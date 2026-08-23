@@ -1,3 +1,1 @@
-# Vulnerable notes (9.4)
-
-We are secure because TLS and a scanner are green.
+Vulnerable 9.4 local fixture. Authorized directory only.

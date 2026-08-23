@@ -1,3 +1,1 @@
-# Fixed notes (E5)
-
-Property-shaped claim; mechanism is not the property.
+Fixed E5 local fixture. Authorized directory only.

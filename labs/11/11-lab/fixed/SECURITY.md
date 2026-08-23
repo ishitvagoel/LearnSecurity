@@ -1,3 +1,1 @@
-# Fixed notes (11)
-
-Property-shaped claim; mechanism is not the property.
+Fixed 11 local fixture. Authorized directory only.
