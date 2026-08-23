@@ -3,7 +3,7 @@
 Date: 2026-08-23  
 Reviewers recorded on each `module.yaml`: `quality-reviewer (Pass C); lab-safety-reviewer (local YAML fixture)`.
 
-Scope: all 50 core modules (`0.1`–`10.5`), capstone `11`, electives `E1`–`E6`. Pass D/E not in scope.
+Scope: all 50 core modules (`0.1`–`10.5`), capstone `11`, electives `E1`–`E6`. Pass D site and Pass E review recorded 2026-08-23.
 
 ## Method
 
@@ -29,4 +29,4 @@ No compensating averages. Schema: every `module.yaml` validates against `content
 
 ## Per-unit stamp
 
-All 57 units: `pass: C`, `quality: competent` in `STATUS.yaml`. Mastery **gates** and product **milestones** remain `not-attempted` until learner/product evidence exists.
+All 57 units: `pass: E`, `quality: competent` in `STATUS.yaml` (generation coverage). Mastery **gates** and product **milestones** remain `not-attempted` until learner/product evidence exists.
