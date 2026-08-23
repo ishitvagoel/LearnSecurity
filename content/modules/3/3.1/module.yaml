@@ -102,7 +102,7 @@ misconceptions:
 operationalConsiderations:
 - Pair prevention with detection/recovery where prevention is not absolute
 author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (Pass C); lab-safety-reviewer (local YAML fixture)
+reviewer: quality-reviewer (3.1 deepen); lab-safety-reviewer (local structural fixture)
 lastReviewedAt: '2026-08-23'
 nextReviewAt: '2027-02-23'
 changelog:
@@ -114,3 +114,5 @@ changelog:
   note: Pass B lessons and authorized local lab
 - date: '2026-08-23'
   note: Pass C rubric and examiner keys; quality-gate recorded
+- date: '2026-08-23'
+  note: 'Deepen: 1.1-density lessons; structural local lab; quality-gate recorded'

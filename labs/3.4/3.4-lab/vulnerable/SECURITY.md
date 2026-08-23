@@ -1,3 +1,1 @@
-# Vulnerable notes (3.4)
-
-We are secure because TLS and a scanner are green.
+Vulnerable 3.4 fixture. Local only.
