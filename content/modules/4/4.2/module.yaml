@@ -1,0 +1,121 @@
+id: '4.2'
+slug: authentication-phishing-resistance-and-usable-access
+title: Authentication, phishing resistance, and usable access
+phase: 4
+track: core
+difficulty: intermediate
+status: reviewed
+estimatedMinutes: 240
+prerequisites:
+- Prior phase Pass A per blueprint §7; 1.1–2.4 Pass A complete
+routeTags:
+- complete
+- web-api
+releaseMilestone: M1
+outcomes:
+- 'Demonstrate: Authentication, phishing resistance, and usable access'
+- 'Produce evidence: Authenticator decision record, accessible-flow review'
+- Name attacker capabilities and trust assumptions
+- Include a local-only lab brief and a transfer challenge
+- Do not instruct live-target attacks or mix awareness lists as compliance
+reviewTriggers:
+- Material SecureCollab change in this module's concern
+- Superseding final standard
+invariants:
+- Claims are properties of SecureCollab (or the elective system), not tool names
+- Labs stay in authorized local or official training scope
+- Draft standards are labeled draft
+threatModelPrompts:
+- What can go wrong for this module's assets?
+- Which trust boundary or interpreter is in play?
+- What residual remains if the primary control fails?
+concepts:
+- authentication
+- securecollab
+- seven-step-loop
+learningObjects:
+- id: 4.2-LO-01
+  kind: concept-model
+  title: 'Authentication, phishing resistance, and usable access: property vs mechanism'
+  path: lessons/01-property.md
+- id: 4.2-LO-02
+  kind: design-exercise
+  title: Model SecureCollab for 4.2
+  path: lessons/02-model.md
+- id: 4.2-LO-03
+  kind: mechanism-lab
+  title: Local fixture illustrating 4.2 failure (authorized only)
+  path: lessons/03-break.md
+- id: 4.2-LO-04
+  kind: design-exercise
+  title: Structural fix restoring the 4.2 invariant
+  path: lessons/04-build.md
+- id: 4.2-LO-05
+  kind: verification-lab
+  title: Forbidden-outcome tests for 4.2
+  path: lessons/05-verify.md
+- id: 4.2-LO-06
+  kind: operations-exercise
+  title: Detect/recover notes for 4.2
+  path: lessons/06-operate.md
+- id: 4.2-LO-07
+  kind: transfer-challenge
+  title: Novel variation of 4.2
+  path: lessons/07-transfer.md
+- id: 4.2-LO-08
+  kind: code-review
+  title: Seeded diff for 4.2
+  path: lessons/08-review.md
+labSpec:
+  authorizedScope: Local course fixture or official training lab only
+  slug: 4.2-lab
+  summary: 'Pass A brief only: Authenticator decision record, accessible-flow review'
+  forbiddenOutcomes:
+  - Live-target instructions
+  - Real PII or production secrets
+  - Awareness list used as the syllabus
+evidenceRequired:
+- Authenticator decision record, accessible-flow review
+- Transfer task prompt
+- Local lab brief
+assessmentBlueprint:
+  explain: Causal model for Authentication, phishing resistance, and usable access
+  design: Authenticator decision record, accessible-flow review
+  build: Deferred to Pass B
+  break: Authorized local reproduction of the representative failure
+  verify: Forbidden-outcome tests
+  operate: Detection and recovery notes
+  communicate: Residual risk without compliance theater
+masteryGate: '4'
+standardsRefs:
+- source: OWASP ASVS / module anchors (see spec)
+  version: 5.0.0
+  status: final
+  requirementIds:
+  - V6
+  url: https://owasp.org/www-project-application-security-verification-standard/
+- source: W3C WebAuthn Level 3
+  version: Level 3
+  status: candidate
+  requirementIds:
+  - webauthn
+  url: https://www.w3.org/TR/webauthn-3/
+misconceptions:
+- Authentication, phishing resistance, and usable access is a Top 10 memorization exercise
+- Framework defaults are application guarantees
+- A green scanner proves the invariant
+operationalConsiderations:
+- Pair prevention with detection/recovery where prevention is not absolute
+author: choreograph-curriculum / author-module-spec
+reviewer: quality-reviewer (Pass C); lab-safety-reviewer (local YAML fixture)
+lastReviewedAt: '2026-08-23'
+nextReviewAt: '2027-02-23'
+changelog:
+- date: '2026-08-23'
+  note: Pass A specification generated to complete the curriculum map
+- date: '2026-08-23'
+  note: 'Pass A quality-gate: spec completeness competent; expand in a later revision if thin'
+- date: '2026-08-23'
+  note: Pass B lessons and authorized local lab
+- date: '2026-08-23'
+  note: Pass C rubric and examiner keys; quality-gate recorded

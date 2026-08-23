@@ -1,0 +1,128 @@
+id: '2.1'
+slug: bytes-text-formats-parsers-interpreters
+title: Bytes, text, formats, parsers, and interpreters
+phase: 2
+track: core
+difficulty: foundation
+status: reviewed
+estimatedMinutes: 270
+prerequisites:
+- 1.1–1.4 Pass A
+routeTags:
+- complete
+- accelerated
+- web-api
+- mobile
+releaseMilestone: M0
+outcomes:
+- Produce a parser-boundary map for the SecureCollab request path
+- Explain bytes vs characters, Unicode, canonicalization, encodings, grammars, serialization,
+  interpreter boundaries
+- Demonstrate a local parser differential as a property failure
+- Separate validation, canonicalization, sanitization, and encoding by context
+- Transfer the map when a new format is added
+reviewTriggers:
+- New serializer, template engine, or query builder
+- Unicode normalization or default encoding change
+invariants:
+- Each interpreter boundary on the scoped path is named
+- Disagreeing parsers are treated as an invariant failure
+- No live-target encoding attacks or lesson-page weaponized payloads
+threatModelPrompts:
+- Where can an attacker choose encoding, BOM, or nested format?
+- Which shared parser is a least-common-mechanism risk?
+concepts:
+- bytes-versus-characters
+- unicode-normalization
+- canonicalization
+- parser-differential
+- interpreter-boundary
+- serialization
+learningObjects:
+- id: 2.1-LO-01
+  kind: concept-model
+  title: Bytes vs characters, Unicode, canonicalization, interpreter boundaries
+  path: lessons/01-property.md
+- id: 2.1-LO-02
+  kind: design-exercise
+  title: Parser-boundary map for SecureCollab request path
+  path: lessons/02-model.md
+- id: 2.1-LO-03
+  kind: mechanism-lab
+  title: 'Local fixture: two parsers disagree on the same byte string'
+  path: lessons/03-break.md
+- id: 2.1-LO-04
+  kind: design-exercise
+  title: Pick a structural API that removes the ambiguity
+  path: lessons/04-build.md
+- id: 2.1-LO-05
+  kind: verification-lab
+  title: Ambiguity test suite (forbidden outcomes)
+  path: lessons/05-verify.md
+- id: 2.1-LO-06
+  kind: operations-exercise
+  title: Log parse failures without echoing raw hostile bytes to users
+  path: lessons/06-operate.md
+- id: 2.1-LO-07
+  kind: transfer-challenge
+  title: 'Add multipart/CSV: new interpreters and invalidated map cells'
+  path: lessons/07-transfer.md
+- id: 2.1-LO-08
+  kind: code-review
+  title: Seeded decode-then-concat-then-decode again
+  path: lessons/08-review.md
+labSpec:
+  authorizedScope: Local course fixture only
+  slug: 2.1-parser-boundaries
+  summary: Parser-boundary map plus local differential fixture
+  forbiddenOutcomes:
+  - Live-target encoding attacks
+  - Weaponized payloads in learner-facing lesson Markdown
+evidenceRequired:
+- Parser-boundary map
+- Ambiguity test list
+- Local differential annotation
+assessmentBlueprint:
+  explain: Bytes vs characters; validation vs encoding
+  design: Parser-boundary map
+  build: Deferred; typed or parameterized path
+  break: Local differential annotation
+  verify: Ambiguity tests for forbidden outcomes
+  operate: Safe parse-failure logging
+  communicate: Why a character blacklist is insufficient
+masteryGate: '2'
+standardsRefs:
+- source: OWASP Application Security Verification Standard
+  version: 5.0.0
+  status: final
+  requirementIds:
+  - V1
+  - V2
+  - V15
+  url: https://owasp.org/www-project-application-security-verification-standard/
+- source: MITRE CWE
+  version: Top 25 2025 / family refs
+  status: awareness
+  requirementIds:
+  - parser-confusion-families
+  url: https://cwe.mitre.org/top25/archive/2025/2025_cwe_top25.html
+misconceptions:
+- Strings are characters; UTF-8 is just text
+- Validation, sanitization, encoding, and parameterization are interchangeable
+- Successful JSON.parse means unambiguous meaning across languages
+- Framework auto-escaping completely mediates interpreters
+operationalConsiderations:
+- Parse errors must not leak internals or log full hostile bodies
+author: choreograph-curriculum / author-module-spec
+reviewer: quality-reviewer (Pass C); lab-safety-reviewer (local YAML fixture)
+lastReviewedAt: '2026-08-23'
+nextReviewAt: '2027-02-23'
+changelog:
+- date: '2026-08-23'
+  note: Pass A initial specification
+- date: '2026-08-23'
+  note: 'Pass A quality-gate: spec completeness competent; reviewer recorded'
+- date: '2026-08-23'
+  note: Pass B lessons and authorized local lab
+- date: '2026-08-23'
+  note: Pass C rubric and examiner keys; quality-gate recorded

@@ -1,0 +1,9 @@
+secure: false
+property: Tenant A's note bodies are not readable by Tenant B via the API, or via logs and backups Tenant B can access.
+attacker: A member of another tenant, or anyone who can read application logs and backups they are authorized to fetch in this lab.
+trust: Application and database in the local lab TCB; browser client is not trusted; hashing library is a mechanism for password-at-rest, not for note confidentiality.
+timeHorizon: Includes retained logs and backups, not only a live HTTP session.
+mechanism: Do not log note bodies; hashed user passwords are a separate password-at-rest property.
+evidence: Tests that fail if note body substrings appear in captured logs; cross-tenant GET tests (later module).
+detection: Alert if log pipeline schema includes a body field.
+recovery: Purge logs, rotate credentials, notify tenant owners.

@@ -1,0 +1,115 @@
+id: '8.1'
+slug: the-hostile-client-and-mobile-platform-model
+title: The hostile-client and mobile-platform model
+phase: 8
+track: mobile
+difficulty: advanced
+status: reviewed
+estimatedMinutes: 240
+prerequisites:
+- Prior phase Pass A per blueprint §7; 1.1–2.4 Pass A complete
+routeTags:
+- complete
+- mobile
+releaseMilestone: M3
+outcomes:
+- 'Demonstrate: The hostile-client and mobile-platform model'
+- 'Produce evidence: Mobile threat model and client/server responsibility matrix'
+- Name attacker capabilities and trust assumptions
+- Include a local-only lab brief and a transfer challenge
+- Do not instruct live-target attacks or mix awareness lists as compliance
+reviewTriggers:
+- Material SecureCollab change in this module's concern
+- Superseding final standard
+invariants:
+- Claims are properties of SecureCollab (or the elective system), not tool names
+- Labs stay in authorized local or official training scope
+- Draft standards are labeled draft
+threatModelPrompts:
+- What can go wrong for this module's assets?
+- Which trust boundary or interpreter is in play?
+- What residual remains if the primary control fails?
+concepts:
+- the
+- securecollab
+- seven-step-loop
+learningObjects:
+- id: 8.1-LO-01
+  kind: concept-model
+  title: 'The hostile-client and mobile-platform model: property vs mechanism'
+  path: lessons/01-property.md
+- id: 8.1-LO-02
+  kind: design-exercise
+  title: Model SecureCollab for 8.1
+  path: lessons/02-model.md
+- id: 8.1-LO-03
+  kind: mechanism-lab
+  title: Local fixture illustrating 8.1 failure (authorized only)
+  path: lessons/03-break.md
+- id: 8.1-LO-04
+  kind: design-exercise
+  title: Structural fix restoring the 8.1 invariant
+  path: lessons/04-build.md
+- id: 8.1-LO-05
+  kind: verification-lab
+  title: Forbidden-outcome tests for 8.1
+  path: lessons/05-verify.md
+- id: 8.1-LO-06
+  kind: operations-exercise
+  title: Detect/recover notes for 8.1
+  path: lessons/06-operate.md
+- id: 8.1-LO-07
+  kind: transfer-challenge
+  title: Novel variation of 8.1
+  path: lessons/07-transfer.md
+- id: 8.1-LO-08
+  kind: code-review
+  title: Seeded diff for 8.1
+  path: lessons/08-review.md
+labSpec:
+  authorizedScope: Local course fixture or official training lab only
+  slug: 8.1-lab
+  summary: 'Pass A brief only: Mobile threat model and client/server responsibility matrix'
+  forbiddenOutcomes:
+  - Live-target instructions
+  - Real PII or production secrets
+  - Awareness list used as the syllabus
+evidenceRequired:
+- Mobile threat model and client/server responsibility matrix
+- Transfer task prompt
+- Local lab brief
+assessmentBlueprint:
+  explain: Causal model for The hostile-client and mobile-platform model
+  design: Mobile threat model and client/server responsibility matrix
+  build: Deferred to Pass B
+  break: Authorized local reproduction of the representative failure
+  verify: Forbidden-outcome tests
+  operate: Detection and recovery notes
+  communicate: Residual risk without compliance theater
+masteryGate: '8'
+standardsRefs:
+- source: OWASP ASVS / module anchors (see spec)
+  version: 5.0.0
+  status: final
+  requirementIds:
+  - PLATFORM
+  url: https://owasp.org/www-project-application-security-verification-standard/
+misconceptions:
+- The hostile-client and mobile-platform model is a Top 10 memorization exercise
+- Framework defaults are application guarantees
+- A green scanner proves the invariant
+operationalConsiderations:
+- Pair prevention with detection/recovery where prevention is not absolute
+author: choreograph-curriculum / author-module-spec
+reviewer: quality-reviewer (Pass C); lab-safety-reviewer (local YAML fixture)
+lastReviewedAt: '2026-08-23'
+nextReviewAt: '2027-02-23'
+changelog:
+- date: '2026-08-23'
+  note: Pass A specification generated to complete the curriculum map
+- date: '2026-08-23'
+  note: 'Pass A quality-gate: spec completeness competent; expand in a later revision if thin'
+- date: '2026-08-23'
+  note: Pass B lessons and authorized local lab
+- date: '2026-08-23'
+  note: Pass C rubric and examiner keys; quality-gate recorded

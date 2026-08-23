@@ -1,0 +1,6 @@
+property: SecureCollab product invariant holds for named assets under stated attacker
+  capabilities
+attacker: Anyone who can call the local lab API; a member of another tenant
+trust: FastAPI process and PostgreSQL roles; not the Next.js bundle
+timeHorizon: Session plus backup retention window
+evidence: Forbidden-outcome tests fail on vulnerable and pass on fixed

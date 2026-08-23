@@ -1,0 +1,3 @@
+secure: true
+because: bcrypt
+notes: Passwords are hashed so we are secure.
