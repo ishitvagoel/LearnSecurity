@@ -1,0 +1,138 @@
+id: "1.1"
+slug: security-as-invariants-under-attack
+title: Security as invariants under attack
+phase: 1
+track: core
+difficulty: foundation
+status: spec
+estimatedMinutes: 240
+prerequisites:
+  - "Entry profile: small database-backed API, Git, tests, basic SQL"
+  - "0.1 vocabulary recommended, not blocking for Phase 1 spec pilot"
+routeTags:
+  - complete
+  - accelerated
+  - web-api
+  - mobile
+releaseMilestone: null
+outcomes:
+  - "Produce a system-specific invariant catalogue for SecureCollab that a reviewer can test"
+  - "Separate desired security properties from mechanisms and framework defaults"
+  - "Name attacker capabilities, trust assumptions, and time horizon for each invariant"
+  - "Pair prevention claims with detection and recovery where prevention is not absolute"
+  - "Transfer the catalogue method to an unfamiliar product without naming a tool or Top 10 item as the definition of security"
+reviewTriggers:
+  - "New SecureCollab asset class (files, webhooks, simulated billing, AI summarizer)"
+  - "New principal class (support, worker, mobile offline client)"
+  - "Changed time horizon (backups, long-lived tokens, offline cache)"
+  - "Attempt to reorganize later content as a Top 10 rotation"
+invariants:
+  - "Catalogue entries are properties of this system, not product or scanner names"
+  - "Each claimed property names who/what is trusted and what the attacker can do"
+  - "Non-goals and residual risk are explicit"
+  - "No live-target or real-PII instructions appear in this module"
+threatModelPrompts:
+  - "If this invariant is false, who is harmed and how?"
+  - "What smallest change to assets or actors invalidates the catalogue?"
+  - "Which claims depend on browser, OS, cloud provider, or lab honesty?"
+concepts:
+  - property-versus-mechanism
+  - confidentiality
+  - integrity
+  - availability
+  - authenticity
+  - authorization
+  - accountability
+  - privacy
+  - safety
+  - attacker-capabilities
+  - trust-assumptions
+  - evidence-of-property
+  - detection-and-recovery
+learningObjects:
+  - id: 1.1-LO-01
+    kind: concept-model
+    title: "Property vs mechanism: eight named properties as invariants"
+  - id: 1.1-LO-02
+    kind: design-exercise
+    title: Sketch SecureCollab assets and write a first invariant catalogue
+  - id: 1.1-LO-03
+    kind: mechanism-lab
+    title: "Observe a local app claim (“passwords are hashed”) and restate the actual property"
+  - id: 1.1-LO-04
+    kind: design-exercise
+    title: Replace a named tool with the smallest trustworthy mechanism that would restore one invariant
+  - id: 1.1-LO-05
+    kind: verification-lab
+    title: List forbidden outcomes and evidence they did not occur
+  - id: 1.1-LO-06
+    kind: operations-exercise
+    title: Log, alert, revoke, or recover when prevention is not absolute
+  - id: 1.1-LO-07
+    kind: transfer-challenge
+    title: "Unfamiliar product card: catalogue without a scanner or Top 10"
+  - id: 1.1-LO-08
+    kind: code-review
+    title: Seeded security.md that confuses controls with properties
+labSpec:
+  authorizedScope: "Local course materials and synthetic SecureCollab description only; no public or third-party targets"
+  slug: 1.1-invariant-catalogue
+  summary: "Learner produces a testable invariant catalogue; mechanism-lab uses a local fixture only"
+  forbiddenOutcomes:
+    - "Tool list or copied CIA triad with no system-specific names"
+    - "Instructions targeting a non-lab system"
+    - "Real PII or production secrets in the catalogue"
+evidenceRequired:
+  - "Invariant catalogue for SecureCollab Phase 1"
+  - "Annotation of at least one mechanism that does not imply its claimed property"
+  - "Forbidden-outcome and operate notes"
+  - "Transfer catalogue for an unfamiliar product (for transfer-ready)"
+assessmentBlueprint:
+  explain: "Property vs mechanism; eight properties as system-specific invariants"
+  design: "Invariant catalogue v1 for stated SecureCollab assets and non-goals"
+  build: "Deferred to Pass B; tests that name a property rather than a tool"
+  break: "Annotation of a seeded we-are-secure-because-X claim on a local artifact"
+  verify: "Forbidden-outcome list and proposed negative evidence"
+  operate: "Detection/recovery note for one non-absolute prevention"
+  communicate: "Residual risk and explicit non-goals without compliance theater"
+masteryGate: "1"
+standardsRefs:
+  - source: Saltzer & Schroeder, The Protection of Information in Computer Systems
+    version: "1975"
+    status: seminal
+    requirementIds:
+      - protection-principles
+    url: "https://web.mit.edu/saltzer/www/publications/protection/"
+  - source: NIST Cybersecurity Framework (CSF) 2.0
+    version: "2.0"
+    status: final
+    requirementIds:
+      - GV
+      - ID
+      - PR
+      - DE
+      - RS
+      - RC
+    url: "https://www.nist.gov/publications/nist-cybersecurity-framework-csf-20"
+misconceptions:
+  - "Security is a vulnerability list, Top 10, or green scanner"
+  - "CIA are universal checkboxes independent of the product"
+  - "Naming TLS, JWT, or bcrypt is the security property"
+  - "Happy-path success implies the invariant holds"
+  - "Privacy equals confidentiality; safety equals availability"
+  - "A control that usually works needs no detection or recovery"
+  - "Framework or cloud secure defaults are application guarantees"
+operationalConsiderations:
+  - "Accountability invariants constrain what must be logged and withheld (privacy)"
+  - "Availability and safety imply graceful degradation, not mere uptime"
+  - "Compromise recording is an evidence property, not a SIEM product"
+  - "Human-in-the-loop controls must later be usable and accessible (modules 1.4, 4.2)"
+author: "choreograph-curriculum / author-module-spec"
+reviewer: "quality-reviewer (Pass A spec completeness)"
+lastReviewedAt: "2026-08-23"
+nextReviewAt: "2027-02-23"
+changelog:
+  - date: "2026-08-23"
+    note: "Pass A initial specification"
+  - date: "2026-08-23"
+    note: "Pass A quality-gate: spec completeness competent; reviewer recorded"
