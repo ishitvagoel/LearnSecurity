@@ -22,3 +22,21 @@ pins:
     url: "https://www.nist.gov/publications/nist-cybersecurity-framework-csf-20"
     role: "Govern, Identify, Protect, Detect, Respond, Recover outcome taxonomy"
     notes: "NIST CSWP 29. CSF states outcomes; it does not prescribe controls. Do not treat CSF Functions as a vulnerability checklist or as proof of security."
+  - id: cisa-secure-by-design
+    source: CISA Secure by Design
+    version: "current-public-guidance"
+    status: final
+    publishedAt: "2023"
+    reviewedAt: "2026-08-23"
+    url: "https://www.cisa.gov/securebydesign"
+    role: "Product ownership, secure defaults, shift burden off customers"
+    notes: "Living CISA program page, not a versioned ISO-style standard. Live-checked 2026-08-23: manufacturers own security as a core requirement; secure out-of-the-box defaults. Related Secure by Demand guide is customer-facing. Do not treat the pledge as a verification baseline (that is ASVS/MASVS)."
+  - id: owasp-asvs-5.0.0
+    source: OWASP Application Security Verification Standard
+    version: "5.0.0"
+    status: final
+    publishedAt: "2025-05-30"
+    reviewedAt: "2026-08-23"
+    url: "https://owasp.org/www-project-application-security-verification-standard/"
+    role: "Web/API security requirements and assurance baseline"
+    notes: "Project page confirms latest stable 5.0.0 released 30 May 2025. Identifiers: v5.0.0-<chapter>.<section>.<requirement>. Do not mix ASVS 4.x IDs. Level 2 is the normal commercial target later; this module only maps V8 Authorization and V15 Secure Coding and Architecture at chapter level."
