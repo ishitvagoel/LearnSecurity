@@ -8,3 +8,5 @@ npm run build
 ```
 
 Output: `out/`. Do not deploy `labs/` or `content/assessment/keys/` as this origin.
+
+Vercel project root must be the **repository root** so this app can read `../content` at build time. See the root README “Vercel” section.
