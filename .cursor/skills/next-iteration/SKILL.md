@@ -28,5 +28,5 @@ description: Read curriculum STATUS.yaml, choose the next allowed Pass A/B/C uni
    - skill to invoke next (`author-module-spec`, `author-lesson`, `author-lab`, `author-assessment`, `standards-pin`, `spiral-revisit`, `quality-gate`)
    - output paths
    - lab-safety reminder if Pass B labs
-6. Do not author content in this skill. Stop after the brief unless the user already asked to execute that unit in the same message.
+6. Do not author content in this skill. Stop after the brief unless the user already asked to execute that unit in the same message, **or** the parent skill is `choreograph-curriculum` (then return the brief to the conductor and let it run the next skills).
 7. After a unit is completed by another skill, update `next` and the unit’s `pass` / `quality` fields. Do not mark `competent` without `quality-gate`.

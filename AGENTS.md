@@ -25,9 +25,9 @@ Override only by recording a human decision in [`content/progress/STATUS.yaml`](
 | D | Vercel learning site | not until A/B pilots exist; see `site/AGENTS.md` |
 | E | Independent coverage and security review | `coverage-audit`, review subagents |
 
-Start each session with **`next-iteration`**: read `content/progress/STATUS.yaml`, do **one unit**, update status, stop.
+**Default entry:** run **`choreograph-curriculum`** (`/choreograph-curriculum`). It reads `content/progress/STATUS.yaml` and executes the other skills in order. Until Phase 1 and 2 have Pass A specs, it only runs the Pass A chain (pin → spec → quality-gate) for the next module. It does not generate the whole course in one invocation (max 4 modules if the user says “keep going”).
 
-A unit is one of: one module spec; one module’s learner-facing lessons; one lab set; one assessment pack; one spiral revisit of SecureCollab artifacts; or one quality/coverage audit of already-authored work.
+A unit is one of: one module spec; one module’s learner-facing lessons; one lab set; one assessment pack; one spiral revisit of SecureCollab artifacts; or one quality/coverage audit of already-authored work. Specialist skills may still be invoked alone.
 
 ## Do not
 
@@ -73,6 +73,6 @@ Before generating or materially revising a module, run **`standards-pin`**. Chec
 
 ## Skills and subagents
 
-Skills: `next-iteration`, `author-module-spec`, `author-lesson`, `author-lab`, `author-assessment`, `standards-pin`, `quality-gate`, `spiral-revisit`. Slash-only: `pilot-phase-1`, `coverage-audit`.
+Conductor: `choreograph-curriculum`. Inner skills: `next-iteration`, `author-module-spec`, `author-lesson`, `author-lab`, `author-assessment`, `standards-pin`, `quality-gate`, `spiral-revisit`. Slash-only helpers: `pilot-phase-1`, `coverage-audit`.
 
 Review subagents (read-only, do not rewrite in the same pass): `standards-auditor`, `quality-reviewer`, `lab-safety-reviewer`, `curriculum-architect`.
