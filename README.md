@@ -19,7 +19,7 @@ Record overrides in [`content/progress/STATUS.yaml`](content/progress/STATUS.yam
 
 ## How to run the next iteration
 
-**Usual path:** in Cursor Agent run **`/choreograph-curriculum`**. That one skill picks the next legal module from `STATUS.yaml` and runs the others in order (pin standards → write spec → quality-gate; later, lessons → labs → assessment → spiral revisit → quality-gate).
+**After Pass A–E:** run **`/deepen-curriculum`** (or `/goal run /deepen-curriculum until revision.remaining is empty`). That revises map-complete modules to 1.1-quality publishable depth. Generation conductor **`/choreograph-curriculum`** has no queued A–E unit.
 
 Until Phase 1 and Phase 2 specs exist, the conductor stays on **Pass A only** so the course is not mass-authored too early. Optional phrases:
 
