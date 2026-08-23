@@ -29,4 +29,4 @@ No compensating averages. Schema: every `module.yaml` validates against `content
 
 ## Per-unit stamp
 
-All 57 units: `pass: C`, `quality: competent` in `STATUS.yaml`. Mastery **gates** and product **milestones** remain `not-attempted` until learner/product evidence exists.
+All 57 units: `pass: E`, `quality: competent` in `STATUS.yaml` (generation coverage). Mastery **gates** and product **milestones** remain `not-attempted` until learner/product evidence exists.
