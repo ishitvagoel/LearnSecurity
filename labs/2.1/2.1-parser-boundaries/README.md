@@ -1,35 +1,34 @@
 # Lab: 2.1-parser-boundaries
 
-**Module:** `2.1` — Bytes, text, formats, parsers, and interpreters
-**Authorized scope:** Local course fixture only
-**Invariant:** Claims about this concern must be property-shaped (attacker, trust, time horizon, evidence) and name SecureCollab assets.
-**Root cause class:** trust / authority / parser / state / resource (module-specific)
-**Non-goals:** live targets, real PII, weaponized learner-facing payloads.
+**Module:** `2.1`  
+**Authorized scope:** this directory only.  
+**Invariant:** A note ingest that two parsers interpret with **different tenant ids** is not accepted. Bytes→JSON is not “just text.”  
+**Root cause class:** parser / interpreter differential  
+**Non-goals:** public JSON bombs, live APIs, weaponized Unicode exploits.
 
 ## Reset
 
-Replace `vulnerable/` or `fixed/` claim files from git. Do not keep learner secrets.
+Restore `vulnerable/` and `fixed/` from git. Synthetic JSON only.
 
 ## Vulnerable behavior (local only)
 
-The vulnerable claim is a mechanism slogan. Tests must **fail**. This is a local fixture only.
-
-Parser-boundary map plus local differential fixture
+`ingest_note` uses a first-key scanner for ACL and `json.loads` (last key wins in CPython) for storage. Duplicate `"tenant"` keys make bob’s note look like tA to one interpreter and tB to the other.
 
 ## Structural fix
 
-The fixed claim states a system-specific property plus attacker, trust, time horizon, and evidence. A scanner-only or denylist response is insufficient.
+Reject when first and last tenant disagree (fail-safe). Canonicalization is the mechanism; “sanitize quotes” is not.
 
 ## Verify
 
-- Happy path: fixed claim passes `--claim`
-- Negative: vulnerable claim fails `--claim`
-- No network calls; synthetic data only
+```bash
+python3 -m pytest tests/test_parser.py --impl vulnerable   # fail duplicate-key test
+python3 -m pytest tests/test_parser.py --impl fixed
+```
 
 ## Operate
 
-If the invariant is not absolute, record what you would log, alert on, revoke, or restore.
+Log rejected ambiguous bodies **without** storing the body. Do not treat `JSON.parse` success as the property.
 
 ## Transfer
 
-Add a new principal or object and rewrite the claim without a Top 10 name as the property.
+Multipart filename encoding: two parsers (browser vs API) on the same bytes — new 6.4 surface.

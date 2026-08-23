@@ -1,35 +1,34 @@
 # Lab: 2.4-state-time
 
-**Module:** `2.4` — State, time, concurrency, and distributed failure
-**Authorized scope:** Local course fixture only
-**Invariant:** Claims about this concern must be property-shaped (attacker, trust, time horizon, evidence) and name SecureCollab assets.
-**Root cause class:** trust / authority / parser / state / resource (module-specific)
-**Non-goals:** live targets, real PII, weaponized learner-facing payloads.
+**Module:** `2.4`  
+**Authorized scope:** this directory only.  
+**Invariant:** A retried `share_note` with the same idempotency key does not create a second share (exceptional conditions / TOCTOU of “did it land?”). Top 10 A10:2025 is **awareness**, not this lesson’s outline.  
+**Root cause class:** state / time  
+**Non-goals:** live race exploits against production, wall-clock attacks on NTP.
 
 ## Reset
 
-Replace `vulnerable/` or `fixed/` claim files from git. Do not keep learner secrets.
+Git restore; tests call `reset()`.
 
 ## Vulnerable behavior (local only)
 
-The vulnerable claim is a mechanism slogan. Tests must **fail**. This is a local fixture only.
-
-State machine and local concurrency/retry fixture
+Every call appends a share. A client retry after timeout duplicates the side effect.
 
 ## Structural fix
 
-The fixed claim states a system-specific property plus attacker, trust, time horizon, and evidence. A scanner-only or denylist response is insufficient.
+Remember the idempotency key; replay returns without a second append. Fail-closed: missing key still performs one share (lab simplicity) — production should require keys for high-impact actions (residual).
 
 ## Verify
 
-- Happy path: fixed claim passes `--claim`
-- Negative: vulnerable claim fails `--claim`
-- No network calls; synthetic data only
+```bash
+python3 -m pytest tests/test_idempotency.py --impl vulnerable
+python3 -m pytest tests/test_idempotency.py --impl fixed
+```
 
 ## Operate
 
-If the invariant is not absolute, record what you would log, alert on, revoke, or restore.
+Log duplicate-key hits. Do not return HTTP 200 with a new share hidden in a catch-all.
 
 ## Transfer
 
-Add a new principal or object and rewrite the claim without a Top 10 name as the property.
+Worker retry with a **stale** 1.2 grant: time is part of mediation (preview 7.4).

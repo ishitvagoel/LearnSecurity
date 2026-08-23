@@ -1,35 +1,34 @@
 # Lab: 2.3-browser-policy
 
-**Module:** `2.3` — Browser security model
-**Authorized scope:** Local application origin only
-**Invariant:** Claims about this concern must be property-shaped (attacker, trust, time horizon, evidence) and name SecureCollab assets.
-**Root cause class:** trust / authority / parser / state / resource (module-specific)
-**Non-goals:** live targets, real PII, weaponized learner-facing payloads.
+**Module:** `2.3`  
+**Authorized scope:** this directory (model of document.cookie). No real browser exploit pages.  
+**Invariant:** A SecureCollab session cookie marked HttpOnly is not readable to script in the origin. That is **browser-enforced**, not an application output-encoding guarantee.  
+**Root cause class:** trust (confusing cookie flags with XSS completeness)  
+**Non-goals:** live sites, XSS payloads, copy-paste gadget chains.
 
 ## Reset
 
-Replace `vulnerable/` or `fixed/` claim files from git. Do not keep learner secrets.
+Git checkout this lab.
 
 ## Vulnerable behavior (local only)
 
-The vulnerable claim is a mechanism slogan. Tests must **fail**. This is a local fixture only.
-
-Browser policy matrix and local cookie/CORS fixture
+`js_read_session` ignores `httponly` and returns the value. HTTPS/`Secure` does not imply unreadability to JS.
 
 ## Structural fix
 
-The fixed claim states a system-specific property plus attacker, trust, time horizon, and evidence. A scanner-only or denylist response is insufficient.
+Honor HttpOnly. Label **CSP3** and **Trusted Types** as **Working Drafts** (2026-08-23 snapshot) — they are not this cell and not “XSS finished.”
 
 ## Verify
 
-- Happy path: fixed claim passes `--claim`
-- Negative: vulnerable claim fails `--claim`
-- No network calls; synthetic data only
+```bash
+python3 -m pytest tests/test_httponly.py --impl vulnerable
+python3 -m pytest tests/test_httponly.py --impl fixed
+```
 
 ## Operate
 
-If the invariant is not absolute, record what you would log, alert on, revoke, or restore.
+Set-Cookie in logs should not include the session value. Report-only CSP is detection, not this property.
 
 ## Transfer
 
-Add a new principal or object and rewrite the claim without a Top 10 name as the property.
+Third-party iframe: origin vs site (schemeful same-site) — new matrix rows; this lab does not prove CORS.

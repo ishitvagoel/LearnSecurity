@@ -14,11 +14,11 @@ defaults:
   ai_security: elective E1
   website_progress: local-first static site (site/); no accounts
 next:
-  id: '2.1'
+  id: '3.1'
   pass: revise
   skill: deepen-curriculum
   inner_skill: author-lesson
-  note: Phase 1 1.1–1.4 are depth publishable. Continue /deepen-curriculum (next 2.1) until revision.remaining
+  note: Cores 0.1–0.2 and 1.1–2.4 are publishable. Continue /deepen-curriculum (next 3.1) until revision.remaining
     is empty.
 spiral_deltas:
 - date: '2026-08-23'
@@ -41,6 +41,22 @@ spiral_deltas:
   module: '1.4'
   change: Inaccessible recovery is a security residual
   retest: 4.2 usable auth; WCAG on recovery
+- date: '2026-08-23'
+  module: '2.1'
+  change: Duplicate JSON tenant keys rejected; parser agreement is the ingest property
+  retest: 6.1 injection; multipart 6.4
+- date: '2026-08-23'
+  module: '2.2'
+  change: Cache key includes bound tenant; TLS is not the key
+  retest: CDN Vary; forwarded headers
+- date: '2026-08-23'
+  module: '2.3'
+  change: HttpOnly session not script-readable; CSP3 remains draft
+  retest: 6.2 XSS encoding
+- date: '2026-08-23'
+  module: '2.4'
+  change: Idempotent share; retry is not a second share
+  retest: 7.4 worker retry stale grants
 modules:
 - id: '0.1'
   title: Security engineering orientation
@@ -48,16 +64,16 @@ modules:
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
-  depth: map-complete
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '0.2'
   title: Diagnostic and adaptive bridge
   phase: 0
   track: bridge
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
-  depth: map-complete
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '1.1'
   title: Security as invariants under attack
   phase: 1
@@ -96,32 +112,32 @@ modules:
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
-  depth: map-complete
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '2.2'
   title: DNS, transport, HTTP, TLS, proxies, CDNs, and caches
   phase: 2
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
-  depth: map-complete
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '2.3'
   title: Browser security model
   phase: 2
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
-  depth: map-complete
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '2.4'
   title: State, time, concurrency, and distributed failure
   phase: 2
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
-  depth: map-complete
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '3.1'
   title: Assets, data classification, and security requirements
   phase: 3
@@ -561,12 +577,6 @@ revision:
   skill: deepen-curriculum
   reference_module: '1.1'
   remaining:
-  - '2.1'
-  - '2.2'
-  - '2.3'
-  - '2.4'
-  - '0.1'
-  - '0.2'
   - '3.1'
   - '3.2'
   - '3.3'

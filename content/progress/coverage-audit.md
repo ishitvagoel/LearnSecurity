@@ -45,4 +45,4 @@ None that reopen Pass A sequencing. Thin generated specs (Phase 0, 3–11, elect
 
 ## Follow-up
 
-Pass D static site is in `site/`. Pass E review: [`pass-e-review.md`](pass-e-review.md). **Phase 1 core 1.1–1.4** are `depth: publishable` after deepen (structural labs). Remaining `revision.remaining` starts at **2.1**. Mastery gates and product milestones remain learner/product evidence.
+Pass D static site is in `site/`. Pass E review: [`pass-e-review.md`](pass-e-review.md). **Phase 1 core 1.1–1.4** and **Phase 2 2.1–2.4** are `depth: publishable` after deepen (structural labs). Remaining `revision.remaining` starts at **0.1**. Mastery gates and product milestones remain learner/product evidence.
