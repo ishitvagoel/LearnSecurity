@@ -19,21 +19,16 @@ Record overrides in [`content/progress/STATUS.yaml`](content/progress/STATUS.yam
 
 ## How to run the next iteration
 
-1. In Cursor Agent, run **`/next-iteration`** (or ask the agent to follow the `next-iteration` skill).
-2. It reads `STATUS.yaml` and names **one unit** (module + pass).
-3. Run the skill it names:
+**Usual path:** in Cursor Agent run **`/choreograph-curriculum`**. That one skill picks the next legal module from `STATUS.yaml` and runs the others in order (pin standards → write spec → quality-gate; later, lessons → labs → assessment → spiral revisit → quality-gate).
 
-   | Pass | Skill |
-   |---|---|
-   | A — specifications only | `author-module-spec` |
-   | B — lessons | `author-lesson` |
-   | B — labs | `author-lab` |
-   | C — assessments | `author-assessment` |
+Until Phase 1 and Phase 2 specs exist, the conductor stays on **Pass A only** so the course is not mass-authored too early. Optional phrases:
 
-4. Before writing or revising a module, run **`standards-pin`**. Before marking a unit done, run **`quality-gate`**. If SecureCollab assumptions changed, run **`spiral-revisit`**.
-5. Slash-only: **`/pilot-phase-1`** (Pass A for 1.1–1.4 then stop), **`/coverage-audit`**.
+- “this pass only” — do not advance into lessons
+- “whole module” — Pass A through C for one module
+- “pilot phase 1” — specs for 1.1–1.4 then stop
+- “keep going, N modules” — repeat, capped at 4 per invocation
 
-Each session should complete one unit, update `STATUS.yaml`, and stop. Pilot Phase 1 then Phase 2 before multiplying the pattern.
+You can still run inner skills by hand (`next-iteration`, `author-module-spec`, `author-lesson`, `author-lab`, `author-assessment`, `standards-pin`, `quality-gate`, `spiral-revisit`) or **`/coverage-audit`**.
 
 Agent standing instructions: [`AGENTS.md`](AGENTS.md). Rules live in [`.cursor/rules/`](.cursor/rules/). Skills in [`.cursor/skills/`](.cursor/skills/). Review subagents in [`.cursor/agents/`](.cursor/agents/).
 
