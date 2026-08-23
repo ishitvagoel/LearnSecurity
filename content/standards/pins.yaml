@@ -1,0 +1,6 @@
+# Pinned standards
+
+# Populated by the standards-pin skill. Do not present drafts as final.
+# Schema per row: id, source, version, status, publishedAt, reviewedAt, url, role, notes
+
+pins: []

@@ -1,0 +1,235 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://learnsecurity.local/schema/module.json",
+  "title": "Curriculum module metadata",
+  "description": "Site-ready module schema from blueprint §14.2. Lesson prose stays outside this file.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "slug",
+    "title",
+    "phase",
+    "track",
+    "difficulty",
+    "status",
+    "estimatedMinutes",
+    "prerequisites",
+    "routeTags",
+    "releaseMilestone",
+    "outcomes",
+    "reviewTriggers",
+    "invariants",
+    "threatModelPrompts",
+    "concepts",
+    "learningObjects",
+    "labSpec",
+    "evidenceRequired",
+    "assessmentBlueprint",
+    "masteryGate",
+    "standardsRefs",
+    "misconceptions",
+    "operationalConsiderations",
+    "author",
+    "reviewer",
+    "lastReviewedAt",
+    "nextReviewAt",
+    "changelog"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^([0-9]+\\.[0-9]+|11|E[1-6])$"
+    },
+    "slug": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "title": { "type": "string", "minLength": 1 },
+    "phase": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 11
+    },
+    "track": {
+      "type": "string",
+      "enum": ["core", "mobile", "elective", "capstone", "bridge"]
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": ["foundation", "intermediate", "advanced", "capstone"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["stub", "spec", "draft", "reviewed", "published", "retired"]
+    },
+    "estimatedMinutes": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "prerequisites": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "routeTags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "complete",
+          "accelerated",
+          "web-api",
+          "mobile",
+          "elective",
+          "bridge"
+        ]
+      }
+    },
+    "releaseMilestone": {
+      "type": ["string", "null"],
+      "enum": ["M0", "M1", "M2", "M3", "M4", "M5", null]
+    },
+    "outcomes": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "reviewTriggers": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "invariants": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "threatModelPrompts": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "concepts": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "learningObjects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "title"],
+        "properties": {
+          "id": { "type": "string" },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "concept-model",
+              "mechanism-lab",
+              "break-fix-lab",
+              "design-exercise",
+              "code-review",
+              "verification-lab",
+              "operations-exercise",
+              "transfer-challenge"
+            ]
+          },
+          "title": { "type": "string" },
+          "path": { "type": "string" }
+        }
+      }
+    },
+    "labSpec": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "authorizedScope": { "type": "string" },
+        "slug": { "type": "string" },
+        "summary": { "type": "string" },
+        "forbiddenOutcomes": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "evidenceRequired": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "assessmentBlueprint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["explain", "design", "build", "break", "verify", "operate", "communicate"],
+      "properties": {
+        "explain": { "type": "string" },
+        "design": { "type": "string" },
+        "build": { "type": "string" },
+        "break": { "type": "string" },
+        "verify": { "type": "string" },
+        "operate": { "type": "string" },
+        "communicate": { "type": "string" }
+      }
+    },
+    "masteryGate": {
+      "type": ["string", "null"],
+      "description": "Gate id this module feeds, e.g. 1 or 11"
+    },
+    "standardsRefs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source", "version", "status", "requirementIds", "url"],
+        "properties": {
+          "source": { "type": "string" },
+          "version": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": [
+              "final",
+              "draft",
+              "candidate",
+              "bcp",
+              "awareness",
+              "seminal",
+              "unverified"
+            ]
+          },
+          "requirementIds": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "url": { "type": "string" }
+        }
+      }
+    },
+    "misconceptions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "operationalConsiderations": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "author": { "type": ["string", "null"] },
+    "reviewer": { "type": ["string", "null"] },
+    "lastReviewedAt": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "nextReviewAt": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "changelog": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["date", "note"],
+        "properties": {
+          "date": { "type": "string" },
+          "note": { "type": "string" }
+        }
+      }
+    }
+  }
+}

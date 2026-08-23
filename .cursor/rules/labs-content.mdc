@@ -1,0 +1,15 @@
+---
+description: Isolation, reset, and pairing rules for executable labs
+globs: labs/**
+alwaysApply: false
+---
+
+# Labs content
+
+Each lab must declare authorized scope, stay local or on an official training target, and include reset instructions.
+
+Pair a vulnerable artifact with a structurally fixed artifact and tests that assert forbidden outcomes, not only happy paths.
+
+README must state the invariant, root cause, impact, fix, and detection/recovery notes. Do not put production secrets, real PII, or skimmable weaponized payloads in lab docs.
+
+Labs must remain isolated from the future public site origin (`site/`).
