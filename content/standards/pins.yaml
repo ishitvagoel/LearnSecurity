@@ -40,3 +40,12 @@ pins:
     url: "https://owasp.org/www-project-application-security-verification-standard/"
     role: "Web/API security requirements and assurance baseline"
     notes: "Project page confirms latest stable 5.0.0 released 30 May 2025. Identifiers: v5.0.0-<chapter>.<section>.<requirement>. Do not mix ASVS 4.x IDs. Level 2 is the normal commercial target later; this module only maps V8 Authorization and V15 Secure Coding and Architecture at chapter level."
+  - id: owasp-threat-modeling
+    source: OWASP Threat Modeling Project
+    version: "maintained-project-guidance"
+    status: final
+    publishedAt: "2020"
+    reviewedAt: "2026-08-23"
+    url: "https://owasp.org/www-project-threat-modeling/"
+    role: "Methodology-neutral threat modeling entry; Four Question Framework; trust-boundary language"
+    notes: "Live-checked 2026-08-23: Status Maintained Project Guidance. Does not define a single OWASP methodology. Starting point: Shostack Four Questions. Full STRIDE/LINDDUN process is module 3.2. Do not treat Threat Dragon or any tool as the definition of threat modeling."
