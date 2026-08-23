@@ -4,7 +4,7 @@ title: State, time, concurrency, and distributed failure
 phase: 2
 track: core
 difficulty: foundation
-status: spec
+status: reviewed
 estimatedMinutes: 300
 prerequisites:
 - 2.1 Pass A
@@ -18,8 +18,8 @@ routeTags:
 - mobile
 releaseMilestone: M0
 outcomes:
-- Model session state, replay, freshness, idempotency, ordering, retry, timeout, clocks,
-  TOCTOU, races, and partial failure
+- Model session state, replay, freshness, idempotency, ordering, retry, timeout, clocks, TOCTOU,
+  races, and partial failure
 - Produce a state-machine plus concurrency and replay test list
 - Show a local retry or timeout that duplicates a side effect or fail-opens
 - Treat Top 10:2025 A10 as awareness regression only
@@ -48,27 +48,35 @@ learningObjects:
 - id: 2.4-LO-01
   kind: concept-model
   title: State, time, replay, idempotency, partial failure
+  path: lessons/01-property.md
 - id: 2.4-LO-02
   kind: design-exercise
   title: SecureCollab state machine for note-share or invite
+  path: lessons/02-model.md
 - id: 2.4-LO-03
   kind: mechanism-lab
   title: Local duplicate-submit or TOCTOU fixture
+  path: lessons/03-break.md
 - id: 2.4-LO-04
   kind: design-exercise
   title: Idempotency keys and fail-closed timeout
+  path: lessons/04-build.md
 - id: 2.4-LO-05
   kind: verification-lab
   title: Concurrency and replay tests
+  path: lessons/05-verify.md
 - id: 2.4-LO-06
   kind: operations-exercise
   title: Exceptional-condition logging without fail-open
+  path: lessons/06-operate.md
 - id: 2.4-LO-07
   kind: transfer-challenge
   title: 'Worker retry: stale authorization'
+  path: lessons/07-transfer.md
 - id: 2.4-LO-08
   kind: code-review
   title: Seeded catch-all that returns 200 on failure
+  path: lessons/08-review.md
 labSpec:
   authorizedScope: Local course fixture only
   slug: 2.4-state-time
@@ -112,7 +120,7 @@ misconceptions:
 operationalConsiderations:
 - Exceptional-condition logs must not fail open or leak internals
 author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (Pass A spec completeness)
+reviewer: quality-reviewer (Pass C); lab-safety-reviewer (local YAML fixture)
 lastReviewedAt: '2026-08-23'
 nextReviewAt: '2027-02-23'
 changelog:
@@ -120,3 +128,7 @@ changelog:
   note: Pass A initial specification
 - date: '2026-08-23'
   note: 'Pass A quality-gate: spec completeness competent; reviewer recorded'
+- date: '2026-08-23'
+  note: Pass B lessons and authorized local lab
+- date: '2026-08-23'
+  note: Pass C rubric and examiner keys; quality-gate recorded

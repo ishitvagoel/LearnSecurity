@@ -4,7 +4,7 @@ title: Browser security model
 phase: 2
 track: core
 difficulty: foundation
-status: spec
+status: reviewed
 estimatedMinutes: 300
 prerequisites:
 - 2.1 Pass A
@@ -17,8 +17,8 @@ routeTags:
 - web-api
 releaseMilestone: M0
 outcomes:
-- Produce a browser policy matrix covering origin vs site, cookies, storage, frames,
-  CORS, CSP, Trusted Types, SRI, and browser vs server enforcement
+- Produce a browser policy matrix covering origin vs site, cookies, storage, frames, CORS,
+  CSP, Trusted Types, SRI, and browser vs server enforcement
 - Show a local fixture where a browser control is not an application guarantee
 - Label CSP3 and Trusted Types as Working Drafts
 - Transfer after adding a third-party script or iframe
@@ -48,27 +48,35 @@ learningObjects:
 - id: 2.3-LO-01
   kind: concept-model
   title: Origin vs site; browser vs server enforcement
+  path: lessons/01-property.md
 - id: 2.3-LO-02
   kind: design-exercise
   title: Browser policy matrix for SecureCollab web client
+  path: lessons/02-model.md
 - id: 2.3-LO-03
   kind: mechanism-lab
   title: 'Local page: cookie, storage, or CORS confusion'
+  path: lessons/03-break.md
 - id: 2.3-LO-04
   kind: design-exercise
   title: Header and cookie policy that matches the matrix; label draft standards
+  path: lessons/04-build.md
 - id: 2.3-LO-05
   kind: verification-lab
   title: Header and cookie verification tests
+  path: lessons/05-verify.md
 - id: 2.3-LO-06
   kind: operations-exercise
   title: CSP report-only versus enforce; what to log
+  path: lessons/06-operate.md
 - id: 2.3-LO-07
   kind: transfer-challenge
   title: 'Add third-party widget: new origin and site rows'
+  path: lessons/07-transfer.md
 - id: 2.3-LO-08
   kind: code-review
   title: Seeded CSP that is treated as XSS-complete
+  path: lessons/08-review.md
 labSpec:
   authorizedScope: Local application origin only
   slug: 2.3-browser-policy
@@ -115,7 +123,7 @@ misconceptions:
 operationalConsiderations:
 - CSP reports can leak URLs; treat as potentially sensitive
 author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (Pass A spec completeness)
+reviewer: quality-reviewer (Pass C); lab-safety-reviewer (local YAML fixture)
 lastReviewedAt: '2026-08-23'
 nextReviewAt: '2027-02-23'
 changelog:
@@ -123,3 +131,7 @@ changelog:
   note: Pass A initial specification
 - date: '2026-08-23'
   note: 'Pass A quality-gate: spec completeness competent; reviewer recorded'
+- date: '2026-08-23'
+  note: Pass B lessons and authorized local lab
+- date: '2026-08-23'
+  note: Pass C rubric and examiner keys; quality-gate recorded
