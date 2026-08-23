@@ -3,7 +3,7 @@
 Date: 2026-08-23  
 Reviewers recorded on each `module.yaml`: `quality-reviewer (Pass C); lab-safety-reviewer (local YAML fixture)`.
 
-Scope: all 50 core modules (`0.1`–`10.5`), capstone `11`, electives `E1`–`E6`. Pass D/E not in scope.
+Scope: all 50 core modules (`0.1`–`10.5`), capstone `11`, electives `E1`–`E6`. Pass D site and Pass E review recorded 2026-08-23.
 
 ## Method
 

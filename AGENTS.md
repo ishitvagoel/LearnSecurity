@@ -22,7 +22,7 @@ Override only by recording a human decision in [`content/progress/STATUS.yaml`](
 | A | Module specifications only (no lesson prose) | `author-module-spec` |
 | B | Lessons, diagrams, examples, isolated labs | `author-lesson`, `author-lab` |
 | C | Assessments, rubrics, keys (keys isolated) | `author-assessment` |
-| D | Vercel learning site | not until A/B pilots exist; see `site/AGENTS.md` |
+| D | Vercel learning site | `site/` (after Phase 1–2 A/B pilots) |
 | E | Independent coverage and security review | `coverage-audit`, review subagents |
 
 **Default entry:** run **`choreograph-curriculum`** (`/choreograph-curriculum`). It reads `content/progress/STATUS.yaml` and executes the other skills in order. Until Phase 1 and 2 have Pass A specs, it only runs the Pass A chain (pin → spec → quality-gate) for the next module. It does not generate the whole course in one invocation (max 4 modules if the user says “keep going”).

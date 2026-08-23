@@ -45,4 +45,4 @@ None that reopen Pass A sequencing. Thin generated specs (Phase 0, 3–11, elect
 
 ## Follow-up
 
-Pass D (website) and Pass E (independent review) are **not** queued. Choreographer hard-stop: no site generation until explicitly allowed.
+Pass D static site is in `site/`. Pass E review: [`pass-e-review.md`](pass-e-review.md). Mastery gates and product milestones remain learner/product evidence.

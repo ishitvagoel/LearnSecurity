@@ -2,7 +2,7 @@
 
 Curriculum production repository for **Secure Application Engineering from First Principles** (web, API, and mobile).
 
-The syllabus map is [`secure-application-engineering-curriculum-blueprint.md`](secure-application-engineering-curriculum-blueprint.md) (revision 1.1). This repository currently holds the **Cursor agent harness** and an empty content scaffold. It does **not** yet contain lesson prose, labs, quizzes, SecureCollab source, or the Vercel site.
+The syllabus map is [`secure-application-engineering-curriculum-blueprint.md`](secure-application-engineering-curriculum-blueprint.md) (revision 1.1). The repo holds the Cursor harness, authored Pass A–C content, authorized local labs, and a Pass D static site under [`site/`](site/).
 
 ## Locked defaults
 
@@ -46,6 +46,11 @@ labs/             future authorized labs only (see labs/AGENTS.md)
 site/             Pass D only (see site/AGENTS.md)
 ```
 
-## Intentionally not generated yet
+## Site (Pass D)
 
-Lesson text, diagrams, quizzes, answer keys, executable labs, the SecureCollab application, and the learning website (Passes B–D). Next productive content step after this harness: **Pass A for module 1.1**.
+```bash
+npm --prefix site install
+npm --prefix site run build
+```
+
+Labs are not executed by the site. Examiner keys stay under `content/assessment/keys/` and are not linked from learner pages.
