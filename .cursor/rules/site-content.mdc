@@ -1,0 +1,13 @@
+---
+description: Pass D website constraints — static public content, labs off-origin, accessibility
+globs: site/**
+alwaysApply: false
+---
+
+# Site content
+
+Do not build the learning website until Phase 1–2 Pass A/B pilots exist.
+
+When implementing `site/`: prefer static public content; keep progress local-first; never run executable vulnerable labs on the public content origin; treat MDX as code; meet WCAG 2.2 on security-sensitive journeys; include CSP, headers, telemetry, dependency, and deployment provenance in the security bar.
+
+No real secrets, user PII, or production targets in exercises.

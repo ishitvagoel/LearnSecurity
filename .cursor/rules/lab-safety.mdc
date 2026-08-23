@@ -1,0 +1,21 @@
+---
+description: Authorized-lab boundaries and agent safety for security curriculum work
+alwaysApply: true
+---
+
+# Lab and agent safety
+
+Offensive activity is allowed only against:
+
+1. local applications created for this course;
+2. intentionally vulnerable official training projects or labs;
+3. challenges whose published terms authorize the action; or
+4. systems with written authorization and a defined scope.
+
+Never instruct the learner (or another agent) to try attacks against a public or third-party target.
+
+In authorized labs, document cause, invariant, impact, structural fix, and tests. Do not ship copy-paste weaponized exploits, third-party PoCs, or live-target walkthroughs in learner-facing pages. Vulnerable snippets live only under `labs/` with warnings and reset steps.
+
+Use synthetic data. Treat secrets as disposable. Isolate vulnerable configurations from personal and production environments.
+
+Do not include real PII, production credentials, or unprotected secrets in the repository.

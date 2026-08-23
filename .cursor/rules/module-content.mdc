@@ -1,0 +1,29 @@
+---
+description: Schema, quality bar, and metadata rules for authored curriculum files
+globs: content/**
+alwaysApply: false
+---
+
+# Module content
+
+Validate module metadata against `content/schema/module.schema.json`. Keep `module.yaml` as the machine-readable record; keep lesson Markdown free of answer keys.
+
+A module is not publishable unless it (blueprint §16):
+
+1. begins with a security property or question;
+2. names attacker capabilities and trust assumptions;
+3. distinguishes root cause, exploit preconditions, impact, prevention, detection, and recovery;
+4. uses current canonical standards and labels maturity/status;
+5. explains mechanism limits and common failure modes;
+6. includes a safe practice task and a transfer task;
+7. tests forbidden outcomes and failure behavior;
+8. separates framework defaults from application guarantees;
+9. avoids universal claims where risk-based selection is required;
+10. contains no live-target instructions or real sensitive data;
+11. has executable code/labs verified in a clean environment (Pass B+);
+12. tests usability/accessibility of security-sensitive journeys where humans are part of the control;
+13. records reviewer and review date.
+
+Required fields include misconceptions, invariants, evidence, standards refs with version/status/url, and operational considerations.
+
+Answer keys belong only in `content/assessment/keys/`.

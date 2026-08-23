@@ -1,0 +1,16 @@
+---
+description: Standing curriculum thesis, spiral structure, and SecureCollab reference system
+alwaysApply: true
+---
+
+# Curriculum core
+
+Security is maintaining **invariants under adversarial conditions**. Every control is derived from a threat and a required property. Every claimed property needs evidence. Preventive controls are paired with detection and recovery where appropriate.
+
+The path is **builder-first and spiral**, not a waterfall and not a rotating Top 10. Learners ship vertical slices of **SecureCollab**, then revisit earlier models when identity, persistence, mobile, deployment, or operating assumptions change.
+
+Offensive technique exists only to expose causes, validate impact, and verify repairs. It is not the organizing goal.
+
+Canonical source: `secure-application-engineering-curriculum-blueprint.md`. Module order and gates in `content/progress/STATUS.yaml`. Do not skip phases. Phase 8 (mobile) may be postponed for a web/API-only milestone. Electives open after Phase 7.
+
+Saltzer–Schroeder principles plus modern additions (attack surface, blast radius, distrust external data/clients, explicit state, revocation, dependencies as attack surface) organize teaching. Framework defaults are not application guarantees.
