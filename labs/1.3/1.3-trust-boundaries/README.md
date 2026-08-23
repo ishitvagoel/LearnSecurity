@@ -1,35 +1,34 @@
 # Lab: 1.3-trust-boundaries
 
-**Module:** `1.3` — Trust boundaries and attack surface
-**Authorized scope:** Local course materials and synthetic SecureCollab description only; no public or third-party targets
-**Invariant:** Claims about this concern must be property-shaped (attacker, trust, time horizon, evidence) and name SecureCollab assets.
-**Root cause class:** trust / authority / parser / state / resource (module-specific)
-**Non-goals:** live targets, real PII, weaponized learner-facing payloads.
+**Module:** `1.3`  
+**Authorized scope:** this directory only.  
+**Invariant:** A caller who can set HTTP headers (browser, Next.js, hostile client) must not obtain a full-note export by sending `X-SecureCollab-Internal`.  
+**Root cause class:** trust / shared mechanism (header treated as worker identity)  
+**Non-goals:** live CDNs, real networks, weaponized header lists beyond this one teaching name.
 
 ## Reset
 
-Replace `vulnerable/` or `fixed/` claim files from git. Do not keep learner secrets.
+Restore `vulnerable/` and `fixed/` from git.
 
 ## Vulnerable behavior (local only)
 
-The vulnerable claim is a mechanism slogan. Tests must **fail**. This is a local fixture only.
-
-Learner produces a trust-boundary diagram and attack-surface inventory; local fixture shows correlated layers
+`export_notes` trusts a client header as if it were the TCB worker bind. Both tenants' bodies return. Correlated "second layer" (header check) shares the first layer's unsanitized identifier.
 
 ## Structural fix
 
-The fixed claim states a system-specific property plus attacker, trust, time horizon, and evidence. A scanner-only or denylist response is insufficient.
+Ignore client headers for export. Only a **server-side** `worker_bound` flag (stand-in for mTLS / workload identity, not a header) may export. That splits the mechanism.
 
 ## Verify
 
-- Happy path: fixed claim passes `--claim`
-- Negative: vulnerable claim fails `--claim`
-- No network calls; synthetic data only
+```bash
+python3 -m pytest tests/test_boundary.py --impl vulnerable   # fail client-header test
+python3 -m pytest tests/test_boundary.py --impl fixed        # pass
+```
 
 ## Operate
 
-If the invariant is not absolute, record what you would log, alert on, revoke, or restore.
+Alert on export calls that still include the internal header (probe). Do not log note bodies.
 
 ## Transfer
 
-Add a new principal or object and rewrite the claim without a Top 10 name as the property.
+Put a CDN in front: cache keys that include tenant-unaware URLs become a new shared mechanism (least common mechanism).

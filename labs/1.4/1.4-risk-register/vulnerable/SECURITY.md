@@ -1,3 +1,3 @@
-# Vulnerable notes (1.4)
+# Vulnerable recovery (1.4)
 
-We are secure because TLS and a scanner are green.
+Color-only confirm. Local fixture; not a real account.

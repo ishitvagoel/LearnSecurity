@@ -1,68 +1,47 @@
-# 1.2-LO-02 — SecureCollab authority map and access matrix (org, member, note, file, admin)
+# 1.2-LO-02 — SecureCollab authority map and access matrix
 
 **Kind:** design-exercise  
 **Loop step:** 2 Model  
-**Standards:** Saltzer & Schroeder, The Protection of Information in Computer Systems 1975 (seminal). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** Saltzer complete mediation and least privilege (1975, seminal); ASVS 5.0.0 V8 (final) as later testable requirements, not this exercise’s grading rubric.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Authority and protection** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Every security-relevant action in scope has an explicit subject-object-action rule; Unknown or failed policy evaluation denies (fail-safe default); Authentication is not treated as authorization; No live-target or real-PII instructions appear in this module
+Can a second engineer **execute** your matrix as tests without asking you what “member” meant?
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** another tenant’s member; an org admin of tenant A who should not become ambient admin of tenant B; a future file object (named now as a review trigger).
+- **Trust:** you are drawing policy, not deploying production. Synthetic names only.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
+## Draw the map (Phase 1)
 
-Threat-model prompts from the spec:
+**Subjects:** org (tenant), member, admin-of-this-tenant. Non-goal this phase: support impersonation, workers, webhooks (name them as **out of matrix** or you will forget them later).
 
-- Where does ambient authority leak across tenants, roles, or background work?
-- Who can delegate, and can they delegate more than they have?
-- What can an attacker do with any URL the user can see versus a stolen worker identity?
+**Objects:** tenant record, user record, note (body + id). Files: **non-goal**, listed as a hole.
 
-## Root cause, preconditions, impact, prevention, detection, recovery
+**Actions:** read, create, update, delete, list. List is a different action from read-body (IDOR vs enumeration).
 
-| Slice | For Authority and protection |
-|---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+## Matrix (minimum)
 
-## Framework defaults vs application guarantees
+Fill allow/deny/non-goal. Example rows (complete yours):
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Authority and protection**. Name what the app must still enforce.
+| Subject | Object | Action | Decision | Why (principle) |
+|---|---|---|---|---|
+| member tA | note n1 (tA) | read | allow | least privilege still allows own notes |
+| member tB | note n1 (tA) | read | deny | fail-safe; not “unless they have the URL” |
+| admin tA | note n1 (tA) | delete | allow? | if yes, is that one privilege or separated? |
+| member tA | note n1 | list-other-tenant | deny | list ≠ read; still mediated |
 
-## Mechanism limits
+Indirect paths to mark even if unimplemented: bulk export, admin JSON, search index, “share by link.” If the HTTP handler is the only check, write **complete-mediation risk**.
 
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
+## Root cause / impact / prevention / detection / recovery
 
-## Practice (local, authorized)
+Skipping a cell is how ambient authority appears. Impact is a 1.1 confidentiality or integrity failure. Prevention is an explicit cell. Detection is a denied-action log. Recovery is revoke + notify.
 
-Complete the associated lab under `labs/1.2/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
+## Practice
 
-Safe task: write one testable sentence that would fail if the **authority** property were false.
+Produce a one-page matrix someone else can turn into pytest names (`test_bob_cannot_read_n1`).
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
-
-## Usability and accessibility
-
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Authentication is authorization
-- UI roles are the access matrix
-- An HTTP handler check mediates every path
-- Admin is one ambient superuser
-
-## Non-goals
-
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+Add **file** as an object class. Which cells copy from notes, and which must not (download vs preview vs delete)?

@@ -1,31 +1,22 @@
 # 1.4 assessment (learner-facing — no answers)
 
-**Pass C.** Practical evidence, not a compensating average. States: not-attempted | developing | competent | transfer-ready.
-
-## Module
-
-Risk, people, economics, usable security, and resilience
+**Deepened Pass C.** No compensating averages.
 
 ## Evidence checklist
 
-- [ ] Risk register with assumptions, uncertainty, user-harm, residual, owners
-- [ ] WCAG-oriented notes for one recovery/auth journey
-- [ ] Degrade/detect/recover scenario
-- [ ] Transfer register after actor or a11y change (for transfer-ready)
-- [ ] Lab: `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
-- [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Transfer challenge (LO-07) for transfer-ready
+- [ ] Risk register with residual, owner, trigger (LO-02)
+- [ ] Lab: vulnerable fails a11y test; fixed passes
+- [ ] Friction recorded as security outcome
+- [ ] Operate: degrade/detect/recover (LO-06)
+- [ ] Seeded review (LO-08)
+- [ ] Transfer (LO-07) for transfer-ready
 
 ## Rubric
 
 | Result | Meaning |
 |---|---|
-| Developing | Tools listed; missing attacker/trust; mechanism slogans |
-| Competent | System-specific invariant; lab understood; operate present |
-| Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
+| Developing | Scanner as residual; usability as opposite of security |
+| Competent | Owned residuals; inaccessible recovery as security failure; lab understood |
+| Transfer-ready | Actor or a11y change rewrites 1.1–1.3 artifacts |
 
-Knowledge check (80% retryable): distinguish property vs mechanism for this module. Items live in the session worksheet, not here.
-
-## Seeded review
-
-Use the local `vulnerable/` artifact. Intended findings live only in `content/assessment/keys/1.4.md`.
+Keys: `content/assessment/keys/1.4.md` only.

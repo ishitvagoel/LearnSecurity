@@ -1,3 +1,3 @@
 # Vulnerable notes (1.2)
 
-We are secure because TLS and a scanner are green.
+This fixture uses ambient login as if it were object authorization. Do not copy this pattern into a product.

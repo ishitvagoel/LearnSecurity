@@ -1,3 +1,3 @@
-# Fixed notes (1.3)
+# Fixed surface (1.3)
 
-Property-shaped claim; mechanism is not the property.
+Worker bind is not taken from request headers.

@@ -14,13 +14,12 @@ defaults:
   ai_security: elective E1
   website_progress: local-first static site (site/); no accounts
 next:
-  id: '1.2'
+  id: '2.1'
   pass: revise
   skill: deepen-curriculum
   inner_skill: author-lesson
-  note: Generation (Pass A–E) is complete. Next work is publishable-depth revision, starting at 1.2, using
-    /deepen-curriculum (or /goal run /deepen-curriculum until revision.remaining is empty). Do not skip
-    mastery gates; do not mark M0–M5 from this skill.
+  note: Phase 1 1.1–1.4 are depth publishable. Continue /deepen-curriculum (next 2.1) until revision.remaining
+    is empty.
 spiral_deltas:
 - date: '2026-08-23'
   module: '1.1'
@@ -30,6 +29,18 @@ spiral_deltas:
   module: '11'
   change: Capstone SecureCollab integration specified through Pass C (no production app)
   retest: Milestones M0–M5 evidence when a product tree exists
+- date: '2026-08-23'
+  module: '1.2'
+  change: Per-tenant note read matrix; ambient login is not authorization
+  retest: 1.3 export header; 4.4 executable auth
+- date: '2026-08-23'
+  module: '1.3'
+  change: Client internal header is not worker TCB
+  retest: CDN/cache keys; worker identity at 7.4
+- date: '2026-08-23'
+  module: '1.4'
+  change: Inaccessible recovery is a security residual
+  retest: 4.2 usable auth; WCAG on recovery
 modules:
 - id: '0.1'
   title: Security engineering orientation
@@ -61,24 +72,24 @@ modules:
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
-  depth: map-complete
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '1.3'
   title: Trust boundaries and attack surface
   phase: 1
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
-  depth: map-complete
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '1.4'
   title: Risk, people, economics, usable security, and resilience
   phase: 1
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
-  depth: map-complete
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '2.1'
   title: Bytes, text, formats, parsers, and interpreters
   phase: 2
@@ -550,9 +561,6 @@ revision:
   skill: deepen-curriculum
   reference_module: '1.1'
   remaining:
-  - '1.2'
-  - '1.3'
-  - '1.4'
   - '2.1'
   - '2.2'
   - '2.3'
