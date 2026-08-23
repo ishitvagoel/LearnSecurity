@@ -1,0 +1,122 @@
+id: '2.4'
+slug: state-time-concurrency-distributed-failure
+title: State, time, concurrency, and distributed failure
+phase: 2
+track: core
+difficulty: foundation
+status: spec
+estimatedMinutes: 300
+prerequisites:
+- 2.1 Pass A
+- 2.2 Pass A
+- 2.3 Pass A
+- 1.2 Pass A
+routeTags:
+- complete
+- accelerated
+- web-api
+- mobile
+releaseMilestone: M0
+outcomes:
+- Model session state, replay, freshness, idempotency, ordering, retry, timeout, clocks,
+  TOCTOU, races, and partial failure
+- Produce a state-machine plus concurrency and replay test list
+- Show a local retry or timeout that duplicates a side effect or fail-opens
+- Treat Top 10:2025 A10 as awareness regression only
+- Transfer after adding a worker retry with stale authorization
+reviewTriggers:
+- New async path
+- Timeout or retry policy change
+- Clock source change
+invariants:
+- Retries do not duplicate non-idempotent side effects in the scoped workflow
+- Timeouts fail closed for authorization-relevant operations
+- No load-testing of third-party APIs
+threatModelPrompts:
+- What happens on retry, timeout, or partial commit?
+- Whose clock is trusted for freshness?
+- Can authorization become stale between check and use?
+concepts:
+- idempotency
+- replay
+- toctou
+- race
+- partial-failure
+- fail-closed
+- exceptional-conditions
+learningObjects:
+- id: 2.4-LO-01
+  kind: concept-model
+  title: State, time, replay, idempotency, partial failure
+- id: 2.4-LO-02
+  kind: design-exercise
+  title: SecureCollab state machine for note-share or invite
+- id: 2.4-LO-03
+  kind: mechanism-lab
+  title: Local duplicate-submit or TOCTOU fixture
+- id: 2.4-LO-04
+  kind: design-exercise
+  title: Idempotency keys and fail-closed timeout
+- id: 2.4-LO-05
+  kind: verification-lab
+  title: Concurrency and replay tests
+- id: 2.4-LO-06
+  kind: operations-exercise
+  title: Exceptional-condition logging without fail-open
+- id: 2.4-LO-07
+  kind: transfer-challenge
+  title: 'Worker retry: stale authorization'
+- id: 2.4-LO-08
+  kind: code-review
+  title: Seeded catch-all that returns 200 on failure
+labSpec:
+  authorizedScope: Local course fixture only
+  slug: 2.4-state-time
+  summary: State machine and local concurrency/retry fixture
+  forbiddenOutcomes:
+  - Load-testing third-party APIs
+  - Fail-open timeouts on authorization paths
+evidenceRequired:
+- State-machine model
+- Concurrency and replay test list
+- Fail-closed timeout decision
+assessmentBlueprint:
+  explain: Replay, idempotency, and partial failure
+  design: Workflow state machine
+  build: Deferred; idempotency and fail-closed timeout
+  break: Local duplicate-submit or TOCTOU annotation
+  verify: Concurrency and replay tests
+  operate: Exceptional-condition logging without fail-open
+  communicate: A10 is awareness regression, not the lesson structure
+masteryGate: '2'
+standardsRefs:
+- source: OWASP Application Security Verification Standard
+  version: 5.0.0
+  status: final
+  requirementIds:
+  - V2
+  - V7
+  - V9
+  - V16
+  url: https://owasp.org/www-project-application-security-verification-standard/
+- source: OWASP Top 10
+  version: '2025'
+  status: awareness
+  requirementIds:
+  - A10
+  url: https://owasp.org/Top10/2025/
+misconceptions:
+- Happy-path tests prove absence of races
+- Timeouts are only UX
+- Top 10 A10 is the organizing lesson
+operationalConsiderations:
+- Exceptional-condition logs must not fail open or leak internals
+author: choreograph-curriculum / author-module-spec
+reviewer: quality-reviewer (Pass A spec completeness)
+lastReviewedAt: '2026-08-23'
+nextReviewAt: '2027-02-23'
+changelog:
+- date: '2026-08-23'
+  note: Pass A initial specification
+- date: '2026-08-23'
+  note: 'Pass A quality-gate: spec completeness competent; reviewer recorded'

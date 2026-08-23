@@ -15,11 +15,11 @@ defaults:
   website_progress: "local-first"
 
 next:
-  id: "1.4"
-  pass: A
+  id: "1.1"
+  pass: B
   skill: choreograph-curriculum
-  inner_skill: author-module-spec
-  note: "1.3 Pass A competent (spec only). Continue Phase 1 spec pilot with /choreograph-curriculum. Do not start Pass B until 1.1–1.4 and 2.1–2.4 have Pass A."
+  inner_skill: author-lesson
+  note: "Phase 1 and Phase 2 Pass A complete. Pilot learning loop next: Pass B for 1.1 (lessons then labs). Do not mass-author Phase 3+ Pass A until the Phase 1 lesson loop is proven, unless a later choreograph run chooses remaining Pass A after the pilot lesson."
 
 spiral_deltas: []
 
@@ -58,32 +58,32 @@ modules:
     title: "Risk, people, economics, usable security, and resilience"
     phase: 1
     track: core
-    pass: none
-    quality: not-attempted
+    pass: A
+    quality: competent
   - id: "2.1"
     title: "Bytes, text, formats, parsers, and interpreters"
     phase: 2
     track: core
-    pass: none
-    quality: not-attempted
+    pass: A
+    quality: competent
   - id: "2.2"
     title: "DNS, transport, HTTP, TLS, proxies, CDNs, and caches"
     phase: 2
     track: core
-    pass: none
-    quality: not-attempted
+    pass: A
+    quality: competent
   - id: "2.3"
     title: "Browser security model"
     phase: 2
     track: core
-    pass: none
-    quality: not-attempted
+    pass: A
+    quality: competent
   - id: "2.4"
     title: "State, time, concurrency, and distributed failure"
     phase: 2
     track: core
-    pass: none
-    quality: not-attempted
+    pass: A
+    quality: competent
   - id: "3.1"
     title: "Assets, data classification, and security requirements"
     phase: 3

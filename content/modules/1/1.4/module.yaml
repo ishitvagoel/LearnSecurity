@@ -1,0 +1,163 @@
+id: "1.4"
+slug: risk-people-economics-usable-security-resilience
+title: Risk, people, economics, usable security, and resilience
+phase: 1
+track: core
+difficulty: foundation
+status: spec
+estimatedMinutes: 270
+prerequisites:
+  - "1.1 Pass A: invariant catalogue"
+  - "1.2 Pass A: authority map"
+  - "1.3 Pass A: trust boundaries"
+  - "Entry profile: small database-backed API, Git, tests, basic SQL"
+routeTags:
+  - complete
+  - accelerated
+  - web-api
+  - mobile
+releaseMilestone: null
+outcomes:
+  - "Produce a SecureCollab risk register with assumptions, uncertainty, user-harm, residual risk, and owners"
+  - "Model threat actors by capability and incentive, including human error, coercion, and abuse economics"
+  - "Treat security friction and inaccessibility as security outcomes"
+  - "Include graceful degradation, detection, and recovery when prevention is not absolute"
+  - "Transfer the register after changed actor capability or a failing accessible recovery flow"
+reviewTriggers:
+  - "New high-impact user journey (recovery, invite, impersonation, billing)"
+  - "Actor model change (insider, coerced user, bulk automation)"
+  - "Accessibility complaint or lockout incident"
+  - "Residual accepted without owner or expiry"
+invariants:
+  - "Every high-impact 1.1 invariant has residual, owner, and revisit trigger"
+  - "Inaccessible or unusable security flows are recorded as security failures"
+  - "Vanity metrics are not presented as residual risk"
+  - "No live-target or real-PII instructions appear in this module"
+threatModelPrompts:
+  - "Who is harmed (user, tenant, coerced user, bystander)?"
+  - "What is the cheapest abuse that still pays?"
+  - "Which assumptions are untested (honest lab, trusted operator, honest IdP)?"
+concepts:
+  - threat-actor-capability
+  - incentive
+  - work-factor
+  - residual-risk
+  - user-harm
+  - security-friction
+  - accessibility
+  - graceful-degradation
+  - psychological-acceptability
+  - vanity-versus-outcome-metrics
+learningObjects:
+  - id: 1.4-LO-01
+    kind: concept-model
+    title: Actors, incentives, work factor, residual risk vs vanity metrics
+  - id: 1.4-LO-02
+    kind: design-exercise
+    title: SecureCollab risk register with assumptions and user-harm scenarios
+  - id: 1.4-LO-03
+    kind: mechanism-lab
+    title: "Local fixture: a secure recovery flow unusable without a mouse or visual CAPTCHA"
+  - id: 1.4-LO-04
+    kind: design-exercise
+    title: Reduce friction without weakening the 1.1 invariant; document the trade-off
+  - id: 1.4-LO-05
+    kind: verification-lab
+    title: Test plan for lockout, bypass, and inaccessible recovery as forbidden outcomes
+  - id: 1.4-LO-06
+    kind: operations-exercise
+    title: "Degrade, detect, recover: one scenario with CSF Detect/Respond/Recover labels"
+  - id: 1.4-LO-07
+    kind: transfer-challenge
+    title: "Raise attacker capability or add coercion: rewrite residuals and Gate 1 defense"
+  - id: 1.4-LO-08
+    kind: code-review
+    title: Seeded risk register that lists tools instead of harm and residual
+labSpec:
+  authorizedScope: "Local course fixture and synthetic SecureCollab description only"
+  slug: 1.4-risk-register
+  summary: "Learner produces a risk register; local fixture shows unusable recovery as a security failure"
+  forbiddenOutcomes:
+    - "Heat-map-only register with no harm or residual"
+    - "Live-target user testing or real PII in harm scenarios"
+    - "Treating accessibility as non-security"
+evidenceRequired:
+  - "Risk register with assumptions, uncertainty, user-harm, residual, owners"
+  - "WCAG-oriented notes for one recovery/auth journey"
+  - "Degrade/detect/recover scenario"
+  - "Transfer register after actor or a11y change (for transfer-ready)"
+assessmentBlueprint:
+  explain: "Actor vs vulnerability; friction as security"
+  design: "Register completeness vs 1.1–1.3 artifacts"
+  build: "Deferred to Pass B; usable recovery change on local fixture"
+  break: "Unusable control annotated as a security failure"
+  verify: "Lockout, bypass, and accessibility forbidden outcomes"
+  operate: "Degrade/detect/recover scenario labeled with CSF functions"
+  communicate: "Residual risk with owner and trigger, without compliance theater"
+masteryGate: "1"
+standardsRefs:
+  - source: CISA Secure by Design
+    version: "current-public-guidance"
+    status: final
+    requirementIds:
+      - customer-outcomes
+      - secure-defaults
+    url: "https://www.cisa.gov/securebydesign"
+  - source: NIST Cybersecurity Framework (CSF) 2.0
+    version: "2.0"
+    status: final
+    requirementIds:
+      - GV
+      - DE
+      - RS
+      - RC
+    url: "https://www.nist.gov/publications/nist-cybersecurity-framework-csf-20"
+  - source: NIST SP 800-63-4 Digital Identity Guidelines
+    version: "4"
+    status: final
+    requirementIds:
+      - risk-management
+      - customer-experience
+    url: "https://pages.nist.gov/800-63-4/"
+  - source: W3C Web Content Accessibility Guidelines
+    version: "2.2"
+    status: final
+    requirementIds:
+      - security-sensitive-journeys
+    url: "https://www.w3.org/TR/WCAG22/"
+  - source: OWASP Software Assurance Maturity Model
+    version: "2.0"
+    status: final
+    requirementIds:
+      - governance-metrics
+    url: "https://owaspsamm.org/model/"
+  - source: Saltzer & Schroeder, The Protection of Information in Computer Systems
+    version: "1975"
+    status: seminal
+    requirementIds:
+      - psychological-acceptability
+      - work-factor
+      - compromise-recording
+    url: "https://web.mit.edu/saltzer/www/publications/protection/"
+misconceptions:
+  - "Residual risk is a yellow scanner"
+  - "Usability is the opposite of security; accessibility is later compliance"
+  - "Work factor is key length"
+  - "Users who bypass a control are the problem"
+  - "Detection without recovery is resilience"
+  - "NIST 800-63 is a password-complexity checklist"
+  - "SAMM scores prove the product is secure"
+  - "Secure by Design means the customer bought MFA"
+operationalConsiderations:
+  - "Detection and recovery are residual-risk controls"
+  - "Support tools must not become unaudited impersonation"
+  - "Course harm scenarios stay synthetic"
+author: "choreograph-curriculum / author-module-spec"
+reviewer: "quality-reviewer (Pass A spec completeness)"
+lastReviewedAt: "2026-08-23"
+nextReviewAt: "2027-02-23"
+changelog:
+  - date: "2026-08-23"
+    note: "Pass A initial specification"
+  - date: "2026-08-23"
+    note: "Pass A quality-gate: spec completeness competent; reviewer recorded"
