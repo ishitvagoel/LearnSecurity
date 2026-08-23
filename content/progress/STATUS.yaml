@@ -15,11 +15,11 @@ defaults:
   website_progress: "local-first"
 
 next:
-  id: "1.2"
+  id: "1.3"
   pass: A
   skill: choreograph-curriculum
   inner_skill: author-module-spec
-  note: "1.1 Pass A competent (spec only). Continue Phase 1 spec pilot with /choreograph-curriculum. Do not start Pass B until 1.1–1.4 and 2.1–2.4 have Pass A."
+  note: "1.2 Pass A competent (spec only). Continue Phase 1 spec pilot with /choreograph-curriculum. Do not start Pass B until 1.1–1.4 and 2.1–2.4 have Pass A."
 
 spiral_deltas: []
 
@@ -46,8 +46,8 @@ modules:
     title: "Authority and protection"
     phase: 1
     track: core
-    pass: none
-    quality: not-attempted
+    pass: A
+    quality: competent
   - id: "1.3"
     title: "Trust boundaries and attack surface"
     phase: 1

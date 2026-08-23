@@ -1,0 +1,149 @@
+id: "1.2"
+slug: authority-and-protection
+title: Authority and protection
+phase: 1
+track: core
+difficulty: foundation
+status: spec
+estimatedMinutes: 240
+prerequisites:
+  - "1.1 Pass A: invariant catalogue language"
+  - "Entry profile: small database-backed API, Git, tests, basic SQL"
+  - "0.1 vocabulary recommended, not blocking for Phase 1 spec pilot"
+routeTags:
+  - complete
+  - accelerated
+  - web-api
+  - mobile
+releaseMilestone: null
+outcomes:
+  - "Produce a reviewable SecureCollab authority map and access matrix"
+  - "Model subjects, objects, actions, delegation, capabilities, and ambient authority"
+  - "Apply least privilege, complete mediation, fail-safe defaults, separation of privilege, and secure defaults as design rules"
+  - "Show that skipped checks on indirect paths are complete-mediation failures"
+  - "Transfer the matrix after a new principal or object without treating authentication as authorization"
+reviewTriggers:
+  - "New principal (support impersonation, worker, webhook, mobile client)"
+  - "New object class (files, GraphQL field, search index)"
+  - "Paths that bypass HTTP middleware"
+  - "Multi-tenant cells added to the matrix"
+invariants:
+  - "Every security-relevant action in scope has an explicit subject-object-action rule"
+  - "Unknown or failed policy evaluation denies (fail-safe default)"
+  - "Authentication is not treated as authorization"
+  - "No live-target or real-PII instructions appear in this module"
+threatModelPrompts:
+  - "Where does ambient authority leak across tenants, roles, or background work?"
+  - "Who can delegate, and can they delegate more than they have?"
+  - "What can an attacker do with any URL the user can see versus a stolen worker identity?"
+  - "Who is in the TCB for mediation: application policy, database role, or worker identity?"
+concepts:
+  - subject
+  - object
+  - action
+  - delegation
+  - capability
+  - ambient-authority
+  - access-matrix
+  - least-privilege
+  - complete-mediation
+  - fail-safe-defaults
+  - separation-of-privilege
+  - secure-defaults
+  - authentication-versus-authorization
+learningObjects:
+  - id: 1.2-LO-01
+    kind: concept-model
+    title: "Subjects, objects, actions, matrix vs capability vs ambient authority"
+  - id: 1.2-LO-02
+    kind: design-exercise
+    title: "SecureCollab authority map and access matrix (org, member, note, file, admin)"
+  - id: 1.2-LO-03
+    kind: mechanism-lab
+    title: "Local fixture: a handler that trusts ambient current_user without an object check"
+  - id: 1.2-LO-04
+    kind: design-exercise
+    title: Restore complete mediation and least privilege on that path (structural, not a denylist)
+  - id: 1.2-LO-05
+    kind: verification-lab
+    title: Turn matrix cells into forbidden-outcome tests (cross-role, cross-object)
+  - id: 1.2-LO-06
+    kind: operations-exercise
+    title: "Revoke and expire: what logs prove who held which authority when"
+  - id: 1.2-LO-07
+    kind: transfer-challenge
+    title: "Add support impersonation or a worker: redraw matrix and name stressed principles"
+  - id: 1.2-LO-08
+    kind: code-review
+    title: Seeded diff that adds an admin JSON route without a policy check
+labSpec:
+  authorizedScope: "Local course fixture and synthetic SecureCollab description only; no public or third-party targets"
+  slug: 1.2-authority-matrix
+  summary: "Learner produces an authority map and access matrix; local fixture shows a missing object-level check"
+  forbiddenOutcomes:
+    - "Cross-role or cross-object success on the local fixture"
+    - "Instructions targeting a non-lab system"
+    - "Treating login success as authorization evidence"
+evidenceRequired:
+  - "Authority map and access matrix for SecureCollab Phase 1"
+  - "Annotation of at least one complete-mediation miss (indirect path or seeded route)"
+  - "Forbidden-outcome test list derived from matrix cells"
+  - "Transfer matrix after a new principal or object (for transfer-ready)"
+assessmentBlueprint:
+  explain: "Subject/object/action; ambient vs granted authority; authentication is not authorization"
+  design: "Authority map and access matrix including one indirect path"
+  build: "Deferred to Pass B; policy check on a local fixture"
+  break: "Annotation of a local ambient-authority miss or seeded admin route"
+  verify: "Forbidden cells named as negative tests"
+  operate: "Revocation, expiry, and audit of who held which authority"
+  communicate: "Why unbounded admin ambient authority was rejected or bounded"
+masteryGate: "1"
+standardsRefs:
+  - source: Saltzer & Schroeder, The Protection of Information in Computer Systems
+    version: "1975"
+    status: seminal
+    requirementIds:
+      - least-privilege
+      - complete-mediation
+      - fail-safe-defaults
+      - separation-of-privilege
+      - economy-of-mechanism
+      - open-design
+    url: "https://web.mit.edu/saltzer/www/publications/protection/"
+  - source: CISA Secure by Design
+    version: "current-public-guidance"
+    status: final
+    requirementIds:
+      - secure-defaults
+      - manufacturer-ownership
+    url: "https://www.cisa.gov/securebydesign"
+  - source: OWASP Application Security Verification Standard
+    version: "5.0.0"
+    status: final
+    requirementIds:
+      - V8
+      - V15
+    url: "https://owasp.org/www-project-application-security-verification-standard/"
+misconceptions:
+  - "Authentication is authorization"
+  - "UI roles are the access matrix"
+  - "An HTTP handler check mediates every path"
+  - "Admin is one ambient superuser"
+  - "Allow-by-default with a denylist is fail-safe"
+  - "Framework auth middleware is complete mediation"
+  - "Capabilities and ACLs are interchangeable; ambient authority is just being logged in"
+  - "Secure by Design means paid extra security features"
+operationalConsiderations:
+  - "Log grants, impersonation, and revocations; include workers and break-glass"
+  - "Failed policy evaluation and new objects deny"
+  - "A matrix users bypass is not complete mediation (usability in 1.4/4.2)"
+  - "Database-role least privilege is deferred to 5.5"
+author: "choreograph-curriculum / author-module-spec"
+reviewer: "quality-reviewer (Pass A spec completeness)"
+lastReviewedAt: "2026-08-23"
+nextReviewAt: "2027-02-23"
+changelog:
+  - date: "2026-08-23"
+    note: "Pass A initial specification"
+  - date: "2026-08-23"
+    note: "Pass A quality-gate: spec completeness competent; reviewer recorded"
