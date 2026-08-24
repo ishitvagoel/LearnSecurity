@@ -1,3 +1,5 @@
+import { PageHeader, PageShell } from "@/components/ui";
+
 const TERMS: { term: string; def: string }[] = [
   {
     term: "Invariant",
@@ -39,20 +41,24 @@ const TERMS: { term: string; def: string }[] = [
 
 export default function GlossaryPage() {
   return (
-    <article>
-      <h1 className="mb-4 text-3xl font-semibold">Glossary</h1>
-      <p className="mb-6 max-w-prose leading-relaxed">
-        These are working definitions for this course. Prefer a testable sentence
-        about SecureCollab over a memorized triad.
-      </p>
-      <dl>
+    <PageShell width="narrow">
+      <PageHeader title="Glossary">
+        <p>
+          These are working definitions for this course. Prefer a testable sentence
+          about SecureCollab over a memorized triad.
+        </p>
+      </PageHeader>
+      <dl className="space-y-4">
         {TERMS.map((t) => (
-          <div key={t.term} className="mb-5 max-w-prose">
-            <dt className="font-semibold">{t.term}</dt>
-            <dd className="leading-relaxed">{t.def}</dd>
+          <div
+            key={t.term}
+            className="rounded-xl border border-stone-200 bg-white px-4 py-3"
+          >
+            <dt className="font-semibold text-stone-900">{t.term}</dt>
+            <dd className="mt-1 leading-relaxed text-stone-800">{t.def}</dd>
           </div>
         ))}
       </dl>
-    </article>
+    </PageShell>
   );
 }

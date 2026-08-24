@@ -36,11 +36,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to main content
         </a>
         <SiteNav />
-        <main id="main" className="mx-auto max-w-6xl flex-1 px-4 py-8">
+        <main id="main" className="mx-auto w-full max-w-[90rem] flex-1 px-4 py-8 sm:py-10">
           {children}
         </main>
-        <footer className="border-t border-stone-300 bg-white px-4 py-6 text-sm text-stone-800">
-          <div className="mx-auto max-w-6xl">
+        <footer className="border-t border-stone-300 bg-white px-4 py-6 text-sm text-stone-700">
+          <div className="mx-auto max-w-[90rem]">
             Authorized local labs only. Answer keys are not published on this site.
             Blueprint revision 1.1.
           </div>

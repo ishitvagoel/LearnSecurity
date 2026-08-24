@@ -60,15 +60,20 @@ export function ProgressToggle({ moduleId }: { moduleId: string }): ReactElement
   };
 
   return (
-    <label className="mt-4 flex items-start gap-2 text-sm">
+    <label className="mt-2 flex cursor-pointer items-start gap-3 rounded-lg border border-stone-200 bg-white px-3 py-3 text-sm">
       <input
         type="checkbox"
         checked={done}
         onChange={onChange}
-        className="mt-1 h-4 w-4"
+        className="mt-0.5 h-4 w-4 shrink-0"
       />
       <span>
-        Mark this module visited on this device (local-first progress; no account).
+        <span className="font-medium text-stone-900">
+          {done ? "Visited on this device" : "Mark visited on this device"}
+        </span>
+        <span className="mt-0.5 block text-stone-600">
+          Stored in this browser only. No account.
+        </span>
       </span>
     </label>
   );
