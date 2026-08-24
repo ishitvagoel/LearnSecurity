@@ -5,17 +5,26 @@ export default function CapstonePage() {
     <article>
       <h1 className="mb-4 text-3xl font-semibold">Capstone 11 — SecureCollab</h1>
       <p className="mb-4 max-w-prose leading-relaxed">
-        Integrate the seven-step loop across identity, data, API, verification,
-        and operations. Evidence is an architecture defense plus repaired
-        findings—not a feature demo.
+        The capstone is not a new feature demo. You show that the same
+        invariants still hold when identity, data, APIs, workers, and time
+        interact: a revoked share stays revoked; a worker is not a user
+        session; deletion does not leave bodies in a side copy.
+      </p>
+      <p className="mb-4 max-w-prose leading-relaxed">
+        Evidence is an architecture defense plus repaired findings. Product
+        milestones M0–M5 in STATUS stay not-attempted until a real product tree
+        exists. Completing lessons on this site is not that evidence.
       </p>
       <p className="max-w-prose leading-relaxed">
-        Module page:{" "}
+        Start at{" "}
         <Link href="/learn/11/" className="text-blue-900 underline">
-          11 — Integrating capstone
+          module 11
         </Link>
-        . Milestones M0–M5 in STATUS remain not-attempted until a product tree
-        exists.
+        . Run the local capstone fixture from the{" "}
+        <Link href="/labs/11/" className="text-blue-900 underline">
+          lab brief
+        </Link>
+        .
       </p>
     </article>
   );
