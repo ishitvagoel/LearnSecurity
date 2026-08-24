@@ -1,4 +1,11 @@
 import type { ReactNode } from "react";
+import {
+  createIdAllocator,
+  plainHeadingText,
+  sectionClassName,
+  sectionKindFromHeading,
+  type LessonSectionKind,
+} from "./headings";
 
 function safeHref(href: string): string | null {
   const trimmed = href.trim();
@@ -31,7 +38,7 @@ function inline(text: string): ReactNode[] {
       nodes.push(<strong key={key}>{token.slice(2, -2)}</strong>);
     } else if (token.startsWith("`")) {
       nodes.push(
-        <code key={key} className="rounded bg-stone-200 px-1 font-mono text-[0.95em]">
+        <code key={key} className="rounded bg-stone-200/80 px-1 py-0.5 font-mono text-[0.9em]">
           {token.slice(1, -1)}
         </code>,
       );
@@ -44,7 +51,7 @@ function inline(text: string): ReactNode[] {
           <a
             key={key}
             href={href}
-            className="text-blue-900 underline"
+            className="text-blue-900 underline decoration-blue-900/30 underline-offset-2 hover:decoration-blue-900"
             {...(external ? { rel: "noreferrer", target: "_blank" } : {})}
           >
             {link[1]}
@@ -81,14 +88,14 @@ function renderTable(rows: string[], key: string): ReactNode {
   const header = body[0];
   const rest = body.slice(1);
   return (
-    <div key={key} className="mb-6 overflow-x-auto">
-      <table className="w-full min-w-[36rem] border-collapse text-left text-sm">
+    <div key={key} className="mb-5 overflow-x-auto rounded-lg border border-stone-200">
+      <table className="w-full min-w-[32rem] border-collapse text-left text-sm">
         <thead>
           <tr>
             {header.map((cell) => (
               <th
                 key={cell}
-                className="border border-stone-300 bg-stone-100 px-3 py-2 font-semibold"
+                className="border-b border-stone-200 bg-stone-100 px-3 py-2 font-semibold text-stone-900"
               >
                 {inline(cell)}
               </th>
@@ -99,7 +106,7 @@ function renderTable(rows: string[], key: string): ReactNode {
           {rest.map((row, ri) => (
             <tr key={ri} className="odd:bg-white even:bg-stone-50">
               {row.map((cell, ci) => (
-                <td key={ci} className="border border-stone-300 px-3 py-2 align-top">
+                <td key={ci} className="border-t border-stone-100 px-3 py-2 align-top text-stone-800">
                   {inline(cell)}
                 </td>
               ))}
@@ -111,69 +118,122 @@ function renderTable(rows: string[], key: string): ReactNode {
   );
 }
 
+function isMechanismAside(text: string): boolean {
+  return text.startsWith("**Mechanism (not the property):**");
+}
+
 /** Trusted, reviewed Markdown only (curriculum tree). Not MDX. */
 export function Markdown({ source }: { source: string }): ReactNode {
   const lines = source.replace(/\r\n/g, "\n").split("\n");
   const nodes: ReactNode[] = [];
+  const alloc = createIdAllocator();
   let para: string[] = [];
   let list: { ordered: boolean; items: string[] } | null = null;
   let table: string[] = [];
   let inCode = false;
   let code: string[] = [];
   let quote: string[] = [];
+  let seq = 0;
+  let section: {
+    kind: LessonSectionKind;
+    headingId: string;
+    headingText: string;
+    children: ReactNode[];
+  } | null = null;
+
+  const nextKey = (prefix: string): string => {
+    seq += 1;
+    return `${prefix}-${seq}`;
+  };
+
+  const pushNode = (node: ReactNode): void => {
+    if (section) {
+      section.children.push(node);
+      return;
+    }
+    nodes.push(node);
+  };
+
+  const flushSection = (): void => {
+    if (!section) {
+      return;
+    }
+    const current = section;
+    section = null;
+    nodes.push(
+      <section
+        key={nextKey("sec")}
+        className={sectionClassName(current.kind)}
+        aria-labelledby={current.headingId}
+      >
+        <h2 id={current.headingId} className="lesson-h2 mt-0">
+          {inline(current.headingText)}
+        </h2>
+        {current.children}
+      </section>,
+    );
+  };
 
   const flushPara = (): void => {
     if (para.length === 0) {
       return;
     }
-    nodes.push(
-      <p key={`p-${nodes.length}`} className="mb-4 max-w-prose leading-relaxed">
-        {inline(para.join(" "))}
+    const text = para.join(" ");
+    para = [];
+    if (isMechanismAside(text)) {
+      pushNode(
+        <aside key={nextKey("mech")} className="lesson-mechanism">
+          {inline(text)}
+        </aside>,
+      );
+      return;
+    }
+    pushNode(
+      <p key={nextKey("p")} className="lesson-p">
+        {inline(text)}
       </p>,
     );
-    para = [];
   };
+
   const flushList = (): void => {
     if (!list || list.items.length === 0) {
       return;
     }
     const Tag = list.ordered ? "ol" : "ul";
-    const cls = list.ordered ? "mb-4 list-decimal pl-6" : "mb-4 list-disc pl-6";
-    nodes.push(
-      <Tag key={`l-${nodes.length}`} className={cls}>
+    const cls = list.ordered ? "lesson-ol" : "lesson-ul";
+    pushNode(
+      <Tag key={nextKey("l")} className={cls}>
         {list.items.map((item, i) => (
-          <li key={i} className="mb-1 max-w-prose">
-            {inline(item)}
-          </li>
+          <li key={i}>{inline(item)}</li>
         ))}
       </Tag>,
     );
     list = null;
   };
+
   const flushTable = (): void => {
     if (table.length === 0) {
       return;
     }
-    const node = renderTable(table, `t-${nodes.length}`);
+    const node = renderTable(table, nextKey("t"));
     if (node) {
-      nodes.push(node);
+      pushNode(node);
     }
     table = [];
   };
+
   const flushQuote = (): void => {
     if (quote.length === 0) {
       return;
     }
-    nodes.push(
-      <blockquote
-        key={`q-${nodes.length}`}
-        className="mb-4 border-l-4 border-stone-400 pl-4 text-stone-800"
-      >
+    pushNode(
+      <blockquote key={nextKey("q")} className="lesson-quote">
         {inline(quote.join(" "))}
       </blockquote>,
     );
     quote = [];
   };
+
   const flushFlow = (): void => {
     flushPara();
     flushList();
@@ -181,14 +241,35 @@ export function Markdown({ source }: { source: string }): ReactNode {
     flushQuote();
   };
 
+  const startHeading = (level: 2 | 3, raw: string): void => {
+    flushFlow();
+    const kind = level === 2 ? sectionKindFromHeading(raw) : null;
+    if (level === 2) {
+      flushSection();
+    }
+    if (kind) {
+      section = {
+        kind,
+        headingId: alloc(plainHeadingText(raw)),
+        headingText: raw,
+        children: [],
+      };
+      return;
+    }
+    const Tag = level === 2 ? "h2" : "h3";
+    const cls = level === 2 ? "lesson-h2" : "lesson-h3";
+    pushNode(
+      <Tag key={nextKey("h")} id={alloc(plainHeadingText(raw))} className={cls}>
+        {inline(raw)}
+      </Tag>,
+    );
+  };
+
   for (const line of lines) {
     if (line.startsWith("```")) {
       if (inCode) {
-        nodes.push(
-          <pre
-            key={`pre-${nodes.length}`}
-            className="mb-4 overflow-x-auto rounded border border-stone-300 bg-stone-100 p-3 font-mono text-sm"
-          >
+        pushNode(
+          <pre key={nextKey("pre")} className="lesson-pre">
             <code>{code.join("\n")}</code>
           </pre>,
         );
@@ -251,33 +332,25 @@ export function Markdown({ source }: { source: string }): ReactNode {
     }
     if (line.startsWith("# ")) {
       flushFlow();
-      nodes.push(
-        <h1 key={`h1-${nodes.length}`} className="mb-4 text-3xl font-semibold">
+      flushSection();
+      pushNode(
+        <h1 key={nextKey("h1")} className="lesson-h1">
           {inline(line.slice(2))}
         </h1>,
       );
       continue;
     }
     if (line.startsWith("## ")) {
-      flushFlow();
-      nodes.push(
-        <h2 key={`h2-${nodes.length}`} className="mb-3 mt-8 text-2xl font-semibold">
-          {inline(line.slice(3))}
-        </h2>,
-      );
+      startHeading(2, line.slice(3));
       continue;
     }
     if (line.startsWith("### ")) {
-      flushFlow();
-      nodes.push(
-        <h3 key={`h3-${nodes.length}`} className="mb-2 mt-6 text-xl font-semibold">
-          {inline(line.slice(4))}
-        </h3>,
-      );
+      startHeading(3, line.slice(4));
       continue;
     }
     para.push(line);
   }
   flushFlow();
+  flushSection();
   return <div className="curriculum-prose">{nodes}</div>;
 }
