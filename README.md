@@ -70,6 +70,8 @@ Import this GitHub repository in Vercel. Use these project settings (also in `ve
 
 No environment variables are required. Production branch: `main`. Preview deployments: every other branch.
 
-This repository is linked to Vercel project **learnsecurity**. After this branch is merged, connect GitHub in the Vercel dashboard so pushes to `main` build automatically (Project → Settings → Git). The current production alias is `https://workspace-livid-rho.vercel.app` (rename/add a custom domain in Vercel when you want a stable hostname).
+GitHub is already connected to Vercel project **learn-security** (`.vercel/project.json`). Leave Root Directory empty. Pushes to this PR already create preview deployments; merging to `main` updates production.
 
-`.vercelignore` omits `labs/` and `content/assessment/keys/` so they are not uploaded. After connecting Git, Vercel builds on push; use a preview URL before promoting production.
+A second CLI-created project named `learnsecurity` (alias `workspace-livid-rho.vercel.app`) is a duplicate and can be deleted in the Vercel dashboard so only **learn-security** remains.
+
+`.vercelignore` omits `/labs` and `/content/assessment/keys` (root-anchored) so they are not uploaded. Preview Authentication should be off for this public curriculum, or PR preview URLs will bounce to the Vercel login.
