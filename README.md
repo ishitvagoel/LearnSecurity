@@ -49,8 +49,29 @@ site/             Pass D only (see site/AGENTS.md)
 ## Site (Pass D)
 
 ```bash
-npm --prefix site install
+npm --prefix site ci
 npm --prefix site run build
 ```
 
-Labs are not executed by the site. Examiner keys stay under `content/assessment/keys/` and are not linked from learner pages.
+Static HTML is written to `site/out/`. Labs are not executed by the site. Examiner keys stay under `content/assessment/keys/` and are not linked from learner pages.
+
+### Vercel
+
+Import this GitHub repository in Vercel. Use these project settings (also in `vercel.json`):
+
+| Setting | Value |
+|---|---|
+| Root Directory | *empty* (repository root), **not** `site/` |
+| Framework Preset | Other (`framework: null`) — static export |
+| Install | `npm --prefix site ci` |
+| Build | `npm --prefix site run build` |
+| Output | `site/out` |
+| Node | 20 (`.nvmrc`) |
+
+No environment variables are required. Production branch: `main`. Preview deployments: every other branch.
+
+GitHub is already connected to Vercel project **learn-security** (`.vercel/project.json`). Leave Root Directory empty. Pushes to this PR already create preview deployments; merging to `main` updates production.
+
+A second CLI-created project named `learnsecurity` (alias `workspace-livid-rho.vercel.app`) is a duplicate and can be deleted in the Vercel dashboard so only **learn-security** remains.
+
+`.vercelignore` omits `/labs` and `/content/assessment/keys` (root-anchored) so they are not uploaded. Preview Authentication should be off for this public curriculum, or PR preview URLs will bounce to the Vercel login.

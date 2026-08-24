@@ -1,0 +1,12 @@
+# Paths are gitignore-style. Anchor to repo root so `site/app/labs` is still uploaded.
+/labs
+/content/assessment/keys
+**/.pytest_cache
+**/__pycache__
+*.pyc
+/.cursor
+/.agents
+/site/node_modules
+/site/.next
+/site/out
+/.git

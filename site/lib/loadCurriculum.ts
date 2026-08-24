@@ -55,7 +55,7 @@ export function loadLessons(mod: ModuleMeta): LessonFile[] {
     const filename = rel.replace(/^lessons\//, "");
     const full = path.join(mod.contentDir, rel);
     let body = "";
-    if (rel && fs.existsSync(full) && !full.includes("assessment/keys")) {
+    if (rel && fs.existsSync(full) && !full.includes(`${path.sep}assessment${path.sep}keys${path.sep}`) && !full.endsWith(`${path.sep}assessment${path.sep}keys`)) {
       body = fs.readFileSync(full, "utf8");
     }
     return {

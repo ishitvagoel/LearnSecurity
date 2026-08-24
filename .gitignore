@@ -4,3 +4,7 @@
 site/node_modules/
 site/.next/
 site/out/
+.vercel/*
+!.vercel/project.json
+site/.vercel
+
