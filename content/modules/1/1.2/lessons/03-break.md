@@ -1,68 +1,28 @@
-# 1.2-LO-03 — Local fixture: a handler that trusts ambient current_user without an object check
+# 1.2-LO-03 — Ambient current_user without an object check
 
 **Kind:** mechanism-lab  
 **Loop step:** 3 Break  
-**Standards:** Saltzer & Schroeder, The Protection of Information in Computer Systems 1975 (seminal). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** Saltzer complete mediation (1975, seminal). Authorized **local** fixture only.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Authority and protection** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Every security-relevant action in scope has an explicit subject-object-action rule; Unknown or failed policy evaluation denies (fail-safe default); Authentication is not treated as authorization; No live-target or real-PII instructions appear in this module
+Does `read_note(user, note_id)` fail when the user is authenticated but **not** granted that note?
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** `bob` in the lab store (tenant `tB`), calling the same function alice uses, with note id `n1`.
+- **Trust:** this directory is the only target. No public URL, no real accounts.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
+## What to observe
 
-Threat-model prompts from the spec:
+In `labs/1.2/1.2-authority-matrix/`, `vulnerable/notes.py` returns tenant A’s body to bob. Root cause: **ambient authority** (any authenticated user). Preconditions: bob exists; n1 exists. Impact: 1.1 confidentiality cell fails. This is not a “new Top 10 item”; it is a missing matrix cell.
 
-- Where does ambient authority leak across tenants, roles, or background work?
-- Who can delegate, and can they delegate more than they have?
-- What can an attacker do with any URL the user can see versus a stolen worker identity?
+Do not write exploit scripts for other hosts. Calling `read_note("bob", "n1")` in-process is enough.
 
-## Root cause, preconditions, impact, prevention, detection, recovery
+## Practice
 
-| Slice | For Authority and protection |
-|---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
-
-## Framework defaults vs application guarantees
-
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Authority and protection**. Name what the app must still enforce.
-
-## Mechanism limits
-
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
-
-## Practice (local, authorized)
-
-Complete the associated lab under `labs/1.2/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
-
-Safe task: write one testable sentence that would fail if the **authority** property were false.
+Run the README pytest commands. Record which test name is the forbidden outcome.
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
-
-## Usability and accessibility
-
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Authentication is authorization
-- UI roles are the access matrix
-- An HTTP handler check mediates every path
-- Admin is one ambient superuser
-
-## Non-goals
-
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+If note ids were random 128-bit values, would the vulnerable function still be wrong? (Yes—obscurity is not the cell.)

@@ -1,67 +1,71 @@
-# 2.1-LO-04 — Pick a structural API that removes the ambiguity
+# 2.1 — Bytes, encodings, parsers, and interpreter boundaries (4 Build)
 
 **Kind:** design-exercise  
 **Loop step:** 4 Build  
-**Standards:** OWASP Application Security Verification Standard 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** ASVS 5.0.0 V5 (final) input; RFC 8259 JSON (STD 90); Unicode UAX #15 as *normalization*, not a security control by itself.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Bytes, text, formats, parsers, and interpreters** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Each interpreter boundary on the scoped path is named; Disagreeing parsers are treated as an invariant failure; No live-target encoding attacks or lesson-page weaponized payloads
+If a note JSON object repeats the tenant key, ingest must reject (or both the ACL decision and the stored row must see the same tenant). A parser that keeps the first key for ACL and the last key for storage is a confidentiality failure.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** A member who can POST JSON; a proxy that re-encodes Unicode; a second parser in a worker.
+- **Trust:** One agreed parser in the app. The client encoder is hostile. PostgreSQL jsonb is another parser — do not assume it matches Python json.
+Reject duplicate keys or compare acl_tenant == stored_tenant.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Threat-model prompts from the spec:
+## Fixed fixture (local)
 
-- Where can an attacker choose encoding, BOM, or nested format?
-- Which shared parser is a least-common-mechanism risk?
+```python
+"""Fixed: duplicate tenant keys are rejected so both interpreters share one meaning."""
 
-## Root cause, preconditions, impact, prevention, detection, recovery
+from __future__ import annotations
 
-| Slice | For Bytes, text, formats, parsers, and interpreters |
-|---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+import json
+import re
 
-## Framework defaults vs application guarantees
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Bytes, text, formats, parsers, and interpreters**. Name what the app must still enforce.
+def _first_tenant(text: str) -> str:
+    match = re.search(r'"tenant"\s*:\s*"([^"]*)"', text)
+    return match.group(1) if match else ""
 
-## Mechanism limits
 
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
+def _last_tenant(text: str) -> str:
+    data = json.loads(text)
+    return str(data.get("tenant", ""))
 
-## Practice (local, authorized)
 
-Complete the associated lab under `labs/2.1/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
+def ingest_note(text: str) -> dict:
+    acl = _first_tenant(text)
+    stored = _last_tenant(text)
+    if not acl or acl != stored:
+        return {"accepted": False, "acl_tenant": acl, "stored_tenant": stored, "body": None}
+    data = json.loads(text)
+    return {"accepted": True, "acl_tenant": acl, "stored_tenant": stored, "body": data.get("body")}
+```
 
-Safe task: write one testable sentence that would fail if the **bytes** property were false.
+## Why this restores the cell
+
+Reject duplicate keys; pass one parse tree everywhere.
+
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+
+## What this is not
+
+Pydantic v2 defaults are not “duplicate keys impossible.” stdlib json keeps the last key.
+
+A WAF string filter for “tenant twice” fails on whitespace and Unicode escapes.
+
+## Practice
+
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
+GraphQL and REST both ingest the same note — two grammars.
 
-## Usability and accessibility
+## Residual risk
 
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Strings are characters; UTF-8 is just text
-- Validation, sanitization, encoding, and parameterization are interchangeable
-- Successful JSON.parse means unambiguous meaning across languages
-- Framework auto-escaping completely mediates interpreters
-
-## Non-goals
-
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+Honest unique-key JSON still needs 1.2 mediation.

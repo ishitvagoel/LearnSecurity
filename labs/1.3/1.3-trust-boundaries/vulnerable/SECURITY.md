@@ -1,3 +1,3 @@
-# Vulnerable notes (1.3)
+# Vulnerable surface (1.3)
 
-We are secure because TLS and a scanner are green.
+Client header mistaken for worker identity. Local fixture only.

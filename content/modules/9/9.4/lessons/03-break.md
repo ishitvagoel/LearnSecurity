@@ -1,67 +1,50 @@
-# 9.4-LO-03 — Local fixture illustrating 9.4 failure (authorized only)
+# 9.4 — Automated analysis and tool orchestration (3 Break)
 
 **Kind:** mechanism-lab  
 **Loop step:** 3 Break  
-**Standards:** OWASP ASVS / module anchors (see spec) 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** NIST SSDF (final); OWASP SAMM; OpenSSF. Tools are signals.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Automated analysis and tool orchestration** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Claims are properties of SecureCollab (or the elective system), not tool names; Labs stay in authorized local or official training scope; Draft standards are labeled draft
+A HIGH finding without a mapped SecureCollab requirement cannot pass the ship gate. Unmapped means unowned, not “probably fine.”
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** Alert fatigue; vendor dashboard theater.
+- **Trust:** Local ship_ok(findings, map).
+**Forbidden outcome:** Unmapped HIGH finding allows ship
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
+**Authorized scope:** `labs/9.4/9.4-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
 
-Threat-model prompts from the spec:
+## What to observe
 
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+vulnerable sast.py ships anyway.
 
-## Root cause, preconditions, impact, prevention, detection, recovery
+The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: ship_ok([HIGH], {}) True.
 
-| Slice | For Automated analysis and tool orchestration |
+## Vulnerable fixture (local)
+
+```python
+def ship_ok(findings, mappings):
+    return True
+```
+
+## Root cause vs impact
+
+| Slice | Lab |
 |---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+| Root cause | Scanner output not joined to 9.1. |
+| Impact | Unknown HIGH in prod. |
+| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
 
-## Framework defaults vs application guarantees
+## Practice
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Automated analysis and tool orchestration**. Name what the app must still enforce.
-
-## Mechanism limits
-
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
-
-## Practice (local, authorized)
-
-Complete the associated lab under `labs/9.4/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
-
-Safe task: write one testable sentence that would fail if the **automated** property were false.
+Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/9.4/9.4-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
-
-## Usability and accessibility
-
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Automated analysis and tool orchestration is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
+SCA CVE vs actually called function.
 
 ## Non-goals
 
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+No live-target instructions. Synthetic data only.

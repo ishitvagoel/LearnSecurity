@@ -4,26 +4,26 @@
 
 ## Module
 
-DNS, transport, HTTP, TLS, proxies, CDNs, and caches
+HTTP, TLS, proxies, CDNs, and cache keys
 
 ## Evidence checklist
 
-- [ ] Request-path diagram
-- [ ] Hardened local edge notes
-- [ ] Origin verification tests list
-- [ ] Lab: `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Request-path diagram and cache-key tests
+- [ ] Transfer task (Clinic: cached /patients/me.)
+- [ ] Lab `labs/2.2/2.2-request-path`: forbidden outcome **Shared cache returns tenant A's body to tenant B**
+- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Transfer challenge (LO-07) for transfer-ready
+- [ ] Operate signal without note bodies / secrets: cdn_hit_tenant_mismatch; purge playbook.
 
 ## Rubric
 
 | Result | Meaning |
 |---|---|
 | Developing | Tools listed; missing attacker/trust; mechanism slogans |
-| Competent | System-specific invariant; lab understood; operate present |
+| Competent | System-specific invariant; lab mapped; operate present |
 | Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
 
-Knowledge check (80% retryable): distinguish property vs mechanism for this module. Items live in the session worksheet, not here.
+Knowledge check (retryable): distinguish property vs mechanism for **2.2**. Items live in the session worksheet, not here.
 
 ## Seeded review
 

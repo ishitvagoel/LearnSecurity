@@ -1,68 +1,67 @@
-# 1.4-LO-04 — Reduce friction without weakening the 1.1 invariant; document the trade-off
+# 1.4 — Risk, people, economics, usable security, and resilience (4 Build)
 
 **Kind:** design-exercise  
 **Loop step:** 4 Build  
-**Standards:** CISA Secure by Design current-public-guidance (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** WCAG 2.2 (final, W3C Rec); NIST SP 800-63-4 (final) as identity *risk* language; CISA Secure by Design (public guidance, final); NIST CSF 2.0 GV.OC.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Risk, people, economics, usable security, and resilience** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Every high-impact 1.1 invariant has residual, owner, and revisit trigger; Inaccessible or unusable security flows are recorded as security failures; Vanity metrics are not presented as residual risk; No live-target or real-PII instructions appear in this module
+A high-impact recovery control that is color-only or mouse-only is a security failure: people will be locked out or will route around it (shared passwords, screenshot of the “red” button). Usability is in the TCB for human-mediated controls.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** A tired legitimate user; an abuser who controls the mouse; a support attacker who prefers friction that pushes users to email secrets.
+- **Trust:** Lab recovery UI fixture only. Real users would include keyboard-only and low-vision operators.
+recovery_confirm_control exposes role=button, name, keyboard=True, color_only=False.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Threat-model prompts from the spec:
+## Fixed fixture (local)
 
-- Who is harmed (user, tenant, coerced user, bystander)?
-- What is the cheapest abuse that still pays?
-- Which assumptions are untested (honest lab, trusted operator, honest IdP)?
+```python
+"""Fixed: named, keyboard-operable recovery confirm (WCAG 2.2 as web baseline)."""
 
-## Root cause, preconditions, impact, prevention, detection, recovery
 
-| Slice | For Risk, people, economics, usable security, and resilience |
-|---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+def recovery_confirm_control() -> dict:
+    return {
+        "id": "confirm-recovery",
+        "name": "Confirm account recovery",
+        "keyboard": True,
+        "color": "green",
+        "mouse_only": False,
+    }
 
-## Framework defaults vs application guarantees
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Risk, people, economics, usable security, and resilience**. Name what the app must still enforce.
+def is_usable_accessible(control: dict) -> bool:
+    if control.get("mouse_only"):
+        return False
+    if not str(control.get("name", "")).strip():
+        return False
+    if not control.get("keyboard"):
+        return False
+    return True
+```
 
-## Mechanism limits
+## Why this restores the cell
 
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
+Keyboard operable, name in accessible tree, not color-only (WCAG 2.2).
 
-## Practice (local, authorized)
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-Complete the associated lab under `labs/1.4/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
+## What this is not
 
-Safe task: write one testable sentence that would fail if the **risk** property were false.
+A React component library “accessible by default” is not your journey. You still test the recovery path.
+
+CAPTCHA or “confirm in the app” can recreate the same exclusion.
+
+## Practice
+
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
+Step-up auth on a clinic portal: if the second factor UI is mouse-only, what property fails?
 
-## Usability and accessibility
+## Residual risk
 
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Residual risk is a yellow scanner
-- Usability is the opposite of security; accessibility is later compliance
-- Work factor is key length
-- Users who bypass a control are the problem
-
-## Non-goals
-
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+Coercion: a physically present attacker can still force a confirmation. Record as residual (do not pretend UX fixes coercion).

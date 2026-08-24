@@ -1,67 +1,58 @@
-# 5.4-LO-01 — Secure communication and channel binding: property vs mechanism
+# 5.4 — Secure communication and channel binding (1 Property)
 
 **Kind:** concept-model  
 **Loop step:** 1 Property  
-**Standards:** OWASP ASVS / module anchors (see spec) 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** RFC 8446/9846 TLS 1.3 (final); ASVS 5.0.0 V12; MASVS-NETWORK for 8.x. Pinning is a trade-off, not a universal rule.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Secure communication and channel binding** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Claims are properties of SecureCollab (or the elective system), not tool names; Labs stay in authorized local or official training scope; Draft standards are labeled draft
+A client-supplied X-Forwarded-Proto: https does not make the channel HTTPS. Channel authenticity is what the server socket actually negotiated (or a trusted proxy you *bound*), not a header from the browser.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** Client on cleartext who wants the app to think TLS is on (cookie Secure flags, redirects).
+- **Trust:** Direct socket proto in the lab. Real deployments may trust a *locked* load balancer hop only.
+**Mechanism (not the property):** uvicorn --proxy-headers without a trusted proxy IP is this bug.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Threat-model prompts from the spec:
+## Root cause vs impact vs prevention vs detection vs recovery
 
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
-
-## Root cause, preconditions, impact, prevention, detection, recovery
-
-| Slice | For Secure communication and channel binding |
+| Slice | For 5.4 |
 |---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+| Root cause | Confused deputy: app believes client about the channel. |
+| Preconditions | Header https + socket http => True. |
+| Impact (1.1 cell) | Authenticity of the transport. — Session cookies marked as if Secure; users stay on cleartext; HSTS skipped. |
+| Prevention | Ignore client proto unless the immediate peer is a trusted proxy with a bound identity. |
+| Detection | Requests where header https and socket http. |
+| Recovery | HSTS once you really have TLS; revoke cookies issued over cleartext. |
 
 ## Framework defaults vs application guarantees
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Secure communication and channel binding**. Name what the app must still enforce.
+uvicorn --proxy-headers without a trusted proxy IP is this bug.
 
-## Mechanism limits
+## Mechanism limits and bypasses
 
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
+Correct TLS to the LB is not e2e if you needed e2e (messaging).
 
-## Practice (local, authorized)
+SSLStrip on networks without HSTS; spoofed Forwarded.
 
-Complete the associated lab under `labs/5.4/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
+## Residual risk
 
-Safe task: write one testable sentence that would fail if the **communication** property were false.
+Pinning mobile apps (8.x) vs operational breakage — document, don’t mandate.
+
+## Practice
+
+Draw hops: device — ? — LB — app. Who is allowed to assert proto?
+
+Run `labs/5.4/5.4-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
+mTLS service identity vs this header.
 
-## Usability and accessibility
-
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Secure communication and channel binding is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
+Clinic: “we’re on TLS” because the SPA uses https:// in axios baseURL while API is http internally logged as https.
 
 ## Non-goals
 
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.

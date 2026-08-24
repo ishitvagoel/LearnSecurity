@@ -1,67 +1,50 @@
-# 3.3-LO-04 — Structural fix restoring the 3.3 invariant
+# 3.3 — Secure architecture patterns (4 Build)
 
 **Kind:** design-exercise  
 **Loop step:** 4 Build  
-**Standards:** OWASP ASVS / module anchors (see spec) 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** ASVS 5.0.0 V4/V13 (final); CISA Secure by Design (final guidance); Saltzer least privilege (1975, seminal).
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Secure architecture patterns** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Claims are properties of SecureCollab (or the elective system), not tool names; Labs stay in authorized local or official training scope; Draft standards are labeled draft
+The application DB role used by FastAPI must not SELECT another tenant’s rows even if a handler forgets a WHERE. Architecture is a second mediation, not a substitute for 1.2.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** Buggy handler; SQLi later (5.5/6.1); stolen app credentials.
+- **Trust:** PostgreSQL RLS/role in the lab stand-in. The app still must mediate.
+can_select('app', 'tB', 'tA') is False.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Threat-model prompts from the spec:
+## Fixed fixture (local)
 
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+```python
+def can_select(role: str, tenant: str, note_tenant: str) -> bool:
+    if role != "app":
+        return False
+    return tenant == note_tenant
+```
 
-## Root cause, preconditions, impact, prevention, detection, recovery
+## Why this restores the cell
 
-| Slice | For Secure architecture patterns |
-|---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+Least-privilege role; RLS as extra layer (5.5).
 
-## Framework defaults vs application guarantees
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Secure architecture patterns**. Name what the app must still enforce.
+## What this is not
 
-## Mechanism limits
+SQLAlchemy session is not a tenant scope.
 
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
+RLS bypassed by table owners and SECURITY DEFINER (E5).
 
-## Practice (local, authorized)
+## Practice
 
-Complete the associated lab under `labs/3.3/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
-
-Safe task: write one testable sentence that would fail if the **architecture** property were false.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
+Serverless function with a shared “admin” connection string.
 
-## Usability and accessibility
+## Residual risk
 
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Secure architecture patterns is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
-
-## Non-goals
-
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+Stolen migrator role — separate credential, shorter life.

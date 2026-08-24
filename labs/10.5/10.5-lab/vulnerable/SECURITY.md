@@ -1,3 +1,1 @@
-# Vulnerable notes (10.5)
-
-We are secure because TLS and a scanner are green.
+Vulnerable 10.5 local fixture. Authorized directory only.

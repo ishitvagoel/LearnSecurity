@@ -44,7 +44,7 @@ learningObjects:
   path: lessons/02-model.md
 - id: 6.5-LO-03
   kind: mechanism-lab
-  title: Local fixture illustrating 6.5 failure (authorized only)
+  title: 'Local fixture: Server-side fetch to link-local metadata is allowed'
   path: lessons/03-break.md
 - id: 6.5-LO-04
   kind: design-exercise
@@ -60,17 +60,19 @@ learningObjects:
   path: lessons/06-operate.md
 - id: 6.5-LO-07
   kind: transfer-challenge
-  title: Novel variation of 6.5
+  title: 'Transfer: Clinic “fetch lab result PDF from URL.”'
   path: lessons/07-transfer.md
 - id: 6.5-LO-08
   kind: code-review
-  title: Seeded diff for 6.5
+  title: Seeded review for 6.5
   path: lessons/08-review.md
 labSpec:
-  authorizedScope: Local course fixture or official training lab only
+  authorizedScope: Local course fixture or official training lab only; no public or
+    third-party targets
   slug: 6.5-lab
-  summary: 'Pass A brief only: Egress policy, URL validation, edge-origin consistency tests'
+  summary: Server-side fetch to link-local metadata is allowed
   forbiddenOutcomes:
+  - Server-side fetch to link-local metadata is allowed
   - Live-target instructions
   - Real PII or production secrets
   - Awareness list used as the syllabus
@@ -95,21 +97,28 @@ standardsRefs:
   - V4
   url: https://owasp.org/www-project-application-security-verification-standard/
 misconceptions:
-- Server-side requests and protocol parsing is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
+- HTTPS URLs cannot SSRF
+- Private IP blocklists are complete
+- Open redirect is just UX
 operationalConsiderations:
-- Pair prevention with detection/recovery where prevention is not absolute
+- egress_denied{host}.
+- Legitimate preview of customer URLs — dedicated egress proxy.
 author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (Pass C); lab-safety-reviewer (local YAML fixture)
-lastReviewedAt: '2026-08-23'
-nextReviewAt: '2027-02-23'
+reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+lastReviewedAt: '2026-08-24'
+nextReviewAt: '2027-02-24'
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map
 - date: '2026-08-23'
-  note: 'Pass A quality-gate: spec completeness competent; expand in a later revision if thin'
+  note: 'Pass A quality-gate: spec completeness competent; expand in a later revision
+    if thin'
 - date: '2026-08-23'
   note: Pass B lessons and authorized local lab
 - date: '2026-08-23'
   note: Pass C rubric and examiner keys; quality-gate recorded
+- date: '2026-08-23'
+  note: 'Deepen: 1.1-density lessons; structural local lab; quality-gate recorded'
+- date: '2026-08-24'
+  note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
+    Pass C keys isolated'

@@ -40,11 +40,11 @@ learningObjects:
   path: lessons/01-property.md
 - id: E2-LO-02
   kind: design-exercise
-  title: Model SecureCollab for E2
+  title: Model SecureCollab edge/browser for E2
   path: lessons/02-model.md
 - id: E2-LO-03
   kind: mechanism-lab
-  title: Local fixture illustrating E2 failure (authorized only)
+  title: 'Local fixture: Report-Only CSP counted as isolation enforcement'
   path: lessons/03-break.md
 - id: E2-LO-04
   kind: design-exercise
@@ -60,17 +60,19 @@ learningObjects:
   path: lessons/06-operate.md
 - id: E2-LO-07
   kind: transfer-challenge
-  title: Novel variation of E2
+  title: 'Transfer: Clinic: Report-Only as “HIPAA header.”'
   path: lessons/07-transfer.md
 - id: E2-LO-08
   kind: code-review
-  title: Seeded diff for E2
+  title: Seeded review for E2
   path: lessons/08-review.md
 labSpec:
-  authorizedScope: Local course fixture or official training lab only
+  authorizedScope: Local course fixture or official training lab only; no public or
+    third-party targets
   slug: e2-lab
-  summary: 'Pass A brief only: Advanced edge/browser assessment'
+  summary: Report-Only CSP counted as isolation enforcement
   forbiddenOutcomes:
+  - Report-Only CSP counted as isolation enforcement
   - Live-target instructions
   - Real PII or production secrets
   - Awareness list used as the syllabus
@@ -95,21 +97,28 @@ standardsRefs:
   - V17
   url: https://owasp.org/www-project-application-security-verification-standard/
 misconceptions:
-- Advanced browser and edge security is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
+- More headers is more security
+- Report-Only is a safer enforcing mode
+- CDN WAF is CSP
 operationalConsiderations:
-- Pair prevention with detection/recovery where prevention is not absolute
+- csp_reportonly_not_enforced.
+- XS-Leaks — named as elective depth.
 author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (Pass C); lab-safety-reviewer (local YAML fixture)
-lastReviewedAt: '2026-08-23'
-nextReviewAt: '2027-02-23'
+reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+lastReviewedAt: '2026-08-24'
+nextReviewAt: '2027-02-24'
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map
 - date: '2026-08-23'
-  note: 'Pass A quality-gate: spec completeness competent; expand in a later revision if thin'
+  note: 'Pass A quality-gate: spec completeness competent; expand in a later revision
+    if thin'
 - date: '2026-08-23'
   note: Pass B lessons and authorized local lab
 - date: '2026-08-23'
   note: Pass C rubric and examiner keys; quality-gate recorded
+- date: '2026-08-23'
+  note: 'Deepen: 1.1-density lessons; structural local lab; quality-gate recorded'
+- date: '2026-08-24'
+  note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
+    Pass C keys isolated'

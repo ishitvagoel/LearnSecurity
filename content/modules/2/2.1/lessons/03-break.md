@@ -1,67 +1,71 @@
-# 2.1-LO-03 — Local fixture: two parsers disagree on the same byte string
+# 2.1 — Bytes, encodings, parsers, and interpreter boundaries (3 Break)
 
 **Kind:** mechanism-lab  
 **Loop step:** 3 Break  
-**Standards:** OWASP Application Security Verification Standard 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** ASVS 5.0.0 V5 (final) input; RFC 8259 JSON (STD 90); Unicode UAX #15 as *normalization*, not a security control by itself.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Bytes, text, formats, parsers, and interpreters** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Each interpreter boundary on the scoped path is named; Disagreeing parsers are treated as an invariant failure; No live-target encoding attacks or lesson-page weaponized payloads
+If a note JSON object repeats the tenant key, ingest must reject (or both the ACL decision and the stored row must see the same tenant). A parser that keeps the first key for ACL and the last key for storage is a confidentiality failure.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** A member who can POST JSON; a proxy that re-encodes Unicode; a second parser in a worker.
+- **Trust:** One agreed parser in the app. The client encoder is hostile. PostgreSQL jsonb is another parser — do not assume it matches Python json.
+**Forbidden outcome:** Parser differential: ACL tenant disagrees with stored tenant
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
+**Authorized scope:** `labs/2.1/2.1-parser-boundaries` only. Do not target other hosts. Do not paste weaponized payloads into notes.
 
-Threat-model prompts from the spec:
+## What to observe
 
-- Where can an attacker choose encoding, BOM, or nested format?
-- Which shared parser is a least-common-mechanism risk?
+vulnerable parse_note.py splits ACL vs storage on duplicate tenant.
 
-## Root cause, preconditions, impact, prevention, detection, recovery
+The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: Duplicate tenant keys in one object; split parse.
 
-| Slice | For Bytes, text, formats, parsers, and interpreters |
+## Vulnerable fixture (local)
+
+```python
+"""Vulnerable: ACL parser (first tenant key) disagrees with store parser (JSON last key)."""
+
+from __future__ import annotations
+
+import json
+import re
+
+
+def _first_tenant(text: str) -> str:
+    match = re.search(r'"tenant"\s*:\s*"([^"]*)"', text)
+    return match.group(1) if match else ""
+
+
+def _last_tenant(text: str) -> str:
+    data = json.loads(text)
+    value = data.get("tenant", "")
+    return str(value)
+
+
+def ingest_note(text: str) -> dict:
+    acl = _first_tenant(text)
+    stored = _last_tenant(text)
+    return {"accepted": True, "acl_tenant": acl, "stored_tenant": stored, "body": json.loads(text).get("body")}
+```
+
+## Root cause vs impact
+
+| Slice | Lab |
 |---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+| Root cause | Two interpreters, two meanings of the same bytes. |
+| Impact | tB body stored as tA or ACL sees tA while disk sees tB. |
+| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
 
-## Framework defaults vs application guarantees
+## Practice
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Bytes, text, formats, parsers, and interpreters**. Name what the app must still enforce.
-
-## Mechanism limits
-
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
-
-## Practice (local, authorized)
-
-Complete the associated lab under `labs/2.1/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
-
-Safe task: write one testable sentence that would fail if the **bytes** property were false.
+Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/2.1/2.1-parser-boundaries/tests -q --impl vulnerable` (or the README if fixtures differ).
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
-
-## Usability and accessibility
-
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Strings are characters; UTF-8 is just text
-- Validation, sanitization, encoding, and parameterization are interchangeable
-- Successful JSON.parse means unambiguous meaning across languages
-- Framework auto-escaping completely mediates interpreters
+GraphQL and REST both ingest the same note — two grammars.
 
 ## Non-goals
 
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+No live-target instructions. Synthetic data only.

@@ -1,67 +1,44 @@
-# 4.2-LO-08 — Seeded diff for 4.2
+# 4.2 — Authentication and phishing-resistant authenticators (Review)
 
 **Kind:** code-review  
 **Loop step:** Review  
-**Standards:** OWASP ASVS / module anchors (see spec) 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** NIST SP 800-63B-4 (final); WebAuthn Level 3 is a **W3C Candidate Recommendation** — label CR, not Rec; WCAG 2.2 for the journey; ASVS 5.0.0 V6.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Authentication, phishing resistance, and usable access** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Claims are properties of SecureCollab (or the elective system), not tool names; Labs stay in authorized local or official training scope; Draft standards are labeled draft
+A password check that ignores origin is not phishing-resistant. WebAuthn to evil.example must fail even if the secret/credential exists. Passwords to the real origin are still phishable — do not advertise them as resistant.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** Lookalike origin; intercepted password; fatigued user.
+- **Trust:** Lab origin binding. Real authenticators later; this fixture models origin check.
+Review `labs/4.2/4.2-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/4.2.md` — not here.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
+## What to label
 
-Threat-model prompts from the spec:
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+- Seeded smell (label it yourself): phishing_resistant('password', evil, real) True
+- Seeded smell (label it yourself): Marketing copy “MFA = phishing resistant”
+- Seeded smell (label it yourself): Recovery SMS as default
+- Seeded smell (label it yourself): No wrong-origin WebAuthn test
 
-## Root cause, preconditions, impact, prevention, detection, recovery
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
 
-| Slice | For Authentication, phishing resistance, and usable access |
-|---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+## Misconceptions
 
-## Framework defaults vs application guarantees
+- Any 2FA is phishing-resistant
+- WebAuthn replaces authorization
+- Usable login is a nice-to-have
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Authentication, phishing resistance, and usable access**. Name what the app must still enforce.
+## Practice
 
-## Mechanism limits
-
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
-
-## Practice (local, authorized)
-
-Complete the associated lab under `labs/4.2/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
-
-Safe task: write one testable sentence that would fail if the **authentication** property were false.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
+Step-up for export: still origin-bound?
 
-## Usability and accessibility
+## HITL / WCAG 2.2
 
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Authentication, phishing resistance, and usable access is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
-
-## Non-goals
-
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+WebAuthn and password fallback must work with keyboard, labels, and no color-only errors (WCAG 2.2). A broken accessible path pushes people to shared passwords.

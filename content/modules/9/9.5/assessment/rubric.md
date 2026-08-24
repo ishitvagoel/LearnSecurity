@@ -4,26 +4,26 @@
 
 ## Module
 
-Penetration testing, reporting, and remediation
+Authorized assessment, reporting, and remediation
 
 ## Evidence checklist
 
-- [ ] Assessment report, remediation plan, retest record
-- [ ] Transfer task prompt
-- [ ] Local lab brief
-- [ ] Lab: `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Assessment report, remediation/variant plan, retest record
+- [ ] Transfer task (Clinic pentest PDF shelf.)
+- [ ] Lab `labs/9.5/9.5-lab`: forbidden outcome **Finding closed without retest**
+- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Transfer challenge (LO-07) for transfer-ready
+- [ ] Operate signal without note bodies / secrets: finding_closed_without_retest denied.
 
 ## Rubric
 
 | Result | Meaning |
 |---|---|
 | Developing | Tools listed; missing attacker/trust; mechanism slogans |
-| Competent | System-specific invariant; lab understood; operate present |
+| Competent | System-specific invariant; lab mapped; operate present |
 | Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
 
-Knowledge check (80% retryable): distinguish property vs mechanism for this module. Items live in the session worksheet, not here.
+Knowledge check (retryable): distinguish property vs mechanism for **9.5**. Items live in the session worksheet, not here.
 
 ## Seeded review
 

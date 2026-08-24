@@ -1,67 +1,44 @@
-# E1-LO-08 — Seeded diff for E1
+# E1 — AI, LLM, and agentic application security (Review)
 
 **Kind:** code-review  
 **Loop step:** Review  
-**Standards:** OWASP ASVS / module anchors (see spec) 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** OWASP GenAI LLM Top 10 2026 (awareness, not syllabus); NIST AI RMF GenAI Profile (guidance); this lab’s cell is tool authority.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **AI, LLM, and agentic application security** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Claims are properties of SecureCollab (or the elective system), not tool names; Labs stay in authorized local or official training scope; Draft standards are labeled draft
+The lab agent may only invoke allowlisted tools. A model-proposed exec_sql is not authorization. The model is an untrusted client (8.1) that speaks English.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** Prompt injection in a note body; malicious retrieved doc.
+- **Trust:** Local run_tool(name).
+Review `labs/E1/e1-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/E1.md` — not here.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
+## What to label
 
-Threat-model prompts from the spec:
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+- Seeded smell (label it yourself): exec_sql available
+- Seeded smell (label it yourself): Policy only in the system prompt
+- Seeded smell (label it yourself): No denied-tool test
+- Seeded smell (label it yourself): Retrieved docs trusted
 
-## Root cause, preconditions, impact, prevention, detection, recovery
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
 
-| Slice | For AI, LLM, and agentic application security |
-|---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+## Misconceptions
 
-## Framework defaults vs application guarantees
+- LLM Top 10 is ASVS for AI
+- RAG is safe because it is “our data”
+- The model is in the TCB
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **AI, LLM, and agentic application security**. Name what the app must still enforce.
+## Practice
 
-## Mechanism limits
-
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
-
-## Practice (local, authorized)
-
-Complete the associated lab under `labs/E1/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
-
-Safe task: write one testable sentence that would fail if the **agentic** property were false.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
+Copilot in CI.
 
-## Usability and accessibility
+## HITL / WCAG 2.2
 
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- AI, LLM, and agentic application security is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
-
-## Non-goals
-
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+Human approval UI for tools must be accessible; otherwise operators auto-approve.

@@ -1,3 +1,1 @@
-# Vulnerable notes (E1)
-
-We are secure because TLS and a scanner are green.
+Vulnerable E1 local fixture. Authorized directory only.

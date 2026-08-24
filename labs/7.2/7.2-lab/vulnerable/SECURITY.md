@@ -1,3 +1,1 @@
-# Vulnerable notes (7.2)
-
-We are secure because TLS and a scanner are green.
+Vulnerable 7.2 local fixture.

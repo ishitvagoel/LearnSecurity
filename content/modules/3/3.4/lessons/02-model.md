@@ -1,67 +1,53 @@
-# 3.4-LO-02 — Model SecureCollab for 3.4
+# 3.4 — Business logic and abuse-resistant design (2 Model)
 
 **Kind:** design-exercise  
 **Loop step:** 2 Model  
-**Standards:** OWASP ASVS / module anchors (see spec) 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** ASVS 5.0.0 V2 (final); OWASP API Security Top 10:2023 API4/API6 as *awareness*; this lab is a product rule, not a CWE name.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Business logic and abuse-resistant design** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Claims are properties of SecureCollab (or the elective system), not tool names; Labs stay in authorized local or official training scope; Draft standards are labeled draft
+A note share grant cannot be applied enough times to exceed the product cap (5 members). Abuse is a logic invariant.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** A scripted member; a confused deputy UI that retries (2.4).
+- **Trust:** Local counter. Real rate limits are 6.7.
+Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
-
-Threat-model prompts from the spec:
-
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
-
-## Root cause, preconditions, impact, prevention, detection, recovery
-
-| Slice | For Business logic and abuse-resistant design |
+| Piece | This system |
 |---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+| Subjects | Owner, automated client |
+| Objects | share count, cap=5 |
+| Actions | add_share |
+| Channels | API loop |
+| TCB | Server-side cap in the same transaction as insert. |
+| Untrusted | Client disabling the “max 5” UI |
+| State / time | Eight rapid POSTs. |
+| 1.1 cell | Integrity of the share policy; availability of the owner’s threat model (too many readers). |
 
-## Framework defaults vs application guarantees
+## Authority matrix (minimum)
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Business logic and abuse-resistant design**. Name what the app must still enforce.
+| Subject | Object | Action | Decision |
+|---|---|---|---|
+| owner | share 1-5 | add | allow |
+| owner | share 6 | add | deny |
+| script | parallel 6 | add | deny-with-lock |
+| support | override | add | audited-exception |
 
-## Mechanism limits
+A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
 
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
+## Practice
 
-## Practice (local, authorized)
-
-Complete the associated lab under `labs/3.4/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
-
-Safe task: write one testable sentence that would fail if the **business** property were false.
+Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/3.4/3.4-lab` file `share_limit.py`.
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
+Invite tokens (6.6) and export quotas (6.7).
 
-## Usability and accessibility
+## Residual risk
 
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Business logic and abuse-resistant design is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
+Legitimate teams >5 need an owned exception (E6).
 
 ## Non-goals
 
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.

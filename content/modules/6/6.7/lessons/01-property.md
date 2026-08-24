@@ -1,67 +1,62 @@
-# 6.7-LO-01 — Resource abuse, automation, and availability: property vs mechanism
+# 6.7 — Resource abuse, automation, and availability (1 Property)
 
 **Kind:** concept-model  
 **Loop step:** 1 Property  
-**Standards:** OWASP ASVS / module anchors (see spec) 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** ASVS 5.0.0 V1/V11 (final); API4/API6 awareness. Fairness is a security cell (availability + cost).
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Resource abuse, automation, and availability** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Claims are properties of SecureCollab (or the elective system), not tool names; Labs stay in authorized local or official training scope; Draft standards are labeled draft
+The fourth export in the lab window is denied. Unbounded exports exhaust budget and leak extra copies (5.1).
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** Scripted member; compromised session.
+- **Trust:** Local allow(n).
+**Mechanism (not the property):** nginx rate limit without identity is shared-fate.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Threat-model prompts from the spec:
+## Root cause vs impact vs prevention vs detection vs recovery
 
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
-
-## Root cause, preconditions, impact, prevention, detection, recovery
-
-| Slice | For Resource abuse, automation, and availability |
+| Slice | For 6.7 |
 |---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+| Root cause | No resource account. |
+| Preconditions | allow(4) True. |
+| Impact (1.1 cell) | Availability and cost; secondary confidentiality via extra copies. — Cost/DoS; extra CSV copies of bodies. |
+| Prevention | Quota + authz + maybe queue. |
+| Detection | export_denied_quota. |
+| Recovery | Disable token; bill anomaly. |
 
 ## Framework defaults vs application guarantees
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Resource abuse, automation, and availability**. Name what the app must still enforce.
+nginx rate limit without identity is shared-fate.
 
-## Mechanism limits
+## Mechanism limits and bypasses
 
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
+Per-IP limits punish NAT; need per-subject.
 
-## Practice (local, authorized)
+New accounts; GraphQL aliases (7.1).
 
-Complete the associated lab under `labs/6.7/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
+## Residual risk
 
-Safe task: write one testable sentence that would fail if the **resource** property were false.
+Legitimate burst — owned exception.
+
+## Practice
+
+Budget: CPU, bytes, paid API calls.
+
+Run `labs/6.7/6.7-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
+Notification fan-out; search complexity.
 
-## Usability and accessibility
-
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Resource abuse, automation, and availability is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
+Clinic bulk-export patients.
 
 ## Non-goals
 
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.
+
+## Usability and accessibility
+
+Quota errors must be readable; do not trap keyboard users in a spinner that retries (amplifying load).

@@ -1,67 +1,65 @@
-# 2.2-LO-03 — Local proxy that rewrites Host or cache key
+# 2.2 — HTTP, TLS, proxies, CDNs, and cache keys (3 Break)
 
 **Kind:** mechanism-lab  
 **Loop step:** 3 Break  
-**Standards:** OWASP Application Security Verification Standard 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** RFC 9110 HTTP Semantics (final); RFC 9846 TLS 1.3 (final); ASVS 5.0.0 V12 (final). TLS is transport authenticity, not a cache-key.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **DNS, transport, HTTP, TLS, proxies, CDNs, and caches** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Origin does not treat unauthenticated forwarded headers as identity; Cache keys are explicit and in the threat model; No attacks against real CDNs or third-party sites
+A cache entry for GET /notes/n1 must include the bound tenant in the key. Tenant B must not receive tenant A’s body. HTTPS does not imply this.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** Tenant B on a shared CDN/proxy; a neighbor on a corporate TLS-inspecting proxy.
+- **Trust:** Origin app can set cache keys. The CDN is honest but greedy. Clients are hostile.
+**Forbidden outcome:** Shared cache returns tenant A's body to tenant B
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
+**Authorized scope:** `labs/2.2/2.2-request-path` only. Do not target other hosts. Do not paste weaponized payloads into notes.
 
-Threat-model prompts from the spec:
+## What to observe
 
-- Who authenticated the name, and to which hop?
-- What is the cache key, and can an attacker influence it?
-- After TLS termination, what identity is still bound to the request?
+vulnerable cache.py keys only on path.
 
-## Root cause, preconditions, impact, prevention, detection, recovery
+The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: Shared cache; path-only key; tA populated the entry.
 
-| Slice | For DNS, transport, HTTP, TLS, proxies, CDNs, and caches |
+## Vulnerable fixture (local)
+
+```python
+"""Vulnerable: cache key is URL only; tenant is not part of the key."""
+
+from __future__ import annotations
+
+_CACHE: dict[str, str] = {}
+
+
+def cache_put(path: str, tenant: str, body: str) -> None:
+    _CACHE[path] = body
+
+
+def cache_get(path: str, tenant: str) -> str | None:
+    return _CACHE.get(path)
+
+
+def reset() -> None:
+    _CACHE.clear()
+```
+
+## Root cause vs impact
+
+| Slice | Lab |
 |---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+| Root cause | Key omitted the subject’s tenant; shared store. |
+| Impact | Cross-tenant read without guessing ids. |
+| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
 
-## Framework defaults vs application guarantees
+## Practice
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **DNS, transport, HTTP, TLS, proxies, CDNs, and caches**. Name what the app must still enforce.
-
-## Mechanism limits
-
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
-
-## Practice (local, authorized)
-
-Complete the associated lab under `labs/2.2/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
-
-Safe task: write one testable sentence that would fail if the **transport** property were false.
+Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/2.2/2.2-request-path/tests -q --impl vulnerable` (or the README if fixtures differ).
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
-
-## Usability and accessibility
-
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- TLS termination means the app can trust X-Forwarded headers and Host
-- CDN cache is performance-only
-- RFC 9846 is a checkbox that TLS 1.3 is enabled
+Authenticated RSS or export CSV via CDN.
 
 ## Non-goals
 
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+No live-target instructions. Synthetic data only.

@@ -1,67 +1,57 @@
-# 11-LO-04 — Structural fix restoring the 11 invariant
+# 11 — Capstone: SecureCollab integration (4 Build)
 
 **Kind:** design-exercise  
 **Loop step:** 4 Build  
-**Standards:** OWASP ASVS / module anchors (see spec) 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** All prior pinned standards as applicable; no new “capstone-only” standard. Gates 0–10 stay not-attempted without learner evidence.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Integrating capstone — SecureCollab** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Claims are properties of SecureCollab (or the elective system), not tool names; Labs stay in authorized local or official training scope; Draft standards are labeled draft
+After a share is revoked, tenant B must not read tenant A’s note. The capstone stitches 1.2 mediation over time (2.4, 4.1, 4.4) — not a new slogan YAML.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** Former collaborator with a cached id; delayed worker (7.4).
+- **Trust:** Local share map.
+revoke then read is None.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Threat-model prompts from the spec:
+## Fixed fixture (local)
 
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+```python
+NOTES={'n1': {'tenant': 'A', 'body': 'secret'}}
+GRANTS={('n1', 'B')}
+def reset():
+    GRANTS.clear(); GRANTS.add(('n1', 'B'))
+def revoke(nid, tenant):
+    GRANTS.discard((nid, tenant))
+def read(nid, tenant):
+    n = NOTES[nid]
+    if tenant == n['tenant'] or (nid, tenant) in GRANTS:
+        return n['body']
+    return None
+```
 
-## Root cause, preconditions, impact, prevention, detection, recovery
+## Why this restores the cell
 
-| Slice | For Integrating capstone — SecureCollab |
-|---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+Complete mediation on read; invalidate caches; wipe mobile.
 
-## Framework defaults vs application guarantees
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Integrating capstone — SecureCollab**. Name what the app must still enforce.
+## What this is not
 
-## Mechanism limits
+A green capstone scanner is not the 13 artifacts.
 
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
+Email already received the body — residual 5.1.
 
-## Practice (local, authorized)
+## Practice
 
-Complete the associated lab under `labs/11/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
-
-Safe task: write one testable sentence that would fail if the **integrating** property were false.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
+Clinic: revoke a guardian.
 
-## Usability and accessibility
+## Residual risk
 
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Integrating capstone — SecureCollab is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
-
-## Non-goals
-
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+Honest copies already made — policy + detect.

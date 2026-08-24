@@ -1,3 +1,1 @@
-# Vulnerable notes (8.1)
-
-We are secure because TLS and a scanner are green.
+Vulnerable 8.1 local fixture. Authorized directory only.

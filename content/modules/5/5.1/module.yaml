@@ -44,7 +44,7 @@ learningObjects:
   path: lessons/02-model.md
 - id: 5.1-LO-03
   kind: mechanism-lab
-  title: Local fixture illustrating 5.1 failure (authorized only)
+  title: 'Local fixture: Analytics copy still holds note body after account deletion'
   path: lessons/03-break.md
 - id: 5.1-LO-04
   kind: design-exercise
@@ -60,17 +60,19 @@ learningObjects:
   path: lessons/06-operate.md
 - id: 5.1-LO-07
   kind: transfer-challenge
-  title: Novel variation of 5.1
+  title: 'Transfer: Appointment card with notes.'
   path: lessons/07-transfer.md
 - id: 5.1-LO-08
   kind: code-review
-  title: Seeded diff for 5.1
+  title: Seeded review for 5.1
   path: lessons/08-review.md
 labSpec:
-  authorizedScope: Local course fixture or official training lab only
+  authorizedScope: Local course fixture or official training lab only; no public or
+    third-party targets
   slug: 5.1-lab
-  summary: 'Pass A brief only: Data-flow inventory, retention/deletion matrix, privacy review'
+  summary: Analytics copy still holds note body after account deletion
   forbiddenOutcomes:
+  - Analytics copy still holds note body after account deletion
   - Live-target instructions
   - Real PII or production secrets
   - Awareness list used as the syllabus
@@ -95,21 +97,28 @@ standardsRefs:
   - V14
   url: https://owasp.org/www-project-application-security-verification-standard/
 misconceptions:
-- Data lifecycle and privacy engineering is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
+- Encryption makes retention OK
+- Privacy equals confidentiality
+- GDPR text in footer is the invariant
 operationalConsiderations:
-- Pair prevention with detection/recovery where prevention is not absolute
+- deleted_user_body_hits; warehouse SLA for purge.
+- Legal hold copies — named exception with owner (E6).
 author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (Pass C); lab-safety-reviewer (local YAML fixture)
-lastReviewedAt: '2026-08-23'
-nextReviewAt: '2027-02-23'
+reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+lastReviewedAt: '2026-08-24'
+nextReviewAt: '2027-02-24'
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map
 - date: '2026-08-23'
-  note: 'Pass A quality-gate: spec completeness competent; expand in a later revision if thin'
+  note: 'Pass A quality-gate: spec completeness competent; expand in a later revision
+    if thin'
 - date: '2026-08-23'
   note: Pass B lessons and authorized local lab
 - date: '2026-08-23'
   note: Pass C rubric and examiner keys; quality-gate recorded
+- date: '2026-08-23'
+  note: 'Deepen: 1.1-density lessons; structural local lab; quality-gate recorded'
+- date: '2026-08-24'
+  note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
+    Pass C keys isolated'

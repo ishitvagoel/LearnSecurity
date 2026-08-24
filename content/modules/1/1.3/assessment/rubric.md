@@ -8,23 +8,22 @@ Trust boundaries and attack surface
 
 ## Evidence checklist
 
-- [ ] Annotated trust-boundary diagram for SecureCollab Phase 1
-- [ ] Attack-surface inventory with an evidence column
-- [ ] Note on independent vs correlated defensive layers
-- [ ] Transfer diagram after CDN, queue, or mobile client (for transfer-ready)
-- [ ] Lab: `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Trust-boundary diagram and attack-surface inventory
+- [ ] Transfer task (Clinic booking: X-Internal-Admin on the public API.)
+- [ ] Lab `labs/1.3/1.3-trust-boundaries`: forbidden outcome **Client internal header dumps all tenants' notes**
+- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Transfer challenge (LO-07) for transfer-ready
+- [ ] Operate signal without note bodies / secrets: Public-edge log: internal-header-seen without worker identity.
 
 ## Rubric
 
 | Result | Meaning |
 |---|---|
 | Developing | Tools listed; missing attacker/trust; mechanism slogans |
-| Competent | System-specific invariant; lab understood; operate present |
+| Competent | System-specific invariant; lab mapped; operate present |
 | Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
 
-Knowledge check (80% retryable): distinguish property vs mechanism for this module. Items live in the session worksheet, not here.
+Knowledge check (retryable): distinguish property vs mechanism for **1.3**. Items live in the session worksheet, not here.
 
 ## Seeded review
 

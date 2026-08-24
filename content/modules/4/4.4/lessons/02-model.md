@@ -1,67 +1,53 @@
-# 4.4-LO-02 — Model SecureCollab for 4.4
+# 4.4 — Authorization and tenant isolation (2 Model)
 
 **Kind:** design-exercise  
 **Loop step:** 2 Model  
-**Standards:** OWASP ASVS / module anchors (see spec) 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** ASVS 5.0.0 V4 (final); Saltzer complete mediation; API1/API3/API5 as awareness after the matrix.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Authorization and tenant isolation** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Claims are properties of SecureCollab (or the elective system), not tool names; Labs stay in authorized local or official training scope; Draft standards are labeled draft
+A share grant for note n1 is not a grant for n2. Object-level authorization (1.2) on the grant table. Login + “shared something” is ambient.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** Member with a grant on n1 who swaps note_id; IDOR enumerator.
+- **Trust:** Local grants dict. SQL still needs 5.5.
+Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
-
-Threat-model prompts from the spec:
-
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
-
-## Root cause, preconditions, impact, prevention, detection, recovery
-
-| Slice | For Authorization and tenant isolation |
+| Piece | This system |
 |---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+| Subjects | bob with n1 grant, alice owner |
+| Objects | n1, n2, grant row |
+| Actions | can_read |
+| Channels | GET /notes/{id} |
+| TCB | Lookup (subject, object) not (subject, any object). |
+| Untrusted | Client-supplied note_id, “I’m a collaborator” boolean |
+| State / time | Grant revoked on n1 (11, 2.4) must not linger on n1 either. |
+| 1.1 cell | Authorization (1.1/1.2). |
 
-## Framework defaults vs application guarantees
+## Authority matrix (minimum)
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Authorization and tenant isolation**. Name what the app must still enforce.
+| Subject | Object | Action | Decision |
+|---|---|---|---|
+| bob | n1 | read | allow-if-granted |
+| bob | n2 | read | deny |
+| alice | n2 | read | allow-owner |
+| anon | n1 | read | deny |
 
-## Mechanism limits
+A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
 
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
+## Practice
 
-## Practice (local, authorized)
-
-Complete the associated lab under `labs/4.4/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
-
-Safe task: write one testable sentence that would fail if the **authorization** property were false.
+Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/4.4/4.4-lab` file `grant.py`.
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
+Property-level: bob can read title but not body (7.2).
 
-## Usability and accessibility
+## Residual risk
 
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Authorization and tenant isolation is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
+Honest grant on n1 still reveals n1 — that’s the product.
 
 ## Non-goals
 
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.

@@ -1,67 +1,38 @@
-# 7.3-LO-05 — Forbidden-outcome tests for 7.3
+# 7.3 — Webhooks, callbacks, and third-party APIs (5 Verify)
 
 **Kind:** verification-lab  
 **Loop step:** 5 Verify  
-**Standards:** OWASP ASVS / module anchors (see spec) 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** ASVS 5.0.0 V10 (final); API10 awareness. HMAC is a teaching stand-in, not “we are Stripe.”
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Webhooks, callbacks, and third-party APIs** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Claims are properties of SecureCollab (or the elective system), not tool names; Labs stay in authorized local or official training scope; Draft standards are labeled draft
+A webhook with a missing signature is rejected. Authenticity of the *provider message* is distinct from TLS and from 1.2 on the resulting action.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** Anyone who can POST your callback URL.
+- **Trust:** Local accept(sig, body, secret).
+An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
-
-Threat-model prompts from the spec:
-
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
-
-## Root cause, preconditions, impact, prevention, detection, recovery
-
-| Slice | For Webhooks, callbacks, and third-party APIs |
+| Case | Must show |
 |---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+| Normal | Honest allowed action still works where the product says so |
+| Negative / abuse | Unsigned webhook body accepted |
+| Failure | Fail closed: Verify MAC; bind to secret per provider; timestamp |
 
-## Framework defaults vs application guarantees
+Lab tests: `test_property.py` under `labs/7.3/7.3-lab`.
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Webhooks, callbacks, and third-party APIs**. Name what the app must still enforce.
+- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Unsigned webhook body accepted`
+- `--impl fixed`: **pass**
 
-## Mechanism limits
+missing signature rejected.
 
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
+## Practice
 
-## Practice (local, authorized)
-
-Complete the associated lab under `labs/7.3/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
-
-Safe task: write one testable sentence that would fail if the **webhooks** property were false.
+Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
+Signed redirects; outbound webhook SSRF (6.5).
 
-## Usability and accessibility
-
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Webhooks, callbacks, and third-party APIs is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
-
-## Non-goals
-
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).

@@ -18,8 +18,8 @@ routeTags:
 - mobile
 releaseMilestone: M0
 outcomes:
-- Model session state, replay, freshness, idempotency, ordering, retry, timeout, clocks, TOCTOU,
-  races, and partial failure
+- Model session state, replay, freshness, idempotency, ordering, retry, timeout, clocks,
+  TOCTOU, races, and partial failure
 - Produce a state-machine plus concurrency and replay test list
 - Show a local retry or timeout that duplicates a side effect or fail-opens
 - Treat Top 10:2025 A10 as awareness regression only
@@ -47,43 +47,46 @@ concepts:
 learningObjects:
 - id: 2.4-LO-01
   kind: concept-model
-  title: State, time, replay, idempotency, partial failure
+  title: 'State, time, concurrency, and distributed failure: property vs mechanism'
   path: lessons/01-property.md
 - id: 2.4-LO-02
   kind: design-exercise
-  title: SecureCollab state machine for note-share or invite
+  title: Model SecureCollab for 2.4
   path: lessons/02-model.md
 - id: 2.4-LO-03
   kind: mechanism-lab
-  title: Local duplicate-submit or TOCTOU fixture
+  title: 'Local fixture: Retry creates a second share grant'
   path: lessons/03-break.md
 - id: 2.4-LO-04
   kind: design-exercise
-  title: Idempotency keys and fail-closed timeout
+  title: Structural fix restoring the 2.4 invariant
   path: lessons/04-build.md
 - id: 2.4-LO-05
   kind: verification-lab
-  title: Concurrency and replay tests
+  title: Forbidden-outcome tests for 2.4
   path: lessons/05-verify.md
 - id: 2.4-LO-06
   kind: operations-exercise
-  title: Exceptional-condition logging without fail-open
+  title: Detect/recover notes for 2.4
   path: lessons/06-operate.md
 - id: 2.4-LO-07
   kind: transfer-challenge
-  title: 'Worker retry: stale authorization'
+  title: 'Transfer: Clinic: double-book the last slot.'
   path: lessons/07-transfer.md
 - id: 2.4-LO-08
   kind: code-review
-  title: Seeded catch-all that returns 200 on failure
+  title: Seeded review for 2.4
   path: lessons/08-review.md
 labSpec:
-  authorizedScope: Local course fixture only
+  authorizedScope: Local course fixture or official training lab only; no public or
+    third-party targets
   slug: 2.4-state-time
-  summary: State machine and local concurrency/retry fixture
+  summary: Retry creates a second share grant
   forbiddenOutcomes:
-  - Load-testing third-party APIs
-  - Fail-open timeouts on authorization paths
+  - Retry creates a second share grant
+  - Live-target instructions
+  - Real PII or production secrets
+  - Awareness list used as the syllabus
 evidenceRequired:
 - State-machine model
 - Concurrency and replay test list
@@ -114,15 +117,16 @@ standardsRefs:
   - A10
   url: https://owasp.org/Top10/2025/
 misconceptions:
-- Happy-path tests prove absence of races
-- Timeouts are only UX
-- Top 10 A10 is the organizing lesson
+- Retries are a client bug not ours
+- 200 means once
+- Databases are automatically idempotent
 operationalConsiderations:
-- Exceptional-condition logs must not fail open or leak internals
+- share_count vs unique keys; never fail-open if the key store is down.
+- Lost first response still needs a read-your-write path.
 author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (Pass C); lab-safety-reviewer (local YAML fixture)
-lastReviewedAt: '2026-08-23'
-nextReviewAt: '2027-02-23'
+reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+lastReviewedAt: '2026-08-24'
+nextReviewAt: '2027-02-24'
 changelog:
 - date: '2026-08-23'
   note: Pass A initial specification
@@ -132,3 +136,8 @@ changelog:
   note: Pass B lessons and authorized local lab
 - date: '2026-08-23'
   note: Pass C rubric and examiner keys; quality-gate recorded
+- date: '2026-08-23'
+  note: 'Deepen: 1.1-density lessons; structural local lab; quality-gate recorded'
+- date: '2026-08-24'
+  note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
+    Pass C keys isolated'

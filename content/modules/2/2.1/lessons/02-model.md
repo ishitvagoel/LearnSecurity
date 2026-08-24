@@ -1,67 +1,53 @@
-# 2.1-LO-02 — Parser-boundary map for SecureCollab request path
+# 2.1 — Bytes, encodings, parsers, and interpreter boundaries (2 Model)
 
 **Kind:** design-exercise  
 **Loop step:** 2 Model  
-**Standards:** OWASP Application Security Verification Standard 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** ASVS 5.0.0 V5 (final) input; RFC 8259 JSON (STD 90); Unicode UAX #15 as *normalization*, not a security control by itself.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Bytes, text, formats, parsers, and interpreters** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Each interpreter boundary on the scoped path is named; Disagreeing parsers are treated as an invariant failure; No live-target encoding attacks or lesson-page weaponized payloads
+If a note JSON object repeats the tenant key, ingest must reject (or both the ACL decision and the stored row must see the same tenant). A parser that keeps the first key for ACL and the last key for storage is a confidentiality failure.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** A member who can POST JSON; a proxy that re-encodes Unicode; a second parser in a worker.
+- **Trust:** One agreed parser in the app. The client encoder is hostile. PostgreSQL jsonb is another parser — do not assume it matches Python json.
+Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
-
-Threat-model prompts from the spec:
-
-- Where can an attacker choose encoding, BOM, or nested format?
-- Which shared parser is a least-common-mechanism risk?
-
-## Root cause, preconditions, impact, prevention, detection, recovery
-
-| Slice | For Bytes, text, formats, parsers, and interpreters |
+| Piece | This system |
 |---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+| Subjects | Poster (tB), ACL checker, storage writer, later reader |
+| Objects | JSON bytes, ACL tenant, stored tenant, note body |
+| Actions | ingest_note, parse, persist |
+| Channels | HTTP body, worker re-parse, DB jsonb |
+| TCB | A single parse result object used for both ACL and persist. |
+| Untrusted | Duplicate keys, overlong UTF-8, NFC vs NFD names |
+| State / time | The same bytes parsed tomorrow by a new library version. |
+| 1.1 cell | Confidentiality (cross-tenant) caused by *disagreement*, not by missing login. |
 
-## Framework defaults vs application guarantees
+## Authority matrix (minimum)
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Bytes, text, formats, parsers, and interpreters**. Name what the app must still enforce.
+| Subject | Object | Action | Decision |
+|---|---|---|---|
+| poster tA | CLEAN json | ingest | allow |
+| poster tB | duplicate tenant keys | ingest | deny |
+| worker | re-parse stored bytes | must-match | allow-only-if-same |
+| reader tA | stored body | read | 1.2 cell |
 
-## Mechanism limits
+A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
 
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
+## Practice
 
-## Practice (local, authorized)
-
-Complete the associated lab under `labs/2.1/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
-
-Safe task: write one testable sentence that would fail if the **bytes** property were false.
+Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/2.1/2.1-parser-boundaries` file `parse_note.py`.
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
+GraphQL and REST both ingest the same note — two grammars.
 
-## Usability and accessibility
+## Residual risk
 
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Strings are characters; UTF-8 is just text
-- Validation, sanitization, encoding, and parameterization are interchangeable
-- Successful JSON.parse means unambiguous meaning across languages
-- Framework auto-escaping completely mediates interpreters
+Honest unique-key JSON still needs 1.2 mediation.
 
 ## Non-goals
 
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.

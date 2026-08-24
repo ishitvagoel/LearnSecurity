@@ -44,7 +44,7 @@ learningObjects:
   path: lessons/02-model.md
 - id: 6.6-LO-03
   kind: mechanism-lab
-  title: Local fixture illustrating 6.6 failure (authorized only)
+  title: 'Local fixture: Invite token accepted twice'
   path: lessons/03-break.md
 - id: 6.6-LO-04
   kind: design-exercise
@@ -60,17 +60,19 @@ learningObjects:
   path: lessons/06-operate.md
 - id: 6.6-LO-07
   kind: transfer-challenge
-  title: Novel variation of 6.6
+  title: 'Transfer: Clinic invite-guardian token.'
   path: lessons/07-transfer.md
 - id: 6.6-LO-08
   kind: code-review
-  title: Seeded diff for 6.6
+  title: Seeded review for 6.6
   path: lessons/08-review.md
 labSpec:
-  authorizedScope: Local course fixture or official training lab only
+  authorizedScope: Local course fixture or official training lab only; no public or
+    third-party targets
   slug: 6.6-lab
-  summary: 'Pass A brief only: Concurrency/chaos suite and repaired workflow'
+  summary: Invite token accepted twice
   forbiddenOutcomes:
+  - Invite token accepted twice
   - Live-target instructions
   - Real PII or production secrets
   - Awareness list used as the syllabus
@@ -96,21 +98,28 @@ standardsRefs:
   - V16
   url: https://owasp.org/www-project-application-security-verification-standard/
 misconceptions:
-- Workflow, race, and exceptional-condition failures is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
+- 400 errors are fail-safe
+- Email links are authenticators of the recipient
+- Races are only performance
 operationalConsiderations:
-- Pair prevention with detection/recovery where prevention is not absolute
+- invite_replay_denied.
+- Email is a phishable channel (4.2).
 author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (Pass C); lab-safety-reviewer (local YAML fixture)
-lastReviewedAt: '2026-08-23'
-nextReviewAt: '2027-02-23'
+reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+lastReviewedAt: '2026-08-24'
+nextReviewAt: '2027-02-24'
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map
 - date: '2026-08-23'
-  note: 'Pass A quality-gate: spec completeness competent; expand in a later revision if thin'
+  note: 'Pass A quality-gate: spec completeness competent; expand in a later revision
+    if thin'
 - date: '2026-08-23'
   note: Pass B lessons and authorized local lab
 - date: '2026-08-23'
   note: Pass C rubric and examiner keys; quality-gate recorded
+- date: '2026-08-23'
+  note: 'Deepen: 1.1-density lessons; structural local lab; quality-gate recorded'
+- date: '2026-08-24'
+  note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
+    Pass C keys isolated'

@@ -1,67 +1,40 @@
-# 0.1-LO-06 — Detect/recover notes for 0.1
+# 0.1 — Security engineering orientation (6 Operate)
 
 **Kind:** operations-exercise  
 **Loop step:** 6 Operate  
-**Standards:** OWASP ASVS / module anchors (see spec) 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** NIST CSF 2.0 (final) GV/ID; OWASP WSTG v4.2 (final) as *lab method*, not a licence to scan the internet; NICE Framework as role language only.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Security engineering orientation** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Claims are properties of SecureCollab (or the elective system), not tool names; Labs stay in authorized local or official training scope; Draft standards are labeled draft
+A URL is in scope only if it is a named local lab host (127.0.0.1, localhost, lab.securecollab.test). example.com, a employer production API, and a classmate’s deployed preview are out of scope even if they are “easy to hit.”
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** A motivated learner who can type any URL into a proxy; a future self who is tired and copies a blog “try this host” snippet.
+- **Trust:** You trust this repository’s lab trees and official OWASP training apps when the README names them. You do not trust “the internet,” robots.txt, or a recruiter’s staging site without written scope.
+Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
-
-Threat-model prompts from the spec:
-
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
-
-## Root cause, preconditions, impact, prevention, detection, recovery
-
-| Slice | For Security engineering orientation |
+| Outcome | This module |
 |---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+| Detect | Log denied hosts without fetching them; supervisor review of proxy history in class only. |
+| Signal (no bodies) | Denied-host log line {url, reason=out_of_scope}; never store response bodies from out-of-scope hosts. |
+| Revoke / recover | Stop, document, do not exfiltrate; notify instructor. Do not “just this once” continue. |
+| Residual | Official Juice Shop on your machine is OK; a random cloud Juice Shop you do not own is not. |
 
-## Framework defaults vs application guarantees
+CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Security engineering orientation**. Name what the app must still enforce.
+## Practice
 
-## Mechanism limits
-
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
-
-## Practice (local, authorized)
-
-Complete the associated lab under `labs/0.1/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
-
-Safe task: write one testable sentence that would fail if the **engineering** property were false.
+Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/0.1/0.1-orientation`.
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
+Your company staging URL: what written artifact would make it in-scope? (Not a Slack thumbs-up.)
 
-## Usability and accessibility
+## Usability
 
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Security engineering orientation is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
+Scope templates and stop-buttons in course UI must be keyboard-operable (WCAG 2.2). A mouse-only “I agree” is not informed consent.
 
 ## Non-goals
 
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+SIEM product names are not the property. Keys stay out of lessons.

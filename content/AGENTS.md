@@ -8,7 +8,7 @@ This directory holds **curriculum metadata and authored learning objects**. It i
 |---|---|
 | `schema/` | JSON Schema for module metadata (§14.2) |
 | `templates/` | Pass A spec template |
-| `progress/STATUS.yaml` | Iteration state; read and update every session |
+| `progress/STATUS.yaml` | Iteration state; `revision.remaining` is the deepen queue after Pass E |
 | `modules/<phase>/<id>/` | One folder per module (`spec.md`, `module.yaml`, later `lessons/`, `assessment/`) |
 | `standards/pins.yaml` | Pinned standard versions (created by `standards-pin`) |
 | `assessment/keys/` | Answer keys and examiner notes — never linked from learner pages |

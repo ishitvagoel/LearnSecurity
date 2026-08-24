@@ -1,67 +1,53 @@
-# E6-LO-02 — Model SecureCollab for E6
+# E6 — Product security leadership (2 Model)
 
 **Kind:** design-exercise  
 **Loop step:** 2 Model  
-**Standards:** OWASP ASVS / module anchors (see spec) 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** OWASP SAMM; NIST CSF 2.0; SSDF; CISA Secure by Design. Leadership is accountable residual, not a slide.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Product security leadership** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Claims are properties of SecureCollab (or the elective system), not tool names; Labs stay in authorized local or official training scope; Draft standards are labeled draft
+A risk exception cannot be accepted without an owner, a review date, and an accessibility check flag. “We’ll accept it” is not a record.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** Calendar; silent exceptions.
+- **Trust:** Local accept_exception({owner, review_by}).
+Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
-
-Threat-model prompts from the spec:
-
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
-
-## Root cause, preconditions, impact, prevention, detection, recovery
-
-| Slice | For Product security leadership |
+| Piece | This system |
 |---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+| Subjects | VP eng, security, users who need a11y |
+| Objects | exception record |
+| Actions | accept_exception |
+| Channels | risk register |
+| TCB | Required fields + expiry. |
+| Untrusted | Slide deck, chat thumbs-up |
+| State / time | Until review_by. |
+| 1.1 cell | Accountability of residual risk (1.1 + 1.4). |
 
-## Framework defaults vs application guarantees
+## Authority matrix (minimum)
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Product security leadership**. Name what the app must still enforce.
+| Subject | Object | Action | Decision |
+|---|---|---|---|
+| VP | complete record | accept | allow |
+| VP | empty owner | accept | deny |
+| expired | past review_by | still-open | deny-or-revisit |
+| a11y residual | flag | record | required |
 
-## Mechanism limits
+A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
 
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
+## Practice
 
-## Practice (local, authorized)
-
-Complete the associated lab under `labs/E6/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
-
-Safe task: write one testable sentence that would fail if the **product** property were false.
+Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/E6/e6-lab` file `risk.py`.
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
+Procurement questionnaire vs this record.
 
-## Usability and accessibility
+## Residual risk
 
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Product security leadership is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
+Some risk always remains — that’s the point of an honest register.
 
 ## Non-goals
 
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.

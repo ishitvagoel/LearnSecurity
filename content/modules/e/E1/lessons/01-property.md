@@ -1,67 +1,62 @@
-# E1-LO-01 — AI, LLM, and agentic application security: property vs mechanism
+# E1 — AI, LLM, and agentic application security (1 Property)
 
 **Kind:** concept-model  
 **Loop step:** 1 Property  
-**Standards:** OWASP ASVS / module anchors (see spec) 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** OWASP GenAI LLM Top 10 2026 (awareness, not syllabus); NIST AI RMF GenAI Profile (guidance); this lab’s cell is tool authority.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **AI, LLM, and agentic application security** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Claims are properties of SecureCollab (or the elective system), not tool names; Labs stay in authorized local or official training scope; Draft standards are labeled draft
+The lab agent may only invoke allowlisted tools. A model-proposed exec_sql is not authorization. The model is an untrusted client (8.1) that speaks English.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** Prompt injection in a note body; malicious retrieved doc.
+- **Trust:** Local run_tool(name).
+**Mechanism (not the property):** LangChain default tools are not your matrix.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Threat-model prompts from the spec:
+## Root cause vs impact vs prevention vs detection vs recovery
 
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
-
-## Root cause, preconditions, impact, prevention, detection, recovery
-
-| Slice | For AI, LLM, and agentic application security |
+| Slice | For E1 |
 |---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+| Root cause | Model output treated as policy. |
+| Preconditions | run_tool('exec_sql') executes. |
+| Impact (1.1 cell) | Authorization of tools — complete mediation for the agent. — Interpreter 6.1 via English. |
+| Prevention | Allow-list; no exec_sql; human approval for high impact. |
+| Detection | denied_tool. |
+| Recovery | Revoke agent creds (7.4). |
 
 ## Framework defaults vs application guarantees
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **AI, LLM, and agentic application security**. Name what the app must still enforce.
+LangChain default tools are not your matrix.
 
-## Mechanism limits
+## Mechanism limits and bypasses
 
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
+Prompt “never call exec_sql” is not mediation.
 
-## Practice (local, authorized)
+Indirect injection via 5.1 analytics copy.
 
-Complete the associated lab under `labs/E1/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
+## Residual risk
 
-Safe task: write one testable sentence that would fail if the **agentic** property were false.
+Hallucinated packages (10.2) in copilot use.
+
+## Practice
+
+List tools and who may call them.
+
+Run `labs/E1/e1-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
+Copilot in CI.
 
-## Usability and accessibility
-
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- AI, LLM, and agentic application security is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
+Clinic summarizer over charts.
 
 ## Non-goals
 
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.
+
+## Usability and accessibility
+
+Human approval UI for tools must be accessible; otherwise operators auto-approve.

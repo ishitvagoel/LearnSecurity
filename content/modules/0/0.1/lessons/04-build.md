@@ -1,67 +1,55 @@
-# 0.1-LO-04 — Structural fix restoring the 0.1 invariant
+# 0.1 — Security engineering orientation (4 Build)
 
 **Kind:** design-exercise  
 **Loop step:** 4 Build  
-**Standards:** OWASP ASVS / module anchors (see spec) 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** NIST CSF 2.0 (final) GV/ID; OWASP WSTG v4.2 (final) as *lab method*, not a licence to scan the internet; NICE Framework as role language only.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Security engineering orientation** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Claims are properties of SecureCollab (or the elective system), not tool names; Labs stay in authorized local or official training scope; Draft standards are labeled draft
+A URL is in scope only if it is a named local lab host (127.0.0.1, localhost, lab.securecollab.test). example.com, a employer production API, and a classmate’s deployed preview are out of scope even if they are “easy to hit.”
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** A motivated learner who can type any URL into a proxy; a future self who is tired and copies a blog “try this host” snippet.
+- **Trust:** You trust this repository’s lab trees and official OWASP training apps when the README names them. You do not trust “the internet,” robots.txt, or a recruiter’s staging site without written scope.
+Parse hostname; compare to ALLOWED_HOSTS; default False.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Threat-model prompts from the spec:
+## Fixed fixture (local)
 
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+```python
+from urllib.parse import urlparse
 
-## Root cause, preconditions, impact, prevention, detection, recovery
+ALLOWED_HOSTS = {"127.0.0.1", "localhost", "lab.securecollab.test"}
 
-| Slice | For Security engineering orientation |
-|---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
 
-## Framework defaults vs application guarantees
+def target_is_authorized(url: str) -> bool:
+    """Fixed: only named local lab hosts; public hosts are out of scope."""
+    host = (urlparse(url).hostname or "").lower()
+    return host in ALLOWED_HOSTS
+```
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Security engineering orientation**. Name what the app must still enforce.
+## Why this restores the cell
 
-## Mechanism limits
+Allow-list local names; fail closed; written scope template.
 
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Practice (local, authorized)
+## What this is not
 
-Complete the associated lab under `labs/0.1/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
+Burp, ZAP, or curl existing is not authorization. CSF GV is governance language, not a pentest permit.
 
-Safe task: write one testable sentence that would fail if the **engineering** property were false.
+An allow-list of three names still fails if you SSH to a stolen hostname that resolves locally via /etc/hosts tricks — check what you actually connected to.
+
+## Practice
+
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
+Your company staging URL: what written artifact would make it in-scope? (Not a Slack thumbs-up.)
 
-## Usability and accessibility
+## Residual risk
 
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Security engineering orientation is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
-
-## Non-goals
-
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+Official Juice Shop on your machine is OK; a random cloud Juice Shop you do not own is not.

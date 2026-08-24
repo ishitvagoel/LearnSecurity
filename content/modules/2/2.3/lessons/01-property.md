@@ -1,67 +1,58 @@
-# 2.3-LO-01 — Origin vs site; browser vs server enforcement
+# 2.3 — Browser security model (1 Property)
 
 **Kind:** concept-model  
 **Loop step:** 1 Property  
-**Standards:** OWASP Application Security Verification Standard 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** HTML Living Standard cookies (living); RFC 6265bis drafts remain **draft** if cited; ASVS 5.0.0 V3 (final); CSP3 is **not** this lab’s property.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Browser security model** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Browser-enforced controls are not treated as application guarantees; Draft standards are labeled draft; No instructions to attack third-party sites via CORS or CSRF
+A session cookie marked HttpOnly must not be readable by script in the lab DOM. That is a *browser* cell. It does not mean XSS is impossible (6.2) and does not make CSP3 (Candidate Recommendation / draft-ish depending on pin) a substitute for encoding.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** Injected script in origin (later 6.2); a malicious extension (residual).
+- **Trust:** Browser honors HttpOnly. The app must actually set the flag. Extensions are outside this TCB.
+**Mechanism (not the property):** Next.js “cookies() are httpOnly by default” is not true for every cookie you set manually.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Threat-model prompts from the spec:
+## Root cause vs impact vs prevention vs detection vs recovery
 
-- Who has DOM authority after navigation or postMessage?
-- Which cookie is readable to script, and on which site vs origin?
-- If CSP is bypassed, what server control remains?
-
-## Root cause, preconditions, impact, prevention, detection, recovery
-
-| Slice | For Browser security model |
+| Slice | For 2.3 |
 |---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+| Root cause | Session presented to the script interpreter. |
+| Preconditions | Cookie without HttpOnly; script runs. |
+| Impact (1.1 cell) | Session confidentiality against script (not against the network — that’s TLS). — Session theft then 1.2 as the thief. |
+| Prevention | HttpOnly; Secure; careful SameSite — still not XSS-proof. |
+| Detection | Token-binding / anomaly (later); XSS reports. |
+| Recovery | Revoke session (4.3); rotate. |
 
 ## Framework defaults vs application guarantees
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Browser security model**. Name what the app must still enforce.
+Next.js “cookies() are httpOnly by default” is not true for every cookie you set manually.
 
-## Mechanism limits
+## Mechanism limits and bypasses
 
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
+HttpOnly does not stop network theft, CSRF (6.3), or native apps reading the store.
 
-## Practice (local, authorized)
+XSS in a sibling cookie that is not HttpOnly; MITM without Secure.
 
-Complete the associated lab under `labs/2.3/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
+## Residual risk
 
-Safe task: write one testable sentence that would fail if the **browser** property were false.
+Browser extensions; physical access.
+
+## Practice
+
+Name three things HttpOnly does *not* prove. Run the lab.
+
+Run `labs/2.3/2.3-browser-policy` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
+React Native WebView cookie bridge.
 
-## Usability and accessibility
-
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Origin and site are the same
-- CSP or Trusted Types replace context-aware encoding
-- Cookies with HTTPS are unreadable to JavaScript
+Clinic patient portal session cookie.
 
 ## Non-goals
 
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.

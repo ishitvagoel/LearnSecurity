@@ -1,67 +1,53 @@
-# 2.4-LO-02 — SecureCollab state machine for note-share or invite
+# 2.4 — State, time, concurrency, and distributed failure (2 Model)
 
 **Kind:** design-exercise  
 **Loop step:** 2 Model  
-**Standards:** OWASP Application Security Verification Standard 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** ASVS 5.0.0 V2/V8 (final); OWASP Top 10:2025 A10 as *awareness*, not the definition; RFC 9110 safety/idempotency language.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **State, time, concurrency, and distributed failure** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Retries do not duplicate non-idempotent side effects in the scoped workflow; Timeouts fail closed for authorization-relevant operations; No load-testing of third-party APIs
+A retried share with the same idempotency key must not create a second share. Timeouts are a security property (integrity of the share graph), not only UX.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** A client retrying after 504; a double-click; a worker at-least-once delivery (7.4).
+- **Trust:** Local share store. Clocks may skew; do not rely on “user won’t retry.”
+Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
-
-Threat-model prompts from the spec:
-
-- What happens on retry, timeout, or partial commit?
-- Whose clock is trusted for freshness?
-- Can authorization become stale between check and use?
-
-## Root cause, preconditions, impact, prevention, detection, recovery
-
-| Slice | For State, time, concurrency, and distributed failure |
+| Piece | This system |
 |---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+| Subjects | Sharer, retrying client, share table |
+| Objects | Share row, idempotency key, note n1 |
+| Actions | share_note, retry |
+| Channels | HTTP POST, queue redelivery |
+| TCB | Idempotency store keyed by (actor, key) with the first outcome. |
+| Untrusted | Client “I only clicked once”; load balancer retries |
+| State / time | Two POSTs 200ms apart; worker redelivery tomorrow. |
+| 1.1 cell | Integrity of authorization state over time. |
 
-## Framework defaults vs application guarantees
+## Authority matrix (minimum)
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **State, time, concurrency, and distributed failure**. Name what the app must still enforce.
+| Subject | Object | Action | Decision |
+|---|---|---|---|
+| owner | n1 | share-once | allow |
+| owner | n1 | share-retry-same-key | no-second-row |
+| owner | n1 | share-new-key | policy-cap-3.4 |
+| worker | n1 | redeliver | same-as-retry |
 
-## Mechanism limits
+A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
 
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
+## Practice
 
-## Practice (local, authorized)
-
-Complete the associated lab under `labs/2.4/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
-
-Safe task: write one testable sentence that would fail if the **state** property were false.
+Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/2.4/2.4-state-time` file `share.py`.
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
+Payment capture (E3) and invite tokens (6.6) are the same shape.
 
-## Usability and accessibility
+## Residual risk
 
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Happy-path tests prove absence of races
-- Timeouts are only UX
-- Top 10 A10 is the organizing lesson
+Lost first response still needs a read-your-write path.
 
 ## Non-goals
 
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.

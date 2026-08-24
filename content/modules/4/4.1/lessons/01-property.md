@@ -1,67 +1,62 @@
-# 4.1-LO-01 — Digital identity and account lifecycle: property vs mechanism
+# 4.1 — Identity lifecycle (1 Property)
 
 **Kind:** concept-model  
 **Loop step:** 1 Property  
-**Standards:** OWASP ASVS / module anchors (see spec) 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** NIST SP 800-63-4 (final) identity lifecycle; ASVS 5.0.0 V6 (final). Deprovision is part of 1.2 over time.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Digital identity and account lifecycle** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Claims are properties of SecureCollab (or the elective system), not tool names; Labs stay in authorized local or official training scope; Draft standards are labeled draft
+After an account is deleted, that subject’s leftover session must not read notes. Lifecycle is complete mediation across account states, not a login screen.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** Stolen session cookie after the user left the org; a delayed worker using the old user id.
+- **Trust:** Local user+session maps. Real IdP SLO is extra (4.5).
+**Mechanism (not the property):** Starlette SessionMiddleware does not know HR offboarding.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Threat-model prompts from the spec:
+## Root cause vs impact vs prevention vs detection vs recovery
 
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
-
-## Root cause, preconditions, impact, prevention, detection, recovery
-
-| Slice | For Digital identity and account lifecycle |
+| Slice | For 4.1 |
 |---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+| Root cause | Authentication artifact outlived the subject. |
+| Preconditions | delete_user removes profile only. |
+| Impact (1.1 cell) | Authorization over time (1.2 + 2.4). — Ex-employee or attacker with the cookie still reads tenant notes. |
+| Prevention | Invalidate sessions (and tokens, workers) in the same use-case. |
+| Detection | Use of session after user_state=deleted. |
+| Recovery | Mass revoke; rotate signing keys if tokens self-verify. |
 
 ## Framework defaults vs application guarantees
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Digital identity and account lifecycle**. Name what the app must still enforce.
+Starlette SessionMiddleware does not know HR offboarding.
 
-## Mechanism limits
+## Mechanism limits and bypasses
 
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
+Email “you’re deleted” is not revocation.
 
-## Practice (local, authorized)
+Refresh tokens, mobile offline cache (8.2), shared device.
 
-Complete the associated lab under `labs/4.1/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
+## Residual risk
 
-Safe task: write one testable sentence that would fail if the **digital** property were false.
+Backups still contain the user row — 5.1.
+
+## Practice
+
+List every artifact that must die with the user.
+
+Run `labs/4.1/4.1-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
+Contractor access end-date; support impersonation tickets.
 
-## Usability and accessibility
-
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Digital identity and account lifecycle is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
+Clinic: departing clinician.
 
 ## Non-goals
 
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.
+
+## Usability and accessibility
+
+Offboarding confirmation must be accessible (1.4). A mouse-only “delete user” is a missed revoke.

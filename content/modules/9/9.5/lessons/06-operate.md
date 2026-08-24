@@ -1,67 +1,40 @@
-# 9.5-LO-06 — Detect/recover notes for 9.5
+# 9.5 — Authorized assessment, reporting, and remediation (6 Operate)
 
 **Kind:** operations-exercise  
 **Loop step:** 6 Operate  
-**Standards:** OWASP ASVS / module anchors (see spec) 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** OWASP WSTG (final); CVSS 4.0 (final spec) as *input* not the decision; CISA KEV as exploitation context.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Penetration testing, reporting, and remediation** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Claims are properties of SecureCollab (or the elective system), not tool names; Labs stay in authorized local or official training scope; Draft standards are labeled draft
+A finding cannot be closed without a passing retest of the same forbidden outcome. A PDF report is not remediation. Scope stays the local lab.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** Paper-compliance; ignored variant classes.
+- **Trust:** Local close_finding({retest}).
+Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
-
-Threat-model prompts from the spec:
-
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
-
-## Root cause, preconditions, impact, prevention, detection, recovery
-
-| Slice | For Penetration testing, reporting, and remediation |
+| Outcome | This module |
 |---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+| Detect | closed_without_retest metric. |
+| Signal (no bodies) | finding_closed_without_retest denied. |
+| Revoke / recover | Reopen. |
+| Residual | Unknown variants — hunt (same root cause). |
 
-## Framework defaults vs application guarantees
+CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Penetration testing, reporting, and remediation**. Name what the app must still enforce.
+## Practice
 
-## Mechanism limits
-
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
-
-## Practice (local, authorized)
-
-Complete the associated lab under `labs/9.5/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
-
-Safe task: write one testable sentence that would fail if the **penetration** property were false.
+Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/9.5/9.5-lab`.
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
+KEV vs internal-only.
 
-## Usability and accessibility
+## Usability
 
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Penetration testing, reporting, and remediation is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
+Reports used by engineers must be readable (structure, not color-only severity).
 
 ## Non-goals
 
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+SIEM product names are not the property. Keys stay out of lessons.

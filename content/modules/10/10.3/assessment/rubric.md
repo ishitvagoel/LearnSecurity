@@ -4,26 +4,26 @@
 
 ## Module
 
-Cloud, serverless, containers, Kubernetes, and IaC
+Cloud, containers, Kubernetes, and IaC
 
 ## Evidence checklist
 
-- [ ] Threat-modeled deployment and IaC/container policy tests
-- [ ] Transfer task prompt
-- [ ] Local lab brief
-- [ ] Lab: `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Threat-modeled deploy and IaC/container policy tests
+- [ ] Transfer task (Clinic: app SA is cluster-admin.)
+- [ ] Lab `labs/10.3/10.3-lab`: forbidden outcome **App pod granted cluster-admin**
+- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Transfer challenge (LO-07) for transfer-ready
+- [ ] Operate signal without note bodies / secrets: cluster_admin_denied.
 
 ## Rubric
 
 | Result | Meaning |
 |---|---|
 | Developing | Tools listed; missing attacker/trust; mechanism slogans |
-| Competent | System-specific invariant; lab understood; operate present |
+| Competent | System-specific invariant; lab mapped; operate present |
 | Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
 
-Knowledge check (80% retryable): distinguish property vs mechanism for this module. Items live in the session worksheet, not here.
+Knowledge check (retryable): distinguish property vs mechanism for **10.3**. Items live in the session worksheet, not here.
 
 ## Seeded review
 

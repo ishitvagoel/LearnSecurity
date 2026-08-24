@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProgressToggle } from "@/components/ProgressToggle";
+import { PHASES } from "@/lib/catalog";
 import {
   lessonHref,
   loadAllModules,
@@ -30,18 +31,35 @@ export default async function ModulePage({ params }: Props) {
   }
   const mod = loadModule(id);
   const lessons = loadLessons(mod);
+  const first = lessons.find((l) => l.filename);
+  const phase = PHASES[mod.phase];
 
   return (
     <article>
       <p className="mb-2 text-sm text-stone-700">
-        Phase {mod.phase} · {mod.track} · {mod.difficulty} · {mod.estimatedMinutes}{" "}
-        min
+        <Link href="/learn/" className="text-blue-900 underline">
+          Learn
+        </Link>
+        {" · "}
+        Phase {mod.phase}
+        {phase ? ` (${phase.title})` : ""} · {mod.track} · {mod.difficulty} ·{" "}
+        {mod.estimatedMinutes} min
       </p>
       <h1 className="mb-4 text-3xl font-semibold">
         {mod.id} — {mod.title}
       </h1>
+      {first ? (
+        <p className="mb-4">
+          <Link
+            href={lessonHref(mod.id, first.filename)}
+            className="inline-block rounded bg-blue-900 px-3 py-2 text-sm font-medium text-white"
+          >
+            Open first lesson
+          </Link>
+        </p>
+      ) : null}
       <ProgressToggle moduleId={mod.id} />
-      <h2 className="mb-2 mt-8 text-2xl font-semibold">Outcomes</h2>
+      <h2 className="mb-2 mt-8 text-2xl font-semibold">What you should be able to do</h2>
       <ul className="mb-4 list-disc pl-6">
         {mod.outcomes.map((o) => (
           <li key={o} className="max-w-prose">
@@ -49,7 +67,7 @@ export default async function ModulePage({ params }: Props) {
           </li>
         ))}
       </ul>
-      <h2 className="mb-2 mt-8 text-2xl font-semibold">Invariants</h2>
+      <h2 className="mb-2 mt-8 text-2xl font-semibold">Invariants this module owns</h2>
       <ul className="mb-4 list-disc pl-6">
         {mod.invariants.map((o) => (
           <li key={o} className="max-w-prose">
@@ -57,7 +75,19 @@ export default async function ModulePage({ params }: Props) {
           </li>
         ))}
       </ul>
-      <h2 className="mb-2 mt-8 text-2xl font-semibold">Learning objects</h2>
+      {mod.threatModelPrompts?.length ? (
+        <>
+          <h2 className="mb-2 mt-8 text-2xl font-semibold">Threat prompts</h2>
+          <ul className="mb-4 list-disc pl-6">
+            {mod.threatModelPrompts.map((o) => (
+              <li key={o} className="max-w-prose">
+                {o}
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : null}
+      <h2 className="mb-2 mt-8 text-2xl font-semibold">Lessons</h2>
       <ol className="mb-4 list-decimal pl-6">
         {lessons.map((lo) => (
           <li key={lo.id} className="mb-1">
@@ -76,12 +106,33 @@ export default async function ModulePage({ params }: Props) {
         ))}
       </ol>
       {mod.labSpec ? (
-        <p className="mt-4 max-w-prose">
-          Lab (not executed here):{" "}
-          <Link href={`/labs/${encodeURIComponent(mod.id)}/`} className="text-blue-900 underline">
-            {mod.labSpec.slug || mod.id}
-          </Link>
-        </p>
+        <section className="mb-6 max-w-prose">
+          <h2 className="mb-2 mt-8 text-2xl font-semibold">Lab (local only)</h2>
+          <p className="mb-2 leading-relaxed">
+            {mod.labSpec.summary || "See the lab brief."} Forbidden outcome is
+            checked in-repo, not on this origin.
+          </p>
+          <p>
+            <Link
+              href={`/labs/${encodeURIComponent(mod.id)}/`}
+              className="text-blue-900 underline"
+            >
+              Lab brief — {mod.labSpec.slug || mod.id}
+            </Link>
+          </p>
+        </section>
+      ) : null}
+      {mod.misconceptions?.length ? (
+        <>
+          <h2 className="mb-2 mt-8 text-2xl font-semibold">Misconceptions this module refuses</h2>
+          <ul className="mb-4 list-disc pl-6">
+            {mod.misconceptions.map((o) => (
+              <li key={o} className="max-w-prose">
+                {o}
+              </li>
+            ))}
+          </ul>
+        </>
       ) : null}
       <h2 className="mb-2 mt-8 text-2xl font-semibold">Standards</h2>
       <ul className="list-disc pl-6">

@@ -1,67 +1,50 @@
-# 3.2-LO-04 — Structural fix restoring the 3.2 invariant
+# 3.2 — Threat modeling (4 Build)
 
 **Kind:** design-exercise  
 **Loop step:** 4 Build  
-**Standards:** OWASP ASVS / module anchors (see spec) 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** OWASP Threat Modeling (project); NIST SP 800-154 remains **draft/withdrawn-track** — treat as informative only; ASVS 5.0.0 as later requirements, not a model.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Threat modeling** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Claims are properties of SecureCollab (or the elective system), not tool names; Labs stay in authorized local or official training scope; Draft standards are labeled draft
+A green scanner does not yield an empty threat list. SecureCollab’s model must still include a cross-tenant reader and a hostile Next.js client.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** Cross-tenant member; hostile browser; future worker identity (named now as a trigger).
+- **Trust:** Local threats_from_scan fixture. Real scanners are coverage tools (9.4), not oracles.
+threats_from_scan always includes cross-tenant-read.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Threat-model prompts from the spec:
+## Fixed fixture (local)
 
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+```python
+ALWAYS = ["cross-tenant-read", "hostile-browser", "stolen-worker"]
 
-## Root cause, preconditions, impact, prevention, detection, recovery
+def threats_from_scan(scanner_green: bool) -> list[str]:
+    return list(ALWAYS)
+```
 
-| Slice | For Threat modeling |
-|---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Seed mandatory threats; scanner findings are extra, not the set.
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Threat modeling**. Name what the app must still enforce.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Mechanism limits
+## What this is not
 
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
+STRIDE stickers on a DFD are not a model without invalidation conditions.
 
-## Practice (local, authorized)
+LINDDUN is valuable for 5.1; it still won’t list IDOR for you automatically.
 
-Complete the associated lab under `labs/3.2/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
+## Practice
 
-Safe task: write one testable sentence that would fail if the **threat** property were false.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
+Add webhooks (7.3): which new threats?
 
-## Usability and accessibility
+## Residual risk
 
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Threat modeling is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
-
-## Non-goals
-
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+Unknown unknowns — review triggers exist for that.

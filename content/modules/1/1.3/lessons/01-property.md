@@ -1,68 +1,58 @@
-# 1.3-LO-01 — TCB, entry points, transitive trust, shared mechanisms, blast radius
+# 1.3 — Trust boundaries and attack surface (1 Property)
 
 **Kind:** concept-model  
 **Loop step:** 1 Property  
-**Standards:** OWASP Threat Modeling Project maintained-project-guidance (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** OWASP Threat Modeling (project guidance, living); ASVS 5.0.0 V15 (final) architecture; Saltzer economy of mechanism (1975, seminal).
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Trust boundaries and attack surface** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Every data flow that can change a 1.1 invariant crosses a named boundary with a named check or an explicit residual; The client is not in the TCB for authorization or integrity of server-side assets; Correlated layers are not counted as independent depth; No live-target or real-PII instructions appear in this module
+A browser-supplied header such as X-SecureCollab-Internal is on the untrusted side of the API boundary. It must not dump all tenants’ notes. Only a worker bound in-process (or a real service identity later) may export.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** Anyone who can set headers on HTTPS to the public API, including a modified Next.js client and a stolen browser extension.
+- **Trust:** FastAPI process + PostgreSQL roles you will define; the HTTP client is hostile. CDN/WAF are not yet in the TCB.
+**Mechanism (not the property):** FastAPI dependency injection does not know your TCB. Next.js rewrite headers are client-controlled after the browser.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Threat-model prompts from the spec:
+## Root cause vs impact vs prevention vs detection vs recovery
 
-- What are we working on (scope, users, dependencies, trust boundaries)?
-- What can go wrong at each entry point and shared mechanism?
-- Who can we no longer trust if the IdP, email provider, or object store is compromised?
-
-## Root cause, preconditions, impact, prevention, detection, recovery
-
-| Slice | For Trust boundaries and attack surface |
+| Slice | For 1.3 |
 |---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+| Root cause | Transitive trust: the handler believed a string that crossed the boundary. |
+| Preconditions | Public listener; header check instead of identity. |
+| Impact (1.1 cell) | Confidentiality (1.1) via a boundary failure, not a new CWE slogan. — Cross-tenant dump; blast radius = all notes. |
+| Prevention | Ignore client internal headers; bind worker identity in the process/mesh. |
+| Detection | Alert on that header appearing on the public listener (it is a probe). |
+| Recovery | Rotate worker credentials; audit export logs; notify tenants if bodies left. |
 
 ## Framework defaults vs application guarantees
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Trust boundaries and attack surface**. Name what the app must still enforce.
+FastAPI dependency injection does not know your TCB. Next.js rewrite headers are client-controlled after the browser.
 
-## Mechanism limits
+## Mechanism limits and bypasses
 
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
+A WAF dropping the header is defense in depth, not the property. Attackers will use another field.
 
-## Practice (local, authorized)
+Body field is_internal=true; GraphQL; gRPC metadata; websocket first message.
 
-Complete the associated lab under `labs/1.3/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
+## Residual risk
 
-Safe task: write one testable sentence that would fail if the **trust** property were false.
+A real compromised worker still exports. Detect and revoke (7.4, 10.5).
+
+## Practice
+
+Draw the line: browser | TLS | app | DB. Star every input that currently influences export_notes.
+
+Run `labs/1.3/1.3-trust-boundaries` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
+CDN “authenticated origin pull” — is the CDN in the TCB? What header does it add?
 
-## Usability and accessibility
-
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Boxes labeled secure zone are a threat model
-- The TCB is the server or the cloud provider
-- Defense in depth means stacking products with correlated failures
-- Attack surface is open ports or the OWASP Top 10
+Clinic booking: X-Internal-Admin on the public API.
 
 ## Non-goals
 
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.

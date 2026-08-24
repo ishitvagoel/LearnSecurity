@@ -1,67 +1,36 @@
-# 10.2-LO-06 — Detect/recover notes for 10.2
+# 10.2 — Source control, CI/CD, and software supply chain (6 Operate)
 
 **Kind:** operations-exercise  
 **Loop step:** 6 Operate  
-**Standards:** OWASP ASVS / module anchors (see spec) 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** SLSA 1.2; OpenSSF OSPS; CISA 2026 SBOM minimum elements; NIST 800-161r1. Pin versions.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Source control, CI/CD, dependencies, and software supply chain** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Claims are properties of SecureCollab (or the elective system), not tool names; Labs stay in authorized local or official training scope; Draft standards are labeled draft
+A dependency whose digest does not match the lockfile must not install. Integrity of build inputs is the cell — not “we have Dependabot.”
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** Typosquat; compromised maintainer; poisoned PR from a fork.
+- **Trust:** Local install_ok(got, expected).
+Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
-
-Threat-model prompts from the spec:
-
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
-
-## Root cause, preconditions, impact, prevention, detection, recovery
-
-| Slice | For Source control, CI/CD, dependencies, and software supply chain |
+| Outcome | This module |
 |---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+| Detect | mismatch fail the job. |
+| Signal (no bodies) | hash_mismatch_denied. |
+| Revoke / recover | Pin known-good; rotate secrets in CI (5.3). |
+| Residual | Build cache poisoning. |
 
-## Framework defaults vs application guarantees
+CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Source control, CI/CD, dependencies, and software supply chain**. Name what the app must still enforce.
+## Practice
 
-## Mechanism limits
-
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
-
-## Practice (local, authorized)
-
-Complete the associated lab under `labs/10.2/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
-
-Safe task: write one testable sentence that would fail if the **source** property were false.
+Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/10.2/10.2-lab`.
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
-
-## Usability and accessibility
-
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Source control, CI/CD, dependencies, and software supply chain is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
+GitHub Actions third-party action@v1.
 
 ## Non-goals
 
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+SIEM product names are not the property. Keys stay out of lessons.

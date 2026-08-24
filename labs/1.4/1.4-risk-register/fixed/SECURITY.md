@@ -1,3 +1,3 @@
-# Fixed notes (1.4)
+# Fixed recovery (1.4)
 
-Property-shaped claim; mechanism is not the property.
+Named, keyboard-operable confirm. Color is redundant, not the only signal.

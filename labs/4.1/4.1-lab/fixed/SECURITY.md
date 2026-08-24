@@ -1,3 +1,1 @@
-# Fixed notes (4.1)
-
-Property-shaped claim; mechanism is not the property.
+Fixed 4.1 fixture. Local only.

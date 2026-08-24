@@ -1,67 +1,50 @@
-# 10.2-LO-03 — Local fixture illustrating 10.2 failure (authorized only)
+# 10.2 — Source control, CI/CD, and software supply chain (3 Break)
 
 **Kind:** mechanism-lab  
 **Loop step:** 3 Break  
-**Standards:** OWASP ASVS / module anchors (see spec) 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** SLSA 1.2; OpenSSF OSPS; CISA 2026 SBOM minimum elements; NIST 800-161r1. Pin versions.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Source control, CI/CD, dependencies, and software supply chain** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Claims are properties of SecureCollab (or the elective system), not tool names; Labs stay in authorized local or official training scope; Draft standards are labeled draft
+A dependency whose digest does not match the lockfile must not install. Integrity of build inputs is the cell — not “we have Dependabot.”
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** Typosquat; compromised maintainer; poisoned PR from a fork.
+- **Trust:** Local install_ok(got, expected).
+**Forbidden outcome:** Dependency installed when digest mismatches lockfile
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
+**Authorized scope:** `labs/10.2/10.2-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
 
-Threat-model prompts from the spec:
+## What to observe
 
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+vulnerable lock.py ignores digest.
 
-## Root cause, preconditions, impact, prevention, detection, recovery
+The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: install_ok('aaa','bbb') True.
 
-| Slice | For Source control, CI/CD, dependencies, and software supply chain |
+## Vulnerable fixture (local)
+
+```python
+def install_ok(expected_hash, got_hash):
+    return True
+```
+
+## Root cause vs impact
+
+| Slice | Lab |
 |---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+| Root cause | Name-only install. |
+| Impact | Malicious code in the TCB. |
+| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
 
-## Framework defaults vs application guarantees
+## Practice
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Source control, CI/CD, dependencies, and software supply chain**. Name what the app must still enforce.
-
-## Mechanism limits
-
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
-
-## Practice (local, authorized)
-
-Complete the associated lab under `labs/10.2/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
-
-Safe task: write one testable sentence that would fail if the **source** property were false.
+Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/10.2/10.2-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
-
-## Usability and accessibility
-
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Source control, CI/CD, dependencies, and software supply chain is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
+GitHub Actions third-party action@v1.
 
 ## Non-goals
 
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+No live-target instructions. Synthetic data only.

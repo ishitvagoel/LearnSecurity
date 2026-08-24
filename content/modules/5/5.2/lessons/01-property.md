@@ -1,67 +1,58 @@
-# 5.2-LO-01 — Cryptographic properties and safe use: property vs mechanism
+# 5.2 — Cryptographic properties and safe use (1 Property)
 
 **Kind:** concept-model  
 **Loop step:** 1 Property  
-**Standards:** OWASP ASVS / module anchors (see spec) 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** ASVS 5.0.0 V11 (final); RFC 9106 Argon2 (final) for *passwords* not this field; never roll a cipher. This lab’s cell is confidentiality of a stored secret at rest — encoding is not encryption.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Cryptographic properties and safe use** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Claims are properties of SecureCollab (or the elective system), not tool names; Labs stay in authorized local or official training scope; Draft standards are labeled draft
+protect(secret) must not be reversible as Base64 of the plaintext. Encoding, hex, and “obfuscation” are not confidentiality mechanisms.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** Operator who can read the stored field; stolen disk of the lab dict.
+- **Trust:** Local protect()/looks_encrypted(). Real AEAD keys are 5.3.
+**Mechanism (not the property):** passlib/bcrypt is for passwords, not note bodies. Fernet still needs 5.3 key storage.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Threat-model prompts from the spec:
+## Root cause vs impact vs prevention vs detection vs recovery
 
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
-
-## Root cause, preconditions, impact, prevention, detection, recovery
-
-| Slice | For Cryptographic properties and safe use |
+| Slice | For 5.2 |
 |---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+| Root cause | Mechanism name “encrypted” applied to encoding. |
+| Preconditions | protect returns b64(secret). |
+| Impact (1.1 cell) | Confidentiality of the stored secret vs honest storage observers. — Any reader of the column gets the secret. |
+| Prevention | Use a standard AEAD with a managed key; tests forbid b64 identity. |
+| Detection | Scanner for b64-looking “ciphertext” of known plaintext in tests. |
+| Recovery | Rotate keys; re-encrypt; treat as leak. |
 
 ## Framework defaults vs application guarantees
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Cryptographic properties and safe use**. Name what the app must still enforce.
+passlib/bcrypt is for passwords, not note bodies. Fernet still needs 5.3 key storage.
 
-## Mechanism limits
+## Mechanism limits and bypasses
 
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
+AES-GCM with a nonce reuse is not this property. Do not paste attack scripts — name the misuse.
 
-## Practice (local, authorized)
+Key in the same row; client-side only “encryption” with key in the bundle (8.1).
 
-Complete the associated lab under `labs/5.2/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
+## Residual risk
 
-Safe task: write one testable sentence that would fail if the **cryptographic** property were false.
+Memory dumps; authorized operators.
+
+## Practice
+
+Table: property vs algorithm vs what it is *not* for.
+
+Run `labs/5.2/5.2-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
+Password hashing vs field encryption vs backup encryption.
 
-## Usability and accessibility
-
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Cryptographic properties and safe use is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
+Clinic: SSN column labeled “encrypted” that is b64.
 
 ## Non-goals
 
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.

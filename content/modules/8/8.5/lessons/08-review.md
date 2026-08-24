@@ -1,67 +1,44 @@
-# 8.5-LO-08 — Seeded diff for 8.5
+# 8.5 — Mobile verification and privacy (Review)
 
 **Kind:** code-review  
 **Loop step:** Review  
-**Standards:** OWASP ASVS / module anchors (see spec) 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** MASVS 2.1 + MASTG 2.0 (final); MASWE mapping; Mobile Top 10:2024 awareness only.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Mobile verification and privacy** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Claims are properties of SecureCollab (or the elective system), not tool names; Labs stay in authorized local or official training scope; Draft standards are labeled draft
+A crash report must not include the note body. Mobile privacy is a 1.1 privacy cell, not a Play Data safety form as the control.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** Crash-platform operator; another process reading logcat.
+- **Trust:** Local crash_report(body).
+Review `labs/8.5/8.5-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/8.5.md` — not here.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
+## What to label
 
-Threat-model prompts from the spec:
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+- Seeded smell (label it yourself): crash_report includes body
+- Seeded smell (label it yourself): READ_LOGS leftover
+- Seeded smell (label it yourself): Tracker SDK without review
+- Seeded smell (label it yourself): MASVS spreadsheet row without test
 
-## Root cause, preconditions, impact, prevention, detection, recovery
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
 
-| Slice | For Mobile verification and privacy |
-|---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+## Misconceptions
 
-## Framework defaults vs application guarantees
+- Store privacy labels are controls
+- Debug logs stay on device
+- MASTG is a scanner
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Mobile verification and privacy**. Name what the app must still enforce.
+## Practice
 
-## Mechanism limits
-
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
-
-## Practice (local, authorized)
-
-Complete the associated lab under `labs/8.5/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
-
-Safe task: write one testable sentence that would fail if the **mobile** property were false.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
+Web Sentry (10.5) same cell.
 
-## Usability and accessibility
+## HITL / WCAG 2.2
 
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Mobile verification and privacy is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
-
-## Non-goals
-
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+In-app “send feedback” must not require attaching a screenshot of PHI to proceed.

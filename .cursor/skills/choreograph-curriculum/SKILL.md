@@ -28,7 +28,9 @@ Read the user message. Default is `auto`.
 
 **Pilot-aware `auto`:** If any of 1.1–1.4 still have `pass: none` or missing spec files, run only the **Pass A chain** for the next Phase 1 (then Phase 2) module. Do not start Pass B/C until Pass A exists for 1.1–1.4 **and** 2.1–2.4, unless the user explicitly asked for `module` (whole A→C) or Pass B/C.
 
-Never start Pass D (the website). Never skip gates. Never generate the entire 50-module course in one run.
+Never start Pass D (the website) **from this skill**. Never skip gates. Never generate the entire 50-module course in one run.
+
+If `STATUS.yaml` shows Pass E for all units and `revision.remaining` is non-empty, **stop generation** and tell the user to run `/deepen-curriculum` (or `/goal run /deepen-curriculum until revision.remaining is empty`). Do not invent a parallel generation pipeline.
 
 ## Pipeline (canonical order)
 

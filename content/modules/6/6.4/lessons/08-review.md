@@ -1,67 +1,40 @@
-# 6.4-LO-08 — Seeded diff for 6.4
+# 6.4 — Files, paths, uploads, archives, XML, deserialization (Review)
 
 **Kind:** code-review  
 **Loop step:** Review  
-**Standards:** OWASP ASVS / module anchors (see spec) 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** ASVS 5.0.0 V12 (final); CWE-22/434/502 as names after the path/interpreter cause.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Files, paths, uploads, archives, XML, and deserialization** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Claims are properties of SecureCollab (or the elective system), not tool names; Labs stay in authorized local or official training scope; Draft standards are labeled draft
+A user-supplied path must not resolve outside the lab root. `../etc/passwd` is data that tried to become a different object. This is not a weaponized exploit lesson — we assert prefix.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** Uploader or filename field attacker.
+- **Trust:** Local resolve() under /tmp/sc-lab.
+Review `labs/6.4/6.4-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/6.4.md` — not here.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
+## What to label
 
-Threat-model prompts from the spec:
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+- Seeded smell (label it yourself): open(user_path)
+- Seeded smell (label it yourself): Blacklist of '..' only
+- Seeded smell (label it yourself): Trust Content-Type
+- Seeded smell (label it yourself): No prefix test
 
-## Root cause, preconditions, impact, prevention, detection, recovery
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
 
-| Slice | For Files, paths, uploads, archives, XML, and deserialization |
-|---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+## Misconceptions
 
-## Framework defaults vs application guarantees
+- UUID filenames replace path checks
+- Antivirus is the upload control
+- JSON is always safe deserialize
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Files, paths, uploads, archives, XML, and deserialization**. Name what the app must still enforce.
+## Practice
 
-## Mechanism limits
-
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
-
-## Practice (local, authorized)
-
-Complete the associated lab under `labs/6.4/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
-
-Safe task: write one testable sentence that would fail if the **files** property were false.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
-
-## Usability and accessibility
-
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Files, paths, uploads, archives, XML, and deserialization is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
-
-## Non-goals
-
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+XML entity expansion; pickle; YAML load.

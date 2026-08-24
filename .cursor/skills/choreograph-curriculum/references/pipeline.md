@@ -19,3 +19,5 @@ Slash-only helpers the conductor may call as a **mode**, not as a hidden extra l
 
 - `pilot-phase-1` — Pass A for 1.1–1.4 then stop
 - `coverage-audit` — map vs ASVS/MASVS/awareness lists
+
+Post-generation revision is a **separate** conductor: [`deepen-curriculum`](../../deepen-curriculum/SKILL.md).

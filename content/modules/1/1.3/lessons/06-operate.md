@@ -1,68 +1,36 @@
-# 1.3-LO-06 — Detect crossing a boundary (unexpected caller, unexpected egress)
+# 1.3 — Trust boundaries and attack surface (6 Operate)
 
 **Kind:** operations-exercise  
 **Loop step:** 6 Operate  
-**Standards:** OWASP Threat Modeling Project maintained-project-guidance (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** OWASP Threat Modeling (project guidance, living); ASVS 5.0.0 V15 (final) architecture; Saltzer economy of mechanism (1975, seminal).
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Trust boundaries and attack surface** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Every data flow that can change a 1.1 invariant crosses a named boundary with a named check or an explicit residual; The client is not in the TCB for authorization or integrity of server-side assets; Correlated layers are not counted as independent depth; No live-target or real-PII instructions appear in this module
+A browser-supplied header such as X-SecureCollab-Internal is on the untrusted side of the API boundary. It must not dump all tenants’ notes. Only a worker bound in-process (or a real service identity later) may export.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** Anyone who can set headers on HTTPS to the public API, including a modified Next.js client and a stolen browser extension.
+- **Trust:** FastAPI process + PostgreSQL roles you will define; the HTTP client is hostile. CDN/WAF are not yet in the TCB.
+Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
-
-Threat-model prompts from the spec:
-
-- What are we working on (scope, users, dependencies, trust boundaries)?
-- What can go wrong at each entry point and shared mechanism?
-- Who can we no longer trust if the IdP, email provider, or object store is compromised?
-
-## Root cause, preconditions, impact, prevention, detection, recovery
-
-| Slice | For Trust boundaries and attack surface |
+| Outcome | This module |
 |---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+| Detect | Alert on that header appearing on the public listener (it is a probe). |
+| Signal (no bodies) | Public-edge log: internal-header-seen without worker identity. |
+| Revoke / recover | Rotate worker credentials; audit export logs; notify tenants if bodies left. |
+| Residual | A real compromised worker still exports. Detect and revoke (7.4, 10.5). |
 
-## Framework defaults vs application guarantees
+CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Trust boundaries and attack surface**. Name what the app must still enforce.
+## Practice
 
-## Mechanism limits
-
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
-
-## Practice (local, authorized)
-
-Complete the associated lab under `labs/1.3/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
-
-Safe task: write one testable sentence that would fail if the **trust** property were false.
+Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/1.3/1.3-trust-boundaries`.
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
-
-## Usability and accessibility
-
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Boxes labeled secure zone are a threat model
-- The TCB is the server or the cloud provider
-- Defense in depth means stacking products with correlated failures
-- Attack surface is open ports or the OWASP Top 10
+CDN “authenticated origin pull” — is the CDN in the TCB? What header does it add?
 
 ## Non-goals
 
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+SIEM product names are not the property. Keys stay out of lessons.

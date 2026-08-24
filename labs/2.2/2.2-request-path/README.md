@@ -1,35 +1,34 @@
 # Lab: 2.2-request-path
 
-**Module:** `2.2` — DNS, transport, HTTP, TLS, proxies, CDNs, and caches
-**Authorized scope:** Local reverse proxy and course fixture only
-**Invariant:** Claims about this concern must be property-shaped (attacker, trust, time horizon, evidence) and name SecureCollab assets.
-**Root cause class:** trust / authority / parser / state / resource (module-specific)
-**Non-goals:** live targets, real PII, weaponized learner-facing payloads.
+**Module:** `2.2`  
+**Authorized scope:** this directory only.  
+**Invariant:** Tenant B must not be served tenant A’s cached note body for the same URL. “HTTPS on” (RFC 9846 TLS 1.3, final) is not the cache-key property.  
+**Root cause class:** trust / shared mechanism (URL-only cache key after TLS termination)  
+**Non-goals:** live CDNs, poisoning a public cache, DNS hijacking labs.
 
 ## Reset
 
-Replace `vulnerable/` or `fixed/` claim files from git. Do not keep learner secrets.
+Restore trees from git. Call `reset()` between mental experiments; tests call it.
 
 ## Vulnerable behavior (local only)
 
-The vulnerable claim is a mechanism slogan. Tests must **fail**. This is a local fixture only.
-
-End-to-end path diagram and local Host/cache-key rewrite fixture
+`cache_put` keys only on path. Bob’s `cache_get("/notes/n1", "tB")` returns alice’s body. `X-Forwarded-Host` is not even needed — the key never included tenant.
 
 ## Structural fix
 
-The fixed claim states a system-specific property plus attacker, trust, time horizon, and evidence. A scanner-only or denylist response is insufficient.
+Key `(path, tenant)` where tenant is the **bound** application identity (1.2), not a client `Host` header.
 
 ## Verify
 
-- Happy path: fixed claim passes `--claim`
-- Negative: vulnerable claim fails `--claim`
-- No network calls; synthetic data only
+```bash
+python3 -m pytest tests/test_cache_key.py --impl vulnerable
+python3 -m pytest tests/test_cache_key.py --impl fixed
+```
 
 ## Operate
 
-If the invariant is not absolute, record what you would log, alert on, revoke, or restore.
+Log cache hits with tenant, not bodies. CDN `Vary` is a later origin policy, not a product slogan.
 
 ## Transfer
 
-Add a new principal or object and rewrite the claim without a Top 10 name as the property.
+Add a reverse proxy that sets `X-Forwarded-Proto`. The app still must not treat that header as the TLS property.

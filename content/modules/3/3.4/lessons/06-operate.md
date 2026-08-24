@@ -1,67 +1,40 @@
-# 3.4-LO-06 — Detect/recover notes for 3.4
+# 3.4 — Business logic and abuse-resistant design (6 Operate)
 
 **Kind:** operations-exercise  
 **Loop step:** 6 Operate  
-**Standards:** OWASP ASVS / module anchors (see spec) 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** ASVS 5.0.0 V2 (final); OWASP API Security Top 10:2023 API4/API6 as *awareness*; this lab is a product rule, not a CWE name.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Business logic and abuse-resistant design** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Claims are properties of SecureCollab (or the elective system), not tool names; Labs stay in authorized local or official training scope; Draft standards are labeled draft
+A note share grant cannot be applied enough times to exceed the product cap (5 members). Abuse is a logic invariant.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** A scripted member; a confused deputy UI that retries (2.4).
+- **Trust:** Local counter. Real rate limits are 6.7.
+Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
-
-Threat-model prompts from the spec:
-
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
-
-## Root cause, preconditions, impact, prevention, detection, recovery
-
-| Slice | For Business logic and abuse-resistant design |
+| Outcome | This module |
 |---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+| Detect | share_cap_denied metric; anomaly on one note. |
+| Signal (no bodies) | denied 6th share; lock contention on hot notes. |
+| Revoke / recover | Trim extra grants; notify owner. |
+| Residual | Legitimate teams >5 need an owned exception (E6). |
 
-## Framework defaults vs application guarantees
+CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Business logic and abuse-resistant design**. Name what the app must still enforce.
+## Practice
 
-## Mechanism limits
-
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
-
-## Practice (local, authorized)
-
-Complete the associated lab under `labs/3.4/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
-
-Safe task: write one testable sentence that would fail if the **business** property were false.
+Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/3.4/3.4-lab`.
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
+Invite tokens (6.6) and export quotas (6.7).
 
-## Usability and accessibility
+## Usability
 
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Business logic and abuse-resistant design is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
+Error “share limit reached” must be programmatically announced (WCAG 4.1.3), not only a red border.
 
 ## Non-goals
 
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+SIEM product names are not the property. Keys stay out of lessons.

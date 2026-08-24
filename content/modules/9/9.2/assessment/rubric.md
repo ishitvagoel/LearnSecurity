@@ -8,22 +8,22 @@ Secure code review
 
 ## Evidence checklist
 
-- [ ] Structured review of a seeded change set
-- [ ] Transfer task prompt
-- [ ] Local lab brief
-- [ ] Lab: `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Structured review of a seeded diff
+- [ ] Transfer task (Clinic: eval in a report template.)
+- [ ] Lab `labs/9.2/9.2-lab`: forbidden outcome **eval on user input approved in review**
+- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Transfer challenge (LO-07) for transfer-ready
+- [ ] Operate signal without note bodies / secrets: review_block_eval.
 
 ## Rubric
 
 | Result | Meaning |
 |---|---|
 | Developing | Tools listed; missing attacker/trust; mechanism slogans |
-| Competent | System-specific invariant; lab understood; operate present |
+| Competent | System-specific invariant; lab mapped; operate present |
 | Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
 
-Knowledge check (80% retryable): distinguish property vs mechanism for this module. Items live in the session worksheet, not here.
+Knowledge check (retryable): distinguish property vs mechanism for **9.2**. Items live in the session worksheet, not here.
 
 ## Seeded review
 
