@@ -1,45 +1,50 @@
 # 7.2 — Object, property, and function security (3 Break)
 
-**Kind:** mechanism-lab
-**Loop step:** 3 Break
-**Standards:** ASVS V4/V8 chapter-level.
+**Kind:** mechanism-lab  
+**Loop step:** 3 Break  
+**Standards:** ASVS 5.0.0 V4 (final); API1/3/5 awareness after 1.2/4.4.
 
 ## Property (start here)
 
-GraphQL-style note.secret_internal is not visible to members. Field-level authorization, not 'hidden in UI'.
+A member must not resolve secret_internal. Function/property authorization is not “they can call GET /notes.” Identifiers locate; they do not authorize.
 
 ## Attacker capabilities and trust assumptions
 
-Member who asks for extra fields. Trust: local resolver.
+- **Attacker:** Member using GraphQL __typename or REST ?fields=.
+- **Trust:** Local resolve(role, field).
+**Forbidden outcome:** Member resolves secret_internal
 
-## This step
+**Authorized scope:** `labs/7.2/7.2-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
 
-The authorized break is the local vulnerable/ fixture. No live targets, no weaponized copy-paste exploits, no public CDN to attack.
+## What to observe
 
-## Root cause / impact / prevention / detection / recovery
+vulnerable field.py allows member internal.
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: resolve('member','secret_internal') True.
 
-## Framework defaults vs application guarantees
+## Vulnerable fixture (local)
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+```python
+def resolve(role, field):
+    return True
+```
 
-## Residual risk
+## Root cause vs impact
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+| Slice | Lab |
+|---|---|
+| Root cause | Serializer dumps the ORM object. |
+| Impact | Internal secret or PII extra. |
+| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
 
 ## Practice
 
-Run `labs/7.2/7.2-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/7.2/7.2-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Bulk update; search highlighting leaking snippets.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+No live-target instructions. Synthetic data only.

@@ -1,45 +1,38 @@
 # 5.1 — Data lifecycle and privacy engineering (5 Verify)
 
-**Kind:** verification-lab
-**Loop step:** 5 Verify
-**Standards:** NIST Privacy Framework 1.0 (final); 1.1 IPD stays **draft** if cited.
+**Kind:** verification-lab  
+**Loop step:** 5 Verify  
+**Standards:** NIST Privacy Framework 1.0 (final); NIST PF 1.1 IPD stays **draft** if cited; ASVS 5.0.0 V14; MASVS-PRIVACY for later mobile caches.
 
 ## Property (start here)
 
-After account deletion, SecureCollab must not retain note **bodies** in an analytics copy. Retention is a 1.1 privacy/confidentiality property.
+After account deletion, SecureCollab must not retain note bodies in an analytics copy. Retention is a 1.1 privacy/confidentiality property, not a checkbox in a DPA.
 
 ## Attacker capabilities and trust assumptions
 
-Insider with analytics DB. Trust: local two-table fixture.
+- **Attacker:** Insider with analytics DB; buyer of a “de-identified” export that still has bodies.
+- **Trust:** Local NOTES vs ANALYTICS maps. Real warehouses are 7.4 workers.
+An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
 
-## This step
+| Case | Must show |
+|---|---|
+| Normal | Honest allowed action still works where the product says so |
+| Negative / abuse | Analytics copy still holds note body after account deletion |
+| Failure | Fail closed: Inventory copies; delete or unlink bodies in each |
 
-pytest --impl vulnerable must fail; --impl fixed must pass. A test that only checks HTTP 200 is not a security test.
+Lab tests: `test_property.py` under `labs/5.1/5.1-lab`.
 
-## Root cause / impact / prevention / detection / recovery
+- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Analytics copy still holds note body after account deletion`
+- `--impl fixed`: **pass**
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+after delete body_retained is None.
 
 ## Practice
 
-Run `labs/5.1/5.1-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+CSV export to a partner; clinic-booking card PHI.
 
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).

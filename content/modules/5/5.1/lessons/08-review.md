@@ -1,45 +1,44 @@
 # 5.1 — Data lifecycle and privacy engineering (Review)
 
-**Kind:** code-review
-**Loop step:** Review
-**Standards:** NIST Privacy Framework 1.0 (final); 1.1 IPD stays **draft** if cited.
+**Kind:** code-review  
+**Loop step:** Review  
+**Standards:** NIST Privacy Framework 1.0 (final); NIST PF 1.1 IPD stays **draft** if cited; ASVS 5.0.0 V14; MASVS-PRIVACY for later mobile caches.
 
 ## Property (start here)
 
-After account deletion, SecureCollab must not retain note **bodies** in an analytics copy. Retention is a 1.1 privacy/confidentiality property.
+After account deletion, SecureCollab must not retain note bodies in an analytics copy. Retention is a 1.1 privacy/confidentiality property, not a checkbox in a DPA.
 
 ## Attacker capabilities and trust assumptions
 
-Insider with analytics DB. Trust: local two-table fixture.
+- **Attacker:** Insider with analytics DB; buyer of a “de-identified” export that still has bodies.
+- **Trust:** Local NOTES vs ANALYTICS maps. Real warehouses are 7.4 workers.
+Review `labs/5.1/5.1-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/5.1.md` — not here.
 
-## This step
+## What to label
 
-Review the diff as a SecureCollab PR. Reject client trust, interpreter concatenation, Report-Only as enforcement, and closing findings without retest. Keys stay out of lessons.
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-## Root cause / impact / prevention / detection / recovery
+- Seeded smell (label it yourself): delete_account only NOTES.pop
+- Seeded smell (label it yourself): Analytics “immutable for ML” without exception record
+- Seeded smell (label it yourself): No test body_retained after delete
+- Seeded smell (label it yourself): Privacy policy PDF as the control
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
 
-## Framework defaults vs application guarantees
+## Misconceptions
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+- Encryption makes retention OK
+- Privacy equals confidentiality
+- GDPR text in footer is the invariant
 
 ## Practice
 
-Run `labs/5.1/5.1-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+CSV export to a partner; clinic-booking card PHI.
 
-## Non-goals
+## HITL / WCAG 2.2
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Delete-account journey must be completable with keyboard and clear status (WCAG 3.3.x). An unreachable delete is a privacy incident (1.4).

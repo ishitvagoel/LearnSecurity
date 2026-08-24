@@ -1,45 +1,53 @@
 # E2 — Advanced browser and edge security (2 Model)
 
-**Kind:** design-exercise
-**Loop step:** 2 Model
-**Standards:** CSP3 WD (**draft**); Trusted Types WD (**draft**). 2.3 browser cells still apply.
+**Kind:** design-exercise  
+**Loop step:** 2 Model  
+**Standards:** W3C CSP3 (CR — label draft/CR); Fetch Metadata; this lab’s cell is enforcement vs report-only.
 
 ## Property (start here)
 
-Content-Security-Policy-Report-Only is not enforcement. CSP3 remains a Working Draft — label it draft.
+Content-Security-Policy-Report-Only is not enforcement. Isolation is not “we set a header.”
 
 ## Attacker capabilities and trust assumptions
 
-Injected active content in the model. Trust: local header dict. No live XSS campaign.
+- **Attacker:** XSS that would be blocked only if CSP were enforcing.
+- **Trust:** Local isolation_enforced(headers).
+Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
 
-## This step
+| Piece | This system |
+|---|---|
+| Subjects | browser, app |
+| Objects | CSP header |
+| Actions | isolation_enforced |
+| Channels | HTTP headers |
+| TCB | Enforcing CSP (and others) actually parsed as enforcing. |
+| Untrusted | Report-Only, comments in HTML |
+| State / time | Rollout. |
+| 1.1 cell | Integrity of the browser policy mechanism (2.3 layered with 6.2). |
 
-Name principals, objects, and channels. Open design: the client, APK, or prompt is hostile. Secrecy of the check is not the property.
+## Authority matrix (minimum)
 
-## Root cause / impact / prevention / detection / recovery
+| Subject | Object | Action | Decision |
+|---|---|---|---|
+| CSP enforce | script | block | maybe |
+| CSP Report-Only | script | block | no |
+| encoding 6.2 | title | safe | still-required |
+| cache 2.2 | header | strip | deny |
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
 
 ## Practice
 
-Run `labs/E2/e2-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/E2/e2-lab` file `csp.py`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Trusted Types, COOP/COEP.
+
+## Residual risk
+
+XS-Leaks — named as elective depth.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.

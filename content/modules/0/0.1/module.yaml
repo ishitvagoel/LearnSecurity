@@ -40,11 +40,11 @@ learningObjects:
   path: lessons/01-property.md
 - id: 0.1-LO-02
   kind: design-exercise
-  title: Model SecureCollab for 0.1
+  title: Model SecureCollab course lab for 0.1
   path: lessons/02-model.md
 - id: 0.1-LO-03
   kind: mechanism-lab
-  title: Local fixture illustrating 0.1 failure (authorized only)
+  title: 'Local fixture: HTTP to a non-allowlisted host treated as authorized'
   path: lessons/03-break.md
 - id: 0.1-LO-04
   kind: design-exercise
@@ -60,17 +60,19 @@ learningObjects:
   path: lessons/06-operate.md
 - id: 0.1-LO-07
   kind: transfer-challenge
-  title: Novel variation of 0.1
+  title: 'Transfer: A contractor asked to “quickly test our customer’s WordPress.”'
   path: lessons/07-transfer.md
 - id: 0.1-LO-08
   kind: code-review
-  title: Seeded diff for 0.1
+  title: Seeded review for 0.1
   path: lessons/08-review.md
 labSpec:
-  authorizedScope: Local course fixture or official training lab only
-  slug: 0.1-lab
-  summary: 'Pass A brief only: Personal lab rules, scope template, vocabulary map'
+  authorizedScope: Local course fixture or official training lab only; no public or
+    third-party targets
+  slug: 0.1-orientation
+  summary: HTTP to a non-allowlisted host treated as authorized
   forbiddenOutcomes:
+  - HTTP to a non-allowlisted host treated as authorized
   - Live-target instructions
   - Real PII or production secrets
   - Awareness list used as the syllabus
@@ -96,21 +98,28 @@ standardsRefs:
   - authorized-scope
   url: https://owasp.org/www-project-application-security-verification-standard/
 misconceptions:
-- Security engineering orientation is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
+- If it has a login page it is a lab
+- WSTG chapter titles are the syllabus
+- Defensive learning requires attacking strangers
 operationalConsiderations:
-- Pair prevention with detection/recovery where prevention is not absolute
+- Denied-host log line {url, reason=out_of_scope}; never store response bodies from
+  out-of-scope hosts.
+- Official Juice Shop on your machine is OK; a random cloud Juice Shop you do not
+  own is not.
 author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (Pass C); lab-safety-reviewer (local YAML fixture)
-lastReviewedAt: '2026-08-23'
-nextReviewAt: '2027-02-23'
+reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+lastReviewedAt: '2026-08-24'
+nextReviewAt: '2027-02-24'
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map
 - date: '2026-08-23'
-  note: 'Pass A quality-gate: spec completeness competent; expand in a later revision if thin'
+  note: 'Pass A quality-gate: spec completeness competent; expand in a later revision
+    if thin'
 - date: '2026-08-23'
   note: Pass B lessons and authorized local lab
 - date: '2026-08-23'
   note: Pass C rubric and examiner keys; quality-gate recorded
+- date: '2026-08-24'
+  note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
+    Pass C keys isolated'

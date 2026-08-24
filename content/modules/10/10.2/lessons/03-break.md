@@ -1,45 +1,50 @@
-# 10.2 — Source control, CI/CD, dependencies, and software supply chain (3 Break)
+# 10.2 — Source control, CI/CD, and software supply chain (3 Break)
 
-**Kind:** mechanism-lab
-**Loop step:** 3 Break
-**Standards:** SSDF; lockfiles are mechanisms.
+**Kind:** mechanism-lab  
+**Loop step:** 3 Break  
+**Standards:** SLSA 1.2; OpenSSF OSPS; CISA 2026 SBOM minimum elements; NIST 800-161r1. Pin versions.
 
 ## Property (start here)
 
-Install must fail when the lockfile hash does not match the fetched artifact. CI green is not integrity of dependencies.
+A dependency whose digest does not match the lockfile must not install. Integrity of build inputs is the cell — not “we have Dependabot.”
 
 ## Attacker capabilities and trust assumptions
 
-Substituted package. Trust: local hash compare. No real npm/pypi fetch.
+- **Attacker:** Typosquat; compromised maintainer; poisoned PR from a fork.
+- **Trust:** Local install_ok(got, expected).
+**Forbidden outcome:** Dependency installed when digest mismatches lockfile
 
-## This step
+**Authorized scope:** `labs/10.2/10.2-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
 
-The authorized break is the local vulnerable/ fixture. No live targets, no weaponized copy-paste exploits, no public CDN to attack.
+## What to observe
 
-## Root cause / impact / prevention / detection / recovery
+vulnerable lock.py ignores digest.
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: install_ok('aaa','bbb') True.
 
-## Framework defaults vs application guarantees
+## Vulnerable fixture (local)
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+```python
+def install_ok(expected_hash, got_hash):
+    return True
+```
 
-## Residual risk
+## Root cause vs impact
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+| Slice | Lab |
+|---|---|
+| Root cause | Name-only install. |
+| Impact | Malicious code in the TCB. |
+| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
 
 ## Practice
 
-Run `labs/10.2/10.2-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/10.2/10.2-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+GitHub Actions third-party action@v1.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+No live-target instructions. Synthetic data only.

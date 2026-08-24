@@ -1,45 +1,53 @@
-# 10.2 — Source control, CI/CD, dependencies, and software supply chain (2 Model)
+# 10.2 — Source control, CI/CD, and software supply chain (2 Model)
 
-**Kind:** design-exercise
-**Loop step:** 2 Model
-**Standards:** SSDF; lockfiles are mechanisms.
+**Kind:** design-exercise  
+**Loop step:** 2 Model  
+**Standards:** SLSA 1.2; OpenSSF OSPS; CISA 2026 SBOM minimum elements; NIST 800-161r1. Pin versions.
 
 ## Property (start here)
 
-Install must fail when the lockfile hash does not match the fetched artifact. CI green is not integrity of dependencies.
+A dependency whose digest does not match the lockfile must not install. Integrity of build inputs is the cell — not “we have Dependabot.”
 
 ## Attacker capabilities and trust assumptions
 
-Substituted package. Trust: local hash compare. No real npm/pypi fetch.
+- **Attacker:** Typosquat; compromised maintainer; poisoned PR from a fork.
+- **Trust:** Local install_ok(got, expected).
+Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
 
-## This step
+| Piece | This system |
+|---|---|
+| Subjects | CI, package registry |
+| Objects | wheel hash, lockfile |
+| Actions | install_ok |
+| Channels | pip/npm/gradle |
+| TCB | Lockfile + verify digest; isolated runners; signed provenance later. |
+| Untrusted | Postinstall scripts, mutable latest tags |
+| State / time | Install at 03:00. |
+| 1.1 cell | Integrity of the artifact you will run. |
 
-Name principals, objects, and channels. Open design: the client, APK, or prompt is hostile. Secrecy of the check is not the property.
+## Authority matrix (minimum)
 
-## Root cause / impact / prevention / detection / recovery
+| Subject | Object | Action | Decision |
+|---|---|---|---|
+| CI | matching digest | install | allow |
+| CI | mismatch | install | deny |
+| fork PR | secrets | read | deny |
+| release | provenance | sign | allow |
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
 
 ## Practice
 
-Run `labs/10.2/10.2-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/10.2/10.2-lab` file `lock.py`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+GitHub Actions third-party action@v1.
+
+## Residual risk
+
+Build cache poisoning.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.

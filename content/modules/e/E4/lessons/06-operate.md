@@ -1,45 +1,36 @@
 # E4 — Memory safety and native-code boundaries (6 Operate)
 
-**Kind:** operations-exercise
-**Loop step:** 6 Operate
-**Standards:** Memory-safety as an integrity/availability property at the FFI boundary.
+**Kind:** operations-exercise  
+**Loop step:** 6 Operate  
+**Standards:** CISA memory-safe roadmap (guidance); CWE Top 25 awareness. This models a length mismatch — it is not a weaponized native exploit.
 
 ## Property (start here)
 
-A copy into a 4-byte lab buffer must not return more than 4 bytes. This models a length mismatch — it is not a weaponized native exploit.
+A copy into a 4-byte lab buffer must not return more than 4 bytes. Length is complete mediation of the buffer object.
 
 ## Attacker capabilities and trust assumptions
 
-Caller supplying a long src. Trust: local bytes. No live memory corruption.
+- **Attacker:** Hostile filename/size field; FFI caller.
+- **Trust:** Local copy_into(dst_len, src, n).
+Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
 
-## This step
+| Outcome | This module |
+|---|---|
+| Detect | ASAN in real native (named, not run as a weapon). |
+| Signal (no bodies) | overlong_copy_denied. |
+| Revoke / recover | Patch; do not ship the overflowed binary. |
+| Residual | Existing C codecs for images (6.4). |
 
-Detect without logging note bodies or tokens. Recover fail-safe (revoke, rotate, quarantine). If a human must act, the path must be usable (WCAG 2.2).
-
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
 
 ## Practice
 
-Run `labs/E4/e4-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/E4/e4-lab`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Image parser; protobuf C.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+SIEM product names are not the property. Keys stay out of lessons.

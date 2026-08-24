@@ -1,33 +1,33 @@
-# 0.1-LO-07 — Authorized lab scope (Transfer)
+# 0.1 — Security engineering orientation (7 Transfer)
 
-**Kind:** loop-object  
+**Kind:** transfer-challenge  
 **Loop step:** 7 Transfer  
-**Standards:** CISA Secure by Design (final public guidance); Saltzer (1975, seminal) where authority appears.
+**Standards:** NIST CSF 2.0 (final) GV/ID; OWASP WSTG v4.2 (final) as *lab method*, not a licence to scan the internet; NICE Framework as role language only.
 
 ## Property (start here)
 
-Course activity is authorized only for named local lab hosts. A public URL is out of scope even if the learner is curious. This is a 1.2-style **subject–object–action** over the tester’s own actions.
+A URL is in scope only if it is a named local lab host (127.0.0.1, localhost, lab.securecollab.test). example.com, a employer production API, and a classmate’s deployed preview are out of scope even if they are “easy to hit.”
 
 ## Attacker capabilities and trust assumptions
 
-**Actor:** the learner. **Object:** remote systems. **Trust:** none for example.com. Local `127.0.0.1` is in the TCB of the course, not of production.
+- **Attacker:** A motivated learner who can type any URL into a proxy; a future self who is tired and copies a blog “try this host” snippet.
+- **Trust:** You trust this repository’s lab trees and official OWASP training apps when the README names them. You do not trust “the internet,” robots.txt, or a recruiter’s staging site without written scope.
+Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
 
-## Root cause / impact / prevention / detection / recovery
+**Prompt:** Your company staging URL: what written artifact would make it in-scope? (Not a Slack thumbs-up.)
 
-Root cause: treating curiosity as authorization. Impact: illegal/unethical testing. Prevention: allowlist of lab hosts. Detection: refuse and log. Recovery: stop, report if a tool was pointed wrongly.
+**Product sketch:** A contractor asked to “quickly test our customer’s WordPress.”
 
-## Framework defaults vs application guarantees
+Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
 
-A proxy or browser ‘works’ on the internet. That is not course authorization.
+## What graders reject
+
+| Reject | Why |
+|---|---|
+| Tool or awareness-list name as the property | 1.1 |
+| Framework default as the guarantee | Burp, ZAP, or curl existing is not authorization. CSF GV is governance language,… |
+| Live-target plan | Lab policy |
 
 ## Practice
 
-Transfer: CTF with written terms — how does scope change?
-
-## Transfer
-
-Document the terms as the matrix cell.
-
-## Non-goals
-
-Live targets, real PII, weaponized payloads. Mastery gates stay not-attempted.
+One page. No keys. The lab `labs/0.1/0.1-orientation` stays the only running system you may break.

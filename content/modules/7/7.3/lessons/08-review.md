@@ -1,45 +1,40 @@
 # 7.3 — Webhooks, callbacks, and third-party APIs (Review)
 
-**Kind:** code-review
-**Loop step:** Review
-**Standards:** ASVS V10; 5.4 channel ≠ authenticity.
+**Kind:** code-review  
+**Loop step:** Review  
+**Standards:** ASVS 5.0.0 V10 (final); API10 awareness. HMAC is a teaching stand-in, not “we are Stripe.”
 
 ## Property (start here)
 
-Webhook bodies without a valid lab HMAC are rejected. TLS to the peer is not authenticity of this callback.
+A webhook with a missing signature is rejected. Authenticity of the *provider message* is distinct from TLS and from 1.2 on the resulting action.
 
 ## Attacker capabilities and trust assumptions
 
-Caller who can POST /webhook. Trust: local compare.
+- **Attacker:** Anyone who can POST your callback URL.
+- **Trust:** Local accept(sig, body, secret).
+Review `labs/7.3/7.3-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/7.3.md` — not here.
 
-## This step
+## What to label
 
-Review the diff as a SecureCollab PR. Reject client trust, interpreter concatenation, Report-Only as enforcement, and closing findings without retest. Keys stay out of lessons.
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-## Root cause / impact / prevention / detection / recovery
+- Seeded smell (label it yourself): if path==/webhook: process
+- Seeded smell (label it yourself): JSON parsed before MAC
+- Seeded smell (label it yourself): No missing-sig test
+- Seeded smell (label it yourself): Secret in query (4.3)
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
 
-## Framework defaults vs application guarantees
+## Misconceptions
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+- TLS to us proves the sender
+- IP allowlist is authenticity
+- Webhooks are just APIs in reverse so JWT login applies
 
 ## Practice
 
-Run `labs/7.3/7.3-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
-
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Signed redirects; outbound webhook SSRF (6.5).

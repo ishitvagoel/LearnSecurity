@@ -1,45 +1,40 @@
 # E1 — AI, LLM, and agentic application security (6 Operate)
 
-**Kind:** operations-exercise
-**Loop step:** 6 Operate
-**Standards:** Elective E1; treat vendor AI-security features as mechanisms. Draft eval methods stay draft if cited.
+**Kind:** operations-exercise  
+**Loop step:** 6 Operate  
+**Standards:** OWASP GenAI LLM Top 10 2026 (awareness, not syllabus); NIST AI RMF GenAI Profile (guidance); this lab’s cell is tool authority.
 
 ## Property (start here)
 
-The lab agent may only invoke allowlisted tools. A model-proposed exec_sql is not authorization. OWASP LLM lists are awareness, not this syllabus.
+The lab agent may only invoke allowlisted tools. A model-proposed exec_sql is not authorization. The model is an untrusted client (8.1) that speaks English.
 
 ## Attacker capabilities and trust assumptions
 
-Prompt that asks the model to call exec_sql. Trust: local tool router. No live model vendor.
+- **Attacker:** Prompt injection in a note body; malicious retrieved doc.
+- **Trust:** Local run_tool(name).
+Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
 
-## This step
+| Outcome | This module |
+|---|---|
+| Detect | denied_tool. |
+| Signal (no bodies) | tool_denied{exec_sql}. |
+| Revoke / recover | Revoke agent creds (7.4). |
+| Residual | Hallucinated packages (10.2) in copilot use. |
 
-Detect without logging note bodies or tokens. Recover fail-safe (revoke, rotate, quarantine). If a human must act, the path must be usable (WCAG 2.2).
-
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
 
 ## Practice
 
-Run `labs/E1/e1-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/E1/e1-lab`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Copilot in CI.
+
+## Usability
+
+Human approval UI for tools must be accessible; otherwise operators auto-approve.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+SIEM product names are not the property. Keys stay out of lessons.

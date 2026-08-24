@@ -1,45 +1,53 @@
 # 6.2 — Browser injection and active content (2 Model)
 
-**Kind:** design-exercise
-**Loop step:** 2 Model
-**Standards:** ASVS 5.0.0 V5; CSP3 WD (label **draft**); 2.3 browser cells.
+**Kind:** design-exercise  
+**Loop step:** 2 Model  
+**Standards:** ASVS 5.0.0 V3 (final); CWE-79 as name; CSP3 / Trusted Types are layered and some docs are still CR — do not claim they replace encoding.
 
 ## Property (start here)
 
-Note HTML encoding must treat '<' as data. CSP3 (Working Draft) is not a substitute for encoding.
+Angle brackets in a note title must be encoded in HTML context (`&lt;`) so the browser does not parse an extra element. Encoding is context-specific; CSP is not this cell.
 
 ## Attacker capabilities and trust assumptions
 
-Member who types markup into a note. Trust: local encoder. No live XSS campaign.
+- **Attacker:** Collaborator who can edit a title; stored XSS later in another tenant’s view.
+- **Trust:** Local render(). Real DOM sinks in 2.3.
+Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
 
-## This step
+| Piece | This system |
+|---|---|
+| Subjects | renderer, browser HTML parser, peer user |
+| Objects | title string, HTML output |
+| Actions | render |
+| Channels | HTML body |
+| TCB | Context-aware encoder for HTML text. |
+| Untrusted | Note title, display name |
+| State / time | Stored now, viewed later by owner. |
+| 1.1 cell | Integrity of the HTML interpreter; confidentiality of sessions if combined with 2.3 fail. |
 
-Name principals, objects, and channels. Open design: the client, APK, or prompt is hostile. Secrecy of the check is not the property.
+## Authority matrix (minimum)
 
-## Root cause / impact / prevention / detection / recovery
+| Subject | Object | Action | Decision |
+|---|---|---|---|
+| peer | title | store | allow-data |
+| browser | title | as-HTML | encoded |
+| CSP | script | block | layer-not-property |
+| admin | raw HTML | render | non-goal-or-tiny-exception |
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
 
 ## Practice
 
-Run `labs/6.2/6.2-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/6.2/6.2-lab` file `html.py`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Markdown-to-HTML sanitizer as a second parser (2.1).
+
+## Residual risk
+
+Trusted admin HTML — explicit tiny exception.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.

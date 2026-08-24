@@ -1,45 +1,54 @@
 # 6.5 — Server-side requests and protocol parsing (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** ASVS 5.0.0 V10 SSRF (chapter-level).
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** ASVS 5.0.0 V10 (final); API7 awareness; URL is untrusted *structure* (2.1).
 
 ## Property (start here)
 
-Server-side fetch allowlists lab.securecollab.test only. Link-local metadata IPs are out of scope.
+The lab fetcher must not allow http://169.254.169.254/ (link-local metadata). SSRF is a trust-boundary fail: the server’s network is not the user’s to steer. HTTPS to a named lab host may be allowed.
 
 ## Attacker capabilities and trust assumptions
 
-Member who pastes a URL for a preview. Trust: URL parser, no real HTTP.
+- **Attacker:** User who supplies an unfurl/preview URL.
+- **Trust:** Local allowed(url). No real cloud metadata in this VM lesson — we assert the deny.
+link-local False; lab https host True.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+from urllib.parse import urlparse
+ALLOW={'lab.securecollab.test'}
+def allowed(url):
+    u=urlparse(url)
+    host=(u.hostname or '').lower()
+    if host in {'169.254.169.254','127.0.0.1','localhost'}:
+        return False
+    return u.scheme=='https' and host in ALLOW
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Allow-list; parse then pin; block link-local, loopback, metadata; no open redirects.
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+requests.get is not an allow-list.
+
+DNS rebinding after allow — pin IP or block.
 
 ## Practice
 
-Run `labs/6.5/6.5-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Webhook delivery (7.3) is egress too.
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Legitimate preview of customer URLs — dedicated egress proxy.

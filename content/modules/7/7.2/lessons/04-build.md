@@ -1,45 +1,50 @@
 # 7.2 — Object, property, and function security (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** ASVS V4/V8 chapter-level.
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** ASVS 5.0.0 V4 (final); API1/3/5 awareness after 1.2/4.4.
 
 ## Property (start here)
 
-GraphQL-style note.secret_internal is not visible to members. Field-level authorization, not 'hidden in UI'.
+A member must not resolve secret_internal. Function/property authorization is not “they can call GET /notes.” Identifiers locate; they do not authorize.
 
 ## Attacker capabilities and trust assumptions
 
-Member who asks for extra fields. Trust: local resolver.
+- **Attacker:** Member using GraphQL __typename or REST ?fields=.
+- **Trust:** Local resolve(role, field).
+member × secret_internal False.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+def resolve(role, field):
+    if field=='secret_internal':
+        return role=='service'
+    return True
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Allow-list fields by role; never bind authz to the id format.
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+SQLAlchemy to_dict() is not a policy.
+
+Hiding fields in UI only.
 
 ## Practice
 
-Run `labs/7.2/7.2-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Bulk update; search highlighting leaking snippets.
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Admin sees secret_internal — audited.

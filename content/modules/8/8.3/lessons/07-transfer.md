@@ -1,45 +1,33 @@
-# 8.3 — Network, deep links, WebViews, and inter-app communication (7 Generalize)
+# 8.3 — Network, deep links, WebViews, IPC (7 Transfer)
 
-**Kind:** transfer-challenge
-**Loop step:** 7 Generalize
-**Standards:** MASVS 2.1 platform interaction; 2.3/6.3 web origins are a different channel.
+**Kind:** transfer-challenge  
+**Loop step:** 7 Transfer  
+**Standards:** MASVS 2.1 PLATFORM/NETWORK/AUTH (final); RFC 8252. Exported components are attack surface.
 
 ## Property (start here)
 
-A deep link query as= must not switch the signed-in principal. Exported activities are an attack surface; the session is the identity.
+A deep link query as=admin must not switch the signed-in principal. The session is identity; the Intent is untrusted input.
 
 ## Attacker capabilities and trust assumptions
 
-Another app sending securecollab://notes?as=admin. Trust: local session dict. No real IPC.
+- **Attacker:** Malicious app sending an Intent; crafted https link.
+- **Trust:** Local open_link / current_user.
+Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
 
-## This step
+**Prompt:** OAuth redirect to app (4.5).
 
-Keep the property; change one channel (worker, WebView, CSV, CI). Do not answer with a Top 10 name. Label drafts draft.
+**Product sketch:** Clinic: deep link as=doctor.
 
-## Root cause / impact / prevention / detection / recovery
+Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## What graders reject
 
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+| Reject | Why |
+|---|---|
+| Tool or awareness-list name as the property | 1.1 |
+| Framework default as the guarantee | exported=true defaults on old Android.… |
+| Live-target plan | Lab policy |
 
 ## Practice
 
-Run `labs/8.3/8.3-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
-
-## Transfer
-
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
-
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+One page. No keys. The lab `labs/8.3/8.3-lab` stays the only running system you may break.

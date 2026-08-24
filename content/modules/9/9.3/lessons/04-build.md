@@ -1,45 +1,48 @@
 # 9.3 — Security-focused tests (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** ASVS verification; pytest is a mechanism.
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** ASVS/WSTG/MASTG as catalogs of *what* to test; this lab’s cell is the shape of a security test.
 
 ## Property (start here)
 
-A test that only asserts status 200 is not a security test. Security tests name a forbidden outcome (1.1 / 4.4).
+A test that only asserts HTTP 200 is not a security test. Security tests name a forbidden outcome (1.1 / 4.4).
 
 ## Attacker capabilities and trust assumptions
 
-CI green theater. Trust: local metadata about tests.
+- **Attacker:** False confidence.
+- **Trust:** Local is_security_test(spec).
+status-only is not a security test.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+def is_security_test(t):
+    return bool(t.get('forbidden_outcome'))
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Require forbidden-outcome asserts.
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+pytest-cov 90% is not 1.2.
+
+Property tests still need oracles.
 
 ## Practice
 
-Run `labs/9.3/9.3-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Fuzzing without an oracle.
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Exploratory testing (9.5).

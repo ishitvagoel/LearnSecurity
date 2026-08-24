@@ -1,45 +1,36 @@
 # 6.1 — Interpreter confusion and injection (6 Operate)
 
-**Kind:** operations-exercise
-**Loop step:** 6 Operate
-**Standards:** ASVS 5.0.0 V5 (chapter-level).
+**Kind:** operations-exercise  
+**Loop step:** 6 Operate  
+**Standards:** ASVS 5.0.0 V5 (final); CWE-77/78/89 as *names after* the cause; OWASP Top 10:2025 A05 as regression awareness.
 
 ## Property (start here)
 
-A filename argument is data, not a shell program. The lab uses argv lists, not bash -c.
+A filename or list target is data, not a shell program. argv_for_list must not invoke a shell. Structural APIs (argv list, parameterized SQL in 5.5) are the mechanism; denylists of metacharacters are incomplete.
 
 ## Attacker capabilities and trust assumptions
 
-Member uploading a name. Trust: local argv builder. No network.
+- **Attacker:** User who chooses a note/export name; a compromised client.
+- **Trust:** Local argv.py. No live OS attack — the test only checks argv shape.
+Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
 
-## This step
+| Outcome | This module |
+|---|---|
+| Detect | Unexpected child processes. |
+| Signal (no bodies) | child_process_anomaly. |
+| Revoke / recover | Kill; rotate host if it left the lab (it must not). |
+| Residual | Needed shell for a plugin — isolate that binary. |
 
-Detect without logging note bodies or tokens. Recover fail-safe (revoke, rotate, quarantine). If a human must act, the path must be usable (WCAG 2.2).
-
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
 
 ## Practice
 
-Run `labs/6.1/6.1-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/6.1/6.1-lab`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Jinja, SQL, mail headers.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+SIEM product names are not the property. Keys stay out of lessons.

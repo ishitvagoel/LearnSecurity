@@ -1,45 +1,51 @@
 # 5.3 — Key and secret lifecycle (3 Break)
 
-**Kind:** mechanism-lab
-**Loop step:** 3 Break
-**Standards:** ASVS 5.0.0 V13 secrets (chapter-level).
+**Kind:** mechanism-lab  
+**Loop step:** 3 Break  
+**Standards:** ASVS 5.0.0 V11/V13 (final); OWASP secrets guidance; NIST PQC standards are for *agility planning*, not a lab quantum attack.
 
 ## Property (start here)
 
-A disposable lab API key must not be a hardcoded default that always authenticates. Rotation means the old value fails.
+A disposable lab API key that is a hardcoded default must not authenticate after rotation. The old value fails. Inventory + rotation is the property, not “we have a secrets manager” as a sticker.
 
 ## Attacker capabilities and trust assumptions
 
-Repo clone containing the default. Trust: local string compare.
+- **Attacker:** Anyone who cloned the repo or an old container image with sk-lab-hardcoded.
+- **Trust:** Local auth(current). Real KMS later.
+**Forbidden outcome:** Hardcoded default API key still authenticates after rotation
 
-## This step
+**Authorized scope:** `labs/5.3/5.3-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
 
-The authorized break is the local vulnerable/ fixture. No live targets, no weaponized copy-paste exploits, no public CDN to attack.
+## What to observe
 
-## Root cause / impact / prevention / detection / recovery
+vulnerable secrets.py still honors the default.
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: auth(hardcoded) True while current is rotated-now.
 
-## Framework defaults vs application guarantees
+## Vulnerable fixture (local)
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+```python
+DEFAULT='sk-lab-hardcoded'
+def auth(presented, current=None):
+    return presented == DEFAULT or presented == current
+```
 
-## Residual risk
+## Root cause vs impact
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+| Slice | Lab |
+|---|---|
+| Root cause | Default credential never invalidated. |
+| Impact | Silent backdoor equal to production admin if copied. |
+| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
 
 ## Practice
 
-Run `labs/5.3/5.3-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/5.3/5.3-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Envelope encryption DEK vs KEK; compromise runbook.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+No live-target instructions. Synthetic data only.

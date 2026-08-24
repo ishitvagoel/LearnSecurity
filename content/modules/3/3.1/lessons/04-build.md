@@ -1,37 +1,48 @@
-# 3.1 — Assets, data classification, and security requirements (4 Build)
+# 3.1 — Assets, classification, and security requirements (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** NIST CSF 2.0 (final) Identify; ASVS 5.0.0 V14 data protection (chapter-level).
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** NIST CSF 2.0 Identify (final); ASVS 5.0.0 V14 (final); NIST Privacy Framework 1.0 (final). Classification is a property of a *field*, not a spreadsheet sticker.
 
 ## Property (start here)
 
-Note **bodies** are Confidential; they must not appear in application logs. Classification is a property of the field, not a spreadsheet label.
+Note bodies are Confidential. An application log line for note_read must not contain the body. Labels in Confluence do not enforce this.
 
 ## Attacker capabilities and trust assumptions
 
-Operator who can read logs; another tenant's admin; a support engineer. Trust: lab log sink is local.
+- **Attacker:** Operator with log access; SIEM vendor; another tenant’s admin who can read shared observability.
+- **Trust:** Local log sink. Real ELK is another TCB later (10.5).
+log_event redacts body to 'redacted'/'confidential'.
 
-## Root cause / impact / prevention / detection / recovery
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Fixed fixture (local)
 
-## Framework defaults vs application guarantees
+```python
+def log_event(event: str, note_body: str) -> str:
+    return f"{event}: [redacted-confidential]"
+```
 
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+## Why this restores the cell
+
+Structured logs with allow-listed fields; redact bodies.
+
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+
+## What this is not
+
+uvicorn access logs will happily store query strings (4.3). FastAPI does not know Confidential.
+
+Regex redaction misses encodings (2.1).
 
 ## Practice
 
-State the structural fix (not a denylist of one user).
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
+Clinic notes vs appointment time: two classes, two sinks.
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+Operators still see metadata (ids). That’s a different cell — document it.

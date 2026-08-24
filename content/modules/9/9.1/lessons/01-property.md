@@ -1,45 +1,58 @@
 # 9.1 — Verification requirements and traceability (1 Property)
 
-**Kind:** concept-model
-**Loop step:** 1 Property
-**Standards:** ASVS 5.0.0 as verification requirements; CSF 2.0 outcomes are labels, not coverage.
+**Kind:** concept-model  
+**Loop step:** 1 Property  
+**Standards:** ASVS 5.0.0 (final) as the web/API backbone; MASVS 2.1 for mobile; a spreadsheet row is not coverage.
 
 ## Property (start here)
 
-A requirement id is covered only if a test asserts the isolation property, not if a spreadsheet row exists.
+A requirements row that only stores status=done without a test asserting isolation does not cover AUTHZ-1. Traceability is threat → requirement → test → result.
 
 ## Attacker capabilities and trust assumptions
 
-Process attacker: shipping with paper coverage. Trust: local list of tests.
+- **Attacker:** Optimistic PM; empty CI.
+- **Trust:** Local covered(req, tests).
+**Mechanism (not the property):** ASVS PDF is not your matrix.
 
-## This step
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Start from this system's testable sentence, not a topic title. A mechanism (TLS, MASVS control, scanner, CSP) is not the invariant.
+## Root cause vs impact vs prevention vs detection vs recovery
 
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+| Slice | For 9.1 |
+|---|---|
+| Root cause | Status without evidence. |
+| Preconditions | covered True when asserts_isolation False. |
+| Impact (1.1 cell) | Integrity of the assurance case. — Ship 1.2 holes with a green gate. |
+| Prevention | Coverage predicate requires the isolation assert. |
+| Detection | CI: every L2 req maps a test id. |
+| Recovery | Add tests; do not backfill “done.” |
 
 ## Framework defaults vs application guarantees
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+ASVS PDF is not your matrix.
+
+## Mechanism limits and bypasses
+
+Level 2 tailored — say what you dropped (E6).
+
+Test named test_authz that asserts 200.
 
 ## Residual risk
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+Unmapped Level 3 risks.
 
 ## Practice
 
-Run `labs/9.1/9.1-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+One chain for AUTHZ-1.
+
+Run `labs/9.1/9.1-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+MASVS STORAGE for 8.2.
+
+Clinic: HIPAA “done” column.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.

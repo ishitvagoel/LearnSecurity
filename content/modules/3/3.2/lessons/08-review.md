@@ -1,37 +1,40 @@
 # 3.2 — Threat modeling (Review)
 
-**Kind:** code-review
-**Loop step:** Review
-**Standards:** OWASP Threat Modeling (maintained, final guidance) Four Questions; not a single tool.
+**Kind:** code-review  
+**Loop step:** Review  
+**Standards:** OWASP Threat Modeling (project); NIST SP 800-154 remains **draft/withdrawn-track** — treat as informative only; ASVS 5.0.0 as later requirements, not a model.
 
 ## Property (start here)
 
-A green scanner does **not** mean 'no threats.' SecureCollab threat model must still list a cross-tenant reader and a hostile Next.js client.
+A green scanner does not yield an empty threat list. SecureCollab’s model must still include a cross-tenant reader and a hostile Next.js client.
 
 ## Attacker capabilities and trust assumptions
 
-Modeler who substitutes scanner output for Shostack questions. Trust: none in the scanner as TCB.
+- **Attacker:** Cross-tenant member; hostile browser; future worker identity (named now as a trigger).
+- **Trust:** Local threats_from_scan fixture. Real scanners are coverage tools (9.4), not oracles.
+Review `labs/3.2/3.2-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/3.2.md` — not here.
 
-## Root cause / impact / prevention / detection / recovery
+## What to label
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-## Framework defaults vs application guarantees
+- Seeded smell (label it yourself): threats = [] if scan_green
+- Seeded smell (label it yourself): No cross-tenant-read item
+- Seeded smell (label it yourself): Model not in git
+- Seeded smell (label it yourself): STRIDE letters without assets
 
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+
+## Misconceptions
+
+- Green scan means no threats
+- Threat models are pre-code only
+- Awareness lists are the threat list
 
 ## Practice
 
-Review the vulnerable tree; keys are not in this file.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
-
-## Non-goals
-
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+Add webhooks (7.3): which new threats?

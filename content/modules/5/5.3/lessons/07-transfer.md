@@ -1,45 +1,33 @@
-# 5.3 — Key and secret lifecycle (7 Generalize)
+# 5.3 — Key and secret lifecycle (7 Transfer)
 
-**Kind:** transfer-challenge
-**Loop step:** 7 Generalize
-**Standards:** ASVS 5.0.0 V13 secrets (chapter-level).
+**Kind:** transfer-challenge  
+**Loop step:** 7 Transfer  
+**Standards:** ASVS 5.0.0 V11/V13 (final); OWASP secrets guidance; NIST PQC standards are for *agility planning*, not a lab quantum attack.
 
 ## Property (start here)
 
-A disposable lab API key must not be a hardcoded default that always authenticates. Rotation means the old value fails.
+A disposable lab API key that is a hardcoded default must not authenticate after rotation. The old value fails. Inventory + rotation is the property, not “we have a secrets manager” as a sticker.
 
 ## Attacker capabilities and trust assumptions
 
-Repo clone containing the default. Trust: local string compare.
+- **Attacker:** Anyone who cloned the repo or an old container image with sk-lab-hardcoded.
+- **Trust:** Local auth(current). Real KMS later.
+Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
 
-## This step
+**Prompt:** Envelope encryption DEK vs KEK; compromise runbook.
 
-Keep the property; change one channel (worker, WebView, CSV, CI). Do not answer with a Top 10 name. Label drafts draft.
+**Product sketch:** Clinic lab API key in a GitHub gist.
 
-## Root cause / impact / prevention / detection / recovery
+Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## What graders reject
 
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+| Reject | Why |
+|---|---|
+| Tool or awareness-list name as the property | 1.1 |
+| Framework default as the guarantee | pydantic Settings reading .env does not rotate anything.… |
+| Live-target plan | Lab policy |
 
 ## Practice
 
-Run `labs/5.3/5.3-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
-
-## Transfer
-
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
-
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+One page. No keys. The lab `labs/5.3/5.3-lab` stays the only running system you may break.

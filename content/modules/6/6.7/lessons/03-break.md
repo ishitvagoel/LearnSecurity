@@ -1,45 +1,50 @@
 # 6.7 — Resource abuse, automation, and availability (3 Break)
 
-**Kind:** mechanism-lab
-**Loop step:** 3 Break
-**Standards:** ASVS V13 rate (chapter-level).
+**Kind:** mechanism-lab  
+**Loop step:** 3 Break  
+**Standards:** ASVS 5.0.0 V1/V11 (final); API4/API6 awareness. Fairness is a security cell (availability + cost).
 
 ## Property (start here)
 
-Export API allows at most 3 calls per principal per window. Availability is a 1.1 cell, not 'buy a bigger box'.
+The fourth export in the lab window is denied. Unbounded exports exhaust budget and leak extra copies (5.1).
 
 ## Attacker capabilities and trust assumptions
 
-Automated exporter. Trust: local counter.
+- **Attacker:** Scripted member; compromised session.
+- **Trust:** Local allow(n).
+**Forbidden outcome:** Unbounded exports (4th allowed in the lab window)
 
-## This step
+**Authorized scope:** `labs/6.7/6.7-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
 
-The authorized break is the local vulnerable/ fixture. No live targets, no weaponized copy-paste exploits, no public CDN to attack.
+## What to observe
 
-## Root cause / impact / prevention / detection / recovery
+vulnerable limit.py unbounded.
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: allow(4) True.
 
-## Framework defaults vs application guarantees
+## Vulnerable fixture (local)
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+```python
+def allow(n_calls):
+    return True
+```
 
-## Residual risk
+## Root cause vs impact
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+| Slice | Lab |
+|---|---|
+| Root cause | No resource account. |
+| Impact | Cost/DoS; extra CSV copies of bodies. |
+| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
 
 ## Practice
 
-Run `labs/6.7/6.7-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/6.7/6.7-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Notification fan-out; search complexity.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+No live-target instructions. Synthetic data only.

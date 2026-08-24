@@ -1,45 +1,54 @@
 # 6.6 — Workflow, race, and exceptional-condition failures (3 Break)
 
-**Kind:** mechanism-lab
-**Loop step:** 3 Break
-**Standards:** ASVS business logic; Top 10 A10:2025 awareness only.
+**Kind:** mechanism-lab  
+**Loop step:** 3 Break  
+**Standards:** ASVS 5.0.0 V2 (final); Top 10:2025 A10 awareness. State machines fail open or double-fire.
 
 ## Property (start here)
 
-An invite token cannot be accepted twice. Exceptional retry is not a second membership (ties 2.4).
+An invite token must be single-use. The second accept('t1') is denied. TOCTOU and retries (2.4) are the same family.
 
 ## Attacker capabilities and trust assumptions
 
-Two accepts of the same token. Trust: local set.
+- **Attacker:** Two tabs; an attacker who copied the token from email logs.
+- **Trust:** Local accept().
+**Forbidden outcome:** Invite token accepted twice
 
-## This step
+**Authorized scope:** `labs/6.6/6.6-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
 
-The authorized break is the local vulnerable/ fixture. No live targets, no weaponized copy-paste exploits, no public CDN to attack.
+## What to observe
 
-## Root cause / impact / prevention / detection / recovery
+vulnerable invite.py allows replay.
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: second accept True.
 
-## Framework defaults vs application guarantees
+## Vulnerable fixture (local)
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+```python
+_used=False
+def reset():
+    global _used
+    _used=False
+def accept(token):
+    return True
+```
 
-## Residual risk
+## Root cause vs impact
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+| Slice | Lab |
+|---|---|
+| Root cause | Non-atomic check-then-set; token not marked used. |
+| Impact | Extra member or replay after revoke. |
+| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
 
 ## Practice
 
-Run `labs/6.6/6.6-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/6.6/6.6-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Password reset; 2.4 share retry; 7.4 jobs.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+No live-target instructions. Synthetic data only.

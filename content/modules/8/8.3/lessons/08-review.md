@@ -1,45 +1,44 @@
-# 8.3 — Network, deep links, WebViews, and inter-app communication (Review)
+# 8.3 — Network, deep links, WebViews, IPC (Review)
 
-**Kind:** code-review
-**Loop step:** Review
-**Standards:** MASVS 2.1 platform interaction; 2.3/6.3 web origins are a different channel.
+**Kind:** code-review  
+**Loop step:** Review  
+**Standards:** MASVS 2.1 PLATFORM/NETWORK/AUTH (final); RFC 8252. Exported components are attack surface.
 
 ## Property (start here)
 
-A deep link query as= must not switch the signed-in principal. Exported activities are an attack surface; the session is the identity.
+A deep link query as=admin must not switch the signed-in principal. The session is identity; the Intent is untrusted input.
 
 ## Attacker capabilities and trust assumptions
 
-Another app sending securecollab://notes?as=admin. Trust: local session dict. No real IPC.
+- **Attacker:** Malicious app sending an Intent; crafted https link.
+- **Trust:** Local open_link / current_user.
+Review `labs/8.3/8.3-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/8.3.md` — not here.
 
-## This step
+## What to label
 
-Review the diff as a SecureCollab PR. Reject client trust, interpreter concatenation, Report-Only as enforcement, and closing findings without retest. Keys stay out of lessons.
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-## Root cause / impact / prevention / detection / recovery
+- Seeded smell (label it yourself): current_user = extras['as']
+- Seeded smell (label it yourself): exported Activity without permission
+- Seeded smell (label it yourself): WebView addJavascriptInterface too wide
+- Seeded smell (label it yourself): No as= test
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
 
-## Framework defaults vs application guarantees
+## Misconceptions
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+- https App Links are trusted input
+- WebView is just Chrome so 2.3 applies unchanged
+- IPC is private to our app
 
 ## Practice
 
-Run `labs/8.3/8.3-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+OAuth redirect to app (4.5).
 
-## Non-goals
+## HITL / WCAG 2.2
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Deep-link errors should not trap users in a broken WebView without a keyboard-accessible exit.

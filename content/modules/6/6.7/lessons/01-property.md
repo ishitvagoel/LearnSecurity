@@ -1,45 +1,62 @@
 # 6.7 — Resource abuse, automation, and availability (1 Property)
 
-**Kind:** concept-model
-**Loop step:** 1 Property
-**Standards:** ASVS V13 rate (chapter-level).
+**Kind:** concept-model  
+**Loop step:** 1 Property  
+**Standards:** ASVS 5.0.0 V1/V11 (final); API4/API6 awareness. Fairness is a security cell (availability + cost).
 
 ## Property (start here)
 
-Export API allows at most 3 calls per principal per window. Availability is a 1.1 cell, not 'buy a bigger box'.
+The fourth export in the lab window is denied. Unbounded exports exhaust budget and leak extra copies (5.1).
 
 ## Attacker capabilities and trust assumptions
 
-Automated exporter. Trust: local counter.
+- **Attacker:** Scripted member; compromised session.
+- **Trust:** Local allow(n).
+**Mechanism (not the property):** nginx rate limit without identity is shared-fate.
 
-## This step
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Start from this system's testable sentence, not a topic title. A mechanism (TLS, MASVS control, scanner, CSP) is not the invariant.
+## Root cause vs impact vs prevention vs detection vs recovery
 
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+| Slice | For 6.7 |
+|---|---|
+| Root cause | No resource account. |
+| Preconditions | allow(4) True. |
+| Impact (1.1 cell) | Availability and cost; secondary confidentiality via extra copies. — Cost/DoS; extra CSV copies of bodies. |
+| Prevention | Quota + authz + maybe queue. |
+| Detection | export_denied_quota. |
+| Recovery | Disable token; bill anomaly. |
 
 ## Framework defaults vs application guarantees
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+nginx rate limit without identity is shared-fate.
+
+## Mechanism limits and bypasses
+
+Per-IP limits punish NAT; need per-subject.
+
+New accounts; GraphQL aliases (7.1).
 
 ## Residual risk
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+Legitimate burst — owned exception.
 
 ## Practice
 
-Run `labs/6.7/6.7-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Budget: CPU, bytes, paid API calls.
+
+Run `labs/6.7/6.7-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Notification fan-out; search complexity.
+
+Clinic bulk-export patients.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.
+
+## Usability and accessibility
+
+Quota errors must be readable; do not trap keyboard users in a spinner that retries (amplifying load).

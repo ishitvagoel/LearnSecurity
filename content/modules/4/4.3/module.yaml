@@ -44,7 +44,7 @@ learningObjects:
   path: lessons/02-model.md
 - id: 4.3-LO-03
   kind: mechanism-lab
-  title: Local fixture illustrating 4.3 failure (authorized only)
+  title: 'Local fixture: Session established from a query-string token'
   path: lessons/03-break.md
 - id: 4.3-LO-04
   kind: design-exercise
@@ -60,17 +60,19 @@ learningObjects:
   path: lessons/06-operate.md
 - id: 4.3-LO-07
   kind: transfer-challenge
-  title: Novel variation of 4.3
+  title: 'Transfer: Clinic appointment deep link.'
   path: lessons/07-transfer.md
 - id: 4.3-LO-08
   kind: code-review
-  title: Seeded diff for 4.3
+  title: Seeded review for 4.3
   path: lessons/08-review.md
 labSpec:
-  authorizedScope: Local course fixture or official training lab only
+  authorizedScope: Local course fixture or official training lab only; no public or
+    third-party targets
   slug: 4.3-lab
-  summary: 'Pass A brief only: Session protocol/state diagram and theft/replay tests'
+  summary: Session established from a query-string token
   forbiddenOutcomes:
+  - Session established from a query-string token
   - Live-target instructions
   - Real PII or production secrets
   - Awareness list used as the syllabus
@@ -97,23 +99,28 @@ standardsRefs:
   - V9
   url: https://owasp.org/www-project-application-security-verification-standard/
 misconceptions:
-- Sessions, cookies, and tokens is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
+- JWT is more secure than sessions
+- Query strings are private over HTTPS
+- Logout clears stolen tokens automatically
 operationalConsiderations:
-- Pair prevention with detection/recovery where prevention is not absolute
+- query_token_rejected; log-redact gateway.
+- Referer on first-party navigations — strip on outbound.
 author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (4.3 deepen); lab-safety-reviewer (local structural fixture)
-lastReviewedAt: '2026-08-23'
-nextReviewAt: '2027-02-23'
+reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+lastReviewedAt: '2026-08-24'
+nextReviewAt: '2027-02-24'
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map
 - date: '2026-08-23'
-  note: 'Pass A quality-gate: spec completeness competent; expand in a later revision if thin'
+  note: 'Pass A quality-gate: spec completeness competent; expand in a later revision
+    if thin'
 - date: '2026-08-23'
   note: Pass B lessons and authorized local lab
 - date: '2026-08-23'
   note: Pass C rubric and examiner keys; quality-gate recorded
 - date: '2026-08-23'
   note: 'Deepen: 1.1-density lessons; structural local lab; quality-gate recorded'
+- date: '2026-08-24'
+  note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
+    Pass C keys isolated'

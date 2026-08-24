@@ -1,45 +1,40 @@
-# 11 — Integrating capstone — SecureCollab (6 Operate)
+# 11 — Capstone: SecureCollab integration (6 Operate)
 
-**Kind:** operations-exercise
-**Loop step:** 6 Operate
-**Standards:** Blueprint capstone evidence pack; ASVS L2 as claim language, not a certificate.
+**Kind:** operations-exercise  
+**Loop step:** 6 Operate  
+**Standards:** All prior pinned standards as applicable; no new “capstone-only” standard. Gates 0–10 stay not-attempted without learner evidence.
 
 ## Property (start here)
 
-After a share is revoked, tenant B must not read tenant A's note. Capstone integrates 1.2 mediation over time (2.4) — not a new slogan YAML.
+After a share is revoked, tenant B must not read tenant A’s note. The capstone stitches 1.2 mediation over time (2.4, 4.1, 4.4) — not a new slogan YAML.
 
 ## Attacker capabilities and trust assumptions
 
-Tenant B after revoke. Trust: local notes/grants. No production app required for this fixture.
+- **Attacker:** Former collaborator with a cached id; delayed worker (7.4).
+- **Trust:** Local share map.
+Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
 
-## This step
+| Outcome | This module |
+|---|---|
+| Detect | read_after_revoke. |
+| Signal (no bodies) | revoked_share_read_denied. |
+| Revoke / recover | Notify A; rotate links. |
+| Residual | Honest copies already made — policy + detect. |
 
-Detect without logging note bodies or tokens. Recover fail-safe (revoke, rotate, quarantine). If a human must act, the path must be usable (WCAG 2.2).
-
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-Gates 0–10 and M0–M5 stay not-attempted until a product tree and learner evidence exist. Share/revoke UX must be operable (WCAG 2.2).
+CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
 
 ## Practice
 
-Run `labs/11/11-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/11/11-lab`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Clinic: revoke a guardian.
+
+## Usability
+
+Revoke UX must be completable (1.4) or people will not revoke.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+SIEM product names are not the property. Keys stay out of lessons.

@@ -1,37 +1,40 @@
-# 4.1 — Digital identity and account lifecycle (6 Operate)
+# 4.1 — Identity lifecycle (6 Operate)
 
-**Kind:** operations-exercise
-**Loop step:** 6 Operate
-**Standards:** NIST SP 800-63-4 (final) lifecycle/CX; not a password-complexity checklist.
+**Kind:** operations-exercise  
+**Loop step:** 6 Operate  
+**Standards:** NIST SP 800-63-4 (final) identity lifecycle; ASVS 5.0.0 V6 (final). Deprovision is part of 1.2 over time.
 
 ## Property (start here)
 
-A **deleted** SecureCollab user must not read notes with a leftover session. Lifecycle is part of 1.2 mediation over time.
+After an account is deleted, that subject’s leftover session must not read notes. Lifecycle is complete mediation across account states, not a login screen.
 
 ## Attacker capabilities and trust assumptions
 
-Stolen cookie after self-delete or admin disable. Trust: lab session store.
+- **Attacker:** Stolen session cookie after the user left the org; a delayed worker using the old user id.
+- **Trust:** Local user+session maps. Real IdP SLO is extra (4.5).
+Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
 
-## Root cause / impact / prevention / detection / recovery
+| Outcome | This module |
+|---|---|
+| Detect | Use of session after user_state=deleted. |
+| Signal (no bodies) | session_after_delete; offboarding checklist in 10.1. |
+| Revoke / recover | Mass revoke; rotate signing keys if tokens self-verify. |
+| Residual | Backups still contain the user row — 5.1. |
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
 
 ## Practice
 
-What is logged without sensitive bodies/secrets?
+Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/4.1/4.1-lab`.
 
 ## Transfer
 
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
+Contractor access end-date; support impersonation tickets.
+
+## Usability
+
+Offboarding confirmation must be accessible (1.4). A mouse-only “delete user” is a missed revoke.
 
 ## Non-goals
 
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+SIEM product names are not the property. Keys stay out of lessons.

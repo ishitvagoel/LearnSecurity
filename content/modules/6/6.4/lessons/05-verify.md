@@ -1,45 +1,38 @@
-# 6.4 — Files, paths, uploads, archives, XML, and deserialization (5 Verify)
+# 6.4 — Files, paths, uploads, archives, XML, deserialization (5 Verify)
 
-**Kind:** verification-lab
-**Loop step:** 5 Verify
-**Standards:** ASVS 5.0.0 V12 file (chapter-level).
+**Kind:** verification-lab  
+**Loop step:** 5 Verify  
+**Standards:** ASVS 5.0.0 V12 (final); CWE-22/434/502 as names after the path/interpreter cause.
 
 ## Property (start here)
 
-Upload names cannot escape the lab root via .. segments. Local path join only.
+A user-supplied path must not resolve outside the lab root. `../etc/passwd` is data that tried to become a different object. This is not a weaponized exploit lesson — we assert prefix.
 
 ## Attacker capabilities and trust assumptions
 
-Uploader choosing a name. Trust: sandbox dir.
+- **Attacker:** Uploader or filename field attacker.
+- **Trust:** Local resolve() under /tmp/sc-lab.
+An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
 
-## This step
+| Case | Must show |
+|---|---|
+| Normal | Honest allowed action still works where the product says so |
+| Negative / abuse | Resolved path escapes the lab root |
+| Failure | Fail closed: Join + canonicalize + prefix; random stored names; never execute uploads |
 
-pytest --impl vulnerable must fail; --impl fixed must pass. A test that only checks HTTP 200 is not a security test.
+Lab tests: `test_property.py` under `labs/6.4/6.4-lab`.
 
-## Root cause / impact / prevention / detection / recovery
+- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Resolved path escapes the lab root`
+- `--impl fixed`: **pass**
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+.. does not escape.
 
 ## Practice
 
-Run `labs/6.4/6.4-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+XML entity expansion; pickle; YAML load.
 
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).

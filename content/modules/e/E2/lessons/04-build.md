@@ -1,45 +1,48 @@
 # E2 — Advanced browser and edge security (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** CSP3 WD (**draft**); Trusted Types WD (**draft**). 2.3 browser cells still apply.
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** W3C CSP3 (CR — label draft/CR); Fetch Metadata; this lab’s cell is enforcement vs report-only.
 
 ## Property (start here)
 
-Content-Security-Policy-Report-Only is not enforcement. CSP3 remains a Working Draft — label it draft.
+Content-Security-Policy-Report-Only is not enforcement. Isolation is not “we set a header.”
 
 ## Attacker capabilities and trust assumptions
 
-Injected active content in the model. Trust: local header dict. No live XSS campaign.
+- **Attacker:** XSS that would be blocked only if CSP were enforcing.
+- **Trust:** Local isolation_enforced(headers).
+Report-Only => False.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+def isolation_enforced(headers):
+    return 'Content-Security-Policy' in headers
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Detect enforcing header; don’t claim isolation otherwise.
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+Helmet defaults may be report-only in some templates.
+
+CSP does not replace encoding (6.2) or CSRF (6.3).
 
 ## Practice
 
-Run `labs/E2/e2-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Trusted Types, COOP/COEP.
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+XS-Leaks — named as elective depth.

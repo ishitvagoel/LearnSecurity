@@ -1,45 +1,53 @@
 # 7.4 — Queues, workers, events, and service identity (2 Model)
 
-**Kind:** design-exercise
-**Loop step:** 2 Model
-**Standards:** ASVS V8; 1.2 complete mediation.
+**Kind:** design-exercise  
+**Loop step:** 2 Model  
+**Standards:** ASVS 5.0.0 V4/V10 (final); NIST zero trust as architecture *guidance*.
 
 ## Property (start here)
 
-A worker job must use **service identity**, not a leftover user session, to export notes.
+A leftover user session is not worker identity. Exports must run as a service principal. Confused deputy: the queue message’s user_session must not become the worker’s ambient authority.
 
 ## Attacker capabilities and trust assumptions
 
-Queue message carrying a user cookie. Trust: local job dict.
+- **Attacker:** Stolen cookie posted into a job; a job that forgets to drop the user context.
+- **Trust:** Local exporter(ctx).
+Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
 
-## This step
+| Piece | This system |
+|---|---|
+| Subjects | alice session, export-service |
+| Objects | export job |
+| Actions | exporter |
+| Channels | queue payload |
+| TCB | Service credential distinct from user sessions. |
+| Untrusted | Job JSON, user ids inside jobs |
+| State / time | Job delayed 6h after user deletion (4.1). |
+| 1.1 cell | Authorization of the worker plane. |
 
-Name principals, objects, and channels. Open design: the client, APK, or prompt is hostile. Secrecy of the check is not the property.
+## Authority matrix (minimum)
 
-## Root cause / impact / prevention / detection / recovery
+| Subject | Object | Action | Decision |
+|---|---|---|---|
+| user session | export job | run | deny-as-identity |
+| service | export job | run | allow-least-priv |
+| deleted user | old job | run | deny-4.1 |
+| tB job | tA worker ctx | run | deny |
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
 
 ## Practice
 
-Run `labs/7.4/7.4-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/7.4/7.4-lab` file `worker.py`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Outbox pattern; event schemas.
+
+## Residual risk
+
+Broker ACLs — 10.3.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.

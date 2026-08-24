@@ -1,45 +1,48 @@
-# 10.3 — Cloud, serverless, containers, Kubernetes, and IaC (4 Build)
+# 10.3 — Cloud, containers, Kubernetes, and IaC (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** Least privilege for this workload; CIS-style lists are examples, not the property.
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** NIST SP 800-190; Kubernetes security guidance; ASVS V13/V15. K8s is optional in prod, required as a *model* here.
 
 ## Property (start here)
 
-An app pod must not run as cluster-admin. Cloud IAM is complete mediation of the cluster API, not 'we use Kubernetes.'
+A pod requesting cluster-admin must be denied. Workload identity is least privilege (3.3 at cluster grain), not “our namespace is private.”
 
 ## Attacker capabilities and trust assumptions
 
-Over-privileged workload. Trust: local role string. No live cluster.
+- **Attacker:** Compromised app container; malicious helm chart.
+- **Trust:** Local pod_ok(role).
+cluster-admin pod_ok False.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+def pod_ok(role):
+    return role != 'cluster-admin'
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Deny cluster-admin to app; PSP/PSS; no instance metadata from app net (6.5).
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+EKS default service account often too wide.
+
+NetworkPolicy is not RBAC.
 
 ## Practice
 
-Run `labs/10.3/10.3-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Serverless IAM *.
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Break-glass admin with E6.

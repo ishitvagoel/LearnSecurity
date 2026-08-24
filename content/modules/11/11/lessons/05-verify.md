@@ -1,45 +1,38 @@
-# 11 — Integrating capstone — SecureCollab (5 Verify)
+# 11 — Capstone: SecureCollab integration (5 Verify)
 
-**Kind:** verification-lab
-**Loop step:** 5 Verify
-**Standards:** Blueprint capstone evidence pack; ASVS L2 as claim language, not a certificate.
+**Kind:** verification-lab  
+**Loop step:** 5 Verify  
+**Standards:** All prior pinned standards as applicable; no new “capstone-only” standard. Gates 0–10 stay not-attempted without learner evidence.
 
 ## Property (start here)
 
-After a share is revoked, tenant B must not read tenant A's note. Capstone integrates 1.2 mediation over time (2.4) — not a new slogan YAML.
+After a share is revoked, tenant B must not read tenant A’s note. The capstone stitches 1.2 mediation over time (2.4, 4.1, 4.4) — not a new slogan YAML.
 
 ## Attacker capabilities and trust assumptions
 
-Tenant B after revoke. Trust: local notes/grants. No production app required for this fixture.
+- **Attacker:** Former collaborator with a cached id; delayed worker (7.4).
+- **Trust:** Local share map.
+An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
 
-## This step
+| Case | Must show |
+|---|---|
+| Normal | Honest allowed action still works where the product says so |
+| Negative / abuse | Revoked share still reads the note |
+| Failure | Fail closed: Complete mediation on read; invalidate caches; wipe mobile |
 
-pytest --impl vulnerable must fail; --impl fixed must pass. A test that only checks HTTP 200 is not a security test.
+Lab tests: `test_property.py` under `labs/11/11-lab`.
 
-## Root cause / impact / prevention / detection / recovery
+- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Revoked share still reads the note`
+- `--impl fixed`: **pass**
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-Gates 0–10 and M0–M5 stay not-attempted until a product tree and learner evidence exist. Share/revoke UX must be operable (WCAG 2.2).
+revoked share cannot read.
 
 ## Practice
 
-Run `labs/11/11-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Clinic: revoke a guardian.
 
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).

@@ -1,45 +1,36 @@
 # 10.4 — Deployment and configuration hardening (6 Operate)
 
-**Kind:** operations-exercise
-**Loop step:** 6 Operate
-**Standards:** ASVS V14 config (chapter-level).
+**Kind:** operations-exercise  
+**Loop step:** 6 Operate  
+**Standards:** ASVS 5.0.0 V14 (final); CISA Secure by Default. Debug in prod is a config property.
 
 ## Property (start here)
 
-Production must not boot with debug=True. Configuration is part of the TCB.
+A production boot with debug=True must fail. Debug endpoints, extra headers, and verbose errors are forbidden outcomes in prod, not “just for five minutes.”
 
 ## Attacker capabilities and trust assumptions
 
-Mis-set env. Trust: local pair (env, debug).
+- **Attacker:** Anyone who finds /debug; error pages with traces.
+- **Trust:** Local boot_ok('prod', True).
+Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
 
-## This step
+| Outcome | This module |
+|---|---|
+| Detect | prod_debug_boot denied metric; drift. |
+| Signal (no bodies) | prod_debug_forbidden. |
+| Revoke / recover | Kill; rotate secrets that appeared in traces. |
+| Residual | Emergency debug with E6 timebox. |
 
-Detect without logging note bodies or tokens. Recover fail-safe (revoke, rotate, quarantine). If a human must act, the path must be usable (WCAG 2.2).
-
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
 
 ## Practice
 
-Run `labs/10.4/10.4-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/10.4/10.4-lab`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Feature flag that disables authz.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+SIEM product names are not the property. Keys stay out of lessons.

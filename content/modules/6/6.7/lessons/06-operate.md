@@ -1,45 +1,40 @@
 # 6.7 — Resource abuse, automation, and availability (6 Operate)
 
-**Kind:** operations-exercise
-**Loop step:** 6 Operate
-**Standards:** ASVS V13 rate (chapter-level).
+**Kind:** operations-exercise  
+**Loop step:** 6 Operate  
+**Standards:** ASVS 5.0.0 V1/V11 (final); API4/API6 awareness. Fairness is a security cell (availability + cost).
 
 ## Property (start here)
 
-Export API allows at most 3 calls per principal per window. Availability is a 1.1 cell, not 'buy a bigger box'.
+The fourth export in the lab window is denied. Unbounded exports exhaust budget and leak extra copies (5.1).
 
 ## Attacker capabilities and trust assumptions
 
-Automated exporter. Trust: local counter.
+- **Attacker:** Scripted member; compromised session.
+- **Trust:** Local allow(n).
+Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
 
-## This step
+| Outcome | This module |
+|---|---|
+| Detect | export_denied_quota. |
+| Signal (no bodies) | quota_denied; cost_alert. |
+| Revoke / recover | Disable token; bill anomaly. |
+| Residual | Legitimate burst — owned exception. |
 
-Detect without logging note bodies or tokens. Recover fail-safe (revoke, rotate, quarantine). If a human must act, the path must be usable (WCAG 2.2).
-
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
 
 ## Practice
 
-Run `labs/6.7/6.7-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/6.7/6.7-lab`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Notification fan-out; search complexity.
+
+## Usability
+
+Quota errors must be readable; do not trap keyboard users in a spinner that retries (amplifying load).
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+SIEM product names are not the property. Keys stay out of lessons.

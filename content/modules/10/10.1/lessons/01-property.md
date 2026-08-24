@@ -1,8 +1,8 @@
 # 10.1 — Secure software lifecycle and security culture (1 Property)
 
-**Kind:** concept-model
-**Loop step:** 1 Property
-**Standards:** NIST SSDF 1.1 (final) as practice names; not a control menu.
+**Kind:** concept-model  
+**Loop step:** 1 Property  
+**Standards:** NIST SSDF 1.1 SP 800-218 (final); OWASP SAMM; CISA Secure by Design.
 
 ## Property (start here)
 
@@ -10,36 +10,53 @@ A SecureCollab PR cannot merge without a threat-model identifier for the changed
 
 ## Attacker capabilities and trust assumptions
 
-Busy author. Trust: local PR dict.
+- **Attacker:** Schedule pressure.
+- **Trust:** Local merge_ok({}).
+**Mechanism (not the property):** CODEOWNERS is not a threat model.
 
-## This step
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Start from this system's testable sentence, not a topic title. A mechanism (TLS, MASVS control, scanner, CSP) is not the invariant.
+## Root cause vs impact vs prevention vs detection vs recovery
 
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+| Slice | For 10.1 |
+|---|---|
+| Root cause | Security as a later phase. |
+| Preconditions | merge_ok({}) True. |
+| Impact (1.1 cell) | Integrity of process evidence. — Surfaces without 3.2. |
+| Prevention | Require tm id; triggers on identity, data, mobile… |
+| Detection | merge_blocked_no_tm. |
+| Recovery | Open TM, then merge. |
 
 ## Framework defaults vs application guarantees
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+CODEOWNERS is not a threat model.
+
+## Mechanism limits and bypasses
+
+A stale tm-id rubber stamp — 3.2 age.
+
+Hotfix path without after-the-fact TM (must still record).
 
 ## Residual risk
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+Metrics vanity — count TMs with tests, not posters.
 
 ## Practice
 
-Run `labs/10.1/10.1-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write the merge checklist line.
+
+Run `labs/10.1/10.1-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Exception path (E6).
+
+Clinic: “HIPAA training complete” as merge.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.
+
+## Usability and accessibility
+
+Merge and checklist UIs must be accessible to the actual reviewers you have.

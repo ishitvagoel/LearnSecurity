@@ -1,45 +1,38 @@
-# 8.4 — Build, distribution, attestation, and resilience (5 Verify)
+# 8.4 — Build, distribution, attestation, resilience (5 Verify)
 
-**Kind:** verification-lab
-**Loop step:** 5 Verify
-**Standards:** MASVS 2.1 resilience; attestation vendor docs are mechanisms.
+**Kind:** verification-lab  
+**Loop step:** 5 Verify  
+**Standards:** MASVS 2.1 CODE/RESILIENCE (final). Resilience raises cost; it is not trust.
 
 ## Property (start here)
 
-A debug-signed lab build must not call the production export API even if a client attest string is present.
+A debug-signed lab build must not call the production export API even if a client attest string is present. Channel + build type are part of the TCB decision on the server.
 
 ## Attacker capabilities and trust assumptions
 
-Sideloaded debug APK. Trust: server sees build_type. Local only.
+- **Attacker:** Leaked debug APK; student build pointed at prod.
+- **Trust:** Local api_allowed(build, attest).
+An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
 
-## This step
+| Case | Must show |
+|---|---|
+| Normal | Honest allowed action still works where the product says so |
+| Negative / abuse | Debug build allowed to call production export |
+| Failure | Fail closed: Separate client ids; server checks; signing keys in HSM; no prod in debug manifests |
 
-pytest --impl vulnerable must fail; --impl fixed must pass. A test that only checks HTTP 200 is not a security test.
+Lab tests: `test_property.py` under `labs/8.4/8.4-lab`.
 
-## Root cause / impact / prevention / detection / recovery
+- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Debug build allowed to call production export`
+- `--impl fixed`: **pass**
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+debug cannot call prod export.
 
 ## Practice
 
-Run `labs/8.4/8.4-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+SBOM of the APK (10.2).
 
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).

@@ -1,37 +1,44 @@
-# 4.1 — Digital identity and account lifecycle (Review)
+# 4.1 — Identity lifecycle (Review)
 
-**Kind:** code-review
-**Loop step:** Review
-**Standards:** NIST SP 800-63-4 (final) lifecycle/CX; not a password-complexity checklist.
+**Kind:** code-review  
+**Loop step:** Review  
+**Standards:** NIST SP 800-63-4 (final) identity lifecycle; ASVS 5.0.0 V6 (final). Deprovision is part of 1.2 over time.
 
 ## Property (start here)
 
-A **deleted** SecureCollab user must not read notes with a leftover session. Lifecycle is part of 1.2 mediation over time.
+After an account is deleted, that subject’s leftover session must not read notes. Lifecycle is complete mediation across account states, not a login screen.
 
 ## Attacker capabilities and trust assumptions
 
-Stolen cookie after self-delete or admin disable. Trust: lab session store.
+- **Attacker:** Stolen session cookie after the user left the org; a delayed worker using the old user id.
+- **Trust:** Local user+session maps. Real IdP SLO is extra (4.5).
+Review `labs/4.1/4.1-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/4.1.md` — not here.
 
-## Root cause / impact / prevention / detection / recovery
+## What to label
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-## Framework defaults vs application guarantees
+- Seeded smell (label it yourself): DELETE FROM users without session purge
+- Seeded smell (label it yourself): JWT exp 30d ignored on delete
+- Seeded smell (label it yourself): Worker still has user_id
+- Seeded smell (label it yourself): No test session_valid after delete
 
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+
+## Misconceptions
+
+- Disable login is enough
+- SSO magically revokes
+- Deleted means gone from backups
 
 ## Practice
 
-Review the vulnerable tree; keys are not in this file.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
+Contractor access end-date; support impersonation tickets.
 
-## Non-goals
+## HITL / WCAG 2.2
 
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+Offboarding confirmation must be accessible (1.4). A mouse-only “delete user” is a missed revoke.

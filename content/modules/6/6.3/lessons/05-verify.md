@@ -1,45 +1,38 @@
 # 6.3 — Cross-site and cross-context attacks (5 Verify)
 
-**Kind:** verification-lab
-**Loop step:** 5 Verify
-**Standards:** ASVS 5.0.0 V4 CSRF (chapter-level).
+**Kind:** verification-lab  
+**Loop step:** 5 Verify  
+**Standards:** ASVS 5.0.0 V3/V4 (final); Fetch Metadata / SameSite as *helpers*; cookie session (2.3) is not the CSRF property.
 
 ## Property (start here)
 
-A state-changing share POST without a matching origin/CSRF token is denied. Cookie session (2.3) is not the CSRF property.
+A state-changing share POST from a foreign origin without a matching CSRF token/origin check is denied. Ambient cookies are not consent.
 
 ## Attacker capabilities and trust assumptions
 
-Other-origin page that can trigger a cookie-bearing POST in the model. Local only.
+- **Attacker:** Evil origin with the victim’s browser session cookie.
+- **Trust:** Local allow_share(origin, expected, token).
+An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
 
-## This step
+| Case | Must show |
+|---|---|
+| Normal | Honest allowed action still works where the product says so |
+| Negative / abuse | Cross-origin state-changing POST authorized by cookie alone |
+| Failure | Fail closed: Reject foreign Origin; require token for cookie sessions |
 
-pytest --impl vulnerable must fail; --impl fixed must pass. A test that only checks HTTP 200 is not a security test.
+Lab tests: `test_property.py` under `labs/6.3/6.3-lab`.
 
-## Root cause / impact / prevention / detection / recovery
+- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Cross-origin state-changing POST authorized by cookie alone`
+- `--impl fixed`: **pass**
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+foreign POST denied.
 
 ## Practice
 
-Run `labs/6.3/6.3-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+postMessage, clickjacking, CORS * with credentials.
 
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).

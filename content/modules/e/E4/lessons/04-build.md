@@ -1,45 +1,49 @@
 # E4 — Memory safety and native-code boundaries (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** Memory-safety as an integrity/availability property at the FFI boundary.
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** CISA memory-safe roadmap (guidance); CWE Top 25 awareness. This models a length mismatch — it is not a weaponized native exploit.
 
 ## Property (start here)
 
-A copy into a 4-byte lab buffer must not return more than 4 bytes. This models a length mismatch — it is not a weaponized native exploit.
+A copy into a 4-byte lab buffer must not return more than 4 bytes. Length is complete mediation of the buffer object.
 
 ## Attacker capabilities and trust assumptions
 
-Caller supplying a long src. Trust: local bytes. No live memory corruption.
+- **Attacker:** Hostile filename/size field; FFI caller.
+- **Trust:** Local copy_into(dst_len, src, n).
+len(out) <= 4.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+def copy_into(bufsize, src, declared_len):
+    n = min(bufsize, declared_len, len(src))
+    return src[:n]
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Bound the copy; prefer memory-safe languages for new code.
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+Python slice is the *fixed* model; C will not do this for you.
+
+Safe language still has FFI (this module).
 
 ## Practice
 
-Run `labs/E4/e4-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Image parser; protobuf C.
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Existing C codecs for images (6.4).

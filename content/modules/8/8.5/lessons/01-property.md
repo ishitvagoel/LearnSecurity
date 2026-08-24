@@ -1,45 +1,62 @@
 # 8.5 — Mobile verification and privacy (1 Property)
 
-**Kind:** concept-model
-**Loop step:** 1 Property
-**Standards:** MASVS 2.1 privacy; NIST Privacy Framework 1.0 (final).
+**Kind:** concept-model  
+**Loop step:** 1 Property  
+**Standards:** MASVS 2.1 + MASTG 2.0 (final); MASWE mapping; Mobile Top 10:2024 awareness only.
 
 ## Property (start here)
 
-A crash report must not include the note body. Mobile privacy is a 1.1 privacy cell, not a policy PDF.
+A crash report must not include the note body. Mobile privacy is a 1.1 privacy cell, not a Play Data safety form as the control.
 
 ## Attacker capabilities and trust assumptions
 
-Crash reporter / support inbox. Trust: local dict. No real PII.
+- **Attacker:** Crash-platform operator; another process reading logcat.
+- **Trust:** Local crash_report(body).
+**Mechanism (not the property):** Firebase Crashlytics “automatic” will ship whatever you log.
 
-## This step
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Start from this system's testable sentence, not a topic title. A mechanism (TLS, MASVS control, scanner, CSP) is not the invariant.
+## Root cause vs impact vs prevention vs detection vs recovery
 
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+| Slice | For 8.5 |
+|---|---|
+| Root cause | Exception message includes the body. |
+| Preconditions | secret in str(report). |
+| Impact (1.1 cell) | Privacy/confidentiality of bodies in telemetry. — Bodies at a vendor; maybe public if misbucketed. |
+| Prevention | Do not put bodies in exceptions; SDK filters; permission minimization. |
+| Detection | CI grep crash fixtures; vendor DLP. |
+| Recovery | Purge vendor; notify if needed. |
 
 ## Framework defaults vs application guarantees
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Firebase Crashlytics “automatic” will ship whatever you log.
+
+## Mechanism limits and bypasses
+
+Play Data safety form is disclosure, not redaction.
+
+Screenshots in bug reports; ANR traces.
 
 ## Residual risk
 
-Crash-upload consent and support emails must be understandable (WCAG 2.2).
+Vendor as processor — contract + 5.1.
 
 ## Practice
 
-Run `labs/8.5/8.5-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+MASVS-PRIVACY traceability for this one cell.
+
+Run `labs/8.5/8.5-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Web Sentry (10.5) same cell.
+
+Clinic crash with patient name.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.
+
+## Usability and accessibility
+
+In-app “send feedback” must not require attaching a screenshot of PHI to proceed.

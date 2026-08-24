@@ -1,45 +1,40 @@
-# 10.2 — Source control, CI/CD, dependencies, and software supply chain (Review)
+# 10.2 — Source control, CI/CD, and software supply chain (Review)
 
-**Kind:** code-review
-**Loop step:** Review
-**Standards:** SSDF; lockfiles are mechanisms.
+**Kind:** code-review  
+**Loop step:** Review  
+**Standards:** SLSA 1.2; OpenSSF OSPS; CISA 2026 SBOM minimum elements; NIST 800-161r1. Pin versions.
 
 ## Property (start here)
 
-Install must fail when the lockfile hash does not match the fetched artifact. CI green is not integrity of dependencies.
+A dependency whose digest does not match the lockfile must not install. Integrity of build inputs is the cell — not “we have Dependabot.”
 
 ## Attacker capabilities and trust assumptions
 
-Substituted package. Trust: local hash compare. No real npm/pypi fetch.
+- **Attacker:** Typosquat; compromised maintainer; poisoned PR from a fork.
+- **Trust:** Local install_ok(got, expected).
+Review `labs/10.2/10.2-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/10.2.md` — not here.
 
-## This step
+## What to label
 
-Review the diff as a SecureCollab PR. Reject client trust, interpreter concatenation, Report-Only as enforcement, and closing findings without retest. Keys stay out of lessons.
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-## Root cause / impact / prevention / detection / recovery
+- Seeded smell (label it yourself): install_ok True on hash mismatch
+- Seeded smell (label it yourself): Unpinned action
+- Seeded smell (label it yourself): Secrets in PR from forks
+- Seeded smell (label it yourself): SBOM generated but never used
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
 
-## Framework defaults vs application guarantees
+## Misconceptions
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+- Lockfile without verify is integrity
+- Private npm is safe
+- SLSA badge is the app’s 1.2
 
 ## Practice
 
-Run `labs/10.2/10.2-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
-
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+GitHub Actions third-party action@v1.

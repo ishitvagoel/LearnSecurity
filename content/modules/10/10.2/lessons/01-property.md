@@ -1,45 +1,58 @@
-# 10.2 — Source control, CI/CD, dependencies, and software supply chain (1 Property)
+# 10.2 — Source control, CI/CD, and software supply chain (1 Property)
 
-**Kind:** concept-model
-**Loop step:** 1 Property
-**Standards:** SSDF; lockfiles are mechanisms.
+**Kind:** concept-model  
+**Loop step:** 1 Property  
+**Standards:** SLSA 1.2; OpenSSF OSPS; CISA 2026 SBOM minimum elements; NIST 800-161r1. Pin versions.
 
 ## Property (start here)
 
-Install must fail when the lockfile hash does not match the fetched artifact. CI green is not integrity of dependencies.
+A dependency whose digest does not match the lockfile must not install. Integrity of build inputs is the cell — not “we have Dependabot.”
 
 ## Attacker capabilities and trust assumptions
 
-Substituted package. Trust: local hash compare. No real npm/pypi fetch.
+- **Attacker:** Typosquat; compromised maintainer; poisoned PR from a fork.
+- **Trust:** Local install_ok(got, expected).
+**Mechanism (not the property):** npm audit is 9.4 signal, not this cell.
 
-## This step
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Start from this system's testable sentence, not a topic title. A mechanism (TLS, MASVS control, scanner, CSP) is not the invariant.
+## Root cause vs impact vs prevention vs detection vs recovery
 
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+| Slice | For 10.2 |
+|---|---|
+| Root cause | Name-only install. |
+| Preconditions | install_ok('aaa','bbb') True. |
+| Impact (1.1 cell) | Integrity of the artifact you will run. — Malicious code in the TCB. |
+| Prevention | Hash pin; deny scripts; provenance. |
+| Detection | mismatch fail the job. |
+| Recovery | Pin known-good; rotate secrets in CI (5.3). |
 
 ## Framework defaults vs application guarantees
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+npm audit is 9.4 signal, not this cell.
+
+## Mechanism limits and bypasses
+
+Pinning a malicious 1.2.3 still installs malware — review + provenance.
+
+Git dependency to a moving branch; compromised runner.
 
 ## Residual risk
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+Build cache poisoning.
 
 ## Practice
 
-Run `labs/10.2/10.2-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name lockfiles and who can change them.
+
+Run `labs/10.2/10.2-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+GitHub Actions third-party action@v1.
+
+Clinic: npm install in prod pod.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.

@@ -1,8 +1,8 @@
 # 10.1 — Secure software lifecycle and security culture (2 Model)
 
-**Kind:** design-exercise
-**Loop step:** 2 Model
-**Standards:** NIST SSDF 1.1 (final) as practice names; not a control menu.
+**Kind:** design-exercise  
+**Loop step:** 2 Model  
+**Standards:** NIST SSDF 1.1 SP 800-218 (final); OWASP SAMM; CISA Secure by Design.
 
 ## Property (start here)
 
@@ -10,36 +10,44 @@ A SecureCollab PR cannot merge without a threat-model identifier for the changed
 
 ## Attacker capabilities and trust assumptions
 
-Busy author. Trust: local PR dict.
+- **Attacker:** Schedule pressure.
+- **Trust:** Local merge_ok({}).
+Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
 
-## This step
+| Piece | This system |
+|---|---|
+| Subjects | author, reviewer |
+| Objects | PR, tm-id |
+| Actions | merge_ok |
+| Channels | GitHub |
+| TCB | Required field + human 9.2. |
+| Untrusted | “tiny change” label |
+| State / time | Every merge. |
+| 1.1 cell | Integrity of process evidence. |
 
-Name principals, objects, and channels. Open design: the client, APK, or prompt is hostile. Secrecy of the check is not the property.
+## Authority matrix (minimum)
 
-## Root cause / impact / prevention / detection / recovery
+| Subject | Object | Action | Decision |
+|---|---|---|---|
+| PR | tm-id+tests | merge | allow |
+| PR | no tm | merge | deny |
+| hotfix | no tm | merge | deny-or-timeboxed-E6 |
+| poster | wall | merge | irrelevant |
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
 
 ## Practice
 
-Run `labs/10.1/10.1-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/10.1/10.1-lab` file `sdl.py`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Exception path (E6).
+
+## Residual risk
+
+Metrics vanity — count TMs with tests, not posters.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.

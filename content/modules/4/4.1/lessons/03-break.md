@@ -1,37 +1,60 @@
-# 4.1 — Digital identity and account lifecycle (3 Break)
+# 4.1 — Identity lifecycle (3 Break)
 
-**Kind:** mechanism-lab
-**Loop step:** 3 Break
-**Standards:** NIST SP 800-63-4 (final) lifecycle/CX; not a password-complexity checklist.
+**Kind:** mechanism-lab  
+**Loop step:** 3 Break  
+**Standards:** NIST SP 800-63-4 (final) identity lifecycle; ASVS 5.0.0 V6 (final). Deprovision is part of 1.2 over time.
 
 ## Property (start here)
 
-A **deleted** SecureCollab user must not read notes with a leftover session. Lifecycle is part of 1.2 mediation over time.
+After an account is deleted, that subject’s leftover session must not read notes. Lifecycle is complete mediation across account states, not a login screen.
 
 ## Attacker capabilities and trust assumptions
 
-Stolen cookie after self-delete or admin disable. Trust: lab session store.
+- **Attacker:** Stolen session cookie after the user left the org; a delayed worker using the old user id.
+- **Trust:** Local user+session maps. Real IdP SLO is extra (4.5).
+**Forbidden outcome:** Deleted user's leftover session still authenticates
 
-## Root cause / impact / prevention / detection / recovery
+**Authorized scope:** `labs/4.1/4.1-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## What to observe
 
-## Framework defaults vs application guarantees
+vulnerable lifecycle.py leaves session live.
 
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: delete_user removes profile only.
+
+## Vulnerable fixture (local)
+
+```python
+SESSIONS = {"alice": True}
+DELETED = set()
+
+def reset():
+    SESSIONS.clear(); SESSIONS["alice"] = True
+    DELETED.clear()
+
+def delete_user(user: str) -> None:
+    DELETED.add(user)
+
+def session_valid(user: str) -> bool:
+    return bool(SESSIONS.get(user))
+```
+
+## Root cause vs impact
+
+| Slice | Lab |
+|---|---|
+| Root cause | Authentication artifact outlived the subject. |
+| Impact | Ex-employee or attacker with the cookie still reads tenant notes. |
+| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
 
 ## Practice
 
-Run `labs/4.1/4.1-lab` with --impl vulnerable then fixed.
+Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/4.1/4.1-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
 
 ## Transfer
 
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
+Contractor access end-date; support impersonation tickets.
 
 ## Non-goals
 
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+No live-target instructions. Synthetic data only.

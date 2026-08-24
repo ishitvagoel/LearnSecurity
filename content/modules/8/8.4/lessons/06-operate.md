@@ -1,45 +1,36 @@
-# 8.4 — Build, distribution, attestation, and resilience (6 Operate)
+# 8.4 — Build, distribution, attestation, resilience (6 Operate)
 
-**Kind:** operations-exercise
-**Loop step:** 6 Operate
-**Standards:** MASVS 2.1 resilience; attestation vendor docs are mechanisms.
+**Kind:** operations-exercise  
+**Loop step:** 6 Operate  
+**Standards:** MASVS 2.1 CODE/RESILIENCE (final). Resilience raises cost; it is not trust.
 
 ## Property (start here)
 
-A debug-signed lab build must not call the production export API even if a client attest string is present.
+A debug-signed lab build must not call the production export API even if a client attest string is present. Channel + build type are part of the TCB decision on the server.
 
 ## Attacker capabilities and trust assumptions
 
-Sideloaded debug APK. Trust: server sees build_type. Local only.
+- **Attacker:** Leaked debug APK; student build pointed at prod.
+- **Trust:** Local api_allowed(build, attest).
+Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
 
-## This step
+| Outcome | This module |
+|---|---|
+| Detect | debug_client_to_prod. |
+| Signal (no bodies) | debug_to_prod_denied. |
+| Revoke / recover | Revoke debug client id; rotate. |
+| Residual | Attestation farms. |
 
-Detect without logging note bodies or tokens. Recover fail-safe (revoke, rotate, quarantine). If a human must act, the path must be usable (WCAG 2.2).
-
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
 
 ## Practice
 
-Run `labs/8.4/8.4-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/8.4/8.4-lab`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+SBOM of the APK (10.2).
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+SIEM product names are not the property. Keys stay out of lessons.

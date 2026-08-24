@@ -1,45 +1,53 @@
 # 9.4 — Automated analysis and tool orchestration (2 Model)
 
-**Kind:** design-exercise
-**Loop step:** 2 Model
-**Standards:** ASVS + tool results as inputs; not compliance theater.
+**Kind:** design-exercise  
+**Loop step:** 2 Model  
+**Standards:** NIST SSDF (final); OWASP SAMM; OpenSSF. Tools are signals.
 
 ## Property (start here)
 
-A HIGH scanner finding without a mapped SecureCollab requirement cannot pass the lab gate. Tools do not prove invariants.
+A HIGH finding without a mapped SecureCollab requirement cannot pass the ship gate. Unmapped means unowned, not “probably fine.”
 
 ## Attacker capabilities and trust assumptions
 
-Team that clicks dismiss. Trust: local findings list.
+- **Attacker:** Alert fatigue; vendor dashboard theater.
+- **Trust:** Local ship_ok(findings, map).
+Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
 
-## This step
+| Piece | This system |
+|---|---|
+| Subjects | CI, security champion |
+| Objects | HIGH F1, map {} |
+| Actions | ship_ok |
+| Channels | SAST/DAST/SCA |
+| TCB | Gate: HIGH needs req id + decision. |
+| Untrusted | Tool default severity |
+| State / time | Release candidate. |
+| 1.1 cell | Integrity of release decision. |
 
-Name principals, objects, and channels. Open design: the client, APK, or prompt is hostile. Secrecy of the check is not the property.
+## Authority matrix (minimum)
 
-## Root cause / impact / prevention / detection / recovery
+| Subject | Object | Action | Decision |
+|---|---|---|---|
+| HIGH mapped+fixed | ship | allow |
+| HIGH unmapped | ship | deny |
+| HIGH accepted E6 | ship | allow-audited |
+| info finding | ship | policy |
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
 
 ## Practice
 
-Run `labs/9.4/9.4-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/9.4/9.4-lab` file `sast.py`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+SCA CVE vs actually called function.
+
+## Residual risk
+
+Blind spots (authz logic) — 9.2/9.3.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.

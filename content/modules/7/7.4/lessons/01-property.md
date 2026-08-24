@@ -1,45 +1,58 @@
 # 7.4 — Queues, workers, events, and service identity (1 Property)
 
-**Kind:** concept-model
-**Loop step:** 1 Property
-**Standards:** ASVS V8; 1.2 complete mediation.
+**Kind:** concept-model  
+**Loop step:** 1 Property  
+**Standards:** ASVS 5.0.0 V4/V10 (final); NIST zero trust as architecture *guidance*.
 
 ## Property (start here)
 
-A worker job must use **service identity**, not a leftover user session, to export notes.
+A leftover user session is not worker identity. Exports must run as a service principal. Confused deputy: the queue message’s user_session must not become the worker’s ambient authority.
 
 ## Attacker capabilities and trust assumptions
 
-Queue message carrying a user cookie. Trust: local job dict.
+- **Attacker:** Stolen cookie posted into a job; a job that forgets to drop the user context.
+- **Trust:** Local exporter(ctx).
+**Mechanism (not the property):** Celery inherit request context is a trap.
 
-## This step
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Start from this system's testable sentence, not a topic title. A mechanism (TLS, MASVS control, scanner, CSP) is not the invariant.
+## Root cause vs impact vs prevention vs detection vs recovery
 
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+| Slice | For 7.4 |
+|---|---|
+| Root cause | Ambient user context in a system worker. |
+| Preconditions | exporter({user_session: alice}) succeeds. |
+| Impact (1.1 cell) | Authorization of the worker plane. — User cookie drives a privileged export; or stale user still exports. |
+| Prevention | Jobs carry (actor type=service, tenant, resource); workers authenticate as service. |
+| Detection | worker_used_user_session metric. |
+| Recovery | Revoke service creds; drain queue. |
 
 ## Framework defaults vs application guarantees
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Celery inherit request context is a trap.
+
+## Mechanism limits and bypasses
+
+Service role that is still god-mode (3.3).
+
+Poison message loops; cross-tenant job fields.
 
 ## Residual risk
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+Broker ACLs — 10.3.
 
 ## Practice
 
-Run `labs/7.4/7.4-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Trace one export: who is the subject at HTTP vs worker.
+
+Run `labs/7.4/7.4-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Outbox pattern; event schemas.
+
+Clinic batch-export worker.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.

@@ -20,11 +20,12 @@ releaseMilestone: null
 outcomes:
 - Produce a SecureCollab risk register with assumptions, uncertainty, user-harm, residual
   risk, and owners
-- Model threat actors by capability and incentive, including human error, coercion, and abuse
-  economics
+- Model threat actors by capability and incentive, including human error, coercion,
+  and abuse economics
 - Treat security friction and inaccessibility as security outcomes
 - Include graceful degradation, detection, and recovery when prevention is not absolute
-- Transfer the register after changed actor capability or a failing accessible recovery flow
+- Transfer the register after changed actor capability or a failing accessible recovery
+  flow
 reviewTriggers:
 - New high-impact user journey (recovery, invite, impersonation, billing)
 - Actor model change (insider, coerced user, bulk automation)
@@ -53,45 +54,46 @@ concepts:
 learningObjects:
 - id: 1.4-LO-01
   kind: concept-model
-  title: Actors, incentives, work factor, residual risk vs vanity metrics
+  title: 'Risk, people, economics, usable security, and resilience: property vs mechanism'
   path: lessons/01-property.md
 - id: 1.4-LO-02
   kind: design-exercise
-  title: SecureCollab risk register with assumptions and user-harm scenarios
+  title: Model SecureCollab for 1.4
   path: lessons/02-model.md
 - id: 1.4-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: a secure recovery flow unusable without a mouse or visual CAPTCHA'
+  title: 'Local fixture: High-impact recovery control is color- or mouse-only'
   path: lessons/03-break.md
 - id: 1.4-LO-04
   kind: design-exercise
-  title: Reduce friction without weakening the 1.1 invariant; document the trade-off
+  title: Structural fix restoring the 1.4 invariant
   path: lessons/04-build.md
 - id: 1.4-LO-05
   kind: verification-lab
-  title: Test plan for lockout, bypass, and inaccessible recovery as forbidden outcomes
+  title: Forbidden-outcome tests for 1.4
   path: lessons/05-verify.md
 - id: 1.4-LO-06
   kind: operations-exercise
-  title: 'Degrade, detect, recover: one scenario with CSF Detect/Respond/Recover labels'
+  title: Detect/recover notes for 1.4
   path: lessons/06-operate.md
 - id: 1.4-LO-07
   kind: transfer-challenge
-  title: 'Raise attacker capability or add coercion: rewrite residuals and Gate 1 defense'
+  title: 'Transfer: Banking re-auth dialog.'
   path: lessons/07-transfer.md
 - id: 1.4-LO-08
   kind: code-review
-  title: Seeded risk register that lists tools instead of harm and residual
+  title: Seeded review for 1.4
   path: lessons/08-review.md
 labSpec:
-  authorizedScope: Local course fixture and synthetic SecureCollab description only
+  authorizedScope: Local course fixture or official training lab only; no public or
+    third-party targets
   slug: 1.4-risk-register
-  summary: Learner produces a risk register; local fixture shows unusable recovery as a security
-    failure
+  summary: High-impact recovery control is color- or mouse-only
   forbiddenOutcomes:
-  - Heat-map-only register with no harm or residual
-  - Live-target user testing or real PII in harm scenarios
-  - Treating accessibility as non-security
+  - High-impact recovery control is color- or mouse-only
+  - Live-target instructions
+  - Real PII or production secrets
+  - Awareness list used as the syllabus
 evidenceRequired:
 - Risk register with assumptions, uncertainty, user-harm, residual, owners
 - WCAG-oriented notes for one recovery/auth journey
@@ -151,22 +153,17 @@ standardsRefs:
   - compromise-recording
   url: https://web.mit.edu/saltzer/www/publications/protection/
 misconceptions:
-- Residual risk is a yellow scanner
-- Usability is the opposite of security; accessibility is later compliance
-- Work factor is key length
-- Users who bypass a control are the problem
-- Detection without recovery is resilience
-- NIST 800-63 is a password-complexity checklist
-- SAMM scores prove the product is secure
-- Secure by Design means the customer bought MFA
+- Accessibility is a separate compliance track from security
+- Friction always increases security
+- Work factor applies only to attackers, not to legitimate users stuck in a flow
 operationalConsiderations:
-- Detection and recovery are residual-risk controls
-- Support tools must not become unaudited impersonation
-- Course harm scenarios stay synthetic
+- Recovery success/fail by input modality; never log recovery codes.
+- 'Coercion: a physically present attacker can still force a confirmation. Record
+  as residual (do not pretend UX fixes coercion).'
 author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (1.4 deepen); lab-safety-reviewer (local recovery.py fixture)
-lastReviewedAt: '2026-08-23'
-nextReviewAt: '2027-02-23'
+reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+lastReviewedAt: '2026-08-24'
+nextReviewAt: '2027-02-24'
 changelog:
 - date: '2026-08-23'
   note: Pass A initial specification
@@ -178,3 +175,6 @@ changelog:
   note: Pass C rubric and examiner keys; quality-gate recorded
 - date: '2026-08-23'
   note: 'Deepen: 1.1-density lessons; accessible recovery lab; quality-gate recorded'
+- date: '2026-08-24'
+  note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
+    Pass C keys isolated'

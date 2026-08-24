@@ -1,45 +1,58 @@
 # E4 — Memory safety and native-code boundaries (1 Property)
 
-**Kind:** concept-model
-**Loop step:** 1 Property
-**Standards:** Memory-safety as an integrity/availability property at the FFI boundary.
+**Kind:** concept-model  
+**Loop step:** 1 Property  
+**Standards:** CISA memory-safe roadmap (guidance); CWE Top 25 awareness. This models a length mismatch — it is not a weaponized native exploit.
 
 ## Property (start here)
 
-A copy into a 4-byte lab buffer must not return more than 4 bytes. This models a length mismatch — it is not a weaponized native exploit.
+A copy into a 4-byte lab buffer must not return more than 4 bytes. Length is complete mediation of the buffer object.
 
 ## Attacker capabilities and trust assumptions
 
-Caller supplying a long src. Trust: local bytes. No live memory corruption.
+- **Attacker:** Hostile filename/size field; FFI caller.
+- **Trust:** Local copy_into(dst_len, src, n).
+**Mechanism (not the property):** Python slice is the *fixed* model; C will not do this for you.
 
-## This step
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Start from this system's testable sentence, not a topic title. A mechanism (TLS, MASVS control, scanner, CSP) is not the invariant.
+## Root cause vs impact vs prevention vs detection vs recovery
 
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+| Slice | For E4 |
+|---|---|
+| Root cause | Trusting n over dst. |
+| Preconditions | copy 8 bytes into 4-byte dest returns 8. |
+| Impact (1.1 cell) | Integrity of memory object bounds. — In real C, memory corruption; here, the test catches length. |
+| Prevention | Bound the copy; prefer memory-safe languages for new code. |
+| Detection | ASAN in real native (named, not run as a weapon). |
+| Recovery | Patch; do not ship the overflowed binary. |
 
 ## Framework defaults vs application guarantees
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Python slice is the *fixed* model; C will not do this for you.
+
+## Mechanism limits and bypasses
+
+Safe language still has FFI (this module).
+
+Integer wrap on n (name it).
 
 ## Residual risk
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+Existing C codecs for images (6.4).
 
 ## Practice
 
-Run `labs/E4/e4-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Where does SecureCollab still need native code?
+
+Run `labs/E4/e4-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Image parser; protobuf C.
+
+Clinic DICOM parser.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.

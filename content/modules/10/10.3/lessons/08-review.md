@@ -1,45 +1,40 @@
-# 10.3 — Cloud, serverless, containers, Kubernetes, and IaC (Review)
+# 10.3 — Cloud, containers, Kubernetes, and IaC (Review)
 
-**Kind:** code-review
-**Loop step:** Review
-**Standards:** Least privilege for this workload; CIS-style lists are examples, not the property.
+**Kind:** code-review  
+**Loop step:** Review  
+**Standards:** NIST SP 800-190; Kubernetes security guidance; ASVS V13/V15. K8s is optional in prod, required as a *model* here.
 
 ## Property (start here)
 
-An app pod must not run as cluster-admin. Cloud IAM is complete mediation of the cluster API, not 'we use Kubernetes.'
+A pod requesting cluster-admin must be denied. Workload identity is least privilege (3.3 at cluster grain), not “our namespace is private.”
 
 ## Attacker capabilities and trust assumptions
 
-Over-privileged workload. Trust: local role string. No live cluster.
+- **Attacker:** Compromised app container; malicious helm chart.
+- **Trust:** Local pod_ok(role).
+Review `labs/10.3/10.3-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/10.3.md` — not here.
 
-## This step
+## What to label
 
-Review the diff as a SecureCollab PR. Reject client trust, interpreter concatenation, Report-Only as enforcement, and closing findings without retest. Keys stay out of lessons.
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-## Root cause / impact / prevention / detection / recovery
+- Seeded smell (label it yourself): cluster-admin on app SA
+- Seeded smell (label it yourself): Privileged: true
+- Seeded smell (label it yourself): No admission test
+- Seeded smell (label it yourself): IaC with 0.0.0.0/0
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
 
-## Framework defaults vs application guarantees
+## Misconceptions
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+- Namespace equals tenant
+- Managed K8s is secure by default
+- Containers are VMs
 
 ## Practice
 
-Run `labs/10.3/10.3-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
-
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Serverless IAM *.

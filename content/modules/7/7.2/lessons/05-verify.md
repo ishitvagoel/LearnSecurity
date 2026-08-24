@@ -1,45 +1,38 @@
 # 7.2 — Object, property, and function security (5 Verify)
 
-**Kind:** verification-lab
-**Loop step:** 5 Verify
-**Standards:** ASVS V4/V8 chapter-level.
+**Kind:** verification-lab  
+**Loop step:** 5 Verify  
+**Standards:** ASVS 5.0.0 V4 (final); API1/3/5 awareness after 1.2/4.4.
 
 ## Property (start here)
 
-GraphQL-style note.secret_internal is not visible to members. Field-level authorization, not 'hidden in UI'.
+A member must not resolve secret_internal. Function/property authorization is not “they can call GET /notes.” Identifiers locate; they do not authorize.
 
 ## Attacker capabilities and trust assumptions
 
-Member who asks for extra fields. Trust: local resolver.
+- **Attacker:** Member using GraphQL __typename or REST ?fields=.
+- **Trust:** Local resolve(role, field).
+An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
 
-## This step
+| Case | Must show |
+|---|---|
+| Normal | Honest allowed action still works where the product says so |
+| Negative / abuse | Member resolves secret_internal |
+| Failure | Fail closed: Allow-list fields by role; never bind authz to the id format |
 
-pytest --impl vulnerable must fail; --impl fixed must pass. A test that only checks HTTP 200 is not a security test.
+Lab tests: `test_property.py` under `labs/7.2/7.2-lab`.
 
-## Root cause / impact / prevention / detection / recovery
+- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Member resolves secret_internal`
+- `--impl fixed`: **pass**
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+member cannot resolve secret_internal.
 
 ## Practice
 
-Run `labs/7.2/7.2-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Bulk update; search highlighting leaking snippets.
 
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).

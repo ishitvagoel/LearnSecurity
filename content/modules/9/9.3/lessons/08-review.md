@@ -1,45 +1,40 @@
 # 9.3 — Security-focused tests (Review)
 
-**Kind:** code-review
-**Loop step:** Review
-**Standards:** ASVS verification; pytest is a mechanism.
+**Kind:** code-review  
+**Loop step:** Review  
+**Standards:** ASVS/WSTG/MASTG as catalogs of *what* to test; this lab’s cell is the shape of a security test.
 
 ## Property (start here)
 
-A test that only asserts status 200 is not a security test. Security tests name a forbidden outcome (1.1 / 4.4).
+A test that only asserts HTTP 200 is not a security test. Security tests name a forbidden outcome (1.1 / 4.4).
 
 ## Attacker capabilities and trust assumptions
 
-CI green theater. Trust: local metadata about tests.
+- **Attacker:** False confidence.
+- **Trust:** Local is_security_test(spec).
+Review `labs/9.3/9.3-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/9.3.md` — not here.
 
-## This step
+## What to label
 
-Review the diff as a SecureCollab PR. Reject client trust, interpreter concatenation, Report-Only as enforcement, and closing findings without retest. Keys stay out of lessons.
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-## Root cause / impact / prevention / detection / recovery
+- Seeded smell (label it yourself): assert r.status_code==200 only
+- Seeded smell (label it yourself): No cross-tenant test
+- Seeded smell (label it yourself): Security suite empty
+- Seeded smell (label it yourself): Chaos without authz
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
 
-## Framework defaults vs application guarantees
+## Misconceptions
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+- Coverage is security
+- Fuzzing finds all authz bugs
+- Snapshot tests are isolation tests
 
 ## Practice
 
-Run `labs/9.3/9.3-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
-
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Fuzzing without an oracle.

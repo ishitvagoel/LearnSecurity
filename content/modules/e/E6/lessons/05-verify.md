@@ -1,45 +1,38 @@
 # E6 — Product security leadership (5 Verify)
 
-**Kind:** verification-lab
-**Loop step:** 5 Verify
-**Standards:** Risk ownership; WCAG 2.2 on any human control named in the exception.
+**Kind:** verification-lab  
+**Loop step:** 5 Verify  
+**Standards:** OWASP SAMM; NIST CSF 2.0; SSDF; CISA Secure by Design. Leadership is accountable residual, not a slide.
 
 ## Property (start here)
 
-A risk exception cannot be accepted without an owner, a review date, and an accessibility check flag. Leadership is accountable residual, not a slide.
+A risk exception cannot be accepted without an owner, a review date, and an accessibility check flag. “We’ll accept it” is not a record.
 
 ## Attacker capabilities and trust assumptions
 
-Executive who wants the date. Trust: local exception dict.
+- **Attacker:** Calendar; silent exceptions.
+- **Trust:** Local accept_exception({owner, review_by}).
+An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
 
-## This step
+| Case | Must show |
+|---|---|
+| Normal | Honest allowed action still works where the product says so |
+| Negative / abuse | Risk exception accepted without owner and review date |
+| Failure | Fail closed: Schema of an exception; refuse incomplete |
 
-pytest --impl vulnerable must fail; --impl fixed must pass. A test that only checks HTTP 200 is not a security test.
+Lab tests: `test_property.py` under `labs/E6/e6-lab`.
 
-## Root cause / impact / prevention / detection / recovery
+- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Risk exception accepted without owner and review date`
+- `--impl fixed`: **pass**
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-Exceptions that rely on a human process must remain operable and understandable (WCAG 2.2).
+exception needs owner, review date, a11y flag.
 
 ## Practice
 
-Run `labs/E6/e6-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Procurement questionnaire vs this record.
 
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).

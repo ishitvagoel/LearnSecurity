@@ -1,45 +1,53 @@
-# 6.4 — Files, paths, uploads, archives, XML, and deserialization (2 Model)
+# 6.4 — Files, paths, uploads, archives, XML, deserialization (2 Model)
 
-**Kind:** design-exercise
-**Loop step:** 2 Model
-**Standards:** ASVS 5.0.0 V12 file (chapter-level).
+**Kind:** design-exercise  
+**Loop step:** 2 Model  
+**Standards:** ASVS 5.0.0 V12 (final); CWE-22/434/502 as names after the path/interpreter cause.
 
 ## Property (start here)
 
-Upload names cannot escape the lab root via .. segments. Local path join only.
+A user-supplied path must not resolve outside the lab root. `../etc/passwd` is data that tried to become a different object. This is not a weaponized exploit lesson — we assert prefix.
 
 ## Attacker capabilities and trust assumptions
 
-Uploader choosing a name. Trust: sandbox dir.
+- **Attacker:** Uploader or filename field attacker.
+- **Trust:** Local resolve() under /tmp/sc-lab.
+Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
 
-## This step
+| Piece | This system |
+|---|---|
+| Subjects | app, filesystem, user filename |
+| Objects | resolved path, root |
+| Actions | resolve |
+| Channels | upload name, archive member (transfer) |
+| TCB | realpath + prefix check after normalization (2.1). |
+| Untrusted | filename, symlink, zip slip members |
+| State / time | Extract then later process. |
+| 1.1 cell | Authorization of *which file object* plus integrity of the host. |
 
-Name principals, objects, and channels. Open design: the client, APK, or prompt is hostile. Secrecy of the check is not the property.
+## Authority matrix (minimum)
 
-## Root cause / impact / prevention / detection / recovery
+| Subject | Object | Action | Decision |
+|---|---|---|---|
+| user | safe name | store | under-root |
+| user | .. path | resolve | deny |
+| zip member | .. | extract | deny |
+| processor | upload | exec | deny |
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
 
 ## Practice
 
-Run `labs/6.4/6.4-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/6.4/6.4-lab` file `path.py`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+XML entity expansion; pickle; YAML load.
+
+## Residual risk
+
+Image codecs (memory) — E4.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.

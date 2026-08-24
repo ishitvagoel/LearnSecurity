@@ -1,37 +1,38 @@
 # 4.3 — Sessions, cookies, and tokens (5 Verify)
 
-**Kind:** verification-lab
-**Loop step:** 5 Verify
-**Standards:** ASVS 5.0.0 V7 session (chapter-level); 2.3 HttpOnly cell.
+**Kind:** verification-lab  
+**Loop step:** 5 Verify  
+**Standards:** ASVS 5.0.0 V3/V7 (final); OWASP Session Management. JWT is a token format, not an architecture.
 
 ## Property (start here)
 
-A session token in the **query string** is not an acceptable session. Bearer belongs in Cookie (HttpOnly, 2.3) or Authorization, not logs and Referer.
+A session token in the query string is not an acceptable session. Access tokens belong in Cookie (HttpOnly, 2.3) or Authorization, never in logs and Referer.
 
 ## Attacker capabilities and trust assumptions
 
-Referer leak, access logs. Trust: local request model.
+- **Attacker:** Referer leak to a CDN; access-log operator; shared screenshot of a URL.
+- **Trust:** Local request dict. Real TLS still leaks query to files and analytics.
+An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
 
-## Root cause / impact / prevention / detection / recovery
+| Case | Must show |
+|---|---|
+| Normal | Honest allowed action still works where the product says so |
+| Negative / abuse | Session established from a query-string token |
+| Failure | Fail closed: Reject query tokens; use cookie/header |
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+Lab tests: `test_property.py` under `labs/4.3/4.3-lab`.
 
-## Framework defaults vs application guarantees
+- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Session established from a query-string token`
+- `--impl fixed`: **pass**
 
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+query-only request yields no session.
 
 ## Practice
 
-Name the forbidden-outcome test.
+Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
 
 ## Transfer
 
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
+Magic-link email (still a URL token — time-bound, one-time, 6.6).
 
-## Non-goals
-
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).

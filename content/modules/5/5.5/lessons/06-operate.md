@@ -1,45 +1,36 @@
 # 5.5 — Database and persistence security (6 Operate)
 
-**Kind:** operations-exercise
-**Loop step:** 6 Operate
-**Standards:** ASVS 5.0.0 V13/V5 (chapter-level). Teach bind variables, not payload catalogs.
+**Kind:** operations-exercise  
+**Loop step:** 6 Operate  
+**Standards:** ASVS 5.0.0 V13 (final); PostgreSQL role/RLS docs as *platform*; parameterization is complete mediation of the SQL interpreter (also 6.1).
 
 ## Property (start here)
 
-Note fetch is parameterized: user input is not concatenated into a query string. Local model only — no live DB attacks.
+fetch_sql must bind the tenant (and note id) as parameters, not concatenate a string the SQL interpreter will parse as code. Application 1.2 is necessary; it is not a substitute for interpreter isolation.
 
 ## Attacker capabilities and trust assumptions
 
-Caller who supplies note_id. Trust: in-process list.
+- **Attacker:** Member who types a note id with SQL metacharacters; stolen app role (3.3).
+- **Trust:** Local query object. Real DB roles in 3.3.
+Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
 
-## This step
+| Outcome | This module |
+|---|---|
+| Detect | SQL error anomalies; WAF is not the property. |
+| Signal (no bodies) | sql_error_spike; grant_drift (3.3). |
+| Revoke / recover | Rotate DB creds; restore if mutated. |
+| Residual | DB superuser tools; replicas. |
 
-Detect without logging note bodies or tokens. Recover fail-safe (revoke, rotate, quarantine). If a human must act, the path must be usable (WCAG 2.2).
-
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
 
 ## Practice
 
-Run `labs/5.5/5.5-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/5.5/5.5-lab`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+NoSQL operators, GraphQL args (7.1).
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+SIEM product names are not the property. Keys stay out of lessons.

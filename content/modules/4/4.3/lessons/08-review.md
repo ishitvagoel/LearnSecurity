@@ -1,37 +1,40 @@
 # 4.3 — Sessions, cookies, and tokens (Review)
 
-**Kind:** code-review
-**Loop step:** Review
-**Standards:** ASVS 5.0.0 V7 session (chapter-level); 2.3 HttpOnly cell.
+**Kind:** code-review  
+**Loop step:** Review  
+**Standards:** ASVS 5.0.0 V3/V7 (final); OWASP Session Management. JWT is a token format, not an architecture.
 
 ## Property (start here)
 
-A session token in the **query string** is not an acceptable session. Bearer belongs in Cookie (HttpOnly, 2.3) or Authorization, not logs and Referer.
+A session token in the query string is not an acceptable session. Access tokens belong in Cookie (HttpOnly, 2.3) or Authorization, never in logs and Referer.
 
 ## Attacker capabilities and trust assumptions
 
-Referer leak, access logs. Trust: local request model.
+- **Attacker:** Referer leak to a CDN; access-log operator; shared screenshot of a URL.
+- **Trust:** Local request dict. Real TLS still leaks query to files and analytics.
+Review `labs/4.3/4.3-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/4.3.md` — not here.
 
-## Root cause / impact / prevention / detection / recovery
+## What to label
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-## Framework defaults vs application guarantees
+- Seeded smell (label it yourself): session_from_request uses query
+- Seeded smell (label it yourself): JWT in localStorage as “SPA best practice” 2016 blog
+- Seeded smell (label it yourself): No Referer policy
+- Seeded smell (label it yourself): Tokens printed in uvicorn logs
 
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+
+## Misconceptions
+
+- JWT is more secure than sessions
+- Query strings are private over HTTPS
+- Logout clears stolen tokens automatically
 
 ## Practice
 
-Review the vulnerable tree; keys are not in this file.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
-
-## Non-goals
-
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+Magic-link email (still a URL token — time-bound, one-time, 6.6).

@@ -1,45 +1,50 @@
 # 9.3 — Security-focused tests (3 Break)
 
-**Kind:** mechanism-lab
-**Loop step:** 3 Break
-**Standards:** ASVS verification; pytest is a mechanism.
+**Kind:** mechanism-lab  
+**Loop step:** 3 Break  
+**Standards:** ASVS/WSTG/MASTG as catalogs of *what* to test; this lab’s cell is the shape of a security test.
 
 ## Property (start here)
 
-A test that only asserts status 200 is not a security test. Security tests name a forbidden outcome (1.1 / 4.4).
+A test that only asserts HTTP 200 is not a security test. Security tests name a forbidden outcome (1.1 / 4.4).
 
 ## Attacker capabilities and trust assumptions
 
-CI green theater. Trust: local metadata about tests.
+- **Attacker:** False confidence.
+- **Trust:** Local is_security_test(spec).
+**Forbidden outcome:** HTTP 200-only test counted as a security test
 
-## This step
+**Authorized scope:** `labs/9.3/9.3-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
 
-The authorized break is the local vulnerable/ fixture. No live targets, no weaponized copy-paste exploits, no public CDN to attack.
+## What to observe
 
-## Root cause / impact / prevention / detection / recovery
+vulnerable stest.py treats 200 as security.
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: is_security_test({status_asserted: True}) True.
 
-## Framework defaults vs application guarantees
+## Vulnerable fixture (local)
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+```python
+def is_security_test(t):
+    return bool(t.get('status_asserted'))
+```
 
-## Residual risk
+## Root cause vs impact
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+| Slice | Lab |
+|---|---|
+| Root cause | Happy path as assurance. |
+| Impact | 4.4 holes with green CI. |
+| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
 
 ## Practice
 
-Run `labs/9.3/9.3-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/9.3/9.3-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Fuzzing without an oracle.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+No live-target instructions. Synthetic data only.

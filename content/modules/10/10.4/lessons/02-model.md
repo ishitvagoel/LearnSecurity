@@ -1,45 +1,53 @@
 # 10.4 — Deployment and configuration hardening (2 Model)
 
-**Kind:** design-exercise
-**Loop step:** 2 Model
-**Standards:** ASVS V14 config (chapter-level).
+**Kind:** design-exercise  
+**Loop step:** 2 Model  
+**Standards:** ASVS 5.0.0 V14 (final); CISA Secure by Default. Debug in prod is a config property.
 
 ## Property (start here)
 
-Production must not boot with debug=True. Configuration is part of the TCB.
+A production boot with debug=True must fail. Debug endpoints, extra headers, and verbose errors are forbidden outcomes in prod, not “just for five minutes.”
 
 ## Attacker capabilities and trust assumptions
 
-Mis-set env. Trust: local pair (env, debug).
+- **Attacker:** Anyone who finds /debug; error pages with traces.
+- **Trust:** Local boot_ok('prod', True).
+Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
 
-## This step
+| Piece | This system |
+|---|---|
+| Subjects | prod process, attacker |
+| Objects | debug flag |
+| Actions | boot_ok |
+| Channels | env, feature flags |
+| TCB | Fail closed on prod+debug. |
+| Untrusted | Default FastAPI debug, leftover env from staging |
+| State / time | Boot; hot flag. |
+| 1.1 cell | Least privilege of the running config + confidentiality of traces. |
 
-Name principals, objects, and channels. Open design: the client, APK, or prompt is hostile. Secrecy of the check is not the property.
+## Authority matrix (minimum)
 
-## Root cause / impact / prevention / detection / recovery
+| Subject | Object | Action | Decision |
+|---|---|---|---|
+| prod | debug True | boot | deny |
+| prod | debug False | boot | allow-if-else-ok |
+| dev | debug True | boot | allow-local |
+| flag | skip_authz | on | deny |
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
 
 ## Practice
 
-Run `labs/10.4/10.4-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/10.4/10.4-lab` file `cfg.py`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Feature flag that disables authz.
+
+## Residual risk
+
+Emergency debug with E6 timebox.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.

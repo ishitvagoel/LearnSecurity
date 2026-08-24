@@ -1,45 +1,58 @@
-# 10.3 — Cloud, serverless, containers, Kubernetes, and IaC (1 Property)
+# 10.3 — Cloud, containers, Kubernetes, and IaC (1 Property)
 
-**Kind:** concept-model
-**Loop step:** 1 Property
-**Standards:** Least privilege for this workload; CIS-style lists are examples, not the property.
+**Kind:** concept-model  
+**Loop step:** 1 Property  
+**Standards:** NIST SP 800-190; Kubernetes security guidance; ASVS V13/V15. K8s is optional in prod, required as a *model* here.
 
 ## Property (start here)
 
-An app pod must not run as cluster-admin. Cloud IAM is complete mediation of the cluster API, not 'we use Kubernetes.'
+A pod requesting cluster-admin must be denied. Workload identity is least privilege (3.3 at cluster grain), not “our namespace is private.”
 
 ## Attacker capabilities and trust assumptions
 
-Over-privileged workload. Trust: local role string. No live cluster.
+- **Attacker:** Compromised app container; malicious helm chart.
+- **Trust:** Local pod_ok(role).
+**Mechanism (not the property):** EKS default service account often too wide.
 
-## This step
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Start from this system's testable sentence, not a topic title. A mechanism (TLS, MASVS control, scanner, CSP) is not the invariant.
+## Root cause vs impact vs prevention vs detection vs recovery
 
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+| Slice | For 10.3 |
+|---|---|
+| Root cause | God-mode for convenience. |
+| Preconditions | pod_ok('cluster-admin') True. |
+| Impact (1.1 cell) | Authorization of the control plane. — Cluster takeover from one app bug. |
+| Prevention | Deny cluster-admin to app; PSP/PSS; no instance metadata from app net (6.5). |
+| Detection | admission_denied. |
+| Recovery | Rotate cluster creds. |
 
 ## Framework defaults vs application guarantees
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+EKS default service account often too wide.
+
+## Mechanism limits and bypasses
+
+NetworkPolicy is not RBAC.
+
+node IAM via metadata.
 
 ## Residual risk
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+Break-glass admin with E6.
 
 ## Practice
 
-Run `labs/10.3/10.3-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Shared-responsibility sketch: you vs cloud vs K8s.
+
+Run `labs/10.3/10.3-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Serverless IAM *.
+
+Clinic: app SA is cluster-admin.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.

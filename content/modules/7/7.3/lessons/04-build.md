@@ -1,45 +1,50 @@
 # 7.3 — Webhooks, callbacks, and third-party APIs (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** ASVS V10; 5.4 channel ≠ authenticity.
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** ASVS 5.0.0 V10 (final); API10 awareness. HMAC is a teaching stand-in, not “we are Stripe.”
 
 ## Property (start here)
 
-Webhook bodies without a valid lab HMAC are rejected. TLS to the peer is not authenticity of this callback.
+A webhook with a missing signature is rejected. Authenticity of the *provider message* is distinct from TLS and from 1.2 on the resulting action.
 
 ## Attacker capabilities and trust assumptions
 
-Caller who can POST /webhook. Trust: local compare.
+- **Attacker:** Anyone who can POST your callback URL.
+- **Trust:** Local accept(sig, body, secret).
+empty signature False.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+import hmac, hashlib
+def accept(sig, body, secret):
+    expect=hmac.new(secret.encode(), body.encode(), hashlib.sha256).hexdigest()
+    return hmac.compare_digest(sig, expect)
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Verify MAC; bind to secret per provider; timestamp.
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+Stripe SDK verify is not your custom HMAC if you reimplement poorly.
+
+Correct signature still needs 1.2 on side effects.
 
 ## Practice
 
-Run `labs/7.3/7.3-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Signed redirects; outbound webhook SSRF (6.5).
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Provider compromise — egress + least privilege on what a webhook may do.

@@ -1,33 +1,44 @@
-# 0.2-LO-08 — Diagnostic is not authorization (Review)
+# 0.2 — Diagnostic and adaptive bridge (Review)
 
-**Kind:** loop-object  
-**Loop step:** 8 Review  
-**Standards:** CISA Secure by Design (final public guidance); Saltzer (1975, seminal) where authority appears.
+**Kind:** code-review  
+**Loop step:** Review  
+**Standards:** NICE Secure Systems Development competencies (informative); this course’s Gate 1 evidence rules. A quiz vendor’s score report is not ASVS.
 
 ## Property (start here)
 
-A placement quiz score does not skip 1.2 mediation or Gate 1 evidence. Adaptive path may skip **orientation prose**, never **invariants**.
+A placement quiz score of 100 does not skip 1.2 complete mediation, Gate 1 evidence, or the authority matrix. Adaptive paths may skip *orientation prose*, never *invariants*.
 
 ## Attacker capabilities and trust assumptions
 
-No attacker needed: the **product** (course) must not treat a score as a capability. Learner with 100% is still untrusted relative to tenant B’s notes.
+- **Attacker:** A hurried learner optimizing for the shortest click-path; a future hiring manager who equates a badge with tenant isolation.
+- **Trust:** The diagnostic repository is local and honest. Quiz items are not production secrets.
+Review `labs/0.2/0.2-bridge/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/0.2.md` — not here.
 
-## Root cause / impact / prevention / detection / recovery
+## What to label
 
-Root cause: confusing assessment score with access matrix. Impact: skipped complete mediation teaching. Prevention: quiz never returns `grants_phase1_skip`. Detection: curriculum tests. Recovery: re-instate 1.2 lab.
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-## Framework defaults vs application guarantees
+- Seeded smell (label it yourself): if score >= 80: skip_phase(1)
+- Seeded smell (label it yourself): No link from diagnostic to 1.2 evidence
+- Seeded smell (label it yourself): Badge screenshot as Gate 1
+- Seeded smell (label it yourself): Adaptive path hides 1.4 accessibility residual
 
-LMS ‘pass’ badges are not ASVS. SAMM scores are not product security.
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+
+## Misconceptions
+
+- Placement is a security clearance
+- Fast learners skip invariants
+- Tool fluency is threat modeling
 
 ## Practice
 
-Review vulnerable/diagnostic.py.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Keys not here.
+A vendor SANS/OSCP score used to skip your team’s threat-model review.
 
-## Non-goals
+## HITL / WCAG 2.2
 
-Live targets, real PII, weaponized payloads. Mastery gates stay not-attempted.
+Diagnostic UI must not be color-only “green = skip Phase 1” (WCAG 2.2 1.4.1).

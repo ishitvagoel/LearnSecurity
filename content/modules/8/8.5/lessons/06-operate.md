@@ -1,45 +1,40 @@
 # 8.5 — Mobile verification and privacy (6 Operate)
 
-**Kind:** operations-exercise
-**Loop step:** 6 Operate
-**Standards:** MASVS 2.1 privacy; NIST Privacy Framework 1.0 (final).
+**Kind:** operations-exercise  
+**Loop step:** 6 Operate  
+**Standards:** MASVS 2.1 + MASTG 2.0 (final); MASWE mapping; Mobile Top 10:2024 awareness only.
 
 ## Property (start here)
 
-A crash report must not include the note body. Mobile privacy is a 1.1 privacy cell, not a policy PDF.
+A crash report must not include the note body. Mobile privacy is a 1.1 privacy cell, not a Play Data safety form as the control.
 
 ## Attacker capabilities and trust assumptions
 
-Crash reporter / support inbox. Trust: local dict. No real PII.
+- **Attacker:** Crash-platform operator; another process reading logcat.
+- **Trust:** Local crash_report(body).
+Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
 
-## This step
+| Outcome | This module |
+|---|---|
+| Detect | CI grep crash fixtures; vendor DLP. |
+| Signal (no bodies) | crash_body_redacted test. |
+| Revoke / recover | Purge vendor; notify if needed. |
+| Residual | Vendor as processor — contract + 5.1. |
 
-Detect without logging note bodies or tokens. Recover fail-safe (revoke, rotate, quarantine). If a human must act, the path must be usable (WCAG 2.2).
-
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-Crash-upload consent and support emails must be understandable (WCAG 2.2).
+CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
 
 ## Practice
 
-Run `labs/8.5/8.5-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/8.5/8.5-lab`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Web Sentry (10.5) same cell.
+
+## Usability
+
+In-app “send feedback” must not require attaching a screenshot of PHI to proceed.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+SIEM product names are not the property. Keys stay out of lessons.

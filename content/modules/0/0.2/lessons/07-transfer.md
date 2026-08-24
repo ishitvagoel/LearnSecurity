@@ -1,33 +1,33 @@
-# 0.2-LO-07 — Diagnostic is not authorization (Transfer)
+# 0.2 — Diagnostic and adaptive bridge (7 Transfer)
 
-**Kind:** loop-object  
+**Kind:** transfer-challenge  
 **Loop step:** 7 Transfer  
-**Standards:** CISA Secure by Design (final public guidance); Saltzer (1975, seminal) where authority appears.
+**Standards:** NICE Secure Systems Development competencies (informative); this course’s Gate 1 evidence rules. A quiz vendor’s score report is not ASVS.
 
 ## Property (start here)
 
-A placement quiz score does not skip 1.2 mediation or Gate 1 evidence. Adaptive path may skip **orientation prose**, never **invariants**.
+A placement quiz score of 100 does not skip 1.2 complete mediation, Gate 1 evidence, or the authority matrix. Adaptive paths may skip *orientation prose*, never *invariants*.
 
 ## Attacker capabilities and trust assumptions
 
-No attacker needed: the **product** (course) must not treat a score as a capability. Learner with 100% is still untrusted relative to tenant B’s notes.
+- **Attacker:** A hurried learner optimizing for the shortest click-path; a future hiring manager who equates a badge with tenant isolation.
+- **Trust:** The diagnostic repository is local and honest. Quiz items are not production secrets.
+Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
 
-## Root cause / impact / prevention / detection / recovery
+**Prompt:** A vendor SANS/OSCP score used to skip your team’s threat-model review.
 
-Root cause: confusing assessment score with access matrix. Impact: skipped complete mediation teaching. Prevention: quiz never returns `grants_phase1_skip`. Detection: curriculum tests. Recovery: re-instate 1.2 lab.
+**Product sketch:** Onboarding at a clinic-booking SaaS.
 
-## Framework defaults vs application guarantees
+Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
 
-LMS ‘pass’ badges are not ASVS. SAMM scores are not product security.
+## What graders reject
+
+| Reject | Why |
+|---|---|
+| Tool or awareness-list name as the property | 1.1 |
+| Framework default as the guarantee | The LMS mastery percentage is not a security property of SecureCollab.… |
+| Live-target plan | Lab policy |
 
 ## Practice
 
-Transfer: industry cert ≠ 4.2 phishing-resistant auth.
-
-## Transfer
-
-Name a cert that still needs Gate 4.
-
-## Non-goals
-
-Live targets, real PII, weaponized payloads. Mastery gates stay not-attempted.
+One page. No keys. The lab `labs/0.2/0.2-bridge` stays the only running system you may break.

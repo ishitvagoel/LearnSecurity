@@ -1,45 +1,40 @@
-# 10.5 — Logging, detection, incident response, recovery, and maintenance (6 Operate)
+# 10.5 — Logging, detection, incident response, recovery, maintenance (6 Operate)
 
-**Kind:** operations-exercise
-**Loop step:** 6 Operate
-**Standards:** NIST CSF 2.0 Recover (final) as outcome label; not a playbook menu.
+**Kind:** operations-exercise  
+**Loop step:** 6 Operate  
+**Standards:** ASVS 5.0.0 V7 (final); NIST CSF 2.0 DE/RS/RC (final); CISA KEV as input.
 
 ## Property (start here)
 
-An incident cannot close until recovery is marked done and logs do not contain note bodies.
+An incident cannot be closed with recovery=todo. Detect without recover is theater. Logs must not become a second body store (3.1/5.1).
 
 ## Attacker capabilities and trust assumptions
 
-On-call theater. Trust: local incident dict.
+- **Attacker:** Real incident; optimistic closer.
+- **Trust:** Local close_incident({recovery, logs}).
+Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
 
-## This step
+| Outcome | This module |
+|---|---|
+| Detect | closed_without_recovery. |
+| Signal (no bodies) | incident_closed_without_recovery denied. |
+| Revoke / recover | This *is* the step — restore drill. |
+| Residual | Some incidents never get perfect forensic certainty — say so. |
 
-Detect without logging note bodies or tokens. Recover fail-safe (revoke, rotate, quarantine). If a human must act, the path must be usable (WCAG 2.2).
-
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-Incident comms and account recovery after compromise must be usable (WCAG 2.2).
+CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
 
 ## Practice
 
-Run `labs/10.5/10.5-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/10.5/10.5-lab`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Ransomware restore vs note-level integrity.
+
+## Usability
+
+IR runbooks and status pages must be usable under stress (keyboard, language, not color-only severity).
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+SIEM product names are not the property. Keys stay out of lessons.

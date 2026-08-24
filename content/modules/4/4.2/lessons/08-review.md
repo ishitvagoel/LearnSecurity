@@ -1,37 +1,44 @@
-# 4.2 — Authentication, phishing resistance, and usable access (Review)
+# 4.2 — Authentication and phishing-resistant authenticators (Review)
 
-**Kind:** code-review
-**Loop step:** Review
-**Standards:** NIST SP 800-63-4 (final) phishing-resistant AAL; WebAuthn L3 remains **Candidate Recommendation** — label it.
+**Kind:** code-review  
+**Loop step:** Review  
+**Standards:** NIST SP 800-63B-4 (final); WebAuthn Level 3 is a **W3C Candidate Recommendation** — label CR, not Rec; WCAG 2.2 for the journey; ASVS 5.0.0 V6.
 
 ## Property (start here)
 
-Password + 'remember me' is **not** phishing-resistant. A phishing-resistant authenticator must fail a lookalike origin (WebAuthn-class). Passwords stay allowed only as a labeled residual.
+A password check that ignores origin is not phishing-resistant. WebAuthn to evil.example must fail even if the secret/credential exists. Passwords to the real origin are still phishable — do not advertise them as resistant.
 
 ## Attacker capabilities and trust assumptions
 
-Lookalike origin. Trust: lab origin string only — no live IdP.
+- **Attacker:** Lookalike origin; intercepted password; fatigued user.
+- **Trust:** Lab origin binding. Real authenticators later; this fixture models origin check.
+Review `labs/4.2/4.2-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/4.2.md` — not here.
 
-## Root cause / impact / prevention / detection / recovery
+## What to label
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-## Framework defaults vs application guarantees
+- Seeded smell (label it yourself): phishing_resistant('password', evil, real) True
+- Seeded smell (label it yourself): Marketing copy “MFA = phishing resistant”
+- Seeded smell (label it yourself): Recovery SMS as default
+- Seeded smell (label it yourself): No wrong-origin WebAuthn test
 
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+
+## Misconceptions
+
+- Any 2FA is phishing-resistant
+- WebAuthn replaces authorization
+- Usable login is a nice-to-have
 
 ## Practice
 
-Review the vulnerable tree; keys are not in this file.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
+Step-up for export: still origin-bound?
 
-## Non-goals
+## HITL / WCAG 2.2
 
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+WebAuthn and password fallback must work with keyboard, labels, and no color-only errors (WCAG 2.2). A broken accessible path pushes people to shared passwords.

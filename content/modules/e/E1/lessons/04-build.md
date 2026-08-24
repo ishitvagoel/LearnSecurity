@@ -1,45 +1,51 @@
 # E1 — AI, LLM, and agentic application security (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** Elective E1; treat vendor AI-security features as mechanisms. Draft eval methods stay draft if cited.
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** OWASP GenAI LLM Top 10 2026 (awareness, not syllabus); NIST AI RMF GenAI Profile (guidance); this lab’s cell is tool authority.
 
 ## Property (start here)
 
-The lab agent may only invoke allowlisted tools. A model-proposed exec_sql is not authorization. OWASP LLM lists are awareness, not this syllabus.
+The lab agent may only invoke allowlisted tools. A model-proposed exec_sql is not authorization. The model is an untrusted client (8.1) that speaks English.
 
 ## Attacker capabilities and trust assumptions
 
-Prompt that asks the model to call exec_sql. Trust: local tool router. No live model vendor.
+- **Attacker:** Prompt injection in a note body; malicious retrieved doc.
+- **Trust:** Local run_tool(name).
+exec_sql => None.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+ALLOWED={'search_notes'}
+def run_tool(name, args):
+    if name not in ALLOWED:
+        return None
+    return f'ran {name}'
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Allow-list; no exec_sql; human approval for high impact.
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+LangChain default tools are not your matrix.
+
+Prompt “never call exec_sql” is not mediation.
 
 ## Practice
 
-Run `labs/E1/e1-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Copilot in CI.
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Hallucinated packages (10.2) in copilot use.

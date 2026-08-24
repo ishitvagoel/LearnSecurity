@@ -1,45 +1,53 @@
 # 5.5 — Database and persistence security (2 Model)
 
-**Kind:** design-exercise
-**Loop step:** 2 Model
-**Standards:** ASVS 5.0.0 V13/V5 (chapter-level). Teach bind variables, not payload catalogs.
+**Kind:** design-exercise  
+**Loop step:** 2 Model  
+**Standards:** ASVS 5.0.0 V13 (final); PostgreSQL role/RLS docs as *platform*; parameterization is complete mediation of the SQL interpreter (also 6.1).
 
 ## Property (start here)
 
-Note fetch is parameterized: user input is not concatenated into a query string. Local model only — no live DB attacks.
+fetch_sql must bind the tenant (and note id) as parameters, not concatenate a string the SQL interpreter will parse as code. Application 1.2 is necessary; it is not a substitute for interpreter isolation.
 
 ## Attacker capabilities and trust assumptions
 
-Caller who supplies note_id. Trust: in-process list.
+- **Attacker:** Member who types a note id with SQL metacharacters; stolen app role (3.3).
+- **Trust:** Local query object. Real DB roles in 3.3.
+Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
 
-## This step
+| Piece | This system |
+|---|---|
+| Subjects | app, postgres parser, attacker input |
+| Objects | SQL text vs bound params |
+| Actions | fetch_sql, is_bound |
+| Channels | SQL session |
+| TCB | Bound API (psycopg parameters). |
+| Untrusted | note_id, sort columns, search q |
+| State / time | One request; also migrations (residual). |
+| 1.1 cell | Confidentiality/integrity of rows via interpreter confusion. |
 
-Name principals, objects, and channels. Open design: the client, APK, or prompt is hostile. Secrecy of the check is not the property.
+## Authority matrix (minimum)
 
-## Root cause / impact / prevention / detection / recovery
+| Subject | Object | Action | Decision |
+|---|---|---|---|
+| app | tenant param | query | bound |
+| attacker | id field | as-SQL | deny |
+| migrator | ddl | run | offline-role |
+| analyst | bodies | SELECT | 3.3 |
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
 
 ## Practice
 
-Run `labs/5.5/5.5-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/5.5/5.5-lab` file `query.py`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+NoSQL operators, GraphQL args (7.1).
+
+## Residual risk
+
+DB superuser tools; replicas.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.

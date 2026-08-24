@@ -1,45 +1,40 @@
 # 9.1 — Verification requirements and traceability (Review)
 
-**Kind:** code-review
-**Loop step:** Review
-**Standards:** ASVS 5.0.0 as verification requirements; CSF 2.0 outcomes are labels, not coverage.
+**Kind:** code-review  
+**Loop step:** Review  
+**Standards:** ASVS 5.0.0 (final) as the web/API backbone; MASVS 2.1 for mobile; a spreadsheet row is not coverage.
 
 ## Property (start here)
 
-A requirement id is covered only if a test asserts the isolation property, not if a spreadsheet row exists.
+A requirements row that only stores status=done without a test asserting isolation does not cover AUTHZ-1. Traceability is threat → requirement → test → result.
 
 ## Attacker capabilities and trust assumptions
 
-Process attacker: shipping with paper coverage. Trust: local list of tests.
+- **Attacker:** Optimistic PM; empty CI.
+- **Trust:** Local covered(req, tests).
+Review `labs/9.1/9.1-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/9.1.md` — not here.
 
-## This step
+## What to label
 
-Review the diff as a SecureCollab PR. Reject client trust, interpreter concatenation, Report-Only as enforcement, and closing findings without retest. Keys stay out of lessons.
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-## Root cause / impact / prevention / detection / recovery
+- Seeded smell (label it yourself): status-only coverage
+- Seeded smell (label it yourself): ASVS copied wholesale
+- Seeded smell (label it yourself): No isolation assert
+- Seeded smell (label it yourself): Exceptions without expiry
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
 
-## Framework defaults vs application guarantees
+## Misconceptions
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+- ASVS certification exists as a sticker
+- Number of tests is coverage
+- Green build is Gate 9
 
 ## Practice
 
-Run `labs/9.1/9.1-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
-
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+MASVS STORAGE for 8.2.

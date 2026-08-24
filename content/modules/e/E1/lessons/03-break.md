@@ -1,45 +1,50 @@
 # E1 — AI, LLM, and agentic application security (3 Break)
 
-**Kind:** mechanism-lab
-**Loop step:** 3 Break
-**Standards:** Elective E1; treat vendor AI-security features as mechanisms. Draft eval methods stay draft if cited.
+**Kind:** mechanism-lab  
+**Loop step:** 3 Break  
+**Standards:** OWASP GenAI LLM Top 10 2026 (awareness, not syllabus); NIST AI RMF GenAI Profile (guidance); this lab’s cell is tool authority.
 
 ## Property (start here)
 
-The lab agent may only invoke allowlisted tools. A model-proposed exec_sql is not authorization. OWASP LLM lists are awareness, not this syllabus.
+The lab agent may only invoke allowlisted tools. A model-proposed exec_sql is not authorization. The model is an untrusted client (8.1) that speaks English.
 
 ## Attacker capabilities and trust assumptions
 
-Prompt that asks the model to call exec_sql. Trust: local tool router. No live model vendor.
+- **Attacker:** Prompt injection in a note body; malicious retrieved doc.
+- **Trust:** Local run_tool(name).
+**Forbidden outcome:** Agent executes exec_sql because the model asked
 
-## This step
+**Authorized scope:** `labs/E1/e1-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
 
-The authorized break is the local vulnerable/ fixture. No live targets, no weaponized copy-paste exploits, no public CDN to attack.
+## What to observe
 
-## Root cause / impact / prevention / detection / recovery
+vulnerable tools.py allows exec_sql.
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: run_tool('exec_sql') executes.
 
-## Framework defaults vs application guarantees
+## Vulnerable fixture (local)
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+```python
+def run_tool(name, args):
+    return f'ran {name}'
+```
 
-## Residual risk
+## Root cause vs impact
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+| Slice | Lab |
+|---|---|
+| Root cause | Model output treated as policy. |
+| Impact | Interpreter 6.1 via English. |
+| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
 
 ## Practice
 
-Run `labs/E1/e1-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/E1/e1-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Copilot in CI.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+No live-target instructions. Synthetic data only.

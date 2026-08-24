@@ -1,37 +1,38 @@
 # 3.3 — Secure architecture patterns (5 Verify)
 
-**Kind:** verification-lab
-**Loop step:** 5 Verify
-**Standards:** ASVS 5.0.0 V15 architecture (chapter-level); Saltzer least privilege (1975, seminal).
+**Kind:** verification-lab  
+**Loop step:** 5 Verify  
+**Standards:** ASVS 5.0.0 V4/V13 (final); CISA Secure by Design (final guidance); Saltzer least privilege (1975, seminal).
 
 ## Property (start here)
 
-Tenant isolation is not 'one Postgres role for the whole app.' A stolen app role must not SELECT other tenants without 1.2 mediation.
+The application DB role used by FastAPI must not SELECT another tenant’s rows even if a handler forgets a WHERE. Architecture is a second mediation, not a substitute for 1.2.
 
 ## Attacker capabilities and trust assumptions
 
-Stolen application DB credential. Trust: DB is in TCB only with per-tenant enforcement (5.5 residual if app-only).
+- **Attacker:** Buggy handler; SQLi later (5.5/6.1); stolen app credentials.
+- **Trust:** PostgreSQL RLS/role in the lab stand-in. The app still must mediate.
+An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
 
-## Root cause / impact / prevention / detection / recovery
+| Case | Must show |
+|---|---|
+| Normal | Honest allowed action still works where the product says so |
+| Negative / abuse | App DB role can SELECT another tenant's rows |
+| Failure | Fail closed: Least-privilege role; RLS as extra layer (5 |
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+Lab tests: `test_property.py` under `labs/3.3/3.3-lab`.
 
-## Framework defaults vs application guarantees
+- `--impl vulnerable` (or vulnerable fixtures): **fail** on `App DB role can SELECT another tenant's rows`
+- `--impl fixed`: **pass**
 
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+app cannot select other tenant.
 
 ## Practice
 
-Name the forbidden-outcome test.
+Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
 
 ## Transfer
 
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
+Serverless function with a shared “admin” connection string.
 
-## Non-goals
-
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).

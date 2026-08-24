@@ -1,45 +1,58 @@
 # 9.3 — Security-focused tests (1 Property)
 
-**Kind:** concept-model
-**Loop step:** 1 Property
-**Standards:** ASVS verification; pytest is a mechanism.
+**Kind:** concept-model  
+**Loop step:** 1 Property  
+**Standards:** ASVS/WSTG/MASTG as catalogs of *what* to test; this lab’s cell is the shape of a security test.
 
 ## Property (start here)
 
-A test that only asserts status 200 is not a security test. Security tests name a forbidden outcome (1.1 / 4.4).
+A test that only asserts HTTP 200 is not a security test. Security tests name a forbidden outcome (1.1 / 4.4).
 
 ## Attacker capabilities and trust assumptions
 
-CI green theater. Trust: local metadata about tests.
+- **Attacker:** False confidence.
+- **Trust:** Local is_security_test(spec).
+**Mechanism (not the property):** pytest-cov 90% is not 1.2.
 
-## This step
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Start from this system's testable sentence, not a topic title. A mechanism (TLS, MASVS control, scanner, CSP) is not the invariant.
+## Root cause vs impact vs prevention vs detection vs recovery
 
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+| Slice | For 9.3 |
+|---|---|
+| Root cause | Happy path as assurance. |
+| Preconditions | is_security_test({status_asserted: True}) True. |
+| Impact (1.1 cell) | Integrity of evidence. — 4.4 holes with green CI. |
+| Prevention | Require forbidden-outcome asserts. |
+| Detection | lint tests for security suite membership. |
+| Recovery | Add negative tests. |
 
 ## Framework defaults vs application guarantees
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+pytest-cov 90% is not 1.2.
+
+## Mechanism limits and bypasses
+
+Property tests still need oracles.
+
+Renaming test_security_*.
 
 ## Residual risk
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+Exploratory testing (9.5).
 
 ## Practice
 
-Run `labs/9.3/9.3-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write one forbidden-outcome test name for this module’s neighbors.
+
+Run `labs/9.3/9.3-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Fuzzing without an oracle.
+
+Clinic: test_get_patient_200.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.

@@ -1,37 +1,36 @@
 # 3.3 — Secure architecture patterns (6 Operate)
 
-**Kind:** operations-exercise
-**Loop step:** 6 Operate
-**Standards:** ASVS 5.0.0 V15 architecture (chapter-level); Saltzer least privilege (1975, seminal).
+**Kind:** operations-exercise  
+**Loop step:** 6 Operate  
+**Standards:** ASVS 5.0.0 V4/V13 (final); CISA Secure by Design (final guidance); Saltzer least privilege (1975, seminal).
 
 ## Property (start here)
 
-Tenant isolation is not 'one Postgres role for the whole app.' A stolen app role must not SELECT other tenants without 1.2 mediation.
+The application DB role used by FastAPI must not SELECT another tenant’s rows even if a handler forgets a WHERE. Architecture is a second mediation, not a substitute for 1.2.
 
 ## Attacker capabilities and trust assumptions
 
-Stolen application DB credential. Trust: DB is in TCB only with per-tenant enforcement (5.5 residual if app-only).
+- **Attacker:** Buggy handler; SQLi later (5.5/6.1); stolen app credentials.
+- **Trust:** PostgreSQL RLS/role in the lab stand-in. The app still must mediate.
+Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
 
-## Root cause / impact / prevention / detection / recovery
+| Outcome | This module |
+|---|---|
+| Detect | pg_audit on cross-tenant seqscans. |
+| Signal (no bodies) | grant_drift check in CI; connection-user metric. |
+| Revoke / recover | Rotate DB password; review grants. |
+| Residual | Stolen migrator role — separate credential, shorter life. |
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
 
 ## Practice
 
-What is logged without sensitive bodies/secrets?
+Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/3.3/3.3-lab`.
 
 ## Transfer
 
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
+Serverless function with a shared “admin” connection string.
 
 ## Non-goals
 
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+SIEM product names are not the property. Keys stay out of lessons.

@@ -1,45 +1,48 @@
 # 5.4 — Secure communication and channel binding (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** RFC 8446 TLS 1.3 (final). Forwarded headers untrusted unless the proxy is TCB (2.2).
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** RFC 8446/9846 TLS 1.3 (final); ASVS 5.0.0 V12; MASVS-NETWORK for 8.x. Pinning is a trade-off, not a universal rule.
 
 ## Property (start here)
 
-Client-supplied X-Forwarded-Proto=https is not proof of TLS. Channel binding uses the server's view of the connection.
+A client-supplied X-Forwarded-Proto: https does not make the channel HTTPS. Channel authenticity is what the server socket actually negotiated (or a trusted proxy you *bound*), not a header from the browser.
 
 ## Attacker capabilities and trust assumptions
 
-Client who sets headers after a cleartext hop. Trust: local header dict.
+- **Attacker:** Client on cleartext who wants the app to think TLS is on (cookie Secure flags, redirects).
+- **Trust:** Direct socket proto in the lab. Real deployments may trust a *locked* load balancer hop only.
+header https + socket http => False.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+def channel_is_https(headers, server_scheme):
+    return server_scheme == 'https'
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Ignore client proto unless the immediate peer is a trusted proxy with a bound identity.
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+uvicorn --proxy-headers without a trusted proxy IP is this bug.
+
+Correct TLS to the LB is not e2e if you needed e2e (messaging).
 
 ## Practice
 
-Run `labs/5.4/5.4-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+mTLS service identity vs this header.
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Pinning mobile apps (8.x) vs operational breakage — document, don’t mandate.

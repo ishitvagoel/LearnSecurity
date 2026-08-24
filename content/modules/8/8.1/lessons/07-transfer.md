@@ -1,45 +1,33 @@
-# 8.1 — The hostile-client and mobile-platform model (7 Generalize)
+# 8.1 — Hostile-client and mobile platform model (7 Transfer)
 
-**Kind:** transfer-challenge
-**Loop step:** 7 Generalize
-**Standards:** MASVS 2.1 (final) platform model; Play Integrity is a vendor mechanism, not the property.
+**Kind:** transfer-challenge  
+**Loop step:** 7 Transfer  
+**Standards:** MASVS 2.1 (final) PLATFORM/CODE; Android security model. APK is not in the TCB.
 
 ## Property (start here)
 
-SecureCollab must not grant a sensitive export because the Android client JSON says integrity is ok. Server attestation (lab token) is the TCB; the APK is hostile.
+A client JSON field integrity=ok must not authorize a sensitive export. The server attestation result is the TCB; the APK is hostile (root, patched, emulator).
 
 ## Attacker capabilities and trust assumptions
 
-Modified APK that sets integrity=ok. Trust: server token only. Local dict; no real Play Integrity calls.
+- **Attacker:** Modified APK; Frida; stolen “integrity ok” boolean.
+- **Trust:** Local allow_export(client_claim, server_attest).
+Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
 
-## This step
+**Prompt:** Feature flags in the APK; premium=true.
 
-Keep the property; change one channel (worker, WebView, CSV, CI). Do not answer with a Top 10 name. Label drafts draft.
+**Product sketch:** Clinic Android: client says hipaaMode=true.
 
-## Root cause / impact / prevention / detection / recovery
+Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## What graders reject
 
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-Attestation can be unavailable; then deny the sensitive path (fail-safe), do not trust the client checkbox.
+| Reject | Why |
+|---|---|
+| Tool or awareness-list name as the property | 1.1 |
+| Framework default as the guarantee | Play Integrity is a signal, not 1.2.… |
+| Live-target plan | Lab policy |
 
 ## Practice
 
-Run `labs/8.1/8.1-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
-
-## Transfer
-
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
-
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+One page. No keys. The lab `labs/8.1/8.1-lab` stays the only running system you may break.

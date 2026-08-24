@@ -1,45 +1,33 @@
-# 5.5 — Database and persistence security (7 Generalize)
+# 5.5 — Database and persistence security (7 Transfer)
 
-**Kind:** transfer-challenge
-**Loop step:** 7 Generalize
-**Standards:** ASVS 5.0.0 V13/V5 (chapter-level). Teach bind variables, not payload catalogs.
+**Kind:** transfer-challenge  
+**Loop step:** 7 Transfer  
+**Standards:** ASVS 5.0.0 V13 (final); PostgreSQL role/RLS docs as *platform*; parameterization is complete mediation of the SQL interpreter (also 6.1).
 
 ## Property (start here)
 
-Note fetch is parameterized: user input is not concatenated into a query string. Local model only — no live DB attacks.
+fetch_sql must bind the tenant (and note id) as parameters, not concatenate a string the SQL interpreter will parse as code. Application 1.2 is necessary; it is not a substitute for interpreter isolation.
 
 ## Attacker capabilities and trust assumptions
 
-Caller who supplies note_id. Trust: in-process list.
+- **Attacker:** Member who types a note id with SQL metacharacters; stolen app role (3.3).
+- **Trust:** Local query object. Real DB roles in 3.3.
+Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
 
-## This step
+**Prompt:** NoSQL operators, GraphQL args (7.1).
 
-Keep the property; change one channel (worker, WebView, CSV, CI). Do not answer with a Top 10 name. Label drafts draft.
+**Product sketch:** Clinic search box.
 
-## Root cause / impact / prevention / detection / recovery
+Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## What graders reject
 
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+| Reject | Why |
+|---|---|
+| Tool or awareness-list name as the property | 1.1 |
+| Framework default as the guarantee | SQLAlchemy text() with f-strings is still concat. ORM defaults can still interpo… |
+| Live-target plan | Lab policy |
 
 ## Practice
 
-Run `labs/5.5/5.5-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
-
-## Transfer
-
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
-
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+One page. No keys. The lab `labs/5.5/5.5-lab` stays the only running system you may break.

@@ -1,45 +1,44 @@
 # E6 — Product security leadership (Review)
 
-**Kind:** code-review
-**Loop step:** Review
-**Standards:** Risk ownership; WCAG 2.2 on any human control named in the exception.
+**Kind:** code-review  
+**Loop step:** Review  
+**Standards:** OWASP SAMM; NIST CSF 2.0; SSDF; CISA Secure by Design. Leadership is accountable residual, not a slide.
 
 ## Property (start here)
 
-A risk exception cannot be accepted without an owner, a review date, and an accessibility check flag. Leadership is accountable residual, not a slide.
+A risk exception cannot be accepted without an owner, a review date, and an accessibility check flag. “We’ll accept it” is not a record.
 
 ## Attacker capabilities and trust assumptions
 
-Executive who wants the date. Trust: local exception dict.
+- **Attacker:** Calendar; silent exceptions.
+- **Trust:** Local accept_exception({owner, review_by}).
+Review `labs/E6/e6-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/E6.md` — not here.
 
-## This step
+## What to label
 
-Review the diff as a SecureCollab PR. Reject client trust, interpreter concatenation, Report-Only as enforcement, and closing findings without retest. Keys stay out of lessons.
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-## Root cause / impact / prevention / detection / recovery
+- Seeded smell (label it yourself): accept with empty owner
+- Seeded smell (label it yourself): No review_by
+- Seeded smell (label it yourself): a11y not in the schema
+- Seeded smell (label it yourself): SAMM slide as the exception
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
 
-## Framework defaults vs application guarantees
+## Misconceptions
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-Exceptions that rely on a human process must remain operable and understandable (WCAG 2.2).
+- Leadership is soft skills not invariants
+- Exceptions are failure
+- Users can always call support instead of accessible recovery
 
 ## Practice
 
-Run `labs/E6/e6-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Procurement questionnaire vs this record.
 
-## Non-goals
+## HITL / WCAG 2.2
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+The exception must record whether the residual includes an inaccessible control (1.4). Leadership owns that users cannot complete recovery.

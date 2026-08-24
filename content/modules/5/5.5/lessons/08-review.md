@@ -1,45 +1,40 @@
 # 5.5 — Database and persistence security (Review)
 
-**Kind:** code-review
-**Loop step:** Review
-**Standards:** ASVS 5.0.0 V13/V5 (chapter-level). Teach bind variables, not payload catalogs.
+**Kind:** code-review  
+**Loop step:** Review  
+**Standards:** ASVS 5.0.0 V13 (final); PostgreSQL role/RLS docs as *platform*; parameterization is complete mediation of the SQL interpreter (also 6.1).
 
 ## Property (start here)
 
-Note fetch is parameterized: user input is not concatenated into a query string. Local model only — no live DB attacks.
+fetch_sql must bind the tenant (and note id) as parameters, not concatenate a string the SQL interpreter will parse as code. Application 1.2 is necessary; it is not a substitute for interpreter isolation.
 
 ## Attacker capabilities and trust assumptions
 
-Caller who supplies note_id. Trust: in-process list.
+- **Attacker:** Member who types a note id with SQL metacharacters; stolen app role (3.3).
+- **Trust:** Local query object. Real DB roles in 3.3.
+Review `labs/5.5/5.5-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/5.5.md` — not here.
 
-## This step
+## What to label
 
-Review the diff as a SecureCollab PR. Reject client trust, interpreter concatenation, Report-Only as enforcement, and closing findings without retest. Keys stay out of lessons.
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-## Root cause / impact / prevention / detection / recovery
+- Seeded smell (label it yourself): f"SELECT ... '{note_id}'"
+- Seeded smell (label it yourself): ORM .filter with raw strings
+- Seeded smell (label it yourself): RLS disabled in tests “for speed” and forgotten
+- Seeded smell (label it yourself): No is_bound assertion
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
 
-## Framework defaults vs application guarantees
+## Misconceptions
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+- ORM means no injection
+- RLS replaces parameterization
+- Blacklist of quotes is mediation
 
 ## Practice
 
-Run `labs/5.5/5.5-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
-
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+NoSQL operators, GraphQL args (7.1).

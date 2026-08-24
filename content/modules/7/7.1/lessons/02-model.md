@@ -1,45 +1,53 @@
 # 7.1 — API contracts, protocols, and inventory (2 Model)
 
-**Kind:** design-exercise
-**Loop step:** 2 Model
-**Standards:** ASVS API V4 (chapter-level).
+**Kind:** design-exercise  
+**Loop step:** 2 Model  
+**Standards:** ASVS 5.0.0 V13 (final); OpenAPI as inventory, not security; API8/API9 awareness.
 
 ## Property (start here)
 
-JSON PATCH cannot set is_admin. Unknown fields are ignored or rejected — mass assignment is an authorization bug.
+Mass assignment: a PATCH must not set is_admin from the client document. The contract’s writable field set is an authorization property (1.2 at field grain, 7.2).
 
 ## Attacker capabilities and trust assumptions
 
-Authenticated member sending extra fields. Trust: local dict.
+- **Attacker:** Authenticated member sending extra JSON keys.
+- **Trust:** Local apply(user, patch).
+Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
 
-## This step
+| Piece | This system |
+|---|---|
+| Subjects | member, admin flag |
+| Objects | display_name, is_admin |
+| Actions | apply |
+| Channels | JSON PATCH/PUT |
+| TCB | Allow-listed writable fields server-side. |
+| Untrusted | JSON keys, GraphQL mutations, protobuf unexpected fields |
+| State / time | One PATCH; also undocumented /v0 leftover (inventory). |
+| 1.1 cell | Authorization of properties. |
 
-Name principals, objects, and channels. Open design: the client, APK, or prompt is hostile. Secrecy of the check is not the property.
+## Authority matrix (minimum)
 
-## Root cause / impact / prevention / detection / recovery
+| Subject | Object | Action | Decision |
+|---|---|---|---|
+| member | display_name | PATCH | allow |
+| member | is_admin | PATCH | deny |
+| admin | is_admin | PATCH | allow-audited |
+| ghost /v0 | any | call | deny-or-inventory |
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
 
 ## Practice
 
-Run `labs/7.1/7.1-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/7.1/7.1-lab` file `patch.py`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+GraphQL mutation arguments; gRPC unknown fields.
+
+## Residual risk
+
+Honest display_name XSS (6.2) is another cell.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.

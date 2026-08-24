@@ -1,45 +1,62 @@
-# 10.5 — Logging, detection, incident response, recovery, and maintenance (1 Property)
+# 10.5 — Logging, detection, incident response, recovery, maintenance (1 Property)
 
-**Kind:** concept-model
-**Loop step:** 1 Property
-**Standards:** NIST CSF 2.0 Recover (final) as outcome label; not a playbook menu.
+**Kind:** concept-model  
+**Loop step:** 1 Property  
+**Standards:** ASVS 5.0.0 V7 (final); NIST CSF 2.0 DE/RS/RC (final); CISA KEV as input.
 
 ## Property (start here)
 
-An incident cannot close until recovery is marked done and logs do not contain note bodies.
+An incident cannot be closed with recovery=todo. Detect without recover is theater. Logs must not become a second body store (3.1/5.1).
 
 ## Attacker capabilities and trust assumptions
 
-On-call theater. Trust: local incident dict.
+- **Attacker:** Real incident; optimistic closer.
+- **Trust:** Local close_incident({recovery, logs}).
+**Mechanism (not the property):** PagerDuty is not recovery.
 
-## This step
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Start from this system's testable sentence, not a topic title. A mechanism (TLS, MASVS control, scanner, CSP) is not the invariant.
+## Root cause vs impact vs prevention vs detection vs recovery
 
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+| Slice | For 10.5 |
+|---|---|
+| Root cause | Close on detection quality. |
+| Preconditions | close_incident({recovery:'todo', logs:'ok'}) True. |
+| Impact (1.1 cell) | Resilience — recover is part of the 1.1 cell when prevention failed. — System still broken or attacker still in. |
+| Prevention | Require recovery evidence (restore test, revoke list). |
+| Detection | closed_without_recovery. |
+| Recovery | This *is* the step — restore drill. |
 
 ## Framework defaults vs application guarantees
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+PagerDuty is not recovery.
+
+## Mechanism limits and bypasses
+
+Observability pipeline as exfil (3.1).
+
+Mark recovery N/A without E6.
 
 ## Residual risk
 
-Incident comms and account recovery after compromise must be usable (WCAG 2.2).
+Some incidents never get perfect forensic certainty — say so.
 
 ## Practice
 
-Run `labs/10.5/10.5-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Tabletop: stolen session (4.3) — detect, revoke, recover.
+
+Run `labs/10.5/10.5-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Ransomware restore vs note-level integrity.
+
+Clinic: close ticket when SIEM is green.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.
+
+## Usability and accessibility
+
+IR runbooks and status pages must be usable under stress (keyboard, language, not color-only severity).

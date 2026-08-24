@@ -1,37 +1,50 @@
 # 3.3 — Secure architecture patterns (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** ASVS 5.0.0 V15 architecture (chapter-level); Saltzer least privilege (1975, seminal).
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** ASVS 5.0.0 V4/V13 (final); CISA Secure by Design (final guidance); Saltzer least privilege (1975, seminal).
 
 ## Property (start here)
 
-Tenant isolation is not 'one Postgres role for the whole app.' A stolen app role must not SELECT other tenants without 1.2 mediation.
+The application DB role used by FastAPI must not SELECT another tenant’s rows even if a handler forgets a WHERE. Architecture is a second mediation, not a substitute for 1.2.
 
 ## Attacker capabilities and trust assumptions
 
-Stolen application DB credential. Trust: DB is in TCB only with per-tenant enforcement (5.5 residual if app-only).
+- **Attacker:** Buggy handler; SQLi later (5.5/6.1); stolen app credentials.
+- **Trust:** PostgreSQL RLS/role in the lab stand-in. The app still must mediate.
+can_select('app', 'tB', 'tA') is False.
 
-## Root cause / impact / prevention / detection / recovery
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Fixed fixture (local)
 
-## Framework defaults vs application guarantees
+```python
+def can_select(role: str, tenant: str, note_tenant: str) -> bool:
+    if role != "app":
+        return False
+    return tenant == note_tenant
+```
 
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+## Why this restores the cell
+
+Least-privilege role; RLS as extra layer (5.5).
+
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+
+## What this is not
+
+SQLAlchemy session is not a tenant scope.
+
+RLS bypassed by table owners and SECURITY DEFINER (E5).
 
 ## Practice
 
-State the structural fix (not a denylist of one user).
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
+Serverless function with a shared “admin” connection string.
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+Stolen migrator role — separate credential, shorter life.

@@ -1,45 +1,48 @@
 # 9.1 — Verification requirements and traceability (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** ASVS 5.0.0 as verification requirements; CSF 2.0 outcomes are labels, not coverage.
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** ASVS 5.0.0 (final) as the web/API backbone; MASVS 2.1 for mobile; a spreadsheet row is not coverage.
 
 ## Property (start here)
 
-A requirement id is covered only if a test asserts the isolation property, not if a spreadsheet row exists.
+A requirements row that only stores status=done without a test asserting isolation does not cover AUTHZ-1. Traceability is threat → requirement → test → result.
 
 ## Attacker capabilities and trust assumptions
 
-Process attacker: shipping with paper coverage. Trust: local list of tests.
+- **Attacker:** Optimistic PM; empty CI.
+- **Trust:** Local covered(req, tests).
+status-only row is not coverage.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+def covered(req_id, tests):
+    return any(t.get('req') == req_id and t.get('asserts_isolation') for t in tests)
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Coverage predicate requires the isolation assert.
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+ASVS PDF is not your matrix.
+
+Level 2 tailored — say what you dropped (E6).
 
 ## Practice
 
-Run `labs/9.1/9.1-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+MASVS STORAGE for 8.2.
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Unmapped Level 3 risks.

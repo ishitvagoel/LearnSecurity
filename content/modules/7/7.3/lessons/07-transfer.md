@@ -1,45 +1,33 @@
-# 7.3 — Webhooks, callbacks, and third-party APIs (7 Generalize)
+# 7.3 — Webhooks, callbacks, and third-party APIs (7 Transfer)
 
-**Kind:** transfer-challenge
-**Loop step:** 7 Generalize
-**Standards:** ASVS V10; 5.4 channel ≠ authenticity.
+**Kind:** transfer-challenge  
+**Loop step:** 7 Transfer  
+**Standards:** ASVS 5.0.0 V10 (final); API10 awareness. HMAC is a teaching stand-in, not “we are Stripe.”
 
 ## Property (start here)
 
-Webhook bodies without a valid lab HMAC are rejected. TLS to the peer is not authenticity of this callback.
+A webhook with a missing signature is rejected. Authenticity of the *provider message* is distinct from TLS and from 1.2 on the resulting action.
 
 ## Attacker capabilities and trust assumptions
 
-Caller who can POST /webhook. Trust: local compare.
+- **Attacker:** Anyone who can POST your callback URL.
+- **Trust:** Local accept(sig, body, secret).
+Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
 
-## This step
+**Prompt:** Signed redirects; outbound webhook SSRF (6.5).
 
-Keep the property; change one channel (worker, WebView, CSV, CI). Do not answer with a Top 10 name. Label drafts draft.
+**Product sketch:** Clinic lab-result webhook.
 
-## Root cause / impact / prevention / detection / recovery
+Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## What graders reject
 
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+| Reject | Why |
+|---|---|
+| Tool or awareness-list name as the property | 1.1 |
+| Framework default as the guarantee | Stripe SDK verify is not your custom HMAC if you reimplement poorly.… |
+| Live-target plan | Lab policy |
 
 ## Practice
 
-Run `labs/7.3/7.3-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
-
-## Transfer
-
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
-
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+One page. No keys. The lab `labs/7.3/7.3-lab` stays the only running system you may break.

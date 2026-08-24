@@ -1,45 +1,48 @@
 # 9.4 — Automated analysis and tool orchestration (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** ASVS + tool results as inputs; not compliance theater.
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** NIST SSDF (final); OWASP SAMM; OpenSSF. Tools are signals.
 
 ## Property (start here)
 
-A HIGH scanner finding without a mapped SecureCollab requirement cannot pass the lab gate. Tools do not prove invariants.
+A HIGH finding without a mapped SecureCollab requirement cannot pass the ship gate. Unmapped means unowned, not “probably fine.”
 
 ## Attacker capabilities and trust assumptions
 
-Team that clicks dismiss. Trust: local findings list.
+- **Attacker:** Alert fatigue; vendor dashboard theater.
+- **Trust:** Local ship_ok(findings, map).
+unmapped HIGH => ship_ok False.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+def ship_ok(findings, mappings):
+    return all(f['id'] in mappings for f in findings if f.get('sev') == 'HIGH')
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Block unmapped HIGH; allow mapped+accepted with E6.
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+GitHub code scanning default is not your policy.
+
+False positives exist — mapping is how you record that.
 
 ## Practice
 
-Run `labs/9.4/9.4-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+SCA CVE vs actually called function.
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Blind spots (authz logic) — 9.2/9.3.

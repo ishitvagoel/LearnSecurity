@@ -1,33 +1,38 @@
-# 0.1-LO-05 — Authorized lab scope (Verify)
+# 0.1 — Security engineering orientation (5 Verify)
 
-**Kind:** loop-object  
+**Kind:** verification-lab  
 **Loop step:** 5 Verify  
-**Standards:** CISA Secure by Design (final public guidance); Saltzer (1975, seminal) where authority appears.
+**Standards:** NIST CSF 2.0 (final) GV/ID; OWASP WSTG v4.2 (final) as *lab method*, not a licence to scan the internet; NICE Framework as role language only.
 
 ## Property (start here)
 
-Course activity is authorized only for named local lab hosts. A public URL is out of scope even if the learner is curious. This is a 1.2-style **subject–object–action** over the tester’s own actions.
+A URL is in scope only if it is a named local lab host (127.0.0.1, localhost, lab.securecollab.test). example.com, a employer production API, and a classmate’s deployed preview are out of scope even if they are “easy to hit.”
 
 ## Attacker capabilities and trust assumptions
 
-**Actor:** the learner. **Object:** remote systems. **Trust:** none for example.com. Local `127.0.0.1` is in the TCB of the course, not of production.
+- **Attacker:** A motivated learner who can type any URL into a proxy; a future self who is tired and copies a blog “try this host” snippet.
+- **Trust:** You trust this repository’s lab trees and official OWASP training apps when the README names them. You do not trust “the internet,” robots.txt, or a recruiter’s staging site without written scope.
+An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
 
-## Root cause / impact / prevention / detection / recovery
+| Case | Must show |
+|---|---|
+| Normal | Honest allowed action still works where the product says so |
+| Negative / abuse | HTTP to a non-allowlisted host treated as authorized |
+| Failure | Fail closed: Allow-list local names; fail closed; written scope template |
 
-Root cause: treating curiosity as authorization. Impact: illegal/unethical testing. Prevention: allowlist of lab hosts. Detection: refuse and log. Recovery: stop, report if a tool was pointed wrongly.
+Lab tests: `test_scope.py` under `labs/0.1/0.1-orientation`.
 
-## Framework defaults vs application guarantees
+- `--impl vulnerable` (or vulnerable fixtures): **fail** on `HTTP to a non-allowlisted host treated as authorized`
+- `--impl fixed`: **pass**
 
-A proxy or browser ‘works’ on the internet. That is not course authorization.
+localhost allowed; example.com denied; missing host denied.
 
 ## Practice
 
-What test is the forbidden outcome?
+Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
 
 ## Transfer
 
-Same.
+Your company staging URL: what written artifact would make it in-scope? (Not a Slack thumbs-up.)
 
-## Non-goals
-
-Live targets, real PII, weaponized payloads. Mastery gates stay not-attempted.
+A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).

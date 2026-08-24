@@ -1,45 +1,50 @@
 # 9.2 — Secure code review (3 Break)
 
-**Kind:** mechanism-lab
-**Loop step:** 3 Break
-**Standards:** ASVS 5.0.0 V5; 6.1 interpreter property.
+**Kind:** mechanism-lab  
+**Loop step:** 3 Break  
+**Standards:** OWASP Code Review (guidance); NIST SSDF PW/RV (final). Review is complete mediation of the diff.
 
 ## Property (start here)
 
-A diff that concatenates eval( on user input must not be approved. Review is complete mediation of the interpreter, not a checklist LGTM.
+A diff that uses eval on user input must not be approved. LGTM without looking at interpreters/authority is not review.
 
 ## Attacker capabilities and trust assumptions
 
-Author who lands eval. Trust: local string scan of the teaching diff.
+- **Attacker:** Rushed colleague; supply-chain PR (10.2).
+- **Trust:** Local review_ok(src).
+**Forbidden outcome:** eval on user input approved in review
 
-## This step
+**Authorized scope:** `labs/9.2/9.2-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
 
-The authorized break is the local vulnerable/ fixture. No live targets, no weaponized copy-paste exploits, no public CDN to attack.
+## What to observe
 
-## Root cause / impact / prevention / detection / recovery
+vulnerable review.py approves eval.
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: review_ok('x=eval(user)') True.
 
-## Framework defaults vs application guarantees
+## Vulnerable fixture (local)
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+```python
+def review_ok(diff):
+    return True
+```
 
-## Residual risk
+## Root cause vs impact
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+| Slice | Lab |
+|---|---|
+| Root cause | Visual plausibility. |
+| Impact | Interpreter confusion shipped (6.1). |
+| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
 
 ## Practice
 
-Run `labs/9.2/9.2-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/9.2/9.2-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Terraform, GitHub Actions yaml.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+No live-target instructions. Synthetic data only.

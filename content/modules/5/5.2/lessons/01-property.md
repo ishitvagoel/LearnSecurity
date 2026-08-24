@@ -1,45 +1,58 @@
 # 5.2 — Cryptographic properties and safe use (1 Property)
 
-**Kind:** concept-model
-**Loop step:** 1 Property
-**Standards:** ASVS 5.0.0 V6 (chapter-level). Do not roll your own.
+**Kind:** concept-model  
+**Loop step:** 1 Property  
+**Standards:** ASVS 5.0.0 V11 (final); RFC 9106 Argon2 (final) for *passwords* not this field; never roll a cipher. This lab’s cell is confidentiality of a stored secret at rest — encoding is not encryption.
 
 ## Property (start here)
 
-Confidentiality of a note at rest is not 'we base64ed it.' Encoding is not encryption.
+protect(secret) must not be reversible as Base64 of the plaintext. Encoding, hex, and “obfuscation” are not confidentiality mechanisms.
 
 ## Attacker capabilities and trust assumptions
 
-Stolen disk file. Trust: local bytes only; no novel cryptosystems.
+- **Attacker:** Operator who can read the stored field; stolen disk of the lab dict.
+- **Trust:** Local protect()/looks_encrypted(). Real AEAD keys are 5.3.
+**Mechanism (not the property):** passlib/bcrypt is for passwords, not note bodies. Fernet still needs 5.3 key storage.
 
-## This step
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Start from this system's testable sentence, not a topic title. A mechanism (TLS, MASVS control, scanner, CSP) is not the invariant.
+## Root cause vs impact vs prevention vs detection vs recovery
 
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+| Slice | For 5.2 |
+|---|---|
+| Root cause | Mechanism name “encrypted” applied to encoding. |
+| Preconditions | protect returns b64(secret). |
+| Impact (1.1 cell) | Confidentiality of the stored secret vs honest storage observers. — Any reader of the column gets the secret. |
+| Prevention | Use a standard AEAD with a managed key; tests forbid b64 identity. |
+| Detection | Scanner for b64-looking “ciphertext” of known plaintext in tests. |
+| Recovery | Rotate keys; re-encrypt; treat as leak. |
 
 ## Framework defaults vs application guarantees
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+passlib/bcrypt is for passwords, not note bodies. Fernet still needs 5.3 key storage.
+
+## Mechanism limits and bypasses
+
+AES-GCM with a nonce reuse is not this property. Do not paste attack scripts — name the misuse.
+
+Key in the same row; client-side only “encryption” with key in the bundle (8.1).
 
 ## Residual risk
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+Memory dumps; authorized operators.
 
 ## Practice
 
-Run `labs/5.2/5.2-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Table: property vs algorithm vs what it is *not* for.
+
+Run `labs/5.2/5.2-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Password hashing vs field encryption vs backup encryption.
+
+Clinic: SSN column labeled “encrypted” that is b64.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.

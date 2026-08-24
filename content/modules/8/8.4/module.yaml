@@ -36,15 +36,15 @@ concepts:
 learningObjects:
 - id: 8.4-LO-01
   kind: concept-model
-  title: 'Build, distribution, attestation, and resilience: property vs mechanism'
+  title: 'Build, distribution, attestation, resilience: property vs mechanism'
   path: lessons/01-property.md
 - id: 8.4-LO-02
   kind: design-exercise
-  title: Model SecureCollab for 8.4
+  title: Model SecureCollab Android client for 8.4
   path: lessons/02-model.md
 - id: 8.4-LO-03
   kind: mechanism-lab
-  title: Local fixture illustrating 8.4 failure (authorized only)
+  title: 'Local fixture: Debug build allowed to call production export'
   path: lessons/03-break.md
 - id: 8.4-LO-04
   kind: design-exercise
@@ -60,17 +60,19 @@ learningObjects:
   path: lessons/06-operate.md
 - id: 8.4-LO-07
   kind: transfer-challenge
-  title: Novel variation of 8.4
+  title: 'Transfer: Clinic: debug build against prod FHIR.'
   path: lessons/07-transfer.md
 - id: 8.4-LO-08
   kind: code-review
-  title: Seeded diff for 8.4
+  title: Seeded review for 8.4
   path: lessons/08-review.md
 labSpec:
-  authorizedScope: Local course fixture or official training lab only
+  authorizedScope: Local course fixture or official training lab only; no public or
+    third-party targets
   slug: 8.4-lab
-  summary: 'Pass A brief only: Signed release evidence and resilience limitations report'
+  summary: Debug build allowed to call production export
   forbiddenOutcomes:
+  - Debug build allowed to call production export
   - Live-target instructions
   - Real PII or production secrets
   - Awareness list used as the syllabus
@@ -95,23 +97,28 @@ standardsRefs:
   - RESILIENCE
   url: https://owasp.org/www-project-application-security-verification-standard/
 misconceptions:
-- Build, distribution, attestation, and resilience is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
+- Obfuscation = security
+- Play App Signing means we don’t care
+- Anti-debug proves the server can trust the client
 operationalConsiderations:
-- Pair prevention with detection/recovery where prevention is not absolute
+- debug_to_prod_denied.
+- Attestation farms.
 author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (8.4 deepen); lab-safety-reviewer (local structural fixture)
-lastReviewedAt: '2026-08-23'
-nextReviewAt: '2027-02-23'
+reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+lastReviewedAt: '2026-08-24'
+nextReviewAt: '2027-02-24'
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map
 - date: '2026-08-23'
-  note: 'Pass A quality-gate: spec completeness competent; expand in a later revision if thin'
+  note: 'Pass A quality-gate: spec completeness competent; expand in a later revision
+    if thin'
 - date: '2026-08-23'
   note: Pass B lessons and authorized local lab
 - date: '2026-08-23'
   note: Pass C rubric and examiner keys; quality-gate recorded
 - date: '2026-08-23'
   note: 'Deepen: 1.1-density lessons; structural local lab; quality-gate recorded'
+- date: '2026-08-24'
+  note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
+    Pass C keys isolated'

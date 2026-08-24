@@ -1,45 +1,33 @@
-# 6.2 — Browser injection and active content (7 Generalize)
+# 6.2 — Browser injection and active content (7 Transfer)
 
-**Kind:** transfer-challenge
-**Loop step:** 7 Generalize
-**Standards:** ASVS 5.0.0 V5; CSP3 WD (label **draft**); 2.3 browser cells.
+**Kind:** transfer-challenge  
+**Loop step:** 7 Transfer  
+**Standards:** ASVS 5.0.0 V3 (final); CWE-79 as name; CSP3 / Trusted Types are layered and some docs are still CR — do not claim they replace encoding.
 
 ## Property (start here)
 
-Note HTML encoding must treat '<' as data. CSP3 (Working Draft) is not a substitute for encoding.
+Angle brackets in a note title must be encoded in HTML context (`&lt;`) so the browser does not parse an extra element. Encoding is context-specific; CSP is not this cell.
 
 ## Attacker capabilities and trust assumptions
 
-Member who types markup into a note. Trust: local encoder. No live XSS campaign.
+- **Attacker:** Collaborator who can edit a title; stored XSS later in another tenant’s view.
+- **Trust:** Local render(). Real DOM sinks in 2.3.
+Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
 
-## This step
+**Prompt:** Markdown-to-HTML sanitizer as a second parser (2.1).
 
-Keep the property; change one channel (worker, WebView, CSV, CI). Do not answer with a Top 10 name. Label drafts draft.
+**Product sketch:** Clinic patient nickname field.
 
-## Root cause / impact / prevention / detection / recovery
+Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## What graders reject
 
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+| Reject | Why |
+|---|---|
+| Tool or awareness-list name as the property | 1.1 |
+| Framework default as the guarantee | React defaults help in JSX, not in dangerouslySetInnerHTML or a FastAPI HTML tem… |
+| Live-target plan | Lab policy |
 
 ## Practice
 
-Run `labs/6.2/6.2-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
-
-## Transfer
-
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
-
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+One page. No keys. The lab `labs/6.2/6.2-lab` stays the only running system you may break.

@@ -1,37 +1,33 @@
-# 4.5 — OAuth, OpenID Connect, browser apps, and native apps (7 Generalize)
+# 4.5 — OAuth, OIDC, and delegated authorization (7 Transfer)
 
-**Kind:** transfer-challenge
-**Loop step:** 7 Generalize
-**Standards:** OAuth 2.1 (I-D, not final); OIDC Core (final). Do not present 2.1 as RFC.
+**Kind:** transfer-challenge  
+**Loop step:** 7 Transfer  
+**Standards:** RFC 9700 OAuth 2.0 Security BCP (final); RFC 8252 native apps (final); OIDC Core 1.0 (final); ASVS 5.0.0 V10. JWT *aud* is this lab’s cell, not “we use OAuth.”
 
 ## Property (start here)
 
-An access token is accepted only if **aud** is this API. A token minted for another audience is not a SecureCollab session. OAuth 2.1 remains an **Internet-Draft** — label it.
+A bearer JWT with the wrong audience must be rejected. Tokens for other-api are not sessions for securecollab-api. Delegation is not authentication theater.
 
 ## Attacker capabilities and trust assumptions
 
-Token from another API replayed here. Trust: local claim dict, not a real JWT crypto lab.
+- **Attacker:** Stolen token minted for another API; confused deputy client.
+- **Trust:** Local aud check. Real JWKS, iss, nonce, PKCE in the full protocol — named as residual here.
+Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
 
-## Root cause / impact / prevention / detection / recovery
+**Prompt:** Mobile redirect (8.3, RFC 8252) and BFF vs SPA token storage.
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+**Product sketch:** Clinic: wrong-aud FHIR token.
 
-## Framework defaults vs application guarantees
+Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
 
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+## What graders reject
+
+| Reject | Why |
+|---|---|
+| Tool or awareness-list name as the property | 1.1 |
+| Framework default as the guarantee | Authlib defaults may verify signature only if you configure poorly.… |
+| Live-target plan | Lab policy |
 
 ## Practice
 
-Change one actor or channel; which 1.x/2.x artifacts are invalid?
-
-## Transfer
-
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
-
-## Non-goals
-
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+One page. No keys. The lab `labs/4.5/4.5-lab` stays the only running system you may break.

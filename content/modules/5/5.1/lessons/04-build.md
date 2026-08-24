@@ -1,45 +1,56 @@
 # 5.1 — Data lifecycle and privacy engineering (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** NIST Privacy Framework 1.0 (final); 1.1 IPD stays **draft** if cited.
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** NIST Privacy Framework 1.0 (final); NIST PF 1.1 IPD stays **draft** if cited; ASVS 5.0.0 V14; MASVS-PRIVACY for later mobile caches.
 
 ## Property (start here)
 
-After account deletion, SecureCollab must not retain note **bodies** in an analytics copy. Retention is a 1.1 privacy/confidentiality property.
+After account deletion, SecureCollab must not retain note bodies in an analytics copy. Retention is a 1.1 privacy/confidentiality property, not a checkbox in a DPA.
 
 ## Attacker capabilities and trust assumptions
 
-Insider with analytics DB. Trust: local two-table fixture.
+- **Attacker:** Insider with analytics DB; buyer of a “de-identified” export that still has bodies.
+- **Trust:** Local NOTES vs ANALYTICS maps. Real warehouses are 7.4 workers.
+delete_account also ANALYTICS.pop.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+NOTES={'alice':'secret'}
+ANALYTICS={'alice':'secret'}
+def reset():
+    NOTES.clear(); NOTES['alice']='secret'
+    ANALYTICS.clear(); ANALYTICS['alice']='secret'
+def delete_account(user):
+    NOTES.pop(user, None)
+    ANALYTICS.pop(user, None)
+def body_retained(user):
+    return ANALYTICS.get(user)
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Inventory copies; delete or unlink bodies in each.
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+Postgres DELETE is not warehouse DELETE. Next.js does not erase S3 analytics.
+
+Anonymize ids but keep bodies — still a body retention fail.
 
 ## Practice
 
-Run `labs/5.1/5.1-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+CSV export to a partner; clinic-booking card PHI.
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Legal hold copies — named exception with owner (E6).

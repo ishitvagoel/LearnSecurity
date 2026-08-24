@@ -1,45 +1,58 @@
 # 7.2 — Object, property, and function security (1 Property)
 
-**Kind:** concept-model
-**Loop step:** 1 Property
-**Standards:** ASVS V4/V8 chapter-level.
+**Kind:** concept-model  
+**Loop step:** 1 Property  
+**Standards:** ASVS 5.0.0 V4 (final); API1/3/5 awareness after 1.2/4.4.
 
 ## Property (start here)
 
-GraphQL-style note.secret_internal is not visible to members. Field-level authorization, not 'hidden in UI'.
+A member must not resolve secret_internal. Function/property authorization is not “they can call GET /notes.” Identifiers locate; they do not authorize.
 
 ## Attacker capabilities and trust assumptions
 
-Member who asks for extra fields. Trust: local resolver.
+- **Attacker:** Member using GraphQL __typename or REST ?fields=.
+- **Trust:** Local resolve(role, field).
+**Mechanism (not the property):** SQLAlchemy to_dict() is not a policy.
 
-## This step
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Start from this system's testable sentence, not a topic title. A mechanism (TLS, MASVS control, scanner, CSP) is not the invariant.
+## Root cause vs impact vs prevention vs detection vs recovery
 
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+| Slice | For 7.2 |
+|---|---|
+| Root cause | Serializer dumps the ORM object. |
+| Preconditions | resolve('member','secret_internal') True. |
+| Impact (1.1 cell) | Authorization at property grain. — Internal secret or PII extra. |
+| Prevention | Allow-list fields by role; never bind authz to the id format. |
+| Detection | field_denied. |
+| Recovery | Rotate the secret; audit. |
 
 ## Framework defaults vs application guarantees
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+SQLAlchemy to_dict() is not a policy.
+
+## Mechanism limits and bypasses
+
+Hiding fields in UI only.
+
+CSV export; 7.4; debug toolbar.
 
 ## Residual risk
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+Admin sees secret_internal — audited.
 
 ## Practice
 
-Run `labs/7.2/7.2-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Table: role × field.
+
+Run `labs/7.2/7.2-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Bulk update; search highlighting leaking snippets.
+
+Clinic: member cannot resolve ssn.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.

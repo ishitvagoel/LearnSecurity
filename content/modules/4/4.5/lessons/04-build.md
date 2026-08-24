@@ -1,37 +1,51 @@
-# 4.5 — OAuth, OpenID Connect, browser apps, and native apps (4 Build)
+# 4.5 — OAuth, OIDC, and delegated authorization (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** OAuth 2.1 (I-D, not final); OIDC Core (final). Do not present 2.1 as RFC.
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** RFC 9700 OAuth 2.0 Security BCP (final); RFC 8252 native apps (final); OIDC Core 1.0 (final); ASVS 5.0.0 V10. JWT *aud* is this lab’s cell, not “we use OAuth.”
 
 ## Property (start here)
 
-An access token is accepted only if **aud** is this API. A token minted for another audience is not a SecureCollab session. OAuth 2.1 remains an **Internet-Draft** — label it.
+A bearer JWT with the wrong audience must be rejected. Tokens for other-api are not sessions for securecollab-api. Delegation is not authentication theater.
 
 ## Attacker capabilities and trust assumptions
 
-Token from another API replayed here. Trust: local claim dict, not a real JWT crypto lab.
+- **Attacker:** Stolen token minted for another API; confused deputy client.
+- **Trust:** Local aud check. Real JWKS, iss, nonce, PKCE in the full protocol — named as residual here.
+aud must equal expected.
 
-## Root cause / impact / prevention / detection / recovery
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Fixed fixture (local)
 
-## Framework defaults vs application guarantees
+```python
+def accept_token(claims: dict, expected_aud: str) -> bool:
+    aud = claims.get("aud")
+    if isinstance(aud, list):
+        return expected_aud in aud
+    return aud == expected_aud
+```
 
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+## Why this restores the cell
+
+Exact aud match (or constrained list).
+
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+
+## What this is not
+
+Authlib defaults may verify signature only if you configure poorly.
+
+Correct aud still needs 1.2 on the note.
 
 ## Practice
 
-State the structural fix (not a denylist of one user).
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
+Mobile redirect (8.3, RFC 8252) and BFF vs SPA token storage.
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+Full OAuth (PKCE, state, nonce, sender-constraining) not in this micro-fixture.

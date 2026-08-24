@@ -1,45 +1,53 @@
 # 5.3 — Key and secret lifecycle (2 Model)
 
-**Kind:** design-exercise
-**Loop step:** 2 Model
-**Standards:** ASVS 5.0.0 V13 secrets (chapter-level).
+**Kind:** design-exercise  
+**Loop step:** 2 Model  
+**Standards:** ASVS 5.0.0 V11/V13 (final); OWASP secrets guidance; NIST PQC standards are for *agility planning*, not a lab quantum attack.
 
 ## Property (start here)
 
-A disposable lab API key must not be a hardcoded default that always authenticates. Rotation means the old value fails.
+A disposable lab API key that is a hardcoded default must not authenticate after rotation. The old value fails. Inventory + rotation is the property, not “we have a secrets manager” as a sticker.
 
 ## Attacker capabilities and trust assumptions
 
-Repo clone containing the default. Trust: local string compare.
+- **Attacker:** Anyone who cloned the repo or an old container image with sk-lab-hardcoded.
+- **Trust:** Local auth(current). Real KMS later.
+Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
 
-## This step
+| Piece | This system |
+|---|---|
+| Subjects | old image, rotated app, attacker with git history |
+| Objects | sk-lab-hardcoded, rotated-now |
+| Actions | auth |
+| Channels | env, repo, image layers |
+| TCB | Current secret store; deny list of retired versions. |
+| Untrusted | Source tree, Docker history, CI logs |
+| State / time | Rotate T+0; attacker uses git from T-1. |
+| 1.1 cell | Authenticity of the service credential over time. |
 
-Name principals, objects, and channels. Open design: the client, APK, or prompt is hostile. Secrecy of the check is not the property.
+## Authority matrix (minimum)
 
-## Root cause / impact / prevention / detection / recovery
+| Subject | Object | Action | Decision |
+|---|---|---|---|
+| old default | API | auth | deny |
+| rotated current | API | auth | allow |
+| git history | default | checkout | must-still-deny |
+| worker | own secret | auth | separate |
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
 
 ## Practice
 
-Run `labs/5.3/5.3-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/5.3/5.3-lab` file `secrets.py`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Envelope encryption DEK vs KEK; compromise runbook.
+
+## Residual risk
+
+PQC migration is a plan, not this test.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.

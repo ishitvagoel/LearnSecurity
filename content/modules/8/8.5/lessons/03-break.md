@@ -1,45 +1,50 @@
 # 8.5 — Mobile verification and privacy (3 Break)
 
-**Kind:** mechanism-lab
-**Loop step:** 3 Break
-**Standards:** MASVS 2.1 privacy; NIST Privacy Framework 1.0 (final).
+**Kind:** mechanism-lab  
+**Loop step:** 3 Break  
+**Standards:** MASVS 2.1 + MASTG 2.0 (final); MASWE mapping; Mobile Top 10:2024 awareness only.
 
 ## Property (start here)
 
-A crash report must not include the note body. Mobile privacy is a 1.1 privacy cell, not a policy PDF.
+A crash report must not include the note body. Mobile privacy is a 1.1 privacy cell, not a Play Data safety form as the control.
 
 ## Attacker capabilities and trust assumptions
 
-Crash reporter / support inbox. Trust: local dict. No real PII.
+- **Attacker:** Crash-platform operator; another process reading logcat.
+- **Trust:** Local crash_report(body).
+**Forbidden outcome:** Crash report contains the note body
 
-## This step
+**Authorized scope:** `labs/8.5/8.5-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
 
-The authorized break is the local vulnerable/ fixture. No live targets, no weaponized copy-paste exploits, no public CDN to attack.
+## What to observe
 
-## Root cause / impact / prevention / detection / recovery
+vulnerable crash.py includes body.
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: secret in str(report).
 
-## Framework defaults vs application guarantees
+## Vulnerable fixture (local)
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+```python
+def crash_report(note_body):
+    return {'stack': 'npe', 'note': note_body}
+```
 
-## Residual risk
+## Root cause vs impact
 
-Crash-upload consent and support emails must be understandable (WCAG 2.2).
+| Slice | Lab |
+|---|---|
+| Root cause | Exception message includes the body. |
+| Impact | Bodies at a vendor; maybe public if misbucketed. |
+| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
 
 ## Practice
 
-Run `labs/8.5/8.5-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/8.5/8.5-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Web Sentry (10.5) same cell.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+No live-target instructions. Synthetic data only.

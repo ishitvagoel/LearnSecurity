@@ -1,45 +1,44 @@
 # E1 — AI, LLM, and agentic application security (Review)
 
-**Kind:** code-review
-**Loop step:** Review
-**Standards:** Elective E1; treat vendor AI-security features as mechanisms. Draft eval methods stay draft if cited.
+**Kind:** code-review  
+**Loop step:** Review  
+**Standards:** OWASP GenAI LLM Top 10 2026 (awareness, not syllabus); NIST AI RMF GenAI Profile (guidance); this lab’s cell is tool authority.
 
 ## Property (start here)
 
-The lab agent may only invoke allowlisted tools. A model-proposed exec_sql is not authorization. OWASP LLM lists are awareness, not this syllabus.
+The lab agent may only invoke allowlisted tools. A model-proposed exec_sql is not authorization. The model is an untrusted client (8.1) that speaks English.
 
 ## Attacker capabilities and trust assumptions
 
-Prompt that asks the model to call exec_sql. Trust: local tool router. No live model vendor.
+- **Attacker:** Prompt injection in a note body; malicious retrieved doc.
+- **Trust:** Local run_tool(name).
+Review `labs/E1/e1-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/E1.md` — not here.
 
-## This step
+## What to label
 
-Review the diff as a SecureCollab PR. Reject client trust, interpreter concatenation, Report-Only as enforcement, and closing findings without retest. Keys stay out of lessons.
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-## Root cause / impact / prevention / detection / recovery
+- Seeded smell (label it yourself): exec_sql available
+- Seeded smell (label it yourself): Policy only in the system prompt
+- Seeded smell (label it yourself): No denied-tool test
+- Seeded smell (label it yourself): Retrieved docs trusted
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
 
-## Framework defaults vs application guarantees
+## Misconceptions
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+- LLM Top 10 is ASVS for AI
+- RAG is safe because it is “our data”
+- The model is in the TCB
 
 ## Practice
 
-Run `labs/E1/e1-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Copilot in CI.
 
-## Non-goals
+## HITL / WCAG 2.2
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Human approval UI for tools must be accessible; otherwise operators auto-approve.

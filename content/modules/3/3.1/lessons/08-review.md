@@ -1,37 +1,40 @@
-# 3.1 — Assets, data classification, and security requirements (Review)
+# 3.1 — Assets, classification, and security requirements (Review)
 
-**Kind:** code-review
-**Loop step:** Review
-**Standards:** NIST CSF 2.0 (final) Identify; ASVS 5.0.0 V14 data protection (chapter-level).
+**Kind:** code-review  
+**Loop step:** Review  
+**Standards:** NIST CSF 2.0 Identify (final); ASVS 5.0.0 V14 (final); NIST Privacy Framework 1.0 (final). Classification is a property of a *field*, not a spreadsheet sticker.
 
 ## Property (start here)
 
-Note **bodies** are Confidential; they must not appear in application logs. Classification is a property of the field, not a spreadsheet label.
+Note bodies are Confidential. An application log line for note_read must not contain the body. Labels in Confluence do not enforce this.
 
 ## Attacker capabilities and trust assumptions
 
-Operator who can read logs; another tenant's admin; a support engineer. Trust: lab log sink is local.
+- **Attacker:** Operator with log access; SIEM vendor; another tenant’s admin who can read shared observability.
+- **Trust:** Local log sink. Real ELK is another TCB later (10.5).
+Review `labs/3.1/3.1-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/3.1.md` — not here.
 
-## Root cause / impact / prevention / detection / recovery
+## What to label
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-## Framework defaults vs application guarantees
+- Seeded smell (label it yourself): logger.info('read %s', note.body)
+- Seeded smell (label it yourself): Classification spreadsheet with no test
+- Seeded smell (label it yourself): Debug=True in a “staging” that shares prod data
+- Seeded smell (label it yourself): Exception middleware dumps request body
 
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+
+## Misconceptions
+
+- If we classified it, it is protected
+- Logs are internal so safe
+- Privacy policy equals redaction
 
 ## Practice
 
-Review the vulnerable tree; keys are not in this file.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
-
-## Non-goals
-
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+Clinic notes vs appointment time: two classes, two sinks.

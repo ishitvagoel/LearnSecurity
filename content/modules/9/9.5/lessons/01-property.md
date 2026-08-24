@@ -1,45 +1,62 @@
-# 9.5 — Penetration testing, reporting, and remediation (1 Property)
+# 9.5 — Authorized assessment, reporting, and remediation (1 Property)
 
-**Kind:** concept-model
-**Loop step:** 1 Property
-**Standards:** Reporting as evidence; authorized local scope only.
+**Kind:** concept-model  
+**Loop step:** 1 Property  
+**Standards:** OWASP WSTG (final); CVSS 4.0 (final spec) as *input* not the decision; CISA KEV as exploitation context.
 
 ## Property (start here)
 
-A finding cannot be closed without a passing retest of the same forbidden outcome. A PDF report is not remediation.
+A finding cannot be closed without a passing retest of the same forbidden outcome. A PDF report is not remediation. Scope stays the local lab.
 
 ## Attacker capabilities and trust assumptions
 
-Vendor report theater. Trust: local finding dict. No live pentest of public apps.
+- **Attacker:** Paper-compliance; ignored variant classes.
+- **Trust:** Local close_finding({retest}).
+**Mechanism (not the property):** Jira Done is not retest.
 
-## This step
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Start from this system's testable sentence, not a topic title. A mechanism (TLS, MASVS control, scanner, CSP) is not the invariant.
+## Root cause vs impact vs prevention vs detection vs recovery
 
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+| Slice | For 9.5 |
+|---|---|
+| Root cause | Closure on intent. |
+| Preconditions | close_finding({retest: None}) True. |
+| Impact (1.1 cell) | Integrity of the fix loop. — Vulnerable still there; false residual. |
+| Prevention | Require retest of the same cell. |
+| Detection | closed_without_retest metric. |
+| Recovery | Reopen. |
 
 ## Framework defaults vs application guarantees
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Jira Done is not retest.
+
+## Mechanism limits and bypasses
+
+CVSS 9.8 vs business priority — you still judge.
+
+Retest different endpoint.
 
 ## Residual risk
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+Unknown variants — hunt (same root cause).
 
 ## Practice
 
-Run `labs/9.5/9.5-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write a three-line report: cause, impact, retest cmd.
+
+Run `labs/9.5/9.5-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+KEV vs internal-only.
+
+Clinic pentest PDF shelf.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.
+
+## Usability and accessibility
+
+Reports used by engineers must be readable (structure, not color-only severity).

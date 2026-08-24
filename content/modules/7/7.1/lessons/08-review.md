@@ -1,45 +1,40 @@
 # 7.1 — API contracts, protocols, and inventory (Review)
 
-**Kind:** code-review
-**Loop step:** Review
-**Standards:** ASVS API V4 (chapter-level).
+**Kind:** code-review  
+**Loop step:** Review  
+**Standards:** ASVS 5.0.0 V13 (final); OpenAPI as inventory, not security; API8/API9 awareness.
 
 ## Property (start here)
 
-JSON PATCH cannot set is_admin. Unknown fields are ignored or rejected — mass assignment is an authorization bug.
+Mass assignment: a PATCH must not set is_admin from the client document. The contract’s writable field set is an authorization property (1.2 at field grain, 7.2).
 
 ## Attacker capabilities and trust assumptions
 
-Authenticated member sending extra fields. Trust: local dict.
+- **Attacker:** Authenticated member sending extra JSON keys.
+- **Trust:** Local apply(user, patch).
+Review `labs/7.1/7.1-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/7.1.md` — not here.
 
-## This step
+## What to label
 
-Review the diff as a SecureCollab PR. Reject client trust, interpreter concatenation, Report-Only as enforcement, and closing findings without retest. Keys stay out of lessons.
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-## Root cause / impact / prevention / detection / recovery
+- Seeded smell (label it yourself): user.__dict__.update(body)
+- Seeded smell (label it yourself): Undocumented route not in inventory
+- Seeded smell (label it yourself): No is_admin test
+- Seeded smell (label it yourself): OpenAPI not generated from code
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
 
-## Framework defaults vs application guarantees
+## Misconceptions
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+- If it’s not in Swagger it cannot be called
+- GraphQL is self-documenting therefore safe
+- Versioning is a security control
 
 ## Practice
 
-Run `labs/7.1/7.1-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
-
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+GraphQL mutation arguments; gRPC unknown fields.

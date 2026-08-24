@@ -1,45 +1,38 @@
-# 8.3 — Network, deep links, WebViews, and inter-app communication (5 Verify)
+# 8.3 — Network, deep links, WebViews, IPC (5 Verify)
 
-**Kind:** verification-lab
-**Loop step:** 5 Verify
-**Standards:** MASVS 2.1 platform interaction; 2.3/6.3 web origins are a different channel.
+**Kind:** verification-lab  
+**Loop step:** 5 Verify  
+**Standards:** MASVS 2.1 PLATFORM/NETWORK/AUTH (final); RFC 8252. Exported components are attack surface.
 
 ## Property (start here)
 
-A deep link query as= must not switch the signed-in principal. Exported activities are an attack surface; the session is the identity.
+A deep link query as=admin must not switch the signed-in principal. The session is identity; the Intent is untrusted input.
 
 ## Attacker capabilities and trust assumptions
 
-Another app sending securecollab://notes?as=admin. Trust: local session dict. No real IPC.
+- **Attacker:** Malicious app sending an Intent; crafted https link.
+- **Trust:** Local open_link / current_user.
+An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
 
-## This step
+| Case | Must show |
+|---|---|
+| Normal | Honest allowed action still works where the product says so |
+| Negative / abuse | Deep link as= switches the signed-in user |
+| Failure | Fail closed: Do not take identity from links; validate App Link certs; WebView allow-list |
 
-pytest --impl vulnerable must fail; --impl fixed must pass. A test that only checks HTTP 200 is not a security test.
+Lab tests: `test_property.py` under `labs/8.3/8.3-lab`.
 
-## Root cause / impact / prevention / detection / recovery
+- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Deep link as= switches the signed-in user`
+- `--impl fixed`: **pass**
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+deeplink does not switch user.
 
 ## Practice
 
-Run `labs/8.3/8.3-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+OAuth redirect to app (4.5).
 
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).

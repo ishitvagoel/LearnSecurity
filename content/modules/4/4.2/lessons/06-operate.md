@@ -1,37 +1,40 @@
-# 4.2 — Authentication, phishing resistance, and usable access (6 Operate)
+# 4.2 — Authentication and phishing-resistant authenticators (6 Operate)
 
-**Kind:** operations-exercise
-**Loop step:** 6 Operate
-**Standards:** NIST SP 800-63-4 (final) phishing-resistant AAL; WebAuthn L3 remains **Candidate Recommendation** — label it.
+**Kind:** operations-exercise  
+**Loop step:** 6 Operate  
+**Standards:** NIST SP 800-63B-4 (final); WebAuthn Level 3 is a **W3C Candidate Recommendation** — label CR, not Rec; WCAG 2.2 for the journey; ASVS 5.0.0 V6.
 
 ## Property (start here)
 
-Password + 'remember me' is **not** phishing-resistant. A phishing-resistant authenticator must fail a lookalike origin (WebAuthn-class). Passwords stay allowed only as a labeled residual.
+A password check that ignores origin is not phishing-resistant. WebAuthn to evil.example must fail even if the secret/credential exists. Passwords to the real origin are still phishable — do not advertise them as resistant.
 
 ## Attacker capabilities and trust assumptions
 
-Lookalike origin. Trust: lab origin string only — no live IdP.
+- **Attacker:** Lookalike origin; intercepted password; fatigued user.
+- **Trust:** Lab origin binding. Real authenticators later; this fixture models origin check.
+Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
 
-## Root cause / impact / prevention / detection / recovery
+| Outcome | This module |
+|---|---|
+| Detect | Impossible-travel / new-device (weak); user reports. |
+| Signal (no bodies) | webauthn_fail_origin; recovery_used (higher risk). |
+| Revoke / recover | Revoke sessions; force re-bind authenticators. |
+| Residual | Users with only passwords — honest residual, not a slogan. |
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
 
 ## Practice
 
-What is logged without sensitive bodies/secrets?
+Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/4.2/4.2-lab`.
 
 ## Transfer
 
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
+Step-up for export: still origin-bound?
+
+## Usability
+
+WebAuthn and password fallback must work with keyboard, labels, and no color-only errors (WCAG 2.2). A broken accessible path pushes people to shared passwords.
 
 ## Non-goals
 
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+SIEM product names are not the property. Keys stay out of lessons.

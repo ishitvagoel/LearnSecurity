@@ -1,45 +1,50 @@
 # 6.3 — Cross-site and cross-context attacks (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** ASVS 5.0.0 V4 CSRF (chapter-level).
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** ASVS 5.0.0 V3/V4 (final); Fetch Metadata / SameSite as *helpers*; cookie session (2.3) is not the CSRF property.
 
 ## Property (start here)
 
-A state-changing share POST without a matching origin/CSRF token is denied. Cookie session (2.3) is not the CSRF property.
+A state-changing share POST from a foreign origin without a matching CSRF token/origin check is denied. Ambient cookies are not consent.
 
 ## Attacker capabilities and trust assumptions
 
-Other-origin page that can trigger a cookie-bearing POST in the model. Local only.
+- **Attacker:** Evil origin with the victim’s browser session cookie.
+- **Trust:** Local allow_share(origin, expected, token).
+evil origin + no token => False.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+def allow_share(origin, expected, token=None, session_cookie=True):
+    if not session_cookie:
+        return False
+    return origin == expected and token == 'lab-csrf'
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Reject foreign Origin; require token for cookie sessions.
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+SameSite=Lax is not complete (GET side effects, chrome exceptions).
+
+Bearer tokens in Authorization are a different deputy model.
 
 ## Practice
 
-Run `labs/6.3/6.3-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+postMessage, clickjacking, CORS * with credentials.
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+User clicking “share” on a lookalike UI — 4.2 phishing.

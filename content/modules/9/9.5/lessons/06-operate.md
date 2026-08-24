@@ -1,45 +1,40 @@
-# 9.5 — Penetration testing, reporting, and remediation (6 Operate)
+# 9.5 — Authorized assessment, reporting, and remediation (6 Operate)
 
-**Kind:** operations-exercise
-**Loop step:** 6 Operate
-**Standards:** Reporting as evidence; authorized local scope only.
+**Kind:** operations-exercise  
+**Loop step:** 6 Operate  
+**Standards:** OWASP WSTG (final); CVSS 4.0 (final spec) as *input* not the decision; CISA KEV as exploitation context.
 
 ## Property (start here)
 
-A finding cannot be closed without a passing retest of the same forbidden outcome. A PDF report is not remediation.
+A finding cannot be closed without a passing retest of the same forbidden outcome. A PDF report is not remediation. Scope stays the local lab.
 
 ## Attacker capabilities and trust assumptions
 
-Vendor report theater. Trust: local finding dict. No live pentest of public apps.
+- **Attacker:** Paper-compliance; ignored variant classes.
+- **Trust:** Local close_finding({retest}).
+Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
 
-## This step
+| Outcome | This module |
+|---|---|
+| Detect | closed_without_retest metric. |
+| Signal (no bodies) | finding_closed_without_retest denied. |
+| Revoke / recover | Reopen. |
+| Residual | Unknown variants — hunt (same root cause). |
 
-Detect without logging note bodies or tokens. Recover fail-safe (revoke, rotate, quarantine). If a human must act, the path must be usable (WCAG 2.2).
-
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
 
 ## Practice
 
-Run `labs/9.5/9.5-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/9.5/9.5-lab`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+KEV vs internal-only.
+
+## Usability
+
+Reports used by engineers must be readable (structure, not color-only severity).
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+SIEM product names are not the property. Keys stay out of lessons.

@@ -1,45 +1,62 @@
 # 9.4 — Automated analysis and tool orchestration (1 Property)
 
-**Kind:** concept-model
-**Loop step:** 1 Property
-**Standards:** ASVS + tool results as inputs; not compliance theater.
+**Kind:** concept-model  
+**Loop step:** 1 Property  
+**Standards:** NIST SSDF (final); OWASP SAMM; OpenSSF. Tools are signals.
 
 ## Property (start here)
 
-A HIGH scanner finding without a mapped SecureCollab requirement cannot pass the lab gate. Tools do not prove invariants.
+A HIGH finding without a mapped SecureCollab requirement cannot pass the ship gate. Unmapped means unowned, not “probably fine.”
 
 ## Attacker capabilities and trust assumptions
 
-Team that clicks dismiss. Trust: local findings list.
+- **Attacker:** Alert fatigue; vendor dashboard theater.
+- **Trust:** Local ship_ok(findings, map).
+**Mechanism (not the property):** GitHub code scanning default is not your policy.
 
-## This step
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Start from this system's testable sentence, not a topic title. A mechanism (TLS, MASVS control, scanner, CSP) is not the invariant.
+## Root cause vs impact vs prevention vs detection vs recovery
 
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+| Slice | For 9.4 |
+|---|---|
+| Root cause | Scanner output not joined to 9.1. |
+| Preconditions | ship_ok([HIGH], {}) True. |
+| Impact (1.1 cell) | Integrity of release decision. — Unknown HIGH in prod. |
+| Prevention | Block unmapped HIGH; allow mapped+accepted with E6. |
+| Detection | unmapped_high count. |
+| Recovery | Map or fix; do not suppress silently. |
 
 ## Framework defaults vs application guarantees
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+GitHub code scanning default is not your policy.
+
+## Mechanism limits and bypasses
+
+False positives exist — mapping is how you record that.
+
+Severity downgrade without evidence.
 
 ## Residual risk
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+Blind spots (authz logic) — 9.2/9.3.
 
 ## Practice
 
-Run `labs/9.4/9.4-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Triage one HIGH: reachability, map, or exception.
+
+Run `labs/9.4/9.4-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+SCA CVE vs actually called function.
+
+Clinic: 50 unmapped HIGHs.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.
+
+## Usability and accessibility
+
+Triage UI must be usable; otherwise people mass-suppress.

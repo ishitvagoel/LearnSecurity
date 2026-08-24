@@ -1,45 +1,40 @@
 # 5.3 — Key and secret lifecycle (Review)
 
-**Kind:** code-review
-**Loop step:** Review
-**Standards:** ASVS 5.0.0 V13 secrets (chapter-level).
+**Kind:** code-review  
+**Loop step:** Review  
+**Standards:** ASVS 5.0.0 V11/V13 (final); OWASP secrets guidance; NIST PQC standards are for *agility planning*, not a lab quantum attack.
 
 ## Property (start here)
 
-A disposable lab API key must not be a hardcoded default that always authenticates. Rotation means the old value fails.
+A disposable lab API key that is a hardcoded default must not authenticate after rotation. The old value fails. Inventory + rotation is the property, not “we have a secrets manager” as a sticker.
 
 ## Attacker capabilities and trust assumptions
 
-Repo clone containing the default. Trust: local string compare.
+- **Attacker:** Anyone who cloned the repo or an old container image with sk-lab-hardcoded.
+- **Trust:** Local auth(current). Real KMS later.
+Review `labs/5.3/5.3-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/5.3.md` — not here.
 
-## This step
+## What to label
 
-Review the diff as a SecureCollab PR. Reject client trust, interpreter concatenation, Report-Only as enforcement, and closing findings without retest. Keys stay out of lessons.
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-## Root cause / impact / prevention / detection / recovery
+- Seeded smell (label it yourself): DEFAULT = 'sk-lab-hardcoded' still accepted
+- Seeded smell (label it yourself): Secret in README “for convenience”
+- Seeded smell (label it yourself): No rotation test
+- Seeded smell (label it yourself): Same key for all tenants
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
 
-## Framework defaults vs application guarantees
+## Misconceptions
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+- gitignore means it was never leaked
+- KMS equals rotated
+- Passwords and API keys are the same lifecycle
 
 ## Practice
 
-Run `labs/5.3/5.3-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
-
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Envelope encryption DEK vs KEK; compromise runbook.

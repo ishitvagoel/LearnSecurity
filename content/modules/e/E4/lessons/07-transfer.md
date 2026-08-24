@@ -1,45 +1,33 @@
-# E4 — Memory safety and native-code boundaries (7 Generalize)
+# E4 — Memory safety and native-code boundaries (7 Transfer)
 
-**Kind:** transfer-challenge
-**Loop step:** 7 Generalize
-**Standards:** Memory-safety as an integrity/availability property at the FFI boundary.
+**Kind:** transfer-challenge  
+**Loop step:** 7 Transfer  
+**Standards:** CISA memory-safe roadmap (guidance); CWE Top 25 awareness. This models a length mismatch — it is not a weaponized native exploit.
 
 ## Property (start here)
 
-A copy into a 4-byte lab buffer must not return more than 4 bytes. This models a length mismatch — it is not a weaponized native exploit.
+A copy into a 4-byte lab buffer must not return more than 4 bytes. Length is complete mediation of the buffer object.
 
 ## Attacker capabilities and trust assumptions
 
-Caller supplying a long src. Trust: local bytes. No live memory corruption.
+- **Attacker:** Hostile filename/size field; FFI caller.
+- **Trust:** Local copy_into(dst_len, src, n).
+Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
 
-## This step
+**Prompt:** Image parser; protobuf C.
 
-Keep the property; change one channel (worker, WebView, CSV, CI). Do not answer with a Top 10 name. Label drafts draft.
+**Product sketch:** Clinic DICOM parser.
 
-## Root cause / impact / prevention / detection / recovery
+Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## What graders reject
 
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+| Reject | Why |
+|---|---|
+| Tool or awareness-list name as the property | 1.1 |
+| Framework default as the guarantee | Python slice is the *fixed* model; C will not do this for you.… |
+| Live-target plan | Lab policy |
 
 ## Practice
 
-Run `labs/E4/e4-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
-
-## Transfer
-
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
-
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+One page. No keys. The lab `labs/E4/e4-lab` stays the only running system you may break.

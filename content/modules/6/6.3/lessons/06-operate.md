@@ -1,45 +1,40 @@
 # 6.3 — Cross-site and cross-context attacks (6 Operate)
 
-**Kind:** operations-exercise
-**Loop step:** 6 Operate
-**Standards:** ASVS 5.0.0 V4 CSRF (chapter-level).
+**Kind:** operations-exercise  
+**Loop step:** 6 Operate  
+**Standards:** ASVS 5.0.0 V3/V4 (final); Fetch Metadata / SameSite as *helpers*; cookie session (2.3) is not the CSRF property.
 
 ## Property (start here)
 
-A state-changing share POST without a matching origin/CSRF token is denied. Cookie session (2.3) is not the CSRF property.
+A state-changing share POST from a foreign origin without a matching CSRF token/origin check is denied. Ambient cookies are not consent.
 
 ## Attacker capabilities and trust assumptions
 
-Other-origin page that can trigger a cookie-bearing POST in the model. Local only.
+- **Attacker:** Evil origin with the victim’s browser session cookie.
+- **Trust:** Local allow_share(origin, expected, token).
+Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
 
-## This step
+| Outcome | This module |
+|---|---|
+| Detect | csrf_rejected metric. |
+| Signal (no bodies) | foreign_origin_post_denied. |
+| Revoke / recover | Revoke surprise shares; notify. |
+| Residual | User clicking “share” on a lookalike UI — 4.2 phishing. |
 
-Detect without logging note bodies or tokens. Recover fail-safe (revoke, rotate, quarantine). If a human must act, the path must be usable (WCAG 2.2).
-
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
 
 ## Practice
 
-Run `labs/6.3/6.3-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/6.3/6.3-lab`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+postMessage, clickjacking, CORS * with credentials.
+
+## Usability
+
+CSRF errors must be readable (not color-only). Do not make the secure path harder than a cross-site GET that still mutates.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+SIEM product names are not the property. Keys stay out of lessons.

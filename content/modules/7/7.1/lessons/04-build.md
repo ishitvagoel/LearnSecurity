@@ -1,45 +1,52 @@
 # 7.1 — API contracts, protocols, and inventory (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** ASVS API V4 (chapter-level).
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** ASVS 5.0.0 V13 (final); OpenAPI as inventory, not security; API8/API9 awareness.
 
 ## Property (start here)
 
-JSON PATCH cannot set is_admin. Unknown fields are ignored or rejected — mass assignment is an authorization bug.
+Mass assignment: a PATCH must not set is_admin from the client document. The contract’s writable field set is an authorization property (1.2 at field grain, 7.2).
 
 ## Attacker capabilities and trust assumptions
 
-Authenticated member sending extra fields. Trust: local dict.
+- **Attacker:** Authenticated member sending extra JSON keys.
+- **Trust:** Local apply(user, patch).
+is_admin stays False.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+ALLOWED={'display_name'}
+def apply(user, body):
+    for k,v in body.items():
+        if k in ALLOWED:
+            user[k]=v
+    return user
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Explicit writable set; ignore/reject unknown privileged fields.
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+Pydantic extra=allow is this bug. FastAPI will happily take extra if your model does.
+
+Allow-list must track every protocol (REST, GraphQL, gRPC).
 
 ## Practice
 
-Run `labs/7.1/7.1-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+GraphQL mutation arguments; gRPC unknown fields.
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Honest display_name XSS (6.2) is another cell.

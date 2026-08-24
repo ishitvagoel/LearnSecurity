@@ -1,45 +1,48 @@
 # E6 — Product security leadership (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** Risk ownership; WCAG 2.2 on any human control named in the exception.
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** OWASP SAMM; NIST CSF 2.0; SSDF; CISA Secure by Design. Leadership is accountable residual, not a slide.
 
 ## Property (start here)
 
-A risk exception cannot be accepted without an owner, a review date, and an accessibility check flag. Leadership is accountable residual, not a slide.
+A risk exception cannot be accepted without an owner, a review date, and an accessibility check flag. “We’ll accept it” is not a record.
 
 ## Attacker capabilities and trust assumptions
 
-Executive who wants the date. Trust: local exception dict.
+- **Attacker:** Calendar; silent exceptions.
+- **Trust:** Local accept_exception({owner, review_by}).
+empty owner/date => False.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+def accept_exception(exc):
+    return bool(exc.get('owner') and exc.get('review_by') and exc.get('wcag_checked'))
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Schema of an exception; refuse incomplete.
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-Exceptions that rely on a human process must remain operable and understandable (WCAG 2.2).
+Jira “risk” issue type without dates.
+
+A perfect register that nobody reads.
 
 ## Practice
 
-Run `labs/E6/e6-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Procurement questionnaire vs this record.
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Some risk always remains — that’s the point of an honest register.

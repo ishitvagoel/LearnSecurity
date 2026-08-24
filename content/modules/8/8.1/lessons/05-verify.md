@@ -1,45 +1,38 @@
-# 8.1 — The hostile-client and mobile-platform model (5 Verify)
+# 8.1 — Hostile-client and mobile platform model (5 Verify)
 
-**Kind:** verification-lab
-**Loop step:** 5 Verify
-**Standards:** MASVS 2.1 (final) platform model; Play Integrity is a vendor mechanism, not the property.
+**Kind:** verification-lab  
+**Loop step:** 5 Verify  
+**Standards:** MASVS 2.1 (final) PLATFORM/CODE; Android security model. APK is not in the TCB.
 
 ## Property (start here)
 
-SecureCollab must not grant a sensitive export because the Android client JSON says integrity is ok. Server attestation (lab token) is the TCB; the APK is hostile.
+A client JSON field integrity=ok must not authorize a sensitive export. The server attestation result is the TCB; the APK is hostile (root, patched, emulator).
 
 ## Attacker capabilities and trust assumptions
 
-Modified APK that sets integrity=ok. Trust: server token only. Local dict; no real Play Integrity calls.
+- **Attacker:** Modified APK; Frida; stolen “integrity ok” boolean.
+- **Trust:** Local allow_export(client_claim, server_attest).
+An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
 
-## This step
+| Case | Must show |
+|---|---|
+| Normal | Honest allowed action still works where the product says so |
+| Negative / abuse | Client integrity claim authorizes export |
+| Failure | Fail closed: Ignore client integrity for authorization; server attest/session 1 |
 
-pytest --impl vulnerable must fail; --impl fixed must pass. A test that only checks HTTP 200 is not a security test.
+Lab tests: `test_property.py` under `labs/8.1/8.1-lab`.
 
-## Root cause / impact / prevention / detection / recovery
+- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Client integrity claim authorizes export`
+- `--impl fixed`: **pass**
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-Attestation can be unavailable; then deny the sensitive path (fail-safe), do not trust the client checkbox.
+client integrity is not authorization.
 
 ## Practice
 
-Run `labs/8.1/8.1-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Feature flags in the APK; premium=true.
 
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).

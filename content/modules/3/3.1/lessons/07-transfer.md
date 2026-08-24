@@ -1,37 +1,33 @@
-# 3.1 — Assets, data classification, and security requirements (7 Generalize)
+# 3.1 — Assets, classification, and security requirements (7 Transfer)
 
-**Kind:** transfer-challenge
-**Loop step:** 7 Generalize
-**Standards:** NIST CSF 2.0 (final) Identify; ASVS 5.0.0 V14 data protection (chapter-level).
+**Kind:** transfer-challenge  
+**Loop step:** 7 Transfer  
+**Standards:** NIST CSF 2.0 Identify (final); ASVS 5.0.0 V14 (final); NIST Privacy Framework 1.0 (final). Classification is a property of a *field*, not a spreadsheet sticker.
 
 ## Property (start here)
 
-Note **bodies** are Confidential; they must not appear in application logs. Classification is a property of the field, not a spreadsheet label.
+Note bodies are Confidential. An application log line for note_read must not contain the body. Labels in Confluence do not enforce this.
 
 ## Attacker capabilities and trust assumptions
 
-Operator who can read logs; another tenant's admin; a support engineer. Trust: lab log sink is local.
+- **Attacker:** Operator with log access; SIEM vendor; another tenant’s admin who can read shared observability.
+- **Trust:** Local log sink. Real ELK is another TCB later (10.5).
+Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
 
-## Root cause / impact / prevention / detection / recovery
+**Prompt:** Clinic notes vs appointment time: two classes, two sinks.
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+**Product sketch:** EHR-lite booking card.
 
-## Framework defaults vs application guarantees
+Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
 
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+## What graders reject
+
+| Reject | Why |
+|---|---|
+| Tool or awareness-list name as the property | 1.1 |
+| Framework default as the guarantee | uvicorn access logs will happily store query strings (4.3). FastAPI does not kno… |
+| Live-target plan | Lab policy |
 
 ## Practice
 
-Change one actor or channel; which 1.x/2.x artifacts are invalid?
-
-## Transfer
-
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
-
-## Non-goals
-
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+One page. No keys. The lab `labs/3.1/3.1-lab` stays the only running system you may break.

@@ -1,37 +1,50 @@
-# 4.2 — Authentication, phishing resistance, and usable access (4 Build)
+# 4.2 — Authentication and phishing-resistant authenticators (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** NIST SP 800-63-4 (final) phishing-resistant AAL; WebAuthn L3 remains **Candidate Recommendation** — label it.
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** NIST SP 800-63B-4 (final); WebAuthn Level 3 is a **W3C Candidate Recommendation** — label CR, not Rec; WCAG 2.2 for the journey; ASVS 5.0.0 V6.
 
 ## Property (start here)
 
-Password + 'remember me' is **not** phishing-resistant. A phishing-resistant authenticator must fail a lookalike origin (WebAuthn-class). Passwords stay allowed only as a labeled residual.
+A password check that ignores origin is not phishing-resistant. WebAuthn to evil.example must fail even if the secret/credential exists. Passwords to the real origin are still phishable — do not advertise them as resistant.
 
 ## Attacker capabilities and trust assumptions
 
-Lookalike origin. Trust: lab origin string only — no live IdP.
+- **Attacker:** Lookalike origin; intercepted password; fatigued user.
+- **Trust:** Lab origin binding. Real authenticators later; this fixture models origin check.
+Only webauthn + matching origin returns True.
 
-## Root cause / impact / prevention / detection / recovery
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Fixed fixture (local)
 
-## Framework defaults vs application guarantees
+```python
+def phishing_resistant(method: str, origin: str, expected: str) -> bool:
+    if method != "webauthn":
+        return False
+    return origin == expected
+```
 
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+## Why this restores the cell
+
+WebAuthn origin/RP ID binding; do not call passwords resistant.
+
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+
+## What this is not
+
+HTML autocomplete=webauthn is not a ceremony.
+
+WebAuthn does not authorize (1.2). Recovery paths can re-introduce phishable secrets (1.4, 4.1).
 
 ## Practice
 
-State the structural fix (not a denylist of one user).
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
+Step-up for export: still origin-bound?
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+Users with only passwords — honest residual, not a slogan.

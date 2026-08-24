@@ -1,45 +1,53 @@
-# 8.4 — Build, distribution, attestation, and resilience (2 Model)
+# 8.4 — Build, distribution, attestation, resilience (2 Model)
 
-**Kind:** design-exercise
-**Loop step:** 2 Model
-**Standards:** MASVS 2.1 resilience; attestation vendor docs are mechanisms.
+**Kind:** design-exercise  
+**Loop step:** 2 Model  
+**Standards:** MASVS 2.1 CODE/RESILIENCE (final). Resilience raises cost; it is not trust.
 
 ## Property (start here)
 
-A debug-signed lab build must not call the production export API even if a client attest string is present.
+A debug-signed lab build must not call the production export API even if a client attest string is present. Channel + build type are part of the TCB decision on the server.
 
 ## Attacker capabilities and trust assumptions
 
-Sideloaded debug APK. Trust: server sees build_type. Local only.
+- **Attacker:** Leaked debug APK; student build pointed at prod.
+- **Trust:** Local api_allowed(build, attest).
+Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
 
-## This step
+| Piece | This system |
+|---|---|
+| Subjects | debug build, prod API |
+| Objects | export endpoint |
+| Actions | api_allowed |
+| Channels | TLS to prod |
+| TCB | Server rejects debug client ids / non-prod signatures. |
+| Untrusted | Client attest string, obfuscation |
+| State / time | CI artifact mis-tagged. |
+| 1.1 cell | Integrity of the release channel. |
 
-Name principals, objects, and channels. Open design: the client, APK, or prompt is hostile. Secrecy of the check is not the property.
+## Authority matrix (minimum)
 
-## Root cause / impact / prevention / detection / recovery
+| Subject | Object | Action | Decision |
+|---|---|---|---|
+| debug APK | prod export | call | deny |
+| release APK | prod export | call | allow-if-1.2-attest |
+| stolen sign key | store | publish | 5.3 incident |
+| R8 | strings | hide | not-authz |
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
 
 ## Practice
 
-Run `labs/8.4/8.4-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/8.4/8.4-lab` file `build.py`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+SBOM of the APK (10.2).
+
+## Residual risk
+
+Attestation farms.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.

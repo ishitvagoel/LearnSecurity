@@ -1,45 +1,53 @@
-# 8.2 — Local data, keys, biometrics, offline state, and leakage surfaces (2 Model)
+# 8.2 — Local data, keys, biometrics, offline, leakage (2 Model)
 
-**Kind:** design-exercise
-**Loop step:** 2 Model
-**Standards:** MASVS 2.1 storage; ASVS V6 at rest is a different cell — name which store you mean.
+**Kind:** design-exercise  
+**Loop step:** 2 Model  
+**Standards:** MASVS 2.1 STORAGE/CRYPTO/AUTH/PRIVACY (final); MASTG 2.0 tests.
 
 ## Property (start here)
 
-An offline-cached note body must not sit as plaintext on the lab disk map. Encoding or a world-readable prefs file is not confidentiality.
+A cached note must not be plaintext on disk. Biometric lock is not server authentication (4.2). Backups and screenshots are extra channels.
 
 ## Attacker capabilities and trust assumptions
 
-Backup/ADB-style reader of the local store. Trust: process that can read DISK. No real device.
+- **Attacker:** USB backup; lost unlocked-cache device; cloud backup of app files.
+- **Trust:** Local save_note / plaintext_on_disk.
+Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
 
-## This step
+| Piece | This system |
+|---|---|
+| Subjects | thief, backup service, app |
+| Objects | cache file |
+| Actions | save_note, plaintext_on_disk |
+| Channels | disk, backup, notifications (8.5 related) |
+| TCB | Keystore-backed encryption; server remains source of truth. |
+| Untrusted | App private dir on a rooted device as “enough” |
+| State / time | Offline cache after revoke (4.1). |
+| 1.1 cell | Confidentiality of bodies at rest on a hostile device. |
 
-Name principals, objects, and channels. Open design: the client, APK, or prompt is hostile. Secrecy of the check is not the property.
+## Authority matrix (minimum)
 
-## Root cause / impact / prevention / detection / recovery
+| Subject | Object | Action | Decision |
+|---|---|---|---|
+| thief | cache file | read | deny-plaintext |
+| user | offline read | own notes | allow-until-revoke |
+| backup | app data | cloud | no-bodies-or-encrypted |
+| server | revoke | cache | wipe |
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
 
 ## Practice
 
-Run `labs/8.2/8.2-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/8.2/8.2-lab` file `disk.py`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+iOS Keychain vs Android Keystore; desktop Electron.
+
+## Residual risk
+
+Physical + extracted keys — honest.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.

@@ -1,37 +1,38 @@
-# 3.1 — Assets, data classification, and security requirements (5 Verify)
+# 3.1 — Assets, classification, and security requirements (5 Verify)
 
-**Kind:** verification-lab
-**Loop step:** 5 Verify
-**Standards:** NIST CSF 2.0 (final) Identify; ASVS 5.0.0 V14 data protection (chapter-level).
+**Kind:** verification-lab  
+**Loop step:** 5 Verify  
+**Standards:** NIST CSF 2.0 Identify (final); ASVS 5.0.0 V14 (final); NIST Privacy Framework 1.0 (final). Classification is a property of a *field*, not a spreadsheet sticker.
 
 ## Property (start here)
 
-Note **bodies** are Confidential; they must not appear in application logs. Classification is a property of the field, not a spreadsheet label.
+Note bodies are Confidential. An application log line for note_read must not contain the body. Labels in Confluence do not enforce this.
 
 ## Attacker capabilities and trust assumptions
 
-Operator who can read logs; another tenant's admin; a support engineer. Trust: lab log sink is local.
+- **Attacker:** Operator with log access; SIEM vendor; another tenant’s admin who can read shared observability.
+- **Trust:** Local log sink. Real ELK is another TCB later (10.5).
+An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
 
-## Root cause / impact / prevention / detection / recovery
+| Case | Must show |
+|---|---|
+| Normal | Honest allowed action still works where the product says so |
+| Negative / abuse | Confidential note body appears in a log line |
+| Failure | Fail closed: Structured logs with allow-listed fields; redact bodies |
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+Lab tests: `test_property.py` under `labs/3.1/3.1-lab`.
 
-## Framework defaults vs application guarantees
+- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Confidential note body appears in a log line`
+- `--impl fixed`: **pass**
 
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+body not in line; marker present.
 
 ## Practice
 
-Name the forbidden-outcome test.
+Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
 
 ## Transfer
 
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
+Clinic notes vs appointment time: two classes, two sinks.
 
-## Non-goals
-
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).

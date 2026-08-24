@@ -1,45 +1,53 @@
-# 8.3 — Network, deep links, WebViews, and inter-app communication (4 Build)
+# 8.3 — Network, deep links, WebViews, IPC (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** MASVS 2.1 platform interaction; 2.3/6.3 web origins are a different channel.
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** MASVS 2.1 PLATFORM/NETWORK/AUTH (final); RFC 8252. Exported components are attack surface.
 
 ## Property (start here)
 
-A deep link query as= must not switch the signed-in principal. Exported activities are an attack surface; the session is the identity.
+A deep link query as=admin must not switch the signed-in principal. The session is identity; the Intent is untrusted input.
 
 ## Attacker capabilities and trust assumptions
 
-Another app sending securecollab://notes?as=admin. Trust: local session dict. No real IPC.
+- **Attacker:** Malicious app sending an Intent; crafted https link.
+- **Trust:** Local open_link / current_user.
+as=admin leaves current_user alice.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+SESSION={'user':'alice'}
+def reset():
+    SESSION['user']='alice'
+def open_link(query):
+    return None
+def current_user():
+    return SESSION['user']
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Do not take identity from links; validate App Link certs; WebView allow-list.
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+exported=true defaults on old Android.
+
+Verified App Links still pass query strings.
 
 ## Practice
 
-Run `labs/8.3/8.3-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+OAuth redirect to app (4.5).
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+User installs attacker app — OS model.

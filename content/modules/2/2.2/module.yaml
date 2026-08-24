@@ -15,8 +15,8 @@ routeTags:
 - web-api
 releaseMilestone: M0
 outcomes:
-- Trace a request end to end and mark where identity, scheme, host, headers, body, and cache
-  keys can be transformed or trusted incorrectly
+- Trace a request end to end and mark where identity, scheme, host, headers, body,
+  and cache keys can be transformed or trusted incorrectly
 - State TLS 1.3 deployment responsibilities without treating HTTPS-on as the property
 - Produce a request-path diagram and hardened local edge configuration notes
 - Transfer after adding a CDN or reverse proxy
@@ -41,43 +41,46 @@ concepts:
 learningObjects:
 - id: 2.2-LO-01
   kind: concept-model
-  title: Hops, Host, forwarded identity, cache keys
+  title: 'HTTP, TLS, proxies, CDNs, and cache keys: property vs mechanism'
   path: lessons/01-property.md
 - id: 2.2-LO-02
   kind: design-exercise
-  title: Request-path diagram for local SecureCollab plus edge
+  title: Model SecureCollab for 2.2
   path: lessons/02-model.md
 - id: 2.2-LO-03
   kind: mechanism-lab
-  title: Local proxy that rewrites Host or cache key
+  title: 'Local fixture: Shared cache returns tenant A''s body to tenant B'
   path: lessons/03-break.md
 - id: 2.2-LO-04
   kind: design-exercise
-  title: 'Hardened local edge config: what the origin still must verify'
+  title: Structural fix restoring the 2.2 invariant
   path: lessons/04-build.md
 - id: 2.2-LO-05
   kind: verification-lab
-  title: Tests that origin rejects unauthenticated forwarded identity
+  title: Forbidden-outcome tests for 2.2
   path: lessons/05-verify.md
 - id: 2.2-LO-06
   kind: operations-exercise
-  title: Certificate failure and expiry drill notes
+  title: Detect/recover notes for 2.2
   path: lessons/06-operate.md
 - id: 2.2-LO-07
   kind: transfer-challenge
-  title: 'Add CDN: new cache-key and Host trust'
+  title: 'Transfer: Clinic: cached /patients/me.'
   path: lessons/07-transfer.md
 - id: 2.2-LO-08
   kind: code-review
-  title: Seeded app that trusts X-Forwarded-For for authorization
+  title: Seeded review for 2.2
   path: lessons/08-review.md
 labSpec:
-  authorizedScope: Local reverse proxy and course fixture only
+  authorizedScope: Local course fixture or official training lab only; no public or
+    third-party targets
   slug: 2.2-request-path
-  summary: End-to-end path diagram and local Host/cache-key rewrite fixture
+  summary: Shared cache returns tenant A's body to tenant B
   forbiddenOutcomes:
-  - Attacking real CDNs or third-party sites
-  - Treating TLS termination as origin identity
+  - Shared cache returns tenant A's body to tenant B
+  - Live-target instructions
+  - Real PII or production secrets
+  - Awareness list used as the syllabus
 evidenceRequired:
 - Request-path diagram
 - Hardened local edge notes
@@ -107,15 +110,16 @@ standardsRefs:
   - tls-1.3
   url: https://datatracker.ietf.org/doc/html/rfc9846
 misconceptions:
-- TLS termination means the app can trust X-Forwarded headers and Host
-- CDN cache is performance-only
-- RFC 9846 is a checkbox that TLS 1.3 is enabled
+- HTTPS means no cache bugs
+- CDNs are only a performance layer
+- 'Vary: Cookie is enough forever'
 operationalConsiderations:
-- Certificate expiry and validation failures are operate drills, not optional
+- cdn_hit_tenant_mismatch; purge playbook.
+- Operational error at the CDN remains; monitor.
 author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (2.2 deepen); lab-safety-reviewer (local structural fixture)
-lastReviewedAt: '2026-08-23'
-nextReviewAt: '2027-02-23'
+reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+lastReviewedAt: '2026-08-24'
+nextReviewAt: '2027-02-24'
 changelog:
 - date: '2026-08-23'
   note: Pass A initial specification
@@ -127,3 +131,6 @@ changelog:
   note: Pass C rubric and examiner keys; quality-gate recorded
 - date: '2026-08-23'
   note: 'Deepen: 1.1-density lessons; structural local lab; quality-gate recorded'
+- date: '2026-08-24'
+  note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
+    Pass C keys isolated'

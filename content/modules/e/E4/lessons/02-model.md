@@ -1,45 +1,53 @@
 # E4 — Memory safety and native-code boundaries (2 Model)
 
-**Kind:** design-exercise
-**Loop step:** 2 Model
-**Standards:** Memory-safety as an integrity/availability property at the FFI boundary.
+**Kind:** design-exercise  
+**Loop step:** 2 Model  
+**Standards:** CISA memory-safe roadmap (guidance); CWE Top 25 awareness. This models a length mismatch — it is not a weaponized native exploit.
 
 ## Property (start here)
 
-A copy into a 4-byte lab buffer must not return more than 4 bytes. This models a length mismatch — it is not a weaponized native exploit.
+A copy into a 4-byte lab buffer must not return more than 4 bytes. Length is complete mediation of the buffer object.
 
 ## Attacker capabilities and trust assumptions
 
-Caller supplying a long src. Trust: local bytes. No live memory corruption.
+- **Attacker:** Hostile filename/size field; FFI caller.
+- **Trust:** Local copy_into(dst_len, src, n).
+Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
 
-## This step
+| Piece | This system |
+|---|---|
+| Subjects | Python stand-in for a C helper |
+| Objects | 4-byte buffer |
+| Actions | copy_into |
+| Channels | FFI |
+| TCB | min(n, dst_len) copy. |
+| Untrusted | n, src length |
+| State / time | One copy. |
+| 1.1 cell | Integrity of memory object bounds. |
 
-Name principals, objects, and channels. Open design: the client, APK, or prompt is hostile. Secrecy of the check is not the property.
+## Authority matrix (minimum)
 
-## Root cause / impact / prevention / detection / recovery
+| Subject | Object | Action | Decision |
+|---|---|---|---|
+| caller | n=4 dst=4 | copy | allow |
+| caller | n=8 dst=4 | copy | clamp-or-deny |
+| ASAN | real C | ci | named-tool |
+| lesson | PoC | weaponize | forbid |
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
 
 ## Practice
 
-Run `labs/E4/e4-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/E4/e4-lab` file `copy.py`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Image parser; protobuf C.
+
+## Residual risk
+
+Existing C codecs for images (6.4).
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.

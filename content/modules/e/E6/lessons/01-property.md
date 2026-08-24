@@ -1,45 +1,62 @@
 # E6 — Product security leadership (1 Property)
 
-**Kind:** concept-model
-**Loop step:** 1 Property
-**Standards:** Risk ownership; WCAG 2.2 on any human control named in the exception.
+**Kind:** concept-model  
+**Loop step:** 1 Property  
+**Standards:** OWASP SAMM; NIST CSF 2.0; SSDF; CISA Secure by Design. Leadership is accountable residual, not a slide.
 
 ## Property (start here)
 
-A risk exception cannot be accepted without an owner, a review date, and an accessibility check flag. Leadership is accountable residual, not a slide.
+A risk exception cannot be accepted without an owner, a review date, and an accessibility check flag. “We’ll accept it” is not a record.
 
 ## Attacker capabilities and trust assumptions
 
-Executive who wants the date. Trust: local exception dict.
+- **Attacker:** Calendar; silent exceptions.
+- **Trust:** Local accept_exception({owner, review_by}).
+**Mechanism (not the property):** Jira “risk” issue type without dates.
 
-## This step
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Start from this system's testable sentence, not a topic title. A mechanism (TLS, MASVS control, scanner, CSP) is not the invariant.
+## Root cause vs impact vs prevention vs detection vs recovery
 
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+| Slice | For E6 |
+|---|---|
+| Root cause | Oral acceptance. |
+| Preconditions | accept_exception({owner:'', review_by:None}) True. |
+| Impact (1.1 cell) | Accountability of residual risk (1.1 + 1.4). — Unowned holes; inaccessible recovery (1.4) forever. |
+| Prevention | Schema of an exception; refuse incomplete. |
+| Detection | exception_missing_owner. |
+| Recovery | Expire; fix or re-accept with fields. |
 
 ## Framework defaults vs application guarantees
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Jira “risk” issue type without dates.
+
+## Mechanism limits and bypasses
+
+A perfect register that nobody reads.
+
+Rename to “tech debt.”
 
 ## Residual risk
 
-Exceptions that rely on a human process must remain operable and understandable (WCAG 2.2).
+Some risk always remains — that’s the point of an honest register.
 
 ## Practice
 
-Run `labs/E6/e6-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write one exception that would pass the lab.
+
+Run `labs/E6/e6-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Procurement questionnaire vs this record.
+
+Clinic: “HIPAA exception.”
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.
+
+## Usability and accessibility
+
+The exception must record whether the residual includes an inaccessible control (1.4). Leadership owns that users cannot complete recovery.

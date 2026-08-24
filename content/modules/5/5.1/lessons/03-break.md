@@ -1,45 +1,57 @@
 # 5.1 — Data lifecycle and privacy engineering (3 Break)
 
-**Kind:** mechanism-lab
-**Loop step:** 3 Break
-**Standards:** NIST Privacy Framework 1.0 (final); 1.1 IPD stays **draft** if cited.
+**Kind:** mechanism-lab  
+**Loop step:** 3 Break  
+**Standards:** NIST Privacy Framework 1.0 (final); NIST PF 1.1 IPD stays **draft** if cited; ASVS 5.0.0 V14; MASVS-PRIVACY for later mobile caches.
 
 ## Property (start here)
 
-After account deletion, SecureCollab must not retain note **bodies** in an analytics copy. Retention is a 1.1 privacy/confidentiality property.
+After account deletion, SecureCollab must not retain note bodies in an analytics copy. Retention is a 1.1 privacy/confidentiality property, not a checkbox in a DPA.
 
 ## Attacker capabilities and trust assumptions
 
-Insider with analytics DB. Trust: local two-table fixture.
+- **Attacker:** Insider with analytics DB; buyer of a “de-identified” export that still has bodies.
+- **Trust:** Local NOTES vs ANALYTICS maps. Real warehouses are 7.4 workers.
+**Forbidden outcome:** Analytics copy still holds note body after account deletion
 
-## This step
+**Authorized scope:** `labs/5.1/5.1-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
 
-The authorized break is the local vulnerable/ fixture. No live targets, no weaponized copy-paste exploits, no public CDN to attack.
+## What to observe
 
-## Root cause / impact / prevention / detection / recovery
+vulnerable lifecycle.py leaves analytics body.
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: delete_account pops NOTES only.
 
-## Framework defaults vs application guarantees
+## Vulnerable fixture (local)
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+```python
+NOTES={'alice':'secret'}
+ANALYTICS={'alice':'secret'}
+def reset():
+    NOTES.clear(); NOTES['alice']='secret'
+    ANALYTICS.clear(); ANALYTICS['alice']='secret'
+def delete_account(user):
+    NOTES.pop(user, None)
+def body_retained(user):
+    return ANALYTICS.get(user)
+```
 
-## Residual risk
+## Root cause vs impact
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+| Slice | Lab |
+|---|---|
+| Root cause | Secondary copy not in the deletion graph. |
+| Impact | Bodies persist after the person left. |
+| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
 
 ## Practice
 
-Run `labs/5.1/5.1-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/5.1/5.1-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+CSV export to a partner; clinic-booking card PHI.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+No live-target instructions. Synthetic data only.

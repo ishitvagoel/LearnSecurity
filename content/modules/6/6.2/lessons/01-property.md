@@ -1,45 +1,58 @@
 # 6.2 — Browser injection and active content (1 Property)
 
-**Kind:** concept-model
-**Loop step:** 1 Property
-**Standards:** ASVS 5.0.0 V5; CSP3 WD (label **draft**); 2.3 browser cells.
+**Kind:** concept-model  
+**Loop step:** 1 Property  
+**Standards:** ASVS 5.0.0 V3 (final); CWE-79 as name; CSP3 / Trusted Types are layered and some docs are still CR — do not claim they replace encoding.
 
 ## Property (start here)
 
-Note HTML encoding must treat '<' as data. CSP3 (Working Draft) is not a substitute for encoding.
+Angle brackets in a note title must be encoded in HTML context (`&lt;`) so the browser does not parse an extra element. Encoding is context-specific; CSP is not this cell.
 
 ## Attacker capabilities and trust assumptions
 
-Member who types markup into a note. Trust: local encoder. No live XSS campaign.
+- **Attacker:** Collaborator who can edit a title; stored XSS later in another tenant’s view.
+- **Trust:** Local render(). Real DOM sinks in 2.3.
+**Mechanism (not the property):** React defaults help in JSX, not in dangerouslySetInnerHTML or a FastAPI HTML template.
 
-## This step
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Start from this system's testable sentence, not a topic title. A mechanism (TLS, MASVS control, scanner, CSP) is not the invariant.
+## Root cause vs impact vs prevention vs detection vs recovery
 
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+| Slice | For 6.2 |
+|---|---|
+| Root cause | HTML grammar mixed with data. |
+| Preconditions | render echoes <img without encoding. |
+| Impact (1.1 cell) | Integrity of the HTML interpreter; confidentiality of sessions if combined with 2.3 fail. — Active content in the victim origin. |
+| Prevention | Encode for HTML text; framework safe constructors; CSP extra. |
+| Detection | CSP reports (not enforcement by themselves — E2). |
+| Recovery | Patch content; rotate sessions if cookie not HttpOnly. |
 
 ## Framework defaults vs application guarantees
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+React defaults help in JSX, not in dangerouslySetInnerHTML or a FastAPI HTML template.
+
+## Mechanism limits and bypasses
+
+HTML encoding is wrong in a JS string context.
+
+DOM clobbering, prototype pollution, markdown pipeline.
 
 ## Residual risk
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+Trusted admin HTML — explicit tiny exception.
 
 ## Practice
 
-Run `labs/6.2/6.2-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name the context (HTML text vs attr vs JS vs URL).
+
+Run `labs/6.2/6.2-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Markdown-to-HTML sanitizer as a second parser (2.1).
+
+Clinic patient nickname field.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.

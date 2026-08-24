@@ -1,45 +1,50 @@
 # E2 — Advanced browser and edge security (3 Break)
 
-**Kind:** mechanism-lab
-**Loop step:** 3 Break
-**Standards:** CSP3 WD (**draft**); Trusted Types WD (**draft**). 2.3 browser cells still apply.
+**Kind:** mechanism-lab  
+**Loop step:** 3 Break  
+**Standards:** W3C CSP3 (CR — label draft/CR); Fetch Metadata; this lab’s cell is enforcement vs report-only.
 
 ## Property (start here)
 
-Content-Security-Policy-Report-Only is not enforcement. CSP3 remains a Working Draft — label it draft.
+Content-Security-Policy-Report-Only is not enforcement. Isolation is not “we set a header.”
 
 ## Attacker capabilities and trust assumptions
 
-Injected active content in the model. Trust: local header dict. No live XSS campaign.
+- **Attacker:** XSS that would be blocked only if CSP were enforcing.
+- **Trust:** Local isolation_enforced(headers).
+**Forbidden outcome:** Report-Only CSP counted as isolation enforcement
 
-## This step
+**Authorized scope:** `labs/E2/e2-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
 
-The authorized break is the local vulnerable/ fixture. No live targets, no weaponized copy-paste exploits, no public CDN to attack.
+## What to observe
 
-## Root cause / impact / prevention / detection / recovery
+vulnerable csp.py treats Report-Only as enforcement.
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: Report-Only header => enforced True.
 
-## Framework defaults vs application guarantees
+## Vulnerable fixture (local)
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+```python
+def isolation_enforced(headers):
+    return 'Content-Security-Policy-Report-Only' in headers or 'Content-Security-Policy' in headers
+```
 
-## Residual risk
+## Root cause vs impact
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+| Slice | Lab |
+|---|---|
+| Root cause | Report-Only mistaken for on. |
+| Impact | XSS still runs; dashboard looks green. |
+| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
 
 ## Practice
 
-Run `labs/E2/e2-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/E2/e2-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Trusted Types, COOP/COEP.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+No live-target instructions. Synthetic data only.

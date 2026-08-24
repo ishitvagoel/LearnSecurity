@@ -1,45 +1,40 @@
-# 8.4 — Build, distribution, attestation, and resilience (Review)
+# 8.4 — Build, distribution, attestation, resilience (Review)
 
-**Kind:** code-review
-**Loop step:** Review
-**Standards:** MASVS 2.1 resilience; attestation vendor docs are mechanisms.
+**Kind:** code-review  
+**Loop step:** Review  
+**Standards:** MASVS 2.1 CODE/RESILIENCE (final). Resilience raises cost; it is not trust.
 
 ## Property (start here)
 
-A debug-signed lab build must not call the production export API even if a client attest string is present.
+A debug-signed lab build must not call the production export API even if a client attest string is present. Channel + build type are part of the TCB decision on the server.
 
 ## Attacker capabilities and trust assumptions
 
-Sideloaded debug APK. Trust: server sees build_type. Local only.
+- **Attacker:** Leaked debug APK; student build pointed at prod.
+- **Trust:** Local api_allowed(build, attest).
+Review `labs/8.4/8.4-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/8.4.md` — not here.
 
-## This step
+## What to label
 
-Review the diff as a SecureCollab PR. Reject client trust, interpreter concatenation, Report-Only as enforcement, and closing findings without retest. Keys stay out of lessons.
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-## Root cause / impact / prevention / detection / recovery
+- Seeded smell (label it yourself): api_allowed debug+ok True
+- Seeded smell (label it yourself): Signing key in the repo
+- Seeded smell (label it yourself): Same API key in debug and release (5.3)
+- Seeded smell (label it yourself): Resilience checklist as Gate 8 evidence
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
 
-## Framework defaults vs application guarantees
+## Misconceptions
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+- Obfuscation = security
+- Play App Signing means we don’t care
+- Anti-debug proves the server can trust the client
 
 ## Practice
 
-Run `labs/8.4/8.4-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
-
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+SBOM of the APK (10.2).

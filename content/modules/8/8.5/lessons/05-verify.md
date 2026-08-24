@@ -1,45 +1,38 @@
 # 8.5 — Mobile verification and privacy (5 Verify)
 
-**Kind:** verification-lab
-**Loop step:** 5 Verify
-**Standards:** MASVS 2.1 privacy; NIST Privacy Framework 1.0 (final).
+**Kind:** verification-lab  
+**Loop step:** 5 Verify  
+**Standards:** MASVS 2.1 + MASTG 2.0 (final); MASWE mapping; Mobile Top 10:2024 awareness only.
 
 ## Property (start here)
 
-A crash report must not include the note body. Mobile privacy is a 1.1 privacy cell, not a policy PDF.
+A crash report must not include the note body. Mobile privacy is a 1.1 privacy cell, not a Play Data safety form as the control.
 
 ## Attacker capabilities and trust assumptions
 
-Crash reporter / support inbox. Trust: local dict. No real PII.
+- **Attacker:** Crash-platform operator; another process reading logcat.
+- **Trust:** Local crash_report(body).
+An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
 
-## This step
+| Case | Must show |
+|---|---|
+| Normal | Honest allowed action still works where the product says so |
+| Negative / abuse | Crash report contains the note body |
+| Failure | Fail closed: Do not put bodies in exceptions; SDK filters; permission minimization |
 
-pytest --impl vulnerable must fail; --impl fixed must pass. A test that only checks HTTP 200 is not a security test.
+Lab tests: `test_property.py` under `labs/8.5/8.5-lab`.
 
-## Root cause / impact / prevention / detection / recovery
+- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Crash report contains the note body`
+- `--impl fixed`: **pass**
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-Crash-upload consent and support emails must be understandable (WCAG 2.2).
+crash omits note body.
 
 ## Practice
 
-Run `labs/8.5/8.5-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Web Sentry (10.5) same cell.
 
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).

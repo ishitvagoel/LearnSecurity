@@ -1,45 +1,40 @@
 # 6.5 — Server-side requests and protocol parsing (Review)
 
-**Kind:** code-review
-**Loop step:** Review
-**Standards:** ASVS 5.0.0 V10 SSRF (chapter-level).
+**Kind:** code-review  
+**Loop step:** Review  
+**Standards:** ASVS 5.0.0 V10 (final); API7 awareness; URL is untrusted *structure* (2.1).
 
 ## Property (start here)
 
-Server-side fetch allowlists lab.securecollab.test only. Link-local metadata IPs are out of scope.
+The lab fetcher must not allow http://169.254.169.254/ (link-local metadata). SSRF is a trust-boundary fail: the server’s network is not the user’s to steer. HTTPS to a named lab host may be allowed.
 
 ## Attacker capabilities and trust assumptions
 
-Member who pastes a URL for a preview. Trust: URL parser, no real HTTP.
+- **Attacker:** User who supplies an unfurl/preview URL.
+- **Trust:** Local allowed(url). No real cloud metadata in this VM lesson — we assert the deny.
+Review `labs/6.5/6.5-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/6.5.md` — not here.
 
-## This step
+## What to label
 
-Review the diff as a SecureCollab PR. Reject client trust, interpreter concatenation, Report-Only as enforcement, and closing findings without retest. Keys stay out of lessons.
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-## Root cause / impact / prevention / detection / recovery
+- Seeded smell (label it yourself): requests.get(user_url)
+- Seeded smell (label it yourself): https-only regex still allows metadata IP
+- Seeded smell (label it yourself): Follows redirects off allow-list
+- Seeded smell (label it yourself): No 169.254 test
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
 
-## Framework defaults vs application guarantees
+## Misconceptions
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+- HTTPS URLs cannot SSRF
+- Private IP blocklists are complete
+- Open redirect is just UX
 
 ## Practice
 
-Run `labs/6.5/6.5-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
-
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Webhook delivery (7.3) is egress too.

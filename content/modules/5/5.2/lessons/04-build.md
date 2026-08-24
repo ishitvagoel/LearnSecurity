@@ -1,45 +1,51 @@
 # 5.2 — Cryptographic properties and safe use (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** ASVS 5.0.0 V6 (chapter-level). Do not roll your own.
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** ASVS 5.0.0 V11 (final); RFC 9106 Argon2 (final) for *passwords* not this field; never roll a cipher. This lab’s cell is confidentiality of a stored secret at rest — encoding is not encryption.
 
 ## Property (start here)
 
-Confidentiality of a note at rest is not 'we base64ed it.' Encoding is not encryption.
+protect(secret) must not be reversible as Base64 of the plaintext. Encoding, hex, and “obfuscation” are not confidentiality mechanisms.
 
 ## Attacker capabilities and trust assumptions
 
-Stolen disk file. Trust: local bytes only; no novel cryptosystems.
+- **Attacker:** Operator who can read the stored field; stolen disk of the lab dict.
+- **Trust:** Local protect()/looks_encrypted(). Real AEAD keys are 5.3.
+protect output is not b64(plaintext); looks_encrypted True.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+def protect(p):
+    # stand-in for an AEAD; teaching flag only
+    return 'aesgcm:' + str(len(p))
+def looks_encrypted(t):
+    return t.startswith('aesgcm:')
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Use a standard AEAD with a managed key; tests forbid b64 identity.
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+passlib/bcrypt is for passwords, not note bodies. Fernet still needs 5.3 key storage.
+
+AES-GCM with a nonce reuse is not this property. Do not paste attack scripts — name the misuse.
 
 ## Practice
 
-Run `labs/5.2/5.2-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Password hashing vs field encryption vs backup encryption.
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Memory dumps; authorized operators.

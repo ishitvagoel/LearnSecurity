@@ -1,45 +1,58 @@
 # E2 — Advanced browser and edge security (1 Property)
 
-**Kind:** concept-model
-**Loop step:** 1 Property
-**Standards:** CSP3 WD (**draft**); Trusted Types WD (**draft**). 2.3 browser cells still apply.
+**Kind:** concept-model  
+**Loop step:** 1 Property  
+**Standards:** W3C CSP3 (CR — label draft/CR); Fetch Metadata; this lab’s cell is enforcement vs report-only.
 
 ## Property (start here)
 
-Content-Security-Policy-Report-Only is not enforcement. CSP3 remains a Working Draft — label it draft.
+Content-Security-Policy-Report-Only is not enforcement. Isolation is not “we set a header.”
 
 ## Attacker capabilities and trust assumptions
 
-Injected active content in the model. Trust: local header dict. No live XSS campaign.
+- **Attacker:** XSS that would be blocked only if CSP were enforcing.
+- **Trust:** Local isolation_enforced(headers).
+**Mechanism (not the property):** Helmet defaults may be report-only in some templates.
 
-## This step
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Start from this system's testable sentence, not a topic title. A mechanism (TLS, MASVS control, scanner, CSP) is not the invariant.
+## Root cause vs impact vs prevention vs detection vs recovery
 
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+| Slice | For E2 |
+|---|---|
+| Root cause | Report-Only mistaken for on. |
+| Preconditions | Report-Only header => enforced True. |
+| Impact (1.1 cell) | Integrity of the browser policy mechanism (2.3 layered with 6.2). — XSS still runs; dashboard looks green. |
+| Prevention | Detect enforcing header; don’t claim isolation otherwise. |
+| Detection | csp_mode metric. |
+| Recovery | Flip to enforcing after fix 6.2. |
 
 ## Framework defaults vs application guarantees
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Helmet defaults may be report-only in some templates.
+
+## Mechanism limits and bypasses
+
+CSP does not replace encoding (6.2) or CSRF (6.3).
+
+JSONP, trusted-types not deployed, edge cache stripping headers (2.2).
 
 ## Residual risk
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+XS-Leaks — named as elective depth.
 
 ## Practice
 
-Run `labs/E2/e2-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Classify each header as enforce vs signal.
+
+Run `labs/E2/e2-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Trusted Types, COOP/COEP.
+
+Clinic: Report-Only as “HIPAA header.”
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.

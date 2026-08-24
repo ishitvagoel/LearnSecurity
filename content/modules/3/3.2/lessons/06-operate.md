@@ -1,37 +1,36 @@
 # 3.2 — Threat modeling (6 Operate)
 
-**Kind:** operations-exercise
-**Loop step:** 6 Operate
-**Standards:** OWASP Threat Modeling (maintained, final guidance) Four Questions; not a single tool.
+**Kind:** operations-exercise  
+**Loop step:** 6 Operate  
+**Standards:** OWASP Threat Modeling (project); NIST SP 800-154 remains **draft/withdrawn-track** — treat as informative only; ASVS 5.0.0 as later requirements, not a model.
 
 ## Property (start here)
 
-A green scanner does **not** mean 'no threats.' SecureCollab threat model must still list a cross-tenant reader and a hostile Next.js client.
+A green scanner does not yield an empty threat list. SecureCollab’s model must still include a cross-tenant reader and a hostile Next.js client.
 
 ## Attacker capabilities and trust assumptions
 
-Modeler who substitutes scanner output for Shostack questions. Trust: none in the scanner as TCB.
+- **Attacker:** Cross-tenant member; hostile browser; future worker identity (named now as a trigger).
+- **Trust:** Local threats_from_scan fixture. Real scanners are coverage tools (9.4), not oracles.
+Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
 
-## Root cause / impact / prevention / detection / recovery
+| Outcome | This module |
+|---|---|
+| Detect | CI fails if required threat ids missing. |
+| Signal (no bodies) | model_age_days; missing-mandatory-threat CI. |
+| Revoke / recover | Add the threat, tests, owner; do not back-date. |
+| Residual | Unknown unknowns — review triggers exist for that. |
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
 
 ## Practice
 
-What is logged without sensitive bodies/secrets?
+Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/3.2/3.2-lab`.
 
 ## Transfer
 
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
+Add webhooks (7.3): which new threats?
 
 ## Non-goals
 
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+SIEM product names are not the property. Keys stay out of lessons.

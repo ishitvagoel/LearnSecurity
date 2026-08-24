@@ -1,45 +1,57 @@
-# E3 — Payments, financial, health, and other high-assurance systems (4 Build)
+# E3 — Payments and other high-assurance systems (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** Idempotency as integrity of money movement; do not invent a payment standard pin.
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** ASVS L3 as *selection*; PCI DSS 4.0.1 as sector awareness — this lab does not claim PCI scope. Idempotency is 2.4 at money grain.
 
 ## Property (start here)
 
-A capture with the same idempotency key must not double-charge the lab ledger. High-assurance is a 2.4/7.x property, not PCI theater.
+A capture with the same idempotency key must not double-charge the lab ledger. High-assurance is a 2.4/7.x property, not PCI theater. No real PAN/PII.
 
 ## Attacker capabilities and trust assumptions
 
-Retried capture. Trust: local set. No real card data.
+- **Attacker:** Retry after 504; client double-click.
+- **Trust:** Local capture(key); synthetic amounts.
+two capture(k1) => count 1.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+SEEN=set(); CHARGES=[]
+def reset():
+    SEEN.clear(); CHARGES.clear()
+def capture(key):
+    if key in SEEN:
+        return False
+    SEEN.add(key)
+    CHARGES.append(key)
+    return True
+def charge_count():
+    return len(CHARGES)
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Idempotency key as primary key of capture.
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+Stripe idempotency is not your local ledger unless you use it.
+
+PCI SAQ is not this cell.
 
 ## Practice
 
-Run `labs/E3/e3-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Health record append-only audit.
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Webhook vs capture race (7.3+2.4).

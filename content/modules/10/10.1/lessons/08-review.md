@@ -1,8 +1,8 @@
 # 10.1 — Secure software lifecycle and security culture (Review)
 
-**Kind:** code-review
-**Loop step:** Review
-**Standards:** NIST SSDF 1.1 (final) as practice names; not a control menu.
+**Kind:** code-review  
+**Loop step:** Review  
+**Standards:** NIST SSDF 1.1 SP 800-218 (final); OWASP SAMM; CISA Secure by Design.
 
 ## Property (start here)
 
@@ -10,36 +10,35 @@ A SecureCollab PR cannot merge without a threat-model identifier for the changed
 
 ## Attacker capabilities and trust assumptions
 
-Busy author. Trust: local PR dict.
+- **Attacker:** Schedule pressure.
+- **Trust:** Local merge_ok({}).
+Review `labs/10.1/10.1-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/10.1.md` — not here.
 
-## This step
+## What to label
 
-Review the diff as a SecureCollab PR. Reject client trust, interpreter concatenation, Report-Only as enforcement, and closing findings without retest. Keys stay out of lessons.
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-## Root cause / impact / prevention / detection / recovery
+- Seeded smell (label it yourself): merge_ok True without tm
+- Seeded smell (label it yourself): Security champion optional forever
+- Seeded smell (label it yourself): Vanity vuln-count KPI
+- Seeded smell (label it yourself): No change-trigger matrix
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
 
-## Framework defaults vs application guarantees
+## Misconceptions
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+- SAMM score is product security
+- Culture cannot be tested
+- SSDLC is a waterfall gate at the end
 
 ## Practice
 
-Run `labs/10.1/10.1-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Exception path (E6).
 
-## Non-goals
+## HITL / WCAG 2.2
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Merge and checklist UIs must be accessible to the actual reviewers you have.

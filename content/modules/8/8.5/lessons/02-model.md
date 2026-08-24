@@ -1,45 +1,53 @@
 # 8.5 — Mobile verification and privacy (2 Model)
 
-**Kind:** design-exercise
-**Loop step:** 2 Model
-**Standards:** MASVS 2.1 privacy; NIST Privacy Framework 1.0 (final).
+**Kind:** design-exercise  
+**Loop step:** 2 Model  
+**Standards:** MASVS 2.1 + MASTG 2.0 (final); MASWE mapping; Mobile Top 10:2024 awareness only.
 
 ## Property (start here)
 
-A crash report must not include the note body. Mobile privacy is a 1.1 privacy cell, not a policy PDF.
+A crash report must not include the note body. Mobile privacy is a 1.1 privacy cell, not a Play Data safety form as the control.
 
 ## Attacker capabilities and trust assumptions
 
-Crash reporter / support inbox. Trust: local dict. No real PII.
+- **Attacker:** Crash-platform operator; another process reading logcat.
+- **Trust:** Local crash_report(body).
+Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
 
-## This step
+| Piece | This system |
+|---|---|
+| Subjects | crash SDK, developer |
+| Objects | stack trace, note body |
+| Actions | crash_report |
+| Channels | HTTPS to vendor, logcat |
+| TCB | Redaction before send. |
+| Untrusted | Third-party SDK, verbose logging |
+| State / time | Crash at view-note. |
+| 1.1 cell | Privacy/confidentiality of bodies in telemetry. |
 
-Name principals, objects, and channels. Open design: the client, APK, or prompt is hostile. Secrecy of the check is not the property.
+## Authority matrix (minimum)
 
-## Root cause / impact / prevention / detection / recovery
+| Subject | Object | Action | Decision |
+|---|---|---|---|
+| SDK | body | send | deny |
+| SDK | stack | send | allow |
+| logcat | body | print | deny |
+| vendor | retention | 5.1 | contract |
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-Crash-upload consent and support emails must be understandable (WCAG 2.2).
+A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
 
 ## Practice
 
-Run `labs/8.5/8.5-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/8.5/8.5-lab` file `crash.py`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Web Sentry (10.5) same cell.
+
+## Residual risk
+
+Vendor as processor — contract + 5.1.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.

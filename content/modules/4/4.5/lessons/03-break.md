@@ -1,37 +1,50 @@
-# 4.5 — OAuth, OpenID Connect, browser apps, and native apps (3 Break)
+# 4.5 — OAuth, OIDC, and delegated authorization (3 Break)
 
-**Kind:** mechanism-lab
-**Loop step:** 3 Break
-**Standards:** OAuth 2.1 (I-D, not final); OIDC Core (final). Do not present 2.1 as RFC.
+**Kind:** mechanism-lab  
+**Loop step:** 3 Break  
+**Standards:** RFC 9700 OAuth 2.0 Security BCP (final); RFC 8252 native apps (final); OIDC Core 1.0 (final); ASVS 5.0.0 V10. JWT *aud* is this lab’s cell, not “we use OAuth.”
 
 ## Property (start here)
 
-An access token is accepted only if **aud** is this API. A token minted for another audience is not a SecureCollab session. OAuth 2.1 remains an **Internet-Draft** — label it.
+A bearer JWT with the wrong audience must be rejected. Tokens for other-api are not sessions for securecollab-api. Delegation is not authentication theater.
 
 ## Attacker capabilities and trust assumptions
 
-Token from another API replayed here. Trust: local claim dict, not a real JWT crypto lab.
+- **Attacker:** Stolen token minted for another API; confused deputy client.
+- **Trust:** Local aud check. Real JWKS, iss, nonce, PKCE in the full protocol — named as residual here.
+**Forbidden outcome:** JWT with wrong audience accepted as a SecureCollab session
 
-## Root cause / impact / prevention / detection / recovery
+**Authorized scope:** `labs/4.5/4.5-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## What to observe
 
-## Framework defaults vs application guarantees
+vulnerable jwt_aud.py accepts any aud.
 
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: accept_token ignores aud.
+
+## Vulnerable fixture (local)
+
+```python
+def accept_token(claims: dict, expected_aud: str) -> bool:
+    return "sub" in claims
+```
+
+## Root cause vs impact
+
+| Slice | Lab |
+|---|---|
+| Root cause | Signature verified without audience. |
+| Impact | Other-api token spends SecureCollab API. |
+| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
 
 ## Practice
 
-Run `labs/4.5/4.5-lab` with --impl vulnerable then fixed.
+Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/4.5/4.5-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
 
 ## Transfer
 
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
+Mobile redirect (8.3, RFC 8252) and BFF vs SPA token storage.
 
 ## Non-goals
 
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+No live-target instructions. Synthetic data only.

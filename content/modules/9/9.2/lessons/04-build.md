@@ -1,45 +1,48 @@
 # 9.2 — Secure code review (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** ASVS 5.0.0 V5; 6.1 interpreter property.
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** OWASP Code Review (guidance); NIST SSDF PW/RV (final). Review is complete mediation of the diff.
 
 ## Property (start here)
 
-A diff that concatenates eval( on user input must not be approved. Review is complete mediation of the interpreter, not a checklist LGTM.
+A diff that uses eval on user input must not be approved. LGTM without looking at interpreters/authority is not review.
 
 ## Attacker capabilities and trust assumptions
 
-Author who lands eval. Trust: local string scan of the teaching diff.
+- **Attacker:** Rushed colleague; supply-chain PR (10.2).
+- **Trust:** Local review_ok(src).
+eval(user) => review_ok False.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+def review_ok(diff):
+    return 'eval(' not in diff
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Reject eval-on-user; look at data flow, authz, state, config.
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+GitHub “rulesets” do not read eval.
+
+Review misses generated code (E1).
 
 ## Practice
 
-Run `labs/9.2/9.2-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Terraform, GitHub Actions yaml.
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Unknown unknowns — 9.3 tests.

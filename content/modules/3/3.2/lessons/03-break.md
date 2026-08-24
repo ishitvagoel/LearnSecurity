@@ -1,37 +1,50 @@
 # 3.2 — Threat modeling (3 Break)
 
-**Kind:** mechanism-lab
-**Loop step:** 3 Break
-**Standards:** OWASP Threat Modeling (maintained, final guidance) Four Questions; not a single tool.
+**Kind:** mechanism-lab  
+**Loop step:** 3 Break  
+**Standards:** OWASP Threat Modeling (project); NIST SP 800-154 remains **draft/withdrawn-track** — treat as informative only; ASVS 5.0.0 as later requirements, not a model.
 
 ## Property (start here)
 
-A green scanner does **not** mean 'no threats.' SecureCollab threat model must still list a cross-tenant reader and a hostile Next.js client.
+A green scanner does not yield an empty threat list. SecureCollab’s model must still include a cross-tenant reader and a hostile Next.js client.
 
 ## Attacker capabilities and trust assumptions
 
-Modeler who substitutes scanner output for Shostack questions. Trust: none in the scanner as TCB.
+- **Attacker:** Cross-tenant member; hostile browser; future worker identity (named now as a trigger).
+- **Trust:** Local threats_from_scan fixture. Real scanners are coverage tools (9.4), not oracles.
+**Forbidden outcome:** Green scanner produces an empty SecureCollab threat model
 
-## Root cause / impact / prevention / detection / recovery
+**Authorized scope:** `labs/3.2/3.2-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## What to observe
 
-## Framework defaults vs application guarantees
+vulnerable model.py returns [] when scan is green.
 
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: scan_green=True; model copies it.
+
+## Vulnerable fixture (local)
+
+```python
+def threats_from_scan(scanner_green: bool) -> list[str]:
+    return [] if scanner_green else ["generic"]
+```
+
+## Root cause vs impact
+
+| Slice | Lab |
+|---|---|
+| Root cause | Tool output substituted for thinking. |
+| Impact | No test for 1.2; residual unowned. |
+| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
 
 ## Practice
 
-Run `labs/3.2/3.2-lab` with --impl vulnerable then fixed.
+Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/3.2/3.2-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
 
 ## Transfer
 
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
+Add webhooks (7.3): which new threats?
 
 ## Non-goals
 
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+No live-target instructions. Synthetic data only.

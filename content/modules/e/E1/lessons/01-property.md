@@ -1,45 +1,62 @@
 # E1 — AI, LLM, and agentic application security (1 Property)
 
-**Kind:** concept-model
-**Loop step:** 1 Property
-**Standards:** Elective E1; treat vendor AI-security features as mechanisms. Draft eval methods stay draft if cited.
+**Kind:** concept-model  
+**Loop step:** 1 Property  
+**Standards:** OWASP GenAI LLM Top 10 2026 (awareness, not syllabus); NIST AI RMF GenAI Profile (guidance); this lab’s cell is tool authority.
 
 ## Property (start here)
 
-The lab agent may only invoke allowlisted tools. A model-proposed exec_sql is not authorization. OWASP LLM lists are awareness, not this syllabus.
+The lab agent may only invoke allowlisted tools. A model-proposed exec_sql is not authorization. The model is an untrusted client (8.1) that speaks English.
 
 ## Attacker capabilities and trust assumptions
 
-Prompt that asks the model to call exec_sql. Trust: local tool router. No live model vendor.
+- **Attacker:** Prompt injection in a note body; malicious retrieved doc.
+- **Trust:** Local run_tool(name).
+**Mechanism (not the property):** LangChain default tools are not your matrix.
 
-## This step
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Start from this system's testable sentence, not a topic title. A mechanism (TLS, MASVS control, scanner, CSP) is not the invariant.
+## Root cause vs impact vs prevention vs detection vs recovery
 
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+| Slice | For E1 |
+|---|---|
+| Root cause | Model output treated as policy. |
+| Preconditions | run_tool('exec_sql') executes. |
+| Impact (1.1 cell) | Authorization of tools — complete mediation for the agent. — Interpreter 6.1 via English. |
+| Prevention | Allow-list; no exec_sql; human approval for high impact. |
+| Detection | denied_tool. |
+| Recovery | Revoke agent creds (7.4). |
 
 ## Framework defaults vs application guarantees
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+LangChain default tools are not your matrix.
+
+## Mechanism limits and bypasses
+
+Prompt “never call exec_sql” is not mediation.
+
+Indirect injection via 5.1 analytics copy.
 
 ## Residual risk
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+Hallucinated packages (10.2) in copilot use.
 
 ## Practice
 
-Run `labs/E1/e1-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+List tools and who may call them.
+
+Run `labs/E1/e1-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Copilot in CI.
+
+Clinic summarizer over charts.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.
+
+## Usability and accessibility
+
+Human approval UI for tools must be accessible; otherwise operators auto-approve.

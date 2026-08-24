@@ -1,37 +1,38 @@
-# 4.2 — Authentication, phishing resistance, and usable access (5 Verify)
+# 4.2 — Authentication and phishing-resistant authenticators (5 Verify)
 
-**Kind:** verification-lab
-**Loop step:** 5 Verify
-**Standards:** NIST SP 800-63-4 (final) phishing-resistant AAL; WebAuthn L3 remains **Candidate Recommendation** — label it.
+**Kind:** verification-lab  
+**Loop step:** 5 Verify  
+**Standards:** NIST SP 800-63B-4 (final); WebAuthn Level 3 is a **W3C Candidate Recommendation** — label CR, not Rec; WCAG 2.2 for the journey; ASVS 5.0.0 V6.
 
 ## Property (start here)
 
-Password + 'remember me' is **not** phishing-resistant. A phishing-resistant authenticator must fail a lookalike origin (WebAuthn-class). Passwords stay allowed only as a labeled residual.
+A password check that ignores origin is not phishing-resistant. WebAuthn to evil.example must fail even if the secret/credential exists. Passwords to the real origin are still phishable — do not advertise them as resistant.
 
 ## Attacker capabilities and trust assumptions
 
-Lookalike origin. Trust: lab origin string only — no live IdP.
+- **Attacker:** Lookalike origin; intercepted password; fatigued user.
+- **Trust:** Lab origin binding. Real authenticators later; this fixture models origin check.
+An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
 
-## Root cause / impact / prevention / detection / recovery
+| Case | Must show |
+|---|---|
+| Normal | Honest allowed action still works where the product says so |
+| Negative / abuse | Password (or wrong-origin WebAuthn) counted as phishing-resistant |
+| Failure | Fail closed: WebAuthn origin/RP ID binding; do not call passwords resistant |
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+Lab tests: `test_property.py` under `labs/4.2/4.2-lab`.
 
-## Framework defaults vs application guarantees
+- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Password (or wrong-origin WebAuthn) counted as phishing-resistant`
+- `--impl fixed`: **pass**
 
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+password+evil False; webauthn+evil False.
 
 ## Practice
 
-Name the forbidden-outcome test.
+Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
 
 ## Transfer
 
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
+Step-up for export: still origin-bound?
 
-## Non-goals
-
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).

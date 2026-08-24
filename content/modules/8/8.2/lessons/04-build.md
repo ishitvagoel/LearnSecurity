@@ -1,45 +1,53 @@
-# 8.2 — Local data, keys, biometrics, offline state, and leakage surfaces (4 Build)
+# 8.2 — Local data, keys, biometrics, offline, leakage (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** MASVS 2.1 storage; ASVS V6 at rest is a different cell — name which store you mean.
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** MASVS 2.1 STORAGE/CRYPTO/AUTH/PRIVACY (final); MASTG 2.0 tests.
 
 ## Property (start here)
 
-An offline-cached note body must not sit as plaintext on the lab disk map. Encoding or a world-readable prefs file is not confidentiality.
+A cached note must not be plaintext on disk. Biometric lock is not server authentication (4.2). Backups and screenshots are extra channels.
 
 ## Attacker capabilities and trust assumptions
 
-Backup/ADB-style reader of the local store. Trust: process that can read DISK. No real device.
+- **Attacker:** USB backup; lost unlocked-cache device; cloud backup of app files.
+- **Trust:** Local save_note / plaintext_on_disk.
+plaintext_on_disk False.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+DISK={}
+def reset():
+    DISK.clear()
+def save_note(body):
+    DISK['note']='aead:'+str(len(body))
+def plaintext_on_disk():
+    return DISK.get('note')=='secret'
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Encrypt cache; expire; wipe on logout/revoke; no body in notifications.
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+EncryptedSharedPreferences defaults are not automatic for every file you write.
+
+Biometrics gate UI, not key extraction on a compromised OS.
 
 ## Practice
 
-Run `labs/8.2/8.2-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+iOS Keychain vs Android Keystore; desktop Electron.
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Physical + extracted keys — honest.

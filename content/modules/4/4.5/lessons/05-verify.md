@@ -1,37 +1,38 @@
-# 4.5 — OAuth, OpenID Connect, browser apps, and native apps (5 Verify)
+# 4.5 — OAuth, OIDC, and delegated authorization (5 Verify)
 
-**Kind:** verification-lab
-**Loop step:** 5 Verify
-**Standards:** OAuth 2.1 (I-D, not final); OIDC Core (final). Do not present 2.1 as RFC.
+**Kind:** verification-lab  
+**Loop step:** 5 Verify  
+**Standards:** RFC 9700 OAuth 2.0 Security BCP (final); RFC 8252 native apps (final); OIDC Core 1.0 (final); ASVS 5.0.0 V10. JWT *aud* is this lab’s cell, not “we use OAuth.”
 
 ## Property (start here)
 
-An access token is accepted only if **aud** is this API. A token minted for another audience is not a SecureCollab session. OAuth 2.1 remains an **Internet-Draft** — label it.
+A bearer JWT with the wrong audience must be rejected. Tokens for other-api are not sessions for securecollab-api. Delegation is not authentication theater.
 
 ## Attacker capabilities and trust assumptions
 
-Token from another API replayed here. Trust: local claim dict, not a real JWT crypto lab.
+- **Attacker:** Stolen token minted for another API; confused deputy client.
+- **Trust:** Local aud check. Real JWKS, iss, nonce, PKCE in the full protocol — named as residual here.
+An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
 
-## Root cause / impact / prevention / detection / recovery
+| Case | Must show |
+|---|---|
+| Normal | Honest allowed action still works where the product says so |
+| Negative / abuse | JWT with wrong audience accepted as a SecureCollab session |
+| Failure | Fail closed: Exact aud match (or constrained list) |
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+Lab tests: `test_property.py` under `labs/4.5/4.5-lab`.
 
-## Framework defaults vs application guarantees
+- `--impl vulnerable` (or vulnerable fixtures): **fail** on `JWT with wrong audience accepted as a SecureCollab session`
+- `--impl fixed`: **pass**
 
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+wrong aud false; expected aud true.
 
 ## Practice
 
-Name the forbidden-outcome test.
+Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
 
 ## Transfer
 
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
+Mobile redirect (8.3, RFC 8252) and BFF vs SPA token storage.
 
-## Non-goals
-
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).

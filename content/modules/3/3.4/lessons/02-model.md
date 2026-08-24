@@ -1,37 +1,53 @@
 # 3.4 — Business logic and abuse-resistant design (2 Model)
 
-**Kind:** design-exercise
-**Loop step:** 2 Model
-**Standards:** ASVS 5.0.0 V2 business logic (chapter-level). Top 10 is not the outline.
+**Kind:** design-exercise  
+**Loop step:** 2 Model  
+**Standards:** ASVS 5.0.0 V2 (final); OWASP API Security Top 10:2023 API4/API6 as *awareness*; this lab is a product rule, not a CWE name.
 
 ## Property (start here)
 
-A note share grant cannot be applied twice to exceed the product rule (max 5 members). Abuse is a **logic** invariant, not a new CWE name.
+A note share grant cannot be applied enough times to exceed the product cap (5 members). Abuse is a logic invariant.
 
 ## Attacker capabilities and trust assumptions
 
-Member who retries share (2.4) or parallel tabs. Trust: local counter only.
+- **Attacker:** A scripted member; a confused deputy UI that retries (2.4).
+- **Trust:** Local counter. Real rate limits are 6.7.
+Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
 
-## Root cause / impact / prevention / detection / recovery
+| Piece | This system |
+|---|---|
+| Subjects | Owner, automated client |
+| Objects | share count, cap=5 |
+| Actions | add_share |
+| Channels | API loop |
+| TCB | Server-side cap in the same transaction as insert. |
+| Untrusted | Client disabling the “max 5” UI |
+| State / time | Eight rapid POSTs. |
+| 1.1 cell | Integrity of the share policy; availability of the owner’s threat model (too many readers). |
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Authority matrix (minimum)
 
-## Framework defaults vs application guarantees
+| Subject | Object | Action | Decision |
+|---|---|---|---|
+| owner | share 1-5 | add | allow |
+| owner | share 6 | add | deny |
+| script | parallel 6 | add | deny-with-lock |
+| support | override | add | audited-exception |
 
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
 
 ## Practice
 
-Draw the relevant map/register for this module (not a Top 10 list).
+Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/3.4/3.4-lab` file `share_limit.py`.
 
 ## Transfer
 
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
+Invite tokens (6.6) and export quotas (6.7).
+
+## Residual risk
+
+Legitimate teams >5 need an owned exception (E6).
 
 ## Non-goals
 
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.

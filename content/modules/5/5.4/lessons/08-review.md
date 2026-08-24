@@ -1,45 +1,40 @@
 # 5.4 — Secure communication and channel binding (Review)
 
-**Kind:** code-review
-**Loop step:** Review
-**Standards:** RFC 8446 TLS 1.3 (final). Forwarded headers untrusted unless the proxy is TCB (2.2).
+**Kind:** code-review  
+**Loop step:** Review  
+**Standards:** RFC 8446/9846 TLS 1.3 (final); ASVS 5.0.0 V12; MASVS-NETWORK for 8.x. Pinning is a trade-off, not a universal rule.
 
 ## Property (start here)
 
-Client-supplied X-Forwarded-Proto=https is not proof of TLS. Channel binding uses the server's view of the connection.
+A client-supplied X-Forwarded-Proto: https does not make the channel HTTPS. Channel authenticity is what the server socket actually negotiated (or a trusted proxy you *bound*), not a header from the browser.
 
 ## Attacker capabilities and trust assumptions
 
-Client who sets headers after a cleartext hop. Trust: local header dict.
+- **Attacker:** Client on cleartext who wants the app to think TLS is on (cookie Secure flags, redirects).
+- **Trust:** Direct socket proto in the lab. Real deployments may trust a *locked* load balancer hop only.
+Review `labs/5.4/5.4-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/5.4.md` — not here.
 
-## This step
+## What to label
 
-Review the diff as a SecureCollab PR. Reject client trust, interpreter concatenation, Report-Only as enforcement, and closing findings without retest. Keys stay out of lessons.
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-## Root cause / impact / prevention / detection / recovery
+- Seeded smell (label it yourself): channel_is_https trusts X-Forwarded-Proto from anyone
+- Seeded smell (label it yourself): --proxy-headers with *
+- Seeded smell (label it yourself): No test header vs socket mismatch
+- Seeded smell (label it yourself): HSTS on an app that still accepts http
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
 
-## Framework defaults vs application guarantees
+## Misconceptions
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+- HTTPS URL in the client proves TLS
+- Forwarded headers are for security
+- Pinning is always required
 
 ## Practice
 
-Run `labs/5.4/5.4-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
-
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+mTLS service identity vs this header.

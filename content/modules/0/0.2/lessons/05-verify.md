@@ -1,33 +1,38 @@
-# 0.2-LO-05 — Diagnostic is not authorization (Verify)
+# 0.2 — Diagnostic and adaptive bridge (5 Verify)
 
-**Kind:** loop-object  
+**Kind:** verification-lab  
 **Loop step:** 5 Verify  
-**Standards:** CISA Secure by Design (final public guidance); Saltzer (1975, seminal) where authority appears.
+**Standards:** NICE Secure Systems Development competencies (informative); this course’s Gate 1 evidence rules. A quiz vendor’s score report is not ASVS.
 
 ## Property (start here)
 
-A placement quiz score does not skip 1.2 mediation or Gate 1 evidence. Adaptive path may skip **orientation prose**, never **invariants**.
+A placement quiz score of 100 does not skip 1.2 complete mediation, Gate 1 evidence, or the authority matrix. Adaptive paths may skip *orientation prose*, never *invariants*.
 
 ## Attacker capabilities and trust assumptions
 
-No attacker needed: the **product** (course) must not treat a score as a capability. Learner with 100% is still untrusted relative to tenant B’s notes.
+- **Attacker:** A hurried learner optimizing for the shortest click-path; a future hiring manager who equates a badge with tenant isolation.
+- **Trust:** The diagnostic repository is local and honest. Quiz items are not production secrets.
+An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
 
-## Root cause / impact / prevention / detection / recovery
+| Case | Must show |
+|---|---|
+| Normal | Honest allowed action still works where the product says so |
+| Negative / abuse | Quiz score used as authorization to skip 1.2/Gate 1 |
+| Failure | Fail closed: Skip only missing *tooling* units; never skip mediation labs |
 
-Root cause: confusing assessment score with access matrix. Impact: skipped complete mediation teaching. Prevention: quiz never returns `grants_phase1_skip`. Detection: curriculum tests. Recovery: re-instate 1.2 lab.
+Lab tests: `test_diagnostic.py` under `labs/0.2/0.2-bridge`.
 
-## Framework defaults vs application guarantees
+- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Quiz score used as authorization to skip 1.2/Gate 1`
+- `--impl fixed`: **pass**
 
-LMS ‘pass’ badges are not ASVS. SAMM scores are not product security.
+100 does not skip; missing Git still recommends a bridge unit.
 
 ## Practice
 
-Name the forbidden outcome.
+Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
 
 ## Transfer
 
-Same.
+A vendor SANS/OSCP score used to skip your team’s threat-model review.
 
-## Non-goals
-
-Live targets, real PII, weaponized payloads. Mastery gates stay not-attempted.
+A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).

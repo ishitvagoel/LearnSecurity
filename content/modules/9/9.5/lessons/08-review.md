@@ -1,45 +1,44 @@
-# 9.5 — Penetration testing, reporting, and remediation (Review)
+# 9.5 — Authorized assessment, reporting, and remediation (Review)
 
-**Kind:** code-review
-**Loop step:** Review
-**Standards:** Reporting as evidence; authorized local scope only.
+**Kind:** code-review  
+**Loop step:** Review  
+**Standards:** OWASP WSTG (final); CVSS 4.0 (final spec) as *input* not the decision; CISA KEV as exploitation context.
 
 ## Property (start here)
 
-A finding cannot be closed without a passing retest of the same forbidden outcome. A PDF report is not remediation.
+A finding cannot be closed without a passing retest of the same forbidden outcome. A PDF report is not remediation. Scope stays the local lab.
 
 ## Attacker capabilities and trust assumptions
 
-Vendor report theater. Trust: local finding dict. No live pentest of public apps.
+- **Attacker:** Paper-compliance; ignored variant classes.
+- **Trust:** Local close_finding({retest}).
+Review `labs/9.5/9.5-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/9.5.md` — not here.
 
-## This step
+## What to label
 
-Review the diff as a SecureCollab PR. Reject client trust, interpreter concatenation, Report-Only as enforcement, and closing findings without retest. Keys stay out of lessons.
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-## Root cause / impact / prevention / detection / recovery
+- Seeded smell (label it yourself): close without retest
+- Seeded smell (label it yourself): CVSS as the only priority
+- Seeded smell (label it yourself): Live-target language
+- Seeded smell (label it yourself): No variant search
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
 
-## Framework defaults vs application guarantees
+## Misconceptions
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+- Pentest replaces SSDLC
+- Critical CVSS must be first always
+- Retest is the same as the original exploit blog
 
 ## Practice
 
-Run `labs/9.5/9.5-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+KEV vs internal-only.
 
-## Non-goals
+## HITL / WCAG 2.2
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Reports used by engineers must be readable (structure, not color-only severity).

@@ -1,45 +1,40 @@
-# 8.3 — Network, deep links, WebViews, and inter-app communication (6 Operate)
+# 8.3 — Network, deep links, WebViews, IPC (6 Operate)
 
-**Kind:** operations-exercise
-**Loop step:** 6 Operate
-**Standards:** MASVS 2.1 platform interaction; 2.3/6.3 web origins are a different channel.
+**Kind:** operations-exercise  
+**Loop step:** 6 Operate  
+**Standards:** MASVS 2.1 PLATFORM/NETWORK/AUTH (final); RFC 8252. Exported components are attack surface.
 
 ## Property (start here)
 
-A deep link query as= must not switch the signed-in principal. Exported activities are an attack surface; the session is the identity.
+A deep link query as=admin must not switch the signed-in principal. The session is identity; the Intent is untrusted input.
 
 ## Attacker capabilities and trust assumptions
 
-Another app sending securecollab://notes?as=admin. Trust: local session dict. No real IPC.
+- **Attacker:** Malicious app sending an Intent; crafted https link.
+- **Trust:** Local open_link / current_user.
+Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
 
-## This step
+| Outcome | This module |
+|---|---|
+| Detect | ignored_as_param metric. |
+| Signal (no bodies) | deeplink_identity_ignored. |
+| Revoke / recover | Force re-login. |
+| Residual | User installs attacker app — OS model. |
 
-Detect without logging note bodies or tokens. Recover fail-safe (revoke, rotate, quarantine). If a human must act, the path must be usable (WCAG 2.2).
-
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
 
 ## Practice
 
-Run `labs/8.3/8.3-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/8.3/8.3-lab`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+OAuth redirect to app (4.5).
+
+## Usability
+
+Deep-link errors should not trap users in a broken WebView without a keyboard-accessible exit.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+SIEM product names are not the property. Keys stay out of lessons.

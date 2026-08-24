@@ -1,45 +1,52 @@
 # 6.1 — Interpreter confusion and injection (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** ASVS 5.0.0 V5 (chapter-level).
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** ASVS 5.0.0 V5 (final); CWE-77/78/89 as *names after* the cause; OWASP Top 10:2025 A05 as regression awareness.
 
 ## Property (start here)
 
-A filename argument is data, not a shell program. The lab uses argv lists, not bash -c.
+A filename or list target is data, not a shell program. argv_for_list must not invoke a shell. Structural APIs (argv list, parameterized SQL in 5.5) are the mechanism; denylists of metacharacters are incomplete.
 
 ## Attacker capabilities and trust assumptions
 
-Member uploading a name. Trust: local argv builder. No network.
+- **Attacker:** User who chooses a note/export name; a compromised client.
+- **Trust:** Local argv.py. No live OS attack — the test only checks argv shape.
+argv is ['ls', name] or reject; uses_shell False.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+def argv_for_list(name):
+    if any(c in name for c in ' 	;|&$`'):
+        raise ValueError('rejected')
+    return ['ls', name]
+def uses_shell(name):
+    return False
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+argv list; no shell; validate allow-listed names.
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+subprocess defaults are easy to misuse; FastAPI has no opinion.
+
+Rejecting ; | still fails on IFS and encoding (2.1).
 
 ## Practice
 
-Run `labs/6.1/6.1-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Jinja, SQL, mail headers.
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Needed shell for a plugin — isolate that binary.

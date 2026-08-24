@@ -1,45 +1,40 @@
 # 7.2 — Object, property, and function security (Review)
 
-**Kind:** code-review
-**Loop step:** Review
-**Standards:** ASVS V4/V8 chapter-level.
+**Kind:** code-review  
+**Loop step:** Review  
+**Standards:** ASVS 5.0.0 V4 (final); API1/3/5 awareness after 1.2/4.4.
 
 ## Property (start here)
 
-GraphQL-style note.secret_internal is not visible to members. Field-level authorization, not 'hidden in UI'.
+A member must not resolve secret_internal. Function/property authorization is not “they can call GET /notes.” Identifiers locate; they do not authorize.
 
 ## Attacker capabilities and trust assumptions
 
-Member who asks for extra fields. Trust: local resolver.
+- **Attacker:** Member using GraphQL __typename or REST ?fields=.
+- **Trust:** Local resolve(role, field).
+Review `labs/7.2/7.2-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/7.2.md` — not here.
 
-## This step
+## What to label
 
-Review the diff as a SecureCollab PR. Reject client trust, interpreter concatenation, Report-Only as enforcement, and closing findings without retest. Keys stay out of lessons.
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-## Root cause / impact / prevention / detection / recovery
+- Seeded smell (label it yourself): return orm.__dict__
+- Seeded smell (label it yourself): GraphQL expose all columns
+- Seeded smell (label it yourself): IDOR test only on object not field
+- Seeded smell (label it yourself): UUID as “capability”
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
 
-## Framework defaults vs application guarantees
+## Misconceptions
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+- Object-level authz implies field-level
+- Private JSON keys are hidden
+- GraphQL resolvers inherit REST policy magically
 
 ## Practice
 
-Run `labs/7.2/7.2-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
-
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Bulk update; search highlighting leaking snippets.

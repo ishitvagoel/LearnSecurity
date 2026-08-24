@@ -1,45 +1,53 @@
-# 6.4 — Files, paths, uploads, archives, XML, and deserialization (4 Build)
+# 6.4 — Files, paths, uploads, archives, XML, deserialization (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** ASVS 5.0.0 V12 file (chapter-level).
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** ASVS 5.0.0 V12 (final); CWE-22/434/502 as names after the path/interpreter cause.
 
 ## Property (start here)
 
-Upload names cannot escape the lab root via .. segments. Local path join only.
+A user-supplied path must not resolve outside the lab root. `../etc/passwd` is data that tried to become a different object. This is not a weaponized exploit lesson — we assert prefix.
 
 ## Attacker capabilities and trust assumptions
 
-Uploader choosing a name. Trust: sandbox dir.
+- **Attacker:** Uploader or filename field attacker.
+- **Trust:** Local resolve() under /tmp/sc-lab.
+resolve either raises or stays under /tmp/sc-lab.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+from pathlib import Path
+ROOT=Path('/tmp/sc-lab').resolve()
+def resolve(name):
+    p = (ROOT / name).resolve()
+    if ROOT not in p.parents and p != ROOT:
+        raise ValueError('escape')
+    return str(p)
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Join + canonicalize + prefix; random stored names; never execute uploads.
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+Starlette UploadFile.filename is hostile.
+
+Allow-list of .png still fails if the processor parses XML (XXE) — name it.
 
 ## Practice
 
-Run `labs/6.4/6.4-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+XML entity expansion; pickle; YAML load.
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Image codecs (memory) — E4.

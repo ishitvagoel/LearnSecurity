@@ -1,37 +1,50 @@
 # 4.3 — Sessions, cookies, and tokens (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** ASVS 5.0.0 V7 session (chapter-level); 2.3 HttpOnly cell.
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** ASVS 5.0.0 V3/V7 (final); OWASP Session Management. JWT is a token format, not an architecture.
 
 ## Property (start here)
 
-A session token in the **query string** is not an acceptable session. Bearer belongs in Cookie (HttpOnly, 2.3) or Authorization, not logs and Referer.
+A session token in the query string is not an acceptable session. Access tokens belong in Cookie (HttpOnly, 2.3) or Authorization, never in logs and Referer.
 
 ## Attacker capabilities and trust assumptions
 
-Referer leak, access logs. Trust: local request model.
+- **Attacker:** Referer leak to a CDN; access-log operator; shared screenshot of a URL.
+- **Trust:** Local request dict. Real TLS still leaks query to files and analytics.
+query access_token => None.
 
-## Root cause / impact / prevention / detection / recovery
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Fixed fixture (local)
 
-## Framework defaults vs application guarantees
+```python
+def session_from_request(query: dict, cookie: dict, header: str | None) -> str | None:
+    if query.get("access_token"):
+        return None
+    return cookie.get("sc_session") or header
+```
 
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+## Why this restores the cell
+
+Reject query tokens; use cookie/header.
+
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+
+## What this is not
+
+OAuth “implicit in URL” is obsolete; copying it is not ASVS.
+
+Authorization header still logs at some gateways — redact.
 
 ## Practice
 
-State the structural fix (not a denylist of one user).
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
+Magic-link email (still a URL token — time-bound, one-time, 6.6).
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+Referer on first-party navigations — strip on outbound.

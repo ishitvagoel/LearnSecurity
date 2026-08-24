@@ -18,9 +18,10 @@ next:
   pass: null
   skill: null
   inner_skill: null
-  note: 'Deepen complete: revision.remaining empty; all listed units depth publishable
-    vs 1.1 bar. Gates 0–10 and M0–M5 remain not-attempted (no learner/product evidence).
-    Labs local-only.'
+  note: 'Content generation complete for all listed units. Lessons rewritten to unique
+    1.2-density (1.1/1.2 kept as reference). Structural labs verified this session
+    (vulnerable fail / fixed pass). Gates 0–10 and M0–M5 remain not-attempted (no
+    learner/product evidence). Labs local-only.'
 spiral_deltas:
 - date: '2026-08-23'
   module: '1.1'
@@ -69,6 +70,11 @@ spiral_deltas:
   change: Deepened mobile, verification, operations, capstone, and electives to publishable
     depth
   retest: Same pytest pair; remaining=[]
+- date: '2026-08-24'
+  module: 0.1–11 + E1–E6 except 1.1/1.2
+  change: Unique 1.2-density lesson packs, module-specific assessments/keys, 0.1/0.2
+    slugs pointed at structural labs; leftover slogan YAML labs removed
+  retest: jsonschema all module.yaml; pytest --impl pair on structural labs; 1.1 --claim pair
 modules:
 - id: '0.1'
   title: Security engineering orientation

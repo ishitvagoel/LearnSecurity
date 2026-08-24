@@ -1,45 +1,38 @@
 # 9.2 — Secure code review (5 Verify)
 
-**Kind:** verification-lab
-**Loop step:** 5 Verify
-**Standards:** ASVS 5.0.0 V5; 6.1 interpreter property.
+**Kind:** verification-lab  
+**Loop step:** 5 Verify  
+**Standards:** OWASP Code Review (guidance); NIST SSDF PW/RV (final). Review is complete mediation of the diff.
 
 ## Property (start here)
 
-A diff that concatenates eval( on user input must not be approved. Review is complete mediation of the interpreter, not a checklist LGTM.
+A diff that uses eval on user input must not be approved. LGTM without looking at interpreters/authority is not review.
 
 ## Attacker capabilities and trust assumptions
 
-Author who lands eval. Trust: local string scan of the teaching diff.
+- **Attacker:** Rushed colleague; supply-chain PR (10.2).
+- **Trust:** Local review_ok(src).
+An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
 
-## This step
+| Case | Must show |
+|---|---|
+| Normal | Honest allowed action still works where the product says so |
+| Negative / abuse | eval on user input approved in review |
+| Failure | Fail closed: Reject eval-on-user; look at data flow, authz, state, config |
 
-pytest --impl vulnerable must fail; --impl fixed must pass. A test that only checks HTTP 200 is not a security test.
+Lab tests: `test_property.py` under `labs/9.2/9.2-lab`.
 
-## Root cause / impact / prevention / detection / recovery
+- `--impl vulnerable` (or vulnerable fixtures): **fail** on `eval on user input approved in review`
+- `--impl fixed`: **pass**
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+eval on user rejected.
 
 ## Practice
 
-Run `labs/9.2/9.2-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Terraform, GitHub Actions yaml.
 
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).

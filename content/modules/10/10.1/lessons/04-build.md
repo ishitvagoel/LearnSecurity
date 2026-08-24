@@ -1,8 +1,8 @@
 # 10.1 — Secure software lifecycle and security culture (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** NIST SSDF 1.1 (final) as practice names; not a control menu.
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** NIST SSDF 1.1 SP 800-218 (final); OWASP SAMM; CISA Secure by Design.
 
 ## Property (start here)
 
@@ -10,36 +10,39 @@ A SecureCollab PR cannot merge without a threat-model identifier for the changed
 
 ## Attacker capabilities and trust assumptions
 
-Busy author. Trust: local PR dict.
+- **Attacker:** Schedule pressure.
+- **Trust:** Local merge_ok({}).
+{} => merge_ok False.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+def merge_ok(pr):
+    return bool(pr.get('threat_model'))
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Require tm id; triggers on identity, data, mobile…
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+CODEOWNERS is not a threat model.
+
+A stale tm-id rubber stamp — 3.2 age.
 
 ## Practice
 
-Run `labs/10.1/10.1-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Exception path (E6).
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Metrics vanity — count TMs with tests, not posters.

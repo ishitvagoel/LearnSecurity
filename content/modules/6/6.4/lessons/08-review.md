@@ -1,45 +1,40 @@
-# 6.4 — Files, paths, uploads, archives, XML, and deserialization (Review)
+# 6.4 — Files, paths, uploads, archives, XML, deserialization (Review)
 
-**Kind:** code-review
-**Loop step:** Review
-**Standards:** ASVS 5.0.0 V12 file (chapter-level).
+**Kind:** code-review  
+**Loop step:** Review  
+**Standards:** ASVS 5.0.0 V12 (final); CWE-22/434/502 as names after the path/interpreter cause.
 
 ## Property (start here)
 
-Upload names cannot escape the lab root via .. segments. Local path join only.
+A user-supplied path must not resolve outside the lab root. `../etc/passwd` is data that tried to become a different object. This is not a weaponized exploit lesson — we assert prefix.
 
 ## Attacker capabilities and trust assumptions
 
-Uploader choosing a name. Trust: sandbox dir.
+- **Attacker:** Uploader or filename field attacker.
+- **Trust:** Local resolve() under /tmp/sc-lab.
+Review `labs/6.4/6.4-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/6.4.md` — not here.
 
-## This step
+## What to label
 
-Review the diff as a SecureCollab PR. Reject client trust, interpreter concatenation, Report-Only as enforcement, and closing findings without retest. Keys stay out of lessons.
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-## Root cause / impact / prevention / detection / recovery
+- Seeded smell (label it yourself): open(user_path)
+- Seeded smell (label it yourself): Blacklist of '..' only
+- Seeded smell (label it yourself): Trust Content-Type
+- Seeded smell (label it yourself): No prefix test
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
 
-## Framework defaults vs application guarantees
+## Misconceptions
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+- UUID filenames replace path checks
+- Antivirus is the upload control
+- JSON is always safe deserialize
 
 ## Practice
 
-Run `labs/6.4/6.4-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
-
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+XML entity expansion; pickle; YAML load.

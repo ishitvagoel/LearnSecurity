@@ -1,45 +1,40 @@
 # E5 — Large-scale authorization and multi-tenant SaaS (Review)
 
-**Kind:** code-review
-**Loop step:** Review
-**Standards:** ASVS V4; 1.2 complete mediation.
+**Kind:** code-review  
+**Loop step:** Review  
+**Standards:** ASVS V4 plus row security as *extra*; ReBAC/Zanzibar as patterns. RLS is not a substitute for 1.2.
 
 ## Property (start here)
 
-Tenant id for a query comes from the session, not from the JSON body. Body-supplied tenant is confused deputy of the isolation key (4.4, 7.1).
+A request body tenant:B must not switch the bound tenant A. Tenant is taken from the session/binding, not from the JSON body (1.3 confused deputy).
 
 ## Attacker capabilities and trust assumptions
 
-Member who sets tenant=B in the body. Trust: local session dict.
+- **Attacker:** Member of A sending tenant B in GraphQL/JSON.
+- **Trust:** Local tenant_for(session, body).
+Review `labs/E5/e5-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/E5.md` — not here.
 
-## This step
+## What to label
 
-Review the diff as a SecureCollab PR. Reject client trust, interpreter concatenation, Report-Only as enforcement, and closing findings without retest. Keys stay out of lessons.
+For each claim and each branch: **property**, **mechanism**, or **false assurance**.
 
-## Root cause / impact / prevention / detection / recovery
+- Seeded smell (label it yourself): tenant from body
+- Seeded smell (label it yourself): RLS session var from JSON
+- Seeded smell (label it yourself): Cache key without tenant (2.2)
+- Seeded smell (label it yourself): Support impersonation silent
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
 
-## Framework defaults vs application guarantees
+## Misconceptions
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+- RLS replaces app mediation
+- Subdomain is unforgeable tenant
+- Scale means we switch to IAM instead of 1.2
 
 ## Practice
 
-Run `labs/E5/e5-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Write three review notes. Do not open the keys file.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
-
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Zanzibar tuple vs this binding.

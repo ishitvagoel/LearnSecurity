@@ -1,45 +1,48 @@
-# 8.4 — Build, distribution, attestation, and resilience (4 Build)
+# 8.4 — Build, distribution, attestation, resilience (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** MASVS 2.1 resilience; attestation vendor docs are mechanisms.
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** MASVS 2.1 CODE/RESILIENCE (final). Resilience raises cost; it is not trust.
 
 ## Property (start here)
 
-A debug-signed lab build must not call the production export API even if a client attest string is present.
+A debug-signed lab build must not call the production export API even if a client attest string is present. Channel + build type are part of the TCB decision on the server.
 
 ## Attacker capabilities and trust assumptions
 
-Sideloaded debug APK. Trust: server sees build_type. Local only.
+- **Attacker:** Leaked debug APK; student build pointed at prod.
+- **Trust:** Local api_allowed(build, attest).
+debug + attest ok => False.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+def api_allowed(build_type, attest):
+    return build_type == 'release' and attest == 'ok'
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Separate client ids; server checks; signing keys in HSM; no prod in debug manifests.
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+minifyEnabled is not this property.
+
+R8/obfuscation does not authorize. Root detection is bypassable.
 
 ## Practice
 
-Run `labs/8.4/8.4-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+SBOM of the APK (10.2).
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Attestation farms.

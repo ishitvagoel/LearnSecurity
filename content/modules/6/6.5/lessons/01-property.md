@@ -1,45 +1,58 @@
 # 6.5 — Server-side requests and protocol parsing (1 Property)
 
-**Kind:** concept-model
-**Loop step:** 1 Property
-**Standards:** ASVS 5.0.0 V10 SSRF (chapter-level).
+**Kind:** concept-model  
+**Loop step:** 1 Property  
+**Standards:** ASVS 5.0.0 V10 (final); API7 awareness; URL is untrusted *structure* (2.1).
 
 ## Property (start here)
 
-Server-side fetch allowlists lab.securecollab.test only. Link-local metadata IPs are out of scope.
+The lab fetcher must not allow http://169.254.169.254/ (link-local metadata). SSRF is a trust-boundary fail: the server’s network is not the user’s to steer. HTTPS to a named lab host may be allowed.
 
 ## Attacker capabilities and trust assumptions
 
-Member who pastes a URL for a preview. Trust: URL parser, no real HTTP.
+- **Attacker:** User who supplies an unfurl/preview URL.
+- **Trust:** Local allowed(url). No real cloud metadata in this VM lesson — we assert the deny.
+**Mechanism (not the property):** requests.get is not an allow-list.
 
-## This step
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Start from this system's testable sentence, not a topic title. A mechanism (TLS, MASVS control, scanner, CSP) is not the invariant.
+## Root cause vs impact vs prevention vs detection vs recovery
 
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+| Slice | For 6.5 |
+|---|---|
+| Root cause | Server fetches attacker-chosen authority. |
+| Preconditions | allowed(link-local) True. |
+| Impact (1.1 cell) | Confidentiality of the cloud TCB; integrity of egress. — In real clouds, credential theft; here, the test fails closed conceptually. |
+| Prevention | Allow-list; parse then pin; block link-local, loopback, metadata; no open redirects. |
+| Detection | egress deny logs. |
+| Recovery | Rotate instance role if a real system was hit — never in this course. |
 
 ## Framework defaults vs application guarantees
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+requests.get is not an allow-list.
+
+## Mechanism limits and bypasses
+
+DNS rebinding after allow — pin IP or block.
+
+IPv6, decimal IPs, redirect, file: scheme.
 
 ## Residual risk
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+Legitimate preview of customer URLs — dedicated egress proxy.
 
 ## Practice
 
-Run `labs/6.5/6.5-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Parse scheme/host; do not regex the string only.
+
+Run `labs/6.5/6.5-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Webhook delivery (7.3) is egress too.
+
+Clinic “fetch lab result PDF from URL.”
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.

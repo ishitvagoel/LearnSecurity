@@ -1,37 +1,33 @@
-# 3.3 — Secure architecture patterns (7 Generalize)
+# 3.3 — Secure architecture patterns (7 Transfer)
 
-**Kind:** transfer-challenge
-**Loop step:** 7 Generalize
-**Standards:** ASVS 5.0.0 V15 architecture (chapter-level); Saltzer least privilege (1975, seminal).
+**Kind:** transfer-challenge  
+**Loop step:** 7 Transfer  
+**Standards:** ASVS 5.0.0 V4/V13 (final); CISA Secure by Design (final guidance); Saltzer least privilege (1975, seminal).
 
 ## Property (start here)
 
-Tenant isolation is not 'one Postgres role for the whole app.' A stolen app role must not SELECT other tenants without 1.2 mediation.
+The application DB role used by FastAPI must not SELECT another tenant’s rows even if a handler forgets a WHERE. Architecture is a second mediation, not a substitute for 1.2.
 
 ## Attacker capabilities and trust assumptions
 
-Stolen application DB credential. Trust: DB is in TCB only with per-tenant enforcement (5.5 residual if app-only).
+- **Attacker:** Buggy handler; SQLi later (5.5/6.1); stolen app credentials.
+- **Trust:** PostgreSQL RLS/role in the lab stand-in. The app still must mediate.
+Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
 
-## Root cause / impact / prevention / detection / recovery
+**Prompt:** Serverless function with a shared “admin” connection string.
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+**Product sketch:** Clinic: billing replica.
 
-## Framework defaults vs application guarantees
+Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
 
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+## What graders reject
+
+| Reject | Why |
+|---|---|
+| Tool or awareness-list name as the property | 1.1 |
+| Framework default as the guarantee | SQLAlchemy session is not a tenant scope.… |
+| Live-target plan | Lab policy |
 
 ## Practice
 
-Change one actor or channel; which 1.x/2.x artifacts are invalid?
-
-## Transfer
-
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
-
-## Non-goals
-
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+One page. No keys. The lab `labs/3.3/3.3-lab` stays the only running system you may break.

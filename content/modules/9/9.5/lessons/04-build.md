@@ -1,45 +1,48 @@
-# 9.5 — Penetration testing, reporting, and remediation (4 Build)
+# 9.5 — Authorized assessment, reporting, and remediation (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** Reporting as evidence; authorized local scope only.
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** OWASP WSTG (final); CVSS 4.0 (final spec) as *input* not the decision; CISA KEV as exploitation context.
 
 ## Property (start here)
 
-A finding cannot be closed without a passing retest of the same forbidden outcome. A PDF report is not remediation.
+A finding cannot be closed without a passing retest of the same forbidden outcome. A PDF report is not remediation. Scope stays the local lab.
 
 ## Attacker capabilities and trust assumptions
 
-Vendor report theater. Trust: local finding dict. No live pentest of public apps.
+- **Attacker:** Paper-compliance; ignored variant classes.
+- **Trust:** Local close_finding({retest}).
+retest None => cannot close.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+def close_finding(f):
+    return f.get('retest') == 'pass'
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Require retest of the same cell.
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+Jira Done is not retest.
+
+CVSS 9.8 vs business priority — you still judge.
 
 ## Practice
 
-Run `labs/9.5/9.5-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+KEV vs internal-only.
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Unknown variants — hunt (same root cause).

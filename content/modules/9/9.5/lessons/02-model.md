@@ -1,45 +1,53 @@
-# 9.5 — Penetration testing, reporting, and remediation (2 Model)
+# 9.5 — Authorized assessment, reporting, and remediation (2 Model)
 
-**Kind:** design-exercise
-**Loop step:** 2 Model
-**Standards:** Reporting as evidence; authorized local scope only.
+**Kind:** design-exercise  
+**Loop step:** 2 Model  
+**Standards:** OWASP WSTG (final); CVSS 4.0 (final spec) as *input* not the decision; CISA KEV as exploitation context.
 
 ## Property (start here)
 
-A finding cannot be closed without a passing retest of the same forbidden outcome. A PDF report is not remediation.
+A finding cannot be closed without a passing retest of the same forbidden outcome. A PDF report is not remediation. Scope stays the local lab.
 
 ## Attacker capabilities and trust assumptions
 
-Vendor report theater. Trust: local finding dict. No live pentest of public apps.
+- **Attacker:** Paper-compliance; ignored variant classes.
+- **Trust:** Local close_finding({retest}).
+Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
 
-## This step
+| Piece | This system |
+|---|---|
+| Subjects | assessor, developer, retester |
+| Objects | finding, retest field |
+| Actions | close_finding |
+| Channels | tracker |
+| TCB | Retest artifact linked. |
+| Untrusted | “we deployed Friday” |
+| State / time | After supposed fix. |
+| 1.1 cell | Integrity of the fix loop. |
 
-Name principals, objects, and channels. Open design: the client, APK, or prompt is hostile. Secrecy of the check is not the property.
+## Authority matrix (minimum)
 
-## Root cause / impact / prevention / detection / recovery
+| Subject | Object | Action | Decision |
+|---|---|---|---|
+| finding | retest pass | close | allow |
+| finding | retest missing | close | deny |
+| finding | PDF attached | close | deny |
+| variant | same cause | open | allow |
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
 
 ## Practice
 
-Run `labs/9.5/9.5-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/9.5/9.5-lab` file `pentest.py`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+KEV vs internal-only.
+
+## Residual risk
+
+Unknown variants — hunt (same root cause).
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.

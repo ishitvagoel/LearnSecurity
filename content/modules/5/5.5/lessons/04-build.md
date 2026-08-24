@@ -1,45 +1,50 @@
 # 5.5 — Database and persistence security (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** ASVS 5.0.0 V13/V5 (chapter-level). Teach bind variables, not payload catalogs.
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** ASVS 5.0.0 V13 (final); PostgreSQL role/RLS docs as *platform*; parameterization is complete mediation of the SQL interpreter (also 6.1).
 
 ## Property (start here)
 
-Note fetch is parameterized: user input is not concatenated into a query string. Local model only — no live DB attacks.
+fetch_sql must bind the tenant (and note id) as parameters, not concatenate a string the SQL interpreter will parse as code. Application 1.2 is necessary; it is not a substitute for interpreter isolation.
 
 ## Attacker capabilities and trust assumptions
 
-Caller who supplies note_id. Trust: in-process list.
+- **Attacker:** Member who types a note id with SQL metacharacters; stolen app role (3.3).
+- **Trust:** Local query object. Real DB roles in 3.3.
+fetch_sql returns bound structure not a concat string.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+def fetch_sql(tenant, note_id):
+    return ("SELECT body FROM notes WHERE tenant=%s AND id=%s", (tenant, note_id))
+def is_bound(q):
+    return isinstance(q, tuple) and len(q[1])==2
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Parameters; identifier allow-lists for ORDER BY.
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+SQLAlchemy text() with f-strings is still concat. ORM defaults can still interpolate.
+
+Bound ids plus missing 1.2 still leak via legitimate queries.
 
 ## Practice
 
-Run `labs/5.5/5.5-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+NoSQL operators, GraphQL args (7.1).
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+DB superuser tools; replicas.

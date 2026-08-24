@@ -1,45 +1,53 @@
-# 8.1 — The hostile-client and mobile-platform model (2 Model)
+# 8.1 — Hostile-client and mobile platform model (2 Model)
 
-**Kind:** design-exercise
-**Loop step:** 2 Model
-**Standards:** MASVS 2.1 (final) platform model; Play Integrity is a vendor mechanism, not the property.
+**Kind:** design-exercise  
+**Loop step:** 2 Model  
+**Standards:** MASVS 2.1 (final) PLATFORM/CODE; Android security model. APK is not in the TCB.
 
 ## Property (start here)
 
-SecureCollab must not grant a sensitive export because the Android client JSON says integrity is ok. Server attestation (lab token) is the TCB; the APK is hostile.
+A client JSON field integrity=ok must not authorize a sensitive export. The server attestation result is the TCB; the APK is hostile (root, patched, emulator).
 
 ## Attacker capabilities and trust assumptions
 
-Modified APK that sets integrity=ok. Trust: server token only. Local dict; no real Play Integrity calls.
+- **Attacker:** Modified APK; Frida; stolen “integrity ok” boolean.
+- **Trust:** Local allow_export(client_claim, server_attest).
+Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
 
-## This step
+| Piece | This system |
+|---|---|
+| Subjects | hostile APK, server |
+| Objects | export, integrity claim |
+| Actions | allow_export |
+| Channels | JSON body |
+| TCB | Server-side attestation/token — lab uses server_attest string. |
+| Untrusted | Any client field, local ifs. |
+| State / time | Runtime after Play integrity check cached on device. |
+| 1.1 cell | Authorization — server decides. |
 
-Name principals, objects, and channels. Open design: the client, APK, or prompt is hostile. Secrecy of the check is not the property.
+## Authority matrix (minimum)
 
-## Root cause / impact / prevention / detection / recovery
+| Subject | Object | Action | Decision |
+|---|---|---|---|
+| APK | integrity field | authorize | deny |
+| server | attest fail | export | deny |
+| server | attest+user 1.2 | export | allow |
+| rooted honest | export | policy | residual |
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
-
-## Framework defaults vs application guarantees
-
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
-
-## Residual risk
-
-Attestation can be unavailable; then deny the sensitive path (fail-safe), do not trust the client checkbox.
+A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
 
 ## Practice
 
-Run `labs/8.1/8.1-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/8.1/8.1-lab` file `client.py`.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Feature flags in the APK; premium=true.
+
+## Residual risk
+
+Honest users on rooted devices — product policy.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.

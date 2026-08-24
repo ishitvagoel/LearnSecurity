@@ -1,45 +1,54 @@
 # 6.6 — Workflow, race, and exceptional-condition failures (4 Build)
 
-**Kind:** design-exercise
-**Loop step:** 4 Build
-**Standards:** ASVS business logic; Top 10 A10:2025 awareness only.
+**Kind:** design-exercise  
+**Loop step:** 4 Build  
+**Standards:** ASVS 5.0.0 V2 (final); Top 10:2025 A10 awareness. State machines fail open or double-fire.
 
 ## Property (start here)
 
-An invite token cannot be accepted twice. Exceptional retry is not a second membership (ties 2.4).
+An invite token must be single-use. The second accept('t1') is denied. TOCTOU and retries (2.4) are the same family.
 
 ## Attacker capabilities and trust assumptions
 
-Two accepts of the same token. Trust: local set.
+- **Attacker:** Two tabs; an attacker who copied the token from email logs.
+- **Trust:** Local accept().
+second accept False.
 
-## This step
+Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-Restore the invariant with the smallest structural control in fixed/. Framework defaults are not this guarantee. Name remaining bypasses.
+## Fixed fixture (local)
 
-## Root cause / impact / prevention / detection / recovery
+```python
+_used=set()
+def reset():
+    _used.clear()
+def accept(token):
+    if token in _used:
+        return False
+    _used.add(token)
+    return True
+```
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Why this restores the cell
 
-## Framework defaults vs application guarantees
+Single-use in a transaction; expire; bind to recipient.
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
 
-## Residual risk
+## What this is not
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+DB unique constraint helps but must be the actual consume.
+
+Used flag without locking still races.
 
 ## Practice
 
-Run `labs/6.6/6.6-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+Password reset; 2.4 share retry; 7.4 jobs.
 
-## Non-goals
+## Residual risk
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Email is a phishable channel (4.2).

@@ -1,45 +1,62 @@
-# 8.2 — Local data, keys, biometrics, offline state, and leakage surfaces (1 Property)
+# 8.2 — Local data, keys, biometrics, offline, leakage (1 Property)
 
-**Kind:** concept-model
-**Loop step:** 1 Property
-**Standards:** MASVS 2.1 storage; ASVS V6 at rest is a different cell — name which store you mean.
+**Kind:** concept-model  
+**Loop step:** 1 Property  
+**Standards:** MASVS 2.1 STORAGE/CRYPTO/AUTH/PRIVACY (final); MASTG 2.0 tests.
 
 ## Property (start here)
 
-An offline-cached note body must not sit as plaintext on the lab disk map. Encoding or a world-readable prefs file is not confidentiality.
+A cached note must not be plaintext on disk. Biometric lock is not server authentication (4.2). Backups and screenshots are extra channels.
 
 ## Attacker capabilities and trust assumptions
 
-Backup/ADB-style reader of the local store. Trust: process that can read DISK. No real device.
+- **Attacker:** USB backup; lost unlocked-cache device; cloud backup of app files.
+- **Trust:** Local save_note / plaintext_on_disk.
+**Mechanism (not the property):** EncryptedSharedPreferences defaults are not automatic for every file you write.
 
-## This step
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-Start from this system's testable sentence, not a topic title. A mechanism (TLS, MASVS control, scanner, CSP) is not the invariant.
+## Root cause vs impact vs prevention vs detection vs recovery
 
-## Root cause / impact / prevention / detection / recovery
-
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+| Slice | For 8.2 |
+|---|---|
+| Root cause | Bodies written as text files. |
+| Preconditions | plaintext_on_disk True after save. |
+| Impact (1.1 cell) | Confidentiality of bodies at rest on a hostile device. — Stolen device yields notes. |
+| Prevention | Encrypt cache; expire; wipe on logout/revoke; no body in notifications. |
+| Detection | Device lost flow; remote wipe where the OS allows. |
+| Recovery | Revoke sessions; rotate. |
 
 ## Framework defaults vs application guarantees
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+EncryptedSharedPreferences defaults are not automatic for every file you write.
+
+## Mechanism limits and bypasses
+
+Biometrics gate UI, not key extraction on a compromised OS.
+
+Screenshots, logs, clipboard, auto backup.
 
 ## Residual risk
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+Physical + extracted keys — honest.
 
 ## Practice
 
-Run `labs/8.2/8.2-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Inventory every local store.
+
+Run `labs/8.2/8.2-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+iOS Keychain vs Android Keystore; desktop Electron.
+
+Clinic offline chart cache.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.
+
+## Usability and accessibility
+
+Unlock-with-biometrics fallback must remain accessible (device credential) without dumping plaintext to a debug overlay.

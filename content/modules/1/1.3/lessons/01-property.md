@@ -1,40 +1,58 @@
-# 1.3-LO-01 — TCB, entry points, transitive trust, shared mechanisms, blast radius
+# 1.3 — Trust boundaries and attack surface (1 Property)
 
 **Kind:** concept-model  
 **Loop step:** 1 Property  
-**Standards:** OWASP Threat Modeling Project (maintained guidance, final) — Four Questions, not a single tool; Saltzer (1975, seminal); ASVS 5.0.0 (final) V15 chapter-level.
+**Standards:** OWASP Threat Modeling (project guidance, living); ASVS 5.0.0 V15 (final) architecture; Saltzer economy of mechanism (1975, seminal).
 
 ## Property (start here)
 
-What must remain true **across** the browser→API boundary if the Next.js client is **fully hostile**? For SecureCollab Phase 1: **authorization and note integrity are not properties of the browser**. The client is not in the TCB for those invariants.
+A browser-supplied header such as X-SecureCollab-Internal is on the untrusted side of the API boundary. It must not dump all tenants’ notes. Only a worker bound in-process (or a real service identity later) may export.
 
 ## Attacker capabilities and trust assumptions
 
-- **Attacker:** anyone who can send HTTP; a modified Next.js bundle; a CDN that caches the wrong tenant (later); a stolen worker identity.
-- **Trust:** FastAPI process + (later) PostgreSQL roles. Email/IdP are **transitive trust** — if they are wrong, invite/recovery invariants fail (1.4/4.x).
+- **Attacker:** Anyone who can set headers on HTTPS to the public API, including a modified Next.js client and a stolen browser extension.
+- **Trust:** FastAPI process + PostgreSQL roles you will define; the HTTP client is hostile. CDN/WAF are not yet in the TCB.
+**Mechanism (not the property):** FastAPI dependency injection does not know your TCB. Next.js rewrite headers are client-controlled after the browser.
 
-## Names
+Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
 
-| Term | SecureCollab |
+## Root cause vs impact vs prevention vs detection vs recovery
+
+| Slice | For 1.3 |
 |---|---|
-| TCB | Code that must be right for bob∉read(n1) |
-| Entry point | Public HTTP `read_note` / future export |
-| Shared mechanism | `X-SecureCollab-Internal` header used by both “edge” and app |
-| Blast radius | All tenants’ note bodies if export trusts that header |
-| Defense in depth | A second check that reads the **same** header is **not** independent |
-
-## Root cause / impact / prevention / detection / recovery
-
-Root cause: treating an untrusted-side identifier as worker identity. Impact: 1.1 confidentiality × every tenant on export. Prevention: split the mechanism (server-side bind). Detection: alert on the header still being sent. Recovery: rotate worker credentials; notify tenants if export leaked.
+| Root cause | Transitive trust: the handler believed a string that crossed the boundary. |
+| Preconditions | Public listener; header check instead of identity. |
+| Impact (1.1 cell) | Confidentiality (1.1) via a boundary failure, not a new CWE slogan. — Cross-tenant dump; blast radius = all notes. |
+| Prevention | Ignore client internal headers; bind worker identity in the process/mesh. |
+| Detection | Alert on that header appearing on the public listener (it is a probe). |
+| Recovery | Rotate worker credentials; audit export logs; notify tenants if bodies left. |
 
 ## Framework defaults vs application guarantees
 
-TLS to the API does not put the client in the TCB. “HTTPS therefore trusted frontend” is false.
+FastAPI dependency injection does not know your TCB. Next.js rewrite headers are client-controlled after the browser.
+
+## Mechanism limits and bypasses
+
+A WAF dropping the header is defense in depth, not the property. Attackers will use another field.
+
+Body field is_internal=true; GraphQL; gRPC metadata; websocket first message.
+
+## Residual risk
+
+A real compromised worker still exports. Detect and revoke (7.4, 10.5).
 
 ## Practice
 
-List three entry points and one shared mechanism for Phase 1 SecureCollab.
+Draw the line: browser | TLS | app | DB. Star every input that currently influences export_notes.
+
+Run `labs/1.3/1.3-trust-boundaries` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
 
 ## Transfer
 
-Add object storage for files: is the bucket policy in the TCB or a residual on AWS?
+CDN “authenticated origin pull” — is the CDN in the TCB? What header does it add?
+
+Clinic booking: X-Internal-Admin on the public API.
+
+## Non-goals
+
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.

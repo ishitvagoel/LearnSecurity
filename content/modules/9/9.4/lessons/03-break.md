@@ -1,45 +1,50 @@
 # 9.4 — Automated analysis and tool orchestration (3 Break)
 
-**Kind:** mechanism-lab
-**Loop step:** 3 Break
-**Standards:** ASVS + tool results as inputs; not compliance theater.
+**Kind:** mechanism-lab  
+**Loop step:** 3 Break  
+**Standards:** NIST SSDF (final); OWASP SAMM; OpenSSF. Tools are signals.
 
 ## Property (start here)
 
-A HIGH scanner finding without a mapped SecureCollab requirement cannot pass the lab gate. Tools do not prove invariants.
+A HIGH finding without a mapped SecureCollab requirement cannot pass the ship gate. Unmapped means unowned, not “probably fine.”
 
 ## Attacker capabilities and trust assumptions
 
-Team that clicks dismiss. Trust: local findings list.
+- **Attacker:** Alert fatigue; vendor dashboard theater.
+- **Trust:** Local ship_ok(findings, map).
+**Forbidden outcome:** Unmapped HIGH finding allows ship
 
-## This step
+**Authorized scope:** `labs/9.4/9.4-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
 
-The authorized break is the local vulnerable/ fixture. No live targets, no weaponized copy-paste exploits, no public CDN to attack.
+## What to observe
 
-## Root cause / impact / prevention / detection / recovery
+vulnerable sast.py ships anyway.
 
-Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: ship_ok([HIGH], {}) True.
 
-## Framework defaults vs application guarantees
+## Vulnerable fixture (local)
 
-The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
+```python
+def ship_ok(findings, mappings):
+    return True
+```
 
-## Residual risk
+## Root cause vs impact
 
-If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
+| Slice | Lab |
+|---|---|
+| Root cause | Scanner output not joined to 9.1. |
+| Impact | Unknown HIGH in prod. |
+| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
 
 ## Practice
 
-Run `labs/9.4/9.4-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
+Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/9.4/9.4-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
 
 ## Transfer
 
-Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
+SCA CVE vs actually called function.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.
+No live-target instructions. Synthetic data only.

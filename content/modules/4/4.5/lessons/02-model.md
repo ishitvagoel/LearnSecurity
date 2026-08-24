@@ -1,37 +1,53 @@
-# 4.5 — OAuth, OpenID Connect, browser apps, and native apps (2 Model)
+# 4.5 — OAuth, OIDC, and delegated authorization (2 Model)
 
-**Kind:** design-exercise
-**Loop step:** 2 Model
-**Standards:** OAuth 2.1 (I-D, not final); OIDC Core (final). Do not present 2.1 as RFC.
+**Kind:** design-exercise  
+**Loop step:** 2 Model  
+**Standards:** RFC 9700 OAuth 2.0 Security BCP (final); RFC 8252 native apps (final); OIDC Core 1.0 (final); ASVS 5.0.0 V10. JWT *aud* is this lab’s cell, not “we use OAuth.”
 
 ## Property (start here)
 
-An access token is accepted only if **aud** is this API. A token minted for another audience is not a SecureCollab session. OAuth 2.1 remains an **Internet-Draft** — label it.
+A bearer JWT with the wrong audience must be rejected. Tokens for other-api are not sessions for securecollab-api. Delegation is not authentication theater.
 
 ## Attacker capabilities and trust assumptions
 
-Token from another API replayed here. Trust: local claim dict, not a real JWT crypto lab.
+- **Attacker:** Stolen token minted for another API; confused deputy client.
+- **Trust:** Local aud check. Real JWKS, iss, nonce, PKCE in the full protocol — named as residual here.
+Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
 
-## Root cause / impact / prevention / detection / recovery
+| Piece | This system |
+|---|---|
+| Subjects | client, resource server, other-api |
+| Objects | JWT aud, expected audience |
+| Actions | accept_token |
+| Channels | Authorization header |
+| TCB | RS checks aud (and later iss, exp, signature). |
+| Untrusted | Client-supplied token blob |
+| State / time | Long-lived tokens after client deprovision (4.1). |
+| 1.1 cell | Authenticity of the audience binding. |
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## Authority matrix (minimum)
 
-## Framework defaults vs application guarantees
+| Subject | Object | Action | Decision |
+|---|---|---|---|
+| client | aud=securecollab-api | call API | allow-if-valid |
+| client | aud=other-api | call API | deny |
+| browser | id_token | call API | deny |
+| mobile | custom-scheme token | store | 8.3 residual |
 
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
 
 ## Practice
 
-Draw the relevant map/register for this module (not a Top 10 list).
+Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/4.5/4.5-lab` file `jwt_aud.py`.
 
 ## Transfer
 
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
+Mobile redirect (8.3, RFC 8252) and BFF vs SPA token storage.
+
+## Residual risk
+
+Full OAuth (PKCE, state, nonce, sender-constraining) not in this micro-fixture.
 
 ## Non-goals
 
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.

@@ -1,37 +1,50 @@
-# 3.1 — Assets, data classification, and security requirements (3 Break)
+# 3.1 — Assets, classification, and security requirements (3 Break)
 
-**Kind:** mechanism-lab
-**Loop step:** 3 Break
-**Standards:** NIST CSF 2.0 (final) Identify; ASVS 5.0.0 V14 data protection (chapter-level).
+**Kind:** mechanism-lab  
+**Loop step:** 3 Break  
+**Standards:** NIST CSF 2.0 Identify (final); ASVS 5.0.0 V14 (final); NIST Privacy Framework 1.0 (final). Classification is a property of a *field*, not a spreadsheet sticker.
 
 ## Property (start here)
 
-Note **bodies** are Confidential; they must not appear in application logs. Classification is a property of the field, not a spreadsheet label.
+Note bodies are Confidential. An application log line for note_read must not contain the body. Labels in Confluence do not enforce this.
 
 ## Attacker capabilities and trust assumptions
 
-Operator who can read logs; another tenant's admin; a support engineer. Trust: lab log sink is local.
+- **Attacker:** Operator with log access; SIEM vendor; another tenant’s admin who can read shared observability.
+- **Trust:** Local log sink. Real ELK is another TCB later (10.5).
+**Forbidden outcome:** Confidential note body appears in a log line
 
-## Root cause / impact / prevention / detection / recovery
+**Authorized scope:** `labs/3.1/3.1-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
 
-Root cause is a missing or wrong **mechanism relative to the property**, not a missing scanner item.
-Impact is a named 1.1 cell (confidentiality, integrity, authenticity, …).
-Prevention is the smallest structural control in the lab.
-Detection logs the attempt without storing secrets or note bodies.
-Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
+## What to observe
 
-## Framework defaults vs application guarantees
+vulnerable classify.py interpolates the body.
 
-FastAPI/Next.js/PostgreSQL defaults are not this invariant. The application must still enforce it.
+The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: Handler logs the event payload with the body.
+
+## Vulnerable fixture (local)
+
+```python
+def log_event(event: str, note_body: str) -> str:
+    return f"{event}: {note_body}"
+```
+
+## Root cause vs impact
+
+| Slice | Lab |
+|---|---|
+| Root cause | Body treated as debug context. |
+| Impact | Confidential field in a lower-trust store. |
+| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
 
 ## Practice
 
-Run `labs/3.1/3.1-lab` with --impl vulnerable then fixed.
+Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/3.1/3.1-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
 
 ## Transfer
 
-Apply the same property to a clinic-booking card or a new SecureCollab file object. Do not answer with a Top 10 name.
+Clinic notes vs appointment time: two classes, two sinks.
 
 ## Non-goals
 
-Live targets, real PII, weaponized payloads. Gates 0–10 and M0–M5 stay not-attempted.
+No live-target instructions. Synthetic data only.
