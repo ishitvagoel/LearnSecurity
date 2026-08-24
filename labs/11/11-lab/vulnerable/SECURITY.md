@@ -1,3 +1,1 @@
-# Vulnerable notes (11)
-
-We are secure because TLS and a scanner are green.
+Vulnerable 11 local fixture. Authorized directory only.

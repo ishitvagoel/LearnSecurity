@@ -14,7 +14,7 @@ description: Read curriculum STATUS.yaml, choose the next allowed Pass A/B/C uni
 ## Instructions
 
 1. Read [`content/progress/STATUS.yaml`](../../../content/progress/STATUS.yaml) and the blueprint [`secure-application-engineering-curriculum-blueprint.md`](../../../secure-application-engineering-curriculum-blueprint.md) §7 graph.
-2. Honor `next` if it is still legal. Recalculate if STATUS is inconsistent (wrong pass before prerequisites, Phase 8 before identity/data/API foundations, electives before Phase 7, Pass D before Phase 1–2 pilots).
+2. Honor `next` if it is still legal. Recalculate if STATUS is inconsistent (wrong pass before prerequisites, Phase 8 before identity/data/API foundations, electives before Phase 7, Pass D before Phase 1–2 pilots). If generation is complete (`pass: E` for all units and `revision.remaining` is non-empty), the next skill is **`deepen-curriculum`**, not a new Pass A.
 3. Dependency rules:
    - Hard phase order: 0 → 1 → 2 → 3 → 4 → 5 → 6 → 7 → 9 → 10 → 11. Phase 8 depends on 5 and 7; it may wait for a web/API milestone.
    - Electives E1–E6 only after Phase 7.

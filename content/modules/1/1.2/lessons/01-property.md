@@ -2,67 +2,59 @@
 
 **Kind:** concept-model  
 **Loop step:** 1 Property  
-**Standards:** Saltzer & Schroeder, The Protection of Information in Computer Systems 1975 (seminal). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Standards:** Saltzer & Schroeder (1975, seminal) — least privilege, complete mediation, fail-safe defaults, separation of privilege, open design; CISA Secure by Design (current public guidance, final) — secure defaults as the manufacturer’s job; OWASP ASVS 5.0.0 (final) chapters V8 Authorization and V15 architecture (chapter-level only).
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Authority and protection** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
+For **SecureCollab** notes in Phase 1: **a member of tenant B must not read tenant A’s note body**, even if they are logged in, can guess or observe a note id, and can call the same FastAPI handler alice uses.
 
-Invariant prompt for this object: Every security-relevant action in scope has an explicit subject-object-action rule; Unknown or failed policy evaluation denies (fail-safe default); Authentication is not treated as authorization; No live-target or real-PII instructions appear in this module
+That is an **authorization invariant**. “We require JWT / session cookies / `Depends(get_current_user)`” is a **mechanism**. Login answers *who is authenticated*. It does not answer *may this subject perform this action on this object*.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+- **Attacker:** a logged-in member of another tenant; anyone who can send HTTP to the local lab API; later, a stolen worker identity (preview).
+- **Trust:** application policy in the FastAPI process is in the TCB for this lab. The Next.js bundle is **not**. PostgreSQL roles are **not** yet the mediator (that is 5.5). Open design: assume the check’s location is known.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
+## Vocabulary (use these names)
 
-Threat-model prompts from the spec:
-
-- Where does ambient authority leak across tenants, roles, or background work?
-- Who can delegate, and can they delegate more than they have?
-- What can an attacker do with any URL the user can see versus a stolen worker identity?
-
-## Root cause, preconditions, impact, prevention, detection, recovery
-
-| Slice | For Authority and protection |
+| Name | SecureCollab example |
 |---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+| Subject | `alice` (member, tenant `tA`); `bob` (member, tenant `tB`) |
+| Object | Note `n1` (tenant `tA`) |
+| Action | `read` |
+| Access matrix cell | (alice, n1, read) = allow; (bob, n1, read) = deny |
+| Capability | An unforgeable token that *is* the right (not used in Phase 1 notes UI) |
+| Ambient authority | Process-wide `current_user` used as if it granted every object |
+
+Ambient authority is leftover environment rights (shared DB user, global admin flag, “any authenticated user”) that were **not** granted for this object.
+
+## Root cause vs impact vs prevention vs detection vs recovery
+
+| Slice | This invariant |
+|---|---|
+| Root cause | Mediation skipped: handler trusts ambient login without a subject–object rule |
+| Preconditions | Bob is a valid user; `n1` exists; local fixture only |
+| Impact | Tenant A confidentiality (1.1) fails through an authorization hole |
+| Prevention | Check tenant (or equivalent policy) on **this** object; deny on uncertainty |
+| Detection | Log denied cross-tenant reads **without** note bodies |
+| Recovery | Revoke bob’s session if it was stolen; notify tenant A if the body leaked |
 
 ## Framework defaults vs application guarantees
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Authority and protection**. Name what the app must still enforce.
+FastAPI security dependencies prove a user is authenticated if you wired them. They do **not** implement the matrix. `admin` as one ambient superuser is not Saltzer separation of privilege.
 
 ## Mechanism limits
 
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
+A denylist of user ids, a scanner “IDOR” label, or hiding note ids (capability-by-obscurity) does not restore the cell when a third tenant or an export path appears. ASVS V8 is a requirement catalogue, not proof the matrix is complete.
 
-## Practice (local, authorized)
+## Practice
 
-Complete the associated lab under `labs/1.2/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
+Write the four cells for `{alice, bob} × {n1, n2}` for action `read`. Mark which cell the vulnerable lab violates.
 
-Safe task: write one testable sentence that would fail if the **authority** property were false.
+## Transfer (preview of LO-07)
 
-## Transfer
+Support impersonation: can support read `n1`? Under whose authority? That is a new subject, not “admin is true.”
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
+## Usability
 
-## Usability and accessibility
-
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Authentication is authorization
-- UI roles are the access matrix
-- An HTTP handler check mediates every path
-- Admin is one ambient superuser
-
-## Non-goals
-
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+A matrix people cannot complete (mouse-only admin, color-only “allowed”) will be bypassed (1.4, WCAG 2.2).

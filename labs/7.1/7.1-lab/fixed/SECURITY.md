@@ -1,3 +1,1 @@
-# Fixed notes (7.1)
-
-Property-shaped claim; mechanism is not the property.
+Fixed 7.1 local fixture.

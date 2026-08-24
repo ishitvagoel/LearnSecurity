@@ -1,35 +1,40 @@
 # Lab: 1.2-authority-matrix
 
-**Module:** `1.2` — Authority and protection
-**Authorized scope:** Local course fixture and synthetic SecureCollab description only; no public or third-party targets
-**Invariant:** Claims about this concern must be property-shaped (attacker, trust, time horizon, evidence) and name SecureCollab assets.
-**Root cause class:** trust / authority / parser / state / resource (module-specific)
-**Non-goals:** live targets, real PII, weaponized learner-facing payloads.
+**Module:** `1.2`  
+**Authorized scope:** local course fixture (this directory only). No public or third-party targets.  
+**Invariant:** A logged-in SecureCollab member of tenant B cannot read tenant A’s note body via `read_note`.  
+**Root cause class:** authority (ambient `current_user` without object check)  
+**Non-goals:** live systems, real PII, weaponized HTTP payloads.
 
 ## Reset
 
-Replace `vulnerable/` or `fixed/` claim files from git. Do not keep learner secrets.
+Restore `vulnerable/` and `fixed/` from git. Synthetic tenants `tA`/`tB` only.
 
 ## Vulnerable behavior (local only)
 
-The vulnerable claim is a mechanism slogan. Tests must **fail**. This is a local fixture only.
+`vulnerable/notes.py` treats **authentication** as **authorization**: any known user who supplies note id `n1` receives tenant A’s body. That is a complete-mediation miss on the object.
 
-Learner produces an authority map and access matrix; local fixture shows a missing object-level check
+Forbidden outcome: `read_note("bob", "n1")` returns tenant A’s note.
 
 ## Structural fix
 
-The fixed claim states a system-specific property plus attacker, trust, time horizon, and evidence. A scanner-only or denylist response is insufficient.
+`fixed/notes.py` mediates **subject, object, action**: same-tenant membership is required; missing notes deny (fail-safe). A denylist of “bob” would not restore the invariant when a third tenant appears.
 
 ## Verify
 
-- Happy path: fixed claim passes `--claim`
-- Negative: vulnerable claim fails `--claim`
-- No network calls; synthetic data only
+From this lab directory:
+
+```bash
+python3 -m pytest tests/test_mediation.py --impl vulnerable   # must FAIL on cross-tenant read
+python3 -m pytest tests/test_mediation.py --impl fixed        # must PASS
+```
+
+Happy path: alice reads n1. Negative: bob cannot read n1. Unknown note and unknown user deny.
 
 ## Operate
 
-If the invariant is not absolute, record what you would log, alert on, revoke, or restore.
+Log denied cross-tenant reads (subject, object, action) without logging note bodies. Revoke stolen sessions. Recovery is out of scope until 1.4.
 
 ## Transfer
 
-Add a new principal or object and rewrite the claim without a Top 10 name as the property.
+Add a **worker** principal that exports notes. Redraw the matrix: the worker must not inherit alice’s ambient process user as permission on n2.

@@ -1,3 +1,1 @@
-# Fixed notes (9.2)
-
-Property-shaped claim; mechanism is not the property.
+Fixed 9.2 local fixture. Authorized directory only.

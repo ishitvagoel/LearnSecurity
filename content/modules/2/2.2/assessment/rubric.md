@@ -1,30 +1,13 @@
-# 2.2 assessment (learner-facing — no answers)
+# 2.2 assessment (no answers)
 
-**Pass C.** Practical evidence, not a compensating average. States: not-attempted | developing | competent | transfer-ready.
+## Evidence
 
-## Module
+- [ ] Request-path diagram (LO-02)
+- [ ] Lab: other tenant must not see cached body
+- [ ] Headers after TLS labeled untrusted unless bound
+- [ ] Transfer proxy/CDN (LO-07)
+- [ ] Review (LO-08)
 
-DNS, transport, HTTP, TLS, proxies, CDNs, and caches
+RFC 9846 TLS 1.3 is **final** and still not the cache-key property.
 
-## Evidence checklist
-
-- [ ] Request-path diagram
-- [ ] Hardened local edge notes
-- [ ] Origin verification tests list
-- [ ] Lab: `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
-- [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Transfer challenge (LO-07) for transfer-ready
-
-## Rubric
-
-| Result | Meaning |
-|---|---|
-| Developing | Tools listed; missing attacker/trust; mechanism slogans |
-| Competent | System-specific invariant; lab understood; operate present |
-| Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
-
-Knowledge check (80% retryable): distinguish property vs mechanism for this module. Items live in the session worksheet, not here.
-
-## Seeded review
-
-Use the local `vulnerable/` artifact. Intended findings live only in `content/assessment/keys/2.2.md`.
+Keys: `content/assessment/keys/2.2.md`

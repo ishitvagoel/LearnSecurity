@@ -2,6 +2,7 @@
 
 # Source of truth for sequencing: blueprint §7 and AGENTS.md.
 # pass: none | A | B | C | D | E
+# depth: map-complete | publishable
 # quality: not-attempted | developing | competent | transfer-ready
 
 blueprint_revision: '1.1'
@@ -15,12 +16,11 @@ defaults:
 next:
   id: null
   pass: null
-  skill: choreograph-curriculum
+  skill: null
   inner_skill: null
-  note: 'Generation complete through Pass E: all 50 core modules, capstone 11, and electives E1–E6 have
-    Pass A–C artifacts; Pass D static site is in site/; Pass E review is content/progress/pass-e-review.md.
-    No queued generation unit remains. Mastery gates 0–10 and milestones M0–M5 stay not-attempted (learner/product
-    evidence). Vercel production deploy is optional.'
+  note: 'Deepen complete: revision.remaining empty; all listed units depth publishable
+    vs 1.1 bar. Gates 0–10 and M0–M5 remain not-attempted (no learner/product evidence).
+    Labs local-only.'
 spiral_deltas:
 - date: '2026-08-23'
   module: '1.1'
@@ -28,8 +28,47 @@ spiral_deltas:
   retest: 1.2 authority matrix, 1.3 boundaries, 1.4 residual risk; M0 traces
 - date: '2026-08-23'
   module: '11'
-  change: Capstone SecureCollab integration specified through Pass C (no production app)
+  change: Capstone SecureCollab integration specified through Pass C (no production
+    app)
   retest: Milestones M0–M5 evidence when a product tree exists
+- date: '2026-08-23'
+  module: '1.2'
+  change: Per-tenant note read matrix; ambient login is not authorization
+  retest: 1.3 export header; 4.4 executable auth
+- date: '2026-08-23'
+  module: '1.3'
+  change: Client internal header is not worker TCB
+  retest: CDN/cache keys; worker identity at 7.4
+- date: '2026-08-23'
+  module: '1.4'
+  change: Inaccessible recovery is a security residual
+  retest: 4.2 usable auth; WCAG on recovery
+- date: '2026-08-23'
+  module: '2.1'
+  change: Duplicate JSON tenant keys rejected; parser agreement is the ingest property
+  retest: 6.1 injection; multipart 6.4
+- date: '2026-08-23'
+  module: '2.2'
+  change: Cache key includes bound tenant; TLS is not the key
+  retest: CDN Vary; forwarded headers
+- date: '2026-08-23'
+  module: '2.3'
+  change: HttpOnly session not script-readable; CSP3 remains draft
+  retest: 6.2 XSS encoding
+- date: '2026-08-23'
+  module: '2.4'
+  change: Idempotent share; retry is not a second share
+  retest: 7.4 worker retry stale grants
+- date: '2026-08-23'
+  module: 5.1-7.4
+  change: Deepened data/crypto/injection/API modules to structural local labs and
+    1.1-density lessons
+  retest: pytest --impl vulnerable fails then --impl fixed; schema module.yaml
+- date: '2026-08-23'
+  module: 8.1-11 + E1-E6
+  change: Deepened mobile, verification, operations, capstone, and electives to publishable
+    depth
+  retest: Same pytest pair; remaining=[]
 modules:
 - id: '0.1'
   title: Security engineering orientation
@@ -37,14 +76,16 @@ modules:
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '0.2'
   title: Diagnostic and adaptive bridge
   phase: 0
   track: bridge
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '1.1'
   title: Security as invariants under attack
   phase: 1
@@ -52,341 +93,390 @@ modules:
   pass: E
   quality: competent
   notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  depth: publishable
 - id: '1.2'
   title: Authority and protection
   phase: 1
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '1.3'
   title: Trust boundaries and attack surface
   phase: 1
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '1.4'
   title: Risk, people, economics, usable security, and resilience
   phase: 1
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '2.1'
   title: Bytes, text, formats, parsers, and interpreters
   phase: 2
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '2.2'
   title: DNS, transport, HTTP, TLS, proxies, CDNs, and caches
   phase: 2
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '2.3'
   title: Browser security model
   phase: 2
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '2.4'
   title: State, time, concurrency, and distributed failure
   phase: 2
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '3.1'
   title: Assets, data classification, and security requirements
   phase: 3
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '3.2'
   title: Threat modeling
   phase: 3
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '3.3'
   title: Secure architecture patterns
   phase: 3
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '3.4'
   title: Business logic and abuse-resistant design
   phase: 3
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '4.1'
   title: Digital identity and account lifecycle
   phase: 4
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '4.2'
   title: Authentication, phishing resistance, and usable access
   phase: 4
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '4.3'
   title: Sessions, cookies, and tokens
   phase: 4
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '4.4'
   title: Authorization and tenant isolation
   phase: 4
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '4.5'
   title: OAuth, OpenID Connect, browser apps, and native apps
   phase: 4
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '5.1'
   title: Data lifecycle and privacy engineering
   phase: 5
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '5.2'
   title: Cryptographic properties and safe use
   phase: 5
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '5.3'
   title: Key and secret lifecycle
   phase: 5
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '5.4'
   title: Secure communication and channel binding
   phase: 5
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '5.5'
   title: Database and persistence security
   phase: 5
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '6.1'
   title: Interpreter confusion and injection
   phase: 6
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '6.2'
   title: Browser injection and active content
   phase: 6
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '6.3'
   title: Cross-site and cross-context attacks
   phase: 6
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '6.4'
   title: Files, paths, uploads, archives, XML, and deserialization
   phase: 6
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '6.5'
   title: Server-side requests and protocol parsing
   phase: 6
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '6.6'
   title: Workflow, race, and exceptional-condition failures
   phase: 6
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '6.7'
   title: Resource abuse, automation, and availability
   phase: 6
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '7.1'
   title: API contracts, protocols, and inventory
   phase: 7
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '7.2'
   title: Object, property, and function security
   phase: 7
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '7.3'
   title: Webhooks, callbacks, and third-party APIs
   phase: 7
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '7.4'
   title: Queues, workers, events, and service identity
   phase: 7
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '8.1'
   title: The hostile-client and mobile-platform model
   phase: 8
   track: mobile
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '8.2'
   title: Local data, keys, biometrics, offline state, and leakage surfaces
   phase: 8
   track: mobile
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '8.3'
   title: Network, deep links, WebViews, and inter-app communication
   phase: 8
   track: mobile
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '8.4'
   title: Build, distribution, attestation, and resilience
   phase: 8
   track: mobile
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '8.5'
   title: Mobile verification and privacy
   phase: 8
   track: mobile
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '9.1'
   title: Verification requirements and traceability
   phase: 9
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '9.2'
   title: Secure code review
   phase: 9
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '9.3'
   title: Security-focused tests
   phase: 9
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '9.4'
   title: Automated analysis and tool orchestration
   phase: 9
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '9.5'
   title: Penetration testing, reporting, and remediation
   phase: 9
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '10.1'
   title: Secure software lifecycle and security culture
   phase: 10
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '10.2'
   title: Source control, CI/CD, dependencies, and software supply chain
   phase: 10
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '10.3'
   title: Cloud, serverless, containers, Kubernetes, and IaC
   phase: 10
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '10.4'
   title: Deployment and configuration hardening
   phase: 10
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: '10.5'
   title: Logging, detection, incident response, recovery, and maintenance
   phase: 10
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 capstone:
   id: '11'
   title: Integrating capstone — SecureCollab
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 gates:
 - id: 0
   after: Phase 0
@@ -433,37 +523,43 @@ electives:
   opens_after_phase: 7
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: E2
   title: Advanced browser and edge security
   opens_after_phase: 7
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: E3
   title: Payments, financial, health, and other high-assurance systems
   opens_after_phase: 7
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: E4
   title: Memory safety and native-code boundaries
   opens_after_phase: 7
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: E5
   title: Large-scale authorization and multi-tenant SaaS
   opens_after_phase: 7
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 - id: E6
   title: Product security leadership
   opens_after_phase: 7
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
+  depth: publishable
 milestones:
 - id: M0
   title: Observable skeleton
@@ -489,3 +585,7 @@ milestones:
   title: Defended capstone
   after_gate: 11
   quality: not-attempted
+revision:
+  skill: deepen-curriculum
+  reference_module: '1.1'
+  remaining: []

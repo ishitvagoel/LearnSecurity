@@ -1,67 +1,45 @@
-# E2-LO-01 — Advanced browser and edge security: property vs mechanism
+# E2 — Advanced browser and edge security (1 Property)
 
-**Kind:** concept-model  
-**Loop step:** 1 Property  
-**Standards:** OWASP ASVS / module anchors (see spec) 5.0.0 (final). Awareness lists (Top 10, CWE Top 25) are regression checks, not the outline.
+**Kind:** concept-model
+**Loop step:** 1 Property
+**Standards:** CSP3 WD (**draft**); Trusted Types WD (**draft**). 2.3 browser cells still apply.
 
 ## Property (start here)
 
-What must remain true of **SecureCollab** (or the elective system) regarding **Advanced browser and edge security** when an attacker with stated capabilities acts, a component fails, or a human follows a stressful recovery path?
-
-Invariant prompt for this object: Claims are properties of SecureCollab (or the elective system), not tool names; Labs stay in authorized local or official training scope; Draft standards are labeled draft
+Content-Security-Policy-Report-Only is not enforcement. CSP3 remains a Working Draft — label it draft.
 
 ## Attacker capabilities and trust assumptions
 
-State both, or the claim is a slogan:
+Injected active content in the model. Trust: local header dict. No live XSS campaign.
 
-- **Attacker:** anyone who can reach the local lab API; a logged-in member of another tenant; a stolen worker identity; a hostile mobile client where Phase 8 applies.
-- **Trust:** FastAPI + PostgreSQL with least-privilege roles are in the TCB for server-side mediation; the Next.js bundle and Android client are **not**. Lab honesty is assumed; no public targets.
+## This step
 
-Threat-model prompts from the spec:
+Start from this system's testable sentence, not a topic title. A mechanism (TLS, MASVS control, scanner, CSP) is not the invariant.
 
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+## Root cause / impact / prevention / detection / recovery
 
-## Root cause, preconditions, impact, prevention, detection, recovery
-
-| Slice | For Advanced browser and edge security |
-|---|---|
-| Root cause | Wrong trust in a mechanism, skipped mediation on an indirect path, or a confused interpreter — not “missing a scanner finding.” |
-| Preconditions | The local fixture is reachable; the learner is authorized only on this lab; synthetic data only. |
-| Impact | Tenant notes, identity, or availability of SecureCollab can fail the named property. |
-| Prevention | Smallest structural mechanism that restores the invariant (not a blacklist-only patch). |
-| Detection | Logs/alerts that fire when the forbidden outcome is attempted. |
-| Recovery | Revoke, rotate, purge, restore from a known-good backup, and record residual risk. |
+Root cause is a missing or wrong mechanism relative to the property, not a missing scanner item.
+Impact is a named 1.1 cell (confidentiality, integrity, authenticity, authorization, accountability, privacy, availability, or safety).
+Prevention is the smallest structural control in the lab.
+Detection logs the attempt without secrets or note bodies.
+Recovery revokes, rotates, or quarantines — fail-safe, not fail-open.
 
 ## Framework defaults vs application guarantees
 
-FastAPI, Next.js, PostgreSQL, or Android “secure defaults” are not the application guarantee for **Advanced browser and edge security**. Name what the app must still enforce.
+The lab mechanism is a teaching stand-in. FastAPI, Next.js, Android APIs, and scanners are not this invariant.
 
-## Mechanism limits
+## Residual risk
 
-A green scanner, a named product (JWT, TLS, bcrypt), or an awareness-list item does not prove the invariant. Universal checkboxes fail when risk-based selection is required.
+If the primary control is bypassed, detection and recovery still apply; do not claim checkbox completeness.
 
-## Practice (local, authorized)
+## Practice
 
-Complete the associated lab under `labs/E2/` if a labSpec exists. Observe the forbidden outcome on `vulnerable/`. Do not target non-lab systems. Do not copy weaponized payloads into notes.
-
-Safe task: write one testable sentence that would fail if the **advanced** property were false.
+Run `labs/E2/e2-lab` (`--impl vulnerable` then `fixed`). Map the failing test to this property.
 
 ## Transfer
 
-Change one asset, principal, or boundary (new worker, webhook, offline cache, or clinic-booking card). Redraw the claim without using a Top 10 item as the definition of security.
-
-## Usability and accessibility
-
-Where a human is part of the control (login, recovery, consent, admin impersonation), the journey must remain usable and accessible (WCAG 2.2 final as the web baseline). Do not rely on color, mouse-only, or memory-only secrets.
-
-## Misconceptions to refuse
-
-- Advanced browser and edge security is a Top 10 memorization exercise
-- Framework defaults are application guarantees
-- A green scanner proves the invariant
+Change one channel (worker, mobile, CSV, CI). Do not define security as a Top 10 item.
 
 ## Non-goals
 
-Live-target attacks, real PII, production secrets, and treating this lesson as a product tutorial.
+Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence.

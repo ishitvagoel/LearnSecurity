@@ -149,7 +149,7 @@ operationalConsiderations:
 - WAF, CDN, or framework edge defaults are not the application TCB or an independent layer
 - Detection UX and accessibility of human response are designed in 1.4
 author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (Pass C); lab-safety-reviewer (local YAML fixture)
+reviewer: quality-reviewer (1.3 deepen); lab-safety-reviewer (local surface.py fixture)
 lastReviewedAt: '2026-08-23'
 nextReviewAt: '2027-02-23'
 changelog:
@@ -161,3 +161,5 @@ changelog:
   note: Pass B lessons and authorized local lab
 - date: '2026-08-23'
   note: Pass C rubric and examiner keys; quality-gate recorded
+- date: '2026-08-23'
+  note: 'Deepen: 1.1-density lessons; worker-header boundary lab; quality-gate recorded'
