@@ -2,7 +2,7 @@
 
 This repository produces the **Secure Application Engineering from First Principles** curriculum (web, API, and mobile). The canonical map is [`secure-application-engineering-curriculum-blueprint.md`](secure-application-engineering-curriculum-blueprint.md) (revision 1.1). Do not replace or silently contradict it. Generated files must cite module IDs from the blueprint.
 
-This pass is a **Cursor harness plus empty content scaffold**. Do not invent a parallel syllabus.
+The repository is a **map-complete curriculum prototype under depth remediation**. File presence, generated prose, and schema validity do not by themselves make a module publishable. Only `content/progress/STATUS.yaml` plus a dated independent review artifact may confer publishable depth. Do not invent a parallel syllabus.
 
 ## Locked production defaults
 

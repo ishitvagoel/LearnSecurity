@@ -1,5 +1,7 @@
 # Pass E — independent curriculum and security review
 
+> **Historical record.** This review predates the 2026-08-24 bulk lesson rewrite and cannot approve those later files. For current publishability decisions, use [the 2026-08-25 depth audit](depth-audit-2026-08-25.md), the semantic quality rubric, and a dated per-module review artifact.
+
 Date: 2026-08-23  
 Reviewers: `quality-reviewer`, `lab-safety-reviewer`, `standards-auditor`, `curriculum-architect` (readonly; this record).
 

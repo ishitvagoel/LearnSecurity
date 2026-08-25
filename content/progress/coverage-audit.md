@@ -1,7 +1,9 @@
-# Coverage audit (Pass A complete for all phases)
+# Coverage audit — Pass A map coverage
 
 Date: 2026-08-23  
 Scope: authored `module.yaml` files for core `0.1`–`10.5`, capstone `11`, electives `E1`–`E6`. Pass B/C exists for the same set. Awareness lists are **regression checks**, not a new outline.
+
+> This 2026-08-23 audit answers whether the blueprint map includes the expected standards areas. It does not approve lesson depth, lab semantics, or later generated rewrites. Current depth decisions live in [`depth-audit-2026-08-25.md`](depth-audit-2026-08-25.md) and dated per-module reviews.
 
 ## ASVS 5.0 chapters vs principal modules (blueprint §12.1)
 
@@ -39,10 +41,10 @@ Phase 8 (`8.1`–`8.5`) plus shared STORAGE/CRYPTO/AUTH/PRIVACY with 5.x. Profil
 
 OAuth 2.1, SSDF 1.2 IPD, Privacy Framework 1.1 IPD, WebAuthn L3 CR, CSP3, Trusted Types — do not present as final.
 
-## Defects
+## Pass A finding
 
 None that reopen Pass A sequencing. Thin generated specs (Phase 0, 3–11, electives) remain map-complete; later revision may deepen them without changing STATUS pass.
 
-## Follow-up
+## Current follow-up
 
-Pass D static site is in `site/`. Pass E review: [`pass-e-review.md`](pass-e-review.md). **Phase 1 core 1.1–1.4** and **Phase 2 2.1–2.4** are `depth: publishable` after deepen (structural labs). Remaining `revision.remaining` starts at **0.1**. Mastery gates and product milestones remain learner/product evidence.
+Pass D static site remains in `site/`, and the historical Pass E record remains at [`pass-e-review.md`](pass-e-review.md). The 2026-08-25 semantic audit reset generator-derived depth claims. Module 1.1 is the independently reviewed reference revision; the other 56 units remain queued beginning with 1.2. Mastery gates and product milestones remain learner/product evidence.

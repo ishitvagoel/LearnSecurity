@@ -1,9 +1,336 @@
-secure: false
-property: Tenant A's note bodies are not readable by Tenant B via the API, or via logs and backups Tenant B can access.
-attacker: A member of another tenant, or anyone who can read application logs and backups they are authorized to fetch in this lab.
-trust: Application and database in the local lab TCB; browser client is not trusted; hashing library is a mechanism for password-at-rest, not for note confidentiality.
-timeHorizon: Includes retained logs and backups, not only a live HTTP session.
-mechanism: Do not log note bodies; hashed user passwords are a separate password-at-rest property.
-evidence: Tests that fail if note body substrings appear in captured logs; cross-tenant GET tests (later module).
-detection: Alert if log pipeline schema includes a body field.
-recovery: Purge logs, rotate credentials, notify tenant owners.
+catalogueVersion: 1
+system: SecureCollab
+authorizedScope: Local course fixture with synthetic tenants, members, notes, and events only
+syntheticDataOnly: true
+productScope:
+  included:
+    - tenants
+    - tenant membership
+    - text notes
+    - privacy-safe security events
+  excluded:
+    - production deployment
+    - real personal data
+    - files, webhooks, billing, support impersonation, and offline clients
+claims:
+  - id: SC-CONF-01
+    property: Tenant A note bodies must never be returned to a Tenant B member through an in-scope API response, application log, or tenant export.
+    assets:
+      - note body
+      - application log event
+      - tenant export
+    attackers:
+      - An authenticated Tenant B member who can modify every client request and guess note identifiers
+      - A Tenant B administrator who can create additional B members and request exports
+    trust:
+      - The API policy path binds the authenticated subject, requested note, action, and tenant
+      - The structured event constructor permits only reviewed metadata fields
+    untrusted:
+      - Browser and Next.js client code
+      - Identifiers, headers, and tenant labels supplied by the client
+    timeHorizon: Request handling plus retained application logs and generated tenant exports
+    preconditions:
+      - Tenant A owns a note with a synthetic body
+      - The attacker has valid Tenant B credentials but no Tenant A membership
+    mechanisms:
+      - Server-side subject-object-action policy evaluation
+      - Structured logging field allowlist
+      - Export query bound to the server-resolved tenant
+    mechanismLimits:
+      - These mechanisms do not cover a cloud administrator with direct snapshot access
+      - A future worker or cache creates an alternate path that requires a new review
+    forbiddenOutcomes:
+      - Any Tenant B response contains bytes derived from a Tenant A note body
+      - A log or Tenant B export contains a Tenant A note body
+    evidence:
+      normal:
+        - A Tenant A member can read an A note and the event records only actor, tenant, action, object identifier, decision, and correlation identifier
+      negative:
+        - Cross-tenant reads and exports return no note body and commit no state
+      abuse:
+        - Guessed identifiers and client-supplied Tenant A labels do not change the server-resolved tenant
+      failure:
+        - Policy lookup or event-schema failure denies the read without emitting request or note content
+    detection:
+      signal: Repeated tenant-mismatch denials for one actor across many object identifiers
+      threshold: Risk-based count in a short window, reviewed for legitimate support and test traffic
+      eventFields:
+        - actor_id
+        - tenant_id
+        - object_id
+        - action
+        - decision_code
+        - correlation_id
+      prohibitedFields:
+        - note body
+        - password
+        - token
+      failureBehavior: Authorization remains fail-closed and evidence-pipeline loss raises a separate health alert
+    recovery:
+      - Revoke the implicated session or membership and preserve privacy-safe decision evidence
+      - Remove exposed log or export copies, repair the alternate path, and rerun cross-tenant tests
+    residualRisk: Direct database or backup access by the cloud administrative plane is deferred to later data and key-lifecycle modules
+    nonGoals:
+      - Hiding note existence from the database administrative plane in Phase 1
+      - Defending a public deployment; no public deployment exists
+    reviewTriggers:
+      - Files, sharing links, background workers, caches, or offline clients add a read path
+      - Backup retention or administrative access assumptions change
+
+  - id: SC-INTEG-01
+    property: Membership and note records must change only through an authorized transition, and a denied or retried operation must leave no partial forbidden state.
+    assets:
+      - membership record
+      - note record
+      - state-transition result
+    attackers:
+      - A current member attempting tenant-administrator actions
+      - A formerly authorized administrator replaying a request after revocation
+    trust:
+      - The policy decision and database transaction use the same current tenant and authority context
+      - Idempotency state is bound to the authorized operation
+    untrusted:
+      - Client-visible role labels and disabled buttons
+      - Request order, retries, and client-generated idempotency values
+    timeHorizon: From authority check through transaction commit, retry, revocation, and restore
+    preconditions:
+      - A membership or note exists in an initial valid state
+      - The attacker can send concurrent, repeated, stale, or reordered requests
+    mechanisms:
+      - Transactional state transition with current authority re-evaluation
+      - Operation identifier scoped to subject, tenant, action, and intended object
+    mechanismLimits:
+      - A transaction does not repair an incorrect authorization rule
+      - A global idempotency key can collide across tenants if scope is omitted
+    forbiddenOutcomes:
+      - A non-admin or revoked admin changes membership
+      - A denied or failed request commits a partial note or membership change
+    evidence:
+      normal:
+        - A current tenant administrator performs one permitted transition with one resulting audit event
+      negative:
+        - A member request is denied and before/after state is identical
+      abuse:
+        - Concurrent and replayed requests produce at most the single authorized state transition
+      failure:
+        - Database or evidence failure follows the documented rollback or fail-closed behavior
+    detection:
+      signal: Policy-denied mutation attempts, stale-authority decisions, or duplicate-operation conflicts
+      threshold: Immediate review for a high-impact stale-authority success; aggregated review for denied probes
+      eventFields:
+        - actor_id
+        - tenant_id
+        - action
+        - target_id
+        - authority_version
+        - decision_code
+        - operation_id
+      prohibitedFields:
+        - note body
+        - password
+        - token
+      failureBehavior: A missing decision or transaction outcome is recorded as an operational fault and does not imply success
+    recovery:
+      - Revoke stale authority and isolate affected mutation routes
+      - Reconstruct the intended state from privacy-safe events, repair data, and retest retries and revocation
+    residualRisk: Phase 1 does not yet prove database isolation from a fully privileged administrator
+    nonGoals:
+      - Defining the complete role hierarchy; Module 1.2 owns the authority matrix
+      - Claiming all distributed retries are solved before worker features exist
+    reviewTriggers:
+      - New roles, support impersonation, bulk imports, queues, or multi-step workflows
+      - A transition spans more than one datastore
+
+  - id: SC-ACCT-01
+    property: Every tenant-administrator membership change must produce privacy-safe evidence that remains attributable through the stated incident and recovery interval.
+    assets:
+      - audit event
+      - membership decision
+      - incident reconstruction
+    attackers:
+      - A tenant administrator attempting to conceal a high-impact membership change
+      - An operator who can read ordinary application logs
+    trust:
+      - The service identity and event sink preserve event integrity and ordering within the stated interval
+      - Access to audit evidence is independently recorded
+    untrusted:
+      - Free-form client messages and display names
+      - A green monitoring dashboard without event-level evidence
+    timeHorizon: Mutation decision through the defined audit-retention and incident-reconstruction interval
+    preconditions:
+      - A tenant-administrator membership action is attempted
+      - The decision path can emit a versioned event
+    mechanisms:
+      - Versioned structured audit event emitted with the committed decision
+      - Restricted audit access and retention policy
+    mechanismLimits:
+      - Evidence emitted before a rolled-back transaction can misstate the result
+      - The same operator controlling state and audit storage remains a residual trust concentration
+    forbiddenOutcomes:
+      - A membership grant or removal completes with no attributable decision evidence
+      - Audit evidence contains a note body, password, token, or unnecessary contact detail
+    evidence:
+      normal:
+        - A permitted change yields one committed event with actor, tenant, action, target, decision, authority version, and correlation identifier
+      negative:
+        - A denied change yields a denial event without a target member contact value
+      abuse:
+        - Event access and deletion attempts are themselves attributable
+      failure:
+        - Event-sink failure follows the documented fail-closed or durable-outbox behavior rather than silently losing evidence
+    detection:
+      signal: Missing event sequence, event-write failure, or administrative access outside an incident window
+      threshold: Immediate operational fault for a committed high-impact change with no durable evidence
+      eventFields:
+        - actor_id
+        - tenant_id
+        - target_id
+        - action
+        - decision_code
+        - authority_version
+        - correlation_id
+      prohibitedFields:
+        - note body
+        - password
+        - token
+        - member contact value
+      failureBehavior: The mutation uses its documented fail-closed or recoverable outbox path and raises an independent health signal
+    recovery:
+      - Restrict high-impact mutations until evidence durability is restored
+      - Reconcile membership state with decision records and document any interval that cannot be reconstructed
+    residualRisk: An administrator controlling both primary state and the only evidence store can still suppress or alter evidence
+    nonGoals:
+      - Recording note contents to make investigations easier
+      - Claiming non-repudiation against every privileged infrastructure operator
+    reviewTriggers:
+      - Audit storage, retention, administrative roles, or transaction boundaries change
+      - A compliance or incident requirement changes the reconstruction interval
+
+  - id: SC-AVAIL-01
+    property: One tenant's note export or catalogue-validation workload must not consume all read capacity for other tenants beyond the stated local recovery objective.
+    assets:
+      - note read capacity
+      - export capacity
+      - recovery objective
+    attackers:
+      - An authenticated tenant member able to repeat expensive authorized requests
+      - A faulty client that retries without backoff
+    trust:
+      - The API and job scheduler enforce per-tenant work accounting
+      - Health evidence distinguishes ordinary reads from export work
+    untrusted:
+      - Client retry timing and client-declared priority
+      - A single global health check
+    timeHorizon: Burst, sustained workload, dependency slowdown, and recovery after work is stopped
+    preconditions:
+      - Ordinary reads and expensive exports share at least one constrained resource
+      - The attacker can create repeated authorized work
+    mechanisms:
+      - Per-tenant concurrency and work budgets
+      - Bounded export size and retry policy
+    mechanismLimits:
+      - Static limits may exclude large legitimate tenants and can move the bottleneck downstream
+      - Distributed workers require shared accounting that Phase 1 does not implement
+    forbiddenOutcomes:
+      - Tenant B export work exhausts every Tenant A ordinary read worker beyond the stated objective
+      - Recovery requires deleting another tenant's valid notes
+    evidence:
+      normal:
+        - Ordinary reads and a bounded export both complete inside their separate local objectives
+      negative:
+        - Work above a tenant budget is rejected or queued without consuming unbounded shared capacity
+      abuse:
+        - Repeated and concurrent export attempts remain charged to the initiating tenant
+      failure:
+        - Scheduler or database slowdown triggers bounded degradation and measured recovery rather than infinite retry
+    detection:
+      signal: Per-tenant queue depth, rejection rate, worker saturation, and ordinary-read latency diverge
+      threshold: Local exercise threshold derived from the documented capacity assumption, not declared universal
+      eventFields:
+        - tenant_id
+        - operation_class
+        - queue_depth
+        - decision_code
+        - correlation_id
+      prohibitedFields:
+        - note body
+        - password
+        - token
+      failureBehavior: Missing metrics raise an observability fault and do not disable per-tenant enforcement
+    recovery:
+      - Stop or drain abusive work for the affected tenant without deleting valid data
+      - Restore ordinary capacity, validate queue and retry state, and revise the capacity assumption
+    residualRisk: Phase 1 has no distributed worker implementation or production recovery objective
+    nonGoals:
+      - Claiming universal rate limits or production capacity
+      - Preventing infrastructure-wide failure by the cloud provider
+    reviewTriggers:
+      - Exports move to workers, payload sizes grow, or tenants receive differentiated service objectives
+      - A new shared dependency changes the bottleneck
+
+  - id: SC-PRIV-01
+    property: Deleted note titles and member contact metadata must remain absent from ordinary application events and tenant-visible exports after the declared deletion and retention transition.
+    assets:
+      - note title
+      - member contact metadata
+      - deletion state
+      - retention record
+    attackers:
+      - A tenant member requesting historical exports after deletion
+      - An operator with ordinary application-event access
+    trust:
+      - Deletion and retention state are applied consistently to export and event paths
+      - Restore procedures identify data whose retention period has expired
+    untrusted:
+      - Analytics convenience fields and free-form exception context
+      - A successful DELETE response as the only evidence
+    timeHorizon: Deletion request, active retention interval, ordinary export, and later restore
+    preconditions:
+      - Synthetic note titles or contact metadata existed before deletion
+      - A retained copy or derived event may outlive the primary row
+    mechanisms:
+      - Data inventory with purpose and retention metadata
+      - Export and event schemas that omit expired values
+      - Restore-time reconciliation for expired data
+    mechanismLimits:
+      - Database row deletion alone does not remove logs, exports, caches, or backups
+      - Indefinite backup retention conflicts with the claimed transition
+    forbiddenOutcomes:
+      - A post-transition tenant export contains an expired note title or contact value
+      - An ordinary event stores a note title or member contact value without a stated purpose
+    evidence:
+      normal:
+        - Data required for the active purpose appears only in the documented view before expiry
+      negative:
+        - Post-transition export and ordinary events omit expired values
+      abuse:
+        - Repeated historical export requests and identifier guessing do not recover expired values
+      failure:
+        - A restore identifies and reapplies expired-data reconciliation before tenant access resumes
+    detection:
+      signal: Schema-policy violation, expired-field appearance in a synthetic canary export, or restore reconciliation failure
+      threshold: Any confirmed expired-field appearance in the local synthetic exercise requires investigation
+      eventFields:
+        - tenant_id
+        - data_class
+        - lifecycle_state
+        - policy_version
+        - decision_code
+        - correlation_id
+      prohibitedFields:
+        - note body
+        - note title value
+        - member contact value
+        - password
+        - token
+      failureBehavior: Export or restore remains unavailable until lifecycle policy can be evaluated; no expired value is emitted by default
+    recovery:
+      - Suspend the affected export path and remove improperly retained synthetic outputs
+      - Reconcile restored state, repair lifecycle enforcement, and rerun deletion and restore evidence
+    residualRisk: Backup media outside the modeled restore process is not covered until the later data-lifecycle design
+    nonGoals:
+      - Proving legal compliance or choosing a universal retention period
+      - Handling real personal or medical information
+    reviewTriggers:
+      - Analytics, search indexing, backups, legal holds, notifications, or mobile caches are introduced
+      - Purpose or retention decisions change
