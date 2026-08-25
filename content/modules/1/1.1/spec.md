@@ -1,144 +1,190 @@
-# 1.1 — Security as invariants under attack
+# Module 1.1 specification — Security as invariants under attack
 
-Pass A specification only. No lesson prose, exploits, or implementations.
+This specification is the publishable-depth reference for the remediation queue. It remains subordinate to blueprint revision 1.1 and does not introduce a parallel syllabus.
 
 ## Identity
 
-- **id:** 1.1
-- **slug:** security-as-invariants-under-attack
-- **title:** Security as invariants under attack
-- **phase / track / difficulty:** 1 / core / foundation
-- **estimatedMinutes:** 240
-- **prerequisites:** Entry profile (can ship a small API, Git, tests, basic SQL). Module 0.1 vocabulary recommended, not blocking for the Phase 1 spec pilot.
-- **routeTags:** complete, accelerated, web-api, mobile
-- **releaseMilestone:** none (feeds Gate 1; SecureCollab models precede M0)
-- **masteryGate:** 1
+- **ID:** 1.1
+- **Phase / track / difficulty:** 1 / core / foundation
+- **Estimated effort:** 420 focused minutes
+- **Prerequisite:** entry profile—small database-backed API, Git, tests, and basic SQL; Module 0.1 vocabulary is recommended
+- **Routes:** complete, accelerated, web-api, mobile
+- **Mastery contribution:** Gate 1
+- **SecureCollab state:** Phase 1 product model only; no production service or M0 evidence
 
-## Objective hierarchy
+## Purpose
 
-1. Given a product description (SecureCollab or an unfamiliar sibling), produce a **system-specific invariant catalogue** that a reviewer can test—not a list of tools or CVE names.
-   - Separate **desired property** from **mechanism** (encryption, login, a header, a scanner finding).
-   - Express at least: confidentiality, integrity, availability, authenticity, authorization, accountability, privacy, and safety as *invariants of this system* (or explicitly mark one as out of scope with a reason).
-   - Name **attacker capabilities** and **trust assumptions** for each invariant (who is in the TCB, what they can read/modify, time horizon).
-2. Show that a control can fail its property, and that detection/recovery are part of the claim when prevention is not absolute.
-   - Distinguish root cause, preconditions, impact, prevention, detection, recovery without naming a vendor product as the property.
-   - Identify when a framework default is not an application guarantee.
-3. Transfer: apply the same catalogue method to a **materially changed** product description (different assets, tenants, or offline clients) and explain what must be rewritten.
+The learner must stop treating security as a list of products, settings, vulnerabilities, or framework defaults. They will define security as bounded system outcomes that remain true under stated adversarial and failure conditions, derive candidate mechanisms from those outcomes, identify mechanism limits, specify evidence, and preserve detection/recovery when prevention is incomplete.
 
-## Prerequisite concepts
+The module uses SecureCollab’s first product model and a local semantic-linting lab. It does not claim that an application implementation exists.
 
-- Difference between a running program, stored data, and a network message (entry profile).
-- “User,” “server,” and “database” as informal roles—this module replaces them with property language.
-- 0.1 terms if completed: vulnerability, threat, risk, control, assurance (recommended).
+## Outcomes
 
-## Misconceptions
+By the end of the module, the learner can:
 
-- Security *is* a list of vulnerabilities, a Top 10, or a green scanner.
-- Confidentiality, integrity, and availability are universal checkboxes independent of the product.
-- “We use TLS / JWT / bcrypt” *is* the security property.
-- If the happy path works, the invariant holds.
-- Privacy is the same as confidentiality; safety is the same as availability.
-- A control that usually works needs no detection or recovery story.
-- Framework or cloud “secure defaults” are the application’s guarantees.
+1. produce a versioned SecureCollab invariant catalogue with at least five testable, system-specific rows;
+2. separate a desired property from mechanisms, mechanism limits, framework defaults, and evidence;
+3. bound each claim with assets, subjects/actions, attacker capabilities, trusted and untrusted components, state, time, forbidden outcomes, residual risk, and review triggers;
+4. distinguish root cause, preconditions, impact, prevention, detection, and recovery for a mechanism-only assurance failure;
+5. specify normal, negative, abuse, and failure evidence without treating control presence as proof;
+6. design privacy-safe operational evidence and a bounded response/recovery path;
+7. transfer the catalogue method to a materially changed product and explain which original claims fail.
 
-## Concept map
+## Coverage contract
 
-```text
-Asset (what is valued)
-  -> Property / invariant (what must remain true under misuse, failure, attack)
-       -> Attacker capabilities + trust assumptions + time horizon
-            -> Mechanism (control) — never confused with the property
-                 -> Evidence (test, log, review) that the property still holds
-                      -> Detection / recovery when prevention is incomplete
-```
+Every outcome must have all five evidence types before publication.
 
-Related later nodes (not taught here): authority (1.2), trust boundaries (1.3), risk and usability (1.4).
+| Outcome | Explanation and model | Worked reasoning | Learner practice | Assessment evidence | Transfer |
+|---|---|---|---|---|---|
+| 1 | LO-01 claim envelope; LO-02 product/state model | LO-02 confidentiality-row interrogation | Five-row catalogue and peer classification | Catalogue dimensions in rubric | CivicClinic six-row catalogue |
+| 2 | LO-01 property/mechanism distinction | Hashed-password causal trace; logging alternatives in LO-04 | Slogan-to-bounded-claim rewrite | Mechanism-limit and counterexample criteria | Signed worker-token review |
+| 3 | LO-01 claim envelope; LO-02 actor/state tables | Bounded confidentiality example | Full row template and peer challenge | Model completeness is critical | Changed guardian/vendor/shared-device assumptions |
+| 4 | LO-03 causal diagnostic table | Vulnerable fixture diagnosis | Annotated SECURITY.md and failure grouping | Seeded review and examiner findings | Alternate mechanism slogan |
+| 5 | LO-05 oracle and evidence modes | Cross-tenant evidence trace | Forbidden-outcome matrix | Four evidence modes required | Evidence revised for delegated/time-dependent actions |
+| 6 | LO-06 event-to-response sequence | Privacy-safe authorization event | Operate paragraph | Detection/recovery and human factors | Worker/webhook operational delta |
+| 7 | LO-07 changed-system analysis | Comparison categories | Independent transfer deliverable | Transfer-ready criteria | CivicClinic is the transfer case |
 
-## Invariant prompts
+Missing explanation, practice, assessment, or transfer evidence for an outcome blocks publishable depth.
 
-- What must still be true if the client is hostile and fully modified?
-- What must still be true if an operator, backup, or log pipeline is compromised?
-- Who is allowed to cause which state change, and how would we *notice* a forbidden change?
-- If this mechanism were public knowledge (open design), would the property still hold?
-- Which property are we *not* claiming, and why is that an explicit non-goal?
+## Core model
 
-## Threat-model prompts
+A security claim is represented as:
 
-- If this invariant is false, who is harmed and how (user, tenant, operator, bystander)?
-- What is the smallest change to assets or actors that invalidates the catalogue?
-- Which claims depend on the browser, the OS, the cloud provider, or the learner’s honesty in the lab?
+1. **Asset and required outcome**
+2. **Subject, action, object, and allowed condition**
+3. **Attacker capabilities**
+4. **Trusted and explicitly untrusted components**
+5. **Relevant state and time horizon**
+6. **Forbidden observable outcome**
+7. **Candidate mechanisms and their limits**
+8. **Normal, negative, abuse, and failure evidence**
+9. **Detection, response, and recovery**
+10. **Residual risk, non-goals, and review triggers**
 
-## Lesson inventory (titles only)
+The model distinguishes confidentiality, integrity, availability, authenticity, authorization, accountability, privacy, and safety as prompts rather than universal checkboxes. A learner may omit a property only by recording a reasoned non-goal and review trigger.
 
-| Object id | Kind | Title | Loop step |
+## SecureCollab Phase 1 model
+
+### Included now
+
+- tenants and tenant membership;
+- tenant members and administrators;
+- text notes;
+- privacy-safe security events;
+- request, retained-log, export, deletion, and restore time horizons as design concerns.
+
+### Deferred and review-triggering
+
+- files and public sharing;
+- support impersonation;
+- background workers, webhooks, queues, and caches;
+- billing simulation;
+- offline mobile state;
+- production deployment, real PII, real payments, and cloud-administrator assurance.
+
+### Minimum adversaries
+
+- unauthenticated internet client;
+- authenticated cross-tenant member with a fully controlled browser;
+- stale or over-privileged tenant administrator;
+- faulty or abusive authorized client;
+- operator with ordinary log access;
+- privileged infrastructure administrator as a recorded residual-risk case.
+
+### Intended trusted computing base
+
+The model may depend on a server-side policy path, persistence transaction, structured event constructor, and evidence store for narrowly stated behaviors. Browser claims, client-supplied tenant labels, UI visibility, scanner status, and mechanism secrecy are never trusted enforcement.
+
+Modules 1.2 and 1.3 refine authority and boundaries; this module must not pre-claim their implementation evidence.
+
+## Misconceptions to diagnose
+
+- Security is a Top 10, CWE, CVE, scanner, certification, or product list.
+- CIA labels are complete without product-specific assets and harms.
+- TLS, JWT, password hashing, encryption, validation, or logging is itself the property.
+- Authentication implies authorization.
+- A successful happy path or status code proves the invariant.
+- Configuration presence proves alternate and failure paths.
+- Privacy equals confidentiality; safety equals availability.
+- “Always” and “never” need no channel, time, or trust boundary.
+- Prevention eliminates the need for privacy-safe evidence and recovery.
+- A generated reviewer stamp or schema-valid file is independent semantic review.
+
+## Seven-step learning inventory
+
+| Object | Kind | Learning-loop role | Output |
 |---|---|---|---|
-| 1.1-LO-01 | concept-model | Property vs mechanism: eight named properties as invariants | 1 Property |
-| 1.1-LO-02 | design-exercise | Sketch SecureCollab assets and write a first invariant catalogue | 2 Model |
-| 1.1-LO-03 | mechanism-lab | Observe a local app claim (“passwords are hashed”) and restate the actual property | 3 Break (authorized local only: failed property, not a public exploit) |
-| 1.1-LO-04 | design-exercise | Replace a named tool with the smallest trustworthy mechanism that would restore one invariant | 4 Build |
-| 1.1-LO-05 | verification-lab | List forbidden outcomes and what evidence would show they did not occur | 5 Verify |
-| 1.1-LO-06 | operations-exercise | For one invariant, note log/alert/revoke/recover if prevention is not absolute | 6 Operate |
-| 1.1-LO-07 | transfer-challenge | Unfamiliar product card: catalogue without naming a scanner or Top 10 item | 7 Generalize |
-| 1.1-LO-08 | code-review | Seeded README/security.md that confuses controls with properties (find the confusion) | 5 Verify |
+| 1.1-LO-01 | concept-model | Property | Bounded claim rewrite |
+| 1.1-LO-02 | design-exercise | Model | SecureCollab invariant catalogue |
+| 1.1-LO-03 | mechanism-lab | Break | Causal diagnosis and vulnerable/fixed lab evidence |
+| 1.1-LO-04 | design-exercise | Build | Property-derived mechanism design record |
+| 1.1-LO-05 | verification-lab | Verify | Four-mode forbidden-outcome matrix |
+| 1.1-LO-06 | operations-exercise | Operate | Privacy-safe detection/response/recovery section |
+| 1.1-LO-07 | transfer-challenge | Generalize | CivicClinic catalogue and comparison memo |
+| 1.1-LO-08 | code-review | Verify/communicate | Actionable review of mechanism-only claims |
 
-## Lab briefs (not implementations)
+The sequence reduces scaffolding: LO-01 models the method, LO-02 guides construction, LO-03/04/05 challenge and repair it, LO-06 extends it operationally, and LO-07 requires independent transfer.
 
-**Lab `1.1-invariant-catalogue` (authorized scope: local course materials / synthetic SecureCollab description only).**
+## Lab contract
 
-- **Invariant:** The learner’s catalogue is specific enough that a second person can mark each line as testable or as an unjustified mechanism-claim.
-- **Forbidden outcome:** Submitting a tool list, a copied CIA triad definition with no system names, or instructions that target a non-lab system.
-- **Evidence:** Versioned markdown (or YAML) catalogue in the learner’s notes for SecureCollab Phase 1; instructor rubric against Gate 1.
-- **Non-goals:** No injection, no credential theft, no live-target work. Mechanism-lab 1.1-LO-03 uses a **local** toy service or fixture created for the course.
+**Path:** labs/1.1/1.1-invariant-catalogue
 
-## Assessment blueprint
+**Authorized scope:** local course files and synthetic SecureCollab data only. No service is started and no network target is needed.
 
-| Category | What is assessed | Artifact |
-|---|---|---|
-| Explain | Property vs mechanism; eight properties as system-specific invariants | Short written rationale in the catalogue |
-| Design | Catalogue completeness for stated assets and non-goals | Invariant catalogue v1 for SecureCollab |
-| Build | N/A at spec time; later a one-file fixture that *states* a property in tests | Placeholder until Pass B |
-| Break | Identify a stated control that does not imply the claimed property | Annotation on a seeded “we are secure because X” claim (local) |
-| Verify | Forbidden-outcome list and how it would be tested | Negative-evidence notes |
-| Operate | Detection/recovery note for at least one non-absolute prevention | Operate paragraph |
-| Communicate | Residual risk / explicit non-goals without compliance theater | Non-goals and residual-risk lines |
+**Invariant:** a submitted catalogue is bounded and semantically shaped for independent review rather than being a mechanism slogan.
 
-Gate 1 (with 1.2–1.4): given an unfamiliar product, define security without naming a particular tool or vulnerability and justify which outcomes matter most. Transfer-ready requires the unfamiliar-product card (1.1-LO-07), not only SecureCollab.
+**Vulnerable behavior:** a universal security conclusion, public-target text, insufficient catalogue rows, and missing model/evidence/operation fields cause the selected-catalogue test to fail.
 
-Mastery states: `not-attempted` | `developing` | `competent` | `transfer-ready`. Security-critical gaps cannot be hidden by high scores elsewhere (no compensating averages).
+**Fixed behavior:** five module-specific claims pass semantic and safety checks.
 
-## Standards references
+**Structural fix:** versioned claim records connect product model, forbidden outcome, mechanism limits, four evidence modes, detection/recovery, residual risk, and review triggers.
 
-| source | version | status | requirementIds | url |
-|---|---|---|---|---|
-| Saltzer & Schroeder | 1975 | seminal | protection-principles (economy of mechanism, fail-safe defaults, complete mediation, open design, separation of privilege, least privilege, least common mechanism, psychological acceptability, work factor, compromise recording) | https://web.mit.edu/saltzer/www/publications/protection/ |
-| NIST CSF | 2.0 | final | GV, ID, PR, DE, RS, RC (Functions as *outcome* categories, not a control menu) | https://www.nist.gov/publications/nist-cybersecurity-framework-csf-20 |
+**Limits:** the validator detects selected defects. Passing it is not proof that an implementation exists or satisfies the catalogue.
 
-Pinned in `content/standards/pins.yaml` on 2026-08-23. Do not present CSF as a vulnerability standard or as ASVS.
+**Clean-run requirement:** record exact vulnerable-fail and fixed-pass commands in the independent review artifact.
+
+## Assessment architecture
+
+Critical dimensions are:
+
+- bounded property and product model;
+- attacker/trust/state/time;
+- causal property-to-mechanism reasoning;
+- forbidden-outcome and four-mode evidence;
+- safe lab interpretation;
+- operations and residual risk;
+- materially changed transfer.
+
+Every critical dimension must be satisfactory; scores do not compensate. Knowledge checks may be retryable at 80%, but practical evidence controls Gate 1 contribution. Transfer-ready requires satisfactory CivicClinic evidence and an explanation of which SecureCollab assumptions fail.
+
+Learner prompts remain under this module’s assessment directory. Intended findings and examples remain only under content/assessment/keys/1.1.md.
+
+## Standards
+
+- **Saltzer and Schroeder, 1975, seminal:** exact named principles—economy of mechanism, fail-safe defaults, complete mediation, open design, separation of privilege, least privilege, least common mechanism, psychological acceptability, work factor, and compromise recording. These principles critique mechanisms; they do not prove a system property.
+- **NIST CSF 2.0, final:** GV, ID, PR, DE, RS, and RC are outcome functions. They help prevent a prevention-only catalogue but are not a verification baseline.
+- **ASVS 5.0.0:** intentionally not mapped at requirement level in this first-principles module. Later implementation modules map exact verification requirements; adding unrelated ASVS IDs here would be compliance theater.
+
+Canonical pins are recorded in content/standards/pins.yaml and were reviewed on 2026-08-25.
 
 ## Review triggers
 
-- SecureCollab adds a new asset class (files, webhooks, AI summarizer, billing simulation).
-- A new principal class (support impersonation, mobile offline cache, background worker).
-- Time horizon changes (long-lived backup vs session).
-- A lesson author starts organizing later modules as a Top 10 rotation (reject; keep causal order).
+Reopen the module when:
 
-## Time budget and SecureCollab / milestone dependencies
+- SecureCollab gains a new asset, principal, boundary, state transition, channel, or time horizon;
+- the lab validator begins passing mechanism slogans or rejecting bounded claims for superficial reasons;
+- a standards source changes status or version;
+- human recovery, operator compromise, or accessibility assumptions change;
+- generated prose or automated stamps are proposed as review evidence;
+- the curriculum is reorganized around an awareness list.
 
-- **Budget:** ~240 focused minutes (authoring mix later: heavy on models; light on break/fix).
-- **SecureCollab (blueprint §9.1 Phase 1):** asset, invariant, authority, boundary, and risk models—**before features**. This module owns the invariant catalogue; 1.2–1.4 extend authority, boundaries, and risk.
-- **Milestones:** no M0 evidence yet. Catalogue becomes an input to M0 once Phase 2 exists.
-- **Does not depend on** FastAPI/Next.js implementation details; stack defaults still apply to later labs.
+## Publishability decision
 
-## Operational considerations
-
-- Accountability invariants imply what must be logged (and what must not, for privacy).
-- Availability and safety invariants imply graceful degradation, not “the site is up.”
-- Human action as part of a control (approval, recovery) must later be usable and WCAG-aware (1.4 / 4.2); this module only flags that usability is part of the property, not a UI skin.
-- Compromise recording (Saltzer) is an invariant about evidence existing under attack, not a SIEM product name.
+Publication requires schema validity, the clean vulnerable/fixed lab pair, semantic scores of at least 2 on every required quality dimension, no critical blocker, an independent quality review, an independent lab-safety review, and a dated review artifact. STATUS is updated only after that evidence exists.
 
 ## Changelog
 
-| date | note |
+| Date | Change |
 |---|---|
-| 2026-08-23 | Pass A initial specification |
-| 2026-08-23 | Pass A quality-gate: spec completeness competent |
+| 2026-08-23 | Pass A specification and initial Pass B/C pilot |
+| 2026-08-25 | Rebuilt as the semantic-depth reference with coverage contract, causal lessons, executable semantic lab, aligned assessment, and independent-review requirement |

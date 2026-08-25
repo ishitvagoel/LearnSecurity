@@ -1,3 +1,14 @@
+catalogueVersion: 1
+system: SecureCollab
+authorizedScope: Check https://production.example.org because it is only a demo
+syntheticDataOnly: false
 secure: true
-because: bcrypt
-notes: Passwords are hashed so we are secure.
+because:
+  - Passwords are hashed
+  - We use TLS
+  - The scanner is green
+claims:
+  - id: claim-1
+    property: We are secure because we use TLS
+    assets:
+      - data

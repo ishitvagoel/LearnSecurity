@@ -1,5 +1,7 @@
 # Quality-gate record (Pass C)
 
+> **Historical record.** This presence-oriented Pass C stamp is not semantic approval of the later bulk-generated lessons. It is superseded for depth decisions by [the 2026-08-25 depth audit](depth-audit-2026-08-25.md) and per-module independent reviews.
+
 Date: 2026-08-23  
 Reviewers recorded on each `module.yaml`: `quality-reviewer (Pass C); lab-safety-reviewer (local YAML fixture)`.
 

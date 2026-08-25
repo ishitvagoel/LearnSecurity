@@ -4,152 +4,173 @@ title: Security as invariants under attack
 phase: 1
 track: core
 difficulty: foundation
-status: reviewed
-estimatedMinutes: 240
+status: published
+estimatedMinutes: 420
 prerequisites:
-- 'Entry profile: small database-backed API, Git, tests, basic SQL'
-- 0.1 vocabulary recommended, not blocking for Phase 1 spec pilot
+  - 'Entry profile: small database-backed API, Git, tests, and basic SQL'
+  - 'Module 0.1 vocabulary is recommended but not blocking'
 routeTags:
-- complete
-- accelerated
-- web-api
-- mobile
+  - complete
+  - accelerated
+  - web-api
+  - mobile
 releaseMilestone: null
 outcomes:
-- Produce a system-specific invariant catalogue for SecureCollab that a reviewer can test
-- Separate desired security properties from mechanisms and framework defaults
-- Name attacker capabilities, trust assumptions, and time horizon for each invariant
-- Pair prevention claims with detection and recovery where prevention is not absolute
-- Transfer the catalogue method to an unfamiliar product without naming a tool or Top 10 item
-  as the definition of security
+  - Produce a versioned SecureCollab invariant catalogue with at least five testable system-specific rows
+  - Separate desired properties from mechanisms, mechanism limits, framework defaults, and evidence
+  - Bound claims with assets, attacker capabilities, trust, state, time, forbidden outcomes, residual risk, and review triggers
+  - Distinguish root cause, preconditions, impact, prevention, detection, and recovery for a mechanism-only assurance failure
+  - Specify normal, negative, abuse, and failure evidence without treating control presence as proof
+  - Design privacy-safe operational evidence and bounded response and recovery
+  - Transfer the method to a materially changed system and explain which original claims fail
 reviewTriggers:
-- New SecureCollab asset class (files, webhooks, simulated billing, AI summarizer)
-- New principal class (support, worker, mobile offline client)
-- Changed time horizon (backups, long-lived tokens, offline cache)
-- Attempt to reorganize later content as a Top 10 rotation
+  - SecureCollab gains a new asset, principal, boundary, state transition, channel, or time horizon
+  - The lab validator passes a mechanism slogan or rejects a bounded claim for a superficial reason
+  - Standards sources change status or version
+  - Human recovery, operator compromise, or accessibility assumptions change
+  - Generated prose or automated stamps are proposed as semantic review evidence
 invariants:
-- Catalogue entries are properties of this system, not product or scanner names
-- Each claimed property names who/what is trusted and what the attacker can do
-- Non-goals and residual risk are explicit
-- No live-target or real-PII instructions appear in this module
+  - Security claims identify subject, action, object, allowed condition, attacker capability, trust, state, and time
+  - Properties remain separate from candidate mechanisms and their limits
+  - Important claims name observable forbidden outcomes and normal, negative, abuse, and failure evidence
+  - Prevention is paired with privacy-safe detection and bounded recovery when it is not absolute
+  - Residual risk, non-goals, and product-change review triggers are explicit
+  - No live target, real PII, production credential, or implementation proof claim appears
 threatModelPrompts:
-- If this invariant is false, who is harmed and how?
-- What smallest change to assets or actors invalidates the catalogue?
-- Which claims depend on browser, OS, cloud provider, or lab honesty?
+  - Which concrete observation would falsify this invariant?
+  - What can the attacker already do, and which client-controlled labels must be ignored?
+  - Which smallest trusted component enforces the property, and what happens if it fails?
+  - Which channel, retained state, retry, deletion, or restore interval is missing?
+  - Which product change invalidates the row rather than merely extending it?
 concepts:
-- property-versus-mechanism
-- confidentiality
-- integrity
-- availability
-- authenticity
-- authorization
-- accountability
-- privacy
-- safety
-- attacker-capabilities
-- trust-assumptions
-- evidence-of-property
-- detection-and-recovery
+  - security-invariant
+  - property-versus-mechanism
+  - claim-envelope
+  - confidentiality
+  - integrity
+  - availability
+  - authenticity
+  - authorization
+  - accountability
+  - privacy
+  - safety
+  - attacker-capabilities
+  - trust-assumptions
+  - state-and-time
+  - forbidden-outcome
+  - mechanism-limits
+  - evidence-oracle
+  - detection-response-recovery
+  - residual-risk
+  - review-trigger
 learningObjects:
-- id: 1.1-LO-01
-  kind: concept-model
-  title: 'Property vs mechanism: eight named properties as invariants'
-  path: lessons/01-property-vs-mechanism.md
-- id: 1.1-LO-02
-  kind: design-exercise
-  title: Sketch SecureCollab assets and write a first invariant catalogue
-  path: lessons/02-securecollab-catalogue.md
-- id: 1.1-LO-03
-  kind: mechanism-lab
-  title: Observe a local app claim (“passwords are hashed”) and restate the actual property
-  path: lessons/03-local-hashed-claim.md
-- id: 1.1-LO-04
-  kind: design-exercise
-  title: Replace a named tool with the smallest trustworthy mechanism that would restore one
-    invariant
-  path: lessons/04-smallest-mechanism.md
-- id: 1.1-LO-05
-  kind: verification-lab
-  title: List forbidden outcomes and evidence they did not occur
-  path: lessons/05-forbidden-outcomes.md
-- id: 1.1-LO-06
-  kind: operations-exercise
-  title: Log, alert, revoke, or recover when prevention is not absolute
-  path: lessons/06-operate.md
-- id: 1.1-LO-07
-  kind: transfer-challenge
-  title: 'Unfamiliar product card: catalogue without a scanner or Top 10'
-  path: lessons/07-transfer.md
-- id: 1.1-LO-08
-  kind: code-review
-  title: Seeded security.md that confuses controls with properties
-  path: lessons/08-code-review.md
+  - id: 1.1-LO-01
+    kind: concept-model
+    title: Security is a claim about outcomes
+    path: lessons/01-property-vs-mechanism.md
+  - id: 1.1-LO-02
+    kind: design-exercise
+    title: Build SecureCollab's first invariant catalogue
+    path: lessons/02-securecollab-catalogue.md
+  - id: 1.1-LO-03
+    kind: mechanism-lab
+    title: Break a mechanism-only security claim
+    path: lessons/03-local-hashed-claim.md
+  - id: 1.1-LO-04
+    kind: design-exercise
+    title: Build the smallest mechanism that restores an invariant
+    path: lessons/04-smallest-mechanism.md
+  - id: 1.1-LO-05
+    kind: verification-lab
+    title: Verify forbidden outcomes, not control presence
+    path: lessons/05-forbidden-outcomes.md
+  - id: 1.1-LO-06
+    kind: operations-exercise
+    title: Preserve useful outcomes when prevention fails
+    path: lessons/06-operate.md
+  - id: 1.1-LO-07
+    kind: transfer-challenge
+    title: Transfer the method to a changed system
+    path: lessons/07-transfer.md
+  - id: 1.1-LO-08
+    kind: code-review
+    title: Review a security document as an engineering claim
+    path: lessons/08-code-review.md
 labSpec:
-  authorizedScope: Local course materials and synthetic SecureCollab description only; no
-    public or third-party targets
+  authorizedScope: Local course files and synthetic SecureCollab data only; no service or network target is required
   slug: 1.1-invariant-catalogue
-  summary: Local YAML/SECURITY.md fixture; tests require property-shaped claims
+  summary: Semantic catalogue validator rejects mechanism slogans and requires five bounded, evidenced, operable claims
   forbiddenOutcomes:
-  - Tool list or copied CIA triad with no system-specific names
-  - Instructions targeting a non-lab system
-  - Real PII or production secrets in the catalogue
+    - A control name, awareness list, scanner result, or universal conclusion is accepted as a security invariant
+    - Passing YAML shape is presented as proof that a SecureCollab implementation exists or is secure
+    - A catalogue omits negative, abuse, or failure evidence and still passes
+    - Live-target instructions, real PII, or production credentials enter the lab
 evidenceRequired:
-- Invariant catalogue for SecureCollab Phase 1
-- Annotation of at least one mechanism that does not imply its claimed property
-- Forbidden-outcome and operate notes
-- Transfer catalogue for an unfamiliar product (for transfer-ready)
+  - Five-row SecureCollab invariant catalogue and peer-review classifications
+  - Causal annotation of the vulnerable mechanism-only SECURITY.md
+  - Clean lab record showing vulnerable failure and fixed success for the intended reason
+  - Property-derived mechanism design with alternatives and proof obligations
+  - Four-mode forbidden-outcome evidence matrix
+  - Privacy-safe detection, response, recovery, residual-risk, and human-factor notes
+  - CivicClinic transfer catalogue and comparison memo for transfer-ready evidence
 assessmentBlueprint:
-  explain: Property vs mechanism; eight properties as system-specific invariants
-  design: Invariant catalogue v1 for stated SecureCollab assets and non-goals
-  build: Local fixture tests that reject mechanism-only slogans
-  break: Annotation of a seeded we-are-secure-because-X claim on a local artifact
-  verify: Forbidden-outcome list and proposed negative evidence
-  operate: Detection/recovery note for one non-absolute prevention
-  communicate: Residual risk and explicit non-goals without compliance theater
+  explain: Explain why a bounded property differs from a mechanism, framework default, and evidence item
+  design: Produce and defend a five-row SecureCollab catalogue with a complete claim envelope
+  build: Derive the smallest candidate mechanism for one property and state proof obligations and limits
+  break: Diagnose the local mechanism-only claim by root cause, preconditions, impact, and false assurance
+  verify: Specify normal, negative, abuse, and failure evidence with property oracles
+  operate: Design privacy-safe signals, containment, root-cause repair, recovery validation, and communication
+  communicate: Review mechanism-only claims and explain residual risk and non-goals without universal language
 masteryGate: '1'
 standardsRefs:
-- source: Saltzer & Schroeder, The Protection of Information in Computer Systems
-  version: '1975'
-  status: seminal
-  requirementIds:
-  - protection-principles
-  url: https://web.mit.edu/saltzer/www/publications/protection/
-- source: NIST Cybersecurity Framework (CSF) 2.0
-  version: '2.0'
-  status: final
-  requirementIds:
-  - GV
-  - ID
-  - PR
-  - DE
-  - RS
-  - RC
-  url: https://www.nist.gov/publications/nist-cybersecurity-framework-csf-20
+  - source: Saltzer & Schroeder, The Protection of Information in Computer Systems
+    version: '1975'
+    status: seminal
+    requirementIds:
+      - economy-of-mechanism
+      - fail-safe-defaults
+      - complete-mediation
+      - open-design
+      - separation-of-privilege
+      - least-privilege
+      - least-common-mechanism
+      - psychological-acceptability
+      - work-factor
+      - compromise-recording
+    url: https://web.mit.edu/saltzer/www/publications/protection/
+  - source: NIST Cybersecurity Framework (CSF) 2.0
+    version: '2.0'
+    status: final
+    requirementIds:
+      - GV
+      - ID
+      - PR
+      - DE
+      - RS
+      - RC
+    url: https://www.nist.gov/publications/nist-cybersecurity-framework-csf-20
 misconceptions:
-- Security is a vulnerability list, Top 10, or green scanner
-- CIA are universal checkboxes independent of the product
-- Naming TLS, JWT, or bcrypt is the security property
-- Happy-path success implies the invariant holds
-- Privacy equals confidentiality; safety equals availability
-- A control that usually works needs no detection or recovery
-- Framework or cloud secure defaults are application guarantees
+  - Security is a Top 10, CWE, CVE, scanner, certification, or product list
+  - CIA labels are complete without product-specific assets, authority, and harms
+  - TLS, JWT, password hashing, encryption, validation, or logging is itself the property
+  - Authentication implies authorization
+  - A happy path, status code, configuration, or control-presence test proves the invariant
+  - Privacy equals confidentiality and safety equals availability
+  - Universal language needs no channel, time horizon, or trust assumption
+  - Prevention eliminates the need for privacy-safe detection and recovery
+  - Generated reviewer metadata or schema validity is independent semantic review
 operationalConsiderations:
-- Accountability invariants constrain what must be logged and withheld (privacy)
-- Availability and safety imply graceful degradation, not mere uptime
-- Compromise recording is an evidence property, not a SIEM product
-- Human-in-the-loop controls must later be usable and accessible (modules 1.4, 4.2)
-author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (Pass C); lab-safety-reviewer (local YAML fixture)
-lastReviewedAt: '2026-08-23'
-nextReviewAt: '2027-02-23'
+  - Accountability evidence must remain useful without collecting note bodies, passwords, tokens, or unnecessary personal attributes
+  - Evidence-pipeline failure behavior is part of the claim and must not silently turn denial into success
+  - Containment authority, blast radius, root-cause repair, recovery validation, and communication are explicit
+  - Operator compromise and concentration of control over state and evidence remain residual risks
+  - Human response and recovery paths require clear status, accessible alternatives, and safe failure behavior
+author: OpenAI Codex / deepen-curriculum
+reviewer: quality-reviewer (independent semantic review); lab-safety-reviewer (independent local-lab review)
+lastReviewedAt: '2026-08-25'
+nextReviewAt: '2027-02-25'
 changelog:
-- date: '2026-08-23'
-  note: Pass A initial specification
-- date: '2026-08-23'
-  note: 'Pass A quality-gate: spec completeness competent; reviewer recorded'
-- date: '2026-08-23'
-  note: Pass B lessons and lab; Pass C rubric
-- date: '2026-08-23'
-  note: Pass B lessons and authorized local lab
-- date: '2026-08-23'
-  note: Pass C rubric and examiner keys; quality-gate recorded
+  - date: '2026-08-23'
+    note: Pass A specification and initial Pass B/C pilot
+  - date: '2026-08-25'
+    note: Rebuilt as semantic-depth reference; independent semantic and lab-safety reviews passed

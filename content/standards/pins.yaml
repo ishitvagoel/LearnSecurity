@@ -9,7 +9,7 @@ pins:
     version: "1975"
     status: final
     publishedAt: "1975"
-    reviewedAt: "2026-08-23"
+    reviewedAt: "2026-08-25"
     url: "https://web.mit.edu/saltzer/www/publications/protection/"
     role: "Timeless protection principles; property vs mechanism"
     notes: "Seminal invited paper (IEEE), not a numbered standard. Pin status uses 'final' only to mean the 1975 text is the stable canonical source (not a draft). Module metadata labels status as seminal."
@@ -18,7 +18,7 @@ pins:
     version: "2.0"
     status: final
     publishedAt: "2024-02-26"
-    reviewedAt: "2026-08-23"
+    reviewedAt: "2026-08-25"
     url: "https://www.nist.gov/publications/nist-cybersecurity-framework-csf-20"
     role: "Govern, Identify, Protect, Detect, Respond, Recover outcome taxonomy"
     notes: "NIST CSWP 29. CSF states outcomes; it does not prescribe controls. Do not treat CSF Functions as a vulnerability checklist or as proof of security."
@@ -36,10 +36,10 @@ pins:
     version: "5.0.0"
     status: final
     publishedAt: "2025-05-30"
-    reviewedAt: "2026-08-23"
+    reviewedAt: "2026-08-25"
     url: "https://owasp.org/www-project-application-security-verification-standard/"
     role: "Web/API security requirements and assurance baseline"
-    notes: "Project page confirms latest stable 5.0.0 released 30 May 2025. Identifiers: v5.0.0-<chapter>.<section>.<requirement>. Do not mix ASVS 4.x IDs. Level 2 is the normal commercial target later; this module only maps V8 Authorization and V15 Secure Coding and Architecture at chapter level."
+    notes: "Project page confirms latest stable 5.0.0 released 30 May 2025. Identifiers: v5.0.0-<chapter>.<section>.<requirement>. Do not mix ASVS 4.x IDs. Level 2 is the normal commercial target later. Module 1.1 intentionally does not map ASVS requirements; later implementation modules must use exact v5.0.0 identifiers."
   - id: owasp-threat-modeling
     source: OWASP Threat Modeling Project
     version: "maintained-project-guidance"

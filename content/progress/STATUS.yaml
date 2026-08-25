@@ -1,7 +1,7 @@
 # Curriculum generation status
 
-# Source of truth for sequencing: blueprint §7 and AGENTS.md.
-# pass: none | A | B | C | D | E
+# Source of truth for sequencing: blueprint section 7 and AGENTS.md.
+# pass records historical authoring passes; it does not imply semantic publication.
 # depth: map-complete | publishable
 # quality: not-attempted | developing | competent | transfer-ready
 
@@ -14,15 +14,19 @@ defaults:
   ai_security: elective E1
   website_progress: local-first static site (site/); no accounts
 next:
-  id: null
-  pass: null
-  skill: null
-  inner_skill: null
-  note: 'Content generation complete for all listed units. Lessons rewritten to unique
-    1.2-density (1.1/1.2 kept as reference). Structural labs verified this session
-    (vulnerable fail / fixed pass). Gates 0–10 and M0–M5 remain not-attempted (no
-    learner/product evidence). Labs local-only.'
+  id: '1.2'
+  pass: revise
+  skill: deepen-curriculum
+  inner_skill: standards-pin
+  note: Depth queue reopened after semantic audit. Revise one module at a time; generated
+    scaffolds remain map-complete until independent review passes.
 spiral_deltas:
+- date: '2026-08-25'
+  module: all
+  change: Depth audit invalidated generator-derived publishable claims; Module 1.1
+    selected as the independently reviewed reference revision
+  retest: Use semantic quality rubric, clean vulnerable/fixed lab pair, and dated
+    review artifact for each queued module
 - date: '2026-08-23'
   module: '1.1'
   change: Phase 1 invariant catalogue language and local claim fixture
@@ -74,415 +78,467 @@ spiral_deltas:
   module: 0.1–11 + E1–E6 except 1.1/1.2
   change: Unique 1.2-density lesson packs, module-specific assessments/keys, 0.1/0.2
     slugs pointed at structural labs; leftover slogan YAML labs removed
-  retest: jsonschema all module.yaml; pytest --impl pair on structural labs; 1.1 --claim pair
+  retest: jsonschema all module.yaml; pytest --impl pair on structural labs; 1.1 --claim
+    pair
 modules:
 - id: '0.1'
   title: Security engineering orientation
   phase: 0
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '0.2'
   title: Diagnostic and adaptive bridge
   phase: 0
   track: bridge
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '1.1'
   title: Security as invariants under attack
   phase: 1
   track: core
   pass: E
   quality: competent
-  notes: 'Pass E 2026-08-23: site export + independent review record; labs still local-only'
+  notes: Depth remediation passed independent semantic and lab-safety review on 2026-08-25;
+    see progress/reviews/1.1-2026-08-25.md
   depth: publishable
 - id: '1.2'
   title: Authority and protection
   phase: 1
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '1.3'
   title: Trust boundaries and attack surface
   phase: 1
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '1.4'
   title: Risk, people, economics, usable security, and resilience
   phase: 1
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '2.1'
   title: Bytes, text, formats, parsers, and interpreters
   phase: 2
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '2.2'
   title: DNS, transport, HTTP, TLS, proxies, CDNs, and caches
   phase: 2
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '2.3'
   title: Browser security model
   phase: 2
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '2.4'
   title: State, time, concurrency, and distributed failure
   phase: 2
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '3.1'
   title: Assets, data classification, and security requirements
   phase: 3
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '3.2'
   title: Threat modeling
   phase: 3
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '3.3'
   title: Secure architecture patterns
   phase: 3
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '3.4'
   title: Business logic and abuse-resistant design
   phase: 3
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '4.1'
   title: Digital identity and account lifecycle
   phase: 4
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '4.2'
   title: Authentication, phishing resistance, and usable access
   phase: 4
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '4.3'
   title: Sessions, cookies, and tokens
   phase: 4
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '4.4'
   title: Authorization and tenant isolation
   phase: 4
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '4.5'
   title: OAuth, OpenID Connect, browser apps, and native apps
   phase: 4
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '5.1'
   title: Data lifecycle and privacy engineering
   phase: 5
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '5.2'
   title: Cryptographic properties and safe use
   phase: 5
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '5.3'
   title: Key and secret lifecycle
   phase: 5
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '5.4'
   title: Secure communication and channel binding
   phase: 5
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '5.5'
   title: Database and persistence security
   phase: 5
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '6.1'
   title: Interpreter confusion and injection
   phase: 6
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '6.2'
   title: Browser injection and active content
   phase: 6
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '6.3'
   title: Cross-site and cross-context attacks
   phase: 6
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '6.4'
   title: Files, paths, uploads, archives, XML, and deserialization
   phase: 6
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '6.5'
   title: Server-side requests and protocol parsing
   phase: 6
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '6.6'
   title: Workflow, race, and exceptional-condition failures
   phase: 6
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '6.7'
   title: Resource abuse, automation, and availability
   phase: 6
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '7.1'
   title: API contracts, protocols, and inventory
   phase: 7
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '7.2'
   title: Object, property, and function security
   phase: 7
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '7.3'
   title: Webhooks, callbacks, and third-party APIs
   phase: 7
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '7.4'
   title: Queues, workers, events, and service identity
   phase: 7
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '8.1'
   title: The hostile-client and mobile-platform model
   phase: 8
   track: mobile
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '8.2'
   title: Local data, keys, biometrics, offline state, and leakage surfaces
   phase: 8
   track: mobile
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '8.3'
   title: Network, deep links, WebViews, and inter-app communication
   phase: 8
   track: mobile
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '8.4'
   title: Build, distribution, attestation, and resilience
   phase: 8
   track: mobile
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '8.5'
   title: Mobile verification and privacy
   phase: 8
   track: mobile
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '9.1'
   title: Verification requirements and traceability
   phase: 9
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '9.2'
   title: Secure code review
   phase: 9
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '9.3'
   title: Security-focused tests
   phase: 9
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '9.4'
   title: Automated analysis and tool orchestration
   phase: 9
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '9.5'
   title: Penetration testing, reporting, and remediation
   phase: 9
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '10.1'
   title: Secure software lifecycle and security culture
   phase: 10
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '10.2'
   title: Source control, CI/CD, dependencies, and software supply chain
   phase: 10
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '10.3'
   title: Cloud, serverless, containers, Kubernetes, and IaC
   phase: 10
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '10.4'
   title: Deployment and configuration hardening
   phase: 10
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: '10.5'
   title: Logging, detection, incident response, recovery, and maintenance
   phase: 10
   track: core
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 capstone:
   id: '11'
   title: Integrating capstone — SecureCollab
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 gates:
 - id: 0
   after: Phase 0
@@ -528,44 +584,50 @@ electives:
   title: AI, LLM, and agentic application security
   opens_after_phase: 7
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: E2
   title: Advanced browser and edge security
   opens_after_phase: 7
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: E3
   title: Payments, financial, health, and other high-assurance systems
   opens_after_phase: 7
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: E4
   title: Memory safety and native-code boundaries
   opens_after_phase: 7
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: E5
   title: Large-scale authorization and multi-tenant SaaS
   opens_after_phase: 7
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 - id: E6
   title: Product security leadership
   opens_after_phase: 7
   pass: E
-  quality: competent
-  notes: Deepened 2026-08-23 to publishable vs 1.1 bar; structural local lab verified
-  depth: publishable
+  quality: developing
+  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
+    review required
+  depth: map-complete
 milestones:
 - id: M0
   title: Observable skeleton
@@ -594,4 +656,62 @@ milestones:
 revision:
   skill: deepen-curriculum
   reference_module: '1.1'
-  remaining: []
+  auditedAt: '2026-08-25'
+  remaining:
+  - '1.2'
+  - '1.3'
+  - '1.4'
+  - '2.1'
+  - '2.2'
+  - '2.3'
+  - '2.4'
+  - '0.1'
+  - '0.2'
+  - '3.1'
+  - '3.2'
+  - '3.3'
+  - '3.4'
+  - '4.1'
+  - '4.2'
+  - '4.3'
+  - '4.4'
+  - '4.5'
+  - '5.1'
+  - '5.2'
+  - '5.3'
+  - '5.4'
+  - '5.5'
+  - '6.1'
+  - '6.2'
+  - '6.3'
+  - '6.4'
+  - '6.5'
+  - '6.6'
+  - '6.7'
+  - '7.1'
+  - '7.2'
+  - '7.3'
+  - '7.4'
+  - '8.1'
+  - '8.2'
+  - '8.3'
+  - '8.4'
+  - '8.5'
+  - '9.1'
+  - '9.2'
+  - '9.3'
+  - '9.4'
+  - '9.5'
+  - '10.1'
+  - '10.2'
+  - '10.3'
+  - '10.4'
+  - '10.5'
+  - '11'
+  - E1
+  - E2
+  - E3
+  - E4
+  - E5
+  - E6
+depth_audit: content/progress/depth-audit-2026-08-25.md

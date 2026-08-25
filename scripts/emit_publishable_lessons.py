@@ -1,22 +1,25 @@
 #!/usr/bin/env python3
-"""Emit 1.2-density unique lessons, assessments, and module.yaml stamps.
+"""Emit draft lesson and assessment scaffolds for later human deepening.
 
-Skips module 1.1 (reference) and 1.2 (already unique). Rewrites every other unit.
-Does not mark gates or milestones complete.
+The legacy filename is retained so old authoring notes do not break. Generated text
+is not independently reviewed and MUST NOT be treated as publishable. The script
+requires an explicit opt-in and clears review metadata on every file it rewrites.
+Reference modules 1.1 and 1.2 are never modified.
 """
 from __future__ import annotations
 
 import json
+import os
 import re
+from datetime import date
 from pathlib import Path
 
 import yaml
 
-ROOT = Path("/workspace")
+ROOT = Path(os.environ.get("LEARNSECURITY_ROOT", "/workspace"))
 CONTENT = ROOT / "content"
-SKIP_LESSONS = {"1.1", "1.2"}
-TODAY = "2026-08-24"
-REVIEWER = "quality-reviewer (publishable rewrite vs 1.1/1.2 bar)"
+PROTECTED_REFERENCE_MODULES = {"1.1", "1.2"}
+TODAY = date.today().isoformat()
 
 # lab slug overrides where the structural fixture is not `{id}-lab`
 LAB_SLUG = {
@@ -3376,9 +3379,12 @@ Accept a detect/recover note that does not log bodies/secrets. Example signal: {
 def stamp_yaml(mid: str, spec: dict) -> None:
     path = module_dir(mid) / "module.yaml"
     data = yaml.safe_load(path.read_text())
-    data["reviewer"] = REVIEWER
-    data["lastReviewedAt"] = TODAY
-    data["nextReviewAt"] = "2027-02-24"
+    # Generation and review are deliberately separate trust domains. Rewriting a
+    # module invalidates its former review evidence until quality-gate is rerun.
+    data["status"] = "draft"
+    data["reviewer"] = None
+    data["lastReviewedAt"] = None
+    data["nextReviewAt"] = None
     lab = data.get("labSpec") or {}
     lab["slug"] = lab_slug(mid)
     lab["summary"] = spec["forbidden"]
@@ -3416,7 +3422,7 @@ def stamp_yaml(mid: str, spec: dict) -> None:
     ch.append(
         {
             "date": TODAY,
-            "note": "Publishable rewrite: unique 1.2-density lessons, structural lab mapping, Pass C keys isolated",
+            "note": "Draft scaffold regeneration; independent semantic and lab-safety review required",
         }
     )
     data["changelog"] = ch
@@ -3424,6 +3430,11 @@ def stamp_yaml(mid: str, spec: dict) -> None:
 
 
 def main() -> None:
+    if os.environ.get("ALLOW_DRAFT_REGENERATION") != "1":
+        raise SystemExit(
+            "Refusing to rewrite curriculum without ALLOW_DRAFT_REGENERATION=1. "
+            "Generated scaffolds are drafts and cannot confer publishable status."
+        )
     props = [SPECS[k]["property"] for k in SPECS]
     if len(props) != len(set(props)):
         raise SystemExit("duplicate properties")
@@ -3432,22 +3443,18 @@ def main() -> None:
         raise SystemExit("duplicate forbidden outcomes")
     written = []
     for mid, spec in SPECS.items():
-        if mid in SKIP_LESSONS:
-            write_assessment(mid, spec)
-            stamp_yaml(mid, spec)
+        if mid in PROTECTED_REFERENCE_MODULES:
             continue
         write_lessons(mid, spec)
         write_assessment(mid, spec)
         stamp_yaml(mid, spec)
         written.append(mid)
-    print("wrote lessons for", len(written), "modules")
+    print("wrote draft lesson scaffolds for", len(written), "modules")
     print("specs", len(SPECS))
 
 
 if __name__ == "__main__":
     main()
-
-
 
 
 

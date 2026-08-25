@@ -1,13 +1,9 @@
-# Security
+# Security claim structure
 
-## Property
+SecureCollab security is represented as a versioned catalogue of bounded invariants, not a universal conclusion.
 
-Tenant A’s note bodies are not readable by Tenant B via the API, logs, or backups Tenant B can access.
+The fixed catalogue identifies five Phase 1 properties: cross-tenant note confidentiality, authorized state-transition integrity, attributable membership changes, bounded shared-resource availability, and privacy-aware deletion/retention. Every row records attacker capabilities, trusted and untrusted components, time, forbidden outcomes, candidate mechanisms and their limits, four evidence modes, detection/recovery, residual risk, non-goals, and review triggers.
 
-## Mechanism (not the property)
+The catalogue does not claim that an implementation exists or that the listed mechanisms prove the properties. It is a reviewable model that later modules must implement and test. Cloud administrative access, distributed workers, production capacity, real personal data, and future assets remain explicit non-goals or review triggers.
 
-User passwords are stored with a slow password hash. That supports a *password-at-rest* property. It does not imply note confidentiality.
-
-## Attacker and trust
-
-Hostile or merely logged-in client of another tenant; operator-readable logs. Client code is not in the TCB.
+See security_claim.yaml for the structured fixture and the lesson for the reasoning process.
