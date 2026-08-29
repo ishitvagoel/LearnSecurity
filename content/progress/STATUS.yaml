@@ -14,13 +14,20 @@ defaults:
   ai_security: elective E1
   website_progress: local-first static site (site/); no accounts
 next:
-  id: '1.2'
+  id: '1.3'
   pass: revise
   skill: deepen-curriculum
   inner_skill: standards-pin
   note: Depth queue reopened after semantic audit. Revise one module at a time; generated
     scaffolds remain map-complete until independent review passes.
 spiral_deltas:
+- date: '2026-08-25'
+  module: '1.2'
+  change: Authority v2 adds explicit subject-action-object decisions, direct and aggregate
+    mediation, scoped administration, current revocation state, independent approval,
+    privacy-safe operations, and delayed-machine transfer
+  retest: Revisit tenant/export boundaries in 1.3, revocation and usable administration
+    in 1.4 and 4.1-4.4, queued execution in 7.4, and large-scale authorization in E5
 - date: '2026-08-25'
   module: all
   change: Depth audit invalidated generator-derived publishable claims; Module 1.1
@@ -113,10 +120,10 @@ modules:
   phase: 1
   track: core
   pass: E
-  quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
-  depth: map-complete
+  quality: competent
+  notes: Depth remediation passed independent semantic and lab-safety review on 2026-08-25;
+    see progress/reviews/1.2-2026-08-25.md
+  depth: publishable
 - id: '1.3'
   title: Trust boundaries and attack surface
   phase: 1
@@ -658,7 +665,6 @@ revision:
   reference_module: '1.1'
   auditedAt: '2026-08-25'
   remaining:
-  - '1.2'
   - '1.3'
   - '1.4'
   - '2.1'

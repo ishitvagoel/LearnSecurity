@@ -25,12 +25,12 @@ pins:
   - id: cisa-secure-by-design
     source: CISA Secure by Design
     version: "current-public-guidance"
-    status: final
+    status: unverified
     publishedAt: "2023"
-    reviewedAt: "2026-08-23"
+    reviewedAt: "2026-08-25"
     url: "https://www.cisa.gov/securebydesign"
     role: "Product ownership, secure defaults, shift burden off customers"
-    notes: "Living CISA program page, not a versioned ISO-style standard. Live-checked 2026-08-23: manufacturers own security as a core requirement; secure out-of-the-box defaults. Related Secure by Demand guide is customer-facing. Do not treat the pledge as a verification baseline (that is ASVS/MASVS)."
+    notes: "Living CISA program page, not a versioned ISO-style standard. The 2026-08-23 review confirmed manufacturer ownership and secure out-of-the-box defaults, but both the canonical fetch and an independent HTTP fetch returned 403 during the 2026-08-25 Module 1.2 revision. Retain the snapshot only as unverified guidance until the canonical page is fetchable; do not infer a new version or treat pledge language as an assurance baseline."
   - id: owasp-asvs-5.0.0
     source: OWASP Application Security Verification Standard
     version: "5.0.0"
@@ -39,7 +39,7 @@ pins:
     reviewedAt: "2026-08-25"
     url: "https://owasp.org/www-project-application-security-verification-standard/"
     role: "Web/API security requirements and assurance baseline"
-    notes: "Project page confirms latest stable 5.0.0 released 30 May 2025. Identifiers: v5.0.0-<chapter>.<section>.<requirement>. Do not mix ASVS 4.x IDs. Level 2 is the normal commercial target later. Module 1.1 intentionally does not map ASVS requirements; later implementation modules must use exact v5.0.0 identifiers."
+    notes: "Project page confirms latest stable 5.0.0 released 30 May 2025. The 2026-08-25 Module 1.2 check used the immutable v5.0.0 tag, not bleeding-edge master, and pinned V8/V15 identifiers in v5.0.0-<chapter>.<section>.<requirement> form. Do not mix ASVS 4.x IDs. Level 2 is the normal commercial target later; selected Level 3 references remain explicit advanced anchors. Module 1.1 intentionally does not map ASVS requirements."
   - id: owasp-threat-modeling
     source: OWASP Threat Modeling Project
     version: "maintained-project-guidance"

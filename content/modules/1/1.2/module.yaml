@@ -4,163 +4,196 @@ title: Authority and protection
 phase: 1
 track: core
 difficulty: foundation
-status: reviewed
-estimatedMinutes: 240
+status: published
+estimatedMinutes: 480
 prerequisites:
-- '1.1 Pass A: invariant catalogue language'
-- 'Entry profile: small database-backed API, Git, tests, basic SQL'
-- 0.1 vocabulary recommended, not blocking for Phase 1 spec pilot
+  - 'Module 1.1: bounded invariants, attacker capabilities, trust, state, time, and forbidden outcomes'
+  - 'Entry profile: read small typed Python programs and pytest evidence'
 routeTags:
-- complete
-- accelerated
-- web-api
-- mobile
+  - complete
+  - accelerated
+  - web-api
+  - mobile
 releaseMilestone: null
 outcomes:
-- Produce a reviewable SecureCollab authority map and access matrix
-- Model subjects, objects, actions, delegation, capabilities, and ambient authority
-- Apply least privilege, complete mediation, fail-safe defaults, separation of privilege,
-  and secure defaults as design rules
-- Show that skipped checks on indirect paths are complete-mediation failures
-- Transfer the matrix after a new principal or object without treating authentication as authorization
+  - Produce a reviewable SecureCollab authority map and access matrix with subject, object, action, conditions, source of authority, and time
+  - Distinguish authentication, authorization, roles, ACLs, capabilities, delegation, and ambient authority
+  - Derive least privilege, complete mediation, fail-safe defaults, separation of privilege, and secure initial states from forbidden outcomes
+  - Diagnose direct, aggregate, administrative, stale-authority, and unknown-policy failures causally
+  - Design a small trusted policy path with current server-resolved attributes and explicit enforcement points
+  - Turn matrix cells and authority-lifecycle changes into normal, negative, abuse, and failure evidence
+  - Design privacy-safe grant, denial, expiry, revocation, break-glass, and recovery evidence with usable administration
+  - Transfer the authority model to a time-bounded release-approval system with a machine principal and two-person approval
 reviewTriggers:
-- New principal (support impersonation, worker, webhook, mobile client)
-- New object class (files, GraphQL field, search index)
-- Paths that bypass HTTP middleware
-- Multi-tenant cells added to the matrix
+  - A new principal, role, delegation type, capability, emergency path, or machine identity is introduced
+  - An object gains fields with different read or write rules, or a new lifecycle state
+  - A route, cache, worker, retry, import, export, restore, or maintenance path reaches protected state
+  - Authority is cached, embedded in a token, copied to a device, or evaluated across services
+  - Revocation timing, policy availability, evidence durability, or administrative usability changes
+  - ASVS or another pinned source changes version or status
+  - A central policy library or passing tests are presented as proof of complete mediation without an enforcement inventory
 invariants:
-- Every security-relevant action in scope has an explicit subject-object-action rule
-- Unknown or failed policy evaluation denies (fail-safe default)
-- Authentication is not treated as authorization
-- No live-target or real-PII instructions appear in this module
+  - Every in-scope security-relevant effect has a positive current subject-object-action rule and an identified enforcement point
+  - Unknown subject, object, action, grant, state, or policy failure denies for the scoped fixture
+  - Tenant administration is bound to its tenant and action rather than treated as ambient global authority
+  - Delegated authority is no broader than its justified source, scope, constraints, and lifetime
+  - Authentication and identifier knowledge are never treated as sufficient authorization evidence
+  - High-impact illustrative export authority requires the documented independent conditions
+  - Authority evidence excludes note bodies, credentials, tokens, and unnecessary personal data
+  - No public target, real PII, production credential, or implementation-wide assurance claim appears
 threatModelPrompts:
-- Where does ambient authority leak across tenants, roles, or background work?
-- Who can delegate, and can they delegate more than they have?
-- What can an attacker do with any URL the user can see versus a stolen worker identity?
-- 'Who is in the TCB for mediation: application policy, database role, or worker identity?'
+  - Which originating and effective subject causes the effect, and what is the source of that authority?
+  - Which direct, aggregate, administrative, cached, background, retry, restore, or maintenance path can reach the object?
+  - Which subject, object, action, state, or context attribute is controlled by the requester rather than resolved by a trusted component?
+  - What happens when the policy is unknown, stale, unavailable, or changed after authentication?
+  - Can a delegate grant more authority than the issuer has, or keep using it after expiry or revocation?
+  - Which two genuinely independent conditions protect the highest-impact action, and how can each fail?
 concepts:
-- subject
-- object
-- action
-- delegation
-- capability
-- ambient-authority
-- access-matrix
-- least-privilege
-- complete-mediation
-- fail-safe-defaults
-- separation-of-privilege
-- secure-defaults
-- authentication-versus-authorization
-learningObjects:
-- id: 1.2-LO-01
-  kind: concept-model
-  title: Subjects, objects, actions, matrix vs capability vs ambient authority
-  path: lessons/01-property.md
-- id: 1.2-LO-02
-  kind: design-exercise
-  title: SecureCollab authority map and access matrix (org, member, note, file, admin)
-  path: lessons/02-model.md
-- id: 1.2-LO-03
-  kind: mechanism-lab
-  title: 'Local fixture: a handler that trusts ambient current_user without an object check'
-  path: lessons/03-break.md
-- id: 1.2-LO-04
-  kind: design-exercise
-  title: Restore complete mediation and least privilege on that path (structural, not a denylist)
-  path: lessons/04-build.md
-- id: 1.2-LO-05
-  kind: verification-lab
-  title: Turn matrix cells into forbidden-outcome tests (cross-role, cross-object)
-  path: lessons/05-verify.md
-- id: 1.2-LO-06
-  kind: operations-exercise
-  title: 'Revoke and expire: what logs prove who held which authority when'
-  path: lessons/06-operate.md
-- id: 1.2-LO-07
-  kind: transfer-challenge
-  title: 'Add support impersonation or a worker: redraw matrix and name stressed principles'
-  path: lessons/07-transfer.md
-- id: 1.2-LO-08
-  kind: code-review
-  title: Seeded diff that adds an admin JSON route without a policy check
-  path: lessons/08-review.md
-labSpec:
-  authorizedScope: Local course fixture and synthetic SecureCollab description only; no public
-    or third-party targets
-  slug: 1.2-authority-matrix
-  summary: Learner produces an authority map and access matrix; local fixture shows a missing
-    object-level check
-  forbiddenOutcomes:
-  - Cross-role or cross-object success on the local fixture
-  - Instructions targeting a non-lab system
-  - Treating login success as authorization evidence
-evidenceRequired:
-- Authority map and access matrix for SecureCollab Phase 1
-- Annotation of at least one complete-mediation miss (indirect path or seeded route)
-- Forbidden-outcome test list derived from matrix cells
-- Transfer matrix after a new principal or object (for transfer-ready)
-assessmentBlueprint:
-  explain: Subject/object/action; ambient vs granted authority; authentication is not authorization
-  design: Authority map and access matrix including one indirect path
-  build: Deferred to Pass B; policy check on a local fixture
-  break: Annotation of a local ambient-authority miss or seeded admin route
-  verify: Forbidden cells named as negative tests
-  operate: Revocation, expiry, and audit of who held which authority
-  communicate: Why unbounded admin ambient authority was rejected or bounded
-masteryGate: '1'
-standardsRefs:
-- source: Saltzer & Schroeder, The Protection of Information in Computer Systems
-  version: '1975'
-  status: seminal
-  requirementIds:
+  - authorization-invariant
+  - subject-object-action
+  - originating-subject
+  - effective-subject
+  - access-matrix
+  - access-control-list
+  - role-compression
+  - capability
+  - delegation
+  - attenuation
+  - ambient-authority
   - least-privilege
   - complete-mediation
   - fail-safe-defaults
   - separation-of-privilege
-  - economy-of-mechanism
-  - open-design
-  url: https://web.mit.edu/saltzer/www/publications/protection/
-- source: CISA Secure by Design
-  version: current-public-guidance
-  status: final
-  requirementIds:
   - secure-defaults
-  - manufacturer-ownership
-  url: https://www.cisa.gov/securebydesign
-- source: OWASP Application Security Verification Standard
-  version: 5.0.0
-  status: final
-  requirementIds:
-  - V8
-  - V15
-  url: https://owasp.org/www-project-application-security-verification-standard/
+  - trusted-policy-decision
+  - enforcement-point
+  - authority-lifecycle
+  - revocation
+  - break-glass
+  - authorization-evidence
+learningObjects:
+  - id: 1.2-LO-01
+    kind: concept-model
+    title: Authority is permission to cause a bounded effect
+    path: lessons/01-property.md
+  - id: 1.2-LO-02
+    kind: design-exercise
+    title: Build SecureCollab's authority map and executable matrix
+    path: lessons/02-model.md
+  - id: 1.2-LO-03
+    kind: mechanism-lab
+    title: Break ambient authority and incomplete mediation locally
+    path: lessons/03-break.md
+  - id: 1.2-LO-04
+    kind: design-exercise
+    title: Build a trusted decision path and mediate every operation
+    path: lessons/04-build.md
+  - id: 1.2-LO-05
+    kind: verification-lab
+    title: Turn authority cells and lifecycle changes into evidence
+    path: lessons/05-verify.md
+  - id: 1.2-LO-06
+    kind: operations-exercise
+    title: Grant, observe, expire, revoke, and recover authority
+    path: lessons/06-operate.md
+  - id: 1.2-LO-07
+    kind: transfer-challenge
+    title: Transfer authority reasoning to ReleaseDesk
+    path: lessons/07-transfer.md
+  - id: 1.2-LO-08
+    kind: code-review
+    title: Review an authority change for hidden ambient paths
+    path: lessons/08-review.md
+labSpec:
+  authorizedScope: Local Python files and synthetic SecureCollab tenants, users, notes, and decisions only; no service or network target exists
+  slug: 1.2-authority-matrix
+  summary: An explicit server-side policy mediates note read, list, delete, revocation, unknown actions, and an illustrative two-person export decision
+  forbiddenOutcomes:
+    - An authenticated Tenant B member reads or lists a Tenant A note
+    - A Tenant A administrator deletes a Tenant B note because admin is treated as global
+    - A revoked member retains note authority through ambient authentication state
+    - One approval satisfies the documented two-person export rule
+    - An unknown action or failed authority resolution defaults to allow
+    - Lab instructions or data refer to a public target, real person, or production credential
+evidenceRequired:
+  - SecureCollab Phase 1 authority map and matrix with direct and indirect enforcement inventory
+  - Classification of roles, ACLs, capabilities, delegation, and ambient authority as representations or authority sources
+  - Causal annotation of vulnerable failures before inspecting the fixed tree
+  - Clean vulnerable-fail and fixed-pass lab record with reasons for each failure
+  - Policy-decision and enforcement-point design record with alternatives, limits, and current-state behavior
+  - Normal, negative, abuse, and failure authority-test matrix plus a policy-removal counterfactual
+  - Privacy-safe grant, denial, revocation, break-glass, and recovery runbook with human-factor constraints
+  - ReleaseDesk authority model and SecureCollab comparison memo for transfer-ready evidence
+assessmentBlueprint:
+  explain: Explain authority as a bounded permission relation and distinguish identity, roles, ACLs, capabilities, delegation, and ambient authority
+  design: Produce and defend a complete SecureCollab authority map, matrix, and enforcement inventory
+  build: Design or implement a current server-resolved policy decision consumed by every in-scope operation
+  break: Diagnose missing mediation, unscoped administration, stale authority, insufficient separation, and fail-open unknown cases in the local fixture
+  verify: Derive normal, negative, abuse, failure, and counterfactual evidence from matrix cells and authority lifecycle
+  operate: Specify privacy-safe decisions, signals, revocation, break-glass, response, recovery, and accessible administration
+  communicate: Write actionable review comments and defend residual risk, non-goals, standards applicability, and transfer limits
+masteryGate: '1'
+standardsRefs:
+  - source: Saltzer & Schroeder, The Protection of Information in Computer Systems
+    version: '1975'
+    status: seminal
+    requirementIds:
+      - fail-safe-defaults
+      - complete-mediation
+      - open-design
+      - separation-of-privilege
+      - least-privilege
+      - least-common-mechanism
+      - psychological-acceptability
+      - compromise-recording
+    url: https://web.mit.edu/saltzer/www/publications/protection/
+  - source: OWASP Application Security Verification Standard
+    version: 5.0.0
+    status: final
+    requirementIds:
+      - v5.0.0-8.1.1
+      - v5.0.0-8.1.2
+      - v5.0.0-8.2.1
+      - v5.0.0-8.2.2
+      - v5.0.0-8.2.3
+      - v5.0.0-8.3.1
+      - v5.0.0-8.3.2
+      - v5.0.0-8.3.3
+      - v5.0.0-8.4.1
+      - v5.0.0-15.3.1
+    url: https://github.com/OWASP/ASVS/tree/v5.0.0/5.0/en
+  - source: CISA Secure by Design
+    version: current-public-guidance
+    status: unverified
+    requirementIds:
+      - secure-defaults
+      - manufacturer-ownership
+    url: https://www.cisa.gov/securebydesign
 misconceptions:
-- Authentication is authorization
-- UI roles are the access matrix
-- An HTTP handler check mediates every path
-- Admin is one ambient superuser
-- Allow-by-default with a denylist is fail-safe
-- Framework auth middleware is complete mediation
-- Capabilities and ACLs are interchangeable; ambient authority is just being logged in
-- Secure by Design means paid extra security features
+  - Authentication proves authorization
+  - A role is the authority model rather than a compression of matrix cells
+  - Hidden controls or random identifiers are enforcement or capabilities by themselves
+  - One HTTP policy check mediates aggregate, admin, worker, cache, retry, and restore paths
+  - Admin is a global boolean with no tenant, action, state, or time
+  - A central policy engine guarantees complete mediation without enforcement coverage
+  - Blocking known bad cases is a fail-safe default
+  - Delegation can create authority the issuer does not hold
+  - Revocation is complete when a UI option disappears
+  - Two actions by one principal are separation of privilege
+  - ASVS, scanners, or a passing happy path prove authorization completeness
 operationalConsiderations:
-- Log grants, impersonation, and revocations; include workers and break-glass
-- Failed policy evaluation and new objects deny
-- A matrix users bypass is not complete mediation (usability in 1.4/4.2)
-- Database-role least privilege is deferred to 5.5
-author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (1.2 deepen); lab-safety-reviewer (local notes.py fixture)
-lastReviewedAt: '2026-08-23'
-nextReviewAt: '2027-02-23'
+  - Grant, use, denial, expiry, revocation, and emergency override have versioned privacy-safe evidence
+  - Policy and evidence failures have explicit fail-closed behavior and independent health signals
+  - Stale decisions, cached attributes, sessions, and self-contained grants have bounded revocation behavior
+  - High-impact authority is narrow, time-bounded, independently approved where justified, and followed by review
+  - Administrators can understand the requested effect, object scope, duration, and completion state without color-only or pointer-only interaction
+  - One operator controlling protected state, policy, revocation, and the only evidence store remains explicit residual risk
+author: deepen-curriculum / author-module-spec / author-lesson / author-lab / author-assessment
+reviewer: quality-reviewer and lab-safety-reviewer (independent read-only review)
+lastReviewedAt: '2026-08-25'
+nextReviewAt: '2027-02-25'
 changelog:
-- date: '2026-08-23'
-  note: Pass A initial specification
-- date: '2026-08-23'
-  note: 'Pass A quality-gate: spec completeness competent; reviewer recorded'
-- date: '2026-08-23'
-  note: Pass B lessons and authorized local lab
-- date: '2026-08-23'
-  note: Pass C rubric and examiner keys; quality-gate recorded
-- date: '2026-08-23'
-  note: 'Deepen: 1.1-density lessons; structural tenant mediation lab; quality-gate recorded'
+  - date: '2026-08-23'
+    note: Pass A-C generated module and local note fixture
+  - date: '2026-08-25'
+    note: Depth remediation rebuilt the coverage contract, authority model, exact ASVS mapping, structural lab, assessment, and transfer case; independent semantic and lab-safety review passed
