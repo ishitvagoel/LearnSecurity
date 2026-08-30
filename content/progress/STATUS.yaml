@@ -14,13 +14,22 @@ defaults:
   ai_security: elective E1
   website_progress: local-first static site (site/); no accounts
 next:
-  id: '1.3'
+  id: '1.4'
   pass: revise
   skill: deepen-curriculum
   inner_skill: standards-pin
   note: Depth queue reopened after semantic audit. Revise one module at a time; generated
     scaffolds remain map-complete until independent review passes.
 spiral_deltas:
+- date: '2026-08-30'
+  module: '1.3'
+  change: Boundary model v2 distinguishes property-relative TCBs, trusted provenance,
+    exact worker authority, flow-derived surface, common-mode failures, dimensional
+    blast radius, evidence failure, and materially different stored/asynchronous transfer
+  retest: Revisit 1.1 confidentiality/integrity/accountability/availability/privacy
+    rows and 1.2 worker/export cells when ingress, persistent queues, databases, workload
+    identity, evidence stores, converter isolation, CDN/cache, or operator boundaries enter
+    scope; rerun Modules 2.2, 2.4, 3.2, 4.4, 5.5, 7.4, 8.1, and 10.5 as owned
 - date: '2026-08-25'
   module: '1.2'
   change: Authority v2 adds explicit subject-action-object decisions, direct and aggregate
@@ -129,10 +138,10 @@ modules:
   phase: 1
   track: core
   pass: E
-  quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
-  depth: map-complete
+  quality: competent
+  notes: Depth remediation passed independent semantic and lab-safety review on 2026-08-30;
+    see progress/reviews/1.3-2026-08-30.md
+  depth: publishable
 - id: '1.4'
   title: Risk, people, economics, usable security, and resilience
   phase: 1
@@ -665,7 +674,6 @@ revision:
   reference_module: '1.1'
   auditedAt: '2026-08-25'
   remaining:
-  - '1.3'
   - '1.4'
   - '2.1'
   - '2.2'
