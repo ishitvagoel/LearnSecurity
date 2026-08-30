@@ -4,13 +4,13 @@ title: Trust boundaries and attack surface
 phase: 1
 track: core
 difficulty: foundation
-status: reviewed
-estimatedMinutes: 240
+status: published
+estimatedMinutes: 480
 prerequisites:
-- '1.1 Pass A: invariant catalogue'
-- '1.2 Pass A: authority map and access matrix'
-- 'Entry profile: small database-backed API, Git, tests, basic SQL'
-- 0.1 vocabulary recommended, not blocking for Phase 1 spec pilot
+- '1.1: invariant catalogue'
+- '1.2: authority map and access matrix'
+- 'Entry profile: small database-backed API, Git, tests, and basic SQL'
+- '0.1 vocabulary is recommended but not blocking for Phase 1'
 routeTags:
 - complete
 - accelerated
@@ -18,142 +18,179 @@ routeTags:
 - mobile
 releaseMilestone: null
 outcomes:
-- Produce an annotated trust-boundary diagram and attack-surface inventory for SecureCollab
-- Identify TCB, entry points, transitive trust, shared mechanisms, isolation boundaries,
-  and blast radius
-- Explain defense in depth without assuming independent layers
-- Place 1.2 mediation checks on boundaries, not only inside a named service
-- Transfer the diagram after adding CDN, queue, or mobile client and list invalidated
-  1.1/1.2 artifacts
+- Define a trust boundary as a change in security assumptions or capabilities, and scope a property-relative trusted computing base without equating either concept with a network hop or deployment box
+- Produce and defend an annotated SecureCollab Phase 1 model that names assets, actors, flows, entry points, channels, enforcement points, trusted attribute sources, assumptions, and residual trust
+- Build a flow-derived attack-surface inventory that distinguishes reachable entry points and shared mechanisms from generic component, port, vulnerability, or product lists
+- Analyze transitive trust, least-common mechanisms, correlated failures, isolation boundaries, and blast radius for human, service, storage, and evidence paths
+- Diagnose a boundary failure by separating invariant, preconditions, trigger, root cause, impact, prevention, detection, recovery, and residual risk
+- Design a structural boundary repair that establishes trusted provenance, fails safely, preserves complete mediation, narrows authority, and makes defense-in-depth independence claims falsifiable
+- Verify and operate boundary controls with normal, negative, abuse, failure, and counterfactual evidence plus change-driven model refresh and bounded incident response
+- Transfer the method to PreviewForge, a synthetic document-processing pipeline whose hostile bytes, asynchronous workers, third parties, shared libraries, and egress assumptions materially differ from SecureCollab
 reviewTriggers:
-- 'New component: CDN, queue, mobile client, AI summarizer, webhook receiver'
-- 'New third party: IdP, email, object storage, analytics'
-- Shared cache, search index, or log pipeline added
-- Isolation claim without independence analysis
+- A public ingress, CDN, reverse proxy, gateway, mobile client, webhook, alternate protocol, or administrative route is added or reconfigured
+- A queue, scheduler, retry path, batch process, converter, AI component, or other non-human caller gains a new action or authority
+- Identity, email, object storage, analytics, logging, monitoring, backup, or another third party begins carrying security-relevant data or decisions
+- A cache, parser, credential, runtime, database role, tenant index, log pipeline, or control plane becomes shared across isolation scopes
+- An isolation, sandbox, segmentation, or defense-in-depth claim changes without new evidence of failure independence and bounded blast radius
+- A data flow, protected property, attacker capability, enforcement point, trusted attribute source, or evidence path changes
+- An incident reveals an unmodeled path, common-mode failure, stale assumption, or larger-than-expected blast radius
 invariants:
-- Every data flow that can change a 1.1 invariant crosses a named boundary with a
-  named check or an explicit residual
-- The client is not in the TCB for authorization or integrity of server-side assets
-- Correlated layers are not counted as independent depth
-- No live-target or real-PII instructions appear in this module
+- Every in-scope flow that can reveal, mutate, authorize, enqueue, or record a protected SecureCollab effect crosses a named boundary whose trusted side derives caller and scope from a trusted adapter or records an explicit residual
+- No value controlled by the public requester, including an internal-sounding header, tenant label, service name, or object identifier, is itself proof that the request crossed a trusted worker boundary
+- Each entry point is linked to its reachable protected effects, enforcement points, shared mechanisms, and an evidence oracle; unmodeled and unknown cases deny rather than inherit ambient authority
+- A defense-in-depth claim counts only controls whose relevant failure assumptions and dependencies are stated; layers sharing the same parser, credential, identity assertion, configuration, or operator are treated as correlated
+- The blast radius of a compromised or mistaken caller is bounded by explicit tenant, action, object, time, egress, and evidence scopes rather than by naming the component internal
+- All practice remains local and synthetic and never supplies live-target instructions, production credentials, real personal data, malware, or harmful payloads
 threatModelPrompts:
-- What are we working on (scope, users, dependencies, trust boundaries)?
-- What can go wrong at each entry point and shared mechanism?
-- Who can we no longer trust if the IdP, email provider, or object store is compromised?
-- How far does a worker or admin identity blast if stolen?
+- What property is being protected, from which attacker or failure capability, over which Phase 1 scope and time window?
+- Where do security assumptions or capabilities change, and which flows cross each resulting boundary?
+- Which components must be correct for this one property, and how does that TCB change for another property?
+- Which entry points, alternate paths, stored inputs, administrative paths, and shared mechanisms can influence the protected effect?
+- Which requester-controlled values are being mistaken for authenticated provenance or server-resolved scope?
+- What must be trusted transitively if an identity provider, object store, queue, log sink, dependency, or operator fails?
+- Which defensive layers can fail together because they share a parser, credential, identity assertion, configuration, runtime, vendor, or human operator?
+- If one component or credential is compromised, what data, tenants, actions, time interval, egress destinations, and evidence can it reach or suppress?
+- What normal, negative, abuse, failure, and counterfactual observations would falsify the boundary claim?
+- What architecture, data-flow, authority, implementation, or incident change forces the model to be refreshed?
 concepts:
-- trusted-computing-base
+- property-relative-trusted-computing-base
 - trust-boundary
+- security-assumption
+- actor-and-principal
+- data-flow
 - entry-point
-- transitive-trust
-- shared-mechanism
+- channel
+- enforcement-point
+- trusted-provenance
 - attack-surface
+- transitive-trust
+- least-common-mechanism
+- shared-mechanism
+- common-mode-failure
 - isolation-boundary
 - blast-radius
 - defense-in-depth
-- least-common-mechanism
+- complete-mediation
+- fail-safe-defaults
 - four-question-framework
+- review-trigger
 learningObjects:
 - id: 1.3-LO-01
   kind: concept-model
-  title: 'Trust boundaries and attack surface: property vs mechanism'
+  title: Boundaries are changes in assumptions, not lines around servers
   path: lessons/01-property.md
 - id: 1.3-LO-02
   kind: design-exercise
-  title: Model SecureCollab for 1.3
+  title: Build the SecureCollab boundary and attack-surface model
   path: lessons/02-model.md
 - id: 1.3-LO-03
-  kind: mechanism-lab
-  title: 'Local fixture: Client internal header dumps all tenants'' notes'
+  kind: break-fix-lab
+  title: Break the forged worker-provenance boundary locally
   path: lessons/03-break.md
 - id: 1.3-LO-04
   kind: design-exercise
-  title: Structural fix restoring the 1.3 invariant
+  title: Restore trusted provenance and bound the export blast radius
   path: lessons/04-build.md
 - id: 1.3-LO-05
   kind: verification-lab
-  title: Forbidden-outcome tests for 1.3
+  title: Prove the boundary claim across five evidence modes
   path: lessons/05-verify.md
 - id: 1.3-LO-06
   kind: operations-exercise
-  title: Detect/recover notes for 1.3
+  title: Detect boundary drift and recover from crossed assumptions
   path: lessons/06-operate.md
 - id: 1.3-LO-07
   kind: transfer-challenge
-  title: 'Transfer: Clinic booking: X-Internal-Admin on the public API.'
+  title: Transfer the method to the PreviewForge document pipeline
   path: lessons/07-transfer.md
 - id: 1.3-LO-08
   kind: code-review
-  title: Seeded review for 1.3
+  title: Review a plausible but dishonest boundary design
   path: lessons/08-review.md
 labSpec:
-  authorizedScope: Local course fixture or official training lab only; no public or
-    third-party targets
+  authorizedScope: Local in-process course fixture and synthetic SecureCollab records only; no server, socket, public target, credential, real tenant, or harmful payload
   slug: 1.3-trust-boundaries
-  summary: Client internal header dumps all tenants' notes
+  summary: A public caller forges worker identity and scope because correlated edge and API layers trust the same attacker-controlled metadata; the fixed adapter establishes server-side provenance and a tenant-scoped capability
   forbiddenOutcomes:
-  - Client internal header dumps all tenants' notes
-  - Live-target instructions
-  - Real PII or production secrets
-  - Awareness list used as the syllabus
+  - A public caller reaches the worker-only export effect by supplying an internal-sounding header, service label, tenant, or object scope
+  - A valid worker capability crosses tenant, action, object, or lifecycle scope or remains usable after consumption
+  - Unknown caller kind, missing trusted context, malformed scope, or evidence failure defaults to privileged behavior
+  - Correlated controls are counted as independent defense in depth
+  - Lab steps address a live target, start a network listener, use real personal data or credentials, or provide a harmful payload
 evidenceRequired:
-- Annotated trust-boundary diagram for SecureCollab Phase 1
-- Attack-surface inventory with an evidence column
-- Note on independent vs correlated defensive layers
-- Transfer diagram after CDN, queue, or mobile client (for transfer-ready)
+- Annotated SecureCollab Phase 1 trust-boundary diagram with a property-specific TCB overlay and explicit deferred components
+- Flow-derived attack-surface inventory linking entry points, channels, attacker control, enforcement, shared mechanisms, blast radius, evidence, and residual risk
+- Trust-dependency and control-independence analysis covering at least one transitive dependency and one common-mode failure
+- Exact vulnerable and fixed lab results plus causal traces for every intended forbidden outcome
+- Boundary repair decision record covering trusted provenance, fail-safe behavior, scoped capability lifecycle, rejected alternatives, and remaining limits
+- Five-mode verification matrix with a policy-removal or adapter-bypass counterfactual
+- Boundary-operations runbook with privacy-safe signals, evidence failure, containment, root-cause recovery, and review triggers
+- PreviewForge transfer model and a comparison memo naming at least four SecureCollab assumptions that no longer hold
 assessmentBlueprint:
-  explain: TCB vs attack surface vs blast radius; correlated vs independent layers
-  design: Annotated diagram plus inventory covering 1.2 matrix paths
-  build: Deferred to Pass B; check placement or isolation on a local fixture
-  break: Annotation of correlated depth or missing transitive trust
-  verify: Surfaces listed with how closure would be tested
-  operate: Unexpected caller or egress as a detection signal
-  communicate: Residual third-party trust stated without hiding it
+  explain: Distinguish property-relative TCB, trust boundary, entry point, channel, attack surface, transitive trust, isolation boundary, blast radius, and correlated defense using bounded examples
+  design: Produce the annotated SecureCollab diagram, flow-derived inventory, dependency graph, and independence argument with explicit assumptions and residuals
+  build: Establish worker provenance in a trusted adapter, consume a tenant/action/object-scoped local capability, and deny unknown or failed context before the protected effect
+  break: Demonstrate only in the local fixture how forged metadata, scope widening, replay, alternate paths, and common-mode assumptions violate the stated invariant
+  verify: Trace normal, negative, abuse, failure, and counterfactual tests to diagram flows, inventory rows, and forbidden effects
+  operate: Define privacy-safe boundary evidence, drift and misuse signals, evidence-pipeline failure behavior, containment, recovery, and model-refresh triggers
+  communicate: State what remains transitively trusted, which layers are correlated, the bounded assurance claim, and which decisions belong to later modules
 masteryGate: '1'
 standardsRefs:
 - source: OWASP Threat Modeling Project
   version: maintained-project-guidance
   status: final
   requirementIds:
-  - four-questions
-  - trust-boundaries
+  - four-question-framework
+  - continuous-lifecycle-refinement
   url: https://owasp.org/www-project-threat-modeling/
 - source: OWASP Application Security Verification Standard
   version: 5.0.0
   status: final
   requirementIds:
-  - V15
-  url: https://owasp.org/www-project-application-security-verification-standard/
+  - v5.0.0-15.1.3
+  - v5.0.0-15.2.2
+  - v5.0.0-15.2.5
+  - v5.0.0-15.3.4
+  url: https://github.com/OWASP/ASVS/blob/v5.0.0/5.0/en/0x24-V15-Secure-Coding-and-Architecture.md
 - source: Saltzer & Schroeder, The Protection of Information in Computer Systems
   version: '1975'
   status: seminal
   requirementIds:
-  - least-common-mechanism
   - economy-of-mechanism
-  - open-design
-  url: https://web.mit.edu/saltzer/www/publications/protection/
+  - fail-safe-defaults
+  - complete-mediation
+  - least-common-mechanism
+  url: https://web.mit.edu/Saltzer/www/publications/protection/Basic.html
 misconceptions:
-- TLS is a trust boundary for headers
-- Security by an internal-sounding header name
-- Defense in depth means any layer can be skipped
+- Every network hop, TLS connection, process, container, subnet, or diagram line is automatically a trust boundary
+- The TCB is a fixed list called the backend or the cloud rather than the components that must be correct for one stated property
+- Attack surface means open ports, endpoints, CVEs, or the OWASP Top 10 rather than all reachable influence paths to a protected effect
+- Internal names, private addresses, proxy headers, service labels, signed-but-unscoped messages, or possession of a queue record prove caller authority
+- A WAF and API check are independent when both parse and trust the same requester-controlled field
+- More layers always reduce risk even when they share identity, credentials, parser code, configuration, operators, or failure domains
+- A container, tenant column, or separate queue bounds blast radius without proving the data, authority, egress, control-plane, and evidence boundaries
+- Logs are outside the attack surface because they are defensive, and an unavailable evidence sink may be ignored
+- Completing one diagram closes threat modeling until a formal security review
 operationalConsiderations:
-- 'Public-edge log: internal-header-seen without worker identity.'
-- A real compromised worker still exports. Detect and revoke (7.4, 10.5).
-author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
-lastReviewedAt: '2026-08-24'
-nextReviewAt: '2027-02-24'
+- Record caller kind, trusted adapter, action, tenant/object scope, capability identifier hash, decision reason, enforcement point, model version, correlation identifier, and time without recording content, secrets, raw tokens, or unnecessary personal data
+- Detect public presentation of internal-only metadata, worker calls arriving through public adapters, scope mismatch, replay, unexpected egress, cross-tenant cache keys, and sudden boundary-denial changes
+- State whether a missing or delayed evidence sink blocks, buffers, or degrades an effect; never silently claim detection when evidence can disappear
+- Contain the narrow caller, capability class, tenant, action, adapter, or egress path first; then enumerate all paths and shared mechanisms with the same root assumption
+- Repair the assumption and enforcement path, rotate or revoke affected authority, reconcile leaked or mutated outputs, restore evidence, retest forbidden outcomes, and refresh the model
+- Make diagrams, inventories, alerts, and incident actions readable without color alone and usable by keyboard and assistive technology
+- Treat provider, operator, control-plane, backup, and build-system compromise as explicit residual or later-module work rather than hiding it inside a trusted cloud box
+author: choreograph-curriculum / author-module-spec / deepen-curriculum
+reviewer: quality-reviewer and lab-safety-reviewer (independent read-only review)
+lastReviewedAt: '2026-08-30'
+nextReviewAt: '2027-02-28'
 changelog:
 - date: '2026-08-23'
-  note: Pass A initial specification
-- date: '2026-08-23'
-  note: 'Pass A quality-gate: spec completeness competent; reviewer recorded'
-- date: '2026-08-23'
-  note: Pass B lessons and authorized local lab
-- date: '2026-08-23'
-  note: Pass C rubric and examiner keys; quality-gate recorded
-- date: '2026-08-23'
-  note: 'Deepen: 1.1-density lessons; worker-header boundary lab; quality-gate recorded'
+  note: Pass A initial specification and initial Pass B/C materials
 - date: '2026-08-24'
-  note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
-    Pass C keys isolated'
+  note: First publishability-oriented rewrite
+- date: '2026-08-29'
+  note: Deep rewrite begun with exact standards pins, an eight-outcome coverage contract, a structural provenance lab, five-mode evidence, and material PreviewForge transfer
+- date: '2026-08-29'
+  note: 'Spiral revisit: replaced the SecureCollab boundary stub; revisit 1.1 SC-CONF/INTEG/ACCT/AVAIL/PRIV rows and 1.2 worker/export authority cells, and rerun their semantic reviews when a real ingress, queue, persistence, evidence sink, or worker identity is introduced'
+- date: '2026-08-30'
+  note: 'Independent semantic and lab-safety reviews passed after precision closures; published as curriculum-depth competent, without learner transfer, Gate 1, product, milestone, or compliance claims'
