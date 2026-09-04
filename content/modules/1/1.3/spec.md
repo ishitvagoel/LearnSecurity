@@ -235,3 +235,4 @@ This module feeds Gate 1 with design evidence only. Module 1.4 adds risk priorit
 | 2026-08-24 | First publishability-oriented rewrite |
 | 2026-08-29 | Replaced shallow chapter coverage with an eight-outcome contract, exact standards mappings, structural provenance lab, five-mode evidence, operations lifecycle, and material PreviewForge transfer |
 | 2026-08-29 | Spiral revisit replaced the boundary stub and requires 1.1 invariant plus 1.2 worker/export authority review when real ingress, queue, persistence, evidence, or service identity changes enter scope |
+| 2026-09-04 | Targeted independent recheck closed the post-merge evidence-correlation gap with a server-held non-bearer capability reference, internally generated decision correlation, and privacy/authority regressions. |

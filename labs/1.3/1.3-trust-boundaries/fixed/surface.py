@@ -37,8 +37,10 @@ WORKER_REGISTRY = {
     "registration-b": "export-worker-2",
 }
 
+# Each audit_ref is a non-bearer server-held identifier; worker_export never accepts it.
 GRANTS = {
     "grant-a-exact": {
+        "audit_ref": "capability-ref-01",
         "worker_id": "export-worker-1",
         "tenant_id": "tA",
         "action": "export_summary",
@@ -47,6 +49,7 @@ GRANTS = {
         "used": False,
     },
     "grant-a-single": {
+        "audit_ref": "capability-ref-02",
         "worker_id": "export-worker-1",
         "tenant_id": "tA",
         "action": "export_summary",
@@ -55,6 +58,7 @@ GRANTS = {
         "used": False,
     },
     "grant-a-expired": {
+        "audit_ref": "capability-ref-03",
         "worker_id": "export-worker-1",
         "tenant_id": "tA",
         "action": "export_summary",
@@ -65,10 +69,19 @@ GRANTS = {
 }
 
 EVENTS: list[dict] = []
+_CORRELATION_SEQUENCE = 0
 
 
 def _outcome(allowed: bool, reason: str, summaries: list[dict]) -> dict:
     return {"allowed": allowed, "reason": reason, "summaries": summaries}
+
+
+def _next_correlation_id() -> str:
+    """Create a local server-side decision identifier, never from request data."""
+
+    global _CORRELATION_SEQUENCE
+    _CORRELATION_SEQUENCE += 1
+    return f"boundary-decision-{_CORRELATION_SEQUENCE:04d}"
 
 
 def _emit(
@@ -81,6 +94,7 @@ def _emit(
     allowed: bool,
     reason: str,
     now: int,
+    capability_ref: str | None = None,
 ) -> None:
     EVENTS.append(
         {
@@ -94,6 +108,8 @@ def _emit(
             "allowed": allowed,
             "reason": reason,
             "enforcement_point": "scoped-export-effect",
+            "capability_ref": capability_ref,
+            "correlation_id": _next_correlation_id(),
             "now": now,
         }
     )
@@ -109,6 +125,7 @@ def _deny(
     object_count: int,
     now: int,
     evidence_available: bool,
+    capability_ref: str | None = None,
 ) -> dict:
     if evidence_available:
         _emit(
@@ -120,6 +137,7 @@ def _deny(
             allowed=False,
             reason=reason,
             now=now,
+            capability_ref=capability_ref,
         )
     return _outcome(False, reason, [])
 
@@ -192,6 +210,9 @@ def worker_export(
         )
     if not evidence_available:
         return _outcome(False, "evidence_unavailable", [])
+    grant = GRANTS.get(grant_id)
+    capability_ref = grant["audit_ref"] if grant is not None else None
+
     if not _well_formed(tenant_id, note_ids, action):
         return _deny(
             "malformed_scope",
@@ -202,9 +223,9 @@ def worker_export(
             object_count=object_count,
             now=now,
             evidence_available=True,
+            capability_ref=capability_ref,
         )
 
-    grant = GRANTS.get(grant_id)
     if grant is None:
         return _deny(
             "unknown_grant",
@@ -226,6 +247,7 @@ def worker_export(
             object_count=object_count,
             now=now,
             evidence_available=True,
+            capability_ref=capability_ref,
         )
     if grant["action"] != action:
         return _deny(
@@ -237,6 +259,7 @@ def worker_export(
             object_count=object_count,
             now=now,
             evidence_available=True,
+            capability_ref=capability_ref,
         )
     if grant["tenant_id"] != tenant_id:
         return _deny(
@@ -248,6 +271,7 @@ def worker_export(
             object_count=object_count,
             now=now,
             evidence_available=True,
+            capability_ref=capability_ref,
         )
     if set(grant["note_ids"]) != set(note_ids) or len(grant["note_ids"]) != len(note_ids):
         return _deny(
@@ -259,6 +283,7 @@ def worker_export(
             object_count=object_count,
             now=now,
             evidence_available=True,
+            capability_ref=capability_ref,
         )
     if grant["used"]:
         return _deny(
@@ -270,6 +295,7 @@ def worker_export(
             object_count=object_count,
             now=now,
             evidence_available=True,
+            capability_ref=capability_ref,
         )
     if now >= grant["expires_at"]:
         return _deny(
@@ -281,6 +307,7 @@ def worker_export(
             object_count=object_count,
             now=now,
             evidence_available=True,
+            capability_ref=capability_ref,
         )
 
     notes = [NOTES.get(note_id) for note_id in note_ids]
@@ -294,6 +321,7 @@ def worker_export(
             object_count=object_count,
             now=now,
             evidence_available=True,
+            capability_ref=capability_ref,
         )
 
     summaries = [
@@ -311,6 +339,7 @@ def worker_export(
         allowed=True,
         reason="scoped_grant_consumed",
         now=now,
+        capability_ref=capability_ref,
     )
     return _outcome(True, "scoped_grant_consumed", summaries)
 

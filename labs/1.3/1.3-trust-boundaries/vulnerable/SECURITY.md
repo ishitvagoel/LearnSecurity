@@ -15,7 +15,7 @@ The worker path then treats any registered worker plus any known grant as broad 
 - a high-impact effect proceeds without required evidence;
 - the dependency report calls correlated controls independent.
 
-Valid exact export, ordinary public denial, unknown worker/grant denial, malformed duplicate denial, summary projection, privacy-safe event fields, and the no-network/file/process safety constraint remain as regression cases.
+Valid exact export, ordinary public denial, unknown worker/grant denial, malformed duplicate denial, summary projection, privacy-safe server-held capability/correlation references, and the no-network/file/process safety constraint remain as regression cases.
 
 ## Scope warning
 

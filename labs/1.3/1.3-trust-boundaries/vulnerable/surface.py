@@ -37,8 +37,10 @@ WORKER_REGISTRY = {
     "registration-b": "export-worker-2",
 }
 
+# Each audit_ref is a non-bearer server-held identifier; worker_export never accepts it.
 GRANTS = {
     "grant-a-exact": {
+        "audit_ref": "capability-ref-01",
         "worker_id": "export-worker-1",
         "tenant_id": "tA",
         "action": "export_summary",
@@ -47,6 +49,7 @@ GRANTS = {
         "used": False,
     },
     "grant-a-single": {
+        "audit_ref": "capability-ref-02",
         "worker_id": "export-worker-1",
         "tenant_id": "tA",
         "action": "export_summary",
@@ -55,6 +58,7 @@ GRANTS = {
         "used": False,
     },
     "grant-a-expired": {
+        "audit_ref": "capability-ref-03",
         "worker_id": "export-worker-1",
         "tenant_id": "tA",
         "action": "export_summary",
@@ -65,10 +69,19 @@ GRANTS = {
 }
 
 EVENTS: list[dict] = []
+_CORRELATION_SEQUENCE = 0
 
 
 def _outcome(allowed: bool, reason: str, summaries: list[dict]) -> dict:
     return {"allowed": allowed, "reason": reason, "summaries": summaries}
+
+
+def _next_correlation_id() -> str:
+    """Create a local server-side decision identifier, never from request data."""
+
+    global _CORRELATION_SEQUENCE
+    _CORRELATION_SEQUENCE += 1
+    return f"boundary-decision-{_CORRELATION_SEQUENCE:04d}"
 
 
 def _emit(
@@ -81,6 +94,7 @@ def _emit(
     allowed: bool,
     reason: str,
     now: int,
+    capability_ref: str | None = None,
 ) -> None:
     EVENTS.append(
         {
@@ -94,6 +108,8 @@ def _emit(
             "allowed": allowed,
             "reason": reason,
             "enforcement_point": "shared-export-helper",
+            "capability_ref": capability_ref,
+            "correlation_id": _next_correlation_id(),
             "now": now,
         }
     )
@@ -185,7 +201,8 @@ def worker_export(
     principal_id = WORKER_REGISTRY.get(registration_handle)
     if principal_id is None:
         return _outcome(False, "unknown_worker", [])
-    if grant_id not in GRANTS:
+    grant = GRANTS.get(grant_id)
+    if grant is None:
         return _outcome(False, "unknown_grant", [])
     if not _well_formed(tenant_id, note_ids, action):
         return _outcome(False, "malformed_scope", [])
@@ -201,6 +218,7 @@ def worker_export(
             allowed=True,
             reason="registered_worker_has_known_grant",
             now=now,
+            capability_ref=grant["audit_ref"],
         )
     return _outcome(True, "registered_worker_has_known_grant", summaries)
 

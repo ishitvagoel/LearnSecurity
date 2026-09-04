@@ -245,12 +245,39 @@ def test_decision_evidence_excludes_protected_and_bearer_values(surface) -> None
         action="export_summary",
         now=100,
     )
+    worker_event = surface.EVENTS[-1]
+    surface.public_export(
+        {"X-Correlation-ID": "attacker-chosen"},
+        "tA",
+        ["nA1"],
+        now=101,
+    )
+    public_event = surface.EVENTS[-1]
     serialized = repr(surface.EVENTS)
     assert "synthetic tenant A body" not in serialized
     assert "X-SecureCollab-Grant" not in serialized
     assert "grant-a-exact" not in serialized
     assert "raw-token" not in serialized
-    assert all("object_count" in event for event in surface.EVENTS)
+    assert "attacker-chosen" not in serialized
+    assert worker_event["capability_ref"] == "capability-ref-01"
+    assert worker_event["capability_ref"] not in surface.GRANTS
+    assert public_event["capability_ref"] is None
+    assert worker_event["correlation_id"] != public_event["correlation_id"]
+    assert all(
+        {"object_count", "capability_ref", "correlation_id"} <= event.keys()
+        for event in surface.EVENTS
+    )
+
+    non_bearer_attempt = surface.worker_export(
+        "registration-a",
+        worker_event["capability_ref"],
+        "tA",
+        ["nA1", "nA2"],
+        action="export_summary",
+        now=102,
+    )
+    assert non_bearer_attempt["allowed"] is False
+    assert non_bearer_attempt["summaries"] == []
 
 
 def test_control_independence_claim_names_shared_failures(surface) -> None:

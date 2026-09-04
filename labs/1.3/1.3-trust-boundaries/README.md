@@ -117,7 +117,7 @@ The vulnerable failures are expected property evidence. An import error, syntax 
 | Expiry instant / later expiry / replay | Failure-state and abuse | Only a grant strictly before expiry and not yet consumed works | Three distinct failures |
 | Evidence unavailable | Failure | Effect denies; grant remains unused | Fails; vulnerable effect silently proceeds |
 | Duplicate IDs or non-collection scope | Negative | Malformed scope denies cleanly | Passes |
-| Summary projection / safe evidence | Normal and privacy regression | No bodies or bearer material | Passes |
+| Summary projection / safe evidence | Normal and privacy regression | No bodies, bearer material, or requester-chosen correlation value; include a server-held capability reference and generated correlation ID | Passes |
 | Dependency analysis | Counterfactual/design evidence | Shared failure named; no false independence | Fails |
 | AST safety boundary | Safety | No network/file/process execution path | Passes |
 
@@ -160,7 +160,7 @@ A competent row identifies the false trusted source or missing scope/lifecycle/m
 - **Failure/state:** expiry and evidence-sink outage. Persistent race, crash, queue, and clock behavior are deferred.
 - **Counterfactual:** dependency-classification assertion plus learner mutation of adapter, scope, lifecycle, or evidence behavior.
 
-Every denial should produce empty output. The evidence-failure test also asserts that the unused grant remains unused. Allowed output is checked for exact fields. A status-only oracle would miss these effects.
+Every denial should produce empty output. The evidence-failure test also asserts that the unused grant remains unused. Allowed output is checked for exact fields. The evidence regression proves that a safe server-held capability reference and distinct generated correlation IDs are present while raw grants, bodies, and requester-chosen correlation values are absent. A status-only oracle would miss these effects.
 
 ## Safe counterfactual examples
 
@@ -200,6 +200,7 @@ Confidentiality recovery cannot undo a prior release. Say what remains uncertain
 
 Passing this lab does not prove:
 
+- globally unique or durable correlation, capability lifecycle, or audit linkage; the fixture uses process-local generated correlation IDs and synthetic non-bearer capability references;
 - HTTP, proxy, TLS, DNS, private-network, routing, or header normalization behavior;
 - cryptographic workload identity, secret storage, certificate/key rotation, or cloud IAM;
 - queue authenticity, duplication, retry, ordering, cancellation, or dead-letter behavior;

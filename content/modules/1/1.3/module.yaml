@@ -181,8 +181,8 @@ operationalConsiderations:
 - Treat provider, operator, control-plane, backup, and build-system compromise as explicit residual or later-module work rather than hiding it inside a trusted cloud box
 author: choreograph-curriculum / author-module-spec / deepen-curriculum
 reviewer: quality-reviewer and lab-safety-reviewer (independent read-only review)
-lastReviewedAt: '2026-08-30'
-nextReviewAt: '2027-02-28'
+lastReviewedAt: '2026-09-04'
+nextReviewAt: '2027-03-04'
 changelog:
 - date: '2026-08-23'
   note: Pass A initial specification and initial Pass B/C materials
@@ -194,3 +194,5 @@ changelog:
   note: 'Spiral revisit: replaced the SecureCollab boundary stub; revisit 1.1 SC-CONF/INTEG/ACCT/AVAIL/PRIV rows and 1.2 worker/export authority cells, and rerun their semantic reviews when a real ingress, queue, persistence, evidence sink, or worker identity is introduced'
 - date: '2026-08-30'
   note: 'Independent semantic and lab-safety reviews passed after precision closures; published as curriculum-depth competent, without learner transfer, Gate 1, product, milestone, or compliance claims'
+- date: '2026-09-04'
+  note: 'Targeted independent recheck closed the PR #14 evidence-correlation finding with non-bearer capability references, internally generated correlation IDs, privacy regressions, and explicit durability limits'
