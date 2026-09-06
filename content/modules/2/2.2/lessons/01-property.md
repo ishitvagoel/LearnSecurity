@@ -1,105 +1,108 @@
-# 2.2-LO-01 — TLS authenticates a hop; the cache key decides who reads
+# TLS proves a hop; the cache key decides who reads
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** Saltzer and Schroeder (1975, seminal), especially least common mechanism, complete mediation, and fail-safe defaults; IETF RFC 9110 HTTP Semantics (final) for cacheability and `Vary`; IETF RFC 9846 TLS 1.3 (final) for hop authenticity after termination; OWASP ASVS 5.0.0 (final) `v5.0.0-4.1.3`, `v5.0.0-12.2.1`, `v5.0.0-14.2.2`, and `v5.0.0-14.3.2`; `v5.0.0-14.2.5` is Level 3 web-cache-deception (labeled advanced, not the Phase 1 baseline).
 
-## The claim this module owns
+## The rule
 
-SecureCollab Phase 1 note bodies are tenant-bound. A shared CDN, reverse proxy, or in-process cache can still hand Tenant A’s body to Tenant B if the **key** is only the URL. HTTPS on the browser hop does not write that key.
+The notes app still has a shared cache on the path: a CDN, a reverse proxy, or an in-process store that more than one company can hit. HTTPS on the browser hop does not write that key.
 
-> For a SecureCollab Phase 1 `GET /notes/n1`, a cache hit may return a note body only when the key includes the **bound** tenant from the 1.2 decision—not a client `Host`, `X-Tenant`, or `X-Forwarded-*` field. Tenant B must not receive Tenant A’s body for the same path. Missing or unknown tenant meaning is a miss (or deny), not a shared entry. TLS 1.3 on one hop is transport authenticity for that hop, not the cache-key property.
+> For `GET /notes/n1` in the notes app, a cache hit may return a note body only when the key includes the **company the app already bound you to** — not a client `Host`, `X-Tenant`, or `X-Forwarded-*` field. Company B must not receive company A’s body for the same path. Missing or unknown company meaning is a miss (or a deny), not a shared entry. TLS 1.3 on one hop proves that hop. It is not the cache-key rule.
 
-The forbidden outcome is **cross-tenant cache hit**: path-only key, Tenant A populated the entry, Tenant B’s later GET receives `tenant-A-note`. That is a 1.1 confidentiality failure caused by a **shared mechanism**, not by a missing login.
+So what must not happen: **company B reads company A’s note from a shared cache**. The key was only the URL. Company A filled the slot. Company B’s later GET receives `tenant-A-note`. That is a secrecy failure caused by a **shared store**, not by a missing login.
 
-RFC 9846 specifies TLS 1.3. After the edge terminates TLS, later hops and stores see HTTP as the origin configured them. RFC 9110 says what may be cached and how `Vary` selects a representation. Neither RFC inserts `tenant_id` into your key.
+HTTP rules say what may be cached and how `Vary` picks a representation. TLS 1.3 says how one hop proves itself. After the edge ends TLS, later hops and stores see HTTP the way you configured them. Neither rule puts the company into your key.
 
-## Mental model: hop authenticity is not object identity
+## Picture: hop proof is not object identity
+
+Treat the hop and the key as two different questions.
 
 ```mermaid
 flowchart LR
-  Browser["Browser TLS to edge"] --> Edge[TLS ends]
-  Edge --> Cache["Shared cache - HTTP semantics"]
-  Cache --> Origin["Origin 1.2 decision"]
-  Origin --> Key["Key must include bound tenant"]
+  Browser["Browser TLS to the edge"] --> Edge[TLS ends]
+  Edge --> Cache["Shared cache - HTTP rules"]
+  Cache --> Origin["Origin: who is allowed"]
+  Origin --> Key["Key must include that company"]
 ```
 
-ASVS `v5.0.0-12.2.1` wants TLS to the external-facing HTTP service. That is necessary and not sufficient. A neighbor on a corporate inspecting proxy, or Tenant B on the same CDN POP, never needed to break TLS to read a path-only entry.
+Industry lists want TLS to the public HTTP service. That is needed and not enough. A neighbor on a company inspecting proxy, or company B on the same CDN node, never needed to break TLS to read a path-only entry.
 
-**Mechanism (not the property):** “We enabled HTTPS,” Next.js `fetch` cache defaults, FastAPI `HTTPException`, Cloudflare / Fastly product names, or `Cache-Control: private` while the CDN is configured to cache anyway.
+**A tool is not the rule:** “We turned on HTTPS,” Next.js `fetch` cache defaults, FastAPI `HTTPException`, a CDN product name, or `Cache-Control: private` while the CDN is set to cache anyway.
 
-## Mental model: the key is the least common mechanism
+## Picture: the key is the shared store
 
-Saltzer and Schroeder’s **least common mechanism** warns that a store shared by two tenants is a communication channel. A dict keyed only on `/notes/n1` *is* that channel.
+A store shared by two companies is a communication channel. A dict keyed only on `/notes/n1` *is* that channel.
 
 ```mermaid
 flowchart TD
-  PutA["tA PUT path /notes/n1 body secretA"] --> Store["Shared store"]
-  GetB["tB GET same path"] --> Lookup{Key includes bound tenant?}
+  PutA["Company A PUT path /notes/n1 body secretA"] --> Store["Shared store"]
+  GetB["Company B GET same path"] --> Lookup{Key includes bound company?}
   Store --> Lookup
-  Lookup -->|no - path only| Leak["tB receives secretA"]
-  Lookup -->|yes - path and tB| Miss["Miss or tB's own body"]
+  Lookup -->|no - path only| Leak["Company B receives secretA"]
+  Lookup -->|yes - path and company B| Miss["Miss or company B's own body"]
 ```
 
-The local lab’s vulnerable `cache_put` ignores the tenant argument when storing. Tenant B does not guess ids; they reuse the URL. `X-Forwarded-Host` is not required for the failure.
+The broken files’ `cache_put` ignores the company argument when storing. Company B does not guess ids; they reuse the URL. `X-Forwarded-Host` is not required for the failure.
 
-ASVS `v5.0.0-14.2.2` asks that sensitive data not sit in load-balancer or application caches, or that it be purged. `v5.0.0-14.3.2` is the **browser** anti-cache header (`Cache-Control: no-store`). They are different stores. A correct origin `no-store` does not fix a CDN that keys on path. A correct CDN tenant key does not fix a browser that cached a note body.
+Sensitive data in a load-balancer or application cache is one store. The browser’s `Cache-Control: no-store` is another. They are different stores. A correct origin `no-store` does not fix a CDN that keys on path. A correct CDN company key does not fix a browser that cached a note body.
 
-`v5.0.0-14.2.5` (Level 3) is web cache deception: unexpected content types and non-existent files. Label it advanced. This module’s oracle is tenant disagreement on the same path, not a public CDN poison.
+Web cache deception — unexpected types, files that do not exist — is a later, harder topic. This week’s check is company disagreement on the same path, not a public CDN poison.
 
-## Bound tenant versus forwarded identity
+## Bound company versus forwarded identity
 
-ASVS `v5.0.0-4.1.3`: header fields set by an intermediary (`X-Forwarded-*`, `X-Real-IP`, `X-User-ID`) must not be overridable by the end user if the application uses them. The cache key must use the **same bound tenant** the 1.2 policy used—not a client-supplied label.
+Header fields set by a proxy (`X-Forwarded-*`, `X-Real-IP`, `X-User-ID`) must not be overridable by the end user if the app uses them. The cache key must use the **same bound company** the who-is-allowed check used — not a label the client sent.
 
 | Source | Use in the key? |
 |---|---|
-| Server-resolved membership tenant after 1.2 | Yes, if you cache at all |
-| URL path `/notes/n1` | Necessary, never sufficient for notes |
-| `Authorization` cookie bytes as `Vary: Cookie` | Fragile; cookies are not tenant ids; later 2.3 |
+| Server-resolved membership company after the who-is-allowed check | Yes, if you cache at all |
+| URL path `/notes/n1` | Necessary, never enough for notes |
+| `Authorization` cookie bytes as `Vary: Cookie` | Fragile; cookies are not company ids; later cookies-and-sessions work |
 | Client `X-Tenant`, `Host`, `X-Forwarded-Host` | No |
 
-Default for note bodies: **do not cache** (`private` / `no-store`) unless a reviewable key tuple exists. Caching is an availability/cost choice that must not enlarge confidentiality blast radius.
+Default for note bodies: **do not cache** (`private` / `no-store`) unless a reviewable key tuple exists. Caching is an availability and cost choice that must not widen who can read a note.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | For this property |
+A path-only shared cache fails because **the designers trusted the URL as identity**. Company B hitting the same path is a **result**, not the cause.
+
+| Slice | For this rule |
 |---|---|
-| Root cause | Shared cache keyed without the bound tenant |
-| Preconditions | Shared store; path-only key; Tenant A populated the entry |
-| Trigger | Tenant B `GET /notes/n1` in the TTL window |
-| Impact | Confidentiality: cross-tenant read without guessing ids |
-| Prevention | Key = (bound tenant, route, representation); default no-store for notes |
-| Detection | Hit log with tenant mismatch; never log the body |
-| Recovery | Purge the prefix; treat escaped bodies as a 1.1 incident |
+| Why it happens | Shared cache keyed without the bound company |
+| What has to be true first | Shared store; path-only key; company A filled the entry |
+| Trigger | Company B `GET /notes/n1` while the entry is still live |
+| What it costs | Secrecy: a cross-company read without guessing ids |
+| How you stop it | Key = (bound company, route, representation); default no-store for notes |
+| How you notice | Hit log with a company mismatch; never log the body |
+| How you recover | Purge the prefix; treat escaped bodies as a secrecy incident |
 
-## Framework defaults versus the origin guarantee
+## What the framework does vs what you still have to check
 
-Next.js `fetch` cache and FastAPI defaults do not encode tenant. `Vary: Accept-Encoding` is a compression selector, not a tenant selector. Stale-while-revalidate can serve Tenant A to Tenant B if the key is still path-only. HTTP/2 push and URL normalization are later surfaces; they do not delete this sentence.
+Next.js `fetch` cache and FastAPI defaults do not encode company. `Vary: Accept-Encoding` is a compression selector, not a company selector. Stale-while-revalidate can serve company A to company B if the key is still path-only. HTTP/2 push and URL normalization are later surfaces; they do not delete this sentence.
 
-The application guarantee is: **this** fixture, `cache_get("/notes/n1", "tB")` after a Tenant A put, is not `tenant-A-note`. The oracle is `labs/2.2/2.2-request-path`. It is not a live CDN and not a public cache.
+The app’s promise is: on **these** practice files, `cache_get("/notes/n1", "tB")` after a company A put is not `tenant-A-note`. The practice folder is the local check for that sentence. It is not a live CDN and not a public cache.
 
-## Mechanism limits
+## What the tool cannot do
 
-- `Cache-Control: private` fails if the CDN is configured to cache anyway.
-- TLS client certificates (`v5.0.0-12.1.3`) authenticate a hop; they are not a cache key.
-- Encrypted Client Hello (`v5.0.0-12.1.5`, Level 3) hides SNI metadata; it does not bind tenant in a store.
-- Operational error at the CDN remains: a later config can drop the tenant dimension. Record residual and a purge playbook.
+- `Cache-Control: private` fails if the CDN is set to cache anyway.
+- TLS client certificates prove a hop; they are not a cache key.
+- Encrypted Client Hello hides some handshake metadata; it does not bind company in a store.
+- An operator can still drop the company dimension at the CDN. Record leftover risk and a purge playbook.
 
 ## Practice
 
-Write the key tuple for `/notes/n1` before you run tests. Name which field is the bound tenant and which fields are hostile. Then run the local pair:
+Write the key tuple for `/notes/n1` before you run checks. Name which field is the bound company and which fields are hostile. Then run the local pair:
 
-```
+```text
 python3 -m pytest labs/2.2/2.2-request-path/tests --impl vulnerable
 python3 -m pytest labs/2.2/2.2-request-path/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Map the assertion to path-only sharing, not to “TLS is off.”
+The first command must fail. The second must pass. Tie the check to path-only sharing, not to “TLS is off.”
 
-## Transfer
+## Use it somewhere new
 
-A clinic caches `GET /patients/me`. Authenticated RSS or a CSV export rides the same CDN. Which hop still has TLS, and which store still needs the bound patient or tenant in the key?
+A clinic caches `GET /patients/me`. Authenticated RSS or a CSV export rides the same CDN. Which hop still has TLS, and which store still needs the bound patient or company in the key?
 
-## Non-goals
+## What this page is not doing
 
-Live CDNs, poisoning a public cache, DNS hijacking labs, real patient charts, and “HTTPS means no cache bugs.” Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner or product evidence. Answer keys are not in this file.
+Live CDNs, poisoning a public cache, DNS hijack labs, real patient charts, and “HTTPS means no cache bugs.” Answer keys are not in this file.

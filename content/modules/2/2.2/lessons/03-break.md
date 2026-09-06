@@ -1,66 +1,74 @@
-# 2.2-LO-03 — Observe the path-only key, do not trophy it
+# Practice: a shared cache hands company A’s note to company B
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
-**Standards:** Saltzer and Schroeder (1975, seminal) least common mechanism; IETF RFC 9110 (final); IETF RFC 9846 TLS 1.3 (final).
 
-## Authorized scope
+## Try it
 
-`labs/2.2/2.2-request-path` only. Do not target other hosts, public CDNs, or third-party sites. Do not paste cache-poison payloads.
+The practice is not a website you attack. It is a tiny Python model of a shared cache. The failure is already in the object: the store keys only on path. You are here to see that the check treats that object as a **failed rule**, not as a performance nit.
 
-**Forbidden outcome:** shared cache returns Tenant A’s body to Tenant B.
+The rule:
 
-## Mental model: the tenant argument is ignored on store
+> A cache hit may return a note body only when the key includes the company the notes app already bound you to. Company B must not receive company A’s body for the same path.
+
+## Where you may practice
+
+Only `labs/2.2/2.2-request-path/` is in scope. No live CDN, no public cache, no third-party site, no classmate deployment. Restore the broken and repaired folders from git when you are done. Fake data only.
+
+Do not paste this exercise onto a public CDN, employer origin, or live clinic portal. Do not paste cache-poison payloads.
+
+## Picture: the company argument is ignored on store
 
 ```mermaid
 flowchart TD
-  Put["cache_put path, tA, secretA"] --> Key["Key = path only"]
+  Put["cache_put path, company A, secretA"] --> Key["Key = path only"]
   Key --> Slot["/notes/n1 -> secretA"]
-  Get["cache_get path, tB"] --> Slot
+  Get["cache_get path, company B"] --> Slot
   Slot --> Leak["returns secretA"]
 ```
 
-The vulnerable tree demonstrates **cause** (shared store, incomplete key), not a trophy exploit. Preconditions: shared dict; path-only key; Tenant A populated the entry. Attacker capability: a Tenant B principal who can `cache_get` the same path after Tenant A’s put—no DNS hijack, no TLS break. Trust assumption: the origin’s 1.2-bound tenant is the only identity allowed in the key. TLS is not even in the fixture—on purpose. If the property needed TLS to be “off,” the lab would be teaching the wrong sentence.
+The broken files show **cause** (shared store, incomplete key), not a trophy exploit. What has to be true first: shared dict; path-only key; company A filled the entry. What the attacker can do: a company B person who can `cache_get` the same path after company A’s put — no DNS hijack, no TLS break. What you trust: the origin’s bound company is the only identity allowed in the key. TLS is not even in the practice files — on purpose. If the rule needed TLS to be “off,” the practice would be teaching the wrong sentence.
 
-## What to read in the fixture
+## What to look at — cause, not a trophy
 
-`vulnerable/cache.py` accepts a `tenant` argument on put and get, then stores and looks up **only** `path`. Tenant B’s get returns Tenant A’s body. `X-Forwarded-Host` is not required.
+Read `vulnerable/cache.py` in the broken files as a design note. It accepts a `tenant` argument on put and get, then stores and looks up **only** `path`. Company B’s get returns company A’s body. `X-Forwarded-Host` is not required.
 
-Tests already bind:
+Checks already bind:
 
-- `test_same_tenant_cache_hit` — Tenant A still reads Tenant A.
-- `test_other_tenant_does_not_receive_cached_body` — Tenant B must not receive `tenant-A-note` (must be `None`).
+- `test_same_tenant_cache_hit` — company A still reads company A.
+- `test_other_tenant_does_not_receive_cached_body` — company B must not receive `tenant-A-note` (must be `None`).
 
-## Root cause vs impact
+## Why it happens vs what it costs
 
-| Slice | Lab |
+| Slice | Practice |
 |---|---|
-| Root cause | Key omitted the bound tenant; shared store |
-| Preconditions | Path-only key; tA populated the entry |
-| Impact | Cross-tenant read without guessing ids |
-| Not the lesson | A scanner name, CWE mnemonic, or “TLS is broken” |
-| Prevention | Key `(path, bound tenant)` or refuse to cache note bodies |
-| Detection | Hit with mismatched tenant id; never log the body |
-| Recovery | Purge the prefix; 1.1 incident if bodies already escaped |
+| Why it happens | Key omitted the bound company; shared store |
+| What has to be true first | Path-only key; company A filled the entry |
+| Trigger | Company B `cache_get` of the same path |
+| What it costs | Cross-company read without guessing ids |
+| Not the lesson | A scanner name, a famous-bugs code, or “TLS is broken” |
+| How you stop it | Key `(path, bound company)` or refuse to cache note bodies |
+| How you notice later | Hit with mismatched company id; never log the body |
+| How you recover | Purge the prefix; secrecy incident if bodies already escaped |
 
-## Framework defaults versus the cache guarantee
+## What the framework does vs what you still have to check
 
-Next.js `fetch` cache, FastAPI in-process dicts, and a CDN “HTTPS only” checkbox do not insert `tenant_id`. RFC 9846 authenticates a hop. RFC 9110 says what *may* be cached. Neither writes your key.
+Next.js `fetch` cache, FastAPI in-process dicts, and a CDN “HTTPS only” checkbox do not insert the company. TLS 1.3 proves a hop. HTTP rules say what *may* be cached. Neither writes your key. `Vary` is a selector you configure; it is not a gift of the URL.
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name `test_other_tenant_does_not_receive_cached_body`.
+Run checks against the broken files (they **must fail** on company B getting company A’s body). Record the check name `test_other_tenant_does_not_receive_cached_body`.
 
-```
+```text
 python3 -m pytest labs/2.2/2.2-request-path/tests --impl vulnerable
 ```
 
-Do not “fix” the test to pass. The failure *is* the evidence that the property is currently false.
+Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false.
 
-## Transfer
+## Use it somewhere new
 
 Authenticated RSS or export CSV via CDN. Predict a disagreement without running anything outside this directory.
 
-## Non-goals
+## What this page is not doing
 
-No live-target instructions. Synthetic data only.
+No live-target steps. No real people’s data. Do not “fix” the practice by deleting the check.
