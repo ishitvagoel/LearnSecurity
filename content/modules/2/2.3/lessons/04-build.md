@@ -1,16 +1,15 @@
-# 2.3-LO-04 — Honor HttpOnly; do not claim XSS is finished
+# Set HttpOnly; do not claim XSS is finished
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-3.3.4` and `v5.0.0-3.3.1`; CSP3 and Trusted Types labeled **Working Drafts** (see pins).
 
-## Structural means the script interpreter is excluded
+## The rule
 
-`js_read_session` must return `None` when `httponly` is true. Structural means the lab’s cookie model actually branches on the flag—not a comment, not Report-Only CSP, not “we will encode later in 6.2.”
+`js_read_session` must return `None` when `httponly` is true. Structural means the cookie model actually branches on the flag — not a comment, not Report-Only CSP, not “we will encode later.”
 
-The smallest restore for SecureCollab’s `sc_session` is: if the cookie is a session token, set HttpOnly, and make the script reader fail closed. Moving the token into `localStorage` enlarges the script share. Prefixes (`__Host-`) and `Secure` are sister cells (`v5.0.0-3.3.1`); they do not replace this branch.
+The smallest restore for the notes-app `sc_session` is: if the cookie is a session token, set HttpOnly, and make the script reader fail closed. Moving the token into `localStorage` enlarges the script share. Prefixes (`__Host-`) and `Secure` are sister rules; they do not replace this branch.
 
-## Mental model: one cell restored
+## Picture: one rule restored
 
 ```mermaid
 flowchart TD
@@ -19,9 +18,9 @@ flowchart TD
   Flag -->|no| Value[Return value - not a session token]
 ```
 
-The fixed tree honors the flag. XSS is **not** solved: encoding (6.2), CSP (draft), and Trusted Types (draft) remain later work. Fail-safe for a session token: if the flag is missing, treat it as a defect, not as “readable is fine.”
+The repaired files honor the flag. XSS is **not** solved: encoding, CSP (draft), and Trusted Types (draft) remain later work. Fail-safe for a session token: if the flag is missing, treat it as a defect, not as “readable is fine.”
 
-## Why this restores the cell
+## Why this restores the rule
 
 | After the fix | Must be true |
 |---|---|
@@ -29,34 +28,34 @@ The fixed tree honors the flag. XSS is **not** solved: encoding (6.2), CSP (draf
 | Cookie header to the origin | Still allowed; the jar may send `Cookie` |
 | Non-session cookies | May remain script-readable if that is the product intent; do not silently reuse the session name |
 
-ASVS `v5.0.0-3.3.4` (Level 2) wants HttpOnly when the value is not meant for scripts. The lab is that sentence, not a full cookie catalogue.
+Industry cookie lists want HttpOnly when the value is not meant for scripts. This practice is that sentence, not a full cookie catalogue.
 
 ## What this is not
 
-CSP3, Trusted Types, SameSite, `__Host-`, or moving the token to `localStorage`. Next.js `cookies()` defaults are not this cookie. Report-Only CSP (E2) is detection theater if you count it as this cell. FastAPI `Response.set_cookie(httponly=True)` is a mechanism; the pytest still has to observe unreadability.
+CSP3, Trusted Types, SameSite, `__Host-`, or moving the token to `localStorage`. Next.js `cookies()` defaults are not this cookie. Report-Only CSP is detection theater if you count it as this rule. FastAPI `Response.set_cookie(httponly=True)` is a tool; the check still has to observe unreadability.
 
-## Mechanism limits
+## What can still go wrong
 
-HttpOnly does not stop the script from calling `/notes` as the user, reading note bodies already in the DOM, or exfiltrating them. It does not stop extensions that see cookies. It does not set `Secure`. A WebView bridge can still expose the value if the bridge ignores the flag—name that as a later 8.x residual, not as a silent pass.
+HttpOnly does not stop the script from calling `/notes` as the user, reading note bodies already in the page, or copying them out. It does not stop extensions that see cookies. It does not set `Secure`. A WebView bridge can still expose the value if the bridge ignores the flag — name that as later leftover, not as a silent pass.
 
 ## Practice
 
-Name subject (script in the origin), object (`sc_session` value), action (read), and the predicate (`httponly` ⇒ `None`). Run:
+Name who (script in the origin), what (`sc_session` value), action (read), and the check that must be true (`httponly` ⇒ `None`). Run:
 
 ```text
 python3 -m pytest labs/2.3/2.3-browser-policy/tests --impl fixed
 ```
 
-Must pass.
+It must pass.
 
-## Transfer
+## Use it somewhere new
 
-Clinic portal session cookie. The fix is still “script cannot read the session token,” not “we shipped a CSP.” If the clinic also has a WebView, the same predicate must hold on that bridge.
+Clinic portal session cookie. The fix is still “script cannot read the session token,” not “we shipped a CSP.” If the clinic also has a WebView, the same check must hold on that bridge.
 
-## Residual risk
+## Leftover you will not delete
 
 Extensions; XSS without cookie theft; missing `Secure` on the same cookie; WebView bridges; draft CSP/Trusted Types unused.
 
-## Usability
+## Can people still use it
 
-The login form remains a 1.4 / 4.2 control. HttpOnly is invisible to the keyboard user. Do not trade an accessible login for a script-readable store.
+The login form remains a usable, who-is-allowed control. HttpOnly is invisible to the keyboard user. Do not trade an accessible login for a script-readable store.

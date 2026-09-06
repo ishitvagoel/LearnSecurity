@@ -1,14 +1,15 @@
-# 2.3-LO-06 — Detect a session cookie without HttpOnly; never log the value
+# Notice session cookies without HttpOnly; never log the value
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
-**Standards:** NIST CSF 2.0 (final) Detect / Respond / Recover as *outcome labels*, not proof; OWASP ASVS 5.0.0 (final) `v5.0.0-3.3.4`; Module 3.1 / 5.1 privacy of logs.
 
-## Prevention is not absolute
+## Stopping it is not enough
 
-A new cookie, a WebView, a “debug” `Set-Cookie`, or a second name (`sc_refresh`) can drop the flag. Pair detect and recover. Do not log session values, note bodies, or recovery codes.
+A new cookie, a WebView, a “debug” `Set-Cookie`, or a second name (`sc_refresh`) can drop the flag. Pair notice and recover. Do not log session values, note bodies, or recovery codes.
 
-## Mental model: scan the flags, rotate if script could have read
+## Picture: scan the flags, rotate if script could have read
+
+A missing HttpOnly flag is a notice-and-recover problem, not a licence to paste the session into a ticket. Notice names the cookie. Recover rotates it. Neither logs the value.
 
 ```mermaid
 flowchart TD
@@ -18,15 +19,15 @@ flowchart TD
   Log --> Rotate[Rotate session ids]
 ```
 
-CSF **Detect / Respond / Recover** name those boxes. They do not select a SIEM. They do not prove ASVS. Report-Only CSP (E2) is a **different** detect path. It does not restore this cell.
+Industry lists name detect, respond, recover. They do not pick a log product. They do not prove a checklist. Report-Only CSP is a **different** notice path. It does not restore this rule.
 
-| Outcome | This module |
+| Outcome | This topic |
 |---|---|
-| Detect | `Set-Cookie` without HttpOnly on session names in staging or canary |
-| Signal | cookie **name** + reason + request id; never the value |
+| Notice | `Set-Cookie` without HttpOnly on session names in staging or canary |
+| What the line holds | cookie **name** + reason + request id; never the value |
 | Respond | Stop issuing the broken setter; do not “help” by emailing the session |
 | Recover | Rotate session ids; fix the setter; re-run `test_script_cannot_read_httponly_session` |
-| Residual | Extensions; physical access; XSS that never needed the cookie |
+| Leftover | Extensions; physical access; XSS that never needed the cookie |
 
 A log line a reviewer can accept looks like:
 
@@ -38,16 +39,16 @@ Not: `synthetic-session`, a note body, or a personal mailbox.
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/2.3/2.3-browser-policy`. Reject any line that includes the fixture value. Name who owns the WebView residual and what trigger reopens it.
+Write one log line you would accept in review. Tie it to `labs/2.3/2.3-browser-policy`. Reject any line that includes the dummy session value. Name who owns the WebView leftover and what trigger reopens it.
 
-## Transfer
+## Use it somewhere new
 
-Clinic portal. Staging scans must include WebView or second-cookie names, not only `sc_session`. A privacy-safe Detect signal still has no chart text.
+Clinic portal. Staging scans must include WebView or second-cookie names, not only `sc_session`. A privacy-safe notice still has no chart text.
 
-## Usability
+## Can people still use it
 
-The alternate path after rotation (re-login) must itself meet 1.4: named, keyboard-operable, not color-only. WCAG 2.2 2.1.1, 1.4.1, and 2.5.8 apply to that path. They are not a cookie policy.
+The alternate path after rotation (sign in again) must itself meet keyboard, name, and not-color-only. Those rules apply to that path too. They are not a cookie policy.
 
-## Non-goals
+## What this page is not doing
 
-SIEM product names are not the property. Keys stay out of lessons.
+A log-product name is not the rule. Answer keys stay out of lessons.
