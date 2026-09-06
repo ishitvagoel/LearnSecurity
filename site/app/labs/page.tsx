@@ -1,5 +1,5 @@
 import { PageHeader, PageShell } from "@/components/ui";
-import { phaseHeading, phaseList, topicBlurb } from "@/lib/catalog";
+import { phaseHeading, phaseList, topicBlurb, topicTitle } from "@/lib/catalog";
 import { loadAllModules } from "@/lib/loadCurriculum";
 import Link from "next/link";
 
@@ -49,7 +49,7 @@ export default function LabsIndexPage() {
                     className="block h-full rounded-xl border border-stone-200 bg-white p-4 shadow-sm hover:border-stone-400"
                   >
                     <p className="font-mono text-xs text-stone-600">{m.id}</p>
-                    <p className="mt-1 font-semibold text-blue-900">{m.title}</p>
+                    <p className="mt-1 font-semibold text-blue-900">{topicTitle(m)}</p>
                     <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-stone-700">
                       {topicBlurb(m)}
                     </p>

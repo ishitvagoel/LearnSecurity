@@ -8,6 +8,7 @@ import {
   formatMinutes,
   phaseHeading,
   topicBlurb,
+  topicTitle,
   trackLabel,
 } from "@/lib/catalog";
 import {
@@ -28,7 +29,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props) {
   const { id } = await params;
   const mod = loadAllModules().find((m) => m.id === id);
-  return { title: mod ? `${mod.id} ${mod.title}` : "Topic" };
+  return { title: mod ? `${mod.id} ${topicTitle(mod)}` : "Topic" };
 }
 
 export default async function ModulePage({ params }: Props) {
@@ -50,7 +51,7 @@ export default async function ModulePage({ params }: Props) {
         {" · "}
         Part {mod.phase} · {phaseHeading(mod.phase)}
       </p>
-      <PageHeader title={`${mod.id} — ${mod.title}`}>
+      <PageHeader title={`${mod.id} — ${topicTitle(mod)}`}>
         <p>{topicBlurb(mod)}</p>
         <p>
           {lessons.length} page{lessons.length === 1 ? "" : "s"}. Read them in

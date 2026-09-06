@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHeader, PageShell } from "@/components/ui";
-import { topicBlurb } from "@/lib/catalog";
+import { topicBlurb, topicTitle } from "@/lib/catalog";
 import { loadAllModules, loadModule, moduleHref } from "@/lib/loadCurriculum";
 
 type Props = { params: Promise<{ id: string }> };
@@ -36,7 +36,7 @@ export default async function LabBriefPage({ params }: Props) {
           href={moduleHref(mod.id)}
           className="text-blue-900 underline-offset-2 hover:underline"
         >
-          {mod.id} — {mod.title}
+          {mod.id} — {topicTitle(mod)}
         </Link>
       </p>
       <PageHeader title={`Practice — ${mod.id}`}>

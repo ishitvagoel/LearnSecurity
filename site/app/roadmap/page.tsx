@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { PageHeader, PageShell } from "@/components/ui";
-import { PHASES, phaseHeading, phaseList } from "@/lib/catalog";
+import { PHASES, phaseHeading, phaseList, topicTitle } from "@/lib/catalog";
 import { loadAllModules, moduleHref } from "@/lib/loadCurriculum";
 
 export default function RoadmapPage() {
@@ -54,7 +54,7 @@ export default function RoadmapPage() {
                     >
                       {mod.id}
                       <span className="ml-1.5 max-w-[14rem] truncate font-sans text-stone-600">
-                        {mod.title}
+                        {topicTitle(mod)}
                       </span>
                     </Link>
                   </li>

@@ -21,7 +21,7 @@ export default function StandardsPage() {
         <p>
           These are the published lists and papers the course points at. A list
           of common bugs is a reminder after you have a rule — it is not the
-          syllabus. A draft stays labeled as a draft.
+          course order. A draft stays labeled as a draft.
         </p>
       </PageHeader>
       <h2 className="mb-3 text-xl font-semibold">What we point at</h2>

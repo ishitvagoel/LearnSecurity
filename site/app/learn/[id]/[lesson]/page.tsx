@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { LessonReader } from "@/components/LessonReader";
 import { parseLessonLead } from "@/lib/headings";
+import { topicTitle } from "@/lib/catalog";
 import {
   loadAllModules,
   loadLessons,
@@ -31,7 +32,7 @@ export async function generateMetadata({ params }: Props) {
   const { id, lesson } = await params;
   const mod = loadAllModules().find((m) => m.id === id);
   if (!mod) {
-    return { title: "Lesson" };
+    return { title: "Page" };
   }
   const lo = loadLessons(mod).find((x) => x.filename.replace(/\.md$/, "") === lesson);
   return { title: lo ? `${mod.id} · ${lo.title}` : `${mod.id} · ${lesson}` };
@@ -56,7 +57,7 @@ export default async function LessonPage({ params }: Props) {
   return (
     <LessonReader
       moduleId={mod.id}
-      moduleTitle={mod.title}
+      moduleTitle={topicTitle(mod)}
       lessonTitle={lo.title}
       kind={lead.kind || lo.kind}
       index={index}

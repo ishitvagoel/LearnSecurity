@@ -7,6 +7,7 @@ import {
   formatMinutes,
   phaseHeading,
   topicBlurb,
+  topicTitle,
   trackLabel,
 } from "@/lib/catalog";
 import { moduleHref } from "@/lib/loadCurriculum";
@@ -22,7 +23,7 @@ export function ModuleCard({ mod }: { mod: ModuleMeta }): ReactElement {
         <p className="font-mono text-xs font-medium text-stone-600">{mod.id}</p>
         <Chip>{trackLabel(mod.track)}</Chip>
       </div>
-      <h3 className="mt-2 text-base font-semibold text-stone-900">{mod.title}</h3>
+      <h3 className="mt-2 text-base font-semibold text-stone-900">{topicTitle(mod)}</h3>
       <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-stone-700">
         {topicBlurb(mod)}
       </p>

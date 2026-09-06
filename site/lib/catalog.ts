@@ -52,6 +52,67 @@ export const PHASES: Record<number, { title: string; blurb: string }> = {
   },
 };
 
+/** Short names for cards and headers. Not the curriculum YAML titles. */
+export const TOPIC_TITLE: Record<string, string> = {
+  "0.1": "How to use this course",
+  "0.2": "A first check-in",
+  "1.1": "What “secure” means",
+  "1.2": "Who is allowed to do what",
+  "1.3": "Where trust stops",
+  "1.4": "People, money, and recovery",
+  "2.1": "Text, files, and parsers",
+  "2.2": "The path a request takes",
+  "2.3": "What a web page can do",
+  "2.4": "Time and two things at once",
+  "3.1": "What you are protecting",
+  "3.2": "Who might attack",
+  "3.3": "How to structure the app",
+  "3.4": "Tricks on the happy path",
+  "4.1": "Accounts",
+  "4.2": "Signing in",
+  "4.3": "Staying signed in",
+  "4.4": "Keeping companies apart",
+  "4.5": "Sign in with other apps",
+  "5.1": "What you store, and for how long",
+  "5.2": "What encryption does and does not do",
+  "5.3": "Passwords and keys",
+  "5.4": "Talking to the right place",
+  "5.5": "The database",
+  "6.1": "Typed-in text must not become a command",
+  "6.2": "Pages must not run someone else’s script",
+  "6.3": "Clicks from another site",
+  "6.4": "Uploads and file names",
+  "6.5": "The server fetching a URL",
+  "6.6": "Two clicks and skipped checks",
+  "6.7": "Asking for more than a fair share",
+  "7.1": "What your API actually offers",
+  "7.2": "Some fields, not every field",
+  "7.3": "Other companies calling you back",
+  "7.4": "Background jobs",
+  "8.1": "Don’t trust the phone app",
+  "8.2": "What’s stored on the device",
+  "8.3": "Links that open the app",
+  "8.4": "How the app is built and shipped",
+  "8.5": "Checking a phone app",
+  "9.1": "Each claim needs a check",
+  "9.2": "Reading a change like an attacker",
+  "9.3": "Tests for the bad case",
+  "9.4": "Scanners are not the whole check",
+  "9.5": "A test with permission, then a fix",
+  "10.1": "How the team works",
+  "10.2": "Git, the build, and libraries",
+  "10.3": "Cloud accounts and containers",
+  "10.4": "Settings in production",
+  "10.5": "Logs, alerts, and getting back up",
+  "11": "Putting the notes app together",
+  E1: "When the app calls an AI",
+  E2: "Headers, the edge, and the browser",
+  E3: "Payments and health data",
+  E4: "Code that copies bytes",
+  E5: "Switching you into another customer",
+  E6: "A risk you accept",
+};
+
 /** One plain sentence per topic, for cards. Not the curriculum outcome text. */
 export const TOPIC_BLURB: Record<string, string> = {
   "0.1": "The rules for practice, and how a topic is put together.",
@@ -112,6 +173,10 @@ export const TOPIC_BLURB: Record<string, string> = {
   E5: "A JSON field must not switch you into another customer’s workspace.",
   E6: "A risk you accept needs an owner and a date, not a shrug.",
 };
+
+export function topicTitle(mod: ModuleMeta): string {
+  return TOPIC_TITLE[mod.id] || mod.title;
+}
 
 export function topicBlurb(mod: ModuleMeta): string {
   return TOPIC_BLURB[mod.id] || mod.title;
