@@ -1,33 +1,42 @@
-# 10.1 — Secure software lifecycle and security culture (7 Transfer)
+# 10.1-LO-07 — Transfer: clinic HIPAA training as merge
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** NIST SSDF 1.1 SP 800-218 (final); OWASP SAMM; CISA Secure by Design.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** NIST SSDF 1.1 PW.1. SAMM 2.0 as vocabulary. CISA Secure by Design remains **unverified**.
 
-## Property (start here)
+## Change the workplace; keep training from meaning TM
 
-A SecureCollab PR cannot merge without a threat-model identifier for the changed surface. Culture is the merge gate, not a poster.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic: “HIPAA training complete” as merge. Also name the E6 exception path.
 
-- **Attacker:** Schedule pressure.
-- **Trust:** Local merge_ok({}).
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite “CODEOWNERS plus annual HIPAA training so we merge identity PRs,” plus a SAMM score on a slide.
 
-**Prompt:** Exception path (E6).
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic: “HIPAA training complete” as merge.
+1. attacker capabilities (schedule pressure — not a live clinic);
+2. trust assumptions (merge predicate is TCB; CODEOWNERS/training/SAMM are not);
+3. forbidden outcome (`merge_ok({})` true, not “HIPAA”);
+4. a test idea on a **local** fixture only;
+5. residual (stale tm-id, vanity KPIs, E6);
+6. WCAG if a human merge path exists (say which surface needs a TM).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: training vs 3.2
+
+```mermaid
+flowchart LR
+  Train[HIPAA training done] --> Belief[safe to merge]
+  Empty[no threat_model] --> Reality[identity surface without 3.2]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | CODEOWNERS is not a threat model.… |
-| Live-target plan | Lab policy |
+| “CODEOWNERS” | Who clicks, not what changed |
+| Live GitHub org | Lab policy |
+| “Secure by Design certified” | Pin is unverified; not merge_ok |
 
 ## Practice
 
-One page. No keys. The lab `labs/10.1/10.1-lab` stays the only running system you may break.
+One page. No keys. `labs/10.1/10.1-lab` is the only running system you may break.

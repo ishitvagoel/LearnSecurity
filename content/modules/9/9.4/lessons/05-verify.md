@@ -1,38 +1,44 @@
-# 9.4 — Automated analysis and tool orchestration (5 Verify)
+# 9.4-LO-05 — Evidence is unmapped HIGH denied, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** NIST SSDF (final); OWASP SAMM; OpenSSF. Tools are signals.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-15.2.1`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A HIGH finding without a mapped SecureCollab requirement cannot pass the ship gate. Unmapped means unowned, not “probably fine.”
+“Code scanning on” is not evidence. The oracle is the local pair. Do not scan public repos.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Alert fatigue; vendor dashboard theater.
-- **Trust:** Local ship_ok(findings, map).
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail empty map"]
+  X["--impl fixed"] --> P["Must pass deny"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Unmapped HIGH finding allows ship |
-| Failure | Fail closed: Block unmapped HIGH; allow mapped+accepted with E6 |
+| Negative / abuse | unmapped HIGH → not ship |
+| Normal | mapped HIGH → may ship |
+| Not claimed | real GHAS; Gate 9; SAMM |
 
-Lab tests: `test_property.py` under `labs/9.4/9.4-lab`.
+```
+python3 -m pytest labs/9.4/9.4-lab/tests --impl vulnerable
+python3 -m pytest labs/9.4/9.4-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Unmapped HIGH finding allows ship`
-- `--impl fixed`: **pass**
+Honest mapped HIGH may pass on both.
 
-unmapped HIGH blocks.
+## What the tests do not prove
+
+- That the mapped requirement is the right cell (9.1)
+- That a 9.3 isolation test exists
+- Live SCA reachability
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-SCA CVE vs actually called function.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic: a test that only asserts “scanner job ran” is not this cell.

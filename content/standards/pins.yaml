@@ -39,7 +39,7 @@ pins:
     reviewedAt: "2026-08-29"
     url: "https://owasp.org/www-project-application-security-verification-standard/"
     role: "Web/API security requirements and assurance baseline"
-    notes: "Project page confirms latest stable 5.0.0 released 30 May 2025. The 2026-08-29 Module 1.3 check used the immutable v5.0.0 tag. 2026-09-06 Modules 2.1–9.3 pinned as listed in those module.yaml files. Module 7.1 used v5.0.0-15.3.3 (mass assignment; GraphQL 4.3.2 introspection and 4.3.1 query cost as distinct grains; 4.1.4 unused methods labeled Level 3 advanced). Module 7.2 used v5.0.0-8.2.3 (field-level / BOPLA; 8.3.2 labeled Level 3 advanced). Module 7.3 used v5.0.0-11.2.1 (validated HMAC implementation; 2.3.4 / 2.3.3 replay/freshness; 4.1.5 per-message signatures labeled Level 3 advanced). Module 7.4 used v5.0.0-13.2.1 / 13.2.2 (backend service accounts and least privilege; 8.3.3 originating subject labeled Level 3 advanced). Modules 8.1/8.3/8.4 reuse v5.0.0-8.3.1 (trusted service layer) so mobile clients cannot authorize; 8.4 also pins v5.0.0-13.3.1 (secrets not in artifacts). Module 8.5 reuses v5.0.0-16.2.5 (logging by protection level; spiral from 3.1) and labels v5.0.0-16.5.4 last-resort error handlers as Level 3 advanced. Module 9.1 treats ASVS Level 2 as the web/API backbone for AUTHZ-1 coverage (v5.0.0-8.2.1 / 8.2.2) and labels v5.0.0-8.3.2 immediate grant change as Level 3 advanced, not a spreadsheet 'done' cell. Module 9.2 pins v5.0.0-1.3.2 (avoid eval / dynamic code execution) and labels v5.0.0-15.1.5 documenting dangerous functionality as Level 3 advanced. Module 9.3 owns test *shape* (forbidden outcome), not the ASVS catalogue of *what* to test; v5.0.0-15.4.1 concurrency/TOCTOU tests are labeled Level 3 advanced. Use exact v5.0.0-<chapter>.<section>.<requirement> identifiers; do not mix ASVS 4.x IDs. Level 3 guidance is labeled advanced. Module 1.1 intentionally does not map ASVS requirements."
+    notes: "Project page confirms latest stable 5.0.0 released 30 May 2025. The 2026-08-29 Module 1.3 check used the immutable v5.0.0 tag. 2026-09-06 Modules 2.1–10.2 pinned as listed in those module.yaml files. Module 7.1 used v5.0.0-15.3.3 (mass assignment; GraphQL 4.3.2 introspection and 4.3.1 query cost as distinct grains; 4.1.4 unused methods labeled Level 3 advanced). Module 7.2 used v5.0.0-8.2.3 (field-level / BOPLA; 8.3.2 labeled Level 3 advanced). Module 7.3 used v5.0.0-11.2.1 (validated HMAC implementation; 2.3.4 / 2.3.3 replay/freshness; 4.1.5 per-message signatures labeled Level 3 advanced). Module 7.4 used v5.0.0-13.2.1 / 13.2.2 (backend service accounts and least privilege; 8.3.3 originating subject labeled Level 3 advanced). Modules 8.1/8.3/8.4 reuse v5.0.0-8.3.1 (trusted service layer) so mobile clients cannot authorize; 8.4 also pins v5.0.0-13.3.1 (secrets not in artifacts). Module 8.5 reuses v5.0.0-16.2.5 (logging by protection level; spiral from 3.1) and labels v5.0.0-16.5.4 last-resort error handlers as Level 3 advanced. Module 9.1 treats ASVS Level 2 as the web/API backbone for AUTHZ-1 coverage (v5.0.0-8.2.1 / 8.2.2) and labels v5.0.0-8.3.2 immediate grant change as Level 3 advanced, not a spreadsheet 'done' cell. Module 9.2 pins v5.0.0-1.3.2 (avoid eval / dynamic code execution) and labels v5.0.0-15.1.5 documenting dangerous functionality as Level 3 advanced. Module 9.3 owns test *shape* (forbidden outcome), not the ASVS catalogue of *what* to test; v5.0.0-15.4.1 concurrency/TOCTOU tests are labeled Level 3 advanced. Module 9.4 pins v5.0.0-15.2.1 (component update timeframes as an SCA *signal*) and labels v5.0.0-15.2.4 dependency confusion as Level 3 advanced — scanners do not replace 9.1 mapping. Module 9.5 reuses v5.0.0-8.2.1 as the example cell that must be *retested*, not closed by a PDF. Module 10.1 pins v5.0.0-15.1.5 documenting dangerous functionality as Level 3 advanced (a merge trigger, not merge_ok). Module 10.2 pins v5.0.0-15.1.2 (SBOM inventory) and v5.0.0-13.3.1 (secrets not in artifacts), and labels v5.0.0-15.2.4 as Level 3 advanced. Use exact v5.0.0-<chapter>.<section>.<requirement> identifiers; do not mix ASVS 4.x IDs. Level 3 guidance is labeled advanced. Module 1.1 intentionally does not map ASVS requirements."
   - id: owasp-threat-modeling
     source: OWASP Threat Modeling Project
     version: "maintained-project-guidance"
@@ -93,7 +93,7 @@ pins:
     reviewedAt: "2026-08-23"
     url: "https://owaspsamm.org/model/"
     role: "Governance and measurement of security practice; not a vulnerability list"
-    notes: "Five business functions / fifteen practices. This module uses SAMM only for metrics vs vanity and residual-risk communication; full SAMM assessment is E6/10.1."
+    notes: "Five business functions / fifteen practices. Rechecked 2026-09-06 at owaspsamm.org/model/. Module 1.1 used SAMM only for metrics vs vanity. Module 9.4 uses Implementation/Verification streams as measurement vocabulary for scanner triage, not as a ship-gate sticker. Module 10.1 uses SAMM for culture/process maturity, not as merge_ok. Do not treat a SAMM score as ASVS coverage (9.1) or as Gate 9/10."
   - id: rfc-9846-tls-1.3
     source: IETF RFC 9846 TLS 1.3
     version: "RFC 9846"
@@ -165,7 +165,7 @@ pins:
     reviewedAt: "2026-09-06"
     url: "https://csrc.nist.gov/pubs/sp/800/218/final"
     role: "Secure development practice vocabulary; not a control catalogue for tenant isolation"
-    notes: "SSDF 1.1 (SP 800-218) remains the final baseline. SP 800-218 Rev. 1 / SSDF 1.2 is an Initial Public Draft (17 Dec 2025); comment period closed 30 Jan 2026 and is still draft — see nist-sp-800-218-r1-ssdf-1.2. Module 3.3 uses 1.1 only for design-review vocabulary (PW.1 design); architecture guarantees are the DB-role tests, not an SSDF attestation. Modules 9.1–9.3 use 1.1 PW.1 (design), PW.7 (code review), PW.8 (testing), and RV.1 (identify vulnerabilities) as practice vocabulary, not as Gate 9 evidence."
+    notes: "SSDF 1.1 (SP 800-218) remains the final baseline. SP 800-218 Rev. 1 / SSDF 1.2 is an Initial Public Draft (17 Dec 2025); comment period closed 30 Jan 2026 and is still draft — see nist-sp-800-218-r1-ssdf-1.2. Module 3.3 uses 1.1 only for design-review vocabulary (PW.1 design); architecture guarantees are the DB-role tests, not an SSDF attestation. Modules 9.1–9.5 and 10.1 use 1.1 PW.1 / PW.7 / PW.8 / RV.1 as practice vocabulary, not as Gate 9/10 evidence."
   - id: rfc-9700-oauth-security
     source: IETF RFC 9700 Best Current Practice for OAuth 2.0 Security
     version: "RFC 9700"
@@ -300,7 +300,7 @@ pins:
     reviewedAt: "2026-09-06"
     url: "https://owasp.org/www-project-web-security-testing-guide/v42/"
     role: "Catalogue of *what* web tests exist; not the definition of a security-test shape"
-    notes: "Stable v4.2 released 3 Dec 2020. Use versioned /v42/ links. WSTG 5.0 is in development and must be labeled draft if cited. Module 9.3 owns forbidden-outcome *shape*; WSTG names candidate tests (for example authorization). Do not treat a WSTG checklist membership as coverage (9.1) or as a passing security test."
+    notes: "Stable v4.2 released 3 Dec 2020. Use versioned /v42/ links. WSTG 5.0 is in development and must be labeled draft if cited. Module 9.3 owns forbidden-outcome *shape*; WSTG names candidate tests (for example authorization). Module 9.5 uses WSTG as the authorized-assessment catalogue of *what* to retest, not as a PDF that closes a finding. Do not treat a WSTG checklist membership as coverage (9.1) or as a passing security test."
   - id: owasp-code-review-guide-2
     source: OWASP Code Review Guide
     version: "2.0"
@@ -309,4 +309,58 @@ pins:
     reviewedAt: "2026-09-06"
     url: "https://owasp.org/www-project-code-review-guide/"
     role: "Review-method guidance; not a control catalogue and not a review oracle"
-    notes: "July 2017 PDF (v2) remains the published book. The project page still hosts that PDF; the repository was archived in April 2025. Module 9.2 uses it as *how to look* (data flow, authority, interpreters), not as ASVS IDs and not as the lab substring check. Complementary maintained guidance: OWASP Secure Code Review Cheat Sheet. Do not treat LGTM plus this PDF as Gate 9."
+    notes: "July 2017 PDF (v2) remains the published book. The project page still hosts that PDF; the repository was archived in April 2025. Module 9.2 uses it as *how to look* (data flow, authority, interpreters), not as ASVS IDs and not as the lab substring check. Complementary maintained guidance: OWASP Secure Code Review Cheat Sheet. Do not treat LGTM plus this PDF as Gate 9. Module 9.4 treats scanners as signals that still need this kind of human context."
+  - id: slsa-1.2
+    source: Supply-chain Levels for Software Artifacts (SLSA)
+    version: "1.2"
+    status: final
+    publishedAt: "2025"
+    reviewedAt: "2026-09-06"
+    url: "https://slsa.dev/spec/v1.2/"
+    role: "Build provenance and isolation tracks; not application authorization"
+    notes: "Live-checked 2026-09-06 at slsa.dev/spec/v1.2/. Module 10.2 uses SLSA as provenance vocabulary. A SLSA badge is not the lockfile digest check and not ASVS v5.0.0-8.2.1. Build L3 isolation is a *platform* claim, not SecureCollab 1.2."
+  - id: openssf-osps-baseline-2026-08-28
+    source: OpenSSF Open Source Project Security (OSPS) Baseline
+    version: "2026-08-28"
+    status: final
+    publishedAt: "2026-08-28"
+    reviewedAt: "2026-09-06"
+    url: "https://baseline.openssf.org/versions/2026-08-28.html"
+    role: "Open-source project control baseline; not a lockfile verifier"
+    notes: "Versioned snapshot 2026-08-28 on baseline.openssf.org. Module 10.2 cites OSPS as project-posture guidance (branch protection, reviews, builds). Do not treat an OSPS dashboard as install_ok. Prefer the dated URL over /versions/devel.html."
+  - id: first-cvss-4.0
+    source: FIRST Common Vulnerability Scoring System
+    version: "4.0"
+    status: final
+    publishedAt: "2023-11-01"
+    reviewedAt: "2026-09-06"
+    url: "https://www.first.org/cvss/v4.0/specification-document"
+    role: "Severity input to triage; not the close/retest predicate"
+    notes: "CVSS v4.0 specification. Module 9.5 uses Base/Threat/Environmental metrics as *inputs* to priority. A 9.8 does not close a finding and does not replace a same-cell retest. Do not outsource remediation order to a number."
+  - id: cisa-kev
+    source: CISA Known Exploited Vulnerabilities Catalog
+    version: "current-catalog"
+    status: awareness
+    publishedAt: "current"
+    reviewedAt: "2026-09-06"
+    url: "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"
+    role: "Active-exploitation context; not a pentest report and not a close decision"
+    notes: "Living catalog. Module 9.5 uses KEV as *whether exploitation is observed in the wild*, distinct from CVSS severity and from business priority. Do not treat a KEV listing as authorization to scan public systems. Lab scope stays local."
+  - id: cisa-sbom-minimum-elements-2026
+    source: CISA 2026 Minimum Elements for a Software Bill of Materials (SBOM)
+    version: "2026"
+    status: final
+    publishedAt: "2026-07-29"
+    reviewedAt: "2026-09-06"
+    url: "https://www.cisa.gov/resources-tools/resources/2026-minimum-elements-software-bill-materials-sbom"
+    role: "SBOM field baseline; inventory not install integrity"
+    notes: "Published 29 July 2026; updates the 2021 NTIA minimum elements. Module 10.2 treats an SBOM as inventory (ASVS v5.0.0-15.1.2). Generating an SBOM does not verify lockfile digests. Do not treat a CycloneDX file as install_ok."
+  - id: nist-sp-800-161r1
+    source: NIST SP 800-161 Rev. 1 Cybersecurity Supply Chain Risk Management
+    version: "r1-upd1"
+    status: final
+    publishedAt: "2024-11-01"
+    reviewedAt: "2026-09-06"
+    url: "https://csrc.nist.gov/pubs/sp/800/161/r1/upd1/final"
+    role: "Organization-level C-SCRM practices; not a pip hash check"
+    notes: "SP 800-161r1-upd1, updates as of 1 Nov 2024. Module 10.2 uses it for supplier/risk-management vocabulary. The lab oracle remains digest match. Do not treat a C-SCRM plan as Gate 10."

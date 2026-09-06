@@ -1,48 +1,49 @@
-# 9.5 — Authorized assessment, reporting, and remediation (4 Build)
+# 9.5-LO-04 — Require retest equals pass
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** OWASP WSTG (final); CVSS 4.0 (final spec) as *input* not the decision; CISA KEV as exploitation context.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.1`. NIST SSDF 1.1 RV.2.
 
-## Property (start here)
+## Structural means close looks at the retest field
 
-A finding cannot be closed without a passing retest of the same forbidden outcome. A PDF report is not remediation. Scope stays the local lab.
+`close_finding` must require `retest == "pass"`. Missing, `"fail"`, or `"scheduled"` is deny. That is the lab stand-in for “the same 9.3 command passed.”
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail closed
 
-- **Attacker:** Paper-compliance; ignored variant classes.
-- **Trust:** Local close_finding({retest}).
-retest None => cannot close.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-def close_finding(f):
-    return f.get('retest') == 'pass'
+```mermaid
+flowchart TD
+  Call[close_finding] --> R{"retest pass?"}
+  R -->|yes| Allow[close]
+  R -->|no| Deny[keep open]
 ```
+
+Do not accept a PDF attachment as `retest`.
 
 ## Why this restores the cell
 
-Require retest of the same cell.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| `{retest: None}` | close false |
+| `{retest: "pass"}` | close true |
 
 ## What this is not
 
-Jira Done is not retest.
-
-CVSS 9.8 vs business priority — you still judge.
+CVSS. KEV. Jira Done. Gate 9. A retest of `/health`.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name the residual (variants; wrong endpoint). Run:
+
+```
+python3 -m pytest labs/9.5/9.5-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-KEV vs internal-only.
+Clinic: keep the finding open until the isolation pytest is green.
 
 ## Residual risk
 
-Unknown variants — hunt (same root cause).
+Same-root-cause variants (7.2 fields); `v5.0.0-8.3.2` Level 3 caches; exploratory leftovers.

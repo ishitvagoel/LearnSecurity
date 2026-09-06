@@ -1,6 +1,6 @@
 # 9.4 — Automated analysis and tool orchestration
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. Tools are signals, not Gate 9.
 
 ## Identity
 
@@ -9,71 +9,77 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** Automated analysis and tool orchestration
 - **phase / track / difficulty:** 9 / core / advanced
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Blueprint §7; 9.1 coverage; 9.2 review; 9.3 test shape.
 - **routeTags:** complete, web-api
 - **releaseMilestone:** None
 - **masteryGate:** 9
 
 ## Objective hierarchy
 
-1. Produce **CI signal design and scanner blind-spot analysis** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce a **ship predicate** so an unmapped HIGH cannot ship.
+2. Name attacker capabilities (alert fatigue; dashboard theater) and trust assumptions (local `ship_ok(findings, map)`).
+3. Transfer: SCA CVE vs actually called function; clinic 50 unmapped HIGHs — without treating a scanner as 1.2.
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+9.1 mapping; 9.2 human context; 9.3 forbidden-outcome tests. NIST SSDF 1.1 PW.7/PW.8; OWASP SAMM 2.0 as measurement vocabulary; OpenSSF as project posture. SSDF 1.2 IPD **draft**.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- Zero findings means secure.
+- Tool X replaces ASVS.
+- Reachability is optional theater.
+- GitHub code scanning default is the ship policy.
+- A SAMM score is Gate 9.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+Coverage (9.1) → review (9.2) → tests (9.3) → scanner *signals* (this module) → pentest/retest (9.5). Blind spots remain for authz logic.
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true for `ship_ok([HIGH], {})`?
+- What fails if a suppression has no owner?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can go wrong when HIGH findings are unmapped?
+- What residual remains after every HIGH is mapped?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/9.4/9.4-lab`. Forbidden: unmapped HIGH finding allows ship. No live GitHub Advanced Security tenants.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-NIST SSDF; OWASP SAMM; OpenSSF — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- OWASP ASVS 5.0.0 (final): `v5.0.0-15.2.1` component update timeframes as an SCA *signal*. `v5.0.0-15.2.4` dependency confusion is **Level 3, labeled advanced**.
+- NIST SSDF 1.1 (final) PW.7 / PW.8 / RV.1. SSDF 1.2 IPD is **draft**.
+- OWASP SAMM 2.0 (final): measurement vocabulary, not a ship sticker.
+- OpenSSF OSPS Baseline 2026-08-28 (final): project posture, not `ship_ok`.
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+Unmapped HIGH ships; suppressions without owner; SAST offered as Gate 9; no blind-spot note for IDOR.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: CI signal design and scanner blind-spot analysis.
+Evidence: CI signal design + one mapped/unmapped pair. Feeds Gate 9 (not-attempted).
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`unmapped_high_blocks`. Do not suppress silently. Authz logic remains a 9.2/9.3 blind spot.
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: scanner-is-signal; unmapped HIGH; SAMM as vocabulary |

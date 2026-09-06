@@ -1,29 +1,31 @@
-# 10.2 — Source control, CI/CD, and software supply chain (Review)
+# 10.2-LO-08 — Review always-true install_ok as a PR
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** SLSA 1.2; OpenSSF OSPS; CISA 2026 SBOM minimum elements; NIST 800-161r1. Pin versions.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** ASVS `v5.0.0-15.1.2`, `v5.0.0-13.3.1`. SLSA 1.2 as vocabulary.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab CI install
 
-A dependency whose digest does not match the lockfile must not install. Integrity of build inputs is the cell — not “we have Dependabot.”
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Typosquat; compromised maintainer; poisoned PR from a fork.
-- **Trust:** Local install_ok(got, expected).
 Review `labs/10.2/10.2-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/10.2.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|mismatch installs| Property["Property - good if tested"]
+  Q -->|SBOM attached| Mechanism[Mechanism - inventory]
+  Q -->|SLSA badge| False[False assurance]
+```
 
-- Seeded smell (label it yourself): install_ok True on hash mismatch
-- Seeded smell (label it yourself): Unpinned action
-- Seeded smell (label it yourself): Secrets in PR from forks
-- Seeded smell (label it yourself): SBOM generated but never used
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- install_ok True on hash mismatch
+- Unpinned action
+- Secrets in PR from forks
+- SBOM generated but never used
+
+Also reject: live registry attacks, keys in lessons, claiming Gate 10 or M4.
 
 ## Misconceptions
 
@@ -33,8 +35,8 @@ Also reject: client trust, interpreter concatenation, Report-Only as enforcement
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_hash_mismatch_refuses_install`.
 
 ## Transfer
 
-GitHub Actions third-party action@v1.
+Clinic PR that “added CycloneDX and Dependabot” without a digest check is incomplete.

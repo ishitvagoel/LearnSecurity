@@ -1,40 +1,43 @@
-# 9.5 — Authorized assessment, reporting, and remediation (6 Operate)
+# 9.5-LO-06 — Detect finding_closed_without_retest without logging bodies
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** OWASP WSTG (final); CVSS 4.0 (final spec) as *input* not the decision; CISA KEV as exploitation context.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; NIST SSDF 1.1 RV.2.
 
-## Property (start here)
+## Prevention is not absolute
 
-A finding cannot be closed without a passing retest of the same forbidden outcome. A PDF report is not remediation. Scope stays the local lab.
+A closer can still mark Done. Pair detect and recover. Do not log note bodies from the original finding (3.1).
 
-## Attacker capabilities and trust assumptions
+## Mental model: close without retest is a signal
 
-- **Attacker:** Paper-compliance; ignored variant classes.
-- **Trust:** Local close_finding({retest}).
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Close[ticket Done] --> R{retest pass?}
+  R -->|no| Metric["finding_closed_without_retest += 1"]
+  Metric --> Reopen[reopen]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | closed_without_retest metric. |
-| Signal (no bodies) | finding_closed_without_retest denied. |
-| Revoke / recover | Reopen. |
-| Residual | Unknown variants — hunt (same root cause). |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `finding_closed_without_retest` |
+| Signal | finding id, cell id; never bodies |
+| Recover | Reopen; run the same pytest |
+| Residual | Variants; CVSS vs business priority |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/9.5/9.5-lab`.
+Write one log line you would accept. Tie it to `labs/9.5/9.5-lab`.
+
+```
+log_denied reason=finding_closed_without_retest finding=F-authz-1
+```
+
+Reject any line that includes a note body, a live-target URL, or “Gate 9 complete.”
 
 ## Transfer
 
-KEV vs internal-only.
-
-## Usability
-
-Reports used by engineers must be readable (structure, not color-only severity).
+Clinic: reopen the PDF-shelf ticket; do not attach patient rows.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+A ticketing-product name is not the property. Gate 9 stays not-attempted.

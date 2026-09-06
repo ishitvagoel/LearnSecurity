@@ -1,29 +1,31 @@
-# 9.4 — Automated analysis and tool orchestration (Review)
+# 9.4-LO-08 — Review always-true ship_ok as a PR
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** NIST SSDF (final); OWASP SAMM; OpenSSF. Tools are signals.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-15.2.1`. NIST SSDF 1.1 RV.1.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab’s ship gate
 
-A HIGH finding without a mapped SecureCollab requirement cannot pass the ship gate. Unmapped means unowned, not “probably fine.”
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Alert fatigue; vendor dashboard theater.
-- **Trust:** Local ship_ok(findings, map).
 Review `labs/9.4/9.4-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/9.4.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|unmapped HIGH ships| Property["Property - good if tested"]
+  Q -->|code scanning on| Mechanism[Mechanism - signal]
+  Q -->|SAMM score| False[False assurance]
+```
 
-- Seeded smell (label it yourself): ship_ok True on unmapped HIGH
-- Seeded smell (label it yourself): Suppressions without owner
-- Seeded smell (label it yourself): SAST as Gate 9
-- Seeded smell (label it yourself): No blind-spot note for IDOR
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- `ship_ok` true on unmapped HIGH
+- Suppressions without owner
+- SAST as Gate 9
+- No blind-spot note for IDOR
+
+Also reject: live tenants, keys in lessons, claiming Gate 9.
 
 ## Misconceptions
 
@@ -33,12 +35,8 @@ Also reject: client trust, interpreter concatenation, Report-Only as enforcement
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_unmapped_high_blocks_ship`.
 
 ## Transfer
 
-SCA CVE vs actually called function.
-
-## HITL / WCAG 2.2
-
-Triage UI must be usable; otherwise people mass-suppress.
+Clinic PR that “enabled code scanning” without a mapping predicate is incomplete.

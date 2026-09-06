@@ -1,53 +1,66 @@
-# 10.2 — Source control, CI/CD, and software supply chain (2 Model)
+# 10.2-LO-02 — Lockfile verify vs SBOM inventory
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** SLSA 1.2; OpenSSF OSPS; CISA 2026 SBOM minimum elements; NIST 800-161r1. Pin versions.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** ASVS `v5.0.0-15.1.2`. SLSA 1.2. CISA 2026 SBOM.
 
-## Property (start here)
+## Can a second engineer name the install check from your pipeline map?
 
-A dependency whose digest does not match the lockfile must not install. Integrity of build inputs is the cell — not “we have Dependabot.”
+“We generate CycloneDX” is not this lesson. A reviewable model names **expected digest, got digest, who can edit the lockfile, and fork-PR isolation**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab freeze: local `install_ok(expected, got)`. No live registries.
 
-- **Attacker:** Typosquat; compromised maintainer; poisoned PR from a fork.
-- **Trust:** Local install_ok(got, expected).
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: two artifacts
+
+```mermaid
+flowchart TD
+  Lock[lockfile] --> Verify[install_ok]
+  Sbom[SBOM] --> Inventory[v5.0.0-15.1.2]
+  Prov[SLSA provenance] --> Extra[how it was built]
+```
+
+## Mental model: fork PR is untrusted
+
+```mermaid
+flowchart LR
+  Fork[fork PR] --> Secrets[must not see CI secrets]
+  Fork --> Install[still hash-check]
+```
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | CI, package registry |
-| Objects | wheel hash, lockfile |
-| Actions | install_ok |
-| Channels | pip/npm/gradle |
-| TCB | Lockfile + verify digest; isolated runners; signed provenance later. |
-| Untrusted | Postinstall scripts, mutable latest tags |
-| State / time | Install at 03:00. |
-| 1.1 cell | Integrity of the artifact you will run. |
+| Subjects | typosquat; compromised maintainer; fork PR |
+| Objects | lockfile digest; tarball |
+| Actions | `install_ok` |
+| Channels | CI install |
+| TCB | digest equality |
+| Untrusted | package name; SBOM file; SLSA badge |
+| State / time | cache; tag moves |
+| 1.1 cell | integrity of the artifact you will run |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| CI | matching digest | install | allow |
-| CI | mismatch | install | deny |
-| fork PR | secrets | read | deny |
-| release | provenance | sign | allow |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| mismatch aaa/bbb | install | allow | deny |
+| match aaa/aaa | install | allow | may allow |
+| SBOM present | install | treat as verify | deny |
+| unpinned action@v1 | workflow | treat as pinned | deny |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/10.2/10.2-lab` file `lock.py`.
+Draw the map. Point at `labs/10.2/10.2-lab` file `lock.py`.
 
 ## Transfer
 
-GitHub Actions third-party action@v1.
+`action@v1` is a moving tag — same grain as a name-only install.
 
 ## Residual risk
 
-Build cache poisoning.
+Pinned malware; cache poisoning; `v5.0.0-15.2.4` Level 3.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

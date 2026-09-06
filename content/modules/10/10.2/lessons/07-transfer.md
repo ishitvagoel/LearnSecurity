@@ -1,33 +1,42 @@
-# 10.2 — Source control, CI/CD, and software supply chain (7 Transfer)
+# 10.2-LO-07 — Transfer: clinic npm install in prod pod
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** SLSA 1.2; OpenSSF OSPS; CISA 2026 SBOM minimum elements; NIST 800-161r1. Pin versions.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** SLSA 1.2 as provenance. CISA 2026 SBOM as inventory. ASVS `v5.0.0-15.1.2`.
 
-## Property (start here)
+## Change the workplace; keep name-only install from meaning integrity
 
-A dependency whose digest does not match the lockfile must not install. Integrity of build inputs is the cell — not “we have Dependabot.”
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic: npm install in prod pod. Also name GitHub Actions `action@v1`.
 
-- **Attacker:** Typosquat; compromised maintainer; poisoned PR from a fork.
-- **Trust:** Local install_ok(got, expected).
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite “prod pod runs npm install so we always get latest,” plus “we attach a CycloneDX SBOM and a SLSA badge.”
 
-**Prompt:** GitHub Actions third-party action@v1.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic: npm install in prod pod.
+1. attacker capabilities (typosquat / compromised maintainer — not a live clinic registry attack);
+2. trust assumptions (digest equality is TCB; SBOM/SLSA/Dependabot are not);
+3. forbidden outcome (`install_ok("aaa","bbb")` true, not “HIPAA”);
+4. a test idea on a **local** fixture only (no live npm);
+5. residual (malicious pin, cache poisoning, unpinned actions, `v5.0.0-15.2.4` Level 3);
+6. WCAG if CI is human-read (say digest mismatch).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: latest vs lockfile
+
+```mermaid
+flowchart LR
+  Latest[npm install latest] --> Belief[patched]
+  Name[name only] --> Reality[wrong bytes]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | npm audit is 9.4 signal, not this cell.… |
-| Live-target plan | Lab policy |
+| “we have an SBOM” | Inventory, not verify |
+| Live npm / typosquat tutorial | Lab policy |
+| “SLSA L3 so 1.2 is done” | Provenance ≠ tenant isolation |
 
 ## Practice
 
-One page. No keys. The lab `labs/10.2/10.2-lab` stays the only running system you may break.
+One page. No keys. `labs/10.2/10.2-lab` is the only running system you may break.

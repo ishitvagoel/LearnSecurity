@@ -1,33 +1,42 @@
-# 9.5 — Authorized assessment, reporting, and remediation (7 Transfer)
+# 9.5-LO-07 — Transfer: clinic pentest PDF shelf
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** OWASP WSTG (final); CVSS 4.0 (final spec) as *input* not the decision; CISA KEV as exploitation context.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP WSTG 4.2 (final). CVSS 4.0 as input. CISA KEV as context. Local scope only.
 
-## Property (start here)
+## Change the workplace; keep PDF from meaning closed
 
-A finding cannot be closed without a passing retest of the same forbidden outcome. A PDF report is not remediation. Scope stays the local lab.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic pentest PDF shelf. Also name KEV vs internal-only.
 
-- **Attacker:** Paper-compliance; ignored variant classes.
-- **Trust:** Local close_finding({retest}).
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite “the assessor delivered a 40-page PDF with CVSS 9.8 so we closed isolation,” plus “KEV says we must scan the hospital portal.”
 
-**Prompt:** KEV vs internal-only.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic pentest PDF shelf.
+1. attacker capabilities (paper-compliance closer — not a live hospital);
+2. trust assumptions (same-cell retest is TCB; PDF/CVSS/KEV are not);
+3. forbidden outcome (`close_finding({retest: None})` true, not “HIPAA”);
+4. a test idea on a **local** fixture only (no live pentest);
+5. residual (variants, `v5.0.0-8.3.2` Level 3, business vs CVSS priority);
+6. WCAG if engineers read the report (structure, not color-only severity).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: shelf vs pytest
+
+```mermaid
+flowchart LR
+  Pdf[PDF on a shelf] --> Belief[remediated]
+  None[retest None] --> Reality[cell still open]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | Jira Done is not retest.… |
-| Live-target plan | Lab policy |
+| “CVSS 9.8 so we closed” | Input, not retest |
+| Live clinic / public KEV scan | Lab policy |
+| “WSTG 5.0 final” | 5.0 is in development |
 
 ## Practice
 
-One page. No keys. The lab `labs/9.5/9.5-lab` stays the only running system you may break.
+One page. No keys. `labs/9.5/9.5-lab` is the only running system you may break.

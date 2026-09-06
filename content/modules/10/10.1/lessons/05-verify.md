@@ -1,38 +1,44 @@
-# 10.1 — Secure software lifecycle and security culture (5 Verify)
+# 10.1-LO-05 — Evidence is empty PR denied, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** NIST SSDF 1.1 SP 800-218 (final); OWASP SAMM; CISA Secure by Design.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** NIST SSDF 1.1 PW.1.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A SecureCollab PR cannot merge without a threat-model identifier for the changed surface. Culture is the merge gate, not a poster.
+“We have champions” is not evidence. The oracle is the local pair.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Schedule pressure.
-- **Trust:** Local merge_ok({}).
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail empty pr"]
+  X["--impl fixed"] --> P["Must pass deny"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Merge without a threat-model identifier |
-| Failure | Fail closed: Require tm id; triggers on identity, data, mobile… |
+| Negative / abuse | `{}` → cannot merge |
+| Normal | `threat_model` set → may merge |
+| Not claimed | live GitHub; Gate 10; SAMM |
 
-Lab tests: `test_property.py` under `labs/10.1/10.1-lab`.
+```
+python3 -m pytest labs/10.1/10.1-lab/tests --impl vulnerable
+python3 -m pytest labs/10.1/10.1-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Merge without a threat-model identifier`
-- `--impl fixed`: **pass**
+Honest TM id may pass on both.
 
-missing tm-id cannot merge.
+## What the tests do not prove
+
+- TM quality (3.2)
+- That a 9.3 test exists for the surface
+- M4
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Exception path (E6).
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic: a test that only asserts “training complete” is not this cell.

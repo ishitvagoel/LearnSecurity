@@ -1,36 +1,43 @@
-# 10.2 — Source control, CI/CD, and software supply chain (6 Operate)
+# 10.2-LO-06 — Detect hash_mismatch_denied without logging secrets
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** SLSA 1.2; OpenSSF OSPS; CISA 2026 SBOM minimum elements; NIST 800-161r1. Pin versions.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; ASVS `v5.0.0-13.3.1`.
 
-## Property (start here)
+## Prevention is not absolute
 
-A dependency whose digest does not match the lockfile must not install. Integrity of build inputs is the cell — not “we have Dependabot.”
+A cache can serve old bytes. Pair detect and recover. Do not log registry tokens or signing keys (5.3).
 
-## Attacker capabilities and trust assumptions
+## Mental model: mismatch is a signal
 
-- **Attacker:** Typosquat; compromised maintainer; poisoned PR from a fork.
-- **Trust:** Local install_ok(got, expected).
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Inst[install] --> Eq{digest match?}
+  Eq -->|no| Metric["hash_mismatch_denied += 1"]
+  Metric --> Pin[repin known-good]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | mismatch fail the job. |
-| Signal (no bodies) | hash_mismatch_denied. |
-| Revoke / recover | Pin known-good; rotate secrets in CI (5.3). |
-| Residual | Build cache poisoning. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `hash_mismatch_denied` |
+| Signal | package name, expected vs got *ids*; never tokens |
+| Recover | Pin known-good; rotate CI secrets |
+| Residual | Malicious pin; cache poisoning |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/10.2/10.2-lab`.
+Write one log line you would accept. Tie it to `labs/10.2/10.2-lab`.
+
+```
+log_denied reason=hash_mismatch_denied pkg=demo expected=aaa got=bbb
+```
+
+Reject any line that includes a token, a private key, or “Gate 10 complete.”
 
 ## Transfer
 
-GitHub Actions third-party action@v1.
+Clinic: deny npm in the prod pod; do not paste `.npmrc` into the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+An SBOM-vendor name is not the property. M4 stays not-attempted.

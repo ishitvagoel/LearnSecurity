@@ -14,16 +14,45 @@ defaults:
   ai_security: elective E1
   website_progress: local-first static site (site/); no accounts
 next:
-  id: '9.4'
+  id: '10.3'
   pass: revise
   skill: deepen-curriculum
   inner_skill: standards-pin
-  note: Modules 8.5 and 9.1-9.3 authoring pass added telemetry-sink, coverage-predicate,
-    visual-plausibility, and forbidden-outcome mental models and diagrams; keep 1.4,
-    2.1-2.4, 3.1-3.4, 4.1-4.5, 5.1-5.5, 6.1-6.7, 7.1-7.4, 8.1-8.5, and 9.1-9.3
+  note: Modules 9.4-9.5 and 10.1-10.2 authoring pass added scanner-signal, same-cell-retest,
+    merge-gate, and lockfile-digest mental models and diagrams; keep 1.4, 2.1-2.4,
+    3.1-3.4, 4.1-4.5, 5.1-5.5, 6.1-6.7, 7.1-7.4, 8.1-8.5, 9.1-9.5, and 10.1-10.2
     developing until independent review. Continue the depth queue one module at a
     time.
 spiral_deltas:
+- date: '2026-09-06'
+  module: '10.2'
+  change: Supply-chain loop v2 treats package name as not a digest, refuses SBOM/SLSA/Dependabot
+    as install_ok, pins SLSA 1.2 and CISA 2026 SBOM as inventory/provenance, and labels
+    ASVS v5.0.0-15.2.4 as Level 3 advanced
+  retest: Revisit 5.3 CI secrets; 9.4 SCA as signal not hash; 8.4 APK SBOM; fork-PR
+    isolation
+- date: '2026-09-06'
+  module: '10.1'
+  change: Lifecycle loop v2 treats culture as the merge gate not a poster, refuses
+    CODEOWNERS/training/SAMM as threat_model, pins SSDF 1.1 PW.1, and labels CISA
+    Secure by Design unverified
+  retest: Revisit 3.2 threat-model quality; 9.1 coverage of the surface; E6 exceptions;
+    vanity metrics
+- date: '2026-09-06'
+  module: '9.5'
+  change: Retest loop v2 treats a PDF as not close, requires same-cell retest pass,
+    refuses CVSS/KEV as the close predicate, pins WSTG 4.2 and CVSS 4.0 as input, and
+    keeps assessment scope local
+  retest: Revisit 9.3 forbidden-outcome shape; 9.4 mapped HIGH still needing a retest;
+    variant hunt 7.2; lab-safety no live targets
+- date: '2026-09-06'
+  module: '9.4'
+  change: Scanner loop v2 treats tools as signals not 1.2, refuses unmapped HIGH as
+    shippable, pins v5.0.0-15.2.1, labels v5.0.0-15.2.4 as Level 3 advanced, and keeps
+    SAMM as measurement vocabulary
+  retest: Revisit 9.1 mapping; 9.2 human context for FPs; 9.3 isolation blind spots;
+    10.2 SCA vs digest
+
 - date: '2026-09-06'
   module: '9.3'
   change: Security-test-shape loop v2 treats HTTP 200-only as not a security test,
@@ -764,8 +793,8 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added scanner-is-signal mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '9.5'
   title: Penetration testing, reporting, and remediation
@@ -773,8 +802,8 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added same-cell-retest mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '10.1'
   title: Secure software lifecycle and security culture
@@ -782,8 +811,8 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added merge-gate mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '10.2'
   title: Source control, CI/CD, dependencies, and software supply chain
@@ -791,8 +820,8 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added lockfile-digest mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '10.3'
   title: Cloud, serverless, containers, Kubernetes, and IaC

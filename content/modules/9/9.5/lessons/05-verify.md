@@ -1,38 +1,44 @@
-# 9.5 — Authorized assessment, reporting, and remediation (5 Verify)
+# 9.5-LO-05 — Evidence is close-without-retest denied, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** OWASP WSTG (final); CVSS 4.0 (final spec) as *input* not the decision; CISA KEV as exploitation context.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.1`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A finding cannot be closed without a passing retest of the same forbidden outcome. A PDF report is not remediation. Scope stays the local lab.
+“PDF delivered” is not evidence. The oracle is the local pair. Do not pentest public hosts.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Paper-compliance; ignored variant classes.
-- **Trust:** Local close_finding({retest}).
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail retest None"]
+  X["--impl fixed"] --> P["Must pass deny"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Finding closed without retest |
-| Failure | Fail closed: Require retest of the same cell |
+| Negative / abuse | `retest None` → cannot close |
+| Normal | `retest pass` → may close |
+| Not claimed | live WSTG; Gate 9; CVSS calculator |
 
-Lab tests: `test_property.py` under `labs/9.5/9.5-lab`.
+```
+python3 -m pytest labs/9.5/9.5-lab/tests --impl vulnerable
+python3 -m pytest labs/9.5/9.5-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Finding closed without retest`
-- `--impl fixed`: **pass**
+Honest `{retest: "pass"}` may pass on both.
 
-no retest => False.
+## What the tests do not prove
+
+- That the retest hit the same URL
+- Variant coverage
+- KEV applicability
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-KEV vs internal-only.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic: a test that only asserts “ticket status Done” is not this cell.

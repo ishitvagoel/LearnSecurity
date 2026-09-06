@@ -1,44 +1,42 @@
-# 9.5 — Authorized assessment, reporting, and remediation (Review)
+# 9.5-LO-08 — Review always-true close_finding as a PR
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** OWASP WSTG (final); CVSS 4.0 (final spec) as *input* not the decision; CISA KEV as exploitation context.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** OWASP WSTG 4.2 (final). ASVS `v5.0.0-8.2.1`. CVSS 4.0 as input.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab’s close gate
 
-A finding cannot be closed without a passing retest of the same forbidden outcome. A PDF report is not remediation. Scope stays the local lab.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Paper-compliance; ignored variant classes.
-- **Trust:** Local close_finding({retest}).
 Review `labs/9.5/9.5-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/9.5.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|close without retest| Property["Property - good if tested"]
+  Q -->|PDF attached| Mechanism[Mechanism - report]
+  Q -->|CVSS 9.8| False[False assurance]
+```
 
-- Seeded smell (label it yourself): close without retest
-- Seeded smell (label it yourself): CVSS as the only priority
-- Seeded smell (label it yourself): Live-target language
-- Seeded smell (label it yourself): No variant search
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- close without retest
+- CVSS as the only priority
+- Live-target language
+- No variant search
+
+Also reject: public pentest steps, keys in lessons, claiming Gate 9.
 
 ## Misconceptions
 
-- Pentest replaces SSDLC
-- Critical CVSS must be first always
-- Retest is the same as the original exploit blog
+- A PDF report is remediation
+- CVSS 9.8 is the close decision
+- KEV listing authorizes scanning public systems
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_cannot_close_without_retest`.
 
 ## Transfer
 
-KEV vs internal-only.
-
-## HITL / WCAG 2.2
-
-Reports used by engineers must be readable (structure, not color-only severity).
+Clinic PR that “uploaded the pentest PDF” without a retest field is incomplete.

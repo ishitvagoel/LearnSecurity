@@ -7,64 +7,67 @@ difficulty: advanced
 status: reviewed
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 1.1–2.4 Pass A complete
+- Prior phase Pass A per blueprint §7; 9.3 test shape; authorized-lab policy
 routeTags:
 - complete
 - web-api
 releaseMilestone: null
 outcomes:
-- 'Demonstrate: Penetration testing, reporting, and remediation'
-- 'Produce evidence: Assessment report, remediation plan, retest record'
-- Name attacker capabilities and trust assumptions
-- Include a local-only lab brief and a transfer challenge
-- Do not instruct live-target attacks or mix awareness lists as compliance
+- 'Refuse closing a finding without a passing retest of the same forbidden outcome; a PDF is not remediation.'
+- 'Treat CVSS 4.0 as severity input and CISA KEV as exploitation context, not as the close decision.'
+- 'Keep assessment scope local or official; do not instruct live-target pentests.'
 reviewTriggers:
-- Material SecureCollab change in this module's concern
-- Superseding final standard
+- Finding closed without retest
+- CVSS offered as the only priority
+- Live-target language in learner materials
+- No variant search after a root cause
 invariants:
-- Claims are properties of SecureCollab (or the elective system), not tool names
+- close_finding without retest pass is false
+- CVSS is input, not the close predicate
 - Labs stay in authorized local or official training scope
-- Draft standards are labeled draft
+- KEV does not authorize public scanning
 threatModelPrompts:
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+- What can go wrong when findings close on intent?
+- What residual remains if the retest hits a different endpoint?
+- What residual remains after KEV context is applied to an internal-only bug?
 concepts:
-- penetration
+- same-cell-retest
+- cvss-as-input
+- authorized-scope
 - securecollab
 - seven-step-loop
 learningObjects:
 - id: 9.5-LO-01
   kind: concept-model
-  title: 'Authorized assessment, reporting, and remediation: property vs mechanism'
+  title: A PDF is not a retest
   path: lessons/01-property.md
 - id: 9.5-LO-02
   kind: design-exercise
-  title: Model SecureCollab for 9.5
+  title: Same forbidden outcome, same cell
   path: lessons/02-model.md
 - id: 9.5-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: Finding closed without retest'
+  title: 'Local fixture: always-true close_finding'
   path: lessons/03-break.md
 - id: 9.5-LO-04
   kind: design-exercise
-  title: Structural fix restoring the 9.5 invariant
+  title: Require retest equals pass
   path: lessons/04-build.md
 - id: 9.5-LO-05
   kind: verification-lab
-  title: Forbidden-outcome tests for 9.5
+  title: Fail-on-vulnerable then pass-on-fixed for close
   path: lessons/05-verify.md
 - id: 9.5-LO-06
   kind: operations-exercise
-  title: Detect/recover notes for 9.5
+  title: finding_closed_without_retest without logging bodies
   path: lessons/06-operate.md
 - id: 9.5-LO-07
   kind: transfer-challenge
-  title: 'Transfer: Clinic pentest PDF shelf.'
+  title: 'Transfer: clinic pentest PDF shelf'
   path: lessons/07-transfer.md
 - id: 9.5-LO-08
   kind: code-review
-  title: Seeded review for 9.5
+  title: Review always-true close_finding as a PR
   path: lessons/08-review.md
 labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
@@ -77,48 +80,65 @@ labSpec:
   - Real PII or production secrets
   - Awareness list used as the syllabus
 evidenceRequired:
-- Assessment report, remediation plan, retest record
+- Assessment report, remediation and variant-search plan, retest record
 - Transfer task prompt
-- Local lab brief
+- Local lab brief with close-without-retest deny tests
 assessmentBlueprint:
-  explain: Causal model for Penetration testing, reporting, and remediation
-  design: Assessment report, remediation plan, retest record
-  build: Deferred to Pass B
-  break: Authorized local reproduction of the representative failure
-  verify: Forbidden-outcome tests
-  operate: Detection and recovery notes
-  communicate: Residual risk without compliance theater
+  explain: Close requires same-cell retest; CVSS/KEV are inputs
+  design: Cause, impact, retest command, variant hunt
+  build: close_finding requires retest pass in labs/9.5/9.5-lab/fixed
+  break: Authorized local always-true close
+  verify: Forbidden-outcome tests plus honest retest pass
+  operate: finding_closed_without_retest without bodies
+  communicate: Residual variants; CVSS vs business priority; local scope
 masteryGate: '9'
 standardsRefs:
-- source: OWASP ASVS / module anchors (see spec)
-  version: 5.0.0
+- source: OWASP Web Security Testing Guide
+  version: '4.2'
   status: final
   requirementIds:
-  - assessment
+  - WSTG-v42-catalogue
+  url: https://owasp.org/www-project-web-security-testing-guide/v42/
+- source: OWASP Application Security Verification Standard
+  version: '5.0.0'
+  status: final
+  requirementIds:
+  - v5.0.0-8.2.1
+  - v5.0.0-8.3.2
   url: https://owasp.org/www-project-application-security-verification-standard/
+- source: FIRST CVSS
+  version: '4.0'
+  status: final
+  requirementIds:
+  - CVSS-4.0
+  url: https://www.first.org/cvss/v4.0/specification-document
+- source: CISA Known Exploited Vulnerabilities Catalog
+  version: 'current-catalog'
+  status: awareness
+  requirementIds:
+  - KEV
+  url: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
 misconceptions:
-- Pentest replaces SSDLC
-- Critical CVSS must be first always
-- Retest is the same as the original exploit blog
+- A PDF report is remediation
+- CVSS 9.8 is the close decision
+- KEV listing authorizes scanning public systems
+- Jira Done is a retest
 operationalConsiderations:
-- finding_closed_without_retest denied.
-- Unknown variants — hunt (same root cause).
-author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+- finding_closed_without_retest.
+- Hunt variants of the same root cause.
+author: deepen-curriculum / author-module-spec
+reviewer: pending independent quality and lab-safety review
 lastReviewedAt: '2026-08-24'
 nextReviewAt: '2027-02-24'
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map
 - date: '2026-08-23'
-  note: 'Pass A quality-gate: spec completeness competent; expand in a later revision
-    if thin'
-- date: '2026-08-23'
   note: Pass B lessons and authorized local lab
 - date: '2026-08-23'
   note: Pass C rubric and examiner keys; quality-gate recorded
-- date: '2026-08-23'
-  note: 'Deepen: 1.1-density lessons; structural local lab; quality-gate recorded'
 - date: '2026-08-24'
-  note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
-    Pass C keys isolated'
+  note: Map-complete rewrite recorded; independent review still required
+- date: '2026-09-06'
+  note: 'Depth pass: same-cell-retest mental models, mermaid diagrams, CVSS 4.0 as
+    input, KEV as context; independent review still required'

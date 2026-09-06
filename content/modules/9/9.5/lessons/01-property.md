@@ -1,62 +1,82 @@
-# 9.5 — Authorized assessment, reporting, and remediation (1 Property)
+# 9.5-LO-01 — A PDF is not a retest
 
-**Kind:** concept-model  
-**Loop step:** 1 Property  
-**Standards:** OWASP WSTG (final); CVSS 4.0 (final spec) as *input* not the decision; CISA KEV as exploitation context.
+**Kind:** concept-model
+**Loop step:** 1 Property
+**Standards:** OWASP WSTG 4.2 (final) as catalogue. ASVS `v5.0.0-8.2.1`; `v5.0.0-8.3.2` is **Level 3, advanced**. FIRST CVSS 4.0 (final) as *input*. CISA KEV as **awareness** context. Scope: local lab only.
 
-## Property (start here)
+## The claim this module owns
 
-A finding cannot be closed without a passing retest of the same forbidden outcome. A PDF report is not remediation. Scope stays the local lab.
+SecureCollab may receive an authorized assessment of AUTHZ-1 (cross-tenant read). Closing the finding requires a **passing retest of that same forbidden outcome**. A PDF on a shelf, a Jira Done, or a CVSS number is not that predicate.
 
-## Attacker capabilities and trust assumptions
+> `close_finding({"retest": None})` must be false. `close_finding({"retest": "pass"})` may be true.
 
-- **Attacker:** Paper-compliance; ignored variant classes.
-- **Trust:** Local close_finding({retest}).
-**Mechanism (not the property):** Jira Done is not retest.
+The forbidden outcome is **finding closed without retest**. That is integrity of the fix loop — the hole can still be there.
 
-Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
+WSTG 4.2 names *what* to try in an authorized web assessment; it does not close tickets. CVSS 4.0 Base/Threat/Environmental metrics inform priority; a 9.8 does not outsource judgment. KEV says whether exploitation is *observed in the wild* — useful context for an internal-only bug, not a license to scan public clinics. `v5.0.0-8.3.2` (immediate grant change) is **Level 3, advanced**: retest the *cache after role change*, not a different URL.
+
+**Scope:** this course’s local fixture or official labs. Do not instruct attacks on public or third-party systems.
+
+## Mental model: report vs retest
+
+```mermaid
+flowchart TD
+  Pdf[assessment PDF] --> Record[evidence of a test]
+  Retest["same cell pytest pass"] --> Close[may close]
+  Pdf --> NotClose[not close]
+```
+
+## Mental model: CVSS is an input
+
+```mermaid
+flowchart LR
+  Cvss[CVSS 4.0] --> Pri[priority input]
+  Kev[KEV] --> Exp[exploitation context]
+  Retest[same-cell pass] --> Decision[close]
+```
+
+**Mechanism (not the property):** Jira Done, a pentest vendor logo, CVSS 9.8, KEV listing.
 
 ## Root cause vs impact vs prevention vs detection vs recovery
 
-| Slice | For 9.5 |
+| Slice | For this property |
 |---|---|
-| Root cause | Closure on intent. |
-| Preconditions | close_finding({retest: None}) True. |
-| Impact (1.1 cell) | Integrity of the fix loop. — Vulnerable still there; false residual. |
-| Prevention | Require retest of the same cell. |
-| Detection | closed_without_retest metric. |
-| Recovery | Reopen. |
+| Root cause | Closure on intent |
+| Preconditions | `close_finding({retest: None})` true |
+| Trigger | Ticket marked done after the PDF |
+| Impact | Vulnerable still there; false residual |
+| Prevention | Require retest of the same cell |
+| Detection | `finding_closed_without_retest` |
+| Recovery | Reopen; hunt variants |
 
-## Framework defaults vs application guarantees
+## Framework defaults versus the close guarantee
 
-Jira Done is not retest.
+Issue trackers have a Done state. That is not 9.3’s forbidden-outcome test.
 
-## Mechanism limits and bypasses
+## Mechanism limits
 
-CVSS 9.8 vs business priority — you still judge.
-
-Retest different endpoint.
-
-## Residual risk
-
-Unknown variants — hunt (same root cause).
-
-## Practice
-
-Write a three-line report: cause, impact, retest cmd.
-
-Run `labs/9.5/9.5-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
-
-## Transfer
-
-KEV vs internal-only.
-
-Clinic pentest PDF shelf.
-
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.
+- Retest of a different endpoint.
+- Variants of the same root cause (field grain 7.2).
+- CVSS vs business priority still needs a human.
 
 ## Usability and accessibility
 
-Reports used by engineers must be readable (structure, not color-only severity).
+Reports used by engineers must be readable: structure cause/impact/retest, not color-only severity (WCAG 2.2 1.4.1).
+
+## Practice
+
+Write a three-line report: cause, impact, retest cmd. Then run:
+
+```
+python3 -m pytest labs/9.5/9.5-lab/tests --impl vulnerable
+python3 -m pytest labs/9.5/9.5-lab/tests --impl fixed
+```
+
+The first command must fail. The second must pass.
+
+## Transfer
+
+KEV vs internal-only. Clinic pentest PDF shelf.
+
+## Non-goals
+
+Live-target pentests, real PII, weaponized copy-paste exploits. Gates 0–10 and M0–M5 stay **not-attempted**. Answer keys are not in this file.

@@ -1,53 +1,66 @@
-# 9.4 — Automated analysis and tool orchestration (2 Model)
+# 9.4-LO-02 — Scanner output joined to the 9.1 map
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** NIST SSDF (final); OWASP SAMM; OpenSSF. Tools are signals.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-15.2.1`. NIST SSDF 1.1 RV.1.
 
-## Property (start here)
+## Can a second engineer name pytest cases from your join?
 
-A HIGH finding without a mapped SecureCollab requirement cannot pass the ship gate. Unmapped means unowned, not “probably fine.”
+“We turned on code scanning” is not this lesson. A reviewable model names **finding id, severity, mapped requirement, and owner**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab freeze: local `ship_ok(findings, mappings)`. No live tenants.
 
-- **Attacker:** Alert fatigue; vendor dashboard theater.
-- **Trust:** Local ship_ok(findings, map).
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: join before ship
+
+```mermaid
+flowchart TD
+  F[HIGH findings] --> Join{"id in mappings?"}
+  Join -->|all yes| Ship[may ship]
+  Join -->|any no| Deny[deny]
+```
+
+## Mental model: reachability is a record, not a drop
+
+```mermaid
+flowchart LR
+  Reach[not reachable] --> Note[owner plus E6]
+  Silent[delete the finding] --> False[false assurance]
+```
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | CI, security champion |
-| Objects | HIGH F1, map {} |
-| Actions | ship_ok |
-| Channels | SAST/DAST/SCA |
-| TCB | Gate: HIGH needs req id + decision. |
-| Untrusted | Tool default severity |
-| State / time | Release candidate. |
-| 1.1 cell | Integrity of release decision. |
+| Subjects | alert-fatigued reviewer; vendor dashboard |
+| Objects | HIGH finding; 9.1 requirement id |
+| Actions | `ship_ok` |
+| Channels | CI artifact |
+| TCB | mapping predicate |
+| Untrusted | scanner default; SAMM score; empty dashboard |
+| State / time | exception expiry (E6) |
+| 1.1 cell | integrity of the release decision |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| HIGH mapped+fixed | ship | allow |
-| HIGH unmapped | ship | deny |
-| HIGH accepted E6 | ship | allow-audited |
-| info finding | ship | policy |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| unmapped HIGH | release | ship | deny |
+| mapped HIGH | release | ship | may allow after fix or E6 |
+| empty dashboard | AUTHZ-1 | treat as covered | deny |
+| suppression no owner | HIGH | drop | deny |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/9.4/9.4-lab` file `sast.py`.
+Draw the join. Point at `labs/9.4/9.4-lab` file `sast.py`.
 
 ## Transfer
 
-SCA CVE vs actually called function.
+SCA: CVE mapped to a function you do not call still needs an owner.
 
 ## Residual risk
 
-Blind spots (authz logic) — 9.2/9.3.
+Authz blind spots; Level 3 `v5.0.0-15.2.4`; mass suppressions.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

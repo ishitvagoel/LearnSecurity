@@ -1,27 +1,27 @@
 # 10.2 assessment (learner-facing — no answers)
 
-**Pass C.** Practical evidence, not a compensating average. States: not-attempted | developing | competent | transfer-ready.
+**Pass C.** Practical evidence, not a compensating average. States: not-attempted | developing | competent | transfer-ready. Gate 10 and M4 stay **not-attempted**.
 
 ## Module
 
-Source control, CI/CD, and software supply chain
+Source control, CI/CD, dependencies, and software supply chain
 
 ## Evidence checklist
 
-- [ ] Hardened pipeline, SBOM, provenance, simulated compromise exercise
-- [ ] Transfer task (Clinic: npm install in prod pod.)
-- [ ] Lab `labs/10.2/10.2-lab`: forbidden outcome **Dependency installed when digest mismatches lockfile**
-- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Name vs digest map; SBOM/SLSA labeled as inventory/provenance
+- [ ] Transfer task (clinic npm in prod; `action@v1` named)
+- [ ] Lab `labs/10.2/10.2-lab`: forbidden outcome **dependency installed when digest mismatches lockfile**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: hash_mismatch_denied.
+- [ ] Operate signal without secrets: `hash_mismatch_denied`
 
 ## Rubric
 
 | Result | Meaning |
 |---|---|
-| Developing | Tools listed; missing attacker/trust; mechanism slogans |
+| Developing | Tools listed; missing attacker/trust; “SBOM / Dependabot / SLSA” slogans |
 | Competent | System-specific invariant; lab mapped; operate present |
-| Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
+| Transfer-ready | LO-07 done without Top 10/live-registry/Gate-10 language as the definition of security |
 
 Knowledge check (retryable): distinguish property vs mechanism for **10.2**. Items live in the session worksheet, not here.
 

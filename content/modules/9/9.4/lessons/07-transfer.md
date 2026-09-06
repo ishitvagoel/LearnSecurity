@@ -1,33 +1,42 @@
-# 9.4 — Automated analysis and tool orchestration (7 Transfer)
+# 9.4-LO-07 — Transfer: clinic 50 unmapped HIGHs
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** NIST SSDF (final); OWASP SAMM; OpenSSF. Tools are signals.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-15.2.1`. SAMM 2.0 as vocabulary. SSDF 1.2 IPD remains **draft**.
 
-## Property (start here)
+## Change the workplace; keep unmapped HIGH from shipping
 
-A HIGH finding without a mapped SecureCollab requirement cannot pass the ship gate. Unmapped means unowned, not “probably fine.”
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic: 50 unmapped HIGHs. Also name SCA CVE vs actually called function.
 
-- **Attacker:** Alert fatigue; vendor dashboard theater.
-- **Trust:** Local ship_ok(findings, map).
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite “code scanning is on and the dashboard is noisy so we ship Fridays,” plus a SAMM score.
 
-**Prompt:** SCA CVE vs actually called function.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic: 50 unmapped HIGHs.
+1. attacker capabilities (alert fatigue — not a live clinic);
+2. trust assumptions (mapping predicate is TCB; dashboard and SAMM are not);
+3. forbidden outcome (`ship_ok([HIGH], {})` true, not “HIPAA”);
+4. a test idea on a **local** fixture only (no live GHAS);
+5. residual (authz blind spots, `v5.0.0-15.2.4` Level 3, mass suppressions);
+6. WCAG if a human triage path exists (why F1 is blocked).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: noise is not a map
+
+```mermaid
+flowchart LR
+  Fifty[50 HIGHs] --> Belief[probably FPs]
+  Empty[empty map] --> Reality[unowned ships]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | GitHub code scanning default is not your policy.… |
-| Live-target plan | Lab policy |
+| “scanner is on” | Signal, not ownership |
+| Live GitHub org / public SCA | Lab policy |
+| “SAMM Level 3” as ship_ok | Measurement, not the predicate |
 
 ## Practice
 
-One page. No keys. The lab `labs/9.4/9.4-lab` stays the only running system you may break.
+One page. No keys. `labs/9.4/9.4-lab` is the only running system you may break.

@@ -1,6 +1,6 @@
 # 10.1 assessment (learner-facing — no answers)
 
-**Pass C.** Practical evidence, not a compensating average. States: not-attempted | developing | competent | transfer-ready.
+**Pass C.** Practical evidence, not a compensating average. States: not-attempted | developing | competent | transfer-ready. Gate 10 and M4 stay **not-attempted**.
 
 ## Module
 
@@ -8,20 +8,20 @@ Secure software lifecycle and security culture
 
 ## Evidence checklist
 
-- [ ] Lightweight SSDLC, change-trigger matrix, improvement plan
-- [ ] Transfer task (Clinic: “HIPAA training complete” as merge.)
-- [ ] Lab `labs/10.1/10.1-lab`: forbidden outcome **Merge without a threat-model identifier**
-- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Change-trigger matrix; CODEOWNERS labeled as not TM
+- [ ] Transfer task (clinic HIPAA training; E6 named)
+- [ ] Lab `labs/10.1/10.1-lab`: forbidden outcome **merge without a threat-model identifier**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: merge_without_tm denied.
+- [ ] Operate signal without bodies: `merge_blocked_no_tm`
 
 ## Rubric
 
 | Result | Meaning |
 |---|---|
-| Developing | Tools listed; missing attacker/trust; mechanism slogans |
+| Developing | Tools listed; missing attacker/trust; “CODEOWNERS / poster” slogans |
 | Competent | System-specific invariant; lab mapped; operate present |
-| Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
+| Transfer-ready | LO-07 done without Top 10/SAMM-as-gate/Gate-10 language as the definition of security |
 
 Knowledge check (retryable): distinguish property vs mechanism for **10.1**. Items live in the session worksheet, not here.
 

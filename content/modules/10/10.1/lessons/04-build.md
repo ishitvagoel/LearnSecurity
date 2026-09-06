@@ -1,48 +1,49 @@
-# 10.1 — Secure software lifecycle and security culture (4 Build)
+# 10.1-LO-04 — Require a threat_model identifier
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** NIST SSDF 1.1 SP 800-218 (final); OWASP SAMM; CISA Secure by Design.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** NIST SSDF 1.1 PW.1.
 
-## Property (start here)
+## Structural means merge looks for the id
 
-A SecureCollab PR cannot merge without a threat-model identifier for the changed surface. Culture is the merge gate, not a poster.
+`merge_ok` must require a truthy `threat_model` field. Empty dict denies. The lab does not check TM *quality* — name that residual (3.2 age).
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail closed
 
-- **Attacker:** Schedule pressure.
-- **Trust:** Local merge_ok({}).
-{} => merge_ok False.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-def merge_ok(pr):
-    return bool(pr.get('threat_model'))
+```mermaid
+flowchart TD
+  Call[merge_ok] --> Tm{threat_model set?}
+  Tm -->|yes| Allow[may merge]
+  Tm -->|no| Deny[deny]
 ```
+
+Do not accept CODEOWNERS as the field.
 
 ## Why this restores the cell
 
-Require tm id; triggers on identity, data, mobile…
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| `{}` | merge false |
+| `{threat_model: TM-12}` | merge true |
 
 ## What this is not
 
-CODEOWNERS is not a threat model.
-
-A stale tm-id rubber stamp — 3.2 age.
+A 3.2 quality review. SAMM. Secure by Design. Gate 10 / M4.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name the residual (stale id). Run:
+
+```
+python3 -m pytest labs/10.1/10.1-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Exception path (E6).
+Clinic: stop treating training completion as `threat_model`.
 
 ## Residual risk
 
-Metrics vanity — count TMs with tests, not posters.
+Rubber-stamp ids; hotfix without after-the-fact TM; E6.

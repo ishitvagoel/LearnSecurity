@@ -1,40 +1,43 @@
-# 9.4 — Automated analysis and tool orchestration (6 Operate)
+# 9.4-LO-06 — Detect unmapped_high_blocks without logging payloads
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** NIST SSDF (final); OWASP SAMM; OpenSSF. Tools are signals.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; NIST SSDF 1.1 RV.1.
 
-## Property (start here)
+## Prevention is not absolute
 
-A HIGH finding without a mapped SecureCollab requirement cannot pass the ship gate. Unmapped means unowned, not “probably fine.”
+A new rule can fire a new HIGH. Pair detect and recover. Do not log secret-scanner payloads or note bodies (3.1 / 5.3).
 
-## Attacker capabilities and trust assumptions
+## Mental model: unmapped HIGH is a signal
 
-- **Attacker:** Alert fatigue; vendor dashboard theater.
-- **Trust:** Local ship_ok(findings, map).
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Rel[release] --> Map{unmapped HIGH?}
+  Map -->|yes| Metric["unmapped_high_blocks += 1"]
+  Metric --> Stop[block ship]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | unmapped_high count. |
-| Signal (no bodies) | unmapped_high_blocks. |
-| Revoke / recover | Map or fix; do not suppress silently. |
-| Residual | Blind spots (authz logic) — 9.2/9.3. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `unmapped_high_blocks` |
+| Signal | finding id, sev, missing req; never the payload |
+| Recover | Map or fix; do not silent-suppress |
+| Residual | Authz blind spots; E6 exceptions |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/9.4/9.4-lab`.
+Write one log line you would accept. Tie it to `labs/9.4/9.4-lab`.
+
+```
+log_denied reason=unmapped_high_blocks finding=F1 sev=HIGH
+```
+
+Reject any line that includes a secret, a note body, or “Gate 9 complete.”
 
 ## Transfer
 
-SCA CVE vs actually called function.
-
-## Usability
-
-Triage UI must be usable; otherwise people mass-suppress.
+Clinic: block a release with 50 unmapped HIGHs; do not paste scanner snippets with PHI into Slack.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+A scanner-vendor name is not the property. Gate 9 stays not-attempted.

@@ -1,50 +1,48 @@
-# 9.4 — Automated analysis and tool orchestration (3 Break)
+# 9.4-LO-03 — Observe always-true ship_ok, do not scan public repos
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** NIST SSDF (final); OWASP SAMM; OpenSSF. Tools are signals.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-15.2.1`.
 
-## Property (start here)
+## Authorized scope
 
-A HIGH finding without a mapped SecureCollab requirement cannot pass the ship gate. Unmapped means unowned, not “probably fine.”
+`labs/9.4/9.4-lab` only. Synthetic finding id `F1`. No live GitHub Advanced Security, no scanning other people’s repositories.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Unmapped HIGH finding allows ship.
 
-- **Attacker:** Alert fatigue; vendor dashboard theater.
-- **Trust:** Local ship_ok(findings, map).
-**Forbidden outcome:** Unmapped HIGH finding allows ship
+## Mental model: every finding ships
 
-**Authorized scope:** `labs/9.4/9.4-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable sast.py ships anyway.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: ship_ok([HIGH], {}) True.
-
-## Vulnerable fixture (local)
-
-```python
-def ship_ok(findings, mappings):
-    return True
+```mermaid
+flowchart TD
+  Any[any findings] --> True[ship_ok true]
 ```
+
+The vulnerable tree demonstrates **cause** (no join to 9.1). Do not run scanners against public targets.
+
+## What to read in the fixture
+
+`vulnerable/sast.py` returns true for every pair. Tests require `ship_ok([HIGH], {})` to be false.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Scanner output not joined to 9.1. |
-| Impact | Unknown HIGH in prod. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Scanner output not joined to the map |
+| Impact | Unowned HIGH ships |
+| Not the lesson | A product name as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/9.4/9.4-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/9.4/9.4-lab/tests --impl vulnerable
+```
+
+Record `test_unmapped_high_blocks_ship`. Do not probe public hosts.
 
 ## Transfer
 
-SCA CVE vs actually called function.
+Clinic 50 unmapped HIGHs: predict without leaving this directory.
 
 ## Non-goals
 
-No live-target instructions. Synthetic data only.
+No live-target or vendor-tenant instructions.

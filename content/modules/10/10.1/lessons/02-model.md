@@ -1,53 +1,66 @@
-# 10.1 — Secure software lifecycle and security culture (2 Model)
+# 10.1-LO-02 — Change-trigger matrix vs CODEOWNERS
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** NIST SSDF 1.1 SP 800-218 (final); OWASP SAMM; CISA Secure by Design.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** NIST SSDF 1.1 PW.1. Module 3.2 threat modeling.
 
-## Property (start here)
+## Can a second engineer name which PRs need a TM?
 
-A SecureCollab PR cannot merge without a threat-model identifier for the changed surface. Culture is the merge gate, not a poster.
+“We have CODEOWNERS” is not this lesson. A reviewable model names **surfaces that trigger a TM: identity, data, mobile, queues, authz**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab freeze: local `merge_ok(pr)`. No live orgs.
 
-- **Attacker:** Schedule pressure.
-- **Trust:** Local merge_ok({}).
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: triggers
+
+```mermaid
+flowchart TD
+  Pr[PR] --> Surf{identity data mobile queue authz?}
+  Surf -->|yes| Need[require threat_model]
+  Surf -->|docs only| Skip[may skip TM]
+```
+
+## Mental model: vanity vs outcome
+
+```mermaid
+flowchart LR
+  Count[vuln tickets closed] --> Vanity[vanity]
+  TmWithTest[TM with 9.3 test] --> Outcome[outcome]
+```
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | author, reviewer |
-| Objects | PR, tm-id |
-| Actions | merge_ok |
-| Channels | GitHub |
-| TCB | Required field + human 9.2. |
-| Untrusted | “tiny change” label |
-| State / time | Every merge. |
-| 1.1 cell | Integrity of process evidence. |
+| Subjects | schedule pressure |
+| Objects | PR; TM id |
+| Actions | `merge_ok` |
+| Channels | GitHub merge |
+| TCB | merge predicate |
+| Untrusted | poster; CODEOWNERS; training checkbox |
+| State / time | TM age (3.2); hotfix after-the-fact |
+| 1.1 cell | integrity of process evidence |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| PR | tm-id+tests | merge | allow |
-| PR | no tm | merge | deny |
-| hotfix | no tm | merge | deny-or-timeboxed-E6 |
-| poster | wall | merge | irrelevant |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| empty PR meta | merge | allow | deny |
+| threat_model TM-12 | merge | allow | may allow |
+| CODEOWNERS only | merge | treat as TM | deny |
+| HIPAA training | merge | treat as TM | deny |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/10.1/10.1-lab` file `sdl.py`.
+Draw the trigger matrix. Point at `labs/10.1/10.1-lab` file `sdl.py`.
 
 ## Transfer
 
-Exception path (E6).
+E6: an exception still names the missing TM and expiry.
 
 ## Residual risk
 
-Metrics vanity — count TMs with tests, not posters.
+Stale tm-id; vanity KPIs; `v5.0.0-15.1.5` Level 3 undocumented dangerous functionality.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

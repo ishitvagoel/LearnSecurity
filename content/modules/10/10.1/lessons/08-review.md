@@ -1,44 +1,42 @@
-# 10.1 — Secure software lifecycle and security culture (Review)
+# 10.1-LO-08 — Review always-true merge_ok as a PR
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** NIST SSDF 1.1 SP 800-218 (final); OWASP SAMM; CISA Secure by Design.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** NIST SSDF 1.1 PW.1. OWASP SAMM 2.0 as vocabulary.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab’s merge gate
 
-A SecureCollab PR cannot merge without a threat-model identifier for the changed surface. Culture is the merge gate, not a poster.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Schedule pressure.
-- **Trust:** Local merge_ok({}).
 Review `labs/10.1/10.1-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/10.1.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|merge without tm| Property["Property - good if tested"]
+  Q -->|CODEOWNERS| Mechanism[Mechanism - reviewers]
+  Q -->|training complete| False[False assurance]
+```
 
-- Seeded smell (label it yourself): merge_ok True without tm
-- Seeded smell (label it yourself): Security champion optional forever
-- Seeded smell (label it yourself): Vanity vuln-count KPI
-- Seeded smell (label it yourself): No change-trigger matrix
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- merge_ok True without tm
+- Security champion optional forever
+- Vanity vuln-count KPI
+- No change-trigger matrix
+
+Also reject: live orgs, keys in lessons, claiming Gate 10 or M4.
 
 ## Misconceptions
 
-- SAMM score is product security
-- Culture cannot be tested
-- SSDLC is a waterfall gate at the end
+- CODEOWNERS is a threat model
+- A security-champion poster is the merge gate
+- Vuln-count KPIs are outcome metrics
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_merge_requires_threat_model_id`.
 
 ## Transfer
 
-Exception path (E6).
-
-## HITL / WCAG 2.2
-
-Merge and checklist UIs must be accessible to the actual reviewers you have.
+Clinic PR that “everyone finished HIPAA training” without a TM field is incomplete.

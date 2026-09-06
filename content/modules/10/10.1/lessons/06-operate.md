@@ -1,40 +1,43 @@
-# 10.1 — Secure software lifecycle and security culture (6 Operate)
+# 10.1-LO-06 — Detect merge_blocked_no_tm without logging bodies
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** NIST SSDF 1.1 SP 800-218 (final); OWASP SAMM; CISA Secure by Design.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; NIST SSDF 1.1 PW.1.
 
-## Property (start here)
+## Prevention is not absolute
 
-A SecureCollab PR cannot merge without a threat-model identifier for the changed surface. Culture is the merge gate, not a poster.
+A hotfix can skip the field. Pair detect and recover. Do not log note bodies from the PR diff (3.1).
 
-## Attacker capabilities and trust assumptions
+## Mental model: missing TM is a signal
 
-- **Attacker:** Schedule pressure.
-- **Trust:** Local merge_ok({}).
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Merge[merge attempt] --> Tm{threat_model?}
+  Tm -->|no| Metric["merge_blocked_no_tm += 1"]
+  Metric --> Open[open TM]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | merge_blocked_no_tm. |
-| Signal (no bodies) | merge_without_tm denied. |
-| Revoke / recover | Open TM, then merge. |
-| Residual | Metrics vanity — count TMs with tests, not posters. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `merge_blocked_no_tm` |
+| Signal | PR id, surface; never bodies |
+| Recover | Open TM, then merge; hotfix still records after |
+| Residual | Stale ids; vanity KPIs |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/10.1/10.1-lab`.
+Write one log line you would accept. Tie it to `labs/10.1/10.1-lab`.
+
+```
+log_denied reason=merge_blocked_no_tm pr=pr_101e surface=authz
+```
+
+Reject any line that includes a note body or “Gate 10 complete.”
 
 ## Transfer
 
-Exception path (E6).
-
-## Usability
-
-Merge and checklist UIs must be accessible to the actual reviewers you have.
+Clinic: block merge; do not attach patient charts to the TM ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+A culture-poster product is not the property. M4 stays not-attempted.

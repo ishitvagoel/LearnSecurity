@@ -1,48 +1,51 @@
-# 9.4 — Automated analysis and tool orchestration (4 Build)
+# 9.4-LO-04 — Require a mapping for every HIGH
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** NIST SSDF (final); OWASP SAMM; OpenSSF. Tools are signals.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-15.2.1`. NIST SSDF 1.1 RV.1.
 
-## Property (start here)
+## Structural means HIGH ids must appear in the map
 
-A HIGH finding without a mapped SecureCollab requirement cannot pass the ship gate. Unmapped means unowned, not “probably fine.”
+`ship_ok` must be false unless every HIGH `id` is a key in `mappings`. Fail-safe: missing map is deny. LOW/INFO without a map may still ship in this lab — name that residual.
 
-## Attacker capabilities and trust assumptions
+## Mental model: HIGH gate
 
-- **Attacker:** Alert fatigue; vendor dashboard theater.
-- **Trust:** Local ship_ok(findings, map).
-unmapped HIGH => ship_ok False.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-def ship_ok(findings, mappings):
-    return all(f['id'] in mappings for f in findings if f.get('sev') == 'HIGH')
+```mermaid
+flowchart TD
+  Call[ship_ok] --> High{HIGH findings?}
+  High -->|no| Allow[may ship]
+  High -->|yes| Map{all ids mapped?}
+  Map -->|yes| Allow
+  Map -->|no| Deny[deny]
 ```
+
+Do not accept “dashboard is green” as a mapping.
 
 ## Why this restores the cell
 
-Block unmapped HIGH; allow mapped+accepted with E6.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| HIGH + empty map | `ship_ok` false |
+| HIGH + `{F1: AUTHZ-1}` | `ship_ok` true |
 
 ## What this is not
 
-GitHub code scanning default is not your policy.
-
-False positives exist — mapping is how you record that.
+GitHub default setup. SAMM. Reachability without an owner. Gate 9.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name the residual (unmapped LOW; authz blind spots). Run:
+
+```
+python3 -m pytest labs/9.4/9.4-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-SCA CVE vs actually called function.
+SCA: mapping a CVE to “we do not call it” still records the owner.
 
 ## Residual risk
 
-Blind spots (authz logic) — 9.2/9.3.
+Wrong requirement id; `v5.0.0-15.2.4` Level 3; 9.2/9.3 for logic bugs.

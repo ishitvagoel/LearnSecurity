@@ -7,64 +7,67 @@ difficulty: advanced
 status: reviewed
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 1.1–2.4 Pass A complete
+- Prior phase Pass A per blueprint §7; 3.2 threat modeling; 9.1 coverage
 routeTags:
 - complete
 - web-api
 releaseMilestone: M4
 outcomes:
-- 'Demonstrate: Secure software lifecycle and security culture'
-- 'Produce evidence: Lightweight SSDLC, change-trigger matrix, maturity plan'
-- Name attacker capabilities and trust assumptions
-- Include a local-only lab brief and a transfer challenge
-- Do not instruct live-target attacks or mix awareness lists as compliance
+- 'Refuse merging a PR without a threat-model identifier for the changed surface; culture is the merge gate, not a poster.'
+- 'Treat CODEOWNERS, SAMM scores, and training checkboxes as not merge_ok.'
+- 'Keep SSDF 1.1 as the final practice vocabulary and label SSDF 1.2 IPD and CISA Secure by Design as draft/unverified as pinned.'
 reviewTriggers:
-- Material SecureCollab change in this module's concern
-- Superseding final standard
+- Merge without a threat-model identifier
+- Security champion optional forever
+- Vanity vuln-count KPI offered as Gate 10
+- No change-trigger matrix for identity, data, or mobile
 invariants:
-- Claims are properties of SecureCollab (or the elective system), not tool names
+- merge_ok without threat_model is false
+- CODEOWNERS is not a threat model
 - Labs stay in authorized local or official training scope
-- Draft standards are labeled draft
+- SSDF 1.2 is labeled draft
 threatModelPrompts:
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+- What can go wrong when security is a later phase?
+- What residual remains if every PR has a stale tm-id?
+- What residual remains if metrics count posters instead of tests?
 concepts:
-- secure
+- merge-gate
+- change-trigger
+- ssdf-pw1
 - securecollab
 - seven-step-loop
 learningObjects:
 - id: 10.1-LO-01
   kind: concept-model
-  title: 'Secure software lifecycle and security culture: property vs mechanism'
+  title: Culture is the merge gate, not a poster
   path: lessons/01-property.md
 - id: 10.1-LO-02
   kind: design-exercise
-  title: Model SecureCollab team for 10.1
+  title: Change-trigger matrix vs CODEOWNERS
   path: lessons/02-model.md
 - id: 10.1-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: Merge without a threat-model identifier'
+  title: 'Local fixture: always-true merge_ok'
   path: lessons/03-break.md
 - id: 10.1-LO-04
   kind: design-exercise
-  title: Structural fix restoring the 10.1 invariant
+  title: Require a threat_model identifier
   path: lessons/04-build.md
 - id: 10.1-LO-05
   kind: verification-lab
-  title: Forbidden-outcome tests for 10.1
+  title: Fail-on-vulnerable then pass-on-fixed for merge
   path: lessons/05-verify.md
 - id: 10.1-LO-06
   kind: operations-exercise
-  title: Detect/recover notes for 10.1
+  title: merge_blocked_no_tm without logging bodies
   path: lessons/06-operate.md
 - id: 10.1-LO-07
   kind: transfer-challenge
-  title: 'Transfer: Clinic: “HIPAA training complete” as merge.'
+  title: 'Transfer: clinic HIPAA training as merge'
   path: lessons/07-transfer.md
 - id: 10.1-LO-08
   kind: code-review
-  title: Seeded review for 10.1
+  title: Review always-true merge_ok as a PR
   path: lessons/08-review.md
 labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
@@ -77,48 +80,70 @@ labSpec:
   - Real PII or production secrets
   - Awareness list used as the syllabus
 evidenceRequired:
-- Lightweight SSDLC, change-trigger matrix, maturity plan
+- Lightweight SSDLC, change-trigger matrix, and maturity improvement plan
 - Transfer task prompt
-- Local lab brief
+- Local lab brief with merge-without-tm deny tests
 assessmentBlueprint:
-  explain: Causal model for Secure software lifecycle and security culture
-  design: Lightweight SSDLC, change-trigger matrix, maturity plan
-  build: Deferred to Pass B
-  break: Authorized local reproduction of the representative failure
-  verify: Forbidden-outcome tests
-  operate: Detection and recovery notes
-  communicate: Residual risk without compliance theater
+  explain: Merge requires a threat-model id; posters are not culture
+  design: Change-trigger matrix for identity, data, mobile, queues
+  build: merge_ok requires threat_model in labs/10.1/10.1-lab/fixed
+  break: Authorized local always-true merge_ok
+  verify: Forbidden-outcome tests plus honest tm id
+  operate: merge_blocked_no_tm without bodies
+  communicate: Residual stale tm-id; vanity metrics; E6 exceptions
 masteryGate: '10'
 standardsRefs:
-- source: OWASP ASVS / module anchors (see spec)
-  version: 5.0.0
+- source: NIST SP 800-218 SSDF
+  version: '1.1'
   status: final
   requirementIds:
-  - SSDF
+  - PW.1
+  url: https://csrc.nist.gov/pubs/sp/800/218/final
+- source: OWASP Software Assurance Maturity Model
+  version: '2.0'
+  status: final
+  requirementIds:
+  - Governance
+  url: https://owaspsamm.org/model/
+- source: CISA Secure by Design
+  version: 'current-public-guidance'
+  status: unverified
+  requirementIds:
+  - manufacturer-ownership
+  url: https://www.cisa.gov/securebydesign
+- source: OWASP Application Security Verification Standard
+  version: '5.0.0'
+  status: final
+  requirementIds:
+  - v5.0.0-15.1.5
   url: https://owasp.org/www-project-application-security-verification-standard/
+- source: NIST SP 800-218 Rev. 1 SSDF
+  version: '1.2 IPD'
+  status: draft
+  requirementIds:
+  - SSDF-1.2-IPD
+  url: https://csrc.nist.gov/pubs/sp/800/218/r1/ipd
 misconceptions:
-- SAMM score is product security
-- Culture cannot be tested
-- SSDLC is a waterfall gate at the end
+- CODEOWNERS is a threat model
+- A security-champion poster is the merge gate
+- Vuln-count KPIs are outcome metrics
+- HIPAA training complete authorizes merge
 operationalConsiderations:
-- merge_without_tm denied.
-- Metrics vanity — count TMs with tests, not posters.
-author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+- merge_blocked_no_tm.
+- Count TMs that have tests, not posters.
+author: deepen-curriculum / author-module-spec
+reviewer: pending independent quality and lab-safety review
 lastReviewedAt: '2026-08-24'
 nextReviewAt: '2027-02-24'
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map
 - date: '2026-08-23'
-  note: 'Pass A quality-gate: spec completeness competent; expand in a later revision
-    if thin'
-- date: '2026-08-23'
   note: Pass B lessons and authorized local lab
 - date: '2026-08-23'
   note: Pass C rubric and examiner keys; quality-gate recorded
-- date: '2026-08-23'
-  note: 'Deepen: 1.1-density lessons; structural local lab; quality-gate recorded'
 - date: '2026-08-24'
-  note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
-    Pass C keys isolated'
+  note: Map-complete rewrite recorded; independent review still required
+- date: '2026-09-06'
+  note: 'Depth pass: merge-gate mental models, mermaid diagrams, SSDF PW.1, CISA
+    Secure by Design labeled unverified; independent review still required'
