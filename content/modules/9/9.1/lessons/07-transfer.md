@@ -19,7 +19,7 @@ Renaming “note” to “chart” is not transfer. Threat, requirement, test, a
 |---|---|
 | AUTHZ-1 is the isolation row | Fake HIPAA isolation row |
 | Status-only must not count | Done column must not count |
-| `covered("AUTHZ-1", status_only)` | `covered("AUTHZ-1", status_only)` on a local fixture |
+| `covered("AUTHZ-1", status_only)` | `covered("AUTHZ-1", status_only)` on a local practice files |
 | Optimistic project manager | Same actor — **not** a live clinic |
 | Isolation assert in the dict | Isolation assert in the dict |
 
@@ -31,7 +31,7 @@ flowchart LR
 
 If the HIPAA column is Done while `covered` only matches `req`, the rule is gone. A checklist PDF import, pytest-cov, and a later draft of a practice guide do not assert isolation. The mobile storage row from 8.2 is the same check family — name it, do not scrape a live mobile portal here. A 200-only test that sets the isolation flag by mistake is 9.3.
 
-The clinic rewrite still has to keep the notes-app fork: status-only not covered, isolation-assert may count. Marking HIPAA isolation done without an isolation assert leaves `covered("AUTHZ-1", status_only)` true. The local pytest analogue is `test_status_only_row_is_not_coverage` — on a fixture, not a live governance product.
+The clinic rewrite still has to keep the notes-app fork: status-only not covered, isolation-assert may count. Marking HIPAA isolation done without an isolation assert leaves `covered("AUTHZ-1", status_only)` true. The local pytest analogue is `test_status_only_row_is_not_coverage` — on a practice, not a live governance product.
 
 ## Prompt — clinic HIPAA done column
 
@@ -40,7 +40,7 @@ Rewrite the notes-app sentence. Include:
 1. who can act (optimistic status column — not a live hospital);
 2. what you trust (the coverage check is the promise; checklist membership is not);
 3. what must not happen (`covered("AUTHZ-1", status_only)` true, not a legal label);
-4. a test idea on a **local** fixture only (no live governance scrape);
+4. a test idea on a **local** practice files only (no live governance scrape);
 5. leftover (unnamed extra advanced rows, exceptions without expiry);
 6. whether a human exception path exists (must state what is uncovered and when it expires).
 

@@ -13,7 +13,7 @@ The rule under test:
 
 ## Where you may practice
 
-Only `labs/E6/e6-lab` is in scope. The fixture is an in-process `accept_exception(exc)`. Owner strings are fake. Do **not** file a real public bug, email a vendor disclosure inbox, or accept a production exception as the exercise.
+Only `labs/E6/e6-lab` is in scope. The practice is an in-process `accept_exception(exc)`. Owner strings are fake. Do **not** file a real public bug, email a vendor disclosure inbox, or accept a production exception as the exercise.
 
 Do not paste this exercise onto a public clinic, employer register, or live hospital portal “to see what happens.”
 
@@ -63,7 +63,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 | How you recover later | Expire; fix or re-accept with fields |
 | Out of scope | A maturity dashboard; live disclosure; claiming an assurance gate |
 
-A ticket type named “risk” will close without dates if you let it. Industry “govern” labels name outcomes; they do not write the row. An unverified pledge is manufacturer talk, not this function. The notes app’s promise this week is: **this** fixture, empty owner is deny.
+A ticket type named “risk” will close without dates if you let it. Industry “govern” labels name outcomes; they do not write the row. An unverified pledge is manufacturer talk, not this function. The notes app’s promise this week is: **this** practice, empty owner is deny.
 
 ## Practice
 

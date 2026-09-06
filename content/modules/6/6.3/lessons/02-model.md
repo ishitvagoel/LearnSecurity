@@ -51,7 +51,7 @@ This lab is the leftover-cookie helper. Do not treat a Bearer-only API as “CSR
 | foreign origin + cookie | share | POST | deny |
 | same origin, no token | share | POST | deny |
 | no cookie | share | POST | deny |
-| GET | share | mutate | deny (named, not this fixture) |
+| GET | share | mutate | deny (named, not this practice) |
 
 ## Practice
 

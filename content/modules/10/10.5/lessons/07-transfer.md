@@ -18,7 +18,7 @@ Renaming “note” to “chart” is not transfer. Recovery evidence, log inven
 | Notes app this week | Clinic sketch |
 |---|---|
 | Incident ticket with recovery + logs | Clinic ticket with the same two fields |
-| Restore drill before close | Same restore evidence on a **local** fixture |
+| Restore drill before close | Same restore evidence on a **local** practice files |
 | `close_incident({"recovery": "todo", "logs": "ok"})` | Same call — recovery todo still denied |
 | Optimistic closer / still-in actor | Same closer — **not** a live clinic SIEM |
 | SIEM green / paging / known-exploited list | Same inputs — not the close decision |
@@ -32,7 +32,7 @@ flowchart LR
 
 If alerts stopped while `close_incident` is always true, the rule is gone. Paging, a known-exploited listing, and untested nightly backups do not set `recovery` to `"done"`. Ransomware restore (disk image) is a different grain from note-level integrity (no extra chart copies) — name both, do not run a live incident exercise here. Industry “recover” is an outcome label. A known-exploited list is patch-order input, not close. Logging every authorization decision without the sensitive data is extra, advanced work.
 
-The clinic rewrite still has to keep the notes-app fork: recovery todo denied, `note_body` denied, done + ok may close. Wiring a paging product without the conjunction leaves `close_incident` true on todo. The local pytest analogue is `test_cannot_close_without_recovery` — on a fixture, not a live SIEM.
+The clinic rewrite still has to keep the notes-app fork: recovery todo denied, `note_body` denied, done + ok may close. Wiring a paging product without the conjunction leaves `close_incident` true on todo. The local pytest analogue is `test_cannot_close_without_recovery` — on a practice, not a live SIEM.
 
 ## Prompt — clinic close ticket when SIEM is green
 
@@ -41,7 +41,7 @@ Rewrite the notes-app sentence. Include:
 1. who can act (optimistic closer / still-in actor — not a live clinic SIEM attack);
 2. what you trust (recovery done and no `note_body` is the promise; SIEM, paging, known-exploited list, and untested backups are not);
 3. what must not happen (`close_incident` true while recovery is todo, not a legal label);
-4. a test idea on a **local** fixture only (no live paging);
+4. a test idea on a **local** practice files only (no live paging);
 5. leftover (imperfect forensics, observability as a way out, support-tool god-mode, logging every authorization decision without the sensitive data);
 6. whether engineers read the runbook under stress (plain language, not color-only severity).
 

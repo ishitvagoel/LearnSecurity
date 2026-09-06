@@ -15,7 +15,7 @@ The rule under test:
 
 Only `labs/9.2/9.2-lab` is in scope. The helper is in-process: `review_ok(diff)`. Fake diff string `x = eval(user)` — the lab’s stand-in identifier, not a working exploit.
 
-Do not write a working exploit. Do not run eval on untrusted input outside this fixture. Do not probe a live GitHub org. Do not paste eval payloads “to see what happens.”
+Do not write a working exploit. Do not run eval on untrusted input outside this practice. Do not probe a live GitHub org. Do not paste eval payloads “to see what happens.”
 
 What must not happen: eval on user input approved in review. `review_ok("x = eval(user)")` returns true.
 

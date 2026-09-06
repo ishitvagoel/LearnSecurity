@@ -19,7 +19,7 @@ Renaming “note finding” to “clinic finding” is not transfer. Finding, ma
 |---|---|
 | HIGH finding is unowned until mapped | Same — fifty unmapped HIGHs |
 | Coverage-map requirement id | Same join, clinic requirement names |
-| `ship_ok([HIGH], {})` | `ship_ok` on a local fixture |
+| `ship_ok([HIGH], {})` | `ship_ok` on a local practice files |
 | Alert-fatigued reviewer | Same reader — **not** a live clinic |
 | Empty map ships the finding | Empty map ships the finding |
 
@@ -31,7 +31,7 @@ flowchart LR
 
 If the dashboard is noisy while `ship_ok` is always true, the rule is gone. A vendor default setup, a maturity score, and Dependabot do not join F1 to AUTHZ-1. SCA “we do not call that function” still records an owner — name it, do not scan a live org here. Who-is-allowed blind spots remain review and isolation tests.
 
-The clinic rewrite still has to keep the notes-app fork: unmapped HIGH denied, mapped HIGH may ship. Enabling code scanning without a mapping check leaves `ship_ok([HIGH], {})` true. The local pytest analogue is `test_unmapped_high_blocks_ship` — on a fixture, not a live GitHub tenant.
+The clinic rewrite still has to keep the notes-app fork: unmapped HIGH denied, mapped HIGH may ship. Enabling code scanning without a mapping check leaves `ship_ok([HIGH], {})` true. The local pytest analogue is `test_unmapped_high_blocks_ship` — on a practice, not a live GitHub tenant.
 
 Also name SCA: a CVE versus a function you actually call.
 
@@ -42,7 +42,7 @@ Rewrite the notes-app sentence. Include:
 1. who can act (alert fatigue — not a live clinic);
 2. what you trust (the mapping check is the promise; the dashboard and a maturity score are not);
 3. what must not happen (`ship_ok([HIGH], {})` true, not a legal label);
-4. a test idea on a **local** fixture only (no live GitHub);
+4. a test idea on a **local** practice files only (no live GitHub);
 5. leftover (who-is-allowed blind spots, dependency confusion as an advanced leftover, mass suppressions);
 6. whether a human triage path exists (must say *why* F1 is blocked, in words).
 

@@ -13,7 +13,7 @@ The rule under test:
 
 ## Where you may practice
 
-Only `labs/9.4/9.4-lab` is in scope. The fixture is an in-process `ship_ok(findings, mappings)`. The finding id is the synthetic string `F1`. No live GitHub Advanced Security, no scanning other people’s repositories, no Dependabot against a public clinic.
+Only `labs/9.4/9.4-lab` is in scope. The practice is an in-process `ship_ok(findings, mappings)`. The finding id is the synthetic string `F1`. No live GitHub Advanced Security, no scanning other people’s repositories, no Dependabot against a public clinic.
 
 Do not paste this exercise onto a public GitHub org, employer dashboard, or live clinic “to see what the scanner finds.”
 
@@ -63,7 +63,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 | How you recover later | Map it or fix it; do not hide it quietly |
 | Out of scope | A product name, live GitHub, or claiming the verification gate is done |
 
-A web framework will still ship if CI’s `ship_ok` is always true. The app’s promise this week is: **this** fixture, empty map plus HIGH is deny.
+A web framework will still ship if CI’s `ship_ok` is always true. The app’s promise this week is: **this** practice, empty map plus HIGH is deny.
 
 ## Practice
 

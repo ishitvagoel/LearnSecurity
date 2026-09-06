@@ -26,7 +26,7 @@ Re-run `test_crash_report_omits_note_body` after any crash-SDK change. A green �
 
 | Outcome | This topic |
 |---|---|
-| Notice | `crash_body_redacted`; a CI check of fixtures |
+| Notice | `crash_body_redacted`; a CI check of practice files |
 | What the line holds | Crash id, app version, reason; **never** the body |
 | Respond | Stop the printer that reintroduced the field; do not paste the matching report into chat |
 | Recover | Keep the redact; purge the vendor copy; tell people if needed |
@@ -46,7 +46,7 @@ If your alert includes the matching report, you have copied the leak into the pa
 
 ## What the framework does vs what you still have to check
 
-The same leftover `READ_LOGS` path, tracker SDK extras, and web crash drains that bypass this fixture will also bypass a “scan our crash dashboard” detector. Name those places before you claim recover. A crash-product name is not the rule.
+The same leftover `READ_LOGS` path, tracker SDK extras, and web crash drains that bypass this practice will also bypass a “scan our crash dashboard” detector. Name those places before you claim recover. A crash-product name is not the rule.
 
 ## Can people still use it
 

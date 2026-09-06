@@ -29,7 +29,7 @@ flowchart LR
   Twice[two accepts] --> Reality[two memberships if not consumed]
 ```
 
-If the mail link always returns 200 and never writes used, the hole is open. A magic-link that stays a standing session is 4.3 — exchange it for a cookie; this week's check owns consume. Adding a unique index without a second-accept test leaves `accept` always true. The local pytest analogue is `test_invite_token_is_single_use` — on a fixture, not a live mail link.
+If the mail link always returns 200 and never writes used, the hole is open. A magic-link that stays a standing session is 4.3 — exchange it for a cookie; this week's check owns consume. Adding a unique index without a second-accept test leaves `accept` always true. The local pytest analogue is `test_invite_token_is_single_use` — on a practice, not a live mail link.
 
 ## Prompt — clinic invite-guardian
 

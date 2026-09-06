@@ -30,7 +30,7 @@ flowchart LR
 
 If “Export all” is a disabled button in the browser while the server `allow` is always true, the check is gone. FastAPI, an IP limit at the edge, and a CAPTCHA do not count `n` per person. Notification fan-out and GraphQL search complexity (7.1) are the same budget family — name them, do not run those systems here. Extra CSVs are still copies from 5.1 even when the UI said “once.”
 
-The clinic rewrite still has to keep the notes-app fork: fourth export false, third true. Rate-limiting at the edge without a per-person fourth-export test leaves `allow(4)` true. The local pytest analogue is `test_fourth_export_is_denied` — on a fixture, not a live clinic load test.
+The clinic rewrite still has to keep the notes-app fork: fourth export false, third true. Rate-limiting at the edge without a per-person fourth-export test leaves `allow(4)` true. The local pytest analogue is `test_fourth_export_is_denied` — on a practice, not a live clinic load test.
 
 ## Prompt — clinic bulk-export
 
@@ -41,7 +41,7 @@ Rewrite the notes-app sentence. Include:
 1. who can act (scripted clinician session — not a live clinic);
 2. what you trust (server `n <= 3` is what you trust; the disabled button and an IP rate limit are not);
 3. what must not happen (`allow(4)` true, not a legal label);
-4. a test idea on a **local** fixture only (fourth denied — never on the real clinic);
+4. a test idea on a **local** practice files only (fourth denied — never on the real clinic);
 5. leftover (new accounts, GraphQL aliases, human timing as advanced work, extra copies from 5.1);
 6. whether a human-read “try tomorrow” must be announced, not a spinner that retries and burns the budget.
 

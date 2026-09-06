@@ -13,7 +13,7 @@ The rule under test:
 
 ## Where you may practice
 
-Only `labs/7.4/7.4-lab` is in scope. The fixture is an in-process `exporter(job)`. Fake job dicts (`alice`, `worker-sc`). It does not talk to Redis, RabbitMQ, or a live task library.
+Only `labs/7.4/7.4-lab` is in scope. The practice is an in-process `exporter(job)`. Fake job dicts (`alice`, `worker-sc`). It does not talk to Redis, RabbitMQ, or a live task library.
 
 Do not attach to a public broker. Do not probe an employer queue. Do not probe a classmate preview. Do not paste a live cookie “to see what happens.”
 
@@ -29,7 +29,7 @@ flowchart TD
   Or --> Alice[returns alice]
 ```
 
-The broken files show **cause** (ambient user context). Do not aim anything except this fixture. What has to be true first: `exporter` returns `user_session` if present. You do not need a broker. You must not attach to a live queue.
+The broken files show **cause** (ambient user context). Do not aim anything except this practice. What has to be true first: `exporter` returns `user_session` if present. You do not need a broker. You must not attach to a live queue.
 
 Industry lists want backend jobs logged in as their own accounts, not leftover people. Module 4.1 already revoked leftover HTTP sessions. This check is **whether the worker still is that session**. A zero-trust paper does not replace the pytest.
 
@@ -67,7 +67,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-A task library can copy the request into the later job. FastAPI `Depends()` is gone once the HTTP worker returns. A message broker on a private network is still untrusted input (2.1). Next.js never sees the overnight job. The app’s promise is: **this** fixture, Alice session yields `None`.
+A task library can copy the request into the later job. FastAPI `Depends()` is gone once the HTTP worker returns. A message broker on a private network is still untrusted input (2.1). Next.js never sees the overnight job. The app’s promise is: **this** practice, Alice session yields `None`.
 
 ## Practice
 

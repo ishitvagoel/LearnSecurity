@@ -13,7 +13,7 @@ The rule under test:
 
 ## Where you may practice
 
-Only `labs/11/11-lab` is in scope. The fixture is in-process `revoke` / `read` over synthetic people `A` / `B` and note `n1`. Do **not** revoke, read, or scrape a real notes app, clinic portal, or shared tenant as the exercise.
+Only `labs/11/11-lab` is in scope. The practice is in-process `revoke` / `read` over synthetic people `A` / `B` and note `n1`. Do **not** revoke, read, or scrape a real notes app, clinic portal, or shared tenant as the exercise.
 
 Do not paste this exercise onto a public clinic, employer dashboard, or live hospital portal “to see what happens.”
 
@@ -65,7 +65,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 | How you recover later | Notify A; rotate links; wipe caches |
 | Out of scope | A capstone scanner; live clinic; claiming an assurance gate |
 
-FastAPI will return 200 for DELETE if you wrote that route. A scanner will stay green if the suite never reads after revoke. The notes app’s promise this week is: **this** fixture, B after revoke is None.
+FastAPI will return 200 for DELETE if you wrote that route. A scanner will stay green if the suite never reads after revoke. The notes app’s promise this week is: **this** practice, B after revoke is None.
 
 ## Practice
 

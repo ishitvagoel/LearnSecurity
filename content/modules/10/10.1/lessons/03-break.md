@@ -13,7 +13,7 @@ The rule under test:
 
 ## Where you may practice
 
-Only `labs/10.1/10.1-lab` is in scope. The fixture is an in-process `merge_ok(pr)`. The change is a synthetic dict. No live GitHub orgs, no employer repos, no clinic systems. Do not send the dict anywhere.
+Only `labs/10.1/10.1-lab` is in scope. The practice is an in-process `merge_ok(pr)`. The change is a synthetic dict. No live GitHub orgs, no employer repos, no clinic systems. Do not send the dict anywhere.
 
 Do not turn off branch protection on a real org “to see what happens.” Do not paste this exercise onto a public GitHub org, employer repo, or live clinic.
 
@@ -63,7 +63,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 | How you recover later | Add a threat-model id; re-run `merge_ok` |
 | Out of scope | A maturity score, a live GitHub org, or claiming Gate 10 |
 
-Required reviewers on GitHub are off until someone turns them on, and an admin can still bypass them. CODEOWNERS says who clicks, not what changed. FastAPI has no software-lifecycle check. The app’s promise this week is: **this** fixture, an empty change is deny.
+Required reviewers on GitHub are off until someone turns them on, and an admin can still bypass them. CODEOWNERS says who clicks, not what changed. FastAPI has no software-lifecycle check. The app’s promise this week is: **this** practice, an empty change is deny.
 
 A design-review guide is vocabulary, not this check. Gate 10 and M4 stay **not-attempted**.
 

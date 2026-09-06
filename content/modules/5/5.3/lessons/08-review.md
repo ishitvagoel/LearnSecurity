@@ -32,7 +32,7 @@ Classification starts at the protected effect (default dead after rotate; missin
 - No rotation test
 - Same key for all tenants
 
-Also reject: real production keys in fixtures; closing findings without re-running `test_hardcoded_default_does_not_auth`; keys in learner notes; allow when current is missing.
+Also reject: real production keys in practice files; closing findings without re-running `test_hardcoded_default_does_not_auth`; keys in learner notes; allow when current is missing.
 
 ## Common mix-ups
 

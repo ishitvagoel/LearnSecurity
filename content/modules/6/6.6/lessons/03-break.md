@@ -13,7 +13,7 @@ The rule under test:
 
 ## Where you may practice
 
-Only `labs/6.6/6.6-lab` is in scope. The fixture is an in-process `accept` with synthetic tokens `t1` / `t2`. It does not send mail, open two hosts, or touch an employer invite link.
+Only `labs/6.6/6.6-lab` is in scope. The practice is an in-process `accept` with synthetic tokens `t1` / `t2`. It does not send mail, open two hosts, or touch an employer invite link.
 
 Do not probe public invite links. Do not click a live mail link. Do not build a race harness. You do not need two processes. You must not.
 

@@ -13,7 +13,7 @@ The rule under test:
 
 ## Where you may practice
 
-Only `labs/8.5/8.5-lab` is in scope. The fixture is an in-process `crash_report(note_body)`. The body is the synthetic string `secret`. No live crash consoles, no public store, no public apps. Do not send the JSON anywhere.
+Only `labs/8.5/8.5-lab` is in scope. The practice is an in-process `crash_report(note_body)`. The body is the synthetic string `secret`. No live crash consoles, no public store, no public apps. Do not send the JSON anywhere.
 
 Do not paste a real note body into a crash SDK “to see what happens.” Do not paste this exercise onto a public crash project, employer dashboard, or live clinic.
 
@@ -61,11 +61,11 @@ Do not open the repaired files yet. Diagnose the cause first.
 | Trigger | Crash on view-note, or verbose logcat |
 | What it costs | The body sits at a vendor; maybe public if their store is misconfigured (5.1 extra copy) |
 | How you stop it later | Do not put bodies in exceptions; redact before send |
-| How you notice later | `crash_body_redacted`; a CI check of crash fixtures; never the body |
+| How you notice later | `crash_body_redacted`; a CI check of crash practice files; never the body |
 | How you recover later | Keep the redact; purge the vendor; tell people if the copy left what you trust |
 | Out of scope | A crash product name, a live vendor, or the store form as redaction |
 
-A crash SDK will ship whatever you attach. Private storage on the phone (8.2) does not encrypt the HTTPS payload. A web crash product (10.5) is the same field on the server. The app's promise this week is: **this** fixture, `'secret'` is absent from the report.
+A crash SDK will ship whatever you attach. Private storage on the phone (8.2) does not encrypt the HTTPS payload. A web crash product (10.5) is the same field on the server. The app's promise this week is: **this** practice, `'secret'` is absent from the report.
 
 ## Practice
 

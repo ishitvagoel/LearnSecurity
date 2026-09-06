@@ -41,8 +41,8 @@ Vault without a test. Same key for all tenants. Password lifecycle (a different 
 - Copies already cloned still hold the old string until they are rebuilt.
 - A second default on a worker is another path of the same cell (later topic).
 - Keys baked into a phone app wait for a later topic.
-- Timed rotation (advanced extra) is not this fixture.
-- A hardware box for crypto (advanced extra) is not this fixture.
+- Timed rotation (advanced extra) is not this practice.
+- A hardware box for crypto (advanced extra) is not this practice.
 
 ## Practice
 

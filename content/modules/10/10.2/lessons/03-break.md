@@ -13,7 +13,7 @@ The rule under test:
 
 ## Where you may practice
 
-Only `labs/10.2/10.2-lab` is in scope. The fixture is an in-process `install_ok(expected_hash, got_hash)`. The digests are the synthetic strings `aaa` and `bbb`. No live registries, no public indexes, no clinic clusters. Do not fetch a live package.
+Only `labs/10.2/10.2-lab` is in scope. The practice is an in-process `install_ok(expected_hash, got_hash)`. The digests are the synthetic strings `aaa` and `bbb`. No live registries, no public indexes, no clinic clusters. Do not fetch a live package.
 
 Do not publish, typosquat, or pull a real tarball “to see what happens.” Do not paste this exercise onto a public registry, employer CI, or live clinic.
 
@@ -63,7 +63,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 | How you recover later | Pin known-good; rotate CI secrets (5.3) |
 | Out of scope | An SBOM product, live npm, or claiming the ship gate |
 
-`npm install` latest is a convenience default. Dependabot opens pull requests; it does not verify bytes at install. A pip install without a hash requirement will take whatever the index returns. The app’s promise this week is: **this** fixture, `aaa` vs `bbb` is deny.
+`npm install` latest is a convenience default. Dependabot opens pull requests; it does not verify bytes at install. A pip install without a hash requirement will take whatever the index returns. The app’s promise this week is: **this** practice, `aaa` vs `bbb` is deny.
 
 ## Practice
 

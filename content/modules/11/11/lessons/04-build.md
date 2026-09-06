@@ -53,7 +53,7 @@ Fail closed: if you are unsure whether the grant is gone, return None. Uncertain
 - Phone cache is a different grain.
 - Email already sent is leftover copies.
 - Access-rights change in the same session without signing in again is not this pytest.
-- A second note `n2` is not in the fixture.
+- A second note `n2` is not in the practice files.
 
 ## Practice
 

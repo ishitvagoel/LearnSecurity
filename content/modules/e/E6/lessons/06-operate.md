@@ -46,7 +46,7 @@ If your alert includes the matching writeup, you have copied the leak into the t
 
 ## What the framework does vs what you still have to check
 
-The same always-true accept, unread register, and tech-debt rename that bypass this fixture will also bypass a “scan our risk dashboard” detector. Name those places before you claim recover. A maturity-model name is not the rule.
+The same always-true accept, unread register, and tech-debt rename that bypass this practice will also bypass a “scan our risk dashboard” detector. Name those places before you claim recover. A maturity-model name is not the rule.
 
 Cause vs cost stays split here too: the **cause** is oral acceptance treated as a row; the **cost** is unowned leftover and inaccessible recovery kept; **how you stop it** is the schema; **how you notice** is `exception_incomplete_denied`; **how you recover** is expire-or-re-accept. What the tool cannot do: this alert does not prove anyone reads the register, and it does not verify the accessibility flag.
 

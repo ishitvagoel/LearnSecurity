@@ -39,7 +39,7 @@ A language rewrite this week. A sanitizer. An awareness-list dashboard. A course
 ## What can still go wrong
 
 - Integer wrap of size fields can still beat a naive min.
-- Leftover C codecs are not this Python fixture.
+- Leftover C codecs are not this Python practice files.
 - Time bugs (use-after-free) are a different grain.
 - Silent truncate without an error is leftover of this smallest fix.
 - Calling another language means the check must live next to the native copy.

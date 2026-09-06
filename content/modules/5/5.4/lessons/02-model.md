@@ -51,7 +51,7 @@ An earlier topic used hop versus cache key. Here the hop is the channel-authenti
 | socket https | channel | treat as TLS | allow |
 | socket http | channel | treat as TLS | deny |
 | client header https + socket http | channel | treat as TLS | deny |
-| bound load balancer (named leftover) | proto | assert | not in this fixture |
+| bound load balancer (named leftover) | proto | assert | not in this practice |
 
 A missing “header https × socket http × deny” row is how the client header still counts as TLS. Write the hole.
 

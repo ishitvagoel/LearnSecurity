@@ -19,7 +19,7 @@ Renaming “note body” to “patient name” is not transfer. Field, place, an
 |---|---|
 | Note body is confidential | Fake patient name / chart text is confidential |
 | Stack identifier may send | Stack identifier may send |
-| `crash_report("secret")` | `crash_report(name)` on a local fixture |
+| `crash_report("secret")` | `crash_report(name)` on a local practice files |
 | Crash-platform operator / logcat reader | Same readers — **not** a live clinic |
 | Body substring in the JSON | Name substring in the JSON |
 
@@ -31,7 +31,7 @@ flowchart LR
 
 If support “needs the last chart” while `crash_report` copies the body, the rule is gone. A crash product set to automatic, the store form, and HTTPS to the vendor do not omit the field. Web crash reports (10.5) are the same place family — name them, do not call that vendor here. A transparency label does not delete the field.
 
-The clinic rewrite still has to keep the notes-app fork: fake name absent from the report, stack may remain. Enabling a crash product and completing the store form without a body-omit test leaves `'name' in str(crash_report(name))` true. The local pytest analogue is `test_crash_report_omits_note_body` — on a fixture, not a live crash project.
+The clinic rewrite still has to keep the notes-app fork: fake name absent from the report, stack may remain. Enabling a crash product and completing the store form without a body-omit test leaves `'name' in str(crash_report(name))` true. The local pytest analogue is `test_crash_report_omits_note_body` — on a practice, not a live crash project.
 
 ## Prompt — clinic crash with a fake patient name
 
@@ -40,7 +40,7 @@ Rewrite the notes-app sentence. Include:
 1. who can act (crash-platform operator, logcat reader — not a live clinic);
 2. what you trust (redact-before-send is the promise; the store form and a crash product set to automatic are not);
 3. what must not happen (`'name' in str(crash_report(name))`, not a legal label);
-4. a test idea on a **local** fixture only (no live web-crash call);
+4. a test idea on a **local** practice files only (no live web-crash call);
 5. leftover (vendor as processor, screenshots, frozen-app traces, leftover `READ_LOGS`);
 6. whether a human feedback path exists (must not require a screenshot of the chart to continue).
 

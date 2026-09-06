@@ -273,6 +273,8 @@ function transformProseLine(line: string): string {
   next = next.replace(/\ban rule\b/g, "a rule");
   next = next.replace(/\ban leftover\b/g, "a leftover");
   next = next.replace(/\bthe what you trust\b/g, "what you trust");
+  next = next.replace(/\bThe practice files is\b/g, "The practice is");
+  next = next.replace(/\bThis practice files is\b/g, "This practice is");
   next = next.replace(/\s{2,}/g, " ");
   next = next.replace(/ \(Level \d+\)/g, "");
   return next.replace(/\u0000C(\d+)\u0000/g, (_, index) => codes[Number(index)] ?? "");

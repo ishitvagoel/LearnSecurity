@@ -46,7 +46,7 @@ If your alert includes the registry token, you have copied the leak into the pag
 
 ## What the framework does vs what you still have to check
 
-The same always-true installer, poisoned cache, and unpinned `@v1` Actions that bypass this fixture will also bypass a “scan our advisory count” detector. Name those places before you claim recover. An SBOM-vendor name is not the rule.
+The same always-true installer, poisoned cache, and unpinned `@v1` Actions that bypass this practice will also bypass a “scan our advisory count” detector. Name those places before you claim recover. An SBOM-vendor name is not the rule.
 
 Why it happens, what it costs, how you stop it, how you notice, how you recover stays split here too: the **cause** is install without comparing digests; the **cost** is wrong bytes in the trusted computing base; **how you stop it** is `expected_hash == got_hash`; **how you notice** is `hash_mismatch_denied`; **how you recover** is pin known-good and rotate CI secrets (5.3). What the tool cannot do: this alert does not prove the pin is benign, does not authenticate provenance, and does not stop cache poisoning or `@v1` Actions. Equality is the local stand-in, not index policy.
 

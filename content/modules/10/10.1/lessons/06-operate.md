@@ -44,7 +44,7 @@ Not: a token, a real org name, a threat-model body, or “Gate 10 complete.”
 
 ## What the framework does vs what you still have to check
 
-The same always-true merge, stale TM-12, and docs exemptions that bypass this fixture will also bypass a “scan our CODEOWNERS” detector. Name those places before you claim recover. A GitHub-product name is not the rule.
+The same always-true merge, stale TM-12, and docs exemptions that bypass this practice will also bypass a “scan our CODEOWNERS” detector. Name those places before you claim recover. A GitHub-product name is not the rule.
 
 Why it happens vs what it costs stays split here too: the **cause** is merge without a threat-model id; the **cost** is an identity surface that 3.2 never modelled; **how you stop it** is the truthy `threat_model` check; **how you notice** is `merge_blocked_no_tm`; **how you recover** is add a threat-model id and re-run `merge_ok`. What this alert cannot do: it does not prove TM-12 covers this change’s files, and it does not replace 3.2 authorship or 10.4 governance evidence.
 

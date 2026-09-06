@@ -30,7 +30,7 @@ flowchart LR
 
 If the callback is TLS-terminated and address-range-allow-listed while `accept` is always true, the check is gone. FastAPI, nginx TLS, and a vendor SDK name do not hash the raw body. Parse-then-MAC (2.1) and outbound webhook URLs (6.5) are the same authenticity family — name them, do not run those systems here. A valid MAC still needs 1.2 on what the handler writes.
 
-The clinic rewrite still has to keep the notes-app fork: empty sig false, matching HMAC over the same raw body true. Terminating TLS and allow-listing the vendor without a missing-sig test leaves `accept("", ...)` true. The local pytest analogue is `test_missing_signature_is_rejected` — on a fixture, not a live lab vendor POST.
+The clinic rewrite still has to keep the notes-app fork: empty sig false, matching HMAC over the same raw body true. Terminating TLS and allow-listing the vendor without a missing-sig test leaves `accept("", ...)` true. The local pytest analogue is `test_missing_signature_is_rejected` — on a practice, not a live lab vendor POST.
 
 ## Prompt — clinic lab-result webhook
 
@@ -41,7 +41,7 @@ Rewrite the notes-app sentence. Include:
 1. who can act (anyone who can POST the clinic callback URL — not a live clinic);
 2. what you trust (raw-body HMAC + `compare_digest`; TLS and vendor address range are not);
 3. what must not happen (`accept("", body, secret)` true, not a legal label);
-4. a test idea on a **local** fixture only (never on the real lab vendor);
+4. a test idea on a **local** practice files only (never on the real lab vendor);
 5. leftover (replay, parse-before-MAC, 1.2 on writing results, 6.5 if the clinic *calls out*, advanced signatures beyond HMAC);
 6. whether a human-read deny must not dump the result payload into an error (readable status, not the lab JSON on the page).
 

@@ -17,7 +17,7 @@ flowchart TD
   P --> Enc{"< encoded?"}
 ```
 
-Attribute, JavaScript, and URL contexts are named holes, not this fixture.
+Attribute, JavaScript, and URL contexts are named holes, not this practice.
 
 ## Picture: React is not what you trust
 

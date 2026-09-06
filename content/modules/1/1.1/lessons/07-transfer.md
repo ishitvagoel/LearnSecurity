@@ -15,7 +15,7 @@ Carry that to one other place you already know.
 
 **A mobile app** that remembers "this device is enrolled" — different asset (device key vs password), same honesty: do not store the secret in a form you can copy out of a backup.
 
-**A group project** that currently has `password` in a YAML fixture. Name the change: hash, unique salt, settings, compare that does not leak timing. Name what stays out of scope (no public website).
+**A group project** that currently has `password` in a YAML practice files. Name the change: hash, unique salt, settings, compare that does not leak timing. Name what stays out of scope (no public website).
 
 Write:
 

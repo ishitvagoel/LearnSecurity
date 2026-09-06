@@ -34,7 +34,7 @@ A god-mode `DATABASE_URL` (3.3) and retry after revoke (2.4) are other worker ho
 - No test that leftover session is rejected
 - Retry duplicates after revoke (2.4)
 
-Also reject: live broker attacks; closing findings without re-running `test_user_session_is_not_worker_identity`; keys in learner notes; real session cookies in fixtures.
+Also reject: live broker attacks; closing findings without re-running `test_user_session_is_not_worker_identity`; keys in learner notes; real session cookies in practice files.
 
 ## Common mix-ups
 

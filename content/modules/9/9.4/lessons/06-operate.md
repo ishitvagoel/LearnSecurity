@@ -46,7 +46,7 @@ If your alert includes the matching scanner snippet, you have copied the leak in
 
 ## What the framework does vs what you still have to check
 
-The same who-is-allowed holes that bypass this fixture will also bypass a “scan our dashboard” detector. Name those places before you claim recover. A scanner-product name is not the rule.
+The same who-is-allowed holes that bypass this practice will also bypass a “scan our dashboard” detector. Name those places before you claim recover. A scanner-product name is not the rule.
 
 ## Can people still use it
 

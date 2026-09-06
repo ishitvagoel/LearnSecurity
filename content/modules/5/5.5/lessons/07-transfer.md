@@ -30,7 +30,7 @@ flowchart LR
 
 If the search box is concatenated into SQL (or into a query language), the check is gone. FastAPI, SQLAlchemy, and “row-level security is on” do not bind the box. Quote denylists fail the encoding lesson from 2.1. GraphQL arguments and NoSQL operators are the same shape in 7.1 — name them, do not run those systems here.
 
-The clinic rewrite still has to keep the notes-app fork: the lookup helper returns `(sql, params)` (or an ORM bound construct), not a concatenated `str`. Switching to SQLAlchemy while interpolating the box into `text()` leaves the interpreter mixed. The local pytest analogue is `test_query_is_bound_not_concatenated` — on a fixture, not a live clinic system.
+The clinic rewrite still has to keep the notes-app fork: the lookup helper returns `(sql, params)` (or an ORM bound construct), not a concatenated `str`. Switching to SQLAlchemy while interpolating the box into `text()` leaves the interpreter mixed. The local pytest analogue is `test_query_is_bound_not_concatenated` — on a practice, not a live clinic system.
 
 ## Prompt — clinic search box
 
@@ -39,7 +39,7 @@ Rewrite the notes-app sentence. Include:
 1. who can act (clinician or kiosk user supplying search text — not a live clinic);
 2. what you trust (which API binds values; the ORM brand is not);
 3. what must not happen (`fetch`-like function returns concatenated query text, not a legal label);
-4. a test idea on a **local** fixture only (shape is a tuple, not a `str` — never on the real clinic);
+4. a test idea on a **local** practice files only (shape is a tuple, not a `str` — never on the real clinic);
 5. leftover (ORDER BY identifiers; replicas; row-level-rule theater; advanced logging);
 6. whether a human-read “search failed” status must not use color as the only cue (readable error, not a silent empty list that hides a parser crash).
 

@@ -23,7 +23,7 @@ flowchart LR
 
 If the table omits the SSN column while `resolve` is always true, the cell is gone. FastAPI `response_model`, GraphQL “typed schema,” and UUID length do not check role × field. Identifiers find a row. They do not authorize fields. Search highlighting and CSV export are the same dump family — name them, do not run those systems here. A passing 4.4 object GET is a coarser grain: the member may read the *row* and still must not read the *field*.
 
-The clinic rewrite still has to keep the notes-app fork: member × SSN false, member × display name true. Hiding SSN in the table without a member×field deny test leaves the serializer open. The local pytest analogue is `test_member_cannot_resolve_internal_field` — on a fixture, not a live EHR GraphQL query.
+The clinic rewrite still has to keep the notes-app fork: member × SSN false, member × display name true. Hiding SSN in the table without a member×field deny test leaves the serializer open. The local pytest analogue is `test_member_cannot_resolve_internal_field` — on a practice, not a live EHR GraphQL query.
 
 | Notes app this week | Clinic sketch |
 |---|---|
@@ -39,11 +39,11 @@ Rewrite the notes-app sentence. Include:
 1. who can act (clinician session selecting extra fields — not a live clinic);
 2. what you trust (server role×field is what you trust; UI omit and UUID are not);
 3. what must not happen (`resolve("member", "ssn")` true, not “HIPAA”);
-4. a test idea on a **local** fixture only (no public EHR);
+4. a test idea on a **local** practice files only (no public EHR);
 5. leftover (search snippets, CSV, later workers, stale serializer cache after a role change);
 6. the web accessibility baseline if a human path is in the claim (do not announce the SSN in an error).
 
-Use synthetic labels (`ssn` as a field name in a local fixture). Do not use real patient identifiers.
+Use synthetic labels (`ssn` as a field name in a local practice files). Do not use real patient identifiers.
 
 ## What is not good enough
 

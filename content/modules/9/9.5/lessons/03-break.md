@@ -13,7 +13,7 @@ The rule under test:
 
 ## Where you may practice
 
-Only `labs/9.5/9.5-lab` is in scope. The fixture is an in-process `close_finding(f)`. The finding is a synthetic dict. Do **not** scan, exploit, or "verify" any public or third-party system.
+Only `labs/9.5/9.5-lab` is in scope. The practice is an in-process `close_finding(f)`. The finding is a synthetic dict. Do **not** scan, exploit, or "verify" any public or third-party system.
 
 Do not paste this exercise onto a public clinic, employer tracker, or live hospital portal "to see what happens."
 
@@ -63,7 +63,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 | How you recover later | Reopen; run the same isolation pytest |
 | Out of scope | A severity number; a live pentest; claiming an assurance gate |
 
-A ticket tracker will show Done. A pentest vendor PDF is evidence that *someone tested once*. A severity score ranks work. The notes app's API will still serve the hole if the close gate is always true. The app's promise this week is: **this** fixture, `retest` None is deny.
+A ticket tracker will show Done. A pentest vendor PDF is evidence that *someone tested once*. A severity score ranks work. The notes app's API will still serve the hole if the close gate is always true. The app's promise this week is: **this** practice, `retest` None is deny.
 
 ## Practice
 

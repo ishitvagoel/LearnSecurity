@@ -25,7 +25,7 @@ flowchart TD
 
 Classification starts at the protected effect (recovery todo denied). Everything that is not the conjunction at that call is a candidate always-close path. A SIEM screenshot without that pytest is the same smell, not a different finding class.
 
-Note bodies in logs are the second forbidden outcome. Support-tool god-mode is leftover from earlier cluster lessons. Do not skip `test_cannot_close_without_recovery`. Do not claim you finished an assurance gate. Do not query a live SIEM to prove the finding.
+Note bodies in logs are the second what must not happen. Support-tool god-mode is leftover from earlier cluster lessons. Do not skip `test_cannot_close_without_recovery`. Do not claim you finished an assurance gate. Do not query a live SIEM to prove the finding.
 
 ## Seeded smells (label them yourself)
 

@@ -32,7 +32,7 @@ Classification starts at the protected effect (tB cannot SELECT tA). Everything 
 - Analytics role `SELECT *`
 - No test that `can_select("app", "tB", "tA") is False`
 
-Also reject: treating the client as what you trust; closing findings without re-running `test_app_role_cannot_read_other_tenant`; keys in learner notes; real personal data in fixtures; a manufacturer pledge as GRANT.
+Also reject: treating the client as what you trust; closing findings without re-running `test_app_role_cannot_read_other_tenant`; keys in learner notes; real personal data in practice files; a manufacturer pledge as GRANT.
 
 ## Common mix-ups
 

@@ -18,7 +18,7 @@ Renaming “note” to “chart” is not transfer. Owner, review date, and acce
 | Notes app this week | Clinic sketch |
 |---|---|
 | Exception dict with owner + review_by + wcag_checked | Clinic exception with the same three fields |
-| Schema before accept | Same schema on a **local** fixture |
+| Schema before accept | Same schema on a **local** practice files |
 | `accept_exception({"owner": "", "review_by": None})` | Same call — empty owner still denied |
 | Calendar / silent accept | Same pressure — **not** a live clinic audit |
 | Maturity score / pledge / HIPAA slide | Same inputs — not the accept decision |
@@ -32,7 +32,7 @@ flowchart LR
 
 If legal said yes while `accept_exception` is always true, the rule is gone. A maturity score, an industry “govern” sticker, and an unverified pledge do not put `owner` and `review_by` on the row. A procurement questionnaire is a different document — name it, do not open a live clinic audit here. Exceptions are not failure; hiding them is a dishonest register. A later design-review draft stays a draft. Extra advanced documentation of a dangerous function is documentation, not this pytest.
 
-The clinic rewrite still has to keep the notes-app fork: empty owner denied, complete record may accept. Adding a HIPAA slide without the schema leaves `accept_exception` true on empty owner. The local pytest analogue is `test_exception_needs_owner_review_and_wcag` — on a fixture, not a live governance tool.
+The clinic rewrite still has to keep the notes-app fork: empty owner denied, complete record may accept. Adding a HIPAA slide without the schema leaves `accept_exception` true on empty owner. The local pytest analogue is `test_exception_needs_owner_review_and_wcag` — on a practice, not a live governance tool.
 
 ## Prompt — clinic HIPAA exception
 
@@ -41,7 +41,7 @@ Rewrite the notes-app sentence. Include:
 1. who can act (calendar / silent accept — not a live clinic audit);
 2. what you trust (schema is the promise; maturity score, industry labels, and a pledge are not);
 3. what must not happen (`accept_exception` true with empty owner, not a legal label);
-4. a test idea on a **local** fixture only (no clinic governance tool);
+4. a test idea on a **local** practice files only (no clinic governance tool);
 5. leftover (unread register, inaccessible recovery, extra advanced documentation);
 6. whether the exception records that patients can complete recovery (plain language, not color-only).
 

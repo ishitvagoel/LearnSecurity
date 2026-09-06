@@ -46,7 +46,7 @@ If your alert includes the matching note, you have copied the leak into the pagi
 
 ## What the framework does vs what you still have to check
 
-The same wrong-URL `"pass"`, extra-field variants, and role-change caches that bypass this fixture will also bypass a "scan our ticket dashboard" detector. Name those places before you claim recover. A ticket-product name is not the rule.
+The same wrong-URL `"pass"`, extra-field variants, and role-change caches that bypass this practice will also bypass a "scan our ticket dashboard" detector. Name those places before you claim recover. A ticket-product name is not the rule.
 
 Cause vs cost stays split here too: the **cause** is close looking at intent (PDF, ticket Done) instead of `retest == "pass"`; the **cost** is an isolation hole that looks fixed; **how you stop it** is the retest equality; **how you notice** is `finding_closed_without_retest`; **how you recover** is reopen and re-run the same isolation pytest. What the tool cannot do: this alert does not prove the `"pass"` hit the same URL, and it does not search extra fields or role-change caches.
 

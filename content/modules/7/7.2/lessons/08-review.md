@@ -34,7 +34,7 @@ Identifiers find a row. They do not authorize fields. Object GET tests (4.4) do 
 - Object GET test only, not field
 - UUID treated as a capability
 
-Also reject: public GraphQL attacks; closing findings without re-running `test_member_cannot_resolve_internal_field`; keys in lessons; real personal data in fixtures.
+Also reject: public GraphQL attacks; closing findings without re-running `test_member_cannot_resolve_internal_field`; keys in lessons; real personal data in practice files.
 
 ## Common mix-ups this topic refuses
 

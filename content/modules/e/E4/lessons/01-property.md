@@ -37,7 +37,7 @@ flowchart LR
   Py --> NotC[not what C does]
 ```
 
-A Python slice in this fixture is a teaching stand-in. C will not do this for you. Calling a helper from another language still needs the same length check next to the copy.
+A Python slice in this practice is a teaching stand-in. C will not do this for you. Calling a helper from another language still needs the same length check next to the copy.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

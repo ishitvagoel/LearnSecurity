@@ -54,7 +54,7 @@ Write one log line you would accept in review (job id, expected principal, no co
 
 ## Use it somewhere new
 
-Clinic: notice batch-export jobs running as a clinician session on a local fixture; do not attach the session token to the ticket. Do not attach to a live broker.
+Clinic: notice batch-export jobs running as a clinician session on a local practice files; do not attach the session token to the ticket. Do not attach to a live broker.
 
 ## Can people still use it
 

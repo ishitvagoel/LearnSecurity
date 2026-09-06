@@ -19,7 +19,7 @@ flowchart LR
 
 If both pass, the test is not looking at recovery todo. If both fail, the fix is not structural or the check is wrong.
 
-The second forbidden outcome is **`note_body` in logs** — `test_cannot_close_when_logs_contain_note_body` must also fail on the broken files.
+The second what must not happen is **`note_body` in logs** — `test_cannot_close_when_logs_contain_note_body` must also fail on the broken files.
 
 ## Four modes, even for a close dict
 

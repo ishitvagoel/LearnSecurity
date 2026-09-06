@@ -31,7 +31,7 @@ flowchart LR
 
 If DELETE returns 200 while `read` ignores grants, the cell is gone. A scanner, a YAML pack, and an assurance stamp in a README do not consult `GRANTS`. The full slice is API + delayed worker + phone cache — name them, do not hit a live clinic system here. Access-rights change in the same session without signing in again is extra, advanced work: in-session grant change, not “we stored a revoke row.” A numbered slogan is not the portable pack.
 
-The clinic rewrite still has to keep the notes-app fork: B after revoke denied, A still reads, B before revoke still reads. Adding DELETE without consulting grants leaves `read` returning the body. The local pytest analogue is `test_revoked_share_cannot_read` — on a fixture, not a live tenant.
+The clinic rewrite still has to keep the notes-app fork: B after revoke denied, A still reads, B before revoke still reads. Adding DELETE without consulting grants leaves `read` returning the body. The local pytest analogue is `test_revoked_share_cannot_read` — on a practice, not a live tenant.
 
 ## Prompt — clinic revoke a guardian
 
@@ -40,7 +40,7 @@ Rewrite the notes-app sentence. Include:
 1. who can act (former guardian with a cached chart id — not a live clinic attack);
 2. what you trust (owner-or-grant on every read is the promise; scanner, YAML pack, and HTTP 200 are not);
 3. what must not happen (`read` after `revoke` still returns the body, not a legal label);
-4. a test idea on a **local** fixture only (no live clinic system);
+4. a test idea on a **local** practice files only (no live clinic system);
 5. leftover (copies already sent, delayed worker, phone cache, access-rights change in the same session);
 6. whether a human-read deny must say share revoked (plain language, not color-only).
 

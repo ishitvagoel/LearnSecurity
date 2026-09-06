@@ -13,7 +13,7 @@ The rule under test:
 
 ## Where you may practice
 
-Only `labs/9.3/9.3-lab` is in scope. The fixture is an in-process `is_security_test(t)`. Synthetic test descriptors. No live apps, no fuzz campaigns against other hosts. Do not send the descriptors anywhere.
+Only `labs/9.3/9.3-lab` is in scope. The practice is an in-process `is_security_test(t)`. Synthetic test descriptors. No live apps, no fuzz campaigns against other hosts. Do not send the descriptors anywhere.
 
 Do not paste this exercise onto a public host, employer clinic, or live patient system. You do not need HTTP. You must not fuzz a public host.
 
@@ -63,7 +63,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 | How you recover later | Add the isolation test; keep 200-only as product tests |
 | Out of scope | A testing-guide chapter; live fuzz; claiming a later gate |
 
-A FastAPI test client 200 is a product test. Snapshot tests are not isolation. Line coverage is not the isolation check. The app's promise this week is: **this** fixture, 200-only is not a security test.
+A FastAPI test client 200 is a product test. Snapshot tests are not isolation. Line coverage is not the isolation check. The app's promise this week is: **this** practice, 200-only is not a security test.
 
 ## Practice
 

@@ -13,7 +13,7 @@ The rule under test:
 
 ## Where you may practice
 
-Only `labs/10.3/10.3-lab` is in scope. The fixture is an in-process `pod_ok(role)`. The roles are synthetic strings `cluster-admin` / `app`. Do **not** apply ClusterRoleBindings to a real cluster, cloud account, or shared lab Kubernetes as the exercise.
+Only `labs/10.3/10.3-lab` is in scope. The practice is an in-process `pod_ok(role)`. The roles are synthetic strings `cluster-admin` / `app`. Do **not** apply ClusterRoleBindings to a real cluster, cloud account, or shared lab Kubernetes as the exercise.
 
 Do not paste this exercise onto a public cluster, employer account, or live hospital Kubernetes "to see what happens."
 
@@ -63,7 +63,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 | How you recover later | Delete the binding; rotate cluster credentials |
 | Out of scope | A CIS score; a live managed cluster; claiming an assurance gate |
 
-A managed cluster will still accept a ClusterRoleBinding. A restricted pod profile hardens the *pod spec*. FastAPI will still run as whatever SA the chart mounts. The notes app's API will still take the cluster if admission is always true. The app's promise this week is: **this** fixture, `cluster-admin` is deny.
+A managed cluster will still accept a ClusterRoleBinding. A restricted pod profile hardens the *pod spec*. FastAPI will still run as whatever SA the chart mounts. The notes app's API will still take the cluster if admission is always true. The app's promise this week is: **this** practice, `cluster-admin` is deny.
 
 ## Practice
 

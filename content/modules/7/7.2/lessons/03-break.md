@@ -13,7 +13,7 @@ The rule under test:
 
 ## Where you may practice
 
-Only `labs/7.2/7.2-lab` is in scope. The fixture is an in-process `resolve(role, field)`. Fake roles (`member`, `service`) and field names (`display_name`, `secret_internal`). `secret_internal` is a lab label, not a production token. It does not open FastAPI or GraphQL. Do not query a public GraphQL host, an employer API, or a live clinic.
+Only `labs/7.2/7.2-lab` is in scope. The practice is an in-process `resolve(role, field)`. Fake roles (`member`, `service`) and field names (`display_name`, `secret_internal`). `secret_internal` is a lab label, not a production token. It does not open FastAPI or GraphQL. Do not query a public GraphQL host, an employer API, or a live clinic.
 
 Do not paste this exercise onto a public site, employer board, or live clinic portal.
 
@@ -28,7 +28,7 @@ flowchart TD
   Call["resolve member secret_internal"] --> True[returns true]
 ```
 
-The broken files show **cause** (no field table). Do not query anything except this fixture. What has to be true first: `resolve` returns true for every pair. You do not need HTTP. You must not query a public GraphQL host.
+The broken files show **cause** (no field table). Do not query anything except this practice. What has to be true first: `resolve` returns true for every pair. You do not need HTTP. You must not query a public GraphQL host.
 
 Identifiers find a row. They do not authorize fields. Object×company grants were 4.4; this cell is **which fields that grant may read**. Extra keys on *write* were 7.1.
 
@@ -60,7 +60,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-ORM dump helpers are convenience, not field permission. GraphQL will resolve any field the schema exposes. FastAPI `response_model` helps only if it is the actual response. Next.js hiding a table column does not bind `resolve`. The app’s promise is: **this** fixture, member × `secret_internal` is false.
+ORM dump helpers are convenience, not field permission. GraphQL will resolve any field the schema exposes. FastAPI `response_model` helps only if it is the actual response. Next.js hiding a table column does not bind `resolve`. The app’s promise is: **this** practice, member × `secret_internal` is false.
 
 ## Practice
 
@@ -74,7 +74,7 @@ Run from `labs/7.2/7.2-lab` if a repo-root collection picks up `site/`. Do not �
 
 ## Use it somewhere new
 
-Clinic SSN as a *field name* on a local fixture. Predict without leaving this directory. Do not query a live EHR.
+Clinic SSN as a *field name* on a local practice files. Predict without leaving this directory. Do not query a live EHR.
 
 ## What this page is not doing
 

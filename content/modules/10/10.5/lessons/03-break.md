@@ -13,7 +13,7 @@ The rule under test:
 
 ## Where you may practice
 
-Only `labs/10.5/10.5-lab` is in scope. The fixture is an in-process `close_incident(inc)`. The incident is a synthetic dict. Do **not** close, page, or query a real SIEM, paging product, or clinic incident system as the exercise.
+Only `labs/10.5/10.5-lab` is in scope. The practice is an in-process `close_incident(inc)`. The incident is a synthetic dict. Do **not** close, page, or query a real SIEM, paging product, or clinic incident system as the exercise.
 
 Do not paste this exercise onto a public clinic, employer dashboard, or live hospital portal “to see what happens.”
 
@@ -64,7 +64,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 | How you recover later | This *is* the step — restore drill |
 | Out of scope | A SIEM product; live paging; claiming an assurance gate |
 
-A SIEM dashboard turns green when alerts stop. A paging ack is a human click. The notes app’s API will log whatever you print. The app’s promise this week is: **this** fixture, recovery todo is deny and `note_body` in logs is deny.
+A SIEM dashboard turns green when alerts stop. A paging ack is a human click. The notes app’s API will log whatever you print. The app’s promise this week is: **this** practice, recovery todo is deny and `note_body` in logs is deny.
 
 ## Practice
 

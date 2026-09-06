@@ -13,7 +13,7 @@ The rule under test:
 
 ## Where you may practice
 
-Only `labs/10.4/10.4-lab` is in scope. The fixture is an in-process `boot_ok(env, debug)`. The flags are synthetic strings and booleans. Do **not** turn debug on a real production host, staging SaaS, or someone else’s compose “to see what happens.”
+Only `labs/10.4/10.4-lab` is in scope. The practice is an in-process `boot_ok(env, debug)`. The flags are synthetic strings and booleans. Do **not** turn debug on a real production host, staging SaaS, or someone else’s compose “to see what happens.”
 
 Do not paste this exercise onto a public clinic, employer cluster, or live hospital portal.
 
@@ -63,7 +63,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 | How you recover later | Kill the process; rotate secrets that appeared in traces |
 | Out of scope | A canary percentage; live compose; claiming an assurance gate |
 
-FastAPI `debug=True` is a developer default. Next.js will print stack traces when `NODE_ENV` is not production — and the string can lie. Compose will start whatever you wrote. The notes app’s promise this week is: **this** fixture, prod plus debug is deny.
+FastAPI `debug=True` is a developer default. Next.js will print stack traces when `NODE_ENV` is not production — and the string can lie. Compose will start whatever you wrote. The notes app’s promise this week is: **this** practice, prod plus debug is deny.
 
 ## Practice
 

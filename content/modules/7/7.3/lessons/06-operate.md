@@ -56,7 +56,7 @@ Write one log line you would accept in review (ids, reason, no body). Tie it to 
 
 ## Use it somewhere new
 
-Clinic: notice unsigned lab-result posts on a local fixture; do not attach the HL7/JSON body to the ticket. Do not POST a live vendor.
+Clinic: notice unsigned lab-result posts on a local practice files; do not attach the HL7/JSON body to the ticket. Do not POST a live vendor.
 
 ## Usability
 

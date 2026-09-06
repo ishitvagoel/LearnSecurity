@@ -13,7 +13,7 @@ The rule under test:
 
 ## Where you may practice
 
-Only `labs/E1/e1-lab` is in scope. The fixture is an in-process `run_tool(name, args)`. The names are synthetic strings `exec_sql` / `search_notes`. Do **not** send prompts to a public language model, production agent, or clinic summarizer as the exercise.
+Only `labs/E1/e1-lab` is in scope. The practice is an in-process `run_tool(name, args)`. The names are synthetic strings `exec_sql` / `search_notes`. Do **not** send prompts to a public language model, production agent, or clinic summarizer as the exercise.
 
 Do not paste this exercise onto a public API, employer agent, or live hospital summarizer "to see what happens."
 
@@ -63,7 +63,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 | How you recover later | Revoke leftover agent credentials |
 | Out of scope | A famous-bugs product; a live vendor API; claiming an assurance gate |
 
-A tool library will expose whatever tools you pass. A system prompt is another string the model may ignore. The web framework will still run whatever handler you wired. The notes app's summarizer will still run `exec_sql` if `run_tool` is always-run. The app's promise this week is: **this** fixture, `exec_sql` is None.
+A tool library will expose whatever tools you pass. A system prompt is another string the model may ignore. The web framework will still run whatever handler you wired. The notes app's summarizer will still run `exec_sql` if `run_tool` is always-run. The app's promise this week is: **this** practice, `exec_sql` is None.
 
 ## Practice
 

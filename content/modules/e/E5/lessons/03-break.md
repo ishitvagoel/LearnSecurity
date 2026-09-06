@@ -39,7 +39,7 @@ Read `vulnerable/rls.py`. It returns the body company when present. Tests:
 - `test_body_cannot_switch_tenant`
 - `test_matching_body_may_keep_session_tenant` — A/A may pass on both
 
-You do not need a new company letter. The failure of `test_body_cannot_switch_tenant` *is* the evidence. Do not paste the fixture into a public API.
+You do not need a new company letter. The failure of `test_body_cannot_switch_tenant` *is* the evidence. Do not paste the practice files into a public API.
 
 Do not open the repaired files yet. Diagnose the cause first.
 
@@ -57,7 +57,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 | How you recover later | Audit B for A's actions; take back the confused session |
 | Out of scope | A famous-bugs name, a row-level product, a live company, a course gate |
 
-FastAPI will bind whatever field you declare. PostgreSQL row-level rules will isolate whatever session variable you `SET`. A subdomain Host header is client-controlled. The app’s promise is: **this** fixture, session A plus body B is A.
+FastAPI will bind whatever field you declare. PostgreSQL row-level rules will isolate whatever session variable you `SET`. A subdomain Host header is client-controlled. The app’s promise is: **this** practice, session A plus body B is A.
 
 ## Practice
 

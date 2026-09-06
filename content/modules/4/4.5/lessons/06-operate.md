@@ -24,7 +24,7 @@ flowchart TD
 | Recover | Revoke the client; rotate signing keys if tokens self-verify |
 | Leftover | PKCE / nonce / DPoP not in this practice |
 
-Industry lists name detect, respond, recover. They do not prove the `aud` comparison. A log-product name is not the rule. Re-run `test_wrong_audience_is_rejected` after any verifier change; a green OpenID dashboard is not that pytest. Missing `aud` is the same forbidden outcome as `aud=other-api` — do not close one without retesting the other. A leaked token that already has the *correct* audience is leftover (revocation / sender-constraint), not a pass for this metric.
+Industry lists name detect, respond, recover. They do not prove the `aud` comparison. A log-product name is not the rule. Re-run `test_wrong_audience_is_rejected` after any verifier change; a green OpenID dashboard is not that pytest. Missing `aud` is the same what must not happen as `aud=other-api` — do not close one without retesting the other. A leaked token that already has the *correct* audience is leftover (revocation / sender-constraint), not a pass for this metric.
 
 ## What the framework does vs what you still have to check
 

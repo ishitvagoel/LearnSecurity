@@ -13,7 +13,7 @@ The rule under test:
 
 ## Where you may practice
 
-Only `labs/6.7/6.7-lab` is in scope. The fixture is an in-process `allow`. Fake call counts. It does not talk to the network.
+Only `labs/6.7/6.7-lab` is in scope. The practice is an in-process `allow`. Fake call counts. It does not talk to the network.
 
 Do not load-test a public host. Do not probe an employer export API. Do not probe a classmate preview. Do not paste a live export “to see what happens.”
 
@@ -28,7 +28,7 @@ flowchart TD
   Call["allow 4"] --> True[returns true]
 ```
 
-The broken files show **cause** (no resource account). Do not aim a load generator at anything except this fixture. What has to be true first: `allow` returns true for every `n`. You do not need HTTP. You must not load-test a public host.
+The broken files show **cause** (no resource account). Do not aim a load generator at anything except this practice. What has to be true first: `allow` returns true for every `n`. You do not need HTTP. You must not load-test a public host.
 
 Industry lists want a stop against scripts that burn quota. Module 3.4 already capped shares on the write path. This check is how many **exports** in a window. A famous API-abuse list is a later name, not this pytest.
 
@@ -66,7 +66,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-An IP limit at the edge is a bucket per address, not a per-person export account. FastAPI will run export as often as you call it. Next.js disabling a button does not bind `n`. The app’s promise is: **this** fixture, `allow(4)` is false.
+An IP limit at the edge is a bucket per address, not a per-person export account. FastAPI will run export as often as you call it. Next.js disabling a button does not bind `n`. The app’s promise is: **this** practice, `allow(4)` is false.
 
 ## Practice
 

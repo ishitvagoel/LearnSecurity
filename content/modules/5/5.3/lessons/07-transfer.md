@@ -31,7 +31,7 @@ flowchart LR
 
 If rotate only updates the wiki, the gist string still authenticates. A settings library, a vault brand, and `.gitignore` do not pop `DEFAULT`. Envelope wrapping is a later sketch: compromising the wrapping key still requires the old data key to be dead — same fork, different wrapping.
 
-The clinic rewrite still has to keep the notes-app fork: the leaked string is false after rotate, and missing current denies. Moving the key to Vault while leaving `or presented == DEFAULT` in `auth` leaves the gist live. The local pytest analogue is `test_hardcoded_default_does_not_auth` plus `test_missing_current_denies` — on a fixture, not a live gist.
+The clinic rewrite still has to keep the notes-app fork: the leaked string is false after rotate, and missing current denies. Moving the key to Vault while leaving `or presented == DEFAULT` in `auth` leaves the gist live. The local pytest analogue is `test_hardcoded_default_does_not_auth` plus `test_missing_current_denies` — on a practice, not a live gist.
 
 ## What is not good enough
 

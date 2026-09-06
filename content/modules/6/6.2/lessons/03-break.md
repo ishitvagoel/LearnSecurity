@@ -13,7 +13,7 @@ The rule under test:
 
 ## Where you may practice
 
-Only `labs/6.2/6.2-lab` is in scope. The fixture is an in-process `render`. Fake titles only. It does not open a browser. Do not load a live page, an employer board, or a classmate preview as this exercise.
+Only `labs/6.2/6.2-lab` is in scope. The practice is an in-process `render`. Fake titles only. It does not open a browser. Do not load a live page, an employer board, or a classmate preview as this exercise.
 
 Do not paste this exercise onto a public site, employer board, or live clinic portal.
 
@@ -60,7 +60,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-React JSX encodes text children by default; `dangerouslySetInnerHTML` does not. FastAPI `HTMLResponse` will ship whatever string you build. Jinja autoescape is off unless you turn it on. The app’s promise is: **this** fixture, the extra-tag marker `"<img"` is absent and `&lt;` is present.
+React JSX encodes text children by default; `dangerouslySetInnerHTML` does not. FastAPI `HTMLResponse` will ship whatever string you build. Jinja autoescape is off unless you turn it on. The app’s promise is: **this** practice, the extra-tag marker `"<img"` is absent and `&lt;` is present.
 
 ## Practice
 

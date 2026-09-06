@@ -17,7 +17,7 @@ Renaming “note” to “chart” is not transfer. Expected digest, got digest,
 
 | Notes app this week | Clinic sketch |
 |---|---|
-| `install_ok("aaa", "bbb")` must be false | Same check on a local fixture |
+| `install_ok("aaa", "bbb")` must be false | Same check on a local practice files |
 | Lockfile digest is the pin | Prod pod still needs a pin |
 | Name-only install | “Always get latest” |
 | Lookalike publisher | Same actor — **not** a live clinic registry |
@@ -31,7 +31,7 @@ flowchart LR
 
 If the pod installs “latest” while `install_ok` is always true, the rule is gone. CycloneDX, provenance badges, and Dependabot do not compare `aaa` to `bbb`. Pinning Actions by SHA is the same equality idea on a different object — name it, do not typosquat a live registry here. A lookalike package wins when you install by name. An SBOM is inventory, not verify.
 
-The clinic rewrite still has to keep the notes-app fork: mismatch denied, match may install. Generating an SBOM without a digest check leaves `install_ok("aaa","bbb")` true. The local pytest analogue is `test_hash_mismatch_refuses_install` — on a fixture, not a live npm.
+The clinic rewrite still has to keep the notes-app fork: mismatch denied, match may install. Generating an SBOM without a digest check leaves `install_ok("aaa","bbb")` true. The local pytest analogue is `test_hash_mismatch_refuses_install` — on a practice, not a live npm.
 
 ## Prompt — clinic npm install in a prod pod
 
@@ -40,7 +40,7 @@ Rewrite the notes-app sentence. Include:
 1. who can act (lookalike / compromised maintainer — not a live clinic registry attack);
 2. what you trust (digest equality is the promise; SBOM / provenance / Dependabot are not);
 3. what must not happen (`install_ok("aaa","bbb")` true, not a legal label);
-4. a test idea on a **local** fixture only (no live npm);
+4. a test idea on a **local** practice files only (no live npm);
 5. leftover (malicious pin, cache poisoning, unpinned actions, lookalike packages);
 6. whether a human-read CI path exists (must say digest mismatch in words).
 

@@ -22,7 +22,7 @@ flowchart LR
 
 If the appointment grant feeds `can_read(chart)`, the cell is gone. FastAPI `Depends(get_user)` and a “clinician” role string do not key chart B. Id length is obscurity, not a grant. A clinic admin costume that crosses companies is the eve×n1 sibling: deny even if the role string says admin.
 
-The clinic rewrite still has to keep the notes-app fork: a grant on appointment A is not a grant on chart B, and a grant in clinic-acme is not a grant in clinic-globex. Copying the share table into a new resource while leaving `has_any_share` as the gate leaves the new table unused. That leftover permission is the same cause with new nouns. The local pytest analogue is `test_grant_on_n1_is_not_grant_on_n2` plus a cross-company deny — on a fixture, not a live clinic system.
+The clinic rewrite still has to keep the notes-app fork: a grant on appointment A is not a grant on chart B, and a grant in clinic-acme is not a grant in clinic-globex. Copying the share table into a new resource while leaving `has_any_share` as the gate leaves the new table unused. That leftover permission is the same cause with new nouns. The local pytest analogue is `test_grant_on_n1_is_not_grant_on_n2` plus a cross-company deny — on a practice, not a live clinic system.
 
 ## Prompt — clinic sketch
 
@@ -31,7 +31,7 @@ Rewrite the notes-app sentence. Include:
 1. who can act (member with a real appointment grant who swaps chart id; clinic admin costume — **not** a live clinic system);
 2. what you trust (which lookup is trusted; the scheduling UI is not);
 3. what must not happen (`can_read` true for chart B, not a legal label and not “IDOR”);
-4. a test idea on a **local** fixture only (appointment grant does not allow chart B);
+4. a test idea on a **local** practice files only (appointment grant does not allow chart B);
 5. leftover (search index, export, worker, title-vs-body later);
 6. whether a human-seen “access denied” path must be announced in text, not a silent blank page that pushes people to share passwords.
 

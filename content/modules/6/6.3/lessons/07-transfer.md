@@ -21,7 +21,7 @@ flowchart LR
 
 If the partner-share POST keys only the login cookie, the cell is gone. FastAPI, SameSite=Lax, and a CORS allow-list do not bind origin and token. CORS `*` with credentials is false comfort. postMessage and clickjacking are named leftovers: they can still confuse the helper after this pytest is green.
 
-The clinic rewrite still has to keep the notes-app fork: foreign origin without token is false, and same origin without token is also false. Setting SameSite=Lax without an origin-and-token test leaves leftover cookies as consent. The local pytest analogue is `test_foreign_origin_post_is_denied` plus `test_same_origin_without_token_is_denied` — on a fixture, not a live clinic system.
+The clinic rewrite still has to keep the notes-app fork: foreign origin without token is false, and same origin without token is also false. Setting SameSite=Lax without an origin-and-token test leaves leftover cookies as consent. The local pytest analogue is `test_foreign_origin_post_is_denied` plus `test_same_origin_without_token_is_denied` — on a practice, not a live clinic system.
 
 ## Prompt — clinic sketch
 
@@ -30,7 +30,7 @@ Rewrite the notes-app sentence. Include:
 1. who can act (foreign origin using the victim browser as helper — **not** a live clinic);
 2. what you trust (origin + token are trusted; SameSite is not);
 3. what must not happen (`allow_share` true for foreign origin without token, not a legal label);
-4. a test idea on a **local** fixture only (foreign origin + no token is false);
+4. a test idea on a **local** practice files only (foreign origin + no token is false);
 5. leftover (GET mutate; clickjacking; postMessage; CORS credentials; advanced embeds; lookalike UI from the phishing lesson);
 6. whether a human-seen “share blocked” path must be announced in text, not a silent no-op that pushes people to retry from a lookalike.
 

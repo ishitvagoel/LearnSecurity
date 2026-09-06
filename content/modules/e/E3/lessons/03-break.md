@@ -30,7 +30,7 @@ flowchart TD
 
 The broken files show **cause** (a side effect that is not bound to the key). Do not probe public APIs. What has to be true first: every `capture` appends. You do not need a payment company. You must not hit a live processor. `conftest.py` should call `reset()` so ledger state does not leak across tests.
 
-Module 2.4 / 6.6 already said consume-once; this cell is **money-like grain**. Course gates stay unclaimed. This fixture is not in card-network scope.
+Module 2.4 / 6.6 already said consume-once; this cell is **money-like grain**. Course gates stay unclaimed. This practice is not in card-network scope.
 
 ## What to look at — cause, not a trophy
 

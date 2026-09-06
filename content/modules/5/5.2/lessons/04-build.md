@@ -45,7 +45,7 @@ Volume encryption. HTTPS. Argon2 on a note body. JWT. ECB “because we need it 
 
 - The `aesgcm:` prefix is a stand-in, not AES-GCM.
 - Key in the same row, or a hardcoded key, waits for a later lesson.
-- Nonce reuse is advanced work, not this fixture.
+- Nonce reuse is advanced work, not this practice.
 - TLS does not encrypt the column.
 - Password hashing is a different field.
 

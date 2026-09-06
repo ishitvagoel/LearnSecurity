@@ -13,7 +13,7 @@ The rule under test:
 
 ## Where you may practice
 
-Only `labs/9.1/9.1-lab` is in scope. The fixture is an in-process `covered(req_id, tests)`. The requirement id is the synthetic string `AUTHZ-1`. No live checklist portals, no governance products, no clinic systems. Do not send the spreadsheet anywhere.
+Only `labs/9.1/9.1-lab` is in scope. The practice is an in-process `covered(req_id, tests)`. The requirement id is the synthetic string `AUTHZ-1`. No live checklist portals, no governance products, no clinic systems. Do not send the spreadsheet anywhere.
 
 Do not paste a real requirements matrix into a public tracker “to see what happens.” Do not paste this exercise onto a public checklist portal, employer dashboard, or live clinic.
 
@@ -63,7 +63,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 | How you recover later | Add the test; do not backfill “done” |
 | Out of scope | A checklist PDF page, a live portal, or claiming the verification gate |
 
-A green CI job is not AUTHZ-1. Copied-wholesale checklists are inventory, not a tailored matrix. A FastAPI TestClient 200 is a product test (9.3). The app’s promise this week is: **this** fixture, status-only is not covered.
+A green CI job is not AUTHZ-1. Copied-wholesale checklists are inventory, not a tailored matrix. A FastAPI TestClient 200 is a product test (9.3). The app’s promise this week is: **this** practice, status-only is not covered.
 
 ## Practice
 
