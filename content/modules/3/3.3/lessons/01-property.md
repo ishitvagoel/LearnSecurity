@@ -1,84 +1,85 @@
-# 3.3-LO-01 — Architecture is a second mediation, not a substitute for 1.2
+# Architecture is a second check, not a substitute for who-is-allowed
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** Saltzer and Schroeder (1975, seminal) least privilege and complete mediation; OWASP ASVS 5.0.0 (final) `v5.0.0-8.4.1` (Level 2 cross-tenant controls), `v5.0.0-8.2.2`, `v5.0.0-8.3.1`; `v5.0.0-15.2.5` is **Level 3, advanced** (isolation around dangerous functionality). CISA Secure by Design is living guidance and **unverified** in this repo’s pin (403 on fetch). NIST SSDF 1.1 (final); SSDF 1.2 remains **draft**.
 
-## The claim this module owns
+## The rule
 
-SecureCollab Phase 1 FastAPI handlers must still mediate tenant reads (1.2). That is not enough if the PostgreSQL role in `DATABASE_URL` can `SELECT` every notes row. A forgotten `WHERE tenant_id = …`, later SQLi (6.1), or a stolen app password then becomes a cross-tenant dump. Architecture is a **second** mediation: the runtime role must not be able to read another tenant even when the handler is wrong.
+The notes app’s FastAPI handlers must still check who is allowed to read a note. That is not enough if the PostgreSQL role in `DATABASE_URL` can `SELECT` every notes row. A forgotten `WHERE` on the company, a later injection into SQL, or a stolen app password then becomes a dump of another company’s notes.
 
-> For a SecureCollab Phase 1 notes table, the runtime `app` role bound as tenant `tB` must not `SELECT` a row whose `note_tenant` is `tA`. SQLAlchemy, a VPC, or “we use microservices” does not enforce this. RLS (5.5) is a later layer, not a comment that ships.
+Architecture is a **second** check: the role the app uses at request time must not be able to read another company’s row even when the handler is wrong.
 
-The forbidden outcome is **shared app role reads tA as tB**: `can_select("app", "tB", "tA") is True`. That is a 1.1 confidentiality failure with a 1.2 cell that the database did not catch.
+> For a notes table, the runtime `app` role bound as company `tB` must not `SELECT` a row whose `note_tenant` is `tA`. SQLAlchemy, a private network, or “we use microservices” does not enforce this. A later row-level rule in the database is a later layer, not a comment that ships.
 
-ASVS `v5.0.0-8.4.1` wants cross-tenant controls so operations never affect another tenant. `v5.0.0-8.2.2` wants data-specific access. `v5.0.0-8.3.1` wants enforcement at a trusted service layer, not the Next.js client. `v5.0.0-15.2.5` is **Level 3 (advanced)** extra isolation around dangerous functionality — not a silent baseline. CISA’s manufacturer-ownership language does not configure `GRANT`.
+What must not happen is a **shared app role that reads tA as tB**: `can_select("app", "tB", "tA") is True`. Who-is-allowed failed, and the database did not catch it. That is a secrecy failure.
 
-## Mental model: two gates, one forgotten WHERE
+Industry checklists want a second check so work never hits another company’s rows, and they want that check on a trusted server, not in the Next.js client. Extra isolation around dangerous work is an advanced row, not this week’s pytest. A manufacturer-ownership pledge does not configure `GRANT`.
+
+## Picture: two gates, one forgotten WHERE
 
 ```mermaid
 flowchart TD
-  Req["GET note n1 as tB"] --> App{"1.2 handler checks tenant?"}
+  Req["GET note n1 as company tB"] --> App{"Who-is-allowed check?"}
   App -->|yes| Db["PostgreSQL session"]
   App -->|forgotten WHERE| Db
   Db --> Role{"Runtime role can SELECT tA rows?"}
-  Role -->|yes| Leak["tA body returned - property false"]
-  Role -->|no| Deny["Second mediation holds"]
+  Role -->|yes| Leak["tA body returned — rule false"]
+  Role -->|no| Deny["Second check holds"]
 ```
 
-The TCB for this module is the **runtime connection role plus its grants** (lab stand-in: `can_select`). The handler is still required. Trusting ORM defaults or a pooler user named `app` without a tenant predicate is not a TCB.
+What you trust for this topic is the **runtime connection role plus its grants** (lab stand-in: `can_select`). The handler is still required. Trusting ORM defaults or a pooler user named `app` without a same-company check is not what you trust.
 
-**Mechanism (not the property):** SQLAlchemy `session`, Kubernetes NetworkPolicy, or an RLS ticket titled “later.”
+**A tool is not the rule.** SQLAlchemy `session`, a Kubernetes network policy, or a ticket titled “row-level security later.”
 
-## Mental model: data plane vs administrative plane
+## Picture: the running app versus migrate and look-but-don’t-read
 
 ```mermaid
 flowchart LR
-  AppRole["app - runtime SELECT own tenant"] --> Notes[notes]
-  Migrator["migrator - DDL offline"] --> Notes
+  AppRole["app — runtime SELECT own company"] --> Notes[notes]
+  Migrator["migrator — DDL offline"] --> Notes
   Super["postgres superuser"] --> Notes
-  Analyst["analyst - no bodies"] --> Notes
+  Analyst["analyst — no bodies"] --> Notes
 ```
 
-Migrator and superuser exist. They must not be `DATABASE_URL` at request time. Stolen migrator is a residual with a shorter life and a different owner — not a reason to run the API as that user.
+Migrator and superuser exist. They must not be `DATABASE_URL` at request time. A stolen migrator password is leftover risk with a shorter life and a different owner — not a reason to run the API as that user.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | For this property |
+| Slice | For this rule |
 |---|---|
-| Root cause | One omnipotent DB user shared by app and migrate |
-| Preconditions | Runtime role can `SELECT` other tenants |
-| Trigger | Forgotten WHERE, SQLi, or stolen app password |
-| Impact | Confidentiality of tA notes |
-| Prevention | Least-privilege runtime role; tenant predicate in the role/RLS |
-| Detection | `grant_drift` in CI; connection-user metric |
-| Recovery | Rotate the password; review `GRANT`; do not log bodies |
+| Why it happens | One all-powerful database user shared by the app and migrate |
+| What has to be true first | The runtime role can `SELECT` other companies |
+| Trigger | Forgotten WHERE, later SQL injection, or a stolen app password |
+| What it costs | Secrecy of company tA’s notes |
+| How you stop it | Least-privilege runtime role; same-company check in the role or a later row-level rule |
+| How you notice | `grant_drift` in CI; who connected |
+| How you recover | Rotate the password; review `GRANT`; do not log bodies |
 
-## Framework defaults versus the architecture guarantee
+## What the framework does vs what you still have to check
 
-FastAPI does not scope PostgreSQL. A microservice split without new grants is a topology drawing. The lab guarantee: `can_select("app", "tB", "tA") is False` and the runtime connection is not `postgres`. Oracle: `labs/3.3/3.3-lab`. No live databases.
+FastAPI does not scope PostgreSQL. Splitting into microservices without new grants is a topology drawing. The app’s promise is: `can_select("app", "tB", "tA") is False` and the runtime connection is not `postgres`. The folder is `labs/3.3/3.3-lab`. No live databases.
 
-## Mechanism limits
+## What the tool cannot do
 
-- RLS bypassed by table owners and `SECURITY DEFINER` (E5).
-- Connection pooler user; analytics replica without RLS (clinic transfer).
-- Comment “RLS later” on the production path.
+- A table owner or a function that runs as the owner can walk around a later row-level rule (later topic).
+- A connection-pooler user; an analytics copy without the same-company check (clinic transfer).
+- A comment “row-level security later” on the production path.
 
 ## Practice
 
 Draw app vs migrator vs analyst. Then run:
 
-```
+```text
 python3 -m pytest labs/3.3/3.3-lab/tests --impl vulnerable
 python3 -m pytest labs/3.3/3.3-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Map the assertion to `tB` reading `tA`, not to a VPC diagram.
+The first command must fail. The second must pass. Tie the check to `tB` reading `tA`, not to a private-network diagram.
 
-## Transfer
+## Use it somewhere new
 
-Serverless function with a shared `admin` connection string. Clinic billing replica: another plane, same rule.
+A serverless function with a shared `admin` connection string. A clinic billing copy: another lane, same rule.
 
-## Non-goals
+## What this page is not doing
 
-Live RDS, real tenant dumps, weaponized SQL payloads, and “microservices isolate tenants.” Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner or product evidence. Answer keys are not in this file.
+Live cloud databases, real company dumps, weaponized SQL, and “microservices isolate companies.” Course gates stay unclaimed without learner or product evidence. Answer keys are not in this file.

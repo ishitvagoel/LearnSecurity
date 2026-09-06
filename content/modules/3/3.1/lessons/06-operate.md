@@ -1,14 +1,17 @@
-# 3.1-LO-06 — Detect a redaction miss; purge without logging the body again
+# Notice a redaction miss; purge without logging the body again
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
-**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-16.2.5`. CSF names outcomes; it does not redact the line.
 
-## Prevention is not absolute
+## Stopping it is not enough
 
-A new handler, an exception printer, or an APM agent can reintroduce the body after `log_event` was “fixed once.” Pair detect and recover. Do not log the body while investigating. Do not paste the matching line into Slack, a ticket, or a lesson note.
+Even after `log_event` was fixed once, a new handler, an exception printer, or an APM agent can put the body back. Running it for real is the rest of the loop: notice, contain, purge, and refuse to “help” by logging the body again.
 
-## Mental model: alert on substring, then purge
+Do not paste the matching line into Slack, a ticket, or a lesson note.
+
+## Picture: alert on the substring, then purge
+
+A redaction miss is a notice-and-recover problem, not a licence to quote the secret in the paging channel. Notice names the event. Recover purges the line. Neither reprints the body.
 
 ```mermaid
 flowchart TD
@@ -18,37 +21,44 @@ flowchart TD
   Alert --> Purge[Purge matching lines]
 ```
 
-| Outcome | This module |
+Industry lists name detect, respond, recover. They do not pick a log product. They do not prove this line is clean. Someone still has to own the leftover.
+
+## Signals that do not become a second leak
+
+| Outcome | This topic |
 |---|---|
-| Detect | `log_redaction_miss`; CI test that the synthetic substring is absent |
-| Signal | event name, request id; never the body |
-| Recover | Purge matching lines; rotate if tokens present; re-run `test_note_body_is_not_logged` |
-| Residual | Operators still see ids; document that cell; APM and access logs remain other sinks |
+| Notice | `log_redaction_miss`; a CI test that the synthetic substring is absent |
+| What the line holds | Event name, request id — **never** the body |
+| Respond | Stop the printer that reintroduced the field; do not paste the matching line into chat |
+| Recover | Purge matching lines; rotate if tokens were present; re-run `test_note_body_is_not_logged` |
+| Leftover | Operators still see ids; write that row down; APM and access logs remain other places |
 
-CSF 2.0 names Detect / Respond / Recover. They do not prove `v5.0.0-16.2.5`. A SIEM product name is not the property.
-
-## Framework defaults versus the operate guarantee
-
-The same uvicorn / exception / APM drains that bypass the logger will also bypass a “scan our app logs” detector. Inventory those sinks (LO-02) before claiming Recover. If your alert includes the matching line, you have duplicated the leak into the paging channel.
-
-## Practice
-
-Write one log line you would accept. Tie it to `labs/3.1/3.1-lab`.
+A log line a reviewer can accept looks like:
 
 ```text
 log_denied reason=confidential_field event=note_read request_id=req_81aa
 ```
 
-Reject any line that includes `tenant-A-secret-body`, a note body, a patient chart, or a PAN.
+Not: `tenant-A-secret-body`, a note body, a patient chart, or a card number.
 
-## Transfer
+If your alert includes the matching line, you have copied the leak into the paging channel.
 
-Clinic: detect chart text in appointment logs; purge without pasting the chart into the ticket. Support tools (1.4): detect paste of the body into a ticket the same way.
+## What the framework does vs what you still have to check
 
-## Usability
+The same access logs, exception dumps, and APM drains that bypass the logger will also bypass a “scan our app logs” detector. Name those places before you claim recover. A log-product name is not the rule.
 
-If operators see a redaction-miss badge, do not encode it as color-only (WCAG 2.2 Success Criterion 1.4.1).
+## Can people still use it
 
-## Non-goals
+If operators see a redaction-miss badge, do not encode it as color only. Give it a name or text a screen reader can speak.
 
-SIEM product names are not the property. Do not instruct live SIEM queries against production. Gates 0–10 stay not-attempted without learner or product evidence.
+## Practice
+
+Write one log line you would accept in review (ids, reason, no body). Tie it to `labs/3.1/3.1-lab`. Reject any line that includes `tenant-A-secret-body`, a note body, a patient chart, or a card number.
+
+## Use it somewhere new
+
+Clinic: notice chart text in appointment logs; purge without pasting the chart into the ticket. Support tools: notice a paste of the body into a ticket the same way.
+
+## What this page is not doing
+
+A log-product name is not the rule. Do not run live queries against production logs. Answer keys stay out of lessons.

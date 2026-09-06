@@ -1,83 +1,103 @@
-# 3.1-LO-01 — Classification is a sink rule, not a spreadsheet sticker
+# Classification is a sink rule, not a spreadsheet sticker
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** NIST CSF 2.0 (final) Identify as an *outcome family*, not a control catalogue; OWASP ASVS 5.0.0 (final) `v5.0.0-14.1.1`, `v5.0.0-14.1.2`, and `v5.0.0-16.2.5`; NIST Privacy Framework 1.0 (final) for privacy outcomes; Privacy Framework 1.1 remains a **draft** if cited.
 
-## The claim this module owns
+## The rule
 
-SecureCollab Phase 1 note **bodies** are Confidential. That word is empty until it names **which sinks** may hold the field. An application log line for `note_read` is a lower-trust store than the note table: operators, a SIEM vendor, and another tenant’s admin on shared observability may read it.
+The notes app still stores note bodies. Those bodies are confidential. That word does nothing until it names **which places** may hold the field.
 
-> For a SecureCollab Phase 1 `note_read` event, the log line must not contain the note body. It may contain allow-listed metadata (event name, note id, tenant id). Classification is a property of the **field** and of each sink. A Confluence label, a privacy policy, or `DEBUG=true` does not enforce this.
+A log line for `note_read` is a lower-trust store than the note table. Operators can read it. A log vendor can read it. On shared observability, another company's admin might read it.
 
-The forbidden outcome is **Confidential field in a lower-trust store**: `log_event("note_read", "tenant-A-secret-body")` includes `tenant-A-secret-body`. That is a 1.1 confidentiality and privacy failure.
+> For a `note_read` event, the log line must not contain the note body. It may contain allow-listed metadata: event name, note id, tenant id. Classification is a sink rule: a **field** plus **each place it can land**. A spreadsheet label, a privacy policy, or `DEBUG=true` does not enforce this.
 
-ASVS `v5.0.0-14.1.1` wants sensitive data identified and classified. `v5.0.0-14.1.2` wants each protection level to say **how the data is logged**. `v5.0.0-16.2.5` wants logging to enforce that level (credentials never; other data hashed or masked). CSF Identify names the inventory outcome; it does not redact uvicorn.
+A sink is a place the field can land: the note table, a log line, an error dump.
 
-## Mental model: field × sink
+So what must not happen: **the confidential body in a lower-trust store**. `log_event("note_read", "tenant-A-secret-body")` must not include `tenant-A-secret-body`. That is a secrecy and privacy failure of the body.
+
+Industry lists ask you to name sensitive data and to say how each level is logged. They do not redact this logger.
+
+## Picture: field and place
+
+Treat classification as a rule per field and per place, not as a sticker on a spreadsheet.
 
 ```mermaid
 flowchart TD
   Body["Note body - Confidential"] --> Table["Note table - allowed store"]
   Body --> Log["Application log - deny body"]
-  Body --> APM["APM / exception - deny body"]
+  Body --> APM["Error / APM dump - deny body"]
   Id["Note id - Internal"] --> Log
   Id --> Table
 ```
 
-A sticker on the field that does not change the log API is theater. The TCB is the **logging API handlers actually call**, plus every other sink (print, f-string, exception `repr`, slow-query log, packet capture).
+A sticker on the field that does not change the log API is just a sticker. What you trust is the **logging API handlers actually call**, plus every other printer: `print`, an f-string, an exception dump, a slow-query log, a packet capture.
 
-**Mechanism (not the property):** uvicorn access logs will store query strings (4.3). FastAPI does not know Confidential. A DLP product name is not this sentence.
+The web framework does not know "Confidential." Access logs will store query strings — that is a later topic. A product name for data-loss tools is not this sentence.
 
-## Mental model: inventory sinks before redaction
+## Picture: name the places before you redact
 
 ```mermaid
 flowchart LR
   Asset[What is valued] --> Class[Protection level]
-  Class --> Req["Requirements per sink - log, backup, support"]
-  Req --> Test[Forbidden-outcome test]
+  Class --> Req["Rules per place - log, backup, support"]
+  Req --> Test[Check that the body is not in the log]
 ```
 
-If the inventory does not list the log drain, redaction of `logger.info` is incomplete. Operators still seeing **ids** is a different cell—document it; do not pretend ids are the body.
+If the list of places does not include the log drain, redacting `logger.info` is incomplete. Operators still seeing **ids** is a different row. Write that down. Do not pretend ids are the body.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## People who can read a log line
 
-| Slice | For this property |
+| Person | What they can do here | Motive | Harm if the body is in the log |
+|---|---|---|---|
+| Operator | Read application logs | Debug a `note_read` | Reads company A's note body |
+| Log vendor | Index and search the drain | Run the logging product | Same body, now in a third-party store |
+| Another company's admin on shared observability | Read a shared log view | Operate their own tenant | Reads a body that is not theirs |
+| Support | Paste "what the user saw" into a ticket | Close a ticket | The body leaves the log and lands in a ticket |
+
+"Nation-state" can wait. This week needs the table above. Those four already get the body without a new bug name.
+
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
+
+Someone treated the body as debug context. That is the cause. The person who later reads the log is a **result**, not the cause.
+
+| Slice | For this rule |
 |---|---|
-| Root cause | Body treated as debug context |
-| Preconditions | Handler logs the event payload including the body |
+| Why it happens | The body was treated as debug context |
+| What has to be true first | The handler logs the event payload, including the body |
 | Trigger | `log_event` for `note_read` |
-| Impact | Confidentiality and privacy of the body in a lower-trust store |
-| Prevention | Structured logs with allow-listed fields; never interpolate the body |
-| Detection | Tests and scans that the body substring is absent; `log_redaction_miss` |
-| Recovery | Purge matching logs; rotate if tokens were present |
+| What it costs | The body sits in a lower-trust store; operators and vendors can read it |
+| How you stop it | Structured logs with allow-listed fields; never paste the body into the line |
+| How you notice | Tests and scans that the body substring is absent; a `log_redaction_miss` count |
+| How you recover | Purge matching logs; rotate if tokens were present; do not log the body again while looking |
 
-## Framework defaults versus the field guarantee
+## What the framework does vs what you still have to check
 
-Regex redaction after the fact misses encodings (2.1). Error traces, slow-query logs, and full-packet APM bypass the logger. The application guarantee is: **this** fixture’s `log_event` line does not contain `tenant-A-secret-body` and does contain a redaction marker. Oracle: `labs/3.1/3.1-lab`. No real PII, no production log drain.
+Regex redaction after the fact misses encodings — a later topic. Error traces, slow-query logs, and full-packet dumps bypass the logger. FastAPI does not know Confidential.
 
-## Mechanism limits
+The app's promise is: **this** `log_event` line does not contain `tenant-A-secret-body` and does contain a redaction marker. The local check is `labs/3.1/3.1-lab`. Fake data only. No real people's data. No production log drain.
 
-- Classification spreadsheet with no test.
+## What the tool cannot do
+
+- A classification spreadsheet with no test.
 - `DEBUG=True` in an environment that shares production data.
 - Exception middleware that dumps the request body.
-- Support tools that paste the body into a ticket (1.4 / 4.2 residual).
+- Support tools that paste the body into a ticket. That leftover stays on the list.
 
 ## Practice
 
-Name the field, the sink, and the deny rule. Then run:
+Name the field, the place it must not land, and the deny rule. Then run the local pair:
 
-```
+```text
 python3 -m pytest labs/3.1/3.1-lab/tests --impl vulnerable
 python3 -m pytest labs/3.1/3.1-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Map the assertion to the body in the log, not to a privacy-policy URL.
+The first command must fail. The second must pass. Tie the check to the body in the log, not to a privacy-policy URL.
 
-## Transfer
+## Use it somewhere new
 
-Clinic: notes vs appointment time are two classes and two sinks. An EHR-lite booking card that logs the chart text fails this sentence even if the time is Internal.
+A clinic booking card. Chart text vs appointment time are two classes and two places. A card that logs the chart text fails this sentence even if the time is Internal.
 
-## Non-goals
+## What this page is not doing
 
-Live SIEM tenants, real patient charts, production log dumps, and “we classified it so it is protected.” Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner or product evidence. Answer keys are not in this file.
+Live log tenants, real patient charts, production log dumps, and “we classified it so it is protected.” Answer keys are not in this file.

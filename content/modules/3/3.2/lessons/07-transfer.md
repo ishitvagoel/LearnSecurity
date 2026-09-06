@@ -1,52 +1,53 @@
-# 3.2-LO-07 — Transfer: clinic SMS reminders
+# Same idea on clinic SMS reminders
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** OWASP Threat Modeling Project (maintained) Four Questions; OWASP ASVS 5.0.0 (final) `v5.0.0-15.1.3`; NIST SP 800-154 IPD remains **draft**.
 
-## Change the channel; keep scanner ≠ model
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: a green scan still lists `cross-tenant-read`. Rewrite it for a new hop without changing the fork.
+The notes-app scaffolding goes away. You get **clinic SMS reminders** — a new channel that HTTP scans of the notes app will not enumerate. Do not answer with a Top 10, a CWE, or a scanner as the definition of security. The notes-app sentence was: a green scan still lists `cross-tenant-read`. Rewrite it for a new hop without changing the fork.
 
-**Prompt:** Clinic SMS reminders — a new channel that Phase 1 HTTP scans will not enumerate.
+**Prompt:** Clinic SMS reminders — a new channel that HTTP scans will not enumerate.
 
-**Product sketch:** EHR-lite booking card that texts “your appointment” to a phone number.
+**Product sketch:** An EHR-lite booking card that texts “your appointment” to a phone number.
 
-Rewrite the SecureCollab sentence. Include:
+Rewrite the notes-app sentence. Include:
 
-1. attacker capabilities (number-swap; SMS intercept on an untrusted hop; operator who pastes chart text into the template — **not** a live clinic, carrier, or public SMS API);
-2. trust assumptions (which assembler or markdown file is TCB; the SMS vendor questionnaire is not);
-3. forbidden outcome (empty model because “gateway questionnaire green,” or reminder body includes chart text — pick one and test it locally);
-4. a test idea on a **local** fixture only (`sms-content-leak` present when `scanner_green=True`);
-5. residual (carrier logs; support read-aloud — 1.4; SP 800-154 still draft);
-6. WCAG 2.2 if a human-mediated control is in the claim (for example, a usable “opt out of SMS” path); SMS content classification itself is not a WCAG problem.
+1. who can act (number-swap; SMS intercept on an untrusted hop; an operator who pastes chart text into the template — **not** a live clinic, carrier, or public SMS API);
+2. what you trust (which assembler or markdown file is the list you keep; the SMS vendor questionnaire is not);
+3. what must not happen (empty model because “gateway questionnaire green,” or reminder body includes chart text — pick one and test it locally);
+4. a test idea on a **local** practice only (`sms-content-leak` present when `scanner_green=True`);
+5. leftover (carrier logs; support read-aloud; the data-centric modeling note is still a **draft**);
+6. whether a human path must meet WCAG 2.2 (for example, a usable “opt out of SMS” path). SMS content classification itself is not an accessibility problem.
 
-## Mental model: a new hop is a new question-one
+## Picture: a new hop is a new “what are we working on?”
+
+Renaming “note” to “reminder” is not transfer. Person, object, path, and leftover change. Content leak and number-swap are new rows. A vendor sticker is still not what you trust.
 
 ```mermaid
 flowchart LR
-  Api["Clinic API TCB"] --> Sms["SMS vendor - untrusted hop"]
+  Api["Clinic API — what you trust"] --> Sms["SMS vendor — untrusted hop"]
   Sms --> Phone["Patient handset"]
-  Chart["Chart text - Confidential"] --> SmsDeny["Must not be in template"]
-  Time["Appointment time - Internal"] --> SmsAllow["May be in template if policy says so"]
+  Chart["Chart text — Confidential"] --> SmsDeny["Must not be in template"]
+  Time["Appointment time — Internal"] --> SmsAllow["May be in template if policy says so"]
 ```
 
-Question two now includes content leak and number-swap even if every HTTP scanner is green. Seed those ids; do not wait for a CVE. A vendor “HIPAA certified” sticker is mechanism theater, not the row.
+Question two now includes content leak and number-swap even if every HTTP scanner is green. Seed those ids. Do not wait for a CVE. A vendor “HIPAA certified” sticker is theater, not the row.
 
-## What graders reject
+## What is not good enough
 
 | Reject | Why |
 |---|---|
-| Top 10 item as the property | Awareness, not 1.1 |
-| “Vendor is HIPAA certified” as the model | Mechanism theater |
-| Live clinic or real phone numbers | Lab policy |
+| A Top 10 item as the rule | Awareness, not the story of what you checked |
+| “Vendor is HIPAA certified” as the model | Theater |
+| Live clinic or real phone numbers | Course rules |
 | STRIDE letters without assets | Stickers |
-| SP 800-154 as a final baseline | Draft IPD |
+| The data-centric modeling note as a final baseline | Still a **draft** |
 
 ## Practice
 
-One page. No keys. `labs/3.2/3.2-lab` is the only running system you may break. You may also name webhook threats (7.3) as a second optional paragraph — still no live targets.
+One page. No keys. `labs/3.2/3.2-lab` is the only running system you may break. You may also name webhook threats as a second optional paragraph — still no live targets.
 
-## Non-goals
+## What this page is not doing
 
-Live-target scanning. Real patient phone numbers. Claiming Gate 3 from this page.
+Live-target scanning. Real patient phone numbers. Claiming a course gate from this page.

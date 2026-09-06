@@ -1,36 +1,37 @@
-# 3.2-LO-01 — A green scanner is not an empty threat model
+# A green scanner is not an empty threat model
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** OWASP Threat Modeling Project (maintained guidance, live-checked 2026-09-06) Four Question Framework; NIST SP 800-154 IPD remains **draft** (March 2016; NIST still plans to finalize as of 2025-01-23); OWASP ASVS 5.0.0 (final) `v5.0.0-15.1.3` (Level 2 documented security decisions) and `v5.0.0-15.1.5` (**Level 3, advanced** — dangerous-functionality documentation). ASVS 5.0 removed a numbered “do threat modeling” requirement; Appendix D is process **awareness**, not a verification ID.
 
-## The claim this module owns
+## The rule
 
-SecureCollab Phase 1 still has a cross-tenant reader (1.2), a hostile Next.js client (2.3), and a future worker identity that will execute with stored grants (7.4). None of those are CVEs a scanner must find today. A green SAST/DAST/SCA run is coverage for *implementation* bugs that happen to match a rule. It is not a model of what can go wrong for the assets.
+The notes app still has a reader from another company. It still has a browser client you do not trust. It will later have a worker that runs with stored grants. None of those are bug names a scanner has to find today.
 
-> For SecureCollab Phase 1, a version-controlled threat model must still list `cross-tenant-read`, `hostile-browser`, and `stolen-worker` when every scanner is green. Scanner findings are extra coverage, not the set. STRIDE letters without assets, owners, and invalidation conditions are not this sentence.
+A green SAST, DAST, or package scan is coverage for implementation bugs that happen to match a rule. It is not a model of what can go wrong for the notes, the grants, and the cookies.
 
-The forbidden outcome is **empty model on green scan**: `threats_from_scan(scanner_green=True)` returns `[]`, so `cross-tenant-read` is missing. That is a 1.1 *integrity of the assurance story* failure: untested 1.2 and 1.3 cells look “done.”
+> For the notes app, a threat model you keep in version control must still list `cross-tenant-read`, `hostile-browser`, and `stolen-worker` when every scanner is green. Scanner findings are extra coverage, not the set. STRIDE letters with no assets, no owners, and no “what would prove this row wrong” are not this sentence.
 
-ASVS `v5.0.0-15.1.3` wants documented security decisions you can verify in the running system — not a ceremony named STRIDE. `v5.0.0-15.1.5` is **Level 3 (advanced)** and wants dangerous functionality called out in documentation; it is not a silent baseline. Appendix D still recommends threat modeling on design change; that recommendation is not a numbered requirement you can pass by pasting a tool report.
+What must not happen is an **empty model on a green scan**. `threats_from_scan(scanner_green=True)` returns `[]`, so `cross-tenant-read` is missing. Then the story of what you already checked looks finished. Who may read a note, and where trust stops, were never even listed.
 
-## Mental model: scanner is coverage, not the model
+Awareness lists still say “model the design when it changes.” That is not a passing score you earn by pasting a tool report. Industry checklists want documented security decisions you can check in the running system. They want dangerous features called out in docs when you claim that bar. Neither sentence is “the scanner was green.”
+
+## Picture: the scanner is coverage, not the model
 
 ```mermaid
 flowchart TD
-  Assets["Phase 1 notes, grants, cookies"] --> Q2["What can go wrong?"]
-  Q2 --> Seed["Mandatory: 1.2 cross-tenant-read, hostile-browser, stolen-worker"]
-  Scan["SAST/DAST green"] --> Extra["Scanner findings - additive"]
+  Assets["Notes, grants, cookies"] --> Q2["What can go wrong?"]
+  Q2 --> Seed["Always name: cross-tenant-read, hostile-browser, stolen-worker"]
+  Scan["SAST/DAST green"] --> Extra["Scanner findings — extra, not the set"]
   Extra --> Seed
-  Scan --> Empty["Empty list if copied as the model"]
-  Empty --> Fail["Property false"]
+  Scan --> Empty["Empty list if you copy the scan as the model"]
+  Empty --> Fail["The rule is false"]
 ```
 
-The TCB for this property is the **versioned list with owners and triggers**, plus the CI gate that those ids exist. The scanner process is untrusted as an oracle. FastAPI, Semgrep, and a vendor dashboard do not know 1.2.
+What you trust is the **versioned list with owners and triggers**, plus the check that those ids exist. The scanner process is not an oracle. FastAPI, Semgrep, and a vendor dashboard do not know `cross-tenant-read`.
 
-**Mechanism (not the property):** Threat Dragon, a DFD PNG, or “we did STRIDE in the sprint.” A named product is not this sentence.
+**A tool is not the rule.** Threat Dragon, a data-flow picture, or “we did STRIDE in the sprint.” A named product is not this sentence.
 
-## Mental model: four questions, not a sticker pack
+## Picture: four questions, not a sticker pack
 
 ```mermaid
 flowchart LR
@@ -41,46 +42,50 @@ flowchart LR
   Trigger --> Q1
 ```
 
-OWASP’s Threat Modeling Project is methodology-neutral. STRIDE, PASTA, LINDDUN, and attack trees are *prompts* under question two. LINDDUN is valuable for 5.1 privacy flows; it will not list IDOR for you. SP 800-154 (draft) is data-centric: pick the data, then model attack and defense — still not a substitute for owners and invalidation.
+Those four questions are the method. STRIDE, PASTA, LINDDUN, and attack trees are *prompts* under question two. LINDDUN will matter later for privacy flows. It will not list “someone from another company reads a note” for you.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+NIST’s data-centric modeling note is still a **draft**. It says: pick the data, then model attack and defense. That is useful. It still does not replace owners and “when this row is no longer true.”
 
-| Slice | For this property |
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
+
+| Slice | For this rule |
 |---|---|
-| Root cause | Tool output substituted for thinking |
-| Preconditions | `scanner_green=True`; assembler copies that as “no threats” |
+| Why it happens | Tool output is treated as thinking |
+| What has to be true first | `scanner_green=True`; the assembler copies that as “no threats” |
 | Trigger | CI or a reviewer asks “what’s in the model?” |
-| Impact | Integrity of the assurance story: 1.2/1.3 cells untested |
-| Prevention | Seed mandatory threats; union scanner findings |
-| Detection | CI fails if required ids, owners, or triggers are missing |
-| Recovery | Add the threat, tests, and owner; do not back-date the file |
+| What it costs | The story of what you checked looks done; who-may-read and where-trust-stops were never listed |
+| How you stop it | Seed the threats you must always name; join scanner findings onto that list |
+| How you notice | CI fails if required ids, owners, or triggers are missing |
+| How you recover | Add the threat, the tests, and an owner; do not pretend the file already had the row |
 
-## Framework defaults versus the model guarantee
+## What the framework does vs what you still have to check
 
-A “no High findings” ticket is not a threat model. Framework secure-defaults (HttpOnly, parameterized queries) are 2.3/6.1 mechanisms; they do not enumerate cross-tenant read. The application guarantee in this lab: **this** fixture still returns `cross-tenant-read` when the scanner is green. Oracle: `labs/3.2/3.2-lab`. No live targets, no production scanner tenant.
+A “no High findings” ticket is not a threat model. Framework defaults such as HttpOnly cookies and parameterized queries are real later rows. They do not enumerate cross-tenant read.
 
-## Mechanism limits
+The app’s promise in this practice: the list still returns `cross-tenant-read` when the scanner is green. The folder is `labs/3.2/3.2-lab`. No live targets. No production scanner tenant.
 
-- STRIDE stickers on a DFD without invalidation conditions.
-- Moving threats to “accepted” with no residual owner.
-- Treating Appendix D or Top 10 as ASVS compliance.
-- A model that is not in git, so nobody can see it age.
+## What the tool cannot do
+
+- STRIDE stickers on a picture with no “what would prove this row wrong.”
+- Moving a threat to “accepted” with nobody left holding it.
+- Treating an awareness list or a Top 10 as the threat list.
+- A model that lives only on a slide, so nobody can see it age.
 
 ## Practice
 
 Name three threats that remain if every CVE is patched. Then run:
 
-```
+```text
 python3 -m pytest labs/3.2/3.2-lab/tests --impl vulnerable
 python3 -m pytest labs/3.2/3.2-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Map the assertion to `cross-tenant-read` still present, not to a scanner product name.
+The first command must fail. The second must pass. Tie the check to `cross-tenant-read` still present, not to a scanner product name.
 
-## Transfer
+## Use it somewhere new
 
-Clinic SMS reminders: the new channel is not in the Phase 1 HTTP model. Which threats appear that no CVE scanner will list?
+Clinic SMS reminders. The new channel is not in the notes-app HTTP model. Which threats appear that no CVE scanner will list?
 
-## Non-goals
+## What this page is not doing
 
-Live-target scanning, real PII in fixtures, weaponized copy-paste exploits, and “green scan means ship.” Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner or product evidence. Answer keys are not in this file.
+Live-target scanning, real personal data in the practice, copy-paste exploits, and “green scan means ship.” Answer keys are not in this file.

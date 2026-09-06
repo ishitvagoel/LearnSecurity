@@ -1,52 +1,53 @@
-# 3.4-LO-07 — Transfer: clinic guardians, invites, and export quotas
+# Same idea on clinic guardians, invites, and export quotas
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-2.3.2`; API Top 10:2023 API4/API6 **awareness** only.
 
-## Change the object; keep the write-path cap
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: eight `add_share` calls leave count ≤ 5. Rewrite it for a different object without changing the fork.
+The notes-app scaffolding goes away. You get a **clinic guardian list**, an **invite token**, or an **export quota**. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: eight `add_share` calls leave count ≤ 5. Rewrite it for a different object without changing the fork.
 
-**Prompt:** Clinic: max 3 guardians per child. Optionally map invite tokens (6.6) and export quotas (6.7) as *different objects, same shape*.
+**Prompt:** Clinic: max 3 guardians per child. Optionally map invite tokens and export quotas as *different objects, same shape*.
 
 **Product sketch:** EHR-lite guardian list on a booking card.
 
-Rewrite the SecureCollab sentence. Include:
+Rewrite the notes-app sentence. Include:
 
-1. attacker capabilities (scripted add; disabled UI max; import — **not** a live clinic);
-2. trust assumptions (which write path is TCB; HTML is not);
-3. forbidden outcome (`add_guardian` four times yields count 4, not “HIPAA” and not “API4”);
-4. a test idea on a **local** fixture only (loop four times, last ≤ 3);
-5. residual (honest family of 4 needs an owned exception; parallel adds need a lock);
-6. WCAG 2.2 Success Criterion 4.1.3 if the denial is shown to a human (announce “guardian limit reached”).
+1. who can act (scripted add; disabled UI max; import — **not** a live clinic);
+2. what you trust (which write path is trusted; HTML is not);
+3. what must not happen (`add_guardian` four times yields count 4 — not a privacy-law name and not an awareness-list name);
+4. a test idea on a **local** practice only (loop four times, last ≤ 3);
+5. leftover (honest family of 4 needs an owned exception; parallel adds need a lock);
+6. whether a human path must meet the web accessibility baseline (announce “guardian limit reached” if the denial is shown to a human).
 
-## Mental model: three is not five, the shape is the same
+## Picture: three is not five, the shape is the same
+
+Renaming “share” to “guardian” is not transfer. Person, object, path, and leftover change. A fourth guardian and a second invite redeem are new rules. HTML max is still not what you trust.
 
 ```mermaid
 flowchart LR
   G0["Guardians 0"] --> G3["Guardians 3"]
   G3 --> Deny["4th add denied"]
-  Invite["Invite token"] --> Once["Redeem at most once - 6.6"]
-  Export["Export job"] --> Quota["Bytes or rows cap - 6.7"]
+  Invite["Invite token"] --> Once["Redeem at most once"]
+  Export["Export job"] --> Quota["Bytes or rows cap"]
 ```
 
-API4/API6 may appear in a regression checklist after the machine exists. They are not the property. Rate limit is availability (6.7); this cap is integrity of the share / guardian graph. Idempotency of one grant is 2.4.
+Awareness-list names may appear in a regression checklist after the machine exists. They are not the rule. Rate limit is availability; this cap is integrity of the share / guardian graph. Idempotency of one grant is a different earlier topic.
 
-## What graders reject
+## What is not good enough
 
 | Reject | Why |
 |---|---|
-| CWE-799 as the property | Weakness name ≠ cap |
-| Rate limit as the cap | Different 1.1 cell |
-| Live clinic APIs | Lab policy |
+| A weakness nickname as the rule | Weakness name ≠ cap |
+| Rate limit as the cap | Different cell |
+| Live clinic APIs | Course rules |
 | HTML max=3 as enforcement | Client is untrusted |
-| API4 sticker | Awareness only |
+| Awareness-list sticker | Awareness only |
 
 ## Practice
 
 One page. No keys. `labs/3.4/3.4-lab` is the only running system you may break. Do not load-test a clinic or an invite API.
 
-## Non-goals
+## What this page is not doing
 
-Live-target bots. Real member emails. Claiming Gate 3 from this page.
+Live-target bots. Real member emails. Claiming a course gate from this page.

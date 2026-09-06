@@ -1,60 +1,69 @@
-# 3.3-LO-03 — Observe tB reading tA, do not trophy a dump
+# Practice: the app database role can read another company's rows
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.4.1`; Saltzer and Schroeder (1975, seminal) least privilege. CISA Secure by Design remains **unverified** in this pin set.
 
-## Authorized scope
+## Try it
 
-`labs/3.3/3.3-lab` only. The fixture is an in-process `can_select` predicate. Synthetic tenant ids `tA` / `tB`. It does not open PostgreSQL, RDS, or a classmate database. Do not run `SELECT` against a live cluster, an employer replica, or a public demo DB.
+The practice is not a website you attack. It is a tiny in-process `can_select` check. It does not open PostgreSQL, a cloud database, or a classmate’s replica. The failure is already in the object: every role can read every company. You are here to see that the check treats that as a **failed rule**, not as a topology drawing.
 
-**Forbidden outcome:** the app DB role can SELECT another tenant's rows. `can_select("app", "tB", "tA") is True`.
+The rule under test:
 
-Attacker capability in this lab: a forgotten `WHERE`, later SQLi (6.1), or a stolen app password that can call `can_select` as tenant `tB`. That stands in for an omnipotent `DATABASE_URL`. Trust assumption: the runtime role is supposed to be a **second** mediation after 1.2. SQLAlchemy, a VPC, and “we use microservices” are not in the TCB for this cell.
+> The runtime `app` role bound as company `tB` must not `SELECT` a row whose company is `tA`. Architecture is a second check, not a substitute for who-is-allowed.
 
-## Mental model: role without a tenant predicate
+## Where you may practice
+
+Only `labs/3.3/3.3-lab` is in scope. Fake company ids `tA` / `tB`. Restore the broken and repaired folders when you are done.
+
+Do not run `SELECT` against a live cluster, an employer replica, or a public demo database. Do not point this exercise at a classmate’s FastAPI or a production notes app.
+
+What must not happen: the app database role can read another company’s rows. `can_select("app", "tB", "tA") is True`.
+
+Who can act here: a forgotten `WHERE`, later injection into SQL, or a stolen app password that can call `can_select` as company `tB`. That stands in for an all-powerful `DATABASE_URL`. What you are supposed to trust: the runtime role is a **second** check after who-is-allowed. SQLAlchemy, a private network, and “we use microservices” are not what you trust for this cell.
+
+## Picture: a role with no same-company check
 
 ```mermaid
 flowchart TD
-  App["role app"] --> Pred{"tenant equals note_tenant?"}
+  App["role app"] --> Pred{"company equals note_tenant?"}
   Pred -->|not checked| Allow["can_select tB, tA is True"]
   Allow --> Body["tA notes readable"]
 ```
 
-The vulnerable tree demonstrates **cause** (omnipotent runtime user / missing tenant predicate), not a trophy `SELECT *` against a real cluster. Preconditions: `can_select` returns `True` for every role; `runtime_connection_role` is `postgres`. You do not need a live dump. You must not dump a live cluster.
+The broken files show **cause** (all-powerful runtime user / missing same-company check), not a trophy `SELECT *` against a real cluster. What has to be true first: `can_select` returns `True` for every role; `runtime_connection_role` is `postgres`. You do not need a live dump. You must not dump a live cluster.
 
-ASVS `v5.0.0-8.4.1` wants cross-tenant controls so operations never affect another tenant. A VPC diagram is a topology observation, not that control.
+A private-network diagram is a topology observation, not that second check.
 
-## What to read in the fixture
+## What to look at — cause, not a trophy
 
-`vulnerable/roles.py` `can_select` returns `True` for every role and tenant. `runtime_connection_role` is `postgres`. Tests:
+Read `vulnerable/roles.py`. `can_select` returns `True` for every role and company. `runtime_connection_role` is `postgres`. Checks:
 
 - `test_app_role_cannot_read_other_tenant` — `can_select("app", "tB", "tA") is False`
 - `test_migrator_cannot_select_notes_at_runtime`
 - `test_runtime_connection_is_not_superuser`
-- `test_app_role_can_read_own_tenant` — honest path (may fail on vulnerable too)
+- `test_app_role_can_read_own_tenant` — honest path (may fail on the broken files too)
 
-You do not need a new tenant id. The failure of `test_app_role_cannot_read_other_tenant` *is* the evidence.
+You do not need a new company id. The failure of `test_app_role_cannot_read_other_tenant` *is* the evidence.
 
-Do not open the fixed tree yet. Diagnose the cause first.
+Do not open the repaired files yet. Diagnose the cause first.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | This lab |
+| Slice | This practice |
 |---|---|
-| Required property | Runtime `app` bound as `tB` cannot read `tA` rows |
-| Root cause | One omnipotent DB user shared by app and migrate |
-| Preconditions | Runtime role can `SELECT` other tenants |
+| The rule | Runtime `app` bound as `tB` cannot read `tA` rows |
+| Why it happens | One all-powerful database user shared by the app and migrate |
+| What has to be true first | The runtime role can `SELECT` other companies |
 | Trigger | `can_select("app", "tB", "tA")` |
-| Impact | Confidentiality of tA notes; 1.2 cell the database did not catch |
-| Prevention | Least-privilege runtime role; tenant predicate in the role/RLS |
-| Detection | `grant_drift` in CI; connection-user metric |
-| Recovery | Rotate the password; review `GRANT`; do not log bodies |
-| Not the lesson | A VPC diagram, microservice count, or CISA pledge |
+| What it costs | Secrecy of tA notes; a who-is-allowed cell the database did not catch |
+| How you stop it | Least-privilege runtime role; same-company check in the role or a later row-level rule |
+| How you notice | `grant_drift` in CI; who connected |
+| How you recover | Rotate the password; review `GRANT`; do not log bodies |
+| Not the lesson | A private-network diagram, microservice count, or a manufacturer pledge |
 
-## Framework defaults versus the architecture guarantee
+## What the framework does vs what you still have to check
 
-FastAPI does not scope PostgreSQL. A microservice split without new grants is a topology drawing. The application guarantee is: **this** fixture, `can_select("app", "tB", "tA") is False`.
+FastAPI does not scope PostgreSQL. Splitting into microservices without new grants is a topology drawing. The app’s promise is: **this** practice, `can_select("app", "tB", "tA") is False`.
 
 ## Practice
 
@@ -64,10 +73,10 @@ python3 -m pytest labs/3.3/3.3-lab/tests --impl vulnerable
 
 Record `test_app_role_cannot_read_other_tenant`. Do not weaken it to “a role named app exists.” An environment error is not security evidence.
 
-## Transfer
+## Use it somewhere new
 
-Serverless admin string. Predict the `can_select` analogue without leaving this directory. Do not connect to a cloud database.
+A serverless admin string. Predict the `can_select` analogue without leaving this directory. Do not connect to a cloud database.
 
-## Non-goals
+## What this page is not doing
 
-No live-target SQL. Synthetic tenant ids only. No weaponized payloads.
+No live-target SQL. Fake company ids only. No weaponized payloads. Do not “fix” the practice by deleting the check.

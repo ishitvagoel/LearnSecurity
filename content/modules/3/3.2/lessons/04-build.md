@@ -1,69 +1,65 @@
-# 3.2-LO-04 — Seed mandatory threats; union scanner extras
+# Seed the threats you must always name
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** OWASP Threat Modeling Project (maintained) Four Question Framework; OWASP ASVS 5.0.0 (final) `v5.0.0-15.1.3`. `v5.0.0-15.1.5` is **Level 3, advanced** (dangerous-functionality documentation), not this pytest.
 
-## Structural means the seed cannot disappear
+## The rule
 
-`assemble_threat_model` must still emit `cross-tenant-read`, `hostile-browser`, and `stolen-worker` with owner and trigger when the scanner is green. Structural means the assembler **unions** a mandatory set with scanner findings — not a denylist of yesterday’s CVE, not “trust the dashboard,” not a STRIDE sticker with no row, not Appendix D cited as a passing requirement id.
+`assemble_threat_model` must still emit `cross-tenant-read`, `hostile-browser`, and `stolen-worker` with owner and trigger when the scanner is green. Structural means the assembler **joins** an always-name set with scanner findings — not a denylist of yesterday’s CVE, not “trust the dashboard,” not a STRIDE sticker with no row, not an awareness list cited as a passing score.
 
-The smallest restore for SecureCollab Phase 1 is: always write the three mandatory rows, then append scanner ids that are not already present. Fail-safe: if you are unsure whether a design threat is “in scope,” keep the row and name the residual — do not delete it because the scan was clean.
+The smallest restore for the notes app is: always write the three always-name rows, then append scanner ids that are not already present. If you are unsure whether a design threat is “in scope,” keep the row and name what is left — do not delete it because the scan was clean.
 
-## Mental model: seed then union
+## Picture: seed then join
 
 ```mermaid
 flowchart TD
-  Call["assemble_threat_model green, extras"] --> Seed["Mandatory rows"]
+  Call["assemble_threat_model green, extras"] --> Seed["Always-name rows"]
   Call --> Extra["Scanner ids"]
-  Seed --> Union[Union by id]
+  Seed --> Union[Join by id]
   Extra --> Union
   Union --> Test{"cross-tenant-read present?"}
-  Test -->|no| Fail[Property false]
-  Test -->|yes| Pass[Property true]
+  Test -->|no| Fail[The rule is false]
+  Test -->|yes| Pass[The rule is true]
 ```
 
-The lab’s fixed tree always includes the three mandatory ids with `owner` and `trigger`. Scanner findings append if new. The TCB is that versioned list, plus the CI gate that those ids exist. Threat Dragon, a DFD PNG, and Semgrep are untrusted as oracles.
+The lab’s repaired files always include the three always-name ids with `owner` and `trigger`. Scanner findings append if new. What you trust is that versioned list, plus the check that those ids exist. Threat Dragon, a data-flow picture, and Semgrep are not oracles.
 
-ASVS `v5.0.0-15.1.3` (Level 2) wants documented security decisions. This pytest is that sentence for three Phase 1 ids, not a complete future catalogue.
+Industry checklists want documented security decisions. This pytest is that sentence for three notes-app ids, not a complete future catalogue.
 
-## Why this restores the cell
+## What the repaired files must show
 
 | After the fix | Must be true |
 |---|---|
 | Green scan | `cross-tenant-read` in the id list |
-| Each mandatory id | has `owner` and `trigger` |
+| Each always-name id (`cross-tenant-read`, `hostile-browser`, `stolen-worker`) | has `owner` and `trigger` |
 | Scanner extras | do not drop the seed (`cve-extra` may appear *and* the seed remains) |
 
 ## What this is not
 
-STRIDE letters without assets. LINDDUN auto-listing IDOR (5.1). ASVS Appendix D treated as a passing requirement id. Back-dating the markdown after an incident. Top 10 as the threat list. SP 800-154 (draft) as a substitute for owners.
+STRIDE letters without assets. A privacy method that auto-lists “someone from another company reads a note.” An awareness list treated as a passing score. Back-dating the markdown after an incident. A Top 10 as the threat list. A **draft** data-centric note as a substitute for owners.
 
-## Mechanism limits
+## What can still go wrong
 
-- Unknown unknowns remain; the seed is not completeness.
-- Models age: a new share path, worker, or webhook is a named trigger, not present code.
-- Moving a row to “accepted” with no residual owner reopens 1.1 integrity of the assurance story (E6).
-- A model that is not in git cannot fail CI.
+- Unknown unknowns remain. The seed is not completeness.
+- Models age. A new share path, worker, or webhook is a named trigger, not present code.
+- Moving a row to “accepted” with nobody left holding it reopens the story of what you checked.
+- A model that is not in version control cannot fail CI.
+- Calling out dangerous features in docs is a sister bar, not this pytest.
 
 ## Practice
 
-Name subject (assembler / CI), object (threat-id list), and the predicate (`cross-tenant-read` present on green). Run:
+Name who (assembler / CI), what (threat-id list), and the check (`cross-tenant-read` present on green). Run:
 
 ```text
 python3 -m pytest labs/3.2/3.2-lab/tests --impl fixed
 ```
 
-Must pass.
+It must pass.
 
-## Transfer
+## Use it somewhere new
 
 Clinic: seed `sms-content-leak` and `number-swap` even if the gateway vendor’s questionnaire is green. HIPAA stickers and vendor scans are not those rows.
 
-## Residual risk
+## What this page is not doing
 
-Unknown unknowns; models age; workers and webhooks are named triggers, not present code; `v5.0.0-15.1.5` advanced documentation of dangerous functionality is a sister cell.
-
-## Non-goals
-
-Do not connect a production scanner. Do not claim Gate 3 from a green union.
+Do not connect a production scanner. Do not claim a course gate from a green join.

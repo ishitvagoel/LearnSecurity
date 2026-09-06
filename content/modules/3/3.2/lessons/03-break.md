@@ -1,59 +1,66 @@
-# 3.2-LO-03 — Observe the empty list, do not trophy a scanner
+# Practice: a green scanner produces an empty threat model
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
-**Standards:** OWASP Threat Modeling Project (maintained guidance); OWASP ASVS 5.0.0 (final) `v5.0.0-15.1.3`. ASVS Appendix D is process **awareness**, not this oracle. NIST SP 800-154 IPD remains **draft**.
 
-## Authorized scope
+## Try it
 
-`labs/3.2/3.2-lab` only. The fixture is an in-process `assemble_threat_model` dict. Synthetic threat ids. It does not open a scanner tenant, a Semgrep cloud org, or a production dashboard. Do not run SAST/DAST against a public host, an employer repo, or a classmate preview as this exercise.
+The practice is not a website you attack. It is a tiny in-process `assemble_threat_model` dictionary. It does not open a scanner tenant, a Semgrep cloud org, or a production dashboard. Fake threat ids only. You are here to see that the check treats an empty list as a **failed rule**, not as a clean bill of health.
 
-**Forbidden outcome:** a green scanner produces an empty SecureCollab threat model. `threats_from_scan(True)` returns `[]`, so `cross-tenant-read` is missing.
+The rule under test:
 
-Attacker capability in this lab: a reviewer or CI job that can ask “what’s in the model?” after `scanner_green=True`. That stands in for a “no High findings” ticket, a Threat Dragon PNG, or “we did STRIDE in the sprint.” Trust assumption: the assembler is supposed to **seed** design threats that no CVE rule will list. FastAPI, Semgrep, and a vendor dashboard are not in the TCB for this cell.
+> A green scan still lists `cross-tenant-read`. `threats_from_scan(True)` must not return `[]`.
 
-## Mental model: green copies empty
+## Where you may practice
+
+Only `labs/3.2/3.2-lab` is in scope. Do not run SAST or DAST against a public host, an employer repo, or a classmate preview as this exercise.
+
+What must not happen: a green scanner produces an empty notes-app threat model. `threats_from_scan(True)` returns `[]`, so `cross-tenant-read` is missing.
+
+Who can act here: a reviewer or CI job that can ask “what’s in the model?” after `scanner_green=True`. That stands in for a “no High findings” ticket, a Threat Dragon picture, or “we did STRIDE in the sprint.” What you are supposed to trust: the assembler **seeds** design threats that no CVE rule will list. FastAPI, Semgrep, and a vendor dashboard are not what you trust for this check.
+
+## Picture: green copies empty
 
 ```mermaid
 flowchart TD
   Green["scanner_green true"] --> Copy["Assembler returns empty threats"]
   Copy --> List["cross-tenant-read missing"]
-  List --> Reviewer[Assurance story looks clean]
+  List --> Reviewer[The assurance story looks clean]
 ```
 
-The vulnerable tree demonstrates **cause** (tool output substituted for thinking), not a trophy dump of a vendor report. Preconditions: `scanner_green` is true; the assembler returns `{"threats": []}`. You do not need a live scan. You must not point a scanner at a third-party target.
+The broken files show **cause** (tool output treated as thinking), not a trophy dump of a vendor report. What has to be true first: `scanner_green` is true; the assembler returns `{"threats": []}`. You do not need a live scan. You must not point a scanner at someone else’s system.
 
-ASVS `v5.0.0-15.1.3` wants documented security decisions you can verify in the running system. A green dashboard is a mechanism observation, not that document.
+A green dashboard is a tool observation. It is not documented security decisions you can check.
 
-## What to read in the fixture
+## What to look at — cause, not a trophy
 
-`vulnerable/model.py` `assemble_threat_model` returns an empty list when `scanner_green` is true. `threats_from_scan(True)` is therefore empty. Tests:
+Read `vulnerable/model.py`. `assemble_threat_model` returns an empty list when `scanner_green` is true. `threats_from_scan(True)` is therefore empty. Checks:
 
 - `test_green_scanner_is_not_an_empty_threat_model` — `cross-tenant-read` must be present
-- `test_mandatory_threats_have_owners_and_triggers` — each mandatory row has `owner` and `trigger`
-- `test_scanner_findings_are_additive` — extras union; they do not replace the seed
+- `test_mandatory_threats_have_owners_and_triggers` — `cross-tenant-read`, `hostile-browser`, and `stolen-worker` each have `owner` and `trigger`
+- `test_scanner_findings_are_additive` — extras join; they do not replace the seed
 
 You do not need a new CVE id. The failure of `test_green_scanner_is_not_an_empty_threat_model` *is* the evidence.
 
-Do not open the fixed tree yet. Diagnose the cause first.
+Do not open the repaired files yet. Diagnose the cause first.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | This lab |
+| Slice | This practice |
 |---|---|
-| Required property | Green scan still lists `cross-tenant-read` |
-| Root cause | Tool output substituted for thinking |
-| Preconditions | `scanner_green=True`; assembler copies that as “no threats” |
+| The rule | A green scan still lists `cross-tenant-read` |
+| Why it happens | Tool output is treated as thinking |
+| What has to be true first | `scanner_green=True`; the assembler copies that as “no threats” |
 | Trigger | `threats_from_scan(True)` |
-| Impact | Integrity of the assurance story: 1.2 / 1.3 cells look done while untested |
-| Prevention | Seed mandatory threats; union scanner findings |
-| Detection | CI fails if required ids, owners, or triggers are missing |
-| Recovery | Add the threat, tests, and owner; do not back-date the file |
-| Not the lesson | A scanner product name, Top 10 mnemonic, or Appendix D as a passing ID |
+| What it costs | The story of what you checked looks done; who-may-read was never listed |
+| How you stop it | Seed the threats you must always name; join scanner findings onto that list |
+| How you notice | CI fails if required ids, owners, or triggers are missing |
+| How you recover | Add the threat, the tests, and an owner; do not pretend the file already had the row |
+| Not the lesson | A scanner product name, a Top 10 mnemonic, or an awareness list as a passing score |
 
-## Framework defaults versus the model guarantee
+## What the framework does vs what you still have to check
 
-A “no High findings” ticket is not a threat model. Framework secure-defaults (HttpOnly, parameterized queries) are 2.3 / 6.1 mechanisms; they do not enumerate cross-tenant read. The application guarantee is: **this** fixture still returns `cross-tenant-read` when the scanner is green.
+A “no High findings” ticket is not a threat model. HttpOnly cookies and parameterized queries are real later rows. They do not enumerate cross-tenant read. The app’s promise is: **this** practice still returns `cross-tenant-read` when the scanner is green.
 
 ## Practice
 
@@ -63,10 +70,10 @@ python3 -m pytest labs/3.2/3.2-lab/tests --impl vulnerable
 
 Record the failing tests, starting with `test_green_scanner_is_not_an_empty_threat_model`. Do not weaken them to “a threats key exists.” An environment error is not security evidence.
 
-## Transfer
+## Use it somewhere new
 
-Clinic SMS reminders: predict an empty model if the only input is “SMS gateway vendor scan green.” Stay in this directory. Do not scan a clinic or a carrier.
+Clinic SMS reminders. Predict an empty model if the only input is “SMS gateway vendor scan green.” Stay in this directory. Do not scan a clinic or a carrier.
 
-## Non-goals
+## What this page is not doing
 
-No live-target scanning. Synthetic ids only. Do not paste a real vendor report into the lesson.
+No live-target scanning. Fake ids only. Do not paste a real vendor report into the lesson.

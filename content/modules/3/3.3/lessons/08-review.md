@@ -1,54 +1,55 @@
-# 3.3-LO-08 — Review the omnipotent role as a PR, not a diagram
+# Review of an all-powerful runtime role
 
 **Kind:** code-review
 **Loop step:** Review
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.4.1`. CISA Secure by Design remains **unverified**.
 
-## Review the fixture as if it were SecureCollab’s DB role
+Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
 
-Review `labs/3.3/3.3-lab/vulnerable/` as a SecureCollab PR. Your job is not to count suspicious lines. Reconstruct whether `can_select("app", "tB", "tA")` is still true, compare that with the module invariant, and write changes a developer can verify.
+## What you are reviewing
 
-Intended findings live only in `content/assessment/keys/3.3.md` — not here. Do not open the keys file until your review has been evaluated.
+A colleague ships the notes app’s database role. Review `labs/3.3/3.3-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `can_select("app", "tB", "tA")` is still true, compare that with the rule, and write changes a developer can verify.
 
-## Mental model: DATABASE_URL uses superuser
+The check you already ran (`test_app_role_cannot_read_other_tenant`) is the rule test. A comment “row-level security later” is not.
 
-Start with this seeded smell: **`DATABASE_URL` uses superuser**. Label it property, mechanism, or false assurance before you accept the PR.
+## Picture: DATABASE_URL uses superuser
+
+Start with this seeded smell: **`DATABASE_URL` uses superuser**. Label it rule, tool, or false comfort before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would falsify it?"}
-  Q -->|"can_select app tB tA is True"| Property["Property - good if tested"]
-  Q -->|"we use microservices"| Mechanism[Mechanism - no predicate]
-  Q -->|"VPC is isolation"| False[False assurance]
+  Q -->|"can_select app tB tA is True"| Property["Rule — good if tested"]
+  Q -->|"we use microservices"| Mechanism[Tool — no same-company check]
+  Q -->|"VPC is isolation"| False[False comfort]
 ```
 
-Classification starts at the protected effect (tB cannot SELECT tA). Everything that is not a tenant predicate at that call is a candidate ambient path.
+Classification starts at the protected effect (tB cannot SELECT tA). Everything that is not a same-company check at that call is a leftover path.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - `DATABASE_URL` uses superuser
-- Comment “RLS later” in the production path
+- Comment “row-level security later” in the production path
 - Analytics role `SELECT *`
 - No test that `can_select("app", "tB", "tA") is False`
 
-Also reject: client trust; closing findings without re-running `test_app_role_cannot_read_other_tenant`; keys in lessons; real PII in fixtures; CISA pledge as GRANT.
+Also reject: treating the client as what you trust; closing findings without re-running `test_app_role_cannot_read_other_tenant`; keys in learner notes; real personal data in fixtures; a manufacturer pledge as GRANT.
 
-## Misconceptions this module refuses
+## Common mix-ups
 
 - Microservices are automatically isolated
-- RLS replaces application authz (1.2 remains required)
-- Network VPC is tenant isolation
-- SQLAlchemy session is the predicate
-- A managed database product name is the second mediation
+- A later row-level rule replaces who-is-allowed (the handler check remains required)
+- A private network is company isolation
+- SQLAlchemy session is the same-company check
+- A managed-database product name is the second check
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: observation, property or false assurance, suggested structural change, residual you will **not** delete. Tie at least one to `test_app_role_cannot_read_other_tenant`.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one to `test_app_role_cannot_read_other_tenant`. Do not open the keys file.
 
-## Transfer
+## Use it somewhere new
 
-Serverless PR that “uses a managed database” without a tenant predicate is an incomplete mediation review. Name the independent falsehood that would still keep `tB` from reading `tA`.
+A serverless change that “uses a managed database” without a same-company check is an incomplete review. Name the independent falsehood that would still keep `tB` from reading `tA`.
 
-## Non-goals
+## What this page is not doing
 
-Do not merge by adding a comment “RLS later.” That comment is a residual without an owner. Do not connect live RDS to prove the finding.
+Do not merge by adding a comment “row-level security later.” That comment is leftover risk without an owner. Do not connect to a live cloud database to prove the finding.

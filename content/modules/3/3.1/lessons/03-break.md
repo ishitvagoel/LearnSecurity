@@ -1,18 +1,27 @@
-# 3.1-LO-03 — Observe the body in the log line, do not trophy it
+# Practice: a confidential note appears in a log line
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-16.2.5` and `v5.0.0-14.1.2`; NIST CSF 2.0 (final) Identify as an outcome family, not a redaction control.
 
-## Authorized scope
+## Try it
 
-`labs/3.1/3.1-lab` only. The fixture is an in-process `log_event` string. Synthetic string `tenant-A-secret-body`. No production log drains, no real PII, no live SIEM tenant, no patient chart. Do not paste a real note body into the logger “to see what happens.”
+The practice is not a website you attack. It is a tiny Python `log_event` that returns a string. The failure is already in the function: it pastes the note body into the line. You are here to see that the check treats that line as a **failed rule**, not as a debug nit.
 
-**Forbidden outcome:** Confidential note body appears in a log line. `log_event("note_read", "tenant-A-secret-body")` includes `tenant-A-secret-body`.
+The rule under test:
 
-Attacker capability in this lab: an operator, SIEM vendor, or another tenant’s admin on shared observability who can read the log line. That stands in for uvicorn access logs, exception `repr`, APM, and a support ticket. Trust assumption: the logging API is supposed to deny the body sink. A Confluence classification sticker, a privacy policy URL, `DEBUG=false` in one environment, and a DLP product name are not in the TCB for this cell.
+> A confidential note body must not appear in this log line. If `log_event("note_read", "tenant-A-secret-body")` includes `tenant-A-secret-body`, logging has failed as a security control.
 
-## Mental model: debug context is the leak
+## Where you may practice
+
+Only `labs/3.1/3.1-lab` is in scope. The string is in-process. The body is the synthetic string `tenant-A-secret-body`. No production log drains, no real people's data, no live log tenant, no patient chart.
+
+Do not paste a real note body into the logger “to see what happens.” Do not paste this exercise onto a public log drain, employer dashboard, or live clinic.
+
+What you trust for this check: the logging API is supposed to deny the body. A spreadsheet sticker, a privacy-policy URL, `DEBUG=false` in one environment, and a data-loss product name are not what you trust.
+
+Who can read the line in this story: an operator, a log vendor, or another company's admin on shared observability. That stands in for access logs, exception dumps, APM, and a support ticket.
+
+## Picture: debug context is the leak
 
 ```mermaid
 flowchart TD
@@ -21,37 +30,40 @@ flowchart TD
   Line --> Operator[Lower-trust reader]
 ```
 
-The vulnerable tree demonstrates **cause** (body treated as debug context), not a trophy dump of a real tenant. Preconditions: a `note_read` event; a handler that interpolates the body into the line. You do not need a production drain. The substring in the returned line *is* the leak.
+The broken files take that path on purpose. You do not need a production drain. The substring in the returned line *is* the leak.
 
-ASVS `v5.0.0-16.2.5` wants logging to enforce the protection level (credentials never; other data hashed or masked). `v5.0.0-14.1.2` wants each protection level to say **how the data is logged**. CSF Identify names inventory; it does not redact uvicorn.
+## What to look at — cause, not a dump
 
-## What to read in the fixture
-
-`vulnerable/classify.py` `log_event` returns `f"{event}: {note_body}"`. The test asserts the body substring is absent **and** a redaction marker (`redacted` or `confidential`) is present.
+Read `vulnerable/classify.py`. `log_event` returns `f"{event}: {note_body}"`. The test asserts the body substring is absent **and** a redaction marker (`redacted` or `confidential`) is present.
 
 You do not need a new body string. The failure of `test_note_body_is_not_logged` *is* the evidence.
 
-Do not open the fixed tree yet. Diagnose the cause first.
+Do not open the repaired files yet. Diagnose the cause first.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+| What you see | What kind of failure | Not the lesson |
+|---|---|---|
+| Body interpolated into the line | Confidential field in a lower-trust store | “Logs are internal” |
+| Event name plus the secret | Debug context used as the payload | A privacy-policy URL |
+| No redaction marker | The sink accepted the field | “Make DEBUG false” |
 
-| Slice | This lab |
+## Why it happens vs what it costs
+
+| Slice | Practice |
 |---|---|
-| Required property | Confidential field does not appear in this log sink |
-| Root cause | Body treated as debug context; the sink accepts the field |
-| Preconditions | Handler logs the event payload including the body |
+| Why it happens | The body was treated as debug context; the log accepted the field |
+| What has to be true first | A `note_read` event; a handler that pastes the body into the line |
 | Trigger | `log_event("note_read", "tenant-A-secret-body")` |
-| Impact | Confidentiality and privacy of the body in a lower-trust store (1.1 cell) |
-| Prevention | Structured logs with allow-listed fields; never interpolate the body |
-| Detection | Tests that the body substring is absent; `log_redaction_miss` |
-| Recovery | Purge matching logs; rotate if tokens were present; do not log the body again while investigating |
-| Not the lesson | A privacy-policy URL, a DLP product name, or “logs are internal” |
+| What it costs | Secrecy and privacy of the body in a lower-trust store |
+| How you stop it later | Structured logs with allow-listed fields; never paste the body |
+| How you notice later | Tests that the body substring is absent; `log_redaction_miss` |
+| How you recover later | Purge matching logs; rotate if tokens were present; do not log the body again while looking |
+| Out of scope | A privacy-policy URL, a data-loss product name, or “logs are internal” |
 
-## Framework defaults versus the field guarantee
-
-FastAPI does not know Confidential. uvicorn access logs will store query strings (4.3). Regex redaction after the fact misses encodings (2.1). The application guarantee is: **this** fixture’s line does not contain `tenant-A-secret-body`.
+FastAPI does not know Confidential. Access logs will store query strings — a later topic. Regex after the fact misses encodings — a later topic. The app's promise this week is: **this** line does not contain `tenant-A-secret-body`.
 
 ## Practice
+
+From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/3.1/3.1-lab/tests --impl vulnerable
@@ -59,10 +71,10 @@ python3 -m pytest labs/3.1/3.1-lab/tests --impl vulnerable
 
 Record the failing test `test_note_body_is_not_logged`. Do not weaken it to “logs exist.” An environment error is not security evidence.
 
-## Transfer
+## Use it somewhere new
 
 Clinic chart text in an appointment log. Predict, without leaving this directory, whether logging the booking time is a different class from logging the chart. Do not fetch a clinic.
 
-## Non-goals
+## What this page is not doing
 
-No live-target instructions. Synthetic data only. No production log dumps.
+No live-target steps. Fake data only. No production log dumps. Do not “fix” the practice by deleting the test.

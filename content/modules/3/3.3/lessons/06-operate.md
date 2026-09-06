@@ -1,14 +1,13 @@
-# 3.3-LO-06 — Detect grant drift; rotate without logging bodies
+# Notice grant drift; rotate without logging bodies
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
-**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-8.4.1`. CSF names outcomes; it does not configure `GRANT`.
 
-## Prevention is not absolute
+## Stopping it is not enough
 
-A migration can leave `GRANT ALL` on the runtime user. A pooler can switch to `postgres`. Pair detect and recover. Do not log note bodies (3.1). Do not paste a tenant dump into the ticket while investigating.
+A migration can leave `GRANT ALL` on the runtime user. A pooler can switch to `postgres`. Pair notice and recover. Do not log note bodies. Do not paste a company dump into the ticket while investigating.
 
-## Mental model: who connected, then rotate
+## Picture: who connected, then rotate
 
 ```mermaid
 flowchart TD
@@ -18,20 +17,22 @@ flowchart TD
   Alert --> Rotate[Rotate and rewrite DATABASE_URL]
 ```
 
-| Outcome | This module |
+A broken grant is a notice-and-recover problem, not a licence to dump the note into the log.
+
+| Outcome | This topic |
 |---|---|
-| Detect | `grant_drift` in CI; connection-user metric |
-| Signal | role name, request id; never the body |
+| Notice | `grant_drift` in CI; who connected; the local pair still red then green |
+| What the line holds | role name, request id; never the body |
 | Recover | Rotate password; fix `GRANT`; take migrator offline |
-| Residual | Stolen `app` still reads one tenant; document that cell |
+| Leftover | Stolen `app` still reads one company; write that cell down |
 
-CSF 2.0 Detect / Respond / Recover name outcomes. They do not prove `v5.0.0-8.4.1`. A SIEM product name is not the property. Re-run `test_app_role_cannot_read_other_tenant` after any GRANT change; a green IAM dashboard is not that pytest.
+Industry lists name detect, respond, recover. They do not configure `GRANT`. They do not prove this company rule. A log-product name is not the rule. Re-run `test_app_role_cannot_read_other_tenant` after any GRANT change; a green IAM dashboard is not that pytest.
 
-The migrator plane is a residual you must keep named: it exists, it is offline at request time, and a leaked migrate secret is a different owner than a leaked `app` password. Do not collapse those two alerts into “database issue.”
+The migrate job is leftover you must keep named: it exists, it is offline at request time, and a leaked migrate secret is a different owner than a leaked `app` password. Do not collapse those two alerts into “database issue.”
 
-## Framework defaults versus the operate guarantee
+## What the framework does vs what you still have to check
 
-Cloud IAM dashboards will show “RDS in a private subnet” and stay silent when the connection user is `postgres`. Detection must observe the **runtime role**, not the VPC. If the alert includes a note body, you have opened a 3.1 cell.
+Cloud IAM dashboards will show “database in a private subnet” and stay silent when the connection user is `postgres`. Notice must observe the **runtime role**, not the private network. If the alert includes a note body, you have opened a leak.
 
 ## Practice
 
@@ -41,12 +42,12 @@ Write one log line you would accept. Tie it to `labs/3.3/3.3-lab`.
 log_denied reason=wrong_db_role role=postgres request_id=req_33ar
 ```
 
-Reject any line that includes a note body, a real connection string secret, or “VPC is isolation.”
+Reject any line that includes a note body, a real connection-string secret, or “VPC is isolation.”
 
-## Transfer
+## Use it somewhere new
 
-Serverless: detect the function using the migrate secret. Clinic replica: detect `SELECT *` from billing onto chart text. Do not connect to those systems.
+Serverless: notice the function using the migrate secret. Clinic replica: notice `SELECT *` from billing onto chart text. Do not connect to those systems.
 
-## Non-goals
+## What this page is not doing
 
-SIEM product names are not the property. Live GRANT dumps are out of scope. Gates 0–10 stay not-attempted.
+A log-product name is not the rule. Live GRANT dumps are out of scope. Course gates stay unclaimed. Answer keys stay out of lessons.

@@ -1,36 +1,37 @@
-# 3.2-LO-06 — Detect a missing id; recover without back-dating
+# Notice a missing id; do not pretend you already had it
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
-**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-15.1.3`. CSF names outcomes; it does not prove the seed.
 
-## Prevention is not absolute
+## Stopping it is not enough
 
-A new share path, a worker, or a webhook can make the model stale while every CVE scanner stays green. Pair detect and recover. Do not log note bodies while investigating (3.1). Do not back-date the threat-model file after an incident so it looks as if the row was always there.
+A new share path, a worker, or a webhook can make the model stale while every CVE scanner stays green. Pair notice and recover. Do not log note bodies while you look. Do not back-date the threat-model file after an incident so it looks as if the row was always there.
 
-## Mental model: age and missing-id gates
+## Picture: age and missing-id gates
 
 ```mermaid
 flowchart TD
-  Merge[Merge or nightly] --> Ids{"Mandatory ids present?"}
+  Merge[Merge or nightly] --> Ids{"Always-name ids present?"}
   Ids -->|no| Metric["missing_mandatory_threat += 1"]
   Metric --> Alert["reason=missing_threat id=cross-tenant-read no body"]
   Ids -->|yes| Age{"model_age_days vs last trigger?"}
   Age -->|stale| Revisit[Re-run four questions]
 ```
 
-| Outcome | This module |
+A missing id is a notice-and-recover problem, not a licence to rewrite yesterday’s date. Notice names the threat. Recover adds the row. Neither pretends you already had it.
+
+| Outcome | This topic |
 |---|---|
-| Detect | CI fails if required ids missing; `model_age_days` after a named trigger |
-| Signal | threat id, owner, trigger name; never the note body |
-| Recover | Add the row, tests, and owner; **do not back-date** the file |
-| Residual | Unknown unknowns; document the next trigger |
+| Notice | CI fails if required ids are missing; `model_age_days` after a named trigger |
+| What the line holds | threat id, owner, trigger name; never the note body |
+| Recover | Add the row, the tests, and an owner; **do not back-date** the file |
+| Leftover | Unknown unknowns; write down the next trigger |
 
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS. Appendix D is still awareness. A SIEM product name is not the property.
+Industry lists name detect, respond, recover. They do not pick a log product. They do not prove the seed. An awareness list is still awareness. A SIEM product name is not the rule.
 
-## Framework defaults versus the operate guarantee
+## What the framework does vs what you still have to check
 
-A scanner SaaS will page on new CVEs and stay silent on missing `cross-tenant-read`. That silence is this bug. Detection must ask the assembler, not the dashboard. If your alert pastes a note body or a patient SMS into the ticket, you have opened a 3.1 cell.
+A scanner SaaS will page on new CVEs and stay silent on missing `cross-tenant-read`. That silence is this bug. Detection must ask the assembler, not the dashboard. If your alert pastes a note body or a patient SMS into the ticket, you have opened a classification leak.
 
 ## Practice
 
@@ -40,12 +41,12 @@ Write one log line you would accept. Tie it to `labs/3.2/3.2-lab`.
 log_denied reason=missing_mandatory_threat id=cross-tenant-read owner=authz request_id=req_32tm
 ```
 
-Reject any line that includes a note body, a real email, a vendor scan PDF treated as the model, or “Gate 3 complete.”
+Reject any line that includes a note body, a real email, a vendor scan PDF treated as the model, or “course gate complete.”
 
-## Transfer
+## Use it somewhere new
 
-Clinic: detect missing `sms-content-leak` after the reminder feature merges; do not paste patient text into the ticket. Do not scan the clinic to prove the gap.
+Clinic: notice missing `sms-content-leak` after the reminder feature merges. Do not paste patient text into the ticket. Do not scan the clinic to prove the gap.
 
-## Non-goals
+## What this page is not doing
 
-SIEM product names are not the property. Keys stay out of lessons. Gates 0–10 stay not-attempted without learner or product evidence.
+A log-product name is not the rule. Answer keys stay out of lessons. Do not claim a course gate without learner or product evidence.

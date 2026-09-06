@@ -1,27 +1,25 @@
-# 3.1-LO-07 — Transfer: two classes on a clinic booking card
+# Same idea on a clinic booking card
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-14.1.1` and `v5.0.0-16.2.5`. Privacy Framework 1.1 remains a **draft** if cited.
 
-## Change the fields; keep field × sink
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: `log_event("note_read", "tenant-A-secret-body")` must not contain the body. Rewrite it for a booking card without changing the fork.
+The notes-app scaffolding goes away. You get a **clinic booking card**. Chart text and appointment time sit on the same card. Your job is to rewrite the loop, not to name a bug-list code.
 
-**Prompt:** Clinic notes vs appointment time: two classes, two sinks.
+The notes-app sentence was: `log_event("note_read", "tenant-A-secret-body")` must not contain the body. Rewrite it for a booking card without changing the fork: field × place, allow or deny.
 
-**Product sketch:** EHR-lite booking card.
+## Picture: time is not the chart
 
-Rewrite the SecureCollab sentence. Include:
+Renaming “note body” to “chart text” is not transfer. Field, place, and leftover change. Logging the time does not authorize logging the chart. A single “sensitive” sticker that does not name places is just a sticker.
 
-1. attacker capabilities (operator with logs; vendor with the drain; another tenant on shared observability — **not** a live clinic);
-2. trust assumptions (which logging API is TCB; the spreadsheet and the privacy policy are not);
-3. forbidden outcome (chart text in the log, not “HIPAA” and not “we classified it”);
-4. a test idea on a **local** fixture only (substring absent + marker present);
-5. residual (time is Internal and may be logged; ids remain; APM; exception middleware; 4.3 query strings);
-6. WCAG 2.2 only if a human-mediated control is in the claim (classification itself is not a WCAG problem; color-only “Confidential” badges are).
-
-## Mental model: time is not the chart
+| Notes app this week | Clinic sketch |
+|---|---|
+| Note body is Confidential | Chart text is Confidential |
+| Note id / tenant id may be Internal | Appointment time may be Internal |
+| `note_read` log line | Appointment log line |
+| Operator / vendor / shared observability | Same readers — **not** a live clinic |
+| Body substring in the line | Chart substring in the line |
 
 ```mermaid
 flowchart LR
@@ -29,22 +27,33 @@ flowchart LR
   Chart["Chart text - Confidential"] --> LogDeny[Log deny]
 ```
 
-Two classes on one card is the point. Logging the time does not authorize logging the chart. A single “PHI” sticker that does not name sinks is theater. `v5.0.0-14.1.1` wants identification; `v5.0.0-16.2.5` wants the log to enforce the level.
+Two classes on one card is the point.
 
-## What graders reject
+## Prompt — clinic booking card
+
+Rewrite the notes-app sentence. Include:
+
+1. who can act (operator with logs; vendor with the drain; another company on shared observability — **not** a live clinic);
+2. what you trust (which logging API; the spreadsheet and the privacy policy are not);
+3. what must not happen (chart text in the log, not a legal label and not “we classified it”);
+4. a test idea on **local** files only (substring absent + marker present — never on the real clinic);
+5. leftover (time is Internal and may be logged; ids remain; APM; exception dumps; query strings in access logs);
+6. whether a human-read badge must not use color as the only cue (classification itself is not an accessibility problem; color-only “Confidential” badges are).
+
+## What is not good enough
 
 | Reject | Why |
 |---|---|
-| Spreadsheet as the property | No sink rule |
-| Live clinic logs | Lab policy |
-| Privacy policy URL | Mechanism theater |
-| “HIPAA” as the oracle | Awareness / legal label, not this pytest |
+| Spreadsheet as the rule | No place named; no allow or deny |
+| Live clinic logs | Course rules |
+| Privacy-policy URL | A document is not the logger |
+| A legal label as the check | Awareness, not this pytest |
 | HTTP 200 as classification evidence | Wrong observation |
 
 ## Practice
 
-One page. No keys. `labs/3.1/3.1-lab` is the only running system you may break. Do not fetch a clinic, dump a production drain, or use real patient identifiers.
+One page. No answer keys. The only running system you may break is `labs/3.1/3.1-lab`. Do not fetch a clinic, dump a production drain, or use real patient identifiers.
 
-## Non-goals
+## What this page is not doing
 
-Live SIEM tenants. Real charts. Claiming Gate 3 from this page. Mixing Privacy Framework 1.1 (draft) as if it were final.
+Live log tenants. Real charts. Mixing a draft privacy list as if it were final.

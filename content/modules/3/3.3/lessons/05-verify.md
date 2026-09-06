@@ -1,57 +1,56 @@
-# 3.3-LO-05 — Evidence is tB-denied-tA, then a passing pair
+# Fail on the broken files, then pass on the repaired ones
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.4.1`.
 
-## An invariant that cannot fail a test is still a slogan
+## If you cannot test it, it is still a slogan
 
-“We have RLS in the backlog” is not evidence. “Private subnet” is a topology observation. The oracle is: `can_select("app", "tB", "tA") is False`. That observation must be **false** on `--impl vulnerable` (the helper returns true) and **true** on `--impl fixed`.
+“We have row-level security in the backlog” is not evidence. “Private subnet” is a topology observation. The check is: `can_select("app", "tB", "tA") is False`. That observation must be **false** on the broken files (the helper returns true) and **true** on the repaired files.
 
-## Mental model: vulnerable must fail: tB reads tA
+## Picture: broken must fail — tB reads tA
 
-The failing observation on `--impl vulnerable` is **tB reads tA**. A passing collection count is not this cell.
+A test that only counts passing cases can pass while tB still reads tA. This check asks whether a shared app role reading tA as tB still counts as a passing control. Broken must fail that question. Repaired must pass it — deny the other company, and still allow own-company read.
 
 ```mermaid
 flowchart LR
-  V["--impl vulnerable"] --> F["Must fail tB reads tA"]
-  X["--impl fixed"] --> P["Must pass deny plus own-tenant allow"]
+  V["broken files"] --> F["Must fail: tB reads tA"]
+  X["repaired files"] --> P["Must pass: deny plus own-company allow"]
 ```
 
-| Mode | Must show for this module |
+| Mode | Must show for this topic |
 |---|---|
 | Normal | After the fix, `can_select("app", "tA", "tA") is True` |
-| Negative / abuse | `can_select("app", "tB", "tA") is False`; vulnerable must fail that assertion |
-| Plane | migrator cannot SELECT at runtime; connection is not `postgres` |
-| Not claimed | Production RLS; replica fleet; SQLi complete (6.1) |
+| Wrong input / abuse | `can_select("app", "tB", "tA") is False`; broken files must fail that check |
+| When things break | migrator cannot SELECT at runtime; connection is not `postgres` |
+| Not claimed | Production row-level security; replica fleet; SQL injection complete |
 
-Lab tests in `labs/3.3/3.3-lab/tests/test_property.py`. `test_app_role_cannot_read_other_tenant` is a **forbidden-outcome** test: a shared app role reading tA as tB is not allowed to count as a passing control.
+Lab tests in `labs/3.3/3.3-lab/tests/test_property.py`. `test_app_role_cannot_read_other_tenant` is a **what-must-not-happen** test: a shared app role reading tA as tB is not allowed to count as a passing control.
 
 ```text
 python3 -m pytest labs/3.3/3.3-lab/tests --impl vulnerable
 python3 -m pytest labs/3.3/3.3-lab/tests --impl fixed
 ```
 
-Map each test to an LO-02 cell. If vulnerable does not fail the cross-tenant assertion, the lab is miswired—fix the wiring, not the assertion.
+Map each test to a row you wrote on the compartments page. Do not paste keys. If the broken files do not fail the cross-company check, the lab is miswired — fix the wiring, not the check. An environment error is not security evidence.
 
 ## What the tests do not prove
 
-- SQLi (6.1) beyond the forgotten-WHERE analogy
-- Table-owner / `SECURITY DEFINER` bypass (E5)
+- SQL injection beyond the forgotten-WHERE analogy
+- Table-owner / function-as-owner walk-around (later topic)
 - Billing replica (transfer)
-- Kubernetes NetworkPolicy
-- That 1.2 handler checks are present (they remain required)
+- Kubernetes network policy
+- That who-is-allowed handler checks are present (they remain required)
 
-Record those as residuals or later modules, not as silent passes.
+Record those as leftover or later topics, not as silent passes.
 
 ## Practice
 
-Execute both implementations this session. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `GRANT` in a migration without calling `can_select`.
+Run both this session. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `GRANT` in a migration without calling `can_select`.
 
-## Transfer
+## Use it somewhere new
 
-Serverless admin string. A test that only asserts HTTP 200 is not architecture evidence (see 9.3). A test that connects to live RDS is out of scope.
+A serverless admin string. A test that only asserts HTTP 200 is not architecture evidence. A test that connects to a live cloud database is out of scope.
 
-## Non-goals
+## What this page is not doing
 
-Do not add a live database. Do not log note bodies. Keys stay out of this file.
+Do not add a live database. Do not log note bodies. Answer keys stay out of this file.
