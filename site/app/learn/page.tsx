@@ -1,5 +1,5 @@
+import { PhaseJump, PhaseSection } from "@/components/PhaseSection";
 import { PageHeader, PageShell } from "@/components/ui";
-import { PhaseSection } from "@/components/PhaseSection";
 import { phaseList } from "@/lib/catalog";
 import { loadAllModules } from "@/lib/loadCurriculum";
 
@@ -16,10 +16,11 @@ export default function LearnIndexPage() {
           feature list.
         </p>
         <p>
-          Open a module, then read its lessons left-to-right. Answer keys are not
+          Open a module, then read its lessons left to right. Answer keys are not
           on this site. Labs run only in your clone of the repository.
         </p>
       </PageHeader>
+      <PhaseJump phases={phases} />
       {phases.map((phase) => (
         <PhaseSection
           key={phase}

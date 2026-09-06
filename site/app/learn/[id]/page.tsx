@@ -101,18 +101,18 @@ export default async function ModulePage({ params }: Props) {
         </ol>
       </section>
 
-      <section className="mt-10">
+      <section className="mt-10 rounded-xl border border-stone-200 bg-white p-5">
         <h2 className="mb-3 text-xl font-semibold">What you should be able to do</h2>
-        <ul className="list-disc space-y-2 pl-5 leading-relaxed">
+        <ul className="list-disc space-y-2 pl-5 leading-relaxed text-stone-800">
           {mod.outcomes.map((o) => (
             <li key={o}>{o}</li>
           ))}
         </ul>
       </section>
 
-      <section className="mt-10">
+      <section className="mt-6 rounded-xl border border-stone-200 bg-white p-5">
         <h2 className="mb-3 text-xl font-semibold">Invariants this module owns</h2>
-        <ul className="list-disc space-y-2 pl-5 leading-relaxed">
+        <ul className="list-disc space-y-2 pl-5 leading-relaxed text-stone-800">
           {mod.invariants.map((o) => (
             <li key={o}>{o}</li>
           ))}
@@ -120,9 +120,9 @@ export default async function ModulePage({ params }: Props) {
       </section>
 
       {mod.threatModelPrompts?.length ? (
-        <section className="mt-10">
+        <section className="mt-6 rounded-xl border border-stone-200 bg-white p-5">
           <h2 className="mb-3 text-xl font-semibold">Threat prompts</h2>
-          <ul className="list-disc space-y-2 pl-5 leading-relaxed">
+          <ul className="list-disc space-y-2 pl-5 leading-relaxed text-stone-800">
             {mod.threatModelPrompts.map((o) => (
               <li key={o}>{o}</li>
             ))}
@@ -149,9 +149,9 @@ export default async function ModulePage({ params }: Props) {
       ) : null}
 
       {mod.misconceptions?.length ? (
-        <section className="mt-10">
+        <section className="mt-6 rounded-xl border border-stone-200 bg-white p-5">
           <h2 className="mb-3 text-xl font-semibold">Misconceptions this module refuses</h2>
-          <ul className="list-disc space-y-2 pl-5 leading-relaxed">
+          <ul className="list-disc space-y-2 pl-5 leading-relaxed text-stone-800">
             {mod.misconceptions.map((o) => (
               <li key={o}>{o}</li>
             ))}
@@ -159,7 +159,7 @@ export default async function ModulePage({ params }: Props) {
         </section>
       ) : null}
 
-      <section className="mt-10">
+      <section className="mt-6 rounded-xl border border-stone-200 bg-white p-5">
         <h2 className="mb-3 text-xl font-semibold">Standards</h2>
         <ul className="space-y-2">
           {mod.standardsRefs.map((s) => (

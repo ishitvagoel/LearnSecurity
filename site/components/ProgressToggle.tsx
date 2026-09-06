@@ -18,20 +18,28 @@ function subscribe(onStoreChange: () => void): () => void {
   };
 }
 
-function snapshot(moduleId: string): boolean {
+function readVisited(): string[] {
   try {
     const raw = localStorage.getItem(KEY);
     if (!raw) {
-      return false;
+      return [];
     }
     const parsed: unknown = JSON.parse(raw);
     if (!Array.isArray(parsed)) {
-      return false;
+      return [];
     }
-    return parsed.some((x) => x === moduleId);
+    return parsed.filter((x): x is string => typeof x === "string");
   } catch {
-    return false;
+    return [];
   }
+}
+
+function snapshot(moduleId: string): boolean {
+  return readVisited().includes(moduleId);
+}
+
+export function useVisitedModuleIds(): string[] {
+  return useSyncExternalStore(subscribe, readVisited, () => []);
 }
 
 export function ProgressToggle({ moduleId }: { moduleId: string }): ReactElement {
@@ -40,16 +48,7 @@ export function ProgressToggle({ moduleId }: { moduleId: string }): ReactElement
 
   const onChange = (): void => {
     const current = snapshot(moduleId);
-    let next: string[] = [];
-    try {
-      const raw = localStorage.getItem(KEY);
-      const parsed: unknown = raw ? JSON.parse(raw) : [];
-      next = Array.isArray(parsed)
-        ? parsed.filter((x): x is string => typeof x === "string")
-        : [];
-    } catch {
-      next = [];
-    }
+    let next = readVisited();
     if (current) {
       next = next.filter((x) => x !== moduleId);
     } else {

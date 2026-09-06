@@ -76,7 +76,7 @@ export function LessonToc({
   return (
     <nav
       aria-label="On this page"
-      className="sticky top-4 max-h-[calc(100vh-2rem)] overflow-y-auto pb-8"
+      className="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto pb-8"
     >
       <p className="text-xs font-semibold uppercase tracking-wide text-stone-600">
         On this page
@@ -110,7 +110,7 @@ export function ReadingProgress(): ReactElement {
 
   return (
     <div
-      className="pointer-events-none fixed inset-x-0 top-0 z-40 h-1 bg-stone-200"
+      className="pointer-events-none fixed inset-x-0 top-16 z-40 h-1 bg-stone-200"
       role="progressbar"
       aria-label="Reading progress"
       aria-valuemin={0}

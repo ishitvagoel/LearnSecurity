@@ -39,9 +39,9 @@ export function LessonReader({
   return (
     <>
       <ReadingProgress />
-      <div className="lg:grid lg:grid-cols-[16rem_minmax(0,42rem)_14rem] lg:justify-center lg:gap-10">
+      <div className="mx-auto max-w-[90rem] px-4 py-8 lg:grid lg:grid-cols-[16rem_minmax(0,42rem)_14rem] lg:justify-center lg:gap-10">
         <aside className="hidden lg:block">
-          <div className="sticky top-4 max-h-[calc(100vh-2rem)] overflow-y-auto pb-8">
+          <div className="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto pb-8">
             <LessonNav
               moduleId={moduleId}
               moduleTitle={moduleTitle}
