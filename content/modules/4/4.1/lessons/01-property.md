@@ -1,20 +1,21 @@
-# 4.1-LO-01 — Delete must kill the session, not only the profile row
+# Delete must kill the session, not only the profile row
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** NIST SP 800-63-4 (final) account lifecycle; OWASP ASVS 5.0.0 (final) `v5.0.0-7.4.2` and `v5.0.0-7.4.1`; `v5.0.0-6.5.6` is **Level 3, advanced** (revoke an authentication factor on theft). Starlette SessionMiddleware is not this sentence.
 
-## The claim this module owns
+## The rule
 
-SecureCollab Phase 1 subjects have account states. Deleting `alice` is a 1.2 change over **time**: that principal must no longer read notes. A leftover session cookie, a refresh token, or a worker still holding `user_id` is an authentication artifact that outlived the subject. An “account deleted” email is not revocation.
+The notes app has people with account states. Deleting `alice` is a change over **time**. After that, she must no longer read notes.
 
-> After `delete_user("alice")`, `session_valid("alice")` must be false. Lifecycle is complete mediation across account states, not a login screen. SSO, SessionMiddleware, and “we disabled the password” do not by themselves kill the cookie.
+A leftover session cookie is still her. A leftover refresh token is still her. A worker still holding `user_id` is still her. An “account deleted” email does not kill any of that.
 
-The forbidden outcome is **deleted user’s leftover session still authenticates**: `delete_user` adds the profile to `DELETED` but `SESSIONS["alice"]` stays true. That is a 1.1 confidentiality failure with a 1.2 cell that time reopened.
+> After `delete_user("alice")`, `session_valid("alice")` must be false. Lifecycle is every leftover that can still act as that person, not a login screen. Single sign-on, the web session library, and “we disabled the password” do not by themselves kill the cookie.
 
-ASVS `v5.0.0-7.4.2` wants all active sessions terminated when an account is disabled or deleted. `v5.0.0-7.4.1` wants further use of that session disallowed (invalidate backend state; self-contained tokens need a denylist or per-user not-before). `v5.0.0-6.5.6` is **Level 3 (advanced)** factor revocation — not a silent baseline. NIST SP 800-63-4 separates identifiers, authenticators, and session; this lab’s oracle is session-after-delete, not proofing.
+So what must not happen: **a deleted user’s leftover session still works**. `delete_user` marks the profile deleted, but `SESSIONS["alice"]` stays true. The notes are still readable after the person is gone.
 
-## Mental model: the artifact outlives the subject
+Industry lists want all active sessions killed when an account is disabled or deleted. They also want further use of that session refused — kill the server-side state. Self-contained tokens need a denylist or a per-user not-before. Revoking a stolen login factor is advanced work, not this week's check. Identity guidance separates identifiers, authenticators, and session. This week's check is session-after-delete, not proofing who someone is.
+
+## Picture: the leftover outlives the person
 
 ```mermaid
 flowchart TD
@@ -25,11 +26,11 @@ flowchart TD
   Cookie -->|no| Dead["session_valid false"]
 ```
 
-The attacker is an ex-employee with a copied cookie, or a delayed worker (7.4) using the old `user_id`. Trusting HR email or “login is disabled” is not a TCB.
+The person who can still get in is an ex-employee with a copied cookie, or a delayed worker still holding `user_id`. Trusting HR email or “login is disabled” is not what you trust.
 
-**Mechanism (not the property):** Starlette SessionMiddleware, Auth0 SLO, or `DELETE FROM users`.
+**The tool (not the rule):** SessionMiddleware, a single-sign-on logout product, or `DELETE FROM users`.
 
-## Mental model: states, not a login screen
+## Picture: states, not a login screen
 
 ```mermaid
 stateDiagram-v2
@@ -41,45 +42,47 @@ stateDiagram-v2
   Deleted --> Deleted: leftover session must fail
 ```
 
-Disabled and deleted are different product states. Both must fail `session_valid` in this lab’s freeze. Recovery and re-enrollment are later 4.2; they must not resurrect the old cookie.
+Disabled and deleted are different product states. Both must fail `session_valid` in this week's freeze. Recovery and signing up again come later. They must not bring the old cookie back to life.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | For this property |
+Someone killed the profile row and left the session. That is the cause. The person who later presents the cookie is a **result**, not the cause.
+
+| Slice | For this rule |
 |---|---|
-| Root cause | Authentication artifact outlived the subject |
-| Preconditions | `delete_user` removes profile only |
-| Trigger | Cookie presented after offboarding |
-| Impact | Confidentiality of tenant notes; 1.2 over time |
-| Prevention | Invalidate sessions (and tokens, workers) in the same use-case |
-| Detection | Use of session after `user_state=deleted` |
-| Recovery | Mass revoke; rotate signing keys if tokens self-verify |
+| Why it happens | The authentication leftover outlived the person |
+| What has to be true first | `delete_user` removes the profile only |
+| Trigger | Cookie presented after they leave |
+| What it costs | The notes are still readable; secrecy over time |
+| How you stop it | Kill sessions (and tokens, workers) in the same delete |
+| How you notice | Use of a session after `user_state=deleted` |
+| How you recover | Mass revoke; rotate signing keys if tokens self-verify |
 
-## Framework defaults versus the lifecycle guarantee
+## What the framework does vs what you still have to check
 
-SessionMiddleware does not know HR offboarding. A JWT with `exp` in 30 days still verifies unless you check a per-user not-before. The lab guarantee: after `delete_user("alice")`, `session_valid("alice") is False`. Oracle: `labs/4.1/4.1-lab`. No live IdP.
+SessionMiddleware does not know HR offboarding. A token with `exp` in 30 days still verifies unless you check a per-user not-before. The app's promise: after `delete_user("alice")`, `session_valid("alice")` is False. The local check is `labs/4.1/4.1-lab`. Fake data only. No live identity provider.
 
-## Mechanism limits
+## What the tool cannot do
 
-- Email “you’re deleted” is not revocation.
-- Refresh tokens; mobile offline cache (8.2); shared device.
-- Backups still contain the user row (5.1).
+- Email “you’re deleted” is not killing the session.
+- Refresh tokens; a phone's offline cache (later); a shared device.
+- Backups still contain the user row (later).
 
 ## Practice
 
-Name the state change and the leftover artifact. Then run:
+Name the state change and the leftover. Then run:
 
-```
+```text
 python3 -m pytest labs/4.1/4.1-lab/tests --impl vulnerable
 python3 -m pytest labs/4.1/4.1-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Map the assertion to `session_valid` after delete, not to an SSO product name.
+The first command must fail. The second must pass. Tie the check to `session_valid` after delete, not to a single-sign-on product name.
 
-## Transfer
+## Use it somewhere new
 
-Clinic: departing clinician. The badge is disabled; the EHR cookie must die the same day.
+Clinic: a clinician leaves. The badge is disabled. The chart cookie must die the same day.
 
-## Non-goals
+## What this page is not doing
 
-Live IdPs, real HR exports, real session cookies from production, weaponized token replay. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner or product evidence. Answer keys are not in this file.
+Live identity providers, real HR exports, real session cookies from production, weaponized token replay. Answer keys are not in this file.

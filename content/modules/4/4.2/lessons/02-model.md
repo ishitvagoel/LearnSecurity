@@ -1,72 +1,77 @@
-# 4.2-LO-02 — An authenticator record a second engineer can test
+# An authenticator record someone else can test
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** NIST SP 800-63B-4 (final); WebAuthn Level 3 (**CR**); OWASP ASVS 5.0.0 (final) `v5.0.0-6.3.3`.
 
-## Can a second engineer name pytest cases from your decision record?
+## Could someone else name the checks from your record?
 
-“We use MFA” is not this lesson. A reviewable record names **method**, **origin**, **whether the claim is phishing-resistant**, and **the residual** if only passwords remain.
+“We use MFA” is not this lesson. A reviewable record names **method**, **origin**, **whether the claim is phishing-resistant**, and **the leftover** if only passwords remain.
 
-SecureCollab Phase 1 freeze: local `phishing_resistant` classifier; origins `https://app.securecollab.test` vs `https://evil.example`. No live authenticators.
+This week’s freeze: a local `phishing_resistant` helper; origins `https://app.securecollab.test` vs `https://evil.example`. No live authenticators.
 
-## Mental model: three methods, two origins
+## Picture: three methods, two origins
 
 ```mermaid
 flowchart TD
-  Pw["password"] --> EvilPw["evil origin - not resistant"]
-  Otp["otp"] --> EvilOtp["evil origin - not resistant"]
-  Wa["webauthn"] --> EvilWa["evil origin - fail"]
-  Wa --> RealWa["real origin - resistant authn only"]
+  Pw["password"] --> EvilPw["lookalike origin — not resistant"]
+  Otp["otp"] --> EvilOtp["lookalike origin — not resistant"]
+  Wa["webauthn"] --> EvilWa["lookalike origin — fail"]
+  Wa --> RealWa["real origin — resistant login only"]
 ```
 
-## Mental model: usability is in the TCB
+If the map already lets a password at evil.example count as resistant, it already predicts `test_password_is_not_phishing_resistant` will fail.
+
+## Picture: a usable path is part of what you trust
 
 ```mermaid
 flowchart LR
   Path[Login journey] --> Kbd[Keyboard]
-  Path --> Label[Accessible name]
+  Path --> Label[Name a screen reader can use]
   Path --> Err[Error not color-only]
-  Path --> Residual[Password fallback - labeled phishable]
+  Path --> Residual[Password leftover — labeled phishable]
 ```
 
-If WebAuthn is pointer-only, the residual grows (1.4).
+If WebAuthn is pointer-only, the leftover grows. People share passwords.
 
-## Step 1: freeze pieces
+## Step 1: freeze the pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | User; phishing site; real origin |
-| Objects | password; otp; webauthn assertion; origin |
+| Who | User; phishing site; real notes-app origin |
+| What | password; otp; webauthn assertion; origin |
 | Actions | `phishing_resistant` |
-| Channels | browser; authenticator |
-| TCB | Origin-bound ceremony (lab stand-in) |
-| Untrusted | URL-reading; password reuse |
-| State / time | Login; later step-up (transfer) |
-| 1.1 cell | Authenticity to *this* origin |
+| Paths | browser; authenticator |
+| What you trust | Origin-bound ceremony (the local stand-in) |
+| What you do not trust | Reading the URL; password reuse |
+| Time | Login now; later step-up before export |
+| Login cell | Authenticity to *this* origin |
 
-## Step 2: write cells
+The client, the lookalike page, and “the user will notice the URL” are hostile. What you trust is the **origin check**, not “MFA is on.”
 
-| Subject | Object | Action | Decision |
+## Step 2: write cells the practice can fail
+
+| Who | What | Action | Decision |
 |---|---|---|---|
-| user | password | real origin | phishable (allowed residual) |
-| user | password | evil origin | deny-and-not-resistant |
-| user | otp | evil origin | deny-and-not-resistant |
-| user | webauthn | evil origin | deny |
-| user | webauthn | real origin | resistant-authn-only |
+| user | password | real origin | phishable (allowed leftover) |
+| user | password | lookalike origin | deny-and-not-resistant |
+| user | otp | lookalike origin | deny-and-not-resistant |
+| user | webauthn | lookalike origin | deny |
+| user | webauthn | real origin | resistant-login-only |
+
+A missing step-up cell is how export theater appears. Write the hole even if this week has no export button.
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Point at `labs/4.2/4.2-lab` file `authn.py`.
+Draw this map so someone else could name the checks without opening the answer-key folder. Point at `labs/4.2/4.2-lab` file `authn.py`. Label password and OTP as phishable even at the real origin — the leftover is honest, not a silent pass.
 
-## Transfer
+## Use it somewhere new
 
-Step-up for export. Clinic SSO portal.
+Step-up before export. Clinic staff SSO portal. Same three methods, two origins.
 
-## Residual risk
+## What can still go wrong
 
-Password-only users. Recovery SMS. WebAuthn ≠ 1.2.
+Password-only users. Recovery SMS. WebAuthn does not decide who may read a note.
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+Do not define security as a famous-bugs list. Answer keys stay out of lessons.

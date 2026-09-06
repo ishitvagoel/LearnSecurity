@@ -1,87 +1,84 @@
-# 4.2-LO-01 — A password at a lookalike origin is not phishing-resistant
+# A password at a lookalike site is not phishing-resistant
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** NIST SP 800-63B-4 (final, part of SP 800-63-4); W3C WebAuthn Level 3 (**Candidate Recommendation** — not Rec); OWASP ASVS 5.0.0 (final) `v5.0.0-6.3.3` (Level 2 MFA; the hardware phishing-resistant clause is **Level 3, advanced**); WCAG 2.2 (final) for the journey.
 
-## The claim this module owns
+## The rule
 
-SecureCollab Phase 1 authenticates a browser user to `https://app.securecollab.test`. A password or OTP typed at `https://evil.example` is a **shared secret the attacker now has**. That is not phishing-resistant, even if the real origin later accepts the same secret. WebAuthn-class authenticators are scoped to the RP origin: an assertion for evil.example must fail even if the credential exists.
+The notes app logs a browser user in at `https://app.securecollab.test`. A password or one-time code typed at `https://evil.example` is a **shared secret the attacker now has**. That is not phishing-resistant, even if the real site later accepts the same secret. A WebAuthn-class authenticator is tied to the relying-party origin: an assertion for evil.example must fail even if the credential exists.
 
-> `phishing_resistant("password", "https://evil.example", "https://app.securecollab.test")` must be false. `phishing_resistant("webauthn", "https://evil.example", "https://app.securecollab.test")` must be false. Passwords to the *real* origin are still phishable — do not advertise them as resistant. HTML `autocomplete=webauthn` is not a ceremony.
+> `phishing_resistant("password", "https://evil.example", "https://app.securecollab.test")` must be false. `phishing_resistant("webauthn", "https://evil.example", "https://app.securecollab.test")` must be false. Passwords to the *real* origin are still phishable — do not advertise them as resistant. An HTML `autocomplete=webauthn` hint is not the ceremony.
 
-The forbidden outcome is **password (or wrong-origin WebAuthn) counted as phishing-resistant**. That is a 1.1 authenticity failure: the principal is bound to the *wrong* origin, then 1.2 runs as the victim.
+What must not happen is a **password (or wrong-origin WebAuthn) counted as phishing-resistant**. That is a login bound to the *wrong* site, then a session that acts as the victim.
 
-ASVS `v5.0.0-6.3.3` wants MFA at Level 2. The same requirement’s **Level 3** clause wants a hardware, user-intent, phishing-resistant factor — label that advanced; it is not a silent baseline. WebAuthn L3 is a **Candidate Recommendation**. 800-63B-4 distinguishes phishing-resistant authenticators from OTP and passwords. Any 2FA is not this sentence.
+Authenticator guidance still treats passwords and OTP as phishable. “We turned on 2FA” is not this sentence. WebAuthn Level 3 is still a Candidate Recommendation, not a finished Rec. A later, stricter bar wants a hardware, user-intent, phishing-resistant factor. Treat that as later, not as this week’s pytest.
 
-## Mental model: the secret walks to the wrong origin
+## Picture: the secret walks to the wrong site
 
 ```mermaid
 flowchart TD
-  User[Fatigued user] --> Evil["https://evil.example"]
+  User[Tired user] --> Evil["https://evil.example"]
   Evil --> Pw["password or OTP captured"]
   Pw --> Real["https://app.securecollab.test"]
-  Real --> Session["Attacker session - then 1.2"]
+  Real --> Session["Attacker session — then who-is-allowed as the victim"]
 ```
 
-The attacker is a lookalike origin, not a novel CVE. Trusting “the user will read the URL” is not a TCB.
+Nobody needs a new bug name. A lookalike login page is enough. Trusting “the user will read the URL” is not what you trust.
 
-**Mechanism (not the property):** a passkey vendor dashboard, `autocomplete=webauthn`, or “we turned on MFA.”
+**A tool is not the rule.** A passkey vendor dashboard, `autocomplete=webauthn`, or “we turned on MFA” is not this sentence.
 
-## Mental model: origin binding vs shared secret
+## Picture: origin binding vs a shared secret
 
 ```mermaid
 flowchart LR
   Cred[Authenticator credential] --> Origin{"origin equals RP ID?"}
   Origin -->|no| Fail[Assertion fails]
   Origin -->|yes| Ok[Resistant to this phishing class]
-  Secret[Password or OTP] --> Anywhere[Replayable at evil origin]
+  Secret[Password or OTP] --> Anywhere[Replayable at the lookalike site]
 ```
 
-OTP is a second factor. It is still typed into the phishing page. Prompt bombing and recovery SMS re-introduce phishable secrets (1.4, 4.1).
+OTP is a second factor. It is still typed into the phishing page. Prompt bombing and recovery SMS put a phishable secret back on the path. Password-only users are an honest leftover, not a slogan.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | For this property |
+| Slice | For this rule |
 |---|---|
-| Root cause | Shared secret replayable at the wrong origin |
-| Preconditions | Classifier returns true for password at evil origin |
-| Trigger | Lookalike login page |
-| Impact | Authenticity of the principal to *this* origin |
-| Prevention | Origin/RP ID binding; do not call passwords resistant |
-| Detection | `webauthn_fail_origin`; user report; new-device (weak) |
-| Recovery | Revoke sessions (4.1); force re-bind authenticators |
+| Why it happens | A shared secret that still works at the wrong site |
+| What has to be true first | The helper returns true for a password at the lookalike origin |
+| Trigger | A lookalike login page |
+| What it costs | Login is bound to the *wrong* site; the session then acts as the victim |
+| How you stop it | Bind the ceremony to origin / RP ID; do not call passwords resistant |
+| How you notice | `webauthn_fail_origin`; a user report; a new-device signal (weak) |
+| How you recover | Revoke sessions (the leftover-session topic); force a re-bind of authenticators |
 
-## Framework defaults versus the authenticator guarantee
+## What the framework does vs what you still have to check
 
-FastAPI does not know RP ID. Next.js `<input type=password>` will happily POST to evil.example. WCAG 2.2 still applies: a mouse-only WebAuthn button pushes people onto the password residual. The lab guarantee is the boolean classifier, not a live authenticator. Oracle: `labs/4.2/4.2-lab`. No live phishing sites.
+FastAPI does not know the RP ID. A Next.js password field will happily POST to evil.example. The login still has to work with a keyboard, a name a screen reader can use, and errors that are not color-only. A mouse-only WebAuthn button pushes people onto the password leftover — that is a security leftover, not polish.
 
-## Mechanism limits
+The app’s promise is the boolean helper, not a live authenticator. The practice folder is `labs/4.2/4.2-lab`. It is not a live phishing site.
 
-- WebAuthn does not authorize (1.2).
-- Recovery email/SMS can re-introduce phishable secrets.
-- Compromised authenticator; prompt bombing.
-- Users with only passwords — honest residual, not a slogan.
+## What the tool cannot do
+
+- WebAuthn does not decide who may read a note.
+- Recovery email or SMS can put a phishable secret back on the path.
+- A stolen authenticator, or prompt bombing, still mints a session.
+- People who only have passwords — name that leftover; do not advertise resistance.
 
 ## Practice
 
-Fill method × origin × expected. Then run:
+Fill method × origin × expected. Then run the local pair:
 
-```
+```text
 python3 -m pytest labs/4.2/4.2-lab/tests --impl vulnerable
 python3 -m pytest labs/4.2/4.2-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Map the assertion to the password-at-evil boolean, not to a vendor name.
+The first command must fail. The second must pass. Tie the check to the password-at-lookalike boolean, not to a vendor name.
 
-## Transfer
+## Use it somewhere new
 
-Step-up for export: still origin-bound? Clinic staff SSO portal: password MFA to a lookalike IdP is still this sentence.
+Step-up before export: still origin-bound? Clinic staff SSO: password MFA to a lookalike identity provider is still this sentence.
 
-## Non-goals
+## What this page is not doing
 
-Live phishing campaigns, real user credentials, weaponized kits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner or product evidence. Answer keys are not in this file.
-
-## Usability and accessibility
-
-WebAuthn and the password fallback must work with keyboard, labels, and no color-only errors (WCAG 2.2). A broken accessible path is a security residual: people share passwords.
+Live phishing campaigns, real user credentials, copy-paste kits. Practice stays in this folder. Answer keys are not in this file.

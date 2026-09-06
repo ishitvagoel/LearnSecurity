@@ -1,31 +1,34 @@
-# 4.1-LO-04 — Invalidate the session in the same delete use-case
+# Invalidate the session in the same delete
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-7.4.1` and `v5.0.0-7.4.2`. `v5.0.0-6.5.6` is **Level 3, advanced** (revoke a factor on theft), not this pytest.
 
-## Structural means the cookie cannot authenticate
+## The rule
 
-`delete_user` must pop the session **and** `session_valid` must treat `DELETED` as deny. Structural means the delete use-case kills artifacts — not an email, not “disable password,” not SLO as a brand, not `DELETE FROM users` alone.
+A later email is not the fix. “Disable the password” is not the fix. A logout product name is not the fix. `DELETE FROM users` alone is not the fix.
 
-The smallest restore for SecureCollab Phase 1 offboarding is: add `alice` to `DELETED`, pop `SESSIONS["alice"]`, and refuse authentication if the user is in `DELETED` even if someone writes the map back. Fail-safe: if the session store is down, **deny** authentication for that user (do not fail open).
+The structural change is: `delete_user` **pops the session**, and `session_valid` **treats `DELETED` as deny**. Kill leftovers in the same use-case. Same delete. Not a follow-up ticket.
 
-## Mental model: mark deleted and drop the session
+The smallest restore for a notes-app offboard is: add `alice` to `DELETED`, pop `SESSIONS["alice"]`, and refuse authentication if the user is in `DELETED` even if someone writes the map back. Fail closed: if the session store is down, **deny** authentication for that user. Do not fail open.
+
+## Picture: mark deleted and drop the session
 
 ```mermaid
 flowchart TD
   Call["delete_user alice"] --> Mark[Add to DELETED]
   Call --> Pop["SESSIONS pop alice"]
   Pop --> Check{"session_valid?"}
-  Check -->|true| Fail[Property false]
-  Check -->|false| Pass[Property true]
+  Check -->|true| Fail[Rule false]
+  Check -->|false| Pass[Rule true]
 ```
 
-The lab’s fixed tree pops the session and checks `DELETED` first. Production should also invalidate refresh tokens, worker `user_id` (7.4), and mobile offline cache (8.2). Self-contained JWTs need a denylist or per-user not-before (`v5.0.0-7.4.1`). Disabled and deleted are different product states; both must fail `session_valid` in this lab’s freeze.
+The repaired files pop the session and check `DELETED` first. Production should also kill refresh tokens, worker `user_id`, and a phone's offline cache. Self-contained tokens need a denylist or a per-user not-before. Disabled and deleted are different product states. Both must fail `session_valid` in this week's freeze.
 
-ASVS `v5.0.0-7.4.2` (Level 2) wants all active sessions terminated. This pytest is that sentence for one synthetic cookie, not proofing (800-63-4) or WebAuthn (4.2).
+Industry lists want all active sessions killed. This pytest is that sentence for one synthetic cookie, not proofing who someone is, and not a new login factor.
 
-## Why this restores the cell
+## What the repaired files must show
+
+Read `fixed/lifecycle.py` against this checklist. Do not treat the snippet as a production session store.
 
 | After the fix | Must be true |
 |---|---|
@@ -33,36 +36,43 @@ ASVS `v5.0.0-7.4.2` (Level 2) wants all active sessions terminated. This pytest 
 | Before delete | honest session still valid |
 | Deleted set | even a resurrected `SESSIONS` entry is denied |
 
+Fail closed: if you cannot ask the session store, the answer is no. Uncertainty is a **deny**, not a yes because the dashboard still showed “signed in.”
+
 ## What this is not
 
-`DELETE FROM users` without session purge. JWT `exp` 30d. Worker `user_id` (7.4). Mobile cache (8.2). Auth0 SLO as a product name. SessionMiddleware defaults.
+- `DELETE FROM users` without session purge.
+- A token with `exp` in 30 days.
+- Worker `user_id` (later).
+- A phone's offline cache (later).
+- Single-sign-on logout as a product name.
+- SessionMiddleware defaults.
 
-## Mechanism limits
+## What the tool cannot do
 
-- Email “you’re deleted” is not revocation.
-- Refresh-token family (4.3 / 4.5).
-- Shared device cookies you did not list.
-- Backups still contain the user row (5.1).
-- Recovery and re-enrollment (4.2) must not resurrect the old cookie.
+- Email “you’re deleted” is not killing the session.
+- A refresh-token family (later).
+- Shared-device cookies you did not list.
+- Backups still contain the user row (later).
+- Recovery and signing up again must not bring the old cookie back to life.
+
+## Can people still use it
+
+If you show “you are signed out,” say it in text a screen reader can speak. Do not encode signed-out as color only. The announcement is not the kill.
 
 ## Practice
 
-Name subject (ex-employee with leftover cookie), object (`alice` session), predicate (`session_valid` false after delete). Run:
+Name who (ex-employee with leftover cookie), what (`alice` session), and the check that must be true after the fix (`session_valid` false after delete). Run:
 
 ```text
 python3 -m pytest labs/4.1/4.1-lab/tests --impl fixed
 ```
 
-Must pass.
+It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-## Transfer
+## Use it somewhere new
 
-Clinic: disable badge and kill EHR sessions in one runbook. A badge vendor API is not the EHR session store.
+Clinic: disable the badge and kill chart sessions in one runbook. A badge vendor API is not the chart session store.
 
-## Residual risk
+## What can still go wrong
 
-Self-contained tokens until per-user not-before or key rotation; backups (5.1); worker identity (7.4); mobile cache (8.2).
-
-## Usability
-
-If you show “you are signed out,” announce it (WCAG 2.2 Success Criterion 4.1.3). The announcement is not revocation.
+Self-contained tokens until a per-user not-before or key rotation. Backups. Worker identity. A phone's offline cache.

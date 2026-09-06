@@ -1,73 +1,74 @@
-# 4.4-LO-04 — Key the grant by tenant and note id
+# Key the grant by company and note id
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.2`, `v5.0.0-8.3.1`, `v5.0.0-8.4.1`. `v5.0.0-8.3.2` and `v5.0.0-8.3.3` are **Level 3, advanced**.
 
-## Structural means the lookup is on this object
+## The rule
 
-`can_read` must deny unless tenant matches **and** the user is the note owner **or** `GRANTS[(user, note_id)]` is true. Structural means the object is mediated — not a denylist of yesterday’s ids, not “hide the button,” not UUID length, not “they are a collaborator.”
+A denylist of yesterday’s ids is not the fix. Hiding the button is not the fix. Id length is not the fix. “They are a collaborator” is not the fix.
 
-The smallest restore for SecureCollab Phase 1 notes is: deny-by-default, then tenant equality, then owner or grant on **this** id. Fail-safe: missing note, missing user, or missing grant is **deny**. Do not fail open because the id “looks valid.”
+The structural change is: `can_read` **denies unless company matches and the user is the note owner or `GRANTS[(user, note_id)]` is true**. Structural means this object is checked — not leftover permission from the surroundings.
 
-## Mental model: deny default, then two keys
+The smallest restore for notes-app notes is: deny by default, then company equality, then owner or grant on **this** id. Fail closed: missing note, missing user, or missing grant is **deny**. Do not fail open because the id “looks valid.”
+
+## Picture: deny default, then two keys
 
 ```mermaid
 flowchart TD
-  Call["can_read user note_id"] --> Known{"note and principal exist?"}
+  Call["can_read user note_id"] --> Known{"note and person exist?"}
   Known -->|no| Deny[Deny]
-  Known -->|yes| Ten{"same tenant?"}
+  Known -->|yes| Ten{"same company?"}
   Ten -->|no| Deny
   Ten -->|yes| Own{"owner or grant on this id?"}
   Own -->|no| Deny
   Own -->|yes| Allow[Allow]
 ```
 
-The lab’s fixed tree compares tenant then owner/grant. Module 3.3 adds a database role as a *second* mediation; this table is still required. A clinic admin named `eve` is not an acme capability. PostgreSQL RLS waits for 5.5 and does not replace this cell.
+The repaired files compare company, then owner or grant. A later database-role check is a *second* gate; this table is still required. A clinic admin named Eve is not an `acme` capability. A later PostgreSQL row-level rule does not replace this cell.
 
-ASVS `v5.0.0-8.3.1` wants enforcement at a trusted service layer, not the Next.js client. This pytest is that sentence for `can_read`.
+Industry checklists want the check on a trusted server, not in the Next.js client. This pytest is that sentence for `can_read`. Extra rows about applying grant changes immediately, and carrying the original person through a worker, are advanced — not this week’s pytest.
 
-## Why this restores the cell
+## What the repaired files must show
 
 | After the fix | Must be true |
 |---|---|
 | bob × n1 | allow (honest grant) |
 | bob × n2 | deny |
 | alice × n2 | allow (owner) |
-| alice × n3 | deny (cross-tenant) |
+| alice × n3 | deny (other company) |
 | eve × n1 | deny (admin ≠ acme) |
 | eve × n3 | deny (admin ≠ object grant) |
 
 ## What this is not
 
-`Depends(get_user)`. Signed ids as capabilities. Casbin file without tests. RLS as a substitute (5.5). Worker `user_id` (7.4 / `v5.0.0-8.3.3` advanced). API1 as the finding title.
+`Depends(get_user)`. Signed ids as capabilities. A Casbin file without tests. A row-level rule as a substitute. A worker `user_id` as the person. A famous-bugs label as the finding title.
 
-## Mechanism limits
+## What the tool cannot do
 
-- UUID obscurity is not a grant.
-- GraphQL `node(id)`, export zip, search index (2.2), workers (7.4) are other paths of the same cell.
-- Property-level title-vs-body is 7.2; this lab is object + tenant.
-- Honest grant on n1 still reveals n1 — that is the product.
-- Grant revocation lag is `v5.0.0-8.3.2` advanced.
+- A hard-to-guess id is not a grant.
+- GraphQL `node(id)`, an export zip, a search index, and workers are other paths of the same cell.
+- Title vs body is a later field-level topic. This week is object plus company.
+- An honest grant on n1 still reveals n1 — that is the product.
+- How fast a taken-back grant dies is an advanced leftover.
 
 ## Practice
 
-Name subject, tenant, object, and predicate. Run:
+Name person, company, object, and the check. Run:
 
 ```text
 python3 -m pytest labs/4.4/4.4-lab/tests --impl fixed
 ```
 
-Must pass.
+It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-## Transfer
+## Use it somewhere new
 
-Clinic: appointment grant table keyed by chart id and tenant, not by “clinician role.”
+Clinic: an appointment grant table keyed by chart id and company, not by “clinician role.”
 
-## Residual risk
+## What can still go wrong
 
-Search/export/GraphQL paths; grant revocation lag; honest n1 still readable; 3.3 DB role still required.
+Search / export / GraphQL paths; grant take-back lag; honest n1 still readable; a later database-role check still required.
 
-## Non-goals
+## What this page is not doing
 
-Do not connect a live tenant. Do not claim Gate 4 from an RBAC product name.
+Do not connect a live company. Do not claim a course gate from a roles-product name.

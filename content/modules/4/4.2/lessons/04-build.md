@@ -1,16 +1,17 @@
-# 4.2-LO-04 — Only origin-bound WebAuthn may claim resistance
+# Only origin-bound WebAuthn may claim resistance
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** WebAuthn Level 3 (**Candidate Recommendation**); OWASP ASVS 5.0.0 (final) `v5.0.0-6.3.3`. The Level 3 hardware clause is **advanced**, not this pytest.
 
-## Structural means evil origin cannot pass as resistant
+## The rule
 
-`phishing_resistant` must return false unless the method is `webauthn` **and** `origin == expected`. Structural means origin/RP ID is in the predicate — not a denylist of hostnames, not `autocomplete=webauthn`, not “users are trained,” not “we use Okta.”
+A denylist of yesterday’s hostnames is not the fix. Training people to read the URL is not the fix. “We use Okta” is not the fix. `autocomplete=webauthn` is not the fix.
 
-The smallest restore for SecureCollab Phase 1 login copy is: passwords and OTP never claim resistance; WebAuthn claims it only when origin matches the RP. Fail-safe: unknown method denies. Passwords at the *real* origin may still authenticate; they must not be *labeled* resistant.
+The structural change is: `phishing_resistant` returns false unless the method is `webauthn` **and** `origin == expected`. Origin / RP ID is in the predicate.
 
-## Mental model: method then origin
+The smallest restore for notes-app login copy is: passwords and OTP never claim resistance; WebAuthn claims it only when origin matches the relying party. Fail closed: an unknown method denies. Passwords at the *real* origin may still log someone in; they must not be *labeled* resistant.
+
+## Picture: method, then origin
 
 ```mermaid
 flowchart TD
@@ -21,49 +22,56 @@ flowchart TD
   O -->|yes| True[Resistant to this phishing class]
 ```
 
-The lab’s fixed tree branches on method then origin equality. Production WebAuthn still needs a ceremony that works with keyboard and labels (WCAG 2.2). Prompt bombing and recovery SMS re-introduce phishable secrets (1.4, 4.1) — name them as residuals, not silent passes.
+The repaired files branch on method, then origin equality. A live WebAuthn path still needs a keyboard and a name a screen reader can use. Prompt bombing and recovery SMS put a phishable secret back on the path — name them as leftovers, not silent passes.
 
-ASVS `v5.0.0-6.3.3` Level 2 is MFA. This pytest is the **phishing-resistant claim**, not “2FA exists.”
+“2FA exists” is not this pytest. This pytest is the **phishing-resistant claim**.
 
-## Why this restores the cell
+## What the repaired files must show
 
 | After the fix | Must be true |
 |---|---|
-| password + evil | false |
-| otp + evil | false |
-| webauthn + evil | false |
-| webauthn + real | true |
+| password + lookalike origin | false |
+| otp + lookalike origin | false |
+| webauthn + lookalike origin | false |
+| webauthn + real origin | true |
+
+Fail closed: on an unknown method, **deny**. Do not repair by returning true because “the method is enrolled.”
 
 ## What this is not
 
-Any 2FA. WebAuthn as 1.2. SMS recovery as default. Level 3 hardware clause as an unlabeled baseline. A passkey vendor dashboard. HTML autocomplete.
+- Any 2FA.
+- WebAuthn as who-is-allowed.
+- SMS recovery as the default.
+- A later hardware bar as an unlabeled baseline.
+- A passkey vendor dashboard.
+- HTML autocomplete.
 
-## Mechanism limits
+## What the tool cannot do
 
-- WebAuthn does not authorize (1.2).
-- Recovery email/SMS can re-introduce phishable secrets.
-- Compromised authenticator; prompt bombing.
-- Users with only passwords — honest residual, not a slogan.
-- Step-up for export still needs origin binding or the second factor is theater.
+- WebAuthn does not decide who may read a note.
+- Recovery email or SMS can put a phishable secret back on the path.
+- A stolen authenticator; prompt bombing.
+- People who only have passwords — honest leftover, not a slogan.
+- Step-up before export still needs origin binding, or the second factor is theater.
 
 ## Practice
 
-Name method, origin, and predicate (webauthn ∧ origin == expected). Run:
+Name method, origin, and the predicate (webauthn **and** origin == expected). Run `--impl fixed` (must pass):
 
 ```text
 python3 -m pytest labs/4.2/4.2-lab/tests --impl fixed
 ```
 
-Must pass.
+Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-## Transfer
+## Use it somewhere new
 
-Step-up for export still needs origin binding. Clinic staff SSO: OTP to a lookalike IdP stays false.
+Step-up before export still needs origin binding. Clinic staff SSO: OTP to a lookalike identity provider stays false.
 
-## Residual risk
+## What can still go wrong
 
-Password-only users; recovery paths; compromised authenticator; mouse-only ceremony.
+Password-only users; recovery paths; a stolen authenticator; a mouse-only ceremony.
 
-## Usability
+## A usable leftover
 
-WebAuthn and the password fallback must work with keyboard, labels, and no color-only errors (WCAG 2.2). A broken accessible path is a security residual: people share passwords.
+WebAuthn and the password leftover must work with a keyboard, labels, and errors that are not color-only. A broken accessible path is a security leftover: people share passwords.

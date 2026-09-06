@@ -1,14 +1,13 @@
-# 4.5-LO-06 — Detect jwt_aud_mismatch; revoke without logging tokens
+# Notice audience mismatch; revoke without logging tokens
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
-**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-10.3.1`. CSF names outcomes; it does not compare `aud`.
 
-## Prevention is not absolute
+## Stopping it is not enough
 
-A leaked token for this audience still spends until expiry or sender-constraint. Pair detect and recover. Do not log raw tokens or note bodies (3.1, 4.3). Do not paste a JWT into the ticket.
+A leaked token for this audience still spends until expiry or a sender-constraint. Pair notice and recover. Do not log raw tokens or note bodies. Do not paste a JWT into the ticket.
 
-## Mental model: audience mismatch is a signal
+## Picture: audience mismatch is a signal
 
 ```mermaid
 flowchart TD
@@ -18,18 +17,18 @@ flowchart TD
   Alert --> Revoke[Revoke client and rotate if JWT]
 ```
 
-| Outcome | This module |
+| Outcome | This topic |
 |---|---|
-| Detect | `jwt_aud_mismatch`; `client_revoked` |
-| Signal | expected aud, token id or hash, client id; never the raw token |
-| Recover | Revoke client; rotate signing keys if tokens self-verify |
-| Residual | PKCE/nonce/DPoP not in this fixture |
+| Notice | `jwt_aud_mismatch`; `client_revoked` |
+| What the line holds | expected aud, token id or hash, client id; never the raw token |
+| Recover | Revoke the client; rotate signing keys if tokens self-verify |
+| Leftover | PKCE / nonce / DPoP not in this practice |
 
-CSF 2.0 Detect / Respond / Recover name outcomes. They do not prove `v5.0.0-10.3.1`. A SIEM product name is not the property. Re-run `test_wrong_audience_is_rejected` after any verifier change; a green OIDC dashboard is not that pytest. Missing `aud` is the same forbidden outcome as `aud=other-api` — do not close one without retesting the other. A leaked token that already has the *correct* audience is 4.1 / sender-constraint residual, not a pass for this metric.
+Industry lists name detect, respond, recover. They do not prove the `aud` comparison. A log-product name is not the rule. Re-run `test_wrong_audience_is_rejected` after any verifier change; a green OpenID dashboard is not that pytest. Missing `aud` is the same forbidden outcome as `aud=other-api` — do not close one without retesting the other. A leaked token that already has the *correct* audience is leftover (revocation / sender-constraint), not a pass for this metric.
 
-## Framework defaults versus the operate guarantee
+## What the framework does vs what you still have to check
 
-An IdP will page on failed logins and stay silent when this API accepts `aud=other-api`. Detection must observe the **resource-server comparison**, not the IdP tile. If the alert includes a raw JWT, you have opened a 4.3 / 3.1 cell.
+An identity provider will page on failed logins and stay silent when this API accepts `aud=other-api`. Notice must observe the **resource-server comparison**, not the identity-provider tile. If the alert includes a raw JWT, you have opened a leak.
 
 ## Practice
 
@@ -39,12 +38,12 @@ Write one log line you would accept. Tie it to `labs/4.5/4.5-lab`.
 log_denied reason=jwt_aud_mismatch expected_aud=securecollab-api client_id=sc_web request_id=req_45oa
 ```
 
-Reject any line that includes a raw JWT, a note body, or “OIDC handled.”
+Reject any line that includes a raw JWT, a note body, or “OpenID Connect handled.”
 
-## Transfer
+## Use it somewhere new
 
-Clinic: detect FHIR tokens with the wrong hospital aud; do not paste the token into the ticket. Do not query a live FHIR server.
+Clinic: notice FHIR tokens with the wrong hospital aud; do not paste the token into the ticket. Do not query a live FHIR server.
 
-## Non-goals
+## What this page is not doing
 
-SIEM product names are not the property. Live IdP audits are out of scope. Gates 0–10 stay not-attempted.
+A log-product name is not the rule. Live identity-provider audits are out of scope. Course gates stay unclaimed.

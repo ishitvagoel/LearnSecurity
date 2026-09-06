@@ -1,27 +1,25 @@
-# 4.1-LO-07 — Transfer: departing clinician
+# Same idea when a clinician leaves
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** NIST SP 800-63-4 (final); OWASP ASVS 5.0.0 (final) `v5.0.0-7.4.2`.
 
-## Change the workplace; keep artifact-must-die
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: after `delete_user("alice")`, `session_valid("alice")` is false. Rewrite it for a clinic offboard without changing the fork.
+The notes-app scaffolding goes away. You get a **clinic offboard**. A badge system and a browser session sit next to each other. Your job is to rewrite the loop, not to name a bug-list code.
 
-**Prompt:** Clinic: departing clinician.
+The notes-app sentence was: after `delete_user("alice")`, `session_valid("alice")` is false. Rewrite it for a clinician leaving without changing the fork: leftover must die in the same delete.
 
-**Product sketch:** EHR-lite with a badge system and a browser session.
+## Picture: badge off is not session off
 
-Rewrite the SecureCollab sentence. Include:
+Renaming “alice” to “clinician” is not transfer. The leftover changes. Disabling the badge does not authorize leaving the chart cookie alive. A logout product name is not the pytest.
 
-1. attacker capabilities (copied cookie; shared workstation; delayed lab-result worker — **not** a live clinic or IdP);
-2. trust assumptions (which delete use-case is TCB; badge vendor is not);
-3. forbidden outcome (`session_valid` true after offboard, not “HIPAA”);
-4. a test idea on a **local** fixture only (`delete_user` analogue then `session_valid` false);
-5. residual (backups; mobile cache; JWT exp; worker `user_id`);
-6. WCAG 2.2 if a human-mediated recovery/offboard path is in the claim (usable “you are signed out” status — Success Criterion 4.1.3).
-
-## Mental model: badge off is not session off
+| Notes app this week | Clinic sketch |
+|---|---|
+| `alice` session cookie | Chart browser cookie |
+| `delete_user` | Offboard analogue |
+| `session_valid` after delete | Chart session still valid after badge off |
+| Ex-employee with copied cookie | Copied cookie; shared workstation |
+| Delayed worker holding `user_id` | Delayed lab-result worker — **not** a live clinic |
 
 ```mermaid
 flowchart LR
@@ -30,22 +28,33 @@ flowchart LR
   Offboard[delete_user analogue] --> Cookie
 ```
 
-If offboard only hits the badge, the chart cookie still reads. 800-63-4 separates identifiers, authenticators, and session; this transfer still owns the session artifact. SLO as a brand is not the pytest. FastAPI, SessionMiddleware, and a badge vendor webhook do not pop `SESSIONS["alice"]`. A delayed lab-result worker that still holds `user_id` is 7.4 — name it as residual, do not pretend the EHR cookie test covers it.
+If offboard only hits the badge, the chart cookie still reads. Identity guidance separates identifiers, authenticators, and session. The session leftover is still the point. FastAPI, SessionMiddleware, and a badge vendor webhook do not pop `SESSIONS["alice"]`. A delayed lab-result worker that still holds `user_id` is later work — name it as leftover. Do not pretend the chart-cookie test covers it.
 
-## What graders reject
+## Prompt — departing clinician
+
+Rewrite the notes-app sentence. Include:
+
+1. who can act (copied cookie; shared workstation; delayed lab-result worker — **not** a live clinic or identity provider);
+2. what you trust (which delete path is trusted; the badge vendor is not);
+3. what must not happen (`session_valid` true after offboard, not a legal label);
+4. a test idea on **local** files only (`delete_user` analogue then `session_valid` false — never on the real clinic);
+5. leftover (backups; phone cache; token `exp`; worker `user_id`);
+6. whether a human-read “you are signed out” status must not use color as the only cue.
+
+## What is not good enough
 
 | Reject | Why |
 |---|---|
-| “SSO will revoke” without a test | Mechanism theater |
-| Live clinic IdP | Lab policy |
-| Profile DELETE as the property | Artifact still live |
-| HIPAA as the oracle | Legal label, not this pytest |
+| “Single sign-on will revoke” without a test | Tool theater |
+| Live clinic identity provider | Course rules |
+| Profile DELETE as the rule | Leftover still live |
+| A legal label as the check | Awareness, not this pytest |
 | HTTP 200 as lifecycle evidence | Wrong observation |
 
 ## Practice
 
-One page. No keys. `labs/4.1/4.1-lab` is the only running system you may break. Do not disable a real badge or replay an EHR cookie.
+One page. No answer keys. The only running system you may break is `labs/4.1/4.1-lab`. Do not disable a real badge or replay a chart cookie.
 
-## Non-goals
+## What this page is not doing
 
-Live-target token replay. Real HR exports. Claiming Gate 4 from this page.
+Live-target token replay. Real HR exports. Claiming a course gate from this page.

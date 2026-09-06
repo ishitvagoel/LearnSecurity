@@ -1,85 +1,86 @@
-# 4.4-LO-01 — A grant on n1 is not a grant on n2
+# A grant on note 1 is not a grant on note 2
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** Saltzer and Schroeder (1975, seminal) complete mediation and fail-safe defaults; OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.1`, `v5.0.0-8.2.2`, `v5.0.0-8.3.1`, `v5.0.0-8.4.1`; `v5.0.0-8.3.2` and `v5.0.0-8.3.3` are **Level 3, advanced**. OWASP API Security Top 10:2023 API1/API3/API5 are **awareness** after the matrix, not the syllabus.
 
-## The claim this module owns
+## The rule
 
-SecureCollab Phase 1 stores notes in tenants. Bob has a share grant on `n1` in tenant `acme`. That grant is a 1.2 cell: `(bob, read, n1)`. It is not `(bob, read, n2)` and it is not `(bob, read, n3)` in tenant `clinic`. Login plus “shared something” is ambient authority. A FastAPI `Depends(get_user)` is authentication, not authorization.
+The notes app stores notes per company. Bob has a share on note `n1` in company `acme`. That share is one row: Bob may read `n1`. It is not a yes for `n2`. It is not a yes for `n3` in company `clinic`. Being signed in and “having shared something” is leftover permission. A FastAPI `Depends(get_user)` answers who is speaking. It does not answer whether this note may be read.
 
-> After seed, `can_read("bob", "n2")` must be false. `can_read("alice", "n3")` must be false even though alice owns notes. `can_read("eve", "n1")` must be false even though eve’s role is `admin`. UUID obscurity is not a grant. RBAC, ABAC, ReBAC, and capabilities are policy *shapes*; the property is the cell.
+> After seed, `can_read("bob", "n2")` must be false. `can_read("alice", "n3")` must be false even though Alice owns notes. `can_read("eve", "n1")` must be false even though Eve’s role is `admin`. A hard-to-guess id is not a grant. Roles, attributes, relationship graphs, and capability tokens are shapes for writing the table. The rule is still the cell: this person, this action, this note, this company.
 
-The forbidden outcome is **grant on n1 authorizes n2**, plus the sibling **role or owner costume crosses tenants**. That is a 1.1 confidentiality failure because 1.2 never ran on the requested object.
+What must not happen is **a grant on n1 authorizes n2**, plus the sibling **owner or admin costume that walks into another company**. That is a secrecy failure because who-is-allowed never ran on the requested object.
 
-ASVS `v5.0.0-8.2.1` wants function permissions; `v5.0.0-8.2.2` wants data-item permissions; `v5.0.0-8.3.1` wants enforcement at a trusted service layer, not the Next.js client. `v5.0.0-8.4.1` wants cross-tenant controls so operations never affect another tenant. `v5.0.0-8.3.2` (apply grant changes immediately) and `v5.0.0-8.3.3` (originating subject through a worker) are **Level 3 (advanced)** — not a silent baseline. API1/API3/API5 name broken object, property, and function authorization as awareness regression after this matrix exists.
+Industry checklists want function permissions and data-item permissions, checked on a trusted server, not in the Next.js client. They also want work never to hit another company’s rows. Extra rows about applying grant changes immediately, and carrying the original person through a worker, are advanced — not this week’s pytest. Famous “broken object / property / function” lists are a later awareness check after this table exists. They are not the syllabus.
 
-## Mental model: collection flag vs object-keyed grant
+## Picture: a collection flag vs a grant on this note
+
+Treat leftover permission as a boolean that says “Bob has a share somewhere,” then treats that as a yes for every note.
 
 ```mermaid
 flowchart TD
   Req["GET /notes/n2 as bob"] --> Flag{"bob has any grant?"}
-  Flag -->|yes ambient| Leak["n2 body released"]
+  Flag -->|yes leftover| Leak["n2 body released"]
   Flag -->|no| Lookup{"GRANTS bob n2?"}
   Lookup -->|yes| Ok["Allow n2"]
   Lookup -->|no| Deny["Deny"]
 ```
 
-The attacker is a member with a real grant on `n1` who swaps `note_id`, or an enumerator of ids. Trusting “they are a collaborator” as a boolean is not a TCB.
+Who can act here: a member with a real grant on `n1` who swaps `note_id`, or someone guessing ids. Trusting “they are a collaborator” as a boolean is not what you trust.
 
-**Mechanism (not the property):** Casbin, OPA, RLS, or a signed note id.
+**A tool is not the rule.** Casbin, OPA, a database row rule, or a signed note id.
 
-## Mental model: tenant is a second key, not a role costume
+## Picture: company is a second key, not a costume
 
 ```mermaid
 flowchart LR
-  Subject[bob or eve] --> Tenant{"principal tenant equals note tenant?"}
+  Subject[bob or eve] --> Tenant{"person's company equals note's company?"}
   Tenant -->|no| Cross["Deny even if owner or admin"]
   Tenant -->|yes| Object{"owner or grant on this note_id?"}
   Object -->|no| Deny2[Deny]
   Object -->|yes| Allow[Allow]
 ```
 
-Module 3.3 adds a database role as a *second* mediation. This module’s table is still required. A clinic admin named `eve` is not an acme capability.
+A later database-role check is a *second* gate. This table is still required. A clinic admin named Eve is not an `acme` capability.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | For this property |
+| Slice | For this rule |
 |---|---|
-| Root cause | Collection-level “has any grant” flag, or a role string treated as a grant |
-| Preconditions | `can_read(bob, n2)` true because bob has n1; or owner/admin ambient |
-| Trigger | Client-supplied `note_id` or guessed UUID |
-| Impact | Confidentiality of n2 / clinic notes; 1.2 cell missing |
-| Prevention | Deny-by-default lookup `(subject, tenant, note_id)` on every path |
-| Detection | `authz_deny` by object and tenant; grant-table drift |
-| Recovery | Revoke the ambient flag; audit bob’s reads of n2 |
+| Why it happens | A collection-level “has any grant” flag, or a role string treated as a grant |
+| What has to be true first | `can_read(bob, n2)` is true because Bob has n1; or owner/admin leftover |
+| Trigger | Client-supplied `note_id` or a guessed id |
+| What it costs | Secrecy of n2 / clinic notes; the who-is-allowed cell never ran |
+| How you stop it | Deny-by-default lookup `(person, company, note_id)` on every path |
+| How you notice | A deny count by object and company; grant-table drift |
+| How you recover | Take back the leftover flag; audit Bob’s reads of n2 |
 
-## Framework defaults versus the grant guarantee
+## What the framework does vs what you still have to check
 
-`Depends(get_user)` is not `Depends(can_read_note)`. Starlette, Next.js middleware, and “the user is logged in” do not key the grant. PostgreSQL RLS waits for 5.5 and does not replace this cell. Oracle: `labs/4.4/4.4-lab`. No live tenant.
+`Depends(get_user)` is not `Depends(can_read_note)`. Starlette, Next.js middleware, and “the user is logged in” do not key the grant. A later PostgreSQL row-level rule does not replace this cell. The app’s promise is this lookup. The local folder is `labs/4.4/4.4-lab`. No live company.
 
-## Mechanism limits
+## What the tool cannot do
 
-- UUID obscurity is not a grant.
-- GraphQL `node(id)`, export zip, search index (2.2), workers (7.4) are other paths of the same cell.
-- Property-level title-vs-body is 7.2; this lab is object + tenant.
-- Honest grant on n1 still reveals n1 — that is the product.
+- A hard-to-guess id is not a grant.
+- GraphQL `node(id)`, an export zip, a search index, and workers are other paths of the same cell.
+- Title vs body is a later field-level topic. This week is object plus company.
+- An honest grant on n1 still reveals n1 — that is the product.
 
 ## Practice
 
-Name subject, tenant, object, and action. Then run:
+Name person, company, object, and action. Then run:
 
-```
+```text
 python3 -m pytest labs/4.4/4.4-lab/tests --impl vulnerable
 python3 -m pytest labs/4.4/4.4-lab/tests --impl fixed
 ```
 
-The first command must fail on the deny tests. The second must pass. Map failures to `can_read("bob", "n2")`, not to “IDOR.”
+The first command must fail on the deny tests. The second must pass. Map failures to `can_read("bob", "n2")`, not to a scanner bug name.
 
-## Transfer
+## Use it somewhere new
 
-Clinic: grant on appointment A is not a grant on chart B.
+Clinic: a grant on appointment A is not a grant on chart B.
 
-## Non-goals
+## What this page is not doing
 
-Live tenants, real charts, weaponized id enumerators, Top 10 as the definition of the cell. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner or product evidence. Answer keys are not in this file.
+Live companies, real charts, weaponized id guessing, or a famous-bugs list as the definition of the cell. Course gates stay unclaimed without learner or product evidence. Answer keys are not in this file.

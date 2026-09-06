@@ -1,34 +1,33 @@
-# 4.3-LO-01 — A query-string token is not a session
+# A token in the URL is not a session
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-14.2.1` (no sensitive data in URL/query), `v5.0.0-3.4.5` (Referrer-Policy), `v5.0.0-3.3.4` (HttpOnly session cookies; 2.3). JWT is a token *format*, not an architecture.
 
-## The claim this module owns
+## The rule
 
-SecureCollab Phase 1 carries a session after 4.2. That artifact must not appear in the URL. Query strings land in access logs, Referer to third parties, screenshots, and browser history. TLS does not stop those copies. Cookie (HttpOnly, 2.3) or `Authorization` is the channel; `?access_token=` is not.
+The notes app already carries a session from the last lesson. That session must not appear in the URL. Query strings land in access logs, in the Referer header sent to other sites, in screenshots, and in browser history. TLS encrypts the hop. It does not stop those copies. A cookie marked HttpOnly, or an `Authorization` header, is an acceptable channel. `?access_token=` is not.
 
-> `session_from_request({"access_token": "secret"}, {}, None)` must return `None`. A session may come from cookie `sc_session` or an Authorization header. Uvicorn access logs will store query strings (3.1 / 4.3). A JWT in localStorage is a different leak (2.3 script-readable).
+> `session_from_request({"access_token": "secret"}, {}, None)` must return `None`. A session may come from the cookie `sc_session` or from an Authorization header. Uvicorn access logs will store query strings. A JWT sitting in localStorage is a different leak: scripts can read it.
 
-The forbidden outcome is **session established from a query-string token**. That is a 1.1 confidentiality failure of the session secret, then 1.2 as whoever holds the URL.
+What must not happen is a **session started from a query-string token**. The session secret is no longer secret. Anyone who can see the URL can then act as that person.
 
-ASVS `v5.0.0-14.2.1` wants secrets in body or headers, not the URL. `v5.0.0-3.4.5` wants a referrer policy so path and query do not leak. `v5.0.0-3.3.4` wants HttpOnly for script-inaccessible session cookies. OAuth implicit-in-URL is obsolete; copying it is not ASVS.
+Industry checklists want secrets in the body or headers, not in the URL. They want a referrer policy so path and query do not leak to other sites. They want HttpOnly for session cookies that scripts cannot read. Putting an OAuth token in the URL the old implicit-grant way is obsolete. Copying that pattern is not those checklists.
 
-## Mental model: the URL is a postcard
+## Picture: the URL is a postcard
 
 ```mermaid
 flowchart TD
-  Url["GET /notes?access_token=secret"] --> Log["Access log - 3.1 sink"]
+  Url["GET /notes?access_token=secret"] --> Log["Access log"]
   Url --> Referer["Referer to CDN or analytics"]
   Url --> Hist[Browser history]
   Url --> Shot[Screenshot or chat paste]
 ```
 
-The attacker is a log operator, a Referer collector, or a shared screenshot — not a novel JWT CVE.
+The person who can hurt you here is a log operator, a Referer collector, or someone with a shared screenshot — not a brand-new JWT bug.
 
-**Mechanism (not the property):** “we use JWTs,” NextAuth, or a blog titled SPA best practice 2016.
+**A tool is not the rule.** “We use JWTs,” NextAuth, or a blog titled SPA best practice 2016.
 
-## Mental model: three channels, one deny
+## Picture: three channels, one deny
 
 ```mermaid
 flowchart LR
@@ -37,45 +36,45 @@ flowchart LR
   Header["Authorization"] --> Allow
 ```
 
-2.3 already separated cookie-jar sending from script readability. This module adds: the jar (or header) is acceptable; the query string is not.
+The cookie lesson already separated cookie-jar sending from script readability. This page adds: the jar (or the header) is acceptable; the query string is not.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | For this property |
+| Slice | For this rule |
 |---|---|
-| Root cause | Token placed in a logged, shared channel |
-| Preconditions | `session_from_request` prefers query |
+| Why it happens | Token placed in a logged, shared channel |
+| What has to be true first | `session_from_request` prefers query |
 | Trigger | Link clicked, logged, or referred |
-| Impact | Confidentiality of the session artifact |
-| Prevention | Ignore query tokens; Cookie or Authorization only |
-| Detection | `query_token_rejected`; log-redact gateway |
-| Recovery | Revoke the leaked token; purge logs (3.1) |
+| What it costs | The session secret is no longer secret |
+| How you stop it | Ignore query tokens; cookie or Authorization only |
+| How you notice | `query_token_rejected`; a log-redact gateway |
+| How you recover | Revoke the leaked token; purge logs |
 
-## Framework defaults versus the channel guarantee
+## What the framework does vs what you still have to check
 
-FastAPI will bind query params. Next.js router will put them in the address bar. TLS encrypts the hop, not the log. The lab guarantee: query-only requests yield `None`; cookie/header still work. Oracle: `labs/4.3/4.3-lab`. No live CDNs.
+FastAPI will bind query params. Next.js router will put them in the address bar. TLS encrypts the hop, not the log. The app’s promise: a query-only request yields `None`; cookie and header still work. The folder is `labs/4.3/4.3-lab`. No live CDNs.
 
-## Mechanism limits
+## What the tool cannot do
 
-- Magic-link email is still a URL token — time-bound, one-use (6.6), not a standing session.
-- Referer on first-party navigations — strip on outbound.
-- Header tokens in CORS misconfig (E2).
+- A magic-link email is still a URL token — short-lived, one-use, not a standing session.
+- Referer on first-party navigations — strip it on the way out.
+- Header tokens leaking through a CORS misconfig (later).
 
 ## Practice
 
 Name the channel and the deny rule. Then run:
 
-```
+```text
 python3 -m pytest labs/4.3/4.3-lab/tests --impl vulnerable
 python3 -m pytest labs/4.3/4.3-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Map the assertion to query `access_token`, not to a JWT library name.
+The first command must fail. The second must pass. Tie the check to query `access_token`, not to a JWT library name.
 
-## Transfer
+## Use it somewhere new
 
-Clinic appointment deep link. Magic-link email (6.6).
+Clinic appointment deep link. Magic-link email (still a URL token — later you exchange it).
 
-## Non-goals
+## What this page is not doing
 
-Live token replay, real session cookies, weaponized Referer harvesting. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner or product evidence. Answer keys are not in this file.
+Live token replay, real session cookies, weaponized Referer harvesting. Course gates stay unclaimed without learner or product evidence. Answer keys are not in this file.

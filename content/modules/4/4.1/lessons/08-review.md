@@ -1,54 +1,59 @@
-# 4.1-LO-08 — Review leftover session as a PR, not an HR ticket
+# Review of a leftover session after delete
 
 **Kind:** code-review
 **Loop step:** Review
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-7.4.2`. NIST SP 800-63-4 (final) as lifecycle vocabulary, not an SSO product.
 
-## Review the fixture as if it were SecureCollab offboarding
+Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
 
-Review `labs/4.1/4.1-lab/vulnerable/` as a SecureCollab PR. Your job is not to count suspicious lines. Reconstruct whether `session_valid("alice")` is still true after `delete_user`, compare that with the module invariant, and write changes a developer can verify.
+## What you are reviewing
 
-Intended findings live only in `content/assessment/keys/4.1.md` — not here. Do not open the keys file until your review has been evaluated.
+A colleague ships notes-app offboarding. Your job is to label each claim **rule**, **tool**, or **false comfort**, and to say whether `session_valid("alice")` is still true after `delete_user` if they ship. Start at the leftover session after delete, not at a scanner color or an HR ticket.
 
-## Mental model: DELETE FROM users without session purge
+The folder `labs/4.1/4.1-lab/vulnerable/` is the change. The check you already ran (`test_deleted_user_session_is_dead`) is the rule test. A comment “will revoke sessions later” is not.
 
-Start with this seeded smell: **`DELETE FROM users` without session purge**. Label it property, mechanism, or false assurance before you accept the PR.
+## Picture: problems to find (name them yourself)
+
+Start with this seeded smell: **`DELETE FROM users` without session purge**. Label it rule, tool, or false comfort before you accept the change.
 
 ```mermaid
 flowchart TD
-  Claim[PR claim] --> Q{"What would falsify it?"}
-  Q -->|"session_valid true after delete"| Property["Property - good if tested"]
-  Q -->|"we emailed them"| Mechanism[Mechanism - no revoke]
-  Q -->|"SSO is on"| False[False assurance]
+  Claim[PR claim] --> Q{"What would show it is false?"}
+  Q -->|"session_valid true after delete"| Property["Rule - good if tested"]
+  Q -->|"we emailed them"| Mechanism[Tool - no revoke]
+  Q -->|"single sign-on is on"| False[False comfort]
 ```
 
-Classification starts at the protected effect (session dead after delete). Everything that is not artifact kill in that use-case is a candidate ambient path.
+The review starts at the protected effect (session dead after delete). Everything that is not leftover-kill in that same delete is a candidate extra path.
 
 ## Seeded smells (label them yourself)
 
 - `DELETE FROM users` without session purge
-- JWT `exp` 30d ignored on delete
+- Token `exp` 30d ignored on delete
 - Worker still has `user_id`
 - No test `session_valid` after delete
 
-Also reject: client trust; closing findings without re-running `test_deleted_user_session_is_dead`; keys in lessons; real PII in fixtures; production cookies in the review notes.
+Also reject: trusting the browser as the vault; closing findings without re-running `test_deleted_user_session_is_dead`; keys in learner notes; real people's data in the practice files; production cookies in the review notes.
 
-## Misconceptions this module refuses
+## Common mix-ups
 
 - Disable login is enough
-- SSO magically revokes
+- Single sign-on magically revokes
 - Deleted means gone from backups
 - SessionMiddleware knows HR
-- An “account deleted” email is `v5.0.0-7.4.2`
+- An “account deleted” email is the kill
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: observation, property or false assurance, suggested structural change, residual you will **not** delete. Tie at least one to `test_deleted_user_session_is_dead`.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_deleted_user_session_is_dead`. Do not open the keys file.
 
-## Transfer
+## Use it somewhere new
 
-Clinic PR that “disables the badge” without killing the EHR session is an incomplete mediation review. Name the independent falsehood that would still keep `session_valid` false after offboard.
+Clinic change that “disables the badge” without killing the chart session is an incomplete review of leftover access. Name the independent falsehood that would still keep `session_valid` false after offboard.
 
-## Non-goals
+## Can people still use it
 
-Do not merge by adding a comment “will revoke sessions later.” That comment is a residual without an owner. Do not replay a live cookie to prove the finding.
+If the dashboard shows a signed-out badge, do not encode it as color only. That is a cue for operators, not the kill.
+
+## What this page is not doing
+
+Do not merge by adding a comment “will revoke sessions later.” That comment is leftover without an owner. Do not replay a live cookie to prove the finding.

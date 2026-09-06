@@ -1,51 +1,54 @@
-# 4.5-LO-07 — Transfer: wrong-aud FHIR token and native redirect
+# Same idea on a wrong-audience FHIR token
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** RFC 8252 (final); RFC 10017 (final, August 2026); OWASP ASVS 5.0.0 (final) `v5.0.0-10.3.1` and `v5.0.0-10.1.1`. OAuth 2.1 remains **draft**.
 
-## Change the workplace; keep audience-must-match
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: `accept_token(..., "other-api")` is false. Rewrite it for a clinic FHIR RS without changing the fork.
+The notes-app scaffolding goes away. You get a **clinic FHIR resource server**. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: `accept_token` is false for `aud=other-api`. Rewrite it for a clinic FHIR resource server without changing the fork.
 
-**Prompt:** Clinic: wrong-aud FHIR token. Also name RFC 8252 native redirect vs SPA/BFF storage.
+**Prompt:** Clinic: wrong-audience FHIR token. Also name native redirect (claimed HTTPS, not a custom scheme) vs browser vs backend-for-frontend storage.
 
 **Product sketch:** EHR-lite that accepts SMART-on-FHIR-shaped access tokens.
 
-Rewrite the SecureCollab sentence. Include:
+Rewrite the notes-app sentence. Include:
 
-1. attacker capabilities (token minted for another hospital API; stolen SPA token; malicious native app claiming a custom scheme — **not** a live clinic);
-2. trust assumptions (which RS `aud` check is TCB; the vendor “OIDC dashboard” is not);
-3. forbidden outcome (`accept_token` true for `other-hospital-fhir`, not “HIPAA”);
-4. a test idea on a **local** fixture only (wrong aud and missing aud deny);
-5. residual (PKCE, mix-up, DPoP Level 3, 4.4 object grants, 8.3 WebView);
-6. WCAG 2.2 if a human consent screen is in the claim (usable consent, not a mouse-only approve).
+1. who can act (token minted for another hospital API; stolen browser token; malicious phone app claiming a custom scheme — **not** a live clinic);
+2. what you trust (which resource-server `aud` check is trusted; the vendor “OpenID dashboard” is not);
+3. what must not happen (`accept_token` true for `other-hospital-fhir` — not a privacy-law name);
+4. a test idea on a **local** practice only (wrong aud and missing aud deny);
+5. leftover (PKCE, mix-up, DPoP advanced, object grants, WebView);
+6. whether a human consent screen must meet the web accessibility baseline (usable consent, not a mouse-only approve).
 
-## Mental model: hospital name in aud, not in the TLS certificate
+## Picture: hospital name in aud, not in the TLS certificate
 
 ```mermaid
 flowchart LR
-  Token["aud other-hospital"] --> EHR[This clinic RS]
+  Token["aud other-hospital"] --> EHR[This clinic resource server]
   Check{"aud equals this FHIR API?"} -->|no| Deny[Deny]
-  Native[Custom scheme] --> Intercept[Malicious app - RFC 8252 residual]
+  Native[Custom scheme] --> Intercept[Malicious app - leftover]
 ```
 
-TLS on the hop does not name the audience. Authlib signature-ok does not compare hospital ids. A custom URI scheme is an RFC 8252 residual, not a silent pass. SPA-held access tokens are `v5.0.0-10.1.1` (prefer BFF). OAuth 2.1 is still draft — do not cite it as the property.
+TLS on the hop does not name the audience. Authlib signature-ok does not compare hospital ids. A custom URI scheme is leftover, not a silent pass. Browser-held access tokens are leftover (prefer a backend-for-frontend). OAuth 2.1 is still a draft — do not cite it as the rule.
 
-## What graders reject
+## What is not good enough
 
 | Reject | Why |
 |---|---|
-| “We use OAuth 2.1” as the property | Draft, and not an aud check |
-| Live clinic IdP | Lab policy |
+| “We use OAuth 2.1” as the rule | Draft, and not an aud check |
+| Live clinic identity provider | Course rules |
 | Signature-only verify | Skipped audience |
 | HTTP 200 as audience evidence | Wrong observation |
-| HIPAA as the oracle | Legal label |
+| A privacy-law name as the check | Legal label |
 
 ## Practice
 
 One page. No keys. `labs/4.5/4.5-lab` is the only running system you may break. Do not replay a live FHIR token or register a malicious custom scheme against a real app.
 
-## Non-goals
+## Can people still use it
 
-Live-target token replay. Real patient tokens. Claiming Gate 4 from this page.
+If a human consent screen is in the claim, “approve” must be something keyboard and assistive tech can use, not only a mouse click. A usable consent screen is not the audience check.
+
+## What this page is not doing
+
+Live-target token replay. Real patient tokens. Claiming a course gate from this page.

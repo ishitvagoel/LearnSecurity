@@ -1,55 +1,61 @@
-# 4.4-LO-05 — Evidence is deny on n2 and clinic, then a passing pair
+# Fail on the broken files, then pass on the repaired ones
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.2` and `v5.0.0-8.4.1`.
 
-## An invariant that cannot fail a test is still a slogan
+## If you cannot test it, it is still a slogan
 
-“We have RBAC” is not evidence. “IDs are UUIDs” is a mechanism observation. The oracle is: `can_read("bob", "n2") is False`. That observation must be **false** on `--impl vulnerable` (returns true) and **true** on `--impl fixed`.
+“We have roles” is not evidence. “Ids are hard to guess” is a tool observation. The check is: `can_read("bob", "n2") is False`. That observation must be **false** on the broken files (returns true) and **true** on the repaired files.
 
-## Mental model: vulnerable must fail: n2 and cross-tenant denies
+## Picture: broken must fail the n2 and cross-company denies
 
-The failing observation on `--impl vulnerable` is **n2 and cross-tenant denies**. A passing collection count is not this cell.
+A test that only counts how many grants exist can pass while leftover permission still opens n2. This check asks whether a grant on n1 is allowed to count as a passing control for n2. Broken must fail that question. Repaired must pass it.
 
 ```mermaid
 flowchart LR
-  V["--impl vulnerable"] --> F["Must fail n2 and cross-tenant denies"]
-  X["--impl fixed"] --> P["Must pass the same denies"]
+  V["broken files --impl vulnerable"] --> F["Must fail n2 and cross-company denies"]
+  X["repaired files --impl fixed"] --> P["Must pass the same denies"]
 ```
 
-| Mode | Must show for this module |
+| Mode | Must show for this topic |
 |---|---|
 | Normal | bob×n1 and alice×n2 are true (honest path; may pass on both) |
-| Negative / abuse | bob×n2, alice×n3, eve×n1, eve×n3 are false; vulnerable must fail |
-| Not claimed | Title vs body (7.2); search index; worker; RLS |
+| Wrong input / abuse | bob×n2, alice×n3, eve×n1, eve×n3 are false; broken files must fail |
+| Not claimed | Title vs body; search index; worker; row-level rules |
 
-Lab tests in `labs/4.4/4.4-lab/tests/test_property.py`. `test_grant_on_n1_is_not_grant_on_n2` is a **forbidden-outcome** test: an ambient grant is not allowed to count as a passing control.
+The file is `labs/4.4/4.4-lab/tests/test_property.py`. `test_grant_on_n1_is_not_grant_on_n2` is a **what-must-not-happen** test: leftover permission is not allowed to count as a passing control.
 
 ```text
 python3 -m pytest labs/4.4/4.4-lab/tests --impl vulnerable
 python3 -m pytest labs/4.4/4.4-lab/tests --impl fixed
 ```
 
-Honest-path tests may pass on both implementations. That does not excuse the deny tests. If vulnerable does not fail bob×n2, the lab is miswired—fix the wiring, not the assertion.
+Honest-path tests may pass on both implementations. That does not excuse the deny tests. If the broken files do not fail bob×n2, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
 
 ## What the tests do not prove
 
-- Field-level body vs title (7.2 / `v5.0.0-8.2.3`)
-- Immediate grant revocation (`v5.0.0-8.3.2` Level 3 advanced)
-- Worker originating subject (`v5.0.0-8.3.3` Level 3 advanced)
-- Database role (3.3) or RLS (5.5)
+- Field-level body vs title (later topic)
+- Immediate grant take-back (advanced)
+- Worker originating person (advanced)
+- Database role (earlier second gate) or row-level rules (later)
 
-Record those as residuals or later modules, not as silent passes.
+Record those as leftover or later topics, not as silent passes.
 
 ## Practice
 
-Execute both implementations this session. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `admin` in a role enum without calling `can_read("bob", "n2")`.
+Run both this session:
 
-## Transfer
+```text
+python3 -m pytest labs/4.4/4.4-lab/tests --impl vulnerable
+python3 -m pytest labs/4.4/4.4-lab/tests --impl fixed
+```
 
-Clinic appointment vs chart. A test that only asserts HTTP 200 is not authorization evidence (see 9.3). A test that hits a live EHR is out of scope.
+Write the fail/pass pair next to the table row. Reject a “test” that only greps `admin` in a role list without calling `can_read("bob", "n2")`.
 
-## Non-goals
+## Use it somewhere new
 
-Do not add a live enumerator. Do not log note bodies. Keys stay out of this file.
+Clinic appointment vs chart. A test that only asserts HTTP 200 is not who-is-allowed evidence. A test that hits a live clinic system is out of scope.
+
+## What this page is not doing
+
+Do not add a live id guesser. Do not log note bodies. Answer keys stay out of this file.

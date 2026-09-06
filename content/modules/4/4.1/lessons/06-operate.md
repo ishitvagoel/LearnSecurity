@@ -1,14 +1,17 @@
-# 4.1-LO-06 — Detect session-after-delete; mass-revoke without logging bodies
+# Notice session-after-delete; mass-revoke without logging bodies
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
-**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-7.4.2`. CSF names outcomes; it does not kill the cookie.
 
-## Prevention is not absolute
+## Stopping it is not enough
 
-A replica session store, a refresh token, or a worker can still present `alice` after `delete_user` was “fixed once.” Pair detect and recover. Do not log note bodies (3.1). Do not paste a personal email or a production cookie into the ticket.
+Even after `delete_user` was fixed once, a replica session store, a refresh token, or a worker can still present `alice`. Running it for real is the rest of the loop: notice, contain, mass-revoke, and refuse to “help” by logging note bodies.
 
-## Mental model: alert on use after deleted
+Do not paste a personal email or a production cookie into the ticket. Do not log note bodies.
+
+## Picture: alert on use after deleted
+
+A leftover cookie after delete is a notice-and-recover problem, not a licence to quote notes in the paging channel. Notice names the event. Recover mass-revokes. Neither reprints the body.
 
 ```mermaid
 flowchart TD
@@ -18,37 +21,46 @@ flowchart TD
   Alert --> Revoke[Mass revoke and rotate if JWT]
 ```
 
-| Outcome | This module |
+Industry lists name detect, respond, recover. They do not pick a log product. They do not kill the cookie. Someone still has to own the leftover.
+
+## Signals that do not become a second leak
+
+| Outcome | This topic |
 |---|---|
-| Detect | `session_after_delete`; offboarding checklist (10.1) |
-| Signal | user id, request id; never the body or a real email |
-| Recover | Mass revoke; rotate signing keys if tokens self-verify |
-| Residual | Backups still contain the row (5.1); workers (7.4); mobile cache (8.2) |
+| Notice | `session_after_delete`; offboarding checklist (later) |
+| What the line holds | user id, request id — **never** the body or a real email |
+| Respond | Mass revoke; stop the replica that still has `alice` |
+| Recover | Mass revoke; rotate signing keys if tokens self-verify; re-run `test_deleted_user_session_is_dead` |
+| Leftover | Backups still contain the row; workers; a phone's offline cache |
 
-CSF 2.0 Detect / Respond / Recover name outcomes. They do not prove `v5.0.0-7.4.2`. A SIEM product name is not the property. An “account deleted” email is not recovery. Re-run `test_deleted_user_session_is_dead` after any offboarding change; a green IdP “user disabled” tile is not that pytest. If a replica session store still has `alice`, treat it as the same forbidden outcome, not a separate “eventual consistency” pass.
-
-## Framework defaults versus the operate guarantee
-
-An IdP dashboard will show “user disabled” and stay silent when a self-contained JWT still verifies. Detection must observe **session_valid after deleted**, not the HR ticket. If the alert includes a note body, you have opened a 3.1 cell.
-
-## Practice
-
-Write one log line you would accept. Tie it to `labs/4.1/4.1-lab`.
+A log line a reviewer can accept looks like:
 
 ```text
 log_denied reason=session_after_delete user_id=alice request_id=req_41lc
 ```
 
-Reject any line that includes a note body, a personal email, a production cookie, or “SSO revoked it.”
+Not: a note body, a personal email, a production cookie, or “single sign-on revoked it.”
 
-## Transfer
+If your alert includes a note body, you have opened a second leak in the paging channel.
 
-Clinic: detect EHR use after badge disable; do not paste the chart into the ticket. Do not query a live IdP.
+A green identity-provider tile that says “user disabled” is not that pytest. If a replica session store still has `alice`, treat it as the same leftover session, not a separate “eventual consistency” pass. An “account deleted” email is not recovery.
 
-## Usability
+## What the framework does vs what you still have to check
 
-If operators see a “signed out” badge, do not encode it as color-only (WCAG 2.2 Success Criterion 1.4.1). Announce status (4.1.3) without claiming revocation.
+An identity-provider dashboard will show “user disabled” and stay silent when a self-contained token still verifies. Detection must observe **session_valid after deleted**, not the HR ticket. SessionMiddleware does not emit this alert for you.
 
-## Non-goals
+## Can people still use it
 
-SIEM product names are not the property. Live IdP audits are out of scope. Gates 0–10 stay not-attempted.
+If operators see a “signed out” badge, do not encode it as color only. Give it a name or text a screen reader can speak. The badge is not the kill.
+
+## Practice
+
+Write one log line you would accept in review (ids, reason, no body). Tie it to `labs/4.1/4.1-lab`. Reject any line that includes a note body, a personal email, a production cookie, or “single sign-on revoked it.”
+
+## Use it somewhere new
+
+Clinic: notice chart use after badge disable; do not paste the chart into the ticket. Do not query a live identity provider.
+
+## What this page is not doing
+
+A log-product name is not the rule. Do not run live queries against a production identity provider. Answer keys stay out of lessons.

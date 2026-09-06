@@ -1,56 +1,55 @@
-# 4.5-LO-05 — Evidence is wrong-aud false, then a passing pair
+# Fail on the broken files, then pass on the repaired ones
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-10.3.1`. OAuth 2.1 remains **draft**.
 
-## An invariant that cannot fail a test is still a slogan
+## If you cannot test it, it is still a slogan
 
-“OIDC is configured” is not evidence. “The JWT verifies” is a mechanism observation. The oracle is: `accept_token({"sub": "alice", "aud": "other-api"}, "securecollab-api")` is false. That observation must be **false** on `--impl vulnerable` (returns true) and **true** on `--impl fixed`.
+“OpenID Connect is configured” is not this topic’s evidence. “The JWT verifies” is a tool observation. The check is: `accept_token({"sub": "alice", "aud": "other-api"}, "securecollab-api")` is false. That observation must be **false** on the broken files (returns true) and **true** on the repaired files.
 
-## Mental model: vulnerable must fail: other-api and missing aud
+## Picture: other-api and missing aud must fail
 
-The failing observation on `--impl vulnerable` is **other-api and missing aud**. A passing collection count is not this cell.
+A test that only asserts a library called `verify` can pass while a wrong-audience token still counts as a session. This check asks whether a token for another API still counts as a passing control. Broken must fail that question. Repaired must pass it.
 
 ```mermaid
 flowchart LR
-  V["--impl vulnerable"] --> F["Must fail other-api and missing aud"]
-  X["--impl fixed"] --> P["Must pass the same denies"]
+  V["broken files"] --> F["Must fail: other-api and missing aud"]
+  X["repaired files"] --> P["Must pass the same denies"]
 ```
 
-| Mode | Must show for this module |
+| Mode | Must show for this topic |
 |---|---|
 | Normal | expected `aud` is true (may pass on both) |
-| Negative / abuse | `aud=other-api` and missing `aud` are false; vulnerable must fail |
-| Not claimed | PKCE; JWKS; DPoP; 1.2 on notes |
+| Wrong input / abuse | `aud=other-api` and missing `aud` are false; broken files must fail |
+| Not claimed | PKCE; JWKS; DPoP; who-is-allowed on notes |
 
-Lab tests in `labs/4.5/4.5-lab/tests/test_property.py`. `test_wrong_audience_is_rejected` is a **forbidden-outcome** test: a wrong-aud token accepted as a session is not allowed to count as a passing control.
+Lab tests in `labs/4.5/4.5-lab/tests/test_property.py`. `test_wrong_audience_is_rejected` is a **what-must-not-happen** test: a wrong-audience token accepted as a session is not allowed to count as a passing control.
 
 ```text
 python3 -m pytest labs/4.5/4.5-lab/tests --impl vulnerable
 python3 -m pytest labs/4.5/4.5-lab/tests --impl fixed
 ```
 
-The honest expected-aud test may pass on both. That does not excuse the deny tests. If vulnerable does not fail other-api, the lab is miswired—fix the wiring, not the assertion.
+The honest expected-aud test may pass on both. That does not excuse the deny tests. If the broken files do not fail other-api, the lab is miswired — fix the wiring, not the check. An environment error is not security evidence.
 
 ## What the tests do not prove
 
-- PKCE / `state` / `nonce` (`v5.0.0-10.1.2`, `v5.0.0-10.2.1`)
-- BFF token confinement (`v5.0.0-10.1.1`)
-- Sender-constrained tokens (`v5.0.0-10.3.5` Level 3 advanced)
-- Note authorization (4.4)
-- Native redirect safety (RFC 8252 / 8.3)
+- PKCE / `state` / `nonce`
+- Backend-for-frontend token confinement
+- Sender-constrained tokens (advanced)
+- Note authorization (who-is-allowed)
+- Native redirect safety (claimed HTTPS, not a custom scheme)
 
-Record those as residuals or later modules, not as silent passes.
+Record those as leftover or later topics, not as silent passes.
 
 ## Practice
 
-Execute both implementations this session. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `verify` in an Authlib call without comparing `aud`.
+Run both this session. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `verify` in an Authlib call without comparing `aud`.
 
-## Transfer
+## Use it somewhere new
 
-Clinic FHIR. A test that only asserts HTTP 200 is not audience evidence (see 9.3). A test that hits a live IdP is out of scope.
+Clinic FHIR. A test that only asserts HTTP 200 is not audience evidence. A test that hits a live identity provider is out of scope.
 
-## Non-goals
+## What this page is not doing
 
-Do not add a live token. Do not paste JWTs into tickets. Keys stay out of this file.
+Do not add a live token. Do not paste JWTs into tickets. Answer keys stay out of this file.

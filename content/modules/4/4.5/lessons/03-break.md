@@ -1,18 +1,27 @@
-# 4.5-LO-03 — Observe the skipped audience, do not trophy a JWT
+# Practice: a JWT with the wrong audience is accepted
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-10.3.1`; IETF RFC 9700 / BCP 240 (final). OAuth 2.1 remains an **Internet-Draft**.
 
-## Authorized scope
+## Try it
 
-`labs/4.5/4.5-lab` only. The fixture is an in-process `accept_token`. Synthetic claims. It does not open an IdP or verify a real signature. Do not replay a production access token, an employer OIDC tenant, or a classmate Auth0 app.
+The practice is not a website you attack. It is a tiny in-process `accept_token`. Fake claims. It does not open an identity provider or check a real signature. You are here to see that a JWT minted for another API still counting as a notes-app session is a **failed rule**, not a trophy dump of a production token.
 
-**Forbidden outcome:** JWT with wrong audience accepted as a SecureCollab session. `accept_token({"sub": "alice", "aud": "other-api"}, "securecollab-api")` is true.
+The rule under test:
 
-Attacker capability in this lab: a bearer minted for another API (confused deputy), or a stolen token whose `sub` looks familiar. Trust assumption: the resource server is supposed to compare `aud` to itself before 1.2. Authlib “verify signature,” Auth0, and “we enabled OIDC” are not in the TCB for this cell.
+> A token for another API is not a notes-app session. `accept_token({"sub": "alice", "aud": "other-api"}, "securecollab-api")` must be false.
 
-## Mental model: sub without aud
+## Where you may practice
+
+Only `labs/4.5/4.5-lab` is in scope. Restore the broken and repaired folders when you are done. Fake claims only.
+
+Do not replay a production access token, an employer OpenID tenant, or a classmate Auth0 app.
+
+What must not happen: a JWT with the wrong audience accepted as a notes-app session. `accept_token({"sub": "alice", "aud": "other-api"}, "securecollab-api")` is true.
+
+Who can act here: a **bearer minted for another API** (confused deputy), or a stolen token whose `sub` looks familiar. What you are supposed to trust: the **resource server compares `aud` to itself** before who-is-allowed. Authlib “verify signature,” Auth0, and “we turned on OpenID Connect” are not what you trust for this cell.
+
+## Picture: sub without aud
 
 ```mermaid
 flowchart TD
@@ -21,13 +30,13 @@ flowchart TD
   Sub -->|no| False[False]
 ```
 
-The vulnerable tree demonstrates **cause** (audience never consulted), not a trophy dump of a production access token. Preconditions: `accept_token` returns true when `sub` is in the dict. You do not need a signed JWT. You must not paste a live one.
+The broken files show **cause** (audience never consulted), not a trophy dump of a production access token. What has to be true first: `accept_token` returns true when `sub` is in the dict. You do not need a signed JWT. You must not paste a live one.
 
-ASVS `v5.0.0-10.3.1` wants the resource server to accept only tokens intended for that service. Signature-ok is a mechanism observation, not that sentence.
+A library saying the signature is fine is a tool observation, not that sentence.
 
-## What to read in the fixture
+## What to look at — cause, not a trophy
 
-`vulnerable/jwt_aud.py` `accept_token` returns true when `sub` is in the dict. Tests:
+Read `vulnerable/jwt_aud.py`. `accept_token` returns true when `sub` is in the dict. Checks:
 
 - `test_wrong_audience_is_rejected`
 - `test_missing_audience_is_rejected`
@@ -35,25 +44,25 @@ ASVS `v5.0.0-10.3.1` wants the resource server to accept only tokens intended fo
 
 You do not need a new `aud` string. The failure of `test_wrong_audience_is_rejected` *is* the evidence.
 
-Do not open the fixed tree yet. Diagnose the cause first.
+Do not open the repaired files yet. Diagnose the cause first.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | This lab |
+| Slice | This practice |
 |---|---|
-| Required property | Token for `other-api` is not a SecureCollab session |
-| Root cause | Subject (or signature) accepted without audience |
-| Preconditions | `accept_token` ignores `aud` |
+| The rule | Token for `other-api` is not a notes-app session |
+| Why it happens | Subject (or signature) accepted without audience |
+| What has to be true first | `accept_token` ignores `aud` |
 | Trigger | Bearer minted for `other-api` |
-| Impact | Authenticity of audience; then 1.2 as `sub` |
-| Prevention | Exact `aud` match (or constrained list) before 1.2 |
-| Detection | `jwt_aud_mismatch` |
-| Recovery | Revoke client; rotate keys if tokens self-verify |
+| What it costs | Authenticity of the audience; then who-is-allowed as `sub` |
+| How you stop it | Exact `aud` match (or a constrained list) before who-is-allowed |
+| How you notice | `jwt_aud_mismatch` |
+| How you recover | Revoke the client; rotate keys if tokens self-verify |
 | Not the lesson | An OAuth product name, OAuth 2.1 as final, or “the JWT verifies” |
 
-## Framework defaults versus the audience guarantee
+## What the framework does vs what you still have to check
 
-Authlib and many JWT libraries verify a signature if you configure a key and skip `aud`. Next.js middleware that “has a Bearer” is not `v5.0.0-10.3.1`. The application guarantee is: **this** fixture, wrong `aud` → false.
+Authlib and many JWT libraries will check a signature if you give them a key and skip `aud`. Next.js middleware that “has a Bearer” is not an audience check. The app’s promise is: **this** practice, wrong `aud` → false.
 
 ## Practice
 
@@ -63,10 +72,10 @@ python3 -m pytest labs/4.5/4.5-lab/tests --impl vulnerable
 
 Record `test_wrong_audience_is_rejected`. Do not weaken it to “the JWT verifies.” An environment error is not security evidence.
 
-## Transfer
+## Use it somewhere new
 
 Clinic: FHIR token minted for another hospital’s API. Predict without leaving this directory. Do not hit a live FHIR endpoint.
 
-## Non-goals
+## What this page is not doing
 
-No live-target token replay. Synthetic claims only. Do not ship `alg=none` payloads in this file.
+No live-target token replay. Fake claims only. Do not ship `alg=none` payloads in this file.

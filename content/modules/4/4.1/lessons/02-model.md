@@ -1,32 +1,33 @@
-# 4.1-LO-02 — A lifecycle a second engineer can test
+# A lifecycle someone else can test
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** NIST SP 800-63-4 (final); OWASP ASVS 5.0.0 (final) `v5.0.0-7.4.2`.
 
-## Can a second engineer name pytest cases from your state machine?
+## Could someone else name the checks?
 
-“We delete the user” is not this lesson. A reviewable model names **account states**, **artifacts that must die**, and **who may offboard**.
+“We delete the user” is not this lesson. A map someone else can test names **account states**, **leftovers that must die**, and **who may offboard**.
 
-SecureCollab Phase 1 freeze: local `SESSIONS` / `DELETED` maps; user `alice`. No live SSO.
+This week's freeze: local `SESSIONS` / `DELETED` maps; user `alice`. No live single sign-on.
 
-## Mental model: every artifact is a row in the matrix
+> After `delete_user("alice")`, `session_valid("alice")` must be false. If a leftover is missing from the map, leftover access appears.
+
+## Picture: every leftover is a row
 
 ```mermaid
 flowchart LR
   Subject[alice] --> Session[Session cookie]
-  Subject --> Refresh["Refresh token - 4.3"]
-  Subject --> Worker["Worker user_id - 7.4"]
-  Subject --> Mobile["Offline cache - 8.2"]
+  Subject --> Refresh["Refresh token - later"]
+  Subject --> Worker["Worker user_id - later"]
+  Subject --> Mobile["Offline cache - later"]
   Delete[delete_user] --> Session
   Delete --> Refresh
   Delete --> Worker
   Delete --> Mobile
 ```
 
-If any arrow is missing, leftover access appears. This lab only executes the session arrow.
+If any arrow is missing, leftover access appears. This week's check only runs the session arrow.
 
-## Mental model: delete is a use-case, not a SQL statement
+## Picture: delete is a path, not a SQL statement
 
 ```mermaid
 flowchart TD
@@ -34,44 +35,48 @@ flowchart TD
   Use --> Mark[Mark deleted]
   Use --> Kill[Invalidate sessions]
   Kill --> Test{session_valid?}
-  Test -->|true| Fail[Property false]
-  Test -->|false| Pass[Property true]
+  Test -->|true| Fail[Rule false]
+  Test -->|false| Pass[Rule true]
 ```
 
-## Step 1: freeze pieces
+Killing the profile row is one step. Killing the session is another. They belong in the **same** delete.
+
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | alice; offboarding admin; stolen-cookie attacker |
-| Objects | profile; session; notes |
+| Who | alice; offboarding admin; stolen-cookie attacker |
+| What | profile; session; notes |
 | Actions | `delete_user`; `session_valid` |
-| Channels | Cookie jar; later worker queue |
-| TCB | Delete use-case that kills sessions |
-| Untrusted | “Login disabled”; SLO email |
-| State / time | Cookie presented after delete |
-| 1.1 cell | Confidentiality over time |
+| Paths | Cookie jar; later a worker queue |
+| What you trust | The delete path that kills sessions |
+| What you do not trust | “Login disabled”; a logout email |
+| Time | Cookie presented after delete |
+| The rule | Notes stay secret after the person is gone |
 
-## Step 2: write cells
+## Step 2: write allow and deny
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
 | alice (active) | notes | read with session | allow |
 | alice (deleted) | notes | read with leftover session | deny |
 | admin | alice | delete | allow (audited) |
-| worker | alice user_id | execute after delete | deny (named 7.4 hole) |
+| worker | alice user_id | execute after delete | deny (named later hole) |
+
+A missing “deleted alice × leftover session × deny” row is how the cookie still reads notes. Write the hole.
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Point at `labs/4.1/4.1-lab` file `lifecycle.py`.
+Draw this map so someone else could name the pytest cases. Point at `labs/4.1/4.1-lab` file `lifecycle.py`. Your artifact is a versioned list (even a table in your notes) with state, leftover, allow or deny, and what would show the deny is false. Fake data only.
 
-## Transfer
+## Use it somewhere new
 
-Clinic departing clinician. Shared workstation cookie.
+Clinic: a clinician leaves. Shared workstation cookie. Disabling the badge does not name the chart session.
 
-## Residual risk
+## What can still go wrong
 
-Backups (5.1); mobile cache (8.2); self-contained JWT until key rotation.
+Backups still contain the user row. A phone's offline cache. A self-contained token until you rotate keys or set a per-user not-before.
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+Do not define security as a famous-bugs list. Do not run this map against a public clinic or a live identity provider. Answer keys stay out of lessons.

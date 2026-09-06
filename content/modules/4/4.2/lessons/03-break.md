@@ -1,76 +1,87 @@
-# 4.2-LO-03 — Observe the password counted as resistant, do not trophy a kit
+# Practice: a password counted as phishing-resistant
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-6.3.3`; WebAuthn Level 3 (**Candidate Recommendation**, not Rec). NIST SP 800-63B-4 (final) distinguishes phishing-resistant authenticators from OTP and passwords.
 
-## Authorized scope
+## Try it
 
-`labs/4.2/4.2-lab` only. The fixture is an in-process `phishing_resistant` classifier. Synthetic origins `https://evil.example` and `https://app.securecollab.test`. It does not open a browser or an authenticator. Do not load a lookalike login page, a public phishing kit, an employer SSO, or a classmate preview as this exercise.
+The practice is not a website you attack. It is a tiny Python helper named `phishing_resistant`. The failure is already in the function: any enrolled method returns true, and origin is ignored. You are here to see that a password at a lookalike origin counted as **resistant** is a failed rule, not a trophy kit.
 
-**Forbidden outcome:** password (or wrong-origin WebAuthn) counted as phishing-resistant. `phishing_resistant("password", EVIL, REAL)` returns true.
+The rule under test:
 
-Attacker capability in this lab: a lookalike origin that can collect a typed secret. That stands in for OTP typed at evil.example, or a WebAuthn assertion requested for the wrong RP ID. Trust assumption: the classifier is supposed to treat shared secrets as **not** resistant, and to fail WebAuthn when origin ≠ expected. A passkey vendor dashboard, `autocomplete=webauthn`, and “we turned on MFA” are not in the TCB for this cell.
+> A password or OTP at a lookalike origin is not phishing-resistant. WebAuthn at the wrong origin must fail.
 
-## Mental model: any enrolled method returns true
+## Where you may practice
+
+Only `labs/4.2/4.2-lab/` is in scope. No other hosts. The helper is in-process. Synthetic origins `https://evil.example` and `https://app.securecollab.test`. It does not open a browser or an authenticator.
+
+Do not load a lookalike login page, a public phishing kit, an employer SSO, or a classmate preview as this exercise.
+
+What must not happen: **password (or wrong-origin WebAuthn) counted as phishing-resistant**. `phishing_resistant("password", EVIL, REAL)` returns true.
+
+Attacker capability in this lab: a lookalike origin that can collect a typed secret. That stands in for OTP typed at evil.example, or a WebAuthn assertion asked for the wrong RP ID. What you are supposed to trust: the helper treats shared secrets as **not** resistant, and fails WebAuthn when origin ≠ expected. A passkey vendor dashboard, `autocomplete=webauthn`, and “we turned on MFA” are not in that set.
+
+## Picture: any enrolled method returns true
 
 ```mermaid
 flowchart TD
   Call["phishing_resistant password, evil, real"] --> Set{"method in password otp webauthn?"}
-  Set -->|yes| True[Returns true - property false]
+  Set -->|yes| True[Returns true — the rule is false]
 ```
 
-The vulnerable tree demonstrates **cause** (shared secret treated as resistant), not a trophy kit against a public site. Preconditions: method is in `{password, otp, webauthn}`; origin is ignored. You do not need a live phishing page. You must not build one.
+The broken files show **cause** (a shared secret treated as resistant), not a trophy kit against a public site. What has to be true first: method is in `{password, otp, webauthn}`; origin is ignored. You do not need a live phishing page. You must not build one.
 
-ASVS `v5.0.0-6.3.3` wants MFA at Level 2. The same requirement’s **Level 3** clause wants a hardware, user-intent, phishing-resistant factor — label that advanced; it is not this pytest.
+A later hardware bar is not this pytest.
 
-## What to read in the fixture
+## What to read in the broken files
 
-`vulnerable/authn.py` returns true for `password`, `otp`, and `webauthn` and ignores origin. Tests:
+`vulnerable/authn.py` returns true for `password`, `otp`, and `webauthn` and ignores origin. Checks:
 
 - `test_password_is_not_phishing_resistant`
 - `test_otp_is_not_phishing_resistant`
 - `test_webauthn_wrong_origin_fails`
-- `test_webauthn_matching_origin_is_resistant` — honest path on the fixed tree
+- `test_webauthn_matching_origin_is_resistant` — honest path on the repaired files
 
 You do not need a new origin string. The failure of `test_password_is_not_phishing_resistant` *is* the evidence.
 
-Do not open the fixed tree yet. Diagnose the cause first.
+Do not open the repaired files yet. Name the cause first.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens vs what it costs
 
-| Slice | This lab |
+| Slice | Practice |
 |---|---|
-| Required property | Password at evil origin is not labeled phishing-resistant |
-| Root cause | Shared secret replayable at the wrong origin |
-| Preconditions | Classifier returns true for password at evil origin |
+| Required rule | A password at the lookalike origin is not labeled phishing-resistant |
+| Why it happens | A shared secret that still works at the wrong site |
+| What has to be true first | The helper returns true for a password at the lookalike origin |
 | Trigger | `phishing_resistant("password", EVIL, REAL)` |
-| Impact | Authenticity of the principal to *this* origin; then 1.2 as the victim |
-| Prevention | Origin/RP ID binding; do not call passwords resistant |
-| Detection | `webauthn_fail_origin`; user report |
-| Recovery | Revoke sessions (4.1); force re-bind authenticators |
+| What it costs | Login is bound to the *wrong* site; the session then acts as the victim |
+| How you stop it | Bind origin / RP ID; do not call passwords resistant |
+| How you notice | `webauthn_fail_origin`; a user report |
+| How you recover | Revoke sessions; force a re-bind of authenticators |
 | Not the lesson | “MFA” as a marketing word, a passkey vendor name, or a live kit |
 
-## Framework defaults versus the authenticator guarantee
+## What the framework does vs what you still have to check
 
-FastAPI does not know RP ID. Next.js `<input type=password>` will happily POST to evil.example. The application guarantee is: **this** fixture, password at evil → false.
+FastAPI does not know the RP ID. A Next.js password field will happily POST to evil.example. The app’s promise is: **this** helper, password at the lookalike origin → false.
 
 ## Practice
+
+Run checks against the broken files (they **must fail** on the password-at-lookalike claim). Record the check name `test_password_is_not_phishing_resistant`.
 
 ```text
 python3 -m pytest labs/4.2/4.2-lab/tests --impl vulnerable
 ```
 
-Record `test_password_is_not_phishing_resistant`. Do not weaken it to “we have 2FA.” An environment error is not security evidence.
+Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not weaken it to “we have 2FA.” An environment error is not security evidence.
 
-## Transfer
+## Use it somewhere new
 
-Clinic SSO lookalike. Predict without leaving this directory. Do not open a clinic IdP or a public phishing page.
+Clinic SSO lookalike. Predict without leaving this directory. Do not open a clinic identity provider or a public phishing page.
 
-## Usability
+## A usable leftover
 
-A mouse-only WebAuthn button pushes people onto the password residual (WCAG 2.2). That is a security residual, not a polish item.
+A mouse-only WebAuthn button pushes people onto the password leftover. That is a security leftover, not polish.
 
-## Non-goals
+## What this page is not doing
 
-No live phishing campaigns. Synthetic origins only.
+No live phishing campaigns. Synthetic origins only. Re-run pytest when you are done. No leftover state.
