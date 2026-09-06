@@ -1,44 +1,42 @@
-# 11 — Capstone: SecureCollab integration (Review)
+# 11-LO-08 — Review no-op revoke as a PR
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** All prior pinned standards as applicable; no new “capstone-only” standard. Gates 0–10 stay not-attempted without learner evidence.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** ASVS `v5.0.0-8.2.1`, `v5.0.0-8.2.2`.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab share revoke
 
-After a share is revoked, tenant B must not read tenant A’s note. The capstone stitches 1.2 mediation over time (2.4, 4.1, 4.4) — not a new slogan YAML.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Former collaborator with a cached id; delayed worker (7.4).
-- **Trust:** Local share map.
 Review `labs/11/11-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/11.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|B still reads| Property["Property - good if tested"]
+  Q -->|revoke returned 200| Mechanism[Mechanism - event]
+  Q -->|scanner green| False[False assurance]
+```
 
-- Seeded smell (label it yourself): read after revoke succeeds
-- Seeded smell (label it yourself): Capstone README: scanner green = done
-- Seeded smell (label it yourself): No cache invalidation
-- Seeded smell (label it yourself): Gate 11 claimed without artifacts
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- read after revoke succeeds
+- Capstone README: scanner green = done
+- No cache invalidation
+- Gate 11 claimed without artifacts
+
+Also reject: live tenant attacks, keys in lessons, claiming Gate 11 or M5.
 
 ## Misconceptions
 
 - Capstone is a new product
-- Milestones M0–M5 complete because lessons exist
-- Integration tests replace the 13 artifacts
+- Milestones complete because lessons exist
+- A green scanner is the evidence pack
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_revoked_share_cannot_read`.
 
 ## Transfer
 
-Clinic: revoke a guardian.
-
-## HITL / WCAG 2.2
-
-Revoke UX must be completable (1.4) or people will not revoke.
+Clinic PR that “added DELETE /guardians and a scanner badge” without a post-revoke read deny is incomplete.

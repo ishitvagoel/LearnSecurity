@@ -1,62 +1,84 @@
-# 11 — Capstone: SecureCollab integration (1 Property)
+# 11-LO-01 — Revoke is mediation, not an event
 
-**Kind:** concept-model  
-**Loop step:** 1 Property  
-**Standards:** All prior pinned standards as applicable; no new “capstone-only” standard. Gates 0–10 stay not-attempted without learner evidence.
+**Kind:** concept-model
+**Loop step:** 1 Property
+**Standards:** ASVS `v5.0.0-8.2.1`, `v5.0.0-8.2.2`; `v5.0.0-8.3.2` is **Level 3, advanced**. Prior pins (MASVS 2.1.0, CSF 2.0, SLSA 1.2) are vocabulary, not a capstone-only standard.
 
-## Property (start here)
+## The claim this module owns
 
-After a share is revoked, tenant B must not read tenant A’s note. The capstone stitches 1.2 mediation over time (2.4, 4.1, 4.4) — not a new slogan YAML.
+SecureCollab shares note `n1` from tenant A with tenant B, then A revokes. **Authorization over time** is whether the *next* `read` consults the grant. A green scanner, a YAML “evidence pack,” or Gate 11 in a README is not that check.
 
-## Attacker capabilities and trust assumptions
+> After `revoke("n1", "B")`, `read("n1", "B")` must be `None`. `read("n1", "A")` may still return the body. `read("n1", "B")` before revoke may return the body.
 
-- **Attacker:** Former collaborator with a cached id; delayed worker (7.4).
-- **Trust:** Local share map.
-**Mechanism (not the property):** A green capstone scanner is not the 13 artifacts.
+The forbidden outcome is **revoked share still reads the note**. That is 1.2 complete mediation stitched with 2.4 time, 4.1/4.4 revoke, 7.4 delayed workers, and 8.2 device cache.
 
-Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
+ASVS `v5.0.0-8.2.1` / `v5.0.0-8.2.2` want authorization on every access, not a share event that is forgotten. `v5.0.0-8.3.2` (access rights change takes effect within the session without re-login) is **Level 3, advanced** — named so learners do not confuse “we stored a revoke row” with “the next read is denied.”
+
+The portable portfolio is blueprint §10.3. A numbered thirteen-item slogan is not that pack.
+
+## Mental model: event vs next read
+
+```mermaid
+flowchart TD
+  Revoke[revoke row] --> Belief[B is out]
+  Read[next read] --> Pred{"owner or grant?"}
+  Pred -->|no| Deny[None]
+  Pred -->|yes| Body[body]
+```
+
+## Mental model: scanner is not the portfolio
+
+```mermaid
+flowchart LR
+  Scan[scanner green] --> Belief[Gate 11]
+  Pack[invariants tests restore defense] --> Evidence[portfolio]
+  Scan --> NotPack[not the pack]
+```
+
+**Mechanism (not the property):** pytest-cov, a capstone scanner, “we finished Phase 10.”
 
 ## Root cause vs impact vs prevention vs detection vs recovery
 
-| Slice | For 11 |
+| Slice | For this property |
 |---|---|
-| Root cause | Grant not consulted after revoke. |
-| Preconditions | read after revoke still body. |
-| Impact (1.1 cell) | Authorization over time — the course thesis in one fixture. — Ex-collaborator confidentiality fail. |
-| Prevention | Complete mediation on read; invalidate caches; wipe mobile. |
-| Detection | read_after_revoke. |
-| Recovery | Notify A; rotate links. |
+| Root cause | Grant not consulted after revoke |
+| Preconditions | `read` after `revoke` still returns the body |
+| Trigger | Former collaborator; cached id; delayed worker |
+| Impact | Authorization over time — ex-collaborator confidentiality |
+| Prevention | Complete mediation on every read; invalidate caches |
+| Detection | `revoked_share_read_denied` |
+| Recovery | Notify A; rotate links; tabletop (10.5) |
 
-## Framework defaults vs application guarantees
+## Framework defaults versus the grant guarantee
 
-A green capstone scanner is not the 13 artifacts.
+FastAPI will not consult a grant you never check. A mobile cache (8.2) and a worker leftover session (7.4) are extra grains of the same cell.
 
-## Mechanism limits and bypasses
+## Mechanism limits
 
-Email already received the body — residual 5.1.
-
-Export from B before revoke still on B’s disk.
-
-## Residual risk
-
-Honest copies already made — policy + detect.
-
-## Practice
-
-Map this cell to 1.2, 2.2, 2.4, 4.4, 7.4, 8.2.
-
-Run `labs/11/11-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
-
-## Transfer
-
-Clinic: revoke a guardian.
-
-Full SecureCollab slice.
-
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.
+- Email already received the body — residual 5.1.
+- Export from B before revoke still on B’s disk.
+- Delayed worker with leftover user session (7.4).
+- Level 3 `v5.0.0-8.3.2` if the session was minted before revoke.
 
 ## Usability and accessibility
 
-Revoke UX must be completable (1.4) or people will not revoke.
+A denied read must say *share revoked* in text, not only a red 403 (WCAG 2.2 4.1.3).
+
+## Practice
+
+Name who can revoke. Then run:
+
+```
+python3 -m pytest labs/11/11-lab/tests --impl vulnerable
+python3 -m pytest labs/11/11-lab/tests --impl fixed
+```
+
+The first command must fail. The second must pass.
+
+## Transfer
+
+Clinic: revoke a guardian. Full SecureCollab slice: the same cell across API, worker, and mobile cache.
+
+## Non-goals
+
+Live tenants, claiming Gate 11 or M5. Answer keys are not in this file.

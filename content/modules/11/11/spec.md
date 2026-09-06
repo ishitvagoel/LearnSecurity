@@ -1,6 +1,6 @@
 # 11 — Integrating capstone — SecureCollab
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. After revoke, tenant B must not read tenant A’s note — that is 1.2 over time, not a new product. Do not mark M5 or Gate 11 complete.
 
 ## Identity
 
@@ -9,71 +9,74 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** Integrating capstone — SecureCollab
 - **phase / track / difficulty:** 11 / capstone / capstone
 - **estimatedMinutes:** 1200
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Blueprint §7; 1.2 mediation; 2.4 time; 4.1/4.4 revoke; 7.4 delayed worker; 9.1 coverage; 10.5 restore.
 - **routeTags:** complete, web-api
 - **releaseMilestone:** M5
 - **masteryGate:** 11
 
 ## Objective hierarchy
 
-1. Produce **Capstone evidence pack items 1–13** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce a **read-after-revoke predicate** so `read("n1", "B")` is `None` after `revoke("n1", "B")`.
+2. Name attacker capabilities (former collaborator with a cached id; delayed worker 7.4) and trust assumptions (local share map).
+3. Transfer: clinic revoke a guardian — without treating a green scanner or a YAML pack as Gate 11.
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+1.2 complete mediation; 2.4 time/TOCTOU; 4.1 logout; 4.4 isolation; 5.1 copies already sent; 7.4 leftover sessions on workers; 8.2 device cache; 9.1 coverage vs spreadsheet; 9.5 retest vs PDF; 10.5 SIEM-green is not recover.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- Capstone is a new product.
+- Milestones M0–M5 complete because lessons exist.
+- Integration tests replace the portfolio.
+- A green scanner is the evidence pack.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+Always-true read (break) → consult grant on every read (this module) → caches/workers/mobile (2.4 / 7.4 / 8.2) → leftover copies (5.1) → tabletop + restore (10.5). Residual: email already received.
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true for `read("n1", "B")` after `revoke("n1", "B")`?
+- What fails if revoke is an event that never reaches the next read?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can a former collaborator do with a cached note id?
+- What residual remains if B already exported the body?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/11/11-lab`. Forbidden: revoked share still reads the note. No live tenants.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint. The portable portfolio is blueprint §10.3 (invariants, threat models, ADRs, protocol models, tests, ASVS/MASVS traceability, review/pentest reports, SBOM/pipeline, detection/restore, architecture defense). A numbered “13-item YAML” is not that pack.
 
 ## Standards references
 
-ASVS L2 tailored; MASVS profile — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- OWASP ASVS 5.0.0 (final): `v5.0.0-8.2.1` / `v5.0.0-8.2.2` authorization on every access (Level 2). `v5.0.0-8.3.2` immediate grant change is **Level 3, labeled advanced**.
+- Prior pins apply as vocabulary (MASVS 2.1.0 profiles, NIST CSF 2.0 Recover, SLSA 1.2 as provenance not 1.2). No capstone-only standard.
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+Read after revoke succeeds; scanner-green README; no cache invalidation; Gate 11 claimed without artifacts.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: Capstone evidence pack items 1–13.
+Evidence: local revoke test + named portfolio. Feeds Gate 11 / M5 (not-attempted).
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`revoked_share_read_denied`. Honest copies already made — policy + detect (5.1).
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: revoke is mediation not an event; scanner is not the portfolio |

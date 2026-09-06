@@ -1,33 +1,42 @@
-# 11 — Capstone: SecureCollab integration (7 Transfer)
+# 11-LO-07 — Transfer: clinic revoke a guardian
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** All prior pinned standards as applicable; no new “capstone-only” standard. Gates 0–10 stay not-attempted without learner evidence.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** ASVS `v5.0.0-8.2.1`. `v5.0.0-8.3.2` Level 3 advanced as residual.
 
-## Property (start here)
+## Change the workplace; keep revoke-200 from meaning the next read is denied
 
-After a share is revoked, tenant B must not read tenant A’s note. The capstone stitches 1.2 mediation over time (2.4, 4.1, 4.4) — not a new slogan YAML.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic: revoke a guardian. Also name the full SecureCollab slice (API + worker + mobile cache).
 
-- **Attacker:** Former collaborator with a cached id; delayed worker (7.4).
-- **Trust:** Local share map.
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite “we hit DELETE /guardians/12 so the next chart read is fine,” plus “the capstone scanner is green so Gate 11 is done.”
 
-**Prompt:** Clinic: revoke a guardian.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Full SecureCollab slice.
+1. attacker capabilities (former guardian with a cached chart id — not a live clinic attack);
+2. trust assumptions (owner-or-grant on every read is TCB; scanner/YAML pack/HTTP 200 are not);
+3. forbidden outcome (`read` after `revoke` still returns the body, not “HIPAA”);
+4. a test idea on a **local** fixture only (no live EHR);
+5. residual (copies already sent, delayed worker, device cache, `v5.0.0-8.3.2` Level 3);
+6. WCAG if the deny is human-read (say share revoked).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: HTTP 200 vs next read
+
+```mermaid
+flowchart LR
+  Del[DELETE 200] --> Belief[out]
+  Next[next read] --> Reality[grant consulted?]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | A green capstone scanner is not the 13 artifacts.… |
-| Live-target plan | Lab policy |
+| “scanner green” | Not the portfolio |
+| Live clinic / guardian tutorial | Lab policy |
+| “Gate 11 complete” | No learner evidence |
 
 ## Practice
 
-One page. No keys. The lab `labs/11/11-lab` stays the only running system you may break.
+One page. No keys. `labs/11/11-lab` is the only running system you may break.

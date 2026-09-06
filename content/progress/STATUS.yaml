@@ -14,15 +14,22 @@ defaults:
   ai_security: elective E1
   website_progress: local-first static site (site/); no accounts
 next:
-  id: '11'
+  id: E1
   pass: revise
   skill: deepen-curriculum
   inner_skill: standards-pin
-  note: Modules 10.3-10.5 authoring pass added namespace-not-tenant, prod-debug-boot,
-    and SIEM-green-is-not-recovery mental models and diagrams; keep 1.4, 2.1-10.5
-    developing until independent review. Continue the depth queue one module at a
-    time.
+  note: Modules 10.3-10.5 and capstone 11 authoring pass added namespace-not-tenant,
+    prod-debug-boot, SIEM-green-is-not-recovery, and revoke-is-mediation mental models
+    and diagrams; keep 1.4, 2.1-10.5, and 11 developing until independent review.
+    Continue the depth queue one module at a time.
 spiral_deltas:
+- date: '2026-09-06'
+  module: '11'
+  change: Capstone loop v2 treats revoke as mediation on the next read not an event,
+    refuses a green scanner as the portfolio, pins v5.0.0-8.2.1 / 8.2.2, and labels
+    v5.0.0-8.3.2 as Level 3 advanced
+  retest: Revisit 1.2/4.4 isolation; 2.4 time; 7.4 leftover worker sessions; 8.2 device
+    cache; 5.1 copies already sent; 9.5 retest vs PDF; 10.5 close vs restore
 - date: '2026-09-06'
   module: '10.5'
   change: IR loop v2 treats SIEM green as not close, requires recovery=done and no
@@ -875,8 +882,8 @@ capstone:
   title: Integrating capstone — SecureCollab
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added revoke-is-mediation mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 gates:
 - id: 0

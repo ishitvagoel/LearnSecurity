@@ -1,57 +1,52 @@
-# 11 — Capstone: SecureCollab integration (4 Build)
+# 11-LO-04 — Consult owner-or-grant on read
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** All prior pinned standards as applicable; no new “capstone-only” standard. Gates 0–10 stay not-attempted without learner evidence.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** ASVS 5.0.0 (final) `v5.0.0-8.2.1`, `v5.0.0-8.2.2`.
 
-## Property (start here)
+## Structural means every read compares owner and grant
 
-After a share is revoked, tenant B must not read tenant A’s note. The capstone stitches 1.2 mediation over time (2.4, 4.1, 4.4) — not a new slogan YAML.
+`revoke` must `discard` the grant. `read` must return the body only if `tenant == owner` or `(nid, tenant) in GRANTS`. Fail-safe: missing grant denies. A revoke *event* that is not consulted on the next read is still the break.
 
-## Attacker capabilities and trust assumptions
+## Mental model: consult on the path
 
-- **Attacker:** Former collaborator with a cached id; delayed worker (7.4).
-- **Trust:** Local share map.
-revoke then read is None.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-NOTES={'n1': {'tenant': 'A', 'body': 'secret'}}
-GRANTS={('n1', 'B')}
-def reset():
-    GRANTS.clear(); GRANTS.add(('n1', 'B'))
-def revoke(nid, tenant):
-    GRANTS.discard((nid, tenant))
-def read(nid, tenant):
-    n = NOTES[nid]
-    if tenant == n['tenant'] or (nid, tenant) in GRANTS:
-        return n['body']
-    return None
+```mermaid
+flowchart TD
+  Call[read] --> Own{owner?}
+  Own -->|yes| Body[body]
+  Own -->|no| G{in GRANTS?}
+  G -->|yes| Body
+  G -->|no| Deny[None]
 ```
+
+Do not accept “we called revoke” as consultation.
 
 ## Why this restores the cell
 
-Complete mediation on read; invalidate caches; wipe mobile.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| B after revoke | read None |
+| A after revoke | read secret |
+| B before revoke | read secret |
 
 ## What this is not
 
-A green capstone scanner is not the 13 artifacts.
-
-Email already received the body — residual 5.1.
+Scanner green. YAML pack. Gate 11 / M5. Cache wipe (residual 8.2). Copies already sent (5.1).
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name every read path. Run:
+
+```
+python3 -m pytest labs/11/11-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Clinic: revoke a guardian.
+Clinic guardian: the next chart read must consult the grant, not the last login.
 
 ## Residual risk
 
-Honest copies already made — policy + detect.
+Delayed worker (7.4); device cache (8.2); `v5.0.0-8.3.2` Level 3; email already sent.

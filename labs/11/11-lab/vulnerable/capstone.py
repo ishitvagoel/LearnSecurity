@@ -1,9 +1,16 @@
-NOTES={'n1': {'tenant': 'A', 'body': 'secret'}}
-GRANTS={('n1', 'B')}
+NOTES = {"n1": {"tenant": "A", "body": "secret"}}
+GRANTS = {("n1", "B")}
+
+
 def reset():
-    GRANTS.clear(); GRANTS.add(('n1', 'B'))
+    GRANTS.clear()
+    GRANTS.add(("n1", "B"))
+
+
 def revoke(nid, tenant):
+    # Vulnerable: revoke is a no-op. The grant is never consulted on read.
     pass
+
+
 def read(nid, tenant):
-    n = NOTES[nid]
-    return n['body']
+    return NOTES[nid]["body"]

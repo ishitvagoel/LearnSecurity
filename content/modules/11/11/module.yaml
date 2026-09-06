@@ -7,64 +7,67 @@ difficulty: capstone
 status: reviewed
 estimatedMinutes: 1200
 prerequisites:
-- Prior phase Pass A per blueprint §7; 1.1–2.4 Pass A complete
+- 'Prior phase Pass A per blueprint §7; 1.2 mediation; 2.4 time; 4.4 isolation; 7.4 workers'
 routeTags:
 - complete
 - web-api
 releaseMilestone: M5
 outcomes:
-- 'Demonstrate: Integrating capstone — SecureCollab'
-- 'Produce evidence: Capstone evidence pack items 1–13'
-- Name attacker capabilities and trust assumptions
-- Include a local-only lab brief and a transfer challenge
-- Do not instruct live-target attacks or mix awareness lists as compliance
+- 'Refuse a read after revoke; a green scanner is not the portfolio.'
+- 'Treat revoke as complete mediation on the next read, not as a one-shot event.'
+- 'Name leftover copies, caches, and delayed workers as residuals without claiming Gate 11.'
 reviewTriggers:
-- Material SecureCollab change in this module's concern
-- Superseding final standard
+- Read after revoke succeeds
+- Capstone README treats scanner green as done
+- No cache invalidation
+- Gate 11 claimed without artifacts
 invariants:
-- Claims are properties of SecureCollab (or the elective system), not tool names
+- read after revoke for tenant B is None
 - Labs stay in authorized local or official training scope
-- Draft standards are labeled draft
+- A scanner is not application 1.2
+- Gate 11 and M5 stay not-attempted without learner evidence
 threatModelPrompts:
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+- What can a former collaborator do with a cached note id?
+- What residual remains if a delayed worker still holds a user session?
+- What residual remains if B already exported the body?
 concepts:
-- integrating
+- revoke-is-mediation
+- portfolio-not-scanner
+- complete-mediation-over-time
 - securecollab
 - seven-step-loop
 learningObjects:
 - id: 11-LO-01
   kind: concept-model
-  title: 'Capstone: SecureCollab integration: property vs mechanism'
+  title: Revoke is mediation, not an event
   path: lessons/01-property.md
 - id: 11-LO-02
   kind: design-exercise
-  title: Model SecureCollab for 11
+  title: Grant consulted on every read
   path: lessons/02-model.md
 - id: 11-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: Revoked share still reads the note'
+  title: 'Local fixture: no-op revoke'
   path: lessons/03-break.md
 - id: 11-LO-04
   kind: design-exercise
-  title: Structural fix restoring the 11 invariant
+  title: Consult owner-or-grant on read
   path: lessons/04-build.md
 - id: 11-LO-05
   kind: verification-lab
-  title: Forbidden-outcome tests for 11
+  title: Fail-on-vulnerable then pass-on-fixed for revoke
   path: lessons/05-verify.md
 - id: 11-LO-06
   kind: operations-exercise
-  title: Detect/recover notes for 11
+  title: revoked_share_read_denied without logging bodies
   path: lessons/06-operate.md
 - id: 11-LO-07
   kind: transfer-challenge
-  title: 'Transfer: Full SecureCollab slice.'
+  title: 'Transfer: clinic revoke a guardian'
   path: lessons/07-transfer.md
 - id: 11-LO-08
   kind: code-review
-  title: Seeded review for 11
+  title: Review no-op revoke as a PR
   path: lessons/08-review.md
 labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
@@ -77,48 +80,49 @@ labSpec:
   - Real PII or production secrets
   - Awareness list used as the syllabus
 evidenceRequired:
-- Capstone evidence pack items 1–13
+- Local revoke-after-share tests plus a named portable portfolio
 - Transfer task prompt
 - Local lab brief
 assessmentBlueprint:
-  explain: Causal model for Integrating capstone — SecureCollab
-  design: Capstone evidence pack items 1–13
-  build: Deferred to Pass B
-  break: Authorized local reproduction of the representative failure
-  verify: Forbidden-outcome tests
-  operate: Detection and recovery notes
-  communicate: Residual risk without compliance theater
+  explain: Revoke is 1.2 over time; a scanner is not the pack
+  design: Owner, grant, cache, worker, leftover copies
+  build: read consults owner-or-grant in labs/11/11-lab/fixed
+  break: Authorized local no-op revoke
+  verify: Forbidden-outcome tests plus honest owner and pre-revoke share
+  operate: revoked_share_read_denied without bodies
+  communicate: Residual copies already sent; delayed worker; device cache
 masteryGate: '11'
 standardsRefs:
-- source: OWASP ASVS / module anchors (see spec)
-  version: 5.0.0
+- source: OWASP Application Security Verification Standard
+  version: '5.0.0'
   status: final
   requirementIds:
-  - capstone
+  - v5.0.0-8.2.1
+  - v5.0.0-8.2.2
+  - v5.0.0-8.3.2
   url: https://owasp.org/www-project-application-security-verification-standard/
 misconceptions:
 - Capstone is a new product
-- Milestones M0–M5 complete because lessons exist
-- Integration tests replace the 13 artifacts
+- Milestones M0-M5 complete because lessons exist
+- Integration tests replace the portfolio
+- A green scanner is the evidence pack
 operationalConsiderations:
 - revoked_share_read_denied.
-- Honest copies already made — policy + detect.
-author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+- Honest copies already made — policy plus detect.
+author: deepen-curriculum / author-module-spec
+reviewer: pending independent quality and lab-safety review
 lastReviewedAt: '2026-08-24'
 nextReviewAt: '2027-02-24'
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map
 - date: '2026-08-23'
-  note: 'Pass A quality-gate: spec completeness competent; expand in a later revision
-    if thin'
-- date: '2026-08-23'
   note: Pass B lessons and authorized local lab
 - date: '2026-08-23'
   note: Pass C rubric and examiner keys; quality-gate recorded
-- date: '2026-08-23'
-  note: 'Deepen: 1.1-density lessons; structural local lab; quality-gate recorded'
 - date: '2026-08-24'
-  note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
-    Pass C keys isolated'
+  note: Map-complete rewrite recorded; independent review still required
+- date: '2026-09-06'
+  note: 'Depth pass: revoke-is-mediation mental models, mermaid diagrams, ASVS
+    v5.0.0-8.2.1 / 8.2.2; v5.0.0-8.3.2 labeled Level 3 advanced; independent review
+    still required'

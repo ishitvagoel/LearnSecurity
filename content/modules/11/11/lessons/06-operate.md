@@ -1,40 +1,43 @@
-# 11 — Capstone: SecureCollab integration (6 Operate)
+# 11-LO-06 — Detect revoked_share_read_denied without logging bodies
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** All prior pinned standards as applicable; no new “capstone-only” standard. Gates 0–10 stay not-attempted without learner evidence.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; ASVS `v5.0.0-8.2.1`.
 
-## Property (start here)
+## Prevention is not absolute
 
-After a share is revoked, tenant B must not read tenant A’s note. The capstone stitches 1.2 mediation over time (2.4, 4.1, 4.4) — not a new slogan YAML.
+A cache or worker can serve the old grant. Pair detect and recover. Do not log note bodies (3.1 / 10.5).
 
-## Attacker capabilities and trust assumptions
+## Mental model: post-revoke read is a signal
 
-- **Attacker:** Former collaborator with a cached id; delayed worker (7.4).
-- **Trust:** Local share map.
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Read[read] --> G{grant?}
+  G -->|no| Metric["revoked_share_read_denied += 1"]
+  Metric --> Notify[notify A rotate links]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | read_after_revoke. |
-| Signal (no bodies) | revoked_share_read_denied. |
-| Revoke / recover | Notify A; rotate links. |
-| Residual | Honest copies already made — policy + detect. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `revoked_share_read_denied` |
+| Signal | note id, tenant id; never body |
+| Recover | Notify A; rotate share links; wipe caches |
+| Residual | Copies already sent; E6 exceptions |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/11/11-lab`.
+Write one log line you would accept. Tie it to `labs/11/11-lab`.
+
+```
+log_denied reason=revoked_share_read_denied note=n1 tenant=B
+```
+
+Reject any line that includes the note body, a session token, or “Gate 11 complete.”
 
 ## Transfer
 
-Clinic: revoke a guardian.
-
-## Usability
-
-Revoke UX must be completable (1.4) or people will not revoke.
+Clinic: deny the guardian read; do not paste the chart into the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+A scanner-vendor name is not the property. M5 stays not-attempted.

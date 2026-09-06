@@ -1,57 +1,49 @@
-# 11 — Capstone: SecureCollab integration (3 Break)
+# 11-LO-03 — Observe no-op revoke, do not attack live tenants
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** All prior pinned standards as applicable; no new “capstone-only” standard. Gates 0–10 stay not-attempted without learner evidence.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** ASVS `v5.0.0-8.2.1`. Lab policy: local only.
 
-## Property (start here)
+## Authorized scope
 
-After a share is revoked, tenant B must not read tenant A’s note. The capstone stitches 1.2 mediation over time (2.4, 4.1, 4.4) — not a new slogan YAML.
+`labs/11/11-lab` only. Synthetic tenants `A` / `B` and note `n1`. Do **not** revoke, read, or scrape a real notes app, clinic portal, or shared tenant as the exercise.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Revoked share still reads the note.
 
-- **Attacker:** Former collaborator with a cached id; delayed worker (7.4).
-- **Trust:** Local share map.
-**Forbidden outcome:** Revoked share still reads the note
+## Mental model: revoke does nothing
 
-**Authorized scope:** `labs/11/11-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable capstone.py still reads.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: read after revoke still body.
-
-## Vulnerable fixture (local)
-
-```python
-NOTES={'n1': {'tenant': 'A', 'body': 'secret'}}
-GRANTS={('n1', 'B')}
-def reset():
-    GRANTS.clear(); GRANTS.add(('n1', 'B'))
-def revoke(nid, tenant):
-    pass
-def read(nid, tenant):
-    n = NOTES[nid]
-    return n['body']
+```mermaid
+flowchart TD
+  Revoke[revoke] --> Noop[pass]
+  Read[read] --> Body[always body]
 ```
+
+The vulnerable tree demonstrates **cause** (grant not consulted). Do not probe public hosts.
+
+## What to read in the fixture
+
+`vulnerable/capstone.py` ignores `revoke` and returns the body. Tests require `read("n1", "B")` to be `None` after revoke.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Grant not consulted after revoke. |
-| Impact | Ex-collaborator confidentiality fail. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Grant not consulted after revoke |
+| Impact | Ex-collaborator still reads |
+| Not the lesson | A capstone scanner as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/11/11-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/11/11-lab/tests --impl vulnerable
+```
+
+Record `test_revoked_share_cannot_read`. Do not probe public hosts.
 
 ## Transfer
 
-Clinic: revoke a guardian.
+Clinic revoke a guardian: predict without leaving this directory.
 
 ## Non-goals
 
-No live-target instructions. Synthetic data only.
+No live-tenant, clinic-portal, or public notes-app instructions.

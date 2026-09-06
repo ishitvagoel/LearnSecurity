@@ -1,38 +1,46 @@
-# 11 — Capstone: SecureCollab integration (5 Verify)
+# 11-LO-05 — Evidence is revoke denied, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** All prior pinned standards as applicable; no new “capstone-only” standard. Gates 0–10 stay not-attempted without learner evidence.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** ASVS `v5.0.0-8.2.1`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-After a share is revoked, tenant B must not read tenant A’s note. The capstone stitches 1.2 mediation over time (2.4, 4.1, 4.4) — not a new slogan YAML.
+“Capstone scanner green” is not evidence. The oracle is the local pair. Do not hit live tenants.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Former collaborator with a cached id; delayed worker (7.4).
-- **Trust:** Local share map.
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail B after revoke"]
+  X["--impl fixed"] --> P["Must pass deny"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Revoked share still reads the note |
-| Failure | Fail closed: Complete mediation on read; invalidate caches; wipe mobile |
+| Negative / abuse | B after revoke → None |
+| Normal | A after revoke → body |
+| Normal | B before revoke → body |
+| Not claimed | live clinic; Gate 11; M5 |
 
-Lab tests: `test_property.py` under `labs/11/11-lab`.
+```
+python3 -m pytest labs/11/11-lab/tests --impl vulnerable
+python3 -m pytest labs/11/11-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Revoked share still reads the note`
-- `--impl fixed`: **pass**
+Honest owner-after-revoke and share-before-revoke may pass on both.
 
-revoked share cannot read.
+## What the tests do not prove
+
+- Worker leftover session is gone (7.4)
+- Device cache is wiped (8.2)
+- Copies already sent are gone (5.1)
+- `v5.0.0-8.3.2` Level 3 in-session grant change
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Clinic: revoke a guardian.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic: a test that only asserts “revoke returned 200” is not this cell.

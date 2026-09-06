@@ -1,53 +1,68 @@
-# 11 — Capstone: SecureCollab integration (2 Model)
+# 11-LO-02 — Grant consulted on every read
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** All prior pinned standards as applicable; no new “capstone-only” standard. Gates 0–10 stay not-attempted without learner evidence.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** ASVS `v5.0.0-8.2.1`, `v5.0.0-8.2.2`.
 
-## Property (start here)
+## Can a second engineer name the revoke check from your share map?
 
-After a share is revoked, tenant B must not read tenant A’s note. The capstone stitches 1.2 mediation over time (2.4, 4.1, 4.4) — not a new slogan YAML.
+“We have a revoke endpoint” is not this lesson. A reviewable model names **owner, grant, every read path (API, worker, cache), and leftover copies**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab freeze: local `revoke` / `read`. No live tenants.
 
-- **Attacker:** Former collaborator with a cached id; delayed worker (7.4).
-- **Trust:** Local share map.
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: three subjects
+
+```mermaid
+flowchart TD
+  A[tenant A owner] --> Read[read n1]
+  B[tenant B grant] --> Read
+  Revoked[B after revoke] --> Deny[None]
+```
+
+## Mental model: other grains of the same cell
+
+```mermaid
+flowchart LR
+  Api[API read] --> Grant[GRANTS]
+  Worker[7.4 worker] --> Grant
+  Cache[8.2 device] --> Grant
+  Mail[5.1 copy] --> Residual[already sent]
+```
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | A owner, B member after revoke |
-| Objects | n1 share |
-| Actions | revoke, read |
-| Channels | API, cache (2.2), mobile (8.2) |
-| TCB | Grant table as source of truth on every read. |
-| Untrusted | CDN cache of n1, offline cache, email copy |
-| State / time | Revoke then read. |
-| 1.1 cell | Authorization over time — the course thesis in one fixture. |
+| Subjects | former collaborator; delayed worker |
+| Objects | note body |
+| Actions | `revoke`, `read` |
+| Channels | API; worker; mobile cache |
+| TCB | owner-or-grant on every read |
+| Untrusted | cached id; scanner green; YAML pack |
+| State / time | after revoke; leftover copies |
+| 1.1 cell | authorization over time |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| B | n1 before revoke | read | allow-if-granted |
-| B | n1 after revoke | read | deny |
-| cache | n1 | serve B | deny |
-| worker | old job | export B | deny |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| B after revoke | n1 body | read | deny |
+| A after revoke | n1 body | read | may allow |
+| B before revoke | n1 body | read | may allow |
+| scanner green | Gate 11 | claim | deny |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/11/11-lab` file `capstone.py`.
+Draw the map. Point at `labs/11/11-lab` file `capstone.py`.
 
 ## Transfer
 
-Clinic: revoke a guardian.
+Clinic guardian revoke is the same cell with a different relationship name.
 
 ## Residual risk
 
-Honest copies already made — policy + detect.
+Copies already sent; `v5.0.0-8.3.2` Level 3 session that was minted before revoke.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.
