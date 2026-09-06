@@ -151,3 +151,6 @@ changelog:
 - date: '2026-09-06'
   note: 'Depth pass: telemetry-is-a-sink mental models, mermaid diagrams, MASVS-PRIVACY-1–4,
     ASVS v5.0.0-16.2.5; independent review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with crash-body cause tables, Play-Data-safety
+    limits, and clinic synthetic-name transfer; independent review still required

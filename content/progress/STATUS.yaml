@@ -19,13 +19,37 @@ next:
   skill: deepen-curriculum
   inner_skill: quality-gate
   note: Authoring-pass named mental models and mermaid cover every lesson. 1.4,
-    2.1-2.4, 0.1, 0.2, 3.1-3.4, 4.1-4.5, 5.1-5.5, 6.1-6.7, 7.1-7.4, and 8.1-8.4
-    later lessons were thickened with system-specific cause, limits, and transfer.
-    Units stay developing / map-complete in revision.remaining until independent
-    quality and lab-safety review artifacts exist under content/progress/reviews/.
-    Do not mark depth publishable in this skill. 1.1-1.3 remain the independently
-    reviewed reference.
+    2.1-2.4, 0.1, 0.2, 3.1-3.4, 4.1-4.5, 5.1-5.5, 6.1-6.7, 7.1-7.4, 8.1-8.4, 8.5,
+    and 9.1-9.3 later lessons were thickened with system-specific cause, limits,
+    and transfer. Units stay developing / map-complete in revision.remaining until
+    independent quality and lab-safety review artifacts exist under
+    content/progress/reviews/. Do not mark depth publishable in this skill. 1.1-1.3
+    remain the independently reviewed reference.
 spiral_deltas:
+- date: '2026-09-06'
+  module: '9.3'
+  change: Lessons 03-08 now insist HTTP 200-only is not a security test and refuse
+    pytest-cov/WSTG ticks as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; 9.5 exploratory, fuzz without oracle, and
+    7.2 field grain remain residuals
+- date: '2026-09-06'
+  module: '9.2'
+  change: Lessons 03-08 now name eval-on-user approve as the forbidden outcome and
+    refuse formatter LGTM as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; substring stand-in, exec/SpEL, and E1
+    generated code remain residuals
+- date: '2026-09-06'
+  module: '9.1'
+  change: Lessons 03-08 now insist status-only AUTHZ-1 is not coverage and refuse
+    ASVS-PDF import as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; 9.3 lying isolation flags, Level 3 8.3.2,
+    and E6 exceptions remain residuals
+- date: '2026-09-06'
+  module: '8.5'
+  change: Lessons 03-08 now name secret-in-crash-report as the forbidden outcome and
+    refuse Play Data safety as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; vendor copies, screenshots, ANR, and 10.5
+    web Sentry remain residuals
 - date: '2026-09-06'
   module: '8.4'
   change: Lessons 03-08 now name debug-plus-ok as the forbidden outcome and refuse
@@ -1105,8 +1129,9 @@ modules:
   track: mobile
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added telemetry-is-a-sink mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+  notes: Later lessons 03-08 thickened 2026-09-06 with crash-body cause tables and
+    Play-Data-safety limits; independent quality and lab-safety review still required
+    before publishable
   depth: map-complete
 - id: '9.1'
   title: Verification requirements and traceability
@@ -1114,8 +1139,9 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added coverage-predicate mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+  notes: Later lessons 03-08 thickened 2026-09-06 with status-only coverage cause
+    tables and PDF/CI limits; independent quality and lab-safety review still required
+    before publishable
   depth: map-complete
 - id: '9.2'
   title: Secure code review
@@ -1123,8 +1149,9 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added visual-plausibility mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+  notes: Later lessons 03-08 thickened 2026-09-06 with always-approve cause tables
+    and formatter limits; independent quality and lab-safety review still required
+    before publishable
   depth: map-complete
 - id: '9.3'
   title: Security-focused tests
@@ -1132,8 +1159,9 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added forbidden-outcome mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+  notes: Later lessons 03-08 thickened 2026-09-06 with 200-only cause tables and
+    coverage-percent limits; independent quality and lab-safety review still required
+    before publishable
   depth: map-complete
 - id: '9.4'
   title: Automated analysis and tool orchestration

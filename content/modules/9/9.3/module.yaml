@@ -149,3 +149,6 @@ changelog:
 - date: '2026-09-06'
   note: 'Depth pass: forbidden-outcome mental models, mermaid diagrams, WSTG 4.2 as
     catalogue, v5.0.0-15.4.1 labeled Level 3; independent review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with 200-only cause tables, coverage-percent limits,
+    and clinic test_get_patient_200 transfer; independent review still required

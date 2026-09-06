@@ -151,3 +151,6 @@ changelog:
 - date: '2026-09-06'
   note: 'Depth pass: coverage-predicate mental models, mermaid diagrams, ASVS L2 vs
     L3 8.3.2, SSDF 1.2 labeled draft; independent review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with status-only coverage cause tables, PDF/CI
+    limits, and clinic HIPAA-done transfer; independent review still required
