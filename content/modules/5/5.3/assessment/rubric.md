@@ -8,12 +8,12 @@ Key and secret lifecycle
 
 ## Evidence checklist
 
-- [ ] Key hierarchy, inventory, rotation exercise, compromise runbook
-- [ ] Transfer task (Clinic lab API key in a GitHub gist.)
-- [ ] Lab `labs/5.3/5.3-lab`: forbidden outcome **Hardcoded default API key still authenticates after rotation**
-- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Secret inventory, rotation exercise, compromise runbook
+- [ ] Transfer task (Clinic gist-leaked API key; DEK vs KEK sketch)
+- [ ] Lab `labs/5.3/5.3-lab`: forbidden outcome **hardcoded default still authenticates after rotation**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: auth_default_denied; image_rebuild after rotate.
+- [ ] Operate signal without secret values: `default_secret_used`
 
 ## Rubric
 

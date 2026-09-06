@@ -1,58 +1,80 @@
-# 5.3 — Key and secret lifecycle (1 Property)
+# 5.3-LO-01 — A rotated secret must kill the hardcoded default
 
-**Kind:** concept-model  
-**Loop step:** 1 Property  
-**Standards:** ASVS 5.0.0 V11/V13 (final); OWASP secrets guidance; NIST PQC standards are for *agility planning*, not a lab quantum attack.
+**Kind:** concept-model
+**Loop step:** 1 Property
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-13.3.1`, `v5.0.0-13.2.3`, `v5.0.0-11.1.1`; `v5.0.0-13.3.4` and `v5.0.0-13.3.3` are **Level 3, advanced**. pydantic Settings is not this sentence. NIST PQC is agility planning, not a lab quantum attack.
 
-## Property (start here)
+## The claim this module owns
 
-A disposable lab API key that is a hardcoded default must not authenticate after rotation. The old value fails. Inventory + rotation is the property, not “we have a secrets manager” as a sticker.
+SecureCollab Phase 1 uses an application API key distinct from user passwords (4.2) and public identifiers. A disposable lab string `sk-lab-hardcoded` in source is a default credential. After rotation to `current="rotated-now"`, that default must not authenticate. A secrets-manager sticker is not rotation.
 
-## Attacker capabilities and trust assumptions
+> `auth("sk-lab-hardcoded", current="rotated-now")` must be false. Missing `current` must deny. Inventory + rotation is complete mediation over time, like 4.1 leftover sessions.
 
-- **Attacker:** Anyone who cloned the repo or an old container image with sk-lab-hardcoded.
-- **Trust:** Local auth(current). Real KMS later.
-**Mechanism (not the property):** pydantic Settings reading .env does not rotate anything.
+The forbidden outcome is **old hardcoded default still authenticates after rotation**. That is a 1.1 authenticity failure of the service credential; 1.2 then runs as whoever holds the clone.
 
-Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
+ASVS `v5.0.0-13.3.1` wants secrets created and stored outside source and build artifacts (L3 adds HSM — **advanced**, not this lab). `v5.0.0-13.2.3` wants no default credentials. `v5.0.0-11.1.1` wants a key lifecycle. `v5.0.0-13.3.4` (expire/rotate on a schedule) and `v5.0.0-13.3.3` (isolated HSM for crypto ops) are **Level 3 (advanced)**.
+
+## Mental model: the secret outlives rotation
+
+```mermaid
+flowchart TD
+  Rotate["current equals rotated-now"] --> Old{"sk-lab-hardcoded still accepted?"}
+  Old -->|yes| Backdoor["Cloned repo still auths"]
+  Old -->|no| Dead["Default is dead"]
+```
+
+The attacker cloned the repo or an old image. Trusting `.gitignore` or “we use Vault” without a rotation test is not a TCB.
+
+**Mechanism (not the property):** AWS Secrets Manager, pydantic Settings, or a `.env` file.
+
+## Mental model: three secret classes
+
+```mermaid
+flowchart LR
+  App[Application API key] --> Rotate2[Rotate and inventory]
+  Pw[User password] --> KDF["4.2 / RFC 9106"]
+  Pub[Public identifier] --> NotSecret[Not a secret]
+```
+
+Mixing classes is how a tenant id becomes a “key” or a password becomes a service credential.
 
 ## Root cause vs impact vs prevention vs detection vs recovery
 
-| Slice | For 5.3 |
+| Slice | For this property |
 |---|---|
-| Root cause | Default credential never invalidated. |
-| Preconditions | auth(hardcoded) True while current is rotated-now. |
-| Impact (1.1 cell) | Authenticity of the service credential over time. — Silent backdoor equal to production admin if copied. |
-| Prevention | Generate unique secrets; rotate; refuse known defaults; never commit. |
-| Detection | Secret scanning; auth failures on default strings. |
-| Recovery | Rotate again; rebuild images; purge logs. |
+| Root cause | Default credential never invalidated |
+| Preconditions | `auth(hardcoded)` true while `current` is rotated |
+| Trigger | Clone presents `sk-lab-hardcoded` |
+| Impact | Authenticity of the service credential over time |
+| Prevention | Unique secrets; rotate; refuse known defaults; never commit |
+| Detection | `default_secret_used`; secret scanning |
+| Recovery | Rotate again; rebuild images; purge logs |
 
-## Framework defaults vs application guarantees
+## Framework defaults versus the rotation guarantee
 
-pydantic Settings reading .env does not rotate anything.
+pydantic Settings reading `.env` does not rotate anything. Vault without a rotation test is a new dump. Oracle: `labs/5.3/5.3-lab`. No live KMS. The lab string is disposable.
 
-## Mechanism limits and bypasses
+## Mechanism limits
 
-Vault without rotation policy is a new hard-to-scan dump.
-
-Secondary default in a worker (7.4); mobile embedded key (8.4).
-
-## Residual risk
-
-PQC migration is a plan, not this test.
+- Secondary default in a worker (7.4); mobile embedded key (8.4).
+- Envelope DEK vs KEK is named, not executed.
+- PQC migration is a plan (`v5.0.0-11.1.4` in 5.2), not this test.
 
 ## Practice
 
-Inventory: name, location, owner, last rotated, blast radius.
+Inventory: name, location, owner, last rotated, blast radius. Then run:
 
-Run `labs/5.3/5.3-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
+```
+python3 -m pytest labs/5.3/5.3-lab/tests --impl vulnerable
+python3 -m pytest labs/5.3/5.3-lab/tests --impl fixed
+```
+
+The first command must fail. The second must pass.
 
 ## Transfer
 
-Envelope encryption DEK vs KEK; compromise runbook.
-
-Clinic lab API key in a GitHub gist.
+Clinic lab API key in a gist. Envelope DEK vs KEK compromise runbook.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.
+Live cloud keys, real production secrets, quantum attack scripts. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not in this file.

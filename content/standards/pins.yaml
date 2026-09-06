@@ -39,7 +39,7 @@ pins:
     reviewedAt: "2026-08-29"
     url: "https://owasp.org/www-project-application-security-verification-standard/"
     role: "Web/API security requirements and assurance baseline"
-    notes: "Project page confirms latest stable 5.0.0 released 30 May 2025. The 2026-08-29 Module 1.3 check used the immutable v5.0.0 tag. 2026-09-06 Modules 2.1–4.5 pinned as listed in those module.yaml files. Module 4.2 used v5.0.0-6.3.3 (MFA; Level 3 phishing-resistant hardware labeled advanced). Module 4.3 used v5.0.0-14.2.1 (no secrets in query strings). Module 4.4 used v5.0.0-8.2.2 / 8.4.1 (object and cross-tenant; 8.3.2 / 8.3.3 labeled Level 3 advanced). Module 4.5 used v5.0.0-10.3.1 (resource-server audience; 10.3.5 labeled Level 3 advanced). Use exact v5.0.0-<chapter>.<section>.<requirement> identifiers; do not mix ASVS 4.x IDs. Level 3 guidance is labeled advanced. Module 1.1 intentionally does not map ASVS requirements."
+    notes: "Project page confirms latest stable 5.0.0 released 30 May 2025. The 2026-08-29 Module 1.3 check used the immutable v5.0.0 tag. 2026-09-06 Modules 2.1–5.4 pinned as listed in those module.yaml files. Module 5.1 used v5.0.0-14.2.4 (deletion implemented as documented; 14.2.7 labeled Level 3 advanced). Module 5.2 used v5.0.0-11.3.3 (AEAD; 11.3.4 / 11.1.4 labeled Level 3 advanced). Module 5.3 used v5.0.0-13.2.3 / 13.3.1 (no default credentials; 13.3.3 / 13.3.4 labeled Level 3 advanced). Module 5.4 used v5.0.0-12.2.1 (TLS without fallback; 12.1.4 / 12.1.5 labeled Level 3 advanced). Use exact v5.0.0-<chapter>.<section>.<requirement> identifiers; do not mix ASVS 4.x IDs. Level 3 guidance is labeled advanced. Module 1.1 intentionally does not map ASVS requirements."
   - id: owasp-threat-modeling
     source: OWASP Threat Modeling Project
     version: "maintained-project-guidance"
@@ -102,7 +102,7 @@ pins:
     reviewedAt: "2026-08-23"
     url: "https://datatracker.ietf.org/doc/html/rfc9846"
     role: "Current TLS 1.3 protocol specification (obsoletes RFC 8446)"
-    notes: "Standards Track, July 2026. Module 2.2 teaches hop authenticity after termination; 'enable TLS' is not the cache-key property."
+    notes: "Standards Track, July 2026. Module 2.2 teaches hop authenticity after termination; 'enable TLS' is not the cache-key property. Module 5.4 uses the same RFC for the socket-scheme cell: client X-Forwarded-Proto is not TLS."
   - id: rfc-9110-http
     source: IETF RFC 9110 HTTP Semantics
     version: "RFC 9110"
@@ -202,3 +202,30 @@ pins:
     url: "https://datatracker.ietf.org/doc/draft-ietf-oauth-v2-1/"
     role: "Useful direction for OAuth; never represented as a final standard"
     notes: "Internet-Draft as of the 2026-08-23 curriculum snapshot and rechecked 2026-09-06. Module 4.5 must label OAuth 2.1 as draft. Do not treat a vendor 'OAuth 2.1' dashboard as RFC 9700 or ASVS v5.0.0-10.3.1."
+  - id: nist-privacy-framework-1.0
+    source: NIST Privacy Framework
+    version: "1.0"
+    status: final
+    publishedAt: "2020-01-16"
+    reviewedAt: "2026-09-06"
+    url: "https://www.nist.gov/privacy-framework"
+    role: "Privacy risk-management outcomes; not a deletion-graph test"
+    notes: "Version 1.0 remains the only final Privacy Framework. Module 5.1 uses it for Identify/Govern/Control/Communicate vocabulary; the lab oracle is leftover analytics bodies after delete."
+  - id: nist-privacy-framework-1.1
+    source: NIST Privacy Framework 1.1
+    version: "1.1 IPD"
+    status: draft
+    publishedAt: "2025-04-14"
+    reviewedAt: "2026-09-06"
+    url: "https://csrc.nist.gov/pubs/cswp/40/nist-privacy-framework-11/ipd"
+    role: "Draft realignment with CSF 2.0; not a current baseline"
+    notes: "CSWP 40 Initial Public Draft, 14 April 2025. Comment period closed 13 June 2025. NIST has not published a final 1.1 as of the 2026-09-06 check. Module 5.1 must label 1.1 draft and keep 1.0 as the final pin."
+  - id: rfc-9106-argon2
+    source: IETF RFC 9106 Argon2 Memory-Hard Function for Password Hashing
+    version: "RFC 9106"
+    status: final
+    publishedAt: "2021-09"
+    reviewedAt: "2026-09-06"
+    url: "https://datatracker.ietf.org/doc/html/rfc9106"
+    role: "Password KDF; not note-body encryption"
+    notes: "Module 5.2 names Argon2 as the password-at-rest row. Do not apply RFC 9106 to note bodies; that cell is AEAD with keys in 5.3."

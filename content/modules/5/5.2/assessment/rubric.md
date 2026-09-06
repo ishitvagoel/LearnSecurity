@@ -8,12 +8,12 @@ Cryptographic properties and safe use
 
 ## Evidence checklist
 
-- [ ] Crypto decision table and misuse tests
-- [ ] Transfer task (Clinic: SSN column labeled “encrypted” that is b64.)
-- [ ] Lab `labs/5.2/5.2-lab`: forbidden outcome **Stored secret is mere encoding of plaintext**
-- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Crypto decision table and misuse-focused tests
+- [ ] Transfer task (Clinic: SSN column labeled encrypted that is Base64)
+- [ ] Lab `labs/5.2/5.2-lab`: forbidden outcome **protect is reversible as Base64**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: known-plaintext-b64 test in CI.
+- [ ] Operate signal without plaintext: known-plaintext Base64 in CI
 
 ## Rubric
 

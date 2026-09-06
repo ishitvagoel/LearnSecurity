@@ -1,29 +1,31 @@
-# 5.2 — Cryptographic properties and safe use (Review)
+# 5.2-LO-08 — Review Base64-as-encryption as a PR, not a crypto ticket
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** ASVS 5.0.0 V11 (final); RFC 9106 Argon2 (final) for *passwords* not this field; never roll a cipher. This lab’s cell is confidentiality of a stored secret at rest — encoding is not encryption.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-11.3.3`.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab at-rest protection
 
-protect(secret) must not be reversible as Base64 of the plaintext. Encoding, hex, and “obfuscation” are not confidentiality mechanisms.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Operator who can read the stored field; stolen disk of the lab dict.
-- **Trust:** Local protect()/looks_encrypted(). Real AEAD keys are 5.3.
 Review `labs/5.2/5.2-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/5.2.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|"Base64 of secret"| Property["Property - good if tested"]
+  Q -->|"we use AES"| Mechanism[Mechanism - no test]
+  Q -->|"HTTPS"| False[False assurance]
+```
 
-- Seeded smell (label it yourself): protect = base64
-- Seeded smell (label it yourself): AES-ECB “because we need it deterministic”
-- Seeded smell (label it yourself): JWT as encryption
-- Seeded smell (label it yourself): No looks_encrypted test
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- `protect = base64`
+- AES-ECB “because we need it deterministic”
+- JWT as encryption
+- No `looks_encrypted` test
+
+Also reject: rolling a cipher, keys in lessons, real PII in fixtures.
 
 ## Misconceptions
 
@@ -33,8 +35,8 @@ Also reject: client trust, interpreter concatenation, Report-Only as enforcement
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_protect_is_not_mere_encoding`.
 
 ## Transfer
 
-Password hashing vs field encryption vs backup encryption.
+Clinic PR that renames a column to `ssn_encrypted` without a reversibility test is incomplete.

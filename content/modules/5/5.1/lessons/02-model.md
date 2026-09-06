@@ -1,53 +1,77 @@
-# 5.1 — Data lifecycle and privacy engineering (2 Model)
+# 5.1-LO-02 — A deletion graph a second engineer can test
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** NIST Privacy Framework 1.0 (final); NIST PF 1.1 IPD stays **draft** if cited; ASVS 5.0.0 V14; MASVS-PRIVACY for later mobile caches.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** NIST Privacy Framework 1.0 (final); OWASP ASVS 5.0.0 (final) `v5.0.0-14.1.1` and `v5.0.0-14.2.4`.
 
-## Property (start here)
+## Can a second engineer name pytest cases from your inventory?
 
-After account deletion, SecureCollab must not retain note bodies in an analytics copy. Retention is a 1.1 privacy/confidentiality property, not a checkbox in a DPA.
+“We delete the user” is not this lesson. A reviewable model names **every copy of the body** and **who may retain an exception**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab Phase 1 freeze: local `NOTES` / `ANALYTICS` / `SEARCH`. User `alice`. No live warehouse.
 
-- **Attacker:** Insider with analytics DB; buyer of a “de-identified” export that still has bodies.
-- **Trust:** Local NOTES vs ANALYTICS maps. Real warehouses are 7.4 workers.
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: every copy is a row
+
+```mermaid
+flowchart LR
+  Body[Note body] --> Notes[NOTES]
+  Body --> Analytics[ANALYTICS]
+  Body --> Search[SEARCH]
+  Body --> Backup["Backup - 5.5 residual"]
+  Delete[delete_account] --> Notes
+  Delete --> Analytics
+  Delete --> Search
+```
+
+If an arrow is missing, leftover retention appears. This lab executes notes, analytics, and search.
+
+## Mental model: inventory before redaction
+
+```mermaid
+flowchart TD
+  Field[Body field] --> Sink1[Notes table]
+  Field --> Sink2[Analytics]
+  Field --> Sink3[Search]
+  Sink2 --> Rule{"In deletion graph?"}
+  Rule -->|no| Fail[Property false]
+```
+
+Module 3.1 classified Confidential × sink. This module adds *time after delete*.
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | deleted user, analytics role, remaining notes table |
-| Objects | body in NOTES, body in ANALYTICS |
-| Actions | delete_account, body_retained |
-| Channels | product DB, analytics copy, backups (residual) |
-| TCB | Delete use-case that enumerates copies. |
-| Untrusted | “We don’t use analytics for authz” as a reason to skip delete |
-| State / time | Delete T+0; warehouse load T+6h still has yesterday’s extract. |
-| 1.1 cell | Privacy + confidentiality of bodies after the legal/product relationship ends. |
+| Subjects | alice; analytics insider; export buyer |
+| Objects | note body in NOTES, ANALYTICS, SEARCH |
+| Actions | `delete_account`; `body_retained`; `search_retained` |
+| Channels | App DB; warehouse; search index |
+| TCB | Delete use-case that walks the inventory |
+| Untrusted | “Anonymized”; privacy-policy PDF |
+| State / time | Read after delete |
+| 1.1 cell | Privacy + confidentiality over time |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| user | NOTES body | delete | gone |
-| analyst | ANALYTICS body | after-delete | gone |
-| backup | body | restore | residual-named |
-| user | delete UI | complete | accessible |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| alice (active) | analytics body | retain | allow (product) |
+| alice (deleted) | analytics body | retain | deny |
+| alice (deleted) | search body | retain | deny |
+| legal-hold owner | named copy | retain | exception (E6, documented) |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/5.1/5.1-lab` file `lifecycle.py`.
+Draw this map so a second engineer could name pytest cases. Point at `labs/5.1/5.1-lab` file `lifecycle.py`.
 
 ## Transfer
 
-CSV export to a partner; clinic-booking card PHI.
+Clinic appointment card + notes. Partner CSV export.
 
 ## Residual risk
 
-Legal hold copies — named exception with owner (E6).
+Backups (5.5); mobile cache (8.2); tickets with paste.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

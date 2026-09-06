@@ -1,38 +1,44 @@
-# 5.1 — Data lifecycle and privacy engineering (5 Verify)
+# 5.1-LO-05 — Evidence is body_retained None after delete, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** NIST Privacy Framework 1.0 (final); NIST PF 1.1 IPD stays **draft** if cited; ASVS 5.0.0 V14; MASVS-PRIVACY for later mobile caches.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-14.2.4`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-After account deletion, SecureCollab must not retain note bodies in an analytics copy. Retention is a 1.1 privacy/confidentiality property, not a checkbox in a DPA.
+“We have a DPA” is not evidence. The oracle is the local pair.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Insider with analytics DB; buyer of a “de-identified” export that still has bodies.
-- **Trust:** Local NOTES vs ANALYTICS maps. Real warehouses are 7.4 workers.
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail leftover analytics or search"]
+  X["--impl fixed"] --> P["Must pass both None"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Analytics copy still holds note body after account deletion |
-| Failure | Fail closed: Inventory copies; delete or unlink bodies in each |
+| Negative / abuse | analytics and search bodies gone after delete |
+| Normal | analytics present before delete |
+| Not claimed | Backups; mobile cache; scheduled warehouse jobs |
 
-Lab tests: `test_property.py` under `labs/5.1/5.1-lab`.
+Lab tests in `labs/5.1/5.1-lab/tests/test_property.py`:
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Analytics copy still holds note body after account deletion`
-- `--impl fixed`: **pass**
+```
+python3 -m pytest labs/5.1/5.1-lab/tests --impl vulnerable
+python3 -m pytest labs/5.1/5.1-lab/tests --impl fixed
+```
 
-after delete body_retained is None.
+## What the tests do not prove
+
+- Backup restore (5.5)
+- Mobile offline copies (8.2)
+- Automatic retention schedule (`v5.0.0-14.2.7` Level 3 advanced)
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-CSV export to a partner; clinic-booking card PHI.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic appointment card. A test that only asserts HTTP 200 on delete is not retention evidence (see 9.3).

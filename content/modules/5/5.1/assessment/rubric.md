@@ -9,11 +9,11 @@ Data lifecycle and privacy engineering
 ## Evidence checklist
 
 - [ ] Data-flow inventory, retention/deletion matrix, privacy review
-- [ ] Transfer task (Appointment card with notes.)
+- [ ] Transfer task (Clinic: appointment card with leftover notes)
 - [ ] Lab `labs/5.1/5.1-lab`: forbidden outcome **Analytics copy still holds note body after account deletion**
-- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: deleted_user_body_hits; warehouse SLA for purge.
+- [ ] Operate signal without note bodies / secrets: `deleted_user_body_hits`
 
 ## Rubric
 

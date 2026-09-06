@@ -1,52 +1,48 @@
-# 5.2 — Cryptographic properties and safe use (3 Break)
+# 5.2-LO-03 — Observe Base64 labeled encryption, do not trophy a decoder
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** ASVS 5.0.0 V11 (final); RFC 9106 Argon2 (final) for *passwords* not this field; never roll a cipher. This lab’s cell is confidentiality of a stored secret at rest — encoding is not encryption.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-11.3.3`.
 
-## Property (start here)
+## Authorized scope
 
-protect(secret) must not be reversible as Base64 of the plaintext. Encoding, hex, and “obfuscation” are not confidentiality mechanisms.
+`labs/5.2/5.2-lab` only. Synthetic plaintext `secret`. No live ciphertext.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** `protect()` is reversible as Base64 to `secret`.
 
-- **Attacker:** Operator who can read the stored field; stolen disk of the lab dict.
-- **Trust:** Local protect()/looks_encrypted(). Real AEAD keys are 5.3.
-**Forbidden outcome:** Stored secret is mere encoding of plaintext
+## Mental model: reversible encoding
 
-**Authorized scope:** `labs/5.2/5.2-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable crypto.py encodes rather than encrypts.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: protect returns b64(secret).
-
-## Vulnerable fixture (local)
-
-```python
-import base64
-def protect(p):
-    return base64.b64encode(p.encode()).decode()
-def looks_encrypted(t):
-    return t != 'secret'
+```mermaid
+flowchart TD
+  Call["protect secret"] --> B64[Base64]
+  B64 --> Decode[decode equals secret]
 ```
+
+The vulnerable tree demonstrates **cause** (encoding named encryption), not a decoder script for production.
+
+## What to read in the fixture
+
+`vulnerable/crypto.py` `protect` Base64-encodes the string. Tests require that decoding does **not** yield `secret`, and that `looks_encrypted` is true on the fixed stand-in.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Mechanism name “encrypted” applied to encoding. |
-| Impact | Any reader of the column gets the secret. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Encoding labeled encryption |
+| Impact | Any column reader gets the secret |
+| Not the lesson | A cipher product name as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/5.2/5.2-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/5.2/5.2-lab/tests --impl vulnerable
+```
+
+Record `test_protect_is_not_mere_encoding`. Do not add a live decoder against other hosts.
 
 ## Transfer
 
-Password hashing vs field encryption vs backup encryption.
+Clinic SSN column. Predict without leaving this directory.
 
 ## Non-goals
 

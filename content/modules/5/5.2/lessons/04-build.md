@@ -1,51 +1,51 @@
-# 5.2 — Cryptographic properties and safe use (4 Build)
+# 5.2-LO-04 — Refuse encoding as the confidentiality mechanism
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** ASVS 5.0.0 V11 (final); RFC 9106 Argon2 (final) for *passwords* not this field; never roll a cipher. This lab’s cell is confidentiality of a stored secret at rest — encoding is not encryption.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-11.2.1` and `v5.0.0-11.3.3`.
 
-## Property (start here)
+## Structural means the stored value is not reversible as encoding
 
-protect(secret) must not be reversible as Base64 of the plaintext. Encoding, hex, and “obfuscation” are not confidentiality mechanisms.
+`protect` must not be Base64 of the plaintext. The lab’s `aesgcm:` prefix is a **teaching flag** that `looks_encrypted` can assert — not a cipher to copy into FastAPI.
 
-## Attacker capabilities and trust assumptions
+## Mental model: stand-in, then a real AEAD in 5.3
 
-- **Attacker:** Operator who can read the stored field; stolen disk of the lab dict.
-- **Trust:** Local protect()/looks_encrypted(). Real AEAD keys are 5.3.
-protect output is not b64(plaintext); looks_encrypted True.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-def protect(p):
-    # stand-in for an AEAD; teaching flag only
-    return 'aesgcm:' + str(len(p))
-def looks_encrypted(t):
-    return t.startswith('aesgcm:')
+```mermaid
+flowchart TD
+  Call[protect] --> Enc{reversible as Base64?}
+  Enc -->|yes| Fail[Property false]
+  Enc -->|no| Flag["aesgcm prefix - teaching only"]
+  Flag --> Keys["Real key lifecycle - 5.3"]
 ```
+
+Fail-safe: if the AEAD library or key is missing, **do not store plaintext** (refuse write).
 
 ## Why this restores the cell
 
-Use a standard AEAD with a managed key; tests forbid b64 identity.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| `protect("secret")` | not equal to `secret` |
+| Base64 decode | not equal to `secret` |
+| `looks_encrypted` | true on the stand-in |
 
 ## What this is not
 
-passlib/bcrypt is for passwords, not note bodies. Fernet still needs 5.3 key storage.
-
-AES-GCM with a nonce reuse is not this property. Do not paste attack scripts — name the misuse.
+Volume encryption. HTTPS. Argon2 on a note body. JWT. ECB “because we need deterministic.”
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name property and predicate. Run:
+
+```
+python3 -m pytest labs/5.2/5.2-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Password hashing vs field encryption vs backup encryption.
+Clinic: replace Base64 column with AEAD and a managed key (5.3).
 
 ## Residual risk
 
-Memory dumps; authorized operators.
+Nonce reuse (`v5.0.0-11.3.4` Level 3 advanced); key in the same row.

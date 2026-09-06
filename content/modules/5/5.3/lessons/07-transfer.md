@@ -1,33 +1,43 @@
-# 5.3 — Key and secret lifecycle (7 Transfer)
+# 5.3-LO-07 — Transfer: gist-leaked clinic API key
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** ASVS 5.0.0 V11/V13 (final); OWASP secrets guidance; NIST PQC standards are for *agility planning*, not a lab quantum attack.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-13.2.3` and `v5.0.0-13.3.1`.
 
-## Property (start here)
+## Change the workplace; keep old-value-must-die
 
-A disposable lab API key that is a hardcoded default must not authenticate after rotation. The old value fails. Inventory + rotation is the property, not “we have a secrets manager” as a sticker.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic lab API key in a gist. Also sketch envelope DEK vs KEK on compromise.
 
-- **Attacker:** Anyone who cloned the repo or an old container image with sk-lab-hardcoded.
-- **Trust:** Local auth(current). Real KMS later.
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite with a backend integration key.
 
-**Prompt:** Envelope encryption DEK vs KEK; compromise runbook.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic lab API key in a GitHub gist.
+1. attacker capabilities (gist reader; old container — not a live clinic);
+2. trust assumptions (which current secret is TCB; the vault brand is not);
+3. forbidden outcome (`auth` true for the leaked string after rotate, not “HIPAA”);
+4. a test idea on a **local** fixture only;
+5. residual (images; logs; worker default; HSM Level 3);
+6. WCAG only if a human rotation acknowledgement is in the claim.
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: leak, rotate, prove dead
+
+```mermaid
+flowchart LR
+  Gist[Gist copy] --> Old[Old string]
+  Rotate[Set current] --> Old
+  Old --> Test{auth false?}
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | pydantic Settings reading .env does not rotate anything.… |
-| Live-target plan | Lab policy |
+| “We use Vault” without a test | Sticker |
+| Live gist search | Lab policy |
+| gitignore as revocation | Artifact still live |
 
 ## Practice
 
-One page. No keys. The lab `labs/5.3/5.3-lab` stays the only running system you may break.
+One page. No keys. `labs/5.3/5.3-lab` is the only running system you may break.

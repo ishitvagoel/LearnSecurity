@@ -1,29 +1,31 @@
-# 5.4 — Secure communication and channel binding (Review)
+# 5.4-LO-08 — Review trusted Forwarded-Proto as a PR, not a TLS ticket
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** RFC 8446/9846 TLS 1.3 (final); ASVS 5.0.0 V12; MASVS-NETWORK for 8.x. Pinning is a trade-off, not a universal rule.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-12.2.1`.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab channel binding
 
-A client-supplied X-Forwarded-Proto: https does not make the channel HTTPS. Channel authenticity is what the server socket actually negotiated (or a trusted proxy you *bound*), not a header from the browser.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Client on cleartext who wants the app to think TLS is on (cookie Secure flags, redirects).
-- **Trust:** Direct socket proto in the lab. Real deployments may trust a *locked* load balancer hop only.
 Review `labs/5.4/5.4-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/5.4.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|"header https socket http"| Property["Property - good if tested"]
+  Q -->|"Force HTTPS"| Mechanism[Mechanism - header trust]
+  Q -->|"HSTS preload"| False[False assurance]
+```
 
-- Seeded smell (label it yourself): channel_is_https trusts X-Forwarded-Proto from anyone
-- Seeded smell (label it yourself): --proxy-headers with *
-- Seeded smell (label it yourself): No test header vs socket mismatch
-- Seeded smell (label it yourself): HSTS on an app that still accepts http
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- `channel_is_https` trusts `X-Forwarded-Proto` from anyone
+- `--proxy-headers` with `*`
+- No test header vs socket mismatch
+- HSTS on an app that still accepts http
+
+Also reject: live TLS attacks, keys in lessons.
 
 ## Misconceptions
 
@@ -33,8 +35,8 @@ Also reject: client trust, interpreter concatenation, Report-Only as enforcement
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_client_forwarded_proto_is_not_tls`.
 
 ## Transfer
 
-mTLS service identity vs this header.
+Clinic PR that “enabled HTTPS” by trusting Forwarded-Proto is incomplete.

@@ -1,6 +1,6 @@
 # 5.1 — Data lifecycle and privacy engineering
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. No exploit walkthroughs.
 
 ## Identity
 
@@ -9,71 +9,74 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** Data lifecycle and privacy engineering
 - **phase / track / difficulty:** 5 / core / intermediate
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Blueprint §7; 1.1–4.5 authored. 3.1 classified the body; 4.1 deleted the subject.
 - **routeTags:** complete, web-api
-- **releaseMilestone:** None
+- **releaseMilestone:** null
 - **masteryGate:** 5
 
 ## Objective hierarchy
 
-1. Produce **Data-flow inventory, retention/deletion matrix, privacy review** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce a **data-flow inventory, retention/deletion matrix, and privacy review** for SecureCollab Phase 1 (notes, analytics, search).
+2. Name attacker capabilities (warehouse insider; “de-identified” export) and trust assumptions (Postgres DELETE is not warehouse DELETE).
+3. Transfer: clinic appointment card with leftover notes.
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+3.1 field × sink; 4.1 subject delete; 5.5 backups later; 8.2 mobile cache later.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- Encryption makes retention OK.
+- Privacy equals confidentiality.
+- GDPR text in footer is the invariant.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+Classification (3.1) → this module’s deletion graph → 5.5 backups / 8.2 mobile.
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true of analytics after `delete_account`?
+- What fails if only the notes row is removed?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can go wrong with a secondary copy after the person left?
+- What residual remains in backups and tickets?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/5.1/5.1-lab`. Forbidden: analytics or search still holds the body after delete. No live warehouses.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-ASVS V14; MASVS-PRIVACY; NIST Privacy Framework 1.0 — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- NIST Privacy Framework 1.0 (final). Privacy Framework 1.1 IPD **draft**.
+- OWASP ASVS 5.0.0 (final): `v5.0.0-14.1.1`, `v5.0.0-14.1.2`, `v5.0.0-14.2.3`, `v5.0.0-14.2.4`; `v5.0.0-14.2.7` **Level 3, labeled advanced**.
+- MASVS-PRIVACY named for later mobile; India DPDP **awareness**.
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+New copy (warehouse, search, ticket, mobile); superseding Privacy Framework.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: Data-flow inventory, retention/deletion matrix, privacy review.
+Evidence: inventory, retention/deletion matrix, privacy review. Feeds Gate 5.
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`deleted_user_body_hits`; warehouse purge SLA; never log bodies.
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: deletion-graph mental models; ASVS v5.0.0-14.2.4; v5.0.0-14.2.7 labeled Level 3 advanced; PF 1.1 draft |

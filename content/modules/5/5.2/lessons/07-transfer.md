@@ -1,33 +1,42 @@
-# 5.2 — Cryptographic properties and safe use (7 Transfer)
+# 5.2-LO-07 — Transfer: SSN column labeled encrypted that is Base64
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** ASVS 5.0.0 V11 (final); RFC 9106 Argon2 (final) for *passwords* not this field; never roll a cipher. This lab’s cell is confidentiality of a stored secret at rest — encoding is not encryption.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-11.3.3`; RFC 9106 (final) if a password row appears.
 
-## Property (start here)
+## Change the workplace; keep encoding-is-not-confidentiality
 
-protect(secret) must not be reversible as Base64 of the plaintext. Encoding, hex, and “obfuscation” are not confidentiality mechanisms.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic: SSN column labeled “encrypted” that is Base64. Also name password hashing vs field AEAD vs backup encryption.
 
-- **Attacker:** Operator who can read the stored field; stolen disk of the lab dict.
-- **Trust:** Local protect()/looks_encrypted(). Real AEAD keys are 5.3.
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite with an `ssn_encrypted` column.
 
-**Prompt:** Password hashing vs field encryption vs backup encryption.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic: SSN column labeled “encrypted” that is b64.
+1. attacker capabilities (DB admin; stolen disk — not a live clinic);
+2. trust assumptions (which AEAD+key is TCB; the column name is not);
+3. forbidden outcome (Base64 round-trip of the stand-in, not “HIPAA”);
+4. a test idea on a **local** fixture only;
+5. residual (key in the same row; nonce reuse Level 3; TLS ≠ at rest);
+6. WCAG only if a human “show SSN” path is in the claim (masked until explicit view — `v5.0.0-14.2.6` is Level 3 elsewhere).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: the label is not the mechanism
+
+```mermaid
+flowchart LR
+  Col["ssn_encrypted"] --> B64[Base64]
+  B64 --> Reader[Admin reads SSN]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | passlib/bcrypt is for passwords, not note bodies. Fernet still needs 5.3 key sto… |
-| Live-target plan | Lab policy |
+| “Disk encryption is on” | Wrong observer |
+| Live clinic DB | Lab policy |
+| Argon2 on the SSN | Wrong property |
 
 ## Practice
 
-One page. No keys. The lab `labs/5.2/5.2-lab` stays the only running system you may break.
+One page. No keys. `labs/5.2/5.2-lab` is the only running system you may break.

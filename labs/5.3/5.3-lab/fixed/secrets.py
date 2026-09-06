@@ -1,2 +1,2 @@
-def auth(presented, current=None):
+def auth(presented: str, current=None) -> bool:
     return bool(current) and presented == current

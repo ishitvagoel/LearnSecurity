@@ -1,48 +1,50 @@
-# 5.4 — Secure communication and channel binding (4 Build)
+# 5.4-LO-04 — Bind the scheme to the server socket
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** RFC 8446/9846 TLS 1.3 (final); ASVS 5.0.0 V12; MASVS-NETWORK for 8.x. Pinning is a trade-off, not a universal rule.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-12.2.1`.
 
-## Property (start here)
+## Structural means the client cannot assert TLS
 
-A client-supplied X-Forwarded-Proto: https does not make the channel HTTPS. Channel authenticity is what the server socket actually negotiated (or a trusted proxy you *bound*), not a header from the browser.
+`channel_is_https` must use `server_scheme == "https"` only. Structural means a bound proxy identity if you add one later — not trusting a header name, not “Force HTTPS” in a UI.
 
-## Attacker capabilities and trust assumptions
+## Mental model: ignore the client proto
 
-- **Attacker:** Client on cleartext who wants the app to think TLS is on (cookie Secure flags, redirects).
-- **Trust:** Direct socket proto in the lab. Real deployments may trust a *locked* load balancer hop only.
-header https + socket http => False.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-def channel_is_https(headers, server_scheme):
-    return server_scheme == 'https'
+```mermaid
+flowchart TD
+  Call[channel_is_https] --> Sock{server_scheme https?}
+  Sock -->|yes| Allow[Allow]
+  Sock -->|no| Deny[Deny]
 ```
+
+Fail-safe: unknown scheme **denies** TLS claims (do not treat as https).
 
 ## Why this restores the cell
 
-Ignore client proto unless the immediate peer is a trusted proxy with a bound identity.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| socket https | true |
+| socket http | false |
+| header https + socket http | false |
 
 ## What this is not
 
-uvicorn --proxy-headers without a trusted proxy IP is this bug.
-
-Correct TLS to the LB is not e2e if you needed e2e (messaging).
+`--proxy-headers` with `*`. HSTS on an app that still accepts http. Pinning as a universal rule. mTLS (named residual).
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name predicate. Run:
+
+```
+python3 -m pytest labs/5.4/5.4-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-mTLS service identity vs this header.
+Clinic: stop treating axios `https://` as the API socket.
 
 ## Residual risk
 
-Pinning mobile apps (8.x) vs operational breakage — document, don’t mandate.
+TLS termination at LB; e2e messaging; `v5.0.0-12.1.4` / `v5.0.0-12.1.5` Level 3 advanced.

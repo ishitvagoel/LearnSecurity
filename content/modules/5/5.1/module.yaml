@@ -7,7 +7,7 @@ difficulty: intermediate
 status: reviewed
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 1.1–2.4 Pass A complete
+- Prior phase Pass A per blueprint §7; 1.1–4.5 Pass A complete
 routeTags:
 - complete
 - web-api
@@ -20,11 +20,13 @@ outcomes:
 - Do not instruct live-target attacks or mix awareness lists as compliance
 reviewTriggers:
 - Material SecureCollab change in this module's concern
+- New analytics, search, backup, or mobile copy
 - Superseding final standard
 invariants:
 - Claims are properties of SecureCollab (or the elective system), not tool names
 - Labs stay in authorized local or official training scope
 - Draft standards are labeled draft
+- Delete must walk every inventoried copy of the body
 threatModelPrompts:
 - What can go wrong for this module's assets?
 - Which trust boundary or interpreter is in play?
@@ -36,11 +38,11 @@ concepts:
 learningObjects:
 - id: 5.1-LO-01
   kind: concept-model
-  title: 'Data lifecycle and privacy engineering: property vs mechanism'
+  title: Delete must walk every copy, not only the notes table
   path: lessons/01-property.md
 - id: 5.1-LO-02
   kind: design-exercise
-  title: Model SecureCollab for 5.1
+  title: A deletion graph a second engineer can test
   path: lessons/02-model.md
 - id: 5.1-LO-03
   kind: mechanism-lab
@@ -48,23 +50,23 @@ learningObjects:
   path: lessons/03-break.md
 - id: 5.1-LO-04
   kind: design-exercise
-  title: Structural fix restoring the 5.1 invariant
+  title: Walk the inventory in the same delete use-case
   path: lessons/04-build.md
 - id: 5.1-LO-05
   kind: verification-lab
-  title: Forbidden-outcome tests for 5.1
+  title: Fail-on-vulnerable then pass-on-fixed for leftover analytics
   path: lessons/05-verify.md
 - id: 5.1-LO-06
   kind: operations-exercise
-  title: Detect/recover notes for 5.1
+  title: Detect leftover bodies; purge without logging them
   path: lessons/06-operate.md
 - id: 5.1-LO-07
   kind: transfer-challenge
-  title: 'Transfer: Appointment card with notes.'
+  title: 'Transfer: appointment card still holds notes'
   path: lessons/07-transfer.md
 - id: 5.1-LO-08
   kind: code-review
-  title: Seeded review for 5.1
+  title: Seeded review of leftover analytics
   path: lessons/08-review.md
 labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
@@ -90,12 +92,28 @@ assessmentBlueprint:
   communicate: Residual risk without compliance theater
 masteryGate: '5'
 standardsRefs:
-- source: OWASP ASVS / module anchors (see spec)
-  version: 5.0.0
+- source: OWASP Application Security Verification Standard
+  version: '5.0.0'
   status: final
   requirementIds:
-  - V14
+  - v5.0.0-14.1.1
+  - v5.0.0-14.1.2
+  - v5.0.0-14.2.3
+  - v5.0.0-14.2.4
+  - v5.0.0-14.2.7
   url: https://owasp.org/www-project-application-security-verification-standard/
+- source: NIST Privacy Framework
+  version: '1.0'
+  status: final
+  requirementIds:
+  - identify-control-communicate
+  url: https://www.nist.gov/privacy-framework
+- source: NIST Privacy Framework
+  version: '1.1 IPD'
+  status: draft
+  requirementIds:
+  - cswp-40
+  url: https://csrc.nist.gov/pubs/cswp/40/nist-privacy-framework-11/ipd
 misconceptions:
 - Encryption makes retention OK
 - Privacy equals confidentiality
@@ -104,7 +122,7 @@ operationalConsiderations:
 - deleted_user_body_hits; warehouse SLA for purge.
 - Legal hold copies — named exception with owner (E6).
 author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+reviewer: pending independent quality and lab-safety review
 lastReviewedAt: '2026-08-24'
 nextReviewAt: '2027-02-24'
 changelog:
@@ -122,3 +140,7 @@ changelog:
 - date: '2026-08-24'
   note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
     Pass C keys isolated'
+- date: '2026-09-06'
+  note: 'Depth pass: deletion-graph mental models, mermaid diagrams, ASVS
+    v5.0.0-14.2.4, v5.0.0-14.2.7 labeled Level 3 advanced, Privacy Framework 1.1
+    labeled draft; independent review still required'

@@ -1,40 +1,44 @@
-# 5.1 — Data lifecycle and privacy engineering (6 Operate)
+# 5.1-LO-06 — Detect leftover bodies; purge without logging them
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** NIST Privacy Framework 1.0 (final); NIST PF 1.1 IPD stays **draft** if cited; ASVS 5.0.0 V14; MASVS-PRIVACY for later mobile caches.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-14.2.4`.
 
-## Property (start here)
+## Prevention is not absolute
 
-After account deletion, SecureCollab must not retain note bodies in an analytics copy. Retention is a 1.1 privacy/confidentiality property, not a checkbox in a DPA.
+A replica warehouse, a backup, or a support ticket can still hold the body. Pair detect and recover. Do not log bodies (3.1).
 
-## Attacker capabilities and trust assumptions
+## Mental model: hunt ids, not bodies
 
-- **Attacker:** Insider with analytics DB; buyer of a “de-identified” export that still has bodies.
-- **Trust:** Local NOTES vs ANALYTICS maps. Real warehouses are 7.4 workers.
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Job[Retention job] --> Hit{"deleted user id in ANALYTICS?"}
+  Hit -->|yes| Metric["deleted_user_body_hits += 1"]
+  Metric --> Alert["reason=deleted_user_body_hits user_id=alice no body"]
+  Alert --> Purge[Purge partition]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | Job that searches analytics for deleted user ids (careful with logs). |
-| Signal (no bodies) | deleted_user_body_hits; warehouse SLA for purge. |
-| Revoke / recover | Purge warehouse partitions; notify if required by policy (not fake GDPR theater). |
-| Residual | Legal hold copies — named exception with owner (E6). |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `deleted_user_body_hits`; warehouse SLA for purge |
+| Signal | user id, store name; never the body |
+| Recover | Purge partitions; named legal-hold owner |
+| Residual | Backups still contain the row (5.5) |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/5.1/5.1-lab`.
+Write one log line you would accept. Tie it to `labs/5.1/5.1-lab`.
+
+```
+log_denied reason=deleted_user_body_hits store=analytics user_id=alice request_id=req_51lc
+```
+
+Reject any line that includes a note body or a personal email.
 
 ## Transfer
 
-CSV export to a partner; clinic-booking card PHI.
-
-## Usability
-
-Delete-account journey must be completable with keyboard and clear status (WCAG 3.3.x). An unreachable delete is a privacy incident (1.4).
+Clinic: detect appointment-card notes after patient delete; do not paste the chart into the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+SIEM product names are not the property.

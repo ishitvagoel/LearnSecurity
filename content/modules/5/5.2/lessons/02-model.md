@@ -1,44 +1,60 @@
-# 5.2 — Cryptographic properties and safe use (2 Model)
+# 5.2-LO-02 — A crypto decision table a second engineer can test
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** ASVS 5.0.0 V11 (final); RFC 9106 Argon2 (final) for *passwords* not this field; never roll a cipher. This lab’s cell is confidentiality of a stored secret at rest — encoding is not encryption.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-11.3.3`; RFC 9106 (final) for the password row only.
 
-## Property (start here)
+## Can a second engineer name pytest cases from your table?
 
-protect(secret) must not be reversible as Base64 of the plaintext. Encoding, hex, and “obfuscation” are not confidentiality mechanisms.
+“We use AES” is not this lesson. A reviewable model names **property, field, algorithm family, and what it is not**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab Phase 1 freeze: local `protect` / `looks_encrypted`. Plaintext stand-in `secret`. No live KMS.
 
-- **Attacker:** Operator who can read the stored field; stolen disk of the lab dict.
-- **Trust:** Local protect()/looks_encrypted(). Real AEAD keys are 5.3.
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: four rows, four wrong tools
+
+```mermaid
+flowchart TD
+  Body[Note body at rest] --> AEAD[AEAD]
+  Pw[Password verifier] --> Argon["Argon2 RFC 9106"]
+  Token[Session token] --> MAC[MAC or server store]
+  Transit[On the wire] --> TLS["TLS 5.4"]
+```
+
+Using Argon2 on a note body, or Base64 on a password, mixes rows.
+
+## Mental model: the test is reversibility, not a product name
+
+```mermaid
+flowchart LR
+  Out[protect output] --> B64{Base64 of secret?}
+  B64 -->|yes| Fail[Property false]
+  B64 -->|no| Flag{looks_encrypted?}
+```
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | app, disk observer |
-| Objects | plaintext, stored blob |
-| Actions | protect |
-| Channels | file/db column |
-| TCB | A real AEAD or KDF appropriate to the threat — lab may stub as non-b64. |
-| Untrusted | Base64, rot13, homegrown XOR with a constant |
-| State / time | Stolen backup years later (crypto agility 5.3). |
-| 1.1 cell | Confidentiality of the stored secret vs honest storage observers. |
+| Subjects | storage observer; developer who named the column encrypted |
+| Objects | field `secret` at rest |
+| Actions | `protect`; `looks_encrypted` |
+| Channels | DB column stand-in |
+| TCB | AEAD-shaped protect; keys in 5.3 |
+| Untrusted | Column name; “HTTPS therefore encrypted” |
+| State / time | Stolen disk later |
+| 1.1 cell | Confidentiality at rest |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| disk observer | b64 field | read | must-not-be-plaintext |
-| app | AEAD | decrypt-with-key | allow |
-| app | password KDF | note body | wrong-tool |
-| backup | blob | steal | 5.3 key residual |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| storage observer | Base64 field | recover plaintext | deny (must fail) |
+| app | AEAD stand-in | store | allow if not reversible as Base64 |
+| password path | note body | Argon2 | wrong row (named hole) |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/5.2/5.2-lab` file `crypto.py`.
+Draw the table. Point at `labs/5.2/5.2-lab` file `crypto.py`.
 
 ## Transfer
 
@@ -46,8 +62,8 @@ Password hashing vs field encryption vs backup encryption.
 
 ## Residual risk
 
-Memory dumps; authorized operators.
+Memory dumps; authorized operators; real AEAD keys (5.3).
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

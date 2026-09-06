@@ -1,53 +1,69 @@
-# 5.4 — Secure communication and channel binding (2 Model)
+# 5.4-LO-02 — A hop map a second engineer can test
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** RFC 8446/9846 TLS 1.3 (final); ASVS 5.0.0 V12; MASVS-NETWORK for 8.x. Pinning is a trade-off, not a universal rule.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** RFC 9846 (final); OWASP ASVS 5.0.0 (final) `v5.0.0-12.2.1`.
 
-## Property (start here)
+## Can a second engineer name pytest cases from your hop map?
 
-A client-supplied X-Forwarded-Proto: https does not make the channel HTTPS. Channel authenticity is what the server socket actually negotiated (or a trusted proxy you *bound*), not a header from the browser.
+“We enabled HTTPS” is not this lesson. A reviewable model names **each hop and who is allowed to assert the scheme**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab Phase 1 freeze: local `channel_is_https(headers, server_scheme)`. No live LB.
 
-- **Attacker:** Client on cleartext who wants the app to think TLS is on (cookie Secure flags, redirects).
-- **Trust:** Direct socket proto in the lab. Real deployments may trust a *locked* load balancer hop only.
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: three hops
+
+```mermaid
+flowchart LR
+  Device[Device] --> Edge[Edge or LB]
+  Edge --> App[App socket]
+```
+
+Only a **bound** edge may forward proto. This lab has none, so `server_scheme` is the only input.
+
+## Mental model: header is untrusted data
+
+```mermaid
+flowchart TD
+  Hdr[X-Forwarded-Proto] --> Untrusted[Client-controlled]
+  Sock[server_scheme] --> TCB[Lab TCB]
+```
+
+Module 2.2 used hop vs cache key. Here the hop is the channel authenticity cell.
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | client, app, maybe LB |
-| Objects | X-Forwarded-Proto, socket proto |
-| Actions | channel_is_https |
-| Channels | HTTP headers vs TLS |
-| TCB | Socket or a *configured* trusted proxy hop. |
-| Untrusted | Any client header about TLS |
-| State / time | Mixed content, stray http:// bookmark. |
-| 1.1 cell | Authenticity of the transport. |
+| Subjects | cleartext client; app |
+| Objects | channel scheme |
+| Actions | `channel_is_https` |
+| Channels | socket; optional Forwarded header |
+| TCB | server_scheme in this lab |
+| Untrusted | X-Forwarded-Proto from anyone |
+| State / time | cookie flags decided now |
+| 1.1 cell | Authenticity of transport |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| client | X-Forwarded-Proto | assert TLS | deny |
-| socket TLS | channel | https | allow |
-| trusted LB | proto header | assert | allow-if-bound-peer |
-| mobile | pin | fail-closed | trade-off |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| socket https | channel | treat as TLS | allow |
+| socket http | channel | treat as TLS | deny |
+| client header https + socket http | channel | treat as TLS | deny |
+| bound LB (named residual) | proto | assert | not in this fixture |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/5.4/5.4-lab` file `channel.py`.
+Draw the hops. Point at `labs/5.4/5.4-lab` file `channel.py`.
 
 ## Transfer
 
-mTLS service identity vs this header.
+mTLS service identity. SPA axios baseURL.
 
 ## Residual risk
 
-Pinning mobile apps (8.x) vs operational breakage — document, don’t mandate.
+TLS-to-LB not e2e; pinning trade-off; OCSP/ECH Level 3.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

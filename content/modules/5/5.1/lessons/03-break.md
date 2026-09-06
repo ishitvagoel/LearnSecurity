@@ -1,56 +1,49 @@
-# 5.1 — Data lifecycle and privacy engineering (3 Break)
+# 5.1-LO-03 — Observe the leftover analytics body, do not trophy a warehouse dump
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** NIST Privacy Framework 1.0 (final); NIST PF 1.1 IPD stays **draft** if cited; ASVS 5.0.0 V14; MASVS-PRIVACY for later mobile caches.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-14.2.3` and `v5.0.0-14.2.4`.
 
-## Property (start here)
+## Authorized scope
 
-After account deletion, SecureCollab must not retain note bodies in an analytics copy. Retention is a 1.1 privacy/confidentiality property, not a checkbox in a DPA.
+`labs/5.1/5.1-lab` only. Synthetic user `alice` and body `secret`. No live warehouses.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Analytics copy still holds note body after account deletion.
 
-- **Attacker:** Insider with analytics DB; buyer of a “de-identified” export that still has bodies.
-- **Trust:** Local NOTES vs ANALYTICS maps. Real warehouses are 7.4 workers.
-**Forbidden outcome:** Analytics copy still holds note body after account deletion
+## Mental model: notes gone, copies live
 
-**Authorized scope:** `labs/5.1/5.1-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable lifecycle.py leaves analytics body.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: delete_account pops NOTES only.
-
-## Vulnerable fixture (local)
-
-```python
-NOTES={'alice':'secret'}
-ANALYTICS={'alice':'secret'}
-def reset():
-    NOTES.clear(); NOTES['alice']='secret'
-    ANALYTICS.clear(); ANALYTICS['alice']='secret'
-def delete_account(user):
-    NOTES.pop(user, None)
-def body_retained(user):
-    return ANALYTICS.get(user)
+```mermaid
+flowchart TD
+  Del["delete_account alice"] --> Pop["NOTES pop alice"]
+  Del --> Skip["ANALYTICS and SEARCH left"]
+  Skip --> Hit["body_retained returns secret"]
 ```
+
+The vulnerable tree demonstrates **cause** (copy missing from the graph), not a trophy dump of a production warehouse.
+
+## What to read in the fixture
+
+`vulnerable/lifecycle.py` `delete_account` only pops `NOTES`. `body_retained` and `search_retained` still return the body. Tests require both None after delete, and analytics present before delete.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Secondary copy not in the deletion graph. |
-| Impact | Bodies persist after the person left. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Secondary copy not in the deletion graph |
+| Impact | Body persists after the person left |
+| Not the lesson | A privacy-law name as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/5.1/5.1-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/5.1/5.1-lab/tests --impl vulnerable
+```
+
+Record `test_deleted_account_leaves_no_analytics_body`. Do not weaken it to “the notes row is gone.”
 
 ## Transfer
 
-CSV export to a partner; clinic-booking card PHI.
+Clinic: patient deleted; appointment-card notes remain. Predict without leaving this directory.
 
 ## Non-goals
 

@@ -1,6 +1,6 @@
 # 5.3 — Key and secret lifecycle
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. No exploit walkthroughs.
 
 ## Identity
 
@@ -9,71 +9,72 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** Key and secret lifecycle
 - **phase / track / difficulty:** 5 / core / intermediate
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Blueprint §7; 5.2 authored. Application secrets ≠ user passwords (4.2).
 - **routeTags:** complete, web-api
-- **releaseMilestone:** None
+- **releaseMilestone:** null
 - **masteryGate:** 5
 
 ## Objective hierarchy
 
-1. Produce **Key hierarchy, secret inventory, rotation, compromise runbook** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce a **secret inventory, rotation exercise, and compromise runbook** (hardcoded default dies after rotate).
+2. Name attacker capabilities (repo clone; old image) and trust assumptions (Vault sticker is not rotation).
+3. Transfer: clinic gist-leaked API key; envelope DEK vs KEK sketch.
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+5.2 AEAD needs keys; 4.1 leftover artifacts; 7.4 worker defaults later.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- gitignore means it was never leaked.
+- KMS equals rotated.
+- Passwords and API keys are the same lifecycle.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+AEAD (5.2) → this module’s current secret → 7.4 / 8.4 extra copies.
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true of `sk-lab-hardcoded` after rotation?
+- What fails if `current` is missing?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can go wrong with a default in source?
+- What residual remains in images and logs?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/5.3/5.3-lab`. Forbidden: hardcoded default still authenticates after rotation. Disposable lab string only.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-ASVS V11/V13 — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- OWASP ASVS 5.0.0 (final): `v5.0.0-13.3.1`, `v5.0.0-13.2.3`, `v5.0.0-11.1.1`; `v5.0.0-13.3.4` and `v5.0.0-13.3.3` **Level 3, labeled advanced**.
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+New secret class, worker, or mobile embed; superseding ASVS.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: Key hierarchy, secret inventory, rotation, compromise runbook.
+Evidence: inventory, rotation exercise, compromise runbook. Feeds Gate 5.
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`default_secret_used`; never log the value.
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: secret-outlives-rotation mental models; ASVS v5.0.0-13.2.3; L3 rotate/HSM labeled advanced |

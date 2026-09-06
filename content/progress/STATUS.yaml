@@ -14,14 +14,41 @@ defaults:
   ai_security: elective E1
   website_progress: local-first static site (site/); no accounts
 next:
-  id: '5.1'
+  id: '5.5'
   pass: revise
   skill: deepen-curriculum
   inner_skill: standards-pin
-  note: Module 4.5 authoring pass added audience-is-a-name mental models and diagrams;
-    keep 1.4, 2.1-2.4, 3.1-3.4, and 4.1-4.5 developing until independent review. Continue
-    the depth queue one module at a time.
+  note: Module 5.4 authoring pass added hop-versus-claim mental models and diagrams;
+    keep 1.4, 2.1-2.4, 3.1-3.4, 4.1-4.5, and 5.1-5.4 developing until independent review.
+    Continue the depth queue one module at a time.
 spiral_deltas:
+- date: '2026-09-06'
+  module: '5.4'
+  change: Channel-binding loop v2 treats X-Forwarded-Proto as a client claim, binds
+    TLS to the server socket, refuses pinning as a universal rule, pins RFC 9846,
+    and labels ASVS v5.0.0-12.1.4 / 12.1.5 as Level 3 advanced
+  retest: Revisit 2.2 hops; 4.3 Secure cookie flags; 5.3 secrets on the wire; 8.3
+    pinning trade-off
+- date: '2026-09-06'
+  module: '5.3'
+  change: Secret-lifecycle loop v2 treats hardcoded defaults as leftover credentials,
+    refuses vault stickers and gitignore as rotation, and labels ASVS v5.0.0-13.3.3 /
+    13.3.4 as Level 3 advanced
+  retest: Revisit 4.1 leftover artifacts; 5.2 keys; 7.4 worker defaults; 8.4 mobile
+    embeds
+- date: '2026-09-06'
+  module: '5.2'
+  change: Crypto-property loop v2 treats Base64 as encoding not confidentiality, separates
+    Argon2 (RFC 9106) from field AEAD, and labels ASVS v5.0.0-11.3.4 / 11.1.4 as Level
+    3 advanced
+  retest: Revisit 4.3 JWT-as-format; 5.3 key storage; 5.4 TLS as a different cell
+- date: '2026-09-06'
+  module: '5.1'
+  change: Data-lifecycle loop v2 treats delete as a graph of copies, refuses encryption
+    as deletion, pins Privacy Framework 1.0 while labeling 1.1 IPD draft, and labels
+    ASVS v5.0.0-14.2.7 as Level 3 advanced
+  retest: Revisit 3.1 field-times-sink; 4.1 subject delete; 5.5 backups; 8.2 mobile
+    cache
 - date: '2026-09-06'
   module: '4.5'
   change: Delegation loop v2 treats audience as a resource-server name, refuses
@@ -380,8 +407,8 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added deletion-graph mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '5.2'
   title: Cryptographic properties and safe use
@@ -389,8 +416,9 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added encoding-versus-encryption mental models
+    and diagrams; independent quality and lab-safety review still required before
+    publishable
   depth: map-complete
 - id: '5.3'
   title: Key and secret lifecycle
@@ -398,8 +426,8 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added leftover-default mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '5.4'
   title: Secure communication and channel binding
@@ -407,8 +435,8 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added hop-versus-claim mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '5.5'
   title: Database and persistence security

@@ -1,53 +1,70 @@
-# 5.3 — Key and secret lifecycle (2 Model)
+# 5.3-LO-02 — A secret inventory a second engineer can test
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** ASVS 5.0.0 V11/V13 (final); OWASP secrets guidance; NIST PQC standards are for *agility planning*, not a lab quantum attack.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-13.3.1` and `v5.0.0-11.1.1`.
 
-## Property (start here)
+## Can a second engineer name pytest cases from your inventory?
 
-A disposable lab API key that is a hardcoded default must not authenticate after rotation. The old value fails. Inventory + rotation is the property, not “we have a secrets manager” as a sticker.
+“We have a vault” is not this lesson. A reviewable model names **each secret, where it lives, who owns rotation, and what happens to the old value**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab Phase 1 freeze: local `auth(presented, current)`. Disposable `sk-lab-hardcoded`. No live vault.
 
-- **Attacker:** Anyone who cloned the repo or an old container image with sk-lab-hardcoded.
-- **Trust:** Local auth(current). Real KMS later.
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: inventory row
+
+```mermaid
+flowchart TD
+  Name[api_key] --> Loc[Source vs current]
+  Loc --> Owner[On-call]
+  Owner --> Rotated[Last rotated]
+  Rotated --> Blast[Tenant blast radius]
+```
+
+A missing row is how a worker default survives (7.4).
+
+## Mental model: current is the only acceptor
+
+```mermaid
+flowchart LR
+  Presented[Presented string] --> Cur{equals current?}
+  Cur -->|no| Deny[Deny]
+  Cur -->|yes| Allow[Allow]
+  Default[Hardcoded DEFAULT] --> Deny
+```
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | old image, rotated app, attacker with git history |
-| Objects | sk-lab-hardcoded, rotated-now |
-| Actions | auth |
-| Channels | env, repo, image layers |
-| TCB | Current secret store; deny list of retired versions. |
-| Untrusted | Source tree, Docker history, CI logs |
-| State / time | Rotate T+0; attacker uses git from T-1. |
-| 1.1 cell | Authenticity of the service credential over time. |
+| Subjects | service; repo-clone attacker |
+| Objects | current API key; hardcoded default |
+| Actions | `auth` |
+| Channels | header stand-in |
+| TCB | Current-only compare; fail closed if current missing |
+| Untrusted | Source DEFAULT; “Vault is on” |
+| State / time | After rotation |
+| 1.1 cell | Authenticity over time |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| old default | API | auth | deny |
-| rotated current | API | auth | allow |
-| git history | default | checkout | must-still-deny |
-| worker | own secret | auth | separate |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| client | current `rotated-now` | auth | allow |
+| clone | `sk-lab-hardcoded` | auth after rotate | deny |
+| anyone | presented with current None | auth | deny |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/5.3/5.3-lab` file `secrets.py`.
+Draw the inventory. Point at `labs/5.3/5.3-lab` file `secrets.py`.
 
 ## Transfer
 
-Envelope encryption DEK vs KEK; compromise runbook.
+Envelope DEK vs KEK; gist leak.
 
 ## Residual risk
 
-PQC migration is a plan, not this test.
+Images already shipped; logs that captured the old value; HSM (`v5.0.0-13.3.3` Level 3 advanced).
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

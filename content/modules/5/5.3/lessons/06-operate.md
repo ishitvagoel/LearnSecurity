@@ -1,36 +1,44 @@
-# 5.3 — Key and secret lifecycle (6 Operate)
+# 5.3-LO-06 — Detect default_secret_used; rotate without logging the secret
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** ASVS 5.0.0 V11/V13 (final); OWASP secrets guidance; NIST PQC standards are for *agility planning*, not a lab quantum attack.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-13.2.3`.
 
-## Property (start here)
+## Prevention is not absolute
 
-A disposable lab API key that is a hardcoded default must not authenticate after rotation. The old value fails. Inventory + rotation is the property, not “we have a secrets manager” as a sticker.
+An old image or a worker can still present `sk-lab-hardcoded`. Pair detect and recover. Do not log the secret (3.1).
 
-## Attacker capabilities and trust assumptions
+## Mental model: alert on the default string id, not the value
 
-- **Attacker:** Anyone who cloned the repo or an old container image with sk-lab-hardcoded.
-- **Trust:** Local auth(current). Real KMS later.
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Presented[Presented key] --> Known{matches retired default id?}
+  Known -->|yes| Metric["default_secret_used += 1"]
+  Metric --> Alert["reason=default_secret_used secret_id=lab_default no value"]
+  Alert --> Rotate[Rotate and rebuild]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | Secret scanning; auth failures on default strings. |
-| Signal (no bodies) | auth_default_denied; image_rebuild after rotate. |
-| Revoke / recover | Rotate again; rebuild images; purge logs. |
-| Residual | PQC migration is a plan, not this test. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `default_secret_used`; secret scanning |
+| Signal | secret id, request id; never the value |
+| Recover | Rotate; rebuild images; purge logs |
+| Residual | Copies already cloned |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/5.3/5.3-lab`.
+Write one log line you would accept. Tie it to `labs/5.3/5.3-lab`.
+
+```
+log_denied reason=default_secret_used secret_id=lab_default request_id=req_53sk
+```
+
+Reject any line that includes `sk-lab-hardcoded` or a real key.
 
 ## Transfer
 
-Envelope encryption DEK vs KEK; compromise runbook.
+Clinic: detect gist-key use; do not paste the key into the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+SIEM product names are not the property.

@@ -1,6 +1,6 @@
 # 5.4 — Secure communication and channel binding
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. No exploit walkthroughs.
 
 ## Identity
 
@@ -9,71 +9,73 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** Secure communication and channel binding
 - **phase / track / difficulty:** 5 / core / intermediate
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Blueprint §7; 2.2 hop model; 5.3 secrets. MASVS-NETWORK waits for 8.x.
 - **routeTags:** complete, web-api
-- **releaseMilestone:** None
+- **releaseMilestone:** null
 - **masteryGate:** 5
 
 ## Objective hierarchy
 
-1. Produce **Trust-chain diagram, TLS tests, certificate failure drill** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce a **trust-chain / hop diagram and TLS tests** (socket scheme, not client Forwarded-Proto).
+2. Name attacker capabilities (cleartext client forging the header) and trust assumptions (bound proxy vs header name).
+3. Transfer: clinic SPA https URL vs http API socket; mTLS vs this header.
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+2.2 hops; 4.3 cookie flags; 5.2 at-rest is a different cell.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- HTTPS URL in the client proves TLS.
+- Forwarded headers are for security.
+- Pinning is always required.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+Hop model (2.2) → this module’s socket scheme → 8.x pinning trade-off.
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true if the client sends `X-Forwarded-Proto: https` on `http`?
+- What fails if `--proxy-headers` trusts `*`?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can go wrong for cookie Secure flags and HSTS?
+- What residual remains at TLS termination?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/5.4/5.4-lab`. Forbidden: client Forwarded-Proto counted as TLS. No live load balancers.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-ASVS V12; RFC 9846; MASVS-NETWORK — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- IETF RFC 9846 TLS 1.3 (final).
+- OWASP ASVS 5.0.0 (final): `v5.0.0-12.2.1`, `v5.0.0-12.1.1`, `v5.0.0-12.3.2`; `v5.0.0-12.1.4` and `v5.0.0-12.1.5` **Level 3, labeled advanced**.
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+New proxy hop, mTLS, or pinning policy; superseding TLS RFC.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: Trust-chain diagram, TLS tests, certificate failure drill.
+Evidence: hop diagram, TLS tests, certificate-failure drill (named). Feeds Gate 5.
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`header_https_socket_http`; revoke cleartext cookies; never log cookies.
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: hop-vs-claim mental models; RFC 9846; ASVS v5.0.0-12.2.1; L3 OCSP/ECH labeled advanced |

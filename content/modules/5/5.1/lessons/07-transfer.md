@@ -1,33 +1,45 @@
-# 5.1 — Data lifecycle and privacy engineering (7 Transfer)
+# 5.1-LO-07 — Transfer: appointment card still holds notes
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** NIST Privacy Framework 1.0 (final); NIST PF 1.1 IPD stays **draft** if cited; ASVS 5.0.0 V14; MASVS-PRIVACY for later mobile caches.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** NIST Privacy Framework 1.0 (final); OWASP ASVS 5.0.0 (final) `v5.0.0-14.2.4`. Privacy Framework 1.1 remains **draft**.
 
-## Property (start here)
+## Change the workplace; keep every-copy-must-die
 
-After account deletion, SecureCollab must not retain note bodies in an analytics copy. Retention is a 1.1 privacy/confidentiality property, not a checkbox in a DPA.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic: appointment card with notes after the patient record is deleted.
 
-- **Attacker:** Insider with analytics DB; buyer of a “de-identified” export that still has bodies.
-- **Trust:** Local NOTES vs ANALYTICS maps. Real warehouses are 7.4 workers.
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite with a patient row, an appointment card, and an analytics export.
 
-**Prompt:** CSV export to a partner; clinic-booking card PHI.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Appointment card with notes.
+1. attacker capabilities (insider analytics; partner CSV — not a live clinic);
+2. trust assumptions (which delete use-case is TCB; the DPA is not);
+3. forbidden outcome (`body_retained` true after delete, not “HIPAA”);
+4. a test idea on a **local** fixture only;
+5. residual (backups; mobile cache; legal hold);
+6. WCAG 2.2 on the human delete path (usable “account deleted” status — 1.4).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: card is another copy
+
+```mermaid
+flowchart LR
+  Patient[Patient row] --> Delete[delete analogue]
+  Card["Appointment card notes"] --> Body[Body]
+  Delete --> Card
+```
+
+If delete only hits the patient row, the card still retains.
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | Postgres DELETE is not warehouse DELETE. Next.js does not erase S3 analytics.… |
-| Live-target plan | Lab policy |
+| “We encrypted analytics” as deletion | Privacy ≠ confidentiality |
+| Live clinic warehouse | Lab policy |
+| Privacy-policy PDF as the property | Mechanism theater |
 
 ## Practice
 
-One page. No keys. The lab `labs/5.1/5.1-lab` stays the only running system you may break.
+One page. No keys. `labs/5.1/5.1-lab` is the only running system you may break.

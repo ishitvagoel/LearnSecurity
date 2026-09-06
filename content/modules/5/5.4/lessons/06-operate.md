@@ -1,36 +1,44 @@
-# 5.4 — Secure communication and channel binding (6 Operate)
+# 5.4-LO-06 — Detect header/socket mismatch; revoke cleartext cookies
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** RFC 8446/9846 TLS 1.3 (final); ASVS 5.0.0 V12; MASVS-NETWORK for 8.x. Pinning is a trade-off, not a universal rule.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-12.2.1`.
 
-## Property (start here)
+## Prevention is not absolute
 
-A client-supplied X-Forwarded-Proto: https does not make the channel HTTPS. Channel authenticity is what the server socket actually negotiated (or a trusted proxy you *bound*), not a header from the browser.
+A misconfigured proxy can start trusting `*` again. Pair detect and recover. Do not log cookie values (4.3).
 
-## Attacker capabilities and trust assumptions
+## Mental model: mismatch is a signal
 
-- **Attacker:** Client on cleartext who wants the app to think TLS is on (cookie Secure flags, redirects).
-- **Trust:** Direct socket proto in the lab. Real deployments may trust a *locked* load balancer hop only.
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Req[Request] --> Mismatch{header https and socket http?}
+  Mismatch -->|yes| Metric["header_https_socket_http += 1"]
+  Metric --> Alert["reason=header_https_socket_http no cookie"]
+  Alert --> Revoke[Revoke cookies issued on that path]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | Requests where header https and socket http. |
-| Signal (no bodies) | proto_mismatch; cert expiry drill (ops 10.4). |
-| Revoke / recover | HSTS once you really have TLS; revoke cookies issued over cleartext. |
-| Residual | Pinning mobile apps (8.x) vs operational breakage — document, don’t mandate. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `header_https_socket_http` |
+| Signal | request id, socket scheme; never the cookie |
+| Recover | Stop trusting the header; HSTS once TLS is real; revoke cleartext cookies |
+| Residual | Pinning trade-off (8.x) |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/5.4/5.4-lab`.
+Write one log line you would accept. Tie it to `labs/5.4/5.4-lab`.
+
+```
+log_denied reason=header_https_socket_http socket=http request_id=req_54ch
+```
+
+Reject any line that includes a session cookie or note body.
 
 ## Transfer
 
-mTLS service identity vs this header.
+Clinic: detect SPA-https vs API-http; do not paste cookies into the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+SIEM product names are not the property.

@@ -1,29 +1,31 @@
-# 5.3 — Key and secret lifecycle (Review)
+# 5.3-LO-08 — Review leftover defaults as a PR, not a vault ticket
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** ASVS 5.0.0 V11/V13 (final); OWASP secrets guidance; NIST PQC standards are for *agility planning*, not a lab quantum attack.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-13.2.3`.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab rotation
 
-A disposable lab API key that is a hardcoded default must not authenticate after rotation. The old value fails. Inventory + rotation is the property, not “we have a secrets manager” as a sticker.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Anyone who cloned the repo or an old container image with sk-lab-hardcoded.
-- **Trust:** Local auth(current). Real KMS later.
 Review `labs/5.3/5.3-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/5.3.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|"default still auths"| Property["Property - good if tested"]
+  Q -->|"we use Vault"| Mechanism[Mechanism - no rotate]
+  Q -->|"gitignore"| False[False assurance]
+```
 
-- Seeded smell (label it yourself): DEFAULT = 'sk-lab-hardcoded' still accepted
-- Seeded smell (label it yourself): Secret in README “for convenience”
-- Seeded smell (label it yourself): No rotation test
-- Seeded smell (label it yourself): Same key for all tenants
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- `DEFAULT = 'sk-lab-hardcoded'` still accepted
+- Secret in README “for convenience”
+- No rotation test
+- Same key for all tenants
+
+Also reject: real production keys in fixtures, keys in lessons.
 
 ## Misconceptions
 
@@ -33,8 +35,8 @@ Also reject: client trust, interpreter concatenation, Report-Only as enforcement
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_hardcoded_default_does_not_auth`.
 
 ## Transfer
 
-Envelope encryption DEK vs KEK; compromise runbook.
+Clinic PR that “moved the key to Vault” without killing the default is incomplete.

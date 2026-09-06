@@ -1,38 +1,44 @@
-# 5.4 — Secure communication and channel binding (5 Verify)
+# 5.4-LO-05 — Evidence is header mismatch false, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** RFC 8446/9846 TLS 1.3 (final); ASVS 5.0.0 V12; MASVS-NETWORK for 8.x. Pinning is a trade-off, not a universal rule.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-12.2.1`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A client-supplied X-Forwarded-Proto: https does not make the channel HTTPS. Channel authenticity is what the server socket actually negotiated (or a trusted proxy you *bound*), not a header from the browser.
+“TLS is on” is not evidence. The oracle is the local pair.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Client on cleartext who wants the app to think TLS is on (cookie Secure flags, redirects).
-- **Trust:** Direct socket proto in the lab. Real deployments may trust a *locked* load balancer hop only.
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail header https socket http"]
+  X["--impl fixed"] --> P["Must pass mismatch false"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Client X-Forwarded-Proto treated as TLS |
-| Failure | Fail closed: Ignore client proto unless the immediate peer is a trusted proxy with a bound identity |
+| Negative / abuse | client header does not make TLS |
+| Normal | socket https is https; plain http is not |
+| Not claimed | Cert validation; mTLS; pinning; ECH |
 
-Lab tests: `test_property.py` under `labs/5.4/5.4-lab`.
+```
+python3 -m pytest labs/5.4/5.4-lab/tests --impl vulnerable
+python3 -m pytest labs/5.4/5.4-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Client X-Forwarded-Proto treated as TLS`
-- `--impl fixed`: **pass**
+Honest socket-https may pass on both.
 
-mismatch is not TLS.
+## What the tests do not prove
+
+- Certificate validation (`v5.0.0-12.3.2`)
+- OCSP / ECH Level 3
+- MASVS-NETWORK (8.x)
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-mTLS service identity vs this header.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic SPA. A test that only asserts the site loads on port 443 is not this cell.

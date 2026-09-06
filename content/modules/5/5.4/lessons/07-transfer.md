@@ -1,33 +1,42 @@
-# 5.4 — Secure communication and channel binding (7 Transfer)
+# 5.4-LO-07 — Transfer: SPA https URL vs http API socket
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** RFC 8446/9846 TLS 1.3 (final); ASVS 5.0.0 V12; MASVS-NETWORK for 8.x. Pinning is a trade-off, not a universal rule.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** RFC 9846 (final); OWASP ASVS 5.0.0 (final) `v5.0.0-12.2.1`. Pinning is a trade-off.
 
-## Property (start here)
+## Change the workplace; keep socket-not-header
 
-A client-supplied X-Forwarded-Proto: https does not make the channel HTTPS. Channel authenticity is what the server socket actually negotiated (or a trusted proxy you *bound*), not a header from the browser.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic SPA axios `https://` baseURL while the API socket is `http`. Also name mTLS service identity vs this header.
 
-- **Attacker:** Client on cleartext who wants the app to think TLS is on (cookie Secure flags, redirects).
-- **Trust:** Direct socket proto in the lab. Real deployments may trust a *locked* load balancer hop only.
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite behind a dashboard that “forces HTTPS.”
 
-**Prompt:** mTLS service identity vs this header.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic: “we’re on TLS” because the SPA uses https:// in axios baseURL while API is http internally logged as https.
+1. attacker capabilities (cleartext client setting Forwarded-Proto — not a live clinic);
+2. trust assumptions (which socket/bound LB is TCB; the dashboard toggle is not);
+3. forbidden outcome (`channel_is_https` true on header/socket mismatch, not “HIPAA”);
+4. a test idea on a **local** fixture only;
+5. residual (TLS-to-LB; pinning vs breakage; OCSP/ECH Level 3);
+6. WCAG if a human certificate-warning path is in the claim (readable error, not a silent fail that pushes people onto http).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: the URL bar is not the socket
+
+```mermaid
+flowchart LR
+  SPA["axios https"] --> Belief[UI believes TLS]
+  Sock["API socket http"] --> Reality[Cleartext]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | uvicorn --proxy-headers without a trusted proxy IP is this bug.… |
-| Live-target plan | Lab policy |
+| “Force HTTPS is on” | Dashboard theater |
+| Live clinic probe | Lab policy |
+| Pinning as the property | Trade-off, and not this lab |
 
 ## Practice
 
-One page. No keys. The lab `labs/5.4/5.4-lab` stays the only running system you may break.
+One page. No keys. `labs/5.4/5.4-lab` is the only running system you may break.

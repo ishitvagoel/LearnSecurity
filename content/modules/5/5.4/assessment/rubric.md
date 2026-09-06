@@ -8,12 +8,12 @@ Secure communication and channel binding
 
 ## Evidence checklist
 
-- [ ] Trust-chain diagram, TLS tests, certificate failure drill
-- [ ] Transfer task (Clinic: “we’re on TLS” because the SPA uses https:// in axios baseURL while API is http internally logged as https.)
-- [ ] Lab `labs/5.4/5.4-lab`: forbidden outcome **Client X-Forwarded-Proto treated as TLS**
-- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Trust-chain / hop diagram and TLS tests
+- [ ] Transfer task (Clinic SPA https vs API http; mTLS vs header)
+- [ ] Lab `labs/5.4/5.4-lab`: forbidden outcome **client Forwarded-Proto counted as TLS**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: proto_mismatch; cert expiry drill (ops 10.4).
+- [ ] Operate signal without cookies: `header_https_socket_http`
 
 ## Rubric
 

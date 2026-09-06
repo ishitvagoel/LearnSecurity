@@ -1,48 +1,52 @@
-# 5.3 — Key and secret lifecycle (4 Build)
+# 5.3-LO-04 — Authenticate only the current secret
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** ASVS 5.0.0 V11/V13 (final); OWASP secrets guidance; NIST PQC standards are for *agility planning*, not a lab quantum attack.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-13.3.1` and `v5.0.0-13.2.3`.
 
-## Property (start here)
+## Structural means the default is not an or-clause
 
-A disposable lab API key that is a hardcoded default must not authenticate after rotation. The old value fails. Inventory + rotation is the property, not “we have a secrets manager” as a sticker.
+`auth` must require a truthy `current` and equality with `presented`. Structural means the old value is dead — not `.gitignore`, not a vault brand, not “we rotated in the wiki.”
 
-## Attacker capabilities and trust assumptions
+## Mental model: current only, fail closed
 
-- **Attacker:** Anyone who cloned the repo or an old container image with sk-lab-hardcoded.
-- **Trust:** Local auth(current). Real KMS later.
-auth(hardcoded, current=rotated) False.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-def auth(presented, current=None):
-    return bool(current) and presented == current
+```mermaid
+flowchart TD
+  Call[auth] --> Has{current set?}
+  Has -->|no| Deny[Deny]
+  Has -->|yes| Eq{presented equals current?}
+  Eq -->|no| Deny
+  Eq -->|yes| Allow[Allow]
 ```
+
+Fail-safe: missing current **denies**. Do not fall back to `DEFAULT`.
 
 ## Why this restores the cell
 
-Generate unique secrets; rotate; refuse known defaults; never commit.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| current `rotated-now` | authenticates |
+| `sk-lab-hardcoded` after rotate | deny |
+| current None | deny |
 
 ## What this is not
 
-pydantic Settings reading .env does not rotate anything.
-
-Vault without rotation policy is a new hard-to-scan dump.
+Vault without a test. Same key for all tenants. Password lifecycle (4.2).
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name predicate. Run:
+
+```
+python3 -m pytest labs/5.3/5.3-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Envelope encryption DEK vs KEK; compromise runbook.
+Clinic: rotate the gist-leaked key and prove the old string fails.
 
 ## Residual risk
 
-PQC migration is a plan, not this test.
+Shipped images; scheduled rotation (`v5.0.0-13.3.4` Level 3 advanced) is not this fixture.

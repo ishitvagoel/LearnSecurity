@@ -1,56 +1,52 @@
-# 5.1 — Data lifecycle and privacy engineering (4 Build)
+# 5.1-LO-04 — Walk the inventory in the same delete use-case
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** NIST Privacy Framework 1.0 (final); NIST PF 1.1 IPD stays **draft** if cited; ASVS 5.0.0 V14; MASVS-PRIVACY for later mobile caches.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-14.2.4`.
 
-## Property (start here)
+## Structural means every listed copy is gone
 
-After account deletion, SecureCollab must not retain note bodies in an analytics copy. Retention is a 1.1 privacy/confidentiality property, not a checkbox in a DPA.
+`delete_account` must pop `NOTES`, `ANALYTICS`, and `SEARCH`. Structural means the use-case owns the graph — not a privacy PDF, not “anonymize the user id,” not encryption of a kept row.
 
-## Attacker capabilities and trust assumptions
+## Mental model: one call, three pops
 
-- **Attacker:** Insider with analytics DB; buyer of a “de-identified” export that still has bodies.
-- **Trust:** Local NOTES vs ANALYTICS maps. Real warehouses are 7.4 workers.
-delete_account also ANALYTICS.pop.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-NOTES={'alice':'secret'}
-ANALYTICS={'alice':'secret'}
-def reset():
-    NOTES.clear(); NOTES['alice']='secret'
-    ANALYTICS.clear(); ANALYTICS['alice']='secret'
-def delete_account(user):
-    NOTES.pop(user, None)
-    ANALYTICS.pop(user, None)
-def body_retained(user):
-    return ANALYTICS.get(user)
+```mermaid
+flowchart TD
+  Call["delete_account alice"] --> N[NOTES pop]
+  Call --> A[ANALYTICS pop]
+  Call --> S[SEARCH pop]
+  A --> Check{body_retained?}
+  Check -->|secret| Fail[Property false]
+  Check -->|None| Pass[Property true]
 ```
+
+Fail-safe: if a listed copy cannot be reached, **do not claim delete complete** (refuse the use-case or alert). Do not fail open by returning 200 while analytics remains.
 
 ## Why this restores the cell
 
-Inventory copies; delete or unlink bodies in each.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| After delete | `body_retained` and `search_retained` are None |
+| Before delete | analytics body still present (honest product) |
 
 ## What this is not
 
-Postgres DELETE is not warehouse DELETE. Next.js does not erase S3 analytics.
-
-Anonymize ids but keep bodies — still a body retention fail.
+`DELETE FROM notes` only. Encrypted warehouse you still keep. Backup purge (named 5.5). Mobile cache (8.2).
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name copies and predicates. Run:
+
+```
+python3 -m pytest labs/5.1/5.1-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-CSV export to a partner; clinic-booking card PHI.
+Clinic: delete patient and appointment-card notes in one runbook.
 
 ## Residual risk
 
-Legal hold copies — named exception with owner (E6).
+Legal hold (E6); backups; scheduled purge (`v5.0.0-14.2.7` Level 3 advanced) is not this fixture.

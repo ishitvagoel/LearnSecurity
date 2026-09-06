@@ -1,50 +1,48 @@
-# 5.3 — Key and secret lifecycle (3 Break)
+# 5.3-LO-03 — Observe the leftover default, do not trophy a live key
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** ASVS 5.0.0 V11/V13 (final); OWASP secrets guidance; NIST PQC standards are for *agility planning*, not a lab quantum attack.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-13.2.3`.
 
-## Property (start here)
+## Authorized scope
 
-A disposable lab API key that is a hardcoded default must not authenticate after rotation. The old value fails. Inventory + rotation is the property, not “we have a secrets manager” as a sticker.
+`labs/5.3/5.3-lab` only. Disposable `sk-lab-hardcoded`. No live cloud.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Old hardcoded default still authenticates after rotation.
 
-- **Attacker:** Anyone who cloned the repo or an old container image with sk-lab-hardcoded.
-- **Trust:** Local auth(current). Real KMS later.
-**Forbidden outcome:** Hardcoded default API key still authenticates after rotation
+## Mental model: DEFAULT still wins
 
-**Authorized scope:** `labs/5.3/5.3-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable secrets.py still honors the default.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: auth(hardcoded) True while current is rotated-now.
-
-## Vulnerable fixture (local)
-
-```python
-DEFAULT='sk-lab-hardcoded'
-def auth(presented, current=None):
-    return presented == DEFAULT or presented == current
+```mermaid
+flowchart TD
+  Call["auth sk-lab-hardcoded current rotated-now"] --> Or{"DEFAULT or current?"}
+  Or -->|DEFAULT| True["returns true"]
 ```
+
+The vulnerable tree demonstrates **cause** (default never died), not a scan of GitHub for real keys.
+
+## What to read in the fixture
+
+`vulnerable/secrets.py` `auth` returns true if `current` is missing (fail open) or if presented equals `DEFAULT` **or** `current`. Tests require the default false after rotation, current true, and missing current false.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Default credential never invalidated. |
-| Impact | Silent backdoor equal to production admin if copied. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Default credential never invalidated |
+| Impact | Cloned repo still authenticates |
+| Not the lesson | A vault product name as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/5.3/5.3-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/5.3/5.3-lab/tests --impl vulnerable
+```
+
+Record `test_hardcoded_default_does_not_auth`. Do not search public GitHub.
 
 ## Transfer
 
-Envelope encryption DEK vs KEK; compromise runbook.
+Clinic gist. Predict without leaving this directory.
 
 ## Non-goals
 
