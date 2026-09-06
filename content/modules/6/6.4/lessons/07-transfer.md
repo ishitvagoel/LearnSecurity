@@ -6,7 +6,7 @@
 
 ## Change the workplace; keep prefix-after-canonicalize
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security.
+Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: `resolve` must not return a path outside `/tmp/sc-lab`. Rewrite it for a clinic without changing the fork.
 
 **Prompt:** Clinic scan upload whose original filename is kept. Also name XML entity expansion, pickle, and YAML load as other parsers (same 6.1 shape).
 
@@ -29,6 +29,10 @@ flowchart LR
   FS[filesystem join] --> Reality[grammar mixed with data]
 ```
 
+If the original scan filename is joined onto a public folder without canonicalize-and-prefix, the cell is gone. FastAPI, a UUID rename, and an AV scanner do not bind the object. Zip member paths are `v5.0.0-5.3.3` Level 3 — same shape, different parser. XML/pickle/YAML `load` are 6.1-shaped residuals: name them, do not run those parsers here.
+
+The clinic rewrite still has to keep the SecureCollab fork: after join and canonicalize, the object is still the imaging root or a child. Randomizing filenames without a prefix test leaves `../` encodings live. The local pytest analogue is `test_dotdot_does_not_escape_root` — on a fixture, not a live imaging store.
+
 ## What graders reject
 
 | Reject | Why |
@@ -36,7 +40,13 @@ flowchart LR
 | “We renamed to UUID” | Extra, not the prefix check |
 | Live clinic probe | Lab policy |
 | Zip-bomb cookbook | Lab policy |
+| HTTP 200 as object evidence | Wrong observation |
+| Content-Type as the path check | Wrong parser |
 
 ## Practice
 
-One page. No keys. `labs/6.4/6.4-lab` is the only running system you may break.
+One page. No keys. `labs/6.4/6.4-lab` is the only running system you may break. Do not open host files outside the lab root.
+
+## Non-goals
+
+Live-target path trophies. Real patient filenames. Claiming Gate 6 from this page.

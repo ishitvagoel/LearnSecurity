@@ -137,3 +137,6 @@ changelog:
   note: 'Depth pass: URL-as-authority mental models, mermaid diagrams, ASVS
     v5.0.0-1.3.6 / 13.2.4 / 3.7.2, v5.0.0-3.7.3 labeled Level 3 advanced; independent
     review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with scheme-only cause tables, host allow-list
+    limits, and clinic PDF-URL transfer; independent review still required

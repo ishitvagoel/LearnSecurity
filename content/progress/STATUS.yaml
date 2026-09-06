@@ -19,12 +19,36 @@ next:
   skill: deepen-curriculum
   inner_skill: quality-gate
   note: Authoring-pass named mental models and mermaid cover every lesson. 1.4,
-    2.1-2.4, 0.1, 0.2, 3.1-3.4, 4.1-4.5, 5.1-5.5, and 6.1-6.3 later lessons were
+    2.1-2.4, 0.1, 0.2, 3.1-3.4, 4.1-4.5, 5.1-5.5, and 6.1-6.7 later lessons were
     thickened with system-specific cause, limits, and transfer. Units stay developing /
     map-complete in revision.remaining until independent quality and lab-safety
     review artifacts exist under content/progress/reviews/. Do not mark depth
     publishable in this skill. 1.1-1.3 remain the independently reviewed reference.
 spiral_deltas:
+- date: '2026-09-06'
+  module: '6.7'
+  change: Lessons 03-08 now name allow(4) as the forbidden outcome and refuse SPA/nginx
+    as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; new accounts, GraphQL aliases, and extra
+    CSV copies remain residuals
+- date: '2026-09-06'
+  module: '6.6'
+  change: Lessons 03-08 now insist second accept of t1 is false and refuse HTTP 400
+    as consume; the lab oracle is unchanged
+  retest: Independent review still required; TOCTOU locks, fail-open, and phishable
+    mail remain residuals
+- date: '2026-09-06'
+  module: '6.5'
+  change: Lessons 03-08 now name link-local allowed as the forbidden outcome and refuse
+    HTTPS-prefix as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; DNS rebinding, redirects, and webhooks
+    remain residuals
+- date: '2026-09-06'
+  module: '6.4'
+  change: Lessons 03-08 now insist ../outside must not leave the lab root and refuse
+    UUID rename as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; zip slip, XML/pickle, and executing
+    uploads remain residuals
 - date: '2026-09-06'
   module: '6.3'
   change: Lessons 03-08 now name cookie-only foreign-origin share as the forbidden
@@ -913,7 +937,8 @@ modules:
   pass: E
   quality: developing
   notes: Authoring pass 2026-09-06 added path-object mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+    03-08 thickened with join-without-canonicalize cause tables; independent quality
+    and lab-safety review still required before publishable
   depth: map-complete
 - id: '6.5'
   title: Server-side requests and protocol parsing
@@ -922,7 +947,8 @@ modules:
   pass: E
   quality: developing
   notes: Authoring pass 2026-09-06 added URL-as-authority mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+    03-08 thickened with scheme-only cause tables; independent quality and lab-safety
+    review still required before publishable
   depth: map-complete
 - id: '6.6'
   title: Workflow, race, and exceptional-condition failures
@@ -931,7 +957,8 @@ modules:
   pass: E
   quality: developing
   notes: Authoring pass 2026-09-06 added consume-once mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+    03-08 thickened with always-true-accept cause tables; independent quality and
+    lab-safety review still required before publishable
   depth: map-complete
 - id: '6.7'
   title: Resource abuse, automation, and availability
@@ -940,7 +967,8 @@ modules:
   pass: E
   quality: developing
   notes: Authoring pass 2026-09-06 added resource-account mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+    03-08 thickened with unbounded-allow cause tables; independent quality and
+    lab-safety review still required before publishable
   depth: map-complete
 - id: '7.1'
   title: API contracts, protocols, and inventory
