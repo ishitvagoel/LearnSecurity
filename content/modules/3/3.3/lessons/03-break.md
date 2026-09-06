@@ -1,49 +1,49 @@
-# 3.3 — Secure architecture patterns (3 Break)
+# 3.3-LO-03 — Observe tB reading tA, do not trophy a dump
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** ASVS 5.0.0 V4/V13 (final); CISA Secure by Design (final guidance); Saltzer least privilege (1975, seminal).
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.4.1`.
 
-## Property (start here)
+## Authorized scope
 
-The application DB role used by FastAPI must not SELECT another tenant’s rows even if a handler forgets a WHERE. Architecture is a second mediation, not a substitute for 1.2.
+`labs/3.3/3.3-lab` only. Synthetic tenant ids `tA` / `tB`. No live databases.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** App DB role can SELECT another tenant's rows.
 
-- **Attacker:** Buggy handler; SQLi later (5.5/6.1); stolen app credentials.
-- **Trust:** PostgreSQL RLS/role in the lab stand-in. The app still must mediate.
-**Forbidden outcome:** App DB role can SELECT another tenant's rows
+## Mental model: role without a tenant predicate
 
-**Authorized scope:** `labs/3.3/3.3-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable roles.py allows app to read tA as tB.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: app role can_select other tenant.
-
-## Vulnerable fixture (local)
-
-```python
-def can_select(role: str, tenant: str, note_tenant: str) -> bool:
-    return role == "app"
+```mermaid
+flowchart TD
+  App["role app"] --> Pred{"tenant equals note_tenant?"}
+  Pred -->|not checked| Allow["can_select tB, tA is True"]
+  Allow --> Body["tA notes readable"]
 ```
+
+The vulnerable tree demonstrates **cause** (omnipotent runtime user / missing tenant predicate), not a trophy `SELECT *` against a real cluster.
+
+## What to read in the fixture
+
+`vulnerable/roles.py` `can_select` returns `True` for every role and tenant. `runtime_connection_role` is `postgres`. Tests assert `can_select("app", "tB", "tA") is False`, migrator cannot SELECT at runtime, the runtime role is not superuser, and own-tenant still works on the fixed tree.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | One omnipotent DB user shared by app and migrate. |
-| Impact | Forgot WHERE becomes a breach. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | One omnipotent DB user shared by app and migrate |
+| Impact | Forgotten WHERE becomes a breach |
+| Not the lesson | A VPC diagram or microservice count |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/3.3/3.3-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/3.3/3.3-lab/tests --impl vulnerable
+```
+
+Record `test_app_role_cannot_read_other_tenant`. Do not weaken it to “a role named app exists.”
 
 ## Transfer
 
-Serverless function with a shared “admin” connection string.
+Serverless admin string. Predict `can_select` analogue without leaving this directory.
 
 ## Non-goals
 

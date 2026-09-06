@@ -1,33 +1,46 @@
-# 3.3 — Secure architecture patterns (7 Transfer)
+# 3.3-LO-07 — Transfer: serverless admin string and clinic replica
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** ASVS 5.0.0 V4/V13 (final); CISA Secure by Design (final guidance); Saltzer least privilege (1975, seminal).
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.4.1`; Saltzer and Schroeder (1975, seminal) least privilege. CISA Secure by Design remains **unverified** in this pin set.
 
-## Property (start here)
+## Change the plane; keep two mediations
 
-The application DB role used by FastAPI must not SELECT another tenant’s rows even if a handler forgets a WHERE. Architecture is a second mediation, not a substitute for 1.2.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Serverless function with a shared `admin` connection string.
 
-- **Attacker:** Buggy handler; SQLi later (5.5/6.1); stolen app credentials.
-- **Trust:** PostgreSQL RLS/role in the lab stand-in. The app still must mediate.
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** Clinic billing replica that should see invoice rows, not chart text.
 
-**Prompt:** Serverless function with a shared “admin” connection string.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic: billing replica.
+1. attacker capabilities (stolen function secret; forgotten handler filter; replica user with `SELECT` on notes — not a live clinic);
+2. trust assumptions (which role is TCB; the cloud vendor IAM name is not);
+3. forbidden outcome (`admin` can read tA notes, or billing replica can read chart text — pick one);
+4. a test idea on a **local** fixture only;
+5. residual (IAM admin still exists; RLS owner bypass);
+6. WCAG 2.2 only if a human-mediated control is in the claim (role design itself is not a WCAG problem).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: a new compute shape is still a role
+
+```mermaid
+flowchart LR
+  Fn["Lambda or Cloud Function"] --> Secret["DATABASE_URL"]
+  Secret --> Role{admin or app?}
+  Role -->|admin| All[All tenants readable]
+  Role -->|app plus tenant| Bound[Second mediation]
+```
+
+Microservices and serverless do not add a tenant predicate by existing.
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | SQLAlchemy session is not a tenant scope.… |
-| Live-target plan | Lab policy |
+| “Private subnet” as the property | Topology ≠ isolation |
+| Live clinic or real RDS | Lab policy |
+| RLS ticket without a test | Mechanism theater |
 
 ## Practice
 
-One page. No keys. The lab `labs/3.3/3.3-lab` stays the only running system you may break.
+One page. No keys. `labs/3.3/3.3-lab` is the only running system you may break.

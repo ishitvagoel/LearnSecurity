@@ -14,14 +14,22 @@ defaults:
   ai_security: elective E1
   website_progress: local-first static site (site/); no accounts
 next:
-  id: '3.3'
+  id: '3.4'
   pass: revise
   skill: deepen-curriculum
   inner_skill: standards-pin
-  note: Module 3.2 authoring pass added four-questions and scanner-is-coverage mental
-    models and diagrams; keep 1.4, 2.1-2.4, 3.1, and 3.2 developing until independent
-    review. Continue the depth queue one module at a time.
+  note: Module 3.3 authoring pass added two-gate and plane-separation mental models
+    and diagrams; keep 1.4, 2.1-2.4, and 3.1-3.3 developing until independent review.
+    Continue the depth queue one module at a time.
 spiral_deltas:
+- date: '2026-09-06'
+  module: '3.3'
+  change: Architecture-pattern loop v2 treats the runtime DB role as a second mediation
+    that does not replace 1.2, separates migrator from request-time SELECT, and labels
+    ASVS v5.0.0-15.2.5 as Level 3 advanced while keeping the CISA Secure by Design
+    pin unverified
+  retest: Revisit 1.2 handler cells; 1.3 TCB when a replica or pooler appears; 5.5
+    RLS owner bypass; 7.4 worker DB users; E5 SECURITY DEFINER
 - date: '2026-09-06'
   module: '3.2'
   change: Threat-model loop v2 treats a green scanner as coverage not the set, seeds
@@ -263,8 +271,9 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added two-gate and plane-separation mental models
+    and diagrams; independent quality and lab-safety review still required before
+    publishable
   depth: map-complete
 - id: '3.4'
   title: Business logic and abuse-resistant design
