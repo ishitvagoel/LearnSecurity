@@ -20,12 +20,37 @@ next:
   inner_skill: quality-gate
   note: Authoring-pass named mental models and mermaid cover every lesson. 1.4,
     2.1-2.4, 0.1, 0.2, 3.1-3.4, 4.1-4.5, 5.1-5.5, 6.1-6.7, 7.1-7.4, 8.1-8.4, 8.5,
-    9.1-9.3, and 9.4-10.2 later lessons were thickened with system-specific cause,
-    limits, and transfer. Units stay developing / map-complete in revision.remaining
-    until independent quality and lab-safety review artifacts exist under
-    content/progress/reviews/. Do not mark depth publishable in this skill. 1.1-1.3
-    remain the independently reviewed reference.
+    9.1-9.3, 9.4-10.2, and 10.3-11 later lessons were thickened with system-specific
+    cause, limits, and transfer. Units stay developing / map-complete in
+    revision.remaining until independent quality and lab-safety review artifacts
+    exist under content/progress/reviews/. Do not mark depth publishable in this
+    skill. 1.1-1.3 remain the independently reviewed reference.
 spiral_deltas:
+- date: '2026-09-06'
+  module: '11'
+  change: Lessons 03-08 now name post-revoke read as the forbidden outcome and refuse
+    scanner-green/DELETE-200 as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; 7.4 workers, 8.2 device caches, 5.1 copies
+    already sent, and Level 3 v5.0.0-8.3.2 remain residuals
+- date: '2026-09-06'
+  module: '10.5'
+  change: Lessons 03-08 now name close-without-recovery and note_body-in-logs as the
+    forbidden outcomes and refuse SIEM-green/KEV as that oracle; the lab oracle is
+    unchanged
+  retest: Independent review still required; untested backups, observability exfil,
+    and L3 v5.0.0-16.3.2 remain residuals
+- date: '2026-09-06'
+  module: '10.4'
+  change: Lessons 03-08 now name prod-plus-debug boot as the forbidden outcome and
+    refuse NODE_ENV/canary as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; feature flags that disable authz, sidecar
+    debug, and Level 3 v5.0.0-13.4.6 remain residuals
+- date: '2026-09-06'
+  module: '10.3'
+  change: Lessons 03-08 now name cluster-admin on the app SA as the forbidden outcome
+    and refuse namespace/PSS/CIS as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; break-glass E6, IMDS hop 6.5, and Level 3
+    v5.0.0-13.2.6 remain residuals
 - date: '2026-09-06'
   module: '10.2'
   change: Lessons 03-08 now name digest-mismatch install as the forbidden outcome
@@ -1233,8 +1258,9 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added namespace-not-tenant mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+  notes: Later lessons 03-08 thickened 2026-09-06 with cluster-admin cause tables and
+    namespace/PSS/CIS limits; independent quality and lab-safety review still
+    required before publishable
   depth: map-complete
 - id: '10.4'
   title: Deployment and configuration hardening
@@ -1242,8 +1268,9 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added prod-debug-boot mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+  notes: Later lessons 03-08 thickened 2026-09-06 with prod-plus-debug cause tables
+    and NODE_ENV/canary limits; independent quality and lab-safety review still
+    required before publishable
   depth: map-complete
 - id: '10.5'
   title: Logging, detection, incident response, recovery, and maintenance
@@ -1251,16 +1278,18 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added SIEM-green-is-not-recovery mental models and
-    diagrams; independent quality and lab-safety review still required before publishable
+  notes: Later lessons 03-08 thickened 2026-09-06 with close-without-recovery cause
+    tables and SIEM/KEV limits; independent quality and lab-safety review still
+    required before publishable
   depth: map-complete
 capstone:
   id: '11'
   title: Integrating capstone — SecureCollab
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added revoke-is-mediation mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+  notes: Later lessons 03-08 thickened 2026-09-06 with post-revoke-read cause tables
+    and scanner/DELETE-200 limits; independent quality and lab-safety review still
+    required before publishable
   depth: map-complete
 gates:
 - id: 0

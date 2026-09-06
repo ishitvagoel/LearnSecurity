@@ -148,3 +148,6 @@ changelog:
 - date: '2026-09-06'
   note: 'Depth pass: SIEM-green-is-not-recovery mental models, mermaid diagrams, ASVS
     v5.0.0-16.2.5 / 16.4.3; KEV as awareness not close; independent review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with close-without-recovery cause tables, SIEM/KEV
+    limits, and clinic SIEM-green transfer; independent review still required

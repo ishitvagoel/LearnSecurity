@@ -143,3 +143,6 @@ changelog:
   note: 'Depth pass: namespace-is-not-tenant mental models, mermaid diagrams, NIST
     SP 800-190 and Kubernetes PSS as vocabulary not 1.2; independent review still
     required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with cluster-admin cause tables, namespace/PSS/CIS
+    limits, and clinic app-SA transfer; independent review still required

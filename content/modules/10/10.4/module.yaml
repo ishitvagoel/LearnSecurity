@@ -140,3 +140,6 @@ changelog:
   note: 'Depth pass: prod-debug-must-not-boot mental models, mermaid diagrams, ASVS
     v5.0.0-13.4.2; CISA Secure by Design unlabeled as unverified; independent review
     still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with prod-plus-debug cause tables, NODE_ENV/canary
+    limits, and clinic Django DEBUG transfer; independent review still required
