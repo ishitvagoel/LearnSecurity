@@ -1,33 +1,42 @@
-# 8.5 — Mobile verification and privacy (7 Transfer)
+# 8.5-LO-07 — Transfer: clinic crash with a synthetic patient name
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** MASVS 2.1 + MASTG 2.0 (final); MASWE mapping; Mobile Top 10:2024 awareness only.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-PRIVACY-1`–`PRIVACY-4`. ASVS `v5.0.0-16.2.5`. Play Data safety is disclosure.
 
-## Property (start here)
+## Change the workplace; keep bodies out of telemetry
 
-A crash report must not include the note body. Mobile privacy is a 1.1 privacy cell, not a Play Data safety form as the control.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic crash with a synthetic patient name. Also name web Sentry (10.5).
 
-- **Attacker:** Crash-platform operator; another process reading logcat.
-- **Trust:** Local crash_report(body).
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite “debug crash includes the last chart so support can reproduce,” plus a completed Play Data safety form.
 
-**Prompt:** Web Sentry (10.5) same cell.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic crash with patient name.
+1. attacker capabilities (crash-platform operator, logcat reader — not a live clinic);
+2. trust assumptions (redact-before-send is TCB; Play Data safety and Crashlytics automatic are not);
+3. forbidden outcome (`'name' in str(crash_report(name))`, not “HIPAA”);
+4. a test idea on a **local** fixture only (no live Sentry);
+5. residual (vendor processor, screenshots, ANR, leftover `READ_LOGS`);
+6. WCAG if a human feedback path exists (must not require a screenshot of the chart).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: same sink, clinical object
+
+```mermaid
+flowchart LR
+  Chart[synthetic chart text] --> Belief[support wants the last screen]
+  Crash[crash SDK] --> Reality[vendor copy of the chart]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | Firebase Crashlytics “automatic” will ship whatever you log.… |
-| Live-target plan | Lab policy |
+| “Play Data safety is filled in” | Disclosure, not redaction |
+| Live Crashlytics / real names | Lab policy |
+| “MASVS L1 privacy” | Obsolete MASVS levels; profiles live in MASTG |
 
 ## Practice
 
-One page. No keys. The lab `labs/8.5/8.5-lab` stays the only running system you may break.
+One page. No keys. `labs/8.5/8.5-lab` is the only running system you may break.

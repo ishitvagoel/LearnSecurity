@@ -1,48 +1,50 @@
-# 8.5 — Mobile verification and privacy (4 Build)
+# 8.5-LO-04 — Redact before send; do not trust the SDK default
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** MASVS 2.1 + MASTG 2.0 (final); MASWE mapping; Mobile Top 10:2024 awareness only.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-16.2.5`. MASVS 2.1.0 `MASVS-PRIVACY-1`.
 
-## Property (start here)
+## Structural means the body never enters the report
 
-A crash report must not include the note body. Mobile privacy is a 1.1 privacy cell, not a Play Data safety form as the control.
+`crash_report` must not copy `note_body` into the payload. A constant `'[redacted]'` (lab stand-in) is the teaching shape. Do not attach the live note, clipboard, or screenshot.
 
-## Attacker capabilities and trust assumptions
+## Mental model: redact then send
 
-- **Attacker:** Crash-platform operator; another process reading logcat.
-- **Trust:** Local crash_report(body).
-secret not in report.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-def crash_report(note_body):
-    return {'stack': 'npe', 'note': '[redacted]'}
+```mermaid
+flowchart TD
+  Crash[crash_report] --> Strip{body attached?}
+  Strip -->|yes| Drop["replace with redacted"]
+  Drop --> Send[stack only]
+  Strip -->|no| Send
 ```
+
+Fail-safe: if the SDK offers “include last screen,” leave it off. Do not accept a Play Data safety form as the strip.
 
 ## Why this restores the cell
 
-Do not put bodies in exceptions; SDK filters; permission minimization.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| `crash_report('secret')` | `'secret'` not in the report |
+| stack key | still present so the crash is useful |
 
 ## What this is not
 
-Firebase Crashlytics “automatic” will ship whatever you log.
-
-Play Data safety form is disclosure, not redaction.
+Crashlytics “automatic.” Play Data safety. A tracker-SDK “privacy mode” sticker. MASVS spreadsheet membership (9.1).
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name the predicate. Run:
+
+```
+python3 -m pytest labs/8.5/8.5-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Web Sentry (10.5) same cell.
+Clinic: stop putting patient names in exception messages; the lab still uses synthetic strings.
 
 ## Residual risk
 
-Vendor as processor — contract + 5.1.
+Vendor copies already sent (5.1 purge); screenshots; ANR; `v5.0.0-16.5.4` last-resort handlers (Level 3) that stringify arguments.

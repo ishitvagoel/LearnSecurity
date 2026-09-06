@@ -8,20 +8,20 @@ Mobile verification and privacy
 
 ## Evidence checklist
 
-- [ ] Mobile verification report and MASVS traceability
-- [ ] Transfer task (Clinic crash with patient name.)
-- [ ] Lab `labs/8.5/8.5-lab`: forbidden outcome **Crash report contains the note body**
-- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Crash-body vs stack map; Play Data safety labeled as disclosure
+- [ ] Transfer task (clinic synthetic name; Sentry named)
+- [ ] Lab `labs/8.5/8.5-lab`: forbidden outcome **crash report contains the note body**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: crash_body_redacted test.
+- [ ] Operate signal without bodies: `crash_body_redacted`
 
 ## Rubric
 
 | Result | Meaning |
 |---|---|
-| Developing | Tools listed; missing attacker/trust; mechanism slogans |
+| Developing | Tools listed; missing attacker/trust; “Play Data safety / Crashlytics” slogans |
 | Competent | System-specific invariant; lab mapped; operate present |
-| Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
+| Transfer-ready | LO-07 done without Top 10/scanner/MASVS-L1 language as the definition of security |
 
 Knowledge check (retryable): distinguish property vs mechanism for **8.5**. Items live in the session worksheet, not here.
 

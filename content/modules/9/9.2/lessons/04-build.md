@@ -1,48 +1,49 @@
-# 9.2 — Secure code review (4 Build)
+# 9.2-LO-04 — Reject eval in the review predicate
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** OWASP Code Review (guidance); NIST SSDF PW/RV (final). Review is complete mediation of the diff.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.3.2`. NIST SSDF 1.1 PW.7.
 
-## Property (start here)
+## Structural means the review asks the interpreter question
 
-A diff that uses eval on user input must not be approved. LGTM without looking at interpreters/authority is not review.
+`review_ok` must be false when the diff contains `eval(`. That is the **lab stand-in** for “user input is not Python grammar.” Name the residual: `exec(`, SpEL, and generated code are not this check.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail closed on eval
 
-- **Attacker:** Rushed colleague; supply-chain PR (10.2).
-- **Trust:** Local review_ok(src).
-eval(user) => review_ok False.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-def review_ok(diff):
-    return 'eval(' not in diff
+```mermaid
+flowchart TD
+  Diff[review_ok] --> Ev{"eval( present?"}
+  Ev -->|yes| Deny[reject]
+  Ev -->|no| Allow[may approve]
 ```
+
+Fail-safe: unknown dynamic execution denies in a real review even if this fixture’s substring misses it. Do not treat the denylist as 1.3.2 complete.
 
 ## Why this restores the cell
 
-Reject eval-on-user; look at data flow, authz, state, config.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| `x = eval(user)` | `review_ok` false |
+| `x = int(user)` | `review_ok` true |
 
 ## What this is not
 
-GitHub “rulesets” do not read eval.
-
-Review misses generated code (E1).
+A complete review oracle. A formatter. A 9.4 bot. Documenting eval as dangerous (`v5.0.0-15.1.5`, Level 3) without rejecting it.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name the residual. Run:
+
+```
+python3 -m pytest labs/9.2/9.2-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Terraform, GitHub Actions yaml.
+Terraform: reject `local-exec` interpolating untrusted names the same way 6.1 rejects a shell string.
 
 ## Residual risk
 
-Unknown unknowns — 9.3 tests.
+Substring stand-in; generated reintroduction (E1); tests still required (9.3).

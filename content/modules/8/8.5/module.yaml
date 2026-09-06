@@ -7,64 +7,67 @@ difficulty: advanced
 status: reviewed
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 1.1–2.4 Pass A complete
+- Prior phase Pass A per blueprint §7; 8.1 hostile client; 3.1 log bodies; 5.1 extra copies
 routeTags:
 - complete
 - mobile
 releaseMilestone: M3
 outcomes:
-- 'Demonstrate: Mobile verification and privacy'
-- 'Produce evidence: Mobile verification report and traceability matrix'
-- Name attacker capabilities and trust assumptions
-- Include a local-only lab brief and a transfer challenge
-- Do not instruct live-target attacks or mix awareness lists as compliance
+- 'Refuse crash reports that include a SecureCollab note body; Play Data safety is disclosure, not redaction.'
+- 'Treat telemetry vendors and tracker SDKs as 3.1 / 5.1 sinks, not as trusted on-device storage.'
+- 'Map MASVS 2.1 PRIVACY-1 through PRIVACY-4 and keep MAS Testing Profiles in MASTG, not obsolete MASVS L1/L2/R.'
 reviewTriggers:
-- Material SecureCollab change in this module's concern
-- Superseding final standard
+- Crash SDK includes note bodies or screenshots of notes
+- Tracker SDK ships without a processor review
+- Play Data safety form offered as the redaction control
+- Superseding final MASVS
 invariants:
-- Claims are properties of SecureCollab (or the elective system), not tool names
+- crash_report must not include the note body
+- Play Data safety is disclosure, not redaction
 - Labs stay in authorized local or official training scope
-- Draft standards are labeled draft
+- MASVS L1/L2/R are not used as current levels
 threatModelPrompts:
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+- What can go wrong when an exception message includes the note body?
+- What residual remains if Play Data safety is filled in but crash JSON still has the body?
+- What residual remains if the crash vendor is an honest processor (5.1)?
 concepts:
-- mobile
+- telemetry-sink
+- masvs-privacy
+- crash-redaction
 - securecollab
 - seven-step-loop
 learningObjects:
 - id: 8.5-LO-01
   kind: concept-model
-  title: 'Mobile verification and privacy: property vs mechanism'
+  title: A crash report must not include the note body
   path: lessons/01-property.md
 - id: 8.5-LO-02
   kind: design-exercise
-  title: Model SecureCollab Android client for 8.5
+  title: Telemetry is a 3.1 and 5.1 sink
   path: lessons/02-model.md
 - id: 8.5-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: Crash report contains the note body'
+  title: 'Local fixture: crash JSON contains the note body'
   path: lessons/03-break.md
 - id: 8.5-LO-04
   kind: design-exercise
-  title: Structural fix restoring the 8.5 invariant
+  title: Redact before send; do not trust the SDK default
   path: lessons/04-build.md
 - id: 8.5-LO-05
   kind: verification-lab
-  title: Forbidden-outcome tests for 8.5
+  title: Fail-on-vulnerable then pass-on-fixed for crash bodies
   path: lessons/05-verify.md
 - id: 8.5-LO-06
   kind: operations-exercise
-  title: Detect/recover notes for 8.5
+  title: crash_body_redacted without logging the body
   path: lessons/06-operate.md
 - id: 8.5-LO-07
   kind: transfer-challenge
-  title: 'Transfer: Clinic crash with patient name.'
+  title: 'Transfer: clinic crash with a synthetic patient name'
   path: lessons/07-transfer.md
 - id: 8.5-LO-08
   kind: code-review
-  title: Seeded review for 8.5
+  title: Review crash_report that includes the body as a PR
   path: lessons/08-review.md
 labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
@@ -77,34 +80,57 @@ labSpec:
   - Real PII or production secrets
   - Awareness list used as the syllabus
 evidenceRequired:
-- Mobile verification report and traceability matrix
+- Mobile verification report and MASVS-PRIVACY traceability
 - Transfer task prompt
-- Local lab brief
+- Local lab brief with crash-body deny tests
 assessmentBlueprint:
-  explain: Causal model for Mobile verification and privacy
-  design: Mobile verification report and traceability matrix
-  build: Deferred to Pass B
-  break: Authorized local reproduction of the representative failure
-  verify: Forbidden-outcome tests
-  operate: Detection and recovery notes
-  communicate: Residual risk without compliance theater
+  explain: Crash JSON must omit note bodies; Play Data safety is disclosure
+  design: Telemetry vendor and tracker SDK as extra processors
+  build: crash_report redacts the body in labs/8.5/8.5-lab/fixed
+  break: Authorized local report that includes the body
+  verify: Forbidden-outcome tests plus honest stack-present crash
+  operate: crash_body_redacted without the body
+  communicate: Residual vendor-as-processor; screenshots; ANR traces
 masteryGate: '8'
 standardsRefs:
-- source: OWASP ASVS / module anchors (see spec)
-  version: 5.0.0
+- source: OWASP MASVS
+  version: '2.1.0'
   status: final
   requirementIds:
-  - PRIVACY
+  - MASVS-PRIVACY-1
+  - MASVS-PRIVACY-2
+  - MASVS-PRIVACY-3
+  - MASVS-PRIVACY-4
+  url: https://mas.owasp.org/MASVS/12-MASVS-PRIVACY/
+- source: OWASP MASTG
+  version: '2.0.0'
+  status: final
+  requirementIds:
+  - MAS-testing-profiles
+  url: https://mas.owasp.org/MASTG/
+- source: OWASP Application Security Verification Standard
+  version: '5.0.0'
+  status: final
+  requirementIds:
+  - v5.0.0-16.2.5
+  - v5.0.0-16.5.4
   url: https://owasp.org/www-project-application-security-verification-standard/
+- source: OWASP Mobile Top 10
+  version: '2024'
+  status: awareness
+  requirementIds:
+  - Mobile-Top-10-2024-awareness
+  url: https://owasp.org/www-project-mobile-top-10/
 misconceptions:
 - Store privacy labels are controls
 - Debug logs stay on device
 - MASTG is a scanner
+- Play Data safety redacts crash bodies
 operationalConsiderations:
-- crash_body_redacted test.
-- Vendor as processor — contract + 5.1.
-author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+- crash_body_redacted.
+- Vendor as processor — contract plus 5.1 purge.
+author: deepen-curriculum / author-module-spec
+reviewer: pending independent quality and lab-safety review
 lastReviewedAt: '2026-08-24'
 nextReviewAt: '2027-02-24'
 changelog:
@@ -122,3 +148,6 @@ changelog:
 - date: '2026-08-24'
   note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
     Pass C keys isolated'
+- date: '2026-09-06'
+  note: 'Depth pass: telemetry-is-a-sink mental models, mermaid diagrams, MASVS-PRIVACY-1–4,
+    ASVS v5.0.0-16.2.5; independent review still required'

@@ -1,40 +1,43 @@
-# 9.2 — Secure code review (6 Operate)
+# 9.2-LO-06 — Detect review_block_eval without logging the payload
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** OWASP Code Review (guidance); NIST SSDF PW/RV (final). Review is complete mediation of the diff.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; NIST SSDF 1.1 PW.7 / RV.1.
 
-## Property (start here)
+## Prevention is not absolute
 
-A diff that uses eval on user input must not be approved. LGTM without looking at interpreters/authority is not review.
+A later generated helper can reintroduce eval. Pair detect and recover. Do not log the user string that would have been eval’d (3.1).
 
-## Attacker capabilities and trust assumptions
+## Mental model: eval in a PR is a signal
 
-- **Attacker:** Rushed colleague; supply-chain PR (10.2).
-- **Trust:** Local review_ok(src).
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Pr[PR] --> Ev{eval on user?}
+  Ev -->|yes| Metric["review_block_eval += 1"]
+  Metric --> Revert[block merge]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | review_bot as aid not oracle (9.4). |
-| Signal (no bodies) | review_block_eval. |
-| Revoke / recover | Revert. |
-| Residual | Unknown unknowns — 9.3 tests. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `review_block_eval` |
+| Signal | PR id, file, reason=eval; never the payload |
+| Recover | Keep reject; add 9.3 tests; review generated code |
+| Residual | Substring stand-in; E1; 9.4 bots |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/9.2/9.2-lab`.
+Write one log line you would accept. Tie it to `labs/9.2/9.2-lab`.
+
+```
+log_denied reason=review_block_eval pr=pr_92e file=export.py
+```
+
+Reject any line that includes `eval(user)` payloads, note bodies, or a live GitHub trace.
 
 ## Transfer
 
-Terraform, GitHub Actions yaml.
-
-## Usability
-
-Review UI must be keyboard accessible; otherwise people rubber-stamp from a phone.
+Clinic: block a template PR; do not paste the template source with patient fields into Slack.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+A bot-vendor name is not the property. Gate 9 stays not-attempted.

@@ -1,29 +1,31 @@
-# 9.2 — Secure code review (Review)
+# 9.2-LO-08 — Review always-true review_ok as a PR
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** OWASP Code Review (guidance); NIST SSDF PW/RV (final). Review is complete mediation of the diff.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.3.2`. OWASP Code Review Guide v2 as guidance.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab merge gating
 
-A diff that uses eval on user input must not be approved. LGTM without looking at interpreters/authority is not review.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Rushed colleague; supply-chain PR (10.2).
-- **Trust:** Local review_ok(src).
 Review `labs/9.2/9.2-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/9.2.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|eval approved| Property["Property - good if tested"]
+  Q -->|ruff passed| Mechanism[Mechanism - formatter]
+  Q -->|bot LGTM| False[False assurance]
+```
 
-- Seeded smell (label it yourself): LGTM on eval(user)
-- Seeded smell (label it yourself): Reviewer only read README
-- Seeded smell (label it yourself): Framework-generated SQL ignored
-- Seeded smell (label it yourself): No authority question
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- LGTM on `eval(user)`
+- Reviewer only read README
+- Framework-generated SQL ignored
+- No authority question
+
+Also reject: weaponized eval, keys in lessons, claiming Gate 9, treating the substring as a complete oracle.
 
 ## Misconceptions
 
@@ -33,12 +35,8 @@ Also reject: client trust, interpreter concatenation, Report-Only as enforcement
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_eval_on_user_input_is_rejected`.
 
 ## Transfer
 
-Terraform, GitHub Actions yaml.
-
-## HITL / WCAG 2.2
-
-Review UI must be keyboard accessible; otherwise people rubber-stamp from a phone.
+Clinic PR that “CI formatted the template” without an interpreter question is incomplete.

@@ -1,33 +1,42 @@
-# 9.1 — Verification requirements and traceability (7 Transfer)
+# 9.1-LO-07 — Transfer: clinic HIPAA done column
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** ASVS 5.0.0 (final) as the web/API backbone; MASVS 2.1 for mobile; a spreadsheet row is not coverage.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP ASVS 5.0.0 (final) Level 2 backbone; MASVS 2.1.0 STORAGE for the mobile analogue. SSDF 1.2 IPD remains **draft**.
 
-## Property (start here)
+## Change the workplace; keep status from meaning coverage
 
-A requirements row that only stores status=done without a test asserting isolation does not cover AUTHZ-1. Traceability is threat → requirement → test → result.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic HIPAA “done” column. Also name MASVS-STORAGE for 8.2.
 
-- **Attacker:** Optimistic PM; empty CI.
-- **Trust:** Local covered(req, tests).
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite “we imported the HIPAA checklist and marked isolation done,” plus a green CI.
 
-**Prompt:** MASVS STORAGE for 8.2.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic: HIPAA “done” column.
+1. attacker capabilities (optimistic status column — not a live hospital);
+2. trust assumptions (coverage predicate is TCB; checklist membership is not);
+3. forbidden outcome (`covered("AUTHZ-1", status_only)` true, not “HIPAA”);
+4. a test idea on a **local** fixture only;
+5. residual (unnamed Level 3 `v5.0.0-8.3.2`, exceptions without expiry);
+6. WCAG if a human exception path exists (state what is uncovered and when it expires).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: same predicate, clinical checklist
+
+```mermaid
+flowchart LR
+  Col[HIPAA done column] --> Belief[isolation is finished]
+  Pred[no isolation assert] --> Reality[1.2 hole ships]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | ASVS PDF is not your matrix.… |
-| Live-target plan | Lab policy |
+| “ASVS imported” | Inventory, not coverage |
+| Live clinic / real PHI | Lab policy |
+| “SSDF 1.2 certified” | 1.2 is IPD draft; not Gate 9 |
 
 ## Practice
 
-One page. No keys. The lab `labs/9.1/9.1-lab` stays the only running system you may break.
+One page. No keys. `labs/9.1/9.1-lab` is the only running system you may break.

@@ -1,62 +1,84 @@
-# 8.5 — Mobile verification and privacy (1 Property)
+# 8.5-LO-01 — A crash report must not include the note body
 
-**Kind:** concept-model  
-**Loop step:** 1 Property  
-**Standards:** MASVS 2.1 + MASTG 2.0 (final); MASWE mapping; Mobile Top 10:2024 awareness only.
+**Kind:** concept-model
+**Loop step:** 1 Property
+**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-PRIVACY-1`–`PRIVACY-4`. ASVS `v5.0.0-16.2.5`; `v5.0.0-16.5.4` is **Level 3, advanced**. MASTG 2.0.0 testing profiles — not MASVS L1/L2/R. Mobile Top 10:2024 awareness after the cause.
 
-## Property (start here)
+## The claim this module owns
 
-A crash report must not include the note body. Mobile privacy is a 1.1 privacy cell, not a Play Data safety form as the control.
+SecureCollab Android may crash while a member is viewing a note. The **note body is a 1.1 privacy cell**. A crash report that includes that body ships the cell to a telemetry vendor (3.1 / 5.1). Play Data safety is a **disclosure form**, not redaction.
 
-## Attacker capabilities and trust assumptions
+> `crash_report("secret")` must not contain `secret`. A stack identifier may remain.
 
-- **Attacker:** Crash-platform operator; another process reading logcat.
-- **Trust:** Local crash_report(body).
-**Mechanism (not the property):** Firebase Crashlytics “automatic” will ship whatever you log.
+The forbidden outcome is **crash JSON contains the note body**. That is confidentiality of bodies in telemetry — a vendor copy, and maybe a public bucket if the vendor is misconfigured.
 
-Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
+MASVS-PRIVACY-1 wants minimized access (do not collect the body). PRIVACY-3 wants transparency about what *is* collected; filling the Play form does not delete the field. PRIVACY-2 / PRIVACY-4 are unlinkability and user control — they do not make an unredacted dump safe. MAS Testing Profiles live in **MASTG**, not a current MASVS “L1.”
+
+## Mental model: telemetry is a sink
+
+```mermaid
+flowchart TD
+  Body[note body] --> Crash[crash_report]
+  Crash --> Vendor[telemetry vendor]
+  Vendor --> Copy["5.1 extra copy"]
+  Form[Play Data safety] --> Disclose[disclosure]
+  Disclose --> NotRedact[not redaction]
+```
+
+## Mental model: tracker SDK is another processor
+
+```mermaid
+flowchart LR
+  App[SecureCollab APK] --> CrashSdk[crash SDK]
+  App --> Tracker[analytics SDK]
+  CrashSdk --> VendorA[processor A]
+  Tracker --> VendorB[processor B]
+```
+
+**Mechanism (not the property):** Firebase Crashlytics “automatic,” a Play Data safety checkbox, or “we use HTTPS to the vendor.”
 
 ## Root cause vs impact vs prevention vs detection vs recovery
 
-| Slice | For 8.5 |
+| Slice | For this property |
 |---|---|
-| Root cause | Exception message includes the body. |
-| Preconditions | secret in str(report). |
-| Impact (1.1 cell) | Privacy/confidentiality of bodies in telemetry. — Bodies at a vendor; maybe public if misbucketed. |
-| Prevention | Do not put bodies in exceptions; SDK filters; permission minimization. |
-| Detection | CI grep crash fixtures; vendor DLP. |
-| Recovery | Purge vendor; notify if needed. |
+| Root cause | Exception / report builder includes the note body |
+| Preconditions | `secret` in `str(report)` |
+| Trigger | Crash on view-note, or verbose logcat |
+| Impact | Body at a vendor; maybe public if misbucketed |
+| Prevention | Do not put bodies in exceptions; redact before send; permission minimization |
+| Detection | `crash_body_redacted`; CI grep of crash fixtures |
+| Recovery | Purge vendor; notify if the copy left the TCB |
 
-## Framework defaults vs application guarantees
+## Framework defaults versus the privacy guarantee
 
-Firebase Crashlytics “automatic” will ship whatever you log.
+A crash SDK will ship whatever you attach. Android private storage (8.2) does not encrypt the HTTPS payload. `v5.0.0-16.2.5` is the same protection-level rule as 3.1, now at a mobile sink.
 
-## Mechanism limits and bypasses
+## Mechanism limits
 
-Play Data safety form is disclosure, not redaction.
-
-Screenshots in bug reports; ANR traces.
-
-## Residual risk
-
-Vendor as processor — contract + 5.1.
-
-## Practice
-
-MASVS-PRIVACY traceability for this one cell.
-
-Run `labs/8.5/8.5-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
-
-## Transfer
-
-Web Sentry (10.5) same cell.
-
-Clinic crash with patient name.
-
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.
+- Screenshots in “send feedback.”
+- ANR traces and logcat if a leftover `READ_LOGS` path prints the body.
+- Vendor as processor — contract + 5.1, not disappearance.
+- Last-resort handlers (`v5.0.0-16.5.4`, Level 3) can still dump frames that embed arguments.
 
 ## Usability and accessibility
 
-In-app “send feedback” must not require attaching a screenshot of PHI to proceed.
+In-app “send feedback” must not require attaching a screenshot of the note to proceed (WCAG 2.2 4.1.3). Offer a text field that is itself redacted before send.
+
+## Practice
+
+Where does a crash go; who is the processor. Then run:
+
+```
+python3 -m pytest labs/8.5/8.5-lab/tests --impl vulnerable
+python3 -m pytest labs/8.5/8.5-lab/tests --impl fixed
+```
+
+The first command must fail. The second must pass.
+
+## Transfer
+
+Clinic crash with a synthetic patient name. Web Sentry (10.5) same cell.
+
+## Non-goals
+
+Live Crashlytics, Play Console, public APKs, real PII. Gates 0–10 and M0–M5 stay **not-attempted**. Answer keys are not in this file.

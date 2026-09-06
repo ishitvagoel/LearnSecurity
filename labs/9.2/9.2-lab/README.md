@@ -1,9 +1,36 @@
-# Lab 9.2
+# Lab 9.2 — eval on user input must not be approved
 
-Authorized: this directory only. No live targets.
+**Module:** `9.2`
+**Authorized scope:** this directory only. Local course fixture. No live GitHub orgs, no weaponized eval.
+**Invariant:** `review_ok("x = eval(user)")` is false. Honest diffs without eval may pass.
+**Root cause class:** visual plausibility / always-approve
+**Non-goals:** complete review oracle, live exploits. The substring check is a **lab stand-in**.
 
-A diff that concatenates eval( on user input must not be approved. Review is complete mediation of the interpreter, not a checklist LGTM.
+## Reset
 
-pytest tests/test_property.py --impl vulnerable (must fail) then --impl fixed.
+Re-run pytest. Optional: `git checkout -- labs/9.2/9.2-lab`.
 
-Forbidden: approving a diff containing eval(user).
+## Vulnerable behavior (local only)
+
+`review_ok` always returns true. Forbidden outcome: eval on user input approved in review.
+
+## Structural fix
+
+Return false when `'eval('` is in the diff. Name the residual: this is not a complete oracle.
+
+## Verify
+
+```
+python3 -m pytest labs/9.2/9.2-lab/tests --impl vulnerable
+python3 -m pytest labs/9.2/9.2-lab/tests --impl fixed
+```
+
+The first command must fail on eval approval. The second must pass. Honest diffs without eval may pass on both.
+
+## Operate
+
+Signal: `review_block_eval`. Do not log payloads.
+
+## Transfer
+
+Clinic eval in a report template. Prompt only.

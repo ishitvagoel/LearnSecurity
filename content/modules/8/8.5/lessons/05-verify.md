@@ -1,38 +1,44 @@
-# 8.5 — Mobile verification and privacy (5 Verify)
+# 8.5-LO-05 — Evidence is the body absent, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** MASVS 2.1 + MASTG 2.0 (final); MASWE mapping; Mobile Top 10:2024 awareness only.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-PRIVACY-1`. ASVS `v5.0.0-16.2.5`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A crash report must not include the note body. Mobile privacy is a 1.1 privacy cell, not a Play Data safety form as the control.
+“We filled Play Data safety” is not evidence. The oracle is the local pair. Do not call a crash vendor.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Crash-platform operator; another process reading logcat.
-- **Trust:** Local crash_report(body).
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail secret in report"]
+  X["--impl fixed"] --> P["Must pass omit body"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Crash report contains the note body |
-| Failure | Fail closed: Do not put bodies in exceptions; SDK filters; permission minimization |
+| Negative / abuse | `'secret'` not in `str(crash_report('secret'))` |
+| Normal | honest crash still has a `stack` key |
+| Not claimed | real Crashlytics; Play Console; screenshot pipelines |
 
-Lab tests: `test_property.py` under `labs/8.5/8.5-lab`.
+```
+python3 -m pytest labs/8.5/8.5-lab/tests --impl vulnerable
+python3 -m pytest labs/8.5/8.5-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Crash report contains the note body`
-- `--impl fixed`: **pass**
+Honest stack-present may pass on both.
 
-crash omits note body.
+## What the tests do not prove
+
+- Vendor DLP after send
+- MASVS-PRIVACY on a physical device
+- That debug logcat is empty on a rooted phone (8.1)
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Web Sentry (10.5) same cell.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic: a test that only asserts “crash dialog shown” is not this cell. A test that only asserts HTTP 200 is 9.3’s shape failure.

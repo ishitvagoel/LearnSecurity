@@ -1,33 +1,42 @@
-# 9.2 — Secure code review (7 Transfer)
+# 9.2-LO-07 — Transfer: clinic eval in a report template
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** OWASP Code Review (guidance); NIST SSDF PW/RV (final). Review is complete mediation of the diff.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.3.2`. Code Review Guide as guidance. SSDF 1.2 IPD remains **draft**.
 
-## Property (start here)
+## Change the workplace; keep eval off user input
 
-A diff that uses eval on user input must not be approved. LGTM without looking at interpreters/authority is not review.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic eval in a report template. Also name Terraform `local-exec` and GitHub Actions yaml.
 
-- **Attacker:** Rushed colleague; supply-chain PR (10.2).
-- **Trust:** Local review_ok(src).
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite “designers can put expressions in the discharge template,” plus “CI formatted the file so we LGTM’d.”
 
-**Prompt:** Terraform, GitHub Actions yaml.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic: eval in a report template.
+1. attacker capabilities (template author / compromised designer — not a live clinic);
+2. trust assumptions (review of interpreters is TCB; formatter LGTM is not);
+3. forbidden outcome (`review_ok` true for eval-on-user, not “HIPAA”);
+4. a test idea on a **local** fixture only (no weaponized eval);
+5. residual (substring stand-in, `exec(`, generated templates, E1);
+6. WCAG if a human block path exists (say “eval on user input,” not only a code).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: same interpreter, clinical object
+
+```mermaid
+flowchart LR
+  Tmpl[report template] --> Belief[designers need expressions]
+  Eval[eval of field] --> Reality[patient field becomes code]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | GitHub “rulesets” do not read eval.… |
-| Live-target plan | Lab policy |
+| “Formatter passed” | Not an interpreter review |
+| Weaponized eval / live GitHub | Lab policy |
+| “AI reviewed it” | 9.4 is an aid, not 9.2 |
 
 ## Practice
 
-One page. No keys. The lab `labs/9.2/9.2-lab` stays the only running system you may break.
+One page. No keys. `labs/9.2/9.2-lab` is the only running system you may break.

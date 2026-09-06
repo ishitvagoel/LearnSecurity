@@ -1,6 +1,6 @@
 # 9.3 — Security-focused tests
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. This module owns test *shape*, not the ASVS catalogue of *what* to test.
 
 ## Identity
 
@@ -9,71 +9,77 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** Security-focused tests
 - **phase / track / difficulty:** 9 / core / advanced
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Blueprint §7; 1.2 / 4.4 isolation tests; 9.1 coverage predicate; 9.2 review.
 - **routeTags:** complete, web-api
 - **releaseMilestone:** None
 - **masteryGate:** 9
 
 ## Objective hierarchy
 
-1. Produce **Layered security test portfolio** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce a **security-test predicate** so HTTP 200-only is not counted as a security test.
+2. Name attacker capabilities (happy-path suite; lint membership) and trust assumptions (local `is_security_test(t)`).
+3. Transfer: clinic `test_get_patient_200`; fuzzing without an oracle — without treating pytest-cov as 1.2.
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+9.1 coverage needs a real isolation assert; this module defines that assert’s *shape*. ASVS 5.0.0, WSTG 4.2, and MASTG 2.0.0 are catalogues of *what* to test. NIST SSDF 1.1 PW.8; SSDF 1.2 IPD **draft**. Residual exploratory testing is 9.5.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- Coverage percentage is security.
+- Fuzzing finds all authz bugs.
+- Snapshot tests are isolation tests.
+- WSTG checklist membership is a passing security test.
+- HTTP 200 is evidence of 1.2.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+Coverage predicate (9.1) → review (9.2) → forbidden-outcome tests (this module) → tools (9.4) → exploratory (9.5).
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true for `is_security_test({status_asserted: True})`?
+- What fails if fuzzing has no oracle?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can go wrong when the suite only asserts 200?
+- What residual remains after a well-shaped isolation test?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/9.3/9.3-lab`. Forbidden: HTTP 200-only test counted as a security test.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-ASVS; WSTG; MASTG — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- OWASP ASVS 5.0.0 (final): catalogue of *what* (AUTHZ-1 maps to `v5.0.0-8.2.1` / `8.2.2`). This module owns *shape*. `v5.0.0-15.4.1` concurrency/TOCTOU tests are **Level 3, labeled advanced** — still need a forbidden outcome, not “the fuzzer ran.”
+- OWASP WSTG 4.2 (final): catalogue of web tests. WSTG 5.0 is **in development / draft** if cited.
+- OWASP MASTG 2.0.0 (final): mobile catalogue.
+- NIST SSDF 1.1 PW.8 (final). SSDF 1.2 IPD is **draft**.
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+assert status_code==200 only; empty security suite; chaos without authz; fuzzing without an oracle.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: Layered security test portfolio.
+Evidence: layered security test portfolio with at least one forbidden-outcome test. Feeds Gate 9 (not-attempted).
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`security_suite_missing_isolation`. Exploratory testing remains 9.5.
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: forbidden-outcome shape; WSTG 4.2 as catalogue; L3 15.4.1 labeled advanced |

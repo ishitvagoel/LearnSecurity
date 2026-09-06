@@ -1,53 +1,69 @@
-# 9.2 — Secure code review (2 Model)
+# 9.2-LO-02 — Visual plausibility vs data-flow review
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** OWASP Code Review (guidance); NIST SSDF PW/RV (final). Review is complete mediation of the diff.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** OWASP Code Review Guide v2 (2017) as guidance. ASVS `v5.0.0-1.3.2`. NIST SSDF 1.1 PW.7.
 
-## Property (start here)
+## Can a second engineer name pytest cases from your review questions?
 
-A diff that uses eval on user input must not be approved. LGTM without looking at interpreters/authority is not review.
+“I LGTM’d the screenshot” is not this lesson. A reviewable model names **data flow, authority, interpreter, state, and configuration**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab freeze: local `review_ok(diff)`. No live GitHub.
 
-- **Attacker:** Rushed colleague; supply-chain PR (10.2).
-- **Trust:** Local review_ok(src).
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: five questions
+
+```mermaid
+flowchart TD
+  Diff[diff] --> Q1[data flow]
+  Diff --> Q2[authority]
+  Diff --> Q3[interpreter]
+  Diff --> Q4[state]
+  Diff --> Q5[config]
+```
+
+## Mental model: generated code is still in scope
+
+```mermaid
+flowchart LR
+  Human[human diff] --> Review[9.2]
+  Gen[generated helper] --> Review
+  Bot[9.4 bot] --> Aid[aid not oracle]
+```
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | reviewer, author |
-| Objects | eval(user) |
-| Actions | review_ok |
-| Channels | PR |
-| TCB | Human + checklist tied to 1.1 cells. |
-| Untrusted | Green CI, pretty formatting |
-| State / time | One PR. |
-| 1.1 cell | Integrity of the change. |
+| Subjects | optimistic reviewer; generated-code bot |
+| Objects | export helper; user string |
+| Actions | `review_ok` |
+| Channels | PR diff |
+| TCB | review of interpreters and authority |
+| Untrusted | visual plausibility; formatters; 9.4 bots |
+| State / time | merge; later generated rewrite (E1) |
+| 1.1 cell | integrity of the interpreter boundary |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| reviewer | eval(user) | approve | deny |
-| reviewer | bound SQL | approve | maybe |
-| bot | comment | approve | never-alone |
-| author | self-merge | prod | deny |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| eval(user) | merge | approve | deny |
+| int(user) helper | merge | approve | may allow |
+| README-only | merge | treat as reviewed | deny |
+| 9.4 bot LGTM | merge | treat as oracle | deny |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/9.2/9.2-lab` file `review.py`.
+Draw the questions. Point at `labs/9.2/9.2-lab` file `review.py`.
 
 ## Transfer
 
-Terraform, GitHub Actions yaml.
+GitHub Actions yaml: untrusted `github.event` into `run:`.
 
 ## Residual risk
 
-Unknown unknowns — 9.3 tests.
+Substring stand-in; `exec(`; SpEL; E1 generated code.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

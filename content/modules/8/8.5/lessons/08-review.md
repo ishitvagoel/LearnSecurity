@@ -1,29 +1,31 @@
-# 8.5 — Mobile verification and privacy (Review)
+# 8.5-LO-08 — Review crash_report that includes the body as a PR
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** MASVS 2.1 + MASTG 2.0 (final); MASWE mapping; Mobile Top 10:2024 awareness only.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-PRIVACY-1`. ASVS `v5.0.0-16.2.5`.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab crash telemetry
 
-A crash report must not include the note body. Mobile privacy is a 1.1 privacy cell, not a Play Data safety form as the control.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Crash-platform operator; another process reading logcat.
-- **Trust:** Local crash_report(body).
 Review `labs/8.5/8.5-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/8.5.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|body in crash JSON| Property["Property - good if tested"]
+  Q -->|Crashlytics HTTPS| Mechanism[Mechanism - channel]
+  Q -->|Play Data safety| False[False assurance]
+```
 
-- Seeded smell (label it yourself): crash_report includes body
-- Seeded smell (label it yourself): READ_LOGS leftover
-- Seeded smell (label it yourself): Tracker SDK without review
-- Seeded smell (label it yourself): MASVS spreadsheet row without test
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- `crash_report` includes the body
+- Leftover `READ_LOGS`
+- Tracker SDK without a processor review
+- MASVS spreadsheet row without a test (9.1)
+
+Also reject: live vendor payloads, keys in lessons, MASVS L1/L2/R as current.
 
 ## Misconceptions
 
@@ -33,11 +35,11 @@ Also reject: client trust, interpreter concatenation, Report-Only as enforcement
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_crash_report_omits_note_body`.
 
 ## Transfer
 
-Web Sentry (10.5) same cell.
+Clinic PR that “enabled Crashlytics and completed Data safety” without a body-omit test is incomplete.
 
 ## HITL / WCAG 2.2
 

@@ -1,53 +1,67 @@
-# 9.1 — Verification requirements and traceability (2 Model)
+# 9.1-LO-02 — Threat to requirement to test to result
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** ASVS 5.0.0 (final) as the web/API backbone; MASVS 2.1 for mobile; a spreadsheet row is not coverage.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.1`, `v5.0.0-8.2.2`. NIST SSDF 1.1 PW.8.
 
-## Property (start here)
+## Can a second engineer name pytest cases from your chain?
 
-A requirements row that only stores status=done without a test asserting isolation does not cover AUTHZ-1. Traceability is threat → requirement → test → result.
+“We imported ASVS” is not this lesson. A reviewable model names **threat, requirement id, test id, and the isolation assert**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab freeze: local `covered(req_id, tests)`. No live trackers.
 
-- **Attacker:** Optimistic PM; empty CI.
-- **Trust:** Local covered(req, tests).
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: the chain
+
+```mermaid
+flowchart TD
+  Threat["1.2 cross-tenant read"] --> Req[AUTHZ-1]
+  Req --> Test["test asserts isolation"]
+  Test --> Result[pass or fail]
+```
+
+## Mental model: L2 backbone vs L3 elevation
+
+```mermaid
+flowchart LR
+  L2["ASVS Level 2"] --> Matrix[living matrix]
+  L3["v5.0.0-8.3.2 advanced"] --> Extra[named extra row]
+  Extra --> StillTest[still needs a test]
+```
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | reviewer, CI, requirement AUTHZ-1 |
-| Objects | status cell, test that asserts isolation |
-| Actions | covered |
-| Channels | assurance matrix |
-| TCB | Link to a failing-on-vulnerable test. |
-| Untrusted | Colour in Jira |
-| State / time | Release day. |
-| 1.1 cell | Integrity of the assurance case. |
+| Subjects | optimistic PM; empty CI |
+| Objects | AUTHZ-1; isolation assert |
+| Actions | `covered` |
+| Channels | spreadsheet / CI artifact |
+| TCB | coverage predicate |
+| Untrusted | status column; wholesale PDF |
+| State / time | exception expiry (E6) |
+| 1.1 cell | integrity of the assurance case |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| AUTHZ-1 | isolation test | cover | allow |
-| AUTHZ-1 | status done | cover | deny |
-| AUTHZ-1 | HTTP 200 test | cover | deny |
-| exception | unmapped | ship | E6 |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| status-only row | AUTHZ-1 | count as covered | deny |
+| isolation assert | AUTHZ-1 | count as covered | may allow |
+| wholesale ASVS paste | matrix | treat as tailored | deny |
+| unnamed L3 | 8.3.2 | count as done | deny |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/9.1/9.1-lab` file `trace.py`.
+Draw the chain. Point at `labs/9.1/9.1-lab` file `trace.py`.
 
 ## Transfer
 
-MASVS STORAGE for 8.2.
+MASVS-STORAGE for 8.2: same predicate, different catalogue.
 
 ## Residual risk
 
-Unmapped Level 3 risks.
+Unmapped Level 3; expired exceptions; 9.3 HTTP-200 tests that match the req id.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

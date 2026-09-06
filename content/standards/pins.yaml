@@ -39,7 +39,7 @@ pins:
     reviewedAt: "2026-08-29"
     url: "https://owasp.org/www-project-application-security-verification-standard/"
     role: "Web/API security requirements and assurance baseline"
-    notes: "Project page confirms latest stable 5.0.0 released 30 May 2025. The 2026-08-29 Module 1.3 check used the immutable v5.0.0 tag. 2026-09-06 Modules 2.1–8.4 pinned as listed in those module.yaml files. Module 7.1 used v5.0.0-15.3.3 (mass assignment; GraphQL 4.3.2 introspection and 4.3.1 query cost as distinct grains; 4.1.4 unused methods labeled Level 3 advanced). Module 7.2 used v5.0.0-8.2.3 (field-level / BOPLA; 8.3.2 labeled Level 3 advanced). Module 7.3 used v5.0.0-11.2.1 (validated HMAC implementation; 2.3.4 / 2.3.3 replay/freshness; 4.1.5 per-message signatures labeled Level 3 advanced). Module 7.4 used v5.0.0-13.2.1 / 13.2.2 (backend service accounts and least privilege; 8.3.3 originating subject labeled Level 3 advanced). Modules 8.1/8.3/8.4 reuse v5.0.0-8.3.1 (trusted service layer) so mobile clients cannot authorize; 8.4 also pins v5.0.0-13.3.1 (secrets not in artifacts). Use exact v5.0.0-<chapter>.<section>.<requirement> identifiers; do not mix ASVS 4.x IDs. Level 3 guidance is labeled advanced. Module 1.1 intentionally does not map ASVS requirements."
+    notes: "Project page confirms latest stable 5.0.0 released 30 May 2025. The 2026-08-29 Module 1.3 check used the immutable v5.0.0 tag. 2026-09-06 Modules 2.1–9.3 pinned as listed in those module.yaml files. Module 7.1 used v5.0.0-15.3.3 (mass assignment; GraphQL 4.3.2 introspection and 4.3.1 query cost as distinct grains; 4.1.4 unused methods labeled Level 3 advanced). Module 7.2 used v5.0.0-8.2.3 (field-level / BOPLA; 8.3.2 labeled Level 3 advanced). Module 7.3 used v5.0.0-11.2.1 (validated HMAC implementation; 2.3.4 / 2.3.3 replay/freshness; 4.1.5 per-message signatures labeled Level 3 advanced). Module 7.4 used v5.0.0-13.2.1 / 13.2.2 (backend service accounts and least privilege; 8.3.3 originating subject labeled Level 3 advanced). Modules 8.1/8.3/8.4 reuse v5.0.0-8.3.1 (trusted service layer) so mobile clients cannot authorize; 8.4 also pins v5.0.0-13.3.1 (secrets not in artifacts). Module 8.5 reuses v5.0.0-16.2.5 (logging by protection level; spiral from 3.1) and labels v5.0.0-16.5.4 last-resort error handlers as Level 3 advanced. Module 9.1 treats ASVS Level 2 as the web/API backbone for AUTHZ-1 coverage (v5.0.0-8.2.1 / 8.2.2) and labels v5.0.0-8.3.2 immediate grant change as Level 3 advanced, not a spreadsheet 'done' cell. Module 9.2 pins v5.0.0-1.3.2 (avoid eval / dynamic code execution) and labels v5.0.0-15.1.5 documenting dangerous functionality as Level 3 advanced. Module 9.3 owns test *shape* (forbidden outcome), not the ASVS catalogue of *what* to test; v5.0.0-15.4.1 concurrency/TOCTOU tests are labeled Level 3 advanced. Use exact v5.0.0-<chapter>.<section>.<requirement> identifiers; do not mix ASVS 4.x IDs. Level 3 guidance is labeled advanced. Module 1.1 intentionally does not map ASVS requirements."
   - id: owasp-threat-modeling
     source: OWASP Threat Modeling Project
     version: "maintained-project-guidance"
@@ -165,7 +165,7 @@ pins:
     reviewedAt: "2026-09-06"
     url: "https://csrc.nist.gov/pubs/sp/800/218/final"
     role: "Secure development practice vocabulary; not a control catalogue for tenant isolation"
-    notes: "SSDF 1.1 (SP 800-218) remains the final baseline. SP 800-218 Rev. 1 / SSDF 1.2 is an Initial Public Draft (17 Dec 2025); comment period closed 30 Jan 2026 and is still draft. Module 3.3 uses 1.1 only for design-review vocabulary (PW.1 design); architecture guarantees are the DB-role tests, not an SSDF attestation."
+    notes: "SSDF 1.1 (SP 800-218) remains the final baseline. SP 800-218 Rev. 1 / SSDF 1.2 is an Initial Public Draft (17 Dec 2025); comment period closed 30 Jan 2026 and is still draft — see nist-sp-800-218-r1-ssdf-1.2. Module 3.3 uses 1.1 only for design-review vocabulary (PW.1 design); architecture guarantees are the DB-role tests, not an SSDF attestation. Modules 9.1–9.3 use 1.1 PW.1 (design), PW.7 (code review), PW.8 (testing), and RV.1 (identify vulnerabilities) as practice vocabulary, not as Gate 9 evidence."
   - id: rfc-9700-oauth-security
     source: IETF RFC 9700 Best Current Practice for OAuth 2.0 Security
     version: "RFC 9700"
@@ -264,7 +264,7 @@ pins:
     reviewedAt: "2026-09-06"
     url: "https://mas.owasp.org/MASVS/"
     role: "Mobile control groups (STORAGE/CRYPTO/AUTH/NETWORK/PLATFORM/CODE/RESILIENCE/PRIVACY)"
-    notes: "Live-checked 2026-09-06. MASVS 2.x does not contain verification levels L1/L2/R; those were moved to MAS Testing Profiles in MASTG/MASWE. Modules 8.1–8.4 pin PLATFORM, STORAGE, AUTH, CODE, and RESILIENCE groups by control id (e.g. MASVS-STORAGE-1). Do not teach obsolete MASVS L1/L2/R as current."
+    notes: "Live-checked 2026-09-06. MASVS 2.x does not contain verification levels L1/L2/R; those were moved to MAS Testing Profiles in MASTG/MASWE. Modules 8.1–8.4 pin PLATFORM, STORAGE, AUTH, CODE, and RESILIENCE groups by control id (e.g. MASVS-STORAGE-1). Module 8.5 pins MASVS-PRIVACY-1 (minimize access), PRIVACY-2 (prevent identification), PRIVACY-3 (transparency — Play Data safety is disclosure, not redaction), and PRIVACY-4 (user control). Module 9.1 restates MASVS 2.1.0 as the mobile backbone of the living matrix (STORAGE for 8.2), not a spreadsheet. Do not teach obsolete MASVS L1/L2/R as current."
   - id: owasp-mastg-2.0.0
     source: OWASP Mobile Application Security Testing Guide
     version: "2.0.0"
@@ -273,7 +273,7 @@ pins:
     reviewedAt: "2026-09-06"
     url: "https://mas.owasp.org/MASTG/"
     role: "Atomic mobile tests and MAS Testing Profiles; MASVS to MASWE to MASTG chain"
-    notes: "MASTG v2.0.0 stable release reported June 2026 on mas.owasp.org/news/archive/2026/. Website and repositories are authoritative (no official checklist spreadsheet in v2). Module 8.2/8.4 cite tests and profiles; resilience-oriented profiles raise cost and do not replace 8.1/8.4 server oracles."
+    notes: "MASTG v2.0.0 stable release reported June 2026 on mas.owasp.org/news/archive/2026/. Website and repositories are authoritative (no official checklist spreadsheet in v2). Module 8.2/8.4 cite tests and profiles; resilience-oriented profiles raise cost and do not replace 8.1/8.4 server oracles. Module 8.5 maps MASVS-PRIVACY to MASWE to MASTG tests; a MASVS spreadsheet row without a test is 9.1's coverage failure. Module 9.3 treats MASTG as a catalogue of *what* to test on mobile, not as the definition of a security-test shape."
   - id: owasp-mobile-top-10-2024
     source: OWASP Mobile Top 10
     version: "2024"
@@ -282,4 +282,31 @@ pins:
     reviewedAt: "2026-09-06"
     url: "https://owasp.org/www-project-mobile-top-10/"
     role: "Mobile risk-awareness regression only; not the syllabus"
-    notes: "Module 8.1 maps M7 after the hostile-client cause. Do not organize Phase 8 as a Top 10 rotation."
+    notes: "Module 8.1 maps M7 after the hostile-client cause. Module 8.5 maps Mobile Top 10:2024 privacy/telemetry items as awareness after the crash-body invariant, not as the syllabus. Do not organize Phase 8 as a Top 10 rotation."
+  - id: nist-sp-800-218-r1-ssdf-1.2
+    source: NIST SP 800-218 Rev. 1 Secure Software Development Framework (SSDF) Version 1.2
+    version: "1.2 IPD"
+    status: draft
+    publishedAt: "2025-12-17"
+    reviewedAt: "2026-09-06"
+    url: "https://csrc.nist.gov/pubs/sp/800/218/r1/ipd"
+    role: "Draft SSDF revision; not the current baseline"
+    notes: "Initial Public Draft 17 Dec 2025; comment period closed 30 Jan 2026. Rechecked 2026-09-06: still IPD, not final. Modules 9.1–9.3 must label SSDF 1.2 draft and keep SSDF 1.1 as the final pin. Do not treat a vendor 'SSDF 1.2' dashboard as Gate 9 evidence."
+  - id: owasp-wstg-4.2
+    source: OWASP Web Security Testing Guide
+    version: "4.2"
+    status: final
+    publishedAt: "2020-12-03"
+    reviewedAt: "2026-09-06"
+    url: "https://owasp.org/www-project-web-security-testing-guide/v42/"
+    role: "Catalogue of *what* web tests exist; not the definition of a security-test shape"
+    notes: "Stable v4.2 released 3 Dec 2020. Use versioned /v42/ links. WSTG 5.0 is in development and must be labeled draft if cited. Module 9.3 owns forbidden-outcome *shape*; WSTG names candidate tests (for example authorization). Do not treat a WSTG checklist membership as coverage (9.1) or as a passing security test."
+  - id: owasp-code-review-guide-2
+    source: OWASP Code Review Guide
+    version: "2.0"
+    status: seminal
+    publishedAt: "2017-07"
+    reviewedAt: "2026-09-06"
+    url: "https://owasp.org/www-project-code-review-guide/"
+    role: "Review-method guidance; not a control catalogue and not a review oracle"
+    notes: "July 2017 PDF (v2) remains the published book. The project page still hosts that PDF; the repository was archived in April 2025. Module 9.2 uses it as *how to look* (data flow, authority, interpreters), not as ASVS IDs and not as the lab substring check. Complementary maintained guidance: OWASP Secure Code Review Cheat Sheet. Do not treat LGTM plus this PDF as Gate 9."

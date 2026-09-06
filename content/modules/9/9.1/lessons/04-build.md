@@ -1,48 +1,52 @@
-# 9.1 — Verification requirements and traceability (4 Build)
+# 9.1-LO-04 — Coverage requires an isolation assert
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** ASVS 5.0.0 (final) as the web/API backbone; MASVS 2.1 for mobile; a spreadsheet row is not coverage.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.1`, `v5.0.0-8.2.2`. NIST SSDF 1.1 PW.8.
 
-## Property (start here)
+## Structural means the predicate checks the assert
 
-A requirements row that only stores status=done without a test asserting isolation does not cover AUTHZ-1. Traceability is threat → requirement → test → result.
+`covered` must require `req == req_id` **and** `asserts_isolation`. A row that only stores status is uncovered. Fail-safe: missing flag is false.
 
-## Attacker capabilities and trust assumptions
+## Mental model: both gates
 
-- **Attacker:** Optimistic PM; empty CI.
-- **Trust:** Local covered(req, tests).
-status-only row is not coverage.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-def covered(req_id, tests):
-    return any(t.get('req') == req_id and t.get('asserts_isolation') for t in tests)
+```mermaid
+flowchart TD
+  Call[covered] --> Req{req matches?}
+  Req -->|no| Deny[not covered]
+  Req -->|yes| Iso{asserts isolation?}
+  Iso -->|yes| Allow[covered]
+  Iso -->|no| Deny
 ```
+
+Do not accept “we ran ASVS” as the isolation flag.
 
 ## Why this restores the cell
 
-Coverage predicate requires the isolation assert.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| status-only row | `covered` false |
+| isolation-assert row | `covered` true |
+| empty list | `covered` false |
 
 ## What this is not
 
-ASVS PDF is not your matrix.
-
-Level 2 tailored — say what you dropped (E6).
+pytest-cov. Jira done. Copied-wholesale ASVS. SSDF 1.2 IPD (draft) as a sticker.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name the predicate. Run:
+
+```
+python3 -m pytest labs/9.1/9.1-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-MASVS STORAGE for 8.2.
+MASVS-STORAGE: require a MASTG test id, not a control-group checkbox.
 
 ## Residual risk
 
-Unmapped Level 3 risks.
+HTTP-200 tests that set `asserts_isolation` by mistake (9.3); unnamed Level 3; exceptions without expiry (E6).

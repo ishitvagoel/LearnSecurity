@@ -1,38 +1,44 @@
-# 9.2 — Secure code review (5 Verify)
+# 9.2-LO-05 — Evidence is eval rejected, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** OWASP Code Review (guidance); NIST SSDF PW/RV (final). Review is complete mediation of the diff.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.3.2`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A diff that uses eval on user input must not be approved. LGTM without looking at interpreters/authority is not review.
+“We always LGTM after CI” is not evidence. The oracle is the local pair. Do not run eval on live input.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Rushed colleague; supply-chain PR (10.2).
-- **Trust:** Local review_ok(src).
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail eval approve"]
+  X["--impl fixed"] --> P["Must pass reject"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | eval on user input approved in review |
-| Failure | Fail closed: Reject eval-on-user; look at data flow, authz, state, config |
+| Negative / abuse | `eval(user)` → not approved |
+| Normal | honest `int(user)` → may approve |
+| Not claimed | complete oracle; SpEL; live GitHub |
 
-Lab tests: `test_property.py` under `labs/9.2/9.2-lab`.
+```
+python3 -m pytest labs/9.2/9.2-lab/tests --impl vulnerable
+python3 -m pytest labs/9.2/9.2-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `eval on user input approved in review`
-- `--impl fixed`: **pass**
+Honest diffs without eval may pass on both.
 
-eval on user rejected.
+## What the tests do not prove
+
+- That `exec(` is rejected
+- That generated code is reviewed (E1)
+- That 9.4 bots are honest
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 question.
 
 ## Transfer
 
-Terraform, GitHub Actions yaml.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic: a review that only asserts “template still renders” is not this cell.

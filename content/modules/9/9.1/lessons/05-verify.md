@@ -1,38 +1,44 @@
-# 9.1 — Verification requirements and traceability (5 Verify)
+# 9.1-LO-05 — Evidence is status-only denied, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** ASVS 5.0.0 (final) as the web/API backbone; MASVS 2.1 for mobile; a spreadsheet row is not coverage.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.1`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A requirements row that only stores status=done without a test asserting isolation does not cover AUTHZ-1. Traceability is threat → requirement → test → result.
+“Matrix imported” is not evidence. The oracle is the local pair. Do not call an ASVS portal.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Optimistic PM; empty CI.
-- **Trust:** Local covered(req, tests).
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail status-only"]
+  X["--impl fixed"] --> P["Must pass deny"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Status-only row counted as AUTHZ-1 coverage |
-| Failure | Fail closed: Coverage predicate requires the isolation assert |
+| Negative / abuse | status-only → not covered |
+| Normal | isolation assert → covered |
+| Not claimed | real ASVS assessment; Gate 9; SSDF 1.2 |
 
-Lab tests: `test_property.py` under `labs/9.1/9.1-lab`.
+```
+python3 -m pytest labs/9.1/9.1-lab/tests --impl vulnerable
+python3 -m pytest labs/9.1/9.1-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Status-only row counted as AUTHZ-1 coverage`
-- `--impl fixed`: **pass**
+Honest isolation-assert rows may pass on both.
 
-asserts_isolation False => not covered.
+## What the tests do not prove
+
+- That the named test actually isolates tenants (9.3 owns shape)
+- That Level 3 `v5.0.0-8.3.2` is covered
+- MASVS-STORAGE on a device
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-MASVS STORAGE for 8.2.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic: a test that only asserts the spreadsheet exports is not this cell.

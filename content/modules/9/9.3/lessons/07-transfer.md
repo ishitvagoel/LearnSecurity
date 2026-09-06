@@ -1,33 +1,42 @@
-# 9.3 — Security-focused tests (7 Transfer)
+# 9.3-LO-07 — Transfer: clinic test_get_patient_200
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** ASVS/WSTG/MASTG as catalogs of *what* to test; this lab’s cell is the shape of a security test.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP ASVS 5.0.0 (final) as catalogue. WSTG 4.2 (final). Fuzzing without an oracle is residual.
 
-## Property (start here)
+## Change the workplace; keep 200 from meaning isolation
 
-A test that only asserts HTTP 200 is not a security test. Security tests name a forbidden outcome (1.1 / 4.4).
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic `test_get_patient_200`. Also name fuzzing without an oracle.
 
-- **Attacker:** False confidence.
-- **Trust:** Local is_security_test(spec).
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite “we have 94% coverage and GET /patient/1 returns 200,” plus a WSTG checklist ticked.
 
-**Prompt:** Fuzzing without an oracle.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic: test_get_patient_200.
+1. attacker capabilities (another clinician’s token — not a live clinic);
+2. trust assumptions (forbidden-outcome tests are TCB; cov % and WSTG ticks are not);
+3. forbidden outcome (`is_security_test({status_asserted: True})` true, not “HIPAA”);
+4. a test idea on a **local** fixture only (other clinician must not 200);
+5. residual (exploratory 9.5, fuzzing without oracle, field grain 7.2);
+6. WCAG if CI is human-read (assertion message names the forbidden outcome).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: same 200, clinical object
+
+```mermaid
+flowchart LR
+  Get[GET patient as owner] --> Belief[security suite green]
+  Cross[GET as other clinician] --> Reality[never asserted]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | pytest-cov 90% is not 1.2.… |
-| Live-target plan | Lab policy |
+| “coverage 94%” | Not 1.2 |
+| Live clinic / real PHI / public fuzz | Lab policy |
+| “WSTG 5.0” as final | 5.0 is in development; 4.2 is the final pin |
 
 ## Practice
 
-One page. No keys. The lab `labs/9.3/9.3-lab` stays the only running system you may break.
+One page. No keys. `labs/9.3/9.3-lab` is the only running system you may break.

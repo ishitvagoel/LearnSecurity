@@ -7,64 +7,67 @@ difficulty: advanced
 status: reviewed
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 1.1–2.4 Pass A complete
+- Prior phase Pass A per blueprint §7; 6.1 interpreter confusion; 9.1 coverage
 routeTags:
 - complete
 - web-api
 releaseMilestone: null
 outcomes:
-- 'Demonstrate: Secure code review'
-- 'Produce evidence: Structured review of a seeded change set'
-- Name attacker capabilities and trust assumptions
-- Include a local-only lab brief and a transfer challenge
-- Do not instruct live-target attacks or mix awareness lists as compliance
+- 'Refuse approval of a diff that uses eval on user input; LGTM without interpreters or authority is not review.'
+- 'Treat visual plausibility as insufficient; review data flow, authority, state, and configuration.'
+- 'Label the lab substring denylist as a stand-in, not a complete review oracle; 9.4 bots are an aid.'
 reviewTriggers:
-- Material SecureCollab change in this module's concern
-- Superseding final standard
+- LGTM on eval of user input
+- Reviewer only read the README
+- Framework-generated SQL ignored
+- AI review offered as a replacement for 9.2
 invariants:
-- Claims are properties of SecureCollab (or the elective system), not tool names
+- review_ok('x = eval(user)') is false
+- Substring denylist is a lab stand-in, not a complete oracle
 - Labs stay in authorized local or official training scope
-- Draft standards are labeled draft
+- SSDF 1.2 is labeled draft
 threatModelPrompts:
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+- What can go wrong when visual plausibility is the review?
+- What residual remains if the denylist misses exec or SpEL?
+- What residual remains if generated code is not reviewed (E1)?
 concepts:
-- secure
+- visual-plausibility
+- interpreter-review
+- ssdf-pw7
 - securecollab
 - seven-step-loop
 learningObjects:
 - id: 9.2-LO-01
   kind: concept-model
-  title: 'Secure code review: property vs mechanism'
+  title: eval on user input must not be approved
   path: lessons/01-property.md
 - id: 9.2-LO-02
   kind: design-exercise
-  title: Model SecureCollab for 9.2
+  title: Visual plausibility vs data-flow review
   path: lessons/02-model.md
 - id: 9.2-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: eval on user input approved in review'
+  title: 'Local fixture: always-true review_ok'
   path: lessons/03-break.md
 - id: 9.2-LO-04
   kind: design-exercise
-  title: Structural fix restoring the 9.2 invariant
+  title: Reject eval in the review predicate
   path: lessons/04-build.md
 - id: 9.2-LO-05
   kind: verification-lab
-  title: Forbidden-outcome tests for 9.2
+  title: Fail-on-vulnerable then pass-on-fixed for eval
   path: lessons/05-verify.md
 - id: 9.2-LO-06
   kind: operations-exercise
-  title: Detect/recover notes for 9.2
+  title: review_block_eval without logging the payload
   path: lessons/06-operate.md
 - id: 9.2-LO-07
   kind: transfer-challenge
-  title: 'Transfer: Clinic: eval in a report template.'
+  title: 'Transfer: clinic eval in a report template'
   path: lessons/07-transfer.md
 - id: 9.2-LO-08
   kind: code-review
-  title: Seeded review for 9.2
+  title: Review always-true review_ok as a PR
   path: lessons/08-review.md
 labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
@@ -79,32 +82,53 @@ labSpec:
 evidenceRequired:
 - Structured review of a seeded change set
 - Transfer task prompt
-- Local lab brief
+- Local lab brief with eval-deny tests
 assessmentBlueprint:
-  explain: Causal model for Secure code review
-  design: Structured review of a seeded change set
-  build: Deferred to Pass B
-  break: Authorized local reproduction of the representative failure
-  verify: Forbidden-outcome tests
-  operate: Detection and recovery notes
-  communicate: Residual risk without compliance theater
+  explain: Visual plausibility is not review; eval on user input is forbidden
+  design: Data-flow, authority, state, configuration questions
+  build: review_ok rejects eval in labs/9.2/9.2-lab/fixed
+  break: Authorized local always-true review_ok
+  verify: Forbidden-outcome tests plus honest diff without eval
+  operate: review_block_eval without payloads
+  communicate: Residual substring stand-in; generated code (E1); 9.4 bots are not oracles
 masteryGate: '9'
 standardsRefs:
-- source: OWASP ASVS / module anchors (see spec)
-  version: 5.0.0
+- source: OWASP Application Security Verification Standard
+  version: '5.0.0'
   status: final
   requirementIds:
-  - V15
+  - v5.0.0-1.3.2
+  - v5.0.0-15.1.5
   url: https://owasp.org/www-project-application-security-verification-standard/
+- source: OWASP Code Review Guide
+  version: '2.0'
+  status: seminal
+  requirementIds:
+  - data-flow-review
+  url: https://owasp.org/www-project-code-review-guide/
+- source: NIST SP 800-218 SSDF
+  version: '1.1'
+  status: final
+  requirementIds:
+  - PW.7
+  - RV.1
+  url: https://csrc.nist.gov/pubs/sp/800/218/final
+- source: NIST SP 800-218 Rev. 1 SSDF
+  version: '1.2 IPD'
+  status: draft
+  requirementIds:
+  - SSDF-1.2-IPD
+  url: https://csrc.nist.gov/pubs/sp/800/218/r1/ipd
 misconceptions:
 - Tests mean review is optional
 - Formatters catch security
 - AI review replaces 9.2
+- A substring denylist is a complete review oracle
 operationalConsiderations:
 - review_block_eval.
-- Unknown unknowns — 9.3 tests.
-author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+- Unknown unknowns remain for 9.3 tests.
+author: deepen-curriculum / author-module-spec
+reviewer: pending independent quality and lab-safety review
 lastReviewedAt: '2026-08-24'
 nextReviewAt: '2027-02-24'
 changelog:
@@ -122,3 +146,6 @@ changelog:
 - date: '2026-08-24'
   note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
     Pass C keys isolated'
+- date: '2026-09-06'
+  note: 'Depth pass: visual-plausibility mental models, mermaid diagrams, v5.0.0-1.3.2,
+    substring stand-in labeled; independent review still required'

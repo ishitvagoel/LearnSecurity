@@ -1,48 +1,49 @@
-# 9.3 — Security-focused tests (4 Build)
+# 9.3-LO-04 — Require a named forbidden outcome
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** ASVS/WSTG/MASTG as catalogs of *what* to test; this lab’s cell is the shape of a security test.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.1`. NIST SSDF 1.1 PW.8.
 
-## Property (start here)
+## Structural means the predicate looks for the forbidden outcome
 
-A test that only asserts HTTP 200 is not a security test. Security tests name a forbidden outcome (1.1 / 4.4).
+`is_security_test` must require `forbidden_outcome`. HTTP 200 alone is a product test. Fail-safe: missing flag is false.
 
-## Attacker capabilities and trust assumptions
+## Mental model: shape gate
 
-- **Attacker:** False confidence.
-- **Trust:** Local is_security_test(spec).
-status-only is not a security test.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-def is_security_test(t):
-    return bool(t.get('forbidden_outcome'))
+```mermaid
+flowchart TD
+  Call[is_security_test] --> Fo{forbidden_outcome?}
+  Fo -->|yes| Allow[security test]
+  Fo -->|no| Deny[not]
 ```
+
+Do not accept “status_asserted and we listed WSTG-ATHZ” as the flag.
 
 ## Why this restores the cell
 
-Require forbidden-outcome asserts.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| `{status_asserted: True}` | not a security test |
+| `{forbidden_outcome: True, status_asserted: True}` | may be a security test |
 
 ## What this is not
 
-pytest-cov 90% is not 1.2.
-
-Property tests still need oracles.
+pytest-cov. WSTG membership. A fuzzer without an oracle. Gate 9.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name the forbidden outcome for AUTHZ-1. Run:
+
+```
+python3 -m pytest labs/9.3/9.3-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Fuzzing without an oracle.
+Clinic: replace `test_get_patient_200` with “other clinician must not 200.”
 
 ## Residual risk
 
-Exploratory testing (9.5).
+Well-shaped tests that still miss field grain (7.2); exploratory 9.5; L3 TOCTOU (`v5.0.0-15.4.1`) without an oracle.

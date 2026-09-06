@@ -1,1 +1,1 @@
-Fixed 9.3 local fixture. Authorized directory only.
+Fixed 9.3 local fixture. is_security_test requires forbidden_outcome. Authorized directory only.

@@ -1,29 +1,31 @@
-# 9.1 — Verification requirements and traceability (Review)
+# 9.1-LO-08 — Review any-req-match covered as a PR
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** ASVS 5.0.0 (final) as the web/API backbone; MASVS 2.1 for mobile; a spreadsheet row is not coverage.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.1`. NIST SSDF 1.1 PW.8.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab Gate 9 evidence
 
-A requirements row that only stores status=done without a test asserting isolation does not cover AUTHZ-1. Traceability is threat → requirement → test → result.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Optimistic PM; empty CI.
-- **Trust:** Local covered(req, tests).
 Review `labs/9.1/9.1-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/9.1.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|status-only covered| Property["Property - good if tested"]
+  Q -->|ASVS PDF attached| Mechanism[Mechanism - inventory]
+  Q -->|green CI| False[False assurance]
+```
 
-- Seeded smell (label it yourself): status-only coverage
-- Seeded smell (label it yourself): ASVS copied wholesale
-- Seeded smell (label it yourself): No isolation assert
-- Seeded smell (label it yourself): Exceptions without expiry
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- status-only coverage
+- ASVS copied wholesale
+- No isolation assert
+- Exceptions without expiry
+
+Also reject: live portals, keys in lessons, claiming Gate 9, MASVS L1/L2/R as current.
 
 ## Misconceptions
 
@@ -33,8 +35,8 @@ Also reject: client trust, interpreter concatenation, Report-Only as enforcement
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_status_only_row_is_not_coverage`.
 
 ## Transfer
 
-MASVS STORAGE for 8.2.
+Clinic PR that “marked HIPAA isolation done” without an isolation assert is incomplete.

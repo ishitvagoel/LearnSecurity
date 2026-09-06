@@ -1,50 +1,50 @@
-# 8.5 — Mobile verification and privacy (3 Break)
+# 8.5-LO-03 — Observe the body in crash JSON, do not call a vendor
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** MASVS 2.1 + MASTG 2.0 (final); MASWE mapping; Mobile Top 10:2024 awareness only.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-PRIVACY-1`. ASVS `v5.0.0-16.2.5`.
 
-## Property (start here)
+## Authorized scope
 
-A crash report must not include the note body. Mobile privacy is a 1.1 privacy cell, not a Play Data safety form as the control.
+`labs/8.5/8.5-lab` only. Synthetic note string `secret`. No live Crashlytics, Play Console, or public apps.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Crash report contains the note body.
 
-- **Attacker:** Crash-platform operator; another process reading logcat.
-- **Trust:** Local crash_report(body).
-**Forbidden outcome:** Crash report contains the note body
+## Mental model: exception includes the body
 
-**Authorized scope:** `labs/8.5/8.5-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable crash.py includes body.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: secret in str(report).
-
-## Vulnerable fixture (local)
-
-```python
-def crash_report(note_body):
-    return {'stack': 'npe', 'note': note_body}
+```mermaid
+flowchart TD
+  View[view note] --> Npe[crash]
+  Npe --> Report["report.note = body"]
+  Report --> Vendor[would leave the device]
 ```
+
+The vulnerable tree demonstrates **cause** (report builder copies the body). Do not send the JSON anywhere.
+
+## What to read in the fixture
+
+`vulnerable/crash.py` returns a dict with `'note': note_body`. Tests require `'secret' not in str(rep)`.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Exception message includes the body. |
-| Impact | Bodies at a vendor; maybe public if misbucketed. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Report includes the body |
+| Impact | Body would be at a vendor |
+| Not the lesson | A Crashlytics product name as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/8.5/8.5-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/8.5/8.5-lab/tests --impl vulnerable
+```
+
+Record `test_crash_report_omits_note_body`. Do not probe public hosts.
 
 ## Transfer
 
-Web Sentry (10.5) same cell.
+Clinic: predict a crash that includes a synthetic patient name — still only this directory.
 
 ## Non-goals
 
-No live-target instructions. Synthetic data only.
+No live-target or payload-dump instructions.

@@ -1,53 +1,66 @@
-# 9.3 — Security-focused tests (2 Model)
+# 9.3-LO-02 — Forbidden outcome vs happy path
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** ASVS/WSTG/MASTG as catalogs of *what* to test; this lab’s cell is the shape of a security test.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** OWASP WSTG 4.2 (final) as catalogue. ASVS `v5.0.0-8.2.1`. NIST SSDF 1.1 PW.8.
 
-## Property (start here)
+## Can a second engineer name pytest cases from your shape map?
 
-A test that only asserts HTTP 200 is not a security test. Security tests name a forbidden outcome (1.1 / 4.4).
+“We have WSTG coverage” is not this lesson. A reviewable model names **the forbidden outcome, the subject, and the object**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab freeze: local `is_security_test(t)`. No live scanners.
 
-- **Attacker:** False confidence.
-- **Trust:** Local is_security_test(spec).
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: two suites
+
+```mermaid
+flowchart TD
+  Happy[HTTP 200 owner] --> Product[product test]
+  Forbid["cross-tenant must not 200"] --> Security[security test]
+```
+
+## Mental model: lint membership is not a test
+
+```mermaid
+flowchart LR
+  Wstg[WSTG row] --> Inventory[catalogue]
+  Pytest[forbidden outcome assert] --> Evidence[evidence]
+  Inventory --> NotE[not evidence]
+```
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | CI, author |
-| Objects | status_asserted-only test |
-| Actions | is_security_test |
-| Channels | pytest |
-| TCB | Assert on deny/isolation/encoding… |
-| Untrusted | Coverage % |
-| State / time | PR build. |
-| 1.1 cell | Integrity of evidence. |
+| Subjects | optimistic QA; empty security folder |
+| Objects | AUTHZ-1; HTTP 200 assert |
+| Actions | `is_security_test` |
+| Channels | CI |
+| TCB | forbidden-outcome predicate |
+| Untrusted | cov %, lint, WSTG checklist |
+| State / time | suite grows; 9.5 exploratory residual |
+| 1.1 cell | integrity of the verification suite |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| test | HTTP 200 | security? | no |
-| test | bob cannot read n1 | security? | yes |
-| test | fuzz 5xx | security? | maybe-availability |
-| test | mutation of grant | security? | yes |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| status-only row | security suite | count as security test | deny |
+| forbidden_outcome named | security suite | count as security test | may allow |
+| fuzz without oracle | AUTHZ-1 | count as covered | deny |
+| WSTG membership | suite | count as pass | deny |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/9.3/9.3-lab` file `stest.py`.
+Draw the two suites. Point at `labs/9.3/9.3-lab` file `stest.py`.
 
 ## Transfer
 
-Fuzzing without an oracle.
+MASTG: a profile checkbox is catalogue, not shape.
 
 ## Residual risk
 
-Exploratory testing (9.5).
+Exploratory 9.5; field grain 7.2; concurrency L3 without an oracle.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

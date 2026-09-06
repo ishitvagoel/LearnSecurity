@@ -1,29 +1,31 @@
-# 9.3 — Security-focused tests (Review)
+# 9.3-LO-08 — Review status-only is_security_test as a PR
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** ASVS/WSTG/MASTG as catalogs of *what* to test; this lab’s cell is the shape of a security test.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** OWASP ASVS 5.0.0 (final) as catalogue. WSTG 4.2 (final).
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab’s security suite gate
 
-A test that only asserts HTTP 200 is not a security test. Security tests name a forbidden outcome (1.1 / 4.4).
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** False confidence.
-- **Trust:** Local is_security_test(spec).
 Review `labs/9.3/9.3-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/9.3.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|200-only counted as security| Property["Property - good if tested"]
+  Q -->|pytest-cov| Mechanism[Mechanism - coverage]
+  Q -->|WSTG tick| False[False assurance]
+```
 
-- Seeded smell (label it yourself): assert r.status_code==200 only
-- Seeded smell (label it yourself): No cross-tenant test
-- Seeded smell (label it yourself): Security suite empty
-- Seeded smell (label it yourself): Chaos without authz
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- `assert r.status_code==200` only
+- No cross-tenant test
+- Security suite empty
+- Chaos / fuzz without authz oracle
+
+Also reject: live targets, keys in lessons, claiming Gate 9, treating cov % as 1.2.
 
 ## Misconceptions
 
@@ -33,8 +35,8 @@ Also reject: client trust, interpreter concatenation, Report-Only as enforcement
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_http_200_only_is_not_a_security_test`.
 
 ## Transfer
 
-Fuzzing without an oracle.
+Clinic PR that “added test_get_patient_200 as the security test” is incomplete.

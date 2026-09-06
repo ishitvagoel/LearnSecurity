@@ -1,40 +1,43 @@
-# 8.5 — Mobile verification and privacy (6 Operate)
+# 8.5-LO-06 — Detect crash_body_redacted without logging the body
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** MASVS 2.1 + MASTG 2.0 (final); MASWE mapping; Mobile Top 10:2024 awareness only.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; ASVS `v5.0.0-16.2.5`. MASVS-PRIVACY-4 for user control after a leak.
 
-## Property (start here)
+## Prevention is not absolute
 
-A crash report must not include the note body. Mobile privacy is a 1.1 privacy cell, not a Play Data safety form as the control.
+A new SDK version can re-enable “include extras.” Pair detect and recover. Do not log the body you just redacted (3.1).
 
-## Attacker capabilities and trust assumptions
+## Mental model: body in telemetry is a signal
 
-- **Attacker:** Crash-platform operator; another process reading logcat.
-- **Trust:** Local crash_report(body).
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Fixt[CI crash fixture] --> Grep{body substring?}
+  Grep -->|yes| Metric["crash_body_redacted fail"]
+  Metric --> Purge[Purge vendor copy]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | CI grep crash fixtures; vendor DLP. |
-| Signal (no bodies) | crash_body_redacted test. |
-| Revoke / recover | Purge vendor; notify if needed. |
-| Residual | Vendor as processor — contract + 5.1. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `crash_body_redacted`; CI grep of fixtures |
+| Signal | crash id, app version, reason; never the body |
+| Recover | Keep redact; purge vendor; notify if needed |
+| Residual | Vendor as processor; screenshots; ANR |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/8.5/8.5-lab`.
+Write one log line you would accept. Tie it to `labs/8.5/8.5-lab`.
+
+```
+log_denied reason=crash_body_redacted crash_id=cr_85e app=release
+```
+
+Reject any line that includes a note body, patient name, or a live Crashlytics payload.
 
 ## Transfer
 
-Web Sentry (10.5) same cell.
-
-## Usability
-
-In-app “send feedback” must not require attaching a screenshot of PHI to proceed.
+Clinic: detect a crash that would have included a synthetic name; do not attach the report body to the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+A SIEM product name is not the property.
