@@ -1,63 +1,52 @@
-# 2.4 — State, time, concurrency, and distributed failure (3 Break)
+# 2.4-LO-03 — Observe the second append, do not trophy it
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** ASVS 5.0.0 V2/V8 (final); OWASP Top 10:2025 A10 as *awareness*, not the definition; RFC 9110 safety/idempotency language.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** IETF RFC 9110 (final); OWASP Top 10:2025 A10 as *awareness* only.
 
-## Property (start here)
+## Authorized scope
 
-A retried share with the same idempotency key must not create a second share. Timeouts are a security property (integrity of the share graph), not only UX.
+`labs/2.4/2.4-state-time` only. Do not load-test third-party APIs. Do not run wall-clock attacks on NTP.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** retry creates a second share grant.
 
-- **Attacker:** A client retrying after 504; a double-click; a worker at-least-once delivery (7.4).
-- **Trust:** Local share store. Clocks may skew; do not rely on “user won’t retry.”
-**Forbidden outcome:** Retry creates a second share grant
+## Mental model: every call is a new row
 
-**Authorized scope:** `labs/2.4/2.4-state-time` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable share.py increments on every call.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: Timeout; client retries same key; handler inserts again.
-
-## Vulnerable fixture (local)
-
-```python
-"""Vulnerable: every share_note call performs the side effect (retry duplicates)."""
-
-_SHARES: list[str] = []
-
-
-def reset() -> None:
-    _SHARES.clear()
-
-
-def share_count() -> int:
-    return len(_SHARES)
-
-
-def share_note(note_id: str, idempotency_key: str | None = None) -> None:
-    _SHARES.append(note_id)
+```mermaid
+flowchart TD
+  First["share_note n1 k1"] --> Row1[Count 1]
+  Second["share_note n1 k1 again"] --> Row2[Count 2]
 ```
+
+The vulnerable tree demonstrates **cause** (side effect not bound to the key), not a trophy race exploit. Preconditions: two calls with the same key; handler appends every time. A 504 is modeled by the second call—you do not need a real timeout.
+
+## What to read in the fixture
+
+`vulnerable/share.py` appends `note_id` on every `share_note` and ignores `idempotency_key`. Tests:
+
+- `test_single_share` — one call still creates one grant
+- `test_retry_does_not_duplicate_side_effect` — two calls with `k1` must leave count 1
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Non-idempotent side effect + retry = extra grant. |
-| Impact | Extra principal on the note (1.2 cell changes). |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Non-idempotent side effect plus retry |
+| Impact | Extra principal on the note (1.2 cell changes) |
+| Not the lesson | A10 mnemonic, scanner name, or “the user double-clicked wrong” |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/2.4/2.4-state-time/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/2.4/2.4-state-time/tests --impl vulnerable
+```
+
+Record the failing test name. Do not weaken the assertion.
 
 ## Transfer
 
-Payment capture (E3) and invite tokens (6.6) are the same shape.
+Payment capture (E3) and invite tokens (6.6). Predict without leaving this directory.
 
 ## Non-goals
 
-No live-target instructions. Synthetic data only.
+No live-target instructions. Synthetic note ids only.

@@ -1,40 +1,51 @@
-# 2.4 — State, time, concurrency, and distributed failure (6 Operate)
+# 2.4-LO-06 — Detect a second grant; never fail-open the key store
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** ASVS 5.0.0 V2/V8 (final); OWASP Top 10:2025 A10 as *awareness*, not the definition; RFC 9110 safety/idempotency language.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-2.3.3`; Module 3.1 / 5.1.
 
-## Property (start here)
+## Prevention is not absolute
 
-A retried share with the same idempotency key must not create a second share. Timeouts are a security property (integrity of the share graph), not only UX.
+A new client that mints a key per retry, a TTL that is too short, or a store outage can reintroduce duplicates. Pair detect and recover. Do not log note bodies or session values.
 
-## Attacker capabilities and trust assumptions
+## Mental model: count versus unique keys
 
-- **Attacker:** A client retrying after 504; a double-click; a worker at-least-once delivery (7.4).
-- **Trust:** Local share store. Clocks may skew; do not rely on “user won’t retry.”
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Share[Share attempt] --> Dup{Same key already recorded?}
+  Dup -->|yes| Metric["idempotency_replay += 1"]
+  Metric --> Log["reason=replay key_id=k1 note=n1 no body"]
+  Dup -->|no| Insert[Insert one grant]
+  StoreDown[Key store unreachable] --> Closed["Fail closed - do not insert"]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | Duplicate-key metric; share_count anomaly. |
-| Signal (no bodies) | share_count vs unique keys; never fail-open if the key store is down. |
-| Revoke / recover | Revoke extra shares; notify owner. |
-| Residual | Lost first response still needs a read-your-write path. |
+| Detect | Duplicate-key hits; `share_count` vs unique keys |
+| Signal | key id, note id, actor id; never the note body |
+| Recover | Revoke extra shares; notify owner |
+| Residual | Lost first response needs read-your-write; never fail-open if the key store is down |
 
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+CSF 2.0 names outcomes. They do not prove ASVS. A10 is awareness regression, not the runbook title.
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/2.4/2.4-state-time`.
+Write one log line you would accept. Tie it to `labs/2.4/2.4-state-time`.
+
+```
+share_replay reason=same_idempotency_key note_id=n1 key_id=k1 actor=owner_a request_id=req_22c1
+```
+
+Reject any line that includes a note body or a real email.
 
 ## Transfer
 
-Payment capture (E3) and invite tokens (6.6) are the same shape.
+Payment capture (E3): detect double capture without logging PAN. Clinic: detect double-book without logging the chart.
 
 ## Usability
 
-Disable-on-submit is not the property (users retry). Accessible “still working” status (WCAG 4.1.3) must not encourage extra POSTs with new keys.
+Disable-on-submit is not the property. Accessible “still working” (WCAG 4.1.3) must reuse the same key.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+SIEM product names are not the property.

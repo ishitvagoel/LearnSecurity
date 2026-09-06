@@ -14,14 +14,21 @@ defaults:
   ai_security: elective E1
   website_progress: local-first static site (site/); no accounts
 next:
-  id: '2.4'
+  id: '3.1'
   pass: revise
   skill: deepen-curriculum
   inner_skill: standards-pin
-  note: Module 2.3 authoring pass added jar-versus-script mental models and diagrams;
-    keep 1.4 and 2.1-2.3 developing until independent review. Continue the depth
+  note: Module 2.4 authoring pass added timeout-fork mental models and diagrams;
+    keep 1.4 and 2.1-2.4 developing until independent review. Continue the depth
     queue one module at a time.
 spiral_deltas:
+- date: '2026-09-06'
+  module: '2.4'
+  change: State-time loop v2 treats timeout as a security fork, binds the first share
+    to an idempotency key, fail-closes if the key store is down, and keeps Top 10
+    A10 as awareness only
+  retest: Revisit 1.2 grant cells on retry; 2.3 disable-on-submit; 6.6 invite tokens;
+    7.4 worker redelivery with stale grants; E3 payment capture
 - date: '2026-09-06'
   module: '2.3'
   change: Browser-policy loop v2 separates cookie-jar sending from script readability,
@@ -214,8 +221,8 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added timeout-fork mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '3.1'
   title: Assets, data classification, and security requirements

@@ -1,38 +1,47 @@
-# 2.4 — State, time, concurrency, and distributed failure (5 Verify)
+# 2.4-LO-05 — Evidence is a failing duplicate count, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** ASVS 5.0.0 V2/V8 (final); OWASP Top 10:2025 A10 as *awareness*, not the definition; RFC 9110 safety/idempotency language.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-2.3.3`; RFC 9110 (final).
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A retried share with the same idempotency key must not create a second share. Timeouts are a security property (integrity of the share graph), not only UX.
+HTTP 200 on a single click is not this module’s evidence (see 9.3). The oracle is two calls with the same key.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** A client retrying after 504; a double-click; a worker at-least-once delivery (7.4).
-- **Trust:** Local share store. Clocks may skew; do not rely on “user won’t retry.”
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F[Must fail count 2]
+  X["--impl fixed"] --> P[Must pass count 1]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Retry creates a second share grant |
-| Failure | Fail closed: Persist key → share id; second POST returns the first |
+| Normal | One `share_note` with k1 → count 1 |
+| Negative / abuse | Two calls with k1 → count 1 |
+| Failure default | Key-store uncertainty does not insert (not in this pytest; write it as residual) |
 
-Lab tests: `test_idempotency.py` under `labs/2.4/2.4-state-time`.
+Lab tests: `test_single_share` and `test_retry_does_not_duplicate_side_effect` in `labs/2.4/2.4-state-time/tests/test_idempotency.py`.
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Retry creates a second share grant`
-- `--impl fixed`: **pass**
+```
+python3 -m pytest labs/2.4/2.4-state-time/tests --impl vulnerable
+python3 -m pytest labs/2.4/2.4-state-time/tests --impl fixed
+```
 
-two calls with k1 => count 1.
+Map each test to a matrix cell from LO-02. Do not paste keys.
+
+## What the tests do not prove
+
+- Concurrent two-first-writes (true race) without a unique constraint
+- Worker stale 1.2 grants (7.4)
+- Payment capture (E3)
+- A10 compliance
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. If vulnerable does not fail, the lab is miswired.
 
 ## Transfer
 
-Payment capture (E3) and invite tokens (6.6) are the same shape.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic last slot. A test that only asserts 201 once is not double-book evidence.
