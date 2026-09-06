@@ -82,7 +82,7 @@ export function LessonReader({
           </details>
           <LessonToc headings={headings} variant="mobile" />
           <header className="mb-8 border-b border-stone-200 pb-6">
-            <h1 className="text-3xl font-semibold tracking-tight text-stone-900">
+            <h1 className="font-serif text-3xl font-semibold tracking-tight text-ink">
               {lessonTitle}
             </h1>
             <div className="mt-3 flex flex-wrap gap-2">

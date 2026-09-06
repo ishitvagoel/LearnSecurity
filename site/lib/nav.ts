@@ -4,13 +4,13 @@ export type NavLink = {
 };
 
 export const PRIMARY_NAV: NavLink[] = [
-  { href: "/learn/", label: "Learn" },
-  { href: "/roadmap/", label: "Roadmap" },
-  { href: "/labs/", label: "Labs" },
+  { href: "/learn/", label: "Lessons" },
+  { href: "/roadmap/", label: "Study order" },
+  { href: "/labs/", label: "Practice" },
 ];
 
 export const RESOURCE_NAV: NavLink[] = [
-  { href: "/reference/", label: "SecureCollab" },
+  { href: "/reference/", label: "The example app" },
   { href: "/glossary/", label: "Glossary" },
   { href: "/standards/", label: "Standards" },
   { href: "/sources/", label: "Sources" },

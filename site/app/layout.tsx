@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Source_Serif_4 } from "next/font/google";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteNav } from "@/components/SiteNav";
 import "./globals.css";
@@ -14,25 +14,30 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const sourceSerif = Source_Serif_4({
+  variable: "--font-source-serif",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: {
-    default: "LearnSecurity — Secure Application Engineering",
+    default: "LearnSecurity — Learn to build safer software",
     template: "%s · LearnSecurity",
   },
   description:
-    "First-principles curriculum for building software whose invariants survive attack. Local-first progress. Labs stay off this origin.",
+    "A free course in building software that stays safe when someone tries to break it. Read lessons here. Practice on your own computer.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full`}
+      className={`${geistSans.variable} ${geistMono.variable} ${sourceSerif.variable} h-full`}
     >
-      <body className="flex min-h-full flex-col bg-stone-50 font-sans text-stone-900 antialiased">
+      <body className="flex min-h-full flex-col bg-background font-sans text-ink antialiased">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-white focus:px-3 focus:py-2 focus:text-stone-900 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-blue-800"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-paper focus:px-3 focus:py-2 focus:text-ink"
         >
           Skip to main content
         </a>

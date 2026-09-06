@@ -9,15 +9,15 @@ export default function LearnIndexPage() {
 
   return (
     <PageShell>
-      <PageHeader kicker="Catalog" title="Learn">
+      <PageHeader kicker="All topics" title="Lessons">
         <p>
-          Work phases in order. Each module is a property of{" "}
-          <strong>SecureCollab</strong> (or an elective system), not a vendor
-          feature list.
+          Work through the stages in order. Each topic is one idea you can check,
+          not a vendor feature list. Open a topic, then read its pages left to
+          right.
         </p>
         <p>
-          Open a module, then read its lessons left to right. Answer keys are not
-          on this site. Labs run only in your clone of the repository.
+          Answer keys are not on this site. When a topic includes practice, you
+          run it on your computer from the course repository.
         </p>
       </PageHeader>
       <PhaseJump phases={phases} />

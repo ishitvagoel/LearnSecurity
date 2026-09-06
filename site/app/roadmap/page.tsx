@@ -9,17 +9,16 @@ export default function RoadmapPage() {
 
   return (
     <PageShell>
-      <PageHeader kicker="Order of study" title="Roadmap">
+      <PageHeader kicker="What to study next" title="Study order">
         <p>
-          Hard order (blueprint §7): 0 → 1 → 2 → 3 → 4 → 5 → 6 → 7 → 9 → 10 → 11.
-          Phase 8 (mobile) waits on identity, data, and API foundations. Electives
-          open after Phase 7. Mastery gates are evidence checkpoints, not a Top 10
-          playlist.
+          Go in this order: 0 through 7, then 9 through 11. Stage 8 (phone apps)
+          can wait until the web and API path is in place. Optional extras open
+          after stage 7.
         </p>
         <p>
-          You do not need a production SecureCollab to study. You do need local
-          labs for modules that include a fixture. Product milestones M0–M5 stay
-          unmarked until a real product tree exists.
+          You do not need a live product to study. You do need the practice files
+          on your computer when a topic includes them. This site does not mark
+          you as finished.
         </p>
       </PageHeader>
       <ol className="space-y-4">
@@ -30,7 +29,7 @@ export default function RoadmapPage() {
             <li
               key={phase}
               id={`phase-${phase}`}
-              className="scroll-mt-24 rounded-xl border border-stone-200 bg-white p-5 shadow-sm"
+              className="scroll-mt-24 rounded-2xl border border-line bg-paper p-5 shadow-sm"
             >
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <h2 className="text-xl font-semibold tracking-tight text-stone-900">
@@ -51,7 +50,7 @@ export default function RoadmapPage() {
                   <li key={mod.id}>
                     <Link
                       href={moduleHref(mod.id)}
-                      className="inline-flex items-center rounded-full border border-stone-300 bg-stone-50 px-2.5 py-1 font-mono text-xs text-stone-800 hover:border-stone-500 hover:bg-white"
+                      className="inline-flex items-center rounded-full border border-line bg-background px-2.5 py-1 font-mono text-xs text-ink hover:border-forest hover:bg-white"
                     >
                       {mod.id}
                       <span className="ml-1.5 max-w-[14rem] truncate font-sans text-stone-600">
@@ -66,9 +65,9 @@ export default function RoadmapPage() {
         })}
       </ol>
       <p className="mt-8 text-sm text-stone-600">
-        Prefer cards with outcomes? Use the{" "}
-        <Link href="/learn/" className="text-blue-900 underline underline-offset-2">
-          catalog
+        Want a card for each topic instead of this list? Use the{" "}
+        <Link href="/learn/" className="text-link underline underline-offset-2">
+          lesson catalog
         </Link>
         .
       </p>

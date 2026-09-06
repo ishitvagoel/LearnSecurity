@@ -72,7 +72,7 @@ export function ProgressToggle({ moduleId }: { moduleId: string }): ReactElement
   };
 
   return (
-    <label className="mt-2 flex cursor-pointer items-start gap-3 rounded-lg border border-stone-200 bg-white px-3 py-3 text-sm">
+    <label className="mt-2 flex cursor-pointer items-start gap-3 rounded-2xl border border-line bg-paper px-3 py-3 text-sm">
       <input
         type="checkbox"
         checked={done}

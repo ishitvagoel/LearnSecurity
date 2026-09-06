@@ -1,14 +1,29 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7f6f3;
+  --background: #f3eee4;
   --foreground: #1c1917;
+  --paper: #fbf7f0;
+  --ink: #1c1917;
+  --muted: #57534e;
+  --line: #e7e0d4;
+  --forest: #1f4d45;
+  --forest-hover: #173a34;
+  --link: #184e77;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-forest: var(--forest);
+  --color-forest-hover: var(--forest-hover);
+  --color-link: var(--link);
   --font-sans: var(--font-geist-sans);
+  --font-serif: var(--font-source-serif);
   --font-mono: var(--font-geist-mono);
 }
 
@@ -23,8 +38,12 @@ body {
 }
 
 :focus-visible {
-  outline: 3px solid #1e40af;
+  outline: 3px solid #1f4d45;
   outline-offset: 2px;
+}
+
+.font-serif {
+  font-family: var(--font-source-serif), ui-serif, Georgia, serif;
 }
 
 .sr-only {
@@ -66,6 +85,7 @@ body {
 
 .lesson-h1 {
   margin-bottom: 1rem;
+  font-family: var(--font-source-serif), ui-serif, Georgia, serif;
   font-size: 1.875rem;
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -126,8 +146,8 @@ body {
   margin-bottom: 1.25rem;
   overflow-x: auto;
   border-radius: 0.5rem;
-  border: 1px solid #d6d3d1;
-  background: #f5f5f4;
+  border: 1px solid #e7e0d4;
+  background: #fbf7f0;
   padding: 0.85rem 1rem;
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.875rem;
@@ -135,8 +155,8 @@ body {
 }
 
 .lesson-diagram {
-  background: #fafaf9;
-  border-color: #a8a29e;
+  background: #fbf7f0;
+  border-color: #d6d3d1;
   font-size: 0.82rem;
   line-height: 1.45;
 }
@@ -145,7 +165,7 @@ body {
   margin: 0 0 1.5rem;
   overflow-x: auto;
   border-radius: 0.75rem;
-  border: 1px solid #d6d3d1;
+  border: 1px solid #e7e0d4;
   background: #fff;
   padding: 0.75rem 1rem;
 }
@@ -154,10 +174,10 @@ body {
   min-height: 7rem;
   background: repeating-linear-gradient(
     -45deg,
-    #fafaf9,
-    #fafaf9 12px,
-    #f5f5f4 12px,
-    #f5f5f4 24px
+    #fbf7f0,
+    #fbf7f0 12px,
+    #f3eee4 12px,
+    #f3eee4 24px
   );
 }
 
@@ -180,8 +200,8 @@ body {
 
 .lesson-mechanism {
   margin-bottom: 1rem;
-  border-left: 4px solid #78716c;
-  background: #f5f5f4;
+  border-left: 4px solid #1f4d45;
+  background: #fbf7f0;
   padding: 0.75rem 1rem;
   font-size: 0.95rem;
 }
@@ -218,8 +238,8 @@ body {
 }
 
 .lesson-section-nongoal {
-  border-color: #d6d3d1;
-  background: #f5f5f4;
+  border-color: #e7e0d4;
+  background: #fbf7f0;
 }
 
 .lesson-section-limits {
@@ -238,6 +258,6 @@ body {
 }
 
 .lesson-section-mental {
-  border-color: #93c5fd;
-  background: #f8fafc;
+  border-color: #c5ddd7;
+  background: #f4faf8;
 }

@@ -14,12 +14,12 @@ export function HomeContinue(): ReactElement | null {
     return null;
   }
   return (
-    <p className="mt-6 text-sm text-stone-300">
-      {ids.length} module{ids.length === 1 ? "" : "s"} marked visited on this device. Last
-      marked:{" "}
+    <p className="mt-6 max-w-xl rounded-2xl border border-line bg-paper/80 px-4 py-3 text-sm text-stone-700">
+      You marked {ids.length} topic{ids.length === 1 ? "" : "s"} as visited on this
+      computer. Last one:{" "}
       <Link
         href={`/learn/${encodeURIComponent(last)}/`}
-        className="font-medium text-white underline underline-offset-2"
+        className="font-medium text-forest underline underline-offset-2"
       >
         {last}
       </Link>

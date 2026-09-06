@@ -9,7 +9,7 @@ export function ModuleCard({ mod }: { mod: ModuleMeta }): ReactElement {
   return (
     <Link
       href={moduleHref(mod.id)}
-      className="flex h-full flex-col rounded-xl border border-stone-200 bg-white p-4 shadow-sm transition-colors hover:border-stone-400 hover:bg-stone-50"
+      className="flex h-full flex-col rounded-2xl border border-line bg-paper p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-forest/40 hover:shadow-md"
     >
       <div className="flex items-center justify-between gap-2">
         <p className="font-mono text-xs font-medium text-stone-600">{mod.id}</p>
@@ -76,7 +76,7 @@ export function PhaseJump({ phases }: { phases: number[] }): ReactElement {
             <li key={phase}>
               <a
                 href={`#phase-${phase}`}
-                className="inline-flex items-center rounded-full border border-stone-300 bg-white px-3 py-1 text-sm text-stone-800 hover:border-stone-500"
+                className="inline-flex items-center rounded-full border border-line bg-paper px-3 py-1 text-sm text-ink hover:border-forest hover:bg-white"
               >
                 {phase}
                 {meta ? (
