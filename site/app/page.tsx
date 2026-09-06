@@ -53,14 +53,14 @@ export default function HomePage() {
             fail in an authorized lab, repair it, and prove the repair. TLS, JWT,
             bcrypt, and scanners are mechanisms. They are not the property.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <ButtonLink href="/learn/1.1/01-property-vs-mechanism/" onDark>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <ButtonLink href="/learn/1.1/01-property-vs-mechanism/" onDark className="w-full sm:w-auto">
               Start with module 1.1
             </ButtonLink>
-            <ButtonLink href="/learn/" variant="secondary" onDark>
+            <ButtonLink href="/learn/" variant="secondary" onDark className="w-full sm:w-auto">
               Browse {moduleCount} modules
             </ButtonLink>
-            <ButtonLink href="/roadmap/" variant="secondary" onDark>
+            <ButtonLink href="/roadmap/" variant="secondary" onDark className="w-full sm:w-auto">
               See the roadmap
             </ButtonLink>
           </div>

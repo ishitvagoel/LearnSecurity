@@ -79,7 +79,9 @@ export function PhaseJump({ phases }: { phases: number[] }): ReactElement {
                 className="inline-flex items-center rounded-full border border-stone-300 bg-white px-3 py-1 text-sm text-stone-800 hover:border-stone-500"
               >
                 {phase}
-                {meta ? <span className="ml-1.5 text-stone-500">{meta.title}</span> : null}
+                {meta ? (
+                  <span className="ml-1.5 hidden text-stone-500 sm:inline">{meta.title}</span>
+                ) : null}
               </a>
             </li>
           );

@@ -18,19 +18,32 @@ function subscribe(onStoreChange: () => void): () => void {
   };
 }
 
+const EMPTY_VISITED: string[] = [];
+let cachedRaw: string | null | undefined = undefined;
+let cachedIds: string[] = EMPTY_VISITED;
+
 function readVisited(): string[] {
   try {
     const raw = localStorage.getItem(KEY);
+    if (raw === cachedRaw) {
+      return cachedIds;
+    }
+    cachedRaw = raw;
     if (!raw) {
-      return [];
+      cachedIds = EMPTY_VISITED;
+      return cachedIds;
     }
     const parsed: unknown = JSON.parse(raw);
     if (!Array.isArray(parsed)) {
-      return [];
+      cachedIds = EMPTY_VISITED;
+      return cachedIds;
     }
-    return parsed.filter((x): x is string => typeof x === "string");
+    cachedIds = parsed.filter((x): x is string => typeof x === "string");
+    return cachedIds;
   } catch {
-    return [];
+    cachedRaw = undefined;
+    cachedIds = EMPTY_VISITED;
+    return cachedIds;
   }
 }
 
@@ -39,7 +52,7 @@ function snapshot(moduleId: string): boolean {
 }
 
 export function useVisitedModuleIds(): string[] {
-  return useSyncExternalStore(subscribe, readVisited, () => []);
+  return useSyncExternalStore(subscribe, readVisited, () => EMPTY_VISITED);
 }
 
 export function ProgressToggle({ moduleId }: { moduleId: string }): ReactElement {

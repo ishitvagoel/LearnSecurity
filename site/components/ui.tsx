@@ -82,11 +82,13 @@ export function ButtonLink({
   children,
   variant = "primary",
   onDark = false,
+  className = "",
 }: {
   href: string;
   children: ReactNode;
   variant?: "primary" | "secondary";
   onDark?: boolean;
+  className?: string;
 }): ReactElement {
   const primary = onDark
     ? "bg-white text-stone-900 hover:bg-stone-100"
@@ -99,7 +101,7 @@ export function ButtonLink({
       href={href}
       className={`inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-sm font-medium no-underline ${
         variant === "primary" ? primary : secondary
-      }`}
+      } ${className}`}
     >
       {children}
     </Link>
