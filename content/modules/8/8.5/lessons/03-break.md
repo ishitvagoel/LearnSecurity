@@ -1,18 +1,27 @@
-# 8.5-LO-03 — Observe the body in crash JSON, do not call a vendor
+# Practice: crash JSON contains the note body
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
-**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-PRIVACY-1`. ASVS 5.0.0 (final) `v5.0.0-16.2.5`. `v5.0.0-16.5.4` last-resort handlers are **Level 3, advanced**. PRIVACY-3 (Play Data safety) is disclosure, not this oracle. Do not use MASVS L1/L2/R.
 
-## Authorized scope
+## Try it
 
-`labs/8.5/8.5-lab` only. The fixture is an in-process `crash_report(note_body)`. Synthetic note string `secret`. No live Crashlytics, Play Console, Sentry, or public apps. Do not send the JSON anywhere.
+The practice is not a website you attack. It is a tiny Python `crash_report` that returns a dict. The failure is already in the function: it copies the note body into the report. You are here to see that the check treats that JSON as a **failed rule**, not as a debug nit.
 
-**Forbidden outcome:** Crash report contains the note body. `'secret' in str(crash_report("secret"))` is true.
+The rule under test:
 
-Attacker capability in this lab: a crash-platform operator or a logcat reader. That stands in for a clinic “debug crash includes the last chart so support can reproduce,” a tracker SDK extra, or a leftover `READ_LOGS` path. Trust assumption: `crash_report` is supposed to be a **redact-before-send** sink (3.1 / 5.1 at mobile grain). Crashlytics “automatic,” a completed Play Data safety form, and HTTPS to the vendor are not in the TCB for this cell.
+> A confidential note body must not appear in this crash report. If `crash_report("secret")` includes `secret`, telemetry has failed as a security control.
 
-## Mental model: exception includes the body
+## Where you may practice
+
+Only `labs/8.5/8.5-lab` is in scope. The fixture is an in-process `crash_report(note_body)`. The body is the synthetic string `secret`. No live crash consoles, no public store, no public apps. Do not send the JSON anywhere.
+
+Do not paste a real note body into a crash SDK “to see what happens.” Do not paste this exercise onto a public crash project, employer dashboard, or live clinic.
+
+What you trust for this check: `crash_report` is supposed to redact before send — the same extra-copy problem as logs (3.1) and vendors (5.1), now on a phone. A crash product set to “automatic,” a completed store privacy form, and HTTPS to the vendor are not what you trust.
+
+Who can read the report in this story: a crash-platform operator or a logcat reader. That stands in for a clinic “debug crash includes the last chart so support can reproduce,” a tracker SDK extra, or a leftover `READ_LOGS` path.
+
+## Picture: the report copies the body
 
 ```mermaid
 flowchart TD
@@ -21,51 +30,57 @@ flowchart TD
   Report --> Vendor[would leave the device]
 ```
 
-The vulnerable tree demonstrates **cause** (report builder copies the body). Do not send the JSON anywhere. Preconditions: `crash_report` returns a dict with `'note': note_body`. You do not need an emulator. You must not call a crash vendor.
+The broken files take that path on purpose. You do not need an emulator. You must not call a crash vendor. The substring in the returned dict *is* the leak.
 
-MASVS-PRIVACY-1 wants minimized access (do not collect the body). Module 3.1 already refused bodies in logs; this cell is **the mobile telemetry sink**. Play Data safety discloses; it does not redact.
+The log lesson (3.1) already refused bodies in logs. This check is **the mobile telemetry place**. The store form discloses. It does not redact.
 
-## What to read in the fixture
+## What to look at — cause, not a dump
 
-`vulnerable/crash.py` returns a dict with `'note': note_body`. Tests:
+Read `vulnerable/crash.py`. It returns a dict with `'note': note_body`. Tests:
 
 - `test_crash_report_omits_note_body`
 - `test_honest_crash_still_includes_stack` — a stack identifier may remain
 
 You do not need a new field name. The failure of `test_crash_report_omits_note_body` *is* the evidence.
 
-Do not open the fixed tree yet. Diagnose the cause first.
+Do not open the repaired files yet. Diagnose the cause first.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+| What you see | What kind of failure | Not the lesson |
+|---|---|---|
+| `'note': note_body` in the dict | Confidential field in a lower-trust store | “Crashes stay on the device” |
+| `'secret'` in `str(report)` | Debug extras used as the payload | A store privacy form |
+| No redaction marker | The sink accepted the field | “We use HTTPS to the vendor” |
 
-| Slice | This lab |
+## Why it happens vs what it costs
+
+| Slice | Practice |
 |---|---|
-| Required property | `'secret' not in str(crash_report("secret"))` |
-| Root cause | Exception / report builder includes the note body |
-| Preconditions | `note` key holds the body |
+| The rule | `'secret' not in str(crash_report("secret"))` |
+| Why it happens | The exception or report builder includes the note body |
+| What has to be true first | The `note` key holds the body |
 | Trigger | Crash on view-note, or verbose logcat |
-| Impact | Body at a vendor; maybe public if misbucketed (5.1 extra copy) |
-| Prevention | Do not put bodies in exceptions; redact before send |
-| Detection | `crash_body_redacted`; CI grep of crash fixtures; never the body |
-| Recovery | Keep redact; purge vendor; notify if the copy left the TCB |
-| Not the lesson | A Crashlytics product name; live vendor; Play Data safety as redaction |
+| What it costs | The body sits at a vendor; maybe public if their store is misconfigured (5.1 extra copy) |
+| How you stop it later | Do not put bodies in exceptions; redact before send |
+| How you notice later | `crash_body_redacted`; a CI check of crash fixtures; never the body |
+| How you recover later | Keep the redact; purge the vendor; tell people if the copy left what you trust |
+| Out of scope | A crash product name, a live vendor, or the store form as redaction |
 
-## Framework defaults versus the privacy guarantee
-
-A crash SDK will ship whatever you attach. Android private storage (8.2) does not encrypt the HTTPS payload. FastAPI Sentry (10.5) is the same cell on the web. The application guarantee is: **this** fixture, `'secret'` is absent from the report.
+A crash SDK will ship whatever you attach. Private storage on the phone (8.2) does not encrypt the HTTPS payload. A web crash product (10.5) is the same field on the server. The app's promise this week is: **this** fixture, `'secret'` is absent from the report.
 
 ## Practice
+
+From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/8.5/8.5-lab/tests --impl vulnerable
 ```
 
-Run from `labs/8.5/8.5-lab` if a repo-root collection picks up `site/`. Record `test_crash_report_omits_note_body`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/8.5/8.5-lab` if a collection at the repo root picks up `site/`. Record `test_crash_report_omits_note_body`. Do not probe public hosts. An environment error is not security evidence.
 
-## Transfer
+## Use it somewhere new
 
-Clinic: predict a crash that includes a synthetic patient name — still only this directory. Do not call live Crashlytics.
+Clinic: predict a crash that includes a fake patient name — still only this directory. Do not call a live crash product.
 
-## Non-goals
+## What this page is not doing
 
-No live-target or payload-dump instructions. Synthetic `'secret'` only. Do not dump real PII into fixtures.
+No live-target steps. Fake `'secret'` only. Do not dump real people's data into the practice files. Do not “fix” the practice by deleting the test.

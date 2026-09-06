@@ -1,16 +1,15 @@
-# 8.2-LO-02 — Device store inventory including backups
+# Device store inventory including backups
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-STORAGE-1`, `MASVS-STORAGE-2`.
 
-## Can a second engineer name pytest cases from your inventory?
+## Could someone else name the checks from your map?
 
-“We use EncryptedSharedPreferences” is not this lesson. A reviewable model names **each store and whether it can hold a body**.
+“We use EncryptedSharedPreferences” is not this lesson. A map someone else can test names **each store and whether it can hold a body**.
 
-SecureCollab Phase 8 freeze: local `save_note` / `plaintext_on_disk`. No live phones.
+This week’s freeze: the notes app’s local `save_note` / `plaintext_on_disk`. No live phones.
 
-## Mental model: many sinks, one body
+## Picture: many sinks, one body
 
 ```mermaid
 flowchart TD
@@ -23,49 +22,49 @@ flowchart TD
 
 5.1’s deletion graph now includes the device.
 
-## Mental model: offline still has a policy
+## Picture: offline still has a policy
 
 ```mermaid
 flowchart LR
   Offline[offline] --> Expire[TTL]
   Offline --> Revoke["wipe on logout / 4.1"]
-  Offline --> Replay["8.1 hostile replay residual"]
+  Offline --> Replay["8.1 hostile replay leftover"]
 ```
 
-## Step 1: freeze pieces
+## Step 1: freeze the pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | lost-device finder; backup agent; USB |
-| Objects | cached note body |
+| Who | Lost-device finder; backup agent; USB |
+| What | Cached note body |
 | Actions | `save_note` |
-| Channels | app-private files (lab dict stand-in) |
-| TCB | ciphertext stand-in + wipe policy |
-| Untrusted | the device (8.1) |
-| State / time | TTL; logout; restore |
-| 1.1 cell | confidentiality at rest on device |
+| Paths | App-private files (lab dict stand-in) |
+| What you trust | Ciphertext stand-in plus wipe policy |
+| What you do not trust | The device (8.1) |
+| Time | TTL; logout; restore |
+| Authorization cell | Secrecy at rest on the device |
 
-## Step 2: write cells
+## Step 2: write cells the practice can fail
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
 | app | cache | save | ciphertext, not body |
-| backup agent | same file | copy | residual unless excluded |
-| biometric UI | lock screen | gate | not encryption |
+| backup agent | same file | copy | leftover unless excluded |
+| fingerprint UI | lock screen | gate | not encryption |
 | notification | title | show | no body |
 
 ## Practice
 
-Draw the inventory. Point at `labs/8.2/8.2-lab` file `disk.py`.
+Draw the inventory. Point at `labs/8.2/8.2-lab` file `disk.py`. Label the store even in the repaired tree — the fix is the ciphertext stand-in, not pretending a private folder became encryption.
 
-## Transfer
+## Use it somewhere new
 
 Clinic chart cache; iOS Keychain classes as a later mirror.
 
-## Residual risk
+## What can still go wrong
 
 Extracted Keystore keys on a compromised OS; screenshot channel; 8.3 clipboard IPC.
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+Do not define security as a famous-bugs list. Answer keys stay out of lessons.

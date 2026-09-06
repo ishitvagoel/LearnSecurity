@@ -1,60 +1,61 @@
-# 8.5-LO-08 — Review crash_report that includes the body as a PR
+# Review a crash_report that includes the body
 
 **Kind:** code-review
 **Loop step:** Review
-**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-PRIVACY-1`. ASVS 5.0.0 (final) `v5.0.0-16.2.5`. Do not use MASVS L1/L2/R.
 
-## Review the fixture as if it were SecureCollab crash telemetry
+Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
 
-Review `labs/8.5/8.5-lab/vulnerable/` as a SecureCollab PR. Your job is not to count suspicious lines. Reconstruct whether `crash_report("secret")` still contains `'secret'`, compare that with the module invariant, and write changes a developer can verify.
+## What you are reviewing
 
-Intended findings live only in `content/assessment/keys/8.5.md` — not here. Do not open the keys file until your review has been evaluated.
+A colleague ships the notes app’s crash telemetry. Review `labs/8.5/8.5-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `crash_report("secret")` still contains `'secret'`, compare that with the rule, and write changes a developer can verify.
 
-## Mental model: crash_report includes the body
+Start at `crash_report` and the body×crash row, not at a scanner color or a store screenshot. The check you already ran (`test_crash_report_omits_note_body`) is the rule test. A comment “will redact later” is not.
 
-Start with this seeded smell: **`crash_report` includes the body**. Label it property, mechanism, or false assurance before you accept the PR.
+## Picture: crash_report includes the body
+
+Start with this seeded smell: **`crash_report` includes the body**. Label it rule, tool, or false comfort before you accept the change.
 
 ```mermaid
 flowchart TD
-  Claim[PR claim] --> Q{"What would falsify it?"}
-  Q -->|body in crash JSON| Property["Property - good if tested"]
-  Q -->|Crashlytics HTTPS| Mechanism[Mechanism - channel]
-  Q -->|Play Data safety| False[False assurance]
+  Claim[PR claim] --> Q{"What would show it is false?"}
+  Q -->|body in crash JSON| Property["Rule - good if tested"]
+  Q -->|Crashlytics HTTPS| Mechanism[Tool - channel]
+  Q -->|Play Data safety| False[False comfort]
 ```
 
-Classification starts at the protected effect (`'secret'` absent). Everything that is not redact-before-send at that call is a candidate telemetry copy. A Play Data safety screenshot without that pytest is the same smell, not a different finding class.
+Classification starts at the protected effect (`'secret'` absent). Everything that is not redact-before-send at that call is a candidate extra copy. A store privacy screenshot without that pytest is the same smell, not a different finding class.
 
-Leftover `READ_LOGS`, tracker SDKs, and 10.5 web Sentry are other sinks — name them, do not skip `test_crash_report_omits_note_body`. MASVS spreadsheet membership without a test is 9.1.
+Leftover `READ_LOGS`, tracker SDKs, and web crash reports (10.5) are other places — name them, do not skip `test_crash_report_omits_note_body`. A spreadsheet row without a test is 9.1.
 
 ## Seeded smells (label them yourself)
 
 - `crash_report` includes the body
 - Leftover `READ_LOGS`
 - Tracker SDK without a processor review
-- MASVS spreadsheet row without a test (9.1)
+- A privacy-list spreadsheet row without a test (9.1)
 
-Also reject: live vendor payloads; closing findings without re-running `test_crash_report_omits_note_body`; keys in lessons; MASVS L1/L2/R as current.
+Also reject: live vendor payloads; closing findings without re-running `test_crash_report_omits_note_body`; keys in learner notes; a store privacy form as the fix.
 
-## Misconceptions this module refuses
+## Common mix-ups
 
 - Store privacy labels are controls
-- Debug logs stay on device
-- MASTG is a scanner
+- Debug logs stay on the device
+- A testing catalogue is a scanner
 - HTTPS to the vendor is redaction
-- MASVS L1/L2/R are current levels
+- An old privacy-level sticker is the current bar
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: observation, property or false assurance, suggested structural change, residual you will **not** delete. Tie at least one to `test_crash_report_omits_note_body`.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_crash_report_omits_note_body`. Do not open the keys file.
 
-## Transfer
+## Use it somewhere new
 
-Clinic PR that “enabled Crashlytics and completed Data safety” without a body-omit test is an incomplete confidentiality review. Name the independent falsehood that would still keep `'secret'` out of the report.
+Clinic change that “turned on a crash product and completed the store form” without a body-omit test is an incomplete review of where the field can land. Name the independent falsehood that would still keep `'secret'` out of the report.
 
-## HITL / WCAG 2.2
+## Can people still use it
 
-In-app “send feedback” must not require attaching a screenshot of PHI to proceed.
+In-app “send feedback” must not require attaching a screenshot of a fake chart to continue.
 
-## Non-goals
+## What this page is not doing
 
-Do not merge by adding a comment “will redact later.” That comment is a residual without an owner. Do not call a live vendor to prove the finding.
+Do not merge by adding a comment “will redact later.” That comment is leftover without an owner. Do not call a live vendor to prove the finding.

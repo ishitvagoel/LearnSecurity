@@ -1,16 +1,15 @@
-# 8.3-LO-02 — Exported components and query strings
+# Exported components and query strings
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-PLATFORM-1`. RFC 8252.
 
-## Can a second engineer name pytest cases from your IPC map?
+## Could someone else name the checks from your map?
 
-“App Links are verified” is not this lesson. A reviewable model names **each exported entry and which query keys it may honor**.
+“App Links are verified” is not this lesson. A map someone else can test names **each exported entry and which query keys it may honor**.
 
-SecureCollab Phase 8 freeze: local `open_link` / `current_user`. No live apps.
+This week’s freeze: the notes app’s local `open_link` / `current_user`. No live apps.
 
-## Mental model: locate versus impersonate
+## Picture: locate versus impersonate
 
 ```mermaid
 flowchart TD
@@ -18,49 +17,51 @@ flowchart TD
   As["query as=admin"] --> Deny[not identity]
 ```
 
-## Mental model: three IPC grains
+## Picture: three IPC grains
 
 ```mermaid
 flowchart LR
   Link[App Link] --> Q[query string]
-  Scheme[custom scheme] --> Hijack[hijack residual]
-  Wv["WebView bridge"] --> Js["6.2 plus PLATFORM-2"]
+  Scheme[custom scheme] --> Hijack[hijack leftover]
+  Wv["WebView bridge"] --> Js["6.2 plus another interpreter"]
 ```
 
-## Step 1: freeze pieces
+If App Links are verified and `open_link` still copies `as`, the map has a hole. The host check is how the OS *finds* the app. It is not the session.
+
+## Step 1: freeze the pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | alice session; malicious other app |
-| Objects | session principal; note id |
+| Who | alice session; other app on the tablet |
+| What | session principal; note id |
 | Actions | `open_link` |
-| Channels | query dict (lab stand-in for Intent extras) |
-| TCB | ignore identity keys |
-| Untrusted | all extras |
-| State / time | current session |
-| 1.1 cell | authenticity of the principal |
+| Paths | query dict (practice stand-in for Intent extras) |
+| What you trust | ignore identity keys |
+| What you do not trust | all extras |
+| Time | current session |
+| Authorization cell | authenticity of the principal |
 
-## Step 2: write cells
+## Step 2: write cells the practice can fail
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
 | alice | `note=n1` | open | allow locate |
 | anyone | `as=admin` | switch | deny |
 | App Link cert | host | verify | not identity |
-| WebView | JS bridge | call | PLATFORM-2 residual |
+| WebView | JS bridge | call | leftover, another interpreter |
 
 ## Practice
 
-Draw the inventory. Point at `labs/8.3/8.3-lab` file `link.py`.
+Draw the inventory. Point at `labs/8.3/8.3-lab` file `link.py`. Label the extras even in the repaired tree — the fix is ignore identity keys, not pretending a verified host became the session.
 
-## Transfer
+## Use it somewhere new
 
 OAuth redirect query `code=` is data for 4.5, not a session switch.
 
-## Residual risk
+## What can still go wrong
 
-Custom scheme; WebView; user installs attacker app; 8.2 clipboard.
+Custom scheme. WebView. User installs an attacker app. 8.2 clipboard.
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+Do not define security as a famous-bugs list. Answer keys stay out of lessons.

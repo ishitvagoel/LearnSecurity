@@ -1,84 +1,100 @@
-# 8.5-LO-01 — A crash report must not include the note body
+# A crash report must not include the note body
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-PRIVACY-1`–`PRIVACY-4`. ASVS `v5.0.0-16.2.5`; `v5.0.0-16.5.4` is **Level 3, advanced**. MASTG 2.0.0 testing profiles — not MASVS L1/L2/R. Mobile Top 10:2024 awareness after the cause.
 
-## The claim this module owns
+## The rule
 
-SecureCollab Android may crash while a member is viewing a note. The **note body is a 1.1 privacy cell**. A crash report that includes that body ships the cell to a telemetry vendor (3.1 / 5.1). Play Data safety is a **disclosure form**, not redaction.
+The notes app on a phone can crash while someone is looking at a note. The note body is still confidential. A crash report is another place that field can land.
 
-> `crash_report("secret")` must not contain `secret`. A stack identifier may remain.
+If the report includes the body, you have shipped the note to a crash vendor. That is an extra copy, the same kind of leftover as a log line (3.1) or a vendor who keeps data (5.1). The store’s privacy form is a **disclosure**. It does not strip the field.
 
-The forbidden outcome is **crash JSON contains the note body**. That is confidentiality of bodies in telemetry — a vendor copy, and maybe a public bucket if the vendor is misconfigured.
+> `crash_report("secret")` must not contain `secret`. A stack identifier may stay. The form you fill in the store does not enforce this.
 
-MASVS-PRIVACY-1 wants minimized access (do not collect the body). PRIVACY-3 wants transparency about what *is* collected; filling the Play form does not delete the field. PRIVACY-2 / PRIVACY-4 are unlinkability and user control — they do not make an unredacted dump safe. MAS Testing Profiles live in **MASTG**, not a current MASVS “L1.”
+So what must not happen: **crash JSON contains the note body**. That is secrecy of bodies in telemetry. The vendor has a copy. If their bucket is open, other people might too.
 
-## Mental model: telemetry is a sink
+Privacy lists ask you to collect less (do not put the body in the report) and to say what you *do* collect. Filling the store form does not delete the field. Unlinkability and “the user can delete their account” do not make an unredacted dump safe.
+
+## Picture: telemetry is a place the field can land
 
 ```mermaid
 flowchart TD
   Body[note body] --> Crash[crash_report]
-  Crash --> Vendor[telemetry vendor]
-  Vendor --> Copy["5.1 extra copy"]
-  Form[Play Data safety] --> Disclose[disclosure]
+  Crash --> Vendor[crash vendor]
+  Vendor --> Copy[extra copy]
+  Form[Play Data safety] --> Disclose[store listing]
   Disclose --> NotRedact[not redaction]
 ```
 
-## Mental model: tracker SDK is another processor
+## Picture: a crash SDK is another processor
 
 ```mermaid
 flowchart LR
-  App[SecureCollab APK] --> CrashSdk[crash SDK]
+  App[notes app] --> CrashSdk[crash SDK]
   App --> Tracker[analytics SDK]
   CrashSdk --> VendorA[processor A]
   Tracker --> VendorB[processor B]
 ```
 
-**Mechanism (not the property):** Firebase Crashlytics “automatic,” a Play Data safety checkbox, or “we use HTTPS to the vendor.”
+**A tool, not the rule:** a crash product set to “automatic,” a checkbox on the store listing, or “we use HTTPS to the vendor.”
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## People who can read a crash report
 
-| Slice | For this property |
+| Person | What they can do here | Motive | Harm if the body is in the report |
+|---|---|---|---|
+| Crash-platform operator | Read crash JSON | Debug the crash | Reads the note body |
+| Logcat reader | Read device logs | Debug on a phone | Same body, now in a log |
+| Analytics vendor | Index extras the tracker SDK shipped | Run the product | Same body, second vendor |
+| Support | Paste “what the user saw” so they can reproduce | Close a ticket | The body leaves the device and lands in a ticket |
+
+You do not need a nation-state this week. Those four already get the body.
+
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
+
+Someone put the note body into the exception or the report builder. That is the cause. The person who later reads the vendor dashboard is a **result**, not the cause.
+
+| Slice | For this rule |
 |---|---|
-| Root cause | Exception / report builder includes the note body |
-| Preconditions | `secret` in `str(report)` |
-| Trigger | Crash on view-note, or verbose logcat |
-| Impact | Body at a vendor; maybe public if misbucketed |
-| Prevention | Do not put bodies in exceptions; redact before send; permission minimization |
-| Detection | `crash_body_redacted`; CI grep of crash fixtures |
-| Recovery | Purge vendor; notify if the copy left the TCB |
+| Why it happens | The exception or report builder includes the note body |
+| What has to be true first | `secret` is in `str(report)` |
+| Trigger | Crash on view-note, or a verbose logcat line |
+| What it costs | The body sits at a vendor; maybe public if their store is misconfigured |
+| How you stop it | Do not put bodies in exceptions; redact before send; ask for fewer permissions |
+| How you notice | `crash_body_redacted`; a CI check of crash fixtures |
+| How you recover | Purge the vendor copy; tell people if the copy left what you trust |
 
-## Framework defaults versus the privacy guarantee
+## What the framework does vs what you still have to check
 
-A crash SDK will ship whatever you attach. Android private storage (8.2) does not encrypt the HTTPS payload. `v5.0.0-16.2.5` is the same protection-level rule as 3.1, now at a mobile sink.
+A crash SDK will ship whatever you attach. Private storage on the phone (8.2) does not encrypt the HTTPS payload. The same protection-level rule as the log lesson (3.1) now applies at this mobile place.
 
-## Mechanism limits
+The app's promise is: **this** `crash_report("secret")` does not contain `secret`. The local check is `labs/8.5/8.5-lab`. Fake data only. No live crash product. No real people's notes.
+
+## What the tool cannot do
 
 - Screenshots in “send feedback.”
-- ANR traces and logcat if a leftover `READ_LOGS` path prints the body.
-- Vendor as processor — contract + 5.1, not disappearance.
-- Last-resort handlers (`v5.0.0-16.5.4`, Level 3) can still dump frames that embed arguments.
+- Frozen-app traces and logcat if a leftover `READ_LOGS` path still prints the body.
+- The vendor as a processor — a contract plus the extra-copy lesson (5.1), not disappearance.
+- Last-chance error handlers that dump every frame, including function arguments. That is an advanced extra, not this week's check.
 
-## Usability and accessibility
+## Can people still use it
 
-In-app “send feedback” must not require attaching a screenshot of the note to proceed (WCAG 2.2 4.1.3). Offer a text field that is itself redacted before send.
+In-app “send feedback” must not require attaching a screenshot of the note to continue. Offer a text field. Redact that field before send. Do not encode “this is sensitive” as color only.
 
 ## Practice
 
-Where does a crash go; who is the processor. Then run:
+Where does a crash go, and who is the processor? Then run the local pair:
 
-```
+```text
 python3 -m pytest labs/8.5/8.5-lab/tests --impl vulnerable
 python3 -m pytest labs/8.5/8.5-lab/tests --impl fixed
 ```
 
 The first command must fail. The second must pass.
 
-## Transfer
+## Use it somewhere new
 
-Clinic crash with a synthetic patient name. Web Sentry (10.5) same cell.
+Clinic crash with a fake patient name. Web crash reports (10.5) are the same field in another place.
 
-## Non-goals
+## What this page is not doing
 
-Live Crashlytics, Play Console, public APKs, real PII. Gates 0–10 and M0–M5 stay **not-attempted**. Answer keys are not in this file.
+Live crash consoles, the public store, public apps, and real people's data. Answer keys are not in this file.

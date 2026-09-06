@@ -1,16 +1,15 @@
-# 8.1-LO-05 — Evidence is client claim ignored, then a passing pair
+# Fail on the broken files, then pass on the repaired ones
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.3.1`. MASVS 2.1.0 (final) `MASVS-PLATFORM`.
 
-## An invariant that cannot fail a test is still a slogan
+## If you cannot test it, it is still a slogan
 
-“We use Play Integrity” is not evidence. “The Compose button is disabled” is a mechanism observation. The oracle is: `allow_export({"integrity": "ok"}, "fail")` is false and `allow_export({"integrity": "ok"}, "play_integrity_pass")` may be true. The client-ok-plus-attest-fail observation must be **false** on `--impl vulnerable` (returns true) and **true** on `--impl fixed`. Do not call live attestation APIs.
+“We use Play Integrity” is not evidence. “The Compose button is disabled” is a tool observation. The check is: `allow_export({"integrity": "ok"}, "fail")` is false, and `allow_export({"integrity": "ok"}, "play_integrity_pass")` may be true. The client-ok-plus-attest-fail observation must be **false** on `--impl vulnerable` (returns true) and **true** on `--impl fixed`. Do not call live attestation APIs.
 
-## Mental model: vulnerable must fail: client ok plus attest fail
+## Picture: broken files must fail: client ok plus attest fail
 
-The failing observation on `--impl vulnerable` is **client ok plus attest fail**. A passing collection count is not this cell.
+A check that only counts passing cases can pass while client `integrity=ok` still authorizes export. This check asks whether that grant still counts as a passing control. Broken must fail that question. Repaired must pass it.
 
 ```mermaid
 flowchart LR
@@ -18,41 +17,45 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass deny"]
 ```
 
-| Mode | Must show for this module |
-|---|---|
-| Negative / abuse | client ok, attest fail → false; vulnerable must fail |
-| Normal | client ok, attest pass → true (may pass on both) |
-| Empty | missing client claim, attest fail → false |
-| Not claimed | emulator farms; 4.4 object grant; live Play; MASVS-RESILIENCE-1 on a device |
+If both pass, the check is not looking at the client boolean. If both fail, the fix is not structural or the check is wrong.
 
-Lab tests in `labs/8.1/8.1-lab/tests/test_property.py`. `test_client_integrity_claim_is_not_authorization` is a **forbidden-outcome** test: a client boolean that authorizes export is not allowed to count as a passing control.
+## Three observations, even for export
+
+| Mode | Must show for this topic |
+|---|---|
+| Wrong input / abuse | client ok, attest fail → false; broken files must fail (`test_client_integrity_claim_is_not_authorization`) |
+| Normal | client ok, attest pass → true (`test_server_attest_may_allow_export`; may pass on both) |
+| Extra | missing client claim, attest fail → false (`test_missing_client_claim_does_not_authorize`) |
+| Not claimed | emulator farms; 4.4 object grant; live Play; platform integrity on a physical phone |
+
+Practice checks live in `labs/8.1/8.1-lab/tests/test_property.py`. `test_client_integrity_claim_is_not_authorization` is a **what-must-not-happen** check: a client boolean that authorizes export is not allowed to count as a passing control.
 
 ```text
 python3 -m pytest labs/8.1/8.1-lab/tests --impl vulnerable
 python3 -m pytest labs/8.1/8.1-lab/tests --impl fixed
 ```
 
-Honest server-pass may pass on both implementations. That does not excuse the failing-attest deny test. If vulnerable does not fail `test_client_integrity_claim_is_not_authorization`, the lab is miswired—fix the wiring, not the assertion.
+Honest server-pass may pass on both implementations. That does not excuse the failing-attest deny check. If the broken files do not fail `test_client_integrity_claim_is_not_authorization`, the practice is miswired — fix the wiring, not the check.
 
-## What the tests do not prove
+## What the checks do not prove
 
 - Real Play Integrity token verification
-- MASVS-RESILIENCE-1 on a physical device
+- Platform integrity on a physical phone
 - 8.4 debug/release split
 - iOS App Attest (later mirror)
 - 4.4 object grants after export is allowed
 - 6.7 quota
 
-Record those as residuals or later modules, not as silent passes.
+Record those as leftover risk or later topics, not as silent passes.
 
 ## Practice
 
-Execute both implementations this session from the lab directory if needed. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `PlayIntegrity` in Gradle without calling `allow_export({"integrity": "ok"}, "fail")`.
+Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the map-page row. Reject a “check” that only greps `PlayIntegrity` in Gradle without calling `allow_export({"integrity": "ok"}, "fail")`. An environment error is not security evidence.
 
-## Transfer
+## Use it somewhere new
 
-Clinic: a test that only asserts the Android button is disabled is not this cell. A live Play Console call is out of scope.
+Clinic: a check that only asserts the Android button is disabled is not this cell. A live Play Console call is out of scope.
 
-## Non-goals
+## What this page is not doing
 
-Do not add a device-farm trophy. Do not log attestation blobs. Keys stay out of this file. Do not use MASVS L1/L2/R.
+Do not add a device-farm trophy. Do not log attestation blobs. Answer keys stay out of this file.

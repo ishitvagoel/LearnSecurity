@@ -1,16 +1,17 @@
-# 8.5-LO-04 — Redact before send; do not trust the SDK default
+# Redact before send; do not trust the SDK default
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-16.2.5`. MASVS 2.1.0 (final) `MASVS-PRIVACY-1`. `v5.0.0-16.5.4` is **Level 3, advanced**. PRIVACY-3 is transparency, not the strip.
 
-## Structural means the body never enters the report
+## The rule
 
-`crash_report` must not copy `note_body` into the payload. A constant `'[redacted]'` (lab stand-in) is the teaching shape. Structural means that omit — not Crashlytics “automatic,” not a Play Data safety form, not a tracker-SDK “privacy mode” sticker.
+A denylist of yesterday's crash fields is not the fix. Hiding a scanner warning is not the fix. “We filled in the store’s privacy form” is not the fix.
 
-The smallest restore for SecureCollab Android crash telemetry is: `'secret'` absent from the report. Fail-safe: if the SDK offers “include last screen,” leave it off. Do not fail open because support “needs the last chart.” Do not attach the live note, clipboard, or screenshot.
+The structural change is: `crash_report` **does not copy `note_body` into the payload**. A constant `'[redacted]'` (the local stand-in) is the teaching shape. Structural means omit — not a crash product set to “automatic,” not a store form, not a tracker-SDK “privacy mode” sticker.
 
-## Mental model: redact then send
+The smallest restore for the notes app’s crash telemetry is: `'secret'` absent from the report. Fail-safe: if the SDK offers “include last screen,” leave it off. Do not fail open because support “needs the last chart.” Do not attach the live note, the clipboard, or a screenshot.
+
+## Picture: redact then send
 
 ```mermaid
 flowchart TD
@@ -20,47 +21,56 @@ flowchart TD
   Strip -->|no| Send
 ```
 
-The lab’s fixed tree returns `'note': '[redacted]'` and keeps a `stack` key so the crash is still useful. Production still needs the same omit for screenshots, ANR traces, and leftover `READ_LOGS`. Vendor as processor remains 5.1: redact does not make an already-sent copy disappear. Last-resort handlers (`v5.0.0-16.5.4`, Level 3 advanced) can still stringify arguments.
+The repaired files return `'note': '[redacted]'` and keep a `stack` key so the crash is still useful. Production still needs the same omit for screenshots, frozen-app traces, and leftover `READ_LOGS`. The vendor as a processor remains 5.1: redact does not make an already-sent copy disappear. Last-chance error handlers can still stringify arguments. That leftover stays.
 
-ASVS `v5.0.0-16.2.5` wants logging by protection level — the same rule as 3.1, now at a mobile sink. This pytest is that sentence for `crash_report("secret")`.
+The log lesson (3.1) already said: log by protection level. This check is that sentence for `crash_report("secret")`.
 
-## Why this restores the cell
+## What the repaired files must show
+
+Read `fixed/crash.py` against this checklist. Do not treat the snippet as a production crash SDK.
 
 | After the fix | Must be true |
 |---|---|
 | `crash_report('secret')` | `'secret'` not in the report |
 | stack key | still present so the crash is useful |
 
+Fail closed: if you are unsure whether a value is the note body, omit it. Uncertainty is a **no** on “this may go in the report,” not a yes because support wanted the last screen.
+
 ## What this is not
 
-Crashlytics “automatic.” Play Data safety. A tracker-SDK “privacy mode” sticker. MASVS spreadsheet membership (9.1). HTTPS to the vendor as confidentiality. FLAG_SECURE as telemetry redaction.
+- A crash product set to “automatic.”
+- The store’s privacy form.
+- A tracker-SDK “privacy mode” sticker.
+- A spreadsheet row that says you mapped a privacy list (9.1).
+- HTTPS to the vendor as secrecy of the body.
+- A screenshot-blocking flag as telemetry redaction.
 
-## Mechanism limits
+## What the tool cannot do
 
 - Screenshots in “send feedback.”
-- ANR traces and logcat if a leftover `READ_LOGS` path prints the body.
-- Vendor as processor — contract + 5.1, not disappearance.
-- Last-resort handlers (`v5.0.0-16.5.4`, Level 3) can still dump frames that embed arguments.
-- Web Sentry (10.5) is another sink of the same body.
+- Frozen-app traces and logcat if a leftover `READ_LOGS` path still prints the body.
+- The vendor as a processor — a contract plus 5.1, not disappearance.
+- Last-chance error handlers that dump frames with arguments. That is an advanced extra, not this week's check.
+- Web crash reports (10.5) are another place for the same body.
+
+## Can people still use it
+
+In-app “send feedback” must not require attaching a screenshot of the note to continue. Offer a text field. Redact that field before send.
 
 ## Practice
 
-Name the predicate (body never in the payload; stack may remain). Run:
+Name the check (body never in the payload; stack may remain). Run:
 
 ```text
 python3 -m pytest labs/8.5/8.5-lab/tests --impl fixed
 ```
 
-Must pass. Run from the lab directory if collection at repo root is polluted.
+It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-## Transfer
+## Use it somewhere new
 
-Clinic: stop putting patient names in exception messages; the lab still uses synthetic strings.
+Clinic: stop putting patient names in exception messages. The lab still uses fake strings.
 
-## Residual risk
+## What can still go wrong
 
-Vendor copies already sent (5.1 purge); screenshots; ANR; leftover `READ_LOGS`; Level 3 last-resort handlers; 10.5 web crash sinks.
-
-## Non-goals
-
-Do not call a live vendor. Do not claim Gate 8 from a Play Data safety screenshot. Do not teach MASVS L1/L2/R as current levels.
+Vendor copies already sent (5.1 purge). Screenshots. Frozen-app traces. Leftover `READ_LOGS`. Last-chance handlers. Web crash sinks (10.5).

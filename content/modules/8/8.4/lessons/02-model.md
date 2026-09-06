@@ -1,16 +1,15 @@
-# 8.4-LO-02 — Debug versus release as a server decision
+# Debug versus release as a server decision
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-CODE`. ASVS `v5.0.0-8.3.1`.
 
-## Can a second engineer name pytest cases from your channel map?
+## Could someone else name the checks from your map?
 
-“R8 is on” is not this lesson. A reviewable model names **build type, client id, and which API it may call**.
+“R8 is on” is not this lesson. A map someone else can test names **build type, client id, and which API it may call**.
 
-SecureCollab Phase 8 freeze: local `api_allowed(build_type, attest)`. No live stores.
+This week’s freeze: the notes app’s local `api_allowed(build_type, attest)`. No live stores.
 
-## Mental model: server owns the channel
+## Picture: server owns the channel
 
 ```mermaid
 flowchart TD
@@ -19,7 +18,7 @@ flowchart TD
   Pred -->|no| Deny[deny]
 ```
 
-## Mental model: secrets in the APK will leak
+## Picture: secrets in the APK will leak
 
 ```mermaid
 flowchart LR
@@ -28,42 +27,42 @@ flowchart LR
   Id --> Assume[treat as public]
 ```
 
-That is 5.3 / `v5.0.0-13.3.1` — not solved by minify.
+That leftover is 5.3 — secrets in the artifact. Minify does not solve it.
 
-## Step 1: freeze pieces
+## Step 1: freeze the pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | leaked debug APK; honest release |
-| Objects | prod export API |
+| Who | leaked debug APK; honest release |
+| What | prod export API |
 | Actions | `api_allowed` |
-| Channels | HTTPS from the app |
-| TCB | server build+attest check |
-| Untrusted | client attest string, R8, root checks |
-| State / time | token freshness (8.1 residual) |
-| 1.1 cell | integrity of the release channel |
+| Paths | HTTPS from the app |
+| What you trust | server build-plus-attest check |
+| What you do not trust | client attest string, R8, root checks |
+| Time | token freshness (8.1 leftover) |
+| Authorization cell | integrity of the release channel |
 
-## Step 2: write cells
+## Step 2: write cells the practice can fail
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
 | debug + attest ok | prod export | call | deny |
 | release + attest ok | prod export | call | may allow |
 | release + attest fail | prod export | call | deny |
-| R8 | binary | minify | not TCB |
+| R8 | binary | minify | not what you trust |
 
 ## Practice
 
-Draw the map. Point at `labs/8.4/8.4-lab` file `build.py`.
+Draw the map. Point at `labs/8.4/8.4-lab` file `build.py`. Label the always-true helper even in the repaired tree — the fix is release plus attest, not pretending minify became a grant.
 
-## Transfer
+## Use it somewhere new
 
-Clinic FHIR flavors; 10.2 SBOM.
+Clinic FHIR flavors; a list of what shipped in the APK (10.2).
 
-## Residual risk
+## What can still go wrong
 
-Key leak; attestation farms; MASVS-RESILIENCE as cost.
+Key leak (5.3). Attestation farms. Resilience as cost, not as trust.
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+Do not define security as a famous-bugs list. Answer keys stay out of lessons.

@@ -1,54 +1,65 @@
-# 8.5-LO-07 — Transfer: clinic crash with a synthetic patient name
+# Same idea: clinic crash with a fake patient name
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-PRIVACY-1`–`PRIVACY-4`. ASVS 5.0.0 (final) `v5.0.0-16.2.5`. Play Data safety is disclosure. Do not use MASVS L1/L2/R.
 
-## Change the workplace; keep bodies out of telemetry
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: `crash_report("secret")` must not contain `secret`. Rewrite it for a clinic without changing the fork.
+The notes-app scaffolding goes away. You get a **clinic crash**. A fake patient name sits in the last chart. Your job is to rewrite the loop, not to name a bug-list code.
 
-**Prompt:** Clinic crash with a synthetic patient name. Also name web Sentry (10.5).
+The notes-app sentence was: `crash_report("secret")` must not contain `secret`. Rewrite it for a clinic without changing the fork: field × place, allow or deny. The store’s privacy form is still disclosure, not redaction.
 
-**Product sketch:** EHR-lite “debug crash includes the last chart so support can reproduce,” plus a completed Play Data safety form.
+**Product sketch:** an EHR-lite “debug crash includes the last chart so support can reproduce,” plus a completed store privacy form.
 
-Rewrite the SecureCollab sentence. Include:
+## Picture: same place, clinical object
 
-1. attacker capabilities (crash-platform operator, logcat reader — not a live clinic);
-2. trust assumptions (redact-before-send is TCB; Play Data safety and Crashlytics automatic are not);
-3. forbidden outcome (`'name' in str(crash_report(name))`, not “HIPAA”);
-4. a test idea on a **local** fixture only (no live Sentry);
-5. residual (vendor processor, screenshots, ANR, leftover `READ_LOGS`);
-6. WCAG if a human feedback path exists (must not require a screenshot of the chart).
+Renaming “note body” to “patient name” is not transfer. Field, place, and leftover change. Enabling a crash product and filling the store form does not omit the field.
 
-Use synthetic labels. Do not use real patient names.
-
-## Mental model: same sink, clinical object
+| Notes app this week | Clinic sketch |
+|---|---|
+| Note body is confidential | Fake patient name / chart text is confidential |
+| Stack identifier may send | Stack identifier may send |
+| `crash_report("secret")` | `crash_report(name)` on a local fixture |
+| Crash-platform operator / logcat reader | Same readers — **not** a live clinic |
+| Body substring in the JSON | Name substring in the JSON |
 
 ```mermaid
 flowchart LR
-  Chart[synthetic chart text] --> Belief[support wants the last screen]
+  Chart[fake chart text] --> Belief[support wants the last screen]
   Crash[crash SDK] --> Reality[vendor copy of the chart]
 ```
 
-If support “needs the last chart” while `crash_report` copies the body, the cell is gone. Crashlytics automatic, Play Data safety, and HTTPS to the vendor do not omit the field. Web Sentry (10.5) is the same sink family — name it, do not call that vendor here. PRIVACY-3 transparency does not delete the field.
+If support “needs the last chart” while `crash_report` copies the body, the rule is gone. A crash product set to automatic, the store form, and HTTPS to the vendor do not omit the field. Web crash reports (10.5) are the same place family — name them, do not call that vendor here. A transparency label does not delete the field.
 
-The clinic rewrite still has to keep the SecureCollab fork: synthetic name absent from the report, stack may remain. Enabling Crashlytics and completing Data safety without a body-omit test leaves `'name' in str(crash_report(name))` true. The local pytest analogue is `test_crash_report_omits_note_body` — on a fixture, not a live Crashlytics project.
+The clinic rewrite still has to keep the notes-app fork: fake name absent from the report, stack may remain. Enabling a crash product and completing the store form without a body-omit test leaves `'name' in str(crash_report(name))` true. The local pytest analogue is `test_crash_report_omits_note_body` — on a fixture, not a live crash project.
 
-## What graders reject
+## Prompt — clinic crash with a fake patient name
+
+Rewrite the notes-app sentence. Include:
+
+1. who can act (crash-platform operator, logcat reader — not a live clinic);
+2. what you trust (redact-before-send is the promise; the store form and a crash product set to automatic are not);
+3. what must not happen (`'name' in str(crash_report(name))`, not a legal label);
+4. a test idea on a **local** fixture only (no live web-crash call);
+5. leftover (vendor as processor, screenshots, frozen-app traces, leftover `READ_LOGS`);
+6. whether a human feedback path exists (must not require a screenshot of the chart to continue).
+
+Use fake labels. Do not use real patient names.
+
+## What is not good enough
 
 | Reject | Why |
 |---|---|
-| “Play Data safety is filled in” | Disclosure, not redaction |
-| Live Crashlytics / real names | Lab policy |
-| “MASVS L1 privacy” | Obsolete MASVS levels; profiles live in MASTG |
-| HTTPS to vendor as this cell | Channel, not omit |
+| “The store privacy form is filled in” | Disclosure, not redaction |
+| Live crash console / real names | Course rules |
+| A privacy-level sticker as the definition | Awareness, not this pytest |
+| HTTPS to the vendor as this topic | Channel, not omit |
 | Crash dialog shown as evidence | Wrong observation |
 
 ## Practice
 
-One page. No keys. `labs/8.5/8.5-lab` is the only running system you may break. Do not call a public vendor.
+One page. No answer keys. `labs/8.5/8.5-lab` is the only running system you may break. Do not call a public vendor.
 
-## Non-goals
+## What this page is not doing
 
-Live-target telemetry. Real PHI. Claiming Gate 8 from this page.
+Live-target telemetry. Real patient charts. Claiming you finished a mobile gate from this page.

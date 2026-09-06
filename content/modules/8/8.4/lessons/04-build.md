@@ -1,16 +1,17 @@
-# 8.4-LO-04 — Allow only release plus server attest
+# Allow only release plus server attest
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.3.1`, `v5.0.0-13.3.1`. MASVS 2.1.0 (final) `MASVS-CODE`. RESILIENCE-1/2 raise cost; they are not this grant.
 
-## Structural means the server checks build type
+## The rule
 
-`api_allowed` must require `build_type == "release"` **and** `attest == "ok"` (lab stand-in for server-verified attest from 8.1). Debug never reaches prod. Structural means that conjunction — not R8, not root detection, not Play App Signing, not a resilience sticker.
+R8 is not the fix. Root detection is not the fix. Play App Signing is not the fix. A resilience sticker is not the fix.
 
-The smallest restore for SecureCollab prod export is: debug plus ok denies. Fail-safe: unknown build type denies. Do not accept a client-only minify flag. Do not fail open because “testers need real data.”
+The structural change is: the server **checks build type**. `api_allowed` must require `build_type == "release"` **and** `attest == "ok"` (a stand-in here for server-checked attest from 8.1). Debug never reaches prod. Allow only release plus server attest.
 
-## Mental model: attest and not-debug both gates
+The smallest restore for the notes app’s prod export is: debug plus ok denies. Fail-safe: unknown build type denies. Do not accept a client-only minify flag. Do not fail open because “testers need real data.”
+
+## Picture: attest and not-debug both gates
 
 ```mermaid
 flowchart TD
@@ -21,11 +22,11 @@ flowchart TD
   Att -->|no| Deny
 ```
 
-The lab’s fixed tree requires both gates. Production still needs separate client ids and no prod URLs in debug manifests. Play App Signing protects *store* signing; it does not stop a debug applicationId from using a leaked prod API key. Embedded API identifiers will be recovered — assume that (CODE). Root detection is bypassable (8.1).
+The repaired files require both gates. Production still needs separate client ids and no prod URLs in debug manifests. Play App Signing protects *store* signing; it does not stop a debug application id from using a leaked prod API key. Embedded API identifiers will be recovered — assume that. Root detection is bypassable (8.1).
 
-ASVS `v5.0.0-8.3.1` wants the trusted service layer; `v5.0.0-13.3.1` wants secrets out of artifacts. This pytest is that sentence for `api_allowed("debug", "ok")`.
+Industry lists want a trusted service layer, and they want secrets out of artifacts. This pytest is that sentence for `api_allowed("debug", "ok")`.
 
-## Why this restores the cell
+## What the repaired files must show
 
 | After the fix | Must be true |
 |---|---|
@@ -33,18 +34,26 @@ ASVS `v5.0.0-8.3.1` wants the trusted service layer; `v5.0.0-13.3.1` wants secre
 | release + ok | true |
 | release + fail | false |
 
+Fail closed: if the build is not release, **do not allow prod export**. Do not keep an always-true helper because “minify is on.”
+
 ## What this is not
 
-R8. Root detection. Play App Signing. A resilience sticker. `minifyEnabled`. Hiding the URL. MASVS “R level” (obsolete; profiles live in MASTG).
+- R8.
+- Root detection.
+- Play App Signing.
+- A resilience sticker.
+- `minifyEnabled`.
+- Hiding the URL.
+- An old mobile-app “R level” (obsolete; resilience lives in testing profiles).
 
-## Mechanism limits
+## What the tool cannot do
 
 - Root detection is bypassable (8.1).
-- Repackaged release if signing keys leak (5.3).
-- Attestation farms.
-- Embedded API identifiers will be recovered — assume that (CODE).
+- A repackaged release still works if signing keys leak (5.3).
+- Attestation farms remain.
+- Embedded API identifiers will be recovered — assume that.
 - Debug *should* still reach a **lab** API.
-- 10.2 APK SBOM is inventory, not this channel check.
+- An APK inventory list (10.2) is a list of what shipped, not this channel check.
 
 ## Practice
 
@@ -54,16 +63,16 @@ Name the predicate (`build_type == "release"` and `attest == "ok"`). Run:
 python3 -m pytest labs/8.4/8.4-lab/tests --impl fixed
 ```
 
-Must pass. Run from the lab directory if collection at repo root is polluted.
+Must pass. Run from the lab directory if collection at repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-## Transfer
+## Use it somewhere new
 
 Clinic: stop pointing the debug flavor at production FHIR.
 
-## Residual risk
+## What can still go wrong
 
-Stolen release signing keys (5.3); attestation farms; 8.1 still applies to release APKs; 10.2 SBOM.
+Stolen release signing keys (5.3). Attestation farms. 8.1 still applies to release APKs. APK inventory (10.2).
 
-## Non-goals
+## What this page is not doing
 
-Do not unpack a store APK. Do not claim Gate 8 from an R8 screenshot. Do not teach MASVS L1/L2/R as current levels.
+Do not unpack a store APK. Do not claim Gate 8 from an R8 screenshot. Do not teach old mobile-app L1/L2/R labels as current levels.

@@ -1,14 +1,15 @@
-# 8.5-LO-06 — Detect crash_body_redacted without logging the body
+# crash_body_redacted without logging the body
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
-**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; ASVS 5.0.0 (final) `v5.0.0-16.2.5`. MASVS 2.1.0 (final) `MASVS-PRIVACY-4` for user control after a leak. Do not use MASVS L1/L2/R.
 
-## Prevention is not absolute
+## Stopping it is not enough
 
-A new SDK version can re-enable “include extras” after `crash_report` was “fixed once.” Pair detect and recover. Do not log the body you just redacted (3.1). Do not attach the report body to the ticket.
+A new SDK version can turn “include extras” back on after `crash_report` was “fixed once.” Pair notice and recover. Do not log the body you just redacted (3.1). Do not attach the report body to the ticket.
 
-## Mental model: body in telemetry is a signal
+## Picture: body in telemetry is a signal
+
+A redaction miss is a notice-and-recover problem, not a licence to quote the note in the paging channel. Notice names the crash. Recover purges the vendor copy. Neither reprints the body.
 
 ```mermaid
 flowchart TD
@@ -17,37 +18,54 @@ flowchart TD
   Metric --> Purge[Purge vendor copy]
 ```
 
-| Outcome | This module |
+Industry lists name detect, respond, recover. They do not pick a crash product. They do not prove this report is clean. Someone still has to own the leftover.
+
+Re-run `test_crash_report_omits_note_body` after any crash-SDK change. A green “store privacy form filled” tile is not that pytest. Tracker SDKs and web crash reports (10.5) are other places for the same body — inventory them before you claim recover.
+
+## Signals that do not become a second leak
+
+| Outcome | This topic |
 |---|---|
-| Detect | `crash_body_redacted`; CI grep of fixtures |
-| Signal | crash id, app version, reason; never the body |
-| Recover | Keep redact; purge vendor; notify if needed |
-| Residual | Vendor as processor; screenshots; ANR; leftover `READ_LOGS` |
+| Notice | `crash_body_redacted`; a CI check of fixtures |
+| What the line holds | Crash id, app version, reason; **never** the body |
+| Respond | Stop the printer that reintroduced the field; do not paste the matching report into chat |
+| Recover | Keep the redact; purge the vendor copy; tell people if needed |
+| Leftover | The vendor as a processor; screenshots; frozen-app traces; leftover `READ_LOGS` |
 
-CSF 2.0 Detect / Respond / Recover name outcomes. They do not prove `v5.0.0-16.2.5`. A SIEM product name is not the property. Re-run `test_crash_report_omits_note_body` after any crash-SDK change; a green “Play Data safety filled” tile is not that pytest. Tracker SDKs and web Sentry (10.5) are other sinks of the same body — inventory them before claiming Recover.
+A crash dashboard will show crash counts and stay silent when the last extra still holds the note. Detection must observe **`'secret'` absent**, not vendor uptime. If the alert includes the note body, you have opened the same leak as a log line (3.1) and an extra vendor copy (5.1).
 
-## Framework defaults versus the operate guarantee
-
-A Crashlytics dashboard will show crash counts and stay silent when the last extra still holds the note. Detection must observe **`'secret'` absent**, not vendor uptime. If the alert includes the note body, you have opened a 3.1 / 5.1 cell.
-
-## Practice
-
-Write one log line you would accept. Tie it to `labs/8.5/8.5-lab`.
+A log line a reviewer can accept looks like:
 
 ```text
 log_denied reason=crash_body_redacted crash_id=cr_85e app=release
 ```
 
-Reject any line that includes a note body, patient name, or a live Crashlytics payload.
+Not: a note body, a patient name, or a live crash payload.
 
-## Transfer
+If your alert includes the matching report, you have copied the leak into the paging channel.
 
-Clinic: detect a crash that would have included a synthetic name; do not attach the report body to the ticket. Do not call a live vendor.
+## What the framework does vs what you still have to check
 
-## Usability
+The same leftover `READ_LOGS` path, tracker SDK extras, and web crash drains that bypass this fixture will also bypass a “scan our crash dashboard” detector. Name those places before you claim recover. A crash-product name is not the rule.
 
-In-app “send feedback” must not require attaching a screenshot of the note to proceed (WCAG 2.2 Success Criterion 4.1.3). Offer a text field that is itself redacted before send.
+## Can people still use it
 
-## Non-goals
+In-app “send feedback” must not require attaching a screenshot of the note to continue. Offer a text field. Redact that field before send. If operators see a redaction-miss badge, do not encode it as color only.
 
-A SIEM product name is not the property. Live vendor traces are out of scope. Gates 0–10 stay not-attempted.
+## Practice
+
+Write one log line you would accept in review. Tie it to `labs/8.5/8.5-lab`.
+
+```text
+log_denied reason=crash_body_redacted crash_id=cr_85e app=release
+```
+
+Reject any line that includes a note body, a patient name, or a live crash payload.
+
+## Use it somewhere new
+
+Clinic: notice a crash that would have included a fake name; do not attach the report body to the ticket. Do not call a live vendor.
+
+## What this page is not doing
+
+A crash-product name is not the rule. Live vendor traces are out of scope. Answer keys stay out of lessons.

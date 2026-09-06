@@ -1,31 +1,40 @@
-# 8.1-LO-03 — Observe client-claim allow, do not trophy a device farm
+# Practice: client integrity=ok authorizes export
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
-**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-PLATFORM`. OWASP ASVS 5.0.0 (final) `v5.0.0-8.3.1`. `MASVS-RESILIENCE-1` is a residual, not this oracle. Mobile Top 10:2024 M7 is awareness after the cause. Do not use MASVS L1/L2/R.
 
-## Authorized scope
+## Try it
 
-`labs/8.1/8.1-lab` only. The fixture is an in-process `allow_export(client_claims, server_attest)`. Synthetic claim dicts (`integrity`, `play_integrity_pass`). No live Play Integrity, Frida, device farms, or public APKs. Do not instrument a personal phone.
+The practice is not a phone you attack. It is a tiny Python `allow_export(client_claims, server_attest)`. The failure is already in the function: it returns true when the client says `integrity=ok`, so a failing server attest still exports. You are here to see that **client `integrity=ok` authorizes export** is a failed rule, not a trophy against a device farm.
 
-**Forbidden outcome:** Client integrity claim authorizes export. `allow_export({"integrity": "ok"}, "fail")` returns true.
+The rule under test:
 
-Attacker capability in this lab: a modified client or a stolen boolean. That stands in for a hex-edited Compose switch, a clinic `hipaaMode=true` JSON field, or a patched APK that always reports `integrity=ok`. Trust assumption: `allow_export` is supposed to be a **server-side 1.2 cell** that may consult a *server-verified* attestation result. Play Integrity checked only in the app, R8, the store listing, and Android UID sandboxing are not in the TCB for this cell.
+> `allow_export({"integrity": "ok"}, "fail")` must be false. A client integrity claim is not authorization.
 
-## Mental model: the boolean is enough
+## Where you may practice
+
+Only `labs/8.1/8.1-lab` is in scope. The helper is an in-process `allow_export(client_claims, server_attest)`. Fake claim dicts (`integrity`, `play_integrity_pass`). It does not open a network. Do not call live Play Integrity. Do not instrument a personal phone, a public app, or an employer clinic device.
+
+Do not paste this exercise onto a live phone, a hospital device, or a public Android package.
+
+What must not happen: **client `integrity=ok` authorizes export**. `allow_export({"integrity": "ok"}, "fail")` returns true.
+
+Who can act in this story: a modified client or a stolen boolean. That stands in for a hex-edited Compose switch, a clinic `hipaaMode=true` JSON field, or a patched app file that always reports `integrity=ok`. What you trust: `allow_export` is supposed to be a **server-side 1.2 cell** that may consult a *server-verified* attestation result. Play Integrity checked only in the app, shrinking the app, the store listing, and the Android user-id sandbox are not what you trust for this cell.
+
+## Picture: the boolean is enough
 
 ```mermaid
 flowchart TD
   Claim["integrity ok"] --> True[allow_export true]
 ```
 
-The vulnerable tree demonstrates **cause** (policy on the client field). Do not run instrumentation against anything except this fixture. Preconditions: `allow_export` returns true when the client says `integrity=ok`, ignoring `server_attest`. You do not need an emulator. You must not call live attestation APIs.
+The broken files show **cause** (policy on the client field). Do not send claims at anything except these local files. What has to be true first: `allow_export` returns true when the client says `integrity=ok`, ignoring `server_attest`. You do not need an emulator. You must not call live attestation APIs.
 
-MASVS-PLATFORM is the group for interaction with the OS and other apps. Sandboxing raises the cost of *other apps* reading this process; it does not make *this* process honest. Module 1.2 still lives on the **server**.
+The phone sandbox raises the cost of *other apps* reading this process; it does not make *this* process honest. Last topic (1.2) still lives on the **server**.
 
-## What to read in the fixture
+## What to read in the broken files
 
-`vulnerable/client.py` returns true when the client says `integrity=ok`, ignoring `server_attest`. Tests:
+`vulnerable/client.py` returns true when the client says `integrity=ok`, ignoring `server_attest`. Checks:
 
 - `test_client_integrity_claim_is_not_authorization`
 - `test_server_attest_may_allow_export`
@@ -33,25 +42,25 @@ MASVS-PLATFORM is the group for interaction with the OS and other apps. Sandboxi
 
 You do not need a new boolean name. The failure of `test_client_integrity_claim_is_not_authorization` *is* the evidence.
 
-Do not open the fixed tree yet. Diagnose the cause first.
+Do not open the repaired files yet. Diagnose the cause first.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens vs what it costs
 
-| Slice | This lab |
+| Slice | This practice |
 |---|---|
-| Required property | `allow_export({"integrity": "ok"}, "fail")` is false |
-| Root cause | Policy evaluated on the attacker’s CPU |
-| Preconditions | Client `integrity=ok` is treated as a grant |
-| Trigger | Modified client or stolen boolean |
-| Impact | Export without server authority |
-| Prevention | Ignore client integrity for authorization; server attest + session 1.2 |
-| Detection | `attest_fail_export_denied`; never the APK or note body |
-| Recovery | Keep deny; revoke app tokens; require re-attest |
-| Not the lesson | Mobile Top 10 as the definition; live Play; Frida cookbooks |
+| Required rule | `allow_export({"integrity": "ok"}, "fail")` is false |
+| Why it happens | Policy is decided on the attacker’s CPU |
+| What has to be true first | Client `integrity=ok` is treated as a grant |
+| Trigger | A modified client or a stolen boolean |
+| What it costs | Export without server authority |
+| How you stop it | Ignore client integrity for authorization; server attest plus session 1.2 |
+| How you notice | `attest_fail_export_denied`; never the app file or note body |
+| How you recover | Keep deny; revoke app tokens; require a new attest |
+| Not the lesson | A bug-list sticker, live Play, or a personal-phone cookbook |
 
-## Framework defaults versus the server guarantee
+## What the framework does vs what you still have to check
 
-Android sandbox defaults are not 1.2. Jetpack libraries do not authorize export. FastAPI will accept `integrity=ok` if you bind it. Compose `enabled=false` does not bind `allow_export`. The application guarantee is: **this** fixture, client ok plus attest fail is false.
+Android sandbox defaults are not 1.2. Jetpack libraries do not authorize export. FastAPI will accept `integrity=ok` if you bind it. Compose `enabled=false` does not bind `allow_export`. The app’s promise is: **this** helper, client ok plus attest fail is false.
 
 ## Practice
 
@@ -59,12 +68,12 @@ Android sandbox defaults are not 1.2. Jetpack libraries do not authorize export.
 python3 -m pytest labs/8.1/8.1-lab/tests --impl vulnerable
 ```
 
-Run from `labs/8.1/8.1-lab` if a repo-root collection picks up `site/`. Record `test_client_integrity_claim_is_not_authorization`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/8.1/8.1-lab` if a repo-root collection picks up `site/`. Record `test_client_integrity_claim_is_not_authorization`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. An environment error is not security evidence.
 
-## Transfer
+## Use it somewhere new
 
 Clinic `hipaaMode=true`. Predict without leaving this directory. Do not instrument a live hospital device.
 
-## Non-goals
+## What this page is not doing
 
-No live-target or Frida instructions. Synthetic `'play_integrity_pass'` only. Do not dump device-farm cookbooks.
+No live-target or personal-phone steps. Fake `'play_integrity_pass'` only. Do not dump device-farm cookbooks.

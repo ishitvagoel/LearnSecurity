@@ -1,57 +1,70 @@
-# 8.5-LO-05 — Evidence is the body absent, then a passing pair
+# Fail on the broken files, then pass on the repaired ones
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
-**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-PRIVACY-1`. ASVS 5.0.0 (final) `v5.0.0-16.2.5`.
 
-## An invariant that cannot fail a test is still a slogan
+## If you cannot test it, it is still a slogan
 
-“We filled Play Data safety” is not evidence. “Crashlytics is on HTTPS” is a mechanism observation. The oracle is: `'secret' not in str(crash_report("secret"))` and an honest crash still has a `stack` key. The secret-in-report observation must be **false** on `--impl vulnerable` (body present) and **true** on `--impl fixed`. Do not call a crash vendor.
+“We filled in the store’s privacy form” is not evidence. “The crash product uses HTTPS” is a tool observation. The check is: `'secret' not in str(crash_report("secret"))` and an honest crash still has a `stack` key. That body-absent observation must be **false** on the broken files and **true** on the repaired files. Do not call a crash vendor.
 
-## Mental model: vulnerable must fail: secret in report
+## Picture: a broken crash report must fail the check
 
-The failing observation on `--impl vulnerable` is **secret in report**. A passing collection count is not this cell.
+A test that only counts passing tests can pass while the body is still in the report. This check asks whether a confidential field in this crash JSON still counts as a passing control. Broken must fail that question. Repaired must pass it.
 
 ```mermaid
 flowchart LR
-  V["--impl vulnerable"] --> F["Must fail secret in report"]
-  X["--impl fixed"] --> P["Must pass omit body"]
+  V["broken files --impl vulnerable"] --> F[Must fail: body in report]
+  X["repaired files --impl fixed"] --> P[Must pass: omit body]
 ```
 
-| Mode | Must show for this module |
-|---|---|
-| Negative / abuse | `'secret'` not in `str(crash_report('secret'))`; vulnerable must fail |
-| Normal | honest crash still has a `stack` key (may pass on both) |
-| Not claimed | real Crashlytics; Play Console; screenshot pipelines; vendor DLP |
+If both pass, the test is not looking at the body substring. If both fail, the fix is not structural or the check is wrong.
 
-Lab tests in `labs/8.5/8.5-lab/tests/test_property.py`. `test_crash_report_omits_note_body` is a **forbidden-outcome** test: a report that includes the body is not allowed to count as a passing control.
+## Four modes, even for a crash dict
+
+| Mode | Must show for this topic |
+|---|---|
+| Normal | Honest crash still has a `stack` key (may pass on both) |
+| Wrong input | `'secret'` not in `str(crash_report('secret'))`; broken files must fail |
+| Abuse | Unsure values are not attached (fail closed; leftover if not in this pytest) |
+| Not claimed | A real crash console; the public store; screenshot pipelines; vendor DLP |
+
+The file is `labs/8.5/8.5-lab/tests/test_property.py`. The test `test_crash_report_omits_note_body` is a **what-must-not-happen** test: a report that includes the body is not allowed to count as a passing control.
+
+Honest stack-present may pass on both implementations. That does not excuse the body-omit test. If the broken files do not fail `test_crash_report_omits_note_body`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/8.5/8.5-lab/tests --impl vulnerable
 python3 -m pytest labs/8.5/8.5-lab/tests --impl fixed
 ```
 
-Honest stack-present may pass on both implementations. That does not excuse the body-omit test. If vulnerable does not fail `test_crash_report_omits_note_body`, the lab is miswired—fix the wiring, not the assertion.
+A test that only greps a crash product name in Gradle without calling `crash_report("secret")` is not this topic's evidence. This practice never opens a live crash project.
 
 ## What the tests do not prove
 
 - Vendor DLP after send
-- MASVS-PRIVACY on a physical device
+- A privacy list on a physical device
 - That debug logcat is empty on a rooted phone (8.1)
-- Screenshot / ANR pipelines
-- Last-resort handlers (`v5.0.0-16.5.4`, Level 3 advanced)
-- Web Sentry (10.5)
+- Screenshot / frozen-app pipelines
+- Last-chance error handlers (an advanced extra)
+- Web crash reports (10.5)
 
-Record those as residuals or later modules, not as silent passes.
+Record those as leftover or later topics, not as silent passes.
 
 ## Practice
 
-Execute both implementations this session from the lab directory if needed. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `Crashlytics` in Gradle without calling `crash_report("secret")`.
+Run both this session from the lab directory if needed:
 
-## Transfer
+```text
+python3 -m pytest labs/8.5/8.5-lab/tests --impl vulnerable
+python3 -m pytest labs/8.5/8.5-lab/tests --impl fixed
+```
 
-Clinic: a test that only asserts “crash dialog shown” is not this cell. A test that only asserts HTTP 200 is 9.3’s shape failure. A live Sentry call is out of scope.
+Paste nothing from answer keys. Write fail/pass into your notes next to the body×crash row. Reject a “test” that only greps a crash product name without calling `crash_report("secret")`.
 
-## Non-goals
+## Use it somewhere new
 
-Do not add a live Crashlytics trophy. Do not log note bodies. Keys stay out of this file. Do not use MASVS L1/L2/R.
+Clinic: a test that only asserts “crash dialog shown” is not this topic. A test that only asserts HTTP 200 is the wrong observation. A live web-crash call is out of scope.
+
+## What this page is not doing
+
+Do not add a live crash trophy. Do not log note bodies. Answer keys stay out of this file.

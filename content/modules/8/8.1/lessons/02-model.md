@@ -1,16 +1,15 @@
-# 8.1-LO-02 — Client versus server responsibility matrix
+# Client versus server: who decides
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-PLATFORM`. OWASP ASVS 5.0.0 (final) `v5.0.0-8.3.1`.
 
-## Can a second engineer name pytest cases from your matrix?
+## Could someone else name the checks from your map?
 
-“The phone is sandboxed” is not this lesson. A reviewable model names **which cell the server still owns**.
+“The phone is sandboxed” is not this lesson. A map someone else can test names **which cell the server still owns**.
 
-SecureCollab Phase 8 freeze: local `allow_export(client_claims, server_attest)`. Android/Kotlin first. No live devices.
+This week’s freeze: the notes app’s local `allow_export(client_claims, server_attest)`. Android and Kotlin first. No live phones.
 
-## Mental model: every 1.1 cell has an owner
+## Picture: every 1.1 cell has an owner
 
 ```mermaid
 flowchart TD
@@ -19,9 +18,9 @@ flowchart TD
   Ui["button enabled"] --> Client[client UX only]
 ```
 
-If export is “disabled” in Compose when `integrity != ok`, a patched APK still calls the API.
+If export is “disabled” in Compose when `integrity != ok`, a patched app file still calls the API.
 
-## Mental model: attest is a signal row
+## Picture: attest is a signal row
 
 ```mermaid
 flowchart LR
@@ -32,40 +31,40 @@ flowchart LR
 
 A missing or failed attest **denies**. A passed attest still needs the 1.2 grant (4.4 / 6.7 quota).
 
-## Step 1: freeze pieces
+## Step 1: freeze the pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | patched APK; honest member; emulator |
-| Objects | export action |
+| Who | Patched app file; honest member; emulator |
+| What | Export action |
 | Actions | `allow_export` |
-| Channels | HTTPS JSON from the app |
-| TCB | server `server_attest` plus session |
-| Untrusted | APK, `integrity` field, local UI |
-| State / time | token freshness (named residual) |
-| 1.1 cell | authorization of export |
+| Paths | HTTPS JSON from the app |
+| What you trust | Server `server_attest` plus session |
+| What you do not trust | The app file, the `integrity` field, local UI |
+| Time | Token freshness (named leftover) |
+| Authorization cell | Authorization of export |
 
-## Step 2: write cells
+## Step 2: write cells the practice can fail
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
 | client `integrity=ok`, attest fail | export | allow | deny |
 | attest `play_integrity_pass` + session | export | allow | may allow |
-| Compose hide button | export | UX | not TCB |
-| MASVS-RESILIENCE-1 | platform | detect | cost, not grant |
+| Compose hide button | export | UX | not what you trust |
+| Platform integrity check | phone | detect | cost, not grant |
 
 ## Practice
 
-Draw the matrix. Point at `labs/8.1/8.1-lab` file `client.py`.
+Draw the matrix. Point at `labs/8.1/8.1-lab` file `client.py`. Label even in the repaired tree: the server attest decides; the client boolean is not what you trust.
 
-## Transfer
+## Use it somewhere new
 
-`premium=true` in the APK; clinic `hipaaMode`.
+`premium=true` in the app file; clinic `hipaaMode`.
 
-## Residual risk
+## What can still go wrong
 
 Attestation farms (8.4); rooted honest users; iOS App Attest as a later mirror, same shape.
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+Do not define security as a famous-bugs list. Answer keys stay out of lessons.

@@ -1,69 +1,76 @@
-# 8.5-LO-02 — Telemetry is a 3.1 and 5.1 sink
+# Telemetry is another place the field can land
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-PRIVACY-1`, `MASVS-PRIVACY-3`. ASVS `v5.0.0-16.2.5`.
 
-## Can a second engineer name pytest cases from your sink map?
+## Could someone else name the checks?
 
-“We filled in Play Data safety” is not this lesson. A reviewable model names **what may leave the device, to whom, and which field is forbidden**.
+“We filled in the store’s privacy form” is not this lesson. A drawing someone else can test names **what may leave the device, to whom, and which field is forbidden**.
 
-SecureCollab Phase 8 freeze: local `crash_report(note_body)`. No live vendors.
+This week's freeze for the notes app: local `crash_report(note_body)`. No live vendors.
 
-## Mental model: body vs stack
+> For the note body at `crash_report`, the rule is deny. A stack identifier may send. Evidence that the deny is false: `'secret'` in `str(crash_report("secret"))`.
+
+If the body × crash-report row is blank, the field appears in telemetry because nobody named the place.
+
+## Picture: body vs stack
 
 ```mermaid
 flowchart TD
   Crash[crash_report] --> Pred{"body in payload?"}
-  Pred -->|yes| Forbid[forbidden]
+  Pred -->|yes| Forbid[must not happen]
   Pred -->|no| Stack[stack may send]
 ```
 
-## Mental model: disclosure is not the TCB
+## Picture: a store listing is not the app's promise
 
 ```mermaid
 flowchart LR
   Label[Play Data safety] --> Store[store listing]
-  Redact[redact before send] --> TCB[application TCB]
-  Label --> NotTcb[not TCB]
+  Redact[redact before send] --> Promise[the app's promise]
+  Label --> NotPromise[not the promise]
 ```
 
-MASVS-PRIVACY-3 (transparency) is the label. MASVS-PRIVACY-1 (minimize) is the redaction. Mixing them is how a form becomes false assurance.
+Transparency is the label. Collecting less is the redaction. Mixing them is how a form becomes false comfort.
 
-## Step 1: freeze pieces
+## Step 1: name the pieces
+
+Do not invent a new catalogue. Take the fields you already have and ask where each one may land.
 
 | Piece | This system |
 |---|---|
-| Subjects | crash SDK; tracker SDK; logcat reader |
-| Objects | stack trace; note body |
+| Who | Crash SDK; tracker SDK; logcat reader |
+| What | Stack trace; note body |
 | Actions | `crash_report` |
-| Channels | HTTPS to vendor; logcat |
-| TCB | redaction before send |
-| Untrusted | third-party SDK; verbose logging; Play form |
-| State / time | crash at view-note |
-| 1.1 cell | confidentiality of bodies in telemetry |
+| Paths | HTTPS to the vendor; logcat |
+| What you trust for this journey | Redaction before send |
+| What you do not trust | A third-party SDK; verbose logging; the store form |
+| Time | Crash at view-note |
+| The rule | Secrecy of bodies in telemetry |
 
-## Step 2: write cells
+## Step 2: write allow and deny
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
 | SDK | body | send | deny |
 | SDK | stack | send | allow |
 | logcat | body | print | deny |
-| vendor | retained copy | 5.1 | contract + purge |
+| vendor | retained copy | keep | contract plus purge (5.1) |
+
+A missing body×crash row is how the body shows up as “debug extras.” Write the hole.
 
 ## Practice
 
-Draw the map. Point at `labs/8.5/8.5-lab` file `crash.py`.
+Draw the map so someone else could name the checks. Point at `labs/8.5/8.5-lab` file `crash.py`.
 
-## Transfer
+## Use it somewhere new
 
-Web Sentry (10.5): same body-vs-stack split.
+Web crash reports (10.5): same body-vs-stack split.
 
-## Residual risk
+## What can still go wrong
 
-Vendor as processor; screenshots; ANR; leftover `READ_LOGS`.
+The vendor as a processor. Screenshots. Frozen-app traces. A leftover `READ_LOGS` path.
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+Do not define security as a famous-bugs list. Answer keys stay out of lessons.

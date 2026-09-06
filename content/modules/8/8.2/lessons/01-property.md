@@ -1,20 +1,19 @@
-# 8.2-LO-01 — Private app dir is not encryption
+# A private app folder is not encryption
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-STORAGE-1`, `MASVS-STORAGE-2`, `MASVS-CRYPTO-2`, `MASVS-AUTH-2`. MASTG 2.0.0 tests. ASVS `v5.0.0-11.3.3` named; lab prefix is a stand-in.
 
-## The claim this module owns
+## The rule
 
-SecureCollab Android may cache notes for offline read. The cache lives on a **hostile device** (8.1). A world-readable Downloads file is worse, but **internal storage is still not encryption**. Module 5.2 already refused Base64; this module’s grain is **the phone’s disk**.
+The notes app this week may cache notes so you can read them offline. That cache lives on a **hostile phone** (last topic, 8.1). A world-readable Downloads file is worse. A private app folder is still not encryption. Last crypto topic (5.2) already refused Base64. This week’s grain is **the phone’s disk**.
 
 > After `save_note("secret")`, `plaintext_on_disk()` must be false.
 
-The forbidden outcome is **note body cached as plaintext on disk**. Stolen USB backup or an unlocked-cache device yields bodies.
+What must not happen: **a note body cached as plaintext on disk**. A stolen USB backup, or a phone whose cache is unlocked, yields the bodies.
 
-MASVS-STORAGE-1 wants sensitive data stored securely; STORAGE-2 wants leakage prevented (screenshots, clipboard, notifications, backups). CRYPTO-2 wants keys in platform Keystore/Keychain, not next to the file. AUTH-2 is **local** authentication — it is not 4.2 server MFA.
+Industry lists want sensitive data stored in a way that is actually secret, not just “in the app folder.” They also want extra copies stopped — screenshots, clipboard, notifications, backups. Keys belong in the platform store (Android Keystore, later iOS Keychain), not next to the file. A fingerprint prompt is **local** unlock. It is not the server second factor from 4.2.
 
-## Mental model: private dir versus ciphertext
+## Picture: private folder versus ciphertext
 
 ```mermaid
 flowchart TD
@@ -23,62 +22,64 @@ flowchart TD
   File --> Usb[USB debug]
 ```
 
-`MODE_PRIVATE` keeps other *apps* out on a healthy OS. Root, backup agents, and `adb backup` still see bytes.
+`MODE_PRIVATE` keeps other *apps* out on a healthy OS. Root, backup agents, and a USB debug backup still see the bytes.
 
-## Mental model: biometric gate versus key
+## Picture: fingerprint prompt versus the key
 
 ```mermaid
 flowchart LR
-  Bio["fingerprint prompt"] --> Ui[unlock Compose]
-  Key["Keystore key"] --> Cipher[AEAD]
+  Bio["fingerprint prompt"] --> Ui[unlock the app screen]
+  Key["Keystore key"] --> Cipher[authenticated encryption]
   Ui --> NotKey[does not wrap the file]
 ```
 
-A prompt that shows the list is not wrapping the cache key. Compromised OS can skip the prompt (`MASVS-AUTH-2` residual).
+A prompt that shows the list is not wrapping the cache key. A compromised OS can skip the prompt. That leftover stays even when local unlock looks polished.
 
-**Mechanism (not the property):** EncryptedSharedPreferences on *some* prefs; `FLAG_SECURE` alone; “we use Room.”
+**A tool is not the rule.** EncryptedSharedPreferences on *some* prefs; `FLAG_SECURE` alone; “we use Room.”
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | For this property |
+| Slice | For this rule |
 |---|---|
-| Root cause | Bodies written as text files |
-| Preconditions | `plaintext_on_disk` true after save |
+| Why it happens | Bodies written as text files |
+| What has to be true first | `plaintext_on_disk` true after save |
 | Trigger | Lost device, backup, USB |
-| Impact | Confidentiality of bodies at rest on the device |
-| Prevention | Encrypt cache with Keystore-held keys; expire; wipe on logout/revoke |
-| Detection | Device-lost flow; backup-flag review |
-| Recovery | Revoke sessions; rotate |
+| What it costs | The note bodies are no longer secret on the device |
+| How you stop it | Encrypt the cache with keys held in Keystore; expire; wipe on logout or revoke |
+| How you notice | Device-lost flow; backup-flag review |
+| How you recover | Revoke sessions; rotate |
 
-## Framework defaults versus the disk guarantee
+## What the framework does vs what you still have to check
 
 EncryptedSharedPreferences is not automatic for every file. Room defaults to plaintext SQLite. iOS Data Protection classes are a later mirror — still not “the file is gone.”
 
-## Mechanism limits
+The app’s promise is: **this** save, `plaintext_on_disk()` is false. The practice folder is `labs/8.2/8.2-lab`. It is local only. It is not a live phone.
 
-- Biometrics gate UI, not key extraction on a compromised OS.
+## What the tool cannot do
+
+- A fingerprint gates the screen. It does not stop key extraction on a compromised OS.
 - Screenshots, recents, clipboard, logs, auto backup, WorkManager extras.
-- Lab `aead:` prefix is a **teaching stand-in**, not AES-GCM.
+- The lab `aead:` prefix is a **teaching stand-in**, not AES-GCM.
 
-## Usability and accessibility
+## Can people still use it
 
-Unlock-with-biometrics fallback must remain accessible (device credential) without dumping plaintext to a debug overlay. Offline “read-only until sync” must be readable (WCAG 2.2 4.1.3).
+Unlock-with-fingerprint must still have a device-PIN fallback people can actually use. Do not dump plaintext onto a debug overlay. Offline “read-only until sync” must still be readable (WCAG 2.2 4.1.3).
 
 ## Practice
 
 Inventory every local store. Then run:
 
-```
+```text
 python3 -m pytest labs/8.2/8.2-lab/tests --impl vulnerable
 python3 -m pytest labs/8.2/8.2-lab/tests --impl fixed
 ```
 
 The first command must fail. The second must pass.
 
-## Transfer
+## Use it somewhere new
 
 Clinic offline chart cache. iOS Keychain vs Android Keystore. Desktop Electron.
 
-## Non-goals
+## What this page is not doing
 
-Live device imaging, dumping real AES into lessons. Gates 0–10 and M0–M5 stay **not-attempted**. Answer keys are not in this file.
+Live device imaging, dumping real AES into lessons. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not in this file.

@@ -1,16 +1,19 @@
-# 8.2-LO-04 — Store a ciphertext stand-in, not the body
+# Store a ciphertext stand-in, not the body
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-STORAGE-1`, `MASVS-CRYPTO-2`. AUTH-2 is local, not 4.2. ASVS `v5.0.0-11.3.3` is named; the lab prefix is a stand-in.
 
-## Structural means the stored bytes are not the body
+## The rule
 
-`save_note` must not write `'secret'` as the file contents. The lab uses an `aead:` prefix plus length as a **stand-in** for Keystore-wrapped AEAD — not a real cipher (5.2). Structural means that wrap — not `MODE_PRIVATE`, not a fingerprint prompt, not EncryptedSharedPreferences on a different file.
+A private folder is not the fix. A fingerprint prompt is not the fix. EncryptedSharedPreferences on a *different* file is not the fix.
 
-The smallest restore for SecureCollab offline cache is: `plaintext_on_disk()` false after save. Fail-safe: if wrap fails, **do not** fall back to plaintext. Do not fail open because Keystore was locked.
+The structural change is: the stored bytes are **not the body**. `save_note` must not write `'secret'` as the file contents. Store a ciphertext stand-in, not the body.
 
-## Mental model: wrap then write
+The lab uses an `aead:` prefix plus length as a **stand-in** for Keystore-wrapped authenticated encryption — not a real cipher (5.2). Structural means that wrap.
+
+The smallest restore for the notes app’s offline cache is: `plaintext_on_disk()` false after save. Fail-safe: if wrap fails, **do not** fall back to plaintext. Do not fail open because Keystore was locked.
+
+## Picture: wrap then write
 
 ```mermaid
 flowchart TD
@@ -18,27 +21,34 @@ flowchart TD
   Wrap --> Disk[DISK]
 ```
 
-The lab’s fixed tree writes `'aead:'` plus length, never the body. Production: Android Keystore key + AEAD; iOS Keychain later. Biometrics gate UI, not key extraction on a compromised OS (`MASVS-AUTH-2` residual). Screenshots, recents, clipboard, logs, auto backup, and WorkManager extras remain STORAGE-2 residuals.
+The repaired files write `'aead:'` plus length, never the body. Production still needs an Android Keystore key plus real authenticated encryption; iOS Keychain is a later mirror. A fingerprint gates the screen. It does not stop key extraction on a compromised OS. Screenshots, recents, clipboard, logs, auto backup, and WorkManager extras remain extra copies.
 
-MASVS-STORAGE-1 wants that secure store implemented. This pytest is that sentence for `'secret'` on disk.
+Industry lists want that secure store implemented. This pytest is that sentence for `'secret'` on disk.
 
-## Why this restores the cell
+## What the repaired files must show
 
 | After the fix | Must be true |
 |---|---|
 | save `'secret'` | `plaintext_on_disk` false |
 | save `'other'` | `plaintext_on_disk` false |
 
+Fail closed: if wrap fails, **do not store the body**. Do not keep a text-file cache because “the folder is private.”
+
 ## What this is not
 
-`MODE_PRIVATE` alone. Biometric prompt alone. EncryptedSharedPreferences for a *different* file. Base64 (5.2). Room `insert` success. FLAG_SECURE as the disk wrap.
+- `MODE_PRIVATE` alone.
+- A fingerprint prompt alone.
+- EncryptedSharedPreferences for a *different* file.
+- Base64 (5.2).
+- Room `insert` success.
+- `FLAG_SECURE` as the disk wrap.
 
-## Mechanism limits
+## What the tool cannot do
 
-- Biometrics gate UI, not key extraction on a compromised OS.
-- Screenshots, recents, clipboard, logs, auto backup, WorkManager extras (STORAGE-2).
-- Lab `aead:` prefix is a **teaching stand-in**, not AES-GCM.
-- 4.1 wipe on logout still required.
+- A fingerprint gates the screen. It does not stop key extraction on a compromised OS.
+- Screenshots, recents, clipboard, logs, auto backup, WorkManager extras.
+- The lab `aead:` prefix is a **teaching stand-in**, not AES-GCM.
+- 4.1 wipe on logout is still required.
 - Extracted keys plus ciphertext backups remain.
 
 ## Practice
@@ -49,16 +59,16 @@ Name the predicate (stored bytes ≠ body; no plaintext fallback). Run:
 python3 -m pytest labs/8.2/8.2-lab/tests --impl fixed
 ```
 
-Must pass. Run from the lab directory if collection at repo root is polluted.
+Must pass. Run from the lab directory if collection at repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-## Transfer
+## Use it somewhere new
 
 Clinic: stop treating “internal storage” as the chart-cache control.
 
-## Residual risk
+## What can still go wrong
 
-Backups of ciphertext with extracted keys; screenshots; notifications; 4.1 wipe on logout; clipboard (8.3); lab prefix is not AES.
+Backups of ciphertext with extracted keys; screenshots; notifications; 4.1 wipe on logout; clipboard (8.3); the lab prefix is not AES.
 
-## Non-goals
+## What this page is not doing
 
-Do not image a phone. Do not claim Gate 8 from a fingerprint screenshot. Do not teach MASVS L1/L2/R as current levels.
+Do not image a phone. Do not claim Gate 8 from a fingerprint screenshot.

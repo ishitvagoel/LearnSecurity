@@ -1,29 +1,17 @@
-# 8.3-LO-07 — Transfer: clinic deep link as=doctor
+# Same idea: clinic deep link as=doctor
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-PLATFORM-1`. RFC 8252 (final) for native OAuth. ASVS `v5.0.0-8.3.1`. Do not use MASVS L1/L2/R.
 
-## Change the workplace; keep the session off the query string
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: after `open_link({"as": "admin"})`, `current_user()` must still be `"alice"`. Rewrite it for a clinic without changing the fork.
+The notes-app scaffolding goes away. You get a clinic deep link `as=doctor`. Also name OAuth redirect to the app (4.5).
 
-**Prompt:** Clinic deep link `as=doctor`. Also name OAuth redirect to app (4.5).
+Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: after `open_link({"as": "admin"})`, `current_user()` must still be `"alice"`. Rewrite it for a clinic without changing the fork.
 
-**Product sketch:** EHR-lite claimed HTTPS app link `open?as=doctor` “for kiosk demos,” App Links verified.
+**Product sketch:** an EHR-lite claimed HTTPS app link `open?as=doctor` “for kiosk demos,” plus App Links verified.
 
-Rewrite the SecureCollab sentence. Include:
-
-1. attacker capabilities (another app on the tablet sending extras — not a live clinic);
-2. trust assumptions (server session is TCB; App Links and https are not identity);
-3. forbidden outcome (`current_user` becomes doctor, not “HIPAA”);
-4. a test idea on a **local** fixture only (no sideloaded malware);
-5. residual (WebView, custom schemes, RFC 8252, 4.5 audience);
-6. WCAG if a human error path exists (exit the WebView with a keyboard).
-
-Do not instruct attacks on real hospital or vendor endpoints. Use synthetic clinic names.
-
-## Mental model: verified host is not a principal
+## Picture: verified host is not a principal
 
 ```mermaid
 flowchart LR
@@ -31,17 +19,35 @@ flowchart LR
   As["as=doctor still bound"] --> Reality[session switch]
 ```
 
-If the kiosk demo uses a verified host while `open_link` copies `as`, the cell is gone. HTTPS, App Links, and `exported=false` without a test do not keep alice. OAuth redirect to app (4.5) and WebView bridges are the same extras family — name them, do not run those systems here. RFC 8252 still wants claimed HTTPS; custom schemes remain hijackable.
+Renaming `as=admin` to `as=doctor` is not transfer. Person, object, path, and leftover change. If the kiosk demo uses a verified host while `open_link` copies `as`, the cell is gone. HTTPS, App Links, and `exported=false` without a test do not keep alice. OAuth redirect to the app (4.5) and WebView bridges are the same extras family — name them, do not run those systems here. Claimed HTTPS still wants a real host; custom schemes remain hijackable.
 
-The clinic rewrite still has to keep the SecureCollab fork: `as=doctor` keeps the signed-in user. Verifying App Links without an `as=` deny test leaves the session switch. The local pytest analogue is `test_deeplink_as_param_does_not_switch_user` — on a fixture, not a sideloaded malware APK.
+| Notes app this week | Clinic sketch |
+|---|---|
+| Other app on the tablet sending extras | Same — not a live clinic |
+| `open_link({"as": "admin"})` | Clinic deep link `as=doctor` |
+| Server session is what you trust | Same; App Links and https are not identity |
+| WebView / custom-scheme leftover | Same extras family — name them, do not run them here |
 
-## What graders reject
+## Prompt — clinic deep link as=doctor
+
+Rewrite the notes-app sentence for this product. Your answer must include:
+
+1. who can act (another app on the tablet sending extras — not a live clinic);
+2. what you trust (server session is what you trust; App Links and https are not identity);
+3. what must not happen (`current_user` becomes doctor, not “HIPAA”);
+4. a check idea on **local** practice files only (no sideloaded malware);
+5. leftover risk (WebView, custom schemes, 4.5 audience);
+6. the web accessibility baseline if a human error path exists (exit the WebView with a keyboard).
+
+The clinic rewrite still has to keep the notes-app fork: `as=doctor` keeps the signed-in user. Verifying App Links without an `as=` deny check leaves the session switch. The local pytest analogue is `test_deeplink_as_param_does_not_switch_user` — on the practice files, not a sideloaded malware APK.
+
+## What is not good enough
 
 | Reject | Why |
 |---|---|
 | “App Links verified” | Host, not identity |
-| Live clinic / malware APK | Lab policy |
-| “WebView is Chrome” | PLATFORM-2 / 6.2 |
+| Live clinic / malware APK | Course rules |
+| “WebView is Chrome” | Another interpreter (6.2) |
 | HTTPS as identity | Transport, not principal |
 | Activity launched as this cell | Wrong observation |
 
@@ -49,6 +55,6 @@ The clinic rewrite still has to keep the SecureCollab fork: `as=doctor` keeps th
 
 One page. No keys. `labs/8.3/8.3-lab` is the only running system you may break. Do not send Intents at a public host.
 
-## Non-goals
+## What this page is not doing
 
 Live-target IPC. Real doctor accounts. Claiming Gate 8 from this page.
