@@ -1,6 +1,6 @@
 # E1 — AI, LLM, and agentic application security
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. A model-proposed tool name is not authorization. Do not mark Gate 7 or M2 complete.
 
 ## Identity
 
@@ -9,71 +9,76 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** AI, LLM, and agentic application security
 - **phase / track / difficulty:** 7 / elective / advanced
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Opens after Phase 7; 1.2 mediation; 6.1 interpreters; 8.1 hostile client; 9.2 generated-code review; 10.2 hallucinated packages.
 - **routeTags:** complete, elective
 - **releaseMilestone:** M2
 - **masteryGate:** 7
 
 ## Objective hierarchy
 
-1. Produce **AI-feature threat model and adversarial evaluation** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce a **tool predicate** so `run_tool("exec_sql", {})` is `None`.
+2. Name attacker capabilities (prompt injection in a note; poisoned retrieval) and trust assumptions (local `run_tool`; the model is outside the TCB).
+3. Transfer: clinic summarizer over charts; Copilot in CI — without treating an LLM Top 10 list as ASVS.
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+8.1 the client is hostile; 6.1 the interpreter believes the string; 7.4 leftover credentials; 10.2 name is not a digest.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- LLM Top 10 is ASVS for AI.
+- RAG is safe because it is “our data.”
+- The model is in the TCB.
+- A system prompt is complete mediation.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+Always-true `run_tool` (break) → allowlist (this module) → human approval for high impact (AISVS C9.2) → retrieved docs untrusted (5.1) → hallucinated packages (10.2). Residual: prompt-only “never call exec_sql.”
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true for `run_tool("exec_sql")`?
+- What fails if policy lives only in the system prompt?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can a note body make the agent do?
+- What residual remains if search_notes is allowlisted but returns untrusted HTML (6.2)?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/E1/e1-lab`. Forbidden: agent executes `exec_sql` because the model asked. No live LLM APIs.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-OWASP GenAI LLM Top 10 2026; NIST AI RMF — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- OWASP AISVS 1.0 (final, 2026-06-24): `v1.0-C9.5.3` policy never by the model (Level 2); `v1.0-C9.3.7` allow-list before invoke (Level 2); `v1.0-C9.2.8` cryptographically bound approvals is **Level 3, labeled advanced**.
+- OWASP ASVS 5.0.0 (final): `v5.0.0-8.2.1` authorization on every access; `v5.0.0-13.2.1` backend service accounts — the agent is another principal.
+- OWASP GenAI LLM Top 10 2026 (awareness, published 2026-08-04): LLM03 Excessive Agency after the allowlist cause, not the syllabus.
+- NIST AI 600-1 GenAI Profile (final, 2024-07-26) and NIST SP 800-218A (final, 2024-07-26): guidance, not the lab oracle.
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+`exec_sql` available; policy only in the system prompt; no denied-tool test; retrieved docs trusted.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: AI-feature threat model and adversarial evaluation.
+Optional summarizer agent. Evidence: tool allowlist tests. Elective — not a core gate.
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`tool_denied`. Revoke agent creds (7.4). Hallucinated packages (10.2) in copilot use.
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: model is not TCB; AISVS C9.5.3; LLM Top 10 awareness |

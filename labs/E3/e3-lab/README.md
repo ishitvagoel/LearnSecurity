@@ -1,9 +1,38 @@
-# Lab E3
+# Lab E3 — the same key must not double-charge
 
-Authorized: this directory only. No live targets.
+**Module:** `E3`
+**Authorized scope:** this directory only. Local course fixture. No live payment processors, real PAN, or clinic billing systems.
+**Invariant:** two `capture("k1")` calls leave `charge_count() == 1`. The first capture may succeed.
+**Root cause class:** non-idempotent side effect
+**Non-goals:** PCI SAQ as this cell; claiming Gate 7.
 
-A capture with the same idempotency key must not double-charge the lab ledger. High-assurance is a 2.4/7.x property, not PCI theater.
+The in-memory `SEEN` set is a **teaching stand-in** for an idempotency primary key. It is not Stripe.
 
-pytest tests/test_property.py --impl vulnerable (must fail) then --impl fixed.
+## Reset
 
-Forbidden: two capture('k1') yield two charges.
+Re-run pytest. Optional: `git checkout -- labs/E3/e3-lab`.
+
+## Vulnerable behavior (local only)
+
+Every `capture` appends. Forbidden outcome: duplicate capture double-charges the lab ledger.
+
+## Structural fix
+
+Treat the key as identity: second `k1` does not append.
+
+## Verify
+
+```
+python3 -m pytest labs/E3/e3-lab/tests --impl vulnerable
+python3 -m pytest labs/E3/e3-lab/tests --impl fixed
+```
+
+The first command must fail the duplicate test. The second must pass. Honest first capture may pass on both.
+
+## Operate
+
+Signal: `duplicate_capture_denied`. Do not log PAN-like strings (there are none). Do not claim PCI scope.
+
+## Transfer
+
+Health record append-only. Simulated copay. Prompt only.

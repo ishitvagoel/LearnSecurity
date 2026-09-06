@@ -1,36 +1,43 @@
-# E4 — Memory safety and native-code boundaries (6 Operate)
+# E4-LO-06 — Detect copy_length_denied without logging file bytes
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** CISA memory-safe roadmap (guidance); CWE Top 25 awareness. This models a length mismatch — it is not a weaponized native exploit.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; ASVS `v5.0.0-5.3.1`.
 
-## Property (start here)
+## Prevention is not absolute
 
-A copy into a 4-byte lab buffer must not return more than 4 bytes. Length is complete mediation of the buffer object.
+A new unpacker can land after the min was "set once." Pair detect and recover. Do not log payload bytes (3.1 / 8.5). Uploaded bytes can contain secrets.
 
-## Attacker capabilities and trust assumptions
+## Mental model: rejected unpack is a signal
 
-- **Attacker:** Hostile filename/size field; FFI caller.
-- **Trust:** Local copy_into(dst_len, src, n).
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Copy[copy_into] --> Bound{length ok?}
+  Bound -->|no| Metric["copy_length_denied += 1"]
+  Metric --> Stop[stop serving that parser version]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | ASAN in real native (named, not run as a weapon). |
-| Signal (no bodies) | overlong_copy_denied. |
-| Revoke / recover | Patch; do not ship the overflowed binary. |
-| Residual | Existing C codecs for images (6.4). |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `copy_length_denied` |
+| Signal | declared_len, bufsize, src_len; never payload |
+| Recover | Quarantine blobs; patch parser; do not ship overflowed binary |
+| Residual | FFI; integer wrap; existing C codecs |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/E4/e4-lab`.
+Write one log line you would accept. Tie it to `labs/E4/e4-lab`.
+
+```
+log_denied reason=copy_length_denied declared_len=4 bufsize=4 src_len=8
+```
+
+Reject any line that includes file bytes, a hex dump, or "Gate 7 complete."
 
 ## Transfer
 
-Image parser; protobuf C.
+Clinic: deny the oversize DICOM copy; do not paste the image bytes into the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+A language-name sticker is not the property. M2 stays not-attempted.

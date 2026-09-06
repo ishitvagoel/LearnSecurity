@@ -1,44 +1,42 @@
-# E3 — Payments and other high-assurance systems (Review)
+# E3-LO-08 — Review always-append capture as a PR
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** ASVS L3 as *selection*; PCI DSS 4.0.1 as sector awareness — this lab does not claim PCI scope. Idempotency is 2.4 at money grain.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** ASVS `v5.0.0-2.3.4`. PCI 4.0.1 awareness not scope.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab’s simulated copay
 
-A capture with the same idempotency key must not double-charge the lab ledger. High-assurance is a 2.4/7.x property, not PCI theater. No real PAN/PII.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Retry after 504; client double-click.
-- **Trust:** Local capture(key); synthetic amounts.
 Review `labs/E3/e3-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/E3.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|two k1 charge 2| Property["Property - good if tested"]
+  Q -->|Stripe header| Mechanism[Mechanism - processor]
+  Q -->|PCI SAQ| False[False assurance]
+```
 
-- Seeded smell (label it yourself): double capture increments twice
-- Seeded smell (label it yourself): PAN in logs
-- Seeded smell (label it yourself): PCI checkbox as the test
-- Seeded smell (label it yourself): No idempotency key
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- two capture(k1) charge twice
+- PAN-like strings
+- Webhook vs capture race ignored
+- PCI claimed from this lab
+
+Also reject: live processors, keys in lessons, claiming Gate 7 or PCI scope.
 
 ## Misconceptions
 
-- PCI means the app is safe
-- We don’t store cards so no money bugs
-- Webhooks are eventually consistent so double charge is OK
+- PCI SAQ is this cell
+- Stripe idempotency is the local ledger
+- A new key on each retry is fine
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_duplicate_capture_does_not_double_charge`.
 
 ## Transfer
 
-Health record append-only audit.
-
-## HITL / WCAG 2.2
-
-Payment confirmations must be accessible; trapped users retry (this bug).
+Clinic PR that “added Stripe and a SAQ PDF” without a duplicate-key deny is incomplete.

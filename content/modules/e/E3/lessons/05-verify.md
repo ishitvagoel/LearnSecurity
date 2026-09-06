@@ -1,38 +1,44 @@
-# E3 — Payments and other high-assurance systems (5 Verify)
+# E3-LO-05 — Evidence is duplicate denied, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** ASVS L3 as *selection*; PCI DSS 4.0.1 as sector awareness — this lab does not claim PCI scope. Idempotency is 2.4 at money grain.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** ASVS `v5.0.0-2.3.4`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A capture with the same idempotency key must not double-charge the lab ledger. High-assurance is a 2.4/7.x property, not PCI theater. No real PAN/PII.
+“We use Stripe” is not evidence. The oracle is the local pair. Do not hit live processors.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Retry after 504; client double-click.
-- **Trust:** Local capture(key); synthetic amounts.
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail two k1"]
+  X["--impl fixed"] --> P["Must pass count 1"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Duplicate capture double-charges the lab ledger |
-| Failure | Fail closed: Idempotency key as primary key of capture |
+| Negative / abuse | two k1 → count 1 |
+| Normal | first k1 → may charge |
+| Not claimed | live Stripe; PCI; Gate 7 |
 
-Lab tests: `test_property.py` under `labs/E3/e3-lab`.
+```
+python3 -m pytest labs/E3/e3-lab/tests --impl vulnerable
+python3 -m pytest labs/E3/e3-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Duplicate capture double-charges the lab ledger`
-- `--impl fixed`: **pass**
+Honest first capture may pass on both.
 
-duplicate capture does not double charge.
+## What the tests do not prove
+
+- Webhook path is idempotent
+- Client cannot mint a new key
+- Connection-pool limits (`v5.0.0-13.1.2` Level 3)
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Health record append-only audit.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic: a test that only asserts “Stripe returned 200” is not this cell.

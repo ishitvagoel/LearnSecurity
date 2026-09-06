@@ -1,2 +1,6 @@
+ALLOWED = frozenset({"search_notes"})
+
+
 def run_tool(name, args):
-    return f'ran {name}'
+    # Vulnerable: any model-proposed tool name runs.
+    return f"ran {name}"

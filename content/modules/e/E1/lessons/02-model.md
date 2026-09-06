@@ -1,53 +1,69 @@
-# E1 — AI, LLM, and agentic application security (2 Model)
+# E1-LO-02 — Tool matrix vs system prompt
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** OWASP GenAI LLM Top 10 2026 (awareness, not syllabus); NIST AI RMF GenAI Profile (guidance); this lab’s cell is tool authority.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** AISVS `v1.0-C9.5.3`, `v1.0-C9.3.7`. ASVS `v5.0.0-8.2.1`.
 
-## Property (start here)
+## Can a second engineer name the tool check from your agent map?
 
-The lab agent may only invoke allowlisted tools. A model-proposed exec_sql is not authorization. The model is an untrusted client (8.1) that speaks English.
+“The prompt says not to” is not this lesson. A reviewable model names **ALLOWED tools, who may invoke them, retrieved-doc trust, and human approval**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab freeze: local `run_tool(name, args)`. No live model APIs.
 
-- **Attacker:** Prompt injection in a note body; malicious retrieved doc.
-- **Trust:** Local run_tool(name).
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: two principals
+
+```mermaid
+flowchart TD
+  User[alice] --> Api[SecureCollab API]
+  Model[LLM] --> Tools[run_tool]
+  Tools --> Policy[ALLOWED]
+```
+
+The model is not alice.
+
+## Mental model: retrieval is input
+
+```mermaid
+flowchart LR
+  Rag[retrieved chunk] --> Model[context]
+  Model --> Propose[tool]
+  Rag --> Untrusted[same as note body]
+```
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | model, user, tool exec_sql |
-| Objects | tool name |
-| Actions | run_tool |
-| Channels | prompt, tool router |
-| TCB | Allow-list in code, not in the prompt text. |
-| Untrusted | System prompt, retrieved notes, model output |
-| State / time | One agent turn. |
-| 1.1 cell | Authorization of tools — complete mediation for the agent. |
+| Subjects | prompt injection; poisoned doc |
+| Objects | tools; SQL interpreter |
+| Actions | `run_tool` |
+| Channels | note body; RAG |
+| TCB | allowlist in runtime |
+| Untrusted | model output; system prompt; retrieved docs |
+| State / time | session; tool loop |
+| 1.1 cell | authorization of tools |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| agent | summarize | run | allow |
-| agent | exec_sql | run | deny |
-| note body | prompt | steer | untrusted |
-| human | high-impact tool | approve | HITL |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| model | exec_sql | run | deny |
+| model | search_notes | run | may allow |
+| system prompt | exec_sql | treat as deny | deny |
+| RAG chunk | policy | treat as trusted | deny |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/E1/e1-lab` file `tools.py`.
+Draw the map. Point at `labs/E1/e1-lab` file `tools.py`.
 
 ## Transfer
 
-Copilot in CI.
+Copilot in CI is the same grain with `pip install` as `exec_sql`.
 
 ## Residual risk
 
-Hallucinated packages (10.2) in copilot use.
+`v1.0-C9.2.8` Level 3 bound approvals; hallucinated packages.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

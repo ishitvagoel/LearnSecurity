@@ -1,51 +1,49 @@
-# E1 — AI, LLM, and agentic application security (4 Build)
+# E1-LO-04 — Allowlist tools in the runtime
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** OWASP GenAI LLM Top 10 2026 (awareness, not syllabus); NIST AI RMF GenAI Profile (guidance); this lab’s cell is tool authority.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** AISVS 1.0 (final) `v1.0-C9.5.3`, `v1.0-C9.3.7`. ASVS `v5.0.0-8.2.1`.
 
-## Property (start here)
+## Structural means the runtime compares the name
 
-The lab agent may only invoke allowlisted tools. A model-proposed exec_sql is not authorization. The model is an untrusted client (8.1) that speaks English.
+`run_tool` must return `None` unless `name in ALLOWED`. Fail-safe: unknown tools deny. A system prompt may *accompany* the allowlist; it does not replace it.
 
-## Attacker capabilities and trust assumptions
+## Mental model: allowlist gate
 
-- **Attacker:** Prompt injection in a note body; malicious retrieved doc.
-- **Trust:** Local run_tool(name).
-exec_sql => None.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-ALLOWED={'search_notes'}
-def run_tool(name, args):
-    if name not in ALLOWED:
-        return None
-    return f'ran {name}'
+```mermaid
+flowchart TD
+  Call[run_tool] --> In{"name in ALLOWED?"}
+  In -->|yes| Run[may run]
+  In -->|no| Deny[None]
 ```
+
+Do not accept “the prompt forbids it” as membership.
 
 ## Why this restores the cell
 
-Allow-list; no exec_sql; human approval for high impact.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| exec_sql | None |
+| search_notes | ran search_notes |
 
 ## What this is not
 
-LangChain default tools are not your matrix.
-
-Prompt “never call exec_sql” is not mediation.
+LangChain. LLM03 dashboard. Gate 7 / M2. Human-approval crypto (`v1.0-C9.2.8` Level 3 residual).
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name who can edit ALLOWED. Run:
+
+```
+python3 -m pytest labs/E1/e1-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Copilot in CI.
+Copilot: deny `pip install` / shell tools in CI the same way.
 
 ## Residual risk
 
-Hallucinated packages (10.2) in copilot use.
+Allowlisted tool returns HTML; hallucinated packages; `v1.0-C9.2.8` Level 3.

@@ -1,40 +1,43 @@
-# E1 — AI, LLM, and agentic application security (6 Operate)
+# E1-LO-06 — Detect tool_denied without logging transcripts
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** OWASP GenAI LLM Top 10 2026 (awareness, not syllabus); NIST AI RMF GenAI Profile (guidance); this lab’s cell is tool authority.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; AISVS `v1.0-C9.5.3`.
 
-## Property (start here)
+## Prevention is not absolute
 
-The lab agent may only invoke allowlisted tools. A model-proposed exec_sql is not authorization. The model is an untrusted client (8.1) that speaks English.
+A new tool can be registered after the allowlist was “set once.” Pair detect and recover. Do not log note bodies or full model transcripts (3.1 / 8.5).
 
-## Attacker capabilities and trust assumptions
+## Mental model: denied tool is a signal
 
-- **Attacker:** Prompt injection in a note body; malicious retrieved doc.
-- **Trust:** Local run_tool(name).
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Call[run_tool] --> In{allowlisted?}
+  In -->|no| Metric["tool_denied += 1"]
+  Metric --> Revoke[revoke agent creds]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | denied_tool. |
-| Signal (no bodies) | tool_denied{exec_sql}. |
-| Revoke / recover | Revoke agent creds (7.4). |
-| Residual | Hallucinated packages (10.2) in copilot use. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `tool_denied` |
+| Signal | tool name, agent id; never bodies |
+| Recover | Revoke agent creds (7.4) |
+| Residual | Prompt-only policy; hallucinated packages |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/E1/e1-lab`.
+Write one log line you would accept. Tie it to `labs/E1/e1-lab`.
+
+```
+log_denied reason=tool_denied agent=sum-1 tool=exec_sql
+```
+
+Reject any line that includes a note body, a transcript, or “Gate 7 complete.”
 
 ## Transfer
 
-Copilot in CI.
-
-## Usability
-
-Human approval UI for tools must be accessible; otherwise operators auto-approve.
+Clinic: deny the chart-SQL tool; do not paste the prompt into the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+An LLM-vendor name is not the property. M2 stays not-attempted.

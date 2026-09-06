@@ -1,53 +1,76 @@
-# E4 — Memory safety and native-code boundaries (2 Model)
+# E4-LO-02 — Destination vs declared length vs source length
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** CISA memory-safe roadmap (guidance); CWE Top 25 awareness. This models a length mismatch — it is not a weaponized native exploit.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** ASVS `v5.0.0-5.3.1`. CISA memory-safe roadmaps as guidance.
 
-## Property (start here)
+## Can a second engineer name the length check from your unpacker map?
 
-A copy into a 4-byte lab buffer must not return more than 4 bytes. Length is complete mediation of the buffer object.
+"We wrote it in Python" is not this lesson. A reviewable model names **bufsize, declared_len, len(src), who may set each, and the copy site**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab freeze: local `copy_into(bufsize, src, declared_len)`. No native overflow PoC.
 
-- **Attacker:** Hostile filename/size field; FFI caller.
-- **Trust:** Local copy_into(dst_len, src, n).
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: three numbers, one destination
+
+```mermaid
+flowchart TD
+  subgraph Untrusted["untrusted"]
+    Src["len src"]
+    Decl[declared_len]
+  end
+  subgraph Trusted["trustworthy for this copy"]
+    Buf[bufsize]
+    Min["min of three"]
+  end
+  Src --> Min
+  Decl --> Min
+  Buf --> Min
+  Min --> Dst[destination]
+```
+
+## Mental model: header is input
+
+```mermaid
+flowchart LR
+  Hdr[file header] --> Decl[declared_len]
+  Decl --> Copy[copy_into]
+  Hdr --> Untrusted[same as JSON field]
+```
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | Python stand-in for a C helper |
-| Objects | 4-byte buffer |
-| Actions | copy_into |
-| Channels | FFI |
-| TCB | min(n, dst_len) copy. |
-| Untrusted | n, src length |
-| State / time | One copy. |
-| 1.1 cell | Integrity of memory object bounds. |
+| Subjects | hostile header; FFI caller |
+| Objects | destination buffer of size 4 |
+| Actions | `copy_into` |
+| Channels | declared length; source bytes |
+| TCB | three-way min at copy |
+| Untrusted | `declared_len`; `len(src)` |
+| State / time | destination after copy; check at copy not only at parse |
+| 1.1 cell | integrity of the buffer object |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| caller | n=4 dst=4 | copy | allow |
-| caller | n=8 dst=4 | copy | clamp-or-deny |
-| ASAN | real C | ci | named-tool |
-| lesson | PoC | weaponize | forbid |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| header | dest | copy declared_len only | deny if > bufsize |
+| parser | dest | copy min of three | allow |
+| FFI | dest | skip dest check | deny |
+| "Kotlin app" | C codec | treat as bounded | deny |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/E4/e4-lab` file `copy.py`.
+Draw the map. Point at `labs/E4/e4-lab` file `copy.py`.
 
 ## Transfer
 
-Image parser; protobuf C.
+Clinic DICOM parser: the header length is still untrusted at the native codec.
 
 ## Residual risk
 
-Existing C codecs for images (6.4).
+Integer wrap; temporal safety; parser differentials.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 25 as the definition of security. Keys stay out of lessons.

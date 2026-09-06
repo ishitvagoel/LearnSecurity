@@ -7,118 +7,132 @@ difficulty: advanced
 status: reviewed
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 1.1–2.4 Pass A complete
+- 'Opens after Phase 7; 2.3 cookies; 6.2 encoding; 2.2 edge'
 routeTags:
 - complete
 - elective
 releaseMilestone: M2
 outcomes:
-- 'Demonstrate: Advanced browser and edge security'
-- 'Produce evidence: Advanced edge/browser assessment'
-- Name attacker capabilities and trust assumptions
-- Include a local-only lab brief and a transfer challenge
-- Do not instruct live-target attacks or mix awareness lists as compliance
+- 'Refuse treating Content-Security-Policy-Report-Only as isolation enforcement.'
+- 'Treat CSP3 and Trusted Types as draft layers after encoding, not as 6.2.'
+- 'Keep edge-cache header stripping from looking like a green dashboard.'
 reviewTriggers:
-- Material SecureCollab change in this module's concern
-- Superseding final standard
+- Report-Only counted as enforcement
+- JSONP leftover
+- Trusted Types claimed as encoding
+- Edge cache stripping CSP
 invariants:
-- Claims are properties of SecureCollab (or the elective system), not tool names
+- isolation_enforced of Report-Only is false
+- CSP is a layer not encoding
 - Labs stay in authorized local or official training scope
-- Draft standards are labeled draft
+- CSP3 is draft
 threatModelPrompts:
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+- What can XSS do when CSP is Report-Only?
+- What residual remains if CSP is enforcing but encoding is skipped?
+- What residual remains if the CDN strips the enforcing header?
 concepts:
-- advanced
+- report-only-not-enforcement
+- csp-as-layer
+- edge-header-trust
 - securecollab
 - seven-step-loop
 learningObjects:
 - id: E2-LO-01
   kind: concept-model
-  title: 'Advanced browser and edge security: property vs mechanism'
+  title: Report-Only is not enforcement
   path: lessons/01-property.md
 - id: E2-LO-02
   kind: design-exercise
-  title: Model SecureCollab edge/browser for E2
+  title: Enforce vs signal vs encoding
   path: lessons/02-model.md
 - id: E2-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: Report-Only CSP counted as isolation enforcement'
+  title: 'Local fixture: Report-Only counted as on'
   path: lessons/03-break.md
 - id: E2-LO-04
   kind: design-exercise
-  title: Structural fix restoring the E2 invariant
+  title: Require the enforcing CSP header
   path: lessons/04-build.md
 - id: E2-LO-05
   kind: verification-lab
-  title: Forbidden-outcome tests for E2
+  title: Fail-on-vulnerable then pass-on-fixed for Report-Only
   path: lessons/05-verify.md
 - id: E2-LO-06
   kind: operations-exercise
-  title: Detect/recover notes for E2
+  title: csp_report_only_not_enforced without logging HTML
   path: lessons/06-operate.md
 - id: E2-LO-07
   kind: transfer-challenge
-  title: 'Transfer: Clinic: Report-Only as “HIPAA header.”'
+  title: 'Transfer: clinic Report-Only as HIPAA header'
   path: lessons/07-transfer.md
 - id: E2-LO-08
   kind: code-review
-  title: Seeded review for E2
+  title: Review Report-Only-as-on as a PR
   path: lessons/08-review.md
 labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
     third-party targets
   slug: e2-lab
-  summary: Report-Only CSP counted as isolation enforcement
+  summary: Report-Only treated as isolation enforcement
   forbiddenOutcomes:
-  - Report-Only CSP counted as isolation enforcement
+  - Report-Only treated as isolation enforcement
   - Live-target instructions
   - Real PII or production secrets
   - Awareness list used as the syllabus
 evidenceRequired:
 - Advanced edge/browser assessment
 - Transfer task prompt
-- Local lab brief
+- Local lab brief with Report-Only deny tests
 assessmentBlueprint:
-  explain: Causal model for Advanced browser and edge security
-  design: Advanced edge/browser assessment
-  build: Deferred to Pass B
-  break: Authorized local reproduction of the representative failure
-  verify: Forbidden-outcome tests
-  operate: Detection and recovery notes
-  communicate: Residual risk without compliance theater
+  explain: Report-Only is a signal; enforcing CSP is a layer
+  design: Headers, encoding, edge cache
+  build: isolation_enforced requires Content-Security-Policy in labs/E2/e2-lab/fixed
+  break: Authorized local Report-Only counted as on
+  verify: Forbidden-outcome tests plus honest enforcing CSP
+  operate: csp_report_only_not_enforced without HTML bodies
+  communicate: Residual XS-Leaks; Trusted Types draft; cache stripping
 masteryGate: '7'
 standardsRefs:
-- source: OWASP ASVS / module anchors (see spec)
-  version: 5.0.0
+- source: OWASP Application Security Verification Standard
+  version: '5.0.0'
   status: final
   requirementIds:
-  - V17
+  - v5.0.0-3.4.3
+  - v5.0.0-3.4.7
   url: https://owasp.org/www-project-application-security-verification-standard/
+- source: W3C Content Security Policy Level 3
+  version: 'Level 3'
+  status: draft
+  requirementIds:
+  - CSP3
+  url: https://www.w3.org/TR/CSP3/
+- source: W3C Trusted Types
+  version: 'WD'
+  status: draft
+  requirementIds:
+  - Trusted-Types
+  url: https://www.w3.org/TR/trusted-types/
 misconceptions:
-- More headers is more security
-- Report-Only is a safer enforcing mode
-- CDN WAF is CSP
+- Report-Only is isolation
+- Helmet defaults are the guarantee
+- CSP replaces encoding
 operationalConsiderations:
-- csp_reportonly_not_enforced.
-- XS-Leaks — named as elective depth.
-author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+- csp_report_only_not_enforced.
+- Flip to enforcing after 6.2.
+author: deepen-curriculum / author-module-spec
+reviewer: pending independent quality and lab-safety review
 lastReviewedAt: '2026-08-24'
 nextReviewAt: '2027-02-24'
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map
 - date: '2026-08-23'
-  note: 'Pass A quality-gate: spec completeness competent; expand in a later revision
-    if thin'
-- date: '2026-08-23'
   note: Pass B lessons and authorized local lab
 - date: '2026-08-23'
   note: Pass C rubric and examiner keys; quality-gate recorded
-- date: '2026-08-23'
-  note: 'Deepen: 1.1-density lessons; structural local lab; quality-gate recorded'
 - date: '2026-08-24'
-  note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
-    Pass C keys isolated'
+  note: Map-complete rewrite recorded; independent review still required
+- date: '2026-09-06'
+  note: 'Depth pass: Report-Only-is-not-enforcement mental models, mermaid diagrams,
+    ASVS v5.0.0-3.4.3; v5.0.0-3.4.7 labeled Level 3 advanced; independent review still
+    required'

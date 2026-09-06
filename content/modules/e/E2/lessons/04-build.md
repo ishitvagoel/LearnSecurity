@@ -1,48 +1,49 @@
-# E2 — Advanced browser and edge security (4 Build)
+# E2-LO-04 — Require the enforcing CSP header
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** W3C CSP3 (CR — label draft/CR); Fetch Metadata; this lab’s cell is enforcement vs report-only.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** ASVS 5.0.0 (final) `v5.0.0-3.4.3`. Reporting `v5.0.0-3.4.7` is extra, not the predicate.
 
-## Property (start here)
+## Structural means enforcement looks at the enforcing name
 
-Content-Security-Policy-Report-Only is not enforcement. Isolation is not “we set a header.”
+`isolation_enforced` must return true only when `Content-Security-Policy` is in the headers. Report-Only may *accompany* it; it does not replace it.
 
-## Attacker capabilities and trust assumptions
+## Mental model: name gate
 
-- **Attacker:** XSS that would be blocked only if CSP were enforcing.
-- **Trust:** Local isolation_enforced(headers).
-Report-Only => False.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-def isolation_enforced(headers):
-    return 'Content-Security-Policy' in headers
+```mermaid
+flowchart TD
+  Call[isolation_enforced] --> Has{"CSP header present?"}
+  Has -->|yes| On[may count]
+  Has -->|no| Off[false]
 ```
+
+Do not accept Report-Only as the name.
 
 ## Why this restores the cell
 
-Detect enforcing header; don’t claim isolation otherwise.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| Report-Only only | false |
+| enforcing CSP | true |
 
 ## What this is not
 
-Helmet defaults may be report-only in some templates.
-
-CSP does not replace encoding (6.2) or CSRF (6.3).
+Encoding (6.2). Helmet. Gate 7. CSP3 **draft** as a complete catalogue.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name who can edit Next.js headers. Run:
+
+```
+python3 -m pytest labs/E2/e2-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Trusted Types, COOP/COEP.
+Clinic: send enforcing CSP, keep Report-Only as a *second* header if you still want reports.
 
 ## Residual risk
 
-XS-Leaks — named as elective depth.
+CDN strip; XS-Leaks; Trusted Types **draft**; `v5.0.0-3.4.7` Level 3.

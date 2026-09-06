@@ -1,6 +1,6 @@
 # E4 assessment (learner-facing — no answers)
 
-**Pass C.** Practical evidence, not a compensating average. States: not-attempted | developing | competent | transfer-ready.
+**Pass C.** Practical evidence, not a compensating average. States: not-attempted | developing | competent | transfer-ready. Gate 7 and M2 stay **not-attempted**. Elective. This lab is **not** a native exploit course.
 
 ## Module
 
@@ -8,20 +8,20 @@ Memory safety and native-code boundaries
 
 ## Evidence checklist
 
-- [ ] Memory-safety roadmap or hardened native component notes
-- [ ] Transfer task (Clinic DICOM parser.)
-- [ ] Lab `labs/E4/e4-lab`: forbidden outcome **Copy returns more bytes than the destination length**
-- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Length-as-mediation map; language/CISA/CWE labeled as not the copy check
+- [ ] Transfer task (clinic DICOM; protobuf C named)
+- [ ] Lab `labs/E4/e4-lab`: forbidden outcome **copy exceeds destination**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: overlong_copy_denied.
+- [ ] Operate signal without payload bytes: `copy_length_denied`
 
 ## Rubric
 
 | Result | Meaning |
 |---|---|
-| Developing | Tools listed; missing attacker/trust; mechanism slogans |
+| Developing | Tools listed; missing attacker/trust; “Kotlin / CWE / ASAN” slogans |
 | Competent | System-specific invariant; lab mapped; operate present |
-| Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
+| Transfer-ready | LO-07 done without Top 25/native-PoC/language-as-definition language |
 
 Knowledge check (retryable): distinguish property vs mechanism for **E4**. Items live in the session worksheet, not here.
 

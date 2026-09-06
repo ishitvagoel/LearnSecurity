@@ -1,40 +1,42 @@
-# E2 — Advanced browser and edge security (Review)
+# E2-LO-08 — Review Report-Only-as-on as a PR
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** W3C CSP3 (CR — label draft/CR); Fetch Metadata; this lab’s cell is enforcement vs report-only.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** ASVS `v5.0.0-3.4.3`, `v5.0.0-3.4.7`. CSP3 **draft**.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab header middleware
 
-Content-Security-Policy-Report-Only is not enforcement. Isolation is not “we set a header.”
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** XSS that would be blocked only if CSP were enforcing.
-- **Trust:** Local isolation_enforced(headers).
 Review `labs/E2/e2-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/E2.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|Report-Only counts| Property["Property - good if tested"]
+  Q -->|Helmet added| Mechanism[Mechanism - library]
+  Q -->|dashboard green| False[False assurance]
+```
 
-- Seeded smell (label it yourself): Report-Only counted as enforced
-- Seeded smell (label it yourself): CSP with unsafe-inline claimed strict
-- Seeded smell (label it yourself): Edge cache serves old headers
-- Seeded smell (label it yourself): No isolation_enforced test
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- Report-Only counted as on
+- JSONP leftover
+- Trusted Types claimed as encoding
+- Edge cache stripping CSP
+
+Also reject: live XSS, keys in lessons, claiming Gate 7.
 
 ## Misconceptions
 
-- More headers is more security
-- Report-Only is a safer enforcing mode
-- CDN WAF is CSP
+- Report-Only is isolation
+- Helmet defaults are the guarantee
+- CSP replaces encoding
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_report_only_is_not_enforcement`.
 
 ## Transfer
 
-Trusted Types, COOP/COEP.
+Clinic PR that “added Report-Only and a dashboard” without an enforcing header is incomplete.

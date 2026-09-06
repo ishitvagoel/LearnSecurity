@@ -1,49 +1,50 @@
-# E4 — Memory safety and native-code boundaries (4 Build)
+# E4-LO-04 — Bound the copy by the minimum of three lengths
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** CISA memory-safe roadmap (guidance); CWE Top 25 awareness. This models a length mismatch — it is not a weaponized native exploit.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** ASVS `v5.0.0-5.3.1`. CISA roadmaps remain guidance.
 
-## Property (start here)
+## Structural means the copy compares three numbers
 
-A copy into a 4-byte lab buffer must not return more than 4 bytes. Length is complete mediation of the buffer object.
+`copy_into` must return `src[:n]` where `n = min(bufsize, declared_len, len(src))`. Fail-safe: a lying header cannot grow the destination. A memory-safe language may *accompany* this check; it does not replace it at FFI.
 
-## Attacker capabilities and trust assumptions
+## Mental model: three-way min is the gate
 
-- **Attacker:** Hostile filename/size field; FFI caller.
-- **Trust:** Local copy_into(dst_len, src, n).
-len(out) <= 4.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-def copy_into(bufsize, src, declared_len):
-    n = min(bufsize, declared_len, len(src))
-    return src[:n]
+```mermaid
+flowchart TD
+  Call[copy_into] --> M["min bufsize declared_len src"]
+  M --> Out["src slice n"]
 ```
+
+Do not accept "we use Python" as membership in the min.
 
 ## Why this restores the cell
 
-Bound the copy; prefer memory-safe languages for new code.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| declared 4, src 8, buf 4 | length <= 4 |
+| short declared 2, src ab | may copy `ab` |
 
 ## What this is not
 
-Python slice is the *fixed* model; C will not do this for you.
+Rust rewrite this week. ASAN. CWE dashboard. Gate 7 / M2. Native unpacker proof (`v5.0.0-5.3.3` Level 3 residual).
 
-Safe language still has FFI (this module).
+A production unpacker should **fail closed** on header/source mismatch rather than silently truncate without an error the caller can handle. This lab returns a short copy as the smallest trustworthy bound.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name who can change `bufsize`. Run:
+
+```
+python3 -m pytest labs/E4/e4-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Image parser; protobuf C.
+Clinic JNI codec: deny a copy that exceeds the native buffer the same way.
 
 ## Residual risk
 
-Existing C codecs for images (6.4).
+Integer wrap of size fields; leftover C codecs; temporal safety.

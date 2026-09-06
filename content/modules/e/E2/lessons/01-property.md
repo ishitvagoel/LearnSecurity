@@ -1,58 +1,79 @@
-# E2 — Advanced browser and edge security (1 Property)
+# E2-LO-01 — Report-Only is not enforcement
 
-**Kind:** concept-model  
-**Loop step:** 1 Property  
-**Standards:** W3C CSP3 (CR — label draft/CR); Fetch Metadata; this lab’s cell is enforcement vs report-only.
+**Kind:** concept-model
+**Loop step:** 1 Property
+**Standards:** ASVS `v5.0.0-3.4.3`; `v5.0.0-3.4.7` is **Level 3, advanced**. W3C CSP3 and Trusted Types are **Working Draft**.
 
-## Property (start here)
+## The claim this module owns
 
-Content-Security-Policy-Report-Only is not enforcement. Isolation is not “we set a header.”
+SecureCollab’s Next.js responses may send CSP. **Isolation of script execution** is whether the *enforcing* header is present. `Content-Security-Policy-Report-Only` is a signal. It is not that check.
 
-## Attacker capabilities and trust assumptions
+> `isolation_enforced({"Content-Security-Policy-Report-Only": "default-src 'none'"})` must be false. An enforcing `Content-Security-Policy` header may make it true.
 
-- **Attacker:** XSS that would be blocked only if CSP were enforcing.
-- **Trust:** Local isolation_enforced(headers).
-**Mechanism (not the property):** Helmet defaults may be report-only in some templates.
+The forbidden outcome is **Report-Only treated as isolation**. XSS still runs; the dashboard looks green.
 
-Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
+ASVS `v5.0.0-3.4.3` wants a CSP as a **layer** after encoding (6.2). `v5.0.0-3.4.7` (CSP reporting) is **Level 3, advanced** — reporting is the Report-Only grain, not enforcement. CSP3 remains **draft**.
+
+## Mental model: two header names
+
+```mermaid
+flowchart TD
+  Ro[Report-Only] --> Signal[detect]
+  En[Content-Security-Policy] --> Block[may block]
+  Ro --> NotOn[not isolation_enforced]
+```
+
+## Mental model: CSP is a layer
+
+```mermaid
+flowchart LR
+  Enc[6.2 encoding] --> First[property]
+  Csp[CSP] --> Layer[extra]
+  Csp --> NotEnc[not encoding]
+```
+
+**Mechanism (not the property):** Helmet defaults, a green reporting dashboard, “we set a header.”
 
 ## Root cause vs impact vs prevention vs detection vs recovery
 
-| Slice | For E2 |
+| Slice | For this property |
 |---|---|
-| Root cause | Report-Only mistaken for on. |
-| Preconditions | Report-Only header => enforced True. |
-| Impact (1.1 cell) | Integrity of the browser policy mechanism (2.3 layered with 6.2). — XSS still runs; dashboard looks green. |
-| Prevention | Detect enforcing header; don’t claim isolation otherwise. |
-| Detection | csp_mode metric. |
-| Recovery | Flip to enforcing after fix 6.2. |
+| Root cause | Report-Only mistaken for on |
+| Preconditions | Report-Only ⇒ enforced true |
+| Trigger | XSS that would only be logged |
+| Impact | Integrity of the browser policy mechanism |
+| Prevention | Detect enforcing header; do not claim isolation otherwise |
+| Detection | `csp_report_only_not_enforced` |
+| Recovery | Flip to enforcing after 6.2 |
 
-## Framework defaults vs application guarantees
+## Framework defaults versus the header guarantee
 
-Helmet defaults may be report-only in some templates.
+Some templates ship Report-Only. A CDN can strip the enforcing header (2.2).
 
-## Mechanism limits and bypasses
+## Mechanism limits
 
-CSP does not replace encoding (6.2) or CSRF (6.3).
+- CSP does not replace encoding (6.2) or CSRF (6.3).
+- JSONP; Trusted Types not deployed; XS-Leaks.
 
-JSONP, trusted-types not deployed, edge cache stripping headers (2.2).
+## Usability and accessibility
 
-## Residual risk
-
-XS-Leaks — named as elective depth.
+A CSP violation report is not a user-facing error. If you show a blocked-script message, use text not color-only (WCAG 2.2).
 
 ## Practice
 
-Classify each header as enforce vs signal.
+Classify each header as enforce vs signal. Then run:
 
-Run `labs/E2/e2-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
+```
+python3 -m pytest labs/E2/e2-lab/tests --impl vulnerable
+python3 -m pytest labs/E2/e2-lab/tests --impl fixed
+```
+
+The first command must fail. The second must pass.
 
 ## Transfer
 
-Trusted Types, COOP/COEP.
-
-Clinic: Report-Only as “HIPAA header.”
+Trusted Types, COOP/COEP. Clinic: Report-Only as “HIPAA header.”
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.
+Live XSS, claiming Gate 7. Answer keys are not in this file.

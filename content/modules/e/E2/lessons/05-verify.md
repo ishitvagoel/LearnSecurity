@@ -1,38 +1,45 @@
-# E2 — Advanced browser and edge security (5 Verify)
+# E2-LO-05 — Evidence is Report-Only denied, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** W3C CSP3 (CR — label draft/CR); Fetch Metadata; this lab’s cell is enforcement vs report-only.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** ASVS `v5.0.0-3.4.3`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-Content-Security-Policy-Report-Only is not enforcement. Isolation is not “we set a header.”
+“CSP header present” is not evidence if the name is Report-Only. The oracle is the local pair. Do not XSS live origins.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** XSS that would be blocked only if CSP were enforcing.
-- **Trust:** Local isolation_enforced(headers).
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail Report-Only"]
+  X["--impl fixed"] --> P["Must pass deny"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Report-Only CSP counted as isolation enforcement |
-| Failure | Fail closed: Detect enforcing header; don’t claim isolation otherwise |
+| Negative / abuse | Report-Only → not enforced |
+| Normal | enforcing CSP → may count |
+| Not claimed | live XSS; Helmet; Gate 7 |
 
-Lab tests: `test_property.py` under `labs/E2/e2-lab`.
+```
+python3 -m pytest labs/E2/e2-lab/tests --impl vulnerable
+python3 -m pytest labs/E2/e2-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Report-Only CSP counted as isolation enforcement`
-- `--impl fixed`: **pass**
+Honest enforcing CSP may pass on both.
 
-report-only is not enforcement.
+## What the tests do not prove
+
+- Encoding (6.2)
+- Header survives the CDN
+- Trusted Types
+- XS-Leaks
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Trusted Types, COOP/COEP.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic: a test that only asserts “a CSP-looking header exists” is not this cell.

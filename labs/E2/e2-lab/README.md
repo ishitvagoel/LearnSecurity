@@ -1,9 +1,38 @@
-# Lab E2
+# Lab E2 — Report-Only is not enforcement
 
-Authorized: this directory only. No live targets.
+**Module:** `E2`
+**Authorized scope:** this directory only. Local course fixture. No live origins or public XSS targets.
+**Invariant:** a Report-Only header does not make `isolation_enforced` true. An enforcing `Content-Security-Policy` header may.
+**Root cause class:** Report-Only mistaken for on
+**Non-goals:** CSP3 as encoding; claiming Gate 7.
 
-Content-Security-Policy-Report-Only is not enforcement. CSP3 remains a Working Draft — label it draft.
+Header-name presence is a **teaching stand-in** for browser policy mode. It does not parse CSP.
 
-pytest tests/test_property.py --impl vulnerable (must fail) then --impl fixed.
+## Reset
 
-Forbidden: treating CSP Report-Only as enforced isolation.
+Re-run pytest. Optional: `git checkout -- labs/E2/e2-lab`.
+
+## Vulnerable behavior (local only)
+
+Any CSP-looking header counts as enforced. Forbidden outcome: Report-Only treated as isolation.
+
+## Structural fix
+
+Require the enforcing `Content-Security-Policy` header name.
+
+## Verify
+
+```
+python3 -m pytest labs/E2/e2-lab/tests --impl vulnerable
+python3 -m pytest labs/E2/e2-lab/tests --impl fixed
+```
+
+The first command must fail Report-Only. The second must pass. Honest enforcing CSP may pass on both.
+
+## Operate
+
+Signal: `csp_report_only_not_enforced`. Do not log full document HTML. Do not claim Gate 7.
+
+## Transfer
+
+Clinic: Report-Only as “HIPAA header.” Trusted Types / COOP. Prompt only.

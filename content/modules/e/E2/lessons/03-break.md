@@ -1,50 +1,48 @@
-# E2 — Advanced browser and edge security (3 Break)
+# E2-LO-03 — Observe Report-Only counted as on, do not attack live origins
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** W3C CSP3 (CR — label draft/CR); Fetch Metadata; this lab’s cell is enforcement vs report-only.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** ASVS `v5.0.0-3.4.3`. Lab policy: local only.
 
-## Property (start here)
+## Authorized scope
 
-Content-Security-Policy-Report-Only is not enforcement. Isolation is not “we set a header.”
+`labs/E2/e2-lab` only. Synthetic header dicts. Do **not** XSS, probe, or scan a public origin as the exercise.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Report-Only treated as isolation enforcement.
 
-- **Attacker:** XSS that would be blocked only if CSP were enforcing.
-- **Trust:** Local isolation_enforced(headers).
-**Forbidden outcome:** Report-Only CSP counted as isolation enforcement
+## Mental model: any CSP-looking header counts
 
-**Authorized scope:** `labs/E2/e2-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable csp.py treats Report-Only as enforcement.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: Report-Only header => enforced True.
-
-## Vulnerable fixture (local)
-
-```python
-def isolation_enforced(headers):
-    return 'Content-Security-Policy-Report-Only' in headers or 'Content-Security-Policy' in headers
+```mermaid
+flowchart TD
+  Any[Report-Only or CSP] --> True[isolation_enforced true]
 ```
+
+The vulnerable tree demonstrates **cause** (Report-Only mistaken for on). Do not probe public hosts.
+
+## What to read in the fixture
+
+`vulnerable/csp.py` returns true if either header name is present. Tests require Report-Only to be false.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Report-Only mistaken for on. |
-| Impact | XSS still runs; dashboard looks green. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Report-Only mistaken for on |
+| Impact | XSS still runs; dashboard green |
+| Not the lesson | A Helmet product as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/E2/e2-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/E2/e2-lab/tests --impl vulnerable
+```
+
+Record `test_report_only_is_not_enforcement`. Do not probe public hosts.
 
 ## Transfer
 
-Trusted Types, COOP/COEP.
+Clinic HIPAA header: predict without leaving this directory.
 
 ## Non-goals
 
-No live-target instructions. Synthetic data only.
+No live-XSS, public-origin, or browser-exploit instructions.

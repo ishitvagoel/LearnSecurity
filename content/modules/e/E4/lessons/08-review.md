@@ -1,40 +1,42 @@
-# E4 — Memory safety and native-code boundaries (Review)
+# E4-LO-08 — Review declared_len-plus-8 as a PR
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** CISA memory-safe roadmap (guidance); CWE Top 25 awareness. This models a length mismatch — it is not a weaponized native exploit.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** ASVS `v5.0.0-5.3.1`. CISA roadmaps as guidance.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab’s unpacker
 
-A copy into a 4-byte lab buffer must not return more than 4 bytes. Length is complete mediation of the buffer object.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Hostile filename/size field; FFI caller.
-- **Trust:** Local copy_into(dst_len, src, n).
 Review `labs/E4/e4-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/E4.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|oversize copy length| Property["Property - good if tested"]
+  Q -->|we use Python| Mechanism[Mechanism - language]
+  Q -->|CWE-119 mapped| False[False assurance]
+```
 
-- Seeded smell (label it yourself): copy returns full src
-- Seeded smell (label it yourself): No dest length check
-- Seeded smell (label it yourself): unsafe FFI in Kotlin
-- Seeded smell (label it yourself): “Python so we are memory safe” with a C wheel
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- Copy returns full src / declared_len plus slack
+- No destination length check
+- Unsafe FFI treated as bounded because the app is Kotlin
+- "Python so we are memory safe" with a C wheel
+
+Also reject: native exploit walkthroughs, keys in lessons, claiming Gate 7.
 
 ## Misconceptions
 
-- Memory safety is only C
-- Fuzzing without ASAN is enough
-- This lab is an exploit tutorial
+- Python slice is what C does
+- A memory-safe language removes FFI risk
+- CWE Top 25 is the syllabus
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_copy_does_not_exceed_buffer`.
 
 ## Transfer
 
-Image parser; protobuf C.
+Clinic PR that "added a Kotlin rewrite and CWE-119 mapping" without a destination bound is incomplete.

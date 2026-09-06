@@ -1,33 +1,42 @@
-# E2 — Advanced browser and edge security (7 Transfer)
+# E2-LO-07 — Transfer: clinic Report-Only as HIPAA header
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** W3C CSP3 (CR — label draft/CR); Fetch Metadata; this lab’s cell is enforcement vs report-only.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** ASVS `v5.0.0-3.4.3`. CSP3 **draft**.
 
-## Property (start here)
+## Change the workplace; keep a header from meaning isolation
 
-Content-Security-Policy-Report-Only is not enforcement. Isolation is not “we set a header.”
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic: Report-Only as “HIPAA header.” Also name Trusted Types and COOP/COEP.
 
-- **Attacker:** XSS that would be blocked only if CSP were enforcing.
-- **Trust:** Local isolation_enforced(headers).
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite “we ship Content-Security-Policy-Report-Only so XSS is blocked,” plus “the reporting dashboard is green.”
 
-**Prompt:** Trusted Types, COOP/COEP.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic: Report-Only as “HIPAA header.”
+1. attacker capabilities (XSS that would only be logged — not a live clinic XSS);
+2. trust assumptions (enforcing header name is TCB; Report-Only/Helmet/dashboard are not);
+3. forbidden outcome (`isolation_enforced` true on Report-Only, not “HIPAA”);
+4. a test idea on a **local** fixture only (no live origin);
+5. residual (encoding skipped, CDN strip, XS-Leaks, Trusted Types **draft**, `v5.0.0-3.4.7` Level 3);
+6. WCAG if a blocked-script message is shown.
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: green report vs blocked script
+
+```mermaid
+flowchart LR
+  Dash[dashboard green] --> Belief[blocked]
+  Ro[Report-Only] --> Reality[script ran]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | Helmet defaults may be report-only in some templates.… |
-| Live-target plan | Lab policy |
+| “we have CSP” | Name may be Report-Only |
+| Live XSS tutorial | Lab policy |
+| “CSP3 so 6.2 is done” | Draft layer, not encoding |
 
 ## Practice
 
-One page. No keys. The lab `labs/E2/e2-lab` stays the only running system you may break.
+One page. No keys. `labs/E2/e2-lab` is the only running system you may break.

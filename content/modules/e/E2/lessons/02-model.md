@@ -1,53 +1,67 @@
-# E2 — Advanced browser and edge security (2 Model)
+# E2-LO-02 — Enforce vs signal vs encoding
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** W3C CSP3 (CR — label draft/CR); Fetch Metadata; this lab’s cell is enforcement vs report-only.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** ASVS `v5.0.0-3.4.3`, `v5.0.0-3.4.7`. CSP3 **draft**.
 
-## Property (start here)
+## Can a second engineer name the enforcement check from your header map?
 
-Content-Security-Policy-Report-Only is not enforcement. Isolation is not “we set a header.”
+“We set CSP” is not this lesson. A reviewable model names **enforcing header vs Report-Only, encoding (6.2), and whether the edge can strip it**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab freeze: local `isolation_enforced(headers)`. No live origins.
 
-- **Attacker:** XSS that would be blocked only if CSP were enforcing.
-- **Trust:** Local isolation_enforced(headers).
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: three layers
+
+```mermaid
+flowchart TD
+  Enc[encoding] --> Html[6.2]
+  En[enforcing CSP] --> Browser[may block]
+  Ro[Report-Only] --> Log[signal]
+```
+
+## Mental model: edge can lie
+
+```mermaid
+flowchart LR
+  Origin[origin sends CSP] --> Cdn[CDN]
+  Cdn --> Browser[browser]
+  Cdn --> Strip[header gone]
+```
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | browser, app |
-| Objects | CSP header |
-| Actions | isolation_enforced |
-| Channels | HTTP headers |
-| TCB | Enforcing CSP (and others) actually parsed as enforcing. |
-| Untrusted | Report-Only, comments in HTML |
-| State / time | Rollout. |
-| 1.1 cell | Integrity of the browser policy mechanism (2.3 layered with 6.2). |
+| Subjects | XSS; dashboard reader |
+| Objects | script execution |
+| Actions | `isolation_enforced` |
+| Channels | response headers; CDN |
+| TCB | enforcing header name |
+| Untrusted | Report-Only; Helmet sticker |
+| State / time | deploy; cache TTL |
+| 1.1 cell | integrity of browser policy |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| CSP enforce | script | block | maybe |
-| CSP Report-Only | script | block | no |
-| encoding 6.2 | title | safe | still-required |
-| cache 2.2 | header | strip | deny |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| Report-Only | isolation | treat as on | deny |
+| enforcing CSP | isolation | treat as on | may allow |
+| encoding skipped | HTML | treat as CSP | deny |
+| CDN strip | isolation | treat as on | deny |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/E2/e2-lab` file `csp.py`.
+Draw the map. Point at `labs/E2/e2-lab` file `csp.py`.
 
 ## Transfer
 
-Trusted Types, COOP/COEP.
+Clinic HIPAA header: Report-Only is still a signal.
 
 ## Residual risk
 
-XS-Leaks — named as elective depth.
+XS-Leaks; Trusted Types **draft**; `v5.0.0-3.4.7` Level 3 reporting.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

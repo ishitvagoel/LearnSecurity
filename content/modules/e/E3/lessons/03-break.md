@@ -1,56 +1,48 @@
-# E3 — Payments and other high-assurance systems (3 Break)
+# E3-LO-03 — Observe always-append capture, do not call live processors
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** ASVS L3 as *selection*; PCI DSS 4.0.1 as sector awareness — this lab does not claim PCI scope. Idempotency is 2.4 at money grain.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** ASVS `v5.0.0-2.3.4`. Lab policy: local only.
 
-## Property (start here)
+## Authorized scope
 
-A capture with the same idempotency key must not double-charge the lab ledger. High-assurance is a 2.4/7.x property, not PCI theater. No real PAN/PII.
+`labs/E3/e3-lab` only. Synthetic keys. Do **not** charge, refund, or scrape a real processor, clinic billing system, or public store as the exercise. No PAN.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Duplicate capture double-charges the lab ledger.
 
-- **Attacker:** Retry after 504; client double-click.
-- **Trust:** Local capture(key); synthetic amounts.
-**Forbidden outcome:** Duplicate capture double-charges the lab ledger
+## Mental model: every call appends
 
-**Authorized scope:** `labs/E3/e3-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable pay.py double-charges.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: two capture(k1) => count 2.
-
-## Vulnerable fixture (local)
-
-```python
-CHARGES=[]
-def reset():
-    CHARGES.clear()
-def capture(key):
-    CHARGES.append(key)
-    return True
-def charge_count():
-    return len(CHARGES)
+```mermaid
+flowchart TD
+  Any[any capture] --> Append[CHARGES plus one]
 ```
+
+The vulnerable tree demonstrates **cause** (non-idempotent side effect). Do not probe public APIs.
+
+## What to read in the fixture
+
+`vulnerable/pay.py` appends on every `capture`. Tests require two `k1` calls to leave count 1.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Non-idempotent side effect (2.4). |
-| Impact | Double charge (simulated). |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Non-idempotent side effect |
+| Impact | Simulated double charge |
+| Not the lesson | A PCI product as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/E3/e3-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/E3/e3-lab/tests --impl vulnerable
+```
+
+Record `test_duplicate_capture_does_not_double_charge`. Do not probe public hosts.
 
 ## Transfer
 
-Health record append-only audit.
+Clinic copay retry: predict without leaving this directory.
 
 ## Non-goals
 
-No live-target instructions. Synthetic data only.
+No live-processor, clinic-billing, or PAN-handling instructions.

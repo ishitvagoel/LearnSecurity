@@ -1,6 +1,6 @@
 # E3 — Payments, financial, health, and other high-assurance systems
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. The same idempotency key must not double-charge. This lab does not claim PCI scope. Do not mark Gate 7 complete.
 
 ## Identity
 
@@ -9,71 +9,74 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** Payments, financial, health, and other high-assurance systems
 - **phase / track / difficulty:** 7 / elective / advanced
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Opens after Phase 7; 2.4 time; 6.6 consume-once; 7.3 webhooks.
 - **routeTags:** complete, elective
 - **releaseMilestone:** M2
 - **masteryGate:** 7
 
 ## Objective hierarchy
 
-1. Produce **Scoped high-assurance profile** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce a **capture predicate** so two `capture("k1")` calls leave `charge_count() == 1`.
+2. Name attacker capabilities (retry after 504; double-click) and trust assumptions (local ledger; synthetic amounts; no PAN).
+3. Transfer: health append-only audit; simulated copay — without treating a PCI SAQ as this cell.
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+2.4 retry; 6.6 consume-once; 5.1 no extra copies of sensitive data.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- PCI SAQ is this cell.
+- Stripe idempotency is your local ledger unless you use it.
+- A new key on each retry is fine.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+Always-append capture (break) → key as identity (this module) → webhook vs capture race (7.3) → no PAN stored (5.1). Residual: client mints a new key each retry.
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true for a second `capture("k1")`?
+- What fails if the processor is idempotent but your ledger is not?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can a 504 retry do to money-like state?
+- What residual remains if the client sends a new key each click?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/E3/e3-lab`. Forbidden: duplicate capture double-charges. No real PAN or processors.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-ASVS L3; PCI DSS 4.0.1 — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- OWASP ASVS 5.0.0 (final): `v5.0.0-2.3.4` locking so limited resources cannot be double-booked (Level 2); `v5.0.0-2.3.3` succeed entirely or roll back. `v5.0.0-13.1.2` documented connection limits is **Level 3, labeled advanced**.
+- PCI DSS 4.0.1: **awareness** / sector scoping — this lab does **not** claim PCI scope or store PAN.
+- ASVS Level 3 as *selection vocabulary* for high-assurance profiles, not as “we are L3 because we have a SAQ.”
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+Two capture(k1) charge twice; PAN-like strings; webhook vs capture race ignored; PCI claimed from this lab.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: Scoped high-assurance profile.
+Elective. Simulated ledger only.
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`duplicate_capture_denied`. Credit the extra in a runbook; still fail the test first.
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: key is identity; PCI is awareness not scope |

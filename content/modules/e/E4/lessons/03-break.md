@@ -1,50 +1,53 @@
-# E4 — Memory safety and native-code boundaries (3 Break)
+# E4-LO-03 — Observe declared_len plus slack, do not compile overflows
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** CISA memory-safe roadmap (guidance); CWE Top 25 awareness. This models a length mismatch — it is not a weaponized native exploit.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** CISA memory-safe roadmaps (guidance). Lab policy: local only. No native exploits.
 
-## Property (start here)
+## Authorized scope
 
-A copy into a 4-byte lab buffer must not return more than 4 bytes. Length is complete mediation of the buffer object.
+`labs/E4/e4-lab` only. Synthetic `abcdefgh` bytes. Do **not** compile a C overflow, spray a heap, or fuzz a third-party binary as the exercise.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Copy into a 4-byte lab buffer returns more than 4 bytes.
 
-- **Attacker:** Hostile filename/size field; FFI caller.
-- **Trust:** Local copy_into(dst_len, src, n).
-**Forbidden outcome:** Copy returns more bytes than the destination length
+## Mental model: extra eight bytes are not a gift
 
-**Authorized scope:** `labs/E4/e4-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable copy.py returns too many bytes.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: copy 8 bytes into 4-byte dest returns 8.
-
-## Vulnerable fixture (local)
-
-```python
-def copy_into(bufsize, src, declared_len):
-    return src[: declared_len + 8]
+```mermaid
+sequenceDiagram
+  participant H as header declared_len 4
+  participant S as src 8 bytes
+  participant V as vulnerable copy
+  H->>V: copy 4 plus slack
+  S->>V: abcdefgh
+  V-->>V: destination length 8
 ```
+
+`--impl vulnerable` copies `src[: declared_len + 8]`. For an 8-byte source that is the whole buffer — longer than `bufsize` 4. Do not treat the `+ 8` as a C exploit size.
+
+## What to read in the fixture
+
+`vulnerable/copy.py` returns more than `bufsize` bytes. Tests require `len(copy_into(4, b"abcdefgh", 4)) <= 4`.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Trusting n over dst. |
-| Impact | In real C, memory corruption; here, the test catches length. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Declared length trusted over destination size |
+| Impact | Destination longer than 4 |
+| Not the lesson | A C exploit or CWE-119 product as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/E4/e4-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/E4/e4-lab/tests --impl vulnerable
+```
+
+Record `test_copy_does_not_exceed_buffer`. Do not compile native PoCs.
 
 ## Transfer
 
-Image parser; protobuf C.
+Clinic image parser: predict the oversize copy without leaving this directory.
 
 ## Non-goals
 
-No live-target instructions. Synthetic data only.
+No public-binary, production-unpacker, or weaponized overflow instructions.

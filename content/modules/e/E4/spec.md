@@ -1,6 +1,6 @@
 # E4 — Memory safety and native-code boundaries
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. A copy into a 4-byte lab buffer must not return more than 4 bytes. This is not a weaponized native exploit. Do not mark Gate 7 complete.
 
 ## Identity
 
@@ -9,71 +9,75 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** Memory safety and native-code boundaries
 - **phase / track / difficulty:** 7 / elective / advanced
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Opens after Phase 7; 1.2 mediation; 6.4 file/FFI; 6.1 interpreters.
 - **routeTags:** complete, elective
 - **releaseMilestone:** M2
 - **masteryGate:** 7
 
 ## Objective hierarchy
 
-1. Produce **Memory-safety roadmap or hardened native component** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce a **bounds predicate** so `copy_into(4, b"abcdefgh", 4)` returns at most 4 bytes.
+2. Name attacker capabilities (hostile declared length; FFI caller) and trust assumptions (local Python stand-in; C will not do this for you).
+3. Transfer: clinic DICOM parser; image codec FFI — without shipping a native overflow PoC.
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+1.2 complete mediation of the object; 6.4 parsers; CISA memory-safe roadmaps as manufacturer guidance.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- Python slice is what C does.
+- A memory-safe language removes FFI risk.
+- CWE Top 25 is the syllabus.
+- ASAN in a lesson is a weaponized exploit.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+Trust declared_len (break) → min(dst, declared, src) (this module) → prefer memory-safe languages for new code → FFI still a boundary. Residual: integer wrap; existing C codecs (6.4).
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true for `copy_into(4, src, 4)`?
+- What fails if n is trusted over dst?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can a hostile size field do at an FFI boundary?
+- What residual remains if new code is memory-safe but old codecs are not?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/E4/e4-lab`. Forbidden: copy into a 4-byte buffer returns more than 4 bytes. No native exploits.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-CISA memory-safe; CWE Top 25 — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- CISA *The Case for Memory Safe Roadmaps* (2023-12-06): manufacturer guidance, not the lab oracle. CISA/NSA 2025 memory-safe languages guide as additional guidance.
+- CWE Top 25 (awareness): CWE-119/787 after the length cause, not the syllabus.
+- OWASP ASVS 5.0.0 (final): `v5.0.0-5.3.1` uploaded/native components must not become executable server code (related). `v5.0.0-5.3.3` zip/user paths inside archives is **Level 3, labeled advanced** (native unpacker residual). Do not invent ASVS memory-safety IDs.
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+Copy exceeds destination; native PoC in learner pages; FFI unmarked; CWE used as syllabus.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: Memory-safety roadmap or hardened native component.
+Elective. Python length stand-in only.
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`copy_length_denied`. Patch; do not ship an overflowed binary.
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: length is mediation; no native exploits |

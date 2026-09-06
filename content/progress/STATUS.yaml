@@ -14,15 +14,43 @@ defaults:
   ai_security: elective E1
   website_progress: local-first static site (site/); no accounts
 next:
-  id: E1
+  id: E5
   pass: revise
   skill: deepen-curriculum
   inner_skill: standards-pin
-  note: Modules 10.3-10.5 and capstone 11 authoring pass added namespace-not-tenant,
-    prod-debug-boot, SIEM-green-is-not-recovery, and revoke-is-mediation mental models
-    and diagrams; keep 1.4, 2.1-10.5, and 11 developing until independent review.
-    Continue the depth queue one module at a time.
+  note: Electives E1-E4 authoring pass added model-not-TCB, Report-Only-not-enforcement,
+    key-is-identity, and length-is-mediation mental models and diagrams; keep 1.4,
+    2.1-11, and E1-E4 developing until independent review. Continue the depth queue
+    one module at a time.
 spiral_deltas:
+- date: '2026-09-06'
+  module: E4
+  change: Memory-safety loop v2 treats destination length as mediation, refuses a
+    memory-safe-language sticker as the copy check, pins CISA memory-safe roadmaps
+    as guidance, and labels ASVS v5.0.0-5.3.3 as Level 3 advanced
+  retest: Revisit 1.2 object mediation; 6.4 parsers/FFI; 6.1 interpreters at native
+    grain; 5.3 secrets in crash dumps; no native PoCs
+- date: '2026-09-06'
+  module: E3
+  change: High-assurance loop v2 treats the idempotency key as capture identity, refuses
+    Stripe/PCI as the local ledger, pins v5.0.0-2.3.4 / 2.3.3, and labels v5.0.0-13.1.2
+    as Level 3 advanced
+  retest: Revisit 2.4 time; 6.6 consume-once; 7.3 webhook vs capture race; 5.1 copies
+    of money-like state
+- date: '2026-09-06'
+  module: E2
+  change: Browser-edge loop v2 treats Report-Only as not isolation_enforced, refuses
+    CSP/Trusted Types drafts as 6.2 encoding, pins v5.0.0-3.4.3, and labels v5.0.0-3.4.7
+    as Level 3 advanced
+  retest: Revisit 6.2 encoding; 2.2/2.3 cookies and edge cache stripping CSP; 8.1 hostile
+    client XSS
+- date: '2026-09-06'
+  module: E1
+  change: Agentic loop v2 treats the model as an untrusted client, refuses a system
+    prompt as policy, pins AISVS v1.0-C9.5.3 / C9.3.7, and labels v1.0-C9.2.8 as Level
+    3 advanced
+  retest: Revisit 1.2 mediation; 6.1 interpreters; 8.1 hostile client; 7.4 agent creds;
+    10.2 hallucinated packages; 5.1 retrieved copies
 - date: '2026-09-06'
   module: '11'
   change: Capstone loop v2 treats revoke as mediation on the next read not an event,
@@ -931,32 +959,32 @@ electives:
   opens_after_phase: 7
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added model-not-TCB mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: E2
   title: Advanced browser and edge security
   opens_after_phase: 7
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added Report-Only-not-enforcement mental models and
+    diagrams; independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: E3
   title: Payments, financial, health, and other high-assurance systems
   opens_after_phase: 7
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added key-is-identity mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: E4
   title: Memory safety and native-code boundaries
   opens_after_phase: 7
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added length-is-mediation mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: E5
   title: Large-scale authorization and multi-tenant SaaS

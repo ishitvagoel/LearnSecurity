@@ -1,57 +1,49 @@
-# E3 — Payments and other high-assurance systems (4 Build)
+# E3-LO-04 — Treat the key as capture identity
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** ASVS L3 as *selection*; PCI DSS 4.0.1 as sector awareness — this lab does not claim PCI scope. Idempotency is 2.4 at money grain.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** ASVS 5.0.0 (final) `v5.0.0-2.3.4`, `v5.0.0-2.3.3`.
 
-## Property (start here)
+## Structural means the second key is a no-op
 
-A capture with the same idempotency key must not double-charge the lab ledger. High-assurance is a 2.4/7.x property, not PCI theater. No real PAN/PII.
+`capture` must add to `SEEN` and `CHARGES` only when the key is new. Fail-safe: duplicate denies extra charge. A processor header may *accompany* a match; it does not replace your set.
 
-## Attacker capabilities and trust assumptions
+## Mental model: seen gate
 
-- **Attacker:** Retry after 504; client double-click.
-- **Trust:** Local capture(key); synthetic amounts.
-two capture(k1) => count 1.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-SEEN=set(); CHARGES=[]
-def reset():
-    SEEN.clear(); CHARGES.clear()
-def capture(key):
-    if key in SEEN:
-        return False
-    SEEN.add(key)
-    CHARGES.append(key)
-    return True
-def charge_count():
-    return len(CHARGES)
+```mermaid
+flowchart TD
+  Call[capture] --> In{"key in SEEN?"}
+  In -->|yes| False[return false]
+  In -->|no| Add[append once]
 ```
+
+Do not accept “Stripe was sent the header” as membership.
 
 ## Why this restores the cell
 
-Idempotency key as primary key of capture.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| two k1 | count 1 |
+| first k1 | capture true |
 
 ## What this is not
 
-Stripe idempotency is not your local ledger unless you use it.
-
-PCI SAQ is not this cell.
+PCI SAQ. Stripe. Gate 7. New-key retries (residual).
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name who can mint keys. Run:
+
+```
+python3 -m pytest labs/E3/e3-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Health record append-only audit.
+Health: the document version id is the key, not “POST again.”
 
 ## Residual risk
 
-Webhook vs capture race (7.3+2.4).
+Webhook race; new key each click; `v5.0.0-13.1.2` Level 3.

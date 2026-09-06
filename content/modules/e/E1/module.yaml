@@ -7,64 +7,67 @@ difficulty: advanced
 status: reviewed
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 1.1–2.4 Pass A complete
+- 'Opens after Phase 7; 1.2 mediation; 6.1 interpreters; 8.1 hostile client'
 routeTags:
 - complete
 - elective
 releaseMilestone: M2
 outcomes:
-- 'Demonstrate: AI, LLM, and agentic application security'
-- 'Produce evidence: AI-feature threat model and adversarial evaluation'
-- Name attacker capabilities and trust assumptions
-- Include a local-only lab brief and a transfer challenge
-- Do not instruct live-target attacks or mix awareness lists as compliance
+- 'Refuse a model-proposed exec_sql tool; the model is an untrusted client.'
+- 'Treat LLM Top 10 2026 as awareness after the allowlist cause, not as AISVS.'
+- 'Keep retrieved documents and system prompts from becoming policy.'
 reviewTriggers:
-- Material SecureCollab change in this module's concern
-- Superseding final standard
+- exec_sql available to the agent
+- Policy only in the system prompt
+- No denied-tool test
+- Retrieved docs treated as trusted
 invariants:
-- Claims are properties of SecureCollab (or the elective system), not tool names
+- run_tool of exec_sql is None
+- The model is outside the TCB
 - Labs stay in authorized local or official training scope
-- Draft standards are labeled draft
+- LLM Top 10 is not ASVS
 threatModelPrompts:
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+- What can a note body make the agent do?
+- What residual remains if policy lives only in the prompt?
+- What residual remains if search_notes returns untrusted HTML?
 concepts:
-- ai
+- model-not-tcb
+- tool-allowlist
+- excessive-agency
 - securecollab
 - seven-step-loop
 learningObjects:
 - id: E1-LO-01
   kind: concept-model
-  title: 'AI, LLM, and agentic application security: property vs mechanism'
+  title: A model proposal is not authorization
   path: lessons/01-property.md
 - id: E1-LO-02
   kind: design-exercise
-  title: Model SecureCollab optional summarizer agent for E1
+  title: Tool matrix vs system prompt
   path: lessons/02-model.md
 - id: E1-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: Agent executes exec_sql because the model asked'
+  title: 'Local fixture: always-run run_tool'
   path: lessons/03-break.md
 - id: E1-LO-04
   kind: design-exercise
-  title: Structural fix restoring the E1 invariant
+  title: Allowlist tools in the runtime
   path: lessons/04-build.md
 - id: E1-LO-05
   kind: verification-lab
-  title: Forbidden-outcome tests for E1
+  title: Fail-on-vulnerable then pass-on-fixed for exec_sql
   path: lessons/05-verify.md
 - id: E1-LO-06
   kind: operations-exercise
-  title: Detect/recover notes for E1
+  title: tool_denied without logging transcripts
   path: lessons/06-operate.md
 - id: E1-LO-07
   kind: transfer-challenge
-  title: 'Transfer: Clinic summarizer over charts.'
+  title: 'Transfer: clinic summarizer over charts'
   path: lessons/07-transfer.md
 - id: E1-LO-08
   kind: code-review
-  title: Seeded review for E1
+  title: Review always-run run_tool as a PR
   path: lessons/08-review.md
 labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
@@ -79,46 +82,71 @@ labSpec:
 evidenceRequired:
 - AI-feature threat model and adversarial evaluation
 - Transfer task prompt
-- Local lab brief
+- Local lab brief with exec_sql deny tests
 assessmentBlueprint:
-  explain: Causal model for AI, LLM, and agentic application security
-  design: AI-feature threat model and adversarial evaluation
-  build: Deferred to Pass B
-  break: Authorized local reproduction of the representative failure
-  verify: Forbidden-outcome tests
-  operate: Detection and recovery notes
-  communicate: Residual risk without compliance theater
+  explain: Model output is not policy; allowlist is mediation
+  design: Tools, who may call them, retrieved docs untrusted
+  build: run_tool requires allowlist in labs/E1/e1-lab/fixed
+  break: Authorized local always-run run_tool
+  verify: Forbidden-outcome tests plus honest search_notes
+  operate: tool_denied without bodies
+  communicate: Residual prompt-only policy; hallucinated packages
 masteryGate: '7'
 standardsRefs:
-- source: OWASP ASVS / module anchors (see spec)
-  version: 5.0.0
+- source: OWASP Artificial Intelligence Security Verification Standard
+  version: '1.0'
   status: final
   requirementIds:
-  - genai
+  - v1.0-C9.5.3
+  - v1.0-C9.3.7
+  - v1.0-C9.2.8
+  url: https://owasp.org/www-project-artificial-intelligence-security-verification-standard-aisvs-docs/
+- source: OWASP Application Security Verification Standard
+  version: '5.0.0'
+  status: final
+  requirementIds:
+  - v5.0.0-8.2.1
+  - v5.0.0-13.2.1
   url: https://owasp.org/www-project-application-security-verification-standard/
+- source: OWASP GenAI LLM Top 10
+  version: '2026'
+  status: awareness
+  requirementIds:
+  - LLM03
+  url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/
+- source: NIST AI 600-1 Generative AI Profile
+  version: '600-1'
+  status: final
+  requirementIds:
+  - GenAI-profile
+  url: https://doi.org/10.6028/NIST.AI.600-1
+- source: NIST SP 800-218A SSDF Community Profile for Generative AI
+  version: '800-218A'
+  status: final
+  requirementIds:
+  - SSDF-AI
+  url: https://csrc.nist.gov/pubs/sp/800/218/a/final
 misconceptions:
 - LLM Top 10 is ASVS for AI
-- RAG is safe because it is “our data”
+- RAG is safe because it is our data
 - The model is in the TCB
+- A system prompt is complete mediation
 operationalConsiderations:
-- tool_denied{exec_sql}.
+- tool_denied.
 - Hallucinated packages (10.2) in copilot use.
-author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+author: deepen-curriculum / author-module-spec
+reviewer: pending independent quality and lab-safety review
 lastReviewedAt: '2026-08-24'
 nextReviewAt: '2027-02-24'
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map
 - date: '2026-08-23'
-  note: 'Pass A quality-gate: spec completeness competent; expand in a later revision
-    if thin'
-- date: '2026-08-23'
   note: Pass B lessons and authorized local lab
 - date: '2026-08-23'
   note: Pass C rubric and examiner keys; quality-gate recorded
-- date: '2026-08-23'
-  note: 'Deepen: 1.1-density lessons; structural local lab; quality-gate recorded'
 - date: '2026-08-24'
-  note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
-    Pass C keys isolated'
+  note: Map-complete rewrite recorded; independent review still required
+- date: '2026-09-06'
+  note: 'Depth pass: model-not-TCB mental models, mermaid diagrams, AISVS v1.0-C9.5.3;
+    LLM Top 10 2026 as awareness; independent review still required'

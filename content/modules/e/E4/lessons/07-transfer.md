@@ -1,33 +1,42 @@
-# E4 — Memory safety and native-code boundaries (7 Transfer)
+# E4-LO-07 — Transfer: clinic DICOM parser
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** CISA memory-safe roadmap (guidance); CWE Top 25 awareness. This models a length mismatch — it is not a weaponized native exploit.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** CISA memory-safe roadmaps (guidance). ASVS `v5.0.0-5.3.1`. CWE-119 awareness after the cause.
 
-## Property (start here)
+## Change the workplace; keep length as mediation
 
-A copy into a 4-byte lab buffer must not return more than 4 bytes. Length is complete mediation of the buffer object.
+Do not answer with a Top 25 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic DICOM / image parser. Also name a protobuf C extension.
 
-- **Attacker:** Hostile filename/size field; FFI caller.
-- **Trust:** Local copy_into(dst_len, src, n).
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite "the app is mostly Kotlin so copies are safe," plus "we mapped CWE-119 so the unpacker is done."
 
-**Prompt:** Image parser; protobuf C.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic DICOM parser.
+1. attacker capabilities (hostile header length — not a live clinic binary attack);
+2. trust assumptions (three-way min at the **native** copy is TCB; Kotlin/CISA/CWE are not);
+3. forbidden outcome (`copy_into` length > bufsize, not "HIPAA");
+4. a test idea on a **local** fixture only (no third-party codec fuzzing);
+5. residual (FFI, integer wrap, `v5.0.0-5.3.3` Level 3);
+6. WCAG if operator reject-UI exists (operators must read the error without a hex dump).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: Kotlin app vs C codec
+
+```mermaid
+flowchart LR
+  Kt[Kotlin app] --> Belief[safe language]
+  Jni[JNI copy] --> Reality[needs min of three]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | Python slice is the *fixed* model; C will not do this for you.… |
-| Live-target plan | Lab policy |
+| "we use Kotlin / Rust" | Not mediation of this copy |
+| Native overflow PoC / public binary | Lab policy |
+| "CWE-119 so 1.2 is done" | Awareness after the cause |
 
 ## Practice
 
-One page. No keys. The lab `labs/E4/e4-lab` stays the only running system you may break.
+One page. No keys. `labs/E4/e4-lab` is the only running system you may break.

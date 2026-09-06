@@ -1,53 +1,66 @@
-# E3 — Payments and other high-assurance systems (2 Model)
+# E3-LO-02 — Ledger identity vs processor sticker
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** ASVS L3 as *selection*; PCI DSS 4.0.1 as sector awareness — this lab does not claim PCI scope. Idempotency is 2.4 at money grain.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** ASVS `v5.0.0-2.3.4`. PCI 4.0.1 awareness not scope.
 
-## Property (start here)
+## Can a second engineer name the capture check from your ledger map?
 
-A capture with the same idempotency key must not double-charge the lab ledger. High-assurance is a 2.4/7.x property, not PCI theater. No real PAN/PII.
+“We use Stripe idempotency” is not this lesson. A reviewable model names **key, SEEN set, webhook path, and that PAN is absent**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab freeze: local `capture(key)`. Synthetic amounts.
 
-- **Attacker:** Retry after 504; client double-click.
-- **Trust:** Local capture(key); synthetic amounts.
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: one key one row
+
+```mermaid
+flowchart TD
+  K[k1] --> Row[capture row]
+  K2[k1 again] --> Same[same row]
+```
+
+## Mental model: two writers
+
+```mermaid
+flowchart LR
+  Api[capture API] --> Ledger[CHARGES]
+  Hook[webhook] --> Ledger
+  Race[both append] --> Residual[7.3]
+```
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | payer, ledger |
-| Objects | capture key k1 |
-| Actions | capture, charge_count |
-| Channels | payment API stand-in |
-| TCB | Idempotent capture store. |
-| Untrusted | Client retries, webhook duplicates (7.3) |
-| State / time | Two captures. |
-| 1.1 cell | Integrity of money-like state. |
+| Subjects | retry; double-click |
+| Objects | lab ledger |
+| Actions | `capture` |
+| Channels | API; webhook |
+| TCB | key identity |
+| Untrusted | Stripe sticker; PCI SAQ |
+| State / time | 504 retry |
+| 1.1 cell | integrity of money-like state |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| payer | k1 first | capture | allow |
-| payer | k1 retry | capture | no-second-charge |
-| webhook | k1 | capture | same |
-| logs | PAN | store | deny |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| second k1 | charge | append | deny |
+| first k1 | charge | append | may allow |
+| Stripe header | local count | treat as check | deny |
+| PCI SAQ | this cell | treat as proof | deny |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/E3/e3-lab` file `pay.py`.
+Draw the map. Point at `labs/E3/e3-lab` file `pay.py`.
 
 ## Transfer
 
-Health record append-only audit.
+Health append-only: the document id is the key.
 
 ## Residual risk
 
-Webhook vs capture race (7.3+2.4).
+New key each click; webhook race; `v5.0.0-13.1.2` Level 3.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

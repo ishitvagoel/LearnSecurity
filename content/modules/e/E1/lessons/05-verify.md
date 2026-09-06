@@ -1,38 +1,44 @@
-# E1 — AI, LLM, and agentic application security (5 Verify)
+# E1-LO-05 — Evidence is exec_sql denied, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** OWASP GenAI LLM Top 10 2026 (awareness, not syllabus); NIST AI RMF GenAI Profile (guidance); this lab’s cell is tool authority.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** AISVS `v1.0-C9.5.3`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-The lab agent may only invoke allowlisted tools. A model-proposed exec_sql is not authorization. The model is an untrusted client (8.1) that speaks English.
+“We use RAG” is not evidence. The oracle is the local pair. Do not call live models.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Prompt injection in a note body; malicious retrieved doc.
-- **Trust:** Local run_tool(name).
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail exec_sql"]
+  X["--impl fixed"] --> P["Must pass deny"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Agent executes exec_sql because the model asked |
-| Failure | Fail closed: Allow-list; no exec_sql; human approval for high impact |
+| Negative / abuse | exec_sql → None |
+| Normal | search_notes → may run |
+| Not claimed | live OpenAI; LLM03 dashboard; Gate 7 |
 
-Lab tests: `test_property.py` under `labs/E1/e1-lab`.
+```
+python3 -m pytest labs/E1/e1-lab/tests --impl vulnerable
+python3 -m pytest labs/E1/e1-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Agent executes exec_sql because the model asked`
-- `--impl fixed`: **pass**
+Honest `search_notes` may pass on both.
 
-exec_sql denied.
+## What the tests do not prove
+
+- Retrieved chunks are encoded (6.2)
+- Agent credentials rotate (AISVS `v1.0-C9.4.3` Level 3)
+- Copilot cannot hallucinate packages
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Copilot in CI.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic: a test that only asserts “the prompt mentions exec_sql” is not this cell.
