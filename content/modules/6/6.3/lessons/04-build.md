@@ -1,16 +1,17 @@
-# 6.3-LO-04 — Require origin match and CSRF token
+# Require origin match and a CSRF token
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-3.5.1`. `v5.0.0-3.5.3` wants unsafe methods. `v5.0.0-3.5.8` is **Level 3, advanced**. SameSite (`v5.0.0-3.3.2`) is a helper.
 
-## Structural means the cookie is not enough
+## The rule
 
-`allow_share` must require a session cookie **and** `origin == expected` **and** a matching token. Structural means site-bound intent — not SameSite as the only check, not CORS as a stand-in, not “the user clicked something somewhere.”
+A leftover cookie is not the fix. SameSite as the only check is not the fix. CORS as a stand-in is not the fix. “The user clicked something somewhere” is not the fix.
 
-The smallest restore for SecureCollab Phase 1 share is: all three, or deny. Fail-safe: missing origin or token **denies**. Do not fail open because SameSite is Lax.
+The structural change is: `allow_share` must require a session cookie **and** `origin == expected` **and** a matching CSRF token. Structural means site-bound intent — not leftover cookie authority from the surroundings.
 
-## Mental model: all three, or deny
+The smallest restore for notes-app share is: all three, or deny. Fail closed: missing origin or token **denies**. Do not fail open because SameSite is Lax.
+
+## Picture: all three, or deny
 
 ```mermaid
 flowchart TD
@@ -23,11 +24,11 @@ flowchart TD
   Token -->|yes| Allow[Allow]
 ```
 
-The lab’s fixed tree is `session_cookie` then `origin == expected and token == "lab-csrf"`. Production still needs the token bound to the session (not a cookie the foreign origin can cause to be sent). GET `/share?to=` is a mutate-on-GET residual. Clickjacking, postMessage, and open redirect (6.5) stay named residuals. CORS `*` with credentials is false assurance.
+The lab’s repaired files are `session_cookie` then `origin == expected and token == "lab-csrf"`. Production still needs the token bound to the session (not a cookie the foreign origin can cause to be sent). GET `/share?to=` is a mutate-on-GET leftover. Clickjacking, postMessage, and a later open-redirect lesson stay named leftovers. CORS `*` with credentials is false comfort.
 
-ASVS `v5.0.0-3.5.1` wants anti-forgery tokens or extra non-CORS-safelisted headers. This pytest is that sentence for `allow_share`.
+Industry checklists want anti-forgery tokens or extra headers a simple form cannot set. This pytest is that sentence for `allow_share`. Extra rows about authenticated embeds and CORP are **advanced** — not this week’s pytest.
 
-## Why this restores the cell
+## What the repaired files must show
 
 | After the fix | Must be true |
 |---|---|
@@ -38,34 +39,34 @@ ASVS `v5.0.0-3.5.1` wants anti-forgery tokens or extra non-CORS-safelisted heade
 
 ## What this is not
 
-SameSite=Lax as complete. CORS `*` with credentials. Token stored in a cookie that the foreign origin can cause to be sent (double-submit without binding). GET `/share?to=`. Fetch Metadata as the only check.
+SameSite=Lax as complete. CORS `*` with credentials. Token stored in a cookie that the foreign origin can cause to be sent (double-submit without binding). GET `/share?to=`. Fetch metadata as the only check.
 
-## Mechanism limits
+## What the tool cannot do
 
-- Clickjacking / `frame-ancestors` (`v5.0.0-3.4.6`) is a different cell.
-- postMessage origin checks (`v5.0.0-3.5.5`) are a different cell.
-- Open redirect (6.5) can still send the user somewhere else after a real click.
-- Authenticated embeds / CORP (`v5.0.0-3.5.8`) are Level 3 advanced.
-- 4.2 phishing: the user intended the *lookalike*, not this origin.
+- Clickjacking / who may frame the page is a different cell.
+- postMessage origin checks are a different cell.
+- A later open-redirect lesson can still send the person somewhere else after a real click.
+- Authenticated embeds / CORP are advanced extras.
+- Lookalike UI from the phishing lesson: the person intended the *lookalike*, not this origin.
 
 ## Practice
 
-Name the predicate (cookie ∧ origin == expected ∧ token). Run:
+Name the check (cookie and origin == expected and token). Run:
 
 ```text
 python3 -m pytest labs/6.3/6.3-lab/tests --impl fixed
 ```
 
-Must pass.
+It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-## Transfer
+## Use it somewhere new
 
 Clinic: stop treating “logged-in cookie” as consent to share with a partner.
 
-## Residual risk
+## What can still go wrong
 
-Clickjacking; postMessage; open redirect (6.5); Level 3 embeds; 4.2 phishing; GET mutate.
+Clickjacking; postMessage; later open redirect; advanced embeds; lookalike UI; GET that still mutates.
 
-## Non-goals
+## What this page is not doing
 
-Do not visit a live foreign origin. Do not claim Gate 6 from SameSite=Lax.
+Do not visit a live foreign origin. Do not claim a course gate from SameSite=Lax.

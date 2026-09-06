@@ -1,31 +1,40 @@
-# 6.7-LO-03 — Observe the fourth allow, do not trophy a public host
+# Practice: unbounded exports (fourth allowed)
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-2.4.1`. `v5.0.0-2.4.2` (human timing) is **Level 3, advanced**. API4/API6 are awareness after the cause (also 3.4).
 
-## Authorized scope
+## Try it
 
-`labs/6.7/6.7-lab` only. The fixture is an in-process `allow`. Synthetic call counts. No live load tests, no public hosts, no employer export API.
+The practice is not a website you attack. It is a tiny Python `allow`. It does not open a live export API. The failure is already in the function: it says yes for every `n`. You are here to see that the check treats that as a **failed rule**, not as a trophy against a public host.
 
-**Forbidden outcome:** unbounded exports (4th allowed in the lab window). `allow(4)` returns true.
+The rule under test:
 
-Attacker capability in this lab: a scripted session that calls export more than three times. That stands in for a clinic “Export all” button, notification fan-out, or GraphQL aliases later in 7.1. Trust assumption: `allow` is supposed to be a **per-subject resource account** on the export action. A disabled SPA button, an IP bucket, CAPTCHA, and autoscaling are not in the TCB for this cell.
+> Export has a resource account, not an unbounded loop. `allow(4)` must be false in the lab window. `allow(3)` may be true.
 
-## Mental model: allow always true
+## Where you may practice
+
+Only `labs/6.7/6.7-lab` is in scope. The fixture is an in-process `allow`. Fake call counts. It does not talk to the network.
+
+Do not load-test a public host. Do not probe an employer export API. Do not probe a classmate preview. Do not paste a live export “to see what happens.”
+
+What must not happen: unbounded exports (fourth allowed in the lab window). `allow(4)` returns true.
+
+Who can act here: a scripted session that calls export more than three times. That stands in for a clinic “Export all” button, notification fan-out, or GraphQL aliases later in 7.1. What you are supposed to trust: `allow` is a **per-person resource account** on the export action. A disabled button in the browser, an IP bucket, a CAPTCHA, and autoscaling are not what you trust for this check.
+
+## Picture: allow always true
 
 ```mermaid
 flowchart TD
   Call["allow 4"] --> True[returns true]
 ```
 
-The vulnerable tree demonstrates **cause** (no resource account). Do not aim a load generator at anything except this fixture. Preconditions: `allow` returns true for every `n`. You do not need HTTP. You must not load-test a public host.
+The broken files show **cause** (no resource account). Do not aim a load generator at anything except this fixture. What has to be true first: `allow` returns true for every `n`. You do not need HTTP. You must not load-test a public host.
 
-ASVS `v5.0.0-2.4.1` wants anti-automation against quota exhaustion. Module 3.4 already capped shares on the write path; this cell is how many **exports** in a window.
+Industry lists want a stop against scripts that burn quota. Module 3.4 already capped shares on the write path. This check is how many **exports** in a window. A famous API-abuse list is a later name, not this pytest.
 
-## What to read in the fixture
+## What to look at — cause, not a trophy
 
-`vulnerable/limit.py` returns true for every `n`. Tests:
+Read `vulnerable/limit.py`. It returns true for every `n`. Tests:
 
 - `test_fourth_export_is_denied`
 - `test_third_export_is_allowed`
@@ -33,27 +42,35 @@ ASVS `v5.0.0-2.4.1` wants anti-automation against quota exhaustion. Module 3.4 a
 
 You do not need a new `n`. The failure of `test_fourth_export_is_denied` *is* the evidence.
 
-Do not open the fixed tree yet. Diagnose the cause first.
+Do not open the repaired files yet. Diagnose the cause first.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+| What you see | What kind of failure | Not the lesson |
+|---|---|---|
+| `allow(4)` is true | No resource account | A famous API-abuse list |
+| `allow` true for every `n` | Unbounded loop | “The edge will throttle it” |
+| Fourth export in the window succeeds | What must not happen | A public load test |
 
-| Slice | This lab |
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
+
+| Slice | This practice |
 |---|---|
-| Required property | Fourth export in the window is denied |
-| Root cause | No resource account |
-| Preconditions | `allow(n)` is always true |
+| The rule | Fourth export in the window is denied |
+| Why it happens | No resource account |
+| What has to be true first | `allow(n)` is always true |
 | Trigger | `allow(4)` |
-| Impact | Availability/cost plus extra CSV copies of bodies (5.1) |
-| Prevention | Server predicate `n <= 3` on the export action |
-| Detection | `quota_denied`; `cost_alert`; never the CSV body |
-| Recovery | Keep deny; revoke session if automated |
-| Not the lesson | API4, nginx, CAPTCHA, or a public load test |
+| What it costs | Availability and cost, plus extra CSV copies of bodies (5.1) |
+| How you stop it | Server check `n <= 3` on the export action |
+| How you notice | `quota_denied`; `cost_alert`; never the CSV body |
+| How you recover | Keep deny; revoke the session if it looks automated |
+| Not the lesson | A famous API-abuse list, an edge IP limit, a CAPTCHA, or a public load test |
 
-## Framework defaults versus the quota guarantee
+## What the framework does vs what you still have to check
 
-nginx rate-limit is an IP bucket, not a per-subject export account. FastAPI will run export as often as you call it. Next.js disabling a button does not bind `n`. The application guarantee is: **this** fixture, `allow(4)` is False.
+An IP limit at the edge is a bucket per address, not a per-person export account. FastAPI will run export as often as you call it. Next.js disabling a button does not bind `n`. The app’s promise is: **this** fixture, `allow(4)` is false.
 
 ## Practice
+
+From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/6.7/6.7-lab/tests --impl vulnerable
@@ -61,10 +78,10 @@ python3 -m pytest labs/6.7/6.7-lab/tests --impl vulnerable
 
 Record `test_fourth_export_is_denied`. Do not probe public hosts. An environment error is not security evidence.
 
-## Transfer
+## Use it somewhere new
 
-Clinic bulk-export. Predict without leaving this directory. Do not load-test a live EHR.
+Clinic bulk-export. Predict without leaving this directory. Do not load-test a live clinic system.
 
-## Non-goals
+## What this page is not doing
 
-No live-target instructions. Synthetic counts only. No public load tests.
+No live-target instructions. Fake counts only. No public load tests. Do not “fix” the practice by deleting the test.

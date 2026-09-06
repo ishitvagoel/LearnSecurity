@@ -1,27 +1,26 @@
-# 6.7-LO-07 — Transfer: clinic bulk-export patients
+# Same idea on clinic bulk-export
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-2.4.1`. API4/API6 awareness after. WCAG 2.2 for the deny message.
 
-## Change the workplace; keep a per-subject resource account
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: `allow(4)` must be false. Rewrite it for a clinic without changing the fork.
+The notes-app scaffolding goes away. You get a **clinic bulk-export** of patients. Your job is to rewrite the loop, not to name a bug-list code.
 
-**Prompt:** Clinic bulk-export patients. Also name notification fan-out and search complexity (7.1).
+The notes-app sentence was: `allow(4)` must be false in the lab window. Export has a resource account, not an unbounded loop. Rewrite it for a clinic without changing the fork: the fourth bulk-export is denied, the first three may be allowed.
 
-**Product sketch:** EHR-lite “Export all” with a disabled button in the SPA.
+Also name notification fan-out and search complexity as the same budget family (7.1), without running those systems.
 
-Rewrite the SecureCollab sentence. Include:
+## Picture: bulk export is still a budget row
 
-1. attacker capabilities (scripted clinician session — not a live clinic);
-2. trust assumptions (server `n <= 3` is TCB; SPA disable and IP rate limit are not);
-3. forbidden outcome (`allow(4)` true, not “HIPAA”);
-4. a test idea on a **local** fixture only (no public load test);
-5. residual (new accounts, GraphQL aliases, Level 3 human timing, extra copies 5.1);
-6. WCAG if a human quota path is in the claim (readable “try tomorrow,” not a spinner that retries).
+Renaming “export notes” to “export patients” is not transfer. The untrusted click changes. The fork does not.
 
-## Mental model: bulk export is still a budget row
+| Notes app this week | Clinic sketch |
+|---|---|
+| `allow(n)` on export | Bulk-export of patients |
+| Cap 3 in the lab window | Same shape: a per-person resource account |
+| Fourth export denied | Fourth bulk-export denied |
+| Scripted member | Scripted clinician session — **not** a live clinic |
 
 ```mermaid
 flowchart LR
@@ -29,24 +28,37 @@ flowchart LR
   N["n = 4"] --> Reality[unbounded CSVs if allow is true]
 ```
 
-If “Export all” is a disabled SPA button while the server `allow` is always true, the cell is gone. FastAPI, nginx `limit_req`, and CAPTCHA do not count `n` per subject. Notification fan-out and GraphQL search complexity (7.1) are the same budget family — name them, do not run those systems here. Extra CSVs are a 5.1 copy even when the UI said “once.”
+If “Export all” is a disabled button in the browser while the server `allow` is always true, the check is gone. FastAPI, an IP limit at the edge, and a CAPTCHA do not count `n` per person. Notification fan-out and GraphQL search complexity (7.1) are the same budget family — name them, do not run those systems here. Extra CSVs are still copies from 5.1 even when the UI said “once.”
 
-The clinic rewrite still has to keep the SecureCollab fork: fourth export false, third true. Rate-limiting at nginx without a per-subject fourth-export test leaves `allow(4)` true. The local pytest analogue is `test_fourth_export_is_denied` — on a fixture, not a live EHR load test.
+The clinic rewrite still has to keep the notes-app fork: fourth export false, third true. Rate-limiting at the edge without a per-person fourth-export test leaves `allow(4)` true. The local pytest analogue is `test_fourth_export_is_denied` — on a fixture, not a live clinic load test.
 
-## What graders reject
+## Prompt — clinic bulk-export
+
+**Product sketch:** a small clinic app with an “Export all” button that is disabled in the browser.
+
+Rewrite the notes-app sentence. Include:
+
+1. who can act (scripted clinician session — not a live clinic);
+2. what you trust (server `n <= 3` is what you trust; the disabled button and an IP rate limit are not);
+3. what must not happen (`allow(4)` true, not a legal label);
+4. a test idea on a **local** fixture only (fourth denied — never on the real clinic);
+5. leftover (new accounts, GraphQL aliases, human timing as advanced work, extra copies from 5.1);
+6. whether a human-read “try tomorrow” must be announced, not a spinner that retries and burns the budget.
+
+## What is not good enough
 
 | Reject | Why |
 |---|---|
 | “CAPTCHA is on” | Not a resource account |
-| Live clinic / public load test | Lab policy |
+| Live clinic / public load test | Course rules |
 | Autoscaling | Spends more; does not enforce the cap |
 | HTTP 200 as quota evidence | Wrong observation |
-| SPA disabled button as the cap | Client is not TCB (3.4) |
+| Disabled button as the cap | The client is not what you trust (3.4) |
 
 ## Practice
 
-One page. No keys. `labs/6.7/6.7-lab` is the only running system you may break. Do not load-test a public host.
+One page. No answer keys. The only running system you may break is `labs/6.7/6.7-lab`. Do not load-test a public host.
 
-## Non-goals
+## What this page is not doing
 
-Live-target DoS. Real patient CSVs. Claiming Gate 6 from this page.
+Live-target load tests. Real patient CSVs. Claiming a course gate from this page.

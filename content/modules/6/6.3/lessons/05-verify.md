@@ -1,58 +1,64 @@
-# 6.3-LO-05 — Evidence is foreign-origin deny, then a passing pair
+# Fail on the broken files, then pass on the repaired ones
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-3.5.1`.
 
-## An invariant that cannot fail a test is still a slogan
+## If you cannot test it, it is still a slogan
 
-“SameSite is Lax” is not evidence. “CORS is configured” is a mechanism observation. The oracle is: `allow_share` for a foreign origin with `token=None` is False. That observation must be **false** on `--impl vulnerable` (returns true) and **true** on `--impl fixed`.
+“SameSite is Lax” is not evidence. “CORS is configured” is a tool observation. The check is: `allow_share` for a foreign origin with `token=None` is False. That observation must be **false** on the broken files (returns true) and **true** on the repaired files.
 
-## Mental model: vulnerable must fail: foreign origin
+## Picture: broken must fail foreign origin
 
-The failing observation on `--impl vulnerable` is **foreign origin**. A passing collection count is not this cell.
+A test that only counts passing cases can pass while leftover cookies still authorize a share. This check asks whether a cookie-only share is allowed to count as a passing control. Broken must fail that question. Repaired must pass it — the deny plus the honest allow.
 
 ```mermaid
 flowchart LR
-  V["--impl vulnerable"] --> F["Must fail foreign origin"]
-  X["--impl fixed"] --> P["Must pass deny plus honest allow"]
+  V["broken files --impl vulnerable"] --> F["Must fail foreign origin"]
+  X["repaired files --impl fixed"] --> P["Must pass deny plus honest allow"]
 ```
 
-| Mode | Must show for this module |
+| Mode | Must show for this topic |
 |---|---|
-| Negative / abuse | foreign origin, no token → deny; vulnerable must fail |
-| Negative | same origin, no token → deny |
+| Wrong input / abuse | foreign origin, no token → deny; broken files must fail |
+| Wrong input | same origin, no token → deny |
 | Normal | same origin, token, cookie → allow |
 | Normal / fail-closed | missing cookie → deny (may pass on both) |
 | Not claimed | GET mutate; clickjacking; CORS; postMessage |
 
-Lab tests in `labs/6.3/6.3-lab/tests/test_property.py`. `test_foreign_origin_post_is_denied` is a **forbidden-outcome** test: a cookie-only share is not allowed to count as a passing control.
+The file is `labs/6.3/6.3-lab/tests/test_property.py`. `test_foreign_origin_post_is_denied` is a **what-must-not-happen** test: a cookie-only share is not allowed to count as a passing control.
 
 ```text
 python3 -m pytest labs/6.3/6.3-lab/tests --impl vulnerable
 python3 -m pytest labs/6.3/6.3-lab/tests --impl fixed
 ```
 
-Honest same-origin-with-token may pass on both (vulnerable allows any cookie). Missing cookie may pass on both. That does not excuse the foreign-origin and same-origin-without-token tests. If vulnerable does not fail foreign origin, the lab is miswired—fix the wiring, not the assertion.
+Honest same-origin-with-token may pass on both (broken files allow any cookie). Missing cookie may pass on both. That does not excuse the foreign-origin and same-origin-without-token tests. If the broken files do not fail foreign origin, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
 
 ## What the tests do not prove
 
-- SameSite cookie flags (`v5.0.0-3.3.2`)
-- Fetch Metadata / CORP Level 3 (`v5.0.0-3.5.8`)
-- Clickjacking / `frame-ancestors` (`v5.0.0-3.4.6`)
-- postMessage origin checks (`v5.0.0-3.5.5`)
-- Open redirect (6.5)
+- SameSite cookie flags
+- Fetch metadata / CORP (advanced)
+- Clickjacking / who may frame the page
+- postMessage origin checks
+- Later open redirect
 
-Record those as residuals or later modules, not as silent passes.
+Record those as leftover or later topics, not as silent passes.
 
 ## Practice
 
-Execute both implementations this session. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `SameSite` in a cookie helper without calling `allow_share` on a foreign origin.
+Run both this session:
 
-## Transfer
+```text
+python3 -m pytest labs/6.3/6.3-lab/tests --impl vulnerable
+python3 -m pytest labs/6.3/6.3-lab/tests --impl fixed
+```
 
-Clinic partner-share. A test that only asserts HTTP 200 on `/share` is not this cell (see 9.3). A test that visits a live third-party page is out of scope.
+Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `SameSite` in a cookie helper without calling `allow_share` on a foreign origin.
 
-## Non-goals
+## Use it somewhere new
 
-Do not add a live CSRF page. Do not log cookie values. Keys stay out of this file.
+Clinic partner-share. A test that only asserts HTTP 200 on `/share` is not this cell (see the later testing topic). A test that visits a live third-party page is out of scope.
+
+## What this page is not doing
+
+Do not add a live CSRF page. Do not log cookie values. Answer keys stay out of this file.

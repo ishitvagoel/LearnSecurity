@@ -1,70 +1,73 @@
-# 6.1-LO-02 — An argv map a second engineer can test
+# An argv map someone else can test
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.2.5`.
 
-## Can a second engineer name pytest cases from your interpreter map?
+## Could someone else name the checks?
 
-“We don’t use a shell” is not this lesson. A reviewable model names **which process is invoked, which argv slots are data, and which interpreters are out of this fixture**.
+“We don’t use a shell” is not this lesson. A map someone else can test names **which process is started**, **which argv slots are data**, and **which interpreters are out of this fixture**.
 
-SecureCollab Phase 1 freeze: local `argv_for_list(name)` / `uses_shell`. No live `ls`.
+This week's freeze: local `argv_for_list(name)` and `uses_shell`. No live `ls`.
 
-## Mental model: argv slots, not a string
+> Pass the name as one argv element. The program must be a fixed binary. The shell must never see the name as grammar.
+
+## Picture: argv slots, not a string
 
 ```mermaid
 flowchart TD
-  Prog[ls] --> TCB[Lab TCB]
+  Prog[ls] --> TCB[What you trust in the lab]
   Dash["--"] --> TCB
   Name[name] --> Data[Untrusted data slot]
 ```
 
-The program path is chosen by the application. The name occupies one slot. `--` tells the binary that later tokens are operands, not flags (argument-injection residual).
+The program path is chosen by the application. The name occupies one slot. `--` tells the binary that later tokens are operands, not flags (argument-injection leftover).
 
-## Mental model: denylist is not mediation
+## Picture: a denylist is not mediation
 
 ```mermaid
 flowchart TD
-  Deny["strip ; |"] --> Still[still sh -c]
+  Deny["strip punctuation"] --> Still[still sh -c]
   Still --> Grammar[shell grammar remains]
 ```
 
-Module 2.1 already showed encodings beating string filters. This map refuses a metacharacter denylist as the property.
+Module 2.1 already showed encodings beating string filters. This map refuses a punctuation denylist as the rule.
 
-## Step 1: freeze pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | member choosing an export name |
-| Objects | argv list vs shell string |
+| Who | member choosing an export name |
+| What | argv list vs shell string |
 | Actions | `argv_for_list`, `uses_shell` |
-| Channels | OS process spawn (not executed in tests) |
-| TCB | argv array, `uses_shell is False` |
-| Untrusted | `name` |
-| State / time | One list call |
-| 1.1 cell | Integrity of the OS interpreter boundary |
+| Paths | OS process spawn (not executed in tests) |
+| What you trust | argv array, `uses_shell is False` |
+| What you do not trust | `name` |
+| Time | One list call |
+| The rule | Integrity of the OS interpreter boundary |
 
-## Step 2: write cells
+## Step 2: write allow and deny
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
 | app | `ls` | spawn with argv | allow |
 | attacker | name | as shell grammar | deny |
-| plugin | `/bin/sh` | needed shell | isolate (residual) |
-| export | CSV cells | formula chars | 1.2.10 advanced |
+| plugin | `/bin/sh` | needed shell | isolate (leftover) |
+| export | CSV cells | formula characters | advanced leftover |
+
+A missing “hostile name × shell grammar × deny” row is how `sh -c` concatenation appears. Write the hole.
 
 ## Practice
 
-Draw SQL vs shell vs template on one page. Point at `labs/6.1/6.1-lab` file `argv.py`.
+Draw SQL vs shell vs template on one page so someone else could name the pytest cases. Point at `labs/6.1/6.1-lab` file `argv.py`. Fake names only.
 
-## Transfer
+## Use it somewhere new
 
-Clinic CSV filename; Jinja includes.
+Clinic CSV filename as a second interpreter. Jinja includes.
 
-## Residual risk
+## What can still go wrong
 
-Argument injection; plugin shells; CSV formula (`v5.0.0-1.2.10` Level 3).
+Argument injection; plugin shells; formula characters in CSV cells.
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+Do not define security as a famous-bugs list. Do not run this map against a live clinic or a live export worker. Answer keys stay out of lessons.

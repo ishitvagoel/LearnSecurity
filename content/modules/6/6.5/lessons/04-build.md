@@ -1,16 +1,17 @@
-# 6.5-LO-04 — Parse, then allow-list host and scheme
+# Parse, then allow-list host and scheme
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.3.6` and `v5.0.0-13.2.4`. `v5.0.0-3.7.3` is **Level 3, advanced**.
 
-## Structural means the authority is a named peer
+## The rule
 
-`allowed` must parse the URL, require `https`, require the hostname in a small allow-list, and deny link-local and loopback. Structural means that identity check — not “starts with https”, not a denylist of one IP, not following redirects off the list.
+“Starts with https” is not the fix. A denylist of one IP is not the fix. Following redirects off the list is not the fix.
 
-The smallest restore for SecureCollab Phase 1 unfurl is: host deny unless listed. Fail-safe: unknown host **denies**. Do not fail open because the scheme is https.
+Structural means the host is a named peer. `allowed` must parse the URL, require `https`, require the hostname in a small allow-list, and deny link-local and loopback.
 
-## Mental model: host deny unless listed
+The smallest restore for notes-app unfurl is: host deny unless listed. Fail closed: unknown host **denies**. Do not fail open because the scheme is https.
+
+## Picture: host deny unless listed
 
 ```mermaid
 flowchart TD
@@ -22,11 +23,13 @@ flowchart TD
   Host -->|yes| Allow[Allow]
 ```
 
-The lab’s fixed tree requires `https` and host in `{"lab.securecollab.test"}`, and denies named block hosts. Production still needs a dedicated egress proxy if customer sites must be fetched. DNS rebinding and IPv6 encodings remain residuals. Open-redirect UX (`v5.0.0-3.7.2`) is a sister cell; user notification (`v5.0.0-3.7.3`) is Level 3 advanced.
+The lab’s repaired files require `https` and host in `{"lab.securecollab.test"}`, and deny named block hosts. Production still needs a dedicated egress proxy if customer sites must be fetched. DNS rebinding and IPv6 encodings remain leftover. Open-redirect UX is a sister check. Telling the person they are leaving the site is advanced work, not this pytest.
 
-ASVS `v5.0.0-1.3.6` wants the allow-list before calling another service. This pytest is that sentence for `allowed`. **Do not fetch.**
+Industry lists want the allow-list before calling another service. This pytest is that sentence for `allowed`. **Do not fetch.**
 
-## Why this restores the cell
+## What the repaired files must show
+
+Read `fixed/ssrf.py` against this checklist. Do not treat the snippet as a production egress proxy.
 
 | After the fix | Must be true |
 |---|---|
@@ -34,36 +37,38 @@ ASVS `v5.0.0-1.3.6` wants the allow-list before calling another service. This py
 | loopback | false |
 | `https://lab.securecollab.test/og` | true |
 
+Fail closed: if the host is not on the list, the answer is no. Uncertainty is a **deny**, not a yes because the scheme looked like https.
+
 ## What this is not
 
 HTTPS-only regex that still allows a metadata IP. Following redirects off the list. `file:` because the scheme is “local.” Pinning DNS as complete without a proxy. `requests.get` with a timeout as the policy.
 
-## Mechanism limits
+## What the tool cannot do
 
 - DNS rebinding can change the IP after the host check unless you pin or proxy.
-- IPv6 and decimal encodings of the same destination remain residuals.
+- IPv6 and decimal encodings of the same destination remain leftover.
 - Redirect following can leave the allow-list.
 - Webhook signing waits for 7.3.
 - `file:` and other schemes must deny, not “local is fine.”
 
 ## Practice
 
-Name the predicate (https ∧ host in ALLOW ∧ not blocked). Run:
+Name the check (https ∧ host in ALLOW ∧ not blocked). Run:
 
 ```text
 python3 -m pytest labs/6.5/6.5-lab/tests --impl fixed
 ```
 
-Must pass. Do not fetch the URLs.
+It must pass. Do not fetch the URLs. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-## Transfer
+## Use it somewhere new
 
 Clinic: stop fetching whatever URL the form posted; parse then allow-list.
 
-## Residual risk
+## What can still go wrong
 
-DNS rebinding; IPv6 encodings; Level 3 redirect notice; dedicated egress proxy for customer sites.
+DNS rebinding; IPv6 encodings; telling the person they left the site (advanced); dedicated egress proxy for customer sites.
 
-## Non-goals
+## What this page is not doing
 
-Do not curl metadata. Do not claim Gate 6 from an HTTPS prefix.
+Do not curl metadata. Do not claim a course gate from an HTTPS prefix.

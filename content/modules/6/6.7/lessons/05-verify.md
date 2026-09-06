@@ -1,56 +1,69 @@
-# 6.7-LO-05 — Evidence is fourth denied, then a passing pair
+# Fail on the broken files, then pass on the repaired ones
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-2.4.1`.
 
-## An invariant that cannot fail a test is still a slogan
+## If you cannot test it, it is still a slogan
 
-“Rate limit is on” is not evidence. “The button is disabled” is a mechanism observation. The oracle is: `allow(4)` is false and `allow(3)` is true. The fourth observation must be **false** on `--impl vulnerable` (returns true) and **true** on `--impl fixed`. Do not load-test public hosts.
+“Rate limit is on” is not evidence. “The button is disabled” is a tool observation. The check is: `allow(4)` is false and `allow(3)` is true. That fourth-export observation must be **false** on the broken files (returns true) and **true** on the repaired files. Do not load-test public hosts.
 
-## Mental model: vulnerable must fail: allow 4
+## Picture: unbounded allow must fail the check
 
-The failing observation on `--impl vulnerable` is **allow 4**. A passing collection count is not this cell.
+A test that only counts passing cases can pass while the fourth export still goes through. This check asks whether an unbounded fourth still counts as a passing control. Broken must fail that question. Repaired must pass it.
 
 ```mermaid
 flowchart LR
-  V["--impl vulnerable"] --> F["Must fail allow 4"]
-  X["--impl fixed"] --> P["Must pass deny at 4"]
+  V["broken files --impl vulnerable"] --> F["Must fail: allow 4"]
+  X["repaired files --impl fixed"] --> P["Must pass: deny at 4"]
 ```
 
-| Mode | Must show for this module |
-|---|---|
-| Negative / abuse | `allow(4)` false; vulnerable must fail |
-| Normal | `allow(3)` and `allow(1)` true (may pass on both) |
-| Not claimed | per-IP fairness; GraphQL; live RPS |
+If both pass, the test is not looking at the fourth export. If both fail, the fix is not structural or the check is wrong.
 
-Lab tests in `labs/6.7/6.7-lab/tests/test_property.py`. `test_fourth_export_is_denied` is a **forbidden-outcome** test: an unbounded fourth is not allowed to count as a passing control.
+## Four modes, even for one quota
+
+| Mode | Must show for this topic |
+|---|---|
+| Normal | `allow(3)` and `allow(1)` true (may pass on both) |
+| Wrong input / abuse | `allow(4)` false; broken files must fail |
+| Failure | If you cannot read the count, deny |
+| Not claimed | Per-IP fairness; GraphQL; live requests per second |
+
+The file is `labs/6.7/6.7-lab/tests/test_property.py`. The test `test_fourth_export_is_denied` is a **what-must-not-happen** test: an unbounded fourth is not allowed to count as a passing control.
+
+A test that only asserts HTTP 200 on `/export` is not this topic’s evidence. A test that only greps an edge-proxy keyword without calling `allow(4)` is not this topic’s evidence. This practice never opens a public host.
 
 ```text
 python3 -m pytest labs/6.7/6.7-lab/tests --impl vulnerable
 python3 -m pytest labs/6.7/6.7-lab/tests --impl fixed
 ```
 
-Honest `allow(3)` may pass on both implementations. That does not excuse the fourth-deny test. If vulnerable does not fail `allow(4)`, the lab is miswired—fix the wiring, not the assertion.
+Honest `allow(3)` may pass on both implementations. That does not excuse the fourth-deny test. If the broken files do not fail `allow(4)`, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
 
 ## What the tests do not prove
 
-- Human timing Level 3 (`v5.0.0-2.4.2`)
-- Per-subject vs per-IP in production (named in LO-02)
-- File storage quotas (`v5.0.0-5.2.4` Level 3, 6.4)
+- Human timing tricks (advanced, not this pytest)
+- Per-person vs per-IP in production (named in the quota map)
+- File storage quotas (a different budget, later)
 - Cost of a real cloud bill
 - GraphQL alias multiplication (7.1)
 
-Record those as residuals or later modules, not as silent passes.
+Record those as leftover or later topics, not as silent passes.
 
 ## Practice
 
-Execute both implementations this session. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `limit_req` in nginx without calling `allow(4)`.
+Run both this session:
 
-## Transfer
+```text
+python3 -m pytest labs/6.7/6.7-lab/tests --impl vulnerable
+python3 -m pytest labs/6.7/6.7-lab/tests --impl fixed
+```
 
-Clinic bulk-export. A test that only asserts HTTP 200 on `/export` is not this cell (see 9.3). A public load test is out of scope.
+Paste nothing from answer keys. Write fail/pass into your notes next to the matrix row. Reject a “test” that only greps an edge-proxy keyword without calling `allow(4)`.
 
-## Non-goals
+## Use it somewhere new
 
-Do not add a live RPS trophy. Do not log CSV bodies. Keys stay out of this file.
+Clinic bulk-export. A test that only asserts HTTP 200 on `/export` is not this check (see 9.3). A public load test is out of scope.
+
+## What this page is not doing
+
+Do not add a live load trophy. Do not log CSV bodies. Answer keys stay out of this file.

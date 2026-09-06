@@ -1,18 +1,25 @@
-# 6.3-LO-03 — Observe cookie-only share, do not trophy a third-party site
+# Practice: a cross-site POST authorized by cookie alone
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-3.5.1`. `v5.0.0-3.5.8` is **Level 3, advanced**. SameSite is a helper, not this oracle.
 
-## Authorized scope
+## Try it
 
-`labs/6.3/6.3-lab` only. The fixture is an in-process `allow_share`. Synthetic origins `https://evil.example` and `https://app.securecollab.test`. It does not open a browser. Do not visit a lookalike page, an employer share endpoint, or a classmate preview as this exercise.
+The practice is not a website you attack. It is a tiny Python `allow_share`. The failure is already in the function: it treats a leftover session cookie as consent to share. You are here to see that the check treats that as a **failed rule**, not as a trophy against another site.
 
-**Forbidden outcome:** cross-origin state-changing POST authorized by cookie alone. `allow_share("https://evil.example", expected, token=None)` returns true.
+The rule under test:
 
-Attacker capability in this lab: a foreign origin that can cause the victim browser to POST while the session cookie is ambient. That stands in for a clinic “share with partner” button the user did not click on this site. Trust assumption: `allow_share` is supposed to require cookie **and** origin match **and** a matching token. SameSite=Lax, CORS, and “the user is logged in” are not in the TCB for this cell.
+> Leftover cookies are not consent to share. If `allow_share` from a foreign origin with `token=None` is true, leftover cookie authority has replaced site-bound intent.
 
-## Mental model: cookie is enough in the vulnerable tree
+## Where you may practice
+
+Only `labs/6.3/6.3-lab` is in scope. The check is in-process `allow_share`. Origins `https://evil.example` and `https://app.securecollab.test` are fake. It does not open a browser. Do not visit a lookalike page, an employer share endpoint, or a classmate preview as this exercise.
+
+What must not happen: a cross-site POST that changes a share, authorized by cookie alone. `allow_share("https://evil.example", expected, token=None)` returns true.
+
+Who can act in this story: a foreign origin that can cause the victim browser to POST while the session cookie is leftover. That stands in for a clinic “share with partner” button the person did not click on this site. What you trust: `allow_share` is supposed to require cookie **and** origin match **and** a matching CSRF token. SameSite=Lax, CORS, and “the user is logged in” are not what you trust for this cell.
+
+## Picture: leftover cookie is enough in the broken files
 
 ```mermaid
 flowchart TD
@@ -20,42 +27,42 @@ flowchart TD
   Cookie -->|yes| True["returns true"]
 ```
 
-The vulnerable tree demonstrates **cause** (ambient cookie treated as consent), not a cross-site trophy against a public app. Preconditions: `allow_share` returns `session_cookie` and ignores origin and token. You do not need a live third-party page. You must not build one.
+The broken files show **cause** (leftover cookie treated as consent), not a cross-site trophy against a public app. What has to be true first: `allow_share` returns `session_cookie` and ignores origin and token. You do not need a live third-party page. You must not build one.
 
-ASVS `v5.0.0-3.5.1` wants anti-forgery tokens (or extra non-CORS-safelisted headers). SameSite (`v5.0.0-3.3.2`) is set according to purpose — a helper, not complete.
+SameSite set for purpose is a helper, not complete. Industry checklists want anti-forgery tokens (or extra headers a simple form cannot set). This practice is that sentence for `allow_share`.
 
-## What to read in the fixture
+## What to look at — cause, not a trophy
 
-`vulnerable/csrf.py` returns `session_cookie` and ignores origin and token. Tests:
+Read `vulnerable/csrf.py`. It returns `session_cookie` and ignores origin and token. Tests:
 
 - `test_foreign_origin_post_is_denied`
 - `test_same_origin_without_token_is_denied`
-- `test_same_origin_with_token_is_allowed` — honest path; may pass on vulnerable because a cookie is present
+- `test_same_origin_with_token_is_allowed` — honest path; may pass on the broken files because a cookie is present
 - `test_missing_cookie_is_denied` — may pass on both
 
 You do not need a new origin string. The failure of `test_foreign_origin_post_is_denied` *is* the evidence.
 
-Do not open the fixed tree yet. Diagnose the cause first.
+Do not open the repaired files yet. Diagnose the cause first.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens vs what it costs
 
-| Slice | This lab |
+| Slice | Practice |
 |---|---|
-| Required property | Foreign origin without token cannot share |
-| Root cause | Cookie authority used without site-bound intent |
-| Preconditions | `allow_share` returns true whenever `session_cookie` is true |
+| Required rule | Foreign origin without token cannot share |
+| Why it happens | Cookie authority used without site-bound intent |
+| What has to be true first | `allow_share` returns true whenever `session_cookie` is true |
 | Trigger | `allow_share` with foreign origin and `token=None` |
-| Impact | Integrity of share grants (4.4); unwanted collaborator |
-| Prevention | Cookie ∧ origin == expected ∧ matching token; fail closed |
-| Detection | `foreign_origin_post_denied` by expected host; never the cookie |
-| Recovery | Keep deny; revoke grants created in the window |
-| Not the lesson | SameSite as the definition, CORS, or a live third-party page |
+| What it costs | Integrity of share grants; unwanted collaborator |
+| How you stop it later | Cookie and origin == expected and matching token; fail closed |
+| How you notice later | `foreign_origin_post_denied` by expected host; never the cookie |
+| How you recover later | Keep deny; revoke grants created in the window |
+| Out of scope | SameSite as the definition, CORS, or a live third-party page |
 
-## Framework defaults versus the intent guarantee
-
-FastAPI `Request.cookies` will attach whatever the browser sent. Starlette CORSMiddleware is not CSRF. Next.js server actions still need origin/token at the grant. The application guarantee is: **this** fixture, foreign origin + no token is False.
+FastAPI `Request.cookies` will attach whatever the browser sent. Starlette CORS middleware is not CSRF. Next.js server actions still need origin and token at the grant. The app’s promise is: **this** check, foreign origin + no token is False.
 
 ## Practice
+
+From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/6.3/6.3-lab/tests --impl vulnerable
@@ -63,10 +70,10 @@ python3 -m pytest labs/6.3/6.3-lab/tests --impl vulnerable
 
 Record `test_foreign_origin_post_is_denied`. Do not visit `evil.example` as a real host. An environment error is not security evidence.
 
-## Transfer
+## Use it somewhere new
 
-Clinic partner-share. Predict without leaving this directory. Do not hit a live EHR.
+Clinic partner-share. Predict without leaving this directory. Do not hit a live clinic system.
 
-## Non-goals
+## What this page is not doing
 
-No live-target instructions. Synthetic origins only.
+No live-target CSRF walkthroughs. Fake origins only. Do not “fix” the practice by deleting the test.

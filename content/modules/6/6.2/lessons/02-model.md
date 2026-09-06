@@ -1,16 +1,15 @@
-# 6.2-LO-02 — A context map a second engineer can test
+# A context map someone else can test
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.2.1`. CSP3 **draft**.
 
-## Can a second engineer name pytest cases from your context map?
+## Could someone else name the checks from your map?
 
-“We enabled CSP” is not this lesson. A reviewable model names **the sink, the context, and what encoding applies**.
+“We turned on a content-security policy” is not this lesson. A map someone else can test names **the sink, the context, and what encoding applies**.
 
-SecureCollab Phase 1 freeze: local `render(body)` wrapping a `<p>` text node. No live DOM.
+This week’s freeze: the notes app’s local `render(body)` wrapping a `<p>` text node. No live page. No real browser.
 
-## Mental model: one sink, one context in this lab
+## Picture: one sink, one context in this practice
 
 ```mermaid
 flowchart TD
@@ -18,9 +17,9 @@ flowchart TD
   P --> Enc{"< encoded?"}
 ```
 
-Attribute, JS, and URL contexts are named holes, not this fixture.
+Attribute, JavaScript, and URL contexts are named holes, not this fixture.
 
-## Mental model: React is not the TCB
+## Picture: React is not what you trust
 
 ```mermaid
 flowchart TD
@@ -31,40 +30,40 @@ flowchart TD
 
 Framework defaults help only at the constructors you actually use.
 
-## Step 1: freeze pieces
+## Step 1: freeze the pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | collaborator editing a title |
-| Objects | HTML text vs markup |
+| Who | Collaborator editing a title |
+| What | HTML text vs markup |
 | Actions | `render` |
-| Channels | HTML document |
-| TCB | HTML-text encoder |
-| Untrusted | title / body string |
-| State / time | stored title, later rendered |
-| 1.1 cell | Integrity of the HTML interpreter |
+| Paths | HTML document |
+| What you trust | The HTML-text encoder |
+| What you do not trust | The title / body string |
+| Time | Stored title, later drawn |
+| Integrity cell | Integrity of the HTML interpreter |
 
-## Step 2: write cells
+## Step 2: write cells the practice can fail
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
 | app | title | HTML text | encode `<` |
 | attacker | title | as HTML grammar | deny |
-| markdown | HTML | second parse | 2.1 residual |
-| CSP | script loads | extra layer | draft, not this test |
+| markdown | HTML | second parse | 2.1 leftover |
+| content-security policy | script loads | extra layer | draft, not this check |
 
 ## Practice
 
-Draw text vs attr vs JS vs URL. Point at `labs/6.2/6.2-lab` file `html.py`.
+Draw text vs attribute vs JavaScript vs URL. Point at `labs/6.2/6.2-lab` file `html.py`. Label the sink as HTML text even in the repaired tree — the fix is encoding at that sink, not pretending a header became encoding.
 
-## Transfer
+## Use it somewhere new
 
-Clinic nickname; markdown pipeline.
+Clinic nickname. Markdown pipeline.
 
-## Residual risk
+## What can still go wrong
 
-Trusted admin HTML; CSP report-only; JS-context encoding (`v5.0.0-1.2.3`).
+Trusted admin HTML. Content-security policy in report-only mode. Encoding for a JavaScript string (a different cell).
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+Do not define security as a famous-bugs list. Answer keys stay out of lessons.

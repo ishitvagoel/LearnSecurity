@@ -1,14 +1,17 @@
-# 6.7-LO-06 — Detect quota_denied and cost_alert
+# Notice quota_denied and cost_alert
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
-**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-2.4.1`. CSF names outcomes; it does not count exports.
 
-## Prevention is not absolute
+## Stopping it is not enough
 
-A new export format can skip the counter after `allow` was “fixed once.” Pair detect and recover. Do not log note bodies in the CSV path (3.1 / 5.1). Do not attach the CSV to the ticket.
+Even after `allow` was “fixed once,” a new export format can skip the counter. Running it for real is the rest of the loop: notice, contain, and recover.
 
-## Mental model: fourth try is a signal
+Do not log note bodies in the CSV path (3.1 / 5.1). Do not attach the CSV to the ticket.
+
+## Picture: the fourth try is a signal
+
+A fourth export in the window is a notice-and-recover problem, not a licence to quote note bodies in the paging channel. Notice names the event. Recover keeps the deny and revokes a stolen session. Neither reprints the CSV.
 
 ```mermaid
 flowchart TD
@@ -18,37 +21,46 @@ flowchart TD
   Cost --> Stop[Disable token if stolen session]
 ```
 
-| Outcome | This module |
+Industry lists name detect, respond, recover. They do not count exports. A filter-product name is not the rule. Someone still has to own the budget.
+
+## Signals that do not become a second leak
+
+| Outcome | This topic |
 |---|---|
-| Detect | `quota_denied`; `cost_alert` |
-| Signal | request id, subject id, n; never the CSV body |
-| Recover | Keep deny; revoke session if automated; owned burst exception if documented |
-| Residual | New accounts; GraphQL (7.1) |
+| Notice | `quota_denied`; `cost_alert` |
+| What the line holds | request id, subject id, n — **never** the CSV body |
+| Respond | Keep deny |
+| Recover | Revoke the session if it looks automated; owned burst exception if it is written down; re-run `test_fourth_export_is_denied` |
+| Leftover | New accounts; GraphQL aliases (7.1) |
 
-CSF 2.0 Detect / Respond / Recover name outcomes. They do not prove `v5.0.0-2.4.1`. A CDN WAF product name is not the property. Re-run `test_fourth_export_is_denied` after any export-route change; a green “rate limit enabled” tile is not that pytest. Notification fan-out and extra formats are other paths of the same budget — inventory them before claiming Recover.
-
-## Framework defaults versus the operate guarantee
-
-An nginx dashboard will show 429s on an IP and stay silent when `/export.csv` still has no per-subject counter. Detection must observe **`allow(4)` false**, not HTTP status counts. If the alert includes note bodies from the CSV, you have opened a 3.1 / 5.1 cell.
-
-## Practice
-
-Write one log line you would accept. Tie it to `labs/6.7/6.7-lab`.
+A log line a reviewer can accept looks like:
 
 ```text
 log_denied reason=quota_denied n=4 subject=user_67e request_id=req_67e
 ```
 
-Reject any line that includes note bodies, a real email, or a live RPS trace against a public host.
+Not: a note body, a CSV attachment, a real email, or a live load trace against a public host.
 
-## Transfer
+If your alert includes note bodies from the CSV, you have opened a second leak in the paging channel.
 
-Clinic: detect bulk-export over quota; do not attach the CSV to the ticket. Do not load-test a live EHR.
+A green “rate limit enabled” tile is not that pytest. Notification fan-out and extra formats are other paths of the same budget — inventory them before claiming recover. Re-run `test_fourth_export_is_denied` after any export-route change.
 
-## Usability
+## What the framework does vs what you still have to check
 
-If a human sees a quota deny, announce “try tomorrow” (WCAG 2.2 Success Criterion 4.1.3). A spinner that retries spends the budget for them.
+An edge dashboard will show 429s on an IP and stay silent when `/export.csv` still has no per-person counter. Detection must observe **`allow(4)` false**, not HTTP status counts. If the alert includes note bodies from the CSV, you have opened a 3.1 / 5.1 cell.
 
-## Non-goals
+## Practice
 
-A CDN WAF product name is not the property. Public load tests are out of scope. Gates 0–10 stay not-attempted.
+Write one log line you would accept in review (ids, reason, n, no body). Tie it to `labs/6.7/6.7-lab`. Reject any line that includes note bodies, a real email, or a live load trace against a public host.
+
+## Use it somewhere new
+
+Clinic: notice bulk-export over quota; do not attach the CSV to the ticket. Do not load-test a live clinic system.
+
+## Can people still use it
+
+If a human sees a quota deny, announce “try tomorrow.” A spinner that retries spends the budget for them.
+
+## What this page is not doing
+
+A filter-product name is not the rule. Public load tests are out of scope. Course gates stay unclaimed. Answer keys stay out of lessons.

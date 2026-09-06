@@ -1,27 +1,27 @@
-# 6.6-LO-07 — Transfer: clinic invite-guardian token
+# Same idea on a clinic invite-guardian token
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-2.3.4`. Top 10 A10 is awareness after.
 
-## Change the workplace; keep consume-once
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: second `accept('t1')` must be false. Rewrite it for a clinic without changing the fork.
+The notes-app scaffolding goes away. You get a **clinic invite-guardian token**. An “add guardian” mail link always returns 200. Your job is to rewrite the loop, not to name a bug-list code.
 
-**Prompt:** Clinic invite-guardian token. Also name password reset, 2.4 share retry, and 7.4 jobs as the same family with different “once” meanings.
+The notes-app sentence was: second `accept('t1')` must be false. Rewrite it for a clinic without changing the fork: consume-once, first true, second false.
 
-**Product sketch:** EHR-lite “add guardian” mail link that always returns 200.
+Also name password reset, 2.4 share retry, and later jobs (7.4) as the same family with different “once” meanings.
 
-Rewrite the SecureCollab sentence. Include:
+## Picture: guardian invite is still a limited seat
 
-1. attacker capabilities (two clicks or a copied link — not a live clinic);
-2. trust assumptions (consume in the store is TCB; HTTP 400 is not);
-3. forbidden outcome (second `accept` true, not “HIPAA”);
-4. a test idea on a **local** fixture only (first true, second false);
-5. residual (TOCTOU without lock; fail-open; token in URL; phishing; Level 3 last-resort handler);
-6. WCAG if a human “link already used” path is in the claim (announced status, not a silent retry loop).
+Renaming “t1” to “guardian” is not transfer. The leftover changes. A click counter is not consume. FastAPI, a unique-index screenshot, and “we emailed the guardian” do not consume.
 
-## Mental model: guardian invite is still a limited seat
+| Notes app this week | Clinic sketch |
+|---|---|
+| `t1` invite token | Guardian mail-link token |
+| `accept` | Join analogue |
+| second `accept` false | Second click must not add another guardian |
+| Two tabs / copied link | Two clicks / copied link — **not** a live clinic |
+| Password reset; 2.4 retry; 7.4 jobs | Same family — name the “once,” do not run them here |
 
 ```mermaid
 flowchart LR
@@ -29,24 +29,33 @@ flowchart LR
   Twice[two accepts] --> Reality[two memberships if not consumed]
 ```
 
-If the mail link always returns 200 and never writes used, the cell is gone. FastAPI, a unique index screenshot, and “we emailed the guardian” do not consume. Password reset, 2.4 share retry, and 7.4 jobs are the same family: name the “once,” do not run those systems here. Magic-link standing session is 4.3 — exchange for a cookie (this module owns consume).
+If the mail link always returns 200 and never writes used, the hole is open. A magic-link that stays a standing session is 4.3 — exchange it for a cookie; this week's check owns consume. Adding a unique index without a second-accept test leaves `accept` always true. The local pytest analogue is `test_invite_token_is_single_use` — on a fixture, not a live mail link.
 
-The clinic rewrite still has to keep the SecureCollab fork: first accept true, second false, distinct tokens independent. Adding a unique index without a second-accept test leaves `accept` always true. The local pytest analogue is `test_invite_token_is_single_use` — on a fixture, not a live mail link.
+## Prompt — clinic invite-guardian
 
-## What graders reject
+Rewrite the notes-app sentence. Include:
+
+1. who can act (two clicks or a copied link — **not** a live clinic);
+2. what you trust (consume in the store is trusted; HTTP 400 is not);
+3. what must not happen (second `accept` true, not a legal label);
+4. a test idea on **local** files only (first true, second false — never on the real clinic);
+5. leftover (two accepts that both see unused; fail-open; token in URL; phishing; last-resort error handler is advanced);
+6. whether a human-read “link already used” status must not use color as the only cue.
+
+## What is not good enough
 
 | Reject | Why |
 |---|---|
 | “We return 400” | Error page is not consume |
-| Live clinic probe | Lab policy |
-| A10 as the property | Awareness after the cause |
+| Live clinic probe | Course rules |
+| A famous-bugs list as the rule | Awareness after the cause |
 | HTTP 200 as consume evidence | Wrong observation |
-| Unique index without a write | Mechanism theater |
+| Unique index without a write | Tool theater |
 
 ## Practice
 
-One page. No keys. `labs/6.6/6.6-lab` is the only running system you may break. Do not click a live invite.
+One page. No answer keys. The only running system you may break is `labs/6.6/6.6-lab`. Do not click a live invite.
 
-## Non-goals
+## What this page is not doing
 
-Live-target races. Real invite tokens. Claiming Gate 6 from this page.
+Live-target races. Real invite tokens. Claiming a course gate from this page.

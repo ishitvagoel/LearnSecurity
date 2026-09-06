@@ -1,16 +1,15 @@
-# 6.3-LO-02 — An origin × token map a second engineer can test
+# An origin-and-token map someone else can test
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-3.5.1`.
 
-## Can a second engineer name pytest cases from your origin map?
+## Could someone else name pytest cases from your origin map?
 
-“SameSite is on” is not this lesson. A reviewable model names **who may POST share, with which cookie, origin, and token**.
+“SameSite is on” is not this page. A map someone else can test names **who may POST share, with which cookie, origin, and token**.
 
-SecureCollab Phase 1 freeze: local `allow_share(origin, expected, token, session_cookie)`. No live browsers.
+This week’s freeze: local `allow_share(origin, expected, token, session_cookie)`. No live browsers.
 
-## Mental model: three inputs, one decision
+## Picture: three inputs, one decision
 
 ```mermaid
 flowchart TD
@@ -21,7 +20,7 @@ flowchart TD
 
 Missing cookie denies. Matching origin without token denies. Foreign origin denies.
 
-## Mental model: Bearer is a different deputy
+## Picture: a hand-attached token is a different helper
 
 ```mermaid
 flowchart LR
@@ -29,20 +28,20 @@ flowchart LR
   Bearer[Authorization] --> Manual[caller must attach]
 ```
 
-This lab is the cookie deputy. Do not treat a Bearer-only API as “CSRF solved” if a cookie fallback still exists.
+This lab is the leftover-cookie helper. Do not treat a Bearer-only API as “CSRF solved” if a cookie fallback still exists.
 
 ## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | victim browser; foreign origin |
+| People | victim browser; foreign origin |
 | Objects | share grant |
 | Actions | `allow_share` |
-| Channels | cookie; Origin; CSRF token |
-| TCB | origin match **and** token when cookie present |
-| Untrusted | Origin header from the request; missing token |
-| State / time | one POST |
-| 1.1 cell | Integrity of share grants |
+| Paths | cookie; Origin; CSRF token |
+| What you trust | origin match **and** token when cookie present |
+| What you do not trust | Origin header from the request; missing token |
+| Time | one POST |
+| The rule | Integrity of share grants |
 
 ## Step 2: write cells
 
@@ -58,14 +57,14 @@ This lab is the cookie deputy. Do not treat a Bearer-only API as “CSRF solved�
 
 Fill the matrix. Point at `labs/6.3/6.3-lab` file `csrf.py`.
 
-## Transfer
+## Use it somewhere new
 
 Clinic partner-share POST; postMessage origin check.
 
-## Residual risk
+## What can still go wrong
 
-Clickjacking; CORS credentials; `v5.0.0-3.5.8` Level 3 embeds; 4.2 lookalike UI.
+Clickjacking; CORS credentials; advanced authenticated embeds; lookalike UI from the phishing lesson.
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+A famous-bugs list as the definition of security. Answer keys stay out of lessons.

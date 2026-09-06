@@ -1,20 +1,19 @@
-# 6.7-LO-01 — Export has a resource account, not an unbounded loop
+# Export has a budget, not an unbounded loop
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-2.4.1`, `v5.0.0-2.1.3`, `v5.0.0-2.3.2`; `v5.0.0-2.4.2` is **Level 3, advanced**. API4/API6 are *awareness after* the cause (also 3.4). nginx is not this sentence.
 
-## The claim this module owns
+## The rule
 
-SecureCollab Phase 1 export copies note bodies (5.1). Unbounded exports exhaust budget and create extra copies. Fairness is a 1.1 **availability and cost** cell, not “ops will scale it.” Module 3.4 already capped shares on the write path; this module’s cell is **how many exports in a window**.
+The notes app lets a member export notes. Export copies note bodies into a CSV. If export can run forever, two things happen: you spend the machine and the bill, and you mint extra copies of the same bodies. Fairness is an **availability and cost** rule, not “ops will scale it.” Module 3.4 already put a cap on shares on the write path. This week’s check is **how many exports in a window**.
 
 > `allow(4)` must be false in the lab window. `allow(3)` may be true. The fourth export is denied.
 
-The forbidden outcome is **unbounded exports (4th allowed)**. That is availability/cost plus secondary confidentiality via extra CSVs of bodies.
+What must not happen is **unbounded exports (fourth allowed)**. That burns availability and cost. It also makes extra CSVs of note bodies, which is a second secrecy problem from the copies lesson (5.1).
 
-ASVS `v5.0.0-2.4.1` wants anti-automation against quota exhaustion and costly resources. `v5.0.0-2.1.3` wants documented per-user and global limits. `v5.0.0-2.3.2` wants those limits implemented. `v5.0.0-2.4.2` (human timing) is **Level 3, advanced**.
+Industry lists want a stop against scripts that burn quota and costly work. They want per-person and whole-app limits written down, then actually enforced. Human timing tricks are **advanced** work, not this week’s pytest. An edge proxy’s request limit is not this sentence.
 
-## Mental model: a resource account per subject
+## Picture: a resource account per person
 
 ```mermaid
 flowchart TD
@@ -24,61 +23,61 @@ flowchart TD
   Cap -->|no| Deny[Deny]
 ```
 
-The attacker is a scripted member or a stolen session. Trust is local `allow(n)`. nginx rate limit without identity is **shared-fate**: NAT users share a bucket; a stolen session is not a new IP.
+Who can act: a scripted member, or anyone who stole a session. What you trust in this practice: local `allow(n)`. An IP limit at the edge with no identity is **shared fate**: people behind one office network share a bucket, and a stolen session is not a new IP.
 
-**Mechanism (not the property):** CAPTCHA, autoscaling, or a frontend disable of the button.
+**The tool (not the rule):** a CAPTCHA, autoscaling, or a frontend that disables the export button.
 
-## Mental model: extra copies are still 5.1
+## Picture: extra copies are still copies
 
 ```mermaid
 flowchart LR
   Export[each export] --> Copy[another CSV of bodies]
-  Copy --> Life["5.1 deletion graph"]
+  Copy --> Life[still a copy you have to delete later]
 ```
 
-Quota is not encryption and not deletion. It bounds how many copies you mint.
+A quota is not encryption and not deletion. It bounds how many copies you mint.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | For this property |
+| Slice | For this rule |
 |---|---|
-| Root cause | No resource account |
-| Preconditions | `allow(4)` is true |
+| Why it happens | No resource account |
+| What has to be true first | `allow(4)` is true |
 | Trigger | Fourth export in the window |
-| Impact | Availability, cost, extra copies |
-| Prevention | Per-subject quota on the write path |
-| Detection | `quota_denied`; `cost_alert` |
-| Recovery | Disable token; investigate cost |
+| What it costs | Availability, cost, extra copies |
+| How you stop it | Per-person quota on the write path |
+| How you notice | `quota_denied`; `cost_alert` |
+| How you recover | Disable the token; investigate cost |
 
-## Framework defaults versus the quota guarantee
+## What the framework does vs what you still have to check
 
-SPA `disabled={count>=3}` is not the server. FastAPI has no default export budget. Autoscaling spends more money; it does not enforce the cell.
+A web page with `disabled={count>=3}` is not the server. FastAPI has no default export budget. Autoscaling spends more money; it does not enforce the cap. The app’s promise: `allow(4)` is false in the lab window. The folder is `labs/6.7/6.7-lab`. Fake counts only. No live traffic.
 
-## Mechanism limits
+## What the tool cannot do
 
-- Per-IP limits punish NAT; need per-subject.
-- New accounts and GraphQL aliases (7.1) bypass a single counter.
-- Legitimate burst needs an **owned** exception, documented (`v5.0.0-2.1.3`).
+- Per-IP limits punish people on a shared network; you need a per-person account.
+- New accounts and GraphQL aliases (7.1) can skip a single counter.
+- A legitimate burst needs an **owned** exception, written down, not a silent hole.
 
-## Usability and accessibility
+## Can people still use it
 
-Quota errors must be readable (WCAG 2.2 4.1.3). Do not trap keyboard users in a spinner that retries and amplifies load.
+Quota errors must be something a screen reader can announce. Do not trap keyboard users in a spinner that retries and burns the budget for them.
 
 ## Practice
 
 Name CPU, bytes, and paid API calls as budget rows. Then run:
 
-```
+```text
 python3 -m pytest labs/6.7/6.7-lab/tests --impl vulnerable
 python3 -m pytest labs/6.7/6.7-lab/tests --impl fixed
 ```
 
 The first command must fail. The second must pass.
 
-## Transfer
+## Use it somewhere new
 
-Clinic bulk-export patients. Notification fan-out; search complexity.
+Clinic bulk-export of patients. Notification fan-out. Search complexity later in 7.1.
 
-## Non-goals
+## What this page is not doing
 
-Live load tests against public hosts, dumping lab Python into notes. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not in this file.
+Live load tests against public hosts, dumping lab Python into notes. Course gates stay unclaimed. Answer keys are not in this file.

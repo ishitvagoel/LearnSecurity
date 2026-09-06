@@ -1,14 +1,13 @@
-# 6.3-LO-06 — Detect foreign_origin_post_denied; revoke surprise shares
+# Notice a foreign-origin POST; revoke surprise shares
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
-**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-3.5.1`. CSF names outcomes; it does not bind origin and token.
 
-## Prevention is not absolute
+## Stopping it is not enough
 
-A new JSON share route can forget the token check after `allow_share` was “fixed once.” Pair detect and recover. Do not log cookie values (4.3) or note bodies (3.1). Do not paste cookies into the ticket.
+A new JSON share route can forget the token check after `allow_share` was “fixed once.” Pair notice and recover. Do not log cookie values or note bodies. Do not paste cookies into the ticket.
 
-## Mental model: denied foreign POST is a signal
+## Picture: a denied foreign POST is a signal
 
 ```mermaid
 flowchart TD
@@ -18,18 +17,22 @@ flowchart TD
   Alert --> Revoke[Revoke surprise shares]
 ```
 
-| Outcome | This module |
+| Outcome | This topic |
 |---|---|
-| Detect | `foreign_origin_post_denied` |
-| Signal | request id, expected origin host; never the cookie or token |
+| Notice | `foreign_origin_post_denied` |
+| What the line holds | request id, expected origin host; never the cookie or token |
 | Recover | Keep deny; revoke grants created in the window; notify the member |
-| Residual | Lookalike UI the user clicked (4.2); clickjacking |
+| Leftover | Lookalike UI the person clicked (phishing lesson); clickjacking |
 
-CSF 2.0 Detect / Respond / Recover name outcomes. They do not prove `v5.0.0-3.5.1`. A WAF product name is not the property. Re-run `test_foreign_origin_post_is_denied` after any share-route change; a green “SameSite=Lax” tile is not that pytest. JSON share routes and GET mutate paths are other paths of the same cell — inventory them before claiming Recover.
+Industry lists name detect, respond, recover. They do not bind origin and token. They do not prove the anti-forgery check. A network-filter product name is not the rule. Re-run `test_foreign_origin_post_is_denied` after any share-route change; a green “SameSite=Lax” tile is not that pytest. JSON share routes and GET mutate paths are other paths of the same cell — inventory them before you claim recover.
 
-## Framework defaults versus the operate guarantee
+## What the framework does vs what you still have to check
 
-A WAF will page on cross-site POST volume and stay silent when `/share.json` still keys only the cookie. Detection must observe **origin mismatch or missing token at `allow_share`**, not CORS error counts. If the alert includes a session cookie or CSRF token, you have opened a 4.3 cell.
+A network filter will page on cross-site POST volume and stay silent when `/share.json` still keys only the cookie. Notice must observe **origin mismatch or missing token at `allow_share`**, not CORS error counts. If the alert includes a session cookie or CSRF token, you have opened a logging cell from an earlier topic.
+
+## Can people still use it
+
+If a human sees “share blocked,” announce it in text a screen reader can speak. A silent no-op pushes people to retry from a lookalike (phishing lesson).
 
 ## Practice
 
@@ -41,14 +44,10 @@ log_denied reason=foreign_origin_post_denied expected_host=app.securecollab.test
 
 Reject any line that includes a session cookie, CSRF token, or note body.
 
-## Transfer
+## Use it somewhere new
 
-Clinic: detect partner-share POSTs from the wrong origin; do not paste cookies into the ticket. Do not visit a live foreign origin.
+Clinic: notice partner-share POSTs from the wrong origin; do not paste cookies into the ticket. Do not visit a live foreign origin.
 
-## Usability
+## What this page is not doing
 
-If a human sees “share blocked,” announce it (WCAG 2.2 Success Criterion 4.1.3). A silent no-op pushes people to retry from a lookalike (4.2).
-
-## Non-goals
-
-A WAF product name is not the property. Live third-party CSRF is out of scope. Gates 0–10 stay not-attempted.
+A network-filter product name is not the rule. Live third-party CSRF is out of scope. Course gates stay unclaimed. Answer keys stay out of lessons.

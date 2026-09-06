@@ -1,33 +1,32 @@
-# 6.4-LO-01 — A filename is data, not a filesystem object
+# A filename is data, not a filesystem object
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-5.3.2`, `v5.0.0-5.3.1`, `v5.0.0-5.2.2`; `v5.0.0-5.3.3` is **Level 3, advanced**. CWE-22/434/502 are *awareness after* the cause. Starlette `UploadFile.filename` is not this sentence.
 
-## The claim this module owns
+## The rule
 
-SecureCollab Phase 1 stores an upload under a lab root. The **filename is data**. After join and canonicalize, the object must still be that root. Module 6.1 taught data vs interpreter grammar; this module’s cell is **which file object** the path parser selected.
+The notes app stores an upload under a lab folder. The **filename is data**. After you join it to the folder and canonicalize, the object must still be that folder. An earlier topic taught data vs interpreter grammar; this week’s cell is **which file object** the path parser selected.
 
-> `resolve` must not return a path outside `/tmp/sc-lab`. A `../` name is data that tried to become a different object. This lab asserts prefix and raises; it does not read host files.
+> `resolve` must not return a path outside `/tmp/sc-lab`. A `../` name is data that tried to become a different object. This practice checks the prefix and raises; it does not read host files.
 
-The forbidden outcome is **a resolved path that escapes the lab root**. That is a 1.1 authorization failure of *which object* plus integrity of the host store.
+What must not happen is **a resolved path that leaves the lab folder**. That is a who-is-allowed failure of *which object*, plus whether the host store stays honest.
 
-ASVS `v5.0.0-5.3.2` wants internally generated names or strict validation of user filenames (path traversal / LFI / RFI / SSRF). `v5.0.0-5.3.1` wants uploaded files not executed as server code. `v5.0.0-5.2.2` wants extension matching content. `v5.0.0-5.3.3` (zip slip / ignore user paths inside archives) is **Level 3, advanced**.
+Awareness lists name “path walk” as a family. They are not this sentence. Industry checklists want internally generated names or a hard check on user filenames, uploaded files not run as server code, and an extension that matches the content. Names inside zip files that walk out are a later, harder leftover — not this pytest. Starlette `UploadFile.filename` is not this sentence.
 
-## Mental model: path grammar mixed with data
+## Picture: path grammar mixed with data
 
 ```mermaid
 flowchart TD
   Name[filename as data] --> Mix{join without canonicalize?}
-  Mix -->|yes| Other["object outside lab root"]
+  Mix -->|yes| Other["object outside lab folder"]
   Mix -->|no| Prefix["stays under /tmp/sc-lab"]
 ```
 
-The attacker is an uploader who controls a filename field. Trust is local `resolve()` under `/tmp/sc-lab`. Do not open host files outside this fixture.
+Who can act: an uploader who controls a filename field. What you trust: local `resolve()` under `/tmp/sc-lab`. Do not open host files outside this practice.
 
-**Mechanism (not the property):** a UUID stored name, an antivirus product, or a denylist of `..`.
+**A tool is not the rule.** A UUID stored name, an antivirus product, or a denylist of `..` is not this sentence.
 
-## Mental model: join, canonicalize, then prefix
+## Picture: join, canonicalize, then prefix
 
 ```mermaid
 flowchart LR
@@ -37,46 +36,46 @@ flowchart LR
   Check -->|no| Deny[Deny]
 ```
 
-Stripping `..` without canonicalize still fails on encodings (2.1). UUID names without a prefix check still fail if you later join the original filename.
+Stripping `..` without canonicalize still fails on encodings. UUID names without a prefix check still fail if you later join the original filename.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | For this property |
+| Slice | For this rule |
 |---|---|
-| Root cause | Path grammar mixed with data; no canonicalization |
-| Preconditions | `resolve('../outside')` leaves the root |
+| Why it happens | Path grammar mixed with data; no canonicalization |
+| What has to be true first | `resolve('../outside')` leaves the folder |
 | Trigger | User-supplied relative segments |
-| Impact | Authorization of which file object |
-| Prevention | Join + canonicalize + prefix; random stored names; never execute uploads |
-| Detection | `path_escape_denied` |
-| Recovery | Audit the store; restore |
+| What it costs | Who is allowed to pick which file object; the host store can change |
+| How you stop it | Join + canonicalize + prefix; random stored names; never run uploads as code |
+| How you notice | `path_escape_denied` |
+| How you recover | Audit the store; restore |
 
-## Framework defaults versus the path guarantee
+## What the framework does vs what you still have to check
 
-Starlette `UploadFile.filename` is hostile. FastAPI does not canonicalize for you. Content-Type is a client claim (2.1).
+Starlette `UploadFile.filename` is hostile. FastAPI does not canonicalize for you. Content-Type is a client claim. The app’s promise is: **this** practice, after join and canonicalize, the object is still `/tmp/sc-lab` or a child. The folder is `labs/6.4/6.4-lab`. No live walk against a public upload folder.
 
-## Mechanism limits
+## What the tool cannot do
 
-- `.png` allow-lists still fail if a processor parses XML (XXE) — named residual.
-- Zip members, absolute names, UNC, symlink (`v5.0.0-5.2.5` Level 3) — named, not this fixture.
-- Pickle / unsafe YAML / XML entity expansion are other interpreters (6.1 shape).
-- Image codecs (memory) wait for E4.
+- `.png` allow-lists still fail if a processor parses XML (entity expansion) — leftover you name.
+- Zip members, absolute names, UNC, symlink follow — leftover, not this practice.
+- Pickle / unsafe YAML / XML entity expansion are other interpreters (same shape as the earlier data-vs-grammar topic).
+- Image codecs (memory) wait for a later elective.
 
 ## Practice
 
 Treat `../` as a test *name*, not a cookbook to fire at other hosts. Then run:
 
-```
+```text
 python3 -m pytest labs/6.4/6.4-lab/tests --impl vulnerable
 python3 -m pytest labs/6.4/6.4-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
+The first command must fail. The second must pass. Tie the check to a path that left the folder, not to an awareness-list name.
 
-## Transfer
+## Use it somewhere new
 
 Clinic scan upload. XML entity expansion; pickle; YAML load.
 
-## Non-goals
+## What this page is not doing
 
-Live filesystem trophies, zip-bomb cookbooks, dumping lab Python into notes. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not in this file.
+Live filesystem trophies, zip-bomb cookbooks, dumping lab Python into notes, and treating an awareness list as the definition of security. Answer keys are not in this file.

@@ -1,16 +1,17 @@
-# 6.7-LO-04 — Enforce the cap on the write path
+# Enforce the cap on the write path
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-2.4.1`, `v5.0.0-2.3.2`. `v5.0.0-2.1.3` wants documented limits. `v5.0.0-2.4.2` is **Level 3, advanced**.
 
-## Structural means the server counts
+## The rule
 
-`allow(n)` must be `n <= 3`. Structural means that predicate on the export action — not a disabled button, not an IP bucket, not autoscaling, not CAPTCHA as the quota.
+A disabled export button is not the fix. An IP bucket at the edge is not the fix. Autoscaling is not the fix. A CAPTCHA is not the quota.
 
-The smallest restore for SecureCollab Phase 1 export is: deny at four. Fail-safe: unknown count **denies**. Do not fail open because the counter store was unreachable.
+Structural means the server counts. `allow(n)` must be `n <= 3`. That check lives on the export action — the write path — not in the browser.
 
-## Mental model: deny at four
+The smallest restore for notes-app export is: deny at four. Fail closed: if the count is unknown, **deny**. Do not fail open because the counter store was unreachable.
+
+## Picture: deny at four
 
 ```mermaid
 flowchart TD
@@ -19,11 +20,13 @@ flowchart TD
   Cap -->|no| Deny[Deny]
 ```
 
-The lab’s fixed tree is `n_calls <= 3`. Production still needs a per-subject counter (LO-02), not a global IP limit that punishes a NAT. GraphQL aliases (7.1) are another path of the same budget. New accounts can reset the window — named residual. Human timing (`v5.0.0-2.4.2` Level 3 advanced) is not this pytest.
+The lab’s repaired files use `n_calls <= 3`. Production still needs a per-person counter (the map from the last page), not a global IP limit that punishes people on one office network. GraphQL aliases (7.1) are another path of the same budget. New accounts can reset the window — name that leftover. Human timing tricks are advanced work, not this pytest.
 
-ASVS `v5.0.0-2.3.2` wants documented limits implemented. This pytest is that sentence for `allow(4)`.
+Industry lists want documented limits actually implemented. This pytest is that sentence for `allow(4)`.
 
-## Why this restores the cell
+## What the repaired files must show
+
+Read `fixed/limit.py` against this checklist. Do not treat the snippet as a production rate limiter.
 
 | After the fix | Must be true |
 |---|---|
@@ -31,36 +34,38 @@ ASVS `v5.0.0-2.3.2` wants documented limits implemented. This pytest is that sen
 | `allow(4)` | false |
 | `allow(1)` | true |
 
+Fail closed: if you cannot read the count, the answer is deny. Uncertainty is a **no**, not a yes because the store was down.
+
 ## What this is not
 
-Frontend-only cap (3.4 already refused that for shares). Global IP limit. CAPTCHA as the quota. Autoscaling as the control. CDN WAF as the resource account. HTTP 429 without a server count.
+Frontend-only cap (3.4 already refused that for shares). Global IP limit. CAPTCHA as the quota. Autoscaling as the control. A CDN filter as the resource account. HTTP 429 without a server count.
 
-## Mechanism limits
+## What the tool cannot do
 
 - New accounts reset the window unless identity is expensive.
 - GraphQL aliases and extra export formats skip a counter that only wraps one route.
-- File storage quotas (`v5.0.0-5.2.4` Level 3, 6.4) are a different resource.
-- Owned burst exceptions must be documented, not silent.
-- Extra CSV copies are a 5.1 confidentiality residual even when the fourth is denied later.
+- How much disk a file can take is a different budget (later, 6.4).
+- Owned burst exceptions must be written down, not silent.
+- Extra CSV copies are still a secrecy leftover from 5.1 even when the fourth is denied later.
 
 ## Practice
 
-Name the predicate (`n <= 3`). Run:
+Name the check (`n <= 3`). Run:
 
 ```text
 python3 -m pytest labs/6.7/6.7-lab/tests --impl fixed
 ```
 
-Must pass.
+It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-## Transfer
+## Use it somewhere new
 
 Clinic: stop treating “Export” as unlimited; count on the server.
 
-## Residual risk
+## What can still go wrong
 
-New accounts; GraphQL aliases (7.1); Level 3 human timing; owned burst exception; extra copies (5.1).
+New accounts; GraphQL aliases (7.1); human timing (advanced); owned burst exception; extra copies (5.1).
 
-## Non-goals
+## What this page is not doing
 
-Do not load-test a public host. Do not claim Gate 6 from an nginx screenshot.
+Do not load-test a public host. Do not claim a course gate from an edge-proxy screenshot.

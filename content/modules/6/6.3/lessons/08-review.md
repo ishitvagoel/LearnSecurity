@@ -1,28 +1,31 @@
-# 6.3-LO-08 — Review cookie-only share POST as a PR, not a SameSite ticket
+# Review of a cookie-only share POST
 
 **Kind:** code-review
 **Loop step:** Review
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-3.5.1`.
 
-## Review the fixture as if it were SecureCollab share
+Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
 
-Review `labs/6.3/6.3-lab/vulnerable/` as a SecureCollab PR. Your job is not to count suspicious lines. Reconstruct whether `allow_share` for a foreign origin with `token=None` is still true, compare that with the module invariant, and write changes a developer can verify.
+## What you are reviewing
 
-Intended findings live only in `content/assessment/keys/6.3.md` — not here. Do not open the keys file until your review has been evaluated.
+A colleague ships notes-app share. Your job is not to count suspicious lines. Reconstruct whether `allow_share` for a foreign origin with `token=None` is still true, compare that with the module rule, and write changes a developer can verify.
 
-## Mental model: Cookie auth + no Origin check
+The folder `labs/6.3/6.3-lab/vulnerable/` is the change. The check you already ran (`test_foreign_origin_post_is_denied`) is the rule test. A comment “will add CSRF later” is not.
 
-Start with this seeded smell: **Cookie auth + no Origin check**. Label it property, mechanism, or false assurance before you accept the PR.
+## Picture: leftover cookie auth + no Origin check
+
+Start with this seeded smell: **Cookie auth + no Origin check**. Label it rule, tool, or false comfort before you accept the change.
 
 ```mermaid
 flowchart TD
-  Claim[PR claim] --> Q{"What would falsify it?"}
-  Q -->|"foreign origin allowed"| Property["Property - good if tested"]
-  Q -->|"SameSite Lax"| Mechanism[Mechanism - helper]
-  Q -->|"CORS star"| False[False assurance]
+  Claim[PR claim] --> Q{"What would show it is false?"}
+  Q -->|"foreign origin allowed"| Property["Rule - good if tested"]
+  Q -->|"SameSite Lax"| Mechanism[Tool - helper]
+  Q -->|"CORS star"| False[False comfort]
 ```
 
-Classification starts at the protected effect (foreign origin without token denied). Everything that is not origin×token at that call is a candidate ambient-cookie path. SameSite=Lax without that test is the same smell, not a different finding class.
+Review starts at the protected effect (foreign origin without token denied). Everything that is not origin-and-token at that call is a candidate leftover-cookie path. SameSite=Lax without that test is the same smell, not a different finding class.
+
+Leftover cookies are leftover permission from login — a signed-in session cookie that rides along — used as if it were consent for this person, this share, and this origin.
 
 ## Seeded smells (label them yourself)
 
@@ -33,22 +36,22 @@ Classification starts at the protected effect (foreign origin without token deni
 
 Also reject: live third-party CSRF; closing findings without re-running `test_foreign_origin_post_is_denied`; keys in lessons.
 
-## Misconceptions this module refuses
+## Common mix-ups
 
 - SameSite is CSRF done
 - JSON APIs cannot CSRF
 - CORS is CSRF defense
 - Logged-in cookie is consent
-- Fetch Metadata alone is this pytest
+- Fetch metadata alone is this pytest
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: observation, property or false assurance, suggested structural change, residual you will **not** delete. Tie at least one to `test_foreign_origin_post_is_denied`.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one to `test_foreign_origin_post_is_denied`. Do not open the keys file.
 
-## Transfer
+## Use it somewhere new
 
-Clinic PR that “set SameSite=Lax” without an origin×token test is an incomplete mediation review. Name the independent falsehood that would still keep a foreign origin from sharing.
+Clinic change that “set SameSite=Lax” without an origin-and-token test is an incomplete review of leftover cookies. Name the independent falsehood that would still keep a foreign origin from sharing.
 
-## Non-goals
+## What this page is not doing
 
-Do not merge by adding a comment “will add CSRF later.” That comment is a residual without an owner. Do not visit a live third-party page to prove the finding.
+Do not merge by adding a comment “will add CSRF later.” That comment is leftover without an owner. Do not visit a live third-party page to prove the finding.

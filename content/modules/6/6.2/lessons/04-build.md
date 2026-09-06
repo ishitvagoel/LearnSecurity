@@ -1,16 +1,17 @@
-# 6.2-LO-04 — Encode for the HTML text context
+# Encode for the HTML text context
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.2.1`. `v5.0.0-3.4.3` CSP is a **layer**. `v5.0.0-3.4.7` reporting is **Level 3, advanced**. CSP3 / Trusted Types are **draft**.
 
-## Structural means the parser never sees extra tags
+## The rule
 
-`render` must HTML-escape the body for a text context (`<` → `&lt;`). Structural means encoding at the sink — not a CSP Report-Only header, not sanitizing after `innerHTML`, not “React will handle it.”
+A content-security header in report-only mode is not the fix. Cleaning after `innerHTML` is not the fix. “React will handle it” is not the fix.
 
-The smallest restore for SecureCollab Phase 1 title HTML is: escape, then wrap. Fail-safe: if you cannot encode for this context, **do not render HTML**. Do not fail open because CSP is “on.”
+The structural change is: the parser **never sees extra tags**. `render` must HTML-escape the body for a text context (`<` → `&lt;`). Encode at the sink.
 
-## Mental model: escape, then wrap
+The smallest restore for the notes app’s title HTML is: escape, then wrap. Fail-safe: if you cannot encode for this context, **do not draw HTML**. Do not fail open because a content-security policy is “on.”
+
+## Picture: escape, then wrap
 
 ```mermaid
 flowchart TD
@@ -18,47 +19,53 @@ flowchart TD
   Esc --> P["wrap in p"]
 ```
 
-The lab’s fixed tree uses `html.escape(body, quote=True)` then wraps in `<p>`. Production still needs encoding for attribute, JavaScript, and URL contexts (`v5.0.0-1.2.3` and neighbors) as residuals. Markdown is a second parser (2.1). CSP `object-src 'none'` / `base-uri 'none'` (`v5.0.0-3.4.3`) is a layer after encoding, not a substitute.
+The repaired files use `html.escape(body, quote=True)` then wrap in `<p>`. Production still needs encoding for attribute, JavaScript, and URL contexts as leftovers. Markdown is a second parser (2.1). A content-security policy that blocks objects and base tags is a layer after encoding, not a substitute.
 
-ASVS `v5.0.0-1.2.1` wants context-relevant output encoding. This pytest is that sentence for HTML text.
+Industry checklists want output encoded for the context you are writing into. This pytest is that sentence for HTML text.
 
-## Why this restores the cell
+## What the repaired files must show
 
 | After the fix | Must be true |
 |---|---|
-| body containing `<` | `&lt;` present, `"<img"` absent |
+| body containing `<` | `&lt;` present, extra-tag marker `"<img"` absent |
 | honest “Weekly notes” | still visible as text |
+
+Fail closed: if you cannot encode for this context, **do not draw HTML**. Do not keep the raw string because “the header will catch it.”
 
 ## What this is not
 
-CSP as the fix. Sanitizer after assignment to `innerHTML`. Encoding for the wrong context (JS string, URL). Markdown left raw. HttpOnly as “XSS is harmless.”
+- A content-security policy as the fix.
+- A cleaner after assignment to `innerHTML`.
+- Encoding for the wrong context (JavaScript string, URL).
+- Markdown left raw.
+- HttpOnly as “script in the page is harmless.”
 
-## Mechanism limits
+## What the tool cannot do
 
-- Attribute, JS, and URL contexts need different encoding.
-- Trusted Types remain **Working Draft**.
-- CSP reporting (`v5.0.0-3.4.7`) is Level 3 advanced, not enforcement.
+- Attribute, JavaScript, and URL contexts need different encoding.
+- Trusted Types remain **draft**.
+- Content-security reporting is extra, advanced, not enforcement.
 - A trusted-admin HTML exception must be named, not silent.
 - Markdown-to-HTML is 2.1’s second parser.
 
 ## Practice
 
-Name the predicate (`&lt;` present ∧ `"<img"` absent ∧ honest title survives). Run:
+Name the check (`&lt;` present, extra-tag marker `"<img"` absent, honest title survives). Run `--impl fixed` (must pass):
 
 ```text
 python3 -m pytest labs/6.2/6.2-lab/tests --impl fixed
 ```
 
-Must pass.
+Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-## Transfer
+## Use it somewhere new
 
 Clinic: encode the nickname in HTML text; treat markdown as a second parser.
 
-## Residual risk
+## What can still go wrong
 
-Attribute/JS/URL contexts; Trusted Types draft; CSP reporting Level 3; trusted admin HTML; 2.3 cookie flags.
+Attribute / JavaScript / URL contexts. Trusted Types still draft. Content-security reporting as extra, not this check. Trusted admin HTML. Cookie flags (2.3).
 
-## Non-goals
+## What this page is not doing
 
-Do not paste exploit kits. Do not claim Gate 6 from a CSP header.
+Do not paste attack recipes. Do not claim Gate 6 from a content-security header.

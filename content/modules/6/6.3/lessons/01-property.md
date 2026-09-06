@@ -1,34 +1,33 @@
-# 6.3-LO-01 — Ambient cookies are not consent to share
+# Leftover cookies are not consent to share
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-3.5.1`, `v5.0.0-3.5.3`, `v5.0.0-3.3.2`; `v5.0.0-3.5.8` is **Level 3, advanced**. SameSite and Fetch Metadata are *helpers*. Cookie session (2.3) is not this sentence.
 
-## The claim this module owns
+## The rule
 
-SecureCollab Phase 1 share is a **state-changing grant** (4.4). A browser will attach the session cookie to a request the user did not intend for this site. That cookie is ambient authority. It is not consent.
+The notes app already treats a share as a grant. Sharing a note is a **change that writes a grant**. A leftover session cookie is leftover permission from login. The browser will attach that cookie to a request the person did not aim at this site. That cookie is leftover authority. It is not consent to share.
 
-> `allow_share` from a foreign origin without a matching CSRF token must be false. Ambient cookies are not consent.
+> `allow_share` from a foreign origin without a matching CSRF token must be false. Leftover cookies are not consent.
 
-The forbidden outcome is **a cross-origin state-changing POST authorized by cookie alone**. That is a 1.1 integrity failure of share grants: an unwanted share against the browser as confused deputy.
+What must not happen is **a cross-site POST that changes a share, authorized by cookie alone**. That is an integrity failure of share grants: an unwanted share, with the browser acting as a helper that sent the leftover cookie.
 
-ASVS `v5.0.0-3.5.1` wants anti-forgery tokens or extra non-CORS-safelisted headers when CORS preflight is not the defense. `v5.0.0-3.5.3` wants unsafe methods (not GET) or strict `Sec-Fetch-*`. `v5.0.0-3.3.2` wants SameSite set **according to purpose** — a helper, not complete. `v5.0.0-3.5.8` (authenticated embeds / CORP / Fetch Metadata) is **Level 3, advanced**.
+Industry checklists want an anti-forgery token, or an extra header that a simple cross-site form cannot set, when a CORS preflight is not the defense. They want unsafe methods (not GET) for changes, or a strict fetch-metadata check. They want SameSite set for the cookie’s purpose — a helper, not the whole rule. Extra rows about authenticated embeds and CORP are **advanced**, not this week’s pytest.
 
-## Mental model: cookie authority without site-bound intent
+## Picture: leftover cookie authority without site-bound intent
 
 ```mermaid
 flowchart TD
-  Cookie[session cookie] --> Browser[Browser deputy]
+  Cookie[session cookie] --> Browser[Browser helper]
   Foreign[foreign origin POST] --> Browser
   Browser --> App{allow_share?}
   App -->|cookie only| Share[unwanted share grant]
 ```
 
-The attacker is an evil origin that can cause the victim’s browser to send the cookie. Trust is local `allow_share(origin, expected, token)`. Do not visit third-party sites.
+Who can act here: a foreign origin that can cause the victim’s browser to send the leftover cookie. What you trust is local `allow_share(origin, expected, token)`. Do not visit other people’s sites.
 
-**Mechanism (not the property):** SameSite=Lax, a CORS `*` reflex, or “JSON APIs can’t CSRF.”
+**A tool is not the rule.** SameSite=Lax, a CORS `*` reflex, or “JSON APIs cannot CSRF.”
 
-## Mental model: origin × token × method
+## Picture: origin and token and method
 
 ```mermaid
 flowchart LR
@@ -38,49 +37,49 @@ flowchart LR
   And -->|no| Deny[Deny]
 ```
 
-Bearer tokens in `Authorization` are a **different deputy**: they do not ride automatically on cross-site form POSTs. Cookie sessions do. GET that mutates share fails `v5.0.0-3.5.3`.
+A token you put on `Authorization` by hand is a **different helper**. It does not ride along on a form POST from another site. A leftover cookie does. A GET that still changes a share is a leftover hole.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | For this property |
+| Slice | For this rule |
 |---|---|
-| Root cause | Cookie authority used without site-bound intent |
-| Preconditions | `allow_share(evil, app, token=None)` is true |
-| Trigger | Foreign-origin POST with ambient cookie |
-| Impact | Integrity of share grants |
-| Prevention | Reject foreign Origin; require token for cookie sessions |
-| Detection | `foreign_origin_post_denied` |
-| Recovery | Revoke surprise shares; notify |
+| Why it happens | Cookie authority used without site-bound intent |
+| What has to be true first | `allow_share(evil, app, token=None)` is true |
+| Trigger | Foreign-origin POST with leftover cookie |
+| What it costs | Integrity of share grants |
+| How you stop it | Reject foreign Origin; require a CSRF token for cookie sessions |
+| How you notice | `foreign_origin_post_denied` |
+| How you recover | Revoke surprise shares; notify |
 
-## Framework defaults versus the CSRF guarantee
+## What the framework does vs what you still have to check
 
-SameSite=Lax is not complete (top-level GET, browser exceptions, old clients). FastAPI does not add a CSRF token because you used cookies. CORS allowing `*` with credentials is a leak, not a CSRF defense.
+SameSite=Lax is not complete (top-level GET, browser exceptions, old clients). FastAPI does not add a CSRF token because you used cookies. CORS allowing `*` with credentials is a leak, not a CSRF defense. The app’s promise is this `allow_share` check. The local folder is `labs/6.3/6.3-lab`. No live foreign origin.
 
-## Mechanism limits
+## What the tool cannot do
 
-- Bearer APIs still need origin checks for cookie-backed fallbacks.
-- Subdomain XSS, open redirect (6.5), and clickjacking/postMessage are named residuals.
-- Lookalike UI that the user actually clicks is 4.2 phishing, not CSRF.
+- Bearer APIs still need origin checks if a cookie fallback still exists.
+- Script in a subdomain, a later open-redirect lesson, and clickjacking or postMessage are named leftovers.
+- Lookalike UI that the person actually clicks is the phishing lesson, not CSRF.
 
-## Usability and accessibility
+## Can people still use it
 
-CSRF errors must be readable (not color-only). Do not make the secure path harder than a cross-site GET that still mutates. WCAG 2.2 applies to the deny page.
+CSRF errors must be readable (not color-only). Do not make the secure path harder than a cross-site GET that still mutates. A deny page must say so in text a screen reader can speak.
 
 ## Practice
 
-Draw origin × token × method. Then run:
+Draw origin and token and method. Then run:
 
-```
+```text
 python3 -m pytest labs/6.3/6.3-lab/tests --impl vulnerable
 python3 -m pytest labs/6.3/6.3-lab/tests --impl fixed
 ```
 
 The first command must fail. The second must pass.
 
-## Transfer
+## Use it somewhere new
 
 Clinic “share record with partner” POST. postMessage, clickjacking, CORS `*` with credentials.
 
-## Non-goals
+## What this page is not doing
 
-Live third-party CSRF, clickjacking trophies, dumping lab Python into notes. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not in this file.
+Live third-party CSRF, clickjacking trophies, dumping lab Python into notes. Course gates stay unclaimed without learner or product evidence. Answer keys are not in this file.

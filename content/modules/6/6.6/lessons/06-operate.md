@@ -1,14 +1,17 @@
-# 6.6-LO-06 — Detect invite_replay_denied
+# Notice invite_replay_denied
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
-**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-2.3.4`. CSF names outcomes; it does not consume the token.
 
-## Prevention is not absolute
+## Stopping it is not enough
 
-A new accept route can skip consume after `accept` was “fixed once.” Pair detect and recover. Do not log tokens (4.3) or email addresses as if they were public ids. Do not paste the mail link into the ticket.
+Even after `accept` was fixed once, a new accept route can skip consume. Running it for real is the rest of the loop: notice, keep deny, remove a surprise member, and refuse to “help” by logging the token.
 
-## Mental model: second accept is a signal
+Do not log tokens (4.3) or email addresses as if they were public ids. Do not paste the mail link into the ticket.
+
+## Picture: second accept is a signal
+
+A second accept after consume is a notice-and-recover problem, not a licence to quote the token in the paging channel. Notice names the event. Recover removes the extra membership. Neither reprints the token.
 
 ```mermaid
 flowchart TD
@@ -18,37 +21,46 @@ flowchart TD
   Alert --> Revoke[Remove extra membership if one landed]
 ```
 
-| Outcome | This module |
+Industry lists name detect, respond, recover. They do not pick a log product. They do not consume the token. Someone still has to own the leftover.
+
+## Signals that do not become a second leak
+
+| Outcome | This topic |
 |---|---|
-| Detect | `invite_replay_denied` |
-| Signal | request id, invite id; never the raw token |
-| Recover | Keep deny; remove surprise members; rotate token scheme if leaked |
-| Residual | Email phishing (4.2) |
+| Notice | `invite_replay_denied` |
+| What the line holds | request id, invite id — **never** the raw token |
+| Respond | Keep deny; stop the route that skipped consume |
+| Recover | Remove surprise members; rotate the token scheme if leaked; re-run `test_invite_token_is_single_use` |
+| Leftover | Email phishing (4.2) |
 
-CSF 2.0 Detect / Respond / Recover name outcomes. They do not prove `v5.0.0-2.3.4`. A SIEM product name is not the property. Re-run `test_invite_token_is_single_use` after any accept-route change; a green “unique index” tile is not that pytest. Password-reset consume is another path of the same family — inventory it before claiming Recover.
-
-## Framework defaults versus the operate guarantee
-
-A mail vendor dashboard will show “link clicked once” and stay silent when `/accept` still returns true the second time. Detection must observe **second `accept` false**, not a click counter. If the alert includes the raw token, you have opened a 4.3 cell.
-
-## Practice
-
-Write one log line you would accept. Tie it to `labs/6.6/6.6-lab`.
+A log line a reviewer can accept looks like:
 
 ```text
 log_denied reason=invite_replay_denied invite_id=inv_66a request_id=req_66a
 ```
 
-Reject any line that includes the token, a note body, or a real email.
+Not: the token, a note body, a real email, or “the mailer said clicked once.”
 
-## Transfer
+If your alert includes the raw token, you have opened a 4.3 hole in the paging channel.
 
-Clinic: detect guardian-invite replays; do not paste the mail link into the ticket. Do not click a live invite.
+A green “unique index” tile is not that pytest. A mail vendor dashboard will show “link clicked once” and stay silent when `/accept` still returns true the second time. Detection must observe **second `accept` false**, not a click counter. Password-reset consume is another path of the same family — inventory it before claiming recover.
 
-## Usability
+## What the framework does vs what you still have to check
 
-If a human sees “link already used,” announce it (WCAG 2.2 Success Criterion 4.1.3). A silent retry loop looks like a broken link and pushes people to share the token (4.2).
+A mailer dashboard is not consume. FastAPI does not emit `invite_replay_denied` for you. Re-run `test_invite_token_is_single_use` after any accept-route change.
 
-## Non-goals
+## Can people still use it
 
-A SIEM product name is not the property. Live invite replay is out of scope. Gates 0–10 stay not-attempted.
+If a human sees “link already used,” announce it in text a screen reader can speak. A silent retry loop looks like a broken link and pushes people to share the token (4.2).
+
+## Practice
+
+Write one log line you would accept in review (ids, reason, no token). Tie it to `labs/6.6/6.6-lab`. Reject any line that includes the token, a note body, or a real email.
+
+## Use it somewhere new
+
+Clinic: notice guardian-invite replays; do not paste the mail link into the ticket. Do not click a live invite.
+
+## What this page is not doing
+
+A log-product name is not the rule. Live invite replay is out of scope. Course gates stay unclaimed. Answer keys stay out of lessons.

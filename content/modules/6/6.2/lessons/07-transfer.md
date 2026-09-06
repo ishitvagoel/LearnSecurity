@@ -1,27 +1,17 @@
-# 6.2-LO-07 — Transfer: clinic patient nickname field
+# Same idea on a clinic nickname field
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.2.1`. CSP3 **draft**.
 
-## Change the workplace; keep context encoding
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: `render` encodes `<` as `&lt;` in HTML text. Rewrite it for a clinic without changing the fork.
+The notes-app scaffolding goes away. You get a **clinic patient nickname** field drawn on a shared board. Also name markdown-to-HTML as a second parser (2.1).
 
-**Prompt:** Clinic patient nickname field rendered on a shared board. Also name markdown-to-HTML as a second parser (2.1).
+Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: `render` encodes `<` as `&lt;` in HTML text. Rewrite it for a clinic without changing the fork.
 
-**Product sketch:** EHR-lite “preferred name” that concatenates into an HTML badge.
+**Product sketch:** an EHR-lite “preferred name” that concatenates into an HTML badge.
 
-Rewrite the SecureCollab sentence. Include:
-
-1. attacker capabilities (patient or clerk supplying a nickname — not a live clinic);
-2. trust assumptions (HTML-text encoder is TCB; CSP header is not);
-3. forbidden outcome (`render` leaves `<` as markup, not “HIPAA”);
-4. a test idea on a **local** fixture only (tame `<` marker);
-5. residual (JS/attr/URL contexts; markdown pipeline; Trusted Types draft; CSP reporting Level 3);
-6. WCAG if a human “name could not be shown” path is in the claim (readable fallback, not a blank badge that hides the person).
-
-## Mental model: nickname is still HTML input
+## Picture: nickname is still HTML input
 
 ```mermaid
 flowchart LR
@@ -29,24 +19,42 @@ flowchart LR
   HTML[HTML badge] --> Reality[grammar mixed with data]
 ```
 
-If the nickname is concatenated into an HTML badge, the cell is gone. FastAPI, a CSP Report-Only header, and React defaults on a different component do not encode this sink. Markdown-to-HTML is 2.1’s second parser: even a well-encoded badge fails if markdown emits raw tags later. Trusted Types remain draft.
+Renaming “title” to “nickname” is not transfer. Person, object, path, and leftover change. If the nickname is concatenated into an HTML badge, the cell is gone. FastAPI, a content-security header in report-only mode, and React defaults on a different component do not encode this sink. Markdown-to-HTML is 2.1’s second parser: even a well-encoded badge fails if markdown emits raw tags later. Trusted Types remain draft.
 
-The clinic rewrite still has to keep the SecureCollab fork: `<` in the nickname becomes `&lt;` in the badge text. Adding CSP without an encode test leaves the HTML interpreter mixed. The local pytest analogue is `test_angle_brackets_are_encoded` — on a fixture, not a live board.
+| Notes app this week | Clinic sketch |
+|---|---|
+| Collaborator editing a title | Patient or clerk supplying a nickname — not a live clinic |
+| `render` of a title into `<p>` text | Preferred name concatenated into an HTML badge |
+| HTML-text encoder is what you trust | Same; a content-security header is not |
+| Markdown leftover | Markdown-to-HTML as a second parser (2.1) |
 
-## What graders reject
+## Prompt — clinic nickname field
+
+Rewrite the notes-app sentence for this product. Your answer must include:
+
+1. who can act (patient or clerk supplying a nickname — not a live clinic);
+2. what you trust (the HTML-text encoder is what you trust; a content-security header is not);
+3. what must not happen (`render` leaves `<` as markup, not “HIPAA”);
+4. a check idea on a **local** fixture only (tame `<` marker);
+5. leftover risk (JavaScript / attribute / URL contexts; markdown pipeline; Trusted Types draft; content-security reporting as extra, advanced);
+6. the web accessibility baseline if a human “name could not be shown” path is in the claim (readable fallback, not a blank badge that hides the person).
+
+The clinic rewrite still has to keep the notes-app fork: `<` in the nickname becomes `&lt;` in the badge text. Adding a content-security policy without an encode check leaves the HTML interpreter mixed. The local pytest analogue is `test_angle_brackets_are_encoded` — on a fixture, not a live board.
+
+## What is not good enough
 
 | Reject | Why |
 |---|---|
-| “CSP is on” | Layer, draft, not this cell |
-| Live clinic probe | Lab policy |
-| Exploit-kit payload as the test | Lab policy; tame `<` is enough |
+| “Content-security policy is on” | Layer, draft, not this cell |
+| Live clinic probe | Course rules |
+| Attack-recipe payload as the check | Course rules; tame `<` is enough |
 | HTTP 200 as encoding evidence | Wrong observation |
-| HttpOnly as XSS done | Different cell (2.3) |
+| HttpOnly as “script in the page is done” | Different cell (2.3) |
 
 ## Practice
 
-One page. No keys. `labs/6.2/6.2-lab` is the only running system you may break. Do not load a live board or paste exploit kits.
+One page. No keys. `labs/6.2/6.2-lab` is the only running system you may break. Do not load a live board or paste attack recipes.
 
-## Non-goals
+## What this page is not doing
 
-Live-target XSS. Real nicknames as PHI dumps. Claiming Gate 6 from this page.
+Live-target attacks. Real nicknames as patient-data dumps. Claiming Gate 6 from this page.

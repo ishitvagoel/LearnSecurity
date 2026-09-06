@@ -1,16 +1,17 @@
-# 6.6-LO-02 — A consume-once map a second engineer can test
+# A consume-once map someone else can test
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-2.3.4`.
 
-## Can a second engineer name pytest cases from your state map?
+## Could someone else name the checks?
 
-“We have a unique index” is not this lesson. A reviewable model names **states, the consume step, and fail-closed on store errors**.
+“We have a unique index” is not this lesson. A map someone else can test names **states**, **the consume step**, and **fail-closed on store errors**.
 
-SecureCollab Phase 1 freeze: local `accept(token)` / `reset()`. No live mailer.
+This week's freeze: local `accept(token)` / `reset()`. No live mailer.
 
-## Mental model: the token is the limited resource
+> `accept('t1')` may be true once. The second `accept('t1')` must be false. If consume is missing from the map, a second join appears.
+
+## Picture: the token is the limited seat
 
 ```mermaid
 flowchart TD
@@ -18,9 +19,9 @@ flowchart TD
   Slot --> Once{consumed?}
 ```
 
-`v5.0.0-2.3.4` theater-seat locking is this shape. The seat is the invite.
+Industry lists want locking so a limited seat cannot be booked twice. The seat is the invite.
 
-## Mental model: 2.4 retry vs 6.6 consume
+## Picture: 2.4 retry vs this consume
 
 ```mermaid
 flowchart LR
@@ -30,40 +31,42 @@ flowchart LR
 
 Retry wants **one** success that can be repeated safely. Invite wants **one** success that cannot be repeated.
 
-## Step 1: freeze pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | invitee; copied-token attacker |
-| Objects | membership slot |
+| Who | invitee; copied-token attacker |
+| What | membership slot |
 | Actions | `accept` |
-| Channels | token string |
-| TCB | used-set consume |
-| Untrusted | extra accepts; store errors |
-| State / time | issued → consumed |
-| 1.1 cell | integrity of membership |
+| Paths | token string |
+| What you trust | used-set consume |
+| What you do not trust | extra accepts; store errors |
+| Time | issued → consumed |
+| The rule | membership stays one join per token |
 
-## Step 2: write cells
+## Step 2: write allow and deny
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
 | first accept | `t1` | join | allow |
 | second accept | `t1` | join | deny |
 | first accept | `t2` | join | allow |
 | store error | any | join | deny (fail-closed) |
 
+A missing “second accept × `t1` × deny” row is how the invite is accepted twice. Write the hole.
+
 ## Practice
 
-Draw the states. Point at `labs/6.6/6.6-lab` file `invite.py`.
+Draw the states so someone else could name the pytest cases. Point at `labs/6.6/6.6-lab` file `invite.py`. Your artifact is a versioned list (even a table in your notes) with state, consume, allow or deny, and what would show the deny is false. Fake tokens only.
 
-## Transfer
+## Use it somewhere new
 
-Password reset codes; job delivery (7.4).
+Password-reset codes. Later job delivery (7.4). Name the “once.” Do not run those systems here.
 
-## Residual risk
+## What can still go wrong
 
-TOCTOU without lock; email phishing (4.2); token in logs (4.3).
+Two accepts that both see unused before either writes. Email phishing (4.2). Token in logs (4.3).
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+Do not define security as a famous-bugs list. Do not run this map against a public clinic or a live mailer. Answer keys stay out of lessons.

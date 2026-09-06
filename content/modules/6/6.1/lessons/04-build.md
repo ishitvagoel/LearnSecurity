@@ -1,16 +1,17 @@
-# 6.1-LO-04 — Pass the name as an argv element
+# Pass the name as an argv element
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.2.5`. `v5.0.0-1.2.10` is **Level 3, advanced**.
 
-## Structural means the shell never sees the name
+## The rule
 
-`argv_for_list` must return a list whose program is `ls` (or another fixed binary), not `sh`. The name is one element. `--` before the name is the extra slot that closes argument injection as a *named* residual.
+A denylist of punctuation is not the fix. “subprocess will handle it” is not the fix. Commenting “internal users are trusted” is not the fix.
 
-The smallest restore for SecureCollab Phase 1 export listing is: list, not string. Fail-safe: if you cannot spawn without a shell, **do not spawn**. Do not fail open because the name “looks like notes.”
+Structural means the shell never sees the name. `argv_for_list` must return a list whose program is `ls` (or another fixed binary), not `sh`. The name is one element. `--` before the name is the extra slot that closes argument injection as a *named* leftover.
 
-## Mental model: list, not string
+The smallest restore for notes-app export listing is: list, not string. Fail closed: if you cannot spawn without a shell, **do not spawn**. Do not fail open because the name “looks like notes.”
+
+## Picture: list, not string
 
 ```mermaid
 flowchart TD
@@ -20,11 +21,13 @@ flowchart TD
   Shell -->|yes| Deny[Deny]
 ```
 
-The lab’s fixed tree is `["ls", "--", name]`. Production still has to call `subprocess.run` with that list and `shell=False`. A denylist of metacharacters fails the 2.1 encoding lesson. Path traversal of the name is 6.4, a different cell. CSV formula characters in the file *contents* are `v5.0.0-1.2.10` Level 3 advanced.
+The lab’s repaired files return `["ls", "--", name]`. Production still has to call `subprocess.run` with that list and `shell=False`. A denylist of punctuation fails the 2.1 encoding lesson. Path traversal of the name is 6.4, a different check. Formula characters in the file *contents* are advanced leftover, not argv.
 
-ASVS `v5.0.0-1.2.5` wants arguments as parameters. This pytest is that sentence for `argv_for_list`.
+Industry lists want arguments as parameters. This pytest is that sentence for `argv_for_list`.
 
-## Why this restores the cell
+## What the repaired files must show
+
+Read `fixed/argv.py` against this checklist. Do not treat the snippet as a production process launcher.
 
 | After the fix | Must be true |
 |---|---|
@@ -32,36 +35,38 @@ ASVS `v5.0.0-1.2.5` wants arguments as parameters. This pytest is that sentence 
 | `uses_shell` | false |
 | name slot | last element is the name, not `ls notes` as one string |
 
+Fail closed: if you cannot spawn without a shell, the answer is no spawn. Uncertainty is a **deny**, not a yes because the name looked well-formed.
+
 ## What this is not
 
-A denylist of `;` `|` `$`. `shell=True` with “sanitized” strings. Commenting “internal users are trusted.” CWE-78 as the finding title. Executing the argv to “prove” it.
+A denylist of punctuation. `shell=True` with “cleaned” strings. Commenting “internal users are trusted.” A scanner finding as the title. Executing the argv to “prove” it.
 
-## Mechanism limits
+## What the tool cannot do
 
-- Argument injection if `--` is omitted (name starts with `-` can become a flag).
-- Plugin shells and `child_process.exec` are other paths of the same cell.
+- Argument injection if `--` is omitted (a name that starts with `-` can become a flag).
+- Plugin shells and `child_process.exec` are other paths of the same check.
 - Path traversal of the name is 6.4.
-- CSV/formula injection (`v5.0.0-1.2.10` Level 3 advanced) is file *content*, not argv.
+- Formula characters in CSV *content* are file body, not argv.
 - SQL (5.5) is the same *shape* at a different interpreter.
 
 ## Practice
 
-Name the predicate (program ≠ `sh` ∧ last element is the name ∧ not `uses_shell`). Run:
+Name the check (program ≠ `sh` ∧ last element is the name ∧ not `uses_shell`). Run:
 
 ```text
 python3 -m pytest labs/6.1/6.1-lab/tests --impl fixed
 ```
 
-Must pass. Do not execute the returned list.
+It must pass. Do not execute the returned list. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-## Transfer
+## Use it somewhere new
 
 Clinic: stop wrapping the export filename in `sh -c`; pass it as argv.
 
-## Residual risk
+## What can still go wrong
 
-Argument injection; plugin shells; CSV formula Level 3; 6.4 path cells.
+Argument injection; plugin shells; CSV formula leftover; 6.4 path cells.
 
-## Non-goals
+## What this page is not doing
 
-Do not spawn a live process. Do not claim Gate 6 from a denylist.
+Do not spawn a live process. Do not claim a course gate from a denylist.

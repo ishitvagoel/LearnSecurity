@@ -1,56 +1,69 @@
-# 6.5-LO-05 — Evidence is link-local deny, then a passing pair
+# Fail on the broken files, then pass on the repaired ones
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.3.6`.
 
-## An invariant that cannot fail a test is still a slogan
+## If you cannot test it, it is still a slogan
 
-“We block private IPs” is not evidence. “HTTPS only” is a mechanism observation. The oracle is: `allowed` is false for the named link-local metadata URL and for loopback, and true for the named lab host on https. The link-local observation must be **false** on `--impl vulnerable` (returns true) and **true** on `--impl fixed`. Tests **must not** fetch.
+“We block private IPs” is not evidence. “HTTPS only” is a tool observation. The check is: `allowed` is false for the named link-local metadata URL and for loopback, and true for the named lab host on https. That observation must be **false** on the broken files (returns true for link-local) and **true** on the repaired files. Tests **must not** fetch.
 
-## Mental model: vulnerable must fail: link-local allowed
+## Picture: link-local allowed must fail the check
 
-The failing observation on `--impl vulnerable` is **link-local allowed**. A passing collection count is not this cell.
+A test that only counts passing cases can pass while link-local is still allowed. This check asks whether a scheme-only allow still counts as a passing control. Broken must fail that question. Repaired must pass it.
 
 ```mermaid
 flowchart LR
-  V["--impl vulnerable"] --> F["Must fail link-local allowed"]
-  X["--impl fixed"] --> P["Must pass deny plus lab host"]
+  V["broken files --impl vulnerable"] --> F[Must fail: link-local allowed]
+  X["repaired files --impl fixed"] --> P[Must pass: deny plus lab host]
 ```
 
-| Mode | Must show for this module |
-|---|---|
-| Negative / abuse | link-local metadata URL denied; loopback denied; vulnerable must fail |
-| Normal | named lab host on https allowed (may pass on both) |
-| Not claimed | live fetch; DNS rebinding; redirects; IPv6 |
+If both pass, the test is not looking at link-local. If both fail, the fix is not structural or the check is wrong.
 
-Lab tests in `labs/6.5/6.5-lab/tests/test_property.py`. `test_link_local_metadata_is_denied` is a **forbidden-outcome** test: a scheme-only allow is not allowed to count as a passing control. The destination is a **string** in the fixture — do not send packets to it.
+## Four modes, even for one preview URL
+
+| Mode | Must show for this topic |
+|---|---|
+| Normal | Named lab host on https allowed (may pass on both) |
+| Wrong input / abuse | Link-local metadata URL denied; loopback denied; broken must fail |
+| Failure | If you cannot name the host, do not fetch |
+| Not claimed | Live fetch; DNS rebinding; redirects; IPv6 |
+
+The file is `labs/6.5/6.5-lab/tests/test_property.py`. The test `test_link_local_metadata_is_denied` is a **what-must-not-happen** test: a scheme-only allow is not allowed to count as a passing control. The destination is a **string** in the fixture — do not send packets to it.
+
+A test that only asserts the preview image loaded is not this topic’s evidence. A test that only greps `https` in a prefix check without calling `allowed` on the link-local string is not this topic’s evidence. This practice never fetches.
 
 ```text
 python3 -m pytest labs/6.5/6.5-lab/tests --impl vulnerable
 python3 -m pytest labs/6.5/6.5-lab/tests --impl fixed
 ```
 
-Honest lab-host https may pass on both (vulnerable allows any https). That does not excuse the link-local and loopback tests. If vulnerable does not fail link-local, the lab is miswired—fix the wiring, not the assertion.
+Honest lab-host https may pass on both (broken files allow any https). That does not excuse the link-local and loopback tests. If the broken files do not fail link-local, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
 
 ## What the tests do not prove
 
 - Redirect following
 - DNS rebinding / IP pin
-- Open-redirect UX (`v5.0.0-3.7.2` / `v5.0.0-3.7.3` Level 3)
+- Open-redirect UX (sister check; telling the person they left is advanced)
 - Webhook signing (7.3)
 - A production egress proxy
 
-Record those as residuals or later modules, not as silent passes.
+Record those as leftover or later topics, not as silent passes.
 
 ## Practice
 
-Execute both implementations this session. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `https` in a prefix check without calling `allowed` on the link-local string.
+Run both this session:
 
-## Transfer
+```text
+python3 -m pytest labs/6.5/6.5-lab/tests --impl vulnerable
+python3 -m pytest labs/6.5/6.5-lab/tests --impl fixed
+```
 
-Clinic PDF URL. A test that only asserts the preview image loaded is not this cell (see 9.3). A test that fetches a live URL is out of scope.
+Paste nothing from answer keys. Write fail/pass into your notes next to the matrix row. Reject a “test” that only greps `https` in a prefix check without calling `allowed` on the link-local string.
 
-## Non-goals
+## Use it somewhere new
 
-Do not fetch. Do not log full URLs if they contain tokens. Keys stay out of this file.
+Clinic PDF URL. A test that only asserts the preview image loaded is not this check (see 9.3). A test that fetches a live URL is out of scope.
+
+## What this page is not doing
+
+Do not fetch. Do not log full URLs if they contain tokens. Answer keys stay out of this file.

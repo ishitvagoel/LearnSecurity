@@ -1,60 +1,77 @@
-# 6.5-LO-03 — Observe the predicate, do not trophy metadata
+# Practice: a server-side fetch to link-local metadata is allowed
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.3.6`. `v5.0.0-3.7.3` is **Level 3, advanced**. API7 is awareness after the cause.
 
-## Authorized scope
+## Try it
 
-`labs/6.5/6.5-lab` only. The fixture is an in-process `allowed`. Synthetic URLs. **Do not fetch.** No cloud metadata, no public hosts, no employer PDF importer.
+The practice is not a website you attack. It is a tiny Python `allowed`. It does not open a network. The failure is already in the function: it treats any `http` or `https` scheme as fine. You are here to see that a link-local metadata URL counting as an allowed peer is a **failed rule**, not a trophy fetch of cloud identity.
 
-**Forbidden outcome:** server-side fetch to link-local metadata is allowed. `allowed` returns true for a link-local metadata URL.
+The rule under test:
 
-Attacker capability in this lab: a member who can supply a preview URL (untrusted structure, 2.1). That stands in for a clinic “fetch PDF from URL” field or a webhook target (7.3). Trust assumption: `allowed` is supposed to parse scheme **and** host against a small allow-list. “Starts with https,” a denylist of one IP, and `requests.get` are not in the TCB for this cell.
+> A link-local metadata URL is not an allowed peer. `allowed` must be false for that named string. This practice checks the predicate only. It does not fetch.
 
-## Mental model: scheme-only is not an allow-list
+## Where you may practice
+
+Only `labs/6.5/6.5-lab` is in scope. The maps are in-process: `allowed`. Fake URLs. **Do not fetch.** Restore the broken and repaired folders when you are done.
+
+Do not probe cloud metadata. Do not probe public hosts. Do not probe an employer PDF importer. Do not paste a live URL “to see what happens.”
+
+What must not happen: a server-side fetch to link-local metadata is allowed. `allowed` returns true for a link-local metadata URL.
+
+Who can act here: a member who can supply a preview URL (untrusted structure, 2.1). That stands in for a clinic “fetch PDF from URL” field or a webhook target (7.3). What you are supposed to trust: `allowed` parses scheme **and** host against a small allow-list. “Starts with https,” a denylist of one IP, and `requests.get` are not what you trust for this check.
+
+## Picture: scheme-only is not an allow-list
 
 ```mermaid
 flowchart TD
-  Call["allowed link-local http"] --> Scheme{"http or https?"}
+  Call["allowed link-local"] --> Scheme{"http or https?"}
   Scheme -->|yes| True["returns true"]
 ```
 
-The vulnerable tree demonstrates **cause** (server would dial attacker-chosen authority). The link-local address is a **named destination string**. Do not send packets to it. Preconditions: `allowed` returns true for any `http`/`https` scheme. You do not need to `GET`. You must not.
+The broken files show **cause** (the server would dial whoever the URL names). The link-local address is a **named destination string**. Do not send packets to it. What has to be true first: `allowed` returns true for any `http`/`https` scheme. You do not need a GET. You must not.
 
-ASVS `v5.0.0-1.3.6` wants an allow-list of protocols, domains, paths, and ports before calling another service. This pytest is the predicate, not a network trophy.
+Industry lists want an allow-list of protocols, hosts, paths, and ports before calling another service. This pytest is the predicate, not a network trophy. A famous-bugs nickname for server-side requests is awareness after the cause, not that check.
 
-## What to read in the fixture
+## What to look at — cause, not a fetch
 
-`vulnerable/ssrf.py` returns true for any `http`/`https` scheme. Tests:
+Read `vulnerable/ssrf.py`. It returns true for any `http`/`https` scheme. Tests:
 
 - `test_link_local_metadata_is_denied`
 - `test_loopback_is_denied`
-- `test_lab_host_https_ok` — honest named host; may pass on vulnerable because any https is true
+- `test_lab_host_https_ok` — honest named host; may pass on the broken files because any https is true
 
 You do not need a new URL. The failure of `test_link_local_metadata_is_denied` *is* the evidence.
 
-Do not open the fixed tree yet. Diagnose the cause first.
+Do not open the repaired files yet. Diagnose the cause first.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+| What you see | What kind of failure | Not the lesson |
+|---|---|---|
+| `allowed` true for link-local | Scheme-only check | A live metadata GET |
+| loopback also true | Same scheme-only hole | A public hunt |
+| named lab host on https | Honest path (may pass on both) | Proof that host was checked |
 
-| Slice | This lab |
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
+
+| Slice | This practice |
 |---|---|
-| Required property | Link-local metadata URL is not an allowed peer |
-| Root cause | Server would fetch attacker-chosen authority |
-| Preconditions | `allowed` is true for any http/https scheme |
+| The rule | Link-local metadata URL is not an allowed peer |
+| Why it happens | The server would fetch whoever the URL names |
+| What has to be true first | `allowed` is true for any http/https scheme |
 | Trigger | `allowed` on the named link-local metadata URL |
-| Impact | Confidentiality of the cloud TCB in real systems; here the predicate fails closed |
-| Prevention | Parse; require https; host in ALLOW; deny link-local and loopback |
-| Detection | `egress_denied`; never the full URL if it holds secrets |
-| Recovery | Keep deny; do not fetch “to confirm” |
-| Not the lesson | API7, a live metadata GET, or HTTPS-prefix theater |
+| What it costs | Secrecy of cloud identity in real systems; here the predicate fails closed |
+| How you stop it | Parse; require https; host in ALLOW; deny link-local and loopback |
+| How you notice | `egress_denied`; never the full URL if it holds secrets |
+| How you recover | Keep the deny; do not fetch “to confirm” |
+| Not the lesson | A famous-bugs nickname, a live metadata GET, or HTTPS-prefix theater |
 
-## Framework defaults versus the egress guarantee
+## What the framework does vs what you still have to check
 
-`requests.get(user_url)` will dial whoever you pass. FastAPI has no outbound allow-list. urllib `urlparse` is not a policy. The application guarantee is: **this** fixture, link-local metadata URL is False. **Do not curl anything.**
+`requests.get(user_url)` will dial whoever you pass. FastAPI has no outbound allow-list. urllib `urlparse` is not a policy. The app’s promise is: **these** local files, a link-local metadata URL is False. **Do not curl anything.**
 
 ## Practice
+
+From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/6.5/6.5-lab/tests --impl vulnerable
@@ -62,10 +79,10 @@ python3 -m pytest labs/6.5/6.5-lab/tests --impl vulnerable
 
 Record `test_link_local_metadata_is_denied`. Do not fetch. An environment error is not security evidence.
 
-## Transfer
+## Use it somewhere new
 
-Clinic PDF URL. Predict without leaving this directory. Do not fetch a live PDF or metadata endpoint.
+Clinic PDF URL. Predict without leaving this directory. Do not fetch a live PDF or a metadata endpoint.
 
-## Non-goals
+## What this page is not doing
 
-No live-target instructions. Synthetic URLs only. Tests must not fetch.
+No live-target instructions. Fake URLs only. Tests must not fetch. Do not “fix” the practice by deleting the test.

@@ -1,27 +1,26 @@
-# 6.1-LO-07 — Transfer: clinic export-to-CSV filename
+# Same idea on a clinic CSV filename
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.2.5`; `v5.0.0-1.2.10` Level 3 advanced for formula characters.
 
-## Change the workplace; keep data-vs-grammar
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: `argv_for_list` must not start `sh -c`. Rewrite it for a clinic without changing the fork.
+The notes-app scaffolding goes away. You get a **clinic export-to-CSV filename** chosen by a clerk. Your job is to rewrite the loop, not to name a bug-list code.
 
-**Prompt:** Clinic export-to-CSV filename chosen by a clerk. Also name Jinja, SQL (5.5), and mail headers as the same shape.
+The notes-app sentence was: `argv_for_list` must not start `sh -c`. Pass the name as one argv element. Rewrite it for a clinic without changing the fork: the spawn helper returns a list whose program is not `sh`, and the filename is one element.
 
-**Product sketch:** EHR-lite “download roster” that shells out to `ls` or to a CSV writer.
+Also name Jinja, SQL (5.5), and mail headers as the same shape, without running those systems.
 
-Rewrite the SecureCollab sentence. Include:
+## Picture: the filename is still an interpreter input
 
-1. attacker capabilities (clerk-chosen filename — not a live clinic);
-2. trust assumptions (argv list is TCB; denylist of `;` is not);
-3. forbidden outcome (`argv_for_list` starts `sh -c`, not “HIPAA”);
-4. a test idea on a **local** fixture only (shape, no execution);
-5. residual (argument injection; CSV formula Level 3; plugin shells);
-6. WCAG if a human “export failed” path is in the claim (readable error, not a silent missing file).
+Renaming “export name” to “CSV filename” is not transfer. The untrusted string changes. The fork does not.
 
-## Mental model: filename is still an interpreter input
+| Notes app this week | Clinic sketch |
+|---|---|
+| `name` glued into `sh -c` | Clerk-chosen filename glued into `sh -c` |
+| `argv_for_list` | Export-worker spawn helper |
+| Argv list `ls -- name` | Argv list with the filename as one element |
+| Member choosing an export name | Clerk choosing a download name — **not** a live clinic |
 
 ```mermaid
 flowchart LR
@@ -29,24 +28,35 @@ flowchart LR
   Shell2["sh -c or formula cell"] --> Reality[grammar mixed with data]
 ```
 
-If the clerk-chosen filename is concatenated into `sh -c`, the cell is gone. FastAPI, a denylist of semicolons, and “internal clerk” trust do not bind argv. Jinja, SQL (5.5), and mail headers are the same shape at other parsers — name them, do not run those systems here. Formula characters in the CSV *body* are `v5.0.0-1.2.10` Level 3 advanced, a different residual.
+If the clerk-chosen filename is concatenated into `sh -c`, the check is gone. FastAPI, a denylist of punctuation, and “internal clerk” trust do not bind argv. Jinja, SQL (5.5), and mail headers are the same shape at other parsers — name them, do not run those systems here. Formula characters in the CSV *body* are advanced leftover, a different residual.
 
-The clinic rewrite still has to keep the SecureCollab fork: the spawn helper returns a list whose program is not `sh`, and the name is one element. Sanitizing `;` while still calling `sh -c` leaves the second parser. The local pytest analogue is `test_does_not_invoke_shell` — on a fixture, not a live export worker.
+The clinic rewrite still has to keep the notes-app fork: the spawn helper returns a list whose program is not `sh`, and the name is one element. Stripping punctuation while still calling `sh -c` leaves the second parser. The local pytest analogue is `test_does_not_invoke_shell` — on a fixture, not a live export worker.
 
-## What graders reject
+## Prompt — clinic CSV filename
+
+Rewrite the notes-app sentence. Include:
+
+1. who can act (clerk-chosen filename — not a live clinic);
+2. what you trust (argv list is what you trust; a denylist of punctuation is not);
+3. what must not happen (`argv_for_list` starts `sh -c`, not a legal label);
+4. a test idea on a **local** fixture only (shape, no execution — never on the real clinic);
+5. leftover (argument injection; CSV formula leftover; plugin shells);
+6. whether a human-read “export failed” status must not use color as the only cue (readable error, not a silent missing file).
+
+## What is not good enough
 
 | Reject | Why |
 |---|---|
-| “We blacklist semicolons” | Incomplete mediation (2.1) |
-| Live clinic probe | Lab policy |
-| CWE-78 as the property | Awareness after the cause |
+| “We blacklist punctuation” | Incomplete mediation (2.1) |
+| Live clinic probe | Course rules |
+| Scanner name as the rule | Awareness after the cause |
 | HTTP 200 as argv evidence | Wrong observation |
-| Executing argv to prove the finding | Lab policy |
+| Executing argv to prove the finding | Course rules |
 
 ## Practice
 
-One page. No keys. `labs/6.1/6.1-lab` is the only running system you may break. Do not execute argv or run a live worker.
+One page. No answer keys. The only running system you may break is `labs/6.1/6.1-lab`. Do not execute argv or run a live worker.
 
-## Non-goals
+## What this page is not doing
 
-Live-target shells. Real patient filenames. Claiming Gate 6 from this page.
+Live-target shells. Real patient filenames. Claiming a course gate from this page.

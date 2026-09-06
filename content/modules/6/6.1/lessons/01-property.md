@@ -1,33 +1,32 @@
-# 6.1-LO-01 — Export name is data, not shell grammar
+# Export name is data, not a shell command
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.2.5`, `v5.0.0-1.2.4` (same shape as 5.5); `v5.0.0-1.2.10` is **Level 3, advanced**. OWASP Top 10:2025 A05 and CWE-77/78/89 are *awareness after* the cause. FastAPI has no opinion about argv.
 
-## The claim this module owns
+## The rule
 
-SecureCollab Phase 1 may list an export directory. The **name is data**. The OS must not parse it as a shell program. Module 5.5 already taught parameters vs SQL grammar; this module’s cell is the same shape at the process boundary.
+The notes app may list an export folder. The **name is data**. The operating system must not read that name as a shell program. Module 5.5 already taught parameters versus SQL grammar. This week's check is the same shape at the process boundary.
 
-> `argv_for_list` must not invoke a shell. Structural APIs (argv list, parameterized SQL in 5.5) are the mechanism. A denylist of metacharacters is incomplete (2.1 encodings).
+> `argv_for_list` must not start a shell. Pass the name as a list of arguments. A denylist of punctuation is incomplete — encodings from 2.1 still beat string filters.
 
-The forbidden outcome is **a user-controlled name executed via a shell string**. That is a 1.1 integrity failure of the OS interpreter boundary. This lab asserts **argv shape only**. It does not run a live OS attack.
+What must not happen is **a user-chosen name run through a shell string**. That is an integrity failure at the OS interpreter: extra words in the name can become extra commands. This practice checks **argv shape only**. It does not run a live OS command.
 
-ASVS `v5.0.0-1.2.5` wants OS calls that pass arguments as parameters (or, weaker, contextual encoding — this course prefers argv and treats encoding as residual). `v5.0.0-1.2.10` (CSV/formula injection) is **Level 3, advanced** and appears in the clinic transfer, not this fixture.
+Industry lists want OS calls that pass arguments as parameters. Encoding the name for a shell is a leftover, not this week's pytest. Formula characters in a CSV file are **advanced** work and show up in the clinic transfer, not this fixture. FastAPI has no opinion about argv.
 
-## Mental model: data vs interpreter grammar
+## Picture: data vs shell grammar
 
 ```mermaid
 flowchart TD
-  Name[export name as data] --> Mix{concat into sh -c?}
+  Name[export name as data] --> Mix{glued into sh -c?}
   Mix -->|yes| Shell[shell parser reads extra commands]
-  Mix -->|no| Argv["argv ls -- name"]
+  Mix -->|no| Argv["argv: ls -- name"]
 ```
 
-The attacker is a user who chooses a note or export name, or a compromised client. Trust is local `argv.py`. Do not probe other hosts.
+Who can act: a member who chooses a note or export name, or a stolen client. What you trust in this practice: the local `argv.py` helper. Do not probe other hosts.
 
-**Mechanism (not the property):** `shell=False` as a comment, a denylist of `;` `|`, or a scanner finding.
+**The tool (not the rule):** a `shell=False` comment, a denylist of punctuation, or a scanner finding.
 
-## Mental model: same shape across interpreters
+## Picture: same shape across interpreters
 
 ```mermaid
 flowchart LR
@@ -37,45 +36,47 @@ flowchart LR
   Mail[mail headers] --> Shape
 ```
 
-SQL, shell, templates, and mail headers fail the same way: untrusted data becomes another language’s program.
+SQL, shell, templates, and mail headers fail the same way: untrusted data becomes another language's program.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | For this property |
+| Slice | For this rule |
 |---|---|
-| Root cause | Concatenating untrusted data into a shell grammar |
-| Preconditions | returns `['sh', '-c', 'ls ' + name]` |
-| Trigger | User-chosen name (lab checks shape, not execution) |
-| Impact | Integrity of the OS interpreter boundary |
-| Prevention | argv list; no shell; `--` before the name |
-| Detection | `child_process_anomaly` |
-| Recovery | Kill the child; isolate the host if it left the lab (it must not) |
+| Why it happens | Concatenating untrusted data into a shell string |
+| What has to be true first | `argv_for_list` returns `['sh', '-c', 'ls ' + name]` |
+| Trigger | User-chosen name (this practice checks shape, not execution) |
+| What it costs | Integrity of the OS interpreter boundary |
+| How you stop it | argv list; no shell; `--` before the name |
+| How you notice | `child_process_anomaly` |
+| How you recover | Kill the child; isolate the host if it left the lab (it must not) |
 
-## Framework defaults versus the argv guarantee
+## What the framework does vs what you still have to check
 
-Python `subprocess` defaults are easy to misuse (`shell=True`, or a string instead of a list). FastAPI does not mediate OS calls.
+Python `subprocess` is easy to misuse (`shell=True`, or a string instead of a list). FastAPI does not mediate OS calls. Next.js `child_process.exec` is a shell.
 
-## Mechanism limits
+The app's promise: `argv_for_list` is a list whose program is not `sh`. The folder is `labs/6.1/6.1-lab`. Fake names only. No live OS command.
 
-- Rejecting `;` `|` still fails on encodings and IFS (2.1).
-- Argv without `--` still leaves **argument injection** if the binary treats leading `-` as flags — named residual, not executed here.
+## What the tool cannot do
+
+- Stripping punctuation still fails on encodings and IFS (2.1).
+- Argv without `--` still leaves **argument injection** if the binary treats a leading `-` as a flag — named leftover, not executed here.
 - A plugin that truly needs a shell is a separate, isolated binary.
 
 ## Practice
 
 Map data flow into each interpreter on the export path. Then run:
 
-```
+```text
 python3 -m pytest labs/6.1/6.1-lab/tests --impl vulnerable
 python3 -m pytest labs/6.1/6.1-lab/tests --impl fixed
 ```
 
 The first command must fail. The second must pass.
 
-## Transfer
+## Use it somewhere new
 
 Clinic export-to-CSV filename. Jinja, SQL, mail headers.
 
-## Non-goals
+## What this page is not doing
 
-Live command execution, shell metacharacter cookbooks, dumping lab Python into notes. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not in this file.
+Live command execution, shell-punctuation cookbooks, dumping lab Python into notes. Course gates stay unclaimed. Answer keys are not in this file.

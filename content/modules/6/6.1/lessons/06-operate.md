@@ -1,14 +1,17 @@
-# 6.1-LO-06 — Detect child_process_anomaly
+# Notice a child-process anomaly
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
-**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-1.2.5`. CSF names outcomes; it does not build argv.
 
-## Prevention is not absolute
+## Stopping it is not enough
 
-A plugin path can bring `sh -c` back after `argv_for_list` was “fixed once.” Pair detect and recover. Do not log export names that are patient identifiers. Do not paste filenames into the ticket if they are PHI.
+Even after `argv_for_list` was “fixed once,” a plugin path can bring `sh -c` back. Running it for real is the rest of the loop: notice, contain, and recover.
 
-## Mental model: unexpected child is a signal
+Do not log export names that are patient identifiers. Do not paste filenames into the ticket if they are patient data.
+
+## Picture: unexpected child is a signal
+
+A child whose program is `sh` after an export-helper change is a notice-and-recover problem, not a licence to quote filenames in the paging channel. Notice names the event. Recover kills the child and removes the concatenating path. Neither reprints the name.
 
 ```mermaid
 flowchart TD
@@ -18,33 +21,42 @@ flowchart TD
   Alert --> Kill[Kill child; isolate plugin]
 ```
 
-| Outcome | This module |
+Industry lists name detect, respond, recover. They do not build argv. A log-product name is not the rule. Someone still has to own the concatenating path.
+
+## Signals that do not become a second leak
+
+| Outcome | This topic |
 |---|---|
-| Detect | `child_process_anomaly` |
-| Signal | request id, program basename; never the full argv if it holds PHI |
-| Recover | Kill; remove the concatenating path; isolate a needed-shell plugin |
-| Residual | Argument injection; host compromise if it left the lab (must not) |
+| Notice | `child_process_anomaly` |
+| What the line holds | request id, program basename — **never** the full argv if it holds patient data |
+| Respond | Kill the child; isolate a needed-shell plugin |
+| Recover | Remove the concatenating path; re-run `test_does_not_invoke_shell` |
+| Leftover | Argument injection; host compromise if it left the lab (must not) |
 
-CSF 2.0 Detect / Respond / Recover name outcomes. They do not prove `v5.0.0-1.2.5`. An EDR product name is not the property. Re-run `test_does_not_invoke_shell` after any export-worker change; a green “no shell in CI grep” tile is not that pytest. Plugin loaders are other paths of the same cell — inventory them before claiming Recover.
-
-## Framework defaults versus the operate guarantee
-
-A host EDR will page on `sh` children and stay silent when the Python helper still returns `["sh", "-c", …]` in a test that nobody runs. Detection must observe **program basename `sh` at spawn**, not a scanner CWE. If the alert includes the full argv with a patient filename, you have opened a 3.1 / 5.1 cell.
-
-## Practice
-
-Write one log line you would accept. Tie it to `labs/6.1/6.1-lab`.
+A log line a reviewer can accept looks like:
 
 ```text
 log_denied reason=child_process_anomaly program=sh request_id=req_61a
 ```
 
-Reject any line that includes a note body, a real email, a patient filename, or a shell cookbook.
+Not: a note body, a real email, a patient filename, or a shell-punctuation cookbook.
 
-## Transfer
+If your alert includes the full argv with a patient filename, you have opened a second leak in the paging channel (3.1 / 5.1).
 
-Clinic: detect unexpected `sh` under the export worker; do not paste filenames into the ticket if they are patient ids. Do not run a live worker hunt.
+A green “no shell in CI grep” tile is not that pytest. Plugin loaders are other paths of the same check — inventory them before claiming recover.
 
-## Non-goals
+## What the framework does vs what you still have to check
 
-EDR product names are not the property. Live command execution is out of scope. Gates 0–10 stay not-attempted.
+A host product will page on `sh` children and stay silent when the Python helper still returns `["sh", "-c", …]` in a test that nobody runs. Detection must observe **program basename `sh` at spawn**, not a scanner nickname. If the alert includes the full argv with a patient filename, you have opened a 3.1 / 5.1 cell.
+
+## Practice
+
+Write one log line you would accept in review (ids, reason, program basename, no name). Tie it to `labs/6.1/6.1-lab`. Reject any line that includes a note body, a real email, a patient filename, or a shell cookbook.
+
+## Use it somewhere new
+
+Clinic: notice unexpected `sh` under the export worker; do not paste filenames into the ticket if they are patient ids. Do not hunt a live worker.
+
+## What this page is not doing
+
+A log-product name is not the rule. Live command execution is out of scope. Course gates stay unclaimed. Answer keys stay out of lessons.

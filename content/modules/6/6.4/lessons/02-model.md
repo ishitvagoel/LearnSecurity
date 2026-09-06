@@ -1,27 +1,26 @@
-# 6.4-LO-02 — A prefix map a second engineer can test
+# A prefix map someone else can test
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-5.3.2`.
 
-## Can a second engineer name pytest cases from your path map?
+## Could someone else name checks from your map?
 
-“We store UUID names” is not this lesson. A reviewable model names **the root, the canonicalize step, and which parsers are out of this fixture**.
+“We store UUID names” is not this page. A reviewable model names **the folder, the canonicalize step, and which parsers are out of this practice**.
 
-SecureCollab Phase 1 freeze: local `resolve(name)` under `/tmp/sc-lab`. No live host reads.
+This week’s freeze: a local `resolve(name)` practice under `/tmp/sc-lab`. No live host reads.
 
-## Mental model: the object is the canonical path
+## Picture: the object is the canonical path
 
 ```mermaid
 flowchart TD
-  Root["/tmp/sc-lab"] --> TCB[Lab TCB]
+  Root["/tmp/sc-lab"] --> TCB[What you trust]
   Name[name] --> Untrusted[Untrusted data]
   Untrusted --> Join[join then canonicalize]
 ```
 
-If the canonical result is not the root or a child of the root, deny.
+If the canonical result is not the folder or a child of the folder, deny.
 
-## Mental model: stored name vs display name
+## Picture: stored name vs display name
 
 ```mermaid
 flowchart LR
@@ -31,40 +30,40 @@ flowchart LR
 
 A random stored name is extra. It is not a substitute for the prefix check on any path you still join.
 
-## Step 1: freeze pieces
+## Step 1: freeze who, what, and the path
 
 | Piece | This system |
 |---|---|
-| Subjects | uploader |
-| Objects | file under lab root |
+| Who | Uploader |
+| What | File under the lab folder |
 | Actions | `resolve` |
-| Channels | filename field |
-| TCB | canonical prefix `/tmp/sc-lab` |
-| Untrusted | `name` |
-| State / time | one resolve |
-| 1.1 cell | which file object |
+| Paths | Filename field |
+| What you trust | Canonical prefix `/tmp/sc-lab` |
+| What you do not trust | `name`; a denylist of `..`; a UUID sticker; Content-Type |
+| State / time | One resolve |
+| The rule | Which file object you selected |
 
-## Step 2: write cells
+## Step 2: write rows the lab can fail
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
-| app | `notes/a.txt` | resolve | under root |
+| app | `notes/a.txt` | resolve | under folder |
 | attacker | `../outside` | resolve | deny |
-| zip member | stored path | unpack | 5.3.3 advanced |
-| XML | entity | expand | named residual |
+| zip member | stored path | unpack | leftover, later and harder |
+| XML | entity | expand | leftover you name |
 
 ## Practice
 
-Draw join → canonicalize → prefix. Point at `labs/6.4/6.4-lab` file `path.py`.
+Draw join → canonicalize → prefix so someone else could name pytest cases. Point at `labs/6.4/6.4-lab` file `path.py`.
 
-## Transfer
+## Use it somewhere new
 
 Clinic scan filename; zip member names.
 
-## Residual risk
+## What can still go wrong
 
-Zip slip Level 3; XML/pickle; codecs (E4).
+Zip members that walk out; XML/pickle; image codecs later.
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+Treating an awareness list as the definition of security. Answer keys stay out of lessons.

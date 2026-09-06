@@ -1,18 +1,27 @@
-# 6.6-LO-03 — Observe second accept, do not trophy a race
+# Practice: an invite token accepted twice
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-2.3.4`. `v5.0.0-16.5.4` is **Level 3, advanced**. Top 10:2025 A10 is awareness after the cause.
 
-## Authorized scope
+## Try it
 
-`labs/6.6/6.6-lab` only. The fixture is an in-process `accept` with synthetic tokens `t1` / `t2`. No live mail, no multi-host races, no employer invite links.
+The practice is not a website you attack. It is a tiny Python `accept`. The failure is already in the function: `accept` returns true and never marks the token used. You are here to see that the check treats a second true as a **failed rule**, not as a retry nit.
 
-**Forbidden outcome:** invite token accepted twice. Second `accept("t1")` returns true.
+The rule under test:
 
-Attacker capability in this lab: two tabs, a copied link, or a retry of the same token. That stands in for a clinic guardian invite, a password-reset consume, or 2.4’s share retry. Trust assumption: `accept` is supposed to consume the token in the same step that it returns true. A unique index you never write, HTTP 400 after membership already exists, and “the email proves the recipient” are not in the TCB for this cell.
+> `accept("t1")` may be true once. The second `accept("t1")` must be false. If it is still true, an invite token was accepted twice.
 
-## Mental model: accept always true
+## Where you may practice
+
+Only `labs/6.6/6.6-lab` is in scope. The fixture is an in-process `accept` with synthetic tokens `t1` / `t2`. It does not send mail, open two hosts, or touch an employer invite link.
+
+Do not probe public invite links. Do not click a live mail link. Do not build a race harness. You do not need two processes. You must not.
+
+What you trust for this check: `accept` is supposed to consume the token in the same step that it returns true. A unique index you never write, HTTP 400 after membership already exists, and “the email proves the recipient” are not what you trust.
+
+Who can act, in this story: two tabs, a copied link, or a retry of the same token. That stands in for a clinic guardian invite, a password-reset consume, or 2.4’s share retry.
+
+## Picture: accept always true
 
 ```mermaid
 flowchart TD
@@ -20,51 +29,57 @@ flowchart TD
   Again["accept t1 again"] --> True
 ```
 
-The vulnerable tree demonstrates **cause** (token never consumed). Sequential double-accept is enough. Do not build a weaponized race harness. Preconditions: `accept` returns true every time; `_used` in the vulnerable tree is unused. You do not need two processes. You must not.
+The broken files take that path on purpose. The token is never consumed. Sequential double-accept is enough. You do not need a new token string. The leftover still returning true *is* the leak.
 
-ASVS `v5.0.0-2.3.4` wants locking so limited resources cannot be double-booked. This pytest is sequential consume-once, not a threaded trophy.
+Industry lists want locking so a limited seat cannot be booked twice. This pytest is sequential consume-once, not a threaded trophy.
 
-## What to read in the fixture
+## What to look at — cause, not a dump
 
-`vulnerable/invite.py` returns true every time. `reset()` exists so tests start clean. Tests:
+Read `vulnerable/invite.py`. It returns true every time. `reset()` exists so tests start clean. `_used` in the broken files is unused. Tests:
 
-- `test_invite_token_is_single_use`
-- `test_distinct_tokens_are_independent` — `t2` still succeeds once on the fixed tree
+- `test_invite_token_is_single_use` — second `accept("t1")` is false
+- `test_distinct_tokens_are_independent` — `t2` still succeeds once on the repaired files
 
 You do not need a new token string. The failure of `test_invite_token_is_single_use` *is* the evidence.
 
-Do not open the fixed tree yet. Diagnose the cause first.
+Do not open the repaired files yet. Diagnose the cause first.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+| What you see | What kind of failure | Not the lesson |
+|---|---|---|
+| `accept` returns true every time | Token never marked used | “We return 400” |
+| `_used` unused | Consume is missing | A unique index screenshot |
+| Second `t1` still true | Invite accepted twice | A live race harness |
 
-| Slice | This lab |
+## Why it happens vs what it costs
+
+| Slice | Practice |
 |---|---|
-| Required property | Second accept of `t1` is false |
-| Root cause | Token not marked used |
-| Preconditions | `accept` always returns true |
+| Required rule | Second accept of `t1` is false |
+| Why it happens | Token not marked used |
+| What has to be true first | `accept` always returns true |
 | Trigger | `accept("t1")` then `accept("t1")` |
-| Impact | Integrity of membership; extra member or replay after revoke |
-| Prevention | Write used in the same step; fail closed on store errors |
-| Detection | `invite_replay_denied`; never the raw token |
-| Recovery | Keep deny; remove surprise members |
-| Not the lesson | A10, HTTP 400, or a live race harness |
+| What it costs | Integrity of membership; extra member or replay after revoke |
+| How you stop it later | Write used in the same step; fail closed on store errors |
+| How you notice later | `invite_replay_denied`; never the raw token |
+| How you recover later | Keep deny; remove surprise members |
+| Out of scope | A famous-bugs list, HTTP 400, or a live race harness |
 
-## Framework defaults versus the consume guarantee
-
-FastAPI will run `accept` twice if two requests arrive. Postgres unique indexes do nothing until you write the used row. Next.js will happily POST the mail link again. The application guarantee is: **this** fixture, second `t1` is False.
+FastAPI will run `accept` twice if two requests arrive. Postgres unique indexes do nothing until you write the used row. Next.js will happily POST the mail link again. The app's promise this week is: **these** local files, second `t1` is False.
 
 ## Practice
+
+From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/6.6/6.6-lab/tests --impl vulnerable
 ```
 
-Record `test_invite_token_is_single_use`. Do not probe public invite links. An environment error is not security evidence.
+Record the failing test `test_invite_token_is_single_use`. Do not probe public invite links. An environment error is not security evidence.
 
-## Transfer
+## Use it somewhere new
 
-Clinic guardian invite. Predict without leaving this directory. Do not click a live mail link.
+Clinic guardian invite. Predict, without leaving this directory, whether a second click still joins. Do not click a live mail link.
 
-## Non-goals
+## What this page is not doing
 
-No live-target instructions. Synthetic tokens only. Sequential double-accept only — no race harness.
+No live-target instructions. Synthetic tokens only. Sequential double-accept only — no race harness. Do not “fix” the practice by deleting the test.
