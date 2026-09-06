@@ -1,69 +1,84 @@
-# 10.3-LO-03 — Observe always-true pod_ok, do not attack clusters
+# Practice: always-true pod_ok
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-13.2.1`. `v5.0.0-13.2.6` documented cluster-API retry is **Level 3, advanced**. NIST SP 800-190 (final, 2017) as stack vocabulary. Kubernetes PSS/PSA as pod-hardening vocabulary. Lab policy: local only.
 
-## Authorized scope
+## Try it
 
-`labs/10.3/10.3-lab` only. The fixture is an in-process `pod_ok(role)`. Synthetic role strings `cluster-admin` / `app`. Do **not** apply ClusterRoleBindings to a real cluster, cloud account, or shared lab Kubernetes as the exercise.
+The practice is not a cluster you attack. It is a tiny Python `pod_ok` that returns true for every role. The failure is already in the function: it never looks at the role. You are here to see that the check treats that always-true admission as a **failed rule**, not as a paperwork nit.
 
-**Forbidden outcome:** App pod granted cluster-admin. `pod_ok("cluster-admin")` returns true.
+The rule under test:
 
-Attacker capability in this lab: a compromised container or a malicious Helm chart. That stands in for “the API namespace is private so ClusterRole is fine,” a CIS Kubernetes scan treated as 1.2, or NetworkPolicy treated as RBAC. Trust assumption: `pod_ok` is supposed to allow **only namespaced app roles**. EKS defaults, PSS `restricted`, NetworkPolicy, and FastAPI itself are not in the TCB for this cell.
+> An app pod must not run as cluster-admin. If `pod_ok("cluster-admin")` returns true, admission has failed as a security control.
 
-## Mental model: admission always says yes
+## Where you may practice
+
+Only `labs/10.3/10.3-lab` is in scope. The fixture is an in-process `pod_ok(role)`. The roles are synthetic strings `cluster-admin` / `app`. Do **not** apply ClusterRoleBindings to a real cluster, cloud account, or shared lab Kubernetes as the exercise.
+
+Do not paste this exercise onto a public cluster, employer account, or live hospital Kubernetes "to see what happens."
+
+What you trust for this check: `pod_ok` is supposed to allow **only namespaced app roles**. Managed-cluster defaults, a restricted pod profile, a network policy, and FastAPI itself are not what you trust.
+
+Who can take the cluster in this story: a compromised container or a malicious Helm chart. That stands in for "the API namespace is private so ClusterRole is fine," a CIS Kubernetes scan treated as the who-is-allowed check, or a network policy treated as RBAC.
+
+## Picture: admission always says yes
 
 ```mermaid
 flowchart TD
   Any[any role] --> True[pod_ok true]
 ```
 
-The vulnerable tree demonstrates **cause** (god-mode for convenience). Do not probe public APIs. Preconditions: `pod_ok` returns true for every role. You do not need kube-apiserver. You must not bind a live cluster.
+The broken files take that path on purpose. You do not need a kube-apiserver. You must not bind a live cluster. The true return for `"cluster-admin"` *is* the leak.
 
-ASVS `v5.0.0-13.2.1` wants individual backend service accounts, not a shared god role. Module 3.3 already said DB god-mode is a blast-radius cell; this cell is **3.3 at cluster grain**. Gate 10 and M4 stay **not-attempted**.
+The database god-role lesson already said one shared admin is a blast-radius cell. This check is **the same idea at cluster grain**.
 
-## What to read in the fixture
+## What to look at — cause, not a dump
 
-`vulnerable/iam.py` returns true for every role. Tests:
+Read `vulnerable/iam.py`. It returns true for every role. Tests:
 
 - `test_cluster_admin_pod_is_denied`
 - `test_namespaced_app_role_may_run` — `"app"` may pass on both
 
 You do not need a new role string. The failure of `test_cluster_admin_pod_is_denied` *is* the evidence.
 
-Do not open the fixed tree yet. Diagnose the cause first.
+Do not open the repaired files yet. Diagnose the cause first.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+| What you see | What kind of failure | Not the lesson |
+|---|---|---|
+| `return True` for every role | Always-true admission; god-mode for convenience | "The namespace is private" |
+| `"cluster-admin"` still runs | What must not happen is allowed | A CIS score |
+| No look at `"app"` membership | The gate accepted a god role | A network policy |
 
-| Slice | This lab |
+## Why it happens vs what it costs
+
+| Slice | Practice |
 |---|---|
-| Required property | `pod_ok("cluster-admin")` is false |
-| Root cause | Always-true admission; god-mode for convenience |
-| Preconditions | `pod_ok` true for every role |
+| The rule | `pod_ok("cluster-admin")` is false |
+| Why it happens | Always-true admission; god-mode for convenience |
+| What has to be true first | `pod_ok` true for every role |
 | Trigger | Compromised container or malicious chart |
-| Impact | One app bug becomes control-plane takeover |
-| Prevention | Allowlist namespaced roles; unknown roles deny |
-| Detection | `cluster_admin_denied`; never kubeconfig |
-| Recovery | Delete the binding; rotate cluster credentials |
-| Not the lesson | A CIS score; live EKS; Gate 10 complete |
+| What it costs | One app bug becomes control-plane takeover |
+| How you stop it later | Allow-list namespaced roles; unknown roles deny |
+| How you notice later | `cluster_admin_denied`; never kubeconfig |
+| How you recover later | Delete the binding; rotate cluster credentials |
+| Out of scope | A CIS score; a live managed cluster; claiming an assurance gate |
 
-## Framework defaults versus the admission guarantee
-
-Managed Kubernetes is not least privilege. PSS `restricted` hardens the *pod spec*; it does not replace RBAC. FastAPI will still run as whatever SA the chart mounts. The application guarantee is: **this** fixture, `cluster-admin` is deny.
+A managed cluster will still accept a ClusterRoleBinding. A restricted pod profile hardens the *pod spec*. FastAPI will still run as whatever SA the chart mounts. The notes app's API will still take the cluster if admission is always true. The app's promise this week is: **this** fixture, `cluster-admin` is deny.
 
 ## Practice
+
+From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/10.3/10.3-lab/tests --impl vulnerable
 ```
 
-Run from `labs/10.3/10.3-lab` if a repo-root collection picks up `site/`. Record `test_cluster_admin_pod_is_denied`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/10.3/10.3-lab` if a collection at the repo root picks up `site/`. Record `test_cluster_admin_pod_is_denied`. Do not probe public hosts. An environment error is not security evidence.
 
-## Transfer
+## Use it somewhere new
 
-Clinic app SA is cluster-admin: predict without leaving this directory. Do not apply YAML to a live cluster.
+Clinic app SA is cluster-admin: predict without leaving this directory. Do not apply manifests to a live cluster.
 
-## Non-goals
+## What this page is not doing
 
-No live-cluster, cloud-account, or public Kubernetes API instructions. Do not claim Gate 10 or M4. Do not fetch instance metadata as an exercise.
+No live-cluster, cloud-account, or public Kubernetes API instructions. Do not claim you finished an assurance gate. Do not fetch instance metadata as an exercise.

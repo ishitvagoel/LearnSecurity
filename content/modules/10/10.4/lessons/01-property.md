@@ -1,30 +1,29 @@
-# 10.4-LO-01 — Production must not boot with debug
+# Production must not boot with debug
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** ASVS `v5.0.0-13.4.2`, `v5.0.0-13.4.5`, `v5.0.0-13.3.1`; `v5.0.0-13.4.6` is **Level 3, advanced**. CISA Secure by Design is **unverified**. Top 10:2025 A02 is **awareness after** the cause.
 
-## The claim this module owns
+## The rule
 
-SecureCollab’s FastAPI + Next.js compose file has an `env` and a `debug` flag. **Least privilege of the running config** is whether production can boot with debug features. `NODE_ENV=production` is a string in a file. It is not this check.
+The notes app’s FastAPI and Next.js compose file has an `env` name and a `debug` flag. Least privilege of the running config is whether production can start with debug on. `NODE_ENV=production` is a string in a file. It is not this check.
 
 > `boot_ok("prod", True)` must be false. `boot_ok("prod", False)` may be true.
 
-The forbidden outcome is **production process boots with debug enabled**. That leaks stack traces, interactive debuggers, extra headers, and sometimes secrets (5.3 / `v5.0.0-13.3.1`).
+What must not happen: **a production process boots with debug enabled**. That leaks stack traces, interactive debuggers, extra headers, and sometimes secrets. The secrets lesson already said keep secrets out of traces.
 
-ASVS `v5.0.0-13.4.2` wants debug modes disabled for all components in production. `v5.0.0-13.4.5` wants documentation and monitoring endpoints not exposed unless intended. `v5.0.0-13.3.1` wants secrets out of artifacts and traces. `v5.0.0-13.4.6` (detailed backend version leakage) is **Level 3, advanced**. CISA Secure by Design is a living program page previously fetched as 403 — cite it as **unverified**, not as the lab oracle. Top 10:2025 A02 is a regression label after the fail-open cause, not the syllabus.
+A checklist that wants debug modes off in production is vocabulary, not this function. Docs and monitoring pages should stay off unless you meant to expose them. Extra detail about leaking backend version numbers is extra, advanced work, not this week’s check. A manufacturer-defaults program page we have not verified is not the lab’s answer key. A famous-bugs list is a label you apply *after* you find the fail-open cause. It is not this week’s rule.
 
-## Mental model: flag vs environment name
+## Picture: a flag vs an environment name
 
 ```mermaid
 flowchart TD
   Name[NODE_ENV string] --> Belief[feels like prod]
   Flag[debug true] --> Pred{"boot_ok prod debug?"}
-  Pred -->|yes| Leak["traces /debugger"]
+  Pred -->|yes| Leak["traces / debugger"]
   Pred -->|no| Deny[do not boot]
 ```
 
-## Mental model: config is TCB
+## Picture: config is what you trust
 
 ```mermaid
 flowchart LR
@@ -34,50 +33,65 @@ flowchart LR
   Boot --> NotFlag[debug is one cell]
 ```
 
-**Mechanism (not the property):** compose `NODE_ENV`, a canary, IaC that exists, a CIS benchmark.
+**A tool, not the rule:** compose `NODE_ENV`, a canary, an IaC file that exists, a benchmark score.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Who can turn debug on in production
 
-| Slice | For this property |
+| Person | What they can do here | Motive | Harm if prod boots with debug |
+|---|---|---|---|
+| Anyone who finds `/debug` or an error page | Read traces, hit a debugger | Curiosity or theft | Secrets and extra attack surface |
+| Support who asked for five minutes | Flip debug so they can see a trace | Help a user | The process is still a production boot |
+| Someone who trusts `NODE_ENV=production` | Treat a string as the check | Looks like prod | `boot_ok("prod", True)` still returns true |
+
+You do not need a live production host this week. Those three already get the leak if boot always says yes.
+
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
+
+Fail-open defaults. That is the cause. The person who later reads a stack trace is a **result**, not the cause.
+
+| Slice | For this rule |
 |---|---|
-| Root cause | Fail-open defaults |
-| Preconditions | `boot_ok("prod", True)` true |
+| Why it happens | Fail-open defaults; debug is ignored |
+| What has to be true first | `boot_ok("prod", True)` is true |
 | Trigger | Anyone who finds `/debug` or an error page |
-| Impact | Confidentiality of traces + extra attack surface |
-| Prevention | Refuse boot; do not register debug routes |
-| Detection | `prod_debug_forbidden` |
-| Recovery | Kill; rotate secrets that appeared in traces |
+| What it costs | Confidentiality of traces plus extra attack surface |
+| How you stop it | Refuse boot; do not register debug routes |
+| How you notice | `prod_debug_forbidden` |
+| How you recover | Kill the process; rotate secrets that appeared in traces |
 
-## Framework defaults versus the boot guarantee
+## What the framework does vs what you still have to check
 
-Next.js will run with `NODE_ENV=development` if you tell compose to. FastAPI `debug=True` is a constructor argument, not a cloud setting. Django `DEBUG` is the clinic grain.
+Next.js will run with `NODE_ENV=development` if you tell compose to. FastAPI `debug=True` is a constructor argument, not a cloud setting. Django `DEBUG` is the clinic grain. Compose will start whatever you wrote.
 
-## Mechanism limits
+The app’s promise this week is: **this** local check, production plus debug is deny. The folder is `labs/10.4/10.4-lab`. Fake flags only. No live production hosts.
 
-- `debug=False` still has other flags (feature, migration).
-- Sidecar debug container.
-- Admin on `0.0.0.0`; public `/metrics` (`v5.0.0-13.4.5`).
+## What the tool cannot do
+
+- `debug=False` still leaves other flags (feature flags, migrations).
+- A sidecar debug container can still leak.
+- Admin bound to `0.0.0.0`; a public `/metrics` page.
 - “Just for five minutes” is still a production boot.
+- Extra version leakage with debug already off is extra, advanced work.
 
-## Usability and accessibility
+## Can people still use it
 
-Boot failure must say *prod debug refused* in text, not only a red container (WCAG 2.2 4.1.3).
+A refused boot must say *prod debug refused* in text, not only a red container. Do not encode the reason as color only.
 
 ## Practice
 
 Name the compose flags and who can change them. Then run:
 
-```
+```text
 python3 -m pytest labs/10.4/10.4-lab/tests --impl vulnerable
 python3 -m pytest labs/10.4/10.4-lab/tests --impl fixed
 ```
 
 The first command must fail. The second must pass.
 
-## Transfer
+## Use it somewhere new
 
-Feature flag that disables authz. Clinic: Django `DEBUG=True`.
+A feature flag that turns off authorization. Clinic: Django `DEBUG=True`.
 
-## Non-goals
+## What this page is not doing
 
-Live production hosts, claiming Gate 10 or M4. Answer keys are not in this file.
+Live production hosts. Claiming you finished an assurance gate. Answer keys are not in this file.

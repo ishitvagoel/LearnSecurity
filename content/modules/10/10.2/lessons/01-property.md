@@ -1,20 +1,19 @@
-# 10.2-LO-01 — A name is not a digest
+# A name is not a digest
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** SLSA 1.2 (final) as provenance vocabulary. CISA 2026 SBOM (final) as inventory. ASVS `v5.0.0-15.1.2`, `v5.0.0-13.3.1`; `v5.0.0-15.2.4` is **Level 3, advanced**. OpenSSF OSPS 2026-08-28. NIST SP 800-161r1-upd1.
 
-## The claim this module owns
+## The rule
 
-SecureCollab CI installs Python/JS dependencies from a lockfile. **Integrity of build inputs** is whether the bytes match the pinned digest. A package *name*, Dependabot, an SBOM file, or a SLSA badge is not that check.
+The notes app’s CI installs Python and JavaScript libraries from a lockfile. **Integrity of what you will run** is whether the bytes match the pinned digest. A package *name*, Dependabot, an SBOM file, or a provenance badge is not that check.
 
 > `install_ok("aaa", "bbb")` must be false. `install_ok("aaa", "aaa")` may be true.
 
-The forbidden outcome is **dependency installed when digest mismatches lockfile**. That is integrity of the artifact you will run — malicious code in the TCB.
+What must not happen: **a dependency installed when the digest does not match the lockfile**. That is integrity of the artifact you will run — someone else’s code inside the trusted computing base.
 
-ASVS `v5.0.0-15.1.2` wants an SBOM inventory — *what* you think you have. `v5.0.0-13.3.1` wants secrets out of artifacts (5.3 / 8.4). `v5.0.0-15.2.4` (dependency confusion) is **Level 3, advanced**: a name-only install is how that grain wins. SLSA 1.2 provenance says *how* the artifact was built; it does not replace digest match. CISA 2026 SBOM minimum elements add fields (hashes, signatures) — generating the file is still not `install_ok`.
+An SBOM is inventory — *what* you think you have. Provenance says *how* the artifact was built. Neither one is `install_ok`. A lookalike package on a public index wins when you install by name. Generating the SBOM file is still not the hash check.
 
-## Mental model: name vs digest
+## Picture: a name is not a digest
 
 ```mermaid
 flowchart TD
@@ -24,7 +23,7 @@ flowchart TD
   Pred -->|yes| Allow[may install]
 ```
 
-## Mental model: SBOM is inventory
+## Picture: lockfile verify vs SBOM inventory
 
 ```mermaid
 flowchart LR
@@ -33,50 +32,52 @@ flowchart LR
   Sbom --> NotHash[not install_ok]
 ```
 
-**Mechanism (not the property):** npm audit, Dependabot, SLSA badge, “we have an SBOM.”
+**A tool, not the rule:** npm audit, Dependabot, a provenance badge, or “we have an SBOM.”
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | For this property |
+| Slice | For this rule |
 |---|---|
-| Root cause | Name-only install |
-| Preconditions | `install_ok('aaa','bbb')` true |
-| Trigger | Typosquat or swapped tarball |
-| Impact | Malicious code in the TCB |
-| Prevention | Hash pin; deny install scripts; provenance as extra |
-| Detection | `hash_mismatch_denied` |
-| Recovery | Pin known-good; rotate CI secrets (5.3) |
+| Why it happens | Name-only install |
+| What has to be true first | `install_ok('aaa','bbb')` true |
+| Trigger | Lookalike name or a swapped tarball |
+| What it costs | Wrong bytes in the trusted computing base |
+| How you stop it | Hash pin; deny install scripts; provenance as extra |
+| How you notice | `hash_mismatch_denied` |
+| How you recover | Pin known-good; rotate CI secrets (5.3) |
 
-## Framework defaults versus the install guarantee
+## What the framework does vs what you still have to check
 
-pip/npm will fetch a name. A lockfile that is not *checked* is documentation. Private registries still serve whatever was published.
+pip and npm will fetch a name. A lockfile that is not *checked* is documentation. A private registry still serves whatever was published.
 
-## Mechanism limits
+The app’s promise this week is: **this** local check, `aaa` vs `bbb` is deny. The folder is `labs/10.2/10.2-lab`. Fake digest strings only. No live registries.
 
-- Pinning a malicious 1.2.3 still installs malware — review + provenance.
-- Git dependency to a moving branch.
-- Compromised runner; build cache poisoning.
-- Unpinned `action@v1`.
+## What the tool cannot do
 
-## Usability and accessibility
+- Pinning a malicious 1.2.3 still installs malware — you still need review plus provenance.
+- A Git dependency that tracks a moving branch.
+- A compromised runner or a poisoned build cache.
+- An unpinned `action@v1`.
 
-CI failure must say *digest mismatch* in text, not only a red X (WCAG 2.2 4.1.3).
+## Can people still use it
+
+A CI failure must say *digest mismatch* in words, not only a red X. Do not hide the reason behind color.
 
 ## Practice
 
-Name lockfiles and who can change them. Then run:
+Name the lockfiles and who can change them. Then run:
 
-```
+```text
 python3 -m pytest labs/10.2/10.2-lab/tests --impl vulnerable
 python3 -m pytest labs/10.2/10.2-lab/tests --impl fixed
 ```
 
 The first command must fail. The second must pass.
 
-## Transfer
+## Use it somewhere new
 
-GitHub Actions third-party `action@v1`. Clinic: npm install in prod pod.
+GitHub Actions third-party `action@v1`. Clinic: npm install in a prod pod.
 
-## Non-goals
+## What this page is not doing
 
-Live registry attacks, claiming Gate 10 or M4. Answer keys are not in this file.
+Live registry attacks, claiming you finished the ship gate. Answer keys are not in this file.

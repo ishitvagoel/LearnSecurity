@@ -1,14 +1,15 @@
-# 10.2-LO-06 — Detect hash_mismatch_denied without logging secrets
+# hash_mismatch_denied without logging secrets
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
-**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; ASVS `v5.0.0-13.3.1`, `v5.0.0-15.1.2`.
 
-## Prevention is not absolute
+## Stopping it is not enough
 
-A cache can serve old bytes after `install_ok` was “fixed once.” Pair detect and recover. Do not log registry tokens or signing keys (5.3). Do not paste `.npmrc` into the ticket.
+A cache can serve old bytes after `install_ok` was “fixed once.” Pair notice and recover. Do not log registry tokens or signing keys (5.3). Do not paste `.npmrc` into the ticket.
 
-## Mental model: digest mismatch is a signal
+## Picture: digest mismatch is a signal
+
+A denied mismatch is a notice-and-recover problem, not a licence to quote a registry token in the paging channel. Notice names the package and the two digest ids. Recover pins known-good. Neither reprints a secret.
 
 ```mermaid
 flowchart TD
@@ -17,39 +18,56 @@ flowchart TD
   Metric --> Pin[repin known-good]
 ```
 
-| Outcome | This module |
+Industry lists name detect, respond, recover. They do not pick an SBOM vendor. They do not prove the lockfile was checked. Someone still has to own the leftover.
+
+Re-run `test_hash_mismatch_refuses_install` after any installer change. A green “SBOM attached” tile is not that pytest. Cache poisoning and `@v1` Actions are sibling grains — inventory them before you claim recover.
+
+## Signals that do not become a second leak
+
+| Outcome | This topic |
 |---|---|
-| Detect | `hash_mismatch_denied` |
-| Signal | package name, expected vs got *ids*; never tokens |
+| Notice | `hash_mismatch_denied` |
+| What the line holds | Package name, expected vs got *ids*; **never** tokens |
+| Respond | Stop the install that would take wrong bytes; do not paste registry tokens into chat |
 | Recover | Pin known-good; rotate CI secrets |
-| Residual | Malicious pin; cache poisoning; unpinned actions |
+| Leftover | Malicious pin; cache poisoning; unpinned actions |
 
-CSF 2.0 Detect / Respond / Recover name outcomes. They do not prove `v5.0.0-15.1.2`. An SBOM-vendor name is not the property. Re-run `test_hash_mismatch_refuses_install` after any installer change; a green “SBOM attached” tile is not that pytest. Cache poisoning and `@v1` Actions are sibling grains — inventory them before claiming Recover.
+An npm audit dashboard will show advisory counts and stay silent when CI’s `install_ok` is always true. Detection must observe **aaa vs bbb is deny**, not CVE volume. If the alert includes a registry token, you have opened the same leak as a log line (5.3).
 
-## Framework defaults versus the operate guarantee
-
-An npm audit dashboard will show advisory counts and stay silent when CI’s `install_ok` is always true. Detection must observe **aaa vs bbb is deny**, not CVE volume. If the alert includes a registry token, you have opened a 5.3 / `v5.0.0-13.3.1` cell.
-
-## Practice
-
-Write one log line you would accept. Tie it to `labs/10.2/10.2-lab`.
+A log line a reviewer can accept looks like:
 
 ```text
 log_denied reason=hash_mismatch_denied pkg=demo expected=aaa got=bbb
 ```
 
-Reject any line that includes a token, a private key, or “Gate 10 complete.”
+Not: a token, a private key, or “ship gate complete.”
 
-## Transfer
+If your alert includes the registry token, you have copied the leak into the paging channel.
+
+## What the framework does vs what you still have to check
+
+The same always-true installer, poisoned cache, and unpinned `@v1` Actions that bypass this fixture will also bypass a “scan our advisory count” detector. Name those places before you claim recover. An SBOM-vendor name is not the rule.
+
+Why it happens, what it costs, how you stop it, how you notice, how you recover stays split here too: the **cause** is install without comparing digests; the **cost** is wrong bytes in the trusted computing base; **how you stop it** is `expected_hash == got_hash`; **how you notice** is `hash_mismatch_denied`; **how you recover** is pin known-good and rotate CI secrets (5.3). What the tool cannot do: this alert does not prove the pin is benign, does not authenticate provenance, and does not stop cache poisoning or `@v1` Actions. Equality is the local stand-in, not index policy.
+
+## Can people still use it
+
+A denied install must say *digest mismatch* in words, not only “assert False.” If operators see a mismatch badge, do not encode it as color only.
+
+## Practice
+
+Write one log line you would accept in review. Tie it to `labs/10.2/10.2-lab`.
+
+```text
+log_denied reason=hash_mismatch_denied pkg=demo expected=aaa got=bbb
+```
+
+Reject any line that includes a token, a private key, or “ship gate complete.”
+
+## Use it somewhere new
 
 Clinic: deny npm in the prod pod; do not paste `.npmrc` into the ticket. Do not fetch a live package.
 
-## Usability
+## What this page is not doing
 
-A denied install must say *digest mismatch*, not only “assert False” (WCAG 2.2 Success Criterion 4.1.3 for human-read CI).
-
-Cause vs impact stays split here too: the **cause** is install without comparing digests; the **impact** is wrong bytes in the TCB; **prevention** is `expected_hash == got_hash`; **detection** is `hash_mismatch_denied`; **recovery** is pin known-good and rotate CI secrets (5.3). Mechanism limit: this alert does not prove the pin is benign, does not authenticate SLSA provenance, and does not stop cache poisoning or `@v1` Actions. `v5.0.0-15.2.4` (dependency confusion) remains Level 3 advanced: equality is the local stand-in, not index policy.
-
-## Non-goals
-
-An SBOM-vendor name is not the property. M4 stays not-attempted. A SLSA badge is not this alert.
+An SBOM-vendor name is not the rule. Live registry traces are out of scope. The ship gate stays not-attempted. A provenance badge is not this alert. Answer keys stay out of lessons.

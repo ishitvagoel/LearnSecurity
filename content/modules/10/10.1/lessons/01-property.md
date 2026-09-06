@@ -1,20 +1,19 @@
-# 10.1-LO-01 — Culture is the merge gate, not a poster
+# Culture is the merge check, not a poster
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** NIST SSDF 1.1 (final) PW.1. OWASP SAMM 2.0 as measurement. CISA Secure by Design **unverified**. ASVS `v5.0.0-15.1.5` is **Level 3, advanced**. SSDF 1.2 IPD is **draft**.
 
-## The claim this module owns
+## The rule
 
-SecureCollab treats a material PR (identity, data, mobile, queues) as a 3.2 event. **Culture is whether that PR can merge without a threat-model identifier.** A champion poster, CODEOWNERS file, or “HIPAA training complete” is not that predicate.
+The notes app treats a material change — identity, stored data, mobile, or a queue — as a threat-modeling event (3.2). **Culture is whether that change can merge without a threat-model identifier.** A champion poster on the wall, a CODEOWNERS file, or a box that says “HIPAA training complete” is **not** that check.
 
 > `merge_ok({})` must be false. `merge_ok({"threat_model": "TM-12"})` may be true.
 
-The forbidden outcome is **merge without a threat-model identifier**. That is integrity of process evidence — surfaces without 3.2.
+What must not happen: **merge without a threat-model identifier**. That is honesty of the process evidence you show before the change lands. If the merge is green while the identifier is missing, those surfaces ship with no 3.2 model.
 
-SSDF 1.1 PW.1 is design-review vocabulary, not `merge_ok`. SAMM measures whether the *practice exists*. CISA Secure by Design (unverified living page) talks manufacturer ownership — it does not stamp the PR. `v5.0.0-15.1.5` (document dangerous functionality) is **Level 3, advanced**: a reason to *require* a TM, not the gate itself.
+A design-review guide is vocabulary for “think about security while you design.” It is not `merge_ok`. A process-maturity score measures whether a practice exists somewhere in the company. An unverified “secure by design” page talks about manufacturer ownership. It does not stamp the pull request. An extra advanced row — for example “document the dangerous function” — is a reason to *require* a threat model. It is not the merge check itself. A later draft of the design-review guide stays a **draft**.
 
-## Mental model: poster vs gate
+## Picture: poster vs merge check
 
 ```mermaid
 flowchart TD
@@ -24,7 +23,7 @@ flowchart TD
   Tm -->|yes| Allow[may merge]
 ```
 
-## Mental model: CODEOWNERS is not a TM
+## Picture: CODEOWNERS is not a threat model
 
 ```mermaid
 flowchart LR
@@ -33,49 +32,51 @@ flowchart LR
   Owners --> NotTm["not 3.2"]
 ```
 
-**Mechanism (not the property):** CODEOWNERS, SAMM score, training checkbox, Secure by Design pledge.
+**A tool, not the rule:** CODEOWNERS, a maturity score, a training checkbox, or a “secure by design” pledge.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | For this property |
+| Slice | For this rule |
 |---|---|
-| Root cause | Security as a later phase |
-| Preconditions | `merge_ok({})` true |
-| Trigger | Identity/data/mobile PR without TM |
-| Impact | Surfaces without 3.2 |
-| Prevention | Require tm id; triggers on those surfaces |
-| Detection | `merge_blocked_no_tm` |
-| Recovery | Open TM, then merge |
+| Why it happens | Security treated as a later phase |
+| What has to be true first | `merge_ok({})` is true |
+| Trigger | Identity, data, or mobile change with no threat-model id |
+| What it costs | Surfaces land without a 3.2 model |
+| How you stop it | Require a threat-model id on those surfaces |
+| How you notice | `merge_blocked_no_tm` |
+| How you recover | Open a threat model, then merge |
 
-## Framework defaults versus the merge guarantee
+## What the framework does vs what you still have to check
 
-GitHub required reviewers are not a threat model. A stale tm-id is a 3.2 age problem — still better than none, still not a rubber stamp forever.
+Required reviewers on GitHub are not a threat model. A stale threat-model id is an age problem for 3.2 — still better than none, still not a rubber stamp forever.
 
-## Mechanism limits
+The app’s promise this week is: **this** local check, an empty change is deny. The folder is `labs/10.1/10.1-lab`. Fake pull-request dicts only. No live GitHub orgs.
 
-- Hotfix path must still *record* a TM after the fact.
-- Vanity vuln-count KPIs.
-- Exceptions without expiry (E6).
+## What the tool cannot do
 
-## Usability and accessibility
+- A hotfix path must still *record* a threat-model id after the fact.
+- Counting closed vulnerability tickets is a vanity score, not this check.
+- Exceptions without an expiry date (E6) are silent holes.
 
-Merge and checklist UIs must be usable by the actual reviewers you have (WCAG 2.2 4.1.3: say which surface needs a TM).
+## Can people still use it
+
+The merge screen has to say which surface still needs a threat-model id, in words, not only a red X. Do not hide the gap behind a poster.
 
 ## Practice
 
 Write the merge checklist line. Then run:
 
-```
+```text
 python3 -m pytest labs/10.1/10.1-lab/tests --impl vulnerable
 python3 -m pytest labs/10.1/10.1-lab/tests --impl fixed
 ```
 
 The first command must fail. The second must pass.
 
-## Transfer
+## Use it somewhere new
 
-Exception path (E6). Clinic: “HIPAA training complete” as merge.
+An exception path (E6) that still names the missing threat model and when it expires. A clinic that treats “HIPAA training complete” as enough to merge.
 
-## Non-goals
+## What this page is not doing
 
-Live GitHub orgs, claiming Gate 10 or M4. Answer keys are not in this file.
+Live GitHub orgs, claiming you finished Gate 10 or M4, or ready-made attack recipes. Answer keys are not in this file.

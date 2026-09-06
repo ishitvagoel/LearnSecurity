@@ -1,69 +1,86 @@
-# 10.1-LO-03 — Observe always-true merge_ok
+# Practice: always-true merge_ok
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
-**Standards:** NIST SSDF 1.1 (final) PW.1 as design-review vocabulary. OWASP SAMM 2.0 as measurement vocabulary. CISA Secure by Design **unverified**. ASVS `v5.0.0-15.1.5` is **Level 3, advanced**. SSDF 1.2 IPD is **draft**. Lab policy: local only.
 
-## Authorized scope
+## Try it
 
-`labs/10.1/10.1-lab` only. The fixture is an in-process `merge_ok(pr)`. Synthetic PR dict. No live GitHub orgs.
+The practice is not a website you attack. It is a tiny Python `merge_ok(pr)` that returns true or false. The failure is already in the function: every dict is allowed to merge. You are here to see that the check treats that as a **failed rule**, not as a missing GitHub setting.
 
-**Forbidden outcome:** Merge without a threat-model identifier. `merge_ok({})` returns true.
+The rule under test:
 
-Attacker capability in this lab: schedule pressure plus an always-true merge gate. That stands in for “CODEOWNERS plus annual HIPAA training so we merge identity PRs,” a SAMM score on a slide, or a champion poster treated as 3.2. Trust assumption: `merge_ok` is supposed to require a **truthy threat-model id**. GitHub branch protection, CODEOWNERS, training checkboxes, and FastAPI defaults are not in the TCB for this cell.
+> An empty change must not merge. If `merge_ok({})` is true, the process evidence you show before merge has failed as a security control.
 
-## Mental model: every PR merges
+## Where you may practice
+
+Only `labs/10.1/10.1-lab` is in scope. The fixture is an in-process `merge_ok(pr)`. The change is a synthetic dict. No live GitHub orgs, no employer repos, no clinic systems. Do not send the dict anywhere.
+
+Do not turn off branch protection on a real org “to see what happens.” Do not paste this exercise onto a public GitHub org, employer repo, or live clinic.
+
+What you trust for this check: `merge_ok` is supposed to require a **truthy threat-model id**. Branch protection, CODEOWNERS, training checkboxes, and FastAPI defaults are not what you trust.
+
+Who can merge in this story: schedule pressure plus an always-true merge check. That stands in for “CODEOWNERS plus annual HIPAA training so we merge identity changes,” a maturity score on a slide, or a champion poster treated as 3.2.
+
+## Picture: every change merges
 
 ```mermaid
 flowchart TD
   Any[any pr dict] --> True[merge_ok true]
 ```
 
-The vulnerable tree demonstrates **cause** (security as a later phase). Do not change production branch protection on a real org as the exercise. Preconditions: `merge_ok` returns true for every dict. You do not need GitHub. You must not merge in a live org.
+The broken files take that path on purpose. You do not need GitHub. You must not merge in a live org. The true return *is* the leak of honesty.
 
-SSDF 1.1 PW.1 is design-with-security vocabulary, not this predicate. Module 3.2 already said how to write the model; this cell is **citation exists before merge**. Gate 10 and M4 stay **not-attempted**.
+The threat-modeling lessons (3.2) already said how to write the model. This check is **whether a citation exists before merge**. A poster is a belief. It does not put `threat_model` on the change.
 
-## What to read in the fixture
+## What to look at — cause, not a dump
 
-`vulnerable/sdl.py` returns true for every dict. Tests:
+Read `vulnerable/sdl.py`. It returns true for every dict. Tests:
 
 - `test_merge_requires_threat_model_id`
 - `test_pr_with_threat_model_may_merge` — `{"threat_model": "TM-12"}` may pass on both
 
-You do not need a new PR key. The failure of `test_merge_requires_threat_model_id` *is* the evidence.
+You do not need a new pull-request key. The failure of `test_merge_requires_threat_model_id` *is* the evidence.
 
-Do not open the fixed tree yet. Diagnose the cause first.
+Do not open the repaired files yet. Diagnose the cause first.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+| What you see | What kind of failure | Not the lesson |
+|---|---|---|
+| `merge_ok` true for every dict | No threat-model id required | “We have CODEOWNERS” |
+| Empty dict merges | Always-true merge used as the payload | A green required-reviewer tile |
+| No `threat_model` field required | The sink accepted any dict | “We finished HIPAA training” |
 
-| Slice | This lab |
+## Why it happens vs what it costs
+
+| Slice | Practice |
 |---|---|
-| Required property | `merge_ok({})` is false |
-| Root cause | No TM required; merge always true |
-| Preconditions | `merge_ok` true for every dict |
-| Trigger | Identity PR merges without a 3.2 citation |
-| Impact | Surfaces without a threat model |
-| Prevention | Require truthy `threat_model`; empty/None deny |
-| Detection | `merge_blocked_no_tm`; never GitHub tokens |
-| Recovery | Add a TM id; re-run merge_ok |
-| Not the lesson | A SAMM score; live GitHub org; Gate 10 complete |
+| The rule | `merge_ok({})` is false |
+| Why it happens | No threat-model id required; merge always true |
+| What has to be true first | `merge_ok` is true for every dict |
+| Trigger | An identity change merges with no 3.2 citation |
+| What it costs | Surfaces land without a threat model |
+| How you stop it later | Require a truthy `threat_model`; empty or None is deny |
+| How you notice later | `merge_blocked_no_tm`; never GitHub tokens |
+| How you recover later | Add a threat-model id; re-run `merge_ok` |
+| Out of scope | A maturity score, a live GitHub org, or claiming Gate 10 |
 
-## Framework defaults versus the merge guarantee
+Required reviewers on GitHub are off until someone turns them on, and an admin can still bypass them. CODEOWNERS says who clicks, not what changed. FastAPI has no software-lifecycle check. The app’s promise this week is: **this** fixture, an empty change is deny.
 
-GitHub required checks are off until configured and can be bypassed by admins. CODEOWNERS says who clicks, not what changed. FastAPI has no SDL. The application guarantee is: **this** fixture, empty PR is deny.
+A design-review guide is vocabulary, not this check. Gate 10 and M4 stay **not-attempted**.
 
 ## Practice
+
+From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/10.1/10.1-lab/tests --impl vulnerable
 ```
 
-Run from `labs/10.1/10.1-lab` if a repo-root collection picks up `site/`. Record `test_merge_requires_threat_model_id`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/10.1/10.1-lab` if a collection at the repo root picks up `site/`. Record `test_merge_requires_threat_model_id`. Do not probe public hosts. An environment error is not security evidence.
 
-## Transfer
+## Use it somewhere new
 
-Clinic HIPAA training as merge: predict without leaving this directory. Do not change a live GitHub org.
+Clinic: predict “HIPAA training complete” used as merge — still only this directory. Do not change a live GitHub org.
 
-## Non-goals
+## What this page is not doing
 
-No live-org or weaponized instructions. Do not claim Gate 10 or M4. CISA Secure by Design stays labeled unverified. SSDF 1.2 IPD stays labeled draft.
+No live-org or weaponized instructions. Fake pull-request dicts only. Do not dump real people’s data into the practice files. Do not “fix” the practice by deleting the test. Do not claim Gate 10 or M4. An unverified “secure by design” page stays unverified. A later draft of the design-review guide stays a draft.

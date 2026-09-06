@@ -1,16 +1,17 @@
-# 10.3-LO-04 — Allowlist namespaced app roles
+# Allow-list namespaced app roles
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** ASVS 5.0.0 (final) `v5.0.0-13.2.1`, `v5.0.0-13.2.2`. Kubernetes PSS as extra, not the predicate. `v5.0.0-13.2.6` is **Level 3, advanced**. NIST SP 800-190 as vocabulary.
 
-## Structural means admission compares to an allowlist
+## The rule
 
-`pod_ok` must return `role in ALLOWED_ROLES` where `ALLOWED_ROLES` is `{"app"}`. Fail-safe: unknown roles deny. A denylist of the string `cluster-admin` would still be god-mode-minus-one-name. Structural means that membership — not namespace name, not NetworkPolicy, not a CIS score.
+A private namespace is not the fix. A network policy is not the fix. "The CIS scan is green so we shipped it" is not the fix.
 
-The lab allowlist is a **stand-in** for a namespaced Role + RoleBinding plus PSA `restricted`. It is not kube-apiserver. The smallest restore for SecureCollab’s API SA is: `cluster-admin` → do not run.
+The structural change is: `pod_ok` **returns `role in ALLOWED_ROLES`** where `ALLOWED_ROLES` is `{"app"}`. Fail-safe: unknown roles deny. A denylist of the string `cluster-admin` would still be god-mode-minus-one-name. Structural means that membership — not namespace name, not a network policy, not a CIS score.
 
-## Mental model: namespace is not cluster-admin
+The lab allow-list is a **stand-in** for a namespaced Role plus RoleBinding plus a restricted pod profile. It is not kube-apiserver. The smallest restore for the notes app's API SA is: `cluster-admin` → do not run. Fail-safe: if you are unsure whether the role is namespaced, deny. Do not fail open because "it is in namespace sc-prod."
+
+## Picture: namespace is not cluster-admin
 
 ```mermaid
 flowchart TD
@@ -19,28 +20,38 @@ flowchart TD
   In -->|no| Deny[deny]
 ```
 
-Do not accept “it is in namespace sc-prod” as membership. Production still needs the allowlist to be the *right* Role — `"app"` that can still list all Secrets is a lying least-privilege. PSS `restricted` remains a sibling grain. `v5.0.0-13.2.4` outbound allowlist (IMDS hop, 6.5) is not this pytest. `v5.0.0-13.2.6` (documented connection/retry toward the cluster API) is Level 3 advanced.
+The repaired files require membership in `{"app"}`. Production still needs that allow-list to be the *right* Role — `"app"` that can still list all Secrets is a lying least-privilege. A restricted pod profile remains a sibling grain. An outbound allow-list (the metadata hop) is not this pytest. Documented connection and retry toward the cluster API is extra, advanced work.
 
-ASVS `v5.0.0-13.2.2` wants those accounts least-privileged. This pytest is that sentence for cluster-admin.
+Industry checklists want those accounts least-privileged. This pytest is that sentence for cluster-admin.
 
-## Why this restores the cell
+## What the repaired files must show
+
+Read `fixed/iam.py` against this checklist. Do not treat the snippet as a production cluster product.
 
 | After the fix | Must be true |
 |---|---|
 | cluster-admin | run false |
 | app | run true |
 
+Fail closed: if you are unsure whether the role is a namespaced app role, deny. Uncertainty is a **no** on run, not a yes because the namespace looks private.
+
 ## What this is not
 
-NetworkPolicy. PSS profile alone. EKS IRSA sticker. Gate 10 / M4. Break-glass (residual, E6). FastAPI defaults. A CIS benchmark.
+- A network policy.
+- A restricted pod profile alone.
+- A managed-cluster identity sticker.
+- An assurance gate sticker.
+- Break-glass (leftover, later elective).
+- FastAPI defaults.
+- A CIS benchmark.
 
-## Mechanism limits
+## What the tool cannot do
 
-- `"app"` that can still patch Deployments is a lying allowlist.
-- Break-glass ClusterRole remains E6, not this predicate.
-- IMDS hop (6.5) can leak node IAM even with a good Role.
-- Helm chart supply chain is 10.2.
-- Leftover user session on a worker is 7.4.
+- `"app"` that can still patch Deployments is a lying allow-list.
+- Break-glass ClusterRole remains a later elective, not this predicate.
+- The metadata hop can leak node credentials even with a good Role.
+- Helm chart supply chain is the previous module.
+- Leftover user session on a worker is the worker-identity lesson.
 
 ## Practice
 
@@ -50,16 +61,16 @@ Name who can apply Helm ClusterRoles. Run:
 python3 -m pytest labs/10.3/10.3-lab/tests --impl fixed
 ```
 
-Must pass. Run from the lab directory if collection at repo root is polluted.
+It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-## Transfer
+## Use it somewhere new
 
-Serverless: replace `ALLOWED_ROLES` with an IAM statement that is not `*`. Same allowlist idea, different object.
+Serverless: replace `ALLOWED_ROLES` with an IAM statement that is not `*`. Same allow-list idea, different object.
 
-## Residual risk
+## What can still go wrong
 
-Break-glass ClusterRole; IMDS hop (6.5); `v5.0.0-13.2.6` Level 3; leftover user session on a worker (7.4).
+Break-glass ClusterRole. The metadata hop. Documented cluster-API retry (extra, advanced). Leftover user session on a worker.
 
-## Non-goals
+## What this page is not doing
 
-Do not apply YAML to a live cluster. Do not claim Gate 10 from a CIS screenshot. Do not present PSS as RBAC.
+Do not apply manifests to a live cluster. Do not claim you finished an assurance gate from a CIS screenshot. Do not present a restricted pod profile as who-is-allowed on the API.

@@ -1,16 +1,17 @@
-# 10.1-LO-04 — Require a threat-model identifier
+# Require a threat-model identifier
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** NIST SSDF 1.1 (final) PW.1. OWASP SAMM 2.0 as vocabulary. CISA Secure by Design **unverified**. ASVS `v5.0.0-15.1.5` is **Level 3, advanced**. SSDF 1.2 IPD is **draft**.
 
-## Structural means merge looks at the TM id
+## The rule
 
-`merge_ok` must be false unless `pr` has a truthy `threat_model`. Fail-safe: missing id is deny. Structural means that citation — not CODEOWNERS, not HIPAA training, not a SAMM score.
+A denylist of yesterday’s pull requests is not the fix. Hiding a scanner warning is not the fix. “We have CODEOWNERS” is not the fix.
 
-The smallest restore for SecureCollab’s merge culture is: `{}` → do not merge. Do not fail open because branch protection is “on.” Do not accept “training complete” as a threat-model id. The id is **opaque** — `"TM-12"` is enough for this lab. Completeness of the document is 3.2 / 10.4.
+The structural change is: `merge_ok` **is false unless the change has a truthy `threat_model`**. Fail-safe: a missing id is deny. Structural means that citation — not CODEOWNERS, not HIPAA training, not a maturity score.
 
-## Mental model: empty threat-model fails closed
+The smallest restore for the notes app’s merge culture is: `{}` → do not merge. Do not fail open because branch protection is “on.” Do not accept “training complete” as a threat-model id. The id is **opaque** — `"TM-12"` is enough for this lab. Whether the document actually covers this change is 3.2 and 10.4.
+
+## Picture: empty threat-model fails closed
 
 ```mermaid
 flowchart TD
@@ -19,47 +20,57 @@ flowchart TD
   Tm -->|no| Deny[deny]
 ```
 
-The lab’s fixed tree requires `bool(pr.get("threat_model"))`. Production still needs the cited model to *cover this PR’s files* — citing `TM-12` that never mentions OAuth is a lying citation. Authz surfaces remain 3.2. `v5.0.0-15.1.5` (document dangerous functionality) is Level 3 advanced: a reason to *require* a TM, not this pytest.
+The repaired files require `bool(pr.get("threat_model"))`. Production still needs the cited model to *cover this change’s files* — citing `TM-12` that never mentions OAuth is a lying citation. Authorization surfaces remain 3.2. An extra advanced row about documenting a dangerous function is a reason to *require* a threat model. It is not this pytest.
 
-SSDF 1.1 PW.1 wants design with security. This pytest is that sentence for empty-PR merge.
+A design-review guide that wants security in the design is that sentence for empty-change merge. This pytest is the local stand-in.
 
-## Why this restores the cell
+## What the repaired files must show
+
+Read `fixed/sdl.py` against this checklist. Do not treat the snippet as a production merge bot.
 
 | After the fix | Must be true |
 |---|---|
 | `{}` | `merge_ok` false |
 | `{"threat_model": "TM-12"}` | `merge_ok` true |
 
+Fail closed: if you are unsure whether a threat-model id is present, the change does not merge. Uncertainty is a **no** on “this may merge,” not a yes because CODEOWNERS is on.
+
 ## What this is not
 
-GitHub branch protection. CODEOWNERS. SAMM. CISA Secure by Design as verified. Gate 10 / M4. A threat-model quality review. FastAPI defaults.
+- GitHub branch protection.
+- CODEOWNERS.
+- A process-maturity score.
+- An unverified “secure by design” page treated as a product.
+- Gate 10 or M4 complete.
+- A threat-model quality review.
+- FastAPI defaults.
 
-## Mechanism limits
+## What the tool cannot do
 
-- Opaque id: `"TM-12"` is not proof the model covers this PR.
-- `bool()` truthiness: empty string is false; `"0"` is true — document the convention.
-- No file-path check: README-only and authz PRs look the same if both cite TM-12.
+- An opaque id: `"TM-12"` is not proof the model covers this change.
+- Python `bool()` truthiness: an empty string is false; `"0"` is true — write down the convention.
+- No file-path check: a README-only change and an authorization change look the same if both cite TM-12.
 - No actor check: anyone can type TM-12.
-- Docs exemptions must be an explicit predicate, not a deleted gate.
+- A docs exemption must be an explicit check, not a deleted gate.
+
+## Can people still use it
+
+The merge screen has to say *missing threat-model id*, in words, not only a red X. Do not hide the gap behind “see CODEOWNERS.”
 
 ## Practice
 
-Name the residual (stale TM; docs exemption). Run:
+Name the leftover (a stale threat model; a docs exemption). Run:
 
 ```text
 python3 -m pytest labs/10.1/10.1-lab/tests --impl fixed
 ```
 
-Must pass. Run from the lab directory if collection at repo root is polluted.
+It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-## Transfer
+## Use it somewhere new
 
-A “docs: update README” PR with no TM id still fails `merge_ok` in this lab. If you exempt, write the exemption in the predicate.
+A “docs: update README” change with no threat-model id still fails `merge_ok` in this lab. If you exempt it, write the exemption in the check.
 
-## Residual risk
+## What can still go wrong
 
-Stale TM-12; vanity KPIs; E6 exceptions; Level 3 `v5.0.0-15.1.5` evidence still missing.
-
-## Non-goals
-
-Do not wire this into a live GitHub org. Do not claim Gate 10. Do not present CISA Secure by Design as verified or SSDF 1.2 IPD as final.
+Stale TM-12. Vanity ticket counts. Exceptions without expiry (E6). An extra advanced row about documenting a dangerous function that you still never wrote down.

@@ -1,16 +1,17 @@
-# 10.2-LO-04 — Require expected hash equals got hash
+# Require expected hash equals got hash
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** ASVS 5.0.0 (final) `v5.0.0-15.1.2`. SLSA 1.2 as extra, not the predicate. `v5.0.0-15.2.4` is **Level 3, advanced**. CISA 2026 SBOM as inventory.
 
-## Structural means install compares digests
+## The rule
 
-`install_ok` must return `expected_hash == got_hash`. Fail-safe: mismatch denies. Provenance and SBOM may *accompany* a match; they do not replace it. Structural means that equality — not package name, not Dependabot, not a SLSA badge.
+A denylist of yesterday’s package names is not the fix. Hiding a scanner warning is not the fix. “We have an SBOM” is not the fix.
 
-The smallest restore for SecureCollab CI is: `aaa` vs `bbb` → do not install. Do not fail open because “the SBOM lists the package.” Do not accept `@v1` as a digest.
+The structural change is: `install_ok` **returns `expected_hash == got_hash`**. Fail-safe: a mismatch denies. Provenance and an SBOM may *sit next to* a match; they do not replace it. Structural means that equality — not package name, not Dependabot, not a provenance badge.
 
-## Mental model: equality gate
+The smallest restore for the notes app’s CI is: `aaa` vs `bbb` → do not install. Do not fail open because “the SBOM lists the package.” Do not accept `@v1` as a digest.
+
+## Picture: equality is the gate
 
 ```mermaid
 flowchart TD
@@ -19,28 +20,42 @@ flowchart TD
   Eq -->|no| Deny[deny]
 ```
 
-The lab’s fixed tree requires equality. Production still needs the pin to be *benign* — matching a malicious digest is a lying lockfile. Who can edit the lockfile is 10.1 / CODEOWNERS, not this predicate. `v5.0.0-15.2.4` (dependency confusion) is Level 3 advanced: a name-only install is how that grain wins; equality is the local stand-in.
+The repaired files require equality. Production still needs the pin to be *benign* — matching a malicious digest is a lying lockfile. Who can edit the lockfile is 10.1 / CODEOWNERS, not this check. A lookalike package still wins if you install by name somewhere else; equality is the local stand-in.
 
-SLSA 1.2 provenance says *how* the artifact was built. It does not replace digest match. CISA 2026 SBOM minimum elements add hash fields — generating the file is still not `install_ok`.
+Provenance says *how* the artifact was built. It does not replace digest match. An SBOM can list hashes — generating the file is still not `install_ok`.
 
-## Why this restores the cell
+## What the repaired files must show
+
+Read `fixed/lock.py` against this checklist. Do not treat the snippet as a production installer.
 
 | After the fix | Must be true |
 |---|---|
 | aaa vs bbb | install false |
 | aaa vs aaa | install true |
 
+Fail closed: if the hashes do not match, do not install. Uncertainty is a **no** on “this may install,” not a yes because the SBOM listed the name.
+
 ## What this is not
 
-Dependabot. SLSA badge. CISA SBOM file. Gate 10 / M4. Pinning malware (residual). npm audit. pip without `--require-hashes` as the TCB.
+- Dependabot.
+- A provenance badge.
+- A CISA-style SBOM file treated as verify.
+- The ship gate complete.
+- Pinning malware (leftover).
+- npm audit.
+- pip without a hash requirement as the trusted check.
 
-## Mechanism limits
+## What the tool cannot do
 
 - Matching a malicious pin still installs in this lab.
 - Cache poisoning can serve old bytes after a good pin.
 - Unpinned GitHub Actions `@v1` is a sibling grain, not this pytest.
-- Secrets in fork PRs remain 5.3.
-- `v5.0.0-15.2.4` Level 3 confusion still needs index policy beyond equality.
+- Secrets in fork pull requests remain 5.3.
+- A lookalike on a public index still needs index policy beyond equality.
+
+## Can people still use it
+
+A denied install must say *digest mismatch* in words, not only “assert False.” Do not hide the reason behind a red X.
 
 ## Practice
 
@@ -50,16 +65,12 @@ Name who can edit the lockfile. Run:
 python3 -m pytest labs/10.2/10.2-lab/tests --impl fixed
 ```
 
-Must pass. Run from the lab directory if collection at repo root is polluted.
+It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-## Transfer
+## Use it somewhere new
 
 Pin Actions by SHA, not `@v1`. That is the same equality idea on a different object.
 
-## Residual risk
+## What can still go wrong
 
-Malicious pin; cache poisoning; `v5.0.0-15.2.4` Level 3; secrets in fork PRs (5.3).
-
-## Non-goals
-
-Do not fetch a live package. Do not claim Gate 10 from an SBOM screenshot. Do not present a SLSA badge as 1.2.
+Malicious pin. Cache poisoning. Unpinned actions. Secrets in fork pull requests (5.3). A lookalike package that never hits this equality check.

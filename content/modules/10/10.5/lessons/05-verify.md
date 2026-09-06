@@ -1,58 +1,72 @@
-# 10.5-LO-05 — Evidence is close denied, then a passing pair
+# Fail on the broken files, then pass on the repaired ones
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
-**Standards:** ASVS `v5.0.0-16.2.5`. NIST CSF 2.0 Recover as label, not the oracle.
 
-## An invariant that cannot fail a test is still a slogan
+## If you cannot test it, it is still a slogan
 
-“SIEM green” is not evidence. “PagerDuty acked” is a mechanism observation. The oracle is: recovery todo is false, note_body in logs is false, and done + ok may close. The recovery-todo observation must be **false** on `--impl vulnerable` (returns true) and **true** on `--impl fixed`. Do not query a live SIEM.
+“SIEM green” is not evidence. “Paging acked” is a tool observation. The check is: recovery todo is false, `note_body` in logs is false, and done + ok may close. The recovery-todo observation must be **false** on the broken files and **true** on the repaired files. Do not query a live SIEM.
 
-## Mental model: vulnerable must fail: recovery todo
+## Picture: a broken close gate must fail the check
 
-The failing observation on `--impl vulnerable` is **recovery todo**. A passing collection count is not this cell. The second forbidden outcome is **note_body in logs** — `test_cannot_close_when_logs_contain_note_body` must also fail on vulnerable.
+A test that only counts passing tests can pass while recovery todo still closes. This check asks whether an incident closed without recovery still counts as a passing control. Broken must fail that question. Repaired must pass it.
 
 ```mermaid
 flowchart LR
-  V["--impl vulnerable"] --> F["Must fail recovery todo"]
-  X["--impl fixed"] --> P["Must pass deny"]
+  V["broken files --impl vulnerable"] --> F[Must fail: recovery todo closes]
+  X["repaired files --impl fixed"] --> P[Must pass: recovery todo denied]
 ```
 
-| Mode | Must show for this module |
-|---|---|
-| Negative / abuse | recovery todo → not close; vulnerable must fail |
-| Negative / abuse | note_body in logs → not close |
-| Normal | done + ok → may close (may pass on both) |
-| Not claimed | live PagerDuty; KEV; Gate 10; that restore ran |
+If both pass, the test is not looking at recovery todo. If both fail, the fix is not structural or the check is wrong.
 
-Lab tests in `labs/10.5/10.5-lab/tests/test_property.py`. `test_cannot_close_without_recovery` is a **forbidden-outcome** test: always-true `close_incident` is not allowed to count as a passing control.
+The second forbidden outcome is **`note_body` in logs** — `test_cannot_close_when_logs_contain_note_body` must also fail on the broken files.
+
+## Four modes, even for a close dict
+
+| Mode | Must show for this topic |
+|---|---|
+| Wrong input | recovery todo → cannot close; broken files must fail |
+| Abuse | `note_body` in logs → cannot close |
+| Normal | done + ok → may close (may pass on both) |
+| Not claimed | live paging; a known-exploited list; an assurance gate; that restore actually ran |
+
+The file is `labs/10.5/10.5-lab/tests/test_property.py`. The test `test_cannot_close_without_recovery` is a **what-must-not-happen** test: always-true `close_incident` is not allowed to count as a passing control.
+
+Honest recovery plus safe logs may pass on both implementations. That does not excuse the two deny tests. If the broken files do not fail `test_cannot_close_without_recovery`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/10.5/10.5-lab/tests --impl vulnerable
 python3 -m pytest labs/10.5/10.5-lab/tests --impl fixed
 ```
 
-Honest recovery + safe logs may pass on both implementations. That does not excuse the two deny tests. If vulnerable does not fail `test_cannot_close_without_recovery`, the lab is miswired—fix the wiring, not the assertion.
+A test that only greps `PagerDuty` in a runbook without calling `close_incident({"recovery": "todo", "logs": "ok"})` is not this topic’s evidence. This practice never opens a live host.
 
 ## What the tests do not prove
 
-- Restore actually ran
-- Clocks are synced (`v5.0.0-16.2.2`)
-- Logs are on a separate system (`v5.0.0-16.4.3`)
-- Support tool is least privilege
-- L3 clause of `v5.0.0-16.3.2`
-- Gate 10 / M4 complete
+- That restore actually ran
+- That clocks match across hosts
+- That logs live on a separate system
+- That the support tool is least privilege
+- Logging every authorization decision without the sensitive data
+- An assurance gate complete
 
-Record those as residuals or later modules, not as silent passes.
+Record those as leftover or later topics, not as silent passes.
 
 ## Practice
 
-Execute both implementations this session from the lab directory if needed. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `PagerDuty` in a runbook without calling `close_incident({"recovery": "todo", "logs": "ok"})`.
+Run both this session from the lab directory if needed:
 
-## Transfer
+```text
+python3 -m pytest labs/10.5/10.5-lab/tests --impl vulnerable
+python3 -m pytest labs/10.5/10.5-lab/tests --impl fixed
+```
 
-Clinic: a test that only asserts “alert fired” is not this cell. A live SIEM is out of scope.
+Paste nothing from answer keys. Write fail/pass into your notes next to the close-without-recovery row. Reject a “test” that only greps a paging product name without calling `close_incident({"recovery": "todo", "logs": "ok"})`.
 
-## Non-goals
+## Use it somewhere new
 
-Do not add a live-IR trophy. Do not log note bodies. Keys stay out of this file. Gate 10 stays not-attempted.
+Clinic: a test that only asserts “alert fired” is not this topic. A live SIEM is out of scope.
+
+## What this page is not doing
+
+Do not add a live-incident trophy. Do not log note bodies. Answer keys stay out of this file. Do not claim you finished an assurance gate.

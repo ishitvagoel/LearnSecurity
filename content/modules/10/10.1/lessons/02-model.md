@@ -1,16 +1,19 @@
-# 10.1-LO-02 — Change-trigger matrix vs CODEOWNERS
+# Change-trigger table vs CODEOWNERS
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** NIST SSDF 1.1 PW.1. Module 3.2 threat modeling.
 
-## Can a second engineer name which PRs need a TM?
+## Could someone else name which changes need a threat model?
 
-“We have CODEOWNERS” is not this lesson. A reviewable model names **surfaces that trigger a TM: identity, data, mobile, queues, authz**.
+“We have CODEOWNERS” is not this lesson. A drawing someone else can test names **the surfaces that trigger a threat model: identity, stored data, mobile, queues, and authorization**.
 
-SecureCollab freeze: local `merge_ok(pr)`. No live orgs.
+This week’s freeze for the notes app: local `merge_ok(pr)`. No live orgs.
 
-## Mental model: triggers
+> For an empty change, merge is deny. A change that names `threat_model` as `TM-12` may merge. Evidence that the deny is false: `merge_ok({})` returns true.
+
+If the trigger table is blank, CODEOWNERS looks finished because nobody named which files need a model.
+
+## Picture: which surfaces trigger a threat model
 
 ```mermaid
 flowchart TD
@@ -19,7 +22,7 @@ flowchart TD
   Surf -->|docs only| Skip[may skip TM]
 ```
 
-## Mental model: vanity vs outcome
+## Picture: vanity count vs outcome
 
 ```mermaid
 flowchart LR
@@ -27,40 +30,46 @@ flowchart LR
   TmWithTest["TM with 9.3 test"] --> Outcome[outcome]
 ```
 
-## Step 1: freeze pieces
+CODEOWNERS says who must click. It does not say what changed. A closed-ticket count is a vanity score. A threat model that points at a real test (9.3) is an outcome.
+
+## Step 1: name the pieces
+
+Do not invent a new catalogue. Take the merge check you already have and ask which surfaces would make an empty dict merge.
 
 | Piece | This system |
 |---|---|
-| Subjects | schedule pressure |
-| Objects | PR; TM id |
+| Who | Schedule pressure |
+| What | The pull request; the threat-model id |
 | Actions | `merge_ok` |
-| Channels | GitHub merge |
-| TCB | merge predicate |
-| Untrusted | poster; CODEOWNERS; training checkbox |
-| State / time | TM age (3.2); hotfix after-the-fact |
-| 1.1 cell | integrity of process evidence |
+| Paths | GitHub merge |
+| What you trust for this journey | The merge check |
+| What you do not trust | A poster; CODEOWNERS; a training checkbox |
+| Time | Threat-model age (3.2); hotfix recorded after the fact |
+| The rule | Honesty of the process evidence you show before merge |
 
-## Step 2: write cells
+## Step 2: write allow and deny
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
-| empty PR meta | merge | allow | deny |
+| Empty change metadata | merge | allow | deny |
 | threat_model TM-12 | merge | allow | may allow |
-| CODEOWNERS only | merge | treat as TM | deny |
-| HIPAA training | merge | treat as TM | deny |
+| CODEOWNERS only | merge | treat as a threat model | deny |
+| HIPAA training | merge | treat as a threat model | deny |
+
+A missing threat-model cell is how a required-reviewer list becomes false comfort. Write the hole.
 
 ## Practice
 
-Draw the trigger matrix. Point at `labs/10.1/10.1-lab` file `sdl.py`.
+Draw the trigger table so someone else could name the checks. Point at `labs/10.1/10.1-lab` file `sdl.py`.
 
-## Transfer
+## Use it somewhere new
 
-E6: an exception still names the missing TM and expiry.
+An exception path (E6): the exception still names the missing threat model and when it expires.
 
-## Residual risk
+## What can still go wrong
 
-Stale tm-id; vanity KPIs; `v5.0.0-15.1.5` Level 3 undocumented dangerous functionality.
+A stale threat-model id. Vanity ticket counts. An extra advanced row about documenting a dangerous function that you never actually wrote down.
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+Do not define security as a famous-bugs list. Answer keys stay out of lessons.

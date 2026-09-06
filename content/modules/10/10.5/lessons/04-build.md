@@ -1,16 +1,17 @@
-# 10.5-LO-04 — Require recovery done and no note_body
+# Require recovery done and no note body
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** ASVS 5.0.0 (final) `v5.0.0-16.2.5`, `v5.0.0-16.4.3`. NIST CSF 2.0 Recover as the outcome. The L3 clause of `v5.0.0-16.3.2` is **Level 3, advanced**.
 
-## Structural means close compares recovery and logs
+## The rule
 
-`close_incident` must return true only when `recovery == "done"` **and** `'note_body' not in logs`. Fail-safe: missing recovery or a body in logs denies. SIEM green may *accompany* a match; it does not replace it.
+A green SIEM tile is not the fix. A paging ack is not the fix. “Alerts stopped firing so we closed it” is not the fix.
 
-The `note_body` substring is a **teaching stand-in** for protection-level logging (`v5.0.0-16.2.5`). It is not a complete DLP oracle. The smallest restore for SecureCollab’s incident ticket is: recovery todo → stay open, and a leaked body → stay open.
+The structural change is: `close_incident` **returns true only when `recovery == "done"` and `'note_body' not in logs`**. Missing recovery or a body in logs is deny. A green SIEM may *accompany* a match; it does not replace it.
 
-## Mental model: recovery-done and no-body conjunction
+The `note_body` substring is a **teaching stand-in** for “logs match how sensitive the data is.” It is not a complete leak scanner. The smallest restore for the notes app’s incident ticket is: recovery todo → stay open, and a leaked body → stay open. Fail-safe: a missing field is deny. Do not fail open because the dashboard went green. Do not accept “alerts stopped” as the conjunction.
+
+## Picture: recovery-done and no-body together
 
 ```mermaid
 flowchart TD
@@ -21,29 +22,39 @@ flowchart TD
   Body -->|no| Allow[may close]
 ```
 
-Do not accept “alerts stopped firing” as the conjunction. Production still needs restore to have *run* — `"done"` typed by an optimistic closer is a lying recovery. Untested backups remain residual. `v5.0.0-16.4.3` wants logs on a logically separate system so an app breach does not erase evidence. The L3 clause of `v5.0.0-16.3.2` (log all authorization decisions without the sensitive data) is Level 3 advanced.
+The repaired files require that conjunction. Production still needs restore to have *run* — `"done"` typed by an optimistic closer is a lying recovery. Untested backups remain leftover. Logs still belong on a separate system so an app breach does not erase evidence. Logging every authorization decision without the sensitive data is extra, advanced work.
 
-CSF 2.0 Recover is an outcome. This pytest is that sentence for close-without-recovery.
+Industry “recover” is an outcome. This pytest is that sentence for close-without-recovery.
 
-## Why this restores the cell
+## What the repaired files must show
+
+Read `fixed/ir.py` against this checklist. Do not treat the snippet as a production incident product.
 
 | After the fix | Must be true |
 |---|---|
 | recovery todo | close false |
-| note_body in logs | close false |
+| `note_body` in logs | close false |
 | done + ok | close true |
+
+Fail closed: if you are unsure whether restore ran, keep the ticket open. Uncertainty is a **no** on close, not a yes because the SIEM is green.
 
 ## What this is not
 
-PagerDuty. MTTD. KEV. Gate 10 / M4. Untested backups (residual). A SIEM vendor. Logging Cheat Sheet as the oracle.
+- A paging product.
+- Time-to-detect.
+- A known-exploited listing.
+- An assurance-gate sticker.
+- Untested backups.
+- A SIEM vendor.
+- A logging cheat sheet as the oracle.
 
-## Mechanism limits
+## What the tool cannot do
 
 - `"done"` without a restore drill is a lying field.
-- Substring `note_body` is a stand-in, not DLP.
-- Clocks (`v5.0.0-16.2.2`) are not this predicate.
-- Support-tool god-mode is 3.3.
-- Observability exfil (8.5 web Sentry) remains a sibling sink.
+- Substring `note_body` is a stand-in, not a leak scanner.
+- Clocks that match across hosts are not this check.
+- Support-tool god-mode is a different leftover from earlier cluster lessons.
+- Crash and observability sinks remain sibling copies of the note.
 
 ## Practice
 
@@ -53,16 +64,16 @@ Name who can mark recovery done. Run:
 python3 -m pytest labs/10.5/10.5-lab/tests --impl fixed
 ```
 
-Must pass. Run from the lab directory if collection at repo root is polluted.
+It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-## Transfer
+## Use it somewhere new
 
-Clinic: restore test evidence, not a green dashboard.
+Clinic: restore-test evidence, not a green dashboard. The lab still uses fake strings.
 
-## Residual risk
+## What can still go wrong
 
-Imperfect forensics; observability exfil; support-tool god-mode; L3 clause of `v5.0.0-16.3.2`.
+Imperfect forensics. Observability as a way out. Support-tool god-mode. Logging every authorization decision without the sensitive data.
 
-## Non-goals
+## What this page is not doing
 
-Do not query a live SIEM. Do not claim Gate 10 from a green tile. Do not present KEV as close.
+Do not query a live SIEM. Do not claim you finished an assurance gate from a green tile. Do not present a known-exploited list as close.

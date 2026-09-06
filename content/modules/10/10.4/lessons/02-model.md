@@ -1,25 +1,28 @@
-# 10.4-LO-02 — Boot flags vs NODE_ENV slogans
+# Boot flags vs NODE_ENV slogans
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** ASVS `v5.0.0-13.4.2`, `v5.0.0-13.4.5`, `v5.0.0-13.3.1`.
 
-## Can a second engineer name the boot check from your compose map?
+## Could someone else name the boot check from your compose map?
 
-“We set NODE_ENV=production” is not this lesson. A reviewable model names **env, debug, who can edit compose, admin bind address, migration fail-open, and rollback**.
+“We set `NODE_ENV=production`” is not this lesson. A drawing someone else can test names **env, debug, who can edit compose, the admin bind address, whether a migration fails open, and rollback**.
 
-SecureCollab freeze: local `boot_ok(env, debug)`. No live production hosts.
+This week’s freeze for the notes app: local `boot_ok(env, debug)`. No live production hosts.
 
-## Mental model: two flags
+> For boot, the rule is deny when `env` is `"prod"` and `debug` is true. Production without debug may boot. Evidence that the deny is false: `boot_ok("prod", True)` returns true.
+
+If the env × debug row is blank, the process starts because nobody named the check.
+
+## Picture: two flags
 
 ```mermaid
 flowchart TD
   Env[env prod] --> Boot[boot_ok]
   Debug[debug] --> Boot
-  Node[NODE_ENV string] --> NotBoot[not the predicate]
+  Node[NODE_ENV string] --> NotBoot[not the check]
 ```
 
-## Mental model: other TCB leftover
+## Picture: leftover you still have to trust
 
 ```mermaid
 flowchart LR
@@ -28,40 +31,46 @@ flowchart LR
   Admin[admin bind] --> World["0.0.0.0"]
 ```
 
-## Step 1: freeze pieces
+`NODE_ENV` is a slogan until something compares `env` to `debug`. A feature flag that turns off authorization, a migration that fails open, and an admin port bound to the world are other leftover — same family, not this pytest.
+
+## Step 1: name the pieces
+
+Do not invent a new catalogue. Take the boot rule you already have and ask what would show production started with debug on.
 
 | Piece | This system |
 |---|---|
-| Subjects | anyone who finds `/debug`; error-page scraper |
-| Objects | running config; traces |
+| Who | Anyone who finds `/debug`; an error-page scraper |
+| What | Running config; traces |
 | Actions | `boot_ok` |
-| Channels | compose; feature flags; admin port |
-| TCB | prod+debug deny |
-| Untrusted | NODE_ENV string; canary; IaC existence |
-| State / time | deploy; “five minutes”; rollback |
-| 1.1 cell | least privilege of the running config |
+| Paths | Compose; feature flags; admin port |
+| What you trust for this journey | Prod plus debug is deny |
+| What you do not trust | The `NODE_ENV` string; a canary; an IaC file that exists |
+| Time | Deploy; “five minutes”; rollback |
+| The rule | Least privilege of the running config |
 
-## Step 2: write cells
+## Step 2: write allow and deny
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
 | prod + debug | boot | allow | deny |
 | prod + not debug | boot | allow | may allow |
-| NODE_ENV=production | boot | treat as check | deny |
-| feature flag disables authz | request | treat as config leftover | deny |
+| `NODE_ENV=production` | boot | treat as the check | deny |
+| feature flag turns off authz | request | treat as leftover config | deny |
+
+A missing prod-plus-debug deny is how a compose slogan becomes false comfort. Write the hole.
 
 ## Practice
 
-Draw the map. Point at `labs/10.4/10.4-lab` file `cfg.py`.
+Draw the map so someone else could name the checks. Point at `labs/10.4/10.4-lab` file `cfg.py`.
 
-## Transfer
+## Use it somewhere new
 
 Django `DEBUG=True` is the same grain with different syntax.
 
-## Residual risk
+## What can still go wrong
 
-Other flags; sidecar debug; `v5.0.0-13.4.6` Level 3 version leakage; emergency debug with E6.
+Other flags. A sidecar debug container. Extra version leakage with debug already off (extra, advanced work). Emergency debug without an expiry (E6).
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+Do not define security as a famous-bugs list. Answer keys stay out of lessons.

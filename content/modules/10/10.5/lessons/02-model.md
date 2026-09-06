@@ -1,25 +1,28 @@
-# 10.5-LO-02 — Close predicate vs detection quality
+# Close check vs detection quality
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** ASVS `v5.0.0-16.1.1`, `v5.0.0-16.2.5`, `v5.0.0-16.4.3`. NIST CSF 2.0.
 
-## Can a second engineer name the close check from your playbook?
+## Could someone else name the close check from your playbook?
 
-“PagerDuty acked” is not this lesson. A reviewable model names **recovery evidence, log inventory, who can close, and whether note bodies can reach the SIEM**.
+“Paging acked” is not this lesson. A drawing someone else can test names **recovery evidence, the log inventory, who can close, and whether note bodies can reach the SIEM**.
 
-SecureCollab freeze: local `close_incident({recovery, logs})`. No live SIEM.
+This week’s freeze for the notes app: local `close_incident({recovery, logs})`. No live SIEM.
 
-## Mental model: three fields
+> For close, the rule is deny when recovery is still todo, and deny when logs contain `note_body`. Honest recovery plus safe logs may close. Evidence that the deny is false: `close_incident({"recovery": "todo", "logs": "ok"})` returns true.
+
+If the recovery × logs row is blank, the ticket closes because nobody named the check.
+
+## Picture: three fields
 
 ```mermaid
 flowchart TD
   Rec[recovery] --> Close[close_incident]
   Logs[logs blob] --> Close
-  Siem[SIEM green] --> NotClose[not the predicate]
+  Siem[SIEM green] --> NotClose[not the check]
 ```
 
-## Mental model: CSF outcomes are not a product
+## Picture: detect is not recover
 
 ```mermaid
 flowchart LR
@@ -29,40 +32,46 @@ flowchart LR
   De --> NotDone[not close]
 ```
 
-## Step 1: freeze pieces
+Industry detect / respond / recover labels name outcomes. They are not a product, and they are not this close check.
+
+## Step 1: name the pieces
+
+Do not invent a new catalogue. Take the ticket you already have and ask what would show recovery still has not run.
 
 | Piece | This system |
 |---|---|
-| Subjects | optimistic closer; still-in attacker |
-| Objects | incident ticket; log pipeline |
+| Who | Optimistic closer; still-in attacker |
+| What | Incident ticket; log pipeline |
 | Actions | `close_incident` |
-| Channels | SIEM; crash; support tool |
-| TCB | recovery=done and no note_body |
-| Untrusted | SIEM green; PagerDuty; KEV; MTTD |
-| State / time | restore drill; clock sync (`v5.0.0-16.2.2`) |
-| 1.1 cell | resilience after prevention failed |
+| Paths | SIEM; crash; support tool |
+| What you trust for this journey | recovery done and no `note_body` |
+| What you do not trust | SIEM green; paging ack; known-exploited list; time-to-detect |
+| Time | Restore drill; clocks that actually match |
+| The rule | Resilience after prevention failed |
 
-## Step 2: write cells
+## Step 2: write allow and deny
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
-| recovery todo | close | allow | deny |
-| note_body in logs | close | allow | deny |
-| recovery done + safe logs | close | allow | may allow |
-| SIEM green | close | treat as recover | deny |
+| closer | recovery todo | close | deny |
+| closer | `note_body` in logs | close | deny |
+| closer | recovery done + safe logs | close | may allow |
+| SIEM green | ticket | treat as recover | deny |
+
+A missing recovery field is how a green tile becomes “Done.” Write the hole.
 
 ## Practice
 
-Draw the map. Point at `labs/10.5/10.5-lab` file `ir.py`.
+Draw the map so someone else could name the checks. Point at `labs/10.5/10.5-lab` file `ir.py`.
 
-## Transfer
+## Use it somewhere new
 
 Clinic SIEM-green close is the same grain with a dashboard instead of a dict.
 
-## Residual risk
+## What can still go wrong
 
-Imperfect forensics; support-tool god-mode (3.3 / 10.3); L3 clause of `v5.0.0-16.3.2`.
+Imperfect forensics. Support-tool god-mode from earlier cluster lessons. Logging every authorization decision without the sensitive data is extra, advanced work.
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+Do not define security as a famous-bugs list. Answer keys stay out of lessons.

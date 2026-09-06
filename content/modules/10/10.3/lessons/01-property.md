@@ -1,20 +1,21 @@
-# 10.3-LO-01 — A namespace is not cluster-admin
+# A namespace is not cluster-admin
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** NIST SP 800-190 (final, 2017) as container-stack vocabulary. Kubernetes PSS/PSA (stable) as pod-hardening vocabulary. ASVS `v5.0.0-13.2.1`, `v5.0.0-13.2.2`, `v5.0.0-13.2.4`; `v5.0.0-13.2.6` is **Level 3, advanced**.
 
-## The claim this module owns
+## The rule
 
-SecureCollab’s API pods run on a lab cluster (or a serverless analogue). **Authorization of the control plane** is whether the app ServiceAccount can mutate the cluster. A Kubernetes *namespace* is a name for objects. It is not a tenant and not least privilege.
+The notes app's API pods run on a lab cluster (or a serverless analogue). **Authorization of the control plane** is whether the app ServiceAccount can change the cluster. A Kubernetes *namespace* is a name for objects. It is not a tenant and not least privilege.
 
 > `pod_ok("cluster-admin")` must be false. `pod_ok("app")` may be true.
 
-The forbidden outcome is **app pod granted cluster-admin**. That is 3.3 at cluster grain: one app bug becomes cluster takeover.
+So what must not happen: **an app pod granted cluster-admin**. That is least privilege at cluster grain — the same idea as a shared database god-role: one app bug becomes cluster takeover.
 
-ASVS `v5.0.0-13.2.1` wants backend components authenticated with individual service accounts, not a shared god role. `v5.0.0-13.2.2` wants those accounts least-privileged. `v5.0.0-13.2.4` wants an outbound allowlist — the hop to instance metadata (6.5) is how node IAM leaks into the pod. `v5.0.0-13.2.6` (documented connection/retry toward the cluster API) is **Level 3, advanced**. NIST SP 800-190 names five layers (image, registry, orchestrator, container, host); it does not make EKS “secure by default.” Kubernetes PSS `restricted` hardens the *pod spec*; it does not replace RBAC.
+Industry checklists want backend pieces authenticated with their own service accounts, not a shared god role. They want those accounts least-privileged. They want an outbound allow-list — the hop to instance metadata is how node credentials leak into the pod. Documented connection and retry toward the cluster API is extra, advanced work, not this week's check. A container-stack guide names five layers (image, registry, orchestrator, container, host). It does not make a managed cluster "secure by default." A restricted pod profile hardens the *pod spec*. It does not replace who may call the API.
 
-## Mental model: namespace vs ClusterRole
+This week's practice is this course's local files. Do not tell anyone to try attacks on public or third-party clusters.
+
+## Picture: namespace vs ClusterRole
 
 ```mermaid
 flowchart TD
@@ -24,60 +25,64 @@ flowchart TD
   Bind -->|Role in ns| Least[may run]
 ```
 
-## Mental model: PSS is not RBAC
+## Picture: a restricted pod profile is not who-is-allowed
 
 ```mermaid
 flowchart LR
-  Pss[PSS restricted] --> Spec[pod spec fields]
-  Rbac[RBAC] --> Api[who may call the API]
-  Net[NetworkPolicy] --> Egress[who may talk]
+  Pss[restricted pod profile] --> Spec[pod spec fields]
+  Rbac[who-is-allowed on the API] --> Api[who may call the API]
+  Net[network policy] --> Egress[who may talk]
   Pss --> NotRbac[not authorization]
 ```
 
-**Mechanism (not the property):** EKS defaults, Helm, “we use Kubernetes,” NetworkPolicy, a CIS benchmark score.
+**A tool, not the rule:** managed-cluster defaults, Helm, "we use Kubernetes," a network policy, a CIS benchmark score.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | For this property |
+Someone granted god-mode for convenience. That is the cause. Cluster takeover from one app bug is a **result**, not the cause.
+
+| Slice | For this rule |
 |---|---|
-| Root cause | God-mode for convenience |
-| Preconditions | `pod_ok("cluster-admin")` true |
+| Why it happens | God-mode for convenience |
+| What has to be true first | `pod_ok("cluster-admin")` true |
 | Trigger | Compromised container or malicious chart |
-| Impact | Authorization of the control plane |
-| Prevention | Namespaced RoleBinding; PSS restricted; IMDS hop denied |
-| Detection | `cluster_admin_denied` |
-| Recovery | Rotate cluster credentials; revoke the binding |
+| What it costs | Authorization of the control plane |
+| How you stop it | Namespaced RoleBinding; restricted pod profile; IMDS hop denied |
+| How you notice | `cluster_admin_denied` |
+| How you recover | Rotate cluster credentials; revoke the binding |
 
-## Framework defaults versus the cluster guarantee
+## What the framework does vs what you still have to check
 
 A default ServiceAccount in a namespace often mounts a token. Managed Kubernetes still accepts a ClusterRoleBinding you apply. `Dockerfile USER root` and `hostNetwork` are extra grains, not this cell.
 
-## Mechanism limits
+The app's promise is: **this** `pod_ok("cluster-admin")` is false. The local check is `labs/10.3/10.3-lab`. Fake role strings only. No live clusters.
 
-- NetworkPolicy is not RBAC.
-- PSS `restricted` with ClusterRole `cluster-admin` still takes the API.
-- Node IAM via instance metadata (6.5).
-- Helm charts that create ClusterRoles as a “convenience.”
+## What the tool cannot do
 
-## Usability and accessibility
+- A network policy is not who-is-allowed on the API.
+- A restricted pod profile with ClusterRole `cluster-admin` still takes the API.
+- Node credentials via instance metadata.
+- Helm charts that create ClusterRoles as a "convenience."
 
-Admission denial must say *cluster-admin refused* in text, not only a red webhook (WCAG 2.2 4.1.3).
+## Can people still use it
+
+Admission denial must say *cluster-admin refused* in text, not only a red webhook.
 
 ## Practice
 
 Name the ServiceAccount and the Role it is bound to. Then run:
 
-```
+```text
 python3 -m pytest labs/10.3/10.3-lab/tests --impl vulnerable
 python3 -m pytest labs/10.3/10.3-lab/tests --impl fixed
 ```
 
 The first command must fail. The second must pass.
 
-## Transfer
+## Use it somewhere new
 
 Serverless IAM `*`. Clinic: app SA is cluster-admin.
 
-## Non-goals
+## What this page is not doing
 
-Live clusters, claiming Gate 10 or M4. Answer keys are not in this file.
+Live clusters, claiming you finished an assurance gate from this page. Answer keys are not in this file.

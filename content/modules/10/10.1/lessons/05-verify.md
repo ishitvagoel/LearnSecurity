@@ -1,56 +1,69 @@
-# 10.1-LO-05 — Evidence is empty-PR denied, then a passing pair
+# Fail on the broken files, then pass on the repaired ones
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
-**Standards:** NIST SSDF 1.1 (final) PW.1. ASVS `v5.0.0-15.1.5` Level 3 **advanced**. CISA Secure by Design **unverified**.
 
-## An invariant that cannot fail a test is still a slogan
+## If you cannot test it, it is still a slogan
 
-“CODEOWNERS is on” is not evidence. “SAMM Level 3” is a mechanism observation. The oracle is: `merge_ok({})` is false and `{"threat_model": "TM-12"}` may merge. The empty-PR observation must be **false** on `--impl vulnerable` (returns true) and **true** on `--impl fixed`. Do not merge in a live GitHub org.
+“CODEOWNERS is on” is not evidence. “Maturity Level 3” is a tool observation. The check is: `merge_ok({})` is false and `{"threat_model": "TM-12"}` may merge. That empty-change observation must be **false** on the broken files (they return true) and **true** on the repaired files. Do not merge in a live GitHub org.
 
-## Mental model: empty threat-model PR must fail merge
+## Picture: a broken merge check must fail the empty-change test
 
-The failing observation on `--impl vulnerable` is **empty PR**. A passing collection count is not this cell.
+A test that only counts passing checks can pass while an empty dict still merges. This check asks whether merge without a threat-model id still counts as a passing control. Broken must fail that question. Repaired must pass it.
 
 ```mermaid
 flowchart LR
-  V["--impl vulnerable"] --> F["Must fail empty PR"]
-  X["--impl fixed"] --> P["Must pass deny"]
+  V["broken files --impl vulnerable"] --> F[Must fail: empty change merges]
+  X["repaired files --impl fixed"] --> P[Must pass: empty change is deny]
 ```
 
-| Mode | Must show for this module |
-|---|---|
-| Negative / abuse | `{}` → not merge; empty threat-model PR must fail merge |
-| Normal | `{"threat_model": "TM-12"}` → may merge (may pass on both) |
-| Not claimed | live GitHub; Gate 10; SAMM; that TM-12 covers this PR |
+If both pass, the test is not looking at `threat_model`. If both fail, the fix is not structural or the check is wrong.
 
-Lab tests in `labs/10.1/10.1-lab/tests/test_property.py`. `test_merge_requires_threat_model_id` is a **forbidden-outcome** test: always-true `merge_ok` is not allowed to count as a passing control.
+## Four modes, even for a merge dict
+
+| Mode | Must show for this topic |
+|---|---|
+| Normal | `{"threat_model": "TM-12"}` → may merge (may pass on both) |
+| Wrong input | `{}` → not merge; empty threat-model change must fail merge |
+| Abuse | Unsure or empty ids are deny (fail closed; leftover if not in this pytest) |
+| Not claimed | A live GitHub org; Gate 10; a maturity score; that TM-12 covers this change |
+
+The file is `labs/10.1/10.1-lab/tests/test_property.py`. The test `test_merge_requires_threat_model_id` is a **what-must-not-happen** test: always-true `merge_ok` is not allowed to count as a passing control.
+
+Honest `{"threat_model": "TM-12"}` may pass on both implementations. That does not excuse the empty-change deny test. If the broken files do not fail `test_merge_requires_threat_model_id`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/10.1/10.1-lab/tests --impl vulnerable
 python3 -m pytest labs/10.1/10.1-lab/tests --impl fixed
 ```
 
-Honest `{"threat_model": "TM-12"}` may pass on both implementations. That does not excuse the empty-PR deny test. If vulnerable does not fail `test_merge_requires_threat_model_id`, the lab is miswired—fix the wiring, not the assertion.
+A test that only greps `CODEOWNERS` in a repo without calling `merge_ok({})` is not this topic’s evidence. This practice never opens a live GitHub org.
 
-## What the tests do not prove
+## What the checks do not prove
 
-- That TM-12’s listed files include this PR’s paths (3.2 quality)
+- That TM-12’s listed files include this change’s paths (3.2 owns quality)
 - That the author may cite that id
-- CISA Secure by Design as a verified pin
-- Level 3 SDL evidence (`v5.0.0-15.1.5`)
-- Gate 10 / M4 complete
+- An unverified “secure by design” page as a product
+- Extra advanced software-lifecycle evidence about documenting dangerous functions
+- Gate 10 or M4 complete
 
-Record those as residuals or later modules, not as silent passes.
+Record those as leftover or later topics, not as silent passes.
 
 ## Practice
 
-Execute both implementations this session from the lab directory if needed. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `CODEOWNERS` in a repo without calling `merge_ok({})`.
+Run both this session from the lab directory if needed:
 
-## Transfer
+```text
+python3 -m pytest labs/10.1/10.1-lab/tests --impl vulnerable
+python3 -m pytest labs/10.1/10.1-lab/tests --impl fixed
+```
 
-Clinic: a test that only asserts “HIPAA training complete” is not this cell. A live GitHub org is out of scope.
+Paste nothing from answer keys. Write fail/pass into your notes next to the trigger-table row. Reject a “test” that only greps `CODEOWNERS` in a repo without calling `merge_ok({})`.
 
-## Non-goals
+## Use it somewhere new
 
-Do not add a live-org trophy. Do not log GitHub tokens. Keys stay out of this file. Gate 10 stays not-attempted.
+Clinic: a test that only asserts “HIPAA training complete” is not this topic. A live GitHub org is out of scope.
+
+## What this page is not doing
+
+Do not add a live-org trophy. Do not log GitHub tokens. Answer keys stay out of this file. Gate 10 stays not-attempted.

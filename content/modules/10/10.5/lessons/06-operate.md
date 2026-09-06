@@ -1,14 +1,15 @@
-# 10.5-LO-06 — Detect incident_closed_without_recovery without logging bodies
+# incident_closed_without_recovery without logging bodies
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
-**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; ASVS `v5.0.0-16.2.5`, `v5.0.0-16.4.3`.
 
-## Prevention is not absolute
+## Stopping it is not enough
 
-A closer can bypass the ticket UI. Pair detect and recover. Do not log note bodies, session tokens, or dump files into the ticket (3.1). Do not paste note text into Slack.
+A closer can still mark Done after `close_incident` was “fixed once.” Pair notice and recover. Do not log note bodies, session tokens, or dump files into the ticket. Do not paste note text into chat.
 
-## Mental model: illegal close is a signal
+## Picture: illegal close is a signal
+
+A close that skipped recovery is a notice-and-recover problem, not a licence to quote the note in the paging channel. Notice names the incident. Recover reopens and runs the restore drill. Neither reprints the body.
 
 ```mermaid
 flowchart TD
@@ -17,39 +18,56 @@ flowchart TD
   Metric --> Reopen[reopen and restore]
 ```
 
-| Outcome | This module |
+Industry lists name detect, respond, recover. They do not pick a SIEM product. They do not prove this ticket’s restore ran. Someone still has to own the leftover.
+
+Re-run `test_cannot_close_without_recovery` after any close-workflow change. A green “alerts stopped” tile is not that pytest. Also re-run `test_cannot_close_when_logs_contain_note_body` — a second sink (crash reports, web telemetry) can reopen the leftover-body hole.
+
+## Signals that do not become a second leak
+
+| Outcome | This topic |
 |---|---|
-| Detect | `incident_closed_without_recovery` |
-| Signal | incident id, recovery state; never note bodies |
-| Recover | Reopen; run restore drill; revoke leftover sessions (4.3) |
-| Residual | Imperfect forensics; observability exfil; E6 N/A |
+| Notice | `incident_closed_without_recovery` |
+| What the line holds | Incident id, recovery state; **never** note bodies |
+| Respond | Stop the closer that ignored recovery; do not paste note text into chat |
+| Recover | Reopen; run restore drill; revoke leftover sessions |
+| Leftover | Imperfect forensics; observability as a way out; recovery marked “not applicable” without an exception process |
 
-CSF 2.0 Detect / Respond / Recover name outcomes. They do not prove `v5.0.0-16.2.5`. A SIEM-product name is not the property. Re-run `test_cannot_close_without_recovery` after any close-workflow change; a green “alerts stopped” tile is not that pytest. Also re-run `test_cannot_close_when_logs_contain_note_body` — a second sink (8.5 / web crash reports) can reopen the 3.1 cell.
+A SIEM dashboard will show time-to-detect and stay silent when CI’s `close_incident` is always true. Detection must observe **recovery todo is deny**, not alert volume. If the alert includes a note body, you have opened a leftover-body leak.
 
-## Framework defaults versus the operate guarantee
-
-A SIEM dashboard will show MTTD and stay silent when CI’s `close_incident` is always true. Detection must observe **recovery todo is deny**, not alert volume. If the alert includes a note body, you have opened a 3.1 / `v5.0.0-16.2.5` cell.
-
-## Practice
-
-Write one log line you would accept. Tie it to `labs/10.5/10.5-lab`.
+A log line a reviewer can accept looks like:
 
 ```text
 log_denied reason=incident_closed_without_recovery id=INC-12 recovery=todo
 ```
 
-Reject any line that includes a note body, a session token, or “Gate 10 complete.”
+Not: a note body, a session token, or “assurance gate complete.”
 
-## Transfer
+If your alert includes the matching note, you have copied the leak into the paging channel.
 
-Clinic: reopen the SIEM-green ticket; do not paste note text into Slack. Do not query a live SIEM.
+## What the framework does vs what you still have to check
 
-## Usability
+The same always-true close, leftover bodies, and support-tool god-mode that bypass this fixture will also bypass a “scan our SIEM dashboard” detector. Name those places before you claim recover. A SIEM-product name is not the rule.
 
-A reopen notice must say *recovery still todo*, not only “assert False” (WCAG 2.2 Success Criterion 4.1.3). Under stress, do not use color-only severity.
+Cause vs cost stays split here too: the **cause** is close looking at detection quality instead of recovery done and no `note_body`; the **cost** is an attacker still in plus extra note copies; **how you stop it** is the conjunction; **how you notice** is `incident_closed_without_recovery`; **how you recover** is reopen and restore. What the tool cannot do: this alert does not prove the restore drill ran, and it does not ship logs to a separate system.
 
-Cause vs impact stays split here too: the **cause** is close on detection quality; the **impact** is an attacker still in plus extra note copies; **prevention** is the conjunction; **detection** is `incident_closed_without_recovery`; **recovery** is reopen-and-restore. Mechanism limit: this alert does not prove the restore drill ran, and it does not ship logs to a separate system (`v5.0.0-16.4.3`).
+## Can people still use it
 
-## Non-goals
+A reopen notice must say *recovery still todo*, not only “assert False.” Under stress, do not use color-only severity.
 
-A SIEM-vendor name is not the property. M4 stays not-attempted. KEV is not close.
+## Practice
+
+Write one log line you would accept in review. Tie it to `labs/10.5/10.5-lab`.
+
+```text
+log_denied reason=incident_closed_without_recovery id=INC-12 recovery=todo
+```
+
+Reject any line that includes a note body, a session token, or “assurance gate complete.”
+
+## Use it somewhere new
+
+Clinic: reopen the SIEM-green ticket; do not paste note text into chat. Do not query a live SIEM.
+
+## What this page is not doing
+
+A SIEM-vendor name is not the rule. Do not claim you finished an assurance gate. A known-exploited listing is not close. Answer keys stay out of lessons.

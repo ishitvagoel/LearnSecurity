@@ -1,57 +1,62 @@
-# 10.2-LO-08 — Review always-true install_ok as a PR
+# Review always-true install_ok like a pull request
 
 **Kind:** code-review
 **Loop step:** Review
-**Standards:** ASVS `v5.0.0-15.1.2`, `v5.0.0-13.3.1`. SLSA 1.2 as vocabulary. CISA 2026 SBOM as inventory.
 
-## Review the fixture as if it were SecureCollab CI install
+Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
 
-Review `labs/10.2/10.2-lab/vulnerable/` as a SecureCollab PR. Your job is not to count suspicious lines. Reconstruct whether `install_ok("aaa", "bbb")` still returns true, compare that with the module invariant, and write changes a developer can verify.
+## What you are reviewing
 
-Intended findings live only in `content/assessment/keys/10.2.md` — not here. Do not open the keys file until your review has been evaluated.
+A colleague ships the notes app’s CI install check. Review `labs/10.2/10.2-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `install_ok("aaa", "bbb")` still returns true, compare that with the rule, and write changes a developer can verify.
 
-## Mental model: install_ok True on hash mismatch
+Start at `install_ok` and the two hash strings, not at a scanner color or an SBOM screenshot. The check you already ran (`test_hash_mismatch_refuses_install`) is the rule test. A comment “will pin later” is not.
 
-Start with this seeded smell: **install_ok True on hash mismatch**. Label it property, mechanism, or false assurance before you accept the PR.
+## Picture: install_ok true on hash mismatch
+
+Start with this seeded smell: **install_ok true on hash mismatch**. Label it rule, tool, or false comfort before you accept the change.
 
 ```mermaid
 flowchart TD
-  Claim[PR claim] --> Q{"What would falsify it?"}
-  Q -->|mismatch installs| Property["Property - good if tested"]
-  Q -->|SBOM attached| Mechanism[Mechanism - inventory]
-  Q -->|SLSA badge| False[False assurance]
+  Claim[PR claim] --> Q{"What would show it is false?"}
+  Q -->|mismatch installs| Property["Rule - good if tested"]
+  Q -->|SBOM attached| Mechanism[Tool - inventory]
+  Q -->|provenance badge| False[False comfort]
 ```
 
 Classification starts at the protected effect (mismatch denied). Everything that is not digest equality at that call is a candidate always-install path. An SBOM screenshot without that pytest is the same smell, not a different finding class.
 
-Unpinned Actions are a sibling grain. Secrets in fork PRs are 5.3. Do not skip `test_hash_mismatch_refuses_install`. Do not claim Gate 10. Do not fetch a live package to prove the finding.
+Unpinned Actions are a sibling grain. Secrets in fork pull requests are 5.3. Do not skip `test_hash_mismatch_refuses_install`. Do not claim the ship gate. Do not fetch a live package to prove the finding.
 
 ## Seeded smells (label them yourself)
 
-- install_ok True on hash mismatch
+- install_ok true on hash mismatch
 - Unpinned action
 - Secrets in PR from forks
 - SBOM generated but never used
 
-Also reject: live registry attacks; installing without re-running `test_hash_mismatch_refuses_install`; keys in lessons; claiming Gate 10 or M4.
+Also reject: live registry attacks; installing without re-running `test_hash_mismatch_refuses_install`; keys in learner notes; claiming the ship gate.
 
-## Misconceptions this module refuses
+## Common mix-ups
 
 - Lockfile without verify is integrity
 - Private npm is safe
-- SLSA badge is the app’s 1.2
+- A provenance badge is the app’s hash check
 - Generating an SBOM verifies installs
 - Dependabot is `install_ok`
-- Gate 10 follows from a green audit job
+- The ship gate follows from a green audit job
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: observation, property or false assurance, suggested structural change, residual you will **not** delete. Tie at least one to `test_hash_mismatch_refuses_install`.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_hash_mismatch_refuses_install`. Do not open the keys file.
 
-## Transfer
+## Use it somewhere new
 
-Clinic PR that “added CycloneDX and Dependabot” without a digest check is an incomplete install-gate review. Name the independent falsehood that would still keep mismatch from installing.
+Clinic change that “added CycloneDX and Dependabot” without a digest check is an incomplete review of the install gate. Name the independent falsehood that would still keep mismatch from installing.
 
-## Non-goals
+## Can people still use it
 
-Do not merge by adding a comment “will pin later.” That comment is a residual without an owner. Do not typosquat a public registry to prove the finding.
+A denied install must say *digest mismatch* in words. Do not hide the reason behind a red X.
+
+## What this page is not doing
+
+Do not merge by adding a comment “will pin later.” That comment is leftover without an owner. Do not typosquat a public registry to prove the finding.

@@ -1,57 +1,70 @@
-# 10.3-LO-05 — Evidence is cluster-admin denied, then a passing pair
+# Fail on the broken files, then pass on the repaired ones
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
-**Standards:** ASVS `v5.0.0-13.2.1`. Kubernetes PSS as vocabulary, not the oracle.
 
-## An invariant that cannot fail a test is still a slogan
+## If you cannot test it, it is still a slogan
 
-“We use Kubernetes” is not evidence. “CIS is green” is a mechanism observation. The oracle is: `pod_ok("cluster-admin")` is false and `"app"` may run. The cluster-admin observation must be **false** on `--impl vulnerable` (returns true) and **true** on `--impl fixed`. Do not apply YAML to a live cluster.
+"We use Kubernetes" is not evidence. "CIS is green" is a tool observation. The check is: `pod_ok("cluster-admin")` is false and `"app"` may run. That cluster-admin observation must be **false** on the broken files and **true** on the repaired files. Do not apply manifests to a live cluster.
 
-## Mental model: vulnerable must fail: cluster-admin
+## Picture: a broken admission must fail the check
 
-The failing observation on `--impl vulnerable` is **cluster-admin**. A passing collection count is not this cell.
+A test that only counts passing tests can pass while `pod_ok("cluster-admin")` still returns true. This check asks whether an app pod granted cluster-admin still counts as a passing control. Broken must fail that question. Repaired must pass it.
 
 ```mermaid
 flowchart LR
-  V["--impl vulnerable"] --> F["Must fail cluster-admin"]
-  X["--impl fixed"] --> P["Must pass deny"]
+  V["broken files --impl vulnerable"] --> F[Must fail: cluster-admin runs]
+  X["repaired files --impl fixed"] --> P[Must pass: cluster-admin denied]
 ```
 
-| Mode | Must show for this module |
-|---|---|
-| Negative / abuse | cluster-admin → not run; vulnerable must fail |
-| Normal | app → may run (may pass on both) |
-| Not claimed | live EKS; CIS score; Gate 10; that `"app"` is least privilege |
+If both pass, the test is not looking at cluster-admin. If both fail, the fix is not structural or the check is wrong.
 
-Lab tests in `labs/10.3/10.3-lab/tests/test_property.py`. `test_cluster_admin_pod_is_denied` is a **forbidden-outcome** test: always-true `pod_ok` is not allowed to count as a passing control.
+## Four modes, even for a role string
+
+| Mode | Must show for this topic |
+|---|---|
+| Normal | `app` → may run (may pass on both) |
+| Wrong input | cluster-admin → cannot run; broken files must fail |
+| Abuse | Unknown roles still deny (fail closed) |
+| Not claimed | A live managed cluster; a CIS score; an assurance gate; that `"app"` is least privilege |
+
+The file is `labs/10.3/10.3-lab/tests/test_property.py`. The test `test_cluster_admin_pod_is_denied` is a **what-must-not-happen** test: always-true `pod_ok` is not allowed to count as a passing control.
+
+Honest `"app"` may pass on both implementations. That does not excuse the cluster-admin deny test. If the broken files do not fail `test_cluster_admin_pod_is_denied`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/10.3/10.3-lab/tests --impl vulnerable
 python3 -m pytest labs/10.3/10.3-lab/tests --impl fixed
 ```
 
-Honest `"app"` may pass on both implementations. That does not excuse the cluster-admin deny test. If vulnerable does not fail `test_cluster_admin_pod_is_denied`, the lab is miswired—fix the wiring, not the assertion.
+A test that only greps `namespace:` in a chart without calling `pod_ok("cluster-admin")` is not this topic's evidence. This practice never opens a live cluster.
 
 ## What the tests do not prove
 
-- PSS `restricted` on the real spec
-- NetworkPolicy egress
-- IMDS blocked (6.5)
-- Helm chart supply chain (10.2)
-- `v5.0.0-13.2.6` Level 3 cluster-API retry docs
-- Gate 10 / M4 complete
+- A restricted pod profile on the real spec
+- Network-policy egress
+- Instance metadata blocked
+- Helm chart supply chain
+- Documented cluster-API retry (extra, advanced)
+- An assurance gate complete
 
-Record those as residuals or later modules, not as silent passes.
+Record those as leftover or later topics, not as silent passes.
 
 ## Practice
 
-Execute both implementations this session from the lab directory if needed. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `namespace:` in a chart without calling `pod_ok("cluster-admin")`.
+Run both this session from the lab directory if needed:
 
-## Transfer
+```text
+python3 -m pytest labs/10.3/10.3-lab/tests --impl vulnerable
+python3 -m pytest labs/10.3/10.3-lab/tests --impl fixed
+```
 
-Clinic: a test that only asserts “namespace exists” is not this cell. A live kube-apiserver is out of scope.
+Paste nothing from answer keys. Write fail/pass into your notes next to the cluster-admin row. Reject a "test" that only greps `namespace:` in a chart without calling `pod_ok("cluster-admin")`.
 
-## Non-goals
+## Use it somewhere new
 
-Do not add a live-cluster trophy. Do not log kubeconfig. Keys stay out of this file. Gate 10 stays not-attempted.
+Clinic: a test that only asserts "namespace exists" is not this topic. A live kube-apiserver is out of scope.
+
+## What this page is not doing
+
+Do not add a live-cluster trophy. Do not log kubeconfig. Answer keys stay out of this file. Do not claim you finished an assurance gate.

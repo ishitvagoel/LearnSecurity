@@ -1,27 +1,27 @@
-# 10.3-LO-07 — Transfer: clinic app SA is cluster-admin
+# Same idea: clinic app SA is cluster-admin
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** NIST SP 800-190 as stack vocabulary. Kubernetes PSS as pod hardening. ASVS `v5.0.0-13.2.1`. `v5.0.0-13.2.6` Level 3 **advanced**.
 
-## Change the workplace; keep namespace from meaning isolation
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: `pod_ok("cluster-admin")` must be false. Rewrite it for a clinic without changing the fork.
+The notes-app scaffolding goes away. You get a **clinic app ServiceAccount that is cluster-admin**. Your job is to rewrite the loop, not to name a bug-list code.
 
-**Prompt:** Clinic: app SA is cluster-admin. Also name serverless IAM `*`.
+The notes-app sentence was: `pod_ok("cluster-admin")` must be false. Rewrite it for a clinic without changing the fork: cluster-admin denied, app may run. A private namespace is still a name, not isolation.
 
-**Product sketch:** EHR-lite “the API namespace is private so ClusterRole is fine,” plus “we attached a NetworkPolicy and a CIS Kubernetes scan.”
+**Product sketch:** an EHR-lite "the API namespace is private so ClusterRole is fine," plus "we attached a network policy and a CIS Kubernetes scan."
 
-Rewrite the SecureCollab sentence. Include:
+## Picture: same admission loop, clinical object
 
-1. attacker capabilities (compromised container / malicious chart — not a live clinic cluster attack);
-2. trust assumptions (allowlisted namespaced role is TCB; namespace/NetworkPolicy/PSS/CIS are not);
-3. forbidden outcome (`pod_ok("cluster-admin")` true, not “HIPAA”);
-4. a test idea on a **local** fixture only (no live kube-apiserver);
-5. residual (break-glass E6, IMDS hop, `v5.0.0-13.2.6` Level 3);
-6. WCAG if admission is human-read (say cluster-admin refused).
+Renaming "note" to "chart" is not transfer. Rule, allow-list, and leftover change. Putting the app in a private namespace does not put `"app"` in `ALLOWED_ROLES`.
 
-## Mental model: private namespace vs ClusterRole
+| Notes app this week | Clinic sketch |
+|---|---|
+| App pod must not be cluster-admin | Clinic API SA must not be cluster-admin |
+| `pod_ok("cluster-admin")` false | Same call — cluster-admin still denied |
+| Namespaced `"app"` may run | Same allow-list — local fixture only |
+| Compromised container / malicious chart | Same actors — **not** a live clinic cluster |
+| Namespace / network policy / CIS scan | Same inputs — not the admission decision |
 
 ```mermaid
 flowchart LR
@@ -29,24 +29,39 @@ flowchart LR
   Sa[cluster-admin SA] --> Reality[control plane]
 ```
 
-If the namespace is “private” while `pod_ok` is always true, the cell is gone. NetworkPolicy, PSS `restricted`, and a CIS scan do not put `"app"` in `ALLOWED_ROLES`. Serverless IAM `*` is the same god-mode grain on a different object — name it, do not attack a live cloud account here. NIST SP 800-190 names five layers; it does not make EKS secure by default. `v5.0.0-13.2.6` is Level 3 advanced: documented cluster-API retry, not this pytest.
+If the namespace is "private" while `pod_ok` is always true, the rule is gone. A network policy, a restricted pod profile, and a CIS scan do not put `"app"` in `ALLOWED_ROLES`. Serverless IAM `*` is the same god-mode grain on a different object — name it, do not attack a live cloud account here. A container-stack guide names five layers; it does not make a managed cluster secure by default. Documented cluster-API retry is extra, advanced work, not this pytest.
 
-The clinic rewrite still has to keep the SecureCollab fork: cluster-admin denied, app may run. Adding a namespace without an allowlist leaves `pod_ok("cluster-admin")` true. The local pytest analogue is `test_cluster_admin_pod_is_denied` — on a fixture, not a live cluster.
+The clinic rewrite still has to keep the notes-app fork: cluster-admin denied, app may run. Adding a namespace without an allow-list leaves `pod_ok("cluster-admin")` true. The local pytest analogue is `test_cluster_admin_pod_is_denied` — on a fixture, not a live cluster.
 
-## What graders reject
+## Prompt — clinic app SA is cluster-admin
+
+Rewrite the notes-app sentence. Include:
+
+1. who can act (compromised container / malicious chart — not a live clinic cluster);
+2. what you trust (allow-listed namespaced role is the promise; namespace, network policy, restricted pod profile, and CIS are not);
+3. what must not happen (`pod_ok("cluster-admin")` true, not a legal label);
+4. a test idea on a **local** fixture only (no live kube-apiserver);
+5. leftover (break-glass elective, metadata hop, documented cluster-API retry);
+6. whether engineers read the denial (say cluster-admin refused, not color only).
+
+Use fake labels. Do not use real patient names.
+
+Also name serverless IAM `*`.
+
+## What is not good enough
 
 | Reject | Why |
 |---|---|
-| “we have NetworkPolicy” | Egress, not RBAC |
-| Live cluster / cloud takeover tutorial | Lab policy |
-| “PSS restricted so 1.2 is done” | Pod spec ≠ API authorization |
-| “CIS scan green” | Benchmark, not the predicate |
-| “Gate 10 complete” | Forbidden stamp |
+| "we have a network policy" | Egress, not who-is-allowed on the API |
+| Live cluster / cloud takeover tutorial | Course rules |
+| "restricted pod profile so who-is-allowed is done" | Pod spec is not API authorization |
+| "CIS scan green" | Benchmark, not the predicate |
+| "assurance gate complete" | Forbidden stamp |
 
 ## Practice
 
-One page. No keys. `labs/10.3/10.3-lab` is the only running system you may break. Do not apply YAML to a live cluster.
+One page. No answer keys. `labs/10.3/10.3-lab` is the only running system you may break. Do not apply manifests to a live cluster.
 
-## Non-goals
+## What this page is not doing
 
-Live-cluster attacks. Real cloud-account takeover. Claiming Gate 10 or M4 from this page.
+Live-cluster attacks. Real cloud-account takeover. Claiming you finished an assurance gate from this page.

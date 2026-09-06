@@ -1,16 +1,17 @@
-# 10.4-LO-04 — Refuse prod plus debug
+# Refuse prod plus debug
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** ASVS 5.0.0 (final) `v5.0.0-13.4.2`. Secrets out of traces: `v5.0.0-13.3.1`. `v5.0.0-13.4.6` is **Level 3, advanced**. CISA Secure by Design **unverified**.
 
-## Structural means boot compares env and debug
+## The rule
 
-`boot_ok` must return false when `env == "prod"` and `debug` is true. Fail-safe: production with debug denies. `NODE_ENV` may *accompany* a match; it does not replace it. Structural means that conjunction — not a canary percentage, not IaC file presence, not “we meant to turn it off.”
+A `NODE_ENV` string is not the fix. A canary percentage is not the fix. “We meant to turn it off” is not the fix.
 
-The smallest restore for SecureCollab’s FastAPI + Next.js compose is: prod + True → do not boot. Do not fail open because support asked for five minutes. Do not register debug routes after a denied boot.
+The structural change is: `boot_ok` **returns false when `env == "prod"` and `debug` is true**. Fail-safe: production with debug denies. `NODE_ENV` may sit next to a match; it does not replace it. Structural means that both-at-once check — not a canary, not an IaC file that exists, not “support asked for five minutes.”
 
-## Mental model: prod and not-debug conjunction
+The smallest restore for the notes app’s FastAPI + Next.js compose is: prod + True → do not boot. Do not fail open because support asked for five minutes. Do not register debug routes after a denied boot.
+
+## Picture: prod and debug together
 
 ```mermaid
 flowchart TD
@@ -19,28 +20,42 @@ flowchart TD
   Both -->|no| Allow[may boot]
 ```
 
-Do not accept “NODE_ENV is production” as the conjunction. Production still needs other flags — a feature flag that disables 1.2 is a sibling grain, not this pytest. `v5.0.0-13.4.5` (management endpoints) and `v5.0.0-13.4.6` (version leakage, Level 3) remain residuals. Emergency debug is E6, not a silent `return True`.
+The repaired files require that both-at-once check. Do not accept “`NODE_ENV` is production” as the check. Production still needs other flags — a feature flag that turns off authorization (1.2) is leftover, not this pytest. Docs and monitoring pages that stay public, and extra version leakage with debug already off, remain leftover. Emergency debug is E6, not a silent `return True`.
 
-ASVS `v5.0.0-13.4.2` wants debug off in production. This pytest is that sentence for prod+debug.
+A checklist that wants debug off in production is that sentence for prod plus debug. This pytest is the local stand-in.
 
-## Why this restores the cell
+## What the repaired files must show
+
+Read `fixed/cfg.py` against this checklist. Do not treat the snippet as a production compose product.
 
 | After the fix | Must be true |
 |---|---|
 | prod + True | boot false |
 | prod + False | boot true |
 
+Fail closed: if you are unsure whether this boot is production with debug, do not start. Uncertainty is a **no** on boot, not a yes because support asked for five minutes.
+
 ## What this is not
 
-Canary. IaC file presence. CISA Secure by Design (unverified). Gate 10 / M4. Other flags (residual). Top 10:2025 A02 as the syllabus.
+- A canary.
+- An IaC file that exists.
+- A manufacturer-defaults program page we have not verified.
+- An assurance-gate sticker.
+- Other flags (leftover).
+- A famous-bugs list used as the syllabus.
+- “We meant to turn it off.”
 
-## Mechanism limits
+## What the tool cannot do
 
-- Feature flags that disable authz are not this predicate.
-- Sidecar debug (a second process) can still leak.
-- `v5.0.0-13.4.6` Level 3 version leakage can remain with debug off.
-- Admin bound to all interfaces is a sibling grain (`v5.0.0-13.4.5`).
-- Emergency debug needs E6 expiry, not a deleted gate.
+- Feature flags that turn off authorization are not this check.
+- A sidecar debug process can still leak.
+- Extra version leakage can remain with debug off. That is extra, advanced work.
+- Admin bound to all interfaces is leftover in the same family (docs and monitoring pages).
+- Emergency debug needs an E6 expiry, not a deleted gate.
+
+## Can people still use it
+
+A refused boot must say *prod debug refused* in text, not only “assert False.” Do not encode the reason as color only.
 
 ## Practice
 
@@ -50,16 +65,16 @@ Name who can edit compose. Run:
 python3 -m pytest labs/10.4/10.4-lab/tests --impl fixed
 ```
 
-Must pass. Run from the lab directory if collection at repo root is polluted.
+It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-## Transfer
+## Use it somewhere new
 
 Django: `DEBUG` must be false when `ENV=prod`, not “we meant to turn it off.”
 
-## Residual risk
+## What can still go wrong
 
-Feature flag that disables authz; sidecar debug; `v5.0.0-13.4.6` Level 3; emergency debug with E6.
+A feature flag that turns off authorization. Sidecar debug. Extra version leakage with debug already off. Emergency debug without E6.
 
-## Non-goals
+## What this page is not doing
 
-Do not boot a live host. Do not claim Gate 10 from a `NODE_ENV` screenshot. Do not present CISA Secure by Design as verified.
+Do not boot a live host. Do not claim you finished an assurance gate from a `NODE_ENV` screenshot. Do not present a manufacturer-defaults program page as verified.

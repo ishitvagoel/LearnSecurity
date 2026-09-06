@@ -1,27 +1,28 @@
-# 10.5-LO-07 — Transfer: clinic close ticket when SIEM is green
+# Same idea: clinic close ticket when SIEM is green
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** ASVS `v5.0.0-16.2.5`. NIST CSF 2.0 Recover. CISA KEV as awareness not close. L3 clause of `v5.0.0-16.3.2` is **Level 3, advanced**.
 
-## Change the workplace; keep SIEM-green from meaning recovered
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: `close_incident({"recovery": "todo", "logs": "ok"})` must be false. Rewrite it for a clinic without changing the fork.
+The notes-app scaffolding goes away. You get a **clinic that closes the ticket when the SIEM is green**. Your job is to rewrite the loop, not to name a bug-list code.
 
-**Prompt:** Clinic: close ticket when SIEM is green. Also name ransomware restore vs note-level integrity.
+The notes-app sentence was: `close_incident({"recovery": "todo", "logs": "ok"})` must be false. Rewrite it for a clinic without changing the fork: recovery todo denied, `note_body` denied, done + ok may close. A green SIEM is still a detect tile, not recover.
 
-**Product sketch:** EHR-lite “alerts stopped so we closed INC-12,” plus “we have nightly backups and a KEV dashboard.”
+**Product sketch:** an EHR-lite “alerts stopped so we closed INC-12,” plus “we have nightly backups and a known-exploited dashboard.”
 
-Rewrite the SecureCollab sentence. Include:
+## Picture: same close loop, clinical object
 
-1. attacker capabilities (optimistic closer / still-in actor — not a live clinic SIEM attack);
-2. trust assumptions (recovery=done and no note_body is TCB; SIEM/PagerDuty/KEV/backups-untested are not);
-3. forbidden outcome (`close_incident` true while recovery is todo, not “HIPAA”);
-4. a test idea on a **local** fixture only (no live PagerDuty);
-5. residual (imperfect forensics, observability exfil, support-tool god-mode, L3 clause of `v5.0.0-16.3.2`);
-6. WCAG if the runbook is human-read under stress (not color-only severity).
+Renaming “note” to “chart” is not transfer. Recovery evidence, log inventory, and leftover change. Filing a green tile and marking the ticket Done does not set `recovery` to `"done"`.
 
-## Mental model: green vs restored
+| Notes app this week | Clinic sketch |
+|---|---|
+| Incident ticket with recovery + logs | Clinic ticket with the same two fields |
+| Restore drill before close | Same restore evidence on a **local** fixture |
+| `close_incident({"recovery": "todo", "logs": "ok"})` | Same call — recovery todo still denied |
+| Optimistic closer / still-in actor | Same closer — **not** a live clinic SIEM |
+| SIEM green / paging / known-exploited list | Same inputs — not the close decision |
+| Ransomware restore vs note-level integrity | Disk image vs chart-body copies — name both |
 
 ```mermaid
 flowchart LR
@@ -29,24 +30,39 @@ flowchart LR
   Todo[recovery todo] --> Reality[still broken]
 ```
 
-If alerts stopped while `close_incident` is always true, the cell is gone. PagerDuty, KEV, and untested nightly backups do not set `recovery` to `"done"`. Ransomware restore (disk image) is a different grain from note-level integrity (5.1) — name both, do not run a live IR exercise here. CSF 2.0 Recover is an outcome label. KEV is patch-SLA input, not close. The L3 clause of `v5.0.0-16.3.2` is advanced: log all authz decisions without the sensitive data.
+If alerts stopped while `close_incident` is always true, the rule is gone. Paging, a known-exploited listing, and untested nightly backups do not set `recovery` to `"done"`. Ransomware restore (disk image) is a different grain from note-level integrity (no extra chart copies) — name both, do not run a live incident exercise here. Industry “recover” is an outcome label. A known-exploited list is patch-order input, not close. Logging every authorization decision without the sensitive data is extra, advanced work.
 
-The clinic rewrite still has to keep the SecureCollab fork: recovery todo denied, note_body denied, done + ok may close. Wiring PagerDuty without the conjunction leaves `close_incident` true on todo. The local pytest analogue is `test_cannot_close_without_recovery` — on a fixture, not a live SIEM.
+The clinic rewrite still has to keep the notes-app fork: recovery todo denied, `note_body` denied, done + ok may close. Wiring a paging product without the conjunction leaves `close_incident` true on todo. The local pytest analogue is `test_cannot_close_without_recovery` — on a fixture, not a live SIEM.
 
-## What graders reject
+## Prompt — clinic close ticket when SIEM is green
+
+Rewrite the notes-app sentence. Include:
+
+1. who can act (optimistic closer / still-in actor — not a live clinic SIEM attack);
+2. what you trust (recovery done and no `note_body` is the promise; SIEM, paging, known-exploited list, and untested backups are not);
+3. what must not happen (`close_incident` true while recovery is todo, not a legal label);
+4. a test idea on a **local** fixture only (no live paging);
+5. leftover (imperfect forensics, observability as a way out, support-tool god-mode, logging every authorization decision without the sensitive data);
+6. whether engineers read the runbook under stress (plain language, not color-only severity).
+
+Use fake labels. Do not use real patient names.
+
+Also name ransomware restore vs note-level integrity.
+
+## What is not good enough
 
 | Reject | Why |
 |---|---|
-| “we have backups” | Untested is not Recover |
-| Live SIEM / ransomware tutorial | Lab policy |
-| “KEV listed so we closed” | Awareness / patch input, not close |
-| “MTTD improved” | Detect metric, not recover |
-| “Gate 10 complete” | Forbidden stamp |
+| “we have backups” | Untested is not recover |
+| Live SIEM / ransomware tutorial | Course rules |
+| “known-exploited listed so we closed” | Awareness / patch input, not close |
+| “time-to-detect improved” | Detect metric, not recover |
+| “assurance gate complete” | Forbidden stamp |
 
 ## Practice
 
-One page. No keys. `labs/10.5/10.5-lab` is the only running system you may break. Do not query a live SIEM.
+One page. No answer keys. `labs/10.5/10.5-lab` is the only running system you may break. Do not query a live SIEM.
 
-## Non-goals
+## What this page is not doing
 
-Live-IR attacks. Real PHI in logs. Claiming Gate 10 or M4 from this page.
+Live-incident attacks. Real patient charts in logs. Claiming you finished an assurance gate from this page.

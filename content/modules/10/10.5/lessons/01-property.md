@@ -1,20 +1,23 @@
-# 10.5-LO-01 — A green SIEM is not recovery
+# A green SIEM is not recovery
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** ASVS `v5.0.0-16.1.1`, `v5.0.0-16.2.5`, `v5.0.0-16.4.2`, `v5.0.0-16.4.3`; the L3 clause of `v5.0.0-16.3.2` is **Level 3, advanced**. NIST CSF 2.0 DE/RS/RC as outcome labels. CISA KEV is **awareness**. OWASP Logging Cheat Sheet as vocabulary.
 
-## The claim this module owns
+## The rule
 
-SecureCollab’s incident ticket has a `recovery` field and a `logs` blob. **Resilience after prevention failed** is whether you can close only when recovery is done *and* logs are not a second note store. A green SIEM, PagerDuty ack, or KEV listing is not that check.
+The notes app may get an incident ticket with a `recovery` field and a `logs` blob. Closing that ticket needs **recovery actually done** *and* logs that are not a second copy of the note. A green SIEM tile, a paging ack, or a known-exploited listing is not that check.
 
-> `close_incident({"recovery": "todo", "logs": "ok"})` must be false. `close_incident({"recovery": "done", "logs": "note_body leaked"})` must be false. Honest recovery + safe logs may close.
+> `close_incident({"recovery": "todo", "logs": "ok"})` must be false. `close_incident({"recovery": "done", "logs": "note_body leaked"})` must be false. Honest recovery plus safe logs may close.
 
-The forbidden outcomes are **incident closed without recovery evidence** and **note body in logs**. Detect without recover is theater. Logs with bodies are 3.1 / 5.1 / 8.5 at the observability sink.
+So what must not happen: **an incident closed without recovery evidence**, and **a note body in the logs**. Detect without recover is theater. Logs with bodies are leftover copies at the observability sink — the same family as earlier lessons on note bodies, extra copies, and crash dumps.
 
-ASVS `v5.0.0-16.1.1` wants a logging inventory. `v5.0.0-16.2.5` wants logging by protection level — note bodies are not “forensics.” `v5.0.0-16.4.2` / `v5.0.0-16.4.3` want logs protected and shipped to a logically separate system so a breach of the app does not erase evidence. The L3 clause of `v5.0.0-16.3.2` (log *all* authorization decisions without the sensitive data) is **Level 3, advanced**. NIST CSF 2.0 Recover is an outcome, not a product. KEV is patch-priority input (9.5 spiral), not close.
+A logging list names *what* you keep. It does not prove restore ran. Logs should match how sensitive the data is — note bodies are not “forensics.” Ship logs to a separate system so a breach of the app does not erase the evidence. Logging every authorization decision without the sensitive data is extra, advanced work, not this week’s check.
 
-## Mental model: detect vs recover
+Industry “detect / respond / recover” labels name outcomes, not a product. A known-exploited list is useful for patch order. It is not a close decision, and it is not a licence to scan a public clinic.
+
+This week’s practice is this course’s local files or official labs. Do not tell anyone to try attacks on public or third-party systems.
+
+## Picture: detect vs recover
 
 ```mermaid
 flowchart TD
@@ -25,7 +28,7 @@ flowchart TD
   Logs -->|no| May[may close]
 ```
 
-## Mental model: logs are a sink
+## Picture: logs are a sink
 
 ```mermaid
 flowchart LR
@@ -35,50 +38,64 @@ flowchart LR
   Note --> NotForensics[not allowed in logs]
 ```
 
-**Mechanism (not the property):** PagerDuty, a SIEM dashboard, MTTD, “we have backups,” KEV.
+**A tool, not the rule:** a paging ack, a SIEM dashboard, time-to-detect, “we have backups,” a known-exploited listing.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## People who can close without recovery
 
-| Slice | For this property |
+| Person | What they can do here | Motive | Harm if close ignores recovery |
+|---|---|---|---|
+| Optimistic closer | Close when alerts stop | Look finished | System still broken; leftover looks closed |
+| Still-in attacker | Keep a foothold after the tile goes green | Stay in | Close hid that they are still there |
+| Someone who treats a known-exploited list as close | Patch-list as the ticket Done | “It’s on the list” | Awareness is not restore; still no local check |
+
+You do not need a nation-state this week. Those three already close the incident without recovery.
+
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
+
+Someone closed on detection quality. That is the cause. The system still broken, or extra note copies in logs, is a **result**, not the cause.
+
+| Slice | For this rule |
 |---|---|
-| Root cause | Close on detection quality |
-| Preconditions | `close_incident` true while recovery is todo |
+| Why it happens | Close looks at detection quality (green SIEM, paging ack) |
+| What has to be true first | `close_incident` true while recovery is todo |
 | Trigger | Optimistic closer; still-in attacker |
-| Impact | System still broken or attacker still in; extra note copies |
-| Prevention | Require recovery evidence; omit bodies |
-| Detection | `incident_closed_without_recovery` |
-| Recovery | This *is* the step — restore drill |
+| What it costs | System still broken or attacker still in; extra note copies |
+| How you stop it | Require recovery evidence; omit bodies |
+| How you notice | `incident_closed_without_recovery` |
+| How you recover | This *is* the step — restore drill |
 
-## Framework defaults versus the close guarantee
+## What the framework does vs what you still have to check
 
-A SIEM will go green when the *rule* stops firing. That is not a restore test. Untested backups are not Recover. Support tools with cluster-admin (10.3) are a second incident.
+A SIEM will go green when the *rule* stops firing. That is not a restore test. Untested backups are not recover. Support tools with cluster-admin are a second incident.
 
-## Mechanism limits
+The app’s promise is: **this** `close_incident({"recovery": "todo", "logs": "ok"})` is false, and a leaked `note_body` cannot close either. The local check is `labs/10.5/10.5-lab`. Fake data only. No live SIEM. No real people’s notes.
 
-- Observability pipeline as exfil (3.1).
-- Mark recovery N/A without E6.
+## What the tool cannot do
+
+- Observability pipeline as a way out (earlier leftover-body lesson).
+- Mark recovery “not applicable” without an exception process.
 - Some incidents never get perfect forensic certainty — say so.
-- KEV listing is not authorization to scan public systems.
+- A known-exploited listing is not authorization to scan public systems.
 
-## Usability and accessibility
+## Can people still use it
 
-IR runbooks and status pages must be usable under stress (keyboard, language, not color-only severity) (WCAG 2.2).
+Incident runbooks and status pages must be usable under stress: keyboard, plain language, not color-only severity.
 
 ## Practice
 
 Name the restore evidence you would accept. Then run:
 
-```
+```text
 python3 -m pytest labs/10.5/10.5-lab/tests --impl vulnerable
 python3 -m pytest labs/10.5/10.5-lab/tests --impl fixed
 ```
 
 The first command must fail. The second must pass.
 
-## Transfer
+## Use it somewhere new
 
 Ransomware restore vs note-level integrity. Clinic: close ticket when SIEM is green.
 
-## Non-goals
+## What this page is not doing
 
-Live IR systems, claiming Gate 10 or M4. Answer keys are not in this file.
+Live incident systems, claiming you finished an assurance gate. Answer keys are not in this file.

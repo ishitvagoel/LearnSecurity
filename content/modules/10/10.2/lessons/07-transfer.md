@@ -1,27 +1,27 @@
-# 10.2-LO-07 — Transfer: clinic npm install in prod pod
+# Same idea: clinic npm install in a prod pod
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** SLSA 1.2 as provenance. CISA 2026 SBOM as inventory. ASVS `v5.0.0-15.1.2`. `v5.0.0-15.2.4` Level 3 **advanced**.
 
-## Change the workplace; keep name-only install from meaning integrity
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: `install_ok("aaa", "bbb")` must be false. Rewrite it for a clinic without changing the fork.
+The notes-app scaffolding goes away. You get a **clinic that runs npm install in a prod pod**. A fake “always get latest” install sits next to an SBOM. Your job is to rewrite the loop, not to name a bug-list code.
 
-**Prompt:** Clinic: npm install in prod pod. Also name GitHub Actions `action@v1`.
+The notes-app sentence was: `install_ok("aaa", "bbb")` must be false. Rewrite it for a clinic without changing the fork: mismatch is deny; a matching pair may install. An SBOM is still inventory, not verify.
 
-**Product sketch:** EHR-lite “prod pod runs npm install so we always get latest,” plus “we attach a CycloneDX SBOM and a SLSA badge.”
+**Product sketch:** an EHR-lite “prod pod runs npm install so we always get latest,” plus “we attach a CycloneDX SBOM and a provenance badge.”
 
-Rewrite the SecureCollab sentence. Include:
+## Picture: latest vs lockfile
 
-1. attacker capabilities (typosquat / compromised maintainer — not a live clinic registry attack);
-2. trust assumptions (digest equality is TCB; SBOM/SLSA/Dependabot are not);
-3. forbidden outcome (`install_ok("aaa","bbb")` true, not “HIPAA”);
-4. a test idea on a **local** fixture only (no live npm);
-5. residual (malicious pin, cache poisoning, unpinned actions, `v5.0.0-15.2.4` Level 3);
-6. WCAG if CI is human-read (say digest mismatch).
+Renaming “note” to “chart” is not transfer. Expected digest, got digest, and leftover change. Marking “npm install ran” does not compare hashes.
 
-## Mental model: latest vs lockfile
+| Notes app this week | Clinic sketch |
+|---|---|
+| `install_ok("aaa", "bbb")` must be false | Same check on a local fixture |
+| Lockfile digest is the pin | Prod pod still needs a pin |
+| Name-only install | “Always get latest” |
+| Lookalike publisher | Same actor — **not** a live clinic registry |
+| Equality in the function | Equality in the function |
 
 ```mermaid
 flowchart LR
@@ -29,24 +29,37 @@ flowchart LR
   Name[name only] --> Reality[wrong bytes]
 ```
 
-If the pod installs “latest” while `install_ok` is always true, the cell is gone. CycloneDX, SLSA badges, and Dependabot do not compare `aaa` to `bbb`. Pinning Actions by SHA is the same equality idea on a different object — name it, do not typosquat a live registry here. `v5.0.0-15.2.4` (dependency confusion) is Level 3 advanced: name-only install is how that grain wins. CISA 2026 SBOM is inventory, not verify.
+If the pod installs “latest” while `install_ok` is always true, the rule is gone. CycloneDX, provenance badges, and Dependabot do not compare `aaa` to `bbb`. Pinning Actions by SHA is the same equality idea on a different object — name it, do not typosquat a live registry here. A lookalike package wins when you install by name. An SBOM is inventory, not verify.
 
-The clinic rewrite still has to keep the SecureCollab fork: mismatch denied, match may install. Generating an SBOM without a digest check leaves `install_ok("aaa","bbb")` true. The local pytest analogue is `test_hash_mismatch_refuses_install` — on a fixture, not a live npm.
+The clinic rewrite still has to keep the notes-app fork: mismatch denied, match may install. Generating an SBOM without a digest check leaves `install_ok("aaa","bbb")` true. The local pytest analogue is `test_hash_mismatch_refuses_install` — on a fixture, not a live npm.
 
-## What graders reject
+## Prompt — clinic npm install in a prod pod
+
+Rewrite the notes-app sentence. Include:
+
+1. who can act (lookalike / compromised maintainer — not a live clinic registry attack);
+2. what you trust (digest equality is the promise; SBOM / provenance / Dependabot are not);
+3. what must not happen (`install_ok("aaa","bbb")` true, not a legal label);
+4. a test idea on a **local** fixture only (no live npm);
+5. leftover (malicious pin, cache poisoning, unpinned actions, lookalike packages);
+6. whether a human-read CI path exists (must say digest mismatch in words).
+
+Use fake labels. Do not use real clinic secrets. Also name GitHub Actions `action@v1`.
+
+## What is not good enough
 
 | Reject | Why |
 |---|---|
-| “we have an SBOM” | Inventory, not verify |
-| Live npm / typosquat tutorial | Lab policy |
-| “SLSA L3 so 1.2 is done” | Provenance ≠ tenant isolation |
+| “We have an SBOM” | Inventory, not verify |
+| Live npm / typosquat tutorial | Course rules |
+| “A provenance badge so the hash check is done” | Provenance is not the install check |
 | “Dependabot is on” | Signal, not digest equality |
-| “Gate 10 complete” | Forbidden stamp |
+| “Ship gate complete” | Forbidden stamp |
 
 ## Practice
 
-One page. No keys. `labs/10.2/10.2-lab` is the only running system you may break. Do not fetch a live package.
+One page. No answer keys. `labs/10.2/10.2-lab` is the only running system you may break. Do not fetch a live package.
 
-## Non-goals
+## What this page is not doing
 
-Live-registry attacks. Real org poison-PRs. Claiming Gate 10 or M4 from this page.
+Live-registry attacks. Real org poison-PRs. Claiming you finished the ship gate from this page.
