@@ -1,120 +1,119 @@
-# 1.4-LO-01 — Residual risk is a decision, not a leftover color
+# Leftover risk is a decision, not a leftover color
 
-**Kind:** concept-model  
-**Loop step:** 1 Property  
-**Standards:** Saltzer and Schroeder (1975, seminal), especially psychological acceptability, work factor, and compromise recording; WCAG 2.2 (final) for keyboard, use of color, and target size on security-sensitive journeys; NIST SP 800-63-4 (final) for identity *risk* language, not a password recipe; CISA Secure by Design (current public guidance, final) for customer-owned outcomes; NIST CSF 2.0 (final) GV for residual ownership and DE/RS/RC as outcome labels.
+**Kind:** concept-model
+**Loop step:** 1 Property
 
-## The claim this module owns
+## The rule
 
-SecureCollab Phase 1 still has a human on the path: a member who must confirm account recovery. The property is not “we added MFA” and not “the scanner is green.”
+The notes app still has a person on the path: someone who must confirm account recovery. The rule is not “we added a second factor” and not “the scanner is green.”
 
-> A high-impact recovery confirmation is a security control. If a legitimate user cannot complete it with keyboard, named controls, and a non-color cue, the control has failed: the user is locked out, or they adopt an unsafe workaround that leaks notes, codes, or a tenant-admin session. Usability is in the trusted computing base for that human-mediated step. Residual risk is whatever still remains after that structural control, with an owner and a revisit date—not a leftover cell on a heat map.
+> Confirming recovery is a security control. If a real user cannot do it with a keyboard, a named button, and a cue that is not only color, the control has failed: they are locked out, or they take a shortcut that leaks notes, codes, or an admin session. Whether people can actually finish the step is part of what you trust. Leftover risk is whatever still remains after that, with an owner and a date to look again — not a leftover square on a heat map.
 
-The forbidden outcomes are therefore **lockout**, **unsafe workaround**, and **vanity residual**. Coercion by a physically present attacker is a recorded residual, not something a nicer button deletes.
+So what must not happen: **lockout**, **an unsafe shortcut**, and **a fake leftover** (“users should be careful”). A person standing at the laptop can still force a click. That stays on the list. A nicer button does not delete it.
 
-## Mental model: the risk decision loop
+## Picture: the risk loop
 
-Treat risk as a loop over a named 1.1 invariant, not as a score.
+Treat risk as a loop over a named rule, not as a score.
 
 ```mermaid
 flowchart TD
-  P["1.1 invariant"] --> A[Actor capability and incentive]
-  A --> H[User harm if the invariant fails]
-  H --> C["Current 1.2 authority and 1.3 blast radius"]
-  C --> W["Work factor - attacker cost vs user cost"]
-  W --> U{Can a stressed legitimate user complete the control?}
-  U -->|no| F["Security failure: lockout or workaround"]
-  U -->|yes| R["Residual - what still remains"]
-  R --> O[Owner, evidence, revisit trigger]
-  O --> D[Detect, contain, recover if prevention is not absolute]
+  P[A named rule] --> A[Who can act, and why]
+  A --> H[Who gets hurt if the rule fails]
+  H --> C[Who is allowed, and how far a break can spread]
+  C --> W[Attacker effort vs user effort]
+  W --> U{Can a stressed real user finish the step?}
+  U -->|no| F[Failure: lockout or shortcut]
+  U -->|yes| R[Leftover: what still remains]
+  R --> O[Owner, evidence, when to look again]
+  O --> D[Notice, contain, recover]
   D --> P
 ```
 
 Each arrow is a question you can fail:
 
-| Arrow | Weak answer | Reviewable answer |
+| Arrow | Weak answer | An answer someone else can check |
 |---|---|---|
-| Actor | “hackers” | tired legitimate owner; household abuser with the mouse; support channel that prefers emailing secrets |
-| Harm | “account compromise” | Tenant A notes unreadable to the owner, or readable to a chat the owner pasted codes into |
-| Work factor | “256-bit crypto” | hours of attacker effort versus thirty seconds of user pain on a broken confirm |
-| Residual | “users should be careful” | coercion remains; owner is the product lead; revisit when recovery adds a second device |
-| Operate | “we have logs” | detect cancel-without-keyboard; recover with a still-mediated alternate path; never email a note body |
+| Who | “hackers” | tired owner; someone in the house with the mouse; support that wants secrets emailed |
+| Harm | “account compromise” | company A notes unreadable to the owner, or readable in a chat where they pasted codes |
+| Effort | “256-bit crypto” | hours of attacker work versus thirty seconds of pain on a broken confirm |
+| Leftover | “users should be careful” | coercion remains; owner is the product lead; look again when recovery adds a second device |
+| Running it | “we have logs” | notice cancel-without-keyboard; recover on a still-checked path; never email a note |
 
-NIST CSF 2.0 **Govern / Detect / Respond / Recover** name those outcome families. They do not prove the SecureCollab sentence. SAMM 2.0 governance scores are a maturity conversation, not residual risk. CISA Secure by Design says the manufacturer owns customer outcomes; buying MFA is not the property.
+Industry lists name families like govern, detect, respond, recover. They do not prove this sentence about the notes app. A maturity score is not leftover risk. Buying a second factor is not the rule.
 
-## Mental model: two work factors
+## Picture: two kinds of effort
 
-Saltzer and Schroeder’s **work factor** is usually taught as attacker cost. For a human-mediated control there are two costs, and they trade.
+Attacker effort is one cost. User effort is another. They trade.
 
 ```mermaid
 flowchart LR
   subgraph Attacker
-    AW[Work to forge, coerce, or wait out recovery]
+    AW[Work to fake, coerce, or wait out recovery]
   end
   subgraph Legitimate user
     UW[Work to see, aim, remember, and confirm under stress]
   end
-  AW -->|if UW is higher, users bypass| Bypass["Shared admin session or codes in chat"]
-  UW -->|if UW is impossible| Lockout[Availability and safety fail]
+  AW -->|if user work is higher, people bypass| Bypass[Shared admin session or codes in chat]
+  UW -->|if user work is impossible| Lockout[The owner cannot get in]
 ```
 
-- Raising attacker work without measuring user work produces **friction theater**: a mouse-only green button that demoed well and fails on a laptop with no pointer, a low-vision user, or a person using only a keyboard.
-- Lowering user work without keeping a 1.2 decision (“who may confirm recovery on this account, now”) produces **convenience holes**: email the password, share the tenant-admin session, screenshot the red/green pair.
+- Raising attacker work without measuring user work is **friction theater**: a mouse-only green button that demoed well and fails on a laptop with no pointer, a low-vision user, or a keyboard-only user.
+- Lowering user work without keeping a who-is-allowed check (“who may confirm recovery on this account, now”) is a **convenience hole**: email the password, share the admin session, screenshot the red/green pair.
 
-Psychological acceptability is the principle that the secure path must be the path people can actually complete. WCAG 2.2 Success Criteria **2.1.1 Keyboard**, **1.4.1 Use of Color**, and **2.5.8 Target Size (Minimum)** are the web baseline for that path. They are not a privacy policy and not a claim of full conformance.
+The secure path has to be a path people can actually finish. Keyboard, not-color-alone, and a large enough target are the web baseline for that path. They are not a privacy policy and not a claim that the whole site meets every accessibility rule.
 
-## Actors are capability plus incentive, not a villain list
+## People are capability plus motive, not a villain list
 
-| Actor | Capability in this module | Incentive | Harm if the control fails |
+| Person | What they can do here | Motive | Harm if the control fails |
 |---|---|---|---|
-| Account owner, exhausted | Keyboard, screen reader, or pointer; may lack one of those | Get back into Tenant A notes | Lockout (availability/safety) |
-| Household abuser | Physical presence; can use the mouse the owner cannot | Keep the owner locked out, or force a confirmation | Coercion residual; safety |
-| Support attacker | Social channel; prefers the user to volunteer secrets | Collect recovery codes or note bodies | Confidentiality of notes and codes |
-| Bulk automator | Volume of recovery starts | Account takeover at scale | Many tenants, not one tired user |
+| Account owner, exhausted | Keyboard, screen reader, or pointer — maybe missing one | Get back into company A notes | Lockout |
+| Someone in the house | Physical presence; can use the mouse the owner cannot | Keep the owner locked out, or force a confirmation | Coercion; safety |
+| Fake support | A chat or phone; wants the user to volunteer secrets | Collect recovery codes or note bodies | Notes and codes leak |
+| Bulk automator | Many recovery starts | Take over accounts at scale | Many companies, not one tired user |
 
-“Insider” and “nation-state” are later review triggers. Phase 1 needs the table above, because those four already break the recovery sentence without a new CVE.
+“Insider” and “nation-state” can wait. This week needs the table above. Those four already break recovery without a new bug name.
 
-## Root cause is not “users are careless”
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-A demo recovery control that is green and mouse-only fails because **the designers trusted a pointer and a color**. The user who pastes codes into chat is a **consequence**, not the root cause.
+A demo recovery control that is green and mouse-only fails because **the designers trusted a pointer and a color**. The user who pastes codes into chat is a **result**, not the cause.
 
-| Slice | For this property |
+| Slice | For this rule |
 |---|---|
-| Root cause | Human-mediated enforcement omitted keyboard, accessible name, and a non-color cue |
-| Preconditions | High-impact confirm is required; some users have no reliable pointer or cannot use color alone |
-| Trigger | Owner attempts recovery; `is_usable_accessible` is false |
-| Impact | Safety and availability (lockout) and/or confidentiality (workaround leaks) |
-| Prevention | Named, keyboard-operable control; color is redundant encoding only |
-| Detection | Support tickets “can’t click recover”; telemetry on confirm vs cancel by input modality — never log codes |
-| Recovery | Alternate accessible path that is still 1.2-mediated; do not email the note body |
+| Why it happens | The human step skipped keyboard, a name a screen reader can speak, and a cue that is not only color |
+| What has to be true first | Confirm is required; some users have no pointer or cannot use color alone |
+| Trigger | The owner tries to recover; the control is not usable |
+| What it costs | Lockout, and/or a shortcut that leaks notes |
+| How you stop it | Named, keyboard-operable control; color is extra, not the only cue |
+| How you notice | Support tickets “I cannot click recover”; counts of confirm vs cancel by keyboard vs mouse — never log codes |
+| How you recover | Another usable path that is still checked; do not email the note |
 
-## Framework defaults versus the journey
+## What the framework does vs what you still have to check
 
-A React component library can ship accessible primitives. FastAPI does not see the button. Next.js “secure defaults” do not name the recovery confirm. WCAG documents success criteria; they do not walk your fixture.
+A React library can ship accessible pieces. FastAPI does not see the button. Next.js defaults do not name this confirm. Accessibility documents list success criteria; they do not walk your practice files.
 
-The application guarantee is: **this** confirm control, on **this** recovery journey, is operable without a mouse, has an accessible name, and does not use color as the only encoding. The lab `labs/1.4/1.4-risk-register` is the local oracle for that sentence. It is not a live IdP and not a real mailbox.
+The app’s promise is: **this** confirm, on **this** recovery, works without a mouse, has a name, and does not use color as the only cue. The practice folder is the local check for that sentence. It is not a live login provider and not a real mailbox.
 
-## Mechanism limits
+## What the tool cannot do
 
-CAPTCHA, “confirm in the app,” drag-to-unlock, and hover-only hit targets can recreate the same exclusion. A second device the coerced or locked-out user does not control recreates lockout under a different costume.
+CAPTCHA, “confirm in the app,” drag-to-unlock, and hover-only targets can shut people out the same way. A second device the locked-out person does not control is lockout in a new costume.
 
-Coercion is not fixed by WCAG. Record it as residual with an owner. Do not pretend a larger target size removes a physically present attacker.
+Coercion is not fixed by accessibility rules. Record it as leftover risk with an owner. A larger button does not remove someone standing at the laptop.
 
 ## Practice
 
-Describe the confirm control in the words a screen-reader user would hear. If you cannot, the control fails this property. Then run the local pair:
+Describe the confirm control in the words a screen-reader user would hear. If you cannot, it fails this rule. Then run the local pair:
 
 ```text
 python -m pytest labs/1.4/1.4-risk-register/tests --impl vulnerable
 python -m pytest labs/1.4/1.4-risk-register/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Map the assertion to lockout-or-workaround, not to a scanner color.
+The first command must fail. The second must pass. Tie the check to lockout-or-shortcut, not to a scanner color.
 
-## Transfer
+## Use it somewhere new
 
-A clinic portal adds step-up authentication. The second factor is a mouse-only dialog. Which 1.1 cells move (availability, safety, confidentiality of the chart), and which residual (coercion, shared workstation) must be rewritten rather than deleted?
+A clinic portal adds a second factor. The second factor is a mouse-only dialog. Which rules move (getting in, safety, secrecy of the chart), and which leftover (coercion, shared workstation) must be rewritten rather than deleted?
 
-## Non-goals
+## What this page is not doing
 
-Live identity providers, real recovery inboxes, real patient or banking data, weaponized payloads, and heat maps that replace harm sentences. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner or product evidence. Answer keys are not in this file.
+Live login providers, real recovery inboxes, real patient or banking data, ready-made attack recipes, and heat maps that replace harm sentences. Answer keys are not in this file.

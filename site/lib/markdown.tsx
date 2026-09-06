@@ -7,7 +7,7 @@ import {
   sectionKindFromHeading,
   type LessonSectionKind,
 } from "./headings";
-import { displayHeading, plainMechanismLead } from "./plainCopy";
+import { displayHeading, plainLessonProse, plainMechanismLead } from "./plainCopy";
 
 function safeHref(href: string): string | null {
   const trimmed = href.trim();
@@ -122,7 +122,7 @@ function renderTable(rows: string[], key: string): ReactNode {
 
 /** Trusted, reviewed Markdown only (curriculum tree). Not MDX. */
 export function Markdown({ source }: { source: string }): ReactNode {
-  const lines = source.replace(/\r\n/g, "\n").split("\n");
+  const lines = plainLessonProse(source).replace(/\r\n/g, "\n").split("\n");
   const nodes: ReactNode[] = [];
   const alloc = createIdAllocator();
   let para: string[] = [];

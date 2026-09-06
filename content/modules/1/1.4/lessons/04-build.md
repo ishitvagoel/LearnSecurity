@@ -1,66 +1,64 @@
-# 1.4-LO-04 — Restore the human path without lowering assurance
+# Fix the button without making recovery weaker
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Lab:** `labs/1.4/1.4-risk-register`  
-**Standards:** WCAG 2.2 (final) as web baseline; Saltzer and Schroeder fail-safe defaults and psychological acceptability (1975, seminal); CISA Secure by Design (current public guidance, final) for not shifting the burden onto the customer’s eyesight and pointer.
+**Kind:** design-exercise
+**Loop step:** 4 Build
 
-## Structural means the journey actually works
+## The rule
 
-A denylist of yesterday’s CSS class is not the fix. A scanner suppression is not the fix. “The component library is accessible” is not the fix.
+A denylist of yesterday’s CSS class is not the fix. Hiding a scanner warning is not the fix. “The component library is accessible” is not the fix.
 
-The structural change is: the confirm object **is** a named, keyboard-operable control, and color is extra encoding only. The 1.2 decision (this principal may confirm **this** account **now**) is unchanged. You do not restore availability by emailing the password.
+The structural change is: the confirm object **is** a named, keyboard-operable control, and color is extra encoding only. The who-is-allowed decision (this person may confirm **this** account **now**) does not change. You do not restore access by emailing the password.
 
-## Mental model: redundant encoding, not a swap
+## Picture: extra cues, not a swap
 
 ```mermaid
 flowchart LR
-  Name[Accessible name] --> Ctrl[Confirm control]
+  Name[Name a screen reader can speak] --> Ctrl[Confirm control]
   Key[Keyboard operation] --> Ctrl
-  Color[Color as extra cue] --> Ctrl
-  Ctrl --> Decision["Still a 1.2 allow or deny"]
+  Color[Color as an extra cue] --> Ctrl
+  Ctrl --> Decision[Still an allow or deny]
 ```
 
-If you remove Name or Key, the control is not a control. If you remove Color, a sighted mouse user might be slightly slower; the property can still hold. If you remove the 1.2 decision, anyone who can call `confirm` wins.
+If you remove Name or Key, the control is not a control. If you remove Color, a sighted mouse user might be slightly slower; the rule can still hold. If you remove the who-is-allowed decision, anyone who can call confirm wins.
 
-## What the fixed fixture must show
+## What the repaired files must show
 
 Read `fixed/recovery.py` against this checklist. Do not treat the snippet as production React.
 
-| Predicate | Why it is structural |
+| Check | Why it is structural |
 |---|---|
 | `name` is a non-empty accessible name | Screen-reader users can hear “Confirm account recovery” |
-| `keyboard` is true | 2.1.1: the effect is reachable without a pointer |
-| `mouse_only` is false | Pointer is not a hidden TCB |
-| Color may remain | Redundant, not sole, encoding |
+| `keyboard` is true | The effect is reachable without a pointer |
+| `mouse_only` is false | A pointer is not secretly what you trust |
+| Color may remain | Extra, not the only, cue |
 
-Fail-safe: if name or keyboard is missing, `is_usable_accessible` is false. Uncertainty is a **deny** of “this control is an acceptable recovery gate,” not an allow because the demo looked fine.
+Fail closed: if name or keyboard is missing, `is_usable_accessible` is false. Uncertainty is a **no** on “this control is an acceptable recovery gate,” not a yes because the demo looked fine.
 
 ## What this is not
 
-- A full WCAG conformance claim for SecureCollab.
-- A CAPTCHA, drag-to-confirm, or “open the mobile app” detour that recreates exclusion.
-- A lower-assurance escape hatch (“email us the note body”).
-- A coercion fix. Physical presence remains residual.
+- A full accessibility badge for the notes app.
+- A CAPTCHA, drag-to-confirm, or “open the phone app” detour that shuts people out again.
+- A weaker escape hatch (“email us the note”).
+- A coercion fix. Physical presence remains leftover risk.
 
 ## Trade-off you must write down
 
-Reducing friction (keyboard, name, larger target) **is** the security change for this invariant. It is not a gift that weakens hashing or tenant isolation. If someone argues that making confirm easier helps attackers, answer with the two-work-factor model from LO-01: you measured user work that was blocking legitimate recovery. Attacker work to coerce or phish is a **different row**, owned and dated.
+Reducing friction (keyboard, name, larger target) **is** the security change for this rule. It is not a gift that weakens hashing or keeping companies apart. If someone argues that making confirm easier helps attackers, answer with the two-effort picture from the first page: you measured user work that was blocking real recovery. Attacker work to coerce or phish is a **different row**, owned and dated.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run:
+Name who, what, action, and the check that must be true after the fix. Run:
 
 ```text
 python -m pytest labs/1.4/1.4-risk-register/tests --impl fixed
 ```
 
-It must pass. Then write one sentence: which 1.1 cell is restored, and which residual you refused to delete.
+It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-## Transfer
+## Use it somewhere new
 
-Banking re-auth dialog: if the bank “fixes” mouse-only by sending a one-time code in SMS that support will read back, what 1.2 cell did they quietly change?
+Banking re-auth dialog: if the bank “fixes” mouse-only by sending a one-time code in SMS that support will read back, what who-is-allowed row did they quietly change?
 
-## Residual risk
+## What can still go wrong
 
-Coercion remains. Alternate mediated path is still future work. Honest-lab is not a user study.
+Coercion remains. An alternate checked path is still future work. This practice is not a user study.

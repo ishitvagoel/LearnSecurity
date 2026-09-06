@@ -1,52 +1,66 @@
-# 2.1-LO-07 — Transfer: two grammars, one patient identifier
+# Same idea on clinic REST and GraphQL
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** Saltzer and Schroeder (1975, seminal) least common mechanism; OWASP ASVS 5.0.0 (final) `v5.0.0-1.1.1` and Level 3 `v5.0.0-1.5.3` labeled advanced; RFC 8259 JSON (STD 90, final).
 
-## Change the channel; keep the invariant shape
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+The notes-app scaffolding goes away. You get a **clinic booking** API. A JSON object (REST) and a GraphQL variable map can both carry `patient_id`. Duplicate keys, aliased fields, or a proxy that re-encodes Unicode can make the ACL patient disagree with the stored patient.
 
-**Prompt:** GraphQL and REST both ingest the same clinic appointment.
+Do not answer with a famous-bugs list or a scanner as the definition of security.
 
-**Product sketch:** Clinic booking. A JSON object (REST) and a GraphQL variable map can both carry `patient_id`. Duplicate keys, aliased fields, or a proxy that re-encodes Unicode can make the ACL patient disagree with the stored patient.
+## Picture: each grammar is a reader
 
-Rewrite the SecureCollab sentence for this product. Your answer must include:
+Renaming `"tenant"` to `patient_id` is not transfer. Person, object, path, and leftover change. Two grammars are two readers. Who-is-allowed still runs after one meaning exists.
 
-1. attacker capabilities (who can POST or query);
-2. trust assumptions (which parser is TCB; the client is not);
-3. a forbidden outcome (disagreement, not “injection”);
-4. a test idea that would fail if the cell were false (local fixture only);
-5. residual risk (honest unique keys still need authorization; coercion/support paths if a human confirms);
-6. whether a human path must meet WCAG 2.2 (only if a person must complete a control; parser disagreement itself is not a WCAG problem).
-
-## Mental model: each grammar is an interpreter
+| Notes app this week | Clinic sketch |
+|---|---|
+| Poster sending a note | Someone who can POST or query an appointment |
+| `"tenant"` on a JSON note | `patient_id` on REST and on GraphQL variables |
+| ACL tenant vs stored tenant | ACL patient vs stored patient |
+| Who-is-allowed leftover | Honest unique keys still need authorization |
 
 ```mermaid
 flowchart TD
-  REST["REST JSON body"] --> P1[REST parser]
-  GQL["GraphQL variables"] --> P2[GraphQL parser]
-  P1 --> Bind["patient_id used for ACL and store"]
+  REST[REST JSON body] --> P1[REST reader]
+  GQL[GraphQL variables] --> P2[GraphQL reader]
+  P1 --> Bind[patient_id used for ACL and store]
   P2 --> Bind
   Bind --> Ok{Same meaning?}
-  Ok -->|no| Deny[Reject both grammars]
-  Ok -->|yes| AuthZ["Still a 1.2 decision"]
+  Ok -->|no| Deny[Refuse both grammars]
+  Ok -->|yes| AuthZ[Still a who-is-allowed decision]
 ```
 
-## What graders reject
+## Prompt — clinic REST and GraphQL
+
+GraphQL and REST both ingest the same clinic appointment.
+
+Rewrite the notes-app sentence for this product. Your answer must include:
+
+- who can act (who can POST or query);
+- what you trust (which reader is trusted; the client is not);
+- what must not happen (disagreement, not “injection”);
+- a check idea that would fail if the rule were false (local practice only);
+- leftover risk (honest unique keys still need authorization; coercion/support paths if a person confirms);
+- whether a human path must meet the web accessibility baseline (only if a person must finish a control; parser disagreement itself is not an accessibility problem).
+
+## What is not good enough
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | Pydantic / `JSON.parse` / GraphQL library defaults |
-| Live-target plan or real patient ids | Lab policy |
+| A tool or famous-bugs-list name as the rule | You still have not named the outcome |
+| Framework default as the promise | Pydantic / `JSON.parse` / GraphQL library defaults |
+| A live-target plan or real patient ids | Course rules |
 | “Sanitize quotes” as the structural fix | Wrong slice |
 
-If REST “looks unique” while GraphQL variables keep two `patient_id` aliases, the cell is gone. A WAF quote filter and an RFC 8259 citation do not put one meaning into both grammars. The clinic rewrite still has to keep the SecureCollab fork: CLEAN unique keys may accept, AMBIGUOUS keys reject or agree. The local pytest analogue is `test_duplicate_tenant_keys_are_one_meaning` — on a fixture, not a live EHR.
+If REST “looks unique” while GraphQL variables keep two `patient_id` aliases, the cell is gone. A WAF quote filter and a JSON-spec citation do not put one meaning into both grammars. The clinic rewrite still has to keep the notes-app fork: CLEAN unique keys may accept, messy keys refuse or agree. The local analogue is `test_duplicate_tenant_keys_are_one_meaning` — on a practice object, not a live health record.
 
-ASVS `v5.0.0-1.5.3` (architecture documentation of parsers) is **Level 3, advanced**: a diagram of grammars, not this pytest.
+A diagram of grammars is a later architecture bar. It is not this check.
 
 ## Practice
 
-One page. No keys. The lab `labs/2.1/2.1-parser-boundaries` stays the only running system you may break. Multipart filename encoding (two parsers on the same bytes) is an acceptable alternate sketch pointing at 6.4—still local, still synthetic.
+One page. No keys. The practice `labs/2.1/2.1-parser-boundaries` stays the only running system you may break. Multipart filename encoding (two readers on the same bytes) is an acceptable alternate sketch pointing at a later upload topic — still local, still fake data.
+
+## What this page is not doing
+
+Real clinics, real patient identifiers, live GraphQL targets.

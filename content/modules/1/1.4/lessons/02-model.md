@@ -1,97 +1,96 @@
-# 1.4-LO-02 — A risk register is a set of reviewable rows
+# A risk list someone else can argue with
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** NIST CSF 2.0 (final) GV for ownership of residual risk; WCAG 2.2 (final) as the web baseline for the recovery journey; NIST SP 800-63-4 (final) for risk-based identity decisions; CISA Secure by Design (current public guidance, final); Saltzer and Schroeder (1975, seminal) psychological acceptability.
+**Kind:** design-exercise
+**Loop step:** 2 Model
 
-## Can a second engineer challenge a row?
+## Could someone else challenge a row?
 
-A register that lists “MFA,” “WAF,” and “users should be careful” is a tool inventory. A register that a peer can attack looks like this:
+A list that says “MFA,” “WAF,” and “users should be careful” is a tool inventory. A list a peer can attack looks like this:
 
-> For invariant *I*, actor *A* with capability *C* and incentive *N* can cause harm *H* unless control *K* holds. Residual *R* remains, owned by *O*, revisited on trigger *T*. Evidence *E* would show *K* is false.
+> For rule *I*, person *A* with ability *C* and motive *N* can cause harm *H* unless control *K* holds. Leftover *R* remains, owned by *O*, looked at again on trigger *T*. Evidence *E* would show *K* is false.
 
-SecureCollab Phase 1 freeze: tenants, memberships, notes, and a **local recovery-confirm fixture**. No live IdP, no files, no support impersonation product, no production users.
+This week’s freeze: companies, memberships, notes, and a **local recovery-confirm practice**. No live login provider, no files, no support-impersonation product, no real users.
 
-## Mental model: anatomy of a row
+## Picture: anatomy of a row
 
 ```mermaid
 flowchart TD
-  I["Invariant from 1.1"] --> Row[Register row]
-  A[Actor capability and incentive] --> Row
-  K["Control - authority, blast radius, usable path"] --> Row
-  Row --> R[Residual]
+  I[Rule from the first topic] --> Row[Register row]
+  A[Who can act, and why] --> Row
+  K[Control: who is allowed, how far a break spreads, usable path] --> Row
+  Row --> R[Leftover]
   R --> Own[Owner]
-  Own --> T[Revisit trigger]
-  Row --> E["Evidence - test, ticket, or journey note"]
+  Own --> T[When to look again]
+  Row --> E[Evidence: a check, a ticket, or a journey note]
 ```
 
 If any box is a product name or a color, the row is not ready.
 
-## Step 1: bind every high-impact 1.1 cell
+## Step 1: name the pieces
 
-Do not invent a new catalogue. Pull the Phase 1 cells you already wrote and ask what residual they still carry when a human must confirm recovery.
+Do not invent a new catalogue. Take the rules you already wrote and ask what leftover they still carry when a human must confirm recovery.
 
-| 1.1 cell | Recovery-related residual to name | Out of scope this week |
+| Rule | Recovery leftover to name | Out of scope this week |
 |---|---|---|
-| Confidentiality of note bodies | Workaround: codes or bodies pasted into chat; shared tenant-admin session | Cloud operator with a database snapshot (1.1 already deferred this) |
-| Availability of the owner’s notes | Mouse-only or color-only confirm blocks the owner | Regional outage of a future IdP |
-| Safety of the person recovering | Coercion; lockout of a user who cannot use a pointer | Full WCAG conformance audit of the whole product |
-| Authorization of who may confirm | Support reading codes aloud over the phone | Support impersonation as a shipped feature |
-| Accountability of recovery | Evidence of confirm/cancel by modality, without recording codes | SIEM product selection |
+| Secrecy of note bodies | Shortcut: codes or bodies pasted into chat; shared admin session | Cloud operator with a database snapshot (already deferred) |
+| Owner can reach their notes | Mouse-only or color-only confirm blocks the owner | A future login provider going down in a region |
+| Safety of the person recovering | Coercion; lockout of someone who cannot use a pointer | A full accessibility audit of the whole product |
+| Who may confirm | Support reading codes aloud over the phone | Support impersonation as a shipped feature |
+| A record of recovery | Confirm/cancel by keyboard vs mouse, without recording codes | Picking a log product |
 
-## Step 2: write the recovery journey as subjects and effects
+## Step 2: write the rules
 
 | Piece | This system |
 |---|---|
-| Subjects | Owner; household abuser with the pointer; support staff on a voice channel |
-| Objects | Recovery confirm control; backup codes; session after success |
-| Actions | `recovery:confirm`, `recovery:cancel`, `support:read-codes` |
-| Channels | Local UI fixture now; email and phone later (4.1 / 4.2) |
-| TCB for this journey | Accessible name, keyboard path, non-color cue, 1.2 decision that this principal may confirm **this** account |
-| Untrusted | Color alone; hover-only hit target; “users will figure it out”; the component library brochure |
-| State / time | Recovery happens under stress, often without the original device |
+| Who | Owner; someone in the house with the pointer; support on a voice channel |
+| What | Recovery confirm control; backup codes; session after success |
+| Actions | confirm, cancel, support-reads-codes |
+| Paths | Local UI practice now; email and phone later |
+| What you trust for this journey | Accessible name, keyboard path, cue that is not only color, a who-is-allowed check that this person may confirm **this** account |
+| What you do not trust | Color alone; hover-only target; “users will figure it out”; the component library brochure |
+| Time | Recovery happens under stress, often without the original device |
 
-Minimum authority cells (1.2 shape):
+Minimum who-is-allowed rows:
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
 | Current owner | confirm control | keyboard confirm | allow if the control is usable |
-| Current owner | confirm control | color-only distinguish | deny-as-control: the control is not a control |
-| Abuser present | confirm control | coerce pointer | residual: record, do not “fix” with CSS |
-| Support | backup codes | read aloud | deny in Phase 1; later 4.2 with mediation and evidence |
+| Current owner | confirm control | color-only distinguish | deny: that is not a control |
+| Person present | confirm control | coerce pointer | leftover: record it; do not “fix” with CSS |
+| Support | backup codes | read aloud | deny this week; later topics add a check and a record |
 
-A missing support cell is how ambient authority appears (“just tell us the code”). Write the hole.
+A missing support row is how leftover permission appears (“just tell us the code”). Write the hole.
 
-## Step 3: harm scenarios, not CVE names
+## Step 3: harm scenarios, not bug-list names
 
-Write at least three scenarios in complete sentences. Synthetic names only.
+Write at least three scenarios in complete sentences. Fake names only.
 
-1. **Lockout.** Kai uses a screen reader and no pointer. The confirm control has no name and is mouse-only. Kai never re-enters Tenant A. Availability and safety fail.
-2. **Workaround.** Remy cannot tell green from gray. They screenshot both buttons to a roommate group chat and ask which one is “the good one.” Confidentiality of the recovery step fails; a later shared admin session may follow.
-3. **Support pressure.** A caller claiming to be support asks for the code because “the button is broken for everyone.” If the product trained users that recovery is hostile, phishing work factor drops.
+1. **Lockout.** Kai uses a screen reader and no pointer. The confirm control has no name and is mouse-only. Kai never re-enters company A. Getting in, and safety, fail.
+2. **Shortcut.** Remy cannot tell green from gray. They screenshot both buttons to a roommate chat and ask which one is “the good one.” The recovery step leaks; a later shared admin session may follow.
+3. **Support pressure.** A caller claiming to be support asks for the code because “the button is broken for everyone.” If the product trained users that recovery is hostile, phishing gets easier.
 
-## Step 4: residual, owner, trigger
+## Step 4: leftover, owner, when to look again
 
-| Residual | Why it remains | Owner | Revisit |
+| Leftover | Why it remains | Owner | Look again |
 |---|---|---|---|
-| Coercion by a present attacker | Accessible UI does not remove physical control of the device | Product lead for identity | When recovery adds a second factor or a safe word (4.2) |
-| Alternate path not yet built | Lab only proves the confirm widget | Same | When a mediated backup path is designed |
-| Honest-lab assumption | Pytest is not a user study | Course facilitator | Never treat the lab as population evidence |
+| Coercion by a present attacker | A usable UI does not remove physical control of the device | Product lead for identity | When recovery adds a second factor or a safe word |
+| Alternate path not yet built | Practice only proves the confirm widget | Same | When a checked backup path is designed |
+| Honest-lab assumption | The check is not a user study | Course facilitator | Never treat the practice as population evidence |
 
-SAMM scores, scanner yellow, and “256-bit” do not belong in the residual column.
+Maturity scores, scanner yellow, and “256-bit” do not belong in the leftover column.
 
 ## Practice
 
-Draw the row diagram so a second engineer could name pytest cases. The fixture to point at is `labs/1.4/1.4-risk-register` file `recovery.py`. Your artifact is a versioned register (even a table in your notes) with invariant, actor, harm, control, residual, owner, trigger, and evidence. No real PII.
+Draw the row picture so someone else could name the checks. Point at `labs/1.4/1.4-risk-register` file `recovery.py`. Your artifact is a versioned list (even a table in your notes) with rule, person, harm, control, leftover, owner, trigger, and evidence. No real people’s data.
 
-## Transfer
+## Use it somewhere new
 
-Clinic step-up: mouse-only second factor. Add rows for a clinician on a shared workstation and a patient using only a keyboard. Which 1.3 blast-radius dimensions change (time, objects, evidence suppression)?
+Clinic second factor: mouse-only. Add rows for a clinician on a shared workstation and a patient using only a keyboard. Which dimensions of “how far a break can spread” change (time, objects, hiding the evidence)?
 
-## Residual risk
+## What can still go wrong
 
 Coercion remains. Do not delete that row when the button becomes keyboard-operable.
 
-## Non-goals
+## What this page is not doing
 
-Do not define security as a Top 10 item. Do not run this register against a public clinic or bank. Keys stay out of lessons.
+Do not define security as a famous-bugs list item. Do not run this list against a public clinic or bank. Answer keys stay out of lessons.

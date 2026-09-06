@@ -1,57 +1,55 @@
-# 1.4-LO-08 — Review a register that lists tools instead of harm
+# Review a risk list that names tools instead of harm
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Lab:** `labs/1.4/1.4-risk-register/vulnerable/` as a SecureCollab PR  
-**Standards:** WCAG 2.2 (final); NIST CSF 2.0 GV; Saltzer and Schroeder psychological acceptability (1975, seminal).
+**Kind:** code-review
+**Loop step:** Review
 
-Intended findings live only in `content/assessment/keys/1.4.md` — not here. Do not open that file until your review has been evaluated.
+Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
 
 ## What you are reviewing
 
-A colleague ships a SecureCollab recovery confirm and a “risk register.” Your job is to label each claim **property**, **mechanism**, or **false assurance**, and to say which 1.1 cell (lockout, workaround/confidentiality, or accountability) breaks if they ship. Classification starts at the confirm widget and the register row, not at a scanner color or a WCAG badge.
+A colleague ships a notes-app recovery confirm and a “risk register.” Your job is to label each claim **rule**, **tool**, or **false comfort**, and to say which outcome (lockout, shortcut/secrecy, or a missing record) breaks if they ship. Start at the confirm widget and the register row, not at a scanner color or an accessibility badge.
 
-The lab folder `labs/1.4/1.4-risk-register/vulnerable/` is the PR. The oracle you already ran in LO-05 (`test_recovery_control_is_usable_and_accessible`) is the property test. A comment “will fix a11y later” is not.
+The folder `labs/1.4/1.4-risk-register/vulnerable/` is the change. The check you already ran (`test_recovery_control_is_usable_and_accessible`) is the rule test. A comment “will fix accessibility later” is not.
 
-## Mental model: four seeded smells to find yourself
+## Picture: problems to find (name them yourself)
 
-Classification starts at the control and the register, not at the tool names. A missing accessible name, color-only distinction, mouse-only confirm, or “users should be careful” residual each maps to a 1.1 cell. Do not open the keys file. For each smell, write the label and the rewrite.
+Start at the control and the list, not at the tool names. A missing name a screen reader can speak, color-only distinction, mouse-only confirm, or “users should be careful” leftover each maps to a rule. Do not open the keys file. For each problem, write the label and the rewrite.
 
 ```mermaid
 flowchart TD
-  PR[Proposed recovery PR] --> Q1{Named keyboard control?}
-  PR --> Q2{Register names harm, owner, trigger?}
-  Q1 -->|no| Fail1["Property fail - lockout or workaround"]
-  Q2 -->|no| Fail2["False assurance - vanity residual"]
+  PR[Proposed recovery change] --> Q1{Named keyboard control?}
+  PR --> Q2{List names harm, owner, when to look again?}
+  Q1 -->|no| Fail1[Rule fail: lockout or shortcut]
+  Q2 -->|no| Fail2[False comfort: fake leftover]
 ```
 
-- Confirm button has no accessible name  
-- Destructive or confirming action distinguished only by red vs green  
-- Mouse-only drag-to-confirm  
-- Risk register lists residual as “users should be careful”
+- Confirm button has no accessible name
+- Confirming action distinguished only by red vs green
+- Mouse-only drag-to-confirm
+- Risk list lists leftover as “users should be careful”
 
-Also reject: client trust as the TCB; closing a finding without re-running `--impl fixed`; keys in learner notes; live-target “we should try this on staging clinic.”
+Also reject: trusting the browser as the vault; closing a finding without re-running `--impl fixed`; keys in learner notes; “we should try this on the staging clinic.”
 
-## Misconceptions this module refuses
+## Common mix-ups
 
-- Accessibility is a separate compliance track from security  
-- Friction always increases security  
-- Work factor applies only to attackers, not to legitimate users stuck in a flow  
-- SAMM or scanner color is residual risk  
-- Coercion is solved by CSS  
+- Accessibility is a separate compliance track from security
+- Friction always increases security
+- Attacker effort is the only effort that counts — not the legitimate user stuck in a flow
+- A maturity score or scanner color is leftover risk
+- Coercion is solved by CSS
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: observation, property or false assurance, suggested structural change, residual you will **not** delete. Tie at least one note to `test_recovery_control_is_usable_and_accessible`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_recovery_control_is_usable_and_accessible`. Do not open the keys file.
 
-## Transfer
+## Use it somewhere new
 
-Clinic mouse-only step-up: write the same four smell names as they would appear in that UI (unnamed dialog, color-only continue, pointer-only, residual “clinicians should be careful”).
+Clinic mouse-only second factor: write the same four problem names as they would appear in that UI (unnamed dialog, color-only continue, pointer-only, leftover “clinicians should be careful”).
 
-## Usability
+## Can people still use it
 
-WCAG 2.2 2.1.1, 1.4.1, and 2.5.8 apply to the control. They are not a privacy policy.
+Keyboard, not-color-alone, and a large enough target apply to the control. They are not a privacy policy.
 
-## Non-goals
+## What this page is not doing
 
-Do not merge by adding a comment “will fix a11y later.” That comment is a residual without an owner.
+Do not merge by adding a comment “will fix accessibility later.” That comment is leftover risk without an owner.

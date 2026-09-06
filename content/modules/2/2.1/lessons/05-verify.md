@@ -1,65 +1,68 @@
-# 2.1-LO-05 — Evidence is a failing test, then a passing pair
+# Fail on the broken files, then pass on the repaired ones
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-2.2.1`; RFC 8259 JSON (STD 90, final).
 
-## An invariant that cannot fail a test is still a slogan
+## If you cannot test it, it is still a slogan
 
-Happy-path HTTP 200 is not this module’s evidence (see 9.3). The oracle is the local pair against a named forbidden outcome.
+Happy-path HTTP 200 is not evidence. The check must be **false** on the broken files and **true** on the repaired files, against a named “what must not happen.”
 
-## Mental model: vulnerable must fail: duplicate-key assertion
+## Picture: broken files must fail the duplicate-key check
 
-The failing observation on `--impl vulnerable` is **duplicate-key assertion**. A passing collection count is not this cell.
+A check that only counts passing cases can pass while two readers still disagree. This check asks whether two company meanings still count as a passing control. Broken must fail that question. Repaired must pass it.
 
 ```mermaid
 flowchart LR
-  V["--impl vulnerable"] --> F[Must fail duplicate-key assertion]
-  X["--impl fixed"] --> P[Must pass both CLEAN and AMBIGUOUS]
-  F --> E[Evidence the property was false]
-  P --> E2[Evidence the predicate is now true]
+  V[broken files] --> F[Must fail the duplicate-key check]
+  X[repaired files] --> P[Must pass both the clean object and the messy one]
+  F --> E[Evidence the rule was false]
+  P --> E2[Evidence the check is now true]
 ```
 
-| Case | Must show |
+If both pass, the check is not looking at ACL tenant vs stored tenant. If both fail, the fix is not structural or the check is wrong.
+
+## Four modes, even for a parse
+
+| Mode | Must show |
 |---|---|
 | Normal | CLEAN unique-key JSON is accepted with `acl_tenant == stored_tenant == tA` |
-| Negative / abuse | AMBIGUOUS duplicate keys: rejected **or** both tenants identical |
-| Failure default | Uncertainty does not persist a body under a guessed tenant |
+| Wrong input / abuse | Messy duplicate keys: refused **or** both tenants identical |
+| When things break | Uncertainty does not persist a body under a guessed company |
 
-Lab tests: `test_unambiguous_json_is_accepted` and `test_duplicate_tenant_keys_are_one_meaning` in `labs/2.1/2.1-parser-boundaries/tests/test_parser.py`. `test_duplicate_tenant_keys_are_one_meaning` is a **forbidden-outcome** test: last-key-wins `acl_tenant != stored_tenant` is not allowed to count as a passing control.
+The file is `labs/2.1/2.1-parser-boundaries/tests/test_parser.py`. The checks are `test_unambiguous_json_is_accepted` and `test_duplicate_tenant_keys_are_one_meaning`. The second is a **what-must-not-happen** check: last-key-wins `acl_tenant != stored_tenant` is not allowed to count as a passing control.
 
 ```text
 python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl vulnerable
 python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl fixed
 ```
 
-Run from `labs/2.1/2.1-parser-boundaries` if a repo-root collection picks up `site/`. Map each test to a matrix cell from LO-02. Do not paste keys. An environment error is not security evidence.
+Run from `labs/2.1/2.1-parser-boundaries` if a repo-root collection picks up `site/`. Map each check to a cell from the map page. Do not paste keys. An environment error is not security evidence.
 
-| Slice | This lab |
+| Slice | This practice |
 |---|---|
-| Required property | duplicate keys → one meaning or reject |
-| Root cause | two interpreters, one byte string |
-| Trigger | AMBIGUOUS duplicate `tenant` keys |
-| Prevention | reject or compare ACL and store |
-| Not claimed | Pydantic last-key; GraphQL live target; 1.2 for unique keys |
+| Required rule | duplicate keys → one meaning or refuse |
+| Why it happens | two readers, one byte string |
+| Trigger | messy duplicate `tenant` keys |
+| How you stop it | refuse, or compare ACL and store |
+| Not claimed | Pydantic last-key; GraphQL live target; who-is-allowed for unique keys |
 
-## What the tests do not prove
+## What the checks do not prove
 
 - PostgreSQL `jsonb` agreement
 - GraphQL variable parsing
 - Unicode identifier spoofing
-- Authorization for an honest unique-key object (that is 1.2)
+- Authorization for an honest unique-key object (that is the who-is-allowed topic)
 
-Record those as residuals or later modules, not as silent passes.
+Record those as leftover risk or later topics, not as silent passes.
 
 ## Practice
 
-Execute both implementations this session. If vulnerable does not fail, the lab is miswired—fix the wiring, not the assertion. Write the fail/pass pair next to the LO-02 ingest cell.
+Run both implementations this session. If the broken files do not fail, the practice is miswired — fix the wiring, not the check. Write the fail/pass pair next to the ingest cell from the map page.
 
-## Transfer
+## Use it somewhere new
 
-GraphQL and REST both ingest the same note. A test that only asserts status 200 on `/graphql` is not parser-agreement evidence. A live GraphQL target is out of scope.
+GraphQL and REST both ingest the same note. A check that only asserts status 200 on `/graphql` is not parser-agreement evidence. A live GraphQL target is out of scope.
 
-## Non-goals
+## What this page is not doing
 
-Do not add live traffic. Do not log the AMBIGUOUS blob. Keys stay out of this file.
+Do not add live traffic. Do not log the messy object. Answer keys stay out of this file.

@@ -1,99 +1,63 @@
-# 1.1-LO-08 — Review a security document as an engineering claim
+# Would you merge this password file?
 
-**Kind:** code-review  
-**Loop step:** 5 Verify
-**Fixture:** labs/1.1/1.1-invariant-catalogue/vulnerable/SECURITY.md
+**Kind:** code-review
+**Loop step:** 7 Generalize
 
-## Review objective
+## Review
 
-Security documentation can create false assurance before a line of vulnerable application code exists. Treat the seeded SECURITY.md as a proposed engineering claim in a pull request.
+You are reviewing a change that "adds login" to the local notes app. The patch is small. That is not the same as safe.
 
-Your review should determine whether each sentence is:
+## What to look for
 
-- a property;
-- a mechanism;
-- evidence;
-- an assumption or non-goal;
-- false assurance;
-- or too ambiguous to classify.
+Read the store write path:
 
-## Mental model: classify before you accept
+- Is the password written as itself, as Base64, or as a slow hash?
+- Is there a **unique** salt per user, or one salt in a config file?
+- Are hashing settings stored next to the hash?
+- Is the compare a secret-safe function?
 
-```mermaid
-flowchart TD
-  Sent["SECURITY.md sentence"] --> Q{What would falsify it?}
-  Q -->|named forbidden outcome| Prop[property]
-  Q -->|tool name only| Mech[mechanism]
-  Q -->|scanner passed| False[false assurance]
-```
+Read the log path:
 
-Do not open content/assessment/keys/1.1.md until your work has been evaluated.
+- Do failed sign-ins print the password "for debugging"?
 
-## Review method
+Read the tests:
 
-### 1. Reconstruct the implied claim
+- Is there a test that the file has no readable password?
+- Is there a test that two users with the same password have different salts?
 
-For every mechanism named by the document, ask:
+Read the comments:
 
-- which asset and forbidden outcome is this supposed to address?
-- against which attacker capability?
-- which trusted component must enforce it?
-- over which channel and time horizon?
-- what evidence would falsify the claim?
-- what unrelated properties remain uncovered?
+- Do they claim "production ready" or "secure by default"?
+- Do they admit this is **local-only**?
 
-If the document does not answer, do not invent certainty on the author’s behalf. Record the gap.
+## Merge or block
 
-### 2. Trace control to outcome
+**Block** if any of these are true:
 
-Create a table:
+- readable password in the store,
+- fast hash sold as a password store,
+- shared salt,
+- `==` on secret strings as the only check,
+- password in logs,
+- no test for plaintext-absent,
+- comment says the laptop is now safe from theft because of Argon2.
 
-| Source sentence | Classification | Implied property | Missing assumptions | Counterexample | Minimum rewrite |
-|---|---|---|---|---|---|
+**Merge** (for this week) if:
 
-A counterexample should be safe and conceptual. For example, a transport mechanism may protect one network hop while a log or authorization error discloses the same asset. Do not demonstrate attacks against a running or public system.
+- Argon2id (or the pinned slow hash) plus unique salt plus settings,
+- secret-safe compare,
+- tests named above pass,
+- comments tell the truth about local-only and leftover risk.
 
-### 3. Look for universal language
+## What to write in the review
 
-Flag terms such as secure, protected, encrypted, validated, compliant, impossible, always, and only when they lack a bounded subject, object, action, attacker, trust, channel, or time horizon.
+Two sentences:
 
-Universal language is not automatically wrong. It carries a large proof obligation that the seeded document does not meet.
+1. What evidence you ran or read.
+2. What leftover risk you are accepting (disk theft, no server).
 
-### 4. Look for missing operations
+"Looks good to me" is not a review.
 
-Ask what happens when the stated mechanism fails, is bypassed, is misconfigured, or produces no evidence. A security claim with no detection, response, recovery, or review trigger may be incomplete even if its prevention mechanism is reasonable.
+## Check yourself
 
-### 5. Check editorial integrity
-
-A reviewer line, green badge, generated timestamp, or passing schema is not independent evidence of semantic quality. Verify who reviewed what, against which criteria, and with which test result.
-
-## Write actionable review comments
-
-Each comment should contain:
-
-1. the unsupported conclusion;
-2. the concrete missing model element;
-3. why the gap matters;
-4. the minimum requested change;
-5. how the revised claim could be evaluated.
-
-Avoid “needs more detail.” Prefer: “This sentence names a credential-storage mechanism but concludes that the whole application is secure. Please state the credential property, snapshot attacker, trusted capture paths, time horizon, and evidence; move note confidentiality and authorization to separate catalogue rows.”
-
-## Required output
-
-Submit:
-
-- the classification table;
-- at least four actionable comments;
-- one proposed bounded rewrite;
-- one residual risk the document should acknowledge;
-- one review trigger for a future asset or actor;
-- a short note explaining why a green scanner result cannot close the review.
-
-## Transfer
-
-Review this new sentence without naming a vendor-specific fix:
-
-> We use signed tokens, so only authorized workers can process jobs.
-
-Identify the property, subject, object, action, attacker capability, trust assumptions, state/time issue, mechanism limit, evidence, and residual risk that the sentence omits.
+Take the broken tree from the practice. Write the review that **blocks** it. Then take the repaired tree and write the review that **merges** it with leftover risk named. Keep both in your notes for the first check-in.

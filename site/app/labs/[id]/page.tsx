@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { PageHeader, PageShell } from "@/components/ui";
 import { topicBlurb, topicTitle } from "@/lib/catalog";
 import { loadAllModules, loadModule, moduleHref } from "@/lib/loadCurriculum";
+import { learnerFacingOutcomes } from "@/lib/plainCopy";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -53,7 +54,7 @@ export default async function LabBriefPage({ params }: Props) {
           ones. If both pass, the check is not catching the bug.
         </p>
         <ul className="list-disc space-y-2 pl-5 leading-relaxed">
-          {(mod.labSpec.forbiddenOutcomes || []).map((o) => (
+          {learnerFacingOutcomes(mod.labSpec.forbiddenOutcomes).map((o) => (
             <li key={o}>{o}</li>
           ))}
         </ul>

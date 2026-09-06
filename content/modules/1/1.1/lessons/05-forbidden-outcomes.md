@@ -1,103 +1,55 @@
-# 1.1-LO-05 — Verify forbidden outcomes, not control presence
+# What must never show up in the file
 
-**Kind:** verification-lab  
+**Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## Turn the property into an oracle
+## Check it
 
-A security test needs an oracle: a rule that decides whether the observed result violates the invariant. “The middleware ran” is a mechanism oracle. “Tenant B received zero bytes derived from Tenant A’s note body” is a property oracle.
+A mechanism without a **failed test** is a story. This page names the stories that must not pass.
 
-## Mental model: property oracle vs mechanism oracle
+## Tests you should be able to name
 
-```mermaid
-flowchart LR
-  Prop[zero Tenant A bytes in B response] --> Oracle[can fail]
-  Mech[middleware is installed] --> NotOracle[does not prove the cell]
+**Normal**
+
+- Create a user with a throwaway password. The store has a hash, a unique salt, and hashing settings. The password is not in the file.
+- Sign in with the right password. The app accepts. Sign in with the wrong one. The app refuses.
+
+**Wrong input**
+
+- Empty password, huge password, password with spaces or unicode: rejected or handled on purpose — not hashed as `None`, not crashed into a 500 with a stack trace on a public page (there is no public page yet; still do not print the password).
+
+**Abuse**
+
+- Two users, same password: salts differ, hashes differ.
+- Compare uses a secret-safe function, not a shortcut that can leak timing.
+- Pepper, if present, is not sitting in the same file as the hashes.
+
+**When things break**
+
+- Missing store file: fail closed, not "treat everyone as signed in."
+- Unknown hashing settings in an old row: fail closed or migrate on purpose — not silently check with today's settings against yesterday's hash.
+
+Write the test names in your notes. Then run them:
+
+```text
+cd labs/phase1/lab-1.1-local-hashed-identity/fixed
+python -m pytest tests/ -q
 ```
 
-For each catalogue row, write the forbidden outcome before choosing a test tool.
+## What "fail closed" means here
 
-| Invariant shape | Forbidden outcome | Property evidence | Misleading evidence |
-|---|---|---|---|
-| Cross-tenant confidentiality | A B principal obtains any A note-body value through an in-scope route | Negative tests over every read/export route and captured logs | Authentication middleware is installed |
-| Membership integrity | A non-admin or stale admin changes membership | State-transition tests with current and revoked authority | The UI hides the button |
-| Accountability | A role grant completes without privacy-safe actor, tenant, action, target, decision, and correlation evidence | Assert an event is emitted and survives the stated failure | “Logging enabled” configuration |
-| Bounded availability | One tenant’s abusive workload prevents ordinary reads outside the stated budget | Load/failure experiment with per-tenant observations and recovery timing | A single health check returns 200 |
-| Privacy deletion | Data remains accessible beyond declared retention or restore behavior | Live, cache, export, and restore-path evidence | DELETE returned success |
+If the store cannot be read, or the row cannot be verified, the app does **not** invent a success. A broken file is not a free login.
 
-The later modules implement many of these tests. In Module 1.1, your task is to specify evidence precisely enough that implementation can be judged.
+## Check yourself
 
-## Four evidence modes
+Which test would catch "I hashed with SHA-256 and called it Argon2"? If you do not have one, add a check that the algorithm name in the record is the one you pinned.
 
-Every important row needs more than a happy path.
+Which test would catch "one salt for everyone"? If you do not have one, create two users and compare salts.
 
-1. **Normal:** an authorized action succeeds and produces the intended state and evidence.
-2. **Negative:** a clearly unauthorized or invalid action is denied without partial effect.
-3. **Abuse:** a capable adversary varies identifiers, order, volume, or context within the lab model.
-4. **Failure:** dependencies time out, retries occur, evidence storage fails, or state is restored.
+## What can still go wrong
 
-These modes expose different assumptions. A negative test may prove that one route denies Tenant B while a failure test reveals that a cache or restore path leaks stale Tenant A data.
+Green tests on this laptop are not a pentest of a website. They are evidence for **this** store, **this** week.
 
-## Trace one evidence argument
+## Where this shows up later
 
-For a proposed cross-tenant read test, record:
-
-- **Initial state:** Tenant A and Tenant B exist; each has a member; note N belongs to A.
-- **Attacker capability:** B’s member has a valid session and can choose any note identifier and request shape.
-- **Action:** request N through each in-scope read path.
-- **Oracle:** no response body, status detail, timing-class claim, log accessible to B, or export contains N’s body. Be precise about which side channels are in scope.
-- **Expected state:** N and membership remain unchanged; a privacy-safe denial event may exist.
-- **Counterfactual:** removing tenant binding from the policy would make at least one test fail.
-- **Limits:** this evidence does not cover operator database access or future offline caches.
-
-The counterfactual is important. If the test passes with the enforcement mechanism removed, it may not exercise the property.
-
-## Evidence quality ladder
-
-Classify each proposed item:
-
-| Level | Evidence | Value |
-|---|---|---|
-| 0 | “We follow best practices” | No observable claim |
-| 1 | Configuration or control presence | Shows intent, not outcome |
-| 2 | Test observes a property under stated preconditions | Useful but bounded |
-| 3 | Independent evidence spans alternate paths and failure modes | Stronger assurance, still not universal proof |
-
-Do not call Level 1 evidence useless; configuration review can expose defects. Do not call it proof of the invariant.
-
-## Practice: build a forbidden-outcome matrix
-
-Add a table to your catalogue with one row per invariant:
-
-| ID | Normal | Negative | Abuse | Failure | Oracle | Residual gap |
-|---|---|---|---|---|---|---|
-
-Requirements:
-
-- at least one case must change time or retained state;
-- at least one must challenge an alternate route or component;
-- at least one must verify privacy-safe detection evidence;
-- at least one must describe what happens if evidence collection itself fails;
-- no case may target a public or third-party system.
-
-For each case, say whether it is executable now, executable in a later named module, or a review-only claim. Future evidence is not current proof.
-
-## Common verification errors
-
-- **Testing a label:** asserting a function called authorize was invoked.
-- **One-object sampling:** testing only a random object that happens to belong to the caller.
-- **No state oracle:** checking a status code while a forbidden write partially commits.
-- **No alternate path:** testing the UI but not the API, export, retry, or restore route.
-- **Secret-bearing evidence:** logging the protected value so a test can find it.
-- **Universal conclusion:** turning one passing test into “tenant isolation is guaranteed.”
-- **Mocking away the property:** replacing the actual policy or persistence boundary with a permissive mock.
-
-## Review checkpoint
-
-A reviewer should be able to answer three questions from your matrix:
-
-1. What observation would falsify the invariant?
-2. Which assumptions are not exercised?
-3. Which future product change invalidates the evidence?
-
-If any answer is missing, the row remains developing.
+Check-in 1 asks for this kind of evidence, not a screenshot of a green arrow with no test names.

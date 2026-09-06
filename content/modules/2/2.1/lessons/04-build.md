@@ -1,55 +1,60 @@
-# 2.1-LO-04 — Restore one meaning, or refuse ingest
+# Restore one meaning, or refuse the file
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** Saltzer and Schroeder (1975, seminal) fail-safe defaults and economy of mechanism; OWASP ASVS 5.0.0 (final) `v5.0.0-1.1.1`, `v5.0.0-2.2.1`, and `v5.0.0-2.2.2`; RFC 8259 JSON (STD 90, final).
 
-## Structural means the predicate is true
+## The rule
 
-Reject duplicate keys, or compare `acl_tenant == stored_tenant` and deny on mismatch. Structural means the object actually has one tenant meaning before 1.2 mediation runs—not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
+A denylist of yesterday’s string is not the fix. Hiding a scanner warning is not the fix. “Trust the framework” is not the fix.
 
-## Mental model: fail closed on disagreement
+The structural change is: the object **actually has one company meaning** before the who-is-allowed check runs. Refuse duplicate keys, or compare `acl_tenant == stored_tenant` and deny on mismatch.
+
+## Picture: fail closed on disagreement
 
 ```mermaid
 flowchart TD
-  Bytes[Request bytes] --> P1[Interpreter A]
-  Bytes --> P2[Interpreter B]
+  Bytes[Request bytes] --> P1[Reader A]
+  Bytes --> P2[Reader B]
   P1 --> Cmp{Meanings equal and present?}
   P2 --> Cmp
   Cmp -->|yes| One[One parse result to ACL and store]
-  Cmp -->|no| Deny["accepted false - no body stored"]
+  Cmp -->|no| Deny[accepted false — no body stored]
 ```
 
-The lab’s fixed tree still *has* two interpreters. It restores the invariant by **refusing** when they disagree. A production design may instead use a single strict parser that errors on duplicate keys. Both are fail-safe. Guessing which key “the user meant” is not.
+The repaired files still *have* two readers. They restore the rule by **refusing** when those readers disagree. A production design may instead use a single strict parser that errors on duplicate keys. Both are fail-safe. Guessing which key “the user meant” is not.
 
-## Why this restores the cell
+## What the repaired files must show
 
 | After the fix | Must be true |
 |---|---|
 | CLEAN unique-key JSON | `accepted` is true; ACL and store are `tA` |
-| AMBIGUOUS duplicate keys | `accepted` is false, **or** ACL and store are identical |
-| Body on reject | not persisted as a note |
+| Messy duplicate keys | `accepted` is false, **or** ACL and store are identical |
+| Body on refuse | not persisted as a note |
 
-Fail-safe: on uncertainty, **deny**. Do not repair by keeping the last key because “that is what Python does.”
+Fail closed: on uncertainty, **deny**. Do not repair by keeping the last key because “that is what Python does.”
 
 ## What this is not
 
-Pydantic v2 defaults are not “duplicate keys impossible.” stdlib `json` keeps the last key. A WAF string filter for “tenant twice” fails on whitespace and Unicode escapes. NFC-normalizing display names does not bind tenant ids.
-
-ASVS `v5.0.0-2.2.2`: client-side validation is not the control. The trusted service layer must enforce the predicate.
+- Pydantic v2 defaults are not “duplicate keys impossible.”
+- stdlib `json` keeps the last key.
+- A WAF string filter for “tenant twice” fails on whitespace and Unicode escapes.
+- NFC-normalizing display names does not bind company ids.
+- Client-side validation is not the control. The trusted service layer must enforce the check.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass):
+Name who, what, action, and the check that must be true after the fix. Run `--impl fixed` (must pass):
 
 ```text
 python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl fixed
 ```
 
-## Transfer
+Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-GraphQL and REST both ingest the same note — two grammars. The fix is still “one meaning or reject,” not “sanitize quotes.”
+## Use it somewhere new
 
-## Residual risk
+GraphQL and REST both ingest the same note — two grammars. The fix is still “one meaning or refuse,” not “sanitize quotes.”
 
-Honest unique-key JSON still needs 1.2 mediation. A future `jsonb` column is a new interpreter until proven otherwise.
+## What can still go wrong
+
+Honest unique-key JSON still needs a who-is-allowed check. A future `jsonb` column is a new reader until proven otherwise.

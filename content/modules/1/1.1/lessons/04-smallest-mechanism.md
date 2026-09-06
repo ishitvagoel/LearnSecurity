@@ -1,124 +1,70 @@
-# 1.1-LO-04 — Build the smallest mechanism that restores an invariant
+# The smallest honest password store
 
-**Kind:** design-exercise  
+**Kind:** design-exercise
 **Loop step:** 4 Build
 
-## Start from a failed property
+## The rule
 
-A trustworthy build step is not “add more security.” It is a causal argument:
+A local password file may be written only as a **slow hash**, a **unique salt**, and **honest hashing settings**. Checking a password uses a **compare that does not leak timing**.
 
-1. a specific forbidden outcome is possible;
-2. a root cause and preconditions explain why;
-3. a mechanism changes the relevant state transition or trust relation;
-4. evidence can distinguish the repaired system from the failed one;
-5. residual risk remains explicit.
+That is the whole mechanism for this week. Not a session cookie. Not OAuth. Not "the framework hashed it."
 
-Choose one catalogue row from LO-02. Do not choose a mechanism first.
-
-## Mental model: property first, then the smallest change
+## Picture
 
 ```mermaid
-flowchart TD
-  Out[forbidden outcome] --> Cause[root cause]
-  Cause --> Mech[smallest mechanism]
-  Mech --> Ev[evidence that can fail]
-  Mech --> Res[named residual]
+flowchart LR
+  pwd[Password in memory]
+  salt[Unique salt]
+  params[Hashing settings]
+  hash[Slow hash]
+  store[(Store on disk)]
+  pwd --> hash
+  salt --> hash
+  params --> hash
+  hash --> store
+  salt --> store
+  params --> store
 ```
 
-## Worked design: note bodies in logs
+**Minimum fields**
 
-Assume the property is:
+| Field | Why |
+| --- | --- |
+| Hash | What you compare against. Never store the password. |
+| Unique salt | Two users with the same password must not look the same on disk. |
+| Hashing settings | So you can raise the cost later without pretending an old file was stronger. |
+| Optional pepper | Extra secret, not in the same file as the hash. If you skip it, say so. Do not claim it exists. |
 
-> Application observability events must not contain note-body or credential values during request handling or error reporting.
+**How you check a password**
 
-The attacker is an operator or compromised log reader who cannot directly query note rows. The API process and logging configuration are trusted to enforce a field policy. The time horizon includes retained logs and incident exports.
+1. Load the row for that user.
+2. Hash the typed password with **that row's** salt and settings.
+3. Compare hash bytes with a function meant for secrets (`hmac.compare_digest` in Python, or Argon2's verify). Do not use `==` on strings if you can avoid it.
+4. On success, you may set a **local** flag. That flag is not a server session.
 
-### Root cause and preconditions
+**What you refuse**
 
-The failure is possible when application code passes arbitrary objects or exception context to a general serializer. A note body is present in process memory, the logging call accepts it, and the log pipeline retains it. TLS and database encryption do not intervene because disclosure occurs before transport to the logging service.
+- Base64 or reversible "encryption" of the password.
+- A fast hash (plain SHA-256 of the password) as the password store.
+- One salt for the whole app.
+- Logging the password, the salt, or the hash.
 
-### Candidate mechanisms
+## Frameworks are not the rule
 
-| Candidate | What it changes | Limit |
-|---|---|---|
-| “Install a SIEM” | Stores and queries events | Does not prevent sensitive fields from entering events |
-| Redact known note text after serialization | Attempts content matching | Misses encodings, fragments, new fields, and transformed values |
-| Structured event allowlist with typed safe fields | Makes sensitive fields unrepresentable in normal event construction | Bypass remains possible through raw logging or exception middleware |
-| Encrypt the logging destination | Protects a storage channel | Authorized log readers may still see note bodies |
-| Disable all logs | Removes one disclosure path | Destroys accountability and diagnosis; other telemetry may remain |
+FastAPI does not hash for you. Next.js does not hash for you. If you call `argon2.PasswordHasher().hash(...)` and write the result plus salt plus settings, **you** kept the rule. If you write `password=` into JSON, **you** broke it — no matter what the README claims.
 
-The smallest plausible structural mechanism is an allowlisted event constructor plus a ban on raw object logging in the trusted API path. It directly constrains which fields can cross the observability boundary. It still needs tests for exception paths and a residual-risk statement for memory dumps or bypass APIs.
+Pin a real algorithm (Argon2id is the default in this practice). Do not pin a wish.
 
-### Derive proof obligations
+## Check yourself
 
-A mechanism is not complete until you can state what must be true of it:
+Sketch the store record. If you cannot point to hash, unique salt, and settings, the sketch is not done.
 
-- every security-relevant logging path uses the safe constructor;
-- note bodies and credentials have no allowed event field;
-- framework and exception middleware cannot append request bodies;
-- field-policy failures deny emission or replace the value safely;
-- the application still emits enough identifiers for accountability;
-- a captured event can be tested without storing the sensitive input.
+Name the compare function you will call. If you cannot, you are not ready to merge.
 
-These obligations become review and test targets. “The library supports redaction” is not one of them.
+## What can still go wrong
 
-## Minimize trusted computing base
+This store does not encrypt the disk. It does not survive a stolen laptop by itself. It does not become a server login because you reused the same JSON shape.
 
-For your chosen row, draw a small table:
+## Where this shows up later
 
-| Component | Must be trusted for this property? | Why or why not? |
-|---|---|---|
-| Browser/Next.js client | No | A hostile client can construct requests; the property cannot depend on client honesty |
-| FastAPI route | Maybe | It gathers subject and object context |
-| Central policy function | Yes, if it decides authorization | A wrong decision directly permits the forbidden outcome |
-| PostgreSQL role/policy | Depends on design | It may provide independent enforcement or merely obey the API |
-| Log pipeline | Only for evidence availability, not request authorization | Conflating the two enlarges trust |
-| Scanner | No | It observes selected behavior and cannot enforce the invariant |
-
-Remove unnecessary trusted components. For each remaining one, name the behavior you rely on. “Trust the database” is too broad; “the role cannot select rows outside the bound tenant” is reviewable.
-
-## Framework defaults versus application guarantees
-
-A framework may parse a request, hash a credential, set a cookie flag, escape a template, or emit an access log. Those are default mechanisms under conditions. Your guarantee includes:
-
-- how the application configures the mechanism;
-- alternate routes and failure paths;
-- version and deployment assumptions;
-- state outside the framework;
-- tests that exercise the forbidden outcome.
-
-When you rely on a default, record how it could be disabled or bypassed. A default with no invariant and no verification is inherited optimism.
-
-## Build record
-
-For one catalogue row, produce a one-page design record:
-
-1. **Invariant and forbidden outcome**
-2. **Root cause and preconditions**
-3. **Smallest mechanism**
-4. **State transition or trust relation changed**
-5. **Why two plausible alternatives are insufficient**
-6. **Proof obligations**
-7. **Normal, negative, abuse, and failure evidence**
-8. **Detection and recovery**
-9. **Residual risk**
-10. **Review trigger**
-
-The record may propose a future implementation; this Phase 1 exercise does not require SecureCollab product code.
-
-## Design review questions
-
-A reviewer should challenge the record:
-
-- Does the mechanism prevent the forbidden outcome or merely make it less likely?
-- Can the same state change occur through another route, worker, retry, import, or restore?
-- Does the repair trust the client or a label supplied by the attacker?
-- Does the mechanism destroy an accountability, privacy, availability, safety, or usability property?
-- What happens when the mechanism is unavailable, stale, or misconfigured?
-- Which test would fail if the mechanism were removed?
-
-Revise until the mechanism is both smaller and more directly connected to the property.
-
-## Transfer
-
-SecureCollab later adds webhook delivery. Revisit the log-confidentiality example: payloads, retry metadata, third-party endpoints, and background workers introduce new channels and trusted components. “Reuse the allowlist” is not enough. State which proof obligations survive and which must be rewritten.
+Auth topics will move this pattern behind an API and add sessions. The fields do not get to disappear — they get a new attacker.

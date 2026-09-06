@@ -1,58 +1,59 @@
-# 2.1-LO-06 — Detect disagreement; never log the body
+# Notice disagreement without logging the body
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
-**Standards:** NIST CSF 2.0 (final) DE/RS/RC as *outcome labels*, not proof; OWASP ASVS 5.0.0 (final) `v5.0.0-2.2.2`; Module 3.1 / 5.1 privacy of logs.
 
-## Prevention is not absolute
+## Stopping it is not enough
 
-A new JSON library, a worker re-parse, or a `jsonb` cast can reintroduce two meanings. Pair detect and recover. Do not log secrets or note bodies.
+A new JSON library, a worker re-parse, or a `jsonb` cast can bring two meanings back. Pair notice and recover. Do not log secrets or note bodies.
 
-## Mental model: signal without the blob
+## Picture: signal without the blob
 
 ```mermaid
 flowchart TD
   Ingest[Ingest attempt] --> Decision{One meaning?}
-  Decision -->|no| Metric["ingest_reject_duplicate_key += 1"]
-  Metric --> Log["reason=duplicate_tenant_key request_id=... no body"]
+  Decision -->|no| Metric[ingest_reject_duplicate_key += 1]
+  Metric --> Log[reason=duplicate_tenant_key request_id=... no body]
   Log --> Quarantine[Do not persist; quarantine if a row already disagrees]
-  Decision -->|yes| Mediate["Hand the parse result to 1.2"]
+  Decision -->|yes| Mediate[Hand the parse result to the who-is-allowed check]
 ```
 
-| Outcome | This module |
+Industry lists name detect, respond, recover. They do not pick a log product. They do not prove a checklist. Someone still has to own the leftover.
+
+## Signals that do not become a second leak
+
+| Outcome | This topic |
 |---|---|
-| Detect | Parse-error / duplicate-key metric; CI differential corpus |
-| Signal (no bodies) | `ingest_reject_duplicate_key` count; `request_id`; reason code |
-| Revoke / recover | Quarantine rows whose ACL and store disagree; do not guess a tenant |
-| Residual | Honest unique-key JSON still needs 1.2 mediation |
+| Notice | Parse-error / duplicate-key metric; a local corpus of messy objects |
+| What the line holds | `ingest_reject_duplicate_key` count; `request_id`; reason code — **never** the note body |
+| Recover | Quarantine rows whose ACL and store disagree; do not guess a company |
+| Leftover | Honest unique-key JSON still needs a who-is-allowed check |
 
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS. A SIEM product name is not the property.
+A log-product name is not the rule. FastAPI will still parse whatever JSON library you wired. PostgreSQL `jsonb` will keep one key if you cast. The app’s promise is: **this** practice, messy keys do not persist two companies, and the deny log never includes the blob.
 
-FastAPI will still parse whatever JSON library you wired. PostgreSQL `jsonb` will keep one key if you cast. The application guarantee is: **this** fixture, AMBIGUOUS keys do not persist two tenants, and the deny log never includes the blob.
+A metric without a quarantine playbook still leaves a disagreeing row if a worker stored first. Unicode lookalike keys are leftover risk. Honest unique-key JSON still needs who-is-allowed. A dashboard green is not that sentence.
 
-Mechanism limits: a metric without a quarantine playbook still leaves a disagreeing row if a worker stored first. Unicode lookalike keys are residual. Honest unique-key JSON still needs 1.2. `v5.0.0-2.2.2` wants the trusted layer to enforce the predicate; a dashboard green is not that sentence.
-
-| Slice | This lab |
+| Slice | This practice |
 |---|---|
-| Detect | `ingest_reject_duplicate_key` |
+| Notice | `ingest_reject_duplicate_key` |
 | Signal | reason code and `request_id`; never note body |
 | Recover | Do not persist; quarantine if a row already disagrees |
-| Residual | `jsonb` as a new interpreter; GraphQL aliases |
+| Leftover | `jsonb` as a new reader; GraphQL aliases |
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/2.1/2.1-parser-boundaries`. Example shape (synthetic ids only):
+Write one log line you would accept in review. Tie it to `labs/2.1/2.1-parser-boundaries`. Example shape (fake ids only):
 
 ```text
-ingest_denied reason=duplicate_tenant_key request_id=req_7c3a fixture=2.1-parser-boundaries
+ingest_denied reason=duplicate_tenant_key request_id=req_7c3a practice=2.1-parser-boundaries
 ```
 
 Reject any line that includes `body`, note text, or a raw JSON blob.
 
-## Transfer
+## Use it somewhere new
 
-GraphQL and REST both ingest the same note. Two reject metrics, or one shared ingest id with a `grammar=` field—pick one and justify least common mechanism.
+GraphQL and REST both ingest the same note. Two refuse metrics, or one shared ingest id with a `grammar=` field — pick one and say why one shared path is safer than two.
 
-## Non-goals
+## What this page is not doing
 
-SIEM product names are not the property. Keys stay out of lessons.
+A log-product name is not the rule. Answer keys stay out of lessons.

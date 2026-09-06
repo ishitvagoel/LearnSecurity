@@ -1,8 +1,7 @@
 import { notFound } from "next/navigation";
 import { LessonReader } from "@/components/LessonReader";
-import { parseLessonLead } from "@/lib/headings";
+import { parseLessonLead, spokenLessonTitle } from "@/lib/headings";
 import { topicTitle } from "@/lib/catalog";
-import { plainLessonTitle } from "@/lib/plainCopy";
 import {
   loadAllModules,
   loadLessons,
@@ -36,7 +35,10 @@ export async function generateMetadata({ params }: Props) {
     return { title: "Page" };
   }
   const lo = loadLessons(mod).find((x) => x.filename.replace(/\.md$/, "") === lesson);
-  return { title: lo ? `${mod.id} · ${plainLessonTitle(lo.title)}` : `${mod.id} · ${lesson}` };
+  if (!lo) {
+    return { title: `${mod.id} · ${lesson}` };
+  }
+  return { title: `${mod.id} · ${spokenLessonTitle(lo.title, lo.body || "")}` };
 }
 
 export default async function LessonPage({ params }: Props) {
@@ -54,17 +56,18 @@ export default async function LessonPage({ params }: Props) {
   }
   const lead = parseLessonLead(lo.body || `# ${lo.title}\n\nLesson file missing.`);
   const source = lead.body || `_This lesson file is empty._`;
+  const lessonTitle = spokenLessonTitle(lo.title, lo.body || `# ${lo.title}\n\nLesson file missing.`);
 
   return (
     <LessonReader
       moduleId={mod.id}
       moduleTitle={topicTitle(mod)}
-      lessonTitle={plainLessonTitle(lo.title)}
+      lessonTitle={lessonTitle}
       kind={lead.kind || lo.kind}
       index={index}
       lessons={lessons.map((item) => ({
         filename: item.filename,
-        title: item.title,
+        title: spokenLessonTitle(item.title, item.body || ""),
         kind: item.kind,
       }))}
       source={source}

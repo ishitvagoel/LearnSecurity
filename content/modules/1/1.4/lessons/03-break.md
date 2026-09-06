@@ -1,79 +1,77 @@
-# 1.4-LO-03 — Break an inaccessible recovery control locally
+# Try a recovery button that some people cannot use
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Lab:** `labs/1.4/1.4-risk-register` — local course files and synthetic data only  
-**Standards:** WCAG 2.2 (final) 2.1.1, 1.4.1, 2.5.8 as the web baseline; Saltzer and Schroeder psychological acceptability (1975, seminal); NIST CSF 2.0 DE as an outcome label for later operate work.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
 
-## Which forbidden effects does a green button still cause?
+## Try it
 
-The lab is not a website you attack. It is a tiny Python model of a recovery **confirm** control. The security failure is already in the object: color without a name, mouse without a keyboard. You are here to see that pytest treats that object as a **failed property**, not as a UI nit.
+The practice is not a website you attack. It is a tiny Python model of a recovery **confirm** control. The failure is already in the object: color without a name, mouse without a keyboard. You are here to see that the check treats that object as a **failed rule**, not as a UI nit.
 
-The invariant under test:
+The rule under test:
 
-> The confirm control used for account recovery must be usable without a pointer and must not use color as the only encoding. If it is not, recovery has failed as a security control.
+> The confirm control used for account recovery must be usable without a pointer and must not use color as the only cue. If it is not, recovery has failed as a security control.
 
-## Authorized boundary
+## Where you may practice
 
-Only `labs/1.4/1.4-risk-register/` is in scope. No browser, no IdP, no real mailbox, no classmate deployment. Restore `vulnerable/` and `fixed/` from git when you are done. Synthetic data only.
+Only `labs/1.4/1.4-risk-register/` is in scope. No browser, no live login, no real mailbox, no classmate deployment. Restore the broken and repaired folders from git when you are done. Fake data only.
 
-Do not paste this exercise onto a public recovery page, employer SSO, or live clinic portal.
+Do not paste this exercise onto a public recovery page, employer login, or live clinic portal.
 
-## Mental model: two paths through the same confirm
+## Picture: two paths through the same confirm
 
 ```mermaid
 flowchart TD
   Start[Owner starts recovery] --> Ctrl[Confirm control]
   Ctrl --> K{Has name, keyboard, not color-only?}
-  K -->|yes| Ok["1.2-mediated restore"]
+  K -->|yes| Ok[Checked restore]
   K -->|no| L[Lockout]
-  K -->|no| W["Workaround: shared session or codes in chat"]
+  K -->|no| W[Shortcut: shared session or codes in chat]
 ```
 
-The vulnerable fixture takes the **no** branch by construction.
+The broken files take the **no** branch on purpose.
 
 ## Run the pair
 
-From the repository root, in a disposable environment:
+From the repository root, in a throwaway environment:
 
 ```text
 python -m pytest labs/1.4/1.4-risk-register/tests --impl vulnerable
 python -m pytest labs/1.4/1.4-risk-register/tests --impl fixed
 ```
 
-`--impl vulnerable` **must fail** on `test_recovery_control_is_usable_and_accessible`. `--impl fixed` **must pass**. If both pass, you are not testing the invariant.
+`--impl vulnerable` **must fail** on `test_recovery_control_is_usable_and_accessible`. `--impl fixed` **must pass**. If both pass, you are not testing the rule.
 
-## What to observe — cause, not trophy
+## What to look at — cause, not a trophy
 
-Read `vulnerable/recovery.py` as a design document. Group what you see:
+Read `vulnerable/recovery.py` as a design note. Group what you see:
 
-| Observation | Failure class | Not the lesson |
+| What you see | What kind of failure | Not the lesson |
 |---|---|---|
-| `mouse_only: True` | Psychological acceptability / complete mediation of the human path | “Users should practice clicking” |
-| No `name` | WCAG 2.1.1 / 4.1.2-shaped gap: the control is not in the accessible tree | A scanner finding titled “button contrast” as the definition of security |
-| Color present without a name | 1.4.1 Use of Color | “Make it a nicer green” |
+| `mouse_only: True` | People cannot finish the secure path | “Users should practice clicking” |
+| No `name` | The control is not in the accessible tree | A scanner title about contrast as the definition of security |
+| Color present without a name | Color is the only cue | “Make it a nicer green” |
 
-The helper `is_usable_accessible` is the oracle the tests call. It is not a production accessibility engine. It exists so the forbidden outcome is **machine-checkable** in this course.
+The helper `is_usable_accessible` is what the tests call. It is not a production accessibility engine. It exists so “this must not happen” is **checkable** in this course.
 
-## Root cause versus impact
+## Why it happens vs what it costs
 
-| Slice | Lab |
+| Slice | Practice |
 |---|---|
-| Root cause | Designers trusted a pointer and a hue |
-| Preconditions | Recovery is high-impact; some operators have no pointer or cannot rely on color |
-| Trigger | `recovery_confirm_control()` returns a mouse-only unnamed widget |
-| Impact | Lockout or unsafe workaround, which can leak Tenant A notes or a tenant-admin session |
-| Detection later | Tickets and modality telemetry (LO-06) |
-| Out of scope | Live CAPTCHA farms, real user tests, weaponized payloads |
+| Why it happens | Designers trusted a pointer and a hue |
+| What has to be true first | Recovery is high-impact; some people have no pointer or cannot rely on color |
+| Trigger | The confirm control is a mouse-only unnamed widget |
+| What it costs | Lockout or an unsafe shortcut, which can leak company A notes or an admin session |
+| How you notice later | Tickets and keyboard-vs-mouse counts |
+| Out of scope | Live CAPTCHA farms, real user tests, ready-made attack recipes |
 
 ## Practice
 
-Run both commands this session. Record the failing test name. In your notes, rewrite the failure as a 1.1 cell (availability/safety and/or confidentiality), not as “a11y bug.”
+Run both commands this session. Record the failing test name. In your notes, rewrite the failure as a rule (getting in / safety and/or secrecy), not as “an accessibility bug.”
 
-## Transfer
+## Use it somewhere new
 
-Clinic step-up that is mouse-only: name the same two branches (lockout vs workaround) for a clinician on a crash cart workstation.
+Clinic second factor that is mouse-only: name the same two branches (lockout vs shortcut) for a clinician on a crash-cart workstation.
 
-## Non-goals
+## What this page is not doing
 
-No live-target instructions. No real PII. Do not “fix” the lab by deleting the test.
+No live-target steps. No real people’s data. Do not “fix” the practice by deleting the test.

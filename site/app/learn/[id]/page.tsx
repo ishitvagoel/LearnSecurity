@@ -2,8 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProgressToggle } from "@/components/ProgressToggle";
 import { Chip, PageHeader, PageShell } from "@/components/ui";
-import { kindLabel } from "@/lib/headings";
-import { plainLessonTitle } from "@/lib/plainCopy";
+import { kindLabel, spokenLessonTitle } from "@/lib/headings";
 import {
   difficultyLabel,
   formatMinutes,
@@ -82,7 +81,9 @@ export default async function ModulePage({ params }: Props) {
       <section className="mt-10">
         <h2 className="mb-3 text-xl font-semibold">Pages</h2>
         <ol className="divide-y divide-stone-200 overflow-hidden rounded-xl border border-stone-200 bg-white">
-          {lessons.map((lo, i) => (
+          {lessons.map((lo, i) => {
+            const spoken = spokenLessonTitle(lo.title, lo.body || "");
+            return (
             <li key={lo.id}>
               {lo.filename ? (
                 <Link
@@ -94,7 +95,7 @@ export default async function ModulePage({ params }: Props) {
                   </span>
                   <span>
                     <span className="block font-medium text-blue-900">
-                      {plainLessonTitle(lo.title)}
+                      {spoken}
                     </span>
                     <span className="block text-sm text-stone-600">{kindLabel(lo.kind)}</span>
                   </span>
@@ -104,11 +105,12 @@ export default async function ModulePage({ params }: Props) {
                   <span className="w-6 shrink-0 font-mono text-sm text-stone-500">
                     {i + 1}
                   </span>
-                  {plainLessonTitle(lo.title)}
+                  {spoken}
                 </span>
               )}
             </li>
-          ))}
+            );
+          })}
         </ol>
       </section>
 

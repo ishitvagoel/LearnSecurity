@@ -1,34 +1,34 @@
-# 0.2-LO-06 — Detect phase1_skip_denied without back-dating Gate 1
+# Notice a denied skip without back-dating check-in 1
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 **Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels. CSF names outcomes; it does not mint Gate 1.
 
-## Prevention is not absolute
+## Stopping it is not enough
 
-A new “fast-track seniors” flag can reintroduce score-as-skip after the predicate was “set once.” Pair detect and recover. Do not back-date Gate 1. Do not log quiz item text if it leaks lab keys. Do not treat a badge screenshot as recovery evidence.
+A new “fast-track seniors” flag can reintroduce score-as-skip after the check was “set once.” Pair noticing with recovery. Do not back-date check-in 1. Do not log quiz item text if it leaks practice keys. Do not treat a badge screenshot as recovery evidence.
 
-## Mental model: denied skip is a signal
+## Picture: a denied skip is a signal
 
 ```mermaid
 flowchart TD
-  Call[quiz skip] --> Ok{"Phase 1 skip?"}
+  Call[quiz skip] --> Ok{"part 1 skip?"}
   Ok -->|attempted| Metric["phase1_skip_denied += 1"]
   Metric --> Reopen["keep 1.2 required"]
 ```
 
-| Outcome | This module |
+| Outcome | This topic |
 |---|---|
-| Detect | `phase1_skip_denied`; CI pair still red/green for score 100 |
-| Signal | learner id, requested skip; never quiz item text if it leaks lab keys |
-| Recover | Re-open 1.2; do not back-date Gate 1; do not mark 1.4 hidden |
-| Residual | Memorized answers; tooling gaps; color-only skip UI |
+| Notice | `phase1_skip_denied`; the check pair is still red/green for score 100 |
+| Signal | learner id, requested skip; never quiz item text if it leaks practice keys |
+| Recover | Re-open 1.2; do not back-date check-in 1; do not mark 1.4 hidden |
+| Leftover | Memorized answers; tooling gaps; color-only skip UI |
 
-CSF 2.0 names Detect / Respond / Recover. They do not prove 1.2. A NICE work-role name is not the property. Gate 0 stays not-attempted.
+A job-title name is not the rule. Opening this page does not finish the first check-in.
 
-## Framework defaults versus the operate guarantee
+## What the framework does vs what you still have to check
 
-An LMS will happily store “module complete” from a percentage and export it to HR. That export is not this deny metric. If you paste quiz items or a cert screenshot into the ticket, you have opened a key-leak and a false Gate 1 cell.
+An LMS will happily store “topic complete” from a percentage and export it to HR. That export is not this deny metric. If you paste quiz items or a cert screenshot into the ticket, you have opened a key-leak and a fake check-in 1 cell.
 
 ## Practice
 
@@ -38,16 +38,16 @@ Write one log line you would accept. Tie it to `labs/0.2/0.2-bridge`.
 log_denied reason=phase1_skip_denied learner=dev-1 requested=1.2
 ```
 
-Reject any line that includes quiz keys, a badge screenshot, a NICE competency id treated as done, or “Gate 1 complete.”
+Reject any line that includes quiz keys, a badge screenshot, a job-title id treated as done, or “check-in 1 complete.”
 
-## Transfer
+## Use it somewhere new
 
 Clinic: deny the onboarding skip; do not paste the quiz items into HR. Vendor cert used to skip a threat-model review: same deny, same no-back-date rule.
 
-## Usability
+## Can people still use it
 
-Do not encode the deny as red-only. Keyboard users must still reach 1.2. Adaptive paths must not hide 1.4 (WCAG 2.2 Success Criterion 1.4.1).
+Do not encode the deny as red-only. Keyboard users must still reach 1.2. Adaptive paths must not hide 1.4.
 
-## Non-goals
+## What this page is not doing
 
-A NICE work-role name is not the property. Gate 0 stays not-attempted. Do not instruct live LMS audits.
+A job-title name is not the rule. Opening this page does not finish the first check-in. Do not instruct live LMS audits.

@@ -1,104 +1,62 @@
-# 1.1-LO-03 — Break a mechanism-only security claim
+# Try a local hashed login
 
 **Kind:** mechanism-lab
-**Loop step:** 3 Break  
-**Lab:** labs/1.1/1.1-invariant-catalogue — authorized local files and synthetic SecureCollab data only.
+**Loop step:** 3 Break
 
-## What this lab breaks
+## Try it
 
-The vulnerable fixture says the product is secure because it names familiar mechanisms. It is not an intentionally exploitable web service. The failure is a review and assurance failure: an unbounded slogan is allowed to stand in for a testable system property.
+Open the practice for this topic. Two trees sit side by side: one that stores the password in a form you can read, and one that stores a slow hash plus a unique salt.
 
-That distinction is deliberate. This module occurs before SecureCollab features exist. Later modules break running authorization, parser, browser, and state-transition mechanisms. Here you learn to reject a false claim before code makes it expensive.
+**What you are showing**
 
-## Mental model: a slogan is not a catalogue row
+Not "hashing exists in a textbook." You are showing that a **readable password file** fails the rule, and that a **slow hash plus a unique salt, checked with a compare that does not leak timing,** restores it **on this computer**.
 
-```mermaid
-flowchart LR
-  Slogan[we use TLS and bcrypt] --> V[vulnerable claim]
-  V --> Fail[catalogue validator fails]
-  Row[testable invariant] --> F[fixed claim]
-  F --> Pass[validator passes]
-```
+**What you may touch**
 
-## Safety boundary
+- Only the practice folder for this topic.
+- Synthetic users (`practice-user-1`, `practice-user-2`).
+- Disposable pepper values in `.env.example`. Never a password you use on a real site.
 
-You may inspect and validate only the files in this lab directory. Do not test a public site, employer system, classmate deployment, or real account. The fixtures contain synthetic tenants and notes; no credentials or personal data are needed.
+Do **not** point these steps at a public website, a school portal, or anyone else's login.
 
-## Run the two variants
+## What to look at
 
-From the repository root, create an isolated environment if needed and install pytest and PyYAML. Then run:
+**The broken store**
+
+1. Create a local user with a throwaway password.
+2. Open the store file (JSON in the practice).
+3. Write down: can you read the password in the file? Could a unique salt exist if there is no salt field?
+
+**The repaired store**
+
+4. Create the same user in the repaired tree.
+5. Open that store. You should see a hash, a unique salt, and hashing settings — not the password.
+6. Run the tests in that folder. They fail closed if the password is stored readable, if two users share a salt, or if the check uses a compare that can leak timing.
+
+**Copy this into your lab notes** (short answers):
+
+- Store path (broken):
+- Readable password? (yes/no):
+- Store path (repaired):
+- Unique salt per user? (yes/no):
+- Hashing settings present? (yes/no):
+- Tests run (command + pass/fail):
 
 ```text
-python -m pytest labs/1.1/1.1-invariant-catalogue/tests   --claim labs/1.1/1.1-invariant-catalogue/vulnerable/security_claim.yaml
-
-python -m pytest labs/1.1/1.1-invariant-catalogue/tests   --claim labs/1.1/1.1-invariant-catalogue/fixed/security_claim.yaml
+cd labs/phase1/lab-1.1-local-hashed-identity/fixed
+python -m pytest tests/ -q
 ```
 
-The vulnerable run must fail the catalogue-validation test. The fixed run must pass. A failure caused by a missing dependency, unreadable path, or invalid test setup is not the intended observation.
+If Python or Argon2 is missing, use the README in that folder. Do not paste real passwords into tickets or git.
 
-## Read the failure as evidence
+## The rule, in one line
 
-The validator checks more than whether certain field names exist. It asks whether the catalogue:
+A readable password in the store is a failed rule. A slow hash plus a unique salt is the start of a passing one — still only on this computer.
 
-- identifies SecureCollab and a local synthetic scope;
-- contains several stable, unique invariant IDs;
-- names specific assets and adversary capabilities;
-- identifies trusted and untrusted components;
-- bounds the claim in time;
-- separates properties from mechanisms and records mechanism limits;
-- names module-specific forbidden outcomes;
-- proposes normal, negative, abuse, and failure evidence;
-- includes privacy-safe detection and concrete recovery;
-- states residual risk, non-goals, and review triggers;
-- avoids live-target URLs, credentials, personal data, and universal “we are secure” language.
+## Fix
 
-A document can be valid YAML and still be invalid security reasoning. Syntax is necessary for the tool, not sufficient for the claim.
+The next page names the smallest store that keeps this rule. You do not need to invent Argon2. You do need to refuse a store that cannot tell a hash from a password.
 
-## Diagnose the vulnerable fixture
+## Check
 
-Do not jump directly to the fixed file. Annotate the vulnerable SECURITY.md and YAML using this causal chain:
-
-| Layer | Question |
-|---|---|
-| Root cause | Which property was replaced by a mechanism label or universal conclusion? |
-| Preconditions | What must a reviewer assume for the slogan to be accepted? |
-| Trigger | Which line or missing field permits the false conclusion? |
-| Impact | Which security decisions could be incorrectly marked complete? |
-| Prevention | What structure would force a bounded property and assumptions? |
-| Detection | What review or test should reject the claim? |
-| Recovery | After false assurance has influenced a design, what must be reopened and retested? |
-
-The important observation is not merely “required keys are missing.” A claim can contain attacker and trust fields while still saying nothing testable. Look for semantics: named actors, objects, actions, channels, time, and counterexamples.
-
-## Compare the fixed fixture
-
-After you have written your diagnosis, inspect the fixed version. Trace one invariant from property to forbidden outcome to evidence. Then ask:
-
-- Does the proposed evidence observe the property, or only the control?
-- Which trusted component could still invalidate the result?
-- Which channel or time period remains a residual risk?
-- Which product change forces review?
-
-The fixed fixture is a model of claim quality, not proof that a SecureCollab implementation is secure. There is no implementation here to prove.
-
-## Practice modification
-
-Copy the fixed fixture to a temporary file outside the fixed directory. Make one change at a time:
-
-1. replace a property with “we use encryption”;
-2. remove the time horizon;
-3. provide only happy-path evidence;
-4. add the reserved example-domain URL from the vulnerable fixture as inert text;
-5. put a note body into the proposed detection signal.
-
-Run the validator after each change and record whether the failure message points to the reasoning defect. If a defect is not detected, note it as a validator limitation rather than claiming the catalogue is safe.
-
-## Transfer prompt
-
-Choose a different mechanism slogan—JWT, TLS, framework validation, encrypted storage, or a green scanner. Write:
-
-- one bounded property it might support;
-- one unrelated property it cannot establish;
-- one assumption under which even the bounded property fails.
-
-That three-part answer is the conceptual “break” for this lesson.
+The tests in the repaired tree are the check for "password not stored readable" and "unique salt." They are not a check for "safe on the internet." Do not write that sentence in your notes.

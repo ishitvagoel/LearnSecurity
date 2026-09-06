@@ -1,62 +1,61 @@
-# 1.4-LO-07 — Rewrite the register when the human path changes
+# Same idea at a clinic and a bank
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** WCAG 2.2 (final); NIST SP 800-63-4 (final) risk language; CISA Secure by Design (current public guidance, final). Do not cite a Top 10 item as the definition of security.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
 
-## Change the product, keep the loop
+## Use it somewhere new
 
-SecureCollab scaffolding goes away. You get a **clinic portal** that adds step-up authentication, and a **banking re-auth** dialog as a second sketch. One of the second-factor UIs is mouse-only. Your job is to rewrite the 1.4 loop, not to name a CWE.
+The notes-app scaffolding goes away. You get a **clinic portal** that adds a second factor, and a **banking re-auth** dialog as a second sketch. One of the second-factor UIs is mouse-only. Your job is to rewrite the loop, not to name a bug-list code.
 
-## Mental model: transfer changes the envelope, not the product name
+## Picture: transfer changes the envelope, not the product name
 
-Renaming “recovery confirm” to “clinic step-up” is not transfer. Actor, object, channel, and residual change. Keyboard lockout and chart-exposing workarounds are new 1.1 cells. Support reading a code aloud is a new 1.2 cell, not a usability win.
+Renaming “recovery confirm” to “clinic step-up” is not transfer. Person, object, path, and leftover change. Keyboard lockout and chart-exposing shortcuts are new rules. Support reading a code aloud is a new who-is-allowed row, not a usability win.
 
-| SecureCollab Phase 1 | Clinic / bank sketch |
+| Notes app this week | Clinic / bank sketch |
 |---|---|
 | Owner recovering a notes account | Exhausted clinician or customer on a shared workstation |
-| Recovery confirm widget | Step-up or re-auth dialog over a chart or balance |
-| Lockout or support read-aloud of codes | Lockout or chart/balance exposed by a workaround |
-| Coercion residual | Still coercion; SMS to a shared phone is a new channel |
+| Recovery confirm widget | Second-factor or re-auth dialog over a chart or balance |
+| Lockout or support read-aloud of codes | Lockout or chart/balance exposed by a shortcut |
+| Coercion leftover | Still coercion; SMS to a shared phone is a new path |
 
 ```mermaid
 flowchart TD
-  Old[SecureCollab recovery confirm] --> Q["What changed - actor, object, channel, time"]
-  Q --> NewI["New 1.1 cells for chart and availability"]
-  NewI --> NewR["New residuals - shared workstation, coercion"]
-  NewR --> Ev["New evidence: keyboard oracle, modality logs without chart text"]
+  Old[Notes-app recovery confirm] --> Q[What changed: person, object, path, time]
+  Q --> NewI[New rules for the chart and for getting in]
+  NewI --> NewR[New leftovers: shared workstation, coercion]
+  NewR --> Ev[New evidence: keyboard check, logs without chart text]
 ```
 
-## Prompt A — clinic step-up
+## Prompt A — clinic second factor
 
 The second factor is a mouse-only dialog over a patient chart.
 
 Your answer must include:
 
-- attacker capabilities (exhausted clinician; shared workstation; someone who wants the chart);
-- trust assumptions (browser is hostile; the dialog is in the TCB for this step);
-- the forbidden outcome (keyboard-only clinician locked out **or** a workaround that exposes the chart);
-- a test idea that would fail if the cell were false (oracle on name/keyboard/not-color-only — run only on a local fixture you own, never on the real clinic);
-- residual risk (coercion; SMS to a shared phone);
-- whether the human path must meet WCAG 2.2 (yes, as web baseline, not as a full conformance badge).
+- who can act (exhausted clinician; shared workstation; someone who wants the chart);
+- what you trust (the browser is hostile; the dialog is what you trust for this step);
+- what must not happen (keyboard-only clinician locked out **or** a shortcut that exposes the chart);
+- a test idea that would fail if the rule were false (check on name/keyboard/not-color-only — run only on a local practice you own, never on the real clinic);
+- leftover risk (coercion; SMS to a shared phone);
+- whether the human path must meet the web accessibility baseline (yes, as a baseline, not as a full badge).
 
 ## Prompt B — banking re-auth
 
-A bank “fixes” mouse-only by offering support that will read the one-time code aloud. State which 1.2 cell changed (support × code × read-aloud) and why that is not a 1.4 usability win.
+A bank “fixes” mouse-only by offering support that will read the one-time code aloud. State which who-is-allowed row changed (support × code × read-aloud) and why that is not a usability win.
 
-## What graders reject
+## What is not good enough
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| “The framework is accessible” as the guarantee | Journey-level claim required |
-| Live-target plan against a hospital or bank | Lab policy |
-| Deleting coercion because the button is larger | Residual ownership required |
+| A tool or famous-bugs-list name as the rule | You still have not named the outcome |
+| “The framework is accessible” as the promise | You need a claim about this journey |
+| A live-target plan against a hospital or bank | Course rules |
+| Deleting coercion because the button is larger | Leftover risk needs an owner |
 
 ## Practice
 
-One page. No keys. The only running system you may break is `labs/1.4/1.4-risk-register`.
+One page. No answer keys. The only running system you may break is `labs/1.4/1.4-risk-register`.
 
-## Non-goals
+## What this page is not doing
 
-Real clinics, real banks, real patient or financial data. Gates stay unmarked without evidence.
+Real clinics, real banks, real patient or financial data.

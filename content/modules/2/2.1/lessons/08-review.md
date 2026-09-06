@@ -1,52 +1,53 @@
-# 2.1-LO-08 — Review the split parse as a PR, not a slogan
+# Review of split JSON parsers
 
 **Kind:** code-review
 **Loop step:** Review
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.1.1` and `v5.0.0-2.2.2`; RFC 8259 JSON (STD 90, final).
 
-## Review the fixture as if it were SecureCollab ingest
+Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
 
-Review `labs/2.1/2.1-parser-boundaries/vulnerable/` as a SecureCollab PR. Reconstruct whether ACL and store still parse the same bytes twice, compare that with the module invariant, and write changes a developer can verify.
+## What you are reviewing
 
-Intended findings live only in `content/assessment/keys/2.1.md` — not here. Do not open the keys file until your review has been evaluated.
+A colleague ships notes-app ingest. Review `labs/2.1/2.1-parser-boundaries/vulnerable/` as that change. Reconstruct whether ACL and store still parse the same bytes twice, compare that with the rule, and write changes a developer can verify.
 
-## Mental model: json.loads used for store while ACL uses a different first-key scan
+The check you already ran (`test_duplicate_tenant_keys_are_one_meaning`) is the rule check. A comment “JSON should not duplicate keys” is not.
 
-Start with this seeded smell: **`json.loads` used for store while ACL uses a different first-key scan**. Label it property, mechanism, or false assurance before you accept the PR.
+## Picture: problems to find (name them yourself)
+
+Start with this seeded smell: **`json.loads` used for store while ACL uses a different first-key scan**. Label it **rule**, **tool**, or **false comfort** before you accept the change.
 
 ```mermaid
 flowchart TD
-  Claim[PR claim] --> Q{What would falsify it?}
-  Q -->|a two-meaning ingest| Property[Property - good if tested]
-  Q -->|a library name| Mechanism[Mechanism - ask which property]
-  Q -->|JSON cannot duplicate| False[False assurance]
+  Claim[Change claim] --> Q{What would prove it false?}
+  Q -->|a two-meaning ingest| Property[Rule — good if checked]
+  Q -->|a library name| Mechanism[Tool — ask which rule]
+  Q -->|JSON cannot duplicate| False[False comfort]
 ```
 
-For each claim and each branch: label **property**, **mechanism**, or **false assurance**.
+For each claim and each branch: label **rule**, **tool**, or **false comfort**.
 
 Seeded smells (label them yourself; do not open the keys file):
 
 - `json.loads` used for store while ACL uses a different first-key scan
-- Comment or belief that “JSON can’t have duplicate keys” (RFC 8259 recommends uniqueness; parsers differ)
-- No corpus test for duplicate keys
-- Normalizing display names as a substitute for tenant ids
+- Comment or belief that “JSON can’t have duplicate keys” (the spec recommends uniqueness; readers differ)
+- No corpus check for duplicate keys
+- Normalizing display names as a stand-in for company ids
 
-Also reject: client trust, concatenating interpreters, Report-Only as enforcement, closing findings without retest, keys in lessons.
+Also reject: trusting the client; concatenating readers; Report-Only as enforcement; closing findings without re-running the repaired-files check; keys in learner notes.
 
-## Misconceptions
+## Common mix-ups
 
 - Encoding is a crypto problem
-- One parser is as good as another
+- One reader is as good as another
 - Validation equals canonicalization
 
 ## Practice
 
-Write three review notes a peer could act on. Each note: observation, property or false assurance, suggested structural change, residual you will **not** delete. Tie at least one note to `test_duplicate_tenant_keys_are_one_meaning`.
+Write three review notes a peer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_duplicate_tenant_keys_are_one_meaning`. Do not open the keys file.
 
-## Transfer
+## Use it somewhere new
 
-GraphQL and REST both ingest the same note — two grammars. A PR that “validates JSON” on only one path is an incomplete mediation review. Name the independent falsehood that would still stop a two-meaning ingest.
+GraphQL and REST both ingest the same note — two grammars. A change that “validates JSON” on only one path is an incomplete review. Name the independent falsehood that would still stop a two-meaning ingest.
 
-## Non-goals
+## What this page is not doing
 
-Do not merge by adding a comment “JSON should not duplicate keys.” RFC 8259 is SHOULD, not this pytest.
+Do not merge by adding a comment “JSON should not duplicate keys.” The spec says should, not this check.

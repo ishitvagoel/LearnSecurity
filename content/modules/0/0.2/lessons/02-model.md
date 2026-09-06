@@ -1,16 +1,16 @@
-# 0.2-LO-02 — Tooling skip vs invariant skip
+# A tooling skip vs skipping a rule
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
 **Standards:** NICE SP 800-181r1 as role language. Gate 1 evidence rules of this course.
 
-## Can a second engineer name what a quiz may skip from your path map?
+## Can a second person name what a quiz may skip from your path map?
 
-“They’re advanced” is not this lesson. A reviewable model names **tooling-bridge ids, required 1.2/1.3/1.4, and Gate 1 evidence**.
+“They’re advanced” is not this lesson. A reviewable picture names **tooling-bridge ids, required 1.2/1.3/1.4, and check-in 1 evidence**.
 
-SecureCollab freeze: local `quiz_score_grants_phase1_skip(score)`. No vendor LMS.
+Notes-app freeze: local `quiz_score_grants_phase1_skip(score)`. No vendor LMS.
 
-## Mental model: two skip classes
+## Picture: two skip classes
 
 ```mermaid
 flowchart TD
@@ -20,49 +20,49 @@ flowchart TD
   Inv --> Never[never skip]
 ```
 
-## Mental model: badge is not Gate 1
+## Picture: a badge is not check-in 1
 
 ```mermaid
 flowchart LR
   Badge[cert screenshot] --> Belief[cleared]
-  Ev["1.2 lab pair"] --> Gate1[Gate 1 evidence]
-  Badge --> NotGate[not Gate 1]
+  Ev["1.2 practice pair"] --> Gate1[check-in 1 evidence]
+  Badge --> NotGate[not check-in 1]
 ```
 
-## Step 1: freeze pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|
 | Subjects | hurried learner; hiring manager |
-| Objects | 1.2 cells; tooling units; Gate 1 record |
+| Objects | 1.2 cells; tooling units; check-in 1 record |
 | Actions | `quiz_score_grants_phase1_skip` |
 | Channels | quiz score; LMS |
-| TCB | skip predicate that ignores score for Phase 1 |
-| Untrusted | percentage; badge; NICE mapping |
+| What you trust | a skip check that ignores score for part 1 |
+| What you do not trust | percentage; badge; job-title mapping |
 | State / time | cohort export of skipped ids |
-| 1.1 cell | integrity of the learning system |
+| The rule | integrity of the learning system |
 
-## Step 2: write cells
+## Step 2: write the rules
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| score 100 | 1.2 lab | skip | deny |
-| Git gap | git-bridge unit | skip Phase 1 | deny (assign bridge only) |
-| badge | Gate 1 | treat as evidence | deny |
+| score 100 | 1.2 practice | skip | deny |
+| Git gap | git-bridge unit | skip part 1 | deny (assign bridge only) |
+| badge | check-in 1 | treat as evidence | deny |
 | color-only green | skip UI | use as sole signal | deny |
 
 ## Practice
 
 Draw the map. Point at `labs/0.2/0.2-bridge` file `diagnostic.py`.
 
-## Transfer
+## Use it somewhere new
 
-Clinic onboarding quiz used to skip threat-model review. Same grain.
+A clinic onboarding quiz used to skip a threat-model review. Same grain.
 
-## Residual risk
+## What can still go wrong
 
 Memorized 1.2 answers. Real tooling gaps still need bridges.
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+A famous-bugs list as the definition of security. Keys stay out of lessons.

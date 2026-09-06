@@ -1,186 +1,196 @@
-# 1.3-LO-01 — Boundaries are changes in assumptions, not lines around servers
+# A boundary is a change in what you assume
 
-**Kind:** concept-model  
-**Loop step:** 1 Property  
-**Standards:** OWASP Threat Modeling Project (maintained guidance, Four Questions and lifecycle refinement); Saltzer and Schroeder (1975, seminal), especially economy of mechanism, fail-safe defaults, complete mediation, and least common mechanism.
+**Kind:** concept-model
+**Loop step:** 1 Property
+**Standards:** OWASP Threat Modeling Project (maintained guidance). Saltzer and Schroeder (1975) on fail-safe defaults, checking every path, and sharing as few tools as you can.
 
-## Start with the claim
+## The rule
 
-SecureCollab’s diagram is not the security property. Begin with one bounded claim:
+A box on a notes-app diagram is not the rule. Start with one sentence you can prove false:
 
-> For a SecureCollab Phase 1 note export, a public requester cannot become a worker merely by choosing request metadata. The export effect occurs only after a trusted server-side adapter establishes worker provenance and a current grant narrows the worker to the intended tenant, action, and object set. Missing or unknown context denies.
+> For a notes-app export this week, a public caller cannot become a worker just by filling in request fields. The export happens only after a trusted server-side adapter shows that this call is a worker, and a current grant narrows that worker to the intended company, action, and notes. If the context is missing or unknown, the answer is no.
 
-This claim names an effect, attacker capability, trusted decision, scope, and failure default. It can be false even if every connection uses TLS and every box runs in a private subnet. Conversely, two functions in the same process can sit on opposite sides of the relevant trust boundary if one accepts hostile fields and the other accepts only context constructed by a trusted adapter.
+That sentence names the effect, what an attacker can try, who decides, how far the allow goes, and what happens on failure. Where worker identity comes from is sometimes called **provenance**. After you meet the word, keep asking: which trusted source established that this call is a worker?
 
-A **trust boundary** is where a security-relevant assumption or capability changes. Ask what the receiving side may rely on after crossing. A line is useful only when its annotation answers that question.
+The sentence can be false even when every hop uses TLS and every box sits on a private network. Two functions in the same process can sit on opposite sides of a real boundary: one still treats every field as hostile, the other only accepts context a trusted adapter built.
 
-## Mental model: the line is the change in assumption
+A **trust boundary** is where a security-relevant assumption or ability changes. Ask what the receiving side may rely on after the crossing. A line on a picture is useful only when the note on that line answers that question.
+
+## Picture: the line is the change in what you assume
 
 ```mermaid
 flowchart TD
-  Browser["Public requester - every field hostile"] --> Adapter[Public adapter]
-  Adapter --> Pub["PublicContext cannot represent worker"]
-  WorkerSrc[Trusted worker provenance] --> WAdapt[Worker adapter]
-  WAdapt --> Wctx[WorkerContext plus current grant]
-  Pub --> Policy[Policy immediately before export]
+  Browser[Public caller - every field hostile] --> Adapter[Public adapter]
+  Adapter --> Pub[Public context cannot represent a worker]
+  WorkerSrc[Trusted worker origin] --> WAdapt[Worker adapter]
+  WAdapt --> Wctx[Worker context plus current grant]
+  Pub --> Policy[Check immediately before export]
   Wctx --> Policy
-  Policy --> Allow["Export only if grant matches tenant and objects"]
-  Policy --> Deny["Missing or unknown denies"]
+  Policy --> Allow[Export only if the grant matches company and notes]
+  Policy --> Deny[Missing or unknown means no]
 ```
 
-A TLS hop between browser and adapter can exist without a new trust boundary if both sides still treat every field as attacker-controlled. Two functions in one process *can* be a boundary if `PublicContext` cannot carry worker authority.
+A TLS hop between browser and adapter can exist without a new boundary if both sides still treat every field as attacker-controlled. Two functions in one process *can* be a boundary if the public context cannot carry worker authority.
 
-## Keep six terms separate
+## Keep these words from collapsing
 
-| Term | Precise question | SecureCollab example |
+| Word | Precise question | In the notes app this week |
 |---|---|---|
-| Actor | Who or what participates? | Member, tenant admin, batch operator, attacker |
-| Principal | Which identity is used for a decision? | Current member ID or export-worker ID |
-| Component | Where does code or data run? | Public adapter, policy function, note store |
-| Channel | How are representations carried? | Function arguments now; HTTP or queue later |
-| Entry point | Where can an actor or failure first influence in-scope behavior? | Public request adapter; worker adapter |
-| Trust boundary | Where does a relevant assumption or capability change? | Untrusted request fields become a validated public context; worker identity becomes a server-constructed context |
+| Actor | Who or what takes part? | Member, company admin, batch operator, attacker |
+| Principal | Which identity is used for a decision? | Current member id, or export-worker id |
+| Component | Where does the code or data run? | Public adapter, policy function, note store |
+| Channel | How is the data carried? | Function arguments now; HTTP or a queue later |
+| Entry point | Where can an actor or a failure first change in-scope behavior? | Public request adapter; worker adapter |
+| Trust boundary | Where does a relevant assumption or ability change? | Untrusted request fields become a checked public context; worker identity becomes a server-built context |
 
-These can coincide, but they are not synonyms. One component can expose several entry points with different assumptions. One channel can carry both trusted and untrusted data. One actor can act through several principals. A boundary can be crossed without a network.
+These can sit in the same place. They are not the same word. One component can expose several entry points with different assumptions. One channel can carry both trusted and untrusted data. One actor can act through several principals. A boundary can be crossed without a network.
 
-### Network line without a new trust boundary
+### A network hop is not automatically a boundary
 
-Suppose a public request passes through a transparent relay. Both sides still treat every field as attacker-controlled, and the relay adds no authenticated provenance or enforcement. There is a network hop, but for the export-authority property the relevant assumption did not change. Drawing a boundary there and labeling it “trusted edge” would invent trust.
+Suppose a public request passes through a transparent relay. Both sides still treat every field as attacker-controlled. The relay adds no authenticated origin and enforces nothing. There is a network hop. For the export rule, the relevant assumption did not change. Drawing a line there and labeling it “trusted edge” invents trust.
 
-### Trust boundary without a network line
+### A boundary can sit inside one process
 
-Suppose `public_entry(...)` parses hostile fields and calls a policy function with a `PublicContext` that cannot represent a worker. The two functions execute in one Python process. The assumption changes from “the caller chooses these strings” to “this context was constructed through the public adapter and cannot carry worker authority.” That is a meaningful boundary for this property.
+Suppose the public entry parses hostile fields and calls a policy function with a public context that cannot represent a worker. The two functions run in one Python process. The assumption changes from “the caller chose these strings” to “this context was built through the public adapter and cannot carry worker authority.” That is a real boundary for this rule.
 
-## The TCB is relative to a property
+## What you trust depends on the rule
 
-The **trusted computing base** is the set of components and assumptions that must be correct for a stated property. It is not a permanent inventory of everything called “backend.”
+People sometimes call this the trusted computing base. In this course we will keep asking a plainer question: **what you must trust for this named rule**. It is not a permanent inventory of everything called “backend.”
 
-For the Phase 1 export-authority claim, a candidate TCB includes:
+For the export-authority rule this week, a candidate list of what you trust includes:
 
-- the adapter that distinguishes public and worker call paths;
-- the source of worker identity and scoped grant;
-- the policy/enforcement code that consumes that context immediately before export;
-- the store or fixture state used to resolve tenant and note scope;
-- the language/runtime assumptions needed to preserve the context type and state.
+- the adapter that keeps public and worker call paths apart;
+- the source of worker identity and the scoped grant;
+- the check that consumes that context immediately before export;
+- the store (or practice-file state) used to resolve company and note scope;
+- the language and runtime assumptions needed to keep the context type and state honest.
 
-The public browser should not be in that TCB. If a browser must honestly label itself as an internal worker, the design has already conceded the property.
+The public browser should not be on that list. If a browser must honestly label itself as an internal worker, the design has already given up the rule.
 
-Change the property and the TCB changes. For **note confidentiality**, output selection and any log/export sink handling note bodies matter. For **availability**, resource limits, work scheduling, and perhaps a dependency’s failure behavior matter; the content projection might not. For **accountability**, the evidence producer, transport, store, clock assumptions, and access to evidence become central. Saying “the API is trusted” hides those differences.
+Change the rule and the list changes. For **note secrecy**, output selection and any log or export sink that handles note bodies matter. For **availability**, resource limits, work scheduling, and maybe a dependency’s failure behavior matter; the content projection might not. For **a usable record**, the evidence producer, transport, store, clock assumptions, and who can read the record become central. Saying “the API is trusted” hides those differences.
 
 Use this test:
 
-> If this component behaved maliciously or incorrectly, could the stated property fail despite every other listed control working as assumed?
+> If this component behaved badly or incorrectly, could the stated rule fail even if every other listed control worked as assumed?
 
-If yes, it belongs in the TCB or the property must be narrowed. If no, it may be deployed and security-relevant without belonging to this property’s TCB. If you cannot decide, mark the dependency **unknown**, not trusted by optimism.
+If yes, it belongs in what you trust for this rule, or you must narrow the rule. If no, it may still be deployed and security-relevant without belonging on this rule’s list. If you cannot decide, mark the dependency **unknown**. Do not mark it trusted because you hope.
 
-## Attack surface is reachable influence on a protected effect
+## Attack surface is how someone can reach the protected effect
 
-An **attack surface** is the set of ways an attacker or modeled failure can influence a protected effect. Ports and routes can be members of the set, but they do not define it.
+An **attack surface** is the set of ways an attacker or a modeled failure can influence a protected effect. Ports and routes can be members of the set. They do not define it.
 
 For a note export, relevant surface can include:
 
-- the public request entry point and all fields it accepts;
-- the worker entry point and the mechanism that establishes service provenance;
-- stored tenant and note identifiers read later;
-- a queued or retried message when workers are introduced;
+- the public request entry and every field it accepts;
+- the worker entry and the mechanism that establishes service origin;
+- stored company and note identifiers read later;
+- a queued or retried message when workers show up later;
 - the policy and enforcement path;
 - the shared database role or cache key that can widen reach;
-- the evidence path if suppressing evidence changes whether the effect proceeds;
-- administrative/configuration paths that can redefine worker identity or scope.
+- the evidence path, if hiding evidence changes whether the effect proceeds;
+- admin and configuration paths that can redefine worker identity or scope.
 
-A CVE list answers a different question. An endpoint list misses stored inputs, alternate paths, shared credentials, configuration, evidence suppression, and state transitions. Derive the inventory from flows to protected effects, then ask what can influence each flow.
+A CVE list answers a different question. An endpoint list misses stored inputs, alternate paths, shared credentials, configuration, hidden evidence, and state changes. Start from flows to protected effects, then ask what can influence each flow.
 
-## Transitive trust and shared mechanisms
+## Shared tools can make two checks into one
 
-Trust is often transitive:
+Trust is often chained:
 
 ```text
 export decision
   relies on worker context
-    relies on adapter provenance
+    relies on adapter origin
       may later rely on queue identity and deployment configuration
-        may rely on build/control-plane operators
+        may rely on build and control-plane operators
 ```
 
-The diagram should stop only at an explicit assumption, residual, or later-module boundary. “Managed service” is not an endpoint in the reasoning chain.
+Stop the chain only at an explicit assumption, leftover risk, or a later topic. “Managed service” is not the end of the reasoning.
 
-Saltzer and Schroeder’s **least common mechanism** warns that mechanisms shared by users or scopes create communication and failure channels. A process-wide database credential, a tenantless cache key, one parser used by edge and API, or a logging pipeline shared with sensitive content can expand both attack surface and blast radius.
+Saltzer and Schroeder warn that tools shared by users or companies create extra communication and failure channels. A process-wide database credential, a cache key with no company on it, one parser used by edge and API, or a logging pipeline shared with sensitive content can widen both the attack surface and **how far a break can spread**.
 
-Shared does not always mean unacceptable. It means the claim must account for common-mode failure. If two layers both rely on the same `X-Internal` value, the second check is not independent evidence of worker provenance. If a configuration mistake causes both to accept the value, both fail together.
+Shared does not always mean unacceptable. It means the claim must account for a common failure. If two layers both rely on the same `X-Internal` value, the second check is not independent evidence of worker origin. If a configuration mistake causes both to accept the value, both fail together.
 
-## Isolation and blast radius are claims about effects
+## Isolation and how far a break can spread
 
-An **isolation boundary** is a mechanism intended to prevent one scope from influencing another. A container, schema, process, credential, sandbox, or network policy may contribute. Its name does not prove the property.
+People sometimes call the second idea **blast radius**. After you meet the phrase, keep asking the plain question: **how far a break can spread**.
 
-**Blast radius** describes what a compromised or mistaken capability can affect. Bound it across dimensions:
+An **isolation boundary** is a mechanism meant to stop one scope from influencing another. A container, schema, process, credential, sandbox, or network policy may help. Its name does not prove the rule.
 
-- which tenants and objects;
-- which actions: read, mutate, delete, execute, administer, or suppress evidence;
-- which data fields and sensitivity;
-- which egress destinations;
+Bound how far a break can spread across dimensions:
+
+- which companies and objects;
+- which actions: read, change, delete, execute, administer, or hide evidence;
+- which data fields and how sensitive they are;
+- which places the data can leave to;
 - which time, expiry, replay, and retry window;
 - which control-plane or policy changes;
 - which evidence can be hidden or forged.
 
-“Worker access is limited” is not reviewable. “The capability can export note summaries for Tenant A’s object set once before 12:05, cannot read bodies, cannot choose egress, cannot alter policy, and emits an independent decision record” is a bounded claim. Later modules will supply production mechanisms; this module requires the reasoning shape.
+“Worker access is limited” is not something a reviewer can check. “The ability can export note summaries for company A’s object set once before 12:05, cannot read bodies, cannot choose where the data goes, cannot alter policy, and writes an independent decision record” is a bounded claim. Later topics supply production mechanisms. This page requires the reasoning shape.
 
-## Defense in depth requires a failure argument
+## Two checks need two different assumptions
 
-Multiple controls can be useful for different reasons:
+Several controls can be useful for different reasons:
 
 - **prevention** blocks the effect;
-- **detection** makes misuse or drift observable;
-- **recovery** limits duration or restores state.
+- **detection** makes misuse or drift visible;
+- **recovery** limits how long it lasts or restores state.
 
-Calling them “layers” is not enough. Compare their failure assumptions.
+Calling them “layers” is not enough. Compare what each one assumes when it fails.
 
 | Pair | Independence question | Honest conclusion |
 |---|---|---|
-| Edge strips `X-Internal`; API trusts `X-Internal` | Do both rely on the same field and routing/configuration? | Correlated for header-forgery failure |
-| Adapter constructs typed worker context; policy enforces scoped capability | Can a requester bypass the adapter or mint the capability? | Potentially complementary; prove enforcement coverage |
-| Policy denies; evidence sink records decision | Can failure of the policy also suppress evidence? Does evidence failure block? | Detection may be partially independent, not preventive |
+| Edge strips `X-Internal`; API trusts `X-Internal` | Do both rely on the same field and the same routing or config? | Correlated for header-forgery failure |
+| Adapter builds typed worker context; policy enforces a scoped grant | Can a requester skip the adapter or mint the grant? | Can be complementary; prove every export path uses the check |
+| Policy denies; evidence sink records the decision | Can failure of the policy also hide the record? Does a missing record block the export? | Detection may be partly independent, not preventive |
 | Two products use the same identity assertion and administrator | Can one false assertion or operator mistake defeat both? | Correlated for that failure |
 
-Independence is always “independent with respect to which failure?” A control may be independent of parser compromise but correlated through the same cloud control plane. Unknown dependencies should be labeled unknown.
+Independence is always “independent with respect to which failure?” A control may be independent of a parser bug but correlated through the same cloud control plane. Unknown dependencies should be labeled unknown.
 
-## Work the four questions
+## Four questions threat modeling uses
 
-OWASP’s current Threat Modeling Project recommends a methodology-neutral Four Question starting point:
+Threat modeling often starts with four questions. They are a starting point, not a claim that one named method is required:
 
-1. **What are we working on?** The property, Phase 1 scope, flows, assumptions, boundaries, TCB, and dependencies.
-2. **What can go wrong?** Forged provenance, scope widening, alternate entry, replay, dependency failure, shared-mechanism collision, evidence suppression.
-3. **What are we going to do?** Structural adapter separation, narrow authority, fail-safe enforcement, evidence, recovery, explicit residuals.
-4. **Did we do a good enough job?** Trace every effect, use five evidence modes, challenge independence, and refresh on change or incident.
+1. **What are we working on?** The rule, this week’s scope, flows, assumptions, boundaries, what you trust, and dependencies.
+2. **What can go wrong?** Forged origin, scope widening, an alternate entry, replay, a dependency failure, a shared-tool collision, hidden evidence.
+3. **What are we going to do?** Separate adapters, narrow authority, deny when unknown, keep a record, recover, name leftover risk.
+4. **Did we do a good enough job?** Trace every effect, use several kinds of evidence, challenge independence, and look again after a change or an incident.
 
-This is not a claim that OWASP mandates one threat-modeling method. STRIDE, LINDDUN, attack trees, and more formal elicitation come later. Here the four questions prevent the diagram from becoming decorative.
+Named methods with their own checklists come later. These four questions stop the diagram from being decoration.
 
-## Guided practice — classify before drawing
+## Practice
 
-For each statement, label it **property**, **component**, **entry point**, **channel**, **trust boundary**, **TCB claim**, **attack-surface item**, **isolation claim**, **blast-radius claim**, or **unsupported**. More than one label may apply only if you explain why.
+For each statement, label it **rule**, **component**, **entry point**, **channel**, **trust boundary**, **what-you-trust claim**, **attack-surface item**, **isolation claim**, **how-far-a-break-can-spread claim**, or **unsupported**. More than one label may apply only if you explain why.
 
 1. “The browser connects using TLS.”
 2. “The public adapter treats every request field as attacker-controlled.”
-3. “Only the worker adapter can construct `WorkerContext`.”
+3. “Only the worker adapter can construct worker context.”
 4. “The API and edge both reject requests whose `X-Internal` value is not `worker`.”
-5. “One process-wide store credential can read all tenants.”
-6. “A single-use grant names Tenant A, action `export_summary`, and notes A1/A2.”
-7. “The audit sink is down, but exports continue and no alternate evidence exists.”
+5. “One process-wide store credential can read all companies.”
+6. “A single-use grant names company A, action `export_summary`, and notes A1/A2.”
+7. “The audit sink is down, but exports continue and no other record exists.”
 8. “The service is in a private subnet, so public callers cannot influence it.”
 
-For every **unsupported** statement, rewrite it as a falsifiable claim. Include the protected property, attacker/failure capability, changed assumption, trusted source, forbidden effect, and oracle.
+For every **unsupported** statement, rewrite it as a claim you could prove false. Include the protected rule, attacker or failure ability, changed assumption, trusted source, what must not happen, and how you would see it.
 
-### Success criteria
+## Check yourself
 
-Your answer is ready for peer review when:
+- No box, protocol, product, address range, or internal name is trusted by the label alone.
+- What you trust is tied to one rule and changes when the rule changes.
+- Entry point and channel are not used as the same word.
+- Attack-surface rows point to reachable protected effects.
+- Isolation and how far a break can spread name dimensions and evidence.
+- “Layers” include a common-failure analysis.
+- Unknowns and later work stay explicit.
 
-- no box, protocol, product, address range, or internal name is trusted by label alone;
-- the TCB is tied to one property and changes when the property changes;
-- entry point and channel are not used as synonyms;
-- attack-surface rows point to reachable protected effects;
-- isolation and blast radius name dimensions and evidence;
-- defensive layers include a common-mode failure analysis;
-- unknowns and later work remain explicit.
+## Use it somewhere new
 
-## Transfer hook
+A later page will use a fictional document-preview service. Before you get there, predict why “the upload API is the boundary” is not enough. Think about stored-input entry, parser workers, object-store callbacks, queue replay, converter egress, shared libraries, preview caching, moderator tools, and hidden evidence. Do not solve that transfer yet. List which definitions from this page will need a new instance.
 
-PreviewForge will accept hostile document bytes, store them, trigger asynchronous conversion, and publish previews. Before LO-07, predict why “the upload API is the boundary” is insufficient. Consider stored-input entry, parser workers, object-store callbacks, queue replay, converter egress, shared libraries, preview caching, moderator tools, and evidence suppression. Do not solve the transfer yet; list which definitions from this lesson will need a new instance.
+## What can still go wrong
+
+A private network, TLS, and an internal-looking field can all be true while a public caller still becomes a worker. Opening this page does not finish the drawing.
+
+## What this page is not doing
+
+Live targets. Ready-made attack recipes. Treating a “top ten bugs” list as the course. Answer keys are not in this file.

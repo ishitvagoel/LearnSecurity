@@ -1,4 +1,4 @@
-import { displayHeading } from "./plainCopy";
+import { displayHeading, plainLessonTitle } from "./plainCopy";
 
 export type TocHeading = {
   id: string;
@@ -29,6 +29,7 @@ const KIND_LABELS: Record<string, string> = {
   "concept-model": "Idea",
   "design-exercise": "Design",
   "mechanism-lab": "Try it",
+  "break-fix-lab": "Try it",
   "verification-lab": "Check it",
   "operations-exercise": "Keep it running",
   "transfer-challenge": "Use it elsewhere",
@@ -73,6 +74,22 @@ export function parseLessonLead(source: string): LessonLead {
     i += 1;
   }
   let title: string | null = null;
+  if (lines[i] === "---") {
+    i += 1;
+    while (i < lines.length && lines[i] !== "---") {
+      const field = /^title:\s*(.*)$/.exec(lines[i]);
+      if (field) {
+        title = field[1].trim().replace(/^['"]|['"]$/g, "");
+      }
+      i += 1;
+    }
+    if (lines[i] === "---") {
+      i += 1;
+    }
+    while (i < lines.length && lines[i].trim() === "") {
+      i += 1;
+    }
+  }
   if (lines[i]?.startsWith("# ")) {
     title = lines[i].slice(2).trim();
     i += 1;
@@ -103,6 +120,11 @@ export function parseLessonLead(source: string): LessonLead {
   };
 }
 
+export function spokenLessonTitle(yamlTitle: string, body: string): string {
+  const lead = parseLessonLead(body);
+  return plainLessonTitle(lead.title || yamlTitle);
+}
+
 export function extractHeadings(source: string): TocHeading[] {
   const alloc = createIdAllocator();
   const out: TocHeading[] = [];
@@ -130,7 +152,7 @@ export function extractHeadings(source: string): TocHeading[] {
 
 export function sectionKindFromHeading(text: string): LessonSectionKind | null {
   const t = plainHeadingText(text).toLowerCase();
-  if (t.startsWith("property") || t === "the rule") {
+  if (t.startsWith("property") || t === "the rule" || t === "start with the rule") {
     return "property";
   }
   if (t === "practice") {
