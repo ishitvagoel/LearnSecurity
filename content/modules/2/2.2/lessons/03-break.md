@@ -1,64 +1,58 @@
-# 2.2 — HTTP, TLS, proxies, CDNs, and cache keys (3 Break)
+# 2.2-LO-03 — Observe the path-only key, do not trophy it
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** RFC 9110 HTTP Semantics (final); RFC 9846 TLS 1.3 (final); ASVS 5.0.0 V12 (final). TLS is transport authenticity, not a cache-key.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** Saltzer and Schroeder (1975, seminal) least common mechanism; IETF RFC 9110 (final); IETF RFC 9846 TLS 1.3 (final).
 
-## Property (start here)
+## Authorized scope
 
-A cache entry for GET /notes/n1 must include the bound tenant in the key. Tenant B must not receive tenant A’s body. HTTPS does not imply this.
+`labs/2.2/2.2-request-path` only. Do not target other hosts, public CDNs, or third-party sites. Do not paste cache-poison payloads.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** shared cache returns Tenant A’s body to Tenant B.
 
-- **Attacker:** Tenant B on a shared CDN/proxy; a neighbor on a corporate TLS-inspecting proxy.
-- **Trust:** Origin app can set cache keys. The CDN is honest but greedy. Clients are hostile.
-**Forbidden outcome:** Shared cache returns tenant A's body to tenant B
+## Mental model: the tenant argument is ignored on store
 
-**Authorized scope:** `labs/2.2/2.2-request-path` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable cache.py keys only on path.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: Shared cache; path-only key; tA populated the entry.
-
-## Vulnerable fixture (local)
-
-```python
-"""Vulnerable: cache key is URL only; tenant is not part of the key."""
-
-from __future__ import annotations
-
-_CACHE: dict[str, str] = {}
-
-
-def cache_put(path: str, tenant: str, body: str) -> None:
-    _CACHE[path] = body
-
-
-def cache_get(path: str, tenant: str) -> str | None:
-    return _CACHE.get(path)
-
-
-def reset() -> None:
-    _CACHE.clear()
+```mermaid
+flowchart TD
+  Put["cache_put path, tA, secretA"] --> Key["Key = path only"]
+  Key --> Slot["/notes/n1 -> secretA"]
+  Get["cache_get path, tB"] --> Slot
+  Slot --> Leak["returns secretA"]
 ```
+
+The vulnerable tree demonstrates **cause** (shared store, incomplete key), not a trophy exploit. Preconditions: shared dict; path-only key; Tenant A populated the entry. TLS is not even in the fixture—on purpose. If the property needed TLS to be “off,” the lab would be teaching the wrong sentence.
+
+## What to read in the fixture
+
+`vulnerable/cache.py` accepts a `tenant` argument on put and get, then stores and looks up **only** `path`. Tenant B’s get returns Tenant A’s body. `X-Forwarded-Host` is not required.
+
+Tests already bind:
+
+- `test_same_tenant_cache_hit` — Tenant A still reads Tenant A.
+- `test_other_tenant_does_not_receive_cached_body` — Tenant B must not receive `tenant-A-note` (must be `None`).
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Key omitted the subject’s tenant; shared store. |
-| Impact | Cross-tenant read without guessing ids. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Key omitted the bound tenant; shared store |
+| Preconditions | Path-only key; tA populated the entry |
+| Impact | Cross-tenant read without guessing ids |
+| Not the lesson | A scanner name, CWE mnemonic, or “TLS is broken” |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/2.2/2.2-request-path/tests -q --impl vulnerable` (or the README if fixtures differ).
+Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name `test_other_tenant_does_not_receive_cached_body`.
+
+```
+python3 -m pytest labs/2.2/2.2-request-path/tests --impl vulnerable
+```
+
+Do not “fix” the test to pass. The failure *is* the evidence that the property is currently false.
 
 ## Transfer
 
-Authenticated RSS or export CSV via CDN.
+Authenticated RSS or export CSV via CDN. Predict a disagreement without running anything outside this directory.
 
 ## Non-goals
 

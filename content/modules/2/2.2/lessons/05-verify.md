@@ -1,38 +1,51 @@
-# 2.2 — HTTP, TLS, proxies, CDNs, and cache keys (5 Verify)
+# 2.2-LO-05 — Evidence is a failing cross-tenant get, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** RFC 9110 HTTP Semantics (final); RFC 9846 TLS 1.3 (final); ASVS 5.0.0 V12 (final). TLS is transport authenticity, not a cache-key.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** IETF RFC 9110 (final); OWASP ASVS 5.0.0 (final) `v5.0.0-14.2.2`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A cache entry for GET /notes/n1 must include the bound tenant in the key. Tenant B must not receive tenant A’s body. HTTPS does not imply this.
+Happy-path HTTP 200 over HTTPS is not this module’s evidence (see 9.3). The oracle is the local pair against a named forbidden outcome.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Tenant B on a shared CDN/proxy; a neighbor on a corporate TLS-inspecting proxy.
-- **Trust:** Origin app can set cache keys. The CDN is honest but greedy. Clients are hostile.
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F[Must fail tB get of tA body]
+  X["--impl fixed"] --> P["Must pass tA hit and tB miss"]
+  F --> E[Evidence the key omitted tenant]
+  P --> E2[Evidence the pair is now bound]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Shared cache returns tenant A's body to tenant B |
-| Failure | Fail closed: Key = (tenant_id, route, representation) |
+| Normal | After tA put, tA get returns `tenant-A-note` |
+| Negative / abuse | After tA put, tB get is not `tenant-A-note` and is `None` |
+| Failure default | Unknown tenant does not share the slot |
 
-Lab tests: `test_cache_key.py` under `labs/2.2/2.2-request-path`.
+Lab tests: `test_same_tenant_cache_hit` and `test_other_tenant_does_not_receive_cached_body` in `labs/2.2/2.2-request-path/tests/test_cache_key.py`.
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Shared cache returns tenant A's body to tenant B`
-- `--impl fixed`: **pass**
+```
+python3 -m pytest labs/2.2/2.2-request-path/tests --impl vulnerable
+python3 -m pytest labs/2.2/2.2-request-path/tests --impl fixed
+```
 
-tA hit works; tB get is None.
+Map each test to a matrix cell from LO-02. Do not paste keys.
+
+## What the tests do not prove
+
+- Live CDN `Vary` behavior
+- Browser `no-store` (`v5.0.0-14.3.2`)
+- Forwarded-header pinning in FastAPI (`v5.0.0-4.1.3`)
+- DNS authenticity
+
+Record those as residuals or later work, not as silent passes.
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations this session. If vulnerable does not fail, the lab is miswired—fix the wiring, not the assertion.
 
 ## Transfer
 
-Authenticated RSS or export CSV via CDN.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Authenticated RSS or export CSV via CDN. A test that only asserts status 200 on `/export` is not cache-key evidence.

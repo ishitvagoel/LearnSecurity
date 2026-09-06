@@ -14,14 +14,21 @@ defaults:
   ai_security: elective E1
   website_progress: local-first static site (site/); no accounts
 next:
-  id: '2.2'
+  id: '2.3'
   pass: revise
   skill: deepen-curriculum
   inner_skill: standards-pin
-  note: Module 2.1 authoring pass added parser-boundary mental models and diagrams;
-    keep 1.4 and 2.1 developing until independent review. Continue the depth queue
-    one module at a time.
+  note: Module 2.2 authoring pass added hop-versus-key mental models and diagrams;
+    keep 1.4, 2.1, and 2.2 developing until independent review. Continue the depth
+    queue one module at a time.
 spiral_deltas:
+- date: '2026-09-06'
+  module: '2.2'
+  change: Request-path loop v2 separates TLS hop authenticity from cache-key identity,
+    forbids client forwarded headers as key input, and labels ASVS v5.0.0-14.2.5 as
+    Level 3 rather than a silent baseline
+  retest: Revisit 1.2 tenant cells when a CDN is introduced; 1.3 edge as a trust boundary;
+    2.3 cookie Vary; 7.4 workers behind the same cache; 14.3.2 browser no-store
 - date: '2026-09-06'
   module: '2.1'
   change: Parser-boundary loop v2 treats duplicate-key disagreement as a confidentiality
@@ -182,8 +189,8 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added hop-versus-key mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '2.3'
   title: Browser security model
