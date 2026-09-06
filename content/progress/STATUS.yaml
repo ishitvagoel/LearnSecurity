@@ -18,13 +18,36 @@ next:
   pass: revise
   skill: deepen-curriculum
   inner_skill: quality-gate
-  note: Authoring-pass named mental models and mermaid cover every lesson. 1.4 and
-    2.1-2.3 later lessons were thickened with system-specific cause, limits, and
-    transfer. Units stay developing / map-complete in revision.remaining until independent
-    quality and lab-safety review artifacts exist under content/progress/reviews/.
-    Do not mark depth publishable in this skill. 1.1-1.3 remain the independently
-    reviewed reference.
+  note: Authoring-pass named mental models and mermaid cover every lesson. 1.4,
+    2.1-2.4, 0.1, 0.2, and 3.1 later lessons were thickened with system-specific
+    cause, limits, and transfer. Units stay developing / map-complete in
+    revision.remaining until independent quality and lab-safety review artifacts
+    exist under content/progress/reviews/. Do not mark depth publishable in this
+    skill. 1.1-1.3 remain the independently reviewed reference.
 spiral_deltas:
+- date: '2026-09-06'
+  module: '3.1'
+  change: Lessons 03-08 now carry body-in-log cause tables, logging-API mechanism
+    limits, and clinic chart-versus-time transfer; the lab oracle is unchanged
+  retest: Independent review still required; access logs (4.3), exception middleware,
+    and APM remain separate sinks
+- date: '2026-09-06'
+  module: '0.2'
+  change: Lessons 03-08 now name score-100 skip as the forbidden outcome and refuse
+    LMS/NICE/badge as Gate 1; the lab oracle is unchanged
+  retest: Independent review still required; 1.2/1.3/1.4 still required; tooling
+    bridges remain a different function
+- date: '2026-09-06'
+  module: '0.1'
+  change: Lessons 03-08 now insist the example.com literal is denied without fetching
+    and refuse WSTG/Burp as the allow-list; the lab oracle is unchanged
+  retest: Independent review still required; redirect and hosts-file residuals remain
+- date: '2026-09-06'
+  module: '2.4'
+  change: Lessons 03-08 now carry retry-client cause tables, key-store fail-closed
+    limits, and clinic/payment transfer; the lab oracle is unchanged
+  retest: Independent review still required; worker stale grants (7.4) and true races
+    remain residuals
 - date: '2026-09-06'
   module: '2.3'
   change: Lessons 03-08 now carry sc_session cause tables, HttpOnly mechanism limits,
@@ -529,7 +552,8 @@ modules:
   pass: E
   quality: developing
   notes: Authoring pass 2026-09-06 added reachability-not-authorization mental models
-    and diagrams; independent quality and lab-safety review still required before publishable
+    and diagrams; 03-08 thickened with host-gate cause tables; independent quality
+    and lab-safety review still required before publishable
   depth: map-complete
 - id: '0.2'
   title: Diagnostic and adaptive bridge
@@ -537,8 +561,9 @@ modules:
   track: bridge
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added quiz-not-1.2 mental models and diagrams; independent
-    quality and lab-safety review still required before publishable
+  notes: Authoring pass 2026-09-06 added quiz-not-1.2 mental models and diagrams; 03-08
+    thickened with score-as-skip cause tables; independent quality and lab-safety
+    review still required before publishable
   depth: map-complete
 - id: '1.1'
   title: Security as invariants under attack
@@ -613,7 +638,8 @@ modules:
   pass: E
   quality: developing
   notes: Authoring pass 2026-09-06 added timeout-fork mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+    03-08 thickened with retry-client cause tables; independent quality and lab-safety
+    review still required before publishable
   depth: map-complete
 - id: '3.1'
   title: Assets, data classification, and security requirements
@@ -622,7 +648,8 @@ modules:
   pass: E
   quality: developing
   notes: Authoring pass 2026-09-06 added field-times-sink mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+    03-08 thickened with body-in-log cause tables; independent quality and lab-safety
+    review still required before publishable
   depth: map-complete
 - id: '3.2'
   title: Threat modeling

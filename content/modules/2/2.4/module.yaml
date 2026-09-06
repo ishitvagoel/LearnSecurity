@@ -148,3 +148,6 @@ changelog:
 - date: '2026-09-06'
   note: 'Depth pass: timeout-fork mental models, mermaid diagrams, ASVS 5.0
     2.3.3/2.3.4 pins with A10 labeled awareness; independent review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with retry-client cause tables, key-store fail-closed
+    limits, and clinic/payment transfer; independent review still required

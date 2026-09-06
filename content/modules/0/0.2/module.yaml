@@ -137,3 +137,6 @@ changelog:
 - date: '2026-09-06'
   note: 'Depth pass: quiz-not-1.2 mental models, mermaid diagrams, NICE as tooling
     language not Gate 1; independent review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with score-as-skip cause tables, always-false Phase 1
+    predicate, and clinic onboarding transfer; independent review still required

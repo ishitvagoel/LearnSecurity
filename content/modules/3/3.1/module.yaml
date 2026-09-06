@@ -133,3 +133,6 @@ changelog:
 - date: '2026-09-06'
   note: 'Depth pass: field-times-sink mental models, mermaid diagrams, ASVS 5.0
     14.1.1/14.1.2/16.2.5 pins; independent review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with body-in-log cause tables, sink-API limits, and
+    clinic chart-versus-time transfer; independent review still required
