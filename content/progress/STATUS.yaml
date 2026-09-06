@@ -19,12 +19,36 @@ next:
   skill: deepen-curriculum
   inner_skill: quality-gate
   note: Authoring-pass named mental models and mermaid cover every lesson. 1.4,
-    2.1-2.4, 0.1, 0.2, 3.1-3.4, 4.1-4.5, and 5.1-5.4 later lessons were thickened
-    with system-specific cause, limits, and transfer. Units stay developing /
+    2.1-2.4, 0.1, 0.2, 3.1-3.4, 4.1-4.5, 5.1-5.5, and 6.1-6.3 later lessons were
+    thickened with system-specific cause, limits, and transfer. Units stay developing /
     map-complete in revision.remaining until independent quality and lab-safety
     review artifacts exist under content/progress/reviews/. Do not mark depth
     publishable in this skill. 1.1-1.3 remain the independently reviewed reference.
 spiral_deltas:
+- date: '2026-09-06'
+  module: '6.3'
+  change: Lessons 03-08 now name cookie-only foreign-origin share as the forbidden
+    outcome and refuse SameSite as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; clickjacking, postMessage, and GET mutate
+    remain residuals
+- date: '2026-09-06'
+  module: '6.2'
+  change: Lessons 03-08 now insist raw angle brackets are unencoded HTML and refuse
+    CSP as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; JS/attr/URL contexts, markdown, and
+    Trusted Types remain residuals
+- date: '2026-09-06'
+  module: '6.1'
+  change: Lessons 03-08 now name sh-c concatenation as the forbidden outcome and refuse
+    metacharacter denylists as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; argument injection, plugin shells, and
+    CSV formula Level 3 remain residuals
+- date: '2026-09-06'
+  module: '5.5'
+  change: Lessons 03-08 now insist fetch_sql is a bound tuple not a concatenated str
+    and refuse ORM/RLS as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; ORDER BY identifiers, replicas, and 7.1
+    remain residuals
 - date: '2026-09-06'
   module: '5.4'
   change: Lessons 03-08 now carry believed-header cause tables, socket-only limits,
@@ -849,7 +873,8 @@ modules:
   pass: E
   quality: developing
   notes: Authoring pass 2026-09-06 added data-versus-SQL-grammar mental models and
-    diagrams; independent quality and lab-safety review still required before publishable
+    diagrams; 03-08 thickened with concatenation cause tables; independent quality
+    and lab-safety review still required before publishable
   depth: map-complete
 - id: '6.1'
   title: Interpreter confusion and injection
@@ -858,8 +883,8 @@ modules:
   pass: E
   quality: developing
   notes: Authoring pass 2026-09-06 added data-versus-interpreter-grammar mental models
-    and diagrams; independent quality and lab-safety review still required before
-    publishable
+    and diagrams; 03-08 thickened with sh-c cause tables; independent quality and
+    lab-safety review still required before publishable
   depth: map-complete
 - id: '6.2'
   title: Browser injection and active content
@@ -868,7 +893,8 @@ modules:
   pass: E
   quality: developing
   notes: Authoring pass 2026-09-06 added HTML-grammar and context mental models and
-    diagrams; independent quality and lab-safety review still required before publishable
+    diagrams; 03-08 thickened with raw-angle-bracket cause tables; independent quality
+    and lab-safety review still required before publishable
   depth: map-complete
 - id: '6.3'
   title: Cross-site and cross-context attacks
@@ -877,7 +903,8 @@ modules:
   pass: E
   quality: developing
   notes: Authoring pass 2026-09-06 added cookie-without-intent mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+    03-08 thickened with cookie-only-share cause tables; independent quality and
+    lab-safety review still required before publishable
   depth: map-complete
 - id: '6.4'
   title: Files, paths, uploads, archives, XML, and deserialization

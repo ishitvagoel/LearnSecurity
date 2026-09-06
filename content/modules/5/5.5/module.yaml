@@ -137,3 +137,6 @@ changelog:
   note: 'Depth pass: data-vs-SQL-grammar and three-gate mental models, mermaid
     diagrams, ASVS v5.0.0-1.2.4 / 8.4.1 / 13.2.2, v5.0.0-16.3.2 Level 3 clause
     labeled advanced; independent review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with concatenation cause tables, bound-tuple
+    limits, and clinic search-box transfer; independent review still required

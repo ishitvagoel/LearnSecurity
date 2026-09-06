@@ -148,3 +148,6 @@ changelog:
   note: 'Depth pass: HTML-grammar and context mental models, mermaid diagrams,
     ASVS v5.0.0-1.2.1 / 3.4.3, v5.0.0-3.4.7 labeled Level 3 advanced, CSP3 and
     Trusted Types labeled draft; independent review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with raw-angle-bracket cause tables, HTML-text
+    encode limits, and clinic nickname transfer; independent review still required

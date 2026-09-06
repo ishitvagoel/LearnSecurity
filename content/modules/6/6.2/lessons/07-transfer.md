@@ -6,7 +6,7 @@
 
 ## Change the workplace; keep context encoding
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security.
+Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: `render` encodes `<` as `&lt;` in HTML text. Rewrite it for a clinic without changing the fork.
 
 **Prompt:** Clinic patient nickname field rendered on a shared board. Also name markdown-to-HTML as a second parser (2.1).
 
@@ -29,6 +29,10 @@ flowchart LR
   HTML[HTML badge] --> Reality[grammar mixed with data]
 ```
 
+If the nickname is concatenated into an HTML badge, the cell is gone. FastAPI, a CSP Report-Only header, and React defaults on a different component do not encode this sink. Markdown-to-HTML is 2.1’s second parser: even a well-encoded badge fails if markdown emits raw tags later. Trusted Types remain draft.
+
+The clinic rewrite still has to keep the SecureCollab fork: `<` in the nickname becomes `&lt;` in the badge text. Adding CSP without an encode test leaves the HTML interpreter mixed. The local pytest analogue is `test_angle_brackets_are_encoded` — on a fixture, not a live board.
+
 ## What graders reject
 
 | Reject | Why |
@@ -36,7 +40,13 @@ flowchart LR
 | “CSP is on” | Layer, draft, not this cell |
 | Live clinic probe | Lab policy |
 | Exploit-kit payload as the test | Lab policy; tame `<` is enough |
+| HTTP 200 as encoding evidence | Wrong observation |
+| HttpOnly as XSS done | Different cell (2.3) |
 
 ## Practice
 
-One page. No keys. `labs/6.2/6.2-lab` is the only running system you may break.
+One page. No keys. `labs/6.2/6.2-lab` is the only running system you may break. Do not load a live board or paste exploit kits.
+
+## Non-goals
+
+Live-target XSS. Real nicknames as PHI dumps. Claiming Gate 6 from this page.

@@ -144,3 +144,6 @@ changelog:
   note: 'Depth pass: data-vs-interpreter-grammar mental models, mermaid diagrams,
     ASVS v5.0.0-1.2.5, v5.0.0-1.2.10 labeled Level 3 advanced; independent review
     still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with sh-c cause tables, argv-list limits, and
+    clinic export-filename transfer; independent review still required
