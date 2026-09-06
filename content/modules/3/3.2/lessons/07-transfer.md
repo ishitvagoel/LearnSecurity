@@ -6,7 +6,7 @@
 
 ## Change the channel; keep scanner ≠ model
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security.
+Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: a green scan still lists `cross-tenant-read`. Rewrite it for a new hop without changing the fork.
 
 **Prompt:** Clinic SMS reminders — a new channel that Phase 1 HTTP scans will not enumerate.
 
@@ -14,11 +14,11 @@ Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
 Rewrite the SecureCollab sentence. Include:
 
-1. attacker capabilities (number-swap; SMS intercept on an untrusted hop; operator who pastes chart text into the template — not a live clinic);
-2. trust assumptions (which assembler or markdown file is TCB; the SMS vendor is not);
-3. forbidden outcome (empty model because “gateway questionnaire green,” or reminder body includes chart text — pick one and test it);
-4. a test idea on a **local** fixture only;
-5. residual (carrier logs; support read-aloud — 1.4);
+1. attacker capabilities (number-swap; SMS intercept on an untrusted hop; operator who pastes chart text into the template — **not** a live clinic, carrier, or public SMS API);
+2. trust assumptions (which assembler or markdown file is TCB; the SMS vendor questionnaire is not);
+3. forbidden outcome (empty model because “gateway questionnaire green,” or reminder body includes chart text — pick one and test it locally);
+4. a test idea on a **local** fixture only (`sms-content-leak` present when `scanner_green=True`);
+5. residual (carrier logs; support read-aloud — 1.4; SP 800-154 still draft);
 6. WCAG 2.2 if a human-mediated control is in the claim (for example, a usable “opt out of SMS” path); SMS content classification itself is not a WCAG problem.
 
 ## Mental model: a new hop is a new question-one
@@ -31,17 +31,22 @@ flowchart LR
   Time["Appointment time - Internal"] --> SmsAllow["May be in template if policy says so"]
 ```
 
-Question two now includes content leak and number-swap even if every HTTP scanner is green. Seed those ids; do not wait for a CVE.
+Question two now includes content leak and number-swap even if every HTTP scanner is green. Seed those ids; do not wait for a CVE. A vendor “HIPAA certified” sticker is mechanism theater, not the row.
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Top 10 item as the property | 1.1 |
+| Top 10 item as the property | Awareness, not 1.1 |
 | “Vendor is HIPAA certified” as the model | Mechanism theater |
 | Live clinic or real phone numbers | Lab policy |
 | STRIDE letters without assets | Stickers |
+| SP 800-154 as a final baseline | Draft IPD |
 
 ## Practice
 
 One page. No keys. `labs/3.2/3.2-lab` is the only running system you may break. You may also name webhook threats (7.3) as a second optional paragraph — still no live targets.
+
+## Non-goals
+
+Live-target scanning. Real patient phone numbers. Claiming Gate 3 from this page.

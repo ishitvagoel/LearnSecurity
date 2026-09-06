@@ -6,7 +6,7 @@
 
 ## Change the object; keep the write-path cap
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security.
+Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: eight `add_share` calls leave count ≤ 5. Rewrite it for a different object without changing the fork.
 
 **Prompt:** Clinic: max 3 guardians per child. Optionally map invite tokens (6.6) and export quotas (6.7) as *different objects, same shape*.
 
@@ -14,12 +14,12 @@ Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
 Rewrite the SecureCollab sentence. Include:
 
-1. attacker capabilities (scripted add; disabled UI max; import — not a live clinic);
+1. attacker capabilities (scripted add; disabled UI max; import — **not** a live clinic);
 2. trust assumptions (which write path is TCB; HTML is not);
-3. forbidden outcome (`add_guardian` four times yields count 4, not “HIPAA”);
-4. a test idea on a **local** fixture only;
+3. forbidden outcome (`add_guardian` four times yields count 4, not “HIPAA” and not “API4”);
+4. a test idea on a **local** fixture only (loop four times, last ≤ 3);
 5. residual (honest family of 4 needs an owned exception; parallel adds need a lock);
-6. WCAG 2.2 4.1.3 if the denial is shown to a human (announce “guardian limit reached”).
+6. WCAG 2.2 Success Criterion 4.1.3 if the denial is shown to a human (announce “guardian limit reached”).
 
 ## Mental model: three is not five, the shape is the same
 
@@ -31,7 +31,7 @@ flowchart LR
   Export["Export job"] --> Quota["Bytes or rows cap - 6.7"]
 ```
 
-API4/API6 may appear in a regression checklist after the machine exists. They are not the property.
+API4/API6 may appear in a regression checklist after the machine exists. They are not the property. Rate limit is availability (6.7); this cap is integrity of the share / guardian graph. Idempotency of one grant is 2.4.
 
 ## What graders reject
 
@@ -41,7 +41,12 @@ API4/API6 may appear in a regression checklist after the machine exists. They ar
 | Rate limit as the cap | Different 1.1 cell |
 | Live clinic APIs | Lab policy |
 | HTML max=3 as enforcement | Client is untrusted |
+| API4 sticker | Awareness only |
 
 ## Practice
 
-One page. No keys. `labs/3.4/3.4-lab` is the only running system you may break.
+One page. No keys. `labs/3.4/3.4-lab` is the only running system you may break. Do not load-test a clinic or an invite API.
+
+## Non-goals
+
+Live-target bots. Real member emails. Claiming Gate 3 from this page.

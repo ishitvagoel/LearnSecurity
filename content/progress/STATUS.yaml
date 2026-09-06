@@ -19,12 +19,36 @@ next:
   skill: deepen-curriculum
   inner_skill: quality-gate
   note: Authoring-pass named mental models and mermaid cover every lesson. 1.4,
-    2.1-2.4, 0.1, 0.2, and 3.1 later lessons were thickened with system-specific
-    cause, limits, and transfer. Units stay developing / map-complete in
-    revision.remaining until independent quality and lab-safety review artifacts
-    exist under content/progress/reviews/. Do not mark depth publishable in this
-    skill. 1.1-1.3 remain the independently reviewed reference.
+    2.1-2.4, 0.1, 0.2, 3.1-3.4, and 4.1 later lessons were thickened with
+    system-specific cause, limits, and transfer. Units stay developing /
+    map-complete in revision.remaining until independent quality and lab-safety
+    review artifacts exist under content/progress/reviews/. Do not mark depth
+    publishable in this skill. 1.1-1.3 remain the independently reviewed reference.
 spiral_deltas:
+- date: '2026-09-06'
+  module: '4.1'
+  change: Lessons 03-08 now carry leftover-session cause tables, same-use-case
+    revoke limits, and departing-clinician transfer; the lab oracle is unchanged
+  retest: Independent review still required; refresh tokens, workers (7.4), and
+    mobile cache (8.2) remain residuals
+- date: '2026-09-06'
+  module: '3.4'
+  change: Lessons 03-08 now carry sixth-grant cause tables, write-path cap limits,
+    and clinic-guardian transfer; the lab oracle is unchanged
+  retest: Independent review still required; parallel sixths (2.4) and import/GraphQL
+    paths remain residuals
+- date: '2026-09-06'
+  module: '3.3'
+  change: Lessons 03-08 now name tB-reads-tA as the forbidden outcome and refuse VPC
+    or microservices as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; RLS (5.5) and SECURITY DEFINER (E5)
+    remain residuals
+- date: '2026-09-06'
+  module: '3.2'
+  change: Lessons 03-08 now insist cross-tenant-read survives a green scan and refuse
+    Appendix D as a passing ID; the lab oracle is unchanged
+  retest: Independent review still required; SMS/webhook channels remain transfer
+    residuals
 - date: '2026-09-06'
   module: '3.1'
   change: Lessons 03-08 now carry body-in-log cause tables, logging-API mechanism
@@ -658,8 +682,8 @@ modules:
   pass: E
   quality: developing
   notes: Authoring pass 2026-09-06 added four-questions and scanner-is-coverage mental
-    models and diagrams; independent quality and lab-safety review still required
-    before publishable
+    models and diagrams; 03-08 thickened with green-scan cause tables; independent
+    quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '3.3'
   title: Secure architecture patterns
@@ -668,8 +692,8 @@ modules:
   pass: E
   quality: developing
   notes: Authoring pass 2026-09-06 added two-gate and plane-separation mental models
-    and diagrams; independent quality and lab-safety review still required before
-    publishable
+    and diagrams; 03-08 thickened with tB-reads-tA cause tables; independent quality
+    and lab-safety review still required before publishable
   depth: map-complete
 - id: '3.4'
   title: Business logic and abuse-resistant design
@@ -678,8 +702,8 @@ modules:
   pass: E
   quality: developing
   notes: Authoring pass 2026-09-06 added write-path-cap versus UI-max mental models
-    and diagrams; independent quality and lab-safety review still required before
-    publishable
+    and diagrams; 03-08 thickened with sixth-grant cause tables; independent quality
+    and lab-safety review still required before publishable
   depth: map-complete
 - id: '4.1'
   title: Digital identity and account lifecycle
@@ -688,7 +712,8 @@ modules:
   pass: E
   quality: developing
   notes: Authoring pass 2026-09-06 added leftover-session mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+    03-08 thickened with leftover-session cause tables; independent quality and
+    lab-safety review still required before publishable
   depth: map-complete
 - id: '4.2'
   title: Authentication, phishing resistance, and usable access

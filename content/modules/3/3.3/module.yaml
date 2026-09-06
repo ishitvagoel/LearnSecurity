@@ -150,3 +150,6 @@ changelog:
   note: 'Depth pass: two-gate and plane-separation mental models, mermaid diagrams,
     ASVS v5.0.0-8.4.1 / 8.2.2 / 8.3.1, v5.0.0-15.2.5 labeled Level 3 advanced; CISA
     pin remains unverified; independent review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with tB-reads-tA cause tables, runtime-role limits,
+    and serverless/replica transfer; independent review still required
