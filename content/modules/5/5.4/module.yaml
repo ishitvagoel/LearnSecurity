@@ -138,3 +138,6 @@ changelog:
   note: 'Depth pass: hop-vs-claim mental models, mermaid diagrams, RFC 9846,
     ASVS v5.0.0-12.2.1, v5.0.0-12.1.4 / 12.1.5 labeled Level 3 advanced; independent
     review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with believed-header cause tables, socket-only
+    limits, and clinic SPA-vs-API transfer; independent review still required

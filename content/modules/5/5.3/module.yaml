@@ -132,3 +132,6 @@ changelog:
   note: 'Depth pass: secret-outlives-rotation mental models, mermaid diagrams,
     ASVS v5.0.0-13.2.3 / 13.3.1, v5.0.0-13.3.3 / 13.3.4 labeled Level 3 advanced;
     independent review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with leftover-default cause tables, fail-closed
+    current-only limits, and clinic-gist transfer; independent review still required

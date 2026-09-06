@@ -19,12 +19,36 @@ next:
   skill: deepen-curriculum
   inner_skill: quality-gate
   note: Authoring-pass named mental models and mermaid cover every lesson. 1.4,
-    2.1-2.4, 0.1, 0.2, 3.1-3.4, and 4.1-4.5 later lessons were thickened with
-    system-specific cause, limits, and transfer. Units stay developing /
+    2.1-2.4, 0.1, 0.2, 3.1-3.4, 4.1-4.5, and 5.1-5.4 later lessons were thickened
+    with system-specific cause, limits, and transfer. Units stay developing /
     map-complete in revision.remaining until independent quality and lab-safety
     review artifacts exist under content/progress/reviews/. Do not mark depth
     publishable in this skill. 1.1-1.3 remain the independently reviewed reference.
 spiral_deltas:
+- date: '2026-09-06'
+  module: '5.4'
+  change: Lessons 03-08 now carry believed-header cause tables, socket-only limits,
+    and SPA-vs-API transfer; the lab oracle is unchanged
+  retest: Independent review still required; bound LB identity, pinning, and MASVS-NETWORK
+    remain residuals
+- date: '2026-09-06'
+  module: '5.3'
+  change: Lessons 03-08 now name leftover-default as the forbidden outcome and refuse
+    Vault stickers as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; images, worker defaults, and HSM remain
+    residuals
+- date: '2026-09-06'
+  module: '5.2'
+  change: Lessons 03-08 now insist Base64 round-trip is not confidentiality and refuse
+    HTTPS as the column control; the lab oracle is unchanged
+  retest: Independent review still required; real AEAD, key lifecycle (5.3), and
+    nonce uniqueness remain residuals
+- date: '2026-09-06'
+  module: '5.1'
+  change: Lessons 03-08 now name leftover analytics/search bodies as the forbidden
+    outcome and refuse DPA/encryption as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; backups (5.5), mobile cache (8.2), and
+    legal hold remain residuals
 - date: '2026-09-06'
   module: '4.5'
   change: Lessons 03-08 now carry skipped-aud cause tables, expected-audience limits,
@@ -785,7 +809,8 @@ modules:
   pass: E
   quality: developing
   notes: Authoring pass 2026-09-06 added deletion-graph mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+    03-08 thickened with leftover-analytics cause tables; independent quality and
+    lab-safety review still required before publishable
   depth: map-complete
 - id: '5.2'
   title: Cryptographic properties and safe use
@@ -794,8 +819,8 @@ modules:
   pass: E
   quality: developing
   notes: Authoring pass 2026-09-06 added encoding-versus-encryption mental models
-    and diagrams; independent quality and lab-safety review still required before
-    publishable
+    and diagrams; 03-08 thickened with Base64-round-trip cause tables; independent
+    quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '5.3'
   title: Key and secret lifecycle
@@ -804,7 +829,8 @@ modules:
   pass: E
   quality: developing
   notes: Authoring pass 2026-09-06 added leftover-default mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+    03-08 thickened with leftover-default cause tables; independent quality and
+    lab-safety review still required before publishable
   depth: map-complete
 - id: '5.4'
   title: Secure communication and channel binding
@@ -813,7 +839,8 @@ modules:
   pass: E
   quality: developing
   notes: Authoring pass 2026-09-06 added hop-versus-claim mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+    03-08 thickened with believed-header cause tables; independent quality and
+    lab-safety review still required before publishable
   depth: map-complete
 - id: '5.5'
   title: Database and persistence security

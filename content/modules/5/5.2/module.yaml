@@ -138,3 +138,6 @@ changelog:
   note: 'Depth pass: encoding-vs-encryption mental models, mermaid diagrams,
     ASVS v5.0.0-11.3.3, v5.0.0-11.3.4 / 11.1.4 labeled Level 3 advanced; independent
     review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with Base64-round-trip cause tables, teaching-flag
+    limits, and clinic SSN-column transfer; independent review still required
