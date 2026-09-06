@@ -1,59 +1,60 @@
-# 2.4-LO-08 — Review the duplicate share as a PR, not a slogan
+# Review of duplicate share inserts
 
 **Kind:** code-review
 **Loop step:** Review
-**Standards:** RFC 9110 (final); OWASP ASVS 5.0.0 (final) `v5.0.0-2.3.3`; OWASP Top 10:2025 A10 as awareness only.
 
-## Review the fixture as if it were SecureCollab share
+Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
 
-Review `labs/2.4/2.4-state-time/vulnerable/` as a SecureCollab PR. Your job is not to count suspicious lines. Reconstruct whether a second `share_note` with `k1` still appends a row, compare that with the module invariant, and write changes a developer can verify.
+## What you are reviewing
 
-Intended findings live only in `content/assessment/keys/2.4.md` — not here. Do not open the keys file until your review has been evaluated.
+A colleague ships notes-app share. Review `labs/2.4/2.4-state-time/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether a second `share_note` with `k1` still appends a row, compare that with the rule, and write changes a developer can verify.
 
-## Mental model: INSERT share on every POST
+The check you already ran (`test_retry_does_not_duplicate_side_effect`) is the rule test. A comment “will add remembering later” is not.
 
-Start with this seeded smell: **INSERT share on every POST**. Label it property, mechanism, or false assurance before you accept the PR.
+## Picture: INSERT share on every POST
+
+Start with this seeded smell: **INSERT share on every POST**. Label it rule, tool, or false comfort before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would falsify it?"}
-  Q -->|"two k1 calls yield two rows"| Property["Property - good if tested"]
-  Q -->|"we disable the button"| Mechanism[Mechanism - not the store]
-  Q -->|"HTTP 201 means once"| False[False assurance]
+  Q -->|"two k1 calls yield two rows"| Property["Rule — good if tested"]
+  Q -->|"we disable the button"| Mechanism[Tool — not the store]
+  Q -->|"HTTP 201 means once"| False[False comfort]
 ```
 
-Classification starts at the protected effect (share count under retry). Everything that is not a remembered first outcome at that second call is a candidate ambient path.
+Classification starts at the protected effect (share count under retry). Everything that is not a remembered first outcome at that second call is a candidate leftover path.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - INSERT share on every POST
 - Idempotency key in a log comment only
 - Test only happy-path single click
-- Fail-open on idempotency store timeout
+- Fail open on idempotency store timeout
 
-Also reject: client trust as the TCB; A10 as the finding title; closing findings without re-running `test_retry_does_not_duplicate_side_effect`; keys in learner notes; live load tests against a public API; unique-on-`note_id` as if it were this cell.
+Also reject: treating the client as what you trust; an awareness-list name as the finding title; closing findings without re-running `test_retry_does_not_duplicate_side_effect`; keys in learner notes; live load tests against a public API; unique-on-`note_id` as if it were this rule.
 
-## Misconceptions this module refuses
+## Common mix-ups
 
 - Retries are a client bug, not ours
 - HTTP 200 means once
-- Databases are automatically idempotent
-- Disable-on-submit is the guarantee
-- FastAPI or Next.js retries remember the share graph
-- A10 as the definition of the finding
+- Databases automatically remember
+- Disable-on-submit is the promise
+- FastAPI or Next.js retries remember the share list
+- An awareness-list name as the definition of the finding
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: observation, property or false assurance, suggested structural change, residual you will **not** delete. Tie at least one to `test_retry_does_not_duplicate_side_effect`.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one to `test_retry_does_not_duplicate_side_effect`. Do not open the keys file.
 
-## Transfer
+## Use it somewhere new
 
-Payment capture, invite token, or clinic last slot. A PR that “handles A10” without a replay test is an incomplete mediation review. Name the independent falsehood that would still stop a second grant.
+Payment capture, invite token, or clinic last slot. A change that “handles the awareness list” without a replay test is an incomplete review. Name the independent falsehood that would still stop a second grant.
 
-## HITL / WCAG 2.2
+## Can people still use it
 
-Disable-on-submit is not the property. Accessible “still working” must not mint a new key.
+Disable-on-submit is not the rule. Accessible “still working” must not mint a new key.
 
-## Non-goals
+## What this page is not doing
 
-Do not merge by adding a comment “will add idempotency later.” That comment is a residual without an owner.
+Do not merge by adding a comment “will add remembering later.” That comment is leftover risk without an owner.

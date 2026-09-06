@@ -1,36 +1,37 @@
-# 2.4-LO-06 — Detect a second grant; never fail-open the key store
+# Notice a second grant; never fail open the key store
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
-**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-2.3.3`; Module 3.1 / 5.1. CSF names outcomes; it does not prove ASVS.
 
-## Prevention is not absolute
+## Stopping it is not enough
 
-A new client that mints a key per retry, a TTL that is too short, or a store outage can reintroduce duplicates after `_SEEN` was “set once.” Pair detect and recover. Do not log note bodies or session values. Do not fail-open: if the idempotency store is unreachable, do not insert “just this once.”
+A new client that mints a key per retry, a lifetime that is too short, or a store outage can reintroduce duplicates after `_SEEN` was “set once.” Pair notice and recover. Do not log note bodies or session values. Do not fail open: if the idempotency store is unreachable, do not insert “just this once.”
 
-## Mental model: count versus unique keys
+## Picture: count versus unique keys
 
 ```mermaid
 flowchart TD
   Share[Share attempt] --> Dup{"Same key already recorded?"}
   Dup -->|yes| Metric["idempotency_replay += 1"]
   Metric --> Log["reason=replay key_id=k1 note=n1 no body"]
-  Dup -->|no| Insert[Insert one grant]
-  StoreDown[Key store unreachable] --> Closed["Fail closed - do not insert"]
+  Dup -->|no| Insert[Insert one share]
+  StoreDown[Key store unreachable] --> Closed["Fail closed — do not insert"]
 ```
 
-| Outcome | This module |
+A broken retry is a notice-and-recover problem, not a licence to fail open or to dump the note into the log.
+
+| Outcome | This topic |
 |---|---|
-| Detect | Duplicate-key hits; `share_count` versus unique keys; CI pair still red/green |
-| Signal | key id, note id, actor id, request id; never the note body |
-| Recover | Revoke extra shares; notify owner; re-run `test_retry_does_not_duplicate_side_effect` |
-| Residual | Lost first response needs read-your-write; never fail-open if the key store is down |
+| Notice | Hits on a key you already saw; `share_count` versus unique keys; the local pair still red then green |
+| What the line holds | key id, note id, actor id, request id; never the note body |
+| Recover | Take extra shares back; tell the owner; re-run `test_retry_does_not_duplicate_side_effect` |
+| Leftover | A lost first response needs a path so the owner can see the share; never fail open if the key store is down |
 
-CSF 2.0 names Detect / Respond / Recover outcomes. They do not prove `v5.0.0-2.3.3`. A10 is awareness regression, not the runbook title. A SIEM product name is not the property.
+Industry lists name detect, respond, recover. They do not pick a log product. They do not prove this share rule. An awareness-list name is not the runbook title. A SIEM product name is not the rule.
 
-## Framework defaults versus the operate guarantee
+## What the framework does vs what you still have to check
 
-uvicorn access logs, FastAPI exception handlers, and Next.js analytics will store query strings and error `repr`s (3.1 / 4.3). Those drains are not this replay metric. If you log the note body while investigating a duplicate share, you have opened a 3.1 cell.
+uvicorn access logs, FastAPI exception handlers, and Next.js analytics will store query strings and error text. Those drains are not this replay metric. If you log the note body while investigating a duplicate share, you have opened a leak.
 
 ## Practice
 
@@ -40,16 +41,16 @@ Write one log line you would accept. Tie it to `labs/2.4/2.4-state-time`.
 share_replay reason=same_idempotency_key note_id=n1 key_id=k1 actor=owner_a request_id=req_22c1
 ```
 
-Reject any line that includes a note body, a real email, a session value, or “A10 handled.”
+Reject any line that includes a note body, a real email, a session value, or “awareness list handled.”
 
-## Transfer
+## Use it somewhere new
 
-Payment capture (E3): detect double capture without logging PAN. Clinic: detect double-book without logging the chart. Invite tokens (6.6): detect replay without logging the token.
+Payment capture: notice a double capture without logging card numbers. Clinic: notice a double-book without logging the chart. Invite tokens: notice a replay without logging the token.
 
-## Usability
+## Can people still use it
 
-Disable-on-submit is not the property. Accessible “still working” (WCAG 2.2 Success Criterion 4.1.3) must reuse the same key if it retriggers work.
+Disable-on-submit is not the rule. Accessible “still working” must reuse the same key if it starts the work again.
 
-## Non-goals
+## What this page is not doing
 
-SIEM product names are not the property. Do not instruct live load tests. Gate 2 stays not-attempted without learner or product evidence.
+A log-product name is not the rule. Do not instruct live load tests. Answer keys stay out of lessons.
