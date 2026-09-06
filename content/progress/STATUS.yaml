@@ -19,13 +19,37 @@ next:
   skill: deepen-curriculum
   inner_skill: quality-gate
   note: Authoring-pass named mental models and mermaid cover every lesson. 1.4,
-    2.1-2.4, 0.1, 0.2, 3.1-3.4, 4.1-4.5, 5.1-5.5, 6.1-6.7, and 7.1-7.4 later
-    lessons were thickened with system-specific cause, limits, and transfer. Units
-    stay developing / map-complete in revision.remaining until independent quality
-    and lab-safety review artifacts exist under content/progress/reviews/. Do not
-    mark depth publishable in this skill. 1.1-1.3 remain the independently reviewed
-    reference.
+    2.1-2.4, 0.1, 0.2, 3.1-3.4, 4.1-4.5, 5.1-5.5, 6.1-6.7, 7.1-7.4, and 8.1-8.4
+    later lessons were thickened with system-specific cause, limits, and transfer.
+    Units stay developing / map-complete in revision.remaining until independent
+    quality and lab-safety review artifacts exist under content/progress/reviews/.
+    Do not mark depth publishable in this skill. 1.1-1.3 remain the independently
+    reviewed reference.
 spiral_deltas:
+- date: '2026-09-06'
+  module: '8.4'
+  change: Lessons 03-08 now name debug-plus-ok as the forbidden outcome and refuse
+    R8/Play-Signing as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; stolen release keys, attestation farms,
+    and 8.1 hostile release APKs remain residuals
+- date: '2026-09-06'
+  module: '8.3'
+  change: Lessons 03-08 now insist as=admin keeps alice and refuse App Links as that
+    oracle; the lab oracle is unchanged
+  retest: Independent review still required; WebView bridges, custom schemes, and 4.5
+    audience remain residuals
+- date: '2026-09-06'
+  module: '8.2'
+  change: Lessons 03-08 now name plaintext secret on disk as the forbidden outcome
+    and refuse MODE_PRIVATE/fingerprint as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; backups, screenshots, and 4.1 logout wipe
+    remain residuals
+- date: '2026-09-06'
+  module: '8.1'
+  change: Lessons 03-08 now insist client ok plus attest fail is denied and refuse
+    Play Integrity in-app as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; attestation farms, 8.4 debug builds, and
+    rooted honest-user policy remain residuals
 - date: '2026-09-06'
   module: '7.4'
   change: Lessons 03-08 now name leftover alice session as the forbidden outcome and
@@ -1041,8 +1065,9 @@ modules:
   track: mobile
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added hostile-client mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+  notes: Later lessons 03-08 thickened 2026-09-06 with client-boolean cause tables
+    and Play-Integrity limits; independent quality and lab-safety review still
+    required before publishable
   depth: map-complete
 - id: '8.2'
   title: Local data, keys, biometrics, offline state, and leakage surfaces
@@ -1050,8 +1075,9 @@ modules:
   track: mobile
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added private-dir-vs-encryption mental models and
-    diagrams; independent quality and lab-safety review still required before publishable
+  notes: Later lessons 03-08 thickened 2026-09-06 with plaintext-cache cause tables
+    and MODE_PRIVATE limits; independent quality and lab-safety review still required
+    before publishable
   depth: map-complete
 - id: '8.3'
   title: Network, deep links, WebViews, and inter-app communication
@@ -1059,8 +1085,9 @@ modules:
   track: mobile
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added Intent-as-untrusted-input mental models and
-    diagrams; independent quality and lab-safety review still required before publishable
+  notes: Later lessons 03-08 thickened 2026-09-06 with extras-as-identity cause tables
+    and App-Links limits; independent quality and lab-safety review still required
+    before publishable
   depth: map-complete
 - id: '8.4'
   title: Build, distribution, attestation, and resilience
@@ -1068,8 +1095,9 @@ modules:
   track: mobile
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added resilience-is-cost mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+  notes: Later lessons 03-08 thickened 2026-09-06 with debug-to-prod cause tables
+    and R8/Play-Signing limits; independent quality and lab-safety review still
+    required before publishable
   depth: map-complete
 - id: '8.5'
   title: Mobile verification and privacy

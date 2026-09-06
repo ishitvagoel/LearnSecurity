@@ -144,3 +144,6 @@ changelog:
 - date: '2026-09-06'
   note: 'Depth pass: private-dir-vs-encryption mental models, mermaid diagrams,
     MASVS-STORAGE-1/2, AUTH-2 local vs server; independent review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with plaintext-cache cause tables, MODE_PRIVATE
+    limits, and clinic chart-cache transfer; independent review still required

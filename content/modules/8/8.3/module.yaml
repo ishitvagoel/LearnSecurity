@@ -144,3 +144,6 @@ changelog:
 - date: '2026-09-06'
   note: 'Depth pass: Intent-as-untrusted-input mental models, mermaid diagrams,
     MASVS-PLATFORM-1/2, RFC 8252; independent review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with extras-as-identity cause tables, App-Links
+    limits, and clinic as=doctor transfer; independent review still required

@@ -144,3 +144,6 @@ changelog:
 - date: '2026-09-06'
   note: 'Depth pass: resilience-is-cost mental models, mermaid diagrams, MASVS-CODE
     / RESILIENCE-1, ASVS v5.0.0-13.3.1; independent review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with debug-to-prod cause tables, R8/Play-Signing
+    limits, and clinic FHIR flavor transfer; independent review still required
