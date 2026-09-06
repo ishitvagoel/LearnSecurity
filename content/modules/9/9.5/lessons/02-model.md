@@ -1,67 +1,76 @@
-# 9.5-LO-02 — Same forbidden outcome, same cell
+# Same bad result, same rule
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** OWASP WSTG 4.2 (final). ASVS `v5.0.0-8.2.1`. FIRST CVSS 4.0 as input.
 
-## Can a second engineer name the retest from your report?
+## Could someone else name the retest from your report?
 
-“We delivered a PDF” is not this lesson. A reviewable model names **the cell, the forbidden outcome, the retest command, and variants**.
+"We delivered a PDF" is not this lesson. A drawing someone else can test names **the rule, what must not happen, the retest command, and variants**.
 
-SecureCollab freeze: local `close_finding(f)`. No live clinics.
+This week's freeze for the notes app: local `close_finding(f)`. No live clinics.
 
-## Mental model: same cell
+> For close, the rule is deny when `retest` is missing. A passing retest of the same isolation check may close. Evidence that the deny is false: `close_finding({"retest": None})` returns true.
+
+If the rule × retest row is blank, the finding closes because nobody named the check.
+
+## Picture: same rule
 
 ```mermaid
 flowchart TD
-  Cell[AUTHZ-1 isolation] --> Test["9.3 forbidden outcome"]
+  Cell[bob must not read alice's note] --> Test[isolation pytest]
   Test --> Fix[structural fix]
   Fix --> Retest[same pytest]
   Retest --> Close[may close]
 ```
 
-## Mental model: different URL is not a retest
+## Picture: a different URL is not a retest
 
 ```mermaid
 flowchart LR
-  Orig["GET /notes/n1 as B"] --> Cell[the finding]
-  Other["GET /health 200"] --> Not[not the cell]
+  Orig["GET alice's note as bob"] --> Cell[the finding]
+  Other["GET /health 200"] --> Not[not the rule]
 ```
 
-## Step 1: freeze pieces
+A health check that returns 200 is a product test. It is not the isolation check you claimed to retest.
+
+## Step 1: name the pieces
+
+Do not invent a new catalogue. Take the finding you already have and ask what would show the hole is still there.
 
 | Piece | This system |
 |---|---|
-| Subjects | paper-compliance closer; ignored variants |
-| Objects | finding; retest record |
+| Who | Paper-compliance closer; someone who ignores variants |
+| What | Finding; retest record |
 | Actions | `close_finding` |
-| Channels | ticket + CI |
-| TCB | same-cell retest |
-| Untrusted | PDF; CVSS; Jira Done; KEV as a close |
-| State / time | after fix; variant hunt |
-| 1.1 cell | integrity of the fix loop |
+| Paths | Ticket plus CI |
+| What you trust for this journey | Same-rule retest |
+| What you do not trust | PDF; severity score; ticket Done; known-exploited list as a close |
+| Time | After the fix; then hunt variants |
+| The rule | Honesty of the fix loop |
 
-## Step 2: write cells
+## Step 2: write allow and deny
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
-| retest None | finding | close | deny |
-| retest pass | finding | close | may allow |
-| CVSS 9.8 | finding | close | deny |
+| closer | finding with retest None | close | deny |
+| closer | finding with retest pass | close | may allow |
+| severity 9.8 | finding | close | deny |
 | different endpoint | finding | treat as retest | deny |
+
+A missing retest field is how a PDF on a shelf becomes "Done." Write the hole.
 
 ## Practice
 
-Draw the loop. Point at `labs/9.5/9.5-lab` file `pentest.py`.
+Draw the loop so someone else could name the checks. Point at `labs/9.5/9.5-lab` file `pentest.py`.
 
-## Transfer
+## Use it somewhere new
 
-KEV: an exploited-in-the-wild CVE still needs a *local* retest if it maps to your cell.
+Known-exploited list: a bug seen in the wild still needs a *local* retest if it maps to your rule.
 
-## Residual risk
+## What can still go wrong
 
-Unknown variants; Level 3 `v5.0.0-8.3.2` caches.
+Unknown variants. A role-change cache that still serves the old grant. That leftover is extra, advanced work, not this week's check.
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+Do not define security as a famous-bugs list. Answer keys stay out of lessons.

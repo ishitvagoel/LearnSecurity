@@ -1,38 +1,56 @@
-# 9.2-LO-06 — Detect review_block_eval without logging the payload
+# review_block_eval without logging the payload
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
-**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; NIST SSDF 1.1 (final) PW.7 / RV.1. ASVS 5.0.0 (final) `v5.0.0-1.3.2`.
 
-## Prevention is not absolute
+## Stopping it is not enough
 
-A later generated helper can reintroduce eval after `review_ok` was “fixed once.” Pair detect and recover. Do not log the user string that would have been eval’d (3.1). Do not paste template source with patient fields into Slack.
+Even after `review_ok` was “fixed once,” a later generated helper can put eval back. Running it for real is the rest of the loop: notice, contain, and recover.
 
-## Mental model: eval in a PR is a signal
+Do not log the user string that would have been eval’d. Do not paste template source with patient fields into chat.
+
+## Picture: eval in a change is a signal
+
+A pull request whose diff still grants `eval` on a user string is a notice-and-recover problem, not a licence to quote the payload in the paging channel. Notice names the event. Recover blocks the merge and keeps the reject. Neither reprints the payload.
 
 ```mermaid
 flowchart TD
-  Pr[PR] --> Ev{eval on user?}
+  Pr[change] --> Ev{eval on user?}
   Ev -->|yes| Metric["review_block_eval plus 1"]
   Metric --> Revert[block merge]
 ```
 
-| Outcome | This module |
+Industry lists name detect, respond, recover. They do not prove avoid-eval. A bot-vendor name is not the rule. Someone still has to own the always-approve path.
+
+## Signals that do not become a second leak
+
+| Outcome | This topic |
 |---|---|
-| Detect | `review_block_eval` |
-| Signal | PR id, file, reason=eval; never the payload |
-| Recover | Keep reject; add 9.3 tests; review generated code |
-| Residual | Substring stand-in; E1; 9.4 bots |
+| Notice | `review_block_eval` |
+| What the line holds | change id, file, reason=eval; **never** the payload |
+| Respond | Block merge |
+| Recover | Keep reject; add tests (9.3); review generated code |
+| Leftover | Substring stand-in; generated code; later review bots |
 
-CSF 2.0 Detect / Respond / Recover name outcomes. They do not prove `v5.0.0-1.3.2`. A bot-vendor name is not the property. Re-run `test_eval_on_user_input_is_rejected` after any review-bot change; a green “formatter passed” tile is not that pytest. Terraform `local-exec` and Actions `run:` are other interpreter paths — inventory them before claiming Recover. The lab substring is a stand-in: an `exec(` helper can skip it, so keep the human interpreter question even after this metric is green.
+A log line a reviewer can accept looks like:
 
-## Framework defaults versus the operate guarantee
+```text
+log_denied reason=review_block_eval pr=pr_92e file=export.py
+```
 
-A GitHub checks dashboard will show ruff green and stay silent when `review_ok` is always true. Detection must observe **eval-on-user rejected**, not check count. If the alert includes the eval payload or note bodies, you have opened a 3.1 / 6.1 cell.
+Not: an eval payload, a note body, or a live GitHub trace.
+
+If your alert includes the eval payload or note bodies, you have opened a second leak in the paging channel (logging topic / interpreter topic).
+
+A green “formatter passed” tile is not that pytest. Re-run `test_eval_on_user_input_is_rejected` after any review-bot change. Terraform `local-exec` and GitHub Actions `run:` are other interpreter paths — inventory them before claiming recover. The lab substring is a stand-in: an `exec(` helper can skip it, so keep the human interpreter question even after this metric is green.
+
+## What the framework does vs what you still have to check
+
+A GitHub checks dashboard will show the formatter green and stay silent when `review_ok` is always true. Detection must observe **eval-on-user rejected**, not check count. If the alert includes the eval payload or note bodies, you have opened a second leak.
 
 ## Practice
 
-Write one log line you would accept. Tie it to `labs/9.2/9.2-lab`.
+Write one log line you would accept in review. Tie it to `labs/9.2/9.2-lab`.
 
 ```text
 log_denied reason=review_block_eval pr=pr_92e file=export.py
@@ -40,14 +58,14 @@ log_denied reason=review_block_eval pr=pr_92e file=export.py
 
 Reject any line that includes eval payloads, note bodies, or a live GitHub trace.
 
-## Transfer
+## Use it somewhere new
 
-Clinic: block a template PR; do not paste the template source with patient fields into Slack. Do not run eval on live input.
+Clinic: block a template change; do not paste the template source with patient fields into chat. Do not run eval on live input.
 
-## Usability
+## Can people still use it
 
-A blocked review must say *why* in plain language (eval on user input), not only “policy P12” (WCAG 2.2 Success Criterion 4.1.3).
+A blocked review must say *why* in plain language (eval on user input), not only a policy code. Color or a code alone is not enough.
 
-## Non-goals
+## What this page is not doing
 
-A bot-vendor name is not the property. Gate 9 stays not-attempted.
+A bot-vendor name is not the rule. Course gates stay unclaimed. Answer keys stay out of lessons.

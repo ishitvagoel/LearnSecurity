@@ -1,67 +1,76 @@
-# 9.1-LO-02 — Threat to requirement to test to result
+# Threat to requirement to test to result
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.1`, `v5.0.0-8.2.2`. NIST SSDF 1.1 PW.8.
 
-## Can a second engineer name pytest cases from your chain?
+## Could someone else name the checks?
 
-“We imported ASVS” is not this lesson. A reviewable model names **threat, requirement id, test id, and the isolation assert**.
+“We imported the checklist” is not this lesson. A drawing someone else can test names **the threat, the requirement id, the test id, and the isolation assert**.
 
-SecureCollab freeze: local `covered(req_id, tests)`. No live trackers.
+This week’s freeze for the notes app: local `covered(req_id, tests)`. No live trackers.
 
-## Mental model: the chain
+> For AUTHZ-1, a status-only row is deny. A row that asserts isolation may count. Evidence that the deny is false: `covered("AUTHZ-1", [{"req": "AUTHZ-1", "asserts_isolation": False}])` returns true.
+
+If the threat × test row is blank, the checkbox looks finished because nobody named the check.
+
+## Picture: the chain
 
 ```mermaid
 flowchart TD
-  Threat["1.2 cross-tenant read"] --> Req[AUTHZ-1]
+  Threat["1.2 cross-company read"] --> Req[AUTHZ-1]
   Req --> Test["test asserts isolation"]
   Test --> Result[pass or fail]
 ```
 
-## Mental model: L2 backbone vs L3 elevation
+## Picture: the usual backbone vs an extra advanced row
 
 ```mermaid
 flowchart LR
-  L2["ASVS Level 2"] --> Matrix[living matrix]
-  L3["v5.0.0-8.3.2 advanced"] --> Extra[named extra row]
+  L2[usual web/API checklist] --> Matrix[living matrix]
+  L3[extra advanced row] --> Extra[named extra row]
   Extra --> StillTest[still needs a test]
 ```
 
-## Step 1: freeze pieces
+The usual checklist is the living matrix. An extra advanced row is still a named row that needs a test. Pasting the whole PDF is not that picture.
+
+## Step 1: name the pieces
+
+Do not invent a new catalogue. Take the isolation rule you already have and ask which test would show it is false.
 
 | Piece | This system |
 |---|---|
-| Subjects | optimistic PM; empty CI |
-| Objects | AUTHZ-1; isolation assert |
+| Who | Optimistic project manager; empty CI |
+| What | AUTHZ-1; isolation assert |
 | Actions | `covered` |
-| Channels | spreadsheet / CI artifact |
-| TCB | coverage predicate |
-| Untrusted | status column; wholesale PDF |
-| State / time | exception expiry (E6) |
-| 1.1 cell | integrity of the assurance case |
+| Paths | Spreadsheet / CI artifact |
+| What you trust for this journey | The coverage check |
+| What you do not trust | The status column; a wholesale PDF |
+| Time | Exception expiry (E6) |
+| The rule | Honesty of the proof you show before a release |
 
-## Step 2: write cells
+## Step 2: write allow and deny
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
-| status-only row | AUTHZ-1 | count as covered | deny |
-| isolation assert | AUTHZ-1 | count as covered | may allow |
-| wholesale ASVS paste | matrix | treat as tailored | deny |
-| unnamed L3 | 8.3.2 | count as done | deny |
+| Status-only row | AUTHZ-1 | count as covered | deny |
+| Isolation assert | AUTHZ-1 | count as covered | may allow |
+| Wholesale checklist paste | matrix | treat as tailored | deny |
+| Unnamed extra advanced row | permission-change-immediate | count as done | deny |
+
+A missing isolation-assert cell is how a done checkbox becomes false comfort. Write the hole.
 
 ## Practice
 
-Draw the chain. Point at `labs/9.1/9.1-lab` file `trace.py`.
+Draw the chain so someone else could name the checks. Point at `labs/9.1/9.1-lab` file `trace.py`.
 
-## Transfer
+## Use it somewhere new
 
-MASVS-STORAGE for 8.2: same predicate, different catalogue.
+The mobile storage row from 8.2: same check, different catalogue.
 
-## Residual risk
+## What can still go wrong
 
-Unmapped Level 3; expired exceptions; 9.3 HTTP-200 tests that match the req id.
+Unmapped extra advanced rows. Expired exceptions. HTTP-200 tests that match the requirement id (9.3).
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+Do not define security as a famous-bugs list. Answer keys stay out of lessons.

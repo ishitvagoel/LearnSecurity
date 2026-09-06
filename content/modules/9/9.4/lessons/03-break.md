@@ -1,69 +1,84 @@
-# 9.4-LO-03 — Observe always-true ship_ok, do not scan public repos
+# Practice: always-true ship_ok
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-15.2.1`. `v5.0.0-15.2.4` dependency confusion is **Level 3, advanced**. NIST SSDF 1.1 (final) PW.7 / PW.8. OWASP SAMM 2.0 as measurement vocabulary. SSDF 1.2 IPD is **draft**.
 
-## Authorized scope
+## Try it
 
-`labs/9.4/9.4-lab` only. The fixture is an in-process `ship_ok(findings, mappings)`. Synthetic finding id `F1`. No live GitHub Advanced Security, no scanning other people’s repositories, no Dependabot against a public clinic.
+The practice is not a public repo you scan. It is a tiny Python `ship_ok` that takes findings and a map. The failure is already in the function: it returns true for every pair. You are here to see that the check treats that true as a **failed rule**, not as a green tile.
 
-**Forbidden outcome:** Unmapped HIGH finding allows ship. `ship_ok([{"id": "F1", "sev": "HIGH"}], {})` returns true.
+The rule under test:
 
-Attacker capability in this lab: alert fatigue plus an always-true gate. That stands in for “code scanning is on and the dashboard is noisy so we ship Fridays,” a SAMM score on a slide, or fifty unmapped HIGHs treated as probable false positives. Trust assumption: `ship_ok` is supposed to **join scanner output to the 9.1 map**. GitHub default setup, Semgrep defaults, and an empty dashboard are not in the TCB for this cell.
+> An unmapped HIGH must not ship. If `ship_ok([{"id": "F1", "sev": "HIGH"}], {})` returns true, the ship gate has failed as a security control.
 
-## Mental model: every finding ships
+## Where you may practice
+
+Only `labs/9.4/9.4-lab` is in scope. The fixture is an in-process `ship_ok(findings, mappings)`. The finding id is the synthetic string `F1`. No live GitHub Advanced Security, no scanning other people’s repositories, no Dependabot against a public clinic.
+
+Do not paste this exercise onto a public GitHub org, employer dashboard, or live clinic “to see what the scanner finds.”
+
+What you trust for this check: `ship_ok` is supposed to **join scanner output to the coverage map**. A vendor default setup, a default Semgrep ruleset, and an empty dashboard are not what you trust.
+
+Who can make this go wrong in this story: alert fatigue plus an always-true gate. That stands in for “code scanning is on and the dashboard is noisy so we ship Fridays,” a maturity score on a slide, or fifty unmapped HIGHs treated as probable false positives.
+
+## Picture: every finding ships
 
 ```mermaid
 flowchart TD
   Any[any findings] --> True[ship_ok true]
 ```
 
-The vulnerable tree demonstrates **cause** (no join to 9.1). Do not run scanners against public targets. Preconditions: `ship_ok` returns true for every pair. You do not need GHAS. You must not scan a public repo.
+The broken files take that path on purpose. You do not need a vendor console. You must not scan a public repo. The true return *is* the leak of the release decision.
 
-ASVS `v5.0.0-15.2.1` wants components inside documented update timeframes — an SCA *signal*, not the map. Module 9.1 already said status is not coverage; this cell is **unowned HIGH must not ship**. Gate 9 stays **not-attempted**.
+The coverage lesson already said status is not coverage. This check is **unowned HIGH must not ship**.
 
-## What to read in the fixture
+## What to look at — cause, not a dump
 
-`vulnerable/sast.py` returns true for every pair. Tests:
+Read `vulnerable/sast.py`. It returns true for every pair. Tests:
 
 - `test_unmapped_high_blocks_ship`
-- `test_mapped_high_may_ship` — mapped HIGH may pass on both
+- `test_mapped_high_may_ship` — a mapped HIGH may pass on both
 
 You do not need a new finding id. The failure of `test_unmapped_high_blocks_ship` *is* the evidence.
 
-Do not open the fixed tree yet. Diagnose the cause first.
+Do not open the repaired files yet. Diagnose the cause first.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+| What you see | What kind of failure | Not the lesson |
+|---|---|---|
+| `return True` for every pair | No join to the coverage map | “Code scanning is on” |
+| `ship_ok([HIGH], {})` is true | Unmapped HIGH allowed to ship | A vendor dashboard |
+| No map lookup | The gate accepted the finding | A maturity score on a slide |
 
-| Slice | This lab |
+## Why it happens vs what it costs
+
+| Slice | Practice |
 |---|---|
-| Required property | `ship_ok([HIGH], {})` is false |
-| Root cause | Scanner output not joined to the 9.1 map |
-| Preconditions | `ship_ok` true for every pair |
-| Trigger | Release with unmapped HIGH |
-| Impact | Unknown HIGH in prod |
-| Prevention | Block unmapped HIGH; mapped+accepted needs E6 expiry |
-| Detection | `unmapped_high_blocks`; never the payload |
-| Recovery | Map or fix; do not silent-suppress |
-| Not the lesson | A product name; live GHAS; Gate 9 complete |
+| The rule | `ship_ok([HIGH], {})` is false |
+| Why it happens | Scanner output not joined to the coverage map |
+| What has to be true first | `ship_ok` true for every pair |
+| Trigger | Release with an unmapped HIGH |
+| What it costs | Unknown HIGH in production |
+| How you stop it later | Block unmapped HIGH; a mapped HIGH you accept still needs an exception with an expiry |
+| How you notice later | `unmapped_high_blocks`; never the payload |
+| How you recover later | Map it or fix it; do not hide it quietly |
+| Out of scope | A product name, live GitHub, or claiming the verification gate is done |
 
-## Framework defaults versus the ship guarantee
-
-Code scanning “default setup” is inventory of *some* findings. Reachability may record a false positive — with an owner — it does not silently drop HIGH. FastAPI will still ship if CI’s `ship_ok` is always true. The application guarantee is: **this** fixture, empty map plus HIGH is deny.
+A web framework will still ship if CI’s `ship_ok` is always true. The app’s promise this week is: **this** fixture, empty map plus HIGH is deny.
 
 ## Practice
+
+From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/9.4/9.4-lab/tests --impl vulnerable
 ```
 
-Run from `labs/9.4/9.4-lab` if a repo-root collection picks up `site/`. Record `test_unmapped_high_blocks_ship`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/9.4/9.4-lab` if a collection at the repo root picks up `site/`. Record `test_unmapped_high_blocks_ship`. Do not probe public hosts. An environment error is not security evidence.
 
-## Transfer
+## Use it somewhere new
 
-Clinic 50 unmapped HIGHs: predict without leaving this directory. Do not scan a live GitHub org.
+Clinic: fifty unmapped HIGHs — predict without leaving this directory. Do not scan a live GitHub org.
 
-## Non-goals
+## What this page is not doing
 
-No live-target or vendor-tenant instructions. Do not claim Gate 9. SSDF 1.2 IPD stays labeled draft.
+No live-target steps. Fake `F1` only. Do not dump real scanner payloads into the practice files. Do not “fix” the practice by deleting the test.

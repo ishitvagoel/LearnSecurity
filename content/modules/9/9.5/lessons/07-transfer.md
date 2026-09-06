@@ -1,52 +1,67 @@
-# 9.5-LO-07 — Transfer: clinic pentest PDF shelf
+# Same idea: clinic pentest PDF shelf
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** OWASP WSTG 4.2 (final). CVSS 4.0 as input. CISA KEV as context. ASVS `v5.0.0-8.2.1`. WSTG 5.0 remains **draft**. Local scope only.
 
-## Change the workplace; keep PDF from meaning closed
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: `close_finding({"retest": None})` must be false. Rewrite it for a clinic without changing the fork.
+The notes-app scaffolding goes away. You get a **clinic pentest PDF on a shelf**. Your job is to rewrite the loop, not to name a bug-list code.
 
-**Prompt:** Clinic pentest PDF shelf. Also name KEV vs internal-only.
+The notes-app sentence was: `close_finding({"retest": None})` must be false. Rewrite it for a clinic without changing the fork: missing retest denied, passing retest may close. A PDF on a shelf is still a report, not a retest.
 
-**Product sketch:** EHR-lite “the assessor delivered a 40-page PDF with CVSS 9.8 so we closed isolation,” plus “KEV says we must scan the hospital portal.”
+**Product sketch:** an EHR-lite "the assessor delivered a 40-page PDF with severity 9.8 so we closed isolation," plus "the known-exploited list says we must scan the hospital portal."
 
-Rewrite the SecureCollab sentence. Include:
+## Picture: same close loop, clinical object
 
-1. attacker capabilities (paper-compliance closer — not a live clinic);
-2. trust assumptions (same-cell retest is TCB; PDF/CVSS/KEV are not);
-3. forbidden outcome (`close_finding({retest: None})` true, not “HIPAA”);
-4. a test idea on a **local** fixture only (no live pentest);
-5. residual (variants, `v5.0.0-8.3.2` Level 3, business vs CVSS priority);
-6. WCAG if engineers read the report (structure, not color-only severity).
+Renaming "note" to "chart" is not transfer. Rule, retest, and leftover change. Filing the PDF and marking the ticket Done does not set `retest` to `"pass"`.
 
-## Mental model: shelf vs pytest
+| Notes app this week | Clinic sketch |
+|---|---|
+| Bob must not read alice's note | A clinic staffer must not read another patient's chart |
+| Isolation pytest must pass before close | Same isolation pytest on a **local** fixture |
+| `close_finding({"retest": None})` | Same call — missing retest still denied |
+| Paper-compliance closer | Same closer — **not** a live clinic |
+| PDF / severity / known-exploited list | Same inputs — not the close decision |
 
 ```mermaid
 flowchart LR
   Pdf[PDF on a shelf] --> Belief[remediated]
-  None[retest None] --> Reality[cell still open]
+  None[retest None] --> Reality[rule still open]
 ```
 
-If the PDF is filed while `close_finding` is always true, the cell is gone. Jira Done, CVSS 9.8, and a KEV listing do not set `retest` to `"pass"`. Field grain (7.2) and grant-change cache (`v5.0.0-8.3.2`) are the same close-loop family — name them, do not pentest a live EHR here. WSTG 5.0 is in development; 4.2 is the final pin. KEV is whether exploitation is *observed in the wild* for an internal-only bug, not a license to scan a public clinic.
+If the PDF is filed while `close_finding` is always true, the rule is gone. A ticket marked Done, a 9.8 severity, and a known-exploited listing do not set `retest` to `"pass"`. Extra fields and a role-change cache are the same close-loop family — name them, do not pentest a live clinic system here. A testing-catalogue draft is in development; the current final pin is the published catalogue. A known-exploited list is whether exploitation is *observed in the wild* for an internal-only bug, not a licence to scan a public clinic.
 
-The clinic rewrite still has to keep the SecureCollab fork: missing retest denied, passing retest may close. Uploading the PDF without a retest field leaves `close_finding({retest: None})` true. The local pytest analogue is `test_cannot_close_without_retest` — on a fixture, not a live host.
+The clinic rewrite still has to keep the notes-app fork: missing retest denied, passing retest may close. Uploading the PDF without a retest field leaves `close_finding({retest: None})` true. The local pytest analogue is `test_cannot_close_without_retest` — on a fixture, not a live host.
 
-## What graders reject
+## Prompt — clinic pentest PDF on a shelf
+
+Rewrite the notes-app sentence. Include:
+
+1. who can act (paper-compliance closer — not a live clinic);
+2. what you trust (same-rule retest is the promise; PDF, severity score, and a known-exploited list are not);
+3. what must not happen (`close_finding({retest: None})` true, not a legal label);
+4. a test idea on a **local** fixture only (no live pentest);
+5. leftover (variants, role-change cache, business vs severity priority);
+6. whether engineers read the report (structure, not color-only severity).
+
+Use fake labels. Do not use real patient names.
+
+Also name known-exploited list vs internal-only.
+
+## What is not good enough
 
 | Reject | Why |
 |---|---|
-| “CVSS 9.8 so we closed” | Input, not retest |
-| Live clinic / public KEV scan | Lab policy |
-| “WSTG 5.0” as final | 5.0 is in development; 4.2 is the final pin |
-| Jira Done as this cell | Workflow, not the predicate |
-| PDF attachment as `retest` | Report is not the same-cell pytest |
+| "Severity 9.8 so we closed" | Input, not retest |
+| Live clinic / public known-exploited scan | Course rules |
+| A testing-catalogue draft as the current final pin | Draft, not this week's pin |
+| Ticket Done as this topic | Workflow, not the check |
+| PDF attachment as `retest` | Report is not the same-rule pytest |
 
 ## Practice
 
-One page. No keys. `labs/9.5/9.5-lab` is the only running system you may break. Do not pentest a public host.
+One page. No answer keys. `labs/9.5/9.5-lab` is the only running system you may break. Do not pentest a public host.
 
-## Non-goals
+## What this page is not doing
 
-Live-target pentest. Real PHI in findings. Claiming Gate 9 from this page.
+Live-target pentest. Real patient charts in findings. Claiming you finished an assurance gate from this page.

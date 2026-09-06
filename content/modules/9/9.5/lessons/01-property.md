@@ -1,82 +1,98 @@
-# 9.5-LO-01 — A PDF is not a retest
+# A PDF is not a retest
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** OWASP WSTG 4.2 (final) as catalogue. ASVS `v5.0.0-8.2.1`; `v5.0.0-8.3.2` is **Level 3, advanced**. FIRST CVSS 4.0 (final) as *input*. CISA KEV as **awareness** context. Scope: local lab only.
 
-## The claim this module owns
+## The rule
 
-SecureCollab may receive an authorized assessment of AUTHZ-1 (cross-tenant read). Closing the finding requires a **passing retest of that same forbidden outcome**. A PDF on a shelf, a Jira Done, or a CVSS number is not that predicate.
+The notes app may get an authorized check of isolation: bob must not read alice's note. Closing that finding needs a **passing retest of that same bad result**. A PDF on a shelf, a ticket marked Done, or a severity number is not that check.
 
 > `close_finding({"retest": None})` must be false. `close_finding({"retest": "pass"})` may be true.
 
-The forbidden outcome is **finding closed without retest**. That is integrity of the fix loop — the hole can still be there.
+So what must not happen: **a finding closed without a retest**. That is honesty of the fix loop — the hole can still be there.
 
-WSTG 4.2 names *what* to try in an authorized web assessment; it does not close tickets. CVSS 4.0 Base/Threat/Environmental metrics inform priority; a 9.8 does not outsource judgment. KEV says whether exploitation is *observed in the wild* — useful context for an internal-only bug, not a license to scan public clinics. `v5.0.0-8.3.2` (immediate grant change) is **Level 3, advanced**: retest the *cache after role change*, not a different URL.
+A testing catalogue names *what* an authorized web check may try. It does not close tickets. A severity score tells you how to rank work. A 9.8 does not make the close decision for you. A known-exploited list says whether someone has seen the bug used in the wild. That is useful context for an internal-only bug. It is not a licence to scan a public clinic.
 
-**Scope:** this course’s local fixture or official labs. Do not instruct attacks on public or third-party systems.
+If you later require that a role change takes effect right away, retest the cache after the role change, not a different URL. That is extra, advanced work, not this week's check.
 
-## Mental model: report vs retest
+This week's practice is this course's local files or official labs. Do not tell anyone to try attacks on public or third-party systems.
+
+## Picture: a report is not a retest
 
 ```mermaid
 flowchart TD
   Pdf[assessment PDF] --> Record[evidence of a test]
-  Retest["same cell pytest pass"] --> Close[may close]
+  Retest["same isolation pytest pass"] --> Close[may close]
   Pdf --> NotClose[not close]
 ```
 
-## Mental model: CVSS is an input
+## Picture: a severity score is an input
 
 ```mermaid
 flowchart LR
-  Cvss["CVSS 4.0"] --> Pri[priority input]
-  Kev[KEV] --> Exp[exploitation context]
-  Retest[same-cell pass] --> Decision[close]
+  Cvss["severity score"] --> Pri[priority input]
+  Kev[known-exploited list] --> Exp[exploitation context]
+  Retest[same-rule pass] --> Decision[close]
 ```
 
-**Mechanism (not the property):** Jira Done, a pentest vendor logo, CVSS 9.8, KEV listing.
+**A tool, not the rule:** a ticket marked Done, a vendor logo on a pentest PDF, a 9.8 severity, a known-exploited listing.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## People who can close without a retest
 
-| Slice | For this property |
+| Person | What they can do here | Motive | Harm if close ignores retest |
+|---|---|---|---|
+| Paper-compliance closer | Mark the ticket Done after the PDF lands | Look finished | Isolation hole stays; leftover looks closed |
+| Severity-only triage | Treat 9.8 as the close decision | Rank and move on | Score is input, not a passing pytest |
+| Someone who treats a known-exploited list as a scan licence | Point a scanner at a public clinic | "It's on the list" | Out of scope; still no local retest |
+
+You do not need a nation-state this week. Those three already close the finding without a retest.
+
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
+
+Someone closed on intent. That is the cause. The remaining isolation hole is a **result**, not the cause.
+
+| Slice | For this rule |
 |---|---|
-| Root cause | Closure on intent |
-| Preconditions | `close_finding({retest: None})` true |
-| Trigger | Ticket marked done after the PDF |
-| Impact | Vulnerable still there; false residual |
-| Prevention | Require retest of the same cell |
-| Detection | `finding_closed_without_retest` |
-| Recovery | Reopen; hunt variants |
+| Why it happens | Close looks at intent (PDF, ticket Done) |
+| What has to be true first | `close_finding({retest: None})` is true |
+| Trigger | Ticket marked Done after the PDF |
+| What it costs | Vulnerable still there; leftover looks closed |
+| How you stop it | Require a retest of the same rule |
+| How you notice | `finding_closed_without_retest` |
+| How you recover | Reopen; hunt variants of the same cause |
 
-## Framework defaults versus the close guarantee
+## What the framework does vs what you still have to check
 
-Issue trackers have a Done state. That is not 9.3’s forbidden-outcome test.
+Issue trackers have a Done state. That is a workflow default. It is not a passing retest of "bob must not read alice's note."
 
-## Mechanism limits
+The app's promise is: **this** `close_finding({"retest": None})` is false. The local check is `labs/9.5/9.5-lab`. Fake data only. No live clinics. No real people's notes.
 
-- Retest of a different endpoint.
-- Variants of the same root cause (field grain 7.2).
-- CVSS vs business priority still needs a human.
+## What the tool cannot do
 
-## Usability and accessibility
+- A retest of a different endpoint (`/health` 200 is not isolation).
+- Variants of the same root cause (extra fields on the note).
+- Severity vs business priority still needs a human.
+- A role-change cache that still serves the old grant. That is extra work, not this week's check.
 
-Reports used by engineers must be readable: structure cause/impact/retest, not color-only severity (WCAG 2.2 1.4.1).
+## Can people still use it
+
+Reports that engineers read must be readable: cause, impact, retest command. Do not encode severity as color only.
 
 ## Practice
 
-Write a three-line report: cause, impact, retest cmd. Then run:
+Write a three-line report: cause, impact, retest command. Then run:
 
-```
+```text
 python3 -m pytest labs/9.5/9.5-lab/tests --impl vulnerable
 python3 -m pytest labs/9.5/9.5-lab/tests --impl fixed
 ```
 
 The first command must fail. The second must pass.
 
-## Transfer
+## Use it somewhere new
 
-KEV vs internal-only. Clinic pentest PDF shelf.
+Known-exploited list vs an internal-only bug. Clinic pentest PDF on a shelf.
 
-## Non-goals
+## What this page is not doing
 
-Live-target pentests, real PII, weaponized copy-paste exploits. Gates 0–10 and M0–M5 stay **not-attempted**. Answer keys are not in this file.
+Live-target pentests, real people's data, copy-paste exploits. Do not claim you finished an assurance gate from this page. Answer keys are not in this file.

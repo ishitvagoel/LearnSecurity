@@ -1,64 +1,74 @@
-# 9.3-LO-04 — Require a named forbidden outcome
+# Require a named what-must-not-happen
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.1` as *what*; this module owns *shape*. NIST SSDF 1.1 (final) PW.8. `v5.0.0-15.4.1` is **Level 3, advanced**.
 
-## Structural means the predicate looks for the forbidden outcome
+## The rule
 
-`is_security_test` must require `forbidden_outcome`. HTTP 200 alone is a product test. Structural means that flag — not pytest-cov, not WSTG membership, not “status_asserted and we listed WSTG-ATHZ.”
+A denylist of yesterday’s test names is not the fix. Hiding a coverage warning is not the fix. “We ticked a testing-guide row” is not the fix.
 
-The smallest restore for SecureCollab’s AUTHZ-1 suite is: 200-only → not a security test. Fail-safe: missing flag is false. Do not fail open because coverage is 94%. Do not accept a fuzzer without an oracle as the flag.
+The structural change is: `is_security_test` **requires `forbidden_outcome`**. HTTP 200 alone is a product test. Structural means that flag — not line coverage, not testing-guide membership, not “status asserted and we listed a catalogue id.”
 
-## Mental model: shape gate
+The smallest restore for the notes app’s isolation suite is: 200-only → not a security test. Fail-safe: missing flag is false. Do not fail open because coverage is 94%. Do not accept a fuzzer with no named bad result as the flag.
+
+## Picture: shape gate
 
 ```mermaid
 flowchart TD
-  Call[is_security_test] --> Fo{forbidden_outcome?}
+  Call[is_security_test] --> Fo{named what-must-not-happen?}
   Fo -->|yes| Allow[security test]
   Fo -->|no| Deny[not]
 ```
 
-The lab’s fixed tree requires `forbidden_outcome`. Production still needs the named outcome to *match* 1.2 (bob must not read alice’s note) — a well-shaped test can still miss field grain (7.2). Exploratory testing remains 9.5. Level 3 concurrency tests (`v5.0.0-15.4.1`) still need an oracle (“TOCTOU must not grant”), not “the fuzzer ran.”
+The repaired files require `forbidden_outcome`. Production still needs the named case to *match* who-is-allowed (Bob must not read Alice’s note) — a well-shaped test can still miss field grain (7.2). Looking around remains 9.5. Race-condition tests still need a named bad result (“the race must not grant”), not “the fuzzer ran.”
 
-SSDF 1.1 PW.8 wants tests against requirements. This pytest is that sentence for 200-only.
+A testing standard that says “test against the requirement” is vocabulary. This pytest is that sentence for 200-only.
 
-## Why this restores the cell
+## What the repaired files must show
+
+Read `fixed/stest.py` against this checklist. Do not treat the snippet as a production scanner.
 
 | After the fix | Must be true |
 |---|---|
 | `{status_asserted: True}` | not a security test |
 | `{forbidden_outcome: True, status_asserted: True}` | may be a security test |
 
+Fail closed: if you are unsure whether a row names what must not happen, it is **not** a security test. Uncertainty is a no on “this may occupy the security slot,” not a yes because coverage looked high.
+
 ## What this is not
 
-pytest-cov. WSTG membership. A fuzzer without an oracle. Gate 9. Snapshot tests as isolation. FastAPI TestClient 200 as AUTHZ-1.
+- Line coverage.
+- Testing-guide membership.
+- A fuzzer with no named bad result.
+- A later gate sticker.
+- Snapshot tests as isolation.
+- A FastAPI test-client 200 as the isolation check.
 
-## Mechanism limits
+## What the tool cannot do
 
-- A well-shaped test can still miss a grain (7.2 fields).
-- Exploratory testing remains 9.5.
-- Level 3 concurrency tests still need an oracle.
-- 9.1 can still map a lying `asserts_isolation` flag if humans set it by mistake.
+- A well-shaped test can still miss a field (7.2).
+- Looking around remains 9.5.
+- Race-condition tests still need a named bad result.
+- Lesson 9.1 can still map a lying isolation flag if people set it by mistake.
+
+## Can people still use it
+
+A failing security test must say what must not happen in the assertion message, not only “assert False.”
 
 ## Practice
 
-Name the forbidden outcome for AUTHZ-1 (cross-tenant GET must not succeed). Run:
+Name the what-must-not-happen for the isolation row (cross-company GET must not succeed). Run:
 
 ```text
 python3 -m pytest labs/9.3/9.3-lab/tests --impl fixed
 ```
 
-Must pass. Run from the lab directory if collection at repo root is polluted.
+It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-## Transfer
+## Use it somewhere new
 
-Clinic: replace `test_get_patient_200` with “other clinician must not 200.”
+Clinic: replace `test_get_patient_200` with “other clinician must not 200.” The lab still uses fake descriptors.
 
-## Residual risk
+## What can still go wrong
 
-Well-shaped tests that still miss field grain (7.2); exploratory 9.5; L3 TOCTOU (`v5.0.0-15.4.1`) without an oracle.
-
-## Non-goals
-
-Do not fuzz a public host. Do not claim Gate 9 from a coverage screenshot. Do not present WSTG 5.0 as final.
+Well-shaped tests that still miss field grain (7.2). Looking around (9.5). A race-condition test with no named bad result.

@@ -1,56 +1,61 @@
-# 9.3-LO-08 — Review status-only is_security_test as a PR
+# Review status-only is_security_test like a pull request
 
 **Kind:** code-review
 **Loop step:** Review
-**Standards:** OWASP ASVS 5.0.0 (final) as catalogue. WSTG 4.2 (final).
 
-## Review the fixture as if it were SecureCollab’s security suite gate
+Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
 
-Review `labs/9.3/9.3-lab/vulnerable/` as a SecureCollab PR. Your job is not to count suspicious lines. Reconstruct whether `{status_asserted: True}` still counts as a security test, compare that with the module invariant, and write changes a developer can verify.
+## What you are reviewing
 
-Intended findings live only in `content/assessment/keys/9.3.md` — not here. Do not open the keys file until your review has been evaluated.
+A colleague ships the notes app’s security-suite gate. Review `labs/9.3/9.3-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `{status_asserted: True}` still counts as a security test, compare that with the rule, and write changes a developer can verify.
 
-## Mental model: assert r.status_code==200 only
+Start at `is_security_test` and the 200-only row, not at a scanner color or a coverage screenshot. The check you already ran (`test_http_200_only_is_not_a_security_test`) is the rule test. A comment “will add isolation later” is not.
 
-Start with this seeded smell: **`assert r.status_code==200` only**. Label it property, mechanism, or false assurance before you accept the PR.
+## Picture: assert r.status_code==200 only
+
+Start with this seeded smell: **`assert r.status_code==200` only**. Label it rule, tool, or false comfort before you accept the change.
 
 ```mermaid
 flowchart TD
-  Claim[PR claim] --> Q{"What would falsify it?"}
-  Q -->|200-only counted as security| Property["Property - good if tested"]
-  Q -->|pytest-cov| Mechanism[Mechanism - coverage]
-  Q -->|WSTG tick| False[False assurance]
+  Claim[PR claim] --> Q{"What would show it is false?"}
+  Q -->|200-only counted as security| Property["Rule - good if tested"]
+  Q -->|line coverage| Mechanism[Tool - coverage]
+  Q -->|testing-guide tick| False[False comfort]
 ```
 
-Classification starts at the protected effect (200-only is not a security test). Everything that is not a named forbidden outcome at that call is a candidate happy-path path. A coverage screenshot without that pytest is the same smell, not a different finding class.
+Classification starts at the protected effect (200-only is not a security test). Everything that is not a named what-must-not-happen at that call is a candidate happy-path path. A coverage screenshot without that pytest is the same smell, not a different finding class.
 
-Chaos / fuzz without an authz oracle is 9.5 residual. Field grain is 7.2. Do not skip `test_http_200_only_is_not_a_security_test`. Do not claim Gate 9. Do not treat cov % as 1.2.
+Fuzz with no named bad result is leftover 9.5. Field grain is 7.2. Do not skip `test_http_200_only_is_not_a_security_test`. Do not claim a later gate. Do not treat coverage percent as the isolation check.
 
 ## Seeded smells (label them yourself)
 
 - `assert r.status_code==200` only
-- No cross-tenant test
+- No cross-company test
 - Security suite empty
-- Chaos / fuzz without authz oracle
+- Chaos / fuzz with no who-is-allowed named bad result
 
-Also reject: live targets; closing findings without re-running `test_http_200_only_is_not_a_security_test`; keys in lessons; claiming Gate 9; treating cov % as 1.2.
+Also reject: live targets; closing findings without re-running `test_http_200_only_is_not_a_security_test`; keys in learner notes; claiming a later gate; treating coverage percent as the isolation check.
 
-## Misconceptions this module refuses
+## Common mix-ups
 
 - Coverage is security
-- Fuzzing finds all authz bugs
+- Fuzzing finds all who-is-allowed bugs
 - Snapshot tests are isolation tests
-- WSTG 5.0 is the current final pin
-- Gate 9 follows from a green suite
+- A draft testing guide is the current pin
+- A later gate follows from a green suite
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: observation, property or false assurance, suggested structural change, residual you will **not** delete. Tie at least one to `test_http_200_only_is_not_a_security_test`.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_http_200_only_is_not_a_security_test`. Do not open the keys file.
 
-## Transfer
+## Use it somewhere new
 
-Clinic PR that “added test_get_patient_200 as the security test” is an incomplete verification review. Name the independent falsehood that would still keep 200-only from counting as security.
+Clinic change that “added test_get_patient_200 as the security test” is an incomplete review of whether 200-only still counts as security. Name the independent falsehood that would still keep 200-only from counting as security.
 
-## Non-goals
+## Can people still use it
 
-Do not merge by adding a comment “will add isolation later.” That comment is a residual without an owner. Do not fuzz a public host to prove the finding.
+A failing security test must say what must not happen in the assertion message, not only “assert False.”
+
+## What this page is not doing
+
+Do not merge by adding a comment “will add isolation later.” That comment is leftover without an owner. Do not fuzz a public host to prove the finding.

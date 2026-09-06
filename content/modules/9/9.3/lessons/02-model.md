@@ -1,66 +1,75 @@
-# 9.3-LO-02 — Forbidden outcome vs happy path
+# The bad case vs the happy path
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** OWASP WSTG 4.2 (final) as catalogue. ASVS `v5.0.0-8.2.1`. NIST SSDF 1.1 PW.8.
 
-## Can a second engineer name pytest cases from your shape map?
+## Could someone else name the checks?
 
-“We have WSTG coverage” is not this lesson. A reviewable model names **the forbidden outcome, the subject, and the object**.
+“We ticked a testing-guide row” is not this lesson. A drawing someone else can test names **what must not happen, who is acting, and which object**.
 
-SecureCollab freeze: local `is_security_test(t)`. No live scanners.
+This week's freeze for the notes app: local `is_security_test(t)`. No live scanners.
 
-## Mental model: two suites
+> For a row with only `status_asserted`, the rule is deny. A named `forbidden_outcome` may count. Evidence that the deny is false: `is_security_test({"status_asserted": True})` is true.
+
+If the isolation row is blank about what must not happen, the suite looks green because nobody named the bad case.
+
+## Picture: two suites
 
 ```mermaid
 flowchart TD
   Happy[HTTP 200 owner] --> Product[product test]
-  Forbid["cross-tenant must not 200"] --> Security[security test]
+  Forbid["cross-company must not 200"] --> Security[security test]
 ```
 
-## Mental model: lint membership is not a test
+## Picture: a catalogue checkbox is not a test
 
 ```mermaid
 flowchart LR
-  Wstg[WSTG row] --> Inventory[catalogue]
-  Pytest[forbidden outcome assert] --> Evidence[evidence]
+  Guide[testing-guide row] --> Inventory[catalogue]
+  Pytest[what-must-not-happen assert] --> Evidence[evidence]
   Inventory --> NotE[not evidence]
 ```
 
-## Step 1: freeze pieces
+A list of things you might test is inventory. A pytest that names the bad case is evidence. Mixing them is how a checkbox becomes false comfort.
+
+## Step 1: name the pieces
+
+Do not invent a new catalogue. Take the tests you already have and ask whether each one names a bad case.
 
 | Piece | This system |
 |---|---|
-| Subjects | optimistic QA; empty security folder |
-| Objects | AUTHZ-1; HTTP 200 assert |
+| Who | Optimistic QA; empty security folder |
+| What | Isolation row; HTTP 200 assert |
 | Actions | `is_security_test` |
-| Channels | CI |
-| TCB | forbidden-outcome predicate |
-| Untrusted | cov %, lint, WSTG checklist |
-| State / time | suite grows; 9.5 exploratory residual |
-| 1.1 cell | integrity of the verification suite |
+| Paths | CI |
+| What you trust for this journey | The named-what-must-not-happen check |
+| What you do not trust | Line coverage; lint; a testing-guide checkbox |
+| Time | The suite grows; looking around remains 9.5 |
+| The rule | Honesty of the test suite |
 
-## Step 2: write cells
+## Step 2: write allow and deny
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
 | status-only row | security suite | count as security test | deny |
-| forbidden_outcome named | security suite | count as security test | may allow |
-| fuzz without oracle | AUTHZ-1 | count as covered | deny |
-| WSTG membership | suite | count as pass | deny |
+| `forbidden_outcome` named | security suite | count as security test | may allow |
+| fuzz with no named bad result | isolation row | count as covered | deny |
+| testing-guide membership | suite | count as pass | deny |
+
+A missing bad-case × isolation row is how 200-only occupies the security slot. Write the hole.
 
 ## Practice
 
-Draw the two suites. Point at `labs/9.3/9.3-lab` file `stest.py`.
+Draw the two suites so someone else could name the checks. Point at `labs/9.3/9.3-lab` file `stest.py`.
 
-## Transfer
+## Use it somewhere new
 
-MASTG: a profile checkbox is catalogue, not shape.
+A mobile testing-profile checkbox is catalogue, not shape.
 
-## Residual risk
+## What can still go wrong
 
-Exploratory 9.5; field grain 7.2; concurrency L3 without an oracle.
+Looking around (9.5). Field grain (7.2). A race-condition test with no named bad result.
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+Do not define security as a famous-bugs list. Answer keys stay out of lessons.

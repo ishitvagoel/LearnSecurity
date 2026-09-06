@@ -1,80 +1,95 @@
-# 9.4-LO-01 — An unmapped HIGH cannot ship
+# An unmapped HIGH cannot ship
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-15.2.1`; `v5.0.0-15.2.4` is **Level 3, advanced**. NIST SSDF 1.1 PW.7 / PW.8. OWASP SAMM 2.0 as measurement vocabulary. SSDF 1.2 IPD is **draft**.
 
-## The claim this module owns
+## The rule
 
-SecureCollab CI may run SAST, SCA, and secret scanners. A HIGH finding that is not mapped to a 9.1 requirement is **unowned**. Unowned is not “probably fine.” The ship gate is a predicate over findings and the map, not a dashboard zero.
+The notes app’s CI may run SAST, SCA, and secret scanners. That is useful noise. It is not a ship decision.
+
+A HIGH finding that is not mapped to a row on the coverage map is **unowned**. Unowned is not “probably fine.” The ship check is a join: every HIGH id against that map. An empty dashboard is not the join.
 
 > `ship_ok([{"id": "F1", "sev": "HIGH"}], {})` must be false.
 
-The forbidden outcome is **unmapped HIGH finding allows ship**. That is integrity of the release decision — an unknown HIGH in prod.
+What must not happen: **an unmapped HIGH is allowed to ship**. That is integrity of the release decision. An unknown HIGH lands in production because nobody owned it.
 
-ASVS `v5.0.0-15.2.1` wants components inside documented update timeframes — an SCA *signal*, not the map. `v5.0.0-15.2.4` (dependency confusion) is **Level 3, advanced** and is a common scanner blind spot: mapping “no finding” is not coverage. SAMM Verification measures whether you *triage*; it is not `ship_ok`. GitHub code scanning default is not your policy.
+Industry lists want you to update components on a documented clock — that is an SCA *signal*, not the map. Dependency confusion is an **advanced leftover**: mapping “the scanner found nothing” is not coverage. A maturity score measures whether you *triage*. It is not `ship_ok`. A vendor’s default setup is not your policy.
 
-## Mental model: scanner is a signal
+## Picture: the scanner is a signal
 
 ```mermaid
 flowchart TD
   Tool[SAST or SCA] --> Finding[HIGH F1]
-  Finding --> Map{"id in 9.1 map?"}
+  Finding --> Map{"id on the coverage map?"}
   Map -->|no| Block[do not ship]
-  Map -->|yes| Own[owned - fix or E6]
+  Map -->|yes| Own[owned - fix or exception with expiry]
 ```
 
-## Mental model: zero findings is not 1.2
+## Picture: zero findings is not isolation
 
 ```mermaid
 flowchart LR
   Dash[empty dashboard] --> Belief[secure]
-  Authz[cross-tenant read] --> Reality["9.3 still required"]
+  Authz[cross-tenant read] --> Reality[isolation still required]
 ```
 
-**Mechanism (not the property):** GitHub code scanning, Semgrep default, Dependabot, a SAMM score.
+**A tool, not the rule:** a vendor’s default code scanning, a default Semgrep ruleset, Dependabot, or a maturity score on a slide.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Who can make an unmapped HIGH ship
 
-| Slice | For this property |
+| Person | What they can do here | Motive | Harm if HIGH is unowned |
+|---|---|---|---|
+| Alert-fatigued reviewer | Click through a noisy dashboard | Ship on Friday | Unknown HIGH in production |
+| Vendor dashboard | Show empty or noisy counts | Look green | No join to the coverage map |
+| Someone with a score on a slide | Treat the score as the gate | Pass an audit | Same unowned HIGH |
+
+You do not need a live GitHub org this week. Those three already ship the finding.
+
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
+
+Scanner output was never joined to the coverage map. That is the cause. The person who later reads production is a **result**, not the cause.
+
+| Slice | For this rule |
 |---|---|
-| Root cause | Scanner output not joined to 9.1 |
-| Preconditions | `ship_ok([HIGH], {})` true |
-| Trigger | Release with unmapped HIGH |
-| Impact | Unknown HIGH in prod |
-| Prevention | Block unmapped HIGH; mapped+accepted needs E6 expiry |
-| Detection | `unmapped_high_blocks` |
-| Recovery | Map or fix; do not suppress silently |
+| Why it happens | Scanner output not joined to the coverage map |
+| What has to be true first | `ship_ok([HIGH], {})` is true |
+| Trigger | Release with an unmapped HIGH |
+| What it costs | Unknown HIGH in production |
+| How you stop it | Block unmapped HIGH; a mapped HIGH you accept still needs an exception with an expiry |
+| How you notice | `unmapped_high_blocks` |
+| How you recover | Map it or fix it; do not hide it quietly |
 
-## Framework defaults versus the ship guarantee
+## What the framework does vs what you still have to check
 
-Code scanning “default setup” is inventory of *some* findings. Reachability may record a false positive — with an owner — it does not silently drop HIGH.
+A vendor “default setup” inventories *some* findings. Reachability may record a false positive — **with an owner** — it does not silently drop HIGH.
 
-## Mechanism limits
+The app’s promise is: **this** `ship_ok` with a HIGH and an empty map is deny. The local check is `labs/9.4/9.4-lab`. Fake finding id `F1` only. No live GitHub. No scanning other people’s repos.
 
-- Authz logic (1.2 / 4.4) is a scanner blind spot — 9.2 / 9.3.
-- Severity downgrade without evidence.
-- Mapped HIGH that is the wrong requirement id.
+## What the tool cannot do
 
-## Usability and accessibility
+- Who-is-allowed logic (isolation / object checks) is a scanner blind spot — you still need review and isolation tests.
+- A severity downgrade with no evidence.
+- A mapped HIGH that points at the wrong requirement id.
 
-Triage UI must be usable or people mass-suppress (WCAG 2.2 4.1.3: say *why* F1 is blocked).
+## Can people still use it
+
+The triage screen must be usable or people mass-suppress. Say *why* F1 is blocked, in words. Do not encode “blocked” as color only.
 
 ## Practice
 
-Triage one HIGH: reachability, map, or exception. Then run:
+Triage one HIGH: reachable, mapped, or an exception with an owner. Then run the local pair:
 
-```
+```text
 python3 -m pytest labs/9.4/9.4-lab/tests --impl vulnerable
 python3 -m pytest labs/9.4/9.4-lab/tests --impl fixed
 ```
 
 The first command must fail. The second must pass.
 
-## Transfer
+## Use it somewhere new
 
-SCA CVE vs actually called function. Clinic: 50 unmapped HIGHs.
+SCA: a CVE versus a function you actually call. Clinic: fifty unmapped HIGHs.
 
-## Non-goals
+## What this page is not doing
 
-Live GitHub orgs, claiming Gate 9, weaponized scanner dumps. Gates 0–10 and M0–M5 stay **not-attempted**. Answer keys are not in this file.
+Live GitHub orgs, claiming the verification gate is done, and weaponized scanner dumps. Answer keys are not in this file.

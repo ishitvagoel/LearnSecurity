@@ -1,14 +1,15 @@
-# 9.4-LO-06 — Detect unmapped_high_blocks without logging payloads
+# unmapped_high_blocks without logging payloads
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
-**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; NIST SSDF 1.1 (final) RV.1. ASVS 5.0.0 (final) `v5.0.0-15.2.1`.
 
-## Prevention is not absolute
+## Stopping it is not enough
 
-A new rule can fire a new HIGH after `ship_ok` was “fixed once.” Pair detect and recover. Do not log secret-scanner payloads or note bodies (3.1 / 5.3). Do not paste scanner snippets with PHI into Slack.
+A new rule can fire a new HIGH after `ship_ok` was “fixed once.” Pair notice and recover. Do not log secret-scanner payloads or note bodies. Do not paste scanner snippets with fake clinic text into Slack.
 
-## Mental model: unmapped HIGH is a signal
+## Picture: unmapped HIGH is a signal
+
+A blocked ship is a notice-and-recover problem, not a licence to quote the finding payload in the paging channel. Notice names the finding id. Recover maps or fixes. Neither reprints the payload.
 
 ```mermaid
 flowchart TD
@@ -17,39 +18,56 @@ flowchart TD
   Metric --> Stop[block ship]
 ```
 
-| Outcome | This module |
+Industry lists name detect, respond, recover. They do not pick a scanner product. They do not prove this finding is owned. Someone still has to own the leftover.
+
+Re-run `test_unmapped_high_blocks_ship` after any scanner-rule change. A green “code scanning on” tile is not that pytest. SCA CVEs that are not actually called still need an *owner* on the map — inventory them before you claim recover.
+
+## Signals that do not become a second leak
+
+| Outcome | This topic |
 |---|---|
-| Detect | `unmapped_high_blocks` |
-| Signal | finding id, sev, missing req; never the payload |
-| Recover | Map or fix; do not silent-suppress |
-| Residual | Authz blind spots; E6 exceptions; mass suppressions |
+| Notice | `unmapped_high_blocks` |
+| What the line holds | Finding id, severity, missing requirement; **never** the payload |
+| Respond | Stop the ship; do not paste the matching snippet into chat |
+| Recover | Map it or fix it; do not hide it quietly |
+| Leftover | Who-is-allowed blind spots; exceptions with expiry; mass suppressions |
 
-CSF 2.0 Detect / Respond / Recover name outcomes. They do not prove RV.1. A scanner-vendor name is not the property. Re-run `test_unmapped_high_blocks_ship` after any scanner-rule change; a green “code scanning on” tile is not that pytest. SCA CVEs that are not actually called still need an *owner* on the map — inventory them before claiming Recover.
+A vendor security dashboard will show finding counts and stay silent when CI’s `ship_ok` is always true. Detection must observe **empty map plus HIGH is deny**, not alert volume. If the alert includes a secret or a note body, you have opened the same leak as a log line and an extra vendor copy.
 
-## Framework defaults versus the operate guarantee
-
-A GitHub Security dashboard will show finding counts and stay silent when CI’s `ship_ok` is always true. Detection must observe **empty map plus HIGH is deny**, not alert volume. If the alert includes a secret or a note body, you have opened a 3.1 / 5.3 cell.
-
-## Practice
-
-Write one log line you would accept. Tie it to `labs/9.4/9.4-lab`.
+A log line a reviewer can accept looks like:
 
 ```text
 log_denied reason=unmapped_high_blocks finding=F1 sev=HIGH
 ```
 
-Reject any line that includes a secret, a note body, or “Gate 9 complete.”
+Not: a secret, a note body, or “verification gate complete.”
 
-## Transfer
+If your alert includes the matching scanner snippet, you have copied the leak into the paging channel.
 
-Clinic: block a release with 50 unmapped HIGHs; do not paste scanner snippets with PHI into Slack. Do not scan a live org.
+## What the framework does vs what you still have to check
 
-## Usability
+The same who-is-allowed holes that bypass this fixture will also bypass a “scan our dashboard” detector. Name those places before you claim recover. A scanner-product name is not the rule.
 
-Triage UI must be usable or people mass-suppress (WCAG 2.2 Success Criterion 4.1.3: say *why* F1 is blocked).
+## Can people still use it
 
-Cause vs impact stays split here too: the **cause** is CI’s `ship_ok` still always true (or a new HIGH with no map row); the **impact** is an unowned HIGH in prod; **prevention** is the join; **detection** is `unmapped_high_blocks`; **recovery** is map-or-fix, not a silent severity downgrade. Mechanism limit: this alert does not prove the mapped requirement is the right 9.1 cell, and it does not cover authz blind spots (9.2 / 9.3).
+The triage screen must say *why* F1 is blocked, in words. Do not encode “blocked” as color only, or people will mass-suppress. If operators see a blocked-ship badge, do not encode it as color only.
 
-## Non-goals
+Cause vs cost stays split here too: the **cause** is CI’s `ship_ok` still always true (or a new HIGH with no map row); the **cost** is an unowned HIGH in production; **how you stop it** is the join; **how you notice** is `unmapped_high_blocks`; **how you recover** is map-or-fix, not a quiet severity downgrade. What the tool cannot do: this alert does not prove the mapped requirement is the right coverage-map cell, and it does not cover who-is-allowed blind spots.
 
-A scanner-vendor name is not the property. Gate 9 stays not-attempted.
+## Practice
+
+Write one log line you would accept in review. Tie it to `labs/9.4/9.4-lab`.
+
+```text
+log_denied reason=unmapped_high_blocks finding=F1 sev=HIGH
+```
+
+Reject any line that includes a secret, a note body, or “verification gate complete.”
+
+## Use it somewhere new
+
+Clinic: block a release with fifty unmapped HIGHs; do not paste scanner snippets with fake patient text into Slack. Do not scan a live org.
+
+## What this page is not doing
+
+A scanner-product name is not the rule. Live org traces are out of scope. Answer keys stay out of lessons.

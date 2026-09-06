@@ -1,16 +1,17 @@
-# 9.5-LO-04 — Require retest equals pass
+# Require retest equals pass
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.1`. NIST SSDF 1.1 (final) RV.2. `v5.0.0-8.3.2` is **Level 3, advanced**. WSTG 4.2 (final) as catalogue. WSTG 5.0 is **draft**.
 
-## Structural means close looks at the retest field
+## The rule
 
-`close_finding` must require `retest == "pass"`. Missing, `"fail"`, or `"scheduled"` is deny. That is the lab stand-in for “the same 9.3 isolation command passed.” Structural means that equality — not a PDF attachment, not Jira Done, not CVSS 9.8.
+A PDF attachment is not the fix. A ticket marked Done is not the fix. "The severity is 9.8 so we closed it" is not the fix.
 
-The smallest restore for SecureCollab’s AUTHZ-1 close loop is: `{retest: None}` → cannot close. Fail-safe: missing field is deny. Do not fail open because the report was filed. Do not accept a retest of `/health` as the isolation cell.
+The structural change is: `close_finding` **requires `retest == "pass"`**. Missing, `"fail"`, or `"scheduled"` is deny. That is the lab stand-in for "the same isolation command passed." Structural means that equality — not a PDF, not a Done column, not a severity number.
 
-## Mental model: missing retest fails closed
+The smallest restore for the notes app's close loop is: `{retest: None}` cannot close. Fail-safe: a missing field is deny. Do not fail open because the report was filed. Do not accept a retest of `/health` as the isolation check.
+
+## Picture: missing retest fails closed
 
 ```mermaid
 flowchart TD
@@ -19,47 +20,58 @@ flowchart TD
   R -->|no| Deny[keep open]
 ```
 
-The lab’s fixed tree requires `retest == "pass"`. Production still needs that pass to be the *same* forbidden outcome (bob must not read alice’s note) — a well-labeled `"pass"` on a different URL is a lying retest. Field grain remains 7.2. Level 3 grant-change cache (`v5.0.0-8.3.2`) still needs a retest of *the cache after role change*, not a different endpoint.
+The repaired files require `retest == "pass"`. Production still needs that pass to be the *same* bad result (bob must not read alice's note) — a well-labeled `"pass"` on a different URL is a lying retest. Extra fields on the same note are still leftover. If a role change is supposed to take effect right away, you still need a retest of *the cache after the role change*, not a different endpoint.
 
-SSDF 1.1 RV.2 wants defects verified as fixed. This pytest is that sentence for close-without-retest.
+Defect lists want bugs verified as fixed. This pytest is that sentence for close-without-retest.
 
-## Why this restores the cell
+## What the repaired files must show
+
+Read `fixed/pentest.py` against this checklist. Do not treat the snippet as a production ticket product.
 
 | After the fix | Must be true |
 |---|---|
 | `{retest: None}` | close false |
 | `{retest: "pass"}` | close true |
 
+Fail closed: if you are unsure whether the retest hit the same isolation check, keep the finding open. Uncertainty is a **no** on close, not a yes because the PDF was filed.
+
 ## What this is not
 
-CVSS. KEV. Jira Done. A PDF. Gate 9. A retest of `/health`. WSTG membership. Exploratory leftovers as close.
+- A severity score.
+- A known-exploited listing.
+- A ticket marked Done.
+- A PDF.
+- An assurance gate sticker.
+- A retest of `/health`.
+- Membership in a testing catalogue.
+- Exploratory leftovers counted as close.
 
-## Mechanism limits
+## What the tool cannot do
 
 - A `"pass"` on the wrong URL still closes in this lab.
-- Same-root-cause variants (7.2 fields) are not searched by `close_finding`.
-- Level 3 grant-change cache (`v5.0.0-8.3.2`) is a different forbidden outcome.
-- Exploratory testing leftovers remain 9.5 residuals, not this predicate.
+- Same-root-cause variants (extra fields on the note) are not searched by `close_finding`.
+- A role-change cache that still serves the old grant is a different bad result. That is extra, advanced work.
+- Exploratory testing leftovers remain leftover, not this check.
 - `"scheduled"` is deny here; production may track a calendar without closing.
 
 ## Practice
 
-Name the residual (variants; wrong endpoint). Run:
+Name the leftover (variants; wrong endpoint). Run:
 
 ```text
 python3 -m pytest labs/9.5/9.5-lab/tests --impl fixed
 ```
 
-Must pass. Run from the lab directory if collection at repo root is polluted.
+It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-## Transfer
+## Use it somewhere new
 
-Clinic: keep the finding open until the isolation pytest is green.
+Clinic: keep the finding open until the isolation pytest is green. The lab still uses fake strings.
 
-## Residual risk
+## What can still go wrong
 
-Same-root-cause variants (7.2 fields); `v5.0.0-8.3.2` Level 3 caches; exploratory leftovers; business vs CVSS priority.
+Same-root-cause variants (extra fields). Role-change caches. Exploratory leftovers. Business priority vs a severity score.
 
-## Non-goals
+## What this page is not doing
 
-Do not pentest a public host. Do not claim Gate 9 from a PDF. Do not present WSTG 5.0 as final.
+Do not pentest a public host. Do not claim you finished an assurance gate from a PDF. Do not present a testing-catalogue draft as the current final pin.

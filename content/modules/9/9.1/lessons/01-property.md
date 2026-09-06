@@ -1,20 +1,21 @@
-# 9.1-LO-01 — Status=done is not AUTHZ-1 coverage
+# A done checkbox is not coverage
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.1`, `v5.0.0-8.2.2`; `v5.0.0-8.3.2` is **Level 3, advanced**. NIST SSDF 1.1 (final) PW.1 / PW.8. SSDF 1.2 IPD is **draft**. MASVS 2.1.0 + MASTG 2.0.0 for mobile rows.
 
-## The claim this module owns
+## The rule
 
-SecureCollab tracks `AUTHZ-1`: a member of tenant A must not read tenant B’s note (1.2 / 4.4). A spreadsheet cell `status=done` is **not** that property. Coverage is a predicate over tests: the row must name a test that **asserts isolation**.
+The notes app tracks a requirement we call AUTHZ-1: a member of company A must not read company B’s note. That rule came from the isolation work (1.2) and the object-level check (4.4). A spreadsheet cell that says status is done is **not** that rule.
+
+Coverage is a check over tests. The row must name a test that **asserts isolation** — that company B really cannot read company A’s note.
 
 > `covered("AUTHZ-1", [{"req": "AUTHZ-1", "asserts_isolation": False}])` must be false.
 
-The forbidden outcome is **status-only row counted as AUTHZ-1 coverage**. That is integrity of the assurance case — shipping 1.2 holes with a green gate.
+What must not happen: **a status-only row counted as AUTHZ-1 coverage**. That is honesty of the proof you show before a release. If the checkbox is green while the isolation test is missing, company-B holes ship with a green sticker.
 
-ASVS 5.0.0 Level 2 is the normal web/API backbone. `v5.0.0-8.2.1` is function-level; `v5.0.0-8.2.2` is object-level (the AUTHZ-1 grain). `v5.0.0-8.3.2` (authorization changes applied immediately, including serializers) is **Level 3, advanced** — if you elevate it, it still needs a test, not a copied chapter. SSDF 1.1 names PW.8 (test executable code against requirements) as vocabulary, not as Gate 9.
+A pasted industry checklist is inventory. It is not a tailored matrix. The usual web/API checklist is a backbone you still have to map. An extra advanced row — for example “permission changes apply immediately, including serializers” — still needs a test if you raise it. A development-practice guide that says “test the running code against the requirements” is vocabulary, not a finished verification gate. A later draft of that guide stays a **draft**.
 
-## Mental model: coverage predicate
+## Picture: coverage is a question about the test
 
 ```mermaid
 flowchart TD
@@ -23,58 +24,60 @@ flowchart TD
   Pred -->|yes| Cov[may be covered]
 ```
 
-## Mental model: wholesale paste is not tailoring
+## Picture: pasting the whole PDF is not tailoring
 
 ```mermaid
 flowchart LR
-  Pdf[ASVS PDF] --> Paste[every row status done]
+  Pdf[whole checklist PDF] --> Paste[every row marked done]
   Threat["1.2 isolation"] --> Test[pytest isolation assert]
-  Paste --> False[false assurance]
+  Paste --> False[false comfort]
 ```
 
-**Mechanism (not the property):** ASVS PDF, a Jira “done” column, pytest-cov percentage, SSDF attestation.
+**A tool, not the rule:** the PDF, a tracker “done” column, a pytest-cov percentage, or a practice-guide attestation.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | For this property |
+| Slice | For this rule |
 |---|---|
-| Root cause | Status without an isolation assert |
-| Preconditions | `covered` true when `asserts_isolation` is false |
+| Why it happens | Status without an isolation assert |
+| What has to be true first | `covered` is true when `asserts_isolation` is false |
 | Trigger | Release gated on the spreadsheet |
-| Impact | 1.2 holes ship with a green Gate 9 sticker |
-| Prevention | Coverage predicate requires the isolation assert |
-| Detection | `unmapped_req_blocks_release` |
-| Recovery | Add the test; do not backfill “done” |
+| What it costs | 1.2 holes ship with a green verification sticker |
+| How you stop it | Coverage requires the isolation assert |
+| How you notice | `unmapped_req_blocks_release` |
+| How you recover | Add the test; do not backfill “done” |
 
-## Framework defaults versus the coverage guarantee
+## What the framework does vs what you still have to check
 
-CI green is not AUTHZ-1. Copied-wholesale ASVS is inventory, not a tailored matrix. Exceptions need expiry (E6) or they are silent uncovered rows.
+A green CI job is not AUTHZ-1. Copied-wholesale checklists are inventory, not a tailored matrix. Exceptions need an expiry date (E6) or they are silent uncovered rows.
 
-## Mechanism limits
+The app’s promise this week is: **this** local check, a status-only row is not covered. The folder is `labs/9.1/9.1-lab`. Fake requirement ids only. No live checklist portals.
 
-- A test named `test_authz` that asserts HTTP 200 is 9.3’s failure, not this predicate.
-- Unmapped Level 3 risks remain if you never elevate.
-- MASVS spreadsheet without a MASTG test is the same hole on mobile (8.2 STORAGE).
+## What the tool cannot do
 
-## Usability and accessibility
+- A test named `test_authz` that only asserts HTTP 200 is a later failure (9.3), not this check.
+- Extra advanced rows stay unmapped if you never name them and never write a test.
+- A mobile storage spreadsheet without a matching test is the same hole on a phone (8.2).
 
-A human exception path must state what is uncovered and when it expires. Do not hide the gap behind “see PDF” (WCAG 2.2 4.1.3).
+## Can people still use it
+
+A human exception path must say what is still uncovered and when the exception expires. Do not hide the gap behind “see PDF.” Do not encode “uncovered” as color only.
 
 ## Practice
 
 One chain for AUTHZ-1. Then run:
 
-```
+```text
 python3 -m pytest labs/9.1/9.1-lab/tests --impl vulnerable
 python3 -m pytest labs/9.1/9.1-lab/tests --impl fixed
 ```
 
 The first command must fail. The second must pass.
 
-## Transfer
+## Use it somewhere new
 
-MASVS-STORAGE for 8.2. Clinic HIPAA “done” column.
+The mobile storage row from 8.2. A clinic HIPAA “done” column.
 
-## Non-goals
+## What this page is not doing
 
-Live ASVS portals, claiming Gate 9, weaponized scans. Gates 0–10 and M0–M5 stay **not-attempted**. Answer keys are not in this file.
+Live checklist portals, claiming you finished the verification gate, or weaponized scans. Gates stay **not-attempted**. Answer keys are not in this file.

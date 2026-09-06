@@ -1,56 +1,69 @@
-# 9.1-LO-05 — Evidence is status-only denied, then a passing pair
+# Fail on the broken files, then pass on the repaired ones
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.1`.
 
-## An invariant that cannot fail a test is still a slogan
+## If you cannot test it, it is still a slogan
 
-“Matrix imported” is not evidence. “CI is green” is a mechanism observation. The oracle is: `covered("AUTHZ-1", [status-only])` is false and `covered("AUTHZ-1", [isolation assert])` may be true. The status-only observation must be **false** on `--impl vulnerable` (returns true) and **true** on `--impl fixed`. Do not call an ASVS portal.
+“Matrix imported” is not evidence. “CI is green” is a tool observation. The check is: `covered("AUTHZ-1", [status-only])` is false and `covered("AUTHZ-1", [isolation assert])` may be true. That status-only observation must be **false** on the broken files and **true** on the repaired files. Do not call a live checklist portal.
 
-## Mental model: vulnerable must fail: status-only
+## Picture: a broken coverage check must fail the status-only test
 
-The failing observation on `--impl vulnerable` is **status-only**. A passing collection count is not this cell.
+A test that only counts passing tests can pass while a status-only row still counts as coverage. This check asks whether membership without an isolation assert still counts as a passing control. Broken must fail that question. Repaired must pass it.
 
 ```mermaid
 flowchart LR
-  V["--impl vulnerable"] --> F["Must fail status-only"]
-  X["--impl fixed"] --> P["Must pass deny"]
+  V["broken files --impl vulnerable"] --> F[Must fail: status-only counts]
+  X["repaired files --impl fixed"] --> P[Must pass: status-only is not covered]
 ```
 
-| Mode | Must show for this module |
-|---|---|
-| Negative / abuse | status-only → not covered; vulnerable must fail |
-| Normal | isolation assert → covered (may pass on both) |
-| Not claimed | real ASVS assessment; Gate 9; SSDF 1.2; that the named test actually isolates |
+If both pass, the test is not looking at `asserts_isolation`. If both fail, the fix is not structural or the check is wrong.
 
-Lab tests in `labs/9.1/9.1-lab/tests/test_property.py`. `test_status_only_row_is_not_coverage` is a **forbidden-outcome** test: membership without an isolation assert is not allowed to count as coverage.
+## Four modes, even for a coverage dict
+
+| Mode | Must show for this topic |
+|---|---|
+| Normal | Isolation assert → covered (may pass on both) |
+| Wrong input | status-only → not covered; broken files must fail |
+| Abuse | Unsure flags are not coverage (fail closed; leftover if not in this pytest) |
+| Not claimed | A real checklist assessment; the verification gate; a later draft of a practice guide; that the named test actually isolates |
+
+The file is `labs/9.1/9.1-lab/tests/test_property.py`. The test `test_status_only_row_is_not_coverage` is a **what-must-not-happen** test: membership without an isolation assert is not allowed to count as coverage.
+
+Honest isolation-assert rows may pass on both implementations. That does not excuse the status-only deny test. If the broken files do not fail `test_status_only_row_is_not_coverage`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/9.1/9.1-lab/tests --impl vulnerable
 python3 -m pytest labs/9.1/9.1-lab/tests --impl fixed
 ```
 
-Honest isolation-assert rows may pass on both implementations. That does not excuse the status-only deny test. If vulnerable does not fail `test_status_only_row_is_not_coverage`, the lab is miswired—fix the wiring, not the assertion.
+A test that only greps `AUTHZ-1` in a spreadsheet without calling `covered(..., [{"asserts_isolation": False}])` is not this topic’s evidence. This practice never opens a live checklist portal.
 
 ## What the tests do not prove
 
-- That the named test actually isolates tenants (9.3 owns shape)
-- That Level 3 `v5.0.0-8.3.2` is covered
-- MASVS-STORAGE on a device
-- SSDF 1.2 IPD (draft) as a product
-- Gate 9 complete
+- That the named test actually isolates companies (9.3 owns shape)
+- That an extra advanced row is covered
+- Mobile storage on a device (8.2)
+- A later draft of a practice guide as a product
+- The verification gate complete
 
-Record those as residuals or later modules, not as silent passes.
+Record those as leftover or later topics, not as silent passes.
 
 ## Practice
 
-Execute both implementations this session from the lab directory if needed. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `AUTHZ-1` in a spreadsheet without calling `covered(..., [{"asserts_isolation": False}])`.
+Run both this session from the lab directory if needed:
 
-## Transfer
+```text
+python3 -m pytest labs/9.1/9.1-lab/tests --impl vulnerable
+python3 -m pytest labs/9.1/9.1-lab/tests --impl fixed
+```
 
-Clinic: a test that only asserts the spreadsheet exports is not this cell. A live GRC scrape is out of scope.
+Paste nothing from answer keys. Write fail/pass into your notes next to the AUTHZ-1 row. Reject a “test” that only greps `AUTHZ-1` in a spreadsheet without calling `covered(..., [{"asserts_isolation": False}])`.
 
-## Non-goals
+## Use it somewhere new
 
-Do not add a live ASVS trophy. Do not log note bodies. Keys stay out of this file. Gate 9 stays not-attempted.
+Clinic: a test that only asserts the spreadsheet exports is not this topic. A live governance scrape is out of scope.
+
+## What this page is not doing
+
+Do not add a live checklist trophy. Do not log note bodies. Answer keys stay out of this file. The verification gate stays not-attempted.

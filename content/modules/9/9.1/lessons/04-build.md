@@ -1,16 +1,17 @@
-# 9.1-LO-04 — Coverage requires an isolation assert
+# Coverage requires an isolation assert
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.1`, `v5.0.0-8.2.2`. NIST SSDF 1.1 (final) PW.8. `v5.0.0-8.3.2` is **Level 3, advanced**. SSDF 1.2 IPD is **draft**.
 
-## Structural means the predicate checks the assert
+## The rule
 
-`covered` must require `req == req_id` **and** `asserts_isolation`. A row that only stores status is uncovered. Structural means that conjunction — not “we ran ASVS,” not pytest-cov, not Jira Done.
+A denylist of yesterday’s spreadsheet cells is not the fix. Hiding a scanner warning is not the fix. “We ran the checklist” is not the fix.
 
-The smallest restore for SecureCollab AUTHZ-1 tracking is: status-only → not covered. Fail-safe: missing flag is false. Do not fail open because the PDF was attached. Do not accept “we ran ASVS” as the isolation flag.
+The structural change is: `covered` **requires `req == req_id` and `asserts_isolation`**. A row that only stores status is uncovered. Structural means that conjunction — not “we ran the checklist,” not pytest-cov, not a tracker Done column.
 
-## Mental model: coverage and test both gates
+The smallest restore for the notes app’s AUTHZ-1 tracking is: status-only → not covered. Fail-safe: a missing flag is false. Do not fail open because the PDF was attached. Do not accept “we ran the checklist” as the isolation flag.
+
+## Picture: coverage and isolation are both gates
 
 ```mermaid
 flowchart TD
@@ -21,11 +22,13 @@ flowchart TD
   Iso -->|no| Deny
 ```
 
-The lab’s fixed tree requires both gates. Production still needs 9.3’s *shape*: a test that sets `asserts_isolation` while only checking HTTP 200 is a lying flag. Unmapped Level 3 (`v5.0.0-8.3.2`) remains if you never elevate it. MASVS-STORAGE without a MASTG test is the same hole on mobile (8.2). Exceptions need expiry (E6) or they are silent uncovered rows.
+The repaired files require both gates. Production still needs the later shape lesson (9.3): a test that sets `asserts_isolation` while only checking HTTP 200 is a lying flag. Extra advanced rows stay unmapped if you never raise them. Mobile storage without a matching test is the same hole on a phone (8.2). Exceptions need an expiry date (E6) or they are silent uncovered rows.
 
-SSDF 1.1 PW.8 wants executable tests against requirements. This pytest is that sentence for AUTHZ-1 status-only.
+A development-practice guide that wants executable tests against requirements is that sentence for AUTHZ-1 status-only. This pytest is the local stand-in.
 
-## Why this restores the cell
+## What the repaired files must show
+
+Read `fixed/trace.py` against this checklist. Do not treat the snippet as a production governance product.
 
 | After the fix | Must be true |
 |---|---|
@@ -33,35 +36,42 @@ SSDF 1.1 PW.8 wants executable tests against requirements. This pytest is that s
 | isolation-assert row | `covered` true |
 | empty list | `covered` false |
 
+Fail closed: if you are unsure whether a test asserts isolation, it does not count. Uncertainty is a **no** on “this may count as coverage,” not a yes because the PDF was attached.
+
 ## What this is not
 
-pytest-cov. Jira done. Copied-wholesale ASVS. SSDF 1.2 IPD (draft) as a sticker. Gate 9 complete. A test named `test_authz` that asserts HTTP 200 (9.3).
+- pytest-cov.
+- A tracker done column.
+- Copied-wholesale checklists.
+- A later draft of a practice guide used as a sticker.
+- The verification gate complete.
+- A test named `test_authz` that asserts HTTP 200 (9.3).
 
-## Mechanism limits
+## What the tool cannot do
 
-- A test named `test_authz` that asserts HTTP 200 is 9.3’s failure, not this predicate.
-- Unmapped Level 3 risks remain if you never elevate (`v5.0.0-8.3.2`).
-- MASVS spreadsheet without a MASTG test is the same hole on mobile (8.2 STORAGE).
+- A test named `test_authz` that asserts HTTP 200 is a later failure (9.3), not this check.
+- Extra advanced rows stay unmapped if you never elevate them.
+- A mobile storage spreadsheet without a matching test is the same hole on a phone (8.2).
 - Exceptions without expiry (E6) are silent uncovered rows.
+
+## Can people still use it
+
+A human exception path must say what is still uncovered and when it expires. Do not hide the gap behind “see PDF.”
 
 ## Practice
 
-Name the predicate (`req` matches **and** `asserts_isolation`). Run:
+Name the check (`req` matches **and** `asserts_isolation`). Run:
 
 ```text
 python3 -m pytest labs/9.1/9.1-lab/tests --impl fixed
 ```
 
-Must pass. Run from the lab directory if collection at repo root is polluted.
+It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-## Transfer
+## Use it somewhere new
 
-MASVS-STORAGE: require a MASTG test id, not a control-group checkbox.
+Mobile storage (8.2): require a matching test id, not a control-group checkbox.
 
-## Residual risk
+## What can still go wrong
 
-HTTP-200 tests that set `asserts_isolation` by mistake (9.3); unnamed Level 3; exceptions without expiry (E6).
-
-## Non-goals
-
-Do not call a live ASVS portal. Do not claim Gate 9 from a PDF screenshot. Do not present SSDF 1.2 IPD as final.
+HTTP-200 tests that set `asserts_isolation` by mistake (9.3). Unnamed extra advanced rows. Exceptions without expiry (E6).

@@ -1,56 +1,69 @@
-# 9.5-LO-05 — Evidence is close-without-retest denied, then a passing pair
+# Fail on the broken files, then pass on the repaired ones
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.1`. WSTG 4.2 (final). CVSS 4.0 as input, not the oracle.
 
-## An invariant that cannot fail a test is still a slogan
+## If you cannot test it, it is still a slogan
 
-“PDF delivered” is not evidence. “CVSS 9.8” is a priority input. The oracle is: `close_finding({"retest": None})` is false and `{retest: "pass"}` may close. The missing-retest observation must be **false** on `--impl vulnerable` (returns true) and **true** on `--impl fixed`. Do not pentest public hosts.
+"PDF delivered" is not evidence. "The severity is 9.8" is a priority input. The check is: `close_finding({"retest": None})` is false and `{retest: "pass"}` may close. That missing-retest observation must be **false** on the broken files and **true** on the repaired files. Do not pentest public hosts.
 
-## Mental model: vulnerable must fail: retest None
+## Picture: a broken close gate must fail the check
 
-The failing observation on `--impl vulnerable` is **retest None**. A passing collection count is not this cell.
+A test that only counts passing tests can pass while `{retest: None}` still closes. This check asks whether a finding closed without a retest still counts as a passing control. Broken must fail that question. Repaired must pass it.
 
 ```mermaid
 flowchart LR
-  V["--impl vulnerable"] --> F["Must fail retest None"]
-  X["--impl fixed"] --> P["Must pass deny"]
+  V["broken files --impl vulnerable"] --> F[Must fail: retest None closes]
+  X["repaired files --impl fixed"] --> P[Must pass: retest None denied]
 ```
 
-| Mode | Must show for this module |
-|---|---|
-| Negative / abuse | `retest None` → cannot close; vulnerable must fail |
-| Normal | `retest pass` → may close (may pass on both) |
-| Not claimed | live WSTG; Gate 9; CVSS calculator; that pass hit the same URL |
+If both pass, the test is not looking at missing retest. If both fail, the fix is not structural or the check is wrong.
 
-Lab tests in `labs/9.5/9.5-lab/tests/test_property.py`. `test_cannot_close_without_retest` is a **forbidden-outcome** test: always-true `close_finding` is not allowed to count as a passing control.
+## Four modes, even for a close dict
+
+| Mode | Must show for this topic |
+|---|---|
+| Normal | `retest pass` → may close (may pass on both) |
+| Wrong input | `retest None` → cannot close; broken files must fail |
+| Abuse | Missing, fail, or scheduled still deny (fail closed) |
+| Not claimed | A live testing catalogue run; an assurance gate; a severity calculator; that pass hit the same URL |
+
+The file is `labs/9.5/9.5-lab/tests/test_property.py`. The test `test_cannot_close_without_retest` is a **what-must-not-happen** test: always-true `close_finding` is not allowed to count as a passing control.
+
+Honest `{retest: "pass"}` may pass on both implementations. That does not excuse the missing-retest deny test. If the broken files do not fail `test_cannot_close_without_retest`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/9.5/9.5-lab/tests --impl vulnerable
 python3 -m pytest labs/9.5/9.5-lab/tests --impl fixed
 ```
 
-Honest `{retest: "pass"}` may pass on both implementations. That does not excuse the missing-retest deny test. If vulnerable does not fail `test_cannot_close_without_retest`, the lab is miswired—fix the wiring, not the assertion.
+A test that only greps `Done` in a ticket tracker without calling `close_finding({"retest": None})` is not this topic's evidence. This practice never opens a live host.
 
 ## What the tests do not prove
 
-- That the retest hit the same URL as the original isolation cell
-- Variant coverage (7.2 fields)
-- KEV applicability
-- Level 3 grant-change cache (`v5.0.0-8.3.2`)
-- Gate 9 complete
+- That the retest hit the same URL as the original isolation check
+- Variant coverage (extra fields on the note)
+- Whether a known-exploited listing applies
+- Role-change cache after a grant change (extra, advanced work)
+- An assurance gate complete
 
-Record those as residuals or later modules, not as silent passes.
+Record those as leftover or later topics, not as silent passes.
 
 ## Practice
 
-Execute both implementations this session from the lab directory if needed. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `Done` in Jira without calling `close_finding({"retest": None})`.
+Run both this session from the lab directory if needed:
 
-## Transfer
+```text
+python3 -m pytest labs/9.5/9.5-lab/tests --impl vulnerable
+python3 -m pytest labs/9.5/9.5-lab/tests --impl fixed
+```
 
-Clinic: a test that only asserts “ticket status Done” is not this cell. A live pentest is out of scope.
+Paste nothing from answer keys. Write fail/pass into your notes next to the close-without-retest row. Reject a "test" that only greps `Done` in a ticket without calling `close_finding({"retest": None})`.
 
-## Non-goals
+## Use it somewhere new
 
-Do not add a live-host trophy. Do not log note bodies. Keys stay out of this file. Gate 9 stays not-attempted.
+Clinic: a test that only asserts "ticket status Done" is not this topic. A live pentest is out of scope.
+
+## What this page is not doing
+
+Do not add a live-host trophy. Do not log note bodies. Answer keys stay out of this file. Do not claim you finished an assurance gate.

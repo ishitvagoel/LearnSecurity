@@ -1,58 +1,75 @@
-# 9.2-LO-03 — Observe always-true review_ok, do not weaponize eval
+# Practice: always-true review_ok
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.3.2`. `v5.0.0-15.1.5` documenting dangerous functionality is **Level 3, advanced**. OWASP Code Review Guide v2 (2017) is **guidance**. NIST SSDF 1.1 (final) PW.7. SSDF 1.2 IPD is **draft**.
 
-## Authorized scope
+## Try it
 
-`labs/9.2/9.2-lab` only. The fixture is an in-process `review_ok(diff)`. Synthetic diff string `x = eval(user)` — the lab’s stand-in identifier, not a working exploit. Do not write a working exploit or run eval on untrusted input outside this fixture. No live GitHub orgs.
+The practice is not a website you attack. It is a tiny Python `review_ok(diff)`. It does not merge anything. The failure is already in the function: it returns true for every string. You are here to see that the check treats that as a **failed rule**, not as a trophy eval.
 
-**Forbidden outcome:** eval on user input approved in review. `review_ok("x = eval(user)")` returns true.
+The rule under test:
 
-Attacker capability in this lab: a helper that looks visually fine. That stands in for a clinic “designers can put expressions in the discharge template,” Terraform `local-exec`, or a GitHub Actions `run:` interpolating untrusted input. Trust assumption: `review_ok` is supposed to ask the **interpreter question** (6.1 at review time). Formatter CI, scanner LGTM, and “the UI still looks fine” are not in the TCB for this cell.
+> Eval on user input must not be approved. `review_ok("x = eval(user)")` must be false.
 
-## Mental model: every diff is approved
+## Where you may practice
+
+Only `labs/9.2/9.2-lab` is in scope. The helper is in-process: `review_ok(diff)`. Fake diff string `x = eval(user)` — the lab’s stand-in identifier, not a working exploit.
+
+Do not write a working exploit. Do not run eval on untrusted input outside this fixture. Do not probe a live GitHub org. Do not paste eval payloads “to see what happens.”
+
+What must not happen: eval on user input approved in review. `review_ok("x = eval(user)")` returns true.
+
+Who can act here: a helper that looks visually fine. That stands in for a clinic “designers can put expressions in the discharge template,” Terraform `local-exec`, or a GitHub Actions `run:` that interpolates untrusted input. What you are supposed to trust: `review_ok` asks the **interpreter question** (6.1 at review time). Formatter continuous integration, a scanner “looks good,” and “the screen still looks fine” are not what you trust for this check.
+
+## Picture: every diff is approved
 
 ```mermaid
 flowchart TD
   Any[any diff] --> True[review_ok true]
 ```
 
-The vulnerable tree demonstrates **cause** (no interpreter question). Do not paste eval payloads into notes. Preconditions: `review_ok` returns true for every string. You do not need GitHub. You must not run eval on live input.
+The broken files show **cause** (no interpreter question), not an eval trophy. What has to be true first: `review_ok` returns true for every string. You do not need GitHub. You must not run eval on live input.
 
-ASVS `v5.0.0-1.3.2` wants applications to avoid `eval()` and similar dynamic execution. Module 6.1 already said the name is data, not Python grammar; this cell is **the merge gate that should have caught it**.
+Industry lists want you to avoid `eval` and similar dynamic execution. Module 6.1 already said the name is data, not Python grammar. This check is **the merge gate that should have caught it**.
 
-## What to read in the fixture
+## What to look at — cause, not a dump
 
-`vulnerable/review.py` returns true for every string. Tests:
+Read `vulnerable/review.py`. It returns true for every string. Tests:
 
 - `test_eval_on_user_input_is_rejected`
 - `test_honest_diff_without_eval_may_pass` — `int(user)` may pass on both
 
 You do not need a new payload. The failure of `test_eval_on_user_input_is_rejected` *is* the evidence.
 
-Do not open the fixed tree yet. Diagnose the cause first.
+Do not open the repaired files yet. Diagnose the cause first.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+| What you see | What kind of failure | Not the lesson |
+|---|---|---|
+| `review_ok` true for every string | Always-approve; no interpreter question | A scanner name |
+| `x = eval(user)` still approved | User string treated as Python | A live eval trophy |
+| Honest `int(user)` also true | Looks-fine path still open | “the formatter will catch it” |
 
-| Slice | This lab |
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
+
+| Slice | This practice |
 |---|---|
-| Required property | `review_ok("x = eval(user)")` is false |
-| Root cause | Reviewer trusts visual plausibility / always-approve |
-| Preconditions | `review_ok` true for every diff |
-| Trigger | Merge of the helper |
-| Impact | User input becomes Python grammar (6.1) |
-| Prevention | Review data flow / authority / interpreters; reject eval |
-| Detection | `review_block_eval`; never the payload |
-| Recovery | Keep reject; revert; add 9.3 tests |
+| The rule | `review_ok("x = eval(user)")` is false |
+| Why it happens | The reviewer trusts that it looks fine / always-approve |
+| What has to be true first | `review_ok` true for every diff |
+| Trigger | The helper is merged |
+| What it costs | User input becomes Python grammar (6.1) |
+| How you stop it | Review data flow, who is allowed, and interpreters; reject eval |
+| How you notice | `review_block_eval`; never the payload |
+| How you recover | Keep reject; revert; add tests (9.3) |
 | Not the lesson | A scanner name; weaponized eval; live GitHub |
 
-## Framework defaults versus the review guarantee
+## What the framework does vs what you still have to check
 
-GitHub “approve” is not 1.3.2. Black/ruff do not see eval as a grant. 9.4 bots are an aid, not an oracle. The application guarantee is: **this** fixture, eval-on-user is not approved.
+GitHub’s “approve” button is not this rule. Formatters do not see eval as a grant of Python. Later review bots are a help, not an oracle. The app’s promise is: **these** local files, eval-on-user is not approved.
 
 ## Practice
+
+From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/9.2/9.2-lab/tests --impl vulnerable
@@ -60,10 +77,10 @@ python3 -m pytest labs/9.2/9.2-lab/tests --impl vulnerable
 
 Run from `labs/9.2/9.2-lab` if a repo-root collection picks up `site/`. Record `test_eval_on_user_input_is_rejected`. Do not probe public hosts. An environment error is not security evidence.
 
-## Transfer
+## Use it somewhere new
 
 Clinic report template with eval: predict without leaving this directory. Do not run eval on live input.
 
-## Non-goals
+## What this page is not doing
 
-No weaponized eval, live GitHub, or copy-paste exploits. The lab substring is a stand-in, not a cookbook.
+No weaponized eval, live GitHub, or copy-paste exploits. The lab substring is a stand-in, not a cookbook. Do not “fix” the practice by deleting the test.

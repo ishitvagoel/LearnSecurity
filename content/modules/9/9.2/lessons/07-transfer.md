@@ -1,27 +1,28 @@
-# 9.2-LO-07 — Transfer: clinic eval in a report template
+# Same idea: clinic eval in a report template
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.3.2`. Code Review Guide v2 as guidance. SSDF 1.2 IPD remains **draft**.
 
-## Change the workplace; keep eval off user input
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: `review_ok("x = eval(user)")` must be false. Rewrite it for a clinic without changing the fork.
+The notes-app scaffolding goes away. You get a **clinic report template** where designers can put expressions. Your job is to rewrite the loop, not to name a bug-list code.
 
-**Prompt:** Clinic eval in a report template. Also name Terraform `local-exec` and GitHub Actions yaml.
+The notes-app sentence was: `review_ok("x = eval(user)")` must be false. Rewrite it for a clinic without changing the fork: eval on user input is not approved; honest `int(user)` may pass.
 
-**Product sketch:** EHR-lite “designers can put expressions in the discharge template,” plus “CI formatted the file so we LGTM’d.”
+Also name Terraform `local-exec` and GitHub Actions yaml as the same interpreter family, without running those systems.
 
-Rewrite the SecureCollab sentence. Include:
+**Product sketch:** a small records app — “designers can put expressions in the discharge template,” plus “continuous integration formatted the file so we approved it.”
 
-1. attacker capabilities (template author / compromised designer — not a live clinic);
-2. trust assumptions (review of interpreters is TCB; formatter LGTM is not);
-3. forbidden outcome (`review_ok` true for eval-on-user, not “HIPAA”);
-4. a test idea on a **local** fixture only (no weaponized eval);
-5. residual (substring stand-in, `exec(`, generated templates, E1);
-6. WCAG if a human block path exists (say “eval on user input,” not only a code).
+## Picture: same interpreter, clinical object
 
-## Mental model: same interpreter, clinical object
+Renaming “export helper” to “report template” is not transfer. The untrusted string changes. The fork does not.
+
+| Notes app this week | Clinic sketch |
+|---|---|
+| `x = eval(user)` approved | Template eval of a patient field approved |
+| `review_ok` | Template-change review helper |
+| `'eval(' not in diff` stand-in | Same stand-in on a local fixture |
+| Optimistic reviewer | Compromised designer — **not** a live clinic |
 
 ```mermaid
 flowchart LR
@@ -29,24 +30,35 @@ flowchart LR
   Eval[eval of field] --> Reality[patient field becomes code]
 ```
 
-If designers “need expressions” while `review_ok` is always true, the cell is gone. Formatter CI, ruff, and “AI reviewed it” (9.4) do not ask the interpreter question. Terraform `local-exec` and Actions `run:` are the same interpreter family — name them, do not run those systems here. The lab substring is a stand-in, not a complete oracle.
+If designers “need expressions” while `review_ok` is always true, the check is gone. Formatter continuous integration, a linter, and “a bot reviewed it” (later, 9.4) do not ask the interpreter question. Terraform `local-exec` and GitHub Actions `run:` are the same interpreter family — name them, do not run those systems here. The lab substring is a stand-in, not a complete oracle.
 
-The clinic rewrite still has to keep the SecureCollab fork: eval-on-user rejected, honest `int(user)` may pass. CI formatted the template without an interpreter question leaves `review_ok` true. The local pytest analogue is `test_eval_on_user_input_is_rejected` — on a fixture, not a live GitHub org.
+The clinic rewrite still has to keep the notes-app fork: eval-on-user rejected, honest `int(user)` may pass. Formatting the template without an interpreter question leaves `review_ok` true. The local pytest analogue is `test_eval_on_user_input_is_rejected` — on a fixture, not a live GitHub org.
 
-## What graders reject
+## Prompt — clinic eval in a report template
+
+Rewrite the notes-app sentence. Include:
+
+1. who can act (template author / compromised designer — not a live clinic);
+2. what you trust (review of interpreters is what you trust; formatter “looks good” is not);
+3. what must not happen (`review_ok` true for eval-on-user, not a legal label);
+4. a test idea on a **local** fixture only (no weaponized eval — never on the real clinic);
+5. leftover (substring stand-in, `exec(`, generated templates, later elective);
+6. whether a human-read “change blocked” status must say “eval on user input,” not only a code (readable error, not color alone).
+
+## What is not good enough
 
 | Reject | Why |
 |---|---|
 | “Formatter passed” | Not an interpreter review |
-| Weaponized eval / live GitHub | Lab policy |
-| “AI reviewed it” | 9.4 is an aid, not 9.2 |
-| Documented as dangerous, still merged | Level 3 `v5.0.0-15.1.5` is not reject |
-| SSDF 1.2 certified | IPD draft; not Gate 9 |
+| Weaponized eval / live GitHub | Course rules |
+| “A bot reviewed it” | Later bots are a help, not this week |
+| Documented as dangerous, still merged | Writing it down is not reject |
+| Draft vocabulary as certified | Draft; not a course gate |
 
 ## Practice
 
-One page. No keys. `labs/9.2/9.2-lab` is the only running system you may break. Do not run eval on untrusted input.
+One page. No answer keys. The only running system you may break is `labs/9.2/9.2-lab`. Do not run eval on untrusted input.
 
-## Non-goals
+## What this page is not doing
 
-Weaponized eval. Live orgs. Claiming Gate 9 from this page.
+Weaponized eval. Live orgs. Claiming a course gate from this page.

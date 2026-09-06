@@ -1,27 +1,27 @@
-# 9.1-LO-07 — Transfer: clinic HIPAA done column
+# Same idea on a clinic HIPAA done column
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** OWASP ASVS 5.0.0 (final) Level 2 backbone; MASVS 2.1.0 STORAGE for the mobile analogue. SSDF 1.2 IPD remains **draft**. Do not use MASVS L1/L2/R.
 
-## Change the workplace; keep status from meaning coverage
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: `covered("AUTHZ-1", [status-only])` must be false. Rewrite it for a clinic without changing the fork.
+The notes-app scaffolding goes away. You get a **clinic HIPAA “done” column**. A fake isolation row sits in a checklist. Your job is to rewrite the loop, not to name a bug-list code.
 
-**Prompt:** Clinic HIPAA “done” column. Also name MASVS-STORAGE for 8.2.
+The notes-app sentence was: `covered("AUTHZ-1", [status-only])` must be false. Rewrite it for a clinic without changing the fork: status-only is not coverage; an isolation assert may count. A pasted checklist is still inventory, not a tailored matrix.
 
-**Product sketch:** EHR-lite “we imported the HIPAA checklist and marked isolation done,” plus a green CI.
+**Product sketch:** an EHR-lite “we imported the HIPAA checklist and marked isolation done,” plus a green CI.
 
-Rewrite the SecureCollab sentence. Include:
+## Picture: same check, clinical checklist
 
-1. attacker capabilities (optimistic status column — not a live hospital);
-2. trust assumptions (coverage predicate is TCB; checklist membership is not);
-3. forbidden outcome (`covered("AUTHZ-1", status_only)` true, not “HIPAA”);
-4. a test idea on a **local** fixture only;
-5. residual (unnamed Level 3 `v5.0.0-8.3.2`, exceptions without expiry);
-6. WCAG if a human exception path exists (state what is uncovered and when it expires).
+Renaming “note” to “chart” is not transfer. Threat, requirement, test, and leftover change. Marking HIPAA isolation done does not assert isolation.
 
-## Mental model: same predicate, clinical checklist
+| Notes app this week | Clinic sketch |
+|---|---|
+| AUTHZ-1 is the isolation row | Fake HIPAA isolation row |
+| Status-only must not count | Done column must not count |
+| `covered("AUTHZ-1", status_only)` | `covered("AUTHZ-1", status_only)` on a local fixture |
+| Optimistic project manager | Same actor — **not** a live clinic |
+| Isolation assert in the dict | Isolation assert in the dict |
 
 ```mermaid
 flowchart LR
@@ -29,24 +29,37 @@ flowchart LR
   Pred[no isolation assert] --> Reality["1.2 hole ships"]
 ```
 
-If the HIPAA column is Done while `covered` only matches `req`, the cell is gone. ASVS PDF import, pytest-cov, and SSDF 1.2 IPD (draft) do not assert isolation. MASVS-STORAGE for 8.2 is the same predicate family — name it, do not scrape a live MASVS portal here. A 200-only test that sets the isolation flag by mistake is 9.3.
+If the HIPAA column is Done while `covered` only matches `req`, the rule is gone. A checklist PDF import, pytest-cov, and a later draft of a practice guide do not assert isolation. The mobile storage row from 8.2 is the same check family — name it, do not scrape a live mobile portal here. A 200-only test that sets the isolation flag by mistake is 9.3.
 
-The clinic rewrite still has to keep the SecureCollab fork: status-only not covered, isolation-assert may count. Marking HIPAA isolation done without an isolation assert leaves `covered("AUTHZ-1", status_only)` true. The local pytest analogue is `test_status_only_row_is_not_coverage` — on a fixture, not a live GRC.
+The clinic rewrite still has to keep the notes-app fork: status-only not covered, isolation-assert may count. Marking HIPAA isolation done without an isolation assert leaves `covered("AUTHZ-1", status_only)` true. The local pytest analogue is `test_status_only_row_is_not_coverage` — on a fixture, not a live governance product.
 
-## What graders reject
+## Prompt — clinic HIPAA done column
+
+Rewrite the notes-app sentence. Include:
+
+1. who can act (optimistic status column — not a live hospital);
+2. what you trust (the coverage check is the promise; checklist membership is not);
+3. what must not happen (`covered("AUTHZ-1", status_only)` true, not a legal label);
+4. a test idea on a **local** fixture only (no live governance scrape);
+5. leftover (unnamed extra advanced rows, exceptions without expiry);
+6. whether a human exception path exists (must state what is uncovered and when it expires).
+
+Use fake labels. Do not use real patient names. Also name the mobile storage row from 8.2.
+
+## What is not good enough
 
 | Reject | Why |
 |---|---|
-| “ASVS imported” | Inventory, not coverage |
-| Live clinic / real PHI | Lab policy |
-| “SSDF 1.2 certified” | 1.2 is IPD draft; not Gate 9 |
+| “The checklist is imported” | Inventory, not coverage |
+| Live clinic / real patient data | Course rules |
+| A later draft of a practice guide as certified | Still a draft; not the verification gate |
 | Green CI as AUTHZ-1 | Wrong observation |
-| MASVS L1 as current | Obsolete MASVS levels |
+| An old mobile-level sticker as current | Obsolete labels |
 
 ## Practice
 
-One page. No keys. `labs/9.1/9.1-lab` is the only running system you may break. Do not scrape a public checklist.
+One page. No answer keys. `labs/9.1/9.1-lab` is the only running system you may break. Do not scrape a public checklist.
 
-## Non-goals
+## What this page is not doing
 
-Live-target GRC. Real PHI. Claiming Gate 9 from this page.
+Live-target governance products. Real patient charts. Claiming you finished the verification gate from this page.

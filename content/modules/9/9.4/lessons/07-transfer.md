@@ -1,52 +1,67 @@
-# 9.4-LO-07 — Transfer: clinic 50 unmapped HIGHs
+# Same idea: clinic 50 unmapped HIGHs
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-15.2.1`. SAMM 2.0 as vocabulary. SSDF 1.2 IPD remains **draft**.
 
-## Change the workplace; keep unmapped HIGH from shipping
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: `ship_ok([HIGH], {})` must be false. Rewrite it for a clinic without changing the fork.
+The notes-app scaffolding goes away. You get a **clinic dashboard**. Fifty HIGH findings sit unmapped. Your job is to rewrite the loop, not to name a bug-list code.
 
-**Prompt:** Clinic: 50 unmapped HIGHs. Also name SCA CVE vs actually called function.
+The notes-app sentence was: `ship_ok([HIGH], {})` must be false. Rewrite it for a clinic without changing the fork: finding × map, allow or deny. A noisy dashboard is still noise, not a map.
 
-**Product sketch:** EHR-lite “code scanning is on and the dashboard is noisy so we ship Fridays,” plus a SAMM score.
+**Product sketch:** an EHR-lite “code scanning is on and the dashboard is noisy so we ship Fridays,” plus a maturity score on a slide.
 
-Rewrite the SecureCollab sentence. Include:
+## Picture: same join, clinical object
 
-1. attacker capabilities (alert fatigue — not a live clinic);
-2. trust assumptions (mapping predicate is TCB; dashboard and SAMM are not);
-3. forbidden outcome (`ship_ok([HIGH], {})` true, not “HIPAA”);
-4. a test idea on a **local** fixture only (no live GHAS);
-5. residual (authz blind spots, `v5.0.0-15.2.4` Level 3, mass suppressions);
-6. WCAG if a human triage path exists (why F1 is blocked).
+Renaming “note finding” to “clinic finding” is not transfer. Finding, map, and leftover change. Enabling code scanning without a mapping check does not own the HIGH.
 
-## Mental model: noise is not a map
+| Notes app this week | Clinic sketch |
+|---|---|
+| HIGH finding is unowned until mapped | Same — fifty unmapped HIGHs |
+| Coverage-map requirement id | Same join, clinic requirement names |
+| `ship_ok([HIGH], {})` | `ship_ok` on a local fixture |
+| Alert-fatigued reviewer | Same reader — **not** a live clinic |
+| Empty map ships the finding | Empty map ships the finding |
 
 ```mermaid
 flowchart LR
-  Fifty[50 HIGHs] --> Belief[probably FPs]
+  Fifty[50 HIGHs] --> Belief[probably false positives]
   Empty[empty map] --> Reality[unowned ships]
 ```
 
-If the dashboard is noisy while `ship_ok` is always true, the cell is gone. GitHub default setup, SAMM, and Dependabot do not join F1 to AUTHZ-1. SCA “we do not call that function” still records an owner — name it, do not scan a live org here. Authz blind spots remain 9.2 / 9.3.
+If the dashboard is noisy while `ship_ok` is always true, the rule is gone. A vendor default setup, a maturity score, and Dependabot do not join F1 to AUTHZ-1. SCA “we do not call that function” still records an owner — name it, do not scan a live org here. Who-is-allowed blind spots remain review and isolation tests.
 
-The clinic rewrite still has to keep the SecureCollab fork: unmapped HIGH denied, mapped HIGH may ship. Enabling code scanning without a mapping predicate leaves `ship_ok([HIGH], {})` true. The local pytest analogue is `test_unmapped_high_blocks_ship` — on a fixture, not a live GHAS tenant.
+The clinic rewrite still has to keep the notes-app fork: unmapped HIGH denied, mapped HIGH may ship. Enabling code scanning without a mapping check leaves `ship_ok([HIGH], {})` true. The local pytest analogue is `test_unmapped_high_blocks_ship` — on a fixture, not a live GitHub tenant.
 
-## What graders reject
+Also name SCA: a CVE versus a function you actually call.
+
+## Prompt — clinic, fifty unmapped HIGHs
+
+Rewrite the notes-app sentence. Include:
+
+1. who can act (alert fatigue — not a live clinic);
+2. what you trust (the mapping check is the promise; the dashboard and a maturity score are not);
+3. what must not happen (`ship_ok([HIGH], {})` true, not a legal label);
+4. a test idea on a **local** fixture only (no live GitHub);
+5. leftover (who-is-allowed blind spots, dependency confusion as an advanced leftover, mass suppressions);
+6. whether a human triage path exists (must say *why* F1 is blocked, in words).
+
+Use fake labels. Do not use real patient findings.
+
+## What is not good enough
 
 | Reject | Why |
 |---|---|
-| “scanner is on” | Signal, not ownership |
-| Live GitHub org / public SCA | Lab policy |
-| “SAMM Level 3” as ship_ok | Measurement, not the predicate |
-| Empty dashboard as 1.2 | Wrong observation |
-| SSDF 1.2 certified | IPD draft; not Gate 9 |
+| “The scanner is on” | Signal, not ownership |
+| Live GitHub org / public SCA | Course rules |
+| A maturity score as `ship_ok` | Measurement, not the check |
+| Empty dashboard as isolation | Wrong observation |
+| A draft supply-chain paper as a certificate | Draft; not the verification gate |
 
 ## Practice
 
-One page. No keys. `labs/9.4/9.4-lab` is the only running system you may break. Do not scan a public host.
+One page. No answer keys. `labs/9.4/9.4-lab` is the only running system you may break. Do not scan a public host.
 
-## Non-goals
+## What this page is not doing
 
-Live-target scanning. Real PHI in findings. Claiming Gate 9 from this page.
+Live-target scanning. Real patient findings. Claiming you finished the verification gate from this page.

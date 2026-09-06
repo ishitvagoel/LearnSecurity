@@ -1,82 +1,85 @@
-# 9.2-LO-01 — eval on user input must not be approved
+# eval on user input must not be approved
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.3.2`; `v5.0.0-15.1.5` is **Level 3, advanced**. OWASP Code Review Guide v2 (2017) as **guidance**. NIST SSDF 1.1 (final) PW.7. SSDF 1.2 IPD is **draft**.
 
-## The claim this module owns
+## The rule
 
-SecureCollab review of a note-export helper must not approve `eval` on user input. That is 6.1’s interpreter confusion at review time: the name is data, not Python grammar. LGTM after “the UI still looks fine” is not complete mediation.
+The notes app this week reviews a helper that exports a note. Review is a gate. `eval` on what a user typed must not get a yes.
+
+Last topic (6.1) taught that a name is data, not a shell program. This week is the same idea at merge time: a user string is data, not Python grammar. “Looks good to me” after “the screen still looks fine” is not a finished review.
 
 > `review_ok("x = eval(user)")` must be false.
 
-The forbidden outcome is **eval on user input approved in review**. That is integrity of the change-control gate — a 1.1 cell for the interpreter boundary.
+What must not happen is **eval on user input approved in review**. That is an integrity failure of the change-control gate — the interpreter boundary from 6.1, checked before the helper ships.
 
-ASVS `v5.0.0-1.3.2` wants applications to avoid `eval()` and similar dynamic execution (SpEL, and kin). `v5.0.0-15.1.5` (document dangerous functionality) is **Level 3, advanced** — documenting eval is not the same as rejecting it. The Code Review Guide is *how to look* (data flow, authority, state, configuration), not a sticker. SSDF 1.1 PW.7 is vocabulary for “a person looks at the code.”
+Industry lists want you to avoid `eval` and similar dynamic execution (template languages that run expressions, and kin). Writing down that eval is dangerous is later, stricter paperwork. It is not the same as rejecting the change. A review guide tells you *how to look* — data flow, who is allowed, state, configuration — not a sticker to paste on. “A person looks at the code” is vocabulary for this week, not a course gate. A later draft of that vocabulary stays a draft.
 
-The lab uses `'eval(' not in diff`. That substring denylist is a **stand-in**, not a complete review oracle. `exec(`, SpEL, and generated code (E1) remain.
+The practice uses `'eval(' not in diff`. That substring check is a **stand-in**, not a complete review oracle. `exec(`, other dynamic-execution languages, and generated code (later elective) can still slip past it.
 
-## Mental model: visual plausibility vs data flow
+## Picture: looks fine vs following the data
 
 ```mermaid
 flowchart TD
   Diff[seeded diff] --> Eyes[looks like a helper]
-  Eyes --> Lgtm[LGTM]
+  Eyes --> Lgtm[looks good to me]
   Diff --> Flow[user to eval]
   Flow --> Reject[must reject]
 ```
 
-## Mental model: LGTM without interpreters
+## Picture: approved without asking the interpreter
 
 ```mermaid
 flowchart LR
   Readme[README looks fine] --> Belief[review done]
-  Interp[eval of user] --> Reality[interpreter grant]
+  Interp[eval of user] --> Reality[user string becomes Python]
 ```
 
-**Mechanism (not the property):** formatter CI, scanner LGTM, ChatGPT “looks safe,” the lab substring itself.
+**The tool (not the rule):** formatter continuous integration, a scanner “looks good,” a chat bot saying “looks safe,” or the lab substring itself.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | For this property |
+| Slice | For this rule |
 |---|---|
-| Root cause | Reviewer trusts visual plausibility |
-| Preconditions | `review_ok` true for `eval(user)` |
-| Trigger | Merge of the helper |
-| Impact | User input becomes Python grammar (6.1) |
-| Prevention | Review data flow / authority / interpreters; reject eval |
-| Detection | `review_block_eval` |
-| Recovery | Revert; add 9.3 tests; do not treat the denylist as done |
+| Why it happens | The reviewer trusts that it looks like a helper |
+| What has to be true first | `review_ok` is true for `eval(user)` |
+| Trigger | The helper is merged |
+| What it costs | User input becomes Python grammar (6.1) |
+| How you stop it | Review data flow, who is allowed, and interpreters; reject eval |
+| How you notice | `review_block_eval` |
+| How you recover | Revert; add tests (next topic, 9.3); do not treat the substring check as done |
 
-## Framework defaults versus the review guarantee
+## What the framework does vs what you still have to check
 
-GitHub “approve” is not 1.3.2. Black/ruff do not see eval as a grant. 9.4 bots are an aid, not an oracle.
+GitHub’s “approve” button is not this rule. Formatters do not see eval as a grant of Python. Later review bots (9.4) are a help, not an oracle.
 
-## Mechanism limits
+The app’s promise: **this** review helper, `review_ok("x = eval(user)")` is false. The folder is `labs/9.2/9.2-lab`. Fake diffs only. Local only.
 
-- Substring misses `exec(`, `__import__`, SpEL, Jinja `|safe`.
-- Generated code (E1) can reintroduce eval after review.
-- Documenting dangerous functionality (`v5.0.0-15.1.5`, Level 3) without rejecting it.
+## What the tool cannot do
 
-## Usability and accessibility
+- The substring misses `exec(`, `__import__`, other expression languages, and template filters that mark text as trusted.
+- Generated code can put eval back after review (later elective).
+- Writing down that eval is dangerous without rejecting it.
 
-A blocked review must say *why* in plain language (eval on user input), not only “policy P12” (WCAG 2.2 4.1.3).
+## Can people still use it
+
+A blocked review must say *why* in plain language (eval on user input), not only a policy code. Color or a code alone is not enough.
 
 ## Practice
 
 Name the interpreter. Then run:
 
-```
+```text
 python3 -m pytest labs/9.2/9.2-lab/tests --impl vulnerable
 python3 -m pytest labs/9.2/9.2-lab/tests --impl fixed
 ```
 
 The first command must fail. The second must pass.
 
-## Transfer
+## Use it somewhere new
 
 Terraform `local-exec`; GitHub Actions `run:` with untrusted input; clinic eval in a report template.
 
-## Non-goals
+## What this page is not doing
 
-Weaponized eval payloads, live GitHub orgs, claiming Gate 9. Gates 0–10 and M0–M5 stay **not-attempted**. Answer keys are not in this file.
+Weaponized eval payloads. Live GitHub orgs. Claiming a course gate. Course gates stay unclaimed. Answer keys are not in this file.

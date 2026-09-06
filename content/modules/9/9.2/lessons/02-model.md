@@ -1,69 +1,74 @@
-# 9.2-LO-02 — Visual plausibility vs data-flow review
+# Looks fine vs following the data
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** OWASP Code Review Guide v2 (2017) as guidance. ASVS `v5.0.0-1.3.2`. NIST SSDF 1.1 PW.7.
 
-## Can a second engineer name pytest cases from your review questions?
+## Could someone else name the checks?
 
-“I LGTM’d the screenshot” is not this lesson. A reviewable model names **data flow, authority, interpreter, state, and configuration**.
+“I approved the screenshot” is not this lesson. A map someone else can test names **data flow**, **who is allowed**, **the interpreter**, **state**, and **configuration**.
 
-SecureCollab freeze: local `review_ok(diff)`. No live GitHub.
+The notes app this week: local `review_ok(diff)`. No live GitHub.
 
-## Mental model: five questions
+> `eval` on a user string must not be approved. An honest helper that uses `int(user)` may pass.
+
+## Picture: five questions
 
 ```mermaid
 flowchart TD
   Diff[diff] --> Q1[data flow]
-  Diff --> Q2[authority]
+  Diff --> Q2[who is allowed]
   Diff --> Q3[interpreter]
   Diff --> Q4[state]
   Diff --> Q5[config]
 ```
 
-## Mental model: generated code is still in scope
+## Picture: generated code is still in scope
 
 ```mermaid
 flowchart LR
-  Human[human diff] --> Review["9.2"]
+  Human[human diff] --> Review["this week's review"]
   Gen[generated helper] --> Review
-  Bot["9.4 bot"] --> Aid[aid not oracle]
+  Bot["later review bot"] --> Aid[help, not an oracle]
 ```
 
-## Step 1: freeze pieces
+A bot that later greps the tree (9.4) is a help. It does not replace the five questions.
+
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | optimistic reviewer; generated-code bot |
-| Objects | export helper; user string |
+| Who | optimistic reviewer; generated-code bot |
+| What | export helper; user string |
 | Actions | `review_ok` |
-| Channels | PR diff |
-| TCB | review of interpreters and authority |
-| Untrusted | visual plausibility; formatters; 9.4 bots |
-| State / time | merge; later generated rewrite (E1) |
-| 1.1 cell | integrity of the interpreter boundary |
+| Paths | pull-request diff |
+| What you trust | review of interpreters and who is allowed |
+| What you do not trust | that it looks fine; formatters; later review bots |
+| Time | merge; later generated rewrite |
+| The rule | Integrity of the interpreter boundary |
 
-## Step 2: write cells
+## Step 2: write allow and deny
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
 | eval(user) | merge | approve | deny |
 | int(user) helper | merge | approve | may allow |
-| README-only | merge | treat as reviewed | deny |
-| 9.4 bot LGTM | merge | treat as oracle | deny |
+| README only | merge | treat as reviewed | deny |
+| later bot “looks good” | merge | treat as oracle | deny |
+
+A missing “eval(user) × merge × deny” row is how “the screen still looks fine” becomes a yes. Write the hole.
 
 ## Practice
 
-Draw the questions. Point at `labs/9.2/9.2-lab` file `review.py`.
+Draw the five questions. Point at `labs/9.2/9.2-lab` file `review.py`. Fake diffs only.
 
-## Transfer
+## Use it somewhere new
 
-GitHub Actions yaml: untrusted `github.event` into `run:`.
+GitHub Actions yaml: untrusted event data into `run:`.
 
-## Residual risk
+## What can still go wrong
 
-Substring stand-in; `exec(`; SpEL; E1 generated code.
+Substring stand-in; `exec(`; other expression languages; generated code after review.
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+Do not define security as a famous-bugs list. Do not run this map against a live GitHub org. Answer keys stay out of lessons.
