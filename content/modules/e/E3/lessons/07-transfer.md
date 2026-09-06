@@ -1,27 +1,26 @@
-# E3-LO-07 — Transfer: health append-only audit
+# Same idea: health append-only audit
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** ASVS `v5.0.0-2.3.4`. PCI 4.0.1 awareness not scope. `v5.0.0-13.1.2` Level 3 **advanced**.
 
-## Change the workplace; keep a processor sticker from meaning the ledger is once
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: two `capture("k1")` must leave count 1. Rewrite it for a clinic without changing the fork.
+The notes-app scaffolding goes away. You get a **health-record append-only audit**, plus a **simulated copay**. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: two `capture("k1")` must leave count 1. Rewrite it for a clinic without changing the fork. A processor sticker must not mean the ledger is once.
 
 **Prompt:** Health record append-only audit. Also name a simulated copay.
 
-**Product sketch:** EHR-lite “Stripe idempotency is on so retries are fine,” plus “we have a PCI SAQ so high-assurance is done.”
+**Product sketch:** EHR-lite “the processor said retries are fine,” plus “we filed a questionnaire so high-assurance is done.”
 
-Rewrite the SecureCollab sentence. Include:
+Rewrite the notes-app sentence. Include:
 
-1. attacker capabilities (504 retry / double-click — not a live clinic processor attack);
-2. trust assumptions (key identity is TCB; Stripe/PCI are not);
-3. forbidden outcome (two `k1` → count 2, not “HIPAA”);
-4. a test idea on a **local** fixture only (no live Stripe);
-5. residual (new key each click, webhook race, `v5.0.0-13.1.2` Level 3);
-6. WCAG if confirmations trap users into retry.
+1. who can act (504 retry / double-click — not a live clinic processor attack);
+2. what you trust (key identity is what you trust; a payment company and a questionnaire are not);
+3. what must not happen (two `k1` → count 2, not a privacy-law name);
+4. a test idea on a **local** practice only (no live Stripe);
+5. leftover (new key each click, webhook race, connection-pool limits as advanced leftover);
+6. whether confirmations trap people into retry.
 
-## Mental model: SAQ vs once
+## Picture: questionnaire vs once
 
 ```mermaid
 flowchart LR
@@ -29,24 +28,24 @@ flowchart LR
   Append[every POST inserts] --> Reality[twice]
 ```
 
-If the SAQ is filed while `capture` always appends, the cell is gone. Stripe headers and PCI 4.0.1 do not put `k1` in `SEEN`. A health append-only audit is the same grain: the document version id is the key, not “POST again.” Name it, do not hit a live processor here. This fixture is not in PCI scope. `v5.0.0-13.1.2` is Level 3 advanced: pool limits, not this pytest.
+If the questionnaire is filed while `capture` always appends, the cell is gone. Processor headers and a card-network standard do not put `k1` in `SEEN`. A health append-only audit is the same grain: the document version id is the key, not “POST again.” Name it, do not hit a live processor here. This fixture is not in card-network scope. Connection-pool limits are advanced leftover: pool size, not this pytest.
 
-The clinic rewrite still has to keep the SecureCollab fork: two k1 → count 1, first k1 may charge. Adding Stripe without a local seen-set leaves count 2. The local pytest analogue is `test_duplicate_capture_does_not_double_charge` — on a fixture, not a live processor.
+The clinic rewrite still has to keep the notes-app fork: two k1 → count 1, first k1 may charge. Adding a payment company without a local seen-set leaves count 2. The local pytest analogue is `test_duplicate_capture_does_not_double_charge` — on a fixture, not a live processor.
 
-## What graders reject
+## What is not good enough
 
 | Reject | Why |
 |---|---|
 | “we have Stripe” | Their side, not your count |
-| Live processor / PAN tutorial | Lab policy |
-| “PCI so 2.4 is done” | Awareness / scope, not this cell |
+| Live processor / card-number tutorial | Course rules |
+| “questionnaire so this cell is done” | Awareness / scope, not this cell |
 | “HTTP 200” | Event, not once |
-| “Gate 7 complete” | Forbidden stamp |
+| “course gate complete” | Forbidden stamp |
 
 ## Practice
 
-One page. No keys. `labs/E3/e3-lab` is the only running system you may break. Do not hit a live processor. No PAN.
+One page. No keys. `labs/E3/e3-lab` is the only running system you may break. Do not hit a live processor. No real card numbers. No real PAN.
 
-## Non-goals
+## What this page is not doing
 
-Live-processor attacks. Real card data. Claiming Gate 7, M2, or PCI scope from this page.
+Live-processor attacks. Real card data. Claiming a course gate, a milestone, or card-network scope from this page.

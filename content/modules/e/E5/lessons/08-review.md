@@ -1,56 +1,57 @@
-# E5-LO-08 — Review body-chosen tenant as a PR
+# Review body-chosen company like a pull request
 
 **Kind:** code-review
 **Loop step:** Review
-**Standards:** ASVS `v5.0.0-8.2.1`. `v5.0.0-15.3.3` related. API1 awareness after the cause.
 
-## Review the fixture as if it were SecureCollab’s note query
+Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
 
-Review `labs/E5/e5-lab/vulnerable/` as a SecureCollab PR. Your job is not to count suspicious lines. Reconstruct whether `tenant_for({"tenant": "A"}, {"tenant": "B"})` still returns `"B"`, compare that with the module invariant, and write changes a developer can verify.
+## What you are reviewing
 
-Intended findings live only in `content/assessment/keys/E5.md` — not here. Do not open the keys file until your review has been evaluated.
+A colleague ships notes-app company binding. Your job is not to count suspicious lines. Reconstruct whether `tenant_for({"tenant": "A"}, {"tenant": "B"})` still returns `"B"`, compare that with the module rule, and write changes a developer can verify.
 
-## Mental model: Tenant taken from the body
+The folder `labs/E5/e5-lab/vulnerable/` is the change. Review it as if it were the notes app’s note query. The check you already ran (`test_body_cannot_switch_tenant`) is the rule test. A comment “will bind later” is not. The JSON body is not the tenant. Body tenant overrides session is the smell. Bind tenant from the session is the structural change.
 
-Start with this seeded smell: **Tenant taken from the body**. Label it property, mechanism, or false assurance before you accept the PR.
+## Picture: company taken from the body
+
+Start with this seeded smell: **company taken from the body**. Label it rule, tool, or false comfort before you accept the change.
 
 ```mermaid
 flowchart TD
-  Claim[PR claim] --> Q{"What would falsify it?"}
-  Q -->|body B becomes tenant| Property["Property - good if tested"]
-  Q -->|RLS is on| Mechanism[Mechanism - GUC]
-  Q -->|API1 mapped| False[False assurance]
+  Claim[PR claim] --> Q{"What would show it is false?"}
+  Q -->|body B becomes tenant| Property["Rule - good if tested"]
+  Q -->|RLS is on| Mechanism[Tool - session variable]
+  Q -->|famous-bugs mapped| False[False comfort]
 ```
 
-Classification starts at the protected effect (session A plus body B is A). Everything that is not session binding at that call is a candidate body-wins path. An RLS screenshot without that pytest is the same smell, not a different finding class.
+Review starts at the protected effect (session A plus body B is A). Everything that is not session binding at that call is a candidate body-wins path. A row-level screenshot without that pytest is the same smell, not a different finding class.
 
-Cache keys without tenant are residual. Silent impersonation is E6. Do not skip `test_body_cannot_switch_tenant`. Do not claim Gate 7. Do not probe a live tenant to prove the finding.
+Cache keys without company are leftover. Silent impersonation is a later topic. Do not skip `test_body_cannot_switch_tenant`. Do not claim a course gate. Do not probe a live company to prove the finding.
 
 ## Seeded smells (label them yourself)
 
-- Tenant taken from the body
-- RLS session var set from JSON
-- Cache key without tenant
+- Company taken from the body
+- Row-level session variable set from JSON
+- Cache key without company
 - Support impersonation silent
 
-Also reject: live SaaS probes; shipping without re-running `test_body_cannot_switch_tenant`; keys in lessons; claiming Gate 7; treating API1 as the syllabus.
+Also reject: live product probes; shipping without re-running `test_body_cannot_switch_tenant`; keys in lessons; claiming a course gate; treating a famous-bugs list as the syllabus.
 
-## Misconceptions this module refuses
+## Common mix-ups
 
-- RLS replaces app mediation
-- Subdomain is unforgeable tenant
-- Scale means IAM instead of 1.2
-- Zanzibar is `tenant_for`
+- Row-level rules replace the app check
+- Subdomain is an unforgeable company
+- Scale means identity products instead of who-is-allowed
+- A relationship-graph product is `tenant_for`
 - GraphQL `org_id` is a different cell
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: observation, property or false assurance, suggested structural change, residual you will **not** delete. Tie at least one to `test_body_cannot_switch_tenant`.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one to `test_body_cannot_switch_tenant`. Do not open the keys file.
 
-## Transfer
+## Use it somewhere new
 
-Clinic PR that "enabled RLS and mapped API1" without session binding is an incomplete tenant-gate review. Name the independent falsehood that would still keep body B from becoming the tenant.
+Clinic change that “enabled row-level rules and mapped a famous-bugs list” without session binding is an incomplete review of a body-chosen company. Name the independent falsehood that would still keep body B from becoming the company.
 
-## Non-goals
+## What this page is not doing
 
-Do not merge by adding a comment “will bind later.” That comment is a residual without an owner. Do not send `org_id` to a public SaaS to prove the finding.
+Do not merge by adding a comment “will bind later.” That comment is leftover without an owner. Do not send `org_id` to a public product to prove the finding.

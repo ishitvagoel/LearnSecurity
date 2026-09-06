@@ -1,14 +1,15 @@
-# 11-LO-06 — Detect revoked_share_read_denied without logging bodies
+# revoked_share_read_denied without logging bodies
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
-**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; ASVS `v5.0.0-8.2.1`. Module 10.5 Recover is the incident sibling.
 
-## Prevention is not absolute
+## Stopping it is not enough
 
-A cache or worker can serve the old grant. Pair detect and recover. Do not log note bodies (3.1 / 10.5). Do not paste the chart into the ticket.
+A cache or worker can still serve the old grant after `read` was “fixed once.” Pair notice and recover. Do not log note bodies, session tokens, or dump files into the ticket. Do not paste the chart into the ticket.
 
-## Mental model: post-revoke read is a signal
+## Picture: post-revoke read is a signal
+
+A read that skipped the grant is a notice-and-recover problem, not a licence to quote the note in the ticket. Notice names the note id and the person. Recover notifies A and rotates links. Neither reprints the body.
 
 ```mermaid
 flowchart TD
@@ -17,39 +18,56 @@ flowchart TD
   Metric --> Notify[notify A rotate links]
 ```
 
-| Outcome | This module |
+Industry lists name detect, respond, recover. They do not pick a scanner product. They do not prove this week’s next-read check. Someone still has to own the leftover.
+
+Re-run `test_revoked_share_cannot_read` after any share-path change. A green “DELETE 200” tile is not that pytest. Phone cache and leftover worker sessions are other read paths of the same family — inventory them before you claim recover. Tabletop remains the restore week.
+
+## Signals that do not become a second leak
+
+| Outcome | This topic |
 |---|---|
-| Detect | `revoked_share_read_denied` |
-| Signal | note id, tenant id; never body |
+| Notice | `revoked_share_read_denied` |
+| What the line holds | note id, tenant id; **never** the body |
+| Respond | Stop the former collaborator’s next read; do not paste note text into chat |
 | Recover | Notify A; rotate share links; wipe caches |
-| Residual | Copies already sent; delayed worker; E6 exceptions |
+| Leftover | Copies already sent; delayed worker; named exceptions later |
 
-CSF 2.0 Detect / Respond / Recover name outcomes. They do not prove `v5.0.0-8.2.1`. A scanner-product name is not the property. Re-run `test_revoked_share_cannot_read` after any share-path change; a green “DELETE 200” tile is not that pytest. Device cache (8.2) and leftover worker sessions (7.4) are other read paths of the same family — inventory them before claiming Recover. Tabletop remains 10.5.
+A scanner dashboard will show coverage and stay silent when CI’s `read` ignores grants. Detection must observe **B after revoke is None**, not “revoke was called.” If the alert includes the note body, you have opened a leftover-body leak.
 
-## Framework defaults versus the operate guarantee
-
-A scanner dashboard will show coverage and stay silent when CI’s `read` ignores grants. Detection must observe **B after revoke is None**, not “revoke was called.” If the alert includes the note body, you have opened a 3.1 / 10.5 cell.
-
-## Practice
-
-Write one log line you would accept. Tie it to `labs/11/11-lab`.
+A log line a reviewer can accept looks like:
 
 ```text
 log_denied reason=revoked_share_read_denied note=n1 tenant=B
 ```
 
-Reject any line that includes the note body, a session token, or “Gate 11 complete.”
+Not: a note body, a session token, or “assurance gate complete.”
 
-## Transfer
+If your alert includes the matching note, you have copied the leak into the ticket.
 
-Clinic: deny the guardian read; do not paste the chart into the ticket. Do not hit a live EHR.
+## What the framework does vs what you still have to check
 
-## Usability
+The same no-op revoke, always-body read, and leftover worker session that bypass this fixture will also bypass a “scan our coverage dashboard” detector. Name those places before you claim recover. A scanner-product name is not the rule.
 
-A deny must say *share revoked*, not only “assert False” (WCAG 2.2 Success Criterion 4.1.3 for human-read CI).
+Cause vs cost stays split here too: the **cause** is grant not consulted; the **cost** is ex-collaborator secrecy; **how you stop it** is owner-or-grant on every read; **how you notice** is `revoked_share_read_denied`; **how you recover** is notify-and-rotate. What the tool cannot do: this alert does not wipe phone caches, and it does not recall copies already sent.
 
-Cause vs impact stays split here too: the **cause** is grant not consulted; the **impact** is ex-collaborator confidentiality; **prevention** is owner-or-grant on every read; **detection** is `revoked_share_read_denied`; **recovery** is notify-and-rotate. Mechanism limit: this alert does not wipe device caches (8.2) and does not recall copies already sent (5.1).
+## Can people still use it
 
-## Non-goals
+A deny must say *share revoked*, not only “assert False.” Under stress, do not use color-only severity.
 
-A scanner-vendor name is not the property. M5 stays not-attempted. A YAML pack is not this alert.
+## Practice
+
+Write one log line you would accept in review. Tie it to `labs/11/11-lab`.
+
+```text
+log_denied reason=revoked_share_read_denied note=n1 tenant=B
+```
+
+Reject any line that includes the note body, a session token, or “assurance gate complete.”
+
+## Use it somewhere new
+
+Clinic: deny the guardian read; do not paste the chart into the ticket. Do not hit a live clinic system.
+
+## What this page is not doing
+
+A scanner-vendor name is not the rule. Do not claim you finished an assurance gate. A YAML pack is not this alert. Answer keys stay out of lessons.

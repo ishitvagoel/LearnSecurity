@@ -1,16 +1,15 @@
-# E3-LO-02 — Ledger identity vs processor sticker
+# Ledger identity vs processor sticker
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** ASVS `v5.0.0-2.3.4`. PCI 4.0.1 awareness not scope.
 
-## Can a second engineer name the capture check from your ledger map?
+## Could someone else name the capture check from your ledger map?
 
-“We use Stripe idempotency” is not this lesson. A reviewable model names **key, SEEN set, webhook path, and that PAN is absent**.
+A slide that says “we use Stripe idempotency” is not this page. A map someone else can test names **the key, the SEEN set, the webhook path, and that no card number is present**.
 
-SecureCollab freeze: local `capture(key)`. Synthetic amounts.
+This week’s freeze for the notes app: a local `capture(key)` practice. Fake amounts only. No live processor.
 
-## Mental model: one key one row
+## Picture: one key, one row
 
 ```mermaid
 flowchart TD
@@ -18,7 +17,7 @@ flowchart TD
   K2[k1 again] --> Same[same row]
 ```
 
-## Mental model: two writers
+## Picture: two writers
 
 ```mermaid
 flowchart LR
@@ -27,40 +26,42 @@ flowchart LR
   Race[both append] --> Residual["7.3"]
 ```
 
-## Step 1: freeze pieces
+If both arrows append, the map already predicts `test_duplicate_capture_does_not_double_charge` will fail.
+
+## Step 1: freeze who, what, and time
 
 | Piece | This system |
 |---|---|
-| Subjects | retry; double-click |
-| Objects | lab ledger |
+| Who | Retrying client; double-click |
+| What | Lab ledger |
 | Actions | `capture` |
-| Channels | API; webhook |
-| TCB | key identity |
-| Untrusted | Stripe sticker; PCI SAQ |
+| Paths | API; webhook |
+| What you trust | The key as capture identity |
+| What you do not trust | A processor sticker; a filled-in questionnaire |
 | State / time | 504 retry |
-| 1.1 cell | integrity of money-like state |
+| The rule | Integrity of money-like state |
 
-## Step 2: write cells
+## Step 2: write rows the lab can fail
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
 | second k1 | charge | append | deny |
 | first k1 | charge | append | may allow |
-| Stripe header | local count | treat as check | deny |
-| PCI SAQ | this cell | treat as proof | deny |
+| Stripe header | local count | treat as the check | deny |
+| Questionnaire | this cell | treat as proof | deny |
 
 ## Practice
 
-Draw the map. Point at `labs/E3/e3-lab` file `pay.py`.
+Draw the map so someone else could name pytest cases. Point at `labs/E3/e3-lab` file `pay.py`.
 
-## Transfer
+## Use it somewhere new
 
 Health append-only: the document id is the key.
 
-## Residual risk
+## What can still go wrong
 
-New key each click; webhook race; `v5.0.0-13.1.2` Level 3.
+A new key each click; webhook race; connection-pool limits are advanced leftover.
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+Treating an awareness list as the definition of security. Answer keys stay out of lessons.

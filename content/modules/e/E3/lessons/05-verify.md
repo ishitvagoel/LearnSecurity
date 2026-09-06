@@ -1,56 +1,55 @@
-# E3-LO-05 — Evidence is duplicate denied, then a passing pair
+# Fail on the broken files, then pass on the repaired ones
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
-**Standards:** ASVS `v5.0.0-2.3.4`. PCI 4.0.1 awareness, not the oracle.
 
-## An invariant that cannot fail a test is still a slogan
+## If you cannot test it, it is still a slogan
 
-“We use Stripe” is not evidence. “PCI SAQ is filed” is a mechanism observation. The oracle is: two `capture("k1")` leave count 1 and the first capture may succeed. The two-k1 observation must be **false** on `--impl vulnerable` (count 2) and **true** on `--impl fixed`. Do not hit live processors.
+“We use Stripe” is not evidence. “The questionnaire is filed” is a tool observation. The check is: two `capture("k1")` leave count 1 and the first capture may succeed. That two-k1 observation must be **false** on `--impl vulnerable` (count 2) and **true** on `--impl fixed`. Do not hit live processors.
 
-## Mental model: vulnerable must fail: two k1
+## Picture: a second k1 that charges twice must fail
 
-The failing observation on `--impl vulnerable` is **two k1**. A passing collection count is not this cell.
+A test that only greps a processor header can pass while every capture still appends. This check asks whether a double charge still counts as a passing control. Broken must fail that question. Repaired must pass it.
 
 ```mermaid
 flowchart LR
-  V["--impl vulnerable"] --> F["Must fail two k1"]
-  X["--impl fixed"] --> P["Must pass count 1"]
+  V["broken files"] --> F["Must fail: two k1"]
+  X["repaired files"] --> P["Must pass: count 1"]
 ```
 
-| Mode | Must show for this module |
+| Mode | Must show for this topic |
 |---|---|
-| Negative / abuse | two k1 → count 1; vulnerable must fail |
+| Wrong input / abuse | two k1 → count 1; broken files must fail |
 | Normal | first k1 → may charge (may pass on both) |
-| Not claimed | live Stripe; PCI; Gate 7; webhook path |
+| Not claimed | live Stripe; card-network scope; a course gate; webhook path |
 
-Lab tests in `labs/E3/e3-lab/tests/test_property.py`. `test_duplicate_capture_does_not_double_charge` is a **forbidden-outcome** test: always-append `capture` is not allowed to count as a passing control. `reset()` keeps ledger state from leaking.
+Lab tests in `labs/E3/e3-lab/tests/test_property.py`. `test_duplicate_capture_does_not_double_charge` is a **what-must-not-happen** test: always-append `capture` is not allowed to count as a passing control. `reset()` keeps ledger state from leaking.
 
 ```text
 python3 -m pytest labs/E3/e3-lab/tests --impl vulnerable
 python3 -m pytest labs/E3/e3-lab/tests --impl fixed
 ```
 
-Honest first capture may pass on both implementations. That does not excuse the two-k1 deny test. If vulnerable does not fail `test_duplicate_capture_does_not_double_charge`, the lab is miswired—fix the wiring, not the assertion.
+Honest first capture may pass on both implementations. That does not excuse the two-k1 deny test. If the broken files do not fail `test_duplicate_capture_does_not_double_charge`, the lab is miswired — fix the wiring, not the check.
 
 ## What the tests do not prove
 
-- Webhook path is idempotent
-- Client cannot mint a new key
-- Connection-pool limits (`v5.0.0-13.1.2` Level 3)
-- PCI scope
-- Gate 7 / M2 complete
+- The webhook path remembers
+- The client cannot mint a new key
+- Connection-pool limits (advanced leftover)
+- Card-network scope
+- A course gate complete
 
-Record those as residuals or later modules, not as silent passes.
+Record those as leftover or later topics, not as silent passes.
 
 ## Practice
 
-Execute both implementations this session from the lab directory if needed. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `Idempotency-Key` in a Stripe client without calling `capture("k1")` twice.
+Run both this session from the practice folder if needed. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `Idempotency-Key` in a Stripe client without calling `capture("k1")` twice.
 
-## Transfer
+## Use it somewhere new
 
-Clinic: a test that only asserts “Stripe returned 200” is not this cell. A live processor is out of scope.
+Clinic: a test that only asserts “the processor returned 200” is not this cell. A live processor is out of scope.
 
-## Non-goals
+## What this page is not doing
 
-Do not add a live-processor trophy. Do not log PAN-like strings. Keys stay out of this file. Gate 7 stays not-attempted.
+Do not add a live-processor trophy. Do not log card-number-like strings. Answer keys stay out of this file. Course gates stay unclaimed.

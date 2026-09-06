@@ -1,16 +1,15 @@
-# E3-LO-04 — Treat the key as capture identity
+# Treat the key as capture identity
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** ASVS 5.0.0 (final) `v5.0.0-2.3.4`, `v5.0.0-2.3.3`. `v5.0.0-13.1.2` is **Level 3, advanced**. PCI 4.0.1 is awareness, not scope.
 
-## Structural means the second key is a no-op
+## The rule
 
-`capture` must add to `SEEN` and `CHARGES` only when the key is new. Fail-safe: duplicate denies extra charge. A processor header may *accompany* a match; it does not replace your set. Structural means that identity — not Stripe, not a SAQ, not HTTP 200.
+`capture` must add to `SEEN` and `CHARGES` only when the key is new. Fail-safe: a duplicate denies the extra charge. A processor header may *ride along* with a match; it does not replace your set. Structural means that identity — not a payment company, not a questionnaire, not HTTP 200.
 
-The smallest restore for the lab ledger is: two k1 → count 1, first k1 may charge. Do not fail open because the processor said ok. Do not mint a new key on every retry and call that idempotency.
+The smallest restore for the notes app's lab ledger is: two k1 → count 1, first k1 may charge. Do not fail open because the processor said ok. Do not mint a new key on every retry and call that remembering.
 
-## Mental model: seen gate
+## Picture: seen gate
 
 ```mermaid
 flowchart TD
@@ -19,11 +18,11 @@ flowchart TD
   In -->|no| Add[append once]
 ```
 
-Do not accept “Stripe was sent the header” as membership. Production still needs the webhook path to use the same key — a second insert from a webhook is a lying once. Clients that mint a new key each click bypass this pytest. `v5.0.0-2.3.3` wants the operation to succeed entirely or roll back. `v5.0.0-13.1.2` (connection-pool limits) is Level 3 advanced.
+Do not accept “we sent the processor the header” as membership. Production still needs the webhook path to use the same key — a second insert from a webhook is a lying once. Clients that mint a new key each click walk around this pytest. Industry checklists want the step to succeed all the way or roll back. Connection-pool limits are advanced leftover.
 
-ASVS `v5.0.0-2.3.4` wants no double-booking. This pytest is that sentence for two k1.
+They also want no double-booking. This pytest is that sentence for two k1.
 
-## Why this restores the cell
+## What the repaired files must show
 
 | After the fix | Must be true |
 |---|---|
@@ -32,15 +31,15 @@ ASVS `v5.0.0-2.3.4` wants no double-booking. This pytest is that sentence for tw
 
 ## What this is not
 
-PCI SAQ. Stripe. Gate 7. New-key retries (residual). Health-record append-only as a different product (same grain).
+A filled-in questionnaire. A payment company. A course gate. New-key retries (leftover). Health-record append-only as a different product (same grain).
 
-## Mechanism limits
+## What can still go wrong
 
-- Client mints a new key each retry.
-- Webhook path can still append if it ignores SEEN.
-- `v5.0.0-13.1.2` Level 3 pool limits are not this predicate.
-- Accessible UIs that trap users cause retries — WCAG residual.
-- This lab has no PAN and is not PCI scope.
+- The client mints a new key each retry.
+- The webhook path can still append if it ignores SEEN.
+- Connection-pool limits are not this check.
+- Screens that trap people cause retries — leftover for people who still need to use it.
+- This practice has no card numbers and is not in card-network scope.
 
 ## Practice
 
@@ -50,16 +49,12 @@ Name who can mint keys. Run:
 python3 -m pytest labs/E3/e3-lab/tests --impl fixed
 ```
 
-Must pass. Run from the lab directory if collection at repo root is polluted.
+It must pass. Run from the practice folder if a run at the repo root is polluted.
 
-## Transfer
+## Use it somewhere new
 
 Health: the document version id is the key, not “POST again.”
 
-## Residual risk
+## What this page is not doing
 
-Webhook race; new key each click; `v5.0.0-13.1.2` Level 3.
-
-## Non-goals
-
-Do not hit a live processor. Do not claim PCI from this lab. Do not invent PAN.
+Do not hit a live processor. Do not claim card-network scope from this practice. Do not invent card numbers.

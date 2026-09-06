@@ -1,56 +1,57 @@
-# E2-LO-08 — Review Report-Only-as-on as a PR
+# Review Report-Only-as-on like a pull request
 
 **Kind:** code-review
 **Loop step:** Review
-**Standards:** ASVS `v5.0.0-3.4.3`, `v5.0.0-3.4.7`. CSP3 **draft**.
 
-## Review the fixture as if it were SecureCollab header middleware
+Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
 
-Review `labs/E2/e2-lab/vulnerable/` as a SecureCollab PR. Your job is not to count suspicious lines. Reconstruct whether Report-Only still makes `isolation_enforced` true, compare that with the module invariant, and write changes a developer can verify.
+## What you are reviewing
 
-Intended findings live only in `content/assessment/keys/E2.md` — not here. Do not open the keys file until your review has been evaluated.
+A colleague ships the notes app’s header middleware. Review `labs/E2/e2-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether Report-Only still makes `isolation_enforced` true, compare that with the rule, and write changes a developer can verify.
 
-## Mental model: Report-Only counted as on
+The check you already ran (`test_report_only_is_not_enforcement`) is the rule check. A comment “we should enforce later” is not.
 
-Start with this seeded smell: **Report-Only counted as on**. Label it property, mechanism, or false assurance before you accept the PR.
+## Picture: Report-Only counted as on
+
+Start with this seeded smell: **Report-Only counted as on**. Label it **rule**, **tool**, or **false comfort** before you accept the change.
 
 ```mermaid
 flowchart TD
-  Claim[PR claim] --> Q{"What would falsify it?"}
-  Q -->|Report-Only counts| Property["Property - good if tested"]
-  Q -->|Helmet added| Mechanism[Mechanism - library]
-  Q -->|dashboard green| False[False assurance]
+  Claim[Change claim] --> Q{"What would prove it false?"}
+  Q -->|Report-Only counts| Property["Rule - good if tested"]
+  Q -->|Helmet added| Mechanism[Tool - library]
+  Q -->|dashboard green| False[False comfort]
 ```
 
 Classification starts at the protected effect (Report-Only is not enforcement). Everything that is not the enforcing header name at that call is a candidate always-on path. A dashboard screenshot without that pytest is the same smell, not a different finding class.
 
-Encoding is 6.2. CDN strip is 2.2. Do not skip `test_report_only_is_not_enforcement`. Do not claim Gate 7. Do not XSS a live origin to prove the finding.
+Encoding is 6.2. CDN strip is 2.2. Do not skip `test_report_only_is_not_enforcement`. Do not claim check-in 7. Do not load a live page to prove the finding.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - Report-Only counted as on
 - JSONP leftover
 - Trusted Types claimed as encoding
 - Edge cache stripping CSP
 
-Also reject: live XSS; shipping without re-running `test_report_only_is_not_enforcement`; keys in lessons; claiming Gate 7; presenting CSP3 as final.
+Also reject: a live script hunt; shipping without re-running `test_report_only_is_not_enforcement`; keys in learner notes; claiming check-in 7; presenting the current content-security spec as final.
 
-## Misconceptions this module refuses
+## Common mix-ups this topic refuses
 
 - Report-Only is isolation
 - Helmet defaults are the guarantee
-- CSP replaces encoding
-- A green reporting dashboard is 6.2
+- A content-security policy replaces encoding
+- A green reporting dashboard is encoding (6.2)
 - Trusted Types is encoding
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: observation, property or false assurance, suggested structural change, residual you will **not** delete. Tie at least one to `test_report_only_is_not_enforcement`.
+Write three review notes a peer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_report_only_is_not_enforcement`. Do not open the keys file.
 
-## Transfer
+## Use it somewhere new
 
-Clinic PR that “added Report-Only and a dashboard” without an enforcing header is an incomplete isolation review. Name the independent falsehood that would still keep Report-Only from counting as on.
+A clinic change that “added Report-Only and a dashboard” without an enforcing header is an incomplete isolation review. Name the independent falsehood that would still keep Report-Only from counting as on.
 
-## Non-goals
+## What this page is not doing
 
-Do not merge by adding a comment “will enforce later.” That comment is a residual without an owner. Do not XSS a public origin to prove the finding.
+Do not merge by adding a comment “will enforce later.” That comment is leftover without an owner. Do not load a public page to prove the finding.

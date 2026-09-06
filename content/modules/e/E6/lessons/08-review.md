@@ -1,56 +1,61 @@
-# E6-LO-08 — Review always-accept exception as a PR
+# Review always-accept exception like a pull request
 
 **Kind:** code-review
 **Loop step:** Review
-**Standards:** SAMM 2.0 vocabulary. ASVS `v5.0.0-15.1.5` Level 3 advanced. CISA Secure by Design **unverified**.
 
-## Review the fixture as if it were SecureCollab’s risk register
+Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
 
-Review `labs/E6/e6-lab/vulnerable/` as a SecureCollab PR. Your job is not to count suspicious lines. Reconstruct whether `accept_exception({"owner": "", "review_by": None})` still returns true, compare that with the module invariant, and write changes a developer can verify.
+## What you are reviewing
 
-Intended findings live only in `content/assessment/keys/E6.md` — not here. Do not open the keys file until your review has been evaluated.
+A colleague ships the notes app’s leftover-risk register. Review `labs/E6/e6-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `accept_exception({"owner": "", "review_by": None})` still returns true, compare that with the rule, and write changes a developer can verify.
 
-## Mental model: Accept with empty owner
+Start at `accept_exception` and the empty-owner row, not at a scanner color or a maturity screenshot. The check you already ran (`test_exception_needs_owner_review_and_wcag`) is the rule test. A comment “will add dates later” is not.
 
-Start with this seeded smell: **Accept with empty owner**. Label it property, mechanism, or false assurance before you accept the PR.
+## Picture: accept with empty owner
+
+Start with this seeded smell: **Accept with empty owner**. Label it rule, tool, or false comfort before you accept the change.
 
 ```mermaid
 flowchart TD
-  Claim[PR claim] --> Q{"What would falsify it?"}
-  Q -->|empty owner accepted| Property["Property - good if tested"]
-  Q -->|Jira risk type| Mechanism[Mechanism - ticket]
-  Q -->|SAMM mapped| False[False assurance]
+  Claim[PR claim] --> Q{"What would show it is false?"}
+  Q -->|empty owner accepted| Property["Rule - good if tested"]
+  Q -->|ticket type named risk| Mechanism[Tool - ticket]
+  Q -->|maturity mapped| False[False comfort]
 ```
 
-Classification starts at the protected effect (empty owner denied). Everything that is not the schema at that call is a candidate always-accept path. A SAMM screenshot without that pytest is the same smell, not a different finding class.
+Classification starts at the protected effect (empty owner denied). Everything that is not the schema at that call is a candidate always-accept path. A maturity screenshot without that pytest is the same smell, not a different finding class.
 
-Unread register is residual. Tech-debt rename is residual. Do not skip `test_exception_needs_owner_review_and_wcag`. Do not claim Gate 7. Do not contact a live PSIRT to prove the finding.
+Unread register is leftover. Tech-debt rename is leftover. Do not skip `test_exception_needs_owner_review_and_wcag`. Do not claim you finished an assurance gate. Do not contact a live disclosure inbox to prove the finding.
 
 ## Seeded smells (label them yourself)
 
 - Accept with empty owner
 - No `review_by`
 - Accessibility not in the schema
-- SAMM slide as the exception
+- Maturity slide as the exception
 
-Also reject: live PSIRT; shipping without re-running `test_exception_needs_owner_review_and_wcag`; keys in lessons; claiming Gate 7; treating CISA Secure by Design as verified.
+Also reject: live disclosure; shipping without re-running `test_exception_needs_owner_review_and_wcag`; keys in learner notes; claiming an assurance gate; treating an unverified pledge as proven.
 
-## Misconceptions this module refuses
+## Common mix-ups
 
-- Leadership is soft skills not invariants
+- Leadership is soft skills, not rules
 - Exceptions are failure
-- Users can always call support instead of accessible recovery
-- SAMM score is the register
+- People can always call support instead of accessible recovery
+- A maturity score is the register
 - A HIPAA slide is `accept_exception`
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: observation, property or false assurance, suggested structural change, residual you will **not** delete. Tie at least one to `test_exception_needs_owner_review_and_wcag`.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_exception_needs_owner_review_and_wcag`. Do not open the keys file.
 
-## Transfer
+## Use it somewhere new
 
-Clinic PR that “added a HIPAA slide and a SAMM score” without owner/review/WCAG is an incomplete register review. Name the independent falsehood that would still keep empty owner from accepting.
+Clinic change that “added a HIPAA slide and a maturity score” without owner / review / accessibility is an incomplete register review. Name the independent falsehood that would still keep empty owner from accepting.
 
-## Non-goals
+## Can people still use it
 
-Do not merge by adding a comment “will add dates later.” That comment is a residual without an owner. Do not email a vendor PSIRT to prove the finding.
+A deny notice must say why the exception stayed incomplete (missing owner, review date, or accessibility check), not only “will add dates later.”
+
+## What this page is not doing
+
+Do not merge by adding a comment “will add dates later.” That comment is leftover without an owner. Do not email a vendor disclosure inbox to prove the finding.

@@ -1,20 +1,21 @@
-# E1-LO-01 — A model proposal is not authorization
+# A model proposal is not permission
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** OWASP AISVS 1.0 (final) `v1.0-C9.5.3`, `v1.0-C9.3.7`; `v1.0-C9.2.8` is **Level 3, advanced**. ASVS `v5.0.0-8.2.1`, `v5.0.0-13.2.1`. LLM Top 10 2026 LLM03 is **awareness after** the cause. NIST AI 600-1 and SP 800-218A are guidance.
 
-## The claim this module owns
+## The rule
 
-SecureCollab may add an optional note summarizer that can call tools. **Authorization of tools** is whether the *runtime* allowlists the name. A model-proposed `exec_sql` is English from an untrusted client (8.1), not a grant.
+The notes app may add an optional note summarizer that can call tools. **Authorization of tools** is whether the *runtime* allow-lists the name. A model-proposed `exec_sql` is English from an untrusted client. It is not a grant.
 
 > `run_tool("exec_sql", {})` must be `None`. `run_tool("search_notes", {})` may run.
 
-The forbidden outcome is **agent executes exec_sql because the model asked**. That is 6.1 (interpreter) plus 1.2 (mediation) with the model as the confused deputy.
+So what must not happen: **the agent runs `exec_sql` because the model asked**. That is the interpreter lesson plus the mediation lesson, with the model as the confused deputy.
 
-AISVS `v1.0-C9.5.3` wants access-control decisions enforced by application logic or a policy engine, **never by the AI model**. `v1.0-C9.3.7` wants an allow-list before invoke. `v1.0-C9.2.8` (cryptographically bound approvals) is **Level 3, advanced**. LLM03:2026 Excessive Agency is a regression label after this cell, not the syllabus.
+Industry checklists want access-control decisions in application logic or a policy engine, **never by the model**. They want an allow-list before a tool runs. Cryptographically bound human approvals are extra, advanced work, not this week's check. A famous-bugs list for language models names "too much agency" as a regression label after the cause, not the syllabus. Guidance documents on AI risk are not the lab oracle.
 
-## Mental model: model vs runtime
+This week's practice is this course's local files. Do not tell anyone to try attacks on a public or live model.
+
+## Picture: model vs runtime
 
 ```mermaid
 flowchart TD
@@ -25,59 +26,63 @@ flowchart TD
   Pred -->|yes| Run[may run]
 ```
 
-## Mental model: prompt is not policy
+## Picture: a prompt is not policy
 
 ```mermaid
 flowchart LR
   Prompt[system prompt] --> Belief[never exec_sql]
-  Runtime[allowlist] --> TCB[run_tool]
+  Runtime[allow-list] --> TCB[run_tool]
   Prompt --> NotTcb[not mediation]
 ```
 
-**Mechanism (not the property):** LangChain defaults, “we have RAG,” an LLM Top 10 dashboard.
+**A tool, not the rule:** library defaults, "we have retrieval," a famous-bugs dashboard.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | For this property |
+Someone treated model output as policy. That is the cause. An interpreter reached through English is a **result**, not the cause.
+
+| Slice | For this rule |
 |---|---|
-| Root cause | Model output treated as policy |
-| Preconditions | `run_tool("exec_sql")` executes |
+| Why it happens | Model output treated as policy |
+| What has to be true first | `run_tool("exec_sql")` executes |
 | Trigger | Prompt injection in a note; poisoned retrieval |
-| Impact | Authorization of tools — interpreter via English |
-| Prevention | Allowlist; no exec_sql; human approval for high impact |
-| Detection | `tool_denied` |
-| Recovery | Revoke agent creds (7.4) |
+| What it costs | Authorization of tools — interpreter via English |
+| How you stop it | Allow-list; no `exec_sql`; human approval for high impact |
+| How you notice | `tool_denied` |
+| How you recover | Revoke leftover agent credentials |
 
-## Framework defaults versus the tool guarantee
+## What the framework does vs what you still have to check
 
-LangChain will expose whatever tools you pass. A system prompt is another string the model may ignore.
+A tool library will expose whatever tools you pass. A system prompt is another string the model may ignore.
 
-## Mechanism limits
+The app's promise is: **this** `run_tool("exec_sql", {})` is `None`. The local check is `labs/E1/e1-lab`. Fake tool names only. No live models.
 
-- Prompt “never call exec_sql” is not mediation.
-- Indirect injection via 5.1 analytics copy.
-- Allowlisted `search_notes` can still return HTML (6.2).
-- Hallucinated packages (10.2) in Copilot.
+## What the tool cannot do
 
-## Usability and accessibility
+- A prompt that says "never call `exec_sql`" is not mediation.
+- Indirect injection through retrieved copy still reaches the model.
+- Allow-listed `search_notes` can still return HTML.
+- Hallucinated package names in a coding assistant stay a later leftover.
 
-Human approval UI for tools must be accessible; otherwise operators auto-approve (WCAG 2.2).
+## Can people still use it
+
+A human-approval screen for tools must be usable. If it is not, operators auto-approve.
 
 ## Practice
 
 List tools and who may call them. Then run:
 
-```
+```text
 python3 -m pytest labs/E1/e1-lab/tests --impl vulnerable
 python3 -m pytest labs/E1/e1-lab/tests --impl fixed
 ```
 
 The first command must fail. The second must pass.
 
-## Transfer
+## Use it somewhere new
 
-Copilot in CI. Clinic summarizer over charts.
+A coding assistant in CI. Clinic summarizer over charts.
 
-## Non-goals
+## What this page is not doing
 
-Live LLM APIs, claiming Gate 7. Answer keys are not in this file.
+Live model APIs, claiming you finished an assurance gate from this page. Answer keys are not in this file.

@@ -1,14 +1,13 @@
-# E4-LO-06 — Detect copy_length_denied without logging file bytes
+# copy_length_denied without logging file bytes
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
-**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; ASVS `v5.0.0-5.3.1`.
 
-## Prevention is not absolute
+## Stopping it is not enough
 
-A new unpacker can land after the min was "set once." Pair detect and recover. Do not log payload bytes (3.1 / 8.5). Uploaded bytes can contain secrets. Do not paste image bytes into the ticket.
+A new unpacker can land after the min was “set once.” Pair notice and recover. Do not log file bytes. Uploaded bytes can contain secrets. Do not paste image bytes into the ticket.
 
-## Mental model: rejected unpack is a signal
+## Picture: a rejected unpack is a signal
 
 ```mermaid
 flowchart TD
@@ -17,18 +16,24 @@ flowchart TD
   Metric --> Stop[stop serving that parser version]
 ```
 
-| Outcome | This module |
+A broken copy is a notice-and-recover problem, not a licence to dump file bytes into the log.
+
+| Outcome | This topic |
 |---|---|
-| Detect | `copy_length_denied` |
-| Signal | declared_len, bufsize, src_len; never payload |
-| Recover | Quarantine blobs; patch parser; do not ship overflowed binary |
-| Residual | FFI; integer wrap; existing C codecs |
+| Notice | `copy_length_denied` |
+| What the line holds | declared_len, bufsize, src_len; never file bytes |
+| Recover | Quarantine blobs; patch the parser; do not ship an overflowed binary |
+| Leftover | Helpers that call C; integer wrap; existing C codecs |
 
-CSF 2.0 Detect / Respond / Recover name outcomes. They do not prove `v5.0.0-5.3.1`. A language-name sticker is not the property. Re-run `test_copy_does_not_exceed_buffer` after any unpacker change; a green “we use Kotlin” tile is not that pytest. JNI / protobuf C extensions are the same family — inventory them before claiming Recover.
+Industry lists name detect, respond, recover. They do not pick a log product. They do not prove this length rule. A language-name sticker is not the rule. Re-run `test_copy_does_not_exceed_buffer` after any unpacker change; a green “we use Kotlin” tile is not that pytest. JNI / protobuf C extensions are the same family — inventory them before claiming recover.
 
-## Framework defaults versus the operate guarantee
+## What the framework does vs what you still have to check
 
-An ASAN dashboard will show sanitizer hits in CI languages that run under it and stay silent when a Python stand-in (or a C wheel) copies by declared_len. Detection must observe **length ≤ bufsize**, not “the language is memory-safe.” If the alert includes file bytes or a hex dump, you have opened a 3.1 cell.
+A sanitizer dashboard will show hits in languages that run under it and stay silent when a Python stand-in (or a C wheel) copies by `declared_len`. Notice must observe **length ≤ bufsize**, not “the language is memory-safe.” If the alert includes file bytes or a hex dump, you have opened a leak.
+
+An operator reject screen must say *copy exceeds destination* without requiring a hex dump. People should be able to read that error without a dump of the file.
+
+Why it happens vs what it costs stays split here too: the **cause** is declared length trusted over destination size; the **cost** is an oversize destination object; **how you stop it** is the three-way min; **how you notice** is `copy_length_denied`; **how you recover** is quarantine-and-patch. What this alert cannot do: it does not bound a leftover C codec and does not catch integer wrap.
 
 ## Practice
 
@@ -38,18 +43,12 @@ Write one log line you would accept. Tie it to `labs/E4/e4-lab`.
 log_denied reason=copy_length_denied declared_len=4 bufsize=4 src_len=8
 ```
 
-Reject any line that includes file bytes, a hex dump, or "Gate 7 complete."
+Reject any line that includes file bytes, a hex dump, or “course gate complete.”
 
-## Transfer
+## Use it somewhere new
 
 Clinic: deny the oversize DICOM copy; do not paste the image bytes into the ticket. Do not fuzz a third-party codec.
 
-## Usability
+## What this page is not doing
 
-An operator reject-UI must state *copy exceeds destination* without requiring a hex dump (WCAG 2.2 Success Criterion 4.1.3).
-
-Cause vs impact stays split here too: the **cause** is declared length trusted over destination size; the **impact** is an oversize destination object; **prevention** is the three-way min; **detection** is `copy_length_denied`; **recovery** is quarantine-and-patch. Mechanism limit: this alert does not bound a leftover C codec and does not catch integer wrap.
-
-## Non-goals
-
-A language-name sticker is not the property. M2 stays not-attempted. CWE-119 is not this alert.
+A language-name sticker is not the rule. Course gates stay not-attempted. An awareness-list name is not this alert.

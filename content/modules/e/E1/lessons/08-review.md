@@ -1,30 +1,31 @@
-# E1-LO-08 — Review always-run run_tool as a PR
+# Review always-run run_tool like a pull request
 
 **Kind:** code-review
 **Loop step:** Review
-**Standards:** AISVS `v1.0-C9.5.3`. ASVS `v5.0.0-8.2.1`. LLM03 awareness after the cause.
 
-## Review the fixture as if it were SecureCollab’s summarizer agent
+Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
 
-Review `labs/E1/e1-lab/vulnerable/` as a SecureCollab PR. Your job is not to count suspicious lines. Reconstruct whether `run_tool("exec_sql", {})` still runs, compare that with the module invariant, and write changes a developer can verify.
+## What you are reviewing
 
-Intended findings live only in `content/assessment/keys/E1.md` — not here. Do not open the keys file until your review has been evaluated.
+A colleague ships the notes app's summarizer agent. Review `labs/E1/e1-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `run_tool("exec_sql", {})` still runs, compare that with the rule, and write changes a developer can verify.
 
-## Mental model: exec_sql available
+Start at `run_tool` and the `exec_sql` row, not at a scanner color or a famous-bugs screenshot. The check you already ran (`test_exec_sql_tool_is_denied`) is the rule test. A comment "will allow-list later" is not.
 
-Start with this seeded smell: **`exec_sql` available**. Label it property, mechanism, or false assurance before you accept the PR.
+## Picture: exec_sql available
+
+Start with this seeded smell: **`exec_sql` available**. Label it rule, tool, or false comfort before you accept the change.
 
 ```mermaid
 flowchart TD
-  Claim[PR claim] --> Q{"What would falsify it?"}
-  Q -->|exec_sql runs| Property["Property - good if tested"]
-  Q -->|prompt forbids SQL| Mechanism[Mechanism - string]
-  Q -->|LLM03 mapped| False[False assurance]
+  Claim[PR claim] --> Q{"What would show it is false?"}
+  Q -->|exec_sql runs| Property["Rule - good if tested"]
+  Q -->|prompt forbids SQL| Mechanism[Tool - string]
+  Q -->|famous-bugs mapped| False[False comfort]
 ```
 
-Classification starts at the protected effect (exec_sql is None). Everything that is not allowlist membership at that call is a candidate always-run path. A prompt screenshot without that pytest is the same smell, not a different finding class.
+Classification starts at the protected effect (`exec_sql` is None). Everything that is not allow-list membership at that call is a candidate always-run path. A prompt screenshot without that pytest is the same smell, not a different finding class.
 
-Retrieved docs are untrusted. Copilot install-tools are 10.2. Do not skip `test_exec_sql_tool_is_denied`. Do not claim Gate 7. Do not call a live model to prove the finding.
+Retrieved docs are untrusted. Coding-assistant install tools are a later leftover. Name them, do not skip `test_exec_sql_tool_is_denied`. Do not claim you finished an assurance gate. Do not call a live model to prove the finding.
 
 ## Seeded smells (label them yourself)
 
@@ -33,24 +34,28 @@ Retrieved docs are untrusted. Copilot install-tools are 10.2. Do not skip `test_
 - No denied-tool test
 - Retrieved docs trusted
 
-Also reject: live LLM attacks; shipping without re-running `test_exec_sql_tool_is_denied`; keys in lessons; claiming Gate 7; treating AISVS as ASVS.
+Also reject: live model attacks; shipping without re-running `test_exec_sql_tool_is_denied`; keys in learner notes; claiming an assurance gate.
 
-## Misconceptions this module refuses
+## Common mix-ups
 
-- LLM Top 10 is ASVS for AI
-- RAG is safe because it is “our data”
-- The model is in the TCB
+- A famous-bugs list is the rulebook for AI
+- Retrieval is safe because it is "our data"
+- The model is what you trust
 - A system prompt is complete mediation
-- LLM03 mapping is `run_tool`
+- A famous-bugs mapping is `run_tool`
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: observation, property or false assurance, suggested structural change, residual you will **not** delete. Tie at least one to `test_exec_sql_tool_is_denied`.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_exec_sql_tool_is_denied`. Do not open the keys file.
 
-## Transfer
+## Use it somewhere new
 
-Clinic PR that “added a system prompt and LLM03 mapping” without an allowlist is an incomplete tool-gate review. Name the independent falsehood that would still keep exec_sql from running.
+Clinic change that "added a system prompt and a famous-bugs mapping" without an allow-list is an incomplete tool-gate review. Name the independent falsehood that would still keep `exec_sql` from running.
 
-## Non-goals
+## Can people still use it
 
-Do not merge by adding a comment “will allowlist later.” That comment is a residual without an owner. Do not jailbreak a public model to prove the finding.
+A denied tool must say why it stayed out (`exec_sql` not allow-listed), not only "will allow-list later."
+
+## What this page is not doing
+
+Do not merge by adding a comment "will allow-list later." That comment is leftover without an owner. Do not jailbreak a public model to prove the finding.

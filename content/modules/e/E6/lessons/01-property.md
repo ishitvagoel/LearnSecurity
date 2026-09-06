@@ -1,20 +1,21 @@
-# E6-LO-01 — Oral acceptance is not a register row
+# A spoken yes is not a register row
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** OWASP SAMM 2.0 (final) as measurement vocabulary. NIST CSF 2.0 (final) GV as outcome labels. SSDF 1.1 (final) PW.1; SSDF 1.2 remains **draft**. CISA Secure by Design is **unverified**. ASVS `v5.0.0-15.1.5` is **Level 3, advanced**. WCAG 2.2 (final).
 
-## The claim this module owns
+## The rule
 
-SecureCollab leadership may accept residual risk. **Accountability of residual risk** is whether the exception is a **record** with an owner, a review date, and an accessibility check. “We’ll accept it” in a meeting is not that record (1.1 + 1.4 + 10.1).
+The notes app’s leadership may accept leftover risk. **Accountability of leftover risk** is whether the exception is a **record** with an owner, a review date, and an accessibility check. “We’ll accept it” in a meeting is not that record.
 
 > `accept_exception({"owner": "", "review_by": None})` must be false. A complete record may be accepted.
 
-The forbidden outcome is **an incomplete exception accepted**. Unowned holes last forever; inaccessible recovery (1.4) is silently kept.
+What must not happen: **an incomplete exception accepted**. Unowned holes last forever. Inaccessible recovery (people cannot finish the reset path) is quietly kept.
 
-SAMM 2.0 measures practices. It is not a row in the register. CSF GV names govern outcomes. SSDF 1.1 PW.1 is design-review vocabulary. CISA Secure by Design is **unverified** manufacturer-ownership guidance, not Gate 7. `v5.0.0-15.1.5` (document dangerous functionality) is **Level 3, advanced**.
+A process-maturity score measures whether a practice exists somewhere. It is not a row in the register. Industry “govern” labels name outcomes. They do not write the exception. A design-review guide is vocabulary for “think while you design.” It is not `accept_exception`. An unverified “secure by design” pledge page talks about manufacturer ownership. It is not this week’s check and not an assurance stamp. Extra advanced work — document the dangerous function — is a reason to *require* a record. It is not this pytest. A later draft of the design-review guide stays a **draft**.
 
-## Mental model: talk vs record
+This week’s practice is this course’s local files or official labs. Do not tell anyone to try attacks on public or third-party systems.
+
+## Picture: talk vs record
 
 ```mermaid
 flowchart TD
@@ -23,63 +24,73 @@ flowchart TD
   Talk --> NotRow[not a register row]
 ```
 
-## Mental model: SAMM is not the exception
+## Picture: a maturity score is not the exception
 
 ```mermaid
 flowchart LR
-  Samm[SAMM score] --> Measure[practice maturity]
-  Row[exception schema] --> Account[this cell]
-  Samm --> NotRow[not accept_exception]
+  Score[maturity score] --> Measure[practice exists]
+  Row[exception record] --> Account[this hole]
+  Score --> NotRow[not accept_exception]
 ```
 
-**Mechanism (not the property):** Jira “risk” issue type without dates; a Secure by Design pledge; a one-year roadmap slide.
+**A tool, not the rule:** a ticket type named “risk” with optional dates; a “secure by design” pledge; a one-year roadmap slide.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Who can treat a spoken yes as a row
 
-| Slice | For this property |
+| Person | What they can do here | Motive | Harm if the spoken yes counts |
+|---|---|---|---|
+| Calendar-pressed lead | Say “we’ll accept it” and ship | Make the date | Nobody owns the hole; it never expires |
+| Someone who treats a maturity score as the register | Point at a dashboard tile | “We already measure this” | The score is not owner, review date, or accessibility |
+| Someone who treats a pledge as done | Paste a manufacturer page | Looks like leadership | The incomplete record still accepted |
+
+You do not need a live disclosure inbox this week. Those three already accept the hole if `accept_exception` always says yes.
+
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
+
+Oral acceptance treated as a register row. That is the cause. The unowned hole that lasts, or inaccessible recovery kept, is a **result**, not the cause.
+
+| Slice | For this rule |
 |---|---|
-| Root cause | Oral acceptance treated as a register row |
-| Preconditions | `accept_exception` true with empty owner |
+| Why it happens | Oral acceptance treated as a register row |
+| What has to be true first | `accept_exception` true with empty owner |
 | Trigger | Calendar; silent “we’ll ship anyway” |
-| Impact | Accountability of residual risk — unowned holes; inaccessible recovery |
-| Prevention | Schema; refuse incomplete |
-| Detection | `exception_incomplete_denied` |
-| Recovery | Expire; fix or re-accept with fields |
+| What it costs | Accountability of leftover risk — unowned holes; inaccessible recovery |
+| How you stop it | Schema; refuse incomplete |
+| How you notice | `exception_incomplete_denied` |
+| How you recover | Expire; fix or re-accept with fields |
 
-## Framework defaults versus the register guarantee
+## What the framework does vs what you still have to check
 
-A Jira workflow named “risk” will accept whatever fields you leave optional. Optional owner is this bug.
+A ticket workflow named “risk” will accept whatever fields you leave optional. Optional owner is this bug.
 
-## Mechanism limits
+The app’s promise this week is: **this** `accept_exception({"owner": "", "review_by": None})` is false, and a complete record may accept. The folder is `labs/E6/e6-lab`. Fake owner strings only. No live disclosure inbox. No real people’s notes.
+
+## What the tool cannot do
 
 - A perfect register that nobody reads.
-- Rename to “tech debt.”
-- Procurement questionnaire without this schema.
-- CISA pledge pages that 403 (unverified).
+- Rename the hole to “tech debt.”
+- A procurement questionnaire without this schema.
+- An unverified pledge page that does not load.
 
-## Usability and accessibility
+## Can people still use it
 
-The exception **must** record whether the residual includes an inaccessible control (WCAG 2.2 / 1.4). Leadership owns that users cannot complete recovery.
+The exception **must** record whether leftover risk includes an inaccessible control. Leadership owns that people cannot complete recovery. Say that in the record, not only in a meeting.
 
 ## Practice
 
 Write one exception that would pass the lab. Then run:
 
-```
+```text
 python3 -m pytest labs/E6/e6-lab/tests --impl vulnerable
 python3 -m pytest labs/E6/e6-lab/tests --impl fixed
 ```
 
 The first command must fail. The second must pass.
 
-## Transfer
+## Use it somewhere new
 
-Clinic “HIPAA exception.” Procurement questionnaire vs this record.
+Clinic “HIPAA exception.” A procurement questionnaire vs this record.
 
-## Residual risk
+## What this page is not doing
 
-Unread register; renamed tech-debt; `v5.0.0-15.1.5` Level 3 documentation residual.
-
-## Non-goals
-
-Live PSIRT. SAMM as the syllabus. Gate 7 / M2.
+Live disclosure inboxes. A maturity score as the syllabus. Claiming you finished an assurance gate. Answer keys are not in this file.

@@ -1,16 +1,15 @@
-# E4-LO-02 — Destination vs declared length vs source length
+# Destination vs declared length
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** ASVS `v5.0.0-5.3.1`. CISA memory-safe roadmaps as guidance.
 
-## Can a second engineer name the length check from your unpacker map?
+## Could someone else name the length check from your unpacker map?
 
-"We wrote it in Python" is not this lesson. A reviewable model names **bufsize, declared_len, len(src), who may set each, and the copy site**.
+“We wrote it in Python” is not this page. A reviewable model names **bufsize, declared_len, len(src), who may set each, and the copy site**.
 
-SecureCollab freeze: local `copy_into(bufsize, src, declared_len)`. No native overflow PoC.
+This week’s freeze for the notes app: local `copy_into(bufsize, src, declared_len)`. No native overflow walkthrough.
 
-## Mental model: three numbers, one destination
+## Picture: three numbers, one destination
 
 ```mermaid
 flowchart TD
@@ -20,7 +19,7 @@ flowchart TD
   end
   subgraph Trusted["trustworthy for this copy"]
     Buf[bufsize]
-    Min["min of three"]
+    Min["smallest of three"]
   end
   Src --> Min
   Decl --> Min
@@ -28,49 +27,53 @@ flowchart TD
   Min --> Dst[destination]
 ```
 
-## Mental model: header is input
+If the copy is not the smallest of destination size, declared length, and source length, deny growth past the box.
+
+## Picture: the header is input
 
 ```mermaid
 flowchart LR
   Hdr[file header] --> Decl[declared_len]
   Decl --> Copy[copy_into]
-  Hdr --> Untrusted[same as JSON field]
+  Hdr --> Untrusted[same as a JSON field]
 ```
 
-## Step 1: freeze pieces
+A header length is data. Treat it like any other field the requester sent.
+
+## Step 1: freeze who, what, and the copy
 
 | Piece | This system |
 |---|---|
-| Subjects | hostile header; FFI caller |
-| Objects | destination buffer of size 4 |
+| Who | Hostile header; caller from another language |
+| What | Destination buffer of size 4 |
 | Actions | `copy_into` |
-| Channels | declared length; source bytes |
-| TCB | three-way min at copy |
-| Untrusted | `declared_len`; `len(src)` |
-| State / time | destination after copy; check at copy not only at parse |
-| 1.1 cell | integrity of the buffer object |
+| Paths | Declared length; source bytes |
+| What you trust | Smallest of three lengths at the copy |
+| What you do not trust | `declared_len`; `len(src)` |
+| State / time | Destination after copy; check at copy, not only at parse |
+| The rule | Integrity of the buffer object |
 
-## Step 2: write cells
+## Step 2: write rows the lab can fail
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
-| header | dest | copy declared_len only | deny if > bufsize |
-| parser | dest | copy min of three | allow |
-| FFI | dest | skip dest check | deny |
-| "Kotlin app" | C codec | treat as bounded | deny |
+| header | dest | copy `declared_len` only | deny if > bufsize |
+| parser | dest | copy smallest of three | allow |
+| caller from another language | dest | skip dest check | deny |
+| “Kotlin app” | C codec | treat as bounded | deny |
 
 ## Practice
 
 Draw the map. Point at `labs/E4/e4-lab` file `copy.py`.
 
-## Transfer
+## Use it somewhere new
 
 Clinic DICOM parser: the header length is still untrusted at the native codec.
 
-## Residual risk
+## What can still go wrong
 
-Integer wrap; temporal safety; parser differentials.
+Integer wrap; time bugs (use-after-free); two parsers that disagree on length.
 
-## Non-goals
+## What this page is not doing
 
-Top 25 as the definition of security. Keys stay out of lessons.
+An awareness list as the definition of security. Answer keys stay out of lessons.

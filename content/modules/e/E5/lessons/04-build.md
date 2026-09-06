@@ -1,16 +1,17 @@
-# E5-LO-04 — Bind tenant from the session
+# Bind the company from the session
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** ASVS 5.0.0 (final) `v5.0.0-8.2.1`, `v5.0.0-8.2.2`. `v5.0.0-8.3.2` is **Level 3, advanced**. `v5.0.0-15.3.3` related.
 
-## Structural means the runtime ignores the body field for isolation
+## The rule
 
-`tenant_for` must return `session["tenant"]`. Fail-safe: a lying body cannot switch workspace. RLS may *accompany* this binding; it must not be `SET` from the body. Structural means that session win — not a subdomain, not a Zanzibar tuple, not API1 mapped.
+A denylist of yesterday’s company ids is not the fix. Hiding the company picker is not the fix. “Row-level rules are on” is not the fix. Trusting a mismatch because the body “looks honest” is not the fix.
 
-The smallest restore for SecureCollab notes is: session A, body B → A. Do not fail open because “RLS is on.” Do not “repair” a mismatch by trusting the body.
+The structural change is: `tenant_for` **returns `session["tenant"]`**. Structural means the runtime ignores the body field for isolation. Bind tenant from the session. Fail closed: a lying body cannot switch company. Row-level rules may *accompany* this binding; they must not be `SET` from the body. Structural means session win — not a subdomain, not a relationship-graph tuple, not a famous-bugs mapping.
 
-## Mental model: session gate
+The smallest restore for notes-app notes is: session A, body B → A. Do not fail open because “row-level rules are on.” Do not “repair” a mismatch by trusting the body. The JSON body is not the tenant.
+
+## Picture: session gate
 
 ```mermaid
 flowchart TD
@@ -19,13 +20,13 @@ flowchart TD
   Body[body tenant] --> Ignore[log mismatch only]
 ```
 
-Do not accept "we enabled RLS" as membership in the session. Production still needs copies (search, cache, lake) to *include* the tenant — a note id without tenant is a sibling grain (`v5.0.0-14.2.3` if cited). Honest super-admin impersonation is E6-audited, not a body field. `v5.0.0-8.3.2` (immediate grant change) is Level 3 advanced.
+Do not accept “we enabled row-level rules” as membership in the session. Production still needs copies (search, cache, lake) to *include* the company — a note id without company is a sibling grain. Honest super-admin impersonation is a later audited path, not a body field. Applying grant changes immediately is advanced — not this week’s pytest.
 
-If the body tenant disagrees with the session, **log** `body_tenant_mismatch` and still use the session.
+If the body company disagrees with the session, **log** `body_tenant_mismatch` and still use the session.
 
-ASVS `v5.0.0-8.2.2` wants isolation enforced. This pytest is that sentence for body-vs-session.
+Industry checklists want isolation enforced. This pytest is that sentence for body-vs-session.
 
-## Why this restores the cell
+## What the repaired files must show
 
 | After the fix | Must be true |
 |---|---|
@@ -34,34 +35,34 @@ ASVS `v5.0.0-8.2.2` wants isolation enforced. This pytest is that sentence for b
 
 ## What this is not
 
-Zanzibar. IAM at scale. Subdomain routing. Gate 7 / M2. Immediate grant-change (`v5.0.0-8.3.2` Level 3 residual). RLS as the TCB.
+A relationship-graph product. Identity-at-scale as a substitute. Subdomain routing. A course gate. Immediate grant-change leftover. Row-level rules as what you trust.
 
-## Mechanism limits
+## What the tool cannot do
 
-- Search/cache/lake keys without tenant remain copies.
-- Silent impersonation is not this predicate.
+- Search, cache, and lake keys without company remain copies.
+- Silent impersonation is not this check.
 - GraphQL `org_id` is the same field under another name.
-- JWT `org` copied from the client is the same bug.
-- RLS-from-body reintroduces the break in SQL.
+- A JWT `org` copied from the client is the same bug.
+- A row-level variable set from the body reintroduces the break in SQL.
 
 ## Practice
 
-Name who can mint the session tenant. Run:
+Name who can mint the session company. Run:
 
 ```text
 python3 -m pytest labs/E5/e5-lab/tests --impl fixed
 ```
 
-Must pass. Run from the lab directory if collection at repo root is polluted.
+It must pass. Run from the lab directory if collection at repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-## Transfer
+## Use it somewhere new
 
-Clinic: ignore `org_id` in JSON the same way.
+Clinic: ignore `org_id` in JSON the same way. Bind the company from the session.
 
-## Residual risk
+## What can still go wrong
 
-Copies keyed without tenant; silent impersonation; honest super-admin; `v5.0.0-8.3.2` Level 3.
+Copies keyed without company; silent impersonation; honest super-admin; immediate grant-change leftover.
 
-## Non-goals
+## What this page is not doing
 
-Do not probe a live tenant. Do not claim Gate 7 from an RLS screenshot. Do not present API1 as the syllabus.
+Do not probe a live company. Do not claim a course gate from a row-level screenshot. Do not present a famous-bugs list as the syllabus.

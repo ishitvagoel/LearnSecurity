@@ -1,61 +1,70 @@
-# E4-LO-03 — Observe declared_len plus slack, do not compile overflows
+# Practice: declared_len plus 8
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
-**Standards:** CISA Case for Memory Safe Roadmaps (2023-12-06, guidance). ASVS `v5.0.0-5.3.1` related. `v5.0.0-5.3.3` native unpacker residual is **Level 3, advanced**. CWE-119 / CWE-787 are **awareness after** the length cause. Lab policy: local only. No native exploits.
 
-## Authorized scope
+## Try it
 
-`labs/E4/e4-lab` only. The fixture is an in-process `copy_into(bufsize, src, declared_len)`. Synthetic `abcdefgh` bytes. Do **not** compile a C overflow, spray a heap, or fuzz a third-party binary as the exercise.
+The practice is not a website you attack. It is a tiny in-process `copy_into(bufsize, src, declared_len)`. It does not compile a C overflow, spray a heap, or fuzz a third-party binary. The failure is already in the object: the copy uses `declared_len` plus 8. You are here to see that the check treats that as a **failed rule**, not as extra slack you needed.
 
-**Forbidden outcome:** Copy into a 4-byte lab buffer returns more than 4 bytes. `len(copy_into(4, b"abcdefgh", 4)) > 4`.
+The rule under test:
 
-Attacker capability in this lab: a hostile header `declared_len`. That stands in for “the app is mostly Kotlin so copies are safe,” ASAN in CI treated as 1.2, or a CWE-119 mapping treated as this cell. Trust assumption: `copy_into` is supposed to bound the copy by **destination capacity**. Python slicing, a CISA roadmap, and FastAPI are not in the TCB for this cell.
+> `len(copy_into(4, b"abcdefgh", 4))` must be ≤ 4. A short honest copy may fit. Checking every path here means the copy is bounded by destination size.
 
-## Mental model: extra eight bytes are not a gift
+## Where you may practice
+
+Only `labs/E4/e4-lab` is in scope. Fake bytes: `abcdefgh`. Restore the broken and repaired folders when you are done.
+
+Do not compile a C overflow. Do not spray a heap. Do not fuzz a third-party binary, an employer codec, or anyone else’s unpacker.
+
+What must not happen: copy into a 4-byte lab buffer returns more than 4 bytes. `len(copy_into(4, b"abcdefgh", 4)) > 4`.
+
+Who can act here: a hostile header `declared_len`. That stands in for “the app is mostly Kotlin so copies are safe,” a sanitizer in CI treated as the rule, or an awareness-list mapping treated as this cell. What you are supposed to trust: `copy_into` bounds the copy by **destination size**. Python slicing, a company language roadmap, and FastAPI are not what you trust for this cell.
+
+## Picture: extra eight bytes are not a gift
 
 ```mermaid
 sequenceDiagram
   participant H as header declared_len 4
   participant S as src 8 bytes
-  participant V as vulnerable copy
-  H->>V: copy 4 plus slack
+  participant V as broken copy
+  H->>V: copy 4 plus 8
   S->>V: abcdefgh
   V-->>V: destination length 8
 ```
 
-`--impl vulnerable` copies `src[: declared_len + 8]`. For an 8-byte source that is the whole buffer — longer than `bufsize` 4. Do not treat the `+ 8` as a C exploit size. Preconditions: declared length is trusted over destination size. You do not need a compiler. You must not ship a native PoC.
+The broken files copy `src[: declared_len + 8]`. For an 8-byte source that is the whole buffer — longer than `bufsize` 4. Do not treat the `+ 8` as a C exploit size. What has to be true first: declared length is trusted over destination size. You do not need a compiler. You must not ship a native walkthrough.
 
-CISA's Case for Memory Safe Roadmaps is **manufacturer guidance**, not the lab oracle. Module 6.4 already said path length is mediation; this cell is **spatial length at the copy**. Gate 7 and M2 stay **not-attempted**.
+An earlier topic already said path length is checking every path for *which file*. This cell is **spatial length at the copy**. Course gates stay not-attempted.
 
-## What to read in the fixture
+## What to look at — cause, not a trophy
 
-`vulnerable/copy.py` returns more than `bufsize` bytes. Tests:
+Read `vulnerable/copy.py`. It returns more than `bufsize` bytes. Checks:
 
 - `test_copy_does_not_exceed_buffer`
 - `test_short_copy_may_fit` — short honest copy may pass on both
 
 You do not need a new source. The failure of `test_copy_does_not_exceed_buffer` *is* the evidence.
 
-Do not open the fixed tree yet. Diagnose the cause first.
+Do not open the repaired files yet. Diagnose the cause first.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | This lab |
+| Slice | This practice |
 |---|---|
-| Required property | `len(copy_into(4, b"abcdefgh", 4)) <= 4` |
-| Root cause | Declared length trusted over destination size |
-| Preconditions | copy uses declared_len plus slack |
+| The rule | `len(copy_into(4, b"abcdefgh", 4)) <= 4` |
+| Why it happens | Declared length trusted over destination size |
+| What has to be true first | Copy uses `declared_len` plus 8 |
 | Trigger | Header claims 4; payload is 8 |
-| Impact | Destination longer than bufsize |
-| Prevention | `min(bufsize, declared_len, len(src))` |
-| Detection | `copy_length_denied`; never payload bytes |
-| Recovery | Reject the blob; patch the parser |
-| Not the lesson | A C exploit; CWE dashboard; Gate 7 complete |
+| What it costs | Destination longer than bufsize |
+| How you stop it | `min(bufsize, declared_len, len(src))` |
+| How you notice | `copy_length_denied`; never file bytes |
+| How you recover | Reject the blob; patch the parser |
+| Not the lesson | A C exploit, an awareness-list dashboard, or a course gate |
 
-## Framework defaults versus the copy guarantee
+## What the framework does vs what you still have to check
 
-Python slicing will not save a C `memcpy`. A memory-safe language reduces CWE-119 **in that language**. FFI and leftover codecs still copy. The application guarantee is: **this** fixture, length ≤ 4.
+Python slicing will not save a C copy. A memory-safe language reduces this overwrite class **in that language**. Helpers that call C, and leftover codecs, still copy. The app’s promise is: **this** practice, length ≤ 4.
 
 ## Practice
 
@@ -63,12 +72,12 @@ Python slicing will not save a C `memcpy`. A memory-safe language reduces CWE-11
 python3 -m pytest labs/E4/e4-lab/tests --impl vulnerable
 ```
 
-Run from `labs/E4/e4-lab` if a repo-root collection picks up `site/`. Record `test_copy_does_not_exceed_buffer`. Do not compile native PoCs. An environment error is not security evidence.
+Run from `labs/E4/e4-lab` if a repo-root collection picks up `site/`. Record `test_copy_does_not_exceed_buffer`. Do not compile native walkthroughs. An environment error is not security evidence.
 
-## Transfer
+## Use it somewhere new
 
 Clinic image parser: predict the oversize copy without leaving this directory. Do not fuzz a third-party codec.
 
-## Non-goals
+## What this page is not doing
 
-No public-binary, production-unpacker, or weaponized overflow instructions. Do not claim Gate 7. CWE-119 stays awareness after the cause.
+No public-binary, production-unpacker, or weaponized overflow instructions. Do not claim a course gate. An awareness-list name stays awareness after the cause.

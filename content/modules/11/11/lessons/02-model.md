@@ -1,16 +1,19 @@
-# 11-LO-02 — Grant consulted on every read
+# Grant consulted on every read
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** ASVS `v5.0.0-8.2.1`, `v5.0.0-8.2.2`.
 
-## Can a second engineer name the revoke check from your share map?
+## Could someone else name the revoke check from your share map?
 
-“We have a revoke endpoint” is not this lesson. A reviewable model names **owner, grant, every read path (API, worker, cache), and leftover copies**.
+“We have a revoke endpoint” is not this lesson. A drawing someone else can test names **owner, grant, every read path (API, worker, cache), and leftover copies**.
 
-SecureCollab freeze: local `revoke` / `read`. No live tenants.
+This week’s freeze for the notes app: local `revoke` / `read`. No live tenants.
 
-## Mental model: three subjects
+> After revoke, the rule is deny when the reader is not the owner and not in the grant set. Honest owner read after revoke may still return the body. Honest share read *before* revoke may still return the body. Evidence that the deny is false: `read("n1", "B")` after `revoke("n1", "B")` still returns the body.
+
+If the owner-or-grant row is blank, B keeps reading because nobody named the check.
+
+## Picture: three subjects
 
 ```mermaid
 flowchart TD
@@ -19,50 +22,56 @@ flowchart TD
   Revoked[B after revoke] --> Deny[None]
 ```
 
-## Mental model: other grains of the same cell
+## Picture: other grains of the same cell
 
 ```mermaid
 flowchart LR
   Api[API read] --> Grant[GRANTS]
-  Worker["7.4 worker"] --> Grant
-  Cache["8.2 device"] --> Grant
-  Mail["5.1 copy"] --> Residual[already sent]
+  Worker[delayed worker] --> Grant
+  Cache[phone cache] --> Grant
+  Mail[copy already sent] --> Residual[already sent]
 ```
 
-## Step 1: freeze pieces
+A copy already sitting in email is leftover, not this week’s pytest.
+
+## Step 1: name the pieces
+
+Do not invent a new catalogue. Take the share you already have and ask what would show the grant was never consulted.
 
 | Piece | This system |
 |---|---|
-| Subjects | former collaborator; delayed worker |
-| Objects | note body |
+| Who | former collaborator; delayed worker |
+| What | note body |
 | Actions | `revoke`, `read` |
-| Channels | API; worker; mobile cache |
-| TCB | owner-or-grant on every read |
-| Untrusted | cached id; scanner green; YAML pack |
-| State / time | after revoke; leftover copies |
-| 1.1 cell | authorization over time |
+| Paths | API; worker; phone cache |
+| What you trust for this journey | owner-or-grant on every read |
+| What you do not trust | cached id; scanner green; YAML pack |
+| Time | after revoke; leftover copies |
+| The rule | permission over time |
 
-## Step 2: write cells
+## Step 2: write allow and deny
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
 | B after revoke | n1 body | read | deny |
 | A after revoke | n1 body | read | may allow |
 | B before revoke | n1 body | read | may allow |
-| scanner green | Gate 11 | claim | deny |
+| scanner green | assurance stamp | claim | deny |
+
+A missing “B after revoke × body × deny” row is how a revoke event becomes “still readable.” Write the hole.
 
 ## Practice
 
-Draw the map. Point at `labs/11/11-lab` file `capstone.py`.
+Draw the map so someone else could name the checks. Point at `labs/11/11-lab` file `capstone.py`.
 
-## Transfer
+## Use it somewhere new
 
 Clinic guardian revoke is the same cell with a different relationship name.
 
-## Residual risk
+## What can still go wrong
 
-Copies already sent; `v5.0.0-8.3.2` Level 3 session that was minted before revoke.
+Copies already sent. Access-rights change in the same session without signing in again is extra, advanced work, not this pytest.
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+Do not define security as a famous-bugs list. Answer keys stay out of lessons.

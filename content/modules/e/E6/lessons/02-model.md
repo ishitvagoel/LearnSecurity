@@ -1,16 +1,19 @@
-# E6-LO-02 — Owner, review date, and WCAG flag
+# Owner, review date, and accessibility flag
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** SAMM 2.0 measurement. CSF 2.0 GV. WCAG 2.2.
 
-## Can a second engineer name the exception check from your roadmap?
+## Could someone else name the exception check from your roadmap?
 
-“We have a risk meeting” is not this lesson. A reviewable model names **owner, review_by, wcag_checked, expiry, and who may accept**.
+“We have a risk meeting” is not this lesson. A drawing someone else can test names **owner, review_by, wcag_checked, expiry, and who may accept**.
 
-SecureCollab freeze: local `accept_exception(exc)`. No live disclosure inbox.
+This week’s freeze for the notes app: local `accept_exception(exc)`. No live disclosure inbox.
 
-## Mental model: three required fields
+> For accept, the rule is deny when owner is empty, deny when `review_by` is missing, and deny when `wcag_checked` is missing. A dated owner plus an accessibility flag may accept. Evidence that the deny is false: `accept_exception({"owner": "", "review_by": None})` returns true.
+
+If those three fields are blank, the hole ships because nobody named the check.
+
+## Picture: three required fields
 
 ```mermaid
 flowchart TD
@@ -21,7 +24,7 @@ flowchart TD
   Gate -->|any missing| Deny[false]
 ```
 
-## Mental model: roadmap vs row
+## Picture: roadmap vs row
 
 ```mermaid
 flowchart LR
@@ -30,40 +33,46 @@ flowchart LR
   Road --> NotNow[not accept_exception]
 ```
 
-## Step 1: freeze pieces
+A one-year slide is a plan. It is not this week’s hole. A process-maturity score still does not write the row.
+
+## Step 1: name the pieces
+
+Do not invent a new catalogue. Take the exception you already have and ask what would show it is still incomplete.
 
 | Piece | This system |
 |---|---|
-| Subjects | product lead; silent calendar |
-| Objects | residual risk; recovery path |
+| Who | Product lead; silent calendar |
+| What | Leftover risk; recovery path |
 | Actions | `accept_exception` |
-| Channels | meeting; ticket; register |
-| TCB | schema of the exception |
-| Untrusted | oral “we’ll accept it”; SAMM slide |
-| State / time | review_by expiry |
-| 1.1 cell | accountability of residual risk |
+| Paths | Meeting; ticket; register |
+| What you trust for this journey | Schema of the exception |
+| What you do not trust | Oral “we’ll accept it”; a maturity slide; a pledge page |
+| Time | `review_by` expiry |
+| The rule | Accountability of leftover risk |
 
-## Step 2: write cells
+## Step 2: write allow and deny
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
 | empty owner | exception | accept | deny |
-| dated owner + WCAG | exception | accept | may allow |
-| SAMM score | exception | treat as row | deny |
-| tech-debt rename | residual | hide | deny |
+| dated owner + accessibility flag | exception | accept | may allow |
+| maturity score | exception | treat as row | deny |
+| tech-debt rename | leftover | hide | deny |
+
+A missing owner is how a spoken yes becomes “accepted.” Write the hole.
 
 ## Practice
 
-Draw the map. Point at `labs/E6/e6-lab` file `risk.py`.
+Draw the map so someone else could name the checks. Point at `labs/E6/e6-lab` file `risk.py`.
 
-## Transfer
+## Use it somewhere new
 
 Clinic HIPAA exception with no review date. Same grain.
 
-## Residual risk
+## What can still go wrong
 
-Unread register. Inaccessible recovery left unchecked.
+Unread register. Inaccessible recovery left unchecked. Anyone can type an owner string.
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+Do not define security as a famous-bugs list. Answer keys stay out of lessons.

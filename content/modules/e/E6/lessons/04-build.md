@@ -1,16 +1,17 @@
-# E6-LO-04 — Require owner, review_by, and wcag_checked
+# Require owner, review_by, and wcag_checked
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** WCAG 2.2 (final). SSDF 1.1 PW.1 as vocabulary. SAMM 2.0 as measurement, not the predicate. ASVS `v5.0.0-15.1.5` is **Level 3, advanced**.
 
-## Structural means the runtime checks the schema
+## The rule
 
-`accept_exception` must be true only when `owner`, `review_by`, and `wcag_checked` are present. Fail-safe: incomplete records deny. A SAMM score may *accompany* the register; it does not replace the row. Structural means that schema — not “the VP said yes,” not a HIPAA slide, not a CISA pledge.
+A spoken “yes” is not the fix. A maturity score is not the fix. “The VP said yes so we shipped” is not the fix.
 
-The smallest restore for SecureCollab leadership is: empty owner → false; alice + date + WCAG may accept. Do not fail open because the meeting notes look complete. Do not silently extend past `review_by`.
+The structural change is: `accept_exception` **returns true only when `owner`, `review_by`, and `wcag_checked` are present**. Incomplete records deny. A maturity score may *accompany* the register; it does not replace the row. Structural means that schema — not “the VP said yes,” not a HIPAA slide, not a pledge.
 
-## Mental model: schema gate
+The smallest restore for the notes app’s leftover-risk record is: empty owner → false; alice + date + accessibility flag may accept. Fail-safe: a missing field is deny. Do not fail open because the meeting notes look complete. Do not silently extend past `review_by`.
+
+## Picture: schema gate
 
 ```mermaid
 flowchart TD
@@ -19,30 +20,39 @@ flowchart TD
   Fields -->|no| Deny[false]
 ```
 
-Do not accept “the VP said yes” as membership. Production still needs someone to *read* the register — an unread complete row is a residual. Inaccessible recovery (1.4) is recorded as a flag here, not proven. `v5.0.0-15.1.5` (document dangerous functionality) is Level 3 advanced: documentation, not this pytest.
+The repaired files require those three fields. Production still needs someone to *read* the register — an unread complete row is leftover. Inaccessible recovery is recorded as a flag here, not proven. Extra advanced documentation of a dangerous function is documentation, not this pytest.
 
 Expire on `review_by`. Re-accept with fields or fix the hole. Do not silently extend.
 
-SSDF 1.1 PW.1 is design-review vocabulary. This pytest is that sentence for incomplete exceptions.
+A design-review guide is vocabulary. This pytest is that sentence for incomplete exceptions.
 
-## Why this restores the cell
+## What the repaired files must show
+
+Read `fixed/risk.py` against this checklist. Do not treat the snippet as a production register product.
 
 | After the fix | Must be true |
 |---|---|
 | empty owner | false |
-| alice + date + WCAG | may be true |
+| alice + date + accessibility flag | may be true |
+
+Fail closed: if you are unsure whether the record is complete, deny. Uncertainty is a **no** on accept, not a yes because the meeting happened.
 
 ## What this is not
 
-SAMM 2.0. CSF GV sticker. CISA pledge. Gate 7 / M2. `v5.0.0-15.1.5` Level 3 documentation residual. A procurement questionnaire.
+- A process-maturity score.
+- An industry “govern” sticker.
+- An unverified pledge.
+- An assurance-gate stamp.
+- Extra advanced documentation of a dangerous function.
+- A procurement questionnaire.
 
-## Mechanism limits
+## What the tool cannot do
 
 - Anyone can type an owner string.
-- Unread register remains residual.
+- Unread register remains leftover.
 - Rename to “tech-debt” can hide the row.
-- `wcag_checked` is a flag, not a WCAG audit.
-- SSDF 1.2 IPD stays draft.
+- `wcag_checked` is a flag, not a full accessibility audit.
+- A later design-review draft stays a draft.
 
 ## Practice
 
@@ -52,16 +62,16 @@ Name who can be `owner`. Run:
 python3 -m pytest labs/E6/e6-lab/tests --impl fixed
 ```
 
-Must pass. Run from the lab directory if collection at repo root is polluted.
+It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-## Transfer
+## Use it somewhere new
 
-Clinic: refuse a HIPAA exception with no review date the same way.
+Clinic: refuse a HIPAA exception with no review date the same way. The lab still uses fake strings.
 
-## Residual risk
+## What can still go wrong
 
-Unread register; rename to tech-debt; inaccessible path still checked only as a flag; `v5.0.0-15.1.5` Level 3.
+Unread register; rename to tech-debt; inaccessible path still checked only as a flag; extra advanced documentation leftover.
 
-## Non-goals
+## What this page is not doing
 
-Do not file a live exception. Do not claim Gate 7 from a SAMM screenshot. Do not present CISA Secure by Design as verified.
+Do not file a live exception. Do not claim you finished an assurance gate from a maturity screenshot. Do not present an unverified pledge as proven.

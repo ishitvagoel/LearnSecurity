@@ -1,27 +1,27 @@
-# 11-LO-07 — Transfer: clinic revoke a guardian
+# Same idea: clinic revoke a guardian
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** ASVS `v5.0.0-8.2.1`. `v5.0.0-8.3.2` Level 3 advanced as residual. Blueprint §10.3 portfolio is not a scanner.
 
-## Change the workplace; keep revoke-200 from meaning the next read is denied
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: after `revoke("n1", "B")`, `read("n1", "B")` must be None. Rewrite it for a clinic without changing the fork.
+The notes-app scaffolding goes away. You get a **clinic that revokes a guardian**. Your job is to rewrite the loop, not to name a bug-list code.
 
-**Prompt:** Clinic: revoke a guardian. Also name the full SecureCollab slice (API + worker + mobile cache).
+The notes-app sentence was: after `revoke("n1", "B")`, `read("n1", "B")` must be None. Rewrite it for a clinic without changing the fork: B after revoke denied, A still reads, B before revoke still reads. HTTP 200 on DELETE is still an event, not the next-read check.
 
-**Product sketch:** EHR-lite “we hit DELETE /guardians/12 so the next chart read is fine,” plus “the capstone scanner is green so Gate 11 is done.”
+**Product sketch:** an EHR-lite “we hit DELETE /guardians/12 so the next chart read is fine,” plus “the capstone scanner is green so the assurance stamp is done.”
 
-Rewrite the SecureCollab sentence. Include:
+## Picture: same revoke loop, clinical object
 
-1. attacker capabilities (former guardian with a cached chart id — not a live clinic attack);
-2. trust assumptions (owner-or-grant on every read is TCB; scanner/YAML pack/HTTP 200 are not);
-3. forbidden outcome (`read` after `revoke` still returns the body, not “HIPAA”);
-4. a test idea on a **local** fixture only (no live EHR);
-5. residual (copies already sent, delayed worker, device cache, `v5.0.0-8.3.2` Level 3);
-6. WCAG if the deny is human-read (say share revoked).
+Renaming “note” to “chart” is not transfer. Owner, grant, and leftover change. Filing DELETE 200 does not consult `GRANTS` on the next read.
 
-## Mental model: HTTP 200 vs next read
+| Notes app this week | Clinic sketch |
+|---|---|
+| Note `n1` shared with B | Chart shared with a guardian |
+| `revoke("n1", "B")` then `read` | Revoke guardian then next chart read |
+| Former collaborator with cached id | Former guardian with a cached chart id — **not** a live clinic |
+| API + delayed worker + phone cache | Same three read paths — name them |
+| Scanner green / YAML pack / DELETE 200 | Same inputs — not the next-read check |
 
 ```mermaid
 flowchart LR
@@ -29,24 +29,39 @@ flowchart LR
   Next[next read] --> Reality[grant consulted?]
 ```
 
-If DELETE returns 200 while `read` ignores grants, the cell is gone. A scanner, a YAML pack, and Gate 11 in a README do not consult `GRANTS`. The full slice is API + delayed worker (7.4) + mobile cache (8.2) — name them, do not hit a live EHR here. `v5.0.0-8.3.2` is Level 3 advanced: in-session grant change, not “we stored a revoke row.” Blueprint §10.3 is the portable portfolio; a numbered slogan is not that pack.
+If DELETE returns 200 while `read` ignores grants, the cell is gone. A scanner, a YAML pack, and an assurance stamp in a README do not consult `GRANTS`. The full slice is API + delayed worker + phone cache — name them, do not hit a live clinic system here. Access-rights change in the same session without signing in again is extra, advanced work: in-session grant change, not “we stored a revoke row.” A numbered slogan is not the portable pack.
 
-The clinic rewrite still has to keep the SecureCollab fork: B after revoke denied, A still reads, B before revoke still reads. Adding DELETE without consulting grants leaves `read` returning the body. The local pytest analogue is `test_revoked_share_cannot_read` — on a fixture, not a live tenant.
+The clinic rewrite still has to keep the notes-app fork: B after revoke denied, A still reads, B before revoke still reads. Adding DELETE without consulting grants leaves `read` returning the body. The local pytest analogue is `test_revoked_share_cannot_read` — on a fixture, not a live tenant.
 
-## What graders reject
+## Prompt — clinic revoke a guardian
+
+Rewrite the notes-app sentence. Include:
+
+1. who can act (former guardian with a cached chart id — not a live clinic attack);
+2. what you trust (owner-or-grant on every read is the promise; scanner, YAML pack, and HTTP 200 are not);
+3. what must not happen (`read` after `revoke` still returns the body, not a legal label);
+4. a test idea on a **local** fixture only (no live clinic system);
+5. leftover (copies already sent, delayed worker, phone cache, access-rights change in the same session);
+6. whether a human-read deny must say share revoked (plain language, not color-only).
+
+Use fake labels. Do not use real patient names.
+
+Also name the full notes-app slice (API + worker + phone cache).
+
+## What is not good enough
 
 | Reject | Why |
 |---|---|
-| “scanner green” | Not the portfolio |
-| Live clinic / guardian tutorial | Lab policy |
-| “Gate 11 complete” | No learner evidence |
-| “DELETE 200” | Event, not next-read mediation |
-| “M5 done because lessons exist” | File presence is not mastery |
+| “scanner green” | Not the pack |
+| Live clinic / guardian tutorial | Course rules |
+| “assurance gate complete” | Forbidden stamp |
+| “DELETE 200” | Event, not next-read check |
+| “mastery because lessons exist” | File presence is not mastery |
 
 ## Practice
 
-One page. No keys. `labs/11/11-lab` is the only running system you may break. Do not hit a live tenant.
+One page. No answer keys. `labs/11/11-lab` is the only running system you may break. Do not hit a live tenant.
 
-## Non-goals
+## What this page is not doing
 
-Live-tenant attacks. Real PHI in notes. Claiming Gate 11 or M5 from this page.
+Live-tenant attacks. Real patient charts in notes. Claiming you finished an assurance gate from this page.

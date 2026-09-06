@@ -1,69 +1,84 @@
-# E1-LO-03 — Observe always-run run_tool, do not call live models
+# Practice: always-run run_tool
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
-**Standards:** OWASP AISVS 1.0 (final) `v1.0-C9.5.3`. `v1.0-C9.2.8` cryptographically bound approvals is **Level 3, advanced**. ASVS `v5.0.0-8.2.1`. LLM Top 10 2026 LLM03 is **awareness after** the cause. Lab policy: local only.
 
-## Authorized scope
+## Try it
 
-`labs/E1/e1-lab` only. The fixture is an in-process `run_tool(name, args)`. Synthetic tool names. Do **not** send prompts to a public LLM, production agent, or clinic summarizer as the exercise.
+The practice is not a model you attack. It is a tiny Python `run_tool` that returns `ran {name}` for every name. The failure is already in the function: it never looks at the name. You are here to see that the check treats that always-run call as a **failed rule**, not as a paperwork nit.
 
-**Forbidden outcome:** Agent executes `exec_sql` because the model asked. `run_tool("exec_sql", {})` returns a ran-string instead of `None`.
+The rule under test:
 
-Attacker capability in this lab: prompt injection in a note plus a confused-deputy runtime. That stands in for “the system prompt forbids SQL,” a RAG corpus treated as TCB, or an LLM03 mapping treated as 1.2. Trust assumption: `run_tool` is supposed to **allowlist the name in the runtime**. LangChain defaults, a system prompt, and FastAPI are not in the TCB for this cell.
+> An agent must not run `exec_sql` because the model asked. If `run_tool("exec_sql", {})` returns a ran-string, the runtime has failed as a security control.
 
-## Mental model: any name runs
+## Where you may practice
+
+Only `labs/E1/e1-lab` is in scope. The fixture is an in-process `run_tool(name, args)`. The names are synthetic strings `exec_sql` / `search_notes`. Do **not** send prompts to a public language model, production agent, or clinic summarizer as the exercise.
+
+Do not paste this exercise onto a public API, employer agent, or live hospital summarizer "to see what happens."
+
+What you trust for this check: `run_tool` is supposed to **allow-list the name in the runtime**. Library defaults, a system prompt, and the web framework itself are not what you trust.
+
+Who can take the tools in this story: prompt injection in a note plus a confused-deputy runtime. That stands in for "the system prompt forbids SQL," a retrieval corpus treated as what you trust, or a famous-bugs mapping treated as mediation.
+
+## Picture: any name runs
 
 ```mermaid
 flowchart TD
   Any[any tool name] --> Ran[ran name]
 ```
 
-The vulnerable tree demonstrates **cause** (model output treated as policy). Do not probe public APIs. Preconditions: `run_tool` returns `ran {name}` for every name. You do not need an LLM. You must not call a live model.
+The broken files take that path on purpose. You do not need a language model. You must not call a live model. The ran-string for `"exec_sql"` *is* the leak.
 
-AISVS `v1.0-C9.5.3` wants access-control decisions enforced by application logic, **never by the AI model**. Module 6.1 already said interpreters need argv shape; this cell is **the model is an untrusted client (8.1)**. Gate 7 and M2 stay **not-attempted**. Electives open after Phase 7; they do not stamp it.
+The interpreter lesson already said a string is not a safe argv. This check is **the same idea with the model as an untrusted client**.
 
-## What to read in the fixture
+## What to look at — cause, not a dump
 
-`vulnerable/tools.py` returns `ran {name}` for every name. Tests:
+Read `vulnerable/tools.py`. It returns `ran {name}` for every name. Tests:
 
 - `test_exec_sql_tool_is_denied`
 - `test_allowlisted_search_notes_may_run` — `search_notes` may pass on both
 
 You do not need a new tool name. The failure of `test_exec_sql_tool_is_denied` *is* the evidence.
 
-Do not open the fixed tree yet. Diagnose the cause first.
+Do not open the repaired files yet. Diagnose the cause first.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+| What you see | What kind of failure | Not the lesson |
+|---|---|---|
+| `ran {name}` for every name | Always-run `run_tool`; model output treated as policy | "The prompt forbids SQL" |
+| `"exec_sql"` still runs | What must not happen is allowed | A famous-bugs score |
+| No look at `"search_notes"` membership | The gate accepted a SQL interpreter | Retrieval as trust |
 
-| Slice | This lab |
+## Why it happens vs what it costs
+
+| Slice | Practice |
 |---|---|
-| Required property | `run_tool("exec_sql", {})` is None |
-| Root cause | Model output treated as policy |
-| Preconditions | `run_tool` runs every name |
+| The rule | `run_tool("exec_sql", {})` is None |
+| Why it happens | Model output treated as policy |
+| What has to be true first | `run_tool` runs every name |
 | Trigger | Prompt injection in a note; poisoned retrieval |
-| Impact | Interpreter via English; 6.1 + 1.2 |
-| Prevention | Allowlist; unknown tools deny |
-| Detection | `tool_denied`; never transcripts |
-| Recovery | Revoke agent creds (7.4) |
-| Not the lesson | An LLM Top 10 product; live OpenAI; Gate 7 complete |
+| What it costs | Interpreter via English |
+| How you stop it later | Allow-list; unknown tools deny |
+| How you notice later | `tool_denied`; never transcripts |
+| How you recover later | Revoke leftover agent credentials |
+| Out of scope | A famous-bugs product; a live vendor API; claiming an assurance gate |
 
-## Framework defaults versus the tool guarantee
-
-LangChain will expose whatever tools you pass. A system prompt is another string the model may ignore. FastAPI will run whatever handler you wired. The application guarantee is: **this** fixture, `exec_sql` is None.
+A tool library will expose whatever tools you pass. A system prompt is another string the model may ignore. The web framework will still run whatever handler you wired. The notes app's summarizer will still run `exec_sql` if `run_tool` is always-run. The app's promise this week is: **this** fixture, `exec_sql` is None.
 
 ## Practice
+
+From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/E1/e1-lab/tests --impl vulnerable
 ```
 
-Run from `labs/E1/e1-lab` if a repo-root collection picks up `site/`. Record `test_exec_sql_tool_is_denied`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/E1/e1-lab` if a collection at the repo root picks up `site/`. Record `test_exec_sql_tool_is_denied`. Do not probe public hosts. An environment error is not security evidence.
 
-## Transfer
+## Use it somewhere new
 
-Clinic summarizer: predict without leaving this directory. Do not call a live LLM.
+Clinic summarizer: predict without leaving this directory. Do not call a live model.
 
-## Non-goals
+## What this page is not doing
 
-No live-LLM, production-agent, or public prompt-injection instructions. Do not claim Gate 7. LLM03 stays awareness after the cause. AISVS is not ASVS.
+No live-model, production-agent, or public prompt-injection instructions. Do not claim you finished an assurance gate. Do not treat a famous-bugs list as the rulebook.

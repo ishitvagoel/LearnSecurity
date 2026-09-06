@@ -1,27 +1,27 @@
-# E1-LO-07 — Transfer: clinic summarizer over charts
+# Same idea: clinic summarizer over charts
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** AISVS `v1.0-C9.5.3`. LLM Top 10 2026 LLM03 awareness after the cause. `v1.0-C9.2.8` Level 3 **advanced**. NIST AI 600-1 is guidance, not the oracle.
 
-## Change the workplace; keep the model from meaning policy
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: `run_tool("exec_sql", {})` must be None. Rewrite it for a clinic without changing the fork.
+The notes-app scaffolding goes away. You get a **clinic summarizer over charts**. Your job is to rewrite the loop, not to name a bug-list code.
 
-**Prompt:** Clinic summarizer over charts. Also name Copilot in CI.
+The notes-app sentence was: `run_tool("exec_sql", {})` must be None. Rewrite it for a clinic without changing the fork: `exec_sql` denied, `search_notes` may run. A system prompt is still English, not permission.
 
-**Product sketch:** EHR-lite “the model is only allowed to summarize, the system prompt forbids SQL,” plus “we mapped LLM03 so the agent is done.”
+**Product sketch:** an EHR-lite "the model is only allowed to summarize, the system prompt forbids SQL," plus "we mapped a famous-bugs list so the agent is done."
 
-Rewrite the SecureCollab sentence. Include:
+## Picture: same tool loop, clinical object
 
-1. attacker capabilities (prompt injection in a chart note — not a live clinic LLM attack);
-2. trust assumptions (runtime allowlist is TCB; prompt/RAG/LLM03 are not);
-3. forbidden outcome (`run_tool("exec_sql")` runs, not “HIPAA”);
-4. a test idea on a **local** fixture only (no live OpenAI);
-5. residual (HTML from search_notes, hallucinated packages, `v1.0-C9.2.8` Level 3);
-6. WCAG if approval UI exists (operators must not auto-approve).
+Renaming "note" to "chart" is not transfer. Rule, allow-list, and leftover change. Telling the model to summarize does not take `exec_sql` out of always-run `run_tool`.
 
-## Mental model: summarize vs execute
+| Notes app this week | Clinic sketch |
+|---|---|
+| Agent must not run `exec_sql` | Clinic summarizer must not run chart-SQL |
+| `run_tool("exec_sql", {})` is None | Same call — `exec_sql` still denied |
+| Allow-listed `search_notes` may run | Same allow-list — local fixture only |
+| Prompt injection / poisoned retrieval | Same actors — **not** a live clinic model |
+| System prompt / retrieval / famous-bugs map | Same inputs — not the tool decision |
 
 ```mermaid
 flowchart LR
@@ -29,24 +29,39 @@ flowchart LR
   Sql[exec_sql] --> Reality[interpreter]
 ```
 
-If the model “only summarizes” while `run_tool` is always-run, the cell is gone. A system prompt, RAG, and an LLM03 mapping do not put `exec_sql` outside `ALLOWED`. Copilot in CI that can install packages is the same allowlist grain — name it, do not jailbreak a live model here. AISVS is not ASVS. LLM03 is a regression label *after* the confused-deputy cause, not the syllabus. `v1.0-C9.2.8` is Level 3 advanced: bound approvals, not this pytest.
+If the model "only summarizes" while `run_tool` is always-run, the rule is gone. A system prompt, retrieval, and a famous-bugs mapping do not put `exec_sql` outside `ALLOWED`. A coding assistant in CI that can install packages is the same allow-list grain — name it, do not jailbreak a live model here. Guidance documents on AI risk are not this pytest. Cryptographically bound approvals are extra, advanced work, not this week's check.
 
-The clinic rewrite still has to keep the SecureCollab fork: exec_sql denied, search_notes may run. Adding a prompt without an allowlist leaves `run_tool("exec_sql")` running. The local pytest analogue is `test_exec_sql_tool_is_denied` — on a fixture, not a live LLM.
+The clinic rewrite still has to keep the notes-app fork: `exec_sql` denied, `search_notes` may run. Adding a prompt without an allow-list leaves `run_tool("exec_sql")` running. The local pytest analogue is `test_exec_sql_tool_is_denied` — on a fixture, not a live model.
 
-## What graders reject
+## Prompt — clinic summarizer over charts
+
+Rewrite the notes-app sentence. Include:
+
+1. who can act (prompt injection in a chart note — not a live clinic model);
+2. what you trust (runtime allow-list is the promise; prompt, retrieval, and a famous-bugs map are not);
+3. what must not happen (`run_tool("exec_sql")` runs, not a legal label);
+4. a test idea on a **local** fixture only (no live vendor API);
+5. leftover (HTML from `search_notes`, hallucinated packages, cryptographically bound approvals);
+6. whether operators read the denial (say `exec_sql` not allow-listed, not color only). If an approval screen exists, operators must not auto-approve.
+
+Use fake labels. Do not use real patient names.
+
+Also name a coding assistant in CI.
+
+## What is not good enough
 
 | Reject | Why |
 |---|---|
-| “the prompt forbids SQL” | Not mediation |
-| Live LLM / jailbreak tutorial | Lab policy |
-| “LLM03 so 1.2 is done” | Awareness after the cause |
-| “we use RAG” | Retrieval is still untrusted |
-| “Gate 7 complete” | Forbidden stamp |
+| "the prompt forbids SQL" | Not mediation |
+| Live model / jailbreak tutorial | Course rules |
+| "famous-bugs map so mediation is done" | Awareness after the cause |
+| "we use retrieval" | Retrieval is still untrusted |
+| "assurance gate complete" | Forbidden stamp |
 
 ## Practice
 
-One page. No keys. `labs/E1/e1-lab` is the only running system you may break. Do not call a live model.
+One page. No answer keys. `labs/E1/e1-lab` is the only running system you may break. Do not call a live model.
 
-## Non-goals
+## What this page is not doing
 
-Live-LLM attacks. Public prompt-injection walkthroughs. Claiming Gate 7 or M2 from this page.
+Live-model attacks. Public prompt-injection walkthroughs. Claiming you finished an assurance gate from this page.

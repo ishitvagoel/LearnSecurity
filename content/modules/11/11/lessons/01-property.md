@@ -1,22 +1,23 @@
-# 11-LO-01 — Revoke is mediation, not an event
+# Revoke has to be checked, not just recorded
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** ASVS `v5.0.0-8.2.1`, `v5.0.0-8.2.2`; `v5.0.0-8.3.2` is **Level 3, advanced**. Prior pins (MASVS 2.1.0, CSF 2.0, SLSA 1.2) are vocabulary, not a capstone-only standard.
 
-## The claim this module owns
+## The rule
 
-SecureCollab shares note `n1` from tenant A with tenant B, then A revokes. **Authorization over time** is whether the *next* `read` consults the grant. A green scanner, a YAML “evidence pack,” or Gate 11 in a README is not that check.
+The notes app shares note `n1` from person A with person B, then A revokes. **Permission over time** is whether the *next* `read` looks at the grant. A green scanner, a YAML “evidence pack,” or an assurance stamp in a README is not that check.
 
 > After `revoke("n1", "B")`, `read("n1", "B")` must be `None`. `read("n1", "A")` may still return the body. `read("n1", "B")` before revoke may return the body.
 
-The forbidden outcome is **revoked share still reads the note**. That is 1.2 complete mediation stitched with 2.4 time, 4.1/4.4 revoke, 7.4 delayed workers, and 8.2 device cache.
+So what must not happen: **a revoked share still reads the note**. That is the “check every access” idea from earlier weeks, stitched with time, revoke, delayed workers, and a phone cache.
 
-ASVS `v5.0.0-8.2.1` / `v5.0.0-8.2.2` want authorization on every access, not a share event that is forgotten. `v5.0.0-8.3.2` (access rights change takes effect within the session without re-login) is **Level 3, advanced** — named so learners do not confuse “we stored a revoke row” with “the next read is denied.”
+Industry lists want a permission check on every access, not a share event that is forgotten. Access rights changing inside an already-open session without signing in again is extra, advanced work — named so you do not confuse “we stored a revoke row” with “the next read is denied.”
 
-The portable portfolio is blueprint §10.3. A numbered thirteen-item slogan is not that pack.
+A numbered thirteen-item slogan is not the portable pack of tests, models, and restore notes this course asks for.
 
-## Mental model: event vs next read
+This week’s practice is this course’s local files or official labs. Do not tell anyone to try attacks on public or third-party systems.
+
+## Picture: event vs next read
 
 ```mermaid
 flowchart TD
@@ -26,59 +27,73 @@ flowchart TD
   Pred -->|yes| Body[body]
 ```
 
-## Mental model: scanner is not the portfolio
+## Picture: scanner is not the pack
 
 ```mermaid
 flowchart LR
-  Scan[scanner green] --> Belief[Gate 11]
+  Scan[scanner green] --> Belief[assurance stamp]
   Pack[invariants tests restore defense] --> Evidence[portfolio]
   Scan --> NotPack[not the pack]
 ```
 
-**Mechanism (not the property):** pytest-cov, a capstone scanner, “we finished Phase 10.”
+**A tool, not the rule:** pytest coverage, a capstone scanner, “we finished the last phase.”
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## People who can still read after revoke
 
-| Slice | For this property |
+| Person | What they can do here | Motive | Harm if read ignores the grant |
+|---|---|---|---|
+| Former collaborator | Present a cached note id | Keep reading | Ex-collaborator still sees the body |
+| Delayed worker | Reuse a leftover user session | Finish a job | Same body on a path nobody checked |
+| Someone who treats a green scanner as done | Skip the next-read check | Look finished | Event recorded; grant never consulted |
+
+You do not need a nation-state this week. Those three already read after revoke.
+
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
+
+Someone recorded revoke and never asked the grant on the next read. That is the cause. The person who later reads the body is a **result**, not the cause.
+
+| Slice | For this rule |
 |---|---|
-| Root cause | Grant not consulted after revoke |
-| Preconditions | `read` after `revoke` still returns the body |
+| Why it happens | Grant not consulted after revoke |
+| What has to be true first | `read` after `revoke` still returns the body |
 | Trigger | Former collaborator; cached id; delayed worker |
-| Impact | Authorization over time — ex-collaborator confidentiality |
-| Prevention | Complete mediation on every read; invalidate caches |
-| Detection | `revoked_share_read_denied` |
-| Recovery | Notify A; rotate links; tabletop (10.5) |
+| What it costs | Permission over time — ex-collaborator secrecy |
+| How you stop it | Check owner-or-grant on every read; drop stale caches |
+| How you notice | `revoked_share_read_denied` |
+| How you recover | Notify A; rotate links; tabletop from the restore week |
 
-## Framework defaults versus the grant guarantee
+## What the framework does vs what you still have to check
 
-FastAPI will not consult a grant you never check. A mobile cache (8.2) and a worker leftover session (7.4) are extra grains of the same cell.
+FastAPI will not consult a grant you never check. A phone cache and a worker leftover session are extra grains of the same cell.
 
-## Mechanism limits
+The app’s promise is: **this** `read("n1", "B")` after `revoke("n1", "B")` is `None`, while A may still read, and B before revoke may still read. The local check is `labs/11/11-lab`. Fake data only. No live tenants.
 
-- Email already received the body — residual 5.1.
+## What the tool cannot do
+
+- Email already received the body — leftover copies from an earlier week.
 - Export from B before revoke still on B’s disk.
-- Delayed worker with leftover user session (7.4).
-- Level 3 `v5.0.0-8.3.2` if the session was minted before revoke.
+- Delayed worker with a leftover user session.
+- Access-rights change in the same session without signing in again, if the session was minted before revoke.
 
-## Usability and accessibility
+## Can people still use it
 
-A denied read must say *share revoked* in text, not only a red 403 (WCAG 2.2 4.1.3).
+A denied read must say *share revoked* in words, not only a red 403. Do not use color as the only cue.
 
 ## Practice
 
 Name who can revoke. Then run:
 
-```
+```text
 python3 -m pytest labs/11/11-lab/tests --impl vulnerable
 python3 -m pytest labs/11/11-lab/tests --impl fixed
 ```
 
 The first command must fail. The second must pass.
 
-## Transfer
+## Use it somewhere new
 
-Clinic: revoke a guardian. Full SecureCollab slice: the same cell across API, worker, and mobile cache.
+Clinic: revoke a guardian. Full notes-app slice: the same cell across API, worker, and phone cache.
 
-## Non-goals
+## What this page is not doing
 
-Live tenants, claiming Gate 11 or M5. Answer keys are not in this file.
+Live tenants, claiming you finished an assurance gate. Answer keys are not in this file.

@@ -1,16 +1,15 @@
-# E2-LO-05 — Evidence is Report-Only denied, then a passing pair
+# Fail on the broken files, then pass on the repaired ones
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
-**Standards:** ASVS `v5.0.0-3.4.3`. CSP3 **draft**.
 
-## An invariant that cannot fail a test is still a slogan
+## If you cannot test it, it is still a slogan
 
-“CSP header present” is not evidence if the name is Report-Only. “Helmet is on” is a mechanism observation. The oracle is: Report-Only only is false and an enforcing `Content-Security-Policy` may count. The Report-Only observation must be **false** on `--impl vulnerable` (returns true) and **true** on `--impl fixed`. Do not XSS live origins.
+“A content-security header is present” is not evidence if the name is Report-Only. “Helmet is on” is a tool observation. The check is: Report-Only only is false, and an enforcing `Content-Security-Policy` may count. That Report-Only observation must be **false** on `--impl vulnerable` (returns true) and **true** on `--impl fixed`. Do not load a live page.
 
-## Mental model: vulnerable must fail: Report-Only
+## Picture: broken files must fail: Report-Only
 
-The failing observation on `--impl vulnerable` is **Report-Only**. A passing collection count is not this cell.
+A check that only counts passing cases can pass while Report-Only still counts as on. This check asks whether Report-Only-as-on still counts as a passing control. Broken must fail that question. Repaired must pass it.
 
 ```mermaid
 flowchart LR
@@ -18,40 +17,42 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass deny"]
 ```
 
-| Mode | Must show for this module |
-|---|---|
-| Negative / abuse | Report-Only → not enforced; vulnerable must fail |
-| Normal | enforcing CSP → may count (may pass on both) |
-| Not claimed | live XSS; Helmet; Gate 7; that encoding exists |
+If both pass, the check is not looking at Report-Only. If both fail, the fix is not structural or the check is wrong.
 
-Lab tests in `labs/E2/e2-lab/tests/test_property.py`. `test_report_only_is_not_enforcement` is a **forbidden-outcome** test: Report-Only-as-on is not allowed to count as a passing control.
+| Mode | Must show for this topic |
+|---|---|
+| Wrong input / abuse | Report-Only → not enforced; broken files must fail |
+| Normal | enforcing CSP → may count (may pass on both) |
+| Not claimed | a live script hunt; Helmet; check-in 7; that encoding exists |
+
+Practice checks live in `labs/E2/e2-lab/tests/test_property.py`. `test_report_only_is_not_enforcement` is a **what-must-not-happen** check: Report-Only-as-on is not allowed to count as a passing control.
 
 ```text
 python3 -m pytest labs/E2/e2-lab/tests --impl vulnerable
 python3 -m pytest labs/E2/e2-lab/tests --impl fixed
 ```
 
-Honest enforcing CSP may pass on both implementations. That does not excuse the Report-Only deny test. If vulnerable does not fail `test_report_only_is_not_enforcement`, the lab is miswired—fix the wiring, not the assertion.
+Honest enforcing CSP may pass on both implementations. That does not excuse the Report-Only deny check. If the broken files do not fail `test_report_only_is_not_enforcement`, the practice is miswired — fix the wiring, not the check.
 
-## What the tests do not prove
+## What the checks do not prove
 
 - Encoding (6.2)
-- Header survives the CDN (2.2)
+- The header survives the CDN (2.2)
 - Trusted Types
 - XS-Leaks
-- `v5.0.0-3.4.7` Level 3 reporting quality
-- Gate 7 / M2 complete
+- Quality of content-security reporting (extra, later, and advanced)
+- Check-in 7 / milestone M2 complete
 
-Record those as residuals or later modules, not as silent passes.
+Record those as leftover risk or later topics, not as silent passes.
 
 ## Practice
 
-Execute both implementations this session from the lab directory if needed. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `Content-Security-Policy` in HTML without calling `isolation_enforced` on a Report-Only dict.
+Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the map-page row. Reject a “check” that only greps `Content-Security-Policy` in HTML without calling `isolation_enforced` on a Report-Only dict. An environment error is not security evidence.
 
-## Transfer
+## Use it somewhere new
 
-Clinic: a test that only asserts “a CSP-looking header exists” is not this cell. A live origin is out of scope.
+Clinic: a check that only asserts “a CSP-looking header exists” is not this rule. A live page is out of scope.
 
-## Non-goals
+## What this page is not doing
 
-Do not add a live-XSS trophy. Do not log HTML. Keys stay out of this file. Gate 7 stays not-attempted.
+Do not add a live-script trophy. Do not log HTML. Answer keys stay out of this file. Check-in 7 stays not finished.

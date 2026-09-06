@@ -1,27 +1,28 @@
-# E6-LO-07 — Transfer: clinic HIPAA exception
+# Same idea: clinic HIPAA exception
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** SAMM 2.0 vocabulary. CSF 2.0 GV. CISA Secure by Design **unverified**. SSDF 1.2 **draft**. `v5.0.0-15.1.5` Level 3 **advanced**.
 
-## Change the workplace; keep the exception as a record
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: `accept_exception({"owner": "", "review_by": None})` must be false. Rewrite it for a clinic without changing the fork.
+The notes-app scaffolding goes away. You get a **clinic that files a “HIPAA exception.”** Your job is to rewrite the loop, not to name a bug-list code.
 
-**Prompt:** Clinic “HIPAA exception.” Also name a procurement questionnaire vs this record.
+The notes-app sentence was: `accept_exception({"owner": "", "review_by": None})` must be false. Rewrite it for a clinic without changing the fork: empty owner denied, complete record may accept. “Legal said we accept it” is still a spoken yes, not a register row.
 
-**Product sketch:** EHR-lite “legal said we accept it,” plus “our SAMM score is 2.5 so exceptions are done.”
+**Product sketch:** an EHR-lite “legal said we accept it,” plus “our maturity score is 2.5 so exceptions are done.”
 
-Rewrite the SecureCollab sentence. Include:
+## Picture: same accept loop, clinical object
 
-1. attacker capabilities (calendar / silent accept — not a live OCR audit);
-2. trust assumptions (schema is TCB; SAMM/CSF/CISA pledge are not);
-3. forbidden outcome (`accept_exception` true with empty owner, not “HIPAA”);
-4. a test idea on a **local** fixture only (no clinic GRC tool);
-5. residual (unread register, inaccessible recovery, `v5.0.0-15.1.5` Level 3);
-6. WCAG (the exception must record whether patients can complete recovery).
+Renaming “note” to “chart” is not transfer. Owner, review date, and accessibility flag still have to be on the row. Filing a HIPAA slide and marking the hole Accepted does not set `owner` or `review_by`.
 
-## Mental model: legal said vs dated owner
+| Notes app this week | Clinic sketch |
+|---|---|
+| Exception dict with owner + review_by + wcag_checked | Clinic exception with the same three fields |
+| Schema before accept | Same schema on a **local** fixture |
+| `accept_exception({"owner": "", "review_by": None})` | Same call — empty owner still denied |
+| Calendar / silent accept | Same pressure — **not** a live clinic audit |
+| Maturity score / pledge / HIPAA slide | Same inputs — not the accept decision |
+| Procurement questionnaire vs this record | A different document — name it, do not open a live audit |
 
 ```mermaid
 flowchart LR
@@ -29,24 +30,39 @@ flowchart LR
   Row[owner plus review_by] --> Reality[register]
 ```
 
-If legal said yes while `accept_exception` is always true, the cell is gone. A SAMM score, a CSF GV sticker, and a CISA pledge do not put `owner` and `review_by` on the row. A procurement questionnaire is a different document — name it, do not open a live OCR audit here. Exceptions are not failure; hiding them is a dishonest register. SSDF 1.2 IPD stays draft. `v5.0.0-15.1.5` is Level 3 advanced: document dangerous functionality, not this pytest.
+If legal said yes while `accept_exception` is always true, the rule is gone. A maturity score, an industry “govern” sticker, and an unverified pledge do not put `owner` and `review_by` on the row. A procurement questionnaire is a different document — name it, do not open a live clinic audit here. Exceptions are not failure; hiding them is a dishonest register. A later design-review draft stays a draft. Extra advanced documentation of a dangerous function is documentation, not this pytest.
 
-The clinic rewrite still has to keep the SecureCollab fork: empty owner denied, complete record may accept. Adding a HIPAA slide without the schema leaves `accept_exception` true on empty owner. The local pytest analogue is `test_exception_needs_owner_review_and_wcag` — on a fixture, not a live GRC tool.
+The clinic rewrite still has to keep the notes-app fork: empty owner denied, complete record may accept. Adding a HIPAA slide without the schema leaves `accept_exception` true on empty owner. The local pytest analogue is `test_exception_needs_owner_review_and_wcag` — on a fixture, not a live governance tool.
 
-## What graders reject
+## Prompt — clinic HIPAA exception
+
+Rewrite the notes-app sentence. Include:
+
+1. who can act (calendar / silent accept — not a live clinic audit);
+2. what you trust (schema is the promise; maturity score, industry labels, and a pledge are not);
+3. what must not happen (`accept_exception` true with empty owner, not a legal label);
+4. a test idea on a **local** fixture only (no clinic governance tool);
+5. leftover (unread register, inaccessible recovery, extra advanced documentation);
+6. whether the exception records that patients can complete recovery (plain language, not color-only).
+
+Use fake labels. Do not use real patient names.
+
+Also name a procurement questionnaire vs this record.
+
+## What is not good enough
 
 | Reject | Why |
 |---|---|
-| “SAMM / HIPAA / CISA pledge” | Not the row |
-| Live clinic GRC / OCR | Lab policy |
+| “maturity / HIPAA / pledge” | Not the row |
+| Live clinic governance / live audit | Course rules |
 | “exceptions are failure so we hide them” | Dishonest register |
-| “SSDF 1.2 certified” | IPD draft |
-| “Gate 7 complete” | Forbidden stamp |
+| “later design-review draft certified” | Still a draft |
+| “assurance gate complete” | Forbidden stamp |
 
 ## Practice
 
-One page. No keys. `labs/E6/e6-lab` is the only running system you may break. Do not contact a live PSIRT.
+One page. No answer keys. `labs/E6/e6-lab` is the only running system you may break. Do not contact a live disclosure inbox.
 
-## Non-goals
+## What this page is not doing
 
-Live-disclosure. Production exceptions. Claiming Gate 7 or M2 from this page.
+Live-disclosure. Production exceptions. Real patient charts in tickets. Claiming you finished an assurance gate from this page.

@@ -1,52 +1,55 @@
-# E5-LO-07 — Transfer: clinic group practice org_id in JSON
+# Same idea: clinic org_id in JSON
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** ASVS `v5.0.0-8.2.1`. API1 awareness after the cause. `v5.0.0-8.3.2` Level 3 **advanced**.
 
-## Change the workplace; keep the session as the tenant
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: `tenant_for({"tenant": "A"}, {"tenant": "B"})` must be `"A"`. Rewrite it for a clinic without changing the fork.
+The notes-app scaffolding goes away. You get a **clinic sketch** with group practices and an `org_id` in JSON. Your job is to rewrite the loop, not to name a famous-bugs code.
 
-**Prompt:** Clinic group practice switching `org_id` in JSON. Also name a Zanzibar tuple vs this binding.
+The notes-app sentence was: `tenant_for({"tenant": "A"}, {"tenant": "B"})` must be `"A"`. The JSON body is not the tenant. Rewrite it for a clinic without changing the fork: bind tenant from the session; body tenant overrides session must stay false.
 
-**Product sketch:** EHR-lite "Postgres RLS is on so tenants are done," plus "we mapped API1 so isolation is done."
+**Prompt:** Clinic group practice switching `org_id` in JSON. Also name a relationship-graph tuple vs this binding.
 
-Rewrite the SecureCollab sentence. Include:
+**Product sketch:** clinic-lite “PostgreSQL row-level rules are on so companies are done,” plus “we mapped a famous-bugs list so isolation is done.”
 
-1. attacker capabilities (member of practice A sending practice B — not a live clinic tenant);
-2. trust assumptions (session binding is TCB; RLS-from-body / API1 / subdomain are not);
-3. forbidden outcome (`tenant_for({A},{B}) == B`, not "HIPAA");
-4. a test idea on a **local** fixture only (no public EHR);
-5. residual (search/cache/lake, silent impersonation, `v5.0.0-8.3.2` Level 3);
-6. WCAG if support impersonation UI exists (must not look like the clinician's own org).
-
-## Mental model: RLS sticker vs binding
+## Picture: row-level sticker vs binding
 
 ```mermaid
 flowchart LR
   Rls[RLS on] --> Belief[tenants isolated]
-  Bind[session tenant] --> Reality["1.2"]
+  Bind[session tenant] --> Reality["who is allowed"]
 ```
 
-If RLS is “on” while `tenant_for` prefers the body, the cell is gone. A Zanzibar tuple store and an API1 mapping do not put session A in the TCB. GraphQL `org_id` is the same field. Name them, do not probe a live clinic here. API1 is a regression label *after* the body-wins cause, not the syllabus. `v5.0.0-8.3.2` is Level 3 advanced: in-session grant change, not this pytest.
+If row-level rules are “on” while `tenant_for` prefers the body, the cell is gone. A relationship-graph tuple store and a famous-bugs mapping do not put session A in what you trust. GraphQL `org_id` is the same field. Name them, do not probe a live clinic here. Famous-bugs lists are a regression label *after* the body-wins cause, not the syllabus. Immediate grant-change leftover is advanced: in-session grant change, not this pytest.
 
-The clinic rewrite still has to keep the SecureCollab fork: session A plus body B is A, matching A/A may keep A. Enabling RLS without session binding leaves `tenant_for({A},{B}) == B`. The local pytest analogue is `test_body_cannot_switch_tenant` — on a fixture, not a live EHR.
+The clinic rewrite still has to keep the notes-app fork: session A plus body B is A, matching A/A may keep A. Enabling row-level rules without session binding leaves `tenant_for({A},{B}) == B`. The local pytest analogue is `test_body_cannot_switch_tenant` — on a fixture, not a live clinic system.
 
-## What graders reject
+## Prompt — clinic sketch
+
+Rewrite the notes-app sentence. Include:
+
+1. who can act (member of practice A sending practice B — not a live clinic company);
+2. what you trust (session binding is trusted; a row-level variable from the body, a famous-bugs mapping, and a subdomain are not);
+3. what must not happen (`tenant_for({A},{B}) == B`, not a legal label);
+4. a test idea on a **local** fixture only (no public clinic system);
+5. leftover (search/cache/lake, silent impersonation, immediate grant-change leftover);
+6. whether a support impersonation UI exists (must not look like the clinician’s own company; announce *acting as* in text).
+
+## What is not good enough
 
 | Reject | Why |
 |---|---|
-| "we have RLS / Zanzibar" | Not this binding |
-| Live clinic GraphQL | Lab policy |
-| "API1 so 1.2 is done" | Awareness after the cause |
-| "subdomain is the tenant" | Client-controlled Host |
-| "Gate 7 complete" | Forbidden stamp |
+| “we have row-level rules / a relationship graph” | Not this binding |
+| Live clinic GraphQL | Course rules |
+| “famous-bugs mapped so who-is-allowed is done” | Awareness after the cause |
+| “subdomain is the company” | Client-controlled Host |
+| “course gate complete” | Forbidden stamp |
 
 ## Practice
 
-One page. No keys. `labs/E5/e5-lab` is the only running system you may break. Do not probe a live tenant.
+One page. No answer keys. `labs/E5/e5-lab` is the only running system you may break. Do not probe a live company.
 
-## Non-goals
+## What this page is not doing
 
-Live-SaaS probes. Production GraphQL. Claiming Gate 7 or M2 from this page.
+Live-product probes. Production GraphQL. Claiming a course gate from this page.

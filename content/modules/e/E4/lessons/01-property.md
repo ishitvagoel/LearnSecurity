@@ -1,87 +1,84 @@
-# E4-LO-01 — Copied bytes never exceed the destination buffer
+# The copy must fit the box
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** CISA Case for Memory Safe Roadmaps (2023-12-06, guidance). ASVS `v5.0.0-5.3.1` related; `v5.0.0-5.3.3` is **Level 3, advanced**. CWE-119 / CWE-787 are **awareness after** the length cause.
 
-## The claim this module owns
+## The rule
 
-SecureCollab unpackers and FFI helpers copy bytes into a destination. **Integrity of the buffer object** is whether the copy length is mediated by destination capacity. A header `declared_len` is untrusted input, the same class as a JSON `workspace_id`.
+The notes app unpacks files and copies bytes into a destination. **Integrity of the buffer** is whether the copy length is checked on every path. Checking every path — textbooks call this complete mediation — here means every copy is bounded by the destination size. Length is that check for the buffer. A header `declared_len` is untrusted input, the same class as a JSON field that names a workspace.
 
 > `copy_into(4, b"abcdefgh", 4)` must return a destination whose length is at most 4. A short honest copy may fit.
 
-The forbidden outcome is **a copy that exceeds the destination**. This elective is a Python length stand-in. It is not a C exploit course.
+What must not happen is **a copy that exceeds the destination**. This elective is a Python length stand-in. It is not a C exploit course.
 
-CISA's Case for Memory Safe Roadmaps is **manufacturer guidance** for language and FFI plans, not the lab oracle. ASVS `v5.0.0-5.3.1` (stable, related) wants unstructured data handled so it does not become an unexpected execution or overwrite path. `v5.0.0-5.3.3` (native unpacker / archive residual) is **Level 3, advanced**. Do not invent an ASVS "memory safety" chapter ID.
+Manufacturer guidance that tells a company to prefer memory-safe languages is not the lab check. Industry checklists want unstructured data handled so it does not become an unexpected overwrite. Native unpackers and leftover C codecs are leftover risk, later and harder — not this pytest. Do not invent a “memory safety” chapter id as the rule.
 
-## Mental model: destination size is the invariant
+## Picture: destination size is the rule
 
 ```mermaid
 flowchart TD
   Src[source bytes] --> Decl[declared_len]
   Decl --> Gate{"copy_into?"}
   Buf[bufsize] --> Gate
-  Gate -->|min of sizes| Ok["len dst <= bufsize"]
+  Gate -->|smallest of the sizes| Ok["len dst <= bufsize"]
   Gate -->|declared_len only| Bad["len dst > bufsize"]
 ```
 
-## Mental model: language marketing is not the copy
+Who can act: someone who controls a file header length. What you trust: a local `copy_into(bufsize, src, declared_len)` that bounds the copy by destination size. Do not compile a native overflow.
+
+**A tool is not the rule.** “We use Kotlin,” a sanitizer in CI, or an awareness-list dashboard is not this sentence.
+
+## Picture: language marketing is not the copy
 
 ```mermaid
 flowchart LR
-  Py[Python slice] --> Lab[this fixture]
+  Py[Python slice] --> Lab[this practice]
   C[C codec] --> Ffi[still needs a length check]
   Py --> NotC[not what C does]
 ```
 
-**Mechanism (not the property):** "we use Kotlin," ASAN in CI, a CWE Top 25 dashboard.
+A Python slice in this fixture is a teaching stand-in. C will not do this for you. Calling a helper from another language still needs the same length check next to the copy.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | For this property |
+| Slice | For this rule |
 |---|---|
-| Root cause | Declared length trusted over destination size |
-| Preconditions | `copy_into` copies `declared_len` plus slack |
+| Why it happens | Declared length trusted over destination size |
+| What has to be true first | `copy_into` copies `declared_len` plus 8 |
 | Trigger | Header claims 4; payload is 8 |
-| Impact | Spatial overwrite of the destination object |
-| Prevention | `min(bufsize, declared_len, len(src))` |
-| Detection | `copy_length_denied` |
-| Recovery | Reject the blob; patch the parser; do not ship the overflowed binary |
+| What it costs | The destination object is overwritten in space |
+| How you stop it | `min(bufsize, declared_len, len(src))` |
+| How you notice | `copy_length_denied` |
+| How you recover | Reject the blob; patch the parser; do not ship the overflowed binary |
 
-## Framework defaults versus the copy guarantee
+## What the framework does vs what you still have to check
 
-Python slicing will not save a C `memcpy`. A memory-safe language reduces CWE-119 **in that language**. FFI and leftover codecs still copy.
+Python slicing will not save a C copy. A memory-safe language reduces this class of overwrite **in that language**. Helpers that call C, and leftover codecs, still copy. The app’s promise is: **this** practice, length ≤ 4.
 
-## Mechanism limits
+## What the tool cannot do
 
 - Three-way min in Python does not prove a C codec.
-- Integer wrap of `n` before the min is a residual.
-- Temporal bugs (use-after-free) are out of this lab.
-- CISA roadmap is organizational, not `copy_into`.
-
-## Usability and accessibility
-
-Parser error messages must be readable without dumping payload bytes (WCAG 2.2 for operator UI; 3.1 for logs).
+- Integer wrap of `n` before the min is leftover risk.
+- Use-after-free and other time bugs are out of this practice.
+- A company language roadmap is organizational advice, not `copy_into`.
 
 ## Practice
 
-Name destination, declared length, and source length. Then run:
+Name destination size, declared length, and source length. Then run:
 
-```
+```text
 python3 -m pytest labs/E4/e4-lab/tests --impl vulnerable
 python3 -m pytest labs/E4/e4-lab/tests --impl fixed
 ```
 
 The first command must fail. The second must pass.
 
-## Transfer
+Parser error messages must be readable without dumping file bytes. Operators should be able to read “copy exceeds destination” without a hex dump.
+
+## Use it somewhere new
 
 Clinic DICOM / image parser. Protobuf C extension.
 
-## Residual risk
+## What this page is not doing
 
-FFI; integer wrap; existing C codecs (6.4). `v5.0.0-5.3.3` Level 3 native unpacker residual.
-
-## Non-goals
-
-Weaponized native exploits. CWE Top 25 as the syllabus. Gate 7 / M2.
+Weaponized native exploits. An awareness list as the syllabus. Course gates from this page. Answer keys are not in this file.

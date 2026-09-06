@@ -1,20 +1,19 @@
-# E3-LO-01 — The same key must not double-charge
+# The same key must not double-charge
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** ASVS `v5.0.0-2.3.4`, `v5.0.0-2.3.3`; `v5.0.0-13.1.2` is **Level 3, advanced**. PCI DSS 4.0.1 is **awareness**, not this lab’s scope.
 
-## The claim this module owns
+## The rule
 
-SecureCollab does not take card payments. This elective models a **lab ledger** with synthetic amounts. **Integrity of money-like state** is whether a second `capture` with the same key is a no-op. Stripe’s idempotency header is not your table.
+The notes app does not take card payments. This elective models a **lab ledger** with fake amounts. The check is whether money-like state stays honest: a second `capture` with the same key must not add another charge. A payment company's "please retry with this header" sticker is not your table.
 
 > Two `capture("k1")` calls must leave `charge_count() == 1`. The first capture may succeed.
 
-The forbidden outcome is **duplicate capture double-charges**. That is 2.4 / 6.6 at money grain. No real PAN.
+What must not happen is a **duplicate capture that double-charges**. That is the same family as a retry that grants twice (2.4) and a token spent twice (6.6), at the grain of money. No real card numbers. No real PAN.
 
-ASVS `v5.0.0-2.3.4` wants locking so limited resources cannot be double-booked. `v5.0.0-2.3.3` wants the operation to succeed entirely or roll back. `v5.0.0-13.1.2` (documented connection-pool limits) is **Level 3, advanced**. PCI 4.0.1 is a sector scope question — this fixture is not in PCI scope.
+Industry checklists want locking so a limited thing cannot be booked twice. They want the step to succeed all the way or roll back. Documented connection-pool limits are advanced leftover, not this pytest. A card-network questionnaire is a sector-scope question — this practice is not in that scope.
 
-## Mental model: key vs append
+## Picture: key vs append
 
 ```mermaid
 flowchart TD
@@ -23,7 +22,7 @@ flowchart TD
   Seen -->|no| Charge[append once]
 ```
 
-## Mental model: processor vs ledger
+## Picture: processor vs ledger
 
 ```mermaid
 flowchart LR
@@ -32,49 +31,49 @@ flowchart LR
   Stripe --> NotYours[not this cell]
 ```
 
-**Mechanism (not the property):** Stripe, a PCI SAQ, “we are high-assurance.”
+**A tool is not the rule.** A payment company's header, a filled-in questionnaire, or “we are high-assurance.”
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | For this property |
+| Slice | For this rule |
 |---|---|
-| Root cause | Non-idempotent side effect |
-| Preconditions | two `capture(k1)` ⇒ count 2 |
+| Why it happens | A side effect that is not bound to the key |
+| What has to be true first | two `capture(k1)` ⇒ count 2 |
 | Trigger | Retry after 504; double-click |
-| Impact | Integrity of money-like state |
-| Prevention | Key as primary identity of capture |
-| Detection | `duplicate_capture_denied` |
-| Recovery | Credit the extra; still fail the test first |
+| What it costs | Integrity of money-like state |
+| How you stop it | Treat the key as the identity of the capture |
+| How you notice | `duplicate_capture_denied` |
+| How you recover | Credit the extra; still fail the test first |
 
-## Framework defaults versus the ledger guarantee
+## What the framework does vs what you still have to check
 
-A processor can be idempotent while your row still inserts twice. Accessible payment UIs that trap users cause retries (this bug).
+A processor can remember its own side and still leave your row inserting twice. Payment screens that trap people cause retries (this bug). The app's promise is: **this** practice, two k1, count 1.
 
-## Mechanism limits
+## What the tool cannot do
 
-- Client mints a new key each retry.
-- Webhook vs capture race (7.3).
-- PCI SAQ is not this cell.
+- The client mints a new key each retry.
+- A webhook and a capture can both append (later topic 7.3).
+- A filled-in questionnaire is not this cell.
 
-## Usability and accessibility
+## Can people still use it
 
-Payment confirmations must be accessible; trapped users retry (WCAG 2.2).
+Payment confirmations must be readable and reachable; trapped people retry.
 
 ## Practice
 
-Map 2.4, 7.3, 5.1 (no PAN). Then run:
+Map retry (2.4), consume-once (6.6), and no extra copies of card-like data (5.1). Then run:
 
-```
+```text
 python3 -m pytest labs/E3/e3-lab/tests --impl vulnerable
 python3 -m pytest labs/E3/e3-lab/tests --impl fixed
 ```
 
 The first command must fail. The second must pass.
 
-## Transfer
+## Use it somewhere new
 
 Health record append-only audit. Simulated copay.
 
-## Non-goals
+## What this page is not doing
 
-Live processors, real PAN, claiming PCI or Gate 7. Answer keys are not in this file.
+Live processors, real card numbers, claiming a questionnaire or a course gate. Answer keys are not in this file.

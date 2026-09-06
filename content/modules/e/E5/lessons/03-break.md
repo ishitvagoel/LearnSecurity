@@ -1,18 +1,25 @@
-# E5-LO-03 — Observe body override, do not probe public tenants
+# Practice: body tenant overrides session
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.1`. `v5.0.0-8.3.2` grant-change cache is **Level 3, advanced**. `v5.0.0-15.3.3` mass assignment of the tenant field (related). API Top 10 2023 API1 is **awareness after** the cause. Lab policy: local only.
 
-## Authorized scope
+## Try it
 
-`labs/E5/e5-lab` only. The fixture is an in-process `tenant_for(session, body)`. Synthetic tenants A and B. Do **not** send `org_id` to a production SaaS, clinic tenant, or classmate preview as the exercise.
+The practice is not a website you attack. It is a tiny Python `tenant_for(session, body)`. The failure is already in the function: it prefers `body["tenant"]` when that key is present. You are here to see that a body-chosen company is **a failed rule**, not a trophy against a public product.
 
-**Forbidden outcome:** JSON body switches the bound tenant. `tenant_for({"tenant": "A"}, {"tenant": "B"})` returns `"B"`.
+The rule under test:
 
-Attacker capability in this lab: a member of A who can write a JSON (or GraphQL) field. That stands in for “Postgres RLS is on so tenants are done,” a Zanzibar dashboard treated as 1.2, or API1 mapped as this cell. Trust assumption: `tenant_for` is supposed to bind from the **session**. FastAPI body parsing, a Host header, and an RLS GUC set from JSON are not in the TCB for this cell.
+> The JSON body is not the tenant. `tenant_for({"tenant": "A"}, {"tenant": "B"})` must return `"A"`. If it returns `"B"`, body tenant overrides session.
 
-## Mental model: body wins
+## Where you may practice
+
+Only `labs/E5/e5-lab` is in scope. The check is an in-process `tenant_for(session, body)`. Fake companies A and B. It does not open a network. Do not send `org_id` to a live product, a clinic company, or a classmate preview.
+
+What must not happen: the JSON body switches the bound company. `tenant_for({"tenant": "A"}, {"tenant": "B"})` returns `"B"`.
+
+Who can act in this story: a member of A who can write a JSON (or GraphQL) field. That stands in for “row-level rules are on so companies are done,” a relationship-graph dashboard treated as who-is-allowed, or a famous-bugs mapping treated as this cell. What you trust: `tenant_for` is supposed to bind the company from the session. FastAPI body parsing, a Host header, and a row-level session variable set from JSON are not what you trust for this cell.
+
+## Picture: body wins
 
 ```mermaid
 flowchart TD
@@ -21,40 +28,40 @@ flowchart TD
   Fn --> Out[tenant B]
 ```
 
-`--impl vulnerable` prefers `body["tenant"]`. That is 7.1 mass assignment of the isolation key. Preconditions: body tenant overrides session. You do not need GraphQL. You must not probe a live tenant.
+The broken files (`--impl vulnerable`) prefer `body["tenant"]`. That is extra writable fields applied to the isolation key. What has to be true first: body tenant overrides session. You do not need GraphQL. You must not probe a live company.
 
-ASVS `v5.0.0-8.2.1` wants isolation of the object and tenant. Module 4.4 already said the object id is not the grant; this cell is **the tenant context is not a client field**. Gate 7 and M2 stay **not-attempted**. Electives open after Phase 7; they do not stamp it.
+Industry checklists want isolation of the object and the company. An earlier topic already said the object id is not the grant; this cell is **the company context is not a client field**. Course gates stay unclaimed. Electives do not stamp them.
 
-## What to read in the fixture
+## What to look at — cause, not a dump
 
-`vulnerable/rls.py` returns the body tenant when present. Tests:
+Read `vulnerable/rls.py`. It returns the body company when present. Tests:
 
 - `test_body_cannot_switch_tenant`
 - `test_matching_body_may_keep_session_tenant` — A/A may pass on both
 
-You do not need a new tenant letter. The failure of `test_body_cannot_switch_tenant` *is* the evidence. Do not paste the fixture into a public API.
+You do not need a new company letter. The failure of `test_body_cannot_switch_tenant` *is* the evidence. Do not paste the fixture into a public API.
 
-Do not open the fixed tree yet. Diagnose the cause first.
+Do not open the repaired files yet. Diagnose the cause first.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens vs what it costs
 
-| Slice | This lab |
+| Slice | Practice |
 |---|---|
-| Required property | `tenant_for({A},{B}) == A` |
-| Root cause | Client-chosen tenant treated as binding |
-| Preconditions | body tenant overrides session |
-| Trigger | Member of A sends tenant B in JSON/GraphQL |
-| Impact | Cross-tenant read/write through every copy |
-| Prevention | Bind from session; ignore body for isolation |
-| Detection | `body_tenant_mismatch`; never note bodies |
-| Recovery | Audit B for A's actions; revoke the confused session |
-| Not the lesson | API1; an RLS product; live SaaS; Gate 7 complete |
+| Required rule | `tenant_for({A},{B}) == A` |
+| Why it happens | Client-chosen company treated as binding |
+| What has to be true first | body tenant overrides session |
+| Trigger | Member of A sends tenant B in JSON or GraphQL |
+| What it costs | Read or write into another company through every copy |
+| How you stop it later | Bind from the session; ignore the body for isolation |
+| How you notice later | `body_tenant_mismatch`; never note bodies |
+| How you recover later | Audit B for A's actions; take back the confused session |
+| Out of scope | A famous-bugs name, a row-level product, a live company, a course gate |
 
-## Framework defaults versus the binding guarantee
-
-FastAPI will bind whatever field you declare. Postgres RLS will isolate whatever GUC you `SET`. A subdomain Host header is client-controlled. The application guarantee is: **this** fixture, session A plus body B is A.
+FastAPI will bind whatever field you declare. PostgreSQL row-level rules will isolate whatever session variable you `SET`. A subdomain Host header is client-controlled. The app’s promise is: **this** fixture, session A plus body B is A.
 
 ## Practice
+
+From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/E5/e5-lab/tests --impl vulnerable
@@ -62,10 +69,10 @@ python3 -m pytest labs/E5/e5-lab/tests --impl vulnerable
 
 Run from `labs/E5/e5-lab` if a repo-root collection picks up `site/`. Record `test_body_cannot_switch_tenant`. Do not probe public hosts. An environment error is not security evidence.
 
-## Transfer
+## Use it somewhere new
 
-Clinic group practice: predict the switch without leaving this directory. Do not hit a live EHR.
+Clinic group practice: predict the switch without leaving this directory. Do not hit a live clinic system.
 
-## Non-goals
+## What this page is not doing
 
-No live-SaaS, production-tenant, or public GraphQL instructions. Do not claim Gate 7. API1 stays awareness after the cause.
+No live-product, production-company, or public GraphQL instructions. Do not claim a course gate. Famous-bugs lists stay awareness after the cause.

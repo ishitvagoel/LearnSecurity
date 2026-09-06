@@ -1,57 +1,69 @@
-# 11-LO-05 — Evidence is revoke denied, then a passing pair
+# Fail on the broken files, then pass on the repaired ones
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
-**Standards:** ASVS `v5.0.0-8.2.1`. Blueprint §10.3 portfolio is not this pytest.
 
-## An invariant that cannot fail a test is still a slogan
+## If you cannot test it, it is still a slogan
 
-“Capstone scanner green” is not evidence. “DELETE returned 200” is a mechanism observation. The oracle is: B after revoke is None, A after revoke still reads, B before revoke still reads. The B-after-revoke observation must be **false** on `--impl vulnerable` (returns the body) and **true** on `--impl fixed`. Do not hit live tenants.
+“Capstone scanner green” is not evidence. “DELETE returned 200” is a tool observation. The check is: B after revoke is None, A after revoke still reads, B before revoke still reads. The B-after-revoke observation must be **false** on the broken files (returns the body) and **true** on the repaired files. Do not hit live tenants.
 
-## Mental model: vulnerable must fail: B after revoke
+## Picture: a broken no-op revoke must fail the check
 
-The failing observation on `--impl vulnerable` is **B after revoke**. A passing collection count is not this cell.
+A test that only counts passing tests can pass while B after revoke still reads. This check asks whether a revoked share still reading the note counts as a passing control. Broken must fail that question. Repaired must pass it.
 
 ```mermaid
 flowchart LR
-  V["--impl vulnerable"] --> F["Must fail B after revoke"]
-  X["--impl fixed"] --> P["Must pass deny"]
+  V["broken files --impl vulnerable"] --> F[Must fail: B after revoke]
+  X["repaired files --impl fixed"] --> P[Must pass: deny]
 ```
 
-| Mode | Must show for this module |
+If both pass, the test is not looking at B after revoke. If both fail, the fix is not structural or the check is wrong.
+
+## Four modes, even for a share dict
+
+| Mode | Must show for this topic |
 |---|---|
-| Negative / abuse | B after revoke → None; vulnerable must fail |
+| Wrong input / abuse | B after revoke → None; broken files must fail |
 | Normal | A after revoke → body (may pass on both) |
 | Normal | B before revoke → body (may pass on both) |
-| Not claimed | live clinic; Gate 11; M5; worker/cache wipe |
+| Not claimed | live clinic; an assurance gate; worker or cache wipe |
 
-Lab tests in `labs/11/11-lab/tests/test_property.py`. `test_revoked_share_cannot_read` is a **forbidden-outcome** test: no-op `revoke` is not allowed to count as a passing control. `conftest.py` calls `reset()` so grant state does not leak.
+The file is `labs/11/11-lab/tests/test_property.py`. The test `test_revoked_share_cannot_read` is a **what-must-not-happen** test: no-op `revoke` is not allowed to count as a passing control. `conftest.py` calls `reset()` so grant state does not leak.
+
+Honest owner-after-revoke and share-before-revoke may pass on both implementations. That does not excuse the B-after-revoke deny test. If the broken files do not fail `test_revoked_share_cannot_read`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/11/11-lab/tests --impl vulnerable
 python3 -m pytest labs/11/11-lab/tests --impl fixed
 ```
 
-Honest owner-after-revoke and share-before-revoke may pass on both implementations. That does not excuse the B-after-revoke deny test. If vulnerable does not fail `test_revoked_share_cannot_read`, the lab is miswired—fix the wiring, not the assertion.
+A test that only greps `revoke` in a README without calling `read("n1", "B")` after `revoke("n1", "B")` is not this topic’s evidence. This practice never opens a live host.
 
 ## What the tests do not prove
 
-- Worker leftover session is gone (7.4)
-- Device cache is wiped (8.2)
-- Copies already sent are gone (5.1)
-- `v5.0.0-8.3.2` Level 3 in-session grant change
-- Gate 11 / M5 complete
+- Worker leftover session is gone
+- Phone cache is wiped
+- Copies already sent are gone
+- Access-rights change in the same session without signing in again
+- An assurance gate complete
 
-Record those as residuals or later modules, not as silent passes.
+Record those as leftover or later topics, not as silent passes.
 
 ## Practice
 
-Execute both implementations this session from the lab directory if needed. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `revoke` in a README without calling `read("n1", "B")` after `revoke("n1", "B")`.
+Run both this session from the lab directory if needed:
 
-## Transfer
+```text
+python3 -m pytest labs/11/11-lab/tests --impl vulnerable
+python3 -m pytest labs/11/11-lab/tests --impl fixed
+```
 
-Clinic: a test that only asserts “revoke returned 200” is not this cell. A live EHR is out of scope.
+Paste nothing from answer keys. Write fail/pass into your notes next to the B-after-revoke row. Reject a “test” that only greps `revoke` in a README without calling `read("n1", "B")` after `revoke("n1", "B")`.
 
-## Non-goals
+## Use it somewhere new
 
-Do not add a live-tenant trophy. Do not log note bodies. Keys stay out of this file. Gate 11 stays not-attempted.
+Clinic: a test that only asserts “revoke returned 200” is not this topic. A live clinic system is out of scope.
+
+## What this page is not doing
+
+Do not add a live-tenant trophy. Do not log note bodies. Answer keys stay out of this file. Do not claim you finished an assurance gate.
