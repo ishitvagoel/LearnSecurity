@@ -8,6 +8,16 @@
 
 Changing “notes” to “appointments” is not enough. A valid transfer case changes assets, actors, authority, trust, state, time, or harm. You must determine which SecureCollab reasoning survives and which must be rebuilt.
 
+## Mental model: transfer changes the envelope
+
+```mermaid
+flowchart TD
+  SC[SecureCollab note body] --> Q[what changed]
+  Q --> Assets[assets actors time]
+  Assets --> Clinic[CivicClinic appointment existence]
+  Clinic --> Rebuild[rewrite the claim]
+```
+
 Do not target or research a real clinic or municipal system. Use only the synthetic product card below.
 
 ## Product card: CivicClinic appointments

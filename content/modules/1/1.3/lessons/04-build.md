@@ -19,6 +19,22 @@ server-held worker registry -> worker adapter -> WorkerContext
 
 The public adapter can carry requester data, but it cannot construct worker caller kind or worker identity. The worker adapter receives a synthetic registered identity from server-held fixture state. This creates a meaningful in-process trust boundary for the exercise.
 
+## Mental model: adapters produce the second context
+
+The smallest composition is not a second `if`. It is an adapter that builds a *different* context — from a server-held worker registry, not from the request’s internal-looking field — and a second decision against that context. If the adapter can fail closed, the second check is real.
+
+```mermaid
+flowchart LR
+  pub["public adapter"]
+  work["worker adapter"]
+  pep1["public policy paths"]
+  pep2["grant decision then export"]
+  pub --> pep1
+  work --> pep2
+  pep2 -->|"current bound grant"| out["summary export"]
+  pep2 -->|"missing or wrong context"| stop["deny before output"]
+```
+
 Be precise about the claim: a caller using the public function cannot become a worker by setting fields. This does **not** establish mutual TLS, workload certificates, deployment identity, queue authenticity, or resistance to a compromised process/operator. Those are named production design obligations and later-module work.
 
 ## Separate provenance, authority, and effect

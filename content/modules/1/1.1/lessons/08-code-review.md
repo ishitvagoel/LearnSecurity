@@ -17,6 +17,16 @@ Your review should determine whether each sentence is:
 - false assurance;
 - or too ambiguous to classify.
 
+## Mental model: classify before you accept
+
+```mermaid
+flowchart TD
+  Sent[SECURITY.md sentence] --> Q{What would falsify it?}
+  Q -->|named forbidden outcome| Prop[property]
+  Q -->|tool name only| Mech[mechanism]
+  Q -->|scanner passed| False[false assurance]
+```
+
 Do not open content/assessment/keys/1.1.md until your work has been evaluated.
 
 ## Review method

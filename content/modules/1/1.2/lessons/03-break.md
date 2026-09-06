@@ -15,6 +15,21 @@ The invariant under test is:
 
 The vulnerable implementation violates that invariant in several ways. Do not reduce them to “missing if statements.” Group them by authority failure.
 
+## Mental model: a valid identity is still a matrix counterexample
+
+Authentication succeeding is a precondition, not a grant. Each failing pytest case is a cell: a subject who is allowed to exist, an action that happened, an object that should have been unreachable. Map the failure to the cell before you open the fixed tree.
+
+```mermaid
+flowchart TD
+  ident["valid synthetic identity"]
+  op["in-process operation"]
+  cell["matrix cell: subject x action x object"]
+  ident --> op
+  op --> cell
+  cell -->|"no current grant"| fail["forbidden effect — this is the break"]
+  cell -->|"positive current grant"| allow["intended allow"]
+```
+
 ## Authorized boundary
 
 Only files under `labs/1.2/1.2-authority-matrix/` are in scope. The users, tenants, notes, approvals, and timestamps are synthetic. No socket is opened, no credential is used, and no outbound request is needed.

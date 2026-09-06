@@ -174,3 +174,5 @@ changelog:
     note: Pass A specification and initial Pass B/C pilot
   - date: '2026-08-25'
     note: Rebuilt as semantic-depth reference; independent semantic and lab-safety reviews passed
+  - date: '2026-09-06'
+    note: Additive named mental models and mermaid diagrams on remaining lessons; independent review artifacts unchanged

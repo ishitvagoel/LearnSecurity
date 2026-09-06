@@ -8,6 +8,10 @@
 
 Even after LO-04, someone will still fail recovery: a new exclusion you did not model, a library regression, a coercion event. Operations is the rest of the 1.4 loop: notice, contain, restore, and refuse to “help” by emailing note bodies.
 
+## Mental model: prevention failed, the loop continues without lowering 1.2
+
+A broken recovery widget is a detection-and-recovery problem, not a licence to grant support ambient read-aloud of codes. The alternate path must still be a 1.2-mediated, usable control. Detect names the modality. Recover restores access. Neither emails note bodies.
+
 ```mermaid
 flowchart TD
   Sig["Signal - cancel without keyboard or lockout tickets"] --> Dec{Still the same account?}

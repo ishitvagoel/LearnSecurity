@@ -13,6 +13,21 @@ The answer is not “install an authorization library.” The smallest trustwort
 
 The policy can be logically centralized without becoming one physical service. The enforcement can be near the service operation, query, database, or protected subsystem. The architecture is correct only when the policy meaning is consistent and no in-scope effect bypasses enforcement.
 
+## Mental model: PDP answers, PEP stops
+
+The smallest restore is not a library import. A policy decision point returns allow or deny from trusted facts. A policy enforcement point is the only path that mutates or releases. If the PEP proceeds without a PDP answer, the split is theater. If the PDP answers from identity instead of from a grant, the split is still theater.
+
+```mermaid
+flowchart LR
+  ctx["trusted DecisionContext"]
+  pdp["PDP: current grant table"]
+  pep["PEP: mutate or refuse"]
+  ctx --> pdp
+  pdp -->|"allow or deny"| pep
+  pep -->|"allow"| write["write or release"]
+  pep -->|"deny or missing answer"| stop["stop"]
+```
+
 ## Start from the forbidden effect
 
 For a cross-tenant note read:

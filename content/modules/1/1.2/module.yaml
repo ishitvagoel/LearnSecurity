@@ -197,3 +197,5 @@ changelog:
     note: Pass A-C generated module and local note fixture
   - date: '2026-08-25'
     note: Depth remediation rebuilt the coverage contract, authority model, exact ASVS mapping, structural lab, assessment, and transfer case; independent semantic and lab-safety review passed
+  - date: '2026-09-06'
+    note: Additive named mental models and mermaid diagrams on remaining lessons; independent review artifacts unchanged

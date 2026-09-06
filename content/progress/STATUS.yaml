@@ -18,11 +18,36 @@ next:
   pass: revise
   skill: deepen-curriculum
   inner_skill: quality-gate
-  note: Authoring-pass mental models and diagrams now cover 2.4-11, E1-E6, and 0.1-0.2.
-    Units stay developing / map-complete in revision.remaining until independent quality
-    and lab-safety review artifacts exist under content/progress/reviews/. Do not mark
-    depth publishable in this skill. 1.1-1.3 remain the independently reviewed reference.
+  note: Authoring-pass mental models and diagrams now cover every lesson in 0.1-11
+    and E1-E6, including remaining 1.1-1.4 lessons. Units stay developing / map-complete
+    in revision.remaining until independent quality and lab-safety review artifacts
+    exist under content/progress/reviews/. Do not mark depth publishable in this skill.
+    1.1-1.3 remain the independently reviewed reference.
 spiral_deltas:
+- date: '2026-09-06'
+  module: '1.4'
+  change: Named Mental model H2s on remaining verify/operate/transfer/review lessons;
+    mermaid already present; no SecureCollab authority or recovery-cell change
+  retest: Independent quality and lab-safety review still required; 1.1 lockout cells
+    and 1.2 support read-aloud cells unchanged
+- date: '2026-09-06'
+  module: '1.3'
+  change: Additive named mental models and mermaid on lessons 03-08; two-checks-one-assumption
+    and adapter-produced second context named without changing the provenance lab
+  retest: Independent review artifacts from 2026-08-30 and 2026-09-04 remain the publishable
+    evidence; rerun semantic review if worker provenance or grant lifecycle later change
+- date: '2026-09-06'
+  module: '1.2'
+  change: Additive named mental models and mermaid on lessons 03-08; identity-is-not-grant,
+    PDP-plus-PEP, and delayed-worker re-check named without changing the authority lab
+  retest: Independent review artifact from 2026-08-25 remains the publishable evidence;
+    rerun 1.2 cells when workers, queues, or impersonation enter scope
+- date: '2026-09-06'
+  module: '1.1'
+  change: Additive named mental models and mermaid on lessons 02-08; catalogue-only-what-exists
+    and property-oracle named without changing the invariant catalogue lab
+  retest: Independent review artifact from 2026-08-25 remains the publishable evidence;
+    rerun catalogue rows when new assets enter Phase 1
 - date: '2026-09-06'
   module: '0.2'
   change: Placement loop v2 treats a quiz score as not a 1.2 cell, refuses LMS/NICE/badge

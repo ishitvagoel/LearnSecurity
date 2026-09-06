@@ -23,6 +23,19 @@ Your job is to trace that claim to assumptions, code paths, effects, and evidenc
 
 Mechanism shopping without a bounded claim is not an actionable review.
 
+## Mental model: slogan is not independence
+
+“Defense in depth” on a design paragraph is not evidence. Classification asks whether the second check can fail while the first succeeds. If the reviewer cannot name that independent falsehood, the slogan is dishonest.
+
+```mermaid
+flowchart TD
+  pr["PR claims defense in depth"]
+  q["what independently false assumption stops the export?"]
+  pr --> q
+  q -->|"named and tested"| pass["composition holds"]
+  q -->|"cannot name it"| fail["slogan — PR fails 1.3"]
+```
+
 ## Seeded design record
 
 Review this fictional proposal alongside the vulnerable code:

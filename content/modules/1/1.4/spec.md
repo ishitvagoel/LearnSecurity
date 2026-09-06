@@ -137,3 +137,4 @@ Pinned in `content/standards/pins.yaml` on 2026-08-23.
 |---|---|
 | 2026-08-23 | Pass A initial specification |
 | 2026-08-23 | Pass A quality-gate: spec completeness competent |
+| 2026-09-06 | Named Mental model H2s on remaining lessons; mermaid already present; independent review still required |

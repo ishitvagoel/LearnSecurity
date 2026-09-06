@@ -8,6 +8,19 @@
 
 At design time, a boundary is an assumption change on a diagram. At runtime, it becomes a set of decisions, configuration, identities, paths, evidence, owners, and failure responses. If those drift while the diagram remains unchanged, the model becomes a source of false confidence.
 
+## Mental model: mappings drift while the diagram stays pretty
+
+The adapter is a living object. Resource schemas change. A header name gets reused. A mapping that once produced an independent worker context can start copying the public field again. Operating composition means watching the adapter: when the two decisions diverge, when the mapping was last reviewed, and whether a schema change silently reunited the inputs.
+
+```mermaid
+flowchart LR
+  map["adapter mapping"]
+  schema["schema or config change"]
+  schema --> map
+  map -->|"still independent"| ok["two assumptions"]
+  map -->|"copies public field again"| drift["two checks, one assumption"]
+```
+
 Operations must answer:
 
 - How will we know which boundary and model version handled an effect?

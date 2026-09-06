@@ -8,6 +8,22 @@
 
 An authorization test needs a property oracle. “The `authorize` function was called” is a mechanism observation. “Bob receives no Tenant A note body and no partial state is committed through any in-scope path” is a property observation.
 
+## Mental model: identity-only must fail the oracle
+
+The honest path is a principal with a current grant. The negative path is a principal without one. The abuse path is a principal who presents identity and expects the write or release to succeed. The oracle does not ask whether `authorize()` was called. It asks whether the forbidden effect happened.
+
+```mermaid
+flowchart TD
+  write["write or release attempted"]
+  ident["identity present?"]
+  grant["current grant present?"]
+  write --> ident
+  ident -->|"no"| deny1["deny"]
+  ident -->|"yes"| grant
+  grant -->|"no"| deny2["deny — this is the identity-only case"]
+  grant -->|"yes"| allow["allow intended effect"]
+```
+
 Start from the matrix cell, not from a test framework:
 
 ```text

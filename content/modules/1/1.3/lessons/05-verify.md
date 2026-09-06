@@ -8,6 +8,17 @@
 
 An architecture diagram can be internally consistent and still be false. Verification connects each boundary claim to an observation that would contradict it.
 
+## Mental model: five evidence modes, one independence question
+
+Normal, negative, abuse, failure, and counterfactual are not five different properties. They are five ways of asking whether the second check still has its own assumption. The independence case sets the second assumption false while leaving the first true.
+
+```mermaid
+flowchart TD
+  q["does a false second assumption stop the export?"]
+  q -->|"yes"| indep["independent composition"]
+  q -->|"no, but two checks ran"| theater["call-count theater"]
+```
+
 For the lab property:
 
 > Public input cannot establish worker provenance, and only a current single-use grant bound to worker, tenant, action, and exact object set permits the summary export effect.

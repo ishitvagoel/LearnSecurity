@@ -9,6 +9,16 @@ SecureCollab Phase 1 is a design sketch, not a production service. It has tenant
 
 That boundary matters. A useful catalogue is versioned against a product model. It does not pretend that future assets are already protected.
 
+## Mental model: catalogue only what exists now
+
+```mermaid
+flowchart TD
+  Now[Phase 1 notes and membership] --> Cat[Invariant catalogue]
+  Later[webhooks workers mobile] --> NotYet[later module]
+  Cat --> Claim[testable current claim]
+  Later --> NotYet
+```
+
 ### Actors and capabilities
 
 Use at least these actors:

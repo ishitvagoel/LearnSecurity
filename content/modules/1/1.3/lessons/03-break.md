@@ -21,6 +21,22 @@ The property under test is:
 
 The local fixture is designed to make that property observable without a network target, real credential, real personal data, or harmful payload.
 
+## Mental model: two checks that share an assumption are one check
+
+Independence is a property of the *inputs*, not of the call count. When both layers read the same requester-controlled marker, a forged marker fools both. The second check is a duplicate, not a defense.
+
+```mermaid
+flowchart TD
+  req["requester-controlled metadata"]
+  a["edge check reads marker"]
+  b["app check reads marker"]
+  req --> a
+  req --> b
+  a --> same["same assumption"]
+  b --> same
+  same --> collapse["two calls, one check"]
+```
+
 ## Prepare an evidence worksheet
 
 Before running anything, create one row per observed case:

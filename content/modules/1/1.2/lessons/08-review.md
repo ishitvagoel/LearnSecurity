@@ -9,6 +9,19 @@
 
 Treat the vulnerable fixture as a pull request proposing reusable authorization logic. Your task is not to count suspicious lines. Reconstruct the authority relation the code actually implements, compare it with the module invariant, and write changes a developer can verify.
 
+## Mental model: hunt the ambient path at the mutation
+
+Ambient identity hides in defaults: the function that “already authenticated,” the role that lost tenant scope, the helper that serializes before `decide()`. Classification starts at the protected effect. Everything that is not a current grant check at that effect is a candidate ambient path.
+
+```mermaid
+flowchart TD
+  mut["find the protected effect"]
+  q["what did the PEP consult?"]
+  mut --> q
+  q -->|"current grant table"| pass["1.2 holds"]
+  q -->|"identity, default, or unscoped role"| fail["ambient path — PR fails 1.2"]
+```
+
 Do not open `content/assessment/keys/1.2.md` until your review has been evaluated.
 
 ## Review boundary

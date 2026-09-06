@@ -196,3 +196,5 @@ changelog:
   note: 'Independent semantic and lab-safety reviews passed after precision closures; published as curriculum-depth competent, without learner transfer, Gate 1, product, milestone, or compliance claims'
 - date: '2026-09-04'
   note: 'Targeted independent recheck closed the PR #14 evidence-correlation finding with non-bearer capability references, internally generated correlation IDs, privacy regressions, and explicit durability limits'
+- date: '2026-09-06'
+  note: Additive named mental models and mermaid diagrams on remaining lessons; independent review artifacts unchanged

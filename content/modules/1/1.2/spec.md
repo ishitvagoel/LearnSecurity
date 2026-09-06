@@ -230,3 +230,4 @@ Publication requires schema validity, vulnerable-fail and fixed-pass lab evidenc
 |---|---|
 | 2026-08-23 | Pass A specification and initial Pass B/C generated content |
 | 2026-08-25 | Rebuilt coverage contract, authority model, exact ASVS mapping, structural lab contract, assessment architecture, and independent-review requirement |
+| 2026-09-06 | Additive named mental models and mermaid diagrams on remaining lessons; independent review artifacts unchanged |

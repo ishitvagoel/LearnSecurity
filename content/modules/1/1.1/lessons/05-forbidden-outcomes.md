@@ -7,6 +7,14 @@
 
 A security test needs an oracle: a rule that decides whether the observed result violates the invariant. “The middleware ran” is a mechanism oracle. “Tenant B received zero bytes derived from Tenant A’s note body” is a property oracle.
 
+## Mental model: property oracle vs mechanism oracle
+
+```mermaid
+flowchart LR
+  Prop[zero Tenant A bytes in B response] --> Oracle[can fail]
+  Mech[middleware is installed] --> NotOracle[does not prove the cell]
+```
+
 For each catalogue row, write the forbidden outcome before choosing a test tool.
 
 | Invariant shape | Forbidden outcome | Property evidence | Misleading evidence |

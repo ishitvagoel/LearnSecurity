@@ -11,6 +11,10 @@ Intended findings live only in `content/assessment/keys/1.4.md` — not here.
 
 A colleague ships a recovery confirm and a “risk register.” Your job is to label each claim **property**, **mechanism**, or **false assurance**, and to say which 1.1 cell breaks if they ship.
 
+## Mental model: four seeded smells to find yourself
+
+Classification starts at the control and the register, not at the tool names. A missing accessible name, color-only distinction, mouse-only confirm, or “users should be careful” residual each maps to a 1.1 cell. Do not open the keys file. For each smell, write the label and the rewrite.
+
 ```mermaid
 flowchart TD
   PR[Proposed recovery PR] --> Q1{Named keyboard control?}
@@ -18,10 +22,6 @@ flowchart TD
   Q1 -->|no| Fail1["Property fail - lockout or workaround"]
   Q2 -->|no| Fail2["False assurance - vanity residual"]
 ```
-
-## Mental model: four seeded smells to find yourself
-
-Do not open the keys file. For each smell, write the label and the rewrite.
 
 - Confirm button has no accessible name  
 - Destructive or confirming action distinguished only by red vs green  

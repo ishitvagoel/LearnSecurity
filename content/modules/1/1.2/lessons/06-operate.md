@@ -20,6 +20,21 @@ requested -> reviewed -> granted -> active -> used
 
 The secure property must survive mistakes, revocation, evidence loss, emergency action, and human stress. Prevention matters, but an invisible or irreversible authorization failure leaves the product unable to contain or learn from compromise.
 
+## Mental model: grants have a lifecycle sessions do not own
+
+A grant is issued, used, expired, and revoked. Session cookies and JWTs have their own clocks. Those clocks are not the grant clock. Operating authorization means operating the grant table: who may still mutate this tenant object, when that row was last checked, and what happens when the row is gone.
+
+```mermaid
+flowchart LR
+  issue["issue grant"]
+  use["PEP checks grant at use"]
+  revoke["revoke or expire grant"]
+  issue --> use
+  use --> revoke
+  revoke --> use
+  use -->|"row gone"| deny["deny even if the session still identifies the principal"]
+```
+
 ## Make grants reviewable before activation
 
 An administrative grant screen should show the effect a reviewer is authorizing:

@@ -10,6 +10,16 @@ The vulnerable fixture says the product is secure because it names familiar mech
 
 That distinction is deliberate. This module occurs before SecureCollab features exist. Later modules break running authorization, parser, browser, and state-transition mechanisms. Here you learn to reject a false claim before code makes it expensive.
 
+## Mental model: a slogan is not a catalogue row
+
+```mermaid
+flowchart LR
+  Slogan[we use TLS and bcrypt] --> V[vulnerable claim]
+  V --> Fail[catalogue validator fails]
+  Row[testable invariant] --> F[fixed claim]
+  F --> Pass[validator passes]
+```
+
 ## Safety boundary
 
 You may inspect and validate only the files in this lab directory. Do not test a public site, employer system, classmate deployment, or real account. The fixtures contain synthetic tenants and notes; no credentials or personal data are needed.

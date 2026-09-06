@@ -8,6 +8,16 @@
 
 Assume one prevention mechanism fails. A stale authorization cache serves one cross-tenant response, an exception path logs a note body, or a restore reintroduces deleted metadata. The invariant has already been violated. Operations determines whether the violation is quickly bounded, understood, and repaired—or remains invisible.
 
+## Mental model: prevention failed, the loop continues
+
+```mermaid
+flowchart TD
+  Fail[prevention failed] --> Det[detect]
+  Det --> Bound[contain]
+  Bound --> Rec[recover]
+  Rec --> Ev[privacy-safe evidence]
+```
+
 For one catalogue row, extend the claim with detection, response, recovery, and evidence-retention properties.
 
 ## Design a privacy-safe event

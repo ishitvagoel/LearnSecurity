@@ -9,6 +9,24 @@
 
 Changing “note” to “release” is not transfer. ReleaseDesk changes the object, authority source, state transition, trusted components, time horizon, and impact. You must rebuild the model and explain which earlier reasoning still applies.
 
+## Mental model: delay is not a grant
+
+ReleaseDesk’s worker runs later, as a machine identity, not as the human who clicked approve. If the worker treats “the enqueueing user was authenticated” as permission to deploy, identity has been smuggled across time. The grant must be re-checked at the mutation, bound to artifact digest, environment, and current approver state.
+
+```mermaid
+sequenceDiagram
+  participant User
+  participant API
+  participant Queue
+  participant Worker
+  User->>API: approve identity plus grant
+  API->>Queue: enqueue job
+  Note over Queue: time passes
+  Queue->>Worker: job
+  Worker->>Worker: re-check grant at mutation
+  Worker-->>API: mutate or refuse
+```
+
 Use only the synthetic product card below. Do not inspect or operate a real CI/CD system, cloud account, repository, or deployment.
 
 ## Product card: ReleaseDesk

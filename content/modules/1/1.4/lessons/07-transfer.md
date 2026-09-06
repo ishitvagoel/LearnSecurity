@@ -8,6 +8,10 @@
 
 SecureCollab scaffolding goes away. You get a **clinic portal** that adds step-up authentication, and a **banking re-auth** dialog as a second sketch. One of the second-factor UIs is mouse-only. Your job is to rewrite the 1.4 loop, not to name a CWE.
 
+## Mental model: transfer changes the envelope, not the product name
+
+Renaming “recovery confirm” to “clinic step-up” is not transfer. Actor, object, channel, and residual change. Keyboard lockout and chart-exposing workarounds are new 1.1 cells. Support reading a code aloud is a new 1.2 cell, not a usability win.
+
 ```mermaid
 flowchart TD
   Old[SecureCollab recovery confirm] --> Q["What changed - actor, object, channel, time"]

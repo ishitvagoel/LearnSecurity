@@ -25,6 +25,19 @@ Assume documents, filenames, embedded links, metadata, archive structure, claime
 
 Do not assume any control is implemented merely because it appears in this description. Your task is to build a model that exposes what must be true and what remains unproved.
 
+## Mental model: pipeline privilege is a second context
+
+PreviewForge’s unprivileged upload and privileged convert look like two stages. If the converter trusts the upload step’s tenant claim, the stages share an assumption. The privileged step must bind to the exact immutable object version and build its own context. Delay and privilege do not compose on their own.
+
+```mermaid
+flowchart LR
+  upload["unprivileged upload"]
+  convert["privileged convert"]
+  upload -->|"shared tenant claim"| collapse["one assumption"]
+  upload -->|"object version loaded at convert"| indep["second context"]
+  indep --> convert
+```
+
 ## Why SecureCollab cannot simply be renamed
 
 At least these assumptions change:

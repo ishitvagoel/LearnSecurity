@@ -188,3 +188,4 @@ Publication requires schema validity, the clean vulnerable/fixed lab pair, seman
 |---|---|
 | 2026-08-23 | Pass A specification and initial Pass B/C pilot |
 | 2026-08-25 | Rebuilt as the semantic-depth reference with coverage contract, causal lessons, executable semantic lab, aligned assessment, and independent-review requirement |
+| 2026-09-06 | Additive named mental models and mermaid diagrams on remaining lessons; independent review artifacts unchanged |

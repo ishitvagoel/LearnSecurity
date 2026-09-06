@@ -15,6 +15,16 @@ A trustworthy build step is not “add more security.” It is a causal argument
 
 Choose one catalogue row from LO-02. Do not choose a mechanism first.
 
+## Mental model: property first, then the smallest change
+
+```mermaid
+flowchart TD
+  Out[forbidden outcome] --> Cause[root cause]
+  Cause --> Mech[smallest mechanism]
+  Mech --> Ev[evidence that can fail]
+  Mech --> Res[named residual]
+```
+
 ## Worked design: note bodies in logs
 
 Assume the property is:
