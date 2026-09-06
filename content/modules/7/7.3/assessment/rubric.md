@@ -8,18 +8,18 @@ Webhooks, callbacks, and third-party APIs
 
 ## Evidence checklist
 
-- [ ] Signed webhook protocol, replay tests, provider-failure runbook
-- [ ] Transfer task (Clinic lab-result webhook.)
-- [ ] Lab `labs/7.3/7.3-lab`: forbidden outcome **Unsigned webhook body accepted**
-- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Raw-body MAC protocol; TLS named as a different cell
+- [ ] Transfer task (clinic lab-result webhook; signed redirects / 6.5 named)
+- [ ] Lab `labs/7.3/7.3-lab`: forbidden outcome **unsigned webhook accepted**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: webhook_sig_fail; replay_window.
+- [ ] Operate signal without bodies/secrets: `webhook_sig_fail`
 
 ## Rubric
 
 | Result | Meaning |
 |---|---|
-| Developing | Tools listed; missing attacker/trust; mechanism slogans |
+| Developing | Tools listed; missing attacker/trust; “TLS/SDK” slogans |
 | Competent | System-specific invariant; lab mapped; operate present |
 | Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
 

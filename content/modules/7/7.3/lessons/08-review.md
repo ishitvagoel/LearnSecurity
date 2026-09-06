@@ -1,40 +1,42 @@
-# 7.3 — Webhooks, callbacks, and third-party APIs (Review)
+# 7.3-LO-08 — Review path-trusted callbacks as a PR, not an API10 ticket
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** ASVS 5.0.0 V10 (final); API10 awareness. HMAC is a teaching stand-in, not “we are Stripe.”
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-11.2.1`.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab billing webhook
 
-A webhook with a missing signature is rejected. Authenticity of the *provider message* is distinct from TLS and from 1.2 on the resulting action.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Anyone who can POST your callback URL.
-- **Trust:** Local accept(sig, body, secret).
 Review `labs/7.3/7.3-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/7.3.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|empty sig accepted| Property["Property - good if tested"]
+  Q -->|TLS only| Mechanism[Mechanism - hop]
+  Q -->|vendor CIDR| False[False assurance]
+```
 
-- Seeded smell (label it yourself): if path==/webhook: process
-- Seeded smell (label it yourself): JSON parsed before MAC
-- Seeded smell (label it yourself): No missing-sig test
-- Seeded smell (label it yourself): Secret in query (4.3)
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- Accept always true / process because path matched
+- JSON parsed before MAC
+- No missing-sig test
+- Secret in query string (4.3)
+
+Also reject: live provider attacks, keys in lessons, real webhook secrets.
 
 ## Misconceptions
 
 - TLS to us proves the sender
-- IP allowlist is authenticity
+- IP allow-list is authenticity
 - Webhooks are just APIs in reverse so JWT login applies
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_missing_signature_is_rejected`.
 
 ## Transfer
 
-Signed redirects; outbound webhook SSRF (6.5).
+Clinic PR that “terminated TLS and allow-listed the vendor” without a missing-sig test is incomplete.

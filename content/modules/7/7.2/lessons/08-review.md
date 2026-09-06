@@ -1,29 +1,31 @@
-# 7.2 — Object, property, and function security (Review)
+# 7.2-LO-08 — Review ORM dumps as a PR, not an API3 ticket
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** ASVS 5.0.0 V4 (final); API1/3/5 awareness after 1.2/4.4.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.3`.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab note JSON
 
-A member must not resolve secret_internal. Function/property authorization is not “they can call GET /notes.” Identifiers locate; they do not authorize.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Member using GraphQL __typename or REST ?fields=.
-- **Trust:** Local resolve(role, field).
 Review `labs/7.2/7.2-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/7.2.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|member sees secret_internal| Property["Property - good if tested"]
+  Q -->|SPA hides column| Mechanism[Mechanism - client]
+  Q -->|UUID obscure| False[False assurance]
+```
 
-- Seeded smell (label it yourself): return orm.__dict__
-- Seeded smell (label it yourself): GraphQL expose all columns
-- Seeded smell (label it yourself): IDOR test only on object not field
-- Seeded smell (label it yourself): UUID as “capability”
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- Resolver / dump always true
+- GraphQL exposes all columns
+- IDOR test only on object, not field
+- UUID treated as a capability
+
+Also reject: public GraphQL attacks, keys in lessons, real PII in fixtures.
 
 ## Misconceptions
 
@@ -33,8 +35,8 @@ Also reject: client trust, interpreter concatenation, Report-Only as enforcement
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_member_cannot_resolve_internal_field`.
 
 ## Transfer
 
-Bulk update; search highlighting leaking snippets.
+Clinic PR that “hid SSN in the table” without a member×field deny test is incomplete.

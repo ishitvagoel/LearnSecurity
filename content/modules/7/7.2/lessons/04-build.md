@@ -1,50 +1,52 @@
-# 7.2 — Object, property, and function security (4 Build)
+# 7.2-LO-04 — Allow-list fields by role
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** ASVS 5.0.0 V4 (final); API1/3/5 awareness after 1.2/4.4.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.3`.
 
-## Property (start here)
+## Structural means the trusted layer checks role × field
 
-A member must not resolve secret_internal. Function/property authorization is not “they can call GET /notes.” Identifiers locate; they do not authorize.
+`resolve` must deny `secret_internal` unless `role == "service"`. Structural means that predicate — not a GraphQL `@hide` directive the client can skip, not a REST field name that starts with `_`.
 
-## Attacker capabilities and trust assumptions
+## Mental model: deny unless listed
 
-- **Attacker:** Member using GraphQL __typename or REST ?fields=.
-- **Trust:** Local resolve(role, field).
-member × secret_internal False.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-def resolve(role, field):
-    if field=='secret_internal':
-        return role=='service'
-    return True
+```mermaid
+flowchart TD
+  Call["resolve role field"] --> Secret{"field is secret_internal?"}
+  Secret -->|yes| Role{"role is service?"}
+  Role -->|yes| Allow[allow]
+  Role -->|no| Deny[deny]
+  Secret -->|no| Public[allow display_name]
 ```
+
+Fail-safe: unknown roles deny the internal field.
 
 ## Why this restores the cell
 
-Allow-list fields by role; never bind authz to the id format.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| member × `secret_internal` | false |
+| member × `display_name` | true |
+| service × `secret_internal` | true |
 
 ## What this is not
 
-SQLAlchemy to_dict() is not a policy.
-
-Hiding fields in UI only.
+Object GET tests only (4.4). Extra-key write tests only (7.1). UI omit. UUID as capability.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name the predicate. Run:
+
+```
+python3 -m pytest labs/7.2/7.2-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Bulk update; search highlighting leaking snippets.
+Clinic: stop treating “SSN not in the member table UI” as field authorization.
 
 ## Residual risk
 
-Admin sees secret_internal — audited.
+CSV/search/7.4 serializers; `v5.0.0-8.3.2` Level 3 after role change.

@@ -1,40 +1,42 @@
-# 7.4 — Queues, workers, events, and service identity (Review)
+# 7.4-LO-08 — Review inherited request context as a PR, not a zero-trust sticker
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** ASVS 5.0.0 V4/V10 (final); NIST zero trust as architecture *guidance*.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-13.2.1`.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab export worker
 
-A leftover user session is not worker identity. Exports must run as a service principal. Confused deputy: the queue message’s user_session must not become the worker’s ambient authority.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Stolen cookie posted into a job; a job that forgets to drop the user context.
-- **Trust:** Local exporter(ctx).
 Review `labs/7.4/7.4-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/7.4.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|alice session is principal| Property["Property - good if tested"]
+  Q -->|VPC queue| Mechanism[Mechanism - network]
+  Q -->|zero trust dashboard| False[False assurance]
+```
 
-- Seeded smell (label it yourself): job['session']=request.cookies
-- Seeded smell (label it yourself): Worker uses DATABASE_URL superuser
-- Seeded smell (label it yourself): No test user_session rejected
-- Seeded smell (label it yourself): Retry duplicates (2.4)
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- `user_session or service` fallback / copy request cookies into the job
+- Worker uses a superuser `DATABASE_URL`
+- No test that leftover session is rejected
+- Retry duplicates after revoke (2.4)
+
+Also reject: live broker attacks, keys in lessons, real session cookies in fixtures.
 
 ## Misconceptions
 
 - Internal queue is trusted input
 - Async means no authz
-- Service account should be superuser “just for jobs”
+- Service account should be superuser just for jobs
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_user_session_is_not_worker_identity`.
 
 ## Transfer
 
-Outbox pattern; event schemas.
+Clinic PR that “runs on the hospital VLAN with zero trust” without a leftover-session deny test is incomplete.

@@ -1,53 +1,70 @@
-# 7.2 — Object, property, and function security (2 Model)
+# 7.2-LO-02 — Role times field is a matrix, not a serializer dump
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** ASVS 5.0.0 V4 (final); API1/3/5 awareness after 1.2/4.4.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.3`, `v5.0.0-8.2.2`.
 
-## Property (start here)
+## Can a second engineer name pytest cases from your field matrix?
 
-A member must not resolve secret_internal. Function/property authorization is not “they can call GET /notes.” Identifiers locate; they do not authorize.
+“Object authz is on” is not this lesson. A reviewable model names **role, field, and every serializer**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab Phase 1 freeze: local `resolve(role, field)`. No live GraphQL.
 
-- **Attacker:** Member using GraphQL __typename or REST ?fields=.
-- **Trust:** Local resolve(role, field).
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: three grains
+
+```mermaid
+flowchart TD
+  Fn["8.2.1 function"] --> Obj["8.2.2 object x tenant"]
+  Obj --> Field["8.2.3 field"]
+```
+
+Passing GET `/notes/{id}` (4.4) does not decide `secret_internal`. Passing 7.1 (cannot *write* `is_admin`) does not decide who may *read* it.
+
+## Mental model: UUID is not a grant
+
+```mermaid
+flowchart LR
+  Id["note UUID"] --> Locate[locator]
+  Locate --> Grant{"4.4 object grant?"}
+  Grant --> Fields["7.2 field matrix"]
+```
+
+Obscure identifiers are not capabilities. API1/API3/API5 are awareness after this sentence.
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | member vs admin |
-| Objects | secret_internal, title |
-| Actions | resolve |
-| Channels | field picker, GraphQL |
-| TCB | Per-field policy. |
-| Untrusted | requested field names |
-| State / time | One query. |
-| 1.1 cell | Authorization at property grain. |
+| Subjects | member; service role |
+| Objects | `display_name`; `secret_internal` |
+| Actions | `resolve` |
+| Channels | REST JSON; GraphQL; CSV; search |
+| TCB | server-side role×field |
+| Untrusted | `?fields=`; GraphQL selection sets; UI hide |
+| State / time | current role; Level 3 cache after role change |
+| 1.1 cell | authorization at property grain |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| member | title | resolve | allow |
-| member | secret_internal | resolve | deny |
-| admin | secret_internal | resolve | allow-audit |
-| anon | title | resolve | deny |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| member | `display_name` | resolve | allow |
+| member | `secret_internal` | resolve | deny |
+| service | `secret_internal` | resolve | allow-audited |
+| SPA hide | `secret_internal` | omit | not TCB |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/7.2/7.2-lab` file `field.py`.
+Draw the matrix. Point at `labs/7.2/7.2-lab` file `field.py`.
 
 ## Transfer
 
-Bulk update; search highlighting leaking snippets.
+Clinic SSN; search snippets; bulk update of hidden fields (write grain is 7.1, read grain is this map).
 
 ## Residual risk
 
-Admin sees secret_internal — audited.
+7.4 worker dumps; `v5.0.0-8.3.2` Level 3 stale serializers; debug toolbar.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

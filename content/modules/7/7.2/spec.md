@@ -1,6 +1,6 @@
 # 7.2 — Object, property, and function security
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. No exploit walkthroughs.
 
 ## Identity
 
@@ -9,71 +9,74 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** Object, property, and function security
 - **phase / track / difficulty:** 7 / core / intermediate
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Blueprint §7; 4.4 object×tenant; 7.1 extra-key *writes*.
 - **routeTags:** complete, web-api
 - **releaseMilestone:** M2
 - **masteryGate:** 7
 
 ## Objective hierarchy
 
-1. Produce **Policy-aware serializers and authorization mutation tests** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce a **role × field matrix** plus deny tests so a member cannot resolve `secret_internal`.
+2. Name attacker capabilities (member using GraphQL fields or REST `?fields=`) and trust assumptions (local `resolve(role, field)`).
+3. Transfer: clinic member cannot resolve SSN; bulk update; search snippets — without treating UUID obscurity as a grant.
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+4.4 grant is object-and-tenant keyed; 7.1 extra keys on *write*; 1.2 cells; identifiers locate.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- Object-level authz implies field-level.
+- Private JSON keys are hidden.
+- GraphQL resolvers inherit REST policy magically.
+- A UUID is a capability.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+Object×tenant (4.4) → field read grain (this module) → extra-key writes (7.1) → worker dumps (7.4).
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true if GET `/notes/{id}` succeeds for a member?
+- What fails if the UI hides `secret_internal` but the serializer still dumps it?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can go wrong when `to_dict()` dumps the ORM object?
+- What residual remains after a role change if serializers are cached (`v5.0.0-8.3.2`)?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/7.2/7.2-lab`. Forbidden: member resolves `secret_internal`. No live GraphQL attacks.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-API1/API3/API5; ASVS V2/V4/V8 — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- OWASP ASVS 5.0.0 (final): `v5.0.0-8.2.3` (field-level / BOPLA, Level 2); `v5.0.0-8.2.1` (function-level); `v5.0.0-8.2.2` (object-level / BOLA — already 4.4, restated so grains stay distinct); `v5.0.0-8.3.2` immediate application of authorization changes is **Level 3, labeled advanced**.
+- OWASP API Security Top 10:2023 API1/API3/API5 as **awareness after** the cause (also 4.4).
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+New serializer, GraphQL field, CSV, search snippet; role change.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: Policy-aware serializers and authorization mutation tests.
+Evidence: role×field matrix, mutation tests. Feeds Gate 7 / M2 (milestone stays not-attempted).
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`field_denied` without the secret value. Service/admin reads are audited.
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: role×field mental models; ASVS v5.0.0-8.2.3; L3 8.3.2 labeled advanced |

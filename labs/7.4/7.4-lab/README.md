@@ -1,9 +1,36 @@
-# Lab 7.4
+# Lab 7.4 — leftover user session is not worker identity
 
-Authorized: this directory only.
+**Module:** `7.4`
+**Authorized scope:** this directory only. Local course fixture. No live brokers.
+**Invariant:** `exporter({"user_session": "alice", "service": None})` is `None`. Honest `service=worker-sc` may succeed.
+**Root cause class:** ambient user context in a system worker
+**Non-goals:** live Redis/RabbitMQ, zero-trust product cookbooks.
 
-A worker job must use **service identity**, not a leftover user session, to export notes. Stale 1.2 grants (2.4) still apply.
+## Reset
 
-pytest tests/test_property.py --impl vulnerable (must fail) then --impl fixed.
+Re-run pytest. Optional: `git checkout -- labs/7.4/7.4-lab`.
 
-Forbidden: exporting under alice's session from a worker job.
+## Vulnerable behavior (local only)
+
+`exporter` returns `user_session` if present. Forbidden outcome: exporting under alice’s session.
+
+## Structural fix
+
+Return `"worker-sc"` only when `service == "worker-sc"`. Leftover sessions are ignored.
+
+## Verify
+
+```
+python3 -m pytest labs/7.4/7.4-lab/tests --impl vulnerable
+python3 -m pytest labs/7.4/7.4-lab/tests --impl fixed
+```
+
+The first command must fail on leftover `user_session`. The second must pass. Honest `worker-sc` may pass on both.
+
+## Operate
+
+Signal: `worker_identity_wrong`. Do not log session cookies.
+
+## Transfer
+
+Clinic batch-export worker. Prompt only.

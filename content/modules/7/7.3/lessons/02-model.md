@@ -1,53 +1,69 @@
-# 7.3 — Webhooks, callbacks, and third-party APIs (2 Model)
+# 7.3-LO-02 — MAC over raw bytes, not parsed JSON
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** ASVS 5.0.0 V10 (final); API10 awareness. HMAC is a teaching stand-in, not “we are Stripe.”
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-11.2.1`, `v5.0.0-2.3.4`.
 
-## Property (start here)
+## Can a second engineer name pytest cases from your webhook map?
 
-A webhook with a missing signature is rejected. Authenticity of the *provider message* is distinct from TLS and from 1.2 on the resulting action.
+“TLS terminates at the edge” is not this lesson. A reviewable model names **raw body, MAC, secret, and what happens on missing sig**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab Phase 1 freeze: local `accept(sig, body, secret)` with disposable `lab-secret`. No live providers.
 
-- **Attacker:** Anyone who can POST your callback URL.
-- **Trust:** Local accept(sig, body, secret).
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: three different cells
+
+```mermaid
+flowchart TD
+  Tls["5.4 TLS hop"] --> Mac["7.3 message MAC"]
+  Mac --> Authz["1.2 side effect"]
+  Url["callback URL"] --> Egress["6.5 if we call out"]
+```
+
+## Mental model: parsed JSON is a second document
+
+```mermaid
+flowchart LR
+  Wire["bytes on the wire"] --> Mac["MAC input"]
+  Wire --> Parse["json.loads"]
+  Parse --> Reser["re-serialized JSON"]
+  Reser --> Mismatch["MAC over the wrong document"]
+```
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | forged client, real provider, app |
-| Objects | body, HMAC, secret |
-| Actions | accept |
-| Channels | HTTPS callback |
-| TCB | Verify signature over raw body + freshness + idempotency (2.4). |
-| Untrusted | IP allow-lists as the only control; JSON fields |
-| State / time | Replay yesterday’s valid signed body (residual if no nonce). |
-| 1.1 cell | Authenticity + integrity of inbound integration. |
+| Subjects | anyone who can POST the URL; provider with `lab-secret` |
+| Objects | callback body |
+| Actions | `accept` |
+| Channels | HTTP POST; signature header |
+| TCB | HMAC-SHA256 over raw body + `compare_digest` |
+| Untrusted | body, signature header, source IP |
+| State / time | replay window (named residual) |
+| 1.1 cell | authenticity + integrity of inbound integration |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| forger | empty sig | POST | deny |
-| provider | valid sig | POST | allow-verify |
-| replay | old valid | POST | deny-if-freshness |
-| handler | event | side-effect | still-1.2 |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| unsigned POST | body | accept | deny |
+| matching MAC | same raw body | accept | allow |
+| wrong MAC | body | accept | deny |
+| TLS only | path | POST | not authenticity |
+| parsed-then-MAC | re-serialized | accept | 2.1 residual |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/7.3/7.3-lab` file `hook.py`.
+Draw the map. Point at `labs/7.3/7.3-lab` file `hook.py`.
 
 ## Transfer
 
-Signed redirects; outbound webhook SSRF (6.5).
+Clinic lab-result webhook; signed redirects.
 
 ## Residual risk
 
-Provider compromise — egress + least privilege on what a webhook may do.
+Replay (`v5.0.0-2.3.4`); freshness (`v5.0.0-2.3.3`); 1.2 on side effects; 6.5 outbound; `v5.0.0-4.1.5` Level 3.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

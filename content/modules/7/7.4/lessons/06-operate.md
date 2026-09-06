@@ -1,36 +1,43 @@
-# 7.4 — Queues, workers, events, and service identity (6 Operate)
+# 7.4-LO-06 — Detect worker_identity_wrong without logging the cookie
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** ASVS 5.0.0 V4/V10 (final); NIST zero trust as architecture *guidance*.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-13.2.1`.
 
-## Property (start here)
+## Prevention is not absolute
 
-A leftover user session is not worker identity. Exports must run as a service principal. Confused deputy: the queue message’s user_session must not become the worker’s ambient authority.
+A new task can inherit request context again. Pair detect and recover. Do not log session cookies or note bodies (3.1 / 4.3).
 
-## Attacker capabilities and trust assumptions
+## Mental model: leftover session is a signal
 
-- **Attacker:** Stolen cookie posted into a job; a job that forgets to drop the user context.
-- **Trust:** Local exporter(ctx).
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Job[job] --> Wrong{user_session used as principal?}
+  Wrong -->|yes| Metric["worker_identity_wrong += 1"]
+  Metric --> Drain[Rotate service creds and drain queue]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | worker_used_user_session metric. |
-| Signal (no bodies) | worker_identity_wrong; poison_queue. |
-| Revoke / recover | Revoke service creds; drain queue. |
-| Residual | Broker ACLs — 10.3. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `worker_identity_wrong`; `poison_queue` |
+| Signal | request/job id, expected principal; never the cookie |
+| Recover | Keep deny; rotate worker creds; drain; re-check 4.1 revoke vs 2.4 retry |
+| Residual | God-mode DB role; Level 3 originating subject; 10.3 broker ACLs |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/7.4/7.4-lab`.
+Write one log line you would accept. Tie it to `labs/7.4/7.4-lab`.
+
+```
+log_denied reason=worker_identity_wrong expected=worker-sc job_id=job_74e
+```
+
+Reject any line that includes `alice`’s session cookie, note bodies, or a live broker dump.
 
 ## Transfer
 
-Outbox pattern; event schemas.
+Clinic: detect batch-export jobs running as a clinician session; do not attach the session token to the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+A zero-trust product name is not the property.

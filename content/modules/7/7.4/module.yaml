@@ -7,105 +7,117 @@ difficulty: intermediate
 status: reviewed
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 1.1–2.4 Pass A complete
+- Prior phase Pass A per blueprint §7; 4.1 leftover sessions; 4.4 object grants; 2.4 retries
 routeTags:
 - complete
 - web-api
 releaseMilestone: M2
 outcomes:
-- 'Demonstrate: Queues, workers, events, and service identity'
-- 'Produce evidence: End-to-end authority trace and adversarial job tests'
-- Name attacker capabilities and trust assumptions
-- Include a local-only lab brief and a transfer challenge
-- Do not instruct live-target attacks or mix awareness lists as compliance
+- 'Run exports as a named worker principal; leftover user sessions in job payloads are not worker identity.'
+- 'Separate HTTP-request subject from service identity; name originating-subject carry-through as an advanced residual.'
+- 'Map ASVS 5.0.0 backend service-account requirements and treat NIST SP 800-207 as architecture guidance, not a product.'
 reviewTriggers:
-- Material SecureCollab change in this module's concern
+- New queue, Celery task, or outbox that inherits request context
+- Worker DATABASE_URL or role broader than the job
+- Retry/redelivery of jobs after grant revocation (2.4 / 4.1)
 - Superseding final standard
 invariants:
-- Claims are properties of SecureCollab (or the elective system), not tool names
+- A leftover user session is not worker identity
+- exporter with user_session alice and no service principal is None
 - Labs stay in authorized local or official training scope
 - Draft standards are labeled draft
 threatModelPrompts:
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+- What can go wrong when the worker uses the job's user_session as ambient authority?
+- Which DB role does the worker actually hold (3.3)?
+- What residual remains if retries replay a revoked grant (2.4)?
 concepts:
-- queues
+- workers
+- service-identity
+- confused-deputy
 - securecollab
 - seven-step-loop
 learningObjects:
 - id: 7.4-LO-01
   kind: concept-model
-  title: 'Queues, workers, events, and service identity: property vs mechanism'
+  title: Leftover user session is not worker identity
   path: lessons/01-property.md
 - id: 7.4-LO-02
   kind: design-exercise
-  title: Model SecureCollab for 7.4
+  title: HTTP subject versus worker principal
   path: lessons/02-model.md
 - id: 7.4-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: User session accepted as worker identity'
+  title: 'Local fixture: user_session accepted as worker identity'
   path: lessons/03-break.md
 - id: 7.4-LO-04
   kind: design-exercise
-  title: Structural fix restoring the 7.4 invariant
+  title: Bind exporter to worker-sc only
   path: lessons/04-build.md
 - id: 7.4-LO-05
   kind: verification-lab
-  title: Forbidden-outcome tests for 7.4
+  title: Alice session denied; worker-sc allowed
   path: lessons/05-verify.md
 - id: 7.4-LO-06
   kind: operations-exercise
-  title: Detect/recover notes for 7.4
+  title: worker_identity_wrong without logging the cookie
   path: lessons/06-operate.md
 - id: 7.4-LO-07
   kind: transfer-challenge
-  title: 'Transfer: Clinic batch-export worker.'
+  title: 'Transfer: clinic batch-export worker'
   path: lessons/07-transfer.md
 - id: 7.4-LO-08
   kind: code-review
-  title: Seeded review for 7.4
+  title: Review inherited request context as a PR, not a zero-trust sticker
   path: lessons/08-review.md
 labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
     third-party targets
   slug: 7.4-lab
-  summary: User session accepted as worker identity
+  summary: User session accepted as worker identity because exporter prefers user_session
   forbiddenOutcomes:
   - User session accepted as worker identity
   - Live-target instructions
   - Real PII or production secrets
   - Awareness list used as the syllabus
 evidenceRequired:
-- End-to-end authority trace and adversarial job tests
+- End-to-end authority trace HTTP vs worker
 - Transfer task prompt
-- Local lab brief
+- Local lab brief with leftover session deny tests
 assessmentBlueprint:
-  explain: Causal model for Queues, workers, events, and service identity
-  design: End-to-end authority trace and adversarial job tests
-  build: Deferred to Pass B
-  break: Authorized local reproduction of the representative failure
-  verify: Forbidden-outcome tests
-  operate: Detection and recovery notes
-  communicate: Residual risk without compliance theater
+  explain: Confused deputy; HTTP subject vs worker principal
+  design: Jobs carry service identity; workers authenticate as service
+  build: exporter returns worker-sc only in labs/7.4/7.4-lab/fixed
+  break: Authorized local user_session or service fallback
+  verify: Forbidden-outcome tests plus honest service principal
+  operate: worker_identity_wrong without the session cookie
+  communicate: Residual originating-subject Level 3, poison loops, god-mode DB role
 masteryGate: '7'
 standardsRefs:
-- source: OWASP ASVS / module anchors (see spec)
-  version: 5.0.0
+- source: OWASP Application Security Verification Standard
+  version: '5.0.0'
   status: final
   requirementIds:
-  - V8
-  - V16
+  - v5.0.0-13.2.1
+  - v5.0.0-13.2.2
+  - v5.0.0-8.3.3
   url: https://owasp.org/www-project-application-security-verification-standard/
+- source: NIST SP 800-207 Zero Trust Architecture
+  version: '800-207'
+  status: final
+  requirementIds:
+  - architecture-guidance
+  url: https://csrc.nist.gov/pubs/sp/800/207/final
 misconceptions:
 - Internal queue is trusted input
 - Async means no authz
-- Service account should be superuser “just for jobs”
+- Service account should be superuser just for jobs
+- Zero trust as a product replaces worker identity tests
 operationalConsiderations:
 - worker_identity_wrong; poison_queue.
-- Broker ACLs — 10.3.
-author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+- Drain queue after rotating service creds.
+- Broker ACLs wait for 10.3.
+author: deepen-curriculum / author-module-spec
+reviewer: pending independent quality and lab-safety review
 lastReviewedAt: '2026-08-24'
 nextReviewAt: '2027-02-24'
 changelog:
@@ -123,3 +135,7 @@ changelog:
 - date: '2026-08-24'
   note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
     Pass C keys isolated'
+- date: '2026-09-06'
+  note: 'Depth pass: HTTP-vs-worker-principal mental models, mermaid diagrams, ASVS
+    v5.0.0-13.2.1 / 13.2.2, v5.0.0-8.3.3 labeled Level 3 advanced; NIST SP 800-207
+    as architecture guidance; independent review still required'

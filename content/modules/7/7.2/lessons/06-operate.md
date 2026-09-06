@@ -1,36 +1,43 @@
-# 7.2 — Object, property, and function security (6 Operate)
+# 7.2-LO-06 — Detect field_denied without logging the secret
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** ASVS 5.0.0 V4 (final); API1/3/5 awareness after 1.2/4.4.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.3`.
 
-## Property (start here)
+## Prevention is not absolute
 
-A member must not resolve secret_internal. Function/property authorization is not “they can call GET /notes.” Identifiers locate; they do not authorize.
+A new CSV exporter can skip the GraphQL resolver. Pair detect and recover. Do not log `secret_internal` values (3.1).
 
-## Attacker capabilities and trust assumptions
+## Mental model: denied field is a signal
 
-- **Attacker:** Member using GraphQL __typename or REST ?fields=.
-- **Trust:** Local resolve(role, field).
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Read[resolve] --> Deny{member x secret_internal?}
+  Deny -->|yes| Metric["field_denied += 1"]
+  Metric --> Rotate[Rotate if the value escaped]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | field_denied. |
-| Signal (no bodies) | field_denied{field}. |
-| Revoke / recover | Rotate the secret; audit. |
-| Residual | Admin sees secret_internal — audited. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `field_denied` with field *name* |
+| Signal | request id, subject id, field name; never the secret |
+| Recover | Keep deny; rotate leaked integration tokens; fix the serializer |
+| Residual | 7.4 dumps; Level 3 stale cache after role change |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/7.2/7.2-lab`.
+Write one log line you would accept. Tie it to `labs/7.2/7.2-lab`.
+
+```
+log_denied reason=field_denied field=secret_internal subject=user_72e request_id=req_72e
+```
+
+Reject any line that includes the field value, a real SSN, or a live GraphQL trace against a public host.
 
 ## Transfer
 
-Bulk update; search highlighting leaking snippets.
+Clinic: detect SSN field probes; do not attach the SSN to the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+A GraphQL gateway product name is not the property.

@@ -1,50 +1,49 @@
-# 7.4 — Queues, workers, events, and service identity (3 Break)
+# 7.4-LO-03 — Observe user_session fallback, do not trophy a live broker
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** ASVS 5.0.0 V4/V10 (final); NIST zero trust as architecture *guidance*.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-13.2.1`.
 
-## Property (start here)
+## Authorized scope
 
-A leftover user session is not worker identity. Exports must run as a service principal. Confused deputy: the queue message’s user_session must not become the worker’s ambient authority.
+`labs/7.4/7.4-lab` only. Synthetic job dicts. No live Redis/RabbitMQ.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** User session accepted as worker identity.
 
-- **Attacker:** Stolen cookie posted into a job; a job that forgets to drop the user context.
-- **Trust:** Local exporter(ctx).
-**Forbidden outcome:** User session accepted as worker identity
+## Mental model: leftover cookie wins
 
-**Authorized scope:** `labs/7.4/7.4-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable worker.py treats user session as worker.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: exporter({user_session: alice}) succeeds.
-
-## Vulnerable fixture (local)
-
-```python
-def exporter(job):
-    return job.get('user_session') or job.get('service')
+```mermaid
+flowchart TD
+  Job["user_session alice"] --> Or["user_session or service"]
+  Or --> Alice[returns alice]
 ```
+
+The vulnerable tree demonstrates **cause** (ambient user context). Do not attach to anything except this fixture.
+
+## What to read in the fixture
+
+`vulnerable/worker.py` returns `user_session` if present. Tests require `exporter({"user_session": "alice", "service": None})` to be `None`.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Ambient user context in a system worker. |
-| Impact | User cookie drives a privileged export; or stale user still exports. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Ambient user context in a system worker |
+| Impact | Export attributed to alice’s session |
+| Not the lesson | Zero-trust sticker as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/7.4/7.4-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/7.4/7.4-lab/tests --impl vulnerable
+```
+
+Record `test_user_session_is_not_worker_identity`. Do not probe public hosts.
 
 ## Transfer
 
-Outbox pattern; event schemas.
+Clinic batch-export. Predict without leaving this directory.
 
 ## Non-goals
 
-No live-target instructions. Synthetic data only.
+No live-target instructions. Synthetic identities only (`alice`, `worker-sc`).

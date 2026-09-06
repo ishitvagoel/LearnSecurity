@@ -1,33 +1,42 @@
-# 7.4 — Queues, workers, events, and service identity (7 Transfer)
+# 7.4-LO-07 — Transfer: clinic batch-export worker
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** ASVS 5.0.0 V4/V10 (final); NIST zero trust as architecture *guidance*.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-13.2.1`. NIST SP 800-207 as architecture guidance only.
 
-## Property (start here)
+## Change the workplace; keep a worker principal
 
-A leftover user session is not worker identity. Exports must run as a service principal. Confused deputy: the queue message’s user_session must not become the worker’s ambient authority.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic batch-export worker. Also name outbox pattern and event schemas.
 
-- **Attacker:** Stolen cookie posted into a job; a job that forgets to drop the user context.
-- **Trust:** Local exporter(ctx).
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite “Export overnight” that copies the clinician cookie into the Celery task so “the job knows who asked.”
 
-**Prompt:** Outbox pattern; event schemas.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic batch-export worker.
+1. attacker capabilities (stolen session stuffed into a job, or inherited request context — not a live clinic);
+2. trust assumptions (worker authenticates as `worker-sc` is TCB; VLAN/internal queue/zero-trust sticker are not);
+3. forbidden outcome (`exporter({user_session: alice})` succeeds, not “HIPAA”);
+4. a test idea on a **local** fixture only (no live broker);
+5. residual (god-mode DB role 3.3, 2.4 retry after revoke, Level 3 originating subject, 7.2 dumps);
+6. WCAG if a human export path is in the claim (readable “queued as service,” not a spinner that retries forever).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: cookie in the job is still a session
+
+```mermaid
+flowchart LR
+  Copy["copy request cookie into task"] --> Belief[dev believes convenience]
+  Run["worker uses that cookie"] --> Reality[confused deputy]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | Celery inherit request context is a trap.… |
-| Live-target plan | Lab policy |
+| “Zero trust is enabled” | Guidance, not the oracle |
+| Live clinic / public broker | Lab policy |
+| “Internal queue is trusted” | Payload is still untrusted |
 
 ## Practice
 
-One page. No keys. The lab `labs/7.4/7.4-lab` stays the only running system you may break.
+One page. No keys. `labs/7.4/7.4-lab` is the only running system you may break.

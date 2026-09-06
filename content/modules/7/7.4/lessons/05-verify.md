@@ -1,38 +1,46 @@
-# 7.4 — Queues, workers, events, and service identity (5 Verify)
+# 7.4-LO-05 — Evidence is alice denied, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** ASVS 5.0.0 V4/V10 (final); NIST zero trust as architecture *guidance*.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-13.2.1`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A leftover user session is not worker identity. Exports must run as a service principal. Confused deputy: the queue message’s user_session must not become the worker’s ambient authority.
+“Workers use a service account” is not evidence. The oracle is the local pair. Do not attach to live brokers.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Stolen cookie posted into a job; a job that forgets to drop the user context.
-- **Trust:** Local exporter(ctx).
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail alice session"]
+  X["--impl fixed"] --> P["Must pass None"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | User session accepted as worker identity |
-| Failure | Fail closed: Jobs carry (actor type=service, tenant, resource); workers authenticate as service |
+| Negative / abuse | alice session, no service → `None` |
+| Normal | `service=worker-sc` → `"worker-sc"` |
+| Mixed | alice + wrong service → `None` |
+| Not claimed | originating-subject Level 3; poison loops; live Celery |
 
-Lab tests: `test_property.py` under `labs/7.4/7.4-lab`.
+```
+python3 -m pytest labs/7.4/7.4-lab/tests --impl vulnerable
+python3 -m pytest labs/7.4/7.4-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `User session accepted as worker identity`
-- `--impl fixed`: **pass**
+Honest `service=worker-sc` may pass on both.
 
-user_session is not worker identity.
+## What the tests do not prove
+
+- Originating-subject carry-through (`v5.0.0-8.3.3`, Level 3)
+- Least-privilege DB role in production (`v5.0.0-13.2.2` beyond the principal name)
+- 2.4 retry after 4.1 revoke
+- Broker ACLs (10.3)
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Outbox pattern; event schemas.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic: a test that only asserts the job was enqueued is not this cell.

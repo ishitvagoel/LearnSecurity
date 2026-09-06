@@ -1,33 +1,44 @@
-# 7.2 — Object, property, and function security (7 Transfer)
+# 7.2-LO-07 — Transfer: clinic member cannot resolve SSN
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** ASVS 5.0.0 V4 (final); API1/3/5 awareness after 1.2/4.4.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.3`. API1/API3/API5 awareness after.
 
-## Property (start here)
+## Change the workplace; keep a role × field matrix
 
-A member must not resolve secret_internal. Function/property authorization is not “they can call GET /notes.” Identifiers locate; they do not authorize.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic member cannot resolve SSN. Also name bulk update and search highlighting leaking snippets.
 
-- **Attacker:** Member using GraphQL __typename or REST ?fields=.
-- **Trust:** Local resolve(role, field).
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite patient page that omits the SSN column in the table, plus GraphQL `Patient { ssn }`.
 
-**Prompt:** Bulk update; search highlighting leaking snippets.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic: member cannot resolve ssn.
+1. attacker capabilities (clinician session selecting extra fields — not a live clinic);
+2. trust assumptions (server role×field is TCB; UI omit and UUID are not);
+3. forbidden outcome (`resolve("member", "ssn")` true, not “HIPAA”);
+4. a test idea on a **local** fixture only (no public EHR);
+5. residual (search snippets, CSV, 7.4 workers, Level 3 serializer cache);
+6. WCAG if a human path is in the claim (do not announce the SSN in an error).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: hidden column is not field authorization
+
+```mermaid
+flowchart LR
+  Table["SPA omits SSN column"] --> Belief[UI believes hidden]
+  GQL["selection set still asks"] --> Reality[dump if matrix is missing]
+```
+
+Use synthetic labels (`ssn` as a field name in a local fixture). Do not use real patient identifiers.
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | SQLAlchemy to_dict() is not a policy.… |
-| Live-target plan | Lab policy |
+| “UUID is secret” | Locator, not a grant |
+| Live clinic / public GraphQL | Lab policy |
+| “We already have object authz” | 4.4 is a coarser grain |
 
 ## Practice
 
-One page. No keys. The lab `labs/7.2/7.2-lab` stays the only running system you may break.
+One page. No keys. `labs/7.2/7.2-lab` is the only running system you may break.

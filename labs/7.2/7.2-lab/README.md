@@ -1,9 +1,36 @@
-# Lab 7.2
+# Lab 7.2 — identifiers locate; they do not authorize fields
 
-Authorized: this directory only.
+**Module:** `7.2`
+**Authorized scope:** this directory only. Local course fixture. No public GraphQL.
+**Invariant:** `resolve("member", "secret_internal")` is false. Honest `display_name` may be true.
+**Root cause class:** serializer/resolver dumps without a role × field matrix
+**Non-goals:** live targets, real PII, UUID-as-capability cookbooks.
 
-GraphQL-style note.secret_internal is not visible to members. Field-level authorization, not 'hidden in UI'.
+## Reset
 
-pytest tests/test_property.py --impl vulnerable (must fail) then --impl fixed.
+Re-run pytest. Optional: `git checkout -- labs/7.2/7.2-lab`.
 
-Forbidden: member resolves secret_internal.
+## Vulnerable behavior (local only)
+
+`resolve` returns true for every pair. Forbidden outcome: member resolves `secret_internal`.
+
+## Structural fix
+
+`secret_internal` resolves only when `role == "service"`. Other fields may resolve for members.
+
+## Verify
+
+```
+python3 -m pytest labs/7.2/7.2-lab/tests --impl vulnerable
+python3 -m pytest labs/7.2/7.2-lab/tests --impl fixed
+```
+
+The first command must fail on member × `secret_internal`. The second must pass. Honest `display_name` may pass on both.
+
+## Operate
+
+Signal: `field_denied`. Do not log the field value.
+
+## Transfer
+
+Clinic SSN. Prompt only. Use synthetic field names.

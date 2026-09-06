@@ -1,50 +1,53 @@
-# 7.3 — Webhooks, callbacks, and third-party APIs (4 Build)
+# 7.3-LO-04 — HMAC-SHA256 compare_digest over the raw body
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** ASVS 5.0.0 V10 (final); API10 awareness. HMAC is a teaching stand-in, not “we are Stripe.”
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-11.2.1`.
 
-## Property (start here)
+## Structural means the MAC is checked before side effects
 
-A webhook with a missing signature is rejected. Authenticity of the *provider message* is distinct from TLS and from 1.2 on the resulting action.
+`accept` must compute HMAC-SHA256 over the raw body with the disposable secret and compare in constant time. Missing or wrong signatures deny. Structural means that check — not TLS, not an IP list, not a vendor logo.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail closed on missing sig
 
-- **Attacker:** Anyone who can POST your callback URL.
-- **Trust:** Local accept(sig, body, secret).
-empty signature False.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-import hmac, hashlib
-def accept(sig, body, secret):
-    expect=hmac.new(secret.encode(), body.encode(), hashlib.sha256).hexdigest()
-    return hmac.compare_digest(sig, expect)
+```mermaid
+flowchart TD
+  In[sig body secret] --> Empty{sig missing?}
+  Empty -->|yes| Deny[deny]
+  Empty -->|no| Mac["HMAC-SHA256 raw body"]
+  Mac --> Cmp["compare_digest"]
+  Cmp -->|match| Allow[allow]
+  Cmp -->|no| Deny
 ```
+
+Fail-safe: empty signature denies without throwing into a 500 that providers retry.
 
 ## Why this restores the cell
 
-Verify MAC; bind to secret per provider; timestamp.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| empty sig | false |
+| wrong sig | false |
+| matching MAC over same body | true |
 
 ## What this is not
 
-Stripe SDK verify is not your custom HMAC if you reimplement poorly.
-
-Correct signature still needs 1.2 on side effects.
+TLS as authenticity. IP allow-list. MAC over `json.dumps(json.loads(body))`. JWT of the end user. “We called Stripe.verify” without testing missing sig.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name the predicate. Run:
+
+```
+python3 -m pytest labs/7.3/7.3-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Signed redirects; outbound webhook SSRF (6.5).
+Clinic: stop treating “the hospital’s IP range” as the lab-result authenticity check.
 
 ## Residual risk
 
-Provider compromise — egress + least privilege on what a webhook may do.
+Replay; freshness; parse-before-MAC (2.1); 1.2; 6.5; `v5.0.0-4.1.5` Level 3.

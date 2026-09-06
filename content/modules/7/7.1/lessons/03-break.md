@@ -1,51 +1,49 @@
-# 7.1 — API contracts, protocols, and inventory (3 Break)
+# 7.1-LO-03 — Observe update(body), do not trophy a public API
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** ASVS 5.0.0 V13 (final); OpenAPI as inventory, not security; API8/API9 awareness.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-15.3.3`.
 
-## Property (start here)
+## Authorized scope
 
-Mass assignment: a PATCH must not set is_admin from the client document. The contract’s writable field set is an authorization property (1.2 at field grain, 7.2).
+`labs/7.1/7.1-lab` only. Synthetic profile dicts. No live API probing.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Client PATCH sets `is_admin`.
 
-- **Attacker:** Authenticated member sending extra JSON keys.
-- **Trust:** Local apply(user, patch).
-**Forbidden outcome:** Client PATCH sets is_admin
+## Mental model: every key becomes a column
 
-**Authorized scope:** `labs/7.1/7.1-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable patch.py copies is_admin.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: apply(..., {is_admin: True}) succeeds.
-
-## Vulnerable fixture (local)
-
-```python
-def apply(user, body):
-    user.update(body)
-    return user
+```mermaid
+flowchart TD
+  Body["body with is_admin"] --> Update["user.update body"]
+  Update --> True["is_admin is true"]
 ```
+
+The vulnerable tree demonstrates **cause** (the binder). Do not send extra keys at anything except this fixture.
+
+## What to read in the fixture
+
+`vulnerable/patch.py` copies every key from `body` onto `user`. Tests require `is_admin` to stay false when the document tries to set it.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Binder maps any key onto the entity. |
-| Impact | Privilege lift. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Binder maps any key |
+| Impact | Privilege lift on the local user dict |
+| Not the lesson | API8 as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/7.1/7.1-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/7.1/7.1-lab/tests --impl vulnerable
+```
+
+Record `test_is_admin_cannot_be_patched`. Do not probe public hosts.
 
 ## Transfer
 
-GraphQL mutation arguments; gRPC unknown fields.
+Clinic PATCH `{is_staff:true}`. Predict without leaving this directory.
 
 ## Non-goals
 
-No live-target instructions. Synthetic data only.
+No live-target instructions. Synthetic data only. Do not dump the fixture into notes as a public-API cookbook.

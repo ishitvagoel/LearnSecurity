@@ -1,50 +1,48 @@
-# 7.2 — Object, property, and function security (3 Break)
+# 7.2-LO-03 — Observe always-true resolve, do not trophy a public GraphQL API
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** ASVS 5.0.0 V4 (final); API1/3/5 awareness after 1.2/4.4.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.3`.
 
-## Property (start here)
+## Authorized scope
 
-A member must not resolve secret_internal. Function/property authorization is not “they can call GET /notes.” Identifiers locate; they do not authorize.
+`labs/7.2/7.2-lab` only. Synthetic roles and field names. No live GraphQL.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Member resolves `secret_internal`.
 
-- **Attacker:** Member using GraphQL __typename or REST ?fields=.
-- **Trust:** Local resolve(role, field).
-**Forbidden outcome:** Member resolves secret_internal
+## Mental model: every field is visible
 
-**Authorized scope:** `labs/7.2/7.2-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable field.py allows member internal.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: resolve('member','secret_internal') True.
-
-## Vulnerable fixture (local)
-
-```python
-def resolve(role, field):
-    return True
+```mermaid
+flowchart TD
+  Call["resolve member secret_internal"] --> True[returns true]
 ```
+
+The vulnerable tree demonstrates **cause** (no field matrix). Do not query anything except this fixture.
+
+## What to read in the fixture
+
+`vulnerable/field.py` returns true for every pair. Tests require member × `secret_internal` to be false.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Serializer dumps the ORM object. |
-| Impact | Internal secret or PII extra. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Serializer / resolver dumps without a matrix |
+| Impact | Internal field extra |
+| Not the lesson | API3 as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/7.2/7.2-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/7.2/7.2-lab/tests --impl vulnerable
+```
+
+Record `test_member_cannot_resolve_internal_field`. Do not probe public hosts.
 
 ## Transfer
 
-Bulk update; search highlighting leaking snippets.
+Clinic SSN. Predict without leaving this directory.
 
 ## Non-goals
 
-No live-target instructions. Synthetic data only.
+No live-target instructions. Synthetic field names only — `secret_internal` is a lab label, not a production token.

@@ -8,18 +8,18 @@ Object, property, and function security
 
 ## Evidence checklist
 
-- [ ] Policy-aware serializers and mutation tests
-- [ ] Transfer task (Clinic: member cannot resolve ssn.)
-- [ ] Lab `labs/7.2/7.2-lab`: forbidden outcome **Member resolves secret_internal**
-- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Role × field matrix (object grain 4.4 named as coarser)
+- [ ] Transfer task (clinic SSN; bulk/search named)
+- [ ] Lab `labs/7.2/7.2-lab`: forbidden outcome **member resolves `secret_internal`**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: field_denied{field}.
+- [ ] Operate signal without secrets: `field_denied`
 
 ## Rubric
 
 | Result | Meaning |
 |---|---|
-| Developing | Tools listed; missing attacker/trust; mechanism slogans |
+| Developing | Tools listed; missing attacker/trust; “hidden key” slogans |
 | Competent | System-specific invariant; lab mapped; operate present |
 | Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
 

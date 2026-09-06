@@ -14,14 +14,45 @@ defaults:
   ai_security: elective E1
   website_progress: local-first static site (site/); no accounts
 next:
-  id: '7.1'
+  id: '8.1'
   pass: revise
   skill: deepen-curriculum
   inner_skill: standards-pin
-  note: Module 6.7 authoring pass added resource-account mental models and diagrams;
-    keep 1.4, 2.1-2.4, 3.1-3.4, 4.1-4.5, 5.1-5.5, and 6.1-6.7 developing until independent
-    review. Continue the depth queue one module at a time.
+  note: Module 7.4 authoring pass added HTTP-vs-worker-principal mental models and
+    diagrams; keep 1.4, 2.1-2.4, 3.1-3.4, 4.1-4.5, 5.1-5.5, 6.1-6.7, and 7.1-7.4
+    developing until independent review. Continue the depth queue one module at a
+    time.
 spiral_deltas:
+- date: '2026-09-06'
+  module: '7.4'
+  change: Worker-identity loop v2 treats leftover user_session as not the worker
+    principal, refuses VPC/zero-trust-product as the oracle, pins v5.0.0-13.2.1 /
+    13.2.2, and labels v5.0.0-8.3.3 originating subject as Level 3 advanced
+  retest: Revisit 4.1 leftover sessions; 2.4 retry after revoke; 3.3 worker DB role;
+    7.2 field dumps from workers; 10.3 broker ACLs
+- date: '2026-09-06'
+  module: '7.3'
+  change: Webhook loop v2 treats path/TLS as not provider-message authenticity,
+    requires HMAC over raw body, refuses vendor CIDR as MAC, pins v5.0.0-11.2.1 /
+    2.3.4, and labels v5.0.0-4.1.5 per-message signatures as Level 3 advanced
+  retest: Revisit 2.1 parse-before-MAC; 5.4 TLS hop; 6.5 outbound webhook URLs;
+    1.2 side effects; 4.3 secret-in-query
+- date: '2026-09-06'
+  module: '7.2'
+  change: Field-authorization loop v2 treats identifiers as locators not field
+    grants, requires a role times field matrix, refuses UI-hide and UUID obscurity,
+    pins v5.0.0-8.2.3, and labels v5.0.0-8.3.2 immediate grant change as Level 3
+    advanced
+  retest: Revisit 4.4 object grain; 7.1 extra-key writes; 7.4 worker serializers;
+    3.1 logging of denied field values
+- date: '2026-09-06'
+  module: '7.1'
+  change: Contract loop v2 treats extra JSON keys as not writable fields, refuses
+    OpenAPI as the allow-list, pins v5.0.0-15.3.3 and GraphQL v5.0.0-4.3.2 /
+    4.3.1 as distinct grains, and labels v5.0.0-4.1.4 unused methods as Level 3
+    advanced
+  retest: Revisit 1.2 cells; 7.2 field reads; 6.7 GraphQL cost; 7.4 job payloads;
+    leftover /v0 inventory
 - date: '2026-09-06'
   module: '6.7'
   change: Resource-abuse loop v2 treats export as a per-subject account, refuses SPA
@@ -568,8 +599,8 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added binder-vs-contract mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '7.2'
   title: Object, property, and function security
@@ -577,8 +608,8 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added role-times-field mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '7.3'
   title: Webhooks, callbacks, and third-party APIs
@@ -586,8 +617,8 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added path-vs-MAC mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '7.4'
   title: Queues, workers, events, and service identity
@@ -595,8 +626,8 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added HTTP-vs-worker-principal mental models and
+    diagrams; independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '8.1'
   title: The hostile-client and mobile-platform model

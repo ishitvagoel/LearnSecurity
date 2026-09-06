@@ -1,6 +1,8 @@
-ALLOWED={'display_name'}
+ALLOWED = {"display_name"}
+
+
 def apply(user, body):
-    for k,v in body.items():
-        if k in ALLOWED:
-            user[k]=v
+    for key, value in body.items():
+        if key in ALLOWED:
+            user[key] = value
     return user

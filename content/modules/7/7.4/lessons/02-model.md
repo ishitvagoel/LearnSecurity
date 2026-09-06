@@ -1,53 +1,69 @@
-# 7.4 — Queues, workers, events, and service identity (2 Model)
+# 7.4-LO-02 — HTTP subject versus worker principal
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** ASVS 5.0.0 V4/V10 (final); NIST zero trust as architecture *guidance*.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-13.2.1`, `v5.0.0-13.2.2`.
 
-## Property (start here)
+## Can a second engineer name pytest cases from your identity trace?
 
-A leftover user session is not worker identity. Exports must run as a service principal. Confused deputy: the queue message’s user_session must not become the worker’s ambient authority.
+“Jobs run internally” is not this lesson. A reviewable model names **who authenticates the worker and what the job is allowed to carry**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab Phase 1 freeze: local `exporter(job)` with principal `worker-sc`. No live brokers.
 
-- **Attacker:** Stolen cookie posted into a job; a job that forgets to drop the user context.
-- **Trust:** Local exporter(ctx).
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: two principals
+
+```mermaid
+flowchart TD
+  Alice["HTTP alice"] --> Enqueue[enqueue export]
+  Enqueue --> Worker["principal worker-sc"]
+  Worker --> Notes["notes chosen by 4.4 grant of the owner"]
+```
+
+The enqueueing user is a *parameter* (which export). It is not the worker’s login.
+
+## Mental model: inherit-request-context trap
+
+```mermaid
+flowchart LR
+  Req["request context"] --> Task["task runs later"]
+  Task --> Cookie["user_session still ambient"]
+```
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | alice session, export-service |
-| Objects | export job |
-| Actions | exporter |
-| Channels | queue payload |
-| TCB | Service credential distinct from user sessions. |
-| Untrusted | Job JSON, user ids inside jobs |
-| State / time | Job delayed 6h after user deletion (4.1). |
-| 1.1 cell | Authorization of the worker plane. |
+| Subjects | alice (HTTP); `worker-sc` (service) |
+| Objects | export job; note bodies |
+| Actions | `exporter` |
+| Channels | in-process job dict (lab stand-in for a queue) |
+| TCB | worker accepts only `service == worker-sc` |
+| Untrusted | job payload; inherited cookies |
+| State / time | delay; 2.4 retry; 4.1 revoke |
+| 1.1 cell | authorization of the worker plane |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| user session | export job | run | deny-as-identity |
-| service | export job | run | allow-least-priv |
-| deleted user | old job | run | deny-4.1 |
-| tB job | tA worker ctx | run | deny |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| `worker-sc` | export | run | allow |
+| `user_session` alice, no service | export | run | deny |
+| alice + wrong service | export | run | deny |
+| god-mode DB role | all tenants | SELECT | 3.3 residual |
+| retry after revoke | notes | export | 2.4 residual |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/7.4/7.4-lab` file `worker.py`.
+Draw the trace. Point at `labs/7.4/7.4-lab` file `worker.py`.
 
 ## Transfer
 
-Outbox pattern; event schemas.
+Outbox pattern; event schemas that still carry `user_id` as data, not as login.
 
 ## Residual risk
 
-Broker ACLs — 10.3.
+`v5.0.0-8.3.3` Level 3 originating subject; poison loops; 7.2 field dumps from the worker; 5.3 hardcoded worker defaults.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

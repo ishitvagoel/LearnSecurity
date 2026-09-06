@@ -1,48 +1,50 @@
-# 7.4 — Queues, workers, events, and service identity (4 Build)
+# 7.4-LO-04 — Bind exporter to worker-sc only
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** ASVS 5.0.0 V4/V10 (final); NIST zero trust as architecture *guidance*.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-13.2.1`, `v5.0.0-13.2.2`.
 
-## Property (start here)
+## Structural means the worker authenticates as a service principal
 
-A leftover user session is not worker identity. Exports must run as a service principal. Confused deputy: the queue message’s user_session must not become the worker’s ambient authority.
+`exporter` must return `"worker-sc"` only when `service == "worker-sc"`. Leftover `user_session` is ignored. Structural means that check — not “the queue is internal,” not a VPC, not a zero-trust dashboard.
 
-## Attacker capabilities and trust assumptions
+## Mental model: service or nothing
 
-- **Attacker:** Stolen cookie posted into a job; a job that forgets to drop the user context.
-- **Trust:** Local exporter(ctx).
-user_session only => None exporter.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-def exporter(job):
-    return job.get('service') if job.get('service')=='worker-sc' else None
+```mermaid
+flowchart TD
+  Job[job] --> Svc{"service is worker-sc?"}
+  Svc -->|yes| Allow["return worker-sc"]
+  Svc -->|no| Deny["return none"]
 ```
+
+Fail-safe: missing service denies. A fallback `user_session or service` is the bug.
 
 ## Why this restores the cell
 
-Jobs carry (actor type=service, tenant, resource); workers authenticate as service.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| alice session, no service | `None` |
+| `service=worker-sc` | `"worker-sc"` |
+| alice + wrong service | `None` |
 
 ## What this is not
 
-Celery inherit request context is a trap.
-
-Service role that is still god-mode (3.3).
+God-mode DB role (3.3). Originating-subject token pass-through (`v5.0.0-8.3.3`, Level 3). Signed broker messages as a substitute for principal checks. NIST SP 800-207 as a product.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name the predicate. Run:
+
+```
+python3 -m pytest labs/7.4/7.4-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Outbox pattern; event schemas.
+Clinic: stop treating “the batch job runs on the hospital VLAN” as worker identity.
 
 ## Residual risk
 
-Broker ACLs — 10.3.
+Poison loops; 2.4 retry of revoked grants; 7.2 dumps; 5.3 default worker credentials; 10.3 broker ACLs.

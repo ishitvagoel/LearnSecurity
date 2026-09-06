@@ -8,18 +8,18 @@ API contracts, protocols, and inventory
 
 ## Evidence checklist
 
-- [ ] Machine-readable contract, endpoint inventory, retirement plan
-- [ ] Transfer task (Clinic: PATCH patient {is_staff:true}.)
-- [ ] Lab `labs/7.1/7.1-lab`: forbidden outcome **Client PATCH sets is_admin**
-- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Writable-field matrix; OpenAPI treated as inventory, not the control
+- [ ] Transfer task (clinic PATCH `is_staff`; GraphQL/gRPC named)
+- [ ] Lab `labs/7.1/7.1-lab`: forbidden outcome **Client PATCH sets `is_admin`**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: unknown_field_rejected; shadow_endpoint_scan.
+- [ ] Operate signal without bodies: `unknown_field_rejected`
 
 ## Rubric
 
 | Result | Meaning |
 |---|---|
-| Developing | Tools listed; missing attacker/trust; mechanism slogans |
+| Developing | Tools listed; missing attacker/trust; “we have Swagger” slogans |
 | Competent | System-specific invariant; lab mapped; operate present |
 | Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
 

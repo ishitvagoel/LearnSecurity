@@ -1,38 +1,45 @@
-# 7.2 — Object, property, and function security (5 Verify)
+# 7.2-LO-05 — Evidence is member denied, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** ASVS 5.0.0 V4 (final); API1/3/5 awareness after 1.2/4.4.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.3`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A member must not resolve secret_internal. Function/property authorization is not “they can call GET /notes.” Identifiers locate; they do not authorize.
+“Field authz is on” is not evidence. The oracle is the local pair. Do not query public GraphQL.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Member using GraphQL __typename or REST ?fields=.
-- **Trust:** Local resolve(role, field).
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail member secret_internal"]
+  X["--impl fixed"] --> P["Must pass deny"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Member resolves secret_internal |
-| Failure | Fail closed: Allow-list fields by role; never bind authz to the id format |
+| Negative / abuse | member × `secret_internal` false |
+| Normal | member × `display_name` true |
+| Service | service × `secret_internal` true |
+| Not claimed | object×tenant (4.4); extra-key writes (7.1); Level 3 cache |
 
-Lab tests: `test_property.py` under `labs/7.2/7.2-lab`.
+```
+python3 -m pytest labs/7.2/7.2-lab/tests --impl vulnerable
+python3 -m pytest labs/7.2/7.2-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Member resolves secret_internal`
-- `--impl fixed`: **pass**
+Honest `display_name` may pass on both.
 
-member cannot resolve secret_internal.
+## What the tests do not prove
+
+- Immediate grant change through caches (`v5.0.0-8.3.2`, Level 3)
+- CSV / search / worker serializers
+- That GraphQL production matches REST
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Bulk update; search highlighting leaking snippets.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic: a test that only asserts HTTP 200 on `/patients/{id}` is 4.4, not this cell.

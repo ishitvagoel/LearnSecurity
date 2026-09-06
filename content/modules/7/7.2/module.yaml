@@ -7,104 +7,120 @@ difficulty: intermediate
 status: reviewed
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 1.1–2.4 Pass A complete
+- Prior phase Pass A per blueprint §7; 4.4 object-and-tenant grants; 7.1 writable-field writes
 routeTags:
 - complete
 - web-api
 releaseMilestone: M2
 outcomes:
-- 'Demonstrate: Object, property, and function security'
-- 'Produce evidence: Policy-aware serializers and authorization mutation tests'
-- Name attacker capabilities and trust assumptions
-- Include a local-only lab brief and a transfer challenge
-- Do not instruct live-target attacks or mix awareness lists as compliance
+- 'Refuse field reads that the role cannot resolve; identifiers locate objects, they do not authorize properties.'
+- 'Separate object×tenant grants (4.4) from field grain (BOPLA) and from function-level actions.'
+- 'Map ASVS 5.0.0 field-level authorization and keep immediate grant-change through serializers as an advanced residual.'
 reviewTriggers:
-- Material SecureCollab change in this module's concern
+- New serializer, GraphQL field, CSV export, or search snippet that dumps ORM columns
+- Role change that must hide previously visible fields
+- Bulk update or debug toolbar that bypasses the matrix
 - Superseding final standard
 invariants:
-- Claims are properties of SecureCollab (or the elective system), not tool names
+- A member must not resolve secret_internal
+- UUID or object GET success is not a field grant
 - Labs stay in authorized local or official training scope
 - Draft standards are labeled draft
 threatModelPrompts:
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+- What can go wrong when the serializer dumps the ORM object?
+- Which fields are granted on GET /notes/{id} versus on GraphQL resolve?
+- What residual remains if the UI hides a column the API still returns?
 concepts:
-- object
+- field-authorization
+- bopla
+- serializer
 - securecollab
 - seven-step-loop
 learningObjects:
 - id: 7.2-LO-01
   kind: concept-model
-  title: 'Object, property, and function security: property vs mechanism'
+  title: Identifiers locate; they do not authorize fields
   path: lessons/01-property.md
 - id: 7.2-LO-02
   kind: design-exercise
-  title: Model SecureCollab for 7.2
+  title: Role times field is a matrix, not a serializer dump
   path: lessons/02-model.md
 - id: 7.2-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: Member resolves secret_internal'
+  title: 'Local fixture: member resolves secret_internal'
   path: lessons/03-break.md
 - id: 7.2-LO-04
   kind: design-exercise
-  title: Structural fix restoring the 7.2 invariant
+  title: Allow-list fields by role
   path: lessons/04-build.md
 - id: 7.2-LO-05
   kind: verification-lab
-  title: Forbidden-outcome tests for 7.2
+  title: Honest display_name vs secret_internal
   path: lessons/05-verify.md
 - id: 7.2-LO-06
   kind: operations-exercise
-  title: Detect/recover notes for 7.2
+  title: field_denied without logging the secret
   path: lessons/06-operate.md
 - id: 7.2-LO-07
   kind: transfer-challenge
-  title: 'Transfer: Clinic: member cannot resolve ssn.'
+  title: 'Transfer: clinic member cannot resolve SSN'
   path: lessons/07-transfer.md
 - id: 7.2-LO-08
   kind: code-review
-  title: Seeded review for 7.2
+  title: Review ORM dumps as a PR, not an API3 ticket
   path: lessons/08-review.md
 labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
     third-party targets
   slug: 7.2-lab
-  summary: Member resolves secret_internal
+  summary: Member resolves secret_internal because resolve always returns true
   forbiddenOutcomes:
   - Member resolves secret_internal
   - Live-target instructions
   - Real PII or production secrets
   - Awareness list used as the syllabus
 evidenceRequired:
-- Policy-aware serializers and authorization mutation tests
+- Role times field matrix and serializer tests
 - Transfer task prompt
-- Local lab brief
+- Local lab brief with member deny on secret_internal
 assessmentBlueprint:
-  explain: Causal model for Object, property, and function security
-  design: Policy-aware serializers and authorization mutation tests
-  build: Deferred to Pass B
-  break: Authorized local reproduction of the representative failure
-  verify: Forbidden-outcome tests
-  operate: Detection and recovery notes
-  communicate: Residual risk without compliance theater
+  explain: Field grain vs object grain; identifiers are locators
+  design: Role times field matrix including GraphQL and CSV
+  build: secret_internal only if role is service in labs/7.2/7.2-lab/fixed
+  break: Authorized local resolve always true
+  verify: Forbidden-outcome tests plus honest display_name
+  operate: field_denied without the secret value
+  communicate: Residual worker dumps (7.4) and Level 3 immediate grant change
 masteryGate: '7'
 standardsRefs:
-- source: OWASP ASVS / module anchors (see spec)
-  version: 5.0.0
+- source: OWASP Application Security Verification Standard
+  version: '5.0.0'
   status: final
   requirementIds:
-  - V8
+  - v5.0.0-8.2.3
+  - v5.0.0-8.2.1
+  - v5.0.0-8.2.2
+  - v5.0.0-8.3.2
   url: https://owasp.org/www-project-application-security-verification-standard/
+- source: OWASP API Security Top 10
+  version: '2023'
+  status: awareness
+  requirementIds:
+  - API1
+  - API3
+  - API5
+  url: https://owasp.org/API-Security/editions/2023/en/0x00-header/
 misconceptions:
 - Object-level authz implies field-level
 - Private JSON keys are hidden
 - GraphQL resolvers inherit REST policy magically
+- A UUID is a capability
 operationalConsiderations:
-- field_denied{field}.
-- Admin sees secret_internal — audited.
-author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+- field_denied without the secret value.
+- Role change must hide previously visible fields.
+- Admin or service sees secret_internal only when audited.
+author: deepen-curriculum / author-module-spec
+reviewer: pending independent quality and lab-safety review
 lastReviewedAt: '2026-08-24'
 nextReviewAt: '2027-02-24'
 changelog:
@@ -122,3 +138,7 @@ changelog:
 - date: '2026-08-24'
   note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
     Pass C keys isolated'
+- date: '2026-09-06'
+  note: 'Depth pass: role-times-field mental models, mermaid diagrams, ASVS
+    v5.0.0-8.2.3 / 8.2.1 / 8.2.2, v5.0.0-8.3.2 labeled Level 3 advanced;
+    independent review still required'

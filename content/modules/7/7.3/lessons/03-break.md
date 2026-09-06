@@ -1,50 +1,48 @@
-# 7.3 — Webhooks, callbacks, and third-party APIs (3 Break)
+# 7.3-LO-03 — Observe always-true accept, do not trophy a live provider
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** ASVS 5.0.0 V10 (final); API10 awareness. HMAC is a teaching stand-in, not “we are Stripe.”
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-11.2.1`.
 
-## Property (start here)
+## Authorized scope
 
-A webhook with a missing signature is rejected. Authenticity of the *provider message* is distinct from TLS and from 1.2 on the resulting action.
+`labs/7.3/7.3-lab` only. Disposable `lab-secret`. No live Stripe, GitHub, or clinic webhooks.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Unsigned webhook body accepted.
 
-- **Attacker:** Anyone who can POST your callback URL.
-- **Trust:** Local accept(sig, body, secret).
-**Forbidden outcome:** Unsigned webhook body accepted
+## Mental model: path is enough
 
-**Authorized scope:** `labs/7.3/7.3-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable hook.py accepts missing sig.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: accept('', body, secret) True.
-
-## Vulnerable fixture (local)
-
-```python
-def accept(sig, body, secret):
-    return True
+```mermaid
+flowchart TD
+  Call["accept empty sig"] --> True[returns true]
 ```
+
+The vulnerable tree demonstrates **cause** (path trusted). Do not POST anything except this fixture.
+
+## What to read in the fixture
+
+`vulnerable/hook.py` returns true for every triple. Tests require a missing signature to be false.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Callback trusted because it hit the path. |
-| Impact | Forged “share” or billing events. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Callback trusted because it hit the path |
+| Impact | Forged local event |
+| Not the lesson | API10 as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/7.3/7.3-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/7.3/7.3-lab/tests --impl vulnerable
+```
+
+Record `test_missing_signature_is_rejected`. Do not probe public hosts.
 
 ## Transfer
 
-Signed redirects; outbound webhook SSRF (6.5).
+Clinic lab-result webhook. Predict without leaving this directory.
 
 ## Non-goals
 
-No live-target instructions. Synthetic data only.
+No live-target instructions. Do not publish provider secrets. `lab-secret` is disposable and local.

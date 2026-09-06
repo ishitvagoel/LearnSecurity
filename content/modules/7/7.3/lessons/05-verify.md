@@ -1,38 +1,45 @@
-# 7.3 — Webhooks, callbacks, and third-party APIs (5 Verify)
+# 7.3-LO-05 — Evidence is missing sig denied, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** ASVS 5.0.0 V10 (final); API10 awareness. HMAC is a teaching stand-in, not “we are Stripe.”
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-11.2.1`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A webhook with a missing signature is rejected. Authenticity of the *provider message* is distinct from TLS and from 1.2 on the resulting action.
+“Webhooks are signed” is not evidence. The oracle is the local pair. Do not hit live providers.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Anyone who can POST your callback URL.
-- **Trust:** Local accept(sig, body, secret).
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail empty sig"]
+  X["--impl fixed"] --> P["Must pass deny"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Unsigned webhook body accepted |
-| Failure | Fail closed: Verify MAC; bind to secret per provider; timestamp |
+| Negative / abuse | empty sig false; wrong sig false |
+| Normal | matching HMAC over the same raw body true |
+| Not claimed | replay window; parse-before-MAC; 1.2; live Stripe |
 
-Lab tests: `test_property.py` under `labs/7.3/7.3-lab`.
+```
+python3 -m pytest labs/7.3/7.3-lab/tests --impl vulnerable
+python3 -m pytest labs/7.3/7.3-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Unsigned webhook body accepted`
-- `--impl fixed`: **pass**
+Honest matching signatures may pass on both.
 
-missing signature rejected.
+## What the tests do not prove
+
+- Replay (`v5.0.0-2.3.4`) and freshness (`v5.0.0-2.3.3`)
+- Per-message signatures (`v5.0.0-4.1.5`, Level 3)
+- That production hashes the raw body rather than parsed JSON
+- Outbound URL ownership (6.5)
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Signed redirects; outbound webhook SSRF (6.5).
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic: a test that only asserts HTTP 200 on `/webhook` is not this cell.

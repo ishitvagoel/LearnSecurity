@@ -1,53 +1,72 @@
-# 7.1 — API contracts, protocols, and inventory (2 Model)
+# 7.1-LO-02 — Binder maps any key; the contract is the writable set
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** ASVS 5.0.0 V13 (final); OpenAPI as inventory, not security; API8/API9 awareness.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-15.3.3`, `v5.0.0-4.3.2`. OpenAPI 3.1.1 is inventory.
 
-## Property (start here)
+## Can a second engineer name pytest cases from your writable-field map?
 
-Mass assignment: a PATCH must not set is_admin from the client document. The contract’s writable field set is an authorization property (1.2 at field grain, 7.2).
+“We published OpenAPI” is not this lesson. A reviewable model names **the action, the writable keys, and every protocol that binds a document**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab Phase 1 freeze: local `apply(user, body)` with `ALLOWED = {display_name}`. No live APIs.
 
-- **Attacker:** Authenticated member sending extra JSON keys.
-- **Trust:** Local apply(user, patch).
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: three binders, one contract
+
+```mermaid
+flowchart TD
+  REST["REST PATCH JSON"] --> Set["writable set"]
+  GQL["GraphQL mutation args"] --> Set
+  GRPC["gRPC unknown fields"] --> Set
+```
+
+If REST is allow-listed and GraphQL `updateUser(input: JSON)` is not, the contract has a hole. Introspection (`v5.0.0-4.3.2`) leaking the schema is how an attacker *finds* extra args; it is not the write itself.
+
+## Mental model: inventory of every protocol
+
+```mermaid
+flowchart LR
+  Spec["OpenAPI 3.1.1 file"] --> Inv[inventory]
+  Inv --> Running["running handlers"]
+  Running --> Ghost["ghost /v0 leftover"]
+```
+
+A spec that does not match running code is API9 as awareness. Versioning the path to `/v2` without retiring `/v0` is not a security control.
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | member, admin flag |
-| Objects | display_name, is_admin |
-| Actions | apply |
-| Channels | JSON PATCH/PUT |
-| TCB | Allow-listed writable fields server-side. |
-| Untrusted | JSON keys, GraphQL mutations, protobuf unexpected fields |
-| State / time | One PATCH; also undocumented /v0 leftover (inventory). |
-| 1.1 cell | Authorization of properties. |
+| Subjects | authenticated member; leftover `/v0` client |
+| Objects | `display_name`, `is_admin` |
+| Actions | `apply` / PATCH |
+| Channels | JSON PATCH; later GraphQL and protobuf |
+| TCB | server-side `ALLOWED` |
+| Untrusted | JSON keys; generated clients; GraphQL variables |
+| State / time | one PATCH; leftover undocumented route |
+| 1.1 cell | authorization of properties |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| member | display_name | PATCH | allow |
-| member | is_admin | PATCH | deny |
-| admin | is_admin | PATCH | allow-audited |
-| ghost /v0 | any | call | deny-or-inventory |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| member | `display_name` | PATCH | allow |
+| member | `is_admin` | PATCH | deny |
+| member | unknown key | PATCH | ignore or reject |
+| OpenAPI comment | any | document | not TCB |
+| leftover `/v0` | any | call | inventory then deny |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/7.1/7.1-lab` file `patch.py`.
+Draw the matrix. Point at `labs/7.1/7.1-lab` file `patch.py`.
 
 ## Transfer
 
-GraphQL mutation arguments; gRPC unknown fields.
+GraphQL `updatePatient(isStaff: true)`; protobuf field numbers not in the writable set.
 
 ## Residual risk
 
-Honest display_name XSS (6.2) is another cell.
+Honest `display_name` XSS (6.2). GraphQL cost (`v5.0.0-4.3.1` / 6.7). Unused methods (`v5.0.0-4.1.4`, Level 3). 7.2 field *reads*. 7.4 job payloads.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

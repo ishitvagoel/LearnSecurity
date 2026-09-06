@@ -1,33 +1,42 @@
-# 7.1 — API contracts, protocols, and inventory (7 Transfer)
+# 7.1-LO-07 — Transfer: clinic PATCH is_staff
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** ASVS 5.0.0 V13 (final); OpenAPI as inventory, not security; API8/API9 awareness.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-15.3.3`. API8/API9 awareness after. WCAG 2.2 for the deny message.
 
-## Property (start here)
+## Change the workplace; keep a writable-field contract
 
-Mass assignment: a PATCH must not set is_admin from the client document. The contract’s writable field set is an authorization property (1.2 at field grain, 7.2).
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic PATCH patient `{is_staff:true}`. Also name GraphQL mutation arguments and gRPC unknown fields.
 
-- **Attacker:** Authenticated member sending extra JSON keys.
-- **Trust:** Local apply(user, patch).
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite “Edit profile” form with no staff checkbox in the SPA, plus a generated OpenAPI file.
 
-**Prompt:** GraphQL mutation arguments; gRPC unknown fields.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic: PATCH patient {is_staff:true}.
+1. attacker capabilities (authenticated clinician session sending extra JSON — not a live clinic);
+2. trust assumptions (server `ALLOWED` is TCB; SPA omit-checkbox and OpenAPI are not);
+3. forbidden outcome (`is_staff` becomes true, not “HIPAA”);
+4. a test idea on a **local** fixture only (no public API);
+5. residual (GraphQL/gRPC binders, leftover `/v0`, Level 3 unused methods, 6.2 on honest names);
+6. WCAG if a human deny path is in the claim (readable “field not writable,” not a silent 200 that dropped the name too).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: missing checkbox is not the contract
+
+```mermaid
+flowchart LR
+  Form["SPA has no is_staff"] --> Belief[UI believes safe]
+  Extra["JSON still has is_staff"] --> Reality[binder writes if ALLOWED is missing]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | Pydantic extra=allow is this bug. FastAPI will happily take extra if your model … |
-| Live-target plan | Lab policy |
+| “OpenAPI is complete” | Inventory, not allow-list |
+| Live clinic / public API | Lab policy |
+| “GraphQL is typed” | Extra args and JSON scalars still bind |
 
 ## Practice
 
-One page. No keys. The lab `labs/7.1/7.1-lab` stays the only running system you may break.
+One page. No keys. `labs/7.1/7.1-lab` is the only running system you may break.

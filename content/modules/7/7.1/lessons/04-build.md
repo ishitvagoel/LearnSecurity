@@ -1,52 +1,50 @@
-# 7.1 — API contracts, protocols, and inventory (4 Build)
+# 7.1-LO-04 — Copy only ALLOWED display_name
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** ASVS 5.0.0 V13 (final); OpenAPI as inventory, not security; API8/API9 awareness.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-15.3.3`.
 
-## Property (start here)
+## Structural means the server copies named fields
 
-Mass assignment: a PATCH must not set is_admin from the client document. The contract’s writable field set is an authorization property (1.2 at field grain, 7.2).
+`apply` must copy `display_name` when present and must not copy `is_admin`. Structural means that allow-list on the write — not an OpenAPI comment, not a frontend form that omits the checkbox.
 
-## Attacker capabilities and trust assumptions
+## Mental model: extras never reach the row
 
-- **Attacker:** Authenticated member sending extra JSON keys.
-- **Trust:** Local apply(user, patch).
-is_admin stays False.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-ALLOWED={'display_name'}
-def apply(user, body):
-    for k,v in body.items():
-        if k in ALLOWED:
-            user[k]=v
-    return user
+```mermaid
+flowchart TD
+  Body[body items] --> Allowed{"key in ALLOWED?"}
+  Allowed -->|yes| Copy["user key = value"]
+  Allowed -->|no| Skip[skip]
 ```
+
+Fail-safe: unknown keys are skipped (or rejected). A denylist of `is_admin` only is not the contract — the next privileged field will slip through.
 
 ## Why this restores the cell
 
-Explicit writable set; ignore/reject unknown privileged fields.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| PATCH `is_admin` true | `is_admin` still false |
+| PATCH `display_name` | name changes; `is_admin` unchanged |
+| PATCH unknown key | key does not appear on the user |
 
 ## What this is not
 
-Pydantic extra=allow is this bug. FastAPI will happily take extra if your model does.
-
-Allow-list must track every protocol (REST, GraphQL, gRPC).
+OpenAPI as the runtime. GraphQL types without a resolver allow-list. gRPC “unknown fields ignored” assumed without a test. FastAPI `extra='ignore'` on a nested model you never applied.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name the predicate. Run:
+
+```
+python3 -m pytest labs/7.1/7.1-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-GraphQL mutation arguments; gRPC unknown fields.
+Clinic: stop treating “the form has no is_staff checkbox” as the server contract.
 
 ## Residual risk
 
-Honest display_name XSS (6.2) is another cell.
+CSV import; 7.4 job payload; leftover `/v0`; `v5.0.0-4.1.4` Level 3 unused methods; GraphQL cost (`v5.0.0-4.3.1`).

@@ -8,18 +8,18 @@ Queues, workers, events, and service identity
 
 ## Evidence checklist
 
-- [ ] End-to-end authority trace and adversarial job tests
-- [ ] Transfer task (Clinic batch-export worker.)
-- [ ] Lab `labs/7.4/7.4-lab`: forbidden outcome **User session accepted as worker identity**
-- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] HTTP vs worker principal trace; leftover session is not identity
+- [ ] Transfer task (clinic batch-export; outbox/events named)
+- [ ] Lab `labs/7.4/7.4-lab`: forbidden outcome **user session accepted as worker identity**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: worker_identity_wrong; poison_queue.
+- [ ] Operate signal without cookies: `worker_identity_wrong`
 
 ## Rubric
 
 | Result | Meaning |
 |---|---|
-| Developing | Tools listed; missing attacker/trust; mechanism slogans |
+| Developing | Tools listed; missing attacker/trust; “internal/zero-trust” slogans |
 | Competent | System-specific invariant; lab mapped; operate present |
 | Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
 

@@ -1,38 +1,46 @@
-# 7.1 — API contracts, protocols, and inventory (5 Verify)
+# 7.1-LO-05 — Evidence is is_admin unchanged, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** ASVS 5.0.0 V13 (final); OpenAPI as inventory, not security; API8/API9 awareness.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-15.3.3`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-Mass assignment: a PATCH must not set is_admin from the client document. The contract’s writable field set is an authorization property (1.2 at field grain, 7.2).
+“We have OpenAPI” is not evidence. The oracle is the local pair. Do not probe public APIs.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Authenticated member sending extra JSON keys.
-- **Trust:** Local apply(user, patch).
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail is_admin"]
+  X["--impl fixed"] --> P["Must pass is_admin false"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Client PATCH sets is_admin |
-| Failure | Fail closed: Explicit writable set; ignore/reject unknown privileged fields |
+| Negative / abuse | `is_admin` stays false |
+| Normal | `display_name` may change |
+| Extra | unknown keys do not become columns |
+| Not claimed | GraphQL cost; unused methods; production inventory |
 
-Lab tests: `test_property.py` under `labs/7.1/7.1-lab`.
+```
+python3 -m pytest labs/7.1/7.1-lab/tests --impl vulnerable
+python3 -m pytest labs/7.1/7.1-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Client PATCH sets is_admin`
-- `--impl fixed`: **pass**
+Honest `display_name` may pass on both.
 
-PATCH is_admin does not stick.
+## What the tests do not prove
+
+- GraphQL introspection off (`v5.0.0-4.3.2`)
+- Query cost (`v5.0.0-4.3.1` / 6.7)
+- Unused HTTP methods (`v5.0.0-4.1.4`, Level 3)
+- That OpenAPI matches every running handler
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-GraphQL mutation arguments; gRPC unknown fields.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic: a test that only asserts HTTP 200 on `/patients/{id}` is not this cell.

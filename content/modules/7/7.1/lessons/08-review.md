@@ -1,40 +1,42 @@
-# 7.1 — API contracts, protocols, and inventory (Review)
+# 7.1-LO-08 — Review update(body) as a PR, not an API9 ticket
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** ASVS 5.0.0 V13 (final); OpenAPI as inventory, not security; API8/API9 awareness.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-15.3.3`.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab profile PATCH
 
-Mass assignment: a PATCH must not set is_admin from the client document. The contract’s writable field set is an authorization property (1.2 at field grain, 7.2).
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Authenticated member sending extra JSON keys.
-- **Trust:** Local apply(user, patch).
 Review `labs/7.1/7.1-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/7.1.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|is_admin true| Property["Property - good if tested"]
+  Q -->|OpenAPI file| Mechanism[Mechanism - inventory]
+  Q -->|SPA omits checkbox| False[False assurance]
+```
 
-- Seeded smell (label it yourself): user.__dict__.update(body)
-- Seeded smell (label it yourself): Undocumented route not in inventory
-- Seeded smell (label it yourself): No is_admin test
-- Seeded smell (label it yourself): OpenAPI not generated from code
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- `user.update(body)` / `__dict__.update`
+- Undocumented route not in inventory
+- No `is_admin` deny test
+- OpenAPI not generated from the running handlers
+
+Also reject: public API attacks, keys in lessons, dumping Pydantic models as the lesson.
 
 ## Misconceptions
 
-- If it’s not in Swagger it cannot be called
+- If it is not in Swagger it cannot be called
 - GraphQL is self-documenting therefore safe
 - Versioning is a security control
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_is_admin_cannot_be_patched`.
 
 ## Transfer
 
-GraphQL mutation arguments; gRPC unknown fields.
+Clinic PR that “documented the PATCH in OpenAPI” without an `is_staff` deny test is incomplete.
