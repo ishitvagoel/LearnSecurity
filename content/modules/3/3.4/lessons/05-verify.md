@@ -1,38 +1,45 @@
-# 3.4 — Business logic and abuse-resistant design (5 Verify)
+# 3.4-LO-05 — Evidence is last ≤ 5 after eight calls, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** ASVS 5.0.0 V2 (final); OWASP API Security Top 10:2023 API4/API6 as *awareness*; this lab is a product rule, not a CWE name.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-2.3.2`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A note share grant cannot be applied enough times to exceed the product cap (5 members). Abuse is a logic invariant.
+“We put max on the select” is not evidence. The oracle is the local pair.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** A scripted member; a confused deputy UI that retries (2.4).
-- **Trust:** Local counter. Real rate limits are 6.7.
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail last greater than 5"]
+  X["--impl fixed"] --> P["Must pass last 5 and sixth no increment"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Share grants exceed the product cap of 5 |
-| Failure | Fail closed: Check count in the write path; reject 6th |
+| Negative / abuse | Eight `add_share` calls leave `last <= 5` |
+| Normal | Five honest shares still land |
+| Sixth | Does not increment past 5 |
+| Not claimed | Production locks; GraphQL; 6.7 |
 
-Lab tests: `test_property.py` under `labs/3.4/3.4-lab`.
+Lab tests in `labs/3.4/3.4-lab/tests/test_property.py`:
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Share grants exceed the product cap of 5`
-- `--impl fixed`: **pass**
+```
+python3 -m pytest labs/3.4/3.4-lab/tests --impl vulnerable
+python3 -m pytest labs/3.4/3.4-lab/tests --impl fixed
+```
 
-eighth add leaves last <= 5.
+## What the tests do not prove
+
+- Two parallel sixths (needs a real lock — 2.4)
+- Import/GraphQL paths
+- Rate limits (6.7)
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Invite tokens (6.6) and export quotas (6.7).
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic guardians. A test that only asserts HTTP 200 is not cap evidence (see 9.3).

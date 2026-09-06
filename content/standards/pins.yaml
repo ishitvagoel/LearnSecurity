@@ -39,7 +39,7 @@ pins:
     reviewedAt: "2026-08-29"
     url: "https://owasp.org/www-project-application-security-verification-standard/"
     role: "Web/API security requirements and assurance baseline"
-    notes: "Project page confirms latest stable 5.0.0 released 30 May 2025. The 2026-08-29 Module 1.3 check used the immutable v5.0.0 tag. 2026-09-06 Modules 2.1–2.4 pinned V1/V2/V3/V4/V12/V14 as listed in those module.yaml files. 2026-09-06 Module 3.1 used V14.1.1, V14.1.2, and V16.2.5. 2026-09-06 Module 3.2 used v5.0.0-15.1.3 and labeled v5.0.0-15.1.5 as Level 3 advanced. 2026-09-06 Module 3.3 used v5.0.0-8.4.1 (Level 2 cross-tenant controls), v5.0.0-8.2.2, v5.0.0-8.3.1, and labeled v5.0.0-15.2.5 as Level 3 advanced (isolation around dangerous functionality). ASVS 5.0 removed a numbered 'do threat modeling' requirement; Appendix D is awareness, not a verification ID. Use exact v5.0.0-<chapter>.<section>.<requirement> identifiers; do not mix ASVS 4.x IDs. Level 3 guidance is labeled advanced and is not an undisclosed baseline. Module 1.1 intentionally does not map ASVS requirements."
+    notes: "Project page confirms latest stable 5.0.0 released 30 May 2025. The 2026-08-29 Module 1.3 check used the immutable v5.0.0 tag. 2026-09-06 Modules 2.1–4.1 pinned as listed in those module.yaml files. Module 3.4 used v5.0.0-2.1.3/2.2.2/2.3.2/2.3.4 and labeled v5.0.0-2.3.5 Level 3 advanced. Module 4.1 used v5.0.0-7.4.2 and v5.0.0-7.4.1 (session termination on delete) and labeled v5.0.0-6.5.6 Level 3 advanced. API Top 10:2023 API4/API6 stay awareness. Use exact v5.0.0-<chapter>.<section>.<requirement> identifiers; do not mix ASVS 4.x IDs. Level 3 guidance is labeled advanced. Module 1.1 intentionally does not map ASVS requirements."
   - id: owasp-threat-modeling
     source: OWASP Threat Modeling Project
     version: "maintained-project-guidance"
@@ -139,6 +139,15 @@ pins:
     url: "https://cwe.mitre.org/top25/archive/2025/2025_cwe_top25.html"
     role: "Implementation-oriented weakness families; not the syllabus order"
     notes: "Use to test whether parser/injection families were missed. Do not organize modules as CWE IDs."
+  - id: owasp-api-top-10-2023
+    source: OWASP API Security Top 10
+    version: "2023"
+    status: awareness
+    publishedAt: "2023"
+    reviewedAt: "2026-09-06"
+    url: "https://owasp.org/API-Security/editions/2023/en/0x00-header/"
+    role: "API risk-awareness regression only; not the syllabus"
+    notes: "Module 3.4 maps API4 Unrestricted Resource Consumption and API6 Unrestricted Access to Sensitive Business Flows as awareness after the product-cap invariant is taught. Do not treat API4/API6 as the definition of the share-cap property."
   - id: nist-sp-800-218-ssdf
     source: NIST SP 800-218 Secure Software Development Framework (SSDF)
     version: "1.1"

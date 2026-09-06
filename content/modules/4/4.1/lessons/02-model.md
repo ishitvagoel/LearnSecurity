@@ -1,53 +1,77 @@
-# 4.1 — Identity lifecycle (2 Model)
+# 4.1-LO-02 — A lifecycle a second engineer can test
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** NIST SP 800-63-4 (final) identity lifecycle; ASVS 5.0.0 V6 (final). Deprovision is part of 1.2 over time.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** NIST SP 800-63-4 (final); OWASP ASVS 5.0.0 (final) `v5.0.0-7.4.2`.
 
-## Property (start here)
+## Can a second engineer name pytest cases from your state machine?
 
-After an account is deleted, that subject’s leftover session must not read notes. Lifecycle is complete mediation across account states, not a login screen.
+“We delete the user” is not this lesson. A reviewable model names **account states**, **artifacts that must die**, and **who may offboard**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab Phase 1 freeze: local `SESSIONS` / `DELETED` maps; user `alice`. No live SSO.
 
-- **Attacker:** Stolen session cookie after the user left the org; a delayed worker using the old user id.
-- **Trust:** Local user+session maps. Real IdP SLO is extra (4.5).
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: every artifact is a row in the matrix
+
+```mermaid
+flowchart LR
+  Subject[alice] --> Session[Session cookie]
+  Subject --> Refresh[Refresh token - 4.3]
+  Subject --> Worker["Worker user_id - 7.4"]
+  Subject --> Mobile["Offline cache - 8.2"]
+  Delete[delete_user] --> Session
+  Delete --> Refresh
+  Delete --> Worker
+  Delete --> Mobile
+```
+
+If any arrow is missing, leftover access appears. This lab only executes the session arrow.
+
+## Mental model: delete is a use-case, not a SQL statement
+
+```mermaid
+flowchart TD
+  HR[Offboard request] --> Use[delete_user]
+  Use --> Mark[Mark deleted]
+  Use --> Kill[Invalidate sessions]
+  Kill --> Test{session_valid?}
+  Test -->|true| Fail[Property false]
+  Test -->|false| Pass[Property true]
+```
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | deleted user, leftover session, admin |
-| Objects | session token, notes |
-| Actions | delete_user, session_valid, read |
-| Channels | cookie, worker job |
-| TCB | Session store checks user state on every use. |
-| Untrusted | JWT still-signed after deletion (4.3/4.5) |
-| State / time | T+0 delete; T+1h replay cookie. |
-| 1.1 cell | Authorization over time (1.2 + 2.4). |
+| Subjects | alice; offboarding admin; stolen-cookie attacker |
+| Objects | profile; session; notes |
+| Actions | `delete_user`; `session_valid` |
+| Channels | Cookie jar; later worker queue |
+| TCB | Delete use-case that kills sessions |
+| Untrusted | “Login disabled”; SLO email |
+| State / time | Cookie presented after delete |
+| 1.1 cell | Confidentiality over time |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| alice live | n1 | read | allow |
-| alice deleted+cookie | n1 | read | deny |
-| admin | alice | delete | allow-audited |
-| worker | alice jobs | run | deny-after-delete |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| alice (active) | notes | read with session | allow |
+| alice (deleted) | notes | read with leftover session | deny |
+| admin | alice | delete | allow (audited) |
+| worker | alice user_id | execute after delete | deny (named 7.4 hole) |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/4.1/4.1-lab` file `lifecycle.py`.
+Draw this map so a second engineer could name pytest cases. Point at `labs/4.1/4.1-lab` file `lifecycle.py`.
 
 ## Transfer
 
-Contractor access end-date; support impersonation tickets.
+Clinic departing clinician. Shared workstation cookie.
 
 ## Residual risk
 
-Backups still contain the user row — 5.1.
+Backups (5.1); mobile cache (8.2); self-contained JWT until key rotation.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

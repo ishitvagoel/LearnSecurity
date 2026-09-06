@@ -1,53 +1,79 @@
-# 3.4 — Business logic and abuse-resistant design (2 Model)
+# 3.4-LO-02 — A state machine a second engineer can test
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** ASVS 5.0.0 V2 (final); OWASP API Security Top 10:2023 API4/API6 as *awareness*; this lab is a product rule, not a CWE name.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-2.1.3` and `v5.0.0-2.3.2`.
 
-## Property (start here)
+## Can a second engineer name pytest cases from your machine?
 
-A note share grant cannot be applied enough times to exceed the product cap (5 members). Abuse is a logic invariant.
+“We have a share limit” is not this lesson. A reviewable model names **states 0–5**, **the 6th transition**, **who may override**, and **which paths skip the cap**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab Phase 1 freeze: one note, `add_share` counter, cap 5. No live GraphQL, no production WAF.
 
-- **Attacker:** A scripted member; a confused deputy UI that retries (2.4).
-- **Trust:** Local counter. Real rate limits are 6.7.
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: five allowed, sixth is a different cell
+
+```mermaid
+stateDiagram-v2
+  [*] --> S0
+  S0 --> S1: add_share
+  S1 --> S2: add_share
+  S2 --> S3: add_share
+  S3 --> S4: add_share
+  S4 --> S5: add_share
+  S5 --> S5: add_share denied
+```
+
+If `S5 --> S6` exists on any channel, the property is false. Import, support, and workers are channels.
+
+## Mental model: misuse cases that are still this product
+
+```mermaid
+flowchart TD
+  Honest["Owner adds 5"] --> Ok[Allow]
+  Script["Loop 8 POSTs"] --> Deny[Deny 6th]
+  Parallel["Two 6ths at once"] --> Lock["2.4 lock - still 5"]
+  Import["CSV import"] --> Same[Same cap]
+```
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | Owner, automated client |
-| Objects | share count, cap=5 |
-| Actions | add_share |
-| Channels | API loop |
-| TCB | Server-side cap in the same transaction as insert. |
-| Untrusted | Client disabling the “max 5” UI |
-| State / time | Eight rapid POSTs. |
-| 1.1 cell | Integrity of the share policy; availability of the owner’s threat model (too many readers). |
+| Subjects | Owner; scripted client; support; import job |
+| Objects | share count; cap=5; note id |
+| Actions | `add_share` |
+| Channels | API loop; UI; later import |
+| TCB | Server-side cap in the same transaction as insert |
+| Untrusted | Client `max=5`; disabled button |
+| State / time | Eight rapid POSTs; lock contention |
+| 1.1 cell | Integrity of the share policy |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| owner | share 1-5 | add | allow |
+| owner | shares 1–5 | add | allow |
 | owner | share 6 | add | deny |
 | script | parallel 6 | add | deny-with-lock |
-| support | override | add | audited-exception |
+| support | override | add | audited exception (advanced) |
+| import | share 6 | add | deny |
 
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+## Step 3: abuse-control plan
+
+Document the cap (`v5.0.0-2.1.3`). Implement it on every write (`v5.0.0-2.3.2`). Do not substitute 6.7 rate limits. API4/API6 are regression labels after the machine exists.
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/3.4/3.4-lab` file `share_limit.py`.
+Draw this map so a second engineer could name pytest cases. Point at `labs/3.4/3.4-lab` file `share_limit.py`.
 
 ## Transfer
 
-Invite tokens (6.6) and export quotas (6.7).
+Clinic: states `0..3` guardians. Invite tokens: one token ≠ unbounded redemption (6.6).
 
 ## Residual risk
 
-Legitimate teams >5 need an owned exception (E6).
+Legitimate teams >5 need an owned exception (E6). Parallel sixths need 2.4 locking.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 / CWE-799 as the definition of security. Keys stay out of lessons.

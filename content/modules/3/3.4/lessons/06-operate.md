@@ -1,40 +1,46 @@
-# 3.4 — Business logic and abuse-resistant design (6 Operate)
+# 3.4-LO-06 — Detect the 6th deny; trim extras without logging bodies
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** ASVS 5.0.0 V2 (final); OWASP API Security Top 10:2023 API4/API6 as *awareness*; this lab is a product rule, not a CWE name.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-2.3.2`. WCAG 2.2 (final) 4.1.3 for the owner-visible error.
 
-## Property (start here)
+## Prevention is not absolute
 
-A note share grant cannot be applied enough times to exceed the product cap (5 members). Abuse is a logic invariant.
+An import job, a support tool, or a missed GraphQL mutation can still insert a sixth. Pair detect and recover. Do not log note bodies (3.1).
 
-## Attacker capabilities and trust assumptions
+## Mental model: metric on deny, then trim
 
-- **Attacker:** A scripted member; a confused deputy UI that retries (2.4).
-- **Trust:** Local counter. Real rate limits are 6.7.
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Write[add_share] --> Cap{count already 5?}
+  Cap -->|yes| Metric["share_cap_denied += 1"]
+  Metric --> Alert["reason=share_cap note_id=n1 count=5 no body"]
+  Alert --> Trim[Trim extras if any landed]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | share_cap_denied metric; anomaly on one note. |
-| Signal (no bodies) | denied 6th share; lock contention on hot notes. |
-| Revoke / recover | Trim extra grants; notify owner. |
-| Residual | Legitimate teams >5 need an owned exception (E6). |
+| Detect | `share_cap_denied`; anomaly on one note |
+| Signal | note id, count, reason; never the body |
+| Recover | Trim extra grants; notify owner |
+| Residual | Teams >5 need an owned exception (E6) |
 
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+Announce “share limit reached” to assistive tech (WCAG 4.1.3). That announcement is not the cap.
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/3.4/3.4-lab`.
+Write one log line you would accept. Tie it to `labs/3.4/3.4-lab`.
+
+```
+log_denied reason=share_cap note_id=n1 count=5 request_id=req_34bl
+```
+
+Reject any line that includes a note body or a real email.
 
 ## Transfer
 
-Invite tokens (6.6) and export quotas (6.7).
-
-## Usability
-
-Error “share limit reached” must be programmatically announced (WCAG 4.1.3), not only a red border.
+Clinic: detect 4th guardian; do not paste the child’s name into the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+SIEM product names are not the property.

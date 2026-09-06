@@ -1,59 +1,49 @@
-# 4.1 — Identity lifecycle (3 Break)
+# 4.1-LO-03 — Observe the leftover session, do not trophy a cookie
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** NIST SP 800-63-4 (final) identity lifecycle; ASVS 5.0.0 V6 (final). Deprovision is part of 1.2 over time.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-7.4.2`.
 
-## Property (start here)
+## Authorized scope
 
-After an account is deleted, that subject’s leftover session must not read notes. Lifecycle is complete mediation across account states, not a login screen.
+`labs/4.1/4.1-lab` only. Synthetic user `alice`. No live IdPs.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Deleted user's leftover session still authenticates.
 
-- **Attacker:** Stolen session cookie after the user left the org; a delayed worker using the old user id.
-- **Trust:** Local user+session maps. Real IdP SLO is extra (4.5).
-**Forbidden outcome:** Deleted user's leftover session still authenticates
+## Mental model: profile marked, cookie still live
 
-**Authorized scope:** `labs/4.1/4.1-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable lifecycle.py leaves session live.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: delete_user removes profile only.
-
-## Vulnerable fixture (local)
-
-```python
-SESSIONS = {"alice": True}
-DELETED = set()
-
-def reset():
-    SESSIONS.clear(); SESSIONS["alice"] = True
-    DELETED.clear()
-
-def delete_user(user: str) -> None:
-    DELETED.add(user)
-
-def session_valid(user: str) -> bool:
-    return bool(SESSIONS.get(user))
+```mermaid
+flowchart TD
+  Del["delete_user alice"] --> Set["DELETED add alice"]
+  Del --> Skip["SESSIONS alice left true"]
+  Skip --> Valid["session_valid returns true"]
 ```
+
+The vulnerable tree demonstrates **cause** (artifact outlived the subject), not a trophy dump of a production cookie.
+
+## What to read in the fixture
+
+`vulnerable/lifecycle.py` `delete_user` only adds the user to `DELETED`. `session_valid` still returns `SESSIONS.get(user)`. Tests require `session_valid` false after delete, and true before delete for the honest path.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Authentication artifact outlived the subject. |
-| Impact | Ex-employee or attacker with the cookie still reads tenant notes. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Authentication artifact outlived the subject |
+| Impact | Ex-employee cookie still reads notes |
+| Not the lesson | An SSO product name as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/4.1/4.1-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/4.1/4.1-lab/tests --impl vulnerable
+```
+
+Record `test_deleted_user_session_is_dead`. Do not weaken it to “the profile row is gone.”
 
 ## Transfer
 
-Contractor access end-date; support impersonation tickets.
+Clinic: badge off, EHR cookie still valid. Predict without leaving this directory.
 
 ## Non-goals
 

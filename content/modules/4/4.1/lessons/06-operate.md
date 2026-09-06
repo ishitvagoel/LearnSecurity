@@ -1,40 +1,44 @@
-# 4.1 — Identity lifecycle (6 Operate)
+# 4.1-LO-06 — Detect session-after-delete; mass-revoke without logging bodies
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** NIST SP 800-63-4 (final) identity lifecycle; ASVS 5.0.0 V6 (final). Deprovision is part of 1.2 over time.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-7.4.2`.
 
-## Property (start here)
+## Prevention is not absolute
 
-After an account is deleted, that subject’s leftover session must not read notes. Lifecycle is complete mediation across account states, not a login screen.
+A replica session store, a refresh token, or a worker can still present `alice`. Pair detect and recover. Do not log note bodies (3.1).
 
-## Attacker capabilities and trust assumptions
+## Mental model: alert on use after deleted
 
-- **Attacker:** Stolen session cookie after the user left the org; a delayed worker using the old user id.
-- **Trust:** Local user+session maps. Real IdP SLO is extra (4.5).
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Cookie[Presented session] --> State{user deleted?}
+  State -->|yes| Metric["session_after_delete += 1"]
+  Metric --> Alert["reason=session_after_delete user_id=alice no body"]
+  Alert --> Revoke[Mass revoke and rotate if JWT]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | Use of session after user_state=deleted. |
-| Signal (no bodies) | session_after_delete; offboarding checklist in 10.1. |
-| Revoke / recover | Mass revoke; rotate signing keys if tokens self-verify. |
-| Residual | Backups still contain the user row — 5.1. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `session_after_delete`; offboarding checklist (10.1) |
+| Signal | user id, request id; never the body or a real email |
+| Recover | Mass revoke; rotate signing keys if tokens self-verify |
+| Residual | Backups still contain the row (5.1) |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/4.1/4.1-lab`.
+Write one log line you would accept. Tie it to `labs/4.1/4.1-lab`.
+
+```
+log_denied reason=session_after_delete user_id=alice request_id=req_41lc
+```
+
+Reject any line that includes a note body or a personal email.
 
 ## Transfer
 
-Contractor access end-date; support impersonation tickets.
-
-## Usability
-
-Offboarding confirmation must be accessible (1.4). A mouse-only “delete user” is a missed revoke.
+Clinic: detect EHR use after badge disable; do not paste the chart into the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+SIEM product names are not the property.

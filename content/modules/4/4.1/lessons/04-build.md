@@ -1,61 +1,52 @@
-# 4.1 — Identity lifecycle (4 Build)
+# 4.1-LO-04 — Invalidate the session in the same delete use-case
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** NIST SP 800-63-4 (final) identity lifecycle; ASVS 5.0.0 V6 (final). Deprovision is part of 1.2 over time.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-7.4.1` and `v5.0.0-7.4.2`.
 
-## Property (start here)
+## Structural means the cookie cannot authenticate
 
-After an account is deleted, that subject’s leftover session must not read notes. Lifecycle is complete mediation across account states, not a login screen.
+`delete_user` must pop the session **and** `session_valid` must treat `DELETED` as deny. Structural means the delete use-case kills artifacts — not an email, not “disable password,” not SLO as a brand.
 
-## Attacker capabilities and trust assumptions
+## Mental model: mark deleted and drop the session
 
-- **Attacker:** Stolen session cookie after the user left the org; a delayed worker using the old user id.
-- **Trust:** Local user+session maps. Real IdP SLO is extra (4.5).
-delete_user sets session_valid False.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-SESSIONS = {"alice": True}
-DELETED = set()
-
-def reset():
-    SESSIONS.clear(); SESSIONS["alice"] = True
-    DELETED.clear()
-
-def delete_user(user: str) -> None:
-    DELETED.add(user)
-    SESSIONS.pop(user, None)
-
-def session_valid(user: str) -> bool:
-    if user in DELETED:
-        return False
-    return bool(SESSIONS.get(user))
+```mermaid
+flowchart TD
+  Call["delete_user alice"] --> Mark[Add to DELETED]
+  Call --> Pop["SESSIONS pop alice"]
+  Pop --> Check{session_valid?}
+  Check -->|true| Fail[Property false]
+  Check -->|false| Pass[Property true]
 ```
+
+Fail-safe: if session store is down, **deny** authentication for that user (do not fail open).
 
 ## Why this restores the cell
 
-Invalidate sessions (and tokens, workers) in the same use-case.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| After delete | `session_valid("alice") is False` |
+| Before delete | honest session still valid |
+| Deleted set | even a resurrected SESSIONS entry is denied |
 
 ## What this is not
 
-Starlette SessionMiddleware does not know HR offboarding.
-
-Email “you’re deleted” is not revocation.
+`DELETE FROM users` without session purge. JWT `exp` 30d. Worker `user_id` (7.4). Mobile cache (8.2).
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name subject, object, and predicate. Run:
+
+```
+python3 -m pytest labs/4.1/4.1-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Contractor access end-date; support impersonation tickets.
+Clinic: disable badge and kill EHR sessions in one runbook.
 
 ## Residual risk
 
-Backups still contain the user row — 5.1.
+Self-contained tokens until per-user not-before or key rotation; backups (5.1).

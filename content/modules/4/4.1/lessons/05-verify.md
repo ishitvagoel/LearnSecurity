@@ -1,38 +1,44 @@
-# 4.1 — Identity lifecycle (5 Verify)
+# 4.1-LO-05 — Evidence is session_valid false after delete, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** NIST SP 800-63-4 (final) identity lifecycle; ASVS 5.0.0 V6 (final). Deprovision is part of 1.2 over time.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-7.4.2`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-After an account is deleted, that subject’s leftover session must not read notes. Lifecycle is complete mediation across account states, not a login screen.
+“We deleted the row” is not evidence. The oracle is the local pair.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Stolen session cookie after the user left the org; a delayed worker using the old user id.
-- **Trust:** Local user+session maps. Real IdP SLO is extra (4.5).
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail leftover session true"]
+  X["--impl fixed"] --> P["Must pass session_valid false"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Deleted user's leftover session still authenticates |
-| Failure | Fail closed: Invalidate sessions (and tokens, workers) in the same use-case |
+| Negative / abuse | `session_valid` after `delete_user` is false |
+| Normal | session still valid before delete |
+| Not claimed | IdP SLO; refresh tokens; mobile cache |
 
-Lab tests: `test_property.py` under `labs/4.1/4.1-lab`.
+Lab tests in `labs/4.1/4.1-lab/tests/test_property.py`:
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Deleted user's leftover session still authenticates`
-- `--impl fixed`: **pass**
+```
+python3 -m pytest labs/4.1/4.1-lab/tests --impl vulnerable
+python3 -m pytest labs/4.1/4.1-lab/tests --impl fixed
+```
 
-after delete_user('alice') session_valid is False.
+## What the tests do not prove
+
+- Refresh-token family (4.3 / 4.5)
+- Worker identity (7.4)
+- Backup residual (5.1)
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Contractor access end-date; support impersonation tickets.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic clinician. A test that only asserts HTTP 200 is not lifecycle evidence (see 9.3).

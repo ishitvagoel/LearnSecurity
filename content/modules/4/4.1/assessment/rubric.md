@@ -8,18 +8,18 @@ Identity lifecycle
 
 ## Evidence checklist
 
-- [ ] Account state machine and support-workflow controls
-- [ ] Transfer task (Clinic: departing clinician.)
+- [ ] Account state machine and leftover-artifact list
+- [ ] Transfer task (clinic: departing clinician)
 - [ ] Lab `labs/4.1/4.1-lab`: forbidden outcome **Deleted user's leftover session still authenticates**
 - [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: session_after_delete; offboarding checklist in 10.1.
+- [ ] Operate signal without note bodies / secrets: `session_after_delete`; offboarding checklist in 10.1
 
 ## Rubric
 
 | Result | Meaning |
 |---|---|
-| Developing | Tools listed; missing attacker/trust; mechanism slogans |
+| Developing | Tools listed; missing attacker/trust; SSO slogans |
 | Competent | System-specific invariant; lab mapped; operate present |
 | Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
 

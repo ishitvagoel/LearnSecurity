@@ -1,8 +1,10 @@
 _n = 0
 
-def reset():
+
+def reset() -> None:
     global _n
     _n = 0
+
 
 def add_share() -> int:
     global _n

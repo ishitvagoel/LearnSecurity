@@ -9,18 +9,18 @@ Business logic and abuse-resistant design
 ## Evidence checklist
 
 - [ ] Misuse cases, workflow state machine, abuse plan
-- [ ] Transfer task (Clinic: max 3 guardians per child.)
+- [ ] Transfer task (clinic: max 3 guardians per child)
 - [ ] Lab `labs/3.4/3.4-lab`: forbidden outcome **Share grants exceed the product cap of 5**
 - [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: denied 6th share; lock contention on hot notes.
+- [ ] Operate signal without note bodies / secrets: `share_cap_denied`; trim extras
 
 ## Rubric
 
 | Result | Meaning |
 |---|---|
-| Developing | Tools listed; missing attacker/trust; mechanism slogans |
-| Competent | System-specific invariant; lab mapped; operate present |
+| Developing | Tools listed; missing attacker/trust; HTML-max or WAF slogans |
+| Competent | System-specific invariant; lab mapped; operate present; API4/API6 labeled awareness |
 | Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
 
 Knowledge check (retryable): distinguish property vs mechanism for **3.4**. Items live in the session worksheet, not here.

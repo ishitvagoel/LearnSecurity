@@ -1,33 +1,47 @@
-# 3.4 — Business logic and abuse-resistant design (7 Transfer)
+# 3.4-LO-07 — Transfer: clinic guardians, invites, and export quotas
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** ASVS 5.0.0 V2 (final); OWASP API Security Top 10:2023 API4/API6 as *awareness*; this lab is a product rule, not a CWE name.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-2.3.2`; API Top 10:2023 API4/API6 **awareness** only.
 
-## Property (start here)
+## Change the object; keep the write-path cap
 
-A note share grant cannot be applied enough times to exceed the product cap (5 members). Abuse is a logic invariant.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic: max 3 guardians per child. Optionally map invite tokens (6.6) and export quotas (6.7) as *different objects, same shape*.
 
-- **Attacker:** A scripted member; a confused deputy UI that retries (2.4).
-- **Trust:** Local counter. Real rate limits are 6.7.
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite guardian list on a booking card.
 
-**Prompt:** Invite tokens (6.6) and export quotas (6.7).
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic: max 3 guardians per child.
+1. attacker capabilities (scripted add; disabled UI max; import — not a live clinic);
+2. trust assumptions (which write path is TCB; HTML is not);
+3. forbidden outcome (`add_guardian` four times yields count 4, not “HIPAA”);
+4. a test idea on a **local** fixture only;
+5. residual (honest family of 4 needs an owned exception; parallel adds need a lock);
+6. WCAG 2.2 4.1.3 if the denial is shown to a human (announce “guardian limit reached”).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: three is not five, the shape is the same
+
+```mermaid
+flowchart LR
+  G0["Guardians 0"] --> G3["Guardians 3"]
+  G3 --> Deny["4th add denied"]
+  Invite["Invite token"] --> Once["Redeem at most once - 6.6"]
+  Export["Export job"] --> Quota["Bytes or rows cap - 6.7"]
+```
+
+API4/API6 may appear in a regression checklist after the machine exists. They are not the property.
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | HTML max=5 is not enforcement.… |
-| Live-target plan | Lab policy |
+| CWE-799 as the property | Weakness name ≠ cap |
+| Rate limit as the cap | Different 1.1 cell |
+| Live clinic APIs | Lab policy |
+| HTML max=3 as enforcement | Client is untrusted |
 
 ## Practice
 
-One page. No keys. The lab `labs/3.4/3.4-lab` stays the only running system you may break.
+One page. No keys. `labs/3.4/3.4-lab` is the only running system you may break.

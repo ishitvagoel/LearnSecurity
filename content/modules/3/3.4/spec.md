@@ -1,6 +1,6 @@
 # 3.4 — Business logic and abuse-resistant design
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. No exploit walkthroughs.
 
 ## Identity
 
@@ -9,71 +9,75 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** Business logic and abuse-resistant design
 - **phase / track / difficulty:** 3 / core / intermediate
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Blueprint §7; 1.1–3.3 authored.
 - **routeTags:** complete, web-api
 - **releaseMilestone:** None
 - **masteryGate:** 3
 
 ## Objective hierarchy
 
-1. Produce **Misuse-case set, workflow state machine, abuse-control plan** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce a **misuse-case set, workflow state machine, and abuse-control plan** for SecureCollab Phase 1 share grants (cap 5).
+2. Name attacker capabilities (scripted loop; disabled UI max; parallel sixth) and trust assumptions (HTML is not the TCB).
+3. Transfer: clinic max 3 guardians; optionally invite tokens (6.6) and export quotas (6.7).
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+1.2 share grants; 2.4 retries vs this module’s *count* cap; 3.2 named threats; 6.7 rate limits later.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- Business logic is not security.
+- Rate limits replace product caps.
+- CWE-799 or API4/API6 is the requirement.
+- HTML `max=5` is enforcement.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+Authority (1.2) → time/retry (2.4) → this module’s product cap → 6.6/6.7 related quotas.
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true if the client disables `max`?
+- What fails if `/import` skips the cap?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can go wrong if eight POSTs hit `/share`?
+- What residual remains if support may override?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/3.4/3.4-lab`. Forbidden: eight `add_share` calls yield count > 5. No live APIs.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-ASVS V2; OWASP API Top 10:2023 API4/API6 — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- OWASP ASVS 5.0.0 (final): `v5.0.0-2.1.3`, `v5.0.0-2.2.2`, `v5.0.0-2.3.2`, `v5.0.0-2.3.4`; `v5.0.0-2.3.5` **Level 3, labeled advanced**.
+- OWASP API Security Top 10:2023 API4/API6 **awareness** only.
+- WCAG 2.2 (final) 4.1.3 for the denial message.
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+New share/import/GraphQL path; support override; cap change; superseding ASVS V2.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: Misuse-case set, workflow state machine, abuse-control plan.
+Evidence: misuse cases, state machine, abuse-control plan. Blueprint §9.1.
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`share_cap_denied`; trim extras; WCAG announcement is not the cap. Teams >5 need an owned exception (E6).
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: write-path cap vs UI max; API4/API6 labeled awareness |

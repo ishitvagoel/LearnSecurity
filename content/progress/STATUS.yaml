@@ -14,14 +14,28 @@ defaults:
   ai_security: elective E1
   website_progress: local-first static site (site/); no accounts
 next:
-  id: '3.4'
+  id: '4.2'
   pass: revise
   skill: deepen-curriculum
   inner_skill: standards-pin
-  note: Module 3.3 authoring pass added two-gate and plane-separation mental models
-    and diagrams; keep 1.4, 2.1-2.4, and 3.1-3.3 developing until independent review.
-    Continue the depth queue one module at a time.
+  note: Module 4.1 authoring pass added leftover-session mental models and diagrams;
+    keep 1.4, 2.1-2.4, 3.1-3.4, and 4.1 developing until independent review. Continue
+    the depth queue one module at a time.
 spiral_deltas:
+- date: '2026-09-06'
+  module: '4.1'
+  change: Identity-lifecycle loop v2 treats delete as a use-case that must kill leftover
+    sessions, refuses disable-login and SSO brand names as revocation, and pins ASVS
+    v5.0.0-7.4.2 while labeling v5.0.0-6.5.6 as Level 3 advanced
+  retest: Revisit 1.2 over time; 2.4 delayed workers; 4.3/4.5 tokens and SLO; 5.1
+    backups; 7.4 worker user_id; 8.2 mobile cache
+- date: '2026-09-06'
+  module: '3.4'
+  change: Business-logic loop v2 treats the share cap as a write-path count of 5,
+    refuses HTML max as enforcement, separates the cap from 2.4 retries and 6.7 rate
+    limits, and labels API4/API6 as awareness and v5.0.0-2.3.5 as Level 3 advanced
+  retest: Revisit 1.2 share-graph size; 2.4 parallel sixths; 6.6 invite redemption;
+    6.7 export quotas; E3 payment capture; E6 exceptions
 - date: '2026-09-06'
   module: '3.3'
   change: Architecture-pattern loop v2 treats the runtime DB role as a second mediation
@@ -281,8 +295,9 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added write-path-cap versus UI-max mental models
+    and diagrams; independent quality and lab-safety review still required before
+    publishable
   depth: map-complete
 - id: '4.1'
   title: Digital identity and account lifecycle
@@ -290,8 +305,8 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added leftover-session mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '4.2'
   title: Authentication, phishing resistance, and usable access

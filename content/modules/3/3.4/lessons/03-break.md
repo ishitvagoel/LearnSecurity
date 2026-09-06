@@ -1,57 +1,49 @@
-# 3.4 — Business logic and abuse-resistant design (3 Break)
+# 3.4-LO-03 — Observe the 6th grant, do not trophy a flood
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** ASVS 5.0.0 V2 (final); OWASP API Security Top 10:2023 API4/API6 as *awareness*; this lab is a product rule, not a CWE name.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-2.3.2`.
 
-## Property (start here)
+## Authorized scope
 
-A note share grant cannot be applied enough times to exceed the product cap (5 members). Abuse is a logic invariant.
+`labs/3.4/3.4-lab` only. Synthetic share counts. No live tenants.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Share grants exceed the product cap of 5.
 
-- **Attacker:** A scripted member; a confused deputy UI that retries (2.4).
-- **Trust:** Local counter. Real rate limits are 6.7.
-**Forbidden outcome:** Share grants exceed the product cap of 5
+## Mental model: increment with no ceiling
 
-**Authorized scope:** `labs/3.4/3.4-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable share_limit.py has no cap.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: add_share without cap.
-
-## Vulnerable fixture (local)
-
-```python
-_n = 0
-
-def reset():
-    global _n
-    _n = 0
-
-def add_share() -> int:
-    global _n
-    _n += 1
-    return _n
+```mermaid
+flowchart TD
+  Loop["add_share eight times"] --> Inc["_n plus 1 each time"]
+  Inc --> Last["last equals 8"]
+  Last --> Extra["1.2 cells 6 through 8"]
 ```
+
+The vulnerable tree demonstrates **cause** (policy only in the UI / no write-path check), not a trophy load test against a public API.
+
+## What to read in the fixture
+
+`vulnerable/share_limit.py` `add_share` always increments. The tests loop eight times and require `last <= 5`, require five honest shares to succeed, and require the sixth call not to increment.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Policy only in the UI. |
-| Impact | Unbounded readers; 1.2 matrix explodes. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Policy only in the UI |
+| Impact | Unbounded readers; 1.2 matrix explodes |
+| Not the lesson | API4 as a sticker or CWE-799 as the requirement |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/3.4/3.4-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/3.4/3.4-lab/tests --impl vulnerable
+```
+
+Record `test_share_cap_is_enforced`. Do not weaken it to “a max attribute exists.”
 
 ## Transfer
 
-Invite tokens (6.6) and export quotas (6.7).
+Clinic: four `add_guardian` calls vs cap 3. Predict without leaving this directory.
 
 ## Non-goals
 
