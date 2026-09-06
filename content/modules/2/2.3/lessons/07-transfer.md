@@ -1,24 +1,17 @@
-# 2.3-LO-07 — Transfer: clinic portal cookie or WebView bridge
+# Same idea on a clinic cookie or WebView
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-3.3.4`; CSP3 and Trusted Types labeled **Working Drafts**. Do not cite a Top 10 item as the definition of security.
 
-## Change the interpreter; keep the jar-versus-script shape
+## Use it somewhere new
 
-Renaming `sc_session` to `clinic_session` is not transfer. The clinic portal changes the object (chart access), the interpreter (browser jar and possibly a WebView bridge), and the residual (shared workstation, 1.4 lockout). You must rebuild the sentence.
+The notes-app scaffolding goes away. You get a **clinic patient-portal** session cookie, and a **React Native WebView cookie bridge** as a second sketch. Renaming `sc_session` to `clinic_session` is not transfer. Person, object, reader, and leftover change. Chart access and a new bridge are new rules. You must rebuild the sentence.
 
-**Prompt A — clinic patient portal session cookie**
+Content Security Policy Level 3 and Trusted Types stay labeled **Working Drafts**. Do not cite a famous-bugs list as the definition of security.
 
-A second-factor or session cookie is set after login. One of the UIs is a shared workstation.
+## Picture: a new bridge is a new reader
 
-**Prompt B — React Native WebView cookie bridge**
-
-The same session is copied into a WebView that exposes cookies to injected JS.
-
-Use only these synthetic sketches. Do not inspect or operate a real hospital, app store build, or third-party widget.
-
-## Mental model: a new bridge is a new interpreter
+HttpOnly on the browser jar does not automatically apply to a bridge that copies the value into JS. Delay and a second runtime do not compose on their own — the same lesson who-is-allowed taught for delayed workers.
 
 ```mermaid
 flowchart TD
@@ -28,30 +21,45 @@ flowchart TD
   WebView --> Bridge{Bridge exposes value to JS?}
 ```
 
-HttpOnly on the browser jar does not automatically apply to a bridge that copies the value into JS. Delay and a second runtime do not compose on their own—the same lesson 1.2 taught for delayed workers.
+| Notes app this week | Clinic / WebView sketch |
+|---|---|
+| Member session cookie `sc_session` | Patient-portal session, or a copy into a WebView |
+| Browser jar vs page script | Browser jar **and** a bridge that may hand the value to JS |
+| Script-readable notes-app session | Script-readable chart session |
+| Extension leftover | Shared workstation; WebView injection; still extensions |
+
+Use only these dummy sketches. Do not inspect or operate a real hospital, app-store build, or third-party widget.
+
+## Prompt A — clinic patient portal session cookie
+
+A second-factor or session cookie is set after login. One of the UIs is a shared workstation.
+
+## Prompt B — React Native WebView cookie bridge
+
+The same session is copied into a WebView that exposes cookies to injected JS.
 
 ## What your answer must include
 
-1. Attacker capabilities (injected script in origin; WebView injected JS; exhausted clinician on a shared workstation—not a live hospital).
-2. Trust assumptions (which jar honors HttpOnly; the app must set the flag; the WebView is a separate TCB).
-3. Forbidden outcome (script-readable session, not “XSS everywhere”).
-4. A test idea on a local fixture you own (oracle: reader returns `None` when HttpOnly is set).
-5. Residual (extensions; XSS without cookie theft; draft CSP; 1.4 lockout if recovery is mouse-only).
-6. WCAG 2.2 only if a human-mediated control is in the claim (login usability is 1.4 / 4.2, not HttpOnly itself).
+1. Who can act (injected script in the origin; WebView injected JS; exhausted clinician on a shared workstation — not a live hospital).
+2. What you trust (which jar honors HttpOnly; the app must set the flag; the WebView is a separate thing you must trust, or not).
+3. What must not happen (script-readable session, not “XSS everywhere”).
+4. A test idea on a local practice you own (the reader returns `None` when HttpOnly is set — never on the real clinic).
+5. Leftover (extensions; XSS without cookie theft; draft CSP; lockout if recovery is mouse-only).
+6. Whether the human path must meet the web accessibility baseline (yes for login usability; HttpOnly itself is invisible to the keyboard).
 
-## What graders reject
+## What is not good enough
 
 | Reject | Why |
 |---|---|
-| HttpOnly means no XSS | 6.2 still exists |
-| CSP3 as this cell | Draft, different property |
-| Live clinic or third-party CSRF test | Lab policy |
-| `localStorage` as the “accessible” fix | Script share enlarged; 1.4 not helped |
+| HttpOnly means no XSS | Encoding work still exists |
+| CSP3 as this week’s check | Draft, different rule |
+| Live clinic or third-party CSRF test | Course rules |
+| `localStorage` as the “accessible” fix | Script share enlarged; usable login not helped |
 
 ## Practice
 
 One page. No keys. `labs/2.3/2.3-browser-policy` is the only running system you may break.
 
-## Non-goals
+## What this page is not doing
 
-Real clinics, real patient cookies, real WebView exploits. Gates stay unmarked without evidence.
+Real clinics, real patient cookies, real WebView exploits.

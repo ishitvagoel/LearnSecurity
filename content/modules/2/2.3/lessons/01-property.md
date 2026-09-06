@@ -1,34 +1,35 @@
-# 2.3-LO-01 — HttpOnly is a browser cell, not an XSS guarantee
+# HttpOnly is a browser setting, not an XSS guarantee
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** Saltzer and Schroeder (1975, seminal), especially least common mechanism and complete mediation; HTML Living Standard cookies (living); RFC 6265bis remains **draft** if cited; OWASP ASVS 5.0.0 (final) `v5.0.0-3.3.4` and `v5.0.0-3.3.1`; `v5.0.0-3.3.2` SameSite is a related L2 cookie purpose control, not this lab’s oracle; W3C CSP3 and Trusted Types are **Working Drafts** (see pins), not this property.
 
-## The claim this module owns
+## The rule
 
-SecureCollab’s session cookie `sc_session` is a bearer of 1.2 authority. If page script can read it, an injected script (later 6.2) steals the session. Marking the cookie HttpOnly is a **browser** mediation: the cookie jar may send the Cookie header to the origin and must not expose the value to `document.cookie`.
+The notes app’s session cookie `sc_session` is the login token. If page script can read it, a later injected script can steal who is signed in.
 
-> For a SecureCollab Phase 1 session cookie marked HttpOnly, script in the origin cannot read the session value. The browser cookie jar is trusted to honor the flag. The application must actually set it. This cell is not “XSS is impossible,” not CSP3, and not Trusted Types. Missing HttpOnly on a session token is a confidentiality failure against script. TLS (`Secure`) is a different cell against the network.
+**HttpOnly** is a flag you put on a cookie. When the browser honors it, page script cannot read that cookie through `document.cookie`. The browser may still send it to the origin that set it, on the Cookie header. That is a **browser cookie-jar** rule. It is not a promise that cross-site scripting is impossible.
 
-The forbidden outcome is **script-readable session**: `js_read_session` returns `synthetic-session` for a cookie whose `httponly` flag is true.
+> For a notes-app session cookie marked HttpOnly, script in the origin cannot read the session value. The browser cookie jar is trusted to honor the flag. The app must actually set it. Missing HttpOnly on a session token is a secrecy failure against script. TLS (`Secure`) is a different rule against the network.
 
-ASVS `v5.0.0-3.3.4` (Level 2): if the value is not meant for client-side scripts (session token), HttpOnly must be set and the value must travel only via `Set-Cookie`. `v5.0.0-3.3.1` requires `Secure` (and `__Secure-` / `__Host-` naming rules). This lab’s oracle is HttpOnly readability, not the full cookie catalog.
+So what must not happen: **script reads the session**. In the practice files, `js_read_session` must not return the dummy value `synthetic-session` for a cookie whose `httponly` flag is true.
 
-## Mental model: two interpreters of the same cookie
+Industry cookie lists want HttpOnly on tokens that scripts are not meant to see, and `Secure` on cookies that should not travel in the clear. This week’s check is script-readability, not the whole cookie catalog. A newer cookie RFC is still a **draft** if you cite it. Cookie behavior in the HTML living standard is the living document.
+
+## Picture: two readers of the same cookie
+
+The cookie jar is a shared tool among navigation, subresource loads, and script. HttpOnly takes the script reader out of that share. It does not remove injected script: the script can still call APIs as the user, rewrite the page, and copy **note bodies** the page already loaded. That is why “HttpOnly means no XSS” is false comfort.
 
 ```mermaid
 flowchart TD
   Set["Set-Cookie sc_session HttpOnly Secure"] --> Jar[Browser cookie jar]
   Jar --> Header["Cookie header to origin - allowed"]
   Jar --> Script["document.cookie / JS - denied if HttpOnly"]
-  Script --> XSS["Injected script later 6.2"]
+  Script --> XSS["Injected script later"]
 ```
 
-The jar is a shared mechanism between navigation, subresource loads, and script. HttpOnly removes the script interpreter from that share. It does not remove XSS: the script can still call APIs as the user, rewrite the DOM, and exfiltrate **note bodies** the page already loaded. That is why “HttpOnly means no XSS” is false assurance.
+**A tool, not the rule:** Next.js `cookies()` defaults, “HttpOnly is on in staging for one cookie,” Content Security Policy Level 3, Trusted Types, SameSite, or `__Host-` prefixes. Prefixes and SameSite are real later rows. They are not this week’s check.
 
-**Mechanism (not the property):** Next.js `cookies()` defaults, “HttpOnly is on in staging for one cookie,” CSP3, Trusted Types, SameSite, or `__Host-` prefixes. Prefixes and SameSite are real later rows; they are not this pytest.
-
-## Mental model: origin, site, and the jar
+## Picture: origin, site, and the jar
 
 ```mermaid
 flowchart LR
@@ -38,49 +39,53 @@ flowchart LR
   Cookies --> Jar[Cookie jar]
 ```
 
-Origin vs site will matter for third-party iframes and CSRF (ASVS `v5.0.0-3.5.*`, later 2.3 transfer and 6.x). This lab does not prove CORS. Do not attack third-party sites.
+**Origin** is scheme, host, and port. **Site** is the schemeful same-site grouping cookies use. They are not the same word. Origin vs site will matter for third-party iframes and forged cross-site requests. This practice does not prove CORS. Do not try this against other people’s sites.
 
-CSP3 (`v5.0.0-3.4.3` wants a CSP header in ASVS; the **CSP3 specification** remains a Working Draft in this snapshot) is a browser load/execute policy. Report-Only is detection, not this HttpOnly cell. Trusted Types is a Working Draft sink policy. Label both **draft**. Neither substitutes for encoding (6.2) or for HttpOnly.
+Content Security Policy Level 3 is a browser load-and-execute policy. In this snapshot the **CSP3 specification** is a Working Draft. Report-Only is a way to **notice**, not this HttpOnly rule. Trusted Types is a Working Draft sink policy. Label both **draft**. Neither replaces output encoding (later work) and neither replaces HttpOnly.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | For this property |
+A session value handed to the script reader fails because **the designers treated a cookie flag as an XSS finish line**, or never set the flag at all.
+
+| Slice | For this rule |
 |---|---|
-| Root cause | Session value presented to the script interpreter |
-| Preconditions | Cookie without HttpOnly (or a fixture that ignores the flag); script runs |
+| Why it happens | The session value is shown to the script reader |
+| What has to be true first | A cookie without HttpOnly, or a reader that ignores the flag; script runs |
 | Trigger | `js_read_session` on `sc_session` |
-| Impact | Session confidentiality against script; thief then acts under 1.2 |
-| Prevention | Set HttpOnly; only `Set-Cookie` carries the value |
-| Detection | Staging scan: `Set-Cookie` without HttpOnly; never log the value |
-| Recovery | Rotate the session; treat as credential leak if script could have read it |
+| What it costs | Session secrecy against script; a thief then acts as the signed-in member |
+| How you stop it | Set HttpOnly; only `Set-Cookie` carries the value |
+| How you notice | Staging scan: `Set-Cookie` without HttpOnly; never log the value |
+| How you recover | Rotate the session; treat it as a stolen login if script could have read it |
 
-## Framework defaults versus the cookie you set
+## What the framework does vs what you still have to check
 
-“Next.js cookies are httpOnly by default” is not true for every cookie you set manually, for a second analytics cookie, or for a WebView bridge (transfer). FastAPI `Response.set_cookie` will emit whatever flags you pass. The application guarantee is: **this** `sc_session` object in the lab is unread by `js_read_session` when `httponly` is true. Oracle: `labs/2.3/2.3-browser-policy`. No real browser exploit pages.
+“Next.js cookies are httpOnly by default” is not true for every cookie you set by hand, for a second analytics cookie, or for a WebView bridge. FastAPI `Response.set_cookie` will emit whatever flags you pass.
 
-## Mechanism limits
+The app’s promise is: **this** `sc_session` object in the practice is unread by `js_read_session` when `httponly` is true. The local check is `labs/2.3/2.3-browser-policy`. It is not a live browser exploit page.
 
-- Malicious or curious extensions can still read cookies the browser exposes to them. Residual; not this TCB.
-- Physical access / debugger. Residual (1.4 coercion shape).
-- `localStorage` is not “safer”; it is always script-readable. Do not move the session there.
-- SameSite is not complete CSRF defense (`v5.0.0-3.3.2` still wants purpose-appropriate SameSite; 3.5.1 is the CSRF row).
-- HttpOnly does not bind tenant (1.2) and does not set the cache key (2.2).
+## What the tool cannot do
+
+- Browser extensions can still read cookies the browser shows them. Leftover; not what you trust for this rule.
+- Someone at the laptop, or a debugger. Leftover (same shape as coercion on the recovery page).
+- `localStorage` is not “safer.” It is always script-readable. Do not move the session there.
+- SameSite is not a complete defense against forged cross-site requests. Purpose-appropriate SameSite is a sister cookie rule; the CSRF check is a later row.
+- HttpOnly does not bind company (who is allowed) and does not set the cache key.
 
 ## Practice
 
-Name which interpreter (jar vs script) must not see `sc_session`. Then run the local pair:
+Name which reader (jar vs script) must not see `sc_session`. Then run the local pair:
 
-```
+```text
 python3 -m pytest labs/2.3/2.3-browser-policy/tests --impl vulnerable
 python3 -m pytest labs/2.3/2.3-browser-policy/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Map the assertion to script readability, not to “XSS is fixed.”
+The first command must fail. The second must pass. Tie the check to script readability, not to “XSS is fixed.”
 
-## Transfer
+## Use it somewhere new
 
-A clinic patient portal session cookie, or a React Native WebView cookie bridge. Which interpreter is new, and which residual (extension, WebView injection) must be written rather than deleted?
+A clinic patient-portal session cookie, or a React Native WebView cookie bridge. Which reader is new, and which leftover (extension, WebView injection) must be rewritten rather than deleted?
 
-## Non-goals
+## What this page is not doing
 
-Live sites, XSS payloads, copy-paste gadget chains, attacking third-party origins via CORS or CSRF. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner or product evidence. Answer keys are not in this file.
+Live sites, XSS recipes, copy-paste gadget chains, attacking third-party origins through CORS or CSRF. Answer keys are not in this file.

@@ -1,16 +1,15 @@
-# 2.3-LO-02 — A browser policy matrix a second engineer can test
+# A browser policy table someone else can test
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** HTML Living Standard cookies (living); OWASP ASVS 5.0.0 (final) `v5.0.0-3.3.4` and `v5.0.0-3.3.1`; CSP3 and Trusted Types labeled **draft**.
 
-## Can a second engineer name pytest cases from your matrix?
+## Could someone else name the checks from your table?
 
-A poster of “we use CSP, cookies, and CORS” is not this lesson. A browser policy matrix names **which interpreter** may see `sc_session` and **which controls are not this cell**.
+A poster of “we use CSP, cookies, and CORS” is not this page. A browser policy table names **which reader** may see `sc_session` and **which controls are not this week’s check**.
 
-SecureCollab Phase 1 freeze: local cookie-jar fixture. No real DOM exploit page, no third-party iframe product, no live CORS test against someone else’s site.
+This week’s freeze: a local cookie-jar model. No real DOM exploit page, no third-party iframe product, no live CORS test against someone else’s site.
 
-## Mental model: jar sends; script must not read
+## Picture: the jar sends; script must not read
 
 ```mermaid
 flowchart TD
@@ -23,53 +22,53 @@ flowchart TD
 
 If `JS` can reach the value while `httponly` is true, the map already predicts `test_script_cannot_read_httponly_session` will fail.
 
-## Step 1: freeze subjects and objects
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | Page script (including your bundle after XSS); browser jar; later XSS; network attacker (TLS, not this lab); extension (residual) |
-| Objects | `sc_session` value; `Set-Cookie` flags; `document.cookie` model |
+| Who | Page script (including your bundle after XSS); browser jar; later injected script; network attacker (TLS, not this practice); extension (leftover) |
+| What | `sc_session` value; `Set-Cookie` flags; `document.cookie` model |
 | Actions | `js_read_session`; send Cookie header; set flags |
-| Channels | DOM; Cookie header; later WebView bridge |
-| TCB | Browser honors HttpOnly; server sets the flag on this cookie |
-| Untrusted | Any JavaScript in origin; client-supplied cookie flags |
-| State / time | Cookie lifetime vs XSS window |
-| 1.1 cell | Session confidentiality against script |
+| Paths | DOM; Cookie header; later WebView bridge |
+| What you trust | The browser honors HttpOnly; the server sets the flag on this cookie |
+| What you do not trust | Any JavaScript in the origin; cookie flags the client invents |
+| Time | Cookie lifetime vs the window while injected script can run |
+| The rule | Session secrecy against script |
 
-## Step 2: write cells
+## Step 2: write the rows
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
 | page script | HttpOnly `sc_session` | read | deny |
 | browser | Cookie header to origin | send | allow |
-| XSS | session via JS | steal | deny if HttpOnly; XSS still other cells |
-| network attacker | cookie on the wire | read | TLS / `Secure` — not this lab |
+| injected script | session via JS | steal | deny if HttpOnly; XSS still other rules |
+| network attacker | cookie on the wire | read | TLS / `Secure` — not this practice |
 | your analytics cookie | script | read | allow only if it is not a session token |
 
-A missing analytics cell is how a second cookie silently becomes a session. Write the hole.
+A missing analytics row is how a second cookie quietly becomes a session. Write the hole.
 
-## Step 3: draft versus this oracle
+## Step 3: draft versus this week’s check
 
 | Control | Status in this snapshot | Relation to HttpOnly |
 |---|---|---|
-| HttpOnly on `sc_session` | ASVS `v5.0.0-3.3.4` final | This lab |
-| Secure | ASVS `v5.0.0-3.3.1` final | Sister cell; fixture includes it |
-| CSP3 | Working Draft | Not a substitute; Report-Only is detection |
-| Trusted Types | Working Draft | Sink typing; later E2 / 6.2 |
-| SameSite | ASVS `v5.0.0-3.3.2` | CSRF-adjacent; not this pytest |
+| HttpOnly on `sc_session` | Final cookie-list expectation for tokens scripts must not see | This practice |
+| Secure | Final sister expectation | Sister rule; the practice object includes it |
+| CSP3 | Working Draft | Not a substitute; Report-Only is notice, not this rule |
+| Trusted Types | Working Draft | Sink typing; later encoding work |
+| SameSite | Sister cookie rule | CSRF-adjacent; not this week’s check |
 
 ## Practice
 
-Draw the matrix so a second engineer could name pytest cases. Point at `labs/2.3/2.3-browser-policy` file `cookies.py`.
+Draw the table so someone else could name the checks. Point at `labs/2.3/2.3-browser-policy` file `cookies.py`.
 
-## Transfer
+## Use it somewhere new
 
-Third-party iframe: origin vs schemeful same-site. Add rows; this lab does not prove CORS. Do not plan tests against a public site.
+Third-party iframe: origin vs schemeful same-site. Add rows. This practice does not prove CORS. Do not plan tests against a public site.
 
-## Residual risk
+## What can still go wrong
 
-Browser extensions; physical access; XSS that does not need the cookie value.
+Browser extensions; physical access; injected script that does not need the cookie value.
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+A famous-bugs list as the definition of security. Answer keys stay out of lessons.
