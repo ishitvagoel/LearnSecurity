@@ -1,35 +1,46 @@
-# 2.1 — Bytes, encodings, parsers, and interpreter boundaries (6 Operate)
+# 2.1-LO-06 — Detect disagreement; never log the body
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** ASVS 5.0.0 V5 (final) input; RFC 8259 JSON (STD 90); Unicode UAX #15 as *normalization*, not a security control by itself.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as *outcome labels*, not proof; OWASP ASVS 5.0.0 (final) `v5.0.0-2.2.2`; Module 3.1 / 5.1 privacy of logs.
 
-## Property (start here)
+## Prevention is not absolute
 
-If a note JSON object repeats the tenant key, ingest must reject (or both the ACL decision and the stored row must see the same tenant). A parser that keeps the first key for ACL and the last key for storage is a confidentiality failure.
+A new JSON library, a worker re-parse, or a `jsonb` cast can reintroduce two meanings. Pair detect and recover. Do not log secrets or note bodies.
 
-## Attacker capabilities and trust assumptions
+## Mental model: signal without the blob
 
-- **Attacker:** A member who can POST JSON; a proxy that re-encodes Unicode; a second parser in a worker.
-- **Trust:** One agreed parser in the app. The client encoder is hostile. PostgreSQL jsonb is another parser — do not assume it matches Python json.
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Ingest[Ingest attempt] --> Decision{One meaning?}
+  Decision -->|no| Metric["ingest_reject_duplicate_key += 1"]
+  Metric --> Log["reason=duplicate_tenant_key request_id=... no body"]
+  Log --> Quarantine[Do not persist; quarantine if a row already disagrees]
+  Decision -->|yes| Mediate[Hand the parse result to 1.2]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | Parse-error metric; differential test corpus in CI. |
-| Signal (no bodies) | ingest_reject_duplicate_key count; never log raw ambiguous bodies. |
-| Revoke / recover | Quarantine ambiguous rows; do not “repair” by guessing. |
-| Residual | Honest unique-key JSON still needs 1.2 mediation. |
+| Detect | Parse-error / duplicate-key metric; CI differential corpus |
+| Signal (no bodies) | `ingest_reject_duplicate_key` count; `request_id`; reason code |
+| Revoke / recover | Quarantine rows whose ACL and store disagree; do not guess a tenant |
+| Residual | Honest unique-key JSON still needs 1.2 mediation |
 
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS. A SIEM product name is not the property.
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/2.1/2.1-parser-boundaries`.
+Write one log line you would accept in review. Tie it to `labs/2.1/2.1-parser-boundaries`. Example shape (synthetic ids only):
+
+```text
+ingest_denied reason=duplicate_tenant_key request_id=req_7c3a fixture=2.1-parser-boundaries
+```
+
+Reject any line that includes `body`, note text, or a raw JSON blob.
 
 ## Transfer
 
-GraphQL and REST both ingest the same note — two grammars.
+GraphQL and REST both ingest the same note. Two reject metrics, or one shared ingest id with a `grammar=` field—pick one and justify least common mechanism.
 
 ## Non-goals
 

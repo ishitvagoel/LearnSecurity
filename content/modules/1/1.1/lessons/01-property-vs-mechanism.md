@@ -37,6 +37,23 @@ A useful invariant has more than a sentence. Treat the invariant as the center o
 
 The envelope prevents universal claims. “No unauthorized person can ever read a note” sounds strong but is not testable until unauthorized, read, note, channels, time, and trusted components are defined.
 
+## Mental model: mechanism is inside the envelope, not above it
+
+```mermaid
+flowchart TD
+  Env[Claim envelope] --> I[Invariant]
+  I --> M["Mechanism - TLS, hash, JWT, scanner"]
+  Env --> A[Attacker capability]
+  Env --> T[Trusted base]
+  Env --> Time[State and time]
+  Env --> F[Forbidden outcome]
+  Env --> E[Evidence]
+  Env --> R[Residual]
+  M -->|supports only if| F
+```
+
+If you start the review at *Mechanism*, you never reach a counterexample. If you start at *Forbidden outcome*, you can ask whether bcrypt, TLS, or a scanner even belongs in the picture.
+
 ## Eight useful property names, not eight checkboxes
 
 The names below are prompts. They overlap, trade off, and depend on the product.

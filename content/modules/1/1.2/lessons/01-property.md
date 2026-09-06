@@ -32,6 +32,19 @@ decision = policy(subject, action, object, state, grant, trusted_context, time)
 
 The tuple is a reasoning model, not a required function signature. A database policy, operating-system capability, application policy service, or relationship graph may represent it differently. The invariant remains the same.
 
+## Mental model: identity evidence is not the decision
+
+```mermaid
+flowchart LR
+  AuthN["Authentication - who is speaking"] --> Subj[Subject]
+  Subj --> Pol["policy of subject, action, object, state"]
+  Obj[Object and action] --> Pol
+  Pol --> Allow[Allow]
+  Pol --> Deny["Deny if missing or unknown"]
+```
+
+A valid session cookie fills *who is speaking*. It does not fill the cell. Ambient authority is what happens when the arrow from AuthN skips *policy* and goes straight to the database.
+
 ## The access matrix is an abstract relation
 
 Imagine a large table. Subjects are rows, objects are columns, and each cell contains allowed actions and conditions. This **access matrix** is the abstract authority model.

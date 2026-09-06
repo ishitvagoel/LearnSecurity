@@ -39,7 +39,7 @@ pins:
     reviewedAt: "2026-08-29"
     url: "https://owasp.org/www-project-application-security-verification-standard/"
     role: "Web/API security requirements and assurance baseline"
-    notes: "Project page confirms latest stable 5.0.0 released 30 May 2025. The 2026-08-29 Module 1.3 check used the immutable v5.0.0 tag, not bleeding-edge master, and checked V15.1, V15.2, and V15.3 text. Use exact v5.0.0-<chapter>.<section>.<requirement> identifiers; do not mix ASVS 4.x IDs. Module 1.3 principally teaches v5.0.0-15.1.3, v5.0.0-15.2.2, v5.0.0-15.2.5, and v5.0.0-15.3.4. Level 3 isolation guidance is labeled advanced and is not an undisclosed baseline. Module 1.1 intentionally does not map ASVS requirements."
+    notes: "Project page confirms latest stable 5.0.0 released 30 May 2025. The 2026-08-29 Module 1.3 check used the immutable v5.0.0 tag, not bleeding-edge master, and checked V15.1, V15.2, and V15.3 text. The 2026-09-06 Module 2.1 check used the same v5.0.0 CSV for V1.1.1 (canonical decode once), V2.2.1–V2.2.2 (trusted-layer input validation), and V1.5.3 (parser consistency, Level 3, labeled advanced). Use exact v5.0.0-<chapter>.<section>.<requirement> identifiers; do not mix ASVS 4.x IDs. Module 1.3 principally teaches v5.0.0-15.1.3, v5.0.0-15.2.2, v5.0.0-15.2.5, and v5.0.0-15.3.4. Level 3 isolation and parser-consistency guidance is labeled advanced and is not an undisclosed baseline. Module 1.1 intentionally does not map ASVS requirements."
   - id: owasp-threat-modeling
     source: OWASP Threat Modeling Project
     version: "maintained-project-guidance"

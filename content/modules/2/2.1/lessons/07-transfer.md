@@ -1,33 +1,48 @@
-# 2.1 — Bytes, encodings, parsers, and interpreter boundaries (7 Transfer)
+# 2.1-LO-07 — Transfer: two grammars, one patient identifier
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** ASVS 5.0.0 V5 (final) input; RFC 8259 JSON (STD 90); Unicode UAX #15 as *normalization*, not a security control by itself.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** Saltzer and Schroeder (1975, seminal) least common mechanism; OWASP ASVS 5.0.0 (final) `v5.0.0-1.1.1` and Level 3 `v5.0.0-1.5.3` labeled advanced; RFC 8259 JSON (STD 90, final).
 
-## Property (start here)
+## Change the channel; keep the invariant shape
 
-If a note JSON object repeats the tenant key, ingest must reject (or both the ACL decision and the stored row must see the same tenant). A parser that keeps the first key for ACL and the last key for storage is a confidentiality failure.
+Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** GraphQL and REST both ingest the same clinic appointment.
 
-- **Attacker:** A member who can POST JSON; a proxy that re-encodes Unicode; a second parser in a worker.
-- **Trust:** One agreed parser in the app. The client encoder is hostile. PostgreSQL jsonb is another parser — do not assume it matches Python json.
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** Clinic booking. A JSON object (REST) and a GraphQL variable map can both carry `patient_id`. Duplicate keys, aliased fields, or a proxy that re-encodes Unicode can make the ACL patient disagree with the stored patient.
 
-**Prompt:** GraphQL and REST both ingest the same note — two grammars.
+Rewrite the SecureCollab sentence for this product. Your answer must include:
 
-**Product sketch:** Clinic booking: duplicate patient_id keys.
+1. attacker capabilities (who can POST or query);
+2. trust assumptions (which parser is TCB; the client is not);
+3. a forbidden outcome (disagreement, not “injection”);
+4. a test idea that would fail if the cell were false (local fixture only);
+5. residual risk (honest unique keys still need authorization; coercion/support paths if a human confirms);
+6. whether a human path must meet WCAG 2.2 (only if a person must complete a control; parser disagreement itself is not a WCAG problem).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: each grammar is an interpreter
+
+```mermaid
+flowchart TD
+  REST["REST JSON body"] --> P1[REST parser]
+  GQL["GraphQL variables"] --> P2[GraphQL parser]
+  P1 --> Bind["patient_id used for ACL and store"]
+  P2 --> Bind
+  Bind --> Ok{Same meaning?}
+  Ok -->|no| Deny[Reject both grammars]
+  Ok -->|yes| AuthZ["Still a 1.2 decision"]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
 | Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | Pydantic v2 defaults are not “duplicate keys impossible.” stdlib json keeps the … |
-| Live-target plan | Lab policy |
+| Framework default as the guarantee | Pydantic / `JSON.parse` / GraphQL library defaults |
+| Live-target plan or real patient ids | Lab policy |
+| “Sanitize quotes” as the structural fix | Wrong slice |
 
 ## Practice
 
-One page. No keys. The lab `labs/2.1/2.1-parser-boundaries` stays the only running system you may break.
+One page. No keys. The lab `labs/2.1/2.1-parser-boundaries` stays the only running system you may break. Multipart filename encoding (two parsers on the same bytes) is an acceptable alternate sketch pointing at 6.4—still local, still synthetic.

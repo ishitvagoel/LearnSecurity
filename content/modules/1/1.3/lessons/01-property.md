@@ -14,6 +14,22 @@ This claim names an effect, attacker capability, trusted decision, scope, and fa
 
 A **trust boundary** is where a security-relevant assumption or capability changes. Ask what the receiving side may rely on after crossing. A line is useful only when its annotation answers that question.
 
+## Mental model: the line is the change in assumption
+
+```mermaid
+flowchart TD
+  Browser["Public requester - every field hostile"] --> Adapter[Public adapter]
+  Adapter --> Pub["PublicContext cannot represent worker"]
+  WorkerSrc[Trusted worker provenance] --> WAdapt[Worker adapter]
+  WAdapt --> Wctx[WorkerContext plus current grant]
+  Pub --> Policy[Policy immediately before export]
+  Wctx --> Policy
+  Policy --> Allow["Export only if grant matches tenant and objects"]
+  Policy --> Deny["Missing or unknown denies"]
+```
+
+A TLS hop between browser and adapter can exist without a new trust boundary if both sides still treat every field as attacker-controlled. Two functions in one process *can* be a boundary if `PublicContext` cannot carry worker authority.
+
 ## Keep six terms separate
 
 | Term | Precise question | SecureCollab example |

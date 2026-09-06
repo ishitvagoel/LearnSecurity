@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { MermaidDiagram } from "@/components/MermaidDiagram";
 import {
   createIdAllocator,
   plainHeadingText,
@@ -132,6 +133,7 @@ export function Markdown({ source }: { source: string }): ReactNode {
   let table: string[] = [];
   let inCode = false;
   let code: string[] = [];
+  let codeLang = "";
   let quote: string[] = [];
   let seq = 0;
   let section: {
@@ -268,16 +270,28 @@ export function Markdown({ source }: { source: string }): ReactNode {
   for (const line of lines) {
     if (line.startsWith("```")) {
       if (inCode) {
-        pushNode(
-          <pre key={nextKey("pre")} className="lesson-pre">
-            <code>{code.join("\n")}</code>
-          </pre>,
-        );
+        const source = code.join("\n");
+        const lang = codeLang.toLowerCase();
+        if (lang === "mermaid") {
+          pushNode(<MermaidDiagram key={nextKey("mmd")} chart={source} />);
+        } else {
+          const diagram = lang === "text" || lang === "diagram";
+          pushNode(
+            <pre
+              key={nextKey("pre")}
+              className={diagram ? "lesson-diagram" : "lesson-pre"}
+            >
+              <code>{source}</code>
+            </pre>,
+          );
+        }
         code = [];
+        codeLang = "";
         inCode = false;
       } else {
         flushFlow();
         inCode = true;
+        codeLang = line.slice(3).trim();
       }
       continue;
     }

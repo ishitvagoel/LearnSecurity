@@ -1,71 +1,55 @@
-# 2.1 — Bytes, encodings, parsers, and interpreter boundaries (4 Build)
+# 2.1-LO-04 — Restore one meaning, or refuse ingest
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** ASVS 5.0.0 V5 (final) input; RFC 8259 JSON (STD 90); Unicode UAX #15 as *normalization*, not a security control by itself.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** Saltzer and Schroeder (1975, seminal) fail-safe defaults and economy of mechanism; OWASP ASVS 5.0.0 (final) `v5.0.0-1.1.1`, `v5.0.0-2.2.1`, and `v5.0.0-2.2.2`; RFC 8259 JSON (STD 90, final).
 
-## Property (start here)
+## Structural means the predicate is true
 
-If a note JSON object repeats the tenant key, ingest must reject (or both the ACL decision and the stored row must see the same tenant). A parser that keeps the first key for ACL and the last key for storage is a confidentiality failure.
+Reject duplicate keys, or compare `acl_tenant == stored_tenant` and deny on mismatch. Structural means the object actually has one tenant meaning before 1.2 mediation runs—not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail closed on disagreement
 
-- **Attacker:** A member who can POST JSON; a proxy that re-encodes Unicode; a second parser in a worker.
-- **Trust:** One agreed parser in the app. The client encoder is hostile. PostgreSQL jsonb is another parser — do not assume it matches Python json.
-Reject duplicate keys or compare acl_tenant == stored_tenant.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-"""Fixed: duplicate tenant keys are rejected so both interpreters share one meaning."""
-
-from __future__ import annotations
-
-import json
-import re
-
-
-def _first_tenant(text: str) -> str:
-    match = re.search(r'"tenant"\s*:\s*"([^"]*)"', text)
-    return match.group(1) if match else ""
-
-
-def _last_tenant(text: str) -> str:
-    data = json.loads(text)
-    return str(data.get("tenant", ""))
-
-
-def ingest_note(text: str) -> dict:
-    acl = _first_tenant(text)
-    stored = _last_tenant(text)
-    if not acl or acl != stored:
-        return {"accepted": False, "acl_tenant": acl, "stored_tenant": stored, "body": None}
-    data = json.loads(text)
-    return {"accepted": True, "acl_tenant": acl, "stored_tenant": stored, "body": data.get("body")}
+```mermaid
+flowchart TD
+  Bytes[Request bytes] --> P1[Interpreter A]
+  Bytes --> P2[Interpreter B]
+  P1 --> Cmp{Meanings equal and present?}
+  P2 --> Cmp
+  Cmp -->|yes| One[One parse result to ACL and store]
+  Cmp -->|no| Deny["accepted false - no body stored"]
 ```
+
+The lab’s fixed tree still *has* two interpreters. It restores the invariant by **refusing** when they disagree. A production design may instead use a single strict parser that errors on duplicate keys. Both are fail-safe. Guessing which key “the user meant” is not.
 
 ## Why this restores the cell
 
-Reject duplicate keys; pass one parse tree everywhere.
+| After the fix | Must be true |
+|---|---|
+| CLEAN unique-key JSON | `accepted` is true; ACL and store are `tA` |
+| AMBIGUOUS duplicate keys | `accepted` is false, **or** ACL and store are identical |
+| Body on reject | not persisted as a note |
 
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+Fail-safe: on uncertainty, **deny**. Do not repair by keeping the last key because “that is what Python does.”
 
 ## What this is not
 
-Pydantic v2 defaults are not “duplicate keys impossible.” stdlib json keeps the last key.
+Pydantic v2 defaults are not “duplicate keys impossible.” stdlib `json` keeps the last key. A WAF string filter for “tenant twice” fails on whitespace and Unicode escapes. NFC-normalizing display names does not bind tenant ids.
 
-A WAF string filter for “tenant twice” fails on whitespace and Unicode escapes.
+ASVS `v5.0.0-2.2.2`: client-side validation is not the control. The trusted service layer must enforce the predicate.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass):
+
+```text
+python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl fixed
+```
 
 ## Transfer
 
-GraphQL and REST both ingest the same note — two grammars.
+GraphQL and REST both ingest the same note — two grammars. The fix is still “one meaning or reject,” not “sanitize quotes.”
 
 ## Residual risk
 
-Honest unique-key JSON still needs 1.2 mediation.
+Honest unique-key JSON still needs 1.2 mediation. A future `jsonb` column is a new interpreter until proven otherwise.
