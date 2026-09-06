@@ -2,11 +2,11 @@
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-11.2.1`. API10 awareness after.
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-11.2.1`. API10 awareness after. WCAG 2.2 for the deny message.
 
 ## Change the workplace; keep a raw-body MAC
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security.
+Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: `accept("", "body", "lab-secret")` must be false. Rewrite it for a clinic without changing the fork.
 
 **Prompt:** Clinic lab-result webhook. Also name signed redirects and outbound webhook SSRF (6.5).
 
@@ -31,6 +31,10 @@ flowchart LR
   Post["empty sig still accepted"] --> Reality[forged lab result]
 ```
 
+If the callback is TLS-terminated and CIDR-allow-listed while `accept` is always true, the cell is gone. FastAPI, nginx TLS, and a vendor SDK name do not hash the raw body. Parse-then-MAC (2.1) and outbound webhook URLs (6.5) are the same authenticity family — name them, do not run those systems here. A valid MAC still needs 1.2 on what the handler writes.
+
+The clinic rewrite still has to keep the SecureCollab fork: empty sig false, matching HMAC over the same raw body true. Terminating TLS and allow-listing the vendor without a missing-sig test leaves `accept("", ...)` true. The local pytest analogue is `test_missing_signature_is_rejected` — on a fixture, not a live lab vendor POST.
+
 ## What graders reject
 
 | Reject | Why |
@@ -38,7 +42,13 @@ flowchart LR
 | “TLS is on” | Hop, not message |
 | Live clinic / Stripe / GitHub | Lab policy |
 | “We use the vendor SDK” | Still need a missing-sig test over raw bytes |
+| Vendor CIDR as authenticity | Shared-fate, not a MAC |
+| HTTP 200 on `/webhook` as this cell | Wrong observation |
 
 ## Practice
 
-One page. No keys. `labs/7.3/7.3-lab` is the only running system you may break.
+One page. No keys. `labs/7.3/7.3-lab` is the only running system you may break. Do not POST a public host.
+
+## Non-goals
+
+Live-target webhooks. Real patient results. Claiming Gate 7 from this page.

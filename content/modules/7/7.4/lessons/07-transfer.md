@@ -2,11 +2,11 @@
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-13.2.1`. NIST SP 800-207 as architecture guidance only.
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-13.2.1`. NIST SP 800-207 as architecture guidance only. WCAG 2.2 for the enqueue message.
 
 ## Change the workplace; keep a worker principal
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security.
+Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: `exporter({"user_session": "alice", "service": None})` must be `None`. Rewrite it for a clinic without changing the fork.
 
 **Prompt:** Clinic batch-export worker. Also name outbox pattern and event schemas.
 
@@ -29,6 +29,10 @@ flowchart LR
   Run["worker uses that cookie"] --> Reality[confused deputy]
 ```
 
+If overnight export copies the clinician cookie into the task while `exporter` prefers `user_session`, the cell is gone. Celery, a VPC, and a zero-trust dashboard do not bind `service == "worker-sc"`. Outbox pattern and event schemas are the same identity family — name them, do not run those brokers here. A correctly named worker that is still a superuser DB role is a 3.3 residual even when alice session is denied.
+
+The clinic rewrite still has to keep the SecureCollab fork: leftover session `None`, `service=worker-sc` allowed. Running on the hospital VLAN with “zero trust enabled” without a leftover-session deny test leaves `exporter({user_session: alice})` succeeding. The local pytest analogue is `test_user_session_is_not_worker_identity` — on a fixture, not a live broker attach.
+
 ## What graders reject
 
 | Reject | Why |
@@ -36,7 +40,13 @@ flowchart LR
 | “Zero trust is enabled” | Guidance, not the oracle |
 | Live clinic / public broker | Lab policy |
 | “Internal queue is trusted” | Payload is still untrusted |
+| VLAN as identity | Network, not principal |
+| Job-enqueued HTTP 202 as this cell | Wrong observation |
 
 ## Practice
 
-One page. No keys. `labs/7.4/7.4-lab` is the only running system you may break.
+One page. No keys. `labs/7.4/7.4-lab` is the only running system you may break. Do not attach to a public broker.
+
+## Non-goals
+
+Live-target queues. Real clinician cookies. Claiming Gate 7 from this page.

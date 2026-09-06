@@ -141,3 +141,6 @@ changelog:
   note: 'Depth pass: path-vs-MAC mental models, mermaid diagrams, ASVS
     v5.0.0-11.2.1 / 2.3.4 / 2.3.3, v5.0.0-4.1.5 labeled Level 3 advanced;
     independent review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with path-trusted callback cause tables, TLS/CIDR
+    limits, and clinic lab-result webhook transfer; independent review still required

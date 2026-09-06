@@ -142,3 +142,6 @@ changelog:
   note: 'Depth pass: role-times-field mental models, mermaid diagrams, ASVS
     v5.0.0-8.2.3 / 8.2.1 / 8.2.2, v5.0.0-8.3.2 labeled Level 3 advanced;
     independent review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with always-true resolve cause tables, serializer
+    limits, and clinic SSN field transfer; independent review still required

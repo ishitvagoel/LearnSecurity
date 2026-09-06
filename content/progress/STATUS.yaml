@@ -19,12 +19,37 @@ next:
   skill: deepen-curriculum
   inner_skill: quality-gate
   note: Authoring-pass named mental models and mermaid cover every lesson. 1.4,
-    2.1-2.4, 0.1, 0.2, 3.1-3.4, 4.1-4.5, 5.1-5.5, and 6.1-6.7 later lessons were
-    thickened with system-specific cause, limits, and transfer. Units stay developing /
-    map-complete in revision.remaining until independent quality and lab-safety
-    review artifacts exist under content/progress/reviews/. Do not mark depth
-    publishable in this skill. 1.1-1.3 remain the independently reviewed reference.
+    2.1-2.4, 0.1, 0.2, 3.1-3.4, 4.1-4.5, 5.1-5.5, 6.1-6.7, and 7.1-7.4 later
+    lessons were thickened with system-specific cause, limits, and transfer. Units
+    stay developing / map-complete in revision.remaining until independent quality
+    and lab-safety review artifacts exist under content/progress/reviews/. Do not
+    mark depth publishable in this skill. 1.1-1.3 remain the independently reviewed
+    reference.
 spiral_deltas:
+- date: '2026-09-06'
+  module: '7.4'
+  change: Lessons 03-08 now name leftover alice session as the forbidden outcome and
+    refuse VLAN/zero-trust as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; god-mode DB role, 2.4 retry after revoke,
+    Level 3 originating subject, and 10.3 broker ACLs remain residuals
+- date: '2026-09-06'
+  module: '7.3'
+  change: Lessons 03-08 now insist empty sig is denied and refuse TLS/vendor CIDR as
+    that oracle; the lab oracle is unchanged
+  retest: Independent review still required; replay, parse-before-MAC, 1.2 side effects,
+    and 6.5 outbound URLs remain residuals
+- date: '2026-09-06'
+  module: '7.2'
+  change: Lessons 03-08 now name member x secret_internal as the forbidden outcome
+    and refuse SPA-hide/UUID as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; CSV/search/7.4 serializers and Level 3
+    grant-change cache remain residuals
+- date: '2026-09-06'
+  module: '7.1'
+  change: Lessons 03-08 now insist is_admin stays false after extra-key PATCH and refuse
+    OpenAPI as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; GraphQL/gRPC binders, leftover /v0, and
+    Level 3 unused methods remain residuals
 - date: '2026-09-06'
   module: '6.7'
   change: Lessons 03-08 now name allow(4) as the forbidden outcome and refuse SPA/nginx
@@ -976,8 +1001,9 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added binder-vs-contract mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+  notes: Later lessons 03-08 thickened 2026-09-06 with is_admin deny cause tables and
+    OpenAPI limits; independent quality and lab-safety review still required before
+    publishable
   depth: map-complete
 - id: '7.2'
   title: Object, property, and function security
@@ -985,8 +1011,9 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added role-times-field mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+  notes: Later lessons 03-08 thickened 2026-09-06 with member x secret_internal cause
+    tables and serializer limits; independent quality and lab-safety review still
+    required before publishable
   depth: map-complete
 - id: '7.3'
   title: Webhooks, callbacks, and third-party APIs
@@ -994,8 +1021,9 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added path-vs-MAC mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+  notes: Later lessons 03-08 thickened 2026-09-06 with empty-sig deny cause tables
+    and TLS/CIDR limits; independent quality and lab-safety review still required
+    before publishable
   depth: map-complete
 - id: '7.4'
   title: Queues, workers, events, and service identity
@@ -1003,8 +1031,9 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added HTTP-vs-worker-principal mental models and
-    diagrams; independent quality and lab-safety review still required before publishable
+  notes: Later lessons 03-08 thickened 2026-09-06 with leftover-session cause tables
+    and VLAN/zero-trust limits; independent quality and lab-safety review still
+    required before publishable
   depth: map-complete
 - id: '8.1'
   title: The hostile-client and mobile-platform model

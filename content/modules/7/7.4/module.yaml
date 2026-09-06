@@ -139,3 +139,6 @@ changelog:
   note: 'Depth pass: HTTP-vs-worker-principal mental models, mermaid diagrams, ASVS
     v5.0.0-13.2.1 / 13.2.2, v5.0.0-8.3.3 labeled Level 3 advanced; NIST SP 800-207
     as architecture guidance; independent review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with leftover-session cause tables, VLAN/zero-trust
+    limits, and clinic batch-export transfer; independent review still required

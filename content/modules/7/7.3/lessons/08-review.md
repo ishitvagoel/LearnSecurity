@@ -6,7 +6,9 @@
 
 ## Review the fixture as if it were SecureCollab billing webhook
 
-Review `labs/7.3/7.3-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/7.3.md` — not here.
+Review `labs/7.3/7.3-lab/vulnerable/` as a SecureCollab PR. Your job is not to count suspicious lines. Reconstruct whether `accept("", "body", "lab-secret")` is still true, compare that with the module invariant, and write changes a developer can verify.
+
+Intended findings live only in `content/assessment/keys/7.3.md` — not here. Do not open the keys file until your review has been evaluated.
 
 ## Mental model: Accept always true / process because path matched
 
@@ -14,31 +16,41 @@ Start with this seeded smell: **Accept always true / process because path matche
 
 ```mermaid
 flowchart TD
-  Claim[PR claim] --> Q{What would falsify it?}
+  Claim[PR claim] --> Q{"What would falsify it?"}
   Q -->|empty sig accepted| Property["Property - good if tested"]
   Q -->|TLS only| Mechanism[Mechanism - hop]
   Q -->|vendor CIDR| False[False assurance]
 ```
 
-Seeded smells (label them yourself; do not open the keys file):
+Classification starts at the protected effect (empty sig denied). Everything that is not a raw-body MAC at that call is a candidate path-trust. A TLS terminator without that pytest is the same smell, not a different finding class.
+
+Parse-before-MAC (2.1) and secret-in-query (4.3) are other authenticity holes — name them, do not skip `test_missing_signature_is_rejected`.
+
+## Seeded smells (label them yourself)
 
 - Accept always true / process because path matched
 - JSON parsed before MAC
 - No missing-sig test
 - Secret in query string (4.3)
 
-Also reject: live provider attacks, keys in lessons, real webhook secrets.
+Also reject: live provider attacks; closing findings without re-running `test_missing_signature_is_rejected`; keys in lessons; real webhook secrets.
 
-## Misconceptions
+## Misconceptions this module refuses
 
 - TLS to us proves the sender
 - IP allow-list is authenticity
 - Webhooks are just APIs in reverse so JWT login applies
+- Vendor SDK verify is the same as a custom MAC over parsed JSON
+- API10 is the property
 
 ## Practice
 
-Write three review notes. Tie at least one to `test_missing_signature_is_rejected`.
+Write three review notes a maintainer could act on. Each note: observation, property or false assurance, suggested structural change, residual you will **not** delete. Tie at least one to `test_missing_signature_is_rejected`.
 
 ## Transfer
 
-Clinic PR that “terminated TLS and allow-listed the vendor” without a missing-sig test is incomplete.
+Clinic PR that “terminated TLS and allow-listed the vendor” without a missing-sig test is an incomplete authenticity review. Name the independent falsehood that would still keep empty sig false.
+
+## Non-goals
+
+Do not merge by adding a comment “will HMAC later.” That comment is a residual without an owner. Do not POST a live provider to prove the finding.
