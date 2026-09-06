@@ -1,53 +1,70 @@
-# 10.3 — Cloud, containers, Kubernetes, and IaC (2 Model)
+# 10.3-LO-02 — Workload identity vs namespace privacy
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** NIST SP 800-190; Kubernetes security guidance; ASVS V13/V15. K8s is optional in prod, required as a *model* here.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** ASVS `v5.0.0-13.2.1`, `v5.0.0-13.2.2`, `v5.0.0-13.2.4`. Kubernetes PSS. NIST SP 800-190.
 
-## Property (start here)
+## Can a second engineer name the admission check from your cluster map?
 
-A pod requesting cluster-admin must be denied. Workload identity is least privilege (3.3 at cluster grain), not “our namespace is private.”
+“We put it in its own namespace” is not this lesson. A reviewable model names **ServiceAccount, Role vs ClusterRole, PSS level, IMDS reachability, and who can apply Helm**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab freeze: local `pod_ok(role)`. No live kube-apiserver.
 
-- **Attacker:** Compromised app container; malicious helm chart.
-- **Trust:** Local pod_ok(role).
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: four planes
+
+```mermaid
+flowchart TD
+  Rbac[RBAC] --> Who[who may call the API]
+  Pss[PSS / PSA] --> How[how the pod may run]
+  Net[NetworkPolicy] --> Talk[who the pod may talk to]
+  Imds[IMDS hop] --> NodeIam[node credentials]
+```
+
+## Mental model: shared responsibility
+
+```mermaid
+flowchart LR
+  Cloud[cloud account IAM] --> You[your IaC]
+  You --> K8s[cluster RBAC / PSS]
+  K8s --> App[app SA]
+```
+
+The cloud’s hypervisor is not your ClusterRoleBinding.
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | app pod, cluster-admin |
-| Objects | API server |
-| Actions | pod_ok |
-| Channels | RBAC, IRSA, metadata (6.5) |
-| TCB | Admission policy. |
-| Untrusted | Dockerfile USER root; hostNetwork |
-| State / time | Deploy. |
-| 1.1 cell | Authorization of the control plane. |
+| Subjects | compromised app container; malicious chart |
+| Objects | API server; IMDS |
+| Actions | `pod_ok` |
+| Channels | RBAC; PSA; metadata (6.5) |
+| TCB | allowlisted namespaced role |
+| Untrusted | Dockerfile USER; hostNetwork; Helm convenience ClusterRoles |
+| State / time | deploy; chart upgrade |
+| 1.1 cell | authorization of the control plane |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| app SA | namespace role | run | allow-least |
+| app SA | namespace Role | run | may allow |
 | app SA | cluster-admin | run | deny |
-| node | metadata | from-pod | deny-or-hop |
-| break-glass | admin | use | E6 |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| app pod | IMDS | GET | deny-or-hop |
+| break-glass | ClusterRole | use | E6 timebox |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/10.3/10.3-lab` file `iam.py`.
+Draw the map. Point at `labs/10.3/10.3-lab` file `iam.py`.
 
 ## Transfer
 
-Serverless IAM *.
+Serverless IAM `*` is the same cell with different syntax.
 
 ## Residual risk
 
-Break-glass admin with E6.
+Break-glass admin with E6; `v5.0.0-13.2.6` Level 3 connection/retry toward the API server.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

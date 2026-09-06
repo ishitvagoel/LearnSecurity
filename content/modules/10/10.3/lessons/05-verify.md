@@ -1,38 +1,45 @@
-# 10.3 — Cloud, containers, Kubernetes, and IaC (5 Verify)
+# 10.3-LO-05 — Evidence is cluster-admin denied, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** NIST SP 800-190; Kubernetes security guidance; ASVS V13/V15. K8s is optional in prod, required as a *model* here.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** ASVS `v5.0.0-13.2.1`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A pod requesting cluster-admin must be denied. Workload identity is least privilege (3.3 at cluster grain), not “our namespace is private.”
+“We use Kubernetes” is not evidence. The oracle is the local pair. Do not apply YAML to a live cluster.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Compromised app container; malicious helm chart.
-- **Trust:** Local pod_ok(role).
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail cluster-admin"]
+  X["--impl fixed"] --> P["Must pass deny"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | App pod granted cluster-admin |
-| Failure | Fail closed: Deny cluster-admin to app; PSP/PSS; no instance metadata from app net (6 |
+| Negative / abuse | cluster-admin → not run |
+| Normal | app → may run |
+| Not claimed | live EKS; CIS score; Gate 10 |
 
-Lab tests: `test_property.py` under `labs/10.3/10.3-lab`.
+```
+python3 -m pytest labs/10.3/10.3-lab/tests --impl vulnerable
+python3 -m pytest labs/10.3/10.3-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `App pod granted cluster-admin`
-- `--impl fixed`: **pass**
+Honest `app` may pass on both.
 
-cluster-admin denied.
+## What the tests do not prove
+
+- PSS `restricted` on the real spec
+- NetworkPolicy egress
+- IMDS blocked
+- Helm chart supply chain (10.2)
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Serverless IAM *.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic: a test that only asserts “namespace exists” is not this cell.

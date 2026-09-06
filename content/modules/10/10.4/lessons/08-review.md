@@ -1,29 +1,31 @@
-# 10.4 — Deployment and configuration hardening (Review)
+# 10.4-LO-08 — Review always-true boot_ok as a PR
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** ASVS 5.0.0 V14 (final); CISA Secure by Default. Debug in prod is a config property.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** ASVS `v5.0.0-13.4.2`, `v5.0.0-13.4.5`, `v5.0.0-13.3.1`.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab compose
 
-A production boot with debug=True must fail. Debug endpoints, extra headers, and verbose errors are forbidden outcomes in prod, not “just for five minutes.”
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Anyone who finds /debug; error pages with traces.
-- **Trust:** Local boot_ok('prod', True).
 Review `labs/10.4/10.4-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/10.4.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|prod debug boots| Property["Property - good if tested"]
+  Q -->|NODE_ENV production| Mechanism[Mechanism - string]
+  Q -->|canary 10 percent| False[False assurance]
+```
 
-- Seeded smell (label it yourself): boot_ok prod debug True
-- Seeded smell (label it yourself): Admin on 0.0.0.0
-- Seeded smell (label it yourself): Migration fail-open
-- Seeded smell (label it yourself): No rollback drill
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- `boot_ok` true on prod+debug
+- Admin on `0.0.0.0`
+- Migration fail-open
+- No rollback drill
+
+Also reject: live production attacks, keys in lessons, claiming Gate 10 or M4.
 
 ## Misconceptions
 
@@ -33,8 +35,8 @@ Also reject: client trust, interpreter concatenation, Report-Only as enforcement
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_prod_debug_must_not_boot`.
 
 ## Transfer
 
-Feature flag that disables authz.
+Clinic PR that “set NODE_ENV and added a canary” without a prod+debug deny is incomplete.

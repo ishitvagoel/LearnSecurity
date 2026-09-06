@@ -1,50 +1,48 @@
-# 10.4 — Deployment and configuration hardening (3 Break)
+# 10.4-LO-03 — Observe always-true boot_ok, do not attack production
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** ASVS 5.0.0 V14 (final); CISA Secure by Default. Debug in prod is a config property.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** ASVS `v5.0.0-13.4.2`. Lab policy: local only.
 
-## Property (start here)
+## Authorized scope
 
-A production boot with debug=True must fail. Debug endpoints, extra headers, and verbose errors are forbidden outcomes in prod, not “just for five minutes.”
+`labs/10.4/10.4-lab` only. Synthetic `env` / `debug` flags. Do **not** enable debug on a real production host, staging SaaS, or someone else’s compose as the exercise.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Production process boots with debug enabled.
 
-- **Attacker:** Anyone who finds /debug; error pages with traces.
-- **Trust:** Local boot_ok('prod', True).
-**Forbidden outcome:** Production process boots with debug enabled
+## Mental model: boot always says yes
 
-**Authorized scope:** `labs/10.4/10.4-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable cfg.py boots anyway.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: boot_ok('prod', True) True.
-
-## Vulnerable fixture (local)
-
-```python
-def boot_ok(env, debug):
-    return True
+```mermaid
+flowchart TD
+  Any[any env debug pair] --> True[boot_ok true]
 ```
+
+The vulnerable tree demonstrates **cause** (fail-open defaults). Do not probe public hosts.
+
+## What to read in the fixture
+
+`vulnerable/cfg.py` returns true for every pair. Tests require `boot_ok("prod", True)` to be false.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Fail-open defaults. |
-| Impact | Stack traces, interactive debugger, secret leak. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Fail-open defaults |
+| Impact | Traces, debugger, secret leak |
+| Not the lesson | A canary percentage as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/10.4/10.4-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/10.4/10.4-lab/tests --impl vulnerable
+```
+
+Record `test_prod_debug_must_not_boot`. Do not probe public hosts.
 
 ## Transfer
 
-Feature flag that disables authz.
+Clinic Django `DEBUG=True`: predict without leaving this directory.
 
 ## Non-goals
 
-No live-target instructions. Synthetic data only.
+No live-production, staging-SaaS, or public debug-endpoint instructions.

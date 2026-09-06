@@ -1,50 +1,48 @@
-# 10.5 — Logging, detection, incident response, recovery, maintenance (3 Break)
+# 10.5-LO-03 — Observe always-true close_incident, do not run live IR
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** ASVS 5.0.0 V7 (final); NIST CSF 2.0 DE/RS/RC (final); CISA KEV as input.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** ASVS `v5.0.0-16.2.5`. Lab policy: local only.
 
-## Property (start here)
+## Authorized scope
 
-An incident cannot be closed with recovery=todo. Detect without recover is theater. Logs must not become a second body store (3.1/5.1).
+`labs/10.5/10.5-lab` only. Synthetic incident dicts. Do **not** close, page, or query a real SIEM, PagerDuty, or clinic IR system as the exercise.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcomes:** Incident closed without recovery evidence; note body in logs.
 
-- **Attacker:** Real incident; optimistic closer.
-- **Trust:** Local close_incident({recovery, logs}).
-**Forbidden outcome:** Incident closed without recovery evidence
+## Mental model: close always says yes
 
-**Authorized scope:** `labs/10.5/10.5-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable ir.py closes anyway.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: close_incident({recovery:'todo', logs:'ok'}) True.
-
-## Vulnerable fixture (local)
-
-```python
-def close_incident(inc):
-    return True
+```mermaid
+flowchart TD
+  Any[any incident dict] --> True[close_incident true]
 ```
+
+The vulnerable tree demonstrates **cause** (close on detection quality). Do not probe public IR APIs.
+
+## What to read in the fixture
+
+`vulnerable/ir.py` returns true for every dict. Tests require `close_incident({"recovery": "todo", "logs": "ok"})` to be false, and `note_body` in logs to be false.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Close on detection quality. |
-| Impact | System still broken or attacker still in. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Close on detection quality |
+| Impact | Attacker still in; extra note copies |
+| Not the lesson | A SIEM product as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/10.5/10.5-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/10.5/10.5-lab/tests --impl vulnerable
+```
+
+Record `test_cannot_close_without_recovery`. Do not probe public hosts.
 
 ## Transfer
 
-Ransomware restore vs note-level integrity.
+Clinic SIEM-green close: predict without leaving this directory.
 
 ## Non-goals
 
-No live-target instructions. Synthetic data only.
+No live-SIEM, PagerDuty, or public incident-system instructions.

@@ -1,48 +1,49 @@
-# 10.4 — Deployment and configuration hardening (4 Build)
+# 10.4-LO-04 — Refuse prod plus debug
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** ASVS 5.0.0 V14 (final); CISA Secure by Default. Debug in prod is a config property.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** ASVS 5.0.0 (final) `v5.0.0-13.4.2`. Secrets out of traces: `v5.0.0-13.3.1`.
 
-## Property (start here)
+## Structural means boot compares env and debug
 
-A production boot with debug=True must fail. Debug endpoints, extra headers, and verbose errors are forbidden outcomes in prod, not “just for five minutes.”
+`boot_ok` must return false when `env == "prod"` and `debug` is true. Fail-safe: production with debug denies. `NODE_ENV` may *accompany* a match; it does not replace it.
 
-## Attacker capabilities and trust assumptions
+## Mental model: conjunction gate
 
-- **Attacker:** Anyone who finds /debug; error pages with traces.
-- **Trust:** Local boot_ok('prod', True).
-prod+debug => False.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-def boot_ok(env, debug):
-    return not (env == 'prod' and debug)
+```mermaid
+flowchart TD
+  Call[boot_ok] --> Both{"prod and debug?"}
+  Both -->|yes| Deny[do not boot]
+  Both -->|no| Allow[may boot]
 ```
+
+Do not accept “NODE_ENV is production” as the conjunction.
 
 ## Why this restores the cell
 
-Refuse boot; config review; no debug routes registered.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| prod + True | boot false |
+| prod + False | boot true |
 
 ## What this is not
 
-Next.js NODE_ENV=development in prod compose files.
-
-debug=False still has other flags (feature, migration).
+Canary. IaC file presence. CISA Secure by Design (unverified). Gate 10 / M4. Other flags (residual).
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name who can edit compose. Run:
+
+```
+python3 -m pytest labs/10.4/10.4-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Feature flag that disables authz.
+Django: `DEBUG` must be false when `ENV=prod`, not “we meant to turn it off.”
 
 ## Residual risk
 
-Emergency debug with E6 timebox.
+Feature flag that disables authz; sidecar debug; `v5.0.0-13.4.6` Level 3; emergency debug with E6.

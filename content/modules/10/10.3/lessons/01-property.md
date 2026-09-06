@@ -1,58 +1,83 @@
-# 10.3 — Cloud, containers, Kubernetes, and IaC (1 Property)
+# 10.3-LO-01 — A namespace is not cluster-admin
 
-**Kind:** concept-model  
-**Loop step:** 1 Property  
-**Standards:** NIST SP 800-190; Kubernetes security guidance; ASVS V13/V15. K8s is optional in prod, required as a *model* here.
+**Kind:** concept-model
+**Loop step:** 1 Property
+**Standards:** NIST SP 800-190 (final, 2017) as container-stack vocabulary. Kubernetes PSS/PSA (stable) as pod-hardening vocabulary. ASVS `v5.0.0-13.2.1`, `v5.0.0-13.2.2`, `v5.0.0-13.2.4`; `v5.0.0-13.2.6` is **Level 3, advanced**.
 
-## Property (start here)
+## The claim this module owns
 
-A pod requesting cluster-admin must be denied. Workload identity is least privilege (3.3 at cluster grain), not “our namespace is private.”
+SecureCollab’s API pods run on a lab cluster (or a serverless analogue). **Authorization of the control plane** is whether the app ServiceAccount can mutate the cluster. A Kubernetes *namespace* is a name for objects. It is not a tenant and not least privilege.
 
-## Attacker capabilities and trust assumptions
+> `pod_ok("cluster-admin")` must be false. `pod_ok("app")` may be true.
 
-- **Attacker:** Compromised app container; malicious helm chart.
-- **Trust:** Local pod_ok(role).
-**Mechanism (not the property):** EKS default service account often too wide.
+The forbidden outcome is **app pod granted cluster-admin**. That is 3.3 at cluster grain: one app bug becomes cluster takeover.
 
-Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
+ASVS `v5.0.0-13.2.1` wants backend components authenticated with individual service accounts, not a shared god role. `v5.0.0-13.2.2` wants those accounts least-privileged. `v5.0.0-13.2.4` wants an outbound allowlist — the hop to instance metadata (6.5) is how node IAM leaks into the pod. `v5.0.0-13.2.6` (documented connection/retry toward the cluster API) is **Level 3, advanced**. NIST SP 800-190 names five layers (image, registry, orchestrator, container, host); it does not make EKS “secure by default.” Kubernetes PSS `restricted` hardens the *pod spec*; it does not replace RBAC.
+
+## Mental model: namespace vs ClusterRole
+
+```mermaid
+flowchart TD
+  Ns[namespace sc-prod] --> Objects[pods secrets]
+  Sa[ServiceAccount app] --> Bind{ClusterRole?}
+  Bind -->|cluster-admin| Takeover[control plane]
+  Bind -->|Role in ns| Least[may run]
+```
+
+## Mental model: PSS is not RBAC
+
+```mermaid
+flowchart LR
+  Pss[PSS restricted] --> Spec[pod spec fields]
+  Rbac[RBAC] --> Api[who may call the API]
+  Net[NetworkPolicy] --> Egress[who may talk]
+  Pss --> NotRbac[not authorization]
+```
+
+**Mechanism (not the property):** EKS defaults, Helm, “we use Kubernetes,” NetworkPolicy, a CIS benchmark score.
 
 ## Root cause vs impact vs prevention vs detection vs recovery
 
-| Slice | For 10.3 |
+| Slice | For this property |
 |---|---|
-| Root cause | God-mode for convenience. |
-| Preconditions | pod_ok('cluster-admin') True. |
-| Impact (1.1 cell) | Authorization of the control plane. — Cluster takeover from one app bug. |
-| Prevention | Deny cluster-admin to app; PSP/PSS; no instance metadata from app net (6.5). |
-| Detection | admission_denied. |
-| Recovery | Rotate cluster creds. |
+| Root cause | God-mode for convenience |
+| Preconditions | `pod_ok("cluster-admin")` true |
+| Trigger | Compromised container or malicious chart |
+| Impact | Authorization of the control plane |
+| Prevention | Namespaced RoleBinding; PSS restricted; IMDS hop denied |
+| Detection | `cluster_admin_denied` |
+| Recovery | Rotate cluster credentials; revoke the binding |
 
-## Framework defaults vs application guarantees
+## Framework defaults versus the cluster guarantee
 
-EKS default service account often too wide.
+A default ServiceAccount in a namespace often mounts a token. Managed Kubernetes still accepts a ClusterRoleBinding you apply. `Dockerfile USER root` and `hostNetwork` are extra grains, not this cell.
 
-## Mechanism limits and bypasses
+## Mechanism limits
 
-NetworkPolicy is not RBAC.
+- NetworkPolicy is not RBAC.
+- PSS `restricted` with ClusterRole `cluster-admin` still takes the API.
+- Node IAM via instance metadata (6.5).
+- Helm charts that create ClusterRoles as a “convenience.”
 
-node IAM via metadata.
+## Usability and accessibility
 
-## Residual risk
-
-Break-glass admin with E6.
+Admission denial must say *cluster-admin refused* in text, not only a red webhook (WCAG 2.2 4.1.3).
 
 ## Practice
 
-Shared-responsibility sketch: you vs cloud vs K8s.
+Name the ServiceAccount and the Role it is bound to. Then run:
 
-Run `labs/10.3/10.3-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
+```
+python3 -m pytest labs/10.3/10.3-lab/tests --impl vulnerable
+python3 -m pytest labs/10.3/10.3-lab/tests --impl fixed
+```
+
+The first command must fail. The second must pass.
 
 ## Transfer
 
-Serverless IAM *.
-
-Clinic: app SA is cluster-admin.
+Serverless IAM `*`. Clinic: app SA is cluster-admin.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.
+Live clusters, claiming Gate 10 or M4. Answer keys are not in this file.

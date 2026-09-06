@@ -1,49 +1,54 @@
-# 10.5 — Logging, detection, incident response, recovery, maintenance (4 Build)
+# 10.5-LO-04 — Require recovery done and no note_body
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** ASVS 5.0.0 V7 (final); NIST CSF 2.0 DE/RS/RC (final); CISA KEV as input.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** ASVS 5.0.0 (final) `v5.0.0-16.2.5`, `v5.0.0-16.4.3`. NIST CSF 2.0 Recover as the outcome.
 
-## Property (start here)
+## Structural means close compares recovery and logs
 
-An incident cannot be closed with recovery=todo. Detect without recover is theater. Logs must not become a second body store (3.1/5.1).
+`close_incident` must return true only when `recovery == "done"` **and** `'note_body' not in logs`. Fail-safe: missing recovery or a body in logs denies. SIEM green may *accompany* a match; it does not replace it.
 
-## Attacker capabilities and trust assumptions
+The `note_body` substring is a **teaching stand-in** for protection-level logging (`v5.0.0-16.2.5`). It is not a complete DLP oracle.
 
-- **Attacker:** Real incident; optimistic closer.
-- **Trust:** Local close_incident({recovery, logs}).
-recovery todo => False.
+## Mental model: conjunction gate
 
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-def close_incident(inc):
-    logs = inc.get('logs', '')
-    return inc.get('recovery') == 'done' and 'note_body' not in logs
+```mermaid
+flowchart TD
+  Call[close_incident] --> Rec{recovery done?}
+  Rec -->|no| Deny[stay open]
+  Rec -->|yes| Body{note_body in logs?}
+  Body -->|yes| Deny
+  Body -->|no| Allow[may close]
 ```
+
+Do not accept “alerts stopped firing” as the conjunction.
 
 ## Why this restores the cell
 
-Require recovery evidence (restore test, revoke list).
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| recovery todo | close false |
+| note_body in logs | close false |
+| done + ok | close true |
 
 ## What this is not
 
-PagerDuty is not recovery.
-
-Observability pipeline as exfil (3.1).
+PagerDuty. MTTD. KEV. Gate 10 / M4. Untested backups (residual).
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name who can mark recovery done. Run:
+
+```
+python3 -m pytest labs/10.5/10.5-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Ransomware restore vs note-level integrity.
+Clinic: restore test evidence, not a green dashboard.
 
 ## Residual risk
 
-Some incidents never get perfect forensic certainty — say so.
+Imperfect forensics; observability exfil; support-tool god-mode; L3 clause of `v5.0.0-16.3.2`.

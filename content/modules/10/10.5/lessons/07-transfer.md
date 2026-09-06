@@ -1,33 +1,42 @@
-# 10.5 — Logging, detection, incident response, recovery, maintenance (7 Transfer)
+# 10.5-LO-07 — Transfer: clinic close ticket when SIEM is green
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** ASVS 5.0.0 V7 (final); NIST CSF 2.0 DE/RS/RC (final); CISA KEV as input.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** ASVS `v5.0.0-16.2.5`. NIST CSF 2.0 Recover. CISA KEV as awareness not close.
 
-## Property (start here)
+## Change the workplace; keep SIEM-green from meaning recovered
 
-An incident cannot be closed with recovery=todo. Detect without recover is theater. Logs must not become a second body store (3.1/5.1).
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic: close ticket when SIEM is green. Also name ransomware restore vs note-level integrity.
 
-- **Attacker:** Real incident; optimistic closer.
-- **Trust:** Local close_incident({recovery, logs}).
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite “alerts stopped so we closed INC-12,” plus “we have nightly backups and a KEV dashboard.”
 
-**Prompt:** Ransomware restore vs note-level integrity.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic: close ticket when SIEM is green.
+1. attacker capabilities (optimistic closer / still-in actor — not a live clinic SIEM attack);
+2. trust assumptions (recovery=done and no note_body is TCB; SIEM/PagerDuty/KEV/backups-untested are not);
+3. forbidden outcome (`close_incident` true while recovery is todo, not “HIPAA”);
+4. a test idea on a **local** fixture only (no live PagerDuty);
+5. residual (imperfect forensics, observability exfil, support-tool god-mode, L3 clause of `v5.0.0-16.3.2`);
+6. WCAG if the runbook is human-read under stress (not color-only severity).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: green vs restored
+
+```mermaid
+flowchart LR
+  Green[SIEM green] --> Belief[over]
+  Todo[recovery todo] --> Reality[still broken]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | PagerDuty is not recovery.… |
-| Live-target plan | Lab policy |
+| “we have backups” | Untested is not Recover |
+| Live SIEM / ransomware tutorial | Lab policy |
+| “KEV listed so we closed” | Awareness / patch input, not close |
 
 ## Practice
 
-One page. No keys. The lab `labs/10.5/10.5-lab` stays the only running system you may break.
+One page. No keys. `labs/10.5/10.5-lab` is the only running system you may break.

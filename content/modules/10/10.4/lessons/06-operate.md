@@ -1,36 +1,43 @@
-# 10.4 — Deployment and configuration hardening (6 Operate)
+# 10.4-LO-06 — Detect prod_debug_forbidden without logging traces
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** ASVS 5.0.0 V14 (final); CISA Secure by Default. Debug in prod is a config property.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; ASVS `v5.0.0-13.4.2`, `v5.0.0-13.3.1`.
 
-## Property (start here)
+## Prevention is not absolute
 
-A production boot with debug=True must fail. Debug endpoints, extra headers, and verbose errors are forbidden outcomes in prod, not “just for five minutes.”
+A flag can flip after boot. Pair detect and recover. Do not log stack traces that contain secrets, session tokens, or note bodies (3.1 / 5.3).
 
-## Attacker capabilities and trust assumptions
+## Mental model: illegal boot is a signal
 
-- **Attacker:** Anyone who finds /debug; error pages with traces.
-- **Trust:** Local boot_ok('prod', True).
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Boot[process start] --> Pair{"prod and debug?"}
+  Pair -->|yes| Metric["prod_debug_forbidden += 1"]
+  Metric --> Kill[kill and rotate traces secrets]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | prod_debug_boot denied metric; drift. |
-| Signal (no bodies) | prod_debug_forbidden. |
-| Revoke / recover | Kill; rotate secrets that appeared in traces. |
-| Residual | Emergency debug with E6 timebox. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `prod_debug_forbidden` |
+| Signal | env, debug, deploy id; never trace bodies |
+| Recover | Kill; rotate secrets that appeared in traces |
+| Residual | Other flags; E6 emergency debug |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/10.4/10.4-lab`.
+Write one log line you would accept. Tie it to `labs/10.4/10.4-lab`.
+
+```
+log_denied reason=prod_debug_forbidden env=prod debug=true deploy=sc-12
+```
+
+Reject any line that includes a stack trace, a secret, or “Gate 10 complete.”
 
 ## Transfer
 
-Feature flag that disables authz.
+Clinic: deny Django `DEBUG=True`; do not paste the traceback into the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+A canary-vendor name is not the property. M4 stays not-attempted.

@@ -1,38 +1,46 @@
-# 10.5 — Logging, detection, incident response, recovery, maintenance (5 Verify)
+# 10.5-LO-05 — Evidence is close denied, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** ASVS 5.0.0 V7 (final); NIST CSF 2.0 DE/RS/RC (final); CISA KEV as input.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** ASVS `v5.0.0-16.2.5`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-An incident cannot be closed with recovery=todo. Detect without recover is theater. Logs must not become a second body store (3.1/5.1).
+“SIEM green” is not evidence. The oracle is the local pair. Do not query a live SIEM.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Real incident; optimistic closer.
-- **Trust:** Local close_incident({recovery, logs}).
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail recovery todo"]
+  X["--impl fixed"] --> P["Must pass deny"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Incident closed without recovery evidence |
-| Failure | Fail closed: Require recovery evidence (restore test, revoke list) |
+| Negative / abuse | recovery todo → not close |
+| Negative / abuse | note_body in logs → not close |
+| Normal | done + ok → may close |
+| Not claimed | live PagerDuty; KEV; Gate 10 |
 
-Lab tests: `test_property.py` under `labs/10.5/10.5-lab`.
+```
+python3 -m pytest labs/10.5/10.5-lab/tests --impl vulnerable
+python3 -m pytest labs/10.5/10.5-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Incident closed without recovery evidence`
-- `--impl fixed`: **pass**
+Honest recovery + safe logs may pass on both.
 
-cannot close without recovery.
+## What the tests do not prove
+
+- Restore actually ran
+- Clocks are synced (`v5.0.0-16.2.2`)
+- Logs are on a separate system (`v5.0.0-16.4.3`)
+- Support tool is least privilege
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Ransomware restore vs note-level integrity.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic: a test that only asserts “alert fired” is not this cell.

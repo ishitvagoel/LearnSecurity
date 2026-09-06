@@ -1,6 +1,6 @@
 # 10.4 — Deployment and configuration hardening
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. Production must not boot with debug — not “just for five minutes.” Do not mark M4 or Gate 10 complete.
 
 ## Identity
 
@@ -9,71 +9,76 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** Deployment and configuration hardening
 - **phase / track / difficulty:** 10 / core / advanced
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Blueprint §7; 5.3 secrets; 10.2 artifacts; 10.3 workload identity.
 - **routeTags:** complete, web-api
 - **releaseMilestone:** M4
 - **masteryGate:** 10
 
 ## Objective hierarchy
 
-1. Produce **Production-readiness review and rollback drill** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce a **boot predicate** so `boot_ok("prod", True)` is false.
+2. Name attacker capabilities (anyone who finds `/debug`; error pages with traces) and trust assumptions (local `boot_ok(env, debug)`).
+3. Transfer: clinic Django `DEBUG=True`; feature flag that disables authz — without treating `NODE_ENV` or a canary as the invariant.
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+5.3 secrets out of artifacts; 10.2 digest of what you run; 13.4 unintended leakage. ASVS `v5.0.0-13.4.2` (debug off in prod). CISA Secure by Design remains **unverified**. Top 10:2025 A02 is **awareness after** the cause.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- IaC means hardened.
+- Canary equals secure config.
+- Feature flags are not TCB.
+- `NODE_ENV=production` is the debug-off check.
+- “Just for five minutes” is not a production boot.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+Always-true boot (break) → refuse prod+debug (this module) → secrets not in traces (5.3 / `v5.0.0-13.3.1`) → admin not on `0.0.0.0` → rollback drill. Residual: emergency debug with E6 timebox; other flags.
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true for `boot_ok("prod", True)`?
+- What fails if debug is false but a feature flag disables authorization?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can go wrong if production boots with debug?
+- What residual remains if debug is off but `/metrics` is public (`v5.0.0-13.4.5`)?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/10.4/10.4-lab`. Forbidden: production process boots with debug enabled. No live production hosts.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-ASVS V13; Top10 A02 — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- OWASP ASVS 5.0.0 (final): `v5.0.0-13.4.2` debug modes disabled in production (Level 2); `v5.0.0-13.4.5` documentation and monitoring endpoints not exposed unless intended; `v5.0.0-13.3.1` secrets not in artifacts. `v5.0.0-13.4.6` detailed backend version leakage is **Level 3, labeled advanced**.
+- CISA Secure by Design: **unverified** living program page (pin already 403 on fetch) — manufacturer ownership of defaults, not the lab oracle.
+- OWASP Top 10:2025 A02: **awareness after** the fail-open cause, not the syllabus.
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+Prod+debug boots; admin on `0.0.0.0`; migration fail-open; no rollback drill; feature flag that disables authz.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: Production-readiness review and rollback drill.
+Evidence: production-readiness review + local `boot_ok` tests + rollback named. Feeds Gate 10 / M4 (not-attempted).
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`prod_debug_forbidden`. Kill the process; rotate secrets that appeared in traces. Emergency debug with E6.
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: prod-debug-must-not-boot; NODE_ENV is not the predicate |

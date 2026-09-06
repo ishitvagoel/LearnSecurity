@@ -1,36 +1,43 @@
-# 10.3 — Cloud, containers, Kubernetes, and IaC (6 Operate)
+# 10.3-LO-06 — Detect cluster_admin_denied without logging kubeconfig
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** NIST SP 800-190; Kubernetes security guidance; ASVS V13/V15. K8s is optional in prod, required as a *model* here.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; ASVS `v5.0.0-13.2.1`.
 
-## Property (start here)
+## Prevention is not absolute
 
-A pod requesting cluster-admin must be denied. Workload identity is least privilege (3.3 at cluster grain), not “our namespace is private.”
+A chart can add a ClusterRoleBinding after admission was “set once.” Pair detect and recover. Do not log kubeconfig, cloud tokens, or node IAM credentials (5.3 / 6.5).
 
-## Attacker capabilities and trust assumptions
+## Mental model: god-mode binding is a signal
 
-- **Attacker:** Compromised app container; malicious helm chart.
-- **Trust:** Local pod_ok(role).
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Bind[RoleBinding] --> Role{cluster-admin?}
+  Role -->|yes| Metric["cluster_admin_denied += 1"]
+  Metric --> Rotate[rotate cluster creds]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | admission_denied. |
-| Signal (no bodies) | cluster_admin_denied. |
-| Revoke / recover | Rotate cluster creds. |
-| Residual | Break-glass admin with E6. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `cluster_admin_denied` |
+| Signal | SA name, intended Role, namespace; never kubeconfig |
+| Recover | Delete the binding; rotate cluster credentials |
+| Residual | Break-glass with E6; IMDS hop |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/10.3/10.3-lab`.
+Write one log line you would accept. Tie it to `labs/10.3/10.3-lab`.
+
+```
+log_denied reason=cluster_admin_denied sa=app ns=sc-prod requested=cluster-admin
+```
+
+Reject any line that includes a kubeconfig, a cloud token, or “Gate 10 complete.”
 
 ## Transfer
 
-Serverless IAM *.
+Clinic: deny the ClusterRoleBinding; do not paste `~/.kube/config` into the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+A CIS-benchmark product name is not the property. M4 stays not-attempted.

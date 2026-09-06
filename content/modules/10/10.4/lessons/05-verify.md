@@ -1,38 +1,45 @@
-# 10.4 — Deployment and configuration hardening (5 Verify)
+# 10.4-LO-05 — Evidence is prod+debug denied, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** ASVS 5.0.0 V14 (final); CISA Secure by Default. Debug in prod is a config property.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** ASVS `v5.0.0-13.4.2`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A production boot with debug=True must fail. Debug endpoints, extra headers, and verbose errors are forbidden outcomes in prod, not “just for five minutes.”
+“NODE_ENV=production” is not evidence. The oracle is the local pair. Do not boot a live host.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Anyone who finds /debug; error pages with traces.
-- **Trust:** Local boot_ok('prod', True).
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail prod plus debug"]
+  X["--impl fixed"] --> P["Must pass deny"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Production process boots with debug enabled |
-| Failure | Fail closed: Refuse boot; config review; no debug routes registered |
+| Negative / abuse | prod+debug → not boot |
+| Normal | prod without debug → may boot |
+| Not claimed | live compose; canary; Gate 10 |
 
-Lab tests: `test_property.py` under `labs/10.4/10.4-lab`.
+```
+python3 -m pytest labs/10.4/10.4-lab/tests --impl vulnerable
+python3 -m pytest labs/10.4/10.4-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Production process boots with debug enabled`
-- `--impl fixed`: **pass**
+Honest prod without debug may pass on both.
 
-prod debug must not boot.
+## What the tests do not prove
+
+- Feature flags cannot disable authz
+- Admin is not on `0.0.0.0`
+- Migrations fail closed
+- Rollback actually works
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Feature flag that disables authz.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic: a test that only asserts “container started” is not this cell.

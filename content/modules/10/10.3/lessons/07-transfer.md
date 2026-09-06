@@ -1,33 +1,42 @@
-# 10.3 — Cloud, containers, Kubernetes, and IaC (7 Transfer)
+# 10.3-LO-07 — Transfer: clinic app SA is cluster-admin
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** NIST SP 800-190; Kubernetes security guidance; ASVS V13/V15. K8s is optional in prod, required as a *model* here.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** NIST SP 800-190 as stack vocabulary. Kubernetes PSS as pod hardening. ASVS `v5.0.0-13.2.1`.
 
-## Property (start here)
+## Change the workplace; keep namespace from meaning isolation
 
-A pod requesting cluster-admin must be denied. Workload identity is least privilege (3.3 at cluster grain), not “our namespace is private.”
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic: app SA is cluster-admin. Also name serverless IAM `*`.
 
-- **Attacker:** Compromised app container; malicious helm chart.
-- **Trust:** Local pod_ok(role).
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite “the API namespace is private so ClusterRole is fine,” plus “we attached a NetworkPolicy and a CIS Kubernetes scan.”
 
-**Prompt:** Serverless IAM *.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic: app SA is cluster-admin.
+1. attacker capabilities (compromised container / malicious chart — not a live clinic cluster attack);
+2. trust assumptions (allowlisted namespaced role is TCB; namespace/NetworkPolicy/PSS/CIS are not);
+3. forbidden outcome (`pod_ok("cluster-admin")` true, not “HIPAA”);
+4. a test idea on a **local** fixture only (no live kube-apiserver);
+5. residual (break-glass E6, IMDS hop, `v5.0.0-13.2.6` Level 3);
+6. WCAG if admission is human-read (say cluster-admin refused).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: private namespace vs ClusterRole
+
+```mermaid
+flowchart LR
+  Ns[private namespace] --> Belief[isolated]
+  Sa[cluster-admin SA] --> Reality[control plane]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | EKS default service account often too wide.… |
-| Live-target plan | Lab policy |
+| “we have NetworkPolicy” | Egress, not RBAC |
+| Live cluster / cloud takeover tutorial | Lab policy |
+| “PSS restricted so 1.2 is done” | Pod spec ≠ API authorization |
 
 ## Practice
 
-One page. No keys. The lab `labs/10.3/10.3-lab` stays the only running system you may break.
+One page. No keys. `labs/10.3/10.3-lab` is the only running system you may break.

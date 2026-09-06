@@ -1,53 +1,67 @@
-# 10.4 — Deployment and configuration hardening (2 Model)
+# 10.4-LO-02 — Boot flags vs NODE_ENV slogans
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** ASVS 5.0.0 V14 (final); CISA Secure by Default. Debug in prod is a config property.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** ASVS `v5.0.0-13.4.2`, `v5.0.0-13.4.5`, `v5.0.0-13.3.1`.
 
-## Property (start here)
+## Can a second engineer name the boot check from your compose map?
 
-A production boot with debug=True must fail. Debug endpoints, extra headers, and verbose errors are forbidden outcomes in prod, not “just for five minutes.”
+“We set NODE_ENV=production” is not this lesson. A reviewable model names **env, debug, who can edit compose, admin bind address, migration fail-open, and rollback**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab freeze: local `boot_ok(env, debug)`. No live production hosts.
 
-- **Attacker:** Anyone who finds /debug; error pages with traces.
-- **Trust:** Local boot_ok('prod', True).
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: two flags
+
+```mermaid
+flowchart TD
+  Env[env prod] --> Boot[boot_ok]
+  Debug[debug] --> Boot
+  Node[NODE_ENV string] --> NotBoot[not the predicate]
+```
+
+## Mental model: other TCB leftover
+
+```mermaid
+flowchart LR
+  Flag[feature flag] --> Authz[may skip 1.2]
+  Mig[migration] --> FailOpen[fail-open?]
+  Admin[admin bind] --> World["0.0.0.0"]
+```
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | prod process, attacker |
-| Objects | debug flag |
-| Actions | boot_ok |
-| Channels | env, feature flags |
-| TCB | Fail closed on prod+debug. |
-| Untrusted | Default FastAPI debug, leftover env from staging |
-| State / time | Boot; hot flag. |
-| 1.1 cell | Least privilege of the running config + confidentiality of traces. |
+| Subjects | anyone who finds `/debug`; error-page scraper |
+| Objects | running config; traces |
+| Actions | `boot_ok` |
+| Channels | compose; feature flags; admin port |
+| TCB | prod+debug deny |
+| Untrusted | NODE_ENV string; canary; IaC existence |
+| State / time | deploy; “five minutes”; rollback |
+| 1.1 cell | least privilege of the running config |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| prod | debug True | boot | deny |
-| prod | debug False | boot | allow-if-else-ok |
-| dev | debug True | boot | allow-local |
-| flag | skip_authz | on | deny |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| prod + debug | boot | allow | deny |
+| prod + not debug | boot | allow | may allow |
+| NODE_ENV=production | boot | treat as check | deny |
+| feature flag disables authz | request | treat as config leftover | deny |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/10.4/10.4-lab` file `cfg.py`.
+Draw the map. Point at `labs/10.4/10.4-lab` file `cfg.py`.
 
 ## Transfer
 
-Feature flag that disables authz.
+Django `DEBUG=True` is the same grain with different syntax.
 
 ## Residual risk
 
-Emergency debug with E6 timebox.
+Other flags; sidecar debug; `v5.0.0-13.4.6` Level 3 version leakage; emergency debug with E6.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

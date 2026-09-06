@@ -14,16 +14,36 @@ defaults:
   ai_security: elective E1
   website_progress: local-first static site (site/); no accounts
 next:
-  id: '10.3'
+  id: '11'
   pass: revise
   skill: deepen-curriculum
   inner_skill: standards-pin
-  note: Modules 9.4-9.5 and 10.1-10.2 authoring pass added scanner-signal, same-cell-retest,
-    merge-gate, and lockfile-digest mental models and diagrams; keep 1.4, 2.1-2.4,
-    3.1-3.4, 4.1-4.5, 5.1-5.5, 6.1-6.7, 7.1-7.4, 8.1-8.5, 9.1-9.5, and 10.1-10.2
+  note: Modules 10.3-10.5 authoring pass added namespace-not-tenant, prod-debug-boot,
+    and SIEM-green-is-not-recovery mental models and diagrams; keep 1.4, 2.1-10.5
     developing until independent review. Continue the depth queue one module at a
     time.
 spiral_deltas:
+- date: '2026-09-06'
+  module: '10.5'
+  change: IR loop v2 treats SIEM green as not close, requires recovery=done and no
+    note_body in logs, pins v5.0.0-16.2.5 / 16.4.3, labels the L3 clause of v5.0.0-16.3.2
+    as Level 3 advanced, and keeps KEV as awareness not close
+  retest: Revisit 3.1/8.5 log bodies; 4.3 leftover sessions after restore; 10.3 support-tool
+    cluster-admin; 9.5 KEV as input
+- date: '2026-09-06'
+  module: '10.4'
+  change: Config loop v2 treats NODE_ENV as not the debug-off check, refuses prod+debug
+    boot, pins v5.0.0-13.4.2 / 13.4.5, labels v5.0.0-13.4.6 as Level 3 advanced, and
+    keeps CISA Secure by Design unverified
+  retest: Revisit 5.3 secrets in traces; 10.2 artifacts; 1.2 feature flags that skip
+    authz; 13.4.5 public metrics
+- date: '2026-09-06'
+  module: '10.3'
+  change: Cluster loop v2 treats a namespace as not a tenant, refuses cluster-admin
+    on the app SA, pins NIST SP 800-190 and Kubernetes PSS as vocabulary not 1.2,
+    and labels v5.0.0-13.2.6 as Level 3 advanced
+  retest: Revisit 3.3 least privilege; 6.5 IMDS hop; 7.4 worker identity; 10.5 support-tool
+    god-mode
 - date: '2026-09-06'
   module: '10.2'
   change: Supply-chain loop v2 treats package name as not a digest, refuses SBOM/SLSA/Dependabot
@@ -829,8 +849,8 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added namespace-not-tenant mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '10.4'
   title: Deployment and configuration hardening
@@ -838,8 +858,8 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added prod-debug-boot mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '10.5'
   title: Logging, detection, incident response, recovery, and maintenance
@@ -847,8 +867,8 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added SIEM-green-is-not-recovery mental models and
+    diagrams; independent quality and lab-safety review still required before publishable
   depth: map-complete
 capstone:
   id: '11'

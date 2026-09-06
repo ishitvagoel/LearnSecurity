@@ -1,33 +1,42 @@
-# 10.4 — Deployment and configuration hardening (7 Transfer)
+# 10.4-LO-07 — Transfer: clinic Django DEBUG=True
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** ASVS 5.0.0 V14 (final); CISA Secure by Default. Debug in prod is a config property.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** ASVS `v5.0.0-13.4.2`. CISA Secure by Design **unverified**. Top 10:2025 A02 awareness after the cause.
 
-## Property (start here)
+## Change the workplace; keep NODE_ENV from meaning debug-off
 
-A production boot with debug=True must fail. Debug endpoints, extra headers, and verbose errors are forbidden outcomes in prod, not “just for five minutes.”
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic: Django `DEBUG=True`. Also name a feature flag that disables authz.
 
-- **Attacker:** Anyone who finds /debug; error pages with traces.
-- **Trust:** Local boot_ok('prod', True).
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite “we left DEBUG on for five minutes so support can see traces,” plus “NODE_ENV is production and we canary 10%.”
 
-**Prompt:** Feature flag that disables authz.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic: Django DEBUG=True.
+1. attacker capabilities (anyone who finds `/debug` or an error page — not a live clinic host attack);
+2. trust assumptions (prod+debug deny is TCB; NODE_ENV/canary/IaC are not);
+3. forbidden outcome (`boot_ok("prod", True)` true, not “HIPAA”);
+4. a test idea on a **local** fixture only (no live Django);
+5. residual (other flags, sidecar debug, `v5.0.0-13.4.6` Level 3, E6 emergency debug);
+6. WCAG if boot is human-read (say prod debug refused).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: five minutes vs a boot
+
+```mermaid
+flowchart LR
+  Five[five minutes] --> Belief[temporary]
+  Boot[debug true in prod] --> Reality[the process is debug]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | Next.js NODE_ENV=development in prod compose files.… |
-| Live-target plan | Lab policy |
+| “NODE_ENV is production” | String, not the conjunction |
+| Live Django / public `/debug` tutorial | Lab policy |
+| “A02 so 1.2 is done” | Awareness after the cause |
 
 ## Practice
 
-One page. No keys. The lab `labs/10.4/10.4-lab` stays the only running system you may break.
+One page. No keys. `labs/10.4/10.4-lab` is the only running system you may break.

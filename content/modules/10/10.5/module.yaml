@@ -7,65 +7,67 @@ difficulty: advanced
 status: reviewed
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 1.1–2.4 Pass A complete
+- 'Prior phase Pass A per blueprint §7; 3.1 log bodies; 5.1 extra copies; 8.5 crash sinks'
 routeTags:
 - complete
 - web-api
 releaseMilestone: M4
 outcomes:
-- 'Demonstrate: Logging, detection, incident response, recovery, and maintenance'
-- 'Produce evidence: Detection rules, incident playbook, restore evidence'
-- Name attacker capabilities and trust assumptions
-- Include a local-only lab brief and a transfer challenge
-- Do not instruct live-target attacks or mix awareness lists as compliance
+- 'Refuse closing an incident while recovery is still todo; a green SIEM is not this cell.'
+- 'Treat logs as a 3.1/5.1 sink so note bodies cannot live there for forensics.'
+- 'Name restore evidence and keep KEV/PagerDuty as inputs not close.'
 reviewTriggers:
-- Material SecureCollab change in this module's concern
-- Superseding final standard
+- Incident closed with recovery todo
+- Note bodies in application or SIEM logs
+- No restore evidence
+- Support tool is god-mode
 invariants:
-- Claims are properties of SecureCollab (or the elective system), not tool names
+- close_incident without recovery done is false
+- note_body must not appear in logs
 - Labs stay in authorized local or official training scope
-- Draft standards are labeled draft
+- PagerDuty is not recovery
 threatModelPrompts:
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+- What can go wrong if you close on SIEM green?
+- What residual remains if logs contain note bodies?
+- What residual remains if the observability pipeline is a 3.1 sink?
 concepts:
-- logging
+- recovery-not-detect
+- logs-not-bodies
+- restore-evidence
 - securecollab
 - seven-step-loop
 learningObjects:
 - id: 10.5-LO-01
   kind: concept-model
-  title: 'Logging, detection, incident response, recovery, maintenance: property vs
-    mechanism'
+  title: A green SIEM is not recovery
   path: lessons/01-property.md
 - id: 10.5-LO-02
   kind: design-exercise
-  title: Model SecureCollab for 10.5
+  title: Close predicate vs detection quality
   path: lessons/02-model.md
 - id: 10.5-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: Incident closed without recovery evidence'
+  title: 'Local fixture: always-true close_incident'
   path: lessons/03-break.md
 - id: 10.5-LO-04
   kind: design-exercise
-  title: Structural fix restoring the 10.5 invariant
+  title: Require recovery done and no note_body
   path: lessons/04-build.md
 - id: 10.5-LO-05
   kind: verification-lab
-  title: Forbidden-outcome tests for 10.5
+  title: Fail-on-vulnerable then pass-on-fixed for close
   path: lessons/05-verify.md
 - id: 10.5-LO-06
   kind: operations-exercise
-  title: Detect/recover notes for 10.5
+  title: incident_closed_without_recovery without logging bodies
   path: lessons/06-operate.md
 - id: 10.5-LO-07
   kind: transfer-challenge
-  title: 'Transfer: Clinic: close ticket when SIEM is green.'
+  title: 'Transfer: clinic close ticket when SIEM is green'
   path: lessons/07-transfer.md
 - id: 10.5-LO-08
   kind: code-review
-  title: Seeded review for 10.5
+  title: Review always-true close_incident as a PR
   path: lessons/08-review.md
 labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
@@ -74,52 +76,75 @@ labSpec:
   summary: Incident closed without recovery evidence
   forbiddenOutcomes:
   - Incident closed without recovery evidence
+  - Note body present in logs
   - Live-target instructions
   - Real PII or production secrets
   - Awareness list used as the syllabus
 evidenceRequired:
 - Detection rules, incident playbook, restore evidence
 - Transfer task prompt
-- Local lab brief
+- Local lab brief with close-without-recovery deny tests
 assessmentBlueprint:
-  explain: Causal model for Logging, detection, incident response, recovery, and maintenance
-  design: Detection rules, incident playbook, restore evidence
-  build: Deferred to Pass B
-  break: Authorized local reproduction of the representative failure
-  verify: Forbidden-outcome tests
-  operate: Detection and recovery notes
-  communicate: Residual risk without compliance theater
+  explain: SIEM green is not recovery; logs are not a body store
+  design: Close predicate, log inventory, restore drill
+  build: close_incident requires recovery done and no note_body in labs/10.5/10.5-lab/fixed
+  break: Authorized local always-true close_incident
+  verify: Forbidden-outcome tests plus honest recovery plus safe logs
+  operate: incident_closed_without_recovery without secrets
+  communicate: Residual imperfect forensics; support-tool god-mode
 masteryGate: '10'
 standardsRefs:
-- source: OWASP ASVS / module anchors (see spec)
-  version: 5.0.0
+- source: OWASP Application Security Verification Standard
+  version: '5.0.0'
   status: final
   requirementIds:
-  - V16
+  - v5.0.0-16.1.1
+  - v5.0.0-16.2.5
+  - v5.0.0-16.4.2
+  - v5.0.0-16.4.3
+  - v5.0.0-16.3.2
   url: https://owasp.org/www-project-application-security-verification-standard/
+- source: NIST Cybersecurity Framework
+  version: '2.0'
+  status: final
+  requirementIds:
+  - Detect
+  - Respond
+  - Recover
+  url: https://www.nist.gov/publications/nist-cybersecurity-framework-csf-20
+- source: OWASP Logging Cheat Sheet
+  version: 'maintained-cheat-sheet'
+  status: final
+  requirementIds:
+  - logging-vocabulary
+  url: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- source: CISA Known Exploited Vulnerabilities Catalog
+  version: 'current-catalog'
+  status: awareness
+  requirementIds:
+  - KEV
+  url: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
 misconceptions:
 - MTTD is the goal
 - Backups untested are recovery
 - Disclosure is legal-only
+- PagerDuty closes the incident
 operationalConsiderations:
 - incident_closed_without_recovery denied.
 - Some incidents never get perfect forensic certainty — say so.
-author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+author: deepen-curriculum / author-module-spec
+reviewer: pending independent quality and lab-safety review
 lastReviewedAt: '2026-08-24'
 nextReviewAt: '2027-02-24'
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map
 - date: '2026-08-23'
-  note: 'Pass A quality-gate: spec completeness competent; expand in a later revision
-    if thin'
-- date: '2026-08-23'
   note: Pass B lessons and authorized local lab
 - date: '2026-08-23'
   note: Pass C rubric and examiner keys; quality-gate recorded
-- date: '2026-08-23'
-  note: 'Deepen: 1.1-density lessons; structural local lab; quality-gate recorded'
 - date: '2026-08-24'
-  note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
-    Pass C keys isolated'
+  note: Map-complete rewrite recorded; independent review still required
+- date: '2026-09-06'
+  note: 'Depth pass: SIEM-green-is-not-recovery mental models, mermaid diagrams, ASVS
+    v5.0.0-16.2.5 / 16.4.3; KEV as awareness not close; independent review still required'

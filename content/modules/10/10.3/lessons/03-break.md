@@ -1,50 +1,48 @@
-# 10.3 — Cloud, containers, Kubernetes, and IaC (3 Break)
+# 10.3-LO-03 — Observe always-true pod_ok, do not attack clusters
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** NIST SP 800-190; Kubernetes security guidance; ASVS V13/V15. K8s is optional in prod, required as a *model* here.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** ASVS `v5.0.0-13.2.1`. Lab policy: local only.
 
-## Property (start here)
+## Authorized scope
 
-A pod requesting cluster-admin must be denied. Workload identity is least privilege (3.3 at cluster grain), not “our namespace is private.”
+`labs/10.3/10.3-lab` only. Synthetic role strings `cluster-admin` / `app`. Do **not** apply ClusterRoleBindings to a real cluster, cloud account, or shared lab Kubernetes as the exercise.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** App pod granted cluster-admin.
 
-- **Attacker:** Compromised app container; malicious helm chart.
-- **Trust:** Local pod_ok(role).
-**Forbidden outcome:** App pod granted cluster-admin
+## Mental model: admission always says yes
 
-**Authorized scope:** `labs/10.3/10.3-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable iam.py allows cluster-admin.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: pod_ok('cluster-admin') True.
-
-## Vulnerable fixture (local)
-
-```python
-def pod_ok(role):
-    return True
+```mermaid
+flowchart TD
+  Any[any role] --> True[pod_ok true]
 ```
+
+The vulnerable tree demonstrates **cause** (god-mode for convenience). Do not probe public APIs.
+
+## What to read in the fixture
+
+`vulnerable/iam.py` returns true for every role. Tests require `pod_ok("cluster-admin")` to be false.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | God-mode for convenience. |
-| Impact | Cluster takeover from one app bug. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Always-true admission |
+| Impact | Control-plane takeover from one app bug |
+| Not the lesson | A CIS Kubernetes product score as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/10.3/10.3-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/10.3/10.3-lab/tests --impl vulnerable
+```
+
+Record `test_cluster_admin_pod_is_denied`. Do not probe public hosts.
 
 ## Transfer
 
-Serverless IAM *.
+Clinic app SA is cluster-admin: predict without leaving this directory.
 
 ## Non-goals
 
-No live-target instructions. Synthetic data only.
+No live-cluster, cloud-account, or public Kubernetes API instructions.

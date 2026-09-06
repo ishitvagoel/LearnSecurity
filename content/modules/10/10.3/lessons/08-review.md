@@ -1,40 +1,42 @@
-# 10.3 — Cloud, containers, Kubernetes, and IaC (Review)
+# 10.3-LO-08 — Review always-true pod_ok as a PR
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** NIST SP 800-190; Kubernetes security guidance; ASVS V13/V15. K8s is optional in prod, required as a *model* here.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** ASVS `v5.0.0-13.2.1`, `v5.0.0-13.2.2`, `v5.0.0-13.2.4`. Kubernetes PSS as vocabulary.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab cluster IAM
 
-A pod requesting cluster-admin must be denied. Workload identity is least privilege (3.3 at cluster grain), not “our namespace is private.”
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Compromised app container; malicious helm chart.
-- **Trust:** Local pod_ok(role).
 Review `labs/10.3/10.3-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/10.3.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|cluster-admin runs| Property["Property - good if tested"]
+  Q -->|namespace private| Mechanism[Mechanism - naming]
+  Q -->|CIS scan green| False[False assurance]
+```
 
-- Seeded smell (label it yourself): cluster-admin on app SA
-- Seeded smell (label it yourself): Privileged: true
-- Seeded smell (label it yourself): No admission test
-- Seeded smell (label it yourself): IaC with 0.0.0.0/0
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- cluster-admin on app SA
+- `privileged: true`
+- No admission test
+- IaC with `0.0.0.0/0`
+
+Also reject: live cluster attacks, keys in lessons, claiming Gate 10 or M4.
 
 ## Misconceptions
 
 - Namespace equals tenant
-- Managed K8s is secure by default
-- Containers are VMs
+- Managed Kubernetes is secure by default
+- NetworkPolicy is RBAC
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_cluster_admin_pod_is_denied`.
 
 ## Transfer
 
-Serverless IAM *.
+Clinic PR that “added a namespace and a CIS scan” without a ClusterRole deny is incomplete.
