@@ -1,51 +1,48 @@
-# 6.4 — Files, paths, uploads, archives, XML, deserialization (3 Break)
+# 6.4-LO-03 — Observe prefix failure, do not trophy the host
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** ASVS 5.0.0 V12 (final); CWE-22/434/502 as names after the path/interpreter cause.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-5.3.2`.
 
-## Property (start here)
+## Authorized scope
 
-A user-supplied path must not resolve outside the lab root. `../etc/passwd` is data that tried to become a different object. This is not a weaponized exploit lesson — we assert prefix.
+`labs/6.4/6.4-lab` only. Synthetic names. Tests must not read host files outside the lab root.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Resolved path escapes the lab root.
 
-- **Attacker:** Uploader or filename field attacker.
-- **Trust:** Local resolve() under /tmp/sc-lab.
-**Forbidden outcome:** Resolved path escapes the lab root
+## Mental model: join without canonicalize
 
-**Authorized scope:** `labs/6.4/6.4-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable path.py concatenates.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: resolve('../etc/passwd') escapes root.
-
-## Vulnerable fixture (local)
-
-```python
-from pathlib import Path
-ROOT=Path('/tmp/sc-lab')
-def resolve(name):
-    return str(ROOT / name)
+```mermaid
+flowchart TD
+  Call["resolve ../outside"] --> Join["root / name"]
+  Join --> Escapes["canonical path leaves root"]
 ```
+
+The vulnerable tree demonstrates **cause** (path grammar mixed with data). The name `../outside` is data. Do not use it against other directories.
+
+## What to read in the fixture
+
+`vulnerable/path.py` joins the name onto `/tmp/sc-lab` and returns the string without canonicalize-and-prefix. Tests resolve that string and require it still start with the lab root, or that `resolve` raise `ValueError`.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Path grammar mixed with data; no canonicalization. |
-| Impact | Read/write outside the note store. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Path grammar mixed with data; no canonicalization |
+| Impact | Object outside the note store |
+| Not the lesson | A CWE-22 sticker as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/6.4/6.4-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/6.4/6.4-lab/tests --impl vulnerable
+```
+
+Record `test_dotdot_does_not_escape_root`. Do not open host files.
 
 ## Transfer
 
-XML entity expansion; pickle; YAML load.
+Clinic scan upload. Predict without leaving this directory.
 
 ## Non-goals
 

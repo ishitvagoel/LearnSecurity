@@ -1,54 +1,53 @@
-# 6.5 — Server-side requests and protocol parsing (4 Build)
+# 6.5-LO-04 — Parse, then allow-list host and scheme
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** ASVS 5.0.0 V10 (final); API7 awareness; URL is untrusted *structure* (2.1).
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.3.6`.
 
-## Property (start here)
+## Structural means the authority is a named peer
 
-The lab fetcher must not allow http://169.254.169.254/ (link-local metadata). SSRF is a trust-boundary fail: the server’s network is not the user’s to steer. HTTPS to a named lab host may be allowed.
+`allowed` must parse the URL, require `https`, require the hostname in a small allow-list, and deny link-local and loopback. Structural means that identity check — not “starts with https”, not a denylist of one IP.
 
-## Attacker capabilities and trust assumptions
+## Mental model: deny unless listed
 
-- **Attacker:** User who supplies an unfurl/preview URL.
-- **Trust:** Local allowed(url). No real cloud metadata in this VM lesson — we assert the deny.
-link-local False; lab https host True.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-from urllib.parse import urlparse
-ALLOW={'lab.securecollab.test'}
-def allowed(url):
-    u=urlparse(url)
-    host=(u.hostname or '').lower()
-    if host in {'169.254.169.254','127.0.0.1','localhost'}:
-        return False
-    return u.scheme=='https' and host in ALLOW
+```mermaid
+flowchart TD
+  Call[allowed] --> Parse[urlparse]
+  Parse --> Https{scheme https?}
+  Https -->|no| Deny[Deny]
+  Https -->|yes| Host{host in ALLOW?}
+  Host -->|no| Deny
+  Host -->|yes| Allow[Allow]
 ```
+
+Fail-safe: unknown host **denies**.
 
 ## Why this restores the cell
 
-Allow-list; parse then pin; block link-local, loopback, metadata; no open redirects.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| link-local metadata URL | false |
+| loopback | false |
+| `https://lab.securecollab.test/og` | true |
 
 ## What this is not
 
-requests.get is not an allow-list.
-
-DNS rebinding after allow — pin IP or block.
+HTTPS-only regex that still allows a metadata IP. Following redirects off the list. `file:` because the scheme is “local.” Pinning DNS as complete without a proxy.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name the predicate. Run:
+
+```
+python3 -m pytest labs/6.5/6.5-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Webhook delivery (7.3) is egress too.
+Clinic: stop fetching whatever URL the form posted.
 
 ## Residual risk
 
-Legitimate preview of customer URLs — dedicated egress proxy.
+DNS rebinding; IPv6 encodings; `v5.0.0-3.7.3` Level 3 user notification on external redirects; dedicated egress proxy for customer sites.

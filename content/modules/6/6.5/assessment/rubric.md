@@ -8,12 +8,12 @@ Server-side requests and protocol parsing
 
 ## Evidence checklist
 
-- [ ] Egress policy, URL validation, origin-consistency tests
-- [ ] Transfer task (Clinic “fetch lab result PDF from URL.”)
-- [ ] Lab `labs/6.5/6.5-lab`: forbidden outcome **Server-side fetch to link-local metadata is allowed**
-- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Egress allow-list and URL predicate tests (no live fetches)
+- [ ] Transfer task (clinic PDF URL; webhooks named)
+- [ ] Lab `labs/6.5/6.5-lab`: forbidden outcome **server-side fetch to link-local metadata is allowed**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: egress_denied{host}.
+- [ ] Operate signal without full URLs: `egress_denied`
 
 ## Rubric
 

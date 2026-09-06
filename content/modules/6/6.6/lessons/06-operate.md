@@ -1,40 +1,44 @@
-# 6.6 — Workflow, race, and exceptional-condition failures (6 Operate)
+# 6.6-LO-06 — Detect invite_replay_denied
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** ASVS 5.0.0 V2 (final); Top 10:2025 A10 awareness. State machines fail open or double-fire.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-2.3.4`.
 
-## Property (start here)
+## Prevention is not absolute
 
-An invite token must be single-use. The second accept('t1') is denied. TOCTOU and retries (2.4) are the same family.
+A new accept route can skip consume. Pair detect and recover. Do not log tokens (4.3) or email addresses as if they were public ids.
 
-## Attacker capabilities and trust assumptions
+## Mental model: second accept is a signal
 
-- **Attacker:** Two tabs; an attacker who copied the token from email logs.
-- **Trust:** Local accept().
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Acc[accept] --> Used{already consumed?}
+  Used -->|yes| Metric["invite_replay_denied += 1"]
+  Metric --> Alert["reason=invite_replay_denied no token"]
+  Alert --> Revoke[Remove extra membership if one landed]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | token_replay metric. |
-| Signal (no bodies) | invite_replay_denied. |
-| Revoke / recover | Remove extra membership; rotate token scheme. |
-| Residual | Email is a phishable channel (4.2). |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `invite_replay_denied` |
+| Signal | request id, invite id; never the raw token |
+| Recover | Keep deny; remove surprise members; rotate token scheme if leaked |
+| Residual | Email phishing (4.2) |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/6.6/6.6-lab`.
+Write one log line you would accept. Tie it to `labs/6.6/6.6-lab`.
+
+```
+log_denied reason=invite_replay_denied invite_id=inv_66a request_id=req_66a
+```
+
+Reject any line that includes the token, a note body, or a real email.
 
 ## Transfer
 
-Password reset; 2.4 share retry; 7.4 jobs.
-
-## Usability
-
-Invite errors (“link already used”) must be announced accessibly so people do not retry into a support backdoor.
+Clinic: detect guardian-invite replays; do not paste the mail link into the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+A SIEM product name is not the property.

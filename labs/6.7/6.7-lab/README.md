@@ -1,9 +1,36 @@
-# Lab 6.7
+# Lab 6.7 — export has a resource account
 
-Authorized: this directory only.
+**Module:** `6.7`
+**Authorized scope:** this directory only. Local course fixture. No public load tests.
+**Invariant:** `allow(4)` is false. `allow(3)` may be true.
+**Root cause class:** no resource account
+**Non-goals:** live RPS against public hosts, CAPTCHA cookbooks.
 
-Export API allows at most 3 calls per principal per window. Availability is a 1.1 cell, not 'buy a bigger box'.
+## Reset
 
-pytest tests/test_property.py --impl vulnerable (must fail) then --impl fixed.
+Re-run pytest. Optional: `git checkout -- labs/6.7/6.7-lab`.
 
-Forbidden: unbounded export.allow(4).
+## Vulnerable behavior (local only)
+
+`allow` always returns true. Forbidden outcome: fourth export allowed.
+
+## Structural fix
+
+`allow(n)` is `n <= 3` on the export action.
+
+## Verify
+
+```
+python3 -m pytest labs/6.7/6.7-lab/tests --impl vulnerable
+python3 -m pytest labs/6.7/6.7-lab/tests --impl fixed
+```
+
+The first command must fail on `allow(4)`. The second must pass. Honest `allow(3)` may pass on both.
+
+## Operate
+
+Signal: `quota_denied`. Do not log CSV bodies.
+
+## Transfer
+
+Clinic bulk-export. Prompt only.

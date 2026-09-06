@@ -1,33 +1,42 @@
-# 6.6 — Workflow, race, and exceptional-condition failures (7 Transfer)
+# 6.6-LO-07 — Transfer: clinic invite-guardian token
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** ASVS 5.0.0 V2 (final); Top 10:2025 A10 awareness. State machines fail open or double-fire.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-2.3.4`. Top 10 A10 is awareness after.
 
-## Property (start here)
+## Change the workplace; keep consume-once
 
-An invite token must be single-use. The second accept('t1') is denied. TOCTOU and retries (2.4) are the same family.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic invite-guardian token. Also name password reset, 2.4 share retry, and 7.4 jobs as the same family with different “once” meanings.
 
-- **Attacker:** Two tabs; an attacker who copied the token from email logs.
-- **Trust:** Local accept().
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite “add guardian” mail link that always returns 200.
 
-**Prompt:** Password reset; 2.4 share retry; 7.4 jobs.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic invite-guardian token.
+1. attacker capabilities (two clicks or a copied link — not a live clinic);
+2. trust assumptions (consume in the store is TCB; HTTP 400 is not);
+3. forbidden outcome (second `accept` true, not “HIPAA”);
+4. a test idea on a **local** fixture only;
+5. residual (TOCTOU without lock; fail-open; token in URL; phishing; Level 3 last-resort handler);
+6. WCAG if a human “link already used” path is in the claim (announced status, not a silent retry loop).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: guardian invite is still a limited seat
+
+```mermaid
+flowchart LR
+  Mail[mail link] --> Belief[UI believes one click]
+  Twice[two accepts] --> Reality[two memberships if not consumed]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | DB unique constraint helps but must be the actual consume.… |
-| Live-target plan | Lab policy |
+| “We return 400” | Error page is not consume |
+| Live clinic probe | Lab policy |
+| A10 as the property | Awareness after the cause |
 
 ## Practice
 
-One page. No keys. The lab `labs/6.6/6.6-lab` stays the only running system you may break.
+One page. No keys. `labs/6.6/6.6-lab` is the only running system you may break.

@@ -1,53 +1,69 @@
-# 6.6 — Workflow, race, and exceptional-condition failures (2 Model)
+# 6.6-LO-02 — A consume-once map a second engineer can test
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** ASVS 5.0.0 V2 (final); Top 10:2025 A10 awareness. State machines fail open or double-fire.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-2.3.4`.
 
-## Property (start here)
+## Can a second engineer name pytest cases from your state map?
 
-An invite token must be single-use. The second accept('t1') is denied. TOCTOU and retries (2.4) are the same family.
+“We have a unique index” is not this lesson. A reviewable model names **states, the consume step, and fail-closed on store errors**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab Phase 1 freeze: local `accept(token)` / `reset()`. No live mailer.
 
-- **Attacker:** Two tabs; an attacker who copied the token from email logs.
-- **Trust:** Local accept().
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: the token is the limited resource
+
+```mermaid
+flowchart TD
+  Token[t1] --> Slot[one membership]
+  Slot --> Once{consumed?}
+```
+
+`v5.0.0-2.3.4` theater-seat locking is this shape. The seat is the invite.
+
+## Mental model: 2.4 retry vs 6.6 consume
+
+```mermaid
+flowchart LR
+  Retry["2.4 same key one grant"] --> Family[same family]
+  Consume[this consume-once] --> Family
+```
+
+Retry wants **one** success that can be repeated safely. Invite wants **one** success that cannot be repeated.
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | invitee, attacker with token copy |
-| Objects | token t1, membership |
-| Actions | accept |
-| Channels | email link, API |
-| TCB | Atomic consume of token. |
-| Untrusted | Email channel, retries |
-| State / time | Two accepts 1ms apart. |
-| 1.1 cell | Integrity of membership workflow. |
+| Subjects | invitee; copied-token attacker |
+| Objects | membership slot |
+| Actions | `accept` |
+| Channels | token string |
+| TCB | used-set consume |
+| Untrusted | extra accepts; store errors |
+| State / time | issued → consumed |
+| 1.1 cell | integrity of membership |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| invitee | fresh t1 | accept | allow |
-| anyone | used t1 | accept | deny |
-| attacker | stolen t1 unused | accept | residual-email |
-| system | expired t1 | accept | deny |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| first accept | `t1` | join | allow |
+| second accept | `t1` | join | deny |
+| first accept | `t2` | join | allow |
+| store error | any | join | deny (fail-closed) |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/6.6/6.6-lab` file `invite.py`.
+Draw the states. Point at `labs/6.6/6.6-lab` file `invite.py`.
 
 ## Transfer
 
-Password reset; 2.4 share retry; 7.4 jobs.
+Password reset codes; job delivery (7.4).
 
 ## Residual risk
 
-Email is a phishable channel (4.2).
+TOCTOU without lock; email phishing (4.2); token in logs (4.3).
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

@@ -7,7 +7,7 @@ difficulty: intermediate
 status: reviewed
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 1.1–2.4 Pass A complete
+- Prior phase Pass A per blueprint §7; 2.4 Pass A complete
 routeTags:
 - complete
 - web-api
@@ -20,11 +20,13 @@ outcomes:
 - Do not instruct live-target attacks or mix awareness lists as compliance
 reviewTriggers:
 - Material SecureCollab change in this module's concern
+- New invite, reset, or retry path
 - Superseding final standard
 invariants:
 - Claims are properties of SecureCollab (or the elective system), not tool names
 - Labs stay in authorized local or official training scope
 - Draft standards are labeled draft
+- Invite tokens are single-use
 threatModelPrompts:
 - What can go wrong for this module's assets?
 - Which trust boundary or interpreter is in play?
@@ -36,35 +38,35 @@ concepts:
 learningObjects:
 - id: 6.6-LO-01
   kind: concept-model
-  title: 'Workflow, race, and exceptional-condition failures: property vs mechanism'
+  title: An invite token is a one-shot consume
   path: lessons/01-property.md
 - id: 6.6-LO-02
   kind: design-exercise
-  title: Model SecureCollab for 6.6
+  title: A consume-once map a second engineer can test
   path: lessons/02-model.md
 - id: 6.6-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: Invite token accepted twice'
+  title: 'Local fixture: invite token accepted twice'
   path: lessons/03-break.md
 - id: 6.6-LO-04
   kind: design-exercise
-  title: Structural fix restoring the 6.6 invariant
+  title: Mark the token used in the same step
   path: lessons/04-build.md
 - id: 6.6-LO-05
   kind: verification-lab
-  title: Forbidden-outcome tests for 6.6
+  title: Fail-on-vulnerable then pass-on-fixed for second accept
   path: lessons/05-verify.md
 - id: 6.6-LO-06
   kind: operations-exercise
-  title: Detect/recover notes for 6.6
+  title: Detect invite_replay_denied
   path: lessons/06-operate.md
 - id: 6.6-LO-07
   kind: transfer-challenge
-  title: 'Transfer: Clinic invite-guardian token.'
+  title: 'Transfer: clinic invite-guardian token'
   path: lessons/07-transfer.md
 - id: 6.6-LO-08
   kind: code-review
-  title: Seeded review for 6.6
+  title: Seeded review of always-true accept
   path: lessons/08-review.md
 labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
@@ -90,13 +92,21 @@ assessmentBlueprint:
   communicate: Residual risk without compliance theater
 masteryGate: '6'
 standardsRefs:
-- source: OWASP ASVS / module anchors (see spec)
-  version: 5.0.0
+- source: OWASP Application Security Verification Standard
+  version: '5.0.0'
   status: final
   requirementIds:
-  - V2
-  - V16
+  - v5.0.0-2.3.4
+  - v5.0.0-2.3.3
+  - v5.0.0-16.5.3
+  - v5.0.0-16.5.4
   url: https://owasp.org/www-project-application-security-verification-standard/
+- source: OWASP Top 10
+  version: '2025'
+  status: awareness
+  requirementIds:
+  - A10
+  url: https://owasp.org/Top10/2025/
 misconceptions:
 - 400 errors are fail-safe
 - Email links are authenticators of the recipient
@@ -105,7 +115,7 @@ operationalConsiderations:
 - invite_replay_denied.
 - Email is a phishable channel (4.2).
 author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+reviewer: pending independent quality and lab-safety review
 lastReviewedAt: '2026-08-24'
 nextReviewAt: '2027-02-24'
 changelog:
@@ -123,3 +133,7 @@ changelog:
 - date: '2026-08-24'
   note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
     Pass C keys isolated'
+- date: '2026-09-06'
+  note: 'Depth pass: consume-once mental models, mermaid diagrams, ASVS v5.0.0-2.3.4
+    / 2.3.3 / 16.5.3, v5.0.0-16.5.4 labeled Level 3 advanced; independent review still
+    required'

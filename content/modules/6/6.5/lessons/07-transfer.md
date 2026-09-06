@@ -1,33 +1,42 @@
-# 6.5 — Server-side requests and protocol parsing (7 Transfer)
+# 6.5-LO-07 — Transfer: clinic fetch lab-result PDF from URL
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** ASVS 5.0.0 V10 (final); API7 awareness; URL is untrusted *structure* (2.1).
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.3.6`. `v5.0.0-3.7.3` Level 3 advanced for user-facing redirects.
 
-## Property (start here)
+## Change the workplace; keep parse-then-allow-list
 
-The lab fetcher must not allow http://169.254.169.254/ (link-local metadata). SSRF is a trust-boundary fail: the server’s network is not the user’s to steer. HTTPS to a named lab host may be allowed.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic “fetch lab result PDF from URL.” Also name webhook delivery (7.3) as the same egress deputy.
 
-- **Attacker:** User who supplies an unfurl/preview URL.
-- **Trust:** Local allowed(url). No real cloud metadata in this VM lesson — we assert the deny.
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite importer that `GET`s whatever URL the form posted.
 
-**Prompt:** Webhook delivery (7.3) is egress too.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic “fetch lab result PDF from URL.”
+1. attacker capabilities (URL field — not a live clinic or cloud metadata probe);
+2. trust assumptions (parsed host allow-list is TCB; “https” prefix is not);
+3. forbidden outcome (`allowed` true for link-local, not “HIPAA”);
+4. a test idea on a **local** fixture only (predicate, no fetch);
+5. residual (redirects, DNS rebinding, IPv6, `file:`, Level 3 redirect notice);
+6. WCAG if a human “could not fetch PDF” path is in the claim (readable error, not a spinner that retries the bad URL).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: the PDF URL is still an egress steering wheel
+
+```mermaid
+flowchart LR
+  Pdf[PDF URL field] --> Belief[UI believes it is a document]
+  Egress[server GET] --> Reality[attacker-chosen authority]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | requests.get is not an allow-list.… |
-| Live-target plan | Lab policy |
+| “HTTPS only” | Scheme is not host identity |
+| Live metadata / clinic probe | Lab policy |
+| API7 as the property | Awareness after the cause |
 
 ## Practice
 
-One page. No keys. The lab `labs/6.5/6.5-lab` stays the only running system you may break.
+One page. No keys. `labs/6.5/6.5-lab` is the only running system you may break.

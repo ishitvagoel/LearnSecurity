@@ -4,16 +4,16 @@
 
 ## Module
 
-Files, paths, uploads, archives, XML, deserialization
+Files, paths, uploads, archives, XML, and deserialization
 
 ## Evidence checklist
 
-- [ ] Hostile-file corpus and isolated processing design
-- [ ] Transfer task (Clinic scan upload.)
-- [ ] Lab `labs/6.4/6.4-lab`: forbidden outcome **Resolved path escapes the lab root**
-- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Hostile-name corpus, prefix tests, isolated processing notes
+- [ ] Transfer task (clinic scan upload; XML/pickle/YAML named)
+- [ ] Lab `labs/6.4/6.4-lab`: forbidden outcome **resolved path escapes the lab root**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: path_escape_denied; malware-scan is extra.
+- [ ] Operate signal without PHI filenames: `path_escape_denied`
 
 ## Rubric
 

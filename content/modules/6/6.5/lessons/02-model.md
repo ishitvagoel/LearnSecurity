@@ -1,53 +1,71 @@
-# 6.5 — Server-side requests and protocol parsing (2 Model)
+# 6.5-LO-02 — An egress map a second engineer can test
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** ASVS 5.0.0 V10 (final); API7 awareness; URL is untrusted *structure* (2.1).
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.3.6`.
 
-## Property (start here)
+## Can a second engineer name pytest cases from your egress map?
 
-The lab fetcher must not allow http://169.254.169.254/ (link-local metadata). SSRF is a trust-boundary fail: the server’s network is not the user’s to steer. HTTPS to a named lab host may be allowed.
+“We only allow HTTPS” is not this lesson. A reviewable model names **scheme, host, and destinations that must deny**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab Phase 1 freeze: local `allowed(url)`. No live fetches.
 
-- **Attacker:** User who supplies an unfurl/preview URL.
-- **Trust:** Local allowed(url). No real cloud metadata in this VM lesson — we assert the deny.
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: allow-list is identity, not a denylist of IPs
+
+```mermaid
+flowchart TD
+  Host[hostname] --> List{in ALLOW?}
+  List -->|yes and https| Allow[Allow]
+  List -->|no| Deny[Deny]
+  Link[link-local] --> Deny
+```
+
+Denylists of “private IPs” miss new encodings. The lab host is a **named** peer.
+
+## Mental model: URL parser is the TCB
+
+```mermaid
+flowchart LR
+  String[raw URL] --> Untrusted[Untrusted]
+  Parsed[scheme + hostname] --> TCB[Lab TCB]
+```
+
+Module 2.1 already treated URL as a structure. Here the structure selects an **egress deputy**.
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | app egress, user URL, metadata service |
-| Objects | URL, scheme, host |
-| Actions | allowed |
-| Channels | server-side HTTP |
-| TCB | Allow-list of hosts/schemes after parse; no redirect to IP. |
-| Untrusted | URL string, redirects, DNS |
-| State / time | Redirect hop after first allow. |
-| 1.1 cell | Confidentiality of the cloud TCB; integrity of egress. |
+| Subjects | member supplying a preview URL |
+| Objects | egress destination |
+| Actions | `allowed` |
+| Channels | URL string |
+| TCB | parsed https + host allow-list |
+| Untrusted | full URL |
+| State / time | one check; DNS later is residual |
+| 1.1 cell | confidentiality of metadata TCB |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| user | lab host https | fetch | allow |
-| user | link-local | fetch | deny |
-| redirect | to link-local | follow | deny |
-| webhook | customer URL | 7.3 | signed+allow-list |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| app | `https://lab.securecollab.test/og` | fetch | allow |
+| attacker | link-local metadata URL | fetch | deny |
+| attacker | loopback | fetch | deny |
+| redirect | off list | follow | deny (named) |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/6.5/6.5-lab` file `ssrf.py`.
+Draw parse → host → allow-list. Point at `labs/6.5/6.5-lab` file `ssrf.py`.
 
 ## Transfer
 
-Webhook delivery (7.3) is egress too.
+Webhook delivery (7.3); open redirect of the browser.
 
 ## Residual risk
 
-Legitimate preview of customer URLs — dedicated egress proxy.
+DNS rebinding; IPv6; `file:`; Level 3 redirect notification.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

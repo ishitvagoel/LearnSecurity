@@ -1,29 +1,31 @@
-# 6.6 — Workflow, race, and exceptional-condition failures (Review)
+# 6.6-LO-08 — Review always-true accept as a PR, not an A10 ticket
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** ASVS 5.0.0 V2 (final); Top 10:2025 A10 awareness. State machines fail open or double-fire.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-2.3.4`.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab invite
 
-An invite token must be single-use. The second accept('t1') is denied. TOCTOU and retries (2.4) are the same family.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Two tabs; an attacker who copied the token from email logs.
-- **Trust:** Local accept().
 Review `labs/6.6/6.6-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/6.6.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|second t1 true| Property["Property - good if tested"]
+  Q -->|HTTP 400| Mechanism[Mechanism - not consume]
+  Q -->|fail-open DB| False[False assurance]
+```
 
-- Seeded smell (label it yourself): accept always True
-- Seeded smell (label it yourself): No unique constraint
-- Seeded smell (label it yourself): Fail-open on DB error
-- Seeded smell (label it yourself): Token in query logs (4.3)
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- `accept` always true
+- No unique constraint / no used write
+- Fail-open on DB error
+- Token in query logs (4.3)
+
+Also reject: live race harnesses, keys in lessons.
 
 ## Misconceptions
 
@@ -33,12 +35,8 @@ Also reject: client trust, interpreter concatenation, Report-Only as enforcement
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_invite_token_is_single_use`.
 
 ## Transfer
 
-Password reset; 2.4 share retry; 7.4 jobs.
-
-## HITL / WCAG 2.2
-
-Invite errors (“link already used”) must be announced accessibly so people do not retry into a support backdoor.
+Clinic PR that “added a unique index” without a second-accept test is incomplete.

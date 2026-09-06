@@ -1,6 +1,6 @@
 # 6.5 — Server-side requests and protocol parsing
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. No exploit walkthroughs.
 
 ## Identity
 
@@ -9,71 +9,73 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** Server-side requests and protocol parsing
 - **phase / track / difficulty:** 6 / core / intermediate
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Blueprint §7; 2.1 URL parsers; 6.1 interpreter shape; 6.4 paths.
 - **routeTags:** complete, web-api
-- **releaseMilestone:** None
+- **releaseMilestone:** null
 - **masteryGate:** 6
 
 ## Objective hierarchy
 
-1. Produce **Egress policy, URL validation, edge-origin consistency tests** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce an **egress allow-list** plus URL tests for SecureCollab unfurl.
+2. Name attacker capabilities (user-supplied preview URL) and trust assumptions (local `allowed()`, no live metadata fetch).
+3. Transfer: clinic “fetch PDF from URL”; webhooks (7.3).
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+2.1 URL is a structure; 6.4 path object; 2.2 hop vs cache key.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- HTTPS URLs cannot SSRF.
+- Private-IP denylists are complete.
+- Open redirect is just UX.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+URL as structure (2.1) → server fetch (this module) → open redirect / desync named residuals → webhooks (7.3).
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true if the preview URL is link-local?
+- What fails if you only check `https://` as a string prefix?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can go wrong when the server fetches attacker-chosen authority?
+- What residual remains if the host allow-list is correct but redirects or DNS rebinding are not?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/6.5/6.5-lab`. Forbidden: allow link-local metadata. Tests call `allowed()` only. No live cloud metadata, no public fetches.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-ASVS V4/V13/V15; API7; Top10 A01/A02 — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- OWASP ASVS 5.0.0 (final): `v5.0.0-1.3.6`, `v5.0.0-13.2.4`, `v5.0.0-3.7.2`; `v5.0.0-3.7.3` **Level 3, labeled advanced**.
+- OWASP API Security Top 10:2023 API7 as **awareness after** the cause.
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+New unfurl, webhook, or redirect; parser change; dedicated egress proxy.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: Egress policy, URL validation, edge-origin consistency tests.
+Evidence: allow-list, deny tests, named redirect/DNS residuals. Feeds Gate 6.
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`egress_denied`. Never rotate a real instance role in this course. Dedicated egress proxy for customer URLs.
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: URL-as-authority mental models; ASVS v5.0.0-1.3.6; L3 3.7.3 labeled advanced |

@@ -1,38 +1,46 @@
-# 6.5 — Server-side requests and protocol parsing (5 Verify)
+# 6.5-LO-05 — Evidence is link-local deny, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** ASVS 5.0.0 V10 (final); API7 awareness; URL is untrusted *structure* (2.1).
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.3.6`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-The lab fetcher must not allow http://169.254.169.254/ (link-local metadata). SSRF is a trust-boundary fail: the server’s network is not the user’s to steer. HTTPS to a named lab host may be allowed.
+“We block private IPs” is not evidence. The oracle is the local pair. Tests **must not** fetch.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** User who supplies an unfurl/preview URL.
-- **Trust:** Local allowed(url). No real cloud metadata in this VM lesson — we assert the deny.
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail link-local allowed"]
+  X["--impl fixed"] --> P["Must pass deny plus lab host"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Server-side fetch to link-local metadata is allowed |
-| Failure | Fail closed: Allow-list; parse then pin; block link-local, loopback, metadata; no open redirects |
+| Negative / abuse | link-local metadata URL denied |
+| Negative | loopback denied |
+| Normal | named lab host on https allowed |
+| Not claimed | live fetch; DNS rebinding; redirects; IPv6 |
 
-Lab tests: `test_property.py` under `labs/6.5/6.5-lab`.
+```
+python3 -m pytest labs/6.5/6.5-lab/tests --impl vulnerable
+python3 -m pytest labs/6.5/6.5-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Server-side fetch to link-local metadata is allowed`
-- `--impl fixed`: **pass**
+Honest lab-host https may pass on both (vulnerable allows any https).
 
-169.254 denied; lab host ok.
+## What the tests do not prove
+
+- Redirect following
+- DNS rebinding / IP pin
+- Open-redirect UX (`v5.0.0-3.7.2` / `v5.0.0-3.7.3` Level 3)
+- Webhook signing (7.3)
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Webhook delivery (7.3) is egress too.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic PDF URL. A test that only asserts the preview image loaded is not this cell.

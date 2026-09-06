@@ -8,12 +8,12 @@ Workflow, race, and exceptional-condition failures
 
 ## Evidence checklist
 
-- [ ] Concurrency tests and repaired state machine
-- [ ] Transfer task (Clinic invite-guardian token.)
-- [ ] Lab `labs/6.6/6.6-lab`: forbidden outcome **Invite token accepted twice**
-- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Consume-once state map and second-accept tests
+- [ ] Transfer task (clinic invite-guardian; reset/jobs named)
+- [ ] Lab `labs/6.6/6.6-lab`: forbidden outcome **invite token accepted twice**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: invite_replay_denied.
+- [ ] Operate signal without tokens: `invite_replay_denied`
 
 ## Rubric
 

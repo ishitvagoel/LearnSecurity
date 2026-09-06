@@ -8,12 +8,12 @@ Resource abuse, automation, and availability
 
 ## Evidence checklist
 
-- [ ] Resource budget, rate policy, cost-abuse tests
-- [ ] Transfer task (Clinic bulk-export patients.)
-- [ ] Lab `labs/6.7/6.7-lab`: forbidden outcome **Unbounded exports (4th allowed in the lab window)**
-- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Resource budget, per-subject quota tests (no public load test)
+- [ ] Transfer task (clinic bulk-export; fan-out/search named)
+- [ ] Lab `labs/6.7/6.7-lab`: forbidden outcome **unbounded exports (4th allowed)**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: quota_denied; cost_alert.
+- [ ] Operate signal without bodies: `quota_denied`
 
 ## Rubric
 

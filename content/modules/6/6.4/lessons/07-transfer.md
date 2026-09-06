@@ -1,33 +1,42 @@
-# 6.4 — Files, paths, uploads, archives, XML, deserialization (7 Transfer)
+# 6.4-LO-07 — Transfer: clinic scan upload
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** ASVS 5.0.0 V12 (final); CWE-22/434/502 as names after the path/interpreter cause.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-5.3.2`. Zip slip is Level 3 advanced.
 
-## Property (start here)
+## Change the workplace; keep prefix-after-canonicalize
 
-A user-supplied path must not resolve outside the lab root. `../etc/passwd` is data that tried to become a different object. This is not a weaponized exploit lesson — we assert prefix.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic scan upload whose original filename is kept. Also name XML entity expansion, pickle, and YAML load as other parsers (same 6.1 shape).
 
-- **Attacker:** Uploader or filename field attacker.
-- **Trust:** Local resolve() under /tmp/sc-lab.
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite “attach imaging” that joins the filename onto a public folder.
 
-**Prompt:** XML entity expansion; pickle; YAML load.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic scan upload.
+1. attacker capabilities (patient or device supplying a filename — not a live clinic);
+2. trust assumptions (canonical prefix is TCB; UUID sticker is not);
+3. forbidden outcome (`resolve` leaves the imaging root, not “HIPAA”);
+4. a test idea on a **local** fixture only (prefix, no host-file trophy);
+5. residual (zip members Level 3; XML/pickle; codecs E4; executing uploads);
+6. WCAG if a human “upload rejected” path is in the claim (readable error, not a silent missing image).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: the scan filename is still a path parser input
+
+```mermaid
+flowchart LR
+  Scan[scan filename] --> Belief[UI believes it is a label]
+  FS[filesystem join] --> Reality[grammar mixed with data]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | Starlette UploadFile.filename is hostile.… |
-| Live-target plan | Lab policy |
+| “We renamed to UUID” | Extra, not the prefix check |
+| Live clinic probe | Lab policy |
+| Zip-bomb cookbook | Lab policy |
 
 ## Practice
 
-One page. No keys. The lab `labs/6.4/6.4-lab` stays the only running system you may break.
+One page. No keys. `labs/6.4/6.4-lab` is the only running system you may break.

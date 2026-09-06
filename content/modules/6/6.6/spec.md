@@ -1,6 +1,6 @@
 # 6.6 — Workflow, race, and exceptional-condition failures
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. No exploit walkthroughs.
 
 ## Identity
 
@@ -9,71 +9,73 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** Workflow, race, and exceptional-condition failures
 - **phase / track / difficulty:** 6 / core / intermediate
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Blueprint §7; 2.4 idempotency; 4.3 token-in-URL.
 - **routeTags:** complete, web-api
-- **releaseMilestone:** None
+- **releaseMilestone:** null
 - **masteryGate:** 6
 
 ## Objective hierarchy
 
-1. Produce **Concurrency/chaos suite and repaired workflow** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce a **single-use invite** state machine plus consume tests.
+2. Name attacker capabilities (two tabs; copied token) and trust assumptions (local `accept()` consume).
+3. Transfer: clinic invite-guardian; password reset; 7.4 jobs.
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+2.4 retry vs second grant; 4.3 query-string tokens; 4.2 phishable email.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- HTTP 400 is fail-safe.
+- Email links authenticate the recipient.
+- Races are only performance.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+Idempotent share (2.4) → consume-once invite (this module) → fail-open errors (V16) → workers (7.4).
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true if `accept` runs twice?
+- What fails if the used flag is checked then set without a lock?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can go wrong when check-then-set is not atomic?
+- What residual remains if consume is correct but email is still a postcard (4.3 / 4.2)?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/6.6/6.6-lab`. Forbidden: invite token accepted twice. Local set, not a live race harness.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-ASVS V2/V16; Top10 A10 — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- OWASP ASVS 5.0.0 (final): `v5.0.0-2.3.4`, `v5.0.0-2.3.3`, `v5.0.0-16.5.3`; `v5.0.0-16.5.4` **Level 3, labeled advanced**.
+- OWASP Top 10:2025 A10 as **awareness after** the cause.
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+New invite, reset, or retry path; fail-open on store errors.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: Concurrency/chaos suite and repaired workflow.
+Evidence: consume-once tests, fail-closed note, named TOCTOU residual. Feeds Gate 6.
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`invite_replay_denied`. Email is phishable (4.2). Do not log tokens (4.3).
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: consume-once mental models; ASVS v5.0.0-2.3.4; L3 16.5.4 labeled advanced |

@@ -1,53 +1,48 @@
-# 6.6 — Workflow, race, and exceptional-condition failures (3 Break)
+# 6.6-LO-03 — Observe second accept, do not trophy a race
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** ASVS 5.0.0 V2 (final); Top 10:2025 A10 awareness. State machines fail open or double-fire.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-2.3.4`.
 
-## Property (start here)
+## Authorized scope
 
-An invite token must be single-use. The second accept('t1') is denied. TOCTOU and retries (2.4) are the same family.
+`labs/6.6/6.6-lab` only. Synthetic token `t1`. No live mail, no multi-host races.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Invite token accepted twice.
 
-- **Attacker:** Two tabs; an attacker who copied the token from email logs.
-- **Trust:** Local accept().
-**Forbidden outcome:** Invite token accepted twice
+## Mental model: accept always true
 
-**Authorized scope:** `labs/6.6/6.6-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable invite.py allows replay.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: second accept True.
-
-## Vulnerable fixture (local)
-
-```python
-_used=False
-def reset():
-    global _used
-    _used=False
-def accept(token):
-    return True
+```mermaid
+flowchart TD
+  Call["accept t1"] --> True[returns true]
+  Again["accept t1 again"] --> True
 ```
+
+The vulnerable tree demonstrates **cause** (token never consumed). Sequential double-accept is enough. Do not build a weaponized race harness.
+
+## What to read in the fixture
+
+`vulnerable/invite.py` returns true every time. `reset()` exists so tests start clean. Tests require first `t1` true, second `t1` false, and a distinct `t2` still able to succeed once on the fixed tree.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Non-atomic check-then-set; token not marked used. |
-| Impact | Extra member or replay after revoke. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Token not marked used |
+| Impact | Extra membership |
+| Not the lesson | A10 as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/6.6/6.6-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/6.6/6.6-lab/tests --impl vulnerable
+```
+
+Record `test_invite_token_is_single_use`. Do not probe public invite links.
 
 ## Transfer
 
-Password reset; 2.4 share retry; 7.4 jobs.
+Clinic guardian invite. Predict without leaving this directory.
 
 ## Non-goals
 

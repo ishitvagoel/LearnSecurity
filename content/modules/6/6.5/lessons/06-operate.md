@@ -1,36 +1,44 @@
-# 6.5 — Server-side requests and protocol parsing (6 Operate)
+# 6.5-LO-06 — Detect egress_denied
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** ASVS 5.0.0 V10 (final); API7 awareness; URL is untrusted *structure* (2.1).
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-1.3.6`.
 
-## Property (start here)
+## Prevention is not absolute
 
-The lab fetcher must not allow http://169.254.169.254/ (link-local metadata). SSRF is a trust-boundary fail: the server’s network is not the user’s to steer. HTTPS to a named lab host may be allowed.
+A new webhook path can fetch again. Pair detect and recover. Do not log full URLs if they contain tokens (4.3). Do not fetch the denied destination “to confirm.”
 
-## Attacker capabilities and trust assumptions
+## Mental model: denied host is a signal
 
-- **Attacker:** User who supplies an unfurl/preview URL.
-- **Trust:** Local allowed(url). No real cloud metadata in this VM lesson — we assert the deny.
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Url[preview URL] --> Deny{not on allow-list?}
+  Deny -->|yes| Metric["egress_denied += 1"]
+  Metric --> Alert["reason=egress_denied no url"]
+  Alert --> Stop[Do not fetch]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | egress deny logs. |
-| Signal (no bodies) | egress_denied{host}. |
-| Revoke / recover | Rotate instance role if a real system was hit — never in this course. |
-| Residual | Legitimate preview of customer URLs — dedicated egress proxy. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `egress_denied` |
+| Signal | request id, reason code; never the full URL if it holds secrets |
+| Recover | Keep deny; do not rotate a real instance role in this course |
+| Residual | DNS rebinding; customer-URL proxy |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/6.5/6.5-lab`.
+Write one log line you would accept. Tie it to `labs/6.5/6.5-lab`.
+
+```
+log_denied reason=egress_denied class=link_local request_id=req_65e
+```
+
+Reject any line that includes a full URL with a query token, a note body, or a live-fetch transcript.
 
 ## Transfer
 
-Webhook delivery (7.3) is egress too.
+Clinic: detect PDF fetches to non-allow-listed hosts; do not paste the URL into the ticket if it has a token.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+A cloud WAF product name is not the property.

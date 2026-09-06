@@ -1,38 +1,45 @@
-# 6.4 — Files, paths, uploads, archives, XML, deserialization (5 Verify)
+# 6.4-LO-05 — Evidence is a prefix, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** ASVS 5.0.0 V12 (final); CWE-22/434/502 as names after the path/interpreter cause.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-5.3.2`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A user-supplied path must not resolve outside the lab root. `../etc/passwd` is data that tried to become a different object. This is not a weaponized exploit lesson — we assert prefix.
+“We use UUID names” is not evidence. The oracle is the local pair.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Uploader or filename field attacker.
-- **Trust:** Local resolve() under /tmp/sc-lab.
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail ../ escape"]
+  X["--impl fixed"] --> P["Must pass prefix or ValueError"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Resolved path escapes the lab root |
-| Failure | Fail closed: Join + canonicalize + prefix; random stored names; never execute uploads |
+| Negative / abuse | `../outside` does not leave the root |
+| Normal | honest `notes/a.txt` stays under the root |
+| Not claimed | zip members; XML entities; pickle; live host reads |
 
-Lab tests: `test_property.py` under `labs/6.4/6.4-lab`.
+```
+python3 -m pytest labs/6.4/6.4-lab/tests --impl vulnerable
+python3 -m pytest labs/6.4/6.4-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Resolved path escapes the lab root`
-- `--impl fixed`: **pass**
+Honest relative names may pass on both.
 
-.. does not escape.
+## What the tests do not prove
+
+- Zip slip (`v5.0.0-5.3.3` Level 3)
+- Magic-byte vs extension (`v5.0.0-5.2.2`)
+- Uploads not executed (`v5.0.0-5.3.1`) except as a named residual
+- Antivirus (`v5.0.0-5.4.3`) — extra, not the property
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-XML entity expansion; pickle; YAML load.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic scan filename. A test that only asserts HTTP 200 on upload is not this cell.

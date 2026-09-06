@@ -1,54 +1,51 @@
-# 6.6 — Workflow, race, and exceptional-condition failures (4 Build)
+# 6.6-LO-04 — Mark the token used in the same step
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** ASVS 5.0.0 V2 (final); Top 10:2025 A10 awareness. State machines fail open or double-fire.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-2.3.4`, `v5.0.0-2.3.3`.
 
-## Property (start here)
+## Structural means consume is the accept
 
-An invite token must be single-use. The second accept('t1') is denied. TOCTOU and retries (2.4) are the same family.
+`accept` must record `t1` as used when it returns true. The next call denies. Structural means that consume — not a unique index you never write, not HTTP 400 after the membership already exists.
 
-## Attacker capabilities and trust assumptions
+## Mental model: write used, then allow once
 
-- **Attacker:** Two tabs; an attacker who copied the token from email logs.
-- **Trust:** Local accept().
-second accept False.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-_used=set()
-def reset():
-    _used.clear()
-def accept(token):
-    if token in _used:
-        return False
-    _used.add(token)
-    return True
+```mermaid
+flowchart TD
+  Call[accept] --> Seen{token in used?}
+  Seen -->|yes| Deny[Deny]
+  Seen -->|no| Add[add to used]
+  Add --> Allow[Allow]
 ```
+
+Fail-safe: store errors **deny** (`v5.0.0-16.5.3`). Production uses a transaction (`v5.0.0-2.3.3`) so add-and-membership commit together.
 
 ## Why this restores the cell
 
-Single-use in a transaction; expire; bind to recipient.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| first `t1` | true |
+| second `t1` | false |
+| first `t2` | true |
 
 ## What this is not
 
-DB unique constraint helps but must be the actual consume.
-
-Used flag without locking still races.
+Used flag without locking (named TOCTOU residual). Fail-open on DB error. Token in query logs (4.3). Email as recipient authenticator (4.2).
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name the predicate. Run:
+
+```
+python3 -m pytest labs/6.6/6.6-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Password reset; 2.4 share retry; 7.4 jobs.
+Clinic: stop treating “link clicked” as unlimited joins.
 
 ## Residual risk
 
-Email is a phishable channel (4.2).
+True concurrent accepts without a lock; `v5.0.0-16.5.4` Level 3 last-resort handler; phishable mail.

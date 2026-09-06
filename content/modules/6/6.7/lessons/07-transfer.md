@@ -1,33 +1,42 @@
-# 6.7 — Resource abuse, automation, and availability (7 Transfer)
+# 6.7-LO-07 — Transfer: clinic bulk-export patients
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** ASVS 5.0.0 V1/V11 (final); API4/API6 awareness. Fairness is a security cell (availability + cost).
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-2.4.1`. API4/API6 awareness after. WCAG 2.2 for the deny message.
 
-## Property (start here)
+## Change the workplace; keep a per-subject resource account
 
-The fourth export in the lab window is denied. Unbounded exports exhaust budget and leak extra copies (5.1).
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic bulk-export patients. Also name notification fan-out and search complexity (7.1).
 
-- **Attacker:** Scripted member; compromised session.
-- **Trust:** Local allow(n).
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite “Export all” with a disabled button in the SPA.
 
-**Prompt:** Notification fan-out; search complexity.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic bulk-export patients.
+1. attacker capabilities (scripted clinician session — not a live clinic);
+2. trust assumptions (server `n <= 3` is TCB; SPA disable and IP rate limit are not);
+3. forbidden outcome (`allow(4)` true, not “HIPAA”);
+4. a test idea on a **local** fixture only (no public load test);
+5. residual (new accounts, GraphQL aliases, Level 3 human timing, extra copies 5.1);
+6. WCAG if a human quota path is in the claim (readable “try tomorrow,” not a spinner that retries).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: bulk export is still a budget row
+
+```mermaid
+flowchart LR
+  Bulk[export all] --> Belief[UI believes one click]
+  N[n = 4] --> Reality[unbounded CSVs if allow is true]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | nginx rate limit without identity is shared-fate.… |
-| Live-target plan | Lab policy |
+| “CAPTCHA is on” | Not a resource account |
+| Live clinic / public load test | Lab policy |
+| Autoscaling | Spends more; does not enforce the cap |
 
 ## Practice
 
-One page. No keys. The lab `labs/6.7/6.7-lab` stays the only running system you may break.
+One page. No keys. `labs/6.7/6.7-lab` is the only running system you may break.

@@ -1,29 +1,31 @@
-# 6.4 — Files, paths, uploads, archives, XML, deserialization (Review)
+# 6.4-LO-08 — Review join-without-canonicalize as a PR, not a CWE ticket
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** ASVS 5.0.0 V12 (final); CWE-22/434/502 as names after the path/interpreter cause.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-5.3.2`.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab uploads
 
-A user-supplied path must not resolve outside the lab root. `../etc/passwd` is data that tried to become a different object. This is not a weaponized exploit lesson — we assert prefix.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Uploader or filename field attacker.
-- **Trust:** Local resolve() under /tmp/sc-lab.
 Review `labs/6.4/6.4-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/6.4.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|../ leaves root| Property["Property - good if tested"]
+  Q -->|denylist of ..| Mechanism[Mechanism - encodings remain]
+  Q -->|Content-Type| False[False assurance]
+```
 
-- Seeded smell (label it yourself): open(user_path)
-- Seeded smell (label it yourself): Blacklist of '..' only
-- Seeded smell (label it yourself): Trust Content-Type
-- Seeded smell (label it yourself): No prefix test
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- `open(user_path)` / join without canonicalize
+- Blacklist of `..` only
+- Trust `Content-Type`
+- No prefix test
+
+Also reject: host-file trophies, keys in lessons.
 
 ## Misconceptions
 
@@ -33,8 +35,8 @@ Also reject: client trust, interpreter concatenation, Report-Only as enforcement
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_dotdot_does_not_escape_root`.
 
 ## Transfer
 
-XML entity expansion; pickle; YAML load.
+Clinic PR that “randomized filenames” without a prefix test is incomplete.

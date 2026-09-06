@@ -1,9 +1,36 @@
-# Lab 6.4
+# Lab 6.4 — a filename is data, not a filesystem object
 
-Authorized: this directory only.
+**Module:** `6.4`
+**Authorized scope:** this directory only. Local course fixture. No host-file trophies.
+**Invariant:** `resolve` stays under `/tmp/sc-lab` after canonicalize. `../` names deny.
+**Root cause class:** path grammar mixed with data
+**Non-goals:** reading host files, zip bombs, XML/pickle gadgets.
 
-Upload names cannot escape the lab root via .. segments. Local path join only.
+## Reset
 
-pytest tests/test_property.py --impl vulnerable (must fail) then --impl fixed.
+Re-run pytest. Optional: `git checkout -- labs/6.4/6.4-lab`.
 
-Forbidden: resolved path leaves /tmp/sc-lab. No real /etc access in tests.
+## Vulnerable behavior (local only)
+
+`resolve` joins the name onto the lab root without canonicalize-and-prefix. Forbidden outcome: resolved path escapes the lab root.
+
+## Structural fix
+
+Join, canonicalize, deny unless the result is the root or a child. Tests assert prefix; they do not open host files.
+
+## Verify
+
+```
+python3 -m pytest labs/6.4/6.4-lab/tests --impl vulnerable
+python3 -m pytest labs/6.4/6.4-lab/tests --impl fixed
+```
+
+The first command must fail on the escape test. The second must pass. Honest relative names may pass on both.
+
+## Operate
+
+Signal: `path_escape_denied`. Do not log PHI filenames.
+
+## Transfer
+
+Clinic scan upload. Prompt only.

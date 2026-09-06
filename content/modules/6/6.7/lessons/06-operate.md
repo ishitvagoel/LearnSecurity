@@ -1,40 +1,44 @@
-# 6.7 — Resource abuse, automation, and availability (6 Operate)
+# 6.7-LO-06 — Detect quota_denied and cost_alert
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** ASVS 5.0.0 V1/V11 (final); API4/API6 awareness. Fairness is a security cell (availability + cost).
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-2.4.1`.
 
-## Property (start here)
+## Prevention is not absolute
 
-The fourth export in the lab window is denied. Unbounded exports exhaust budget and leak extra copies (5.1).
+A new export format can skip the counter. Pair detect and recover. Do not log note bodies in the CSV path (3.1 / 5.1).
 
-## Attacker capabilities and trust assumptions
+## Mental model: fourth try is a signal
 
-- **Attacker:** Scripted member; compromised session.
-- **Trust:** Local allow(n).
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Exp[export] --> Over{n > 3?}
+  Over -->|yes| Metric["quota_denied += 1"]
+  Metric --> Cost["cost_alert if copies still escaped"]
+  Cost --> Stop[Disable token if stolen session]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | export_denied_quota. |
-| Signal (no bodies) | quota_denied; cost_alert. |
-| Revoke / recover | Disable token; bill anomaly. |
-| Residual | Legitimate burst — owned exception. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `quota_denied`; `cost_alert` |
+| Signal | request id, subject id, n; never the CSV body |
+| Recover | Keep deny; revoke session if automated; owned burst exception if documented |
+| Residual | New accounts; GraphQL (7.1) |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/6.7/6.7-lab`.
+Write one log line you would accept. Tie it to `labs/6.7/6.7-lab`.
+
+```
+log_denied reason=quota_denied n=4 subject=user_67e request_id=req_67e
+```
+
+Reject any line that includes note bodies, a real email, or a live RPS trace against a public host.
 
 ## Transfer
 
-Notification fan-out; search complexity.
-
-## Usability
-
-Quota errors must be readable; do not trap keyboard users in a spinner that retries (amplifying load).
+Clinic: detect bulk-export over quota; do not attach the CSV to the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+A CDN WAF product name is not the property.

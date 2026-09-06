@@ -1,38 +1,45 @@
-# 6.6 — Workflow, race, and exceptional-condition failures (5 Verify)
+# 6.6-LO-05 — Evidence is second-accept false, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** ASVS 5.0.0 V2 (final); Top 10:2025 A10 awareness. State machines fail open or double-fire.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-2.3.4`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-An invite token must be single-use. The second accept('t1') is denied. TOCTOU and retries (2.4) are the same family.
+“Unique constraint exists” is not evidence. The oracle is the local pair.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Two tabs; an attacker who copied the token from email logs.
-- **Trust:** Local accept().
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail second t1"]
+  X["--impl fixed"] --> P["Must pass consume-once"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Invite token accepted twice |
-| Failure | Fail closed: Single-use in a transaction; expire; bind to recipient |
+| Negative / abuse | second `t1` denied |
+| Normal | first `t1` allowed; distinct `t2` allowed once |
+| Not claimed | threaded race; mail delivery; lock semantics |
 
-Lab tests: `test_property.py` under `labs/6.6/6.6-lab`.
+```
+python3 -m pytest labs/6.6/6.6-lab/tests --impl vulnerable
+python3 -m pytest labs/6.6/6.6-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Invite token accepted twice`
-- `--impl fixed`: **pass**
+First accept of `t1` may pass on both.
 
-t1 then t1 => False.
+## What the tests do not prove
+
+- Atomic lock under threads (`v5.0.0-2.3.4` production shape)
+- Transaction rollback (`v5.0.0-2.3.3`)
+- Fail-open on errors (`v5.0.0-16.5.3`) except as a named review smell
+- Last-resort handler Level 3 (`v5.0.0-16.5.4`)
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Password reset; 2.4 share retry; 7.4 jobs.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic guardian invite. A test that only asserts HTTP 200 on `/accept` is not this cell.

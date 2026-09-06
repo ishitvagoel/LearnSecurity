@@ -1,6 +1,6 @@
 # 6.4 — Files, paths, uploads, archives, XML, and deserialization
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. No exploit walkthroughs.
 
 ## Identity
 
@@ -9,71 +9,73 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** Files, paths, uploads, archives, XML, and deserialization
 - **phase / track / difficulty:** 6 / core / intermediate
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Blueprint §7; 6.1 interpreter shape; 2.1 parsers.
 - **routeTags:** complete, web-api
-- **releaseMilestone:** None
+- **releaseMilestone:** null
 - **masteryGate:** 6
 
 ## Objective hierarchy
 
-1. Produce **Hostile-file corpus and isolated processing design** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce a **hostile-name corpus** plus prefix tests for SecureCollab upload paths.
+2. Name attacker capabilities (filename field) and trust assumptions (canonical prefix under `/tmp/sc-lab`).
+3. Transfer: clinic scan upload; XML/pickle/YAML named as other parsers.
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+6.1 data vs grammar; 2.1 encodings; uploads are not executed (this module).
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- UUID stored names replace path checks.
+- Antivirus is the upload control.
+- JSON is always a safe deserialize.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+Interpreter shape (6.1) → path object identity (this module) → zip/XML/deserialize residuals → image codecs (E4).
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true if the filename contains `../`?
+- What fails if you strip `..` but never canonicalize?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can go wrong when path grammar mixes with data?
+- What residual remains if the prefix is correct but a zip member or XML parser is not?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/6.4/6.4-lab`. Forbidden: resolved path leaves the lab root. Tests assert prefix/shape only. No real host-file reads.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-ASVS V1/V5; CWE-22/434/502 — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- OWASP ASVS 5.0.0 (final): `v5.0.0-5.3.2`, `v5.0.0-5.3.1`, `v5.0.0-5.2.2`; `v5.0.0-5.3.3` **Level 3, labeled advanced**.
+- CWE-22/434/502 as **awareness after** the cause.
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+New upload processor, zip unpack, XML, or pickle/YAML load.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: Hostile-file corpus and isolated processing design.
+Evidence: prefix test, isolated processing notes, named zip/XML residuals. Feeds Gate 6.
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`path_escape_denied`. Malware scan is extra. Image codecs wait for E4.
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: path-object mental models; ASVS v5.0.0-5.3.2; L3 5.3.3 labeled advanced |

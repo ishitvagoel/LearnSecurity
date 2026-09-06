@@ -1,50 +1,48 @@
-# 6.5 — Server-side requests and protocol parsing (3 Break)
+# 6.5-LO-03 — Observe the predicate, do not trophy metadata
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** ASVS 5.0.0 V10 (final); API7 awareness; URL is untrusted *structure* (2.1).
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.3.6`.
 
-## Property (start here)
+## Authorized scope
 
-The lab fetcher must not allow http://169.254.169.254/ (link-local metadata). SSRF is a trust-boundary fail: the server’s network is not the user’s to steer. HTTPS to a named lab host may be allowed.
+`labs/6.5/6.5-lab` only. Synthetic URLs. **Do not fetch.** No cloud metadata, no public hosts.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Server-side fetch to link-local metadata is allowed.
 
-- **Attacker:** User who supplies an unfurl/preview URL.
-- **Trust:** Local allowed(url). No real cloud metadata in this VM lesson — we assert the deny.
-**Forbidden outcome:** Server-side fetch to link-local metadata is allowed
+## Mental model: scheme-only is not an allow-list
 
-**Authorized scope:** `labs/6.5/6.5-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable ssrf.py allows any URL.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: allowed(link-local) True.
-
-## Vulnerable fixture (local)
-
-```python
-from urllib.parse import urlparse
-def allowed(url):
-    return urlparse(url).scheme in {'http','https'}
+```mermaid
+flowchart TD
+  Call["allowed link-local http"] --> Scheme{http or https?}
+  Scheme -->|yes| True["returns true"]
 ```
+
+The vulnerable tree demonstrates **cause** (server would dial attacker-chosen authority). The link-local address is a **named destination string**. Do not send packets to it.
+
+## What to read in the fixture
+
+`vulnerable/ssrf.py` returns true for any `http`/`https` scheme. Tests require link-local false, loopback false, and the named lab host on https true.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Server fetches attacker-chosen authority. |
-| Impact | In real clouds, credential theft; here, the test fails closed conceptually. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Server fetches attacker-chosen authority |
+| Impact | Metadata TCB would be in reach (not fetched here) |
+| Not the lesson | API7 as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/6.5/6.5-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/6.5/6.5-lab/tests --impl vulnerable
+```
+
+Record `test_link_local_metadata_is_denied`. Do not curl anything.
 
 ## Transfer
 
-Webhook delivery (7.3) is egress too.
+Clinic PDF URL. Predict without leaving this directory.
 
 ## Non-goals
 

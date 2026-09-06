@@ -1,38 +1,45 @@
-# 6.7 — Resource abuse, automation, and availability (5 Verify)
+# 6.7-LO-05 — Evidence is fourth denied, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** ASVS 5.0.0 V1/V11 (final); API4/API6 awareness. Fairness is a security cell (availability + cost).
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-2.4.1`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-The fourth export in the lab window is denied. Unbounded exports exhaust budget and leak extra copies (5.1).
+“Rate limit is on” is not evidence. The oracle is the local pair. Do not load-test public hosts.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Scripted member; compromised session.
-- **Trust:** Local allow(n).
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail allow 4"]
+  X["--impl fixed"] --> P["Must pass deny at 4"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Unbounded exports (4th allowed in the lab window) |
-| Failure | Fail closed: Quota + authz + maybe queue |
+| Negative / abuse | `allow(4)` false |
+| Normal | `allow(3)` and `allow(1)` true |
+| Not claimed | per-IP fairness; GraphQL; live RPS |
 
-Lab tests: `test_property.py` under `labs/6.7/6.7-lab`.
+```
+python3 -m pytest labs/6.7/6.7-lab/tests --impl vulnerable
+python3 -m pytest labs/6.7/6.7-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Unbounded exports (4th allowed in the lab window)`
-- `--impl fixed`: **pass**
+Honest `allow(3)` may pass on both.
 
-fourth export denied.
+## What the tests do not prove
+
+- Human timing Level 3 (`v5.0.0-2.4.2`)
+- Per-subject vs per-IP in production (named in LO-02)
+- File storage quotas (`v5.0.0-5.2.4` Level 3, 6.4)
+- Cost of a real cloud bill
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Notification fan-out; search complexity.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic bulk-export. A test that only asserts HTTP 200 on `/export` is not this cell.

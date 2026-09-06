@@ -1,62 +1,84 @@
-# 6.6 — Workflow, race, and exceptional-condition failures (1 Property)
+# 6.6-LO-01 — An invite token is a one-shot consume
 
-**Kind:** concept-model  
-**Loop step:** 1 Property  
-**Standards:** ASVS 5.0.0 V2 (final); Top 10:2025 A10 awareness. State machines fail open or double-fire.
+**Kind:** concept-model
+**Loop step:** 1 Property
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-2.3.4`, `v5.0.0-2.3.3`, `v5.0.0-16.5.3`; `v5.0.0-16.5.4` is **Level 3, advanced**. Top 10:2025 A10 is *awareness after* the cause. A unique index is not this sentence until it is the consume.
 
-## Property (start here)
+## The claim this module owns
 
-An invite token must be single-use. The second accept('t1') is denied. TOCTOU and retries (2.4) are the same family.
+SecureCollab Phase 1 invite is a **membership workflow**. The token is a capability to join once. Module 2.4 already taught that a retry is not a second grant. This module’s cell is **consume-once** when two tabs or a copied link fire `accept`.
 
-## Attacker capabilities and trust assumptions
+> `accept('t1')` may be true once. The second `accept('t1')` must be false. TOCTOU and retries are the same family.
 
-- **Attacker:** Two tabs; an attacker who copied the token from email logs.
-- **Trust:** Local accept().
-**Mechanism (not the property):** DB unique constraint helps but must be the actual consume.
+The forbidden outcome is **an invite token accepted twice**. That is a 1.1 integrity failure of membership: an extra member, or replay after revoke.
 
-Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
+ASVS `v5.0.0-2.3.4` wants locking so limited resources cannot be double-booked. `v5.0.0-2.3.3` wants the business operation to succeed entirely or roll back. `v5.0.0-16.5.3` wants fail-secure (no fail-open on validation errors). `v5.0.0-16.5.4` (last-resort error handler) is **Level 3, advanced**.
+
+## Mental model: issued → consumed → dead
+
+```mermaid
+flowchart LR
+  Issued[issued] --> First[first accept]
+  First --> Consumed[consumed]
+  Consumed --> Second[second accept]
+  Second --> Dead[denied]
+```
+
+The attacker is two tabs, or anyone who copied the token from mail logs (4.3). Trust is local `accept()`. Email is not an authenticator of the recipient (4.2).
+
+**Mechanism (not the property):** a DB unique constraint you never hit, HTTP 400, or “users won’t double-click.”
+
+## Mental model: check-then-set is two steps
+
+```mermaid
+flowchart TD
+  Check{used?} --> Set[mark used]
+  Check --> Gap[another accept fits here]
+```
+
+Used flag without locking still races. This lab’s oracle is sequential second-accept, which is enough to show the missing consume. A real lock/transaction is the production shape (`v5.0.0-2.3.3` / `v5.0.0-2.3.4`).
 
 ## Root cause vs impact vs prevention vs detection vs recovery
 
-| Slice | For 6.6 |
+| Slice | For this property |
 |---|---|
-| Root cause | Non-atomic check-then-set; token not marked used. |
-| Preconditions | second accept True. |
-| Impact (1.1 cell) | Integrity of membership workflow. — Extra member or replay after revoke. |
-| Prevention | Single-use in a transaction; expire; bind to recipient. |
-| Detection | token_replay metric. |
-| Recovery | Remove extra membership; rotate token scheme. |
+| Root cause | Non-atomic check-then-set; token never marked used |
+| Preconditions | second `accept` is true |
+| Trigger | Two accepts of `t1` |
+| Impact | Integrity of membership workflow |
+| Prevention | Consume in the same step; expire; bind to recipient |
+| Detection | `invite_replay_denied` |
+| Recovery | Remove extra membership; rotate token scheme |
 
-## Framework defaults vs application guarantees
+## Framework defaults versus the consume guarantee
 
-DB unique constraint helps but must be the actual consume.
+A unique constraint helps only if `accept` actually inserts/updates that row. FastAPI does not consume tokens. Fail-open on DB error issues a new membership anyway (`v5.0.0-16.5.3`).
 
-## Mechanism limits and bypasses
+## Mechanism limits
 
-Used flag without locking still races.
-
-New token via fail-open email error.
-
-## Residual risk
-
-Email is a phishable channel (4.2).
-
-## Practice
-
-State: issued → consumed → dead.
-
-Run `labs/6.6/6.6-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
-
-## Transfer
-
-Password reset; 2.4 share retry; 7.4 jobs.
-
-Clinic invite-guardian token.
-
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.
+- Sequential consume still races without a lock — named residual.
+- Fail-open email errors mint a new token.
+- Query-string tokens leak (4.3). Email is phishable (4.2).
 
 ## Usability and accessibility
 
-Invite errors (“link already used”) must be announced accessibly so people do not retry into a support backdoor.
+“Link already used” must be announced (WCAG 2.2 4.1.3). Do not hide the error so people retry into a support backdoor that reissues without consume.
+
+## Practice
+
+Draw issued → consumed → dead. Then run:
+
+```
+python3 -m pytest labs/6.6/6.6-lab/tests --impl vulnerable
+python3 -m pytest labs/6.6/6.6-lab/tests --impl fixed
+```
+
+The first command must fail. The second must pass.
+
+## Transfer
+
+Clinic invite-guardian token. Password reset; 2.4 share retry; 7.4 jobs.
+
+## Non-goals
+
+Live race exploits, dumping lab Python into notes. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not in this file.

@@ -1,53 +1,50 @@
-# 6.4 — Files, paths, uploads, archives, XML, deserialization (4 Build)
+# 6.4-LO-04 — Canonicalize, then require the lab prefix
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** ASVS 5.0.0 V12 (final); CWE-22/434/502 as names after the path/interpreter cause.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-5.3.2`.
 
-## Property (start here)
+## Structural means the object is inside the root
 
-A user-supplied path must not resolve outside the lab root. `../etc/passwd` is data that tried to become a different object. This is not a weaponized exploit lesson — we assert prefix.
+`resolve` must join, canonicalize, and deny unless the result is the root or a child of `/tmp/sc-lab`. Structural means that prefix check — not a denylist of `..`, not a UUID filename sticker.
 
-## Attacker capabilities and trust assumptions
+## Mental model: deny if not under root
 
-- **Attacker:** Uploader or filename field attacker.
-- **Trust:** Local resolve() under /tmp/sc-lab.
-resolve either raises or stays under /tmp/sc-lab.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-from pathlib import Path
-ROOT=Path('/tmp/sc-lab').resolve()
-def resolve(name):
-    p = (ROOT / name).resolve()
-    if ROOT not in p.parents and p != ROOT:
-        raise ValueError('escape')
-    return str(p)
+```mermaid
+flowchart TD
+  Call[resolve] --> P[canonicalize join]
+  P --> Under{under root?}
+  Under -->|yes| Allow[Allow]
+  Under -->|no| Deny[ValueError]
 ```
+
+Fail-safe: if canonicalize is uncertain, **deny**.
 
 ## Why this restores the cell
 
-Join + canonicalize + prefix; random stored names; never execute uploads.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| honest `notes/a.txt` | under `/tmp/sc-lab` |
+| `../outside` | `ValueError` (or not under root) |
 
 ## What this is not
 
-Starlette UploadFile.filename is hostile.
-
-Allow-list of .png still fails if the processor parses XML (XXE) — name it.
+Blacklist of `..` only. Trusting `Content-Type`. Executing uploads. Unpacking zip members with user paths (`v5.0.0-5.3.3` Level 3).
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name the predicate. Run:
+
+```
+python3 -m pytest labs/6.4/6.4-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-XML entity expansion; pickle; YAML load.
+Clinic: stop joining the original scan filename onto a public folder.
 
 ## Residual risk
 
-Image codecs (memory) — E4.
+Zip slip Level 3; XML/pickle; image codecs (E4); `v5.0.0-5.3.1` execution if you later serve from an interpreted directory.

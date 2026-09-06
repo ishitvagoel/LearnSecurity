@@ -1,29 +1,31 @@
-# 6.7 — Resource abuse, automation, and availability (Review)
+# 6.7-LO-08 — Review unbounded allow as a PR, not an API4 ticket
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** ASVS 5.0.0 V1/V11 (final); API4/API6 awareness. Fairness is a security cell (availability + cost).
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-2.4.1`.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab export
 
-The fourth export in the lab window is denied. Unbounded exports exhaust budget and leak extra copies (5.1).
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Scripted member; compromised session.
-- **Trust:** Local allow(n).
 Review `labs/6.7/6.7-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/6.7.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|allow 4 true| Property["Property - good if tested"]
+  Q -->|SPA disabled| Mechanism[Mechanism - client]
+  Q -->|IP rate limit| False[False assurance]
+```
 
-- Seeded smell (label it yourself): No cap
-- Seeded smell (label it yourself): Limit only in frontend
-- Seeded smell (label it yourself): Global IP limit
-- Seeded smell (label it yourself): No test fourth denied
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- No cap (`allow` always true)
+- Limit only in the frontend
+- Global IP limit
+- No test that the fourth is denied
+
+Also reject: public load tests, keys in lessons.
 
 ## Misconceptions
 
@@ -33,12 +35,8 @@ Also reject: client trust, interpreter concatenation, Report-Only as enforcement
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_fourth_export_is_denied`.
 
 ## Transfer
 
-Notification fan-out; search complexity.
-
-## HITL / WCAG 2.2
-
-Quota errors must be readable; do not trap keyboard users in a spinner that retries (amplifying load).
+Clinic PR that “rate-limited at nginx” without a per-subject fourth-export test is incomplete.

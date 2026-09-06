@@ -1,53 +1,70 @@
-# 6.4 — Files, paths, uploads, archives, XML, deserialization (2 Model)
+# 6.4-LO-02 — A prefix map a second engineer can test
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** ASVS 5.0.0 V12 (final); CWE-22/434/502 as names after the path/interpreter cause.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-5.3.2`.
 
-## Property (start here)
+## Can a second engineer name pytest cases from your path map?
 
-A user-supplied path must not resolve outside the lab root. `../etc/passwd` is data that tried to become a different object. This is not a weaponized exploit lesson — we assert prefix.
+“We store UUID names” is not this lesson. A reviewable model names **the root, the canonicalize step, and which parsers are out of this fixture**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab Phase 1 freeze: local `resolve(name)` under `/tmp/sc-lab`. No live host reads.
 
-- **Attacker:** Uploader or filename field attacker.
-- **Trust:** Local resolve() under /tmp/sc-lab.
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: the object is the canonical path
+
+```mermaid
+flowchart TD
+  Root["/tmp/sc-lab"] --> TCB[Lab TCB]
+  Name[name] --> Untrusted[Untrusted data]
+  Untrusted --> Join[join then canonicalize]
+```
+
+If the canonical result is not the root or a child of the root, deny.
+
+## Mental model: stored name vs display name
+
+```mermaid
+flowchart LR
+  Stored[random stored key] --> Disk[Disk object]
+  Display[user filename] --> Meta[Metadata only]
+```
+
+A random stored name is extra. It is not a substitute for the prefix check on any path you still join.
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | app, filesystem, user filename |
-| Objects | resolved path, root |
-| Actions | resolve |
-| Channels | upload name, archive member (transfer) |
-| TCB | realpath + prefix check after normalization (2.1). |
-| Untrusted | filename, symlink, zip slip members |
-| State / time | Extract then later process. |
-| 1.1 cell | Authorization of *which file object* plus integrity of the host. |
+| Subjects | uploader |
+| Objects | file under lab root |
+| Actions | `resolve` |
+| Channels | filename field |
+| TCB | canonical prefix `/tmp/sc-lab` |
+| Untrusted | `name` |
+| State / time | one resolve |
+| 1.1 cell | which file object |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| user | safe name | store | under-root |
-| user | .. path | resolve | deny |
-| zip member | .. | extract | deny |
-| processor | upload | exec | deny |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| app | `notes/a.txt` | resolve | under root |
+| attacker | `../outside` | resolve | deny |
+| zip member | stored path | unpack | 5.3.3 advanced |
+| XML | entity | expand | named residual |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/6.4/6.4-lab` file `path.py`.
+Draw join → canonicalize → prefix. Point at `labs/6.4/6.4-lab` file `path.py`.
 
 ## Transfer
 
-XML entity expansion; pickle; YAML load.
+Clinic scan filename; zip member names.
 
 ## Residual risk
 
-Image codecs (memory) — E4.
+Zip slip Level 3; XML/pickle; codecs (E4).
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.
