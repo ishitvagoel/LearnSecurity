@@ -1,3 +1,5 @@
+import { displayHeading } from "./plainCopy";
+
 export type TocHeading = {
   id: string;
   text: string;
@@ -115,12 +117,12 @@ export function extractHeadings(source: string): TocHeading[] {
     }
     if (line.startsWith("## ")) {
       const text = plainHeadingText(line.slice(3));
-      out.push({ id: alloc(text), text, level: 2 });
+      out.push({ id: alloc(text), text: displayHeading(text), level: 2 });
       continue;
     }
     if (line.startsWith("### ")) {
       const text = plainHeadingText(line.slice(4));
-      out.push({ id: alloc(text), text, level: 3 });
+      out.push({ id: alloc(text), text: displayHeading(text), level: 3 });
     }
   }
   return out;
@@ -128,31 +130,35 @@ export function extractHeadings(source: string): TocHeading[] {
 
 export function sectionKindFromHeading(text: string): LessonSectionKind | null {
   const t = plainHeadingText(text).toLowerCase();
-  if (t.startsWith("property")) {
+  if (t.startsWith("property") || t === "the rule") {
     return "property";
   }
   if (t === "practice") {
     return "practice";
   }
-  if (t.startsWith("transfer")) {
+  if (t.startsWith("transfer") || t.startsWith("use it somewhere new")) {
     return "transfer";
   }
-  if (t.startsWith("residual risk")) {
+  if (t.startsWith("residual risk") || t.startsWith("what can still go wrong")) {
     return "residual";
   }
-  if (t.startsWith("non-goals") || t.startsWith("nongoals")) {
+  if (
+    t.startsWith("non-goals") ||
+    t.startsWith("nongoals") ||
+    t.startsWith("what this page is not doing")
+  ) {
     return "nongoal";
   }
-  if (t.startsWith("mechanism limits")) {
+  if (t.startsWith("mechanism limits") || t.startsWith("what the tool cannot do")) {
     return "limits";
   }
-  if (t.startsWith("why this")) {
+  if (t.startsWith("why this") || t.startsWith("why it happens")) {
     return "why";
   }
-  if (t.startsWith("usability")) {
+  if (t.startsWith("usability") || t.startsWith("can people still use it")) {
     return "usability";
   }
-  if (t.startsWith("mental model")) {
+  if (t.startsWith("mental model") || t.startsWith("picture")) {
     return "mental";
   }
   return null;

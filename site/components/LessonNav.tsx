@@ -1,6 +1,7 @@
 import type { ReactElement } from "react";
 import Link from "next/link";
 import { kindLabel } from "@/lib/headings";
+import { plainLessonTitle } from "@/lib/plainCopy";
 import { lessonHref, moduleHref } from "@/lib/loadCurriculum";
 
 export type LessonNavItem = {
@@ -51,7 +52,7 @@ export function LessonNav({
                   {index + 1}
                 </span>
                 <span>
-                  <span className="block">{lesson.title}</span>
+                    <span className="block">{plainLessonTitle(lesson.title)}</span>
                   <span className="block text-xs font-normal text-stone-600">
                     {kindLabel(lesson.kind)}
                   </span>
@@ -87,7 +88,7 @@ export function LessonPager({
           <span className="block text-xs uppercase tracking-wide text-stone-600">
             Previous
           </span>
-          <span className="mt-1 block font-medium text-blue-900">{prev.title}</span>
+          <span className="mt-1 block font-medium text-blue-900">{plainLessonTitle(prev.title)}</span>
         </Link>
       ) : (
         <p className="rounded-lg border border-dashed border-stone-200 px-4 py-3 text-sm text-stone-600">
@@ -102,7 +103,7 @@ export function LessonPager({
           <span className="block text-xs uppercase tracking-wide text-stone-600">
             Next
           </span>
-          <span className="mt-1 block font-medium text-blue-900">{next.title}</span>
+          <span className="mt-1 block font-medium text-blue-900">{plainLessonTitle(next.title)}</span>
         </Link>
       ) : (
         <Link

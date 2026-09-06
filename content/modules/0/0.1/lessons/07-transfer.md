@@ -1,50 +1,50 @@
-# 0.1-LO-07 — Transfer: contractor asked to test a customer WordPress
+# Somewhere new: a contractor asked to test a customer WordPress
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
 **Standards:** CSF 2.0 GV. WSTG 4.2 as method, not a licence. NICE as role language, not a permit.
 
-## Change the workplace; keep reachability from meaning authorization
+## Change the workplace; keep “it answered” from meaning permission
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab / course sentence was: `target_is_authorized("https://example.com/")` is false. Rewrite it for a workplace paste without changing the fork.
+Do not answer with a “top ten bugs” list or a scanner as the definition of security. The course sentence was: `target_is_authorized("https://example.com/")` is false. Rewrite it for a workplace paste without changing the idea.
 
 **Prompt:** A contractor asked to “quickly test our customer’s WordPress.” Also name a company staging URL.
 
-**Product sketch:** “It has a login page so it’s a lab,” plus “WSTG has an authorization chapter so we can hit it.”
+**Product sketch:** “It has a login page so it’s a lab,” plus “the guide has an authorization chapter so we can hit it.”
 
 Rewrite the course sentence. Include:
 
-1. attacker capabilities (tired paste of a customer host — **not** an instruction to hit the customer host, the staging URL, or a public login page);
-2. trust assumptions (written allow-list is TCB; WSTG / NICE / Burp / robots.txt / “it connected” are not);
-3. forbidden outcome (`target_is_authorized` true for a public or customer host, not “unprofessional”);
-4. a test idea on a **local** fixture only (do not fetch the WordPress; reuse the `example.com` literal shape);
-5. residual (redirects, hosts-file, DNS rebinding, cloud Juice Shop you do not own);
-6. WCAG if a scope-consent UI exists (keyboard-operable stop; not color-only).
+1. who might try (a tired paste of a customer host — **not** an instruction to hit the customer host, the staging URL, or a public login page);
+2. what you trust (the written allow-list; not a testing guide, a job title, a proxy, robots.txt, or “it connected”);
+3. what must not happen (`target_is_authorized` true for a public or customer host, not merely “unprofessional”);
+4. a check idea on **local** files only (do not fetch the WordPress; reuse the `example.com` literal shape);
+5. leftover risk (redirects, hosts-file, DNS tricks, a cloud Juice Shop you do not own);
+6. if a consent screen exists, it must work from the keyboard, not by color only.
 
-## Mental model: login page vs written scope
+## Picture: login page vs written scope
 
 ```mermaid
 flowchart LR
   Login[has a login page] --> Belief[in scope]
-  Write[written hosts] --> Reality[authorization]
+  Write[written hosts] --> Reality[permission]
 ```
 
-A login page is a mechanism observation. Written hosts are the authorization cell. WSTG tells you *how* to test after the host is in the list. NICE names jobs. Neither enlarges the list.
+A login page is a tool observation. Written hosts are the permission check. A testing guide tells you *how* to test after the host is on the list. A job-title list names jobs. Neither enlarges the list.
 
-## What graders reject
+## What is not good enough
 
 | Reject | Why |
 |---|---|
-| “WSTG / Burp / NICE” | Not the allow-list |
-| Fetch the customer WordPress | Lab policy |
-| “robots.txt allowed it” | Not authorization |
+| “The guide / a proxy / a job title” | Not the allow-list |
+| Fetch the customer WordPress | Course rules |
+| “robots.txt allowed it” | Not permission |
 | “I’ll be careful” | Not evidence |
-| Cloud Juice Shop you do not own | Not this course’s local official-training exception |
+| A cloud Juice Shop you do not own | Not this course’s local official-training exception |
 
 ## Practice
 
 One page. No keys. `labs/0.1/0.1-orientation` is the only running system you may break. Do not hit the WordPress, the staging URL, or example.com over the network.
 
-## Non-goals
+## What this page is not doing
 
-Live-target walkthroughs. Claiming Gate 0 from this page. Weaponized payloads “to demonstrate WSTG.”
+Live-target walkthroughs. Claiming the first check-in from this page. Ready-made attack recipes “to demonstrate the guide.”

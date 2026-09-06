@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { LessonReader } from "@/components/LessonReader";
 import { parseLessonLead } from "@/lib/headings";
 import { topicTitle } from "@/lib/catalog";
+import { plainLessonTitle } from "@/lib/plainCopy";
 import {
   loadAllModules,
   loadLessons,
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }: Props) {
     return { title: "Page" };
   }
   const lo = loadLessons(mod).find((x) => x.filename.replace(/\.md$/, "") === lesson);
-  return { title: lo ? `${mod.id} · ${lo.title}` : `${mod.id} · ${lesson}` };
+  return { title: lo ? `${mod.id} · ${plainLessonTitle(lo.title)}` : `${mod.id} · ${lesson}` };
 }
 
 export default async function LessonPage({ params }: Props) {
@@ -58,7 +59,7 @@ export default async function LessonPage({ params }: Props) {
     <LessonReader
       moduleId={mod.id}
       moduleTitle={topicTitle(mod)}
-      lessonTitle={lo.title}
+      lessonTitle={plainLessonTitle(lo.title)}
       kind={lead.kind || lo.kind}
       index={index}
       lessons={lessons.map((item) => ({

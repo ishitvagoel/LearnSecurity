@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { ProgressToggle } from "@/components/ProgressToggle";
 import { Chip, PageHeader, PageShell } from "@/components/ui";
 import { kindLabel } from "@/lib/headings";
+import { plainLessonTitle } from "@/lib/plainCopy";
 import {
   difficultyLabel,
   formatMinutes,
@@ -92,7 +93,9 @@ export default async function ModulePage({ params }: Props) {
                     {i + 1}
                   </span>
                   <span>
-                    <span className="block font-medium text-blue-900">{lo.title}</span>
+                    <span className="block font-medium text-blue-900">
+                      {plainLessonTitle(lo.title)}
+                    </span>
                     <span className="block text-sm text-stone-600">{kindLabel(lo.kind)}</span>
                   </span>
                 </Link>
@@ -101,7 +104,7 @@ export default async function ModulePage({ params }: Props) {
                   <span className="w-6 shrink-0 font-mono text-sm text-stone-500">
                     {i + 1}
                   </span>
-                  {lo.title}
+                  {plainLessonTitle(lo.title)}
                 </span>
               )}
             </li>

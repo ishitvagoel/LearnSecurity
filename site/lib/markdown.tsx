@@ -7,6 +7,7 @@ import {
   sectionKindFromHeading,
   type LessonSectionKind,
 } from "./headings";
+import { displayHeading, plainMechanismLead } from "./plainCopy";
 
 function safeHref(href: string): string | null {
   const trimmed = href.trim();
@@ -119,10 +120,6 @@ function renderTable(rows: string[], key: string): ReactNode {
   );
 }
 
-function isMechanismAside(text: string): boolean {
-  return text.startsWith("**Mechanism (not the property):**");
-}
-
 /** Trusted, reviewed Markdown only (curriculum tree). Not MDX. */
 export function Markdown({ source }: { source: string }): ReactNode {
   const lines = source.replace(/\r\n/g, "\n").split("\n");
@@ -169,7 +166,7 @@ export function Markdown({ source }: { source: string }): ReactNode {
         aria-labelledby={current.headingId}
       >
         <h2 id={current.headingId} className="lesson-h2 mt-0">
-          {inline(current.headingText)}
+          {inline(displayHeading(current.headingText))}
         </h2>
         {current.children}
       </section>,
@@ -182,10 +179,11 @@ export function Markdown({ source }: { source: string }): ReactNode {
     }
     const text = para.join(" ");
     para = [];
-    if (isMechanismAside(text)) {
+    const mechanism = plainMechanismLead(text);
+    if (mechanism) {
       pushNode(
         <aside key={nextKey("mech")} className="lesson-mechanism">
-          {inline(text)}
+          {inline(mechanism)}
         </aside>,
       );
       return;
@@ -262,7 +260,7 @@ export function Markdown({ source }: { source: string }): ReactNode {
     const cls = level === 2 ? "lesson-h2" : "lesson-h3";
     pushNode(
       <Tag key={nextKey("h")} id={alloc(plainHeadingText(raw))} className={cls}>
-        {inline(raw)}
+        {inline(displayHeading(raw))}
       </Tag>,
     );
   };

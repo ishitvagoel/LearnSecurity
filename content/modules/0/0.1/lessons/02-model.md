@@ -1,16 +1,16 @@
-# 0.1-LO-02 — In-scope hosts vs stop condition
+# In-scope hosts vs when you stop
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
 **Standards:** CSF 2.0 GV. WSTG 4.2 as method catalogue.
 
-## Can a second engineer name the host check from your scope sheet?
+## Can a second person name the host check from your scope sheet?
 
-“I’ll be careful” is not this lesson. A reviewable model names **allowed hosts, stop condition, and what you do not fetch**.
+“I’ll be careful” is not this lesson. A reviewable picture names **allowed hosts, when you stop, and what you do not fetch**.
 
-SecureCollab freeze: local `target_is_authorized(url)`. Do not open example.com.
+For the notes app: a local `target_is_authorized(url)` helper. Do not open example.com.
 
-## Mental model: three named hosts
+## Picture: three named hosts
 
 ```mermaid
 flowchart TD
@@ -20,51 +20,51 @@ flowchart TD
   Pub["example.com"] --> Deny[out of scope]
 ```
 
-## Mental model: vocabulary is not a target list
+## Picture: vocabulary is not a target list
 
 ```mermaid
 flowchart LR
   Vuln[vulnerability] --> Word[vocabulary]
   Threat[threat] --> Word
   Risk[risk] --> Word
-  Host[allow-listed host] --> Scope[this cell]
+  Host[allow-listed host] --> Scope[this check]
   Word --> NotHost[not a URL]
 ```
 
-## Step 1: freeze pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | learner with a proxy; future tired self |
-| Objects | lab apps; uninvolved public operators |
+| Subjects | you with a proxy; your future tired self |
+| Objects | practice apps; uninvolved public operators |
 | Actions | `target_is_authorized` |
-| Channels | typed URL; redirect |
-| TCB | written allow-list |
-| Untrusted | any other host; blog snippets |
-| State / time | stop when redirect leaves allow-list |
-| 1.1 cell | authorization of the tester |
+| Channels | a typed URL; a redirect |
+| What you trust | the written allow-list |
+| What you do not trust | any other host; blog snippets |
+| State / time | stop when a redirect leaves the list |
+| The rule | permission of the tester |
 
-## Step 2: write cells
+## Step 2: write the rules
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| learner | example.com | GET | deny |
-| learner | 127.0.0.1 lab | GET | may allow |
-| WSTG chapter | public host | treat as in-scope | deny |
+| you | example.com | GET | deny |
+| you | 127.0.0.1 lab | GET | may allow |
+| a testing-guide chapter | public host | treat as in-scope | deny |
 | cloud Juice Shop | third-party | test | deny |
 
 ## Practice
 
 Draw the map. Point at `labs/0.1/0.1-orientation` file `scope.py`.
 
-## Transfer
+## Use it somewhere new
 
-Written authorization for company staging vs a Slack thumbs-up.
+Written permission for company staging vs a Slack thumbs-up.
 
-## Residual risk
+## What can still go wrong
 
 Redirects; hosts-file aliases.
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+A “top ten bugs” list as the definition of security. Answer keys stay out of lessons.

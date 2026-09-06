@@ -1,20 +1,20 @@
-# 0.1-LO-01 — Reachability is not authorization
+# Connecting is not permission
 
 **Kind:** concept-model
 **Loop step:** 1 Property
 **Standards:** NIST CSF 2.0 (final) GV/ID. OWASP WSTG 4.2 (final) as *lab method*, not a licence. NIST SP 800-181r1 NICE (final) as role language. WCAG 2.2 (final).
 
-## The claim this module owns
+## The rule
 
-This course tests **SecureCollab labs** and named official training apps. **Authorization of the tester** is whether the host is on the written allow-list. TCP connecting is not that check.
+This course lets you practice on **the notes-app files** and on named official training apps. You are allowed to test a host only if it is on the written list. The fact that a computer answers is not that permission.
 
 > `target_is_authorized("https://example.com/")` must be false. `http://127.0.0.1:8000/notes` may be true.
 
-The forbidden outcome is **HTTP to a non-allowlisted host treated as authorized**. That is both a legal failure and an engineering failure (safety + accountability in 1.1).
+What must not happen: treating a visit to a host that is not on the list as allowed. That is both a legal problem and an engineering problem.
 
-CSF GV is governance language, not a pentest permit. WSTG 4.2 names *how* to test an **in-scope** app. NICE work roles name jobs; they do not authorize a scan. Burp, ZAP, or curl existing is a tool, not a grant.
+A testing guide tells you *how* to test an app that is already in scope. A job-title list names jobs. A proxy existing on your laptop is a tool. None of those is permission to hit a public website.
 
-## Mental model: connect vs allow-list
+## Picture: connect vs allow-list
 
 ```mermaid
 flowchart TD
@@ -25,45 +25,45 @@ flowchart TD
   Host -->|yes| Ok[may test locally]
 ```
 
-## Mental model: WSTG is not a licence
+## Picture: a testing guide is not a licence
 
 ```mermaid
 flowchart LR
-  Wstg[WSTG chapter] --> Method[how to test]
-  Scope[written hosts] --> Authz[this cell]
-  Wstg --> NotPermit[not authorization]
+  Wstg[testing guide chapter] --> Method[how to test]
+  Scope[written hosts] --> Authz[this check]
+  Wstg --> NotPermit[not permission]
 ```
 
 **Mechanism (not the property):** robots.txt; a recruiter staging URL; “it has a login page.”
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | For this property |
+| Slice | For this rule |
 |---|---|
-| Root cause | Authorization collapsed into reachability |
-| Preconditions | Proxy in hand; public URL one paste away |
-| Trigger | Tired paste of a blog host |
-| Impact | Unauthorized testing — legal, expulsion, harm to uninvolved operators |
-| Prevention | Allow-list local names; fail closed; written scope |
-| Detection | Denied-host log without fetching |
-| Recovery | Stop; document; notify instructor; do not continue |
+| Why it happens | Permission got mixed up with “the computer answered” |
+| What has to be true first | You have a proxy; a public URL is one paste away |
+| Trigger | A tired paste of a blog host |
+| What it costs | Unauthorized testing — legal trouble, expulsion, harm to people who did not ask |
+| How you stop it | A written list of local names; if you are unsure, say no |
+| How you notice | A denied-host log, without fetching the page |
+| How you recover | Stop; write it down; tell the instructor; do not continue |
 
-## Framework defaults versus the scope guarantee
+## What the framework does vs what you still have to check
 
-A proxy will open whatever you type. That is the bug class, not the property.
+A proxy will open whatever you type. That is the bug class, not the rule.
 
-## Mechanism limits
+## What the tool cannot do
 
-- `/etc/hosts` aliases; DNS rebinding; redirects off localhost.
-- Official Juice Shop **on your machine** is OK; a random cloud Juice Shop you do not own is not.
+- A hosts-file alias, DNS tricks, or a redirect off localhost can still confuse you.
+- Official Juice Shop **on your machine** is fine. A random cloud Juice Shop you do not own is not.
 
-## Usability and accessibility
+## Can people still use it
 
-Scope templates and stop-buttons must be keyboard-operable (WCAG 2.2). A mouse-only “I agree” is not informed consent.
+Scope templates and the stop button must work from the keyboard. A mouse-only “I agree” is not informed consent.
 
 ## Practice
 
-Write a three-line scope: in, out, stop condition. Then run:
+Write three lines: what is in, what is out, and when you stop. Then run this check:
 
 ```
 python3 -m pytest labs/0.1/0.1-orientation/tests --impl vulnerable
@@ -72,14 +72,14 @@ python3 -m pytest labs/0.1/0.1-orientation/tests --impl fixed
 
 The first command must fail. The second must pass. Do not fetch example.com; the test string is enough.
 
-## Transfer
+## Use it somewhere new
 
-Company staging URL: what **written** artifact would make it in-scope? Contractor asked to test a customer WordPress.
+A company staging URL: what **written** artifact would put it on the list? A contractor asked to test a customer WordPress.
 
-## Residual risk
+## What can still go wrong
 
-Hosts-file tricks; redirect chains. Gate 0 stays not-attempted until Phase 0 evidence exists.
+Hosts-file tricks; redirect chains. Opening this page does not finish the first check-in.
 
-## Non-goals
+## What this page is not doing
 
-Live targets. WSTG as the syllabus. Weaponized payloads.
+Live targets. Treating a “top ten bugs” list as the course. Ready-made attack recipes.
