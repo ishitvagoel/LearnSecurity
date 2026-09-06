@@ -6,7 +6,9 @@
 
 ## Review the fixture as if it were SecureCollab ingest
 
-Review `labs/2.1/2.1-parser-boundaries/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/2.1.md` — not here.
+Review `labs/2.1/2.1-parser-boundaries/vulnerable/` as a SecureCollab PR. Reconstruct whether ACL and store still parse the same bytes twice, compare that with the module invariant, and write changes a developer can verify.
+
+Intended findings live only in `content/assessment/keys/2.1.md` — not here. Do not open the keys file until your review has been evaluated.
 
 ## Mental model: json.loads used for store while ACL uses a different first-key scan
 
@@ -39,8 +41,12 @@ Also reject: client trust, concatenating interpreters, Report-Only as enforcemen
 
 ## Practice
 
-Write three review notes a peer could act on. Tie at least one note to `test_duplicate_tenant_keys_are_one_meaning`.
+Write three review notes a peer could act on. Each note: observation, property or false assurance, suggested structural change, residual you will **not** delete. Tie at least one note to `test_duplicate_tenant_keys_are_one_meaning`.
 
 ## Transfer
 
-GraphQL and REST both ingest the same note — two grammars. A PR that “validates JSON” on only one path is an incomplete mediation review.
+GraphQL and REST both ingest the same note — two grammars. A PR that “validates JSON” on only one path is an incomplete mediation review. Name the independent falsehood that would still stop a two-meaning ingest.
+
+## Non-goals
+
+Do not merge by adding a comment “JSON should not duplicate keys.” RFC 8259 is SHOULD, not this pytest.

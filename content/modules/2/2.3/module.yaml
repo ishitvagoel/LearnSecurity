@@ -150,3 +150,6 @@ changelog:
   note: 'Depth pass: jar-versus-script mental models, mermaid diagrams, ASVS 5.0
     3.3.4/3.3.1 pins with CSP3 and Trusted Types labeled draft; independent review
     still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with SecureCollab sc_session cause tables, mechanism
+    limits, and WebView transfer; independent review still required

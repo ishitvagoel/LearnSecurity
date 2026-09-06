@@ -18,13 +18,30 @@ next:
   pass: revise
   skill: deepen-curriculum
   inner_skill: quality-gate
-  note: Authoring-pass named mental models and mermaid now cover every lesson in 0.1-11
-    and E1-E6. Verify/review model titles are module-specific oracles rather than shared
-    slogans. The site renderer draws mermaid as SVG. Units stay developing / map-complete
-    in revision.remaining until independent quality and lab-safety review artifacts
-    exist under content/progress/reviews/. Do not mark depth publishable in this skill.
-    1.1-1.3 remain the independently reviewed reference.
+  note: Authoring-pass named mental models and mermaid cover every lesson. 1.4 and
+    2.1-2.3 later lessons were thickened with system-specific cause, limits, and
+    transfer. Units stay developing / map-complete in revision.remaining until independent
+    quality and lab-safety review artifacts exist under content/progress/reviews/.
+    Do not mark depth publishable in this skill. 1.1-1.3 remain the independently
+    reviewed reference.
 spiral_deltas:
+- date: '2026-09-06'
+  module: '2.3'
+  change: Lessons 03-08 now carry sc_session cause tables, HttpOnly mechanism limits,
+    and WebView as a second interpreter; the lab oracle is unchanged
+  retest: Independent review still required; 6.2 encoding and E2 Report-Only remain
+    separate cells
+- date: '2026-09-06'
+  module: '2.2'
+  change: Break/verify/review now name Tenant B get of a path-only key as the forbidden
+    outcome and refuse TLS as that oracle
+  retest: Independent review still required; 4.1.3 forwarded identity and live CDN
+    Vary remain residuals
+- date: '2026-09-06'
+  module: '2.1'
+  change: Verify/review now insist duplicate-key disagreement is the failing observation,
+    not HTTP 200
+  retest: Independent review still required; jsonb and GraphQL remain residuals
 - date: '2026-09-06'
   module: curriculum
   change: Verify and review Mental model headings name the local oracle or seeded
@@ -557,8 +574,9 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added mental models and diagrams; independent
-    quality and lab-safety review still required before publishable
+  notes: Authoring pass 2026-09-06 thickened transfer/review with envelope change
+    and recovery-oracle review notes; independent quality and lab-safety review still
+    required before publishable
   depth: map-complete
 - id: '2.1'
   title: Bytes, text, formats, parsers, and interpreters
@@ -566,8 +584,8 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added parser-boundary mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+  notes: Authoring pass 2026-09-06 thickened verify/review with parser-agreement
+    oracles; independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '2.2'
   title: DNS, transport, HTTP, TLS, proxies, CDNs, and caches
@@ -575,8 +593,8 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added hop-versus-key mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+  notes: Authoring pass 2026-09-06 thickened break/verify/review so TLS is not the
+    cache key; independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '2.3'
   title: Browser security model
@@ -584,8 +602,9 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added jar-versus-script mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+  notes: Authoring pass 2026-09-06 thickened lessons 03-08 for sc_session HttpOnly
+    cause, limits, and WebView transfer; independent quality and lab-safety review
+    still required before publishable
   depth: map-complete
 - id: '2.4'
   title: State, time, concurrency, and distributed failure

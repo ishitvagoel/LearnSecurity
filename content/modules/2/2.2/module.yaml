@@ -147,3 +147,6 @@ changelog:
   note: 'Depth pass: hop-versus-key mental models, mermaid diagrams, ASVS 5.0
     4.1.3/12.2.1/14.2.2/14.3.2 pins with Level 3 14.2.5 labeled; independent review
     still required'
+- date: '2026-09-06'
+  note: Thickened break/verify/review lessons with attacker capability, framework
+    defaults vs cache key, and TLS-is-not-the-key; independent review still required

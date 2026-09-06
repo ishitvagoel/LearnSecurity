@@ -5,11 +5,13 @@
 **Lab:** `labs/1.4/1.4-risk-register/vulnerable/` as a SecureCollab PR  
 **Standards:** WCAG 2.2 (final); NIST CSF 2.0 GV; Saltzer and Schroeder psychological acceptability (1975, seminal).
 
-Intended findings live only in `content/assessment/keys/1.4.md` — not here.
+Intended findings live only in `content/assessment/keys/1.4.md` — not here. Do not open that file until your review has been evaluated.
 
 ## What you are reviewing
 
-A colleague ships a recovery confirm and a “risk register.” Your job is to label each claim **property**, **mechanism**, or **false assurance**, and to say which 1.1 cell breaks if they ship.
+A colleague ships a SecureCollab recovery confirm and a “risk register.” Your job is to label each claim **property**, **mechanism**, or **false assurance**, and to say which 1.1 cell (lockout, workaround/confidentiality, or accountability) breaks if they ship. Classification starts at the confirm widget and the register row, not at a scanner color or a WCAG badge.
+
+The lab folder `labs/1.4/1.4-risk-register/vulnerable/` is the PR. The oracle you already ran in LO-05 (`test_recovery_control_is_usable_and_accessible`) is the property test. A comment “will fix a11y later” is not.
 
 ## Mental model: four seeded smells to find yourself
 
@@ -28,7 +30,7 @@ flowchart TD
 - Mouse-only drag-to-confirm  
 - Risk register lists residual as “users should be careful”
 
-Also reject: client trust as the TCB; closing a finding without a retest; keys in learner notes; live-target “we should try this on staging clinic.”
+Also reject: client trust as the TCB; closing a finding without re-running `--impl fixed`; keys in learner notes; live-target “we should try this on staging clinic.”
 
 ## Misconceptions this module refuses
 
@@ -40,7 +42,7 @@ Also reject: client trust as the TCB; closing a finding without a retest; keys i
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: observation, property or false assurance, suggested structural change, residual you will **not** delete. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: observation, property or false assurance, suggested structural change, residual you will **not** delete. Tie at least one note to `test_recovery_control_is_usable_and_accessible`. Do not open the keys file.
 
 ## Transfer
 

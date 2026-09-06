@@ -20,7 +20,7 @@ flowchart TD
   Slot --> Leak["returns secretA"]
 ```
 
-The vulnerable tree demonstrates **cause** (shared store, incomplete key), not a trophy exploit. Preconditions: shared dict; path-only key; Tenant A populated the entry. TLS is not even in the fixture—on purpose. If the property needed TLS to be “off,” the lab would be teaching the wrong sentence.
+The vulnerable tree demonstrates **cause** (shared store, incomplete key), not a trophy exploit. Preconditions: shared dict; path-only key; Tenant A populated the entry. Attacker capability: a Tenant B principal who can `cache_get` the same path after Tenant A’s put—no DNS hijack, no TLS break. Trust assumption: the origin’s 1.2-bound tenant is the only identity allowed in the key. TLS is not even in the fixture—on purpose. If the property needed TLS to be “off,” the lab would be teaching the wrong sentence.
 
 ## What to read in the fixture
 
@@ -39,6 +39,13 @@ Tests already bind:
 | Preconditions | Path-only key; tA populated the entry |
 | Impact | Cross-tenant read without guessing ids |
 | Not the lesson | A scanner name, CWE mnemonic, or “TLS is broken” |
+| Prevention | Key `(path, bound tenant)` or refuse to cache note bodies |
+| Detection | Hit with mismatched tenant id; never log the body |
+| Recovery | Purge the prefix; 1.1 incident if bodies already escaped |
+
+## Framework defaults versus the cache guarantee
+
+Next.js `fetch` cache, FastAPI in-process dicts, and a CDN “HTTPS only” checkbox do not insert `tenant_id`. RFC 9846 authenticates a hop. RFC 9110 says what *may* be cached. Neither writes your key.
 
 ## Practice
 

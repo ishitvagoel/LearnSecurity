@@ -144,3 +144,6 @@ changelog:
 - date: '2026-09-06'
   note: 'Depth pass: parser-boundary mental models, mermaid diagrams, ASVS 5.0
     V1/V2 pins with Level 3 1.5.3 labeled; independent review still required'
+- date: '2026-09-06'
+  note: Thickened verify/review lessons with forbidden-outcome oracles and review
+    residuals; independent review still required

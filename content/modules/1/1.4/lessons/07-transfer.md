@@ -12,6 +12,13 @@ SecureCollab scaffolding goes away. You get a **clinic portal** that adds step-u
 
 Renaming “recovery confirm” to “clinic step-up” is not transfer. Actor, object, channel, and residual change. Keyboard lockout and chart-exposing workarounds are new 1.1 cells. Support reading a code aloud is a new 1.2 cell, not a usability win.
 
+| SecureCollab Phase 1 | Clinic / bank sketch |
+|---|---|
+| Owner recovering a notes account | Exhausted clinician or customer on a shared workstation |
+| Recovery confirm widget | Step-up or re-auth dialog over a chart or balance |
+| Lockout or support read-aloud of codes | Lockout or chart/balance exposed by a workaround |
+| Coercion residual | Still coercion; SMS to a shared phone is a new channel |
+
 ```mermaid
 flowchart TD
   Old[SecureCollab recovery confirm] --> Q["What changed - actor, object, channel, time"]

@@ -25,15 +25,18 @@ flowchart LR
 | Normal | After tA put, tA get returns `tenant-A-note` |
 | Negative / abuse | After tA put, tB get is not `tenant-A-note` and is `None` |
 | Failure default | Unknown tenant does not share the slot |
+| Not claimed | Live CDN `Vary`; browser `no-store`; DNS authenticity |
 
-Lab tests: `test_same_tenant_cache_hit` and `test_other_tenant_does_not_receive_cached_body` in `labs/2.2/2.2-request-path/tests/test_cache_key.py`.
+Lab tests: `test_same_tenant_cache_hit` and `test_other_tenant_does_not_receive_cached_body` in `labs/2.2/2.2-request-path/tests/test_cache_key.py`. They observe bodies, not HTTP 200. That is a **forbidden-outcome** pair: a Tenant B get of `tenant-A-note` is not allowed to count as a passing cache.
 
-```
+```text
 python3 -m pytest labs/2.2/2.2-request-path/tests --impl vulnerable
 python3 -m pytest labs/2.2/2.2-request-path/tests --impl fixed
 ```
 
-Map each test to a matrix cell from LO-02. Do not paste keys.
+Map each test to a matrix cell from LO-02. Do not paste keys. If vulnerable does not fail the cross-tenant get, the lab is miswired—fix the wiring, not the assertion.
+
+TLS 1.3 (RFC 9846, final) on the browser hop is not this oracle. A test that only asserts HTTPS is a mechanism observation.
 
 ## What the tests do not prove
 
@@ -46,8 +49,12 @@ Record those as residuals or later work, not as silent passes.
 
 ## Practice
 
-Execute both implementations this session. If vulnerable does not fail, the lab is miswired—fix the wiring, not the assertion.
+Execute both implementations this session. Write the fail/pass pair next to the LO-02 cache-key row. Reject a “test” that only greps `Cache-Control` without calling `cache_get` as Tenant B.
 
 ## Transfer
 
-Authenticated RSS or export CSV via CDN. A test that only asserts status 200 on `/export` is not cache-key evidence.
+Authenticated RSS or export CSV via CDN. A test that only asserts status 200 on `/export` is not cache-key evidence. A test against a live CDN is out of scope.
+
+## Non-goals
+
+Do not add live traffic. Do not log `tenant-A-note`. Keys stay out of this file.

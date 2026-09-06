@@ -46,8 +46,12 @@ Record those as residuals or later modules, not as silent passes.
 
 ## Practice
 
-Execute both implementations this session. If vulnerable does not fail, the lab is miswired—fix the wiring, not the assertion.
+Execute both implementations this session. If vulnerable does not fail, the lab is miswired—fix the wiring, not the assertion. Write the fail/pass pair next to the LO-02 ingest cell.
 
 ## Transfer
 
-GraphQL and REST both ingest the same note. A test that only asserts status 200 on `/graphql` is not parser-agreement evidence.
+GraphQL and REST both ingest the same note. A test that only asserts status 200 on `/graphql` is not parser-agreement evidence. A live GraphQL target is out of scope.
+
+## Non-goals
+
+Do not add live traffic. Do not log the AMBIGUOUS blob. Keys stay out of this file.

@@ -181,3 +181,6 @@ changelog:
 - date: '2026-09-06'
   note: Named Mental model H2s on remaining verify/operate/transfer/review lessons;
     mermaid already present; independent review still required
+- date: '2026-09-06'
+  note: Thickened transfer envelope table and review notes tied to the recovery
+    oracle; independent review still required
