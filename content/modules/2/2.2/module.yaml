@@ -150,3 +150,6 @@ changelog:
 - date: '2026-09-06'
   note: Thickened break/verify/review lessons with attacker capability, framework
     defaults vs cache key, and TLS-is-not-the-key; independent review still required
+- date: '2026-09-06'
+  note: Bumped remaining later lessons to the 360-word bar with cache-key limits;
+    independent review still required

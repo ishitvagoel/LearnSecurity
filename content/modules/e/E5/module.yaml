@@ -133,3 +133,6 @@ changelog:
 - date: '2026-09-06'
   note: 'Depth pass: body-not-tenant mental models, mermaid diagrams, ASVS v5.0.0-8.2.1;
     v5.0.0-8.3.2 labeled Level 3 advanced; independent review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with body-switch cause tables, RLS/API1 limits,
+    and clinic GraphQL transfer; independent review still required

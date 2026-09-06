@@ -26,14 +26,22 @@ flowchart LR
 | Negative / abuse | AMBIGUOUS duplicate keys: rejected **or** both tenants identical |
 | Failure default | Uncertainty does not persist a body under a guessed tenant |
 
-Lab tests: `test_unambiguous_json_is_accepted` and `test_duplicate_tenant_keys_are_one_meaning` in `labs/2.1/2.1-parser-boundaries/tests/test_parser.py`.
+Lab tests: `test_unambiguous_json_is_accepted` and `test_duplicate_tenant_keys_are_one_meaning` in `labs/2.1/2.1-parser-boundaries/tests/test_parser.py`. `test_duplicate_tenant_keys_are_one_meaning` is a **forbidden-outcome** test: last-key-wins `acl_tenant != stored_tenant` is not allowed to count as a passing control.
 
 ```text
 python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl vulnerable
 python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl fixed
 ```
 
-Map each test to a matrix cell from LO-02. Do not paste keys.
+Run from `labs/2.1/2.1-parser-boundaries` if a repo-root collection picks up `site/`. Map each test to a matrix cell from LO-02. Do not paste keys. An environment error is not security evidence.
+
+| Slice | This lab |
+|---|---|
+| Required property | duplicate keys → one meaning or reject |
+| Root cause | two interpreters, one byte string |
+| Trigger | AMBIGUOUS duplicate `tenant` keys |
+| Prevention | reject or compare ACL and store |
+| Not claimed | Pydantic last-key; GraphQL live target; 1.2 for unique keys |
 
 ## What the tests do not prove
 

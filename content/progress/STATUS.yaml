@@ -20,12 +20,24 @@ next:
   inner_skill: quality-gate
   note: Authoring-pass named mental models and mermaid cover every lesson. 1.4,
     2.1-2.4, 0.1, 0.2, 3.1-3.4, 4.1-4.5, 5.1-5.5, 6.1-6.7, 7.1-7.4, 8.1-8.4, 8.5,
-    9.1-9.3, 9.4-10.2, 10.3-11, and E1-E4 later lessons were thickened with
+    9.1-9.3, 9.4-10.2, 10.3-11, and E1-E6 later lessons were thickened with
     system-specific cause, limits, and transfer. Units stay developing /
     map-complete in revision.remaining until independent quality and lab-safety
     review artifacts exist under content/progress/reviews/. Do not mark depth
     publishable in this skill. 1.1-1.3 remain the independently reviewed reference.
 spiral_deltas:
+- date: '2026-09-06'
+  module: E6
+  change: Lessons 03-08 now name empty-owner acceptance as the forbidden outcome and
+    refuse SAMM/CSF/CISA as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; unread register, inaccessible recovery,
+    and Level 3 v5.0.0-15.1.5 remain residuals
+- date: '2026-09-06'
+  module: E5
+  change: Lessons 03-08 now name body-switched tenant as the forbidden outcome and
+    refuse RLS/Zanzibar/API1 as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; search/cache/lake copies, GraphQL aliases,
+    and Level 3 v5.0.0-8.3.2 remain residuals
 - date: '2026-09-06'
   module: E4
   change: Lessons 03-08 now name oversize copy as the forbidden outcome and refuse
@@ -1397,16 +1409,18 @@ electives:
   opens_after_phase: 7
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added body-not-tenant mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+  notes: Later lessons 03-08 thickened 2026-09-06 with body-tenant cause tables and
+    RLS/API1 limits; independent quality and lab-safety review still required
+    before publishable
   depth: map-complete
 - id: E6
   title: Product security leadership
   opens_after_phase: 7
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added exception-is-a-record mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+  notes: Later lessons 03-08 thickened 2026-09-06 with empty-owner cause tables and
+    SAMM/CISA limits; independent quality and lab-safety review still required
+    before publishable
   depth: map-complete
 milestones:
 - id: M0

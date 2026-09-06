@@ -28,6 +28,17 @@ flowchart TD
 
 CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS. A SIEM product name is not the property.
 
+FastAPI will still parse whatever JSON library you wired. PostgreSQL `jsonb` will keep one key if you cast. The application guarantee is: **this** fixture, AMBIGUOUS keys do not persist two tenants, and the deny log never includes the blob.
+
+Mechanism limits: a metric without a quarantine playbook still leaves a disagreeing row if a worker stored first. Unicode lookalike keys are residual. Honest unique-key JSON still needs 1.2. `v5.0.0-2.2.2` wants the trusted layer to enforce the predicate; a dashboard green is not that sentence.
+
+| Slice | This lab |
+|---|---|
+| Detect | `ingest_reject_duplicate_key` |
+| Signal | reason code and `request_id`; never note body |
+| Recover | Do not persist; quarantine if a row already disagrees |
+| Residual | `jsonb` as a new interpreter; GraphQL aliases |
+
 ## Practice
 
 Write one log line you would accept in review. Tie it to `labs/2.1/2.1-parser-boundaries`. Example shape (synthetic ids only):

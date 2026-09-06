@@ -147,3 +147,6 @@ changelog:
 - date: '2026-09-06'
   note: Thickened verify/review lessons with forbidden-outcome oracles and review
     residuals; independent review still required
+- date: '2026-09-06'
+  note: Bumped remaining later lessons to the 360-word bar with parser-agreement
+    cause tables; independent review still required

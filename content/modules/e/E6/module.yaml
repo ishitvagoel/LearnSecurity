@@ -153,3 +153,6 @@ changelog:
 - date: '2026-09-06'
   note: 'Depth pass: exception-is-a-record mental models, mermaid diagrams, SAMM/CSF/SSDF
     as vocabulary; CISA Secure by Design unverified; independent review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with empty-owner cause tables, SAMM/CISA limits,
+    and clinic HIPAA transfer; independent review still required

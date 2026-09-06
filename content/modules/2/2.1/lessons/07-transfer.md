@@ -43,6 +43,10 @@ flowchart TD
 | Live-target plan or real patient ids | Lab policy |
 | “Sanitize quotes” as the structural fix | Wrong slice |
 
+If REST “looks unique” while GraphQL variables keep two `patient_id` aliases, the cell is gone. A WAF quote filter and an RFC 8259 citation do not put one meaning into both grammars. The clinic rewrite still has to keep the SecureCollab fork: CLEAN unique keys may accept, AMBIGUOUS keys reject or agree. The local pytest analogue is `test_duplicate_tenant_keys_are_one_meaning` — on a fixture, not a live EHR.
+
+ASVS `v5.0.0-1.5.3` (architecture documentation of parsers) is **Level 3, advanced**: a diagram of grammars, not this pytest.
+
 ## Practice
 
 One page. No keys. The lab `labs/2.1/2.1-parser-boundaries` stays the only running system you may break. Multipart filename encoding (two parsers on the same bytes) is an acceptable alternate sketch pointing at 6.4—still local, still synthetic.

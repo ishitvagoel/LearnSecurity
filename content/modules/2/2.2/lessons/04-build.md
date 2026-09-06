@@ -21,6 +21,10 @@ The lab’s fixed tree keys `(path, tenant)`. Production may instead **refuse to
 
 Tenant in the key must be the 1.2-resolved tenant, not `Host` or `X-Forwarded-*` from the client (`v5.0.0-4.1.3`).
 
+Do not accept `Cache-Control: private` as membership in the key. Next.js `fetch` cache defaults do not encode tenant. A CDN that keys on path will still serve Tenant A’s note to Tenant B. The application guarantee is: **this** fixture, `cache_get("/notes/n1", "tB")` after a tA put is `None`.
+
+ASVS `v5.0.0-14.2.2` wants cached sensitive data isolated. This pytest is that sentence for path-only keys.
+
 ## Why this restores the cell
 
 | After the fix | Must be true |

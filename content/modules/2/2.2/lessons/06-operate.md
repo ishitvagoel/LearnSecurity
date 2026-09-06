@@ -30,6 +30,17 @@ flowchart TD
 
 CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS. A SIEM product name is not the property. Certificate-failure drills belong to TLS deployment, not this cache-key sentence—keep them in a separate note so they do not replace purge.
 
+Varnish, Fastly, and Next.js data cache will still hit on whatever key you configured. `Cache-Control` is a hint. The application guarantee is: **this** fixture, a tB get after a tA put is a miss, and the mismatch log never includes `tenant-A-note`.
+
+Mechanism limits: purge without a prefix that includes tenant can widen availability harm. Stale-while-revalidate at a new POP is residual. Cookie leakage from a cached body is 2.3 / 4.x, not a SIEM green.
+
+| Slice | This lab |
+|---|---|
+| Detect | `cdn_hit_tenant_mismatch` |
+| Signal | path, bound tenant, logged tenant; never body |
+| Recover | Purge the tenant-including prefix |
+| Residual | CDN config drift; anonymous fill |
+
 ## Practice
 
 Write one log line you would accept in review. Tie it to `labs/2.2/2.2-request-path`. Example shape (synthetic ids only):
