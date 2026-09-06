@@ -8,7 +8,9 @@
 
 Review `labs/E5/e5-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/E5.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: Tenant taken from the body
+
+Start with this seeded smell: **Tenant taken from the body**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

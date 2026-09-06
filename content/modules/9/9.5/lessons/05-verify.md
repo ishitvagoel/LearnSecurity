@@ -8,7 +8,9 @@
 
 “PDF delivered” is not evidence. The oracle is the local pair. Do not pentest public hosts.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: retest None
+
+The failing observation on `--impl vulnerable` is **retest None**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

@@ -8,7 +8,9 @@
 
 “We threat-modeled in the sprint” is not evidence. The oracle is the local pair.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: missing cross-tenant-read
+
+The failing observation on `--impl vulnerable` is **missing cross-tenant-read**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

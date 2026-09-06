@@ -8,7 +8,7 @@
 
 `boot_ok` must return false when `env == "prod"` and `debug` is true. Fail-safe: production with debug denies. `NODE_ENV` may *accompany* a match; it does not replace it.
 
-## Mental model: conjunction gate
+## Mental model: prod and not-debug conjunction
 
 ```mermaid
 flowchart TD

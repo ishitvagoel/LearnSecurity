@@ -8,7 +8,9 @@
 
 Review `labs/5.4/5.4-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/5.4.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: channel_is_https trusts X-Forwarded-Proto from anyone
+
+Start with this seeded smell: **`channel_is_https` trusts `X-Forwarded-Proto` from anyone**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

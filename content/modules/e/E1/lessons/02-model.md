@@ -10,7 +10,7 @@
 
 SecureCollab freeze: local `run_tool(name, args)`. No live model APIs.
 
-## Mental model: two principals
+## Mental model: model principal versus runtime principal
 
 ```mermaid
 flowchart TD

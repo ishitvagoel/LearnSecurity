@@ -8,7 +8,9 @@
 
 “CSP header present” is not evidence if the name is Report-Only. The oracle is the local pair. Do not XSS live origins.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: Report-Only
+
+The failing observation on `--impl vulnerable` is **Report-Only**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

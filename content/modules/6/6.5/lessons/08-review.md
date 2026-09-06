@@ -8,7 +8,9 @@
 
 Review `labs/6.5/6.5-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/6.5.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: requests.get(user_url) / scheme-only allow
+
+Start with this seeded smell: **`requests.get(user_url)` / scheme-only allow**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

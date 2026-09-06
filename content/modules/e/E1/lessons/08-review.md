@@ -8,7 +8,9 @@
 
 Review `labs/E1/e1-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/E1.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: exec_sql available
+
+Start with this seeded smell: **`exec_sql` available**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

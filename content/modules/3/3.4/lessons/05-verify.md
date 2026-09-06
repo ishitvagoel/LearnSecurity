@@ -8,7 +8,9 @@
 
 “We put max on the select” is not evidence. The oracle is the local pair.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: last greater than 5
+
+The failing observation on `--impl vulnerable` is **last greater than 5**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

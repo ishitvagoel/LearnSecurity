@@ -8,7 +8,9 @@
 
 Review `labs/4.5/4.5-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/4.5.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: verify signature, skip aud
+
+Start with this seeded smell: **verify signature, skip aud**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

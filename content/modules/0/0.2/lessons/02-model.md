@@ -16,7 +16,7 @@ SecureCollab freeze: local `quiz_score_grants_phase1_skip(score)`. No vendor LMS
 flowchart TD
   Diag[diagnostic] --> Tool{tooling gap?}
   Tool -->|Git SQL HTTP| Bridge[may assign a bridge unit]
-  Diag --> Inv[1.2 1.3 1.4]
+  Diag --> Inv["1.2 1.3 1.4"]
   Inv --> Never[never skip]
 ```
 
@@ -25,7 +25,7 @@ flowchart TD
 ```mermaid
 flowchart LR
   Badge[cert screenshot] --> Belief[cleared]
-  Ev[1.2 lab pair] --> Gate1[Gate 1 evidence]
+  Ev["1.2 lab pair"] --> Gate1[Gate 1 evidence]
   Badge --> NotGate[not Gate 1]
 ```
 

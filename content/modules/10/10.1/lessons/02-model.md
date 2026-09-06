@@ -24,7 +24,7 @@ flowchart TD
 ```mermaid
 flowchart LR
   Count[vuln tickets closed] --> Vanity[vanity]
-  TmWithTest[TM with 9.3 test] --> Outcome[outcome]
+  TmWithTest["TM with 9.3 test"] --> Outcome[outcome]
 ```
 
 ## Step 1: freeze pieces

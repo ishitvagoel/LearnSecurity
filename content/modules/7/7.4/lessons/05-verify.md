@@ -8,7 +8,9 @@
 
 “Workers use a service account” is not evidence. The oracle is the local pair. Do not attach to live brokers.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: alice session
+
+The failing observation on `--impl vulnerable` is **alice session**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

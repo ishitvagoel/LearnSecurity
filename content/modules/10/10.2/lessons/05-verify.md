@@ -8,7 +8,9 @@
 
 “SBOM generated” is not evidence. The oracle is the local pair. Do not fetch live packages.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: digest mismatch must fail install
+
+The failing observation on `--impl vulnerable` is installing when the claimed digest `aaa` does not match `bbb`. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

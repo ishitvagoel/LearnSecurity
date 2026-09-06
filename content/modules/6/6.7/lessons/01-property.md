@@ -33,7 +33,7 @@ The attacker is a scripted member or a stolen session. Trust is local `allow(n)`
 ```mermaid
 flowchart LR
   Export[each export] --> Copy[another CSV of bodies]
-  Copy --> Life[5.1 deletion graph]
+  Copy --> Life["5.1 deletion graph"]
 ```
 
 Quota is not encryption and not deletion. It bounds how many copies you mint.

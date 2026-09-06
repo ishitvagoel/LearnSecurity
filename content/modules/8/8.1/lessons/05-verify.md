@@ -8,7 +8,9 @@
 
 “We use Play Integrity” is not evidence. The oracle is the local pair. Do not call live attestation APIs.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: client ok plus attest fail
+
+The failing observation on `--impl vulnerable` is **client ok plus attest fail**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

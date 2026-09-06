@@ -8,7 +8,9 @@
 
 “We deleted the row” is not evidence. The oracle is the local pair.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: leftover session true
+
+The failing observation on `--impl vulnerable` is **leftover session true**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

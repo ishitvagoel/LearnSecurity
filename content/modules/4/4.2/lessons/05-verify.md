@@ -8,7 +8,9 @@
 
 “We use passkeys” is not evidence. The oracle is the local pair.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: password at evil is true
+
+The failing observation on `--impl vulnerable` is **password at evil is true**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

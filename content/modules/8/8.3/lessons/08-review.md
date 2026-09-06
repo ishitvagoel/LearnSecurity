@@ -8,7 +8,9 @@
 
 Review `labs/8.3/8.3-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/8.3.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: current_user = extras['as']
+
+Start with this seeded smell: **`current_user = extras['as']`**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

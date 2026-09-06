@@ -8,7 +8,9 @@
 
 Review `labs/5.1/5.1-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/5.1.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: delete_account only NOTES.pop
+
+Start with this seeded smell: **`delete_account` only `NOTES.pop`**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

@@ -26,7 +26,7 @@ Rewrite the SecureCollab sentence. Include:
 ```mermaid
 flowchart LR
   Train[HIPAA training done] --> Belief[safe to merge]
-  Empty[no threat_model] --> Reality[identity surface without 3.2]
+  Empty[no threat_model] --> Reality["identity surface without 3.2"]
 ```
 
 ## What graders reject

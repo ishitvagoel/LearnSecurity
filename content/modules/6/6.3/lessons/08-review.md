@@ -8,7 +8,9 @@
 
 Review `labs/6.3/6.3-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/6.3.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: Cookie auth + no Origin check
+
+Start with this seeded smell: **Cookie auth + no Origin check**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

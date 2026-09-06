@@ -8,7 +8,9 @@
 
 Review `labs/6.7/6.7-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/6.7.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: No cap (allow always true)
+
+Start with this seeded smell: **No cap (`allow` always true)**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

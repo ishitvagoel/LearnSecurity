@@ -29,7 +29,7 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-  Cvss[CVSS 4.0] --> Pri[priority input]
+  Cvss["CVSS 4.0"] --> Pri[priority input]
   Kev[KEV] --> Exp[exploitation context]
   Retest[same-cell pass] --> Decision[close]
 ```

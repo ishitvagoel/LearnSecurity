@@ -8,7 +8,9 @@
 
 “Webhooks are signed” is not evidence. The oracle is the local pair. Do not hit live providers.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: empty sig
+
+The failing observation on `--impl vulnerable` is **empty sig**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

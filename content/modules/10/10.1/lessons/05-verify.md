@@ -8,7 +8,9 @@
 
 “We have champions” is not evidence. The oracle is the local pair.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: empty threat-model PR must fail merge
+
+The failing observation on `--impl vulnerable` is an empty PR with no `threat_model` field. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

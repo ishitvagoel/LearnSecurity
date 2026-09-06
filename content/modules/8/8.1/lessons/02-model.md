@@ -14,7 +14,7 @@ SecureCollab Phase 8 freeze: local `allow_export(client_claims, server_attest)`.
 
 ```mermaid
 flowchart TD
-  Conf["confidentiality of bodies"] --> Srv[server plus 8.2 cache]
+  Conf["confidentiality of bodies"] --> Srv["server plus 8.2 cache"]
   Authz["authorization of export"] --> Srv
   Ui["button enabled"] --> Client[client UX only]
 ```

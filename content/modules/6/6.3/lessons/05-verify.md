@@ -8,7 +8,9 @@
 
 “SameSite is Lax” is not evidence. The oracle is the local pair.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: foreign origin
+
+The failing observation on `--impl vulnerable` is **foreign origin**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

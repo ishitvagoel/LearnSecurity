@@ -15,7 +15,7 @@ SecureCollab freeze: local `install_ok(expected, got)`. No live registries.
 ```mermaid
 flowchart TD
   Lock[lockfile] --> Verify[install_ok]
-  Sbom[SBOM] --> Inventory[v5.0.0-15.1.2]
+  Sbom[SBOM] --> Inventory["v5.0.0-15.1.2"]
   Prov[SLSA provenance] --> Extra[how it was built]
 ```
 

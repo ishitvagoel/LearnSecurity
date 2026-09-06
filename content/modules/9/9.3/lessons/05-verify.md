@@ -8,7 +8,9 @@
 
 “Coverage 92%” is not evidence. The oracle is the local pair. Do not fuzz public hosts.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: 200-only
+
+The failing observation on `--impl vulnerable` is **200-only**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

@@ -31,7 +31,7 @@ flowchart TD
 flowchart LR
   Note[note body] --> App[API]
   App --> Logs[log pipeline]
-  Logs --> Vendor[SIEM / crash]
+  Logs --> Vendor["SIEM / crash"]
   Note --> NotForensics[not allowed in logs]
 ```
 

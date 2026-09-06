@@ -8,7 +8,9 @@
 
 Review `labs/7.4/7.4-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/7.4.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: user_session or service fallback / copy request cookies into the job
+
+Start with this seeded smell: **`user_session or service` fallback / copy request cookies into the job**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

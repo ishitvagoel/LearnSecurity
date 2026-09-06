@@ -8,7 +8,9 @@
 
 “TLS is on” is not evidence. The oracle is the local pair.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: header https socket http
+
+The failing observation on `--impl vulnerable` is **header https socket http**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

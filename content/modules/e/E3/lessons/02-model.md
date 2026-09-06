@@ -24,7 +24,7 @@ flowchart TD
 flowchart LR
   Api[capture API] --> Ledger[CHARGES]
   Hook[webhook] --> Ledger
-  Race[both append] --> Residual[7.3]
+  Race[both append] --> Residual["7.3"]
 ```
 
 ## Step 1: freeze pieces

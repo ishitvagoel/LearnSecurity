@@ -21,7 +21,7 @@ flowchart TD
   User[Fatigued user] --> Evil["https://evil.example"]
   Evil --> Pw["password or OTP captured"]
   Pw --> Real["https://app.securecollab.test"]
-  Real --> Session[Attacker session - then 1.2]
+  Real --> Session["Attacker session - then 1.2"]
 ```
 
 The attacker is a lookalike origin, not a novel CVE. Trusting “the user will read the URL” is not a TCB.

@@ -8,7 +8,9 @@
 
 “We have RBAC” is not evidence. The oracle is the local pair.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: n2 and cross-tenant denies
+
+The failing observation on `--impl vulnerable` is **n2 and cross-tenant denies**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

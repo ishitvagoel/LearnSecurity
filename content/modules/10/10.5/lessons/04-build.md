@@ -10,7 +10,7 @@
 
 The `note_body` substring is a **teaching stand-in** for protection-level logging (`v5.0.0-16.2.5`). It is not a complete DLP oracle.
 
-## Mental model: conjunction gate
+## Mental model: recovery-done and no-body conjunction
 
 ```mermaid
 flowchart TD

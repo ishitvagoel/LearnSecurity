@@ -29,7 +29,7 @@ flowchart TD
 ```mermaid
 flowchart LR
   Dash[empty dashboard] --> Belief[secure]
-  Authz[cross-tenant read] --> Reality[9.3 still required]
+  Authz[cross-tenant read] --> Reality["9.3 still required"]
 ```
 
 **Mechanism (not the property):** GitHub code scanning, Semgrep default, Dependabot, a SAMM score.

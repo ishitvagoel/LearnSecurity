@@ -14,7 +14,7 @@ A new “fast-track seniors” flag can reintroduce score-as-skip after the pred
 flowchart TD
   Call[quiz skip] --> Ok{Phase 1 skip?}
   Ok -->|attempted| Metric["phase1_skip_denied += 1"]
-  Metric --> Reopen[keep 1.2 required]
+  Metric --> Reopen["keep 1.2 required"]
 ```
 
 | Outcome | This module |

@@ -26,7 +26,7 @@ Rewrite the SecureCollab sentence. Include:
 ```mermaid
 flowchart LR
   Col[HIPAA done column] --> Belief[isolation is finished]
-  Pred[no isolation assert] --> Reality[1.2 hole ships]
+  Pred[no isolation assert] --> Reality["1.2 hole ships"]
 ```
 
 ## What graders reject

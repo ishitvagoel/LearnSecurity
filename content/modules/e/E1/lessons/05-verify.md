@@ -8,7 +8,9 @@
 
 “We use RAG” is not evidence. The oracle is the local pair. Do not call live models.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: exec_sql
+
+The failing observation on `--impl vulnerable` is **exec_sql**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

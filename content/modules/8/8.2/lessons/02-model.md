@@ -29,7 +29,7 @@ flowchart TD
 flowchart LR
   Offline[offline] --> Expire[TTL]
   Offline --> Revoke["wipe on logout / 4.1"]
-  Offline --> Replay[8.1 hostile replay residual]
+  Offline --> Replay["8.1 hostile replay residual"]
 ```
 
 ## Step 1: freeze pieces

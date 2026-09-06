@@ -18,7 +18,7 @@ flowchart LR
   Name[Accessible name] --> Ctrl[Confirm control]
   Key[Keyboard operation] --> Ctrl
   Color[Color as extra cue] --> Ctrl
-  Ctrl --> Decision[Still a 1.2 allow or deny]
+  Ctrl --> Decision["Still a 1.2 allow or deny"]
 ```
 
 If you remove Name or Key, the control is not a control. If you remove Color, a sighted mouse user might be slightly slower; the property can still hold. If you remove the 1.2 decision, anyone who can call `confirm` wins.

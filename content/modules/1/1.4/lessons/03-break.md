@@ -27,7 +27,7 @@ flowchart TD
   Ctrl --> K{Has name, keyboard, not color-only?}
   K -->|yes| Ok["1.2-mediated restore"]
   K -->|no| L[Lockout]
-  K -->|no| W[Workaround: shared session or codes in chat]
+  K -->|no| W["Workaround: shared session or codes in chat"]
 ```
 
 The vulnerable fixture takes the **no** branch by construction.

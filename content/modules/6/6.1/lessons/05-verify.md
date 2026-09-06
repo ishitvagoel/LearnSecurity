@@ -8,7 +8,9 @@
 
 “We don’t use a shell” is not evidence. The oracle is the local pair. Tests **must not** execute the argv.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: sh -c
+
+The failing observation on `--impl vulnerable` is **sh -c**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

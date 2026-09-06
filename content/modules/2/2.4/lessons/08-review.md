@@ -8,7 +8,9 @@
 
 Review `labs/2.4/2.4-state-time/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/2.4.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: INSERT share on every POST
+
+Start with this seeded smell: **INSERT share on every POST**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

@@ -8,7 +8,9 @@
 
 “Field authz is on” is not evidence. The oracle is the local pair. Do not query public GraphQL.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: member secret_internal
+
+The failing observation on `--impl vulnerable` is **member secret_internal**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

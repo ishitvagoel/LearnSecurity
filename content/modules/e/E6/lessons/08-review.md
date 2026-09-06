@@ -8,7 +8,9 @@
 
 Review `labs/E6/e6-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/E6.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: Accept with empty owner
+
+Start with this seeded smell: **Accept with empty owner**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

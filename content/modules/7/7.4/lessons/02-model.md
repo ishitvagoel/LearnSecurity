@@ -10,7 +10,7 @@
 
 SecureCollab Phase 1 freeze: local `exporter(job)` with principal `worker-sc`. No live brokers.
 
-## Mental model: two principals
+## Mental model: enqueue principal versus execute principal
 
 ```mermaid
 flowchart TD

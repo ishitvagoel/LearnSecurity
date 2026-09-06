@@ -8,7 +8,9 @@
 
 Review `labs/11/11-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/11.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: read after revoke succeeds
+
+Start with this seeded smell: **read after revoke succeeds**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

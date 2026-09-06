@@ -8,7 +8,9 @@
 
 Review `labs/E2/e2-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/E2.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: Report-Only counted as on
+
+Start with this seeded smell: **Report-Only counted as on**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

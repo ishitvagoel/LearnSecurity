@@ -8,7 +8,9 @@
 
 “NODE_ENV=production” is not evidence. The oracle is the local pair. Do not boot a live host.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: prod plus debug
+
+The failing observation on `--impl vulnerable` is **prod plus debug**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

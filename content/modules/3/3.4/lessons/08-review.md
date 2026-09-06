@@ -8,7 +8,9 @@
 
 Review `labs/3.4/3.4-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/3.4.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: Cap in React only
+
+Start with this seeded smell: **Cap in React only**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

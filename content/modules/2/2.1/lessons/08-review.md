@@ -8,7 +8,9 @@
 
 Review `labs/2.1/2.1-parser-boundaries/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/2.1.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: json.loads used for store while ACL uses a different first-key scan
+
+Start with this seeded smell: **`json.loads` used for store while ACL uses a different first-key scan**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

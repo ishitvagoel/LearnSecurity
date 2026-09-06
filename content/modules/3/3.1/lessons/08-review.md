@@ -8,7 +8,9 @@
 
 Review `labs/3.1/3.1-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/3.1.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: logger.info('read %s', note.body)
+
+Start with this seeded smell: **`logger.info('read %s', note.body)`**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

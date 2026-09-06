@@ -8,7 +8,9 @@
 
 “OIDC is configured” is not evidence. The oracle is the local pair.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: other-api and missing aud
+
+The failing observation on `--impl vulnerable` is **other-api and missing aud**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

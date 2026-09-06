@@ -21,7 +21,7 @@ Your review should determine whether each sentence is:
 
 ```mermaid
 flowchart TD
-  Sent[SECURITY.md sentence] --> Q{What would falsify it?}
+  Sent["SECURITY.md sentence"] --> Q{What would falsify it?}
   Q -->|named forbidden outcome| Prop[property]
   Q -->|tool name only| Mech[mechanism]
   Q -->|scanner passed| False[false assurance]

@@ -28,7 +28,7 @@ flowchart TD
 ```mermaid
 flowchart LR
   Pdf[ASVS PDF] --> Paste[every row status done]
-  Threat[1.2 isolation] --> Test[pytest isolation assert]
+  Threat["1.2 isolation"] --> Test[pytest isolation assert]
   Paste --> False[false assurance]
 ```
 

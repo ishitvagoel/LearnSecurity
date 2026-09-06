@@ -8,7 +8,9 @@
 
 “minifyEnabled is true” is not evidence. The oracle is the local pair. Do not unpack store APKs.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: debug plus ok
+
+The failing observation on `--impl vulnerable` is **debug plus ok**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

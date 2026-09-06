@@ -8,14 +8,16 @@
 
 Review `labs/9.5/9.5-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/9.5.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: close without retest
+
+Start with this seeded smell: **close without retest**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{What would falsify it?}
   Q -->|close without retest| Property["Property - good if tested"]
   Q -->|PDF attached| Mechanism[Mechanism - report]
-  Q -->|CVSS 9.8| False[False assurance]
+  Q -->|"CVSS 9.8"| False[False assurance]
 ```
 
 Seeded smells (label them yourself; do not open the keys file):

@@ -8,7 +8,9 @@
 
 “Code scanning on” is not evidence. The oracle is the local pair. Do not scan public repos.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: empty map
+
+The failing observation on `--impl vulnerable` is **empty map**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

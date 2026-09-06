@@ -8,7 +8,7 @@
 
 A new webhook path can fetch again. Pair detect and recover. Do not log full URLs if they contain tokens (4.3). Do not fetch the denied destination “to confirm.”
 
-## Mental model: denied host is a signal
+## Mental model: SSRF denied host is a signal
 
 ```mermaid
 flowchart TD

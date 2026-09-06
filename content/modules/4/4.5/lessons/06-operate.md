@@ -8,7 +8,7 @@
 
 A leaked token for this audience still spends until expiry or sender-constraint. Pair detect and recover. Do not log raw tokens or note bodies (3.1, 4.3).
 
-## Mental model: mismatch is a signal
+## Mental model: audience mismatch is a signal
 
 ```mermaid
 flowchart TD

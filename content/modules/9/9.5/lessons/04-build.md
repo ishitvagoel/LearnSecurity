@@ -8,7 +8,7 @@
 
 `close_finding` must require `retest == "pass"`. Missing, `"fail"`, or `"scheduled"` is deny. That is the lab stand-in for “the same 9.3 command passed.”
 
-## Mental model: fail closed
+## Mental model: missing retest fails closed
 
 ```mermaid
 flowchart TD

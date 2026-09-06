@@ -8,7 +8,9 @@
 
 Review `labs/10.1/10.1-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/10.1.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: merge_ok True without tm
+
+Start with this seeded smell: **merge_ok True without tm**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

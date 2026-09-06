@@ -8,7 +8,9 @@
 
 “We use Kubernetes” is not evidence. The oracle is the local pair. Do not apply YAML to a live cluster.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: cluster-admin
+
+The failing observation on `--impl vulnerable` is **cluster-admin**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

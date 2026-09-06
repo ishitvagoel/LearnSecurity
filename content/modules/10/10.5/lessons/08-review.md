@@ -8,7 +8,9 @@
 
 Review `labs/10.5/10.5-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/10.5.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: close with recovery todo
+
+Start with this seeded smell: **close with recovery todo**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

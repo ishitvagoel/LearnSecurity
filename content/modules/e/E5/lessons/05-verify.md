@@ -8,7 +8,9 @@
 
 "We have RLS" is not evidence. The oracle is the local pair. Do not hit public tenants.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: body switch
+
+The failing observation on `--impl vulnerable` is **body switch**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

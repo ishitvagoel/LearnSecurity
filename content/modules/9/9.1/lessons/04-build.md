@@ -8,7 +8,7 @@
 
 `covered` must require `req == req_id` **and** `asserts_isolation`. A row that only stores status is uncovered. Fail-safe: missing flag is false.
 
-## Mental model: both gates
+## Mental model: coverage and test both gates
 
 ```mermaid
 flowchart TD

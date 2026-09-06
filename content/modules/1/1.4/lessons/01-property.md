@@ -23,7 +23,7 @@ flowchart TD
   H --> C["Current 1.2 authority and 1.3 blast radius"]
   C --> W["Work factor - attacker cost vs user cost"]
   W --> U{Can a stressed legitimate user complete the control?}
-  U -->|no| F[Security failure: lockout or workaround]
+  U -->|no| F["Security failure: lockout or workaround"]
   U -->|yes| R["Residual - what still remains"]
   R --> O[Owner, evidence, revisit trigger]
   O --> D[Detect, contain, recover if prevention is not absolute]

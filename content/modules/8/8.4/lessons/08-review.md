@@ -8,7 +8,9 @@
 
 Review `labs/8.4/8.4-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/8.4.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: api_allowed debug+ok true
+
+Start with this seeded smell: **`api_allowed` debug+ok true**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

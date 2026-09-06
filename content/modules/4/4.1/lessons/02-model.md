@@ -15,7 +15,7 @@ SecureCollab Phase 1 freeze: local `SESSIONS` / `DELETED` maps; user `alice`. No
 ```mermaid
 flowchart LR
   Subject[alice] --> Session[Session cookie]
-  Subject --> Refresh[Refresh token - 4.3]
+  Subject --> Refresh["Refresh token - 4.3"]
   Subject --> Worker["Worker user_id - 7.4"]
   Subject --> Mobile["Offline cache - 8.2"]
   Delete[delete_user] --> Session

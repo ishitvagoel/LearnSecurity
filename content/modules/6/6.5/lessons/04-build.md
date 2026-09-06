@@ -8,7 +8,7 @@
 
 `allowed` must parse the URL, require `https`, require the hostname in a small allow-list, and deny link-local and loopback. Structural means that identity check — not “starts with https”, not a denylist of one IP.
 
-## Mental model: deny unless listed
+## Mental model: host deny unless listed
 
 ```mermaid
 flowchart TD

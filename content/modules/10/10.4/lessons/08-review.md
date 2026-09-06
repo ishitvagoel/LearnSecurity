@@ -8,7 +8,9 @@
 
 Review `labs/10.4/10.4-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/10.4.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: boot_ok true on prod+debug
+
+Start with this seeded smell: **`boot_ok` true on prod+debug**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

@@ -8,7 +8,7 @@
 
 `resolve` must deny `secret_internal` unless `role == "service"`. Structural means that predicate — not a GraphQL `@hide` directive the client can skip, not a REST field name that starts with `_`.
 
-## Mental model: deny unless listed
+## Mental model: field deny unless listed
 
 ```mermaid
 flowchart TD

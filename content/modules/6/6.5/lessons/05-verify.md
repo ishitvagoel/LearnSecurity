@@ -8,7 +8,9 @@
 
 “We block private IPs” is not evidence. The oracle is the local pair. Tests **must not** fetch.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: link-local allowed
+
+The failing observation on `--impl vulnerable` is **link-local allowed**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

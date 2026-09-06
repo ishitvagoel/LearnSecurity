@@ -8,7 +8,9 @@
 
 “We have RLS in the backlog” is not evidence. The oracle is the local pair.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: tB reads tA
+
+The failing observation on `--impl vulnerable` is **tB reads tA**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

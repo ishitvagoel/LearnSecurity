@@ -8,7 +8,9 @@
 
 Review `labs/E4/e4-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/E4.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: Copy returns full src / declared_len plus slack
+
+Start with this seeded smell: **Copy returns full src / declared_len plus slack**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

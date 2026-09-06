@@ -12,7 +12,7 @@ A new WorkManager blob can skip the cache wrapper. Pair detect and recover. Do n
 
 ```mermaid
 flowchart TD
-  Logout[logout / 4.1] --> Wipe{cache gone?}
+  Logout["logout / 4.1"] --> Wipe{cache gone?}
   Wipe -->|no| Metric["logout_wipes_cache miss"]
   Metric --> Flag["backup_flag review"]
 ```

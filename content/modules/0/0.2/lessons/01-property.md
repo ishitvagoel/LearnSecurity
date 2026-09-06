@@ -20,7 +20,7 @@ NICE Secure Systems Development competencies describe jobs. They are not a 1.2 a
 flowchart TD
   Score[quiz 100] --> Belief[skip Phase 1]
   Score --> Gate{"grants_phase1_skip?"}
-  Gate -->|must be false| Lab[still run 1.2]
+  Gate -->|must be false| Lab["still run 1.2"]
 ```
 
 ## Mental model: tooling bridge vs invariant
@@ -28,8 +28,8 @@ flowchart TD
 ```mermaid
 flowchart LR
   Git[Git gap] --> Bridge[may skip a tooling unit]
-  Med[1.2 mediation] --> Required[never skip]
-  Quiz[percentage] --> NotCell[not a 1.2 cell]
+  Med["1.2 mediation"] --> Required[never skip]
+  Quiz[percentage] --> NotCell["not a 1.2 cell"]
 ```
 
 **Mechanism (not the property):** LMS mastery dashboard; a vendor cert screenshot; NICE work-role mapping.

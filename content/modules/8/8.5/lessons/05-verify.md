@@ -8,7 +8,9 @@
 
 “We filled Play Data safety” is not evidence. The oracle is the local pair. Do not call a crash vendor.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: secret in report
+
+The failing observation on `--impl vulnerable` is **secret in report**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

@@ -15,7 +15,7 @@ flowchart TD
   Sample[Known plaintext secret] --> Out[protect]
   Out --> B64{Base64 round-trip?}
   B64 -->|yes| Metric["encoding_labeled_encryption += 1"]
-  Metric --> Rotate[Rotate keys - 5.3]
+  Metric --> Rotate["Rotate keys - 5.3"]
 ```
 
 | Outcome | This module |

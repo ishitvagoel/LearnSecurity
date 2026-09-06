@@ -36,8 +36,8 @@ flowchart TD
   JWT[JWT bytes] --> Access["access token - aud is the API"]
   JWT --> Id["id token - aud is client_id"]
   JWT --> Logout["logout token - typed JWT"]
-  Access --> RS[Resource server 10.3.1]
-  Id --> RP[Relying party 10.5.4]
+  Access --> RS["Resource server 10.3.1"]
+  Id --> RP["Relying party 10.5.4"]
 ```
 
 Module 4.3 already refused “JWT means secure.” Here the same format carries different audience names.

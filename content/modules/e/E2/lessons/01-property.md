@@ -27,7 +27,7 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-  Enc[6.2 encoding] --> First[property]
+  Enc["6.2 encoding"] --> First[property]
   Csp[CSP] --> Layer[extra]
   Csp --> NotEnc[not encoding]
 ```

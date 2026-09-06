@@ -8,7 +8,9 @@
 
 “Rate limit is on” is not evidence. The oracle is the local pair. Do not load-test public hosts.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: allow 4
+
+The failing observation on `--impl vulnerable` is **allow 4**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

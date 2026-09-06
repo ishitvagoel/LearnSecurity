@@ -8,7 +8,7 @@
 
 A cache can serve old bytes. Pair detect and recover. Do not log registry tokens or signing keys (5.3).
 
-## Mental model: mismatch is a signal
+## Mental model: digest mismatch is a signal
 
 ```mermaid
 flowchart TD

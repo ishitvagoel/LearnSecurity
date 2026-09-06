@@ -8,7 +8,9 @@
 
 “Secrets Manager is enabled” is not evidence. The oracle is the local pair.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: default still auths
+
+The failing observation on `--impl vulnerable` is **default still auths**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

@@ -8,7 +8,7 @@
 
 A misconfigured proxy can start trusting `*` again. Pair detect and recover. Do not log cookie values (4.3).
 
-## Mental model: mismatch is a signal
+## Mental model: header versus socket mismatch is a signal
 
 ```mermaid
 flowchart TD

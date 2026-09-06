@@ -23,7 +23,7 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-  Flag[feature flag] --> Authz[may skip 1.2]
+  Flag[feature flag] --> Authz["may skip 1.2"]
   Mig[migration] --> FailOpen[fail-open?]
   Admin[admin bind] --> World["0.0.0.0"]
 ```

@@ -8,7 +8,9 @@
 
 “We do SAMM” is not evidence. The oracle is the local pair. Do not file live exceptions.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: empty owner
+
+The failing observation on `--impl vulnerable` is **empty owner**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

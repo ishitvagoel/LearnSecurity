@@ -20,7 +20,7 @@ MASVS-RESILIENCE-1 (platform integrity) and RESILIENCE-2 (anti-tampering) **rais
 flowchart TD
   R8[R8 minify] --> Cost[raises RE cost]
   Root[root detection] --> Cost
-  Cost --> NotGrant[not 1.2]
+  Cost --> NotGrant["not 1.2"]
   Server["build_type plus attest"] --> Grant[prod export]
 ```
 

@@ -8,7 +8,9 @@
 
 Review `labs/6.2/6.2-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/6.2.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: Template concatenates title
+
+Start with this seeded smell: **Template concatenates title**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

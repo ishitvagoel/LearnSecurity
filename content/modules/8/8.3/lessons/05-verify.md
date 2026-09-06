@@ -8,7 +8,9 @@
 
 “App Links are verified” is not evidence. The oracle is the local pair. Do not fire live Intents.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: as=admin
+
+The failing observation on `--impl vulnerable` is **as=admin**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

@@ -17,7 +17,7 @@ flowchart TD
   Old[SecureCollab recovery confirm] --> Q["What changed - actor, object, channel, time"]
   Q --> NewI["New 1.1 cells for chart and availability"]
   NewI --> NewR["New residuals - shared workstation, coercion"]
-  NewR --> Ev[New evidence: keyboard oracle, modality logs without chart text]
+  NewR --> Ev["New evidence: keyboard oracle, modality logs without chart text"]
 ```
 
 ## Prompt A — clinic step-up

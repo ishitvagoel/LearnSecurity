@@ -29,7 +29,7 @@ A sticker on the field that does not change the log API is theater. The TCB is t
 
 **Mechanism (not the property):** uvicorn access logs will store query strings (4.3). FastAPI does not know Confidential. A DLP product name is not this sentence.
 
-## Mental model: inventory before redaction
+## Mental model: inventory sinks before redaction
 
 ```mermaid
 flowchart LR

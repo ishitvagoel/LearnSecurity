@@ -8,7 +8,9 @@
 
 Review `labs/8.5/8.5-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/8.5.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: crash_report includes the body
+
+Start with this seeded smell: **`crash_report` includes the body**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

@@ -8,7 +8,9 @@
 
 Review `labs/E3/e3-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/E3.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: two capture(k1) charge twice
+
+Start with this seeded smell: **two capture(k1) charge twice**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

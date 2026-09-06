@@ -24,9 +24,9 @@ flowchart TD
 ```mermaid
 flowchart LR
   Api[API read] --> Grant[GRANTS]
-  Worker[7.4 worker] --> Grant
-  Cache[8.2 device] --> Grant
-  Mail[5.1 copy] --> Residual[already sent]
+  Worker["7.4 worker"] --> Grant
+  Cache["8.2 device"] --> Grant
+  Mail["5.1 copy"] --> Residual[already sent]
 ```
 
 ## Step 1: freeze pieces

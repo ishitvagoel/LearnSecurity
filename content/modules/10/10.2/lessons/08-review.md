@@ -8,7 +8,9 @@
 
 Review `labs/10.2/10.2-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/10.2.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: install_ok True on hash mismatch
+
+Start with this seeded smell: **install_ok True on hash mismatch**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

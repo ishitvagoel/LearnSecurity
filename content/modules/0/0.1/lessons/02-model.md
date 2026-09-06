@@ -14,10 +14,10 @@ SecureCollab freeze: local `target_is_authorized(url)`. Do not open example.com.
 
 ```mermaid
 flowchart TD
-  H1[127.0.0.1] --> Allow[may be in scope]
+  H1["127.0.0.1"] --> Allow[may be in scope]
   H2[localhost] --> Allow
-  H3[lab.securecollab.test] --> Allow
-  Pub[example.com] --> Deny[out of scope]
+  H3["lab.securecollab.test"] --> Allow
+  Pub["example.com"] --> Deny[out of scope]
 ```
 
 ## Mental model: vocabulary is not a target list

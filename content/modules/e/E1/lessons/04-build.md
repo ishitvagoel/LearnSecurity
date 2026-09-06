@@ -8,7 +8,7 @@
 
 `run_tool` must return `None` unless `name in ALLOWED`. Fail-safe: unknown tools deny. A system prompt may *accompany* the allowlist; it does not replace it.
 
-## Mental model: allowlist gate
+## Mental model: tool-name allowlist gate
 
 ```mermaid
 flowchart TD

@@ -25,7 +25,7 @@ flowchart LR
 
 If an arrow is missing, leftover retention appears. This lab executes notes, analytics, and search.
 
-## Mental model: inventory before redaction
+## Mental model: inventory copies before redaction
 
 ```mermaid
 flowchart TD

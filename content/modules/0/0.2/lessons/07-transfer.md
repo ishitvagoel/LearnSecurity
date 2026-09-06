@@ -26,7 +26,7 @@ Rewrite the SecureCollab sentence. Include:
 ```mermaid
 flowchart LR
   Pct[100 percent] --> Belief[knows isolation]
-  Lab[1.2 deny cell] --> Reality[evidence]
+  Lab["1.2 deny cell"] --> Reality[evidence]
 ```
 
 ## What graders reject

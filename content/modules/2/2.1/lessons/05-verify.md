@@ -8,7 +8,9 @@
 
 Happy-path HTTP 200 is not this module’s evidence (see 9.3). The oracle is the local pair against a named forbidden outcome.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: duplicate-key assertion
+
+The failing observation on `--impl vulnerable` is **duplicate-key assertion**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

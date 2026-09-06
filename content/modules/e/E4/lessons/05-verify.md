@@ -8,7 +8,9 @@
 
 "We use Kotlin" is not evidence. The oracle is the local pair. Do not compile native exploits.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: oversize copy
+
+The failing observation on `--impl vulnerable` is **oversize copy**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

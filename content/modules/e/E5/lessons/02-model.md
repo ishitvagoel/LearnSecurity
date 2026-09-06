@@ -27,7 +27,7 @@ flowchart TD
 flowchart LR
   Host[subdomain] --> Claim[looks like org]
   Bind[session] --> TCB[tenant_for]
-  Host --> NotBind[not 1.2]
+  Host --> NotBind["not 1.2"]
 ```
 
 ## Step 1: freeze pieces

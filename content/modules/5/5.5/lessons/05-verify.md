@@ -8,7 +8,9 @@
 
 “We parameterized queries” is not evidence. The oracle is the local pair.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: concatenated str
+
+The failing observation on `--impl vulnerable` is **concatenated str**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

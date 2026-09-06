@@ -8,7 +8,7 @@
 
 `merge_ok` must require a truthy `threat_model` field. Empty dict denies. The lab does not check TM *quality* — name that residual (3.2 age).
 
-## Mental model: fail closed
+## Mental model: empty threat-model fails closed
 
 ```mermaid
 flowchart TD

@@ -8,7 +8,9 @@
 
 Review `labs/7.3/7.3-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/7.3.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: Accept always true / process because path matched
+
+Start with this seeded smell: **Accept always true / process because path matched**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

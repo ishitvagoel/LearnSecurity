@@ -15,7 +15,7 @@ SecureCollab freeze: local `pod_ok(role)`. No live kube-apiserver.
 ```mermaid
 flowchart TD
   Rbac[RBAC] --> Who[who may call the API]
-  Pss[PSS / PSA] --> How[how the pod may run]
+  Pss["PSS / PSA"] --> How[how the pod may run]
   Net[NetworkPolicy] --> Talk[who the pod may talk to]
   Imds[IMDS hop] --> NodeIam[node credentials]
 ```
@@ -25,7 +25,7 @@ flowchart TD
 ```mermaid
 flowchart LR
   Cloud[cloud account IAM] --> You[your IaC]
-  You --> K8s[cluster RBAC / PSS]
+  You --> K8s["cluster RBAC / PSS"]
   K8s --> App[app SA]
 ```
 

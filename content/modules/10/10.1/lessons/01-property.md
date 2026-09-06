@@ -30,7 +30,7 @@ flowchart TD
 flowchart LR
   Owners[CODEOWNERS] --> Review[who must click]
   TmId[TM-12] --> Model[what changed]
-  Owners --> NotTm[not 3.2]
+  Owners --> NotTm["not 3.2"]
 ```
 
 **Mechanism (not the property):** CODEOWNERS, SAMM score, training checkbox, Secure by Design pledge.

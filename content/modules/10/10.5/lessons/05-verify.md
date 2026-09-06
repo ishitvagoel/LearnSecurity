@@ -8,7 +8,9 @@
 
 “SIEM green” is not evidence. The oracle is the local pair. Do not query a live SIEM.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: recovery todo
+
+The failing observation on `--impl vulnerable` is **recovery todo**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

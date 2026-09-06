@@ -8,7 +8,9 @@
 
 Review `labs/9.1/9.1-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/9.1.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: status-only coverage
+
+Start with this seeded smell: **status-only coverage**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

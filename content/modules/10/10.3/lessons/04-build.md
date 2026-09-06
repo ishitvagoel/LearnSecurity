@@ -10,7 +10,7 @@
 
 The lab allowlist is a **stand-in** for a namespaced Role + RoleBinding plus PSA `restricted`. It is not kube-apiserver.
 
-## Mental model: allowlist gate
+## Mental model: namespace is not cluster-admin
 
 ```mermaid
 flowchart TD

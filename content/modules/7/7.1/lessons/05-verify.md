@@ -8,7 +8,9 @@
 
 “We have OpenAPI” is not evidence. The oracle is the local pair. Do not probe public APIs.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: is_admin
+
+The failing observation on `--impl vulnerable` is **is_admin**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

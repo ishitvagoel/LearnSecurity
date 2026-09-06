@@ -8,7 +8,9 @@
 
 “Matrix imported” is not evidence. The oracle is the local pair. Do not call an ASVS portal.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: status-only
+
+The failing observation on `--impl vulnerable` is **status-only**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

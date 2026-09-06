@@ -8,7 +8,9 @@
 
 “We use AES” is not evidence. The oracle is the local pair.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: Base64 round-trip
+
+The failing observation on `--impl vulnerable` is **Base64 round-trip**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

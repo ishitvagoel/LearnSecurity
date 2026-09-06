@@ -8,7 +8,9 @@
 
 “Unique constraint exists” is not evidence. The oracle is the local pair.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: second t1
+
+The failing observation on `--impl vulnerable` is **second t1**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

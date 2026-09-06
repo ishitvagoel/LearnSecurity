@@ -8,7 +8,7 @@
 
 A new “quick check” snippet can paste a public host after the allow-list was “set once.” Pair detect and recover. **Never** store response bodies from denied hosts (3.1).
 
-## Mental model: denied host is a signal
+## Mental model: out-of-scope host is a signal
 
 ```mermaid
 flowchart TD

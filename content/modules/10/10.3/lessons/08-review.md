@@ -8,7 +8,9 @@
 
 Review `labs/10.3/10.3-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/10.3.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: cluster-admin on app SA
+
+Start with this seeded smell: **cluster-admin on app SA**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

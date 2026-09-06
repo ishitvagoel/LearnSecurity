@@ -8,7 +8,9 @@
 
 “I’ll be careful” is not evidence. The oracle is the local pair. Do not fetch example.com.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: public host
+
+The failing observation on `--impl vulnerable` is **public host**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

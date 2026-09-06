@@ -8,7 +8,9 @@
 
 HTTP 200 on a single click is not this module’s evidence (see 9.3). The oracle is two calls with the same key.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: count 2
+
+The failing observation on `--impl vulnerable` is **count 2**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

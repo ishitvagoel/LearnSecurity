@@ -18,12 +18,20 @@ next:
   pass: revise
   skill: deepen-curriculum
   inner_skill: quality-gate
-  note: Authoring-pass mental models and diagrams now cover every lesson in 0.1-11
-    and E1-E6, including remaining 1.1-1.4 lessons. Units stay developing / map-complete
+  note: Authoring-pass named mental models and mermaid now cover every lesson in 0.1-11
+    and E1-E6. Verify/review model titles are module-specific oracles rather than shared
+    slogans. The site renderer draws mermaid as SVG. Units stay developing / map-complete
     in revision.remaining until independent quality and lab-safety review artifacts
     exist under content/progress/reviews/. Do not mark depth publishable in this skill.
     1.1-1.3 remain the independently reviewed reference.
 spiral_deltas:
+- date: '2026-09-06'
+  module: curriculum
+  change: Verify and review Mental model headings name the local oracle or seeded
+    smell instead of shared slogans; mermaid node labels with dots or colons are quoted;
+    the React renderer distinguishes loading, SVG, and parse failure
+  retest: Independent quality and lab-safety review still required; re-check mermaid
+    SVG on lesson pages after any fence or heading change
 - date: '2026-09-06'
   module: '1.4'
   change: Named Mental model H2s on remaining verify/operate/transfer/review lessons;

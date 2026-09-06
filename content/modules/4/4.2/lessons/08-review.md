@@ -8,7 +8,9 @@
 
 Review `labs/4.2/4.2-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/4.2.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: phishing_resistant('password', evil, real) True
+
+Start with this seeded smell: **`phishing_resistant('password', evil, real)` True**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

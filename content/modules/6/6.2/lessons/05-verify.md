@@ -8,7 +8,9 @@
 
 “We added CSP” is not evidence. The oracle is the local pair.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: raw <
+
+The failing observation on `--impl vulnerable` is **raw <**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

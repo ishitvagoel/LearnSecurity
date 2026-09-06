@@ -8,7 +8,9 @@
 
 “We always LGTM after CI” is not evidence. The oracle is the local pair. Do not run eval on live input.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: eval approve
+
+The failing observation on `--impl vulnerable` is **eval approve**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

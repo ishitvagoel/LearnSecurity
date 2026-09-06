@@ -8,7 +8,9 @@
 
 Review `labs/3.3/3.3-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/3.3.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: DATABASE_URL uses superuser
+
+Start with this seeded smell: **`DATABASE_URL` uses superuser**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

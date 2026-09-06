@@ -8,7 +8,9 @@
 
 Review `labs/5.3/5.3-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/5.3.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: DEFAULT = 'sk-lab-hardcoded' still accepted
+
+Start with this seeded smell: **`DEFAULT = 'sk-lab-hardcoded'` still accepted**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

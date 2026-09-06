@@ -8,7 +8,9 @@
 
 “Capstone scanner green” is not evidence. The oracle is the local pair. Do not hit live tenants.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: B after revoke
+
+The failing observation on `--impl vulnerable` is **B after revoke**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

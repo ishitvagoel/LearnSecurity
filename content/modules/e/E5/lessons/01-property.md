@@ -30,7 +30,7 @@ flowchart TD
 flowchart LR
   Json[body tenant] --> Set["SET rls.tenant"]
   Set --> Belief[database isolation]
-  Bind2[session binding] --> TCB[1.2]
+  Bind2[session binding] --> TCB["1.2"]
   Set --> Not12[not mediation]
 ```
 

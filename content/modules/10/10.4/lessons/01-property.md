@@ -20,7 +20,7 @@ ASVS `v5.0.0-13.4.2` wants debug modes disabled for all components in production
 flowchart TD
   Name[NODE_ENV string] --> Belief[feels like prod]
   Flag[debug true] --> Pred{"boot_ok prod debug?"}
-  Pred -->|yes| Leak[traces /debugger]
+  Pred -->|yes| Leak["traces /debugger"]
   Pred -->|no| Deny[do not boot]
 ```
 
@@ -29,7 +29,7 @@ flowchart TD
 ```mermaid
 flowchart LR
   Debug[debug] --> Boot[boot_ok]
-  Flags[feature flags] --> Authz[may disable 1.2]
+  Flags[feature flags] --> Authz["may disable 1.2"]
   Admin["bind 0.0.0.0"] --> Surface[management]
   Boot --> NotFlag[debug is one cell]
 ```

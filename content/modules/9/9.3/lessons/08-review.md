@@ -8,7 +8,9 @@
 
 Review `labs/9.3/9.3-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/9.3.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: assert r.status_code==200 only
+
+Start with this seeded smell: **`assert r.status_code==200` only**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

@@ -14,7 +14,7 @@ SecureCollab freeze: local `isolation_enforced(headers)`. No live origins.
 
 ```mermaid
 flowchart TD
-  Enc[encoding] --> Html[6.2]
+  Enc[encoding] --> Html["6.2"]
   En[enforcing CSP] --> Browser[may block]
   Ro[Report-Only] --> Log[signal]
 ```

@@ -8,7 +8,9 @@
 
 “We set Referrer-Policy” is not evidence that the parser ignores query tokens. The oracle is the local pair.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: query returns secret
+
+The failing observation on `--impl vulnerable` is **query returns secret**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

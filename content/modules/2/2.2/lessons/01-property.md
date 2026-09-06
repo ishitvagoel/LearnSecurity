@@ -20,7 +20,7 @@ RFC 9846 specifies TLS 1.3. After the edge terminates TLS, later hops and stores
 flowchart LR
   Browser["Browser TLS to edge"] --> Edge[TLS ends]
   Edge --> Cache["Shared cache - HTTP semantics"]
-  Cache --> Origin[Origin 1.2 decision]
+  Cache --> Origin["Origin 1.2 decision"]
   Origin --> Key["Key must include bound tenant"]
 ```
 

@@ -8,7 +8,9 @@
 
 “They’re advanced” is not evidence. The oracle is the local pair. Do not hack an LMS.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: score 100 skip
+
+The failing observation on `--impl vulnerable` is **score 100 skip**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

@@ -24,7 +24,7 @@ flowchart TD
 flowchart LR
   Link[App Link] --> Q[query string]
   Scheme[custom scheme] --> Hijack[hijack residual]
-  Wv["WebView bridge"] --> Js[6.2 plus PLATFORM-2]
+  Wv["WebView bridge"] --> Js["6.2 plus PLATFORM-2"]
 ```
 
 ## Step 1: freeze pieces

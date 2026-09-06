@@ -8,7 +8,9 @@
 
 “We use Stripe” is not evidence. The oracle is the local pair. Do not hit live processors.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: two k1
+
+The failing observation on `--impl vulnerable` is **two k1**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

@@ -9,7 +9,7 @@
 
 Happy-path “pytest collected 1 item” is not evidence. The oracle must be **false** on the vulnerable tree and **true** on the fixed tree.
 
-## Mental model: property oracle vs mechanism oracle
+## Mental model: inaccessible recovery must fail the oracle
 
 A test that only asserts the confirm function exists can pass while the control remains mouse-only. The 1.4 oracle asks whether inaccessible recovery still counts as a passing control. Vulnerable must fail that question. Fixed must pass it.
 

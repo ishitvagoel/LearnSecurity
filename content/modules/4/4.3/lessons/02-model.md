@@ -16,8 +16,8 @@ SecureCollab Phase 1 freeze: local `session_from_request(query, cookie, header)`
 flowchart TD
   Q[Query string] --> Logs[Operators and SIEM]
   Q --> Ref[Third-party Referer]
-  C["HttpOnly cookie"] --> Jar[Sent, not script-readable - 2.3]
-  H[Authorization header] --> Hop[TLS hop - 2.2]
+  C["HttpOnly cookie"] --> Jar["Sent, not script-readable - 2.3"]
+  H[Authorization header] --> Hop["TLS hop - 2.2"]
 ```
 
 ## Mental model: JWT is a format

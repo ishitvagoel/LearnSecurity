@@ -8,7 +8,9 @@
 
 Review `labs/5.5/5.5-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/5.5.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: f-string SELECT that interpolates note_id
+
+Start with this seeded smell: **f-string `SELECT` that interpolates `note_id`**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

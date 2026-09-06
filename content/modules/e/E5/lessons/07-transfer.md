@@ -26,7 +26,7 @@ Rewrite the SecureCollab sentence. Include:
 ```mermaid
 flowchart LR
   Rls[RLS on] --> Belief[tenants isolated]
-  Bind[session tenant] --> Reality[1.2]
+  Bind[session tenant] --> Reality["1.2"]
 ```
 
 ## What graders reject

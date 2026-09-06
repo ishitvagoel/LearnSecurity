@@ -8,12 +8,14 @@
 
 Review `labs/0.2/0.2-bridge/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/0.2.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: if score >= 80: skip_phase(1)
+
+Start with this seeded smell: **`if score >= 80: skip_phase(1)`**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{What would falsify it?}
-  Q -->|score 100 skips 1.2| Property["Property - good if tested"]
+  Q -->|"score 100 skips 1.2"| Property["Property - good if tested"]
   Q -->|LMS percentage| Mechanism[Mechanism - number]
   Q -->|NICE mapped| False[False assurance]
 ```

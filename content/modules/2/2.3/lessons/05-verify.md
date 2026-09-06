@@ -8,7 +8,9 @@
 
 A green CSP scanner is not this module’s evidence. The oracle is the local pair.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: HttpOnly read
+
+The failing observation on `--impl vulnerable` is **HttpOnly read**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

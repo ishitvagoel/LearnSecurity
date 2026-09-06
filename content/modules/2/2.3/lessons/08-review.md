@@ -8,7 +8,9 @@
 
 Review `labs/2.3/2.3-browser-policy/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/2.3.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: document.cookie used to persist session
+
+Start with this seeded smell: **`document.cookie` used to persist session**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD

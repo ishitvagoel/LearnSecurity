@@ -8,7 +8,9 @@
 
 “We use UUID names” is not evidence. The oracle is the local pair.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: ../ escape
+
+The failing observation on `--impl vulnerable` is **../ escape**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

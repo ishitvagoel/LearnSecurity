@@ -8,12 +8,14 @@
 
 Review `labs/0.1/0.1-orientation/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/0.1.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: Any URL the proxy can open
+
+Start with this seeded smell: **Any URL the proxy can open**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{What would falsify it?}
-  Q -->|example.com authorized| Property["Property - good if tested"]
+  Q -->|"example.com authorized"| Property["Property - good if tested"]
   Q -->|Burp is installed| Mechanism[Mechanism - tool]
   Q -->|WSTG mapped| False[False assurance]
 ```

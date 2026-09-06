@@ -8,7 +8,9 @@
 
 “EncryptedSharedPreferences is on” is not evidence. The oracle is the local pair. Do not image phones.
 
-## Mental model: fail-on-vulnerable, pass-on-fixed
+## Mental model: vulnerable must fail: plaintext secret
+
+The failing observation on `--impl vulnerable` is **plaintext secret**. A passing collection count is not this cell.
 
 ```mermaid
 flowchart LR

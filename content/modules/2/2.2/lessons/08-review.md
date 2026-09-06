@@ -8,13 +8,15 @@
 
 Review `labs/2.2/2.2-request-path/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/2.2.md` — not here.
 
-## Mental model: property, mechanism, or false assurance
+## Mental model: Cache-Control: public on /notes/{id}
+
+Start with this seeded smell: **`Cache-Control: public` on `/notes/{id}`**. Label it property, mechanism, or false assurance before you accept the PR.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{What would falsify it?}
   Q -->|tB get returns tA body| Property["Property - good if tested"]
-  Q -->|we use TLS 1.3| Mechanism[Mechanism - ask which hop]
+  Q -->|"we use TLS 1.3"| Mechanism[Mechanism - ask which hop]
   Q -->|HTTPS so cache is safe| False[False assurance]
 ```
 

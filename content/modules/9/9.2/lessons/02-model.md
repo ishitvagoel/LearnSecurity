@@ -25,9 +25,9 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-  Human[human diff] --> Review[9.2]
+  Human[human diff] --> Review["9.2"]
   Gen[generated helper] --> Review
-  Bot[9.4 bot] --> Aid[aid not oracle]
+  Bot["9.4 bot"] --> Aid[aid not oracle]
 ```
 
 ## Step 1: freeze pieces

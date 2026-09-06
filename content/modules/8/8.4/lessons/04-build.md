@@ -8,7 +8,7 @@
 
 `api_allowed` must require `build_type == "release"` **and** `attest == "ok"` (lab stand-in for server-verified attest from 8.1). Debug never reaches prod.
 
-## Mental model: both gates
+## Mental model: attest and not-debug both gates
 
 ```mermaid
 flowchart TD
