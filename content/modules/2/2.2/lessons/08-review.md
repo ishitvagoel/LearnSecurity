@@ -1,28 +1,29 @@
-# 2.2-LO-08 — Review the path-only cache as a PR, not a slogan
+# Review of path-only cache keys
 
 **Kind:** code-review
 **Loop step:** Review
-**Standards:** IETF RFC 9110 (final); IETF RFC 9846 TLS 1.3 (final); OWASP ASVS 5.0.0 (final) `v5.0.0-14.2.2`.
 
-## Review the fixture as if it were SecureCollab edge cache
+Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
 
-Review `labs/2.2/2.2-request-path/vulnerable/` as a SecureCollab PR. Reconstruct whether the store still keys only on path, compare that with the module invariant, and write changes a developer can verify.
+## What you are reviewing
 
-Intended findings live only in `content/assessment/keys/2.2.md` — not here. Do not open the keys file until your review has been evaluated.
+A colleague ships a notes-app edge cache. Your job is to label each claim **rule**, **tool**, or **false comfort**, and to say which outcome (company B reading company A’s body) breaks if they ship. Start at the store key, not at a scanner color or an HTTPS checkbox.
 
-## Mental model: Cache-Control: public on /notes/{id}
+The folder `labs/2.2/2.2-request-path/vulnerable/` is the change. Reconstruct whether the store still keys only on path. Compare that with the rule. Write changes a developer can verify. The check you already ran (`test_other_tenant_does_not_receive_cached_body`) is the rule check. A comment “will add Vary later” is not.
 
-Start with this seeded smell: **`Cache-Control: public` on `/notes/{id}`**. Label it property, mechanism, or false assurance before you accept the PR.
+## Picture: problems to find (name them yourself)
+
+Start with this seeded smell: **`Cache-Control: public` on `/notes/{id}`**. Label it rule, tool, or false comfort before you accept the change.
 
 ```mermaid
 flowchart TD
-  Claim[PR claim] --> Q{What would falsify it?}
-  Q -->|tB get returns tA body| Property["Property - good if tested"]
-  Q -->|"we use TLS 1.3"| Mechanism[Mechanism - ask which hop]
-  Q -->|HTTPS so cache is safe| False[False assurance]
+  Claim[Change claim] --> Q{What would falsify it?}
+  Q -->|company B get returns company A body| Property["Rule - good if checked"]
+  Q -->|"we use TLS 1.3"| Mechanism[Tool - ask which hop]
+  Q -->|HTTPS so cache is safe| False[False comfort]
 ```
 
-For each claim and each branch: label **property**, **mechanism**, or **false assurance**.
+For each claim and each branch: label **rule**, **tool**, or **false comfort**.
 
 Seeded smells (label them yourself; do not open the keys file):
 
@@ -31,24 +32,24 @@ Seeded smells (label them yourself; do not open the keys file):
 - Comment “TLS so cache is safe”
 - Purge API not in the incident runbook
 
-Also reject: client `X-Tenant` as key input, `Vary: Cookie` as forever, Report-Only as enforcement, closing findings without retest of `test_other_tenant_does_not_receive_cached_body`, keys in lessons, live-target CDN tests.
+Also reject: client `X-Tenant` as key input; `Vary: Cookie` as forever; Report-Only as enforcement; closing findings without re-running `test_other_tenant_does_not_receive_cached_body`; keys in learner notes; live-target CDN work.
 
-## Misconceptions this module refuses
+## Common mix-ups
 
 - HTTPS means no cache bugs
 - CDNs are only a performance layer
 - `Vary: Cookie` is enough forever
-- RFC 9846 TLS 1.3 is the cache key
-- Next.js `fetch` cache defaults encode tenant
+- TLS 1.3 is the cache key
+- Next.js `fetch` cache defaults encode company
 
 ## Practice
 
-Write three review notes a peer could act on. Each note: observation, property or false assurance, suggested structural change, residual you will **not** delete. Tie at least one note to `test_other_tenant_does_not_receive_cached_body`.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_other_tenant_does_not_receive_cached_body`. Do not open the keys file.
 
-## Transfer
+## Use it somewhere new
 
-Authenticated RSS or export CSV via CDN. A PR that “turns on HTTPS” on only the browser hop is an incomplete mediation review. Name the independent falsehood that would still stop Tenant B from receiving Tenant A’s body.
+Authenticated RSS or export CSV via CDN. A change that “turns on HTTPS” on only the browser hop is an incomplete check-every-path review. Name the independent falsehood that would still stop company B from receiving company A’s body.
 
-## Non-goals
+## What this page is not doing
 
-Do not merge by adding a comment “will add Vary later.” That comment is a residual without an owner.
+Do not merge by adding a comment “will add Vary later.” That comment is leftover risk without an owner.

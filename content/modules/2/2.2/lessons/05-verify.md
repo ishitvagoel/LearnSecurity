@@ -1,60 +1,65 @@
-# 2.2-LO-05 — Evidence is a failing cross-tenant get, then a passing pair
+# Fail on the broken files, then pass on the repaired ones
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
-**Standards:** IETF RFC 9110 (final); OWASP ASVS 5.0.0 (final) `v5.0.0-14.2.2`.
 
-## An invariant that cannot fail a test is still a slogan
+## If you cannot check it, it is still a slogan
 
-Happy-path HTTP 200 over HTTPS is not this module’s evidence (see 9.3). The oracle is the local pair against a named forbidden outcome.
+Happy-path HTTP 200 over HTTPS is not evidence. The check must be **false** on the broken files and **true** on the repaired files.
 
-## Mental model: vulnerable must fail: tB get of tA body
+## Picture: a broken cache must fail the check
 
-The failing observation on `--impl vulnerable` is **tB get of tA body**. A passing collection count is not this cell.
+A check that only asserts HTTPS can pass while the key remains path-only. This check asks whether company B getting company A’s body still counts as a passing cache. Broken files must fail that question. Repaired files must pass it.
 
 ```mermaid
 flowchart LR
-  V["--impl vulnerable"] --> F[Must fail tB get of tA body]
-  X["--impl fixed"] --> P["Must pass tA hit and tB miss"]
-  F --> E[Evidence the key omitted tenant]
+  V["broken files"] --> F[Must fail: company B get of company A body]
+  X["repaired files"] --> P["Must pass: company A hit and company B miss"]
+  F --> E[Evidence the key omitted company]
   P --> E2[Evidence the pair is now bound]
 ```
 
-| Case | Must show |
+If both pass, the check is not looking at the cross-company get. If both fail, the fix is not structural or the check is wrong.
+
+## Four modes, even for a dict
+
+| Mode | Must show for this topic |
 |---|---|
-| Normal | After tA put, tA get returns `tenant-A-note` |
-| Negative / abuse | After tA put, tB get is not `tenant-A-note` and is `None` |
-| Failure default | Unknown tenant does not share the slot |
+| Normal | After company A put, company A get returns `tenant-A-note` |
+| Wrong input / abuse | After company A put, company B get is not `tenant-A-note` and is `None` |
+| When things break | Unknown company does not share the slot |
 | Not claimed | Live CDN `Vary`; browser `no-store`; DNS authenticity |
 
-Lab tests: `test_same_tenant_cache_hit` and `test_other_tenant_does_not_receive_cached_body` in `labs/2.2/2.2-request-path/tests/test_cache_key.py`. They observe bodies, not HTTP 200. That is a **forbidden-outcome** pair: a Tenant B get of `tenant-A-note` is not allowed to count as a passing cache.
+The file is `labs/2.2/2.2-request-path/tests/test_cache_key.py`. The checks are `test_same_tenant_cache_hit` and `test_other_tenant_does_not_receive_cached_body`. They observe bodies, not HTTP 200. That is a **what-must-not-happen** pair: a company B get of `tenant-A-note` is not allowed to count as a passing cache.
+
+Map each check to a cell from the request-path map. Do not paste keys. If the broken files do not fail the cross-company get, the practice files are miswired — fix the wiring, not the assertion.
+
+TLS 1.3 on the browser hop is not this check. A check that only asserts HTTPS is a tool observation.
+
+## What the checks do not prove
+
+- Live CDN `Vary` behavior
+- Browser `no-store`
+- Forwarded-header pinning in FastAPI
+- DNS authenticity
+
+Record those as leftover or later work, not as silent passes.
+
+## Practice
+
+Run both this session:
 
 ```text
 python3 -m pytest labs/2.2/2.2-request-path/tests --impl vulnerable
 python3 -m pytest labs/2.2/2.2-request-path/tests --impl fixed
 ```
 
-Map each test to a matrix cell from LO-02. Do not paste keys. If vulnerable does not fail the cross-tenant get, the lab is miswired—fix the wiring, not the assertion.
+Write the fail/pass pair next to the cache-key row. Reject a “check” that only greps `Cache-Control` without calling `cache_get` as company B. Paste nothing from answer keys.
 
-TLS 1.3 (RFC 9846, final) on the browser hop is not this oracle. A test that only asserts HTTPS is a mechanism observation.
+## Use it somewhere new
 
-## What the tests do not prove
+Authenticated RSS or export CSV via CDN. A check that only asserts status 200 on `/export` is not cache-key evidence. A check against a live CDN is out of scope.
 
-- Live CDN `Vary` behavior
-- Browser `no-store` (`v5.0.0-14.3.2`)
-- Forwarded-header pinning in FastAPI (`v5.0.0-4.1.3`)
-- DNS authenticity
+## What this page is not doing
 
-Record those as residuals or later work, not as silent passes.
-
-## Practice
-
-Execute both implementations this session. Write the fail/pass pair next to the LO-02 cache-key row. Reject a “test” that only greps `Cache-Control` without calling `cache_get` as Tenant B.
-
-## Transfer
-
-Authenticated RSS or export CSV via CDN. A test that only asserts status 200 on `/export` is not cache-key evidence. A test against a live CDN is out of scope.
-
-## Non-goals
-
-Do not add live traffic. Do not log `tenant-A-note`. Keys stay out of this file.
+Do not add live traffic. Do not log `tenant-A-note`. Answer keys stay out of this file.

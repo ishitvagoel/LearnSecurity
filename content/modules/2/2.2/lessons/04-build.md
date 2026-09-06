@@ -1,54 +1,64 @@
-# 2.2-LO-04 — Put the bound tenant in the key, or do not store
+# Put the company in the key, or do not store
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** Saltzer and Schroeder (1975, seminal) fail-safe defaults; IETF RFC 9110 (final); OWASP ASVS 5.0.0 (final) `v5.0.0-14.2.2` and `v5.0.0-4.1.3`.
 
-## Structural means the lookup is tenant-bound
+## The rule
 
-`cache_get` may return a body only when the lookup uses the same **bound** tenant as `cache_put`. Structural means the store actually partitions by that tenant—not `Cache-Control` theater, not a scanner suppression, not “the CDN is PCI compliant.”
+A denylist of yesterday’s CDN header is not the fix. Hiding a scanner warning is not the fix. “The CDN is compliant” is not the fix.
 
-## Mental model: miss is fail-safe
+The structural change is: `cache_get` may return a body only when the lookup uses the same **bound company** as `cache_put`. The store actually partitions by that company — not `Cache-Control` theater, not a scanner suppression. You do not restore secrecy by turning TLS ciphers up.
+
+## Picture: miss is fail-safe
 
 ```mermaid
 flowchart TD
-  Get["cache_get path, bound tenant"] --> Hit{Entry exists for that pair?}
-  Hit -->|yes| Body[Return that tenant's body]
-  Hit -->|no| Miss["Return none - do not serve another tenant"]
+  Get["cache_get path, bound company"] --> Hit{Entry exists for that pair?}
+  Hit -->|yes| Body[Return that company's body]
+  Hit -->|no| Miss["Return none - do not serve another company"]
 ```
 
-The lab’s fixed tree keys `(path, tenant)`. Production may instead **refuse to cache** note bodies (`no-store`). Both restore the confidentiality cell. Serving Tenant A because “the path matched” is not fail-safe.
+The repaired files key `(path, tenant)`. Production may instead **refuse to cache** note bodies (`no-store`). Both restore secrecy. Serving company A because “the path matched” is not fail-safe.
 
-Tenant in the key must be the 1.2-resolved tenant, not `Host` or `X-Forwarded-*` from the client (`v5.0.0-4.1.3`).
+Company in the key must be the company the who-is-allowed check already resolved, not `Host` or `X-Forwarded-*` from the client.
 
-Do not accept `Cache-Control: private` as membership in the key. Next.js `fetch` cache defaults do not encode tenant. A CDN that keys on path will still serve Tenant A’s note to Tenant B. The application guarantee is: **this** fixture, `cache_get("/notes/n1", "tB")` after a tA put is `None`.
+Do not accept `Cache-Control: private` as membership in the key. Next.js `fetch` cache defaults do not encode company. A CDN that keys on path will still serve company A’s note to company B. `Vary: Cookie` is not a company id. The app’s promise is: on **these** practice files, `cache_get("/notes/n1", "tB")` after a company A put is `None`.
 
-ASVS `v5.0.0-14.2.2` wants cached sensitive data isolated. This pytest is that sentence for path-only keys.
+Industry lists want cached sensitive data isolated. This check is that sentence for path-only keys.
 
-## Why this restores the cell
+## What the repaired files must show
+
+Read `fixed/cache.py` in the repaired files against this checklist. Do not treat the snippet as a production CDN.
 
 | After the fix | Must be true |
 |---|---|
-| tA put then tA get | body is `tenant-A-note` |
-| tA put then tB get | `None`, never `tenant-A-note` |
-| Anonymous fill | not in this lab; still deny at policy |
+| Company A put then company A get | body is `tenant-A-note` |
+| Company A put then company B get | `None`, never `tenant-A-note` |
+| Anonymous fill | not in this practice; still deny at who-is-allowed |
+
+Fail closed: if the bound company is missing or unknown, do not share the slot. Uncertainty is a **miss**, not a yes because the path looked familiar.
 
 ## What this is not
 
-Next.js `fetch` cache defaults do not encode tenant. `Cache-Control: private` still fails if your CDN is configured to cache anyway. `Vary: Cookie` is not a tenant id and is a later 2.3 fight.
+- Next.js `fetch` cache defaults. They do not encode company.
+- `Cache-Control: private` while your CDN is set to cache anyway.
+- `Vary: Cookie` as a company id. That is a later cookies-and-sessions fight.
+- More TLS ciphers. TLS still proves a hop, not who may read a cached body.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass):
+Name who, what, action, and the check that must be true after the fix. Run:
 
-```
+```text
 python3 -m pytest labs/2.2/2.2-request-path/tests --impl fixed
 ```
 
-## Transfer
+It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
+
+## Use it somewhere new
 
 Authenticated RSS or export CSV via CDN. The fix is still “bound identity in the key, or do not store,” not “more TLS ciphers.”
 
-## Residual risk
+## What can still go wrong
 
-Operational error at the CDN remains; a config can drop the tenant dimension. Keep a purge playbook.
+An operator can still drop the company dimension at the CDN. Keep a purge playbook. This practice is not a live edge config.
