@@ -66,4 +66,4 @@ Clinic guardian invite. A test that only asserts HTTP 200 on `/accept` is not th
 
 ## What this page is not doing
 
-Do not add a live race harness. Do not log tokens. Answer keys stay out of this file.
+Do not add a live race harness. Do not log tokens. Answer keys are not on this site.

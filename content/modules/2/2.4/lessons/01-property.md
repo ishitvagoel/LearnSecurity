@@ -87,4 +87,4 @@ Disable-on-submit is not the rule. An accessible “still working” message mus
 
 ## What this page is not doing
 
-Live targets, load-testing third-party APIs, clock tricks against NTP, real payments, and treating an awareness list as the definition of security. Answer keys are not in this file.
+Live targets, load-testing third-party APIs, clock tricks against NTP, real payments, and treating an awareness list as the definition of security. Answer keys are not on this site.

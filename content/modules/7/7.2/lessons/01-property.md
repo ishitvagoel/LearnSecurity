@@ -85,4 +85,4 @@ Clinic: a member cannot resolve SSN. Also name bulk update and search highlighti
 
 ## What this page is not doing
 
-Live GraphQL attacks, dumping ORM models into notes. Course gates stay unclaimed without learner or product evidence. Answer keys are not in this file.
+Live GraphQL attacks, dumping ORM models into notes. Course gates stay unclaimed without learner or product evidence. Answer keys are not on this site.

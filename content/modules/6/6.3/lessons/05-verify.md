@@ -61,4 +61,4 @@ Clinic partner-share. A test that only asserts HTTP 200 on `/share` is not this 
 
 ## What this page is not doing
 
-Do not add a live CSRF page. Do not log cookie values. Answer keys stay out of this file.
+Do not add a live CSRF page. Do not log cookie values. Answer keys are not on this site.

@@ -63,4 +63,4 @@ If a human sees a quota deny, announce “try tomorrow.” A spinner that retrie
 
 ## What this page is not doing
 
-A filter-product name is not the rule. Public load tests are out of scope. Course gates stay unclaimed. Answer keys stay out of lessons.
+A filter-product name is not the rule. Public load tests are out of scope. This site does not mark you as finished. Answer keys are not on this site.

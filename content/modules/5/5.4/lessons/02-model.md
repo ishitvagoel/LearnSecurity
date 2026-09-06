@@ -69,4 +69,4 @@ TLS to the load balancer is not end-to-end. Pinning is leftover. OCSP stapling a
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Do not run this map against a public clinic or a live load balancer. Answer keys stay out of lessons.
+Do not define security as a famous-bugs list. Do not run this map against a public clinic or a live load balancer. Answer keys are not on this site.

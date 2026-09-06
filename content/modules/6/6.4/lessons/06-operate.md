@@ -50,4 +50,4 @@ Clinic: notice scan names that leave the imaging root; do not paste filenames in
 
 ## What this page is not doing
 
-An antivirus product name is not the rule. Live host reads are out of scope. Course gates stay not-attempted. Answer keys stay out of lessons.
+An antivirus product name is not the rule. Live host reads are out of scope. Course gates stay not-attempted. Answer keys are not on this site.

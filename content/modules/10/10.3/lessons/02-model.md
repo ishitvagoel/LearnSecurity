@@ -74,4 +74,4 @@ Break-glass admin with a later elective. Documented connection and retry toward 
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys stay out of lessons.
+Do not define security as a famous-bugs list. Answer keys are not on this site.

@@ -96,4 +96,4 @@ Clinic: revoke a guardian. Full notes-app slice: the same cell across API, worke
 
 ## What this page is not doing
 
-Live tenants, claiming you finished an assurance gate. Answer keys are not in this file.
+Live tenants, claiming you finished an assurance gate. Answer keys are not on this site.

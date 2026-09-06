@@ -81,4 +81,4 @@ Clinic DICOM / image parser. Protobuf C extension.
 
 ## What this page is not doing
 
-Weaponized native exploits. An awareness list as the syllabus. Course gates from this page. Answer keys are not in this file.
+Weaponized native exploits. An awareness list as the syllabus. Course gates from this page. Answer keys are not on this site.

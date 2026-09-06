@@ -74,4 +74,4 @@ Copies already sent. Access-rights change in the same session without signing in
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys stay out of lessons.
+Do not define security as a famous-bugs list. Answer keys are not on this site.

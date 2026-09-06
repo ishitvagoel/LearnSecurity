@@ -53,4 +53,4 @@ Clinic SMS. A test that only asserts HTTP 200 is not threat-model evidence. A te
 
 ## What this page is not doing
 
-Do not add a live scanner tenant. Do not log note bodies. Answer keys stay out of this file.
+Do not add a live scanner tenant. Do not log note bodies. Answer keys are not on this site.

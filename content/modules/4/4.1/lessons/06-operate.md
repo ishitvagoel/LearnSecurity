@@ -63,4 +63,4 @@ Clinic: notice chart use after badge disable; do not paste the chart into the ti
 
 ## What this page is not doing
 
-A log-product name is not the rule. Do not run live queries against a production identity provider. Answer keys stay out of lessons.
+A log-product name is not the rule. Do not run live queries against a production identity provider. Answer keys are not on this site.

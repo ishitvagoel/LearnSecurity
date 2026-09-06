@@ -55,4 +55,4 @@ Clinic patient portal. A test that only asserts `Set-Cookie` exists is not HttpO
 
 ## What this page is not doing
 
-Do not add a live page. Do not log `synthetic-session`. Answer keys stay out of this file.
+Do not add a live page. Do not log `synthetic-session`. Answer keys are not on this site.

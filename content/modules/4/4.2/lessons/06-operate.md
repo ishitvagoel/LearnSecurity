@@ -59,4 +59,4 @@ Do not encode “phishing-resistant” as green-only. Keyboard users still need 
 
 ## What this page is not doing
 
-A log-product name is not the rule. Live phishing hunts are out of scope. Answer keys stay out of lessons.
+A log-product name is not the rule. Live phishing hunts are out of scope. Answer keys are not on this site.

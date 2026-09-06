@@ -66,4 +66,4 @@ Clinic search box. A test that only asserts HTTP 200 is not this check (see 9.3)
 
 ## What this page is not doing
 
-Do not add a live SQL trophy. Do not log bound parameter values that are bodies. Answer keys stay out of this file.
+Do not add a live SQL trophy. Do not log bound parameter values that are bodies. Answer keys are not on this site.

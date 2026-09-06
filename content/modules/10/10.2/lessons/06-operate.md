@@ -70,4 +70,4 @@ Clinic: deny npm in the prod pod; do not paste `.npmrc` into the ticket. Do not 
 
 ## What this page is not doing
 
-An SBOM-vendor name is not the rule. Live registry traces are out of scope. The ship gate stays not-attempted. A provenance badge is not this alert. Answer keys stay out of lessons.
+An SBOM-vendor name is not the rule. Live registry traces are out of scope. The ship gate stays not-attempted. A provenance badge is not this alert. Answer keys are not on this site.

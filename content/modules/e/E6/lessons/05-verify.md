@@ -67,4 +67,4 @@ Clinic: a test that only asserts “we have a HIPAA slide” is not this topic. 
 
 ## What this page is not doing
 
-Do not add a live-disclosure trophy. Do not log secret writeups. Answer keys stay out of this file. Do not claim you finished an assurance gate.
+Do not add a live-disclosure trophy. Do not log secret writeups. Answer keys are not on this site. Do not claim you finished an assurance gate.

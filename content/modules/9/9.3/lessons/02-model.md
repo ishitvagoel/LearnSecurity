@@ -72,4 +72,4 @@ Looking around (9.5). Field grain (7.2). A race-condition test with no named bad
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys stay out of lessons.
+Do not define security as a famous-bugs list. Answer keys are not on this site.

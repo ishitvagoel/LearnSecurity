@@ -80,4 +80,4 @@ Clinic invite-guardian token. Password reset. 2.4 share retry. Later job deliver
 
 ## What this page is not doing
 
-Live race exploits, dumping lab Python into notes. Course gates stay unclaimed. Answer keys are not in this file.
+Live race exploits, dumping lab Python into notes. This site does not mark you as finished. Answer keys are not on this site.

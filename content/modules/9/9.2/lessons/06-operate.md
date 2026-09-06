@@ -68,4 +68,4 @@ A blocked review must say *why* in plain language (eval on user input), not only
 
 ## What this page is not doing
 
-A bot-vendor name is not the rule. Course gates stay unclaimed. Answer keys stay out of lessons.
+A bot-vendor name is not the rule. This site does not mark you as finished. Answer keys are not on this site.

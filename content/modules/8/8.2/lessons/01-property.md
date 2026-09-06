@@ -82,4 +82,4 @@ Clinic offline chart cache. iOS Keychain vs Android Keystore. Desktop Electron.
 
 ## What this page is not doing
 
-Live device imaging, dumping real AES into lessons. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not in this file.
+Live device imaging, dumping real AES into lessons. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not on this site.

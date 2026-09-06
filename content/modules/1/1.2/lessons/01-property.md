@@ -167,4 +167,4 @@ A later background job receives a signed message saying “export company A.” 
 
 ## What this page is not doing
 
-Live targets. Treating a “top ten bugs” list as the course. Ready-made attack recipes. Answer keys are not in this file.
+Live targets. Treating a “top ten bugs” list as the course. Ready-made attack recipes. Answer keys are not on this site.

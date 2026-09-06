@@ -66,4 +66,4 @@ Clinic: a review that only asserts “template still renders” is not this chec
 
 ## What this page is not doing
 
-Do not add a live-org trophy. Do not log eval payloads. Answer keys stay out of this file. Course gates stay unclaimed.
+Do not add a live-org trophy. Do not log eval payloads. Answer keys are not on this site. This site does not mark you as finished.

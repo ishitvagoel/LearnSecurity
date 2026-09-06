@@ -69,4 +69,4 @@ Clinic: a test that only asserts “alert fired” is not this topic. A live SIE
 
 ## What this page is not doing
 
-Do not add a live-incident trophy. Do not log note bodies. Answer keys stay out of this file. Do not claim you finished an assurance gate.
+Do not add a live-incident trophy. Do not log note bodies. Answer keys are not on this site. Do not claim you finished an assurance gate.

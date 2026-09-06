@@ -61,4 +61,4 @@ Clinic: notice PDF fetches to hosts that are not on the allow-list; do not paste
 
 ## What this page is not doing
 
-A log-product name is not the rule. A cloud web-filter name is not this check. Live metadata probes are out of scope. Course gates stay unclaimed. Answer keys stay out of lessons.
+A log-product name is not the rule. A cloud web-filter name is not this check. Live metadata probes are out of scope. This site does not mark you as finished. Answer keys are not on this site.

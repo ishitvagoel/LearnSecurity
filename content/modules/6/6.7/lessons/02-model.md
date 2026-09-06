@@ -69,4 +69,4 @@ New accounts that reset the window. An owned burst exception with no owner. Huma
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Do not run this map against a live clinic or a public host. Answer keys stay out of lessons.
+Do not define security as a famous-bugs list. Do not run this map against a live clinic or a public host. Answer keys are not on this site.

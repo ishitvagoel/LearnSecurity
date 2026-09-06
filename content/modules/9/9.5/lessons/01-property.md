@@ -95,4 +95,4 @@ Known-exploited list vs an internal-only bug. Clinic pentest PDF on a shelf.
 
 ## What this page is not doing
 
-Live-target pentests, real people's data, copy-paste exploits. Do not claim you finished an assurance gate from this page. Answer keys are not in this file.
+Live-target pentests, real people's data, copy-paste exploits. Do not claim you finished an assurance gate from this page. Answer keys are not on this site.

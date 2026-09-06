@@ -65,4 +65,4 @@ Clinic SSO. A check that only asserts HTTP 200 is not authenticator evidence. A 
 
 ## What this page is not doing
 
-Do not add a live phishing page. Do not log passwords. Answer keys stay out of this file.
+Do not add a live phishing page. Do not log passwords. Answer keys are not on this site.

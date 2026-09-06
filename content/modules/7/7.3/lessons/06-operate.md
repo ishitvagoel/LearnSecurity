@@ -64,4 +64,4 @@ Provider retries on 5xx can amplify load (6.7). Return 4xx on a bad MAC so retri
 
 ## What this page is not doing
 
-A log-product name is not the rule. A web-filter name is not this check. Live provider posts are out of scope. Course gates stay unclaimed. Answer keys stay out of lessons.
+A log-product name is not the rule. A web-filter name is not this check. Live provider posts are out of scope. This site does not mark you as finished. Answer keys are not on this site.

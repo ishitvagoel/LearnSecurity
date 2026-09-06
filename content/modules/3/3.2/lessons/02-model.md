@@ -76,4 +76,4 @@ Unknown unknowns. Review triggers exist for that. Privacy-method stickers wait f
 
 ## What this page is not doing
 
-Treating a Top 10 as the definition of security. Answer keys stay out of lessons.
+Treating a Top 10 as the definition of security. Answer keys are not on this site.

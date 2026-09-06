@@ -67,4 +67,4 @@ Clickjacking; CORS credentials; advanced authenticated embeds; lookalike UI from
 
 ## What this page is not doing
 
-A famous-bugs list as the definition of security. Answer keys stay out of lessons.
+A famous-bugs list as the definition of security. Answer keys are not on this site.

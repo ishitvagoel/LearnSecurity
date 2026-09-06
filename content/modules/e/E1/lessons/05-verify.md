@@ -66,4 +66,4 @@ Clinic: a test that only asserts "the prompt mentions `exec_sql`" is not this to
 
 ## What this page is not doing
 
-Do not add a live-model trophy. Do not log transcripts. Answer keys stay out of this file. Do not claim you finished an assurance gate.
+Do not add a live-model trophy. Do not log transcripts. Answer keys are not on this site. Do not claim you finished an assurance gate.

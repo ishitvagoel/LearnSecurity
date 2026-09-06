@@ -67,4 +67,4 @@ Clinic: a test that only asserts “container started” is not this topic. A li
 
 ## What this page is not doing
 
-Do not add a live-host trophy. Do not log stack traces. Answer keys stay out of this file. The assurance gate stays not-attempted.
+Do not add a live-host trophy. Do not log stack traces. Answer keys are not on this site. The assurance gate stays not-attempted.

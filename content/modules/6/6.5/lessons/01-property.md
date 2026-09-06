@@ -80,4 +80,4 @@ Clinic “fetch lab result PDF from URL.” Webhooks wait for 7.3.
 
 ## What this page is not doing
 
-Live metadata fetches, public server-side request hunts, dumping lab Python into notes. Course gates stay unclaimed. Answer keys are not in this file.
+Live metadata fetches, public server-side request hunts, dumping lab Python into notes. This site does not mark you as finished. Answer keys are not on this site.

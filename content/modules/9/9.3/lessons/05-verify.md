@@ -66,4 +66,4 @@ Clinic: a test that only asserts the patient page loads is not this topic. A liv
 
 ## What this page is not doing
 
-Do not add a live fuzz trophy. Do not log note bodies. Answer keys stay out of this file.
+Do not add a live fuzz trophy. Do not log note bodies. Answer keys are not on this site.

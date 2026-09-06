@@ -61,4 +61,4 @@ Clinic: notice chart text in appointment logs; purge without pasting the chart i
 
 ## What this page is not doing
 
-A log-product name is not the rule. Do not run live queries against production logs. Answer keys stay out of lessons.
+A log-product name is not the rule. Do not run live queries against production logs. Answer keys are not on this site.

@@ -67,4 +67,4 @@ Clinic: a test that only asserts “crash dialog shown” is not this topic. A t
 
 ## What this page is not doing
 
-Do not add a live crash trophy. Do not log note bodies. Answer keys stay out of this file.
+Do not add a live crash trophy. Do not log note bodies. Answer keys are not on this site.

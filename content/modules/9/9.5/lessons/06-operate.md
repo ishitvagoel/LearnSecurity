@@ -70,4 +70,4 @@ Clinic: reopen the PDF-shelf ticket; do not attach patient rows. Do not pentest 
 
 ## What this page is not doing
 
-A ticket-product name is not the rule. Do not claim you finished an assurance gate. A known-exploited listing is not a scan licence. Answer keys stay out of lessons.
+A ticket-product name is not the rule. Do not claim you finished an assurance gate. A known-exploited listing is not a scan licence. Answer keys are not on this site.

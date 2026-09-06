@@ -213,4 +213,4 @@ This local repair still shares a process, a practice registry, policy code, and 
 
 ## What this page is not doing
 
-Mutual TLS as the week’s proof. Workload certificates. Queue authenticity. Live targets. Answer keys are not in this file.
+Mutual TLS as the week’s proof. Workload certificates. Queue authenticity. Live targets. Answer keys are not on this site.

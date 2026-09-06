@@ -55,4 +55,4 @@ Clinic last slot. A test that only asserts HTTP 201 once is not double-book evid
 
 ## What this page is not doing
 
-Do not add a live race. Do not log note bodies. Answer keys stay out of this file.
+Do not add a live race. Do not log note bodies. Answer keys are not on this site.

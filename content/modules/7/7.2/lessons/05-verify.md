@@ -55,4 +55,4 @@ Clinic: a test that only asserts HTTP 200 on `/patients/{id}` is 4.4, not this c
 
 ## What this page is not doing
 
-Do not add a live schema trophy. Do not log `secret_internal` values. Answer keys stay out of this file.
+Do not add a live schema trophy. Do not log `secret_internal` values. Answer keys are not on this site.

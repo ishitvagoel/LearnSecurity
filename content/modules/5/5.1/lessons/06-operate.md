@@ -63,4 +63,4 @@ Clinic: notice appointment-card notes after patient delete; do not paste the cha
 
 ## What this page is not doing
 
-A log-product name is not the rule. Do not run live queries against a production warehouse. Answer keys stay out of lessons.
+A log-product name is not the rule. Do not run live queries against a production warehouse. Answer keys are not on this site.

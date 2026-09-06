@@ -83,4 +83,4 @@ Clinic change `{is_staff:true}`. GraphQL mutation arguments. gRPC unknown fields
 
 ## What this page is not doing
 
-Live public-API attacks, dumping Pydantic source into notes. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not in this file.
+Live public-API attacks, dumping Pydantic source into notes. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not on this site.

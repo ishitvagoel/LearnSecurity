@@ -56,4 +56,4 @@ Clinic nickname. A check that only asserts HTTP 200 is not this cell (see 9.3). 
 
 ## What this page is not doing
 
-Do not add an attack recipe. Do not log title bodies if they are patient data. Answer keys stay out of this file.
+Do not add an attack recipe. Do not log title bodies if they are patient data. Answer keys are not on this site.

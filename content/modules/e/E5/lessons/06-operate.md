@@ -53,4 +53,4 @@ Clinic: deny the `org_id` switch; do not paste the chart note into the ticket. D
 
 ## What this page is not doing
 
-A row-level vendor name is not the rule. Course gates stay unclaimed. A famous-bugs list is not this alert. Answer keys stay out of lessons.
+A row-level vendor name is not the rule. This site does not mark you as finished. A famous-bugs list is not this alert. Answer keys are not on this site.

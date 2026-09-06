@@ -66,4 +66,4 @@ Clinic: a test that only asserts “HIPAA training complete” is not this topic
 
 ## What this page is not doing
 
-Do not add a live-org trophy. Do not log GitHub tokens. Answer keys stay out of this file. Gate 10 stays not-attempted.
+Do not add a live-org trophy. Do not log GitHub tokens. Answer keys are not on this site. Gate 10 stays not-attempted.

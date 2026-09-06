@@ -59,4 +59,4 @@ Clinic: notice search-box syntax errors; do not paste patient names into the tic
 
 ## What this page is not doing
 
-A log-product name is not the rule. A web filter is not this check. Live SQL hunts are out of scope. Course gates stay unclaimed. Answer keys stay out of lessons.
+A log-product name is not the rule. A web filter is not this check. Live SQL hunts are out of scope. This site does not mark you as finished. Answer keys are not on this site.

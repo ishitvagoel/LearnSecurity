@@ -66,4 +66,4 @@ Clinic page. A test that only asserts the site loads on port 443 is not this cel
 
 ## What this page is not doing
 
-Do not add a live TLS attack. Do not log cookie values. Answer keys stay out of this file.
+Do not add a live TLS attack. Do not log cookie values. Answer keys are not on this site.

@@ -49,4 +49,4 @@ Clinic: notice missing `sms-content-leak` after the reminder feature merges. Do 
 
 ## What this page is not doing
 
-A log-product name is not the rule. Answer keys stay out of lessons. Do not claim a course gate without learner or product evidence.
+A log-product name is not the rule. Answer keys are not on this site. Do not claim a course gate without learner or product evidence.

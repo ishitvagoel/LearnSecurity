@@ -66,4 +66,4 @@ Clinic: a test that only asserts “revoke returned 200” is not this topic. A 
 
 ## What this page is not doing
 
-Do not add a live-tenant trophy. Do not log note bodies. Answer keys stay out of this file. Do not claim you finished an assurance gate.
+Do not add a live-tenant trophy. Do not log note bodies. Answer keys are not on this site. Do not claim you finished an assurance gate.

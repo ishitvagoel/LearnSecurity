@@ -62,4 +62,4 @@ Clinic: notice batch-export jobs running as a clinician session on a local pract
 
 ## What this page is not doing
 
-A zero-trust product name is not the rule. Live broker attaches are out of scope. Course gates stay unclaimed. Answer keys stay out of lessons.
+A zero-trust product name is not the rule. Live broker attaches are out of scope. This site does not mark you as finished. Answer keys are not on this site.

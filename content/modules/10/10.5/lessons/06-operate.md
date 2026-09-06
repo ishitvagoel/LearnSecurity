@@ -70,4 +70,4 @@ Clinic: reopen the SIEM-green ticket; do not paste note text into chat. Do not q
 
 ## What this page is not doing
 
-A SIEM-vendor name is not the rule. Do not claim you finished an assurance gate. A known-exploited listing is not close. Answer keys stay out of lessons.
+A SIEM-vendor name is not the rule. Do not claim you finished an assurance gate. A known-exploited listing is not close. Answer keys are not on this site.

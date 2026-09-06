@@ -58,4 +58,4 @@ Clinic PATCH `{is_staff:true}`. A check that only asserts HTTP 200 on `/patients
 
 ## What this page is not doing
 
-Do not add a live OpenAPI trophy. Do not log PATCH bodies. Answer keys stay out of this file.
+Do not add a live OpenAPI trophy. Do not log PATCH bodies. Answer keys are not on this site.

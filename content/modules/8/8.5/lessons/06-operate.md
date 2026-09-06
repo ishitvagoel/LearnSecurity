@@ -68,4 +68,4 @@ Clinic: notice a crash that would have included a fake name; do not attach the r
 
 ## What this page is not doing
 
-A crash-product name is not the rule. Live vendor traces are out of scope. Answer keys stay out of lessons.
+A crash-product name is not the rule. Live vendor traces are out of scope. Answer keys are not on this site.

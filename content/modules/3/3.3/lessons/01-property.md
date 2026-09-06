@@ -82,4 +82,4 @@ A serverless function with a shared `admin` connection string. A clinic billing 
 
 ## What this page is not doing
 
-Live cloud databases, real company dumps, weaponized SQL, and “microservices isolate companies.” Course gates stay unclaimed without learner or product evidence. Answer keys are not in this file.
+Live cloud databases, real company dumps, weaponized SQL, and “microservices isolate companies.” Course gates stay unclaimed without learner or product evidence. Answer keys are not on this site.

@@ -137,4 +137,4 @@ Synthetic product card only. No live CI, cloud account, or real repository.
 
 ## What this page is not doing
 
-Live-target steps. Vendor prescriptions. Copying the notes-app table with the nouns swapped. Answer keys are not in this file.
+Live-target steps. Vendor prescriptions. Copying the notes-app table with the nouns swapped. Answer keys are not on this site.

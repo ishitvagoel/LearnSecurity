@@ -70,4 +70,4 @@ Clinic: deny the ClusterRoleBinding; do not paste `~/.kube/config` into the tick
 
 ## What this page is not doing
 
-A CIS-benchmark product name is not the rule. Do not claim you finished an assurance gate. A restricted pod profile is not this alert. Answer keys stay out of lessons.
+A CIS-benchmark product name is not the rule. Do not claim you finished an assurance gate. A restricted pod profile is not this alert. Answer keys are not on this site.

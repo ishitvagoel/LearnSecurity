@@ -83,4 +83,4 @@ Clinic Android `hipaaMode=true`. Feature flags in the app file. `premium=true`.
 
 ## What this page is not doing
 
-Live Play Console, device-farm attacks, or instrumentation cookbooks against a personal phone. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not in this file.
+Live Play Console, device-farm attacks, or instrumentation cookbooks against a personal phone. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not on this site.

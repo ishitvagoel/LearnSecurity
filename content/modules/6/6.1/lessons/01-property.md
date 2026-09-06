@@ -79,4 +79,4 @@ Clinic export-to-CSV filename. Jinja, SQL, mail headers.
 
 ## What this page is not doing
 
-Live command execution, shell-punctuation cookbooks, dumping lab Python into notes. Course gates stay unclaimed. Answer keys are not in this file.
+Live command execution, shell-punctuation cookbooks, dumping lab Python into notes. This site does not mark you as finished. Answer keys are not on this site.

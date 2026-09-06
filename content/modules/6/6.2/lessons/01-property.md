@@ -82,4 +82,4 @@ A clinic patient nickname field. Markdown-to-HTML cleaner as a second parser.
 
 ## What this page is not doing
 
-Weaponized attack recipes, live-target walkthroughs, dumping practice Python into notes. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not in this file.
+Weaponized attack recipes, live-target walkthroughs, dumping practice Python into notes. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not on this site.

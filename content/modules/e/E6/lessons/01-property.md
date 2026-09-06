@@ -93,4 +93,4 @@ Clinic “HIPAA exception.” A procurement questionnaire vs this record.
 
 ## What this page is not doing
 
-Live disclosure inboxes. A maturity score as the syllabus. Claiming you finished an assurance gate. Answer keys are not in this file.
+Live disclosure inboxes. A maturity score as the syllabus. Claiming you finished an assurance gate. Answer keys are not on this site.

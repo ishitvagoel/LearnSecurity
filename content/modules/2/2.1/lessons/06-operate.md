@@ -56,4 +56,4 @@ GraphQL and REST both ingest the same note. Two refuse metrics, or one shared in
 
 ## What this page is not doing
 
-A log-product name is not the rule. Answer keys stay out of lessons.
+A log-product name is not the rule. Answer keys are not on this site.

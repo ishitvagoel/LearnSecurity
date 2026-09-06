@@ -57,4 +57,4 @@ Clinic: a test that only asserts Room `insert` succeeded is not this cell. Perso
 
 ## What this page is not doing
 
-Do not add a live backup trophy. Do not log note bodies. Answer keys stay out of this file. Do not claim the lab prefix is AES.
+Do not add a live backup trophy. Do not log note bodies. Answer keys are not on this site. Do not claim the lab prefix is AES.

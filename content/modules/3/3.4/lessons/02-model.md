@@ -75,4 +75,4 @@ Legitimate teams >5 need an owned exception. Parallel sixths need locking from t
 
 ## What this page is not doing
 
-Treating an awareness list as the definition of security. Answer keys stay out of lessons.
+Treating an awareness list as the definition of security. Answer keys are not on this site.

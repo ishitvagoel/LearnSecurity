@@ -59,4 +59,4 @@ Clinic: a test that only asserts “row-level rules are on” is not this cell. 
 
 ## What this page is not doing
 
-Do not add a live-company trophy. Do not log note bodies. Answer keys stay out of this file. Course gates stay unclaimed.
+Do not add a live-company trophy. Do not log note bodies. Answer keys are not on this site. This site does not mark you as finished.

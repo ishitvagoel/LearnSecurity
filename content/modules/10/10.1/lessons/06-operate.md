@@ -68,4 +68,4 @@ Clinic: block an identity change with no threat-model id; do not paste HIPAA tra
 
 ## What this page is not doing
 
-A GitHub-product name is not the rule. Live-org traces are out of scope. Gate 10 and M4 stay not-attempted. An unverified “secure by design” page stays unverified. A later draft of the design-review guide stays a draft. Answer keys stay out of lessons.
+A GitHub-product name is not the rule. Live-org traces are out of scope. Gate 10 and M4 stay not-attempted. An unverified “secure by design” page stays unverified. A later draft of the design-review guide stays a draft. Answer keys are not on this site.

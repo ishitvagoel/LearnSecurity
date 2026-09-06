@@ -68,4 +68,4 @@ Clinic: block a release when the HIPAA “done” column has no isolation test; 
 
 ## What this page is not doing
 
-A governance-product name is not the rule. Live portal traces are out of scope. The verification gate stays not-attempted. Answer keys stay out of lessons.
+A governance-product name is not the rule. Live portal traces are out of scope. The verification gate stays not-attempted. Answer keys are not on this site.

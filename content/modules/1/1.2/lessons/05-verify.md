@@ -208,4 +208,4 @@ Green checks on this laptop are not a pentest of a website. They are evidence fo
 
 ## What this page is not doing
 
-Live targets. Ready-made attack recipes. Treating a status code as the oracle. Answer keys are not in this file.
+Live targets. Ready-made attack recipes. Treating a status code as the oracle. Answer keys are not on this site.

@@ -58,4 +58,4 @@ Clinic: a check that only asserts the Android button is disabled is not this cel
 
 ## What this page is not doing
 
-Do not add a device-farm trophy. Do not log attestation blobs. Answer keys stay out of this file.
+Do not add a device-farm trophy. Do not log attestation blobs. Answer keys are not on this site.

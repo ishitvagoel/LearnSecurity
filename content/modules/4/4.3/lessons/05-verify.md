@@ -52,4 +52,4 @@ Clinic deep link. A test that only asserts HTTP 200 is not channel evidence. A t
 
 ## What this page is not doing
 
-Do not add a live GET. Do not log `secret`. Answer keys stay out of this file.
+Do not add a live GET. Do not log `secret`. Answer keys are not on this site.

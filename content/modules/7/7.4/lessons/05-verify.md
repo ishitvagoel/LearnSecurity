@@ -67,4 +67,4 @@ Clinic: a test that only asserts the job was enqueued is not this check. A live 
 
 ## What this page is not doing
 
-Do not add a live task-library trophy. Do not log session cookies. Answer keys stay out of this file.
+Do not add a live task-library trophy. Do not log session cookies. Answer keys are not on this site.

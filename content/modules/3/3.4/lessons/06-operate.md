@@ -50,4 +50,4 @@ The owner-visible error must be something assistive tech can announce, not only 
 
 ## What this page is not doing
 
-A log-product name is not the rule. Live load tests are out of scope. Answer keys stay out of lessons.
+A log-product name is not the rule. Live load tests are out of scope. Answer keys are not on this site.

@@ -65,4 +65,4 @@ Authenticated RSS or export CSV via CDN. Purge must name the **prefix including 
 
 ## What this page is not doing
 
-A log-product name is not the rule. Answer keys stay out of lessons.
+A log-product name is not the rule. Answer keys are not on this site.

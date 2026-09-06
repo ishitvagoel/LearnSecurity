@@ -51,4 +51,4 @@ The alternate path after rotation (sign in again) must itself meet keyboard, nam
 
 ## What this page is not doing
 
-A log-product name is not the rule. Answer keys stay out of lessons.
+A log-product name is not the rule. Answer keys are not on this site.

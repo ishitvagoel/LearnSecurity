@@ -70,4 +70,4 @@ Clinic: deny the guardian read; do not paste the chart into the ticket. Do not h
 
 ## What this page is not doing
 
-A scanner-vendor name is not the rule. Do not claim you finished an assurance gate. A YAML pack is not this alert. Answer keys stay out of lessons.
+A scanner-vendor name is not the rule. Do not claim you finished an assurance gate. A YAML pack is not this alert. Answer keys are not on this site.

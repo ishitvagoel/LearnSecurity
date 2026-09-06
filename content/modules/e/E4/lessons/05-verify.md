@@ -52,4 +52,4 @@ Clinic: a test that only asserts “the language is memory-safe” is not this c
 
 ## What this page is not doing
 
-Do not add a native-overflow trophy. Do not log file bytes. Answer keys stay out of this file. Course gates stay not-attempted.
+Do not add a native-overflow trophy. Do not log file bytes. Answer keys are not on this site. Course gates stay not-attempted.

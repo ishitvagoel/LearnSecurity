@@ -66,4 +66,4 @@ Clinic: a test that only asserts “npm ci ran” is not this topic. A live regi
 
 ## What this page is not doing
 
-Do not add a live-npm trophy. Do not log registry tokens. Answer keys stay out of this file. The ship gate stays not-attempted.
+Do not add a live-npm trophy. Do not log registry tokens. Answer keys are not on this site. The ship gate stays not-attempted.

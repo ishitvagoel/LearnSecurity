@@ -59,4 +59,4 @@ Clinic: notice unexpected `sh` under the export worker; do not paste filenames i
 
 ## What this page is not doing
 
-A log-product name is not the rule. Live command execution is out of scope. Course gates stay unclaimed. Answer keys stay out of lessons.
+A log-product name is not the rule. Live command execution is out of scope. This site does not mark you as finished. Answer keys are not on this site.

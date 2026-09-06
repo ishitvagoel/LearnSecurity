@@ -30,7 +30,7 @@ flowchart TD
 
 The broken files (`--impl vulnerable`) prefer `body["tenant"]`. That is extra writable fields applied to the isolation key. What has to be true first: body tenant overrides session. You do not need GraphQL. You must not probe a live company.
 
-Industry checklists want isolation of the object and the company. An earlier topic already said the object id is not the grant; this cell is **the company context is not a client field**. Course gates stay unclaimed. Electives do not stamp them.
+Industry checklists want isolation of the object and the company. An earlier topic already said the object id is not the grant; this cell is **the company context is not a client field**. This site does not mark you as finished. 
 
 ## What to look at — cause, not a dump
 

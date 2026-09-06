@@ -65,4 +65,4 @@ GraphQL and REST both ingest the same note. A check that only asserts status 200
 
 ## What this page is not doing
 
-Do not add live traffic. Do not log the messy object. Answer keys stay out of this file.
+Do not add live traffic. Do not log the messy object. Answer keys are not on this site.

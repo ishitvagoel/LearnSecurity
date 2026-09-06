@@ -73,4 +73,4 @@ Unmapped extra advanced rows. Expired exceptions. HTTP-200 tests that match the 
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys stay out of lessons.
+Do not define security as a famous-bugs list. Answer keys are not on this site.

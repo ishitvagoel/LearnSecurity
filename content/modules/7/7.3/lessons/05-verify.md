@@ -66,4 +66,4 @@ Clinic: a test that only asserts HTTP 200 on `/webhook` is not this check. A liv
 
 ## What this page is not doing
 
-Do not add a live Stripe trophy. Do not log bodies or `lab-secret`. Answer keys stay out of this file.
+Do not add a live Stripe trophy. Do not log bodies or `lab-secret`. Answer keys are not on this site.

@@ -79,4 +79,4 @@ Backups still contain the user row. A phone's offline cache. A self-contained to
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Do not run this map against a public clinic or a live identity provider. Answer keys stay out of lessons.
+Do not define security as a famous-bugs list. Do not run this map against a public clinic or a live identity provider. Answer keys are not on this site.

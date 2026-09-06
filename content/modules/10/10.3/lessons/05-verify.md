@@ -67,4 +67,4 @@ Clinic: a test that only asserts "namespace exists" is not this topic. A live ku
 
 ## What this page is not doing
 
-Do not add a live-cluster trophy. Do not log kubeconfig. Answer keys stay out of this file. Do not claim you finished an assurance gate.
+Do not add a live-cluster trophy. Do not log kubeconfig. Answer keys are not on this site. Do not claim you finished an assurance gate.

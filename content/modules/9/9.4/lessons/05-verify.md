@@ -66,4 +66,4 @@ Clinic: a test that only asserts “scanner job ran” is not this topic. A live
 
 ## What this page is not doing
 
-Do not add a live org trophy. Do not log secret-scanner payloads. Answer keys stay out of this file.
+Do not add a live org trophy. Do not log secret-scanner payloads. Answer keys are not on this site.

@@ -58,4 +58,4 @@ Clinic: a check that only asserts the debug APK builds is not this cell. Store A
 
 ## What this page is not doing
 
-Do not add a live Play trophy. Do not log signing keys. Answer keys stay out of this file.
+Do not add a live Play trophy. Do not log signing keys. Answer keys are not on this site.

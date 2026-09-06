@@ -73,4 +73,4 @@ Other flags. A sidecar debug container. Extra version leakage with debug already
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys stay out of lessons.
+Do not define security as a famous-bugs list. Answer keys are not on this site.

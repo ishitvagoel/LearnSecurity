@@ -66,4 +66,4 @@ Clinic clinician. A test that only asserts HTTP 200 is not lifecycle evidence. A
 
 ## What this page is not doing
 
-Do not add a live identity provider. Do not paste production cookies. Answer keys stay out of this file.
+Do not add a live identity provider. Do not paste production cookies. Answer keys are not on this site.

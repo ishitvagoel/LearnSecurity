@@ -233,6 +233,10 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/\bthis lab's oracle\b/gi, "what this check looks at"],
   [/\boracle\b/gi, "check"],
   [/\bHITL\b/g, "a person in the loop"],
+  [/\bCourse gates stay unclaimed\.?/g, "This site does not mark you as finished."],
+  [/\bElectives do not stamp them\.?/g, ""],
+  [/\bAnswer keys are not in this file\.?/g, "Answer keys are not on this site."],
+  [/\bAnswer keys stay out of (?:this file|lessons)\.?/g, "Answer keys are not on this site."],
 ];
 
 const HIDDEN_LAB_NOTES = [

@@ -116,4 +116,4 @@ A clinic portal adds a second factor. The second factor is a mouse-only dialog. 
 
 ## What this page is not doing
 
-Live login providers, real recovery inboxes, real patient or banking data, ready-made attack recipes, and heat maps that replace harm sentences. Answer keys are not in this file.
+Live login providers, real recovery inboxes, real patient or banking data, ready-made attack recipes, and heat maps that replace harm sentences. Answer keys are not on this site.

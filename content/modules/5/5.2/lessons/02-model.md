@@ -69,4 +69,4 @@ Memory dumps. Operators who are allowed to hold the key. Real keys wait for a la
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Do not put keys in lessons. Do not run this map against a public clinic. Answer keys stay out of lessons.
+Do not define security as a famous-bugs list. Do not put keys in lessons. Do not run this map against a public clinic. Answer keys are not on this site.

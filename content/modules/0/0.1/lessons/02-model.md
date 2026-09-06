@@ -67,4 +67,4 @@ Redirects; hosts-file aliases.
 
 ## What this page is not doing
 
-A “top ten bugs” list as the definition of security. Answer keys stay out of lessons.
+A “top ten bugs” list as the definition of security. Answer keys are not on this site.

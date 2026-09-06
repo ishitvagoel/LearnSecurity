@@ -55,4 +55,4 @@ Clinic: a check that only asserts “a CSP-looking header exists” is not this 
 
 ## What this page is not doing
 
-Do not add a live-script trophy. Do not log HTML. Answer keys stay out of this file. Check-in 7 stays not finished.
+Do not add a live-script trophy. Do not log HTML. Answer keys are not on this site. Check-in 7 stays not finished.

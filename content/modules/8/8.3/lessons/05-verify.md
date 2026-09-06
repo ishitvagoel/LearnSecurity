@@ -56,4 +56,4 @@ Clinic: a check that only asserts the Activity launched is not this cell. A side
 
 ## What this page is not doing
 
-Do not add a live Intent trophy. Do not log full URLs that contain tokens. Answer keys stay out of this file.
+Do not add a live Intent trophy. Do not log full URLs that contain tokens. Answer keys are not on this site.

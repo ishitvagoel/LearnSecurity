@@ -70,4 +70,4 @@ Clinic: deny the chart-SQL tool; do not paste the prompt into the ticket. Do not
 
 ## What this page is not doing
 
-A vendor-product name is not the rule. Do not claim you finished an assurance gate. A famous-bugs label is not this alert. Answer keys stay out of lessons.
+A vendor-product name is not the rule. Do not claim you finished an assurance gate. A famous-bugs label is not this alert. Answer keys are not on this site.

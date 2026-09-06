@@ -48,4 +48,4 @@ Clinic: notice `?token=` on appointment links; do not paste the URL into the tic
 
 ## What this page is not doing
 
-A log-product name is not the rule. Live log dumps are out of scope. Course gates stay unclaimed.
+A log-product name is not the rule. Live log dumps are out of scope. This site does not mark you as finished.

@@ -68,4 +68,4 @@ Clinic chart vs time. A test that only asserts HTTP 200 is not classification ev
 
 ## What this page is not doing
 
-Do not add a production drain. Do not paste `tenant-A-secret-body` into tickets. Answer keys stay out of this file.
+Do not add a production drain. Do not paste `tenant-A-secret-body` into tickets. Answer keys are not on this site.

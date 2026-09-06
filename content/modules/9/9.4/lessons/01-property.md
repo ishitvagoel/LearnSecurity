@@ -92,4 +92,4 @@ SCA: a CVE versus a function you actually call. Clinic: fifty unmapped HIGHs.
 
 ## What this page is not doing
 
-Live GitHub orgs, claiming the verification gate is done, and weaponized scanner dumps. Answer keys are not in this file.
+Live GitHub orgs, claiming the verification gate is done, and weaponized scanner dumps. Answer keys are not on this site.

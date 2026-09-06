@@ -70,4 +70,4 @@ Clinic: block a release with fifty unmapped HIGHs; do not paste scanner snippets
 
 ## What this page is not doing
 
-A scanner-product name is not the rule. Live org traces are out of scope. Answer keys stay out of lessons.
+A scanner-product name is not the rule. Live org traces are out of scope. Answer keys are not on this site.

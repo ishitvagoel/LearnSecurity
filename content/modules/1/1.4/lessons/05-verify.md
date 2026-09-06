@@ -59,4 +59,4 @@ Clinic mouse-only second factor: write one test name you would want (`test_step_
 
 ## What this page is not doing
 
-Do not add live traffic. Do not log recovery codes in a “better” test. Answer keys stay out of this file.
+Do not add live traffic. Do not log recovery codes in a “better” test. Answer keys are not on this site.

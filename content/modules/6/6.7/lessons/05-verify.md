@@ -66,4 +66,4 @@ Clinic bulk-export. A test that only asserts HTTP 200 on `/export` is not this c
 
 ## What this page is not doing
 
-Do not add a live load trophy. Do not log CSV bodies. Answer keys stay out of this file.
+Do not add a live load trophy. Do not log CSV bodies. Answer keys are not on this site.

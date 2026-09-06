@@ -79,4 +79,4 @@ Clinic: the page uses `https://` while the API socket is `http`. Mutual TLS name
 
 ## What this page is not doing
 
-Live TLS attacks, strip-attack walkthroughs, pinning exploits. Course gates stay unclaimed without product evidence. Answer keys are not in this file.
+Live TLS attacks, strip-attack walkthroughs, pinning exploits. Course gates stay unclaimed without product evidence. Answer keys are not on this site.

@@ -81,4 +81,4 @@ Step-up before export: still origin-bound? Clinic staff SSO: password MFA to a l
 
 ## What this page is not doing
 
-Live phishing campaigns, real user credentials, copy-paste kits. Practice stays in this folder. Answer keys are not in this file.
+Live phishing campaigns, real user credentials, copy-paste kits. Practice stays in this folder. Answer keys are not on this site.

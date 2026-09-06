@@ -71,4 +71,4 @@ Database superuser tools; replicas; ORDER BY identifiers.
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Do not run this map against a live clinic or a live database. Answer keys stay out of lessons.
+Do not define security as a famous-bugs list. Do not run this map against a live clinic or a live database. Answer keys are not on this site.

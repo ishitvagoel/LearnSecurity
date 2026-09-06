@@ -75,4 +75,4 @@ Unread register. Inaccessible recovery left unchecked. Anyone can type an owner 
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys stay out of lessons.
+Do not define security as a famous-bugs list. Answer keys are not on this site.

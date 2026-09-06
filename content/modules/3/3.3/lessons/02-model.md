@@ -74,4 +74,4 @@ Stolen migrator; table-owner walk-around of a later row-level rule; a replica wi
 
 ## What this page is not doing
 
-Treating an awareness list as the definition of security. Answer keys stay out of lessons.
+Treating an awareness list as the definition of security. Answer keys are not on this site.

@@ -70,4 +70,4 @@ Clinic: deny Django `DEBUG=True`; do not paste the traceback into the ticket. Do
 
 ## What this page is not doing
 
-A canary-vendor name is not the rule. Do not claim you finished an assurance gate. A manufacturer-defaults program page stays unverified. Answer keys stay out of lessons.
+A canary-vendor name is not the rule. Do not claim you finished an assurance gate. A manufacturer-defaults program page stays unverified. Answer keys are not on this site.

@@ -84,4 +84,4 @@ Honest unique-key JSON still needs a who-is-allowed check. Parser agreement is n
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys stay out of lessons.
+Do not define security as a famous-bugs list. Answer keys are not on this site.

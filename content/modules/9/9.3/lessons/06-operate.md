@@ -68,4 +68,4 @@ Clinic: notice `test_get_patient_200` as the only “security” test; do not at
 
 ## What this page is not doing
 
-A coverage-product name is not the rule. Live fuzz traces are out of scope. Answer keys stay out of lessons.
+A coverage-product name is not the rule. Live fuzz traces are out of scope. Answer keys are not on this site.

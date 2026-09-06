@@ -53,4 +53,4 @@ Clinic: detect SSN field probes on a local practice files; do not attach the SSN
 
 ## What this page is not doing
 
-A GraphQL-gateway product name is not the rule. Public GraphQL probes are out of scope. Course gates stay unclaimed. Answer keys stay out of lessons.
+A GraphQL-gateway product name is not the rule. Public GraphQL probes are out of scope. This site does not mark you as finished. Answer keys are not on this site.

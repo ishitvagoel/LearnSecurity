@@ -80,4 +80,4 @@ GitHub Actions third-party `action@v1`. Clinic: npm install in a prod pod.
 
 ## What this page is not doing
 
-Live registry attacks, claiming you finished the ship gate. Answer keys are not in this file.
+Live registry attacks, claiming you finished the ship gate. Answer keys are not on this site.

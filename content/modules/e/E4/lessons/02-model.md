@@ -76,4 +76,4 @@ Integer wrap; time bugs (use-after-free); two parsers that disagree on length.
 
 ## What this page is not doing
 
-An awareness list as the definition of security. Answer keys stay out of lessons.
+An awareness list as the definition of security. Answer keys are not on this site.

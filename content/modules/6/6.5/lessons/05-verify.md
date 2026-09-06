@@ -66,4 +66,4 @@ Clinic PDF URL. A test that only asserts the preview image loaded is not this ch
 
 ## What this page is not doing
 
-Do not fetch. Do not log full URLs if they contain tokens. Answer keys stay out of this file.
+Do not fetch. Do not log full URLs if they contain tokens. Answer keys are not on this site.

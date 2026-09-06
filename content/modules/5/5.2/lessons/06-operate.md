@@ -60,4 +60,4 @@ Clinic: notice Base64 SSN columns; do not paste values into the ticket. Do not q
 
 ## What this page is not doing
 
-A log-product name is not the rule. Live column dumps are out of scope. Course gates stay unclaimed. Answer keys stay out of lessons.
+A log-product name is not the rule. Live column dumps are out of scope. This site does not mark you as finished. Answer keys are not on this site.

@@ -52,4 +52,4 @@ Clinic: a test that only asserts “the processor returned 200” is not this ce
 
 ## What this page is not doing
 
-Do not add a live-processor trophy. Do not log card-number-like strings. Answer keys stay out of this file. Course gates stay unclaimed.
+Do not add a live-processor trophy. Do not log card-number-like strings. Answer keys are not on this site. This site does not mark you as finished.

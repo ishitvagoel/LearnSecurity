@@ -77,4 +77,4 @@ Clinic appointment deep link. Magic-link email (still a URL token — later you 
 
 ## What this page is not doing
 
-Live token replay, real session cookies, weaponized Referer harvesting. Course gates stay unclaimed without learner or product evidence. Answer keys are not in this file.
+Live token replay, real session cookies, weaponized Referer harvesting. Course gates stay unclaimed without learner or product evidence. Answer keys are not on this site.

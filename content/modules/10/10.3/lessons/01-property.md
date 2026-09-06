@@ -85,4 +85,4 @@ Serverless IAM `*`. Clinic: app SA is cluster-admin.
 
 ## What this page is not doing
 
-Live clusters, claiming you finished an assurance gate from this page. Answer keys are not in this file.
+Live clusters, claiming you finished an assurance gate from this page. Answer keys are not on this site.

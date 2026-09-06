@@ -66,4 +66,4 @@ Clinic CSV filename. A test that only asserts the export file exists is not this
 
 ## What this page is not doing
 
-Do not execute the argv. Do not log export names that are patient identifiers. Answer keys stay out of this file.
+Do not execute the argv. Do not log export names that are patient identifiers. Answer keys are not on this site.

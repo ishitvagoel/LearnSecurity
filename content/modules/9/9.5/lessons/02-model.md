@@ -73,4 +73,4 @@ Unknown variants. A role-change cache that still serves the old grant. That left
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys stay out of lessons.
+Do not define security as a famous-bugs list. Answer keys are not on this site.

@@ -66,4 +66,4 @@ Clinic: a test that only asserts the spreadsheet exports is not this topic. A li
 
 ## What this page is not doing
 
-Do not add a live checklist trophy. Do not log note bodies. Answer keys stay out of this file. The verification gate stays not-attempted.
+Do not add a live checklist trophy. Do not log note bodies. Answer keys are not on this site. The verification gate stays not-attempted.

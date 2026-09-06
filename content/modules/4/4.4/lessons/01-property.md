@@ -83,4 +83,4 @@ Clinic: a grant on appointment A is not a grant on chart B.
 
 ## What this page is not doing
 
-Live companies, real charts, weaponized id guessing, or a famous-bugs list as the definition of the cell. Course gates stay unclaimed without learner or product evidence. Answer keys are not in this file.
+Live companies, real charts, weaponized id guessing, or a famous-bugs list as the definition of the cell. Course gates stay unclaimed without learner or product evidence. Answer keys are not on this site.

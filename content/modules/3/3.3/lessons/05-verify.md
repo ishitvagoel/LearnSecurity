@@ -53,4 +53,4 @@ A serverless admin string. A test that only asserts HTTP 200 is not architecture
 
 ## What this page is not doing
 
-Do not add a live database. Do not log note bodies. Answer keys stay out of this file.
+Do not add a live database. Do not log note bodies. Answer keys are not on this site.

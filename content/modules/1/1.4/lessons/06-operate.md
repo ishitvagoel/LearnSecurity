@@ -58,4 +58,4 @@ The alternate path must itself meet keyboard, name, and not-color-only. Those ru
 
 ## What this page is not doing
 
-A log-product name is not the rule. Answer keys stay out of lessons.
+A log-product name is not the rule. Answer keys are not on this site.

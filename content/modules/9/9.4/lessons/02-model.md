@@ -72,4 +72,4 @@ Who-is-allowed blind spots. Dependency confusion as an advanced leftover. Mass s
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys stay out of lessons.
+Do not define security as a famous-bugs list. Answer keys are not on this site.

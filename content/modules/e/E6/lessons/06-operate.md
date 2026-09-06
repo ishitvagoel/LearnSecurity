@@ -70,4 +70,4 @@ Clinic: deny the HIPAA exception; do not paste chart text into the ticket. Do no
 
 ## What this page is not doing
 
-A maturity-model name is not the rule. Do not claim you finished an assurance gate. An unverified pledge stays unverified. Answer keys stay out of lessons.
+A maturity-model name is not the rule. Do not claim you finished an assurance gate. An unverified pledge stays unverified. Answer keys are not on this site.

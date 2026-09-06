@@ -82,4 +82,4 @@ Terraform `local-exec`; GitHub Actions `run:` with untrusted input; clinic eval 
 
 ## What this page is not doing
 
-Weaponized eval payloads. Live GitHub orgs. Claiming a course gate. Course gates stay unclaimed. Answer keys are not in this file.
+Weaponized eval payloads. Live GitHub orgs. Claiming a course gate. This site does not mark you as finished. Answer keys are not on this site.

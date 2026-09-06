@@ -62,4 +62,4 @@ Authenticated RSS or export CSV via CDN. A check that only asserts status 200 on
 
 ## What this page is not doing
 
-Do not add live traffic. Do not log `tenant-A-note`. Answer keys stay out of this file.
+Do not add live traffic. Do not log `tenant-A-note`. Answer keys are not on this site.

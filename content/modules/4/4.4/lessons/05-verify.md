@@ -58,4 +58,4 @@ Clinic appointment vs chart. A test that only asserts HTTP 200 is not who-is-all
 
 ## What this page is not doing
 
-Do not add a live id guesser. Do not log note bodies. Answer keys stay out of this file.
+Do not add a live id guesser. Do not log note bodies. Answer keys are not on this site.

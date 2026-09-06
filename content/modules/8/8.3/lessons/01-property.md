@@ -82,4 +82,4 @@ Clinic `as=doctor`. OAuth redirect to the app (4.5).
 
 ## What this page is not doing
 
-Live malicious APKs, Intent cookbooks. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not in this file.
+Live malicious APKs, Intent cookbooks. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not on this site.

@@ -52,4 +52,4 @@ Clinic FHIR. A test that only asserts HTTP 200 is not audience evidence. A test 
 
 ## What this page is not doing
 
-Do not add a live token. Do not paste JWTs into tickets. Answer keys stay out of this file.
+Do not add a live token. Do not paste JWTs into tickets. Answer keys are not on this site.

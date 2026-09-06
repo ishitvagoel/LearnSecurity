@@ -71,4 +71,4 @@ Substring stand-in; `exec(`; other expression languages; generated code after re
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Do not run this map against a live GitHub org. Answer keys stay out of lessons.
+Do not define security as a famous-bugs list. Do not run this map against a live GitHub org. Answer keys are not on this site.

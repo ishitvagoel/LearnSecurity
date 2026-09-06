@@ -73,4 +73,4 @@ Search, export, GraphQL, and workers are named holes. A later database-role chec
 
 ## What this page is not doing
 
-A famous-bugs list as the definition of security. Answer keys stay out of lessons.
+A famous-bugs list as the definition of security. Answer keys are not on this site.

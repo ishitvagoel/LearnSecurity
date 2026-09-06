@@ -78,4 +78,4 @@ Clinic: wrong-audience FHIR token. Phone-app redirect (claimed HTTPS, not a cust
 
 ## What this page is not doing
 
-Live identity providers, real patient tokens, weaponized `alg=none` copy-paste. Course gates stay unclaimed without product evidence. Answer keys are not in this file.
+Live identity providers, real patient tokens, weaponized `alg=none` copy-paste. Course gates stay unclaimed without product evidence. Answer keys are not on this site.
