@@ -1,17 +1,17 @@
-# 1.2-LO-07 — Transfer authority reasoning to ReleaseDesk
+# Same idea on a release desk
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Generalize
-**Gate 1 contribution:** define who may cause a high-impact effect without using a product, role name, or checklist as the definition of authority
-**Standards:** Saltzer and Schroeder (1975, seminal); OWASP ASVS 5.0.0 `v5.0.0-8.1.1`, `v5.0.0-8.2.1`, `v5.0.0-8.3.1`, `v5.0.0-8.3.2`, and `v5.0.0-8.3.3` as applicable anchors.
 
-## Which SecureCollab authority claims fail when a machine executes a delayed, approved effect?
+## Use it somewhere new
 
-Changing “note” to “release” is not transfer. ReleaseDesk changes the object, authority source, state transition, trusted components, time horizon, and impact. You must rebuild the model and explain which earlier reasoning still applies.
+This work feeds check-in 1: who may cause a high-impact effect, without using a product name, a role name, or a checklist as the definition of permission.
 
-## Mental model: delay is not a grant
+Changing “note” to “release” is not transfer. ReleaseDesk changes the object, permission source, state transition, trusted components, time horizon, and impact. You must rebuild the model and explain which earlier reasoning still applies.
 
-ReleaseDesk’s worker runs later, as a machine identity, not as the human who clicked approve. If the worker treats “the enqueueing user was authenticated” as permission to deploy, identity has been smuggled across time. The grant must be re-checked at the mutation, bound to artifact digest, environment, and current approver state.
+## Picture: delay is not a grant
+
+ReleaseDesk’s worker runs later, as a machine identity, not as the human who clicked approve. If the worker treats “the enqueueing user was signed in” as permission to deploy, identity has been smuggled across time. The grant must be re-checked at the mutation, bound to artifact digest, environment, and current approver state.
 
 ```mermaid
 sequenceDiagram
@@ -27,7 +27,7 @@ sequenceDiagram
   Worker-->>API: mutate or refuse
 ```
 
-Use only the synthetic product card below. Do not inspect or operate a real CI/CD system, cloud account, repository, or deployment.
+Use only the fake product card below. Do not inspect or operate a real CI/CD system, cloud account, repository, or deployment.
 
 ## Product card: ReleaseDesk
 
@@ -43,38 +43,38 @@ ReleaseDesk coordinates production deployments for a small software company.
 - A break-glass on-call path exists for a declared incident, has a five-minute scope, notifies the service owner, and requires post-use review.
 - Production credentials are not exposed to developers or approvers.
 - Some approvers use keyboard-only or assistive-technology workflows.
-- All data and identities in this exercise are synthetic.
+- All data and identities in this exercise are fake.
 
 ## What materially changed?
 
-Compared with SecureCollab Phase 1, consider at least:
+Compared with the notes app at this stage, consider at least:
 
-- the effective subject is a CI worker, while authority may originate from proposer and approvers;
+- the effective person is a CI worker, while permission may originate from proposer and approvers;
 - the protected object is a state transition involving an immutable artifact and environment, not a stored note;
-- authorization is assembled from multiple independent conditions;
+- who is allowed is assembled from multiple independent conditions;
 - the effect occurs after approval and may be delivered more than once;
 - identity, team membership, artifact, approval, queue, and environment state can change independently;
-- denial or delay can affect incident recovery and availability, not only confidentiality;
-- machine credentials provide technical ability that must not become ambient product authority;
+- denial or delay can affect incident recovery and availability, not only secrecy;
+- machine credentials provide technical ability that must not become leftover product permission;
 - an accessible approval and emergency journey is part of whether the policy works.
 
-Do not treat this list as a completed matrix. It identifies dimensions you must resolve.
+Do not treat this list as a completed table. It identifies dimensions you must resolve.
 
-## Required deliverable
+## Practice
 
-Produce one coherent authority pack.
+Produce one coherent who-is-allowed pack.
 
-### 1. Bounded invariant
+### 1. Bounded rule
 
-State who may cause a production deployment of which artifact to which environment, under which approvals, state, and time. Name at least four forbidden effects, including wrong artifact/environment, insufficient or correlated approval, expired/revoked authority, and duplicate execution.
+State who may cause a production deployment of which artifact to which environment, under which approvals, state, and time. Name at least four effects that must not happen, including wrong artifact/environment, insufficient or correlated approval, expired/revoked permission, and duplicate execution.
 
-### 2. Subject and authority map
+### 2. Person and permission map
 
-Include proposer, two approvers, service-team membership source, queue, CI worker, deployment environment, break-glass on-call, and evidence owner. Distinguish originating and effective subjects. Identify the smallest trusted behavior of each component.
+Include proposer, two approvers, service-team membership source, queue, CI worker, deployment environment, break-glass on-call, and evidence owner. Distinguish the person who asked from the person or program that acts. Identify the smallest trusted behavior of each component.
 
 ### 3. Objects, actions, and state machine
 
-Split proposal, approval, artifact digest, job, environment, deployment, emergency grant, and decision evidence where their authority differs. Model at least:
+Split proposal, approval, artifact digest, job, environment, deployment, emergency grant, and decision evidence where their permission differs. Model at least:
 
 ```text
 proposed -> approved -> queued -> executing -> completed
@@ -85,48 +85,56 @@ Define which transitions are irreversible, retryable, or idempotent.
 
 ### 4. Access matrix and separation argument
 
-Write at least twelve allow/deny cells. Explain why the two approvals are meaningfully independent—or record the shared failure that remains. Show that proposer, approvers, worker, and break-glass subject hold different authority rather than a shared “deploy role.”
+Write at least twelve allow/deny rows. Explain why the two approvals are meaningfully independent — or record the shared failure that remains. Show that proposer, approvers, worker, and break-glass person hold different permission rather than a shared “deploy role.”
 
-### 5. Delegation or capability interpretation
+### 5. Hand-off or capability interpretation
 
 Decide what the queued job represents. Is it a scoped capability, a request that requires current re-authorization, or a reference to server-side approval state? Define authenticity, scope, audience, expiry, replay behavior, revocation, and whether the worker can act beyond it.
 
 ### 6. Enforcement inventory
 
-Identify where policy is enforced at proposal, approval, enqueue, execution, retry, cancellation, and emergency use. Explain why checking only when the job is created is or is not sufficient.
+Identify where policy is enforced at proposal, approval, enqueue, execution, retry, cancellation, and emergency use. Explain why checking only when the job is created is or is not enough.
 
 ### 7. Four-mode evidence and operations
 
-Specify normal, negative, abuse, and failure tests, including artifact substitution, duplicate delivery, expiry, approver revocation, unavailable policy/evidence, and emergency use. Add privacy-safe decision events, containment, recovery, accessible approval/revocation, and one operator or infrastructure residual risk.
+Specify normal, negative, abuse, and failure checks, including artifact substitution, duplicate delivery, expiry, approver revocation, unavailable policy/evidence, and emergency use. Add privacy-safe decision events, containment, recovery, accessible approval/revocation, and one operator or infrastructure leftover risk.
 
 ### 8. Comparison memo
 
 Use three headings:
 
-- **Reasoning that transfers:** identify structural ideas such as hostile clients, positive authority, fail-safe unknowns, or enforcement coverage and explain why they remain valid.
-- **SecureCollab claims that fail:** name at least four original subjects, objects, states, time assumptions, or effects that cannot be copied and why.
-- **New conflicts and limits:** explain at least one security-versus-availability or safety conflict, one common-mechanism risk, and one mechanism that supports a property while creating another risk.
+- **Reasoning that transfers:** identify structural ideas such as hostile clients, positive permission, fail-closed unknowns, or enforcement coverage and explain why they remain valid.
+- **Notes-app claims that fail:** name at least four original people, objects, states, time assumptions, or effects that cannot be copied and why.
+- **New conflicts and limits:** explain at least one security-versus-availability or safety conflict, one common-mechanism risk, and one mechanism that supports a rule while creating another risk.
 
-## Constraints
+## What is not good enough
 
-- Do not answer “use RBAC,” “use signed tokens,” “require MFA,” or “use a policy engine” as the authority model.
+- Do not answer “use RBAC,” “use signed tokens,” “require MFA,” or “use a policy engine” as the who-is-allowed model.
 - Do not assume a valid signature proves that the current action remains authorized.
 - Do not count one person, account, device, or identity event twice as independent approval without justification.
 - Do not let the CI worker’s production credential define product permission.
 - Do not probe a real repository, CI provider, cloud service, or deployment.
-- Do not copy SecureCollab tenant names into the solution.
-- Do not open the examiner key before evaluation.
+- Do not copy Alice, Bob, or company A into the solution.
+- Do not open the answer key before evaluation.
 
-## Success criteria
+## Check yourself
 
-A **competent** pack is internally consistent, testable, safe, and explicit about defaults, authority sources, state, time, and enforcement. A **transfer-ready** pack also:
+A usable pack is internally consistent, checkable, safe, and explicit about defaults, permission sources, state, time, and stops. A pack that is ready for check-in 1 also:
 
-- explains at least four SecureCollab assumptions that fail rather than only renaming them;
-- discovers a non-obvious stale-authority, replay, or common-mechanism failure;
-- distinguishes machine ability from originating authority;
+- explains at least four notes-app assumptions that fail rather than only renaming them;
+- discovers a non-obvious stale-permission, replay, or common-mechanism failure;
+- distinguishes machine ability from originating permission;
 - defends or rejects the independence of the approval conditions;
 - narrows a universal revocation or “exactly once” claim after modeling failure;
-- provides usable emergency and recovery paths without turning break-glass into global ambient authority;
-- states which ASVS requirements apply and which advanced references are only design anchors.
+- provides usable emergency and recovery paths without turning break-glass into leftover global permission;
+- states leftover risk and which industry lists you used as a later check, not as the model.
 
-Completion of the prompt does not itself mark Gate 1 transfer-ready. The isolated examiner rubric determines whether the evidence is satisfactory.
+Finishing the page is not the same as finishing check-in 1. A reviewer will look at whether the pack is consistent and testable.
+
+## Where you may practice
+
+Synthetic product card only. No live CI, cloud account, or real repository.
+
+## What this page is not doing
+
+Live-target steps. Vendor prescriptions. Copying the notes-app table with the nouns swapped. Answer keys are not in this file.

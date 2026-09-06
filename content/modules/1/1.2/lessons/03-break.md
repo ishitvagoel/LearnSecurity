@@ -1,44 +1,42 @@
-# 1.2-LO-03 — Break ambient authority and incomplete mediation locally
+# Try leftover permission on your computer
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
-**Lab:** `labs/1.2/1.2-authority-matrix` — local course files and synthetic data only
-**Standards:** Saltzer and Schroeder complete mediation, fail-safe defaults, least privilege, and separation of privilege (1975, seminal); OWASP ASVS 5.0.0 `v5.0.0-8.2.1`, `v5.0.0-8.2.2`, `v5.0.0-8.3.1`, and `v5.0.0-8.4.1`.
 
-## Which forbidden effects can a valid identity still cause?
+## Try it
 
-The lab deliberately gives legitimate synthetic users too much ambient authority. It contains no HTTP server and no real account. The security failure occurs inside a small Python model, which lets you see policy cause and effect without turning the exercise into a target walkthrough.
+The practice is not a website you attack. It is a tiny Python model that gives legitimate fake users too much leftover permission. There is no HTTP server and no real account. The failure happens inside a small in-process model, so you can see cause and effect without turning the exercise into a target walkthrough.
 
-The invariant under test is:
+The rule under test:
 
-> Every in-scope operation must obtain a current positive decision over subject, object, action, tenant, and relevant authority state. Unknown cases deny.
+> Every in-scope operation must obtain a current yes over person, object, action, company, and relevant permission state. Unknown cases deny.
 
-The vulnerable implementation violates that invariant in several ways. Do not reduce them to “missing if statements.” Group them by authority failure.
+The broken files violate that rule in several ways. Do not shrink them to “missing if statements.” Group them by who-is-allowed failure.
 
-## Mental model: a valid identity is still a matrix counterexample
+## Picture: a valid identity is still a table counterexample
 
-Authentication succeeding is a precondition, not a grant. Each failing pytest case is a cell: a subject who is allowed to exist, an action that happened, an object that should have been unreachable. Map the failure to the cell before you open the fixed tree.
+Sign-in succeeding is a precondition, not a grant. Each failing check is a table row: a person who is allowed to exist, an action that happened, an object that should have been unreachable. Map the failure to the row before you open the repaired files.
 
 ```mermaid
 flowchart TD
-  ident["valid synthetic identity"]
+  ident["valid fake identity"]
   op["in-process operation"]
-  cell["matrix cell: subject x action x object"]
+  row["table row: person x action x object"]
   ident --> op
-  op --> cell
-  cell -->|"no current grant"| fail["forbidden effect — this is the break"]
-  cell -->|"positive current grant"| allow["intended allow"]
+  op --> row
+  row -->|"no current grant"| fail["what must not happen — this is the break"]
+  row -->|"positive current grant"| allow["intended allow"]
 ```
 
-## Authorized boundary
+## Where you may practice
 
-Only files under `labs/1.2/1.2-authority-matrix/` are in scope. The users, tenants, notes, approvals, and timestamps are synthetic. No socket is opened, no credential is used, and no outbound request is needed.
+Only files under `labs/1.2/1.2-authority-matrix/` are in scope. The users, companies, notes, approvals, and timestamps are fake. No socket is opened, no credential is used, and no outbound request is needed.
 
-Do not adapt the exercise to a public site, employer system, classmate deployment, or real tenant. The in-process calls provide all evidence required by this lesson.
+Do not adapt the exercise to a public site, employer system, classmate deployment, or real company. The in-process calls provide all evidence this page needs.
 
-## Run the two selected implementations
+## Run the pair
 
-From the repository root, create a disposable environment and install the pinned lab dependency if needed:
+From the repository root, create a throwaway environment and install the pinned lab dependency if needed:
 
 ```text
 python -m venv .venv-1-2
@@ -54,93 +52,97 @@ python -m pytest labs/1.2/1.2-authority-matrix/tests --impl vulnerable
 python -m pytest labs/1.2/1.2-authority-matrix/tests --impl fixed
 ```
 
-The vulnerable run must fail selected forbidden-outcome tests. The fixed run must pass. A syntax error, missing package, import failure, or wrong path is an environment problem, not successful security evidence.
+The broken run must fail selected checks for what must not happen. The repaired run must pass. A syntax error, missing package, import failure, or wrong path is an environment problem, not security evidence.
 
-## Read failures as matrix counterexamples
+## What to read in the practice files
 
-The suite contains both allow and deny cells. Expected allow cells matter: a policy that denies everyone is fail-closed but does not implement the product. Expected deny cells reveal overbroad or stale authority.
+The suite contains both allow and deny rows. Expected allow rows matter: a policy that denies everyone is fail closed but does not implement the product. Expected deny rows reveal overbroad or stale permission.
 
-The vulnerable fixture is designed to expose these failure shapes:
+The broken files are designed to expose these failure shapes:
 
-| Failure shape | Authority question |
+| Failure shape | Who-is-allowed question |
 |---|---|
-| Cross-tenant direct read | Why did authentication become permission on this object? |
-| Cross-tenant aggregate listing | Which alternate release path skipped object/field mediation? |
-| Cross-tenant administrator delete | Where was tenant scope lost when a role compressed the matrix? |
-| Revoked member read | Which stale identity or cached fact survived the authority transition? |
+| Cross-company direct read | Why did sign-in become permission on this object? |
+| Cross-company aggregate listing | Which other release path skipped object/field checking? |
+| Cross-company administrator delete | Where was company scope lost when a role compressed the table? |
+| Removed member read | Which stale identity or cached fact survived the permission change? |
 | One-person bulk-export approval | Are the claimed independent conditions actually required and distinct? |
 | Unknown action allowed | Why did absence of a positive rule become success? |
 
-Do not open the fixed implementation immediately. First map each failing test to a cell:
+Do not open the repaired files immediately. First map each failing check to a row:
 
 ```text
-subject × action × object × state/time -> expected decision
+person × action × object × state/time -> expected decision
 ```
 
-Then identify the attribute source. A decision can have the right shape and still fail if the tenant, role, or object classification came from the requester.
+Then identify the attribute source. A decision can have the right shape and still fail if the company, role, or object classification came from the requester.
 
-## Build a causal diagnosis
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-For each failed test, complete this table.
+For each failed check, complete this table.
 
-| Layer | Question |
+| Slice | Question |
 |---|---|
-| Required property | Which exact effect should have been forbidden? |
-| Root cause | Which authority relation was absent, ambient, overbroad, stale, or default-allow? |
-| Preconditions | Which legitimate identity, object state, role, or approval already existed? |
+| The rule | Which exact effect should not have happened? |
+| Why it happens | Which who-is-allowed relation was absent, leftover, overbroad, stale, or default-allow? |
+| What has to be true first | Which legitimate identity, object state, role, or approval already existed? |
 | Trigger | Which operation and input caused the effect? |
-| Impact | Which confidentiality, integrity, accountability, or tenant-isolation invariant failed? |
-| Prevention | Which positive current rule and enforcement point would restore the cell? |
-| Detection | Which privacy-safe decision evidence could reveal the attempt or success? |
-| Recovery | Which authority, data, alternate paths, and tests must be repaired or revisited? |
+| What it costs | Which secrecy, integrity, accountability, or company-isolation rule failed? |
+| How you stop it | Which positive current rule and stop would restore the row? |
+| How you notice | Which privacy-safe decision evidence could reveal the attempt or success? |
+| How you recover | Which permission, data, alternate paths, and checks must be repaired or revisited? |
 
-“The test expected `None`” is not the root cause. “The function did not compare tenants” is closer, but still incomplete if the larger issue is that each operation invents its own policy. State why the missing comparison represented authority, where it belongs, and which other paths need the same meaning.
+“The check expected `None`” is not the cause. “The function did not compare companies” is closer, but still incomplete if the larger issue is that each operation invents its own policy. State why the missing comparison represented permission, where it belongs, and which other paths need the same meaning.
 
 ## Trace one example without jumping to the patch
 
 Suppose Admin A deletes Note B-4.
 
-- Admin A is correctly authenticated.
+- Admin A is correctly signed in.
 - The role `admin` may legitimately allow selected high-impact actions.
-- The object belongs to Tenant B.
-- The vulnerable decision expands `admin` without tenant scope.
-- The forbidden state change occurs because the role became ambient global authority.
+- The object belongs to company B.
+- The broken decision expands `admin` without company scope.
+- The state change that must not happen occurs because the role became leftover global permission.
 
-A denylist for Admin A would block this one fixture but fail for Admin A2 or a future tenant. A client-supplied `tenant_id` comparison would let the caller choose the authority context. Hiding the delete control would leave the operation reachable. The structural rule must bind the current server-resolved admin membership to the stored object tenant and exact action.
+A denylist for Admin A would block this one practice case but fail for Admin A2 or a future company. A client-supplied `tenant_id` comparison would let the caller choose the permission context. Hiding the delete control would leave the operation reachable. The structural rule must bind the current server-resolved admin membership to the stored object company and exact action.
 
-## Compare the fixed decision path
+## Compare the repaired decision path
 
-After completing your diagnosis, inspect the fixed implementation. For each repaired case, find:
+After completing your diagnosis, inspect the repaired files. For each repaired case, find:
 
-1. where the current subject is resolved;
-2. where the stored object or target tenant is resolved;
+1. where the current person is resolved;
+2. where the stored object or target company is resolved;
 3. where the action is explicitly matched;
-4. where state such as active membership is checked;
+4. where state such as current membership is checked;
 5. where an unknown or invalid case denies;
 6. where the operation consumes the decision before exposing or mutating state.
 
-The fixed file is intentionally small. It is not a production policy framework. It does not prove that a FastAPI route, PostgreSQL query, worker, cache, or mobile client would use the same rule.
+The repaired file is intentionally small. It is not a production policy framework. It does not prove that a FastAPI route, PostgreSQL query, worker, cache, or mobile client would use the same rule.
 
 ## Why the illustrative export case exists
 
-The lab models a high-impact tenant export that requires two distinct current Tenant A administrators. This is an exercise policy chosen to make separation of privilege observable. It does not assert that every export in every product needs two people.
+The practice models a high-impact company export that requires two distinct current company A administrators. This is an exercise policy chosen to make two independent conditions observable. It does not assert that every export in every product needs two people.
 
-The vulnerable implementation accepts one approval. The fixed implementation requires the documented conditions and rejects duplicate, inactive, cross-tenant, or insufficient approvers. The lesson is that “two-person approval” must become a testable authority relation; a second button, second field, or repeated identity is not independent authority.
+The broken files accept one approval. The repaired files require the documented conditions and reject duplicate, inactive, cross-company, or insufficient approvers. The lesson is that “two-person approval” must become a checkable who-is-allowed relation. A second button, second field, or repeated identity is not independent permission.
 
-## Practice modification
+## Practice
 
-Copy the fixed directory to a temporary location outside the fixture directories. Make one change at a time:
+Copy the repaired directory to a temporary location outside the practice folders. Make one change at a time:
 
-1. remove the active-membership check;
+1. remove the current-membership check;
 2. treat all admins as global;
 3. change the final unknown-action branch to allow;
 4. make `list_notes` return storage results before policy filtering;
 5. count duplicate approver IDs as separate approvals.
 
-Run the suite after each change and record which property test detects it. If a meaningful defect is not detected, record a coverage gap. Do not add a superficial assertion merely to turn the suite green; add a matrix cell and a property oracle.
+Run the suite after each change and record which property check detects it. If a meaningful defect is not detected, record a coverage gap. Do not add a superficial assertion merely to turn the suite green. Add a table row and a property check.
 
-## Lab limits and transfer
+## Use it somewhere new
 
-The fixture has no cryptographic capability, no network boundary, no session cache, no transaction, and no distributed worker. A process with full access to the in-memory dictionaries remains powerful. Passing the suite shows that selected service operations consume the modeled policy correctly.
+The practice files have no cryptographic capability, no network boundary, no session cache, no transaction, and no distributed worker. A process with full access to the in-memory dictionaries remains powerful. Passing the suite shows that selected service operations consume the modeled policy correctly.
 
-For transfer, imagine the same decision is made once, placed in a queue, and used ten minutes later by a worker. Which subject is acting? Which authority version applies? What if membership was revoked in the interval? A signed queue message may establish message integrity, but it does not by itself answer those authority questions.
+Imagine the same decision is made once, placed in a queue, and used ten minutes later by a worker. Which person is acting? Which permission version applies? What if membership was removed in the interval? A signed queue message may establish message integrity, but it does not by itself answer those who-is-allowed questions.
+
+## What this page is not doing
+
+Live targets. Ready-made attack recipes. Real people’s data. Do not “fix” the practice by deleting the check.

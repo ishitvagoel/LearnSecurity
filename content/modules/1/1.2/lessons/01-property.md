@@ -1,166 +1,170 @@
-# 1.2-LO-01 — Authority is permission to cause a bounded effect
+# Who is allowed is who can cause a specific effect
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** Saltzer and Schroeder (1975, seminal), especially fail-safe defaults, complete mediation, separation of privilege, and least privilege; OWASP ASVS 5.0.0 (final) `v5.0.0-8.1.1`, `v5.0.0-8.1.2`, `v5.0.0-8.2.1`, `v5.0.0-8.2.2`, and `v5.0.0-8.2.3`.
+**Standards:** Saltzer and Schroeder (1975) on fail closed, checking every path, least privilege, and two independent conditions.
 
-## What must remain true?
+## The rule
 
-For the SecureCollab Phase 1 model:
+For the notes app at this stage:
 
-> A security-relevant effect on a note, membership, tenant, or authority record may occur only when a current, server-resolved rule positively grants the effective subject that exact action on that object in its current state. Missing or unknown authority denies.
+> A change to a note, a membership, a company record, or a permission record may happen only when a current rule on the server says this person may do this action on this object in its current state. Missing or unknown permission means no.
 
-The forbidden outcome is not merely “an unauthenticated request succeeds.” A perfectly authenticated Tenant B member must still be unable to read Tenant A’s note, a Tenant A administrator must not become administrator of Tenant B, and a revoked member must not keep acting merely because an old login session still identifies them.
+What must not happen is not only “a request with no login succeeds.” Bob can be signed in as a company B member and still must not read a company A note. An admin of company A must not become admin of company B. A person whose membership was removed must not keep acting just because an old login still names them.
 
-That distinction is the center of this module. **Authentication supplies identity evidence. Authorization decides whether a particular effect is allowed.** Authentication can be correct while authorization is catastrophically wrong.
+Sign-in answers *who is speaking*. Who is allowed answers *whether this effect may happen*. Sign-in can be correct while who-is-allowed is completely wrong.
 
-## Authority means the ability to cause an effect
+## Picture: a badge is not a decision
 
-Treat authority as a relation, not a badge:
+Treat who is allowed as a relation, not a badge:
 
 ```text
 decision = policy(subject, action, object, state, grant, trusted_context, time)
 ```
 
-- A **subject** is the principal whose authority is being evaluated: a person, service, worker, or delegated actor.
-- An **action** is a security-relevant operation such as `read_body`, `list_summary`, `delete_note`, or `grant_membership`.
-- An **object** is what receives or reveals the effect: a note body, note summary, membership row, tenant record, or export.
-- **State** includes ownership, membership status, document lifecycle, prior approvals, revocation version, and other facts that change the decision.
-- A **grant** explains where authority came from: ownership, membership, delegation, a capability, an approved emergency path, or another explicit policy fact.
-- **Trusted context** contains attributes resolved by a trusted component. A tenant label supplied by the browser is data to validate, not authority.
-- **Time** matters because a grant can begin, expire, be revoked, or become stale between check and use.
+- A **subject** is the person or program you are judging: a human, a service, a worker, or someone acting for someone else.
+- An **action** is the effect: `read_body`, `list_summary`, `delete_note`, `grant_membership`.
+- An **object** is what changes or is revealed: a note body, a title, a membership row, a company record, an export.
+- **State** is facts that change the answer: ownership, membership on/off, published vs draft, a revocation version.
+- A **grant** is where the permission came from: ownership, membership, a hand-off, a capability, an approved emergency path.
+- **Trusted context** is attributes the server resolved. A company label from the browser is data to check, not permission.
+- **Time** matters because a grant can start, expire, be taken back, or go stale between the check and the use.
 
-The tuple is a reasoning model, not a required function signature. A database policy, operating-system capability, application policy service, or relationship graph may represent it differently. The invariant remains the same.
-
-## Mental model: identity evidence is not the decision
+This tuple is a thinking tool, not a required function signature. A database rule, an operating-system capability, or a graph of relationships can store it differently. The rule stays the same.
 
 ```mermaid
 flowchart LR
-  AuthN["Authentication - who is speaking"] --> Subj[Subject]
-  Subj --> Pol["policy of subject, action, object, state"]
+  AuthN["Sign-in: who is speaking"] --> Subj[Person]
+  Subj --> Pol["rule: person, action, object, state"]
   Obj[Object and action] --> Pol
   Pol --> Allow[Allow]
   Pol --> Deny["Deny if missing or unknown"]
 ```
 
-A valid session cookie fills *who is speaking*. It does not fill the cell. Ambient authority is what happens when the arrow from AuthN skips *policy* and goes straight to the database.
+A valid session cookie fills *who is speaking*. It does not fill the table. **Leftover permission** is permission that comes from the surroundings rather than from a grant for this action — a signed-in user, a process-wide database login, an unscoped admin flag — used as if it were a yes for this person, this object, and this action.
 
-## The access matrix is an abstract relation
+## The access matrix is a big table
 
-Imagine a large table. Subjects are rows, objects are columns, and each cell contains allowed actions and conditions. This **access matrix** is the abstract authority model.
+Imagine a large table. People are rows. Objects are columns. Each box holds allowed actions and conditions. That **access matrix** is the abstract who-is-allowed model.
 
-| Subject | Object | Action | Condition | Decision |
+| Person | Object | Action | Condition | Decision |
 |---|---|---|---|---|
-| Alice, active member of A | Note A-17 body | read | note belongs to A | allow |
-| Bob, active member of B | Note A-17 body | read | no A membership or grant | deny |
-| Admin A | Membership A-9 | revoke | admin remains active in A | allow |
-| Admin A | Membership B-4 | revoke | admin role is not global | deny |
+| Alice, current member of A | Note A-17 body | read | note belongs to A | allow |
+| Bob, current member of B | Note A-17 body | read | no A membership or grant | deny |
+| Admin A | Membership A-9 | revoke | admin is still current in A | allow |
+| Admin A | Membership B-4 | revoke | admin of A is not admin of B | deny |
 
-Real systems rarely store that literal table. They compress or distribute it.
+Real apps almost never store that literal table. They compress it.
 
 ### ACLs
 
-An access-control list stores authority near an object: “these subjects or groups may perform these actions.” It is an object-centered representation of matrix cells. It raises questions about group expansion, inheritance, default entries, ownership, and revocation.
+An access-control list stores permission next to an object: “these people or groups may do these actions.” It is the table, written from the object’s side. You then have to ask: how do groups expand, what is inherited, what is the default, who owns the object, and how do you take permission back.
 
 ### Roles
 
-A role groups many permissions so policy is easier to administer. “Tenant admin” might expand into membership-read, membership-grant, membership-revoke, and selected note actions. A role is a compression of cells, not a magical authority fact. If the tenant scope is lost, `role == admin` becomes ambient global authority.
+A role bundles many permissions so people can administer them. “Company admin” might expand into membership-read, membership-grant, membership-revoke, and some note actions. A role is a compression of table rows, not magic. If you drop the company bound, `role == admin` becomes leftover permission over every company.
 
 ### Relationship or attribute rules
 
-A rule may say that a member can read notes whose `tenant_id` equals the member’s active tenant, or that an editor may update a draft but not a published record. These mechanisms calculate cells from trusted relationships, attributes, and state. If the attributes come from the requester, the apparent sophistication does not help.
+A rule may say a member can read notes whose stored company matches the member’s current company, or that an editor may update a draft but not a published note. These calculate table rows from trusted relationships, attributes, and state. If the attributes come from the requester, the fancy rule does not help.
 
 ### Capabilities
 
-A capability is an unforgeable reference whose possession intentionally conveys a specified authority. A random note identifier is not automatically a capability. For possession to be the grant, the design must address unforgeability, scope, audience or bearer semantics, copyability, attenuation, expiry, revocation, and leakage.
+A capability is an unforgeable reference. Holding it is meant to be the grant. A random note id is not automatically a capability. For possession to be the grant, the design must deal with forgery, scope, who may present it, copying, shrinking, expiry, taking it back, and leaks.
 
-Knowledge of `/notes/7f3...` is not permission if the product’s intended rule is tenant membership. Making the identifier harder to guess raises work factor; it does not change the authority relation.
+Knowing `/notes/7f3...` is not permission if the product rule is company membership. Making the id harder to guess raises work. It does not change who is allowed.
 
-## Delegation must attenuate authority
+## Hand-offs must shrink permission
 
-Delegation lets one subject authorize another to perform a bounded action. The grant should record at least:
+A hand-off lets one person authorize another for a bounded action. The grant should record at least:
 
-- issuer and grantee;
-- action and object or object set;
-- constraints and intended audience;
+- who issued it and who received it;
+- the action and the object or object set;
+- limits and intended audience;
 - issue time and expiry;
-- revocation state or version;
-- whether further delegation is permitted;
-- evidence needed at use time.
+- whether it has been taken back, or a version that says so;
+- whether further hand-off is allowed;
+- what evidence you need at use time.
 
-The delegate cannot legitimately receive more authority than the issuer can grant. If Alice can read Note A-17 but cannot delete it, a grant from Alice should not create delete authority. If Alice’s membership is revoked, the design must say whether existing grants also lose effect and within what time. “Share token exists” is a mechanism statement; the authority contract answers what the token means.
+The receiver cannot honestly get more permission than the issuer can grant. If Alice can read Note A-17 but cannot delete it, a grant from Alice should not create delete permission. If Alice’s membership is removed, the design must say whether existing grants also die, and how soon. “A share token exists” is a tool sentence. The contract answers what the token means.
 
-## Ambient authority is authority without an explicit grant for this action
+## Leftover permission has no grant for this action
 
-Ambient authority comes from the surrounding environment rather than the request’s justified authority path. Common examples include:
+Leftover permission comes from the surroundings rather than from a grant for this person, this object, and this action. Common shapes:
 
 - a global `current_user` treated as permission on every object;
-- a process-wide database credential able to read every tenant;
-- an unscoped `admin` boolean;
-- a worker service account whose broad storage access substitutes for the originating user’s permission;
-- a cached “allowed” decision reused after membership changes;
-- a recovery shell that bypasses ordinary policy without independent conditions.
+- a process-wide database login that can read every company;
+- an unscoped `admin` flag;
+- a worker account whose broad storage access stands in for the person who asked;
+- a cached “allowed” reused after membership changed;
+- a recovery shell that skips the ordinary rule with no extra conditions.
 
-Ambient authority is attractive because it makes code convenient. It is dangerous because the authority is available to operations that never justified needing it. Least privilege asks whether the subject and mechanism can hold less. Complete mediation asks whether every effect is checked. Fail-safe defaults ask whether an omitted case becomes denial rather than permission.
+Leftover permission is convenient. It is dangerous because it is available to operations that never justified needing it. Least privilege asks whether the person and the tool can hold less. Checking every path — textbooks call this complete mediation — asks whether every effect is checked. Fail closed asks whether a missing case becomes no, not yes.
 
-## Derive principles from failures
+## Principles come from failures
 
-The classic protection principles are not slogans to attach after design. Each responds to a failure shape.
+These names are not slogans to paste on at the end. Each one answers a failure shape.
 
 | Failure shape | Derived principle | Design question |
 |---|---|---|
-| Unknown subject/action/object is allowed | Fail-safe defaults | What positive fact creates permission? |
-| List, export, worker, retry, or restore bypasses the check | Complete mediation | Which enforcement point guards every in-scope effect? |
-| Tenant admin acts on every tenant | Least privilege | Can authority be narrowed by tenant, action, object, state, and time? |
-| One stolen credential performs a catastrophic export | Separation of privilege | Which independent conditions should be required, and are they truly independent? |
-| The policy works only while attackers do not know it | Open design | Would publishing the rule make it fail? |
-| Administrators cannot understand or revoke grants | Psychological acceptability | Is the secure administrative path understandable and usable under stress? |
+| Unknown person, action, or object is allowed | Fail closed | What positive fact creates permission? |
+| List, export, worker, retry, or restore skips the check | Checking every path | Which stop guards every in-scope effect? |
+| Company admin acts on every company | Least privilege | Can permission be narrowed by company, action, object, state, and time? |
+| One stolen credential does a catastrophic export | Two independent conditions | Which independent conditions should be required, and are they truly independent? |
+| The rule works only while attackers do not know it | Open design | Would publishing the rule make it fail? |
+| Administrators cannot understand or take grants back | People can still use it | Is the secure admin path understandable under stress? |
 
-Two button clicks by the same user are not separation of privilege. Two checks that depend on the same compromised identity may not be meaningfully independent. The principle asks whether one accident, deception, or breach is enough to cause the protected effect.
+Two button clicks by the same person are not two independent conditions. Two checks that depend on the same stolen identity may not be independent either. The question is whether one accident, deception, or break is enough to cause the protected effect.
 
-## Root cause, impact, and response are different
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-Consider Bob reading Alice’s note by choosing `nA1`.
+Bob reads Alice’s note by choosing `nA1`.
 
-- **Root cause:** the read path treats authenticated identity as object authority and omits the subject–object rule.
-- **Preconditions:** Bob has a valid Tenant B identity; Note A-17 exists; Bob can choose an identifier.
-- **Trigger:** the read operation reaches storage without a current positive decision for Bob × read-body × Note A-17.
-- **Impact:** Tenant A note confidentiality fails. The identifier may also reveal note existence.
-- **Prevention:** resolve subject and object server-side, evaluate the exact action, and enforce the decision before release.
-- **Detection:** privacy-safe decision evidence may reveal repeated tenant-mismatch attempts.
-- **Recovery:** revoke stolen authority if applicable, repair every affected path, remove exposed copies where possible, notify owners under the incident process, and retest.
+| Slice | For this rule |
+|---|---|
+| Why it happens | The read path treats a signed-in identity as permission on the object and skips the person–object rule |
+| What has to be true first | Bob has a valid company B identity; Note A-17 exists; Bob can choose an identifier |
+| Trigger | The read reaches storage without a current yes for Bob × read-body × Note A-17 |
+| What it costs | Company A note secrecy fails. The identifier may also reveal that the note exists |
+| How you stop it | Resolve person and object on the server, judge the exact action, and enforce the answer before release |
+| How you notice | A privacy-safe decision record may show repeated company-mismatch attempts |
+| How you recover | Take stolen permission back if it applies, repair every affected path, remove exposed copies where you can, tell owners, and re-check |
 
-Calling this “IDOR” or “BOLA” can help communicate a known weakness family later. It does not explain why the rule failed or which other paths share the same cause.
+Calling this a known weakness family can help you talk to other people later. It does not explain why the rule failed, or which other paths share the same cause.
 
-## Framework defaults versus application guarantees
+## What the framework does vs what you still have to check
 
-FastAPI’s authentication dependency can reject an invalid credential. Next.js can hide an admin control. PostgreSQL can enforce row policies if they are correctly designed and used. None of those facts alone proves SecureCollab’s authority invariant.
+FastAPI can reject a bad credential. Next.js can hide an admin control. PostgreSQL can enforce row rules if they are designed and used. None of that alone proves the notes-app who-is-allowed rule.
 
-The application guarantee must state:
+You still have to state:
 
-- which identity and object attributes are trusted and where they are resolved;
-- which policy rule covers the action;
-- which enforcement points cannot be bypassed;
+- which identity and object attributes are trusted, and where they are resolved;
+- which rule covers the action;
+- which stops cannot be skipped;
 - what happens on unknown state and policy failure;
-- how revocation becomes effective;
-- which tests observe forbidden outcomes;
-- which paths and administrators remain residual risk.
+- how taking permission back becomes real;
+- which checks watch for what must not happen;
+- which paths and administrators remain leftover risk.
 
-ASVS 5.0.0 provides exact verification requirements for documenting function/data/field rules and enforcing them. It is a verification backbone, not a substitute for the product-specific matrix.
+Industry verification lists ask you to write function, data, and field rules and to enforce them. They are a checklist after the table, not a substitute for it.
 
-## Guided practice: classify the claim
+## Practice
 
-For each statement, label it **identity evidence**, **authority rule**, **representation/mechanism**, **ambient authority**, or **unsupported conclusion**. Then rewrite unsupported statements as a bounded cell.
+For each statement, label it **identity evidence**, **who-is-allowed rule**, **tool / representation**, **leftover permission**, or **unsupported claim**. Then rewrite unsupported claims as a bounded table row.
 
 1. “The request has a valid session cookie.”
-2. “A current Tenant A member may read the body of a Tenant A note.”
+2. “A current company A member may read the body of a company A note.”
 3. “The route uses `Depends(get_current_user)`.”
-4. “The worker uses the application database role, so its export is authorized.”
+4. “The worker uses the application database role, so its export is allowed.”
 5. “The note ID is random, so anyone who has it may read.”
-6. “Admin A may revoke active memberships in A, but not in B.”
+6. “Admin A may revoke current memberships in A, but not in B.”
 
-Your rewrite is successful when another learner can identify subject, object, action, positive grant, state/time condition, forbidden outcome, and what must deny. If they must ask what “admin,” “has access,” or “secure” means, the cell is still underspecified.
+Your rewrite works when another learner can name the person, the object, the action, the positive grant, the state/time condition, what must not happen, and what must deny. If they have to ask what “admin,” “has access,” or “secure” means, the row is still too vague.
 
-## Transfer prompt
+## Use it somewhere new
 
-A future background job receives a signed message saying “export tenant A.” Do not decide from the signature alone. List the originating subject, effective worker subject, action, object set, source and scope of authority, issue/use time, revocation behavior, trusted context, and one mechanism limit. LO-07 will require this reasoning without the SecureCollab scaffolding.
+A later background job receives a signed message saying “export company A.” Do not decide from the signature alone. List the person who asked, the worker who runs, the action, the object set, where permission came from and how far it reaches, issue/use time, what happens if permission is taken back, what you trust, and one thing the tool cannot do.
+
+## What this page is not doing
+
+Live targets. Treating a “top ten bugs” list as the course. Ready-made attack recipes. Answer keys are not in this file.
