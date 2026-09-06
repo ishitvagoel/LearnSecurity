@@ -1,48 +1,52 @@
-# 8.4 — Build, distribution, attestation, resilience (4 Build)
+# 8.4-LO-04 — Allow only release plus server attest
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** MASVS 2.1 CODE/RESILIENCE (final). Resilience raises cost; it is not trust.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.3.1`. MASVS 2.1.0 `MASVS-CODE`.
 
-## Property (start here)
+## Structural means the server checks build type
 
-A debug-signed lab build must not call the production export API even if a client attest string is present. Channel + build type are part of the TCB decision on the server.
+`api_allowed` must require `build_type == "release"` **and** `attest == "ok"` (lab stand-in for server-verified attest from 8.1). Debug never reaches prod.
 
-## Attacker capabilities and trust assumptions
+## Mental model: both gates
 
-- **Attacker:** Leaked debug APK; student build pointed at prod.
-- **Trust:** Local api_allowed(build, attest).
-debug + attest ok => False.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-def api_allowed(build_type, attest):
-    return build_type == 'release' and attest == 'ok'
+```mermaid
+flowchart TD
+  Call[api_allowed] --> Rel{release?}
+  Rel -->|no| Deny[deny]
+  Rel -->|yes| Att{attest ok?}
+  Att -->|yes| Allow[allow]
+  Att -->|no| Deny
 ```
+
+Fail-safe: unknown build type denies. Do not accept a client-only minify flag.
 
 ## Why this restores the cell
 
-Separate client ids; server checks; signing keys in HSM; no prod in debug manifests.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| debug + ok | false |
+| release + ok | true |
+| release + fail | false |
 
 ## What this is not
 
-minifyEnabled is not this property.
-
-R8/obfuscation does not authorize. Root detection is bypassable.
+R8. Root detection. Play App Signing. A resilience sticker.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name the predicate. Run:
+
+```
+python3 -m pytest labs/8.4/8.4-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-SBOM of the APK (10.2).
+Clinic: stop pointing the debug flavor at production FHIR.
 
 ## Residual risk
 
-Attestation farms.
+Stolen release signing keys (5.3); attestation farms; 8.1 still applies to release APKs.

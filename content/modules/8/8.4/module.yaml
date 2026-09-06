@@ -7,64 +7,67 @@ difficulty: advanced
 status: reviewed
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 1.1–2.4 Pass A complete
+- Prior phase Pass A per blueprint §7; 8.1 hostile client; 5.3 secrets not in artifacts
 routeTags:
 - complete
 - mobile
 releaseMilestone: M3
 outcomes:
-- 'Demonstrate: Build, distribution, attestation, and resilience'
-- 'Produce evidence: Signed release evidence and resilience limitations report'
-- Name attacker capabilities and trust assumptions
-- Include a local-only lab brief and a transfer challenge
-- Do not instruct live-target attacks or mix awareness lists as compliance
+- 'Refuse debug builds calling the production export API even when a client attest string is present.'
+- 'Treat obfuscation, root detection, and Play Integrity as cost-raising, not as trust of the APK.'
+- 'Map MASVS 2.1 CODE/RESILIENCE and keep signing-key leakage as a 5.3 residual; MAS Testing Profiles are not obsolete MASVS L1/L2/R.'
 reviewTriggers:
-- Material SecureCollab change in this module's concern
-- Superseding final standard
+- Shared API identifier between debug and release
+- Signing key in the repo or CI
+- Resilience checklist offered as Gate 8 evidence
+- Superseding final MASVS
 invariants:
-- Claims are properties of SecureCollab (or the elective system), not tool names
+- api_allowed('debug', 'ok') is false
+- Resilience raises cost; it does not authorize
 - Labs stay in authorized local or official training scope
-- Draft standards are labeled draft
+- MASVS L1/L2/R are not used as current levels
 threatModelPrompts:
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+- What can go wrong when prod trusts attest=ok from any build type?
+- What residual remains if R8 is on but the debug client id still works?
+- What residual remains if signing keys leak (5.3)?
 concepts:
-- build
+- release-channel
+- masvs-resilience
+- signing
 - securecollab
 - seven-step-loop
 learningObjects:
 - id: 8.4-LO-01
   kind: concept-model
-  title: 'Build, distribution, attestation, resilience: property vs mechanism'
+  title: Resilience raises cost; it is not trust
   path: lessons/01-property.md
 - id: 8.4-LO-02
   kind: design-exercise
-  title: Model SecureCollab Android client for 8.4
+  title: Debug versus release as a server decision
   path: lessons/02-model.md
 - id: 8.4-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: Debug build allowed to call production export'
+  title: 'Local fixture: debug build calls prod export'
   path: lessons/03-break.md
 - id: 8.4-LO-04
   kind: design-exercise
-  title: Structural fix restoring the 8.4 invariant
+  title: Allow only release plus server attest
   path: lessons/04-build.md
 - id: 8.4-LO-05
   kind: verification-lab
-  title: Forbidden-outcome tests for 8.4
+  title: Fail-on-vulnerable then pass-on-fixed for debug
   path: lessons/05-verify.md
 - id: 8.4-LO-06
   kind: operations-exercise
-  title: Detect/recover notes for 8.4
+  title: debug_to_prod_denied without logging the APK
   path: lessons/06-operate.md
 - id: 8.4-LO-07
   kind: transfer-challenge
-  title: 'Transfer: Clinic: debug build against prod FHIR.'
+  title: 'Transfer: clinic debug build against prod FHIR'
   path: lessons/07-transfer.md
 - id: 8.4-LO-08
   kind: code-review
-  title: Seeded review for 8.4
+  title: Review always-true api_allowed as a PR, not an R8 sticker
   path: lessons/08-review.md
 labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
@@ -77,34 +80,50 @@ labSpec:
   - Real PII or production secrets
   - Awareness list used as the syllabus
 evidenceRequired:
-- Signed release evidence and resilience limitations report
+- Signed release evidence notes and resilience limitations
 - Transfer task prompt
-- Local lab brief
+- Local lab brief with debug-to-prod deny tests
 assessmentBlueprint:
-  explain: Causal model for Build, distribution, attestation, and resilience
-  design: Signed release evidence and resilience limitations report
-  build: Deferred to Pass B
-  break: Authorized local reproduction of the representative failure
-  verify: Forbidden-outcome tests
-  operate: Detection and recovery notes
-  communicate: Residual risk without compliance theater
+  explain: Build type plus attest on the server; resilience is cost
+  design: Separate client ids; signing-key ownership
+  build: api_allowed requires release and ok in labs/8.4/8.4-lab/fixed
+  break: Authorized local always-true allow
+  verify: Forbidden-outcome tests plus honest release plus attest
+  operate: debug_to_prod_denied without the binary
+  communicate: Residual attestation farms; key leak 5.3; MAS-R profile is not 1.2
 masteryGate: '8'
 standardsRefs:
-- source: OWASP ASVS / module anchors (see spec)
-  version: 5.0.0
+- source: OWASP MASVS
+  version: '2.1.0'
   status: final
   requirementIds:
-  - RESILIENCE
+  - MASVS-CODE
+  - MASVS-RESILIENCE-1
+  - MASVS-RESILIENCE-2
+  url: https://mas.owasp.org/MASVS/
+- source: OWASP MASTG
+  version: '2.0.0'
+  status: final
+  requirementIds:
+  - MAS-testing-profiles
+  url: https://mas.owasp.org/MASTG/0x03b-Testing-Profiles/
+- source: OWASP Application Security Verification Standard
+  version: '5.0.0'
+  status: final
+  requirementIds:
+  - v5.0.0-13.3.1
+  - v5.0.0-8.3.1
   url: https://owasp.org/www-project-application-security-verification-standard/
 misconceptions:
-- Obfuscation = security
-- Play App Signing means we don’t care
+- Obfuscation equals security
+- Play App Signing means we do not care
 - Anti-debug proves the server can trust the client
+- MASVS R-level is a current MASVS verification level
 operationalConsiderations:
 - debug_to_prod_denied.
-- Attestation farms.
-author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+- Attestation farms; revoke debug client ids.
+author: deepen-curriculum / author-module-spec
+reviewer: pending independent quality and lab-safety review
 lastReviewedAt: '2026-08-24'
 nextReviewAt: '2027-02-24'
 changelog:
@@ -122,3 +141,6 @@ changelog:
 - date: '2026-08-24'
   note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
     Pass C keys isolated'
+- date: '2026-09-06'
+  note: 'Depth pass: resilience-is-cost mental models, mermaid diagrams, MASVS-CODE
+    / RESILIENCE-1, ASVS v5.0.0-13.3.1; independent review still required'

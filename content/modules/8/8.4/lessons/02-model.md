@@ -1,53 +1,69 @@
-# 8.4 — Build, distribution, attestation, resilience (2 Model)
+# 8.4-LO-02 — Debug versus release as a server decision
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** MASVS 2.1 CODE/RESILIENCE (final). Resilience raises cost; it is not trust.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-CODE`. ASVS `v5.0.0-8.3.1`.
 
-## Property (start here)
+## Can a second engineer name pytest cases from your channel map?
 
-A debug-signed lab build must not call the production export API even if a client attest string is present. Channel + build type are part of the TCB decision on the server.
+“R8 is on” is not this lesson. A reviewable model names **build type, client id, and which API it may call**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab Phase 8 freeze: local `api_allowed(build_type, attest)`. No live stores.
 
-- **Attacker:** Leaked debug APK; student build pointed at prod.
-- **Trust:** Local api_allowed(build, attest).
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: server owns the channel
+
+```mermaid
+flowchart TD
+  Build[build_type] --> Pred{"release and attest ok?"}
+  Pred -->|yes| Prod[prod export]
+  Pred -->|no| Deny[deny]
+```
+
+## Mental model: secrets in the APK will leak
+
+```mermaid
+flowchart LR
+  Apk[APK] --> Id[client id]
+  Apk --> Url[API URL]
+  Id --> Assume[treat as public]
+```
+
+That is 5.3 / `v5.0.0-13.3.1` — not solved by minify.
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | debug build, prod API |
-| Objects | export endpoint |
-| Actions | api_allowed |
-| Channels | TLS to prod |
-| TCB | Server rejects debug client ids / non-prod signatures. |
-| Untrusted | Client attest string, obfuscation |
-| State / time | CI artifact mis-tagged. |
-| 1.1 cell | Integrity of the release channel. |
+| Subjects | leaked debug APK; honest release |
+| Objects | prod export API |
+| Actions | `api_allowed` |
+| Channels | HTTPS from the app |
+| TCB | server build+attest check |
+| Untrusted | client attest string, R8, root checks |
+| State / time | token freshness (8.1 residual) |
+| 1.1 cell | integrity of the release channel |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| debug APK | prod export | call | deny |
-| release APK | prod export | call | allow-if-1.2-attest |
-| stolen sign key | store | publish | 5.3 incident |
-| R8 | strings | hide | not-authz |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| debug + attest ok | prod export | call | deny |
+| release + attest ok | prod export | call | may allow |
+| release + attest fail | prod export | call | deny |
+| R8 | binary | minify | not TCB |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/8.4/8.4-lab` file `build.py`.
+Draw the map. Point at `labs/8.4/8.4-lab` file `build.py`.
 
 ## Transfer
 
-SBOM of the APK (10.2).
+Clinic FHIR flavors; 10.2 SBOM.
 
 ## Residual risk
 
-Attestation farms.
+Key leak; attestation farms; MASVS-RESILIENCE as cost.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

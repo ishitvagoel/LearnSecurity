@@ -1,38 +1,45 @@
-# 8.4 — Build, distribution, attestation, resilience (5 Verify)
+# 8.4-LO-05 — Evidence is debug denied, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** MASVS 2.1 CODE/RESILIENCE (final). Resilience raises cost; it is not trust.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-CODE`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A debug-signed lab build must not call the production export API even if a client attest string is present. Channel + build type are part of the TCB decision on the server.
+“minifyEnabled is true” is not evidence. The oracle is the local pair. Do not unpack store APKs.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Leaked debug APK; student build pointed at prod.
-- **Trust:** Local api_allowed(build, attest).
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail debug plus ok"]
+  X["--impl fixed"] --> P["Must pass deny"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Debug build allowed to call production export |
-| Failure | Fail closed: Separate client ids; server checks; signing keys in HSM; no prod in debug manifests |
+| Negative / abuse | debug + ok → false |
+| Normal | release + ok → true |
+| Negative | release + fail → false |
+| Not claimed | real Play Integrity; R8; live signing |
 
-Lab tests: `test_property.py` under `labs/8.4/8.4-lab`.
+```
+python3 -m pytest labs/8.4/8.4-lab/tests --impl vulnerable
+python3 -m pytest labs/8.4/8.4-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Debug build allowed to call production export`
-- `--impl fixed`: **pass**
+Honest release+ok may pass on both.
 
-debug cannot call prod export.
+## What the tests do not prove
+
+- Hardware-backed signing
+- MASVS-RESILIENCE on a physical device
+- That debug cannot reach a *lab* API (it should)
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-SBOM of the APK (10.2).
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic: a test that only asserts the debug APK builds is not this cell.

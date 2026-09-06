@@ -1,6 +1,6 @@
 # 8.2 — Local data, keys, biometrics, offline state, and leakage surfaces
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. No exploit walkthroughs. Lab AEAD prefix is a stand-in.
 
 ## Identity
 
@@ -9,71 +9,75 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** Local data, keys, biometrics, offline state, and leakage surfaces
 - **phase / track / difficulty:** 8 / mobile / advanced
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Blueprint §7; 5.2 AEAD; 8.1 hostile client; 4.2 biometrics ≠ server MFA.
 - **routeTags:** complete, mobile
 - **releaseMilestone:** M3
 - **masteryGate:** 8
 
 ## Objective hierarchy
 
-1. Produce **Device data inventory and leakage tests** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce a **device store inventory** plus deny tests so a cached note is not plaintext on disk.
+2. Name attacker capabilities (USB backup, lost device, cloud backup of app files) and trust assumptions (local `save_note` / `plaintext_on_disk`).
+3. Transfer: clinic offline chart cache; iOS Keychain as a later mirror; Electron — without treating EncryptedSharedPreferences as covering every file.
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+5.2 encoding ≠ encryption; 5.1 extra copies; 4.2 local authenticator is not phishing-resistant server auth; 8.1 APK is hostile.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- Private app dir is encryption.
+- Fingerprint is MFA to the server.
+- Offline means no policy.
+- EncryptedSharedPreferences covers every file you write.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+Hostile client (8.1) → at-rest on device (this module) → IPC leaks (8.3) → 5.1 deletion graph includes the phone.
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true after `save_note("secret")`?
+- What fails if biometrics lock the UI but the file is still plaintext?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can go wrong when Room writes bodies as text?
+- What residual remains after a remote-wipe that the OS does not honor?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/8.2/8.2-lab`. Forbidden: note body cached as plaintext. Synthetic `'secret'` only.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-MASVS-STORAGE/CRYPTO/AUTH/PRIVACY — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- OWASP MASVS 2.1.0 (final): `MASVS-STORAGE-1` (store sensitive data securely); `MASVS-STORAGE-2` (prevent leakage); `MASVS-CRYPTO-2` (key management / Keystore); `MASVS-AUTH-2` (local authentication — not 4.2 server MFA). No MASVS L1/L2/R.
+- OWASP MASTG 2.0.0 (final, June 2026): tests for STORAGE group; website/repos authoritative.
+- OWASP ASVS 5.0.0 (final): `v5.0.0-11.3.3` AEAD property named; the lab prefix is **not** that algorithm.
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+New cache/DB file; backup/screenshot/notification; biometric-as-MFA claim.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: Device data inventory and leakage tests.
+Evidence: inventory + plaintext-on-disk tests. Feeds Gate 8 / M3 (not-attempted).
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`logout_wipes_cache`; `backup_flag`. Physical + extracted keys is an honest residual.
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: private-dir vs encryption; MASVS-STORAGE-1/2; AUTH-2 vs 4.2 |

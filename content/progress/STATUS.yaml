@@ -14,15 +14,42 @@ defaults:
   ai_security: elective E1
   website_progress: local-first static site (site/); no accounts
 next:
-  id: '8.1'
+  id: '8.5'
   pass: revise
   skill: deepen-curriculum
   inner_skill: standards-pin
-  note: Module 7.4 authoring pass added HTTP-vs-worker-principal mental models and
-    diagrams; keep 1.4, 2.1-2.4, 3.1-3.4, 4.1-4.5, 5.1-5.5, 6.1-6.7, and 7.1-7.4
+  note: Module 8.4 authoring pass added resilience-is-cost mental models and diagrams;
+    keep 1.4, 2.1-2.4, 3.1-3.4, 4.1-4.5, 5.1-5.5, 6.1-6.7, 7.1-7.4, and 8.1-8.4
     developing until independent review. Continue the depth queue one module at a
     time.
 spiral_deltas:
+- date: '2026-09-06'
+  module: '8.4'
+  change: Release-channel loop v2 treats debug plus attest=ok as not prod export,
+    refuses R8/Play-Signing as 1.2, pins MASVS-CODE and ASVS v5.0.0-13.3.1, and
+    labels MASVS-RESILIENCE as cost-raising not trust
+  retest: Revisit 8.1 hostile APK; 5.3 signing keys; 10.2 APK SBOM; 8.5 MASVS
+    traceability
+- date: '2026-09-06'
+  module: '8.3'
+  change: Intent loop v2 treats deep-link query as untrusted input not identity,
+    refuses verified App Links as a principal, pins MASVS-PLATFORM-1/2 and RFC 8252,
+    and keeps custom schemes as a residual
+  retest: Revisit 4.5 native OAuth; 4.3 query tokens; 6.2 WebView HTML; 8.1 hostile
+    other apps
+- date: '2026-09-06'
+  module: '8.2'
+  change: Device-storage loop v2 treats private app dir as not encryption, refuses
+    fingerprint as server MFA, pins MASVS-STORAGE-1/2 and AUTH-2, and labels the
+    lab aead prefix as a stand-in not AES
+  retest: Revisit 5.2 AEAD property; 5.1 deletion graph; 4.1 logout wipe; 8.3 clipboard
+- date: '2026-09-06'
+  module: '8.1'
+  change: Hostile-client loop v2 treats the APK as outside the TCB, refuses Play
+    Integrity as 1.2, pins MASVS 2.1.0 PLATFORM and ASVS v5.0.0-8.3.1, and forbids
+    obsolete MASVS L1/L2/R as current levels
+  retest: Revisit 1.2 server cells; 7.1 extra client keys; 8.4 debug channel; 8.5
+    MASVS profiles
 - date: '2026-09-06'
   module: '7.4'
   change: Worker-identity loop v2 treats leftover user_session as not the worker
@@ -635,8 +662,8 @@ modules:
   track: mobile
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added hostile-client mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '8.2'
   title: Local data, keys, biometrics, offline state, and leakage surfaces
@@ -644,8 +671,8 @@ modules:
   track: mobile
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added private-dir-vs-encryption mental models and
+    diagrams; independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '8.3'
   title: Network, deep links, WebViews, and inter-app communication
@@ -653,8 +680,8 @@ modules:
   track: mobile
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added Intent-as-untrusted-input mental models and
+    diagrams; independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '8.4'
   title: Build, distribution, attestation, and resilience
@@ -662,8 +689,8 @@ modules:
   track: mobile
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added resilience-is-cost mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '8.5'
   title: Mobile verification and privacy

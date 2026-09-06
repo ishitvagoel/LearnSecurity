@@ -1,6 +1,6 @@
 # 8.1 — The hostile-client and mobile-platform model
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. No exploit walkthroughs. Android/Kotlin first; iOS is a later mirror.
 
 ## Identity
 
@@ -9,71 +9,76 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** The hostile-client and mobile-platform model
 - **phase / track / difficulty:** 8 / mobile / advanced
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Blueprint §7; 1.2 server cells; 7.1 extra client keys.
 - **routeTags:** complete, mobile
 - **releaseMilestone:** M3
 - **masteryGate:** 8
 
 ## Objective hierarchy
 
-1. Produce **Mobile threat model and client/server responsibility matrix** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce a **client/server responsibility matrix** plus deny tests so `integrity=ok` on the device does not authorize export.
+2. Name attacker capabilities (patched APK, emulator, stolen boolean) and trust assumptions (local `allow_export(client_claim, server_attest)`).
+3. Transfer: clinic `hipaaMode=true`; APK feature flags; `premium=true` — without treating Play Integrity as 1.2.
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+1.2 authority is a server cell; 2.3 hostile browser; 7.1 client documents; 8.4 will separate debug/release channels.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- Obfuscation is authorization.
+- Kotlin/Jetpack is the guarantee.
+- Store listing equals device trust.
+- Play Integrity is 1.2.
+- MASVS L1/L2/R are current levels.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+Server 1.2 → hostile APK (this module) → local storage (8.2) → Intents (8.3) → build channel (8.4).
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true if the client JSON says `integrity=ok`?
+- What fails if export is gated only in the Android UI?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can go wrong when policy runs on the attacker’s CPU?
+- What residual remains if Play Integrity passes on an emulator farm?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/8.1/8.1-lab`. Forbidden: client `integrity=ok` with failing server attest still exports. No live Play Console or device farms.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-MASVS; Android; Apple — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- OWASP MASVS 2.1.0 (final, January 2024): `MASVS-PLATFORM` (sandbox / other apps); `MASVS-RESILIENCE-1` (platform integrity) is a **cost-raising residual**, not the export grant. Do **not** use obsolete MASVS L1/L2/R. MAS Testing Profiles live in MASTG 2.0.0 / MASWE.
+- OWASP ASVS 5.0.0 (final): `v5.0.0-8.2.1` function-level on the **server**; `v5.0.0-8.3.1` trusted service layer, not client JS/Kotlin.
+- OWASP Mobile Top 10:2024 M7 as **awareness after** the cause.
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+Client boolean in a server decision; new attestation API; min-SDK change.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: Mobile threat model and client/server responsibility matrix.
+Evidence: responsibility matrix, client-claim tests. Feeds Gate 8 / M3 (milestone stays not-attempted).
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`attest_fail_export_denied`. Honest rooted devices are an owned product policy, not a silent grant.
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: hostile-client mental models; MASVS 2.1.0 PLATFORM; Play Integrity labeled a signal |

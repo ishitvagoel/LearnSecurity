@@ -1,1 +1,1 @@
-Vulnerable 8.2 local fixture. Authorized directory only.
+Vulnerable 8.2 local fixture. Note body stored as plaintext. Authorized directory only.

@@ -1,56 +1,48 @@
-# 8.3 — Network, deep links, WebViews, IPC (3 Break)
+# 8.3-LO-03 — Observe as= switch, do not install a malware APK
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** MASVS 2.1 PLATFORM/NETWORK/AUTH (final); RFC 8252. Exported components are attack surface.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-PLATFORM-1`.
 
-## Property (start here)
+## Authorized scope
 
-A deep link query as=admin must not switch the signed-in principal. The session is identity; the Intent is untrusted input.
+`labs/8.3/8.3-lab` only. Synthetic query dicts. No live Intents, no sideloaded attacker apps.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Deep link `as=` switches the signed-in user.
 
-- **Attacker:** Malicious app sending an Intent; crafted https link.
-- **Trust:** Local open_link / current_user.
-**Forbidden outcome:** Deep link as= switches the signed-in user
+## Mental model: extras become the user
 
-**Authorized scope:** `labs/8.3/8.3-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable link.py switches user.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: open_link({as:admin}) sets admin.
-
-## Vulnerable fixture (local)
-
-```python
-SESSION={'user':'alice'}
-def reset():
-    SESSION['user']='alice'
-def open_link(query):
-    if 'as' in query:
-        SESSION['user']=query['as']
-def current_user():
-    return SESSION['user']
+```mermaid
+flowchart TD
+  Q["as admin"] --> Session["current_user admin"]
 ```
+
+The vulnerable tree demonstrates **cause** (identity from the link). Do not send Intents at anything except this fixture.
+
+## What to read in the fixture
+
+`vulnerable/link.py` copies `as` onto the session. Tests require `current_user()` stay `'alice'`.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Identity taken from the link. |
-| Impact | Local privilege / account switch. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Identity taken from the link |
+| Impact | Local account switch |
+| Not the lesson | MASWE-0029 as a live-target cookbook |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/8.3/8.3-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/8.3/8.3-lab/tests --impl vulnerable
+```
+
+Record `test_deeplink_as_param_does_not_switch_user`. Do not probe public hosts.
 
 ## Transfer
 
-OAuth redirect to app (4.5).
+Clinic `as=doctor`. Predict without leaving this directory.
 
 ## Non-goals
 
-No live-target instructions. Synthetic data only.
+No live-target instructions. Synthetic `'alice'` / `'admin'` only.

@@ -1,36 +1,43 @@
-# 8.4 — Build, distribution, attestation, resilience (6 Operate)
+# 8.4-LO-06 — Detect debug_to_prod_denied without logging the APK
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** MASVS 2.1 CODE/RESILIENCE (final). Resilience raises cost; it is not trust.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; ASVS `v5.0.0-13.3.1`.
 
-## Property (start here)
+## Prevention is not absolute
 
-A debug-signed lab build must not call the production export API even if a client attest string is present. Channel + build type are part of the TCB decision on the server.
+A new flavor can reuse the prod client id. Pair detect and recover. Do not log binaries or secrets (5.3).
 
-## Attacker capabilities and trust assumptions
+## Mental model: debug hitting prod is a signal
 
-- **Attacker:** Leaked debug APK; student build pointed at prod.
-- **Trust:** Local api_allowed(build, attest).
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Call[export] --> Dbg{debug client?}
+  Dbg -->|yes| Metric["debug_to_prod_denied += 1"]
+  Metric --> Revoke[Revoke debug client id]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | debug_client_to_prod. |
-| Signal (no bodies) | debug_to_prod_denied. |
-| Revoke / recover | Revoke debug client id; rotate. |
-| Residual | Attestation farms. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `debug_to_prod_denied` |
+| Signal | client id class, app version; never the APK |
+| Recover | Keep deny; rotate keys; fix the flavor |
+| Residual | Stolen release keys; attestation farms |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/8.4/8.4-lab`.
+Write one log line you would accept. Tie it to `labs/8.4/8.4-lab`.
+
+```
+log_denied reason=debug_to_prod_denied client=debug request_id=req_84e
+```
+
+Reject any line that includes signing keys, an APK, or a live Play Console trace.
 
 ## Transfer
 
-SBOM of the APK (10.2).
+Clinic: detect debug FHIR calls; do not attach the APK to the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+An R8 product name is not the property.

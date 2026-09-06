@@ -1,33 +1,42 @@
-# 8.4 — Build, distribution, attestation, resilience (7 Transfer)
+# 8.4-LO-07 — Transfer: clinic debug build against prod FHIR
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** MASVS 2.1 CODE/RESILIENCE (final). Resilience raises cost; it is not trust.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-CODE`. Resilience as cost. ASVS `v5.0.0-13.3.1`.
 
-## Property (start here)
+## Change the workplace; keep debug off production
 
-A debug-signed lab build must not call the production export API even if a client attest string is present. Channel + build type are part of the TCB decision on the server.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic debug build against prod FHIR. Also name APK SBOM (10.2).
 
-- **Attacker:** Leaked debug APK; student build pointed at prod.
-- **Trust:** Local api_allowed(build, attest).
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite “debug flavor uses the same ApplicationId and API key so testers can hit real data,” plus R8 on release.
 
-**Prompt:** SBOM of the APK (10.2).
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic: debug build against prod FHIR.
+1. attacker capabilities (leaked debug APK — not a live hospital);
+2. trust assumptions (server build+attest is TCB; R8 and Play App Signing are not);
+3. forbidden outcome (`api_allowed("debug","ok")` true, not “HIPAA”);
+4. a test idea on a **local** fixture only (no store APK unpacking);
+5. residual (stolen release keys, attestation farms, 8.1 hostile release APK);
+6. WCAG if a human deny path exists (readable “use the lab environment”).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: same key, two flavors
+
+```mermaid
+flowchart LR
+  Flavor["debug flavor"] --> Belief[testers want real data]
+  Key["prod API key"] --> Reality[debug loggers on prod FHIR]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | minifyEnabled is not this property.… |
-| Live-target plan | Lab policy |
+| “R8 is on” | Cost, not channel |
+| Live Play Console / unpacking | Lab policy |
+| “MASVS R-level” | Obsolete MASVS levels; profiles live in MASTG |
 
 ## Practice
 
-One page. No keys. The lab `labs/8.4/8.4-lab` stays the only running system you may break.
+One page. No keys. `labs/8.4/8.4-lab` is the only running system you may break.

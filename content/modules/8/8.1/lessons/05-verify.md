@@ -1,38 +1,45 @@
-# 8.1 — Hostile-client and mobile platform model (5 Verify)
+# 8.1-LO-05 — Evidence is client claim ignored, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** MASVS 2.1 (final) PLATFORM/CODE; Android security model. APK is not in the TCB.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.3.1`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A client JSON field integrity=ok must not authorize a sensitive export. The server attestation result is the TCB; the APK is hostile (root, patched, emulator).
+“We use Play Integrity” is not evidence. The oracle is the local pair. Do not call live attestation APIs.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Modified APK; Frida; stolen “integrity ok” boolean.
-- **Trust:** Local allow_export(client_claim, server_attest).
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail client ok plus attest fail"]
+  X["--impl fixed"] --> P["Must pass deny"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Client integrity claim authorizes export |
-| Failure | Fail closed: Ignore client integrity for authorization; server attest/session 1 |
+| Negative / abuse | client ok, attest fail → false |
+| Normal | client ok, attest pass → true |
+| Not claimed | emulator farms; 4.4 object grant; live Play |
 
-Lab tests: `test_property.py` under `labs/8.1/8.1-lab`.
+```
+python3 -m pytest labs/8.1/8.1-lab/tests --impl vulnerable
+python3 -m pytest labs/8.1/8.1-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Client integrity claim authorizes export`
-- `--impl fixed`: **pass**
+Honest server-pass may pass on both.
 
-client integrity is not authorization.
+## What the tests do not prove
+
+- Real Play Integrity token verification
+- MASVS-RESILIENCE-1 on a physical device
+- 8.4 debug/release split
+- iOS App Attest (later mirror)
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Feature flags in the APK; premium=true.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic: a test that only asserts the Android button is disabled is not this cell.

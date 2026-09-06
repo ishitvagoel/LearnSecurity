@@ -7,104 +7,123 @@ difficulty: advanced
 status: reviewed
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 1.1–2.4 Pass A complete
+- Prior phase Pass A per blueprint §7; 1.2 server cells; 7.1 client documents are untrusted
 routeTags:
 - complete
 - mobile
 releaseMilestone: M3
 outcomes:
-- 'Demonstrate: The hostile-client and mobile-platform model'
-- 'Produce evidence: Mobile threat model and client/server responsibility matrix'
-- Name attacker capabilities and trust assumptions
-- Include a local-only lab brief and a transfer challenge
-- Do not instruct live-target attacks or mix awareness lists as compliance
+- 'Treat the Android client as hostile: a JSON integrity=ok field must not authorize export.'
+- 'Draw a client/server responsibility matrix so 1.2 stays on the server; Play Integrity is a signal, not a grant.'
+- 'Map MASVS 2.1 PLATFORM (not obsolete L1/L2/R) and keep resilience/attestation as cost-raising residuals.'
 reviewTriggers:
-- Material SecureCollab change in this module's concern
-- Superseding final standard
+- New client-side feature flag, premium bit, or integrity boolean used in a server decision
+- Play Integrity / app-attest wired into an export or share path
+- Minimum supported OS change that moves a sandbox assumption
+- Superseding final MASVS or Android security model
 invariants:
-- Claims are properties of SecureCollab (or the elective system), not tool names
+- allow_export with client integrity=ok and failing server attest is false
+- The APK is outside the TCB for authorization
 - Labs stay in authorized local or official training scope
-- Draft standards are labeled draft
+- MASVS L1/L2/R are not used as current levels
 threatModelPrompts:
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+- What can go wrong when policy runs on the attacker CPU?
+- Which 1.1 cells still belong on the server after an Android client appears?
+- What residual remains if Play Integrity passes on an emulator farm?
 concepts:
-- the
+- hostile-client
+- attestation
+- masvs-platform
 - securecollab
 - seven-step-loop
 learningObjects:
 - id: 8.1-LO-01
   kind: concept-model
-  title: 'Hostile-client and mobile platform model: property vs mechanism'
+  title: The APK is not in the TCB
   path: lessons/01-property.md
 - id: 8.1-LO-02
   kind: design-exercise
-  title: Model SecureCollab Android client for 8.1
+  title: Client versus server responsibility matrix
   path: lessons/02-model.md
 - id: 8.1-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: Client integrity claim authorizes export'
+  title: 'Local fixture: client integrity=ok authorizes export'
   path: lessons/03-break.md
 - id: 8.1-LO-04
   kind: design-exercise
-  title: Structural fix restoring the 8.1 invariant
+  title: Server attest decides; ignore the client boolean
   path: lessons/04-build.md
 - id: 8.1-LO-05
   kind: verification-lab
-  title: Forbidden-outcome tests for 8.1
+  title: Fail-on-vulnerable then pass-on-fixed for client claims
   path: lessons/05-verify.md
 - id: 8.1-LO-06
   kind: operations-exercise
-  title: Detect/recover notes for 8.1
+  title: attest_fail_export_denied without logging the APK
   path: lessons/06-operate.md
 - id: 8.1-LO-07
   kind: transfer-challenge
-  title: 'Transfer: Clinic Android: client says hipaaMode=true.'
+  title: 'Transfer: clinic Android hipaaMode=true'
   path: lessons/07-transfer.md
 - id: 8.1-LO-08
   kind: code-review
-  title: Seeded review for 8.1
+  title: Review client booleans as a PR, not a MASVS sticker
   path: lessons/08-review.md
 labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
     third-party targets
   slug: 8.1-lab
-  summary: Client integrity claim authorizes export
+  summary: Client integrity claim authorizes export because policy runs on the client
   forbiddenOutcomes:
   - Client integrity claim authorizes export
   - Live-target instructions
   - Real PII or production secrets
   - Awareness list used as the syllabus
 evidenceRequired:
-- Mobile threat model and client/server responsibility matrix
+- Client/server responsibility matrix
 - Transfer task prompt
-- Local lab brief
+- Local lab brief with client-claim deny tests
 assessmentBlueprint:
-  explain: Causal model for The hostile-client and mobile-platform model
-  design: Mobile threat model and client/server responsibility matrix
-  build: Deferred to Pass B
-  break: Authorized local reproduction of the representative failure
-  verify: Forbidden-outcome tests
-  operate: Detection and recovery notes
-  communicate: Residual risk without compliance theater
+  explain: Hostile client; APK is not TCB; server attest is the export gate
+  design: Responsibility matrix for each 1.1 cell
+  build: allow_export uses server_attest only in labs/8.1/8.1-lab/fixed
+  break: Authorized local client integrity=ok with failing attest
+  verify: Forbidden-outcome tests plus honest server pass
+  operate: attest_fail_export_denied without bodies
+  communicate: Residual Play Integrity farms; honest rooted devices as product policy
 masteryGate: '8'
 standardsRefs:
-- source: OWASP ASVS / module anchors (see spec)
-  version: 5.0.0
+- source: OWASP MASVS
+  version: '2.1.0'
   status: final
   requirementIds:
-  - PLATFORM
+  - MASVS-PLATFORM
+  - MASVS-RESILIENCE-1
+  url: https://mas.owasp.org/MASVS/
+- source: OWASP Application Security Verification Standard
+  version: '5.0.0'
+  status: final
+  requirementIds:
+  - v5.0.0-8.2.1
+  - v5.0.0-8.3.1
   url: https://owasp.org/www-project-application-security-verification-standard/
+- source: OWASP Mobile Top 10
+  version: '2024'
+  status: awareness
+  requirementIds:
+  - M7
+  url: https://owasp.org/www-project-mobile-top-10/
 misconceptions:
 - Obfuscation is authorization
 - If we use Kotlin we are safe
-- Store listing = device trust
+- Store listing equals device trust
+- Play Integrity is 1.2
+- MASVS L1/L2/R are current levels
 operationalConsiderations:
 - attest_fail_export_denied.
-- Honest users on rooted devices — product policy.
-author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+- Honest users on rooted devices — owned product policy, not a silent export grant.
+author: deepen-curriculum / author-module-spec
+reviewer: pending independent quality and lab-safety review
 lastReviewedAt: '2026-08-24'
 nextReviewAt: '2027-02-24'
 changelog:
@@ -122,3 +141,7 @@ changelog:
 - date: '2026-08-24'
   note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
     Pass C keys isolated'
+- date: '2026-09-06'
+  note: 'Depth pass: hostile-client mental models, mermaid diagrams, MASVS 2.1.0
+    PLATFORM, ASVS v5.0.0-8.2.1 / 8.3.1; Play Integrity labeled a signal not a
+    grant; independent review still required'

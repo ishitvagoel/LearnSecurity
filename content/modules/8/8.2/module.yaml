@@ -7,64 +7,67 @@ difficulty: advanced
 status: reviewed
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 1.1–2.4 Pass A complete
+- Prior phase Pass A per blueprint §7; 5.2 AEAD properties; 8.1 hostile client; 4.2 local auth is not server auth
 routeTags:
 - complete
 - mobile
 releaseMilestone: M3
 outcomes:
-- 'Demonstrate: Local data, keys, biometrics, offline state, and leakage surfaces'
-- 'Produce evidence: Device data inventory and leakage tests'
-- Name attacker capabilities and trust assumptions
-- Include a local-only lab brief and a transfer challenge
-- Do not instruct live-target attacks or mix awareness lists as compliance
+- 'Refuse plaintext note bodies on disk; private app directories are not encryption.'
+- 'Distinguish biometric gating of the UI from server authentication and from Keystore-held keys.'
+- 'Inventory backups, screenshots, clipboard, notifications, and offline caches as extra leakage channels.'
 reviewTriggers:
-- Material SecureCollab change in this module's concern
-- Superseding final standard
+- New Room/SQLite file, cache, or WorkManager payload that stores bodies
+- Backup flag, screenshot allow, or notification that includes a note
+- Biometric prompt added as if it were 4.2 server MFA
+- Superseding final MASVS
 invariants:
-- Claims are properties of SecureCollab (or the elective system), not tool names
+- After save_note('secret'), plaintext_on_disk is false
+- Biometric lock is not server authentication
 - Labs stay in authorized local or official training scope
-- Draft standards are labeled draft
+- Lab AEAD prefix is a stand-in, not a real cipher
 threatModelPrompts:
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+- What can go wrong when bodies are written as text files?
+- Which stores survive logout, backup, and a lost unlocked device?
+- What residual remains if biometrics gate the UI but not the key?
 concepts:
-- local
+- masvs-storage
+- keystore
+- offline-cache
 - securecollab
 - seven-step-loop
 learningObjects:
 - id: 8.2-LO-01
   kind: concept-model
-  title: 'Local data, keys, biometrics, offline, leakage: property vs mechanism'
+  title: Private app dir is not encryption
   path: lessons/01-property.md
 - id: 8.2-LO-02
   kind: design-exercise
-  title: Model SecureCollab Android client for 8.2
+  title: Device store inventory including backups
   path: lessons/02-model.md
 - id: 8.2-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: Note body cached as plaintext on disk'
+  title: 'Local fixture: note body cached as plaintext'
   path: lessons/03-break.md
 - id: 8.2-LO-04
   kind: design-exercise
-  title: Structural fix restoring the 8.2 invariant
+  title: Store a ciphertext stand-in, not the body
   path: lessons/04-build.md
 - id: 8.2-LO-05
   kind: verification-lab
-  title: Forbidden-outcome tests for 8.2
+  title: Fail-on-vulnerable then pass-on-fixed for disk plaintext
   path: lessons/05-verify.md
 - id: 8.2-LO-06
   kind: operations-exercise
-  title: Detect/recover notes for 8.2
+  title: logout_wipes_cache without logging the body
   path: lessons/06-operate.md
 - id: 8.2-LO-07
   kind: transfer-challenge
-  title: 'Transfer: Clinic offline chart cache.'
+  title: 'Transfer: clinic offline chart cache'
   path: lessons/07-transfer.md
 - id: 8.2-LO-08
   kind: code-review
-  title: Seeded review for 8.2
+  title: Review cache.txt as a PR, not a STORAGE sticker
   path: lessons/08-review.md
 labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
@@ -79,33 +82,48 @@ labSpec:
 evidenceRequired:
 - Device data inventory and leakage tests
 - Transfer task prompt
-- Local lab brief
+- Local lab brief with plaintext-on-disk deny tests
 assessmentBlueprint:
-  explain: Causal model for Local data, keys, biometrics, offline state, and leakage
-    surfaces
-  design: Device data inventory and leakage tests
-  build: Deferred to Pass B
-  break: Authorized local reproduction of the representative failure
-  verify: Forbidden-outcome tests
-  operate: Detection and recovery notes
-  communicate: Residual risk without compliance theater
+  explain: Private dir vs encryption; biometrics vs server auth
+  design: Inventory of disk, backup, screenshot, notification, clipboard
+  build: Ciphertext stand-in in labs/8.2/8.2-lab/fixed
+  break: Authorized local save of plaintext secret
+  verify: Forbidden-outcome tests plus honest non-secret save
+  operate: logout_wipes_cache; backup_flag without bodies
+  communicate: Residual extracted keys; iOS Keychain as later mirror
 masteryGate: '8'
 standardsRefs:
-- source: OWASP ASVS / module anchors (see spec)
-  version: 5.0.0
+- source: OWASP MASVS
+  version: '2.1.0'
   status: final
   requirementIds:
-  - STORAGE
+  - MASVS-STORAGE-1
+  - MASVS-STORAGE-2
+  - MASVS-CRYPTO-2
+  - MASVS-AUTH-2
+  url: https://mas.owasp.org/MASVS/
+- source: OWASP MASTG
+  version: '2.0.0'
+  status: final
+  requirementIds:
+  - MASVS-STORAGE
+  url: https://mas.owasp.org/MASTG/
+- source: OWASP Application Security Verification Standard
+  version: '5.0.0'
+  status: final
+  requirementIds:
+  - v5.0.0-11.3.3
   url: https://owasp.org/www-project-application-security-verification-standard/
 misconceptions:
 - Private app dir is encryption
 - Fingerprint is MFA to the server
 - Offline means no policy
+- EncryptedSharedPreferences covers every file you write
 operationalConsiderations:
 - logout_wipes_cache; backup_flag.
-- Physical + extracted keys — honest.
-author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+- Physical plus extracted keys — honest residual.
+author: deepen-curriculum / author-module-spec
+reviewer: pending independent quality and lab-safety review
 lastReviewedAt: '2026-08-24'
 nextReviewAt: '2027-02-24'
 changelog:
@@ -123,3 +141,6 @@ changelog:
 - date: '2026-08-24'
   note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
     Pass C keys isolated'
+- date: '2026-09-06'
+  note: 'Depth pass: private-dir-vs-encryption mental models, mermaid diagrams,
+    MASVS-STORAGE-1/2, AUTH-2 local vs server; independent review still required'

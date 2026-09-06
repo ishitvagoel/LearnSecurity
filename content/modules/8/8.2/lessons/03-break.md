@@ -1,55 +1,48 @@
-# 8.2 — Local data, keys, biometrics, offline, leakage (3 Break)
+# 8.2-LO-03 — Observe plaintext cache, do not image a personal phone
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** MASVS 2.1 STORAGE/CRYPTO/AUTH/PRIVACY (final); MASTG 2.0 tests.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-STORAGE-1`.
 
-## Property (start here)
+## Authorized scope
 
-A cached note must not be plaintext on disk. Biometric lock is not server authentication (4.2). Backups and screenshots are extra channels.
+`labs/8.2/8.2-lab` only. Synthetic body `'secret'`. No live device backups.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Note body cached as plaintext on disk.
 
-- **Attacker:** USB backup; lost unlocked-cache device; cloud backup of app files.
-- **Trust:** Local save_note / plaintext_on_disk.
-**Forbidden outcome:** Note body cached as plaintext on disk
+## Mental model: write the body as the file
 
-**Authorized scope:** `labs/8.2/8.2-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable disk.py stores plaintext.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: plaintext_on_disk True after save.
-
-## Vulnerable fixture (local)
-
-```python
-DISK={}
-def reset():
-    DISK.clear()
-def save_note(body):
-    DISK['note']=body
-def plaintext_on_disk():
-    return DISK.get('note')=='secret'
+```mermaid
+flowchart TD
+  Save["save_note secret"] --> Disk["DISK note equals secret"]
 ```
+
+The vulnerable tree demonstrates **cause** (text file). Do not dump personal device storage.
+
+## What to read in the fixture
+
+`vulnerable/disk.py` stores the body as-is. Tests require `plaintext_on_disk()` false after save.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Bodies written as text files. |
-| Impact | Stolen device yields notes. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Bodies written as text |
+| Impact | Local confidentiality loss |
+| Not the lesson | STORAGE as a sticker |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/8.2/8.2-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/8.2/8.2-lab/tests --impl vulnerable
+```
+
+Record `test_cached_note_is_not_plaintext_on_disk`. Do not image phones.
 
 ## Transfer
 
-iOS Keychain vs Android Keystore; desktop Electron.
+Clinic chart cache. Predict without leaving this directory.
 
 ## Non-goals
 
-No live-target instructions. Synthetic data only.
+No live-target instructions. Synthetic `'secret'` only.

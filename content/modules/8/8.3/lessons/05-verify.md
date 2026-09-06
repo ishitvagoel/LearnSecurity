@@ -1,38 +1,44 @@
-# 8.3 — Network, deep links, WebViews, IPC (5 Verify)
+# 8.3-LO-05 — Evidence is alice unchanged, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** MASVS 2.1 PLATFORM/NETWORK/AUTH (final); RFC 8252. Exported components are attack surface.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-PLATFORM-1`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A deep link query as=admin must not switch the signed-in principal. The session is identity; the Intent is untrusted input.
+“App Links are verified” is not evidence. The oracle is the local pair. Do not fire live Intents.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Malicious app sending an Intent; crafted https link.
-- **Trust:** Local open_link / current_user.
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail as=admin"]
+  X["--impl fixed"] --> P["Must pass alice"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Deep link as= switches the signed-in user |
-| Failure | Fail closed: Do not take identity from links; validate App Link certs; WebView allow-list |
+| Negative / abuse | `as=admin` keeps alice |
+| Normal | `note=n1` keeps alice |
+| Not claimed | WebView; custom schemes; live OAuth |
 
-Lab tests: `test_property.py` under `labs/8.3/8.3-lab`.
+```
+python3 -m pytest labs/8.3/8.3-lab/tests --impl vulnerable
+python3 -m pytest labs/8.3/8.3-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Deep link as= switches the signed-in user`
-- `--impl fixed`: **pass**
+Honest note locators may pass on both.
 
-deeplink does not switch user.
+## What the tests do not prove
+
+- PLATFORM-2 WebView bridges
+- RFC 8252 claimed HTTPS in production
+- `exported` flags on a real manifest
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-OAuth redirect to app (4.5).
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic: a test that only asserts the Activity launched is not this cell.

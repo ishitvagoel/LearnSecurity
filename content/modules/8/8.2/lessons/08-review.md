@@ -1,29 +1,31 @@
-# 8.2 — Local data, keys, biometrics, offline, leakage (Review)
+# 8.2-LO-08 — Review cache.txt as a PR, not a STORAGE sticker
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** MASVS 2.1 STORAGE/CRYPTO/AUTH/PRIVACY (final); MASTG 2.0 tests.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-STORAGE-1`.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab offline cache
 
-A cached note must not be plaintext on disk. Biometric lock is not server authentication (4.2). Backups and screenshots are extra channels.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** USB backup; lost unlocked-cache device; cloud backup of app files.
-- **Trust:** Local save_note / plaintext_on_disk.
 Review `labs/8.2/8.2-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/8.2.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|body on disk| Property["Property - good if tested"]
+  Q -->|fingerprint prompt| Mechanism[Mechanism - UI]
+  Q -->|MODE_PRIVATE| False[False assurance]
+```
 
-- Seeded smell (label it yourself): write body to cache.txt
-- Seeded smell (label it yourself): Backup allowed for the app
-- Seeded smell (label it yourself): No wipe on logout
-- Seeded smell (label it yourself): Note in notification text
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- Write body to cache.txt
+- Backup allowed for the app
+- No wipe on logout
+- Note in notification text
+
+Also reject: live device imaging, keys in lessons, claiming the lab prefix is AES.
 
 ## Misconceptions
 
@@ -33,12 +35,8 @@ Also reject: client trust, interpreter concatenation, Report-Only as enforcement
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_cached_note_is_not_plaintext_on_disk`.
 
 ## Transfer
 
-iOS Keychain vs Android Keystore; desktop Electron.
-
-## HITL / WCAG 2.2
-
-Unlock-with-biometrics fallback must remain accessible (device credential) without dumping plaintext to a debug overlay.
+Clinic PR that “stored charts internally with a fingerprint lock” without a plaintext-on-disk test is incomplete.

@@ -1,40 +1,43 @@
-# 8.2 — Local data, keys, biometrics, offline, leakage (6 Operate)
+# 8.2-LO-06 — Detect logout_wipes_cache without logging the body
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** MASVS 2.1 STORAGE/CRYPTO/AUTH/PRIVACY (final); MASTG 2.0 tests.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; MASVS 2.1.0 `MASVS-STORAGE-2`.
 
-## Property (start here)
+## Prevention is not absolute
 
-A cached note must not be plaintext on disk. Biometric lock is not server authentication (4.2). Backups and screenshots are extra channels.
+A new WorkManager blob can skip the cache wrapper. Pair detect and recover. Do not log note bodies (3.1).
 
-## Attacker capabilities and trust assumptions
+## Mental model: leftover cache is a signal
 
-- **Attacker:** USB backup; lost unlocked-cache device; cloud backup of app files.
-- **Trust:** Local save_note / plaintext_on_disk.
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Logout[logout / 4.1] --> Wipe{cache gone?}
+  Wipe -->|no| Metric["logout_wipes_cache miss"]
+  Metric --> Flag["backup_flag review"]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | Device lost flow; remote wipe where the OS allows. |
-| Signal (no bodies) | logout_wipes_cache; backup_flag. |
-| Revoke / recover | Revoke sessions; rotate. |
-| Residual | Physical + extracted keys — honest. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `logout_wipes_cache`; `backup_flag` |
+| Signal | subject id, store name; never the body |
+| Recover | Wipe; revoke sessions; exclude backup |
+| Residual | Extracted keys; screenshots |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/8.2/8.2-lab`.
+Write one log line you would accept. Tie it to `labs/8.2/8.2-lab`.
+
+```
+log_denied reason=plaintext_cache_forbidden store=offline_notes request_id=req_82e
+```
+
+Reject any line that includes note bodies or a live `adb backup` of a personal phone.
 
 ## Transfer
 
-iOS Keychain vs Android Keystore; desktop Electron.
-
-## Usability
-
-Unlock-with-biometrics fallback must remain accessible (device credential) without dumping plaintext to a debug overlay.
+Clinic: detect leftover chart cache after logout; do not attach the chart to the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+An MDM product name is not the property.

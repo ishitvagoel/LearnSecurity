@@ -1,33 +1,44 @@
-# 8.2 — Local data, keys, biometrics, offline, leakage (7 Transfer)
+# 8.2-LO-07 — Transfer: clinic offline chart cache
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** MASVS 2.1 STORAGE/CRYPTO/AUTH/PRIVACY (final); MASTG 2.0 tests.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-STORAGE-1`. AUTH-2 local vs 4.2 server.
 
-## Property (start here)
+## Change the workplace; keep ciphertext on disk
 
-A cached note must not be plaintext on disk. Biometric lock is not server authentication (4.2). Backups and screenshots are extra channels.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic offline chart cache. Also name iOS Keychain vs Android Keystore and desktop Electron.
 
-- **Attacker:** USB backup; lost unlocked-cache device; cloud backup of app files.
-- **Trust:** Local save_note / plaintext_on_disk.
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite “available offline” that writes the chart as `charts.json` in internal storage, plus a fingerprint prompt to open the app.
 
-**Prompt:** iOS Keychain vs Android Keystore; desktop Electron.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic offline chart cache.
+1. attacker capabilities (lost clinic tablet / backup — not a live hospital);
+2. trust assumptions (Keystore-wrapped cache is TCB; private dir and fingerprint UI are not);
+3. forbidden outcome (`plaintext_on_disk` true, not “HIPAA”);
+4. a test idea on a **local** fixture only (no personal-phone imaging);
+5. residual (backups, screenshots, notifications, extracted keys, 8.3 clipboard);
+6. WCAG if a human unlock path exists (device-credential fallback, no plaintext debug overlay).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+Use synthetic labels. Do not use real patient charts.
+
+## Mental model: fingerprint is not the file wrap
+
+```mermaid
+flowchart LR
+  Fp["fingerprint to open app"] --> Belief[clinician believes encrypted]
+  File["charts.json plaintext"] --> Reality[backup yields bodies]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | EncryptedSharedPreferences defaults are not automatic for every file you write.… |
-| Live-target plan | Lab policy |
+| “Internal storage” | Not encryption |
+| Live clinic tablet imaging | Lab policy |
+| “Fingerprint is MFA” | AUTH-2 local, not 4.2 |
 
 ## Practice
 
-One page. No keys. The lab `labs/8.2/8.2-lab` stays the only running system you may break.
+One page. No keys. `labs/8.2/8.2-lab` is the only running system you may break.

@@ -1,36 +1,43 @@
-# 8.1 — Hostile-client and mobile platform model (6 Operate)
+# 8.1-LO-06 — Detect attest_fail_export_denied without logging the APK
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** MASVS 2.1 (final) PLATFORM/CODE; Android security model. APK is not in the TCB.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; MASVS 2.1.0 `MASVS-PLATFORM`.
 
-## Property (start here)
+## Prevention is not absolute
 
-A client JSON field integrity=ok must not authorize a sensitive export. The server attestation result is the TCB; the APK is hostile (root, patched, emulator).
+A new client field (`premium`, `hipaaMode`) can skip the attest check. Pair detect and recover. Do not log note bodies or attestation blobs (3.1).
 
-## Attacker capabilities and trust assumptions
+## Mental model: failed attest is a signal
 
-- **Attacker:** Modified APK; Frida; stolen “integrity ok” boolean.
-- **Trust:** Local allow_export(client_claim, server_attest).
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Exp[export] --> Attest{server attest fail?}
+  Attest -->|yes| Metric["attest_fail_export_denied += 1"]
+  Metric --> Revoke[Revoke app session if automated]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | client_claim_ignored; attest_fail. |
-| Signal (no bodies) | attest_fail_export_denied. |
-| Revoke / recover | Revoke app tokens. |
-| Residual | Honest users on rooted devices — product policy. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `attest_fail_export_denied` |
+| Signal | request id, app version, attest result class; never the APK or body |
+| Recover | Keep deny; revoke tokens; owned rooted-device policy |
+| Residual | Attestation farms; 8.4 debug clients |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/8.1/8.1-lab`.
+Write one log line you would accept. Tie it to `labs/8.1/8.1-lab`.
+
+```
+log_denied reason=attest_fail_export_denied app_ver=1.0 request_id=req_81e
+```
+
+Reject any line that includes note bodies, a Play Integrity JWT, or a live device trace.
 
 ## Transfer
 
-Feature flags in the APK; premium=true.
+Clinic: detect `hipaaMode` client claims; do not attach the chart to the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+A MDM product name is not the property.

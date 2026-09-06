@@ -1,33 +1,42 @@
-# 8.3 — Network, deep links, WebViews, IPC (7 Transfer)
+# 8.3-LO-07 — Transfer: clinic deep link as=doctor
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** MASVS 2.1 PLATFORM/NETWORK/AUTH (final); RFC 8252. Exported components are attack surface.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-PLATFORM-1`. RFC 8252 for native OAuth.
 
-## Property (start here)
+## Change the workplace; keep the session off the query string
 
-A deep link query as=admin must not switch the signed-in principal. The session is identity; the Intent is untrusted input.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic deep link `as=doctor`. Also name OAuth redirect to app (4.5).
 
-- **Attacker:** Malicious app sending an Intent; crafted https link.
-- **Trust:** Local open_link / current_user.
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite `https://clinic.example/open?as=doctor` “for kiosk demos,” App Links verified.
 
-**Prompt:** OAuth redirect to app (4.5).
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic: deep link as=doctor.
+1. attacker capabilities (another app on the tablet sending extras — not a live clinic);
+2. trust assumptions (server session is TCB; App Links and https are not identity);
+3. forbidden outcome (`current_user` becomes doctor, not “HIPAA”);
+4. a test idea on a **local** fixture only (no sideloaded malware);
+5. residual (WebView, custom schemes, RFC 8252, 4.5 audience);
+6. WCAG if a human error path exists (exit the WebView with a keyboard).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: verified host is not a principal
+
+```mermaid
+flowchart LR
+  Host["App Link host ok"] --> Belief[ops believes safe]
+  As["as=doctor still bound"] --> Reality[session switch]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | exported=true defaults on old Android.… |
-| Live-target plan | Lab policy |
+| “App Links verified” | Host, not identity |
+| Live clinic / malware APK | Lab policy |
+| “WebView is Chrome” | PLATFORM-2 / 6.2 |
 
 ## Practice
 
-One page. No keys. The lab `labs/8.3/8.3-lab` stays the only running system you may break.
+One page. No keys. `labs/8.3/8.3-lab` is the only running system you may break.

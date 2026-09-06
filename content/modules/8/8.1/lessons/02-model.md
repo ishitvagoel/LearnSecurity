@@ -1,53 +1,71 @@
-# 8.1 — Hostile-client and mobile platform model (2 Model)
+# 8.1-LO-02 — Client versus server responsibility matrix
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** MASVS 2.1 (final) PLATFORM/CODE; Android security model. APK is not in the TCB.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-PLATFORM`. OWASP ASVS 5.0.0 (final) `v5.0.0-8.3.1`.
 
-## Property (start here)
+## Can a second engineer name pytest cases from your matrix?
 
-A client JSON field integrity=ok must not authorize a sensitive export. The server attestation result is the TCB; the APK is hostile (root, patched, emulator).
+“The phone is sandboxed” is not this lesson. A reviewable model names **which cell the server still owns**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab Phase 8 freeze: local `allow_export(client_claims, server_attest)`. Android/Kotlin first. No live devices.
 
-- **Attacker:** Modified APK; Frida; stolen “integrity ok” boolean.
-- **Trust:** Local allow_export(client_claim, server_attest).
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: every 1.1 cell has an owner
+
+```mermaid
+flowchart TD
+  Conf["confidentiality of bodies"] --> Srv[server plus 8.2 cache]
+  Authz["authorization of export"] --> Srv
+  Ui["button enabled"] --> Client[client UX only]
+```
+
+If export is “disabled” in Compose when `integrity != ok`, a patched APK still calls the API.
+
+## Mental model: attest is a signal row
+
+```mermaid
+flowchart LR
+  Play["Play Integrity token"] --> Signal[server-verified signal]
+  Signal --> Grant{"1.2 grant?"}
+  Grant --> Export[export]
+```
+
+A missing or failed attest **denies**. A passed attest still needs the 1.2 grant (4.4 / 6.7 quota).
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | hostile APK, server |
-| Objects | export, integrity claim |
-| Actions | allow_export |
-| Channels | JSON body |
-| TCB | Server-side attestation/token — lab uses server_attest string. |
-| Untrusted | Any client field, local ifs. |
-| State / time | Runtime after Play integrity check cached on device. |
-| 1.1 cell | Authorization — server decides. |
+| Subjects | patched APK; honest member; emulator |
+| Objects | export action |
+| Actions | `allow_export` |
+| Channels | HTTPS JSON from the app |
+| TCB | server `server_attest` plus session |
+| Untrusted | APK, `integrity` field, local UI |
+| State / time | token freshness (named residual) |
+| 1.1 cell | authorization of export |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| APK | integrity field | authorize | deny |
-| server | attest fail | export | deny |
-| server | attest+user 1.2 | export | allow |
-| rooted honest | export | policy | residual |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| client `integrity=ok`, attest fail | export | allow | deny |
+| attest `play_integrity_pass` + session | export | allow | may allow |
+| Compose hide button | export | UX | not TCB |
+| MASVS-RESILIENCE-1 | platform | detect | cost, not grant |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/8.1/8.1-lab` file `client.py`.
+Draw the matrix. Point at `labs/8.1/8.1-lab` file `client.py`.
 
 ## Transfer
 
-Feature flags in the APK; premium=true.
+`premium=true` in the APK; clinic `hipaaMode`.
 
 ## Residual risk
 
-Honest users on rooted devices — product policy.
+Attestation farms (8.4); rooted honest users; iOS App Attest as a later mirror, same shape.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

@@ -1,38 +1,45 @@
-# 8.2 — Local data, keys, biometrics, offline, leakage (5 Verify)
+# 8.2-LO-05 — Evidence is plaintext false, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** MASVS 2.1 STORAGE/CRYPTO/AUTH/PRIVACY (final); MASTG 2.0 tests.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-STORAGE-1`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A cached note must not be plaintext on disk. Biometric lock is not server authentication (4.2). Backups and screenshots are extra channels.
+“EncryptedSharedPreferences is on” is not evidence. The oracle is the local pair. Do not image phones.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** USB backup; lost unlocked-cache device; cloud backup of app files.
-- **Trust:** Local save_note / plaintext_on_disk.
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail plaintext secret"]
+  X["--impl fixed"] --> P["Must pass not plaintext"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Note body cached as plaintext on disk |
-| Failure | Fail closed: Encrypt cache; expire; wipe on logout/revoke; no body in notifications |
+| Negative / abuse | save `'secret'` → not plaintext |
+| Normal | save `'other'` → not reported as plaintext secret |
+| Not claimed | real AES; backup exclusion; screenshot FLAG_SECURE |
 
-Lab tests: `test_property.py` under `labs/8.2/8.2-lab`.
+```
+python3 -m pytest labs/8.2/8.2-lab/tests --impl vulnerable
+python3 -m pytest labs/8.2/8.2-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Note body cached as plaintext on disk`
-- `--impl fixed`: **pass**
+Honest non-secret saves may pass on both.
 
-cached note not plaintext.
+## What the tests do not prove
+
+- Keystore hardware backing
+- Auto-backup exclusion
+- Screenshot / notification channels
+- iOS Data Protection
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-iOS Keychain vs Android Keystore; desktop Electron.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic: a test that only asserts Room `insert` succeeded is not this cell.

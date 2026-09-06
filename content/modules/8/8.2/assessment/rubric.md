@@ -4,24 +4,24 @@
 
 ## Module
 
-Local data, keys, biometrics, offline, leakage
+Local data, keys, biometrics, offline state, and leakage surfaces
 
 ## Evidence checklist
 
-- [ ] Device data inventory and leakage tests
-- [ ] Transfer task (Clinic offline chart cache.)
-- [ ] Lab `labs/8.2/8.2-lab`: forbidden outcome **Note body cached as plaintext on disk**
-- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Device store inventory (cache, backup, screenshot, notification, clipboard)
+- [ ] Transfer task (clinic offline chart; Keystore/Keychain/Electron named)
+- [ ] Lab `labs/8.2/8.2-lab`: forbidden outcome **note body cached as plaintext**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: logout_wipes_cache; backup_flag.
+- [ ] Operate signal without bodies: `logout_wipes_cache`
 
 ## Rubric
 
 | Result | Meaning |
 |---|---|
-| Developing | Tools listed; missing attacker/trust; mechanism slogans |
+| Developing | Tools listed; missing attacker/trust; “private dir/fingerprint” slogans |
 | Competent | System-specific invariant; lab mapped; operate present |
-| Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
+| Transfer-ready | LO-07 done without Top 10/scanner/MASVS-L1 language as the definition of security |
 
 Knowledge check (retryable): distinguish property vs mechanism for **8.2**. Items live in the session worksheet, not here.
 

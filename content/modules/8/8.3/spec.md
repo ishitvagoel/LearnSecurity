@@ -1,6 +1,6 @@
 # 8.3 — Network, deep links, WebViews, and inter-app communication
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. No exploit walkthroughs. No live malicious APKs.
 
 ## Identity
 
@@ -9,71 +9,75 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** Network, deep links, WebViews, and inter-app communication
 - **phase / track / difficulty:** 8 / mobile / advanced
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Blueprint §7; 8.1; 4.5 / RFC 8252; 2.1 query strings.
 - **routeTags:** complete, mobile
 - **releaseMilestone:** M3
 - **masteryGate:** 8
 
 ## Objective hierarchy
 
-1. Produce **Malicious-app/link harness and IPC review** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce an **exported-component inventory** plus deny tests so `as=admin` does not switch the session.
+2. Name attacker capabilities (malicious app sending an Intent; crafted https link) and trust assumptions (local `open_link` / `current_user`).
+3. Transfer: clinic `as=doctor`; OAuth native redirect (4.5) — without treating verified App Links as trusted input.
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+2.1 untrusted query; 4.3 session channel; 4.5 claimed HTTPS redirects; 6.2 WebView is another HTML interpreter; 8.1 hostile client.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- HTTPS App Links are trusted input.
+- WebView is just Chrome so 2.3 applies unchanged.
+- IPC is private to our app.
+- `exported=false` is the default on every API level.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+Hostile client (8.1) → Intents/links (this module) → WebView grammar (6.2) → native OAuth (4.5).
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true after `open_link({as: admin})`?
+- What fails if App Links are verified but `as=` still binds?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can go wrong when extras become the session?
+- What residual remains if a WebView bridge can export?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/8.3/8.3-lab`. Forbidden: `as=` switches the signed-in user. No live Play Store apps.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-MASVS-NETWORK/PLATFORM/AUTH; RFC 8252 — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- OWASP MASVS 2.1.0 (final): `MASVS-PLATFORM-1` (IPC); `MASVS-PLATFORM-2` (WebViews); `MASVS-NETWORK-1`; `MASVS-AUTH-1`. No MASVS L1/L2/R. Related MASWE-0029 insecure deep links named as awareness of the weakness family, not a live-target test.
+- IETF RFC 8252 (final): claimed HTTPS redirects for native OAuth; custom schemes are a residual.
+- OWASP ASVS 5.0.0 (final): `v5.0.0-8.3.1` authorization at a trusted service layer — the session is not taken from Intent extras.
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+New exported component; WebView bridge; OAuth redirect.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: Malicious-app/link harness and IPC review.
+Evidence: IPC inventory + `as=` tests. Feeds Gate 8 / M3 (not-attempted).
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`deeplink_identity_ignored`. User installing an attacker app is an OS-model residual.
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: Intent as untrusted input; MASVS-PLATFORM-1/2; RFC 8252 |

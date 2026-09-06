@@ -1,53 +1,49 @@
-# 8.3 — Network, deep links, WebViews, IPC (4 Build)
+# 8.3-LO-04 — Ignore identity parameters on links
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** MASVS 2.1 PLATFORM/NETWORK/AUTH (final); RFC 8252. Exported components are attack surface.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-PLATFORM-1`. ASVS `v5.0.0-8.3.1`.
 
-## Property (start here)
+## Structural means the session does not read `as`
 
-A deep link query as=admin must not switch the signed-in principal. The session is identity; the Intent is untrusted input.
+`open_link` must not copy query identity keys onto `current_user`. Locators such as `note=` may be honored later; this lab ignores extras entirely as the smallest fix. Structural means that ignore — not “https,” not App Links.
 
-## Attacker capabilities and trust assumptions
+## Mental model: extras never become the principal
 
-- **Attacker:** Malicious app sending an Intent; crafted https link.
-- **Trust:** Local open_link / current_user.
-as=admin leaves current_user alice.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-SESSION={'user':'alice'}
-def reset():
-    SESSION['user']='alice'
-def open_link(query):
-    return None
-def current_user():
-    return SESSION['user']
+```mermaid
+flowchart TD
+  Q[query] --> Id{"identity key?"}
+  Id -->|yes| Drop[ignore]
+  Id -->|no| Locate[optional locator]
 ```
+
+Fail-safe: unknown keys do not switch users.
 
 ## Why this restores the cell
 
-Do not take identity from links; validate App Link certs; WebView allow-list.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| `as=admin` | still alice |
+| `note=n1` | still alice |
 
 ## What this is not
 
-exported=true defaults on old Android.
-
-Verified App Links still pass query strings.
+Verified App Links as trusted input. `exported=false` without a test. WebView allow-list as the session.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name the predicate. Run:
+
+```
+python3 -m pytest labs/8.3/8.3-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-OAuth redirect to app (4.5).
+Clinic: stop treating `as=doctor` as a convenient demo login.
 
 ## Residual risk
 
-User installs attacker app — OS model.
+WebView bridges; custom schemes (RFC 8252); 4.5 after a valid redirect.

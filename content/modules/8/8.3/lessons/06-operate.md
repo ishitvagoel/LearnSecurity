@@ -1,40 +1,43 @@
-# 8.3 — Network, deep links, WebViews, IPC (6 Operate)
+# 8.3-LO-06 — Detect deeplink_identity_ignored without logging the URL
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** MASVS 2.1 PLATFORM/NETWORK/AUTH (final); RFC 8252. Exported components are attack surface.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; MASVS 2.1.0 `MASVS-PLATFORM-1`.
 
-## Property (start here)
+## Prevention is not absolute
 
-A deep link query as=admin must not switch the signed-in principal. The session is identity; the Intent is untrusted input.
+A new exported Activity can copy extras again. Pair detect and recover. Do not log full URLs if they contain tokens (4.3).
 
-## Attacker capabilities and trust assumptions
+## Mental model: dropped as= is a signal
 
-- **Attacker:** Malicious app sending an Intent; crafted https link.
-- **Trust:** Local open_link / current_user.
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Link[open_link] --> As{as present?}
+  As -->|yes| Metric["deeplink_identity_ignored += 1"]
+  Metric --> Relogin[Force re-login if session already flipped]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | ignored_as_param metric. |
-| Signal (no bodies) | deeplink_identity_ignored. |
-| Revoke / recover | Force re-login. |
-| Residual | User installs attacker app — OS model. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `deeplink_identity_ignored` |
+| Signal | request id, key *name*; never the full URL or token |
+| Recover | Keep alice; force re-login if switched |
+| Residual | WebView; custom scheme; attacker app installed |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/8.3/8.3-lab`.
+Write one log line you would accept. Tie it to `labs/8.3/8.3-lab`.
+
+```
+log_denied reason=deeplink_identity_ignored field=as request_id=req_83e
+```
+
+Reject any line that includes a full deep-link URL, an OAuth code, or a live Intent dump.
 
 ## Transfer
 
-OAuth redirect to app (4.5).
-
-## Usability
-
-Deep-link errors should not trap users in a broken WebView without a keyboard-accessible exit.
+Clinic: detect `as=doctor` probes; do not attach the link to the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+A mobile-WAF product name is not the property.

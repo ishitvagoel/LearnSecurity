@@ -39,7 +39,7 @@ pins:
     reviewedAt: "2026-08-29"
     url: "https://owasp.org/www-project-application-security-verification-standard/"
     role: "Web/API security requirements and assurance baseline"
-    notes: "Project page confirms latest stable 5.0.0 released 30 May 2025. The 2026-08-29 Module 1.3 check used the immutable v5.0.0 tag. 2026-09-06 Modules 2.1–7.4 pinned as listed in those module.yaml files. Module 5.1 used v5.0.0-14.2.4 (deletion implemented as documented; 14.2.7 labeled Level 3 advanced). Module 5.2 used v5.0.0-11.3.3 (AEAD; 11.3.4 / 11.1.4 labeled Level 3 advanced). Module 5.3 used v5.0.0-13.2.3 / 13.3.1 (no default credentials; 13.3.3 / 13.3.4 labeled Level 3 advanced). Module 5.4 used v5.0.0-12.2.1 (TLS without fallback; 12.1.4 / 12.1.5 labeled Level 3 advanced). Module 5.5 used v5.0.0-1.2.4 (parameterized queries; 16.3.2 Level 3 clause labeled advanced). Module 6.1 used v5.0.0-1.2.5 (OS argv; 1.2.10 labeled Level 3 advanced). Module 6.2 used v5.0.0-1.2.1 (HTML context encoding; 3.4.7 labeled Level 3 advanced). Module 6.3 used v5.0.0-3.5.1 (CSRF origin/token; 3.5.8 labeled Level 3 advanced). Module 6.4 used v5.0.0-5.3.2 (path prefix; 5.3.3 zip-slip labeled Level 3 advanced). Module 6.5 used v5.0.0-1.3.6 (SSRF allow-list; 3.7.3 labeled Level 3 advanced). Module 6.6 used v5.0.0-2.3.4 (consume-once; 16.5.4 labeled Level 3 advanced). Module 6.7 used v5.0.0-2.4.1 (anti-automation quota; 2.4.2 labeled Level 3 advanced). Module 7.1 used v5.0.0-15.3.3 (mass assignment; GraphQL 4.3.2 introspection and 4.3.1 query cost as distinct grains; 4.1.4 unused methods labeled Level 3 advanced). Module 7.2 used v5.0.0-8.2.3 (field-level / BOPLA; 8.3.2 labeled Level 3 advanced). Module 7.3 used v5.0.0-11.2.1 (validated HMAC implementation; 2.3.4 / 2.3.3 replay/freshness; 4.1.5 per-message signatures labeled Level 3 advanced). Module 7.4 used v5.0.0-13.2.1 / 13.2.2 (backend service accounts and least privilege; 8.3.3 originating subject labeled Level 3 advanced). Use exact v5.0.0-<chapter>.<section>.<requirement> identifiers; do not mix ASVS 4.x IDs. Level 3 guidance is labeled advanced. Module 1.1 intentionally does not map ASVS requirements."
+    notes: "Project page confirms latest stable 5.0.0 released 30 May 2025. The 2026-08-29 Module 1.3 check used the immutable v5.0.0 tag. 2026-09-06 Modules 2.1–8.4 pinned as listed in those module.yaml files. Module 7.1 used v5.0.0-15.3.3 (mass assignment; GraphQL 4.3.2 introspection and 4.3.1 query cost as distinct grains; 4.1.4 unused methods labeled Level 3 advanced). Module 7.2 used v5.0.0-8.2.3 (field-level / BOPLA; 8.3.2 labeled Level 3 advanced). Module 7.3 used v5.0.0-11.2.1 (validated HMAC implementation; 2.3.4 / 2.3.3 replay/freshness; 4.1.5 per-message signatures labeled Level 3 advanced). Module 7.4 used v5.0.0-13.2.1 / 13.2.2 (backend service accounts and least privilege; 8.3.3 originating subject labeled Level 3 advanced). Modules 8.1/8.3/8.4 reuse v5.0.0-8.3.1 (trusted service layer) so mobile clients cannot authorize; 8.4 also pins v5.0.0-13.3.1 (secrets not in artifacts). Use exact v5.0.0-<chapter>.<section>.<requirement> identifiers; do not mix ASVS 4.x IDs. Level 3 guidance is labeled advanced. Module 1.1 intentionally does not map ASVS requirements."
   - id: owasp-threat-modeling
     source: OWASP Threat Modeling Project
     version: "maintained-project-guidance"
@@ -256,3 +256,30 @@ pins:
     url: "https://www.postgresql.org/docs/current/ddl-rowsecurity.html"
     role: "Platform extra gate; not application authorization or parameterized queries"
     notes: "Living PostgreSQL documentation. Module 5.5 treats RLS as platform, not the fetch_sql bound-parameter property and not a substitute for 1.2 grants or 3.3 DB roles."
+  - id: owasp-masvs-2.1.0
+    source: OWASP Mobile Application Security Verification Standard
+    version: "2.1.0"
+    status: final
+    publishedAt: "2024-01-18"
+    reviewedAt: "2026-09-06"
+    url: "https://mas.owasp.org/MASVS/"
+    role: "Mobile control groups (STORAGE/CRYPTO/AUTH/NETWORK/PLATFORM/CODE/RESILIENCE/PRIVACY)"
+    notes: "Live-checked 2026-09-06. MASVS 2.x does not contain verification levels L1/L2/R; those were moved to MAS Testing Profiles in MASTG/MASWE. Modules 8.1–8.4 pin PLATFORM, STORAGE, AUTH, CODE, and RESILIENCE groups by control id (e.g. MASVS-STORAGE-1). Do not teach obsolete MASVS L1/L2/R as current."
+  - id: owasp-mastg-2.0.0
+    source: OWASP Mobile Application Security Testing Guide
+    version: "2.0.0"
+    status: final
+    publishedAt: "2026-06"
+    reviewedAt: "2026-09-06"
+    url: "https://mas.owasp.org/MASTG/"
+    role: "Atomic mobile tests and MAS Testing Profiles; MASVS to MASWE to MASTG chain"
+    notes: "MASTG v2.0.0 stable release reported June 2026 on mas.owasp.org/news/archive/2026/. Website and repositories are authoritative (no official checklist spreadsheet in v2). Module 8.2/8.4 cite tests and profiles; resilience-oriented profiles raise cost and do not replace 8.1/8.4 server oracles."
+  - id: owasp-mobile-top-10-2024
+    source: OWASP Mobile Top 10
+    version: "2024"
+    status: awareness
+    publishedAt: "2024"
+    reviewedAt: "2026-09-06"
+    url: "https://owasp.org/www-project-mobile-top-10/"
+    role: "Mobile risk-awareness regression only; not the syllabus"
+    notes: "Module 8.1 maps M7 after the hostile-client cause. Do not organize Phase 8 as a Top 10 rotation."

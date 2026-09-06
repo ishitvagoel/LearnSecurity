@@ -1,53 +1,48 @@
-# 8.2 — Local data, keys, biometrics, offline, leakage (4 Build)
+# 8.2-LO-04 — Store a ciphertext stand-in, not the body
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** MASVS 2.1 STORAGE/CRYPTO/AUTH/PRIVACY (final); MASTG 2.0 tests.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-STORAGE-1`, `MASVS-CRYPTO-2`.
 
-## Property (start here)
+## Structural means the stored bytes are not the body
 
-A cached note must not be plaintext on disk. Biometric lock is not server authentication (4.2). Backups and screenshots are extra channels.
+`save_note` must not write `'secret'` as the file contents. The lab uses an `aead:` prefix plus length as a **stand-in** for Keystore-wrapped AEAD — not a real cipher (5.2).
 
-## Attacker capabilities and trust assumptions
+## Mental model: wrap then write
 
-- **Attacker:** USB backup; lost unlocked-cache device; cloud backup of app files.
-- **Trust:** Local save_note / plaintext_on_disk.
-plaintext_on_disk False.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-DISK={}
-def reset():
-    DISK.clear()
-def save_note(body):
-    DISK['note']='aead:'+str(len(body))
-def plaintext_on_disk():
-    return DISK.get('note')=='secret'
+```mermaid
+flowchart TD
+  Body[body] --> Wrap["stand-in ciphertext"]
+  Wrap --> Disk[DISK]
 ```
+
+Production: Android Keystore key + AEAD; iOS Keychain later. Fail-safe: if wrap fails, **do not** fall back to plaintext.
 
 ## Why this restores the cell
 
-Encrypt cache; expire; wipe on logout/revoke; no body in notifications.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| save `'secret'` | `plaintext_on_disk` false |
+| save `'other'` | `plaintext_on_disk` false |
 
 ## What this is not
 
-EncryptedSharedPreferences defaults are not automatic for every file you write.
-
-Biometrics gate UI, not key extraction on a compromised OS.
+`MODE_PRIVATE` alone. Biometric prompt alone. EncryptedSharedPreferences for a *different* file. Base64 (5.2).
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name the predicate. Run:
+
+```
+python3 -m pytest labs/8.2/8.2-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-iOS Keychain vs Android Keystore; desktop Electron.
+Clinic: stop treating “internal storage” as the chart-cache control.
 
 ## Residual risk
 
-Physical + extracted keys — honest.
+Backups of ciphertext with extracted keys; screenshots; notifications; 4.1 wipe on logout still required.

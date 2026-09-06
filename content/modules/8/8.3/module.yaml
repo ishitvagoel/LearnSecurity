@@ -7,64 +7,67 @@ difficulty: advanced
 status: reviewed
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 1.1–2.4 Pass A complete
+- Prior phase Pass A per blueprint §7; 8.1 hostile client; 4.5 native OAuth; 2.1 untrusted query strings
 routeTags:
 - complete
 - mobile
 releaseMilestone: M3
 outcomes:
-- 'Demonstrate: Network, deep links, WebViews, and inter-app communication'
-- 'Produce evidence: Malicious-app/link harness and IPC review'
-- Name attacker capabilities and trust assumptions
-- Include a local-only lab brief and a transfer challenge
-- Do not instruct live-target attacks or mix awareness lists as compliance
+- 'Refuse identity switches from deep-link query parameters; the session is identity and the Intent is untrusted input.'
+- 'Treat exported components, custom schemes, and WebView bridges as attack surface, not private APIs.'
+- 'Map MASVS 2.1 PLATFORM/NETWORK/AUTH and RFC 8252 claimed HTTPS redirects; keep verified App Links as still carrying query strings.'
 reviewTriggers:
-- Material SecureCollab change in this module's concern
-- Superseding final standard
+- New exported Activity, custom scheme, or App Link
+- WebView JavaScript bridge or local HTTP server
+- Native OAuth redirect (4.5 / RFC 8252)
+- Superseding final MASVS
 invariants:
-- Claims are properties of SecureCollab (or the elective system), not tool names
+- 'open_link as=admin leaves current_user alice'
+- Intents and query strings are untrusted
 - Labs stay in authorized local or official training scope
-- Draft standards are labeled draft
+- MASVS L1/L2/R are not used as current levels
 threatModelPrompts:
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+- What can go wrong when extras['as'] becomes the session?
+- What residual remains if App Links are verified but query strings still bind?
+- What residual remains if a WebView bridge exposes export?
 concepts:
-- network
+- deeplink
+- ipc
+- webview
 - securecollab
 - seven-step-loop
 learningObjects:
 - id: 8.3-LO-01
   kind: concept-model
-  title: 'Network, deep links, WebViews, IPC: property vs mechanism'
+  title: The Intent is untrusted input
   path: lessons/01-property.md
 - id: 8.3-LO-02
   kind: design-exercise
-  title: Model SecureCollab Android client for 8.3
+  title: Exported components and query strings
   path: lessons/02-model.md
 - id: 8.3-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: Deep link as= switches the signed-in user'
+  title: 'Local fixture: as=admin switches the session'
   path: lessons/03-break.md
 - id: 8.3-LO-04
   kind: design-exercise
-  title: Structural fix restoring the 8.3 invariant
+  title: Ignore identity parameters on links
   path: lessons/04-build.md
 - id: 8.3-LO-05
   kind: verification-lab
-  title: Forbidden-outcome tests for 8.3
+  title: Fail-on-vulnerable then pass-on-fixed for as=
   path: lessons/05-verify.md
 - id: 8.3-LO-06
   kind: operations-exercise
-  title: Detect/recover notes for 8.3
+  title: deeplink_identity_ignored without logging the URL
   path: lessons/06-operate.md
 - id: 8.3-LO-07
   kind: transfer-challenge
-  title: 'Transfer: Clinic: deep link as=doctor.'
+  title: 'Transfer: clinic deep link as=doctor'
   path: lessons/07-transfer.md
 - id: 8.3-LO-08
   kind: code-review
-  title: Seeded review for 8.3
+  title: Review extras as= as a PR, not an App Links sticker
   path: lessons/08-review.md
 labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
@@ -77,34 +80,50 @@ labSpec:
   - Real PII or production secrets
   - Awareness list used as the syllabus
 evidenceRequired:
-- Malicious-app/link harness and IPC review
+- Malicious-app/link harness notes and IPC review
 - Transfer task prompt
-- Local lab brief
+- Local lab brief with as= deny tests
 assessmentBlueprint:
-  explain: Causal model for Network, deep links, WebViews, and inter-app communication
-  design: Malicious-app/link harness and IPC review
-  build: Deferred to Pass B
-  break: Authorized local reproduction of the representative failure
-  verify: Forbidden-outcome tests
-  operate: Detection and recovery notes
-  communicate: Residual risk without compliance theater
+  explain: Intent vs session; App Links still carry query strings
+  design: Exported component inventory
+  build: open_link ignores as= in labs/8.3/8.3-lab/fixed
+  break: Authorized local as=admin switch
+  verify: Forbidden-outcome tests plus honest note deep link
+  operate: deeplink_identity_ignored without the full URL
+  communicate: Residual custom-scheme hijack, WebView bridge, RFC 8252
 masteryGate: '8'
 standardsRefs:
-- source: OWASP ASVS / module anchors (see spec)
-  version: 5.0.0
+- source: OWASP MASVS
+  version: '2.1.0'
   status: final
   requirementIds:
-  - NETWORK
+  - MASVS-PLATFORM-1
+  - MASVS-PLATFORM-2
+  - MASVS-NETWORK-1
+  - MASVS-AUTH-1
+  url: https://mas.owasp.org/MASVS/
+- source: IETF RFC 8252 OAuth 2.0 for Native Apps
+  version: RFC 8252
+  status: final
+  requirementIds:
+  - claimed-https-redirect
+  url: https://datatracker.ietf.org/doc/html/rfc8252
+- source: OWASP Application Security Verification Standard
+  version: '5.0.0'
+  status: final
+  requirementIds:
+  - v5.0.0-8.3.1
   url: https://owasp.org/www-project-application-security-verification-standard/
 misconceptions:
-- https App Links are trusted input
+- HTTPS App Links are trusted input
 - WebView is just Chrome so 2.3 applies unchanged
 - IPC is private to our app
+- exported=false is the default on every API level
 operationalConsiderations:
 - deeplink_identity_ignored.
-- User installs attacker app — OS model.
-author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+- User installs attacker app — OS model residual.
+author: deepen-curriculum / author-module-spec
+reviewer: pending independent quality and lab-safety review
 lastReviewedAt: '2026-08-24'
 nextReviewAt: '2027-02-24'
 changelog:
@@ -122,3 +141,6 @@ changelog:
 - date: '2026-08-24'
   note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
     Pass C keys isolated'
+- date: '2026-09-06'
+  note: 'Depth pass: Intent-as-untrusted-input mental models, mermaid diagrams,
+    MASVS-PLATFORM-1/2, RFC 8252; independent review still required'

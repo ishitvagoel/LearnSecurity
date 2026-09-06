@@ -4,24 +4,24 @@
 
 ## Module
 
-Hostile-client and mobile platform model
+The hostile-client and mobile-platform model
 
 ## Evidence checklist
 
-- [ ] Mobile threat model and client/server responsibility matrix
-- [ ] Transfer task (Clinic Android: client says hipaaMode=true.)
-- [ ] Lab `labs/8.1/8.1-lab`: forbidden outcome **Client integrity claim authorizes export**
-- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Client/server responsibility matrix (APK outside TCB)
+- [ ] Transfer task (clinic `hipaaMode`; flags/`premium` named)
+- [ ] Lab `labs/8.1/8.1-lab`: forbidden outcome **client integrity claim authorizes export**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: attest_fail_export_denied.
+- [ ] Operate signal without bodies: `attest_fail_export_denied`
 
 ## Rubric
 
 | Result | Meaning |
 |---|---|
-| Developing | Tools listed; missing attacker/trust; mechanism slogans |
+| Developing | Tools listed; missing attacker/trust; “Play Integrity/Kotlin” slogans |
 | Competent | System-specific invariant; lab mapped; operate present |
-| Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
+| Transfer-ready | LO-07 done without Top 10/scanner/MASVS-L1 language as the definition of security |
 
 Knowledge check (retryable): distinguish property vs mechanism for **8.1**. Items live in the session worksheet, not here.
 

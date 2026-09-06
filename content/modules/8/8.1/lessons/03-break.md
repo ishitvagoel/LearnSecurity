@@ -1,50 +1,48 @@
-# 8.1 — Hostile-client and mobile platform model (3 Break)
+# 8.1-LO-03 — Observe client-claim allow, do not trophy a device farm
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** MASVS 2.1 (final) PLATFORM/CODE; Android security model. APK is not in the TCB.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-PLATFORM`.
 
-## Property (start here)
+## Authorized scope
 
-A client JSON field integrity=ok must not authorize a sensitive export. The server attestation result is the TCB; the APK is hostile (root, patched, emulator).
+`labs/8.1/8.1-lab` only. Synthetic claim dicts. No live Play Integrity, Frida, or public APKs.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Client integrity claim authorizes export.
 
-- **Attacker:** Modified APK; Frida; stolen “integrity ok” boolean.
-- **Trust:** Local allow_export(client_claim, server_attest).
-**Forbidden outcome:** Client integrity claim authorizes export
+## Mental model: the boolean is enough
 
-**Authorized scope:** `labs/8.1/8.1-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable client.py trusts JSON integrity.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: allow_export({integrity:ok}, 'fail') True.
-
-## Vulnerable fixture (local)
-
-```python
-def allow_export(client_claims, server_attest):
-    return client_claims.get('integrity') == 'ok'
+```mermaid
+flowchart TD
+  Claim["integrity ok"] --> True[allow_export true]
 ```
+
+The vulnerable tree demonstrates **cause** (policy on the client field). Do not run instrumentation against anything except this fixture.
+
+## What to read in the fixture
+
+`vulnerable/client.py` returns true when the client says `integrity=ok`, ignoring `server_attest`. Tests require that pair with `'fail'` to be false.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Policy evaluated on the attacker’s CPU. |
-| Impact | Export without server authority. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Policy on the attacker’s CPU |
+| Impact | Local export grant |
+| Not the lesson | Mobile Top 10 as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/8.1/8.1-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/8.1/8.1-lab/tests --impl vulnerable
+```
+
+Record `test_client_integrity_claim_is_not_authorization`. Do not probe public hosts.
 
 ## Transfer
 
-Feature flags in the APK; premium=true.
+Clinic `hipaaMode=true`. Predict without leaving this directory.
 
 ## Non-goals
 
-No live-target instructions. Synthetic data only.
+No live-target or Frida instructions. Synthetic `'play_integrity_pass'` only.

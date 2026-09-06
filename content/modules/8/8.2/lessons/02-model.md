@@ -1,53 +1,71 @@
-# 8.2 — Local data, keys, biometrics, offline, leakage (2 Model)
+# 8.2-LO-02 — Device store inventory including backups
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** MASVS 2.1 STORAGE/CRYPTO/AUTH/PRIVACY (final); MASTG 2.0 tests.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** OWASP MASVS 2.1.0 (final) `MASVS-STORAGE-1`, `MASVS-STORAGE-2`.
 
-## Property (start here)
+## Can a second engineer name pytest cases from your inventory?
 
-A cached note must not be plaintext on disk. Biometric lock is not server authentication (4.2). Backups and screenshots are extra channels.
+“We use EncryptedSharedPreferences” is not this lesson. A reviewable model names **each store and whether it can hold a body**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab Phase 8 freeze: local `save_note` / `plaintext_on_disk`. No live phones.
 
-- **Attacker:** USB backup; lost unlocked-cache device; cloud backup of app files.
-- **Trust:** Local save_note / plaintext_on_disk.
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: many sinks, one body
+
+```mermaid
+flowchart TD
+  Note[note body] --> Cache[offline cache]
+  Note --> Notif[notification text]
+  Note --> Clip[clipboard]
+  Note --> Shot[screenshot]
+  Note --> Bak[auto backup]
+```
+
+5.1’s deletion graph now includes the device.
+
+## Mental model: offline still has a policy
+
+```mermaid
+flowchart LR
+  Offline[offline] --> Expire[TTL]
+  Offline --> Revoke["wipe on logout / 4.1"]
+  Offline --> Replay[8.1 hostile replay residual]
+```
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | thief, backup service, app |
-| Objects | cache file |
-| Actions | save_note, plaintext_on_disk |
-| Channels | disk, backup, notifications (8.5 related) |
-| TCB | Keystore-backed encryption; server remains source of truth. |
-| Untrusted | App private dir on a rooted device as “enough” |
-| State / time | Offline cache after revoke (4.1). |
-| 1.1 cell | Confidentiality of bodies at rest on a hostile device. |
+| Subjects | lost-device finder; backup agent; USB |
+| Objects | cached note body |
+| Actions | `save_note` |
+| Channels | app-private files (lab dict stand-in) |
+| TCB | ciphertext stand-in + wipe policy |
+| Untrusted | the device (8.1) |
+| State / time | TTL; logout; restore |
+| 1.1 cell | confidentiality at rest on device |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| thief | cache file | read | deny-plaintext |
-| user | offline read | own notes | allow-until-revoke |
-| backup | app data | cloud | no-bodies-or-encrypted |
-| server | revoke | cache | wipe |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| app | cache | save | ciphertext, not body |
+| backup agent | same file | copy | residual unless excluded |
+| biometric UI | lock screen | gate | not encryption |
+| notification | title | show | no body |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/8.2/8.2-lab` file `disk.py`.
+Draw the inventory. Point at `labs/8.2/8.2-lab` file `disk.py`.
 
 ## Transfer
 
-iOS Keychain vs Android Keystore; desktop Electron.
+Clinic chart cache; iOS Keychain classes as a later mirror.
 
 ## Residual risk
 
-Physical + extracted keys — honest.
+Extracted Keystore keys on a compromised OS; screenshot channel; 8.3 clipboard IPC.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

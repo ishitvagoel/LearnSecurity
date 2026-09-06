@@ -1,6 +1,6 @@
 # 8.4 — Build, distribution, attestation, and resilience
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. No reverse-engineering cookbooks.
 
 ## Identity
 
@@ -9,71 +9,75 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** Build, distribution, attestation, and resilience
 - **phase / track / difficulty:** 8 / mobile / advanced
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Blueprint §7; 8.1; 5.3 secrets in artifacts.
 - **routeTags:** complete, mobile
 - **releaseMilestone:** M3
 - **masteryGate:** 8
 
 ## Objective hierarchy
 
-1. Produce **Signed release evidence and resilience limitations report** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce a **release-channel check** plus deny tests so a debug build cannot call prod export even with `attest=ok`.
+2. Name attacker capabilities (leaked debug APK; student build pointed at prod) and trust assumptions (local `api_allowed(build, attest)`).
+3. Transfer: clinic debug vs prod FHIR; APK SBOM (10.2) — without treating R8 or root detection as 1.2.
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+8.1 APK hostile; 5.3 no secrets in source; 8.1 Play Integrity is a signal; MAS Testing Profiles in MASTG, not MASVS L1/L2/R.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- Obfuscation equals security.
+- Play App Signing means we do not care.
+- Anti-debug proves the server can trust the client.
+- MASVS “R level” is a current MASVS verification level.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+Hostile client (8.1) → which *binary* may call prod (this module) → supply chain (10.2) → 5.3 signing keys.
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true for `api_allowed("debug", "ok")`?
+- What fails if minifyEnabled is the only control?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can go wrong when prod trusts any build’s attest string?
+- What residual remains if signing keys leak?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/8.4/8.4-lab`. Forbidden: debug build allowed to call production export. No live Play Console.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-MASVS-CODE/RESILIENCE — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- OWASP MASVS 2.1.0 (final): `MASVS-CODE` (keep the app up to date / processing); `MASVS-RESILIENCE-1` / `RESILIENCE-2` **raise cost**, they do not authorize. No MASVS L1/L2/R.
+- OWASP MASTG 2.0.0 (final, June 2026): MAS Testing Profiles (including resilience-oriented profiles) live here / MASWE — not as obsolete MASVS levels.
+- OWASP ASVS 5.0.0 (final): `v5.0.0-13.3.1` secrets not in artifacts; `v5.0.0-8.3.1` trusted layer decides the channel.
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+Shared debug/release API keys; signing key in repo; resilience checklist as Gate 8 evidence.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: Signed release evidence and resilience limitations report.
+Evidence: channel tests + limitations report. Feeds Gate 8 / M3 (not-attempted).
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`debug_to_prod_denied`. Revoke debug client ids. Attestation farms remain.
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: resilience is cost; MASVS-CODE/RESILIENCE; debug≠prod |
