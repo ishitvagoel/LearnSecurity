@@ -1,44 +1,55 @@
-# 3.1 — Assets, classification, and security requirements (2 Model)
+# 3.1-LO-02 — An inventory a second engineer can test
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** NIST CSF 2.0 Identify (final); ASVS 5.0.0 V14 (final); NIST Privacy Framework 1.0 (final). Classification is a property of a *field*, not a spreadsheet sticker.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** NIST CSF 2.0 (final) Identify; OWASP ASVS 5.0.0 (final) `v5.0.0-14.1.1` and `v5.0.0-14.1.2`.
 
-## Property (start here)
+## Can a second engineer name pytest cases from your inventory?
 
-Note bodies are Confidential. An application log line for note_read must not contain the body. Labels in Confluence do not enforce this.
+A list of “PII, secrets, notes” is not this lesson. An inventory names **fields**, **protection levels**, and **sinks** with allow or deny.
 
-## Attacker capabilities and trust assumptions
+SecureCollab Phase 1 freeze: note body, note id, tenant id, local log line. No real ELK, no production backup vendor.
 
-- **Attacker:** Operator with log access; SIEM vendor; another tenant’s admin who can read shared observability.
-- **Trust:** Local log sink. Real ELK is another TCB later (10.5).
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: three columns that must close
+
+```mermaid
+flowchart LR
+  Field[Field] --> Level[Protection level]
+  Level --> Sink[Sink rule]
+  Sink --> Test[Forbidden substring]
+```
+
+If `note body` × `application log` is blank, ambient logging appears.
+
+## Step 1: freeze fields and subjects
 
 | Piece | This system |
 |---|---|
-| Subjects | App logger, operator, SIEM |
-| Objects | note body, log line, classification tag |
-| Actions | log_event, read_logs |
-| Channels | stdout, log drain |
-| TCB | Redaction in the logging API used by handlers. |
-| Untrusted | print(), f-strings, APM capture, exception repr |
-| State / time | Logs retained 30 days after the note is deleted (5.1). |
-| 1.1 cell | Confidentiality + privacy of the body. |
+| Subjects | App logger; operator; SIEM vendor (later 10.5) |
+| Objects | Note body; note id; log line; classification tag |
+| Actions | `log_event`; `read_logs` |
+| Channels | stdout / log drain |
+| TCB | Logging API used by handlers |
+| Untrusted | `print`, f-strings, APM, exception `repr` |
+| State / time | Logs retained after the note is deleted (5.1 hole) |
+| 1.1 cell | Confidentiality and privacy of the body |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
 | handler | body | log | deny |
 | handler | note_id | log | allow |
-| operator | logs | read | meta-only |
+| operator | logs | read | metadata only |
 | SIEM vendor | body | index | deny |
 
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+## Step 3: requirements backlog (reviewable)
+
+For Confidential bodies: no log, no APM raw payload, no support paste. For Internal ids: allowed in logs; still 1.2 who may read logs.
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/3.1/3.1-lab` file `classify.py`.
+Draw the inventory so a second engineer could name pytest cases. Point at `labs/3.1/3.1-lab` file `classify.py`.
 
 ## Transfer
 
@@ -46,8 +57,8 @@ Clinic notes vs appointment time: two classes, two sinks.
 
 ## Residual risk
 
-Operators still see metadata (ids). That’s a different cell — document it.
+Operators still see ids. Retention after deletion is 5.1. Regex redaction is not encoding-safe (2.1).
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

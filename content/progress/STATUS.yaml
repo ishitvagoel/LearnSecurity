@@ -14,14 +14,21 @@ defaults:
   ai_security: elective E1
   website_progress: local-first static site (site/); no accounts
 next:
-  id: '3.1'
+  id: '3.2'
   pass: revise
   skill: deepen-curriculum
   inner_skill: standards-pin
-  note: Module 2.4 authoring pass added timeout-fork mental models and diagrams;
-    keep 1.4 and 2.1-2.4 developing until independent review. Continue the depth
-    queue one module at a time.
+  note: Module 3.1 authoring pass added field-times-sink mental models and diagrams;
+    keep 1.4, 2.1-2.4, and 3.1 developing until independent review. Continue the
+    depth queue one module at a time.
 spiral_deltas:
+- date: '2026-09-06'
+  module: '3.1'
+  change: Classification loop v2 treats Confidential as a field-times-sink rule,
+    forbids note bodies in application logs, and pins ASVS v5.0.0-16.2.5 rather than
+    a spreadsheet sticker
+  retest: Revisit 1.1 confidentiality/privacy; 2.1 encodings that defeat regex redaction;
+    4.3 query-string access logs; 5.1 retention after deletion; 10.5 shared observability
 - date: '2026-09-06'
   module: '2.4'
   change: State-time loop v2 treats timeout as a security fork, binds the first share
@@ -230,8 +237,8 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added field-times-sink mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '3.2'
   title: Threat modeling

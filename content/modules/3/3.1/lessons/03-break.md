@@ -1,49 +1,49 @@
-# 3.1 — Assets, classification, and security requirements (3 Break)
+# 3.1-LO-03 — Observe the body in the log line, do not trophy it
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** NIST CSF 2.0 Identify (final); ASVS 5.0.0 V14 (final); NIST Privacy Framework 1.0 (final). Classification is a property of a *field*, not a spreadsheet sticker.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-16.2.5`.
 
-## Property (start here)
+## Authorized scope
 
-Note bodies are Confidential. An application log line for note_read must not contain the body. Labels in Confluence do not enforce this.
+`labs/3.1/3.1-lab` only. Synthetic string `tenant-A-secret-body`. No production log drains, no real PII.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Confidential note body appears in a log line.
 
-- **Attacker:** Operator with log access; SIEM vendor; another tenant’s admin who can read shared observability.
-- **Trust:** Local log sink. Real ELK is another TCB later (10.5).
-**Forbidden outcome:** Confidential note body appears in a log line
+## Mental model: debug context is the leak
 
-**Authorized scope:** `labs/3.1/3.1-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable classify.py interpolates the body.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: Handler logs the event payload with the body.
-
-## Vulnerable fixture (local)
-
-```python
-def log_event(event: str, note_body: str) -> str:
-    return f"{event}: {note_body}"
+```mermaid
+flowchart TD
+  Read["note_read"] --> Log["log_event interpolates body"]
+  Log --> Line["note_read: tenant-A-secret-body"]
+  Line --> Operator[Lower-trust reader]
 ```
+
+The vulnerable tree demonstrates **cause** (body treated as debug context), not a trophy dump of a real tenant.
+
+## What to read in the fixture
+
+`vulnerable/classify.py` `log_event` returns `f"{event}: {note_body}"`. The test asserts the body substring is absent and a redaction marker is present.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Body treated as debug context. |
-| Impact | Confidential field in a lower-trust store. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Body treated as debug context |
+| Impact | Confidential field in a lower-trust store |
+| Not the lesson | A privacy-policy URL or DLP product name |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/3.1/3.1-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/3.1/3.1-lab/tests --impl vulnerable
+```
+
+Record the failing test `test_note_body_is_not_logged`. Do not weaken it to “logs exist.”
 
 ## Transfer
 
-Clinic notes vs appointment time: two classes, two sinks.
+Clinic chart text in an appointment log. Predict without leaving this directory.
 
 ## Non-goals
 

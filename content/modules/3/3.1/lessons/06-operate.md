@@ -1,36 +1,44 @@
-# 3.1 — Assets, classification, and security requirements (6 Operate)
+# 3.1-LO-06 — Detect a redaction miss; purge without logging the body again
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** NIST CSF 2.0 Identify (final); ASVS 5.0.0 V14 (final); NIST Privacy Framework 1.0 (final). Classification is a property of a *field*, not a spreadsheet sticker.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-16.2.5`.
 
-## Property (start here)
+## Prevention is not absolute
 
-Note bodies are Confidential. An application log line for note_read must not contain the body. Labels in Confluence do not enforce this.
+A new handler, an exception printer, or an APM agent can reintroduce the body. Pair detect and recover. Do not log the body while investigating.
 
-## Attacker capabilities and trust assumptions
+## Mental model: alert on substring, then purge
 
-- **Attacker:** Operator with log access; SIEM vendor; another tenant’s admin who can read shared observability.
-- **Trust:** Local log sink. Real ELK is another TCB later (10.5).
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Line[Log line] --> Scan{Confidential marker or known body pattern?}
+  Scan -->|body present| Metric["log_redaction_miss += 1"]
+  Metric --> Alert["reason=confidential_in_log event=note_read no body"]
+  Alert --> Purge[Purge matching lines]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | Secret scanning on log streams; DLP on the sink. |
-| Signal (no bodies) | log_redaction_miss alerts; purge runbook. |
-| Revoke / recover | Purge matching logs; rotate if tokens present. |
-| Residual | Operators still see metadata (ids). That’s a different cell — document it. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `log_redaction_miss`; tests in CI |
+| Signal | event name, request id; never the body |
+| Recover | Purge; rotate if tokens present |
+| Residual | Operators still see ids; document that cell |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/3.1/3.1-lab`.
+Write one log line you would accept. Tie it to `labs/3.1/3.1-lab`.
+
+```
+log_denied reason=confidential_field event=note_read request_id=req_81aa
+```
+
+Reject any line that includes `tenant-A-secret-body`.
 
 ## Transfer
 
-Clinic notes vs appointment time: two classes, two sinks.
+Clinic: detect chart text in appointment logs; purge without pasting the chart into the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+SIEM product names are not the property.

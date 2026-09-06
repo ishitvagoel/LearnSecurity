@@ -1,33 +1,42 @@
-# 3.1 — Assets, classification, and security requirements (7 Transfer)
+# 3.1-LO-07 — Transfer: two classes on a clinic booking card
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** NIST CSF 2.0 Identify (final); ASVS 5.0.0 V14 (final); NIST Privacy Framework 1.0 (final). Classification is a property of a *field*, not a spreadsheet sticker.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-14.1.1` and `v5.0.0-16.2.5`.
 
-## Property (start here)
+## Change the fields; keep field × sink
 
-Note bodies are Confidential. An application log line for note_read must not contain the body. Labels in Confluence do not enforce this.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Operator with log access; SIEM vendor; another tenant’s admin who can read shared observability.
-- **Trust:** Local log sink. Real ELK is another TCB later (10.5).
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
 **Prompt:** Clinic notes vs appointment time: two classes, two sinks.
 
 **Product sketch:** EHR-lite booking card.
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+Rewrite the SecureCollab sentence. Include:
+
+1. attacker capabilities (operator with logs; vendor with the drain; not a live clinic);
+2. trust assumptions (which logging API is TCB);
+3. forbidden outcome (chart text in the log, not “HIPAA”);
+4. a test idea on a local fixture only;
+5. residual (time is Internal; ids remain; APM);
+6. WCAG 2.2 only if a human-mediated control is in the claim (classification itself is not a WCAG problem).
+
+## Mental model: time is not the chart
+
+```mermaid
+flowchart LR
+  Time["Appointment time - Internal"] --> Log[Log allow]
+  Chart["Chart text - Confidential"] --> LogDeny[Log deny]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | uvicorn access logs will happily store query strings (4.3). FastAPI does not kno… |
-| Live-target plan | Lab policy |
+| Spreadsheet as the property | No sink rule |
+| Live clinic logs | Lab policy |
+| Privacy policy URL | Mechanism theater |
 
 ## Practice
 
-One page. No keys. The lab `labs/3.1/3.1-lab` stays the only running system you may break.
+One page. No keys. `labs/3.1/3.1-lab` is the only running system you may break.

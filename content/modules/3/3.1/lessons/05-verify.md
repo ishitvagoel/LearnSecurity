@@ -1,38 +1,44 @@
-# 3.1 — Assets, classification, and security requirements (5 Verify)
+# 3.1-LO-05 — Evidence is a failing body substring, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** NIST CSF 2.0 Identify (final); ASVS 5.0.0 V14 (final); NIST Privacy Framework 1.0 (final). Classification is a property of a *field*, not a spreadsheet sticker.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-16.2.5`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-Note bodies are Confidential. An application log line for note_read must not contain the body. Labels in Confluence do not enforce this.
+“We have a classification spreadsheet” is not evidence. The oracle is the local pair.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Operator with log access; SIEM vendor; another tenant’s admin who can read shared observability.
-- **Trust:** Local log sink. Real ELK is another TCB later (10.5).
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F[Must fail body in line]
+  X["--impl fixed"] --> P[Must pass redaction marker]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Confidential note body appears in a log line |
-| Failure | Fail closed: Structured logs with allow-listed fields; redact bodies |
+| Negative / abuse | Body substring absent |
+| Marker | `redacted` or `confidential` present in the fixed line |
+| Not claimed | All sinks; production SIEM |
 
-Lab tests: `test_property.py` under `labs/3.1/3.1-lab`.
+Lab test: `test_note_body_is_not_logged` in `labs/3.1/3.1-lab/tests/test_property.py`.
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Confidential note body appears in a log line`
-- `--impl fixed`: **pass**
+```
+python3 -m pytest labs/3.1/3.1-lab/tests --impl vulnerable
+python3 -m pytest labs/3.1/3.1-lab/tests --impl fixed
+```
 
-body not in line; marker present.
+## What the tests do not prove
+
+- Exception middleware
+- Access logs (4.3)
+- Backup stores (5.1 / 10.5)
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map the test to the LO-02 body×log cell.
 
 ## Transfer
 
-Clinic notes vs appointment time: two classes, two sinks.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic chart vs time. A test that only asserts HTTP 200 is not classification evidence.

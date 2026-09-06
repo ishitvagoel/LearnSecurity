@@ -1,48 +1,51 @@
-# 3.1 — Assets, classification, and security requirements (4 Build)
+# 3.1-LO-04 — Allow-list the log fields; never interpolate the body
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** NIST CSF 2.0 Identify (final); ASVS 5.0.0 V14 (final); NIST Privacy Framework 1.0 (final). Classification is a property of a *field*, not a spreadsheet sticker.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-16.2.5` and `v5.0.0-14.1.2`.
 
-## Property (start here)
+## Structural means the sink cannot see the field
 
-Note bodies are Confidential. An application log line for note_read must not contain the body. Labels in Confluence do not enforce this.
+`log_event` must not include the body string. Structural means the logging API does not accept the body as a format argument—not a regex after the fact, not a Confluence label, not `DEBUG=false` in one environment.
 
-## Attacker capabilities and trust assumptions
+## Mental model: redact at the API
 
-- **Attacker:** Operator with log access; SIEM vendor; another tenant’s admin who can read shared observability.
-- **Trust:** Local log sink. Real ELK is another TCB later (10.5).
-log_event redacts body to 'redacted'/'confidential'.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-def log_event(event: str, note_body: str) -> str:
-    return f"{event}: [redacted-confidential]"
+```mermaid
+flowchart TD
+  Call["log_event note_read, body"] --> API[Logging API]
+  API --> Line["note_read: [redacted-confidential]"]
+  Line --> Test{Body substring present?}
+  Test -->|yes| Fail[Property false]
+  Test -->|no| Pass[Property true]
 ```
+
+The lab’s fixed tree returns a redaction marker. Production should use structured fields (`event`, `note_id`) and never have a `body=` key. Fail-safe: if you are unsure whether a value is Confidential, do not log it.
 
 ## Why this restores the cell
 
-Structured logs with allow-listed fields; redact bodies.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| Line | does not contain `tenant-A-secret-body` |
+| Line | contains `redacted` or `confidential` (lab marker) |
 
 ## What this is not
 
-uvicorn access logs will happily store query strings (4.3). FastAPI does not know Confidential.
-
-Regex redaction misses encodings (2.1).
+Regex redaction of encodings (2.1). Exception middleware dumps. uvicorn query strings (4.3). Classification spreadsheet.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name field, sink, and predicate. Run:
+
+```
+python3 -m pytest labs/3.1/3.1-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Clinic notes vs appointment time: two classes, two sinks.
+Clinic: log appointment time; never log chart text. Two classes, two sinks.
 
 ## Residual risk
 
-Operators still see metadata (ids). That’s a different cell — document it.
+Ids in logs; retention after deletion (5.1); APM still capturing payloads.
