@@ -1,14 +1,15 @@
-# 5.4-LO-06 — Detect header/socket mismatch; revoke cleartext cookies
+# Notice header/socket mismatch; revoke cleartext cookies
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
-**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-12.2.1`. CSF names outcomes; it does not bind the socket.
 
-## Prevention is not absolute
+## Stopping it is not enough
 
-A misconfigured proxy can start trusting `*` again after `channel_is_https` was “fixed once.” Pair detect and recover. Do not log cookie values (4.3). Do not paste a session into the ticket.
+A misconfigured proxy can start trusting `*` again after `channel_is_https` was “fixed once.” Pair notice and recover. Do not log cookie values. Do not paste a session into the ticket.
 
-## Mental model: header versus socket mismatch is a signal
+## Picture: header versus socket mismatch is a signal
+
+A client header saying https while the socket is http is a notice-and-recover problem, not a licence to quote cookies in the paging channel. Notice names the event. Recover revokes the cleartext cookies. Neither reprints the cookie.
 
 ```mermaid
 flowchart TD
@@ -18,37 +19,46 @@ flowchart TD
   Alert --> Revoke[Revoke cookies issued on that path]
 ```
 
-| Outcome | This module |
+Industry lists name detect, respond, recover. They do not bind the socket. They do not pick a log product. Someone still has to own the mismatch.
+
+## Signals that do not become a second leak
+
+| Outcome | This topic |
 |---|---|
-| Detect | `header_https_socket_http` |
-| Signal | request id, socket scheme; never the cookie |
-| Recover | Stop trusting the header; HSTS once TLS is real; revoke cleartext cookies |
-| Residual | Pinning trade-off (8.x); cookies already copied |
+| Notice | `header_https_socket_http` |
+| What the line holds | request id, socket scheme — **never** the cookie |
+| Respond | Stop trusting the header |
+| Recover | HSTS once TLS is real; revoke cleartext cookies; re-run `test_client_forwarded_proto_is_not_tls` |
+| Leftover | Pinning (later on phones); cookies already copied |
 
-CSF 2.0 Detect / Respond / Recover name outcomes. They do not prove `v5.0.0-12.2.1`. A SIEM product name is not the property. Re-run `test_client_forwarded_proto_is_not_tls` after any proxy change; a green “Force HTTPS” tile is not that pytest. SPA baseURL vs API socket is another path of the same cell — inventory it before claiming Recover.
-
-## Framework defaults versus the operate guarantee
-
-A CDN dashboard will show “HTTPS only” and stay silent when uvicorn still trusts `X-Forwarded-Proto` from anyone. Detection must observe **header https ∧ socket http**, not a preload list. If the alert includes a session cookie or note body, you have opened a 4.3 / 3.1 cell.
-
-## Practice
-
-Write one log line you would accept. Tie it to `labs/5.4/5.4-lab`.
+A log line a reviewer can accept looks like:
 
 ```text
 log_denied reason=header_https_socket_http socket=http request_id=req_54ch
 ```
 
-Reject any line that includes a session cookie, a note body, or “HSTS handled.”
+Not: a session cookie, a note body, or “HSTS handled.”
 
-## Transfer
+If your alert includes a session cookie or a note body, you have opened a second leak in the paging channel.
 
-Clinic: detect SPA-https vs API-http; do not paste cookies into the ticket. Do not probe a live clinic.
+A green “Force HTTPS” tile is not that pytest. Re-run `test_client_forwarded_proto_is_not_tls` after any proxy change. Page `https://` versus API socket `http` is another path of the same cell — inventory it before claiming recover.
 
-## Usability
+## What the framework does vs what you still have to check
 
-If a human sees a certificate or mixed-content warning, make the error readable (WCAG 2.2). A silent fail that pushes people onto http is a security residual, not polish.
+A CDN dashboard will show “HTTPS only” and stay silent when the app still trusts `X-Forwarded-Proto` from anyone. Notice must observe **header https and socket http**, not a preload list. A server flag that trusts proxy headers does not emit this alert for you.
 
-## Non-goals
+## Can people still use it
 
-SIEM product names are not the property. Live TLS hunts are out of scope. Gates 0–10 stay not-attempted.
+If a human sees a certificate or mixed-content warning, make the error readable. Do not encode “not TLS” as color only. A silent fail that pushes people onto http is leftover risk, not polish.
+
+## Practice
+
+Write one log line you would accept in review (ids, reason, no cookie). Tie it to `labs/5.4/5.4-lab`. Reject any line that includes a session cookie, a note body, or “HSTS handled.”
+
+## Use it somewhere new
+
+Clinic: notice page-https versus API-http; do not paste cookies into the ticket. Do not probe a live clinic.
+
+## What this page is not doing
+
+A log-product name is not the rule. Live TLS hunts are out of scope. Course gates stay unclaimed. Answer keys stay out of lessons.

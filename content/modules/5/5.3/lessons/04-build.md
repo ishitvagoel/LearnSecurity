@@ -1,16 +1,15 @@
-# 5.3-LO-04 — Authenticate only the current secret
+# Authenticate only the current secret
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-13.3.1` and `v5.0.0-13.2.3`. `v5.0.0-13.3.3` and `v5.0.0-13.3.4` are **Level 3, advanced**.
 
-## Structural means the default is not an or-clause
+## The rule
 
 `auth` must require a truthy `current` and equality with `presented`. Structural means the old value is dead — not `.gitignore`, not a vault brand, not “we rotated in the wiki,” not a comment that says TODO remove default.
 
-The smallest restore for SecureCollab Phase 1 service credentials is: current only, fail closed. Fail-safe: missing current **denies**. Do not fall back to `DEFAULT`. Do not fail open because “the vault was unreachable.”
+The smallest restore for notes-app service credentials is: current only, deny if current is missing. Do not fall back to `DEFAULT`. Do not allow because “the vault was unreachable.”
 
-## Mental model: current only, fail closed
+## Picture: current only, deny if missing
 
 ```mermaid
 flowchart TD
@@ -21,11 +20,11 @@ flowchart TD
   Eq -->|yes| Allow[Allow]
 ```
 
-The lab’s fixed tree is `bool(current) and presented == current`. Production still needs the secret created outside source (`v5.0.0-13.3.1`) and a rebuild of images that shipped the old string. Password lifecycle (4.2) is a different authenticator. HSM isolation is Level 3 advanced, not this pytest.
+The lab’s repaired files are `bool(current) and presented == current`. Production still needs the secret created outside source, and a rebuild of images that shipped the old string. User-password lifecycle is a different authenticator. A hardware box for crypto is an advanced extra, not this pytest.
 
-ASVS `v5.0.0-13.2.3` wants no default credentials. This pytest is that sentence for `auth`.
+Industry checklists want no default credentials. This pytest is that sentence for `auth`.
 
-## Why this restores the cell
+## What the repaired files must show
 
 | After the fix | Must be true |
 |---|---|
@@ -35,34 +34,30 @@ ASVS `v5.0.0-13.2.3` wants no default credentials. This pytest is that sentence 
 
 ## What this is not
 
-Vault without a test. Same key for all tenants. Password lifecycle (4.2). gitignore as revocation. KMS dashboard as rotation. Envelope DEK/KEK as this pytest.
+Vault without a test. Same key for all tenants. Password lifecycle (a different authenticator). gitignore as revocation. A key-service dashboard as rotation. Envelope wrapping (data key vs wrapping key) as this pytest.
 
-## Mechanism limits
+## What can still go wrong
 
 - Copies already cloned still hold the old string until they are rebuilt.
-- Worker second defaults (7.4) are another path of the same cell.
-- Mobile embedded keys wait for 8.4.
-- Scheduled rotation (`v5.0.0-13.3.4` Level 3 advanced) is not this fixture.
-- HSM (`v5.0.0-13.3.3` Level 3 advanced) is not this fixture.
+- A second default on a worker is another path of the same cell (later topic).
+- Keys baked into a phone app wait for a later topic.
+- Timed rotation (advanced extra) is not this fixture.
+- A hardware box for crypto (advanced extra) is not this fixture.
 
 ## Practice
 
-Name predicate (`current` truthy ∧ `presented == current`). Run:
+Name the check (`current` truthy and `presented == current`). Run:
 
 ```text
 python3 -m pytest labs/5.3/5.3-lab/tests --impl fixed
 ```
 
-Must pass.
+It must pass.
 
-## Transfer
+## Use it somewhere new
 
 Clinic: rotate the gist-leaked key and prove the old string fails, including missing-current deny.
 
-## Residual risk
+## What this page is not doing
 
-Shipped images; log copies of the value; worker second default; scheduled rotation as a substitute for killing `DEFAULT`.
-
-## Non-goals
-
-Do not search live gists. Do not claim Gate 5 from a vault product name.
+Do not search live gists. Do not claim a course gate from a vault product name.

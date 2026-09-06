@@ -1,20 +1,19 @@
-# 5.4-LO-01 — A client Forwarded-Proto header is not TLS
+# A client Forwarded-Proto header is not TLS
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** IETF RFC 9846 TLS 1.3 (final); OWASP ASVS 5.0.0 (final) `v5.0.0-12.2.1`, `v5.0.0-12.1.1`, `v5.0.0-12.3.2`; `v5.0.0-12.1.4` and `v5.0.0-12.1.5` are **Level 3, advanced**. MASVS-NETWORK waits for 8.x. Pinning is a trade-off, not a universal rule. uvicorn `--proxy-headers` is not this sentence.
 
-## The claim this module owns
+## The rule
 
-SecureCollab Phase 1 must know whether the **server socket** negotiated TLS. A browser can send `X-Forwarded-Proto: https` on cleartext. That header is a client claim. Module 2.2 already taught hop vs cache key; this module’s cell is channel authenticity for cookies, HSTS, and redirects.
+The notes app must know whether the **server socket** negotiated TLS. A browser can send `X-Forwarded-Proto: https` on cleartext. That header is a client claim. An earlier topic already taught hop versus cache key; this week’s cell is channel authenticity for cookies, HSTS, and redirects.
 
-> `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` must be false. `channel_is_https({}, "https")` may be true. A trusted proxy is a **bound peer**, not a header name. This lab has no trusted proxy.
+> `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` must be false. `channel_is_https({}, "https")` may be true. A trusted proxy is a **bound peer**, not a header name. This practice has no trusted proxy.
 
-The forbidden outcome is **client-supplied Forwarded-Proto counted as TLS**. That is a 1.1 authenticity failure of the transport: Secure cookies and HSTS fire while the user stays on cleartext.
+What must not happen is **a client-supplied Forwarded-Proto counted as TLS**. Cookies marked Secure and HSTS fire while the user stays on cleartext. That is an authenticity failure of the transport.
 
-ASVS `v5.0.0-12.2.1` wants TLS for external HTTP without fallback. `v5.0.0-12.1.1` wants TLS 1.2/1.3. `v5.0.0-12.3.2` wants clients to validate certificates. `v5.0.0-12.1.4` (OCSP stapling) and `v5.0.0-12.1.5` (ECH) are **Level 3 (advanced)**. RFC 9846 is current TLS 1.3 (obsoletes RFC 8446).
+Industry lists want TLS on the public HTTP service with no cleartext fallback. They want a current TLS version (TLS 1.3 is the current handshake). Clients still have to check certificates — that is a different cell. OCSP stapling and encrypted client hello are advanced extras, not this week’s pytest. A server flag that trusts proxy headers is not this sentence.
 
-## Mental model: hop vs claim
+## Picture: hop vs claim
 
 ```mermaid
 flowchart TD
@@ -24,11 +23,11 @@ flowchart TD
   Sock["server_scheme http"] --> App
 ```
 
-The attacker is a client on cleartext who wants the app to think TLS is on. Trusting any `X-Forwarded-*` from the socket peer is not a TCB unless that peer is a locked load balancer you bound.
+Who can act: a client on cleartext who wants the app to think TLS is on. Trusting any `X-Forwarded-*` from the socket peer is not what you trust unless that peer is a locked load balancer you bound.
 
-**Mechanism (not the property):** “Force HTTPS” in a dashboard, HSTS preload, or certificate pinning.
+**A tool is not the rule.** “Force HTTPS” in a dashboard, HSTS preload, or certificate pinning.
 
-## Mental model: trusted proxy is identity, not a header
+## Picture: a trusted proxy is identity, not a header
 
 ```mermaid
 flowchart LR
@@ -39,45 +38,45 @@ flowchart LR
   Stray --> Ignore[Ignore Forwarded-Proto]
 ```
 
-Pinning on mobile (8.x) is a residual trade-off: operational breakage vs extra binding. Do not mandate it here.
+Pinning on a phone (later) is leftover: operational breakage versus extra binding. Do not mandate it here.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | For this property |
+| Slice | For this rule |
 |---|---|
-| Root cause | Confused deputy: app believes client about the channel |
-| Preconditions | Header https + socket http => True |
+| Why it happens | The app believes the client about the channel |
+| What has to be true first | Header https + socket http counts as true |
 | Trigger | Cleartext client sets Forwarded-Proto |
-| Impact | Authenticity of transport; cookies/HSTS lie |
-| Prevention | Ignore client proto unless the immediate peer is a bound proxy |
-| Detection | `header_https_socket_http` |
-| Recovery | HSTS once TLS is real; revoke cookies issued over cleartext |
+| What it costs | Authenticity of the transport; cookies and HSTS lie |
+| How you stop it | Ignore client proto unless the immediate peer is a bound proxy |
+| How you notice | `header_https_socket_http` |
+| How you recover | HSTS once TLS is real; revoke cookies issued over cleartext |
 
-## Framework defaults versus the channel guarantee
+## What the framework does vs what you still have to check
 
-uvicorn `--proxy-headers` without a trusted proxy IP is this bug. SPA `https://` in axios is not the API socket. Oracle: `labs/5.4/5.4-lab`. No live LB.
+A server flag that trusts proxy headers, with no trusted-proxy IP, is this bug. A browser `https://` in the page’s API client is not the API socket. The app’s promise is: `labs/5.4/5.4-lab`. No live load balancer.
 
-## Mechanism limits
+## What the tool cannot do
 
-- Correct TLS to the LB is not end-to-end if you needed e2e messaging.
-- Internal HTTP (`v5.0.0-12.3.3`) is a named hole.
-- Pinning vs breakage — document, don’t mandate.
+- Correct TLS to the load balancer is not end-to-end if you needed end-to-end messaging.
+- Cleartext inside the network is a named leftover.
+- Pinning versus breakage — write it down; do not mandate it.
 
 ## Practice
 
-Draw hops: device — ? — LB — app. Who may assert proto? Then run:
+Draw hops: device — ? — load balancer — app. Who may assert proto? Then run:
 
-```
+```text
 python3 -m pytest labs/5.4/5.4-lab/tests --impl vulnerable
 python3 -m pytest labs/5.4/5.4-lab/tests --impl fixed
 ```
 
 The first command must fail. The second must pass.
 
-## Transfer
+## Use it somewhere new
 
-Clinic: SPA uses `https://` while the API socket is `http`. mTLS service identity vs this header.
+Clinic: the page uses `https://` while the API socket is `http`. Mutual TLS names a service identity; that is not this header.
 
-## Non-goals
+## What this page is not doing
 
-Live TLS attacks, SSLStrip walkthroughs, pinning exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not in this file.
+Live TLS attacks, strip-attack walkthroughs, pinning exploits. Course gates stay unclaimed without product evidence. Answer keys are not in this file.

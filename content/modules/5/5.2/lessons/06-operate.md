@@ -1,52 +1,63 @@
-# 5.2-LO-06 — Detect known-plaintext encoding; treat as a leak
+# Notice known-plaintext encoding; treat it as a leak
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
-**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-11.3.3`. CSF names outcomes; it does not encrypt the column.
 
-## Prevention is not absolute
+## Stopping it is not enough
 
-A new encoding wrapper can land in a worker (7.4) after `protect` was “fixed once.” Pair detect and recover. Do not log plaintext bodies (3.1). Do not paste an SSN into the ticket.
+Even after `protect` was “fixed once,” a new encoding wrapper can land in a worker. Running it for real is the rest of the loop: notice, contain, re-protect, and refuse to “help” by logging note bodies.
 
-## Mental model: CI is a detector
+Do not log plaintext bodies. Do not paste an SSN into the ticket.
+
+## Picture: CI is a detector
+
+A known-plaintext Base64 hit is a notice-and-recover problem, not a licence to quote the body in the paging channel. Notice names the event. Recover re-protects and rotates keys. Neither reprints the body.
 
 ```mermaid
 flowchart TD
   Sample[Known plaintext secret] --> Out[protect]
   Out --> B64{"Base64 round-trip?"}
   B64 -->|yes| Metric["encoding_labeled_encryption += 1"]
-  Metric --> Rotate["Rotate keys - 5.3"]
+  Metric --> Rotate[Rotate keys later]
 ```
 
-| Outcome | This module |
+Industry lists name detect, respond, recover. They do not encrypt the column. They do not pick a log product. Someone still has to own the leftover.
+
+## Signals that do not become a second leak
+
+| Outcome | This topic |
 |---|---|
-| Detect | known-plaintext Base64 in CI |
-| Signal | field name, request id; never the body |
-| Recover | Re-protect with AEAD; rotate keys |
-| Residual | Memory dumps; authorized operators who hold the key |
+| Notice | known-plaintext Base64 in CI |
+| What the line holds | field name, request id — **never** the body |
+| Recover | Re-protect with authenticated encryption; rotate keys |
+| Leftover | Memory dumps; operators who are allowed to hold the key |
 
-CSF 2.0 Detect / Respond / Recover name outcomes. They do not prove `v5.0.0-11.3.3`. A SIEM product name is not the property. Re-run `test_protect_is_not_mere_encoding` after any `protect` change; a green “encryption enabled” tile is not that pytest. Workers and export jobs are other paths of the same cell — inventory them before claiming Recover.
-
-Recovery is incomplete if the next deploy still wraps `b64encode` in a helper named `encrypt`. Grep workers and export jobs for Base64 of known plaintext the same day you rotate keys (5.3), or the next backup re-issues the leak. A KMS dashboard is not that grep.
-
-## Framework defaults versus the operate guarantee
-
-A cloud KMS dashboard will show “CMK enabled” and stay silent when the column is still Base64. Detection must observe **the round-trip of a known plaintext**, not a product tile. If the alert includes plaintext `secret` or an SSN, you have opened a 3.1 cell.
-
-## Practice
-
-Write one log line you would accept. Tie it to `labs/5.2/5.2-lab`.
+A log line a reviewer can accept looks like:
 
 ```text
 log_denied reason=encoding_labeled_encryption field=body request_id=req_52cr
 ```
 
-Reject any line that includes plaintext `secret`, a real SSN, or “AES handled.”
+Not: plaintext `secret`, a real SSN, or “AES handled.”
 
-## Transfer
+If your alert includes plaintext `secret` or an SSN, you have opened a second leak in the paging channel.
 
-Clinic: detect Base64 SSN columns; do not paste values into the ticket. Do not query a live EHR.
+A green “encryption enabled” tile is not that pytest. Re-run `test_protect_is_not_mere_encoding` after any `protect` change. Workers and export jobs are other paths of the same cell — inventory them before claiming recover.
 
-## Non-goals
+Recovery is incomplete if the next deploy still wraps `b64encode` in a helper named `encrypt`. Grep workers and export jobs for Base64 of known plaintext the same day you rotate keys, or the next backup re-issues the leak. A key-service dashboard is not that grep.
 
-SIEM product names are not the property. Live column dumps are out of scope. Gates 0–10 stay not-attempted.
+## What the framework does vs what you still have to check
+
+A cloud key dashboard will show “key enabled” and stay silent when the column is still Base64. Detection must observe **the round-trip of a known plaintext**, not a product tile. If the alert includes plaintext `secret` or an SSN, you have opened a logging leak from an earlier lesson.
+
+## Practice
+
+Write one log line you would accept in review (ids, reason, no body). Tie it to `labs/5.2/5.2-lab`. Reject any line that includes plaintext `secret`, a real SSN, or “AES handled.”
+
+## Use it somewhere new
+
+Clinic: notice Base64 SSN columns; do not paste values into the ticket. Do not query a live clinic system.
+
+## What this page is not doing
+
+A log-product name is not the rule. Live column dumps are out of scope. Course gates stay unclaimed. Answer keys stay out of lessons.

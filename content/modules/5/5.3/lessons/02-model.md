@@ -1,16 +1,15 @@
-# 5.3-LO-02 — A secret inventory a second engineer can test
+# A secret inventory someone else can test
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-13.3.1` and `v5.0.0-11.1.1`.
 
-## Can a second engineer name pytest cases from your inventory?
+## Could someone else name pytest cases from your inventory?
 
-“We have a vault” is not this lesson. A reviewable model names **each secret, where it lives, who owns rotation, and what happens to the old value**.
+“We have a vault” is not this page. A reviewable model names **each secret, where it lives, who owns rotation, and what happens to the old value**.
 
-SecureCollab Phase 1 freeze: local `auth(presented, current)`. Disposable `sk-lab-hardcoded`. No live vault.
+This week’s freeze: local `auth(presented, current)`. Disposable `sk-lab-hardcoded`. No live vault.
 
-## Mental model: inventory row
+## Picture: inventory row
 
 ```mermaid
 flowchart TD
@@ -20,9 +19,9 @@ flowchart TD
   Rotated --> Blast[Tenant blast radius]
 ```
 
-A missing row is how a worker default survives (7.4).
+A missing row is how a worker default survives (later topic).
 
-## Mental model: current is the only acceptor
+## Picture: current is the only acceptor
 
 ```mermaid
 flowchart LR
@@ -32,22 +31,22 @@ flowchart LR
   Default[Hardcoded DEFAULT] --> Deny
 ```
 
-## Step 1: freeze pieces
+## Step 1: freeze who, what, and time
 
 | Piece | This system |
 |---|---|
-| Subjects | service; repo-clone attacker |
-| Objects | current API key; hardcoded default |
+| Who | service; repo-clone attacker |
+| What | current API key; hardcoded default |
 | Actions | `auth` |
-| Channels | header stand-in |
-| TCB | Current-only compare; fail closed if current missing |
-| Untrusted | Source DEFAULT; “Vault is on” |
+| Paths | header stand-in |
+| What you trust | Current-only compare; deny if current is missing |
+| What you do not trust | Source DEFAULT; “Vault is on” |
 | State / time | After rotation |
-| 1.1 cell | Authenticity over time |
+| The rule | Authenticity over time |
 
-## Step 2: write cells
+## Step 2: write rows the lab can fail
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
 | client | current `rotated-now` | auth | allow |
 | clone | `sk-lab-hardcoded` | auth after rotate | deny |
@@ -55,16 +54,16 @@ flowchart LR
 
 ## Practice
 
-Draw the inventory. Point at `labs/5.3/5.3-lab` file `secrets.py`.
+Draw the inventory so someone else could name pytest cases. Point at `labs/5.3/5.3-lab` file `secrets.py`.
 
-## Transfer
+## Use it somewhere new
 
-Envelope DEK vs KEK; gist leak.
+Envelope wrapping (data key vs wrapping key); gist leak.
 
-## Residual risk
+## What can still go wrong
 
-Images already shipped; logs that captured the old value; HSM (`v5.0.0-13.3.3` Level 3 advanced).
+Images already shipped; logs that captured the old value; a hardware box for crypto (advanced extra).
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+Treating an awareness list as the definition of security. Answer keys stay out of lessons.

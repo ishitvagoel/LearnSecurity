@@ -1,80 +1,79 @@
-# 5.5-LO-01 — Note id is data, not SQL grammar
+# Note id is data, not SQL grammar
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.2.4`, `v5.0.0-8.4.1`, `v5.0.0-13.2.2`; `v5.0.0-16.3.2` Level 3 clause is **advanced**. PostgreSQL RLS docs are *platform*, not this sentence. SQLAlchemy `text()` with an f-string is still concatenation.
 
-## The claim this module owns
+## The rule
 
-SecureCollab Phase 1 must fetch a note by **tenant and note id as data**. The SQL interpreter must not parse those fields as extra predicates. Module 1.2 already taught the grant cell; this module’s cell is **complete mediation of the SQL grammar**. Module 3.3’s database role is a second gate, not a substitute for parameters.
+The notes app must fetch a note by **company and note id as data**. The SQL engine must not read those fields as extra grammar. Module 1.2 already taught who-is-allowed. This week's check is **keeping data out of the SQL program**. Module 3.3's database role is a second check, not a substitute for parameters.
 
-> `fetch_sql` must return a bound structure (`sql`, `params`), not a concatenated string. Application 1.2 is necessary; it is not interpreter isolation.
+> `fetch_sql` must return a bound pair (`sql`, `params`), not a glued string. Who-is-allowed from 1.2 is still required. It is not the same as isolating the interpreter.
 
-The forbidden outcome is **a query built by concatenating untrusted strings into SQL**. That is a 1.1 confidentiality and integrity failure of rows: the parser can read other tenants or mutate rows even when the handler meant “one note.”
+What must not happen is **a query built by concatenating untrusted strings into SQL**. That is a secrecy and integrity failure of rows: the parser can read other companies or change rows even when the handler meant “one note.”
 
-ASVS `v5.0.0-1.2.4` wants parameterized queries (SQL, HQL, NoSQL, Cypher — same shape). `v5.0.0-8.4.1` still wants cross-tenant controls. `v5.0.0-13.2.2` wants least-privilege service accounts to the data layer. `v5.0.0-16.3.2`’s Level 3 clause (log every authorization decision, never the sensitive data) is **advanced**.
+Industry lists want parameterized queries — SQL, and later the same shape for other query languages. They still want cross-company controls. They want a least-privilege account to the database. Logging every who-is-allowed decision, and never the sensitive data, is **advanced** work, not this week's pytest. A later row-level rule in PostgreSQL is a platform extra, not this sentence. SQLAlchemy `text()` with an f-string is still concatenation.
 
-## Mental model: data vs SQL grammar
+## Picture: data vs SQL grammar
 
 ```mermaid
 flowchart TD
-  Input[note_id as data] --> Mix{concat into SQL?}
-  Mix -->|yes| Parser[SQL parser reads extra predicates]
-  Mix -->|no| Bind["params tuple tenant, note_id"]
+  Input[note id as data] --> Mix{glued into SQL?}
+  Mix -->|yes| Parser[SQL parser reads extra grammar]
+  Mix -->|no| Bind["params tuple: company and note id"]
 ```
 
-The attacker is a member who types a note id that the SQL parser would treat as grammar, or anyone who steals the `app` role (3.3). Trust is the bound API in this lab. A live database is not in scope.
+Who can act: a member who types a note id that the SQL parser would treat as grammar, or anyone who steals the `app` role (3.3). What you trust in this practice: the bound API. A live database is not in scope.
 
-**Mechanism (not the property):** an ORM name, a WAF rule, or a denylist of quotes.
+**The tool (not the rule):** an ORM name, a web filter rule, or a denylist of quotes.
 
-## Mental model: three gates, not one sticker
+## Picture: three checks, not one sticker
 
 ```mermaid
 flowchart LR
-  G1["1.2 grant"] --> Handler[Handler]
+  G1["1.2 who-is-allowed"] --> Handler[Handler]
   G2[bound params] --> SQL[SQL session]
   G3["3.3 DB role"] --> PG[Postgres]
 ```
 
-Parameters without 1.2 still leak via legitimate queries. 1.2 without parameters still lets the parser rewrite the query. The `app` role without either still fails if someone concatenates.
+Parameters without 1.2 still leak through honest queries. Who-is-allowed without parameters still lets the parser rewrite the query. The `app` role without either still fails if someone concatenates.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | For this property |
+| Slice | For this rule |
 |---|---|
-| Root cause | Data and program mixed in one string |
-| Preconditions | `fetch_sql` returns a concatenated `str` |
-| Trigger | Hostile `note_id` (lab treats it as data only) |
-| Impact | Confidentiality/integrity of rows |
-| Prevention | Bind tenant and id; allow-list identifiers for ORDER BY |
-| Detection | `sql_error_spike`; `grant_drift` (3.3) |
-| Recovery | Rotate DB creds; restore if mutated |
+| Why it happens | Data and program mixed in one string |
+| What has to be true first | `fetch_sql` returns a concatenated `str` |
+| Trigger | Hostile `note_id` (this practice treats it as data only) |
+| What it costs | Secrecy and integrity of rows |
+| How you stop it | Bind tenant and note id as parameters; allow-list names for ORDER BY |
+| How you notice | `sql_error_spike`; `grant_drift` (3.3) |
+| How you recover | Rotate database passwords; restore if rows were changed |
 
-## Framework defaults versus the query guarantee
+## What the framework does vs what you still have to check
 
-SQLAlchemy `text()` with an f-string is still concat. An ORM `.filter` that interpolates a raw string is still concat. RLS left disabled “for tests” is not a grant table.
+SQLAlchemy `text()` with an f-string is still concat. An ORM `.filter` that interpolates a raw string is still concat. A row-level rule left off “for tests” is not a who-is-allowed table. The app's promise: `fetch_sql` is not a concatenated string. The folder is `labs/5.5/5.5-lab`. Fake data only. No live database.
 
-## Mechanism limits
+## What the tool cannot do
 
-- Bound ids plus missing 1.2 still leak via legitimate SELECTs.
-- Identifier injection in ORDER BY, table names, `COPY`, and search DSLs — named residual, not this fixture.
+- Bound ids plus missing 1.2 still leak through honest SELECTs.
+- Identifier injection in ORDER BY, table names, `COPY`, and search languages — named leftover, not this practice.
 - Replicas and backups still hold copies (5.1).
 
 ## Practice
 
 Draw data vs grammar for `fetch_sql`. Then run:
 
-```
+```text
 python3 -m pytest labs/5.5/5.5-lab/tests --impl vulnerable
 python3 -m pytest labs/5.5/5.5-lab/tests --impl fixed
 ```
 
 The first command must fail. The second must pass.
 
-## Transfer
+## Use it somewhere new
 
 Clinic search box. NoSQL operators and GraphQL args wait for 7.1.
 
-## Non-goals
+## What this page is not doing
 
-Live SQL attacks, weaponized cookbooks, dumping lab Python into notes. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not in this file.
+Live SQL attacks, weaponized cookbooks, dumping lab Python into notes. Course gates stay unclaimed. Answer keys are not in this file.

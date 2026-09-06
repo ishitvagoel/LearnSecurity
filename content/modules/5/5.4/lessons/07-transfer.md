@@ -1,27 +1,25 @@
-# 5.4-LO-07 — Transfer: SPA https URL vs http API socket
+# Same idea: an https page talking to an http API
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** RFC 9846 (final); OWASP ASVS 5.0.0 (final) `v5.0.0-12.2.1`. Pinning is a trade-off.
 
-## Change the workplace; keep socket-not-header
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` is false. Rewrite it for a clinic without changing the fork.
+The notes-app scaffolding goes away. You get a **clinic page** whose API client uses `https://` while the API socket is `http`. A dashboard that “forces HTTPS” sits next to that socket. Your job is to rewrite the loop, not to name a bug-list code.
 
-**Prompt:** Clinic SPA axios `https://` baseURL while the API socket is `http`. Also name mTLS service identity vs this header.
+The notes-app sentence was: `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` is false. Rewrite it for a clinic without changing the fork: a client header is not TLS.
 
-**Product sketch:** EHR-lite behind a dashboard that “forces HTTPS.”
+## Picture: the URL bar is not the socket
 
-Rewrite the SecureCollab sentence. Include:
+Renaming “notes app” to “clinic” is not transfer. The leftover changes. An https page does not authorize treating the API socket as TLS. A dashboard toggle is not the pytest.
 
-1. attacker capabilities (cleartext client setting Forwarded-Proto — not a live clinic);
-2. trust assumptions (which socket/bound LB is TCB; the dashboard toggle is not);
-3. forbidden outcome (`channel_is_https` true on header/socket mismatch, not “HIPAA”);
-4. a test idea on a **local** fixture only (header https + socket http is false);
-5. residual (TLS-to-LB; pinning vs breakage; OCSP/ECH Level 3);
-6. WCAG if a human certificate-warning path is in the claim (readable error, not a silent fail that pushes people onto http).
-
-## Mental model: the URL bar is not the socket
+| Notes app this week | Clinic sketch |
+|---|---|
+| `X-Forwarded-Proto: https` | Page API client `https://` |
+| `server_scheme http` | API socket `http` |
+| `channel_is_https` true on mismatch | Cookies and HSTS as if TLS |
+| Cleartext client setting the header | Same, plus a “Force HTTPS” tile |
+| Mutual TLS leftover | Service identity — **not** this header; **not** a live clinic |
 
 ```mermaid
 flowchart LR
@@ -29,24 +27,35 @@ flowchart LR
   Sock["API socket http"] --> Reality[Cleartext]
 ```
 
-If the SPA URL is https and the API socket is http, the cell is gone. FastAPI after `--proxy-headers *`, a “Force HTTPS” dashboard, and HSTS preload do not bind the socket. mTLS names a **peer**, which is a different cell: it still must not treat a client header as that peer.
+If the page URL is https and the API socket is http, the cell is gone. A server flag that trusts proxy headers from `*`, a “Force HTTPS” dashboard, and HSTS preload do not bind the socket. Mutual TLS names a **peer**, which is a different cell: it still must not treat a client header as that peer.
 
-The clinic rewrite still has to keep the SecureCollab fork: header https + socket http is false. Enabling a CDN “HTTPS only” tile while uvicorn trusts `X-Forwarded-Proto` from anyone leaves the confused deputy. The local pytest analogue is `test_client_forwarded_proto_is_not_tls` — on a fixture, not a live clinic.
+The clinic rewrite still has to keep the notes-app fork: header https + socket http is false. Enabling a CDN “HTTPS only” tile while the app trusts `X-Forwarded-Proto` from anyone leaves the confused deputy. The local pytest analogue is `test_client_forwarded_proto_is_not_tls` — on a fixture, not a live clinic.
 
-## What graders reject
+## Prompt — clinic page vs API socket
+
+Rewrite the notes-app sentence. Include:
+
+1. who can act (cleartext client setting Forwarded-Proto — **not** a live clinic);
+2. what you trust (which socket or bound load balancer is trusted; the dashboard toggle is not);
+3. what must not happen (`channel_is_https` true on header/socket mismatch, not a legal label);
+4. a test idea on **local** files only (header https + socket http is false — never on the real clinic);
+5. leftover (TLS to the load balancer; pinning versus breakage; OCSP / encrypted client hello as advanced extras);
+6. whether a human-read certificate warning must not use color as the only cue, and must not silently push people onto http.
+
+## What is not good enough
 
 | Reject | Why |
 |---|---|
 | “Force HTTPS is on” | Dashboard theater |
-| Live clinic probe | Lab policy |
-| Pinning as the property | Trade-off, and not this lab |
+| Live clinic probe | Course rules |
+| Pinning as the rule | Leftover, and not this practice |
 | HTTP 200 on port 443 as this cell | Wrong observation |
 | Client URL bar as TLS | Wrong hop |
 
 ## Practice
 
-One page. No keys. `labs/5.4/5.4-lab` is the only running system you may break. Do not probe a live host or paste cookies into a ticket.
+One page. No answer keys. The only running system you may break is `labs/5.4/5.4-lab`. Do not probe a live host or paste cookies into a ticket.
 
-## Non-goals
+## What this page is not doing
 
-Live-target TLS attacks. Real session cookies. Claiming Gate 5 from this page.
+Live-target TLS attacks. Real session cookies. Claiming a course gate from this page.

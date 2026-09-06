@@ -1,30 +1,33 @@
-# 5.2-LO-04 — Refuse encoding as the confidentiality mechanism
+# Refuse encoding as the secrecy tool
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-11.2.1` and `v5.0.0-11.3.3`. `v5.0.0-11.3.4` and `v5.0.0-11.1.4` (PQC plan) are **Level 3, advanced**.
 
-## Structural means the stored value is not reversible as encoding
+## The rule
 
-`protect` must not be Base64 of the plaintext. Structural means a keyed transform the storage observer cannot invert — not a denylist of “base64” in the function name, not a column rename, not HTTPS, not volume encryption.
+A column rename is not the fix. HTTPS is not the fix. Volume encryption is not the fix. A denylist of the word “base64” in the function name is not the fix.
 
-The smallest restore for SecureCollab Phase 1 note-body stand-in is: `protect` returns a value that does not round-trip as Base64, and `looks_encrypted` asserts a teaching flag. The lab’s `aesgcm:` prefix is a **teaching flag** that `looks_encrypted` can assert — not a cipher to copy into FastAPI. Fail-safe: if the AEAD library or key is missing, **do not store plaintext** (refuse write).
+The structural change is: the stored value is **not reversible as encoding**. Structural means a keyed transform the storage reader cannot invert — not a prettier name.
 
-## Mental model: stand-in, then a real AEAD in 5.3
+The smallest restore for a notes-app body stand-in is: `protect` returns a value that does not round-trip as Base64, and `looks_encrypted` asserts a teaching flag. The lab prefix `aesgcm:` is a **teaching flag** that `looks_encrypted` can assert — not a cipher to copy into FastAPI. Fail closed: if the encryption library or the key is missing, **do not store plaintext** (refuse the write).
+
+## Picture: stand-in now, real keys later
 
 ```mermaid
 flowchart TD
   Call[protect] --> Enc{"reversible as Base64?"}
-  Enc -->|yes| Fail[Property false]
+  Enc -->|yes| Fail[Rule false]
   Enc -->|no| Flag["aesgcm prefix - teaching only"]
-  Flag --> Keys["Real key lifecycle - 5.3"]
+  Flag --> Keys["Real key lifecycle - later"]
 ```
 
-The lab’s fixed tree prefixes `aesgcm:` plus length. Production still needs a validated AEAD (`v5.0.0-11.2.1`) and a key that is not in the same row (5.3). Argon2 on a note body is the wrong property. JWT is not encryption.
+The lab’s repaired files prefix `aesgcm:` plus length. Production still needs a reviewed authenticated-encryption library and a key that is not in the same row. Argon2 on a note body is the wrong rule. A JWT is not encryption.
 
-ASVS `v5.0.0-11.3.3` wants approved AEAD. This pytest is “not encoding,” not “we shipped AES-GCM.”
+Industry lists want approved authenticated encryption. This pytest is “not encoding,” not “we shipped AES-GCM.”
 
-## Why this restores the cell
+## What the repaired files must show
+
+Read `fixed/crypto.py` against this checklist. Do not treat the snippet as a production cipher.
 
 | After the fix | Must be true |
 |---|---|
@@ -32,36 +35,38 @@ ASVS `v5.0.0-11.3.3` wants approved AEAD. This pytest is “not encoding,” not
 | Base64 decode | not equal to `secret` |
 | `looks_encrypted` | true on the stand-in |
 
+Fail closed: if you cannot encrypt, the answer is refuse the write. Uncertainty is a **deny**, not a yes because the dashboard still showed “encrypted.”
+
 ## What this is not
 
-Volume encryption. HTTPS. Argon2 on a note body. JWT. ECB “because we need deterministic.” A cipher name in a README. Disk encryption as the column control.
+Volume encryption. HTTPS. Argon2 on a note body. JWT. ECB “because we need it deterministic.” A cipher name in a README. Disk encryption as the column control.
 
-## Mechanism limits
+## What the tool cannot do
 
 - The `aesgcm:` prefix is a stand-in, not AES-GCM.
-- Key in the same row, or a hardcoded key, waits for 5.3.
-- Nonce reuse (`v5.0.0-11.3.4` Level 3 advanced) is not this fixture.
-- TLS (5.4) does not encrypt the column.
-- Password hashing (RFC 9106) is a different field.
+- Key in the same row, or a hardcoded key, waits for a later lesson.
+- Nonce reuse is advanced work, not this fixture.
+- TLS does not encrypt the column.
+- Password hashing is a different field.
 
 ## Practice
 
-Name property and predicate (not Base64 of plaintext ∧ teaching flag). Run:
+Name the rule and the check (not Base64 of plaintext, and the teaching flag). Run:
 
 ```text
 python3 -m pytest labs/5.2/5.2-lab/tests --impl fixed
 ```
 
-Must pass.
+It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-## Transfer
+## Use it somewhere new
 
-Clinic: replace Base64 column with AEAD and a managed key (5.3), not a rename to `ssn_encrypted`.
+Clinic: replace a Base64 column with authenticated encryption and a managed key, not a rename to `ssn_encrypted`.
 
-## Residual risk
+## What can still go wrong
 
-Nonce reuse; key in the same row; stand-in mistaken for a shipped cipher; authorized operators who hold the key.
+Nonce reuse. Key in the same row. The stand-in mistaken for a shipped cipher. Operators who are allowed to hold the key.
 
-## Non-goals
+## What this page is not doing
 
-Do not copy the teaching prefix into production. Do not claim Gate 5 from a cipher product name.
+Do not copy the teaching prefix into production. Do not claim a course gate from a cipher product name.

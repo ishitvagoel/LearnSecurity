@@ -1,18 +1,27 @@
-# 5.1-LO-03 — Observe the leftover analytics body, do not trophy a warehouse dump
+# Practice: analytics still holds the note after delete
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-14.2.3` and `v5.0.0-14.2.4`. NIST Privacy Framework 1.0 (final) names Control outcomes; Privacy Framework 1.1 remains **draft**.
 
-## Authorized scope
+## Try it
 
-`labs/5.1/5.1-lab` only. The fixture is an in-process `delete_account` plus `body_retained` / `search_retained`. Synthetic user `alice` and body `secret`. It does not open PostgreSQL, S3, or a warehouse. Do not dump a live analytics store, an employer warehouse, or a classmate preview as this exercise.
+The practice is not a warehouse you attack. It is a tiny Python `delete_account` plus `body_retained` / `search_retained`. The failure is already in the functions: delete pops the notes map and leaves analytics. You are here to see that the check treats that leftover as a **failed rule**, not as a cleanup nit.
 
-**Forbidden outcome:** analytics (or search) still holds the note body after account deletion. After `delete_account("alice")`, `body_retained("alice")` returns `"secret"`.
+The rule under test:
 
-Attacker capability in this lab: an insider with SELECT on `ANALYTICS`, or a buyer of a “de-identified” export that still contains bodies. That stands in for a partner CSV, a search-index replica, or an appointment-card note that outlived the patient row. Trust assumption: `delete_account` is supposed to walk every listed copy. A DPA PDF, “we anonymized the user id,” and Postgres `DELETE FROM notes` are not in the TCB for this cell.
+> After `delete_account("alice")`, `body_retained("alice")` must be None. If it still returns `"secret"`, analytics still holds the note.
 
-## Mental model: notes gone, copies live
+## Where you may practice
+
+Only `labs/5.1/5.1-lab` is in scope. The maps are in-process: `delete_account` plus `body_retained` / `search_retained`. The user is the synthetic name `alice` and the body is `secret`. It does not open a database, object storage, or a warehouse.
+
+Do not dump a live analytics store. Do not dump an employer warehouse. Do not dump a classmate preview. Do not query a warehouse “to see what happens.”
+
+What you trust for this check: `delete_account` is supposed to walk every listed copy. A contract PDF, “we anonymized the user id,” and a database `DELETE FROM notes` are not what you trust.
+
+Who can still read it, in this story: an insider with SELECT on `ANALYTICS`, or a buyer of a “de-identified” export that still contains bodies. That stands in for a partner CSV, a search-index replica, or an appointment-card note that outlived the patient row.
+
+## Picture: notes gone, copies live
 
 ```mermaid
 flowchart TD
@@ -21,13 +30,13 @@ flowchart TD
   Skip --> Hit["body_retained returns secret"]
 ```
 
-The vulnerable tree demonstrates **cause** (copy missing from the graph), not a trophy dump of a production warehouse. Preconditions: `delete_account` only pops `NOTES`; `body_retained` still returns `ANALYTICS.get(user)`. You do not need a live warehouse query. You must not run one.
+The broken files take that path on purpose. You do not need a live warehouse query. You must not run one. The leftover still returning `"secret"` *is* the leak.
 
-ASVS `v5.0.0-14.2.4` wants documented retention implemented. Encryption of a warehouse you still keep is confidentiality theater, not this privacy cell.
+Industry lists want documented retention actually carried out. Encrypting a warehouse you still keep is secrecy theater, not this privacy check.
 
-## What to read in the fixture
+## What to look at — cause, not a dump
 
-`vulnerable/lifecycle.py` `delete_account` only pops `NOTES`. Tests:
+Read `vulnerable/lifecycle.py`. `delete_account` only pops `NOTES`. Tests:
 
 - `test_deleted_account_leaves_no_analytics_body`
 - `test_deleted_account_leaves_no_search_copy`
@@ -35,42 +44,47 @@ ASVS `v5.0.0-14.2.4` wants documented retention implemented. Encryption of a war
 
 You do not need a new store name. The failure of `test_deleted_account_leaves_no_analytics_body` *is* the evidence.
 
-Do not open the fixed tree yet. Diagnose the cause first.
+Do not open the repaired files yet. Diagnose the cause first.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+| What you see | What kind of failure | Not the lesson |
+|---|---|---|
+| Notes gone, analytics still has `secret` | Copy missing from the graph | “The notes row is gone” |
+| `body_retained` returns `ANALYTICS.get(user)` | Warehouse still holds the body | A privacy-law name |
+| Search left in place | Same leftover, other copy | A contract checkbox |
 
-| Slice | This lab |
+## Why it happens vs what it costs
+
+| Slice | Practice |
 |---|---|
-| Required property | After delete, analytics and search bodies are None |
-| Root cause | Secondary copy not in the deletion graph |
-| Preconditions | `delete_account` pops NOTES only |
+| Why it happens | A second copy was not in the deletion graph |
+| What has to be true first | `delete_account` pops NOTES only |
 | Trigger | `delete_account("alice")` then `body_retained("alice")` |
-| Impact | Privacy + leftover Confidential data (3.1) after the subject left (4.1) |
-| Prevention | Inventory copies; pop or unlink bodies in the same use-case |
-| Detection | `deleted_user_body_hits` by user id and store name; never the body |
-| Recovery | Purge partitions; named legal-hold owner (E6) |
-| Not the lesson | A privacy-law name, a DPA checkbox, or a live warehouse dump |
+| What it costs | Privacy plus leftover confidential data after the person left |
+| How you stop it later | Inventory the copies; pop or unlink bodies in the same delete |
+| How you notice later | `deleted_user_body_hits` by user id and store name; never the body |
+| How you recover later | Purge partitions; a named legal-hold owner |
+| Out of scope | A privacy-law name, a contract checkbox, or a live warehouse dump |
 
-## Framework defaults versus the deletion guarantee
-
-Postgres `DELETE FROM notes` is not warehouse DELETE. Next.js does not erase S3 analytics. FastAPI returning 200 on `/account` is not `body_retained is None`. The application guarantee is: **this** fixture, after delete, both copies are None.
+A database `DELETE FROM notes` is not warehouse DELETE. The web app does not erase object-store analytics. An HTTP 200 on `/account` is not `body_retained is None`. The app's promise this week is: **these** local files, after delete, both copies are None.
 
 ## Practice
+
+From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/5.1/5.1-lab/tests --impl vulnerable
 ```
 
-Record `test_deleted_account_leaves_no_analytics_body`. Do not weaken it to “the notes row is gone.” An environment error is not security evidence.
+Record the failing test `test_deleted_account_leaves_no_analytics_body`. Do not weaken it to “the notes row is gone.” An environment error is not security evidence.
 
-## Transfer
+## Use it somewhere new
 
-Clinic: patient deleted; appointment-card notes remain. Predict without leaving this directory. Do not query a live warehouse.
+Clinic: patient deleted; appointment-card notes remain. Predict, without leaving this directory, whether deleting the patient row clears the card. Do not query a live warehouse.
 
-## Usability
+## Can people still use it
 
-An unreachable delete-account journey is a privacy incident (1.4, WCAG 2.2). A mouse-only “delete” that people cannot complete leaves the copies in place.
+If people cannot reach delete-account with a keyboard, the copies stay. A mouse-only “delete” that people cannot complete is leftover retention, not a polish item.
 
-## Non-goals
+## What this page is not doing
 
-No live warehouse dumps. Synthetic bodies only.
+No live warehouse dumps. Synthetic bodies only. Do not “fix” the practice by deleting the test.

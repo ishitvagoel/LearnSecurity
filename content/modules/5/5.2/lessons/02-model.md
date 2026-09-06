@@ -1,69 +1,72 @@
-# 5.2-LO-02 — A crypto decision table a second engineer can test
+# A crypto decision table someone else can test
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-11.3.3`; RFC 9106 (final) for the password row only.
 
-## Can a second engineer name pytest cases from your table?
+## Could someone else name pytest cases from your table?
 
-“We use AES” is not this lesson. A reviewable model names **property, field, algorithm family, and what it is not**.
+“We use AES” is not this lesson. A map someone else can test names **the rule**, **the field**, **the algorithm family**, and **what it is not for**.
 
-SecureCollab Phase 1 freeze: local `protect` / `looks_encrypted`. Plaintext stand-in `secret`. No live KMS.
+This week's freeze: local `protect` / `looks_encrypted`. Plaintext stand-in `secret`. No live key service.
 
-## Mental model: four rows, four wrong tools
+> `protect("secret")` must not round-trip as Base64. If the table mixes rows, the wrong tool lands on the wrong field.
+
+## Picture: four rows, four wrong tools
 
 ```mermaid
 flowchart TD
-  Body[Note body at rest] --> AEAD[AEAD]
-  Pw[Password verifier] --> Argon["Argon2 RFC 9106"]
+  Body[Note body at rest] --> AEAD[Authenticated encryption]
+  Pw[Password verifier] --> Argon["Argon2 - passwords"]
   Token[Session token] --> MAC[MAC or server store]
-  Transit[On the wire] --> TLS["TLS 5.4"]
+  Transit[On the wire] --> TLS[HTTPS later]
 ```
 
 Using Argon2 on a note body, or Base64 on a password, mixes rows.
 
-## Mental model: the test is reversibility, not a product name
+## Picture: the test is reversibility, not a product name
 
 ```mermaid
 flowchart LR
   Out[protect output] --> B64{Base64 of secret?}
-  B64 -->|yes| Fail[Property false]
+  B64 -->|yes| Fail[Rule false]
   B64 -->|no| Flag{looks_encrypted?}
 ```
 
-## Step 1: freeze pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | storage observer; developer who named the column encrypted |
-| Objects | field `secret` at rest |
+| Who | Someone who can read storage; a developer who named the column encrypted |
+| What | field `secret` at rest |
 | Actions | `protect`; `looks_encrypted` |
-| Channels | DB column stand-in |
-| TCB | AEAD-shaped protect; keys in 5.3 |
-| Untrusted | Column name; “HTTPS therefore encrypted” |
-| State / time | Stolen disk later |
-| 1.1 cell | Confidentiality at rest |
+| Paths | Database column stand-in |
+| What you trust | An authenticated-encryption-shaped `protect`; keys later |
+| What you do not trust | The column name; “HTTPS therefore encrypted” |
+| Time | Stolen disk later |
+| The rule | The stored body stays secret |
 
-## Step 2: write cells
+## Step 2: write allow and deny
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
-| storage observer | Base64 field | recover plaintext | deny (must fail) |
-| app | AEAD stand-in | store | allow if not reversible as Base64 |
+| storage reader | Base64 field | recover plaintext | deny (must fail) |
+| app | authenticated-encryption stand-in | store | allow if not reversible as Base64 |
 | password path | note body | Argon2 | wrong row (named hole) |
+
+A missing “storage reader × Base64 field × deny” row is how encoding gets sold as encryption. Write the hole.
 
 ## Practice
 
-Draw the table. Point at `labs/5.2/5.2-lab` file `crypto.py`.
+Draw this table so someone else could name the pytest cases. Point at `labs/5.2/5.2-lab` file `crypto.py`. Your artifact is a versioned list (even a table in your notes) with field, tool, allow or deny, and what would show the deny is false. Fake data only.
 
-## Transfer
+## Use it somewhere new
 
-Password hashing vs field encryption vs backup encryption.
+Password hashing vs field encryption vs backup encryption. Three rows. Do not mix them.
 
-## Residual risk
+## What can still go wrong
 
-Memory dumps; authorized operators; real AEAD keys (5.3).
+Memory dumps. Operators who are allowed to hold the key. Real keys wait for a later lesson.
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+Do not define security as a famous-bugs list. Do not put keys in lessons. Do not run this map against a public clinic. Answer keys stay out of lessons.

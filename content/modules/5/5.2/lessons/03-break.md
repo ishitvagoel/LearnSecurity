@@ -1,18 +1,27 @@
-# 5.2-LO-03 — Observe Base64 labeled encryption, do not trophy a decoder
+# Practice: protect is reversible as Base64
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-11.3.3`. `v5.0.0-11.3.4` (nonce uniqueness) is **Level 3, advanced**, not this pytest.
 
-## Authorized scope
+## Try it
 
-`labs/5.2/5.2-lab` only. The fixture is an in-process `protect` / `looks_encrypted`. Synthetic plaintext `secret`. It does not open a database or a cipher library. Do not decode a live column, an employer backup, or a classmate dump as this exercise.
+The practice is not a website you attack. It is a tiny in-process `protect` / `looks_encrypted`. Fake plaintext `secret`. It does not open a database or a cipher library. You are here to see that the check treats Base64 labeled encryption as a **failed rule**, not as a trophy decoder.
 
-**Forbidden outcome:** `protect()` is reversible as Base64 to `secret`. `base64.b64decode(protect("secret"))` equals `"secret"`.
+The rule under test:
 
-Attacker capability in this lab: an honest storage observer — DBA, stolen disk, backup tape — who can read the column. That stands in for a clinic SSN column named `ssn_encrypted` that is still encoding. Trust assumption: `protect` is supposed to be irreversible as encoding. HTTPS, volume encryption, a column rename, and “we use AES” in a README are not in the TCB for this cell.
+> `protect("secret")` must not round-trip as Base64 of the plaintext. If `base64.b64decode(protect("secret"))` equals `"secret"`, encoding was sold as secrecy.
 
-## Mental model: reversible encoding
+## Where you may practice
+
+Only `labs/5.2/5.2-lab` is in scope. The maps are in-process. Restore the broken and repaired folders when you are done. Fake plaintext `secret` only.
+
+Do not decode a live column. Do not decode an employer backup. Do not decode a classmate dump. Do not “just try Base64” on someone else's file.
+
+What must not happen: `protect()` is reversible as Base64 to `secret`.
+
+Who can act here: an honest storage reader — a database admin, a stolen disk, a backup tape — who can read the column. That stands in for a clinic SSN column named `ssn_encrypted` that is still encoding. What you are supposed to trust: `protect` is not reversible as encoding. HTTPS, volume encryption, a column rename, and “we use AES” in a README are not what you trust for this cell.
+
+## Picture: reversible encoding
 
 ```mermaid
 flowchart TD
@@ -20,51 +29,57 @@ flowchart TD
   B64 --> Decode[decode equals secret]
 ```
 
-The vulnerable tree demonstrates **cause** (encoding named encryption), not a decoder script for production. Preconditions: `protect` returns `base64.b64encode(p)`; `looks_encrypted` is `t != "secret"`. You do not need a live column. You must not decode one.
+The broken files show **cause** (encoding named encryption), not a decoder script for production. What has to be true first: `protect` returns `base64.b64encode(p)`; `looks_encrypted` is `t != "secret"`. You do not need a live column. You must not decode one.
 
-ASVS `v5.0.0-11.3.3` wants approved AEAD, not encoding. RFC 9106 Argon2 is for **passwords**, not this field.
+Industry lists want approved authenticated encryption, not encoding. Argon2 is for **passwords**, not this field.
 
-## What to read in the fixture
+## What to look at — cause, not a trophy
 
-`vulnerable/crypto.py` `protect` Base64-encodes the string. Tests:
+Read `vulnerable/crypto.py`. `protect` Base64-encodes the string. Tests:
 
 - `test_protect_is_not_mere_encoding`
 - `test_protect_does_not_return_plaintext`
 
 You do not need a new cipher name. The failure of `test_protect_is_not_mere_encoding` *is* the evidence.
 
-Do not open the fixed tree yet. Diagnose the cause first.
+Do not open the repaired files yet. Diagnose the cause first.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+| What you see | What kind of failure | Not the lesson |
+|---|---|---|
+| `protect` returns Base64 | Encoding labeled encryption | “The bytes look scrambled” |
+| Decode equals `secret` | Reversible without a key | A cipher product name |
+| `looks_encrypted` is `t != "secret"` | Teaching flag on encoding | HTTPS or a live decoder |
 
-| Slice | This lab |
+## Why it happens vs what it costs
+
+| Slice | Practice |
 |---|---|
-| Required property | Stored value is not Base64 of the plaintext |
-| Root cause | Encoding labeled encryption |
-| Preconditions | `protect` returns Base64; decode equals `secret` |
+| Required rule | Stored value is not Base64 of the plaintext |
+| Why it happens | Encoding labeled encryption |
+| What has to be true first | `protect` returns Base64; decode equals `secret` |
 | Trigger | `protect("secret")` then Base64 decode |
-| Impact | Confidentiality of the body vs any column reader |
-| Prevention | AEAD with a managed key (5.3); refuse encoding as `protect` |
-| Detection | Known-plaintext Base64 round-trip in CI |
-| Recovery | Re-protect with AEAD; rotate keys (5.3) |
-| Not the lesson | A cipher product name, HTTPS, or a live decoder |
+| What it costs | The body is readable to any column reader |
+| How you stop it later | Authenticated encryption with a managed key; refuse encoding as `protect` |
+| How you notice later | Known-plaintext Base64 round-trip in CI |
+| How you recover later | Re-protect with real encryption; rotate keys later |
+| Out of scope | A cipher product name, HTTPS, or a live decoder |
 
-## Framework defaults versus the confidentiality guarantee
-
-Postgres `bytea` is not AEAD. FastAPI will store whatever string you hand it. Next.js does not encrypt the column. The application guarantee is: **this** fixture, Base64 decode of `protect("secret")` is not `"secret"`.
+Postgres `bytea` is not authenticated encryption. FastAPI will store whatever string you hand it. Next.js does not encrypt the column. The app's promise this week is: **these** local files, Base64 decode of `protect("secret")` is not `"secret"`.
 
 ## Practice
+
+From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/5.2/5.2-lab/tests --impl vulnerable
 ```
 
-Record `test_protect_is_not_mere_encoding`. Do not add a live decoder against other hosts. An environment error is not security evidence.
+Record the failing test `test_protect_is_not_mere_encoding`. Do not add a live decoder against other hosts. An environment error is not security evidence.
 
-## Transfer
+## Use it somewhere new
 
-Clinic SSN column labeled `ssn_encrypted`. Predict without leaving this directory. Do not query a live EHR.
+Clinic SSN column labeled `ssn_encrypted`. Predict, without leaving this directory, whether the label keeps the number secret. Do not query a live clinic system.
 
-## Non-goals
+## What this page is not doing
 
-No live-target instructions. Synthetic plaintext only.
+No live-target instructions. Synthetic plaintext only. Do not “fix” the practice by deleting the test.

@@ -1,71 +1,74 @@
-# 5.5-LO-02 — A three-gate map a second engineer can test
+# A three-check map someone else can test
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.2.4`, `v5.0.0-8.4.1`.
 
-## Can a second engineer name pytest cases from your query map?
+## Could someone else name the checks?
 
-“We use an ORM” is not this lesson. A reviewable model names **what is SQL text, what is a bound parameter, and which role runs it**.
+“We use an ORM” is not this lesson. A map someone else can test names **what is SQL text**, **what is a bound parameter**, and **which role runs it**.
 
-SecureCollab Phase 1 freeze: local `fetch_sql(tenant, note_id)` / `is_bound`. No live PostgreSQL.
+This week's freeze: local `fetch_sql(tenant, note_id)` and `is_bound`. No live PostgreSQL.
 
-## Mental model: SQL text is TCB; values are not
+> Bind tenant and note id as parameters. The parser must receive a fixed program. Company and id travel beside it.
+
+## Picture: SQL text is trusted; values are not
 
 ```mermaid
 flowchart TD
-  Sql["SELECT body FROM notes WHERE tenant=%s AND id=%s"] --> TCB[Lab TCB]
+  Sql["SELECT body FROM notes WHERE tenant=%s AND id=%s"] --> TCB[What you trust in the lab]
   Tenant[tenant] --> Untrusted[Untrusted data]
   NoteId[note_id] --> Untrusted
 ```
 
-The parser must receive a fixed program. Tenant and id travel beside it.
+The parser must receive a fixed program. Tenant and id travel beside it, not inside it.
 
-## Mental model: RLS is not the grant table
+## Picture: a row-level rule is not the who-is-allowed table
 
 ```mermaid
 flowchart TD
-  RLS[RLS policy] --> Extra[Extra gate]
-  Grant["1.2 grant table"] --> Authz[Authorization]
+  RLS[Later row-level rule] --> Extra[Extra check]
+  Grant["1.2 who-is-allowed"] --> Authz[Authorization]
   RLS -.->|not a substitute| Authz
 ```
 
-PostgreSQL RLS is platform. Module 3.3 already refused RLS as a replacement for 1.2. This module refuses it as a replacement for parameters.
+A later row-level rule in PostgreSQL is platform. Module 3.3 already refused it as a replacement for 1.2. This module refuses it as a replacement for parameters.
 
-## Step 1: freeze pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | member; stolen `app` role |
-| Objects | note row; SQL text vs params |
+| Who | member; stolen `app` role |
+| What | note row; SQL text vs params |
 | Actions | `fetch_sql`, `is_bound` |
-| Channels | SQL session |
-| TCB | Bound API (`psycopg`-style parameters) |
-| Untrusted | `note_id`, sort columns, search `q` |
-| State / time | One request; migrations and replicas residual |
-| 1.1 cell | Confidentiality/integrity of rows |
+| Paths | SQL session |
+| What you trust | Bound API (`psycopg`-style parameters) |
+| What you do not trust | `note_id`, sort columns, search `q` |
+| Time | One request; migrations and replicas leftover |
+| The rule | Secrecy and integrity of rows |
 
-## Step 2: write cells
+## Step 2: write allow and deny
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
-| app | tenant + id | query as params | bound |
+| app | company + id | query as params | bound |
 | attacker | id field | as SQL grammar | deny |
 | migrator | DDL | run | offline role |
 | analyst | bodies | SELECT | 3.3 cell |
 
+A missing “hostile note id × SQL grammar × deny” row is how concatenated SQL appears. Write the hole.
+
 ## Practice
 
-Draw the three gates. Point at `labs/5.5/5.5-lab` file `query.py`.
+Draw the three checks so someone else could name the pytest cases. Point at `labs/5.5/5.5-lab` file `query.py`. Fake data only.
 
-## Transfer
+## Use it somewhere new
 
-Clinic search box as a second interpreter (query DSL).
+Clinic search box as a second interpreter (query language).
 
-## Residual risk
+## What can still go wrong
 
-DB superuser tools; replicas; ORDER BY identifiers.
+Database superuser tools; replicas; ORDER BY identifiers.
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+Do not define security as a famous-bugs list. Do not run this map against a live clinic or a live database. Answer keys stay out of lessons.

@@ -1,82 +1,81 @@
-# 5.2-LO-01 — Encoding is not confidentiality
+# Encoding is not secrecy
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-11.2.1`, `v5.0.0-11.3.2`, `v5.0.0-11.3.3`; `v5.0.0-11.3.4` and `v5.0.0-11.1.4` are **Level 3, advanced**. RFC 9106 Argon2 (final) is for **passwords**, not this field. Fernet still needs 5.3 key storage.
 
-## The claim this module owns
+## The rule
 
-SecureCollab Phase 1 stores a note-body stand-in at rest. Confidentiality vs an honest storage observer is not “we Base64ed it.” Encoding, hex, and rot13 are reversible without a key. HTTPS (5.4) does not encrypt the column. Password hashing (RFC 9106) is a different property for a different field.
+The notes app stores a stand-in for a note body. Secrecy against someone who can read the stored field is not “we Base64ed it.” Encoding, hex, and rot13 reverse without a key. HTTPS encrypts the hop. It does not encrypt the column. Password hashing is a different rule for a different field.
 
-> `protect("secret")` must not round-trip as Base64 of the plaintext. `looks_encrypted` is a teaching flag, not AES-GCM. The fixed `aesgcm:` prefix in the lab is a **stand-in**, not a cipher you should ship.
+> `protect("secret")` must not round-trip as Base64 of the plaintext. `looks_encrypted` is a teaching flag, not AES-GCM. The lab prefix `aesgcm:` is a **stand-in**, not a cipher you should ship.
 
-The forbidden outcome is **protect() reversible as Base64 to `secret`**. That is a 1.1 confidentiality failure: any reader of the stored field gets the body.
+What must not happen: **`protect()` reversible as Base64 to `secret`**. Anyone who can read the stored field gets the body. That is a secrecy failure of the stored note. Encoding is not confidentiality.
 
-ASVS `v5.0.0-11.2.1` wants industry-validated implementations. `v5.0.0-11.3.2` / `v5.0.0-11.3.3` want approved AEAD (AES-GCM class), not ECB and not encoding. `v5.0.0-11.4.2` is password KDF — named so you do **not** apply it to note bodies. `v5.0.0-11.3.4` (nonce uniqueness) and `v5.0.0-11.1.4` (PQC migration plan) are **Level 3 (advanced)**.
+Industry lists want a real, reviewed encryption library, not encoding dressed up as encryption. They want authenticated encryption (AES-GCM class), not ECB and not Base64. Password stretching (Argon2) is for passwords, not note bodies. Unique nonces and a post-quantum plan are advanced work, not this week's check. Keys still wait for a later lesson.
 
-## Mental model: encoding vs encryption
+## Picture: encoding vs encryption
 
 ```mermaid
 flowchart TD
   Plain[secret] --> B64["Base64 - reversible"]
-  Plain --> AEAD["AEAD with a key - 5.3"]
+  Plain --> AEAD["Authenticated encryption with a key - later"]
   B64 --> Observer[Storage reader gets secret]
   AEAD --> NeedKey[Need the key]
 ```
 
-The attacker is an operator who can read the column, or a stolen disk of the lab dict. Trusting the column name `encrypted_body` is not a TCB.
+The person who can hurt you here is an operator who can read the column, or someone with a stolen disk of the lab dict. Trusting the column name `encrypted_body` is not what you trust.
 
-**Mechanism (not the property):** Fernet, libsodium, or “we enabled at-rest encryption on the volume.”
+**The tool (not the rule):** Fernet, libsodium, or “we turned on disk encryption.”
 
-## Mental model: pick the property first
+## Picture: pick the rule first
 
 ```mermaid
 flowchart LR
-  Conf[Confidentiality] --> AEAD2[AEAD]
-  Int[Integrity] --> MAC[MAC or AEAD tag]
+  Conf[Secrecy] --> AEAD2[Authenticated encryption]
+  Int[Integrity] --> MAC[MAC or encryption tag]
   Auth[Authenticity] --> Sig[Signature]
-  Pw[Password at rest] --> KDF["Argon2 - RFC 9106"]
+  Pw[Password at rest] --> KDF["Argon2 - passwords only"]
 ```
 
-A stronger algorithm does not fix a missing key story (5.3) or nonce reuse (`v5.0.0-11.3.4` advanced).
+A stronger algorithm does not fix a missing key story (later) or nonce reuse (advanced, later).
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | For this property |
+| Slice | For this rule |
 |---|---|
-| Root cause | Mechanism name “encrypted” applied to encoding |
-| Preconditions | `protect` returns Base64 of plaintext |
-| Trigger | Storage observer reads the field |
-| Impact | Confidentiality of the stored secret |
-| Prevention | Standard AEAD with a managed key; tests forbid Base64 identity |
-| Detection | Known-plaintext Base64 round-trip in CI |
-| Recovery | Rotate keys; re-protect; treat as leak |
+| Why it happens | The name “encrypted” was stuck on encoding |
+| What has to be true first | `protect` returns Base64 of the plaintext |
+| Trigger | Someone who can read storage reads the field |
+| What it costs | The stored secret is no longer secret |
+| How you stop it | Real authenticated encryption with a managed key; tests forbid Base64 identity |
+| How you notice | Known-plaintext Base64 round-trip in CI |
+| How you recover | Rotate keys; re-protect; treat it as a leak |
 
-## Framework defaults versus the confidentiality guarantee
+## What the framework does vs what you still have to check
 
-passlib/bcrypt is for passwords, not note bodies. Disk encryption is not application-level confidentiality vs a DB admin. Oracle: `labs/5.2/5.2-lab`. No live KMS.
+Password libraries are for passwords, not note bodies. Disk encryption is not app-level secrecy against a database admin. The app's promise: Base64 decode of `protect("secret")` is not `"secret"`. The local check is `labs/5.2/5.2-lab`. Fake data only. No live key service.
 
-## Mechanism limits
+## What the tool cannot do
 
-- AES-GCM with nonce reuse is not this lab — name the misuse; do not paste attack scripts.
-- Key in the same row; client-only “encryption” with the key in the bundle (8.1).
-- JWT is a format (4.3), not encryption.
+- AES-GCM with a reused nonce is not this lab — name the misuse; do not paste attack scripts.
+- Key sitting in the same row; “encryption” only on the client with the key in the download (later, phones).
+- A JWT is a format (earlier), not encryption.
 
 ## Practice
 
-Table: property vs algorithm vs what it is *not* for. Then run:
+Make a small table: rule vs algorithm vs what it is *not* for. Then run:
 
-```
+```text
 python3 -m pytest labs/5.2/5.2-lab/tests --impl vulnerable
 python3 -m pytest labs/5.2/5.2-lab/tests --impl fixed
 ```
 
 The first command must fail. The second must pass.
 
-## Transfer
+## Use it somewhere new
 
-Clinic: SSN column labeled “encrypted” that is Base64.
+Clinic: an SSN column labeled “encrypted” that is Base64.
 
-## Non-goals
+## What this page is not doing
 
-Live ciphertext attacks, rolling a cipher, real SSN values. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not in this file.
+Live ciphertext attacks, rolling your own cipher, real SSN values. Course gates stay unclaimed. Answer keys are not in this file.

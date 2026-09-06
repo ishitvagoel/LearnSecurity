@@ -1,52 +1,62 @@
-# 5.5-LO-07 — Transfer: clinic search box
+# Same idea on a clinic search box
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.2.4`. NoSQL/GraphQL wait for 7.1.
 
-## Change the workplace; keep data-vs-grammar
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: `fetch_sql` returns a bound structure, not a concatenated string. Rewrite it for a clinic without changing the fork.
+The notes-app scaffolding goes away. You get a **clinic search box** that builds a patient lookup. Your job is to rewrite the loop, not to name a bug-list code.
 
-**Prompt:** Clinic search box that builds a patient lookup. Also name NoSQL operators and GraphQL arguments as the same shape (7.1), without running those systems.
+The notes-app sentence was: `fetch_sql` returns a bound pair, not a concatenated string. Bind tenant and note id as parameters. Rewrite it for a clinic without changing the fork: the lookup helper returns bound values, not glued query text.
 
-**Product sketch:** EHR-lite “quick search” that concatenates the box into SQL or into a query DSL.
+Also name NoSQL operators and GraphQL arguments as the same shape (7.1), without running those systems.
 
-Rewrite the SecureCollab sentence. Include:
+## Picture: the search box is still an interpreter
 
-1. attacker capabilities (clinician or kiosk user supplying search text — not a live clinic);
-2. trust assumptions (which API binds values; the ORM brand is not TCB);
-3. forbidden outcome (`fetch`-like function returns concatenated query text, not “HIPAA”);
-4. a test idea on a **local** fixture only (shape is a tuple, not a `str`);
-5. residual (ORDER BY identifiers; replicas; RLS theater; Level 3 logging);
-6. WCAG if a human “search failed” path is in the claim (readable error, not a silent empty list that hides a parser crash).
+Renaming “note id” to “search box” is not transfer. The untrusted string changes. The fork does not.
 
-## Mental model: the search box is still an interpreter
+| Notes app this week | Clinic sketch |
+|---|---|
+| `note_id` glued into SQL | Search-box text glued into SQL or a query language |
+| `fetch_sql` | Patient-lookup helper |
+| Bound `(sql, params)` | Bound lookup string |
+| Member supplying note id | Clinician or kiosk user supplying search text — **not** a live clinic |
 
 ```mermaid
 flowchart LR
   Box[search box] --> Belief[UI believes it is text]
-  DSL[query DSL or SQL] --> Reality[grammar mixed with data]
+  DSL[query language or SQL] --> Reality[grammar mixed with data]
 ```
 
-If the search box is concatenated into SQL (or into a query DSL), the cell is gone. FastAPI, SQLAlchemy, and “RLS is on” do not bind the box. Quote denylists fail the 2.1 encoding lesson. GraphQL arguments and NoSQL operators are the same shape in 7.1 — name them, do not run those systems here.
+If the search box is concatenated into SQL (or into a query language), the check is gone. FastAPI, SQLAlchemy, and “row-level security is on” do not bind the box. Quote denylists fail the encoding lesson from 2.1. GraphQL arguments and NoSQL operators are the same shape in 7.1 — name them, do not run those systems here.
 
-The clinic rewrite still has to keep the SecureCollab fork: the lookup helper returns `(sql, params)` (or an ORM bound construct), not a concatenated `str`. Switching to SQLAlchemy while interpolating the box into `text()` leaves the interpreter mixed. The local pytest analogue is `test_query_is_bound_not_concatenated` — on a fixture, not a live EHR.
+The clinic rewrite still has to keep the notes-app fork: the lookup helper returns `(sql, params)` (or an ORM bound construct), not a concatenated `str`. Switching to SQLAlchemy while interpolating the box into `text()` leaves the interpreter mixed. The local pytest analogue is `test_query_is_bound_not_concatenated` — on a fixture, not a live clinic system.
 
-## What graders reject
+## Prompt — clinic search box
+
+Rewrite the notes-app sentence. Include:
+
+1. who can act (clinician or kiosk user supplying search text — not a live clinic);
+2. what you trust (which API binds values; the ORM brand is not);
+3. what must not happen (`fetch`-like function returns concatenated query text, not a legal label);
+4. a test idea on a **local** fixture only (shape is a tuple, not a `str` — never on the real clinic);
+5. leftover (ORDER BY identifiers; replicas; row-level-rule theater; advanced logging);
+6. whether a human-read “search failed” status must not use color as the only cue (readable error, not a silent empty list that hides a parser crash).
+
+## What is not good enough
 
 | Reject | Why |
 |---|---|
 | “ORM is on” | Brand theater |
-| Live clinic probe | Lab policy |
-| RLS as the property | Extra gate, not this cell |
+| Live clinic probe | Course rules |
+| Row-level rule as the rule | Extra check, not this cell |
 | HTTP 200 as binding evidence | Wrong observation |
-| Scanner SQLi name as the invariant | Awareness after the cause |
+| Scanner name as the invariant | Awareness after the cause |
 
 ## Practice
 
-One page. No keys. `labs/5.5/5.5-lab` is the only running system you may break. Do not probe a live database.
+One page. No answer keys. The only running system you may break is `labs/5.5/5.5-lab`. Do not probe a live database.
 
-## Non-goals
+## What this page is not doing
 
-Live-target SQL. Real patient rows. Claiming Gate 5 from this page.
+Live-target SQL. Real patient rows. Claiming a course gate from this page.

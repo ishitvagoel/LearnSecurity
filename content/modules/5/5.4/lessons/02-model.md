@@ -1,16 +1,17 @@
-# 5.4-LO-02 — A hop map a second engineer can test
+# A hop map someone else can test
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** RFC 9846 (final); OWASP ASVS 5.0.0 (final) `v5.0.0-12.2.1`.
 
-## Can a second engineer name pytest cases from your hop map?
+## Could someone else name the checks?
 
-“We enabled HTTPS” is not this lesson. A reviewable model names **each hop and who is allowed to assert the scheme**.
+“We enabled HTTPS” is not this lesson. A map someone else can test names **each hop and who is allowed to assert the scheme**.
 
-SecureCollab Phase 1 freeze: local `channel_is_https(headers, server_scheme)`. No live LB.
+This week’s freeze: local `channel_is_https(headers, server_scheme)`. No live load balancer.
 
-## Mental model: three hops
+> `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` must be false. If a hop is missing from the map, a client header can still count as TLS.
+
+## Picture: three hops
 
 ```mermaid
 flowchart LR
@@ -18,52 +19,54 @@ flowchart LR
   Edge --> App[App socket]
 ```
 
-Only a **bound** edge may forward proto. This lab has none, so `server_scheme` is the only input.
+Only a **bound** edge may forward proto. This practice has none, so `server_scheme` is the only input.
 
-## Mental model: header is untrusted data
+## Picture: the header is untrusted data
 
 ```mermaid
 flowchart TD
   Hdr[X-Forwarded-Proto] --> Untrusted[Client-controlled]
-  Sock[server_scheme] --> TCB[Lab TCB]
+  Sock[server_scheme] --> Trust[What you trust]
 ```
 
-Module 2.2 used hop vs cache key. Here the hop is the channel authenticity cell.
+An earlier topic used hop versus cache key. Here the hop is the channel-authenticity cell.
 
-## Step 1: freeze pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | cleartext client; app |
-| Objects | channel scheme |
+| Who | cleartext client; app |
+| What | channel scheme |
 | Actions | `channel_is_https` |
-| Channels | socket; optional Forwarded header |
-| TCB | server_scheme in this lab |
-| Untrusted | X-Forwarded-Proto from anyone |
-| State / time | cookie flags decided now |
-| 1.1 cell | Authenticity of transport |
+| Paths | socket; optional Forwarded header |
+| What you trust | `server_scheme` in this practice |
+| What you do not trust | `X-Forwarded-Proto` from anyone |
+| Time | cookie flags decided now |
+| The rule | Authenticity of the transport |
 
-## Step 2: write cells
+## Step 2: write allow and deny
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
 | socket https | channel | treat as TLS | allow |
 | socket http | channel | treat as TLS | deny |
 | client header https + socket http | channel | treat as TLS | deny |
-| bound LB (named residual) | proto | assert | not in this fixture |
+| bound load balancer (named leftover) | proto | assert | not in this fixture |
+
+A missing “header https × socket http × deny” row is how the client header still counts as TLS. Write the hole.
 
 ## Practice
 
-Draw the hops. Point at `labs/5.4/5.4-lab` file `channel.py`.
+Draw this map so someone else could name the pytest cases. Point at `labs/5.4/5.4-lab` file `channel.py`. Your artifact is a versioned list (even a table in your notes) with hop, who may assert proto, allow or deny, and what would show the deny is false. Fake data only.
 
-## Transfer
+## Use it somewhere new
 
-mTLS service identity. SPA axios baseURL.
+Clinic: mutual TLS as service identity. A page’s API client `https://` is not the API socket.
 
-## Residual risk
+## What can still go wrong
 
-TLS-to-LB not e2e; pinning trade-off; OCSP/ECH Level 3.
+TLS to the load balancer is not end-to-end. Pinning is leftover. OCSP stapling and encrypted client hello are advanced extras.
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+Do not define security as a famous-bugs list. Do not run this map against a public clinic or a live load balancer. Answer keys stay out of lessons.

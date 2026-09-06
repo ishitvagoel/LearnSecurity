@@ -1,27 +1,28 @@
-# 5.2-LO-07 — Transfer: SSN column labeled encrypted that is Base64
+# Same idea: a column labeled encrypted that is Base64
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-11.3.3`; RFC 9106 (final) if a password row appears. RFC 9106 is for **passwords**, not the SSN field.
 
-## Change the workplace; keep encoding-is-not-confidentiality
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: `protect("secret")` must not round-trip as Base64. Rewrite it for a clinic without changing the fork.
+The notes-app scaffolding goes away. You get a **clinic SSN column**. The label on the column says encrypted. The bytes are Base64. Your job is to rewrite the loop, not to name a bug-list code.
 
-**Prompt:** Clinic: SSN column labeled “encrypted” that is Base64. Also name password hashing vs field AEAD vs backup encryption.
+The notes-app sentence was: `protect("secret")` must not round-trip as Base64. Rewrite it for a clinic without changing the fork: encoding is not secrecy.
 
-**Product sketch:** EHR-lite with an `ssn_encrypted` column.
+**Prompt:** Clinic: SSN column labeled “encrypted” that is Base64. Also name password hashing vs field encryption vs backup encryption.
 
-Rewrite the SecureCollab sentence. Include:
+**Product sketch:** a small clinic record with an `ssn_encrypted` column.
 
-1. attacker capabilities (DB admin; stolen disk — not a live clinic);
-2. trust assumptions (which AEAD+key is TCB; the column name is not);
-3. forbidden outcome (Base64 round-trip of the stand-in, not “HIPAA”);
-4. a test idea on a **local** fixture only (decode of `protect(ssn)` is not the SSN);
-5. residual (key in the same row; nonce reuse Level 3; TLS ≠ at rest);
-6. WCAG only if a human “show SSN” path is in the claim (masked until explicit view — `v5.0.0-14.2.6` is Level 3 elsewhere).
+## Picture: the label is not the tool
 
-## Mental model: the label is not the mechanism
+Renaming “secret” to “SSN” is not transfer. The leftover changes. A column named `ssn_encrypted` does not authorize leaving the bytes as Base64. A disk-encryption checkbox is not the pytest.
+
+| Notes app this week | Clinic sketch |
+|---|---|
+| `protect("secret")` | `protect` analogue on the SSN stand-in |
+| Base64 of the body | Base64 of the SSN |
+| Storage reader | Database admin; stolen disk — **not** a live clinic |
+| Teaching flag `aesgcm:` | Column name `ssn_encrypted` is still not the tool |
 
 ```mermaid
 flowchart LR
@@ -29,24 +30,35 @@ flowchart LR
   B64 --> Reader[Admin reads SSN]
 ```
 
-If the column name is `ssn_encrypted` and the bytes are Base64, the cell is gone. FastAPI, a Postgres `bytea` type, and a disk-encryption checkbox do not invert the observer. Argon2 on the SSN is the wrong property (password KDF, not field AEAD). HTTPS does not encrypt the column.
+If the column name is `ssn_encrypted` and the bytes are Base64, the cell is gone. FastAPI, a Postgres `bytea` type, and a disk-encryption checkbox do not invert the reader. Argon2 on the SSN is the wrong rule (password stretching, not field encryption). HTTPS does not encrypt the column.
 
-The clinic rewrite still has to keep the SecureCollab fork: Base64 decode of the stored stand-in is not the SSN. Renaming the column or wrapping `b64encode` in a function named `encrypt` leaves the observer unchanged. The local pytest analogue is `test_protect_is_not_mere_encoding` — on a fixture, not a live EHR.
+The clinic rewrite still has to keep the notes-app fork: Base64 decode of the stored stand-in is not the SSN. Renaming the column or wrapping `b64encode` in a function named `encrypt` leaves the reader unchanged. The local pytest analogue is `test_protect_is_not_mere_encoding` — on a fixture, not a live clinic system.
 
-## What graders reject
+## Prompt — clinic SSN column
+
+Rewrite the notes-app sentence. Include:
+
+1. who can act (database admin; stolen disk — **not** a live clinic);
+2. what you trust (which authenticated encryption plus key is trusted; the column name is not);
+3. what must not happen (Base64 round-trip of the stand-in, not a legal label);
+4. a test idea on **local** files only (decode of `protect(ssn)` is not the SSN — never on the real clinic);
+5. leftover (key in the same row; nonce reuse is advanced; HTTPS is not at rest);
+6. whether a human “show SSN” path must stay masked until an explicit view — do not use color as the only cue.
+
+## What is not good enough
 
 | Reject | Why |
 |---|---|
-| “Disk encryption is on” | Wrong observer |
-| Live clinic DB | Lab policy |
-| Argon2 on the SSN | Wrong property |
+| “Disk encryption is on” | Wrong reader |
+| Live clinic database | Course rules |
+| Argon2 on the SSN | Wrong rule |
 | HTTPS as at-rest encryption | Wrong hop |
-| HTTP 200 as confidentiality evidence | Wrong observation |
+| HTTP 200 as secrecy evidence | Wrong observation |
 
 ## Practice
 
-One page. No keys. `labs/5.2/5.2-lab` is the only running system you may break. Do not decode a live column.
+One page. No answer keys. The only running system you may break is `labs/5.2/5.2-lab`. Do not decode a live column.
 
-## Non-goals
+## What this page is not doing
 
-Live-target decoders. Real SSNs. Claiming Gate 5 from this page.
+Live-target decoders. Real SSNs. Claiming a course gate from this page.
