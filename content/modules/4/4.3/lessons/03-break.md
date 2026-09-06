@@ -1,49 +1,49 @@
-# 4.3 — Sessions, cookies, and tokens (3 Break)
+# 4.3-LO-03 — Observe the query token accepted, do not trophy a log
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** ASVS 5.0.0 V3/V7 (final); OWASP Session Management. JWT is a token format, not an architecture.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-14.2.1`.
 
-## Property (start here)
+## Authorized scope
 
-A session token in the query string is not an acceptable session. Access tokens belong in Cookie (HttpOnly, 2.3) or Authorization, never in logs and Referer.
+`labs/4.3/4.3-lab` only. Synthetic token `secret`. No live access logs.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Session established from a query-string token.
 
-- **Attacker:** Referer leak to a CDN; access-log operator; shared screenshot of a URL.
-- **Trust:** Local request dict. Real TLS still leaks query to files and analytics.
-**Forbidden outcome:** Session established from a query-string token
+## Mental model: query wins
 
-**Authorized scope:** `labs/4.3/4.3-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable token.py accepts query sessions.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: session_from_request reads access_token query.
-
-## Vulnerable fixture (local)
-
-```python
-def session_from_request(query: dict, cookie: dict, header: str | None) -> str | None:
-    return query.get("access_token") or cookie.get("sc_session") or header
+```mermaid
+flowchart TD
+  Req["query access_token=secret"] --> Parse[session_from_request]
+  Parse --> Sess["returns secret"]
+  Sess --> Log[Would appear in URL copies]
 ```
+
+The vulnerable tree demonstrates **cause** (token in a logged channel), not a trophy dump of production logs.
+
+## What to read in the fixture
+
+`vulnerable/token.py` returns `query.get("access_token")` first. Tests require that path to yield `None`, while cookie and Authorization still work on the fixed tree.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Token placed in a logged, shared channel. |
-| Impact | Session theft without XSS. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Token placed in a logged, shared channel |
+| Impact | Session secret in logs, Referer, history |
+| Not the lesson | A JWT algorithm name |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/4.3/4.3-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/4.3/4.3-lab/tests --impl vulnerable
+```
+
+Record `test_query_string_token_is_rejected`. Do not weaken it to “we use HTTPS.”
 
 ## Transfer
 
-Magic-link email (still a URL token — time-bound, one-time, 6.6).
+Clinic deep link with `?token=`. Predict without leaving this directory.
 
 ## Non-goals
 

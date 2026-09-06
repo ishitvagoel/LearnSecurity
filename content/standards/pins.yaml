@@ -39,7 +39,7 @@ pins:
     reviewedAt: "2026-08-29"
     url: "https://owasp.org/www-project-application-security-verification-standard/"
     role: "Web/API security requirements and assurance baseline"
-    notes: "Project page confirms latest stable 5.0.0 released 30 May 2025. The 2026-08-29 Module 1.3 check used the immutable v5.0.0 tag. 2026-09-06 Modules 2.1–4.1 pinned as listed in those module.yaml files. Module 3.4 used v5.0.0-2.1.3/2.2.2/2.3.2/2.3.4 and labeled v5.0.0-2.3.5 Level 3 advanced. Module 4.1 used v5.0.0-7.4.2 and v5.0.0-7.4.1 (session termination on delete) and labeled v5.0.0-6.5.6 Level 3 advanced. API Top 10:2023 API4/API6 stay awareness. Use exact v5.0.0-<chapter>.<section>.<requirement> identifiers; do not mix ASVS 4.x IDs. Level 3 guidance is labeled advanced. Module 1.1 intentionally does not map ASVS requirements."
+    notes: "Project page confirms latest stable 5.0.0 released 30 May 2025. The 2026-08-29 Module 1.3 check used the immutable v5.0.0 tag. 2026-09-06 Modules 2.1–4.5 pinned as listed in those module.yaml files. Module 4.2 used v5.0.0-6.3.3 (MFA; Level 3 phishing-resistant hardware labeled advanced). Module 4.3 used v5.0.0-14.2.1 (no secrets in query strings). Module 4.4 used v5.0.0-8.2.2 / 8.4.1 (object and cross-tenant; 8.3.2 / 8.3.3 labeled Level 3 advanced). Module 4.5 used v5.0.0-10.3.1 (resource-server audience; 10.3.5 labeled Level 3 advanced). Use exact v5.0.0-<chapter>.<section>.<requirement> identifiers; do not mix ASVS 4.x IDs. Level 3 guidance is labeled advanced. Module 1.1 intentionally does not map ASVS requirements."
   - id: owasp-threat-modeling
     source: OWASP Threat Modeling Project
     version: "maintained-project-guidance"
@@ -66,7 +66,7 @@ pins:
     reviewedAt: "2026-08-23"
     url: "https://pages.nist.gov/800-63-4/"
     role: "Identity proofing, authentication, federation; customer-experience and friction as security outcomes"
-    notes: "Suite final (Rev. 4); superseded Rev. 3. This module uses risk/CX/friction language, not the full authenticator catalog (that is 4.1–4.2). Also https://csrc.nist.gov/pubs/sp/800/63/4/final"
+    notes: "Suite final (Rev. 4); superseded Rev. 3. Module 4.2 uses 800-63B-4 authenticator and phishing-resistance language; WebAuthn origin binding is the lab oracle, not the full catalog. Also https://csrc.nist.gov/pubs/sp/800/63/4/final"
   - id: wcag-2.2
     source: W3C Web Content Accessibility Guidelines
     version: "2.2"
@@ -75,7 +75,16 @@ pins:
     reviewedAt: "2026-08-23"
     url: "https://www.w3.org/TR/WCAG22/"
     role: "Accessibility baseline for security-sensitive web journeys"
-    notes: "W3C Recommendation 12 December 2024. Does not deprecate 2.0/2.1. Security flows must not be mouse-only, visual-only, or memory-only."
+    notes: "W3C Recommendation 12 December 2024. Does not deprecate 2.0/2.1. Security flows must not be mouse-only, visual-only, or memory-only. Module 4.2 treats a broken accessible WebAuthn path as a security residual that pushes people to shared passwords."
+  - id: w3c-webauthn-l3
+    source: W3C Web Authentication (WebAuthn) Level 3
+    version: "Level 3"
+    status: candidate
+    publishedAt: "2025"
+    reviewedAt: "2026-09-06"
+    url: "https://www.w3.org/TR/webauthn-3/"
+    role: "Origin-scoped public-key credentials; not an authorization mechanism"
+    notes: "W3C Candidate Recommendation per the 2026-08-23 curriculum snapshot — label CR, not Recommendation. Module 4.2 models origin/RP ID binding; HTML autocomplete=webauthn is not the ceremony. Do not treat a vendor passkey dashboard as this property."
   - id: owasp-samm-2
     source: OWASP Software Assurance Maturity Model
     version: "2.0"
@@ -147,7 +156,7 @@ pins:
     reviewedAt: "2026-09-06"
     url: "https://owasp.org/API-Security/editions/2023/en/0x00-header/"
     role: "API risk-awareness regression only; not the syllabus"
-    notes: "Module 3.4 maps API4 Unrestricted Resource Consumption and API6 Unrestricted Access to Sensitive Business Flows as awareness after the product-cap invariant is taught. Do not treat API4/API6 as the definition of the share-cap property."
+    notes: "Module 3.4 maps API4 and API6 as awareness after the product-cap invariant. Module 4.4 maps API1/API3/API5 as awareness after the object-and-tenant matrix is taught. Do not treat API1 as the definition of the grant-on-n1 property."
   - id: nist-sp-800-218-ssdf
     source: NIST SP 800-218 Secure Software Development Framework (SSDF)
     version: "1.1"
@@ -157,3 +166,39 @@ pins:
     url: "https://csrc.nist.gov/pubs/sp/800/218/final"
     role: "Secure development practice vocabulary; not a control catalogue for tenant isolation"
     notes: "SSDF 1.1 (SP 800-218) remains the final baseline. SP 800-218 Rev. 1 / SSDF 1.2 is an Initial Public Draft (17 Dec 2025); comment period closed 30 Jan 2026 and is still draft. Module 3.3 uses 1.1 only for design-review vocabulary (PW.1 design); architecture guarantees are the DB-role tests, not an SSDF attestation."
+  - id: rfc-9700-oauth-security
+    source: IETF RFC 9700 Best Current Practice for OAuth 2.0 Security
+    version: "RFC 9700"
+    status: final
+    publishedAt: "2025-01"
+    reviewedAt: "2026-09-06"
+    url: "https://datatracker.ietf.org/doc/html/rfc9700"
+    role: "OAuth 2.0 security BCP (BCP 240); not an authorization matrix"
+    notes: "Standards Track / BCP, January 2025. Module 4.5 uses it as the OAuth 2.0 security baseline alongside the resource-server audience check. It does not replace ASVS v5.0.0-10.3.1 tests."
+  - id: rfc-10017-oauth-browser
+    source: IETF RFC 10017 OAuth 2.0 for Browser-Based Applications
+    version: "RFC 10017"
+    status: final
+    publishedAt: "2026-08"
+    reviewedAt: "2026-09-06"
+    url: "https://datatracker.ietf.org/doc/html/rfc10017"
+    role: "Browser-based OAuth client threat model (BCP 212)"
+    notes: "Best Current Practice, August 2026. Live-checked 2026-09-06 on the datatracker. Module 4.5 names SPA vs BFF token placement; the lab oracle is still audience, not a full browser-app suite. Do not confuse with RFC 8252 (native)."
+  - id: rfc-8252-oauth-native
+    source: IETF RFC 8252 OAuth 2.0 for Native Apps
+    version: "RFC 8252"
+    status: final
+    publishedAt: "2017-10"
+    reviewedAt: "2026-09-06"
+    url: "https://datatracker.ietf.org/doc/html/rfc8252"
+    role: "Native-app OAuth redirects and PKCE"
+    notes: "BCP 212 for native apps. Module 4.5 / 8.3 treat claimed HTTPS redirects as the recommended pattern and custom schemes as a residual. PKCE is named; this lab does not execute it."
+  - id: oauth-2.1-draft
+    source: OAuth 2.1 Authorization Framework
+    version: "Internet-Draft"
+    status: draft
+    publishedAt: "2025"
+    reviewedAt: "2026-09-06"
+    url: "https://datatracker.ietf.org/doc/draft-ietf-oauth-v2-1/"
+    role: "Useful direction for OAuth; never represented as a final standard"
+    notes: "Internet-Draft as of the 2026-08-23 curriculum snapshot and rechecked 2026-09-06. Module 4.5 must label OAuth 2.1 as draft. Do not treat a vendor 'OAuth 2.1' dashboard as RFC 9700 or ASVS v5.0.0-10.3.1."

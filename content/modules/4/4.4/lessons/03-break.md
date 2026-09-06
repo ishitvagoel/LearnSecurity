@@ -1,54 +1,51 @@
-# 4.4 — Authorization and tenant isolation (3 Break)
+# 4.4-LO-03 — Observe the ambient grant, do not trophy an IDOR
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** ASVS 5.0.0 V4 (final); Saltzer complete mediation; API1/API3/API5 as awareness after the matrix.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.2` and `v5.0.0-8.4.1`.
 
-## Property (start here)
+## Authorized scope
 
-A share grant for note n1 is not a grant for n2. Object-level authorization (1.2) on the grant table. Login + “shared something” is ambient.
+`labs/4.4/4.4-lab` only. Synthetic notes `n1`/`n2`/`n3`. No live tenants.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Grant on n1 authorizes n2 (and owner/admin costumes that cross tenants or skip the object key).
 
-- **Attacker:** Member with a grant on n1 who swaps note_id; IDOR enumerator.
-- **Trust:** Local grants dict. SQL still needs 5.5.
-**Forbidden outcome:** Grant on n1 authorizes n2
+## Mental model: any-grant becomes every-note
 
-**Authorized scope:** `labs/4.4/4.4-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable grant.py treats any grant as global.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: can_read(bob, n2) true because bob has n1.
-
-## Vulnerable fixture (local)
-
-```python
-GRANTS = {("bob", "n1"): True}
-
-def reset():
-    GRANTS.clear(); GRANTS[("bob", "n1")] = True
-
-def can_read(user: str, note_id: str) -> bool:
-    return any(u == user for (u, _n) in GRANTS)
+```mermaid
+flowchart TD
+  Seed["GRANTS bob n1"] --> Check["can_read bob n2"]
+  Check --> Any{"any row for bob?"}
+  Any -->|yes| True["returns true"]
+  Role["eve role admin"] --> Any2{"role owner or admin?"}
+  Any2 -->|yes| Cross["reads acme n1"]
 ```
+
+The vulnerable tree demonstrates **cause** (wrong lookup key), not a trophy dump of another tenant’s note body.
+
+## What to read in the fixture
+
+`vulnerable/grant.py` `can_read` returns true if *any* grant exists for the user, or if the user’s role is `owner` or `admin`. It never compares `note_id` or tenant. Tests require n2, n3, and eve×n1 to stay false, and honest n1 / owner-n2 to stay true.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Collection-level “has any grant” flag. |
-| Impact | Unauthorized read of n2 body. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Collection-level flag and role costume |
+| Impact | Unauthorized read of n2 or clinic notes |
+| Not the lesson | A scanner “IDOR” name as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/4.4/4.4-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/4.4/4.4-lab/tests --impl vulnerable
+```
+
+Record `test_grant_on_n1_is_not_grant_on_n2` and the cross-tenant names. Do not weaken them to “bob is logged in.”
 
 ## Transfer
 
-Property-level: bob can read title but not body (7.2).
+Clinic: shared appointment A, swapped chart id. Predict without leaving this directory.
 
 ## Non-goals
 

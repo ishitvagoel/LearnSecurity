@@ -1,50 +1,53 @@
-# 4.2 — Authentication and phishing-resistant authenticators (4 Build)
+# 4.2-LO-04 — Only origin-bound WebAuthn may claim resistance
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** NIST SP 800-63B-4 (final); WebAuthn Level 3 is a **W3C Candidate Recommendation** — label CR, not Rec; WCAG 2.2 for the journey; ASVS 5.0.0 V6.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** WebAuthn Level 3 (**CR**); OWASP ASVS 5.0.0 (final) `v5.0.0-6.3.3`.
 
-## Property (start here)
+## Structural means evil origin cannot pass as resistant
 
-A password check that ignores origin is not phishing-resistant. WebAuthn to evil.example must fail even if the secret/credential exists. Passwords to the real origin are still phishable — do not advertise them as resistant.
+`phishing_resistant` must return false unless the method is `webauthn` **and** `origin == expected`. Structural means origin/RP ID is in the predicate — not a denylist of hostnames, not `autocomplete=webauthn`, not “users are trained.”
 
-## Attacker capabilities and trust assumptions
+## Mental model: method then origin
 
-- **Attacker:** Lookalike origin; intercepted password; fatigued user.
-- **Trust:** Lab origin binding. Real authenticators later; this fixture models origin check.
-Only webauthn + matching origin returns True.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-def phishing_resistant(method: str, origin: str, expected: str) -> bool:
-    if method != "webauthn":
-        return False
-    return origin == expected
+```mermaid
+flowchart TD
+  Call[phishing_resistant] --> M{method is webauthn?}
+  M -->|no| False[Not resistant]
+  M -->|yes| O{"origin equals expected?"}
+  O -->|no| False
+  O -->|yes| True[Resistant to this phishing class]
 ```
+
+Passwords at the real origin may still authenticate; they must not be *labeled* resistant. OTP is the same.
 
 ## Why this restores the cell
 
-WebAuthn origin/RP ID binding; do not call passwords resistant.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| password + evil | false |
+| otp + evil | false |
+| webauthn + evil | false |
+| webauthn + real | true |
 
 ## What this is not
 
-HTML autocomplete=webauthn is not a ceremony.
-
-WebAuthn does not authorize (1.2). Recovery paths can re-introduce phishable secrets (1.4, 4.1).
+Any 2FA. WebAuthn as 1.2. SMS recovery as default. Level 3 hardware clause as an unlabeled baseline.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name method, origin, predicate. Run:
+
+```
+python3 -m pytest labs/4.2/4.2-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Step-up for export: still origin-bound?
+Step-up for export still needs origin binding.
 
 ## Residual risk
 
-Users with only passwords — honest residual, not a slogan.
+Password-only users; recovery paths; compromised authenticator.

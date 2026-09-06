@@ -1,6 +1,6 @@
 # 4.5 — OAuth, OpenID Connect, browser apps, and native apps
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. No exploit walkthroughs.
 
 ## Identity
 
@@ -9,71 +9,76 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** OAuth, OpenID Connect, browser apps, and native apps
 - **phase / track / difficulty:** 4 / core / intermediate
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Blueprint §7; 1.1–4.4 authored. 4.3 refused JWT-as-architecture; this module adds audience.
 - **routeTags:** complete, web-api
 - **releaseMilestone:** M1
 - **masteryGate:** 4
 
 ## Objective hierarchy
 
-1. Produce **Protocol sequence diagrams and redirect tests** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce **protocol sequence diagrams and redirect/audience tests** for SecureCollab Phase 1 (code+PKCE named; lab executes `aud`).
+2. Name attacker capabilities (wrong-audience bearer; confused deputy; custom-scheme intercept) and trust assumptions (signature without `aud` is not enough).
+3. Transfer: clinic wrong-aud FHIR token; RFC 8252 native redirect vs BFF/SPA.
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+4.3 token channel; 4.4 object grants after a valid audience; 4.1 leftover tokens; 8.3 native redirects later.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- OIDC login replaces your matrix.
+- JWT means OAuth is done.
+- Mobile custom scheme is a safe redirect.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+Session channel (4.3) → this module’s audience and client shape → 4.4 on the note → 8.3 native redirects.
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true if a token minted for another API is presented?
+- What fails if only the signature is checked?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can go wrong with SPA token storage vs BFF (`v5.0.0-10.1.1`)?
+- What residual remains without PKCE, mix-up defenses, or sender-constraining?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/4.5/4.5-lab`. Forbidden: JWT with wrong or missing audience accepted as a SecureCollab session. No live IdPs. OAuth 2.1 labeled draft.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-ASVS V10; RFC 9700; RFC 10017; RFC 8252 — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- IETF RFC 9700 / BCP 240 (final) OAuth 2.0 security.
+- IETF RFC 10017 / BCP 212 (final, August 2026) browser-based apps.
+- IETF RFC 8252 (final) native apps.
+- OWASP ASVS 5.0.0 (final): `v5.0.0-10.3.1`, `v5.0.0-10.1.1`, `v5.0.0-10.2.1`, `v5.0.0-10.5.4`; `v5.0.0-10.3.5` **Level 3, labeled advanced**.
+- OAuth 2.1 **Internet-Draft**.
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+New client type, redirect URI, token format, or superseding RFC/ASVS.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: Protocol sequence diagrams and redirect tests.
+Evidence: sequence diagrams and malicious-client/redirect tests. Lab freeze is audience. Feeds M1 / Gate 4.
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`jwt_aud_mismatch`; revoke client; never log raw tokens.
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: audience-is-a-name mental models; RFC 9700 / 10017 / 8252; ASVS v5.0.0-10.3.1; 10.3.5 labeled Level 3 advanced; OAuth 2.1 draft |

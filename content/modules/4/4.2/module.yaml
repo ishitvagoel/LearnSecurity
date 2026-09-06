@@ -7,7 +7,7 @@ difficulty: intermediate
 status: reviewed
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 1.1–2.4 Pass A complete
+- Prior phase Pass A per blueprint §7; 1.1–4.1 Pass A complete
 routeTags:
 - complete
 - web-api
@@ -20,11 +20,13 @@ outcomes:
 - Do not instruct live-target attacks or mix awareness lists as compliance
 reviewTriggers:
 - Material SecureCollab change in this module's concern
+- New recovery path or step-up ceremony
 - Superseding final standard
 invariants:
 - Claims are properties of SecureCollab (or the elective system), not tool names
 - Labs stay in authorized local or official training scope
 - Draft standards are labeled draft
+- Passwords and OTP are not phishing-resistant
 threatModelPrompts:
 - What can go wrong for this module's assets?
 - Which trust boundary or interpreter is in play?
@@ -36,35 +38,35 @@ concepts:
 learningObjects:
 - id: 4.2-LO-01
   kind: concept-model
-  title: 'Authentication and phishing-resistant authenticators: property vs mechanism'
+  title: A password at a lookalike origin is not phishing-resistant
   path: lessons/01-property.md
 - id: 4.2-LO-02
   kind: design-exercise
-  title: Model SecureCollab for 4.2
+  title: An authenticator record a second engineer can test
   path: lessons/02-model.md
 - id: 4.2-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: Password (or wrong-origin WebAuthn) counted as phishing-resistant'
+  title: 'Local fixture: Password or wrong-origin WebAuthn counted as phishing-resistant'
   path: lessons/03-break.md
 - id: 4.2-LO-04
   kind: design-exercise
-  title: Structural fix restoring the 4.2 invariant
+  title: Only origin-bound WebAuthn may claim resistance
   path: lessons/04-build.md
 - id: 4.2-LO-05
   kind: verification-lab
-  title: Forbidden-outcome tests for 4.2
+  title: Fail-on-vulnerable then pass-on-fixed for origin binding
   path: lessons/05-verify.md
 - id: 4.2-LO-06
   kind: operations-exercise
-  title: Detect/recover notes for 4.2
+  title: Detect wrong-origin WebAuthn; revoke without logging secrets
   path: lessons/06-operate.md
 - id: 4.2-LO-07
   kind: transfer-challenge
-  title: 'Transfer: Clinic staff SSO portal.'
+  title: 'Transfer: clinic SSO and step-up export'
   path: lessons/07-transfer.md
 - id: 4.2-LO-08
   kind: code-review
-  title: Seeded review for 4.2
+  title: Seeded review of resistant-password claim
   path: lessons/08-review.md
 labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
@@ -90,27 +92,40 @@ assessmentBlueprint:
   communicate: Residual risk without compliance theater
 masteryGate: '4'
 standardsRefs:
-- source: OWASP ASVS / module anchors (see spec)
-  version: 5.0.0
+- source: OWASP Application Security Verification Standard
+  version: '5.0.0'
   status: final
   requirementIds:
-  - V6
+  - v5.0.0-6.3.3
   url: https://owasp.org/www-project-application-security-verification-standard/
-- source: W3C WebAuthn Level 3
+- source: W3C Web Authentication (WebAuthn) Level 3
   version: Level 3
   status: candidate
   requirementIds:
-  - webauthn
+  - origin-binding
   url: https://www.w3.org/TR/webauthn-3/
+- source: NIST SP 800-63-4 Digital Identity Guidelines
+  version: '4'
+  status: final
+  requirementIds:
+  - '800-63B-4'
+  url: https://pages.nist.gov/800-63-4/
+- source: W3C Web Content Accessibility Guidelines
+  version: '2.2'
+  status: final
+  requirementIds:
+  - '2.1.1'
+  - '1.4.1'
+  url: https://www.w3.org/TR/WCAG22/
 misconceptions:
 - Any 2FA is phishing-resistant
 - WebAuthn replaces authorization
 - Usable login is a nice-to-have
 operationalConsiderations:
 - webauthn_fail_origin; recovery_used (higher risk).
-- Users with only passwords — honest residual, not a slogan.
+- Password-only users are an honest residual.
 author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+reviewer: pending independent quality and lab-safety review
 lastReviewedAt: '2026-08-24'
 nextReviewAt: '2027-02-24'
 changelog:
@@ -128,3 +143,7 @@ changelog:
 - date: '2026-08-24'
   note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
     Pass C keys isolated'
+- date: '2026-09-06'
+  note: 'Depth pass: origin-binding mental models, mermaid diagrams, ASVS v5.0.0-6.3.3
+    with Level 3 hardware clause labeled advanced, WebAuthn L3 labeled CR; independent
+    review still required'

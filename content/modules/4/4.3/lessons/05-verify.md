@@ -1,38 +1,45 @@
-# 4.3 — Sessions, cookies, and tokens (5 Verify)
+# 4.3-LO-05 — Evidence is query yields None, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** ASVS 5.0.0 V3/V7 (final); OWASP Session Management. JWT is a token format, not an architecture.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-14.2.1`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A session token in the query string is not an acceptable session. Access tokens belong in Cookie (HttpOnly, 2.3) or Authorization, never in logs and Referer.
+“We set Referrer-Policy” is not evidence that the parser ignores query tokens. The oracle is the local pair.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Referer leak to a CDN; access-log operator; shared screenshot of a URL.
-- **Trust:** Local request dict. Real TLS still leaks query to files and analytics.
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail query returns secret"]
+  X["--impl fixed"] --> P["Must pass query None; cookie works"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Session established from a query-string token |
-| Failure | Fail closed: Reject query tokens; use cookie/header |
+| Negative / abuse | query `access_token` → `None` |
+| Normal | cookie `sc_session` still works |
+| Header | Authorization still works |
+| Not claimed | Production Referer; magic-link (6.6) |
 
-Lab tests: `test_property.py` under `labs/4.3/4.3-lab`.
+Lab tests in `labs/4.3/4.3-lab/tests/test_property.py`:
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Session established from a query-string token`
-- `--impl fixed`: **pass**
+```
+python3 -m pytest labs/4.3/4.3-lab/tests --impl vulnerable
+python3 -m pytest labs/4.3/4.3-lab/tests --impl fixed
+```
 
-query-only request yields no session.
+## What the tests do not prove
+
+- HttpOnly flag on the wire (2.3)
+- Log redaction of other fields (3.1)
+- Clinic deep links (transfer)
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Magic-link email (still a URL token — time-bound, one-time, 6.6).
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic deep link. A test that only asserts HTTP 200 is not channel evidence (see 9.3).

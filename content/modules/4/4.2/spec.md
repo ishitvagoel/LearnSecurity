@@ -1,6 +1,6 @@
 # 4.2 — Authentication, phishing resistance, and usable access
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. No exploit walkthroughs.
 
 ## Identity
 
@@ -9,71 +9,75 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** Authentication, phishing resistance, and usable access
 - **phase / track / difficulty:** 4 / core / intermediate
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Blueprint §7; 1.1–4.1 authored.
 - **routeTags:** complete, web-api
 - **releaseMilestone:** M1
 - **masteryGate:** 4
 
 ## Objective hierarchy
 
-1. Produce **Authenticator decision record, accessible-flow review** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce an **authenticator decision record and accessible-flow review** for SecureCollab Phase 1 (password/OTP phishable; WebAuthn origin-bound).
+2. Name attacker capabilities (lookalike origin; intercepted password) and trust assumptions (URL-reading is not a TCB).
+3. Transfer: clinic staff SSO; step-up for export still origin-bound.
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+1.1 authenticity; 1.2 after session mint; 1.4 usable path; 4.1 leftover sessions.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- Any 2FA is phishing-resistant.
+- WebAuthn replaces authorization.
+- Usable login is a nice-to-have.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+Lifecycle (4.1) → this module’s authenticator × origin → 4.3 session channel → 4.5 federation.
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true if the user types a password at evil.example?
+- What fails if WebAuthn ignores RP ID?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can go wrong with OTP as “MFA”?
+- What residual remains for password-only users?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/4.2/4.2-lab`. Forbidden: password or wrong-origin WebAuthn counted as phishing-resistant. No live phishing sites.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-NIST SP 800-63B-4; ASVS V6; WCAG 2.2; WebAuthn L3 CR — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- NIST SP 800-63B-4 (final).
+- W3C WebAuthn Level 3 **Candidate Recommendation**.
+- OWASP ASVS 5.0.0 `v5.0.0-6.3.3` (Level 2 MFA; Level 3 hardware phishing-resistant **labeled advanced**).
+- WCAG 2.2 (final).
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+New recovery path; WebAuthn becoming Rec; new step-up.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: Authenticator decision record, accessible-flow review.
+Evidence: authenticator decision record, accessible-flow review. Feeds M1.
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`webauthn_fail_origin`; `recovery_used`. Do not log secrets.
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: origin-binding models; WebAuthn labeled CR |

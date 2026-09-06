@@ -1,36 +1,44 @@
-# 4.5 — OAuth, OIDC, and delegated authorization (6 Operate)
+# 4.5-LO-06 — Detect jwt_aud_mismatch; revoke without logging tokens
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** RFC 9700 OAuth 2.0 Security BCP (final); RFC 8252 native apps (final); OIDC Core 1.0 (final); ASVS 5.0.0 V10. JWT *aud* is this lab’s cell, not “we use OAuth.”
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-10.3.1`.
 
-## Property (start here)
+## Prevention is not absolute
 
-A bearer JWT with the wrong audience must be rejected. Tokens for other-api are not sessions for securecollab-api. Delegation is not authentication theater.
+A leaked token for this audience still spends until expiry or sender-constraint. Pair detect and recover. Do not log raw tokens or note bodies (3.1, 4.3).
 
-## Attacker capabilities and trust assumptions
+## Mental model: mismatch is a signal
 
-- **Attacker:** Stolen token minted for another API; confused deputy client.
-- **Trust:** Local aud check. Real JWKS, iss, nonce, PKCE in the full protocol — named as residual here.
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Bearer[Presented token] --> Aud{aud matches?}
+  Aud -->|no| Metric["jwt_aud_mismatch += 1"]
+  Metric --> Alert["reason=jwt_aud_mismatch expected=securecollab-api"]
+  Alert --> Revoke[Revoke client and rotate if JWT]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | Reject metric by aud. |
-| Signal (no bodies) | jwt_aud_mismatch; client_revoked. |
-| Revoke / recover | Revoke client; rotate keys. |
-| Residual | Full OAuth (PKCE, state, nonce, sender-constraining) not in this micro-fixture. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `jwt_aud_mismatch`; `client_revoked` |
+| Signal | expected aud, token id or hash, client id; never the raw token |
+| Recover | Revoke client; rotate signing keys if tokens self-verify |
+| Residual | PKCE/nonce/DPoP not in this fixture |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/4.5/4.5-lab`.
+Write one log line you would accept. Tie it to `labs/4.5/4.5-lab`.
+
+```
+log_denied reason=jwt_aud_mismatch expected_aud=securecollab-api client_id=sc_web request_id=req_45oa
+```
+
+Reject any line that includes a raw JWT or a note body.
 
 ## Transfer
 
-Mobile redirect (8.3, RFC 8252) and BFF vs SPA token storage.
+Clinic: detect FHIR tokens with the wrong hospital aud; do not paste the token into the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+SIEM product names are not the property.

@@ -1,38 +1,47 @@
-# 4.5 — OAuth, OIDC, and delegated authorization (5 Verify)
+# 4.5-LO-05 — Evidence is wrong-aud false, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** RFC 9700 OAuth 2.0 Security BCP (final); RFC 8252 native apps (final); OIDC Core 1.0 (final); ASVS 5.0.0 V10. JWT *aud* is this lab’s cell, not “we use OAuth.”
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-10.3.1`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A bearer JWT with the wrong audience must be rejected. Tokens for other-api are not sessions for securecollab-api. Delegation is not authentication theater.
+“OIDC is configured” is not evidence. The oracle is the local pair.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Stolen token minted for another API; confused deputy client.
-- **Trust:** Local aud check. Real JWKS, iss, nonce, PKCE in the full protocol — named as residual here.
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail other-api and missing aud"]
+  X["--impl fixed"] --> P["Must pass the same denies"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | JWT with wrong audience accepted as a SecureCollab session |
-| Failure | Fail closed: Exact aud match (or constrained list) |
+| Negative / abuse | `aud=other-api` and missing `aud` are false |
+| Normal | expected `aud` is true |
+| Not claimed | PKCE; JWKS; DPoP; 1.2 on notes |
 
-Lab tests: `test_property.py` under `labs/4.5/4.5-lab`.
+Lab tests in `labs/4.5/4.5-lab/tests/test_property.py`:
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `JWT with wrong audience accepted as a SecureCollab session`
-- `--impl fixed`: **pass**
+```
+python3 -m pytest labs/4.5/4.5-lab/tests --impl vulnerable
+python3 -m pytest labs/4.5/4.5-lab/tests --impl fixed
+```
 
-wrong aud false; expected aud true.
+The honest expected-aud test may pass on both. That does not excuse the deny tests.
+
+## What the tests do not prove
+
+- PKCE / `state` / `nonce` (`v5.0.0-10.1.2`, `v5.0.0-10.2.1`)
+- BFF token confinement (`v5.0.0-10.1.1`)
+- Sender-constrained tokens (`v5.0.0-10.3.5` Level 3 advanced)
+- Note authorization (4.4)
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Mobile redirect (8.3, RFC 8252) and BFF vs SPA token storage.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic FHIR. A test that only asserts HTTP 200 is not audience evidence (see 9.3).

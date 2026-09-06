@@ -9,11 +9,11 @@ Authorization and tenant isolation
 ## Evidence checklist
 
 - [ ] Executable authorization matrix and cross-tenant tests
-- [ ] Transfer task (Clinic: grant on appointment A ≠ chart B.)
+- [ ] Transfer task (Clinic: grant on appointment A ≠ chart B)
 - [ ] Lab `labs/4.4/4.4-lab`: forbidden outcome **Grant on n1 authorizes n2**
-- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: authz_deny{object}; grant_table_drift.
+- [ ] Operate signal without note bodies / secrets: `authz_deny`; `grant_table_drift`
 
 ## Rubric
 

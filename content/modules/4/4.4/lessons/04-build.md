@@ -1,53 +1,57 @@
-# 4.4 — Authorization and tenant isolation (4 Build)
+# 4.4-LO-04 — Key the grant by tenant and note id
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** ASVS 5.0.0 V4 (final); Saltzer complete mediation; API1/API3/API5 as awareness after the matrix.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.2`, `v5.0.0-8.3.1`, `v5.0.0-8.4.1`.
 
-## Property (start here)
+## Structural means the lookup is on this object
 
-A share grant for note n1 is not a grant for n2. Object-level authorization (1.2) on the grant table. Login + “shared something” is ambient.
+`can_read` must deny unless tenant matches **and** the user is the note owner **or** `GRANTS[(user, note_id)]` is true. Structural means the object is mediated — not a denylist of yesterday’s ids, not “hide the button,” not UUID length.
 
-## Attacker capabilities and trust assumptions
+## Mental model: deny default, then two keys
 
-- **Attacker:** Member with a grant on n1 who swaps note_id; IDOR enumerator.
-- **Trust:** Local grants dict. SQL still needs 5.5.
-can_read('bob','n2') False.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-GRANTS = {("bob", "n1"): True}
-
-def reset():
-    GRANTS.clear(); GRANTS[("bob", "n1")] = True
-
-def can_read(user: str, note_id: str) -> bool:
-    return bool(GRANTS.get((user, note_id)))
+```mermaid
+flowchart TD
+  Call["can_read user note_id"] --> Known{note and principal exist?}
+  Known -->|no| Deny[Deny]
+  Known -->|yes| Ten{"same tenant?"}
+  Ten -->|no| Deny
+  Ten -->|yes| Own{"owner or grant on this id?"}
+  Own -->|no| Deny
+  Own -->|yes| Allow[Allow]
 ```
+
+Fail-safe: missing note, missing user, or missing grant is **deny**. Do not fail open because the id “looks valid.”
 
 ## Why this restores the cell
 
-Grant keyed by note id; deny default.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| bob × n1 | allow (honest grant) |
+| bob × n2 | deny |
+| alice × n2 | allow (owner) |
+| alice × n3 | deny (cross-tenant) |
+| eve × n1 | deny (admin ≠ acme) |
+| eve × n3 | deny (admin ≠ object grant) |
 
 ## What this is not
 
-Depends(get_user) is not Depends(can_read_note).
-
-UUID obscurity is not a grant.
+`Depends(get_user)`. Signed ids as capabilities. Casbin file without tests. RLS as a substitute (5.5). Worker `user_id` (7.4 / `v5.0.0-8.3.3` advanced).
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name subject, tenant, object, and predicate. Run:
+
+```
+python3 -m pytest labs/4.4/4.4-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Property-level: bob can read title but not body (7.2).
+Clinic: appointment grant table keyed by chart id and tenant, not by “clinician role.”
 
 ## Residual risk
 
-Honest grant on n1 still reveals n1 — that’s the product.
+Search/export/GraphQL paths; grant revocation lag (`v5.0.0-8.3.2` advanced); honest n1 still readable.

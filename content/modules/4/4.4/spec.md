@@ -1,6 +1,6 @@
 # 4.4 — Authorization and tenant isolation
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. No exploit walkthroughs.
 
 ## Identity
 
@@ -9,71 +9,74 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** Authorization and tenant isolation
 - **phase / track / difficulty:** 4 / core / intermediate
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Blueprint §7; 1.1–4.3 authored. 1.2 named the cells; this module executes them. 3.3 is a second (DB-role) mediation, not a substitute.
 - **routeTags:** complete, web-api
 - **releaseMilestone:** M1
 - **masteryGate:** 4
 
 ## Objective hierarchy
 
-1. Produce **Executable authorization matrix and cross-tenant tests** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce an **executable authorization matrix and cross-tenant tests** for SecureCollab Phase 1 (`can_read` keyed by subject, tenant, and note).
+2. Name attacker capabilities (grant-holder who swaps `note_id`; admin role costume) and trust assumptions (login is not a grant; UUID is not a grant).
+3. Transfer: clinic appointment A ≠ chart B.
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+1.2 complete mediation; 3.3 DB-role second gate; 4.1 leftover sessions; 7.2 property-level later; 5.5 RLS later; 7.4 workers later.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- IDOR is a scanner finding not a missing cell.
+- RBAC role replaces object grants.
+- Signed ids are capabilities.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+Authority (1.2) → this module’s object+tenant lookup → 3.3 DB role / 5.5 RLS as extra gates → 7.2 field-level / 7.4 workers.
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true if bob holds a grant on n1 and requests n2?
+- What fails if an admin role is treated as a cross-tenant capability?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can go wrong when the client supplies `note_id`?
+- What residual remains on search, export, GraphQL, and workers?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/4.4/4.4-lab`. Forbidden: grant on n1 authorizes n2; owner/admin costumes that skip tenant or object keys. No live tenants.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-ASVS V8; OWASP API1/API3/API5 — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- Saltzer and Schroeder (1975, seminal) complete mediation and fail-safe defaults.
+- OWASP ASVS 5.0.0 (final): `v5.0.0-8.2.1`, `v5.0.0-8.2.2`, `v5.0.0-8.3.1`, `v5.0.0-8.4.1`; `v5.0.0-8.3.2` and `v5.0.0-8.3.3` **Level 3, labeled advanced**.
+- OWASP API Security Top 10:2023 API1/API3/API5 **awareness** after the matrix.
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+New path (search, export, GraphQL, worker), new tenant model, or superseding ASVS.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: Executable authorization matrix and cross-tenant tests.
+Evidence: executable matrix and cross-tenant tests. Blueprint §9.1. Feeds M1 / Gate 4.
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`authz_deny`; grant-table drift; never log bodies.
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: object-keyed grant and tenant-key mental models; ASVS v5.0.0-8.2.2 / 8.4.1; L3 8.3.2 / 8.3.3 labeled advanced |

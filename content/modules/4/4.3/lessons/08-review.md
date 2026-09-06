@@ -1,40 +1,42 @@
-# 4.3 — Sessions, cookies, and tokens (Review)
+# 4.3-LO-08 — Review the query token as a PR, not a JWT debate
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** ASVS 5.0.0 V3/V7 (final); OWASP Session Management. JWT is a token format, not an architecture.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-14.2.1`.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab session parsing
 
-A session token in the query string is not an acceptable session. Access tokens belong in Cookie (HttpOnly, 2.3) or Authorization, never in logs and Referer.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Referer leak to a CDN; access-log operator; shared screenshot of a URL.
-- **Trust:** Local request dict. Real TLS still leaks query to files and analytics.
 Review `labs/4.3/4.3-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/4.3.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|"query returns secret"| Property["Property - good if tested"]
+  Q -->|"we use JWT"| Mechanism[Mechanism - format]
+  Q -->|"TLS hides logs"| False[False assurance]
+```
 
-- Seeded smell (label it yourself): session_from_request uses query
-- Seeded smell (label it yourself): JWT in localStorage as “SPA best practice” 2016 blog
-- Seeded smell (label it yourself): No Referer policy
-- Seeded smell (label it yourself): Tokens printed in uvicorn logs
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- `session_from_request` uses query
+- JWT in localStorage as “SPA best practice”
+- No Referer policy
+- Tokens printed in uvicorn logs
+
+Also reject: client trust, closing findings without retest, keys in lessons, real tokens in fixtures.
 
 ## Misconceptions
 
-- JWT is more secure than sessions
-- Query strings are private over HTTPS
-- Logout clears stolen tokens automatically
+- Query strings are fine over TLS
+- JWT means secure
+- HttpOnly is the same as “not in the URL”
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_query_string_token_is_rejected`.
 
 ## Transfer
 
-Magic-link email (still a URL token — time-bound, one-time, 6.6).
+Clinic deep-link PR that “adds a token query param for convenience” is incomplete.

@@ -1,49 +1,49 @@
-# 4.5 — OAuth, OIDC, and delegated authorization (3 Break)
+# 4.5-LO-03 — Observe the skipped audience, do not trophy a JWT
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** RFC 9700 OAuth 2.0 Security BCP (final); RFC 8252 native apps (final); OIDC Core 1.0 (final); ASVS 5.0.0 V10. JWT *aud* is this lab’s cell, not “we use OAuth.”
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-10.3.1`; RFC 9700 (final).
 
-## Property (start here)
+## Authorized scope
 
-A bearer JWT with the wrong audience must be rejected. Tokens for other-api are not sessions for securecollab-api. Delegation is not authentication theater.
+`labs/4.5/4.5-lab` only. Synthetic claims. No live IdPs.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** JWT with wrong audience accepted as a SecureCollab session.
 
-- **Attacker:** Stolen token minted for another API; confused deputy client.
-- **Trust:** Local aud check. Real JWKS, iss, nonce, PKCE in the full protocol — named as residual here.
-**Forbidden outcome:** JWT with wrong audience accepted as a SecureCollab session
+## Mental model: sub without aud
 
-**Authorized scope:** `labs/4.5/4.5-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable jwt_aud.py accepts any aud.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: accept_token ignores aud.
-
-## Vulnerable fixture (local)
-
-```python
-def accept_token(claims: dict, expected_aud: str) -> bool:
-    return "sub" in claims
+```mermaid
+flowchart TD
+  Call["accept_token claims expected"] --> Sub{"sub present?"}
+  Sub -->|yes| True["returns true"]
+  Sub -->|no| False[False]
 ```
+
+The vulnerable tree demonstrates **cause** (audience never consulted), not a trophy dump of a production access token.
+
+## What to read in the fixture
+
+`vulnerable/jwt_aud.py` `accept_token` returns true when `sub` is in the dict. Tests require `aud=other-api` and missing `aud` to stay false, and expected `aud` to stay true.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Signature verified without audience. |
-| Impact | Other-api token spends SecureCollab API. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Subject accepted without audience |
+| Impact | other-api token spends SecureCollab API |
+| Not the lesson | An OAuth product name as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/4.5/4.5-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/4.5/4.5-lab/tests --impl vulnerable
+```
+
+Record `test_wrong_audience_is_rejected`. Do not weaken it to “the JWT verifies.”
 
 ## Transfer
 
-Mobile redirect (8.3, RFC 8252) and BFF vs SPA token storage.
+Clinic: FHIR token minted for another hospital’s API. Predict without leaving this directory.
 
 ## Non-goals
 

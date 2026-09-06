@@ -1,29 +1,31 @@
-# 4.5 — OAuth, OIDC, and delegated authorization (Review)
+# 4.5-LO-08 — Review skipped audience as a PR, not an OIDC ticket
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** RFC 9700 OAuth 2.0 Security BCP (final); RFC 8252 native apps (final); OIDC Core 1.0 (final); ASVS 5.0.0 V10. JWT *aud* is this lab’s cell, not “we use OAuth.”
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-10.3.1`; RFC 9700 (final).
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab token acceptance
 
-A bearer JWT with the wrong audience must be rejected. Tokens for other-api are not sessions for securecollab-api. Delegation is not authentication theater.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Stolen token minted for another API; confused deputy client.
-- **Trust:** Local aud check. Real JWKS, iss, nonce, PKCE in the full protocol — named as residual here.
 Review `labs/4.5/4.5-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/4.5.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|"other-api aud accepted"| Property["Property - good if tested"]
+  Q -->|"we verify JWT"| Mechanism[Mechanism - no aud]
+  Q -->|"OIDC is on"| False[False assurance]
+```
 
-- Seeded smell (label it yourself): verify signature, skip aud
-- Seeded smell (label it yourself): ID token used as API access token
-- Seeded smell (label it yourself): Implicit flow in SPA README
-- Seeded smell (label it yourself): No test other-api aud
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- verify signature, skip aud
+- ID token used as API access token
+- Implicit flow in SPA README
+- No test other-api aud
+
+Also reject: client trust, closing findings without retest, keys in lessons, real tokens in fixtures, OAuth 2.1 presented as final.
 
 ## Misconceptions
 
@@ -33,8 +35,8 @@ Also reject: client trust, interpreter concatenation, Report-Only as enforcement
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_wrong_audience_is_rejected`.
 
 ## Transfer
 
-Mobile redirect (8.3, RFC 8252) and BFF vs SPA token storage.
+Clinic PR that “enables SMART” without an `aud` test is incomplete.

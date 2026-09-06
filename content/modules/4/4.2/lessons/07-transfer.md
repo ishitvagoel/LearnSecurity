@@ -1,33 +1,45 @@
-# 4.2 — Authentication and phishing-resistant authenticators (7 Transfer)
+# 4.2-LO-07 — Transfer: clinic SSO and step-up export
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** NIST SP 800-63B-4 (final); WebAuthn Level 3 is a **W3C Candidate Recommendation** — label CR, not Rec; WCAG 2.2 for the journey; ASVS 5.0.0 V6.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** NIST SP 800-63B-4 (final); WebAuthn Level 3 (**CR**); WCAG 2.2 (final).
 
-## Property (start here)
+## Change the portal; keep origin binding
 
-A password check that ignores origin is not phishing-resistant. WebAuthn to evil.example must fail even if the secret/credential exists. Passwords to the real origin are still phishable — do not advertise them as resistant.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic staff SSO portal. Optionally: step-up for export — still origin-bound?
 
-- **Attacker:** Lookalike origin; intercepted password; fatigued user.
-- **Trust:** Lab origin binding. Real authenticators later; this fixture models origin check.
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite login plus a second ceremony before chart export.
 
-**Prompt:** Step-up for export: still origin-bound?
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic staff SSO portal.
+1. attacker capabilities (lookalike IdP; intercepted OTP; fatigued clinician — not a live clinic);
+2. trust assumptions (which origin check is TCB; “we use Okta” is not);
+3. forbidden outcome (`phishing_resistant("otp", evil, real)` is true, or step-up password counted as resistant);
+4. a test idea on a **local** fixture only;
+5. residual (password fallback; recovery SMS; WebAuthn ≠ authorization);
+6. WCAG 2.2 on the ceremony (keyboard, labels, not color-only).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: MFA to the wrong IdP is still phishing
+
+```mermaid
+flowchart LR
+  Staff[Clinician] --> Fake["https://evil-sso.example"]
+  Fake --> Otp[OTP typed]
+  Otp --> Real["Real EHR session"]
+```
+
+Step-up for export must bind origin too, or the second factor is theater.
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | HTML autocomplete=webauthn is not a ceremony.… |
-| Live-target plan | Lab policy |
+| “Any 2FA is phishing-resistant” | OTP walks |
+| Live clinic IdP | Lab policy |
+| Passkey vendor as the property | Mechanism |
 
 ## Practice
 
-One page. No keys. The lab `labs/4.2/4.2-lab` stays the only running system you may break.
+One page. No keys. `labs/4.2/4.2-lab` is the only running system you may break.

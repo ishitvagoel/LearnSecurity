@@ -1,29 +1,31 @@
-# 4.2 — Authentication and phishing-resistant authenticators (Review)
+# 4.2-LO-08 — Review the resistant-password claim as a PR, not a banner
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** NIST SP 800-63B-4 (final); WebAuthn Level 3 is a **W3C Candidate Recommendation** — label CR, not Rec; WCAG 2.2 for the journey; ASVS 5.0.0 V6.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-6.3.3`; WebAuthn Level 3 (**CR**).
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab login copy
 
-A password check that ignores origin is not phishing-resistant. WebAuthn to evil.example must fail even if the secret/credential exists. Passwords to the real origin are still phishable — do not advertise them as resistant.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Lookalike origin; intercepted password; fatigued user.
-- **Trust:** Lab origin binding. Real authenticators later; this fixture models origin check.
 Review `labs/4.2/4.2-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/4.2.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|"password at evil is true"| Property["Property - good if tested"]
+  Q -->|"autocomplete webauthn"| Mechanism[Mechanism - no origin]
+  Q -->|"MFA equals resistant"| False[False assurance]
+```
 
-- Seeded smell (label it yourself): phishing_resistant('password', evil, real) True
-- Seeded smell (label it yourself): Marketing copy “MFA = phishing resistant”
-- Seeded smell (label it yourself): Recovery SMS as default
-- Seeded smell (label it yourself): No wrong-origin WebAuthn test
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- `phishing_resistant('password', evil, real)` True
+- Marketing copy “MFA = phishing resistant”
+- Recovery SMS as default
+- No wrong-origin WebAuthn test
+
+Also reject: client trust, closing findings without retest, keys in lessons, real credentials in fixtures, unlabeled Level 3 hardware as baseline.
 
 ## Misconceptions
 
@@ -33,12 +35,8 @@ Also reject: client trust, interpreter concatenation, Report-Only as enforcement
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_password_is_not_phishing_resistant`.
 
 ## Transfer
 
-Step-up for export: still origin-bound?
-
-## HITL / WCAG 2.2
-
-WebAuthn and password fallback must work with keyboard, labels, and no color-only errors (WCAG 2.2). A broken accessible path pushes people to shared passwords.
+Clinic SSO PR that “adds MFA” without an origin-fail test is incomplete.

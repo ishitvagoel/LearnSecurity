@@ -1,38 +1,47 @@
-# 4.4 — Authorization and tenant isolation (5 Verify)
+# 4.4-LO-05 — Evidence is deny on n2 and clinic, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** ASVS 5.0.0 V4 (final); Saltzer complete mediation; API1/API3/API5 as awareness after the matrix.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.2` and `v5.0.0-8.4.1`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A share grant for note n1 is not a grant for n2. Object-level authorization (1.2) on the grant table. Login + “shared something” is ambient.
+“We have RBAC” is not evidence. The oracle is the local pair.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Member with a grant on n1 who swaps note_id; IDOR enumerator.
-- **Trust:** Local grants dict. SQL still needs 5.5.
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail n2 and cross-tenant denies"]
+  X["--impl fixed"] --> P["Must pass the same denies"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Grant on n1 authorizes n2 |
-| Failure | Fail closed: Grant keyed by note id; deny default |
+| Negative / abuse | bob×n2, alice×n3, eve×n1, eve×n3 are false |
+| Normal | bob×n1 and alice×n2 are true |
+| Not claimed | Title vs body (7.2); search index; worker; RLS |
 
-Lab tests: `test_property.py` under `labs/4.4/4.4-lab`.
+Lab tests in `labs/4.4/4.4-lab/tests/test_property.py`:
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Grant on n1 authorizes n2`
-- `--impl fixed`: **pass**
+```
+python3 -m pytest labs/4.4/4.4-lab/tests --impl vulnerable
+python3 -m pytest labs/4.4/4.4-lab/tests --impl fixed
+```
 
-n1 maybe true; n2 false.
+Honest-path tests may pass on both implementations. That does not excuse the deny tests.
+
+## What the tests do not prove
+
+- Field-level body vs title (7.2 / `v5.0.0-8.2.3`)
+- Immediate grant revocation (`v5.0.0-8.3.2` Level 3 advanced)
+- Worker originating subject (`v5.0.0-8.3.3` Level 3 advanced)
+- Database role (3.3) or RLS (5.5)
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Property-level: bob can read title but not body (7.2).
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic appointment vs chart. A test that only asserts HTTP 200 is not authorization evidence (see 9.3).

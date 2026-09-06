@@ -1,6 +1,6 @@
 # 4.3 — Sessions, cookies, and tokens
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. No exploit walkthroughs.
 
 ## Identity
 
@@ -9,71 +9,72 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** Sessions, cookies, and tokens
 - **phase / track / difficulty:** 4 / core / intermediate
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Blueprint §7; 1.1–4.2 authored.
 - **routeTags:** complete, web-api
 - **releaseMilestone:** M1
 - **masteryGate:** 4
 
 ## Objective hierarchy
 
-1. Produce **Session protocol/state diagram and theft/replay tests** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce a **session protocol/state diagram and theft/replay tests** for SecureCollab Phase 1 (no query-string tokens).
+2. Name attacker capabilities (Referer, access logs, screenshots) and trust assumptions (TLS does not hide query from logs).
+3. Transfer: clinic appointment deep link; magic-link email (6.6).
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+2.3 cookie jar vs script; 2.2 hop vs log; 3.1 query-string logs; 4.2 session mint.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- Query strings are fine over TLS.
+- JWT means secure.
+- HttpOnly is the same as “not in the URL.”
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+Authn (4.2) → this module’s channel → 4.4 authorization using the session → 4.5 OAuth tokens.
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true if a URL is pasted into chat?
+- What fails if uvicorn logs the query?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can go wrong with `?access_token=`?
+- What residual remains for one-time magic links?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/4.3/4.3-lab`. Forbidden: session from query-string token. No live CDNs.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-ASVS V3/V7/V9 — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- OWASP ASVS 5.0.0 (final): `v5.0.0-14.2.1`, `v5.0.0-3.4.5`, `v5.0.0-3.3.4`.
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+New OAuth flow; magic-link; log drain; superseding ASVS V14.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: Session protocol/state diagram and theft/replay tests.
+Evidence: session protocol diagram, theft/replay tests. Feeds M1.
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`query_token_rejected`; log-redact; revoke leaked tokens.
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: URL-as-postcard models; ASVS 14.2.1 |

@@ -1,53 +1,70 @@
-# 4.3 — Sessions, cookies, and tokens (2 Model)
+# 4.3-LO-02 — Channels a second engineer can test
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** ASVS 5.0.0 V3/V7 (final); OWASP Session Management. JWT is a token format, not an architecture.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-14.2.1` and `v5.0.0-3.4.5`.
 
-## Property (start here)
+## Can a second engineer name pytest cases from your channel map?
 
-A session token in the query string is not an acceptable session. Access tokens belong in Cookie (HttpOnly, 2.3) or Authorization, never in logs and Referer.
+“We use HttpOnly” is not this lesson. A reviewable map names **query / cookie / header**, **who sees each**, and **deny on query**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab Phase 1 freeze: local `session_from_request(query, cookie, header)`. Synthetic token `secret`. No live CDN.
 
-- **Attacker:** Referer leak to a CDN; access-log operator; shared screenshot of a URL.
-- **Trust:** Local request dict. Real TLS still leaks query to files and analytics.
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: who can read the channel
+
+```mermaid
+flowchart TD
+  Q[Query string] --> Logs[Operators and SIEM]
+  Q --> Ref[Third-party Referer]
+  C["HttpOnly cookie"] --> Jar[Sent, not script-readable - 2.3]
+  H[Authorization header] --> Hop[TLS hop - 2.2]
+```
+
+## Mental model: JWT is a format
+
+```mermaid
+flowchart LR
+  Jwt[JWT bytes] --> Cookie[May live in cookie]
+  Jwt --> Header[May live in Authorization]
+  Jwt --> Query[Must not live in query]
+```
+
+Signing algorithm is 5.2. Channel is this module.
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | Browser, logger, third-party referrer |
-| Objects | access_token query param, session |
-| Actions | session_from_request |
-| Channels | query, header, cookie, logs |
-| TCB | Parser that ignores query tokens. |
+| Subjects | Browser; logger; CDN referrer |
+| Objects | `access_token` query; `sc_session` cookie; Authorization |
+| Actions | `session_from_request` |
+| Channels | query, cookie, header, logs |
+| TCB | Parser that ignores query tokens |
 | Untrusted | URL, Referer, reverse-proxy logs |
-| State / time | Link forwarded in chat months later. |
-| 1.1 cell | Authenticity/confidentiality of the session artifact. |
+| State / time | Link forwarded months later |
+| 1.1 cell | Confidentiality of the session artifact |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
 | browser | query token | authn | deny |
 | browser | HttpOnly cookie | authn | allow-if-valid |
+| browser | Authorization | authn | allow-if-valid |
 | logger | url | store | no-token |
-| cdn | Referer | receive | no-token |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/4.3/4.3-lab` file `token.py`.
+Draw this map so a second engineer could name pytest cases. Point at `labs/4.3/4.3-lab` file `token.py`.
 
 ## Transfer
 
-Magic-link email (still a URL token — time-bound, one-time, 6.6).
+Magic-link email (6.6). Clinic appointment deep link.
 
 ## Residual risk
 
-Referer on first-party navigations — strip on outbound.
+First-party Referer; screenshot of a cookie is out of scope here.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

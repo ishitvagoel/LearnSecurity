@@ -1,53 +1,77 @@
-# 4.4 — Authorization and tenant isolation (2 Model)
+# 4.4-LO-02 — A matrix a second engineer can test
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** ASVS 5.0.0 V4 (final); Saltzer complete mediation; API1/API3/API5 as awareness after the matrix.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** Saltzer and Schroeder (1975, seminal) complete mediation; OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.1`, `v5.0.0-8.2.2`, `v5.0.0-8.4.1`.
 
-## Property (start here)
+## Can a second engineer name pytest cases from your matrix?
 
-A share grant for note n1 is not a grant for n2. Object-level authorization (1.2) on the grant table. Login + “shared something” is ambient.
+“We check authorization” is not this lesson. A reviewable model names **subjects, tenants, notes, actions, and every path** that can release a body.
 
-## Attacker capabilities and trust assumptions
+SecureCollab Phase 1 freeze: local `GRANTS` / `NOTES` / `USERS`. Users `alice`, `bob`, `carol`, `eve`. No live IdP.
 
-- **Attacker:** Member with a grant on n1 who swaps note_id; IDOR enumerator.
-- **Trust:** Local grants dict. SQL still needs 5.5.
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: four policy shapes, one cell
+
+```mermaid
+flowchart TD
+  Cell["subject action object tenant"] --> RBAC[RBAC role strings]
+  Cell --> ABAC[ABAC attributes]
+  Cell --> ReBAC[ReBAC relations]
+  Cell --> Cap[Capability tokens]
+```
+
+RBAC (`member`, `owner`, `admin`) is a compact way to *write* many cells. It is not a substitute for looking up the object. ABAC and ReBAC change how you store the grant. A capability is a grant you can hold; a signed id is not automatically a capability.
+
+## Mental model: every path is a cell
+
+```mermaid
+flowchart LR
+  GET["GET /notes/id"] --> Decision[can_read]
+  Search[Search index] --> Decision
+  Export[Export zip] --> Decision
+  Worker["Worker 7.4"] --> Decision
+  GraphQL["GraphQL node id"] --> Decision
+```
+
+If a path is missing from the matrix, ambient authority appears there even if GET is correct. This lab executes GET-shaped `can_read` only.
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | bob with n1 grant, alice owner |
-| Objects | n1, n2, grant row |
-| Actions | can_read |
-| Channels | GET /notes/{id} |
-| TCB | Lookup (subject, object) not (subject, any object). |
-| Untrusted | Client-supplied note_id, “I’m a collaborator” boolean |
-| State / time | Grant revoked on n1 (11, 2.4) must not linger on n1 either. |
-| 1.1 cell | Authorization (1.1/1.2). |
+| Subjects | bob (acme member with n1 grant); alice (acme owner); carol (clinic owner); eve (clinic admin); note-id enumerator |
+| Objects | n1, n2 (acme); n3 (clinic); grant row |
+| Actions | `can_read` |
+| Channels | `GET /notes/{id}`; later search/export/worker |
+| TCB | Lookup `(subject, tenant, note_id)` deny-default |
+| Untrusted | Client `note_id`; “I’m a collaborator” boolean; admin role costume |
+| State / time | Grant revoked on n1 must not linger (4.1 / 2.4) |
+| 1.1 cell | Confidentiality / authorization |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
 | bob | n1 | read | allow-if-granted |
 | bob | n2 | read | deny |
 | alice | n2 | read | allow-owner |
+| alice | n3 | read | deny (cross-tenant) |
+| eve | n1 | read | deny (admin ≠ acme) |
+| eve | n3 | read | deny (admin ≠ object grant) |
 | anon | n1 | read | deny |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/4.4/4.4-lab` file `grant.py`.
+Draw this map so a second engineer could name pytest cases. Point at `labs/4.4/4.4-lab` file `grant.py`.
 
 ## Transfer
 
-Property-level: bob can read title but not body (7.2).
+Clinic appointment A vs chart B. Title vs body is 7.2.
 
 ## Residual risk
 
-Honest grant on n1 still reveals n1 — that’s the product.
+Search, export, GraphQL, and workers are named holes. 3.3 DB role and 5.5 RLS are additional mediations, not this table.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

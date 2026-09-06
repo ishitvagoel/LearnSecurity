@@ -1,38 +1,45 @@
-# 4.2 — Authentication and phishing-resistant authenticators (5 Verify)
+# 4.2-LO-05 — Evidence is password-at-evil false, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** NIST SP 800-63B-4 (final); WebAuthn Level 3 is a **W3C Candidate Recommendation** — label CR, not Rec; WCAG 2.2 for the journey; ASVS 5.0.0 V6.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-6.3.3`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A password check that ignores origin is not phishing-resistant. WebAuthn to evil.example must fail even if the secret/credential exists. Passwords to the real origin are still phishable — do not advertise them as resistant.
+“We use passkeys” is not evidence. The oracle is the local pair.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Lookalike origin; intercepted password; fatigued user.
-- **Trust:** Lab origin binding. Real authenticators later; this fixture models origin check.
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail password at evil is true"]
+  X["--impl fixed"] --> P["Must pass origin-bound webauthn only"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Password (or wrong-origin WebAuthn) counted as phishing-resistant |
-| Failure | Fail closed: WebAuthn origin/RP ID binding; do not call passwords resistant |
+| Negative / abuse | password and otp at evil origin are not resistant |
+| Wrong origin | webauthn at evil origin fails |
+| Matching origin | webauthn at the real origin may claim resistance |
+| Not claimed | Live authenticators; 1.2 |
 
-Lab tests: `test_property.py` under `labs/4.2/4.2-lab`.
+Lab tests in `labs/4.2/4.2-lab/tests/test_property.py`:
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Password (or wrong-origin WebAuthn) counted as phishing-resistant`
-- `--impl fixed`: **pass**
+```
+python3 -m pytest labs/4.2/4.2-lab/tests --impl vulnerable
+python3 -m pytest labs/4.2/4.2-lab/tests --impl fixed
+```
 
-password+evil False; webauthn+evil False.
+## What the tests do not prove
+
+- Recovery SMS
+- Prompt bombing
+- Clinic SSO (transfer)
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Step-up for export: still origin-bound?
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic SSO. A test that only asserts HTTP 200 is not authenticator evidence (see 9.3).

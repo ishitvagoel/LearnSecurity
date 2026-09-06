@@ -1,33 +1,43 @@
-# 4.3 — Sessions, cookies, and tokens (7 Transfer)
+# 4.3-LO-07 — Transfer: clinic deep link and magic-link email
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** ASVS 5.0.0 V3/V7 (final); OWASP Session Management. JWT is a token format, not an architecture.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-14.2.1`.
 
-## Property (start here)
+## Change the link; keep query ≠ session
 
-A session token in the query string is not an acceptable session. Access tokens belong in Cookie (HttpOnly, 2.3) or Authorization, never in logs and Referer.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic appointment deep link. Optionally: magic-link email (still a URL token — time-bound, one-time, 6.6).
 
-- **Attacker:** Referer leak to a CDN; access-log operator; shared screenshot of a URL.
-- **Trust:** Local request dict. Real TLS still leaks query to files and analytics.
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite “open this visit” SMS or email.
 
-**Prompt:** Magic-link email (still a URL token — time-bound, one-time, 6.6).
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic appointment deep link.
+1. attacker capabilities (Referer to a tracking pixel; SMS forward; access-log operator — not a live clinic);
+2. trust assumptions (which parser is TCB; the SMS vendor is not);
+3. forbidden outcome (`?token=` mints a standing session, not “HIPAA”);
+4. a test idea on a **local** fixture only;
+5. residual (one-time magic link still appears in mail logs; exchange it for a cookie);
+6. WCAG 2.2 if a human must follow the link (usable, not color-only).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: one-time URL is not a session cookie
+
+```mermaid
+flowchart LR
+  Mail[Email magic link] --> Once["Redeem once - 6.6"]
+  Once --> Cookie["HttpOnly session"]
+  Deep["Appointment ?token="] --> Deny[Must not be standing session]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | OAuth “implicit in URL” is obsolete; copying it is not ASVS.… |
-| Live-target plan | Lab policy |
+| JWT as the property | Format ≠ channel |
+| Live clinic SMS | Lab policy |
+| “HTTPS so logs are fine” | TLS ≠ log |
 
 ## Practice
 
-One page. No keys. The lab `labs/4.3/4.3-lab` stays the only running system you may break.
+One page. No keys. `labs/4.3/4.3-lab` is the only running system you may break.

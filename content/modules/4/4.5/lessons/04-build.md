@@ -1,51 +1,52 @@
-# 4.5 — OAuth, OIDC, and delegated authorization (4 Build)
+# 4.5-LO-04 — Require the expected audience before 1.2
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** RFC 9700 OAuth 2.0 Security BCP (final); RFC 8252 native apps (final); OIDC Core 1.0 (final); ASVS 5.0.0 V10. JWT *aud* is this lab’s cell, not “we use OAuth.”
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-10.3.1`; RFC 9700 (final).
 
-## Property (start here)
+## Structural means the resource server names itself
 
-A bearer JWT with the wrong audience must be rejected. Tokens for other-api are not sessions for securecollab-api. Delegation is not authentication theater.
+`accept_token` must compare `aud` to `expected_aud`. Missing `aud` is deny. A list may contain the expected name; it must not succeed because `sub` exists. Structural means the audience is mediated — not “we use JWTs,” not Authlib defaults, not HTTPS.
 
-## Attacker capabilities and trust assumptions
+## Mental model: name match, then authorization
 
-- **Attacker:** Stolen token minted for another API; confused deputy client.
-- **Trust:** Local aud check. Real JWKS, iss, nonce, PKCE in the full protocol — named as residual here.
-aud must equal expected.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-def accept_token(claims: dict, expected_aud: str) -> bool:
-    aud = claims.get("aud")
-    if isinstance(aud, list):
-        return expected_aud in aud
-    return aud == expected_aud
+```mermaid
+flowchart TD
+  Call["accept_token"] --> Expected{expected_aud set?}
+  Expected -->|no| Deny[Deny]
+  Expected -->|yes| Aud{"aud matches?"}
+  Aud -->|no| Deny
+  Aud -->|yes| Next["1.2 on the note - 4.4"]
 ```
+
+Fail-safe: empty expected audience, missing claim, or mismatch is **deny**.
 
 ## Why this restores the cell
 
-Exact aud match (or constrained list).
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| aud=securecollab-api | allow (then 1.2) |
+| aud=other-api | deny |
+| missing aud | deny |
 
 ## What this is not
 
-Authlib defaults may verify signature only if you configure poorly.
-
-Correct aud still needs 1.2 on the note.
+ID-token `aud`==`client_id` (`v5.0.0-10.5.4`) is a different check. PKCE. DPoP (`v5.0.0-10.3.5` Level 3 advanced). 4.4 object grants.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name expected audience and predicate. Run:
+
+```
+python3 -m pytest labs/4.5/4.5-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Mobile redirect (8.3, RFC 8252) and BFF vs SPA token storage.
+Clinic FHIR resource server with a hospital-specific `aud`.
 
 ## Residual risk
 
-Full OAuth (PKCE, state, nonce, sender-constraining) not in this micro-fixture.
+Signature, `iss`, `exp`, PKCE, mix-up, sender-constraining, 4.1 leftover tokens.

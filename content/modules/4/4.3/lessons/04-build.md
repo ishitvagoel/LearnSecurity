@@ -1,50 +1,52 @@
-# 4.3 — Sessions, cookies, and tokens (4 Build)
+# 4.3-LO-04 — Ignore query tokens; keep cookie and header
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** ASVS 5.0.0 V3/V7 (final); OWASP Session Management. JWT is a token format, not an architecture.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-14.2.1` and `v5.0.0-3.3.4`.
 
-## Property (start here)
+## Structural means query cannot mint a session
 
-A session token in the query string is not an acceptable session. Access tokens belong in Cookie (HttpOnly, 2.3) or Authorization, never in logs and Referer.
+If `query` contains `access_token`, return `None` even if the value looks like a JWT. Then read cookie or Authorization. Structural means the parser **drops** the query channel — not a denylist of parameter names after logging, not Referrer-Policy as the only control.
 
-## Attacker capabilities and trust assumptions
+## Mental model: deny query, then other channels
 
-- **Attacker:** Referer leak to a CDN; access-log operator; shared screenshot of a URL.
-- **Trust:** Local request dict. Real TLS still leaks query to files and analytics.
-query access_token => None.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-def session_from_request(query: dict, cookie: dict, header: str | None) -> str | None:
-    if query.get("access_token"):
-        return None
-    return cookie.get("sc_session") or header
+```mermaid
+flowchart TD
+  Call[session_from_request] --> Q{query has access_token?}
+  Q -->|yes| None[Return None]
+  Q -->|no| C{cookie sc_session?}
+  C -->|yes| Sess[Return cookie]
+  C -->|no| H[Return Authorization or None]
 ```
+
+Fail-safe: presence of a query token is enough to refuse — do not “fall through” to using it.
 
 ## Why this restores the cell
 
-Reject query tokens; use cookie/header.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| Query only | `None` |
+| Cookie only | session value |
+| Header only | session value |
 
 ## What this is not
 
-OAuth “implicit in URL” is obsolete; copying it is not ASVS.
-
-Authorization header still logs at some gateways — redact.
+localStorage JWT. Implicit grant. Magic-link standing session. TLS as the log control.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name channel and predicate. Run:
+
+```
+python3 -m pytest labs/4.3/4.3-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Magic-link email (still a URL token — time-bound, one-time, 6.6).
+Magic-link: one-time token in URL is 6.6, then exchange for a cookie — do not keep the URL as the session.
 
 ## Residual risk
 
-Referer on first-party navigations — strip on outbound.
+Referer on outbound links; uvicorn still logging other query fields.

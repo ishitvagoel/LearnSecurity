@@ -4,16 +4,16 @@
 
 ## Module
 
-OAuth, OIDC, and delegated authorization
+OAuth, OpenID Connect, browser apps, and native apps
 
 ## Evidence checklist
 
-- [ ] Protocol sequence diagrams and malicious-redirect tests
-- [ ] Transfer task (Clinic: wrong-aud FHIR token.)
+- [ ] Protocol sequence diagrams and malicious-redirect / audience tests
+- [ ] Transfer task (Clinic: wrong-aud FHIR token; RFC 8252 native redirect)
 - [ ] Lab `labs/4.5/4.5-lab`: forbidden outcome **JWT with wrong audience accepted as a SecureCollab session**
-- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: jwt_aud_mismatch; client_revoked.
+- [ ] Operate signal without tokens / note bodies: `jwt_aud_mismatch`; `client_revoked`
 
 ## Rubric
 
