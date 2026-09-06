@@ -1,38 +1,44 @@
-# 2.3 — Browser security model (5 Verify)
+# 2.3-LO-05 — Evidence is a failing script read, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** HTML Living Standard cookies (living); RFC 6265bis drafts remain **draft** if cited; ASVS 5.0.0 V3 (final); CSP3 is **not** this lab’s property.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-3.3.4`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A session cookie marked HttpOnly must not be readable by script in the lab DOM. That is a *browser* cell. It does not mean XSS is impossible (6.2) and does not make CSP3 (Candidate Recommendation / draft-ish depending on pin) a substitute for encoding.
+A green CSP scanner is not this module’s evidence. The oracle is the local pair.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Injected script in origin (later 6.2); a malicious extension (residual).
-- **Trust:** Browser honors HttpOnly. The app must actually set the flag. Extensions are outside this TCB.
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F[Must fail HttpOnly read]
+  X["--impl fixed"] --> P[Must pass None]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Script reads the HttpOnly session cookie |
-| Failure | Fail closed: HttpOnly; Secure; careful SameSite — still not XSS-proof |
+| Negative / abuse | Script cannot read HttpOnly `sc_session` |
+| Not claimed | XSS impossible; CSP enforced; CORS correct |
 
-Lab tests: `test_httponly.py` under `labs/2.3/2.3-browser-policy`.
+Lab test: `test_script_cannot_read_httponly_session` in `labs/2.3/2.3-browser-policy/tests/test_httponly.py`.
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Script reads the HttpOnly session cookie`
-- `--impl fixed`: **pass**
+```
+python3 -m pytest labs/2.3/2.3-browser-policy/tests --impl vulnerable
+python3 -m pytest labs/2.3/2.3-browser-policy/tests --impl fixed
+```
 
-HttpOnly session not script-readable.
+## What the tests do not prove
+
+- Output encoding (6.2)
+- CSP3 (draft) enforcement
+- SameSite CSRF completeness
+- WebView bridges
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map the test to the LO-02 script-read cell.
 
 ## Transfer
 
-React Native WebView cookie bridge.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic patient portal. A test that only asserts `Set-Cookie` exists is not HttpOnly evidence.

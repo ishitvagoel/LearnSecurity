@@ -1,36 +1,46 @@
-# 2.3 — Browser security model (6 Operate)
+# 2.3-LO-06 — Detect a session cookie without HttpOnly; never log the value
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** HTML Living Standard cookies (living); RFC 6265bis drafts remain **draft** if cited; ASVS 5.0.0 V3 (final); CSP3 is **not** this lab’s property.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-3.3.4`; Module 3.1 / 5.1.
 
-## Property (start here)
+## Prevention is not absolute
 
-A session cookie marked HttpOnly must not be readable by script in the lab DOM. That is a *browser* cell. It does not mean XSS is impossible (6.2) and does not make CSP3 (Candidate Recommendation / draft-ish depending on pin) a substitute for encoding.
+A new cookie, a WebView, or a “debug” `Set-Cookie` can drop the flag. Pair detect and recover. Do not log session values.
 
-## Attacker capabilities and trust assumptions
+## Mental model: scan the flags, rotate if script could have read
 
-- **Attacker:** Injected script in origin (later 6.2); a malicious extension (residual).
-- **Trust:** Browser honors HttpOnly. The app must actually set the flag. Extensions are outside this TCB.
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Scan["Staging Set-Cookie review"] --> Flag{HttpOnly on session names?}
+  Flag -->|no| Metric["cookie_session_missing_httponly += 1"]
+  Metric --> Log["name=sc_session reason=missing_httponly no value"]
+  Log --> Rotate[Rotate session ids]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | Token-binding / anomaly (later); XSS reports. |
-| Signal (no bodies) | Set-Cookie without HttpOnly in staging scans. |
-| Revoke / recover | Revoke session (4.3); rotate. |
-| Residual | Browser extensions; physical access. |
+| Detect | `Set-Cookie` without HttpOnly on session names |
+| Signal | cookie name + reason; never the value |
+| Recover | Rotate sessions; fix the setter |
+| Residual | Extensions; physical access |
 
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+Report-Only CSP is a **different** detect path (E2). It does not restore this cell.
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/2.3/2.3-browser-policy`.
+Write one log line you would accept. Tie it to `labs/2.3/2.3-browser-policy`.
+
+```
+cookie_denied reason=missing_httponly name=sc_session env=staging request_id=req_4b11
+```
+
+Reject any line that includes `synthetic-session`.
 
 ## Transfer
 
-React Native WebView cookie bridge.
+Clinic portal. Staging scans must include WebView or second-cookie names, not only `sc_session`.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+SIEM product names are not the property.

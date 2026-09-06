@@ -14,14 +14,21 @@ defaults:
   ai_security: elective E1
   website_progress: local-first static site (site/); no accounts
 next:
-  id: '2.3'
+  id: '2.4'
   pass: revise
   skill: deepen-curriculum
   inner_skill: standards-pin
-  note: Module 2.2 authoring pass added hop-versus-key mental models and diagrams;
-    keep 1.4, 2.1, and 2.2 developing until independent review. Continue the depth
+  note: Module 2.3 authoring pass added jar-versus-script mental models and diagrams;
+    keep 1.4 and 2.1-2.3 developing until independent review. Continue the depth
     queue one module at a time.
 spiral_deltas:
+- date: '2026-09-06'
+  module: '2.3'
+  change: Browser-policy loop v2 separates cookie-jar sending from script readability,
+    refuses HttpOnly as an XSS guarantee, and keeps CSP3 and Trusted Types labeled
+    as Working Drafts
+  retest: Revisit 1.2 session-as-bearer; 2.2 cache Vary-Cookie; 6.2 encoding; E2 CSP
+    Report-Only; WebView bridges in Phase 8
 - date: '2026-09-06'
   module: '2.2'
   change: Request-path loop v2 separates TLS hop authenticity from cache-key identity,
@@ -198,8 +205,8 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added jar-versus-script mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '2.4'
   title: State, time, concurrency, and distributed failure
