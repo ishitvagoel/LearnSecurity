@@ -39,16 +39,25 @@ pins:
     reviewedAt: "2026-08-29"
     url: "https://owasp.org/www-project-application-security-verification-standard/"
     role: "Web/API security requirements and assurance baseline"
-    notes: "Project page confirms latest stable 5.0.0 released 30 May 2025. The 2026-08-29 Module 1.3 check used the immutable v5.0.0 tag. 2026-09-06 Modules 2.1–2.4 pinned V1/V2/V3/V4/V12/V14 as listed in those module.yaml files. 2026-09-06 Module 3.1 used V14.1.1, V14.1.2, and V16.2.5 (classification and logging by protection level). Use exact v5.0.0-<chapter>.<section>.<requirement> identifiers; do not mix ASVS 4.x IDs. Module 1.3 principally teaches v5.0.0-15.1.3, v5.0.0-15.2.2, v5.0.0-15.2.5, and v5.0.0-15.3.4. Level 3 guidance is labeled advanced and is not an undisclosed baseline. Module 1.1 intentionally does not map ASVS requirements."
+    notes: "Project page confirms latest stable 5.0.0 released 30 May 2025. The 2026-08-29 Module 1.3 check used the immutable v5.0.0 tag. 2026-09-06 Modules 2.1–2.4 pinned V1/V2/V3/V4/V12/V14 as listed in those module.yaml files. 2026-09-06 Module 3.1 used V14.1.1, V14.1.2, and V16.2.5 (classification and logging by protection level). 2026-09-06 Module 3.2 used v5.0.0-15.1.3 (Level 2 documented security decisions) and labeled v5.0.0-15.1.5 as Level 3 advanced (dangerous-functionality documentation). ASVS 5.0 removed a numbered 'do threat modeling' requirement; Appendix D still recommends the process and is taught as awareness, not as a verification ID. Use exact v5.0.0-<chapter>.<section>.<requirement> identifiers; do not mix ASVS 4.x IDs. Module 1.3 principally teaches v5.0.0-15.1.3, v5.0.0-15.2.2, v5.0.0-15.2.5, and v5.0.0-15.3.4. Level 3 guidance is labeled advanced and is not an undisclosed baseline. Module 1.1 intentionally does not map ASVS requirements."
   - id: owasp-threat-modeling
     source: OWASP Threat Modeling Project
     version: "maintained-project-guidance"
     status: final
     publishedAt: "2020"
-    reviewedAt: "2026-08-29"
+    reviewedAt: "2026-09-06"
     url: "https://owasp.org/www-project-threat-modeling/"
     role: "Methodology-neutral threat modeling entry; Four Question Framework; trust-boundary language"
-    notes: "Live-checked 2026-08-29: Status Maintained Project Guidance. The publishedAt year records project/Manifesto provenance, not a frozen guidance release; reviewedAt controls freshness for this living page. The page defines threat modeling as analysis of system representations, recommends Shostack's Four Questions as a methodology-neutral starting point, and calls for continuous refinement when architecture, data flow, or implementation changes. It does not define a single OWASP methodology. Full STRIDE/LINDDUN process is module 3.2. Do not treat Threat Dragon, a diagram, or any tool as the definition of threat modeling."
+    notes: "Live-checked 2026-09-06: Status Maintained Project Guidance. The publishedAt year records project/Manifesto provenance, not a frozen guidance release; reviewedAt controls freshness for this living page. The page defines threat modeling as analysis of system representations, recommends Shostack's Four Questions as a methodology-neutral starting point, and calls for continuous refinement when architecture, data flow, or implementation changes. It does not define a single OWASP methodology. Module 3.2 teaches STRIDE as prompts with invalidation conditions, not as a sticker inventory; LINDDUN waits for 5.1. Do not treat Threat Dragon, a diagram, or any tool as the definition of threat modeling."
+  - id: nist-sp-800-154
+    source: NIST SP 800-154 Guide to Data-Centric System Threat Modeling
+    version: "IPD"
+    status: draft
+    publishedAt: "2016-03"
+    reviewedAt: "2026-09-06"
+    url: "https://csrc.nist.gov/pubs/sp/800/154/ipd"
+    role: "Informative data-centric threat-modeling methodology; not a verification catalogue"
+    notes: "Initial Public Draft, March 2016. NIST planning note 2025-01-23 still says the publication will be finalized; it is not final. Module 3.2 treats it as informative only: model attack and defense for selected data, not as a substitute for a version-controlled SecureCollab model with owners and review triggers. Do not present SP 800-154 as a current NIST baseline."
   - id: nist-sp-800-63-4
     source: NIST SP 800-63-4 Digital Identity Guidelines
     version: "4"

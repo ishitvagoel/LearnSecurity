@@ -8,19 +8,19 @@ Threat modeling
 
 ## Evidence checklist
 
-- [ ] Versioned threat model with owners and triggers
-- [ ] Transfer task (Clinic SMS reminders.)
+- [ ] Versioned threat model with owners and review triggers
+- [ ] Transfer task (clinic SMS reminders)
 - [ ] Lab `labs/3.2/3.2-lab`: forbidden outcome **Green scanner produces an empty SecureCollab threat model**
 - [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: model_age_days; missing-mandatory-threat CI.
+- [ ] Operate signal without note bodies / secrets: `missing_mandatory_threat`; `model_age_days`
 
 ## Rubric
 
 | Result | Meaning |
 |---|---|
-| Developing | Tools listed; missing attacker/trust; mechanism slogans |
-| Competent | System-specific invariant; lab mapped; operate present |
+| Developing | Tools listed; missing attacker/trust; STRIDE or scanner slogans |
+| Competent | System-specific invariant; lab mapped; operate present; drafts labeled |
 | Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
 
 Knowledge check (retryable): distinguish property vs mechanism for **3.2**. Items live in the session worksheet, not here.

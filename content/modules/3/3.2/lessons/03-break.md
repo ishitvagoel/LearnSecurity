@@ -1,49 +1,49 @@
-# 3.2 — Threat modeling (3 Break)
+# 3.2-LO-03 — Observe the empty list, do not trophy a scanner
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** OWASP Threat Modeling (project); NIST SP 800-154 remains **draft/withdrawn-track** — treat as informative only; ASVS 5.0.0 as later requirements, not a model.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP Threat Modeling Project (maintained); OWASP ASVS 5.0.0 (final) `v5.0.0-15.1.3`.
 
-## Property (start here)
+## Authorized scope
 
-A green scanner does not yield an empty threat list. SecureCollab’s model must still include a cross-tenant reader and a hostile Next.js client.
+`labs/3.2/3.2-lab` only. Synthetic threat ids. No production scanners, no live tenants.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** A green scanner produces an empty SecureCollab threat model.
 
-- **Attacker:** Cross-tenant member; hostile browser; future worker identity (named now as a trigger).
-- **Trust:** Local threats_from_scan fixture. Real scanners are coverage tools (9.4), not oracles.
-**Forbidden outcome:** Green scanner produces an empty SecureCollab threat model
+## Mental model: green copies empty
 
-**Authorized scope:** `labs/3.2/3.2-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable model.py returns [] when scan is green.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: scan_green=True; model copies it.
-
-## Vulnerable fixture (local)
-
-```python
-def threats_from_scan(scanner_green: bool) -> list[str]:
-    return [] if scanner_green else ["generic"]
+```mermaid
+flowchart TD
+  Green["scanner_green true"] --> Copy["Assembler returns empty threats"]
+  Copy --> List["cross-tenant-read missing"]
+  List --> Reviewer[Assurance story looks clean]
 ```
+
+The vulnerable tree demonstrates **cause** (tool output substituted for thinking), not a trophy dump of a vendor report.
+
+## What to read in the fixture
+
+`vulnerable/model.py` `assemble_threat_model` returns `{"threats": []}` when `scanner_green` is true. `threats_from_scan(True)` is therefore empty. The tests assert `cross-tenant-read` is present, that mandatory rows have owner and trigger, and that scanner findings are additive rather than a replacement set.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Tool output substituted for thinking. |
-| Impact | No test for 1.2; residual unowned. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Tool output substituted for thinking |
+| Impact | No test for 1.2; residual unowned |
+| Not the lesson | A scanner product name or Top 10 mnemonic as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/3.2/3.2-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/3.2/3.2-lab/tests --impl vulnerable
+```
+
+Record the failing tests, starting with `test_green_scanner_is_not_an_empty_threat_model`. Do not weaken them to “a threats key exists.”
 
 ## Transfer
 
-Add webhooks (7.3): which new threats?
+Clinic SMS: predict an empty model if the only input is “SMS gateway vendor scan green.” Stay in this directory.
 
 ## Non-goals
 

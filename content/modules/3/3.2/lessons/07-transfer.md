@@ -1,33 +1,47 @@
-# 3.2 — Threat modeling (7 Transfer)
+# 3.2-LO-07 — Transfer: clinic SMS reminders
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** OWASP Threat Modeling (project); NIST SP 800-154 remains **draft/withdrawn-track** — treat as informative only; ASVS 5.0.0 as later requirements, not a model.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP Threat Modeling Project (maintained) Four Questions; OWASP ASVS 5.0.0 (final) `v5.0.0-15.1.3`; NIST SP 800-154 IPD remains **draft**.
 
-## Property (start here)
+## Change the channel; keep scanner ≠ model
 
-A green scanner does not yield an empty threat list. SecureCollab’s model must still include a cross-tenant reader and a hostile Next.js client.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic SMS reminders — a new channel that Phase 1 HTTP scans will not enumerate.
 
-- **Attacker:** Cross-tenant member; hostile browser; future worker identity (named now as a trigger).
-- **Trust:** Local threats_from_scan fixture. Real scanners are coverage tools (9.4), not oracles.
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite booking card that texts “your appointment” to a phone number.
 
-**Prompt:** Add webhooks (7.3): which new threats?
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic SMS reminders.
+1. attacker capabilities (number-swap; SMS intercept on an untrusted hop; operator who pastes chart text into the template — not a live clinic);
+2. trust assumptions (which assembler or markdown file is TCB; the SMS vendor is not);
+3. forbidden outcome (empty model because “gateway questionnaire green,” or reminder body includes chart text — pick one and test it);
+4. a test idea on a **local** fixture only;
+5. residual (carrier logs; support read-aloud — 1.4);
+6. WCAG 2.2 if a human-mediated control is in the claim (for example, a usable “opt out of SMS” path); SMS content classification itself is not a WCAG problem.
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: a new hop is a new question-one
+
+```mermaid
+flowchart LR
+  Api["Clinic API TCB"] --> Sms["SMS vendor - untrusted hop"]
+  Sms --> Phone["Patient handset"]
+  Chart["Chart text - Confidential"] --> SmsDeny["Must not be in template"]
+  Time["Appointment time - Internal"] --> SmsAllow["May be in template if policy says so"]
+```
+
+Question two now includes content leak and number-swap even if every HTTP scanner is green. Seed those ids; do not wait for a CVE.
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | STRIDE stickers on a DFD are not a model without invalidation conditions.… |
-| Live-target plan | Lab policy |
+| Top 10 item as the property | 1.1 |
+| “Vendor is HIPAA certified” as the model | Mechanism theater |
+| Live clinic or real phone numbers | Lab policy |
+| STRIDE letters without assets | Stickers |
 
 ## Practice
 
-One page. No keys. The lab `labs/3.2/3.2-lab` stays the only running system you may break.
+One page. No keys. `labs/3.2/3.2-lab` is the only running system you may break. You may also name webhook threats (7.3) as a second optional paragraph — still no live targets.

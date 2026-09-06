@@ -1,35 +1,46 @@
-# 3.2 — Threat modeling (6 Operate)
+# 3.2-LO-06 — Detect a missing id; recover without back-dating
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** OWASP Threat Modeling (project); NIST SP 800-154 remains **draft/withdrawn-track** — treat as informative only; ASVS 5.0.0 as later requirements, not a model.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-15.1.3`.
 
-## Property (start here)
+## Prevention is not absolute
 
-A green scanner does not yield an empty threat list. SecureCollab’s model must still include a cross-tenant reader and a hostile Next.js client.
+A new share path, a worker, or a webhook can make the model stale while every CVE scanner stays green. Pair detect and recover. Do not log note bodies while investigating (3.1).
 
-## Attacker capabilities and trust assumptions
+## Mental model: age and missing-id gates
 
-- **Attacker:** Cross-tenant member; hostile browser; future worker identity (named now as a trigger).
-- **Trust:** Local threats_from_scan fixture. Real scanners are coverage tools (9.4), not oracles.
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Merge[Merge or nightly] --> Ids{Mandatory ids present?}
+  Ids -->|no| Metric["missing_mandatory_threat += 1"]
+  Metric --> Alert["reason=missing_threat id=cross-tenant-read no body"]
+  Ids -->|yes| Age{model_age_days vs last trigger?}
+  Age -->|stale| Revisit[Re-run four questions]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | CI fails if required threat ids missing. |
-| Signal (no bodies) | model_age_days; missing-mandatory-threat CI. |
-| Revoke / recover | Add the threat, tests, owner; do not back-date. |
-| Residual | Unknown unknowns — review triggers exist for that. |
+| Detect | CI fails if required ids missing; `model_age_days` after a named trigger |
+| Signal | threat id, owner, trigger name; never the note body |
+| Recover | Add the row, tests, and owner; **do not back-date** the file |
+| Residual | Unknown unknowns; document the next trigger |
 
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS. Appendix D is still awareness.
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/3.2/3.2-lab`.
+Write one log line you would accept. Tie it to `labs/3.2/3.2-lab`.
+
+```
+log_denied reason=missing_mandatory_threat id=cross-tenant-read owner=authz request_id=req_32tm
+```
+
+Reject any line that includes a note body or a real email.
 
 ## Transfer
 
-Add webhooks (7.3): which new threats?
+Clinic: detect missing `sms-content-leak` after the reminder feature merges; do not paste patient text into the ticket.
 
 ## Non-goals
 

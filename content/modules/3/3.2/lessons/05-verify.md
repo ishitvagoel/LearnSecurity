@@ -1,38 +1,45 @@
-# 3.2 — Threat modeling (5 Verify)
+# 3.2-LO-05 — Evidence is a missing id, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** OWASP Threat Modeling (project); NIST SP 800-154 remains **draft/withdrawn-track** — treat as informative only; ASVS 5.0.0 as later requirements, not a model.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-15.1.3`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A green scanner does not yield an empty threat list. SecureCollab’s model must still include a cross-tenant reader and a hostile Next.js client.
+“We threat-modeled in the sprint” is not evidence. The oracle is the local pair.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Cross-tenant member; hostile browser; future worker identity (named now as a trigger).
-- **Trust:** Local threats_from_scan fixture. Real scanners are coverage tools (9.4), not oracles.
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F[Must fail missing cross-tenant-read]
+  X["--impl fixed"] --> P[Must pass seed plus owners]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Green scanner produces an empty SecureCollab threat model |
-| Failure | Fail closed: Seed mandatory threats; scanner findings are extra, not the set |
+| Negative / abuse | Green scan still lists `cross-tenant-read` |
+| Structure | Mandatory rows have owner and trigger |
+| Additive | Scanner extras do not replace the seed |
+| Not claimed | Completeness of all future threats; production scanner SaaS |
 
-Lab tests: `test_property.py` under `labs/3.2/3.2-lab`.
+Lab tests in `labs/3.2/3.2-lab/tests/test_property.py`:
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Green scanner produces an empty SecureCollab threat model`
-- `--impl fixed`: **pass**
+```
+python3 -m pytest labs/3.2/3.2-lab/tests --impl vulnerable
+python3 -m pytest labs/3.2/3.2-lab/tests --impl fixed
+```
 
-green scan still lists cross-tenant-read.
+## What the tests do not prove
+
+- That STRIDE was facilitated well
+- Webhook or SMS threats (transfer)
+- That ASVS Appendix D is “compliant”
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Add webhooks (7.3): which new threats?
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic SMS. A test that only asserts HTTP 200 is not threat-model evidence (see 9.3).
