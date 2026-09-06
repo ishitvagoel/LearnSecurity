@@ -150,3 +150,6 @@ changelog:
 - date: '2026-09-06'
   note: 'Depth pass: model-not-TCB mental models, mermaid diagrams, AISVS v1.0-C9.5.3;
     LLM Top 10 2026 as awareness; independent review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with exec_sql cause tables, prompt/LLM03 limits, and
+    clinic summarizer transfer; independent review still required

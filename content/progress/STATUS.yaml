@@ -20,12 +20,36 @@ next:
   inner_skill: quality-gate
   note: Authoring-pass named mental models and mermaid cover every lesson. 1.4,
     2.1-2.4, 0.1, 0.2, 3.1-3.4, 4.1-4.5, 5.1-5.5, 6.1-6.7, 7.1-7.4, 8.1-8.4, 8.5,
-    9.1-9.3, 9.4-10.2, and 10.3-11 later lessons were thickened with system-specific
-    cause, limits, and transfer. Units stay developing / map-complete in
-    revision.remaining until independent quality and lab-safety review artifacts
-    exist under content/progress/reviews/. Do not mark depth publishable in this
-    skill. 1.1-1.3 remain the independently reviewed reference.
+    9.1-9.3, 9.4-10.2, 10.3-11, and E1-E4 later lessons were thickened with
+    system-specific cause, limits, and transfer. Units stay developing /
+    map-complete in revision.remaining until independent quality and lab-safety
+    review artifacts exist under content/progress/reviews/. Do not mark depth
+    publishable in this skill. 1.1-1.3 remain the independently reviewed reference.
 spiral_deltas:
+- date: '2026-09-06'
+  module: E4
+  change: Lessons 03-08 now name oversize copy as the forbidden outcome and refuse
+    Kotlin/CWE-119 as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; FFI leftover codecs, integer wrap, and
+    Level 3 v5.0.0-5.3.3 remain residuals
+- date: '2026-09-06'
+  module: E3
+  change: Lessons 03-08 now name duplicate capture as the forbidden outcome and refuse
+    Stripe/PCI-SAQ as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; new-key retries, webhook races, and Level 3
+    v5.0.0-13.1.2 remain residuals
+- date: '2026-09-06'
+  module: E2
+  change: Lessons 03-08 now name Report-Only-as-enforcement as the forbidden outcome
+    and refuse Helmet/dashboard as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; 6.2 encoding, CDN strip, and Level 3
+    v5.0.0-3.4.7 remain residuals
+- date: '2026-09-06'
+  module: E1
+  change: Lessons 03-08 now name exec_sql-because-the-model-asked as the forbidden
+    outcome and refuse system-prompt/LLM03 as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; HTML from search_notes, hallucinated
+    packages, and Level 3 v1.0-C9.2.8 remain residuals
 - date: '2026-09-06'
   module: '11'
   change: Lessons 03-08 now name post-revoke read as the forbidden outcome and refuse
@@ -1337,32 +1361,36 @@ electives:
   opens_after_phase: 7
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added model-not-TCB mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+  notes: Later lessons 03-08 thickened 2026-09-06 with exec_sql cause tables and
+    prompt/LLM03 limits; independent quality and lab-safety review still required
+    before publishable
   depth: map-complete
 - id: E2
   title: Advanced browser and edge security
   opens_after_phase: 7
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added Report-Only-not-enforcement mental models and
-    diagrams; independent quality and lab-safety review still required before publishable
+  notes: Later lessons 03-08 thickened 2026-09-06 with Report-Only cause tables and
+    Helmet/dashboard limits; independent quality and lab-safety review still
+    required before publishable
   depth: map-complete
 - id: E3
   title: Payments, financial, health, and other high-assurance systems
   opens_after_phase: 7
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added key-is-identity mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+  notes: Later lessons 03-08 thickened 2026-09-06 with duplicate-capture cause tables
+    and Stripe/PCI limits; independent quality and lab-safety review still required
+    before publishable
   depth: map-complete
 - id: E4
   title: Memory safety and native-code boundaries
   opens_after_phase: 7
   pass: E
   quality: developing
-  notes: Authoring pass 2026-09-06 added length-is-mediation mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+  notes: Later lessons 03-08 thickened 2026-09-06 with oversize-copy cause tables and
+    Kotlin/CWE limits; independent quality and lab-safety review still required
+    before publishable
   depth: map-complete
 - id: E5
   title: Large-scale authorization and multi-tenant SaaS

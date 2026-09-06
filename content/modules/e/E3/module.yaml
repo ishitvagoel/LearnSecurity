@@ -130,3 +130,6 @@ changelog:
 - date: '2026-09-06'
   note: 'Depth pass: key-is-identity mental models, mermaid diagrams, ASVS v5.0.0-2.3.4;
     PCI 4.0.1 as awareness not scope; independent review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with duplicate-capture cause tables, Stripe/PCI
+    limits, and clinic copay/audit transfer; independent review still required

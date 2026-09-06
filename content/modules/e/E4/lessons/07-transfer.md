@@ -2,11 +2,11 @@
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** CISA memory-safe roadmaps (guidance). ASVS `v5.0.0-5.3.1`. CWE-119 awareness after the cause.
+**Standards:** CISA memory-safe roadmaps (guidance). ASVS `v5.0.0-5.3.1`. CWE-119 awareness after the cause. `v5.0.0-5.3.3` Level 3 **advanced**.
 
 ## Change the workplace; keep length as mediation
 
-Do not answer with a Top 25 / CWE / scanner as the definition of security.
+Do not answer with a Top 25 / CWE / scanner as the definition of security. The SecureCollab sentence was: `len(copy_into(4, b"abcdefgh", 4))` must be ≤ 4. Rewrite it for a clinic without changing the fork.
 
 **Prompt:** Clinic DICOM / image parser. Also name a protobuf C extension.
 
@@ -29,6 +29,10 @@ flowchart LR
   Jni[JNI copy] --> Reality[needs min of three]
 ```
 
+If the app is “mostly Kotlin” while `copy_into` trusts declared_len plus slack, the cell is gone. A CISA roadmap and a CWE-119 mapping do not put `min(bufsize, declared_len, len(src))` next to the copy. A protobuf C extension is the same FFI grain — name it, do not fuzz a third-party binary here. CWE-119 is a regression label *after* the length cause, not the syllabus. `v5.0.0-5.3.3` is Level 3 advanced: native unpacker residual, not this pytest.
+
+The clinic rewrite still has to keep the SecureCollab fork: oversize copy denied, short honest copy may fit. Adding a Kotlin rewrite without a destination bound leaves length > 4. The local pytest analogue is `test_copy_does_not_exceed_buffer` — on a fixture, not a live codec.
+
 ## What graders reject
 
 | Reject | Why |
@@ -36,7 +40,13 @@ flowchart LR
 | "we use Kotlin / Rust" | Not mediation of this copy |
 | Native overflow PoC / public binary | Lab policy |
 | "CWE-119 so 1.2 is done" | Awareness after the cause |
+| "ASAN in CI" | Sanitizer, not this predicate |
+| "Gate 7 complete" | Forbidden stamp |
 
 ## Practice
 
-One page. No keys. `labs/E4/e4-lab` is the only running system you may break.
+One page. No keys. `labs/E4/e4-lab` is the only running system you may break. Do not compile a native overflow.
+
+## Non-goals
+
+Weaponized overflow walkthroughs. Third-party binary fuzzing. Claiming Gate 7 or M2 from this page.
