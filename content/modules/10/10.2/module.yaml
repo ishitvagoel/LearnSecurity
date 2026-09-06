@@ -149,3 +149,6 @@ changelog:
 - date: '2026-09-06'
   note: 'Depth pass: name-is-not-digest mental models, mermaid diagrams, SLSA 1.2
     and CISA 2026 SBOM as inventory not verify; independent review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with digest-mismatch cause tables, SBOM/SLSA limits,
+    and clinic npm-in-prod transfer; independent review still required

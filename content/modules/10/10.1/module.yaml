@@ -147,3 +147,6 @@ changelog:
 - date: '2026-09-06'
   note: 'Depth pass: merge-gate mental models, mermaid diagrams, SSDF PW.1, CISA
     Secure by Design labeled unverified; independent review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with empty-PR cause tables, CODEOWNERS/training
+    limits, and clinic HIPAA-training transfer; independent review still required

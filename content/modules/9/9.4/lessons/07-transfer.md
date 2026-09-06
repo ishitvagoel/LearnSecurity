@@ -6,7 +6,7 @@
 
 ## Change the workplace; keep unmapped HIGH from shipping
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security.
+Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: `ship_ok([HIGH], {})` must be false. Rewrite it for a clinic without changing the fork.
 
 **Prompt:** Clinic: 50 unmapped HIGHs. Also name SCA CVE vs actually called function.
 
@@ -29,6 +29,10 @@ flowchart LR
   Empty[empty map] --> Reality[unowned ships]
 ```
 
+If the dashboard is noisy while `ship_ok` is always true, the cell is gone. GitHub default setup, SAMM, and Dependabot do not join F1 to AUTHZ-1. SCA “we do not call that function” still records an owner — name it, do not scan a live org here. Authz blind spots remain 9.2 / 9.3.
+
+The clinic rewrite still has to keep the SecureCollab fork: unmapped HIGH denied, mapped HIGH may ship. Enabling code scanning without a mapping predicate leaves `ship_ok([HIGH], {})` true. The local pytest analogue is `test_unmapped_high_blocks_ship` — on a fixture, not a live GHAS tenant.
+
 ## What graders reject
 
 | Reject | Why |
@@ -36,7 +40,13 @@ flowchart LR
 | “scanner is on” | Signal, not ownership |
 | Live GitHub org / public SCA | Lab policy |
 | “SAMM Level 3” as ship_ok | Measurement, not the predicate |
+| Empty dashboard as 1.2 | Wrong observation |
+| SSDF 1.2 certified | IPD draft; not Gate 9 |
 
 ## Practice
 
-One page. No keys. `labs/9.4/9.4-lab` is the only running system you may break.
+One page. No keys. `labs/9.4/9.4-lab` is the only running system you may break. Do not scan a public host.
+
+## Non-goals
+
+Live-target scanning. Real PHI in findings. Claiming Gate 9 from this page.
