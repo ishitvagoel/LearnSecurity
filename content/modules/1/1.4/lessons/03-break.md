@@ -25,7 +25,7 @@ Do not paste this exercise onto a public recovery page, employer SSO, or live cl
 flowchart TD
   Start[Owner starts recovery] --> Ctrl[Confirm control]
   Ctrl --> K{Has name, keyboard, not color-only?}
-  K -->|yes| Ok[1.2-mediated restore]
+  K -->|yes| Ok["1.2-mediated restore"]
   K -->|no| L[Lockout]
   K -->|no| W[Workaround: shared session or codes in chat]
 ```

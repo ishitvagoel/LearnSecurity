@@ -16,7 +16,7 @@ SecureCollab Phase 1 freeze: tenants, memberships, notes, and a **local recovery
 
 ```mermaid
 flowchart TD
-  I[Invariant from 1.1] --> Row[Register row]
+  I["Invariant from 1.1"] --> Row[Register row]
   A[Actor capability and incentive] --> Row
   K["Control - authority, blast radius, usable path"] --> Row
   Row --> R[Residual]

@@ -275,7 +275,7 @@ export function Markdown({ source }: { source: string }): ReactNode {
         if (lang === "mermaid") {
           pushNode(<MermaidDiagram key={nextKey("mmd")} chart={source} />);
         } else {
-          const diagram = lang === "text" || lang === "diagram";
+          const diagram = lang === "diagram";
           pushNode(
             <pre
               key={nextKey("pre")}

@@ -16,7 +16,7 @@ flowchart TD
   Decision -->|no| Metric["ingest_reject_duplicate_key += 1"]
   Metric --> Log["reason=duplicate_tenant_key request_id=... no body"]
   Log --> Quarantine[Do not persist; quarantine if a row already disagrees]
-  Decision -->|yes| Mediate[Hand the parse result to 1.2]
+  Decision -->|yes| Mediate["Hand the parse result to 1.2"]
 ```
 
 | Outcome | This module |

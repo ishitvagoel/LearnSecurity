@@ -18,9 +18,9 @@ Treat risk as a loop over a named 1.1 invariant, not as a score.
 
 ```mermaid
 flowchart TD
-  P[1.1 invariant] --> A[Actor capability and incentive]
+  P["1.1 invariant"] --> A[Actor capability and incentive]
   A --> H[User harm if the invariant fails]
-  H --> C[Current 1.2 authority and 1.3 blast radius]
+  H --> C["Current 1.2 authority and 1.3 blast radius"]
   C --> W["Work factor - attacker cost vs user cost"]
   W --> U{Can a stressed legitimate user complete the control?}
   U -->|no| F[Security failure: lockout or workaround]
