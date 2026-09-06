@@ -1,36 +1,44 @@
-# 6.2 — Browser injection and active content (6 Operate)
+# 6.2-LO-06 — Detect stored_field_review; CSP reports are extra
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** ASVS 5.0.0 V3 (final); CWE-79 as name; CSP3 / Trusted Types are layered and some docs are still CR — do not claim they replace encoding.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-1.2.1`. `v5.0.0-3.4.7` Level 3 is **advanced**. CSP3 **draft**.
 
-## Property (start here)
+## Prevention is not absolute
 
-Angle brackets in a note title must be encoded in HTML context (`&lt;`) so the browser does not parse an extra element. Encoding is context-specific; CSP is not this cell.
+A markdown path can reintroduce raw HTML. Pair detect and recover. Do not log title bodies if they are PHI (3.1).
 
-## Attacker capabilities and trust assumptions
+## Mental model: stored field is a signal
 
-- **Attacker:** Collaborator who can edit a title; stored XSS later in another tenant’s view.
-- **Trust:** Local render(). Real DOM sinks in 2.3.
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Store[Stored title] --> Review{contains raw < ?}
+  Review -->|yes| Metric["stored_field_review += 1"]
+  Metric --> Alert["reason=stored_field_review no body"]
+  Alert --> Patch[Patch renderer; rotate sessions if needed]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | CSP reports (not enforcement by themselves — E2). |
-| Signal (no bodies) | csp_report; stored_field_review. |
-| Revoke / recover | Patch content; rotate sessions if cookie not HttpOnly. |
-| Residual | Trusted admin HTML — explicit tiny exception. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `stored_field_review`; `csp_report` is extra, not enforcement |
+| Signal | request id, field name; never the title body if PHI |
+| Recover | Patch encoding; re-render; rotate cookies if they were script-readable |
+| Residual | Report-Only CSP; trusted admin HTML |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/6.2/6.2-lab`.
+Write one log line you would accept. Tie it to `labs/6.2/6.2-lab`.
+
+```
+log_denied reason=stored_field_review field=title request_id=req_62h
+```
+
+Reject any line that includes the title text, a note body, or a payload cookbook.
 
 ## Transfer
 
-Markdown-to-HTML sanitizer as a second parser (2.1).
+Clinic: detect nickname fields with raw `<`; do not paste nicknames into the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+A WAF product name is not the property. CSP Report-Only is not this cell’s enforcement.

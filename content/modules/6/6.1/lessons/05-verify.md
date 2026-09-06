@@ -1,38 +1,43 @@
-# 6.1 — Interpreter confusion and injection (5 Verify)
+# 6.1-LO-05 — Evidence is argv shape, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** ASVS 5.0.0 V5 (final); CWE-77/78/89 as *names after* the cause; OWASP Top 10:2025 A05 as regression awareness.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.2.5`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A filename or list target is data, not a shell program. argv_for_list must not invoke a shell. Structural APIs (argv list, parameterized SQL in 5.5) are the mechanism; denylists of metacharacters are incomplete.
+“We don’t use a shell” is not evidence. The oracle is the local pair. Tests **must not** execute the argv.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** User who chooses a note/export name; a compromised client.
-- **Trust:** Local argv.py. No live OS attack — the test only checks argv shape.
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail sh -c"]
+  X["--impl fixed"] --> P["Must pass argv list"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | User-controlled name executed via a shell string |
-| Failure | Fail closed: argv list; no shell; validate allow-listed names |
+| Negative / abuse | `sh -c` concat is forbidden |
+| Normal | honest name `notes` is an argv element |
+| Not claimed | live `ls`; argument injection payloads; CSV formula |
 
-Lab tests: `test_property.py` under `labs/6.1/6.1-lab`.
+```
+python3 -m pytest labs/6.1/6.1-lab/tests --impl vulnerable
+python3 -m pytest labs/6.1/6.1-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `User-controlled name executed via a shell string`
-- `--impl fixed`: **pass**
+## What the tests do not prove
 
-not sh -c; uses_shell false.
+- Path traversal (6.4)
+- SQL (5.5) except as the same *shape*
+- `v5.0.0-1.2.10` CSV/formula Level 3
+- That `subprocess.run` in production uses this list (you still have to call it)
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Jinja, SQL, mail headers.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic CSV filename. A test that only asserts the export file exists is not this cell.

@@ -1,53 +1,70 @@
-# 6.2 — Browser injection and active content (2 Model)
+# 6.2-LO-02 — A context map a second engineer can test
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** ASVS 5.0.0 V3 (final); CWE-79 as name; CSP3 / Trusted Types are layered and some docs are still CR — do not claim they replace encoding.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.2.1`. CSP3 **draft**.
 
-## Property (start here)
+## Can a second engineer name pytest cases from your context map?
 
-Angle brackets in a note title must be encoded in HTML context (`&lt;`) so the browser does not parse an extra element. Encoding is context-specific; CSP is not this cell.
+“We enabled CSP” is not this lesson. A reviewable model names **the sink, the context, and what encoding applies**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab Phase 1 freeze: local `render(body)` wrapping a `<p>` text node. No live DOM.
 
-- **Attacker:** Collaborator who can edit a title; stored XSS later in another tenant’s view.
-- **Trust:** Local render(). Real DOM sinks in 2.3.
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: one sink, one context in this lab
+
+```mermaid
+flowchart TD
+  Body[title string] --> P["p text context"]
+  P --> Enc{"< encoded?"}
+```
+
+Attribute, JS, and URL contexts are named holes, not this fixture.
+
+## Mental model: React is not the TCB
+
+```mermaid
+flowchart TD
+  JSX[React JSX text] --> Help[Usually encodes]
+  DHTML[dangerouslySetInnerHTML] --> Raw[Untrusted HTML]
+  FastAPI[FastAPI template] --> Raw
+```
+
+Framework defaults help only at the constructors you actually use.
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | renderer, browser HTML parser, peer user |
-| Objects | title string, HTML output |
-| Actions | render |
-| Channels | HTML body |
-| TCB | Context-aware encoder for HTML text. |
-| Untrusted | Note title, display name |
-| State / time | Stored now, viewed later by owner. |
-| 1.1 cell | Integrity of the HTML interpreter; confidentiality of sessions if combined with 2.3 fail. |
+| Subjects | collaborator editing a title |
+| Objects | HTML text vs markup |
+| Actions | `render` |
+| Channels | HTML document |
+| TCB | HTML-text encoder |
+| Untrusted | title / body string |
+| State / time | stored title, later rendered |
+| 1.1 cell | Integrity of the HTML interpreter |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| peer | title | store | allow-data |
-| browser | title | as-HTML | encoded |
-| CSP | script | block | layer-not-property |
-| admin | raw HTML | render | non-goal-or-tiny-exception |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| app | title | HTML text | encode `<` |
+| attacker | title | as HTML grammar | deny |
+| markdown | HTML | second parse | 2.1 residual |
+| CSP | script loads | extra layer | draft, not this test |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/6.2/6.2-lab` file `html.py`.
+Draw text vs attr vs JS vs URL. Point at `labs/6.2/6.2-lab` file `html.py`.
 
 ## Transfer
 
-Markdown-to-HTML sanitizer as a second parser (2.1).
+Clinic nickname; markdown pipeline.
 
 ## Residual risk
 
-Trusted admin HTML — explicit tiny exception.
+Trusted admin HTML; CSP report-only; JS-context encoding (`v5.0.0-1.2.3`).
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

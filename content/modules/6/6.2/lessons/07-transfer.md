@@ -1,33 +1,42 @@
-# 6.2 — Browser injection and active content (7 Transfer)
+# 6.2-LO-07 — Transfer: clinic patient nickname field
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** ASVS 5.0.0 V3 (final); CWE-79 as name; CSP3 / Trusted Types are layered and some docs are still CR — do not claim they replace encoding.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.2.1`. CSP3 **draft**.
 
-## Property (start here)
+## Change the workplace; keep context encoding
 
-Angle brackets in a note title must be encoded in HTML context (`&lt;`) so the browser does not parse an extra element. Encoding is context-specific; CSP is not this cell.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic patient nickname field rendered on a shared board. Also name markdown-to-HTML as a second parser (2.1).
 
-- **Attacker:** Collaborator who can edit a title; stored XSS later in another tenant’s view.
-- **Trust:** Local render(). Real DOM sinks in 2.3.
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite “preferred name” that concatenates into an HTML badge.
 
-**Prompt:** Markdown-to-HTML sanitizer as a second parser (2.1).
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic patient nickname field.
+1. attacker capabilities (patient or clerk supplying a nickname — not a live clinic);
+2. trust assumptions (HTML-text encoder is TCB; CSP header is not);
+3. forbidden outcome (`render` leaves `<` as markup, not “HIPAA”);
+4. a test idea on a **local** fixture only (tame `<` marker);
+5. residual (JS/attr/URL contexts; markdown pipeline; Trusted Types draft; CSP reporting Level 3);
+6. WCAG if a human “name could not be shown” path is in the claim (readable fallback, not a blank badge that hides the person).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: nickname is still HTML input
+
+```mermaid
+flowchart LR
+  Nick[nickname] --> Belief[UI believes it is a label]
+  HTML[HTML badge] --> Reality[grammar mixed with data]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | React defaults help in JSX, not in dangerouslySetInnerHTML or a FastAPI HTML tem… |
-| Live-target plan | Lab policy |
+| “CSP is on” | Layer, draft, not this cell |
+| Live clinic probe | Lab policy |
+| Exploit-kit payload as the test | Lab policy; tame `<` is enough |
 
 ## Practice
 
-One page. No keys. The lab `labs/6.2/6.2-lab` stays the only running system you may break.
+One page. No keys. `labs/6.2/6.2-lab` is the only running system you may break.

@@ -1,49 +1,48 @@
-# 6.3 — Cross-site and cross-context attacks (3 Break)
+# 6.3-LO-03 — Observe cookie-only share, do not trophy a third-party site
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** ASVS 5.0.0 V3/V4 (final); Fetch Metadata / SameSite as *helpers*; cookie session (2.3) is not the CSRF property.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-3.5.1`.
 
-## Property (start here)
+## Authorized scope
 
-A state-changing share POST from a foreign origin without a matching CSRF token/origin check is denied. Ambient cookies are not consent.
+`labs/6.3/6.3-lab` only. Synthetic origins. No live third-party pages.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Cross-origin state-changing POST authorized by cookie alone.
 
-- **Attacker:** Evil origin with the victim’s browser session cookie.
-- **Trust:** Local allow_share(origin, expected, token).
-**Forbidden outcome:** Cross-origin state-changing POST authorized by cookie alone
+## Mental model: cookie is enough in the vulnerable tree
 
-**Authorized scope:** `labs/6.3/6.3-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable csrf.py allows foreign origin.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: allow_share(evil, app, token=None) True.
-
-## Vulnerable fixture (local)
-
-```python
-def allow_share(origin, expected, token=None, session_cookie=True):
-    return session_cookie
+```mermaid
+flowchart TD
+  Call["allow_share evil origin token None"] --> Cookie{session_cookie?}
+  Cookie -->|yes| True["returns true"]
 ```
+
+The vulnerable tree demonstrates **cause** (ambient cookie treated as consent), not a cross-site trophy against a public app.
+
+## What to read in the fixture
+
+`vulnerable/csrf.py` returns `session_cookie` and ignores origin and token. Tests require foreign origin without token to be false. Honest same-origin-with-token must be true on the fixed tree; it may already be true on vulnerable because a cookie is present.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Cookie authority used without site-bound intent. |
-| Impact | Unwanted share grant. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Cookie authority used without site-bound intent |
+| Impact | Unwanted share grant |
+| Not the lesson | SameSite as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/6.3/6.3-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/6.3/6.3-lab/tests --impl vulnerable
+```
+
+Record `test_foreign_origin_post_is_denied`. Do not visit `evil.example` as a real host.
 
 ## Transfer
 
-postMessage, clickjacking, CORS * with credentials.
+Clinic partner-share. Predict without leaving this directory.
 
 ## Non-goals
 

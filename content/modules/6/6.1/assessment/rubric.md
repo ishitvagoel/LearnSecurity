@@ -8,12 +8,12 @@ Interpreter confusion and injection
 
 ## Evidence checklist
 
-- [ ] Multi-interpreter data-flow review and exploit/fix regressions
-- [ ] Transfer task (Clinic export-to-CSV filename.)
-- [ ] Lab `labs/6.1/6.1-lab`: forbidden outcome **User-controlled name executed via a shell string**
-- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Multi-interpreter data-flow and argv-shape tests
+- [ ] Transfer task (clinic export-to-CSV filename; Jinja/SQL/mail named)
+- [ ] Lab `labs/6.1/6.1-lab`: forbidden outcome **user-controlled name executed via a shell string**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: child_process_anomaly.
+- [ ] Operate signal without PHI: `child_process_anomaly`
 
 ## Rubric
 

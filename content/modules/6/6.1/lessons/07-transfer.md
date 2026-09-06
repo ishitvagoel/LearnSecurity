@@ -1,33 +1,42 @@
-# 6.1 — Interpreter confusion and injection (7 Transfer)
+# 6.1-LO-07 — Transfer: clinic export-to-CSV filename
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** ASVS 5.0.0 V5 (final); CWE-77/78/89 as *names after* the cause; OWASP Top 10:2025 A05 as regression awareness.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.2.5`; `v5.0.0-1.2.10` Level 3 advanced for formula characters.
 
-## Property (start here)
+## Change the workplace; keep data-vs-grammar
 
-A filename or list target is data, not a shell program. argv_for_list must not invoke a shell. Structural APIs (argv list, parameterized SQL in 5.5) are the mechanism; denylists of metacharacters are incomplete.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic export-to-CSV filename chosen by a clerk. Also name Jinja, SQL (5.5), and mail headers as the same shape.
 
-- **Attacker:** User who chooses a note/export name; a compromised client.
-- **Trust:** Local argv.py. No live OS attack — the test only checks argv shape.
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite “download roster” that shells out to `ls` or to a CSV writer.
 
-**Prompt:** Jinja, SQL, mail headers.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic export-to-CSV filename.
+1. attacker capabilities (clerk-chosen filename — not a live clinic);
+2. trust assumptions (argv list is TCB; denylist of `;` is not);
+3. forbidden outcome (`argv_for_list` starts `sh -c`, not “HIPAA”);
+4. a test idea on a **local** fixture only (shape, no execution);
+5. residual (argument injection; CSV formula Level 3; plugin shells);
+6. WCAG if a human “export failed” path is in the claim (readable error, not a silent missing file).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: filename is still an interpreter input
+
+```mermaid
+flowchart LR
+  File[CSV filename] --> Belief[UI believes it is a label]
+  Shell2[sh -c or formula cell] --> Reality[grammar mixed with data]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | subprocess defaults are easy to misuse; FastAPI has no opinion.… |
-| Live-target plan | Lab policy |
+| “We blacklist semicolons” | Incomplete mediation (2.1) |
+| Live clinic probe | Lab policy |
+| CWE-78 as the property | Awareness after the cause |
 
 ## Practice
 
-One page. No keys. The lab `labs/6.1/6.1-lab` stays the only running system you may break.
+One page. No keys. `labs/6.1/6.1-lab` is the only running system you may break.

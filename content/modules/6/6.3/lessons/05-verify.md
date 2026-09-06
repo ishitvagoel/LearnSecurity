@@ -1,38 +1,47 @@
-# 6.3 — Cross-site and cross-context attacks (5 Verify)
+# 6.3-LO-05 — Evidence is foreign-origin deny, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** ASVS 5.0.0 V3/V4 (final); Fetch Metadata / SameSite as *helpers*; cookie session (2.3) is not the CSRF property.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-3.5.1`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A state-changing share POST from a foreign origin without a matching CSRF token/origin check is denied. Ambient cookies are not consent.
+“SameSite is Lax” is not evidence. The oracle is the local pair.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Evil origin with the victim’s browser session cookie.
-- **Trust:** Local allow_share(origin, expected, token).
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail foreign origin"]
+  X["--impl fixed"] --> P["Must pass deny plus honest allow"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Cross-origin state-changing POST authorized by cookie alone |
-| Failure | Fail closed: Reject foreign Origin; require token for cookie sessions |
+| Negative / abuse | foreign origin, no token → deny |
+| Negative | same origin, no token → deny |
+| Normal | same origin, token, cookie → allow |
+| Normal / fail-closed | missing cookie → deny |
+| Not claimed | GET mutate; clickjacking; CORS; postMessage |
 
-Lab tests: `test_property.py` under `labs/6.3/6.3-lab`.
+```
+python3 -m pytest labs/6.3/6.3-lab/tests --impl vulnerable
+python3 -m pytest labs/6.3/6.3-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Cross-origin state-changing POST authorized by cookie alone`
-- `--impl fixed`: **pass**
+Honest same-origin-with-token may pass on both (vulnerable allows any cookie). Missing cookie may pass on both.
 
-foreign POST denied.
+## What the tests do not prove
+
+- SameSite cookie flags (`v5.0.0-3.3.2`)
+- Fetch Metadata / CORP Level 3 (`v5.0.0-3.5.8`)
+- Clickjacking / `frame-ancestors` (`v5.0.0-3.4.6`)
+- postMessage origin checks (`v5.0.0-3.5.5`)
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-postMessage, clickjacking, CORS * with credentials.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic partner-share. A test that only asserts HTTP 200 on `/share` is not this cell.

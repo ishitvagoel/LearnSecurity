@@ -1,49 +1,48 @@
-# 6.2 — Browser injection and active content (4 Build)
+# 6.2-LO-04 — Encode for the HTML text context
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** ASVS 5.0.0 V3 (final); CWE-79 as name; CSP3 / Trusted Types are layered and some docs are still CR — do not claim they replace encoding.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.2.1`.
 
-## Property (start here)
+## Structural means the parser never sees extra tags
 
-Angle brackets in a note title must be encoded in HTML context (`&lt;`) so the browser does not parse an extra element. Encoding is context-specific; CSP is not this cell.
+`render` must HTML-escape the body for a text context (`<` → `&lt;`). Structural means encoding at the sink — not a CSP Report-Only header, not sanitizing after `innerHTML`.
 
-## Attacker capabilities and trust assumptions
+## Mental model: escape, then wrap
 
-- **Attacker:** Collaborator who can edit a title; stored XSS later in another tenant’s view.
-- **Trust:** Local render(). Real DOM sinks in 2.3.
-render encodes < to &lt; and no raw <img.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-import html
-def render(body):
-    return f'<p>{html.escape(body, quote=True)}</p>'
+```mermaid
+flowchart TD
+  Call[render] --> Esc["html.escape text"]
+  Esc --> P["wrap in p"]
 ```
+
+Fail-safe: if you cannot encode for this context, **do not render HTML**.
 
 ## Why this restores the cell
 
-Encode for HTML text; framework safe constructors; CSP extra.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| body containing `<` | `&lt;` present, `<img` absent |
+| honest “Weekly notes” | still visible as text |
 
 ## What this is not
 
-React defaults help in JSX, not in dangerouslySetInnerHTML or a FastAPI HTML template.
-
-HTML encoding is wrong in a JS string context.
+CSP as the fix. Sanitizer after assignment to `innerHTML`. Encoding for the wrong context (JS string, URL). Markdown left raw.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name the predicate. Run:
+
+```
+python3 -m pytest labs/6.2/6.2-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Markdown-to-HTML sanitizer as a second parser (2.1).
+Clinic: encode the nickname in HTML text; treat markdown as a second parser.
 
 ## Residual risk
 
-Trusted admin HTML — explicit tiny exception.
+Attribute/JS/URL contexts; Trusted Types **draft**; `v5.0.0-3.4.7` Level 3 reporting advanced; trusted admin HTML exception.

@@ -1,33 +1,42 @@
-# 5.5 — Database and persistence security (7 Transfer)
+# 5.5-LO-07 — Transfer: clinic search box
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** ASVS 5.0.0 V13 (final); PostgreSQL role/RLS docs as *platform*; parameterization is complete mediation of the SQL interpreter (also 6.1).
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.2.4`. NoSQL/GraphQL wait for 7.1.
 
-## Property (start here)
+## Change the workplace; keep data-vs-grammar
 
-fetch_sql must bind the tenant (and note id) as parameters, not concatenate a string the SQL interpreter will parse as code. Application 1.2 is necessary; it is not a substitute for interpreter isolation.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic search box that builds a patient lookup. Also name NoSQL operators and GraphQL arguments as the same shape (7.1), without running those systems.
 
-- **Attacker:** Member who types a note id with SQL metacharacters; stolen app role (3.3).
-- **Trust:** Local query object. Real DB roles in 3.3.
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite “quick search” that concatenates the box into SQL or into a query DSL.
 
-**Prompt:** NoSQL operators, GraphQL args (7.1).
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic search box.
+1. attacker capabilities (clinician or kiosk user supplying search text — not a live clinic);
+2. trust assumptions (which API binds values; the ORM brand is not TCB);
+3. forbidden outcome (`fetch`-like function returns concatenated query text, not “HIPAA”);
+4. a test idea on a **local** fixture only;
+5. residual (ORDER BY identifiers; replicas; RLS theater; Level 3 logging);
+6. WCAG if a human “search failed” path is in the claim (readable error, not a silent empty list that hides a parser crash).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: the search box is still an interpreter
+
+```mermaid
+flowchart LR
+  Box[search box] --> Belief[UI believes it is text]
+  DSL[query DSL or SQL] --> Reality[grammar mixed with data]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | SQLAlchemy text() with f-strings is still concat. ORM defaults can still interpo… |
-| Live-target plan | Lab policy |
+| “ORM is on” | Brand theater |
+| Live clinic probe | Lab policy |
+| RLS as the property | Extra gate, not this cell |
 
 ## Practice
 
-One page. No keys. The lab `labs/5.5/5.5-lab` stays the only running system you may break.
+One page. No keys. `labs/5.5/5.5-lab` is the only running system you may break.

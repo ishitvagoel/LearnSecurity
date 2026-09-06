@@ -1,50 +1,51 @@
-# 5.5 — Database and persistence security (4 Build)
+# 5.5-LO-04 — Bind tenant and note id as parameters
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** ASVS 5.0.0 V13 (final); PostgreSQL role/RLS docs as *platform*; parameterization is complete mediation of the SQL interpreter (also 6.1).
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.2.4`.
 
-## Property (start here)
+## Structural means the parser never sees those fields as grammar
 
-fetch_sql must bind the tenant (and note id) as parameters, not concatenate a string the SQL interpreter will parse as code. Application 1.2 is necessary; it is not a substitute for interpreter isolation.
+`fetch_sql` must return `(sql, params)` with `%s` placeholders and a two-tuple of values. Structural means a bound API — not a denylist of quotes, not “the ORM will handle it.”
 
-## Attacker capabilities and trust assumptions
+## Mental model: program beside data
 
-- **Attacker:** Member who types a note id with SQL metacharacters; stolen app role (3.3).
-- **Trust:** Local query object. Real DB roles in 3.3.
-fetch_sql returns bound structure not a concat string.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-def fetch_sql(tenant, note_id):
-    return ("SELECT body FROM notes WHERE tenant=%s AND id=%s", (tenant, note_id))
-def is_bound(q):
-    return isinstance(q, tuple) and len(q[1])==2
+```mermaid
+flowchart TD
+  Call[fetch_sql] --> Pair["sql text + params tuple"]
+  Pair --> Bound{is_bound?}
+  Bound -->|yes| Allow[Allow]
+  Bound -->|no| Deny[Deny]
 ```
+
+Fail-safe: if you cannot bind, **do not query**.
 
 ## Why this restores the cell
 
-Parameters; identifier allow-lists for ORDER BY.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| honest `tA`, `n1` | bound tuple |
+| hostile punctuation in `note_id` | still a param, still not a `str` query |
+| `is_bound` | true only for the tuple shape |
 
 ## What this is not
 
-SQLAlchemy text() with f-strings is still concat. ORM defaults can still interpolate.
-
-Bound ids plus missing 1.2 still leak via legitimate queries.
+SQLAlchemy `text()` with an f-string. ORM `.filter` with a raw interpolated string. RLS enabled in production and disabled in tests. Identifier concatenation for ORDER BY (allow-list column names instead).
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name the predicate. Run:
+
+```
+python3 -m pytest labs/5.5/5.5-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-NoSQL operators, GraphQL args (7.1).
+Clinic: stop treating the search box as SQL text.
 
 ## Residual risk
 
-DB superuser tools; replicas.
+ORDER BY / `COPY` / search DSL; 3.3 role; replicas (5.1); `v5.0.0-16.3.2` Level 3 logging clause advanced.

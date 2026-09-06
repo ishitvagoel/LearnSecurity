@@ -39,7 +39,7 @@ pins:
     reviewedAt: "2026-08-29"
     url: "https://owasp.org/www-project-application-security-verification-standard/"
     role: "Web/API security requirements and assurance baseline"
-    notes: "Project page confirms latest stable 5.0.0 released 30 May 2025. The 2026-08-29 Module 1.3 check used the immutable v5.0.0 tag. 2026-09-06 Modules 2.1–5.4 pinned as listed in those module.yaml files. Module 5.1 used v5.0.0-14.2.4 (deletion implemented as documented; 14.2.7 labeled Level 3 advanced). Module 5.2 used v5.0.0-11.3.3 (AEAD; 11.3.4 / 11.1.4 labeled Level 3 advanced). Module 5.3 used v5.0.0-13.2.3 / 13.3.1 (no default credentials; 13.3.3 / 13.3.4 labeled Level 3 advanced). Module 5.4 used v5.0.0-12.2.1 (TLS without fallback; 12.1.4 / 12.1.5 labeled Level 3 advanced). Use exact v5.0.0-<chapter>.<section>.<requirement> identifiers; do not mix ASVS 4.x IDs. Level 3 guidance is labeled advanced. Module 1.1 intentionally does not map ASVS requirements."
+    notes: "Project page confirms latest stable 5.0.0 released 30 May 2025. The 2026-08-29 Module 1.3 check used the immutable v5.0.0 tag. 2026-09-06 Modules 2.1–6.3 pinned as listed in those module.yaml files. Module 5.1 used v5.0.0-14.2.4 (deletion implemented as documented; 14.2.7 labeled Level 3 advanced). Module 5.2 used v5.0.0-11.3.3 (AEAD; 11.3.4 / 11.1.4 labeled Level 3 advanced). Module 5.3 used v5.0.0-13.2.3 / 13.3.1 (no default credentials; 13.3.3 / 13.3.4 labeled Level 3 advanced). Module 5.4 used v5.0.0-12.2.1 (TLS without fallback; 12.1.4 / 12.1.5 labeled Level 3 advanced). Module 5.5 used v5.0.0-1.2.4 (parameterized queries; 16.3.2 Level 3 clause labeled advanced). Module 6.1 used v5.0.0-1.2.5 (OS argv; 1.2.10 labeled Level 3 advanced). Module 6.2 used v5.0.0-1.2.1 (HTML context encoding; 3.4.7 labeled Level 3 advanced). Module 6.3 used v5.0.0-3.5.1 (CSRF origin/token; 3.5.8 labeled Level 3 advanced). Use exact v5.0.0-<chapter>.<section>.<requirement> identifiers; do not mix ASVS 4.x IDs. Level 3 guidance is labeled advanced. Module 1.1 intentionally does not map ASVS requirements."
   - id: owasp-threat-modeling
     source: OWASP Threat Modeling Project
     version: "maintained-project-guidance"
@@ -120,7 +120,7 @@ pins:
     reviewedAt: "2026-08-23"
     url: "https://www.w3.org/TR/CSP3/"
     role: "Browser-enforced content restrictions; not an application guarantee"
-    notes: "W3C Working Draft 13 August 2026. Must be labeled draft. Not a substitute for output encoding or Trusted Types."
+    notes: "W3C Working Draft 13 August 2026. Must be labeled draft. Not a substitute for output encoding or Trusted Types. Module 6.2 treats CSP as a layer after HTML-text encoding (v5.0.0-1.2.1); report-only is not enforcement."
   - id: w3c-trusted-types
     source: W3C Trusted Types
     version: "WD"
@@ -129,7 +129,7 @@ pins:
     reviewedAt: "2026-08-23"
     url: "https://www.w3.org/TR/trusted-types/"
     role: "Typed values at dangerous sinks; layered with CSP"
-    notes: "W3C Working Draft 23 June 2026. Label draft. Framework defaults are not Trusted Types."
+    notes: "W3C Working Draft 23 June 2026. Label draft. Framework defaults are not Trusted Types. Module 6.2 names Trusted Types as a residual layer, not the HTML-text encoding property."
   - id: owasp-top-10-2025
     source: OWASP Top 10
     version: "2025"
@@ -138,7 +138,7 @@ pins:
     reviewedAt: "2026-08-23"
     url: "https://owasp.org/Top10/2025/"
     role: "Risk-awareness and coverage regression only"
-    notes: "A10:2025 Mishandling of Exceptional Conditions maps to 2.4 as regression, not as the learning order. A03 supply chain is Phase 10."
+    notes: "A10:2025 Mishandling of Exceptional Conditions maps to 2.4 as regression, not as the learning order. A03 supply chain is Phase 10. Blueprint lists A05 against 6.1 as regression after the argv-shape cause; do not treat A05 as the syllabus."
   - id: cwe
     source: MITRE CWE
     version: "Top 25 2025 / family refs"
@@ -147,7 +147,7 @@ pins:
     reviewedAt: "2026-08-23"
     url: "https://cwe.mitre.org/top25/archive/2025/2025_cwe_top25.html"
     role: "Implementation-oriented weakness families; not the syllabus order"
-    notes: "Use to test whether parser/injection families were missed. Do not organize modules as CWE IDs."
+    notes: "Use to test whether parser/injection families were missed. Do not organize modules as CWE IDs. Modules 6.1 and 6.2 cite CWE-77/78/89 and CWE-79 as awareness after the cause."
   - id: owasp-api-top-10-2023
     source: OWASP API Security Top 10
     version: "2023"
@@ -229,3 +229,12 @@ pins:
     url: "https://datatracker.ietf.org/doc/html/rfc9106"
     role: "Password KDF; not note-body encryption"
     notes: "Module 5.2 names Argon2 as the password-at-rest row. Do not apply RFC 9106 to note bodies; that cell is AEAD with keys in 5.3."
+  - id: postgresql-rls
+    source: PostgreSQL row-level security
+    version: current-docs
+    status: final
+    publishedAt: "current"
+    reviewedAt: "2026-09-06"
+    url: "https://www.postgresql.org/docs/current/ddl-rowsecurity.html"
+    role: "Platform extra gate; not application authorization or parameterized queries"
+    notes: "Living PostgreSQL documentation. Module 5.5 treats RLS as platform, not the fetch_sql bound-parameter property and not a substitute for 1.2 grants or 3.3 DB roles."

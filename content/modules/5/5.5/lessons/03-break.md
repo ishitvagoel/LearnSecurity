@@ -1,51 +1,51 @@
-# 5.5 — Database and persistence security (3 Break)
+# 5.5-LO-03 — Observe concatenation, do not trophy a database
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** ASVS 5.0.0 V13 (final); PostgreSQL role/RLS docs as *platform*; parameterization is complete mediation of the SQL interpreter (also 6.1).
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.2.4`.
 
-## Property (start here)
+## Authorized scope
 
-fetch_sql must bind the tenant (and note id) as parameters, not concatenate a string the SQL interpreter will parse as code. Application 1.2 is necessary; it is not a substitute for interpreter isolation.
+`labs/5.5/5.5-lab` only. Synthetic tenants `tA` / note ids. No live databases.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Query built by concatenating untrusted strings into SQL.
 
-- **Attacker:** Member who types a note id with SQL metacharacters; stolen app role (3.3).
-- **Trust:** Local query object. Real DB roles in 3.3.
-**Forbidden outcome:** Query built by concatenating untrusted strings into SQL
+## Mental model: one string is two languages
 
-**Authorized scope:** `labs/5.5/5.5-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable query.py concatenates.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: fetch_sql returns a concatenated str.
-
-## Vulnerable fixture (local)
-
-```python
-def fetch_sql(tenant, note_id):
-    return f"SELECT body FROM notes WHERE tenant='{tenant}' AND id='{note_id}'"
-def is_bound(sql):
-    return '%s' in sql or '?' in sql
+```mermaid
+flowchart TD
+  Call["fetch_sql tenant note_id"] --> Fmt[f-string SQL]
+  Fmt --> Str[returns str]
+  Str --> Fail["is_bound false"]
 ```
+
+The vulnerable tree demonstrates **cause** (data mixed into SQL grammar), not a trophy dump of another tenant.
+
+## What to read in the fixture
+
+`vulnerable/query.py` interpolates `tenant` and `note_id` into the SQL text. `is_bound` looking for `%s` inside that string is a false check: placeholders that never received a params tuple are still concatenation if you built the values into the text.
+
+Tests require a non-string bound structure. The quoted test fragment is **data** that must not become grammar. Do not paste it into notes as a cookbook.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Data and program mixed in one string. |
-| Impact | Interpreter reads other tenants / mutates rows. |
+| Root cause | Data and program mixed in one string |
+| Impact | Interpreter can read other tenants / mutate rows |
 | Not the lesson | A scanner name or Top 10 mnemonic as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/5.5/5.5-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/5.5/5.5-lab/tests --impl vulnerable
+```
+
+Record `test_query_is_bound_not_concatenated`. Do not probe public hosts.
 
 ## Transfer
 
-NoSQL operators, GraphQL args (7.1).
+Clinic search box. Predict without leaving this directory.
 
 ## Non-goals
 

@@ -1,52 +1,51 @@
-# 6.1 — Interpreter confusion and injection (4 Build)
+# 6.1-LO-04 — Pass the name as an argv element
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** ASVS 5.0.0 V5 (final); CWE-77/78/89 as *names after* the cause; OWASP Top 10:2025 A05 as regression awareness.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.2.5`.
 
-## Property (start here)
+## Structural means the shell never sees the name
 
-A filename or list target is data, not a shell program. argv_for_list must not invoke a shell. Structural APIs (argv list, parameterized SQL in 5.5) are the mechanism; denylists of metacharacters are incomplete.
+`argv_for_list` must return a list whose program is `ls` (or another fixed binary), not `sh`. The name is one element. `--` before the name is the extra slot that closes argument injection as a *named* residual.
 
-## Attacker capabilities and trust assumptions
+## Mental model: list, not string
 
-- **Attacker:** User who chooses a note/export name; a compromised client.
-- **Trust:** Local argv.py. No live OS attack — the test only checks argv shape.
-argv is ['ls', name] or reject; uses_shell False.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-def argv_for_list(name):
-    if any(c in name for c in ' 	;|&$`'):
-        raise ValueError('rejected')
-    return ['ls', name]
-def uses_shell(name):
-    return False
+```mermaid
+flowchart TD
+  Call[argv_for_list] --> List["ls -- name"]
+  List --> Shell{uses_shell?}
+  Shell -->|no| Allow[Allow]
+  Shell -->|yes| Deny[Deny]
 ```
+
+Fail-safe: if you cannot spawn without a shell, **do not spawn**.
 
 ## Why this restores the cell
 
-argv list; no shell; validate allow-listed names.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| honest `notes` | argv starts with `ls`, not `sh -c` |
+| `uses_shell` | false |
+| name slot | last element is the name, not `ls notes` as one string |
 
 ## What this is not
 
-subprocess defaults are easy to misuse; FastAPI has no opinion.
-
-Rejecting ; | still fails on IFS and encoding (2.1).
+A denylist of `;` `|` `$`. `shell=True` with “sanitized” strings. Commenting “internal users are trusted.”
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name the predicate. Run:
+
+```
+python3 -m pytest labs/6.1/6.1-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Jinja, SQL, mail headers.
+Clinic: stop wrapping the export filename in `sh -c`.
 
 ## Residual risk
 
-Needed shell for a plugin — isolate that binary.
+Argument injection if `--` is omitted; plugin shells; CSV formula Level 3 (`v5.0.0-1.2.10`).

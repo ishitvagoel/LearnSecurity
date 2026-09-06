@@ -1,40 +1,44 @@
-# 6.3 — Cross-site and cross-context attacks (6 Operate)
+# 6.3-LO-06 — Detect foreign_origin_post_denied; revoke surprise shares
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** ASVS 5.0.0 V3/V4 (final); Fetch Metadata / SameSite as *helpers*; cookie session (2.3) is not the CSRF property.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-3.5.1`.
 
-## Property (start here)
+## Prevention is not absolute
 
-A state-changing share POST from a foreign origin without a matching CSRF token/origin check is denied. Ambient cookies are not consent.
+A new JSON share route can forget the token check. Pair detect and recover. Do not log cookie values (4.3) or note bodies (3.1).
 
-## Attacker capabilities and trust assumptions
+## Mental model: denied foreign POST is a signal
 
-- **Attacker:** Evil origin with the victim’s browser session cookie.
-- **Trust:** Local allow_share(origin, expected, token).
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Req[Share POST] --> Foreign{origin mismatch or missing token?}
+  Foreign -->|yes| Metric["foreign_origin_post_denied += 1"]
+  Metric --> Alert["reason=foreign_origin_post_denied no cookie"]
+  Alert --> Revoke[Revoke surprise shares]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | csrf_rejected metric. |
-| Signal (no bodies) | foreign_origin_post_denied. |
-| Revoke / recover | Revoke surprise shares; notify. |
-| Residual | User clicking “share” on a lookalike UI — 4.2 phishing. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `foreign_origin_post_denied` |
+| Signal | request id, expected origin host; never the cookie or token |
+| Recover | Keep deny; revoke grants created in the window; notify the member |
+| Residual | Lookalike UI the user clicked (4.2); clickjacking |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/6.3/6.3-lab`.
+Write one log line you would accept. Tie it to `labs/6.3/6.3-lab`.
+
+```
+log_denied reason=foreign_origin_post_denied expected_host=app.securecollab.test request_id=req_63c
+```
+
+Reject any line that includes a session cookie, CSRF token, or note body.
 
 ## Transfer
 
-postMessage, clickjacking, CORS * with credentials.
-
-## Usability
-
-CSRF errors must be readable (not color-only). Do not make the secure path harder than a cross-site GET that still mutates.
+Clinic: detect partner-share POSTs from the wrong origin; do not paste cookies into the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+A WAF product name is not the property.

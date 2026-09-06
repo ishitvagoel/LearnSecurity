@@ -1,29 +1,31 @@
-# 6.3 — Cross-site and cross-context attacks (Review)
+# 6.3-LO-08 — Review cookie-only share POST as a PR, not a SameSite ticket
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** ASVS 5.0.0 V3/V4 (final); Fetch Metadata / SameSite as *helpers*; cookie session (2.3) is not the CSRF property.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-3.5.1`.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab share
 
-A state-changing share POST from a foreign origin without a matching CSRF token/origin check is denied. Ambient cookies are not consent.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Evil origin with the victim’s browser session cookie.
-- **Trust:** Local allow_share(origin, expected, token).
 Review `labs/6.3/6.3-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/6.3.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|foreign origin allowed| Property["Property - good if tested"]
+  Q -->|SameSite Lax| Mechanism[Mechanism - helper]
+  Q -->|CORS star| False[False assurance]
+```
 
-- Seeded smell (label it yourself): Cookie auth + no Origin check
-- Seeded smell (label it yourself): GET /share?to= 
-- Seeded smell (label it yourself): CORS * with credentials
-- Seeded smell (label it yourself): Token in cookie not bound to session
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- Cookie auth + no Origin check
+- GET `/share?to=`
+- CORS `*` with credentials
+- Token in a cookie not bound to the session
+
+Also reject: live third-party CSRF, keys in lessons.
 
 ## Misconceptions
 
@@ -33,12 +35,8 @@ Also reject: client trust, interpreter concatenation, Report-Only as enforcement
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_foreign_origin_post_is_denied`.
 
 ## Transfer
 
-postMessage, clickjacking, CORS * with credentials.
-
-## HITL / WCAG 2.2
-
-CSRF errors must be readable (not color-only). Do not make the secure path harder than a cross-site GET that still mutates.
+Clinic PR that “set SameSite=Lax” without an origin×token test is incomplete.

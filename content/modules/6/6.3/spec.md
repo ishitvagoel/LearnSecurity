@@ -1,6 +1,6 @@
 # 6.3 — Cross-site and cross-context attacks
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. No exploit walkthroughs.
 
 ## Identity
 
@@ -9,71 +9,73 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** Cross-site and cross-context attacks
 - **phase / track / difficulty:** 6 / core / intermediate
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Blueprint §7; 2.3 cookie jar; 4.3 session channel; 4.4 grants.
 - **routeTags:** complete, web-api
-- **releaseMilestone:** None
+- **releaseMilestone:** null
 - **masteryGate:** 6
 
 ## Objective hierarchy
 
-1. Produce **Cross-origin policy matrix and attack/defense tests** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce a **cross-origin policy matrix** plus share-POST tests for SecureCollab.
+2. Name attacker capabilities (foreign origin with the victim’s cookie) and trust assumptions (origin × token).
+3. Transfer: clinic “share with partner” POST; postMessage/clickjacking/CORS as named residuals.
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+2.3 ambient cookies; 4.4 share is a grant; SameSite is a helper not complete; Bearer is a different deputy.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- SameSite is CSRF done.
+- JSON APIs cannot CSRF.
+- CORS is CSRF defense.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+Cookie session (2.3) → this module’s site-bound intent → CORS/postMessage/clickjacking named residuals → 6.5 open redirect.
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true if a foreign origin POSTs share with the victim cookie and no token?
+- What fails if GET still mutates share?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can go wrong when cookies travel without site-bound intent?
+- What residual remains if origin and token are checked but a subframe or postMessage path is not?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/6.3/6.3-lab`. Forbidden: cookie-only share POST from a foreign origin. No live third-party sites.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-ASVS V3/V7 — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- OWASP ASVS 5.0.0 (final): `v5.0.0-3.5.1`, `v5.0.0-3.5.3`, `v5.0.0-3.3.2`; `v5.0.0-3.5.8` **Level 3, labeled advanced**.
+- SameSite and Fetch Metadata as *helpers*, not the property.
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+New share method, cookie SameSite change, CORS credentialed route, or postMessage listener.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: Cross-origin policy matrix and attack/defense tests.
+Evidence: origin × token matrix, deny tests, named residuals. Feeds Gate 6.
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`foreign_origin_post_denied`. Revoke surprise shares. Lookalike UI is 4.2.
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: cookie-without-intent mental models; ASVS v5.0.0-3.5.1; L3 3.5.8 labeled advanced |

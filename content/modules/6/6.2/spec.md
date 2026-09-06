@@ -1,6 +1,6 @@
 # 6.2 — Browser injection and active content
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. No exploit walkthroughs.
 
 ## Identity
 
@@ -9,71 +9,74 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** Browser injection and active content
 - **phase / track / difficulty:** 6 / core / intermediate
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Blueprint §7; 2.1 parsers; 2.3 cookie jar; 6.1 interpreter shape.
 - **routeTags:** complete, web-api
-- **releaseMilestone:** None
+- **releaseMilestone:** null
 - **masteryGate:** 6
 
 ## Objective hierarchy
 
-1. Produce **Browser exploit/fix lab plus CSP/Trusted Types plan** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce a **context-encoding map** plus HTML-text tests for SecureCollab note titles.
+2. Name attacker capabilities (collaborator-edited title) and trust assumptions (HTML text context in this lab).
+3. Transfer: clinic nickname; markdown-to-HTML as a second parser (2.1).
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+6.1 data vs grammar; 2.3 HttpOnly is not XSS defense; CSP3/Trusted Types are layered and **draft**.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- CSP replaces encoding.
+- React JSX is a guarantee for `dangerouslySetInnerHTML`.
+- Markdown is inert HTML.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+Interpreter shape (6.1) → HTML text context (this module) → CSP/Trusted Types as extra (draft) → E2 for report-only vs enforce.
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true if a title contains `<`?
+- What fails if you encode HTML text but concatenate into a JavaScript string?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can go wrong when HTML grammar mixes with data?
+- What residual remains if encoding is correct for text but wrong for attributes or URLs?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/6.2/6.2-lab`. Forbidden: unencoded markup in HTML text. Teaching encode; not an exploit kit. Tame marker: `<` must become `&lt;`.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-ASVS V1/V3; CWE-79 — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- OWASP ASVS 5.0.0 (final): `v5.0.0-1.2.1`, `v5.0.0-3.4.3`; `v5.0.0-3.4.7` **Level 3, labeled advanced**.
+- W3C CSP3 and Trusted Types: **draft**.
+- CWE-79 as awareness after the cause.
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+New HTML template, markdown pipeline, or CSP mode change; CSP3 becoming a Recommendation.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: Browser exploit/fix lab plus CSP/Trusted Types plan.
+Evidence: context map, encode test, named CSP draft residual. Feeds Gate 6.
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`stored_field_review`; CSP reports are not enforcement. Do not log title bodies if they are PHI.
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: HTML-grammar and context mental models; ASVS v5.0.0-1.2.1; CSP3 draft; L3 3.4.7 labeled advanced |

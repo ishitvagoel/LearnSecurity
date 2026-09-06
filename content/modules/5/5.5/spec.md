@@ -1,6 +1,6 @@
 # 5.5 — Database and persistence security
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. No exploit walkthroughs.
 
 ## Identity
 
@@ -9,71 +9,73 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** Database and persistence security
 - **phase / track / difficulty:** 5 / core / intermediate
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Blueprint §7; 1.2 cells; 3.3 DB-role second gate; 5.1 deletion graph for backups/replicas.
 - **routeTags:** complete, web-api
-- **releaseMilestone:** None
+- **releaseMilestone:** null
 - **masteryGate:** 5
 
 ## Objective hierarchy
 
-1. Produce **Schema, roles, constraints, backup/restore exercise** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce a **schema / role / constraint map** plus bound-query tests for SecureCollab note fetch.
+2. Name attacker capabilities (hostile `note_id` as SQL grammar) and trust assumptions (bound API; 3.3 role is a second gate).
+3. Transfer: clinic search box; NoSQL/GraphQL args wait for 7.1.
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+1.2 object-and-tenant grants; 3.3 `app` role must not SELECT another tenant; 5.1 copies on replicas; 6.1 same data-vs-grammar shape for shells.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- ORM means no injection.
+- RLS replaces parameterization or 1.2.
+- A denylist of quotes is complete mediation.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+Grant cells (1.2) → interpreter isolation (this module) → DB-role second gate (3.3) → backups/replicas (5.1).
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true if `note_id` contains SQL punctuation?
+- What fails if 1.2 is correct but the query string is concatenated?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can go wrong when data and SQL grammar share one string?
+- What residual remains if parameters are bound but ORDER BY is still concatenated?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/5.5/5.5-lab`. Forbidden: concatenated SQL; live database attacks. The test fragment is data, not a cookbook.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-ASVS V2/V8/V13/V14/V16 — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- OWASP ASVS 5.0.0 (final): `v5.0.0-1.2.4`, `v5.0.0-8.4.1`, `v5.0.0-13.2.2`; `v5.0.0-16.3.2` **Level 3 clause labeled advanced**.
+- PostgreSQL row-security documentation as **platform**, not the property.
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+New query builder, search DSL, replica, or migrator role; superseding **final** ASVS encoding chapter.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: Schema, roles, constraints, backup/restore exercise.
+Evidence: bound `fetch_sql`, role matrix, named backup/restore residual. Feeds Gate 5.
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`sql_error_spike`; `grant_drift` from 3.3. Never log SQL with bound values that are note bodies.
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: data-vs-SQL-grammar and three-gate mental models; ASVS v5.0.0-1.2.4; L3 16.3.2 labeled advanced |

@@ -1,49 +1,48 @@
-# 6.2 — Browser injection and active content (3 Break)
+# 6.2-LO-03 — Observe encoding, do not trophy a script
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** ASVS 5.0.0 V3 (final); CWE-79 as name; CSP3 / Trusted Types are layered and some docs are still CR — do not claim they replace encoding.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.2.1`.
 
-## Property (start here)
+## Authorized scope
 
-Angle brackets in a note title must be encoded in HTML context (`&lt;`) so the browser does not parse an extra element. Encoding is context-specific; CSP is not this cell.
+`labs/6.2/6.2-lab` only. Synthetic titles. No live browsers required.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Unencoded markup reaches the HTML interpreter.
 
-- **Attacker:** Collaborator who can edit a title; stored XSS later in another tenant’s view.
-- **Trust:** Local render(). Real DOM sinks in 2.3.
-**Forbidden outcome:** Unencoded markup reaches the HTML interpreter
+## Mental model: a raw angle bracket is already the break
 
-**Authorized scope:** `labs/6.2/6.2-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable html.py echoes markup.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: render echoes <img without encoding.
-
-## Vulnerable fixture (local)
-
-```python
-def render(body):
-    return f'<p>{body}</p>'
+```mermaid
+flowchart TD
+  Call["render with <"] --> Echo[p wraps raw string]
+  Echo --> Tag["<img remains a tag"]
 ```
+
+The vulnerable tree demonstrates **cause** (HTML grammar mixed with data). The tame marker is `<`. Do not paste exploit kits into notes.
+
+## What to read in the fixture
+
+`vulnerable/html.py` interpolates the body into `<p>…</p>` with no encoding. Tests require that `<img` is absent and `&lt;` is present. Honest text “Weekly notes” must still appear.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | HTML grammar mixed with data. |
-| Impact | Active content in the victim origin. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | HTML grammar mixed with data |
+| Impact | Browser would parse extra elements |
+| Not the lesson | A CWE-79 sticker as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/6.2/6.2-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/6.2/6.2-lab/tests --impl vulnerable
+```
+
+Record `test_angle_brackets_are_encoded`. Do not probe public hosts.
 
 ## Transfer
 
-Markdown-to-HTML sanitizer as a second parser (2.1).
+Clinic nickname. Predict without leaving this directory.
 
 ## Non-goals
 

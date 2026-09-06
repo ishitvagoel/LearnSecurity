@@ -1,38 +1,45 @@
-# 5.5 — Database and persistence security (5 Verify)
+# 5.5-LO-05 — Evidence is a bound tuple, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** ASVS 5.0.0 V13 (final); PostgreSQL role/RLS docs as *platform*; parameterization is complete mediation of the SQL interpreter (also 6.1).
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.2.4`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-fetch_sql must bind the tenant (and note id) as parameters, not concatenate a string the SQL interpreter will parse as code. Application 1.2 is necessary; it is not a substitute for interpreter isolation.
+“We parameterized queries” is not evidence. The oracle is the local pair.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Member who types a note id with SQL metacharacters; stolen app role (3.3).
-- **Trust:** Local query object. Real DB roles in 3.3.
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail concatenated str"]
+  X["--impl fixed"] --> P["Must pass is_bound"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Query built by concatenating untrusted strings into SQL |
-| Failure | Fail closed: Parameters; identifier allow-lists for ORDER BY |
+| Negative / abuse | concatenated SQL is not bound |
+| Normal | honest tenant and note id are still a bound tuple |
+| Not claimed | ORDER BY identifiers; live RLS; NoSQL operators |
 
-Lab tests: `test_property.py` under `labs/5.5/5.5-lab`.
+```
+python3 -m pytest labs/5.5/5.5-lab/tests --impl vulnerable
+python3 -m pytest labs/5.5/5.5-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Query built by concatenating untrusted strings into SQL`
-- `--impl fixed`: **pass**
+Honest bound shape must pass on fixed. Concatenated `str` must fail on vulnerable.
 
-is_bound true; concat fails the test.
+## What the tests do not prove
+
+- Identifier allow-lists for ORDER BY (named residual)
+- Cross-tenant 1.2 without a stolen query (3.3 / 4.4)
+- Backup/restore of mutated rows (5.1)
+- Level 3 authorization-decision logging (`v5.0.0-16.3.2`)
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-NoSQL operators, GraphQL args (7.1).
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic search box. A test that only asserts HTTP 200 is not this cell.

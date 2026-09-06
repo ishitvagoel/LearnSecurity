@@ -1,29 +1,31 @@
-# 6.2 — Browser injection and active content (Review)
+# 6.2-LO-08 — Review unencoded title HTML as a PR, not an XSS ticket
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** ASVS 5.0.0 V3 (final); CWE-79 as name; CSP3 / Trusted Types are layered and some docs are still CR — do not claim they replace encoding.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.2.1`.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab HTML rendering
 
-Angle brackets in a note title must be encoded in HTML context (`&lt;`) so the browser does not parse an extra element. Encoding is context-specific; CSP is not this cell.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Collaborator who can edit a title; stored XSS later in another tenant’s view.
-- **Trust:** Local render(). Real DOM sinks in 2.3.
 Review `labs/6.2/6.2-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/6.2.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|"raw < in output"| Property["Property - good if tested"]
+  Q -->|CSP Report-Only| Mechanism[Mechanism - not encoding]
+  Q -->|sanitizer after innerHTML| False[False assurance]
+```
 
-- Seeded smell (label it yourself): Template concatenates title
-- Seeded smell (label it yourself): CSP Report-Only as the fix
-- Seeded smell (label it yourself): No &lt; test
-- Seeded smell (label it yourself): Sanitizer after innerHTML assignment
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- Template concatenates title
+- CSP Report-Only as the fix
+- No `&lt;` test
+- Sanitizer after `innerHTML` assignment
+
+Also reject: exploit-kit payloads in the PR description, keys in lessons.
 
 ## Misconceptions
 
@@ -33,8 +35,8 @@ Also reject: client trust, interpreter concatenation, Report-Only as enforcement
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_angle_brackets_are_encoded`.
 
 ## Transfer
 
-Markdown-to-HTML sanitizer as a second parser (2.1).
+Clinic PR that “added CSP” without an encode test is incomplete.

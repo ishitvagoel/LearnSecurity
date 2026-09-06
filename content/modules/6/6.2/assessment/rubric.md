@@ -8,12 +8,12 @@ Browser injection and active content
 
 ## Evidence checklist
 
-- [ ] Browser exploit/fix lab plus CSP/TT rollout notes
-- [ ] Transfer task (Clinic patient nickname field.)
-- [ ] Lab `labs/6.2/6.2-lab`: forbidden outcome **Unencoded markup reaches the HTML interpreter**
-- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Context-encoding map, encode tests, CSP/TT labeled draft
+- [ ] Transfer task (clinic nickname; markdown as second parser)
+- [ ] Lab `labs/6.2/6.2-lab`: forbidden outcome **unencoded markup reaches the HTML interpreter**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: csp_report; stored_field_review.
+- [ ] Operate signal without bodies: `stored_field_review`
 
 ## Rubric
 

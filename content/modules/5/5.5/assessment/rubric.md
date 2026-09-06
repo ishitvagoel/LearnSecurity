@@ -8,12 +8,12 @@ Database and persistence security
 
 ## Evidence checklist
 
-- [ ] Schema threat model, role matrix, constraint tests, backup/restore
-- [ ] Transfer task (Clinic search box.)
-- [ ] Lab `labs/5.5/5.5-lab`: forbidden outcome **Query built by concatenating untrusted strings into SQL**
-- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Schema / role / constraint map and bound-query tests
+- [ ] Transfer task (clinic search box; NoSQL/GraphQL named for 7.1)
+- [ ] Lab `labs/5.5/5.5-lab`: forbidden outcome **query built by concatenating untrusted strings into SQL**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: sql_error_spike; grant_drift (3.3).
+- [ ] Operate signal without bodies: `sql_error_spike`
 
 ## Rubric
 

@@ -8,12 +8,12 @@ Cross-site and cross-context attacks
 
 ## Evidence checklist
 
-- [ ] Cross-origin policy matrix and attack/defense tests
-- [ ] Transfer task (Clinic “share record with partner” POST.)
-- [ ] Lab `labs/6.3/6.3-lab`: forbidden outcome **Cross-origin state-changing POST authorized by cookie alone**
-- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Origin × token matrix and share-POST tests
+- [ ] Transfer task (clinic share-with-partner POST; postMessage/clickjacking/CORS named)
+- [ ] Lab `labs/6.3/6.3-lab`: forbidden outcome **cross-origin state-changing POST authorized by cookie alone**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: foreign_origin_post_denied.
+- [ ] Operate signal without cookies: `foreign_origin_post_denied`
 
 ## Rubric
 

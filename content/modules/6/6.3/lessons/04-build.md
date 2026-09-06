@@ -1,50 +1,55 @@
-# 6.3 — Cross-site and cross-context attacks (4 Build)
+# 6.3-LO-04 — Require origin match and CSRF token
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** ASVS 5.0.0 V3/V4 (final); Fetch Metadata / SameSite as *helpers*; cookie session (2.3) is not the CSRF property.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-3.5.1`.
 
-## Property (start here)
+## Structural means the cookie is not enough
 
-A state-changing share POST from a foreign origin without a matching CSRF token/origin check is denied. Ambient cookies are not consent.
+`allow_share` must require a session cookie **and** `origin == expected` **and** a matching token. Structural means site-bound intent — not SameSite as the only check, not CORS as a stand-in.
 
-## Attacker capabilities and trust assumptions
+## Mental model: all three, or deny
 
-- **Attacker:** Evil origin with the victim’s browser session cookie.
-- **Trust:** Local allow_share(origin, expected, token).
-evil origin + no token => False.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-def allow_share(origin, expected, token=None, session_cookie=True):
-    if not session_cookie:
-        return False
-    return origin == expected and token == 'lab-csrf'
+```mermaid
+flowchart TD
+  Call[allow_share] --> Cookie{cookie?}
+  Cookie -->|no| Deny[Deny]
+  Cookie -->|yes| Origin{origin expected?}
+  Origin -->|no| Deny
+  Origin -->|yes| Token{token ok?}
+  Token -->|no| Deny
+  Token -->|yes| Allow[Allow]
 ```
+
+Fail-safe: missing origin or token **denies**.
 
 ## Why this restores the cell
 
-Reject foreign Origin; require token for cookie sessions.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| foreign origin, no token | false |
+| same origin, matching token, cookie | true |
+| cookie missing | false |
+| same origin, no token | false |
 
 ## What this is not
 
-SameSite=Lax is not complete (GET side effects, chrome exceptions).
-
-Bearer tokens in Authorization are a different deputy model.
+SameSite=Lax as complete. CORS `*` with credentials. Token stored in a cookie that the foreign origin can cause to be sent (double-submit without binding). GET `/share?to=`.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name the predicate. Run:
+
+```
+python3 -m pytest labs/6.3/6.3-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-postMessage, clickjacking, CORS * with credentials.
+Clinic: stop treating “logged-in cookie” as consent to share with a partner.
 
 ## Residual risk
 
-User clicking “share” on a lookalike UI — 4.2 phishing.
+Clickjacking; postMessage; open redirect (6.5); `v5.0.0-3.5.8` Level 3; 4.2 phishing.

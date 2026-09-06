@@ -1,33 +1,42 @@
-# 6.3 — Cross-site and cross-context attacks (7 Transfer)
+# 6.3-LO-07 — Transfer: clinic share-with-partner POST
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** ASVS 5.0.0 V3/V4 (final); Fetch Metadata / SameSite as *helpers*; cookie session (2.3) is not the CSRF property.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-3.5.1`. SameSite is a helper.
 
-## Property (start here)
+## Change the workplace; keep cookie-without-intent
 
-A state-changing share POST from a foreign origin without a matching CSRF token/origin check is denied. Ambient cookies are not consent.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic “share record with partner” POST. Also name postMessage, clickjacking, and CORS `*` with credentials as residuals — do not run them against a live clinic.
 
-- **Attacker:** Evil origin with the victim’s browser session cookie.
-- **Trust:** Local allow_share(origin, expected, token).
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite share button that relies on the login cookie.
 
-**Prompt:** postMessage, clickjacking, CORS * with credentials.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic “share record with partner” POST.
+1. attacker capabilities (foreign origin using the victim browser as deputy — not a live clinic);
+2. trust assumptions (origin + token are TCB; SameSite is not);
+3. forbidden outcome (`allow_share` true for foreign origin without token, not “HIPAA”);
+4. a test idea on a **local** fixture only;
+5. residual (GET mutate; clickjacking; postMessage; CORS credentials; Level 3 embeds; 4.2 phishing);
+6. WCAG if a human deny page is in the claim (readable “share blocked,” not a silent no-op).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: partner share is still a grant POST
+
+```mermaid
+flowchart LR
+  Partner[share with partner] --> Belief[UI believes the user clicked]
+  Cookie3[ambient cookie] --> Reality[foreign origin can POST]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | SameSite=Lax is not complete (GET side effects, chrome exceptions).… |
-| Live-target plan | Lab policy |
+| “SameSite is Lax” | Helper, not complete |
+| Live clinic probe | Lab policy |
+| CORS as the CSRF property | Different cell |
 
 ## Practice
 
-One page. No keys. The lab `labs/6.3/6.3-lab` stays the only running system you may break.
+One page. No keys. `labs/6.3/6.3-lab` is the only running system you may break.

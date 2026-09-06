@@ -1,53 +1,71 @@
-# 6.3 — Cross-site and cross-context attacks (2 Model)
+# 6.3-LO-02 — An origin × token map a second engineer can test
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** ASVS 5.0.0 V3/V4 (final); Fetch Metadata / SameSite as *helpers*; cookie session (2.3) is not the CSRF property.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-3.5.1`.
 
-## Property (start here)
+## Can a second engineer name pytest cases from your origin map?
 
-A state-changing share POST from a foreign origin without a matching CSRF token/origin check is denied. Ambient cookies are not consent.
+“SameSite is on” is not this lesson. A reviewable model names **who may POST share, with which cookie, origin, and token**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab Phase 1 freeze: local `allow_share(origin, expected, token, session_cookie)`. No live browsers.
 
-- **Attacker:** Evil origin with the victim’s browser session cookie.
-- **Trust:** Local allow_share(origin, expected, token).
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: three inputs, one decision
+
+```mermaid
+flowchart TD
+  C[session_cookie] --> D{allow_share}
+  O[origin == expected] --> D
+  T[token matches] --> D
+```
+
+Missing cookie denies. Matching origin without token denies. Foreign origin denies.
+
+## Mental model: Bearer is a different deputy
+
+```mermaid
+flowchart LR
+  Cookie2[cookie] --> Ambient[rides on form POST]
+  Bearer[Authorization] --> Manual[caller must attach]
+```
+
+This lab is the cookie deputy. Do not treat a Bearer-only API as “CSRF solved” if a cookie fallback still exists.
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | victim browser, evil.example, app |
-| Objects | share POST, Origin, CSRF token |
-| Actions | allow_share |
-| Channels | cookie + cross-site POST |
-| TCB | Server check of Origin/Fetch Metadata and/or anti-CSRF token bound to session. |
-| Untrusted | Cookie presence, Referer alone |
-| State / time | User still logged in while visiting evil. |
-| 1.1 cell | Integrity of share grants (3.4/1.2) against the browser’s confused-deputy. |
+| Subjects | victim browser; foreign origin |
+| Objects | share grant |
+| Actions | `allow_share` |
+| Channels | cookie; Origin; CSRF token |
+| TCB | origin match **and** token when cookie present |
+| Untrusted | Origin header from the request; missing token |
+| State / time | one POST |
+| 1.1 cell | Integrity of share grants |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| app origin | POST share | with token | allow |
-| evil origin | POST share | cookie only | deny |
-| evil origin | GET share | mutate | deny |
-| bearer API | POST | no cookie | different-model |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| same origin + token + cookie | share | POST | allow |
+| foreign origin + cookie | share | POST | deny |
+| same origin, no token | share | POST | deny |
+| no cookie | share | POST | deny |
+| GET | share | mutate | deny (named, not this fixture) |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/6.3/6.3-lab` file `csrf.py`.
+Fill the matrix. Point at `labs/6.3/6.3-lab` file `csrf.py`.
 
 ## Transfer
 
-postMessage, clickjacking, CORS * with credentials.
+Clinic partner-share POST; postMessage origin check.
 
 ## Residual risk
 
-User clicking “share” on a lookalike UI — 4.2 phishing.
+Clickjacking; CORS credentials; `v5.0.0-3.5.8` Level 3 embeds; 4.2 lookalike UI.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

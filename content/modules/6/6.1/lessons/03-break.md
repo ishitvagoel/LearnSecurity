@@ -1,51 +1,48 @@
-# 6.1 — Interpreter confusion and injection (3 Break)
+# 6.1-LO-03 — Observe argv shape, do not trophy a shell
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** ASVS 5.0.0 V5 (final); CWE-77/78/89 as *names after* the cause; OWASP Top 10:2025 A05 as regression awareness.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.2.5`.
 
-## Property (start here)
+## Authorized scope
 
-A filename or list target is data, not a shell program. argv_for_list must not invoke a shell. Structural APIs (argv list, parameterized SQL in 5.5) are the mechanism; denylists of metacharacters are incomplete.
+`labs/6.1/6.1-lab` only. Synthetic name `notes`. No live OS commands.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** User-controlled name executed via a shell string.
 
-- **Attacker:** User who chooses a note/export name; a compromised client.
-- **Trust:** Local argv.py. No live OS attack — the test only checks argv shape.
-**Forbidden outcome:** User-controlled name executed via a shell string
+## Mental model: sh -c is a second parser
 
-**Authorized scope:** `labs/6.1/6.1-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable argv.py uses sh -c concat.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: returns ['sh','-c','ls '+name].
-
-## Vulnerable fixture (local)
-
-```python
-def argv_for_list(name):
-    return ['sh', '-c', 'ls ' + name]
-def uses_shell(name):
-    return True
+```mermaid
+flowchart TD
+  Call["argv_for_list notes"] --> Sh["sh -c ls + name"]
+  Sh --> Shell[uses_shell true]
 ```
+
+The vulnerable tree demonstrates **cause** (name concatenated into a shell grammar), not a command-execution trophy.
+
+## What to read in the fixture
+
+`vulnerable/argv.py` returns `['sh', '-c', 'ls ' + name]` and `uses_shell` true. Tests require that the first two argv elements are not `sh -c` and that `uses_shell` is false. Honest name `notes` is enough. Do not add metacharacter cookbooks to notes.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Concatenating untrusted data into a shell grammar. |
-| Impact | OS interpreter runs attacker grammar (lab asserts structure only). |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Concatenating untrusted data into a shell grammar |
+| Impact | OS interpreter would run attacker grammar (structure only here) |
+| Not the lesson | A CWE number as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/6.1/6.1-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/6.1/6.1-lab/tests --impl vulnerable
+```
+
+Record `test_does_not_invoke_shell`. Do not probe public hosts.
 
 ## Transfer
 
-Jinja, SQL, mail headers.
+Clinic export filename. Predict without leaving this directory.
 
 ## Non-goals
 
