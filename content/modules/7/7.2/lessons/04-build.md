@@ -1,16 +1,17 @@
-# 7.2-LO-04 — Allow-list fields by role
+# Allow-list fields by role
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.3`. `v5.0.0-8.2.2` is object-level (4.4). `v5.0.0-8.3.2` immediate grant change is **Level 3, advanced**.
 
-## Structural means the trusted layer checks role × field
+## The rule
 
-`resolve` must deny `secret_internal` unless `role == "service"`. Structural means that predicate — not a GraphQL `@hide` directive the client can skip, not a REST field name that starts with `_`, not a hidden SPA column.
+Hiding the column in the SPA is not the fix. GraphQL `@hide` the client can skip is not the fix. A REST field name that starts with `_` is not the fix. “We already passed object GET tests” is not the fix.
 
-The smallest restore for SecureCollab note JSON is: deny member × `secret_internal`. Fail-safe: unknown roles deny the internal field. Do not fail open because the serializer cache still holds yesterday’s dump.
+The structural change is: the trusted layer **checks role × field**. `resolve` must deny `secret_internal` unless `role == "service"`. Structural means that predicate — not a hidden SPA column.
 
-## Mental model: field deny unless listed
+The smallest restore for the notes app’s note JSON is: deny member × `secret_internal`. Fail closed: unknown roles deny the internal field. Do not fail open because the serializer cache still holds yesterday’s dump.
+
+## Picture: field deny unless listed
 
 ```mermaid
 flowchart TD
@@ -21,11 +22,11 @@ flowchart TD
   Secret -->|no| Public[allow display_name]
 ```
 
-The lab’s fixed tree checks `role == "service"` only for `secret_internal`. Production still needs the matrix restated for CSV, search snippets, debug toolbar, and 7.4 workers (LO-02). Object GET success (4.4) is a coarser grain — it locates the row, it does not grant every column. Extra-key *writes* remain 7.1.
+The repaired files check `role == "service"` only for `secret_internal`. Production still needs the table restated for CSV, search snippets, debug toolbar, and later workers (7.4). Object GET success (4.4) is a coarser grain — identifiers find a row; they do not authorize fields. Extra-key *writes* remain 7.1.
 
-ASVS `v5.0.0-8.2.3` wants that explicit permission implemented. This pytest is that sentence for member × `secret_internal`.
+Industry checklists want that explicit permission implemented. This pytest is that sentence for member × `secret_internal`. Applying a role change through every serializer right away is **advanced**, not this week’s pytest.
 
-## Why this restores the cell
+## What the repaired files must show
 
 | After the fix | Must be true |
 |---|---|
@@ -33,35 +34,37 @@ ASVS `v5.0.0-8.2.3` wants that explicit permission implemented. This pytest is t
 | member × `display_name` | true |
 | service × `secret_internal` | true |
 
+Fail closed: unknown roles deny the internal field. Do not keep the dump because “the UI hides it.”
+
 ## What this is not
 
 Object GET tests only (4.4). Extra-key write tests only (7.1). UI omit. UUID as capability. GraphQL schema “private” naming. FastAPI `response_model` unused overlay.
 
-## Mechanism limits
+## What the tool cannot do
 
 - UI hide, GraphQL `__typename` tricks, and “private” naming are not mediation.
-- CSV export, search snippets, debug toolbar, and 7.4 workers are additional serializers.
-- After a role change, a cached dump can still leak (`v5.0.0-8.3.2`, Level 3 advanced).
+- CSV export, search snippets, debug toolbar, and later workers (7.4) are additional serializers.
+- After a role change, a cached dump can still leak (advanced leftover).
 - Honest `display_name` XSS remains 6.2.
 
 ## Practice
 
-Name the predicate (`secret_internal` only if `role == "service"`). Run:
+Name the predicate (`secret_internal` only if `role == "service"`). Run `--impl fixed` (must pass):
 
 ```text
 python3 -m pytest labs/7.2/7.2-lab/tests --impl fixed
 ```
 
-Must pass. Run from the lab directory if collection at repo root is polluted.
+Run from the lab directory if collection at repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-## Transfer
+## Use it somewhere new
 
 Clinic: stop treating “SSN not in the member table UI” as field authorization.
 
-## Residual risk
+## What can still go wrong
 
-CSV/search/7.4 serializers; `v5.0.0-8.3.2` Level 3 after role change; 4.4 object grain still required; 7.1 extra-key writes still required.
+CSV / search / later-worker serializers; stale cache after a role change (advanced); 4.4 object grain still required; 7.1 extra-key writes still required.
 
-## Non-goals
+## What this page is not doing
 
-Do not query a public GraphQL host. Do not claim Gate 7 from a hidden column screenshot.
+Do not query a public GraphQL host. Do not claim a course gate from a hidden-column screenshot.

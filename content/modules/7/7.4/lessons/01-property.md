@@ -1,20 +1,19 @@
-# 7.4-LO-01 — Leftover user session is not worker identity
+# A leftover user session is not worker identity
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-13.2.1`, `v5.0.0-13.2.2`; `v5.0.0-8.3.3` is **Level 3, advanced**. NIST SP 800-207 is architecture *guidance*, not a product.
 
-## The claim this module owns
+## The rule
 
-SecureCollab export can run in a worker after the HTTP request returns (6.7 quota still applies). The worker is a **service principal**. A leftover cookie or `user_session` stuffed into the job must not become ambient authority. That is a confused deputy: the queue message’s user field must not impersonate the worker.
+The notes app can export after the web request is already over. Export still has a budget from the quota lesson (6.7). The overnight job is a **worker**, not Alice’s leftover login. A leftover cookie, or a `user_session` stuffed into the job, must not become the worker’s identity. That is a confused deputy: the queue message’s user field must not impersonate the worker.
 
 > `exporter({"user_session": "alice", "service": None})` must be `None`. `exporter({"service": "worker-sc"})` may be `"worker-sc"`.
 
-The forbidden outcome is **user session accepted as worker identity**. That is authorization of the worker plane, plus stale-user export after 4.1 revoke.
+What must not happen is **a leftover user session accepted as worker identity**. That is who the worker is allowed to be. It is also leftover Alice still exporting after delete-and-revoke (4.1).
 
-ASVS `v5.0.0-13.2.1` wants backend components authenticated with individual service accounts or short-term tokens, not leftover user sessions. `v5.0.0-13.2.2` wants those accounts least-privileged. `v5.0.0-8.3.3` (access based on the *originating* subject through an intermediary) is **Level 3, advanced** — named so learners do not collapse “worker must not *be* alice” with “worker must still *check* alice’s grant.”
+Industry lists want backend jobs logged in as their own short-lived service accounts, not leftover people. Those accounts should be small. After the worker is the worker, it may still need Alice’s grant (4.4) to choose *which* notes. That later check is **advanced** work. Do not collapse “the worker must not *be* Alice” with “the worker must still *check* Alice’s grant.”
 
-## Mental model: HTTP subject versus worker principal
+## Picture: HTTP subject versus worker principal
 
 ```mermaid
 flowchart TD
@@ -24,9 +23,9 @@ flowchart TD
   Worker --> Right["export as worker-sc"]
 ```
 
-Celery (or similar) inheriting request context is a trap: the task looks like it is still the user.
+A task library that copies the web request into the job is a trap: the task looks like it is still the user.
 
-## Mental model: confused deputy
+## Picture: confused deputy
 
 ```mermaid
 flowchart LR
@@ -35,53 +34,55 @@ flowchart LR
   Ambient --> Export["export notes alice could not"]
 ```
 
-If the worker DB role is god-mode (3.3), the deputy is worse: it can read every tenant.
+If the worker’s database role is god-mode (3.3), the deputy is worse: it can read every company.
 
-**Mechanism (not the property):** “internal queue,” “VPC,” “zero-trust product,” “Celery signed messages.”
+**The tool (not the rule):** an “internal” queue, a private network, a zero-trust product name, or signed broker messages.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-| Slice | For this property |
+| Slice | For this rule |
 |---|---|
-| Root cause | Ambient user context in a system worker |
-| Preconditions | `exporter({user_session: alice})` succeeds |
+| Why it happens | Ambient user context in a system worker |
+| What has to be true first | `exporter({user_session: alice})` succeeds |
 | Trigger | Job with leftover session or inherited request context |
-| Impact | User cookie drives privileged export; stale user still exports |
-| Prevention | Jobs name `service=worker-sc`; workers authenticate as that principal |
-| Detection | `worker_identity_wrong` |
-| Recovery | Revoke service creds; drain queue |
+| What it costs | User cookie drives privileged export; stale user still exports |
+| How you stop it | Jobs name `service=worker-sc`; workers authenticate as that principal |
+| How you notice | `worker_identity_wrong` |
+| How you recover | Revoke service creds; drain the queue |
 
-## Framework defaults versus the worker guarantee
+## What the framework does vs what you still have to check
 
-Celery can copy the request context into the task. FastAPI Depends() is gone once the HTTP worker returns. A message broker inside the VPC is still untrusted input (2.1).
+A task library can copy the request into the later job. FastAPI `Depends()` is gone once the HTTP worker returns. A message broker on a private network is still untrusted input (2.1).
 
-## Mechanism limits
+The app’s promise: leftover Alice is `None`; the named worker may run. The folder is `labs/7.4/7.4-lab`. Fake job dicts only. No live broker.
 
-- Service role that is still god-mode (3.3).
-- Poison-message loops and 2.4 retries of revoked grants.
-- Originating-subject carry-through (`v5.0.0-8.3.3`, Level 3) is a *different* cell: after the worker is `worker-sc`, it may still need alice’s 4.4 grant to choose *which* notes.
-- Broker ACLs wait for 10.3.
-- NIST SP 800-207 does not replace the pytest oracle.
+## What the tool cannot do
 
-## Usability and accessibility
+- A correctly named worker that is still a superuser database role (3.3).
+- Poison-message loops, and retries of revoked grants (2.4).
+- After the worker is `worker-sc`, it may still need Alice’s grant (4.4) to choose which notes — that later check is advanced work, not this pytest.
+- Broker access lists wait for 10.3.
+- A zero-trust architecture paper does not replace the pytest.
 
-Export-ready emails must not imply the worker ran “as you” if it ran as service. Failure to enqueue should be readable (WCAG 2.2 4.1.3), not a silent retry storm (6.7).
+## Can people still use it
+
+“Export ready” email must not imply the worker ran “as you” if it ran as the service. Failure to enqueue should be something a screen reader can announce, not a silent retry storm (6.7).
 
 ## Practice
 
 Trace one export: who is the subject at HTTP vs worker. Then run:
 
-```
+```text
 python3 -m pytest labs/7.4/7.4-lab/tests --impl vulnerable
 python3 -m pytest labs/7.4/7.4-lab/tests --impl fixed
 ```
 
 The first command must fail. The second must pass.
 
-## Transfer
+## Use it somewhere new
 
 Clinic batch-export worker. Outbox. Event schemas.
 
-## Non-goals
+## What this page is not doing
 
-Live broker attacks, dumping Celery exploits into notes. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not in this file.
+Live broker attacks, dumping task-library exploits into notes. Course gates stay unclaimed. Answer keys are not in this file.

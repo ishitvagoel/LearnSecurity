@@ -1,56 +1,57 @@
-# 7.1-LO-08 — Review update(body) as a PR, not an API9 ticket
+# Review update(body) like a pull request
 
 **Kind:** code-review
 **Loop step:** Review
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-15.3.3`.
 
-## Review the fixture as if it were SecureCollab profile PATCH
+Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
 
-Review `labs/7.1/7.1-lab/vulnerable/` as a SecureCollab PR. Your job is not to count suspicious lines. Reconstruct whether `apply(..., {"is_admin": true})` still writes true, compare that with the module invariant, and write changes a developer can verify.
+## What you are reviewing
 
-Intended findings live only in `content/assessment/keys/7.1.md` — not here. Do not open the keys file until your review has been evaluated.
+A colleague ships the notes app’s profile PATCH. Review `labs/7.1/7.1-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `apply(..., {"is_admin": true})` still writes true, compare that with the rule, and write changes a developer can verify.
 
-## Mental model: user.update(body) / __dict__.update
+The check you already ran (`test_is_admin_cannot_be_patched`) is the rule check. A comment “we should allow-list later” is not. An inventory ticket about leftover endpoints is not this review.
 
-Start with this seeded smell: **`user.update(body)` / `__dict__.update`**. Label it property, mechanism, or false assurance before you accept the PR.
+## Picture: user.update(body) / __dict__.update
+
+Start with this seeded smell: **`user.update(body)` / `__dict__.update`**. Label it **rule**, **tool**, or **false comfort** before you accept the change.
 
 ```mermaid
 flowchart TD
-  Claim[PR claim] --> Q{"What would falsify it?"}
-  Q -->|is_admin true| Property["Property - good if tested"]
-  Q -->|OpenAPI file| Mechanism[Mechanism - inventory]
-  Q -->|SPA omits checkbox| False[False assurance]
+  Claim[Change claim] --> Q{"What would prove it false?"}
+  Q -->|is_admin true| Property["Rule — good if checked"]
+  Q -->|OpenAPI file| Mechanism[Tool — inventory]
+  Q -->|SPA omits checkbox| False[False comfort]
 ```
 
 Classification starts at the protected effect (`is_admin` still false). Everything that is not a server `ALLOWED` copy at that call is a candidate extra-key path. An OpenAPI file without that pytest is the same smell, not a different finding class.
 
-A missing SPA checkbox (3.4’s client residual, restated for fields) does not bind `apply`. Leftover `/v0` and GraphQL `input: JSON` are other binders — name them, do not skip `test_is_admin_cannot_be_patched`.
+A missing SPA checkbox (3.4’s client leftover, restated for fields) does not bind `apply`. Leftover `/v0` and GraphQL `input: JSON` are other binders — name them, do not skip `test_is_admin_cannot_be_patched`.
 
 ## Seeded smells (label them yourself)
 
 - `user.update(body)` / `__dict__.update`
 - Undocumented route not in inventory
-- No `is_admin` deny test
+- No `is_admin` deny check
 - OpenAPI not generated from the running handlers
 
-Also reject: public API attacks; closing findings without re-running `test_is_admin_cannot_be_patched`; keys in lessons; dumping Pydantic models as the lesson.
+Also reject: public API attacks; closing findings without re-running `test_is_admin_cannot_be_patched`; keys in learner notes; dumping Pydantic models as the lesson.
 
-## Misconceptions this module refuses
+## Common mix-ups this topic refuses
 
 - If it is not in Swagger it cannot be called
 - GraphQL is self-documenting therefore extra mutation args are safe
 - Versioning is a security control
 - A complete OpenAPI file proves extra keys are ignored
-- API9 is the property
+- A leftover-endpoint nickname is the rule
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: observation, property or false assurance, suggested structural change, residual you will **not** delete. Tie at least one to `test_is_admin_cannot_be_patched`.
+Write three review notes a peer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_is_admin_cannot_be_patched`. Do not open the keys file.
 
-## Transfer
+## Use it somewhere new
 
-Clinic PR that “documented the PATCH in OpenAPI” without an `is_staff` deny test is an incomplete mediation review. Name the independent falsehood that would still keep `is_staff` false.
+A clinic change that “documented the PATCH in OpenAPI” without an `is_staff` deny check is an incomplete review. Name the independent falsehood that would still keep `is_staff` false.
 
-## Non-goals
+## What this page is not doing
 
-Do not merge by adding a comment “will allow-list later.” That comment is a residual without an owner. Do not probe a public API to prove the finding.
+Do not merge by adding a comment “will allow-list later.” That comment is leftover without an owner. Do not probe a public API to prove the finding.

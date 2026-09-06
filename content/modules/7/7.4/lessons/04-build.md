@@ -1,16 +1,17 @@
-# 7.4-LO-04 — Bind exporter to worker-sc only
+# Bind the exporter to the worker only
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-13.2.1`, `v5.0.0-13.2.2`. Originating-subject carry-through (`v5.0.0-8.3.3`) is **Level 3, advanced**. NIST SP 800-207 is guidance, not a product.
 
-## Structural means the worker authenticates as a service principal
+## The rule
 
-`exporter` must return `"worker-sc"` only when `service == "worker-sc"`. Leftover `user_session` is ignored. Structural means that check — not “the queue is internal,” not a VPC, not a zero-trust dashboard, not signed broker messages as a substitute for the principal.
+An “internal” queue is not the fix. A private network is not the fix. A zero-trust dashboard is not the fix. Signed broker messages are not a substitute for who the worker is.
 
-The smallest restore for SecureCollab overnight export is: alice session yields `None`. Fail-safe: missing service denies. A fallback `user_session or service` is the bug. Do not fail open because the broker was “inside the VPC.”
+Structural means the worker authenticates as a service principal. `exporter` must return `"worker-sc"` only when `service == "worker-sc"`. Leftover `user_session` is ignored.
 
-## Mental model: service or nothing
+The smallest restore for notes-app overnight export is: Alice session yields `None`. Fail closed: missing service denies. A fallback `user_session or service` is the bug. Do not fail open because the broker was “inside the private network.”
+
+## Picture: service or nothing
 
 ```mermaid
 flowchart TD
@@ -19,11 +20,13 @@ flowchart TD
   Svc -->|no| Deny["return none"]
 ```
 
-The lab’s fixed tree returns `"worker-sc"` only on an exact service match. Production still needs a least-privileged DB role for that principal (`v5.0.0-13.2.2` / 3.3): a correctly named worker that is still god-mode can read every tenant. Originating-subject carry-through (`v5.0.0-8.3.3`, Level 3 advanced) is a *different* cell: after the worker is `worker-sc`, it may still need alice’s 4.4 grant to choose *which* notes. Broker ACLs wait for 10.3.
+The lab’s repaired files return `"worker-sc"` only on an exact service match. Production still needs a least-privileged database role for that principal (3.3): a correctly named worker that is still god-mode can read every company. After the worker is `worker-sc`, it may still need Alice’s grant (4.4) to choose *which* notes. That later check is advanced work, not this pytest. Broker access lists wait for 10.3.
 
-ASVS `v5.0.0-13.2.1` wants that individual service account. This pytest is that sentence for leftover alice.
+Industry lists want that individual service account. This pytest is that sentence for leftover Alice.
 
-## Why this restores the cell
+## What the repaired files must show
+
+Read `fixed/worker.py` against this checklist. Do not treat the snippet as a production broker.
 
 | After the fix | Must be true |
 |---|---|
@@ -31,38 +34,40 @@ ASVS `v5.0.0-13.2.1` wants that individual service account. This pytest is that 
 | `service=worker-sc` | `"worker-sc"` |
 | alice + wrong service | `None` |
 
+Fail closed: if the job does not name the worker, the answer is deny. Uncertainty is a **no**, not a yes because the queue was “internal.”
+
 ## What this is not
 
-God-mode DB role (3.3) as this oracle. Originating-subject token pass-through (`v5.0.0-8.3.3`, Level 3). Signed broker messages as a substitute for principal checks. NIST SP 800-207 as a product. VLAN as identity.
+God-mode database role (3.3) as this check. Passing Alice’s login through the worker as a later grant check (advanced). Signed broker messages as a substitute for the principal. A zero-trust paper as a product. VLAN as identity.
 
-## Mechanism limits
+## What the tool cannot do
 
 - Service role that is still god-mode (3.3).
-- Poison-message loops and 2.4 retries of revoked grants.
-- Originating-subject carry-through (`v5.0.0-8.3.3`, Level 3 advanced) is a different cell.
-- 7.2 field dumps from the worker serializer.
-- 5.3 leftover default worker credentials.
-- Broker ACLs wait for 10.3.
-- NIST SP 800-207 does not replace the pytest oracle.
+- Poison-message loops and retries of revoked grants (2.4).
+- After the worker is the worker, choosing notes from Alice’s grant is a different cell.
+- Field dumps from the worker serializer (7.2).
+- Leftover default worker credentials (5.3).
+- Broker access lists wait for 10.3.
+- A zero-trust architecture paper does not replace the pytest.
 
 ## Practice
 
-Name the predicate (`service == "worker-sc"`; leftover session ignored). Run:
+Name the check (`service == "worker-sc"`; leftover session ignored). Run:
 
 ```text
 python3 -m pytest labs/7.4/7.4-lab/tests --impl fixed
 ```
 
-Must pass. Run from the lab directory if collection at repo root is polluted.
+It must pass. Run from the lab directory if collection at repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-## Transfer
+## Use it somewhere new
 
 Clinic: stop treating “the batch job runs on the hospital VLAN” as worker identity.
 
-## Residual risk
+## What can still go wrong
 
-Poison loops; 2.4 retry of revoked grants; 7.2 dumps; 5.3 default worker credentials; 10.3 broker ACLs; god-mode DB role; Level 3 originating subject.
+Poison loops; retry of revoked grants (2.4); field dumps (7.2); default worker credentials (5.3); broker access lists (10.3); god-mode database role; the later originating-subject check (advanced).
 
-## Non-goals
+## What this page is not doing
 
-Do not attach to a live broker. Do not claim Gate 7 from a zero-trust screenshot.
+Do not attach to a live broker. Do not claim a course gate from a zero-trust screenshot.

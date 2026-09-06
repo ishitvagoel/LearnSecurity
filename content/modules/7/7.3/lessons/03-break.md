@@ -1,31 +1,40 @@
-# 7.3-LO-03 — Observe always-true accept, do not trophy a live provider
+# Practice: an unsigned body is accepted
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-11.2.1`. Replay/freshness (`v5.0.0-2.3.4` / `v5.0.0-2.3.3`) are residuals. Per-message signatures (`v5.0.0-4.1.5`) are **Level 3, advanced**. API10 is awareness after the cause.
 
-## Authorized scope
+## Try it
 
-`labs/7.3/7.3-lab` only. The fixture is an in-process `accept(sig, body, secret)`. Disposable `lab-secret` and synthetic `body`. No live Stripe, GitHub, or clinic webhooks. Do not POST to public hosts.
+The practice is not a website you attack. It is a tiny Python `accept`. It does not open a network. The failure is already in the function: it returns true for every triple. You are here to see that an unsigned body counting as authentic is a **failed rule**, not a trophy POST to a live provider.
 
-**Forbidden outcome:** Unsigned webhook body accepted. `accept("", "body", "lab-secret")` returns true.
+The rule under test:
 
-Attacker capability in this lab: anyone who can POST the callback URL with an empty or wrong signature. That stands in for a forged billing event, an “export-ready” callback, or a clinic lab-result post. Trust assumption: `accept` is supposed to be **message authenticity over raw bytes**. TLS to the path, a vendor CIDR allow-list, and a vendor SDK name are not in the TCB for this cell.
+> An unsigned webhook body is not authentic. `accept("", "body", "lab-secret")` must be false. This practice checks the predicate only. It does not POST a live webhook.
 
-## Mental model: path is enough
+## Where you may practice
+
+Only `labs/7.3/7.3-lab` is in scope. The maps are in-process: `accept(sig, body, secret)`. Disposable `lab-secret` and a synthetic `body`. Restore the broken and repaired folders when you are done.
+
+Do not POST to Stripe. Do not POST to GitHub. Do not POST to a clinic webhook. Do not POST to public hosts. Do not paste a live callback URL “to see what happens.”
+
+What must not happen: an unsigned webhook body is accepted. `accept` returns true for an empty signature.
+
+Who can act here: anyone who can POST the callback URL with an empty or wrong signature. That stands in for a forged billing event, an “export-ready” callback, or a clinic lab-result post. What you are supposed to trust: `accept` is **message authenticity over raw bytes**. TLS to the path, a vendor address-range allow-list, and a vendor SDK name are not what you trust for this check.
+
+## Picture: hitting the path is enough
 
 ```mermaid
 flowchart TD
   Call["accept empty sig"] --> True[returns true]
 ```
 
-The vulnerable tree demonstrates **cause** (path trusted). Do not POST anything except this fixture. Preconditions: `accept` returns true for every triple. You do not need HTTP. You must not POST a live provider.
+The broken files show **cause** (the path was trusted). Do not POST anything except this fixture. What has to be true first: `accept` returns true for every triple. You do not need HTTP. You must not POST a live provider.
 
-ASVS `v5.0.0-11.2.1` wants industry-validated cryptographic implementations (stdlib HMAC-SHA256 in the lab). Module 5.4 already said TLS proves a hop; this cell is **whether the message came from the provider**. HMAC here is a teaching stand-in, not “we are Stripe.”
+Industry lists want a standard-library MAC. Module 5.4 already said TLS proves a hop; this cell is **whether the message came from the provider**. HMAC here is a teaching stand-in, not “we are Stripe.” A famous-bugs nickname for unsafe consumption of APIs is awareness after the cause, not that check.
 
-## What to read in the fixture
+## What to look at — cause, not a live POST
 
-`vulnerable/hook.py` returns true for every triple. Tests:
+Read `vulnerable/hook.py`. It returns true for every triple. Tests:
 
 - `test_missing_signature_is_rejected`
 - `test_wrong_signature_is_rejected`
@@ -33,27 +42,35 @@ ASVS `v5.0.0-11.2.1` wants industry-validated cryptographic implementations (std
 
 You do not need a new secret. The failure of `test_missing_signature_is_rejected` *is* the evidence.
 
-Do not open the fixed tree yet. Diagnose the cause first.
+Do not open the repaired files yet. Diagnose the cause first.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+| What you see | What kind of failure | Not the lesson |
+|---|---|---|
+| `accept` true for empty sig | Path trusted | A live provider POST |
+| wrong sig also true | Same always-true hole | A public hunt |
+| matching MAC over the same body | Honest path (may pass on both) | Proof that the MAC was checked |
 
-| Slice | This lab |
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
+
+| Slice | This practice |
 |---|---|
-| Required property | `accept("", "body", "lab-secret")` is false |
-| Root cause | Callback trusted because it hit the path |
-| Preconditions | `accept` is always true |
-| Trigger | Unauthenticated POST to the callback URL |
-| Impact | Forged local event; in production, forged share, billing, or lab-result |
-| Prevention | MAC over raw body; fail closed on missing/wrong sig |
-| Detection | `webhook_sig_fail`; never the body or secret |
-| Recovery | Keep deny; rotate disposable secret if events escaped |
-| Not the lesson | API10 as the definition; TLS as authenticity; live Stripe |
+| The rule | `accept("", "body", "lab-secret")` is false |
+| Why it happens | The callback was trusted because it hit the path |
+| What has to be true first | `accept` is always true |
+| Trigger | An unauthenticated POST to the callback URL |
+| What it costs | Forged local event; in production, forged share, billing, or lab-result |
+| How you stop it | MAC over the raw body; fail closed on a missing or wrong sig |
+| How you notice | `webhook_sig_fail`; never the body or secret |
+| How you recover | Keep deny; rotate the disposable secret if events escaped |
+| Not the lesson | A famous-bugs nickname, TLS as authenticity, or a live Stripe POST |
 
-## Framework defaults versus the authenticity guarantee
+## What the framework does vs what you still have to check
 
-FastAPI will accept a POST with an empty header. nginx TLS termination proves a hop, not a MAC. A vendor CIDR is shared-fate (NAT, shared cloud egress). Next.js never sees the callback. The application guarantee is: **this** fixture, empty sig is false.
+FastAPI will accept a POST with an empty header. nginx TLS termination proves a hop, not a MAC. A vendor address range is shared-fate (NAT, shared cloud egress). Next.js never sees the callback. The app’s promise is: **these** local files, empty sig is false. **Do not POST a live webhook.**
 
 ## Practice
+
+From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/7.3/7.3-lab/tests --impl vulnerable
@@ -61,10 +78,10 @@ python3 -m pytest labs/7.3/7.3-lab/tests --impl vulnerable
 
 Run from `labs/7.3/7.3-lab` if a repo-root collection picks up `site/`. Record `test_missing_signature_is_rejected`. Do not probe public hosts. An environment error is not security evidence.
 
-## Transfer
+## Use it somewhere new
 
 Clinic lab-result webhook. Predict without leaving this directory. Do not POST a live lab vendor.
 
-## Non-goals
+## What this page is not doing
 
-No live-target instructions. Do not publish provider secrets. `lab-secret` is disposable and local. Do not dump HMAC cookbooks against public endpoints.
+No live-target instructions. Do not publish provider secrets. `lab-secret` is disposable and local. Do not dump HMAC cookbooks against public endpoints. Do not “fix” the practice by deleting the test.

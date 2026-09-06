@@ -1,58 +1,70 @@
-# 7.4-LO-05 — Evidence is alice denied, then a passing pair
+# Alice session denied; worker allowed
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-13.2.1`.
 
-## An invariant that cannot fail a test is still a slogan
+## If you cannot test it, it is still a slogan
 
-“Workers use a service account” is not evidence. “The queue is internal” is a mechanism observation. The oracle is: `exporter({"user_session": "alice", "service": None})` is `None` and `exporter({"service": "worker-sc"})` is `"worker-sc"`. The alice-session observation must be **false** on `--impl vulnerable` (returns `"alice"`) and **true** on `--impl fixed`. Do not attach to live brokers.
+“Workers use a service account” is not evidence. “The queue is internal” is a tool observation. The check is: `exporter({"user_session": "alice", "service": None})` is `None` and `exporter({"service": "worker-sc"})` is `"worker-sc"`. The Alice-session observation must be **false** on the broken files (returns `"alice"`) and **true** on the repaired files. Do not attach to live brokers.
 
-## Mental model: vulnerable must fail: alice session
+## Picture: leftover Alice must fail the check
 
-The failing observation on `--impl vulnerable` is **alice session**. A passing collection count is not this cell.
+A test that only counts passing cases can pass while leftover Alice still becomes the worker. This check asks whether a leftover cookie that becomes the principal still counts as a passing control. Broken must fail that question. Repaired must pass it.
 
 ```mermaid
 flowchart LR
-  V["--impl vulnerable"] --> F["Must fail alice session"]
-  X["--impl fixed"] --> P["Must pass None"]
+  V["broken files --impl vulnerable"] --> F["Must fail: alice session"]
+  X["repaired files --impl fixed"] --> P["Must pass: None"]
 ```
 
-| Mode | Must show for this module |
-|---|---|
-| Negative / abuse | alice session, no service → `None`; vulnerable must fail |
-| Normal | `service=worker-sc` → `"worker-sc"` (may pass on both) |
-| Mixed | alice + wrong service → `None` |
-| Not claimed | originating-subject Level 3; poison loops; live Celery |
+If both pass, the test is not looking at leftover Alice. If both fail, the fix is not structural or the check is wrong.
 
-Lab tests in `labs/7.4/7.4-lab/tests/test_property.py`. `test_user_session_is_not_worker_identity` is a **forbidden-outcome** test: a leftover cookie that becomes the principal is not allowed to count as a passing control.
+## Four modes, even for one principal
+
+| Mode | Must show for this topic |
+|---|---|
+| Normal | `service=worker-sc` → `"worker-sc"` (may pass on both) |
+| Wrong input / abuse | alice session, no service → `None`; broken files must fail |
+| Mixed | alice + wrong service → `None` |
+| Not claimed | later originating-subject check (advanced); poison loops; live task library |
+
+The file is `labs/7.4/7.4-lab/tests/test_property.py`. The test `test_user_session_is_not_worker_identity` is a **what-must-not-happen** test: a leftover cookie that becomes the principal is not allowed to count as a passing control.
+
+A test that only asserts the job was enqueued is not this topic’s evidence. A test that only greps `worker-sc` in a YAML file without calling `exporter({"user_session": "alice", "service": None})` is not this topic’s evidence. This practice never opens a public broker.
 
 ```text
 python3 -m pytest labs/7.4/7.4-lab/tests --impl vulnerable
 python3 -m pytest labs/7.4/7.4-lab/tests --impl fixed
 ```
 
-Honest `service=worker-sc` may pass on both implementations. That does not excuse the leftover-session deny test. If vulnerable does not fail `test_user_session_is_not_worker_identity`, the lab is miswired—fix the wiring, not the assertion.
+Honest `service=worker-sc` may pass on both implementations. That does not excuse the leftover-session deny test. If the broken files do not fail `test_user_session_is_not_worker_identity`, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
 
 ## What the tests do not prove
 
-- Originating-subject carry-through (`v5.0.0-8.3.3`, Level 3 advanced)
-- Least-privilege DB role in production (`v5.0.0-13.2.2` beyond the principal name)
-- 2.4 retry after 4.1 revoke
-- Broker ACLs (10.3)
-- That Celery in production does not re-copy request context
-- NIST SP 800-207 as a product check
+- After the worker is the worker, choosing notes from Alice’s grant (advanced, not this pytest)
+- Least-privilege database role in production (beyond the principal name) (3.3)
+- Retry after revoke (2.4 / 4.1)
+- Broker access lists (10.3)
+- That a production task library does not re-copy request context
+- A zero-trust paper as a product check
 
-Record those as residuals or later modules, not as silent passes.
+Record those as leftover or later topics, not as silent passes.
 
 ## Practice
 
-Execute both implementations this session from the lab directory if needed. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `worker-sc` in a YAML file without calling `exporter({"user_session": "alice", "service": None})`.
+Run both this session from the lab directory if needed:
 
-## Transfer
+```text
+python3 -m pytest labs/7.4/7.4-lab/tests --impl vulnerable
+python3 -m pytest labs/7.4/7.4-lab/tests --impl fixed
+```
 
-Clinic: a test that only asserts the job was enqueued is not this cell. A live broker attach is out of scope.
+Paste nothing from answer keys. Write fail/pass into your notes next to the matrix row. Reject a “test” that only greps `worker-sc` in a YAML file without calling `exporter({"user_session": "alice", "service": None})`.
 
-## Non-goals
+## Use it somewhere new
 
-Do not add a live Celery trophy. Do not log session cookies. Keys stay out of this file.
+Clinic: a test that only asserts the job was enqueued is not this check. A live broker attach is out of scope.
+
+## What this page is not doing
+
+Do not add a live task-library trophy. Do not log session cookies. Answer keys stay out of this file.

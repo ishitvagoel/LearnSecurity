@@ -1,27 +1,26 @@
-# 7.4-LO-07 — Transfer: clinic batch-export worker
+# Same idea on a clinic batch-export worker
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-13.2.1`. NIST SP 800-207 as architecture guidance only. WCAG 2.2 for the enqueue message.
 
-## Change the workplace; keep a worker principal
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: `exporter({"user_session": "alice", "service": None})` must be `None`. Rewrite it for a clinic without changing the fork.
+The notes-app scaffolding goes away. You get a **clinic batch-export worker**. Your job is to rewrite the loop, not to name a bug-list code.
 
-**Prompt:** Clinic batch-export worker. Also name outbox pattern and event schemas.
+The notes-app sentence was: `exporter({"user_session": "alice", "service": None})` must be `None`. A leftover user session is not worker identity. Rewrite it for a clinic without changing the fork: leftover session denied, named worker allowed.
 
-**Product sketch:** EHR-lite “Export overnight” that copies the clinician cookie into the Celery task so “the job knows who asked.”
+Also name outbox pattern and event schemas as the same identity family, without running those brokers here.
 
-Rewrite the SecureCollab sentence. Include:
+## Picture: cookie in the job is still a session
 
-1. attacker capabilities (stolen session stuffed into a job, or inherited request context — not a live clinic);
-2. trust assumptions (worker authenticates as `worker-sc` is TCB; VLAN/internal queue/zero-trust sticker are not);
-3. forbidden outcome (`exporter({user_session: alice})` succeeds, not “HIPAA”);
-4. a test idea on a **local** fixture only (no live broker);
-5. residual (god-mode DB role 3.3, 2.4 retry after revoke, Level 3 originating subject, 7.2 dumps);
-6. WCAG if a human export path is in the claim (readable “queued as service,” not a spinner that retries forever).
+Renaming “export notes” to “export patients overnight” is not transfer. The untrusted leftover changes. The fork does not.
 
-## Mental model: cookie in the job is still a session
+| Notes app this week | Clinic sketch |
+|---|---|
+| `exporter(job)` | Batch-export worker |
+| Leftover `user_session` alice denied | Leftover clinician cookie denied |
+| `service=worker-sc` allowed | Named clinic worker allowed |
+| Stolen cookie stuffed into a job | Stolen clinician session stuffed into a job — **not** a live clinic |
 
 ```mermaid
 flowchart LR
@@ -29,24 +28,37 @@ flowchart LR
   Run["worker uses that cookie"] --> Reality[confused deputy]
 ```
 
-If overnight export copies the clinician cookie into the task while `exporter` prefers `user_session`, the cell is gone. Celery, a VPC, and a zero-trust dashboard do not bind `service == "worker-sc"`. Outbox pattern and event schemas are the same identity family — name them, do not run those brokers here. A correctly named worker that is still a superuser DB role is a 3.3 residual even when alice session is denied.
+If overnight export copies the clinician cookie into the task while `exporter` prefers `user_session`, the check is gone. A task library, a private network, and a zero-trust dashboard do not bind `service == "worker-sc"`. Outbox pattern and event schemas are the same identity family — name them, do not run those brokers here. A correctly named worker that is still a superuser database role is a 3.3 leftover even when Alice session is denied.
 
-The clinic rewrite still has to keep the SecureCollab fork: leftover session `None`, `service=worker-sc` allowed. Running on the hospital VLAN with “zero trust enabled” without a leftover-session deny test leaves `exporter({user_session: alice})` succeeding. The local pytest analogue is `test_user_session_is_not_worker_identity` — on a fixture, not a live broker attach.
+The clinic rewrite still has to keep the notes-app fork: leftover session `None`, `service=worker-sc` allowed. Running on the hospital VLAN with “zero trust enabled” without a leftover-session deny test leaves `exporter({user_session: alice})` succeeding. The local pytest analogue is `test_user_session_is_not_worker_identity` — on a fixture, not a live broker attach.
 
-## What graders reject
+## Prompt — clinic batch-export worker
+
+**Product sketch:** a small clinic app with “Export overnight” that copies the clinician cookie into the task so “the job knows who asked.”
+
+Rewrite the notes-app sentence. Include:
+
+1. who can act (stolen session stuffed into a job, or inherited request context — not a live clinic);
+2. what you trust (worker authenticates as `worker-sc` is what you trust; VLAN, internal queue, and a zero-trust sticker are not);
+3. what must not happen (`exporter({user_session: alice})` succeeds, not a legal label);
+4. a test idea on a **local** fixture only (leftover session denied — never on the real clinic);
+5. leftover (god-mode database role 3.3, retry after revoke 2.4, later originating-subject check as advanced work, field dumps 7.2);
+6. whether a human-read “queued as service” must be announced, not a spinner that retries forever.
+
+## What is not good enough
 
 | Reject | Why |
 |---|---|
-| “Zero trust is enabled” | Guidance, not the oracle |
-| Live clinic / public broker | Lab policy |
+| “Zero trust is enabled” | Guidance, not the check |
+| Live clinic / public broker | Course rules |
 | “Internal queue is trusted” | Payload is still untrusted |
 | VLAN as identity | Network, not principal |
-| Job-enqueued HTTP 202 as this cell | Wrong observation |
+| Job-enqueued HTTP 202 as this check | Wrong observation |
 
 ## Practice
 
-One page. No keys. `labs/7.4/7.4-lab` is the only running system you may break. Do not attach to a public broker.
+One page. No answer keys. The only running system you may break is `labs/7.4/7.4-lab`. Do not attach to a public broker.
 
-## Non-goals
+## What this page is not doing
 
-Live-target queues. Real clinician cookies. Claiming Gate 7 from this page.
+Live-target queues. Real clinician cookies. Claiming a course gate from this page.

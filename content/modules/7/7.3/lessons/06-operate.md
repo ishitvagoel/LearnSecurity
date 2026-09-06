@@ -1,14 +1,17 @@
-# 7.3-LO-06 — Detect webhook_sig_fail without logging the body
+# webhook_sig_fail without logging the body
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
-**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-11.2.1`. CSF names outcomes; it does not compute the MAC.
 
-## Prevention is not absolute
+## Stopping it is not enough
 
-A new callback path can skip the MAC after `accept` was “fixed once.” Pair detect and recover. Do not log bodies or `lab-secret` (3.1 / 5.3). Do not attach the HL7/JSON body to the ticket.
+Even after `accept` was “fixed once,” a new callback path can skip the MAC. Running it for real is the rest of the loop: notice, contain, and keep the deny.
 
-## Mental model: missing sig is a signal
+Do not log bodies or `lab-secret` (3.1 / 5.3). Do not attach the HL7/JSON body to the ticket. Do not POST a live webhook “to confirm.”
+
+## Picture: a missing sig is a signal
+
+A deny of a callback with a missing or wrong MAC is a notice-and-recover problem, not a licence to paste the body into the paging channel. Notice names the event. Recover keeps the deny. Neither logs the body.
 
 ```mermaid
 flowchart TD
@@ -17,37 +20,48 @@ flowchart TD
   Metric --> Rotate[Rotate disposable secret if events escaped]
 ```
 
-| Outcome | This module |
+Industry lists name detect, respond, recover. They do not compute the MAC. A log-product name is not the rule. Someone still has to own every callback path.
+
+## Signals that do not become a second leak
+
+| Outcome | This topic |
 |---|---|
-| Detect | `webhook_sig_fail`; later `replay_window` |
-| Signal | request id, provider id, reason; never body or secret |
-| Recover | Keep deny; rotate secret; review accepted events; tighten 1.2 |
-| Residual | Replay; 6.5 egress; provider compromise; parse-before-MAC |
+| Notice | `webhook_sig_fail`; later `replay_window` |
+| What the line holds | request id, provider id, reason; never body or secret |
+| Respond | Keep the deny; rotate secret if events escaped |
+| Recover | Keep deny; review accepted events; tighten 1.2 |
+| Leftover | Replay; 6.5 egress; provider compromise; parse-before-MAC |
 
-CSF 2.0 Detect / Respond / Recover name outcomes. They do not prove `v5.0.0-11.2.1`. A WAF product name is not the property. Re-run `test_missing_signature_is_rejected` after any callback-route change; a green “webhooks signed” tile is not that pytest. Billing, export-ready, and invite-consumed callbacks are other paths of the same MAC — inventory them before claiming Recover.
-
-## Framework defaults versus the operate guarantee
-
-An nginx dashboard will show TLS handshakes and stay silent when `/webhook` still returns true for an empty header. Detection must observe **empty sig false**, not HTTP status counts. If the alert includes the raw body or `lab-secret`, you have opened a 3.1 / 5.3 cell.
-
-## Practice
-
-Write one log line you would accept. Tie it to `labs/7.3/7.3-lab`.
+A log line a reviewer can accept looks like:
 
 ```text
 log_denied reason=webhook_sig_fail provider=lab-billing request_id=req_73e
 ```
 
-Reject any line that includes the raw body, `lab-secret`, a real patient result, or a live provider trace.
+Not: the raw body, `lab-secret`, a real patient result, or a live provider trace.
 
-## Transfer
+If your alert includes the raw body or `lab-secret`, you have opened a second leak in the paging channel (3.1 / 5.3).
 
-Clinic: detect unsigned lab-result posts on a local fixture; do not attach the HL7/JSON body to the ticket. Do not POST a live vendor.
+A green “webhooks signed” tile is not that pytest. Re-run `test_missing_signature_is_rejected` after any callback-route change. Billing, export-ready, and invite-used callbacks are other paths of the same MAC — inventory them before claiming recover.
+
+Recovery is incomplete if the next route still returns true for an empty header. Grep callback paths the same day you keep the deny, and **do not POST a live provider** to confirm.
+
+## What the framework does vs what you still have to check
+
+An nginx dashboard will show TLS handshakes and stay silent when `/webhook` still returns true for an empty header. Detection must observe **empty sig false**, not HTTP status counts. If the alert includes the raw body or `lab-secret`, you have opened a 3.1 / 5.3 cell. **Do not POST to confirm.**
+
+## Practice
+
+Write one log line you would accept in review (ids, reason, no body). Tie it to `labs/7.3/7.3-lab`. Reject any line that includes the raw body, `lab-secret`, a real patient result, or a live provider trace.
+
+## Use it somewhere new
+
+Clinic: notice unsigned lab-result posts on a local fixture; do not attach the HL7/JSON body to the ticket. Do not POST a live vendor.
 
 ## Usability
 
-Provider retries on 5xx can amplify load (6.7). Return 4xx on bad MAC so retries stop. Do not include the body in the error page (WCAG 2.2 Success Criterion 4.1.3).
+Provider retries on 5xx can amplify load (6.7). Return 4xx on a bad MAC so retries stop. Do not include the body in the error page. Status must not use color as the only cue.
 
-## Non-goals
+## What this page is not doing
 
-A WAF product name is not the property. Live provider posts are out of scope. Gates 0–10 stay not-attempted.
+A log-product name is not the rule. A web-filter name is not this check. Live provider posts are out of scope. Course gates stay unclaimed. Answer keys stay out of lessons.

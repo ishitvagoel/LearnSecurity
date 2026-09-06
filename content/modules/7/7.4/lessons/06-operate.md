@@ -1,14 +1,17 @@
-# 7.4-LO-06 — Detect worker_identity_wrong without logging the cookie
+# worker_identity_wrong without logging the cookie
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
-**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; OWASP ASVS 5.0.0 (final) `v5.0.0-13.2.1`. CSF names outcomes; it does not bind the principal.
 
-## Prevention is not absolute
+## Stopping it is not enough
 
-A new task can inherit request context again after `exporter` was “fixed once.” Pair detect and recover. Do not log session cookies or note bodies (3.1 / 4.3). Do not attach the token to the ticket.
+Even after `exporter` was “fixed once,” a new task can inherit request context again. Running it for real is the rest of the loop: notice, contain, and recover.
 
-## Mental model: leftover session is a signal
+Do not log session cookies or note bodies (3.1 / 4.3). Do not attach the token to the ticket.
+
+## Picture: leftover session is a signal
+
+A leftover cookie used as the principal is a notice-and-recover problem, not a licence to quote the cookie in the paging channel. Notice names the event. Recover keeps the deny and rotates the worker. Neither reprints Alice’s session.
 
 ```mermaid
 flowchart TD
@@ -17,37 +20,46 @@ flowchart TD
   Metric --> Drain[Rotate service creds and drain queue]
 ```
 
-| Outcome | This module |
+Industry lists name detect, respond, recover. They do not bind the principal. A zero-trust product name is not the rule. Someone still has to own the worker identity.
+
+## Signals that do not become a second leak
+
+| Outcome | This topic |
 |---|---|
-| Detect | `worker_identity_wrong`; `poison_queue` |
-| Signal | request/job id, expected principal; never the cookie |
-| Recover | Keep deny; rotate worker creds; drain; re-check 4.1 revoke vs 2.4 retry |
-| Residual | God-mode DB role; Level 3 originating subject; 10.3 broker ACLs |
+| Notice | `worker_identity_wrong`; `poison_queue` |
+| What the line holds | request/job id, expected principal — **never** the cookie |
+| Respond | Keep deny |
+| Recover | Rotate worker creds; drain; re-check revoke (4.1) vs retry (2.4); re-run `test_user_session_is_not_worker_identity` |
+| Leftover | God-mode database role (3.3); later originating-subject check (advanced); broker access lists (10.3) |
 
-CSF 2.0 Detect / Respond / Recover name outcomes. They do not prove `v5.0.0-13.2.1`. A zero-trust product name is not the property. Re-run `test_user_session_is_not_worker_identity` after any task-enqueue change; a green “service account enabled” tile is not that pytest. Overnight export, outbox, and notification fan-out are other jobs of the same principal — inventory them before claiming Recover.
-
-## Framework defaults versus the operate guarantee
-
-A Celery dashboard will show task success and stay silent when the task still used `job.get('user_session')`. Detection must observe **alice session yields `None`**, not queue depth. If the alert includes alice’s cookie or note bodies, you have opened a 3.1 / 4.3 cell.
-
-## Practice
-
-Write one log line you would accept. Tie it to `labs/7.4/7.4-lab`.
+A log line a reviewer can accept looks like:
 
 ```text
 log_denied reason=worker_identity_wrong expected=worker-sc job_id=job_74e
 ```
 
-Reject any line that includes `alice`’s session cookie, note bodies, or a live broker dump.
+Not: Alice’s session cookie, note bodies, a live broker dump, or a real clinician token.
 
-## Transfer
+If your alert includes Alice’s cookie or note bodies, you have opened a second leak in the paging channel.
 
-Clinic: detect batch-export jobs running as a clinician session on a local fixture; do not attach the session token to the ticket. Do not attach to a live broker.
+A green “service account enabled” tile is not that pytest. Overnight export, outbox, and notification fan-out are other jobs of the same principal — inventory them before claiming recover. Re-run `test_user_session_is_not_worker_identity` after any task-enqueue change.
 
-## Usability
+## What the framework does vs what you still have to check
 
-Export-ready emails must not imply the worker ran “as you” if it ran as service. Failure to enqueue should be readable (WCAG 2.2 Success Criterion 4.1.3), not a silent retry storm (6.7).
+A task dashboard will show task success and stay silent when the task still used `job.get('user_session')`. Detection must observe **Alice session yields `None`**, not queue depth. If the alert includes Alice’s cookie or note bodies, you have opened a 3.1 / 4.3 cell.
 
-## Non-goals
+## Practice
 
-A zero-trust product name is not the property. Live broker attaches are out of scope. Gates 0–10 stay not-attempted.
+Write one log line you would accept in review (job id, expected principal, no cookie). Tie it to `labs/7.4/7.4-lab`. Reject any line that includes Alice’s session cookie, note bodies, or a live broker dump.
+
+## Use it somewhere new
+
+Clinic: notice batch-export jobs running as a clinician session on a local fixture; do not attach the session token to the ticket. Do not attach to a live broker.
+
+## Can people still use it
+
+“Export ready” email must not imply the worker ran “as you” if it ran as the service. Failure to enqueue should be something a screen reader can announce, not a silent retry storm (6.7).
+
+## What this page is not doing
+
+A zero-trust product name is not the rule. Live broker attaches are out of scope. Course gates stay unclaimed. Answer keys stay out of lessons.

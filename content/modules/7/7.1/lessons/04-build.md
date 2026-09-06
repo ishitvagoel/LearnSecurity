@@ -1,16 +1,17 @@
-# 7.1-LO-04 — Copy only ALLOWED display_name
+# Copy only the allowed display name
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-15.3.3`. `v5.0.0-4.3.2` is GraphQL introspection (inventory). `v5.0.0-4.3.1` is 6.7 grain. `v5.0.0-4.1.4` unused methods is **Level 3, advanced**.
 
-## Structural means the server copies named fields
+## The rule
 
-`apply` must copy `display_name` when present and must not copy `is_admin`. Structural means that allow-list on the write — not an OpenAPI comment, not a frontend form that omits the checkbox, not a denylist of `is_admin` only.
+An OpenAPI comment is not the fix. A frontend form that omits the checkbox is not the fix. A denylist of `is_admin` only is not the fix.
 
-The smallest restore for SecureCollab Phase 1 profile PATCH is: `ALLOWED = {"display_name"}`. Fail-safe: unknown keys are skipped (or rejected). Do not fail open because a nested model was `extra='allow'`.
+The structural change is: the server **copies named fields**. `apply` must copy `display_name` when present and must not copy `is_admin`. Copy only the allowed display name.
 
-## Mental model: extras never reach the row
+The smallest restore for the notes app’s profile PATCH is: `ALLOWED = {"display_name"}`. Fail-safe: unknown keys are skipped (or rejected). Do not fail open because a nested model was allowed to keep extras.
+
+## Picture: extras never reach the row
 
 ```mermaid
 flowchart TD
@@ -19,11 +20,11 @@ flowchart TD
   Allowed -->|no| Skip[skip]
 ```
 
-The lab’s fixed tree copies only keys in `ALLOWED`. Production still needs the same matrix restated for GraphQL mutation arguments and gRPC unknown fields (LO-02). A denylist of `is_admin` only is not the contract — the next privileged field (`tenant_id`, billing flag) will slip through. Leftover `/v0` handlers are another binder of the same body.
+The repaired files copy only keys in `ALLOWED`. Production still needs the same matrix restated for GraphQL mutation arguments and gRPC unknown fields (the map page). A denylist of `is_admin` only is not the contract — the next privileged field (`tenant_id`, billing flag) will slip through. Leftover `/v0` handlers are another binder of the same body.
 
-ASVS `v5.0.0-15.3.3` wants that per-action limit implemented. This pytest is that sentence for `is_admin`.
+Industry lists want that per-action limit implemented. This pytest is that sentence for `is_admin`.
 
-## Why this restores the cell
+## What the repaired files must show
 
 | After the fix | Must be true |
 |---|---|
@@ -31,16 +32,22 @@ ASVS `v5.0.0-15.3.3` wants that per-action limit implemented. This pytest is tha
 | PATCH `display_name` | name changes; `is_admin` unchanged |
 | PATCH unknown key | key does not appear on the user |
 
+Fail closed: if the key is not in `ALLOWED`, **do not copy it**. Do not keep `user.update(body)` because “the spec does not list `is_admin`.”
+
 ## What this is not
 
-OpenAPI as the runtime. GraphQL types without a resolver allow-list. gRPC “unknown fields ignored” assumed without a test. FastAPI `extra='ignore'` on a nested model you never applied. SPA omit-checkbox as the contract.
+- OpenAPI as the runtime.
+- GraphQL types without a resolver allow-list.
+- gRPC “unknown fields ignored” assumed without a test.
+- FastAPI ignoring extras on a nested model you never applied.
+- SPA omit-checkbox as the contract.
 
-## Mechanism limits
+## What the tool cannot do
 
 - The allow-list must be restated for REST, GraphQL, and gRPC — one OpenAPI file does not cover the others.
 - CSV import, admin BFF, and 7.4 job payloads are additional binders.
-- Unused HTTP methods (`v5.0.0-4.1.4`, Level 3 advanced) can still hit a leftover handler.
-- GraphQL query cost (`v5.0.0-4.3.1`) can exhaust budget even when extras are dropped (6.7).
+- Unused HTTP methods can still hit a leftover handler (leftover, later, advanced).
+- GraphQL query cost can exhaust budget even when extras are dropped (6.7).
 - Honest `display_name` XSS remains 6.2.
 
 ## Practice
@@ -51,16 +58,16 @@ Name the predicate (`key in ALLOWED`). Run:
 python3 -m pytest labs/7.1/7.1-lab/tests --impl fixed
 ```
 
-Must pass. Run from the lab directory if collection at repo root is polluted.
+Must pass. Run from the lab directory if collection at repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
-## Transfer
+## Use it somewhere new
 
 Clinic: stop treating “the form has no is_staff checkbox” as the server contract.
 
-## Residual risk
+## What can still go wrong
 
-CSV import; 7.4 job payload; leftover `/v0`; `v5.0.0-4.1.4` Level 3 unused methods; GraphQL cost (`v5.0.0-4.3.1`); 6.2 on honest names.
+CSV import; 7.4 job payload; leftover `/v0`; unused methods (leftover, later, advanced); GraphQL cost (6.7); 6.2 on honest names.
 
-## Non-goals
+## What this page is not doing
 
 Do not probe a public API. Do not claim Gate 7 from an OpenAPI screenshot.

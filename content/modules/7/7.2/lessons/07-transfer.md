@@ -1,29 +1,19 @@
-# 7.2-LO-07 — Transfer: clinic member cannot resolve SSN
+# Same idea: a clinic member cannot resolve SSN
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.3`. API1/API3/API5 awareness after. WCAG 2.2 for the deny message.
 
-## Change the workplace; keep a role × field matrix
+## Use it somewhere new
 
-Do not answer with a Top 10 / CWE / scanner as the definition of security. The SecureCollab sentence was: `resolve("member", "secret_internal")` must be false. Rewrite it for a clinic without changing the fork.
+The notes-app scaffolding goes away. You get a **clinic sketch** with a patient page that omits the SSN column in the table, plus GraphQL `Patient { ssn }`. Also name bulk update and search highlighting that leaks snippets.
+
+Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: `resolve("member", "secret_internal")` must be false. Rewrite it for a clinic without changing the fork.
 
 **Prompt:** Clinic member cannot resolve SSN. Also name bulk update and search highlighting leaking snippets.
 
 **Product sketch:** EHR-lite patient page that omits the SSN column in the table, plus GraphQL `Patient { ssn }`.
 
-Rewrite the SecureCollab sentence. Include:
-
-1. attacker capabilities (clinician session selecting extra fields — not a live clinic);
-2. trust assumptions (server role×field is TCB; UI omit and UUID are not);
-3. forbidden outcome (`resolve("member", "ssn")` true, not “HIPAA”);
-4. a test idea on a **local** fixture only (no public EHR);
-5. residual (search snippets, CSV, 7.4 workers, Level 3 serializer cache);
-6. WCAG if a human path is in the claim (do not announce the SSN in an error).
-
-Use synthetic labels (`ssn` as a field name in a local fixture). Do not use real patient identifiers.
-
-## Mental model: hidden column is not field authorization
+## Picture: a hidden column is not field authorization
 
 ```mermaid
 flowchart LR
@@ -31,24 +21,44 @@ flowchart LR
   GQL["selection set still asks"] --> Reality[dump if matrix is missing]
 ```
 
-If the table omits the SSN column while `resolve` is always true, the cell is gone. FastAPI `response_model`, GraphQL “typed schema,” and UUID length do not check role × field. Search highlighting and CSV export are the same dump family — name them, do not run those systems here. A passing 4.4 object GET is a coarser grain: the member may read the *row* and still must not read the *field*.
+If the table omits the SSN column while `resolve` is always true, the cell is gone. FastAPI `response_model`, GraphQL “typed schema,” and UUID length do not check role × field. Identifiers find a row. They do not authorize fields. Search highlighting and CSV export are the same dump family — name them, do not run those systems here. A passing 4.4 object GET is a coarser grain: the member may read the *row* and still must not read the *field*.
 
-The clinic rewrite still has to keep the SecureCollab fork: member × SSN false, member × display name true. Hiding SSN in the table without a member×field deny test leaves the serializer open. The local pytest analogue is `test_member_cannot_resolve_internal_field` — on a fixture, not a live EHR GraphQL query.
+The clinic rewrite still has to keep the notes-app fork: member × SSN false, member × display name true. Hiding SSN in the table without a member×field deny test leaves the serializer open. The local pytest analogue is `test_member_cannot_resolve_internal_field` — on a fixture, not a live EHR GraphQL query.
 
-## What graders reject
+| Notes app this week | Clinic sketch |
+|---|---|
+| Member session asking for extra fields | Clinician session selecting extra fields — not a live clinic |
+| `resolve("member", "secret_internal")` false | `resolve("member", "ssn")` false |
+| Server role × field is what you trust | Same; UI omit and UUID are not |
+| Search / CSV leftover | Search snippets, CSV, later workers, stale serializer cache |
+
+## Prompt — clinic member cannot resolve SSN
+
+Rewrite the notes-app sentence. Include:
+
+1. who can act (clinician session selecting extra fields — not a live clinic);
+2. what you trust (server role×field is what you trust; UI omit and UUID are not);
+3. what must not happen (`resolve("member", "ssn")` true, not “HIPAA”);
+4. a test idea on a **local** fixture only (no public EHR);
+5. leftover (search snippets, CSV, later workers, stale serializer cache after a role change);
+6. the web accessibility baseline if a human path is in the claim (do not announce the SSN in an error).
+
+Use synthetic labels (`ssn` as a field name in a local fixture). Do not use real patient identifiers.
+
+## What is not good enough
 
 | Reject | Why |
 |---|---|
 | “UUID is secret” | Locator, not a grant |
-| Live clinic / public GraphQL | Lab policy |
+| Live clinic / public GraphQL | Course rules |
 | “We already have object authz” | 4.4 is a coarser grain |
-| SPA omits column as field authz | Client is not TCB |
+| SPA omits column as field authz | Client is not what you trust |
 | HTTP 200 on object GET as this cell | Wrong observation (4.4) |
 
 ## Practice
 
 One page. No keys. `labs/7.2/7.2-lab` is the only running system you may break. Do not query a public host.
 
-## Non-goals
+## What this page is not doing
 
-Live-target GraphQL. Real SSNs. Claiming Gate 7 from this page.
+Live-target GraphQL. Real SSNs. Claiming a course gate from this page.

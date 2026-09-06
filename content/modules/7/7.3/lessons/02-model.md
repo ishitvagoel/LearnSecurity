@@ -1,16 +1,17 @@
-# 7.3-LO-02 — MAC over raw bytes, not parsed JSON
+# MAC over raw bytes, not parsed JSON
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-11.2.1`, `v5.0.0-2.3.4`.
 
-## Can a second engineer name pytest cases from your webhook map?
+## Could someone else name the checks?
 
-“TLS terminates at the edge” is not this lesson. A reviewable model names **raw body, MAC, secret, and what happens on missing sig**.
+“TLS terminates at the edge” is not this lesson. A map someone else can test names **raw body**, **MAC**, **secret**, and **what happens on a missing sig**.
 
-SecureCollab Phase 1 freeze: local `accept(sig, body, secret)` with disposable `lab-secret`. No live providers.
+This week’s freeze for the notes app: local `accept(sig, body, secret)` with disposable `lab-secret`. No live providers.
 
-## Mental model: three different cells
+> HMAC over the raw body bytes. Compare with `compare_digest`. An empty signature must deny. Parsed JSON is a second document.
+
+## Picture: three different cells
 
 ```mermaid
 flowchart TD
@@ -19,7 +20,7 @@ flowchart TD
   Url["callback URL"] --> Egress["6.5 if we call out"]
 ```
 
-## Mental model: parsed JSON is a second document
+## Picture: parsed JSON is a second document
 
 ```mermaid
 flowchart LR
@@ -29,41 +30,45 @@ flowchart LR
   Reser --> Mismatch["MAC over the wrong document"]
 ```
 
-## Step 1: freeze pieces
+Module 2.1 already treated parsed JSON as a different document. Here the MAC must cover the bytes the provider actually sent, not a dump you built after `json.loads`.
+
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | anyone who can POST the URL; provider with `lab-secret` |
-| Objects | callback body |
+| Who | anyone who can POST the URL; provider with `lab-secret` |
+| What | callback body |
 | Actions | `accept` |
-| Channels | HTTP POST; signature header |
-| TCB | HMAC-SHA256 over raw body + `compare_digest` |
-| Untrusted | body, signature header, source IP |
-| State / time | replay window (named residual) |
-| 1.1 cell | authenticity + integrity of inbound integration |
+| Paths | HTTP POST; signature header |
+| What you trust | HMAC-SHA256 over the raw body + `compare_digest` |
+| What you do not trust | body, signature header, source IP |
+| Time | replay window (named leftover) |
+| The rule | authenticity and integrity of the inbound integration |
 
-## Step 2: write cells
+## Step 2: write allow and deny
 
-| Subject | Object | Action | Decision |
+| Who | What | Action | Decision |
 |---|---|---|---|
 | unsigned POST | body | accept | deny |
 | matching MAC | same raw body | accept | allow |
 | wrong MAC | body | accept | deny |
 | TLS only | path | POST | not authenticity |
-| parsed-then-MAC | re-serialized | accept | 2.1 residual |
+| parsed-then-MAC | re-serialized | accept | 2.1 leftover |
+
+A missing “unsigned POST × accept × deny” row is how a path-trusted callback appears. Write the hole.
 
 ## Practice
 
-Draw the map. Point at `labs/7.3/7.3-lab` file `hook.py`.
+Draw the map so someone else could name the pytest cases. Point at `labs/7.3/7.3-lab` file `hook.py`. Local only. Do not POST a live webhook.
 
-## Transfer
+## Use it somewhere new
 
-Clinic lab-result webhook; signed redirects.
+Clinic lab-result webhook. Signed redirects.
 
-## Residual risk
+## What can still go wrong
 
-Replay (`v5.0.0-2.3.4`); freshness (`v5.0.0-2.3.3`); 1.2 on side effects; 6.5 outbound; `v5.0.0-4.1.5` Level 3.
+Replay; freshness; 1.2 on side effects; 6.5 outbound; per-message signatures beyond HMAC (advanced).
 
-## Non-goals
+## What this page is not doing
 
-Top 10 as the definition of security. Keys stay out of lessons.
+Do not define security as a famous-bugs list. Do not run this map against a live clinic or a live provider. Answer keys stay out of lessons.

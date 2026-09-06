@@ -1,20 +1,19 @@
-# 7.2-LO-01 — Identifiers locate; they do not authorize fields
+# Identifiers find a row; they do not authorize fields
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-8.2.3`, `v5.0.0-8.2.1`, `v5.0.0-8.2.2`; `v5.0.0-8.3.2` is **Level 3, advanced**. API1/API3/API5 are *awareness after* the cause (also 4.4).
 
-## The claim this module owns
+## The rule
 
-SecureCollab notes have a member-visible `display_name` and a service-only `secret_internal` (integration token, not a real secret in the lab). Module 4.4 already required object×tenant grants. This module’s grain is **which fields that grant may read**. Module 7.1 was extra keys on *write*.
+The notes app this week stores a note with a member-visible `display_name` and a service-only `secret_internal` (a fake integration token in this practice, not a real secret). Last topic on object grants (4.4) already said: a share on this note is a yes for **this row**. This week’s cell is **which fields that share may read**. Extra keys on *write* were last week (7.1).
 
 > `resolve("member", "secret_internal")` must be false. `resolve("member", "display_name")` may be true. `resolve("service", "secret_internal")` may be true.
 
-The forbidden outcome is **member resolves `secret_internal`**. That is authorization at property grain (BOPLA), not “they can call GET `/notes`.”
+What must not happen is **a member resolves `secret_internal`**. That is who-is-allowed at field grain. Being able to call GET `/notes` is not this sentence. A UUID in the URL finds the row. It does not authorize every column.
 
-ASVS `v5.0.0-8.2.3` wants field-level access restricted to consumers with explicit permissions. `v5.0.0-8.2.1` is function-level. `v5.0.0-8.2.2` is object-level (4.4). `v5.0.0-8.3.2` (authorization changes applied immediately, including through serializers) is **Level 3, advanced**.
+Industry checklists want field-level access limited to consumers with an explicit yes. Function-level permission is coarser. Object-level permission was 4.4. Applying a role change through every serializer right away is **advanced**, not this week’s pytest. Famous “broken object / property / function” lists are awareness after this table exists. They are not the syllabus.
 
-## Mental model: serializer dumps the ORM
+## Picture: the dump helper writes every column
 
 ```mermaid
 flowchart TD
@@ -22,9 +21,13 @@ flowchart TD
   Dump --> Member["member JSON includes secret_internal"]
 ```
 
-SQLAlchemy `to_dict()`, GraphQL default resolvers, and REST `?fields=` that reflect column names are the same shape: the serializer is not a policy.
+SQLAlchemy `to_dict()`, GraphQL default resolvers, and REST `?fields=` that echo column names are the same shape: the serializer is not a policy.
 
-## Mental model: role times field
+Who can act here: a member session that asks for extra fields. That stands in for a clinic GraphQL `Patient { ssn }`, a REST `?fields=` dump, or a CSV exporter that serializes every ORM column. What you trust is local `resolve(role, field)` on the server. Hiding the key in the SPA is not the cell.
+
+**A tool is not the rule.** “Private JSON keys,” “GraphQL schema is typed,” “we already passed 4.4 object tests.”
+
+## Picture: role times field is a table
 
 ```mermaid
 flowchart LR
@@ -35,51 +38,51 @@ flowchart LR
   Allow -->|yes| Read[read]
 ```
 
-A UUID in the URL locates the row. It is not a capability for every column. Hiding the key in the SPA is not the cell.
+A UUID locates the row. It is not a capability for every column. Hiding the key in the SPA is not the cell.
 
-**Mechanism (not the property):** “private JSON keys,” “GraphQL schema is typed,” “we already passed 4.4 object tests.”
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-## Root cause vs impact vs prevention vs detection vs recovery
-
-| Slice | For this property |
+| Slice | For this rule |
 |---|---|
-| Root cause | Serializer dumps the ORM object |
-| Preconditions | `resolve("member", "secret_internal")` is true |
+| Why it happens | Serializer dumps the ORM object |
+| What has to be true first | `resolve("member", "secret_internal")` is true |
 | Trigger | Member requests the field (REST, GraphQL, CSV, search) |
-| Impact | Internal token or PII extra |
-| Prevention | Allow-list fields by role at the trusted layer |
-| Detection | `field_denied` |
-| Recovery | Rotate the leaked value; audit |
+| What it costs | Internal token or extra personal data |
+| How you stop it | Allow-list fields by role at the trusted layer |
+| How you notice | `field_denied` |
+| How you recover | Rotate the leaked value; audit |
 
-## Framework defaults versus the field guarantee
+## What the framework does vs what you still have to check
 
-ORM dump helpers are convenience, not 8.2.3. GraphQL will resolve any field the schema exposes. FastAPI `response_model` helps only if it is the actual response, not an optional overlay.
+ORM dump helpers are convenience, not field permission. GraphQL will resolve any field the schema exposes. FastAPI `response_model` helps only if it is the actual response, not an optional overlay.
 
-## Mechanism limits
+The app’s promise is: **this** `resolve`, member × `secret_internal` is false. The practice folder is `labs/7.2/7.2-lab`. It is local. No live GraphQL.
+
+## What the tool cannot do
 
 - UI hide, GraphQL `__typename` tricks, and “private” naming are not mediation.
-- CSV export, search snippets, debug toolbar, and 7.4 workers are additional serializers.
-- After a role change, a cached dump can still leak (`v5.0.0-8.3.2`, Level 3).
+- CSV export, search snippets, debug toolbar, and later workers (7.4) are additional serializers.
+- After a role change, a cached dump can still leak. That leftover is advanced.
 
-## Usability and accessibility
+## Can people still use it
 
-Members still need `display_name`. Deny must not look like “note not found” if the object grant succeeded (confuses assistive tech and operators). Do not put the secret in the error.
+Members still need `display_name`. Deny must not look like “note not found” if the object grant succeeded — that confuses screen readers and operators. Do not put the secret in the error.
 
 ## Practice
 
 Draw role × field. Then run:
 
-```
+```text
 python3 -m pytest labs/7.2/7.2-lab/tests --impl vulnerable
 python3 -m pytest labs/7.2/7.2-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
+The first command must fail. The second must pass. Tie the check to `resolve("member", "secret_internal")`, not to a scanner bug name.
 
-## Transfer
+## Use it somewhere new
 
-Clinic member cannot resolve SSN. Bulk update. Search highlighting leaking snippets.
+Clinic: a member cannot resolve SSN. Also name bulk update and search highlighting that leaks snippets.
 
-## Non-goals
+## What this page is not doing
 
-Live GraphQL attacks, dumping ORM models into notes. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not in this file.
+Live GraphQL attacks, dumping ORM models into notes. Course gates stay unclaimed without learner or product evidence. Answer keys are not in this file.

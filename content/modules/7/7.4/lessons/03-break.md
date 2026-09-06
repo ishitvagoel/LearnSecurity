@@ -1,18 +1,27 @@
-# 7.4-LO-03 — Observe user_session fallback, do not trophy a live broker
+# Practice: a user session accepted as worker identity
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-13.2.1`. Least-privilege service accounts (`v5.0.0-13.2.2`) are a paired grain. Originating-subject carry-through (`v5.0.0-8.3.3`) is **Level 3, advanced**. NIST SP 800-207 is architecture guidance, not a product.
 
-## Authorized scope
+## Try it
 
-`labs/7.4/7.4-lab` only. The fixture is an in-process `exporter(job)`. Synthetic job dicts (`alice`, `worker-sc`). No live Redis, RabbitMQ, or Celery. Do not attach to a public broker.
+The practice is not a website you attack. It is a tiny Python `exporter`. It does not open a live queue. The failure is already in the function: leftover `user_session` wins if it is present. You are here to see that the check treats that as a **failed rule**, not as a trophy against a public broker.
 
-**Forbidden outcome:** User session accepted as worker identity. `exporter({"user_session": "alice", "service": None})` returns `"alice"`.
+The rule under test:
 
-Attacker capability in this lab: a leftover cookie stuffed into a job, or inherited request context. That stands in for a clinic “Export overnight” that copies the clinician cookie into the task so “the job knows who asked.” Trust assumption: `exporter` is supposed to authenticate as a **named service principal**. A VPC, an “internal” queue, and a zero-trust dashboard are not in the TCB for this cell.
+> A leftover user session is not worker identity. `exporter({"user_session": "alice", "service": None})` must be `None`. `exporter({"service": "worker-sc"})` may be `"worker-sc"`.
 
-## Mental model: leftover cookie wins
+## Where you may practice
+
+Only `labs/7.4/7.4-lab` is in scope. The fixture is an in-process `exporter(job)`. Fake job dicts (`alice`, `worker-sc`). It does not talk to Redis, RabbitMQ, or a live task library.
+
+Do not attach to a public broker. Do not probe an employer queue. Do not probe a classmate preview. Do not paste a live cookie “to see what happens.”
+
+What must not happen: a user session accepted as worker identity. `exporter({"user_session": "alice", "service": None})` returns `"alice"`.
+
+Who can act here: a leftover cookie stuffed into a job, or inherited request context. That stands in for a clinic “Export overnight” that copies the clinician cookie into the task so “the job knows who asked.” What you are supposed to trust: `exporter` authenticates as a **named service principal**. A private network, an “internal” queue, and a zero-trust dashboard are not what you trust for this check.
+
+## Picture: leftover cookie wins
 
 ```mermaid
 flowchart TD
@@ -20,41 +29,49 @@ flowchart TD
   Or --> Alice[returns alice]
 ```
 
-The vulnerable tree demonstrates **cause** (ambient user context). Do not attach to anything except this fixture. Preconditions: `exporter` returns `user_session` if present. You do not need a broker. You must not attach to a live queue.
+The broken files show **cause** (ambient user context). Do not aim anything except this fixture. What has to be true first: `exporter` returns `user_session` if present. You do not need a broker. You must not attach to a live queue.
 
-ASVS `v5.0.0-13.2.1` wants backend components authenticated with individual service accounts, not leftover user sessions. Module 4.1 already revoked leftover HTTP sessions; this cell is **whether the worker still is that session**. NIST SP 800-207 does not replace the pytest.
+Industry lists want backend jobs logged in as their own accounts, not leftover people. Module 4.1 already revoked leftover HTTP sessions. This check is **whether the worker still is that session**. A zero-trust paper does not replace the pytest.
 
-## What to read in the fixture
+## What to look at — cause, not a trophy
 
-`vulnerable/worker.py` returns `user_session` if present. Tests:
+Read `vulnerable/worker.py`. It returns `user_session` if present. Tests:
 
 - `test_user_session_is_not_worker_identity`
 - `test_service_principal_is_worker_identity`
-- `test_alice_and_wrong_service_is_rejected` — mixed leftover plus wrong service
+- `test_alice_and_wrong_service_is_rejected` — leftover plus wrong service
 
 You do not need a new identity string. The failure of `test_user_session_is_not_worker_identity` *is* the evidence.
 
-Do not open the fixed tree yet. Diagnose the cause first.
+Do not open the repaired files yet. Diagnose the cause first.
 
-## Root cause vs impact vs prevention vs detection vs recovery
+| What you see | What kind of failure | Not the lesson |
+|---|---|---|
+| `exporter` returns `"alice"` | Ambient user context | A zero-trust sticker |
+| `user_session or service` fallback | Leftover cookie wins | “The queue is internal” |
+| Overnight job still is Alice | What must not happen | A live broker attach |
 
-| Slice | This lab |
+## Why it happens, what it costs, how you stop it, how you notice, how you recover
+
+| Slice | This practice |
 |---|---|
-| Required property | `exporter({"user_session": "alice", "service": None})` is `None` |
-| Root cause | Ambient user context in a system worker |
-| Preconditions | `user_session or service` fallback runs |
+| The rule | `exporter({"user_session": "alice", "service": None})` is `None` |
+| Why it happens | Ambient user context in a system worker |
+| What has to be true first | `user_session or service` fallback runs |
 | Trigger | Job with leftover session or inherited request context |
-| Impact | Export attributed to alice’s session; stale user still exports after 4.1 revoke |
-| Prevention | Jobs name `service=worker-sc`; workers authenticate as that principal |
-| Detection | `worker_identity_wrong`; never the cookie |
-| Recovery | Keep deny; rotate worker creds; drain queue |
-| Not the lesson | Zero-trust sticker as the definition; live Celery; god-mode DB role (3.3) as this oracle |
+| What it costs | Export attributed to Alice’s session; stale user still exports after 4.1 revoke |
+| How you stop it | Jobs name `service=worker-sc`; workers authenticate as that principal |
+| How you notice | `worker_identity_wrong`; never the cookie |
+| How you recover | Keep deny; rotate worker creds; drain the queue |
+| Not the lesson | A zero-trust sticker, a live task library, or a god-mode database role (3.3) as this check |
 
-## Framework defaults versus the worker guarantee
+## What the framework does vs what you still have to check
 
-Celery can copy the request context into the task. FastAPI `Depends()` is gone once the HTTP worker returns. A message broker inside the VPC is still untrusted input (2.1). Next.js never sees the overnight job. The application guarantee is: **this** fixture, alice session yields `None`.
+A task library can copy the request into the later job. FastAPI `Depends()` is gone once the HTTP worker returns. A message broker on a private network is still untrusted input (2.1). Next.js never sees the overnight job. The app’s promise is: **this** fixture, Alice session yields `None`.
 
 ## Practice
+
+From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/7.4/7.4-lab/tests --impl vulnerable
@@ -62,10 +79,10 @@ python3 -m pytest labs/7.4/7.4-lab/tests --impl vulnerable
 
 Run from `labs/7.4/7.4-lab` if a repo-root collection picks up `site/`. Record `test_user_session_is_not_worker_identity`. Do not probe public hosts. An environment error is not security evidence.
 
-## Transfer
+## Use it somewhere new
 
 Clinic batch-export. Predict without leaving this directory. Do not attach to a live hospital broker.
 
-## Non-goals
+## What this page is not doing
 
-No live-target instructions. Synthetic identities only (`alice`, `worker-sc`). Do not dump Celery exploits into notes.
+No live-target instructions. Fake identities only (`alice`, `worker-sc`). Do not dump task-library exploits into notes. Do not “fix” the practice by deleting the test.

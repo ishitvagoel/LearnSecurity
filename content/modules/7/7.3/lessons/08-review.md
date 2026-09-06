@@ -1,56 +1,57 @@
-# 7.3-LO-08 — Review path-trusted callbacks as a PR, not an API10 ticket
+# Review path-trusted callbacks like a pull request
 
 **Kind:** code-review
 **Loop step:** Review
-**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-11.2.1`.
 
-## Review the fixture as if it were SecureCollab billing webhook
+Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
 
-Review `labs/7.3/7.3-lab/vulnerable/` as a SecureCollab PR. Your job is not to count suspicious lines. Reconstruct whether `accept("", "body", "lab-secret")` is still true, compare that with the module invariant, and write changes a developer can verify.
+## What you are reviewing
 
-Intended findings live only in `content/assessment/keys/7.3.md` — not here. Do not open the keys file until your review has been evaluated.
+A colleague ships a notes-app billing webhook. Review `labs/7.3/7.3-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `accept("", "body", "lab-secret")` is still true, compare that with the rule, and write changes a developer can verify.
 
-## Mental model: Accept always true / process because path matched
+The check you already ran (`test_missing_signature_is_rejected`) is the rule test. A comment “will HMAC later” is not. A famous-bugs ticket is not.
 
-Start with this seeded smell: **Accept always true / process because path matched**. Label it property, mechanism, or false assurance before you accept the PR.
+## Picture: accept always true / process because the path matched
+
+Start with this seeded smell: **Accept always true / process because the path matched**. Label it rule, tool, or false comfort before you accept the change.
 
 ```mermaid
 flowchart TD
-  Claim[PR claim] --> Q{"What would falsify it?"}
-  Q -->|empty sig accepted| Property["Property - good if tested"]
-  Q -->|TLS only| Mechanism[Mechanism - hop]
-  Q -->|vendor CIDR| False[False assurance]
+  Claim[PR claim] --> Q{"What would show it is false?"}
+  Q -->|empty sig accepted| Property["Rule - good if tested"]
+  Q -->|TLS only| Mechanism[Tool - hop]
+  Q -->|vendor CIDR| False[False comfort]
 ```
 
-Classification starts at the protected effect (empty sig denied). Everything that is not a raw-body MAC at that call is a candidate path-trust. A TLS terminator without that pytest is the same smell, not a different finding class.
+The review starts at the protected effect (empty sig denied). Everything that is not a raw-body MAC at that call is a candidate path-trust. A TLS terminator without that pytest is the same smell, not a different finding class.
 
 Parse-before-MAC (2.1) and secret-in-query (4.3) are other authenticity holes — name them, do not skip `test_missing_signature_is_rejected`.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
-- Accept always true / process because path matched
+- Accept always true / process because the path matched
 - JSON parsed before MAC
 - No missing-sig test
 - Secret in query string (4.3)
 
-Also reject: live provider attacks; closing findings without re-running `test_missing_signature_is_rejected`; keys in lessons; real webhook secrets.
+Also reject: live provider attacks; closing findings without re-running `test_missing_signature_is_rejected`; keys in learner notes; a web filter as the rule.
 
-## Misconceptions this module refuses
+## Common mix-ups
 
 - TLS to us proves the sender
-- IP allow-list is authenticity
+- An IP allow-list is authenticity
 - Webhooks are just APIs in reverse so JWT login applies
 - Vendor SDK verify is the same as a custom MAC over parsed JSON
-- API10 is the property
+- A famous-bugs nickname is the rule
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: observation, property or false assurance, suggested structural change, residual you will **not** delete. Tie at least one to `test_missing_signature_is_rejected`.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_missing_signature_is_rejected`. Do not open the keys file.
 
-## Transfer
+## Use it somewhere new
 
-Clinic PR that “terminated TLS and allow-listed the vendor” without a missing-sig test is an incomplete authenticity review. Name the independent falsehood that would still keep empty sig false.
+Clinic change that “terminated TLS and allow-listed the vendor” without a missing-sig test is an incomplete review of path-trusted callbacks. Name the independent falsehood that would still keep empty sig false.
 
-## Non-goals
+## What this page is not doing
 
-Do not merge by adding a comment “will HMAC later.” That comment is a residual without an owner. Do not POST a live provider to prove the finding.
+Do not merge by adding a comment “will HMAC later.” That comment is leftover without an owner. Do not POST a live provider to prove the finding.
