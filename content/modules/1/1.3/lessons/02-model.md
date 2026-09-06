@@ -15,6 +15,17 @@ Carry forward two artifacts:
 
 Module 1.3 asks where those decisions and effects cross assumptions. If the authority matrix says a worker may export Tenant A summaries, the model must show how a caller becomes that worker, how Tenant A and the object set are bound, where the decision is enforced, and which other paths reach the same output.
 
+## Mental model: adapters produce context; policy consumes it
+
+```mermaid
+flowchart LR
+  Pub["Public adapter - hostile fields"] --> Policy[Policy immediately before export]
+  Worker["Worker adapter - server provenance"] --> Policy
+  Store["Store - tenant and objects"] --> Policy
+  Policy --> Allow["Export only if grant matches"]
+  Policy --> Deny["Missing or unknown denies"]
+```
+
 ## Scope ledger
 
 Start with a ledger so a diagram cannot silently grow fictional assurances.

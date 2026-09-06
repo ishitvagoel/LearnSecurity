@@ -1,70 +1,61 @@
-# 2.1 — Bytes, encodings, parsers, and interpreter boundaries (3 Break)
+# 2.1-LO-03 — Observe the split parse, do not trophy it
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** ASVS 5.0.0 V5 (final) input; RFC 8259 JSON (STD 90); Unicode UAX #15 as *normalization*, not a security control by itself.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** Saltzer and Schroeder (1975, seminal) fail-safe defaults; OWASP ASVS 5.0.0 (final) `v5.0.0-1.1.1` and `v5.0.0-2.2.2`; RFC 8259 JSON (STD 90, final).
 
-## Property (start here)
+## Authorized scope
 
-If a note JSON object repeats the tenant key, ingest must reject (or both the ACL decision and the stored row must see the same tenant). A parser that keeps the first key for ACL and the last key for storage is a confidentiality failure.
+`labs/2.1/2.1-parser-boundaries` only. Do not target other hosts. Do not paste weaponized payloads into notes. The AMBIGUOUS blob is the course fixture, not a public exploit.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** parser differential — ACL tenant disagrees with stored tenant.
 
-- **Attacker:** A member who can POST JSON; a proxy that re-encodes Unicode; a second parser in a worker.
-- **Trust:** One agreed parser in the app. The client encoder is hostile. PostgreSQL jsonb is another parser — do not assume it matches Python json.
-**Forbidden outcome:** Parser differential: ACL tenant disagrees with stored tenant
+## Mental model: lock in the cause before the assertion
 
-**Authorized scope:** `labs/2.1/2.1-parser-boundaries` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable parse_note.py splits ACL vs storage on duplicate tenant.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: Duplicate tenant keys in one object; split parse.
-
-## Vulnerable fixture (local)
-
-```python
-"""Vulnerable: ACL parser (first tenant key) disagrees with store parser (JSON last key)."""
-
-from __future__ import annotations
-
-import json
-import re
-
-
-def _first_tenant(text: str) -> str:
-    match = re.search(r'"tenant"\s*:\s*"([^"]*)"', text)
-    return match.group(1) if match else ""
-
-
-def _last_tenant(text: str) -> str:
-    data = json.loads(text)
-    value = data.get("tenant", "")
-    return str(value)
-
-
-def ingest_note(text: str) -> dict:
-    acl = _first_tenant(text)
-    stored = _last_tenant(text)
-    return {"accepted": True, "acl_tenant": acl, "stored_tenant": stored, "body": json.loads(text).get("body")}
+```mermaid
+flowchart TD
+  Bytes["AMBIGUOUS fixture bytes"] --> Regex["Regex first tenant"]
+  Bytes --> Json["json.loads last tenant"]
+  Regex --> Acl["acl_tenant tA"]
+  Json --> Store["stored_tenant tB"]
+  Acl --> Accept["accepted true"]
+  Store --> Accept
+  Accept --> Harm["Tenant A policy wraps Tenant B body"]
 ```
+
+The vulnerable tree demonstrates **cause** (two interpreters), not a trophy exploit. Preconditions: duplicate tenant keys in one object; split parse.
+
+## What to read in the fixture
+
+`vulnerable/parse_note.py` uses a first-key scanner for ACL and `json.loads` for storage, then returns `accepted: True` even when they disagree. CPython last-wins on duplicates is the store meaning. The regex is not a JSON parser; it is a second grammar that happens to look at similar text.
+
+You do not need a new payload. The test module already binds:
+
+- CLEAN unique-key JSON for Tenant A — must remain acceptable.
+- AMBIGUOUS duplicate `"tenant"` keys — must not yield two meanings.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Two interpreters, two meanings of the same bytes. |
-| Impact | tB body stored as tA or ACL sees tA while disk sees tB. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Two interpreters, two meanings of the same bytes |
+| Preconditions | Duplicate tenant keys; ACL on first, store on last |
+| Impact | tB body stored as if it were tA, or ACL sees tA while disk sees tB |
+| Not the lesson | A scanner name, CWE mnemonic, or “JSON is broken” |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/2.1/2.1-parser-boundaries/tests -q --impl vulnerable` (or the README if fixtures differ).
+Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name `test_duplicate_tenant_keys_are_one_meaning`.
+
+```text
+python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl vulnerable
+```
+
+Do not “fix” the test to pass. The failure *is* the evidence that the property is currently false.
 
 ## Transfer
 
-GraphQL and REST both ingest the same note — two grammars.
+GraphQL and REST both ingest the same note: two grammars. Predict a disagreement without running anything outside this directory.
 
 ## Non-goals
 

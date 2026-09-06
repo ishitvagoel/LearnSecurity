@@ -20,7 +20,8 @@ export type LessonSectionKind =
   | "nongoal"
   | "limits"
   | "why"
-  | "usability";
+  | "usability"
+  | "mental";
 
 const KIND_LABELS: Record<string, string> = {
   "concept-model": "Concept",
@@ -151,6 +152,9 @@ export function sectionKindFromHeading(text: string): LessonSectionKind | null {
   if (t.startsWith("usability")) {
     return "usability";
   }
+  if (t.startsWith("mental model")) {
+    return "mental";
+  }
   return null;
 }
 
@@ -172,6 +176,8 @@ export function sectionClassName(kind: LessonSectionKind): string {
       return "lesson-section lesson-section-why";
     case "usability":
       return "lesson-section lesson-section-usability";
+    case "mental":
+      return "lesson-section lesson-section-mental";
     default: {
       const exhaustive: never = kind;
       return exhaustive;

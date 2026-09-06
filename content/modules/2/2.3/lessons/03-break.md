@@ -1,56 +1,50 @@
-# 2.3 — Browser security model (3 Break)
+# 2.3-LO-03 — Observe the script-readable session, do not trophy it
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** HTML Living Standard cookies (living); RFC 6265bis drafts remain **draft** if cited; ASVS 5.0.0 V3 (final); CSP3 is **not** this lab’s property.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** HTML Living Standard cookies (living); OWASP ASVS 5.0.0 (final) `v5.0.0-3.3.4`.
 
-## Property (start here)
+## Authorized scope
 
-A session cookie marked HttpOnly must not be readable by script in the lab DOM. That is a *browser* cell. It does not mean XSS is impossible (6.2) and does not make CSP3 (Candidate Recommendation / draft-ish depending on pin) a substitute for encoding.
+`labs/2.3/2.3-browser-policy` only. Model of `document.cookie`. No real browser exploit pages. Do not paste XSS payloads.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** script reads the HttpOnly session cookie.
 
-- **Attacker:** Injected script in origin (later 6.2); a malicious extension (residual).
-- **Trust:** Browser honors HttpOnly. The app must actually set the flag. Extensions are outside this TCB.
-**Forbidden outcome:** Script reads the HttpOnly session cookie
+## Mental model: the flag is present and ignored
 
-**Authorized scope:** `labs/2.3/2.3-browser-policy` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable cookies.py exposes session to script.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: Cookie without HttpOnly; script runs.
-
-## Vulnerable fixture (local)
-
-```python
-"""Vulnerable: session cookie is readable to script in the origin (no HttpOnly)."""
-
-
-def js_read_session(cookies: dict) -> str | None:
-    session = cookies.get("sc_session")
-    if not session:
-        return None
-    return session["value"]
+```mermaid
+flowchart TD
+  Cookie["sc_session httponly true"] --> Read["js_read_session"]
+  Read --> Ignore[Fixture ignores httponly]
+  Ignore --> Leak["returns synthetic-session"]
 ```
+
+The vulnerable tree demonstrates **cause** (session presented to the script interpreter), not a trophy exploit. Preconditions: cookie object with `httponly: True`; reader that returns `value` anyway. `Secure` is already true in the test fixture—HTTPS does not imply unreadability to JS.
+
+## What to read in the fixture
+
+`vulnerable/cookies.py` `js_read_session` returns `session["value"]` whenever the name exists. The test binds `HTTPONLY_SESSION` with `httponly: True` and expects `None`.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Session presented to the script interpreter. |
-| Impact | Session theft then 1.2 as the thief. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Session presented to the script interpreter |
+| Impact | Session theft then 1.2 as the thief |
+| Not the lesson | “XSS is solved,” a CWE mnemonic, or CSP3 |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/2.3/2.3-browser-policy/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/2.3/2.3-browser-policy/tests --impl vulnerable
+```
+
+Record the failing test `test_script_cannot_read_httponly_session`. Do not weaken the assertion.
 
 ## Transfer
 
-React Native WebView cookie bridge.
+React Native WebView cookie bridge: a new interpreter. Predict without leaving this directory.
 
 ## Non-goals
 
-No live-target instructions. Synthetic data only.
+No live-target instructions. Synthetic session value only.

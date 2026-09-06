@@ -1,38 +1,51 @@
-# 2.1 — Bytes, encodings, parsers, and interpreter boundaries (5 Verify)
+# 2.1-LO-05 — Evidence is a failing test, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** ASVS 5.0.0 V5 (final) input; RFC 8259 JSON (STD 90); Unicode UAX #15 as *normalization*, not a security control by itself.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-2.2.1`; RFC 8259 JSON (STD 90, final).
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-If a note JSON object repeats the tenant key, ingest must reject (or both the ACL decision and the stored row must see the same tenant). A parser that keeps the first key for ACL and the last key for storage is a confidentiality failure.
+Happy-path HTTP 200 is not this module’s evidence (see 9.3). The oracle is the local pair against a named forbidden outcome.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** A member who can POST JSON; a proxy that re-encodes Unicode; a second parser in a worker.
-- **Trust:** One agreed parser in the app. The client encoder is hostile. PostgreSQL jsonb is another parser — do not assume it matches Python json.
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F[Must fail duplicate-key assertion]
+  X["--impl fixed"] --> P[Must pass both CLEAN and AMBIGUOUS]
+  F --> E[Evidence the property was false]
+  P --> E2[Evidence the predicate is now true]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Parser differential: ACL tenant disagrees with stored tenant |
-| Failure | Fail closed: Reject duplicate keys; pass one parse tree everywhere |
+| Normal | CLEAN unique-key JSON is accepted with `acl_tenant == stored_tenant == tA` |
+| Negative / abuse | AMBIGUOUS duplicate keys: rejected **or** both tenants identical |
+| Failure default | Uncertainty does not persist a body under a guessed tenant |
 
-Lab tests: `test_parser.py` under `labs/2.1/2.1-parser-boundaries`.
+Lab tests: `test_unambiguous_json_is_accepted` and `test_duplicate_tenant_keys_are_one_meaning` in `labs/2.1/2.1-parser-boundaries/tests/test_parser.py`.
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Parser differential: ACL tenant disagrees with stored tenant`
-- `--impl fixed`: **pass**
+```text
+python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl vulnerable
+python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl fixed
+```
 
-CLEAN accepted with tA; AMBIGUOUS rejected or consistent.
+Map each test to a matrix cell from LO-02. Do not paste keys.
+
+## What the tests do not prove
+
+- PostgreSQL `jsonb` agreement
+- GraphQL variable parsing
+- Unicode identifier spoofing
+- Authorization for an honest unique-key object (that is 1.2)
+
+Record those as residuals or later modules, not as silent passes.
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations this session. If vulnerable does not fail, the lab is miswired—fix the wiring, not the assertion.
 
 ## Transfer
 
-GraphQL and REST both ingest the same note — two grammars.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+GraphQL and REST both ingest the same note. A test that only asserts status 200 on `/graphql` is not parser-agreement evidence.

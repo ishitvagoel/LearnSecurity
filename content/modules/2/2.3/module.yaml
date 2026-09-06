@@ -47,35 +47,35 @@ concepts:
 learningObjects:
 - id: 2.3-LO-01
   kind: concept-model
-  title: 'Browser security model: property vs mechanism'
+  title: HttpOnly is a browser cell, not an XSS guarantee
   path: lessons/01-property.md
 - id: 2.3-LO-02
   kind: design-exercise
-  title: Model SecureCollab for 2.3
+  title: Browser policy matrix a second engineer can test
   path: lessons/02-model.md
 - id: 2.3-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: Script reads the HttpOnly session cookie'
+  title: 'Local fixture: script reads the HttpOnly session cookie'
   path: lessons/03-break.md
 - id: 2.3-LO-04
   kind: design-exercise
-  title: Structural fix restoring the 2.3 invariant
+  title: Honor HttpOnly; do not claim XSS is finished
   path: lessons/04-build.md
 - id: 2.3-LO-05
   kind: verification-lab
-  title: Forbidden-outcome tests for 2.3
+  title: Fail-on-vulnerable then pass-on-fixed for HttpOnly
   path: lessons/05-verify.md
 - id: 2.3-LO-06
   kind: operations-exercise
-  title: Detect/recover notes for 2.3
+  title: Detect session cookies without HttpOnly; never log the value
   path: lessons/06-operate.md
 - id: 2.3-LO-07
   kind: transfer-challenge
-  title: 'Transfer: Clinic patient portal session cookie.'
+  title: 'Transfer: clinic portal cookie or WebView bridge'
   path: lessons/07-transfer.md
 - id: 2.3-LO-08
   kind: code-review
-  title: Seeded review for 2.3
+  title: Seeded review of script-readable sessions
   path: lessons/08-review.md
 labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
@@ -102,10 +102,12 @@ assessmentBlueprint:
 masteryGate: '2'
 standardsRefs:
 - source: OWASP Application Security Verification Standard
-  version: 5.0.0
+  version: '5.0.0'
   status: final
   requirementIds:
-  - V3
+  - v5.0.0-3.3.4
+  - v5.0.0-3.3.1
+  - v5.0.0-3.3.2
   url: https://owasp.org/www-project-application-security-verification-standard/
 - source: W3C Content Security Policy Level 3
   version: Level 3
@@ -127,7 +129,7 @@ operationalConsiderations:
 - Set-Cookie without HttpOnly in staging scans.
 - Browser extensions; physical access.
 author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+reviewer: pending independent quality and lab-safety review
 lastReviewedAt: '2026-08-24'
 nextReviewAt: '2027-02-24'
 changelog:
@@ -144,3 +146,7 @@ changelog:
 - date: '2026-08-24'
   note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
     Pass C keys isolated'
+- date: '2026-09-06'
+  note: 'Depth pass: jar-versus-script mental models, mermaid diagrams, ASVS 5.0
+    3.3.4/3.3.1 pins with CSP3 and Trusted Types labeled draft; independent review
+    still required'

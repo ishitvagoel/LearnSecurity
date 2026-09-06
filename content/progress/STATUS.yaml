@@ -14,13 +14,42 @@ defaults:
   ai_security: elective E1
   website_progress: local-first static site (site/); no accounts
 next:
-  id: '1.4'
+  id: '2.4'
   pass: revise
   skill: deepen-curriculum
   inner_skill: standards-pin
-  note: Depth queue reopened after semantic audit. Revise one module at a time; generated
-    scaffolds remain map-complete until independent review passes.
+  note: Module 2.3 authoring pass added jar-versus-script mental models and diagrams;
+    keep 1.4 and 2.1-2.3 developing until independent review. Continue the depth
+    queue one module at a time.
 spiral_deltas:
+- date: '2026-09-06'
+  module: '2.3'
+  change: Browser-policy loop v2 separates cookie-jar sending from script readability,
+    refuses HttpOnly as an XSS guarantee, and keeps CSP3 and Trusted Types labeled
+    as Working Drafts
+  retest: Revisit 1.2 session-as-bearer; 2.2 cache Vary-Cookie; 6.2 encoding; E2 CSP
+    Report-Only; WebView bridges in Phase 8
+- date: '2026-09-06'
+  module: '2.2'
+  change: Request-path loop v2 separates TLS hop authenticity from cache-key identity,
+    forbids client forwarded headers as key input, and labels ASVS v5.0.0-14.2.5 as
+    Level 3 rather than a silent baseline
+  retest: Revisit 1.2 tenant cells when a CDN is introduced; 1.3 edge as a trust boundary;
+    2.3 cookie Vary; 7.4 workers behind the same cache; 14.3.2 browser no-store
+- date: '2026-09-06'
+  module: '2.1'
+  change: Parser-boundary loop v2 treats duplicate-key disagreement as a confidentiality
+    failure, distinguishes validation/canonicalization/sanitization/encoding, and
+    labels ASVS v5.0.0-1.5.3 as Level 3 rather than a silent baseline
+  retest: Revisit 1.2 tenant cells when workers re-parse stored bytes; 2.2 proxies
+    that re-encode; 6.1/6.4 injection and multipart; 7.4 delayed parse; PostgreSQL
+    jsonb as a second interpreter
+- date: '2026-09-06'
+  module: '1.4'
+  change: Residual-risk loop v2 adds two work factors, usable-path TCB, register-row
+    anatomy, lockout-versus-workaround branches, and explicit coercion residual
+  retest: Revisit 1.1 safety/availability/confidentiality when recovery, step-up, or
+    support read-aloud enter scope; 1.2 support cells; 4.2 usable auth; WCAG on recovery
 - date: '2026-08-30'
   module: '1.3'
   change: Boundary model v2 distinguishes property-relative TCBs, trusted provenance,
@@ -149,8 +178,8 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added mental models and diagrams; independent
+    quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '2.1'
   title: Bytes, text, formats, parsers, and interpreters
@@ -158,8 +187,8 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added parser-boundary mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '2.2'
   title: DNS, transport, HTTP, TLS, proxies, CDNs, and caches
@@ -167,8 +196,8 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added hop-versus-key mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '2.3'
   title: Browser security model
@@ -176,8 +205,8 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added jar-versus-script mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '2.4'
   title: State, time, concurrency, and distributed failure

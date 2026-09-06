@@ -16,6 +16,17 @@ Your artifact for this lesson has three connected parts:
 
 The matrix says **what** should be allowed. The map and inventory say **where the claim can fail**.
 
+## Mental model: map, matrix, and inventory must close
+
+```mermaid
+flowchart TD
+  Map["Authority map - where grants originate"] --> Effect[Protected effect]
+  Matrix["Access matrix - subject action object state"] --> Effect
+  Inv["Enforcement inventory - every in-scope path"] --> Effect
+  Effect --> Allow[Allow only if a current grant matches]
+  Effect --> Hole["Missing path is ambient authority"]
+```
+
 ## Freeze the product version first
 
 SecureCollab Phase 1 is still a design model. It includes tenants, active memberships, tenant administrators, text notes, and privacy-safe authority events. It does not yet include files, public sharing, support impersonation, workers, webhooks, caches, mobile offline state, real PII, or production deployment.

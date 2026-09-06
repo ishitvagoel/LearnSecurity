@@ -1,56 +1,49 @@
-# 2.3 — Browser security model (4 Build)
+# 2.3-LO-04 — Honor HttpOnly; do not claim XSS is finished
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** HTML Living Standard cookies (living); RFC 6265bis drafts remain **draft** if cited; ASVS 5.0.0 V3 (final); CSP3 is **not** this lab’s property.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-3.3.4`; CSP3 and Trusted Types labeled **draft**.
 
-## Property (start here)
+## Structural means the script interpreter is excluded
 
-A session cookie marked HttpOnly must not be readable by script in the lab DOM. That is a *browser* cell. It does not mean XSS is impossible (6.2) and does not make CSP3 (Candidate Recommendation / draft-ish depending on pin) a substitute for encoding.
+`js_read_session` must return `None` when `httponly` is true. Structural means the lab’s cookie model actually branches on the flag—not a comment, not Report-Only CSP, not “we will encode later.”
 
-## Attacker capabilities and trust assumptions
+## Mental model: one cell restored
 
-- **Attacker:** Injected script in origin (later 6.2); a malicious extension (residual).
-- **Trust:** Browser honors HttpOnly. The app must actually set the flag. Extensions are outside this TCB.
-js_read_session returns None when httponly True.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-"""Fixed: HttpOnly session is not readable to script; XSS is not 'solved' — this is one cell."""
-
-
-def js_read_session(cookies: dict) -> str | None:
-    session = cookies.get("sc_session")
-    if not session:
-        return None
-    if session.get("httponly"):
-        return None
-    return session["value"]
+```mermaid
+flowchart TD
+  Read["js_read_session"] --> Flag{httponly?}
+  Flag -->|yes| None[Return none]
+  Flag -->|no| Value[Return value - not a session token]
 ```
+
+The fixed tree honors the flag. XSS is **not** solved: encoding, CSP (draft), and Trusted Types (draft) remain later work. Fail-safe for a session token: if the flag is missing, treat it as a defect, not as “readable is fine.”
 
 ## Why this restores the cell
 
-HttpOnly; Secure; careful SameSite — still not XSS-proof.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| `httponly: True` | `js_read_session` is `None` |
+| Session still sent | Cookie header path is out of this function; the jar still sends |
 
 ## What this is not
 
-Next.js “cookies() are httpOnly by default” is not true for every cookie you set manually.
-
-HttpOnly does not stop network theft, CSRF (6.3), or native apps reading the store.
+CSP3, Trusted Types, SameSite, `__Host-`, or moving the token to `localStorage`. Next.js defaults are not this cookie.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name subject, object, action, and the predicate. Run:
+
+```
+python3 -m pytest labs/2.3/2.3-browser-policy/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-React Native WebView cookie bridge.
+Clinic portal session cookie. The fix is still “script cannot read the session token,” not “we shipped a CSP.”
 
 ## Residual risk
 
-Browser extensions; physical access.
+Extensions; XSS without cookie theft; missing `Secure` on the same cookie (sister cell).

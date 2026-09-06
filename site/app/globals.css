@@ -121,7 +121,8 @@ body {
   color: #44403c;
 }
 
-.lesson-pre {
+.lesson-pre,
+.lesson-diagram {
   margin-bottom: 1.25rem;
   overflow-x: auto;
   border-radius: 0.5rem;
@@ -131,6 +132,29 @@ body {
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.875rem;
   line-height: 1.55;
+}
+
+.lesson-diagram {
+  background: #fafaf9;
+  border-color: #a8a29e;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.lesson-mermaid {
+  margin: 0 0 1.5rem;
+  overflow-x: auto;
+  border-radius: 0.75rem;
+  border: 1px solid #d6d3d1;
+  background: #fff;
+  padding: 0.75rem 1rem;
+}
+
+.lesson-mermaid svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
 }
 
 .lesson-mechanism {
@@ -190,4 +214,9 @@ body {
 .lesson-section-usability {
   border-color: #ddd6fe;
   background: #f5f3ff;
+}
+
+.lesson-section-mental {
+  border-color: #93c5fd;
+  background: #f8fafc;
 }

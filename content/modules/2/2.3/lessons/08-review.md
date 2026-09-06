@@ -1,40 +1,42 @@
-# 2.3 — Browser security model (Review)
+# 2.3-LO-08 — Review the script-readable session as a PR, not a slogan
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** HTML Living Standard cookies (living); RFC 6265bis drafts remain **draft** if cited; ASVS 5.0.0 V3 (final); CSP3 is **not** this lab’s property.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-3.3.4`; CSP3 labeled **draft**.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab cookie policy
 
-A session cookie marked HttpOnly must not be readable by script in the lab DOM. That is a *browser* cell. It does not mean XSS is impossible (6.2) and does not make CSP3 (Candidate Recommendation / draft-ish depending on pin) a substitute for encoding.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Injected script in origin (later 6.2); a malicious extension (residual).
-- **Trust:** Browser honors HttpOnly. The app must actually set the flag. Extensions are outside this TCB.
 Review `labs/2.3/2.3-browser-policy/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/2.3.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|script reads HttpOnly session| Property["Property - good if tested"]
+  Q -->|we set Secure| Mechanism[Mechanism - sister cell]
+  Q -->|HttpOnly means no XSS| False[False assurance]
+```
 
-- Seeded smell (label it yourself): document.cookie used to persist session
-- Seeded smell (label it yourself): SECURITY.md equates HttpOnly with “no XSS”
-- Seeded smell (label it yourself): CSP Report-Only treated as enforcement (see E2)
-- Seeded smell (label it yourself): Missing Secure on the same cookie
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- `document.cookie` used to persist session
+- SECURITY.md equates HttpOnly with “no XSS”
+- CSP Report-Only treated as enforcement (see E2)
+- Missing Secure on the same cookie
+
+Also reject: `localStorage` for session, client trust, closing findings without retest, keys in lessons, live-target CORS tests.
 
 ## Misconceptions
 
 - HttpOnly is XSS defense
 - SameSite is CSRF complete
-- localStorage is safer than cookies
+- `localStorage` is safer than cookies
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_script_cannot_read_httponly_session`.
 
 ## Transfer
 
-React Native WebView cookie bridge.
+Clinic portal or WebView bridge. A PR that “adds CSP3” without HttpOnly on the session is an incomplete mediation review.

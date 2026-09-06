@@ -1,53 +1,88 @@
-# 2.1 — Bytes, encodings, parsers, and interpreter boundaries (2 Model)
+# 2.1-LO-02 — A parser-boundary map a second engineer can test
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** ASVS 5.0.0 V5 (final) input; RFC 8259 JSON (STD 90); Unicode UAX #15 as *normalization*, not a security control by itself.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** Saltzer and Schroeder (1975, seminal), especially least common mechanism and complete mediation; OWASP ASVS 5.0.0 (final) `v5.0.0-1.1.1`, `v5.0.0-2.2.1`, and `v5.0.0-2.2.2`; `v5.0.0-1.5.3` labeled Level 3; RFC 8259 JSON (STD 90, final).
 
-## Property (start here)
+## Can a second engineer name pytest cases from your map?
 
-If a note JSON object repeats the tenant key, ingest must reject (or both the ACL decision and the stored row must see the same tenant). A parser that keeps the first key for ACL and the last key for storage is a confidentiality failure.
+A boxes-and-arrows “client → API → database” sketch is not this lesson. A parser-boundary map names **which interpreter** produces the tenant used for the 1.2 decision and **which interpreter** produces the tenant written to storage.
 
-## Attacker capabilities and trust assumptions
+SecureCollab Phase 1 freeze: tenants, memberships, notes, and a **local JSON ingest fixture**. No GraphQL product, no live proxy, no PostgreSQL `jsonb` claim, no Unicode exploit corpus.
 
-- **Attacker:** A member who can POST JSON; a proxy that re-encodes Unicode; a second parser in a worker.
-- **Trust:** One agreed parser in the app. The client encoder is hostile. PostgreSQL jsonb is another parser — do not assume it matches Python json.
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: one parse result, many consumers
+
+```mermaid
+flowchart TD
+  Bytes["Request bytes"] --> Agreed["One agreed parse"]
+  Agreed --> ACL["1.2 tenant decision"]
+  Agreed --> Store["Stored tenant and body"]
+  Agreed --> Worker["Later worker must consume the same result, not re-guess"]
+```
+
+If ACL and store take different arrows out of `Bytes`, the map already predicts `test_duplicate_tenant_keys_are_one_meaning` will fail.
+
+## Step 1: name every interpreter on the ingest path
+
+| Interpreter | What it consumes | What it emits | Phase 1 treatment |
+|---|---|---|---|
+| Client `JSON.stringify` / browser encoder | Hostile JS values | Bytes on the wire | Untrusted |
+| Optional proxy or CDN that re-encodes | Bytes | Possibly different bytes | Deferred to 2.2; still hostile |
+| First-key regex in the vulnerable fixture | Text | First `"tenant"` string | Must not be ACL TCB |
+| CPython `json.loads` | Text | Last duplicate wins | Lab store parser |
+| Agreed parse result object | — | `tenant`, `body` | TCB if both ACL and persist use it |
+| PostgreSQL `jsonb` | Text or JSON | Its own duplicate/escape rules | Residual / later; do not assume it matches CPython |
+| Future worker re-parse of stored text | Stored bytes | A second meaning | Review trigger for 7.4 |
+
+Open design: the client, APK, model, or prompt is hostile. The TCB is the **agreed result**, not “the backend.”
+
+## Step 2: bind objects at the security cut
 
 | Piece | This system |
 |---|---|
-| Subjects | Poster (tB), ACL checker, storage writer, later reader |
-| Objects | JSON bytes, ACL tenant, stored tenant, note body |
-| Actions | ingest_note, parse, persist |
-| Channels | HTTP body, worker re-parse, DB jsonb |
-| TCB | A single parse result object used for both ACL and persist. |
-| Untrusted | Duplicate keys, overlong UTF-8, NFC vs NFD names |
-| State / time | The same bytes parsed tomorrow by a new library version. |
-| 1.1 cell | Confidentiality (cross-tenant) caused by *disagreement*, not by missing login. |
+| Subjects | Poster (Tenant A or B); ACL checker; storage writer; later reader |
+| Objects | Raw bytes; parse result; ACL tenant; stored tenant; note body |
+| Actions | `ingest_note`, `parse`, `persist`, `read_body` |
+| Channels | HTTP body now; worker re-parse and `jsonb` later |
+| TCB | Single parse result used for both ACL and persist |
+| Untrusted | Duplicate keys, overlong or unexpected encodings, client-supplied tenant labels |
+| State / time | The same bytes parsed tomorrow by a new library version |
+| 1.1 cell | Confidentiality from disagreement, not from missing authentication |
 
-## Authority matrix (minimum)
+## Step 3: write cells the lab can fail
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| poster tA | CLEAN json | ingest | allow |
-| poster tB | duplicate tenant keys | ingest | deny |
-| worker | re-parse stored bytes | must-match | allow-only-if-same |
-| reader tA | stored body | read | 1.2 cell |
+| poster tA | CLEAN unique-key JSON | ingest | allow; `acl_tenant == stored_tenant == tA` |
+| poster tB | duplicate tenant keys | ingest | deny, or accept only if both interpreters agree |
+| worker | re-parse stored bytes | persist-or-export | allow only if meaning matches the original result |
+| reader tA | stored body | read | 1.2 cell; ingest agreement does not grant cross-tenant read |
 
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+A missing worker cell is how delayed-machine transfer appears. Write the hole even if Phase 1 has no queue.
+
+## Step 4: ambiguity catalogue, not a CVE list
+
+Write at least four rows a peer could turn into fixtures. Synthetic identifiers only.
+
+1. Duplicate `"tenant"` keys (lab AMBIGUOUS).
+2. Unique keys, honest Tenant A (lab CLEAN).
+3. Missing tenant field (fail closed).
+4. Same bytes later parsed by a second library (review trigger; not claimed fixed by this lab).
+
+Do not add public JSON bombs or live Unicode weaponization. Those are non-goals, not extra credit.
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/2.1/2.1-parser-boundaries` file `parse_note.py`.
+Draw the map so a second engineer could name pytest cases without opening the keys file. Point at `labs/2.1/2.1-parser-boundaries` file `parse_note.py`. Label the first-key scanner and `json.loads` as two interpreters even in the fixed tree—the fix is agreement-or-reject, not pretending the regex became JSON.
 
 ## Transfer
 
-GraphQL and REST both ingest the same note — two grammars.
+GraphQL variables and a REST body both name `patient_id`. Add two grammars to the map before you claim “we validate JSON.”
 
 ## Residual risk
 
-Honest unique-key JSON still needs 1.2 mediation.
+Honest unique-key JSON still needs 1.2 mediation. Parser agreement is not authorization.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 items as the definition of security. Keys stay out of lessons.

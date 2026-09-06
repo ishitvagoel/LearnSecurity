@@ -1,33 +1,44 @@
-# 2.3 — Browser security model (7 Transfer)
+# 2.3-LO-07 — Transfer: clinic portal cookie or WebView bridge
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** HTML Living Standard cookies (living); RFC 6265bis drafts remain **draft** if cited; ASVS 5.0.0 V3 (final); CSP3 is **not** this lab’s property.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-3.3.4`; CSP3 and Trusted Types labeled **draft**.
 
-## Property (start here)
+## Change the interpreter; keep the jar-versus-script shape
 
-A session cookie marked HttpOnly must not be readable by script in the lab DOM. That is a *browser* cell. It does not mean XSS is impossible (6.2) and does not make CSP3 (Candidate Recommendation / draft-ish depending on pin) a substitute for encoding.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic patient portal session cookie.
 
-- **Attacker:** Injected script in origin (later 6.2); a malicious extension (residual).
-- **Trust:** Browser honors HttpOnly. The app must actually set the flag. Extensions are outside this TCB.
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Alternate sketch:** React Native WebView cookie bridge.
 
-**Prompt:** React Native WebView cookie bridge.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic patient portal session cookie.
+1. attacker capabilities (injected script in origin; WebView injected JS; not a live hospital);
+2. trust assumptions (which jar honors HttpOnly; the app must set the flag);
+3. forbidden outcome (script-readable session, not “XSS everywhere”);
+4. a test idea on a local fixture only;
+5. residual (extensions, XSS without cookie theft, draft CSP);
+6. WCAG 2.2 only if a human-mediated control is in the claim (login usability is 1.4 / 4.2, not HttpOnly).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: a new bridge is a new interpreter
+
+```mermaid
+flowchart TD
+  Cookie[Session cookie] --> BrowserJar[Browser jar]
+  Cookie --> WebView[WebView bridge]
+  BrowserJar --> HttpOnly{HttpOnly honored?}
+  WebView --> Bridge{Bridge exposes value to JS?}
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | Next.js “cookies() are httpOnly by default” is not true for every cookie you set… |
-| Live-target plan | Lab policy |
+| HttpOnly means no XSS | 6.2 still exists |
+| CSP3 as this cell | Draft, different property |
+| Live clinic or third-party CSRF test | Lab policy |
 
 ## Practice
 
-One page. No keys. The lab `labs/2.3/2.3-browser-policy` stays the only running system you may break.
+One page. No keys. `labs/2.3/2.3-browser-policy` is the only running system you may break.

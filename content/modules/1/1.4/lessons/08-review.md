@@ -1,44 +1,55 @@
-# 1.4 — Risk, people, economics, usable security, and resilience (Review)
+# 1.4-LO-08 — Review a register that lists tools instead of harm
 
 **Kind:** code-review  
 **Loop step:** Review  
-**Standards:** WCAG 2.2 (final, W3C Rec); NIST SP 800-63-4 (final) as identity *risk* language; CISA Secure by Design (public guidance, final); NIST CSF 2.0 GV.OC.
+**Lab:** `labs/1.4/1.4-risk-register/vulnerable/` as a SecureCollab PR  
+**Standards:** WCAG 2.2 (final); NIST CSF 2.0 GV; Saltzer and Schroeder psychological acceptability (1975, seminal).
 
-## Property (start here)
+Intended findings live only in `content/assessment/keys/1.4.md` — not here.
 
-A high-impact recovery control that is color-only or mouse-only is a security failure: people will be locked out or will route around it (shared passwords, screenshot of the “red” button). Usability is in the TCB for human-mediated controls.
+## What you are reviewing
 
-## Attacker capabilities and trust assumptions
+A colleague ships a recovery confirm and a “risk register.” Your job is to label each claim **property**, **mechanism**, or **false assurance**, and to say which 1.1 cell breaks if they ship.
 
-- **Attacker:** A tired legitimate user; an abuser who controls the mouse; a support attacker who prefers friction that pushes users to email secrets.
-- **Trust:** Lab recovery UI fixture only. Real users would include keyboard-only and low-vision operators.
-Review `labs/1.4/1.4-risk-register/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/1.4.md` — not here.
+```mermaid
+flowchart TD
+  PR[Proposed recovery PR] --> Q1{Named keyboard control?}
+  PR --> Q2{Register names harm, owner, trigger?}
+  Q1 -->|no| Fail1["Property fail - lockout or workaround"]
+  Q2 -->|no| Fail2["False assurance - vanity residual"]
+```
 
-## What to label
+## Mental model: four seeded smells to find yourself
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+Do not open the keys file. For each smell, write the label and the rewrite.
 
-- Seeded smell (label it yourself): Confirm button has no accessible name
-- Seeded smell (label it yourself): Destructive action distinguished only by red vs green
-- Seeded smell (label it yourself): Mouse-only drag-to-confirm
-- Seeded smell (label it yourself): Risk register lists residual as “users should be careful”
+- Confirm button has no accessible name  
+- Destructive or confirming action distinguished only by red vs green  
+- Mouse-only drag-to-confirm  
+- Risk register lists residual as “users should be careful”
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+Also reject: client trust as the TCB; closing a finding without a retest; keys in learner notes; live-target “we should try this on staging clinic.”
 
-## Misconceptions
+## Misconceptions this module refuses
 
-- Accessibility is a separate compliance track from security
-- Friction always increases security
-- Work factor applies only to attackers, not to legitimate users stuck in a flow
+- Accessibility is a separate compliance track from security  
+- Friction always increases security  
+- Work factor applies only to attackers, not to legitimate users stuck in a flow  
+- SAMM or scanner color is residual risk  
+- Coercion is solved by CSS  
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: observation, property or false assurance, suggested structural change, residual you will **not** delete. Do not open the keys file.
 
 ## Transfer
 
-Step-up auth on a clinic portal: if the second factor UI is mouse-only, what property fails?
+Clinic mouse-only step-up: write the same four smell names as they would appear in that UI (unnamed dialog, color-only continue, pointer-only, residual “clinicians should be careful”).
 
-## HITL / WCAG 2.2
+## Usability
 
-WCAG 2.2 Success Criteria 2.1.1 Keyboard, 1.4.1 Use of Color, 2.5.8 Target Size (Minimum) apply to this control. They are not a privacy policy.
+WCAG 2.2 2.1.1, 1.4.1, and 2.5.8 apply to the control. They are not a privacy policy.
+
+## Non-goals
+
+Do not merge by adding a comment “will fix a11y later.” That comment is a residual without an owner.

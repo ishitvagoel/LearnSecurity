@@ -1,38 +1,60 @@
-# 1.4 — Risk, people, economics, usable security, and resilience (5 Verify)
+# 1.4-LO-05 — Evidence that inaccessible recovery is forbidden
 
 **Kind:** verification-lab  
 **Loop step:** 5 Verify  
-**Standards:** WCAG 2.2 (final, W3C Rec); NIST SP 800-63-4 (final) as identity *risk* language; CISA Secure by Design (public guidance, final); NIST CSF 2.0 GV.OC.
+**Lab:** `labs/1.4/1.4-risk-register`  
+**Standards:** WCAG 2.2 (final) as the web baseline the oracle approximates; NIST CSF 2.0 DE as a label for later signals, not as the test.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A high-impact recovery control that is color-only or mouse-only is a security failure: people will be locked out or will route around it (shared passwords, screenshot of the “red” button). Usability is in the TCB for human-mediated controls.
+Happy-path “pytest collected 1 item” is not evidence. The oracle must be **false** on the vulnerable tree and **true** on the fixed tree.
 
-## Attacker capabilities and trust assumptions
+```mermaid
+flowchart TD
+  V[vulnerable implementation] --> T[test_recovery_control_is_usable_and_accessible]
+  F[fixed implementation] --> T
+  T -->|vulnerable| Fail[Must fail]
+  T -->|fixed| Pass[Must pass]
+```
 
-- **Attacker:** A tired legitimate user; an abuser who controls the mouse; a support attacker who prefers friction that pushes users to email secrets.
-- **Trust:** Lab recovery UI fixture only. Real users would include keyboard-only and low-vision operators.
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+If both pass, the test is not looking at `mouse_only`, name, or keyboard. If both fail, the fix is not structural or the oracle is wrong.
 
-| Case | Must show |
+## Four modes, even for a widget
+
+| Mode | Must show for this module |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | High-impact recovery control is color- or mouse-only |
-| Failure | Fail closed: Keyboard operable, name in accessible tree, not color-only (WCAG 2 |
+| Normal | A named, keyboard-operable confirm is accepted by the oracle (fixed tree) |
+| Negative | Color-only or mouse-only confirm is rejected (vulnerable tree) |
+| Abuse | Sharing an admin session to skip recovery is **out of band** here: record it as a register residual, not as a pytest in this folder |
+| Failure | Missing name or keyboard fails closed (`is_usable_accessible` is false) |
 
-Lab tests: `test_recovery_a11y.py` under `labs/1.4/1.4-risk-register`.
+The file is `labs/1.4/1.4-risk-register/tests/test_recovery_a11y.py`. It calls `recovery.recovery_confirm_control()` and asserts `is_usable_accessible`. That is a **forbidden-outcome** test: inaccessible recovery is not allowed to count as a passing control.
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `High-impact recovery control is color- or mouse-only`
-- `--impl fixed`: **pass**
+A test that only asserts HTTP 200 is not this module’s evidence (see 9.3 when you get there). This lab never opens a socket.
 
-is_usable_accessible True only when name+keyboard+non-color cue exist.
+## Map tests to LO-02 cells
+
+| Test | Matrix cell | 1.1 cell |
+|---|---|---|
+| Oracle false on mouse-only unnamed control | Owner × confirm × color-only → deny-as-control | Availability/safety (lockout) |
+| Oracle true on named keyboard control | Owner × confirm × keyboard-confirm → allow | Same cells restored |
+| Not tested here | Support × codes × read-aloud | Authorization hole in the register |
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations this session:
+
+```text
+python -m pytest labs/1.4/1.4-risk-register/tests --impl vulnerable
+python -m pytest labs/1.4/1.4-risk-register/tests --impl fixed
+```
+
+Paste nothing from keys. Write the command output’s fail/pass into your notes next to the matrix row.
 
 ## Transfer
 
-Step-up auth on a clinic portal: if the second factor UI is mouse-only, what property fails?
+Clinic mouse-only step-up: write one test name you would want (`test_step_up_control_keyboard_operable`) and what must fail on the broken widget. Do not run it against a real clinic.
 
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+## Non-goals
+
+Do not add live traffic. Do not log recovery codes in a “better” test. Keys stay out of this file.

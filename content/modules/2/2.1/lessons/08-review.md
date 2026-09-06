@@ -1,29 +1,33 @@
-# 2.1 — Bytes, encodings, parsers, and interpreter boundaries (Review)
+# 2.1-LO-08 — Review the split parse as a PR, not a slogan
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** ASVS 5.0.0 V5 (final) input; RFC 8259 JSON (STD 90); Unicode UAX #15 as *normalization*, not a security control by itself.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** OWASP ASVS 5.0.0 (final) `v5.0.0-1.1.1` and `v5.0.0-2.2.2`; RFC 8259 JSON (STD 90, final).
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab ingest
 
-If a note JSON object repeats the tenant key, ingest must reject (or both the ACL decision and the stored row must see the same tenant). A parser that keeps the first key for ACL and the last key for storage is a confidentiality failure.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** A member who can POST JSON; a proxy that re-encodes Unicode; a second parser in a worker.
-- **Trust:** One agreed parser in the app. The client encoder is hostile. PostgreSQL jsonb is another parser — do not assume it matches Python json.
 Review `labs/2.1/2.1-parser-boundaries/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/2.1.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|a two-meaning ingest| Property[Property - good if tested]
+  Q -->|a library name| Mechanism[Mechanism - ask which property]
+  Q -->|JSON cannot duplicate| False[False assurance]
+```
 
-- Seeded smell (label it yourself): json.loads used twice; ACL on first, store on second
-- Seeded smell (label it yourself): Comment “JSON can’t have duplicate keys” (RFC 8259 recommends but parsers differ)
-- Seeded smell (label it yourself): No corpus test for duplicate keys
-- Seeded smell (label it yourself): Normalizing display names as a substitute for tenant ids
+For each claim and each branch: label **property**, **mechanism**, or **false assurance**.
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+Seeded smells (label them yourself; do not open the keys file):
+
+- `json.loads` used for store while ACL uses a different first-key scan
+- Comment or belief that “JSON can’t have duplicate keys” (RFC 8259 recommends uniqueness; parsers differ)
+- No corpus test for duplicate keys
+- Normalizing display names as a substitute for tenant ids
+
+Also reject: client trust, concatenating interpreters, Report-Only as enforcement, closing findings without retest, keys in lessons.
 
 ## Misconceptions
 
@@ -33,8 +37,8 @@ Also reject: client trust, interpreter concatenation, Report-Only as enforcement
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes a peer could act on. Tie at least one note to `test_duplicate_tenant_keys_are_one_meaning`.
 
 ## Transfer
 
-GraphQL and REST both ingest the same note — two grammars.
+GraphQL and REST both ingest the same note — two grammars. A PR that “validates JSON” on only one path is an incomplete mediation review.

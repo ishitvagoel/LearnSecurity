@@ -1,67 +1,66 @@
-# 1.4 — Risk, people, economics, usable security, and resilience (4 Build)
+# 1.4-LO-04 — Restore the human path without lowering assurance
 
 **Kind:** design-exercise  
 **Loop step:** 4 Build  
-**Standards:** WCAG 2.2 (final, W3C Rec); NIST SP 800-63-4 (final) as identity *risk* language; CISA Secure by Design (public guidance, final); NIST CSF 2.0 GV.OC.
+**Lab:** `labs/1.4/1.4-risk-register`  
+**Standards:** WCAG 2.2 (final) as web baseline; Saltzer and Schroeder fail-safe defaults and psychological acceptability (1975, seminal); CISA Secure by Design (current public guidance, final) for not shifting the burden onto the customer’s eyesight and pointer.
 
-## Property (start here)
+## Structural means the journey actually works
 
-A high-impact recovery control that is color-only or mouse-only is a security failure: people will be locked out or will route around it (shared passwords, screenshot of the “red” button). Usability is in the TCB for human-mediated controls.
+A denylist of yesterday’s CSS class is not the fix. A scanner suppression is not the fix. “The component library is accessible” is not the fix.
 
-## Attacker capabilities and trust assumptions
+The structural change is: the confirm object **is** a named, keyboard-operable control, and color is extra encoding only. The 1.2 decision (this principal may confirm **this** account **now**) is unchanged. You do not restore availability by emailing the password.
 
-- **Attacker:** A tired legitimate user; an abuser who controls the mouse; a support attacker who prefers friction that pushes users to email secrets.
-- **Trust:** Lab recovery UI fixture only. Real users would include keyboard-only and low-vision operators.
-recovery_confirm_control exposes role=button, name, keyboard=True, color_only=False.
+## Mental model: redundant encoding, not a swap
 
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-"""Fixed: named, keyboard-operable recovery confirm (WCAG 2.2 as web baseline)."""
-
-
-def recovery_confirm_control() -> dict:
-    return {
-        "id": "confirm-recovery",
-        "name": "Confirm account recovery",
-        "keyboard": True,
-        "color": "green",
-        "mouse_only": False,
-    }
-
-
-def is_usable_accessible(control: dict) -> bool:
-    if control.get("mouse_only"):
-        return False
-    if not str(control.get("name", "")).strip():
-        return False
-    if not control.get("keyboard"):
-        return False
-    return True
+```mermaid
+flowchart LR
+  Name[Accessible name] --> Ctrl[Confirm control]
+  Key[Keyboard operation] --> Ctrl
+  Color[Color as extra cue] --> Ctrl
+  Ctrl --> Decision[Still a 1.2 allow or deny]
 ```
 
-## Why this restores the cell
+If you remove Name or Key, the control is not a control. If you remove Color, a sighted mouse user might be slightly slower; the property can still hold. If you remove the 1.2 decision, anyone who can call `confirm` wins.
 
-Keyboard operable, name in accessible tree, not color-only (WCAG 2.2).
+## What the fixed fixture must show
 
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+Read `fixed/recovery.py` against this checklist. Do not treat the snippet as production React.
+
+| Predicate | Why it is structural |
+|---|---|
+| `name` is a non-empty accessible name | Screen-reader users can hear “Confirm account recovery” |
+| `keyboard` is true | 2.1.1: the effect is reachable without a pointer |
+| `mouse_only` is false | Pointer is not a hidden TCB |
+| Color may remain | Redundant, not sole, encoding |
+
+Fail-safe: if name or keyboard is missing, `is_usable_accessible` is false. Uncertainty is a **deny** of “this control is an acceptable recovery gate,” not an allow because the demo looked fine.
 
 ## What this is not
 
-A React component library “accessible by default” is not your journey. You still test the recovery path.
+- A full WCAG conformance claim for SecureCollab.
+- A CAPTCHA, drag-to-confirm, or “open the mobile app” detour that recreates exclusion.
+- A lower-assurance escape hatch (“email us the note body”).
+- A coercion fix. Physical presence remains residual.
 
-CAPTCHA or “confirm in the app” can recreate the same exclusion.
+## Trade-off you must write down
+
+Reducing friction (keyboard, name, larger target) **is** the security change for this invariant. It is not a gift that weakens hashing or tenant isolation. If someone argues that making confirm easier helps attackers, answer with the two-work-factor model from LO-01: you measured user work that was blocking legitimate recovery. Attacker work to coerce or phish is a **different row**, owned and dated.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name subject, object, action, and the predicate that must be true after the fix. Run:
+
+```text
+python -m pytest labs/1.4/1.4-risk-register/tests --impl fixed
+```
+
+It must pass. Then write one sentence: which 1.1 cell is restored, and which residual you refused to delete.
 
 ## Transfer
 
-Step-up auth on a clinic portal: if the second factor UI is mouse-only, what property fails?
+Banking re-auth dialog: if the bank “fixes” mouse-only by sending a one-time code in SMS that support will read back, what 1.2 cell did they quietly change?
 
 ## Residual risk
 
-Coercion: a physically present attacker can still force a confirmation. Record as residual (do not pretend UX fixes coercion).
+Coercion remains. Alternate mediated path is still future work. Honest-lab is not a user study.
