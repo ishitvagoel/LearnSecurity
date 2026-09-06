@@ -147,3 +147,6 @@ changelog:
   note: 'Depth pass: origin-binding mental models, mermaid diagrams, ASVS v5.0.0-6.3.3
     with Level 3 hardware clause labeled advanced, WebAuthn L3 labeled CR; independent
     review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with password-at-evil cause tables, origin-bound
+    WebAuthn limits, and clinic-SSO transfer; independent review still required

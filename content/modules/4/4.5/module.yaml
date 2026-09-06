@@ -156,3 +156,6 @@ changelog:
   note: 'Depth pass: audience-is-a-name mental models, mermaid diagrams, RFC
     9700 / 10017 / 8252, ASVS v5.0.0-10.3.1, v5.0.0-10.3.5 labeled Level 3
     advanced, OAuth 2.1 labeled draft; independent review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with skipped-aud cause tables, expected-audience
+    limits, and FHIR/native-redirect transfer; independent review still required

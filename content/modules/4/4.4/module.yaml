@@ -149,3 +149,6 @@ changelog:
   note: 'Depth pass: object-keyed grant and tenant-key mental models, mermaid
     diagrams, ASVS v5.0.0-8.2.2 / 8.4.1, v5.0.0-8.3.2 / 8.3.3 labeled Level 3
     advanced; API1/API3/API5 awareness; independent review still required'
+- date: '2026-09-06'
+  note: Thickened lessons 03-08 with ambient-grant cause tables, tenant-plus-object
+    lookup limits, and appointment-vs-chart transfer; independent review still required

@@ -19,12 +19,35 @@ next:
   skill: deepen-curriculum
   inner_skill: quality-gate
   note: Authoring-pass named mental models and mermaid cover every lesson. 1.4,
-    2.1-2.4, 0.1, 0.2, 3.1-3.4, and 4.1 later lessons were thickened with
+    2.1-2.4, 0.1, 0.2, 3.1-3.4, and 4.1-4.5 later lessons were thickened with
     system-specific cause, limits, and transfer. Units stay developing /
     map-complete in revision.remaining until independent quality and lab-safety
     review artifacts exist under content/progress/reviews/. Do not mark depth
     publishable in this skill. 1.1-1.3 remain the independently reviewed reference.
 spiral_deltas:
+- date: '2026-09-06'
+  module: '4.5'
+  change: Lessons 03-08 now carry skipped-aud cause tables, expected-audience limits,
+    and FHIR/native-redirect transfer; the lab oracle is unchanged
+  retest: Independent review still required; PKCE, DPoP, and 4.4 object grants remain
+    residuals
+- date: '2026-09-06'
+  module: '4.4'
+  change: Lessons 03-08 now name bob-reads-n2 as the forbidden outcome and refuse
+    RBAC or UUID length as that oracle; the lab oracle is unchanged
+  retest: Independent review still required; search/export/GraphQL paths and 7.2
+    field-level remain residuals
+- date: '2026-09-06'
+  module: '4.3'
+  change: Lessons 03-08 now insist query access_token yields None and refuse TLS as
+    the log control; the lab oracle is unchanged
+  retest: Independent review still required; magic-link (6.6) and Referer remain
+    residuals
+- date: '2026-09-06'
+  module: '4.2'
+  change: Lessons 03-08 now name password-at-evil as the forbidden claim and refuse
+    MFA as phishing-resistant; the lab oracle is unchanged
+  retest: Independent review still required; recovery SMS and 1.2 remain residuals
 - date: '2026-09-06'
   module: '4.1'
   change: Lessons 03-08 now carry leftover-session cause tables, same-use-case
@@ -722,8 +745,8 @@ modules:
   pass: E
   quality: developing
   notes: Authoring pass 2026-09-06 added origin-binding versus shared-secret mental
-    models and diagrams; independent quality and lab-safety review still required
-    before publishable
+    models and diagrams; 03-08 thickened with password-at-evil cause tables; independent
+    quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '4.3'
   title: Sessions, cookies, and tokens
@@ -732,7 +755,8 @@ modules:
   pass: E
   quality: developing
   notes: Authoring pass 2026-09-06 added URL-as-postcard mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+    03-08 thickened with query-token cause tables; independent quality and lab-safety
+    review still required before publishable
   depth: map-complete
 - id: '4.4'
   title: Authorization and tenant isolation
@@ -741,8 +765,8 @@ modules:
   pass: E
   quality: developing
   notes: Authoring pass 2026-09-06 added object-keyed grant and tenant-key mental
-    models and diagrams; independent quality and lab-safety review still required
-    before publishable
+    models and diagrams; 03-08 thickened with ambient-grant cause tables; independent
+    quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '4.5'
   title: OAuth, OpenID Connect, browser apps, and native apps
@@ -751,7 +775,8 @@ modules:
   pass: E
   quality: developing
   notes: Authoring pass 2026-09-06 added audience-is-a-name mental models and diagrams;
-    independent quality and lab-safety review still required before publishable
+    03-08 thickened with skipped-aud cause tables; independent quality and lab-safety
+    review still required before publishable
   depth: map-complete
 - id: '5.1'
   title: Data lifecycle and privacy engineering
