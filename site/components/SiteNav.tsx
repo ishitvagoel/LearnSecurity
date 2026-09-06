@@ -126,7 +126,7 @@ export function SiteNav(): ReactElement {
                 id={moreId}
                 className="absolute right-0 z-50 mt-2 w-60 rounded-2xl border border-line bg-paper p-2 shadow-lg"
               >
-                <p className="px-3 pt-1 pb-1 text-xs font-medium text-muted">Reference</p>
+                <p className="px-3 pt-1 pb-1 text-xs font-medium text-muted">More info</p>
                 {RESOURCE_NAV.map((link) => (
                   <Link
                     key={link.href}
@@ -137,7 +137,7 @@ export function SiteNav(): ReactElement {
                     {link.label}
                   </Link>
                 ))}
-                <p className="mt-1 px-3 pt-2 pb-1 text-xs font-medium text-muted">Course</p>
+                <p className="mt-1 px-3 pt-2 pb-1 text-xs font-medium text-muted">The course</p>
                 {COURSE_NAV.map((link) => (
                   <Link
                     key={link.href}
@@ -183,13 +183,13 @@ export function SiteNav(): ReactElement {
               <NavItem key={link.href} href={link.href} label={link.label} pathname={pathname} />
             ))}
           </div>
-          <p className="mt-4 mb-2 text-xs font-medium text-muted">Reference</p>
+          <p className="mt-4 mb-2 text-xs font-medium text-muted">More info</p>
           <div className="flex flex-col gap-1">
             {RESOURCE_NAV.map((link) => (
               <NavItem key={link.href} href={link.href} label={link.label} pathname={pathname} />
             ))}
           </div>
-          <p className="mt-4 mb-2 text-xs font-medium text-muted">Course</p>
+          <p className="mt-4 mb-2 text-xs font-medium text-muted">The course</p>
           <div className="flex flex-col gap-1">
             {COURSE_NAV.map((link) => (
               <NavItem key={link.href} href={link.href} label={link.label} pathname={pathname} />

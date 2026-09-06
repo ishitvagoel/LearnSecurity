@@ -15,7 +15,7 @@ export function HomeContinue(): ReactElement | null {
   }
   return (
     <p className="mt-6 max-w-xl rounded-2xl border border-line bg-paper/80 px-4 py-3 text-sm text-stone-700">
-      You marked {ids.length} topic{ids.length === 1 ? "" : "s"} as visited on this
+      You left off after {ids.length} topic{ids.length === 1 ? "" : "s"} on this
       computer. Last one:{" "}
       <Link
         href={`/learn/${encodeURIComponent(last)}/`}

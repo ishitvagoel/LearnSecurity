@@ -10,16 +10,16 @@ export const PRIMARY_NAV: NavLink[] = [
 ];
 
 export const RESOURCE_NAV: NavLink[] = [
-  { href: "/reference/", label: "The example app" },
-  { href: "/glossary/", label: "Glossary" },
-  { href: "/standards/", label: "Standards" },
-  { href: "/sources/", label: "Sources" },
+  { href: "/reference/", label: "The notes app" },
+  { href: "/glossary/", label: "Word list" },
+  { href: "/standards/", label: "Industry lists" },
+  { href: "/sources/", label: "Where we got this" },
 ];
 
 export const COURSE_NAV: NavLink[] = [
-  { href: "/checkpoints/", label: "Checkpoints" },
-  { href: "/capstone/", label: "Capstone" },
-  { href: "/policy/", label: "Safe use" },
+  { href: "/checkpoints/", label: "Check-ins" },
+  { href: "/capstone/", label: "Final project" },
+  { href: "/policy/", label: "Rules" },
 ];
 
 export const MORE_NAV: NavLink[] = [...RESOURCE_NAV, ...COURSE_NAV];

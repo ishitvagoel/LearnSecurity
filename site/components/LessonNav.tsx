@@ -21,7 +21,7 @@ export function LessonNav({
   currentFilename: string;
 }): ReactElement {
   return (
-    <nav aria-label="Lessons in this module" className="text-sm">
+    <nav aria-label="Pages in this topic" className="text-sm">
       <p className="mb-2 font-semibold text-stone-900">
         <Link
           href={moduleHref(moduleId)}
@@ -77,7 +77,7 @@ export function LessonPager({
   return (
     <nav
       className="mt-12 grid gap-3 border-t border-stone-200 pt-6 sm:grid-cols-2"
-      aria-label="Adjacent lessons"
+      aria-label="Nearby pages"
     >
       {prev ? (
         <Link
@@ -91,7 +91,7 @@ export function LessonPager({
         </Link>
       ) : (
         <p className="rounded-lg border border-dashed border-stone-200 px-4 py-3 text-sm text-stone-600">
-          Start of this module
+          Start of this topic
         </p>
       )}
       {next ? (
@@ -112,7 +112,7 @@ export function LessonPager({
           <span className="block text-xs uppercase tracking-wide text-stone-600">
             Next
           </span>
-          <span className="mt-1 block font-medium text-blue-900">Back to module overview</span>
+          <span className="mt-1 block font-medium text-blue-900">Back to the topic</span>
         </Link>
       )}
     </nav>

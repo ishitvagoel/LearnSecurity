@@ -24,12 +24,12 @@ export type LessonSectionKind =
   | "mental";
 
 const KIND_LABELS: Record<string, string> = {
-  "concept-model": "Concept",
+  "concept-model": "Idea",
   "design-exercise": "Design",
-  "mechanism-lab": "Break",
-  "verification-lab": "Verify",
-  "operations-exercise": "Operate",
-  "transfer-challenge": "Transfer",
+  "mechanism-lab": "Try it",
+  "verification-lab": "Check it",
+  "operations-exercise": "Keep it running",
+  "transfer-challenge": "Use it elsewhere",
   "code-review": "Review",
 };
 

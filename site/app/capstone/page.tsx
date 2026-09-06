@@ -4,35 +4,36 @@ import { CardLink, PageHeader, PageShell } from "@/components/ui";
 export default function CapstonePage() {
   return (
     <PageShell width="narrow">
-      <PageHeader title="Capstone 11 — SecureCollab">
+      <PageHeader title="Final project">
         <p>
-          The capstone is not a new feature demo. You show that the same
-          invariants still hold when identity, data, APIs, workers, and time
-          interact: a revoked share stays revoked; a worker is not a user
-          session; deletion does not leave bodies in a side copy.
+          This is not a new feature demo. You show that the notes app still
+          keeps its promises when logins, data, APIs, background jobs, and time
+          all run together: a revoked share stays revoked; a background job is
+          not a logged-in user; deleting a note does not leave the text sitting
+          in a leftover copy.
         </p>
         <p>
-          Evidence is an architecture defense plus repaired findings. Product
-          milestones M0–M5 in STATUS stay not-attempted until a real product tree
-          exists. Completing lessons on this site is not that evidence.
+          What counts is a design defense plus the bugs you found and repaired.
+          Finishing lessons on this site is not that evidence. This site does
+          not grade you.
         </p>
       </PageHeader>
       <ul className="grid gap-3 sm:grid-cols-2">
         <li>
-          <CardLink href="/learn/11/" title="Module 11">
-            Lessons for the capstone defense.
+          <CardLink href="/learn/11/" title="Lessons">
+            The pages for the final project.
           </CardLink>
         </li>
         <li>
-          <CardLink href="/labs/11/" title="Lab brief">
-            Run the local capstone fixture from git, not from this origin.
+          <CardLink href="/labs/11/" title="Practice note">
+            Run the final-project files from git, on your computer.
           </CardLink>
         </li>
       </ul>
       <p className="mt-6 text-sm text-stone-600">
         Also see{" "}
         <Link href="/checkpoints/" className="text-blue-900 underline underline-offset-2">
-          Gate 11
+          check-in 11
         </Link>
         .
       </p>

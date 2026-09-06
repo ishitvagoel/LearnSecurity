@@ -81,10 +81,12 @@ export function ProgressToggle({ moduleId }: { moduleId: string }): ReactElement
       />
       <span>
         <span className="font-medium text-stone-900">
-          {done ? "Visited on this device" : "Mark visited on this device"}
+          {done ? "You’ve marked this as read" : "I’ve read this"}
         </span>
         <span className="mt-0.5 block text-stone-600">
-          Stored in this browser only. No account.
+          {done
+            ? "Saved in this browser only. Untick if you want to clear it."
+            : "Saved in this browser only. No account."}
         </span>
       </span>
     </label>

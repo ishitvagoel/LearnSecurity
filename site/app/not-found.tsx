@@ -6,9 +6,9 @@ export default function NotFound() {
     <PageShell width="narrow">
       <PageHeader title="Page not found">
         <p>
-          That URL is not in the published curriculum map. Try the{" "}
+          That address is not on this site. Try the{" "}
           <Link href="/learn/" className="text-blue-900 underline underline-offset-2">
-            module list
+            lesson list
           </Link>{" "}
           or the{" "}
           <Link href="/" className="text-blue-900 underline underline-offset-2">

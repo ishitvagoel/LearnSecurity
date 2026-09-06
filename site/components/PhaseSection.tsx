@@ -1,7 +1,14 @@
 import type { ReactElement } from "react";
 import Link from "next/link";
 import { Chip } from "@/components/ui";
-import { PHASES } from "@/lib/catalog";
+import {
+  PHASES,
+  difficultyLabel,
+  formatMinutes,
+  phaseHeading,
+  topicBlurb,
+  trackLabel,
+} from "@/lib/catalog";
 import { moduleHref } from "@/lib/loadCurriculum";
 import type { ModuleMeta } from "@/lib/types";
 
@@ -13,16 +20,14 @@ export function ModuleCard({ mod }: { mod: ModuleMeta }): ReactElement {
     >
       <div className="flex items-center justify-between gap-2">
         <p className="font-mono text-xs font-medium text-stone-600">{mod.id}</p>
-        <Chip>{mod.track}</Chip>
+        <Chip>{trackLabel(mod.track)}</Chip>
       </div>
       <h3 className="mt-2 text-base font-semibold text-stone-900">{mod.title}</h3>
-      {mod.outcomes[0] ? (
-        <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-stone-700">
-          {mod.outcomes[0]}
-        </p>
-      ) : null}
+      <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-stone-700">
+        {topicBlurb(mod)}
+      </p>
       <p className="mt-3 text-xs text-stone-600">
-        {mod.difficulty} · {mod.estimatedMinutes} min
+        {difficultyLabel(mod.difficulty)} · {formatMinutes(mod.estimatedMinutes)}
       </p>
     </Link>
   );
@@ -40,16 +45,16 @@ export function PhaseSection({
     <section id={`phase-${phase}`} className="mb-12 scroll-mt-24">
       <div className="mb-5 flex flex-wrap items-end justify-between gap-2">
         <div>
+          <p className="text-sm font-medium text-forest">Part {phase}</p>
           <h2 className="text-2xl font-semibold tracking-tight text-stone-900">
-            Phase {phase}
-            {meta ? ` — ${meta.title}` : ""}
+            {phaseHeading(phase)}
           </h2>
           {meta ? (
             <p className="mt-2 max-w-prose leading-relaxed text-stone-700">{meta.blurb}</p>
           ) : null}
         </div>
         <p className="text-sm text-stone-600">
-          {modules.length} module{modules.length === 1 ? "" : "s"}
+          {modules.length} topic{modules.length === 1 ? "" : "s"}
         </p>
       </div>
       <ul className="grid gap-3 sm:grid-cols-2">
@@ -65,9 +70,9 @@ export function PhaseSection({
 
 export function PhaseJump({ phases }: { phases: number[] }): ReactElement {
   return (
-    <nav aria-label="Jump to phase" className="mb-10">
+    <nav aria-label="Jump to a section" className="mb-10">
       <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-stone-500">
-        Jump to a phase
+        Jump to a section
       </p>
       <ul className="flex flex-wrap gap-2">
         {phases.map((phase) => {

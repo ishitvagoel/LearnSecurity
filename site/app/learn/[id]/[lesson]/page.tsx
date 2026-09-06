@@ -59,8 +59,6 @@ export default async function LessonPage({ params }: Props) {
       moduleTitle={mod.title}
       lessonTitle={lo.title}
       kind={lead.kind || lo.kind}
-      loopStep={lead.loopStep}
-      standards={lead.standards}
       index={index}
       lessons={lessons.map((item) => ({
         filename: item.filename,

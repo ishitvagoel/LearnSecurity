@@ -11,13 +11,12 @@ export default function LearnIndexPage() {
     <PageShell>
       <PageHeader kicker="All topics" title="Lessons">
         <p>
-          Work through the stages in order. Each topic is one idea you can check,
-          not a vendor feature list. Open a topic, then read its pages left to
-          right.
+          Work through the parts in order. Open a topic, then read its pages
+          left to right. Later topics assume you did the earlier ones.
         </p>
         <p>
           Answer keys are not on this site. When a topic includes practice, you
-          run it on your computer from the course repository.
+          run it on your computer from the course files on GitHub.
         </p>
       </PageHeader>
       <PhaseJump phases={phases} />

@@ -12,8 +12,6 @@ export function LessonReader({
   moduleTitle,
   lessonTitle,
   kind,
-  loopStep,
-  standards,
   index,
   lessons,
   source,
@@ -22,8 +20,6 @@ export function LessonReader({
   moduleTitle: string;
   lessonTitle: string;
   kind: string | null;
-  loopStep: string | null;
-  standards: string | null;
   index: number;
   lessons: LessonNavItem[];
   source: string;
@@ -31,7 +27,7 @@ export function LessonReader({
   const headings = extractHeadings(source);
   const current = lessons[index];
   if (!current) {
-    return <p className="text-stone-700">This lesson is not in the module map.</p>;
+    return <p className="text-stone-700">This page is not in the topic list.</p>;
   }
   const prev = index > 0 ? lessons[index - 1] : undefined;
   const next = index < lessons.length - 1 ? lessons[index + 1] : undefined;
@@ -53,7 +49,7 @@ export function LessonReader({
         <article id="lesson-article" className="min-w-0">
           <nav className="mb-4 text-sm text-stone-700" aria-label="Breadcrumb">
             <Link href="/learn/" className="text-blue-900 underline-offset-2 hover:underline">
-              Learn
+              Lessons
             </Link>
             {" · "}
             <Link
@@ -64,12 +60,12 @@ export function LessonReader({
             </Link>
             <span>
               {" "}
-              · Lesson {index + 1} of {lessons.length}
+              · Page {index + 1} of {lessons.length}
             </span>
           </nav>
           <details className="mb-6 rounded-lg border border-stone-200 bg-white px-3 py-2 lg:hidden">
             <summary className="cursor-pointer font-medium text-stone-900">
-              Lessons in this module
+              Pages in this topic
             </summary>
             <div className="mt-3">
               <LessonNav
@@ -87,17 +83,10 @@ export function LessonReader({
             </h1>
             <div className="mt-3 flex flex-wrap gap-2">
               {kind ? <Chip>{kindLabel(kind)}</Chip> : null}
-              {loopStep ? <Chip>Loop · {loopStep}</Chip> : null}
               <Chip>
                 {index + 1} / {lessons.length}
               </Chip>
             </div>
-            {standards ? (
-              <p className="mt-3 max-w-prose text-sm leading-relaxed text-stone-700">
-                <span className="font-medium text-stone-900">Standards. </span>
-                {standards}
-              </p>
-            ) : null}
           </header>
           <Markdown source={source} />
           <LessonPager moduleId={moduleId} prev={prev} next={next} />

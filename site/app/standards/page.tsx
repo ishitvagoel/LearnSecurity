@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PageHeader, PageShell } from "@/components/ui";
+import { pinStatusLabel } from "@/lib/catalog";
 import { loadAllModules, loadPins, moduleHref } from "@/lib/loadCurriculum";
 
 type Pin = {
@@ -8,8 +9,6 @@ type Pin = {
   version: string;
   status: string;
   url: string;
-  role?: string;
-  notes?: string;
 };
 
 export default function StandardsPage() {
@@ -18,25 +17,22 @@ export default function StandardsPage() {
   const modules = loadAllModules();
   return (
     <PageShell>
-      <PageHeader title="Standards explorer">
+      <PageHeader title="Industry lists">
         <p>
-          Pins come from{" "}
-          <code className="rounded bg-stone-200 px-1">content/standards/pins.yaml</code>{" "}
-          (research snapshot 2026-08-23). Drafts stay labeled draft. ASVS/MASVS
-          chapters are verification language, not a shopping list. OWASP Top 10
-          and CWE Top 25 are regression checks after you have a property.
+          These are the published lists and papers the course points at. A list
+          of common bugs is a reminder after you have a rule — it is not the
+          syllabus. A draft stays labeled as a draft.
         </p>
       </PageHeader>
-      <h2 className="mb-3 text-xl font-semibold">Pinned sources</h2>
+      <h2 className="mb-3 text-xl font-semibold">What we point at</h2>
       <div className="overflow-x-auto rounded-xl border border-stone-200 bg-white">
         <table className="w-full min-w-[36rem] text-left text-sm">
-          <caption className="sr-only">Pinned standards</caption>
+          <caption className="sr-only">Industry lists and papers</caption>
           <thead className="border-b border-stone-200 bg-stone-50 text-stone-600">
             <tr>
-              <th className="px-4 py-2 font-medium">Source</th>
+              <th className="px-4 py-2 font-medium">Name</th>
               <th className="px-4 py-2 font-medium">Version</th>
               <th className="px-4 py-2 font-medium">Status</th>
-              <th className="px-4 py-2 font-medium">Role</th>
             </tr>
           </thead>
           <tbody>
@@ -51,26 +47,24 @@ export default function StandardsPage() {
                   >
                     {p.source}
                   </a>
-                  {p.notes ? (
-                    <p className="mt-1 text-xs leading-relaxed text-stone-600">{p.notes}</p>
-                  ) : null}
                 </td>
                 <td className="px-4 py-3 whitespace-nowrap text-stone-800">{p.version}</td>
-                <td className="px-4 py-3 whitespace-nowrap text-stone-800">{p.status}</td>
-                <td className="px-4 py-3 text-stone-700">{p.role || "—"}</td>
+                <td className="px-4 py-3 whitespace-nowrap text-stone-800">
+                  {pinStatusLabel(p.status)}
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <h2 className="mt-10 mb-3 text-xl font-semibold">Where modules cite them</h2>
+      <h2 className="mt-10 mb-3 text-xl font-semibold">Where topics mention them</h2>
       <div className="overflow-x-auto rounded-xl border border-stone-200 bg-white">
         <table className="w-full min-w-[28rem] text-left text-sm">
-          <caption className="sr-only">Module citations</caption>
+          <caption className="sr-only">Topics and the lists they mention</caption>
           <thead className="border-b border-stone-200 bg-stone-50 text-stone-600">
             <tr>
-              <th className="px-4 py-2 font-medium">Module</th>
-              <th className="px-4 py-2 font-medium">Pins</th>
+              <th className="px-4 py-2 font-medium">Topic</th>
+              <th className="px-4 py-2 font-medium">Lists</th>
             </tr>
           </thead>
           <tbody>
@@ -86,7 +80,7 @@ export default function StandardsPage() {
                 </td>
                 <td className="px-4 py-3 leading-relaxed text-stone-700">
                   {m.standardsRefs
-                    .map((s) => `${s.source} ${s.version} (${s.status})`)
+                    .map((s) => `${s.source} ${s.version}`)
                     .join(" · ")}
                 </td>
               </tr>

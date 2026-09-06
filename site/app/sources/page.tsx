@@ -1,4 +1,5 @@
 import { PageHeader, PageShell } from "@/components/ui";
+import { pinStatusLabel } from "@/lib/catalog";
 import { loadPins } from "@/lib/loadCurriculum";
 
 type Pin = {
@@ -8,7 +9,6 @@ type Pin = {
   status: string;
   reviewedAt?: string;
   url: string;
-  notes?: string;
 };
 
 export default function SourcesPage() {
@@ -16,12 +16,11 @@ export default function SourcesPage() {
   const pins = raw.pins || [];
   return (
     <PageShell>
-      <PageHeader title="Sources and changelog">
+      <PageHeader title="Where we got this">
         <p>
-          Research snapshot 2026-08-23. Prefer the canonical URL and version
-          below over blog posts. Module-level changelog lives on each{" "}
-          <code className="rounded bg-stone-200 px-1">module.yaml</code>. This
-          site does not publish examiner keys.
+          These are the papers and lists the course cites. Prefer the link and
+          version below over a blog post. This site does not publish answer
+          keys.
         </p>
       </PageHeader>
       <ul className="grid gap-3 sm:grid-cols-2">
@@ -39,12 +38,9 @@ export default function SourcesPage() {
               {p.source}
             </a>
             <p className="mt-1 text-sm text-stone-700">
-              {p.version} ({p.status})
-              {p.reviewedAt ? ` · reviewed ${p.reviewedAt}` : ""}
+              {p.version} · {pinStatusLabel(p.status)}
+              {p.reviewedAt ? ` · last checked ${p.reviewedAt}` : ""}
             </p>
-            {p.notes ? (
-              <p className="mt-2 text-sm leading-relaxed text-stone-600">{p.notes}</p>
-            ) : null}
           </li>
         ))}
       </ul>

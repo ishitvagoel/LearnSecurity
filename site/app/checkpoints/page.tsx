@@ -1,89 +1,96 @@
 import { PageHeader, PageShell } from "@/components/ui";
 
-const GATES = [
+const CHECKINS = [
   {
     id: "0",
-    title: "Orientation and lab hygiene",
+    title: "Ground rules",
     detail:
-      "You can explain authorized scope and you do not run fixtures against public targets.",
+      "You can say what you may practice on, and you do not point the course files at public websites.",
   },
   {
     id: "1",
-    title: "Invariants and authority",
+    title: "Rules and who is allowed",
     detail:
-      "You can write SecureCollab properties that a reviewer could test, including who is trusted.",
+      "You can write a rule about the notes app that another person could check, including who you are trusting.",
   },
   {
     id: "2",
-    title: "Mechanism literacy",
-    detail: "You can point at the interpreter (parser, browser, HTTP) that would violate a property.",
+    title: "How software actually runs",
+    detail:
+      "You can point at the parser, the browser, or the network path that would break a rule.",
   },
   {
     id: "3",
-    title: "Threat model and architecture (transfer required)",
-    detail: "A new object or principal does not send you back to a Top 10 list as the design.",
+    title: "Design when someone might attack",
+    detail:
+      "A new kind of object or a new kind of user does not send you back to a “top ten bugs” list as the design.",
   },
   {
     id: "4",
-    title: "Identity vertical (transfer required)",
-    detail: "Session, tenant, and delegated access stay mediated after time and revoke.",
+    title: "Logins and access",
+    detail:
+      "Sessions, companies, and “sign in with…” still get checked after time passes and after someone is kicked out.",
   },
   {
     id: "5",
-    title: "Data and crypto use",
-    detail: "Encoding is not encryption; deletion includes copies; keys are not hardcoded.",
+    title: "Data and secrets",
+    detail:
+      "Encoding is not encryption. Deleting something includes the copies. Keys do not live in the source tree.",
   },
   {
     id: "6",
-    title: "Injection and abuse (transfer required)",
-    detail: "User data is not a program in SQL, HTML, paths, or shells.",
+    title: "Bad input",
+    detail: "Typed-in text must not become a program in SQL, HTML, file paths, or shells.",
   },
   {
     id: "7",
-    title: "API and workers",
-    detail: "Mass assignment, field auth, webhook authenticity, and worker identity are explicit.",
+    title: "APIs and background jobs",
+    detail:
+      "A caller may edit some fields, not every field. A webhook has to prove who sent it. A background job is not the logged-in user.",
   },
   {
     id: "8",
-    title: "Mobile (optional until web/API milestone)",
-    detail: "The APK is hostile; server attestation and storage properties are not client claims.",
+    title: "Phone apps (you can wait)",
+    detail:
+      "A phone app can be copied and changed. What the phone claims is not what the server should believe.",
   },
   {
     id: "9",
-    title: "Verification (transfer required)",
-    detail: "A mapping row is not coverage; a PDF is not a retest.",
+    title: "Checking your work",
+    detail: "A row in a spreadsheet is not coverage. A PDF is not a retest.",
   },
   {
     id: "10",
-    title: "Operate and supply chain (transfer required)",
-    detail: "Merge gates, lockfiles, IAM, debug-off, and recovery are properties, not posters.",
+    title: "Shipping and running it",
+    detail:
+      "Merge checks, lockfiles, cloud accounts, debug-off, and recovery are real rules — not a poster on the wall.",
   },
   {
     id: "11",
-    title: "Capstone defense",
+    title: "Final project",
     detail:
-      "SecureCollab still isolates tenants after share-revoke. This site does not grade that defense.",
+      "The notes app still keeps one company away from another after a share is revoked. This site does not grade that.",
   },
 ] as const;
 
 export default function CheckpointsPage() {
   return (
     <PageShell>
-      <PageHeader kicker="Mastery gates" title="Checkpoints">
+      <PageHeader kicker="How you know you are ready" title="Check-ins">
         <p>
-          Gates use four states: not-attempted, developing, competent,
-          transfer-ready. There is no compensating average. This website does not
-          mark you competent. Rubrics live with each module; examiner keys are
-          not published here.
+          Each part of the course has a check-in. You are not “done” because you
+          opened a page. You are ready when you can show the work — a rule,
+          a repair, a check that fails on the broken files. This website does
+          not grade you. Answer keys are not published here.
         </p>
       </PageHeader>
       <ol className="grid gap-3 sm:grid-cols-2">
-        {GATES.map((g) => (
+        {CHECKINS.map((g) => (
           <li
             key={g.id}
             className="rounded-xl border border-stone-200 bg-white p-4"
           >
-            <p className="font-mono text-xs font-medium text-stone-600">Gate {g.id}</p>
+            <p className="font-mono text-xs font-medium text-stone-600">Check-in {g.id}</p>
             <p className="mt-1 font-semibold text-stone-900">{g.title}</p>
             <p className="mt-2 text-sm leading-relaxed text-stone-700">{g.detail}</p>
           </li>

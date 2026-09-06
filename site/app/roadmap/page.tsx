@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { PageHeader, PageShell } from "@/components/ui";
-import { PHASES, phaseList } from "@/lib/catalog";
+import { PHASES, phaseHeading, phaseList } from "@/lib/catalog";
 import { loadAllModules, moduleHref } from "@/lib/loadCurriculum";
 
 export default function RoadmapPage() {
@@ -11,14 +11,14 @@ export default function RoadmapPage() {
     <PageShell>
       <PageHeader kicker="What to study next" title="Study order">
         <p>
-          Go in this order: 0 through 7, then 9 through 11. Stage 8 (phone apps)
-          can wait until the web and API path is in place. Optional extras open
-          after stage 7.
+          Go in this order: parts 0 through 7, then 9 through 11. Part 8 (phone
+          apps) can wait until the website and API path is in place. Extra
+          topics open after part 7.
         </p>
         <p>
-          You do not need a live product to study. You do need the practice files
-          on your computer when a topic includes them. This site does not mark
-          you as finished.
+          You do not need a live product to study. You do need the practice
+          files on your computer when a topic includes them. This site does not
+          mark you as finished.
         </p>
       </PageHeader>
       <ol className="space-y-4">
@@ -36,10 +36,10 @@ export default function RoadmapPage() {
                   <span className="mr-2 font-mono text-sm font-medium text-stone-500">
                     {phase}
                   </span>
-                  {meta?.title ?? `Phase ${phase}`}
+                  {phaseHeading(phase)}
                 </h2>
                 <p className="text-sm text-stone-600">
-                  {items.length} module{items.length === 1 ? "" : "s"}
+                  {items.length} topic{items.length === 1 ? "" : "s"}
                 </p>
               </div>
               {meta ? (
@@ -67,7 +67,7 @@ export default function RoadmapPage() {
       <p className="mt-8 text-sm text-stone-600">
         Want a card for each topic instead of this list? Use the{" "}
         <Link href="/learn/" className="text-link underline underline-offset-2">
-          lesson catalog
+          lesson list
         </Link>
         .
       </p>

@@ -3,49 +3,50 @@ import { PageHeader, PageShell } from "@/components/ui";
 const TERMS: { term: string; def: string }[] = [
   {
     term: "Invariant",
-    def: "A system-specific sentence that must remain true under named attacker capabilities and trust assumptions. If a second person cannot write a failing test, it is still a slogan.",
+    def: "A rule the software must keep, written so another person could check it. Example: “People in company A cannot read company B’s notes.” If you cannot write a test for it, it is still a slogan.",
   },
   {
     term: "Mechanism",
-    def: "A control or product (TLS, JWT, bcrypt, a scanner, a cloud checkbox) that may or may not restore an invariant.",
+    def: "A tool or setting — encryption, a login library, a scanner, a cloud checkbox. These may help. They are not the same as the rule you are trying to keep.",
   },
   {
     term: "Complete mediation",
-    def: "Every security-relevant action is checked on every path, including workers, exports, and retries. A skipped indirect path is a failed property.",
+    def: "Every path gets the same check: the website, the export, the retry, the background job. A skipped path means the rule is already broken.",
   },
   {
     term: "Fail-safe defaults",
-    def: "Unknown, expired, or failed policy evaluation denies. Availability pressure does not authorize fail-open.",
+    def: "If the app is unsure — expired login, missing setting, failed check — it says no. Being busy is not a reason to skip the check.",
   },
   {
-    term: "TCB (trusted computing base)",
-    def: "The parts of the system you are willing to trust for a given invariant. The Next.js bundle and a hostile APK are usually outside it.",
+    term: "Trusted computing base (TCB)",
+    def: "The pieces of the system you are betting on for a given rule. A page in the browser, and a phone app someone can copy, are usually not on that list.",
   },
   {
     term: "Confused deputy",
-    def: "A privileged component that acts on a caller-supplied identifier (tenant id, URL, object id) without checking the caller’s authority.",
+    def: "A powerful part of the app that does what a caller asks (open this note, fetch this URL) without checking whether that caller is allowed to.",
   },
   {
     term: "Residual risk",
-    def: "What remains if the primary control fails. Name detection, recovery, and who is still harmed. Do not hide it behind a compliance checkbox.",
+    def: "What still goes wrong if the main protection fails. Say how you would notice, how you would recover, and who still gets hurt. A compliance checkbox is not that sentence.",
   },
   {
     term: "Authorized lab",
-    def: "A local course app, official training target, published challenge terms, or a system with written authorization. This website is none of those execution environments.",
+    def: "Practice you are allowed to run: a local course app, an official training target, a challenge whose published rules allow it, or a system with written permission. This website is none of those. It does not run the broken apps.",
   },
   {
     term: "SecureCollab",
-    def: "The course through-line: a small multi-tenant notes product that grows files, sharing, workers, and mobile. Catalogue properties against it, not against a generic CIA triad.",
+    def: "The small notes app the course keeps extending: teams, members, notes, later files and sharing. Write rules about this app, not about a vague slogan like “CIA.”",
   },
 ];
 
 export default function GlossaryPage() {
   return (
     <PageShell width="narrow">
-      <PageHeader title="Glossary">
+      <PageHeader title="Word list">
         <p>
-          These are working definitions for this course. Prefer a testable sentence
-          about SecureCollab over a memorized triad.
+          A few words this course uses a lot. Each one is named, then said in
+          ordinary English. Prefer a sentence you can check about the notes app
+          over a memorized slogan.
         </p>
       </PageHeader>
       <dl className="space-y-4">

@@ -41,13 +41,14 @@ export function SiteFooter(): ReactElement {
           </p>
         </div>
         <FooterGroup title="Study" links={[{ href: "/", label: "Home" }, ...PRIMARY_NAV]} />
-        <FooterGroup title="Reference" links={RESOURCE_NAV} />
-        <FooterGroup title="Course" links={COURSE_NAV} />
+        <FooterGroup title="More info" links={RESOURCE_NAV} />
+        <FooterGroup title="The course" links={COURSE_NAV} />
       </div>
       <p className="mx-auto mt-10 max-w-6xl border-t border-line pt-6 leading-relaxed">
-        Practice only on the files in this course, official training apps, or systems
-        you have written permission to test. This website does not run broken lab
-        apps or publish answer keys. “Visited” checkboxes stay in this browser.
+        Practice only on the files in this course, official training apps, or
+        systems you have written permission to test. This website does not run
+        broken practice apps or publish answer keys. “I’ve read this” stays in
+        this browser.
       </p>
     </footer>
   );
