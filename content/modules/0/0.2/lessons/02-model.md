@@ -1,53 +1,68 @@
-# 0.2 — Diagnostic and adaptive bridge (2 Model)
+# 0.2-LO-02 — Tooling skip vs invariant skip
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** NICE Secure Systems Development competencies (informative); this course’s Gate 1 evidence rules. A quiz vendor’s score report is not ASVS.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** NICE SP 800-181r1 as role language. Gate 1 evidence rules of this course.
 
-## Property (start here)
+## Can a second engineer name what a quiz may skip from your path map?
 
-A placement quiz score of 100 does not skip 1.2 complete mediation, Gate 1 evidence, or the authority matrix. Adaptive paths may skip *orientation prose*, never *invariants*.
+“They’re advanced” is not this lesson. A reviewable model names **tooling-bridge ids, required 1.2/1.3/1.4, and Gate 1 evidence**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab freeze: local `quiz_score_grants_phase1_skip(score)`. No vendor LMS.
 
-- **Attacker:** A hurried learner optimizing for the shortest click-path; a future hiring manager who equates a badge with tenant isolation.
-- **Trust:** The diagnostic repository is local and honest. Quiz items are not production secrets.
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: two skip classes
+
+```mermaid
+flowchart TD
+  Diag[diagnostic] --> Tool{tooling gap?}
+  Tool -->|Git SQL HTTP| Bridge[may assign a bridge unit]
+  Diag --> Inv[1.2 1.3 1.4]
+  Inv --> Never[never skip]
+```
+
+## Mental model: badge is not Gate 1
+
+```mermaid
+flowchart LR
+  Badge[cert screenshot] --> Belief[cleared]
+  Ev[1.2 lab pair] --> Gate1[Gate 1 evidence]
+  Badge --> NotGate[not Gate 1]
+```
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | Learner, diagnostic scorer, Gate 1 reviewer |
-| Objects | Quiz result, 1.2 matrix artifact, Gate 1 packet |
-| Actions | Skip, remediate, attest |
-| Channels | Course site, local git |
-| TCB | diagnostic.py skip rule in labs/0.2/0.2-bridge |
-| Untrusted | Self-attestation, LMS percentage, LinkedIn badge |
-| State / time | Score is a moment; Gate 1 is evidence over time. |
-| 1.1 cell | Integrity of the learning system: false competency is a safety defect for later labs. |
+| Subjects | hurried learner; hiring manager |
+| Objects | 1.2 cells; tooling units; Gate 1 record |
+| Actions | `quiz_score_grants_phase1_skip` |
+| Channels | quiz score; LMS |
+| TCB | skip predicate that ignores score for Phase 1 |
+| Untrusted | percentage; badge; NICE mapping |
+| State / time | cohort export of skipped ids |
+| 1.1 cell | integrity of the learning system |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| learner | 1.2 lab | skip | deny |
-| learner | 0.1 prose | skip-if-known | allow |
-| learner | Gate 1 packet | attest-by-quiz | deny |
-| reviewer | evidence pack | sign | allow-if-artifacts |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| score 100 | 1.2 lab | skip | deny |
+| Git gap | git-bridge unit | skip Phase 1 | deny (assign bridge only) |
+| badge | Gate 1 | treat as evidence | deny |
+| color-only green | skip UI | use as sole signal | deny |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/0.2/0.2-bridge` file `diagnostic.py`.
+Draw the map. Point at `labs/0.2/0.2-bridge` file `diagnostic.py`.
 
 ## Transfer
 
-A vendor SANS/OSCP score used to skip your team’s threat-model review.
+Clinic onboarding quiz used to skip threat-model review. Same grain.
 
 ## Residual risk
 
-Bridge units still needed for Git/SQL/HTTP gaps — those skips are OK when diagnostics show skill.
+Memorized 1.2 answers. Real tooling gaps still need bridges.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

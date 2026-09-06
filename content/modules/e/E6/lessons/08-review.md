@@ -1,29 +1,31 @@
-# E6 — Product security leadership (Review)
+# E6-LO-08 — Review always-accept exception as a PR
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** OWASP SAMM; NIST CSF 2.0; SSDF; CISA Secure by Design. Leadership is accountable residual, not a slide.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** SAMM 2.0 vocabulary. ASVS `v5.0.0-15.1.5` Level 3 advanced.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab’s risk register
 
-A risk exception cannot be accepted without an owner, a review date, and an accessibility check flag. “We’ll accept it” is not a record.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Calendar; silent exceptions.
-- **Trust:** Local accept_exception({owner, review_by}).
 Review `labs/E6/e6-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/E6.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|empty owner accepted| Property["Property - good if tested"]
+  Q -->|Jira risk type| Mechanism[Mechanism - ticket]
+  Q -->|SAMM mapped| False[False assurance]
+```
 
-- Seeded smell (label it yourself): accept with empty owner
-- Seeded smell (label it yourself): No review_by
-- Seeded smell (label it yourself): a11y not in the schema
-- Seeded smell (label it yourself): SAMM slide as the exception
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- Accept with empty owner
+- No `review_by`
+- Accessibility not in the schema
+- SAMM slide as the exception
+
+Also reject: live PSIRT, keys in lessons, claiming Gate 7.
 
 ## Misconceptions
 
@@ -33,12 +35,8 @@ Also reject: client trust, interpreter concatenation, Report-Only as enforcement
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_exception_needs_owner_review_and_wcag`.
 
 ## Transfer
 
-Procurement questionnaire vs this record.
-
-## HITL / WCAG 2.2
-
-The exception must record whether the residual includes an inaccessible control (1.4). Leadership owns that users cannot complete recovery.
+Clinic PR that “added a HIPAA slide and a SAMM score” without owner/review/WCAG is incomplete.

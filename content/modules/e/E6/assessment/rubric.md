@@ -1,6 +1,6 @@
 # E6 assessment (learner-facing — no answers)
 
-**Pass C.** Practical evidence, not a compensating average. States: not-attempted | developing | competent | transfer-ready.
+**Pass C.** Practical evidence, not a compensating average. States: not-attempted | developing | competent | transfer-ready. Gate 7 and M2 stay **not-attempted**. Elective.
 
 ## Module
 
@@ -8,20 +8,20 @@ Product security leadership
 
 ## Evidence checklist
 
-- [ ] One-year product security roadmap notes
-- [ ] Transfer task (Clinic: “HIPAA exception.”)
-- [ ] Lab `labs/E6/e6-lab`: forbidden outcome **Risk exception accepted without owner and review date**
-- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Exception-schema map; SAMM/CSF/CISA labeled as not the row
+- [ ] Transfer task (clinic HIPAA exception; procurement named)
+- [ ] Lab `labs/E6/e6-lab`: forbidden outcome **incomplete exception accepted**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: exception_incomplete_denied.
+- [ ] Operate signal without secrets: `exception_incomplete_denied`
 
 ## Rubric
 
 | Result | Meaning |
 |---|---|
-| Developing | Tools listed; missing attacker/trust; mechanism slogans |
+| Developing | Tools listed; missing attacker/trust; “SAMM / HIPAA / pledge” slogans |
 | Competent | System-specific invariant; lab mapped; operate present |
-| Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
+| Transfer-ready | LO-07 done without Top 10/live-PSIRT/Gate-7 language as the definition of security |
 
 Knowledge check (retryable): distinguish property vs mechanism for **E6**. Items live in the session worksheet, not here.
 

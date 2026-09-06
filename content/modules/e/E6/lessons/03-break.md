@@ -1,50 +1,48 @@
-# E6 — Product security leadership (3 Break)
+# E6-LO-03 — Observe always-accept, do not open a live PSIRT
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** OWASP SAMM; NIST CSF 2.0; SSDF; CISA Secure by Design. Leadership is accountable residual, not a slide.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** SAMM 2.0 as vocabulary. Lab policy: local only.
 
-## Property (start here)
+## Authorized scope
 
-A risk exception cannot be accepted without an owner, a review date, and an accessibility check flag. “We’ll accept it” is not a record.
+`labs/E6/e6-lab` only. Synthetic owner strings. Do **not** file a real CVE, email a vendor PSIRT, or accept a production exception as the exercise.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Risk exception accepted without owner and review date.
 
-- **Attacker:** Calendar; silent exceptions.
-- **Trust:** Local accept_exception({owner, review_by}).
-**Forbidden outcome:** Risk exception accepted without owner and review date
+## Mental model: everything ships
 
-**Authorized scope:** `labs/E6/e6-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable risk.py accepts empty exception.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: accept_exception({owner:'', review_by:None}) True.
-
-## Vulnerable fixture (local)
-
-```python
-def accept_exception(exc):
-    return True
+```mermaid
+flowchart TD
+  Any[any dict] --> Acc[accepted]
 ```
+
+`--impl vulnerable` returns true for every payload, including empty owner.
+
+## What to read in the fixture
+
+`vulnerable/risk.py` always accepts. Tests require `accept_exception({"owner": "", "review_by": None})` is false. Do not treat this as a disclosure tutorial.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Oral acceptance. |
-| Impact | Unowned holes; inaccessible recovery (1.4) forever. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Oral acceptance treated as a register row |
+| Impact | Unowned residual; inaccessible recovery kept |
+| Not the lesson | A SAMM dashboard as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/E6/e6-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/E6/e6-lab/tests --impl vulnerable
+```
+
+Record `test_exception_needs_owner_review_and_wcag`. Do not contact live PSIRTs.
 
 ## Transfer
 
-Procurement questionnaire vs this record.
+Clinic HIPAA exception: predict acceptance without leaving this directory.
 
 ## Non-goals
 
-No live-target instructions. Synthetic data only.
+No live-disclosure, production-exception, or public-bug-bounty instructions.

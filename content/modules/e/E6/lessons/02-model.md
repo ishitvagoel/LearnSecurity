@@ -1,53 +1,69 @@
-# E6 — Product security leadership (2 Model)
+# E6-LO-02 — Owner, review date, and WCAG flag
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** OWASP SAMM; NIST CSF 2.0; SSDF; CISA Secure by Design. Leadership is accountable residual, not a slide.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** SAMM 2.0 measurement. CSF 2.0 GV. WCAG 2.2.
 
-## Property (start here)
+## Can a second engineer name the exception check from your roadmap?
 
-A risk exception cannot be accepted without an owner, a review date, and an accessibility check flag. “We’ll accept it” is not a record.
+“We have a risk meeting” is not this lesson. A reviewable model names **owner, review_by, wcag_checked, expiry, and who may accept**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab freeze: local `accept_exception(exc)`. No live disclosure inbox.
 
-- **Attacker:** Calendar; silent exceptions.
-- **Trust:** Local accept_exception({owner, review_by}).
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: three required fields
+
+```mermaid
+flowchart TD
+  Own[owner] --> Gate{"accept_exception?"}
+  Rev[review_by] --> Gate
+  A11y[wcag_checked] --> Gate
+  Gate -->|all present| Ok[may accept]
+  Gate -->|any missing| Deny[false]
+```
+
+## Mental model: roadmap vs row
+
+```mermaid
+flowchart LR
+  Road[one-year roadmap] --> Intent[plan]
+  Row[exception record] --> Now[this hole]
+  Road --> NotNow[not accept_exception]
+```
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | VP eng, security, users who need a11y |
-| Objects | exception record |
-| Actions | accept_exception |
-| Channels | risk register |
-| TCB | Required fields + expiry. |
-| Untrusted | Slide deck, chat thumbs-up |
-| State / time | Until review_by. |
-| 1.1 cell | Accountability of residual risk (1.1 + 1.4). |
+| Subjects | product lead; silent calendar |
+| Objects | residual risk; recovery path |
+| Actions | `accept_exception` |
+| Channels | meeting; ticket; register |
+| TCB | schema of the exception |
+| Untrusted | oral “we’ll accept it”; SAMM slide |
+| State / time | review_by expiry |
+| 1.1 cell | accountability of residual risk |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| VP | complete record | accept | allow |
-| VP | empty owner | accept | deny |
-| expired | past review_by | still-open | deny-or-revisit |
-| a11y residual | flag | record | required |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| empty owner | exception | accept | deny |
+| dated owner + WCAG | exception | accept | may allow |
+| SAMM score | exception | treat as row | deny |
+| tech-debt rename | residual | hide | deny |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/E6/e6-lab` file `risk.py`.
+Draw the map. Point at `labs/E6/e6-lab` file `risk.py`.
 
 ## Transfer
 
-Procurement questionnaire vs this record.
+Clinic HIPAA exception with no review date. Same grain.
 
 ## Residual risk
 
-Some risk always remains — that’s the point of an honest register.
+Unread register. Inaccessible recovery left unchecked.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

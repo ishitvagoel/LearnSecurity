@@ -1,51 +1,48 @@
-# 0.2 — Diagnostic and adaptive bridge (3 Break)
+# 0.2-LO-03 — Observe score-as-skip, do not hack an LMS
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** NICE Secure Systems Development competencies (informative); this course’s Gate 1 evidence rules. A quiz vendor’s score report is not ASVS.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** NICE as vocabulary. Lab policy: local only.
 
-## Property (start here)
+## Authorized scope
 
-A placement quiz score of 100 does not skip 1.2 complete mediation, Gate 1 evidence, or the authority matrix. Adaptive paths may skip *orientation prose*, never *invariants*.
+`labs/0.2/0.2-bridge` only. Synthetic scores. Do **not** attack a school LMS, vendor quiz, or production HR onboarding as the exercise.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** Quiz score used as authorization to skip 1.2 / Gate 1.
 
-- **Attacker:** A hurried learner optimizing for the shortest click-path; a future hiring manager who equates a badge with tenant isolation.
-- **Trust:** The diagnostic repository is local and honest. Quiz items are not production secrets.
-**Forbidden outcome:** Quiz score used as authorization to skip 1.2/Gate 1
+## Mental model: 80 percent ships
 
-**Authorized scope:** `labs/0.2/0.2-bridge` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable diagnostic returns True at score 100.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: Quiz exists; skip() consulted the number.
-
-## Vulnerable fixture (local)
-
-```python
-def quiz_score_grants_phase1_skip(score: int) -> bool:
-    """Vulnerable: a diagnostic percentage is treated as 1.2 authorization."""
-    return score >= 80
+```mermaid
+flowchart TD
+  Score[score >= 80] --> Skip[Phase 1 skipped]
 ```
+
+`--impl vulnerable` returns true for scores ≥ 80.
+
+## What to read in the fixture
+
+`vulnerable/diagnostic.py` treats the percentage as a skip grant. Tests require `quiz_score_grants_phase1_skip(100)` is false.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | A number was treated as a capability (ambient “you’re advanced”). |
-| Impact | Learner reaches 4.4/6.x without a matrix; false assurance in reviews. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | A number treated as a capability |
+| Impact | False competency for later labs |
+| Not the lesson | A NICE dashboard as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/0.2/0.2-bridge/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/0.2/0.2-bridge/tests --impl vulnerable
+```
+
+Record `test_high_quiz_score_is_not_authorization`. Do not probe live LMS hosts.
 
 ## Transfer
 
-A vendor SANS/OSCP score used to skip your team’s threat-model review.
+Clinic onboarding: predict the skip without leaving this directory.
 
 ## Non-goals
 
-No live-target instructions. Synthetic data only.
+No live-LMS, vendor-quiz, or public-cert-portal instructions.

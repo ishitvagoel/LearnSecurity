@@ -1,33 +1,42 @@
-# E5 — Large-scale authorization and multi-tenant SaaS (7 Transfer)
+# E5-LO-07 — Transfer: clinic group practice org_id in JSON
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** ASVS V4 plus row security as *extra*; ReBAC/Zanzibar as patterns. RLS is not a substitute for 1.2.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** ASVS `v5.0.0-8.2.1`. API1 awareness after the cause.
 
-## Property (start here)
+## Change the workplace; keep the session as the tenant
 
-A request body tenant:B must not switch the bound tenant A. Tenant is taken from the session/binding, not from the JSON body (1.3 confused deputy).
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic group practice switching `org_id` in JSON. Also name a Zanzibar tuple vs this binding.
 
-- **Attacker:** Member of A sending tenant B in GraphQL/JSON.
-- **Trust:** Local tenant_for(session, body).
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite "Postgres RLS is on so tenants are done," plus "we mapped API1 so isolation is done."
 
-**Prompt:** Zanzibar tuple vs this binding.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic group practice switching org_id in JSON.
+1. attacker capabilities (member of practice A sending practice B — not a live clinic tenant);
+2. trust assumptions (session binding is TCB; RLS-from-body / API1 / subdomain are not);
+3. forbidden outcome (`tenant_for({A},{B}) == B`, not "HIPAA");
+4. a test idea on a **local** fixture only (no public EHR);
+5. residual (search/cache/lake, silent impersonation, `v5.0.0-8.3.2` Level 3);
+6. WCAG if support impersonation UI exists (must not look like the clinician's own org).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: RLS sticker vs binding
+
+```mermaid
+flowchart LR
+  Rls[RLS on] --> Belief[tenants isolated]
+  Bind[session tenant] --> Reality[1.2]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | Postgres RLS with a SET tenant from the body is this bug.… |
-| Live-target plan | Lab policy |
+| "we have RLS / Zanzibar" | Not this binding |
+| Live clinic GraphQL | Lab policy |
+| "API1 so 1.2 is done" | Awareness after the cause |
 
 ## Practice
 
-One page. No keys. The lab `labs/E5/e5-lab` stays the only running system you may break.
+One page. No keys. `labs/E5/e5-lab` is the only running system you may break.

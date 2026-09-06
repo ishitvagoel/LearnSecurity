@@ -1,55 +1,51 @@
-# 0.1 — Security engineering orientation (4 Build)
+# 0.1-LO-04 — Allow-list named local lab hosts
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** NIST CSF 2.0 (final) GV/ID; OWASP WSTG v4.2 (final) as *lab method*, not a licence to scan the internet; NICE Framework as role language only.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** CSF 2.0 GV. WCAG 2.2 for stop UI.
 
-## Property (start here)
+## Structural means the runtime compares the host
 
-A URL is in scope only if it is a named local lab host (127.0.0.1, localhost, lab.securecollab.test). example.com, a employer production API, and a classmate’s deployed preview are out of scope even if they are “easy to hit.”
+`target_is_authorized` must parse the hostname and return true only if it is in `{127.0.0.1, localhost, lab.securecollab.test}`. Fail-safe: unknown hosts deny. WSTG may *accompany* testing of an in-scope app; it does not enlarge the list.
 
-## Attacker capabilities and trust assumptions
+## Mental model: host gate
 
-- **Attacker:** A motivated learner who can type any URL into a proxy; a future self who is tired and copies a blog “try this host” snippet.
-- **Trust:** You trust this repository’s lab trees and official OWASP training apps when the README names them. You do not trust “the internet,” robots.txt, or a recruiter’s staging site without written scope.
-Parse hostname; compare to ALLOWED_HOSTS; default False.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-from urllib.parse import urlparse
-
-ALLOWED_HOSTS = {"127.0.0.1", "localhost", "lab.securecollab.test"}
-
-
-def target_is_authorized(url: str) -> bool:
-    """Fixed: only named local lab hosts; public hosts are out of scope."""
-    host = (urlparse(url).hostname or "").lower()
-    return host in ALLOWED_HOSTS
+```mermaid
+flowchart TD
+  Call[target_is_authorized] --> Host{hostname in ALLOWED?}
+  Host -->|yes| Ok[may be true]
+  Host -->|no| Deny[false]
 ```
+
+Do not accept “I can ping it” as membership.
 
 ## Why this restores the cell
 
-Allow-list local names; fail closed; written scope template.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| example.com | false |
+| 127.0.0.1 lab | may be true |
 
 ## What this is not
 
-Burp, ZAP, or curl existing is not authorization. CSF GV is governance language, not a pentest permit.
+Burp. NICE work-role fluency. Gate 0 complete. A cloud Juice Shop you do not own.
 
-An allow-list of three names still fails if you SSH to a stolen hostname that resolves locally via /etc/hosts tricks — check what you actually connected to.
+If a redirect leaves the allow-list, **stop**. Do not follow it “just to see.”
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name the stop condition. Run:
+
+```
+python3 -m pytest labs/0.1/0.1-orientation/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Your company staging URL: what written artifact would make it in-scope? (Not a Slack thumbs-up.)
+Company staging: require a written artifact, then a named host, the same way.
 
 ## Residual risk
 
-Official Juice Shop on your machine is OK; a random cloud Juice Shop you do not own is not.
+Hosts-file aliases; DNS rebinding; redirect chains.

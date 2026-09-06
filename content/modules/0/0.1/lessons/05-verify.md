@@ -1,38 +1,44 @@
-# 0.1 — Security engineering orientation (5 Verify)
+# 0.1-LO-05 — Evidence is public host denied, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** NIST CSF 2.0 (final) GV/ID; OWASP WSTG v4.2 (final) as *lab method*, not a licence to scan the internet; NICE Framework as role language only.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** WSTG 4.2 as catalogue, not the oracle.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A URL is in scope only if it is a named local lab host (127.0.0.1, localhost, lab.securecollab.test). example.com, a employer production API, and a classmate’s deployed preview are out of scope even if they are “easy to hit.”
+“I’ll be careful” is not evidence. The oracle is the local pair. Do not fetch example.com.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** A motivated learner who can type any URL into a proxy; a future self who is tired and copies a blog “try this host” snippet.
-- **Trust:** You trust this repository’s lab trees and official OWASP training apps when the README names them. You do not trust “the internet,” robots.txt, or a recruiter’s staging site without written scope.
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail public host"]
+  X["--impl fixed"] --> P["Must pass allow-list"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | HTTP to a non-allowlisted host treated as authorized |
-| Failure | Fail closed: Allow-list local names; fail closed; written scope template |
+| Negative / abuse | example.com → false |
+| Normal | 127.0.0.1 lab may be true |
+| Not claimed | WSTG dashboard; Gate 0 |
 
-Lab tests: `test_scope.py` under `labs/0.1/0.1-orientation`.
+```
+python3 -m pytest labs/0.1/0.1-orientation/tests --impl vulnerable
+python3 -m pytest labs/0.1/0.1-orientation/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `HTTP to a non-allowlisted host treated as authorized`
-- `--impl fixed`: **pass**
+Honest localhost tests may pass on both.
 
-localhost allowed; example.com denied; missing host denied.
+## What the tests do not prove
+
+- Redirect following is safe
+- `/etc/hosts` cannot lie
+- A written company authorization exists
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Your company staging URL: what written artifact would make it in-scope? (Not a Slack thumbs-up.)
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Contractor: a test that only asserts “WSTG says authorization testing exists” is not this cell.

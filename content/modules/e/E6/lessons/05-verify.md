@@ -1,38 +1,45 @@
-# E6 — Product security leadership (5 Verify)
+# E6-LO-05 — Evidence is incomplete exception denied, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** OWASP SAMM; NIST CSF 2.0; SSDF; CISA Secure by Design. Leadership is accountable residual, not a slide.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** SAMM 2.0 as vocabulary, not the oracle.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A risk exception cannot be accepted without an owner, a review date, and an accessibility check flag. “We’ll accept it” is not a record.
+“We do SAMM” is not evidence. The oracle is the local pair. Do not file live exceptions.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Calendar; silent exceptions.
-- **Trust:** Local accept_exception({owner, review_by}).
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail empty owner"]
+  X["--impl fixed"] --> P["Must pass schema"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | Risk exception accepted without owner and review date |
-| Failure | Fail closed: Schema of an exception; refuse incomplete |
+| Negative / abuse | empty owner → false |
+| Normal | complete record may accept |
+| Not claimed | SAMM dashboard; CISA pledge; Gate 7 |
 
-Lab tests: `test_property.py` under `labs/E6/e6-lab`.
+```
+python3 -m pytest labs/E6/e6-lab/tests --impl vulnerable
+python3 -m pytest labs/E6/e6-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `Risk exception accepted without owner and review date`
-- `--impl fixed`: **pass**
+Honest complete exceptions may pass on both.
 
-exception needs owner, review date, a11y flag.
+## What the tests do not prove
+
+- Anyone reads the register
+- PSIRT actually discloses
+- SSDF 1.2 (still draft)
+- CISA Secure by Design (unverified)
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Procurement questionnaire vs this record.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic: a test that only asserts “we have a HIPAA slide” is not this cell.

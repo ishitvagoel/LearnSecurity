@@ -1,40 +1,42 @@
-# E5 — Large-scale authorization and multi-tenant SaaS (Review)
+# E5-LO-08 — Review body-chosen tenant as a PR
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** ASVS V4 plus row security as *extra*; ReBAC/Zanzibar as patterns. RLS is not a substitute for 1.2.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** ASVS `v5.0.0-8.2.1`. `v5.0.0-15.3.3` related.
 
-## Property (start here)
+## Review the fixture as if it were SecureCollab’s note query
 
-A request body tenant:B must not switch the bound tenant A. Tenant is taken from the session/binding, not from the JSON body (1.3 confused deputy).
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** Member of A sending tenant B in GraphQL/JSON.
-- **Trust:** Local tenant_for(session, body).
 Review `labs/E5/e5-lab/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/E5.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|body B becomes tenant| Property["Property - good if tested"]
+  Q -->|RLS is on| Mechanism[Mechanism - GUC]
+  Q -->|API1 mapped| False[False assurance]
+```
 
-- Seeded smell (label it yourself): tenant from body
-- Seeded smell (label it yourself): RLS session var from JSON
-- Seeded smell (label it yourself): Cache key without tenant (2.2)
-- Seeded smell (label it yourself): Support impersonation silent
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- Tenant taken from the body
+- RLS session var set from JSON
+- Cache key without tenant
+- Support impersonation silent
+
+Also reject: live SaaS probes, keys in lessons, claiming Gate 7.
 
 ## Misconceptions
 
 - RLS replaces app mediation
 - Subdomain is unforgeable tenant
-- Scale means we switch to IAM instead of 1.2
+- Scale means IAM instead of 1.2
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_body_cannot_switch_tenant`.
 
 ## Transfer
 
-Zanzibar tuple vs this binding.
+Clinic PR that "enabled RLS and mapped API1" without session binding is incomplete.

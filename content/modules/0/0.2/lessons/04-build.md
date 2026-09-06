@@ -1,49 +1,49 @@
-# 0.2 — Diagnostic and adaptive bridge (4 Build)
+# 0.2-LO-04 — Diagnostics never grant 1.2 or Gate 1
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** NICE Secure Systems Development competencies (informative); this course’s Gate 1 evidence rules. A quiz vendor’s score report is not ASVS.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** This course’s Gate 1 evidence rules. NICE as tooling language.
 
-## Property (start here)
+## Structural means the skip function ignores the score for Phase 1
 
-A placement quiz score of 100 does not skip 1.2 complete mediation, Gate 1 evidence, or the authority matrix. Adaptive paths may skip *orientation prose*, never *invariants*.
+`quiz_score_grants_phase1_skip` must return false for every score. Fail-safe: diagnostics cannot mint 1.2 cells. A Git-bridge assignment may *accompany* the quiz; it is a different function.
 
-## Attacker capabilities and trust assumptions
+## Mental model: always false for Phase 1
 
-- **Attacker:** A hurried learner optimizing for the shortest click-path; a future hiring manager who equates a badge with tenant isolation.
-- **Trust:** The diagnostic repository is local and honest. Quiz items are not production secrets.
-quiz_score_grants_phase1_skip always False.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-def quiz_score_grants_phase1_skip(score: int) -> bool:
-    """Fixed: diagnostics never grant 1.2 cells or skip Gate 1 evidence."""
-    return False
+```mermaid
+flowchart TD
+  Call[quiz_score_grants_phase1_skip] --> Out[false]
 ```
+
+Do not accept “they’re a senior hire” as membership.
 
 ## Why this restores the cell
 
-Skip only missing *tooling* units; never skip mediation labs.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| score 100 | false |
+| score 0 | false |
 
 ## What this is not
 
-The LMS mastery percentage is not a security property of SecureCollab.
+NICE competency completion. LMS mastery. Gate 0 / Gate 1. ASVS coverage.
 
-A better quiz still cannot observe whether you can write a deny cell.
+Tooling-bridge skips remain allowed **when a separate diagnostic shows a Git/SQL/HTTP gap** — not because the Phase 1 quiz was high.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name who can assign a tooling bridge. Run:
+
+```
+python3 -m pytest labs/0.2/0.2-bridge/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-A vendor SANS/OSCP score used to skip your team’s threat-model review.
+Clinic: refuse a 100% onboarding quiz as a threat-model skip the same way.
 
 ## Residual risk
 
-Bridge units still needed for Git/SQL/HTTP gaps — those skips are OK when diagnostics show skill.
+Memorized answers; real tooling gaps still need bridges.

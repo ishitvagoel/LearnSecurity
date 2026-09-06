@@ -1,6 +1,6 @@
 # E6 — Product security leadership
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. A risk exception cannot be accepted without owner, review date, and an accessibility check. SAMM/CSF/SSDF are vocabulary. CISA Secure by Design stays unverified. Do not mark Gate 7 complete.
 
 ## Identity
 
@@ -9,71 +9,78 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** Product security leadership
 - **phase / track / difficulty:** 7 / elective / advanced
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Opens after Phase 7; 1.4 accessibility residual; 10.1 lifecycle; 9.5 retest.
 - **routeTags:** complete, elective
 - **releaseMilestone:** M2
 - **masteryGate:** 7
 
 ## Objective hierarchy
 
-1. Produce **One-year product security roadmap** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce an **exception predicate** so incomplete records are refused.
+2. Name attacker capabilities (calendar; silent exceptions; inaccessible recovery) and trust assumptions (the register schema is TCB; SAMM slides are not).
+3. Transfer: clinic “HIPAA exception”; procurement questionnaire vs this record.
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+1.4 accessible recovery; 10.1 SSDLC and exceptions; 9.5 retest vs PDF; 1.1 residual risk as a named cell.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- Leadership is soft skills, not invariants.
+- Exceptions are failure (they are dated owned residuals).
+- Users can always call support instead of accessible recovery.
+- A SAMM score is the register row.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+Oral acceptance (break) → owned dated record (this module) → roadmap / champions / PSIRT as operate. Residual: unread register; renamed “tech debt.”
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true for `accept_exception({owner:'', review_by:None})`?
+- What fails if WCAG is not in the schema?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What happens if an exception is oral?
+- What residual remains if recovery is inaccessible?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/E6/e6-lab`. Forbidden: incomplete exception accepted.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-OWASP SAMM; NIST CSF 2.0; SSDF — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- OWASP SAMM 2.0 (final): measurement vocabulary, not the row.
+- NIST CSF 2.0 (final) GV: outcome labels, not the lab oracle.
+- NIST SSDF 1.1 (final) PW.1: design-review vocabulary. SSDF 1.2 remains **draft**.
+- CISA Secure by Design: **unverified** public guidance (403s historically); not Gate 7.
+- ASVS 5.0.0 `v5.0.0-15.1.5` documenting dangerous functionality is **Level 3, labeled advanced**.
+- WCAG 2.2 (final): residual inaccessible recovery is in the exception schema.
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+Empty owner accepted; no review date; a11y missing; SAMM slide as the exception.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: One-year product security roadmap.
+Elective. Python register stand-in only.
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`exception_incomplete_denied`. Expire or re-accept with fields.
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: exception is a record; SAMM is not the row |

@@ -1,40 +1,43 @@
-# E6 — Product security leadership (6 Operate)
+# E6-LO-06 — Detect exception_incomplete_denied without logging secrets
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** OWASP SAMM; NIST CSF 2.0; SSDF; CISA Secure by Design. Leadership is accountable residual, not a slide.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels.
 
-## Property (start here)
+## Prevention is not absolute
 
-A risk exception cannot be accepted without an owner, a review date, and an accessibility check flag. “We’ll accept it” is not a record.
+A new “fast-track risk” form can drop `review_by` after the schema was “set once.” Pair detect and recover. Do not log residual-risk writeups that contain secrets (3.1).
 
-## Attacker capabilities and trust assumptions
+## Mental model: incomplete row is a signal
 
-- **Attacker:** Calendar; silent exceptions.
-- **Trust:** Local accept_exception({owner, review_by}).
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Call[accept_exception] --> Ok{schema complete?}
+  Ok -->|no| Metric["exception_incomplete_denied += 1"]
+  Metric --> Expire[expire or re-accept]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | exception_missing_owner. |
-| Signal (no bodies) | exception_incomplete_denied. |
-| Revoke / recover | Expire; fix or re-accept with fields. |
-| Residual | Some risk always remains — that’s the point of an honest register. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `exception_incomplete_denied` |
+| Signal | missing fields, proposed owner; never secret writeups |
+| Recover | Expire; fix or re-accept with fields |
+| Residual | Unread register; tech-debt rename |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/E6/e6-lab`.
+Write one log line you would accept. Tie it to `labs/E6/e6-lab`.
+
+```
+log_denied reason=exception_incomplete_denied missing=owner,review_by
+```
+
+Reject any line that includes a secret, a SAMM “Gate 7 complete,” or a CISA pledge screenshot.
 
 ## Transfer
 
-Procurement questionnaire vs this record.
-
-## Usability
-
-The exception must record whether the residual includes an inaccessible control (1.4). Leadership owns that users cannot complete recovery.
+Clinic: deny the HIPAA exception; do not paste ePHI into the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+A maturity-model name is not the property. M2 stays not-attempted.

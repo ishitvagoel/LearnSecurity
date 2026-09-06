@@ -1,36 +1,43 @@
-# E5 — Large-scale authorization and multi-tenant SaaS (6 Operate)
+# E5-LO-06 — Detect body_tenant_mismatch without logging note bodies
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** ASVS V4 plus row security as *extra*; ReBAC/Zanzibar as patterns. RLS is not a substitute for 1.2.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels; ASVS `v5.0.0-8.2.1`.
 
-## Property (start here)
+## Prevention is not absolute
 
-A request body tenant:B must not switch the bound tenant A. Tenant is taken from the session/binding, not from the JSON body (1.3 confused deputy).
+A new GraphQL field can reintroduce the body tenant after the binding was "set once." Pair detect and recover. Do not log note bodies (3.1 / 8.5).
 
-## Attacker capabilities and trust assumptions
+## Mental model: disagreeing body is a signal
 
-- **Attacker:** Member of A sending tenant B in GraphQL/JSON.
-- **Trust:** Local tenant_for(session, body).
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Call[tenant_for] --> Match{body equals session?}
+  Match -->|no| Metric["body_tenant_mismatch += 1"]
+  Metric --> Audit[audit tenant B for A]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | body_tenant_ignored mismatch logs. |
-| Signal (no bodies) | body_tenant_mismatch. |
-| Revoke / recover | Audit B’s data for A’s actions. |
-| Residual | Honest super-admin — E6 + 3.3. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `body_tenant_mismatch` |
+| Signal | session tenant, body tenant, actor id; never note body |
+| Recover | Audit B; revoke confused session |
+| Residual | Copies; silent impersonation |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/E5/e5-lab`.
+Write one log line you would accept. Tie it to `labs/E5/e5-lab`.
+
+```
+log_denied reason=body_tenant_mismatch session=A body=B actor=alice
+```
+
+Reject any line that includes a note body, a GraphQL document dump, or "Gate 7 complete."
 
 ## Transfer
 
-Zanzibar tuple vs this binding.
+Clinic: deny the `org_id` switch; do not paste the chart note into the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+An RLS-vendor name is not the property. M2 stays not-attempted.

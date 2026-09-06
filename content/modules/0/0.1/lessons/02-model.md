@@ -1,53 +1,70 @@
-# 0.1 — Security engineering orientation (2 Model)
+# 0.1-LO-02 — In-scope hosts vs stop condition
 
-**Kind:** design-exercise  
-**Loop step:** 2 Model  
-**Standards:** NIST CSF 2.0 (final) GV/ID; OWASP WSTG v4.2 (final) as *lab method*, not a licence to scan the internet; NICE Framework as role language only.
+**Kind:** design-exercise
+**Loop step:** 2 Model
+**Standards:** CSF 2.0 GV. WSTG 4.2 as method catalogue.
 
-## Property (start here)
+## Can a second engineer name the host check from your scope sheet?
 
-A URL is in scope only if it is a named local lab host (127.0.0.1, localhost, lab.securecollab.test). example.com, a employer production API, and a classmate’s deployed preview are out of scope even if they are “easy to hit.”
+“I’ll be careful” is not this lesson. A reviewable model names **allowed hosts, stop condition, and what you do not fetch**.
 
-## Attacker capabilities and trust assumptions
+SecureCollab freeze: local `target_is_authorized(url)`. Do not open example.com.
 
-- **Attacker:** A motivated learner who can type any URL into a proxy; a future self who is tired and copies a blog “try this host” snippet.
-- **Trust:** You trust this repository’s lab trees and official OWASP training apps when the README names them. You do not trust “the internet,” robots.txt, or a recruiter’s staging site without written scope.
-Name principals, objects, actions, channels, TCB vs untrusted, and time. Open design: the client, APK, model, or prompt is hostile.
+## Mental model: three named hosts
+
+```mermaid
+flowchart TD
+  H1[127.0.0.1] --> Allow[may be in scope]
+  H2[localhost] --> Allow
+  H3[lab.securecollab.test] --> Allow
+  Pub[example.com] --> Deny[out of scope]
+```
+
+## Mental model: vocabulary is not a target list
+
+```mermaid
+flowchart LR
+  Vuln[vulnerability] --> Word[vocabulary]
+  Threat[threat] --> Word
+  Risk[risk] --> Word
+  Host[allow-listed host] --> Scope[this cell]
+  Word --> NotHost[not a URL]
+```
+
+## Step 1: freeze pieces
 
 | Piece | This system |
 |---|---|
-| Subjects | Learner, course maintainer, unnamed internet operator |
-| Objects | Local lab process, public website, production API |
-| Actions | Send HTTP, replay a capture, run pytest |
-| Channels | Browser, proxy, pytest against labs/ |
-| TCB | The allow-list in labs/0.1/0.1-orientation/fixed/scope.py |
-| Untrusted | Any host header, any “open bug bounty” rumour, any AI-suggested target |
-| State / time | Scope is per engagement; yesterday’s lab VM IP is not forever-authorized. |
-| 1.1 cell | Safety + accountability (1.1): unauthorized testing is both a legal and an engineering failure. |
+| Subjects | learner with a proxy; future tired self |
+| Objects | lab apps; uninvolved public operators |
+| Actions | `target_is_authorized` |
+| Channels | typed URL; redirect |
+| TCB | written allow-list |
+| Untrusted | any other host; blog snippets |
+| State / time | stop when redirect leaves allow-list |
+| 1.1 cell | authorization of the tester |
 
-## Authority matrix (minimum)
+## Step 2: write cells
 
 | Subject | Object | Action | Decision |
 |---|---|---|---|
-| learner | http://127.0.0.1:8000/notes | GET | allow |
-| learner | https://example.com/ | GET | deny |
-| learner | https://lab.securecollab.test/ | GET | allow |
-| learner | https://customer.example/ | GET | deny |
-
-A missing cell is how ambient authority appears. If a handler, cache, worker, or mobile cache is not in the matrix, write it as a hole.
+| learner | example.com | GET | deny |
+| learner | 127.0.0.1 lab | GET | may allow |
+| WSTG chapter | public host | treat as in-scope | deny |
+| cloud Juice Shop | third-party | test | deny |
 
 ## Practice
 
-Draw this map so a second engineer could name pytest cases. Lab fixture: `labs/0.1/0.1-orientation` file `scope.py`.
+Draw the map. Point at `labs/0.1/0.1-orientation` file `scope.py`.
 
 ## Transfer
 
-Your company staging URL: what written artifact would make it in-scope? (Not a Slack thumbs-up.)
+Written authorization for company staging vs a Slack thumbs-up.
 
 ## Residual risk
 
-Official Juice Shop on your machine is OK; a random cloud Juice Shop you do not own is not.
+Redirects; hosts-file aliases.
 
 ## Non-goals
 
-Do not answer with a Top 10 item as the definition of security. Keys stay out of lessons.
+Top 10 as the definition of security. Keys stay out of lessons.

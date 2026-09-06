@@ -7,64 +7,67 @@ difficulty: foundation
 status: reviewed
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 1.1–2.4 Pass A complete
+- 'None; this module opens the course'
 routeTags:
 - complete
 - web-api
 releaseMilestone: null
 outcomes:
-- 'Demonstrate: Security engineering orientation'
-- 'Produce evidence: Personal lab rules, scope template, vocabulary map'
-- Name attacker capabilities and trust assumptions
-- Include a local-only lab brief and a transfer challenge
-- Do not instruct live-target attacks or mix awareness lists as compliance
+- 'Refuse treating a public URL as authorized just because TCP connects.'
+- 'Treat WSTG as a method catalogue, not as a licence to scan the internet.'
+- 'Keep NICE work-role language from becoming a pentest permit.'
 reviewTriggers:
-- Material SecureCollab change in this module's concern
-- Superseding final standard
+- Any URL treated as in-scope
+- No stop condition on redirect
+- Live-target language in a learner note
+- Quiz score treated as scan permission
 invariants:
-- Claims are properties of SecureCollab (or the elective system), not tool names
+- target_is_authorized of example.com is false
 - Labs stay in authorized local or official training scope
-- Draft standards are labeled draft
+- WSTG is not a scanning licence
+- Reachability is not authorization
 threatModelPrompts:
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+- What can a tired learner paste into a proxy?
+- What residual remains if /etc/hosts aliases a public name to localhost?
+- What residual remains if a redirect leaves 127.0.0.1?
 concepts:
-- security
+- reachability-not-authorization
+- written-scope
+- vocabulary-map
 - securecollab
 - seven-step-loop
 learningObjects:
 - id: 0.1-LO-01
   kind: concept-model
-  title: 'Security engineering orientation: property vs mechanism'
+  title: Reachability is not authorization
   path: lessons/01-property.md
 - id: 0.1-LO-02
   kind: design-exercise
-  title: Model SecureCollab course lab for 0.1
+  title: In-scope hosts vs stop condition
   path: lessons/02-model.md
 - id: 0.1-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: HTTP to a non-allowlisted host treated as authorized'
+  title: 'Local fixture: any URL treated as authorized'
   path: lessons/03-break.md
 - id: 0.1-LO-04
   kind: design-exercise
-  title: Structural fix restoring the 0.1 invariant
+  title: Allow-list named local lab hosts
   path: lessons/04-build.md
 - id: 0.1-LO-05
   kind: verification-lab
-  title: Forbidden-outcome tests for 0.1
+  title: Fail-on-vulnerable then pass-on-fixed for public host
   path: lessons/05-verify.md
 - id: 0.1-LO-06
   kind: operations-exercise
-  title: Detect/recover notes for 0.1
+  title: out_of_scope without storing response bodies
   path: lessons/06-operate.md
 - id: 0.1-LO-07
   kind: transfer-challenge
-  title: 'Transfer: A contractor asked to “quickly test our customer’s WordPress.”'
+  title: 'Transfer: contractor asked to test a customer WordPress'
   path: lessons/07-transfer.md
 - id: 0.1-LO-08
   kind: code-review
-  title: Seeded review for 0.1
+  title: Review any-URL-in-scope as a PR
   path: lessons/08-review.md
 labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
@@ -79,47 +82,66 @@ labSpec:
 evidenceRequired:
 - Personal lab rules, scope template, vocabulary map
 - Transfer task prompt
-- Local lab brief
+- Local lab brief with public-host deny tests
 assessmentBlueprint:
-  explain: Causal model for Security engineering orientation
-  design: Personal lab rules, scope template, vocabulary map
-  build: Deferred to Pass B
-  break: Authorized local reproduction of the representative failure
-  verify: Forbidden-outcome tests
-  operate: Detection and recovery notes
-  communicate: Residual risk without compliance theater
+  explain: Scope is a property of the tester; reachability is not authorization
+  design: Named hosts, stop condition, vocabulary map
+  build: target_is_authorized allow-list in labs/0.1/0.1-orientation/fixed
+  break: Authorized local any-URL-true
+  verify: Forbidden-outcome tests plus honest localhost
+  operate: out_of_scope without response bodies
+  communicate: Residual hosts-file aliases; official Juice Shop on your machine
 masteryGate: '0'
 standardsRefs:
-- source: OWASP ASVS / module anchors (see spec)
-  version: 5.0.0
+- source: NIST Cybersecurity Framework
+  version: '2.0'
   status: final
   requirementIds:
-  - ethics
-  - authorized-scope
-  url: https://owasp.org/www-project-application-security-verification-standard/
+  - GV
+  - ID
+  url: https://www.nist.gov/cyberframework
+- source: OWASP Web Security Testing Guide
+  version: '4.2'
+  status: final
+  requirementIds:
+  - method-catalogue
+  url: https://owasp.org/www-project-web-security-testing-guide/v42/
+- source: NIST SP 800-181 Rev. 1 NICE Workforce Framework
+  version: '800-181r1'
+  status: final
+  requirementIds:
+  - role-language
+  url: https://csrc.nist.gov/pubs/sp/800/181/r1/final
+- source: W3C Web Content Accessibility Guidelines
+  version: '2.2'
+  status: final
+  requirementIds:
+  - informed-consent-ui
+  url: https://www.w3.org/TR/WCAG22/
 misconceptions:
 - If it has a login page it is a lab
 - WSTG chapter titles are the syllabus
 - Defensive learning requires attacking strangers
+- Burp existing is authorization
 operationalConsiderations:
-- Denied-host log line {url, reason=out_of_scope}; never store response bodies from
-  out-of-scope hosts.
+- Denied-host log line with url and reason=out_of_scope; never store response bodies
+  from out-of-scope hosts.
 - Official Juice Shop on your machine is OK; a random cloud Juice Shop you do not
   own is not.
-author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
+author: deepen-curriculum / author-module-spec
+reviewer: pending independent quality and lab-safety review
 lastReviewedAt: '2026-08-24'
 nextReviewAt: '2027-02-24'
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map
 - date: '2026-08-23'
-  note: 'Pass A quality-gate: spec completeness competent; expand in a later revision
-    if thin'
-- date: '2026-08-23'
   note: Pass B lessons and authorized local lab
 - date: '2026-08-23'
   note: Pass C rubric and examiner keys; quality-gate recorded
 - date: '2026-08-24'
-  note: 'Publishable rewrite: unique 1.2-density lessons, structural lab mapping,
-    Pass C keys isolated'
+  note: Map-complete rewrite recorded; independent review still required
+- date: '2026-09-06'
+  note: 'Depth pass: reachability-not-authorization mental models, mermaid diagrams,
+    CSF 2.0 / WSTG 4.2 / NICE as vocabulary not a scanning licence; independent review
+    still required'

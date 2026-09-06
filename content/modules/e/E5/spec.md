@@ -1,6 +1,6 @@
 # E5 — Large-scale authorization and multi-tenant SaaS
 
-Pass A specification (map-complete). Expand lesson-quality in a later revision. No exploit walkthroughs.
+Pass A specification. Lesson prose lives in `lessons/`. A JSON body tenant B must not switch bound tenant A. RLS and ReBAC products are extra layers, not 1.2. Do not mark Gate 7 complete.
 
 ## Identity
 
@@ -9,71 +9,74 @@ Pass A specification (map-complete). Expand lesson-quality in a later revision. 
 - **title:** Large-scale authorization and multi-tenant SaaS
 - **phase / track / difficulty:** 7 / elective / advanced
 - **estimatedMinutes:** 240
-- **prerequisites:** Blueprint §7; Phase 1–2 Pass A already exists.
+- **prerequisites:** Opens after Phase 7; 1.2 mediation; 4.4 isolation; 7.1 writable fields; 2.2 cache.
 - **routeTags:** complete, elective
 - **releaseMilestone:** M2
 - **masteryGate:** 7
 
 ## Objective hierarchy
 
-1. Produce **Formal authorization model and scale tests** for SecureCollab (or the elective system).
-2. Name attacker capabilities, trust assumptions, and a local authorized lab brief.
-3. Transfer: a materially changed case without using a Top 10 as the definition of security.
+1. Produce a **tenant-binding predicate** so `tenant_for(session A, body B)` stays A.
+2. Name attacker capabilities (member of A with a JSON/GraphQL field) and trust assumptions (session binding is TCB; body/RLS-from-body/subdomain are not).
+3. Transfer: clinic group practice switching `org_id` in JSON; Zanzibar tuple vs this binding — without a live SaaS tenant.
 
 ## Prerequisite concepts
 
-Prior modules on the §7 graph.
+1.2 complete mediation; 4.4 object-and-tenant matrix; 7.1 mass assignment of writable fields; 2.2 cache keys; 5.1 copies.
 
 ## Misconceptions
 
-- This topic is a vulnerability-name list.
-- Framework or cloud defaults are the application guarantee.
-- Awareness documents (Top 10, CWE Top 25) are compliance.
+- RLS replaces app mediation.
+- Subdomain is an unforgeable tenant.
+- Scale means IAM instead of 1.2.
+- API1 is the definition of the property.
 
 ## Concept map
 
-Property (1.1) → authority (1.2) → boundary (1.3) → this module’s mechanism and evidence.
+Client-chosen tenant (break) → session binding (this module) → RLS/ReBAC as extra → copies (search/cache/lake) still bound. Residual: honest super-admin (E6 + 3.3); silent impersonation.
 
 ## Invariant prompts
 
-- What must remain true if the client is hostile?
-- What fails if this control is skipped on an indirect path?
+- What must remain true for `tenant_for({A},{B})`?
+- What fails if RLS is `SET` from the body?
 
 ## Threat-model prompts
 
-- What can go wrong for the assets in this module?
-- What residual remains if prevention fails?
+- What can a member of A do with tenant B in JSON?
+- What residual remains in search indexes and data lakes?
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08, seven-step loop).
+See `module.yaml` learningObjects (LO-01–08).
 
 ## Lab briefs
 
-Authorized **local course fixture** (or official training lab). Forbidden: live targets, real PII, weaponized lesson payloads.
+Authorized local `labs/E5/e5-lab`. Forbidden: JSON body switches the bound tenant.
 
 ## Assessment blueprint
 
-See `module.yaml` assessmentBlueprint. Mastery states: not-attempted | developing | competent | transfer-ready. No compensating averages.
+See `module.yaml` assessmentBlueprint.
 
 ## Standards references
 
-ASVS V8/V14/V15 — label drafts (OAuth 2.1, SSDF 1.2, Privacy FW 1.1, WebAuthn L3 CR, NIST 800-154, CSP3, Trusted Types) as non-final. ASVS IDs when pinned later: `v5.0.0-…`. No ASVS 4.x. No MASVS L1/L2/R.
+- OWASP ASVS 5.0.0 (final): `v5.0.0-8.2.1` / `v5.0.0-8.2.2` isolation; `v5.0.0-15.3.3` mass assignment of the tenant field (related); `v5.0.0-14.2.3` copies not sent as a second controller. `v5.0.0-8.3.2` immediate grant change is **Level 3, labeled advanced**.
+- OWASP API Security Top 10 2023 API1 is **awareness after** the binding cause, not the syllabus.
 
 ## Review triggers
 
-Material SecureCollab change in this concern; superseding **final** standard.
+Body tenant overrides session; RLS from JSON; cache key without tenant; silent impersonation.
 
 ## Time budget and SecureCollab
 
-Blueprint §9.1 phase evolution. Evidence: Formal authorization model and scale tests.
+Elective. Python session-binding stand-in only.
 
 ## Operational considerations
 
-Pair prevention with detection and recovery where prevention is not absolute.
+`body_tenant_mismatch`. Audit tenant B for A's actions.
 
 ## Changelog
 
 | date | note |
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
+| 2026-09-06 | Depth pass: body is not the tenant; RLS is not 1.2 |

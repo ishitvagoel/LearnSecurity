@@ -1,33 +1,42 @@
-# E6 — Product security leadership (7 Transfer)
+# E6-LO-07 — Transfer: clinic HIPAA exception
 
-**Kind:** transfer-challenge  
-**Loop step:** 7 Transfer  
-**Standards:** OWASP SAMM; NIST CSF 2.0; SSDF; CISA Secure by Design. Leadership is accountable residual, not a slide.
+**Kind:** transfer-challenge
+**Loop step:** 7 Transfer
+**Standards:** SAMM 2.0 vocabulary. CSF 2.0 GV. CISA Secure by Design **unverified**.
 
-## Property (start here)
+## Change the workplace; keep the exception as a record
 
-A risk exception cannot be accepted without an owner, a review date, and an accessibility check flag. “We’ll accept it” is not a record.
+Do not answer with a Top 10 / CWE / scanner as the definition of security.
 
-## Attacker capabilities and trust assumptions
+**Prompt:** Clinic “HIPAA exception.” Also name a procurement questionnaire vs this record.
 
-- **Attacker:** Calendar; silent exceptions.
-- **Trust:** Local accept_exception({owner, review_by}).
-Change one channel, principal, or object class. Rewrite the invariant. Do not answer with a Top 10 / CWE Top 25 / scanner as the definition of security.
+**Product sketch:** EHR-lite “legal said we accept it,” plus “our SAMM score is 2.5 so exceptions are done.”
 
-**Prompt:** Procurement questionnaire vs this record.
+Rewrite the SecureCollab sentence. Include:
 
-**Product sketch:** Clinic: “HIPAA exception.”
+1. attacker capabilities (calendar / silent accept — not a live OCR audit);
+2. trust assumptions (schema is TCB; SAMM/CSF/CISA pledge are not);
+3. forbidden outcome (`accept_exception` true with empty owner, not “HIPAA”);
+4. a test idea on a **local** fixture only (no clinic GRC tool);
+5. residual (unread register, inaccessible recovery, `v5.0.0-15.1.5` Level 3);
+6. WCAG (the exception must record whether patients can complete recovery).
 
-Your answer must include: attacker capabilities, trust assumptions, a forbidden outcome, a test idea that would fail if the cell were false, residual risk, and whether a human path must meet WCAG 2.2.
+## Mental model: legal said vs dated owner
+
+```mermaid
+flowchart LR
+  Legal[legal said yes] --> Belief[accepted]
+  Row[owner plus review_by] --> Reality[register]
+```
 
 ## What graders reject
 
 | Reject | Why |
 |---|---|
-| Tool or awareness-list name as the property | 1.1 |
-| Framework default as the guarantee | Jira “risk” issue type without dates.… |
-| Live-target plan | Lab policy |
+| “SAMM / HIPAA / CISA pledge” | Not the row |
+| Live clinic GRC / OCR | Lab policy |
+| “exceptions are failure so we hide them” | Dishonest register |
 
 ## Practice
 
-One page. No keys. The lab `labs/E6/e6-lab` stays the only running system you may break.
+One page. No keys. `labs/E6/e6-lab` is the only running system you may break.

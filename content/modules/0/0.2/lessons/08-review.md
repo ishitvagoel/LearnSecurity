@@ -1,29 +1,31 @@
-# 0.2 — Diagnostic and adaptive bridge (Review)
+# 0.2-LO-08 — Review quiz-as-skip as a PR
 
-**Kind:** code-review  
-**Loop step:** Review  
-**Standards:** NICE Secure Systems Development competencies (informative); this course’s Gate 1 evidence rules. A quiz vendor’s score report is not ASVS.
+**Kind:** code-review
+**Loop step:** Review
+**Standards:** NICE as vocabulary. Gate 1 evidence rules.
 
-## Property (start here)
+## Review the fixture as if it were the course placement service
 
-A placement quiz score of 100 does not skip 1.2 complete mediation, Gate 1 evidence, or the authority matrix. Adaptive paths may skip *orientation prose*, never *invariants*.
-
-## Attacker capabilities and trust assumptions
-
-- **Attacker:** A hurried learner optimizing for the shortest click-path; a future hiring manager who equates a badge with tenant isolation.
-- **Trust:** The diagnostic repository is local and honest. Quiz items are not production secrets.
 Review `labs/0.2/0.2-bridge/vulnerable/` as a SecureCollab PR. Intended findings live only in `content/assessment/keys/0.2.md` — not here.
 
-## What to label
+## Mental model: property, mechanism, or false assurance
 
-For each claim and each branch: **property**, **mechanism**, or **false assurance**.
+```mermaid
+flowchart TD
+  Claim[PR claim] --> Q{What would falsify it?}
+  Q -->|score 100 skips 1.2| Property["Property - good if tested"]
+  Q -->|LMS percentage| Mechanism[Mechanism - number]
+  Q -->|NICE mapped| False[False assurance]
+```
 
-- Seeded smell (label it yourself): if score >= 80: skip_phase(1)
-- Seeded smell (label it yourself): No link from diagnostic to 1.2 evidence
-- Seeded smell (label it yourself): Badge screenshot as Gate 1
-- Seeded smell (label it yourself): Adaptive path hides 1.4 accessibility residual
+Seeded smells (label them yourself; do not open the keys file):
 
-Also reject: client trust, interpreter concatenation, Report-Only as enforcement, closing findings without retest, keys in lessons.
+- `if score >= 80: skip_phase(1)`
+- No link from diagnostic to 1.2 evidence
+- Badge screenshot as Gate 1
+- Adaptive path hides 1.4 accessibility residual
+
+Also reject: live LMS attacks, keys in lessons, claiming Gate 0 or Gate 1.
 
 ## Misconceptions
 
@@ -33,12 +35,8 @@ Also reject: client trust, interpreter concatenation, Report-Only as enforcement
 
 ## Practice
 
-Write three review notes. Do not open the keys file.
+Write three review notes. Tie at least one to `test_high_quiz_score_is_not_authorization`.
 
 ## Transfer
 
-A vendor SANS/OSCP score used to skip your team’s threat-model review.
-
-## HITL / WCAG 2.2
-
-Diagnostic UI must not be color-only “green = skip Phase 1” (WCAG 2.2 1.4.1).
+Clinic PR that “added an onboarding quiz and NICE mapping” without keeping 1.2 required is incomplete.

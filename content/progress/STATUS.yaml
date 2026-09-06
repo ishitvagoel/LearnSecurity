@@ -14,15 +14,40 @@ defaults:
   ai_security: elective E1
   website_progress: local-first static site (site/); no accounts
 next:
-  id: E5
+  id: null
   pass: revise
   skill: deepen-curriculum
-  inner_skill: standards-pin
-  note: Electives E1-E4 authoring pass added model-not-TCB, Report-Only-not-enforcement,
-    key-is-identity, and length-is-mediation mental models and diagrams; keep 1.4,
-    2.1-11, and E1-E4 developing until independent review. Continue the depth queue
-    one module at a time.
+  inner_skill: quality-gate
+  note: Authoring-pass mental models and diagrams now cover 2.4-11, E1-E6, and 0.1-0.2.
+    Units stay developing / map-complete in revision.remaining until independent quality
+    and lab-safety review artifacts exist under content/progress/reviews/. Do not mark
+    depth publishable in this skill. 1.1-1.3 remain the independently reviewed reference.
 spiral_deltas:
+- date: '2026-09-06'
+  module: '0.2'
+  change: Placement loop v2 treats a quiz score as not a 1.2 cell, refuses LMS/NICE/badge
+    as Gate 1, and keeps tooling-bridge skips separate from invariant skips
+  retest: Revisit 0.1 scope; 1.2/1.3/1.4 still required; 1.4 hidden by color-only skip
+    UI; 10.1 vanity metrics
+- date: '2026-09-06'
+  module: '0.1'
+  change: Orientation loop v2 treats reachability as not authorization, refuses WSTG/Burp/NICE
+    as a scanning licence, and pins CSF 2.0 GV plus WSTG 4.2 as method not permit
+  retest: Revisit lab-safety no live targets; 9.5 authorized assessment catalogue;
+    official Juice Shop on-machine vs cloud instance you do not own
+- date: '2026-09-06'
+  module: E6
+  change: Leadership loop v2 treats oral acceptance as not a register row, refuses
+    SAMM/CSF/CISA-pledge as accept_exception, pins SSDF 1.1 PW.1 as vocabulary, and
+    labels v5.0.0-15.1.5 as Level 3 advanced
+  retest: Revisit 1.4 inaccessible recovery; 10.1 exceptions; 9.5 PDF-as-close; unread
+    register
+- date: '2026-09-06'
+  module: E5
+  change: SaaS-tenant loop v2 treats JSON body tenant as not the binding, refuses RLS/Zanzibar/API1
+    as 1.2, pins v5.0.0-8.2.1 / 8.2.2, and labels v5.0.0-8.3.2 as Level 3 advanced
+  retest: Revisit 1.2/4.4 isolation; 7.1 mass assignment; 2.2 cache keys; 5.1 copies;
+    E6 silent impersonation
 - date: '2026-09-06'
   module: E4
   change: Memory-safety loop v2 treats destination length as mediation, refuses a
@@ -453,8 +478,8 @@ modules:
   track: core
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added reachability-not-authorization mental models
+    and diagrams; independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '0.2'
   title: Diagnostic and adaptive bridge
@@ -462,8 +487,8 @@ modules:
   track: bridge
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added quiz-not-1.2 mental models and diagrams; independent
+    quality and lab-safety review still required before publishable
   depth: map-complete
 - id: '1.1'
   title: Security as invariants under attack
@@ -991,16 +1016,16 @@ electives:
   opens_after_phase: 7
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added body-not-tenant mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 - id: E6
   title: Product security leadership
   opens_after_phase: 7
   pass: E
   quality: developing
-  notes: Map-complete after 2026-08-25 depth audit; semantic deepening and independent
-    review required
+  notes: Authoring pass 2026-09-06 added exception-is-a-record mental models and diagrams;
+    independent quality and lab-safety review still required before publishable
   depth: map-complete
 milestones:
 - id: M0

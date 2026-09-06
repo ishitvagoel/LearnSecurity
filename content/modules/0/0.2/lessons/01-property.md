@@ -1,62 +1,84 @@
-# 0.2 — Diagnostic and adaptive bridge (1 Property)
+# 0.2-LO-01 — A quiz score is not a 1.2 cell
 
-**Kind:** concept-model  
-**Loop step:** 1 Property  
-**Standards:** NICE Secure Systems Development competencies (informative); this course’s Gate 1 evidence rules. A quiz vendor’s score report is not ASVS.
+**Kind:** concept-model
+**Loop step:** 1 Property
+**Standards:** NIST SP 800-181r1 NICE (final) as informative role language. CSF 2.0 GV. This course’s Gate 1 evidence rules. WCAG 2.2 1.4.1. A quiz vendor’s score report is not ASVS.
 
-## Property (start here)
+## The claim this module owns
 
-A placement quiz score of 100 does not skip 1.2 complete mediation, Gate 1 evidence, or the authority matrix. Adaptive paths may skip *orientation prose*, never *invariants*.
+Learners may take a local placement quiz. **Integrity of the learning system** is whether a high score still leaves 1.2 complete mediation, Gate 1 evidence, and the authority matrix required. Adaptive paths may skip *orientation prose*, never *invariants*.
 
-## Attacker capabilities and trust assumptions
+> `quiz_score_grants_phase1_skip(100)` must be false. A low score also does not skip.
 
-- **Attacker:** A hurried learner optimizing for the shortest click-path; a future hiring manager who equates a badge with tenant isolation.
-- **Trust:** The diagnostic repository is local and honest. Quiz items are not production secrets.
-**Mechanism (not the property):** The LMS mastery percentage is not a security property of SecureCollab.
+The forbidden outcome is **quiz score used as authorization to skip 1.2 / Gate 1**. False competency is a safety defect for later labs (4.4 / 6.x without a matrix).
 
-Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
+NICE Secure Systems Development competencies describe jobs. They are not a 1.2 allow cell. An LMS percentage is not a security property of SecureCollab.
+
+## Mental model: number vs capability
+
+```mermaid
+flowchart TD
+  Score[quiz 100] --> Belief[skip Phase 1]
+  Score --> Gate{"grants_phase1_skip?"}
+  Gate -->|must be false| Lab[still run 1.2]
+```
+
+## Mental model: tooling bridge vs invariant
+
+```mermaid
+flowchart LR
+  Git[Git gap] --> Bridge[may skip a tooling unit]
+  Med[1.2 mediation] --> Required[never skip]
+  Quiz[percentage] --> NotCell[not a 1.2 cell]
+```
+
+**Mechanism (not the property):** LMS mastery dashboard; a vendor cert screenshot; NICE work-role mapping.
 
 ## Root cause vs impact vs prevention vs detection vs recovery
 
-| Slice | For 0.2 |
+| Slice | For this property |
 |---|---|
-| Root cause | A number was treated as a capability (ambient “you’re advanced”). |
-| Preconditions | Quiz exists; skip() consulted the number. |
-| Impact (1.1 cell) | Integrity of the learning system: false competency is a safety defect for later labs. — Learner reaches 4.4/6.x without a matrix; false assurance in reviews. |
-| Prevention | Skip only missing *tooling* units; never skip mediation labs. |
-| Detection | Path log: skipped ids vs required 1.2/1.3/1.4. |
-| Recovery | Re-open 1.2; do not back-date Gate 1. |
+| Root cause | A number treated as a capability |
+| Preconditions | `quiz_score_grants_phase1_skip` consults the score |
+| Trigger | Hurried learner; hiring manager with a badge |
+| Impact | False competency — later labs without a matrix |
+| Prevention | Skip only missing tooling units; never skip mediation labs |
+| Detection | `phase1_skip_denied`; skipped-id audit |
+| Recovery | Re-open 1.2; do not back-date Gate 1 |
 
-## Framework defaults vs application guarantees
+## Framework defaults versus the skip guarantee
 
-The LMS mastery percentage is not a security property of SecureCollab.
+An LMS will let you mark a module complete from a percentage. That is this bug.
 
-## Mechanism limits and bypasses
+## Mechanism limits
 
-A better quiz still cannot observe whether you can write a deny cell.
-
-Memorizing 1.2 answers without running the lab.
-
-## Residual risk
-
-Bridge units still needed for Git/SQL/HTTP gaps — those skips are OK when diagnostics show skill.
-
-## Practice
-
-Name one thing a 100% quiz cannot prove about tenant isolation.
-
-Run `labs/0.2/0.2-bridge` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
-
-## Transfer
-
-A vendor SANS/OSCP score used to skip your team’s threat-model review.
-
-Onboarding at a clinic-booking SaaS.
-
-## Non-goals
-
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.
+- A better quiz still cannot observe whether you can write a deny cell.
+- Memorizing 1.2 answers without running the lab.
+- Git/SQL/HTTP gaps still need bridges when diagnostics show skill.
 
 ## Usability and accessibility
 
-Diagnostic UI must not be color-only “green = skip Phase 1” (WCAG 2.2 1.4.1).
+Diagnostic UI must not be color-only “green = skip Phase 1” (WCAG 2.2 1.4.1). Adaptive paths must not hide 1.4 accessibility residuals.
+
+## Practice
+
+Name one thing a 100% quiz cannot prove about tenant isolation. Then run:
+
+```
+python3 -m pytest labs/0.2/0.2-bridge/tests --impl vulnerable
+python3 -m pytest labs/0.2/0.2-bridge/tests --impl fixed
+```
+
+The first command must fail. The second must pass.
+
+## Transfer
+
+Vendor cert used to skip a threat-model review. Clinic onboarding quiz.
+
+## Residual risk
+
+Memorized answers; tooling gaps still real. Gate 0 stays not-attempted.
+
+## Non-goals
+
+Live LMS exploits. NICE as the syllabus. Gate 1 from a score.

@@ -1,9 +1,38 @@
-# Lab E5
+# Lab E5 — the JSON body is not the tenant
 
-Authorized: this directory only. No live targets.
+**Module:** `E5`
+**Authorized scope:** this directory only. Local course fixture. No public SaaS tenants.
+**Invariant:** `tenant_for({"tenant": "A"}, {"tenant": "B"})` is `A`. Matching A/A may keep A.
+**Root cause class:** client-chosen tenant (confused deputy of the isolation key)
+**Non-goals:** Zanzibar product; Postgres RLS as 1.2; API Top 10 as the syllabus.
 
-Tenant id for a query comes from the session, not from the JSON body. Body-supplied tenant is confused deputy of the isolation key (4.4, 7.1).
+Postgres RLS that `SET`s tenant from the body is the **same bug**. This Python binding is a teaching stand-in.
 
-pytest tests/test_property.py --impl vulnerable (must fail) then --impl fixed.
+## Reset
 
-Forbidden: body tenant B overrides session A.
+Re-run pytest. Optional: `git checkout -- labs/E5/e5-lab`.
+
+## Vulnerable behavior (local only)
+
+`tenant_for` prefers `body["tenant"]`. Forbidden outcome: JSON body switches the bound tenant.
+
+## Structural fix
+
+Return `session["tenant"]`. Ignore the body field for isolation.
+
+## Verify
+
+```
+python3 -m pytest labs/E5/e5-lab/tests --impl vulnerable
+python3 -m pytest labs/E5/e5-lab/tests --impl fixed
+```
+
+The first command must fail `test_body_cannot_switch_tenant`. The second must pass. Honest matching-tenant tests may pass on both.
+
+## Operate
+
+Signal: `body_tenant_mismatch`. Do not log note bodies.
+
+## Transfer
+
+Clinic group practice `org_id` in JSON. Zanzibar tuple vs this binding. Prompt only.

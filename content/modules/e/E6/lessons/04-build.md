@@ -1,48 +1,51 @@
-# E6 — Product security leadership (4 Build)
+# E6-LO-04 — Require owner, review_by, and wcag_checked
 
-**Kind:** design-exercise  
-**Loop step:** 4 Build  
-**Standards:** OWASP SAMM; NIST CSF 2.0; SSDF; CISA Secure by Design. Leadership is accountable residual, not a slide.
+**Kind:** design-exercise
+**Loop step:** 4 Build
+**Standards:** WCAG 2.2 (final). SSDF 1.1 PW.1 as vocabulary.
 
-## Property (start here)
+## Structural means the runtime checks the schema
 
-A risk exception cannot be accepted without an owner, a review date, and an accessibility check flag. “We’ll accept it” is not a record.
+`accept_exception` must be true only when `owner`, `review_by`, and `wcag_checked` are present. Fail-safe: incomplete records deny. A SAMM score may *accompany* the register; it does not replace the row.
 
-## Attacker capabilities and trust assumptions
+## Mental model: schema gate
 
-- **Attacker:** Calendar; silent exceptions.
-- **Trust:** Local accept_exception({owner, review_by}).
-empty owner/date => False.
-
-Structural means the object/interpreter/identity is actually mediated — not a denylist of yesterday’s string, not a scanner suppression, not “trust the framework.”
-
-## Fixed fixture (local)
-
-```python
-def accept_exception(exc):
-    return bool(exc.get('owner') and exc.get('review_by') and exc.get('wcag_checked'))
+```mermaid
+flowchart TD
+  Call[accept_exception] --> Fields{owner and review_by and wcag?}
+  Fields -->|yes| Ok[may accept]
+  Fields -->|no| Deny[false]
 ```
+
+Do not accept “the VP said yes” as membership.
 
 ## Why this restores the cell
 
-Schema of an exception; refuse incomplete.
-
-Fail-safe: on uncertainty, **deny** (or refuse boot / refuse merge / refuse close — whatever the lab’s action is).
+| After the fix | Must be true |
+|---|---|
+| empty owner | false |
+| alice + date + WCAG | may be true |
 
 ## What this is not
 
-Jira “risk” issue type without dates.
+SAMM 2.0. CSF GV sticker. CISA pledge. Gate 7 / M2. `v5.0.0-15.1.5` Level 3 documentation residual.
 
-A perfect register that nobody reads.
+Expire on `review_by`. Re-accept with fields or fix the hole. Do not silently extend.
 
 ## Practice
 
-Name subject, object, action, and the predicate that must be true after the fix. Run `--impl fixed` (must pass).
+Name who can be `owner`. Run:
+
+```
+python3 -m pytest labs/E6/e6-lab/tests --impl fixed
+```
+
+Must pass.
 
 ## Transfer
 
-Procurement questionnaire vs this record.
+Clinic: refuse a HIPAA exception with no review date the same way.
 
 ## Residual risk
 
-Some risk always remains — that’s the point of an honest register.
+Unread register; rename to tech-debt; inaccessible path still checked only as a flag.

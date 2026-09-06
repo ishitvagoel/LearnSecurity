@@ -1,38 +1,44 @@
-# E5 — Large-scale authorization and multi-tenant SaaS (5 Verify)
+# E5-LO-05 — Evidence is body switch denied, then a passing pair
 
-**Kind:** verification-lab  
-**Loop step:** 5 Verify  
-**Standards:** ASVS V4 plus row security as *extra*; ReBAC/Zanzibar as patterns. RLS is not a substitute for 1.2.
+**Kind:** verification-lab
+**Loop step:** 5 Verify
+**Standards:** ASVS `v5.0.0-8.2.1`.
 
-## Property (start here)
+## An invariant that cannot fail a test is still a slogan
 
-A request body tenant:B must not switch the bound tenant A. Tenant is taken from the session/binding, not from the JSON body (1.3 confused deputy).
+"We have RLS" is not evidence. The oracle is the local pair. Do not hit public tenants.
 
-## Attacker capabilities and trust assumptions
+## Mental model: fail-on-vulnerable, pass-on-fixed
 
-- **Attacker:** Member of A sending tenant B in GraphQL/JSON.
-- **Trust:** Local tenant_for(session, body).
-An invariant that cannot fail a test is still a slogan. Happy path is not evidence.
+```mermaid
+flowchart LR
+  V["--impl vulnerable"] --> F["Must fail body switch"]
+  X["--impl fixed"] --> P["Must pass bind"]
+```
 
 | Case | Must show |
 |---|---|
-| Normal | Honest allowed action still works where the product says so |
-| Negative / abuse | JSON body switches the bound tenant |
-| Failure | Fail closed: Ignore body tenant; bind from session; RLS extra |
+| Negative / abuse | session A, body B → A |
+| Normal | session A, body A → A |
+| Not claimed | Zanzibar; API1 dashboard; Gate 7 |
 
-Lab tests: `test_property.py` under `labs/E5/e5-lab`.
+```
+python3 -m pytest labs/E5/e5-lab/tests --impl vulnerable
+python3 -m pytest labs/E5/e5-lab/tests --impl fixed
+```
 
-- `--impl vulnerable` (or vulnerable fixtures): **fail** on `JSON body switches the bound tenant`
-- `--impl fixed`: **pass**
+Honest matching-tenant tests may pass on both.
 
-body cannot switch tenant.
+## What the tests do not prove
+
+- Search/cache/lake keys include tenant (`v5.0.0-14.2.3`)
+- Impersonation is audited (E6)
+- Grant changes are immediate (`v5.0.0-8.3.2` Level 3)
 
 ## Practice
 
-Execute both implementations this session. Paste nothing from keys. Map each test to a matrix cell from LO-02.
+Execute both implementations. Map each test to an LO-02 cell.
 
 ## Transfer
 
-Zanzibar tuple vs this binding.
-
-A test that only asserts HTTP 200 is not this module’s evidence (see 9.3).
+Clinic: a test that only asserts "RLS is on" is not this cell.

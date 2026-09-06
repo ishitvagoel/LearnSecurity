@@ -1,40 +1,43 @@
-# 0.1 — Security engineering orientation (6 Operate)
+# 0.1-LO-06 — Detect out_of_scope without storing response bodies
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** NIST CSF 2.0 (final) GV/ID; OWASP WSTG v4.2 (final) as *lab method*, not a licence to scan the internet; NICE Framework as role language only.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels.
 
-## Property (start here)
+## Prevention is not absolute
 
-A URL is in scope only if it is a named local lab host (127.0.0.1, localhost, lab.securecollab.test). example.com, a employer production API, and a classmate’s deployed preview are out of scope even if they are “easy to hit.”
+A new “quick check” snippet can paste a public host after the allow-list was “set once.” Pair detect and recover. **Never** store response bodies from denied hosts (3.1).
 
-## Attacker capabilities and trust assumptions
+## Mental model: denied host is a signal
 
-- **Attacker:** A motivated learner who can type any URL into a proxy; a future self who is tired and copies a blog “try this host” snippet.
-- **Trust:** You trust this repository’s lab trees and official OWASP training apps when the README names them. You do not trust “the internet,” robots.txt, or a recruiter’s staging site without written scope.
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Call[target_is_authorized] --> In{allow-listed?}
+  In -->|no| Metric["out_of_scope += 1"]
+  Metric --> Stop[stop and notify instructor]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | Log denied hosts without fetching them; supervisor review of proxy history in class only. |
-| Signal (no bodies) | Denied-host log line {url, reason=out_of_scope}; never store response bodies from out-of-scope hosts. |
-| Revoke / recover | Stop, document, do not exfiltrate; notify instructor. Do not “just this once” continue. |
-| Residual | Official Juice Shop on your machine is OK; a random cloud Juice Shop you do not own is not. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `out_of_scope` |
+| Signal | host, reason; never response body |
+| Recover | Stop; document; notify instructor |
+| Residual | Redirects; hosts-file aliases |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/0.1/0.1-orientation`.
+Write one log line you would accept. Tie it to `labs/0.1/0.1-orientation`.
+
+```
+log_denied reason=out_of_scope host=example.com
+```
+
+Reject any line that includes a response body, a screenshot of a public site, or “Gate 0 complete.”
 
 ## Transfer
 
-Your company staging URL: what written artifact would make it in-scope? (Not a Slack thumbs-up.)
-
-## Usability
-
-Scope templates and stop-buttons in course UI must be keyboard-operable (WCAG 2.2). A mouse-only “I agree” is not informed consent.
+Contractor WordPress: deny the host; do not paste the customer HTML into the ticket.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+A scanner name is not the property. Gate 0 stays not-attempted.

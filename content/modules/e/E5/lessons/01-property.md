@@ -1,58 +1,87 @@
-# E5 — Large-scale authorization and multi-tenant SaaS (1 Property)
+# E5-LO-01 — The JSON body is not the tenant
 
-**Kind:** concept-model  
-**Loop step:** 1 Property  
-**Standards:** ASVS V4 plus row security as *extra*; ReBAC/Zanzibar as patterns. RLS is not a substitute for 1.2.
+**Kind:** concept-model
+**Loop step:** 1 Property
+**Standards:** ASVS 5.0.0 (final) `v5.0.0-8.2.1`, `v5.0.0-8.2.2`; `v5.0.0-8.3.2` is **Level 3, advanced**. `v5.0.0-15.3.3` mass assignment of the tenant field (related). API Top 10 2023 API1 is **awareness after** the cause.
 
-## Property (start here)
+## The claim this module owns
 
-A request body tenant:B must not switch the bound tenant A. Tenant is taken from the session/binding, not from the JSON body (1.3 confused deputy).
+SecureCollab notes live in a workspace. **Authorization of the tenant context** is whether the *session binding* names the workspace. A JSON or GraphQL `tenant` / `org_id` field is untrusted input (7.1), not a grant (1.2 / 4.4).
 
-## Attacker capabilities and trust assumptions
+> `tenant_for({"tenant": "A"}, {"tenant": "B"})` must be `A`. Matching A/A may keep A.
 
-- **Attacker:** Member of A sending tenant B in GraphQL/JSON.
-- **Trust:** Local tenant_for(session, body).
-**Mechanism (not the property):** Postgres RLS with a SET tenant from the body is this bug.
+The forbidden outcome is **JSON body switches the bound tenant**. At SaaS scale that is cross-tenant read/write through every copy.
 
-Saltzer/Schroeder still apply: economy of mechanism, fail-safe defaults, complete mediation, open design. A named product (JWT, TLS, scanner, CSP) is not this sentence.
+ASVS `v5.0.0-8.2.1` / `v5.0.0-8.2.2` want isolation of the object and tenant. `v5.0.0-15.3.3` wants unused/writable fields not to become policy. `v5.0.0-8.3.2` (immediate grant change) is **Level 3, advanced**. Postgres RLS and ReBAC/Zanzibar products are **layers**, not this sentence.
+
+## Mental model: body vs session
+
+```mermaid
+flowchart TD
+  Sess[session tenant A] --> Bind{"tenant_for?"}
+  Body[JSON tenant B] --> Bind
+  Bind -->|session wins| Ok[tenant A]
+  Bind -->|body wins| Bad[tenant B]
+```
+
+## Mental model: RLS from the body is the same bug
+
+```mermaid
+flowchart LR
+  Json[body tenant] --> Set["SET rls.tenant"]
+  Set --> Belief[database isolation]
+  Bind2[session binding] --> TCB[1.2]
+  Set --> Not12[not mediation]
+```
+
+**Mechanism (not the property):** subdomain Host header, JWT `org` claim copied from the client, a Zanzibar dashboard, API1 mapped.
 
 ## Root cause vs impact vs prevention vs detection vs recovery
 
-| Slice | For E5 |
+| Slice | For this property |
 |---|---|
-| Root cause | Client-chosen tenant. |
-| Preconditions | tenant_for({A},{B}) == B. |
-| Impact (1.1 cell) | Authorization of the tenant context. — Cross-tenant read/write at scale. |
-| Prevention | Ignore body tenant; bind from session; RLS extra. |
-| Detection | body_tenant_ignored mismatch logs. |
-| Recovery | Audit B’s data for A’s actions. |
+| Root cause | Client-chosen tenant treated as binding |
+| Preconditions | `tenant_for({A},{B}) == B` |
+| Trigger | Member of A sends tenant B in JSON/GraphQL |
+| Impact | Authorization of tenant context — cross-tenant read/write |
+| Prevention | Ignore body tenant; bind from session; RLS extra *after* that |
+| Detection | `body_tenant_mismatch` |
+| Recovery | Audit B for A's actions; revoke the confused session |
 
-## Framework defaults vs application guarantees
+## Framework defaults versus the tenant guarantee
 
-Postgres RLS with a SET tenant from the body is this bug.
+Postgres RLS will isolate whatever GUC you set. If you set it from the body, RLS enforces the **attacker's** tenant.
 
-## Mechanism limits and bypasses
+## Mechanism limits
 
-Search indexes, caches (2.2), data lakes — every copy.
+- Search, cache (2.2), and analytics copies (5.1 / `v5.0.0-14.2.3`) still need the bound tenant in the key.
+- Support impersonation without audit (E6).
+- Honest super-admin (3.3).
+- ReBAC tuples are another map, not this lab.
 
-Support impersonation without audit (E6).
+## Usability and accessibility
 
-## Residual risk
-
-Honest super-admin — E6 + 3.3.
+Tenant-switcher UI for support must be keyboard-operable and must not look like the user's own workspace (WCAG 2.2). A silent impersonation is both a 1.2 and a 1.4 failure.
 
 ## Practice
 
-List every place tenant is read from.
+List every place tenant is read from. Then run:
 
-Run `labs/E5/e5-lab` (`pytest` with `--impl vulnerable` then `--impl fixed` if the lab uses `--impl`). Map the failing test to this property.
+```
+python3 -m pytest labs/E5/e5-lab/tests --impl vulnerable
+python3 -m pytest labs/E5/e5-lab/tests --impl fixed
+```
+
+The first command must fail. The second must pass.
 
 ## Transfer
 
-Zanzibar tuple vs this binding.
+Clinic group practice switching `org_id` in JSON. Zanzibar tuple vs this binding.
 
-Clinic group practice switching org_id in JSON.
+## Residual risk
+
+Copies; silent impersonation; honest super-admin. `v5.0.0-8.3.2` Level 3 grant-change residual.
 
 ## Non-goals
 
-Live targets, real PII, weaponized copy-paste exploits. Gates 0–10 and milestones M0–M5 stay **not-attempted** without learner/product evidence. Answer keys are not in this file.
+Live SaaS tenants. API Top 10 as the syllabus. Gate 7 / M2.

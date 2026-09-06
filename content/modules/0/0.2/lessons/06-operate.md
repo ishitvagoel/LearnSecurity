@@ -1,40 +1,43 @@
-# 0.2 — Diagnostic and adaptive bridge (6 Operate)
+# 0.2-LO-06 — Detect phase1_skip_denied without back-dating Gate 1
 
-**Kind:** operations-exercise  
-**Loop step:** 6 Operate  
-**Standards:** NICE Secure Systems Development competencies (informative); this course’s Gate 1 evidence rules. A quiz vendor’s score report is not ASVS.
+**Kind:** operations-exercise
+**Loop step:** 6 Operate
+**Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels.
 
-## Property (start here)
+## Prevention is not absolute
 
-A placement quiz score of 100 does not skip 1.2 complete mediation, Gate 1 evidence, or the authority matrix. Adaptive paths may skip *orientation prose*, never *invariants*.
+A new “fast-track seniors” flag can reintroduce score-as-skip after the predicate was “set once.” Pair detect and recover. Do not back-date Gate 1.
 
-## Attacker capabilities and trust assumptions
+## Mental model: denied skip is a signal
 
-- **Attacker:** A hurried learner optimizing for the shortest click-path; a future hiring manager who equates a badge with tenant isolation.
-- **Trust:** The diagnostic repository is local and honest. Quiz items are not production secrets.
-Prevention is not absolute. Pair detect and recover. Do not log secrets or note bodies (3.1 / 5.1).
+```mermaid
+flowchart TD
+  Call[quiz skip] --> Ok{Phase 1 skip?}
+  Ok -->|attempted| Metric["phase1_skip_denied += 1"]
+  Metric --> Reopen[keep 1.2 required]
+```
 
 | Outcome | This module |
 |---|---|
-| Detect | Path log: skipped ids vs required 1.2/1.3/1.4. |
-| Signal (no bodies) | Audit skipped-module list on each cohort export. |
-| Revoke / recover | Re-open 1.2; do not back-date Gate 1. |
-| Residual | Bridge units still needed for Git/SQL/HTTP gaps — those skips are OK when diagnostics show skill. |
-
-CSF 2.0 Detect / Respond / Recover name *outcomes*. They do not prove ASVS.
+| Detect | `phase1_skip_denied` |
+| Signal | learner id, requested skip; never quiz item text if it leaks lab keys |
+| Recover | Re-open 1.2; do not back-date Gate 1 |
+| Residual | Memorized answers; tooling gaps |
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/0.2/0.2-bridge`.
+Write one log line you would accept. Tie it to `labs/0.2/0.2-bridge`.
+
+```
+log_denied reason=phase1_skip_denied learner=dev-1 requested=1.2
+```
+
+Reject any line that includes quiz keys, a badge screenshot, or “Gate 1 complete.”
 
 ## Transfer
 
-A vendor SANS/OSCP score used to skip your team’s threat-model review.
-
-## Usability
-
-Diagnostic UI must not be color-only “green = skip Phase 1” (WCAG 2.2 1.4.1).
+Clinic: deny the onboarding skip; do not paste the quiz items into HR.
 
 ## Non-goals
 
-SIEM product names are not the property. Keys stay out of lessons.
+A NICE work-role name is not the property. Gate 0 stays not-attempted.

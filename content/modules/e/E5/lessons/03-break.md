@@ -1,50 +1,50 @@
-# E5 — Large-scale authorization and multi-tenant SaaS (3 Break)
+# E5-LO-03 — Observe body override, do not probe public tenants
 
-**Kind:** mechanism-lab  
-**Loop step:** 3 Break  
-**Standards:** ASVS V4 plus row security as *extra*; ReBAC/Zanzibar as patterns. RLS is not a substitute for 1.2.
+**Kind:** mechanism-lab
+**Loop step:** 3 Break
+**Standards:** ASVS `v5.0.0-8.2.1`. Lab policy: local only.
 
-## Property (start here)
+## Authorized scope
 
-A request body tenant:B must not switch the bound tenant A. Tenant is taken from the session/binding, not from the JSON body (1.3 confused deputy).
+`labs/E5/e5-lab` only. Synthetic tenants A and B. Do **not** send `org_id` to a production SaaS, clinic tenant, or classmate preview as the exercise.
 
-## Attacker capabilities and trust assumptions
+**Forbidden outcome:** JSON body switches the bound tenant.
 
-- **Attacker:** Member of A sending tenant B in GraphQL/JSON.
-- **Trust:** Local tenant_for(session, body).
-**Forbidden outcome:** JSON body switches the bound tenant
+## Mental model: body wins
 
-**Authorized scope:** `labs/E5/e5-lab` only. Do not target other hosts. Do not paste weaponized payloads into notes.
-
-## What to observe
-
-vulnerable rls.py trusts body.
-
-The vulnerable tree demonstrates **cause** (wrong mediation/interpreter/trust), not a trophy exploit. Preconditions: tenant_for({A},{B}) == B.
-
-## Vulnerable fixture (local)
-
-```python
-def tenant_for(session, body):
-    return body.get('tenant', session['tenant'])
+```mermaid
+flowchart TD
+  Sess[session A] --> Fn[tenant_for]
+  Body[body B] --> Fn
+  Fn --> Out[tenant B]
 ```
+
+`--impl vulnerable` prefers `body["tenant"]`. That is 7.1 mass assignment of the isolation key.
+
+## What to read in the fixture
+
+`vulnerable/rls.py` returns the body tenant when present. Tests require `tenant_for({A},{B}) == A`. Do not paste the fixture into a public API.
 
 ## Root cause vs impact
 
 | Slice | Lab |
 |---|---|
-| Root cause | Client-chosen tenant. |
-| Impact | Cross-tenant read/write at scale. |
-| Not the lesson | A scanner name or Top 10 mnemonic as the definition |
+| Root cause | Client-chosen tenant treated as binding |
+| Impact | Cross-tenant read/write |
+| Not the lesson | API1 or an RLS product as the definition |
 
 ## Practice
 
-Run tests against `vulnerable/` (they **must fail** on the forbidden outcome). Record the test name. Command shape: `pytest labs/E5/e5-lab/tests -q --impl vulnerable` (or the README if fixtures differ).
+```
+python3 -m pytest labs/E5/e5-lab/tests --impl vulnerable
+```
+
+Record `test_body_cannot_switch_tenant`. Do not probe public hosts.
 
 ## Transfer
 
-Zanzibar tuple vs this binding.
+Clinic group practice: predict the switch without leaving this directory.
 
 ## Non-goals
 
-No live-target instructions. Synthetic data only.
+No live-SaaS, production-tenant, or public GraphQL instructions.
