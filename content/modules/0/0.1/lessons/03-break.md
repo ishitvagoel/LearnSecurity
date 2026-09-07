@@ -19,7 +19,7 @@ flowchart TD
   Any[any URL] --> True[authorized]
 ```
 
-`--impl vulnerable` returns true for every URL. The broken files show **why** (permission got mixed up with “the computer answered”), not a trophy scan of a public host. You do not need to fetch the host. You must not fetch the host.
+`--impl vulnerable` returns true for every URL. The broken files show **why** (permission got mixed up with “the computer answered”), not a scan of a public host. You do not need to fetch the host. You must not fetch the host.
 
 A testing guide names *how* to test an **in-scope** app. It does not put `example.com` on the list.
 

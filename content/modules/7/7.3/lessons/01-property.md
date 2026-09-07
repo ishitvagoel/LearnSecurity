@@ -53,7 +53,7 @@ If you parse JSON then re-serialize, the MAC is over a different document than t
 
 FastAPI will accept a POST with an empty header. A vendor SDK’s verify helper is not your custom MAC if you hash parsed JSON. JWT login of the *user* is a different rule.
 
-What this practice is supposed to show: `accept` check, on **this** practice string, is false when the signature is missing. The folder is `labs/7.3/7.3-lab`. Local only. No live webhooks.
+What this practice is supposed to show: `accept` check, on **this** practice string, is false when the signature is missing. Practice files are in `labs/7.3/7.3-lab`. Local only. No live webhooks.
 
 ## What the tool cannot do
 

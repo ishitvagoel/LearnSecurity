@@ -26,7 +26,7 @@ Provenance says *how* the artifact was built. It does not replace digest match. 
 
 ## What the repaired files must show
 
-Check `fixed/lock.py` against the list above. Do not treat the snippet as a production installer.
+Open `fixed/lock.py`. Do not treat the snippet as a production installer.
 
 | After the fix | Must be true |
 |---|---|

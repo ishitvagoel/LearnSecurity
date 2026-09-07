@@ -27,9 +27,9 @@ flowchart TD
   Slot --> Leak["returns secretA"]
 ```
 
-The broken files show **cause** (shared store, incomplete key), not a trophy exploit. What has to be true first: shared dict; path-only key; company A filled the entry. What the attacker can do: a company B person who can `cache_get` the same path after company A’s put — no DNS hijack, no TLS break. What is supposed to stop this: the origin’s bound company is the only identity allowed in the key. TLS is not even in the practice files — on purpose. If the rule needed TLS to be “off,” the practice would be teaching the wrong sentence.
+The broken files show **cause** (shared store, incomplete key), not an exploit recipe. What has to be true first: shared dict; path-only key; company A filled the entry. What the attacker can do: a company B person who can `cache_get` the same path after company A’s put — no DNS hijack, no TLS break. What is supposed to stop this: the origin’s bound company is the only identity allowed in the key. TLS is not even in the practice files — on purpose. If the rule needed TLS to be “off,” the practice would be teaching the wrong sentence.
 
-## What to look at: the cause, not a trophy
+## What to look at: the cause, not a hunt
 
 Read `vulnerable/cache.py` in the broken files as a design note. It accepts a `tenant` argument on put and get, then stores and looks up **only** `path`. Company B’s get returns company A’s body. `X-Forwarded-Host` is not required.
 

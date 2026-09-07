@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `allowed`. It does not open a network. The failure is already in the function: it treats any `http` or `https` scheme as fine. A link-local metadata URL counting as an allowed peer is a **failed rule**, not a trophy fetch of cloud identity.
+The practice is not a website you attack. It is a tiny Python `allowed`. It does not open a network. The failure is already in the function: it treats any `http` or `https` scheme as fine. A link-local metadata URL counting as an allowed peer is a **failed rule**, not a live fetch of cloud identity.
 
 > A link-local metadata URL is not an allowed peer. `allowed` must be false for that named string. This practice checks the predicate only. It does not fetch.
 
@@ -29,11 +29,11 @@ flowchart TD
 
 The broken files show **cause** (the server would dial whoever the URL names). The link-local address is a **named destination string**. Do not send packets to it. What has to be true first: `allowed` returns true for any `http`/`https` scheme. You do not need a GET. You must not.
 
-Use an allow-list of protocols, hosts, paths, and ports before calling another service. This week's check is the predicate, not a network trophy. A famous-bugs nickname for server-side requests is awareness after the cause, not that check.
+Use an allow-list of protocols, hosts, paths, and ports before calling another service. This week's check is the predicate, not a live fetch. A famous-bugs nickname for server-side requests is awareness after the cause, not that check.
 
 ## What to look at — cause, not a fetch
 
-Read `vulnerable/ssrf.py`. It returns true for any `http`/`https` scheme. Tests:
+Open `vulnerable/ssrf.py`. It returns true for any `http`/`https` scheme. Tests:
 
 - `test_link_local_metadata_is_denied`
 - `test_loopback_is_denied`

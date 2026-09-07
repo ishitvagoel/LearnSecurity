@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `argv_for_list` and `uses_shell`. It does not start a process. The failure is already in the function: it glues the name into a shell string. That is a **failed rule**, not a trophy command.
+The practice is not a website you attack. It is a tiny Python `argv_for_list` and `uses_shell`. It does not start a process. The failure is already in the function: it glues the name into a shell string. That is a **failed rule**, not a live command.
 
 > The export name is an argv element, not shell grammar. `argv_for_list` must not start `sh -c`.
 
@@ -27,13 +27,13 @@ flowchart TD
   Sh --> Shell[uses_shell true]
 ```
 
-The broken files show **cause** (name concatenated into a shell string), not a command-execution trophy. What has to be true first: `argv_for_list` returns `['sh', '-c', 'ls ' + name]` and `uses_shell` is true. You do not need to execute the list. You must not.
+The broken files show **cause** (name concatenated into a shell string), not a live command. What has to be true first: `argv_for_list` returns `['sh', '-c', 'ls ' + name]` and `uses_shell` is true. You do not need to execute the list. You must not.
 
 OS calls have to pass arguments as parameters. A scanner name for this family is a weakness label, not that check. The class of hostile names is text a shell would treat as extra grammar — extra commands, substitutions, or pipes. Treat it as data for one argv slot. Do not paste that class into notes as a cookbook. Honest name `notes` is enough, because the check looks at shape.
 
 ## What to look at — cause, not a dump
 
-Read `vulnerable/argv.py`. It concatenates the name into a `sh -c` string. Tests:
+Open `vulnerable/argv.py`. It concatenates the name into a `sh -c` string. Tests:
 
 - `test_does_not_invoke_shell`
 - `test_argv_is_program_then_name`
@@ -44,7 +44,7 @@ You do not need a new name string.
 |---|---|---|
 | `argv_for_list` starts `sh -c` | Name glued into shell grammar | A scanner name |
 | `uses_shell` is true | Shell still in the path | “subprocess will handle it” |
-| Honest `notes` still glued in | Data treated as grammar | A live command trophy |
+| Honest `notes` still glued in | Data treated as grammar | A live command |
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

@@ -29,7 +29,7 @@ flowchart LR
 
 JWT as a format is not the channel. TLS does not erase the access log. FastAPI and Next.js will still put query params in the address bar unless the parser refuses them. A one-time magic link that is later exchanged for `sc_session` is later work; leaving `?token=` as the standing session is this rule.
 
-Query `access_token` (or `?token=` on the appointment SMS) yields `None`, while a cookie or Bearer header with the same value may still work. Referer redaction and a scrubbed logger are sister cells, not this parser. The local check is `test_query_string_token_is_rejected` — against `labs/4.3/4.3-lab`, not a live appointment SMS.
+Query `access_token` (or `?token=` on the appointment SMS) yields `None`, while a cookie or Bearer header with the same value may still work. Referer redaction and a scrubbed logger are related leftover, not this parser. The local check is `test_query_string_token_is_rejected` — against `labs/4.3/4.3-lab`, not a live appointment SMS.
 
 ## What is not good enough
 

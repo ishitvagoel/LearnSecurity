@@ -29,11 +29,11 @@ flowchart TD
 
 The token is never consumed. Sequential double-accept is enough. You do not need a new token string. The leftover still returning true *is* the leak.
 
-Lock so a limited seat cannot be booked twice. This week's check is sequential consume-once, not a threaded trophy.
+Lock so a limited seat cannot be booked twice. This week's check is sequential consume-once, not a threaded race.
 
 ## What to look at — cause, not a dump
 
-Read `vulnerable/invite.py`. It returns true every time. `reset()` exists so tests start clean. `_used` in the broken files is unused. Tests:
+Open `vulnerable/invite.py`. It returns true every time. `reset()` exists so tests start clean. `_used` in the broken files is unused. Tests:
 
 - `test_invite_token_is_single_use` — second `accept("t1")` is false
 - `test_distinct_tokens_are_independent` — `t2` still succeeds once on the repaired files

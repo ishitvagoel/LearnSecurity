@@ -57,7 +57,7 @@ If the key store is down, fail closed for share (do not insert “just this once
 
 ## What the framework does vs what you still have to check
 
-FastAPI, Next.js `fetch` retries, and HTTP retry logic do not remember your share list. A unique constraint on `(note_id)` would block **any** second share, including a legitimate new key — wrong check. What this practice is supposed to show: two calls with `k1`, `share_count() == 1`. The folder is `labs/2.4/2.4-state-time`. No live race against a public API.
+FastAPI, Next.js `fetch` retries, and HTTP retry logic do not remember your share list. A unique constraint on `(note_id)` would block **any** second share, including a legitimate new key — wrong check. What this practice is supposed to show: two calls with `k1`, `share_count() == 1`. Practice files are in `labs/2.4/2.4-state-time`. No live race against a public API.
 
 ## What the tool cannot do
 

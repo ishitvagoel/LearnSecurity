@@ -51,4 +51,4 @@ Clinic scan filename. A test that only asserts HTTP 200 on upload is not this ru
 
 ## What this page is not doing
 
-Do not add a host-file trophy. Do not log original filenames if they are patient ids. Answer keys are not on this site.
+Do not treat a host-file screenshot as proof. Do not log original filenames if they are patient ids. Answer keys are not on this site.

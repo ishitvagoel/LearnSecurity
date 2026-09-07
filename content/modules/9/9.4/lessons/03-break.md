@@ -32,7 +32,7 @@ The coverage lesson already said status is not coverage. This check is **unowned
 
 ## What to look at — cause, not a dump
 
-Read `vulnerable/sast.py`. It returns true for every pair. Tests:
+Open `vulnerable/sast.py`. It returns true for every pair. Tests:
 
 - `test_unmapped_high_blocks_ship`
 - `test_mapped_high_may_ship` — a mapped HIGH may pass on both
@@ -59,7 +59,7 @@ You do not need a new finding id.
 | How you recover later | Map it or fix it; do not hide it quietly |
 | Out of scope | A product name, live GitHub, or claiming the verification gate is done |
 
-A web framework will still ship if CI’s `ship_ok` is always true. The app’s promise this week is: **this** practice, empty map plus HIGH is deny.
+A web framework will still ship if CI’s `ship_ok` is always true. What this practice is supposed to show: practice, empty map plus HIGH is deny.
 
 ## Practice
 

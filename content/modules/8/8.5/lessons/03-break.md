@@ -34,7 +34,7 @@ The log lesson (3.1) already refused bodies in logs. This check is **the mobile 
 
 ## What to look at — cause, not a dump
 
-Read `vulnerable/crash.py`. It returns a dict with `'note': note_body`. Tests:
+Open `vulnerable/crash.py`. It returns a dict with `'note': note_body`. Tests:
 
 - `test_crash_report_omits_note_body`
 - `test_honest_crash_still_includes_stack` — a stack identifier may remain
@@ -61,7 +61,7 @@ You do not need a new field name.
 | How you recover later | Keep the redact; purge the vendor; tell people if the copy left what you trust |
 | Out of scope | A crash product name, a live vendor, or the store form as redaction |
 
-A crash SDK will ship whatever you attach. Private storage on the phone (8.2) does not encrypt the HTTPS payload. A web crash product (10.5) is the same field on the server. The app's promise this week is: **this** practice, `'secret'` is absent from the report.
+A crash SDK will ship whatever you attach. Private storage on the phone (8.2) does not encrypt the HTTPS payload. A web crash product (10.5) is the same field on the server. What this practice is supposed to show: practice, `'secret'` is absent from the report.
 
 ## Practice
 

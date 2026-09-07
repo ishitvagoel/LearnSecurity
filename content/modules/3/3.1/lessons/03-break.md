@@ -32,7 +32,7 @@ You do not need a production drain. The substring in the returned line *is* the 
 
 ## What to look at — cause, not a dump
 
-Read `vulnerable/classify.py`. `log_event` returns `f"{event}: {note_body}"`. The test asserts the body substring is absent **and** a redaction marker (`redacted` or `confidential`) is present.
+Open `vulnerable/classify.py`. `log_event` returns `f"{event}: {note_body}"`. The test asserts the body substring is absent **and** a redaction marker (`redacted` or `confidential`) is present.
 
 You do not need a new body string.
 
@@ -55,7 +55,7 @@ You do not need a new body string.
 | How you recover later | Purge matching logs; rotate if tokens were present; do not log the body again while looking |
 | Out of scope | A privacy-policy URL, a data-loss product name, or “logs are internal” |
 
-FastAPI does not know Confidential. Access logs will store query strings — a later topic. Regex after the fact misses encodings — a later topic. The app's promise this week is: **this** line does not contain `tenant-A-secret-body`.
+FastAPI does not know Confidential. Access logs will store query strings — a later topic. Regex after the fact misses encodings — a later topic. What this practice is supposed to show: line does not contain `tenant-A-secret-body`.
 
 ## Practice
 

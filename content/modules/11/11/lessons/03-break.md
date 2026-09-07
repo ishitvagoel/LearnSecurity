@@ -33,7 +33,7 @@ Earlier weeks already said check every access. Time, revoke, leftover worker ses
 
 ## What to look at — cause, not a dump
 
-Read `vulnerable/capstone.py`. It ignores `revoke` and returns the body. Tests:
+Open `vulnerable/capstone.py`. It ignores `revoke` and returns the body. Tests:
 
 - `test_revoked_share_cannot_read`
 - `test_owner_may_still_read_after_revoke` — A may pass on both

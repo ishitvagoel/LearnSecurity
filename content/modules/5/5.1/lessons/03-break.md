@@ -34,7 +34,7 @@ Documented retention has to be actually carried out. Encrypting a warehouse you 
 
 ## What to look at — cause, not a dump
 
-Read `vulnerable/lifecycle.py`. `delete_account` only pops `NOTES`. Tests:
+Open `vulnerable/lifecycle.py`. `delete_account` only pops `NOTES`. Tests:
 
 - `test_deleted_account_leaves_no_analytics_body`
 - `test_deleted_account_leaves_no_search_copy`

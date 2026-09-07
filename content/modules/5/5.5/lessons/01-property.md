@@ -51,7 +51,7 @@ Parameters without 1.2 still leak through honest queries. Who-is-allowed without
 
 ## What the framework does vs what you still have to check
 
-SQLAlchemy `text()` with an f-string is still concat. An ORM `.filter` that interpolates a raw string is still concat. A row-level rule left off “for tests” is not a who-is-allowed table. The app's promise: `fetch_sql` is not a concatenated string. The folder is `labs/5.5/5.5-lab`. Fake data only. No live database.
+SQLAlchemy `text()` with an f-string is still concat. An ORM `.filter` that interpolates a raw string is still concat. A row-level rule left off “for tests” is not a who-is-allowed table. What this practice is supposed to show: `fetch_sql` is not a concatenated string. Practice files are in `labs/5.5/5.5-lab`. Fake data only. No live database.
 
 ## What the tool cannot do
 

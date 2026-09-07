@@ -51,7 +51,7 @@ A quota is not encryption and not deletion. It bounds how many copies you mint.
 
 ## What the framework does vs what you still have to check
 
-A web page with `disabled={count>=3}` is not the server. FastAPI has no default export budget. Autoscaling spends more money; it does not enforce the cap. The app’s promise: `allow(4)` is false in the lab window. The folder is `labs/6.7/6.7-lab`. Fake counts only. No live traffic.
+A web page with `disabled={count>=3}` is not the server. FastAPI has no default export budget. Autoscaling spends more money; it does not enforce the cap. What this practice is supposed to show: `allow(4)` is false in the lab window. Practice files are in `labs/6.7/6.7-lab`. Fake counts only. No live traffic.
 
 ## What the tool cannot do
 

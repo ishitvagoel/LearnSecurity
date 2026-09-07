@@ -22,11 +22,11 @@ flowchart TD
 
 The repaired files require `retest == "pass"`. Production still needs that pass to be the *same* bad result (bob must not read alice's note) — a well-labeled `"pass"` on a different URL is a lying retest. Extra fields on the same note are still leftover. If a role change is supposed to take effect right away, you still need a retest of *the cache after the role change*, not a different endpoint.
 
-Defect lists want bugs verified as fixed. This week's check covers close-without-retest.
+Defect lists want bugs verified as fixed. This week's check is about close-without-retest.
 
 ## What the repaired files must show
 
-Check `fixed/pentest.py` against the list above. Do not treat the snippet as a production ticket product.
+Open `fixed/pentest.py`. Do not treat the snippet as a production ticket product.
 
 | After the fix | Must be true |
 |---|---|

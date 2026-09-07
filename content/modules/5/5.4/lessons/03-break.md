@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `channel_is_https`. Fake headers and a `server_scheme` string. It does not open a socket or a CDN. A client `X-Forwarded-Proto: https` on an `http` socket still counting as TLS is a **failed rule**, not a trophy strip attack.
+The practice is not a website you attack. It is a tiny in-process `channel_is_https`. Fake headers and a `server_scheme` string. It does not open a socket or a CDN. A client `X-Forwarded-Proto: https` on an `http` socket still counting as TLS is a **failed rule**, not a strip attack.
 
 > A client Forwarded-Proto header is not TLS. `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` must be false.
 
@@ -31,9 +31,9 @@ The broken files show **cause** (the app believes the client about the channel),
 
 TLS has to be on the public HTTP service with no cleartext fallback. A client header is not that TLS.
 
-## What to look at: the cause, not a trophy
+## What to look at: the cause, not a hunt
 
-Read `vulnerable/channel.py`. It returns true if the header is `https` **or** the socket is `https`. Checks:
+Open `vulnerable/channel.py`. It returns true if the header is `https` **or** the socket is `https`. Checks:
 
 - `test_client_forwarded_proto_is_not_tls`
 - `test_plain_http_is_not_https`

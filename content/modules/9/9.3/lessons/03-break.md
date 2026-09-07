@@ -32,7 +32,7 @@ Checklists tell you *what* to consider. They do not make `assert r.status_code =
 
 ## What to look at — cause, not a dump
 
-Read `vulnerable/stest.py`. It returns true when `status_asserted` is set. Tests:
+Open `vulnerable/stest.py`. It returns true when `status_asserted` is set. Tests:
 
 - `test_http_200_only_is_not_a_security_test`
 - `test_forbidden_outcome_named_is_a_security_test` — named what must not happen (and maybe status too) may pass on both
@@ -59,7 +59,7 @@ You do not need a new descriptor key.
 | How you recover later | Add the isolation test; keep 200-only as product tests |
 | Out of scope | A testing-guide chapter; live fuzz; claiming a later gate |
 
-A FastAPI test client 200 is a product test. Snapshot tests are not isolation. Line coverage is not the isolation check. The app's promise this week is: **this** practice, 200-only is not a security test.
+A FastAPI test client 200 is a product test. Snapshot tests are not isolation. Line coverage is not the isolation check. What this practice is supposed to show: practice, 200-only is not a security test.
 
 ## Practice
 

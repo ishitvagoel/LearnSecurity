@@ -31,9 +31,9 @@ The broken files show **cause** (path grammar mixed with data). The name `../out
 
 An awareness list that names “path walk” is not the failing check.
 
-## What to look at: the cause, not a trophy
+## What to look at: the cause, not a hunt
 
-Read `vulnerable/path.py`. It joins the name onto `/tmp/sc-lab` and returns the string. Checks:
+Open `vulnerable/path.py`. It joins the name onto `/tmp/sc-lab` and returns the string. Checks:
 
 - `test_dotdot_does_not_escape_root` — `ValueError` **or** resolved path still under the folder
 - `test_honest_relative_stays_under_root`
@@ -51,7 +51,7 @@ You do not need a new name.
 | How you stop it | Canonicalize then prefix; fail closed if uncertain |
 | How you notice | `path_escape_denied`; never the raw filename if it is a patient id |
 | How you recover | Deny; audit; restore if a file landed outside |
-| Not the lesson | An awareness-list name, UUID rename, or a host-file trophy |
+| Not the lesson | An awareness-list name, UUID rename, or a host-file hunt |
 
 ## What the framework does vs what you still have to check
 

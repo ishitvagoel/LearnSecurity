@@ -32,7 +32,7 @@ The secrets lesson already said keep secrets out of traces. This check is **the 
 
 ## What to look at — cause, not a dump
 
-Read `vulnerable/cfg.py`. It returns true for every pair. Tests:
+Open `vulnerable/cfg.py`. It returns true for every pair. Tests:
 
 - `test_prod_debug_must_not_boot`
 - `test_prod_without_debug_may_boot` — `("prod", False)` may pass on both

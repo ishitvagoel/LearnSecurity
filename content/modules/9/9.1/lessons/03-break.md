@@ -32,7 +32,7 @@ The isolation lessons (1.2 / 4.4) already refused company B reading company A. T
 
 ## What to look at — cause, not a dump
 
-Read `vulnerable/trace.py`. It returns true if any test dict has `req == req_id`. Tests:
+Open `vulnerable/trace.py`. It returns true if any test dict has `req == req_id`. Tests:
 
 - `test_status_only_row_is_not_coverage`
 - `test_isolation_assert_may_count_as_coverage` — an honest isolation flag may pass on both
@@ -59,7 +59,7 @@ You do not need a new requirement id.
 | How you recover later | Add the test; do not backfill “done” |
 | Out of scope | A checklist PDF page, a live portal, or claiming the verification gate |
 
-A green CI job is not AUTHZ-1. Copied-wholesale checklists are inventory, not a tailored matrix. A FastAPI TestClient 200 is a product test (9.3). The app’s promise this week is: **this** practice, status-only is not covered.
+A green CI job is not AUTHZ-1. Copied-wholesale checklists are inventory, not a tailored matrix. A FastAPI TestClient 200 is a product test (9.3). What this practice is supposed to show: practice, status-only is not covered.
 
 ## Practice
 

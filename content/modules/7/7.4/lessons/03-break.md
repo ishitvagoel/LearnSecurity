@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `exporter`. It does not open a live queue. The failure is already in the function: leftover `user_session` wins if it is present. That is a **failed rule**, not a trophy against a public broker.
+The practice is not a website you attack. It is a tiny Python `exporter`. It does not open a live queue. The failure is already in the function: leftover `user_session` wins if it is present. That is a **failed rule**, not an attack on a public broker.
 
 > A leftover user session is not worker identity. `exporter({"user_session": "alice", "service": None})` must be `None`. `exporter({"service": "worker-sc"})` may be `"worker-sc"`.
 
@@ -31,9 +31,9 @@ The broken files show **cause** (ambient user context). Do not aim anything exce
 
 Backend jobs should log in as their own accounts, not leftover people. Module 4.1 already revoked leftover HTTP sessions. This check is **whether the worker still is that session**. A zero-trust paper does not replace the check.
 
-## What to look at: the cause, not a trophy
+## What to look at: the cause, not a hunt
 
-Read `vulnerable/worker.py`. It returns `user_session` if present. Tests:
+Open `vulnerable/worker.py`. It returns `user_session` if present. Tests:
 
 - `test_user_session_is_not_worker_identity`
 - `test_service_principal_is_worker_identity`

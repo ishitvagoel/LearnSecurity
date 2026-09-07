@@ -51,7 +51,7 @@ Someone treated the owner’s 200 as proof that isolation works. That is the cau
 
 A FastAPI test client returning 200 is a product test. Snapshot tests are not isolation. Fuzzing with no named bad result is noise (later looking-around, 9.5).
 
-What this practice is supposed to show: `is_security_test({"status_asserted": True})` is false. The local check is `labs/9.3/9.3-lab`. Fake test descriptors only. No live apps.
+What this practice is supposed to show: `is_security_test({"status_asserted": True})` is false. Practice files are in `labs/9.3/9.3-lab`. Fake test descriptors only. No live apps.
 
 ## What the tool cannot do
 

@@ -20,7 +20,7 @@ flowchart TD
 
 Do not accept “we sent the processor the header” as membership. Production still needs the webhook path to use the same key — a second insert from a webhook is a lying once. Clients that mint a new key each click walk around this check. The step to succeed all the way or roll back. Connection-pool limits are advanced leftover.
 
-There should also be no double-booking. This week's check covers two k1.
+There should also be no double-booking. This week's check is about two k1.
 
 ## What the repaired files must show
 

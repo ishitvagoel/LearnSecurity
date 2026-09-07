@@ -63,7 +63,7 @@ Oral acceptance treated as a register row. That is the cause. The unowned hole t
 
 A ticket workflow named “risk” will accept whatever fields you leave optional. Optional owner is this bug.
 
-The app’s promise this week is: **this** `accept_exception({"owner": "", "review_by": None})` is false, and a complete record may accept. The folder is `labs/E6/e6-lab`. Fake owner strings only. No live disclosure inbox. No real people’s notes.
+What this practice is supposed to show: `accept_exception({"owner": "", "review_by": None})` is false, and a complete record may accept. Practice files are in `labs/E6/e6-lab`. Fake owner strings only. No live disclosure inbox. No real people’s notes.
 
 ## What the tool cannot do
 

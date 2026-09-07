@@ -28,7 +28,7 @@ Naming the field is empty until each place has a deny or allow. This check is th
 
 ## What the repaired files must show
 
-Check `fixed/classify.py` against the list above. Do not treat the snippet as a production logger.
+Open `fixed/classify.py`. Do not treat the snippet as a production logger.
 
 | After the fix | Must be true |
 |---|---|

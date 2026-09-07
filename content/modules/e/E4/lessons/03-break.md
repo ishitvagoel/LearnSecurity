@@ -35,9 +35,9 @@ The broken files copy `src[: declared_len + 8]`. For an 8-byte source that is th
 
 An earlier topic already said path length is checking every path for *which file*. This rule is **spatial length at the copy**. This page does not finish a check-in.
 
-## What to look at: the cause, not a trophy
+## What to look at: the cause, not a hunt
 
-Read `vulnerable/copy.py`. It returns more than `bufsize` bytes. Checks:
+Open `vulnerable/copy.py`. It returns more than `bufsize` bytes. Checks:
 
 - `test_copy_does_not_exceed_buffer`
 - `test_short_copy_may_fit` — short honest copy may pass on both

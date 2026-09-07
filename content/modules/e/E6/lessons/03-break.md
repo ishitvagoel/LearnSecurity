@@ -32,7 +32,7 @@ Earlier lessons already said posters are not gates. This check is **accountabili
 
 ## What to look at — cause, not a dump
 
-Read `vulnerable/risk.py`. It returns true for every dict. Tests:
+Open `vulnerable/risk.py`. It returns true for every dict. Tests:
 
 - `test_exception_needs_owner_review_and_wcag`
 - `test_complete_exception_may_be_accepted` — alice + date + accessibility flag may pass on both

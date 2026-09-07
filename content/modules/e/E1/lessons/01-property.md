@@ -55,7 +55,7 @@ Someone treated model output as policy. That is the cause. An interpreter reache
 
 A tool library will expose whatever tools you pass. A system prompt is another string the model may ignore.
 
-What this practice is supposed to show: `run_tool("exec_sql", {})` is `None`. The local check is `labs/E1/e1-lab`. Fake tool names only. No live models.
+What this practice is supposed to show: `run_tool("exec_sql", {})` is `None`. Practice files are in `labs/E1/e1-lab`. Fake tool names only. No live models.
 
 ## What the tool cannot do
 

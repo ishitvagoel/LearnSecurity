@@ -32,7 +32,7 @@ The first lesson already refused a name as a digest. This practice is **whether 
 
 ## What to look at — cause, not a dump
 
-Read `vulnerable/lock.py`. It returns true for every pair. Tests:
+Open `vulnerable/lock.py`. It returns true for every pair. Tests:
 
 - `test_hash_mismatch_refuses_install`
 - `test_matching_digest_may_install` — matching hashes may pass on both
@@ -59,7 +59,7 @@ You do not need a new digest string.
 | How you recover later | Pin known-good; rotate CI secrets (5.3) |
 | Out of scope | An SBOM product, live npm, or claiming the ship gate |
 
-`npm install` latest is a convenience default. Dependabot opens pull requests; it does not verify bytes at install. A pip install without a hash requirement will take whatever the index returns. The app’s promise this week is: **this** practice, `aaa` vs `bbb` is deny.
+`npm install` latest is a convenience default. Dependabot opens pull requests; it does not verify bytes at install. A pip install without a hash requirement will take whatever the index returns. What this practice is supposed to show: practice, `aaa` vs `bbb` is deny.
 
 ## Practice
 

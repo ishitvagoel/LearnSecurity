@@ -23,11 +23,11 @@ flowchart TD
 
 The repaired files use a `set` of consumed tokens. Production still needs a lock for true concurrent accepts — named leftover, not this sequential pytest. Token in the query string is 4.3. Email as proof of the recipient is 4.2. Password reset and later jobs (7.4) are the same family with different “once” meanings.
 
-There should be no double-booking. This week's check covers sequential `accept`.
+There should be no double-booking. This week's check is about sequential `accept`.
 
 ## What the repaired files must show
 
-Check `fixed/invite.py` against the list above. Do not treat the snippet as a production invite store.
+Open `fixed/invite.py`. Do not treat the snippet as a production invite store.
 
 | After the fix | Must be true |
 |---|---|

@@ -38,7 +38,7 @@ Base64 decode of the stored stand-in is not the SSN. Renaming the column or wrap
 
 1. who can act (database admin; stolen disk — **not** a live clinic);
 2. what you trust (which authenticated encryption plus key is trusted; the column name is not);
-3. what must not happen (Base64 round-trip of the stand-in, not a legal label);
+3. what must not happen (Base64 round-trip of the stand-in);
 4. a test idea on **local** files only (decode of `protect(ssn)` is not the SSN — never on the real clinic);
 5. leftover (key in the same row; nonce reuse is advanced; HTTPS is not at rest);
 6. whether a human “show SSN” path must stay masked until an explicit view — do not use color as the only cue.

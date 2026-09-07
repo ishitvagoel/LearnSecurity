@@ -23,7 +23,7 @@ Do not accept “we use Python” as membership in the min. Production still nee
 
 A production unpacker should **fail closed** on header/source mismatch rather than silently truncate without an error the caller can handle. This lab returns a short copy as the smallest trustworthy bound.
 
-Unstructured data must not become an overwrite path. This week's check covers destination length.
+Unstructured data must not become an overwrite path. This week's check is about destination length.
 
 ## What the repaired files must show
 

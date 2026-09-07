@@ -63,7 +63,7 @@ Fail-open defaults. That is the cause. The person who later reads a stack trace 
 
 Next.js will run with `NODE_ENV=development` if you tell compose to. FastAPI `debug=True` is a constructor argument, not a cloud setting. Django `DEBUG` is the clinic grain. Compose will start whatever you wrote.
 
-The app’s promise this week is: **this** local check, production plus debug is deny. The folder is `labs/10.4/10.4-lab`. Fake flags only. No live production hosts.
+What this practice is supposed to show: production plus debug is deny. Practice files are in `labs/10.4/10.4-lab`. Fake flags only. No live production hosts.
 
 ## What the tool cannot do
 

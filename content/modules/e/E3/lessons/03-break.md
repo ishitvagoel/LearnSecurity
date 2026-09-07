@@ -30,9 +30,9 @@ The broken files show **cause** (a side effect that is not bound to the key). Do
 
 Topics 2.4 and 6.6 already said consume-once; this rule is **money-like grain**. This site does not mark you as finished. This practice is not in card-network scope.
 
-## What to look at: the cause, not a trophy
+## What to look at: the cause, not a hunt
 
-Read `vulnerable/pay.py`. `capture` appends on every call. Checks:
+Open `vulnerable/pay.py`. `capture` appends on every call. Checks:
 
 - `test_duplicate_capture_does_not_double_charge`
 - `test_first_capture_may_charge` — first `k1` may pass on both

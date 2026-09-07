@@ -32,7 +32,7 @@ The threat-modeling lessons (3.2) already said how to write the model. This chec
 
 ## What to look at — cause, not a dump
 
-Read `vulnerable/sdl.py`. It returns true for every dict. Tests:
+Open `vulnerable/sdl.py`. It returns true for every dict. Tests:
 
 - `test_merge_requires_threat_model_id`
 - `test_pr_with_threat_model_may_merge` — `{"threat_model": "TM-12"}` may pass on both
@@ -59,7 +59,7 @@ You do not need a new pull-request key.
 | How you recover later | Add a threat-model id; re-run `merge_ok` |
 | Out of scope | A maturity score, a live GitHub org, or claiming Gate 10 |
 
-Required reviewers on GitHub are off until someone turns them on, and an admin can still bypass them. CODEOWNERS says who clicks, not what changed. FastAPI has no software-lifecycle check. The app’s promise this week is: **this** practice, an empty change is deny.
+Required reviewers on GitHub are off until someone turns them on, and an admin can still bypass them. CODEOWNERS says who clicks, not what changed. FastAPI has no software-lifecycle check. What this practice is supposed to show: practice, an empty change is deny.
 
 A design-review guide is vocabulary, not this check. Gate 10 and M4 stay **not finished**.
 

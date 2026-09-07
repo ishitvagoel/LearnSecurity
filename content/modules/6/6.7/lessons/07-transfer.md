@@ -38,7 +38,7 @@ The fourth export still has to be false. The third may still be true. Rate-limit
 
 1. who can act (scripted clinician session — not a live clinic);
 2. what you trust (server `n <= 3` is what you trust; the disabled button and an IP rate limit are not);
-3. what must not happen (`allow(4)` true, not a legal label);
+3. what must not happen (`allow(4)` true);
 4. a test idea on **local** practice files only (fourth denied — never on the real clinic);
 5. leftover (new accounts, GraphQL aliases, human timing as advanced work, extra copies from 5.1);
 6. whether a human-read “try tomorrow” must be announced, not a spinner that retries and burns the budget.

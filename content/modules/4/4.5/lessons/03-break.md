@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `accept_token`. Fake claims. It does not open an identity provider or check a real signature. A JWT minted for another API still counting as a notes-app session is a **failed rule**, not a trophy dump of a production token.
+The practice is not a website you attack. It is a tiny in-process `accept_token`. Fake claims. It does not open an identity provider or check a real signature. A JWT minted for another API still counting as a notes-app session is a **failed rule**, not a dump of a production token.
 
 > A token for another API is not a notes-app session. `accept_token({"sub": "alice", "aud": "other-api"}, "securecollab-api")` must be false.
 
@@ -28,13 +28,13 @@ flowchart TD
   Sub -->|no| False[False]
 ```
 
-The broken files show **cause** (audience never consulted), not a trophy dump of a production access token. What has to be true first: `accept_token` returns true when `sub` is in the dict. You do not need a signed JWT. You must not paste a live one.
+The broken files show **cause** (audience never consulted), not a dump of a production access token. What has to be true first: `accept_token` returns true when `sub` is in the dict. You do not need a signed JWT. You must not paste a live one.
 
 A library saying the signature is fine is a tool observation, not that sentence.
 
-## What to look at: the cause, not a trophy
+## What to look at: the cause, not a hunt
 
-Read `vulnerable/jwt_aud.py`. `accept_token` returns true when `sub` is in the dict. Checks:
+Open `vulnerable/jwt_aud.py`. `accept_token` returns true when `sub` is in the dict. Checks:
 
 - `test_wrong_audience_is_rejected`
 - `test_missing_audience_is_rejected`

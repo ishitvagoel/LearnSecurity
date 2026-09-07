@@ -24,11 +24,11 @@ flowchart TD
 
 Do not accept “we called revoke” as consultation. The repaired files require owner-or-grant on this `read`. Production still needs every *other* read path — delayed workers and phone caches can serve the old grant. Copies already sent are gone from what this check can prove. Access-rights change inside an already-open session without signing in again is extra, advanced work: storing a revoke row is not in-session deny.
 
-Permission has to be enforced. This week's check covers post-revoke read.
+Permission has to be enforced. This week's check is about post-revoke read.
 
 ## What the repaired files must show
 
-Check `fixed/capstone.py` against the list above. Do not treat the snippet as a production share product.
+Open `fixed/capstone.py`. Do not treat the snippet as a production share product.
 
 | After the fix | Must be true |
 |---|---|

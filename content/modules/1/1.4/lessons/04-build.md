@@ -23,7 +23,7 @@ If you remove Name or Key, the control is not a control. If you remove Color, a 
 
 ## What the repaired files must show
 
-Check `fixed/recovery.py` against the list above. Do not treat the snippet as production React.
+Open `fixed/recovery.py`. Do not treat the snippet as production React.
 
 | Check | Why it is structural |
 |---|---|

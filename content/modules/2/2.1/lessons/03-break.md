@@ -32,7 +32,7 @@ flowchart TD
   Accept --> Harm[Company A policy wraps company B body]
 ```
 
-The broken files show **cause** (two readers), not a trophy exploit. What has to be true first: duplicate company keys in one object; split parse.
+The broken files show **cause** (two readers), not an exploit recipe. What has to be true first: duplicate company keys in one object; split parse.
 
 ## What to read in the broken files
 

@@ -53,7 +53,7 @@ A stronger algorithm does not fix a missing key story (later) or nonce reuse (ad
 
 ## What the framework does vs what you still have to check
 
-Password libraries are for passwords, not note bodies. Disk encryption is not app-level secrecy against a database admin. The app's promise: Base64 decode of `protect("secret")` is not `"secret"`. The local check is `labs/5.2/5.2-lab`. Fake data only. No live key service.
+Password libraries are for passwords, not note bodies. Disk encryption is not app-level secrecy against a database admin. What this practice is supposed to show: Base64 decode of `protect("secret")` is not `"secret"`. Practice files are in `labs/5.2/5.2-lab`. Fake data only. No live key service.
 
 ## What the tool cannot do
 

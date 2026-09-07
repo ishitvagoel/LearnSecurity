@@ -32,7 +32,7 @@ The interpreter lesson already said a string is not a safe argv. This check is *
 
 ## What to look at — cause, not a dump
 
-Read `vulnerable/tools.py`. It returns `ran {name}` for every name. Tests:
+Open `vulnerable/tools.py`. It returns `ran {name}` for every name. Tests:
 
 - `test_exec_sql_tool_is_denied`
 - `test_allowlisted_search_notes_may_run` — `search_notes` may pass on both
@@ -59,7 +59,7 @@ You do not need a new tool name.
 | How you recover later | Revoke leftover agent credentials |
 | Out of scope | A famous-bugs product; a live vendor API; claiming an assurance gate |
 
-A tool library will expose whatever tools you pass. A system prompt is another string the model may ignore. The web framework will still run whatever handler you wired. The notes app's summarizer will still run `exec_sql` if `run_tool` is always-run. The app's promise this week is: **this** practice, `exec_sql` is None.
+A tool library will expose whatever tools you pass. A system prompt is another string the model may ignore. The web framework will still run whatever handler you wired. The notes app's summarizer will still run `exec_sql` if `run_tool` is always-run. What this practice is supposed to show: practice, `exec_sql` is None.
 
 ## Practice
 

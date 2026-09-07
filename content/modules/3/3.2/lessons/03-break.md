@@ -26,13 +26,13 @@ flowchart TD
   List --> Reviewer[The assurance story looks clean]
 ```
 
-The broken files show **cause** (tool output treated as thinking), not a trophy dump of a vendor report. What has to be true first: `scanner_green` is true; the assembler returns `{"threats": []}`. You do not need a live scan. You must not point a scanner at someone else’s system.
+The broken files show **cause** (tool output treated as thinking), not a dump of a vendor report. What has to be true first: `scanner_green` is true; the assembler returns `{"threats": []}`. You do not need a live scan. You must not point a scanner at someone else’s system.
 
 A green dashboard is a tool observation. It is not documented security decisions you can check.
 
-## What to look at: the cause, not a trophy
+## What to look at: the cause, not a hunt
 
-Read `vulnerable/model.py`. `assemble_threat_model` returns an empty list when `scanner_green` is true. `threats_from_scan(True)` is therefore empty. Checks:
+Open `vulnerable/model.py`. `assemble_threat_model` returns an empty list when `scanner_green` is true. `threats_from_scan(True)` is therefore empty. Checks:
 
 - `test_green_scanner_is_not_an_empty_threat_model` — `cross-tenant-read` must be present
 - `test_mandatory_threats_have_owners_and_triggers` — `cross-tenant-read`, `hostile-browser`, and `stolen-worker` each have `owner` and `trigger`

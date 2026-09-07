@@ -25,11 +25,11 @@ flowchart TD
 
 The lab’s repaired files hash the raw body string with stdlib HMAC-SHA256 and `compare_digest`. Production still needs the MAC **before** `json.loads` (2.1): parse-then-re-serialize is a different document than the provider signed. Replay of a valid MAC and stale timestamps are named leftovers, not this check. Outbound webhook URLs are 6.5, not this inbound MAC.
 
-Use that standard-library check. This week's check covers empty sig. **Do not POST a live provider.**
+Use that standard-library check. This week's check is about empty sig. **Do not POST a live provider.**
 
 ## What the repaired files must show
 
-Check `fixed/hook.py` against the list above. Do not treat the snippet as a production Stripe integration.
+Open `fixed/hook.py`. Do not treat the snippet as a production Stripe integration.
 
 | After the fix | Must be true |
 |---|---|

@@ -27,13 +27,13 @@ flowchart TD
   Second["share_note n1 k1 again"] --> Row2["Count 2"]
 ```
 
-The broken files show **cause** (the share side effect is not bound to the key), not a trophy race. What has to be true first: two calls with the same key; the handler appends `note_id` every time and ignores `idempotency_key`. A 504 is modeled by the second call — you do not need a real timeout, a sleep, or a second process.
+The broken files show **cause** (the share side effect is not bound to the key), not a live race. What has to be true first: two calls with the same key; the handler appends `note_id` every time and ignores `idempotency_key`. A 504 is modeled by the second call — you do not need a real timeout, a sleep, or a second process.
 
 HTTP does not make POST happen once. HTTP 201 twice is still two rows. An awareness list that names “something went wrong” is not the failing check.
 
-## What to look at: the cause, not a trophy
+## What to look at: the cause, not a hunt
 
-Read `vulnerable/share.py`. `share_note` appends `note_id` to `_SHARES` on every call. The parameter `idempotency_key` is accepted and discarded. Checks:
+Open `vulnerable/share.py`. `share_note` appends `note_id` to `_SHARES` on every call. The parameter `idempotency_key` is accepted and discarded. Checks:
 
 - `test_single_share` — one call still creates one share (honest happy path)
 - `test_retry_does_not_duplicate_side_effect` — two calls with `k1` must leave `share_count() == 1`

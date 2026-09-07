@@ -32,7 +32,7 @@ The isolation lesson already said HTTP 200 is not a security test. This check is
 
 ## What to look at — cause, not a dump
 
-Read `vulnerable/pentest.py`. It returns true for every dict. Tests:
+Open `vulnerable/pentest.py`. It returns true for every dict. Tests:
 
 - `test_cannot_close_without_retest`
 - `test_passing_retest_may_close` — `{retest: "pass"}` may pass on both
@@ -59,7 +59,7 @@ You do not need a new finding key.
 | How you recover later | Reopen; run the same isolation check |
 | Out of scope | A severity number; a live pentest; claiming an assurance gate |
 
-A ticket tracker will show Done. A pentest vendor PDF is evidence that *someone tested once*. A severity score ranks work. The notes app's API will still serve the hole if the close gate is always true. The app's promise this week is: **this** practice, `retest` None is deny.
+A ticket tracker will show Done. A pentest vendor PDF is evidence that *someone tested once*. A severity score ranks work. The notes app's API will still serve the hole if the close gate is always true. What this practice is supposed to show: practice, `retest` None is deny.
 
 ## Practice
 

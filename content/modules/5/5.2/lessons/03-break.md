@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `protect` / `looks_encrypted`. Fake plaintext `secret`. It does not open a database or a cipher library. Base64 labeled encryption is a **failed rule**, not a trophy decoder.
+The practice is not a website you attack. It is a tiny in-process `protect` / `looks_encrypted`. Fake plaintext `secret`. It does not open a database or a cipher library. Base64 labeled encryption is a **failed rule**, not a decoder to run on live data.
 
 > `protect("secret")` must not round-trip as Base64 of the plaintext. If `base64.b64decode(protect("secret"))` equals `"secret"`, encoding was sold as secrecy.
 
@@ -31,9 +31,9 @@ The broken files show **cause** (encoding named encryption), not a decoder scrip
 
 Use approved authenticated encryption, not encoding. Argon2 is for **passwords**, not this field.
 
-## What to look at: the cause, not a trophy
+## What to look at: the cause, not a hunt
 
-Read `vulnerable/crypto.py`. `protect` Base64-encodes the string. Tests:
+Open `vulnerable/crypto.py`. `protect` Base64-encodes the string. Tests:
 
 - `test_protect_is_not_mere_encoding`
 - `test_protect_does_not_return_plaintext`

@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `add_share` counter. Fake share counts. It does not open FastAPI, a CDN filter, or a classmate API. Extra grants is a **failed rule**, not a trophy flood.
+The practice is not a website you attack. It is a tiny in-process `add_share` counter. Fake share counts. It does not open FastAPI, a CDN filter, or a classmate API. Extra grants is a **failed rule**, not a load test.
 
 > Eight `add_share` calls must leave count ≤ 5. Share grants must not go past the product cap of 5.
 
@@ -28,13 +28,13 @@ flowchart TD
   Last --> Extra["extra readers 6 through 8"]
 ```
 
-The broken files show **cause** (policy only in the UI / no write-path check), not a trophy load test against a public API. What has to be true first: `add_share` increments `_n` with no cap. You do not need eight HTTP clients. You must not flood a live API.
+The broken files show **cause** (policy only in the UI / no write-path check), not a load test against a public API. What has to be true first: `add_share` increments `_n` with no cap. You do not need eight HTTP clients. You must not flood a live API.
 
 A React `max={5}` is a usability hint, not that implementation.
 
-## What to look at: the cause, not a trophy
+## What to look at: the cause, not a hunt
 
-Read `vulnerable/share_limit.py`. `add_share` always increments and returns `_n`. Checks:
+Open `vulnerable/share_limit.py`. `add_share` always increments and returns `_n`. Checks:
 
 - `test_share_cap_is_enforced` — eight calls leave `last <= 5`
 - `test_five_shares_are_allowed` — honest path still reaches 5

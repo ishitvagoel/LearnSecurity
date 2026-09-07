@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process model of `document.cookie`. It does not open a browser, load a page, or talk to a network. The failure is already in the reader: the HttpOnly flag is present and ignored. That is a **failed rule**, not a trophy exploit.
+The practice is not a website you attack. It is a tiny in-process model of `document.cookie`. It does not open a browser, load a page, or talk to a network. The failure is already in the reader: the HttpOnly flag is present and ignored. That is a **failed rule**, not an exploit recipe.
 
 > Script in the origin cannot read `sc_session` when HttpOnly is set.
 
@@ -26,9 +26,9 @@ flowchart TD
   Ignore --> Leak["returns synthetic-session"]
 ```
 
-The broken files show **cause** (the session value is handed to the script reader), not a trophy exploit. What has to be true first: a cookie object whose `httponly` flag is already `True`; a reader that returns `value` anyway. `Secure` is already true on `HTTPONLY_SESSION` — HTTPS does not mean unreadability to JS.
+The broken files show **cause** (the session value is handed to the script reader), not an exploit recipe. What has to be true first: a cookie object whose `httponly` flag is already `True`; a reader that returns `value` anyway. `Secure` is already true on `HTTPONLY_SESSION` — HTTPS does not mean unreadability to JS.
 
-## What to look at: the cause, not a trophy
+## What to look at: the cause, not a hunt
 
 `vulnerable/cookies.py` `js_read_session` returns `session["value"]` whenever the name exists. The check binds `HTTPONLY_SESSION` with `httponly: True` and `secure: True` and expects `None`. You do not need a new cookie string.
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover

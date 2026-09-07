@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `session_from_request`. Fake token `secret`. It does not open uvicorn, a CDN, or a browser history. A query-string session is a **failed rule**, not a trophy dump of a log.
+The practice is not a website you attack. It is a tiny in-process `session_from_request`. Fake token `secret`. It does not open uvicorn, a CDN, or a browser history. A query-string session is a **failed rule**, not a dump of a log.
 
 > `session_from_request({"access_token": "secret"}, {}, None)` must return `None`. A session must not start from a query-string token.
 
@@ -30,13 +30,13 @@ flowchart TD
   Sess --> Log[Would appear in URL copies]
 ```
 
-The broken files show **cause** (token in a logged, shared channel), not a trophy dump of production logs. What has to be true first: `session_from_request` prefers `query.get("access_token")`. You do not need a live GET. You must not fetch a URL that contains a real token.
+The broken files show **cause** (token in a logged, shared channel), not a dump of production logs. What has to be true first: `session_from_request` prefers `query.get("access_token")`. You do not need a live GET. You must not fetch a URL that contains a real token.
 
 Secrets belong in the body or headers, not in the URL. HTTPS is a hop tool, not that sentence.
 
-## What to look at: the cause, not a trophy
+## What to look at: the cause, not a hunt
 
-Read `vulnerable/token.py`. It returns `query.get("access_token")` first. Checks:
+Open `vulnerable/token.py`. It returns `query.get("access_token")` first. Checks:
 
 - `test_query_string_token_is_rejected` — query-only yields `None`
 - `test_cookie_session_still_works` — `sc_session` still works on the repaired files

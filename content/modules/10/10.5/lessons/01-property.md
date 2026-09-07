@@ -68,7 +68,7 @@ Someone closed on detection quality. That is the cause. The system still broken,
 
 A SIEM will go green when the *rule* stops firing. That is not a restore test. Untested backups are not recover. Support tools with cluster-admin are a second incident.
 
-What this practice is supposed to show: `close_incident({"recovery": "todo", "logs": "ok"})` is false, and a leaked `note_body` cannot close either. The local check is `labs/10.5/10.5-lab`. Fake data only. No live SIEM. No real people’s notes.
+What this practice is supposed to show: `close_incident({"recovery": "todo", "logs": "ok"})` is false, and a leaked `note_body` cannot close either. Practice files are in `labs/10.5/10.5-lab`. Fake data only. No live SIEM. No real people’s notes.
 
 ## What the tool cannot do
 

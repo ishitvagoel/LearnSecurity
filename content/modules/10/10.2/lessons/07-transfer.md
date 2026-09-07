@@ -37,7 +37,7 @@ A digest mismatch still has to be denied. A match may still install. Generating 
 
 1. who can act (lookalike / compromised maintainer — not a live clinic registry attack);
 2. what you trust (digest equality is the promise; SBOM / provenance / Dependabot are not);
-3. what must not happen (`install_ok("aaa","bbb")` true, not a legal label);
+3. what must not happen (`install_ok("aaa","bbb")` true);
 4. a test idea on **local** practice files only (no live npm);
 5. leftover (malicious pin, cache poisoning, unpinned actions, lookalike packages);
 6. whether a human-read CI path exists (must say digest mismatch in words).

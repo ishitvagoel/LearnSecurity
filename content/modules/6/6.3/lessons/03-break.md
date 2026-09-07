@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `allow_share`. The failure is already in the function: it treats a leftover session cookie as consent to share. That is a **failed rule**, not a trophy against another site.
+The practice is not a website you attack. It is a tiny Python `allow_share`. The failure is already in the function: it treats a leftover session cookie as consent to share. That is a **failed rule**, not an attack on another site.
 
 > Leftover cookies are not consent to share. If `allow_share` from a foreign origin with `token=None` is true, leftover cookie authority has replaced site-bound intent.
 
@@ -25,13 +25,13 @@ flowchart TD
   Cookie -->|yes| True["returns true"]
 ```
 
-The broken files show **cause** (leftover cookie treated as consent), not a cross-site trophy against a public app. What has to be true first: `allow_share` returns `session_cookie` and ignores origin and token. You do not need a live third-party page. You must not build one.
+The broken files show **cause** (leftover cookie treated as consent), not an attack on a public app. What has to be true first: `allow_share` returns `session_cookie` and ignores origin and token. You do not need a live third-party page. You must not build one.
 
 SameSite set for purpose is a helper, not complete. Anti-forgery tokens (or extra headers a simple form cannot set). This practice covers `allow_share`.
 
-## What to look at: the cause, not a trophy
+## What to look at: the cause, not a hunt
 
-Read `vulnerable/csrf.py`. It returns `session_cookie` and ignores origin and token. Tests:
+Open `vulnerable/csrf.py`. It returns `session_cookie` and ignores origin and token. Tests:
 
 - `test_foreign_origin_post_is_denied`
 - `test_same_origin_without_token_is_denied`

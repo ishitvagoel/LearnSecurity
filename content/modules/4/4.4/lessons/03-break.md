@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `can_read`. The failure is already in the function: it treats “Bob has a share somewhere” as a yes for every note. That is a **failed rule**, not a trophy dump of another company’s body.
+The practice is not a website you attack. It is a tiny Python `can_read`. The failure is already in the function: it treats “Bob has a share somewhere” as a yes for every note. That is a **failed rule**, not a dump of another company’s body.
 
 > A grant on n1 does not authorize n2. If `can_read("bob", "n2")` is true because Bob has n1, leftover permission has replaced the rule.
 
@@ -34,7 +34,7 @@ A scanner “IDOR” name is a weakness label, not that rule.
 
 ## What to look at — cause, not a dump
 
-Read `vulnerable/grant.py`. It never compares `note_id` or company. Tests require n2, n3, and eve×n1 to stay false, and honest n1 / owner-n2 to stay true. Record `test_grant_on_n1_is_not_grant_on_n2` first.
+Open `vulnerable/grant.py`. It never compares `note_id` or company. Tests require n2, n3, and eve×n1 to stay false, and honest n1 / owner-n2 to stay true. Record `test_grant_on_n1_is_not_grant_on_n2` first.
 
 ## Why it happens vs what it costs
 

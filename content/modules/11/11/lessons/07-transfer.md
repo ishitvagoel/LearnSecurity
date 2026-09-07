@@ -37,7 +37,7 @@ B after revoke denied, A still reads, B before revoke still reads. Adding DELETE
 
 1. who can act (former guardian with a cached chart id — not a live clinic attack);
 2. what you trust (owner-or-grant on every read is the promise; scanner, YAML pack, and HTTP 200 are not);
-3. what must not happen (`read` after `revoke` still returns the body, not a legal label);
+3. what must not happen (`read` after `revoke` still returns the body);
 4. a test idea on **local** practice files only (no live clinic system);
 5. leftover (copies already sent, delayed worker, phone cache, access-rights change in the same session);
 6. whether a human-read deny must say share revoked (plain language, not color-only).

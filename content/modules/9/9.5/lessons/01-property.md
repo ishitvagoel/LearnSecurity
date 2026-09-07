@@ -65,7 +65,7 @@ Someone closed on intent. That is the cause. The remaining isolation hole is a *
 
 Issue trackers have a Done state. That is a workflow default. It is not a passing retest of "bob must not read alice's note."
 
-What this practice is supposed to show: `close_finding({"retest": None})` is false. The local check is `labs/9.5/9.5-lab`. Fake data only. No live clinics. No real people's notes.
+What this practice is supposed to show: `close_finding({"retest": None})` is false. Practice files are in `labs/9.5/9.5-lab`. Fake data only. No live clinics. No real people's notes.
 
 ## What the tool cannot do
 

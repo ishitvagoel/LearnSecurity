@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python model of header names. The failure is already in the dict: `isolation_enforced` treats Report-Only as on. Report-Only counted as isolation is **a failed rule**, not a trophy script.
+The practice is not a website you attack. It is a tiny Python model of header names. The failure is already in the dict: `isolation_enforced` treats Report-Only as on. Report-Only counted as isolation is **a failed rule**, not an exploit recipe.
 
 > `isolation_enforced` must be false when the only header is `Content-Security-Policy-Report-Only`. An enforcing `Content-Security-Policy` header may count.
 

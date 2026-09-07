@@ -56,4 +56,4 @@ A clinic example: a check that only asserts the Android button is disabled is no
 
 ## What this page is not doing
 
-Do not add a device-farm trophy. Do not log attestation blobs. Answer keys are not on this site.
+Do not treat a device-farm screenshot as proof. Do not log attestation blobs. Answer keys are not on this site.

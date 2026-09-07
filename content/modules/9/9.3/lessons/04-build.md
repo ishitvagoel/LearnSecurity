@@ -22,11 +22,11 @@ flowchart TD
 
 The repaired files require `forbidden_outcome`. Production still needs the named case to *match* who-is-allowed (Bob must not read Alice’s note) — a well-shaped test can still miss field grain (7.2). Looking around remains 9.5. Race-condition tests still need a named bad result (“the race must not grant”), not “the fuzzer ran.”
 
-A testing standard that says “test against the requirement” is vocabulary. This week's check covers 200-only.
+A testing standard that says “test against the requirement” is vocabulary. This week's check is about 200-only.
 
 ## What the repaired files must show
 
-Check `fixed/stest.py` against the list above. Do not treat the snippet as a production scanner.
+Open `fixed/stest.py`. Do not treat the snippet as a production scanner.
 
 | After the fix | Must be true |
 |---|---|

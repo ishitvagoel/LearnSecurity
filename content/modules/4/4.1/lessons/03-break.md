@@ -34,7 +34,7 @@ All active sessions have to be killed when an account is disabled or deleted. `D
 
 ## What to look at — cause, not a dump
 
-Read `vulnerable/lifecycle.py`. `delete_user` only adds the user to `DELETED`. `session_valid` still returns `SESSIONS.get(user)`. Tests:
+Open `vulnerable/lifecycle.py`. `delete_user` only adds the user to `DELETED`. `session_valid` still returns `SESSIONS.get(user)`. Tests:
 
 - `test_active_session_is_valid` — honest path before delete
 - `test_deleted_user_session_is_dead` — `session_valid` false after delete

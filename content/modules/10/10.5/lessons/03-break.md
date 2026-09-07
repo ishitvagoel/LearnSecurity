@@ -32,7 +32,7 @@ Earlier lessons already said bodies stay out of logs. This check is **detect wit
 
 ## What to look at — cause, not a dump
 
-Read `vulnerable/ir.py`. It returns true for every dict. Tests:
+Open `vulnerable/ir.py`. It returns true for every dict. Tests:
 
 - `test_cannot_close_without_recovery`
 - `test_cannot_close_when_logs_contain_note_body`
@@ -60,7 +60,7 @@ You do not need a new incident key.
 | How you recover later | This *is* the step — restore drill |
 | Out of scope | A SIEM product; live paging; claiming an assurance gate |
 
-A SIEM dashboard turns green when alerts stop. A paging ack is a human click. The notes app’s API will log whatever you print. The app’s promise this week is: **this** practice, recovery todo is deny and `note_body` in logs is deny.
+A SIEM dashboard turns green when alerts stop. A paging ack is a human click. The notes app’s API will log whatever you print. What this practice is supposed to show: practice, recovery todo is deny and `note_body` in logs is deny.
 
 ## Practice
 

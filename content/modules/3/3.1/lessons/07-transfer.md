@@ -33,7 +33,7 @@ Two classes on one card is the point.
 
 1. who can act (operator with logs; vendor with the drain; another company on shared observability — **not** a live clinic);
 2. what you trust (which logging API; the spreadsheet and the privacy policy are not);
-3. what must not happen (chart text in the log, not a legal label and not “we classified it”);
+3. what must not happen (chart text in the log, not “we classified it”);
 4. a test idea on **local** files only (substring absent + marker present — never on the real clinic);
 5. leftover (time is Internal and may be logged; ids remain; APM; exception dumps; query strings in access logs);
 6. whether a human-read badge must not use color as the only cue (classification itself is not an accessibility problem; color-only “Confidential” badges are).
@@ -45,7 +45,7 @@ Two classes on one card is the point.
 | Spreadsheet as the rule | No place named; no allow or deny |
 | Live clinic logs | Course rules |
 | Privacy-policy URL | A document is not the logger |
-| A legal label as the check | Awareness, not this check |
+| A famous-bugs name as the check | Awareness, not this check |
 | HTTP 200 as classification evidence | Wrong observation |
 
 ## Practice

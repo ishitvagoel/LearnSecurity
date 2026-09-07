@@ -22,11 +22,11 @@ flowchart TD
 
 The lab’s repaired files use `'eval(' not in diff`. Name the leftover: `exec(`, other expression languages, template filters that mark text as trusted, and generated code are not this check. Writing down that eval is dangerous without rejecting it is a different false assurance. Tests are still required after a human reject (next topic, 9.3).
 
-You need to avoid eval. This week's check covers the lab string.
+You need to avoid eval. This week's check is about the lab string.
 
 ## What the repaired files must show
 
-Check `fixed/review.py` against the list above. Do not treat the snippet as a production review product.
+Open `fixed/review.py`. Do not treat the snippet as a production review product.
 
 | After the fix | Must be true |
 |---|---|

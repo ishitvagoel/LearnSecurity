@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python helper named `phishing_resistant`. The failure is already in the function: any enrolled method returns true, and origin is ignored. A password at a lookalike origin counted as **resistant** is a failed rule, not a trophy kit.
+The practice is not a website you attack. It is a tiny Python helper named `phishing_resistant`. The failure is already in the function: any enrolled method returns true, and origin is ignored. A password at a lookalike origin counted as **resistant** is a failed rule, not an exploit recipe.
 
 > A password or OTP at a lookalike origin is not phishing-resistant. WebAuthn at the wrong origin must fail.
 
@@ -27,7 +27,7 @@ flowchart TD
   Set -->|yes| True[Returns true — the rule is false]
 ```
 
-The broken files show **cause** (a shared secret treated as resistant), not a trophy kit against a public site. What has to be true first: method is in `{password, otp, webauthn}`; origin is ignored. You do not need a live phishing page. You must not build one.
+The broken files show **cause** (a shared secret treated as resistant), not an exploit recipe against a public site. What has to be true first: method is in `{password, otp, webauthn}`; origin is ignored. You do not need a live phishing page. You must not build one.
 
 A later hardware bar is not this check.
 

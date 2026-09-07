@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `review_ok(diff)`. It does not merge anything. The failure is already in the function: it returns true for every string. That is a **failed rule**, not a trophy eval.
+The practice is not a website you attack. It is a tiny Python `review_ok(diff)`. It does not merge anything. The failure is already in the function: it returns true for every string. That is a **failed rule**, not live eval.
 
 > Eval on user input must not be approved. `review_ok("x = eval(user)")` must be false.
 
@@ -26,13 +26,13 @@ flowchart TD
   Any[any diff] --> True[review_ok true]
 ```
 
-The broken files show **cause** (no interpreter question), not an eval trophy. What has to be true first: `review_ok` returns true for every string. You do not need GitHub. You must not run eval on live input.
+The broken files show **cause** (no interpreter question), not an eval hunt. What has to be true first: `review_ok` returns true for every string. You do not need GitHub. You must not run eval on live input.
 
 You need to avoid `eval` and similar dynamic execution. Module 6.1 already said the name is data, not Python grammar. This check is **the merge gate that should have caught it**.
 
 ## What to look at — cause, not a dump
 
-Read `vulnerable/review.py`. It returns true for every string. Tests:
+Open `vulnerable/review.py`. It returns true for every string. Tests:
 
 - `test_eval_on_user_input_is_rejected`
 - `test_honest_diff_without_eval_may_pass` — `int(user)` may pass on both
@@ -42,7 +42,7 @@ You do not need a new payload.
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | `review_ok` true for every string | Always-approve; no interpreter question | A scanner name |
-| `x = eval(user)` still approved | User string treated as Python | A live eval trophy |
+| `x = eval(user)` still approved | User string treated as Python | A live eval |
 | Honest `int(user)` also true | Looks-fine path still open | “the formatter will catch it” |
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover

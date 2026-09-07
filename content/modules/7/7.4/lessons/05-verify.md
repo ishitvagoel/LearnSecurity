@@ -63,4 +63,4 @@ A clinic example: a test that only asserts the job was enqueued is not this chec
 
 ## What this page is not doing
 
-Do not add a live task-library trophy. Do not log session cookies. Answer keys are not on this site.
+Do not treat a live task-library screenshot as proof. Do not log session cookies. Answer keys are not on this site.

@@ -14,7 +14,7 @@ You get a **clinic scan upload** whose original filename is kept. On the notes a
 1. who can act (patient or device supplying a filename — **not** a live clinic);
 2. what you trust (canonical prefix is what you trust; a UUID sticker is not);
 3. what must not happen (`resolve` leaves the imaging root — not a privacy-law name);
-4. a test idea on a **local** practice only (prefix, no host-file trophy);
+4. a test idea on a **local** practice only (prefix, no host-file hunt);
 5. leftover (zip members, later and harder; XML/pickle; image codecs later; running uploads as code);
 6. whether a human “upload rejected” path must meet the web accessibility baseline (readable error, not a silent missing image).
 

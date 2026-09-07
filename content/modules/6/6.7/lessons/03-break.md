@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `allow`. It does not open a live export API. The failure is already in the function: it says yes for every `n`. That is a **failed rule**, not a trophy against a public host.
+The practice is not a website you attack. It is a tiny Python `allow`. It does not open a live export API. The failure is already in the function: it says yes for every `n`. That is a **failed rule**, not an attack on a public host.
 
 > Export has a resource account, not an unbounded loop. `allow(4)` must be false in the lab window. `allow(3)` may be true.
 
@@ -30,9 +30,9 @@ The broken files show **cause** (no resource account). Do not aim a load generat
 
 There has to be a stop against scripts that burn quota. Module 3.4 already capped shares on the write path. This check is how many **exports** in a window. A famous API-abuse list is a later name, not this check.
 
-## What to look at: the cause, not a trophy
+## What to look at: the cause, not a hunt
 
-Read `vulnerable/limit.py`. It returns true for every `n`. Tests:
+Open `vulnerable/limit.py`. It returns true for every `n`. Tests:
 
 - `test_fourth_export_is_denied`
 - `test_third_export_is_allowed`

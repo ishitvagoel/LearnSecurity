@@ -32,7 +32,7 @@ The database god-role lesson already said one shared admin is a blast-radius rul
 
 ## What to look at — cause, not a dump
 
-Read `vulnerable/iam.py`. It returns true for every role. Tests:
+Open `vulnerable/iam.py`. It returns true for every role. Tests:
 
 - `test_cluster_admin_pod_is_denied`
 - `test_namespaced_app_role_may_run` — `"app"` may pass on both
@@ -59,7 +59,7 @@ You do not need a new role string.
 | How you recover later | Delete the binding; rotate cluster credentials |
 | Out of scope | A CIS score; a live managed cluster; claiming an assurance gate |
 
-A managed cluster will still accept a ClusterRoleBinding. A restricted pod profile hardens the *pod spec*. FastAPI will still run as whatever SA the chart mounts. The notes app's API will still take the cluster if admission is always true. The app's promise this week is: **this** practice, `cluster-admin` is deny.
+A managed cluster will still accept a ClusterRoleBinding. A restricted pod profile hardens the *pod spec*. FastAPI will still run as whatever SA the chart mounts. The notes app's API will still take the cluster if admission is always true. What this practice is supposed to show: practice, `cluster-admin` is deny.
 
 ## Practice
 
