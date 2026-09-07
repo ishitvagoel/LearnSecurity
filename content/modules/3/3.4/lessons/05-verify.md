@@ -9,7 +9,7 @@
 
 ## Picture: last greater than 5 must fail
 
-A test that only asserts a max attribute exists can pass while eight calls still leave count 8. Ask whether a sixth grant still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A test that only asserts a max attribute exists can pass while eight calls still leave count 8. Ask whether a sixth grant still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -24,7 +24,7 @@ flowchart LR
 | Sixth | Does not increment past 5 |
 | Not claimed | Production locks; GraphQL; rate limits; awareness-list compliance |
 
-Lab tests in `labs/3.4/3.4-lab/tests/test_property.py`. `test_share_cap_is_enforced` is a **what-must-not-happen** test: a sixth grant is not allowed to count as a passing control.
+Lab tests in `labs/3.4/3.4-lab/tests/test_property.py`. `test_share_cap_is_enforced` is a **what must not happen** test: a sixth grant is not allowed to count as a pass.
 
 ```text
 python3 -m pytest labs/3.4/3.4-lab/tests --impl vulnerable

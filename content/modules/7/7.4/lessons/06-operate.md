@@ -1,4 +1,4 @@
-# worker_identity_wrong without logging the cookie
+# Log the wrong worker identity, not the cookie
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate

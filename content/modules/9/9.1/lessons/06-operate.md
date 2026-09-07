@@ -1,4 +1,4 @@
-# unmapped_req_blocks_release without logging bodies
+# Block the release without logging notes
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate

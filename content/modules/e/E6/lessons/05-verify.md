@@ -9,7 +9,7 @@
 
 ## Picture: a broken register gate must fail the check
 
-A test that only counts passing tests can pass while empty owner still accepts. Ask whether an incomplete exception still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A test that only counts passing tests can pass while empty owner still accepts. Ask whether an incomplete exception still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at empty owner. If both fail, the fix is n
 | Normal | complete record may accept (may pass on both) |
 | Not claimed | a maturity dashboard; a pledge; an assurance gate; that anyone reads the register |
 
-The file is `labs/E6/e6-lab/tests/test_property.py`. The test `test_exception_needs_owner_review_and_wcag` is a **what-must-not-happen** test: always-accept `accept_exception` is not allowed to count as a passing control.
+The file is `labs/E6/e6-lab/tests/test_property.py`. The test `test_exception_needs_owner_review_and_wcag` is a **what must not happen** test: always-accept `accept_exception` is not allowed to count as a pass.
 
 Honest complete exceptions may pass on both implementations. That does not excuse the empty-owner deny test. If the broken files do not fail `test_exception_needs_owner_review_and_wcag`, the lab is miswired — fix the wiring, not the assertion.
 

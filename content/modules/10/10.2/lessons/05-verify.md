@@ -9,7 +9,7 @@
 
 ## Picture: a broken install check must fail the mismatch test
 
-A test that only counts passing tests can pass while always-true `install_ok` still installs a mismatch. Ask whether a digest mismatch still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A test that only counts passing tests can pass while always-true `install_ok` still installs a mismatch. Ask whether a digest mismatch still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at digest equality. If both fail, the fix 
 | Abuse | Unsure hashes are deny (fail closed) |
 | Not claimed | Live npm; provenance builders; the ship gate; that the pin is benign |
 
-The file is `labs/10.2/10.2-lab/tests/test_property.py`. The test `test_hash_mismatch_refuses_install` is a **what-must-not-happen** test: always-true `install_ok` is not allowed to count as a passing control.
+The file is `labs/10.2/10.2-lab/tests/test_property.py`. The test `test_hash_mismatch_refuses_install` is a **what must not happen** test: always-true `install_ok` is not allowed to count as a pass.
 
 Honest matching hashes may pass on both implementations. That does not excuse the mismatch deny test. If the broken files do not fail `test_hash_mismatch_refuses_install`, the lab is miswired — fix the wiring, not the assertion.
 

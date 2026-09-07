@@ -1,4 +1,4 @@
-# tool_denied without logging transcripts
+# Log the denied tool, not the transcript
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate

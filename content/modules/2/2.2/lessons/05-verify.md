@@ -30,7 +30,7 @@ If both pass, the check is not looking at the cross-company get. If both fail, t
 | When things break | Unknown company does not share the slot |
 | Not claimed | Live CDN `Vary`; browser `no-store`; DNS authenticity |
 
-The file is `labs/2.2/2.2-request-path/tests/test_cache_key.py`. The checks are `test_same_tenant_cache_hit` and `test_other_tenant_does_not_receive_cached_body`. They observe bodies, not HTTP 200. That is a **what-must-not-happen** pair: a company B get of `tenant-A-note` is not allowed to count as a passing cache.
+The file is `labs/2.2/2.2-request-path/tests/test_cache_key.py`. The checks are `test_same_tenant_cache_hit` and `test_other_tenant_does_not_receive_cached_body`. They observe bodies, not HTTP 200. That is a **what must not happen** pair: a company B get of `tenant-A-note` is not allowed to count as a passing cache.
 
 Map each check to a rule from the request-path map. Do not paste keys. If the broken files do not fail the cross-company get, the practice files are miswired — fix the wiring, not the assertion.
 

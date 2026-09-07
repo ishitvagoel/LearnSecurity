@@ -25,7 +25,7 @@ flowchart LR
 | Failure | An unparseable host denies (leftover if not in this check) |
 | Not claimed | Following redirects is safe; `/etc/hosts` cannot lie; the first check-in is done; a testing-guide dashboard is green |
 
-The checks live in `labs/0.1/0.1-orientation/tests/test_scope.py`. The second one is a **what-must-not-happen** check: a public host treated as allowed must not count as a passing control.
+The checks live in `labs/0.1/0.1-orientation/tests/test_scope.py`. The second one is a **what must not happen** check: a public host treated as allowed must not count as a pass.
 
 ```text
 python3 -m pytest labs/0.1/0.1-orientation/tests --impl vulnerable

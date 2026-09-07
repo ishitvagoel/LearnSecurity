@@ -19,7 +19,7 @@ Do not paste this exercise onto a public host, employer clinic, or live patient 
 
 What must not happen: **HTTP 200-only test counted as a security test**. `is_security_test({"status_asserted": True})` returns true.
 
-Who could do this: a happy-path suite treated as assurance. That stands in for clinic `test_get_patient_200`, line coverage at 94%, or a testing-guide checkbox ticked without a named what-must-not-happen. What is supposed to stop this: `is_security_test` is supposed to require a **named what-must-not-happen**. Coverage percentage, testing-guide membership, and a fuzzer with no named bad result are not enough.
+Who could do this: a happy-path suite treated as assurance. That stands in for clinic `test_get_patient_200`, line coverage at 94%, or a testing-guide checkbox ticked without a named what must not happen. What is supposed to stop this: `is_security_test` is supposed to require a **named what must not happen**. Coverage percentage, testing-guide membership, and a fuzzer with no named bad result are not enough.
 
 ## Picture: status asserted is enough
 
@@ -37,7 +37,7 @@ Industry catalogues tell you *what* to consider. They do not make `assert r.stat
 Read `vulnerable/stest.py`. It returns true when `status_asserted` is set. Tests:
 
 - `test_http_200_only_is_not_a_security_test`
-- `test_forbidden_outcome_named_is_a_security_test` — named what-must-not-happen (and maybe status too) may pass on both
+- `test_forbidden_outcome_named_is_a_security_test` — named what must not happen (and maybe status too) may pass on both
 
 You do not need a new descriptor key. The failure of `test_http_200_only_is_not_a_security_test` *is* the evidence.
 
@@ -47,7 +47,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 |---|---|---|
 | `status_asserted` alone returns true | Happy path counted as security | “The owner can load a note” |
 | Isolation row mapped to that test | False comfort for who-is-allowed | A testing-guide chapter |
-| No named what-must-not-happen | The predicate accepted status | “We have 94% coverage” |
+| No named what must not happen | The predicate accepted status | “We have 94% coverage” |
 
 ## Why it happens vs what it costs
 
@@ -58,7 +58,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 | What has to be true first | `is_security_test` true when only `status_asserted` |
 | Trigger | Lesson 9.1 maps the isolation row to that test |
 | What it costs | Isolation holes ship with a green suite |
-| How you stop it later | Require a named what-must-not-happen |
+| How you stop it later | Require a named what must not happen |
 | How you notice later | `security_suite_missing_isolation`; never bodies |
 | How you recover later | Add the isolation test; keep 200-only as product tests |
 | Out of scope | A testing-guide chapter; live fuzz; claiming a later gate |

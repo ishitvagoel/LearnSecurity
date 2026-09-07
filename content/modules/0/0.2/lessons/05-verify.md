@@ -25,7 +25,7 @@ flowchart LR
 | Failure | A missing diagnostic defaults to no skip (these files always return a bool) |
 | Not claimed | You can write a deny rule; Git/SQL/HTTP gaps are gone; 1.4 was taught; check-in 1 is done |
 
-The checks live in `labs/0.2/0.2-bridge/tests/test_diagnostic.py`. The first one is a **what-must-not-happen** check: a high score treated as a 1.2 skip must not count as a passing control.
+The checks live in `labs/0.2/0.2-bridge/tests/test_diagnostic.py`. The first one is a **what must not happen** check: a high score treated as a 1.2 skip must not count as a pass.
 
 ```text
 python3 -m pytest labs/0.2/0.2-bridge/tests --impl vulnerable

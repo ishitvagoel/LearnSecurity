@@ -9,7 +9,7 @@
 
 ## Picture: unbounded allow must fail the check
 
-A test that only counts passing cases can pass while the fourth export still goes through. Ask whether an unbounded fourth still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A test that only counts passing cases can pass while the fourth export still goes through. Ask whether an unbounded fourth still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at the fourth export. If both fail, the fi
 | Failure | If you cannot read the count, deny |
 | Not claimed | Per-IP fairness; GraphQL; live requests per second |
 
-The file is `labs/6.7/6.7-lab/tests/test_property.py`. The test `test_fourth_export_is_denied` is a **what-must-not-happen** test: an unbounded fourth is not allowed to count as a passing control.
+The file is `labs/6.7/6.7-lab/tests/test_property.py`. The test `test_fourth_export_is_denied` is a **what must not happen** test: an unbounded fourth is not allowed to count as a pass.
 
 A test that only asserts HTTP 200 on `/export` is not this topic’s evidence. A test that only greps an edge-proxy keyword without calling `allow(4)` is not this topic’s evidence. This practice never opens a public host.
 

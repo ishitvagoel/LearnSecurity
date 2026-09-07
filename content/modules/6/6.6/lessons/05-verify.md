@@ -9,7 +9,7 @@
 
 ## Picture: second t1 must fail the check
 
-A test that only greps `UNIQUE` in a migration can pass while `accept("t1")` is still true twice. Ask whether a second true still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A test that only greps `UNIQUE` in a migration can pass while `accept("t1")` is still true twice. Ask whether a second true still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at the second `t1`. If both fail, the fix 
 | Failure | store error denies (named in review; fail-closed smell) |
 | Not claimed | threaded race; mail delivery; lock semantics |
 
-The file is `labs/6.6/6.6-lab/tests/test_property.py`. The test `test_invite_token_is_single_use` is a **what-must-not-happen** test: a second true is not allowed to count as a passing control. Sequential calls are enough; do not add a race harness.
+The file is `labs/6.6/6.6-lab/tests/test_property.py`. The test `test_invite_token_is_single_use` is a **what must not happen** test: a second true is not allowed to count as a pass. Sequential calls are enough; do not add a race harness.
 
 A test that only asserts HTTP 200 on `/accept` is not this topic's evidence. A test that only greps `UNIQUE` without calling `accept("t1")` twice is not this topic's evidence. This practice never opens a live mailer.
 

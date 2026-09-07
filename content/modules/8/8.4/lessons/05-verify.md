@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: debug plus ok
 
-A check that only counts passing cases can pass while debug still calls prod. Ask whether always-true `api_allowed` still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A check that only counts passing cases can pass while debug still calls prod. Ask whether always-true `api_allowed` still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ flowchart LR
 
 If both pass, the check is not looking at debug-to-prod. If both fail, the fix is not structural or the check is wrong.
 
-## Three observations, even for a channel
+## Three things to look at
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,7 +28,7 @@ If both pass, the check is not looking at debug-to-prod. If both fail, the fix i
 | Extra | release + fail → false (`test_release_without_attest_is_denied`) |
 | Not claimed | real Play Integrity; R8; live signing; hardware-backed keys |
 
-Practice checks live in `labs/8.4/8.4-lab/tests/test_property.py`. `test_debug_build_cannot_call_prod_export` is a **what-must-not-happen** check: an always-true `api_allowed` is not allowed to count as a passing control.
+The checks live in `labs/8.4/8.4-lab/tests/test_property.py`. `test_debug_build_cannot_call_prod_export` is a **what must not happen** check: an always-true `api_allowed` is not allowed to count as a pass.
 
 ```text
 python3 -m pytest labs/8.4/8.4-lab/tests --impl vulnerable
@@ -50,7 +50,7 @@ Record those as leftover risk or later topics, not as silent passes.
 
 ## Practice
 
-Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the map-page row. Reject a “check” that only greps `minifyEnabled` without calling `api_allowed("debug", "ok")`. A setup error is not proof the rule holds.
+Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the notes for this topic. Reject a “check” that only greps `minifyEnabled` without calling `api_allowed("debug", "ok")`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

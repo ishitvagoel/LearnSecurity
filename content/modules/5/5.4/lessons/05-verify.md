@@ -9,7 +9,7 @@
 
 ## Picture: header https, socket http must fail
 
-A test that only asserts “HTTPS is on” can pass while a client header still counts as TLS. Ask whether a client header on an http socket still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A test that only asserts “HTTPS is on” can pass while a client header still counts as TLS. Ask whether a client header on an http socket still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at header versus socket. If both fail, the
 | Failure | unknown scheme does not count as https |
 | Not claimed | Certificate checks; mutual TLS; pinning; encrypted client hello |
 
-The file is `labs/5.4/5.4-lab/tests/test_property.py`. The test `test_client_forwarded_proto_is_not_tls` calls `channel_is_https` with header https and socket http. That is a **what-must-not-happen** test: a client header counted as TLS is not allowed to count as a passing control.
+The file is `labs/5.4/5.4-lab/tests/test_property.py`. The test `test_client_forwarded_proto_is_not_tls` calls `channel_is_https` with header https and socket http. That is a **what must not happen** test: a client header counted as TLS is not allowed to count as a pass.
 
 A test that only asserts the site loads on port 443 is not this topic’s evidence. A test that only greps `https` in a dashboard without calling `channel_is_https` on the mismatch is not this topic’s evidence. This practice never opens a live load balancer.
 

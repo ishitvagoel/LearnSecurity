@@ -9,7 +9,7 @@
 
 ## Picture: other-api and missing aud must fail
 
-A test that only asserts a library called `verify` can pass while a wrong-audience token still counts as a session. Ask whether a token for another API still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A test that only asserts a library called `verify` can pass while a wrong-audience token still counts as a session. Ask whether a token for another API still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -23,7 +23,7 @@ flowchart LR
 | Wrong input / abuse | `aud=other-api` and missing `aud` are false; broken files must fail |
 | Not claimed | PKCE; JWKS; DPoP; who-is-allowed on notes |
 
-Lab tests in `labs/4.5/4.5-lab/tests/test_property.py`. `test_wrong_audience_is_rejected` is a **what-must-not-happen** test: a wrong-audience token accepted as a session is not allowed to count as a passing control.
+Lab tests in `labs/4.5/4.5-lab/tests/test_property.py`. `test_wrong_audience_is_rejected` is a **what must not happen** test: a wrong-audience token accepted as a session is not allowed to count as a pass.
 
 ```text
 python3 -m pytest labs/4.5/4.5-lab/tests --impl vulnerable

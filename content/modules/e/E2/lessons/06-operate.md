@@ -1,4 +1,4 @@
-# csp_report_only_not_enforced without logging HTML
+# Log that Report-Only is not enforcement, not the HTML
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate

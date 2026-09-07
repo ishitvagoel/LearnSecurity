@@ -1,4 +1,4 @@
-# revoked_share_read_denied without logging bodies
+# Log the revoked-share deny, not the note
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate

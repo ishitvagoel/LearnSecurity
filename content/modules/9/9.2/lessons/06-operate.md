@@ -1,4 +1,4 @@
-# review_block_eval without logging the payload
+# Block eval in review without logging the payload
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate

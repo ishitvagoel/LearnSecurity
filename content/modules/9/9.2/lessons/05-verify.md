@@ -9,7 +9,7 @@
 
 ## Picture: broken must fail eval-approve
 
-A test that only counts passing cases can pass while eval on user input is still approved. Ask whether always-true `review_ok` still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A test that only counts passing cases can pass while eval on user input is still approved. Ask whether always-true `review_ok` still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at eval-on-user. If both fail, the fix is 
 | Failure | If you cannot tell whether the diff grants an interpreter, reject |
 | Not claimed | complete oracle; other expression languages; live GitHub; `exec(` |
 
-The file is `labs/9.2/9.2-lab/tests/test_property.py`. The test `test_eval_on_user_input_is_rejected` is a **what-must-not-happen** test: always-true `review_ok` is not allowed to count as a passing control. Do not add a working eval payload to “make the test more real.” The lab string `x = eval(user)` is enough.
+The file is `labs/9.2/9.2-lab/tests/test_property.py`. The test `test_eval_on_user_input_is_rejected` is a **what must not happen** test: always-true `review_ok` is not allowed to count as a pass. Do not add a working eval payload to “make the test more real.” The lab string `x = eval(user)` is enough.
 
 A test that only greps `eval` in a policy PDF without calling `review_ok("x = eval(user)")` is not this topic’s evidence. This practice never runs eval on live input.
 

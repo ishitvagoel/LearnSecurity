@@ -1,4 +1,4 @@
-# merge_blocked_no_tm without logging bodies
+# Block the merge without logging the threat-model body
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate

@@ -9,7 +9,7 @@
 
 ## Picture: a broken crash report must fail the check
 
-A test that only counts passing tests can pass while the body is still in the report. Ask whether a confidential field in this crash JSON still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A test that only counts passing tests can pass while the body is still in the report. Ask whether a confidential field in this crash JSON still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at the body substring. If both fail, the f
 | Abuse | Unsure values are not attached (fail closed; leftover if not in this check) |
 | Not claimed | A real crash console; the public store; screenshot pipelines; vendor DLP |
 
-The file is `labs/8.5/8.5-lab/tests/test_property.py`. The test `test_crash_report_omits_note_body` is a **what-must-not-happen** test: a report that includes the body is not allowed to count as a passing control.
+The file is `labs/8.5/8.5-lab/tests/test_property.py`. The test `test_crash_report_omits_note_body` is a **what must not happen** test: a report that includes the body is not allowed to count as a pass.
 
 Honest stack-present may pass on both implementations. That does not excuse the body-omit test. If the broken files do not fail `test_crash_report_omits_note_body`, the lab is miswired — fix the wiring, not the assertion.
 

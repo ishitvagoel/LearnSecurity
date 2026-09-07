@@ -9,7 +9,7 @@
 
 ## Picture: broken must fail — tB reads tA
 
-A test that only counts passing cases can pass while tB still reads tA. Ask whether a shared app role reading tA as tB still counts as a passing control. The broken files must fail that. The repaired files must pass it — deny the other company, and still allow own-company read.
+A test that only counts passing cases can pass while tB still reads tA. Ask whether a shared app role reading tA as tB still counts as a pass. The broken files must fail that. The repaired files must pass it — deny the other company, and still allow own-company read.
 
 ```mermaid
 flowchart LR
@@ -24,7 +24,7 @@ flowchart LR
 | When things break | migrator cannot SELECT at runtime; connection is not `postgres` |
 | Not claimed | Production row-level security; replica fleet; SQL injection complete |
 
-Lab tests in `labs/3.3/3.3-lab/tests/test_property.py`. `test_app_role_cannot_read_other_tenant` is a **what-must-not-happen** test: a shared app role reading tA as tB is not allowed to count as a passing control.
+Lab tests in `labs/3.3/3.3-lab/tests/test_property.py`. `test_app_role_cannot_read_other_tenant` is a **what must not happen** test: a shared app role reading tA as tB is not allowed to count as a pass.
 
 ```text
 python3 -m pytest labs/3.3/3.3-lab/tests --impl vulnerable

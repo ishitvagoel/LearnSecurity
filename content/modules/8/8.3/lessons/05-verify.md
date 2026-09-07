@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: as=admin
 
-A check that only counts passing cases can pass while `as=` still switches the session. Ask whether a link that switches the principal still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A check that only counts passing cases can pass while `as=` still switches the session. Ask whether a link that switches the principal still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ flowchart LR
 
 If both pass, the check is not looking at identity keys. If both fail, the fix is not structural or the check is wrong.
 
-## Three observations, even for a link
+## Three things to look at
 
 | Mode | Must show for this topic |
 |---|---|
@@ -27,7 +27,7 @@ If both pass, the check is not looking at identity keys. If both fail, the fix i
 | Wrong input / abuse | `as=admin` keeps alice; broken files must fail (`test_deeplink_as_param_does_not_switch_user`) |
 | Not claimed | WebView; custom schemes; live OAuth; real `exported` flags |
 
-Practice checks live in `labs/8.3/8.3-lab/tests/test_property.py`. `test_deeplink_as_param_does_not_switch_user` is a **what-must-not-happen** check: a link that switches the principal is not allowed to count as a passing control.
+The checks live in `labs/8.3/8.3-lab/tests/test_property.py`. `test_deeplink_as_param_does_not_switch_user` is a **what must not happen** check: a link that switches the principal is not allowed to count as a pass.
 
 ```text
 python3 -m pytest labs/8.3/8.3-lab/tests --impl vulnerable
@@ -48,7 +48,7 @@ Record those as leftover risk or later topics, not as silent passes.
 
 ## Practice
 
-Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the map-page row. Reject a “check” that only greps `android:autoVerify` without calling `open_link({"as": "admin"})`. A setup error is not proof the rule holds.
+Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the notes for this topic. Reject a “check” that only greps `android:autoVerify` without calling `open_link({"as": "admin"})`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

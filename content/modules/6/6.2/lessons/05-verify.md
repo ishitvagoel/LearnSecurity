@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: raw <
 
-A check that only counts passing cases can pass while unencoded markup still reaches HTML. Ask whether unencoded markup still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A check that only counts passing cases can pass while unencoded markup still reaches HTML. Ask whether unencoded markup still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -27,7 +27,7 @@ If both pass, the check is not looking at encoding. If both fail, the fix is not
 | Wrong input / abuse | `<` becomes `&lt;`; extra tags absent; broken files must fail |
 | Not claimed | Attribute / JavaScript / URL contexts; live page attacks; content-security enforcement |
 
-Practice checks live in `labs/6.2/6.2-lab/tests/test_property.py`. `test_angle_brackets_are_encoded` is a **what-must-not-happen** check: unencoded markup is not allowed to count as a passing control. The tame marker is enough; do not add an attack recipe to the check.
+The checks live in `labs/6.2/6.2-lab/tests/test_property.py`. `test_angle_brackets_are_encoded` is a **what must not happen** check: unencoded markup is not allowed to count as a pass. The tame marker is enough; do not add an attack recipe to the check.
 
 ```text
 python3 -m pytest labs/6.2/6.2-lab/tests --impl vulnerable
@@ -48,7 +48,7 @@ Record those as leftover risk or later topics, not as silent passes.
 
 ## Practice
 
-Run both implementations this session. Write the fail/pass pair next to the map-page row. Reject a “check” that only greps `Content-Security-Policy` without calling `render`. A setup error is not proof the rule holds.
+Run both implementations this session. Write the fail/pass pair next to the notes for this topic. Reject a “check” that only greps `Content-Security-Policy` without calling `render`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

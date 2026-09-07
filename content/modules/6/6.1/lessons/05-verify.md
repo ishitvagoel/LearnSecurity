@@ -9,7 +9,7 @@
 
 ## Picture: sh -c must fail the check
 
-A test that only counts passing cases can pass while the name is still glued into a shell string. Ask whether `sh -c` still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A test that only counts passing cases can pass while the name is still glued into a shell string. Ask whether `sh -c` still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at `sh -c`. If both fail, the fix is not s
 | Failure | If you cannot spawn without a shell, do not spawn |
 | Not claimed | live `ls`; argument-injection strings; CSV formula |
 
-The file is `labs/6.1/6.1-lab/tests/test_property.py`. The test `test_does_not_invoke_shell` is a **what-must-not-happen** test: a shell string is not allowed to count as a passing control. Do not add a name from the hostile class — extra commands, substitutions, or pipes a shell would parse — to “make the test more real.” Honest `notes` is enough.
+The file is `labs/6.1/6.1-lab/tests/test_property.py`. The test `test_does_not_invoke_shell` is a **what must not happen** test: a shell string is not allowed to count as a pass. Do not add a name from the hostile class — extra commands, substitutions, or pipes a shell would parse — to “make the test more real.” Honest `notes` is enough.
 
 A test that only asserts HTTP 200 is not this topic's evidence. A test that only greps `shell=False` in a comment without calling `argv_for_list` is not this topic's evidence. This practice never starts a live process.
 

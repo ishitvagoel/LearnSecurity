@@ -1,4 +1,4 @@
-# hash_mismatch_denied without logging secrets
+# Log the hash mismatch, not the secrets
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate

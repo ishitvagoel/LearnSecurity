@@ -9,7 +9,7 @@
 
 ## Picture: missing cross-tenant-read must fail
 
-A test that only counts collection size can pass while `cross-tenant-read` is gone. Ask whether an empty model on a green scan still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A test that only counts collection size can pass while `cross-tenant-read` is gone. Ask whether an empty model on a green scan still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -24,7 +24,7 @@ flowchart LR
 | Additive | Scanner extras (`cve-extra`) do not replace the seed |
 | Not claimed | Completeness of all future threats; production scanner SaaS; STRIDE facilitation quality |
 
-Lab tests live in `labs/3.2/3.2-lab/tests/test_property.py`. `test_green_scanner_is_not_an_empty_threat_model` is a **what-must-not-happen** test: an empty model on a green scan is not allowed to count as a passing control.
+Lab tests live in `labs/3.2/3.2-lab/tests/test_property.py`. `test_green_scanner_is_not_an_empty_threat_model` is a **what must not happen** test: an empty model on a green scan is not allowed to count as a pass.
 
 ```text
 python3 -m pytest labs/3.2/3.2-lab/tests --impl vulnerable

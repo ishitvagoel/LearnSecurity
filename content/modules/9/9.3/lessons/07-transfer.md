@@ -7,7 +7,7 @@
 
 The notes-app scaffolding goes away. You get a **clinic page test**. `test_get_patient_200` asserts the owner’s GET returns 200. Your job is to rewrite the loop, not to name a bug-list code.
 
-The notes-app sentence was: `is_security_test({"status_asserted": True})` must be false. Rewrite it for a clinic without changing the fork: 200-only is not a security test; a named what-must-not-happen may count. A testing-guide checkbox is still catalogue, not shape.
+The notes-app sentence was: `is_security_test({"status_asserted": True})` must be false. Rewrite it for a clinic without changing the fork: 200-only is not a security test; a named what must not happen may count. A testing-guide checkbox is still catalogue, not shape.
 
 **Product sketch:** an EHR-lite “we have 94% coverage and GET /patient/1 returns 200,” plus a testing-guide checklist ticked.
 
@@ -31,14 +31,14 @@ flowchart LR
 
 If GET as owner returns 200 while the suite never asserts the other clinician, the rule is gone. Line coverage, testing-guide ticks, and a fuzzer with no named bad result do not name what must not happen. Field grain (7.2) and looking around (9.5) are the same shape family — name them, do not fuzz a live clinic here. A draft testing guide is not the current pin.
 
-The clinic rewrite still has to keep the notes-app fork: 200-only not a security test, named what-must-not-happen may count. Adding `test_get_patient_200` as “the security test” leaves `is_security_test({status_asserted: True})` true. The local pytest analogue is `test_http_200_only_is_not_a_security_test` — on a practice, not a live clinic.
+The clinic rewrite still has to keep the notes-app fork: 200-only not a security test, named what must not happen may count. Adding `test_get_patient_200` as “the security test” leaves `is_security_test({status_asserted: True})` true. The local pytest analogue is `test_http_200_only_is_not_a_security_test` — on a practice, not a live clinic.
 
 ## Prompt — clinic test_get_patient_200
 
 Rewrite the notes-app sentence. Include:
 
 1. who can act (another clinician’s token — not a live clinic);
-2. what you trust (named-what-must-not-happen tests are the promise; coverage percent and testing-guide ticks are not);
+2. what you trust (named-what must not happen tests are the promise; coverage percent and testing-guide ticks are not);
 3. what must not happen (`is_security_test({status_asserted: True})` true, not a legal label);
 4. a test idea on a **local** practice files only (other clinician must not 200);
 5. leftover (looking around 9.5, fuzzing with no named bad result, field grain 7.2);

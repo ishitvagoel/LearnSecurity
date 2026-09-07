@@ -84,8 +84,8 @@ export function displayHeading(raw: string): string {
   if (/^Can a second engineer /i.test(text)) {
     return "Could someone else check this from your notes?";
   }
-  if (text.startsWith("HITL")) {
-    return "Can people still use it";
+  if (text.startsWith("Three observations")) {
+    return "Three things to look at";
   }
   return text;
 }
@@ -103,6 +103,30 @@ export function plainLessonTitle(title: string): string {
     /Fail-on-vulnerable then pass-on-fixed/gi,
     "The broken files must fail this check",
   );
+  t = t.replace(/^attest_fail_export_denied without logging the APK$/i, "Log the deny, not the app file");
+  t = t.replace(/^deeplink_identity_ignored without logging the URL$/i, "Log the dropped link, not the URL");
+  t = t.replace(/^logout_wipes_cache without logging the body$/i, "Wipe the cache without logging the note");
+  t = t.replace(/^debug_to_prod_denied without logging the APK$/i, "Log the deny, not the APK");
+  t = t.replace(/^csp_report_only_not_enforced without logging HTML$/i, "Log that Report-Only is not enforcement, not the HTML");
+  t = t.replace(/^field_denied without logging the secret$/i, "Log the denied field, not the secret");
+  t = t.replace(/^unmapped_high_blocks without logging payloads$/i, "Block the unmapped HIGH without logging payloads");
+  t = t.replace(/^merge_blocked_no_tm without logging bodies$/i, "Block the merge without logging the threat-model body");
+  t = t.replace(/^revoked_share_read_denied without logging bodies$/i, "Log the revoked-share deny, not the note");
+  t = t.replace(/^crash_body_redacted without logging the body$/i, "Redact the crash report without logging the note");
+  t = t.replace(/^duplicate_capture_denied without logging PAN$/i, "Log the duplicate capture, not the card number");
+  t = t.replace(/^tool_denied without logging transcripts$/i, "Log the denied tool, not the transcript");
+  t = t.replace(/^body_tenant_mismatch without logging note bodies$/i, "Log the company mismatch, not the note");
+  t = t.replace(/^finding_closed_without_retest without logging bodies$/i, "Notice a close without a retest, without logging notes");
+  t = t.replace(/^security_suite_missing_isolation without logging bodies$/i, "Notice a missing isolation check, without logging notes");
+  t = t.replace(/^unmapped_req_blocks_release without logging bodies$/i, "Block the release without logging notes");
+  t = t.replace(/^worker_identity_wrong without logging the cookie$/i, "Log the wrong worker identity, not the cookie");
+  t = t.replace(/^webhook_sig_fail without logging the body$/i, "Log the bad signature, not the body");
+  t = t.replace(/^cluster_admin_denied without logging kubeconfig$/i, "Log the cluster-admin deny, not the kubeconfig");
+  t = t.replace(/^incident_closed_without_recovery without logging bodies$/i, "Notice a close without recovery, without logging notes");
+  t = t.replace(/^exception_incomplete_denied without logging secrets$/i, "Log the incomplete exception, not the secrets");
+  t = t.replace(/^copy_length_denied without logging file bytes$/i, "Log the oversize copy, not the file bytes");
+  t = t.replace(/^review_block_eval without logging the payload$/i, "Block eval in review without logging the payload");
+  t = t.replace(/^hash_mismatch_denied without logging secrets$/i, "Log the hash mismatch, not the secrets");
   t = t.replace(/SecureCollab's/g, "the notes app's");
   t = t.replace(/\bthe SecureCollab\b/g, "the notes app");
   t = t.replace(/\bSecureCollab\b/g, "the notes app");
@@ -248,7 +272,11 @@ const PROSE_PHRASES: [RegExp, string][] = [
     "The broken files must fail that. The repaired files must pass it",
   ],
   [/You are here to see that/g, "The point is to see that"],
-  [/This check asks whether/g, "Ask whether"],
+  [/still counts as a passing control/g, "still counts as a pass"],
+  [/count as a passing control/g, "count as a pass"],
+  [/\bwhat-must-not-happen\b/g, "what must not happen"],
+  [/Practice checks live in /g, "The checks live in "],
+  [/map-page row/g, "notes for this topic"],
   [/Attacker capability in this lab:/g, "Who could do this:"],
   [/Who can act in this story:/g, "Who could do this:"],
   [/Who can act here:/g, "Who could do this:"],

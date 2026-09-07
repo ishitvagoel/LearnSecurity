@@ -1,4 +1,4 @@
-# webhook_sig_fail without logging the body
+# Log the bad signature, not the body
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate

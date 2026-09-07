@@ -1,4 +1,4 @@
-# body_tenant_mismatch without logging note bodies
+# Log the company mismatch, not the note
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate

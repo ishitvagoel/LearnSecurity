@@ -1,4 +1,4 @@
-# field_denied without logging the secret
+# Log the denied field, not the secret
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate

@@ -9,7 +9,7 @@
 
 ## Picture: a broken coverage check must fail the status-only test
 
-A test that only counts passing tests can pass while a status-only row still counts as coverage. Ask whether membership without an isolation assert still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A test that only counts passing tests can pass while a status-only row still counts as coverage. Ask whether membership without an isolation assert still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at `asserts_isolation`. If both fail, the 
 | Abuse | Unsure flags are not coverage (fail closed; leftover if not in this check) |
 | Not claimed | A real checklist assessment; the verification gate; a later draft of a practice guide; that the named test actually isolates |
 
-The file is `labs/9.1/9.1-lab/tests/test_property.py`. The test `test_status_only_row_is_not_coverage` is a **what-must-not-happen** test: membership without an isolation assert is not allowed to count as coverage.
+The file is `labs/9.1/9.1-lab/tests/test_property.py`. The test `test_status_only_row_is_not_coverage` is a **what must not happen** test: membership without an isolation assert is not allowed to count as coverage.
 
 Honest isolation-assert rows may pass on both implementations. That does not excuse the status-only deny test. If the broken files do not fail `test_status_only_row_is_not_coverage`, the lab is miswired — fix the wiring, not the assertion.
 

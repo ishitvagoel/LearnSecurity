@@ -1,4 +1,4 @@
-# crash_body_redacted without logging the body
+# Redact the crash report without logging the note
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate

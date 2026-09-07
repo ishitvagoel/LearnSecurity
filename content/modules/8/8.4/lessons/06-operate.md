@@ -1,4 +1,4 @@
-# debug_to_prod_denied without logging the APK
+# Log the deny, not the APK
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate

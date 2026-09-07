@@ -1,4 +1,4 @@
-# logout_wipes_cache without logging the body
+# Wipe the cache without logging the note
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate

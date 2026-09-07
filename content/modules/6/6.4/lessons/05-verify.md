@@ -9,7 +9,7 @@
 
 ## Picture: a path that leaves the folder must fail
 
-A test that only greps `uuid` in a filename helper can pass while `resolve("../outside")` still leaves the folder. Ask whether an escaped object still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A test that only greps `uuid` in a filename helper can pass while `resolve("../outside")` still leaves the folder. Ask whether an escaped object still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -24,7 +24,7 @@ flowchart LR
 | When things break | If canonicalize is uncertain, deny (write it as leftover if this check does not cover it) |
 | Not claimed | Zip members; XML entities; pickle; live host reads; awareness-list “compliant” |
 
-Lab tests: `test_dotdot_does_not_escape_root` and `test_honest_relative_stays_under_root` in `labs/6.4/6.4-lab/tests/test_property.py`. The first test is a **what-must-not-happen** test: an escaped object is not allowed to count as a passing control. The name `../outside` is data for the prefix check — not a cookbook for other directories.
+Lab tests: `test_dotdot_does_not_escape_root` and `test_honest_relative_stays_under_root` in `labs/6.4/6.4-lab/tests/test_property.py`. The first test is a **what must not happen** test: an escaped object is not allowed to count as a pass. The name `../outside` is data for the prefix check — not a cookbook for other directories.
 
 ```text
 python3 -m pytest labs/6.4/6.4-lab/tests --impl vulnerable

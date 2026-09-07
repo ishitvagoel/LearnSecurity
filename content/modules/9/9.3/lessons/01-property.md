@@ -5,15 +5,15 @@
 
 ## The rule
 
-The notes app has a who-is-allowed check: a member of company B must not read a company A note. A test that only asserts HTTP 200 when the owner loads their own note does not name that what-must-not-happen. Line coverage is not that check.
+The notes app has a who-is-allowed check: a member of company B must not read a company A note. A test that only asserts HTTP 200 when the owner loads their own note does not name that what must not happen. Line coverage is not that check.
 
 > `is_security_test({"status_asserted": True})` must be false. A row that names `forbidden_outcome` may count.
 
 So what must not happen: **HTTP 200-only test counted as a security test**. That is honesty of the test suite — lesson 9.1 can mark the isolation row “covered” with a test that never isolates.
 
-Industry catalogues tell you *what* to consider (who is allowed, sessions, storage). They do not make `assert r.status_code == 200` a security test. If you add a race-condition test, it still needs a named what-must-not-happen (“the race must not grant”), not “the fuzzer ran.”
+Industry catalogues tell you *what* to consider (who is allowed, sessions, storage). They do not make `assert r.status_code == 200` a security test. If you add a race-condition test, it still needs a named what must not happen (“the race must not grant”), not “the fuzzer ran.”
 
-## Picture: named what-must-not-happen
+## Picture: named what must not happen
 
 ```mermaid
 flowchart TD
@@ -43,7 +43,7 @@ Someone treated the owner’s 200 as proof that isolation works. That is the cau
 | What has to be true first | `is_security_test` true when only `status_asserted` |
 | Trigger | Lesson 9.1 maps the isolation row to that test |
 | What it costs | Isolation holes ship with a green suite |
-| How you stop it | Require a named what-must-not-happen |
+| How you stop it | Require a named what must not happen |
 | How you notice | `security_suite_missing_isolation` |
 | How you recover | Add the isolation test; do not keep the 200-only row as security |
 
@@ -65,7 +65,7 @@ A failing security test must say what must not happen in the assertion message, 
 
 ## Practice
 
-Name one what-must-not-happen for the notes-app isolation row. Then run:
+Name one what must not happen for the notes-app isolation row. Then run:
 
 ```text
 python3 -m pytest labs/9.3/9.3-lab/tests --impl vulnerable

@@ -26,7 +26,7 @@ flowchart TD
 ```mermaid
 flowchart LR
   Guide[testing-guide row] --> Inventory[catalogue]
-  Pytest[what-must-not-happen assert] --> Evidence[evidence]
+  Pytest[what must not happen assert] --> Evidence[evidence]
   Inventory --> NotE[not evidence]
 ```
 
@@ -42,7 +42,7 @@ Do not invent a new catalogue. Take the tests you already have and ask whether e
 | What | Isolation row; HTTP 200 assert |
 | Actions | `is_security_test` |
 | Paths | CI |
-| What you trust for this journey | The named-what-must-not-happen check |
+| What you trust for this journey | The named-what must not happen check |
 | What you do not trust | Line coverage; lint; a testing-guide checkbox |
 | Time | The suite grows; looking around remains 9.5 |
 | The rule | Honesty of the test suite |

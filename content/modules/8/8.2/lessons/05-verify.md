@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: plaintext secret
 
-A check that only counts passing cases can pass while the cache still holds `'secret'`. Ask whether a text-file cache of `'secret'` still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A check that only counts passing cases can pass while the cache still holds `'secret'`. Ask whether a text-file cache of `'secret'` still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -27,7 +27,7 @@ If both pass, the check is not looking at the body on disk. If both fail, the fi
 | Normal | save `'other'` → not reported as plaintext secret (may pass on both) |
 | Not claimed | Real AES; backup exclusion; screenshot `FLAG_SECURE`; Keystore hardware |
 
-Practice checks live in `labs/8.2/8.2-lab/tests/test_property.py`. `test_cached_note_is_not_plaintext_on_disk` is a **what-must-not-happen** check: a text-file cache of `'secret'` is not allowed to count as a passing control.
+The checks live in `labs/8.2/8.2-lab/tests/test_property.py`. `test_cached_note_is_not_plaintext_on_disk` is a **what must not happen** check: a text-file cache of `'secret'` is not allowed to count as a pass.
 
 ```text
 python3 -m pytest labs/8.2/8.2-lab/tests --impl vulnerable
@@ -49,7 +49,7 @@ Record those as leftover risk or later topics, not as silent passes.
 
 ## Practice
 
-Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the map-page row. Reject a “check” that only greps `EncryptedSharedPreferences` without calling `save_note("secret")` then `plaintext_on_disk()`. A setup error is not proof the rule holds.
+Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the notes for this topic. Reject a “check” that only greps `EncryptedSharedPreferences` without calling `save_note("secret")` then `plaintext_on_disk()`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

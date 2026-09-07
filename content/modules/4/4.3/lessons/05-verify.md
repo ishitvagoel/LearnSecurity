@@ -24,7 +24,7 @@ flowchart LR
 | Header | Authorization still works |
 | Not claimed | Production Referer; magic-link exchange; HttpOnly on the wire |
 
-Lab tests in `labs/4.3/4.3-lab/tests/test_property.py`. `test_query_string_token_is_rejected` is a **what-must-not-happen** test: a query-minted session is not allowed to count as a passing control.
+Lab tests in `labs/4.3/4.3-lab/tests/test_property.py`. `test_query_string_token_is_rejected` is a **what must not happen** test: a query-minted session is not allowed to count as a pass.
 
 ```text
 python3 -m pytest labs/4.3/4.3-lab/tests --impl vulnerable

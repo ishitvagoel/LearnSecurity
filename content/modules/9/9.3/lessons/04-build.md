@@ -1,4 +1,4 @@
-# Require a named what-must-not-happen
+# Require a named what must not happen
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
@@ -15,7 +15,7 @@ The smallest restore for the notes app’s isolation suite is: 200-only → not 
 
 ```mermaid
 flowchart TD
-  Call[is_security_test] --> Fo{named what-must-not-happen?}
+  Call[is_security_test] --> Fo{named what must not happen?}
   Fo -->|yes| Allow[security test]
   Fo -->|no| Deny[not]
 ```
@@ -57,7 +57,7 @@ A failing security test must say what must not happen in the assertion message, 
 
 ## Practice
 
-Name the what-must-not-happen for the isolation row (cross-company GET must not succeed). Run:
+Name the what must not happen for the isolation row (cross-company GET must not succeed). Run:
 
 ```text
 python3 -m pytest labs/9.3/9.3-lab/tests --impl fixed

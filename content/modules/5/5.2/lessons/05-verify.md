@@ -28,7 +28,7 @@ If both pass, the test is not looking at Base64 decode of `protect("secret")`. I
 | Failure | If the library is missing, refuse the write — do not store plaintext |
 | Not claimed | Real AES-GCM; key storage; nonce uniqueness |
 
-The file is `labs/5.2/5.2-lab/tests/test_property.py`. The test `test_protect_is_not_mere_encoding` is a **what-must-not-happen** test: reversible encoding is not allowed to count as a passing control.
+The file is `labs/5.2/5.2-lab/tests/test_property.py`. The test `test_protect_is_not_mere_encoding` is a **what must not happen** test: reversible encoding is not allowed to count as a pass.
 
 A test that only greps `AES` in a comment without decoding `protect("secret")` is not this topic's evidence. This practice never opens a live column.
 

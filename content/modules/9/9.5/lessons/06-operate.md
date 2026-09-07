@@ -1,4 +1,4 @@
-# finding_closed_without_retest without logging bodies
+# Notice a close without a retest, without logging notes
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate

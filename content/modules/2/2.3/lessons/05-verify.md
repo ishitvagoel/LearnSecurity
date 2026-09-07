@@ -9,7 +9,7 @@ A green CSP scanner is not this week’s evidence. “Set-Cookie is present” i
 
 ## Picture: broken must fail the HttpOnly read
 
-A test that only counts collected items can pass while the reader still returns the session. Ask whether a script-readable session still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A test that only counts collected items can pass while the reader still returns the session. Ask whether a script-readable session still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -24,7 +24,7 @@ flowchart LR
 | When things break | Missing flag on a session name is a defect, not a silent readable default |
 | Not claimed | XSS impossible; CSP3 enforced; CORS correct; SameSite complete |
 
-The file is `labs/2.3/2.3-browser-policy/tests/test_httponly.py`. It calls `js_read_session` on a dummy cookie with `httponly: True` and `secure: True`. That is a **what-must-not-happen** test: a script-readable session is not allowed to count as a passing control.
+The file is `labs/2.3/2.3-browser-policy/tests/test_httponly.py`. It calls `js_read_session` on a dummy cookie with `httponly: True` and `secure: True`. That is a **what must not happen** test: a script-readable session is not allowed to count as a pass.
 
 ```text
 python3 -m pytest labs/2.3/2.3-browser-policy/tests --impl vulnerable

@@ -9,7 +9,7 @@ HTTP 200 on a single click is not this topic’s evidence. “The button is disa
 
 ## Picture: a retry that appends twice must fail
 
-A test that only asserts HTTP 200 once can pass while a retry still appends a second share. Ask whether a second grant still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A test that only asserts HTTP 200 once can pass while a retry still appends a second share. Ask whether a second grant still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -24,7 +24,7 @@ flowchart LR
 | When things break | Key-store uncertainty does not insert (not in this check; write it as leftover) |
 | Not claimed | Two first writes at the same time solved; worker stale shares gone; awareness-list “compliant”; payments safe |
 
-Lab tests: `test_single_share` and `test_retry_does_not_duplicate_side_effect` in `labs/2.4/2.4-state-time/tests/test_idempotency.py`. The second test calls `share_note` twice with `k1` and expects count 1. That is a **what-must-not-happen** test: a second grant is not allowed to count as a passing control.
+Lab tests: `test_single_share` and `test_retry_does_not_duplicate_side_effect` in `labs/2.4/2.4-state-time/tests/test_idempotency.py`. The second test calls `share_note` twice with `k1` and expects count 1. That is a **what must not happen** test: a second grant is not allowed to count as a pass.
 
 ```text
 python3 -m pytest labs/2.4/2.4-state-time/tests --impl vulnerable

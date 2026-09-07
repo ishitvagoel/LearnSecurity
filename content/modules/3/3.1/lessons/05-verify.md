@@ -9,7 +9,7 @@
 
 ## Picture: a broken log line must fail the check
 
-A test that only asserts logs exist can pass while the body is still in the line. Ask whether a confidential field in this log still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A test that only asserts logs exist can pass while the body is still in the line. Ask whether a confidential field in this log still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at the body substring. If both fail, the f
 | Abuse | Unsure values are not logged (fail closed; leftover if not in this check) |
 | Not claimed | All places covered; production logs clean; exception middleware safe; access logs safe |
 
-The file is `labs/3.1/3.1-lab/tests/test_property.py`. The test `test_note_body_is_not_logged` calls `log_event` with the synthetic body and asserts the substring is absent. That is a **what-must-not-happen** test: a confidential field in this log is not allowed to count as a passing control.
+The file is `labs/3.1/3.1-lab/tests/test_property.py`. The test `test_note_body_is_not_logged` calls `log_event` with the synthetic body and asserts the substring is absent. That is a **what must not happen** test: a confidential field in this log is not allowed to count as a pass.
 
 A test that only asserts HTTP 200 is not this topic's evidence. A test that only greps `Confidential` in a spreadsheet without calling `log_event` is not this topic's evidence. This practice never opens a production drain.
 

@@ -9,7 +9,7 @@
 
 ## Picture: a second k1 that charges twice must fail
 
-A test that only greps a processor header can pass while every capture still appends. Ask whether a double charge still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A test that only greps a processor header can pass while every capture still appends. Ask whether a double charge still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -23,7 +23,7 @@ flowchart LR
 | Normal | first k1 → may charge (may pass on both) |
 | Not claimed | live Stripe; card-network scope; a course gate; webhook path |
 
-Lab tests in `labs/E3/e3-lab/tests/test_property.py`. `test_duplicate_capture_does_not_double_charge` is a **what-must-not-happen** test: always-append `capture` is not allowed to count as a passing control. `reset()` keeps ledger state from leaking.
+Lab tests in `labs/E3/e3-lab/tests/test_property.py`. `test_duplicate_capture_does_not_double_charge` is a **what must not happen** test: always-append `capture` is not allowed to count as a pass. `reset()` keeps ledger state from leaking.
 
 ```text
 python3 -m pytest labs/E3/e3-lab/tests --impl vulnerable

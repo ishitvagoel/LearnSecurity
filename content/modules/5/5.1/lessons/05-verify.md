@@ -9,7 +9,7 @@
 
 ## Picture: leftover analytics or search must fail the check
 
-A test that only asserts the notes row is gone can pass while the warehouse still holds the body. Ask whether leftover analytics or search after delete still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A test that only asserts the notes row is gone can pass while the warehouse still holds the body. Ask whether leftover analytics or search after delete still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at `body_retained` after delete. If both f
 | Failure | Honest-path tests may pass on both; that does not excuse the leftover-copy tests |
 | Not claimed | Backups (later); a phone's offline cache (later); scheduled warehouse jobs |
 
-The file is `labs/5.1/5.1-lab/tests/test_property.py`. The test `test_deleted_account_leaves_no_analytics_body` calls `delete_account` then `body_retained`. That is a **what-must-not-happen** test: a leftover warehouse body is not allowed to count as a passing control.
+The file is `labs/5.1/5.1-lab/tests/test_property.py`. The test `test_deleted_account_leaves_no_analytics_body` calls `delete_account` then `body_retained`. That is a **what must not happen** test: a leftover warehouse body is not allowed to count as a pass.
 
 A test that only asserts HTTP 200 is not this topic's evidence. A test that only greps `DELETE FROM notes` without calling `body_retained` is not this topic's evidence. This practice never opens a live warehouse.
 

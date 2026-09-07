@@ -1,4 +1,4 @@
-# security_suite_missing_isolation without logging bodies
+# Notice a missing isolation check, without logging notes
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
@@ -9,25 +9,25 @@ A new endpoint can land with only 200 tests after `is_security_test` was “fixe
 
 ## Picture: missing isolation is a signal
 
-A missing named what-must-not-happen is a notice-and-recover problem, not a licence to quote the note in the paging channel. Notice names the suite. Recover adds the isolation test. Neither reprints the body.
+A missing named what must not happen is a notice-and-recover problem, not a licence to quote the note in the paging channel. Notice names the suite. Recover adds the isolation test. Neither reprints the body.
 
 ```mermaid
 flowchart TD
-  Suite[CI suite] --> Iso{isolation what-must-not-happen?}
+  Suite[CI suite] --> Iso{isolation what must not happen?}
   Iso -->|no| Metric["security_suite_missing_isolation plus 1"]
   Metric --> Block[block release]
 ```
 
 Industry lists talk about noticing, responding, and recovering. They do not pick a coverage product. They do not prove this suite is honest. Someone still has to own the leftover.
 
-Re-run `test_http_200_only_is_not_a_security_test` after any suite change. A green “94% coverage” tile is not that check. Field-level tests (7.2) and race-condition tests are other named what-must-not-happen of the same shape — inventory them before you claim recover. Keep 200-only tests as product tests; do not delete them, and do not let them occupy the security-suite slot.
+Re-run `test_http_200_only_is_not_a_security_test` after any suite change. A green “94% coverage” tile is not that check. Field-level tests (7.2) and race-condition tests are other named what must not happen of the same shape — inventory them before you claim recover. Keep 200-only tests as product tests; do not delete them, and do not let them occupy the security-suite slot.
 
 ## Signals that do not become a second leak
 
 | Outcome | This topic |
 |---|---|
 | Notice | `security_suite_missing_isolation` |
-| What the line holds | Suite name, missing what-must-not-happen; **never** bodies |
+| What the line holds | Suite name, missing what must not happen; **never** bodies |
 | Respond | Stop the mapping that counted 200-only as security; do not paste a failed isolation body into chat |
 | Recover | Add the isolation test; keep 200-only as product tests |
 | Leftover | Looking around (9.5); fuzz with no named bad result; field grain (7.2) |

@@ -9,7 +9,7 @@
 
 ## Picture: a broken close gate must fail the check
 
-A test that only counts passing tests can pass while recovery todo still closes. Ask whether an incident closed without recovery still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A test that only counts passing tests can pass while recovery todo still closes. Ask whether an incident closed without recovery still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -30,7 +30,7 @@ The second what must not happen is **`note_body` in logs** — `test_cannot_clos
 | Normal | done + ok → may close (may pass on both) |
 | Not claimed | live paging; a known-exploited list; an assurance gate; that restore actually ran |
 
-The file is `labs/10.5/10.5-lab/tests/test_property.py`. The test `test_cannot_close_without_recovery` is a **what-must-not-happen** test: always-true `close_incident` is not allowed to count as a passing control.
+The file is `labs/10.5/10.5-lab/tests/test_property.py`. The test `test_cannot_close_without_recovery` is a **what must not happen** test: always-true `close_incident` is not allowed to count as a pass.
 
 Honest recovery plus safe logs may pass on both implementations. That does not excuse the two deny tests. If the broken files do not fail `test_cannot_close_without_recovery`, the lab is miswired — fix the wiring, not the assertion.
 

@@ -9,7 +9,7 @@
 
 ## Picture: broken must fail: body switch
 
-A test that only counts how many row-level rules exist can pass while a body-chosen company still wins. Ask whether body-wins `tenant_for` is allowed to count as a passing control. The broken files must fail that. The repaired files must pass it.
+A test that only counts how many row-level rules exist can pass while a body-chosen company still wins. Ask whether body-wins `tenant_for` is allowed to count as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -23,7 +23,7 @@ flowchart LR
 | Normal | session A, body A → A (may pass on both) |
 | Not claimed | relationship graph; famous-bugs dashboard; course gate; search/cache keys |
 
-The file is `labs/E5/e5-lab/tests/test_property.py`. `test_body_cannot_switch_tenant` is a **what-must-not-happen** test: body-wins `tenant_for` is not allowed to count as a passing control.
+The file is `labs/E5/e5-lab/tests/test_property.py`. `test_body_cannot_switch_tenant` is a **what must not happen** test: body-wins `tenant_for` is not allowed to count as a pass.
 
 ```text
 python3 -m pytest labs/E5/e5-lab/tests --impl vulnerable

@@ -9,7 +9,7 @@ Happy-path “1 item collected” is not evidence. The check must be **false** o
 
 ## Picture: a broken recovery must fail the check
 
-A test that only asserts the confirm function exists can pass while the control remains mouse-only. Ask whether inaccessible recovery still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A test that only asserts the confirm function exists can pass while the control remains mouse-only. Ask whether inaccessible recovery still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart TD
@@ -30,7 +30,7 @@ If both pass, the test is not looking at `mouse_only`, name, or keyboard. If bot
 | Abuse | Sharing an admin session to skip recovery is **out of band** here: record it as leftover risk, not as a check in this folder |
 | When things break | Missing name or keyboard fails closed (`is_usable_accessible` is false) |
 
-The file is `labs/1.4/1.4-risk-register/tests/test_recovery_a11y.py`. It calls `recovery.recovery_confirm_control()` and asserts `is_usable_accessible`. That is a **what-must-not-happen** test: inaccessible recovery is not allowed to count as a passing control.
+The file is `labs/1.4/1.4-risk-register/tests/test_recovery_a11y.py`. It calls `recovery.recovery_confirm_control()` and asserts `is_usable_accessible`. That is a **what must not happen** test: inaccessible recovery is not allowed to count as a pass.
 
 A test that only asserts HTTP 200 is not this topic’s evidence. This practice never opens a network socket.
 

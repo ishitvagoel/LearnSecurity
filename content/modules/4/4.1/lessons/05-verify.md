@@ -9,7 +9,7 @@
 
 ## Picture: a leftover session must fail the check
 
-A test that only asserts the profile is gone can pass while the cookie still works. Ask whether a leftover session after delete still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A test that only asserts the profile is gone can pass while the cookie still works. Ask whether a leftover session after delete still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at `session_valid` after delete. If both f
 | Failure | Resurrected map entry still denied (`test_deleted_denies_even_if_session_map_still_has_row`) |
 | Not claimed | Identity-provider logout; refresh tokens; phone cache; token denylist complete |
 
-The file is `labs/4.1/4.1-lab/tests/test_property.py`. The test `test_deleted_user_session_is_dead` calls `delete_user` then `session_valid`. That is a **what-must-not-happen** test: a leftover session that still works is not allowed to count as a passing control.
+The file is `labs/4.1/4.1-lab/tests/test_property.py`. The test `test_deleted_user_session_is_dead` calls `delete_user` then `session_valid`. That is a **what must not happen** test: a leftover session that still works is not allowed to count as a pass.
 
 A test that only asserts HTTP 200 is not this topic's evidence. A test that only greps `DELETED.add` without calling `session_valid` after `delete_user` is not this topic's evidence. This practice never opens a live identity provider.
 

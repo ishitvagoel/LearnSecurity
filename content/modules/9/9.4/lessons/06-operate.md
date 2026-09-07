@@ -1,4 +1,4 @@
-# unmapped_high_blocks without logging payloads
+# Block the unmapped HIGH without logging payloads
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate

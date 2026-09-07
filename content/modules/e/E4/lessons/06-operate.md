@@ -1,4 +1,4 @@
-# copy_length_denied without logging file bytes
+# Log the oversize copy, not the file bytes
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate

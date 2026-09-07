@@ -1,4 +1,4 @@
-# incident_closed_without_recovery without logging bodies
+# Notice a close without recovery, without logging notes
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate

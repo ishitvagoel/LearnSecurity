@@ -1,4 +1,4 @@
-# duplicate_capture_denied without logging PAN
+# Log the duplicate capture, not the card number
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate

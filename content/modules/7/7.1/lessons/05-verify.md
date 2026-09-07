@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: is_admin
 
-A check that only counts passing cases can pass while extra keys still write `is_admin`. Ask whether writing `is_admin` still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A check that only counts passing cases can pass while extra keys still write `is_admin`. Ask whether writing `is_admin` still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ flowchart LR
 
 If both pass, the check is not looking at extra keys. If both fail, the fix is not structural or the check is wrong.
 
-## Three observations, even for a profile
+## Three things to look at
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,7 +28,7 @@ If both pass, the check is not looking at extra keys. If both fail, the fix is n
 | Extra | Unknown keys do not become columns (`test_unknown_key_does_not_appear`) |
 | Not claimed | GraphQL cost; unused methods; production inventory matches OpenAPI |
 
-Practice checks live in `labs/7.1/7.1-lab/tests/test_property.py`. `test_is_admin_cannot_be_patched` is a **what-must-not-happen** check: a binder that writes `is_admin` is not allowed to count as a passing control.
+The checks live in `labs/7.1/7.1-lab/tests/test_property.py`. `test_is_admin_cannot_be_patched` is a **what must not happen** check: a binder that writes `is_admin` is not allowed to count as a pass.
 
 ```text
 python3 -m pytest labs/7.1/7.1-lab/tests --impl vulnerable
@@ -50,7 +50,7 @@ Record those as leftover risk or later topics, not as silent passes.
 
 ## Practice
 
-Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the map-page row. Reject a “check” that only greps `extra = 'forbid'` in a Pydantic model without calling `apply(..., {"is_admin": true})`. A setup error is not proof the rule holds.
+Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the notes for this topic. Reject a “check” that only greps `extra = 'forbid'` in a Pydantic model without calling `apply(..., {"is_admin": true})`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

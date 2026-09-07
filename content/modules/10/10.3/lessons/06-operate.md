@@ -1,4 +1,4 @@
-# cluster_admin_denied without logging kubeconfig
+# Log the cluster-admin deny, not the kubeconfig
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate

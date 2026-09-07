@@ -1,4 +1,4 @@
-# exception_incomplete_denied without logging secrets
+# Log the incomplete exception, not the secrets
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate

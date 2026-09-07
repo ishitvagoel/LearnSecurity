@@ -9,7 +9,7 @@
 
 ## Picture: a broken merge check must fail the empty-change test
 
-A test that only counts passing checks can pass while an empty dict still merges. Ask whether merge without a threat-model id still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A test that only counts passing checks can pass while an empty dict still merges. Ask whether merge without a threat-model id still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at `threat_model`. If both fail, the fix i
 | Abuse | Unsure or empty ids are deny (fail closed; leftover if not in this check) |
 | Not claimed | A live GitHub org; Gate 10; a maturity score; that TM-12 covers this change |
 
-The file is `labs/10.1/10.1-lab/tests/test_property.py`. The test `test_merge_requires_threat_model_id` is a **what-must-not-happen** test: always-true `merge_ok` is not allowed to count as a passing control.
+The file is `labs/10.1/10.1-lab/tests/test_property.py`. The test `test_merge_requires_threat_model_id` is a **what must not happen** test: always-true `merge_ok` is not allowed to count as a pass.
 
 Honest `{"threat_model": "TM-12"}` may pass on both implementations. That does not excuse the empty-change deny test. If the broken files do not fail `test_merge_requires_threat_model_id`, the lab is miswired — fix the wiring, not the assertion.
 

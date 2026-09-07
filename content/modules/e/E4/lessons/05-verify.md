@@ -9,7 +9,7 @@
 
 ## Picture: broken must fail the oversize copy
 
-A test that only greps `Kotlin` in a README can pass while `copy_into(4, b"abcdefgh", 4)` still returns 8 bytes. Ask whether an oversize copy still counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A test that only greps `Kotlin` in a README can pass while `copy_into(4, b"abcdefgh", 4)` still returns 8 bytes. Ask whether an oversize copy still counts as a pass. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
@@ -23,7 +23,7 @@ flowchart LR
 | Normal | Short declared length may copy (may pass on both) |
 | Not claimed | A C walkthrough; an awareness-list dashboard; a course gate; integer wrap |
 
-Lab tests in `labs/E4/e4-lab/tests/test_property.py`. `test_copy_does_not_exceed_buffer` is a **what-must-not-happen** test: `declared_len` plus 8 is not allowed to count as a passing control.
+Lab tests in `labs/E4/e4-lab/tests/test_property.py`. `test_copy_does_not_exceed_buffer` is a **what must not happen** test: `declared_len` plus 8 is not allowed to count as a pass.
 
 ```text
 python3 -m pytest labs/E4/e4-lab/tests --impl vulnerable

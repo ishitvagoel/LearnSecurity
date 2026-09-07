@@ -1,4 +1,4 @@
-# deeplink_identity_ignored without logging the URL
+# Log the dropped link, not the URL
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate

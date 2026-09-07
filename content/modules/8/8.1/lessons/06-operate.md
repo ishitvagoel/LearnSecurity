@@ -1,4 +1,4 @@
-# attest_fail_export_denied without logging the APK
+# Log the deny, not the app file
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
