@@ -20,11 +20,11 @@ flowchart TD
   Body[body tenant] --> Ignore[log mismatch only]
 ```
 
-Do not accept “we enabled row-level rules” as membership in the session. Production still needs copies (search, cache, lake) to *include* the company — a note id without company is a sibling grain. Honest super-admin impersonation is a later audited path, not a body field. Applying grant changes immediately is advanced — not this week’s pytest.
+Do not accept “we enabled row-level rules” as membership in the session. Production still needs copies (search, cache, lake) to *include* the company — a note id without company is a sibling grain. Honest super-admin impersonation is a later audited path, not a body field. Applying grant changes immediately is advanced — not this week's check.
 
 If the body company disagrees with the session, **log** `body_tenant_mismatch` and still use the session.
 
-Industry checklists want isolation enforced. This pytest is that sentence for body-vs-session.
+Industry lists ask for isolation enforced. This pytest is that sentence for body-vs-session.
 
 ## What the repaired files must show
 
@@ -57,7 +57,7 @@ It must pass. Run from the lab directory if collection at repo root is polluted.
 
 ## Use it somewhere new
 
-Clinic: ignore `org_id` in JSON the same way. Bind the company from the session.
+A clinic example: ignore `org_id` in JSON the same way. Bind the company from the session.
 
 ## What can still go wrong
 

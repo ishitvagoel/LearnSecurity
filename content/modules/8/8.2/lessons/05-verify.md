@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# The broken files must fail when the secret is in plaintext
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -49,12 +49,12 @@ Record those as leftover risk or later topics, not as silent passes.
 
 ## Practice
 
-Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the map-page row. Reject a “check” that only greps `EncryptedSharedPreferences` without calling `save_note("secret")` then `plaintext_on_disk()`. An environment error is not security evidence.
+Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the map-page row. Reject a “check” that only greps `EncryptedSharedPreferences` without calling `save_note("secret")` then `plaintext_on_disk()`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts Room `insert` succeeded is not this cell. Personal-phone imaging is out of scope.
+A clinic example: a test that only asserts Room `insert` succeeded is not this rule. Personal-phone imaging is out of scope.
 
 ## What this page is not doing
 
-Do not add a live backup trophy. Do not log note bodies. Answer keys are not on this site. Do not claim the lab prefix is AES.
+Do not treat a live backup screenshot as proof. Do not log note bodies. Answer keys are not on this site. Do not claim the lab prefix is AES.

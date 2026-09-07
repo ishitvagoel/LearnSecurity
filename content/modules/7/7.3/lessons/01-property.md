@@ -11,7 +11,7 @@ The notes app may accept provider callbacks (billing, export-ready, invite used)
 
 What must not happen is **an unsigned webhook body accepted**. That is authenticity and integrity of the inbound integration.
 
-Industry lists want a standard-library MAC, not a homemade hash. Replay and freshness are leftovers, not this week’s empty-sig check. Per-message digital signatures beyond HMAC are **advanced** work, not this pytest. A famous-bugs nickname for unsafe consumption of APIs is awareness after the cause. HMAC here is a teaching stand-in, not “we are Stripe.”
+Industry lists ask for a standard-library MAC, not a homemade hash. Replay and freshness are leftovers, not this week’s empty-sig check. Per-message digital signatures beyond HMAC are **advanced** work, not this check. A famous-bugs nickname for unsafe consumption of APIs is awareness after the cause. HMAC here is a teaching stand-in, not “we are Stripe.”
 
 ## Picture: hitting the path versus authenticity
 
@@ -51,7 +51,7 @@ If you parse JSON then re-serialize, the MAC is over a different document than t
 
 ## What the framework does vs what you still have to check
 
-FastAPI will accept a POST with an empty header. A vendor SDK’s verify helper is not your custom MAC if you hash parsed JSON. JWT login of the *user* is a different cell.
+FastAPI will accept a POST with an empty header. A vendor SDK’s verify helper is not your custom MAC if you hash parsed JSON. JWT login of the *user* is a different rule.
 
 The app’s promise is: **this** `accept` check, on **this** practice string, is false when the signature is missing. The folder is `labs/7.3/7.3-lab`. Local only. No live webhooks.
 

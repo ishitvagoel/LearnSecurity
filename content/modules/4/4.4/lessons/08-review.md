@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"IDs are hard to guess"| False[False comfort]
 ```
 
-Review starts at the protected effect (n2 denied for Bob). Everything that is not an object-keyed lookup at that call is a candidate leftover path. A role list named `admin` without a company comparison is the eve×n1 smell, not a different finding class.
+Start from what must stay true (n2 denied for Bob). Everything that is not an object-keyed lookup at that call is a candidate leftover path. A role list named `admin` without a company comparison is the eve×n1 smell, not a different finding class.
 
 Leftover permission is permission from the surroundings — a signed-in user, “has any share,” an unscoped admin flag — used as if it were a yes for this person, this note, and this action.
 
@@ -38,7 +38,7 @@ Also reject: trusting the client; closing findings without re-running `test_gran
 
 ## Common mix-ups
 
-- A scanner “IDOR” name is the missing cell
+- A scanner “IDOR” name is the missing rule
 - A role replaces object grants
 - Signed ids are capabilities
 - `Depends(get_user)` is who-is-allowed

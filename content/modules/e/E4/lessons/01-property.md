@@ -11,7 +11,7 @@ The notes app unpacks files and copies bytes into a destination. **Integrity of 
 
 What must not happen is **a copy that exceeds the destination**. This elective is a Python length stand-in. It is not a C exploit course.
 
-Manufacturer guidance that tells a company to prefer memory-safe languages is not the lab check. Industry checklists want unstructured data handled so it does not become an unexpected overwrite. Native unpackers and leftover C codecs are leftover risk, later and harder — not this pytest. Do not invent a “memory safety” chapter id as the rule.
+Manufacturer guidance that tells a company to prefer memory-safe languages is not the lab check. Industry lists ask for unstructured data handled so it does not become an unexpected overwrite. Native unpackers and leftover C codecs are leftover risk, later and harder — not this check. Do not invent a “memory safety” chapter id as the rule.
 
 ## Picture: destination size is the rule
 
@@ -24,7 +24,7 @@ flowchart TD
   Gate -->|declared_len only| Bad["len dst > bufsize"]
 ```
 
-Who can act: someone who controls a file header length. What you trust: a local `copy_into(bufsize, src, declared_len)` that bounds the copy by destination size. Do not compile a native overflow.
+Who could do this: someone who controls a file header length. What is supposed to stop this: a local `copy_into(bufsize, src, declared_len)` that bounds the copy by destination size. Do not compile a native overflow.
 
 **A tool is not the rule.** “We use Kotlin,” a sanitizer in CI, or an awareness-list dashboard is not this sentence.
 
@@ -81,4 +81,4 @@ Clinic DICOM / image parser. Protobuf C extension.
 
 ## What this page is not doing
 
-Weaponized native exploits. An awareness list as the syllabus. Course gates from this page. Answer keys are not on this site.
+Weaponized native exploits. An awareness list as the syllabus. This page does not finish a check-in. Answer keys are not on this site.

@@ -19,7 +19,7 @@ Do not load-test a public host, an employer share endpoint, or a live clinic boo
 
 What must not happen: share grants exceed the product cap of 5. Looping `add_share()` eight times yields `last > 5`.
 
-Who can act here: a **scripted client** that can call `add_share` in a loop. That stands in for a disabled `max=5` select, an import path, or eight rapid POSTs. What you are supposed to trust: the **write path** denies the sixth grant. HTML, nginx `limit_req`, and a filter named after an awareness list are not what you trust.
+Who could do this: a **scripted client** that can call `add_share` in a loop. That stands in for a disabled `max=5` select, an import path, or eight rapid POSTs. What is supposed to stop this: the **write path** denies the sixth grant. HTML, nginx `limit_req`, and a filter named after an awareness list are not enough.
 
 ## Picture: increment with no ceiling
 
@@ -34,7 +34,7 @@ The broken files show **cause** (policy only in the UI / no write-path check), n
 
 A React `max={5}` is a usability hint, not that implementation.
 
-## What to look at — cause, not a trophy
+## What to look at: the cause, not a trophy
 
 Read `vulnerable/share_limit.py`. `add_share` always increments and returns `_n`. Checks:
 
@@ -70,11 +70,11 @@ FastAPI does not know “five members.” SQLAlchemy `add()` will insert a sixth
 python3 -m pytest labs/3.4/3.4-lab/tests --impl vulnerable
 ```
 
-Record `test_share_cap_is_enforced`. Do not weaken it to “a max attribute exists.” An environment error is not security evidence.
+Record `test_share_cap_is_enforced`. Do not weaken it to “a max attribute exists.” A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic: four `add_guardian` calls vs cap 3. Predict without leaving this directory. Do not hit a clinic API.
+A clinic example: four `add_guardian` calls vs cap 3. Predict without leaving this directory. Do not hit a clinic API.
 
 ## Can people still use it
 

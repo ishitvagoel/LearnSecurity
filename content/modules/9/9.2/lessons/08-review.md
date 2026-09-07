@@ -23,7 +23,7 @@ flowchart TD
   Q -->|bot looks good| False[False comfort]
 ```
 
-The review starts at the protected effect (eval-on-user rejected). Everything that is not an interpreter question at that call is a candidate always-approve path. A formatter screenshot without that pytest is the same smell, not a different finding class.
+The review starts at the protected effect (eval-on-user rejected). Everything that is not an interpreter question at that call is a candidate always-approve path. A formatter screenshot without that check is the same problem, not a different kind of finding.
 
 The lab substring is a stand-in — name `exec(` and generated code as leftover, do not skip `test_eval_on_user_input_is_rejected`. Do not dump weaponized eval. Do not claim a course gate.
 

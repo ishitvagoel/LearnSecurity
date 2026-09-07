@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# A broken cache must fail the check
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -32,7 +32,7 @@ If both pass, the check is not looking at the cross-company get. If both fail, t
 
 The file is `labs/2.2/2.2-request-path/tests/test_cache_key.py`. The checks are `test_same_tenant_cache_hit` and `test_other_tenant_does_not_receive_cached_body`. They observe bodies, not HTTP 200. That is a **what-must-not-happen** pair: a company B get of `tenant-A-note` is not allowed to count as a passing cache.
 
-Map each check to a cell from the request-path map. Do not paste keys. If the broken files do not fail the cross-company get, the practice files are miswired — fix the wiring, not the assertion.
+Map each check to a rule from the request-path map. Do not paste keys. If the broken files do not fail the cross-company get, the practice files are miswired — fix the wiring, not the assertion.
 
 TLS 1.3 on the browser hop is not this check. A check that only asserts HTTPS is a tool observation.
 

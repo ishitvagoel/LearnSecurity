@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"filter has awareness rule"| False[False comfort]
 ```
 
-Classification starts at the protected effect (count ≤ 5 after eight writes). Everything that is not a write-path ceiling at that loop is a candidate leftover path.
+Start from what must stay true (count ≤ 5 after eight writes). Everything that is not a write-path ceiling at that loop is a candidate leftover path.
 
 ## Problems to find (name them yourself)
 

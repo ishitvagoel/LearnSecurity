@@ -23,7 +23,7 @@ flowchart TD
 
 The repaired files use a `set` of consumed tokens. Production still needs a lock for true concurrent accepts — named leftover, not this sequential pytest. Token in the query string is 4.3. Email as proof of the recipient is 4.2. Password reset and later jobs (7.4) are the same family with different “once” meanings.
 
-Industry lists want no double-booking. This pytest is that sentence for sequential `accept`.
+Industry lists ask for no double-booking. This pytest is that sentence for sequential `accept`.
 
 ## What the repaired files must show
 
@@ -71,8 +71,8 @@ It must pass. Then write one sentence: which rule is restored, and which leftove
 
 ## Use it somewhere new
 
-Clinic: stop treating “link clicked” as unlimited joins; consume in the store.
+A clinic example: stop treating “link clicked” as unlimited joins; consume in the store.
 
 ## What can still go wrong
 
-True concurrent accepts without a lock. Fail-open on store errors. Phishable mail. Token in the URL. A last-resort handler is not this pytest.
+True concurrent accepts without a lock. Fail-open on store errors. Phishable mail. Token in the URL. A last-resort handler is not this check.

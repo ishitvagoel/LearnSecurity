@@ -24,7 +24,7 @@ flowchart TD
 | Recover | Revoke; purge matching logs |
 | Leftover | History and screenshots you cannot purge |
 
-Industry lists name detect, respond, recover. They do not prove secrets stay out of the URL. A log-product name is not the rule. Re-run `test_query_string_token_is_rejected` after any parser change; a green TLS dashboard is not that pytest. History, screenshots, and chat pastes remain leftovers you cannot purge — revoke the token anyway.
+Industry lists talk about noticing, responding, and recovering. They do not prove secrets stay out of the URL. Naming a product is not the rule. Re-run `test_query_string_token_is_rejected` after any parser change; a green TLS dashboard is not that check. History, screenshots, and chat pastes remain leftovers you cannot purge — revoke the token anyway.
 
 Recovery is incomplete if the next deploy still builds `?access_token=` in a Next.js share helper. Grep the frontend for query builders the same day you rotate the signing key, or the next copied URL re-issues the leak. uvicorn will keep printing the query unless the access-log format changes; notice still belongs in `session_from_request` before any log line is written.
 
@@ -44,8 +44,8 @@ Reject any line that includes `secret`, a note body, or a full URL with a query 
 
 ## Use it somewhere new
 
-Clinic: notice `?token=` on appointment links; do not paste the URL into the ticket. Do not fetch the SMS link.
+A clinic example: notice `?token=` on appointment links; do not paste the URL into the ticket. Do not fetch the SMS link.
 
 ## What this page is not doing
 
-A log-product name is not the rule. Live log dumps are out of scope. This site does not mark you as finished.
+Naming a product is not the rule. Live log dumps are out of scope. This site does not mark you as finished.

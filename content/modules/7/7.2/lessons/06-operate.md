@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Rotate[Rotate if the value escaped]
 ```
 
-Industry lists name detect, respond, recover. They do not check role × field. They do not prove field permission. A GraphQL-gateway product name is not the rule. Re-run `test_member_cannot_resolve_internal_field` after any serializer change; a green “field authz enabled” tile is not that pytest. Search highlighting and overnight export are other dumps of the same row — inventory them before you claim recover.
+Industry lists talk about noticing, responding, and recovering. They do not check role × field. They do not prove field permission. Naming a GraphQL-gateway product is not the rule. Re-run `test_member_cannot_resolve_internal_field` after any serializer change; a green “field authz enabled” tile is not that check. Search highlighting and overnight export are other dumps of the same row — inventory them before you claim recover.
 
 ## Signals that do not become a second leak
 
@@ -49,8 +49,8 @@ Reject any line that includes the field value, a real SSN, or a live GraphQL tra
 
 ## Use it somewhere new
 
-Clinic: detect SSN field probes on a local practice files; do not attach the SSN to the ticket. Do not query a live EHR.
+A clinic example: detect SSN field probes on a local practice files; do not attach the SSN to the ticket. Do not query a live EHR.
 
 ## What this page is not doing
 
-A GraphQL-gateway product name is not the rule. Public GraphQL probes are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Naming a GraphQL-gateway product is not the rule. Public GraphQL probes are out of scope. This site does not mark you as finished. Answer keys are not on this site.

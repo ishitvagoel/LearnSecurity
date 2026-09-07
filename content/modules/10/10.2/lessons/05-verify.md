@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# A broken install check must fail the mismatch test
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -62,8 +62,8 @@ Paste nothing from answer keys. Write fail/pass into your notes next to the mism
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts “npm ci ran” is not this topic. A live registry is out of scope.
+A clinic example: a test that only asserts “npm ci ran” is not this topic. A live registry is out of scope.
 
 ## What this page is not doing
 
-Do not add a live-npm trophy. Do not log registry tokens. Answer keys are not on this site. The ship gate stays not-attempted.
+Do not treat a live npm screenshot as proof. Do not log registry tokens. Answer keys are not on this site. The ship gate stays not finished.

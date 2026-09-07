@@ -24,7 +24,7 @@ flowchart TD
 | Recover | Revoke the client; rotate signing keys if tokens self-verify |
 | Leftover | PKCE / nonce / DPoP not in this practice |
 
-Industry lists name detect, respond, recover. They do not prove the `aud` comparison. A log-product name is not the rule. Re-run `test_wrong_audience_is_rejected` after any verifier change; a green OpenID dashboard is not that pytest. Missing `aud` is the same what must not happen as `aud=other-api` — do not close one without retesting the other. A leaked token that already has the *correct* audience is leftover (revocation / sender-constraint), not a pass for this metric.
+Industry lists talk about noticing, responding, and recovering. They do not prove the `aud` comparison. Naming a product is not the rule. Re-run `test_wrong_audience_is_rejected` after any verifier change; a green OpenID dashboard is not that check. Missing `aud` is the same what must not happen as `aud=other-api` — do not close one without retesting the other. A leaked token that already has the *correct* audience is leftover (revocation / sender-constraint), not a pass for this metric.
 
 ## What the framework does vs what you still have to check
 
@@ -42,8 +42,8 @@ Reject any line that includes a raw JWT, a note body, or “OpenID Connect handl
 
 ## Use it somewhere new
 
-Clinic: notice FHIR tokens with the wrong hospital aud; do not paste the token into the ticket. Do not query a live FHIR server.
+A clinic example: notice FHIR tokens with the wrong hospital aud; do not paste the token into the ticket. Do not query a live FHIR server.
 
 ## What this page is not doing
 
-A log-product name is not the rule. Live identity-provider audits are out of scope. This site does not mark you as finished.
+Naming a product is not the rule. Live identity-provider audits are out of scope. This site does not mark you as finished.

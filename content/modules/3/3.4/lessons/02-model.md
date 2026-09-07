@@ -9,7 +9,7 @@
 
 This week’s freeze: one note, `add_share` counter, cap 5. No live GraphQL, no production filter.
 
-## Picture: five allowed, sixth is a different cell
+## Picture: five allowed, sixth is a different rule
 
 ```mermaid
 stateDiagram-v2
@@ -67,7 +67,7 @@ Draw this map so someone else could name pytest cases. Point at `labs/3.4/3.4-la
 
 ## Use it somewhere new
 
-Clinic: states `0..3` guardians. Invite tokens: one token ≠ unbounded redemption.
+A clinic example: states `0..3` guardians. Invite tokens: one token ≠ unbounded redemption.
 
 ## What can still go wrong
 

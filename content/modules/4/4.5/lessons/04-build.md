@@ -20,9 +20,9 @@ flowchart TD
   Aud -->|yes| Next["who-is-allowed on the note"]
 ```
 
-The lab’s repaired files compare `aud` (string or list membership) to `expected_aud`. PKCE, `state`, `nonce`, JWKS, `iss`, and DPoP are named leftovers — they are not proven by this practice. Browser-app and native-app RFCs name client-shape holes; this pytest is the resource-server `aud` check only.
+The lab’s repaired files compare `aud` (string or list membership) to `expected_aud`. PKCE, `state`, `nonce`, JWKS, `iss`, and DPoP are named leftovers — they are not proven by this practice. Browser-app and native-app RFCs name client-shape holes; this check is the resource-server `aud` check only.
 
-Industry checklists want tokens intended for that service. This pytest is that sentence for `securecollab-api`.
+Industry lists ask for tokens intended for that service. This pytest is that sentence for `securecollab-api`.
 
 ## What the repaired files must show
 
@@ -56,7 +56,7 @@ It must pass.
 
 ## Use it somewhere new
 
-Clinic FHIR resource server with a hospital-specific `aud`. Native redirect (claimed HTTPS, not a custom scheme) is leftover, not this pytest.
+Clinic FHIR resource server with a hospital-specific `aud`. Native redirect (claimed HTTPS, not a custom scheme) is leftover, not this check.
 
 ## What this page is not doing
 

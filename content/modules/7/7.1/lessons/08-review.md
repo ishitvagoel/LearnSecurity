@@ -23,7 +23,7 @@ flowchart TD
   Q -->|SPA omits checkbox| False[False comfort]
 ```
 
-Classification starts at the protected effect (`is_admin` still false). Everything that is not a server `ALLOWED` copy at that call is a candidate extra-key path. An OpenAPI file without that pytest is the same smell, not a different finding class.
+Start from what must stay true (`is_admin` still false). Everything that is not a server `ALLOWED` copy at that call is a candidate extra-key path. An OpenAPI file without that check is the same problem, not a different kind of finding.
 
 A missing SPA checkbox (3.4’s client leftover, restated for fields) does not bind `apply`. Leftover `/v0` and GraphQL `input: JSON` are other binders — name them, do not skip `test_is_admin_cannot_be_patched`.
 

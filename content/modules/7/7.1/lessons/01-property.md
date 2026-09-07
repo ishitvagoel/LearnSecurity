@@ -5,13 +5,13 @@
 
 ## The rule
 
-The notes app this week lets a member change their profile. The JSON document is **data**. `is_admin`, company id, and billing flags are **not** in the writable set. Last topic (1.2) said authority is a cell. This week’s grain is **which keys that cell may write**. Extra keys are not writable fields.
+The notes app this week lets a member change their profile. The JSON document is **data**. `is_admin`, company id, and billing flags are **not** in the writable set. Last topic (1.2) said who-is-allowed is a rule. This week's grain is **which keys that rule may write**. Extra keys are not writable fields.
 
 > After `apply(user, {"is_admin": true})`, `is_admin` must still be false. An honest `display_name` may change.
 
 What must not happen: **a client change sets `is_admin`**. That is authorization of properties, not “missing login.”
 
-Industry lists want allowed fields limited per action. Turning GraphQL schema listing off in production (unless the API is meant for other parties) is an **inventory** problem. GraphQL query cost is a **different cell** (6.7), not extra change arguments. Unused HTTP methods are leftover, later, and **advanced**. A famous-bugs nickname for extra fields or leftover endpoints is awareness after the cause, not this sentence. An OpenAPI file is inventory, not this sentence.
+Industry lists ask for allowed fields limited per action. Turning GraphQL schema listing off in production (unless the API is meant for other parties) is an **inventory** problem. GraphQL query cost is a **different rule** (6.7), not extra change arguments. Unused HTTP methods are leftover, later, and **advanced**. A famous-bugs nickname for extra fields or leftover endpoints is awareness after the cause, not this sentence. An OpenAPI file is inventory, not this sentence.
 
 ## Picture: the binder maps any key
 
@@ -83,4 +83,4 @@ Clinic change `{is_staff:true}`. GraphQL mutation arguments. gRPC unknown fields
 
 ## What this page is not doing
 
-Live public-API attacks, dumping Pydantic source into notes. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not on this site.
+Live public-API attacks, dumping Pydantic source into notes. Opening this page does not finish a check-in. Answer keys are not on this site.

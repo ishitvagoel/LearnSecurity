@@ -19,7 +19,7 @@ Do not run `SELECT` against a live cluster, an employer replica, or a public dem
 
 What must not happen: the app database role can read another company’s rows. `can_select("app", "tB", "tA") is True`.
 
-Who can act here: a forgotten `WHERE`, later injection into SQL, or a stolen app password that can call `can_select` as company `tB`. That stands in for an all-powerful `DATABASE_URL`. What you are supposed to trust: the runtime role is a **second** check after who-is-allowed. SQLAlchemy, a private network, and “we use microservices” are not what you trust for this cell.
+Who could do this: a forgotten `WHERE`, later injection into SQL, or a stolen app password that can call `can_select` as company `tB`. That stands in for an all-powerful `DATABASE_URL`. What is supposed to stop this: the runtime role is a **second** check after who-is-allowed. SQLAlchemy, a private network, and “we use microservices” are not enough.
 
 ## Picture: a role with no same-company check
 
@@ -34,7 +34,7 @@ The broken files show **cause** (all-powerful runtime user / missing same-compan
 
 A private-network diagram is a topology observation, not that second check.
 
-## What to look at — cause, not a trophy
+## What to look at: the cause, not a trophy
 
 Read `vulnerable/roles.py`. `can_select` returns `True` for every role and company. `runtime_connection_role` is `postgres`. Checks:
 
@@ -55,7 +55,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 | Why it happens | One all-powerful database user shared by the app and migrate |
 | What has to be true first | The runtime role can `SELECT` other companies |
 | Trigger | `can_select("app", "tB", "tA")` |
-| What it costs | Secrecy of tA notes; a who-is-allowed cell the database did not catch |
+| What it costs | Secrecy of tA notes; a who-is-allowed check the database did not catch |
 | How you stop it | Least-privilege runtime role; same-company check in the role or a later row-level rule |
 | How you notice | `grant_drift` in CI; who connected |
 | How you recover | Rotate the password; review `GRANT`; do not log bodies |
@@ -71,7 +71,7 @@ FastAPI does not scope PostgreSQL. Splitting into microservices without new gran
 python3 -m pytest labs/3.3/3.3-lab/tests --impl vulnerable
 ```
 
-Record `test_app_role_cannot_read_other_tenant`. Do not weaken it to “a role named app exists.” An environment error is not security evidence.
+Record `test_app_role_cannot_read_other_tenant`. Do not weaken it to “a role named app exists.” A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

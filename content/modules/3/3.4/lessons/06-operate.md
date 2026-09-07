@@ -24,7 +24,7 @@ flowchart TD
 | Recover | Trim extra grants; tell the owner |
 | Leftover | Teams >5 need an owned exception |
 
-Announce “share limit reached” so people can hear it. That announcement is not the cap. Industry lists name detect, respond, recover. They do not prove the write-path cap. A log-product name is not the rule.
+Announce “share limit reached” so people can hear it. That announcement is not the cap. Industry lists talk about noticing, responding, and recovering. They do not prove the write-path cap. Naming a product is not the rule.
 
 ## What the framework does vs what you still have to check
 
@@ -42,7 +42,7 @@ Reject any line that includes a note body, a real email, “awareness list handl
 
 ## Use it somewhere new
 
-Clinic: notice a 4th guardian; do not paste the child’s name into the ticket. Invite tokens: notice a second redeem without logging the token.
+A clinic example: notice a 4th guardian; do not paste the child’s name into the ticket. Invite tokens: notice a second redeem without logging the token.
 
 ## Can people still use it
 
@@ -50,4 +50,4 @@ The owner-visible error must be something assistive tech can announce, not only 
 
 ## What this page is not doing
 
-A log-product name is not the rule. Live load tests are out of scope. Answer keys are not on this site.
+Naming a product is not the rule. Live load tests are out of scope. Answer keys are not on this site.

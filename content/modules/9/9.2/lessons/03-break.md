@@ -19,7 +19,7 @@ Do not write a working exploit. Do not run eval on untrusted input outside this 
 
 What must not happen: eval on user input approved in review. `review_ok("x = eval(user)")` returns true.
 
-Who can act here: a helper that looks visually fine. That stands in for a clinic “designers can put expressions in the discharge template,” Terraform `local-exec`, or a GitHub Actions `run:` that interpolates untrusted input. What you are supposed to trust: `review_ok` asks the **interpreter question** (6.1 at review time). Formatter continuous integration, a scanner “looks good,” and “the screen still looks fine” are not what you trust for this check.
+Who could do this: a helper that looks visually fine. That stands in for a clinic “designers can put expressions in the discharge template,” Terraform `local-exec`, or a GitHub Actions `run:` that interpolates untrusted input. What is supposed to stop this: `review_ok` asks the **interpreter question** (6.1 at review time). Formatter continuous integration, a scanner “looks good,” and “the screen still looks fine” are not enough.
 
 ## Picture: every diff is approved
 
@@ -30,7 +30,7 @@ flowchart TD
 
 The broken files show **cause** (no interpreter question), not an eval trophy. What has to be true first: `review_ok` returns true for every string. You do not need GitHub. You must not run eval on live input.
 
-Industry lists want you to avoid `eval` and similar dynamic execution. Module 6.1 already said the name is data, not Python grammar. This check is **the merge gate that should have caught it**.
+Industry lists ask for you to avoid `eval` and similar dynamic execution. Module 6.1 already said the name is data, not Python grammar. This check is **the merge gate that should have caught it**.
 
 ## What to look at — cause, not a dump
 
@@ -75,7 +75,7 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/9.2/9.2-lab/tests --impl vulnerable
 ```
 
-Run from `labs/9.2/9.2-lab` if a repo-root collection picks up `site/`. Record `test_eval_on_user_input_is_rejected`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/9.2/9.2-lab` if a repo-root collection picks up `site/`. Record `test_eval_on_user_input_is_rejected`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

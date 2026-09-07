@@ -23,7 +23,7 @@ flowchart TD
   Q -->|famous-bugs mapped| False[False comfort]
 ```
 
-Review starts at the protected effect (session A plus body B is A). Everything that is not session binding at that call is a candidate body-wins path. A row-level screenshot without that pytest is the same smell, not a different finding class.
+Start from what must stay true (session A plus body B is A). Everything that is not session binding at that call is a candidate body-wins path. A row-level screenshot without that check is the same problem, not a different kind of finding.
 
 Cache keys without company are leftover. Silent impersonation is a later topic. Do not skip `test_body_cannot_switch_tenant`. Do not claim a course gate. Do not probe a live company to prove the finding.
 
@@ -42,7 +42,7 @@ Also reject: live product probes; shipping without re-running `test_body_cannot_
 - Subdomain is an unforgeable company
 - Scale means identity products instead of who-is-allowed
 - A relationship-graph product is `tenant_for`
-- GraphQL `org_id` is a different cell
+- GraphQL `org_id` is a different rule
 
 ## Practice
 

@@ -80,4 +80,4 @@ The mobile storage row from 8.2. A clinic HIPAA “done” column.
 
 ## What this page is not doing
 
-Live checklist portals, claiming you finished the verification gate, or weaponized scans. Gates stay **not-attempted**. Answer keys are not on this site.
+Live checklist portals, claiming you finished the verification gate, or weaponized scans. This page does not finish a check-in. Answer keys are not on this site.

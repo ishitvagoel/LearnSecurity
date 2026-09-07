@@ -24,11 +24,11 @@ flowchart TD
 | Recover | Take back leftover flags; re-run the table on search/export |
 | Leftover | An honest grant on n1 still reveals n1 |
 
-Industry lists name detect, respond, recover. They do not key the grant. They do not prove the data-item check. A log-product name is not the rule. Re-run `test_grant_on_n1_is_not_grant_on_n2` after any path change; a green “roles enabled” tile is not that pytest. Search, export, and GraphQL `node(id)` are other paths of the same cell — inventory them before you claim recover.
+Industry lists talk about noticing, responding, and recovering. They do not key the grant. They do not prove the data-item check. Naming a product is not the rule. Re-run `test_grant_on_n1_is_not_grant_on_n2` after any path change; a green “roles enabled” tile is not that check. Search, export, and GraphQL `node(id)` are other paths of the same rule — inventory them before you claim recover.
 
 ## What the framework does vs what you still have to check
 
-A network filter will page on 403 rate and stay silent when search still returns n2. Notice must observe **object-keyed deny**, not HTTP status counts. If the alert includes a note body, you have opened a logging cell from an earlier topic.
+A network filter will page on 403 rate and stay silent when search still returns n2. Notice must observe **object-keyed deny**, not HTTP status counts. If the alert includes a note body, you have opened a logging hole from an earlier topic.
 
 ## Can people still use it
 
@@ -46,8 +46,8 @@ Reject any line that includes a note body, a personal email, or “IDOR handled.
 
 ## Use it somewhere new
 
-Clinic: notice chart-id swaps; do not paste the chart into the ticket. Do not hit a live clinic system.
+A clinic example: notice chart-id swaps; do not paste the chart into the ticket. Do not hit a live clinic system.
 
 ## What this page is not doing
 
-A log-product name is not the rule. Live company dumps are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Naming a product is not the rule. Live company dumps are out of scope. This site does not mark you as finished. Answer keys are not on this site.

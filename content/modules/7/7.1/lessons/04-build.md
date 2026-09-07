@@ -22,7 +22,7 @@ flowchart TD
 
 The repaired files copy only keys in `ALLOWED`. Production still needs the same matrix restated for GraphQL mutation arguments and gRPC unknown fields (the map page). A denylist of `is_admin` only is not the contract — the next privileged field (`tenant_id`, billing flag) will slip through. Leftover `/v0` handlers are another binder of the same body.
 
-Industry lists want that per-action limit implemented. This pytest is that sentence for `is_admin`.
+Industry lists ask for that per-action limit implemented. This pytest is that sentence for `is_admin`.
 
 ## What the repaired files must show
 
@@ -62,7 +62,7 @@ Must pass. Run from the lab directory if collection at repo root is polluted. Th
 
 ## Use it somewhere new
 
-Clinic: stop treating “the form has no is_staff checkbox” as the server contract.
+A clinic example: stop treating “the form has no is_staff checkbox” as the server contract.
 
 ## What can still go wrong
 

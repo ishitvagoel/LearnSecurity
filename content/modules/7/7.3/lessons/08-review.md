@@ -23,7 +23,7 @@ flowchart TD
   Q -->|vendor CIDR| False[False comfort]
 ```
 
-The review starts at the protected effect (empty sig denied). Everything that is not a raw-body MAC at that call is a candidate path-trust. A TLS terminator without that pytest is the same smell, not a different finding class.
+The review starts at the protected effect (empty sig denied). Everything that is not a raw-body MAC at that call is a candidate path-trust. A TLS terminator without that check is the same problem, not a different kind of finding.
 
 Parse-before-MAC (2.1) and secret-in-query (4.3) are other authenticity holes — name them, do not skip `test_missing_signature_is_rejected`.
 

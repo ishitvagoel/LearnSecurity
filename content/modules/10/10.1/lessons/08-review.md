@@ -23,7 +23,7 @@ flowchart TD
   Q -->|HIPAA training| False[False comfort]
 ```
 
-Classification starts at the protected effect (empty change denied). Everything that is not a truthy `threat_model` at that call is a candidate always-merge path. A training screenshot without that pytest is the same smell, not a different finding class.
+Start from what must stay true (empty change denied). Everything that is not a truthy `threat_model` at that call is a candidate always-merge path. A training screenshot without that check is the same problem, not a different kind of finding.
 
 Stale TM-12 is 3.2. Governance evidence is 10.4. Do not skip `test_merge_requires_threat_model_id`. Do not claim Gate 10. Do not change a live org to prove the finding.
 
@@ -32,7 +32,7 @@ Stale TM-12 is 3.2. Governance evidence is 10.4. Do not skip `test_merge_require
 - `merge_ok` True without a threat-model id
 - Pull-request template asks for a threat model but CI never calls `merge_ok`
 - Design-review practice claimed from a README mention
-- Gate 10 stamped after this pytest
+- Gate 10 stamped after this check
 - An unverified “secure by design” page treated as a product
 - Obsolete requirement numbers from an older checklist
 

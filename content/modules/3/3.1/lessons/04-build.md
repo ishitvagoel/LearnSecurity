@@ -71,7 +71,7 @@ It must pass. Then write one sentence: which rule is restored, and which leftove
 
 ## Use it somewhere new
 
-Clinic: log appointment time; never log chart text. Two classes, two places. A booking card that logs the chart fails this sentence even if the time is Internal.
+A clinic example: log appointment time; never log chart text. Two classes, two places. A booking card that logs the chart fails this sentence even if the time is Internal.
 
 ## What can still go wrong
 

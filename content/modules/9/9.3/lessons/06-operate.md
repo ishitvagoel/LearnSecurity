@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Block[block release]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a coverage product. They do not prove this suite is honest. Someone still has to own the leftover.
+Industry lists talk about noticing, responding, and recovering. They do not pick a coverage product. They do not prove this suite is honest. Someone still has to own the leftover.
 
-Re-run `test_http_200_only_is_not_a_security_test` after any suite change. A green “94% coverage” tile is not that pytest. Field-level tests (7.2) and race-condition tests are other named what-must-not-happen of the same shape — inventory them before you claim recover. Keep 200-only tests as product tests; do not delete them, and do not let them occupy the security-suite slot.
+Re-run `test_http_200_only_is_not_a_security_test` after any suite change. A green “94% coverage” tile is not that check. Field-level tests (7.2) and race-condition tests are other named what-must-not-happen of the same shape — inventory them before you claim recover. Keep 200-only tests as product tests; do not delete them, and do not let them occupy the security-suite slot.
 
 ## Signals that do not become a second leak
 
@@ -46,7 +46,7 @@ If your alert includes the matching note body, you have copied the leak into the
 
 ## What the framework does vs what you still have to check
 
-The same field-grain holes, looking-around leftovers, and fuzz-with-no-named-bad-result that bypass this practice will also bypass a “scan our coverage dashboard” detector. Name those places before you claim recover. A coverage-product name is not the rule.
+The same field-grain holes, looking-around leftovers, and fuzz-with-no-named-bad-result that bypass this practice will also bypass a “scan our coverage dashboard” detector. Name those places before you claim recover. Naming a product is not the rule.
 
 ## Can people still use it
 
@@ -64,8 +64,8 @@ Reject any line that includes a note body, a live fuzz payload, or “later gate
 
 ## Use it somewhere new
 
-Clinic: notice `test_get_patient_200` as the only “security” test; do not attach patient JSON to the ticket. Do not fuzz a live clinic.
+A clinic example: notice `test_get_patient_200` as the only “security” test; do not attach patient JSON to the ticket. Do not fuzz a live clinic.
 
 ## What this page is not doing
 
-A coverage-product name is not the rule. Live fuzz traces are out of scope. Answer keys are not on this site.
+Naming a product is not the rule. Live fuzz traces are out of scope. Answer keys are not on this site.

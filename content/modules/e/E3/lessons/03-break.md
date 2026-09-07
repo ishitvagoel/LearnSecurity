@@ -19,7 +19,7 @@ Do not charge, refund, or scrape a real processor, a clinic billing system, or a
 
 What must not happen: a duplicate capture double-charges the lab ledger. Two `capture("k1")` calls leave `charge_count() == 2`.
 
-Who can act here: a **retry after 504** or a **double-click**. That stands in for “the processor said retries are fine,” a filled-in questionnaire treated as this cell, or HTTP 200 treated as once. What you are supposed to trust: `capture` treats the **key as identity**. Processor headers, FastAPI, and a questionnaire PDF are not what you trust for this cell.
+Who could do this: a **retry after 504** or a **double-click**. That stands in for “the processor said retries are fine,” a filled-in questionnaire treated as this rule, or HTTP 200 treated as once. What is supposed to stop this: `capture` treats the **key as identity**. Processor headers, FastAPI, and a questionnaire PDF are not enough.
 
 ## Picture: every call appends
 
@@ -30,9 +30,9 @@ flowchart TD
 
 The broken files show **cause** (a side effect that is not bound to the key). Do not probe public APIs. What has to be true first: every `capture` appends. You do not need a payment company. You must not hit a live processor. `conftest.py` should call `reset()` so ledger state does not leak across tests.
 
-Module 2.4 / 6.6 already said consume-once; this cell is **money-like grain**. This site does not mark you as finished. This practice is not in card-network scope.
+Topics 2.4 and 6.6 already said consume-once; this rule is **money-like grain**. This site does not mark you as finished. This practice is not in card-network scope.
 
-## What to look at — cause, not a trophy
+## What to look at: the cause, not a trophy
 
 Read `vulnerable/pay.py`. `capture` appends on every call. Checks:
 
@@ -67,7 +67,7 @@ A processor can remember its own side and still leave your row inserting twice. 
 python3 -m pytest labs/E3/e3-lab/tests --impl vulnerable
 ```
 
-Run from `labs/E3/e3-lab` if a run at the repo root picks up `site/`. Record `test_duplicate_capture_does_not_double_charge`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/E3/e3-lab` if a run at the repo root picks up `site/`. Record `test_duplicate_capture_does_not_double_charge`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

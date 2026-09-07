@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Pin[repin known-good]
 ```
 
-Industry lists name detect, respond, recover. They do not pick an SBOM vendor. They do not prove the lockfile was checked. Someone still has to own the leftover.
+Industry lists talk about noticing, responding, and recovering. They do not pick an SBOM vendor. They do not prove the lockfile was checked. Someone still has to own the leftover.
 
-Re-run `test_hash_mismatch_refuses_install` after any installer change. A green “SBOM attached” tile is not that pytest. Cache poisoning and `@v1` Actions are sibling grains — inventory them before you claim recover.
+Re-run `test_hash_mismatch_refuses_install` after any installer change. A green “SBOM attached” tile is not that check. Cache poisoning and `@v1` Actions are sibling grains — inventory them before you claim recover.
 
 ## Signals that do not become a second leak
 
@@ -66,8 +66,8 @@ Reject any line that includes a token, a private key, or “ship gate complete.�
 
 ## Use it somewhere new
 
-Clinic: deny npm in the prod pod; do not paste `.npmrc` into the ticket. Do not fetch a live package.
+A clinic example: deny npm in the prod pod; do not paste `.npmrc` into the ticket. Do not fetch a live package.
 
 ## What this page is not doing
 
-An SBOM-vendor name is not the rule. Live registry traces are out of scope. The ship gate stays not-attempted. A provenance badge is not this alert. Answer keys are not on this site.
+An SBOM-vendor name is not the rule. Live registry traces are out of scope. The ship gate stays not finished. A provenance badge is not this alert. Answer keys are not on this site.

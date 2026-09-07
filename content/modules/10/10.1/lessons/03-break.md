@@ -17,7 +17,7 @@ Only `labs/10.1/10.1-lab` is in scope. The practice is an in-process `merge_ok(p
 
 Do not turn off branch protection on a real org “to see what happens.” Do not paste this exercise onto a public GitHub org, employer repo, or live clinic.
 
-What you trust for this check: `merge_ok` is supposed to require a **truthy threat-model id**. Branch protection, CODEOWNERS, training checkboxes, and FastAPI defaults are not what you trust.
+What is supposed to stop this: `merge_ok` is supposed to require a **truthy threat-model id**. Branch protection, CODEOWNERS, training checkboxes, and FastAPI defaults are not enough.
 
 Who can merge in this story: schedule pressure plus an always-true merge check. That stands in for “CODEOWNERS plus annual HIPAA training so we merge identity changes,” a maturity score on a slide, or a champion poster treated as 3.2.
 
@@ -65,7 +65,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 Required reviewers on GitHub are off until someone turns them on, and an admin can still bypass them. CODEOWNERS says who clicks, not what changed. FastAPI has no software-lifecycle check. The app’s promise this week is: **this** practice, an empty change is deny.
 
-A design-review guide is vocabulary, not this check. Gate 10 and M4 stay **not-attempted**.
+A design-review guide is vocabulary, not this check. Gate 10 and M4 stay **not finished**.
 
 ## Practice
 
@@ -75,11 +75,11 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/10.1/10.1-lab/tests --impl vulnerable
 ```
 
-Run from `labs/10.1/10.1-lab` if a collection at the repo root picks up `site/`. Record `test_merge_requires_threat_model_id`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/10.1/10.1-lab` if a collection at the repo root picks up `site/`. Record `test_merge_requires_threat_model_id`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic: predict “HIPAA training complete” used as merge — still only this directory. Do not change a live GitHub org.
+A clinic example: predict “HIPAA training complete” used as merge — still only this directory. Do not change a live GitHub org.
 
 ## What this page is not doing
 

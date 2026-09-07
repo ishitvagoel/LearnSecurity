@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# The broken files must fail the duplicate-key check
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -36,7 +36,7 @@ python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl vulnerable
 python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl fixed
 ```
 
-Run from `labs/2.1/2.1-parser-boundaries` if a repo-root collection picks up `site/`. Map each check to a cell from the map page. Do not paste keys. An environment error is not security evidence.
+Run from `labs/2.1/2.1-parser-boundaries` if a repo-root collection picks up `site/`. Map each check to a rule from the map page. Do not paste keys. A setup error is not proof the rule holds.
 
 | Slice | This practice |
 |---|---|
@@ -57,7 +57,7 @@ Record those as leftover risk or later topics, not as silent passes.
 
 ## Practice
 
-Run both implementations this session. If the broken files do not fail, the practice is miswired — fix the wiring, not the check. Write the fail/pass pair next to the ingest cell from the map page.
+Run both implementations this session. If the broken files do not fail, the practice is miswired — fix the wiring, not the check. Write the fail/pass pair next to the ingest rule from the map page.
 
 ## Use it somewhere new
 

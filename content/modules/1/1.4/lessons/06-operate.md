@@ -20,7 +20,7 @@ flowchart TD
   Sig --> Ev[Evidence: keyboard vs mouse and reason, never codes]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a log product. They do not prove a checklist. Someone still has to own the leftover.
+Industry lists talk about noticing, responding, and recovering. They do not pick a log product. They do not prove a checklist. Someone still has to own the leftover.
 
 ## Signals that do not become a second leak
 
@@ -58,4 +58,4 @@ The alternate path must itself meet keyboard, name, and not-color-only. Those ru
 
 ## What this page is not doing
 
-A log-product name is not the rule. Answer keys are not on this site.
+Naming a product is not the rule. Answer keys are not on this site.

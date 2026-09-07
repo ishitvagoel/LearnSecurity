@@ -23,9 +23,9 @@ flowchart TD
   Q -->|scanner green| False[False comfort]
 ```
 
-Classification starts at the protected effect (B after revoke is None). Everything that is not owner-or-grant at that call is a candidate always-read path. A scanner screenshot without that pytest is the same smell, not a different finding class.
+Start from what must stay true (B after revoke is None). Everything that is not owner-or-grant at that call is a candidate always-read path. A scanner screenshot without that check is the same problem, not a different kind of finding.
 
-Cache invalidation is a phone leftover. Worker leftover session is a delayed-job leftover. Do not skip `test_revoked_share_cannot_read`. Do not claim you finished an assurance gate. Do not hit a live tenant to prove the finding.
+Cache invalidation is a phone leftover. Worker leftover session is a delayed-job leftover. Do not skip `test_revoked_share_cannot_read`. This page does not mark you as finished. Do not hit a live tenant to prove the finding.
 
 ## Seeded smells (label them yourself)
 
@@ -42,7 +42,7 @@ Also reject: live tenant attacks; merging without re-running `test_revoked_share
 - Milestones complete because lessons exist
 - A green scanner is the evidence pack
 - HTTP 200 on DELETE is the next-read check
-- Access-rights change in the same session is this pytest (it is leftover, advanced work)
+- Access-rights change in the same session is this check (it is leftover, advanced work)
 
 ## Practice
 

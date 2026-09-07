@@ -19,7 +19,7 @@ Do not probe a public host. Do not probe an employer load balancer. Do not probe
 
 What must not happen: client-supplied `X-Forwarded-Proto: https` on an `http` socket counts as TLS. `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` returns true.
 
-Who can act here: a **cleartext client who can set `X-Forwarded-Proto`**. That stands in for a clinic page whose API client uses `https://` while the API socket is `http`, or a dashboard “Force HTTPS” toggle that trusts the header. What you are supposed to trust: `channel_is_https` binds the **server socket**, not a client claim. A server flag that trusts proxy headers, a CDN product name, and HSTS preload are not what you trust for this cell.
+Who could do this: a **cleartext client who can set `X-Forwarded-Proto`**. That stands in for a clinic page whose API client uses `https://` while the API socket is `http`, or a dashboard “Force HTTPS” toggle that trusts the header. What is supposed to stop this: `channel_is_https` binds the **server socket**, not a client claim. A server flag that trusts proxy headers, a CDN product name, and HSTS preload are not enough.
 
 ## Picture: header OR socket
 
@@ -31,9 +31,9 @@ flowchart TD
 
 The broken files show **cause** (the app believes the client about the channel), not a strip-attack walkthrough. What has to be true first: `channel_is_https` returns true if the header is `https` **or** the socket is `https`. You do not need a live man-in-the-middle. You must not run one.
 
-Industry lists want TLS on the public HTTP service with no cleartext fallback. A client header is not that TLS.
+Industry lists ask for TLS on the public HTTP service with no cleartext fallback. A client header is not that TLS.
 
-## What to look at — cause, not a trophy
+## What to look at: the cause, not a trophy
 
 Read `vulnerable/channel.py`. It returns true if the header is `https` **or** the socket is `https`. Checks:
 
@@ -77,11 +77,11 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/5.4/5.4-lab/tests --impl vulnerable
 ```
 
-Record the failing test `test_client_forwarded_proto_is_not_tls`. Do not weaken it to “HTTPS is on.” Do not probe public hosts. An environment error is not security evidence.
+Record the failing test `test_client_forwarded_proto_is_not_tls`. Do not weaken it to “HTTPS is on.” Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic: page API client `https://` versus API socket `http`. Predict without leaving this directory. Do not probe a live clinic.
+A clinic example: page API client `https://` versus API socket `http`. Predict without leaving this directory. Do not probe a live clinic.
 
 ## What this page is not doing
 

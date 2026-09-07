@@ -7,13 +7,13 @@
 
 The notes app this week draws a note title as HTML text. The title is **data**. Angle brackets are data. The browser must not treat them as extra tags.
 
-Last topic (6.1) taught data versus interpreter grammar. This week’s cell is the HTML parser.
+Last topic (6.1) taught data versus interpreter grammar. This week's rule is the HTML parser.
 
 > `render` must turn `<` into `&lt;` when it writes HTML text. Encoding depends on where you write. A content-security header is not this sentence.
 
 What must not happen: **unencoded markup reaches the HTML interpreter**. That is an integrity failure of the HTML document. If the cookie is also readable by script (the cookie-jar topic, 2.3), it can become a secrecy failure of the session. This practice uses a tame marker (`<`). It is not an exploit kit. Do not paste attack recipes into notes.
 
-Industry checklists want output encoded for the context you are writing into. A content-security policy that blocks objects and base tags is a **layer**, not a substitute. Reporting from that policy is extra, later, and advanced. The current content-security spec and Trusted Types are still **draft**. A famous-bugs nickname for “script in HTML” is awareness after the cause, not this sentence. React JSX is not this sentence.
+Industry lists ask for output encoded for the context you are writing into. A content-security policy that blocks objects and base tags is a **layer**, not a substitute. Reporting from that policy is extra, later, and advanced. The current content-security spec and Trusted Types are still **draft**. A famous-bugs nickname for “script in HTML” is awareness after the cause, not this sentence. React JSX is not this sentence.
 
 ## Picture: HTML grammar mixed with data
 
@@ -38,7 +38,7 @@ flowchart LR
   URL[URL] --> Enc4[different encoding]
 ```
 
-Encoding for HTML text is wrong inside a JavaScript string. Encoding for attributes is a different cell. `javascript:` and `data:` URLs are a different cell, not this practice.
+Encoding for HTML text is wrong inside a JavaScript string. Encoding for attributes is a different rule. `javascript:` and `data:` URLs are a different rule, not this practice.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
@@ -82,4 +82,4 @@ A clinic patient nickname field. Markdown-to-HTML cleaner as a second parser.
 
 ## What this page is not doing
 
-Weaponized attack recipes, live-target walkthroughs, dumping practice Python into notes. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not on this site.
+Weaponized attack recipes, live-target walkthroughs, dumping practice Python into notes. Opening this page does not finish a check-in. Answer keys are not on this site.

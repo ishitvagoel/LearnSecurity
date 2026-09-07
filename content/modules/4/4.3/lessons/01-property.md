@@ -11,7 +11,7 @@ The notes app already carries a session from the last lesson. That session must 
 
 What must not happen is a **session started from a query-string token**. The session secret is no longer secret. Anyone who can see the URL can then act as that person.
 
-Industry checklists want secrets in the body or headers, not in the URL. They want a referrer policy so path and query do not leak to other sites. They want HttpOnly for session cookies that scripts cannot read. Putting an OAuth token in the URL the old implicit-grant way is obsolete. Copying that pattern is not those checklists.
+Industry lists ask for secrets in the body or headers, not in the URL. They want a referrer policy so path and query do not leak to other sites. They want HttpOnly for session cookies that scripts cannot read. Putting an OAuth token in the URL the old implicit-grant way is obsolete. Copying that pattern is not those checklists.
 
 ## Picture: the URL is a postcard
 
@@ -77,4 +77,4 @@ Clinic appointment deep link. Magic-link email (still a URL token — later you 
 
 ## What this page is not doing
 
-Live token replay, real session cookies, weaponized Referer harvesting. Course gates stay unclaimed without learner or product evidence. Answer keys are not on this site.
+Live token replay, real session cookies, weaponized Referer harvesting. This page does not finish a check-in. Answer keys are not on this site.

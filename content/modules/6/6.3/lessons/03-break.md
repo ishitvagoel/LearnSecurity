@@ -17,7 +17,7 @@ Only `labs/6.3/6.3-lab` is in scope. The check is in-process `allow_share`. Orig
 
 What must not happen: a cross-site POST that changes a share, authorized by cookie alone. `allow_share("https://evil.example", expected, token=None)` returns true.
 
-Who can act in this story: a foreign origin that can cause the victim browser to POST while the session cookie is leftover. That stands in for a clinic “share with partner” button the person did not click on this site. What you trust: `allow_share` is supposed to require cookie **and** origin match **and** a matching CSRF token. SameSite=Lax, CORS, and “the user is logged in” are not what you trust for this cell.
+Who could do this: a foreign origin that can cause the victim browser to POST while the session cookie is leftover. That stands in for a clinic “share with partner” button the person did not click on this site. What is supposed to stop this: `allow_share` is supposed to require cookie **and** origin match **and** a matching CSRF token. SameSite=Lax, CORS, and “the user is logged in” are not enough.
 
 ## Picture: leftover cookie is enough in the broken files
 
@@ -29,9 +29,9 @@ flowchart TD
 
 The broken files show **cause** (leftover cookie treated as consent), not a cross-site trophy against a public app. What has to be true first: `allow_share` returns `session_cookie` and ignores origin and token. You do not need a live third-party page. You must not build one.
 
-SameSite set for purpose is a helper, not complete. Industry checklists want anti-forgery tokens (or extra headers a simple form cannot set). This practice is that sentence for `allow_share`.
+SameSite set for purpose is a helper, not complete. Industry lists ask for anti-forgery tokens (or extra headers a simple form cannot set). This practice is that sentence for `allow_share`.
 
-## What to look at — cause, not a trophy
+## What to look at: the cause, not a trophy
 
 Read `vulnerable/csrf.py`. It returns `session_cookie` and ignores origin and token. Tests:
 
@@ -68,7 +68,7 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/6.3/6.3-lab/tests --impl vulnerable
 ```
 
-Record `test_foreign_origin_post_is_denied`. Do not visit `evil.example` as a real host. An environment error is not security evidence.
+Record `test_foreign_origin_post_is_denied`. Do not visit `evil.example` as a real host. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

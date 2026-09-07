@@ -20,9 +20,9 @@ flowchart TD
   In -->|no| Deny[None]
 ```
 
-The repaired files require membership in `{"search_notes"}`. Production still needs that allow-list to be the *right* tools — `search_notes` that returns raw HTML is a lying encoding leftover. A coding assistant in CI that can `pip install` is the same allow-list grain on a different object. Cryptographically bound human approvals are extra, advanced work: a human click is not this pytest.
+The repaired files require membership in `{"search_notes"}`. Production still needs that allow-list to be the *right* tools — `search_notes` that returns raw HTML is a lying encoding leftover. A coding assistant in CI that can `pip install` is the same allow-list grain on a different object. Cryptographically bound human approvals are extra, advanced work: a human click is not this check.
 
-Industry checklists want an allow-list before a tool runs. This pytest is that sentence for `exec_sql`.
+Industry lists ask for an allow-list before a tool runs. This pytest is that sentence for `exec_sql`.
 
 ## What the repaired files must show
 
@@ -73,4 +73,4 @@ Allow-listed tool returns HTML. Hallucinated packages. Cryptographically bound a
 
 ## What this page is not doing
 
-Do not call a live model. Do not claim you finished an assurance gate from a famous-bugs screenshot. Do not present a system prompt as the allow-list.
+Do not call a live model. This page does not mark you as finished. from a famous-bugs screenshot. Do not present a system prompt as the allow-list.

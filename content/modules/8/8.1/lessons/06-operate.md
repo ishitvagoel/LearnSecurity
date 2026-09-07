@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Revoke[Revoke app session if automated]
 ```
 
-Industry lists name detect, respond, recover. They do not prove the server attest. Someone still has to own the leftover.
+Industry lists talk about noticing, responding, and recovering. They do not prove the server attest. Someone still has to own the leftover.
 
 ## Signals that do not become a second leak
 
@@ -27,13 +27,13 @@ Industry lists name detect, respond, recover. They do not prove the server attes
 | Recover | Keep deny; revoke tokens; owned rooted-device policy |
 | Leftover | Attestation farms; 8.4 debug clients; old app files shipping the boolean |
 
-A mobile-device product name is not the rule. Re-run `test_client_integrity_claim_is_not_authorization` after any export-route change; a green “Play Integrity enabled” tile is not that pytest. Feature flags and `premium=true` are other client booleans of the same family — list them before you claim Recover.
+Naming a mobile-device product is not the rule. Re-run `test_client_integrity_claim_is_not_authorization` after any export-route change; a green “Play Integrity enabled” tile is not that check. Feature flags and `premium=true` are other client booleans of the same family — list them before you claim Recover.
 
 ## What the framework does vs what you still have to check
 
 A Play Console dashboard will show attestation counts and stay silent when FastAPI still binds `integrity=ok`. Notice must observe **client ok plus attest fail is false**, not store-listing health. If the alert includes a Play Integrity token or note bodies, you have opened a logging leak (3.1 / 4.3).
 
-The app’s promise is: **this** practice, `attest_fail_export_denied` fires without the app file, and a console product name is not this week’s rule.
+The app’s promise is: **this** practice, `attest_fail_export_denied` fires without the app file, and Naming a product is not this week's rule.
 
 ## Practice
 
@@ -47,7 +47,7 @@ Reject any line that includes note bodies, a Play Integrity token, or a live dev
 
 ## Use it somewhere new
 
-Clinic: notice `hipaaMode` client claims on a local helper; do not attach the chart to the ticket. Do not instrument a live hospital device.
+A clinic example: notice `hipaaMode` client claims on a local helper; do not attach the chart to the ticket. Do not instrument a live hospital device.
 
 ## Can people still use it
 
@@ -55,4 +55,4 @@ If export is denied, say so in a readable message. Do not trap TalkBack users in
 
 ## What this page is not doing
 
-A mobile-device product name is not the rule. Live Play traces are out of scope. Gates 0–10 stay not-attempted.
+Naming a mobile-device product is not the rule. Live Play traces are out of scope. Opening this page does not finish a check-in.

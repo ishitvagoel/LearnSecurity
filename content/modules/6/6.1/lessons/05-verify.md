@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# A shell command from user text must fail the check
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -37,7 +37,7 @@ python3 -m pytest labs/6.1/6.1-lab/tests --impl vulnerable
 python3 -m pytest labs/6.1/6.1-lab/tests --impl fixed
 ```
 
-Honest argv shape must pass on repaired. `sh -c` must fail on broken. If the broken files do not fail the `cmd[:2] != ["sh", "-c"]` branch, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
+Honest argv shape must pass on repaired. `sh -c` must fail on broken. If the broken files do not fail the `cmd[:2] != ["sh", "-c"]` branch, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 

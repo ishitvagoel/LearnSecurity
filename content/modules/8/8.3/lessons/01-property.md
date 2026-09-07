@@ -11,7 +11,7 @@ The notes app this week opens notes from a link. The **session** is identity (4.
 
 What must not happen: **a deep link `as=` switches the signed-in user**. That is authenticity of the principal, not “the link was https.”
 
-Industry lists want IPC used securely. A WebView is another HTML interpreter (6.2), not this week’s session. Claimed HTTPS app links for OAuth redirects still leave custom schemes hijackable. “The link was https” is not this sentence.
+Industry lists ask for IPC used securely. A WebView is another HTML interpreter (6.2), not this week’s session. Claimed HTTPS app links for OAuth redirects still leave custom schemes hijackable. “The link was https” is not this sentence.
 
 ## Picture: link locates, session authorizes
 
@@ -82,4 +82,4 @@ Clinic `as=doctor`. OAuth redirect to the app (4.5).
 
 ## What this page is not doing
 
-Live malicious APKs, Intent cookbooks. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not on this site.
+Live malicious APKs, Intent cookbooks. Opening this page does not finish a check-in. Answer keys are not on this site.

@@ -17,7 +17,7 @@ Only `labs/3.1/3.1-lab` is in scope. The string is in-process. The body is the s
 
 Do not paste a real note body into the logger “to see what happens.” Do not paste this exercise onto a public log drain, employer dashboard, or live clinic.
 
-What you trust for this check: the logging API is supposed to deny the body. A spreadsheet sticker, a privacy-policy URL, `DEBUG=false` in one environment, and a data-loss product name are not what you trust.
+What is supposed to stop this: the logging API is supposed to deny the body. A spreadsheet sticker, a privacy-policy URL, `DEBUG=false` in one environment, and a data-loss product name are not enough.
 
 Who can read the line in this story: an operator, a log vendor, or another company's admin on shared observability. That stands in for access logs, exception dumps, APM, and a support ticket.
 
@@ -69,7 +69,7 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/3.1/3.1-lab/tests --impl vulnerable
 ```
 
-Record the failing test `test_note_body_is_not_logged`. Do not weaken it to “logs exist.” An environment error is not security evidence.
+Record the failing test `test_note_body_is_not_logged`. Do not weaken it to “logs exist.” A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

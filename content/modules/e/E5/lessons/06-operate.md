@@ -25,11 +25,11 @@ flowchart TD
 | Recover | Audit B; take back the confused session |
 | Leftover | Copies; silent impersonation; GraphQL aliases |
 
-Industry lists name detect, respond, recover. They do not prove company isolation. A row-level vendor name is not the rule. Re-run `test_body_cannot_switch_tenant` after any query-layer change; a green “row-level rules on” tile is not that pytest. Search, cache, and lake copies are the same family — inventory them before you claim recover.
+Industry lists talk about noticing, responding, and recovering. They do not prove company isolation. A row-level vendor name is not the rule. Re-run `test_body_cannot_switch_tenant` after any query-layer change; a green “row-level rules on” tile is not that check. Search, cache, and lake copies are the same family — inventory them before you claim recover.
 
 ## What the framework does vs what you still have to check
 
-A relationship-graph dashboard will show tuple counts and stay silent when CI’s `tenant_for` prefers the body. Notice must observe **session A plus body B is A**, not “row-level rules are enabled.” If the alert includes a note body or a GraphQL document dump, you have opened a logging cell.
+A relationship-graph dashboard will show tuple counts and stay silent when CI’s `tenant_for` prefers the body. Notice must observe **session A plus body B is A**, not “row-level rules are enabled.” If the alert includes a note body or a GraphQL document dump, you have opened a logging hole.
 
 ## Can people still use it
 
@@ -49,7 +49,7 @@ Reject any line that includes a note body, a GraphQL document dump, or “course
 
 ## Use it somewhere new
 
-Clinic: deny the `org_id` switch; do not paste the chart note into the ticket. Do not probe a live company.
+A clinic example: deny the `org_id` switch; do not paste the chart note into the ticket. Do not probe a live company.
 
 ## What this page is not doing
 

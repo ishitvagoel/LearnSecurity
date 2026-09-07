@@ -11,7 +11,7 @@ The notes app shares note `n1` from person A with person B, then A revokes. **Pe
 
 So what must not happen: **a revoked share still reads the note**. That is the “check every access” idea from earlier weeks, stitched with time, revoke, delayed workers, and a phone cache.
 
-Industry lists want a permission check on every access, not a share event that is forgotten. Access rights changing inside an already-open session without signing in again is extra, advanced work — named so you do not confuse “we stored a revoke row” with “the next read is denied.”
+Industry lists ask for a permission check on every access, not a share event that is forgotten. Access rights changing inside an already-open session without signing in again is extra, advanced work — named so you do not confuse “we stored a revoke row” with “the next read is denied.”
 
 A numbered thirteen-item slogan is not the portable pack of tests, models, and restore notes this course asks for.
 
@@ -64,7 +64,7 @@ Someone recorded revoke and never asked the grant on the next read. That is the 
 
 ## What the framework does vs what you still have to check
 
-FastAPI will not consult a grant you never check. A phone cache and a worker leftover session are extra grains of the same cell.
+FastAPI will not consult a grant you never check. A phone cache and a worker leftover session are extra grains of the same rule.
 
 The app’s promise is: **this** `read("n1", "B")` after `revoke("n1", "B")` is `None`, while A may still read, and B before revoke may still read. The local check is `labs/11/11-lab`. Fake data only. No live tenants.
 
@@ -92,7 +92,7 @@ The first command must fail. The second must pass.
 
 ## Use it somewhere new
 
-Clinic: revoke a guardian. Full notes-app slice: the same cell across API, worker, and phone cache.
+A clinic example: revoke a guardian. Full notes-app slice: the same rule across API, worker, and phone cache.
 
 ## What this page is not doing
 

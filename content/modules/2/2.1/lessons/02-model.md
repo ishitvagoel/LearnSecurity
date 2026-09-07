@@ -55,7 +55,7 @@ The client, the app, the model, or the prompt is hostile. What you trust is the 
 | poster tA | CLEAN unique-key JSON | ingest | allow; `acl_tenant == stored_tenant == tA` |
 | poster tB | duplicate company keys | ingest | deny, or accept only if both readers agree |
 | worker | re-parse stored bytes | persist-or-export | allow only if meaning matches the original result |
-| reader tA | stored body | read | who-is-allowed cell; ingest agreement does not grant a cross-company read |
+| reader tA | stored body | read | who-is-allowed check; ingest agreement does not grant a cross-company read |
 
 A missing worker cell is how delayed-machine transfer appears. Write the hole even if this week has no queue.
 

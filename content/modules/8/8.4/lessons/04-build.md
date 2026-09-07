@@ -24,7 +24,7 @@ flowchart TD
 
 The repaired files require both gates. Production still needs separate client ids and no prod URLs in debug manifests. Play App Signing protects *store* signing; it does not stop a debug application id from using a leaked prod API key. Embedded API identifiers will be recovered — assume that. Root detection is bypassable (8.1).
 
-Industry lists want a trusted service layer, and they want secrets out of artifacts. This pytest is that sentence for `api_allowed("debug", "ok")`.
+Industry lists ask for a trusted service layer, and they want secrets out of artifacts. This pytest is that sentence for `api_allowed("debug", "ok")`.
 
 ## What the repaired files must show
 
@@ -67,7 +67,7 @@ Must pass. Run from the lab directory if collection at repo root is polluted. Th
 
 ## Use it somewhere new
 
-Clinic: stop pointing the debug flavor at production FHIR.
+A clinic example: stop pointing the debug flavor at production FHIR.
 
 ## What can still go wrong
 

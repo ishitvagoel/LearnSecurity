@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Relogin[Force re-login if session already flipped]
 ```
 
-Industry lists name detect, respond, recover. They do not copy “ignore identity keys.” They do not prove a checklist. Someone still has to own the leftover.
+Industry lists talk about noticing, responding, and recovering. They do not copy “ignore identity keys.” They do not prove a checklist. Someone still has to own the leftover.
 
 ## Signals that do not become a second leak
 
@@ -27,13 +27,13 @@ Industry lists name detect, respond, recover. They do not copy “ignore identit
 | Recover | Keep alice; force re-login if switched |
 | Leftover | WebView; custom scheme; attacker app installed |
 
-A mobile-filter product name is not the rule. Re-run `test_deeplink_as_param_does_not_switch_user` after any exported-component change; a green “App Links verified” tile is not that pytest. OAuth redirects (4.5) and WebView bridges are other IPC paths of the same extras — list them before you claim Recover.
+Naming a mobile-filter product is not the rule. Re-run `test_deeplink_as_param_does_not_switch_user` after any exported-component change; a green “App Links verified” tile is not that check. OAuth redirects (4.5) and WebView bridges are other IPC paths of the same extras — list them before you claim Recover.
 
 ## What the framework does vs what you still have to check
 
 Play Console App Link status will show verified hosts and stay silent when an exported Activity still copies `as`. Notice must observe **alice unchanged**, not host association. If the alert includes a full deep-link URL or an OAuth code, you have opened a logging leak (4.3).
 
-The app’s promise is: **this** practice, dropped `as=` fires without the URL, and a filter product name is not this week’s rule.
+The app’s promise is: **this** practice, dropped `as=` fires without the URL, and Naming a product is not this week's rule.
 
 ## Practice
 
@@ -47,7 +47,7 @@ Reject any line that includes a full deep-link URL, an OAuth code, or a live Int
 
 ## Use it somewhere new
 
-Clinic: notice `as=doctor` probes on local practice files; do not attach the link to the ticket. Do not send Intents at a live EHR.
+A clinic example: notice `as=doctor` probes on local practice files; do not attach the link to the ticket. Do not send Intents at a live EHR.
 
 ## Can people still use it
 
@@ -55,4 +55,4 @@ Deep-link errors must not trap people in a broken WebView with no keyboard-acces
 
 ## What this page is not doing
 
-A mobile-filter product name is not the rule. Live Intent dumps are out of scope. Gates 0–10 stay not-attempted.
+Naming a mobile-filter product is not the rule. Live Intent dumps are out of scope. Opening this page does not finish a check-in.

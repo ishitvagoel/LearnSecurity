@@ -11,7 +11,7 @@ The notes app may list an export folder. The **name is data**. The operating sys
 
 What must not happen is **a user-chosen name run through a shell string**. That is an integrity failure at the OS interpreter: extra words in the name can become extra commands. This practice checks **argv shape only**. It does not run a live OS command.
 
-Industry lists want OS calls that pass arguments as parameters. Encoding the name for a shell is a leftover, not this week's pytest. Formula characters in a CSV file are **advanced** work and show up in the clinic transfer, not this practice. FastAPI has no opinion about argv.
+Industry lists ask for OS calls that pass arguments as parameters. Encoding the name for a shell is a leftover, not this week's check. Formula characters in a CSV file are **advanced** work and show up in the clinic transfer, not this practice. FastAPI has no opinion about argv.
 
 ## Picture: data vs shell grammar
 
@@ -22,7 +22,7 @@ flowchart TD
   Mix -->|no| Argv["argv: ls -- name"]
 ```
 
-Who can act: a member who chooses a note or export name, or a stolen client. What you trust in this practice: the local `argv.py` helper. Do not probe other hosts.
+Who could do this: a member who chooses a note or export name, or a stolen client. What you trust in this practice: the local `argv.py` helper. Do not probe other hosts.
 
 **The tool (not the rule):** a `shell=False` comment, a denylist of punctuation, or a scanner finding.
 

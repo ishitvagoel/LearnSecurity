@@ -20,7 +20,7 @@ flowchart TD
   Metric --> Revert[block merge]
 ```
 
-Industry lists name detect, respond, recover. They do not prove avoid-eval. A bot-vendor name is not the rule. Someone still has to own the always-approve path.
+Industry lists talk about noticing, responding, and recovering. They do not prove avoid-eval. A bot-vendor name is not the rule. Someone still has to own the always-approve path.
 
 ## Signals that do not become a second leak
 
@@ -42,7 +42,7 @@ Not: an eval payload, a note body, or a live GitHub trace.
 
 If your alert includes the eval payload or note bodies, you have opened a second leak in the paging channel (logging topic / interpreter topic).
 
-A green “formatter passed” tile is not that pytest. Re-run `test_eval_on_user_input_is_rejected` after any review-bot change. Terraform `local-exec` and GitHub Actions `run:` are other interpreter paths — inventory them before claiming recover. The lab substring is a stand-in: an `exec(` helper can skip it, so keep the human interpreter question even after this metric is green.
+A green “formatter passed” tile is not that check. Re-run `test_eval_on_user_input_is_rejected` after any review-bot change. Terraform `local-exec` and GitHub Actions `run:` are other interpreter paths — inventory them before claiming recover. The lab substring is a stand-in: an `exec(` helper can skip it, so keep the human interpreter question even after this metric is green.
 
 ## What the framework does vs what you still have to check
 
@@ -60,7 +60,7 @@ Reject any line that includes eval payloads, note bodies, or a live GitHub trace
 
 ## Use it somewhere new
 
-Clinic: block a template change; do not paste the template source with patient fields into chat. Do not run eval on live input.
+A clinic example: block a template change; do not paste the template source with patient fields into chat. Do not run eval on live input.
 
 ## Can people still use it
 

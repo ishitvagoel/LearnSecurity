@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Revoke[Revoke debug client id]
 ```
 
-Industry lists name detect, respond, recover. They do not prove secrets stayed out of the APK. Someone still has to own the leftover flavor.
+Industry lists talk about noticing, responding, and recovering. They do not prove secrets stayed out of the APK. Someone still has to own the leftover flavor.
 
 ## Signals that do not become a second leak
 
@@ -27,13 +27,13 @@ Industry lists name detect, respond, recover. They do not prove secrets stayed o
 | Recover | Keep deny; rotate keys; fix the flavor |
 | Leftover | Stolen release keys; attestation farms |
 
-An R8 product name is not the rule. Re-run `test_debug_build_cannot_call_prod_export` after any client-id change; a green “minifyEnabled” tile is not that pytest. Student flavors and leaked debug APKs are other channels of the same prod API — list them before you claim Recover.
+Naming an R8 product is not the rule. Re-run `test_debug_build_cannot_call_prod_export` after any client-id change; a green “minifyEnabled” tile is not that check. Student flavors and leaked debug APKs are other channels of the same prod API — list them before you claim Recover.
 
 ## What the framework does vs what you still have to check
 
-A Play Console dashboard will show signing status and stay silent when FastAPI still allows `build_type=debug`. Notice must observe **debug plus ok is false**, not store health. If the alert includes signing keys or an APK, you have opened a 5.3 cell.
+A Play Console dashboard will show signing status and stay silent when FastAPI still allows `build_type=debug`. Notice must observe **debug plus ok is false**, not store health. If the alert includes signing keys or an APK, you have opened a leftover hole from topic 5.3.
 
-The app’s promise is: **this** practice, debug-to-prod denials fire without the APK, and an R8 product name is not this week’s rule.
+The app’s promise is: **this** practice, debug-to-prod denials fire without the APK, and Naming a product is not this week's rule.
 
 ## Practice
 
@@ -47,7 +47,7 @@ Reject any line that includes signing keys, an APK, or a live Play Console trace
 
 ## Use it somewhere new
 
-Clinic: notice debug FHIR calls on a local helper; do not attach the APK to the ticket. Do not unpack a live clinic APK.
+A clinic example: notice debug FHIR calls on a local helper; do not attach the APK to the ticket. Do not unpack a live clinic APK.
 
 ## Can people still use it
 
@@ -55,4 +55,4 @@ Developers still need a debug build against **lab** data. Do not ship a spinner 
 
 ## What this page is not doing
 
-An R8 product name is not the rule. Live Play traces are out of scope. Gates 0–10 stay not-attempted.
+Naming an R8 product is not the rule. Live Play traces are out of scope. Opening this page does not finish a check-in.

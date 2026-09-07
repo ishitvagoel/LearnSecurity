@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# A broken crash report must fail the check
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -25,7 +25,7 @@ If both pass, the test is not looking at the body substring. If both fail, the f
 |---|---|
 | Normal | Honest crash still has a `stack` key (may pass on both) |
 | Wrong input | `'secret'` not in `str(crash_report('secret'))`; broken files must fail |
-| Abuse | Unsure values are not attached (fail closed; leftover if not in this pytest) |
+| Abuse | Unsure values are not attached (fail closed; leftover if not in this check) |
 | Not claimed | A real crash console; the public store; screenshot pipelines; vendor DLP |
 
 The file is `labs/8.5/8.5-lab/tests/test_property.py`. The test `test_crash_report_omits_note_body` is a **what-must-not-happen** test: a report that includes the body is not allowed to count as a passing control.
@@ -63,8 +63,8 @@ Paste nothing from answer keys. Write fail/pass into your notes next to the body
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts “crash dialog shown” is not this topic. A test that only asserts HTTP 200 is the wrong observation. A live web-crash call is out of scope.
+A clinic example: a test that only asserts “crash dialog shown” is not this topic. A test that only asserts HTTP 200 is the wrong observation. A live web-crash call is out of scope.
 
 ## What this page is not doing
 
-Do not add a live crash trophy. Do not log note bodies. Answer keys are not on this site.
+Do not treat a live crash screenshot as proof. Do not log note bodies. Answer keys are not on this site.

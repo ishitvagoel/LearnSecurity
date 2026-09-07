@@ -11,7 +11,7 @@ The notes app invites people with a token. That token is a **join once**. Module
 
 So what must not happen: **an invite token accepted twice**. That is an integrity failure of membership. You get an extra member, or a replay after you meant to revoke.
 
-Industry lists want locking so a limited seat cannot be booked twice. They want the join to succeed entirely or roll back. They want fail-closed when the store errors. A last-resort error handler is advanced work, not this week's pytest. A famous-bugs list is awareness after the cause. A unique index is not this sentence until the consume actually writes it.
+Industry lists ask for locking so a limited seat cannot be booked twice. They want the join to succeed entirely or roll back. They want fail-closed when the store errors. A last-resort error handler is advanced work, not this week's check. A famous-bugs list is awareness after the cause. A unique index is not this sentence until the consume actually writes it.
 
 ## Picture: issued, then consumed, then dead
 
@@ -23,7 +23,7 @@ flowchart LR
   Second --> Dead[denied]
 ```
 
-Who can act: two tabs, or anyone who copied the token from mail logs (4.3). What you trust in this practice: local `accept()`. Email is not proof of who received it (4.2).
+Who could do this: two tabs, or anyone who copied the token from mail logs (4.3). What you trust in this practice: local `accept()`. Email is not proof of who received it (4.2).
 
 **The tool (not the rule):** a database unique constraint you never hit, HTTP 400, or “people will not double-click.”
 

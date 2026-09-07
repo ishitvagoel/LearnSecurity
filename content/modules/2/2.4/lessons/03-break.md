@@ -19,7 +19,7 @@ Do not load-test third-party APIs. Do not run clock tricks against NTP. Do not p
 
 What must not happen: a retry creates a second share. Two `share_note("n1", idempotency_key="k1")` calls leave `share_count() == 2`.
 
-Who can act here: a **retrying client** that can call `share_note` twice with the same key. That stands in for a 504, a double-click, a load balancer that retries POST, or a later worker that delivers at least once. What you are supposed to trust: the handler treats `k1` as “this attempt already landed.” FastAPI, Next.js `fetch` retries, HTTP retry logic, and “the user will not click twice” are not what you trust.
+Who could do this: a **retrying client** that can call `share_note` twice with the same key. That stands in for a 504, a double-click, a load balancer that retries POST, or a later worker that delivers at least once. What is supposed to stop this: the handler treats `k1` as “this attempt already landed.” FastAPI, Next.js `fetch` retries, HTTP retry logic, and “the user will not click twice” are not enough.
 
 ## Picture: every call is a new row
 
@@ -33,7 +33,7 @@ The broken files show **cause** (the share side effect is not bound to the key),
 
 HTTP does not make POST happen once. HTTP 201 twice is still two rows. An awareness list that names “something went wrong” is not the failing check.
 
-## What to look at — cause, not a trophy
+## What to look at: the cause, not a trophy
 
 Read `vulnerable/share.py`. `share_note` appends `note_id` to `_SHARES` on every call. The parameter `idempotency_key` is accepted and discarded. Checks:
 
@@ -60,7 +60,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-A FastAPI route, Next.js disable-on-submit, or “PostgreSQL will unique-constrain it” is not this pytest. A unique constraint on `(note_id)` would block **any** second share, including a legitimate new key — wrong check. The app’s promise is: **this** practice, two calls with `k1`, `share_count() == 1`.
+A FastAPI route, Next.js disable-on-submit, or “PostgreSQL will unique-constrain it” is not this check. A unique constraint on `(note_id)` would block **any** second share, including a legitimate new key — wrong check. The app’s promise is: **this** practice, two calls with `k1`, `share_count() == 1`.
 
 ## Practice
 

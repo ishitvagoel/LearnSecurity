@@ -25,7 +25,7 @@ flowchart LR
   Origin --> Key["Key must include that company"]
 ```
 
-Industry lists want TLS to the public HTTP service. That is needed and not enough. A neighbor on a company inspecting proxy, or company B on the same CDN node, never needed to break TLS to read a path-only entry.
+Industry lists ask for TLS to the public HTTP service. That is needed and not enough. A neighbor on a company inspecting proxy, or company B on the same CDN node, never needed to break TLS to read a path-only entry.
 
 **A tool is not the rule:** “We turned on HTTPS,” Next.js `fetch` cache defaults, FastAPI `HTTPException`, a CDN product name, or `Cache-Control: private` while the CDN is set to cache anyway.
 

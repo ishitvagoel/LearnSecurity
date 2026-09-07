@@ -68,7 +68,7 @@ It must pass. Run from the lab directory if a collection at the repo root is pol
 
 ## Use it somewhere new
 
-Clinic: restore-test evidence, not a green dashboard. The lab still uses fake strings.
+A clinic example: restore-test evidence, not a green dashboard. The lab still uses fake strings.
 
 ## What can still go wrong
 
@@ -76,4 +76,4 @@ Imperfect forensics. Observability as a way out. Support-tool god-mode. Logging 
 
 ## What this page is not doing
 
-Do not query a live SIEM. Do not claim you finished an assurance gate from a green tile. Do not present a known-exploited list as close.
+Do not query a live SIEM. This page does not mark you as finished. from a green tile. Do not present a known-exploited list as close.

@@ -23,7 +23,7 @@ flowchart TD
 
 The lab’s repaired files return `["ls", "--", name]`. Production still has to call `subprocess.run` with that list and `shell=False`. A denylist of punctuation fails the 2.1 encoding lesson. Path traversal of the name is 6.4, a different check. Formula characters in the file *contents* are advanced leftover, not argv.
 
-Industry lists want arguments as parameters. This pytest is that sentence for `argv_for_list`.
+Industry lists ask for arguments as parameters. This pytest is that sentence for `argv_for_list`.
 
 ## What the repaired files must show
 
@@ -61,7 +61,7 @@ It must pass. Do not execute the returned list. Then write one sentence: which r
 
 ## Use it somewhere new
 
-Clinic: stop wrapping the export filename in `sh -c`; pass it as argv.
+A clinic example: stop wrapping the export filename in `sh -c`; pass it as argv.
 
 ## What can still go wrong
 

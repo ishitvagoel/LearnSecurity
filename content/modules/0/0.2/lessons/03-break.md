@@ -2,7 +2,7 @@
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
-**Standards:** NIST SP 800-181r1 NICE (final) as vocabulary, not a 1.2 cell; this course’s Gate 1 evidence rules. Lab policy: local only.
+**Standards:** NIST SP 800-181r1 NICE (final) as vocabulary, not a leftover hole from topic 1.2; this course’s Gate 1 evidence rules. Lab policy: local only.
 
 ## Where you may practice
 
@@ -10,7 +10,7 @@
 
 What must not happen: using a quiz score as permission to skip 1.2 or check-in 1. `quiz_score_grants_phase1_skip(100)` returns true.
 
-Who you are standing in for: a hurried learner or hiring manager who can supply a high score. That stands in for “they’re a senior hire,” “job-title competency,” or “the LMS dashboard is green.” What you are supposed to trust: the skip function refuses part-1 rule skips. An LMS percentage, a vendor cert, and a job-title mapping are not that trust.
+Who you are standing in for: a hurried learner or hiring manager who can supply a high score. That stands in for “they’re a senior hire,” “job-title competency,” or “the LMS dashboard is green.” What is supposed to stop this: the skip function refuses part-1 rule skips. An LMS percentage, a vendor cert, and a job-title mapping are not that trust.
 
 ## Picture: 80 percent ships
 
@@ -21,7 +21,7 @@ flowchart TD
 
 `--impl vulnerable` returns true for scores ≥ 80. The broken files show **why** (a number treated as a capability), not a trophy LMS exploit. You do not need a live quiz. You must not probe a live LMS.
 
-A 100% quiz cannot observe whether you can write a 1.2 deny cell. Check-in 1 evidence is not a percentage.
+A 100% quiz cannot observe whether you can write a 1.2 deny rule. Check-in 1 evidence is not a percentage.
 
 ## What to read in the practice files
 

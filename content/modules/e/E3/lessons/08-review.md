@@ -23,7 +23,7 @@ flowchart TD
   Q -->|PCI SAQ| False[False comfort]
 ```
 
-Classification starts at the protected effect (two k1 → count 1). Everything that is not key identity at that call is a candidate always-append path. A questionnaire screenshot without that pytest is the same smell, not a different finding class.
+Start from what must stay true (two k1 → count 1). Everything that is not key identity at that call is a candidate always-append path. A questionnaire screenshot without that check is the same problem, not a different kind of finding.
 
 Webhook races are leftover. New keys per click are leftover. Do not skip `test_duplicate_capture_does_not_double_charge`. Do not claim a course gate. Do not hit a live processor to prove the finding. Do not invent card numbers.
 
@@ -38,7 +38,7 @@ Also reject: live processors; shipping without re-running `test_duplicate_captur
 
 ## Common mix-ups
 
-- A filled-in questionnaire is this cell
+- A filled-in questionnaire is this rule
 - Processor remembering is the local ledger
 - A new key on each retry is fine
 - HTTP 200 is once

@@ -42,7 +42,7 @@ Reject any line that includes quiz keys, a badge screenshot, a job-title id trea
 
 ## Use it somewhere new
 
-Clinic: deny the onboarding skip; do not paste the quiz items into HR. Vendor cert used to skip a threat-model review: same deny, same no-back-date rule.
+A clinic example: deny the onboarding skip; do not paste the quiz items into HR. Vendor cert used to skip a threat-model review: same deny, same no-back-date rule.
 
 ## Can people still use it
 

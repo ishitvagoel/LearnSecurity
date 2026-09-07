@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"TLS hides logs"| False[False comfort]
 ```
 
-Classification starts at the protected effect (query yields `None`). Everything that is not a dropped query channel at that call is a candidate leftover path. “We use JWTs” and “SPA best practice” are tool slogans until the pytest fails on the broken files.
+Start from what must stay true (query yields `None`). Everything that is not a dropped query channel at that call is a candidate leftover path. “We use JWTs” and “SPA best practice” are tool slogans until the pytest fails on the broken files.
 
 ## Problems to find (name them yourself)
 

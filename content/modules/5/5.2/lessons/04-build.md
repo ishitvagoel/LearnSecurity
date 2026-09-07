@@ -23,7 +23,7 @@ flowchart TD
 
 The lab’s repaired files prefix `aesgcm:` plus length. Production still needs a reviewed authenticated-encryption library and a key that is not in the same row. Argon2 on a note body is the wrong rule. A JWT is not encryption.
 
-Industry lists want approved authenticated encryption. This pytest is “not encoding,” not “we shipped AES-GCM.”
+Industry lists ask for approved authenticated encryption. This pytest is “not encoding,” not “we shipped AES-GCM.”
 
 ## What the repaired files must show
 
@@ -61,7 +61,7 @@ It must pass. Then write one sentence: which rule is restored, and which leftove
 
 ## Use it somewhere new
 
-Clinic: replace a Base64 column with authenticated encryption and a managed key, not a rename to `ssn_encrypted`.
+A clinic example: replace a Base64 column with authenticated encryption and a managed key, not a rename to `ssn_encrypted`.
 
 ## What can still go wrong
 

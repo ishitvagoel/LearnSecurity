@@ -23,9 +23,9 @@ flowchart TD
   Check -->|None| Pass[Rule true]
 ```
 
-The repaired files pop all three maps. Production still needs an inventory that includes replicas, support tickets, and backups (named later). A privacy-law footer does not pop `ANALYTICS`. A privacy-framework “control” label is an outcome name, not this pytest.
+The repaired files pop all three maps. Production still needs an inventory that includes replicas, support tickets, and backups (named later). A privacy-law footer does not pop `ANALYTICS`. A privacy-framework “control” label is an outcome name, not this check.
 
-Industry lists want sensitive data not sent to an untrusted second party. This pytest is the deletion half of that sentence: if analytics already has the body, delete must still walk it. A scheduled automatic deletion job is advanced work, not this pytest.
+Industry lists ask for sensitive data not sent to an untrusted second party. This pytest is the deletion half of that sentence: if analytics already has the body, delete must still walk it. A scheduled automatic deletion job is advanced work, not this check.
 
 ## What the repaired files must show
 
@@ -72,7 +72,7 @@ It must pass. Then write one sentence: which rule is restored, and which leftove
 
 ## Use it somewhere new
 
-Clinic: delete the patient row and the appointment-card notes in one runbook, not a later ticket.
+A clinic example: delete the patient row and the appointment-card notes in one runbook, not a later ticket.
 
 ## What can still go wrong
 

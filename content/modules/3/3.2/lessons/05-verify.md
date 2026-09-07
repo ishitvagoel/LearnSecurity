@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# A missing cross-company check must fail
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -31,7 +31,7 @@ python3 -m pytest labs/3.2/3.2-lab/tests --impl vulnerable
 python3 -m pytest labs/3.2/3.2-lab/tests --impl fixed
 ```
 
-Map each test to a row you wrote on the model page. If the broken files do not fail the missing-id check, the lab is miswired — fix the wiring, not the check. An environment error is not security evidence.
+Map each test to a row you wrote on the model page. If the broken files do not fail the missing-id check, the lab is miswired — fix the wiring, not the check. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 

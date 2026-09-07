@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"privacy policy"| False[False comfort]
 ```
 
-The review starts at the protected effect (analytics and search bodies None after delete). Everything that is not a pop of that copy in the same delete is a candidate leftover path. “We anonymized user ids” while the body column remains is the same smell, not a different finding class.
+The review starts at the protected effect (analytics and search bodies None after delete). Everything that is not a pop of that copy in the same delete is a candidate leftover path. “We anonymized user ids” while the body column remains is the same problem, not a different kind of finding.
 
 ## Seeded smells (label them yourself)
 

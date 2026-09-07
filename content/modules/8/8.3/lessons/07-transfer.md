@@ -19,7 +19,7 @@ flowchart LR
   As["as=doctor still bound"] --> Reality[session switch]
 ```
 
-Renaming `as=admin` to `as=doctor` is not transfer. Person, object, path, and leftover change. If the kiosk demo uses a verified host while `open_link` copies `as`, the cell is gone. HTTPS, App Links, and `exported=false` without a test do not keep alice. OAuth redirect to the app (4.5) and WebView bridges are the same extras family — name them, do not run those systems here. Claimed HTTPS still wants a real host; custom schemes remain hijackable.
+Renaming `as=admin` to `as=doctor` is not transfer. Person, object, path, and leftover change. If the kiosk demo uses a verified host while `open_link` copies `as`, the rule is gone. HTTPS, App Links, and `exported=false` without a test do not keep alice. OAuth redirect to the app (4.5) and WebView bridges are the same extras family — name them, do not run those systems here. Claimed HTTPS still wants a real host; custom schemes remain hijackable.
 
 | Notes app this week | Clinic sketch |
 |---|---|
@@ -49,7 +49,7 @@ The clinic rewrite still has to keep the notes-app fork: `as=doctor` keeps the s
 | Live clinic / malware APK | Course rules |
 | “WebView is Chrome” | Another interpreter (6.2) |
 | HTTPS as identity | Transport, not principal |
-| Activity launched as this cell | Wrong observation |
+| Activity launched as this rule | Wrong observation |
 
 ## Practice
 
@@ -57,4 +57,4 @@ One page. No keys. `labs/8.3/8.3-lab` is the only running system you may break. 
 
 ## What this page is not doing
 
-Live-target IPC. Real doctor accounts. Claiming Gate 8 from this page.
+Live-target IPC. Real doctor accounts. This page does not finish a check-in.

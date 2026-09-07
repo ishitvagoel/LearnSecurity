@@ -5,13 +5,13 @@
 
 ## The rule
 
-The notes app this week stores a note with a member-visible `display_name` and a service-only `secret_internal` (a fake integration token in this practice, not a real secret). Last topic on object grants (4.4) already said: a share on this note is a yes for **this row**. This week’s cell is **which fields that share may read**. Extra keys on *write* were last week (7.1).
+The notes app this week stores a note with a member-visible `display_name` and a service-only `secret_internal` (a fake integration token in this practice, not a real secret). Last topic on object grants (4.4) already said: a share on this note is a yes for **this row**. This week's rule is **which fields that share may read**. Extra keys on *write* were last week (7.1).
 
 > `resolve("member", "secret_internal")` must be false. `resolve("member", "display_name")` may be true. `resolve("service", "secret_internal")` may be true.
 
 What must not happen is **a member resolves `secret_internal`**. That is who-is-allowed at field grain. Being able to call GET `/notes` is not this sentence. A UUID in the URL finds the row. It does not authorize every column.
 
-Industry checklists want field-level access limited to consumers with an explicit yes. Function-level permission is coarser. Object-level permission was 4.4. Applying a role change through every serializer right away is **advanced**, not this week’s pytest. Famous “broken object / property / function” lists are awareness after this table exists. They are not the syllabus.
+Industry lists ask for field-level access limited to consumers with an explicit yes. Function-level permission is coarser. Object-level permission was 4.4. Applying a role change through every serializer right away is **advanced**, not this week's check. Famous “broken object / property / function” lists are awareness after this table exists. They are not the syllabus.
 
 ## Picture: the dump helper writes every column
 
@@ -23,7 +23,7 @@ flowchart TD
 
 SQLAlchemy `to_dict()`, GraphQL default resolvers, and REST `?fields=` that echo column names are the same shape: the serializer is not a policy.
 
-Who can act here: a member session that asks for extra fields. That stands in for a clinic GraphQL `Patient { ssn }`, a REST `?fields=` dump, or a CSV exporter that serializes every ORM column. What you trust is local `resolve(role, field)` on the server. Hiding the key in the SPA is not the cell.
+Who could do this: a member session that asks for extra fields. That stands in for a clinic GraphQL `Patient { ssn }`, a REST `?fields=` dump, or a CSV exporter that serializes every ORM column. What you trust is local `resolve(role, field)` on the server. Hiding the key in the SPA is not the rule.
 
 **A tool is not the rule.** “Private JSON keys,” “GraphQL schema is typed,” “we already passed 4.4 object tests.”
 
@@ -38,7 +38,7 @@ flowchart LR
   Allow -->|yes| Read[read]
 ```
 
-A UUID locates the row. It is not a capability for every column. Hiding the key in the SPA is not the cell.
+A UUID locates the row. It is not a capability for every column. Hiding the key in the SPA is not the rule.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
@@ -81,8 +81,8 @@ The first command must fail. The second must pass. Tie the check to `resolve("me
 
 ## Use it somewhere new
 
-Clinic: a member cannot resolve SSN. Also name bulk update and search highlighting that leaks snippets.
+A clinic example: a member cannot resolve SSN. Also name bulk update and search highlighting that leaks snippets.
 
 ## What this page is not doing
 
-Live GraphQL attacks, dumping ORM models into notes. Course gates stay unclaimed without learner or product evidence. Answer keys are not on this site.
+Live GraphQL attacks, dumping ORM models into notes. This page does not finish a check-in. Answer keys are not on this site.

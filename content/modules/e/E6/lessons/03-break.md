@@ -17,7 +17,7 @@ Only `labs/E6/e6-lab` is in scope. The practice is an in-process `accept_excepti
 
 Do not paste this exercise onto a public clinic, employer register, or live hospital portal “to see what happens.”
 
-What you trust for this check: `accept_exception` is supposed to require a **record** with owner, review date, and accessibility flag. A ticket type, a HIPAA slide, and a pledge page are not what you trust.
+What is supposed to stop this: `accept_exception` is supposed to require a **record** with owner, review date, and accessibility flag. A ticket type, a HIPAA slide, and a pledge page are not enough.
 
 Who can accept without a record in this story: calendar pressure plus oral “we’ll accept it.” That stands in for “legal said yes,” a maturity score treated as the register, or a “secure by design” pledge treated as an assurance stamp.
 
@@ -73,7 +73,7 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/E6/e6-lab/tests --impl vulnerable
 ```
 
-Run from `labs/E6/e6-lab` if a collection at the repo root picks up `site/`. Record `test_exception_needs_owner_review_and_wcag`. Do not contact live disclosure inboxes. An environment error is not security evidence.
+Run from `labs/E6/e6-lab` if a collection at the repo root picks up `site/`. Record `test_exception_needs_owner_review_and_wcag`. Do not contact live disclosure inboxes. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
@@ -81,4 +81,4 @@ Clinic HIPAA exception: predict acceptance without leaving this directory. Do no
 
 ## What this page is not doing
 
-No live-disclosure, production-exception, or public-bug-bounty instructions. Do not claim you finished an assurance gate. A later design-review draft stays a draft. An unverified pledge stays unverified.
+No live-disclosure, production-exception, or public-bug-bounty instructions. This page does not mark you as finished. A later design-review draft stays a draft. An unverified pledge stays unverified.

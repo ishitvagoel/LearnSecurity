@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"HTTP 201 means once"| False[False comfort]
 ```
 
-Classification starts at the protected effect (share count under retry). Everything that is not a remembered first outcome at that second call is a candidate leftover path.
+Start from what must stay true (share count under retry). Everything that is not a remembered first outcome at that second call is a candidate leftover path.
 
 ## Problems to find (name them yourself)
 

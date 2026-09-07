@@ -17,7 +17,7 @@ Only `labs/10.5/10.5-lab` is in scope. The practice is an in-process `close_inci
 
 Do not paste this exercise onto a public clinic, employer dashboard, or live hospital portal “to see what happens.”
 
-What you trust for this check: `close_incident` is supposed to require **recovery done and logs that are not a note store**. A paging ack, time-to-detect, untested backups, and framework access logs are not what you trust.
+What is supposed to stop this: `close_incident` is supposed to require **recovery done and logs that are not a note store**. A paging ack, time-to-detect, untested backups, and framework access logs are not enough.
 
 Who can close without recovery in this story: an optimistic closer while the actor is still in. That stands in for “alerts stopped so we closed INC-12,” a green SIEM treated as recover, or a known-exploited listing treated as close.
 
@@ -74,7 +74,7 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/10.5/10.5-lab/tests --impl vulnerable
 ```
 
-Run from `labs/10.5/10.5-lab` if a collection at the repo root picks up `site/`. Record `test_cannot_close_without_recovery`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/10.5/10.5-lab` if a collection at the repo root picks up `site/`. Record `test_cannot_close_without_recovery`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
@@ -82,4 +82,4 @@ Clinic SIEM-green close: predict without leaving this directory. Do not query a 
 
 ## What this page is not doing
 
-No live-SIEM, paging-product, or public incident-system instructions. Do not claim you finished an assurance gate. A known-exploited list is patch input, not close.
+No live-SIEM, paging-product, or public incident-system instructions. This page does not mark you as finished. A known-exploited list is patch input, not close.

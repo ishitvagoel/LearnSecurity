@@ -47,7 +47,7 @@ Rewrite the notes-app sentence. Include:
 | Spreadsheet as the rule | No place named; no allow or deny |
 | Live clinic logs | Course rules |
 | Privacy-policy URL | A document is not the logger |
-| A legal label as the check | Awareness, not this pytest |
+| A legal label as the check | Awareness, not this check |
 | HTTP 200 as classification evidence | Wrong observation |
 
 ## Practice

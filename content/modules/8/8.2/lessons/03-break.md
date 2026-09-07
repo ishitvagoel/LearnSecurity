@@ -19,7 +19,7 @@ Do not paste this exercise onto a public device, employer clinic, or live EHR ta
 
 What must not happen: **a note body cached as plaintext on disk**. After `save_note("secret")`, `plaintext_on_disk()` is true.
 
-Attacker capability in this practice: a stolen USB backup or a phone whose cache is unlocked. That stands in for a clinic “available offline” write of `charts.json`, a Room SQLite dump, or a cloud backup of internal storage. What you trust: `save_note` is supposed to leave **ciphertext (or a stand-in) on disk**, not the body. `MODE_PRIVATE`, a fingerprint prompt, and EncryptedSharedPreferences on a *different* file are not what you trust for this cell.
+Who could do this: a stolen USB backup or a phone whose cache is unlocked. That stands in for a clinic “available offline” write of `charts.json`, a Room SQLite dump, or a cloud backup of internal storage. What is supposed to stop this: `save_note` is supposed to leave **ciphertext (or a stand-in) on disk**, not the body. `MODE_PRIVATE`, a fingerprint prompt, and EncryptedSharedPreferences on a *different* file are not enough.
 
 ## Picture: write the body as the file
 
@@ -30,7 +30,7 @@ flowchart TD
 
 The broken files show **cause** (a text file). Do not dump personal device storage. What has to be true first: `save_note` stores the body as-is. You do not need an emulator. You must not image a phone.
 
-Industry lists want sensitive data stored securely. Last crypto topic (5.2) already refused Base64; this cell is **the phone’s disk**. Last topic (8.1) already said the device is hostile.
+Industry lists ask for sensitive data stored securely. Last crypto topic (5.2) already refused Base64; this rule is **the phone’s disk**. Topic 8.1 already said the device is hostile.
 
 ## What to read in the broken files
 
@@ -67,7 +67,7 @@ EncryptedSharedPreferences is not automatic for every file. Room defaults to pla
 python3 -m pytest labs/8.2/8.2-lab/tests --impl vulnerable
 ```
 
-Run from `labs/8.2/8.2-lab` if a repo-root collection picks up `site/`. Record `test_cached_note_is_not_plaintext_on_disk`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not image phones. An environment error is not security evidence.
+Run from `labs/8.2/8.2-lab` if a repo-root collection picks up `site/`. Record `test_cached_note_is_not_plaintext_on_disk`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not image phones. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# The broken files must fail an approved eval
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -37,7 +37,7 @@ python3 -m pytest labs/9.2/9.2-lab/tests --impl vulnerable
 python3 -m pytest labs/9.2/9.2-lab/tests --impl fixed
 ```
 
-Honest diffs without eval may pass on both implementations. That does not excuse the eval-reject test. If the broken files do not fail `test_eval_on_user_input_is_rejected`, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
+Honest diffs without eval may pass on both implementations. That does not excuse the eval-reject test. If the broken files do not fail `test_eval_on_user_input_is_rejected`, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
@@ -62,8 +62,8 @@ Paste nothing from answer keys. Write fail/pass into your notes next to the matr
 
 ## Use it somewhere new
 
-Clinic: a review that only asserts “template still renders” is not this check. Live GitHub and weaponized eval are out of scope.
+A clinic example: a review that only asserts “template still renders” is not this check. Live GitHub and weaponized eval are out of scope.
 
 ## What this page is not doing
 
-Do not add a live-org trophy. Do not log eval payloads. Answer keys are not on this site. This site does not mark you as finished.
+Do not treat a live org screenshot as proof. Do not log eval payloads. Answer keys are not on this site. This site does not mark you as finished.

@@ -11,7 +11,7 @@ The notes app this week may cache notes so you can read them offline. That cache
 
 What must not happen: **a note body cached as plaintext on disk**. A stolen USB backup, or a phone whose cache is unlocked, yields the bodies.
 
-Industry lists want sensitive data stored in a way that is actually secret, not just “in the app folder.” They also want extra copies stopped — screenshots, clipboard, notifications, backups. Keys belong in the platform store (Android Keystore, later iOS Keychain), not next to the file. A fingerprint prompt is **local** unlock. It is not the server second factor from 4.2.
+Industry lists ask for sensitive data stored in a way that is actually secret, not just “in the app folder.” They also want extra copies stopped — screenshots, clipboard, notifications, backups. Keys belong in the platform store (Android Keystore, later iOS Keychain), not next to the file. A fingerprint prompt is **local** unlock. It is not the server second factor from 4.2.
 
 ## Picture: private folder versus ciphertext
 
@@ -82,4 +82,4 @@ Clinic offline chart cache. iOS Keychain vs Android Keystore. Desktop Electron.
 
 ## What this page is not doing
 
-Live device imaging, dumping real AES into lessons. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not on this site.
+Live device imaging, dumping real AES into lessons. Opening this page does not finish a check-in. Answer keys are not on this site.

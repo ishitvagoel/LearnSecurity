@@ -23,7 +23,7 @@ flowchart TD
   Q -->|HttpOnly means no XSS| False[False comfort]
 ```
 
-Classification starts at the protected effect (script read of the session). Everything that is not an HttpOnly honor at that read is a leftover path.
+Start from what must stay true (script read of the session). Everything that is not an HttpOnly honor at that read is a leftover path.
 
 ## Problems to label yourself
 

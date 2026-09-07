@@ -67,7 +67,7 @@ It must pass. Run from the lab directory if a collection at the repo root is pol
 
 ## Use it somewhere new
 
-Clinic: replace `test_get_patient_200` with “other clinician must not 200.” The lab still uses fake descriptors.
+A clinic example: replace `test_get_patient_200` with “other clinician must not 200.” The lab still uses fake descriptors.
 
 ## What can still go wrong
 

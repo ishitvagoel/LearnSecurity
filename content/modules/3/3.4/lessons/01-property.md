@@ -11,7 +11,7 @@ The notes app lets an owner share a note with other people. The product rule is 
 
 What must not happen is **cap exceeded**: looping `add_share()` eight times yields `last > 5`. Extra rows are extra readers nobody intended: more people on the note, a larger blast radius, a noisier threat model.
 
-Industry checklists want the limit written down, enforced on a trusted service, actually implemented, and locked so two parallel sixths cannot both land. Multi-user approval for a support override is an advanced extra, not a silent baseline. Awareness lists name unrestricted consumption after this sentence exists. They are not the syllabus.
+Industry lists ask for the limit written down, enforced on a trusted service, actually implemented, and locked so two parallel sixths cannot both land. Multi-user approval for a support override is an advanced extra, not a silent baseline. Awareness lists name unrestricted consumption after this sentence exists. They are not the syllabus.
 
 ## Picture: UI max is not the write path
 
@@ -62,7 +62,7 @@ FastAPI does not know “five members.” SQLAlchemy `add()` will insert a sixth
 
 - Cap on `/share` but not `/import` or GraphQL.
 - Parallel sixths before commit (needs a transaction or lock — leftover from the retry lab).
-- Support override with no audit (advanced, not this pytest).
+- Support override with no audit (advanced, not this check).
 
 ## Practice
 
@@ -77,7 +77,7 @@ The first command must fail. The second must pass. Tie the check to count ≤ 5,
 
 ## Use it somewhere new
 
-Clinic: max 3 guardians per child. Invite tokens and export quotas are different objects, same shape.
+A clinic example: max 3 guardians per child. Invite tokens and export quotas are different objects, same shape.
 
 ## Can people still use it
 

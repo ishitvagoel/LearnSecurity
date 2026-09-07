@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# A last page with more than five items must fail
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -31,7 +31,7 @@ python3 -m pytest labs/3.4/3.4-lab/tests --impl vulnerable
 python3 -m pytest labs/3.4/3.4-lab/tests --impl fixed
 ```
 
-Map each test to the state-machine row you wrote. If the broken files do not fail the eight-call assertion, the lab is miswired — fix the wiring, not the check. An environment error is not security evidence.
+Map each test to the state-machine row you wrote. If the broken files do not fail the eight-call assertion, the lab is miswired — fix the wiring, not the check. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 

@@ -20,7 +20,7 @@ flowchart TD
   Fields -->|no| Deny[false]
 ```
 
-The repaired files require those three fields. Production still needs someone to *read* the register — an unread complete row is leftover. Inaccessible recovery is recorded as a flag here, not proven. Extra advanced documentation of a dangerous function is documentation, not this pytest.
+The repaired files require those three fields. Production still needs someone to *read* the register — an unread complete row is leftover. Inaccessible recovery is recorded as a flag here, not proven. Extra advanced documentation of a dangerous function is documentation, not this check.
 
 Expire on `review_by`. Re-accept with fields or fix the hole. Do not silently extend.
 
@@ -66,7 +66,7 @@ It must pass. Run from the lab directory if a collection at the repo root is pol
 
 ## Use it somewhere new
 
-Clinic: refuse a HIPAA exception with no review date the same way. The lab still uses fake strings.
+A clinic example: refuse a HIPAA exception with no review date the same way. The lab still uses fake strings.
 
 ## What can still go wrong
 
@@ -74,4 +74,4 @@ Unread register; rename to tech-debt; inaccessible path still checked only as a 
 
 ## What this page is not doing
 
-Do not file a live exception. Do not claim you finished an assurance gate from a maturity screenshot. Do not present an unverified pledge as proven.
+Do not file a live exception. This page does not mark you as finished. from a maturity screenshot. Do not present an unverified pledge as proven.

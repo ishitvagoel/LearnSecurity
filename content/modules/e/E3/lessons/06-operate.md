@@ -23,11 +23,11 @@ flowchart TD
 | Recover | Credit extra in a runbook; still fail the test first |
 | Leftover | New-key retry; webhook race |
 
-Industry lists name detect, respond, recover. They do not prove this ledger rule. A payment-product name is not the rule. Re-run `test_duplicate_capture_does_not_double_charge` after any capture-path change; a green “processor remembers” tile is not that pytest. Webhook inserts are the same family — inventory them before claiming recover.
+Industry lists talk about noticing, responding, and recovering. They do not prove this ledger rule. Naming a product is not the rule. Re-run `test_duplicate_capture_does_not_double_charge` after any capture-path change; a green “processor remembers” tile is not that check. Webhook inserts are the same family — inventory them before claiming recover.
 
 ## What the framework does vs what you still have to check
 
-A processor dashboard will show successful captures and stay silent when CI’s `capture` always appends. Notice must observe **two k1 → count 1**, not processor 200s. If the alert includes a card number, you have opened a 5.1 cell this elective forbids.
+A processor dashboard will show successful captures and stay silent when CI’s `capture` always appends. Notice must observe **two k1 → count 1**, not processor 200s. If the alert includes a card number, you have opened a leftover hole from topic 5.1 this elective forbids.
 
 ## Practice
 
@@ -41,7 +41,7 @@ Reject any line that includes a card number, a note body, or “questionnaire co
 
 ## Use it somewhere new
 
-Clinic: deny the second copay; do not paste billing dumps into the ticket. Do not hit a live processor.
+A clinic example: deny the second copay; do not paste billing dumps into the ticket. Do not hit a live processor.
 
 ## Can people still use it
 

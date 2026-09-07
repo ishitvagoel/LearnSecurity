@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# A leftover session must fail the check
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -37,7 +37,7 @@ python3 -m pytest labs/4.1/4.1-lab/tests --impl vulnerable
 python3 -m pytest labs/4.1/4.1-lab/tests --impl fixed
 ```
 
-Map the test to the deleted-alice × leftover-session row you wrote. If the broken files do not fail the leftover-session assertion, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
+Map the test to the deleted-alice × leftover-session row you wrote. If the broken files do not fail the leftover-session assertion, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
@@ -45,7 +45,7 @@ Map the test to the deleted-alice × leftover-session row you wrote. If the brok
 - Worker identity (later)
 - Backup leftover (later)
 - A phone's offline cache (later)
-- Revoking a stolen login factor (advanced; not this pytest)
+- Revoking a stolen login factor (advanced; not this check)
 
 Record those as leftover or later topics, not as silent passes.
 

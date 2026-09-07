@@ -11,7 +11,7 @@ The notes app can export after the web request is already over. Export still has
 
 What must not happen is **a leftover user session accepted as worker identity**. That is who the worker is allowed to be. It is also leftover Alice still exporting after delete-and-revoke (4.1).
 
-Industry lists want backend jobs logged in as their own short-lived service accounts, not leftover people. Those accounts should be small. After the worker is the worker, it may still need Alice’s grant (4.4) to choose *which* notes. That later check is **advanced** work. Do not collapse “the worker must not *be* Alice” with “the worker must still *check* Alice’s grant.”
+Industry lists ask for backend jobs logged in as their own short-lived service accounts, not leftover people. Those accounts should be small. After the worker is the worker, it may still need Alice’s grant (4.4) to choose *which* notes. That later check is **advanced** work. Do not collapse “the worker must not *be* Alice” with “the worker must still *check* Alice’s grant.”
 
 ## Picture: HTTP subject versus worker principal
 
@@ -60,7 +60,7 @@ The app’s promise: leftover Alice is `None`; the named worker may run. The fol
 
 - A correctly named worker that is still a superuser database role (3.3).
 - Poison-message loops, and retries of revoked grants (2.4).
-- After the worker is `worker-sc`, it may still need Alice’s grant (4.4) to choose which notes — that later check is advanced work, not this pytest.
+- After the worker is `worker-sc`, it may still need Alice’s grant (4.4) to choose which notes — that later check is advanced work, not this check.
 - Broker access lists wait for 10.3.
 - A zero-trust architecture paper does not replace the pytest.
 

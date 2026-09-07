@@ -17,7 +17,7 @@ Only `labs/4.1/4.1-lab` is in scope. The maps are in-process: `SESSIONS` and `DE
 
 Do not replay a production cookie. Do not replay an employer single-sign-on session. Do not replay a classmate login. Do not steal a cookie “to see what happens.”
 
-What you trust for this check: `delete_user` is supposed to kill leftovers in the same delete. HR email, “password disabled,” and a single-sign-on brand name are not what you trust.
+What is supposed to stop this: `delete_user` is supposed to kill leftovers in the same delete. HR email, “password disabled,” and a single-sign-on brand name are not enough.
 
 Who can still get in, in this story: an ex-employee, or a copied cookie on a shared workstation, who can present `SESSIONS["alice"]` after offboarding. That stands in for a delayed worker still holding `user_id`.
 
@@ -32,7 +32,7 @@ flowchart TD
 
 The broken files take that path on purpose. You do not need a real cookie string. The leftover still returning true *is* the leak.
 
-Industry lists want all active sessions killed when an account is disabled or deleted. `DELETE FROM users` is a profile observation, not that kill.
+Industry lists ask for all active sessions killed when an account is disabled or deleted. `DELETE FROM users` is a profile observation, not that kill.
 
 ## What to look at — cause, not a dump
 
@@ -75,11 +75,11 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/4.1/4.1-lab/tests --impl vulnerable
 ```
 
-Record the failing test `test_deleted_user_session_is_dead`. Do not weaken it to “the profile row is gone.” An environment error is not security evidence.
+Record the failing test `test_deleted_user_session_is_dead`. Do not weaken it to “the profile row is gone.” A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic: badge off, chart cookie still valid. Predict, without leaving this directory, whether disabling the badge kills the session. Do not hit a clinic identity provider.
+A clinic example: badge off, chart cookie still valid. Predict, without leaving this directory, whether disabling the badge kills the session. Do not hit a clinic identity provider.
 
 ## What this page is not doing
 

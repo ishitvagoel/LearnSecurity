@@ -23,9 +23,9 @@ flowchart TD
   Q -->|canary 10 percent| False[False comfort]
 ```
 
-Classification starts at the protected effect (prod plus debug denied). Everything that is not the both-at-once check at that call is a candidate always-boot path. A `NODE_ENV` screenshot without that pytest is the same smell, not a different finding class.
+Start from what must stay true (prod plus debug denied). Everything that is not the both-at-once check at that call is a candidate always-boot path. A `NODE_ENV` screenshot without that check is the same problem, not a different kind of finding.
 
-Feature flags are leftover you still have to trust. Admin bound to all interfaces is leftover in the same family (docs and monitoring pages). Do not skip `test_prod_debug_must_not_boot`. Do not claim you finished an assurance gate. Do not boot a live host to prove the finding.
+Feature flags are leftover you still have to trust. Admin bound to all interfaces is leftover in the same family (docs and monitoring pages). Do not skip `test_prod_debug_must_not_boot`. This page does not mark you as finished. Do not boot a live host to prove the finding.
 
 ## Seeded smells (label them yourself)
 

@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# HTTPS in the header with HTTP on the socket must fail
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -37,11 +37,11 @@ python3 -m pytest labs/5.4/5.4-lab/tests --impl vulnerable
 python3 -m pytest labs/5.4/5.4-lab/tests --impl fixed
 ```
 
-Map the test to the header-https × socket-http row you wrote. Honest socket-https may pass on both implementations. That does not excuse the mismatch test. If the broken files do not fail header-https + socket-http, the lab is miswired — fix the wiring, not the check. An environment error is not security evidence.
+Map the test to the header-https × socket-http row you wrote. Honest socket-https may pass on both implementations. That does not excuse the mismatch test. If the broken files do not fail header-https + socket-http, the lab is miswired — fix the wiring, not the check. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
-- Certificate checks (a client cell)
+- Certificate checks (a client-side rule)
 - OCSP stapling / encrypted client hello (advanced extras)
 - Phone network checks (later)
 - Bound load-balancer identity in production
@@ -62,7 +62,7 @@ Paste nothing from answer keys. Write fail/pass into your notes next to the matr
 
 ## Use it somewhere new
 
-Clinic page. A test that only asserts the site loads on port 443 is not this cell (that wait belongs with later availability work). A test that probes a live clinic is out of scope.
+Clinic page. A test that only asserts the site loads on port 443 is not this rule (that wait belongs with later availability work). A test that probes a live clinic is out of scope.
 
 ## What this page is not doing
 

@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# A broken coverage check must fail the status-only test
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -25,7 +25,7 @@ If both pass, the test is not looking at `asserts_isolation`. If both fail, the 
 |---|---|
 | Normal | Isolation assert → covered (may pass on both) |
 | Wrong input | status-only → not covered; broken files must fail |
-| Abuse | Unsure flags are not coverage (fail closed; leftover if not in this pytest) |
+| Abuse | Unsure flags are not coverage (fail closed; leftover if not in this check) |
 | Not claimed | A real checklist assessment; the verification gate; a later draft of a practice guide; that the named test actually isolates |
 
 The file is `labs/9.1/9.1-lab/tests/test_property.py`. The test `test_status_only_row_is_not_coverage` is a **what-must-not-happen** test: membership without an isolation assert is not allowed to count as coverage.
@@ -62,8 +62,8 @@ Paste nothing from answer keys. Write fail/pass into your notes next to the AUTH
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts the spreadsheet exports is not this topic. A live governance scrape is out of scope.
+A clinic example: a test that only asserts the spreadsheet exports is not this topic. A live governance scrape is out of scope.
 
 ## What this page is not doing
 
-Do not add a live checklist trophy. Do not log note bodies. Answer keys are not on this site. The verification gate stays not-attempted.
+Do not treat a live checklist screenshot as proof. Do not log note bodies. Answer keys are not on this site. This page does not finish the verification check-in.

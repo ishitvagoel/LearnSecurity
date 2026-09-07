@@ -19,7 +19,7 @@ flowchart LR
   HTML[HTML badge] --> Reality[grammar mixed with data]
 ```
 
-Renaming “title” to “nickname” is not transfer. Person, object, path, and leftover change. If the nickname is concatenated into an HTML badge, the cell is gone. FastAPI, a content-security header in report-only mode, and React defaults on a different component do not encode this sink. Markdown-to-HTML is 2.1’s second parser: even a well-encoded badge fails if markdown emits raw tags later. Trusted Types remain draft.
+Renaming “title” to “nickname” is not transfer. Person, object, path, and leftover change. If the nickname is concatenated into an HTML badge, the rule is gone. FastAPI, a content-security header in report-only mode, and React defaults on a different component do not encode this sink. Markdown-to-HTML is 2.1’s second parser: even a well-encoded badge fails if markdown emits raw tags later. Trusted Types remain draft.
 
 | Notes app this week | Clinic sketch |
 |---|---|
@@ -45,11 +45,11 @@ The clinic rewrite still has to keep the notes-app fork: `<` in the nickname bec
 
 | Reject | Why |
 |---|---|
-| “Content-security policy is on” | Layer, draft, not this cell |
+| “Content-security policy is on” | Layer, draft, not this rule |
 | Live clinic probe | Course rules |
 | Attack-recipe payload as the check | Course rules; tame `<` is enough |
 | HTTP 200 as encoding evidence | Wrong observation |
-| HttpOnly as “script in the page is done” | Different cell (2.3) |
+| HttpOnly as “script in the page is done” | A different rule (2.3) |
 
 ## Practice
 
@@ -57,4 +57,4 @@ One page. No keys. `labs/6.2/6.2-lab` is the only running system you may break. 
 
 ## What this page is not doing
 
-Live-target attacks. Real nicknames as patient-data dumps. Claiming Gate 6 from this page.
+Live-target attacks. Real nicknames as patient-data dumps. This page does not finish a check-in.

@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# A path that leaves the folder must fail
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -21,7 +21,7 @@ flowchart LR
 |---|---|
 | Normal | Honest `notes/a.txt` stays under the folder (may pass on both) |
 | Wrong input / abuse | `../outside` does not leave the folder; broken files must fail |
-| When things break | If canonicalize is uncertain, deny (write it as leftover if this pytest does not cover it) |
+| When things break | If canonicalize is uncertain, deny (write it as leftover if this check does not cover it) |
 | Not claimed | Zip members; XML entities; pickle; live host reads; awareness-list “compliant” |
 
 Lab tests: `test_dotdot_does_not_escape_root` and `test_honest_relative_stays_under_root` in `labs/6.4/6.4-lab/tests/test_property.py`. The first test is a **what-must-not-happen** test: an escaped object is not allowed to count as a passing control. The name `../outside` is data for the prefix check — not a cookbook for other directories.
@@ -31,7 +31,7 @@ python3 -m pytest labs/6.4/6.4-lab/tests --impl vulnerable
 python3 -m pytest labs/6.4/6.4-lab/tests --impl fixed
 ```
 
-Honest relative names may pass on both implementations. That does not excuse the escape test. Map each test to the prefix row you wrote on the map page. If the broken files do not fail the prefix check, the lab is miswired — fix the wiring, not the check. An environment error is not security evidence.
+Honest relative names may pass on both implementations. That does not excuse the escape test. Map each test to the prefix row you wrote on the map page. If the broken files do not fail the prefix check, the lab is miswired — fix the wiring, not the check. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
@@ -49,7 +49,7 @@ Run both this session. Write the fail/pass pair next to the matrix row. Reject a
 
 ## Use it somewhere new
 
-Clinic scan filename. A test that only asserts HTTP 200 on upload is not this cell. A test that opens host files outside the lab folder is out of scope.
+Clinic scan filename. A test that only asserts HTTP 200 on upload is not this rule. A test that opens host files outside the lab folder is out of scope.
 
 ## What this page is not doing
 

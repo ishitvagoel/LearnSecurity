@@ -41,7 +41,7 @@ A private subnet does not compare `tB` to `tA`. The replica is a second lane: in
 | “Private subnet” as the rule | Topology is not isolation |
 | Live clinic or real managed database | Course rules |
 | Row-level-security ticket without a test | Tool theater |
-| A manufacturer pledge as GRANT | Living guidance, not this pytest |
+| A manufacturer pledge as GRANT | Living guidance, not this check |
 | HTTP 200 as architecture evidence | Wrong observation |
 
 ## Practice

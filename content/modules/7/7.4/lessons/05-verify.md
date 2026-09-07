@@ -37,11 +37,11 @@ python3 -m pytest labs/7.4/7.4-lab/tests --impl vulnerable
 python3 -m pytest labs/7.4/7.4-lab/tests --impl fixed
 ```
 
-Honest `service=worker-sc` may pass on both implementations. That does not excuse the leftover-session deny test. If the broken files do not fail `test_user_session_is_not_worker_identity`, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
+Honest `service=worker-sc` may pass on both implementations. That does not excuse the leftover-session deny test. If the broken files do not fail `test_user_session_is_not_worker_identity`, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
-- After the worker is the worker, choosing notes from Alice’s grant (advanced, not this pytest)
+- After the worker is the worker, choosing notes from Alice’s grant (advanced, not this check)
 - Least-privilege database role in production (beyond the principal name) (3.3)
 - Retry after revoke (2.4 / 4.1)
 - Broker access lists (10.3)
@@ -63,7 +63,7 @@ Paste nothing from answer keys. Write fail/pass into your notes next to the matr
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts the job was enqueued is not this check. A live broker attach is out of scope.
+A clinic example: a test that only asserts the job was enqueued is not this check. A live broker attach is out of scope.
 
 ## What this page is not doing
 

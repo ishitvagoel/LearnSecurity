@@ -19,7 +19,7 @@ Do not paste this exercise onto a public API, employer clinic, or live EHR.
 
 What must not happen: **`user.update(body)` sets `is_admin`**. After `apply(user, {"is_admin": true})`, `is_admin` is true.
 
-Attacker capability in this practice: a signed-in member sending extra JSON keys. That stands in for a clinic “Edit profile” form, a generated client that serializes every model field, or a GraphQL mutation that still binds `input: JSON`. What you trust: `apply` is supposed to be a **per-action writable-field contract**. An OpenAPI file, a SPA that omits the admin checkbox, and FastAPI ignoring extras on a nested model you never applied are not what you trust for this cell.
+Who could do this: a signed-in member sending extra JSON keys. That stands in for a clinic “Edit profile” form, a generated client that serializes every model field, or a GraphQL mutation that still binds `input: JSON`. What is supposed to stop this: `apply` is supposed to be a **per-action writable-field contract**. An OpenAPI file, a SPA that omits the admin checkbox, and FastAPI ignoring extras on a nested model you never applied are not enough.
 
 ## Picture: every key becomes a column
 
@@ -31,7 +31,7 @@ flowchart TD
 
 The broken files show **cause** (the binder maps any key). Do not send extra keys at anything except these local files. What has to be true first: `apply` copies every item from `body` onto `user`. You do not need HTTP. You must not probe a public API.
 
-Industry lists want allowed fields limited per action. Last topic (1.2) already said authority is a cell; this cell is **which keys that cell may write**. GraphQL query cost is 6.7’s resource account, not this PATCH.
+Industry lists ask for allowed fields limited per action. Topic 1.2 already said who-is-allowed is a rule; this rule is **which keys that rule may write**. GraphQL query cost is 6.7’s resource account, not this PATCH.
 
 ## What to read in the broken files
 
@@ -69,7 +69,7 @@ FastAPI will bind extra fields if the model allows it. Pydantic allowing extras 
 python3 -m pytest labs/7.1/7.1-lab/tests --impl vulnerable
 ```
 
-Run from `labs/7.1/7.1-lab` if a repo-root collection picks up `site/`. Record `test_is_admin_cannot_be_patched`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/7.1/7.1-lab` if a repo-root collection picks up `site/`. Record `test_is_admin_cannot_be_patched`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

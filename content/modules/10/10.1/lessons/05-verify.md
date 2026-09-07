@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# A broken merge check must fail the empty-change test
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -25,7 +25,7 @@ If both pass, the test is not looking at `threat_model`. If both fail, the fix i
 |---|---|
 | Normal | `{"threat_model": "TM-12"}` → may merge (may pass on both) |
 | Wrong input | `{}` → not merge; empty threat-model change must fail merge |
-| Abuse | Unsure or empty ids are deny (fail closed; leftover if not in this pytest) |
+| Abuse | Unsure or empty ids are deny (fail closed; leftover if not in this check) |
 | Not claimed | A live GitHub org; Gate 10; a maturity score; that TM-12 covers this change |
 
 The file is `labs/10.1/10.1-lab/tests/test_property.py`. The test `test_merge_requires_threat_model_id` is a **what-must-not-happen** test: always-true `merge_ok` is not allowed to count as a passing control.
@@ -62,8 +62,8 @@ Paste nothing from answer keys. Write fail/pass into your notes next to the trig
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts “HIPAA training complete” is not this topic. A live GitHub org is out of scope.
+A clinic example: a test that only asserts “HIPAA training complete” is not this topic. A live GitHub org is out of scope.
 
 ## What this page is not doing
 
-Do not add a live-org trophy. Do not log GitHub tokens. Answer keys are not on this site. Gate 10 stays not-attempted.
+Do not treat a live org screenshot as proof. Do not log GitHub tokens. Answer keys are not on this site. Gate 10 stays not finished.

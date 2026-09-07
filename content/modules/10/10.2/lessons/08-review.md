@@ -23,7 +23,7 @@ flowchart TD
   Q -->|provenance badge| False[False comfort]
 ```
 
-Classification starts at the protected effect (mismatch denied). Everything that is not digest equality at that call is a candidate always-install path. An SBOM screenshot without that pytest is the same smell, not a different finding class.
+Start from what must stay true (mismatch denied). Everything that is not digest equality at that call is a candidate always-install path. An SBOM screenshot without that check is the same problem, not a different kind of finding.
 
 Unpinned Actions are a sibling grain. Secrets in fork pull requests are 5.3. Do not skip `test_hash_mismatch_refuses_install`. Do not claim the ship gate. Do not fetch a live package to prove the finding.
 

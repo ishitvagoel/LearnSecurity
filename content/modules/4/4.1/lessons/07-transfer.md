@@ -48,7 +48,7 @@ Rewrite the notes-app sentence. Include:
 | “Single sign-on will revoke” without a test | Tool theater |
 | Live clinic identity provider | Course rules |
 | Profile DELETE as the rule | Leftover still live |
-| A legal label as the check | Awareness, not this pytest |
+| A legal label as the check | Awareness, not this check |
 | HTTP 200 as lifecycle evidence | Wrong observation |
 
 ## Practice

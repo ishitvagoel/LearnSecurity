@@ -23,7 +23,7 @@ flowchart TD
   Q -->|logs are internal| False[False comfort]
 ```
 
-Classification starts at the protected effect (body substring absent from this log). Everything that is not an allow-listed log API at that call is a candidate extra path.
+Start from what must stay true (body substring absent from this log). Everything that is not an allow-listed log API at that call is a candidate extra path.
 
 ## Seeded smells (label them yourself)
 

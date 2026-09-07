@@ -18,9 +18,8 @@ export default function ReferencePage() {
           on which path, after how much time.
         </p>
         <p>
-          Design notes live in{" "}
-          <code className="rounded bg-stone-200 px-1">content/reference/securecollab/</code>
-          . Start from{" "}
+          Design notes live in the course repository, in the notes-app folder.
+          Start from{" "}
           <Link href="/learn/1.1/" className="text-blue-900 underline underline-offset-2">
             what “secure” means here
           </Link>

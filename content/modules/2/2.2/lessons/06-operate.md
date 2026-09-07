@@ -22,7 +22,7 @@ flowchart TD
   Inc -->|no| Watch[Keep watching the live window]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a log product. They do not prove a checklist. Someone still has to own the leftover.
+Industry lists talk about noticing, responding, and recovering. They do not pick a log product. They do not prove a checklist. Someone still has to own the leftover.
 
 Certificate-failure drills belong to TLS deployment, not this cache-key sentence. Keep them in a separate note so they do not replace purge.
 
@@ -65,4 +65,4 @@ Authenticated RSS or export CSV via CDN. Purge must name the **prefix including 
 
 ## What this page is not doing
 
-A log-product name is not the rule. Answer keys are not on this site.
+Naming a product is not the rule. Answer keys are not on this site.

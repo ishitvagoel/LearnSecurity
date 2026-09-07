@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# The broken files must fail when company B reads company A
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -31,7 +31,7 @@ python3 -m pytest labs/3.3/3.3-lab/tests --impl vulnerable
 python3 -m pytest labs/3.3/3.3-lab/tests --impl fixed
 ```
 
-Map each test to a row you wrote on the compartments page. Do not paste keys. If the broken files do not fail the cross-company check, the lab is miswired — fix the wiring, not the check. An environment error is not security evidence.
+Map each test to a row you wrote on the compartments page. Do not paste keys. If the broken files do not fail the cross-company check, the lab is miswired — fix the wiring, not the check. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 

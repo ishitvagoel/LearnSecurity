@@ -17,7 +17,7 @@ Only `labs/5.1/5.1-lab` is in scope. The maps are in-process: `delete_account` p
 
 Do not dump a live analytics store. Do not dump an employer warehouse. Do not dump a classmate preview. Do not query a warehouse “to see what happens.”
 
-What you trust for this check: `delete_account` is supposed to walk every listed copy. A contract PDF, “we anonymized the user id,” and a database `DELETE FROM notes` are not what you trust.
+What is supposed to stop this: `delete_account` is supposed to walk every listed copy. A contract PDF, “we anonymized the user id,” and a database `DELETE FROM notes` are not enough.
 
 Who can still read it, in this story: an insider with SELECT on `ANALYTICS`, or a buyer of a “de-identified” export that still contains bodies. That stands in for a partner CSV, a search-index replica, or an appointment-card note that outlived the patient row.
 
@@ -32,7 +32,7 @@ flowchart TD
 
 The broken files take that path on purpose. You do not need a live warehouse query. You must not run one. The leftover still returning `"secret"` *is* the leak.
 
-Industry lists want documented retention actually carried out. Encrypting a warehouse you still keep is secrecy theater, not this privacy check.
+Industry lists ask for documented retention actually carried out. Encrypting a warehouse you still keep is secrecy theater, not this privacy check.
 
 ## What to look at — cause, not a dump
 
@@ -75,11 +75,11 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/5.1/5.1-lab/tests --impl vulnerable
 ```
 
-Record the failing test `test_deleted_account_leaves_no_analytics_body`. Do not weaken it to “the notes row is gone.” An environment error is not security evidence.
+Record the failing test `test_deleted_account_leaves_no_analytics_body`. Do not weaken it to “the notes row is gone.” A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic: patient deleted; appointment-card notes remain. Predict, without leaving this directory, whether deleting the patient row clears the card. Do not query a live warehouse.
+A clinic example: patient deleted; appointment-card notes remain. Predict, without leaving this directory, whether deleting the patient row clears the card. Do not query a live warehouse.
 
 ## Can people still use it
 

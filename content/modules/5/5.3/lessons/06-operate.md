@@ -24,9 +24,9 @@ flowchart TD
 | Recover | Rotate; rebuild images; purge logs |
 | Leftover | Copies already cloned |
 
-Industry lists name detect, respond, recover. They do not kill `DEFAULT`. A log-product name is not the rule. Re-run `test_hardcoded_default_does_not_auth` after any `auth` change; a green “Vault enabled” tile is not that pytest. Images and workers are other copies of the same cell — inventory them before claiming recover.
+Industry lists talk about noticing, responding, and recovering. They do not kill `DEFAULT`. Naming a product is not the rule. Re-run `test_hardcoded_default_does_not_auth` after any `auth` change; a green “Vault enabled” tile is not that check. Images and workers are other copies of the same rule — inventory them before claiming recover.
 
-Recovery is incomplete if the next image still ships `DEFAULT = "sk-lab-hardcoded"` as an or-clause. Rebuild and prove `test_missing_current_denies` the same day you rotate, or the next allow-when-missing still authenticates the gist copy. A vault tile is not that pytest.
+Recovery is incomplete if the next image still ships `DEFAULT = "sk-lab-hardcoded"` as an or-clause. Rebuild and prove `test_missing_current_denies` the same day you rotate, or the next allow-when-missing still authenticates the gist copy. A vault tile is not that check.
 
 ## What the framework does vs what you still have to check
 
@@ -44,8 +44,8 @@ Reject any line that includes `sk-lab-hardcoded`, a real key, or “Vault handle
 
 ## Use it somewhere new
 
-Clinic: notice gist-key use; do not paste the key into the ticket. Do not fetch a live gist.
+A clinic example: notice gist-key use; do not paste the key into the ticket. Do not fetch a live gist.
 
 ## What this page is not doing
 
-A log-product name is not the rule. Live gist searches are out of scope. This site does not mark you as finished.
+Naming a product is not the rule. Live gist searches are out of scope. This site does not mark you as finished.

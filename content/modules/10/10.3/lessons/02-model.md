@@ -66,7 +66,7 @@ Draw the map. Point at `labs/10.3/10.3-lab` file `iam.py`.
 
 ## Use it somewhere new
 
-Serverless IAM `*` is the same cell with different syntax.
+Serverless IAM `*` is the same rule with different syntax.
 
 ## What can still go wrong
 

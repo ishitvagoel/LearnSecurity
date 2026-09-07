@@ -23,7 +23,7 @@ flowchart TD
 
 The repaired files write `'aead:'` plus length, never the body. Production still needs an Android Keystore key plus real authenticated encryption; iOS Keychain is a later mirror. A fingerprint gates the screen. It does not stop key extraction on a compromised OS. Screenshots, recents, clipboard, logs, auto backup, and WorkManager extras remain extra copies.
 
-Industry lists want that secure store implemented. This pytest is that sentence for `'secret'` on disk.
+Industry lists ask for that secure store implemented. This pytest is that sentence for `'secret'` on disk.
 
 ## What the repaired files must show
 
@@ -63,7 +63,7 @@ Must pass. Run from the lab directory if collection at repo root is polluted. Th
 
 ## Use it somewhere new
 
-Clinic: stop treating “internal storage” as the chart-cache control.
+A clinic example: stop treating “internal storage” as the chart-cache control.
 
 ## What can still go wrong
 

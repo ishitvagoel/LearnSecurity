@@ -71,7 +71,7 @@ Draw this map so someone else could name the pytest cases. Point at `labs/4.1/4.
 
 ## Use it somewhere new
 
-Clinic: a clinician leaves. Shared workstation cookie. Disabling the badge does not name the chart session.
+A clinic example: a clinician leaves. Shared workstation cookie. Disabling the badge does not name the chart session.
 
 ## What can still go wrong
 

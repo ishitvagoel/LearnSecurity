@@ -17,7 +17,7 @@ Only `labs/E5/e5-lab` is in scope. The check is an in-process `tenant_for(sessio
 
 What must not happen: the JSON body switches the bound company. `tenant_for({"tenant": "A"}, {"tenant": "B"})` returns `"B"`.
 
-Who can act in this story: a member of A who can write a JSON (or GraphQL) field. That stands in for “row-level rules are on so companies are done,” a relationship-graph dashboard treated as who-is-allowed, or a famous-bugs mapping treated as this cell. What you trust: `tenant_for` is supposed to bind the company from the session. FastAPI body parsing, a Host header, and a row-level session variable set from JSON are not what you trust for this cell.
+Who could do this: a member of A who can write a JSON (or GraphQL) field. That stands in for “row-level rules are on so companies are done,” a relationship-graph dashboard treated as who-is-allowed, or a famous-bugs mapping treated as this rule. What is supposed to stop this: `tenant_for` is supposed to bind the company from the session. FastAPI body parsing, a Host header, and a row-level session variable set from JSON are not enough.
 
 ## Picture: body wins
 
@@ -30,7 +30,7 @@ flowchart TD
 
 The broken files (`--impl vulnerable`) prefer `body["tenant"]`. That is extra writable fields applied to the isolation key. What has to be true first: body tenant overrides session. You do not need GraphQL. You must not probe a live company.
 
-Industry checklists want isolation of the object and the company. An earlier topic already said the object id is not the grant; this cell is **the company context is not a client field**. This site does not mark you as finished. 
+Industry lists ask for isolation of the object and the company. An earlier topic already said the object id is not the grant; this rule is **the company context is not a client field**. This site does not mark you as finished. 
 
 ## What to look at — cause, not a dump
 
@@ -67,7 +67,7 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/E5/e5-lab/tests --impl vulnerable
 ```
 
-Run from `labs/E5/e5-lab` if a repo-root collection picks up `site/`. Record `test_body_cannot_switch_tenant`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/E5/e5-lab` if a repo-root collection picks up `site/`. Record `test_body_cannot_switch_tenant`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

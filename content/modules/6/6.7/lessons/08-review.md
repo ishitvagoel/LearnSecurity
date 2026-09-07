@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"IP rate limit"| False[False comfort]
 ```
 
-The review starts at the protected effect (fourth denied). Everything that is not a server `n <= 3` at that call is a candidate unbounded path. An IP bucket at the edge without that pytest is the same smell, not a different finding class.
+The review starts at the protected effect (fourth denied). Everything that is not a server `n <= 3` at that call is a candidate unbounded path. An IP bucket at the edge without that check is the same problem, not a different kind of finding.
 
 A disabled button in the browser (the leftover 3.4 already named for shares) does not bind `allow(4)`. GraphQL aliases (7.1) are another budget path — name them, do not skip `test_fourth_export_is_denied`.
 

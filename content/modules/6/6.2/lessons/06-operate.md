@@ -17,7 +17,7 @@ flowchart TD
   Alert --> Patch[Patch renderer; rotate sessions if needed]
 ```
 
-Industry lists name detect, respond, recover. They do not encode HTML. They do not prove a checklist. Someone still has to own the leftover.
+Industry lists talk about noticing, responding, and recovering. They do not encode HTML. They do not prove a checklist. Someone still has to own the leftover.
 
 ## Signals that do not become a second leak
 
@@ -28,7 +28,7 @@ Industry lists name detect, respond, recover. They do not encode HTML. They do n
 | Recover | Patch encoding; draw again; rotate cookies if they were readable by script |
 | Leftover | Report-only content-security policy; trusted admin HTML |
 
-A filter-product name is not the rule. Re-run `test_angle_brackets_are_encoded` after any renderer change; a green “content-security policy on” tile is not that pytest. Markdown and nickname fields are other paths of the same cell — list them before you claim Recover.
+Naming a product is not the rule. Re-run `test_angle_brackets_are_encoded` after any renderer change; a green “content-security policy on” tile is not that check. Markdown and nickname fields are other paths of the same rule — list them before you claim Recover.
 
 ## What the framework does vs what you still have to check
 
@@ -48,8 +48,8 @@ Reject any line that includes the title text, a note body, or an attack cookbook
 
 ## Use it somewhere new
 
-Clinic: notice nickname fields with raw `<`; do not paste nicknames into the ticket. Do not load a live board.
+A clinic example: notice nickname fields with raw `<`; do not paste nicknames into the ticket. Do not load a live board.
 
 ## What this page is not doing
 
-A filter-product name is not the rule. Content-security policy in report-only mode is not this cell’s enforcement. Live attack hunts are out of scope. Gates 0–10 stay not-attempted.
+Naming a product is not the rule. Content-security policy in report-only mode is not this rule’s enforcement. Live attack hunts are out of scope. Opening this page does not finish a check-in.

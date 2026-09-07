@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Revoke[revoke agent creds]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a vendor product. They do not prove this tool gate was the allow-list. Someone still has to own the leftover.
+Industry lists talk about noticing, responding, and recovering. They do not pick a vendor product. They do not prove this tool gate was the allow-list. Someone still has to own the leftover.
 
-Re-run `test_exec_sql_tool_is_denied` after any tool-registration change. A green "prompt forbids SQL" tile is not that pytest. Coding-assistant install tools in CI are the same family — inventory them before you claim recover.
+Re-run `test_exec_sql_tool_is_denied` after any tool-registration change. A green "prompt forbids SQL" tile is not that check. Coding-assistant install tools in CI are the same family — inventory them before you claim recover.
 
 ## Signals that do not become a second leak
 
@@ -46,7 +46,7 @@ If your alert includes the matching transcript, you have copied the leak into th
 
 ## What the framework does vs what you still have to check
 
-The same lying `search_notes` HTML, hallucinated packages, and prompt-only policy that bypass this practice will also bypass a "scan our agent dashboard" detector. Name those places before you claim recover. A vendor-product name is not the rule.
+The same lying `search_notes` HTML, hallucinated packages, and prompt-only policy that bypass this practice will also bypass a "scan our agent dashboard" detector. Name those places before you claim recover. Naming a product is not the rule.
 
 Cause vs cost stays split here too: the **cause** is model output treated as policy; the **cost** is an interpreter via English; **how you stop it** is the allow-list; **how you notice** is `tool_denied`; **how you recover** is revoke leftover agent credentials. What the tool cannot do: this alert does not encode `search_notes` HTML, and it does not stop hallucinated packages.
 
@@ -66,8 +66,8 @@ Reject any line that includes a note body, a transcript, or "assurance gate comp
 
 ## Use it somewhere new
 
-Clinic: deny the chart-SQL tool; do not paste the prompt into the ticket. Do not call a live model.
+A clinic example: deny the chart-SQL tool; do not paste the prompt into the ticket. Do not call a live model.
 
 ## What this page is not doing
 
-A vendor-product name is not the rule. Do not claim you finished an assurance gate. A famous-bugs label is not this alert. Answer keys are not on this site.
+Naming a product is not the rule. This page does not mark you as finished. A famous-bugs label is not this alert. Answer keys are not on this site.

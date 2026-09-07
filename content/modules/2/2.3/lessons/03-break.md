@@ -17,7 +17,7 @@ Only `labs/2.3/2.3-browser-policy` is in scope. Fake session value only. Restore
 
 Do not paste XSS recipes. Do not point this exercise at a public origin, an employer login cookie, or a classmate’s deployment.
 
-What an attacker can do here: a same-origin script reader that can call `js_read_session`. That stands in for injected script you will meet in later encoding work. What you trust: the cookie jar is supposed to honor `httponly`. The Next.js client, a CSP scanner, and TLS on the hop are not what you trust for this rule.
+What an attacker can do here: a same-origin script reader that can call `js_read_session`. That stands in for injected script you will meet in later encoding work. What is supposed to stop this: the cookie jar is supposed to honor `httponly`. The Next.js client, a CSP scanner, and TLS on the hop are not enough.
 
 ## Picture: the flag is present and ignored
 
@@ -30,7 +30,7 @@ flowchart TD
 
 The broken files show **cause** (the session value is handed to the script reader), not a trophy exploit. What has to be true first: a cookie object whose `httponly` flag is already `True`; a reader that returns `value` anyway. `Secure` is already true on `HTTPONLY_SESSION` — HTTPS does not mean unreadability to JS.
 
-## What to look at — cause, not a trophy
+## What to look at: the cause, not a trophy
 
 `vulnerable/cookies.py` `js_read_session` returns `session["value"]` whenever the name exists. The check binds `HTTPONLY_SESSION` with `httponly: True` and `secure: True` and expects `None`. You do not need a new cookie string. The failure of `test_script_cannot_read_httponly_session` *is* the evidence.
 

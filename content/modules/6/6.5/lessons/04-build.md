@@ -23,9 +23,9 @@ flowchart TD
   Host -->|yes| Allow[Allow]
 ```
 
-The lab’s repaired files require `https` and host in `{"lab.securecollab.test"}`, and deny named block hosts. Production still needs a dedicated egress proxy if customer sites must be fetched. DNS rebinding and IPv6 encodings remain leftover. Open-redirect UX is a sister check. Telling the person they are leaving the site is advanced work, not this pytest.
+The lab’s repaired files require `https` and host in `{"lab.securecollab.test"}`, and deny named block hosts. Production still needs a dedicated egress proxy if customer sites must be fetched. DNS rebinding and IPv6 encodings remain leftover. Open-redirect UX is a sister check. Telling the person they are leaving the site is advanced work, not this check.
 
-Industry lists want the allow-list before calling another service. This pytest is that sentence for `allowed`. **Do not fetch.**
+Industry lists ask for the allow-list before calling another service. This pytest is that sentence for `allowed`. **Do not fetch.**
 
 ## What the repaired files must show
 
@@ -63,7 +63,7 @@ It must pass. Do not fetch the URLs. Then write one sentence: which rule is rest
 
 ## Use it somewhere new
 
-Clinic: stop fetching whatever URL the form posted; parse then allow-list.
+A clinic example: stop fetching whatever URL the form posted; parse then allow-list.
 
 ## What can still go wrong
 

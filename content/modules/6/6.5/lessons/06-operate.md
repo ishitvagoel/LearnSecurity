@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Stop[Do not fetch]
 ```
 
-Industry lists name detect, respond, recover. They do not allow-list hosts. A log-product name is not the rule. Someone still has to own the importer path.
+Industry lists talk about noticing, responding, and recovering. They do not allow-list hosts. Naming a product is not the rule. Someone still has to own the importer path.
 
 ## Signals that do not become a second leak
 
@@ -43,13 +43,13 @@ Not: a full URL with a query token, a note body, a live-fetch transcript, or “
 
 If your alert includes a full URL with a query token, you have opened a second leak in the paging channel (4.3).
 
-A green “HTTPS only” tile is not that pytest. Re-run `test_link_local_metadata_is_denied` after any importer change. Webhooks (7.3) are another path of the same deputy — inventory them before claiming recover.
+A green “HTTPS only” tile is not that check. Re-run `test_link_local_metadata_is_denied` after any importer change. Webhooks (7.3) are another path of the same deputy — inventory them before claiming recover.
 
 Recovery is incomplete if the next worker still calls `requests.get` on the form URL. Grep importers the same day you keep the deny, and **do not fetch** the denied destination to confirm.
 
 ## What the framework does vs what you still have to check
 
-A cloud dashboard will show “instance metadata requires a token” and stay silent when the unfurl helper still allows any https host. Detection must observe **`allowed` false before any GET**, not a packet capture. If the alert includes a full URL with a query token, you have opened a 4.3 cell. **Do not fetch to confirm.**
+A cloud dashboard will show “instance metadata requires a token” and stay silent when the unfurl helper still allows any https host. Detection must observe **`allowed` false before any GET**, not a packet capture. If the alert includes a full URL with a query token, you have opened a leftover hole from topic 4.3. **Do not fetch to confirm.**
 
 ## Practice
 
@@ -57,8 +57,8 @@ Write one log line you would accept in review (ids, reason, no URL). Tie it to `
 
 ## Use it somewhere new
 
-Clinic: notice PDF fetches to hosts that are not on the allow-list; do not paste the URL into the ticket if it has a token. Do not fetch.
+A clinic example: notice PDF fetches to hosts that are not on the allow-list; do not paste the URL into the ticket if it has a token. Do not fetch.
 
 ## What this page is not doing
 
-A log-product name is not the rule. A cloud web-filter name is not this check. Live metadata probes are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Naming a product is not the rule. A cloud web-filter name is not this check. Live metadata probes are out of scope. This site does not mark you as finished. Answer keys are not on this site.

@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Flag["backup_flag review"]
 ```
 
-Industry lists name detect, respond, recover. They do not prove the wrap. They do not prove a checklist. Someone still has to own the leftover.
+Industry lists talk about noticing, responding, and recovering. They do not prove the wrap. They do not prove a checklist. Someone still has to own the leftover.
 
 ## Signals that do not become a second leak
 
@@ -27,13 +27,13 @@ Industry lists name detect, respond, recover. They do not prove the wrap. They d
 | Recover | Wipe; revoke sessions; exclude backup |
 | Leftover | Extracted keys; screenshots; clipboard; notifications |
 
-An MDM product name is not the rule. Re-run `test_cached_note_is_not_plaintext_on_disk` after any cache-path change; a green “internal storage” tile is not that pytest. Screenshots, recents, and notification text are other copies of the same body — list them before you claim Recover.
+Naming an MDM product is not the rule. Re-run `test_cached_note_is_not_plaintext_on_disk` after any cache-path change; a green “internal storage” tile is not that check. Screenshots, recents, and notification text are other copies of the same body — list them before you claim Recover.
 
 ## What the framework does vs what you still have to check
 
 Android Auto Backup can copy ciphertext *and* a poorly stored key while the pytest still says “not plaintext secret.” Notice must observe **`plaintext_on_disk()` false**, not a fingerprint prompt. If the alert includes note bodies, you have opened a logging leak (3.1 / 5.1).
 
-The app’s promise is: **this** practice, leftover-cache signals fire without the body, and an MDM product name is not this week’s rule.
+The app’s promise is: **this** practice, leftover-cache signals fire without the body, and Naming a product is not this week's rule.
 
 ## Practice
 
@@ -47,7 +47,7 @@ Reject any line that includes note bodies or a live `adb backup` of a personal p
 
 ## Use it somewhere new
 
-Clinic: notice leftover chart cache after logout on a local helper; do not attach the chart to the ticket. Do not image a live tablet.
+A clinic example: notice leftover chart cache after logout on a local helper; do not attach the chart to the ticket. Do not image a live tablet.
 
 ## Can people still use it
 
@@ -55,4 +55,4 @@ Unlock-with-fingerprint must still have a device-PIN fallback people can actuall
 
 ## What this page is not doing
 
-An MDM product name is not the rule. Personal-phone imaging is out of scope. Gates 0–10 stay not-attempted.
+Naming an MDM product is not the rule. Personal-phone imaging is out of scope. Opening this page does not finish a check-in.

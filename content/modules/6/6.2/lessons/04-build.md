@@ -21,7 +21,7 @@ flowchart TD
 
 The repaired files use `html.escape(body, quote=True)` then wrap in `<p>`. Production still needs encoding for attribute, JavaScript, and URL contexts as leftovers. Markdown is a second parser (2.1). A content-security policy that blocks objects and base tags is a layer after encoding, not a substitute.
 
-Industry checklists want output encoded for the context you are writing into. This pytest is that sentence for HTML text.
+Industry lists ask for output encoded for the context you are writing into. This pytest is that sentence for HTML text.
 
 ## What the repaired files must show
 
@@ -60,7 +60,7 @@ Then write one sentence: which rule is restored, and which leftover you refused 
 
 ## Use it somewhere new
 
-Clinic: encode the nickname in HTML text; treat markdown as a second parser.
+A clinic example: encode the nickname in HTML text; treat markdown as a second parser.
 
 ## What can still go wrong
 

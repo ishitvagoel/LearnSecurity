@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Purge[Purge vendor copy]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a crash product. They do not prove this report is clean. Someone still has to own the leftover.
+Industry lists talk about noticing, responding, and recovering. They do not pick a crash product. They do not prove this report is clean. Someone still has to own the leftover.
 
-Re-run `test_crash_report_omits_note_body` after any crash-SDK change. A green “store privacy form filled” tile is not that pytest. Tracker SDKs and web crash reports (10.5) are other places for the same body — inventory them before you claim recover.
+Re-run `test_crash_report_omits_note_body` after any crash-SDK change. A green “store privacy form filled” tile is not that check. Tracker SDKs and web crash reports (10.5) are other places for the same body — inventory them before you claim recover.
 
 ## Signals that do not become a second leak
 
@@ -46,7 +46,7 @@ If your alert includes the matching report, you have copied the leak into the pa
 
 ## What the framework does vs what you still have to check
 
-The same leftover `READ_LOGS` path, tracker SDK extras, and web crash drains that bypass this practice will also bypass a “scan our crash dashboard” detector. Name those places before you claim recover. A crash-product name is not the rule.
+The same leftover `READ_LOGS` path, tracker SDK extras, and web crash drains that bypass this practice will also bypass a “scan our crash dashboard” detector. Name those places before you claim recover. Naming a product is not the rule.
 
 ## Can people still use it
 
@@ -64,8 +64,8 @@ Reject any line that includes a note body, a patient name, or a live crash paylo
 
 ## Use it somewhere new
 
-Clinic: notice a crash that would have included a fake name; do not attach the report body to the ticket. Do not call a live vendor.
+A clinic example: notice a crash that would have included a fake name; do not attach the report body to the ticket. Do not call a live vendor.
 
 ## What this page is not doing
 
-A crash-product name is not the rule. Live vendor traces are out of scope. Answer keys are not on this site.
+Naming a product is not the rule. Live vendor traces are out of scope. Answer keys are not on this site.

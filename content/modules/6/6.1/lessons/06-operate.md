@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Kill[Kill child; isolate plugin]
 ```
 
-Industry lists name detect, respond, recover. They do not build argv. A log-product name is not the rule. Someone still has to own the concatenating path.
+Industry lists talk about noticing, responding, and recovering. They do not build argv. Naming a product is not the rule. Someone still has to own the concatenating path.
 
 ## Signals that do not become a second leak
 
@@ -43,11 +43,11 @@ Not: a note body, a real email, a patient filename, or a shell-punctuation cookb
 
 If your alert includes the full argv with a patient filename, you have opened a second leak in the paging channel (3.1 / 5.1).
 
-A green “no shell in CI grep” tile is not that pytest. Plugin loaders are other paths of the same check — inventory them before claiming recover.
+A green “no shell in CI grep” tile is not that check. Plugin loaders are other paths of the same check — inventory them before claiming recover.
 
 ## What the framework does vs what you still have to check
 
-A host product will page on `sh` children and stay silent when the Python helper still returns `["sh", "-c", …]` in a test that nobody runs. Detection must observe **program basename `sh` at spawn**, not a scanner nickname. If the alert includes the full argv with a patient filename, you have opened a 3.1 / 5.1 cell.
+A host product will page on `sh` children and stay silent when the Python helper still returns `["sh", "-c", …]` in a test that nobody runs. Detection must observe **program basename `sh` at spawn**, not a scanner nickname. If the alert includes the full argv with a patient filename, you have opened a leftover hole from topics 3.1 and 5.1.
 
 ## Practice
 
@@ -55,8 +55,8 @@ Write one log line you would accept in review (ids, reason, program basename, no
 
 ## Use it somewhere new
 
-Clinic: notice unexpected `sh` under the export worker; do not paste filenames into the ticket if they are patient ids. Do not hunt a live worker.
+A clinic example: notice unexpected `sh` under the export worker; do not paste filenames into the ticket if they are patient ids. Do not hunt a live worker.
 
 ## What this page is not doing
 
-A log-product name is not the rule. Live command execution is out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Naming a product is not the rule. Live command execution is out of scope. This site does not mark you as finished. Answer keys are not on this site.

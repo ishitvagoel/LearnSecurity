@@ -24,9 +24,9 @@ flowchart TD
   Own -->|yes| Allow[Allow]
 ```
 
-The repaired files compare company, then owner or grant. A later database-role check is a *second* gate; this table is still required. A clinic admin named Eve is not an `acme` capability. A later PostgreSQL row-level rule does not replace this cell.
+The repaired files compare company, then owner or grant. A later database-role check is a *second* gate; this table is still required. A clinic admin named Eve is not an `acme` capability. A later PostgreSQL row-level rule does not replace this rule.
 
-Industry checklists want the check on a trusted server, not in the Next.js client. This pytest is that sentence for `can_read`. Extra rows about applying grant changes immediately, and carrying the original person through a worker, are advanced — not this week’s pytest.
+Industry lists ask for the check on a trusted server, not in the Next.js client. This pytest is that sentence for `can_read`. Extra rows about applying grant changes immediately, and carrying the original person through a worker, are advanced — not this week's check.
 
 ## What the repaired files must show
 
@@ -46,7 +46,7 @@ Industry checklists want the check on a trusted server, not in the Next.js clien
 ## What the tool cannot do
 
 - A hard-to-guess id is not a grant.
-- GraphQL `node(id)`, an export zip, a search index, and workers are other paths of the same cell.
+- GraphQL `node(id)`, an export zip, a search index, and workers are other paths of the same rule.
 - Title vs body is a later field-level topic. This week is object plus company.
 - An honest grant on n1 still reveals n1 — that is the product.
 - How fast a taken-back grant dies is an advanced leftover.
@@ -63,7 +63,7 @@ It must pass. Then write one sentence: which rule is restored, and which leftove
 
 ## Use it somewhere new
 
-Clinic: an appointment grant table keyed by chart id and company, not by “clinician role.”
+A clinic example: an appointment grant table keyed by chart id and company, not by “clinician role.”
 
 ## What can still go wrong
 

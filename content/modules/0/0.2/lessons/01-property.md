@@ -52,7 +52,7 @@ An LMS will let you mark a topic complete from a percentage. That is this bug.
 
 ## What the tool cannot do
 
-- A better quiz still cannot observe whether you can write a deny cell.
+- A better quiz still cannot observe whether you can write a deny rule.
 - Memorizing 1.2 answers without running the practice.
 - Git/SQL/HTTP gaps still need bridges when diagnostics show the skill is missing.
 

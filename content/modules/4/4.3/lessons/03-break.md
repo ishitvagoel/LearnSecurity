@@ -19,7 +19,7 @@ Do not harvest Referer from a live site, dump production access logs, or replay 
 
 What must not happen: a session started from a query-string token. `session_from_request({"access_token": "secret"}, {}, None)` returns `"secret"`.
 
-Who can act here: a **log operator**, a Referer collector, or someone with a shared screenshot who can read the URL. What you are supposed to trust: the parser ignores query tokens. FastAPI query binding, the Next.js address bar, and “we use JWTs” are not what you trust for this cell.
+Who could do this: a **log operator**, a Referer collector, or someone with a shared screenshot who can read the URL. What is supposed to stop this: the parser ignores query tokens. FastAPI query binding, the Next.js address bar, and “we use JWTs” are not enough.
 
 TLS encrypts the hop. It does not encrypt the access log.
 
@@ -34,9 +34,9 @@ flowchart TD
 
 The broken files show **cause** (token in a logged, shared channel), not a trophy dump of production logs. What has to be true first: `session_from_request` prefers `query.get("access_token")`. You do not need a live GET. You must not fetch a URL that contains a real token.
 
-Industry checklists want secrets in the body or headers, not in the URL. HTTPS is a hop tool, not that sentence.
+Industry lists ask for secrets in the body or headers, not in the URL. HTTPS is a hop tool, not that sentence.
 
-## What to look at — cause, not a trophy
+## What to look at: the cause, not a trophy
 
 Read `vulnerable/token.py`. It returns `query.get("access_token")` first. Checks:
 
@@ -72,7 +72,7 @@ FastAPI will bind query params. Next.js router will put them in the address bar.
 python3 -m pytest labs/4.3/4.3-lab/tests --impl vulnerable
 ```
 
-Record `test_query_string_token_is_rejected`. Do not weaken it to “we use HTTPS.” An environment error is not security evidence.
+Record `test_query_string_token_is_rejected`. Do not weaken it to “we use HTTPS.” A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

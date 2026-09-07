@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"VPC is isolation"| False[False comfort]
 ```
 
-Classification starts at the protected effect (tB cannot SELECT tA). Everything that is not a same-company check at that call is a leftover path.
+Start from what must stay true (tB cannot SELECT tA). Everything that is not a same-company check at that call is a leftover path.
 
 ## Problems to find (name them yourself)
 

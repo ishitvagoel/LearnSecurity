@@ -31,7 +31,7 @@ flowchart LR
   Admin[admin bind] --> World["0.0.0.0"]
 ```
 
-`NODE_ENV` is a slogan until something compares `env` to `debug`. A feature flag that turns off authorization, a migration that fails open, and an admin port bound to the world are other leftover — same family, not this pytest.
+`NODE_ENV` is a slogan until something compares `env` to `debug`. A feature flag that turns off authorization, a migration that fails open, and an admin port bound to the world are other leftover — same family, not this check.
 
 ## Step 1: name the pieces
 

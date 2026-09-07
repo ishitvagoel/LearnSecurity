@@ -41,7 +41,7 @@ The clinic rewrite still has to keep the notes-app fork: the leaked string is fa
 | Live gist search | Course rules |
 | gitignore as revocation | Artifact still live |
 | HTTP 200 as rotation evidence | Wrong observation |
-| Password rotation as this cell | Different authenticator |
+| Password rotation as this rule | Different authenticator |
 
 ## Practice
 

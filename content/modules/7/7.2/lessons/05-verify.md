@@ -33,7 +33,7 @@ python3 -m pytest labs/7.2/7.2-lab/tests --impl vulnerable
 python3 -m pytest labs/7.2/7.2-lab/tests --impl fixed
 ```
 
-Honest `display_name` may pass on both implementations. That does not excuse the member-internal deny test. If the broken files do not fail `test_member_cannot_resolve_internal_field`, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
+Honest `display_name` may pass on both implementations. That does not excuse the member-internal deny test. If the broken files do not fail `test_member_cannot_resolve_internal_field`, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the checks do not prove
 
@@ -51,8 +51,8 @@ Execute both implementations this session from the lab directory if needed. Writ
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts HTTP 200 on `/patients/{id}` is 4.4, not this cell. A public GraphQL query is out of scope.
+A clinic example: a test that only asserts HTTP 200 on `/patients/{id}` is 4.4, not this rule. A public GraphQL query is out of scope.
 
 ## What this page is not doing
 
-Do not add a live schema trophy. Do not log `secret_internal` values. Answer keys are not on this site.
+Do not treat a live schema screenshot as proof. Do not log `secret_internal` values. Answer keys are not on this site.

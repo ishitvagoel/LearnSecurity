@@ -22,7 +22,7 @@ flowchart TD
   Revoked[B after revoke] --> Deny[None]
 ```
 
-## Picture: other grains of the same cell
+## Picture: other grains of the same rule
 
 ```mermaid
 flowchart LR
@@ -32,7 +32,7 @@ flowchart LR
   Mail[copy already sent] --> Residual[already sent]
 ```
 
-A copy already sitting in email is leftover, not this week’s pytest.
+A copy already sitting in email is leftover, not this week's check.
 
 ## Step 1: name the pieces
 
@@ -66,11 +66,11 @@ Draw the map so someone else could name the checks. Point at `labs/11/11-lab` fi
 
 ## Use it somewhere new
 
-Clinic guardian revoke is the same cell with a different relationship name.
+A clinic guardian revoke is the same rule with a different relationship name.
 
 ## What can still go wrong
 
-Copies already sent. Access-rights change in the same session without signing in again is extra, advanced work, not this pytest.
+Copies already sent. Access-rights change in the same session without signing in again is extra, advanced work, not this check.
 
 ## What this page is not doing
 

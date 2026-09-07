@@ -48,7 +48,7 @@ If both arrows append, the map already predicts `test_duplicate_capture_does_not
 | second k1 | charge | append | deny |
 | first k1 | charge | append | may allow |
 | Stripe header | local count | treat as the check | deny |
-| Questionnaire | this cell | treat as proof | deny |
+| Questionnaire | this rule | treat as proof | deny |
 
 ## Practice
 

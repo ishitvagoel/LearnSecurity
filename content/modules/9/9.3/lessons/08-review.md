@@ -23,7 +23,7 @@ flowchart TD
   Q -->|testing-guide tick| False[False comfort]
 ```
 
-Classification starts at the protected effect (200-only is not a security test). Everything that is not a named what-must-not-happen at that call is a candidate happy-path path. A coverage screenshot without that pytest is the same smell, not a different finding class.
+Start from what must stay true (200-only is not a security test). Everything that is not a named what-must-not-happen at that call is a candidate happy-path path. A coverage screenshot without that check is the same problem, not a different kind of finding.
 
 Fuzz with no named bad result is leftover 9.5. Field grain is 7.2. Do not skip `test_http_200_only_is_not_a_security_test`. Do not claim a later gate. Do not treat coverage percent as the isolation check.
 

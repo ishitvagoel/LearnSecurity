@@ -17,7 +17,7 @@ Only `labs/10.2/10.2-lab` is in scope. The practice is an in-process `install_ok
 
 Do not publish, typosquat, or pull a real tarball “to see what happens.” Do not paste this exercise onto a public registry, employer CI, or live clinic.
 
-What you trust for this check: `install_ok` is supposed to require **expected digest equals got digest**. npm audit, Dependabot, SBOM generation, and framework install defaults are not what you trust.
+What is supposed to stop this: `install_ok` is supposed to require **expected digest equals got digest**. npm audit, Dependabot, SBOM generation, and framework install defaults are not enough.
 
 Who can slip a wrong tarball in this story: a name-only install. That stands in for “the prod pod runs npm install so we always get latest,” a CycloneDX file treated as verify, or a provenance badge treated as the hash check.
 
@@ -73,11 +73,11 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/10.2/10.2-lab/tests --impl vulnerable
 ```
 
-Run from `labs/10.2/10.2-lab` if a collection at the repo root picks up `site/`. Record `test_hash_mismatch_refuses_install`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/10.2/10.2-lab` if a collection at the repo root picks up `site/`. Record `test_hash_mismatch_refuses_install`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic: predict npm install in a prod pod — still only this directory. Do not typosquat a live registry.
+A clinic example: predict npm install in a prod pod — still only this directory. Do not typosquat a live registry.
 
 ## What this page is not doing
 

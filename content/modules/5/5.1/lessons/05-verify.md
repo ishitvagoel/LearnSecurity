@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# A leftover analytics or search copy must fail the check
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -37,13 +37,13 @@ python3 -m pytest labs/5.1/5.1-lab/tests --impl vulnerable
 python3 -m pytest labs/5.1/5.1-lab/tests --impl fixed
 ```
 
-Map the test to the deleted-alice × leftover-analytics row you wrote. If the broken files do not fail the leftover-body assertion, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
+Map the test to the deleted-alice × leftover-analytics row you wrote. If the broken files do not fail the leftover-body assertion, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
 - Backup restore (later)
 - Mobile offline copies (later)
-- Automatic retention schedule (advanced; not this pytest)
+- Automatic retention schedule (advanced; not this check)
 - Legal-hold exception handling (named later)
 
 Record those as leftover or later topics, not as silent passes.

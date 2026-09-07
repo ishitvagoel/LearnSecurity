@@ -17,7 +17,7 @@ Only `labs/8.5/8.5-lab` is in scope. The practice is an in-process `crash_report
 
 Do not paste a real note body into a crash SDK “to see what happens.” Do not paste this exercise onto a public crash project, employer dashboard, or live clinic.
 
-What you trust for this check: `crash_report` is supposed to redact before send — the same extra-copy problem as logs (3.1) and vendors (5.1), now on a phone. A crash product set to “automatic,” a completed store privacy form, and HTTPS to the vendor are not what you trust.
+What is supposed to stop this: `crash_report` is supposed to redact before send — the same extra-copy problem as logs (3.1) and vendors (5.1), now on a phone. A crash product set to “automatic,” a completed store privacy form, and HTTPS to the vendor are not enough.
 
 Who can read the report in this story: a crash-platform operator or a logcat reader. That stands in for a clinic “debug crash includes the last chart so support can reproduce,” a tracker SDK extra, or a leftover `READ_LOGS` path.
 
@@ -75,11 +75,11 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/8.5/8.5-lab/tests --impl vulnerable
 ```
 
-Run from `labs/8.5/8.5-lab` if a collection at the repo root picks up `site/`. Record `test_crash_report_omits_note_body`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/8.5/8.5-lab` if a collection at the repo root picks up `site/`. Record `test_crash_report_omits_note_body`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic: predict a crash that includes a fake patient name — still only this directory. Do not call a live crash product.
+A clinic example: predict a crash that includes a fake patient name — still only this directory. Do not call a live crash product.
 
 ## What this page is not doing
 

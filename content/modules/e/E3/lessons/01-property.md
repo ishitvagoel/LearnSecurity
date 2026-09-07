@@ -11,7 +11,7 @@ The notes app does not take card payments. This elective models a **lab ledger**
 
 What must not happen is a **duplicate capture that double-charges**. That is the same family as a retry that grants twice (2.4) and a token spent twice (6.6), at the grain of money. No real card numbers. No real PAN.
 
-Industry checklists want locking so a limited thing cannot be booked twice. They want the step to succeed all the way or roll back. Documented connection-pool limits are advanced leftover, not this pytest. A card-network questionnaire is a sector-scope question — this practice is not in that scope.
+Industry lists ask for locking so a limited thing cannot be booked twice. They want the step to succeed all the way or roll back. Documented connection-pool limits are advanced leftover, not this check. A card-network questionnaire is a sector-scope question — this practice is not in that scope.
 
 ## Picture: key vs append
 
@@ -28,7 +28,7 @@ flowchart TD
 flowchart LR
   Stripe[processor idempotency] --> Their[their side]
   Ledger[your SEEN set] --> Yours[your charge_count]
-  Stripe --> NotYours[not this cell]
+  Stripe --> NotYours[not this rule]
 ```
 
 **A tool is not the rule.** A payment company's header, a filled-in questionnaire, or “we are high-assurance.”
@@ -53,7 +53,7 @@ A processor can remember its own side and still leave your row inserting twice. 
 
 - The client mints a new key each retry.
 - A webhook and a capture can both append (later topic 7.3).
-- A filled-in questionnaire is not this cell.
+- A filled-in questionnaire is not this rule.
 
 ## Can people still use it
 

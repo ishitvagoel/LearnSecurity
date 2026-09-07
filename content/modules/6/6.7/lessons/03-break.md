@@ -19,7 +19,7 @@ Do not load-test a public host. Do not probe an employer export API. Do not prob
 
 What must not happen: unbounded exports (fourth allowed in the lab window). `allow(4)` returns true.
 
-Who can act here: a scripted session that calls export more than three times. That stands in for a clinic “Export all” button, notification fan-out, or GraphQL aliases later in 7.1. What you are supposed to trust: `allow` is a **per-person resource account** on the export action. A disabled button in the browser, an IP bucket, a CAPTCHA, and autoscaling are not what you trust for this check.
+Who could do this: a scripted session that calls export more than three times. That stands in for a clinic “Export all” button, notification fan-out, or GraphQL aliases later in 7.1. What is supposed to stop this: `allow` is a **per-person resource account** on the export action. A disabled button in the browser, an IP bucket, a CAPTCHA, and autoscaling are not enough.
 
 ## Picture: allow always true
 
@@ -30,9 +30,9 @@ flowchart TD
 
 The broken files show **cause** (no resource account). Do not aim a load generator at anything except this practice. What has to be true first: `allow` returns true for every `n`. You do not need HTTP. You must not load-test a public host.
 
-Industry lists want a stop against scripts that burn quota. Module 3.4 already capped shares on the write path. This check is how many **exports** in a window. A famous API-abuse list is a later name, not this pytest.
+Industry lists ask for a stop against scripts that burn quota. Module 3.4 already capped shares on the write path. This check is how many **exports** in a window. A famous API-abuse list is a later name, not this check.
 
-## What to look at — cause, not a trophy
+## What to look at: the cause, not a trophy
 
 Read `vulnerable/limit.py`. It returns true for every `n`. Tests:
 
@@ -76,7 +76,7 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/6.7/6.7-lab/tests --impl vulnerable
 ```
 
-Record `test_fourth_export_is_denied`. Do not probe public hosts. An environment error is not security evidence.
+Record `test_fourth_export_is_denied`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

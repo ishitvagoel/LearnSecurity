@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# A broken register gate must fail the check
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -63,8 +63,8 @@ Paste nothing from answer keys. Write fail/pass into your notes next to the inco
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts “we have a HIPAA slide” is not this topic. A live governance tool is out of scope.
+A clinic example: a test that only asserts “we have a HIPAA slide” is not this topic. A live governance tool is out of scope.
 
 ## What this page is not doing
 
-Do not add a live-disclosure trophy. Do not log secret writeups. Answer keys are not on this site. Do not claim you finished an assurance gate.
+Do not treat a live disclosure screenshot as proof. Do not log secret writeups. Answer keys are not on this site. This page does not mark you as finished.

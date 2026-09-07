@@ -19,7 +19,7 @@ flowchart TD
   Alert --> Revoke[Revoke cookies issued on that path]
 ```
 
-Industry lists name detect, respond, recover. They do not bind the socket. They do not pick a log product. Someone still has to own the mismatch.
+Industry lists talk about noticing, responding, and recovering. They do not bind the socket. They do not pick a log product. Someone still has to own the mismatch.
 
 ## Signals that do not become a second leak
 
@@ -41,7 +41,7 @@ Not: a session cookie, a note body, or “HSTS handled.”
 
 If your alert includes a session cookie or a note body, you have opened a second leak in the paging channel.
 
-A green “Force HTTPS” tile is not that pytest. Re-run `test_client_forwarded_proto_is_not_tls` after any proxy change. Page `https://` versus API socket `http` is another path of the same cell — inventory it before claiming recover.
+A green “Force HTTPS” tile is not that check. Re-run `test_client_forwarded_proto_is_not_tls` after any proxy change. Page `https://` versus API socket `http` is another path of the same rule — inventory it before claiming recover.
 
 ## What the framework does vs what you still have to check
 
@@ -57,8 +57,8 @@ Write one log line you would accept in review (ids, reason, no cookie). Tie it t
 
 ## Use it somewhere new
 
-Clinic: notice page-https versus API-http; do not paste cookies into the ticket. Do not probe a live clinic.
+A clinic example: notice page-https versus API-http; do not paste cookies into the ticket. Do not probe a live clinic.
 
 ## What this page is not doing
 
-A log-product name is not the rule. Live TLS hunts are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Naming a product is not the rule. Live TLS hunts are out of scope. This site does not mark you as finished. Answer keys are not on this site.

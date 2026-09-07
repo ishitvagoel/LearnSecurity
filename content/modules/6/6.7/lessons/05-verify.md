@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# An unbounded allow must fail the check
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -37,11 +37,11 @@ python3 -m pytest labs/6.7/6.7-lab/tests --impl vulnerable
 python3 -m pytest labs/6.7/6.7-lab/tests --impl fixed
 ```
 
-Honest `allow(3)` may pass on both implementations. That does not excuse the fourth-deny test. If the broken files do not fail `allow(4)`, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
+Honest `allow(3)` may pass on both implementations. That does not excuse the fourth-deny test. If the broken files do not fail `allow(4)`, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
-- Human timing tricks (advanced, not this pytest)
+- Human timing tricks (advanced, not this check)
 - Per-person vs per-IP in production (named in the quota map)
 - File storage quotas (a different budget, later)
 - Cost of a real cloud bill
@@ -66,4 +66,4 @@ Clinic bulk-export. A test that only asserts HTTP 200 on `/export` is not this c
 
 ## What this page is not doing
 
-Do not add a live load trophy. Do not log CSV bodies. Answer keys are not on this site.
+Do not treat a live load screenshot as proof. Do not log CSV bodies. Answer keys are not on this site.

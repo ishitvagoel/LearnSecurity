@@ -17,7 +17,7 @@ Only `labs/10.3/10.3-lab` is in scope. The practice is an in-process `pod_ok(rol
 
 Do not paste this exercise onto a public cluster, employer account, or live hospital Kubernetes "to see what happens."
 
-What you trust for this check: `pod_ok` is supposed to allow **only namespaced app roles**. Managed-cluster defaults, a restricted pod profile, a network policy, and FastAPI itself are not what you trust.
+What is supposed to stop this: `pod_ok` is supposed to allow **only namespaced app roles**. Managed-cluster defaults, a restricted pod profile, a network policy, and FastAPI itself are not enough.
 
 Who can take the cluster in this story: a compromised container or a malicious Helm chart. That stands in for "the API namespace is private so ClusterRole is fine," a CIS Kubernetes scan treated as the who-is-allowed check, or a network policy treated as RBAC.
 
@@ -30,7 +30,7 @@ flowchart TD
 
 The broken files take that path on purpose. You do not need a kube-apiserver. You must not bind a live cluster. The true return for `"cluster-admin"` *is* the leak.
 
-The database god-role lesson already said one shared admin is a blast-radius cell. This check is **the same idea at cluster grain**.
+The database god-role lesson already said one shared admin is a blast-radius rule. This check is **the same idea at cluster grain**.
 
 ## What to look at — cause, not a dump
 
@@ -73,7 +73,7 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/10.3/10.3-lab/tests --impl vulnerable
 ```
 
-Run from `labs/10.3/10.3-lab` if a collection at the repo root picks up `site/`. Record `test_cluster_admin_pod_is_denied`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/10.3/10.3-lab` if a collection at the repo root picks up `site/`. Record `test_cluster_admin_pod_is_denied`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
@@ -81,4 +81,4 @@ Clinic app SA is cluster-admin: predict without leaving this directory. Do not a
 
 ## What this page is not doing
 
-No live-cluster, cloud-account, or public Kubernetes API instructions. Do not claim you finished an assurance gate. Do not fetch instance metadata as an exercise.
+No live-cluster, cloud-account, or public Kubernetes API instructions. This page does not mark you as finished. Do not fetch instance metadata as an exercise.

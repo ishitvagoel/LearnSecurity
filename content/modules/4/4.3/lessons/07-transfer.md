@@ -29,7 +29,7 @@ flowchart LR
   Deep["Appointment ?token="] --> Deny[Must not be standing session]
 ```
 
-JWT as a format is not the channel. TLS does not erase the access log. FastAPI and Next.js will still put query params in the address bar unless the parser refuses them. A one-time magic link that is later exchanged for `sc_session` is later work; leaving `?token=` as the standing session is this cell.
+JWT as a format is not the channel. TLS does not erase the access log. FastAPI and Next.js will still put query params in the address bar unless the parser refuses them. A one-time magic link that is later exchanged for `sc_session` is later work; leaving `?token=` as the standing session is this rule.
 
 The clinic rewrite still has to keep the notes-app fork: query `access_token` (or `?token=` on the appointment SMS) yields `None`, while a cookie or Bearer header with the same value may still work. Referer redaction and a scrubbed logger are sister cells, not this parser. The local pytest analogue is `test_query_string_token_is_rejected` — against `labs/4.3/4.3-lab`, not a live appointment SMS.
 
@@ -40,7 +40,7 @@ The clinic rewrite still has to keep the notes-app fork: query `access_token` (o
 | JWT as the rule | Format ≠ channel |
 | Live clinic SMS | Course rules |
 | “HTTPS so logs are fine” | TLS ≠ log |
-| Referrer-Policy as the parser | Sister cell |
+| Referrer-Policy as the parser | Sister rule |
 | HTTP 200 as channel evidence | Wrong observation |
 
 ## Practice

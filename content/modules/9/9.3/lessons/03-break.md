@@ -19,7 +19,7 @@ Do not paste this exercise onto a public host, employer clinic, or live patient 
 
 What must not happen: **HTTP 200-only test counted as a security test**. `is_security_test({"status_asserted": True})` returns true.
 
-Who can act in this story: a happy-path suite treated as assurance. That stands in for clinic `test_get_patient_200`, line coverage at 94%, or a testing-guide checkbox ticked without a named what-must-not-happen. What you trust: `is_security_test` is supposed to require a **named what-must-not-happen**. Coverage percentage, testing-guide membership, and a fuzzer with no named bad result are not what you trust.
+Who could do this: a happy-path suite treated as assurance. That stands in for clinic `test_get_patient_200`, line coverage at 94%, or a testing-guide checkbox ticked without a named what-must-not-happen. What is supposed to stop this: `is_security_test` is supposed to require a **named what-must-not-happen**. Coverage percentage, testing-guide membership, and a fuzzer with no named bad result are not enough.
 
 ## Picture: status asserted is enough
 
@@ -73,7 +73,7 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/9.3/9.3-lab/tests --impl vulnerable
 ```
 
-Run from `labs/9.3/9.3-lab` if a collection at the repo root picks up `site/`. Record `test_http_200_only_is_not_a_security_test`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/9.3/9.3-lab` if a collection at the repo root picks up `site/`. Record `test_http_200_only_is_not_a_security_test`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

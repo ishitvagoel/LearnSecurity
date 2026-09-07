@@ -69,7 +69,7 @@ It must pass. Run from the lab directory if a collection at the repo root is pol
 
 ## Use it somewhere new
 
-Clinic: stop putting patient names in exception messages. The lab still uses fake strings.
+A clinic example: stop putting patient names in exception messages. The lab still uses fake strings.
 
 ## What can still go wrong
 

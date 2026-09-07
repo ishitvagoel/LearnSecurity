@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"row-level rule in prod"| False[False comfort]
 ```
 
-The review starts at the protected effect (`fetch_sql` is a bound tuple). Everything that is not a params tuple at that call is a candidate grammar mix. `%s` inside a concatenated string is the same smell, not a different finding class.
+The review starts at the protected effect (`fetch_sql` is a bound tuple). Everything that is not a params tuple at that call is a candidate grammar mix. `%s` inside a concatenated string is the same problem, not a different kind of finding.
 
 ## Seeded smells (label them yourself)
 

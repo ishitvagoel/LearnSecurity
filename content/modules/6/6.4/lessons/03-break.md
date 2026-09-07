@@ -19,7 +19,7 @@ Do not open a live upload folder. Do not walk a public filesystem. Do not point 
 
 What must not happen: a resolved path leaves the lab folder. `resolve("../outside")` joins onto `/tmp/sc-lab` and, after canonicalize, is no longer that folder or a child of it.
 
-Who can act here: a member who can supply an upload **filename** (data). That stands in for a clinic scan name, a zip member path (leftover, later and harder), or `UploadFile.filename` from Starlette. What you are supposed to trust: `resolve` joins, canonicalizes, and denies unless the object is still `/tmp/sc-lab` or a child. A denylist of `..`, a UUID filename sticker, and `Content-Type` are not what you trust.
+Who could do this: a member who can supply an upload **filename** (data). That stands in for a clinic scan name, a zip member path (leftover, later and harder), or `UploadFile.filename` from Starlette. What is supposed to stop this: `resolve` joins, canonicalizes, and denies unless the object is still `/tmp/sc-lab` or a child. A denylist of `..`, a UUID filename sticker, and `Content-Type` are not enough.
 
 ## Picture: join without canonicalize
 
@@ -33,7 +33,7 @@ The broken files show **cause** (path grammar mixed with data). The name `../out
 
 An awareness list that names “path walk” is not the failing check.
 
-## What to look at — cause, not a trophy
+## What to look at: the cause, not a trophy
 
 Read `vulnerable/path.py`. It joins the name onto `/tmp/sc-lab` and returns the string. Checks:
 

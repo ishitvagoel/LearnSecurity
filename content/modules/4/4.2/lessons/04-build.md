@@ -24,7 +24,7 @@ flowchart TD
 
 The repaired files branch on method, then origin equality. A live WebAuthn path still needs a keyboard and a name a screen reader can use. Prompt bombing and recovery SMS put a phishable secret back on the path — name them as leftovers, not silent passes.
 
-“2FA exists” is not this pytest. This pytest is the **phishing-resistant claim**.
+“2FA exists” is not this check. This pytest is the **phishing-resistant claim**.
 
 ## What the repaired files must show
 

@@ -19,7 +19,7 @@ Do not POST to Stripe. Do not POST to GitHub. Do not POST to a clinic webhook. D
 
 What must not happen: an unsigned webhook body is accepted. `accept` returns true for an empty signature.
 
-Who can act here: anyone who can POST the callback URL with an empty or wrong signature. That stands in for a forged billing event, an “export-ready” callback, or a clinic lab-result post. What you are supposed to trust: `accept` is **message authenticity over raw bytes**. TLS to the path, a vendor address-range allow-list, and a vendor SDK name are not what you trust for this check.
+Who could do this: anyone who can POST the callback URL with an empty or wrong signature. That stands in for a forged billing event, an “export-ready” callback, or a clinic lab-result post. What is supposed to stop this: `accept` is **message authenticity over raw bytes**. TLS to the path, a vendor address-range allow-list, and a vendor SDK name are not enough.
 
 ## Picture: hitting the path is enough
 
@@ -30,7 +30,7 @@ flowchart TD
 
 The broken files show **cause** (the path was trusted). Do not POST anything except this practice. What has to be true first: `accept` returns true for every triple. You do not need HTTP. You must not POST a live provider.
 
-Industry lists want a standard-library MAC. Module 5.4 already said TLS proves a hop; this cell is **whether the message came from the provider**. HMAC here is a teaching stand-in, not “we are Stripe.” A famous-bugs nickname for unsafe consumption of APIs is awareness after the cause, not that check.
+Industry lists ask for a standard-library MAC. Module 5.4 already said TLS proves a hop; this rule is **whether the message came from the provider**. HMAC here is a teaching stand-in, not “we are Stripe.” A famous-bugs nickname for unsafe consumption of APIs is awareness after the cause, not that check.
 
 ## What to look at — cause, not a live POST
 
@@ -76,7 +76,7 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/7.3/7.3-lab/tests --impl vulnerable
 ```
 
-Run from `labs/7.3/7.3-lab` if a repo-root collection picks up `site/`. Record `test_missing_signature_is_rejected`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/7.3/7.3-lab` if a repo-root collection picks up `site/`. Record `test_missing_signature_is_rejected`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

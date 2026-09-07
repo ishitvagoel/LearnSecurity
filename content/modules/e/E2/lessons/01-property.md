@@ -11,7 +11,7 @@ The notes app this week may send a content-security policy on its Next.js respon
 
 What must not happen is **Report-Only treated as isolation**. A script still runs. The dashboard looks green.
 
-Industry checklists want a content-security policy as a **layer** after encoding (6.2). Reporting from that policy is extra, later, and advanced — reporting is the Report-Only kind of signal, not enforcement. The current content-security spec and Trusted Types are still **draft**.
+Industry lists ask for a content-security policy as a **layer** after encoding (6.2). Reporting from that policy is extra, later, and advanced — reporting is the Report-Only kind of signal, not enforcement. The current content-security spec and Trusted Types are still **draft**.
 
 ## Picture: two header names
 

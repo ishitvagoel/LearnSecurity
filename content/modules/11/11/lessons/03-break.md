@@ -17,7 +17,7 @@ Only `labs/11/11-lab` is in scope. The practice is in-process `revoke` / `read` 
 
 Do not paste this exercise onto a public clinic, employer dashboard, or live hospital portal “to see what happens.”
 
-What you trust for this check: `read` is supposed to consult **owner or grant on every access**. pytest coverage, a YAML evidence pack, and FastAPI 200 are not what you trust.
+What is supposed to stop this: `read` is supposed to consult **owner or grant on every access**. pytest coverage, a YAML evidence pack, and FastAPI 200 are not enough.
 
 Who can still read after revoke in this story: a former collaborator with a cached note id. That stands in for “we hit DELETE so the next chart read is fine,” a capstone scanner treated as an assurance stamp, or HTTP 200 on revoke treated as the check.
 
@@ -31,7 +31,7 @@ flowchart TD
 
 The broken files take that path on purpose. You do not need HTTP. You must not hit a live tenant. The body return after revoke *is* the leak.
 
-Earlier weeks already said check every access. Time, revoke, leftover worker sessions, and phone cache are the other grains. This cell is **the stitch**. Do not claim you finished an assurance gate.
+Earlier weeks already said check every access. Time, revoke, leftover worker sessions, and phone cache are the other grains. This rule is **the stitch**. This page does not mark you as finished.
 
 ## What to look at — cause, not a dump
 
@@ -75,7 +75,7 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/11/11-lab/tests --impl vulnerable
 ```
 
-Run from `labs/11/11-lab` if a collection at the repo root picks up `site/`. Record `test_revoked_share_cannot_read`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/11/11-lab` if a collection at the repo root picks up `site/`. Record `test_revoked_share_cannot_read`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
@@ -83,4 +83,4 @@ Clinic revoke a guardian: predict without leaving this directory. Do not hit a l
 
 ## What this page is not doing
 
-No live-tenant, clinic-portal, or public notes-app instructions. Do not claim you finished an assurance gate. A numbered thirteen-item slogan is not the portable pack.
+No live-tenant, clinic-portal, or public notes-app instructions. This page does not mark you as finished. A numbered thirteen-item slogan is not the portable pack.

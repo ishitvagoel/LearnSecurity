@@ -19,7 +19,7 @@ Do not probe cloud metadata. Do not probe public hosts. Do not probe an employer
 
 What must not happen: a server-side fetch to link-local metadata is allowed. `allowed` returns true for a link-local metadata URL.
 
-Who can act here: a member who can supply a preview URL (untrusted structure, 2.1). That stands in for a clinic “fetch PDF from URL” field or a webhook target (7.3). What you are supposed to trust: `allowed` parses scheme **and** host against a small allow-list. “Starts with https,” a denylist of one IP, and `requests.get` are not what you trust for this check.
+Who could do this: a member who can supply a preview URL (untrusted structure, 2.1). That stands in for a clinic “fetch PDF from URL” field or a webhook target (7.3). What is supposed to stop this: `allowed` parses scheme **and** host against a small allow-list. “Starts with https,” a denylist of one IP, and `requests.get` are not enough.
 
 ## Picture: scheme-only is not an allow-list
 
@@ -31,7 +31,7 @@ flowchart TD
 
 The broken files show **cause** (the server would dial whoever the URL names). The link-local address is a **named destination string**. Do not send packets to it. What has to be true first: `allowed` returns true for any `http`/`https` scheme. You do not need a GET. You must not.
 
-Industry lists want an allow-list of protocols, hosts, paths, and ports before calling another service. This pytest is the predicate, not a network trophy. A famous-bugs nickname for server-side requests is awareness after the cause, not that check.
+Industry lists ask for an allow-list of protocols, hosts, paths, and ports before calling another service. This pytest is the predicate, not a network trophy. A famous-bugs nickname for server-side requests is awareness after the cause, not that check.
 
 ## What to look at — cause, not a fetch
 
@@ -77,7 +77,7 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/6.5/6.5-lab/tests --impl vulnerable
 ```
 
-Record `test_link_local_metadata_is_denied`. Do not fetch. An environment error is not security evidence.
+Record `test_link_local_metadata_is_denied`. Do not fetch. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

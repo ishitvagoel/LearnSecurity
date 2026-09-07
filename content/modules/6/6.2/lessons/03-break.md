@@ -19,7 +19,7 @@ Do not paste this exercise onto a public site, employer board, or live clinic po
 
 What must not happen: **unencoded markup reaches the HTML interpreter**. `render` leaves `<` as a tag delimiter, so the extra-tag marker `"<img"` remains in the output.
 
-Attacker capability in this practice: a member (or a stored title) who can supply a string containing `<`. That stands in for a clinic nickname on a shared board, or markdown left raw (2.1). What you trust: `render` is supposed to encode for the **HTML text** context. A content-security header in report-only mode, cleaning after `innerHTML`, and React JSX defaults are not in what you trust for this cell.
+Who could do this: a member (or a stored title) who can supply a string containing `<`. That stands in for a clinic nickname on a shared board, or markdown left raw (2.1). What is supposed to stop this: `render` is supposed to encode for the **HTML text** context. A content-security header in report-only mode, cleaning after `innerHTML`, and React JSX defaults are not in what you trust for this rule.
 
 ## Picture: a raw angle bracket is already the break
 
@@ -70,7 +70,7 @@ Run checks against the broken files (they **must fail** on unencoded markup). Re
 python3 -m pytest labs/6.2/6.2-lab/tests --impl vulnerable
 ```
 
-Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. An environment error is not security evidence.
+Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

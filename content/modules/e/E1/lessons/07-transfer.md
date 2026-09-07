@@ -29,7 +29,7 @@ flowchart LR
   Sql[exec_sql] --> Reality[interpreter]
 ```
 
-If the model "only summarizes" while `run_tool` is always-run, the rule is gone. A system prompt, retrieval, and a famous-bugs mapping do not put `exec_sql` outside `ALLOWED`. A coding assistant in CI that can install packages is the same allow-list grain — name it, do not jailbreak a live model here. Guidance documents on AI risk are not this pytest. Cryptographically bound approvals are extra, advanced work, not this week's check.
+If the model "only summarizes" while `run_tool` is always-run, the rule is gone. A system prompt, retrieval, and a famous-bugs mapping do not put `exec_sql` outside `ALLOWED`. A coding assistant in CI that can install packages is the same allow-list grain — name it, do not jailbreak a live model here. Guidance documents on AI risk are not this check. Cryptographically bound approvals are extra, advanced work, not this week's check.
 
 The clinic rewrite still has to keep the notes-app fork: `exec_sql` denied, `search_notes` may run. Adding a prompt without an allow-list leaves `run_tool("exec_sql")` running. The local pytest analogue is `test_exec_sql_tool_is_denied` — on a practice, not a live model.
 

@@ -17,7 +17,7 @@ Only `labs/3.2/3.2-lab` is in scope. Do not run SAST or DAST against a public ho
 
 What must not happen: a green scanner produces an empty notes-app threat model. `threats_from_scan(True)` returns `[]`, so `cross-tenant-read` is missing.
 
-Who can act here: a reviewer or CI job that can ask “what’s in the model?” after `scanner_green=True`. That stands in for a “no High findings” ticket, a Threat Dragon picture, or “we did STRIDE in the sprint.” What you are supposed to trust: the assembler **seeds** design threats that no CVE rule will list. FastAPI, Semgrep, and a vendor dashboard are not what you trust for this check.
+Who could do this: a reviewer or CI job that can ask “what’s in the model?” after `scanner_green=True`. That stands in for a “no High findings” ticket, a Threat Dragon picture, or “we did STRIDE in the sprint.” What is supposed to stop this: the assembler **seeds** design threats that no CVE rule will list. FastAPI, Semgrep, and a vendor dashboard are not enough.
 
 ## Picture: green copies empty
 
@@ -32,7 +32,7 @@ The broken files show **cause** (tool output treated as thinking), not a trophy 
 
 A green dashboard is a tool observation. It is not documented security decisions you can check.
 
-## What to look at — cause, not a trophy
+## What to look at: the cause, not a trophy
 
 Read `vulnerable/model.py`. `assemble_threat_model` returns an empty list when `scanner_green` is true. `threats_from_scan(True)` is therefore empty. Checks:
 
@@ -68,7 +68,7 @@ A “no High findings” ticket is not a threat model. HttpOnly cookies and para
 python3 -m pytest labs/3.2/3.2-lab/tests --impl vulnerable
 ```
 
-Record the failing tests, starting with `test_green_scanner_is_not_an_empty_threat_model`. Do not weaken them to “a threats key exists.” An environment error is not security evidence.
+Record the failing tests, starting with `test_green_scanner_is_not_an_empty_threat_model`. Do not weaken them to “a threats key exists.” A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

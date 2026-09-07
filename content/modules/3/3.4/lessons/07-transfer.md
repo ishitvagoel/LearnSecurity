@@ -39,7 +39,7 @@ Awareness-list names may appear in a regression checklist after the machine exis
 | Reject | Why |
 |---|---|
 | A weakness nickname as the rule | Weakness name ≠ cap |
-| Rate limit as the cap | Different cell |
+| Rate limit as the cap | A different rule |
 | Live clinic APIs | Course rules |
 | HTML max=3 as enforcement | Client is untrusted |
 | Awareness-list sticker | Awareness only |

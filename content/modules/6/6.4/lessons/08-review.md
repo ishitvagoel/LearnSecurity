@@ -23,9 +23,9 @@ flowchart TD
   Q -->|"Content-Type"| False[False comfort]
 ```
 
-Classification starts at the protected effect (canonical object still under the folder). Everything that is not join-canonicalize-prefix at that call is a candidate leftover path. A `..` denylist without a prefix test is the same smell, not a different finding class.
+Start from what must stay true (canonical object still under the folder). Everything that is not join-canonicalize-prefix at that call is a candidate leftover path. A `..` denylist without a prefix test is the same problem, not a different kind of finding.
 
-Zip member paths are another parser of this cell, not a reason to skip `test_dotdot_does_not_escape_root`. Starlette `UploadFile.filename` is still client data after the change “randomizes names.”
+Zip member paths are another parser of this rule, not a reason to skip `test_dotdot_does_not_escape_root`. Starlette `UploadFile.filename` is still client data after the change “randomizes names.”
 
 ## Problems to find (name them yourself)
 

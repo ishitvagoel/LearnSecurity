@@ -17,7 +17,7 @@ Only `labs/10.4/10.4-lab` is in scope. The practice is an in-process `boot_ok(en
 
 Do not paste this exercise onto a public clinic, employer cluster, or live hospital portal.
 
-What you trust for this check: `boot_ok` is supposed to refuse **prod plus debug**. Compose strings, FastAPI debug defaults, a canary percentage, and a manufacturer-defaults program page we have not verified are not what you trust.
+What is supposed to stop this: `boot_ok` is supposed to refuse **prod plus debug**. Compose strings, FastAPI debug defaults, a canary percentage, and a manufacturer-defaults program page we have not verified are not enough.
 
 Who can get the leak in this story: anyone who finds an error page or a debug route. That stands in for “we left DEBUG on for five minutes so support can see traces,” `NODE_ENV=production` treated as the check, or a 10% canary treated as hardening.
 
@@ -73,7 +73,7 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/10.4/10.4-lab/tests --impl vulnerable
 ```
 
-Run from `labs/10.4/10.4-lab` if a collection at the repo root picks up `site/`. Record `test_prod_debug_must_not_boot`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/10.4/10.4-lab` if a collection at the repo root picks up `site/`. Record `test_prod_debug_must_not_boot`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
@@ -81,4 +81,4 @@ Clinic Django `DEBUG=True`: predict without leaving this directory. Do not hit a
 
 ## What this page is not doing
 
-No live-production, staging-SaaS, or public debug-endpoint instructions. Fake `env` / `debug` flags only. Do not claim you finished an assurance gate. A famous-bugs list stays awareness after the cause. A manufacturer-defaults program page stays unverified.
+No live-production, staging-SaaS, or public debug-endpoint instructions. Fake `env` / `debug` flags only. This page does not mark you as finished. A famous-bugs list stays awareness after the cause. A manufacturer-defaults program page stays unverified.

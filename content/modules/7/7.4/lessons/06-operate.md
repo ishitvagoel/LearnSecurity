@@ -20,7 +20,7 @@ flowchart TD
   Metric --> Drain[Rotate service creds and drain queue]
 ```
 
-Industry lists name detect, respond, recover. They do not bind the principal. A zero-trust product name is not the rule. Someone still has to own the worker identity.
+Industry lists talk about noticing, responding, and recovering. They do not bind the principal. Naming a zero-trust product is not the rule. Someone still has to own the worker identity.
 
 ## Signals that do not become a second leak
 
@@ -42,11 +42,11 @@ Not: Alice’s session cookie, note bodies, a live broker dump, or a real clinic
 
 If your alert includes Alice’s cookie or note bodies, you have opened a second leak in the paging channel.
 
-A green “service account enabled” tile is not that pytest. Overnight export, outbox, and notification fan-out are other jobs of the same principal — inventory them before claiming recover. Re-run `test_user_session_is_not_worker_identity` after any task-enqueue change.
+A green “service account enabled” tile is not that check. Overnight export, outbox, and notification fan-out are other jobs of the same principal — inventory them before claiming recover. Re-run `test_user_session_is_not_worker_identity` after any task-enqueue change.
 
 ## What the framework does vs what you still have to check
 
-A task dashboard will show task success and stay silent when the task still used `job.get('user_session')`. Detection must observe **Alice session yields `None`**, not queue depth. If the alert includes Alice’s cookie or note bodies, you have opened a 3.1 / 4.3 cell.
+A task dashboard will show task success and stay silent when the task still used `job.get('user_session')`. Detection must observe **Alice session yields `None`**, not queue depth. If the alert includes Alice’s cookie or note bodies, you have opened a leftover hole from topics 3.1 and 4.3.
 
 ## Practice
 
@@ -54,7 +54,7 @@ Write one log line you would accept in review (job id, expected principal, no co
 
 ## Use it somewhere new
 
-Clinic: notice batch-export jobs running as a clinician session on a local practice files; do not attach the session token to the ticket. Do not attach to a live broker.
+A clinic example: notice batch-export jobs running as a clinician session on a local practice files; do not attach the session token to the ticket. Do not attach to a live broker.
 
 ## Can people still use it
 
@@ -62,4 +62,4 @@ Clinic: notice batch-export jobs running as a clinician session on a local pract
 
 ## What this page is not doing
 
-A zero-trust product name is not the rule. Live broker attaches are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Naming a zero-trust product is not the rule. Live broker attaches are out of scope. This site does not mark you as finished. Answer keys are not on this site.

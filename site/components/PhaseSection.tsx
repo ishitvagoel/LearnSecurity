@@ -71,9 +71,9 @@ export function PhaseSection({
 
 export function PhaseJump({ phases }: { phases: number[] }): ReactElement {
   return (
-    <nav aria-label="Jump to a section" className="mb-10">
+    <nav aria-label="Jump to a part" className="mb-10">
       <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-stone-500">
-        Jump to a section
+        Jump to a part
       </p>
       <ul className="flex flex-wrap gap-2">
         {phases.map((phase) => {

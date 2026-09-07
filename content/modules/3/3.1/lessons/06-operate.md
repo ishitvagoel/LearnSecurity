@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Purge[Purge matching lines]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a log product. They do not prove this line is clean. Someone still has to own the leftover.
+Industry lists talk about noticing, responding, and recovering. They do not pick a log product. They do not prove this line is clean. Someone still has to own the leftover.
 
 ## Signals that do not become a second leak
 
@@ -45,7 +45,7 @@ If your alert includes the matching line, you have copied the leak into the pagi
 
 ## What the framework does vs what you still have to check
 
-The same access logs, exception dumps, and APM drains that bypass the logger will also bypass a “scan our app logs” detector. Name those places before you claim recover. A log-product name is not the rule.
+The same access logs, exception dumps, and APM drains that bypass the logger will also bypass a “scan our app logs” detector. Name those places before you claim recover. Naming a product is not the rule.
 
 ## Can people still use it
 
@@ -57,8 +57,8 @@ Write one log line you would accept in review (ids, reason, no body). Tie it to 
 
 ## Use it somewhere new
 
-Clinic: notice chart text in appointment logs; purge without pasting the chart into the ticket. Support tools: notice a paste of the body into a ticket the same way.
+A clinic example: notice chart text in appointment logs; purge without pasting the chart into the ticket. Support tools: notice a paste of the body into a ticket the same way.
 
 ## What this page is not doing
 
-A log-product name is not the rule. Do not run live queries against production logs. Answer keys are not on this site.
+Naming a product is not the rule. Do not run live queries against production logs. Answer keys are not on this site.

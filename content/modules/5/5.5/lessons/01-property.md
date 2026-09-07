@@ -11,7 +11,7 @@ The notes app must fetch a note by **company and note id as data**. The SQL engi
 
 What must not happen is **a query built by concatenating untrusted strings into SQL**. That is a secrecy and integrity failure of rows: the parser can read other companies or change rows even when the handler meant “one note.”
 
-Industry lists want parameterized queries — SQL, and later the same shape for other query languages. They still want cross-company controls. They want a least-privilege account to the database. Logging every who-is-allowed decision, and never the sensitive data, is **advanced** work, not this week's pytest. A later row-level rule in PostgreSQL is a platform extra, not this sentence. SQLAlchemy `text()` with an f-string is still concatenation.
+Industry lists ask for parameterized queries — SQL, and later the same shape for other query languages. They still want cross-company controls. They want a least-privilege account to the database. Logging every who-is-allowed decision, and never the sensitive data, is **advanced** work, not this week's check. A later row-level rule in PostgreSQL is a platform extra, not this sentence. SQLAlchemy `text()` with an f-string is still concatenation.
 
 ## Picture: data vs SQL grammar
 
@@ -22,7 +22,7 @@ flowchart TD
   Mix -->|no| Bind["params tuple: company and note id"]
 ```
 
-Who can act: a member who types a note id that the SQL parser would treat as grammar, or anyone who steals the `app` role (3.3). What you trust in this practice: the bound API. A live database is not in scope.
+Who could do this: a member who types a note id that the SQL parser would treat as grammar, or anyone who steals the `app` role (3.3). What you trust in this practice: the bound API. A live database is not in scope.
 
 **The tool (not the rule):** an ORM name, a web filter rule, or a denylist of quotes.
 

@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Reopen[reopen and restore]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a SIEM product. They do not prove this ticket’s restore ran. Someone still has to own the leftover.
+Industry lists talk about noticing, responding, and recovering. They do not pick a SIEM product. They do not prove this ticket’s restore ran. Someone still has to own the leftover.
 
-Re-run `test_cannot_close_without_recovery` after any close-workflow change. A green “alerts stopped” tile is not that pytest. Also re-run `test_cannot_close_when_logs_contain_note_body` — a second sink (crash reports, web telemetry) can reopen the leftover-body hole.
+Re-run `test_cannot_close_without_recovery` after any close-workflow change. A green “alerts stopped” tile is not that check. Also re-run `test_cannot_close_when_logs_contain_note_body` — a second sink (crash reports, web telemetry) can reopen the leftover-body hole.
 
 ## Signals that do not become a second leak
 
@@ -46,7 +46,7 @@ If your alert includes the matching note, you have copied the leak into the pagi
 
 ## What the framework does vs what you still have to check
 
-The same always-true close, leftover bodies, and support-tool god-mode that bypass this practice will also bypass a “scan our SIEM dashboard” detector. Name those places before you claim recover. A SIEM-product name is not the rule.
+The same always-true close, leftover bodies, and support-tool god-mode that bypass this practice will also bypass a “scan our SIEM dashboard” detector. Name those places before you claim recover. Naming a product is not the rule.
 
 Cause vs cost stays split here too: the **cause** is close looking at detection quality instead of recovery done and no `note_body`; the **cost** is an attacker still in plus extra note copies; **how you stop it** is the conjunction; **how you notice** is `incident_closed_without_recovery`; **how you recover** is reopen and restore. What the tool cannot do: this alert does not prove the restore drill ran, and it does not ship logs to a separate system.
 
@@ -66,8 +66,8 @@ Reject any line that includes a note body, a session token, or “assurance gate
 
 ## Use it somewhere new
 
-Clinic: reopen the SIEM-green ticket; do not paste note text into chat. Do not query a live SIEM.
+A clinic example: reopen the SIEM-green ticket; do not paste note text into chat. Do not query a live SIEM.
 
 ## What this page is not doing
 
-A SIEM-vendor name is not the rule. Do not claim you finished an assurance gate. A known-exploited listing is not close. Answer keys are not on this site.
+A SIEM-vendor name is not the rule. This page does not mark you as finished. A known-exploited listing is not close. Answer keys are not on this site.

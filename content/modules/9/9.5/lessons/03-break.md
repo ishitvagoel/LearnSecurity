@@ -17,7 +17,7 @@ Only `labs/9.5/9.5-lab` is in scope. The practice is an in-process `close_findin
 
 Do not paste this exercise onto a public clinic, employer tracker, or live hospital portal "to see what happens."
 
-What you trust for this check: `close_finding` is supposed to require a **passing retest of the same isolation pytest** — bob must not read alice's note. A PDF, a ticket marked Done, a severity score, and a known-exploited listing are not what you trust.
+What is supposed to stop this: `close_finding` is supposed to require a **passing retest of the same isolation pytest** — bob must not read alice's note. A PDF, a ticket marked Done, a severity score, and a known-exploited listing are not enough.
 
 Who can close without a retest in this story: a paper-compliance closer. That stands in for "the assessor delivered a 40-page PDF so we marked isolation Done," a 9.8 treated as the close decision, or a known-exploited listing used as a licence to scan a hospital portal.
 
@@ -73,7 +73,7 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/9.5/9.5-lab/tests --impl vulnerable
 ```
 
-Run from `labs/9.5/9.5-lab` if a collection at the repo root picks up `site/`. Record `test_cannot_close_without_retest`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/9.5/9.5-lab` if a collection at the repo root picks up `site/`. Record `test_cannot_close_without_retest`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
@@ -81,4 +81,4 @@ Clinic PDF on a shelf: predict without leaving this directory. Do not pentest a 
 
 ## What this page is not doing
 
-No live-target, weaponized, or copy-paste exploit instructions. Fake finding dicts only. Do not claim you finished an assurance gate. If you mention a newer testing-catalogue draft, say it is a draft.
+No live-target, weaponized, or copy-paste exploit instructions. Fake finding dicts only. This page does not mark you as finished. If you mention a newer testing-catalogue draft, say it is a draft.

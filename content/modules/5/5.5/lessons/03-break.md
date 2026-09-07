@@ -19,7 +19,7 @@ Do not probe a live database. Do not probe an employer replica. Do not probe a c
 
 What must not happen: a query built by concatenating untrusted strings into SQL. `fetch_sql` returns a `str` instead of a bound `(sql, params)` pair.
 
-Who can act here: a member who can supply `note_id` (or company) text that the SQL parser would treat as extra grammar. That stands in for a clinic search box, an ORDER BY column name, or a GraphQL argument later in 7.1. What you are supposed to trust: `fetch_sql` binds those fields as **data**. SQLAlchemy `text()` with an f-string, a quote denylist, and “row-level security is on in production” are not what you trust for this check.
+Who could do this: a member who can supply `note_id` (or company) text that the SQL parser would treat as extra grammar. That stands in for a clinic search box, an ORDER BY column name, or a GraphQL argument later in 7.1. What is supposed to stop this: `fetch_sql` binds those fields as **data**. SQLAlchemy `text()` with an f-string, a quote denylist, and “row-level security is on in production” are not enough.
 
 ## Picture: one string is two languages
 
@@ -32,7 +32,7 @@ flowchart TD
 
 The broken files show **cause** (data mixed into SQL grammar), not a trophy dump of another company. What has to be true first: `fetch_sql` interpolates `tenant` and `note_id` into the SQL text; `is_bound` looking for `%s` *inside that concatenated string* is a false check. You do not need a live `psql`. You must not run one.
 
-Industry lists want parameterized queries. A scanner name for this family is a weakness label, not that check. The test uses a **class** of hostile note-id text — punctuation the parser would treat as extra grammar. Treat it as data for the params tuple. Do not paste it into notes as a cookbook.
+Industry lists ask for parameterized queries. A scanner name for this family is a weakness label, not that check. The test uses a **class** of hostile note-id text — punctuation the parser would treat as extra grammar. Treat it as data for the params tuple. Do not paste it into notes as a cookbook.
 
 ## What to look at — cause, not a dump
 
@@ -77,7 +77,7 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/5.5/5.5-lab/tests --impl vulnerable
 ```
 
-Record `test_query_is_bound_not_concatenated`. Do not probe public hosts. An environment error is not security evidence.
+Record `test_query_is_bound_not_concatenated`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

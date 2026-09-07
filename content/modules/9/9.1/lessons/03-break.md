@@ -17,7 +17,7 @@ Only `labs/9.1/9.1-lab` is in scope. The practice is an in-process `covered(req_
 
 Do not paste a real requirements matrix into a public tracker “to see what happens.” Do not paste this exercise onto a public checklist portal, employer dashboard, or live clinic.
 
-What you trust for this check: `covered` is supposed to be a **check over tests that assert isolation**. Checklist membership, pytest-cov, and a practice-guide attestation are not what you trust.
+What is supposed to stop this: `covered` is supposed to be a **check over tests that assert isolation**. Checklist membership, pytest-cov, and a practice-guide attestation are not enough.
 
 Who can mark the row done in this story: an optimistic status column. That stands in for “we imported the PDF and marked isolation done,” a tracker Done column, or a mobile storage spreadsheet checkbox without a matching test.
 
@@ -73,11 +73,11 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/9.1/9.1-lab/tests --impl vulnerable
 ```
 
-Run from `labs/9.1/9.1-lab` if a collection at the repo root picks up `site/`. Record `test_status_only_row_is_not_coverage`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/9.1/9.1-lab` if a collection at the repo root picks up `site/`. Record `test_status_only_row_is_not_coverage`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic: predict a HIPAA “done” column with no isolation test — still only this directory. Do not scrape a live governance product.
+A clinic example: predict a HIPAA “done” column with no isolation test — still only this directory. Do not scrape a live governance product.
 
 ## What this page is not doing
 

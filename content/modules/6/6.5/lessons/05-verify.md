@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# Allowing a link-local address must fail the check
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -37,7 +37,7 @@ python3 -m pytest labs/6.5/6.5-lab/tests --impl vulnerable
 python3 -m pytest labs/6.5/6.5-lab/tests --impl fixed
 ```
 
-Honest lab-host https may pass on both (broken files allow any https). That does not excuse the link-local and loopback tests. If the broken files do not fail link-local, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
+Honest lab-host https may pass on both (broken files allow any https). That does not excuse the link-local and loopback tests. If the broken files do not fail link-local, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 

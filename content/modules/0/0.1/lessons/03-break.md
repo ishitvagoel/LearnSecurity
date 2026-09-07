@@ -10,7 +10,7 @@
 
 What must not happen: treating a host that is not on the list as allowed. `target_is_authorized("https://example.com/")` returns true.
 
-Who you are standing in for: a tired learner with a proxy who can paste any URL. That stands in for “it has a login page,” “robots.txt allowed it,” or “the guide has a chapter on authorization.” What you are supposed to trust: the helper compares the hostname to a written list. A proxy, a scanner, a job title, and “it connected” are not that list.
+Who you are standing in for: a tired learner with a proxy who can paste any URL. That stands in for “it has a login page,” “robots.txt allowed it,” or “the guide has a chapter on authorization.” What is supposed to stop this: the helper compares the hostname to a written list. A proxy, a scanner, a job title, and “it connected” are not that list.
 
 ## Picture: every URL is in
 

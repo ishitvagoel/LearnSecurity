@@ -19,7 +19,7 @@ flowchart LR
   Extra["JSON still has is_staff"] --> Reality[binder writes if ALLOWED is missing]
 ```
 
-Renaming `is_admin` to `is_staff` is not transfer. Person, object, path, and leftover change. If “Edit profile” omits the staff checkbox while the server `apply` copies every key, the cell is gone. FastAPI, a generated OpenAPI file, and GraphQL “typed schema” do not copy `ALLOWED`. GraphQL mutation arguments and protobuf field numbers not in the writable set are the same binder family — name them, do not run those systems here. Honest `display_name` XSS is a 6.2 leftover even when extras are dropped.
+Renaming `is_admin` to `is_staff` is not transfer. Person, object, path, and leftover change. If “Edit profile” omits the staff checkbox while the server `apply` copies every key, the rule is gone. FastAPI, a generated OpenAPI file, and GraphQL “typed schema” do not copy `ALLOWED`. GraphQL mutation arguments and protobuf field numbers not in the writable set are the same binder family — name them, do not run those systems here. Honest `display_name` XSS is a 6.2 leftover even when extras are dropped.
 
 | Notes app this week | Clinic sketch |
 |---|---|
@@ -57,4 +57,4 @@ One page. No keys. `labs/7.1/7.1-lab` is the only running system you may break. 
 
 ## What this page is not doing
 
-Live-target API attacks. Real staff flags. Claiming Gate 7 from this page.
+Live-target API attacks. Real staff flags. This page does not finish a check-in.

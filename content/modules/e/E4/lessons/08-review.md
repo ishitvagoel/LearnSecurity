@@ -23,7 +23,7 @@ flowchart TD
   Q -->|awareness-list mapped| False[False comfort]
 ```
 
-Classification starts at the protected effect (length ≤ bufsize). Everything that is not the three-way min at that call is a candidate oversize path. A language sticker without that pytest is the same smell, not a different finding class.
+Start from what must stay true (length ≤ bufsize). Everything that is not the three-way min at that call is a candidate oversize path. A language sticker without that check is the same problem, not a different kind of finding.
 
 Helpers that call C are leftover. Integer wrap is leftover. Do not skip `test_copy_does_not_exceed_buffer`. Do not claim a course gate. Do not compile a native overflow to prove the finding.
 
@@ -44,7 +44,7 @@ Also reject: native exploit walkthroughs; shipping without re-running `test_copy
 - A memory-safe language removes risk from calling C
 - An awareness list is the syllabus
 - A sanitizer is `copy_into`
-- A company language roadmap is this pytest
+- A company language roadmap is this check
 
 ## Practice
 

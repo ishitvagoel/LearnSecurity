@@ -44,7 +44,7 @@ If `RetrySame` draws a second arrow into a **new** row, the map already predicts
 |---|---|---|---|
 | owner | n1 | share once, key k1 | allow; count 1 |
 | owner | n1 | share retry, same k1 | no second row; count 1 |
-| owner | n1 | share new key k2 | who-is-allowed policy (cap, recipient); not this pytest |
+| owner | n1 | share new key k2 | who-is-allowed policy (cap, recipient); not this check |
 | worker | n1 | redeliver k1 | same as retry (write the hole) |
 | handler | key store down | share | fail closed; do not insert |
 

@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Stop[block release]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a governance product. They do not prove this requirement is covered. Someone still has to own the leftover.
+Industry lists talk about noticing, responding, and recovering. They do not pick a governance product. They do not prove this requirement is covered. Someone still has to own the leftover.
 
-Re-run `test_status_only_row_is_not_coverage` after any matrix change. A green “checklist imported” tile is not that pytest. Mobile storage rows (8.2) are other requirements of the same check — inventory them before you claim recover. A 200-only test that someone flagged `asserts_isolation` by mistake is a later lying-flag leftover (9.3), not a silent pass.
+Re-run `test_status_only_row_is_not_coverage` after any matrix change. A green “checklist imported” tile is not that check. Mobile storage rows (8.2) are other requirements of the same check — inventory them before you claim recover. A 200-only test that someone flagged `asserts_isolation` by mistake is a later lying-flag leftover (9.3), not a silent pass.
 
 ## Signals that do not become a second leak
 
@@ -46,7 +46,7 @@ If your alert includes the matching note, you have copied the leak into the pagi
 
 ## What the framework does vs what you still have to check
 
-The same HTTP-200 tests, unnamed extra rows, and expired exceptions that bypass this practice will also bypass a “scan our Done column” detector. Name those places before you claim recover. A governance-product name is not the rule.
+The same HTTP-200 tests, unnamed extra rows, and expired exceptions that bypass this practice will also bypass a “scan our Done column” detector. Name those places before you claim recover. Naming a product is not the rule.
 
 ## Can people still use it
 
@@ -64,8 +64,8 @@ Reject any line that includes a note body, a live checklist portal trace, or “
 
 ## Use it somewhere new
 
-Clinic: block a release when the HIPAA “done” column has no isolation test; do not attach patient rows to the ticket. Do not scrape a live governance product.
+A clinic example: block a release when the HIPAA “done” column has no isolation test; do not attach patient rows to the ticket. Do not scrape a live governance product.
 
 ## What this page is not doing
 
-A governance-product name is not the rule. Live portal traces are out of scope. The verification gate stays not-attempted. Answer keys are not on this site.
+Naming a product is not the rule. Live portal traces are out of scope. This page does not finish the verification check-in. Answer keys are not on this site.

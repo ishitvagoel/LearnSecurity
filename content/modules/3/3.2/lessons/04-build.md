@@ -24,7 +24,7 @@ flowchart TD
 
 The lab’s repaired files always include the three always-name ids with `owner` and `trigger`. Scanner findings append if new. What you trust is that versioned list, plus the check that those ids exist. Threat Dragon, a data-flow picture, and Semgrep are not oracles.
 
-Industry checklists want documented security decisions. This pytest is that sentence for three notes-app ids, not a complete future catalogue.
+Industry lists ask for documented security decisions. This pytest is that sentence for three notes-app ids, not a complete future catalogue.
 
 ## What the repaired files must show
 
@@ -44,7 +44,7 @@ STRIDE letters without assets. A privacy method that auto-lists “someone from 
 - Models age. A new share path, worker, or webhook is a named trigger, not present code.
 - Moving a row to “accepted” with nobody left holding it reopens the story of what you checked.
 - A model that is not in version control cannot fail CI.
-- Calling out dangerous features in docs is a sister bar, not this pytest.
+- Calling out dangerous features in docs is a sister bar, not this check.
 
 ## Practice
 
@@ -58,7 +58,7 @@ It must pass.
 
 ## Use it somewhere new
 
-Clinic: seed `sms-content-leak` and `number-swap` even if the gateway vendor’s questionnaire is green. HIPAA stickers and vendor scans are not those rows.
+A clinic example: seed `sms-content-leak` and `number-swap` even if the gateway vendor’s questionnaire is green. HIPAA stickers and vendor scans are not those rows.
 
 ## What this page is not doing
 

@@ -49,7 +49,7 @@ Fail closed: if the hashes do not match, do not install. Uncertainty is a **no**
 
 - Matching a malicious pin still installs in this lab.
 - Cache poisoning can serve old bytes after a good pin.
-- Unpinned GitHub Actions `@v1` is a sibling grain, not this pytest.
+- Unpinned GitHub Actions `@v1` is a sibling grain, not this check.
 - Secrets in fork pull requests remain 5.3.
 - A lookalike on a public index still needs index policy beyond equality.
 

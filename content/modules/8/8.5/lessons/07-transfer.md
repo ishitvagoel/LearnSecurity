@@ -52,7 +52,7 @@ Use fake labels. Do not use real patient names.
 |---|---|
 | “The store privacy form is filled in” | Disclosure, not redaction |
 | Live crash console / real names | Course rules |
-| A privacy-level sticker as the definition | Awareness, not this pytest |
+| A privacy-level sticker as the definition | Awareness, not this check |
 | HTTPS to the vendor as this topic | Channel, not omit |
 | Crash dialog shown as evidence | Wrong observation |
 

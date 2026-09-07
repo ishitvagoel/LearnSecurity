@@ -24,7 +24,7 @@ flowchart TD
 
 The repaired files check `role == "service"` only for `secret_internal`. Production still needs the table restated for CSV, search snippets, debug toolbar, and later workers (7.4). Object GET success (4.4) is a coarser grain — identifiers find a row; they do not authorize fields. Extra-key *writes* remain 7.1.
 
-Industry checklists want that explicit permission implemented. This pytest is that sentence for member × `secret_internal`. Applying a role change through every serializer right away is **advanced**, not this week’s pytest.
+Industry lists ask for that explicit permission implemented. This pytest is that sentence for member × `secret_internal`. Applying a role change through every serializer right away is **advanced**, not this week's check.
 
 ## What the repaired files must show
 
@@ -59,7 +59,7 @@ Run from the lab directory if collection at repo root is polluted. Then write on
 
 ## Use it somewhere new
 
-Clinic: stop treating “SSN not in the member table UI” as field authorization.
+A clinic example: stop treating “SSN not in the member table UI” as field authorization.
 
 ## What can still go wrong
 

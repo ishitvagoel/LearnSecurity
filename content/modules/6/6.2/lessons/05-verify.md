@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# The broken files must fail on a raw less-than
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -38,7 +38,7 @@ Honest titles may pass on both implementations. That does not excuse the encode 
 
 ## What the checks do not prove
 
-- Encoding for a JavaScript string (a different cell)
+- Encoding for a JavaScript string (a different rule)
 - Content-security policy, or reporting from it (extra, advanced)
 - Trusted Types (**draft**)
 - A markdown cleaner (2.1)
@@ -48,11 +48,11 @@ Record those as leftover risk or later topics, not as silent passes.
 
 ## Practice
 
-Run both implementations this session. Write the fail/pass pair next to the map-page row. Reject a “check” that only greps `Content-Security-Policy` without calling `render`. An environment error is not security evidence.
+Run both implementations this session. Write the fail/pass pair next to the map-page row. Reject a “check” that only greps `Content-Security-Policy` without calling `render`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic nickname. A check that only asserts HTTP 200 is not this cell (see 9.3). A check that loads a live board is out of scope.
+Clinic nickname. A check that only asserts HTTP 200 is not this rule (see 9.3). A check that loads a live board is out of scope.
 
 ## What this page is not doing
 

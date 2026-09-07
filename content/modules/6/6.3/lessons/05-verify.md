@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# The broken files must fail a request from another site
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -32,7 +32,7 @@ python3 -m pytest labs/6.3/6.3-lab/tests --impl vulnerable
 python3 -m pytest labs/6.3/6.3-lab/tests --impl fixed
 ```
 
-Honest same-origin-with-token may pass on both (broken files allow any cookie). Missing cookie may pass on both. That does not excuse the foreign-origin and same-origin-without-token tests. If the broken files do not fail foreign origin, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
+Honest same-origin-with-token may pass on both (broken files allow any cookie). Missing cookie may pass on both. That does not excuse the foreign-origin and same-origin-without-token tests. If the broken files do not fail foreign origin, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
@@ -57,7 +57,7 @@ Write the fail/pass pair next to the matrix row. Reject a “test” that only g
 
 ## Use it somewhere new
 
-Clinic partner-share. A test that only asserts HTTP 200 on `/share` is not this cell (see the later testing topic). A test that visits a live third-party page is out of scope.
+Clinic partner-share. A test that only asserts HTTP 200 on `/share` is not this rule (see the later testing topic). A test that visits a live third-party page is out of scope.
 
 ## What this page is not doing
 

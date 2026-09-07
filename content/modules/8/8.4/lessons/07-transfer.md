@@ -19,7 +19,7 @@ flowchart LR
   Key["prod API key"] --> Reality[debug loggers on prod FHIR]
 ```
 
-If testers share the prod API key while `api_allowed` is always true, the cell is gone. R8, Play App Signing, and root detection do not check `build_type`. An APK inventory list (10.2) is a list of what shipped, not this channel check — name it, do not unpack store APKs here. Debug should still reach a **lab** FHIR sandbox.
+If testers share the prod API key while `api_allowed` is always true, the rule is gone. R8, Play App Signing, and root detection do not check `build_type`. An APK inventory list (10.2) is a list of what shipped, not this channel check — name it, do not unpack store APKs here. Debug should still reach a **lab** FHIR sandbox.
 
 | Notes app this week | Clinic sketch |
 |---|---|
@@ -48,7 +48,7 @@ The clinic rewrite still has to keep the notes-app fork: debug plus ok false, re
 | “R8 is on” | Cost, not channel |
 | Live Play Console / unpacking | Course rules |
 | “mobile-app R-level” | Obsolete labels; resilience lives in testing profiles |
-| Play App Signing as this cell | Store signing, not debug deny |
+| Play App Signing as this rule | Store signing, not debug deny |
 | Debug APK builds as evidence | Wrong observation |
 
 ## Practice
@@ -57,4 +57,4 @@ One page. No keys. `labs/8.4/8.4-lab` is the only running system you may break. 
 
 ## What this page is not doing
 
-Live-target reverse engineering. Real FHIR keys. Claiming Gate 8 from this page.
+Live-target reverse engineering. Real FHIR keys. This page does not finish a check-in.

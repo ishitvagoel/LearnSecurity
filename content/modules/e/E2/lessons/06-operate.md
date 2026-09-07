@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Flip[add enforcing header]
 ```
 
-Industry lists name detect, respond, recover. They do not prove the enforcing header is present. Someone still has to own the leftover.
+Industry lists talk about noticing, responding, and recovering. They do not prove the enforcing header is present. Someone still has to own the leftover.
 
 ## Signals that do not become a second leak
 
@@ -27,7 +27,7 @@ Industry lists name detect, respond, recover. They do not prove the enforcing he
 | Recover | Flip to enforcing after encoding (6.2) |
 | Leftover | XS-Leaks; cache strip; Trusted Types draft |
 
-A Helmet-product name is not the rule. Re-run `test_report_only_is_not_enforcement` after any header-middleware change; a green reporting dashboard is not that pytest. Encoding (6.2) still has to exist before you claim Recover — a content-security policy is a layer.
+Naming a product is not the rule. Re-run `test_report_only_is_not_enforcement` after any header-middleware change; a green reporting dashboard is not that check. Encoding (6.2) still has to exist before you claim Recover — a content-security policy is a layer.
 
 ## What the framework does vs what you still have to check
 
@@ -47,7 +47,7 @@ Reject any line that includes HTML, a note body, or “check-in 7 complete.”
 
 ## Use it somewhere new
 
-Clinic: deny the HIPAA-header claim; do not paste the page source into the ticket. Do not load a live page.
+A clinic example: deny the HIPAA-header claim; do not paste the page source into the ticket. Do not load a live page.
 
 ## Can people still use it
 

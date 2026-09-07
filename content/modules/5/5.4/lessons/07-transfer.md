@@ -27,7 +27,7 @@ flowchart LR
   Sock["API socket http"] --> Reality[Cleartext]
 ```
 
-If the page URL is https and the API socket is http, the cell is gone. A server flag that trusts proxy headers from `*`, a “Force HTTPS” dashboard, and HSTS preload do not bind the socket. Mutual TLS names a **peer**, which is a different cell: it still must not treat a client header as that peer.
+If the page URL is https and the API socket is http, the rule is gone. A server flag that trusts proxy headers from `*`, a “Force HTTPS” dashboard, and HSTS preload do not bind the socket. Mutual TLS names a **peer**, which is a different rule: it still must not treat a client header as that peer.
 
 The clinic rewrite still has to keep the notes-app fork: header https + socket http is false. Enabling a CDN “HTTPS only” tile while the app trusts `X-Forwarded-Proto` from anyone leaves the confused deputy. The local pytest analogue is `test_client_forwarded_proto_is_not_tls` — on a practice, not a live clinic.
 
@@ -49,7 +49,7 @@ Rewrite the notes-app sentence. Include:
 | “Force HTTPS is on” | Dashboard theater |
 | Live clinic probe | Course rules |
 | Pinning as the rule | Leftover, and not this practice |
-| HTTP 200 on port 443 as this cell | Wrong observation |
+| HTTP 200 on port 443 as this rule | Wrong observation |
 | Client URL bar as TLS | Wrong hop |
 
 ## Practice

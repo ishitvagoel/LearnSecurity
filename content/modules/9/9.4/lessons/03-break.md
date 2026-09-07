@@ -17,7 +17,7 @@ Only `labs/9.4/9.4-lab` is in scope. The practice is an in-process `ship_ok(find
 
 Do not paste this exercise onto a public GitHub org, employer dashboard, or live clinic “to see what the scanner finds.”
 
-What you trust for this check: `ship_ok` is supposed to **join scanner output to the coverage map**. A vendor default setup, a default Semgrep ruleset, and an empty dashboard are not what you trust.
+What is supposed to stop this: `ship_ok` is supposed to **join scanner output to the coverage map**. A vendor default setup, a default Semgrep ruleset, and an empty dashboard are not enough.
 
 Who can make this go wrong in this story: alert fatigue plus an always-true gate. That stands in for “code scanning is on and the dashboard is noisy so we ship Fridays,” a maturity score on a slide, or fifty unmapped HIGHs treated as probable false positives.
 
@@ -73,11 +73,11 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/9.4/9.4-lab/tests --impl vulnerable
 ```
 
-Run from `labs/9.4/9.4-lab` if a collection at the repo root picks up `site/`. Record `test_unmapped_high_blocks_ship`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/9.4/9.4-lab` if a collection at the repo root picks up `site/`. Record `test_unmapped_high_blocks_ship`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic: fifty unmapped HIGHs — predict without leaving this directory. Do not scan a live GitHub org.
+A clinic example: fifty unmapped HIGHs — predict without leaving this directory. Do not scan a live GitHub org.
 
 ## What this page is not doing
 

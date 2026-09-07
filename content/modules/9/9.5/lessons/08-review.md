@@ -23,9 +23,9 @@ flowchart TD
   Q -->|"severity 9.8"| False[False comfort]
 ```
 
-Classification starts at the protected effect (missing retest denied). Everything that is not `retest == "pass"` at that call is a candidate always-close path. A PDF screenshot without that pytest is the same smell, not a different finding class.
+Start from what must stay true (missing retest denied). Everything that is not `retest == "pass"` at that call is a candidate always-close path. A PDF screenshot without that check is the same problem, not a different kind of finding.
 
-Variants (extra fields) and a role-change cache are other leftover. Name them, do not skip `test_cannot_close_without_retest`. Do not claim you finished an assurance gate. Do not pentest a live tenant to prove the finding.
+Variants (extra fields) and a role-change cache are other leftover. Name them, do not skip `test_cannot_close_without_retest`. This page does not mark you as finished. Do not pentest a live tenant to prove the finding.
 
 ## Seeded smells (label them yourself)
 

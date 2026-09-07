@@ -33,6 +33,8 @@ const HEADING_EXACT: Record<string, string> = {
   "Misconceptions this module refuses": "Common mix-ups",
   Misconceptions: "Common mix-ups",
   "Seeded smells (label them yourself)": "Problems to find (name them yourself)",
+  "What to look at — cause, not a trophy": "What to look at: the cause, not a trophy",
+  "Signals that do not become a second leak": "Signals that should not become a second leak",
   "Step 2: write cells": "Step 2: write the rules",
   "Step 2: write cells the lab can fail": "Step 2: write the rules the check can fail",
   "Step 1: freeze pieces": "Step 1: name the pieces",
@@ -94,8 +96,12 @@ export function plainLessonTitle(title: string): string {
   t = t.replace(/^Transfer:\s*/i, "Somewhere new: ");
   t = t.replace(/ as a PR$/i, " like a pull request");
   t = t.replace(
+    /^Fail on the broken files, then pass on the repaired ones$/i,
+    "The broken files must fail this check",
+  );
+  t = t.replace(
     /Fail-on-vulnerable then pass-on-fixed/gi,
-    "Fail on the broken files, then pass on the repaired ones",
+    "The broken files must fail this check",
   );
   t = t.replace(/SecureCollab's/g, "the notes app's");
   t = t.replace(/\bthe SecureCollab\b/g, "the notes app");
@@ -151,6 +157,8 @@ export function plainLessonTitle(title: string): string {
   t = t.replace(/Architecture is a second mediation/g, "Architecture is a second check");
   t = t.replace(/Length is complete mediation of the buffer/g, "The copy must fit the box");
   t = t.replace(/Same what must not happen, same cell/g, "Same bad result, same rule");
+  t = t.replace(/\bthis cell\b/gi, "this rule");
+  t = t.replace(/\bthe cell\b/gi, "the rule");
   t = t.replace(/Require a named what must not happen/g, "Name what must not happen");
   t = t.replace(/What must not happen vs happy path/g, "The bad case vs the happy path");
   t = t.replace(/without back-dating check-in/g, "without pretending you already passed check-in");
@@ -202,9 +210,73 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/\bthe fixture\b/gi, "the practice files"],
   [/\bfixtures\b/gi, "practice files"],
   [/\bfixture\b/gi, "practice files"],
+  [
+    /Gates 0[–-]10 and milestones M0[–-]M5 stay \*\*not-attempted\*\*\.?/g,
+    "Opening this page does not finish a check-in.",
+  ],
+  [/Gates 0[–-]10 stay not-attempted\.?/g, "Opening this page does not finish a check-in."],
+  [/Course gates stay not-attempted\.?/g, "This page does not finish a check-in."],
+  [
+    /Course gates stay unclaimed without learner or product evidence\.?/g,
+    "This page does not finish a check-in.",
+  ],
+  [/Course gates stay unclaimed\.?/g, "This site does not mark you as finished."],
+  [/Gates stay \*\*not-attempted\*\*\.?/g, "This page does not finish a check-in."],
+  [
+    /The verification gate stays not-attempted\.?/g,
+    "This page does not finish the verification check-in.",
+  ],
+  [/Check-in 7 stays not finished\.?/g, "This page does not finish check-in 7."],
+  [/Do not claim you finished an assurance gate\.?/g, "This page does not mark you as finished."],
+  [/Claiming Gate \d+ from this page\.?/g, "This page does not finish a check-in."],
+  [/Course gates from this page\.?/g, "This page does not finish a check-in."],
   [/\bGate (\d+)\b/g, "check-in $1"],
   [/\bPhase (\d+)\b/g, "part $1"],
   [/\bnot-attempted\b/g, "not finished"],
+  [/Attacker capability in this practice:/g, "Who could do this:"],
+  [/Attacker capability in this lab:/g, "Who could do this:"],
+  [/Who can act in this story:/g, "Who could do this:"],
+  [/Who can act here:/g, "Who could do this:"],
+  [/Who can act:/g, "Who could do this:"],
+  [/What you are supposed to trust:/g, "What is supposed to stop this:"],
+  [/What you trust for this check:/g, "What is supposed to stop this:"],
+  [/What you trust:/g, "What is supposed to stop this:"],
+  [/are not in what you trust for this rule\.?/g, "are not enough."],
+  [/are not what you trust for this cell\.?/g, "are not enough."],
+  [/are not what you trust for this rule\.?/g, "are not enough."],
+  [/are not what you trust for this check\.?/g, "are not enough."],
+  [/are not what you trust\.?/g, "are not enough."],
+  [/Classification starts at the protected effect/g, "Start from what must stay true"],
+  [/Review starts at the protected effect/g, "Start from what must stay true"],
+  [
+    /the same smell, not a different finding class/g,
+    "the same problem, not a different kind of finding",
+  ],
+  [/Industry checklists want /g, "Industry lists ask for "],
+  [/Industry lists want /g, "Industry lists ask for "],
+  [
+    /Industry lists name detect, respond, recover\./g,
+    "Industry lists talk about noticing, responding, and recovering.",
+  ],
+  [/A ([A-Za-z0-9.+-]+) product name is not the rule\./g, "Naming a $1 product is not the rule."],
+  [/An ([A-Za-z0-9.+-]+) product name is not the rule\./g, "Naming an $1 product is not the rule."],
+  [/Do not add a live-([a-z-]+) trophy\./g, "Do not treat a live $1 screenshot as proof."],
+  [/Do not add a live ([A-Za-z]+) trophy\./g, "Do not treat a live $1 screenshot as proof."],
+  [/Do not add a native-overflow trophy\./g, "Do not treat a native overflow as a prize."],
+  [
+    /An environment error is not security evidence\./g,
+    "A setup error is not proof the rule holds.",
+  ],
+  [/Last topic \((\d+\.\d+)\) already said/g, "Topic $1 already said"],
+  [
+    /Module (\d+\.\d+) \/ (\d+\.\d+) already said/g,
+    "Topics $1 and $2 already said",
+  ],
+  [/server-side 1\.2 cell/g, "server-side who-is-allowed check"],
+  [/authority is a cell/g, "who-is-allowed is a rule"],
+  [/the cell is gone/g, "the rule is gone"],
+  [/opened a (\d+\.\d+) cell/g, "opened a leftover hole from topic $1"],
+  [/\ba (\d+\.\d+) cell\b/g, "a leftover hole from topic $1"],
   [/\bambient authority\b/gi, "leftover permission"],
   [/\bblast radius\b/gi, "how far a break can spread"],
   [/\battack surfaces?\b/gi, "ways in"],
@@ -213,13 +285,26 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/\bthis origin\b/gi, "this website"],
   [/\bthe TCB\b/g, "what you trust"],
   [/\bTCB\b/g, "what you trust"],
+  [/this week's pytest/g, "this week's check"],
+  [/this week’s pytest/g, "this week's check"],
+  [/\bthat pytest\b/gi, "that check"],
   [/\bthis pytest\b/gi, "this check"],
   [/\bthe pytest\b/gi, "the check"],
   [/\bpytest cases\b/gi, "checks"],
   [/\bpytest\b/g, "the check"],
   [/\bthis cell is not\b/gi, "this rule is not"],
+  [/This cell is/g, "This rule is"],
   [/\bthis cell\b/gi, "this rule"],
   [/\bthe cell\b/gi, "the rule"],
+  [/of the same cell/g, "of the same rule"],
+  [/\ba different cell\b/g, "a different rule"],
+  [/A [A-Za-z0-9-]+-product name is not the rule/g, "Naming a product is not the rule"],
+  [/Naming a ([AaEeIiOoUu])/g, "Naming an $1"],
+  [/Naming a (R8|API|MDM)\b/g, "Naming an $1"],
+  [/\*\*different cell\*\*/g, "**different rule**"],
+  [/the same cell/g, "the same rule"],
+  [/deny cell/g, "deny rule"],
+  [/Map each check to a cell/g, "Map each check to a rule"],
   [/\bpolicy cell\b/gi, "policy rule"],
   [/\bexecutable (?:policy )?cells?\b/gi, "rules you can test"],
   [/\bOWASP ASVS 5\.0\.0 \(final\)/g, "the published web-security checklist"],
@@ -233,7 +318,6 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/\bthis lab's oracle\b/gi, "what this check looks at"],
   [/\boracle\b/gi, "check"],
   [/\bHITL\b/g, "a person in the loop"],
-  [/\bCourse gates stay unclaimed\.?/g, "This site does not mark you as finished."],
   [/\bElectives do not stamp them\.?/g, ""],
   [/\bAnswer keys are not in this file\.?/g, "Answer keys are not on this site."],
   [/\bAnswer keys stay out of (?:this file|lessons)\.?/g, "Answer keys are not on this site."],
@@ -279,6 +363,9 @@ function transformProseLine(line: string): string {
   next = next.replace(/\bthe what you trust\b/g, "what you trust");
   next = next.replace(/\bThe practice files is\b/g, "The practice is");
   next = next.replace(/\bThis practice files is\b/g, "This practice is");
+  next = next.replace(/\bthat the check\b/g, "that check");
+  next = next.replace(/\bthis the check\b/g, "this check");
+  next = next.replace(/^Clinic: /g, "A clinic example: ");
   next = next.replace(/\s{2,}/g, " ");
   next = next.replace(/ \(Level \d+\)/g, "");
   return next.replace(/\u0000C(\d+)\u0000/g, (_, index) => codes[Number(index)] ?? "");

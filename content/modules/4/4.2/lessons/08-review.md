@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"MFA equals resistant"| False[False comfort]
 ```
 
-For each claim and each branch: label **rule**, **tool**, or **false comfort**. Classification starts at the protected effect (password at lookalike is false). Everything that is not origin binding at that call is a candidate extra path.
+For each claim and each branch: label **rule**, **tool**, or **false comfort**. Start from what must stay true (password at lookalike is false). Everything that is not origin binding at that call is a candidate extra path.
 
 Seeded smells (label them yourself; do not open the keys file):
 

@@ -2,7 +2,7 @@
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
-**Standards:** This course’s Gate 1 evidence rules. NICE as tooling language, not a 1.2 cell. CSF 2.0 GV as outcome labels.
+**Standards:** This course’s Gate 1 evidence rules. NICE as tooling language, not a leftover hole from topic 1.2. CSF 2.0 GV as outcome labels.
 
 ## The skip function ignores the score for part 1
 
@@ -31,7 +31,7 @@ Check-in 1 still requires 1.2 / 1.3 / 1.4 evidence. This check does not mint tha
 
 ## What this is not
 
-Job-title competency completion. LMS mastery. Check-in 0 / check-in 1. An industry list as coverage. A better quiz still cannot observe whether you can write a deny cell. Memorizing 1.2 answers without running the practice remains leftover risk.
+Job-title competency completion. LMS mastery. Check-in 0 / check-in 1. An industry list as coverage. A better quiz still cannot observe whether you can write a deny rule. Memorizing 1.2 answers without running the practice remains leftover risk.
 
 ## What the tool cannot do
 
@@ -51,7 +51,7 @@ Must pass.
 
 ## Use it somewhere new
 
-Clinic: refuse a 100% onboarding quiz as a threat-model skip the same way. Vendor cert used to skip a design review: same always-false for the rule unit.
+A clinic example: refuse a 100% onboarding quiz as a threat-model skip the same way. Vendor cert used to skip a design review: same always-false for the rule unit.
 
 ## What can still go wrong
 

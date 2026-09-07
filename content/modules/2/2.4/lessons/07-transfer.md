@@ -32,7 +32,7 @@ flowchart TD
   Timeout -->|new key k2| Two["Double-book"]
 ```
 
-Industry checklists want locking so a limited quantity cannot be booked twice. That is the clinic transfer. They also want a business step to succeed all the way or roll back. Neither sentence is an awareness-list name. HTTP still does not make POST happen once.
+Industry lists ask for locking so a limited quantity cannot be booked twice. That is the clinic transfer. They also want a business step to succeed all the way or roll back. Neither sentence is an awareness-list name. HTTP still does not make POST happen once.
 
 ## What is not good enough
 

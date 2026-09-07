@@ -19,7 +19,7 @@ Do not search public GitHub, an employer gist, or a classmate repo as this exerc
 
 What must not happen: the old hardcoded default still authenticates after rotation. `auth("sk-lab-hardcoded", current="rotated-now")` returns true.
 
-Who can act here: a **reader of the cloned repo**, an old container image, or a gist copy of `DEFAULT`. That stands in for a clinic lab API key that was “rotated in the wiki” while the default or-clause stayed. What you are supposed to trust: `auth` accepts only the current secret and denies when current is missing. A vault brand, `.gitignore`, and “we rotated” in a ticket are not what you trust for this cell.
+Who could do this: a **reader of the cloned repo**, an old container image, or a gist copy of `DEFAULT`. That stands in for a clinic lab API key that was “rotated in the wiki” while the default or-clause stayed. What is supposed to stop this: `auth` accepts only the current secret and denies when current is missing. A vault brand, `.gitignore`, and “we rotated” in a ticket are not enough.
 
 ## Picture: DEFAULT still wins
 
@@ -33,7 +33,7 @@ The broken files show **cause** (the default never died), not a scan of GitHub f
 
 A secrets-manager sticker is a tool observation, not that sentence.
 
-## What to look at — cause, not a trophy
+## What to look at: the cause, not a trophy
 
 Read `vulnerable/secrets.py`. `auth` keeps `DEFAULT = "sk-lab-hardcoded"` as an or-clause and allows when `current` is missing. Checks:
 
@@ -69,7 +69,7 @@ A settings library will still load a default if you leave one in code. FastAPI `
 python3 -m pytest labs/5.3/5.3-lab/tests --impl vulnerable
 ```
 
-Record `test_hardcoded_default_does_not_auth`. Do not search public GitHub. An environment error is not security evidence.
+Record `test_hardcoded_default_does_not_auth`. Do not search public GitHub. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

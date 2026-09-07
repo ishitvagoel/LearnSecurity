@@ -20,9 +20,9 @@ flowchart TD
   In -->|no| Deny[deny]
 ```
 
-The repaired files require membership in `{"app"}`. Production still needs that allow-list to be the *right* Role — `"app"` that can still list all Secrets is a lying least-privilege. A restricted pod profile remains a sibling grain. An outbound allow-list (the metadata hop) is not this pytest. Documented connection and retry toward the cluster API is extra, advanced work.
+The repaired files require membership in `{"app"}`. Production still needs that allow-list to be the *right* Role — `"app"` that can still list all Secrets is a lying least-privilege. A restricted pod profile remains a sibling grain. An outbound allow-list (the metadata hop) is not this check. Documented connection and retry toward the cluster API is extra, advanced work.
 
-Industry checklists want those accounts least-privileged. This pytest is that sentence for cluster-admin.
+Industry lists ask for those accounts least-privileged. This pytest is that sentence for cluster-admin.
 
 ## What the repaired files must show
 
@@ -73,4 +73,4 @@ Break-glass ClusterRole. The metadata hop. Documented cluster-API retry (extra, 
 
 ## What this page is not doing
 
-Do not apply manifests to a live cluster. Do not claim you finished an assurance gate from a CIS screenshot. Do not present a restricted pod profile as who-is-allowed on the API.
+Do not apply manifests to a live cluster. This page does not mark you as finished. from a CIS screenshot. Do not present a restricted pod profile as who-is-allowed on the API.

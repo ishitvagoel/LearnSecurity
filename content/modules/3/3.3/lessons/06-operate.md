@@ -24,9 +24,9 @@ A broken grant is a notice-and-recover problem, not a licence to dump the note i
 | Notice | `grant_drift` in CI; who connected; the local pair still red then green |
 | What the line holds | role name, request id; never the body |
 | Recover | Rotate password; fix `GRANT`; take migrator offline |
-| Leftover | Stolen `app` still reads one company; write that cell down |
+| Leftover | Stolen `app` still reads one company; write that rule down |
 
-Industry lists name detect, respond, recover. They do not configure `GRANT`. They do not prove this company rule. A log-product name is not the rule. Re-run `test_app_role_cannot_read_other_tenant` after any GRANT change; a green IAM dashboard is not that pytest.
+Industry lists talk about noticing, responding, and recovering. They do not configure `GRANT`. They do not prove this company rule. Naming a product is not the rule. Re-run `test_app_role_cannot_read_other_tenant` after any GRANT change; a green IAM dashboard is not that check.
 
 The migrate job is leftover you must keep named: it exists, it is offline at request time, and a leaked migrate secret is a different owner than a leaked `app` password. Do not collapse those two alerts into “database issue.”
 
@@ -50,4 +50,4 @@ Serverless: notice the function using the migrate secret. Clinic replica: notice
 
 ## What this page is not doing
 
-A log-product name is not the rule. Live GRANT dumps are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Naming a product is not the rule. Live GRANT dumps are out of scope. This site does not mark you as finished. Answer keys are not on this site.

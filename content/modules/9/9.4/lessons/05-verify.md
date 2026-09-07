@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# A broken ship_ok must fail the check
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -25,8 +25,8 @@ If both pass, the test is not looking at the empty map. If both fail, the fix is
 |---|---|
 | Normal | Mapped HIGH may ship (may pass on both) |
 | Wrong input | Unmapped HIGH → not ship; broken files must fail |
-| Abuse | Suppression with no owner is still deny (leftover if not in this pytest) |
-| Not claimed | A real GitHub tenant; the verification gate; a maturity score; that the mapped requirement is the right cell |
+| Abuse | Suppression with no owner is still deny (leftover if not in this check) |
+| Not claimed | A real GitHub tenant; the verification gate; a maturity score; that the mapped requirement is the right row |
 
 The file is `labs/9.4/9.4-lab/tests/test_property.py`. The test `test_unmapped_high_blocks_ship` is a **what-must-not-happen** test: always-true `ship_ok` is not allowed to count as a passing control.
 
@@ -41,7 +41,7 @@ A test that only greps a scanner name in a workflow without calling `ship_ok([HI
 
 ## What the tests do not prove
 
-- That the mapped requirement is the right coverage-map cell
+- That the mapped requirement is the right coverage-map row
 - That an isolation test exists
 - Live SCA reachability
 - Dependency confusion as an advanced leftover
@@ -62,8 +62,8 @@ Paste nothing from answer keys. Write fail/pass into your notes next to the HIGH
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts “scanner job ran” is not this topic. A live GitHub tenant is out of scope.
+A clinic example: a test that only asserts “scanner job ran” is not this topic. A live GitHub tenant is out of scope.
 
 ## What this page is not doing
 
-Do not add a live org trophy. Do not log secret-scanner payloads. Answer keys are not on this site.
+Do not treat a live org screenshot as proof. Do not log secret-scanner payloads. Answer keys are not on this site.

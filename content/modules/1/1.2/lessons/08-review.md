@@ -13,7 +13,7 @@ The folders `labs/1.2/1.2-authority-matrix/vulnerable/authority.py` and `vulnera
 
 ## Picture: hunt leftover permission at the mutation
 
-Leftover identity hides in defaults: the function that “already signed in,” the role that lost company scope, the helper that serializes before `decide()`. Classification starts at the protected effect. Everything that is not a current grant check at that effect is a candidate leftover path.
+Leftover identity hides in defaults: the function that “already signed in,” the role that lost company scope, the helper that serializes before `decide()`. Start from what must stay true. Everything that is not a current grant check at that effect is a candidate leftover path.
 
 ```mermaid
 flowchart TD

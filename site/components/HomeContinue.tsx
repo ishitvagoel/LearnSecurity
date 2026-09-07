@@ -3,6 +3,7 @@
 import type { ReactElement } from "react";
 import Link from "next/link";
 import { useVisitedModuleIds } from "@/components/ProgressToggle";
+import { TOPIC_TITLE } from "@/lib/catalog";
 
 export function HomeContinue(): ReactElement | null {
   const ids = useVisitedModuleIds();
@@ -21,7 +22,7 @@ export function HomeContinue(): ReactElement | null {
         href={`/learn/${encodeURIComponent(last)}/`}
         className="font-medium text-forest underline underline-offset-2"
       >
-        {last}
+        {TOPIC_TITLE[last] || last}
       </Link>
       .
     </p>

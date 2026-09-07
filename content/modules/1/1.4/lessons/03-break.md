@@ -41,7 +41,7 @@ python -m pytest labs/1.4/1.4-risk-register/tests --impl fixed
 
 `--impl vulnerable` **must fail** on `test_recovery_control_is_usable_and_accessible`. `--impl fixed` **must pass**. If both pass, you are not testing the rule.
 
-## What to look at — cause, not a trophy
+## What to look at: the cause, not a trophy
 
 Read `vulnerable/recovery.py` as a design note. Group what you see:
 

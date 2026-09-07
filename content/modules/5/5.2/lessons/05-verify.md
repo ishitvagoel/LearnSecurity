@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# A Base64 round-trip must fail the check
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -9,7 +9,7 @@
 
 ## Picture: Base64 round-trip must fail the check
 
-A passing collection count is not this cell. The failing observation on the broken files is **Base64 round-trip**.
+A passing collection count is not this rule. The failing observation on the broken files is **Base64 round-trip**.
 
 ```mermaid
 flowchart LR
@@ -37,14 +37,14 @@ python3 -m pytest labs/5.2/5.2-lab/tests --impl vulnerable
 python3 -m pytest labs/5.2/5.2-lab/tests --impl fixed
 ```
 
-`test_protect_does_not_return_plaintext` may pass on both if the broken files already Base64. That does not excuse the round-trip test. If the broken files do not fail Base64 decode, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
+`test_protect_does_not_return_plaintext` may pass on both if the broken files already Base64. That does not excuse the round-trip test. If the broken files do not fail Base64 decode, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
 - Key lifecycle (later)
 - TLS (later)
-- A post-quantum plan (advanced; not this pytest)
-- Nonce uniqueness (advanced; not this pytest)
+- A post-quantum plan (advanced; not this check)
+- Nonce uniqueness (advanced; not this check)
 - A production AES-GCM implementation
 
 Record those as leftover or later topics, not as silent passes.

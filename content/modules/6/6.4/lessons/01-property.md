@@ -5,13 +5,13 @@
 
 ## The rule
 
-The notes app stores an upload under a lab folder. The **filename is data**. After you join it to the folder and canonicalize, the object must still be that folder. An earlier topic taught data vs interpreter grammar; this week’s cell is **which file object** the path parser selected.
+The notes app stores an upload under a lab folder. The **filename is data**. After you join it to the folder and canonicalize, the object must still be that folder. An earlier topic taught data vs interpreter grammar; this week's rule is **which file object** the path parser selected.
 
 > `resolve` must not return a path outside `/tmp/sc-lab`. A `../` name is data that tried to become a different object. This practice checks the prefix and raises; it does not read host files.
 
 What must not happen is **a resolved path that leaves the lab folder**. That is a who-is-allowed failure of *which object*, plus whether the host store stays honest.
 
-Awareness lists name “path walk” as a family. They are not this sentence. Industry checklists want internally generated names or a hard check on user filenames, uploaded files not run as server code, and an extension that matches the content. Names inside zip files that walk out are a later, harder leftover — not this pytest. Starlette `UploadFile.filename` is not this sentence.
+Awareness lists name “path walk” as a family. They are not this sentence. Industry lists ask for internally generated names or a hard check on user filenames, uploaded files not run as server code, and an extension that matches the content. Names inside zip files that walk out are a later, harder leftover — not this check. Starlette `UploadFile.filename` is not this sentence.
 
 ## Picture: path grammar mixed with data
 
@@ -22,7 +22,7 @@ flowchart TD
   Mix -->|no| Prefix["stays under /tmp/sc-lab"]
 ```
 
-Who can act: an uploader who controls a filename field. What you trust: local `resolve()` under `/tmp/sc-lab`. Do not open host files outside this practice.
+Who could do this: an uploader who controls a filename field. What is supposed to stop this: local `resolve()` under `/tmp/sc-lab`. Do not open host files outside this practice.
 
 **A tool is not the rule.** A UUID stored name, an antivirus product, or a denylist of `..` is not this sentence.
 

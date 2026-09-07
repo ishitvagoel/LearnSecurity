@@ -23,9 +23,9 @@ flowchart TD
   Q -->|famous-bugs mapped| False[False comfort]
 ```
 
-Classification starts at the protected effect (`exec_sql` is None). Everything that is not allow-list membership at that call is a candidate always-run path. A prompt screenshot without that pytest is the same smell, not a different finding class.
+Start from what must stay true (`exec_sql` is None). Everything that is not allow-list membership at that call is a candidate always-run path. A prompt screenshot without that check is the same problem, not a different kind of finding.
 
-Retrieved docs are untrusted. Coding-assistant install tools are a later leftover. Name them, do not skip `test_exec_sql_tool_is_denied`. Do not claim you finished an assurance gate. Do not call a live model to prove the finding.
+Retrieved docs are untrusted. Coding-assistant install tools are a later leftover. Name them, do not skip `test_exec_sql_tool_is_denied`. This page does not mark you as finished. Do not call a live model to prove the finding.
 
 ## Seeded smells (label them yourself)
 

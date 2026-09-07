@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"gitignore"| False[False comfort]
 ```
 
-Classification starts at the protected effect (default dead after rotate; missing current denies). Everything that is not equality with current at that call is a candidate leftover path. A vault import without killing `DEFAULT` is the same smell, not a different finding class.
+Start from what must stay true (default dead after rotate; missing current denies). Everything that is not equality with current at that call is a candidate leftover path. A vault import without killing `DEFAULT` is the same problem, not a different kind of finding.
 
 ## Problems to find (name them yourself)
 

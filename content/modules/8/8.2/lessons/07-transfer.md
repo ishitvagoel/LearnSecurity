@@ -19,7 +19,7 @@ flowchart LR
   File["charts.json plaintext"] --> Reality[backup yields bodies]
 ```
 
-Renaming `save_note` to `save_chart` is not transfer. Person, object, path, and leftover change. If “available offline” writes `charts.json` while a fingerprint prompt unlocks the app screen, the cell is gone. `MODE_PRIVATE`, Room, and a local fingerprint do not wrap the file. iOS Keychain vs Android Keystore and desktop Electron are the same disk family — name them, do not image those devices here. The lab `aead:` prefix is a stand-in, not AES.
+Renaming `save_note` to `save_chart` is not transfer. Person, object, path, and leftover change. If “available offline” writes `charts.json` while a fingerprint prompt unlocks the app screen, the rule is gone. `MODE_PRIVATE`, Room, and a local fingerprint do not wrap the file. iOS Keychain vs Android Keystore and desktop Electron are the same disk family — name them, do not image those devices here. The lab `aead:` prefix is a stand-in, not AES.
 
 | Notes app this week | Clinic sketch |
 |---|---|
@@ -51,7 +51,7 @@ The clinic rewrite still has to keep the notes-app fork: `'secret'` not on disk 
 | Live clinic tablet imaging | Course rules |
 | “Fingerprint is MFA” | Local unlock, not 4.2 |
 | EncryptedSharedPreferences on another file | Wrong store |
-| Room insert as this cell | Wrong observation |
+| Room insert as this rule | Wrong observation |
 
 ## Practice
 
@@ -59,4 +59,4 @@ One page. No keys. `labs/8.2/8.2-lab` is the only running system you may break. 
 
 ## What this page is not doing
 
-Live-target device forensics. Real charts. Claiming Gate 8 from this page.
+Live-target device forensics. Real charts. This page does not finish a check-in.

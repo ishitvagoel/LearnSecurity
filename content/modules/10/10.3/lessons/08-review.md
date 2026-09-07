@@ -23,9 +23,9 @@ flowchart TD
   Q -->|CIS scan green| False[False comfort]
 ```
 
-Classification starts at the protected effect (cluster-admin denied). Everything that is not allow-list membership at that call is a candidate always-run path. A CIS screenshot without that pytest is the same smell, not a different finding class.
+Start from what must stay true (cluster-admin denied). Everything that is not allow-list membership at that call is a candidate always-run path. A CIS screenshot without that check is the same problem, not a different kind of finding.
 
-A restricted pod profile is pod spec. A network policy is egress. Instance metadata is a sibling leftover. Name them, do not skip `test_cluster_admin_pod_is_denied`. Do not claim you finished an assurance gate. Do not apply manifests to a live cluster to prove the finding.
+A restricted pod profile is pod spec. A network policy is egress. Instance metadata is a sibling leftover. Name them, do not skip `test_cluster_admin_pod_is_denied`. This page does not mark you as finished. Do not apply manifests to a live cluster to prove the finding.
 
 ## Seeded smells (label them yourself)
 

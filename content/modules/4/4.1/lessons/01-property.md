@@ -13,7 +13,7 @@ A leftover session cookie is still her. A leftover refresh token is still her. A
 
 So what must not happen: **a deleted user’s leftover session still works**. `delete_user` marks the profile deleted, but `SESSIONS["alice"]` stays true. The notes are still readable after the person is gone.
 
-Industry lists want all active sessions killed when an account is disabled or deleted. They also want further use of that session refused — kill the server-side state. Self-contained tokens need a denylist or a per-user not-before. Revoking a stolen login factor is advanced work, not this week's check. Identity guidance separates identifiers, authenticators, and session. This week's check is session-after-delete, not proofing who someone is.
+Industry lists ask for all active sessions killed when an account is disabled or deleted. They also want further use of that session refused — kill the server-side state. Self-contained tokens need a denylist or a per-user not-before. Revoking a stolen login factor is advanced work, not this week's check. Identity guidance separates identifiers, authenticators, and session. This week's check is session-after-delete, not proofing who someone is.
 
 ## Picture: the leftover outlives the person
 
@@ -81,7 +81,7 @@ The first command must fail. The second must pass. Tie the check to `session_val
 
 ## Use it somewhere new
 
-Clinic: a clinician leaves. The badge is disabled. The chart cookie must die the same day.
+A clinic example: a clinician leaves. The badge is disabled. The chart cookie must die the same day.
 
 ## What this page is not doing
 

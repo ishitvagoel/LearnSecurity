@@ -17,7 +17,7 @@ flowchart TD
   Alert --> Revoke[Revoke sessions if a password was used]
 ```
 
-Industry lists name detect, respond, recover. They do not bind RP ID. They do not pick a log product. Someone still has to own the leftover.
+Industry lists talk about noticing, responding, and recovering. They do not bind RP ID. They do not pick a log product. Someone still has to own the leftover.
 
 ## Signals that do not become a second leak
 
@@ -28,7 +28,7 @@ Industry lists name detect, respond, recover. They do not bind RP ID. They do no
 | Recover | Revoke sessions; force a re-bind |
 | Leftover | Password-only users; honest labeled leftover |
 
-A log-product name is not the rule. A green “MFA enabled” tile is not that pytest. Re-run `test_password_is_not_phishing_resistant` after any login-copy change. Origin-mismatch WebAuthn and password-at-lookalike are two observations of the same claim: do not close one without retesting the other.
+Naming a product is not the rule. A green “MFA enabled” tile is not that check. Re-run `test_password_is_not_phishing_resistant` after any login-copy change. Origin-mismatch WebAuthn and password-at-lookalike are two observations of the same claim: do not close one without retesting the other.
 
 An identity-provider dashboard will show “2FA enrolled” and stay silent when the login banner still says “phishing-resistant password.” Notice must look at the **helper boolean**, not the vendor tile. If the alert includes a password, you have opened a second leak.
 
@@ -51,7 +51,7 @@ Reject any line that includes a password, OTP, note body, or “MFA handled.”
 
 ## Use it somewhere new
 
-Clinic: notice lookalike SSO; do not paste the staff password into the ticket. Do not visit a live lookalike.
+A clinic example: notice lookalike SSO; do not paste the staff password into the ticket. Do not visit a live lookalike.
 
 ## A usable leftover
 
@@ -59,4 +59,4 @@ Do not encode “phishing-resistant” as green-only. Keyboard users still need 
 
 ## What this page is not doing
 
-A log-product name is not the rule. Live phishing hunts are out of scope. Answer keys are not on this site.
+Naming a product is not the rule. Live phishing hunts are out of scope. Answer keys are not on this site.

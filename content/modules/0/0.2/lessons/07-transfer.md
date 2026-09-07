@@ -21,15 +21,15 @@ Rewrite the course sentence. Include:
 5. leftover risk (tooling gaps, memorized answers, 1.4 hidden by a fast-track);
 6. if skip is shown in a UI, green-only is not evidence; 1.4 must remain reachable.
 
-## Picture: 100 percent vs a deny cell
+## Picture: 100 percent vs a deny rule
 
 ```mermaid
 flowchart LR
   Pct[100 percent] --> Belief[knows isolation]
-  Lab["1.2 deny cell"] --> Reality[evidence]
+  Lab["1.2 deny rule"] --> Reality[evidence]
 ```
 
-A percentage is a tool observation. A 1.2 deny cell is the evidence. A job-title list names jobs. An LMS stores numbers. Neither is check-in 1. FastAPI, Next.js, and a quiz vendor’s score report do not observe whether the new hire can write a company-B deny cell. Tooling-bridge skips (Git/SQL/HTTP) remain a different function: they must not be keyed off this 100%.
+A percentage is a tool observation. A 1.2 deny rule is the evidence. A job-title list names jobs. An LMS stores numbers. Neither is check-in 1. FastAPI, Next.js, and a quiz vendor’s score report do not observe whether the new hire can write a company-B deny rule. Tooling-bridge skips (Git/SQL/HTTP) remain a different function: they must not be keyed off this 100%.
 
 ## What is not good enough
 

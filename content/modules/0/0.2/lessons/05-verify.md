@@ -1,4 +1,4 @@
-# Evidence is the quiz skip denied, then a passing pair
+# A perfect quiz score must not skip the next part
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -23,7 +23,7 @@ flowchart LR
 | Normal | After the fix, score 0 is still false (`test_low_score_does_not_skip`) |
 | The bad case | score 100 → false; the broken files must fail that assertion |
 | Failure | A missing diagnostic defaults to no skip (these files always return a bool) |
-| Not claimed | You can write a deny cell; Git/SQL/HTTP gaps are gone; 1.4 was taught; check-in 1 is done |
+| Not claimed | You can write a deny rule; Git/SQL/HTTP gaps are gone; 1.4 was taught; check-in 1 is done |
 
 The checks live in `labs/0.2/0.2-bridge/tests/test_diagnostic.py`. The first one is a **what-must-not-happen** check: a high score treated as a 1.2 skip must not count as a passing control.
 
@@ -36,7 +36,7 @@ Honest low-score tests may pass on both. If the broken files do not fail the sco
 
 ## What the checks do not prove
 
-- You can write a deny cell (that is the 1.2 practice)
+- You can write a deny rule (that is the 1.2 practice)
 - Git/SQL/HTTP gaps are gone
 - 1.4 accessibility was taught
 - Job-title competency
@@ -50,7 +50,7 @@ Run both versions this session. Write the fail/pass pair next to your matrix row
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts “onboarding quiz exists” is not this check. A test that logs into the clinic LMS is out of scope.
+A clinic example: a test that only asserts “onboarding quiz exists” is not this check. A test that logs into the clinic LMS is out of scope.
 
 ## What this page is not doing
 

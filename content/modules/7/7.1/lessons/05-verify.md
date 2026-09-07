@@ -50,12 +50,12 @@ Record those as leftover risk or later topics, not as silent passes.
 
 ## Practice
 
-Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the map-page row. Reject a “check” that only greps `extra = 'forbid'` in a Pydantic model without calling `apply(..., {"is_admin": true})`. An environment error is not security evidence.
+Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the map-page row. Reject a “check” that only greps `extra = 'forbid'` in a Pydantic model without calling `apply(..., {"is_admin": true})`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic PATCH `{is_staff:true}`. A check that only asserts HTTP 200 on `/patients/{id}` is not this cell (see 9.3). A public API probe is out of scope.
+Clinic PATCH `{is_staff:true}`. A check that only asserts HTTP 200 on `/patients/{id}` is not this rule (see 9.3). A public API probe is out of scope.
 
 ## What this page is not doing
 
-Do not add a live OpenAPI trophy. Do not log PATCH bodies. Answer keys are not on this site.
+Do not treat a live OpenAPI screenshot as proof. Do not log PATCH bodies. Answer keys are not on this site.

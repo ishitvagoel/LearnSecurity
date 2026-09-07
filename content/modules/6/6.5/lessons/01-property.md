@@ -11,7 +11,7 @@ The notes app may unfurl a link so a note can show a preview. That URL is **untr
 
 What must not happen is **a server-side fetch to link-local metadata allowed**. In a real cloud that is a secrecy failure of the machine’s own identity. Here the test fails closed on the string.
 
-Industry lists want an allow-list of protocols, hosts, paths, and ports before the server calls another service. They want an outbound allow-list. They want open redirects onto an allow-list. Telling the person they are about to leave the site is **advanced** work, not this week’s pytest. A famous-bugs nickname for server-side requests is awareness after the cause. `requests.get` is not this sentence.
+Industry lists ask for an allow-list of protocols, hosts, paths, and ports before the server calls another service. They want an outbound allow-list. They want open redirects onto an allow-list. Telling the person they are about to leave the site is **advanced** work, not this week's check. A famous-bugs nickname for server-side requests is awareness after the cause. `requests.get` is not this sentence.
 
 ## Picture: the server is the deputy
 
@@ -23,7 +23,7 @@ flowchart TD
   Net -->|allow-listed host| Ok[named lab host]
 ```
 
-Who can act: a member who supplies a preview URL. What you trust in this practice: a local `allowed(url)` check. Do not probe cloud metadata, loopback services, or public hosts.
+Who could do this: a member who supplies a preview URL. What you trust in this practice: a local `allowed(url)` check. Do not probe cloud metadata, loopback services, or public hosts.
 
 **The tool (not the rule):** “HTTPS only” as a string prefix, a web filter, or `requests` timeouts.
 
@@ -60,7 +60,7 @@ The app’s promise is: **this** `allowed` check, on **this** practice string, i
 
 - DNS rebinding after allow — pin the IP or use a dedicated egress proxy (named leftover).
 - `file:` scheme, IPv6, decimal IPs, redirect off the list.
-- Open redirect of the *browser* is a sister check, not this pytest.
+- Open redirect of the *browser* is a sister check, not this check.
 - Request splitting and cache-key confusion wait for hop work (2.2).
 
 ## Practice

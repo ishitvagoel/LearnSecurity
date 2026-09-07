@@ -23,7 +23,7 @@ flowchart TD
   Q -->|zero trust dashboard| False[False comfort]
 ```
 
-The review starts at the protected effect (Alice session yields `None`). Everything that is not a `service == "worker-sc"` check at that call is a candidate confused-deputy path. A private network without that pytest is the same smell, not a different finding class.
+The review starts at the protected effect (Alice session yields `None`). Everything that is not a `service == "worker-sc"` check at that call is a candidate confused-deputy path. A private network without that check is the same problem, not a different kind of finding.
 
 A god-mode `DATABASE_URL` (3.3) and retry after revoke (2.4) are other worker holes — name them, do not skip `test_user_session_is_not_worker_identity`.
 

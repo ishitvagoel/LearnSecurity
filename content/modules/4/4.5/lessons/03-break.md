@@ -19,7 +19,7 @@ Do not replay a production access token, an employer OpenID tenant, or a classma
 
 What must not happen: a JWT with the wrong audience accepted as a notes-app session. `accept_token({"sub": "alice", "aud": "other-api"}, "securecollab-api")` is true.
 
-Who can act here: a **bearer minted for another API** (confused deputy), or a stolen token whose `sub` looks familiar. What you are supposed to trust: the **resource server compares `aud` to itself** before who-is-allowed. Authlib “verify signature,” Auth0, and “we turned on OpenID Connect” are not what you trust for this cell.
+Who could do this: a **bearer minted for another API** (confused deputy), or a stolen token whose `sub` looks familiar. What is supposed to stop this: the **resource server compares `aud` to itself** before who-is-allowed. Authlib “verify signature,” Auth0, and “we turned on OpenID Connect” are not enough.
 
 ## Picture: sub without aud
 
@@ -34,7 +34,7 @@ The broken files show **cause** (audience never consulted), not a trophy dump of
 
 A library saying the signature is fine is a tool observation, not that sentence.
 
-## What to look at — cause, not a trophy
+## What to look at: the cause, not a trophy
 
 Read `vulnerable/jwt_aud.py`. `accept_token` returns true when `sub` is in the dict. Checks:
 
@@ -70,11 +70,11 @@ Authlib and many JWT libraries will check a signature if you give them a key and
 python3 -m pytest labs/4.5/4.5-lab/tests --impl vulnerable
 ```
 
-Record `test_wrong_audience_is_rejected`. Do not weaken it to “the JWT verifies.” An environment error is not security evidence.
+Record `test_wrong_audience_is_rejected`. Do not weaken it to “the JWT verifies.” A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic: FHIR token minted for another hospital’s API. Predict without leaving this directory. Do not hit a live FHIR endpoint.
+A clinic example: FHIR token minted for another hospital’s API. Predict without leaving this directory. Do not hit a live FHIR endpoint.
 
 ## What this page is not doing
 

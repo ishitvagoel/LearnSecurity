@@ -20,7 +20,7 @@ flowchart TD
 
 The lab’s repaired files record keys in `_SEEN` and return on replay. Production should persist `(actor, key) → share_id` and return that id. The key the client sends is data: it must be scoped to the sharer so company B cannot replay company A’s key onto a different note. Clocks may skew; do not use wall time as the only uniqueness.
 
-Industry checklists want a business step to succeed all the way or roll back. The lab is that sentence for share-count under retry, not a payment network.
+Industry lists ask for a business step to succeed all the way or roll back. The lab is that sentence for share-count under retry, not a payment network.
 
 ## What the repaired files must show
 
@@ -28,8 +28,8 @@ Industry checklists want a business step to succeed all the way or roll back. Th
 |---|---|
 | One call with k1 | `share_count() == 1` |
 | Two calls with k1 | `share_count() == 1` |
-| Two calls with different keys | not this pytest; who-is-allowed policy may still cap shares |
-| Key store unreachable | do not insert (not in this pytest; write it as leftover) |
+| Two calls with different keys | not this check; who-is-allowed policy may still cap shares |
+| Key store unreachable | do not insert (not in this check; write it as leftover) |
 
 ## What this is not
 

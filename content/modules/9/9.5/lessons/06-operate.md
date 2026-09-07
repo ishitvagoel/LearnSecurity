@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Reopen[reopen]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a ticket product. They do not prove this finding was retested. Someone still has to own the leftover.
+Industry lists talk about noticing, responding, and recovering. They do not pick a ticket product. They do not prove this finding was retested. Someone still has to own the leftover.
 
-Re-run `test_cannot_close_without_retest` after any close-workflow change. A green "PDF attached" tile is not that pytest. Extra fields on the note and a role-change cache are other bad results in the same family — inventory them before you claim recover.
+Re-run `test_cannot_close_without_retest` after any close-workflow change. A green "PDF attached" tile is not that check. Extra fields on the note and a role-change cache are other bad results in the same family — inventory them before you claim recover.
 
 ## Signals that do not become a second leak
 
@@ -46,7 +46,7 @@ If your alert includes the matching note, you have copied the leak into the pagi
 
 ## What the framework does vs what you still have to check
 
-The same wrong-URL `"pass"`, extra-field variants, and role-change caches that bypass this practice will also bypass a "scan our ticket dashboard" detector. Name those places before you claim recover. A ticket-product name is not the rule.
+The same wrong-URL `"pass"`, extra-field variants, and role-change caches that bypass this practice will also bypass a "scan our ticket dashboard" detector. Name those places before you claim recover. Naming a product is not the rule.
 
 Cause vs cost stays split here too: the **cause** is close looking at intent (PDF, ticket Done) instead of `retest == "pass"`; the **cost** is an isolation hole that looks fixed; **how you stop it** is the retest equality; **how you notice** is `finding_closed_without_retest`; **how you recover** is reopen and re-run the same isolation pytest. What the tool cannot do: this alert does not prove the `"pass"` hit the same URL, and it does not search extra fields or role-change caches.
 
@@ -66,8 +66,8 @@ Reject any line that includes a note body, a live-target URL, or "assurance gate
 
 ## Use it somewhere new
 
-Clinic: reopen the PDF-shelf ticket; do not attach patient rows. Do not pentest a live clinic system.
+A clinic example: reopen the PDF-shelf ticket; do not attach patient rows. Do not pentest a live clinic system.
 
 ## What this page is not doing
 
-A ticket-product name is not the rule. Do not claim you finished an assurance gate. A known-exploited listing is not a scan licence. Answer keys are not on this site.
+Naming a product is not the rule. This page does not mark you as finished. A known-exploited listing is not a scan licence. Answer keys are not on this site.

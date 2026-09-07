@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Expire[expire or re-accept]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a governance product. They do not prove this schema. Someone still has to own the leftover.
+Industry lists talk about noticing, responding, and recovering. They do not pick a governance product. They do not prove this schema. Someone still has to own the leftover.
 
-Re-run `test_exception_needs_owner_review_and_wcag` after any register-form change. A green “maturity 2.5” tile is not that pytest. Expired `review_by` dates are the same family — inventory them before claiming recover.
+Re-run `test_exception_needs_owner_review_and_wcag` after any register-form change. A green “maturity 2.5” tile is not that check. Expired `review_by` dates are the same family — inventory them before claiming recover.
 
 ## Signals that do not become a second leak
 
@@ -66,8 +66,8 @@ Reject any line that includes a secret, an “assurance gate complete,” or a p
 
 ## Use it somewhere new
 
-Clinic: deny the HIPAA exception; do not paste chart text into the ticket. Do not open a live governance tenant.
+A clinic example: deny the HIPAA exception; do not paste chart text into the ticket. Do not open a live governance tenant.
 
 ## What this page is not doing
 
-A maturity-model name is not the rule. Do not claim you finished an assurance gate. An unverified pledge stays unverified. Answer keys are not on this site.
+A maturity-model name is not the rule. This page does not mark you as finished. An unverified pledge stays unverified. Answer keys are not on this site.

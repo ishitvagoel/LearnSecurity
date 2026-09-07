@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Stop[block ship]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a scanner product. They do not prove this finding is owned. Someone still has to own the leftover.
+Industry lists talk about noticing, responding, and recovering. They do not pick a scanner product. They do not prove this finding is owned. Someone still has to own the leftover.
 
-Re-run `test_unmapped_high_blocks_ship` after any scanner-rule change. A green “code scanning on” tile is not that pytest. SCA CVEs that are not actually called still need an *owner* on the map — inventory them before you claim recover.
+Re-run `test_unmapped_high_blocks_ship` after any scanner-rule change. A green “code scanning on” tile is not that check. SCA CVEs that are not actually called still need an *owner* on the map — inventory them before you claim recover.
 
 ## Signals that do not become a second leak
 
@@ -46,13 +46,13 @@ If your alert includes the matching scanner snippet, you have copied the leak in
 
 ## What the framework does vs what you still have to check
 
-The same who-is-allowed holes that bypass this practice will also bypass a “scan our dashboard” detector. Name those places before you claim recover. A scanner-product name is not the rule.
+The same who-is-allowed holes that bypass this practice will also bypass a “scan our dashboard” detector. Name those places before you claim recover. Naming a product is not the rule.
 
 ## Can people still use it
 
 The triage screen must say *why* F1 is blocked, in words. Do not encode “blocked” as color only, or people will mass-suppress. If operators see a blocked-ship badge, do not encode it as color only.
 
-Cause vs cost stays split here too: the **cause** is CI’s `ship_ok` still always true (or a new HIGH with no map row); the **cost** is an unowned HIGH in production; **how you stop it** is the join; **how you notice** is `unmapped_high_blocks`; **how you recover** is map-or-fix, not a quiet severity downgrade. What the tool cannot do: this alert does not prove the mapped requirement is the right coverage-map cell, and it does not cover who-is-allowed blind spots.
+Cause vs cost stays split here too: the **cause** is CI’s `ship_ok` still always true (or a new HIGH with no map row); the **cost** is an unowned HIGH in production; **how you stop it** is the join; **how you notice** is `unmapped_high_blocks`; **how you recover** is map-or-fix, not a quiet severity downgrade. What the tool cannot do: this alert does not prove the mapped requirement is the right coverage-map row, and it does not cover who-is-allowed blind spots.
 
 ## Practice
 
@@ -66,8 +66,8 @@ Reject any line that includes a secret, a note body, or “verification gate com
 
 ## Use it somewhere new
 
-Clinic: block a release with fifty unmapped HIGHs; do not paste scanner snippets with fake patient text into Slack. Do not scan a live org.
+A clinic example: block a release with fifty unmapped HIGHs; do not paste scanner snippets with fake patient text into Slack. Do not scan a live org.
 
 ## What this page is not doing
 
-A scanner-product name is not the rule. Live org traces are out of scope. Answer keys are not on this site.
+Naming a product is not the rule. Live org traces are out of scope. Answer keys are not on this site.

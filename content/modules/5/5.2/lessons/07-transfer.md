@@ -30,7 +30,7 @@ flowchart LR
   B64 --> Reader[Admin reads SSN]
 ```
 
-If the column name is `ssn_encrypted` and the bytes are Base64, the cell is gone. FastAPI, a Postgres `bytea` type, and a disk-encryption checkbox do not invert the reader. Argon2 on the SSN is the wrong rule (password stretching, not field encryption). HTTPS does not encrypt the column.
+If the column name is `ssn_encrypted` and the bytes are Base64, the rule is gone. FastAPI, a Postgres `bytea` type, and a disk-encryption checkbox do not invert the reader. Argon2 on the SSN is the wrong rule (password stretching, not field encryption). HTTPS does not encrypt the column.
 
 The clinic rewrite still has to keep the notes-app fork: Base64 decode of the stored stand-in is not the SSN. Renaming the column or wrapping `b64encode` in a function named `encrypt` leaves the reader unchanged. The local pytest analogue is `test_protect_is_not_mere_encoding` — on a practice, not a live clinic system.
 

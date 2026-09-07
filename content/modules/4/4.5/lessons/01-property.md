@@ -11,7 +11,7 @@ The notes app will later accept access tokens at its API. An access token is a c
 
 What must not happen is **a JWT with the wrong audience accepted as a notes-app session**. The token is treated as a login even though it was minted for someone else. Then who-is-allowed runs as whoever `sub` names.
 
-Industry checklists want the API to accept only tokens meant for that service. They want tokens only in components that need them (in a backend-for-frontend, the browser does not hold the access token). They want PKCE or `state` on the code flow. Sender-constrained tokens (DPoP / mutual TLS) are an advanced extra, not this week’s pytest. RFC 9700 is the OAuth 2.0 security practice. RFC 10017 is the browser-app practice. RFC 8252 is native apps. Do not present OAuth 2.1 as final.
+Industry lists ask for the API to accept only tokens meant for that service. They want tokens only in components that need them (in a backend-for-frontend, the browser does not hold the access token). They want PKCE or `state` on the code flow. Sender-constrained tokens (DPoP / mutual TLS) are an advanced extra, not this week's check. RFC 9700 is the OAuth 2.0 security practice. RFC 10017 is the browser-app practice. RFC 8252 is native apps. Do not present OAuth 2.1 as final.
 
 ## Picture: audience is a name, not a signature
 
@@ -74,8 +74,8 @@ The first command must fail on the deny tests. The second must pass.
 
 ## Use it somewhere new
 
-Clinic: wrong-audience FHIR token. Phone-app redirect (claimed HTTPS, not a custom scheme) and backend-for-frontend vs browser token storage.
+A clinic example: wrong-audience FHIR token. Phone-app redirect (claimed HTTPS, not a custom scheme) and backend-for-frontend vs browser token storage.
 
 ## What this page is not doing
 
-Live identity providers, real patient tokens, weaponized `alg=none` copy-paste. Course gates stay unclaimed without product evidence. Answer keys are not on this site.
+Live identity providers, real patient tokens, weaponized `alg=none` copy-paste. This site does not mark you as finished. without product evidence. Answer keys are not on this site.

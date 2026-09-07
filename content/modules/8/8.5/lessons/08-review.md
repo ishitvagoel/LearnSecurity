@@ -23,7 +23,7 @@ flowchart TD
   Q -->|Play Data safety| False[False comfort]
 ```
 
-Classification starts at the protected effect (`'secret'` absent). Everything that is not redact-before-send at that call is a candidate extra copy. A store privacy screenshot without that pytest is the same smell, not a different finding class.
+Start from what must stay true (`'secret'` absent). Everything that is not redact-before-send at that call is a candidate extra copy. A store privacy screenshot without that check is the same problem, not a different kind of finding.
 
 Leftover `READ_LOGS`, tracker SDKs, and web crash reports (10.5) are other places — name them, do not skip `test_crash_report_omits_note_body`. A spreadsheet row without a test is 9.1.
 

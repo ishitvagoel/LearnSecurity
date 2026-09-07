@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"OpenID Connect is on"| False[False comfort]
 ```
 
-Classification starts at the protected effect (wrong aud denied). Everything that is not an `aud` comparison at that call is a candidate leftover path.
+Start from what must stay true (wrong aud denied). Everything that is not an `aud` comparison at that call is a candidate leftover path.
 
 ## Problems to find (name them yourself)
 

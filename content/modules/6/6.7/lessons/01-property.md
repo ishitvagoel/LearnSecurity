@@ -11,7 +11,7 @@ The notes app lets a member export notes. Export copies note bodies into a CSV. 
 
 What must not happen is **unbounded exports (fourth allowed)**. That burns availability and cost. It also makes extra CSVs of note bodies, which is a second secrecy problem from the copies lesson (5.1).
 
-Industry lists want a stop against scripts that burn quota and costly work. They want per-person and whole-app limits written down, then actually enforced. Human timing tricks are **advanced** work, not this week’s pytest. An edge proxy’s request limit is not this sentence.
+Industry lists ask for a stop against scripts that burn quota and costly work. They want per-person and whole-app limits written down, then actually enforced. Human timing tricks are **advanced** work, not this week's check. An edge proxy’s request limit is not this sentence.
 
 ## Picture: a resource account per person
 
@@ -23,7 +23,7 @@ flowchart TD
   Cap -->|no| Deny[Deny]
 ```
 
-Who can act: a scripted member, or anyone who stole a session. What you trust in this practice: local `allow(n)`. An IP limit at the edge with no identity is **shared fate**: people behind one office network share a bucket, and a stolen session is not a new IP.
+Who could do this: a scripted member, or anyone who stole a session. What you trust in this practice: local `allow(n)`. An IP limit at the edge with no identity is **shared fate**: people behind one office network share a bucket, and a stolen session is not a new IP.
 
 **The tool (not the rule):** a CAPTCHA, autoscaling, or a frontend that disables the export button.
 

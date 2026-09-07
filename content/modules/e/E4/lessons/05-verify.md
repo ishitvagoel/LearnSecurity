@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# The broken files must fail the oversize copy
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -30,7 +30,7 @@ python3 -m pytest labs/E4/e4-lab/tests --impl vulnerable
 python3 -m pytest labs/E4/e4-lab/tests --impl fixed
 ```
 
-Honest `test_short_copy_may_fit` may pass on both implementations. That does not excuse the oversize deny test. If the broken files do not fail `test_copy_does_not_exceed_buffer`, the lab is miswired — fix the wiring, not the check. An environment error is not security evidence.
+Honest `test_short_copy_may_fit` may pass on both implementations. That does not excuse the oversize deny test. If the broken files do not fail `test_copy_does_not_exceed_buffer`, the lab is miswired — fix the wiring, not the check. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
@@ -48,8 +48,8 @@ Run both this session from the lab directory if needed. Write the fail/pass pair
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts “the language is memory-safe” is not this cell. A third-party binary is out of scope.
+A clinic example: a test that only asserts “the language is memory-safe” is not this rule. A third-party binary is out of scope.
 
 ## What this page is not doing
 
-Do not add a native-overflow trophy. Do not log file bytes. Answer keys are not on this site. Course gates stay not-attempted.
+Do not treat a native overflow as a prize. Do not log file bytes. Answer keys are not on this site. This page does not finish a check-in.

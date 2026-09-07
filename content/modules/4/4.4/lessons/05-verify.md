@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# The broken files must fail the n2 and cross-company denies
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -30,7 +30,7 @@ python3 -m pytest labs/4.4/4.4-lab/tests --impl vulnerable
 python3 -m pytest labs/4.4/4.4-lab/tests --impl fixed
 ```
 
-Honest-path tests may pass on both implementations. That does not excuse the deny tests. If the broken files do not fail bob×n2, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
+Honest-path tests may pass on both implementations. That does not excuse the deny tests. If the broken files do not fail bob×n2, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 

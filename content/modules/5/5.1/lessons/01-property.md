@@ -13,7 +13,7 @@ Encrypting a warehouse you still keep is not deletion. A privacy-policy PDF is n
 
 So what must not happen: **analytics (or search) still holds the note body after account deletion**. The body was already confidential. After the person leaves, keeping the field is leftover privacy too. Encryption without erasure still retains.
 
-Industry lists want you to name sensitive data, write down how long you keep it, not hand the body to a second party you do not control, and actually carry those rules out. A scheduled warehouse job that maybe runs later is advanced work, not this week's check. A published privacy framework names identify, govern, control, and communicate. A newer draft of that framework is still a draft. A threat-method name does not walk the copies. The local maps do. Phone privacy profiles come later. A country privacy-law name is awareness, not this pytest. A database DELETE is not this sentence.
+Industry lists ask for you to name sensitive data, write down how long you keep it, not hand the body to a second party you do not control, and actually carry those rules out. A scheduled warehouse job that maybe runs later is advanced work, not this week's check. A published privacy framework names identify, govern, control, and communicate. A newer draft of that framework is still a draft. A threat-method name does not walk the copies. The local maps do. Phone privacy profiles come later. A country privacy-law name is awareness, not this check. A database DELETE is not this sentence.
 
 ## Picture: the deletion graph
 
@@ -81,7 +81,7 @@ The first command must fail. The second must pass. Tie the failures to `body_ret
 
 ## Use it somewhere new
 
-Clinic: an appointment card that still stores notes after the patient record is deleted.
+A clinic example: an appointment card that still stores notes after the patient record is deleted.
 
 ## Can people still use it
 

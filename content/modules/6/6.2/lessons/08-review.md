@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"cleaner after innerHTML"| False[False comfort]
 ```
 
-Classification starts at the protected effect (`&lt;` present, extra tags absent). Everything that is not encoding at that sink is a candidate grammar mix. A content-security header in report-only mode without an encode check is the same smell, not a different finding class.
+Start from what must stay true (`&lt;` present, extra tags absent). Everything that is not encoding at that sink is a candidate grammar mix. A content-security header in report-only mode without an encode check is the same problem, not a different kind of finding.
 
 A markdown pipeline that emits raw tags after this template is encoded is 2.1, not a reason to skip `test_angle_brackets_are_encoded`. HttpOnly cookies (2.3) do not encode HTML.
 

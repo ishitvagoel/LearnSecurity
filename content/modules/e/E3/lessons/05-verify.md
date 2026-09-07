@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# Charging twice with the same key must fail
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -48,8 +48,8 @@ Run both this session from the practice folder if needed. Write the fail/pass pa
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts “the processor returned 200” is not this cell. A live processor is out of scope.
+A clinic example: a test that only asserts “the processor returned 200” is not this rule. A live processor is out of scope.
 
 ## What this page is not doing
 
-Do not add a live-processor trophy. Do not log card-number-like strings. Answer keys are not on this site. This site does not mark you as finished.
+Do not treat a live processor screenshot as proof. Do not log card-number-like strings. Answer keys are not on this site. This site does not mark you as finished.

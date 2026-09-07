@@ -19,7 +19,7 @@ Do not paste this exercise onto a public host, employer clinic, or live store AP
 
 What must not happen: **a debug build is allowed to call production export**. `api_allowed("debug", "ok")` returns true.
 
-Attacker capability in this practice: a leaked debug APK or student flavor. That stands in for a clinic debug flavor that reuses the prod application id and API key so testers can “hit real data.” What you trust: `api_allowed` is supposed to be a **server channel check** next to 8.1 attest. R8, Play App Signing, root detection, and `minifyEnabled` are not what you trust for this cell.
+Who could do this: a leaked debug APK or student flavor. That stands in for a clinic debug flavor that reuses the prod application id and API key so testers can “hit real data.” What is supposed to stop this: `api_allowed` is supposed to be a **server channel check** next to 8.1 attest. R8, Play App Signing, root detection, and `minifyEnabled` are not enough.
 
 ## Picture: attest string is enough
 
@@ -30,7 +30,7 @@ flowchart TD
 
 The broken files show **cause** (prod trusts any build). Do not attack store listings. What has to be true first: `api_allowed` returns true for every pair. You do not need Gradle. You must not unpack a store APK.
 
-Last topic (8.1) already said the APK is hostile. This cell is **debug must not call prod even if attest=ok**. Secrets in the APK are a 5.3 leftover, not this grant.
+Topic 8.1 already said the APK is hostile. This rule is **debug must not call prod even if attest=ok**. Secrets in the APK are a 5.3 leftover, not this grant.
 
 ## What to read in the broken files
 
@@ -68,7 +68,7 @@ Gradle `debug` / `release` types are not a server check. R8 does not authorize. 
 python3 -m pytest labs/8.4/8.4-lab/tests --impl vulnerable
 ```
 
-Run from `labs/8.4/8.4-lab` if a repo-root collection picks up `site/`. Record `test_debug_build_cannot_call_prod_export`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/8.4/8.4-lab` if a repo-root collection picks up `site/`. Record `test_debug_build_cannot_call_prod_export`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

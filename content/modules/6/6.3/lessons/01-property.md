@@ -11,7 +11,7 @@ The notes app already treats a share as a grant. Sharing a note is a **change th
 
 What must not happen is **a cross-site POST that changes a share, authorized by cookie alone**. That is an integrity failure of share grants: an unwanted share, with the browser acting as a helper that sent the leftover cookie.
 
-Industry checklists want an anti-forgery token, or an extra header that a simple cross-site form cannot set, when a CORS preflight is not the defense. They want unsafe methods (not GET) for changes, or a strict fetch-metadata check. They want SameSite set for the cookie’s purpose — a helper, not the whole rule. Extra rows about authenticated embeds and CORP are **advanced**, not this week’s pytest.
+Industry lists ask for an anti-forgery token, or an extra header that a simple cross-site form cannot set, when a CORS preflight is not the defense. They want unsafe methods (not GET) for changes, or a strict fetch-metadata check. They want SameSite set for the cookie’s purpose — a helper, not the whole rule. Extra rows about authenticated embeds and CORP are **advanced**, not this week's check.
 
 ## Picture: leftover cookie authority without site-bound intent
 
@@ -23,7 +23,7 @@ flowchart TD
   App -->|cookie only| Share[unwanted share grant]
 ```
 
-Who can act here: a foreign origin that can cause the victim’s browser to send the leftover cookie. What you trust is local `allow_share(origin, expected, token)`. Do not visit other people’s sites.
+Who could do this: a foreign origin that can cause the victim’s browser to send the leftover cookie. What you trust is local `allow_share(origin, expected, token)`. Do not visit other people’s sites.
 
 **A tool is not the rule.** SameSite=Lax, a CORS `*` reflex, or “JSON APIs cannot CSRF.”
 
@@ -82,4 +82,4 @@ Clinic “share record with partner” POST. postMessage, clickjacking, CORS `*`
 
 ## What this page is not doing
 
-Live third-party CSRF, clickjacking trophies, dumping lab Python into notes. Course gates stay unclaimed without learner or product evidence. Answer keys are not on this site.
+Live third-party CSRF, clickjacking trophies, dumping lab Python into notes. This page does not finish a check-in. Answer keys are not on this site.

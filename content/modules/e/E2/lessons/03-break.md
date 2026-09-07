@@ -19,7 +19,7 @@ Do not paste this exercise onto a public site, employer board, or live clinic po
 
 What must not happen: **Report-Only treated as isolation**. `isolation_enforced({"Content-Security-Policy-Report-Only": "default-src 'none'"})` returns true.
 
-Attacker capability in this practice: a script that would only be logged. That stands in for “we ship Report-Only so scripts are blocked,” a Helmet default treated as encoding (6.2), or a green reporting dashboard treated as isolation. What you trust: `isolation_enforced` is supposed to require the **enforcing** header name. Next.js header helpers, a CDN, and FastAPI are not in what you trust for this rule.
+Who could do this: a script that would only be logged. That stands in for “we ship Report-Only so scripts are blocked,” a Helmet default treated as encoding (6.2), or a green reporting dashboard treated as isolation. What is supposed to stop this: `isolation_enforced` is supposed to require the **enforcing** header name. Next.js header helpers, a CDN, and FastAPI are not enough.
 
 ## Picture: any CSP-looking header counts
 
@@ -69,7 +69,7 @@ Run checks against the broken files (they **must fail** on Report-Only counted a
 python3 -m pytest labs/E2/e2-lab/tests --impl vulnerable
 ```
 
-Run from `labs/E2/e2-lab` if a repo-root collection picks up `site/`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/E2/e2-lab` if a repo-root collection picks up `site/`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

@@ -49,7 +49,7 @@ Rewrite the notes-app sentence. Include:
 |---|---|
 | “ORM is on” | Brand theater |
 | Live clinic probe | Course rules |
-| Row-level rule as the rule | Extra check, not this cell |
+| Row-level rule as the rule | Extra check, not this rule |
 | HTTP 200 as binding evidence | Wrong observation |
 | Scanner name as the invariant | Awareness after the cause |
 

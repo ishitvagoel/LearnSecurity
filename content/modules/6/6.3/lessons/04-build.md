@@ -26,7 +26,7 @@ flowchart TD
 
 The lab’s repaired files are `session_cookie` then `origin == expected and token == "lab-csrf"`. Production still needs the token bound to the session (not a cookie the foreign origin can cause to be sent). GET `/share?to=` is a mutate-on-GET leftover. Clickjacking, postMessage, and a later open-redirect lesson stay named leftovers. CORS `*` with credentials is false comfort.
 
-Industry checklists want anti-forgery tokens or extra headers a simple form cannot set. This pytest is that sentence for `allow_share`. Extra rows about authenticated embeds and CORP are **advanced** — not this week’s pytest.
+Industry lists ask for anti-forgery tokens or extra headers a simple form cannot set. This pytest is that sentence for `allow_share`. Extra rows about authenticated embeds and CORP are **advanced** — not this week's check.
 
 ## What the repaired files must show
 
@@ -43,8 +43,8 @@ SameSite=Lax as complete. CORS `*` with credentials. Token stored in a cookie th
 
 ## What the tool cannot do
 
-- Clickjacking / who may frame the page is a different cell.
-- postMessage origin checks are a different cell.
+- Clickjacking / who may frame the page is a different rule.
+- postMessage origin checks are a different rule.
 - A later open-redirect lesson can still send the person somewhere else after a real click.
 - Authenticated embeds / CORP are advanced extras.
 - Lookalike UI from the phishing lesson: the person intended the *lookalike*, not this origin.
@@ -61,7 +61,7 @@ It must pass. Then write one sentence: which rule is restored, and which leftove
 
 ## Use it somewhere new
 
-Clinic: stop treating “logged-in cookie” as consent to share with a partner.
+A clinic example: stop treating “logged-in cookie” as consent to share with a partner.
 
 ## What can still go wrong
 

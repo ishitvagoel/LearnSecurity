@@ -69,7 +69,7 @@ Draw this map so someone else could name the pytest cases. Point at `labs/5.1/5.
 
 ## Use it somewhere new
 
-Clinic: appointment card plus notes. Partner CSV export.
+A clinic example: appointment card plus notes. Partner CSV export.
 
 ## What can still go wrong
 

@@ -67,7 +67,7 @@ Draw the map. Point at `labs/E1/e1-lab` file `tools.py`.
 
 ## Use it somewhere new
 
-A coding assistant in CI is the same cell with `pip install` as `exec_sql`.
+A coding assistant in CI is the same rule with `pip install` as `exec_sql`.
 
 ## What can still go wrong
 

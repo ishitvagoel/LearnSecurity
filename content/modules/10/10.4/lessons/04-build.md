@@ -20,7 +20,7 @@ flowchart TD
   Both -->|no| Allow[may boot]
 ```
 
-The repaired files require that both-at-once check. Do not accept “`NODE_ENV` is production” as the check. Production still needs other flags — a feature flag that turns off authorization (1.2) is leftover, not this pytest. Docs and monitoring pages that stay public, and extra version leakage with debug already off, remain leftover. Emergency debug is E6, not a silent `return True`.
+The repaired files require that both-at-once check. Do not accept “`NODE_ENV` is production” as the check. Production still needs other flags — a feature flag that turns off authorization (1.2) is leftover, not this check. Docs and monitoring pages that stay public, and extra version leakage with debug already off, remain leftover. Emergency debug is E6, not a silent `return True`.
 
 A checklist that wants debug off in production is that sentence for prod plus debug. This pytest is the local stand-in.
 
@@ -77,4 +77,4 @@ A feature flag that turns off authorization. Sidecar debug. Extra version leakag
 
 ## What this page is not doing
 
-Do not boot a live host. Do not claim you finished an assurance gate from a `NODE_ENV` screenshot. Do not present a manufacturer-defaults program page as verified.
+Do not boot a live host. This page does not mark you as finished. from a `NODE_ENV` screenshot. Do not present a manufacturer-defaults program page as verified.

@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# A broken boot check must fail prod plus debug
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -25,7 +25,7 @@ If both pass, the test is not looking at prod plus debug. If both fail, the fix 
 |---|---|
 | Normal | prod without debug → may boot (may pass on both) |
 | Wrong input | prod plus debug → not boot; broken files must fail |
-| Abuse | Unsure flags are not a production boot (fail closed; leftover if not in this pytest) |
+| Abuse | Unsure flags are not a production boot (fail closed; leftover if not in this check) |
 | Not claimed | Live compose; a canary; an assurance gate; other flags |
 
 The file is `labs/10.4/10.4-lab/tests/test_property.py`. The test `test_prod_debug_must_not_boot` is a **what-must-not-happen** test: always-true `boot_ok` is not allowed to count as a passing control.
@@ -63,8 +63,8 @@ Paste nothing from answer keys. Write fail/pass into your notes next to the matr
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts “container started” is not this topic. A live Django host is out of scope.
+A clinic example: a test that only asserts “container started” is not this topic. A live Django host is out of scope.
 
 ## What this page is not doing
 
-Do not add a live-host trophy. Do not log stack traces. Answer keys are not on this site. The assurance gate stays not-attempted.
+Do not treat a live host screenshot as proof. Do not log stack traces. Answer keys are not on this site. The assurance gate stays not finished.

@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# The broken files must fail when the body switches company
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -30,7 +30,7 @@ python3 -m pytest labs/E5/e5-lab/tests --impl vulnerable
 python3 -m pytest labs/E5/e5-lab/tests --impl fixed
 ```
 
-Honest matching-company tests may pass on both implementations. That does not excuse the body-switch deny test. If the broken files do not fail `test_body_cannot_switch_tenant`, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
+Honest matching-company tests may pass on both implementations. That does not excuse the body-switch deny test. If the broken files do not fail `test_body_cannot_switch_tenant`, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
@@ -55,8 +55,8 @@ Write the fail/pass pair next to the table row. Reject a “test” that only gr
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts “row-level rules are on” is not this cell. A live clinic system is out of scope.
+A clinic example: a test that only asserts “row-level rules are on” is not this rule. A live clinic system is out of scope.
 
 ## What this page is not doing
 
-Do not add a live-company trophy. Do not log note bodies. Answer keys are not on this site. This site does not mark you as finished.
+Do not treat a live company screenshot as proof. Do not log note bodies. Answer keys are not on this site. This site does not mark you as finished.

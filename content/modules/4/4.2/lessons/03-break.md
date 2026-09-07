@@ -19,7 +19,7 @@ Do not load a lookalike login page, a public phishing kit, an employer SSO, or a
 
 What must not happen: **password (or wrong-origin WebAuthn) counted as phishing-resistant**. `phishing_resistant("password", EVIL, REAL)` returns true.
 
-Attacker capability in this lab: a lookalike origin that can collect a typed secret. That stands in for OTP typed at evil.example, or a WebAuthn assertion asked for the wrong RP ID. What you are supposed to trust: the helper treats shared secrets as **not** resistant, and fails WebAuthn when origin ≠ expected. A passkey vendor dashboard, `autocomplete=webauthn`, and “we turned on MFA” are not in that set.
+Who could do this: a lookalike origin that can collect a typed secret. That stands in for OTP typed at evil.example, or a WebAuthn assertion asked for the wrong RP ID. What is supposed to stop this: the helper treats shared secrets as **not** resistant, and fails WebAuthn when origin ≠ expected. A passkey vendor dashboard, `autocomplete=webauthn`, and “we turned on MFA” are not in that set.
 
 ## Picture: any enrolled method returns true
 
@@ -31,7 +31,7 @@ flowchart TD
 
 The broken files show **cause** (a shared secret treated as resistant), not a trophy kit against a public site. What has to be true first: method is in `{password, otp, webauthn}`; origin is ignored. You do not need a live phishing page. You must not build one.
 
-A later hardware bar is not this pytest.
+A later hardware bar is not this check.
 
 ## What to read in the broken files
 
@@ -72,7 +72,7 @@ Run checks against the broken files (they **must fail** on the password-at-looka
 python3 -m pytest labs/4.2/4.2-lab/tests --impl vulnerable
 ```
 
-Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not weaken it to “we have 2FA.” An environment error is not security evidence.
+Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not weaken it to “we have 2FA.” A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

@@ -21,7 +21,7 @@ flowchart TD
   Cost --> Stop[Disable token if stolen session]
 ```
 
-Industry lists name detect, respond, recover. They do not count exports. A filter-product name is not the rule. Someone still has to own the budget.
+Industry lists talk about noticing, responding, and recovering. They do not count exports. Naming a product is not the rule. Someone still has to own the budget.
 
 ## Signals that do not become a second leak
 
@@ -43,11 +43,11 @@ Not: a note body, a CSV attachment, a real email, or a live load trace against a
 
 If your alert includes note bodies from the CSV, you have opened a second leak in the paging channel.
 
-A green “rate limit enabled” tile is not that pytest. Notification fan-out and extra formats are other paths of the same budget — inventory them before claiming recover. Re-run `test_fourth_export_is_denied` after any export-route change.
+A green “rate limit enabled” tile is not that check. Notification fan-out and extra formats are other paths of the same budget — inventory them before claiming recover. Re-run `test_fourth_export_is_denied` after any export-route change.
 
 ## What the framework does vs what you still have to check
 
-An edge dashboard will show 429s on an IP and stay silent when `/export.csv` still has no per-person counter. Detection must observe **`allow(4)` false**, not HTTP status counts. If the alert includes note bodies from the CSV, you have opened a 3.1 / 5.1 cell.
+An edge dashboard will show 429s on an IP and stay silent when `/export.csv` still has no per-person counter. Detection must observe **`allow(4)` false**, not HTTP status counts. If the alert includes note bodies from the CSV, you have opened a leftover hole from topics 3.1 and 5.1.
 
 ## Practice
 
@@ -55,7 +55,7 @@ Write one log line you would accept in review (ids, reason, n, no body). Tie it 
 
 ## Use it somewhere new
 
-Clinic: notice bulk-export over quota; do not attach the CSV to the ticket. Do not load-test a live clinic system.
+A clinic example: notice bulk-export over quota; do not attach the CSV to the ticket. Do not load-test a live clinic system.
 
 ## Can people still use it
 
@@ -63,4 +63,4 @@ If a human sees a quota deny, announce “try tomorrow.” A spinner that retrie
 
 ## What this page is not doing
 
-A filter-product name is not the rule. Public load tests are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Naming a product is not the rule. Public load tests are out of scope. This site does not mark you as finished. Answer keys are not on this site.

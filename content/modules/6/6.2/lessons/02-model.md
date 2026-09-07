@@ -41,7 +41,7 @@ Framework defaults help only at the constructors you actually use.
 | What you trust | The HTML-text encoder |
 | What you do not trust | The title / body string |
 | Time | Stored title, later drawn |
-| Integrity cell | Integrity of the HTML interpreter |
+| Integrity rule | Integrity of the HTML interpreter |
 
 ## Step 2: write cells the practice can fail
 
@@ -62,7 +62,7 @@ Clinic nickname. Markdown pipeline.
 
 ## What can still go wrong
 
-Trusted admin HTML. Content-security policy in report-only mode. Encoding for a JavaScript string (a different cell).
+Trusted admin HTML. Content-security policy in report-only mode. Encoding for a JavaScript string (a different rule).
 
 ## What this page is not doing
 

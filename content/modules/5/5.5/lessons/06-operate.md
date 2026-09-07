@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Restore[Rotate creds; restore if mutated]
 ```
 
-Industry lists name detect, respond, recover. They do not bind parameters. A log-product name is not the rule. Someone still has to own the concatenating path.
+Industry lists talk about noticing, responding, and recovering. They do not bind parameters. Naming a product is not the rule. Someone still has to own the concatenating path.
 
 ## Signals that do not become a second leak
 
@@ -43,11 +43,11 @@ Not: a note body, a full SQL string with values, a real email, or “the web fil
 
 If your alert includes a full SQL string with values, you have opened a second leak in the paging channel.
 
-A green “web-filter SQLi rule” tile is not that pytest. Report paths and ORDER BY builders are other paths of the same check — inventory them before claiming recover. If a replica was not restored, treat it as the same leftover, not a separate “eventual consistency” pass.
+A green “web-filter SQLi rule” tile is not that check. Report paths and ORDER BY builders are other paths of the same check — inventory them before claiming recover. If a replica was not restored, treat it as the same leftover, not a separate “eventual consistency” pass.
 
 ## What the framework does vs what you still have to check
 
-A web filter will page on syntax errors and stay silent when the values were concatenated but happened to parse. Detection must observe **concatenated `str` from `fetch_sql`**, not HTTP 500 counts. If the alert includes a full SQL string with values, you have opened a 3.1 cell.
+A web filter will page on syntax errors and stay silent when the values were concatenated but happened to parse. Detection must observe **concatenated `str` from `fetch_sql`**, not HTTP 500 counts. If the alert includes a full SQL string with values, you have opened a leftover hole from topic 3.1.
 
 ## Practice
 
@@ -55,8 +55,8 @@ Write one log line you would accept in review (ids, reason, statement name, no b
 
 ## Use it somewhere new
 
-Clinic: notice search-box syntax errors; do not paste patient names into the ticket. Do not hit a live clinic system.
+A clinic example: notice search-box syntax errors; do not paste patient names into the ticket. Do not hit a live clinic system.
 
 ## What this page is not doing
 
-A log-product name is not the rule. A web filter is not this check. Live SQL hunts are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Naming a product is not the rule. A web filter is not this check. Live SQL hunts are out of scope. This site does not mark you as finished. Answer keys are not on this site.

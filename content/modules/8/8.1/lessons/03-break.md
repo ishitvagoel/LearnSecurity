@@ -19,7 +19,7 @@ Do not paste this exercise onto a live phone, a hospital device, or a public And
 
 What must not happen: **client `integrity=ok` authorizes export**. `allow_export({"integrity": "ok"}, "fail")` returns true.
 
-Who can act in this story: a modified client or a stolen boolean. That stands in for a hex-edited Compose switch, a clinic `hipaaMode=true` JSON field, or a patched app file that always reports `integrity=ok`. What you trust: `allow_export` is supposed to be a **server-side 1.2 cell** that may consult a *server-verified* attestation result. Play Integrity checked only in the app, shrinking the app, the store listing, and the Android user-id sandbox are not what you trust for this cell.
+Who could do this: a modified client or a stolen boolean. That stands in for a hex-edited Compose switch, a clinic `hipaaMode=true` JSON field, or a patched app file that always reports `integrity=ok`. What is supposed to stop this: `allow_export` is supposed to be a **server-side who-is-allowed check** that may consult a *server-verified* attestation result. Play Integrity checked only in the app, shrinking the app, the store listing, and the Android user-id sandbox are not enough.
 
 ## Picture: the boolean is enough
 
@@ -68,7 +68,7 @@ Android sandbox defaults are not 1.2. Jetpack libraries do not authorize export.
 python3 -m pytest labs/8.1/8.1-lab/tests --impl vulnerable
 ```
 
-Run from `labs/8.1/8.1-lab` if a repo-root collection picks up `site/`. Record `test_client_integrity_claim_is_not_authorization`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/8.1/8.1-lab` if a repo-root collection picks up `site/`. Record `test_client_integrity_claim_is_not_authorization`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

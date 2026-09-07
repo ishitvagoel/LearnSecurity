@@ -18,9 +18,9 @@ flowchart TD
   Sock -->|no| Deny[Deny]
 ```
 
-The repaired files are `server_scheme == "https"`. Production still needs a bound load-balancer identity if you end TLS at the load balancer — that peer is what you trust, the header name is not. Pinning is leftover (later on phones), not a universal rule. Mutual TLS is a named leftover for service identity, not this header cell.
+The repaired files are `server_scheme == "https"`. Production still needs a bound load-balancer identity if you end TLS at the load balancer — that peer is what you trust, the header name is not. Pinning is leftover (later on phones), not a universal rule. Mutual TLS is a named leftover for service identity, not this header rule.
 
-Industry lists want TLS with no cleartext fallback. This pytest is that sentence for the scheme check.
+Industry lists ask for TLS with no cleartext fallback. This pytest is that sentence for the scheme check.
 
 ## What the repaired files must show
 
@@ -47,7 +47,7 @@ Fail closed: if you cannot ask the socket, the answer is no. Uncertainty is a **
 
 - TLS ending at the load balancer still needs a **bound** hop, not a header from anyone.
 - End-to-end messaging and pinning versus breakage wait as leftover.
-- Certificate checks are a client cell, not this helper.
+- Certificate checks are a client-side rule, not this helper.
 - OCSP stapling and encrypted client hello are advanced extras.
 - Phone network checks wait for later.
 - Cookies already issued on the cleartext path still need revoke.
@@ -64,7 +64,7 @@ It must pass. Then write one sentence: which rule is restored, and which leftove
 
 ## Use it somewhere new
 
-Clinic: stop treating the page’s `https://` API client as the API socket; bind cookies and HSTS to the server scheme.
+A clinic example: stop treating the page’s `https://` API client as the API socket; bind cookies and HSTS to the server scheme.
 
 ## What can still go wrong
 

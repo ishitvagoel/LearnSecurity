@@ -22,7 +22,7 @@ flowchart TD
   Q -->|job title mapped| False[False assurance]
 ```
 
-Classification starts at the protected effect (part-1 skip denied). Everything that is not an always-false skip at that call is a leftover path.
+Start from what must stay true (part-1 skip denied). Everything that is not an always-false skip at that call is a leftover path.
 
 ## Problems to find (name them yourself)
 

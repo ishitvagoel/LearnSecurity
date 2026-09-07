@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# The broken files must fail a script reading the cookie
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify

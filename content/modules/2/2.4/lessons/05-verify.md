@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# A retry that writes twice must fail
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -21,7 +21,7 @@ flowchart LR
 |---|---|
 | Normal | After the fix, one `share_note` with k1 still creates one share (`test_single_share`) |
 | Wrong input / abuse | Two calls with k1 → count 1; broken files must fail that check |
-| When things break | Key-store uncertainty does not insert (not in this pytest; write it as leftover) |
+| When things break | Key-store uncertainty does not insert (not in this check; write it as leftover) |
 | Not claimed | Two first writes at the same time solved; worker stale shares gone; awareness-list “compliant”; payments safe |
 
 Lab tests: `test_single_share` and `test_retry_does_not_duplicate_side_effect` in `labs/2.4/2.4-state-time/tests/test_idempotency.py`. The second test calls `share_note` twice with `k1` and expects count 1. That is a **what-must-not-happen** test: a second grant is not allowed to count as a passing control.
@@ -31,7 +31,7 @@ python3 -m pytest labs/2.4/2.4-state-time/tests --impl vulnerable
 python3 -m pytest labs/2.4/2.4-state-time/tests --impl fixed
 ```
 
-Map each test to the retry row you wrote on the state-machine page. Do not paste keys. If the broken files do not fail, the lab is miswired — fix the wiring, not the check. An environment error is not security evidence.
+Map each test to the retry row you wrote on the state-machine page. Do not paste keys. If the broken files do not fail, the lab is miswired — fix the wiring, not the check. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 

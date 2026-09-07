@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Notify[notify A rotate links]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a scanner product. They do not prove this week’s next-read check. Someone still has to own the leftover.
+Industry lists talk about noticing, responding, and recovering. They do not pick a scanner product. They do not prove this week’s next-read check. Someone still has to own the leftover.
 
-Re-run `test_revoked_share_cannot_read` after any share-path change. A green “DELETE 200” tile is not that pytest. Phone cache and leftover worker sessions are other read paths of the same family — inventory them before you claim recover. Tabletop remains the restore week.
+Re-run `test_revoked_share_cannot_read` after any share-path change. A green “DELETE 200” tile is not that check. Phone cache and leftover worker sessions are other read paths of the same family — inventory them before you claim recover. Tabletop remains the restore week.
 
 ## Signals that do not become a second leak
 
@@ -46,7 +46,7 @@ If your alert includes the matching note, you have copied the leak into the tick
 
 ## What the framework does vs what you still have to check
 
-The same no-op revoke, always-body read, and leftover worker session that bypass this practice will also bypass a “scan our coverage dashboard” detector. Name those places before you claim recover. A scanner-product name is not the rule.
+The same no-op revoke, always-body read, and leftover worker session that bypass this practice will also bypass a “scan our coverage dashboard” detector. Name those places before you claim recover. Naming a product is not the rule.
 
 Cause vs cost stays split here too: the **cause** is grant not consulted; the **cost** is ex-collaborator secrecy; **how you stop it** is owner-or-grant on every read; **how you notice** is `revoked_share_read_denied`; **how you recover** is notify-and-rotate. What the tool cannot do: this alert does not wipe phone caches, and it does not recall copies already sent.
 
@@ -66,8 +66,8 @@ Reject any line that includes the note body, a session token, or “assurance ga
 
 ## Use it somewhere new
 
-Clinic: deny the guardian read; do not paste the chart into the ticket. Do not hit a live clinic system.
+A clinic example: deny the guardian read; do not paste the chart into the ticket. Do not hit a live clinic system.
 
 ## What this page is not doing
 
-A scanner-vendor name is not the rule. Do not claim you finished an assurance gate. A YAML pack is not this alert. Answer keys are not on this site.
+A scanner-vendor name is not the rule. This page does not mark you as finished. A YAML pack is not this alert. Answer keys are not on this site.

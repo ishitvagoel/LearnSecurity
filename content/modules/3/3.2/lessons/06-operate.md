@@ -27,7 +27,7 @@ A missing id is a notice-and-recover problem, not a licence to rewrite yesterday
 | Recover | Add the row, the tests, and an owner; **do not back-date** the file |
 | Leftover | Unknown unknowns; write down the next trigger |
 
-Industry lists name detect, respond, recover. They do not pick a log product. They do not prove the seed. An awareness list is still awareness. A SIEM product name is not the rule.
+Industry lists talk about noticing, responding, and recovering. They do not pick a log product. They do not prove the seed. An awareness list is still awareness. Naming a SIEM product is not the rule.
 
 ## What the framework does vs what you still have to check
 
@@ -45,8 +45,8 @@ Reject any line that includes a note body, a real email, a vendor scan PDF treat
 
 ## Use it somewhere new
 
-Clinic: notice missing `sms-content-leak` after the reminder feature merges. Do not paste patient text into the ticket. Do not scan the clinic to prove the gap.
+A clinic example: notice missing `sms-content-leak` after the reminder feature merges. Do not paste patient text into the ticket. Do not scan the clinic to prove the gap.
 
 ## What this page is not doing
 
-A log-product name is not the rule. Answer keys are not on this site. Do not claim a course gate without learner or product evidence.
+Naming a product is not the rule. Answer keys are not on this site. Do not claim a course gate without learner or product evidence.

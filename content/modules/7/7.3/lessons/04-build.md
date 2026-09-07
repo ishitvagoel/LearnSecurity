@@ -23,9 +23,9 @@ flowchart TD
   Cmp -->|no| Deny
 ```
 
-The lab’s repaired files hash the raw body string with stdlib HMAC-SHA256 and `compare_digest`. Production still needs the MAC **before** `json.loads` (2.1): parse-then-re-serialize is a different document than the provider signed. Replay of a valid MAC and stale timestamps are named leftovers, not this pytest. Outbound webhook URLs are 6.5, not this inbound MAC.
+The lab’s repaired files hash the raw body string with stdlib HMAC-SHA256 and `compare_digest`. Production still needs the MAC **before** `json.loads` (2.1): parse-then-re-serialize is a different document than the provider signed. Replay of a valid MAC and stale timestamps are named leftovers, not this check. Outbound webhook URLs are 6.5, not this inbound MAC.
 
-Industry lists want that standard-library check. This pytest is that sentence for empty sig. **Do not POST a live provider.**
+Industry lists ask for that standard-library check. This pytest is that sentence for empty sig. **Do not POST a live provider.**
 
 ## What the repaired files must show
 
@@ -63,7 +63,7 @@ It must pass. Run from the lab directory if collection at repo root is polluted.
 
 ## Use it somewhere new
 
-Clinic: stop treating “the hospital’s IP range” as the lab-result authenticity check.
+A clinic example: stop treating “the hospital’s IP range” as the lab-result authenticity check.
 
 ## What can still go wrong
 

@@ -24,7 +24,7 @@ flowchart TD
 
 The repaired files pop the session and check `DELETED` first. Production should also kill refresh tokens, worker `user_id`, and a phone's offline cache. Self-contained tokens need a denylist or a per-user not-before. Disabled and deleted are different product states. Both must fail `session_valid` in this week's freeze.
 
-Industry lists want all active sessions killed. This pytest is that sentence for one synthetic cookie, not proofing who someone is, and not a new login factor.
+Industry lists ask for all active sessions killed. This pytest is that sentence for one synthetic cookie, not proofing who someone is, and not a new login factor.
 
 ## What the repaired files must show
 
@@ -71,7 +71,7 @@ It must pass. Then write one sentence: which rule is restored, and which leftove
 
 ## Use it somewhere new
 
-Clinic: disable the badge and kill chart sessions in one runbook. A badge vendor API is not the chart session store.
+A clinic example: disable the badge and kill chart sessions in one runbook. A badge vendor API is not the chart session store.
 
 ## What can still go wrong
 

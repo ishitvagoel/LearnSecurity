@@ -9,7 +9,7 @@
 
 This week’s freeze: the notes app’s local `allow_export(client_claims, server_attest)`. Android and Kotlin first. No live phones.
 
-## Picture: every 1.1 cell has an owner
+## Picture: every 1.1 rule has an owner
 
 ```mermaid
 flowchart TD

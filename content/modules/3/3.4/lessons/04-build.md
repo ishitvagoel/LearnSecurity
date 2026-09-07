@@ -23,7 +23,7 @@ flowchart TD
 
 The lab’s repaired files use `MAX = 5` and return `_n` when the ceiling is hit. Production should check count in the **same transaction** as insert so two parallel sixths cannot both land. This lab’s check is sequential count under a loop, not a true race.
 
-Industry checklists want enforcement at a trusted service layer. The Next.js client may help usability; it must not be the control.
+Industry lists ask for enforcement at a trusted service layer. The Next.js client may help usability; it must not be the control.
 
 ## What the repaired files must show
 
@@ -56,7 +56,7 @@ It must pass.
 
 ## Use it somewhere new
 
-Clinic: `add_guardian` stops at 3. Invite redemption stops at one use. Export quotas cap bytes or rows — same shape, different cell.
+A clinic example: `add_guardian` stops at 3. Invite redemption stops at one use. Export quotas cap bytes or rows — same shape, different cell.
 
 ## Can people still use it
 

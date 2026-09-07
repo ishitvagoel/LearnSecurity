@@ -19,7 +19,7 @@ flowchart LR
   Json["JSON hipaaMode true"] --> Reality[server grant if unchecked]
 ```
 
-Renaming `integrity` to `hipaaMode` is not transfer. Person, object, path, and leftover change. If the Compose switch is “HIPAA mode” while the server binds `hipaaMode=true` as a grant, the cell is gone. Play Integrity in the app, shrinking the app, and the store listing do not ignore the client boolean. Feature flags and `premium=true` are the same claim family — name them, do not run those app files here. The phone sandbox still does not put this process in what you trust (the first page).
+Renaming `integrity` to `hipaaMode` is not transfer. Person, object, path, and leftover change. If the Compose switch is “HIPAA mode” while the server binds `hipaaMode=true` as a grant, the rule is gone. Play Integrity in the app, shrinking the app, and the store listing do not ignore the client boolean. Feature flags and `premium=true` are the same claim family — name them, do not run those app files here. The phone sandbox still does not put this process in what you trust (the first page).
 
 | Notes app this week | Clinic sketch |
 |---|---|
@@ -57,4 +57,4 @@ One page. No keys. `labs/8.1/8.1-lab` is the only running system you may break. 
 
 ## What this page is not doing
 
-Live-target mobile attacks. Real BAA flags. Claiming Gate 8 from this page.
+Live-target mobile attacks. Real BAA flags. This page does not finish a check-in.

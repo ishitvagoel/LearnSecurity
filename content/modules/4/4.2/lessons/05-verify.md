@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# The broken files must fail when a look-alike site gets the password
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -35,7 +35,7 @@ python3 -m pytest labs/4.2/4.2-lab/tests --impl vulnerable
 python3 -m pytest labs/4.2/4.2-lab/tests --impl fixed
 ```
 
-Map each check to a cell from the map page. If the broken files do not fail the password-at-lookalike assertion, the practice is miswired — fix the wiring, not the check. An environment error is not security evidence. WebAuthn Level 3 is still a Candidate Recommendation; this pair does not turn it into a finished Rec.
+Map each check to a rule from the map page. If the broken files do not fail the password-at-lookalike assertion, the practice is miswired — fix the wiring, not the check. A setup error is not proof the rule holds. WebAuthn Level 3 is still a Candidate Recommendation; this pair does not turn it into a finished Rec.
 
 | Slice | This practice |
 |---|---|

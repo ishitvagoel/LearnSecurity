@@ -28,7 +28,7 @@ flowchart LR
   Jni[JNI copy] --> Reality[needs smallest of three]
 ```
 
-Renaming “notes unpacker” to “DICOM parser” is not transfer. Person, object, path, and leftover change. If the app is “mostly Kotlin” while `copy_into` trusts `declared_len` plus 8, the cell is gone. A company language roadmap and an awareness-list mapping do not put `min(bufsize, declared_len, len(src))` next to the copy. A protobuf C extension is the same grain — name it, do not fuzz a third-party binary here. An awareness-list name is a regression label *after* the length cause, not the syllabus. Native unpacker leftover is later and harder: not this pytest.
+Renaming “notes unpacker” to “DICOM parser” is not transfer. Person, object, path, and leftover change. If the app is “mostly Kotlin” while `copy_into` trusts `declared_len` plus 8, the rule is gone. A company language roadmap and an awareness-list mapping do not put `min(bufsize, declared_len, len(src))` next to the copy. A protobuf C extension is the same grain — name it, do not fuzz a third-party binary here. An awareness-list name is a regression label *after* the length cause, not the syllabus. Native unpacker leftover is later and harder: not this check.
 
 The clinic rewrite still has to keep the notes-app fork: oversize copy denied, short honest copy may fit. Adding a Kotlin rewrite without a destination bound leaves length > 4. The local pytest analogue is `test_copy_does_not_exceed_buffer` — on a practice, not a live codec.
 
@@ -40,7 +40,7 @@ Checking every path still means the native copy itself is bounded. A language st
 |---|---|
 | “we use Kotlin / Rust” | Not checking this copy |
 | Native overflow walkthrough / public binary | Course rules |
-| “awareness-list name so this cell is done” | Awareness after the cause |
+| “awareness-list name so this rule is done” | Awareness after the cause |
 | “sanitizer in CI” | Tool, not this check |
 | “course gate complete” | Forbidden stamp |
 

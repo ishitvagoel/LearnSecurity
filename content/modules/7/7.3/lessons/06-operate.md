@@ -20,7 +20,7 @@ flowchart TD
   Metric --> Rotate[Rotate disposable secret if events escaped]
 ```
 
-Industry lists name detect, respond, recover. They do not compute the MAC. A log-product name is not the rule. Someone still has to own every callback path.
+Industry lists talk about noticing, responding, and recovering. They do not compute the MAC. Naming a product is not the rule. Someone still has to own every callback path.
 
 ## Signals that do not become a second leak
 
@@ -42,13 +42,13 @@ Not: the raw body, `lab-secret`, a real patient result, or a live provider trace
 
 If your alert includes the raw body or `lab-secret`, you have opened a second leak in the paging channel (3.1 / 5.3).
 
-A green “webhooks signed” tile is not that pytest. Re-run `test_missing_signature_is_rejected` after any callback-route change. Billing, export-ready, and invite-used callbacks are other paths of the same MAC — inventory them before claiming recover.
+A green “webhooks signed” tile is not that check. Re-run `test_missing_signature_is_rejected` after any callback-route change. Billing, export-ready, and invite-used callbacks are other paths of the same MAC — inventory them before claiming recover.
 
 Recovery is incomplete if the next route still returns true for an empty header. Grep callback paths the same day you keep the deny, and **do not POST a live provider** to confirm.
 
 ## What the framework does vs what you still have to check
 
-An nginx dashboard will show TLS handshakes and stay silent when `/webhook` still returns true for an empty header. Detection must observe **empty sig false**, not HTTP status counts. If the alert includes the raw body or `lab-secret`, you have opened a 3.1 / 5.3 cell. **Do not POST to confirm.**
+An nginx dashboard will show TLS handshakes and stay silent when `/webhook` still returns true for an empty header. Detection must observe **empty sig false**, not HTTP status counts. If the alert includes the raw body or `lab-secret`, you have opened a leftover hole from topics 3.1 and 5.3. **Do not POST to confirm.**
 
 ## Practice
 
@@ -56,7 +56,7 @@ Write one log line you would accept in review (ids, reason, no body). Tie it to 
 
 ## Use it somewhere new
 
-Clinic: notice unsigned lab-result posts on a local practice files; do not attach the HL7/JSON body to the ticket. Do not POST a live vendor.
+A clinic example: notice unsigned lab-result posts on a local practice files; do not attach the HL7/JSON body to the ticket. Do not POST a live vendor.
 
 ## Usability
 
@@ -64,4 +64,4 @@ Provider retries on 5xx can amplify load (6.7). Return 4xx on a bad MAC so retri
 
 ## What this page is not doing
 
-A log-product name is not the rule. A web-filter name is not this check. Live provider posts are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Naming a product is not the rule. A web-filter name is not this check. Live provider posts are out of scope. This site does not mark you as finished. Answer keys are not on this site.

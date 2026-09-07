@@ -17,7 +17,7 @@ Only `labs/6.6/6.6-lab` is in scope. The practice is an in-process `accept` with
 
 Do not probe public invite links. Do not click a live mail link. Do not build a race harness. You do not need two processes. You must not.
 
-What you trust for this check: `accept` is supposed to consume the token in the same step that it returns true. A unique index you never write, HTTP 400 after membership already exists, and “the email proves the recipient” are not what you trust.
+What is supposed to stop this: `accept` is supposed to consume the token in the same step that it returns true. A unique index you never write, HTTP 400 after membership already exists, and “the email proves the recipient” are not enough.
 
 Who can act, in this story: two tabs, a copied link, or a retry of the same token. That stands in for a clinic guardian invite, a password-reset consume, or 2.4’s share retry.
 
@@ -31,7 +31,7 @@ flowchart TD
 
 The broken files take that path on purpose. The token is never consumed. Sequential double-accept is enough. You do not need a new token string. The leftover still returning true *is* the leak.
 
-Industry lists want locking so a limited seat cannot be booked twice. This pytest is sequential consume-once, not a threaded trophy.
+Industry lists ask for locking so a limited seat cannot be booked twice. This pytest is sequential consume-once, not a threaded trophy.
 
 ## What to look at — cause, not a dump
 
@@ -74,7 +74,7 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/6.6/6.6-lab/tests --impl vulnerable
 ```
 
-Record the failing test `test_invite_token_is_single_use`. Do not probe public invite links. An environment error is not security evidence.
+Record the failing test `test_invite_token_is_single_use`. Do not probe public invite links. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

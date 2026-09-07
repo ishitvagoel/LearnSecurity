@@ -22,7 +22,7 @@ flowchart TD
   Q -->|a guide mapped| False[False assurance]
 ```
 
-Classification starts at the protected effect (public host denied). Everything that is not a hostname allow-list at that call is a leftover path.
+Start from what must stay true (public host denied). Everything that is not a hostname allow-list at that call is a leftover path.
 
 ## Problems to find (name them yourself)
 

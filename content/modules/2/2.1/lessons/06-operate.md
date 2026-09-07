@@ -18,7 +18,7 @@ flowchart TD
   Decision -->|yes| Mediate[Hand the parse result to the who-is-allowed check]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a log product. They do not prove a checklist. Someone still has to own the leftover.
+Industry lists talk about noticing, responding, and recovering. They do not pick a log product. They do not prove a checklist. Someone still has to own the leftover.
 
 ## Signals that do not become a second leak
 
@@ -29,7 +29,7 @@ Industry lists name detect, respond, recover. They do not pick a log product. Th
 | Recover | Quarantine rows whose ACL and store disagree; do not guess a company |
 | Leftover | Honest unique-key JSON still needs a who-is-allowed check |
 
-A log-product name is not the rule. FastAPI will still parse whatever JSON library you wired. PostgreSQL `jsonb` will keep one key if you cast. The app’s promise is: **this** practice, messy keys do not persist two companies, and the deny log never includes the blob.
+Naming a product is not the rule. FastAPI will still parse whatever JSON library you wired. PostgreSQL `jsonb` will keep one key if you cast. The app’s promise is: **this** practice, messy keys do not persist two companies, and the deny log never includes the blob.
 
 A metric without a quarantine playbook still leaves a disagreeing row if a worker stored first. Unicode lookalike keys are leftover risk. Honest unique-key JSON still needs who-is-allowed. A dashboard green is not that sentence.
 
@@ -56,4 +56,4 @@ GraphQL and REST both ingest the same note. Two refuse metrics, or one shared in
 
 ## What this page is not doing
 
-A log-product name is not the rule. Answer keys are not on this site.
+Naming a product is not the rule. Answer keys are not on this site.

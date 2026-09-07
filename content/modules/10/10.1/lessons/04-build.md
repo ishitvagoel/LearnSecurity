@@ -20,7 +20,7 @@ flowchart TD
   Tm -->|no| Deny[deny]
 ```
 
-The repaired files require `bool(pr.get("threat_model"))`. Production still needs the cited model to *cover this change’s files* — citing `TM-12` that never mentions OAuth is a lying citation. Authorization surfaces remain 3.2. An extra advanced row about documenting a dangerous function is a reason to *require* a threat model. It is not this pytest.
+The repaired files require `bool(pr.get("threat_model"))`. Production still needs the cited model to *cover this change’s files* — citing `TM-12` that never mentions OAuth is a lying citation. Authorization surfaces remain 3.2. An extra advanced row about documenting a dangerous function is a reason to *require* a threat model. It is not this check.
 
 A design-review guide that wants security in the design is that sentence for empty-change merge. This pytest is the local stand-in.
 

@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"CORS star"| False[False comfort]
 ```
 
-Review starts at the protected effect (foreign origin without token denied). Everything that is not origin-and-token at that call is a candidate leftover-cookie path. SameSite=Lax without that test is the same smell, not a different finding class.
+Start from what must stay true (foreign origin without token denied). Everything that is not origin-and-token at that call is a candidate leftover-cookie path. SameSite=Lax without that test is the same problem, not a different kind of finding.
 
 Leftover cookies are leftover permission from login — a signed-in session cookie that rides along — used as if it were consent for this person, this share, and this origin.
 
@@ -42,7 +42,7 @@ Also reject: live third-party CSRF; closing findings without re-running `test_fo
 - JSON APIs cannot CSRF
 - CORS is CSRF defense
 - Logged-in cookie is consent
-- Fetch metadata alone is this pytest
+- Fetch metadata alone is this check
 
 ## Practice
 

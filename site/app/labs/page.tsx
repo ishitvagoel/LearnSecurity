@@ -27,8 +27,8 @@ export default function LabsIndexPage() {
       </ol>
       <p className="mb-8 max-w-prose leading-relaxed text-stone-800">
         Practice data is fake. Practice secrets are throwaway. Do not point
-        these tests at shared, other people’s, or live production systems. See
-        the{" "}
+        these tests at other people’s systems, or at anything running in
+        production. See the{" "}
         <Link href="/policy/" className="text-blue-900 underline underline-offset-2">
           rules
         </Link>

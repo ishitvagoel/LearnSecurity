@@ -23,7 +23,7 @@ flowchart TD
   Q -->|green CI| False[False comfort]
 ```
 
-Classification starts at the protected effect (status-only not covered). Everything that is not `req` **and** `asserts_isolation` at that call is a candidate false-comfort path. A checklist PDF without that pytest is the same smell, not a different finding class.
+Start from what must stay true (status-only not covered). Everything that is not `req` **and** `asserts_isolation` at that call is a candidate false-comfort path. A checklist PDF without that check is the same problem, not a different kind of finding.
 
 HTTP-200 tests that lie about isolation are 9.3. Exceptions without expiry are E6. Do not skip `test_status_only_row_is_not_coverage`. Do not claim the verification gate.
 

@@ -24,11 +24,11 @@ flowchart TD
 | Recover | Keep deny; revoke grants created in the window; notify the member |
 | Leftover | Lookalike UI the person clicked (phishing lesson); clickjacking |
 
-Industry lists name detect, respond, recover. They do not bind origin and token. They do not prove the anti-forgery check. A network-filter product name is not the rule. Re-run `test_foreign_origin_post_is_denied` after any share-route change; a green “SameSite=Lax” tile is not that pytest. JSON share routes and GET mutate paths are other paths of the same cell — inventory them before you claim recover.
+Industry lists talk about noticing, responding, and recovering. They do not bind origin and token. They do not prove the anti-forgery check. Naming a network-filter product is not the rule. Re-run `test_foreign_origin_post_is_denied` after any share-route change; a green “SameSite=Lax” tile is not that check. JSON share routes and GET mutate paths are other paths of the same rule — inventory them before you claim recover.
 
 ## What the framework does vs what you still have to check
 
-A network filter will page on cross-site POST volume and stay silent when `/share.json` still keys only the cookie. Notice must observe **origin mismatch or missing token at `allow_share`**, not CORS error counts. If the alert includes a session cookie or CSRF token, you have opened a logging cell from an earlier topic.
+A network filter will page on cross-site POST volume and stay silent when `/share.json` still keys only the cookie. Notice must observe **origin mismatch or missing token at `allow_share`**, not CORS error counts. If the alert includes a session cookie or CSRF token, you have opened a logging hole from an earlier topic.
 
 ## Can people still use it
 
@@ -46,8 +46,8 @@ Reject any line that includes a session cookie, CSRF token, or note body.
 
 ## Use it somewhere new
 
-Clinic: notice partner-share POSTs from the wrong origin; do not paste cookies into the ticket. Do not visit a live foreign origin.
+A clinic example: notice partner-share POSTs from the wrong origin; do not paste cookies into the ticket. Do not visit a live foreign origin.
 
 ## What this page is not doing
 
-A network-filter product name is not the rule. Live third-party CSRF is out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Naming a network-filter product is not the rule. Live third-party CSRF is out of scope. This site does not mark you as finished. Answer keys are not on this site.

@@ -23,7 +23,7 @@ flowchart TD
   Q -->|App Links verified| False[False comfort]
 ```
 
-Classification starts at the protected effect (alice unchanged). Everything that is not “ignore identity keys” at that call is a candidate session switch. An App Links screenshot without that pytest is the same smell, not a different finding class.
+Start from what must stay true (alice unchanged). Everything that is not “ignore identity keys” at that call is a candidate session switch. An App Links screenshot without that check is the same problem, not a different kind of finding.
 
 WebView `addJavascriptInterface` and custom schemes are other IPC holes — name them, do not skip `test_deeplink_as_param_does_not_switch_user`.
 
@@ -41,7 +41,7 @@ Also reject: live malware APKs; closing findings without re-running `test_deepli
 - HTTPS App Links are trusted input
 - WebView is just Chrome so 2.3 applies unchanged
 - IPC is private to our app
-- `exported=false` without a test is this cell
+- `exported=false` without a test is this rule
 - A verified-host tile is the rule
 
 ## Practice

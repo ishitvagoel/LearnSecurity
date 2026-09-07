@@ -19,7 +19,7 @@ Do not run a live OS command. Do not probe an employer export worker. Do not pro
 
 What must not happen: a user-chosen name run through a shell string. `argv_for_list("notes")` starts with `["sh", "-c"]` and `uses_shell` is true.
 
-Who can act here: a member who can choose an export name. That stands in for a clinic CSV filename, a Jinja template name, or a mail header later. What you are supposed to trust: `argv_for_list` passes the name as **one argv element** to a fixed binary. A denylist of punctuation, `shell=True` with “cleaned” strings, and “internal users are trusted” are not what you trust for this check.
+Who could do this: a member who can choose an export name. That stands in for a clinic CSV filename, a Jinja template name, or a mail header later. What is supposed to stop this: `argv_for_list` passes the name as **one argv element** to a fixed binary. A denylist of punctuation, `shell=True` with “cleaned” strings, and “internal users are trusted” are not enough.
 
 ## Picture: sh -c is a second parser
 
@@ -31,7 +31,7 @@ flowchart TD
 
 The broken files show **cause** (name concatenated into a shell string), not a command-execution trophy. What has to be true first: `argv_for_list` returns `['sh', '-c', 'ls ' + name]` and `uses_shell` is true. You do not need to execute the list. You must not.
 
-Industry lists want OS calls that pass arguments as parameters. A scanner name for this family is a weakness label, not that check. The class of hostile names is text a shell would treat as extra grammar — extra commands, substitutions, or pipes. Treat it as data for one argv slot. Do not paste that class into notes as a cookbook. Honest name `notes` is enough, because the check looks at shape.
+Industry lists ask for OS calls that pass arguments as parameters. A scanner name for this family is a weakness label, not that check. The class of hostile names is text a shell would treat as extra grammar — extra commands, substitutions, or pipes. Treat it as data for one argv slot. Do not paste that class into notes as a cookbook. Honest name `notes` is enough, because the check looks at shape.
 
 ## What to look at — cause, not a dump
 
@@ -76,7 +76,7 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/6.1/6.1-lab/tests --impl vulnerable
 ```
 
-Record `test_does_not_invoke_shell`. Do not probe public hosts. An environment error is not security evidence.
+Record `test_does_not_invoke_shell`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

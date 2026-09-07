@@ -20,9 +20,9 @@ flowchart TD
   Eq -->|yes| Allow[Allow]
 ```
 
-The lab’s repaired files are `bool(current) and presented == current`. Production still needs the secret created outside source, and a rebuild of images that shipped the old string. User-password lifecycle is a different authenticator. A hardware box for crypto is an advanced extra, not this pytest.
+The lab’s repaired files are `bool(current) and presented == current`. Production still needs the secret created outside source, and a rebuild of images that shipped the old string. User-password lifecycle is a different authenticator. A hardware box for crypto is an advanced extra, not this check.
 
-Industry checklists want no default credentials. This pytest is that sentence for `auth`.
+Industry lists ask for no default credentials. This pytest is that sentence for `auth`.
 
 ## What the repaired files must show
 
@@ -34,12 +34,12 @@ Industry checklists want no default credentials. This pytest is that sentence fo
 
 ## What this is not
 
-Vault without a test. Same key for all tenants. Password lifecycle (a different authenticator). gitignore as revocation. A key-service dashboard as rotation. Envelope wrapping (data key vs wrapping key) as this pytest.
+Vault without a test. Same key for all tenants. Password lifecycle (a different authenticator). gitignore as revocation. A key-service dashboard as rotation. Envelope wrapping (data key vs wrapping key) as this check.
 
 ## What can still go wrong
 
 - Copies already cloned still hold the old string until they are rebuilt.
-- A second default on a worker is another path of the same cell (later topic).
+- A second default on a worker is another path of the same rule (later topic).
 - Keys baked into a phone app wait for a later topic.
 - Timed rotation (advanced extra) is not this practice.
 - A hardware box for crypto (advanced extra) is not this practice.
@@ -56,7 +56,7 @@ It must pass.
 
 ## Use it somewhere new
 
-Clinic: rotate the gist-leaked key and prove the old string fails, including missing-current deny.
+A clinic example: rotate the gist-leaked key and prove the old string fails, including missing-current deny.
 
 ## What this page is not doing
 

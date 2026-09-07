@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Purge[Purge partition]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a log product. They do not walk the deletion graph. Someone still has to own the leftover.
+Industry lists talk about noticing, responding, and recovering. They do not pick a log product. They do not walk the deletion graph. Someone still has to own the leftover.
 
 ## Signals that do not become a second leak
 
@@ -43,7 +43,7 @@ Not: a note body, a personal email, or “privacy law handled it.”
 
 If your alert includes a note body, you have opened a second leak in the paging channel.
 
-A green dashboard tile that says “privacy mode” is not that pytest. If a replica warehouse still has `alice`, treat it as the same leftover body, not a separate “eventual consistency” pass. Search, analytics, and the appointment-card analogue are other paths of the same leftover — inventory them before claiming recover. An “account deleted” email is not recovery.
+A green dashboard tile that says “privacy mode” is not that check. If a replica warehouse still has `alice`, treat it as the same leftover body, not a separate “eventual consistency” pass. Search, analytics, and the appointment-card analogue are other paths of the same leftover — inventory them before claiming recover. An “account deleted” email is not recovery.
 
 ## What the framework does vs what you still have to check
 
@@ -59,8 +59,8 @@ Write one log line you would accept in review (ids, reason, store name, no body)
 
 ## Use it somewhere new
 
-Clinic: notice appointment-card notes after patient delete; do not paste the chart into the ticket. Do not query a live warehouse.
+A clinic example: notice appointment-card notes after patient delete; do not paste the chart into the ticket. Do not query a live warehouse.
 
 ## What this page is not doing
 
-A log-product name is not the rule. Do not run live queries against a production warehouse. Answer keys are not on this site.
+Naming a product is not the rule. Do not run live queries against a production warehouse. Answer keys are not on this site.

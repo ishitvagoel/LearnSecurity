@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# A broken runtime must fail the check
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -62,8 +62,8 @@ Paste nothing from answer keys. Write fail/pass into your notes next to the `exe
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts "the prompt mentions `exec_sql`" is not this topic. A live vendor tenant is out of scope.
+A clinic example: a test that only asserts "the prompt mentions `exec_sql`" is not this topic. A live vendor tenant is out of scope.
 
 ## What this page is not doing
 
-Do not add a live-model trophy. Do not log transcripts. Answer keys are not on this site. Do not claim you finished an assurance gate.
+Do not treat a live model screenshot as proof. Do not log transcripts. Answer keys are not on this site. This page does not mark you as finished.

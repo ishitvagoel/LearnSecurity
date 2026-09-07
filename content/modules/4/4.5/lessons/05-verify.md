@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# A token for another API, or a missing audience, must fail
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -30,7 +30,7 @@ python3 -m pytest labs/4.5/4.5-lab/tests --impl vulnerable
 python3 -m pytest labs/4.5/4.5-lab/tests --impl fixed
 ```
 
-The honest expected-aud test may pass on both. That does not excuse the deny tests. If the broken files do not fail other-api, the lab is miswired — fix the wiring, not the check. An environment error is not security evidence.
+The honest expected-aud test may pass on both. That does not excuse the deny tests. If the broken files do not fail other-api, the lab is miswired — fix the wiring, not the check. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 

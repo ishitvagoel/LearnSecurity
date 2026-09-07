@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# The broken files must fail when the phone says ok but attest fails
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -50,11 +50,11 @@ Record those as leftover risk or later topics, not as silent passes.
 
 ## Practice
 
-Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the map-page row. Reject a “check” that only greps `PlayIntegrity` in Gradle without calling `allow_export({"integrity": "ok"}, "fail")`. An environment error is not security evidence.
+Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the map-page row. Reject a “check” that only greps `PlayIntegrity` in Gradle without calling `allow_export({"integrity": "ok"}, "fail")`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic: a check that only asserts the Android button is disabled is not this cell. A live Play Console call is out of scope.
+A clinic example: a check that only asserts the Android button is disabled is not this rule. A live Play Console call is out of scope.
 
 ## What this page is not doing
 

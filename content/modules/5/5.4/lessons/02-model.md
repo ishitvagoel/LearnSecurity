@@ -29,7 +29,7 @@ flowchart TD
   Sock[server_scheme] --> Trust[What you trust]
 ```
 
-An earlier topic used hop versus cache key. Here the hop is the channel-authenticity cell.
+An earlier topic used hop versus cache key. Here the hop is the channel-authenticity rule.
 
 ## Step 1: name the pieces
 
@@ -61,7 +61,7 @@ Draw this map so someone else could name the pytest cases. Point at `labs/5.4/5.
 
 ## Use it somewhere new
 
-Clinic: mutual TLS as service identity. A page’s API client `https://` is not the API socket.
+A clinic example: mutual TLS as service identity. A page’s API client `https://` is not the API socket.
 
 ## What can still go wrong
 

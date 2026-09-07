@@ -37,7 +37,7 @@ python3 -m pytest labs/7.3/7.3-lab/tests --impl vulnerable
 python3 -m pytest labs/7.3/7.3-lab/tests --impl fixed
 ```
 
-Honest matching signatures may pass on both implementations. That does not excuse the missing-sig deny test. If the broken files do not fail `test_missing_signature_is_rejected`, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
+Honest matching signatures may pass on both implementations. That does not excuse the missing-sig deny test. If the broken files do not fail `test_missing_signature_is_rejected`, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
@@ -62,8 +62,8 @@ Paste nothing from answer keys. Write fail/pass into your notes next to the matr
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts HTTP 200 on `/webhook` is not this check. A live vendor POST is out of scope.
+A clinic example: a test that only asserts HTTP 200 on `/webhook` is not this check. A live vendor POST is out of scope.
 
 ## What this page is not doing
 
-Do not add a live Stripe trophy. Do not log bodies or `lab-secret`. Answer keys are not on this site.
+Do not treat a live Stripe screenshot as proof. Do not log bodies or `lab-secret`. Answer keys are not on this site.

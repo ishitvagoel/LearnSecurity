@@ -20,9 +20,9 @@ flowchart TD
   Svc -->|no| Deny["return none"]
 ```
 
-The lab’s repaired files return `"worker-sc"` only on an exact service match. Production still needs a least-privileged database role for that principal (3.3): a correctly named worker that is still god-mode can read every company. After the worker is `worker-sc`, it may still need Alice’s grant (4.4) to choose *which* notes. That later check is advanced work, not this pytest. Broker access lists wait for 10.3.
+The lab’s repaired files return `"worker-sc"` only on an exact service match. Production still needs a least-privileged database role for that principal (3.3): a correctly named worker that is still god-mode can read every company. After the worker is `worker-sc`, it may still need Alice’s grant (4.4) to choose *which* notes. That later check is advanced work, not this check. Broker access lists wait for 10.3.
 
-Industry lists want that individual service account. This pytest is that sentence for leftover Alice.
+Industry lists ask for that individual service account. This pytest is that sentence for leftover Alice.
 
 ## What the repaired files must show
 
@@ -44,7 +44,7 @@ God-mode database role (3.3) as this check. Passing Alice’s login through the 
 
 - Service role that is still god-mode (3.3).
 - Poison-message loops and retries of revoked grants (2.4).
-- After the worker is the worker, choosing notes from Alice’s grant is a different cell.
+- After the worker is the worker, choosing notes from Alice’s grant is a different rule.
 - Field dumps from the worker serializer (7.2).
 - Leftover default worker credentials (5.3).
 - Broker access lists wait for 10.3.
@@ -62,7 +62,7 @@ It must pass. Run from the lab directory if collection at repo root is polluted.
 
 ## Use it somewhere new
 
-Clinic: stop treating “the batch job runs on the hospital VLAN” as worker identity.
+A clinic example: stop treating “the batch job runs on the hospital VLAN” as worker identity.
 
 ## What can still go wrong
 

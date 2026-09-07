@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# Using the same token a second time must fail
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -37,14 +37,14 @@ python3 -m pytest labs/6.6/6.6-lab/tests --impl vulnerable
 python3 -m pytest labs/6.6/6.6-lab/tests --impl fixed
 ```
 
-Map the test to the second-`t1` deny row you wrote. If the broken files do not fail the second `t1`, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
+Map the test to the second-`t1` deny row you wrote. If the broken files do not fail the second `t1`, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
 - Atomic lock under threads (production shape)
 - Transaction rollback
 - Fail-open on errors, except as a named review smell
-- Last-resort error handler (advanced; not this pytest)
+- Last-resort error handler (advanced; not this check)
 - Mail delivery or recipient authenticity (4.2)
 
 Record those as leftover or later topics, not as silent passes.
@@ -62,7 +62,7 @@ Paste nothing from answer keys. Write fail/pass into your notes next to the matr
 
 ## Use it somewhere new
 
-Clinic guardian invite. A test that only asserts HTTP 200 on `/accept` is not this cell (see 9.3). A test that clicks a live mail link is out of scope.
+Clinic guardian invite. A test that only asserts HTTP 200 on `/accept` is not this rule (see 9.3). A test that clicks a live mail link is out of scope.
 
 ## What this page is not doing
 

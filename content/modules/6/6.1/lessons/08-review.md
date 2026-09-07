@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"internal users"| False[False comfort]
 ```
 
-The review starts at the protected effect (program is not `sh`; name is one element). Everything that is not an argv list at that call is a candidate second parser. A denylist of punctuation while `uses_shell` stays true is the same smell, not a different finding class.
+The review starts at the protected effect (program is not `sh`; name is one element). Everything that is not an argv list at that call is a candidate second parser. A denylist of punctuation while `uses_shell` stays true is the same problem, not a different kind of finding.
 
 ## Seeded smells (label them yourself)
 
@@ -40,7 +40,7 @@ Also reject: live command execution; closing findings without re-running `test_d
 - subprocess wrappers auto-escape shells
 - A scanner finding is the rule
 - Internal users make a shell safe
-- Executing argv is how you test this cell
+- Executing argv is how you test this rule
 
 ## Practice
 

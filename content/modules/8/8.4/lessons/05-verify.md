@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# The broken files must fail when a debug build looks ok
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -50,12 +50,12 @@ Record those as leftover risk or later topics, not as silent passes.
 
 ## Practice
 
-Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the map-page row. Reject a “check” that only greps `minifyEnabled` without calling `api_allowed("debug", "ok")`. An environment error is not security evidence.
+Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the map-page row. Reject a “check” that only greps `minifyEnabled` without calling `api_allowed("debug", "ok")`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic: a check that only asserts the debug APK builds is not this cell. Store APK unpacking is out of scope.
+A clinic example: a check that only asserts the debug APK builds is not this rule. Store APK unpacking is out of scope.
 
 ## What this page is not doing
 
-Do not add a live Play trophy. Do not log signing keys. Answer keys are not on this site.
+Do not treat a live Play screenshot as proof. Do not log signing keys. Answer keys are not on this site.

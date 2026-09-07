@@ -23,9 +23,9 @@ flowchart TD
   Q -->|maturity mapped| False[False comfort]
 ```
 
-Classification starts at the protected effect (empty owner denied). Everything that is not the schema at that call is a candidate always-accept path. A maturity screenshot without that pytest is the same smell, not a different finding class.
+Start from what must stay true (empty owner denied). Everything that is not the schema at that call is a candidate always-accept path. A maturity screenshot without that check is the same problem, not a different kind of finding.
 
-Unread register is leftover. Tech-debt rename is leftover. Do not skip `test_exception_needs_owner_review_and_wcag`. Do not claim you finished an assurance gate. Do not contact a live disclosure inbox to prove the finding.
+Unread register is leftover. Tech-debt rename is leftover. Do not skip `test_exception_needs_owner_review_and_wcag`. This page does not mark you as finished. Do not contact a live disclosure inbox to prove the finding.
 
 ## Seeded smells (label them yourself)
 

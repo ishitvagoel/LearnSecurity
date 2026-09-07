@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# The broken files must fail when a link claims admin
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -48,12 +48,12 @@ Record those as leftover risk or later topics, not as silent passes.
 
 ## Practice
 
-Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the map-page row. Reject a “check” that only greps `android:autoVerify` without calling `open_link({"as": "admin"})`. An environment error is not security evidence.
+Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the map-page row. Reject a “check” that only greps `android:autoVerify` without calling `open_link({"as": "admin"})`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic: a check that only asserts the Activity launched is not this cell. A sideloaded malware APK is out of scope.
+A clinic example: a check that only asserts the Activity launched is not this rule. A sideloaded malware APK is out of scope.
 
 ## What this page is not doing
 
-Do not add a live Intent trophy. Do not log full URLs that contain tokens. Answer keys are not on this site.
+Do not treat a live Intent screenshot as proof. Do not log full URLs that contain tokens. Answer keys are not on this site.

@@ -66,7 +66,7 @@ It must pass. Run from the lab directory if a collection at the repo root is pol
 
 ## Use it somewhere new
 
-Clinic: keep the finding open until the isolation pytest is green. The lab still uses fake strings.
+A clinic example: keep the finding open until the isolation pytest is green. The lab still uses fake strings.
 
 ## What can still go wrong
 
@@ -74,4 +74,4 @@ Same-root-cause variants (extra fields). Role-change caches. Exploratory leftove
 
 ## What this page is not doing
 
-Do not pentest a public host. Do not claim you finished an assurance gate from a PDF. Do not present a testing-catalogue draft as the current final pin.
+Do not pentest a public host. This page does not mark you as finished. from a PDF. Do not present a testing-catalogue draft as the current final pin.

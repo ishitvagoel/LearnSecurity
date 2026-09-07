@@ -1,4 +1,4 @@
-# Evidence is the public host denied, then a passing pair
+# The public host must be denied
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify

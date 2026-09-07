@@ -22,9 +22,9 @@ flowchart TD
   G -->|no| Deny[None]
 ```
 
-Do not accept “we called revoke” as consultation. The repaired files require owner-or-grant on this `read`. Production still needs every *other* read path — delayed workers and phone caches can serve the old grant. Copies already sent are gone from what this pytest can prove. Access-rights change inside an already-open session without signing in again is extra, advanced work: storing a revoke row is not in-session deny.
+Do not accept “we called revoke” as consultation. The repaired files require owner-or-grant on this `read`. Production still needs every *other* read path — delayed workers and phone caches can serve the old grant. Copies already sent are gone from what this check can prove. Access-rights change inside an already-open session without signing in again is extra, advanced work: storing a revoke row is not in-session deny.
 
-Industry lists want permission enforced. This pytest is that sentence for post-revoke read.
+Industry lists ask for permission enforced. This pytest is that sentence for post-revoke read.
 
 ## What the repaired files must show
 
@@ -52,7 +52,7 @@ Fail closed: if you are unsure whether the grant is gone, return None. Uncertain
 - Delayed worker leftover session is a different grain from an earlier week.
 - Phone cache is a different grain.
 - Email already sent is leftover copies.
-- Access-rights change in the same session without signing in again is not this pytest.
+- Access-rights change in the same session without signing in again is not this check.
 - A second note `n2` is not in the practice files.
 
 ## Practice
@@ -75,4 +75,4 @@ Delayed worker. Phone cache. Access-rights change in the same session. Email alr
 
 ## What this page is not doing
 
-Do not hit a live tenant. Do not claim you finished an assurance gate from a scanner screenshot. Do not treat a README checklist as mastery.
+Do not hit a live tenant. This page does not mark you as finished. from a scanner screenshot. Do not treat a README checklist as mastery.

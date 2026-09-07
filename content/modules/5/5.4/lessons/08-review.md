@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"HSTS preload"| False[False comfort]
 ```
 
-The review starts at the protected effect (mismatch false). Everything that is not `server_scheme == "https"` at that call is a candidate extra path. A server flag that trusts proxy headers from `*` is the same smell, not a different finding class.
+The review starts at the protected effect (mismatch false). Everything that is not `server_scheme == "https"` at that call is a candidate extra path. A server flag that trusts proxy headers from `*` is the same problem, not a different kind of finding.
 
 ## Seeded smells (label them yourself)
 

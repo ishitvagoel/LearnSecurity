@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# The broken files must fail when the header is Report-Only
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -47,12 +47,12 @@ Record those as leftover risk or later topics, not as silent passes.
 
 ## Practice
 
-Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the map-page row. Reject a “check” that only greps `Content-Security-Policy` in HTML without calling `isolation_enforced` on a Report-Only dict. An environment error is not security evidence.
+Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the map-page row. Reject a “check” that only greps `Content-Security-Policy` in HTML without calling `isolation_enforced` on a Report-Only dict. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic: a check that only asserts “a CSP-looking header exists” is not this rule. A live page is out of scope.
+A clinic example: a check that only asserts “a CSP-looking header exists” is not this rule. A live page is out of scope.
 
 ## What this page is not doing
 
-Do not add a live-script trophy. Do not log HTML. Answer keys are not on this site. Check-in 7 stays not finished.
+Do not treat a live script screenshot as proof. Do not log HTML. Answer keys are not on this site. This page does not finish check-in 7.

@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# A query that returns a secret must fail
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -9,7 +9,7 @@
 
 ## Picture: query returns secret must fail
 
-A passing collection count is not this cell. The failing observation on the broken files is **query returns secret**.
+A passing collection count is not this rule. The failing observation on the broken files is **query returns secret**.
 
 ```mermaid
 flowchart LR

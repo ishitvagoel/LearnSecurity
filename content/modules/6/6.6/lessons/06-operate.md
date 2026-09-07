@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Revoke[Remove extra membership if one landed]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a log product. They do not consume the token. Someone still has to own the leftover.
+Industry lists talk about noticing, responding, and recovering. They do not pick a log product. They do not consume the token. Someone still has to own the leftover.
 
 ## Signals that do not become a second leak
 
@@ -43,7 +43,7 @@ Not: the token, a note body, a real email, or “the mailer said clicked once.�
 
 If your alert includes the raw token, you have opened a 4.3 hole in the paging channel.
 
-A green “unique index” tile is not that pytest. A mail vendor dashboard will show “link clicked once” and stay silent when `/accept` still returns true the second time. Detection must observe **second `accept` false**, not a click counter. Password-reset consume is another path of the same family — inventory it before claiming recover.
+A green “unique index” tile is not that check. A mail vendor dashboard will show “link clicked once” and stay silent when `/accept` still returns true the second time. Detection must observe **second `accept` false**, not a click counter. Password-reset consume is another path of the same family — inventory it before claiming recover.
 
 ## What the framework does vs what you still have to check
 
@@ -59,8 +59,8 @@ Write one log line you would accept in review (ids, reason, no token). Tie it to
 
 ## Use it somewhere new
 
-Clinic: notice guardian-invite replays; do not paste the mail link into the ticket. Do not click a live invite.
+A clinic example: notice guardian-invite replays; do not paste the mail link into the ticket. Do not click a live invite.
 
 ## What this page is not doing
 
-A log-product name is not the rule. Live invite replay is out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Naming a product is not the rule. Live invite replay is out of scope. This site does not mark you as finished. Answer keys are not on this site.

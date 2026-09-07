@@ -19,7 +19,7 @@ Do not decode a live column. Do not decode an employer backup. Do not decode a c
 
 What must not happen: `protect()` is reversible as Base64 to `secret`.
 
-Who can act here: an honest storage reader — a database admin, a stolen disk, a backup tape — who can read the column. That stands in for a clinic SSN column named `ssn_encrypted` that is still encoding. What you are supposed to trust: `protect` is not reversible as encoding. HTTPS, volume encryption, a column rename, and “we use AES” in a README are not what you trust for this cell.
+Who could do this: an honest storage reader — a database admin, a stolen disk, a backup tape — who can read the column. That stands in for a clinic SSN column named `ssn_encrypted` that is still encoding. What is supposed to stop this: `protect` is not reversible as encoding. HTTPS, volume encryption, a column rename, and “we use AES” in a README are not enough.
 
 ## Picture: reversible encoding
 
@@ -31,9 +31,9 @@ flowchart TD
 
 The broken files show **cause** (encoding named encryption), not a decoder script for production. What has to be true first: `protect` returns `base64.b64encode(p)`; `looks_encrypted` is `t != "secret"`. You do not need a live column. You must not decode one.
 
-Industry lists want approved authenticated encryption, not encoding. Argon2 is for **passwords**, not this field.
+Industry lists ask for approved authenticated encryption, not encoding. Argon2 is for **passwords**, not this field.
 
-## What to look at — cause, not a trophy
+## What to look at: the cause, not a trophy
 
 Read `vulnerable/crypto.py`. `protect` Base64-encodes the string. Tests:
 
@@ -74,7 +74,7 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/5.2/5.2-lab/tests --impl vulnerable
 ```
 
-Record the failing test `test_protect_is_not_mere_encoding`. Do not add a live decoder against other hosts. An environment error is not security evidence.
+Record the failing test `test_protect_is_not_mere_encoding`. Do not add a live decoder against other hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

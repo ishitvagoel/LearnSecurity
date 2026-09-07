@@ -20,9 +20,9 @@ flowchart TD
   Cap -->|no| Deny[Deny]
 ```
 
-The lab’s repaired files use `n_calls <= 3`. Production still needs a per-person counter (the map from the last page), not a global IP limit that punishes people on one office network. GraphQL aliases (7.1) are another path of the same budget. New accounts can reset the window — name that leftover. Human timing tricks are advanced work, not this pytest.
+The lab’s repaired files use `n_calls <= 3`. Production still needs a per-person counter (the map from the last page), not a global IP limit that punishes people on one office network. GraphQL aliases (7.1) are another path of the same budget. New accounts can reset the window — name that leftover. Human timing tricks are advanced work, not this check.
 
-Industry lists want documented limits actually implemented. This pytest is that sentence for `allow(4)`.
+Industry lists ask for documented limits actually implemented. This pytest is that sentence for `allow(4)`.
 
 ## What the repaired files must show
 
@@ -60,7 +60,7 @@ It must pass. Then write one sentence: which rule is restored, and which leftove
 
 ## Use it somewhere new
 
-Clinic: stop treating “Export” as unlimited; count on the server.
+A clinic example: stop treating “Export” as unlimited; count on the server.
 
 ## What can still go wrong
 

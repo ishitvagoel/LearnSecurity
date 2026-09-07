@@ -20,9 +20,9 @@ flowchart TD
   Id -->|no| Locate[optional locator]
 ```
 
-The repaired files ignore extras entirely (`open_link` returns without writing SESSION). Production may still honor locators such as `note=n1` after 1.2 / 4.4 — this pytest only requires the principal stay alice. Verified App Links still pass query strings. Custom schemes remain hijackable. WebView `addJavascriptInterface` is a new IPC (6.2).
+The repaired files ignore extras entirely (`open_link` returns without writing SESSION). Production may still honor locators such as `note=n1` after 1.2 / 4.4 — this check only requires the principal stay alice. Verified App Links still pass query strings. Custom schemes remain hijackable. WebView `addJavascriptInterface` is a new IPC (6.2).
 
-Industry lists want authorization on a trusted service layer. This pytest is that sentence for `open_link({"as": "admin"})`.
+Industry lists ask for authorization on a trusted service layer. This pytest is that sentence for `open_link({"as": "admin"})`.
 
 ## What the repaired files must show
 
@@ -61,7 +61,7 @@ Must pass. Run from the lab directory if collection at repo root is polluted. Th
 
 ## Use it somewhere new
 
-Clinic: stop treating `as=doctor` as a convenient demo login.
+A clinic example: stop treating `as=doctor` as a convenient demo login.
 
 ## What can still go wrong
 

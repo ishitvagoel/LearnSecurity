@@ -67,7 +67,7 @@ Outbox pattern. Event schemas that still carry `user_id` as data, not as login.
 
 ## What can still go wrong
 
-After the worker is the worker, choosing notes from Alice’s grant is advanced work, not this pytest. Poison loops. Field dumps from the worker (7.2). Hardcoded worker defaults (5.3).
+After the worker is the worker, choosing notes from Alice’s grant is advanced work, not this check. Poison loops. Field dumps from the worker (7.2). Hardcoded worker defaults (5.3).
 
 ## What this page is not doing
 

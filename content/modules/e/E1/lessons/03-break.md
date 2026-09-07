@@ -17,7 +17,7 @@ Only `labs/E1/e1-lab` is in scope. The practice is an in-process `run_tool(name,
 
 Do not paste this exercise onto a public API, employer agent, or live hospital summarizer "to see what happens."
 
-What you trust for this check: `run_tool` is supposed to **allow-list the name in the runtime**. Library defaults, a system prompt, and the web framework itself are not what you trust.
+What is supposed to stop this: `run_tool` is supposed to **allow-list the name in the runtime**. Library defaults, a system prompt, and the web framework itself are not enough.
 
 Who can take the tools in this story: prompt injection in a note plus a confused-deputy runtime. That stands in for "the system prompt forbids SQL," a retrieval corpus treated as what you trust, or a famous-bugs mapping treated as mediation.
 
@@ -73,7 +73,7 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/E1/e1-lab/tests --impl vulnerable
 ```
 
-Run from `labs/E1/e1-lab` if a collection at the repo root picks up `site/`. Record `test_exec_sql_tool_is_denied`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/E1/e1-lab` if a collection at the repo root picks up `site/`. Record `test_exec_sql_tool_is_denied`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
@@ -81,4 +81,4 @@ Clinic summarizer: predict without leaving this directory. Do not call a live mo
 
 ## What this page is not doing
 
-No live-model, production-agent, or public prompt-injection instructions. Do not claim you finished an assurance gate. Do not treat a famous-bugs list as the rulebook.
+No live-model, production-agent, or public prompt-injection instructions. This page does not mark you as finished. Do not treat a famous-bugs list as the rulebook.

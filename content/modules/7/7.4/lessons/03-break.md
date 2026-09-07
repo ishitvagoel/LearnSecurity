@@ -19,7 +19,7 @@ Do not attach to a public broker. Do not probe an employer queue. Do not probe a
 
 What must not happen: a user session accepted as worker identity. `exporter({"user_session": "alice", "service": None})` returns `"alice"`.
 
-Who can act here: a leftover cookie stuffed into a job, or inherited request context. That stands in for a clinic “Export overnight” that copies the clinician cookie into the task so “the job knows who asked.” What you are supposed to trust: `exporter` authenticates as a **named service principal**. A private network, an “internal” queue, and a zero-trust dashboard are not what you trust for this check.
+Who could do this: a leftover cookie stuffed into a job, or inherited request context. That stands in for a clinic “Export overnight” that copies the clinician cookie into the task so “the job knows who asked.” What is supposed to stop this: `exporter` authenticates as a **named service principal**. A private network, an “internal” queue, and a zero-trust dashboard are not enough.
 
 ## Picture: leftover cookie wins
 
@@ -31,9 +31,9 @@ flowchart TD
 
 The broken files show **cause** (ambient user context). Do not aim anything except this practice. What has to be true first: `exporter` returns `user_session` if present. You do not need a broker. You must not attach to a live queue.
 
-Industry lists want backend jobs logged in as their own accounts, not leftover people. Module 4.1 already revoked leftover HTTP sessions. This check is **whether the worker still is that session**. A zero-trust paper does not replace the pytest.
+Industry lists ask for backend jobs logged in as their own accounts, not leftover people. Module 4.1 already revoked leftover HTTP sessions. This check is **whether the worker still is that session**. A zero-trust paper does not replace the pytest.
 
-## What to look at — cause, not a trophy
+## What to look at: the cause, not a trophy
 
 Read `vulnerable/worker.py`. It returns `user_session` if present. Tests:
 
@@ -77,7 +77,7 @@ From the repository root, in a throwaway environment:
 python3 -m pytest labs/7.4/7.4-lab/tests --impl vulnerable
 ```
 
-Run from `labs/7.4/7.4-lab` if a repo-root collection picks up `site/`. Record `test_user_session_is_not_worker_identity`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/7.4/7.4-lab` if a repo-root collection picks up `site/`. Record `test_user_session_is_not_worker_identity`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

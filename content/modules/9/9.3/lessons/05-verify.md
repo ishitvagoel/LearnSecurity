@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# A broken suite must fail the check
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -62,8 +62,8 @@ Paste nothing from answer keys. Write fail/pass into your notes next to the isol
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts the patient page loads is not this topic. A live fuzz call is out of scope.
+A clinic example: a test that only asserts the patient page loads is not this topic. A live fuzz call is out of scope.
 
 ## What this page is not doing
 
-Do not add a live fuzz trophy. Do not log note bodies. Answer keys are not on this site.
+Do not treat a live fuzz screenshot as proof. Do not log note bodies. Answer keys are not on this site.

@@ -19,7 +19,7 @@ Do not paste this exercise onto a public site, employer board, or live clinic po
 
 What must not happen: **a member resolves `secret_internal`**. `resolve("member", "secret_internal")` returns true.
 
-Who can act in this story: a member session selecting extra fields. That stands in for a clinic GraphQL `Patient { ssn }`, a REST `?fields=` dump, or a CSV exporter that serializes every ORM column. What you trust: `resolve` is supposed to be a **role × field table** at the trusted layer. A SPA that omits the column, a UUID in the URL, and GraphQL `@hide` the client can skip are not what you trust for this cell.
+Who could do this: a member session selecting extra fields. That stands in for a clinic GraphQL `Patient { ssn }`, a REST `?fields=` dump, or a CSV exporter that serializes every ORM column. What is supposed to stop this: `resolve` is supposed to be a **role × field table** at the trusted layer. A SPA that omits the column, a UUID in the URL, and GraphQL `@hide` the client can skip are not enough.
 
 ## Picture: every field is visible
 
@@ -30,7 +30,7 @@ flowchart TD
 
 The broken files show **cause** (no field table). Do not query anything except this practice. What has to be true first: `resolve` returns true for every pair. You do not need HTTP. You must not query a public GraphQL host.
 
-Identifiers find a row. They do not authorize fields. Object×company grants were 4.4; this cell is **which fields that grant may read**. Extra keys on *write* were 7.1.
+Identifiers find a row. They do not authorize fields. Object×company grants were 4.4; this rule is **which fields that grant may read**. Extra keys on *write* were 7.1.
 
 ## What to read in the broken files
 
@@ -70,7 +70,7 @@ Run checks against the broken files (they **must fail** on member × `secret_int
 python3 -m pytest labs/7.2/7.2-lab/tests --impl vulnerable
 ```
 
-Run from `labs/7.2/7.2-lab` if a repo-root collection picks up `site/`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/7.2/7.2-lab` if a repo-root collection picks up `site/`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

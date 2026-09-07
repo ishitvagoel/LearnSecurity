@@ -20,9 +20,9 @@ flowchart TD
   Attest -->|no| Deny[deny]
 ```
 
-The repaired files ignore `client_claims` entirely. Production still needs a real server-side token verify (not this pytest) plus 1.2 session and 4.4 object grants. Play Integrity is a vendor **signal** the server may consult — not a grant. Honest users on rooted phones need an **owned** product policy, not a silent grant (the first page).
+The repaired files ignore `client_claims` entirely. Production still needs a real server-side token verify (not this check) plus 1.2 session and 4.4 object grants. Play Integrity is a vendor **signal** the server may consult — not a grant. Honest users on rooted phones need an **owned** product policy, not a silent grant (the first page).
 
-Industry lists want authorization enforced on a trusted service layer. This pytest is that sentence for `allow_export(..., "fail")`.
+Industry lists ask for authorization enforced on a trusted service layer. This pytest is that sentence for `allow_export(..., "fail")`.
 
 ## What the repaired files must show
 
@@ -63,7 +63,7 @@ Must pass. Run from the lab directory if collection at repo root is polluted. Th
 
 ## Use it somewhere new
 
-Clinic: stop treating a client `hipaaMode` checkbox as the server’s BAA switch.
+A clinic example: stop treating a client `hipaaMode` checkbox as the server’s BAA switch.
 
 ## What can still go wrong
 

@@ -23,7 +23,7 @@ flowchart TD
   Q -->|Play App Signing| False[False comfort]
 ```
 
-Classification starts at the protected effect (debug plus ok denied). Everything that is not a server `release` and attest check at that call is a candidate debug-to-prod path. An R8 screenshot without that pytest is the same smell, not a different finding class.
+Start from what must stay true (debug plus ok denied). Everything that is not a server `release` and attest check at that call is a candidate debug-to-prod path. An R8 screenshot without that check is the same problem, not a different kind of finding.
 
 Signing keys in the repo (5.3) and the same API key in debug and release are other leftover holes — name them, do not skip `test_debug_build_cannot_call_prod_export`. Resilience checklists raise cost; they do not become Gate 8 evidence.
 
@@ -42,7 +42,7 @@ Also reject: live store reverse engineering; closing findings without re-running
 - Play App Signing means we do not care
 - Anti-debug proves the server can trust the client
 - Mobile-app “R-level” is a current verification level
-- `minifyEnabled` is this cell
+- `minifyEnabled` is this rule
 
 ## Practice
 

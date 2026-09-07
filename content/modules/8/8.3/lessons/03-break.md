@@ -19,7 +19,7 @@ Do not paste this exercise onto a public app, employer clinic, or live EHR.
 
 What must not happen: **`as=admin` switches the session**. After `open_link({"as": "admin"})`, `current_user()` is `"admin"`.
 
-Attacker capability in this practice: another app on the tablet sending extras, or a crafted link. That stands in for a clinic kiosk demo `as=doctor`, an exported Activity, or a WebView that forwards query identity. What you trust: `open_link` is supposed to treat extras as **data** (2.1 / 7.1); the session stays server-issued (4.3). Verified App Links, `https`, and `exported=false` without a test are not what you trust for this cell.
+Who could do this: another app on the tablet sending extras, or a crafted link. That stands in for a clinic kiosk demo `as=doctor`, an exported Activity, or a WebView that forwards query identity. What is supposed to stop this: `open_link` is supposed to treat extras as **data** (2.1 / 7.1); the session stays server-issued (4.3). Verified App Links, `https`, and `exported=false` without a test are not enough.
 
 ## Picture: extras become the user
 
@@ -30,7 +30,7 @@ flowchart TD
 
 The broken files show **cause** (identity from the link). Do not send Intents at anything except these local files. What has to be true first: `open_link` copies `as` onto the session. You do not need Android. You must not install a malware APK.
 
-Last topic already said the session is identity (4.3). This cell is **the Intent must not become the principal**.
+Last topic already said the session is identity (4.3). This rule is **the Intent must not become the principal**.
 
 ## What to read in the broken files
 
@@ -67,7 +67,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 python3 -m pytest labs/8.3/8.3-lab/tests --impl vulnerable
 ```
 
-Run from `labs/8.3/8.3-lab` if a repo-root collection picks up `site/`. Record `test_deeplink_as_param_does_not_switch_user`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/8.3/8.3-lab` if a repo-root collection picks up `site/`. Record `test_deeplink_as_param_does_not_switch_user`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

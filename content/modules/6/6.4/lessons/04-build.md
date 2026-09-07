@@ -19,9 +19,9 @@ flowchart TD
   Under -->|no| Deny[ValueError]
 ```
 
-The lab’s repaired files resolve `(ROOT / name)` and raise `ValueError("escape")` unless `ROOT` is `p` or in `p.parents`. Production still needs internally generated names as extra defense. Zip member paths are another parser of the same cell. XML/pickle/YAML are leftover of the earlier data-vs-grammar shape, not this prefix.
+The lab’s repaired files resolve `(ROOT / name)` and raise `ValueError("escape")` unless `ROOT` is `p` or in `p.parents`. Production still needs internally generated names as extra defense. Zip member paths are another parser of the same rule. XML/pickle/YAML are leftover of the earlier data-vs-grammar shape, not this prefix.
 
-Industry checklists want a hard check on user filenames. This pytest is that sentence for `resolve`.
+Industry lists ask for a hard check on user filenames. This pytest is that sentence for `resolve`.
 
 ## What the repaired files must show
 
@@ -37,7 +37,7 @@ A blacklist of `..` only. Trusting `Content-Type`. Running uploads as code. Unpa
 ## What can still go wrong
 
 - Zip members that still use user paths inside archives (later, harder leftover).
-- Magic-byte vs extension is a different cell.
+- Magic-byte vs extension is a different rule.
 - Uploads run as server code if you later serve from an interpreted directory.
 - Image codecs wait for a later elective.
 - XML entity expansion / pickle / YAML `load` are other parsers (same earlier shape).
@@ -55,7 +55,7 @@ It must pass. Do not `open()` a path outside the lab folder.
 
 ## Use it somewhere new
 
-Clinic: stop joining the original scan filename onto a public folder; canonicalize then prefix.
+A clinic example: stop joining the original scan filename onto a public folder; canonicalize then prefix.
 
 ## What this page is not doing
 

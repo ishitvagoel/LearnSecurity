@@ -65,7 +65,7 @@ Notification fan-out. GraphQL aliases later in 7.1.
 
 ## What can still go wrong
 
-New accounts that reset the window. An owned burst exception with no owner. Human timing tricks (advanced, not this pytest).
+New accounts that reset the window. An owned burst exception with no owner. Human timing tricks (advanced, not this check).
 
 ## What this page is not doing
 

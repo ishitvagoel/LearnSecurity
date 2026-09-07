@@ -1,4 +1,4 @@
-# Fail on the broken files, then pass on the repaired ones
+# Glued-together SQL must fail the check
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
@@ -37,7 +37,7 @@ python3 -m pytest labs/5.5/5.5-lab/tests --impl vulnerable
 python3 -m pytest labs/5.5/5.5-lab/tests --impl fixed
 ```
 
-Honest bound shape must pass on repaired. Concatenated `str` must fail on broken. If the broken files do not fail the `isinstance(q, str)` branch, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
+Honest bound shape must pass on repaired. Concatenated `str` must fail on broken. If the broken files do not fail the `isinstance(q, str)` branch, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
@@ -66,4 +66,4 @@ Clinic search box. A test that only asserts HTTP 200 is not this check (see 9.3)
 
 ## What this page is not doing
 
-Do not add a live SQL trophy. Do not log bound parameter values that are bodies. Answer keys are not on this site.
+Do not treat a live SQL screenshot as proof. Do not log bound parameter values that are bodies. Answer keys are not on this site.
