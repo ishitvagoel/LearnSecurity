@@ -30,7 +30,7 @@ Recovery is incomplete if the next image still ships `DEFAULT = "sk-lab-hardcode
 
 ## What the framework does vs what you still have to check
 
-“Rotation enabled” on a vault tile does not stop `DEFAULT` from remaining an or-clause. Notice must observe **presented equals the retired secret id**, not a product tile. The retired secret id is the metric. `sk-lab-hardcoded` or a real key is the secret.
+“Rotation enabled” on a vault tile does not stop `DEFAULT` from remaining an or-clause. Match **presented equals the retired secret id**, not a product tile. The retired secret id is the metric. `sk-lab-hardcoded` or a real key is the secret.
 
 ## Practice
 

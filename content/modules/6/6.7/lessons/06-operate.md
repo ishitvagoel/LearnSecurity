@@ -45,7 +45,7 @@ Enabling a rate limit does not deny the fourth export. Notification fan-out and 
 
 ## What the framework does vs what you still have to check
 
-Edge 429s on an IP do not put a per-person counter on `/export.csv`. Detection must observe **`allow(4)` false**, not HTTP status counts. CSV note bodies on `quota_denied` reopen topics 3.1 and 5.1.
+Edge 429s on an IP do not put a per-person counter on `/export.csv`. Gate on **`allow(4)` false**, not HTTP status counts. CSV note bodies on `quota_denied` reopen topics 3.1 and 5.1.
 
 ## Practice
 

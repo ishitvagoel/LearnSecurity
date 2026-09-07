@@ -41,7 +41,7 @@ A sample that still contains the token, a note body, a real email, or “the mai
 
 A raw token in the second-accept ticket is a 4.3 leftover.
 
-A unique-index screenshot does not consume the token. “Link clicked once” on a mail vendor tile does not consume `/accept` the second time. Detection must observe **second `accept` false**, not a click counter. Password-reset consume is another once-token; the seat is not taken until that path is named.
+A unique-index screenshot does not consume the token. “Link clicked once” on a mail vendor tile does not consume `/accept` the second time. Treat **second `accept` false** as the miss, not a click counter. Password-reset consume is another once-token; the seat is not taken until that path is named.
 
 ## What the framework does vs what you still have to check
 

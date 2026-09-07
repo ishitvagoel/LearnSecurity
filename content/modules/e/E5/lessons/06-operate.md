@@ -29,7 +29,7 @@ A row-level vendor name does not prove company isolation. Body tenant B still ha
 
 ## What the framework does vs what you still have to check
 
-Relationship-graph tuple counts stay green while CI’s `tenant_for` prefers the body. Notice must observe **session A plus body B is A**, not “row-level rules are enabled.” The metric is session A plus body B is A. A note body or a GraphQL document dump is the chart.
+Relationship-graph tuple counts stay green while CI’s `tenant_for` prefers the body. Win **session A plus body B is A**, not “row-level rules are enabled.” The metric is session A plus body B is A. A note body or a GraphQL document dump is the chart.
 
 ## Can people still use it
 

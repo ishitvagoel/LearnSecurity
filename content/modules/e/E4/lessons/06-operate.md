@@ -29,7 +29,7 @@ A language-name sticker does not prove this length rule. An oversized `declared_
 
 ## What the framework does vs what you still have to check
 
-Sanitizer hits in supported languages do not bound a Python stand-in (or a C wheel) that copies by `declared_len`. Notice must observe **length ≤ bufsize**, not “the language is memory-safe.” File bytes or a hex dump would name the buffer on the length metric.
+Sanitizer hits in supported languages do not bound a Python stand-in (or a C wheel) that copies by `declared_len`. Cap **length ≤ bufsize**, not “the language is memory-safe.” File bytes or a hex dump would name the buffer on the length metric.
 
 An operator reject screen must say *copy exceeds destination* without requiring a hex dump. People should be able to read that error without a dump of the file.
 

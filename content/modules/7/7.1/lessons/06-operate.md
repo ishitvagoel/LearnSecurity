@@ -32,7 +32,7 @@ An API gateway sticker does not drop `is_admin`. `is_admin` in the PATCH body st
 
 ## What the framework does vs what you still have to check
 
-Schema-mismatch 400s do not stop `/v0/users` from running `user.update(body)`. Notice must observe **`is_admin` still false**, not HTTP status counts. The PATCH JSON on the extra-key metric is a logging leak (3.1 / 5.1).
+Schema-mismatch 400s do not stop `/v0/users` from running `user.update(body)`. Keep **`is_admin` still false**, not HTTP status counts. The PATCH JSON on the extra-key metric is a logging leak (3.1 / 5.1).
 
 Extra-key denials fire without the document.
 

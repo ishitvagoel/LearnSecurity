@@ -46,7 +46,7 @@ Recovery is incomplete if the next route still returns true for an empty header.
 
 ## What the framework does vs what you still have to check
 
-nginx TLS handshake volume is not an empty-header check on `/webhook`. Detection must observe **empty sig false**, not HTTP status counts. The raw body or `lab-secret` on empty-sig-false reopens topics 3.1 and 5.3. **Do not POST to confirm.**
+nginx TLS handshake volume is not an empty-header check on `/webhook`. Fail the webhook on **empty sig false**, not HTTP status counts. The raw body or `lab-secret` on empty-sig-false reopens topics 3.1 and 5.3. **Do not POST to confirm.**
 
 ## Practice
 

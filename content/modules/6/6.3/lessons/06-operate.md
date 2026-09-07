@@ -28,7 +28,7 @@ A network-filter product name does not bind origin and token or prove the anti-f
 
 ## What the framework does vs what you still have to check
 
-Cross-site POST volume can look noisy while `/share.json` still keys only the cookie. Notice must observe **origin mismatch or missing token at `allow_share`**, not CORS error counts. A session cookie or CSRF token on `allow_share` is a logging hole from an earlier topic.
+Cross-site POST volume can look noisy while `/share.json` still keys only the cookie. Test **origin mismatch or missing token at `allow_share`**, not CORS error counts. A session cookie or CSRF token on `allow_share` is a logging hole from an earlier topic.
 
 ## Can people still use it
 

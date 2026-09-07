@@ -28,7 +28,7 @@ Announce “share limit reached” so people can hear it. That announcement is n
 
 ## What the framework does vs what you still have to check
 
-Request-rate paging misses five slow grants plus a sixth import. Notice must observe **share_count versus cap**, not requests per minute. Keep a note body out of the share-cap metric.
+Request-rate paging misses five slow grants plus a sixth import. Compare **share_count versus cap**, not requests per minute. Keep a note body out of the share-cap metric.
 
 ## Practice
 

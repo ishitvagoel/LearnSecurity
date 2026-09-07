@@ -31,7 +31,7 @@ A mobile-filter product name does not ignore `as=`. `as=` on the link still has 
 
 ## What the framework does vs what you still have to check
 
-App Link verified hosts are not a check that an exported Activity dropped `as`. Notice must observe **alice unchanged**, not host association. The Intent metric is alice unchanged. A full deep-link URL or an OAuth code is a logging leak (4.3).
+App Link verified hosts are not a check that an exported Activity dropped `as`. Leave **alice unchanged** as the miss, not host association. The Intent metric is alice unchanged. A full deep-link URL or an OAuth code is a logging leak (4.3).
 
 Dropped `as=` fires without the URL.
 

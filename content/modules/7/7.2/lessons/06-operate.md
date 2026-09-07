@@ -29,7 +29,7 @@ A GraphQL-gateway product name does not check role × field or prove field permi
 
 ## What the framework does vs what you still have to check
 
-GraphQL error charts in APM can look busy while `/export.csv` still dumps every column. Notice must observe **member × `secret_internal` false**, not HTTP status counts. The field value on the field-deny metric is a logging leak (3.1).
+GraphQL error charts in APM can look busy while `/export.csv` still dumps every column. Resolve **member × `secret_internal` false**, not HTTP status counts. The field value on the field-deny metric is a logging leak (3.1).
 
 A `field_denied` line fires without the secret.
 

@@ -32,7 +32,7 @@ A vendor product does not make the tool gate an allow-list.
 | Recover | Revoke leftover agent credentials |
 | Leftover | Prompt-only policy; hallucinated packages; HTML from `search_notes` |
 
-Agent token counts do not mean CI's `run_tool` refused `exec_sql`. Detection must observe **`exec_sql` is None**, not "the model is on-policy." The metric is `exec_sql` is None. A transcript or a note body is the model output.
+Agent token counts do not mean CI's `run_tool` refused `exec_sql`. Deny the tool on **`exec_sql` is None**, not "the model is on-policy." The metric is `exec_sql` is None. A transcript or a note body is the model output.
 
 ```text
 log_denied reason=tool_denied agent=sum-1 tool=exec_sql

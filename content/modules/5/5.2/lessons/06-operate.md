@@ -46,7 +46,7 @@ Recovery is incomplete if the next deploy still wraps `b64encode` in a helper na
 
 ## What the framework does vs what you still have to check
 
-“Key enabled” on a cloud key tile still looks healthy if the column is still Base64. Detection must observe **the round-trip of a known plaintext**, not a product tile. Plaintext `secret` or an SSN on the encoding-miss metric is a logging leak from an earlier lesson.
+“Key enabled” on a cloud key tile still looks healthy if the column is still Base64. Prove **the round-trip of a known plaintext**, not a product tile. Plaintext `secret` or an SSN on the encoding-miss metric is a logging leak from an earlier lesson.
 
 ## Practice
 

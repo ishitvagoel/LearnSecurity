@@ -43,7 +43,7 @@ A “Force HTTPS” toggle does not prove the socket is TLS. A client `https` he
 
 ## What the framework does vs what you still have to check
 
-“HTTPS only” on a CDN tile does not see the app still trusting `X-Forwarded-Proto` from anyone. Notice must observe **header https and socket http**, not a preload list. A server flag that trusts proxy headers does not emit this alert for you.
+“HTTPS only” on a CDN tile does not see the app still trusting `X-Forwarded-Proto` from anyone. Pair **header https and socket http**, not a preload list. A server flag that trusts proxy headers does not emit this alert for you.
 
 ## Can people still use it
 

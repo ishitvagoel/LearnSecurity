@@ -31,7 +31,7 @@ A mobile-device product name does not attest export. A client `premium` flag sti
 
 ## What the framework does vs what you still have to check
 
-Play Console attestation volume is not FastAPI refusing `integrity=ok`. Notice must observe **client ok plus attest fail is false**, not store-listing health. Keep a Play Integrity token and note bodies in the lab — they are a logging leak (3.1 / 4.3).
+Play Console attestation volume is not FastAPI refusing `integrity=ok`. Hold **client ok plus attest fail is false**, not store-listing health. Keep a Play Integrity token and note bodies in the lab — they are a logging leak (3.1 / 4.3).
 
 `attest_fail_export_denied` fires without the app file.
 

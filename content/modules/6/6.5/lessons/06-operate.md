@@ -47,7 +47,7 @@ Recovery is incomplete if the next worker still calls `requests.get` on the form
 
 ## What the framework does vs what you still have to check
 
-“Instance metadata requires a token” on a cloud tile does not constrain the unfurl helper to allowed hosts. Detection must observe **`allowed` false before any GET**, not a packet capture. A query-token URL on `egress_denied` reopens topic 4.3. **Do not fetch to confirm.**
+“Instance metadata requires a token” on a cloud tile does not constrain the unfurl helper to allowed hosts. Require **`allowed` false before any GET**, not a packet capture. A query-token URL on `egress_denied` reopens topic 4.3. **Do not fetch to confirm.**
 
 ## Practice
 

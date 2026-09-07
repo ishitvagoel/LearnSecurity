@@ -44,7 +44,7 @@ Enabling a service account does not stop a leftover cookie from being the princi
 
 ## What the framework does vs what you still have to check
 
-Queue success is not a check that the task dropped `job.get('user_session')`. Detection must observe **Alice session yields `None`**, not queue depth. Alice’s cookie or note bodies next to Alice-session-yields-None reopen topics 3.1 and 4.3.
+Queue success is not a check that the task dropped `job.get('user_session')`. Fail the job on **Alice session yields `None`**, not queue depth. Alice’s cookie or note bodies next to Alice-session-yields-None reopen topics 3.1 and 4.3.
 
 ## Practice
 

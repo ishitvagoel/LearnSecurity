@@ -45,7 +45,7 @@ A CI grep that finds no `sh` does not prove argv is a list. Plugin loaders still
 
 ## What the framework does vs what you still have to check
 
-A host product paging on `sh` children stays quiet if the Python helper still returns `["sh", "-c", …]` in a test that nobody runs. Detection must observe **program basename `sh` at spawn**, not a scanner nickname. The full argv with a patient filename on the spawn metric reopens topics 3.1 and 5.1.
+A host product paging on `sh` children stays quiet if the Python helper still returns `["sh", "-c", …]` in a test that nobody runs. See **program basename `sh` at spawn**, not a scanner nickname. The full argv with a patient filename on the spawn metric reopens topics 3.1 and 5.1.
 
 ## Practice
 

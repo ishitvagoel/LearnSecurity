@@ -32,7 +32,7 @@ If the crash payload still holds the note, `test_crash_report_omits_note_body` i
 | Recover | Keep the redact; purge the vendor copy; tell people if needed |
 | Leftover | The vendor as a processor; screenshots; frozen-app traces; leftover `READ_LOGS` |
 
-Crash-count tiles stay green even if the last extra still holds the note. Detection must observe **`'secret'` absent**, not vendor uptime. The crash metric is `'secret'` absent. The note body is a log-line leak (3.1) and an extra vendor copy (5.1).
+Crash-count tiles stay green even if the last extra still holds the note. Fail the extra on **`'secret'` absent**, not vendor uptime. The crash metric is `'secret'` absent. The note body is a log-line leak (3.1) and an extra vendor copy (5.1).
 
 ```text
 log_denied reason=crash_body_redacted crash_id=cr_85e app=release

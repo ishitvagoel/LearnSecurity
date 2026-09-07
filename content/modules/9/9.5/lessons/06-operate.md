@@ -32,7 +32,7 @@ Close without a pass on the same URL still has to fail `test_cannot_close_withou
 | Recover | Reopen; run the same isolation check |
 | Leftover | Variants; severity vs business priority; role-change caches |
 
-Ticket Done counts do not mean CI's `close_finding` required a retest. Detection must observe **retest None is deny**, not ticket volume. File a note body or a patient row with the lab, not with `finding_closed_without_retest`.
+Ticket Done counts do not mean CI's `close_finding` required a retest. Reopen on **retest None is deny**, not ticket volume. File a note body or a patient row with the lab, not with `finding_closed_without_retest`.
 
 ```text
 log_denied reason=finding_closed_without_retest finding=F-authz-1

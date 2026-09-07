@@ -44,7 +44,7 @@ A formatter passing does not reject `eval`. If the review bot changes, `test_eva
 
 ## What the framework does vs what you still have to check
 
-A green formatter on GitHub checks does not mean `review_ok` rejected eval-on-user. Detection must observe **eval-on-user rejected**, not check count. The eval payload or note bodies on eval-on-user-rejected are a second leak.
+A green formatter on GitHub checks does not mean `review_ok` rejected eval-on-user. Block merge until **eval-on-user rejected**, not check count. The eval payload or note bodies on eval-on-user-rejected are a second leak.
 
 ## Practice
 

@@ -45,7 +45,7 @@ A web-filter SQLi rule does not bind the query helper. Report paths and ORDER BY
 
 ## What the framework does vs what you still have to check
 
-Syntax-error paging on a web filter skips concatenated values that happened to parse. Detection must observe **concatenated `str` from `fetch_sql`**, not HTTP 500 counts. A full SQL string with values on the concat metric reopens topic 3.1.
+Syntax-error paging on a web filter skips concatenated values that happened to parse. Catch **concatenated `str` from `fetch_sql`**, not HTTP 500 counts. A full SQL string with values on the concat metric reopens topic 3.1.
 
 ## Practice
 

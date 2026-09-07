@@ -32,7 +32,7 @@ Raw `<` in the title still has to fail `test_angle_brackets_are_encoded`. Turnin
 
 ## What the framework does vs what you still have to check
 
-Blocked-script counts on a report-only dashboard miss a stored title that still contains raw `<`. Notice must observe **raw angle brackets at the encode sink**, not report-only counts. The title text on the encode-sink metric is a logging leak (3.1).
+Blocked-script counts on a report-only dashboard miss a stored title that still contains raw `<`. Encode **raw angle brackets at the encode sink**, not report-only counts. The title text on the encode-sink metric is a logging leak (3.1).
 
 A stored-field review fires without the title body, and a content-security report is extra, not this enforcement.
 

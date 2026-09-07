@@ -32,7 +32,7 @@ Blank owner or `review_by` still has to make `test_exception_needs_owner_review_
 | Recover | Expire; fix or re-accept with fields |
 | Leftover | Unread register; tech-debt rename |
 
-Governance exception counts do not mean CI’s `accept_exception` required an owner. Detection must observe **empty owner is deny**, not “we have a risk register.” Empty owner is the metric. A secret writeup or chart text is the risk writeup.
+Governance exception counts do not mean CI’s `accept_exception` required an owner. Block accept on **empty owner is deny**, not “we have a risk register.” Empty owner is the metric. A secret writeup or chart text is the risk writeup.
 
 ```text
 log_denied reason=exception_incomplete_denied missing=owner,review_by
