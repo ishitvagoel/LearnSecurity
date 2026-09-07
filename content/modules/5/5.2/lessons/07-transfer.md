@@ -15,7 +15,7 @@ A small clinic record with an `ssn_encrypted` column.
 
 ## Picture: the label is not the tool
 
-Calling it “SSN” instead of “secret” does not move the work. A column named `ssn_encrypted` does not authorize leaving the bytes as Base64. A disk-encryption checkbox is not the check.
+Here, “SSN” is still “secret” for this rule. A column named `ssn_encrypted` does not authorize leaving the bytes as Base64. A disk-encryption checkbox is not the check.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -55,7 +55,7 @@ Base64 decode of the stored stand-in is not the SSN. Renaming the column or wrap
 
 ## Practice
 
-One page. No answer keys. The only running system you may break is `labs/5.2/5.2-lab`. Do not decode a live column.
+Write one page. Leave the answer keys closed. The only running system you may break is `labs/5.2/5.2-lab`. Do not decode a live column.
 
 ## What this page is not doing
 

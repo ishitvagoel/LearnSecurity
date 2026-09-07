@@ -47,11 +47,11 @@ Honest `'other'` saves may pass on both implementations. That does not excuse th
 
 ## Practice
 
-Reject a “check” that only greps `EncryptedSharedPreferences` without calling `save_note("secret")` then `plaintext_on_disk()`. A setup error is not proof the rule holds.
+Do not treat a grep for `EncryptedSharedPreferences` as the check. Call `save_note("secret")` then `plaintext_on_disk()`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-A clinic example: a test that only asserts Room `insert` succeeded is not this rule. Personal-phone imaging is out of scope.
+Asserting Room `insert` succeeded is not this check. Do not image a personal phone.
 
 ## What this page is not doing
 

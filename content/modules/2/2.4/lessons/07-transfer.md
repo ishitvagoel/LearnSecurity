@@ -20,7 +20,7 @@ Clinic: two POSTs book the last slot.
 
 ## Picture: limited quantity is the same fork
 
-Calling it “booking” instead of “share” does not move the work. Double-book and a second debit are new rules. Disable-on-submit is still not what you trust.
+Here, “booking” is still “share” for this rule. Double-book and a second debit are new rules. Disable-on-submit is still not what you trust.
 
 ```mermaid
 flowchart TD
@@ -44,7 +44,7 @@ Locking so a limited quantity cannot be booked twice. That is the clinic transfe
 
 ## Practice
 
-One page. No keys. `labs/2.4/2.4-state-time` is the only running system you may break. A worker retry of a share that was **taken back** is an acceptable extra sentence pointing at a later topic. Do not fetch a clinic, a payment sandbox you do not own, or a public invite API.
+Write one page. Leave the keys closed. `labs/2.4/2.4-state-time` is the only running system you may break. A worker retry of a share that was **taken back** is an acceptable extra sentence pointing at a later topic. Do not fetch a clinic, a payment sandbox you do not own, or a public invite API.
 
 ## What this page is not doing
 

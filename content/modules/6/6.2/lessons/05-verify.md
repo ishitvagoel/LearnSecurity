@@ -46,11 +46,11 @@ Honest titles may pass on both implementations. That does not excuse the encode 
 
 ## Practice
 
-Reject a “check” that only greps `Content-Security-Policy` without calling `render`. A setup error is not proof the rule holds.
+Do not treat a grep for `Content-Security-Policy` as the check. Call `render`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic nickname. A check that only asserts HTTP 200 is not this rule (see 9.3). A check that loads a live board is out of scope.
+Clinic nickname. Asserting HTTP 200 is not this check (see 9.3). Do not run a check that loads a live board.
 
 ## What this page is not doing
 

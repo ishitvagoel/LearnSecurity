@@ -37,7 +37,7 @@ python3 -m pytest labs/10.1/10.1-lab/tests --impl vulnerable
 python3 -m pytest labs/10.1/10.1-lab/tests --impl fixed
 ```
 
-A test that only greps `CODEOWNERS` in a repo without calling `merge_ok({})` is not this topic’s evidence. This practice never opens a live GitHub org.
+Searching for `CODEOWNERS` in a repo without calling `merge_ok({})` is not evidence. This practice never opens a live GitHub org.
 
 ## What the checks do not prove
 
@@ -54,11 +54,11 @@ python3 -m pytest labs/10.1/10.1-lab/tests --impl vulnerable
 python3 -m pytest labs/10.1/10.1-lab/tests --impl fixed
 ```
 
-Reject a “test” that only greps `CODEOWNERS` in a repo without calling `merge_ok({})`.
+Do not treat a grep for `CODEOWNERS` in a repo as the check. Call `merge_ok({})`.
 
 ## Use it somewhere new
 
-A clinic example: a test that only asserts “HIPAA training complete” is not this topic. A live GitHub org is out of scope.
+Asserting “HIPAA training complete” is not this check. Do not use a live GitHub org.
 
 ## What this page is not doing
 

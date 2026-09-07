@@ -55,7 +55,7 @@ Use synthetic labels (`ssn` as a field name in local practice files). Do not use
 
 ## Practice
 
-One page. No keys. `labs/7.2/7.2-lab` is the only running system you may break. Do not query a public host.
+Write one page. Leave the keys closed. `labs/7.2/7.2-lab` is the only running system you may break. Do not query a public host.
 
 ## What this page is not doing
 

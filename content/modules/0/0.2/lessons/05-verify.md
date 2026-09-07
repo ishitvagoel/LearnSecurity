@@ -44,11 +44,11 @@ Honest low-score tests may pass on both. If the broken files do not fail the sco
 
 ## Practice
 
-Reject a “test” that only greps `return False` in a string without calling `quiz_score_grants_phase1_skip(100)`.
+Do not treat a grep for `return False` in a string as the check. Call `quiz_score_grants_phase1_skip(100)`.
 
 ## Use it somewhere new
 
-A clinic example: a test that only asserts “onboarding quiz exists” is not this check. A test that logs into the clinic LMS is out of scope.
+Asserting “onboarding quiz exists” is not this check. Do not run a test that logs into the clinic LMS.
 
 ## What this page is not doing
 

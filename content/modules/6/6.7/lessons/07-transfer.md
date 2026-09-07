@@ -13,7 +13,7 @@ Also name notification fan-out and search complexity as the same budget family (
 
 ## Picture: bulk export is still a budget row
 
-Calling it “export patients” instead of “export notes” does not move the work.
+Here, “export patients” is still “export notes” for this rule.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -55,7 +55,7 @@ A small clinic app with an “Export all” button that is disabled in the brows
 
 ## Practice
 
-One page. No answer keys. The only running system you may break is `labs/6.7/6.7-lab`. Do not load-test a public host.
+Write one page. Leave the answer keys closed. The only running system you may break is `labs/6.7/6.7-lab`. Do not load-test a public host.
 
 ## What this page is not doing
 

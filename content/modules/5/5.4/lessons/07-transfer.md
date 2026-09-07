@@ -11,7 +11,7 @@ You get a **clinic page** whose API client uses `https://` while the API socket 
 
 ## Picture: the URL bar is not the socket
 
-Calling it “clinic” instead of “notes app” does not move the work. An https page does not authorize treating the API socket as TLS. A dashboard toggle is not the check.
+Here, “clinic” is still “notes app” for this rule. An https page does not authorize treating the API socket as TLS. A dashboard toggle is not the check.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -52,7 +52,7 @@ Header https plus socket http still has to be false. Enabling a CDN “HTTPS onl
 
 ## Practice
 
-One page. No answer keys. The only running system you may break is `labs/5.4/5.4-lab`. Do not probe a live host or paste cookies into a ticket.
+Write one page. Leave the answer keys closed. The only running system you may break is `labs/5.4/5.4-lab`. Do not probe a live host or paste cookies into a ticket.
 
 ## What this page is not doing
 

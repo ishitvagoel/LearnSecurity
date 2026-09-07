@@ -55,11 +55,11 @@ Map each check to a rule from the map page. If the broken files do not fail the 
 
 ## Practice
 
-Reject a “test” that only greps `webauthn` in HTML without calling `phishing_resistant` on the password / lookalike pair.
+Do not treat a grep for `webauthn` in HTML as the check. Call `phishing_resistant` on the password / lookalike pair.
 
 ## Use it somewhere new
 
-Clinic SSO. A check that only asserts HTTP 200 is not authenticator evidence. A check that loads a live identity provider is out of scope.
+Clinic SSO. Asserting HTTP 200 is not authenticator evidence. Do not run a check that loads a live identity provider.
 
 ## What this page is not doing
 

@@ -13,7 +13,7 @@ Also name NoSQL operators and GraphQL arguments as the same shape (7.1), without
 
 ## Picture: the search box is still an interpreter
 
-Calling it “search box” instead of “note id” does not move the work.
+Here, “search box” is still “note id” for this rule.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -53,7 +53,7 @@ The lookup helper returns `(sql, params)` (or an ORM bound construct), not a con
 
 ## Practice
 
-One page. No answer keys. The only running system you may break is `labs/5.5/5.5-lab`. Do not probe a live database.
+Write one page. Leave the answer keys closed. The only running system you may break is `labs/5.5/5.5-lab`. Do not probe a live database.
 
 ## What this page is not doing
 

@@ -13,7 +13,7 @@ An EHR-lite "the model is only allowed to summarize, the system prompt forbids S
 
 ## Picture: same tool loop, clinical object
 
-Renaming "note" to "chart" is not transfer. Rule, allow-list, and leftover change. Telling the model to summarize does not take `exec_sql` out of always-run `run_tool`.
+Here, "chart" is still "note" for this rule. Rule, allow-list, and leftover change. Telling the model to summarize does not take `exec_sql` out of always-run `run_tool`.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -58,7 +58,7 @@ Also name a coding assistant in CI.
 
 ## Practice
 
-One page. No answer keys. `labs/E1/e1-lab` is the only running system you may break. Do not call a live model.
+Write one page. Leave the answer keys closed. `labs/E1/e1-lab` is the only running system you may break. Do not call a live model.
 
 ## What this page is not doing
 

@@ -41,11 +41,11 @@ The honest current-secret test may pass on both. That does not excuse the defaul
 
 ## Practice
 
-Reject a “test” that only greps `Vault` in a README without calling `auth("sk-lab-hardcoded", current="rotated-now")`.
+Do not treat a grep for `Vault` in a README as the check. Call `auth("sk-lab-hardcoded", current="rotated-now")`.
 
 ## Use it somewhere new
 
-Clinic gist. A test that only asserts HTTP 200 on login is not rotation evidence (later testing topic). A test that fetches a live gist is out of scope.
+Clinic gist. Asserting HTTP 200 on login is not rotation evidence (later testing topic). Do not run a test that fetches a live gist.
 
 ## What this page is not doing
 

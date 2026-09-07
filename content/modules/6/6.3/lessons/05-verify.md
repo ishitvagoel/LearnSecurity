@@ -49,11 +49,11 @@ python3 -m pytest labs/6.3/6.3-lab/tests --impl vulnerable
 python3 -m pytest labs/6.3/6.3-lab/tests --impl fixed
 ```
 
-Reject a “test” that only greps `SameSite` in a cookie helper without calling `allow_share` on a foreign origin.
+Do not treat a grep for `SameSite` in a cookie helper as the check. Call `allow_share` on a foreign origin.
 
 ## Use it somewhere new
 
-Clinic partner-share. A test that only asserts HTTP 200 on `/share` is not this rule (see the later testing topic). A test that visits a live third-party page is out of scope.
+Clinic partner-share. Asserting HTTP 200 on `/share` is not this check (see the later testing topic). Do not run a test that visits a live third-party page.
 
 ## What this page is not doing
 

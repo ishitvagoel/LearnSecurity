@@ -45,7 +45,7 @@ A grant on appointment A is not a grant on chart B, and a grant in clinic-acme i
 
 ## Practice
 
-One page. No answer keys. `labs/4.4/4.4-lab` is the only running system you may break. Do not guess ids on a live clinic system.
+Write one page. Leave the answer keys closed. `labs/4.4/4.4-lab` is the only running system you may break. Do not guess ids on a live clinic system.
 
 ## What this page is not doing
 

@@ -37,7 +37,7 @@ python3 -m pytest labs/9.1/9.1-lab/tests --impl vulnerable
 python3 -m pytest labs/9.1/9.1-lab/tests --impl fixed
 ```
 
-A test that only greps `AUTHZ-1` in a spreadsheet without calling `covered(..., [{"asserts_isolation": False}])` is not this topic’s evidence. This practice never opens a live checklist portal.
+Searching for `AUTHZ-1` in a spreadsheet without calling `covered(..., [{"asserts_isolation": False}])` is not evidence. This practice never opens a live checklist portal.
 
 ## What the tests do not prove
 
@@ -54,11 +54,11 @@ python3 -m pytest labs/9.1/9.1-lab/tests --impl vulnerable
 python3 -m pytest labs/9.1/9.1-lab/tests --impl fixed
 ```
 
-Reject a “test” that only greps `AUTHZ-1` in a spreadsheet without calling `covered(..., [{"asserts_isolation": False}])`.
+Do not treat a grep for `AUTHZ-1` in a spreadsheet as the check. Call `covered(..., [{"asserts_isolation": False}])`.
 
 ## Use it somewhere new
 
-A clinic example: a test that only asserts the spreadsheet exports is not this topic. A live governance scrape is out of scope.
+Asserting the spreadsheet exports is not this check. Do not run a live governance scrape.
 
 ## What this page is not doing
 

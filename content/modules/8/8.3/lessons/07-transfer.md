@@ -19,7 +19,7 @@ flowchart LR
   As["as=doctor still bound"] --> Reality[session switch]
 ```
 
-Renaming `as=admin` to `as=doctor` is not transfer. If the kiosk demo uses a verified host while `open_link` copies `as`, the rule is gone. HTTPS, App Links, and `exported=false` without a test do not keep alice. OAuth redirect to the app (4.5) and WebView bridges are the same extras family — name them, do not run those systems here. Claimed HTTPS still wants a real host; custom schemes remain hijackable.
+Here, `as=doctor` is still `as=admin` for this rule. If the kiosk demo uses a verified host while `open_link` copies `as`, the rule is gone. HTTPS, App Links, and `exported=false` without a test do not keep alice. OAuth redirect to the app (4.5) and WebView bridges are the same extras family — name them, do not run those systems here. Claimed HTTPS still wants a real host; custom schemes remain hijackable.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -51,7 +51,7 @@ Renaming `as=admin` to `as=doctor` is not transfer. If the kiosk demo uses a ver
 
 ## Practice
 
-One page. No keys. `labs/8.3/8.3-lab` is the only running system you may break. Do not send Intents at a public host.
+Write one page. Leave the keys closed. `labs/8.3/8.3-lab` is the only running system you may break. Do not send Intents at a public host.
 
 ## What this page is not doing
 

@@ -37,7 +37,7 @@ python3 -m pytest labs/10.2/10.2-lab/tests --impl vulnerable
 python3 -m pytest labs/10.2/10.2-lab/tests --impl fixed
 ```
 
-A test that only greps `CycloneDX` in CI without calling `install_ok("aaa", "bbb")` is not this topic’s evidence. This practice never opens a live registry.
+Searching for `CycloneDX` in CI without calling `install_ok("aaa", "bbb")` is not evidence. This practice never opens a live registry.
 
 ## What the tests do not prove
 
@@ -54,11 +54,11 @@ python3 -m pytest labs/10.2/10.2-lab/tests --impl vulnerable
 python3 -m pytest labs/10.2/10.2-lab/tests --impl fixed
 ```
 
-Reject a “test” that only greps `CycloneDX` in CI without calling `install_ok("aaa", "bbb")`.
+Do not treat a grep for `CycloneDX` in CI as the check. Call `install_ok("aaa", "bbb")`.
 
 ## Use it somewhere new
 
-A clinic example: a test that only asserts “npm ci ran” is not this topic. A live registry is out of scope.
+Asserting “npm ci ran” is not this check. Do not use a live registry.
 
 ## What this page is not doing
 

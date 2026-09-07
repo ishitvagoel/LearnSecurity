@@ -13,7 +13,7 @@ An EHR-lite "the API namespace is private so ClusterRole is fine," plus "we atta
 
 ## Picture: same admission loop, clinical object
 
-Renaming "note" to "chart" is not transfer. Rule, allow-list, and leftover change. Putting the app in a private namespace does not put `"app"` in `ALLOWED_ROLES`.
+Here, "chart" is still "note" for this rule. Rule, allow-list, and leftover change. Putting the app in a private namespace does not put `"app"` in `ALLOWED_ROLES`.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -58,7 +58,7 @@ Also name serverless IAM `*`.
 
 ## Practice
 
-One page. No answer keys. `labs/10.3/10.3-lab` is the only running system you may break. Do not apply manifests to a live cluster.
+Write one page. Leave the answer keys closed. `labs/10.3/10.3-lab` is the only running system you may break. Do not apply manifests to a live cluster.
 
 ## What this page is not doing
 

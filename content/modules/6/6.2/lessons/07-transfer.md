@@ -19,7 +19,7 @@ flowchart LR
   HTML[HTML badge] --> Reality[grammar mixed with data]
 ```
 
-Calling it “nickname” instead of “title” does not move the work. If the nickname is concatenated into an HTML badge, the rule is gone. FastAPI, a content-security header in report-only mode, and React defaults on a different component do not encode this sink. Markdown-to-HTML is 2.1’s second parser: even a well-encoded badge fails if markdown emits raw tags later. Trusted Types remain draft.
+Here, “nickname” is still “title” for this rule. If the nickname is concatenated into an HTML badge, the rule is gone. FastAPI, a content-security header in report-only mode, and React defaults on a different component do not encode this sink. Markdown-to-HTML is 2.1’s second parser: even a well-encoded badge fails if markdown emits raw tags later. Trusted Types remain draft.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -51,7 +51,7 @@ Calling it “nickname” instead of “title” does not move the work. If the 
 
 ## Practice
 
-One page. No keys. `labs/6.2/6.2-lab` is the only running system you may break. Do not load a live board or paste attack recipes.
+Write one page. Leave the keys closed. `labs/6.2/6.2-lab` is the only running system you may break. Do not load a live board or paste attack recipes.
 
 ## What this page is not doing
 

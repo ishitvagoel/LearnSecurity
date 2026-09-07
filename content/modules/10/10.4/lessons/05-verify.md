@@ -37,7 +37,7 @@ python3 -m pytest labs/10.4/10.4-lab/tests --impl vulnerable
 python3 -m pytest labs/10.4/10.4-lab/tests --impl fixed
 ```
 
-A test that only greps `NODE_ENV` in compose without calling `boot_ok("prod", True)` is not this topic’s evidence. This practice never opens a live host.
+Searching for `NODE_ENV` in compose without calling `boot_ok("prod", True)` is not evidence. This practice never opens a live host.
 
 ## What the tests do not prove
 
@@ -55,11 +55,11 @@ python3 -m pytest labs/10.4/10.4-lab/tests --impl vulnerable
 python3 -m pytest labs/10.4/10.4-lab/tests --impl fixed
 ```
 
-Reject a “test” that only greps `NODE_ENV` in compose without calling `boot_ok("prod", True)`.
+Do not treat a grep for `NODE_ENV` in compose as the check. Call `boot_ok("prod", True)`.
 
 ## Use it somewhere new
 
-A clinic example: a test that only asserts “container started” is not this topic. A live Django host is out of scope.
+Asserting “container started” is not this check. Do not use a live Django host.
 
 ## What this page is not doing
 

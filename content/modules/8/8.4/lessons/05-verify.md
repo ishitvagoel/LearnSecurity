@@ -48,11 +48,11 @@ Honest release plus ok may pass on both implementations. That does not excuse th
 
 ## Practice
 
-Reject a “check” that only greps `minifyEnabled` without calling `api_allowed("debug", "ok")`. A setup error is not proof the rule holds.
+Do not treat a grep for `minifyEnabled` as the check. Call `api_allowed("debug", "ok")`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-A clinic example: a check that only asserts the debug APK builds is not this rule. Store APK unpacking is out of scope.
+Asserting the debug APK builds is not this check. Do not unpack a store APK.
 
 ## What this page is not doing
 

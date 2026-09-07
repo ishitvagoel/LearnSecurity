@@ -30,7 +30,7 @@ If both pass, you are not looking at concatenated SQL.
 
 The test `test_query_is_bound_not_concatenated` is there so a concatenated `str` still fails. The hostile `note_id` in that test is **data** for the params tuple — a class of extra grammar, not a cookbook to paste into a live query.
 
-A test that only asserts HTTP 200 is not this topic's evidence. A test that only greps `%s` inside a concatenated string without asserting the tuple shape is not this topic's evidence. This practice never opens a live database.
+Searching for `%s` inside a concatenated string without asserting the tuple shape is not evidence. This practice never opens a live database.
 
 ```text
 python3 -m pytest labs/5.5/5.5-lab/tests --impl vulnerable
@@ -54,11 +54,11 @@ python3 -m pytest labs/5.5/5.5-lab/tests --impl vulnerable
 python3 -m pytest labs/5.5/5.5-lab/tests --impl fixed
 ```
 
-Reject a “test” that only greps `%s` inside a concatenated string without asserting the tuple shape.
+Do not treat a grep for `%s` inside a concatenated string as the check. Assert the tuple shape.
 
 ## Use it somewhere new
 
-Clinic search box. A test that only asserts HTTP 200 is not this check (see 9.3). A test that hits a live clinic system is out of scope.
+Clinic search box. Asserting HTTP 200 is not this check (see 9.3). Do not run a test that hits a live clinic system.
 
 ## What this page is not doing
 

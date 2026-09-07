@@ -9,7 +9,7 @@
 
 ## Picture: leftover analytics or search must fail the check
 
-A check that only asserts the notes row is gone can still look green while the warehouse still holds the body.
+Asserting the notes row is gone can still hide that the warehouse still holds the body.
 
 ```mermaid
 flowchart LR
@@ -30,7 +30,7 @@ If both pass, you are not looking at `body_retained` after delete.
 
 The test `test_deleted_account_leaves_no_analytics_body` calls `delete_account` then `body_retained`. That check is there so a leftover warehouse body still fails.
 
-A test that only asserts HTTP 200 is not this topic's evidence. A test that only greps `DELETE FROM notes` without calling `body_retained` is not this topic's evidence. This practice never opens a live warehouse.
+Searching for `DELETE FROM notes` without calling `body_retained` is not evidence. This practice never opens a live warehouse.
 
 ```text
 python3 -m pytest labs/5.1/5.1-lab/tests --impl vulnerable
@@ -53,11 +53,11 @@ python3 -m pytest labs/5.1/5.1-lab/tests --impl vulnerable
 python3 -m pytest labs/5.1/5.1-lab/tests --impl fixed
 ```
 
-Reject a “test” that only greps `DELETE FROM notes` without calling `body_retained`.
+Do not treat a grep for `DELETE FROM notes` as the check. Call `body_retained`.
 
 ## Use it somewhere new
 
-Clinic appointment card. A test that only asserts HTTP 200 on delete is not retention evidence. A test that hits a live warehouse is out of scope.
+Clinic appointment card. Asserting HTTP 200 on delete is not retention evidence. Do not run a test that hits a live warehouse.
 
 ## What this page is not doing
 

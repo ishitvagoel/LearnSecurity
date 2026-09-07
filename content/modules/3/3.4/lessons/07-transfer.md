@@ -20,7 +20,7 @@ EHR-lite guardian list on a booking card.
 
 ## Picture: three is not five, the shape is the same
 
-Calling it “guardian” instead of “share” does not move the work. A fourth guardian and a second invite redeem are new rules. HTML max is still not what you trust.
+Here, “guardian” is still “share” for this rule. A fourth guardian and a second invite redeem are new rules. HTML max is still not what you trust.
 
 ```mermaid
 flowchart LR
@@ -44,7 +44,7 @@ Awareness-list names may appear in a regression checklist after the machine exis
 
 ## Practice
 
-One page. No keys. `labs/3.4/3.4-lab` is the only running system you may break. Do not load-test a clinic or an invite API.
+Write one page. Leave the keys closed. `labs/3.4/3.4-lab` is the only running system you may break. Do not load-test a clinic or an invite API.
 
 ## What this page is not doing
 

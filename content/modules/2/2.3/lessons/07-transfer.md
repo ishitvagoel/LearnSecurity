@@ -5,7 +5,7 @@
 
 ## Use it somewhere new
 
-You get a **clinic patient-portal** session cookie, and a **React Native WebView cookie bridge** as a second sketch. Renaming `sc_session` to `clinic_session` is not transfer. Person, object, reader, and leftover change. Chart access and a new bridge are new rules. You must rebuild the sentence.
+You get a **clinic patient-portal** session cookie, and a **React Native WebView cookie bridge** as a second sketch. Here, `clinic_session` is still `sc_session` for this rule. Person, object, reader, and leftover change. Chart access and a new bridge are new rules. You must rebuild the sentence.
 
 Content Security Policy Level 3 and Trusted Types stay labeled **Working Drafts**. Do not cite a famous-bugs list as the definition of security.
 
@@ -58,7 +58,7 @@ The same session is copied into a WebView that exposes cookies to injected JS.
 
 ## Practice
 
-One page. No keys. `labs/2.3/2.3-browser-policy` is the only running system you may break.
+Write one page. Leave the keys closed. `labs/2.3/2.3-browser-policy` is the only running system you may break.
 
 ## What this page is not doing
 

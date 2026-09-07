@@ -30,7 +30,7 @@ If both pass, you are not looking at eval-on-user.
 
 The test `test_eval_on_user_input_is_rejected` is there so always-true `review_ok` still fails. Do not add a working eval payload to “make the test more real.” The lab string `x = eval(user)` is enough.
 
-A test that only greps `eval` in a policy PDF without calling `review_ok("x = eval(user)")` is not this topic’s evidence. This practice never runs eval on live input.
+Searching for `eval` in a policy PDF without calling `review_ok("x = eval(user)")` is not evidence. This practice never runs eval on live input.
 
 ```text
 python3 -m pytest labs/9.2/9.2-lab/tests --impl vulnerable
@@ -54,11 +54,11 @@ python3 -m pytest labs/9.2/9.2-lab/tests --impl vulnerable
 python3 -m pytest labs/9.2/9.2-lab/tests --impl fixed
 ```
 
-Reject a “test” that only greps `eval` in a policy PDF without calling `review_ok("x = eval(user)")`.
+Do not treat a grep for `eval` in a policy PDF as the check. Call `review_ok("x = eval(user)")`.
 
 ## Use it somewhere new
 
-A clinic example: a review that only asserts “template still renders” is not this check. Live GitHub and weaponized eval are out of scope.
+Asserting “template still renders” is not this check. Do not use live GitHub or weaponized eval.
 
 ## What this page is not doing
 

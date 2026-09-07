@@ -48,11 +48,11 @@ Honest `display_name` may pass on both implementations. That does not excuse the
 
 ## Practice
 
-Reject a “check” that only greps `extra = 'forbid'` in a Pydantic model without calling `apply(..., {"is_admin": true})`. A setup error is not proof the rule holds.
+Do not treat a grep for `extra = 'forbid'` in a Pydantic model as the check. Call `apply(..., {"is_admin": true})`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic PATCH `{is_staff:true}`. A check that only asserts HTTP 200 on `/patients/{id}` is not this rule (see 9.3). A public API probe is out of scope.
+Clinic PATCH `{is_staff:true}`. Asserting HTTP 200 on `/patients/{id}` is not this check (see 9.3). Do not use a public API probe.
 
 ## What this page is not doing
 

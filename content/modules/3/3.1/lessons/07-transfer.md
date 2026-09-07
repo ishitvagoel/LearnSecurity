@@ -11,7 +11,7 @@ You get a **clinic booking card**. Chart text and appointment time sit on the sa
 
 ## Picture: time is not the chart
 
-Calling it “chart text” instead of “note body” does not move the work. Field, place, and leftover change. Logging the time does not authorize logging the chart. A single “sensitive” sticker that does not name places is just a sticker.
+Here, “chart text” is still “note body” for this rule. Field, place, and leftover change. Logging the time does not authorize logging the chart. A single “sensitive” sticker that does not name places is just a sticker.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -50,7 +50,7 @@ Two classes on one card is the point.
 
 ## Practice
 
-One page. No answer keys. The only running system you may break is `labs/3.1/3.1-lab`. Do not fetch a clinic, dump a production drain, or use real patient identifiers.
+Write one page. Leave the answer keys closed. The only running system you may break is `labs/3.1/3.1-lab`. Do not fetch a clinic, dump a production drain, or use real patient identifiers.
 
 ## What this page is not doing
 

@@ -13,7 +13,7 @@ Also name outbox pattern and event schemas as the same identity family, without 
 
 ## Picture: cookie in the job is still a session
 
-Calling it “export patients overnight” instead of “export notes” does not move the work.
+Here, “export patients overnight” is still “export notes” for this rule.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -55,7 +55,7 @@ A small clinic app with “Export overnight” that copies the clinician cookie 
 
 ## Practice
 
-One page. No answer keys. The only running system you may break is `labs/7.4/7.4-lab`. Do not attach to a public broker.
+Write one page. Leave the answer keys closed. The only running system you may break is `labs/7.4/7.4-lab`. Do not attach to a public broker.
 
 ## What this page is not doing
 

@@ -13,7 +13,7 @@ An EHR-lite “CODEOWNERS plus annual HIPAA training so we merge identity change
 
 ## Picture: same check, clinical training
 
-Calling it “chart” instead of “note” does not move the work. Surfaces, threat-model id, and leftover change. Marking HIPAA training complete does not put `threat_model` on the change.
+Here, “chart” is still “note” for this rule. Surfaces, threat-model id, and leftover change. Marking HIPAA training complete does not put `threat_model` on the change.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -59,7 +59,7 @@ Use fake labels. Do not use real patient names. Also name the E6 exception path.
 
 ## Practice
 
-One page. No answer keys. `labs/10.1/10.1-lab` is the only running system you may break. Do not change a live org.
+Write one page. Leave the answer keys closed. `labs/10.1/10.1-lab` is the only running system you may break. Do not change a live org.
 
 ## What this page is not doing
 

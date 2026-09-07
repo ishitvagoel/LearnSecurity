@@ -50,7 +50,7 @@ The same who-is-allowed holes that bypass this practice will also bypass a “sc
 
 The triage screen must say *why* F1 is blocked, in words. Do not encode “blocked” as color only, or people will mass-suppress. If operators see a blocked-ship badge, do not encode it as color only.
 
-Cause vs cost stays split here too: the **cause** is CI’s `ship_ok` still always true (or a new HIGH with no map row); the **cost** is an unowned HIGH in production; **how you stop it** is the join; **how you notice** is `unmapped_high_blocks`; **how you recover** is map-or-fix, not a quiet severity downgrade. What the tool cannot do: this alert does not prove the mapped requirement is the right coverage-map row, and it does not cover who-is-allowed blind spots.
+The **cause** is CI’s `ship_ok` still always true (or a new HIGH with no map row); the **cost** is an unowned HIGH in production; **how you stop it** is the join; **how you notice** is `unmapped_high_blocks`; **how you recover** is map-or-fix, not a quiet severity downgrade. What the tool cannot do: this alert does not prove the mapped requirement is the right coverage-map row, and it does not cover who-is-allowed blind spots.
 
 ## Practice
 

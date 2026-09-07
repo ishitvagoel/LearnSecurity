@@ -13,7 +13,7 @@ An EHR-lite “code scanning is on and the dashboard is noisy so we ship Fridays
 
 ## Picture: same join, clinical object
 
-Calling it “clinic finding” instead of “note finding” does not move the work. Finding, map, and leftover change. Enabling code scanning without a mapping check does not own the HIGH.
+Here, “clinic finding” is still “note finding” for this rule. Finding, map, and leftover change. Enabling code scanning without a mapping check does not own the HIGH.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -58,7 +58,7 @@ Use fake labels. Do not use real patient findings.
 
 ## Practice
 
-One page. No answer keys. `labs/9.4/9.4-lab` is the only running system you may break. Do not scan a public host.
+Write one page. Leave the answer keys closed. `labs/9.4/9.4-lab` is the only running system you may break. Do not scan a public host.
 
 ## What this page is not doing
 

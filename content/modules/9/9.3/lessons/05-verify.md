@@ -37,7 +37,7 @@ python3 -m pytest labs/9.3/9.3-lab/tests --impl vulnerable
 python3 -m pytest labs/9.3/9.3-lab/tests --impl fixed
 ```
 
-A test that only greps a testing-guide id in a checklist without calling `is_security_test({"status_asserted": True})` is not this topic's evidence. This practice never opens a live app.
+Searching for a testing-guide id in a checklist without calling `is_security_test({"status_asserted": True})` is not evidence. This practice never opens a live app.
 
 ## What the tests do not prove
 
@@ -54,11 +54,11 @@ python3 -m pytest labs/9.3/9.3-lab/tests --impl vulnerable
 python3 -m pytest labs/9.3/9.3-lab/tests --impl fixed
 ```
 
-Reject a “test” that only greps a guide name without calling `is_security_test({"status_asserted": True})`.
+Do not treat a grep for a guide name as the check. Call `is_security_test({"status_asserted": True})`.
 
 ## Use it somewhere new
 
-A clinic example: a test that only asserts the patient page loads is not this topic. A live fuzz call is out of scope.
+Asserting the patient page loads is not this check. Do not make a live fuzz call.
 
 ## What this page is not doing
 

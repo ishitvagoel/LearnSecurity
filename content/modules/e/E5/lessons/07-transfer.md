@@ -46,7 +46,7 @@ Session A plus body B is still A. Matching A/A may still keep A. Enabling row-le
 
 ## Practice
 
-One page. No answer keys. `labs/E5/e5-lab` is the only running system you may break. Do not probe a live company.
+Write one page. Leave the answer keys closed. `labs/E5/e5-lab` is the only running system you may break. Do not probe a live company.
 
 ## What this page is not doing
 

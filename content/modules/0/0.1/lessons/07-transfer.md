@@ -41,7 +41,7 @@ A login page is a tool observation. Written hosts are the permission check. A te
 
 ## Practice
 
-One page. No keys. `labs/0.1/0.1-orientation` is the only running system you may break. Do not hit the WordPress, the staging URL, or example.com over the network.
+Write one page. Leave the keys closed. `labs/0.1/0.1-orientation` is the only running system you may break. Do not hit the WordPress, the staging URL, or example.com over the network.
 
 ## What this page is not doing
 

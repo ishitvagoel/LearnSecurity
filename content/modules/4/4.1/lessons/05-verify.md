@@ -9,7 +9,7 @@
 
 ## Picture: a leftover session must fail the check
 
-A check that only asserts the profile is gone can still look green while the cookie still works.
+Asserting the profile is gone can still hide that the cookie still works.
 
 ```mermaid
 flowchart LR
@@ -30,7 +30,7 @@ If both pass, you are not looking at `session_valid` after delete.
 
 The test `test_deleted_user_session_is_dead` calls `delete_user` then `session_valid`. That check is there so a leftover session that still works still fails.
 
-A test that only asserts HTTP 200 is not this topic's evidence. A test that only greps `DELETED.add` without calling `session_valid` after `delete_user` is not this topic's evidence. This practice never opens a live identity provider.
+Searching for `DELETED.add` without calling `session_valid` after `delete_user` is not evidence. This practice never opens a live identity provider.
 
 ```text
 python3 -m pytest labs/4.1/4.1-lab/tests --impl vulnerable
@@ -56,7 +56,7 @@ python3 -m pytest labs/4.1/4.1-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-Clinic clinician. A test that only asserts HTTP 200 is not lifecycle evidence. A test that logs into a live chart system is out of scope.
+Clinic clinician. Asserting HTTP 200 is not lifecycle evidence. Do not run a test that logs into a live chart system.
 
 ## What this page is not doing
 

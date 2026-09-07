@@ -43,11 +43,11 @@ Map each test to a row you wrote on the compartments page. Do not paste keys. If
 
 ## Practice
 
-Reject a “test” that only greps `GRANT` in a migration without calling `can_select`.
+Do not treat a grep for `GRANT` in a migration as the check. Call `can_select`.
 
 ## Use it somewhere new
 
-A serverless admin string. A test that only asserts HTTP 200 is not architecture evidence. A test that connects to a live cloud database is out of scope.
+A serverless admin string. Asserting HTTP 200 is not architecture evidence. Do not run a test that connects to a live cloud database.
 
 ## What this page is not doing
 

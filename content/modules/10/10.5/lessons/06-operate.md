@@ -46,7 +46,7 @@ If your alert includes the matching note, the pager now has the incident text to
 
 The same always-true close, leftover bodies, and support-tool god-mode that bypass this practice will also bypass a “scan our SIEM dashboard” detector.
 
-Cause vs cost stays split here too: the **cause** is close looking at detection quality instead of recovery done and no `note_body`; the **cost** is an attacker still in plus extra note copies; **how you stop it** is the conjunction; **how you notice** is `incident_closed_without_recovery`; **how you recover** is reopen and restore. What the tool cannot do: this alert does not prove the restore drill ran, and it does not ship logs to a separate system.
+The **cause** is close looking at detection quality instead of recovery done and no `note_body`; the **cost** is an attacker still in plus extra note copies; **how you stop it** is the conjunction; **how you notice** is `incident_closed_without_recovery`; **how you recover** is reopen and restore. What the tool cannot do: this alert does not prove the restore drill ran, and it does not ship logs to a separate system.
 
 ## Can people still use it
 

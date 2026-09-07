@@ -42,7 +42,7 @@ Two k1 still have to count as 1. The first k1 may still charge. Adding a payment
 
 ## Practice
 
-One page. No keys. `labs/E3/e3-lab` is the only running system you may break. Do not hit a live processor. No real card numbers. No real PAN.
+Write one page. Leave the keys closed. `labs/E3/e3-lab` is the only running system you may break. Do not hit a live processor. No real card numbers. No real PAN.
 
 ## What this page is not doing
 

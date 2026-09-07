@@ -45,11 +45,11 @@ Honest localhost tests may pass on both. If the broken files do not fail the pub
 
 ## Practice
 
-Reject a “test” that only greps `ALLOWED_HOSTS` in a string without calling `target_is_authorized` on the public literal.
+Do not treat a grep for `ALLOWED_HOSTS` in a string as the check. Call `target_is_authorized` on the public literal.
 
 ## Use it somewhere new
 
-Contractor: a test that only asserts “the guide says authorization testing exists” is not this check. A test that fetches the customer WordPress is out of scope.
+Contractor: Asserting “the guide says authorization testing exists” is not this check. Do not run a test that fetches the customer WordPress.
 
 ## What this page is not doing
 

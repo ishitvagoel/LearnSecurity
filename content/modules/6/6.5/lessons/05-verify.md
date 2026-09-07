@@ -30,7 +30,7 @@ If both pass, you are not looking at link-local.
 
 The test `test_link_local_metadata_is_denied` is there so a scheme-only allow still fails. The destination is a **string** in the practice files — do not send packets to it.
 
-A test that only asserts the preview image loaded is not this topic’s evidence. A test that only greps `https` in a prefix check without calling `allowed` on the link-local string is not this topic’s evidence. This practice never fetches.
+Searching for `https` in a prefix check without calling `allowed` on the link-local string is not evidence. This practice never fetches.
 
 ```text
 python3 -m pytest labs/6.5/6.5-lab/tests --impl vulnerable
@@ -54,11 +54,11 @@ python3 -m pytest labs/6.5/6.5-lab/tests --impl vulnerable
 python3 -m pytest labs/6.5/6.5-lab/tests --impl fixed
 ```
 
-Reject a “test” that only greps `https` in a prefix check without calling `allowed` on the link-local string.
+Do not treat a grep for `https` in a prefix check as the check. Call `allowed` on the link-local string.
 
 ## Use it somewhere new
 
-Clinic PDF URL. A test that only asserts the preview image loaded is not this check (see 9.3). A test that fetches a live URL is out of scope.
+Clinic PDF URL. Asserting the preview image loaded is not this check (see 9.3). Do not run a test that fetches a live URL.
 
 ## What this page is not doing
 

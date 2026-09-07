@@ -46,7 +46,7 @@ If your alert includes the matching transcript, the pager now has the model outp
 
 The same lying `search_notes` HTML, hallucinated packages, and prompt-only policy that bypass this practice will also bypass a "scan our agent dashboard" detector.
 
-Cause vs cost stays split here too: the **cause** is model output treated as policy; the **cost** is an interpreter via English; **how you stop it** is the allow-list; **how you notice** is `tool_denied`; **how you recover** is revoke leftover agent credentials. What the tool cannot do: this alert does not encode `search_notes` HTML, and it does not stop hallucinated packages.
+The **cause** is model output treated as policy; the **cost** is an interpreter via English; **how you stop it** is the allow-list; **how you notice** is `tool_denied`; **how you recover** is revoke leftover agent credentials. What the tool cannot do: this alert does not encode `search_notes` HTML, and it does not stop hallucinated packages.
 
 ## Can people still use it
 

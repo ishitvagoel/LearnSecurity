@@ -20,7 +20,7 @@ EHR-lite “attach imaging” that joins the filename onto a public folder.
 
 ## Picture: the scan filename is still a path parser input
 
-Calling it “scan upload” instead of “notes upload” does not move the work. FastAPI, a UUID rename, and an antivirus scanner still do not bind the object.
+Here, “scan upload” is still “notes upload” for this rule. FastAPI, a UUID rename, and an antivirus scanner still do not bind the object.
 
 ```mermaid
 flowchart LR
@@ -47,7 +47,7 @@ User filenames still need a hard check. That is the clinic transfer. Neither sen
 
 ## Practice
 
-One page. No keys. `labs/6.4/6.4-lab` is the only running system you may break. Do not open host files outside the lab folder. Do not fetch a live imaging folder, a classmate preview, or a public upload API.
+Write one page. Leave the keys closed. `labs/6.4/6.4-lab` is the only running system you may break. Do not open host files outside the lab folder. Do not fetch a live imaging folder, a classmate preview, or a public upload API.
 
 ## What this page is not doing
 

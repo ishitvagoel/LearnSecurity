@@ -13,7 +13,7 @@ An EHR-lite “we imported the HIPAA checklist and marked isolation done,” plu
 
 ## Picture: same check, clinical checklist
 
-Calling it “chart” instead of “note” does not move the work. Threat, requirement, test, and leftover change. Marking HIPAA isolation done does not assert isolation.
+Here, “chart” is still “note” for this rule. Threat, requirement, test, and leftover change. Marking HIPAA isolation done does not assert isolation.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -56,7 +56,7 @@ Use fake labels. Do not use real patient names. Also name the mobile storage row
 
 ## Practice
 
-One page. No answer keys. `labs/9.1/9.1-lab` is the only running system you may break. Do not scrape a public checklist.
+Write one page. Leave the answer keys closed. `labs/9.1/9.1-lab` is the only running system you may break. Do not scrape a public checklist.
 
 ## What this page is not doing
 

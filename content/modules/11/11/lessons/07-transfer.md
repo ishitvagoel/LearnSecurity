@@ -13,7 +13,7 @@ An EHR-lite “we hit DELETE /guardians/12 so the next chart read is fine,” pl
 
 ## Picture: same revoke loop, clinical object
 
-Calling it “chart” instead of “note” does not move the work. Owner, grant, and leftover change. Filing DELETE 200 does not consult `GRANTS` on the next read.
+Here, “chart” is still “note” for this rule. Owner, grant, and leftover change. Filing DELETE 200 does not consult `GRANTS` on the next read.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -58,7 +58,7 @@ Also name the full notes-app slice (API + worker + phone cache).
 
 ## Practice
 
-One page. No answer keys. `labs/11/11-lab` is the only running system you may break. Do not hit a live tenant.
+Write one page. Leave the answer keys closed. `labs/11/11-lab` is the only running system you may break. Do not hit a live tenant.
 
 ## What this page is not doing
 

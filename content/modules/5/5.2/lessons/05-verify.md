@@ -30,7 +30,7 @@ If both pass, you are not looking at Base64 decode of `protect("secret")`.
 
 The test `test_protect_is_not_mere_encoding` is there so reversible encoding still fails.
 
-A test that only greps `AES` in a comment without decoding `protect("secret")` is not this topic's evidence. This practice never opens a live column.
+Searching for `AES` in a comment without decoding `protect("secret")` is not evidence. This practice never opens a live column.
 
 ```text
 python3 -m pytest labs/5.2/5.2-lab/tests --impl vulnerable
@@ -54,11 +54,11 @@ python3 -m pytest labs/5.2/5.2-lab/tests --impl vulnerable
 python3 -m pytest labs/5.2/5.2-lab/tests --impl fixed
 ```
 
-Reject a “test” that only greps `AES` in a comment without decoding `protect("secret")`.
+Do not treat a grep for `AES` in a comment as the check. Decode `protect("secret")`.
 
 ## Use it somewhere new
 
-Clinic SSN. A test that only asserts the column is non-null is not secrecy evidence. A test that decodes a live clinic column is out of scope.
+Clinic SSN. Asserting the column is non-null is not secrecy evidence. Do not run a test that decodes a live clinic column.
 
 ## What this page is not doing
 

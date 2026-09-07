@@ -19,7 +19,7 @@ flowchart LR
   Ro[Report-Only] --> Reality[script ran]
 ```
 
-Calling it “charts” instead of “notes” does not move the work. If the dashboard is green while `isolation_enforced` treats Report-Only as on, the rule is gone. Helmet, a HIPAA sticker, and the current content-security spec do not put the enforcing name on the response. Trusted Types and COOP/COEP are sibling isolation leftovers — name them, do not load a live clinic here. The current content-security spec is still a **draft**; encoding (6.2) remains the first rule. Reporting from that policy is extra, later, and advanced: reporting, not enforcement.
+Here, “charts” is still “notes” for this rule. If the dashboard is green while `isolation_enforced` treats Report-Only as on, the rule is gone. Helmet, a HIPAA sticker, and the current content-security spec do not put the enforcing name on the response. Trusted Types and COOP/COEP are sibling isolation leftovers — name them, do not load a live clinic here. The current content-security spec is still a **draft**; encoding (6.2) remains the first rule. Reporting from that policy is extra, later, and advanced: reporting, not enforcement.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -51,7 +51,7 @@ Report-Only still has to be denied. Enforcing CSP may still count. Adding Report
 
 ## Practice
 
-One page. No keys. `labs/E2/e2-lab` is the only running system you may break. Do not load a live page.
+Write one page. Leave the keys closed. `labs/E2/e2-lab` is the only running system you may break. Do not load a live page.
 
 ## What this page is not doing
 

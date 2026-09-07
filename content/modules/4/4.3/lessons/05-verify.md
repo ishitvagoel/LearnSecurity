@@ -42,11 +42,11 @@ Map each test to a row on the channel map you drew. If the broken files do not f
 
 ## Practice
 
-Reject a “test” that only greps `Referrer-Policy` without calling `session_from_request` on a query dict.
+Do not treat a grep for `Referrer-Policy` as the check. Call `session_from_request` on a query dict.
 
 ## Use it somewhere new
 
-Clinic deep link. A test that only asserts HTTP 200 is not channel evidence. A test that clicks a live SMS is out of scope.
+Clinic deep link. Asserting HTTP 200 is not channel evidence. Do not run a test that clicks a live SMS.
 
 ## What this page is not doing
 

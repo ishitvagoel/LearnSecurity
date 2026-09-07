@@ -13,7 +13,7 @@ Also name webhook delivery (7.3) as the same egress deputy, without running thos
 
 ## Picture: the PDF URL is still a steering wheel
 
-Calling it “PDF URL” instead of “preview URL” does not move the work.
+Here, “PDF URL” is still “preview URL” for this rule.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -53,7 +53,7 @@ Link-local and loopback still have to be false; only the named lab (or clinic) h
 
 ## Practice
 
-One page. No answer keys. The only running system you may break is `labs/6.5/6.5-lab`. Do not fetch.
+Write one page. Leave the answer keys closed. The only running system you may break is `labs/6.5/6.5-lab`. Do not fetch.
 
 ## What this page is not doing
 

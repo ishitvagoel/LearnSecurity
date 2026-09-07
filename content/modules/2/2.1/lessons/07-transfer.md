@@ -9,7 +9,7 @@ You get a **clinic booking** API. A JSON object (REST) and a GraphQL variable ma
 
 ## Picture: each grammar is a reader
 
-Renaming `"tenant"` to `patient_id` is not transfer. Two grammars are two readers. Who-is-allowed still runs after one meaning exists.
+Here, `patient_id` is still `"tenant"` for this rule. Two grammars are two readers. Who-is-allowed still runs after one meaning exists.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -55,7 +55,7 @@ A diagram of grammars is a later architecture bar. It is not this check.
 
 ## Practice
 
-One page. No keys. The practice `labs/2.1/2.1-parser-boundaries` stays the only running system you may break. Multipart filename encoding (two readers on the same bytes) is an acceptable alternate sketch pointing at a later upload topic — still local, still fake data.
+Write one page. Leave the keys closed. The practice `labs/2.1/2.1-parser-boundaries` stays the only running system you may break. Multipart filename encoding (two readers on the same bytes) is an acceptable alternate sketch pointing at a later upload topic — still local, still fake data.
 
 ## What this page is not doing
 

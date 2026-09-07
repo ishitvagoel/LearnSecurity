@@ -13,7 +13,7 @@ An EHR-lite “alerts stopped so we closed INC-12,” plus “we have nightly ba
 
 ## Picture: same close loop, clinical object
 
-Calling it “chart” instead of “note” does not move the work. Recovery evidence, log inventory, and leftover change. Filing a green tile and marking the ticket Done does not set `recovery` to `"done"`.
+Here, “chart” is still “note” for this rule. Recovery evidence, log inventory, and leftover change. Filing a green tile and marking the ticket Done does not set `recovery` to `"done"`.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -59,7 +59,7 @@ Also name ransomware restore vs note-level integrity.
 
 ## Practice
 
-One page. No answer keys. `labs/10.5/10.5-lab` is the only running system you may break. Do not query a live SIEM.
+Write one page. Leave the answer keys closed. `labs/10.5/10.5-lab` is the only running system you may break. Do not query a live SIEM.
 
 ## What this page is not doing
 

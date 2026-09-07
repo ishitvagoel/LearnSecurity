@@ -45,11 +45,11 @@ Honest `display_name` may pass on both implementations. That does not excuse the
 
 ## Practice
 
-Reject a “test” that only greps `@hide` in a GraphQL schema without calling `resolve("member", "secret_internal")`.
+Do not treat a grep for `@hide` in a GraphQL schema as the check. Call `resolve("member", "secret_internal")`.
 
 ## Use it somewhere new
 
-A clinic example: a test that only asserts HTTP 200 on `/patients/{id}` is 4.4, not this rule. A public GraphQL query is out of scope.
+Asserting HTTP 200 on `/patients/{id}` is 4.4, not this check. Do not use a public GraphQL query.
 
 ## What this page is not doing
 

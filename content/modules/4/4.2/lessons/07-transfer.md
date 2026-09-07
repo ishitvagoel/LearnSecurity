@@ -11,7 +11,7 @@ You get a **clinic staff SSO** portal. Optionally: a second ceremony before char
 
 ## Picture: MFA to the wrong identity provider is still phishing
 
-Renaming `"password"` to `"otp"` is not transfer. A lookalike identity provider is still the wrong origin. Who-is-allowed still runs after login.
+Here, `"otp"` is still `"password"` for this rule. A lookalike identity provider is still the wrong origin. Who-is-allowed still runs after login.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -54,7 +54,7 @@ Naming Okta, “we use SSO,” or a step-up checkbox on the real portal is not t
 
 ## Practice
 
-One page. No keys. `labs/4.2/4.2-lab` is the only running system you may break. Do not visit a lookalike identity provider or export from a live EHR.
+Write one page. Leave the keys closed. `labs/4.2/4.2-lab` is the only running system you may break. Do not visit a lookalike identity provider or export from a live EHR.
 
 ## What this page is not doing
 

@@ -9,7 +9,7 @@ A green CSP scanner is not the evidence for this check. “Set-Cookie is present
 
 ## Picture: broken must fail the HttpOnly read
 
-A check that only counts collected items can still look green while the reader still returns the session.
+A check that only counts collected items can still hide that the reader still returns the session.
 
 ```mermaid
 flowchart LR
@@ -45,11 +45,11 @@ Map the test to the script-read row you wrote. Do not paste keys. If broken does
 
 ## Practice
 
-Reject a “test” that only greps `HttpOnly` in a string without calling the reader.
+Do not treat a grep for `HttpOnly` in a string as the check. Call the reader.
 
 ## Use it somewhere new
 
-Clinic patient portal. A test that only asserts `Set-Cookie` exists is not HttpOnly evidence. A test that loads the real clinic is out of scope.
+Clinic patient portal. Asserting `Set-Cookie` exists is not HttpOnly evidence. Do not run a test that loads the real clinic.
 
 ## What this page is not doing
 

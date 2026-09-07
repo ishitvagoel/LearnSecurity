@@ -9,7 +9,7 @@
 
 ## Picture: a path that leaves the folder must fail
 
-A check that only greps `uuid` in a filename helper can still look green while `resolve("../outside")` still leaves the folder.
+A grep for `uuid` in a filename helper can still hide that `resolve("../outside")` still leaves the folder.
 
 ```mermaid
 flowchart LR
@@ -43,11 +43,11 @@ Honest relative names may pass on both implementations. That does not excuse the
 
 ## Practice
 
-Reject a “test” that only greps `uuid` in a filename helper without calling `resolve("../outside")`.
+Do not treat a grep for `uuid` in a filename helper as the check. Call `resolve("../outside")`.
 
 ## Use it somewhere new
 
-Clinic scan filename. A test that only asserts HTTP 200 on upload is not this rule. A test that opens host files outside the lab folder is out of scope.
+Clinic scan filename. Asserting HTTP 200 on upload is not this check. Do not run a test that opens host files outside the lab folder.
 
 ## What this page is not doing
 

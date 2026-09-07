@@ -332,7 +332,7 @@ const PROSE_PHRASES: [RegExp, string][] = [
   ],
   [
     /A (?:check|test) that only (.+?) can pass while (.+?)\. Ask whether .+?\. (?:The )?[Bb]roken files must fail that(?: question)?\. (?:The )?[Rr]epaired files must pass it/g,
-    "A check that only $1 can still look green while $2",
+    "A check that only $1 can still hide that $2",
   ],
   [/ The broken files have to fail that case\. The repaired files have to pass it\.?/g, ""],
   [/ is a \*\*what must not happen\*\* (?:check|test|pair): /g, " is there so "],
@@ -625,6 +625,11 @@ const PROSE_PHRASES: [RegExp, string][] = [
     /A check that only counts passing (?:tests|cases|checks) can still look green while /g,
     "A passing-test tally can still hide that ",
   ],
+  [
+    /A (?:check|test) that only greps (.+?) can still look green while /g,
+    "A grep for $1 can still hide that ",
+  ],
+  [/ can still look green while /g, " can still hide that "],
   [/If both pass, the (?:test|check) is not looking at /g, "If both pass, you are not looking at "],
   [/This review is about notes-app /g, "You are reviewing "],
   [
@@ -671,7 +676,111 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/Write fail or pass next to [^.]+. /g, ""],
   [
     /Renaming “([^”]+)” to “([^”]+)” is not transfer\./g,
-    "Calling it “$2” instead of “$1” does not move the work.",
+    "Here, “$2” is still “$1” for this rule.",
+  ],
+  [
+    /Renaming "([^"]+)" to "([^"]+)" is not transfer\./g,
+    'Here, "$2" is still "$1" for this rule.',
+  ],
+  [
+    /Renaming (`[^`]+`) to (`[^`]+`) is not transfer\./g,
+    "Here, $2 is still $1 for this rule.",
+  ],
+  [
+    /Calling it “([^”]+)” instead of “([^”]+)” does not move the work\./g,
+    "Here, “$1” is still “$2” for this rule.",
+  ],
+  [/One page\. No answer keys\. /g, "Write one page. Leave the answer keys closed. "],
+  [/One page\. No keys\. /g, "Write one page. Leave the keys closed. "],
+  [/Why it happens vs what it costs stays split here too: the /g, "The "],
+  [
+    /Why it happens, what it costs, how you stop it, how you notice, how you recover stays split here too: the /g,
+    "The ",
+  ],
+  [/Cause vs cost stays split here too: the /g, "The "],
+  [
+    /A test that only greps (`[^`]+`) without calling (`[^`]+`) is not this topic['’]s evidence\./g,
+    "Searching for $1 without calling $2 is not evidence.",
+  ],
+  [
+    /A test that only greps (`[^`]+`) without (decoding|asserting|comparing) (`[^`]+`) is not this topic['’]s evidence\./g,
+    "Searching for $1 without $2 $3 is not evidence.",
+  ],
+  [
+    /Reject a [“"](?:test|check)[”"] that only greps (`[^`]+`) without calling (`[^`]+`)\./g,
+    "Do not treat a grep for $1 as the check. Call $2.",
+  ],
+  [
+    /Reject a [“"](?:test|check)[”"] that only greps (`[^`]+`) without (decoding|asserting|comparing) (`[^`]+`)\./g,
+    "Do not treat a grep for $1 as the check. $2 $3.",
+  ],
+  [/as the check\. decoding /g, "as the check. Decode "],
+  [/as the check\. asserting /g, "as the check. Assert "],
+  [/as the check\. comparing /g, "as the check. Compare "],
+  [
+    /A clinic example: a (?:test|check|review) that only asserts /g,
+    "Asserting ",
+  ],
+  [
+    /A test that only asserts ([^.]+?) is not this topic['’]s evidence\. (?=Searching )/g,
+    "",
+  ],
+  [
+    /A test that only asserts HTTP 200 is not this topic['’]s evidence\./g,
+    "HTTP 200 is not this check.",
+  ],
+  [/\bA (?:test|check|review) that only asserts /g, "Asserting "],
+  [
+    /Asserting ([^\n]+?) is not this (?:topic|rule)((?: \([^)]+\))?)\./g,
+    "Asserting $1 is not this check$2.",
+  ],
+  [/ is 4\.4, not this rule\./g, " is 4.4, not this check."],
+  [
+    /A test that ([a-z][^.]*?) is out of scope\./g,
+    "Do not run a test that $1.",
+  ],
+  [
+    /A check that ([a-z][^.]*?) is out of scope\./g,
+    "Do not run a check that $1.",
+  ],
+  [
+    /A check against ([^.]*?) is out of scope\./g,
+    "Do not run a check against $1.",
+  ],
+  [/A live vendor POST is out of scope\./g, "Do not send a live vendor POST."],
+  [/A live broker attach is out of scope\./g, "Do not attach to a live broker."],
+  [
+    /A live Play Console call is out of scope\./g,
+    "Do not make a live Play Console call.",
+  ],
+  [
+    /A live web-crash call is out of scope\./g,
+    "Do not make a live web-crash call.",
+  ],
+  [/A live fuzz call is out of scope\./g, "Do not make a live fuzz call."],
+  [
+    /A live governance scrape is out of scope\./g,
+    "Do not run a live governance scrape.",
+  ],
+  [/A live pentest is out of scope\./g, "Do not run a live pentest."],
+  [/A live ([^.]*?) is out of scope\./g, "Do not use a live $1."],
+  [/A public ([^.]*?) is out of scope\./g, "Do not use a public $1."],
+  [
+    /A third-party binary is out of scope\./g,
+    "Do not use a third-party binary.",
+  ],
+  [
+    /A sideloaded malware APK is out of scope\./g,
+    "Do not use a sideloaded malware APK.",
+  ],
+  [/Store APK unpacking is out of scope\./g, "Do not unpack a store APK."],
+  [
+    /Personal-phone imaging is out of scope\./g,
+    "Do not image a personal phone.",
+  ],
+  [
+    /Live GitHub and weaponized eval are out of scope\./g,
+    "Do not use live GitHub or weaponized eval.",
   ],
   [/Read (`[^`]+`) against this checklist\./g, "Check $1 against the list above."],
   [/Claiming a course gate from this page\./g, "This page does not finish a check-in."],
@@ -792,7 +901,6 @@ function transformProseLine(line: string): string {
   next = next.replace(/\bThis practice files is\b/g, "This practice is");
   next = next.replace(/\bthat the check\b/g, "that check");
   next = next.replace(/\bthis the check\b/g, "this check");
-  next = next.replace(/^Clinic: /g, "A clinic example: ");
   next = next.replace(/\s{2,}/g, " ");
   next = next.replace(/ \(Level \d+\)/g, "");
   return next.replace(/\u0000C(\d+)\u0000/g, (_, index) => codes[Number(index)] ?? "");

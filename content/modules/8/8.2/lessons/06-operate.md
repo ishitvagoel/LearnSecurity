@@ -53,4 +53,4 @@ Unlock-with-fingerprint must still have a device-PIN fallback people can actuall
 
 ## What this page is not doing
 
-An MDM product name is not the check. Personal-phone imaging is out of scope. Opening this page does not finish a check-in.
+An MDM product name is not the check. Do not image a personal phone. Opening this page does not finish a check-in.

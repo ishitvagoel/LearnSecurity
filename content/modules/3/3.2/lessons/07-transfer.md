@@ -20,7 +20,7 @@ An EHR-lite booking card that texts “your appointment” to a phone number.
 
 ## Picture: a new hop is a new “what are we working on?”
 
-Calling it “reminder” instead of “note” does not move the work. Content leak and number-swap are new rows. A vendor sticker is still not what you trust.
+Here, “reminder” is still “note” for this rule. Content leak and number-swap are new rows. A vendor sticker is still not what you trust.
 
 ```mermaid
 flowchart LR
@@ -44,7 +44,7 @@ Question two now includes content leak and number-swap even if every HTTP scanne
 
 ## Practice
 
-One page. No keys. `labs/3.2/3.2-lab` is the only running system you may break. You may also name webhook threats as a second optional paragraph — still no live targets.
+Write one page. Leave the keys closed. `labs/3.2/3.2-lab` is the only running system you may break. You may also name webhook threats as a second optional paragraph — still no live targets.
 
 ## What this page is not doing
 

@@ -13,7 +13,7 @@ Also name signed redirects and outbound webhook SSRF (6.5) as the same authentic
 
 ## Picture: the vendor’s IP range is still not a MAC
 
-Calling it “lab-result webhook” instead of “billing webhook” does not move the work.
+Here, “lab-result webhook” is still “billing webhook” for this rule.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -57,7 +57,7 @@ Use synthetic lab names. Do not instruct attacks on real hospital or vendor endp
 
 ## Practice
 
-One page. No answer keys. The only running system you may break is `labs/7.3/7.3-lab`. Do not POST a public host.
+Write one page. Leave the answer keys closed. The only running system you may break is `labs/7.3/7.3-lab`. Do not POST a public host.
 
 ## What this page is not doing
 

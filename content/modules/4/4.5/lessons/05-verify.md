@@ -9,7 +9,7 @@
 
 ## Picture: other-api and missing aud must fail
 
-A check that only asserts a library called `verify` can still look green while a wrong-audience token still counts as a session.
+Asserting a library called `verify` can still hide that a wrong-audience token still counts as a session.
 
 ```mermaid
 flowchart LR
@@ -42,11 +42,11 @@ The honest expected-aud test may pass on both. That does not excuse the deny tes
 
 ## Practice
 
-Reject a “test” that only greps `verify` in an Authlib call without comparing `aud`.
+Do not treat a grep for `verify` in an Authlib call as the check. Compare `aud`.
 
 ## Use it somewhere new
 
-Clinic FHIR. A test that only asserts HTTP 200 is not audience evidence. A test that hits a live identity provider is out of scope.
+Clinic FHIR. Asserting HTTP 200 is not audience evidence. Do not run a test that hits a live identity provider.
 
 ## What this page is not doing
 

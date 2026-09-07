@@ -19,7 +19,7 @@ flowchart LR
   File["charts.json plaintext"] --> Reality[backup yields bodies]
 ```
 
-Renaming `save_note` to `save_chart` is not transfer. If “available offline” writes `charts.json` while a fingerprint prompt unlocks the app screen, the rule is gone. `MODE_PRIVATE`, Room, and a local fingerprint do not wrap the file. iOS Keychain vs Android Keystore and desktop Electron are the same disk family — name them, do not image those devices here. The lab `aead:` prefix is a stand-in, not AES.
+Here, `save_chart` is still `save_note` for this rule. If “available offline” writes `charts.json` while a fingerprint prompt unlocks the app screen, the rule is gone. `MODE_PRIVATE`, Room, and a local fingerprint do not wrap the file. iOS Keychain vs Android Keystore and desktop Electron are the same disk family — name them, do not image those devices here. The lab `aead:` prefix is a stand-in, not AES.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -53,7 +53,7 @@ Use fake labels. Do not use real patient charts.
 
 ## Practice
 
-One page. No keys. `labs/8.2/8.2-lab` is the only running system you may break. Do not image a public or personal device.
+Write one page. Leave the keys closed. `labs/8.2/8.2-lab` is the only running system you may break. Do not image a public or personal device.
 
 ## What this page is not doing
 

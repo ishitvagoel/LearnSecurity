@@ -30,7 +30,7 @@ If both pass, you are not looking at the fourth export.
 
 The test `test_fourth_export_is_denied` is there so an unbounded fourth still fails.
 
-A test that only asserts HTTP 200 on `/export` is not this topic’s evidence. A test that only greps an edge-proxy keyword without calling `allow(4)` is not this topic’s evidence. This practice never opens a public host.
+Searching for an edge-proxy keyword without calling `allow(4)` is not evidence. This practice never opens a public host.
 
 ```text
 python3 -m pytest labs/6.7/6.7-lab/tests --impl vulnerable
@@ -54,11 +54,11 @@ python3 -m pytest labs/6.7/6.7-lab/tests --impl vulnerable
 python3 -m pytest labs/6.7/6.7-lab/tests --impl fixed
 ```
 
-Reject a “test” that only greps an edge-proxy keyword without calling `allow(4)`.
+Do not treat a grep for an edge-proxy keyword as the check. Call `allow(4)`.
 
 ## Use it somewhere new
 
-Clinic bulk-export. A test that only asserts HTTP 200 on `/export` is not this check (see 9.3). A public load test is out of scope.
+Clinic bulk-export. Asserting HTTP 200 on `/export` is not this check (see 9.3). Do not use a public load test.
 
 ## What this page is not doing
 

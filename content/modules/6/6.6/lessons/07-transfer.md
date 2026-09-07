@@ -13,7 +13,7 @@ Also name password reset, 2.4 share retry, and later jobs (7.4) as the same fami
 
 ## Picture: guardian invite is still a limited seat
 
-Calling it “guardian” instead of “t1” does not move the work. A click counter is not consume. FastAPI, a unique-index screenshot, and “we emailed the guardian” do not consume.
+Here, “guardian” is still “t1” for this rule. A click counter is not consume. FastAPI, a unique-index screenshot, and “we emailed the guardian” do not consume.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -52,7 +52,7 @@ If the mail link always returns 200 and never writes used, the hole is open. A m
 
 ## Practice
 
-One page. No answer keys. The only running system you may break is `labs/6.6/6.6-lab`. Do not click a live invite.
+Write one page. Leave the answer keys closed. The only running system you may break is `labs/6.6/6.6-lab`. Do not click a live invite.
 
 ## What this page is not doing
 

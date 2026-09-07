@@ -9,7 +9,7 @@ On the happy path, HTTP 200 over HTTPS is not evidence. The check must be **fals
 
 ## Picture: a broken cache must fail the check
 
-A check that only asserts HTTPS can still look green while the key remains path-only.
+Asserting HTTPS can still hide that the key remains path-only.
 
 ```mermaid
 flowchart LR
@@ -34,7 +34,7 @@ The checks are `test_same_tenant_cache_hit` and `test_other_tenant_does_not_rece
 
 Map each check to a rule from the request-path map. Do not paste keys. If the broken files do not fail the cross-company get, the practice files are miswired — fix the wiring, not the assertion.
 
-TLS 1.3 on the browser hop is not this check. A check that only asserts HTTPS is a tool observation.
+TLS 1.3 on the browser hop is not this check. Asserting HTTPS is a tool observation.
 
 ## What the checks do not prove
 
@@ -52,11 +52,11 @@ python3 -m pytest labs/2.2/2.2-request-path/tests --impl vulnerable
 python3 -m pytest labs/2.2/2.2-request-path/tests --impl fixed
 ```
 
-Reject a “check” that only greps `Cache-Control` without calling `cache_get` as company B. 
+Do not treat a grep for `Cache-Control` as the check. Call `cache_get` as company B. 
 
 ## Use it somewhere new
 
-Authenticated RSS or export CSV via CDN. A check that only asserts status 200 on `/export` is not cache-key evidence. A check against a live CDN is out of scope.
+Authenticated RSS or export CSV via CDN. Asserting status 200 on `/export` is not cache-key evidence. Do not run a check against a live CDN.
 
 ## What this page is not doing
 

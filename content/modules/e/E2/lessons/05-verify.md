@@ -45,11 +45,11 @@ Honest enforcing CSP may pass on both implementations. That does not excuse the 
 
 ## Practice
 
-Reject a “check” that only greps `Content-Security-Policy` in HTML without calling `isolation_enforced` on a Report-Only dict. A setup error is not proof the rule holds.
+Do not treat a grep for `Content-Security-Policy` in HTML as the check. Call `isolation_enforced` on a Report-Only dict. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-A clinic example: a check that only asserts “a CSP-looking header exists” is not this rule. A live page is out of scope.
+Asserting “a CSP-looking header exists” is not this check. Do not use a live page.
 
 ## What this page is not doing
 

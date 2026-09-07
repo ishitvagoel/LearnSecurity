@@ -39,7 +39,7 @@ python3 -m pytest labs/10.5/10.5-lab/tests --impl vulnerable
 python3 -m pytest labs/10.5/10.5-lab/tests --impl fixed
 ```
 
-A test that only greps `PagerDuty` in a runbook without calling `close_incident({"recovery": "todo", "logs": "ok"})` is not this topic’s evidence. This practice never opens a live host.
+Searching for `PagerDuty` in a runbook without calling `close_incident({"recovery": "todo", "logs": "ok"})` is not evidence. This practice never opens a live host.
 
 ## What the tests do not prove
 
@@ -57,11 +57,11 @@ python3 -m pytest labs/10.5/10.5-lab/tests --impl vulnerable
 python3 -m pytest labs/10.5/10.5-lab/tests --impl fixed
 ```
 
-Reject a “test” that only greps a paging product name without calling `close_incident({"recovery": "todo", "logs": "ok"})`.
+Do not treat a grep for a paging product name as the check. Call `close_incident({"recovery": "todo", "logs": "ok"})`.
 
 ## Use it somewhere new
 
-A clinic example: a test that only asserts “alert fired” is not this topic. A live SIEM is out of scope.
+Asserting “alert fired” is not this check. Do not use a live SIEM.
 
 ## What this page is not doing
 

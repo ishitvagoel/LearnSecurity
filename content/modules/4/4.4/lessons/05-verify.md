@@ -9,7 +9,7 @@
 
 ## Picture: broken must fail the n2 and cross-company denies
 
-A check that only counts how many grants exist can still look green while leftover permission still opens n2.
+A check that only counts how many grants exist can still hide that leftover permission still opens n2.
 
 ```mermaid
 flowchart LR
@@ -46,11 +46,11 @@ python3 -m pytest labs/4.4/4.4-lab/tests --impl vulnerable
 python3 -m pytest labs/4.4/4.4-lab/tests --impl fixed
 ```
 
-Reject a “test” that only greps `admin` in a role list without calling `can_read("bob", "n2")`.
+Do not treat a grep for `admin` in a role list as the check. Call `can_read("bob", "n2")`.
 
 ## Use it somewhere new
 
-Clinic appointment vs chart. A test that only asserts HTTP 200 is not who-is-allowed evidence. A test that hits a live clinic system is out of scope.
+Clinic appointment vs chart. Asserting HTTP 200 is not who-is-allowed evidence. Do not run a test that hits a live clinic system.
 
 ## What this page is not doing
 

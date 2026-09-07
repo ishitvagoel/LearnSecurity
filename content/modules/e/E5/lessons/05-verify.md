@@ -9,7 +9,7 @@
 
 ## Picture: broken must fail: body switch
 
-A check that only counts how many row-level rules exist can still look green while a body-chosen company still wins.
+A check that only counts how many row-level rules exist can still hide that a body-chosen company still wins.
 
 ```mermaid
 flowchart LR
@@ -47,11 +47,11 @@ python3 -m pytest labs/E5/e5-lab/tests --impl vulnerable
 python3 -m pytest labs/E5/e5-lab/tests --impl fixed
 ```
 
-Reject a “test” that only greps `ENABLE ROW LEVEL SECURITY` without calling `tenant_for({"tenant": "A"}, {"tenant": "B"})`.
+Do not treat a grep for `ENABLE ROW LEVEL SECURITY` as the check. Call `tenant_for({"tenant": "A"}, {"tenant": "B"})`.
 
 ## Use it somewhere new
 
-A clinic example: a test that only asserts “row-level rules are on” is not this rule. A live clinic system is out of scope.
+Asserting “row-level rules are on” is not this check. Do not use a live clinic system.
 
 ## What this page is not doing
 

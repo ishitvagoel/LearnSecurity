@@ -9,7 +9,7 @@
 
 ## Picture: header https, socket http must fail
 
-A check that only asserts “HTTPS is on” can still look green while a client header still counts as TLS.
+Asserting “HTTPS is on” can still hide that a client header still counts as TLS.
 
 ```mermaid
 flowchart LR
@@ -30,7 +30,7 @@ If both pass, you are not looking at header versus socket.
 
 The test `test_client_forwarded_proto_is_not_tls` calls `channel_is_https` with header https and socket http. That check is there so a client header counted as TLS still fails.
 
-A test that only asserts the site loads on port 443 is not this topic’s evidence. A test that only greps `https` in a dashboard without calling `channel_is_https` on the mismatch is not this topic’s evidence. This practice never opens a live load balancer.
+Searching for `https` in a dashboard without calling `channel_is_https` on the mismatch is not evidence. This practice never opens a live load balancer.
 
 ```text
 python3 -m pytest labs/5.4/5.4-lab/tests --impl vulnerable
@@ -54,11 +54,11 @@ python3 -m pytest labs/5.4/5.4-lab/tests --impl vulnerable
 python3 -m pytest labs/5.4/5.4-lab/tests --impl fixed
 ```
 
-Reject a “test” that only greps `https` in a dashboard without calling `channel_is_https` on the mismatch.
+Do not treat a grep for `https` in a dashboard as the check. Call `channel_is_https` on the mismatch.
 
 ## Use it somewhere new
 
-Clinic page. A test that only asserts the site loads on port 443 is not this rule (that wait belongs with later availability work). A test that probes a live clinic is out of scope.
+Clinic page. Asserting the site loads on port 443 is not this check (that wait belongs with later availability work). Do not run a test that probes a live clinic.
 
 ## What this page is not doing
 

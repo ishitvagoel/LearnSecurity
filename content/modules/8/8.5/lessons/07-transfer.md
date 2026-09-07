@@ -13,7 +13,7 @@ An EHR-lite “debug crash includes the last chart so support can reproduce,” 
 
 ## Picture: same place, clinical object
 
-Calling it “patient name” instead of “note body” does not move the work. Field, place, and leftover change. Enabling a crash product and filling the store form does not omit the field.
+Here, “patient name” is still “note body” for this rule. Field, place, and leftover change. Enabling a crash product and filling the store form does not omit the field.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -56,7 +56,7 @@ Use fake labels. Do not use real patient names.
 
 ## Practice
 
-One page. No answer keys. `labs/8.5/8.5-lab` is the only running system you may break. Do not call a public vendor.
+Write one page. Leave the answer keys closed. `labs/8.5/8.5-lab` is the only running system you may break. Do not call a public vendor.
 
 ## What this page is not doing
 

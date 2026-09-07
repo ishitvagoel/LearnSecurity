@@ -13,7 +13,7 @@ An EHR-lite “we left DEBUG on for five minutes so support can see traces,” p
 
 ## Picture: five minutes vs a boot
 
-Calling it “chart” instead of “note” does not move the work. Env, debug, and leftover change. Leaving DEBUG on for five minutes is still a production boot.
+Here, “chart” is still “note” for this rule. Env, debug, and leftover change. Leaving DEBUG on for five minutes is still a production boot.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -58,7 +58,7 @@ Also name a feature flag that turns off authorization.
 
 ## Practice
 
-One page. No answer keys. `labs/10.4/10.4-lab` is the only running system you may break. Do not boot a live host.
+Write one page. Leave the answer keys closed. `labs/10.4/10.4-lab` is the only running system you may break. Do not boot a live host.
 
 ## What this page is not doing
 

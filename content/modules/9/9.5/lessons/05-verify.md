@@ -37,7 +37,7 @@ python3 -m pytest labs/9.5/9.5-lab/tests --impl vulnerable
 python3 -m pytest labs/9.5/9.5-lab/tests --impl fixed
 ```
 
-A test that only greps `Done` in a ticket tracker without calling `close_finding({"retest": None})` is not this topic's evidence. This practice never opens a live host.
+Searching for `Done` in a ticket tracker without calling `close_finding({"retest": None})` is not evidence. This practice never opens a live host.
 
 ## What the tests do not prove
 
@@ -54,11 +54,11 @@ python3 -m pytest labs/9.5/9.5-lab/tests --impl vulnerable
 python3 -m pytest labs/9.5/9.5-lab/tests --impl fixed
 ```
 
-Reject a "test" that only greps `Done` in a ticket without calling `close_finding({"retest": None})`.
+Do not treat a grep for `Done` in a ticket as the check. Call `close_finding({"retest": None})`.
 
 ## Use it somewhere new
 
-A clinic example: a test that only asserts "ticket status Done" is not this topic. A live pentest is out of scope.
+Asserting "ticket status Done" is not this check. Do not run a live pentest.
 
 ## What this page is not doing
 

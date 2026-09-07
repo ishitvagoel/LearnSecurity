@@ -48,11 +48,11 @@ Honest server-pass may pass on both implementations. That does not excuse the fa
 
 ## Practice
 
-Reject a “check” that only greps `PlayIntegrity` in Gradle without calling `allow_export({"integrity": "ok"}, "fail")`. A setup error is not proof the rule holds.
+Do not treat a grep for `PlayIntegrity` in Gradle as the check. Call `allow_export({"integrity": "ok"}, "fail")`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-A clinic example: a check that only asserts the Android button is disabled is not this rule. A live Play Console call is out of scope.
+Asserting the Android button is disabled is not this check. Do not make a live Play Console call.
 
 ## What this page is not doing
 

@@ -9,7 +9,7 @@ On the happy path, “1 item collected” is not evidence. The check must be **f
 
 ## Picture: a broken recovery must fail the check
 
-A check that only asserts the confirm function exists can still look green while the control remains mouse-only.
+Asserting the confirm function exists can still hide that the control remains mouse-only.
 
 ```mermaid
 flowchart TD
@@ -32,7 +32,7 @@ If both pass, you are not looking at `mouse_only`, name, or keyboard.
 
 It calls `recovery.recovery_confirm_control()` and asserts `is_usable_accessible`. That check is there so inaccessible recovery still fails.
 
-A test that only asserts HTTP 200 is not this topic’s evidence. This practice never opens a network socket.
+HTTP 200 is not this check. This practice never opens a network socket.
 
 ## Map checks to the rows you wrote
 

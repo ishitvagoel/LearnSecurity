@@ -13,7 +13,7 @@ Also name Jinja, SQL (5.5), and mail headers as the same shape, without running 
 
 ## Picture: the filename is still an interpreter input
 
-Calling it “CSV filename” instead of “export name” does not move the work.
+Here, “CSV filename” is still “export name” for this rule.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -53,7 +53,7 @@ The spawn helper returns a list whose program is not `sh`, and the name is one e
 
 ## Practice
 
-One page. No answer keys. The only running system you may break is `labs/6.1/6.1-lab`. Do not execute argv or run a live worker.
+Write one page. Leave the answer keys closed. The only running system you may break is `labs/6.1/6.1-lab`. Do not execute argv or run a live worker.
 
 ## What this page is not doing
 

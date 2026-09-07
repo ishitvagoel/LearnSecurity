@@ -9,7 +9,7 @@
 
 ## Picture: missing cross-tenant-read must fail
 
-A check that only counts collection size can still look green while `cross-tenant-read` is gone.
+A check that only counts collection size can still hide that `cross-tenant-read` is gone.
 
 ```mermaid
 flowchart LR
@@ -43,11 +43,11 @@ Map each test to a row you wrote on the model page. If the broken files do not f
 
 ## Practice
 
-Reject a “test” that only greps `STRIDE` in a markdown file without calling `threats_from_scan(True)`.
+Do not treat a grep for `STRIDE` in a markdown file as the check. Call `threats_from_scan(True)`.
 
 ## Use it somewhere new
 
-Clinic SMS. A test that only asserts HTTP 200 is not threat-model evidence. A test that scans a live clinic is out of scope.
+Clinic SMS. Asserting HTTP 200 is not threat-model evidence. Do not run a test that scans a live clinic.
 
 ## What this page is not doing
 

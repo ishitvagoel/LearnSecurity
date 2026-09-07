@@ -41,7 +41,7 @@ A percentage is a tool observation. A 1.2 deny rule is the evidence. A job-title
 
 ## Practice
 
-One page. No keys. `labs/0.2/0.2-bridge` is the only running system you may break. Do not log into a clinic LMS or a cert vendor portal.
+Write one page. Leave the keys closed. `labs/0.2/0.2-bridge` is the only running system you may break. Do not log into a clinic LMS or a cert vendor portal.
 
 ## What this page is not doing
 

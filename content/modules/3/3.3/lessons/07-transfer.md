@@ -20,7 +20,7 @@ Clinic billing replica that should see invoice rows, not chart text.
 
 ## Picture: a new compute shape is still a role
 
-Calling it “function” instead of “app” does not move the work. A shared `admin` string and a billing replica that can read chart text are new rules. Microservices and serverless still do not add a same-company check by existing.
+Here, “function” is still “app” for this rule. A shared `admin` string and a billing replica that can read chart text are new rules. Microservices and serverless still do not add a same-company check by existing.
 
 ```mermaid
 flowchart LR
@@ -44,7 +44,7 @@ A private subnet does not compare `tB` to `tA`. The replica is a second lane: in
 
 ## Practice
 
-One page. No keys. `labs/3.3/3.3-lab` is the only running system you may break. Do not deploy a function or open a replica.
+Write one page. Leave the keys closed. `labs/3.3/3.3-lab` is the only running system you may break. Do not deploy a function or open a replica.
 
 ## What this page is not doing
 

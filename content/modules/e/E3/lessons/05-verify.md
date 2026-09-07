@@ -9,7 +9,7 @@
 
 ## Picture: a second k1 that charges twice must fail
 
-A check that only greps a processor header can still look green while every capture still appends.
+A grep for a processor header can still hide that every capture still appends.
 
 ```mermaid
 flowchart LR
@@ -42,11 +42,11 @@ Honest first capture may pass on both implementations. That does not excuse the 
 
 ## Practice
 
-Reject a “test” that only greps `Idempotency-Key` in a Stripe client without calling `capture("k1")` twice.
+Do not treat a grep for `Idempotency-Key` in a Stripe client as the check. Call `capture("k1")` twice.
 
 ## Use it somewhere new
 
-A clinic example: a test that only asserts “the processor returned 200” is not this rule. A live processor is out of scope.
+Asserting “the processor returned 200” is not this check. Do not use a live processor.
 
 ## What this page is not doing
 

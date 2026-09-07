@@ -13,7 +13,7 @@ An EHR-lite "the assessor delivered a 40-page PDF with severity 9.8 so we closed
 
 ## Picture: same close loop, clinical object
 
-Renaming "note" to "chart" is not transfer. Rule, retest, and leftover change. Filing the PDF and marking the ticket Done does not set `retest` to `"pass"`.
+Here, "chart" is still "note" for this rule. Rule, retest, and leftover change. Filing the PDF and marking the ticket Done does not set `retest` to `"pass"`.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -58,7 +58,7 @@ Also name known-exploited list vs internal-only.
 
 ## Practice
 
-One page. No answer keys. `labs/9.5/9.5-lab` is the only running system you may break. Do not pentest a public host.
+Write one page. Leave the answer keys closed. `labs/9.5/9.5-lab` is the only running system you may break. Do not pentest a public host.
 
 ## What this page is not doing
 

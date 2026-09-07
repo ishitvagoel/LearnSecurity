@@ -37,7 +37,7 @@ python3 -m pytest labs/8.5/8.5-lab/tests --impl vulnerable
 python3 -m pytest labs/8.5/8.5-lab/tests --impl fixed
 ```
 
-A test that only greps a crash product name in Gradle without calling `crash_report("secret")` is not this topic's evidence. This practice never opens a live crash project.
+Searching for a crash product name in Gradle without calling `crash_report("secret")` is not evidence. This practice never opens a live crash project.
 
 ## What the tests do not prove
 
@@ -55,11 +55,11 @@ python3 -m pytest labs/8.5/8.5-lab/tests --impl vulnerable
 python3 -m pytest labs/8.5/8.5-lab/tests --impl fixed
 ```
 
-Reject a “test” that only greps a crash product name without calling `crash_report("secret")`.
+Do not treat a grep for a crash product name as the check. Call `crash_report("secret")`.
 
 ## Use it somewhere new
 
-A clinic example: a test that only asserts “crash dialog shown” is not this topic. A test that only asserts HTTP 200 is the wrong observation. A live web-crash call is out of scope.
+Asserting “crash dialog shown” is not this check. Asserting HTTP 200 is the wrong observation. Do not make a live web-crash call.
 
 ## What this page is not doing
 

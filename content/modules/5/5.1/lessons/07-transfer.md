@@ -11,7 +11,7 @@ After `delete_account("alice")`, `body_retained("alice")` is None. For a clinic,
 
 ## Picture: the card is another copy
 
-Calling it “patient” instead of “alice” does not move the work. Deleting the patient row does not authorize leaving the appointment-card notes alive. A “right to be forgotten” banner is not the check.
+Here, “patient” is still “alice” for this rule. Deleting the patient row does not authorize leaving the appointment-card notes alive. A “right to be forgotten” banner is not the check.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -53,7 +53,7 @@ After patient delete, appointment-card notes and the analytics export still have
 
 ## Practice
 
-One page. No answer keys. The only running system you may break is `labs/5.1/5.1-lab`. Do not query a live warehouse or paste a chart into a ticket.
+Write one page. Leave the answer keys closed. The only running system you may break is `labs/5.1/5.1-lab`. Do not query a live warehouse or paste a chart into a ticket.
 
 ## What this page is not doing
 

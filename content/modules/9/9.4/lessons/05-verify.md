@@ -37,7 +37,7 @@ python3 -m pytest labs/9.4/9.4-lab/tests --impl vulnerable
 python3 -m pytest labs/9.4/9.4-lab/tests --impl fixed
 ```
 
-A test that only greps a scanner name in a workflow without calling `ship_ok([HIGH], {})` is not this topic’s evidence. This practice never opens a live GitHub org.
+Searching for a scanner name in a workflow without calling `ship_ok([HIGH], {})` is not evidence. This practice never opens a live GitHub org.
 
 ## What the tests do not prove
 
@@ -54,11 +54,11 @@ python3 -m pytest labs/9.4/9.4-lab/tests --impl vulnerable
 python3 -m pytest labs/9.4/9.4-lab/tests --impl fixed
 ```
 
-Reject a “test” that only greps `codeql` in a workflow without calling `ship_ok([HIGH], {})`.
+Do not treat a grep for `codeql` in a workflow as the check. Call `ship_ok([HIGH], {})`.
 
 ## Use it somewhere new
 
-A clinic example: a test that only asserts “scanner job ran” is not this topic. A live GitHub tenant is out of scope.
+Asserting “scanner job ran” is not this check. Do not use a live GitHub tenant.
 
 ## What this page is not doing
 

@@ -30,7 +30,7 @@ If both pass, you are not looking at `sh -c`.
 
 The test `test_does_not_invoke_shell` is there so a shell string still fails. Do not add a name from the hostile class — extra commands, substitutions, or pipes a shell would parse — to “make the test more real.” Honest `notes` is enough.
 
-A test that only asserts HTTP 200 is not this topic's evidence. A test that only greps `shell=False` in a comment without calling `argv_for_list` is not this topic's evidence. This practice never starts a live process.
+Searching for `shell=False` in a comment without calling `argv_for_list` is not evidence. This practice never starts a live process.
 
 ```text
 python3 -m pytest labs/6.1/6.1-lab/tests --impl vulnerable
@@ -54,11 +54,11 @@ python3 -m pytest labs/6.1/6.1-lab/tests --impl vulnerable
 python3 -m pytest labs/6.1/6.1-lab/tests --impl fixed
 ```
 
-Reject a “test” that only greps `shell=False` in a comment without calling `argv_for_list`.
+Do not treat a grep for `shell=False` in a comment as the check. Call `argv_for_list`.
 
 ## Use it somewhere new
 
-Clinic CSV filename. A test that only asserts the export file exists is not this check (see 9.3). A test that executes argv is out of scope.
+Clinic CSV filename. Asserting the export file exists is not this check (see 9.3). Do not run a test that executes argv.
 
 ## What this page is not doing
 

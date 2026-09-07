@@ -9,7 +9,7 @@ You get a **clinic portal** that caches `GET /patients/me` at the edge, and auth
 
 ## Picture: `/me` is still a shared URL
 
-Calling it “chart” instead of “note body” does not move the work. TLS on one hop stays hop proof. The cache key still decides who reads.
+Here, “chart” is still “note body” for this rule. TLS on one hop stays hop proof. The cache key still decides who reads.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -52,7 +52,7 @@ A reverse proxy that sets `X-Forwarded-Proto` is an acceptable extra sentence: t
 
 ## Practice
 
-One page. No answer keys. The only running system you may break is `labs/2.2/2.2-request-path`.
+Write one page. Leave the answer keys closed. The only running system you may break is `labs/2.2/2.2-request-path`.
 
 ## What this page is not doing
 

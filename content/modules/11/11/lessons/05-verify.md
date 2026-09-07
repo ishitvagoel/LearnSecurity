@@ -37,7 +37,7 @@ python3 -m pytest labs/11/11-lab/tests --impl vulnerable
 python3 -m pytest labs/11/11-lab/tests --impl fixed
 ```
 
-A test that only greps `revoke` in a README without calling `read("n1", "B")` after `revoke("n1", "B")` is not this topic’s evidence. This practice never opens a live host.
+Searching for `revoke` in a README without calling `read("n1", "B")` after `revoke("n1", "B")` is not evidence. This practice never opens a live host.
 
 ## What the tests do not prove
 
@@ -54,11 +54,11 @@ python3 -m pytest labs/11/11-lab/tests --impl vulnerable
 python3 -m pytest labs/11/11-lab/tests --impl fixed
 ```
 
-Reject a “test” that only greps `revoke` in a README without calling `read("n1", "B")` after `revoke("n1", "B")`.
+Do not treat a grep for `revoke` in a README as the check. Call `read("n1", "B")` after `revoke("n1", "B")`.
 
 ## Use it somewhere new
 
-A clinic example: a test that only asserts “revoke returned 200” is not this topic. A live clinic system is out of scope.
+Asserting “revoke returned 200” is not this check. Do not use a live clinic system.
 
 ## What this page is not doing
 

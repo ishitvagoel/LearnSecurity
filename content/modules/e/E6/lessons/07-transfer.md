@@ -13,7 +13,7 @@ An EHR-lite “legal said we accept it,” plus “our maturity score is 2.5 so 
 
 ## Picture: same accept loop, clinical object
 
-Calling it “chart” instead of “note” does not move the work. Owner, review date, and accessibility flag still have to be on the row. Filing a HIPAA slide and marking the hole Accepted does not set `owner` or `review_by`.
+Here, “chart” is still “note” for this rule. Owner, review date, and accessibility flag still have to be on the row. Filing a HIPAA slide and marking the hole Accepted does not set `owner` or `review_by`.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -59,7 +59,7 @@ Also name a procurement questionnaire vs this record.
 
 ## Practice
 
-One page. No answer keys. `labs/E6/e6-lab` is the only running system you may break. Do not contact a live disclosure inbox.
+Write one page. Leave the answer keys closed. `labs/E6/e6-lab` is the only running system you may break. Do not contact a live disclosure inbox.
 
 ## What this page is not doing
 

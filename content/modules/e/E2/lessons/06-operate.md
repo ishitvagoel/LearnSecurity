@@ -51,7 +51,7 @@ A clinic example: deny the HIPAA-header claim; do not paste the page source into
 
 A blocked-script message (once enforcing) must be readable without color-only meaning (the web accessibility baseline).
 
-Cause vs cost stays split here too: the **cause** is Report-Only mistaken for on; the **cost** is a script that still runs; **how you stop it** is the enforcing name; **how you notice** is `csp_report_only_not_enforced`; **how you recover** is flip-after-encoding (6.2). What the tool cannot do: this alert does not prove encoding exists and does not survive a CDN strip.
+The **cause** is Report-Only mistaken for on; the **cost** is a script that still runs; **how you stop it** is the enforcing name; **how you notice** is `csp_report_only_not_enforced`; **how you recover** is flip-after-encoding (6.2). What the tool cannot do: this alert does not prove encoding exists and does not survive a CDN strip.
 
 ## What this page is not doing
 

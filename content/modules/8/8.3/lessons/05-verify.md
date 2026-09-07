@@ -46,11 +46,11 @@ Honest note locators may pass on both implementations. That does not excuse the 
 
 ## Practice
 
-Reject a “check” that only greps `android:autoVerify` without calling `open_link({"as": "admin"})`. A setup error is not proof the rule holds.
+Do not treat a grep for `android:autoVerify` as the check. Call `open_link({"as": "admin"})`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-A clinic example: a check that only asserts the Activity launched is not this rule. A sideloaded malware APK is out of scope.
+Asserting the Activity launched is not this check. Do not use a sideloaded malware APK.
 
 ## What this page is not doing
 

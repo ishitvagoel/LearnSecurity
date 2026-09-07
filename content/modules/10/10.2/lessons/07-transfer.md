@@ -13,7 +13,7 @@ An EHR-lite “prod pod runs npm install so we always get latest,” plus “we 
 
 ## Picture: latest vs lockfile
 
-Calling it “chart” instead of “note” does not move the work. Expected digest, got digest, and leftover change. Marking “npm install ran” does not compare hashes.
+Here, “chart” is still “note” for this rule. Expected digest, got digest, and leftover change. Marking “npm install ran” does not compare hashes.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -56,7 +56,7 @@ Use fake labels. Do not use real clinic secrets. Also name GitHub Actions `actio
 
 ## Practice
 
-One page. No answer keys. `labs/10.2/10.2-lab` is the only running system you may break. Do not fetch a live package.
+Write one page. Leave the answer keys closed. `labs/10.2/10.2-lab` is the only running system you may break. Do not fetch a live package.
 
 ## What this page is not doing
 

@@ -45,7 +45,7 @@ A clinic example: deny the second copay; do not paste billing dumps into the tic
 
 A duplicate deny must say *key already captured*, not only “assert False.” Confirmations that trap people into retry are leftover that *causes* this bug.
 
-Cause vs cost stays split here too: the **cause** is an append that is not bound to the key; the **cost** is a double charge on the lab ledger; **how you stop it** is the seen gate; **how you notice** is `duplicate_capture_denied`; **how you recover** is runbook credit after the test fails. What the tool cannot do: this alert does not stop a new key per click and does not serialize webhooks.
+The **cause** is an append that is not bound to the key; the **cost** is a double charge on the lab ledger; **how you stop it** is the seen gate; **how you notice** is `duplicate_capture_denied`; **how you recover** is runbook credit after the test fails. What the tool cannot do: this alert does not stop a new key per click and does not serialize webhooks.
 
 ## What this page is not doing
 

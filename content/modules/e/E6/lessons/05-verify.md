@@ -37,7 +37,7 @@ python3 -m pytest labs/E6/e6-lab/tests --impl vulnerable
 python3 -m pytest labs/E6/e6-lab/tests --impl fixed
 ```
 
-A test that only greps a maturity name in a slide without calling `accept_exception({"owner": "", "review_by": None})` is not this topic’s evidence. This practice never opens a live host.
+Searching for a maturity name in a slide without calling `accept_exception({"owner": "", "review_by": None})` is not evidence. This practice never opens a live host.
 
 ## What the tests do not prove
 
@@ -55,11 +55,11 @@ python3 -m pytest labs/E6/e6-lab/tests --impl vulnerable
 python3 -m pytest labs/E6/e6-lab/tests --impl fixed
 ```
 
-Reject a “test” that only greps a maturity name without calling `accept_exception({"owner": "", "review_by": None})`.
+Do not treat a grep for a maturity name as the check. Call `accept_exception({"owner": "", "review_by": None})`.
 
 ## Use it somewhere new
 
-A clinic example: a test that only asserts “we have a HIPAA slide” is not this topic. A live governance tool is out of scope.
+Asserting “we have a HIPAA slide” is not this check. Do not use a live governance tool.
 
 ## What this page is not doing
 

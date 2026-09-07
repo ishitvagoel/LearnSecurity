@@ -9,7 +9,7 @@
 
 ## Picture: a broken log line must fail the check
 
-A check that only asserts logs exist can still look green while the body is still in the line.
+Asserting logs exist can still hide that the body is still in the line.
 
 ```mermaid
 flowchart LR
@@ -30,7 +30,7 @@ If both pass, you are not looking at the body substring.
 
 The test `test_note_body_is_not_logged` calls `log_event` with the synthetic body and asserts the substring is absent. That check is there so a confidential field in this log still fails.
 
-A test that only asserts HTTP 200 is not this topic's evidence. A test that only greps `Confidential` in a spreadsheet without calling `log_event` is not this topic's evidence. This practice never opens a production drain.
+Searching for `Confidential` in a spreadsheet without calling `log_event` is not evidence. This practice never opens a production drain.
 
 ```text
 python3 -m pytest labs/3.1/3.1-lab/tests --impl vulnerable
@@ -58,7 +58,7 @@ python3 -m pytest labs/3.1/3.1-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-Clinic chart vs time. A test that only asserts HTTP 200 is not classification evidence. A test that reads a live clinic log drain is out of scope.
+Clinic chart vs time. Asserting HTTP 200 is not classification evidence. Do not run a test that reads a live clinic log drain.
 
 ## What this page is not doing
 

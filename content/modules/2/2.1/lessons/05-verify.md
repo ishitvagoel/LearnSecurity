@@ -59,7 +59,7 @@ If the broken files do not fail, the practice is miswired — fix the wiring, no
 
 ## Use it somewhere new
 
-GraphQL and REST both ingest the same note. A check that only asserts status 200 on `/graphql` is not parser-agreement evidence. A live GraphQL target is out of scope.
+GraphQL and REST both ingest the same note. Asserting status 200 on `/graphql` is not parser-agreement evidence. Do not use a live GraphQL target.
 
 ## What this page is not doing
 

@@ -37,7 +37,7 @@ python3 -m pytest labs/E1/e1-lab/tests --impl vulnerable
 python3 -m pytest labs/E1/e1-lab/tests --impl fixed
 ```
 
-A test that only greps `exec_sql` in a prompt file without calling `run_tool("exec_sql", {})` is not this topic's evidence. This practice never opens a live model.
+Searching for `exec_sql` in a prompt file without calling `run_tool("exec_sql", {})` is not evidence. This practice never opens a live model.
 
 ## What the tests do not prove
 
@@ -54,11 +54,11 @@ python3 -m pytest labs/E1/e1-lab/tests --impl vulnerable
 python3 -m pytest labs/E1/e1-lab/tests --impl fixed
 ```
 
-Reject a "test" that only greps `exec_sql` in a prompt file without calling `run_tool("exec_sql", {})`.
+Do not treat a grep for `exec_sql` in a prompt file as the check. Call `run_tool("exec_sql", {})`.
 
 ## Use it somewhere new
 
-A clinic example: a test that only asserts "the prompt mentions `exec_sql`" is not this topic. A live vendor tenant is out of scope.
+Asserting "the prompt mentions `exec_sql`" is not this check. Do not use a live vendor tenant.
 
 ## What this page is not doing
 

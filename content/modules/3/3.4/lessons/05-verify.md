@@ -9,7 +9,7 @@
 
 ## Picture: last greater than 5 must fail
 
-A check that only asserts a max attribute exists can still look green while eight calls still leave count 8.
+Asserting a max attribute exists can still hide that eight calls still leave count 8.
 
 ```mermaid
 flowchart LR
@@ -43,11 +43,11 @@ Map each test to the state-machine row you wrote. If the broken files do not fai
 
 ## Practice
 
-Reject a “test” that only greps `max={5}` in JSX without calling `add_share` eight times.
+Do not treat a grep for `max={5}` in JSX as the check. Call `add_share` eight times.
 
 ## Use it somewhere new
 
-Clinic guardians. A test that only asserts HTTP 200 is not cap evidence. A test that load-tests a live clinic is out of scope.
+Clinic guardians. Asserting HTTP 200 is not cap evidence. Do not run a test that load-tests a live clinic.
 
 ## What this page is not doing
 

@@ -30,7 +30,7 @@ If both pass, you are not looking at leftover Alice.
 
 The test `test_user_session_is_not_worker_identity` is there so a leftover cookie that becomes the principal still fails.
 
-A test that only asserts the job was enqueued is not this topic’s evidence. A test that only greps `worker-sc` in a YAML file without calling `exporter({"user_session": "alice", "service": None})` is not this topic’s evidence. This practice never opens a public broker.
+Searching for `worker-sc` in a YAML file without calling `exporter({"user_session": "alice", "service": None})` is not evidence. This practice never opens a public broker.
 
 ```text
 python3 -m pytest labs/7.4/7.4-lab/tests --impl vulnerable
@@ -55,11 +55,11 @@ python3 -m pytest labs/7.4/7.4-lab/tests --impl vulnerable
 python3 -m pytest labs/7.4/7.4-lab/tests --impl fixed
 ```
 
-Reject a “test” that only greps `worker-sc` in a YAML file without calling `exporter({"user_session": "alice", "service": None})`.
+Do not treat a grep for `worker-sc` in a YAML file as the check. Call `exporter({"user_session": "alice", "service": None})`.
 
 ## Use it somewhere new
 
-A clinic example: a test that only asserts the job was enqueued is not this check. A live broker attach is out of scope.
+Asserting the job was enqueued is not this check. Do not attach to a live broker.
 
 ## What this page is not doing
 

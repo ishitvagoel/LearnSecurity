@@ -37,7 +37,7 @@ python3 -m pytest labs/10.3/10.3-lab/tests --impl vulnerable
 python3 -m pytest labs/10.3/10.3-lab/tests --impl fixed
 ```
 
-A test that only greps `namespace:` in a chart without calling `pod_ok("cluster-admin")` is not this topic's evidence. This practice never opens a live cluster.
+Searching for `namespace:` in a chart without calling `pod_ok("cluster-admin")` is not evidence. This practice never opens a live cluster.
 
 ## What the tests do not prove
 
@@ -55,11 +55,11 @@ python3 -m pytest labs/10.3/10.3-lab/tests --impl vulnerable
 python3 -m pytest labs/10.3/10.3-lab/tests --impl fixed
 ```
 
-Reject a "test" that only greps `namespace:` in a chart without calling `pod_ok("cluster-admin")`.
+Do not treat a grep for `namespace:` in a chart as the check. Call `pod_ok("cluster-admin")`.
 
 ## Use it somewhere new
 
-A clinic example: a test that only asserts "namespace exists" is not this topic. A live kube-apiserver is out of scope.
+Asserting "namespace exists" is not this check. Do not use a live kube-apiserver.
 
 ## What this page is not doing
 

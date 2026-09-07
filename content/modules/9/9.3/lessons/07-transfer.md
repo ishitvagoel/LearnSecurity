@@ -13,7 +13,7 @@ An EHR-lite “we have 94% coverage and GET /patient/1 returns 200,” plus a te
 
 ## Picture: same 200, clinical object
 
-Calling it “patient” instead of “note” does not move the work. Object, bad case, and leftover change. Enabling a coverage product and ticking the guide does not name what must not happen.
+Here, “patient” is still “note” for this rule. Object, bad case, and leftover change. Enabling a coverage product and ticking the guide does not name what must not happen.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -56,7 +56,7 @@ Use fake labels. Do not use real patient names.
 
 ## Practice
 
-One page. No answer keys. `labs/9.3/9.3-lab` is the only running system you may break. Do not fuzz a public host.
+Write one page. Leave the answer keys closed. `labs/9.3/9.3-lab` is the only running system you may break. Do not fuzz a public host.
 
 ## What this page is not doing
 

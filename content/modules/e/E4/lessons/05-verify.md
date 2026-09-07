@@ -9,7 +9,7 @@
 
 ## Picture: broken must fail the oversize copy
 
-A check that only greps `Kotlin` in a README can still look green while `copy_into(4, b"abcdefgh", 4)` still returns 8 bytes.
+A grep for `Kotlin` in a README can still hide that `copy_into(4, b"abcdefgh", 4)` still returns 8 bytes.
 
 ```mermaid
 flowchart LR
@@ -42,11 +42,11 @@ Honest `test_short_copy_may_fit` may pass on both implementations. That does not
 
 ## Practice
 
-Reject a “test” that only greps `Kotlin` in a README without calling `copy_into(4, b"abcdefgh", 4)`.
+Do not treat a grep for `Kotlin` in a README as the check. Call `copy_into(4, b"abcdefgh", 4)`.
 
 ## Use it somewhere new
 
-A clinic example: a test that only asserts “the language is memory-safe” is not this rule. A third-party binary is out of scope.
+Asserting “the language is memory-safe” is not this check. Do not use a third-party binary.
 
 ## What this page is not doing
 

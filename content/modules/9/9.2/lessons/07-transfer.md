@@ -15,7 +15,7 @@ A small records app — “designers can put expressions in the discharge templa
 
 ## Picture: same interpreter, clinical object
 
-Calling it “report template” instead of “export helper” does not move the work.
+Here, “report template” is still “export helper” for this rule.
 
 | Notes app | Clinic sketch |
 |---|---|
@@ -55,7 +55,7 @@ Eval-on-user still has to be rejected. Honest `int(user)` may still pass. Format
 
 ## Practice
 
-One page. No answer keys. The only running system you may break is `labs/9.2/9.2-lab`. Do not run eval on untrusted input.
+Write one page. Leave the answer keys closed. The only running system you may break is `labs/9.2/9.2-lab`. Do not run eval on untrusted input.
 
 ## What this page is not doing
 

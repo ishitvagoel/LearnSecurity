@@ -9,7 +9,7 @@ HTTP 200 on a single click is not this topic’s evidence. “The button is disa
 
 ## Picture: a retry that appends twice must fail
 
-A check that only asserts HTTP 200 once can still look green while a retry still appends a second share.
+Asserting HTTP 200 once can still hide that a retry still appends a second share.
 
 ```mermaid
 flowchart LR
@@ -45,11 +45,11 @@ Map each test to the retry row you wrote on the state-machine page. Do not paste
 
 ## Practice
 
-Reject a “test” that only greps `idempotency` in a string without calling `share_note` twice.
+Do not treat a grep for `idempotency` in a string as the check. Call `share_note` twice.
 
 ## Use it somewhere new
 
-Clinic last slot. A test that only asserts HTTP 201 once is not double-book evidence. A test that loads the real clinic is out of scope.
+Clinic last slot. Asserting HTTP 201 once is not double-book evidence. Do not run a test that loads the real clinic.
 
 ## What this page is not doing
 
