@@ -5,7 +5,7 @@
 
 ## Check it
 
-Deleting the profile row does not kill the session. A single-sign-on toggle is a product. After `delete_user("alice")`, `session_valid("alice")` has to be False. On the broken files the helper still returns true. On the repaired files it does not.
+Deleting the profile row does not kill the session. A single-sign-on toggle is a product. After `delete_user("alice")`, `session_valid("alice")` has to be False. Leftover: `session_valid("alice")` is still true. Repair makes it false after `delete_user`.
 
 ## Picture: a leftover session must fail the check
 

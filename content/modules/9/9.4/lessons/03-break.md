@@ -26,7 +26,7 @@ flowchart TD
   Any[any findings] --> True[ship_ok true]
 ```
 
-You do not need a vendor console. You must not scan a public repo. The true return is already the leak of the release decision.
+You do not need a vendor console. You must not scan a public repo. That true return already ships the unmapped HIGH.
 
 The coverage lesson already said status is not coverage. This check is **unowned HIGH must not ship**.
 

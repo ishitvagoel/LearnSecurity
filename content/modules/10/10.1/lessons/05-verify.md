@@ -5,7 +5,7 @@
 
 ## Check it
 
-A CODEOWNERS file does not require a threat-model id. Maturity Level 3 is a score. `merge_ok({})` has to be false, and `{"threat_model": "TM-12"}` may merge. On the broken files the empty change still returns true. On the repaired files it does not. Do not merge in a live GitHub org.
+A CODEOWNERS file does not require a threat-model id. Maturity Level 3 is a score. `merge_ok({})` has to be false, and `{"threat_model": "TM-12"}` may merge. Broken: the empty change still returns true. Repair refuses a change with no threat-model id. Do not merge in a live GitHub org.
 
 ## Picture: a broken merge check must fail the empty-change test
 

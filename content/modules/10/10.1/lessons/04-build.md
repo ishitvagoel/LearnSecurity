@@ -5,7 +5,7 @@
 
 ## The rule
 
-Last week’s pull-request titles are not a threat-model id. Muting a scanner finding does not fill `merge_ok`. A CODEOWNERS file is not the repair.
+The old pull-request titles are not a threat-model id. Hiding a scan result does not fill `merge_ok`. A CODEOWNERS file does not finish this.
 
 What has to change: `merge_ok` **is false unless the change has a truthy `threat_model`**. Fail-safe: a missing id is deny. In short, that citation — not CODEOWNERS, not HIPAA training, not a maturity score.
 

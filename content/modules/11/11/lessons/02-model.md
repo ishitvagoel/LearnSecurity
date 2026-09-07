@@ -9,7 +9,7 @@ The testable picture is **owner, grant, every read path (API, worker, cache), an
 
 `revoke` / `read` — no live tenants.
 
-> After revoke, the rule is deny when the reader is not the owner and not in the grant set. Honest owner read after revoke may still return the body. Honest share read *before* revoke may still return the body. Evidence that the deny is false: `read("n1", "B")` after `revoke("n1", "B")` still returns the body.
+> After revoke, the rule is deny when the reader is not the owner and not in the grant set. Honest owner read after revoke may still return the body. Honest share read *before* revoke may still return the body. The false allow: `read("n1", "B")` after `revoke("n1", "B")` still returns the body.
 
 If the owner-or-grant row is blank, B keeps reading because nobody named the check.
 

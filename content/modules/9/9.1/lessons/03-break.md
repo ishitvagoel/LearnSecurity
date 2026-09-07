@@ -26,7 +26,7 @@ flowchart TD
   Row["req equals AUTHZ-1"] --> True[covered true]
 ```
 
-You do not need CI. You must not call a live checklist portal. The true return is already the leak of honesty.
+You do not need CI. You must not call a live checklist portal. That true return already counts a status-only row as coverage.
 
 The isolation lessons (1.2 / 4.4) already refused company B reading company A. This check is **whether the proof names a test that asserts that**. A pasted PDF is inventory. It does not assert isolation.
 

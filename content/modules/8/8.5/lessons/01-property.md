@@ -51,7 +51,7 @@ You do not need a nation-state. Those four already get the body.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-Someone put the note body into the exception or the report builder. That is the cause. The person who later reads the vendor dashboard is a **result**, not the cause.
+Someone put the note body into the exception or the report builder. That's the hole. The person who later reads the vendor dashboard is fallout.
 
 | Slice | For this rule |
 |---|---|

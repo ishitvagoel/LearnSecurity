@@ -5,7 +5,7 @@
 
 ## The rule
 
-Last week’s log-format string is not redaction. Muting a scanner finding does not keep the body out of the line. Labeling the spreadsheet Confidential is not the repair.
+A prior log-format string is not redaction. A muted ticket does not keep the body out of the line. Labeling the spreadsheet Confidential does not fix the leftover.
 
 Do this: `log_event` **does not include the body string**. The logging API does not accept the body as a format argument. Not a regex after the fact. Not a spreadsheet label. Not `DEBUG=false` in one environment. Not a data-loss product name.
 

@@ -5,7 +5,7 @@
 
 ## Check it
 
-UUID filenames do not keep `../` inside the folder. Stripping `..` in one place is a string munge. `resolve("../outside")` has to raise `ValueError` **or** stay under `/tmp/sc-lab`. On the broken files join leaves the folder. On the repaired files it does not. Tests must not read host files outside the lab folder.
+UUID filenames do not keep `../` inside the folder. Stripping `..` in one place is a string munge. `resolve("../outside")` has to raise `ValueError` **or** stay under `/tmp/sc-lab`. Broken: join leaves the folder. Repair keeps `../outside` under the lab root, or raises. Tests must not read host files outside the lab folder.
 
 ## Picture: a path that leaves the folder must fail
 

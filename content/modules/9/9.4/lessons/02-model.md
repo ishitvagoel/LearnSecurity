@@ -9,7 +9,7 @@
 
 `ship_ok(findings, mappings)` — no live tenants.
 
-> For a HIGH finding at `ship_ok`, the rule is deny unless that id is on the map. Evidence that the deny is false: `ship_ok([{"id": "F1", "sev": "HIGH"}], {})` returns true.
+> For a HIGH finding at `ship_ok`, the rule is deny unless that id is on the map. The deny already lied when `ship_ok([{"id": "F1", "sev": "HIGH"}], {})` returns true.
 
 If the HIGH × map row is blank, the finding ships because nobody named the owner.
 

@@ -5,7 +5,7 @@
 
 ## Check it
 
-One 200 from a single Share click does not prove idempotency. A disabled button is the UI, not the count. Two `share_note("n1", idempotency_key="k1")` calls have to leave `share_count() == 1`. On the broken files the count still climbs. On the repaired files it stays 1.
+One 200 from a single Share click does not prove idempotency. A disabled button is the UI, not the count. Two `share_note("n1", idempotency_key="k1")` calls have to leave `share_count() == 1`. On the broken helper, the count still climbs. Repair leaves `share_count()` at 1.
 
 ## Picture: a retry that appends twice must fail
 

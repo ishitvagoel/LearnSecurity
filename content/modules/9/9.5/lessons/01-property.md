@@ -49,7 +49,7 @@ You do not need a nation-state. Those three already close the finding without a 
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-Someone closed on intent. That is the cause. The remaining isolation hole is a **result**, not the cause.
+Someone closed on intent. That's the close-on-intent. The remaining isolation hole is what's still open.
 
 | Slice | For this rule |
 |---|---|

@@ -9,7 +9,7 @@
 
 `crash_report(note_body)` — no live vendors.
 
-> For the note body at `crash_report`, the rule is deny. A stack identifier may send. Evidence that the deny is false: `'secret'` in `str(crash_report("secret"))`.
+> For the note body at `crash_report`, the rule is deny. A stack identifier may send. You can see the hole: `'secret'` in `str(crash_report("secret"))`.
 
 If the body × crash-report row is blank, the field appears in telemetry because nobody named the place.
 

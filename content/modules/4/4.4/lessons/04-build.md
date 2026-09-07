@@ -5,7 +5,7 @@
 
 ## The rule
 
-Last week’s id list does not decide who may read. Hiding the button does not decide it. Making ids longer does not decide it. “They are a collaborator” is not the repair.
+The previous id list does not decide who may read. Hiding the button does not decide it. Making ids longer does not decide it. “They are a collaborator” is still theater.
 
 The restore: `can_read` **denies unless company matches and the user is the note owner or `GRANTS[(user, note_id)]` is true**. Put simply, this object is checked — not leftover permission from the surroundings.
 

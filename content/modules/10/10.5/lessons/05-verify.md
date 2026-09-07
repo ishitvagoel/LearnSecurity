@@ -5,7 +5,7 @@
 
 ## Check it
 
-A green SIEM tile does not close an incident with recovery still todo. An ack on the pager is an ack. Recovery todo has to stay unclosed, `note_body` must stay out of the logs, and done + ok may close. On the broken files recovery-todo still closes. On the repaired files it does not. Do not query a live SIEM.
+A green SIEM tile does not close an incident with recovery still todo. An ack on the pager is an ack. Recovery todo has to stay unclosed, `note_body` must stay out of the logs, and done + ok may close. Broken: recovery-todo still closes. Repair leaves recovery-todo unclosed. Do not query a live SIEM.
 
 ## Picture: a broken close gate must fail the check
 

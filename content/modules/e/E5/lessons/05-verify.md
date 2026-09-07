@@ -5,7 +5,7 @@
 
 ## Check it
 
-Row-level rules in the database do not bind tenant from the session. Mapping a famous-bugs list is a spreadsheet. `tenant_for({"tenant": "A"}, {"tenant": "B"})` has to equal `"A"`, and matching A/A may keep A. The JSON body is not the tenant. On the broken files the body tenant overrides the session (returns B). On the repaired files tenant comes from the session. Do not hit public companies.
+Row-level rules in the database do not bind tenant from the session. Mapping a famous-bugs list is a spreadsheet. `tenant_for({"tenant": "A"}, {"tenant": "B"})` has to equal `"A"`, and matching A/A may keep A. The JSON body is not the tenant. The leftover files: the body tenant overrides the session (returns B). Repair takes tenant from the session. Do not hit public companies.
 
 ## Picture: broken must fail: body switch
 

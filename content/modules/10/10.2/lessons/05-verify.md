@@ -5,7 +5,7 @@
 
 ## Check it
 
-Generating an SBOM does not compare hashes. A provenance badge is how-it-was-built theater. `install_ok("aaa", "bbb")` has to be false, and matching hashes may install. On the broken files the mismatch still installs. On the repaired files it does not. Do not fetch live packages.
+Generating an SBOM does not compare hashes. A provenance badge is how-it-was-built theater. `install_ok("aaa", "bbb")` has to be false, and matching hashes may install. The leftover files: the mismatch still installs. Repair refuses `aaa` vs `bbb`. Do not fetch live packages.
 
 ## Picture: a broken install check must fail the mismatch test
 

@@ -5,7 +5,7 @@
 
 ## Check it
 
-Importing a matrix spreadsheet does not prove `AUTHZ-1` has an isolation assert. A green CI tile is a score. `covered("AUTHZ-1", [status-only])` has to be false, and `covered("AUTHZ-1", [isolation assert])` may be true. On the broken files status-only still counts. On the repaired files it does not. Do not call a live checklist portal.
+Importing a matrix spreadsheet does not prove `AUTHZ-1` has an isolation assert. A green CI tile is a score. `covered("AUTHZ-1", [status-only])` has to be false, and `covered("AUTHZ-1", [isolation assert])` may be true. Vulnerable files: status-only still counts. Repair stops a status-only row from counting. Do not call a live checklist portal.
 
 ## Picture: a broken coverage check must fail the status-only test
 

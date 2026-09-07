@@ -9,7 +9,7 @@ Keep **owner, review_by, wcag_checked, expiry, and who may accept**; “We have 
 
 `accept_exception(exc)` — no live disclosure inbox.
 
-> For accept, the rule is deny when owner is empty, deny when `review_by` is missing, and deny when `wcag_checked` is missing. A dated owner plus an accessibility flag may accept. Evidence that the deny is false: `accept_exception({"owner": "", "review_by": None})` returns true.
+> For accept, the rule is deny when owner is empty, deny when `review_by` is missing, and deny when `wcag_checked` is missing. A dated owner plus an accessibility flag may accept. You can see the hole: `accept_exception({"owner": "", "review_by": None})` returns true.
 
 If those three fields are blank, the hole ships because nobody named the check.
 

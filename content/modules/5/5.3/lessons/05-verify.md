@@ -5,7 +5,7 @@
 
 ## Check it
 
-Turning on Secrets Manager does not rotate the default. A wiki that says you rotated is a page. `auth("sk-lab-hardcoded", current="rotated-now")` has to be False, and `auth("rotated-now", current=None)` has to be False. On the broken files the default still authenticates and a missing current still allows. On the repaired files both deny.
+Turning on Secrets Manager does not rotate the default. A wiki that says you rotated is a page. `auth("sk-lab-hardcoded", current="rotated-now")` has to be False, and `auth("rotated-now", current=None)` has to be False. The leftover files: the default still authenticates and a missing current still allows. Repair denies both leftover keys.
 
 ## Picture: leftover default must fail
 

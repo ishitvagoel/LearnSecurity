@@ -5,7 +5,7 @@
 
 ## Check it
 
-A maturity score does not accept an empty owner. “Legal said yes” is a conversation. `accept_exception({"owner": "", "review_by": None})` has to be false, and a complete record may accept. On the broken files the empty owner still accepts. On the repaired files it does not. Do not file live exceptions.
+A maturity score does not accept an empty owner. “Legal said yes” is a conversation. `accept_exception({"owner": "", "review_by": None})` has to be false, and a complete record may accept. On the broken helper, the empty owner still accepts. Repair refuses a row with no owner. Do not file live exceptions.
 
 ## Picture: a broken register gate must fail the check
 

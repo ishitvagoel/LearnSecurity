@@ -6,7 +6,7 @@
 
 ## Check it
 
-Saying you’ll be careful does not authorize the target. An authorization chapter is a heading. `target_is_authorized("https://example.com/")` has to be false. On `--impl vulnerable` the helper returns true. On `--impl fixed` it returns false. Do not fetch example.com; the test string is enough.
+Saying you’ll be careful does not authorize the target. An authorization chapter is a heading. `target_is_authorized("https://example.com/")` has to be false. Leftover: `example.com` still counts as authorized. Repair keeps it false. Do not fetch example.com; the test string is enough.
 
 ## Picture: the broken files must fail on the public host
 

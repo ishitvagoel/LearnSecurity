@@ -5,7 +5,7 @@
 
 ## Check it
 
-A comment that says you don’t use a shell does not change argv. A sanitized filename is a string munge. `argv_for_list("notes")[:2]` must not be `["sh", "-c"]`, and `uses_shell("notes")` has to be False. On the broken files it still returns `sh -c`. On the repaired files it does not. Tests **must not** execute the argv.
+A comment that says you don’t use a shell does not change argv. A sanitized filename is a string munge. `argv_for_list("notes")[:2]` must not be `["sh", "-c"]`, and `uses_shell("notes")` has to be False. Vulnerable files: it still returns `sh -c`. Repair stops argv from starting with a shell. Tests **must not** execute the argv.
 
 ## Picture: sh -c must fail the check
 

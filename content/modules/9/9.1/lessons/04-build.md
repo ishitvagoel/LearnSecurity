@@ -5,7 +5,7 @@
 
 ## The rule
 
-Last week’s spreadsheet cells are not an isolation assert. Muting a scanner finding does not cover `AUTHZ-1`. Running the checklist once is not the repair.
+The old spreadsheet cells are not an isolation assert. A silenced finding does not cover `AUTHZ-1`. Running the checklist once does not finish this.
 
 What has to change: `covered` **requires `req == req_id` and `asserts_isolation`**. A row that only stores status is uncovered. Namely that conjunction — not “we ran the checklist,” not pytest-cov, not a tracker Done column.
 

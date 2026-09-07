@@ -5,7 +5,7 @@
 
 ## Check it
 
-A filled-in store privacy form does not strip `secret` from the crash body. HTTPS to the crash product is a hop. `'secret'` must not appear in `str(crash_report("secret"))`, and an honest crash still has a `stack` key. On the broken files the body is still in the report. On the repaired files it is not. Do not call a crash vendor.
+A filled-in store privacy form does not strip `secret` from the crash body. HTTPS to the crash product is a hop. `'secret'` must not appear in `str(crash_report("secret"))`, and an honest crash still has a `stack` key. On the broken helper, the body is still in the report. Repair keeps `'secret'` out of the crash payload. Do not call a crash vendor.
 
 ## Picture: a broken crash report must fail the check
 

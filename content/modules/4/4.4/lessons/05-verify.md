@@ -5,7 +5,7 @@
 
 ## Check it
 
-Having roles in a table does not decide who may read. “Ids are hard to guess” is a hope. `can_read("bob", "n2")` has to be False. `can_read` is still true on the broken files and false after repair.
+Having roles in a table does not decide who may read. “Ids are hard to guess” is a hope. `can_read("bob", "n2")` has to be False. Leftover: Bob can still read n2. Repair returns false.
 
 ## Picture: broken must fail the n2 and cross-company denies
 

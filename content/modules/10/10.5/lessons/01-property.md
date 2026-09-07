@@ -52,7 +52,7 @@ You do not need a nation-state. Those three already close the incident without r
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-Someone closed on detection quality. That is the cause. The system still broken, or extra note copies in logs, is a **result**, not the cause.
+Someone closed on detection quality. That's the close-on-green decision. A still-broken system, or extra note copies in logs, is what you notice later.
 
 | Slice | For this rule |
 |---|---|

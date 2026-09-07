@@ -5,7 +5,7 @@
 
 ## Check it
 
-Running Kubernetes does not deny `cluster-admin`. A green CIS scan is a score. `pod_ok("cluster-admin")` has to be false, and `"app"` may run. On the broken files cluster-admin still runs. On the repaired files it does not. Do not apply manifests to a live cluster.
+Running Kubernetes does not deny `cluster-admin`. A green CIS scan is a score. `pod_ok("cluster-admin")` has to be false, and `"app"` may run. On the broken helper, cluster-admin still runs. Repair refuses `cluster-admin`. Do not apply manifests to a live cluster.
 
 ## Picture: a broken admission must fail the check
 

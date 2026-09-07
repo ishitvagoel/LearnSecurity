@@ -26,7 +26,7 @@ flowchart TD
   Any[any pair] --> True[install_ok true]
 ```
 
-You do not need npm. You must not fetch a live package. The true return is already the leak of integrity.
+You do not need npm. You must not fetch a live package. That true return already installs a digest mismatch.
 
 The first lesson already refused a name as a digest. This practice is **whether the check compares bytes**. An SBOM is inventory. It does not compare `aaa` to `bbb`.
 

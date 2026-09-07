@@ -5,7 +5,7 @@
 
 ## Check it
 
-A green capstone scanner does not consult the grant on the next read. HTTP 200 on DELETE is a status. After revoke, B has to read None, A has to still read, and B before revoke has to still read. On the broken files B-after-revoke still returns the body. On the repaired files it does not. Do not hit live tenants.
+A green capstone scanner does not consult the grant on the next read. HTTP 200 on DELETE is a status. After revoke, B has to read None, A has to still read, and B before revoke has to still read. The leftover files: B-after-revoke still returns the body. Repair leaves B reading None after revoke. Do not hit live tenants.
 
 ## Picture: a broken no-op revoke must fail the check
 

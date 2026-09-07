@@ -5,7 +5,7 @@
 
 ## Check it
 
-Putting max on a select is a form field, not the cap. An awareness-list rule on a filter is a label. After eight `add_share()` calls, `last` has to be `<= 5`. On the broken files the eighth share still lands. On the repaired files it does not.
+Putting max on a select is a form field, not the cap. An awareness-list rule on a filter is a label. After eight `add_share()` calls, `last` has to be `<= 5`. The leftover files: the eighth share still lands. Repair keeps `last` at five or fewer.
 
 ## Picture: last greater than 5 must fail
 

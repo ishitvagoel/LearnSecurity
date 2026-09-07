@@ -5,7 +5,7 @@
 
 ## Check it
 
-A deletion contract on paper does not empty analytics. Seeing the notes row gone is a SQL observation. After `delete_account("alice")`, `body_retained("alice")` and `search_retained("alice")` both have to be None. On the broken files the helper still returns `"secret"`. On the repaired files those lookups stay empty.
+A deletion contract on paper does not empty analytics. Seeing the notes row gone is a SQL observation. After `delete_account("alice")`, `body_retained("alice")` and `search_retained("alice")` both have to be None. Vulnerable files: the helper still returns `"secret"`. Repair leaves analytics and search empty for Alice.
 
 ## Picture: leftover analytics or search must fail the check
 

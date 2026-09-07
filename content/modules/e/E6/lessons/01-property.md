@@ -47,7 +47,7 @@ You do not need a live disclosure inbox. Those three already accept the hole if 
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-Oral acceptance treated as a register row. That is the cause. The unowned hole that lasts, or inaccessible recovery kept, is a **result**, not the cause.
+Oral acceptance treated as a register row. That's the oral yes. The unowned hole that lasts, or inaccessible recovery kept, is what remains.
 
 | Slice | For this rule |
 |---|---|

@@ -5,7 +5,7 @@
 
 ## Check it
 
-A private-IP denylist does not cover link-local metadata. “HTTPS only” is a scheme check. `allowed` has to be false for the named link-local metadata URL and for loopback, and true for the named lab host on https. On the broken files link-local still returns true. On the repaired files it does not. Tests **must not** fetch.
+A private-IP denylist does not cover link-local metadata. “HTTPS only” is a scheme check. `allowed` has to be false for the named link-local metadata URL and for loopback, and true for the named lab host on https. The leftover files: link-local still returns true. Repair refuses the link-local metadata URL. Tests **must not** fetch.
 
 ## Picture: link-local allowed must fail the check
 

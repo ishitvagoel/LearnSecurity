@@ -58,7 +58,7 @@ If the list of places does not include the log drain, redacting `logger.info` is
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-Someone treated the body as debug context. That is the cause. The person who later reads the log is a **result**, not the cause.
+Someone treated the body as debug context. That's the debug-in-the-body choice. The person who later reads the log is who sees it.
 
 | Slice | For this rule |
 |---|---|

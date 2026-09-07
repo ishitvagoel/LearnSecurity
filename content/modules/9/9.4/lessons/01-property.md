@@ -47,7 +47,7 @@ You do not need a live GitHub org. Those three already ship the finding.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-Scanner output was never joined to the coverage map. That is the cause. The person who later reads production is a **result**, not the cause.
+Scanner output was never joined to the coverage map. That's the unmapped finding. The person who later reads production is who pays for it.
 
 | Slice | For this rule |
 |---|---|

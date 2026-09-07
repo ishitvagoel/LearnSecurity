@@ -46,7 +46,7 @@ Disabled and deleted are different product states. Both must fail `session_valid
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-Someone killed the profile row and left the session. That is the cause. The person who later presents the cookie is a **result**, not the cause.
+Someone killed the profile row and left the session. That's the leftover session. The person who later presents the cookie is who still gets in.
 
 | Slice | For this rule |
 |---|---|

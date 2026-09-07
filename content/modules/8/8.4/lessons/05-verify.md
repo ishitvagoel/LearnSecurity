@@ -5,7 +5,7 @@
 
 ## Check it
 
-`minifyEnabled` true does not keep the debug client id off the API. Play App Signing is a store setting. `api_allowed("debug", "ok")` has to be false, and `api_allowed("release", "ok")` may be true. On `--impl vulnerable` debug-plus-ok still returns true. On `--impl fixed` it does not. Do not unpack store APKs.
+`minifyEnabled` true does not keep the debug client id off the API. Play App Signing is a store setting. `api_allowed("debug", "ok")` has to be false, and `api_allowed("release", "ok")` may be true. On the broken helper, debug-plus-ok still returns true. Repair refuses a debug client talking to prod. Do not unpack store APKs.
 
 ## Picture: broken files must fail: debug plus ok
 

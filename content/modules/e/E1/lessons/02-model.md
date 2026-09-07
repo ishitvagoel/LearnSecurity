@@ -9,7 +9,7 @@
 
 `run_tool(name, args)` — no live model APIs.
 
-> For tools, the rule is deny when the name is `exec_sql`. Allow-listed `search_notes` may run. Evidence that the deny is false: `run_tool("exec_sql", {})` returns a ran-string.
+> For tools, the rule is deny when the name is `exec_sql`. Allow-listed `search_notes` may run. The false allow: `run_tool("exec_sql", {})` returns a ran-string.
 
 If the tool × who-may-call row is blank, the tool runs because nobody named the check.
 

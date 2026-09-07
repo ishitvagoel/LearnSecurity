@@ -5,7 +5,7 @@
 
 ## Check it
 
-Saying you use passkeys does not stop a look-alike page. An MFA badge is a product. `phishing_resistant("password", EVIL, REAL)` has to be false. On `--impl vulnerable` the helper returns true. On `--impl fixed` it returns false.
+Saying you use passkeys does not stop a look-alike page. An MFA badge is a product. `phishing_resistant("password", EVIL, REAL)` has to be false. Leftover: a password at the look-alike origin still claims resistance. Repair returns false.
 
 ## Picture: broken files must fail: password at lookalike is true
 

@@ -50,7 +50,7 @@ You do not need a nation-state. Those three already read after revoke.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-Someone recorded revoke and never asked the grant on the next read. That is the cause. The person who later reads the body is a **result**, not the cause.
+Someone recorded revoke and never asked the grant on the next read. That's the skipped grant check. The person who later reads the body is what happened next.
 
 | Slice | For this rule |
 |---|---|

@@ -26,7 +26,7 @@ flowchart TD
   Row["status_asserted true"] --> True[is_security_test true]
 ```
 
-You do not need a running notes server. You must not fuzz a public host. The true return is already the leak of the suite’s honesty.
+You do not need a running notes server. You must not fuzz a public host. That true return already shows the suite can lie.
 
 Checklists tell you *what* to consider. They do not make `assert r.status_code == 200` a security test. Lesson 9.1 can mark the isolation row “covered” with a test that never isolates if this shape gate is missing.
 

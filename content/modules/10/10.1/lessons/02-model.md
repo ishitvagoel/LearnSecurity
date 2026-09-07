@@ -9,7 +9,7 @@
 
 `merge_ok(pr)` — no live orgs.
 
-> For an empty change, merge is deny. A change that names `threat_model` as `TM-12` may merge. Evidence that the deny is false: `merge_ok({})` returns true.
+> For an empty change, merge is deny. A change that names `threat_model` as `TM-12` may merge. You can see the hole: `merge_ok({})` returns true.
 
 If the trigger table is blank, CODEOWNERS looks finished because nobody named which files need a model.
 

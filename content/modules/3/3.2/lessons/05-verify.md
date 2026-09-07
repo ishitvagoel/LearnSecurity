@@ -5,7 +5,7 @@
 
 ## Check it
 
-A sprint that “did threat modeling” does not name the leftover read. A green scanner tile is a score. `threats_from_scan(True)` still has to contain `cross-tenant-read`. On the broken files that row is missing. On the repaired files it is there.
+A sprint that “did threat modeling” does not name the leftover read. A green scanner tile is a score. `threats_from_scan(True)` still has to contain `cross-tenant-read`. Broken: that row is missing. Repair still lists `cross-tenant-read` on a green scan.
 
 ## Picture: missing cross-tenant-read must fail
 

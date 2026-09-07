@@ -9,7 +9,7 @@
 
 `pod_ok(role)` — no live kube-apiserver.
 
-> For admission, the rule is deny when the role is `cluster-admin`. A namespaced app role may run. Evidence that the deny is false: `pod_ok("cluster-admin")` returns true.
+> For admission, the rule is deny when the role is `cluster-admin`. A namespaced app role may run. Watch it fail: `pod_ok("cluster-admin")` returns true.
 
 If the role × namespace row is blank, the pod runs because nobody named the check.
 

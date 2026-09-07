@@ -5,7 +5,7 @@
 
 ## Check it
 
-Naming Play Integrity in a README does not ignore the client boolean. A disabled Compose button is the UI. `allow_export({"integrity": "ok"}, "fail")` has to be false, and `allow_export({"integrity": "ok"}, "play_integrity_pass")` may be true. On `--impl vulnerable` client-ok-plus-attest-fail still returns true. On `--impl fixed` it does not. Do not call live attestation APIs.
+Naming Play Integrity in a README does not ignore the client boolean. A disabled Compose button is the UI. `allow_export({"integrity": "ok"}, "fail")` has to be false, and `allow_export({"integrity": "ok"}, "play_integrity_pass")` may be true. Vulnerable path: client-ok-plus-attest-fail still returns true. Repair refuses a failing attestation claim. Do not call live attestation APIs.
 
 ## Picture: broken files must fail: client ok plus attest fail
 

@@ -46,7 +46,7 @@ Secrecy can hold while privacy fails. The body was already classified confidenti
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-Someone deleted the notes row and left the other copies. That is the cause. The person who later SELECTs the warehouse is a **result**, not the cause.
+Someone deleted the notes row and left the other copies. That's the leftover copy. The person who later SELECTs the warehouse is who still has it.
 
 | Slice | For this rule |
 |---|---|

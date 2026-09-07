@@ -5,7 +5,7 @@
 
 ## Check it
 
-Turning on retrieval does not block `exec_sql`. A prompt that forbids SQL is a string. `run_tool("exec_sql", {})` has to be None, and `search_notes` may run. On the broken files `exec_sql` still runs. On the repaired files it does not. Do not call live models.
+Turning on retrieval does not block `exec_sql`. A prompt that forbids SQL is a string. `run_tool("exec_sql", {})` has to be None, and `search_notes` may run. Vulnerable files: `exec_sql` still runs. Repair stops that tool from running. Do not call live models.
 
 ## Picture: a broken runtime must fail the check
 

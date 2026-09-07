@@ -5,7 +5,7 @@
 
 ## Check it
 
-A classification spreadsheet does not keep the note body out of the log. “Logs are internal” is a trust assumption, not an observation. After `log_event("note_read", "tenant-A-secret-body")`, the line must not contain `tenant-A-secret-body` and must contain a redaction marker. On the broken files the body is still in the line. On the repaired files it is not.
+A classification spreadsheet does not keep the note body out of the log. “Logs are internal” is a trust assumption, not an observation. After `log_event("note_read", "tenant-A-secret-body")`, the line must not contain `tenant-A-secret-body` and must contain a redaction marker. Vulnerable files: the body is still in the line. Repair redacts `tenant-A-secret-body`.
 
 ## Picture: a broken log line must fail the check
 

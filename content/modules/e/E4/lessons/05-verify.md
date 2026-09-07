@@ -5,7 +5,7 @@
 
 ## Check it
 
-Writing the copy in Kotlin does not bound the buffer. A sanitizer flag is a product. `len(copy_into(4, b"abcdefgh", 4))` has to be `<= 4`, and a short honest copy may fit. On the broken files the oversize copy is length 8. On the repaired files it is not. Do not compile native exploits.
+Writing the copy in Kotlin does not bound the buffer. A sanitizer flag is a product. `len(copy_into(4, b"abcdefgh", 4))` has to be `<= 4`, and a short honest copy may fit. Broken: the oversize copy is length 8. Repair keeps the copy at length 4 or less. Do not compile native exploits.
 
 ## Picture: broken must fail the oversize copy
 

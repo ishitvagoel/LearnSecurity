@@ -5,7 +5,7 @@
 
 ## Check it
 
-A rate-limit product name does not cap the fourth export. A disabled button is the UI. `allow(4)` has to be false and `allow(3)` has to be true. On the broken files the fourth export still returns true. On the repaired files it does not. Do not load-test public hosts.
+A rate-limit product name does not cap the fourth export. A disabled button is the UI. `allow(4)` has to be false and `allow(3)` has to be true. Vulnerable files: the fourth export still returns true. Repair refuses the fourth export. Do not load-test public hosts.
 
 ## Picture: unbounded allow must fail the check
 

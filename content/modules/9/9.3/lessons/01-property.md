@@ -35,7 +35,7 @@ flowchart LR
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-Someone treated the owner’s 200 as proof that isolation works. That is the cause. A later green coverage tile is a **result**, not the cause.
+Someone treated the owner’s 200 as proof that isolation works. That's why the suite lied. A later green coverage tile is the score, not the reason.
 
 | Slice | For this rule |
 |---|---|

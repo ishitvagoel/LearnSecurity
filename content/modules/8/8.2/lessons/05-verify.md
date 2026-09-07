@@ -5,7 +5,7 @@
 
 ## Check it
 
-EncryptedSharedPreferences on a different file does not hide the note. Internal storage is a folder. After `save_note("secret")`, `plaintext_on_disk()` has to be false. On `--impl vulnerable` DISK still holds `'secret'`. On `--impl fixed` it does not. Do not image phones.
+EncryptedSharedPreferences on a different file does not hide the note. Internal storage is a folder. After `save_note("secret")`, `plaintext_on_disk()` has to be false. Broken: DISK still holds `'secret'`. Repair leaves DISK empty of `'secret'`. Do not image phones.
 
 ## Picture: broken files must fail: plaintext secret
 

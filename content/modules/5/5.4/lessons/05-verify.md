@@ -5,7 +5,7 @@
 
 ## Check it
 
-A TLS checkbox does not ignore a spoofed forwarded header. “Force HTTPS” is a dashboard tick. `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` has to be False. On the broken files the helper still returns true. On the repaired files it does not.
+A TLS checkbox does not ignore a spoofed forwarded header. “Force HTTPS” is a dashboard tick. `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` has to be False. Leftover: a spoofed `X-Forwarded-Proto` still counts as HTTPS. Repair looks at the socket.
 
 ## Picture: header https, socket http must fail
 

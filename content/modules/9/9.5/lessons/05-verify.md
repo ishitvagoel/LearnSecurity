@@ -5,7 +5,7 @@
 
 ## Check it
 
-Attaching a PDF does not close the finding. Severity 9.8 is a priority number. `close_finding({"retest": None})` has to be false, and `{retest: "pass"}` may close. On the broken files a missing retest still closes. On the repaired files it does not. Do not pentest public hosts.
+Attaching a PDF does not close the finding. Severity 9.8 is a priority number. `close_finding({"retest": None})` has to be false, and `{retest: "pass"}` may close. On the broken helper, a missing retest still closes. Repair refuses a close with no retest. Do not pentest public hosts.
 
 ## Picture: a broken close gate must fail the check
 

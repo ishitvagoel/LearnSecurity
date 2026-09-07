@@ -39,7 +39,7 @@ flowchart LR
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-Someone treated model output as policy. That is the cause. An interpreter reached through English is a **result**, not the cause.
+Someone treated model output as policy. That's the policy hole. An interpreter reached through English is what ran afterward.
 
 | Slice | For this rule |
 |---|---|

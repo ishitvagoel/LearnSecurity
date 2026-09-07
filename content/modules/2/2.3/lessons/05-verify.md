@@ -5,7 +5,7 @@
 
 ## If you cannot fail a check, it is still a slogan
 
-A green CSP scanner does not prove the cookie is unreadable from script. A Set-Cookie header is a name, not HttpOnly. For `HTTPONLY_SESSION`, `js_read_session` has to return `None`. On `--impl vulnerable` the reader still returns the session. On `--impl fixed` it does not.
+A green CSP scanner does not prove the cookie is unreadable from script. A Set-Cookie header is a name, not HttpOnly. For `HTTPONLY_SESSION`, `js_read_session` has to return `None`. Broken: the reader still returns the session. Repair keeps script from reading it.
 
 ## Picture: broken must fail the HttpOnly read
 

@@ -5,7 +5,7 @@
 
 ## Check it
 
-Turning on code scanning does not map HIGH findings. A high maturity score is a dashboard. `ship_ok([HIGH], {})` has to be false, and a mapped HIGH may ship. On the broken files the empty map still ships. On the repaired files it does not. Do not scan public repos.
+Turning on code scanning does not map HIGH findings. A high maturity score is a dashboard. `ship_ok([HIGH], {})` has to be false, and a mapped HIGH may ship. The leftover files: the empty map still ships. Repair blocks an unmapped HIGH. Do not scan public repos.
 
 ## Picture: a broken ship_ok must fail the check
 

@@ -5,7 +5,7 @@
 
 ## Check it
 
-Coverage at 92% does not name what must not happen. A ticked testing-guide row is a checkbox. `is_security_test({"status_asserted": True})` has to be false, and a row that names `forbidden_outcome` may count. On the broken files a 200-only row still counts. On the repaired files it does not. Do not fuzz public hosts.
+Coverage at 92% does not name what must not happen. A ticked testing-guide row is a checkbox. `is_security_test({"status_asserted": True})` has to be false, and a row that names `forbidden_outcome` may count. Broken: a 200-only row still counts. Repair stops a 200-only row from counting as a security test. Do not fuzz public hosts.
 
 ## Picture: a broken suite must fail the check
 

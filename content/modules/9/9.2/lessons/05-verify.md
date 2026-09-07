@@ -5,7 +5,7 @@
 
 ## Check it
 
-Approving because continuous integration passed does not reject `eval`. A formatter pass is style. `review_ok("x = eval(user)")` has to be false, and `review_ok("x = int(user)")` may be true. On `--impl vulnerable` the eval line still returns true. On `--impl fixed` it does not. Do not run eval on live input.
+Approving because continuous integration passed does not reject `eval`. A formatter pass is style. `review_ok("x = eval(user)")` has to be false, and `review_ok("x = int(user)")` may be true. Vulnerable path: the eval line still returns true. Repair refuses `eval(` in the diff. Do not run eval on live input.
 
 ## Picture: broken must fail eval-approve
 

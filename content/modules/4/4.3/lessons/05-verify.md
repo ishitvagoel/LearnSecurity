@@ -5,7 +5,7 @@
 
 ## Check it
 
-A Referrer-Policy header does not prove the parser ignores query tokens. HTTPS is a hop. `session_from_request({"access_token": "secret"}, {}, None)` has to be `None`. On the broken files it returns `secret`. On the repaired files it does not.
+A Referrer-Policy header does not prove the parser ignores query tokens. HTTPS is a hop. `session_from_request({"access_token": "secret"}, {}, None)` has to be `None`. On the broken helper, it returns `secret`. Repair ignores a token in the query string.
 
 ## Picture: query returns secret must fail
 

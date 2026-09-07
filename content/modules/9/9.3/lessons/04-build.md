@@ -5,7 +5,7 @@
 
 ## The rule
 
-Last week’s test names are not a “what must not happen” assert. Hiding a coverage warning does not turn a 200-check into a security test. Ticking a testing-guide row is not the repair.
+Those test names are not a “what must not happen” assert. Hiding a coverage warning does not turn a 200-check into a security test. Ticking a testing-guide row is still a slogan.
 
 Repair this: `is_security_test` **requires `forbidden_outcome`**. HTTP 200 alone is a product test. Put simply, that flag — not line coverage, not testing-guide membership, not “status asserted and we listed a guide id.”
 

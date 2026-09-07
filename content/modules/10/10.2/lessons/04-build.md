@@ -5,7 +5,7 @@
 
 ## The rule
 
-Last week’s package names are not a digest check. Muting a scanner finding does not compare hashes. Generating an SBOM is not the repair.
+Those package names are not a digest check. A silenced finding does not compare hashes. Generating an SBOM is still a slogan.
 
 Repair this: `install_ok` **returns `expected_hash == got_hash`**. Fail-safe: a mismatch denies. Provenance and an SBOM may *sit next to* a match; they do not replace it. Here: that equality — not package name, not Dependabot, not a provenance badge.
 

@@ -9,7 +9,7 @@ Until you have **env, debug, who can edit compose, the admin bind address, wheth
 
 `boot_ok(env, debug)` — no live production hosts.
 
-> For boot, the rule is deny when `env` is `"prod"` and `debug` is true. Production without debug may boot. Evidence that the deny is false: `boot_ok("prod", True)` returns true.
+> For boot, the rule is deny when `env` is `"prod"` and `debug` is true. Production without debug may boot. The deny already lied when `boot_ok("prod", True)` returns true.
 
 If the env × debug row is blank, the process starts because nobody named the check.
 

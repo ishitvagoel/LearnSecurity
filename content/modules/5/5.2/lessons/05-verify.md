@@ -5,7 +5,7 @@
 
 ## Check it
 
-Naming AES in a comment does not encrypt the body. A `bytea` column type is storage. Base64 decode of `protect("secret")` must not be `"secret"`, and `looks_encrypted` has to be true on the repaired stand-in. On the broken files decode still equals secret. On the repaired files it does not.
+Naming AES in a comment does not encrypt the body. A `bytea` column type is storage. Base64 decode of `protect("secret")` must not be `"secret"`, and `looks_encrypted` has to be true on the repaired stand-in. Broken: decode still equals secret. Repair keeps decode from matching the body.
 
 ## Picture: Base64 round-trip must fail the check
 

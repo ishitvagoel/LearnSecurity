@@ -5,7 +5,7 @@
 
 ## Check it
 
-`NODE_ENV=production` does not turn debug off. A 10% canary is a traffic split. `boot_ok("prod", True)` has to be false, and `("prod", False)` may boot. On the broken files prod-plus-debug still boots. On the repaired files it does not. Do not boot a live host.
+`NODE_ENV=production` does not turn debug off. A 10% canary is a traffic split. `boot_ok("prod", True)` has to be false, and `("prod", False)` may boot. Vulnerable files: prod-plus-debug still boots. Repair refuses production with debug on. Do not boot a live host.
 
 ## Picture: a broken boot check must fail prod plus debug
 

@@ -26,7 +26,7 @@ flowchart TD
   Any[any pr dict] --> True[merge_ok true]
 ```
 
-You do not need GitHub. You must not merge in a live org. The true return is already the leak of honesty.
+You do not need GitHub. You must not merge in a live org. That true return already merges a change with no threat-model id.
 
 The threat-modeling lessons (3.2) already said how to write the model. This check is **whether a citation exists before merge**. A poster is a belief. It does not put `threat_model` on the change.
 

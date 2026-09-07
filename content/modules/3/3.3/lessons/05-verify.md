@@ -5,7 +5,7 @@
 
 ## Check it
 
-A backlog ticket for row-level security does not stop the select. A private subnet is topology. `can_select("app", "tB", "tA")` has to be False. On the broken files the helper returns true. On the repaired files it returns false.
+A backlog ticket for row-level security does not stop the select. A private subnet is topology. `can_select("app", "tB", "tA")` has to be False. Leftover: app on tB can still select tA. Repair returns false.
 
 ## Picture: broken must fail — tB reads tA
 

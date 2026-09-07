@@ -5,7 +5,7 @@
 
 ## Check it
 
-Saying queries are parameterized does not prove the SQL is a tuple. An ORM toggle is a product. `fetch_sql` must not be a `str`, and `is_bound` has to be true for the `(sql, params)` shape. On the broken files the helper returns concatenated SQL. On the repaired files it returns the bound pair.
+Saying queries are parameterized does not prove the SQL is a tuple. An ORM toggle is a product. `fetch_sql` must not be a `str`, and `is_bound` has to be true for the `(sql, params)` shape. On the broken helper, the helper returns concatenated SQL. Repair returns `(sql, params)`.
 
 ## Picture: concatenated SQL must fail the check
 

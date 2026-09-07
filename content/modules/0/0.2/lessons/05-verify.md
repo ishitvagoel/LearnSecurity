@@ -6,7 +6,7 @@
 
 ## Check it
 
-Calling someone advanced does not skip part 1. A 100% LMS tile is a dashboard number. `quiz_score_grants_phase1_skip(100)` has to be false. On `--impl vulnerable` the helper returns true. On `--impl fixed` it returns false. Do not hack an LMS; the integer is enough.
+Calling someone advanced does not skip part 1. A 100% LMS tile is a dashboard number. `quiz_score_grants_phase1_skip(100)` has to be false. Leftover: a 100 quiz still skips part 1. Repair keeps the skip false. Do not hack an LMS; the integer is enough.
 
 ## Picture: the broken files must fail on score 100 skip
 

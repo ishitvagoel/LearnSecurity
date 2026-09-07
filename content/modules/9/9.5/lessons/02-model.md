@@ -9,7 +9,7 @@ Keep **the rule, what must not happen, the retest command, and variants**; "We d
 
 `close_finding(f)` — no live clinics.
 
-> For close, the rule is deny when `retest` is missing. A passing retest of the same isolation check may close. Evidence that the deny is false: `close_finding({"retest": None})` returns true.
+> For close, the rule is deny when `retest` is missing. A passing retest of the same isolation check may close. A missing retest still closes: `close_finding({"retest": None})` returns true.
 
 If the rule × retest row is blank, the finding closes because nobody named the check.
 

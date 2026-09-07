@@ -5,7 +5,7 @@
 
 ## Check it
 
-A unique index you never write does not stop the second join. Returning 400 after the row exists is late. First `accept("t1")` has to be true and the second `accept("t1")` has to be false. On the broken files the helper still returns true the second time. On the repaired files it does not.
+A unique index you never write does not stop the second join. Returning 400 after the row exists is late. First `accept("t1")` has to be true and the second `accept("t1")` has to be false. On the broken helper, the helper still returns true the second time. Repair stops the second `accept("t1")`.
 
 ## Picture: second t1 must fail the check
 

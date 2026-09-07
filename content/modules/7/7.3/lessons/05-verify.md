@@ -5,7 +5,7 @@
 
 ## Check it
 
-A “webhooks are signed” slide does not reject an empty signature. TLS is a hop. `accept("", "body", "lab-secret")` has to be false, and a matching HMAC over the same raw body has to be true. On the broken files the empty signature still returns true. On the repaired files it does not. Tests stay local. Do not hit live providers.
+A “webhooks are signed” slide does not reject an empty signature. TLS is a hop. `accept("", "body", "lab-secret")` has to be false, and a matching HMAC over the same raw body has to be true. Broken: the empty signature still returns true. Repair refuses a missing HMAC. Tests stay local. Do not hit live providers.
 
 ## Picture: empty sig on the broken files must fail the check
 

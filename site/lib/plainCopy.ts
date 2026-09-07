@@ -685,6 +685,34 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/Do not fail open because /g, "Do not allow just because "],
   [/even in the repaired (?:tree|files) — the fix is /g, ". After repair, keep "],
   [/not pretending (.+) became (.+)\./g, "$1 is not $2."],
+  [/The structural change is: /g, "The restore: "],
+  [/Structural means /g, "In short, "],
+  [
+    /On the broken files it returns true\. On the repaired files it does not\./g,
+    "Leftover still returns true; repair returns false.",
+  ],
+  [/Muting a scanner finding does not /g, "Hiding a scan result does not "],
+  [/ is not the repair\./g, " does not close the leftover."],
+  [
+    /On \u0000C\d+\u0000 the helper returns true\. On \u0000C\d+\u0000 it returns false\./g,
+    "Leftover still says yes; repair says no.",
+  ],
+  [
+    /On the broken files the helper still returns true\. On the repaired files it does not\./g,
+    "Leftover still says yes; repair says no.",
+  ],
+  [
+    /On the broken files the helper returns true\. On the repaired files it returns false\./g,
+    "Leftover still returns true; repair returns false.",
+  ],
+  [/On the repaired files it does not\./g, "Repair clears that leftover."],
+  [
+    /That is the cause\. (.+?) is a \*\*result\*\*, not the cause\./g,
+    "That's why it broke. $1 is what showed up later.",
+  ],
+  [/Evidence that the deny is false: /g, "You can see the hole: "],
+  [/The true return is already the leak of /g, "That true return already leaks "],
+  [/^Last week['’]s /g, "Leftover "],
   [/, dumping lab Python into notes/g, ""],
   [/ dumping lab Python into notes/g, ""],
   [/\. without product evidence\./g, "."],
@@ -800,7 +828,7 @@ const PROSE_PHRASES: [RegExp, string][] = [
     /A denylist of yesterday['’]s (.+) is not the fix\./g,
     "A list of old $1 does not restore the rule.",
   ],
-  [/Hiding a scanner warning is not the fix\./g, "Muting a scanner finding does not restore the rule."],
+  [/Hiding a scanner warning is not the fix\./g, "Hiding a scan result does not restore the rule."],
   [
     /Do not weaken it to [“"]([^“”"]+)[”"]\./g,
     "Do not swap the failing test for “$1.”",

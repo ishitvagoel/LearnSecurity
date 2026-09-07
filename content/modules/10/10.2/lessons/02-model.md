@@ -9,7 +9,7 @@ Keep **the expected digest, the got digest, who can edit the lockfile, and that 
 
 `install_ok(expected, got)` — no live registries.
 
-> For a mismatch, `aaa` vs `bbb` is deny. A matching pair may install. Evidence that the deny is false: `install_ok("aaa", "bbb")` returns true.
+> For a mismatch, `aaa` vs `bbb` is deny. A matching pair may install. The leak shows up as: `install_ok("aaa", "bbb")` returns true.
 
 If the expected-vs-got cell is blank, the SBOM looks finished because nobody named the hash check.
 

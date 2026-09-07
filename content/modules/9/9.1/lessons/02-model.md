@@ -9,7 +9,7 @@ Until you have **the threat, the requirement id, the test id, and the isolation 
 
 `covered(req_id, tests)` — no live trackers.
 
-> For AUTHZ-1, a status-only row is deny. A row that asserts isolation may count. Evidence that the deny is false: `covered("AUTHZ-1", [{"req": "AUTHZ-1", "asserts_isolation": False}])` returns true.
+> For AUTHZ-1, a status-only row is deny. A row that asserts isolation may count. The leak shows up as: `covered("AUTHZ-1", [{"req": "AUTHZ-1", "asserts_isolation": False}])` returns true.
 
 If the threat × test row is blank, the checkbox looks finished because nobody named the check.
 

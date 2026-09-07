@@ -5,7 +5,7 @@
 
 ## Check it
 
-Adding a content-security header does not encode the note. A React import is a library. `render` of a string containing `<` has to include `&lt;` and must not include the extra-tag marker `"<img"`. On `--impl vulnerable` the raw `<` remains. On `--impl fixed` it is encoded.
+Adding a content-security header does not encode the note. A React import is a library. `render` of a string containing `<` has to include `&lt;` and must not include the extra-tag marker `"<img"`. The leftover build: the raw `<` remains. Repair encodes `<` as `&lt;`.
 
 ## Picture: broken files must fail: raw <
 

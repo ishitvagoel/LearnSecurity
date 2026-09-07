@@ -9,7 +9,7 @@ The testable picture is **what must not happen, who is acting, and which object*
 
 `is_security_test(t)` — no live scanners.
 
-> For a row with only `status_asserted`, the rule is deny. A named `forbidden_outcome` may count. Evidence that the deny is false: `is_security_test({"status_asserted": True})` is true.
+> For a row with only `status_asserted`, the rule is deny. A named `forbidden_outcome` may count. Watch it fail: `is_security_test({"status_asserted": True})` is true.
 
 If the isolation row is blank about what must not happen, the suite looks green because nobody named the bad case.
 

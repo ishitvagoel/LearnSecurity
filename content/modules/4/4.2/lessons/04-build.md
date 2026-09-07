@@ -5,7 +5,7 @@
 
 ## The rule
 
-Last week’s hostname list does not stop a look-alike page. Training people to read the URL bar does not stop it either. An Okta logo is not the repair. `autocomplete=webauthn` is extra encoding, not the check.
+Yesterday's hostname list does not stop a look-alike page. Training people to read the URL bar does not stop it either. An Okta logo does not stop a look-alike page. `autocomplete=webauthn` is extra encoding, not the check.
 
 Change this: `phishing_resistant` returns false unless the method is `webauthn` **and** `origin == expected`. Origin / RP ID is in the predicate.
 

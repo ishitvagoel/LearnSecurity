@@ -47,7 +47,7 @@ You do not need a live production host. Those three already get the leak if boot
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-Fail-open defaults. That is the cause. The person who later reads a stack trace is a **result**, not the cause.
+Fail-open defaults. Start there. The person who later reads a stack trace is the later mess.
 
 | Slice | For this rule |
 |---|---|

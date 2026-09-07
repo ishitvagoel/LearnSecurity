@@ -5,7 +5,7 @@
 
 ## Check it
 
-A worker service-account name in YAML does not bind who the exporter is. An “internal” queue is a network hope. `exporter({"user_session": "alice", "service": None})` has to be `None`, and `exporter({"service": "worker-sc"})` has to be `"worker-sc"`. On the broken files the Alice session still returns `"alice"`. On the repaired files it does not. Do not attach to live brokers.
+A worker service-account name in YAML does not bind who the exporter is. An “internal” queue is a network hope. `exporter({"user_session": "alice", "service": None})` has to be `None`, and `exporter({"service": "worker-sc"})` has to be `"worker-sc"`. The leftover files: the Alice session still returns `"alice"`. Repair stops a user session from counting as the exporter. Do not attach to live brokers.
 
 ## Picture: leftover Alice must fail the check
 

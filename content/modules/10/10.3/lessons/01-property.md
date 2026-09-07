@@ -39,7 +39,7 @@ flowchart LR
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-Someone granted god-mode for convenience. That is the cause. Cluster takeover from one app bug is a **result**, not the cause.
+Someone granted god-mode for convenience. That's the convenience grant. Cluster takeover from one app bug is the blast afterward.
 
 | Slice | For this rule |
 |---|---|

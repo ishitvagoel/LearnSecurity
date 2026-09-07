@@ -9,7 +9,7 @@
 
 `close_incident({recovery, logs})` — no live SIEM.
 
-> For close, the rule is deny when recovery is still todo, and deny when logs contain `note_body`. Honest recovery plus safe logs may close. Evidence that the deny is false: `close_incident({"recovery": "todo", "logs": "ok"})` returns true.
+> For close, the rule is deny when recovery is still todo, and deny when logs contain `note_body`. Honest recovery plus safe logs may close. Recovery-todo still closes: `close_incident({"recovery": "todo", "logs": "ok"})` returns true.
 
 If the recovery × logs row is blank, the ticket closes because nobody named the check.
 
