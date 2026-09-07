@@ -66,4 +66,4 @@ Later worker dumps (7.4). Stale serializers after a role change (advanced). Debu
 
 ## What this page is not doing
 
-Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.
+Naming mass assignment does not drop `secret_internal`. Answer keys are not on this site.

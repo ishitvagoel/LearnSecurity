@@ -65,4 +65,4 @@ Memorized 1.2 answers. Real tooling gaps still need bridges.
 
 ## What this page is not doing
 
-Do not treat a famous-bugs list as the definition of security. Keys stay out of lessons.
+Scoring a ranked-bugs quiz does not skip Phase 1. Keys stay out of lessons.

@@ -66,4 +66,4 @@ Zip members that walk out; XML/pickle; image codecs later.
 
 ## What this page is not doing
 
-Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.
+Circling “path traversal” does not keep uploads under the root. Answer keys are not on this site.

@@ -75,4 +75,4 @@ Legitimate teams >5 need an owned exception. Parallel sixths need locking from t
 
 ## What this page is not doing
 
-Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.
+Circling “broken access control” does not cap `add_share`. Answer keys are not on this site.

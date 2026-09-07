@@ -73,4 +73,4 @@ Search, export, GraphQL, and workers are named holes. A later database-role chec
 
 ## What this page is not doing
 
-Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.
+Circling IDOR does not bind Bob’s grant to `n2`. Answer keys are not on this site.

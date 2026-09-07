@@ -76,4 +76,4 @@ Unknown unknowns. Review triggers exist for that. Privacy-method stickers wait f
 
 ## What this page is not doing
 
-Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.
+A scanner-ranked list does not insert `cross-tenant-read`. Answer keys are not on this site.

@@ -76,4 +76,4 @@ Integer wrap; time bugs (use-after-free); two parsers that disagree on length.
 
 ## What this page is not doing
 
-An awareness list as the definition of security. Answer keys are not on this site.
+Naming a memory-safety ranking does not cap `copy_into`. Answer keys are not on this site.

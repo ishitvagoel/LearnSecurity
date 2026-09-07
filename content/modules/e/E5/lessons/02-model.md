@@ -65,4 +65,4 @@ Silent impersonation; lake jobs that re-key on a body field.
 
 ## What this page is not doing
 
-Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.
+Naming “broken tenancy” does not bind company from the session. Answer keys are not on this site.

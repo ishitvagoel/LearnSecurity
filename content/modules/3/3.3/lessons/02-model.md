@@ -74,4 +74,4 @@ Stolen migrator; table-owner walk-around of a later row-level rule; a replica wi
 
 ## What this page is not doing
 
-Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.
+A SQL-injection ranking does not drop the `postgres` role. Answer keys are not on this site.

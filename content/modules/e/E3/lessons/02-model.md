@@ -64,4 +64,4 @@ A new key each click; webhook race; connection-pool limits are advanced leftover
 
 ## What this page is not doing
 
-Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.
+Circling “double charge” does not stop the second `capture("k1")`. Answer keys are not on this site.

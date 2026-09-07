@@ -66,4 +66,4 @@ Images already shipped; logs that captured the old value; a hardware box for cry
 
 ## What this page is not doing
 
-Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.
+Circling “hardcoded secret” does not rotate `DEFAULT`. Answer keys are not on this site.

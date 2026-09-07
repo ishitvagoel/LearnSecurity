@@ -66,4 +66,4 @@ A lost first response still needs a path so the owner can see the existing share
 
 ## What this page is not doing
 
-Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.
+Circling “race condition” does not add the share key. Answer keys are not on this site.

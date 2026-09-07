@@ -67,4 +67,4 @@ Redirects; hosts-file aliases.
 
 ## What this page is not doing
 
-A “top ten bugs” list as the definition of security. Answer keys are not on this site.
+Circling “top ten bugs” does not set `target_is_authorized`. Answer keys are not on this site.

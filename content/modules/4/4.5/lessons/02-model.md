@@ -78,4 +78,4 @@ PKCE, nonce, mix-up, DPoP (advanced sender-constraint).
 
 ## What this page is not doing
 
-Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.
+Naming “JWT” does not check `aud`. Answer keys are not on this site.

@@ -1011,14 +1011,11 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/leaves (.+) too in the pager\./g, "leaves $1 in the pager too."],
   [/Read (`[^`]+`) against this checklist\./g, "Check $1 against the list above."],
   [/Claiming a course gate from this page\./g, "This page does not finish a check-in."],
-  [
-    /Treating an awareness list as the definition of security\./g,
-    "Do not treat a famous-bugs list as the definition of security.",
-  ],
-  [
-    /A famous-bugs list as the definition of security\./g,
-    "Do not treat a famous-bugs list as the definition of security.",
-  ],
+  [/Do not treat a famous-bugs list as the definition of security\. /g, ""],
+  [/Treating an awareness list as the definition of security\. ?/g, ""],
+  [/A famous-bugs list as the definition of security\. /g, ""],
+  [/An awareness list as the definition of security\. /g, ""],
+  [/A [“"]top ten bugs[”"] list as the definition of security\. /g, ""],
   [
     /This page does not mark you as finished\. from this page\./g,
     "This page does not mark you as finished.",

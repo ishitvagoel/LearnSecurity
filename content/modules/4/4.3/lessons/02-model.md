@@ -66,4 +66,4 @@ First-party Referer; a screenshot of a cookie is out of scope here.
 
 ## What this page is not doing
 
-Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.
+Naming “session fixation” does not stop `?token=` from minting a session. Answer keys are not on this site.

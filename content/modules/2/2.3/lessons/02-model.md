@@ -71,4 +71,4 @@ Browser extensions; physical access; injected script that does not need the cook
 
 ## What this page is not doing
 
-Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.
+Naming XSS on a slide does not set HttpOnly on `sc_session`. Answer keys are not on this site.
