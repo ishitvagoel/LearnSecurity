@@ -49,7 +49,7 @@ A web filter will page on syntax errors and stay silent when the values were con
 
 ## Practice
 
-Log ids, a reason, and the statement name — never bound values. A note body, a full SQL string with values, or a real email would dump bound values onto the SQL deny line.
+Log ids, a reason, and the statement name — never bound values. Keep a note body, a full SQL string with values, and a real email off the SQL deny line.
 
 ## Use it somewhere new
 

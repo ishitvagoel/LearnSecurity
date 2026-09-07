@@ -35,7 +35,7 @@ A processor dashboard will show successful captures and stay silent when CI’s 
 log_denied reason=duplicate_capture_denied key=k1
 ```
 
-A card number, a note body, or “questionnaire complete” would dump PAN-like data onto the capture-deny line.
+A card number, a note body, or “questionnaire complete” has no place on the capture-deny line.
 
 ## Use it somewhere new
 

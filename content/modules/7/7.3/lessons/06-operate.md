@@ -50,7 +50,7 @@ An nginx dashboard will show TLS handshakes and stay silent when `/webhook` stil
 
 ## Practice
 
-Log ids and a reason for the missing MAC — never the callback body. The raw body, `lab-secret`, a real patient result, or a live provider trace would dump the callback onto the MAC-deny line.
+Name ids and a reason for the missing MAC — never the callback body. Skip the raw body, `lab-secret`, a real patient result, and a live provider trace on the MAC line.
 
 ## Use it somewhere new
 

@@ -51,7 +51,7 @@ A cloud dashboard will show “instance metadata requires a token” and stay si
 
 ## Practice
 
-Log ids and a reason for the denied host — never the URL. A full URL with a query token, a note body, or a live-fetch transcript would dump the fetch onto the host-deny line.
+Name ids and a reason for the denied host — never the URL. Keep a full URL with a query token, a note body, and a live-fetch transcript off the host line.
 
 ## Use it somewhere new
 

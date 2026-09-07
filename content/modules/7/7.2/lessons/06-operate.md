@@ -43,7 +43,7 @@ If a human is denied a field they should not see, do not announce the secret in 
 log_denied reason=field_denied field=secret_internal subject=user_72e request_id=req_72e
 ```
 
-The field value, a real SSN, or a live GraphQL trace against a public host would dump the record onto the field-deny line.
+Skip the field value, a real SSN, and a live GraphQL trace against a public host — they leak the record.
 
 ## Use it somewhere new
 

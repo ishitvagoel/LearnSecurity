@@ -51,7 +51,7 @@ If a human sees a certificate or mixed-content warning, make the error readable.
 
 ## Practice
 
-Log ids and a reason for the header-versus-socket miss — never the cookie. A session cookie, a note body, or “HSTS handled” would turn the deny line into a cookie jar.
+Name ids and a reason for the header-versus-socket miss — never the cookie. A session cookie, a note body, or “HSTS handled” would turn the deny line into a cookie jar.
 
 ## Use it somewhere new
 

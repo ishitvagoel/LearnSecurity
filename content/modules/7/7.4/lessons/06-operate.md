@@ -48,7 +48,7 @@ A task dashboard will show task success and stay silent when the task still used
 
 ## Practice
 
-Log the job id and expected principal — never the leftover cookie. Alice’s session cookie, note bodies, or a live broker dump would dump the principal onto the worker-deny line.
+Log the job id and expected principal — never the leftover cookie. Skip Alice’s session cookie, note bodies, and a live broker dump on the worker line.
 
 ## Use it somewhere new
 

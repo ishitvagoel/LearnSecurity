@@ -38,7 +38,7 @@ A tracker dashboard will show Done and stay silent when AUTHZ-1 still has `asser
 log_denied reason=unmapped_req_blocks_release req=AUTHZ-1 release=rel_91e
 ```
 
-The requirement example leaks from a sample that still has a note body, a patient name, or a live checklist portal trace.
+The requirement example is already in the sample if it still has a note body, a patient name, or a live checklist portal trace.
 
 A matching note in the coverage alert already puts the requirement example in the pager.
 
