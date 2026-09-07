@@ -13,7 +13,7 @@ An EHR-lite “alerts stopped so we closed INC-12,” plus “we have nightly ba
 
 ## Picture: same close loop, clinical object
 
-Here, a clinic chart is still this topic’s note. Name the recovery evidence, the log inventory, and what still changes after the ticket is Done. Filing a green tile and marking the ticket Done does not set `recovery` to `"done"`.
+Here, a clinic incident is still this topic’s restore drill. Name the recovery evidence, the log inventory, and what still changes after the ticket is Done. Filing a green tile and marking the ticket Done does not set `recovery` to `"done"`.
 
 | Notes app | Clinic sketch |
 |---|---|

@@ -13,7 +13,7 @@ An EHR-lite "the API namespace is private so ClusterRole is fine," plus "we atta
 
 ## Picture: same admission loop, clinical object
 
-Here, a clinic chart is still this topic’s note. Name the rule, the allow-list, and what still changes after the namespace is “private.” Putting the app in a private namespace does not put `"app"` in `ALLOWED_ROLES`.
+Here, a clinic pod is still this topic’s notes-app process. Name the rule, the allow-list, and what still changes after the namespace is “private.” Putting the app in a private namespace does not put `"app"` in `ALLOWED_ROLES`.
 
 | Notes app | Clinic sketch |
 |---|---|

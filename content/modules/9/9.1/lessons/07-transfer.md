@@ -13,7 +13,7 @@ An EHR-lite “we imported the HIPAA checklist and marked isolation done,” plu
 
 ## Picture: same check, clinical checklist
 
-Here, a clinic chart is still this topic’s note. Name the threat, the requirement, the test, and what still changes after the checklist is imported. Marking HIPAA isolation done does not assert isolation.
+Here, a clinic requirement is still this topic’s isolation row. Name the threat, the requirement, the test, and what still changes after the checklist is imported. Marking HIPAA isolation done does not assert isolation.
 
 | Notes app | Clinic sketch |
 |---|---|
