@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P["Must pass: deny at 4"]
 ```
 
-If both pass, the test is not looking at the fourth export. If both fail, the fix is not structural or the check is wrong.
+If both pass, the test is not looking at the fourth export.
 
 ## What the check has to show
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/6.7/6.7-lab/tests --impl vulnerable
 python3 -m pytest labs/6.7/6.7-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Reject a “test” that only greps an edge-proxy keyword without calling `allow(4)`.
+Reject a “test” that only greps an edge-proxy keyword without calling `allow(4)`.
 
 ## Use it somewhere new
 

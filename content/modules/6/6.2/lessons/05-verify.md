@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass encoded lt"]
 ```
 
-If both pass, the check is not looking at encoding. If both fail, the fix is not structural or the check is wrong.
+If both pass, the check is not looking at encoding.
 
 ## What the check has to show
 
@@ -46,7 +46,7 @@ Honest titles may pass on both implementations. That does not excuse the encode 
 
 ## Practice
 
-Run both implementations this session. Reject a “check” that only greps `Content-Security-Policy` without calling `render`. A setup error is not proof the rule holds.
+Reject a “check” that only greps `Content-Security-Policy` without calling `render`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

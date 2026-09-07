@@ -60,7 +60,7 @@ Run checks against the broken files (they **must fail** on two meanings). Record
 python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl vulnerable
 ```
 
-Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false.
+Do not “fix” the check to pass.
 
 ## Use it somewhere new
 

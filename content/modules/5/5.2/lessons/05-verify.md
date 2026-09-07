@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: not reversible]
 ```
 
-If both pass, the test is not looking at Base64 decode of `protect("secret")`. If both fail, the fix is not structural or the check is wrong.
+If both pass, the test is not looking at Base64 decode of `protect("secret")`.
 
 ## What the check has to show
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/5.2/5.2-lab/tests --impl vulnerable
 python3 -m pytest labs/5.2/5.2-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Reject a “test” that only greps `AES` in a comment without decoding `protect("secret")`.
+Reject a “test” that only greps `AES` in a comment without decoding `protect("secret")`.
 
 ## Use it somewhere new
 

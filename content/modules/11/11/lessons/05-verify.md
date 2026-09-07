@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: deny]
 ```
 
-If both pass, the test is not looking at B after revoke. If both fail, the fix is not structural or the check is wrong.
+If both pass, the test is not looking at B after revoke.
 
 ## What the check has to show
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/11/11-lab/tests --impl vulnerable
 python3 -m pytest labs/11/11-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Reject a “test” that only greps `revoke` in a README without calling `read("n1", "B")` after `revoke("n1", "B")`.
+Reject a “test” that only greps `revoke` in a README without calling `read("n1", "B")` after `revoke("n1", "B")`.
 
 ## Use it somewhere new
 

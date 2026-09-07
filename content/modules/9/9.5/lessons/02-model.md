@@ -7,7 +7,7 @@
 
 "We delivered a PDF" is not this lesson. A drawing someone else can test names **the rule, what must not happen, the retest command, and variants**.
 
-This week's freeze for the notes app: local `close_finding(f)`. No live clinics.
+This week on the notes app: local `close_finding(f)`. No live clinics.
 
 > For close, the rule is deny when `retest` is missing. A passing retest of the same isolation check may close. Evidence that the deny is false: `close_finding({"retest": None})` returns true.
 

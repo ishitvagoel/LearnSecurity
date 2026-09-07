@@ -7,7 +7,7 @@
 
 “We turned on a content-security policy” is not this lesson. A map someone else can test names **the sink, the context, and what encoding applies**.
 
-This week’s freeze: the notes app’s local `render(body)` wrapping a `<p>` text node. No live page. No real browser.
+This week on the notes app: local `render(body)` wrapping a `<p>` text node. No live page. No real browser.
 
 ## Picture: one sink, one context in this practice
 
@@ -30,7 +30,7 @@ flowchart TD
 
 Framework defaults help only at the constructors you actually use.
 
-## Step 1: freeze the pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|

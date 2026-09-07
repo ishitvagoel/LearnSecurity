@@ -7,7 +7,7 @@
 
 “Object authz is on” is not this page. A table someone else can test names **role, field, and every serializer**.
 
-This week’s freeze: the notes app’s local `resolve(role, field)`. No live GraphQL.
+This week on the notes app: local `resolve(role, field)`. No live GraphQL.
 
 ## Picture: three grains
 
@@ -30,7 +30,7 @@ flowchart LR
 
 Identifiers find a row. They do not authorize fields. Obscure identifiers are not capabilities. Famous “broken object / property / function” lists are awareness after this sentence.
 
-## Step 1: freeze the pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|

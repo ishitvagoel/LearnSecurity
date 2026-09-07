@@ -7,7 +7,7 @@
 
 “We use AES” is not this lesson. A map someone else can test names **the rule**, **the field**, **the algorithm family**, and **what it is not for**.
 
-This week's freeze: local `protect` / `looks_encrypted`. Plaintext stand-in `secret`. No live key service.
+This week: local `protect` / `looks_encrypted`. Plaintext stand-in `secret`. No live key service.
 
 > `protect("secret")` must not round-trip as Base64. If the table mixes rows, the wrong tool lands on the wrong field.
 

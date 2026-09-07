@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: omit body]
 ```
 
-If both pass, the test is not looking at the body substring. If both fail, the fix is not structural or the check is wrong.
+If both pass, the test is not looking at the body substring.
 
 ## What the check has to show
 
@@ -55,7 +55,7 @@ python3 -m pytest labs/8.5/8.5-lab/tests --impl vulnerable
 python3 -m pytest labs/8.5/8.5-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Reject a “test” that only greps a crash product name without calling `crash_report("secret")`.
+Reject a “test” that only greps a crash product name without calling `crash_report("secret")`.
 
 ## Use it somewhere new
 

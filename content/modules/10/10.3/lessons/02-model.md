@@ -7,7 +7,7 @@
 
 "We put it in its own namespace" is not this lesson. A drawing someone else can test names **ServiceAccount, Role vs ClusterRole, pod-profile level, whether the pod can reach instance metadata, and who can apply Helm**.
 
-This week's freeze for the notes app: local `pod_ok(role)`. No live kube-apiserver.
+This week on the notes app: local `pod_ok(role)`. No live kube-apiserver.
 
 > For admission, the rule is deny when the role is `cluster-admin`. A namespaced app role may run. Evidence that the deny is false: `pod_ok("cluster-admin")` returns true.
 

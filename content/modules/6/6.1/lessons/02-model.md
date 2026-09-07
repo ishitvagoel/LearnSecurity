@@ -7,7 +7,7 @@
 
 “We don’t use a shell” is not this lesson. A map someone else can test names **which process is started**, **which argv slots are data**, and **which interpreters are out of this practice**.
 
-This week's freeze: local `argv_for_list(name)` and `uses_shell`. No live `ls`.
+This week: local `argv_for_list(name)` and `uses_shell`. No live `ls`.
 
 > Pass the name as one argv element. The program must be a fixed binary. The shell must never see the name as grammar.
 

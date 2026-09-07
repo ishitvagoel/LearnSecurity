@@ -7,7 +7,7 @@
 
 “We use MFA” is not this lesson. A reviewable record names **method**, **origin**, **whether the claim is phishing-resistant**, and **the leftover** if only passwords remain.
 
-This week’s freeze: a local `phishing_resistant` helper; origins `https://app.securecollab.test` vs `https://evil.example`. No live authenticators.
+This week: a local `phishing_resistant` helper; origins `https://app.securecollab.test` vs `https://evil.example`. No live authenticators.
 
 ## Picture: three methods, two origins
 
@@ -33,7 +33,7 @@ flowchart LR
 
 If WebAuthn is pointer-only, the leftover grows. People share passwords.
 
-## Step 1: freeze the pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|

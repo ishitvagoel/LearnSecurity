@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass not plaintext"]
 ```
 
-If both pass, the check is not looking at the body on disk. If both fail, the fix is not structural or the check is wrong.
+If both pass, the check is not looking at the body on disk.
 
 ## Observations, even for a cache
 
@@ -47,7 +47,7 @@ Honest `'other'` saves may pass on both implementations. That does not excuse th
 
 ## Practice
 
-Run both implementations this session from the lab directory if needed. Reject a “check” that only greps `EncryptedSharedPreferences` without calling `save_note("secret")` then `plaintext_on_disk()`. A setup error is not proof the rule holds.
+Reject a “check” that only greps `EncryptedSharedPreferences` without calling `save_note("secret")` then `plaintext_on_disk()`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

@@ -62,7 +62,7 @@ You do not need a new query key.
 python3 -m pytest labs/8.3/8.3-lab/tests --impl vulnerable
 ```
 
-Run from `labs/8.3/8.3-lab` if a repo-root collection picks up `site/`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. A setup error is not proof the rule holds.
+Run from `labs/8.3/8.3-lab` if a repo-root collection picks up `site/`. Do not “fix” the check to pass. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

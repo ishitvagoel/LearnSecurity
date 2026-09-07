@@ -9,7 +9,7 @@ A new “fast-track risk” form can drop `review_by` after the schema was “se
 
 ## Picture: incomplete row is a signal
 
-An accept that skipped owner, review date, or accessibility is a notice-and-recover problem, not a licence to quote secrets in the ticket. Notice names the missing fields. Recover expires the hole or re-accepts with a complete record. Neither reprints a secret.
+An accept that skipped owner, review date, or accessibility is something you still have to notice and recover from, not an excuse to quote secrets in the ticket. Notice names the missing fields. Recover expires the hole or re-accepts with a complete record.
 
 ```mermaid
 flowchart TD

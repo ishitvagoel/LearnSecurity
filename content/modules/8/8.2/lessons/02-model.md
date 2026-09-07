@@ -7,7 +7,7 @@
 
 “We use EncryptedSharedPreferences” is not this lesson. A map someone else can test names **each store and whether it can hold a body**.
 
-This week’s freeze: the notes app’s local `save_note` / `plaintext_on_disk`. No live phones.
+This week on the notes app: local `save_note` / `plaintext_on_disk`. No live phones.
 
 ## Picture: many sinks, one body
 
@@ -31,7 +31,7 @@ flowchart LR
   Offline --> Replay["8.1 hostile replay leftover"]
 ```
 
-## Step 1: freeze the pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|

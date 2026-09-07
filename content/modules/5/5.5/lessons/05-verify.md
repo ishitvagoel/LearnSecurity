@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: is_bound]
 ```
 
-If both pass, the test is not looking at concatenated SQL. If both fail, the fix is not structural or the check is wrong.
+If both pass, the test is not looking at concatenated SQL.
 
 ## What the check has to show
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/5.5/5.5-lab/tests --impl vulnerable
 python3 -m pytest labs/5.5/5.5-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Reject a “test” that only greps `%s` inside a concatenated string without asserting the tuple shape.
+Reject a “test” that only greps `%s` inside a concatenated string without asserting the tuple shape.
 
 ## Use it somewhere new
 

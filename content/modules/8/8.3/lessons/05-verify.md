@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass alice"]
 ```
 
-If both pass, the check is not looking at identity keys. If both fail, the fix is not structural or the check is wrong.
+If both pass, the check is not looking at identity keys.
 
 ## Three things to look at
 
@@ -46,7 +46,7 @@ Honest note locators may pass on both implementations. That does not excuse the 
 
 ## Practice
 
-Run both implementations this session from the lab directory if needed. Reject a “check” that only greps `android:autoVerify` without calling `open_link({"as": "admin"})`. A setup error is not proof the rule holds.
+Reject a “check” that only greps `android:autoVerify` without calling `open_link({"as": "admin"})`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

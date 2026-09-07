@@ -7,7 +7,7 @@
 
 “App Links are verified” is not this lesson. A map someone else can test names **each exported entry and which query keys it may honor**.
 
-This week’s freeze: the notes app’s local `open_link` / `current_user`. No live apps.
+This week on the notes app: local `open_link` / `current_user`. No live apps.
 
 ## Picture: locate versus impersonate
 
@@ -28,7 +28,7 @@ flowchart LR
 
 If App Links are verified and `open_link` still copies `as`, the map has a hole. The host check is how the OS *finds* the app. It is not the session.
 
-## Step 1: freeze the pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|

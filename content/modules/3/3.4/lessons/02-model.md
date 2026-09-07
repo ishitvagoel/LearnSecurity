@@ -7,7 +7,7 @@
 
 “We have a share limit” is not this page. A reviewable model names **states 0–5**, **the 6th transition**, **who may override**, and **which paths skip the cap**.
 
-This week’s freeze: one note, `add_share` counter, cap 5. No live GraphQL, no production filter.
+This week: one note, `add_share` counter, cap 5. No live GraphQL, no production filter.
 
 ## Picture: five allowed, sixth is a different rule
 
@@ -34,7 +34,7 @@ flowchart TD
   Import["CSV import"] --> Same[Same cap]
 ```
 
-## Step 1: freeze who, what, and time
+## Step 1: name who, what, and when
 
 | Piece | This system |
 |---|---|

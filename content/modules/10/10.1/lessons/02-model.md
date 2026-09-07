@@ -7,7 +7,7 @@
 
 “We have CODEOWNERS” is not this lesson. A drawing someone else can test names **the surfaces that trigger a threat model: identity, stored data, mobile, queues, and authorization**.
 
-This week’s freeze for the notes app: local `merge_ok(pr)`. No live orgs.
+This week on the notes app: local `merge_ok(pr)`. No live orgs.
 
 > For an empty change, merge is deny. A change that names `threat_model` as `TM-12` may merge. Evidence that the deny is false: `merge_ok({})` returns true.
 

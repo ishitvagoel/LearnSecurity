@@ -9,7 +9,7 @@ A new identity change can land after `merge_ok` was “fixed once.” Do not log
 
 ## Picture: missing threat-model id is a signal
 
-A blocked merge is a notice-and-recover problem, not a licence to quote the threat-model body in the paging channel. Notice names the change. Recover adds the threat-model id. Neither reprints the body.
+A blocked merge is something you still have to notice and recover from, not an excuse to quote the threat-model body in the paging channel. Notice names the change. Recover adds the threat-model id.
 
 ```mermaid
 flowchart TD

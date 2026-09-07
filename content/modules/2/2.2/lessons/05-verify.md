@@ -19,7 +19,7 @@ flowchart LR
   P --> E2[Evidence the pair is now bound]
 ```
 
-If both pass, the check is not looking at the cross-company get. If both fail, the fix is not structural or the check is wrong.
+If both pass, the check is not looking at the cross-company get.
 
 ## What the check has to show
 
@@ -52,7 +52,7 @@ python3 -m pytest labs/2.2/2.2-request-path/tests --impl vulnerable
 python3 -m pytest labs/2.2/2.2-request-path/tests --impl fixed
 ```
 
-Reject a “check” that only greps `Cache-Control` without calling `cache_get` as company B. Paste nothing from answer keys.
+Reject a “check” that only greps `Cache-Control` without calling `cache_get` as company B. 
 
 ## Use it somewhere new
 

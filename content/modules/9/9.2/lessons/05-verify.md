@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P["Must pass: reject eval"]
 ```
 
-If both pass, the test is not looking at eval-on-user. If both fail, the fix is not structural or the check is wrong.
+If both pass, the test is not looking at eval-on-user.
 
 ## What the check has to show
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/9.2/9.2-lab/tests --impl vulnerable
 python3 -m pytest labs/9.2/9.2-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Reject a “test” that only greps `eval` in a policy PDF without calling `review_ok("x = eval(user)")`.
+Reject a “test” that only greps `eval` in a policy PDF without calling `review_ok("x = eval(user)")`.
 
 ## Use it somewhere new
 

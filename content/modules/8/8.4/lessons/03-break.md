@@ -63,7 +63,7 @@ Gradle `debug` / `release` types are not a server check. R8 does not authorize. 
 python3 -m pytest labs/8.4/8.4-lab/tests --impl vulnerable
 ```
 
-Run from `labs/8.4/8.4-lab` if a repo-root collection picks up `site/`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. A setup error is not proof the rule holds.
+Run from `labs/8.4/8.4-lab` if a repo-root collection picks up `site/`. Do not “fix” the check to pass. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

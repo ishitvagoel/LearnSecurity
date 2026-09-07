@@ -64,7 +64,7 @@ Run checks against the broken files (they **must fail** on Report-Only counted a
 python3 -m pytest labs/E2/e2-lab/tests --impl vulnerable
 ```
 
-Run from `labs/E2/e2-lab` if a repo-root collection picks up `site/`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. A setup error is not proof the rule holds.
+Run from `labs/E2/e2-lab` if a repo-root collection picks up `site/`. Do not “fix” the check to pass. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

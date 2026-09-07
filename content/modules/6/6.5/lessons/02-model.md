@@ -7,7 +7,7 @@
 
 “We only allow HTTPS” is not this lesson. A map someone else can test names **scheme**, **host**, and **destinations that must deny**.
 
-This week’s freeze for the notes app: local `allowed(url)`. No live fetches.
+This week on the notes app: local `allowed(url)`. No live fetches.
 
 > Parse the URL. Require https. Require the hostname in a small allow-list. Link-local metadata and loopback must deny.
 

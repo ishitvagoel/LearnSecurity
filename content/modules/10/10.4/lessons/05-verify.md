@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: prod plus debug denied]
 ```
 
-If both pass, the test is not looking at prod plus debug. If both fail, the fix is not structural or the check is wrong.
+If both pass, the test is not looking at prod plus debug.
 
 ## What the check has to show
 
@@ -55,7 +55,7 @@ python3 -m pytest labs/10.4/10.4-lab/tests --impl vulnerable
 python3 -m pytest labs/10.4/10.4-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Reject a “test” that only greps `NODE_ENV` in compose without calling `boot_ok("prod", True)`.
+Reject a “test” that only greps `NODE_ENV` in compose without calling `boot_ok("prod", True)`.
 
 ## Use it somewhere new
 

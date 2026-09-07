@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass deny"]
 ```
 
-If both pass, the check is not looking at Report-Only. If both fail, the fix is not structural or the check is wrong.
+If both pass, the check is not looking at Report-Only.
 
 | Mode | Must show for this topic |
 |---|---|
@@ -45,7 +45,7 @@ Honest enforcing CSP may pass on both implementations. That does not excuse the 
 
 ## Practice
 
-Run both implementations this session from the lab directory if needed. Reject a “check” that only greps `Content-Security-Policy` in HTML without calling `isolation_enforced` on a Report-Only dict. A setup error is not proof the rule holds.
+Reject a “check” that only greps `Content-Security-Policy` in HTML without calling `isolation_enforced` on a Report-Only dict. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

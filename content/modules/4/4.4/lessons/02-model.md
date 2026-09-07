@@ -7,7 +7,7 @@
 
 “We check authorization” is not this page. A table someone else can test names **people, companies, notes, actions, and every path** that can release a body.
 
-This week’s freeze: local `GRANTS` / `NOTES` / `USERS`. People `alice`, `bob`, `carol`, `eve`. No live identity product.
+This week: local `GRANTS` / `NOTES` / `USERS`. People `alice`, `bob`, `carol`, `eve`. No live identity product.
 
 ## Picture: four shapes, one cell
 
@@ -34,7 +34,7 @@ flowchart LR
 
 If a path is missing from the table, leftover permission appears there even if GET is correct. This lab runs GET-shaped `can_read` only.
 
-## Step 1: freeze pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|

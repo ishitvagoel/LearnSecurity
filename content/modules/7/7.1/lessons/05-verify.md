@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass is_admin false"]
 ```
 
-If both pass, the check is not looking at extra keys. If both fail, the fix is not structural or the check is wrong.
+If both pass, the check is not looking at extra keys.
 
 ## Three things to look at
 
@@ -48,7 +48,7 @@ Honest `display_name` may pass on both implementations. That does not excuse the
 
 ## Practice
 
-Run both implementations this session from the lab directory if needed. Reject a “check” that only greps `extra = 'forbid'` in a Pydantic model without calling `apply(..., {"is_admin": true})`. A setup error is not proof the rule holds.
+Reject a “check” that only greps `extra = 'forbid'` in a Pydantic model without calling `apply(..., {"is_admin": true})`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

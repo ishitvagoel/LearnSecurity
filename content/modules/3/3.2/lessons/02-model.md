@@ -7,7 +7,7 @@
 
 A page of STRIDE letters is not this page. A reviewable model names **assets**, **flows**, **trust boundaries**, **threat ids**, **owners**, and **what would prove each row wrong**.
 
-This week’s freeze: note body and id, share grant, session cookie, a local `assemble_threat_model` practice. No real Threat Dragon cloud. No production ticket tracker.
+This week: note body and id, share grant, session cookie, a local `assemble_threat_model` practice. No real Threat Dragon cloud. No production ticket tracker.
 
 ## Picture: data flow with one hostile hop
 
@@ -33,7 +33,7 @@ flowchart TD
 
 `scanner_green` does not delete the always-name list. Scanner ids may append. A missing owner is how “accepted risk” becomes nobody’s job.
 
-## Step 1: freeze who, what, and time
+## Step 1: name who, what, and when
 
 | Piece | This system |
 |---|---|

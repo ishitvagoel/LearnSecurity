@@ -7,7 +7,7 @@
 
 “We use Postgres row-level security” is not this page. A reviewable architecture names **roles**, **lanes**, **what each may SELECT**, and **the rejected alternative** (one superuser in `DATABASE_URL`).
 
-This week’s freeze: notes rows keyed by company; a local `can_select` stand-in. No live cluster, no production replica.
+This week: notes rows keyed by company; a local `can_select` stand-in. No live cluster, no production replica.
 
 ## Picture: topology is not isolation
 
@@ -33,7 +33,7 @@ flowchart LR
 
 Policy lives in one place (who may read). Enforcement happens in the handler **and** in the role. Hiding notes in the Next.js client is not a trusted-server check.
 
-## Step 1: freeze pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|

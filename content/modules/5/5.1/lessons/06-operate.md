@@ -11,7 +11,7 @@ Do not paste the chart into the ticket. Do not log bodies.
 
 ## Picture: hunt ids, not bodies
 
-A leftover body after delete is a notice-and-recover problem, not a licence to quote notes in the paging channel. Recover purges the partition. Neither reprints the body.
+A leftover body after delete is something you still have to notice and recover from, not an excuse to quote notes in the paging channel. Recover purges the partition.
 
 ```mermaid
 flowchart TD

@@ -8,7 +8,7 @@
 
 “They’re advanced” is not this lesson. A reviewable picture names **tooling-bridge ids, required 1.2/1.3/1.4, and check-in 1 evidence**.
 
-Notes-app freeze: local `quiz_score_grants_phase1_skip(score)`. No vendor LMS.
+This week on the notes app: local `quiz_score_grants_phase1_skip(score)`. No vendor LMS.
 
 ## Picture: two skip classes
 

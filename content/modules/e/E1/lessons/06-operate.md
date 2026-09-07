@@ -9,7 +9,7 @@ A new tool can still be registered after the allow-list was "set once." Do not l
 
 ## Picture: denied tool is a signal
 
-A denied tool is a notice-and-recover problem, not a licence to quote a transcript in the paging channel. Notice names the tool. Recover revokes leftover agent credentials. Neither reprints the note body.
+A denied tool is something you still have to notice and recover from, not an excuse to quote a transcript in the paging channel. Notice names the tool. Recover revokes leftover agent credentials.
 
 ```mermaid
 flowchart TD

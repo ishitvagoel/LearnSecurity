@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: redaction marker]
 ```
 
-If both pass, the test is not looking at the body substring. If both fail, the fix is not structural or the check is wrong.
+If both pass, the test is not looking at the body substring.
 
 ## What the check has to show
 
@@ -55,8 +55,6 @@ Map the test to the body×log row you wrote. If the broken files do not fail, th
 python3 -m pytest labs/3.1/3.1-lab/tests --impl vulnerable
 python3 -m pytest labs/3.1/3.1-lab/tests --impl fixed
 ```
-
-Paste nothing from answer keys. row.
 
 ## Use it somewhere new
 

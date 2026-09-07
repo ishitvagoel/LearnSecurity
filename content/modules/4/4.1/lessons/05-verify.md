@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: session_valid false]
 ```
 
-If both pass, the test is not looking at `session_valid` after delete. If both fail, the fix is not structural or the check is wrong.
+If both pass, the test is not looking at `session_valid` after delete.
 
 ## What the check has to show
 
@@ -53,8 +53,6 @@ Map the test to the deleted-alice × leftover-session row you wrote. If the brok
 python3 -m pytest labs/4.1/4.1-lab/tests --impl vulnerable
 python3 -m pytest labs/4.1/4.1-lab/tests --impl fixed
 ```
-
-Paste nothing from answer keys. row.
 
 ## Use it somewhere new
 

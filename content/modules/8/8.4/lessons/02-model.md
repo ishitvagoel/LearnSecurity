@@ -7,7 +7,7 @@
 
 “R8 is on” is not this lesson. A map someone else can test names **build type, client id, and which API it may call**.
 
-This week’s freeze: the notes app’s local `api_allowed(build_type, attest)`. No live stores.
+This week on the notes app: local `api_allowed(build_type, attest)`. No live stores.
 
 ## Picture: server owns the channel
 
@@ -29,7 +29,7 @@ flowchart LR
 
 That leftover is 5.3 — secrets in the artifact. Minify does not solve it.
 
-## Step 1: freeze the pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|

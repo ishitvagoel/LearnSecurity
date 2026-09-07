@@ -7,7 +7,7 @@
 
 “We have row-level rules” is not this page. A map someone else can test names **session binding, body fields, where the database session variable comes from, cache/search/lake keys, and impersonation**.
 
-This week’s freeze: local `tenant_for(session, body)`. No public company. The notes app binds company from the session. The JSON body is not the tenant.
+This week: local `tenant_for(session, body)`. No public company. The notes app binds company from the session. The JSON body is not the tenant.
 
 ## Picture: one binding, many copies
 
@@ -29,7 +29,7 @@ flowchart LR
   Host --> NotBind["not who is allowed"]
 ```
 
-## Step 1: freeze pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|

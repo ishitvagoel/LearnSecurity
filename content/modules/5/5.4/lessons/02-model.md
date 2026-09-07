@@ -7,7 +7,7 @@
 
 “We enabled HTTPS” is not this lesson. A map someone else can test names **each hop and who is allowed to assert the scheme**.
 
-This week’s freeze: local `channel_is_https(headers, server_scheme)`. No live load balancer.
+This week: local `channel_is_https(headers, server_scheme)`. No live load balancer.
 
 > `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` must be false. If a hop is missing from the map, a client header can still count as TLS.
 

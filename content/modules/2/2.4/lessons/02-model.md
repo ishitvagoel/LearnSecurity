@@ -7,7 +7,7 @@
 
 A sequence diagram that says “owner clicks Share” is not this page. A state machine names **which events** may fire twice and **what the share table must still contain**.
 
-This week’s freeze: a local `share_note` practice. No payment processor, no live queue, no NTP lab.
+This week: a local `share_note` practice. No payment processor, no live queue, no NTP lab.
 
 ## Picture: pending, shared, and retry
 
@@ -25,7 +25,7 @@ flowchart TD
 
 If `RetrySame` draws a second arrow into a **new** row, the map already predicts `test_retry_does_not_duplicate_side_effect` will fail.
 
-## Step 1: freeze who, what, and time
+## Step 1: name who, what, and when
 
 | Piece | This system |
 |---|---|

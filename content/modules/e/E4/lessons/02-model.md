@@ -7,7 +7,7 @@
 
 “We wrote it in Python” is not this page. A reviewable model names **bufsize, declared_len, len(src), who may set each, and the copy site**.
 
-This week’s freeze for the notes app: local `copy_into(bufsize, src, declared_len)`. No native overflow walkthrough.
+This week on the notes app: local `copy_into(bufsize, src, declared_len)`. No native overflow walkthrough.
 
 ## Picture: three numbers, one destination
 
@@ -40,7 +40,7 @@ flowchart LR
 
 A header length is data. Treat it like any other field the requester sent.
 
-## Step 1: freeze who, what, and the copy
+## Step 1: name who, what, and the copy
 
 | Piece | This system |
 |---|---|

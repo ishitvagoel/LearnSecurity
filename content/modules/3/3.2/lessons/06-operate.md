@@ -18,7 +18,7 @@ flowchart TD
   Age -->|stale| Revisit[Re-run four questions]
 ```
 
-A missing id is a notice-and-recover problem, not a licence to rewrite yesterday’s date. Notice names the threat. Recover adds the row. Neither pretends you already had it.
+A missing id is something you still have to notice and recover from, not an excuse to rewrite yesterday’s date. Notice names the threat. Recover adds the row. Neither pretends you already had it.
 
 | Outcome | This topic |
 |---|---|

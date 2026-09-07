@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: both None]
 ```
 
-If both pass, the test is not looking at `body_retained` after delete. If both fail, the fix is not structural or the check is wrong.
+If both pass, the test is not looking at `body_retained` after delete.
 
 ## What the check has to show
 
@@ -53,7 +53,7 @@ python3 -m pytest labs/5.1/5.1-lab/tests --impl vulnerable
 python3 -m pytest labs/5.1/5.1-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Reject a “test” that only greps `DELETE FROM notes` without calling `body_retained`.
+Reject a “test” that only greps `DELETE FROM notes` without calling `body_retained`.
 
 ## Use it somewhere new
 

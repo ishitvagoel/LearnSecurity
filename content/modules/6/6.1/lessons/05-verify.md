@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: argv list]
 ```
 
-If both pass, the test is not looking at `sh -c`. If both fail, the fix is not structural or the check is wrong.
+If both pass, the test is not looking at `sh -c`.
 
 ## What the check has to show
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/6.1/6.1-lab/tests --impl vulnerable
 python3 -m pytest labs/6.1/6.1-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Reject a “test” that only greps `shell=False` in a comment without calling `argv_for_list`.
+Reject a “test” that only greps `shell=False` in a comment without calling `argv_for_list`.
 
 ## Use it somewhere new
 

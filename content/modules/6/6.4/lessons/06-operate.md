@@ -17,7 +17,7 @@ flowchart TD
   Alert --> Audit[Audit store; restore]
 ```
 
-A broken resolve is a notice-and-recover problem, not a licence to dump a patient filename into the log.
+A broken resolve is something you still have to notice and recover from, not an excuse to dump a patient filename into the log.
 
 | Outcome | This topic |
 |---|---|

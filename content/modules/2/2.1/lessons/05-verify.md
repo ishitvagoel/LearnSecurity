@@ -19,7 +19,7 @@ flowchart LR
   P --> E2[Evidence the check is now true]
 ```
 
-If both pass, the check is not looking at ACL tenant vs stored tenant. If both fail, the fix is not structural or the check is wrong.
+If both pass, the check is not looking at ACL tenant vs stored tenant.
 
 ## What the check has to show
 
@@ -55,7 +55,7 @@ Run from `labs/2.1/2.1-parser-boundaries` if a repo-root collection picks up `si
 
 ## Practice
 
-Run both implementations this session. If the broken files do not fail, the practice is miswired — fix the wiring, not the check. page.
+If the broken files do not fail, the practice is miswired — fix the wiring, not the check.
 
 ## Use it somewhere new
 

@@ -9,7 +9,7 @@ A new requirement can land without a test after `covered` was “fixed once.” 
 
 ## Picture: uncovered AUTHZ-1 is a signal
 
-An unmapped requirement is a notice-and-recover problem, not a licence to quote the note in the paging channel. Notice names the requirement. Recover adds the isolation test. Neither reprints the body.
+An unmapped requirement is something you still have to notice and recover from, not an excuse to quote the note in the paging channel. Notice names the requirement. Recover adds the isolation test.
 
 ```mermaid
 flowchart TD

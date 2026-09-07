@@ -17,7 +17,7 @@ Do not paste this exercise onto a public clinic, employer tracker, or live hospi
 
 What is supposed to stop this: `close_finding` is supposed to require a **passing retest of the same isolation check** — bob must not read alice's note. A PDF, a ticket marked Done, a severity score, and a known-exploited listing are not enough.
 
-Who can close without a retest in this story: a paper-compliance closer. That stands in for "the assessor delivered a 40-page PDF so we marked isolation Done," a 9.8 treated as the close decision, or a known-exploited listing used as a licence to scan a hospital portal.
+Who can close without a retest in this story: a paper-compliance closer. That stands in for "the assessor delivered a 40-page PDF so we marked isolation Done," a 9.8 treated as the close decision, or a known-exploited listing used as permission to scan a hospital portal.
 
 ## Picture: intent is enough
 

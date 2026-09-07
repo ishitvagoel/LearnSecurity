@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: status-only is not covered]
 ```
 
-If both pass, the test is not looking at `asserts_isolation`. If both fail, the fix is not structural or the check is wrong.
+If both pass, the test is not looking at `asserts_isolation`.
 
 ## What the check has to show
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/9.1/9.1-lab/tests --impl vulnerable
 python3 -m pytest labs/9.1/9.1-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Reject a “test” that only greps `AUTHZ-1` in a spreadsheet without calling `covered(..., [{"asserts_isolation": False}])`.
+Reject a “test” that only greps `AUTHZ-1` in a spreadsheet without calling `covered(..., [{"asserts_isolation": False}])`.
 
 ## Use it somewhere new
 

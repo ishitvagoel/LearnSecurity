@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: deny plus lab host]
 ```
 
-If both pass, the test is not looking at link-local. If both fail, the fix is not structural or the check is wrong.
+If both pass, the test is not looking at link-local.
 
 ## What the check has to show
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/6.5/6.5-lab/tests --impl vulnerable
 python3 -m pytest labs/6.5/6.5-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Reject a “test” that only greps `https` in a prefix check without calling `allowed` on the link-local string.
+Reject a “test” that only greps `https` in a prefix check without calling `allowed` on the link-local string.
 
 ## Use it somewhere new
 

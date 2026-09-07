@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass deny"]
 ```
 
-If both pass, the check is not looking at the client boolean. If both fail, the fix is not structural or the check is wrong.
+If both pass, the check is not looking at the client boolean.
 
 ## Three things to look at
 
@@ -48,7 +48,7 @@ Honest server-pass may pass on both implementations. That does not excuse the fa
 
 ## Practice
 
-Run both implementations this session from the lab directory if needed. Reject a “check” that only greps `PlayIntegrity` in Gradle without calling `allow_export({"integrity": "ok"}, "fail")`. A setup error is not proof the rule holds.
+Reject a “check” that only greps `PlayIntegrity` in Gradle without calling `allow_export({"integrity": "ok"}, "fail")`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

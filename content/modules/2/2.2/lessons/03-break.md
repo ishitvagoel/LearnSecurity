@@ -63,7 +63,7 @@ Run checks against the broken files (they **must fail** on company B getting com
 python3 -m pytest labs/2.2/2.2-request-path/tests --impl vulnerable
 ```
 
-Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false.
+Do not “fix” the check to pass.
 
 ## Use it somewhere new
 

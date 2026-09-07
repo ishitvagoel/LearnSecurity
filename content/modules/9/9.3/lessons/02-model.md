@@ -7,7 +7,7 @@
 
 “We ticked a testing-guide row” is not this lesson. A drawing someone else can test names **what must not happen, who is acting, and which object**.
 
-This week's freeze for the notes app: local `is_security_test(t)`. No live scanners.
+This week on the notes app: local `is_security_test(t)`. No live scanners.
 
 > For a row with only `status_asserted`, the rule is deny. A named `forbidden_outcome` may count. Evidence that the deny is false: `is_security_test({"status_asserted": True})` is true.
 

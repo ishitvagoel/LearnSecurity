@@ -65,7 +65,7 @@ Run checks against the broken files (they **must fail** on unencoded markup). Re
 python3 -m pytest labs/6.2/6.2-lab/tests --impl vulnerable
 ```
 
-Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. A setup error is not proof the rule holds.
+Do not “fix” the check to pass. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

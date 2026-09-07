@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: schema]
 ```
 
-If both pass, the test is not looking at empty owner. If both fail, the fix is not structural or the check is wrong.
+If both pass, the test is not looking at empty owner.
 
 ## What the check has to show
 
@@ -55,7 +55,7 @@ python3 -m pytest labs/E6/e6-lab/tests --impl vulnerable
 python3 -m pytest labs/E6/e6-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Reject a “test” that only greps a maturity name without calling `accept_exception({"owner": "", "review_by": None})`.
+Reject a “test” that only greps a maturity name without calling `accept_exception({"owner": "", "review_by": None})`.
 
 ## Use it somewhere new
 

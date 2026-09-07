@@ -7,7 +7,7 @@
 
 “We have a vault” is not this page. A reviewable model names **each secret, where it lives, who owns rotation, and what happens to the old value**.
 
-This week’s freeze: local `auth(presented, current)`. Disposable `sk-lab-hardcoded`. No live vault.
+This week: local `auth(presented, current)`. Disposable `sk-lab-hardcoded`. No live vault.
 
 ## Picture: inventory row
 
@@ -31,7 +31,7 @@ flowchart LR
   Default[Hardcoded DEFAULT] --> Deny
 ```
 
-## Step 1: freeze who, what, and time
+## Step 1: name who, what, and when
 
 | Piece | This system |
 |---|---|

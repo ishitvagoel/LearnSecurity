@@ -7,7 +7,7 @@
 
 “We use HttpOnly” is not this page. A reviewable map names **query / cookie / header**, **who sees each**, and **deny on query**.
 
-This week’s freeze: local `session_from_request(query, cookie, header)`. Fake token `secret`. No live CDN.
+This week: local `session_from_request(query, cookie, header)`. Fake token `secret`. No live CDN.
 
 ## Picture: who can read the channel
 
@@ -30,7 +30,7 @@ flowchart LR
 
 How you sign the token is a later lesson. Which channel carries it is this page.
 
-## Step 1: freeze who, what, and time
+## Step 1: name who, what, and when
 
 | Piece | This system |
 |---|---|

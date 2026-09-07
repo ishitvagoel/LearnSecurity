@@ -7,7 +7,7 @@
 
 A boxes-and-arrows “client → API → database” sketch is not this lesson. A parser map names **which reader** produces the company used for the who-is-allowed check and **which reader** produces the company written to storage.
 
-This week’s freeze: companies, memberships, notes, and a **local JSON ingest practice**. No GraphQL product, no live proxy, no PostgreSQL `jsonb` claim, no Unicode attack corpus.
+This week: companies, memberships, notes, and a **local JSON ingest practice**. No GraphQL product, no live proxy, no PostgreSQL `jsonb` claim, no Unicode attack corpus.
 
 ## Picture: one parse result, many consumers
 

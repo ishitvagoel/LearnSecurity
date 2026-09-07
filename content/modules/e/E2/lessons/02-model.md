@@ -7,7 +7,7 @@
 
 “We set a content-security policy” is not this lesson. A map someone else can test names **the enforcing header vs Report-Only, encoding (6.2), and whether the edge can strip it**.
 
-This week’s freeze for the notes app: local `isolation_enforced(headers)`. No live pages.
+This week on the notes app: local `isolation_enforced(headers)`. No live pages.
 
 ## Picture: three layers
 

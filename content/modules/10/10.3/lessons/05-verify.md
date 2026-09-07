@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: cluster-admin denied]
 ```
 
-If both pass, the test is not looking at cluster-admin. If both fail, the fix is not structural or the check is wrong.
+If both pass, the test is not looking at cluster-admin.
 
 ## What the check has to show
 
@@ -55,7 +55,7 @@ python3 -m pytest labs/10.3/10.3-lab/tests --impl vulnerable
 python3 -m pytest labs/10.3/10.3-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Reject a "test" that only greps `namespace:` in a chart without calling `pod_ok("cluster-admin")`.
+Reject a "test" that only greps `namespace:` in a chart without calling `pod_ok("cluster-admin")`.
 
 ## Use it somewhere new
 

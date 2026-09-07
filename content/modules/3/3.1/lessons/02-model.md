@@ -7,7 +7,7 @@
 
 A list that says “PII, secrets, notes” is a pile of words. A list someone else can test names **fields**, **protection levels**, and **places** with allow or deny.
 
-This week's freeze: note body, note id, tenant id, and a **local log line**. No live log product. No production backup vendor. Fake data only.
+This week: note body, note id, tenant id, and a **local log line**. No live log product. No production backup vendor. Fake data only.
 
 > For field *F* at place *S*, the rule is allow or deny. Evidence *E* would show the deny is false — here, the body substring in the log line.
 

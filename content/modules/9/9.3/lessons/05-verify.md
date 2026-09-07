@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: 200-only denied]
 ```
 
-If both pass, the test is not looking at `status_asserted` alone. If both fail, the fix is not structural or the check is wrong.
+If both pass, the test is not looking at `status_asserted` alone.
 
 ## What the check has to show
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/9.3/9.3-lab/tests --impl vulnerable
 python3 -m pytest labs/9.3/9.3-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Reject a “test” that only greps a guide name without calling `is_security_test({"status_asserted": True})`.
+Reject a “test” that only greps a guide name without calling `is_security_test({"status_asserted": True})`.
 
 ## Use it somewhere new
 

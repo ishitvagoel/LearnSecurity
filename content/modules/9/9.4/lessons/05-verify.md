@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: deny unmapped HIGH]
 ```
 
-If both pass, the test is not looking at the empty map. If both fail, the fix is not structural or the check is wrong.
+If both pass, the test is not looking at the empty map.
 
 ## What the check has to show
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/9.4/9.4-lab/tests --impl vulnerable
 python3 -m pytest labs/9.4/9.4-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Reject a “test” that only greps `codeql` in a workflow without calling `ship_ok([HIGH], {})`.
+Reject a “test” that only greps `codeql` in a workflow without calling `ship_ok([HIGH], {})`.
 
 ## Use it somewhere new
 

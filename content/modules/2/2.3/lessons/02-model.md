@@ -7,7 +7,7 @@
 
 A poster of “we use CSP, cookies, and CORS” is not this page. A browser policy table names **which reader** may see `sc_session` and **which controls are not this week’s check**.
 
-This week’s freeze: a local cookie-jar model. No real DOM exploit page, no third-party iframe product, no live CORS test against someone else’s site.
+This week: a local cookie-jar model. No real DOM exploit page, no third-party iframe product, no live CORS test against someone else’s site.
 
 ## Picture: the jar sends; script must not read
 

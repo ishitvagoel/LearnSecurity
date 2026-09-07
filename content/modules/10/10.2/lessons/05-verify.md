@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: mismatch is deny]
 ```
 
-If both pass, the test is not looking at digest equality. If both fail, the fix is not structural or the check is wrong.
+If both pass, the test is not looking at digest equality.
 
 ## What the check has to show
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/10.2/10.2-lab/tests --impl vulnerable
 python3 -m pytest labs/10.2/10.2-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Reject a “test” that only greps `CycloneDX` in CI without calling `install_ok("aaa", "bbb")`.
+Reject a “test” that only greps `CycloneDX` in CI without calling `install_ok("aaa", "bbb")`.
 
 ## Use it somewhere new
 

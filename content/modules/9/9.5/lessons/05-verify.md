@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: retest None denied]
 ```
 
-If both pass, the test is not looking at missing retest. If both fail, the fix is not structural or the check is wrong.
+If both pass, the test is not looking at missing retest.
 
 ## What the check has to show
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/9.5/9.5-lab/tests --impl vulnerable
 python3 -m pytest labs/9.5/9.5-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Reject a "test" that only greps `Done` in a ticket without calling `close_finding({"retest": None})`.
+Reject a "test" that only greps `Done` in a ticket without calling `close_finding({"retest": None})`.
 
 ## Use it somewhere new
 

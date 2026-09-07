@@ -18,7 +18,7 @@ flowchart TD
   StoreDown[Key store unreachable] --> Closed["Fail closed — do not insert"]
 ```
 
-A broken retry is a notice-and-recover problem, not a licence to fail open or to dump the note into the log.
+A broken retry is something you still have to notice and recover from, not an excuse to fail open or to dump the note into the log.
 
 | Outcome | This topic |
 |---|---|

@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass deny"]
 ```
 
-If both pass, the check is not looking at debug-to-prod. If both fail, the fix is not structural or the check is wrong.
+If both pass, the check is not looking at debug-to-prod.
 
 ## Three things to look at
 
@@ -48,7 +48,7 @@ Honest release plus ok may pass on both implementations. That does not excuse th
 
 ## Practice
 
-Run both implementations this session from the lab directory if needed. Reject a “check” that only greps `minifyEnabled` without calling `api_allowed("debug", "ok")`. A setup error is not proof the rule holds.
+Reject a “check” that only greps `minifyEnabled` without calling `api_allowed("debug", "ok")`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

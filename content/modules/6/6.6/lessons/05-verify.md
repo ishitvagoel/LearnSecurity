@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P["Must pass: consume-once"]
 ```
 
-If both pass, the test is not looking at the second `t1`. If both fail, the fix is not structural or the check is wrong. First accept of `t1` may pass on both implementations. That does not excuse the second-accept test.
+If both pass, the test is not looking at the second `t1`. First accept of `t1` may pass on both implementations. That does not excuse the second-accept test.
 
 ## What the check has to show
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/6.6/6.6-lab/tests --impl vulnerable
 python3 -m pytest labs/6.6/6.6-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Reject a “test” that only greps `UNIQUE` in a migration without calling `accept("t1")` twice.
+Reject a “test” that only greps `UNIQUE` in a migration without calling `accept("t1")` twice.
 
 ## Use it somewhere new
 

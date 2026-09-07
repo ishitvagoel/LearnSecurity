@@ -11,7 +11,7 @@ Do not log note bodies in the CSV path (3.1 / 5.1). Do not attach the CSV to the
 
 ## Picture: the fourth try is a signal
 
-A fourth export in the window is a notice-and-recover problem, not a licence to quote note bodies in the paging channel. Recover keeps the deny and revokes a stolen session. Neither reprints the CSV.
+A fourth export in the window is something you still have to notice and recover from, not an excuse to quote note bodies in the paging channel. Recover keeps the deny and revokes a stolen session.
 
 ```mermaid
 flowchart TD

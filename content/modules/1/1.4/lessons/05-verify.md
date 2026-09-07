@@ -19,7 +19,7 @@ flowchart TD
   T -->|repaired| Pass[Must pass]
 ```
 
-If both pass, the test is not looking at `mouse_only`, name, or keyboard. If both fail, the fix is not structural or the check is wrong.
+If both pass, the test is not looking at `mouse_only`, name, or keyboard.
 
 ## What the check has to show
 
@@ -48,8 +48,6 @@ A test that only asserts HTTP 200 is not this topic’s evidence. This practice 
 python -m pytest labs/1.4/1.4-risk-register/tests --impl vulnerable
 python -m pytest labs/1.4/1.4-risk-register/tests --impl fixed
 ```
-
-Paste nothing from answer keys. row.
 
 ## Use it somewhere new
 

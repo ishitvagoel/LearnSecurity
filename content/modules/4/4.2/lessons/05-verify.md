@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass: origin-bound webauthn only"]
 ```
 
-If both pass, the check is not looking at password-at-lookalike. If both fail, the fix is not structural or the check is wrong.
+If both pass, the check is not looking at password-at-lookalike.
 
 ## What the check has to show
 
@@ -55,7 +55,7 @@ Map each check to a rule from the map page. If the broken files do not fail the 
 
 ## Practice
 
-Run both implementations this session. Reject a “test” that only greps `webauthn` in HTML without calling `phishing_resistant` on the password / lookalike pair.
+Reject a “test” that only greps `webauthn` in HTML without calling `phishing_resistant` on the password / lookalike pair.
 
 ## Use it somewhere new
 

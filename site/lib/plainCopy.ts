@@ -45,6 +45,10 @@ const HEADING_EXACT: Record<string, string> = {
   "Step 2: write cells": "Step 2: write the rules",
   "Step 2: write cells the lab can fail": "Step 2: write the rules the check can fail",
   "Step 1: freeze pieces": "Step 1: name the pieces",
+  "Step 1: freeze the pieces": "Step 1: name the pieces",
+  "Step 1: freeze who, what, and time": "Step 1: name who, what, and when",
+  "Step 1: freeze who, what, and the copy": "Step 1: name who, what, and the copy",
+  "Step 1: freeze who, what, and the path": "Step 1: name who, what, and the path",
   "Invariant prompts": "Questions to ask",
   "Threat-model prompts": "Who might attack, and how",
   "Lab briefs": "Practice files",
@@ -66,6 +70,13 @@ export function displayHeading(raw: string): string {
   const exact = HEADING_EXACT[text];
   if (exact) {
     return exact;
+  }
+  if (text.startsWith("Step 1: freeze ")) {
+    const rest = text.slice("Step 1: freeze ".length);
+    if (rest === "pieces" || rest === "the pieces") {
+      return "Step 1: name the pieces";
+    }
+    return `Step 1: name ${rest}`;
   }
   if (text.startsWith("Mental model:")) {
     return `Picture:${text.slice("Mental model:".length)}`;
@@ -445,6 +456,31 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/Run both this session from the practice folder if needed\. /g, ""],
   [/Run both this session:/g, ""],
   [/Run both this session\. /g, ""],
+  [/Run both implementations this session from the lab directory if needed\. /g, ""],
+  [/Run both implementations this session\. /g, ""],
+  [/Execute both implementations this session from the lab directory if needed\. /g, ""],
+  [/Run both versions this session\. /g, ""],
+  [/ If both fail, the fix is not structural or the check is wrong\./g, ""],
+  [/If both fail, the fix is not structural or the check is wrong\. /g, ""],
+  [/Paste nothing from answer keys\. row\./g, ""],
+  [/Paste nothing from answer keys\. /g, ""],
+  [/Paste nothing from answer keys\./g, ""],
+  [/ The failure \*is\* the evidence that the rule is currently false\./g, ""],
+  [/ Neither reprints the body\./g, ""],
+  [/Neither reprints the body\./g, ""],
+  [/ Neither reprints [^.]+\./g, ""],
+  [/not the check\. page\./g, "not the check."],
+  [/This week['’]s freeze for the notes app: /g, "This week on the notes app: "],
+  [/This week['’]s freeze: the notes app['’]s /g, "This week on the notes app: "],
+  [/This week['’]s freeze: /g, "This week: "],
+  [
+    / is a notice-and-recover problem, not a licence to /g,
+    " is something you still have to notice and recover from, not an excuse to ",
+  ],
+  [/in this week['’]s freeze/g, "in this week's practice"],
+  [/Notes-app freeze: /g, "This week on the notes app: "],
+  [/not a licence to scan /g, "not permission to scan "],
+  [/as a licence to scan /g, "as permission to scan "],
   [
     /Write one log line you would accept(?: in review)?(?: \(([^)]+)\))?\. Tie it to (`[^`]+`)\./g,
     "Write a log line you would accept.",

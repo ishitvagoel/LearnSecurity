@@ -9,7 +9,7 @@ A closer can still mark Done after `close_finding` was "fixed once." Do not log 
 
 ## Picture: close without retest is a signal
 
-A close that skipped retest is a notice-and-recover problem, not a licence to quote the note in the paging channel. Notice names the finding. Recover reopens and re-runs the same isolation check. Neither reprints the body.
+A close that skipped retest is something you still have to notice and recover from, not an excuse to quote the note in the paging channel. Notice names the finding. Recover reopens and re-runs the same isolation check.
 
 ```mermaid
 flowchart TD
@@ -66,4 +66,4 @@ A clinic example: reopen the PDF-shelf ticket; do not attach patient rows. Do no
 
 ## What this page is not doing
 
-This page does not mark you as finished. A known-exploited listing is not a scan licence. Answer keys are not on this site.
+This page does not mark you as finished. A known-exploited listing is not permission to scan. Answer keys are not on this site.

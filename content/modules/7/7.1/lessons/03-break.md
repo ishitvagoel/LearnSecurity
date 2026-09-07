@@ -64,7 +64,7 @@ FastAPI will bind extra fields if the model allows it. Pydantic allowing extras 
 python3 -m pytest labs/7.1/7.1-lab/tests --impl vulnerable
 ```
 
-Run from `labs/7.1/7.1-lab` if a repo-root collection picks up `site/`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. A setup error is not proof the rule holds.
+Run from `labs/7.1/7.1-lab` if a repo-root collection picks up `site/`. Do not “fix” the check to pass. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

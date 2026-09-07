@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: empty change is deny]
 ```
 
-If both pass, the test is not looking at `threat_model`. If both fail, the fix is not structural or the check is wrong.
+If both pass, the test is not looking at `threat_model`.
 
 ## What the check has to show
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/10.1/10.1-lab/tests --impl vulnerable
 python3 -m pytest labs/10.1/10.1-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Reject a “test” that only greps `CODEOWNERS` in a repo without calling `merge_ok({})`.
+Reject a “test” that only greps `CODEOWNERS` in a repo without calling `merge_ok({})`.
 
 ## Use it somewhere new
 

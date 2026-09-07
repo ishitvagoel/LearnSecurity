@@ -7,7 +7,7 @@
 
 “TLS terminates at the edge” is not this lesson. A map someone else can test names **raw body**, **MAC**, **secret**, and **what happens on a missing sig**.
 
-This week’s freeze for the notes app: local `accept(sig, body, secret)` with disposable `lab-secret`. No live providers.
+This week on the notes app: local `accept(sig, body, secret)` with disposable `lab-secret`. No live providers.
 
 > HMAC over the raw body bytes. Compare with `compare_digest`. An empty signature must deny. Parsed JSON is a second document.
 

@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P["Must pass: None"]
 ```
 
-If both pass, the test is not looking at leftover Alice. If both fail, the fix is not structural or the check is wrong.
+If both pass, the test is not looking at leftover Alice.
 
 ## What the check has to show
 
@@ -55,7 +55,7 @@ python3 -m pytest labs/7.4/7.4-lab/tests --impl vulnerable
 python3 -m pytest labs/7.4/7.4-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Reject a “test” that only greps `worker-sc` in a YAML file without calling `exporter({"user_session": "alice", "service": None})`.
+Reject a “test” that only greps `worker-sc` in a YAML file without calling `exporter({"user_session": "alice", "service": None})`.
 
 ## Use it somewhere new
 

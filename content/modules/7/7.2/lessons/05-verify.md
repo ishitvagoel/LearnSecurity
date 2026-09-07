@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass deny"]
 ```
 
-If both pass, the check is not looking at the field table. If both fail, the fix is not structural or the check is wrong.
+If both pass, the check is not looking at the field table.
 
 | Mode | Must show for this topic |
 |---|---|
@@ -45,7 +45,7 @@ Honest `display_name` may pass on both implementations. That does not excuse the
 
 ## Practice
 
-Execute both implementations this session from the lab directory if needed. Reject a “test” that only greps `@hide` in a GraphQL schema without calling `resolve("member", "secret_internal")`.
+Reject a “test” that only greps `@hide` in a GraphQL schema without calling `resolve("member", "secret_internal")`.
 
 ## Use it somewhere new
 

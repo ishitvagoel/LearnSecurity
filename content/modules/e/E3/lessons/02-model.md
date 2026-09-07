@@ -7,7 +7,7 @@
 
 A slide that says “we use Stripe idempotency” is not this page. A map someone else can test names **the key, the SEEN set, the webhook path, and that no card number is present**.
 
-This week’s freeze for the notes app: a local `capture(key)` practice. Fake amounts only. No live processor.
+This week on the notes app: a local `capture(key)` practice. Fake amounts only. No live processor.
 
 ## Picture: one key, one row
 
@@ -28,7 +28,7 @@ flowchart LR
 
 If both arrows append, the map already predicts `test_duplicate_capture_does_not_double_charge` will fail.
 
-## Step 1: freeze who, what, and time
+## Step 1: name who, what, and when
 
 | Piece | This system |
 |---|---|

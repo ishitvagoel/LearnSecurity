@@ -7,7 +7,7 @@
 
 “We delete the user” is not this lesson. A map someone else can test names **account states**, **leftovers that must die**, and **who may offboard**.
 
-This week's freeze: local `SESSIONS` / `DELETED` maps; user `alice`. No live single sign-on.
+This week: local `SESSIONS` / `DELETED` maps; user `alice`. No live single sign-on.
 
 > After `delete_user("alice")`, `session_valid("alice")` must be false. If a leftover is missing from the map, leftover access appears.
 

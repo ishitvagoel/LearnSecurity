@@ -9,7 +9,7 @@ A new SDK version can turn “include extras” back on after `crash_report` was
 
 ## Picture: body in telemetry is a signal
 
-A redaction miss is a notice-and-recover problem, not a licence to quote the note in the paging channel. Notice names the crash. Recover purges the vendor copy. Neither reprints the body.
+A redaction miss is something you still have to notice and recover from, not an excuse to quote the note in the paging channel. Notice names the crash. Recover purges the vendor copy.
 
 ```mermaid
 flowchart TD

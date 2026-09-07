@@ -7,7 +7,7 @@
 
 “We have a revoke endpoint” is not this lesson. A drawing someone else can test names **owner, grant, every read path (API, worker, cache), and leftover copies**.
 
-This week’s freeze for the notes app: local `revoke` / `read`. No live tenants.
+This week on the notes app: local `revoke` / `read`. No live tenants.
 
 > After revoke, the rule is deny when the reader is not the owner and not in the grant set. Honest owner read after revoke may still return the body. Honest share read *before* revoke may still return the body. Evidence that the deny is false: `read("n1", "B")` after `revoke("n1", "B")` still returns the body.
 

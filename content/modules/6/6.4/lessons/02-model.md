@@ -7,7 +7,7 @@
 
 “We store UUID names” is not this page. A reviewable model names **the folder, the canonicalize step, and which parsers are out of this practice**.
 
-This week’s freeze: a local `resolve(name)` practice under `/tmp/sc-lab`. No live host reads.
+This week: a local `resolve(name)` practice under `/tmp/sc-lab`. No live host reads.
 
 ## Picture: the object is the canonical path
 
@@ -30,7 +30,7 @@ flowchart LR
 
 A random stored name is extra. It is not a substitute for the prefix check on any path you still join.
 
-## Step 1: freeze who, what, and the path
+## Step 1: name who, what, and the path
 
 | Piece | This system |
 |---|---|

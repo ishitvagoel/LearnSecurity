@@ -11,7 +11,7 @@ Do not log bodies or `lab-secret` (3.1 / 5.3). Do not attach the HL7/JSON body t
 
 ## Picture: a missing sig is a signal
 
-A deny of a callback with a missing or wrong MAC is a notice-and-recover problem, not a licence to paste the body into the paging channel. Recover keeps the deny. Neither logs the body.
+A deny of a callback with a missing or wrong MAC is something you still have to notice and recover from, not an excuse to paste the body into the paging channel. Recover keeps the deny. Neither logs the body.
 
 ```mermaid
 flowchart TD

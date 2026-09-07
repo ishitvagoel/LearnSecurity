@@ -7,7 +7,7 @@
 
 “The phone is sandboxed” is not this lesson. A map someone else can test names **which cell the server still owns**.
 
-This week’s freeze: the notes app’s local `allow_export(client_claims, server_attest)`. Android and Kotlin first. No live phones.
+This week on the notes app: local `allow_export(client_claims, server_attest)`. Android and Kotlin first. No live phones.
 
 ## Picture: every 1.1 rule has an owner
 
@@ -31,7 +31,7 @@ flowchart LR
 
 A missing or failed attest **denies**. A passed attest still needs the 1.2 grant (4.4 / 6.7 quota).
 
-## Step 1: freeze the pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|

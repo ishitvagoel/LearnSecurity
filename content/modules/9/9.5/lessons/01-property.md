@@ -11,7 +11,7 @@ The notes app may get an authorized check of isolation: bob must not read alice'
 
 So what must not happen: **a finding closed without a retest**. That is honesty of the fix loop — the hole can still be there.
 
-A testing-guide list names *what* an authorized web check may try. It does not close tickets. A severity score tells you how to rank work. A 9.8 does not make the close decision for you. A known-exploited list says whether someone has seen the bug used in the wild. That is useful context for an internal-only bug. It is not a licence to scan a public clinic.
+A testing-guide list names *what* an authorized web check may try. It does not close tickets. A severity score tells you how to rank work. A 9.8 does not make the close decision for you. A known-exploited list says whether someone has seen the bug used in the wild. That is useful context for an internal-only bug. It is not permission to scan a public clinic.
 
 If you later require that a role change takes effect right away, retest the cache after the role change, not a different URL. That is extra, advanced work, not this week's check.
 
@@ -43,7 +43,7 @@ flowchart LR
 |---|---|---|---|
 | Paper-compliance closer | Mark the ticket Done after the PDF lands | Look finished | Isolation hole stays; leftover looks closed |
 | Severity-only triage | Treat 9.8 as the close decision | Rank and move on | Score is input, not a passing check |
-| Someone who treats a known-exploited list as a scan licence | Point a scanner at a public clinic | "It's on the list" | Out of scope; still no local retest |
+| Someone who treats a known-exploited list as permission to scan | Point a scanner at a public clinic | "It's on the list" | Out of scope; still no local retest |
 
 You do not need a nation-state this week. Those three already close the finding without a retest.
 

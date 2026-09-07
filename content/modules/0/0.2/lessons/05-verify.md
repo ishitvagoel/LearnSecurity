@@ -44,7 +44,7 @@ Honest low-score tests may pass on both. If the broken files do not fail the sco
 
 ## Practice
 
-Run both versions this session. Reject a “test” that only greps `return False` in a string without calling `quiz_score_grants_phase1_skip(100)`.
+Reject a “test” that only greps `return False` in a string without calling `quiz_score_grants_phase1_skip(100)`.
 
 ## Use it somewhere new
 

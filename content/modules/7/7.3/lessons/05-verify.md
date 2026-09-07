@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P["Must pass: deny"]
 ```
 
-If both pass, the test is not looking at a missing sig. If both fail, the fix is not structural or the check is wrong.
+If both pass, the test is not looking at a missing sig.
 
 ## What the check has to show
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/7.3/7.3-lab/tests --impl vulnerable
 python3 -m pytest labs/7.3/7.3-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Reject a “test” that only greps `hmac` in source without calling `accept("", "body", "lab-secret")`.
+Reject a “test” that only greps `hmac` in source without calling `accept("", "body", "lab-secret")`.
 
 ## Use it somewhere new
 

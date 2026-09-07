@@ -7,7 +7,7 @@
 
 “We published OpenAPI” is not this lesson. A map someone else can test names **the action, the writable keys, and every protocol that binds a document**.
 
-This week’s freeze: the notes app’s local `apply(user, body)` with `ALLOWED = {display_name}`. No live APIs.
+This week on the notes app: local `apply(user, body)` with `ALLOWED = {display_name}`. No live APIs.
 
 ## Picture: three binders, one contract
 
@@ -31,7 +31,7 @@ flowchart LR
 
 A spec that does not match running code is leftover-endpoint awareness, not the allow-list. Versioning the path to `/v2` without retiring `/v0` is not a security control.
 
-## Step 1: freeze the pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|

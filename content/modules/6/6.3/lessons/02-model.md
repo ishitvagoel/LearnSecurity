@@ -7,7 +7,7 @@
 
 “SameSite is on” is not this page. A map someone else can test names **who may POST share, with which cookie, origin, and token**.
 
-This week’s freeze: local `allow_share(origin, expected, token, session_cookie)`. No live browsers.
+This week: local `allow_share(origin, expected, token, session_cookie)`. No live browsers.
 
 ## Picture: three inputs, one decision
 
@@ -30,7 +30,7 @@ flowchart LR
 
 This lab is the leftover-cookie helper. Do not treat a Bearer-only API as “CSRF solved” if a cookie fallback still exists.
 
-## Step 1: freeze pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|

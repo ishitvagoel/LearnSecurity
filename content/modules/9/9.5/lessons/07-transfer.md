@@ -29,7 +29,7 @@ flowchart LR
   None[retest None] --> Reality[rule still open]
 ```
 
-If the PDF is filed while `close_finding` is always true, the rule is gone. A ticket marked Done, a 9.8 severity, and a known-exploited listing do not set `retest` to `"pass"`. Extra fields and a role-change cache are the same close-loop family — name them, do not pentest a live clinic system here. A testing-guide draft is in development; the current final pin is the published testing guide. A known-exploited list is whether exploitation is *observed in the wild* for an internal-only bug, not a licence to scan a public clinic.
+If the PDF is filed while `close_finding` is always true, the rule is gone. A ticket marked Done, a 9.8 severity, and a known-exploited listing do not set `retest` to `"pass"`. Extra fields and a role-change cache are the same close-loop family — name them, do not pentest a live clinic system here. A testing-guide draft is in development; the current final pin is the published testing guide. A known-exploited list is whether exploitation is *observed in the wild* for an internal-only bug, not permission to scan a public clinic.
 
 A missing retest still has to be denied. A passing retest may still close. Uploading the PDF without a retest field leaves `close_finding({retest: None})` true. The local check is `test_cannot_close_without_retest` — on a practice, not a live host.
 

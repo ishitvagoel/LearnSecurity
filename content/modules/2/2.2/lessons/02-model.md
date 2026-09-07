@@ -7,7 +7,7 @@
 
 A boxes-and-arrows “browser → CDN → API” sketch is not this lesson. A request-path map names **where TLS ends**, **what the cache key contains**, and **which bound company** that key is allowed to use.
 
-This week’s freeze: companies, notes, and a **local cache practice**. No live CDN, no DNSSEC claim, no mTLS mesh, no HTTP/3 product.
+This week: companies, notes, and a **local cache practice**. No live CDN, no DNSSEC claim, no mTLS mesh, no HTTP/3 product.
 
 ## Picture: every hop can change what is trusted
 

@@ -9,7 +9,7 @@ A list that says “MFA,” “WAF,” and “users should be careful” is a to
 
 > For rule *I*, person *A* with ability *C* and motive *N* can cause harm *H* unless control *K* holds. Leftover *R* remains, owned by *O*, looked at again on trigger *T*. Evidence *E* would show *K* is false.
 
-This week’s freeze: companies, memberships, notes, and a **local recovery-confirm practice**. No live login provider, no files, no support-impersonation product, no real users.
+This week: companies, memberships, notes, and a **local recovery-confirm practice**. No live login provider, no files, no support-impersonation product, no real users.
 
 ## Picture: anatomy of a row
 

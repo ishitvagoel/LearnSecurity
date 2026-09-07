@@ -13,7 +13,7 @@ So what must not happen: **an incident closed without recovery evidence**, and *
 
 A logging list names *what* you keep. It does not prove restore ran. Logs should match how sensitive the data is — note bodies are not “forensics.” Ship logs to a separate system so a breach of the app does not erase the evidence. Logging every authorization decision without the sensitive data is extra, advanced work, not this week’s check.
 
-Industry “detect / respond / recover” labels name outcomes, not a product. A known-exploited list is useful for patch order. It is not a close decision, and it is not a licence to scan a public clinic.
+Industry “detect / respond / recover” labels name outcomes, not a product. A known-exploited list is useful for patch order. It is not a close decision, and it is not permission to scan a public clinic.
 
 This week’s practice is this course’s local files or official labs. Do not tell anyone to try attacks on public or third-party systems.
 

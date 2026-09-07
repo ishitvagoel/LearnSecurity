@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: recovery todo denied]
 ```
 
-If both pass, the test is not looking at recovery todo. If both fail, the fix is not structural or the check is wrong.
+If both pass, the test is not looking at recovery todo.
 
 The second what must not happen is **`note_body` in logs** — `test_cannot_close_when_logs_contain_note_body` must also fail on the broken files.
 
@@ -57,7 +57,7 @@ python3 -m pytest labs/10.5/10.5-lab/tests --impl vulnerable
 python3 -m pytest labs/10.5/10.5-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Reject a “test” that only greps a paging product name without calling `close_incident({"recovery": "todo", "logs": "ok"})`.
+Reject a “test” that only greps a paging product name without calling `close_incident({"recovery": "todo", "logs": "ok"})`.
 
 ## Use it somewhere new
 

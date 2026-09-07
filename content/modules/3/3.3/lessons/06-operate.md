@@ -17,7 +17,7 @@ flowchart TD
   Alert --> Rotate[Rotate and rewrite DATABASE_URL]
 ```
 
-A broken grant is a notice-and-recover problem, not a licence to dump the note into the log.
+A broken grant is something you still have to notice and recover from, not an excuse to dump the note into the log.
 
 | Outcome | This topic |
 |---|---|

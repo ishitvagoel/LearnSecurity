@@ -42,7 +42,7 @@ stateDiagram-v2
   Deleted --> Deleted: leftover session must fail
 ```
 
-Disabled and deleted are different product states. Both must fail `session_valid` in this week's freeze. Recovery and signing up again come later. They must not bring the old cookie back to life.
+Disabled and deleted are different product states. Both must fail `session_valid` in this week's practice. Recovery and signing up again come later. They must not bring the old cookie back to life.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

@@ -7,7 +7,7 @@
 
 “Jobs run internally” is not this lesson. A map someone else can test names **who authenticates the worker** and **what the job is allowed to carry**.
 
-This week’s freeze: local `exporter(job)` with principal `worker-sc`. No live brokers.
+This week: local `exporter(job)` with principal `worker-sc`. No live brokers.
 
 > The person who clicked Export is a *parameter* (which export). It is not the worker’s login. Leftover Alice with no service is denied. The named worker may run.
 

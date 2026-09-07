@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: exec_sql denied]
 ```
 
-If both pass, the test is not looking at `exec_sql`. If both fail, the fix is not structural or the check is wrong.
+If both pass, the test is not looking at `exec_sql`.
 
 ## What the check has to show
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/E1/e1-lab/tests --impl vulnerable
 python3 -m pytest labs/E1/e1-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Reject a "test" that only greps `exec_sql` in a prompt file without calling `run_tool("exec_sql", {})`.
+Reject a "test" that only greps `exec_sql` in a prompt file without calling `run_tool("exec_sql", {})`.
 
 ## Use it somewhere new
 

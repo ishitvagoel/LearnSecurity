@@ -7,7 +7,7 @@
 
 “We filled in the store’s privacy form” is not this lesson. A drawing someone else can test names **what may leave the device, to whom, and which field is forbidden**.
 
-This week's freeze for the notes app: local `crash_report(note_body)`. No live vendors.
+This week on the notes app: local `crash_report(note_body)`. No live vendors.
 
 > For the note body at `crash_report`, the rule is deny. A stack identifier may send. Evidence that the deny is false: `'secret'` in `str(crash_report("secret"))`.
 
