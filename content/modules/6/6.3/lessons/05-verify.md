@@ -25,7 +25,7 @@ flowchart LR
 | Normal / fail-closed | missing cookie → deny (may pass on both) |
 | Not claimed | GET mutate; clickjacking; CORS; postMessage |
 
-`test_foreign_origin_post_is_denied` is there so a cookie-only share cannot sneak through.
+`test_foreign_origin_post_is_denied` is there so a cookie-only share still fails.
 
 ```text
 python3 -m pytest labs/6.3/6.3-lab/tests --impl vulnerable

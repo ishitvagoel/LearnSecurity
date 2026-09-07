@@ -34,7 +34,7 @@ If the column name is `ssn_encrypted` and the bytes are Base64, the rule is gone
 
 Base64 decode of the stored stand-in is not the SSN. Renaming the column or wrapping `b64encode` in a function named `encrypt` leaves the reader unchanged. The local check is `test_protect_is_not_mere_encoding` — on a practice, not a live clinic system.
 
-## Prompt — clinic SSN column
+## Write this for a clinic SSN column
 
 1. who can act (database admin; stolen disk — **not** a live clinic);
 2. what you trust (which authenticated encryption plus key is trusted; the column name is not);

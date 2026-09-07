@@ -30,7 +30,7 @@ You do not need a running notes server. You must not fuzz a public host. The tru
 
 Checklists tell you *what* to consider. They do not make `assert r.status_code == 200` a security test. Lesson 9.1 can mark the isolation row “covered” with a test that never isolates if this shape gate is missing.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
 Open `vulnerable/stest.py`. It returns true when `status_asserted` is set. Tests:
 

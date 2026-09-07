@@ -32,7 +32,7 @@ If the clerk-chosen filename is concatenated into `sh -c`, the check is gone. Fa
 
 The spawn helper returns a list whose program is not `sh`, and the name is one element. Stripping punctuation while still calling `sh -c` leaves the second parser. The local check is `test_does_not_invoke_shell` — on a practice, not a live export worker.
 
-## Prompt — clinic CSV filename
+## Write this for a clinic CSV filename
 
 1. who can act (clerk-chosen filename — not a live clinic);
 2. what you trust (argv list is what you trust; a denylist of punctuation is not);

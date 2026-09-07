@@ -30,7 +30,7 @@ flowchart TD
 
 Earlier lessons already said posters are not gates. This check is **accountability of leftover risk**.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
 Open `vulnerable/risk.py`. It returns true for every dict. Tests:
 

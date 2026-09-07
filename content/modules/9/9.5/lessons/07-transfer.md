@@ -18,7 +18,7 @@ Renaming "note" to "chart" is not transfer. Rule, retest, and leftover change. F
 | Notes app this week | Clinic sketch |
 |---|---|
 | Bob must not read alice's note | A clinic staffer must not read another patient's chart |
-| Isolation pytest must pass before close | Same isolation check on **local** practice files |
+| The isolation check must pass before close | Same isolation check on **local** practice files |
 | `close_finding({"retest": None})` | Same call — missing retest still denied |
 | Paper-compliance closer | Same closer — **not** a live clinic |
 | PDF / severity / known-exploited list | Same inputs — not the close decision |
@@ -33,7 +33,7 @@ If the PDF is filed while `close_finding` is always true, the rule is gone. A ti
 
 A missing retest still has to be denied. A passing retest may still close. Uploading the PDF without a retest field leaves `close_finding({retest: None})` true. The local check is `test_cannot_close_without_retest` — on a practice, not a live host.
 
-## Prompt — clinic pentest PDF on a shelf
+## Write this for a clinic pentest PDF on a shelf
 
 1. who can act (paper-compliance closer — not a live clinic);
 2. what you trust (same-rule retest is the promise; PDF, severity score, and a known-exploited list are not);

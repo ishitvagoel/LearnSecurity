@@ -28,7 +28,7 @@ If both pass, the test is not looking at empty owner.
 | Normal | complete record may accept (may pass on both) |
 | Not claimed | a maturity dashboard; a pledge; an assurance gate; that anyone reads the register |
 
-The test `test_exception_needs_owner_review_and_wcag` is there so always-accept `accept_exception` cannot sneak through.
+The test `test_exception_needs_owner_review_and_wcag` is there so always-accept `accept_exception` still fails.
 
 Honest complete exceptions may pass on both implementations. That does not excuse the empty-owner deny test. If the broken files do not fail `test_exception_needs_owner_review_and_wcag`, the lab is miswired — fix the wiring, not the assertion.
 

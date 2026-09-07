@@ -28,7 +28,7 @@ flowchart TD
 
 `/me` looks personal. The path string is identical for every patient. Personalization that is not in the key is ambient secrecy failure.
 
-## Prompt — clinic cache and the CDN export
+## Write this for a clinic cache and the CDN export
 
 Your answer must include:
 

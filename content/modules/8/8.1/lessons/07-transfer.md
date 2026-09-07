@@ -28,7 +28,7 @@ Renaming `integrity` to `hipaaMode` is not transfer. If the Compose switch is �
 | Server attest is what you trust | Same; Compose switch and store listing are not |
 | Feature flags / `premium=true` leftover | Same claim family — name them, do not run them here |
 
-## Prompt — clinic Android hipaaMode=true
+## Write this for a clinic Android hipaaMode=true
 
 1. who can act (patched clinic app file — not a live hospital device);
 2. what you trust (server attest plus 1.2 is what you trust; client boolean and store listing are not);

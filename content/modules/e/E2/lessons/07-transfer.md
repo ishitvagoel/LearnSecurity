@@ -28,7 +28,7 @@ Calling it “charts” instead of “notes” does not move the work. If the da
 | Enforcing header name is what you trust | Same; a dashboard is not |
 | Encoding leftover (6.2) | Encoding still first; Trusted Types still draft |
 
-## Prompt — clinic Report-Only as a HIPAA header
+## Write this for a clinic Report-Only as a HIPAA header
 
 1. who can act (a script that would only be logged — not a live clinic script hunt);
 2. what you trust (the enforcing header name is what you trust; Report-Only, Helmet, and a dashboard are not);

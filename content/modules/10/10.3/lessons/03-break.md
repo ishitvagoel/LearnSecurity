@@ -30,7 +30,7 @@ You do not need a kube-apiserver. You must not bind a live cluster. The true ret
 
 The database god-role lesson already said one shared admin is a blast-radius rule. This check is **the same idea at cluster grain**.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
 Open `vulnerable/iam.py`. It returns true for every role. Tests:
 

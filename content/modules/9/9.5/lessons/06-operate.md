@@ -9,7 +9,7 @@ A closer can still mark Done after `close_finding` was "fixed once." Do not log 
 
 ## Picture: close without retest is a signal
 
-A close that skipped retest is something you still have to notice and recover from, not an excuse to quote the note in the paging channel. Notice names the finding. Recover reopens and re-runs the same isolation check.
+A close that skipped retest is something you still have to notice and recover from, not an excuse to quote the note in the paging channel. The notice should name the finding. Recover reopens and re-runs the same isolation check.
 
 ```mermaid
 flowchart TD

@@ -28,7 +28,7 @@ Calling it “nickname” instead of “title” does not move the work. If the 
 | HTML-text encoder is what you trust | Same; a content-security header is not |
 | Markdown leftover | Markdown-to-HTML as a second parser (2.1) |
 
-## Prompt — clinic nickname field
+## Write this for a clinic nickname field
 
 1. who can act (patient or clerk supplying a nickname — not a live clinic);
 2. what you trust (the HTML-text encoder is what you trust; a content-security header is not);

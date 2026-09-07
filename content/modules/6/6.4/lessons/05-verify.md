@@ -24,7 +24,7 @@ flowchart LR
 | When things break | If canonicalize is uncertain, deny (write it as leftover if this check does not cover it) |
 | Not claimed | Zip members; XML entities; pickle; live host reads; awareness-list “compliant” |
 
-Lab tests: `test_dotdot_does_not_escape_root` and `test_honest_relative_stays_under_root` in `labs/6.4/6.4-lab/tests/test_property.py`. The first test is there so an escaped object cannot sneak through. The name `../outside` is data for the prefix check — not a cookbook for other directories.
+Lab tests: `test_dotdot_does_not_escape_root` and `test_honest_relative_stays_under_root` in `labs/6.4/6.4-lab/tests/test_property.py`. The first test is there so an escaped object still fails. The name `../outside` is data for the prefix check — not a cookbook for other directories.
 
 ```text
 python3 -m pytest labs/6.4/6.4-lab/tests --impl vulnerable

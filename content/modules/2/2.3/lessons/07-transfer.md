@@ -30,11 +30,11 @@ flowchart TD
 
 Use only these dummy sketches. Do not inspect or operate a real hospital, app-store build, or third-party widget.
 
-## Prompt A — clinic patient portal session cookie
+## Write this for a clinic patient portal session cookie
 
 A second-factor or session cookie is set after login. One of the UIs is a shared workstation.
 
-## Prompt B — React Native WebView cookie bridge
+## Write this for a React Native WebView cookie bridge
 
 The same session is copied into a WebView that exposes cookies to injected JS.
 

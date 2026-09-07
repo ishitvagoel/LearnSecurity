@@ -25,7 +25,7 @@ If row-level rules are “on” while `tenant_for` prefers the body, the rule is
 
 Session A plus body B is still A. Matching A/A may still keep A. Enabling row-level rules without session binding leaves `tenant_for({A},{B}) == B`. The local check is `test_body_cannot_switch_tenant` — on a practice, not a live clinic system.
 
-## Prompt — clinic sketch
+## Write this for a clinic sketch
 
 1. who can act (member of practice A sending practice B — not a live clinic company);
 2. what you trust (session binding is trusted; a row-level variable from the body, a famous-bugs mapping, and a subdomain are not);

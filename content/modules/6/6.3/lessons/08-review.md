@@ -7,7 +7,7 @@
 
 This review is about notes-app share. Check whether `allow_share` for a foreign origin with `token=None` is still true.
 
-You already ran `test_foreign_origin_post_is_denied`. A comment “will add CSRF later” is not.
+A comment “will add CSRF later” is not a pass on `test_foreign_origin_post_is_denied`.
 
 ## Picture: leftover cookie auth + no Origin check
 

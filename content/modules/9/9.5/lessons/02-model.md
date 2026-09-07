@@ -17,9 +17,9 @@ If the rule × retest row is blank, the finding closes because nobody named the 
 
 ```mermaid
 flowchart TD
-  Cell[bob must not read alice's note] --> Test[isolation pytest]
+  Cell[bob must not read alice's note] --> Test[isolation check]
   Test --> Fix[structural fix]
-  Fix --> Retest[same pytest]
+  Fix --> Retest[same check]
   Retest --> Close[may close]
 ```
 

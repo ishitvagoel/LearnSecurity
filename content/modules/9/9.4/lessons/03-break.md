@@ -30,7 +30,7 @@ You do not need a vendor console. You must not scan a public repo. The true retu
 
 The coverage lesson already said status is not coverage. This check is **unowned HIGH must not ship**.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
 Open `vulnerable/sast.py`. It returns true for every pair. Tests:
 

@@ -33,7 +33,7 @@ If the pod installs “latest” while `install_ok` is always true, the rule is 
 
 A digest mismatch still has to be denied. A match may still install. Generating an SBOM without a digest check leaves `install_ok("aaa","bbb")` true. The local check is `test_hash_mismatch_refuses_install` — on a practice, not a live npm.
 
-## Prompt — clinic npm install in a prod pod
+## Write this for a clinic npm install in a prod pod
 
 1. who can act (lookalike / compromised maintainer — not a live clinic registry attack);
 2. what you trust (digest equality is the promise; SBOM / provenance / Dependabot are not);

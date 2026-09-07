@@ -32,7 +32,7 @@ If delete only hits the patient row, the card still retains. An HTTP 200 on `/pa
 
 After patient delete, appointment-card notes and the analytics export still have to be None. Copying a delete handler that only drops the patient row leaves the card unused as a copy. The local check is `test_deleted_account_leaves_no_analytics_body` plus the search-copy deny — on local files, not a live warehouse.
 
-## Prompt — leftover card notes
+## Write this for leftover card notes
 
 1. who can act (insider analytics; partner CSV — **not** a live clinic);
 2. what you trust (which delete path is trusted; the contract PDF is not);

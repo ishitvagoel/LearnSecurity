@@ -7,7 +7,7 @@
 
 Review `labs/3.4/3.4-lab/vulnerable/` as a change to notes-app share. Check whether eight `add_share` calls still leave `last > 5`.
 
-You already ran `test_share_cap_is_enforced`. A comment “will cap later” is not.
+A comment “will cap later” is not a pass on `test_share_cap_is_enforced`.
 
 ## Picture: cap in React only
 

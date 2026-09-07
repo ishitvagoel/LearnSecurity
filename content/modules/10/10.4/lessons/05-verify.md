@@ -28,7 +28,7 @@ If both pass, the test is not looking at prod plus debug.
 | Abuse | Unsure flags are not a production boot (fail closed; leftover if not in this check) |
 | Not claimed | Live compose; a canary; an assurance gate; other flags |
 
-The test `test_prod_debug_must_not_boot` is there so always-true `boot_ok` cannot sneak through.
+The test `test_prod_debug_must_not_boot` is there so always-true `boot_ok` still fails.
 
 Honest prod without debug may pass on both implementations. That does not excuse the prod-plus-debug deny test. If the broken files do not fail `test_prod_debug_must_not_boot`, the lab is miswired — fix the wiring, not the assertion.
 

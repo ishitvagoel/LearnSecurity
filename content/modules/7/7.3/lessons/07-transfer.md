@@ -32,7 +32,7 @@ If the callback is TLS-terminated and address-range-allow-listed while `accept` 
 
 An empty sig still has to be false. A matching HMAC over the same raw body may still be true. Terminating TLS and allow-listing the vendor without a missing-sig test leaves `accept("", ...)` true. The local check is `test_missing_signature_is_rejected` — on a practice, not a live lab vendor POST.
 
-## Prompt — clinic lab-result webhook
+## Write this for a clinic lab-result webhook
 
 **Product sketch:** EHR-lite `POST /lab-results` behind TLS, IP-allow-listed to “the lab vendor,” no MAC.
 

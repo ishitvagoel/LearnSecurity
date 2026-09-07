@@ -30,7 +30,7 @@ The broken files (`--impl vulnerable`) prefer `body["tenant"]`. That is extra wr
 
 Isolation of the object and the company. An earlier topic already said the object id is not the grant; this rule is **the company context is not a client field**. This site does not mark you as finished.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
 Open `vulnerable/rls.py`. It returns the body company when present. Tests:
 

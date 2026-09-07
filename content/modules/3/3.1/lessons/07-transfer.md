@@ -29,7 +29,7 @@ flowchart LR
 
 Two classes on one card is the point.
 
-## Prompt — clinic booking card
+## Write this for a clinic booking card
 
 1. who can act (operator with logs; vendor with the drain; another company on shared observability — **not** a live clinic);
 2. what you trust (which logging API; the spreadsheet and the privacy policy are not);

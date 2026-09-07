@@ -35,7 +35,7 @@ An unmapped HIGH still has to be denied. A mapped HIGH may still ship. Enabling 
 
 Also name SCA: a CVE versus a function you actually call.
 
-## Prompt — clinic, fifty unmapped HIGHs
+## Write this for a clinic with fifty unmapped HIGHs
 
 1. who can act (alert fatigue — not a live clinic);
 2. what you trust (the mapping check is the promise; the dashboard and a maturity score are not);

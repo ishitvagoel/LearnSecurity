@@ -7,7 +7,7 @@
 
 Review `labs/8.1/8.1-lab/vulnerable/` as a change to the notes app’s Android export. Check whether `allow_export({"integrity": "ok"}, "fail")` still returns true.
 
-You already ran `test_client_integrity_claim_is_not_authorization`. A comment “we will attest later” is not. A sticker about a mobile checklist is not this review.
+A comment “we will attest later” is not a pass on `test_client_integrity_claim_is_not_authorization`. A sticker about a mobile checklist is not this review.
 
 ## Picture: if integrity==ok: export
 

@@ -33,7 +33,7 @@ If DELETE returns 200 while `read` ignores grants, the rule is gone. A scanner, 
 
 B after revoke denied, A still reads, B before revoke still reads. Adding DELETE without consulting grants leaves `read` returning the body. The local check is `test_revoked_share_cannot_read` — on a practice, not a live tenant.
 
-## Prompt — clinic revoke a guardian
+## Write this for a clinic revoke a guardian
 
 1. who can act (former guardian with a cached chart id — not a live clinic attack);
 2. what you trust (owner-or-grant on every read is the promise; scanner, YAML pack, and HTTP 200 are not);

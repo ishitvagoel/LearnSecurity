@@ -28,7 +28,7 @@ If both pass, the test is not looking at header versus socket.
 | Failure | unknown scheme does not count as https |
 | Not claimed | Certificate checks; mutual TLS; pinning; encrypted client hello |
 
-The test `test_client_forwarded_proto_is_not_tls` calls `channel_is_https` with header https and socket http. That check is there so a client header counted as TLS cannot sneak through.
+The test `test_client_forwarded_proto_is_not_tls` calls `channel_is_https` with header https and socket http. That check is there so a client header counted as TLS still fails.
 
 A test that only asserts the site loads on port 443 is not this topic’s evidence. A test that only greps `https` in a dashboard without calling `channel_is_https` on the mismatch is not this topic’s evidence. This practice never opens a live load balancer.
 

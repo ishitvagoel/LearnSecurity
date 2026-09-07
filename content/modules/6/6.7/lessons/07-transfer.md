@@ -32,7 +32,7 @@ If “Export all” is a disabled button in the browser while the server `allow`
 
 The fourth export still has to be false. The third may still be true. Rate-limiting at the edge without a per-person fourth-export test leaves `allow(4)` true. The local check is `test_fourth_export_is_denied` — on a practice, not a live clinic load test.
 
-## Prompt — clinic bulk-export
+## Write this for a clinic bulk-export
 
 **Product sketch:** a small clinic app with an “Export all” button that is disabled in the browser.
 

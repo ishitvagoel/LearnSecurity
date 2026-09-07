@@ -28,7 +28,7 @@ If both pass, the test is not looking at digest equality.
 | Abuse | Unsure hashes are deny (fail closed) |
 | Not claimed | Live npm; provenance builders; the ship gate; that the pin is benign |
 
-The test `test_hash_mismatch_refuses_install` is there so always-true `install_ok` cannot sneak through.
+The test `test_hash_mismatch_refuses_install` is there so always-true `install_ok` still fails.
 
 Honest matching hashes may pass on both implementations. That does not excuse the mismatch deny test. If the broken files do not fail `test_hash_mismatch_refuses_install`, the lab is miswired — fix the wiring, not the assertion.
 

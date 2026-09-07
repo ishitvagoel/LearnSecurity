@@ -28,7 +28,7 @@ If both pass, the test is not looking at Base64 decode of `protect("secret")`.
 | Failure | If the library is missing, refuse the write — do not store plaintext |
 | Not claimed | Real AES-GCM; key storage; nonce uniqueness |
 
-The test `test_protect_is_not_mere_encoding` is there so reversible encoding cannot sneak through.
+The test `test_protect_is_not_mere_encoding` is there so reversible encoding still fails.
 
 A test that only greps `AES` in a comment without decoding `protect("secret")` is not this topic's evidence. This practice never opens a live column.
 

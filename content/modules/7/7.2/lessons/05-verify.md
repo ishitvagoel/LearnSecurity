@@ -26,7 +26,7 @@ If both pass, the check is not looking at the field table.
 | Service | service × `secret_internal` true |
 | Not claimed | object×company (4.4); extra-key writes (7.1); advanced cache leftover |
 
-The checks live in `labs/7.2/7.2-lab/tests/test_property.py`. `test_member_cannot_resolve_internal_field` is there so a dump that always returns true cannot sneak through. `test_member_can_resolve_display_name` is the honest path.
+The checks are in `labs/7.2/7.2-lab/tests/test_property.py`. `test_member_cannot_resolve_internal_field` is there so a dump that always returns true still fails. `test_member_can_resolve_display_name` is the honest path.
 
 ```text
 python3 -m pytest labs/7.2/7.2-lab/tests --impl vulnerable

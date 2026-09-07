@@ -32,7 +32,7 @@ If the importer GETs whatever URL the form posted, the check is gone. FastAPI, a
 
 Link-local and loopback still have to be false; only the named lab (or clinic) host on https may be true. Switching the importer to HTTPS without a host allow-list leaves the server as deputy. The local check is `test_link_local_metadata_is_denied` — on a practice, not a live PDF or metadata endpoint.
 
-## Prompt — clinic fetch of a lab-result PDF
+## Write this for a clinic fetch of a lab-result PDF
 
 1. who can act (URL field — not a live clinic or cloud metadata probe);
 2. what you trust (parsed host allow-list; “https” prefix is not);

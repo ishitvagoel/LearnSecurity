@@ -32,7 +32,7 @@ Member × SSN still has to be false. Member × display name may still be true. H
 | Server role × field is what you trust | Same; UI omit and UUID are not |
 | Search / CSV leftover | Search snippets, CSV, later workers, stale serializer cache |
 
-## Prompt — clinic member cannot resolve SSN
+## Write this for a clinic member cannot resolve SSN
 
 1. who can act (clinician session selecting extra fields — not a live clinic);
 2. what you trust (server role×field is what you trust; UI omit and UUID are not);

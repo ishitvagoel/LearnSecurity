@@ -28,7 +28,7 @@ If both pass, the test is not looking at B after revoke.
 | Normal | B before revoke → body (may pass on both) |
 | Not claimed | live clinic; an assurance gate; worker or cache wipe |
 
-The test `test_revoked_share_cannot_read` is there so no-op `revoke` cannot sneak through. `conftest.py` calls `reset()` so grant state does not leak.
+The test `test_revoked_share_cannot_read` is there so no-op `revoke` still fails. `conftest.py` calls `reset()` so grant state does not leak.
 
 Honest owner-after-revoke and share-before-revoke may pass on both implementations. That does not excuse the B-after-revoke deny test. If the broken files do not fail `test_revoked_share_cannot_read`, the lab is miswired — fix the wiring, not the assertion.
 

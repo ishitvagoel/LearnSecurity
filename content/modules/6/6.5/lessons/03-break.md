@@ -31,7 +31,7 @@ The broken files show **cause** (the server would dial whoever the URL names). T
 
 Use an allow-list of protocols, hosts, paths, and ports before calling another service. This week's check is the predicate, not a live fetch. A famous-bugs nickname for server-side requests is awareness after the cause, not that check.
 
-## What to look at — cause, not a fetch
+## What to look at: the cause, not a fetch
 
 Open `vulnerable/ssrf.py`. It returns true for any `http`/`https` scheme. Tests:
 

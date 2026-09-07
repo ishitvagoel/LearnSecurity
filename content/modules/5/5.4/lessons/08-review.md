@@ -7,7 +7,7 @@
 
 Review `labs/5.4/5.4-lab/vulnerable/` as a change to notes-app channel binding. Check whether `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` is still true.
 
-You already ran `test_client_forwarded_proto_is_not_tls`. A comment “will bind the proxy later” is not.
+A comment “will bind the proxy later” is not a pass on `test_client_forwarded_proto_is_not_tls`.
 
 ## Picture: problems to find (name them yourself)
 

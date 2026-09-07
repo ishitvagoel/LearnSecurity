@@ -7,7 +7,7 @@
 
 Review `labs/10.2/10.2-lab/vulnerable/` as a change to the notes app’s CI install check. Check whether `install_ok("aaa", "bbb")` still returns true.
 
-Start at `install_ok` and the two hash strings, not at a scanner color or an SBOM screenshot. You already ran `test_hash_mismatch_refuses_install`. A comment “will pin later” is not.
+Start at `install_ok` and the two hash strings, not at a scanner color or an SBOM screenshot. A comment “will pin later” is not a pass on `test_hash_mismatch_refuses_install`.
 
 ## Picture: install_ok true on hash mismatch
 

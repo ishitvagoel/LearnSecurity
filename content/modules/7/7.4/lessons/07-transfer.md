@@ -32,7 +32,7 @@ If overnight export copies the clinician cookie into the task while `exporter` p
 
 A leftover session still has to be `None`. `service=worker-sc` may still be allowed. Running on the hospital VLAN with “zero trust enabled” without a leftover-session deny test leaves `exporter({user_session: alice})` succeeding. The local check is `test_user_session_is_not_worker_identity` — on a practice, not a live broker attach.
 
-## Prompt — clinic batch-export worker
+## Write this for a clinic batch-export worker
 
 **Product sketch:** a small clinic app with “Export overnight” that copies the clinician cookie into the task so “the job knows who asked.”
 

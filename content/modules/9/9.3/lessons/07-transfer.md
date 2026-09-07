@@ -33,7 +33,7 @@ If GET as owner returns 200 while the suite never asserts the other clinician, t
 
 200-only is still not a security test. A named what-must-not-happen may still count. Adding `test_get_patient_200` as “the security test” leaves `is_security_test({status_asserted: True})` true. The local check is `test_http_200_only_is_not_a_security_test` — on a practice, not a live clinic.
 
-## Prompt — clinic test_get_patient_200
+## Write this for a clinic test_get_patient_200
 
 1. who can act (another clinician’s token — not a live clinic);
 2. what you trust (named-what must not happen tests are the promise; coverage percent and testing-guide ticks are not);

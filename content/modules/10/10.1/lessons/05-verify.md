@@ -28,7 +28,7 @@ If both pass, the test is not looking at `threat_model`.
 | Abuse | Unsure or empty ids are deny (fail closed; leftover if not in this check) |
 | Not claimed | A live GitHub org; Gate 10; a maturity score; that TM-12 covers this change |
 
-The test `test_merge_requires_threat_model_id` is there so always-true `merge_ok` cannot sneak through.
+The test `test_merge_requires_threat_model_id` is there so always-true `merge_ok` still fails.
 
 Honest `{"threat_model": "TM-12"}` may pass on both implementations. That does not excuse the empty-change deny test. If the broken files do not fail `test_merge_requires_threat_model_id`, the lab is miswired — fix the wiring, not the assertion.
 

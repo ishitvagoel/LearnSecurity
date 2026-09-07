@@ -25,7 +25,7 @@ If both pass, the check is not looking at Report-Only.
 | Normal | enforcing CSP → may count (may pass on both) |
 | Not claimed | a live script hunt; Helmet; check-in 7; that encoding exists |
 
-The checks live in `labs/E2/e2-lab/tests/test_property.py`. `test_report_only_is_not_enforcement` is there so Report-Only-as-on cannot sneak through.
+The checks are in `labs/E2/e2-lab/tests/test_property.py`. `test_report_only_is_not_enforcement` is there so Report-Only-as-on still fails.
 
 ```text
 python3 -m pytest labs/E2/e2-lab/tests --impl vulnerable

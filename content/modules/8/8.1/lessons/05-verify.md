@@ -28,7 +28,7 @@ If both pass, the check is not looking at the client boolean.
 | Extra | missing client claim, attest fail → false (`test_missing_client_claim_does_not_authorize`) |
 | Not claimed | emulator farms; 4.4 object grant; live Play; platform integrity on a physical phone |
 
-The checks live in `labs/8.1/8.1-lab/tests/test_property.py`. `test_client_integrity_claim_is_not_authorization` is there so a client boolean that authorizes export cannot sneak through.
+The checks are in `labs/8.1/8.1-lab/tests/test_property.py`. `test_client_integrity_claim_is_not_authorization` is there so a client boolean that authorizes export still fails.
 
 ```text
 python3 -m pytest labs/8.1/8.1-lab/tests --impl vulnerable

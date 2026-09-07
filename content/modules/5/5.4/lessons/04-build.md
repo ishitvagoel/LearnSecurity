@@ -20,7 +20,7 @@ flowchart TD
 
 The repaired files are `server_scheme == "https"`. Production still needs a bound load-balancer identity if you end TLS at the load balancer — that peer is what you trust, the header name is not. Pinning is leftover (later on phones), not a universal rule. Mutual TLS is a named leftover for service identity, not this header rule.
 
-TLS has to have no cleartext fallback. This week's check is about the scheme check.
+TLS has to have no cleartext fallback. This week's check looks at the scheme check.
 
 ## What the repaired files must show
 

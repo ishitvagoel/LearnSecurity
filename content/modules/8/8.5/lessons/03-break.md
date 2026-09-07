@@ -32,7 +32,7 @@ You do not need an emulator. You must not call a crash vendor. The substring in 
 
 The log lesson (3.1) already refused bodies in logs. This check is **the mobile telemetry place**. The store form discloses. It does not redact.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
 Open `vulnerable/crash.py`. It returns a dict with `'note': note_body`. Tests:
 

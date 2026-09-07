@@ -28,7 +28,7 @@ If both pass, the test is not looking at concatenated SQL.
 | Failure | If you cannot bind, do not query |
 | Not claimed | ORDER BY identifiers; live row-level rules; NoSQL operators |
 
-The test `test_query_is_bound_not_concatenated` is there so a concatenated `str` cannot sneak through. The hostile `note_id` in that test is **data** for the params tuple — a class of extra grammar, not a cookbook to paste into a live query.
+The test `test_query_is_bound_not_concatenated` is there so a concatenated `str` still fails. The hostile `note_id` in that test is **data** for the params tuple — a class of extra grammar, not a cookbook to paste into a live query.
 
 A test that only asserts HTTP 200 is not this topic's evidence. A test that only greps `%s` inside a concatenated string without asserting the tuple shape is not this topic's evidence. This practice never opens a live database.
 

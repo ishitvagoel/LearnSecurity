@@ -22,7 +22,7 @@ flowchart TD
 
 The repaired files require membership in `{"app"}`. Production still needs that allow-list to be the *right* Role — `"app"` that can still list all Secrets is a lying least-privilege. A restricted pod profile remains a sibling grain. An outbound allow-list (the metadata hop) is not this check. Documented connection and retry toward the cluster API is extra, advanced work.
 
-Those accounts should be least-privileged. This week's check is about cluster-admin.
+Those accounts should be least-privileged. This week's check looks at cluster-admin.
 
 ## What the repaired files must show
 

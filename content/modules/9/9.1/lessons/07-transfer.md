@@ -33,7 +33,7 @@ If the HIPAA column is Done while `covered` only matches `req`, the rule is gone
 
 Status-only still is not coverage. An isolation-assert may still count. Marking HIPAA isolation done without an isolation assert leaves `covered("AUTHZ-1", status_only)` true. The local check is `test_status_only_row_is_not_coverage` — on a practice, not a live governance product.
 
-## Prompt — clinic HIPAA done column
+## Write this for a clinic HIPAA done column
 
 1. who can act (optimistic status column — not a live hospital);
 2. what you trust (the coverage check is the promise; checklist membership is not);

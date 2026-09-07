@@ -32,7 +32,7 @@ The broken files show **cause** (wrong lookup key), not a dump of another compan
 
 A scanner “IDOR” name is a weakness label, not that rule.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
 Open `vulnerable/grant.py`. It never compares `note_id` or company. Tests require n2, n3, and eve×n1 to stay false, and honest n1 / owner-n2 to stay true. Record `test_grant_on_n1_is_not_grant_on_n2` first.
 

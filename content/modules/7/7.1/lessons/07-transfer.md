@@ -28,7 +28,7 @@ Renaming `is_admin` to `is_staff` is not transfer. If “Edit profile” omits t
 | Server `ALLOWED` is what you trust | Same; SPA omit-checkbox and OpenAPI are not |
 | GraphQL / gRPC leftover | Mutation arguments and unknown fields — name them, do not run them here |
 
-## Prompt — clinic PATCH is_staff
+## Write this for a clinic PATCH is_staff
 
 1. who can act (authenticated clinician session sending extra JSON — not a live clinic);
 2. what you trust (server `ALLOWED` is what you trust; SPA omit-checkbox and OpenAPI are not);

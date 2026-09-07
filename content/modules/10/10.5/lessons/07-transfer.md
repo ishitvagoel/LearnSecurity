@@ -34,7 +34,7 @@ If alerts stopped while `close_incident` is always true, the rule is gone. Pagin
 
 A recovery todo still has to be denied, and a note body still has to stay out. Done plus ok may still close. Wiring a paging product without the conjunction leaves `close_incident` true on todo. The local check is `test_cannot_close_without_recovery` — on a practice, not a live SIEM.
 
-## Prompt — clinic close ticket when SIEM is green
+## Write this for a clinic close ticket when SIEM is green
 
 1. who can act (optimistic closer / still-in actor — not a live clinic SIEM attack);
 2. what you trust (recovery done and no `note_body` is the promise; SIEM, paging, known-exploited list, and untested backups are not);

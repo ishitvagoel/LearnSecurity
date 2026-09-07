@@ -7,7 +7,7 @@
 
 Review `labs/9.5/9.5-lab/vulnerable/` as a change to the notes app's close gate. Check whether `close_finding({"retest": None})` still returns true.
 
-Start at `close_finding` and the missing-retest row, not at a scanner color or a PDF screenshot. You already ran `test_cannot_close_without_retest`. A comment "will retest later" is not.
+Start at `close_finding` and the missing-retest row, not at a scanner color or a PDF screenshot. A comment "will retest later" is not a pass on `test_cannot_close_without_retest`.
 
 ## Picture: close without retest
 

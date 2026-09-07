@@ -30,7 +30,7 @@ The broken files show **cause** (the path was trusted). Do not POST anything exc
 
 Use a standard-library MAC. Module 5.4 already said TLS proves a hop; this rule is **whether the message came from the provider**. HMAC here is a teaching stand-in, not “we are Stripe.” A famous-bugs nickname for unsafe consumption of APIs is awareness after the cause, not that check.
 
-## What to look at — cause, not a live POST
+## What to look at: the cause, not a live POST
 
 Open `vulnerable/hook.py`. It returns true for every triple. Tests:
 

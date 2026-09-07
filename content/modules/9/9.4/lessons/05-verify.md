@@ -28,7 +28,7 @@ If both pass, the test is not looking at the empty map.
 | Abuse | Suppression with no owner is still deny (leftover if not in this check) |
 | Not claimed | A real GitHub tenant; the verification gate; a maturity score; that the mapped requirement is the right row |
 
-The test `test_unmapped_high_blocks_ship` is there so always-true `ship_ok` cannot sneak through.
+The test `test_unmapped_high_blocks_ship` is there so always-true `ship_ok` still fails.
 
 Honest mapped HIGH may pass on both implementations. That does not excuse the empty-map deny test. If the broken files do not fail `test_unmapped_high_blocks_ship`, the lab is miswired — fix the wiring, not the assertion.
 

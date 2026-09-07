@@ -35,7 +35,7 @@ An empty change still has to be denied. TM-12 may still merge. Turning on CODEOW
 
 Also name the exception path (E6): an exception still names the missing threat model and when it expires.
 
-## Prompt — clinic HIPAA training as merge
+## Write this for a clinic HIPAA training as merge
 
 1. who can act (schedule pressure — not a live clinic);
 2. what you trust (the merge check is the promise; CODEOWNERS, training, and a maturity score are not);

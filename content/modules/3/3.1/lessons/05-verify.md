@@ -28,7 +28,7 @@ If both pass, the test is not looking at the body substring.
 | Abuse | Unsure values are not logged (fail closed; leftover if not in this check) |
 | Not claimed | All places covered; production logs clean; exception middleware safe; access logs safe |
 
-The test `test_note_body_is_not_logged` calls `log_event` with the synthetic body and asserts the substring is absent. That check is there so a confidential field in this log cannot sneak through.
+The test `test_note_body_is_not_logged` calls `log_event` with the synthetic body and asserts the substring is absent. That check is there so a confidential field in this log still fails.
 
 A test that only asserts HTTP 200 is not this topic's evidence. A test that only greps `Confidential` in a spreadsheet without calling `log_event` is not this topic's evidence. This practice never opens a production drain.
 

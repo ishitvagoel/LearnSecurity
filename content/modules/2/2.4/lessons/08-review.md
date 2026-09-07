@@ -7,7 +7,7 @@
 
 Review `labs/2.4/2.4-state-time/vulnerable/` as a change to notes-app share. Check whether a second `share_note` with `k1` still appends a row.
 
-You already ran `test_retry_does_not_duplicate_side_effect`. A comment “will add remembering later” is not.
+A comment “will add remembering later” is not a pass on `test_retry_does_not_duplicate_side_effect`.
 
 ## Picture: INSERT share on every POST
 

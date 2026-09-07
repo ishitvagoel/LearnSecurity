@@ -24,7 +24,7 @@ flowchart TD
 
 The repaired files pop the session and check `DELETED` first. Production should also kill refresh tokens, worker `user_id`, and a phone's offline cache. Self-contained tokens need a denylist or a per-user not-before. Disabled and deleted are different product states. Both must fail `session_valid` in this week's practice.
 
-All active sessions have to be killed. This week's check is about one synthetic cookie, not proofing who someone is, and not a new login factor.
+All active sessions have to be killed. This week's check looks at one synthetic cookie, not proofing who someone is, and not a new login factor.
 
 ## What the repaired files must show
 

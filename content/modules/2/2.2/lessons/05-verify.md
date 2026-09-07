@@ -30,7 +30,7 @@ If both pass, the check is not looking at the cross-company get.
 | When things break | Unknown company does not share the slot |
 | Not claimed | Live CDN `Vary`; browser `no-store`; DNS authenticity |
 
-The checks are `test_same_tenant_cache_hit` and `test_other_tenant_does_not_receive_cached_body`. They observe bodies, not HTTP 200. That check is there so a company B get of `tenant-A-note` cannot sneak through as a cache hit.
+The checks are `test_same_tenant_cache_hit` and `test_other_tenant_does_not_receive_cached_body`. They observe bodies, not HTTP 200. That check is there so a company B get of `tenant-A-note` does not pass as a cache hit.
 
 Map each check to a rule from the request-path map. Do not paste keys. If the broken files do not fail the cross-company get, the practice files are miswired — fix the wiring, not the assertion.
 

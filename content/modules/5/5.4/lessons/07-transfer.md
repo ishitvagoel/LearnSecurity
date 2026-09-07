@@ -31,7 +31,7 @@ If the page URL is https and the API socket is http, the rule is gone. A server 
 
 Header https plus socket http still has to be false. Enabling a CDN “HTTPS only” tile while the app trusts `X-Forwarded-Proto` from anyone leaves the confused deputy. The local check is `test_client_forwarded_proto_is_not_tls` — on a practice, not a live clinic.
 
-## Prompt — clinic page vs API socket
+## Write this for a clinic page vs API socket
 
 1. who can act (cleartext client setting Forwarded-Proto — **not** a live clinic);
 2. what you trust (which socket or bound load balancer is trusted; the dashboard toggle is not);

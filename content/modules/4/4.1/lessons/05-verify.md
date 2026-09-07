@@ -28,7 +28,7 @@ If both pass, the test is not looking at `session_valid` after delete.
 | Failure | Resurrected map entry still denied (`test_deleted_denies_even_if_session_map_still_has_row`) |
 | Not claimed | Identity-provider logout; refresh tokens; phone cache; token denylist complete |
 
-The test `test_deleted_user_session_is_dead` calls `delete_user` then `session_valid`. That check is there so a leftover session that still works cannot sneak through.
+The test `test_deleted_user_session_is_dead` calls `delete_user` then `session_valid`. That check is there so a leftover session that still works still fails.
 
 A test that only asserts HTTP 200 is not this topic's evidence. A test that only greps `DELETED.add` without calling `session_valid` after `delete_user` is not this topic's evidence. This practice never opens a live identity provider.
 

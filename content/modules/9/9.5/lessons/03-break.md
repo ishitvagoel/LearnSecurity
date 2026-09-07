@@ -30,7 +30,7 @@ You do not need a testing-guide list. You must not pentest a public host. The tr
 
 The isolation lesson already said HTTP 200 is not a security test. This check is **the same isolation check must pass before close**.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
 Open `vulnerable/pentest.py`. It returns true for every dict. Tests:
 

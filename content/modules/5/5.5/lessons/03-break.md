@@ -32,7 +32,7 @@ The broken files show **cause** (data mixed into SQL grammar), not a dump of ano
 
 Use parameterized queries. A scanner name for this family is a weakness label, not that check. The test uses a **class** of hostile note-id text — punctuation the parser would treat as extra grammar. Treat it as data for the params tuple. Do not paste it into notes as a cookbook.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
 Open `vulnerable/query.py`. It interpolates `tenant` and `note_id` into the SQL text. Tests:
 

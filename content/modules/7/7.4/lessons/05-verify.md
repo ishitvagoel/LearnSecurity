@@ -28,7 +28,7 @@ If both pass, the test is not looking at leftover Alice.
 | Mixed | alice + wrong service → `None` |
 | Not claimed | later originating-subject check (advanced); poison loops; live task library |
 
-The test `test_user_session_is_not_worker_identity` is there so a leftover cookie that becomes the principal cannot sneak through.
+The test `test_user_session_is_not_worker_identity` is there so a leftover cookie that becomes the principal still fails.
 
 A test that only asserts the job was enqueued is not this topic’s evidence. A test that only greps `worker-sc` in a YAML file without calling `exporter({"user_session": "alice", "service": None})` is not this topic’s evidence. This practice never opens a public broker.
 

@@ -31,7 +31,7 @@ You do not need HTTP. You must not hit a live tenant. The body return after revo
 
 Earlier weeks already said check every access. Time, revoke, leftover worker sessions, and phone cache are the other grains. This rule is **the stitch**. This page does not mark you as finished.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
 Open `vulnerable/capstone.py`. It ignores `revoke` and returns the body. Tests:
 

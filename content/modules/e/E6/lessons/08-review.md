@@ -7,7 +7,7 @@
 
 Review `labs/E6/e6-lab/vulnerable/` as a change to the notes app’s leftover-risk register. Check whether `accept_exception({"owner": "", "review_by": None})` still returns true.
 
-Start at `accept_exception` and the empty-owner row, not at a scanner color or a maturity screenshot. You already ran `test_exception_needs_owner_review_and_wcag`. A comment “will add dates later” is not.
+Start at `accept_exception` and the empty-owner row, not at a scanner color or a maturity screenshot. A comment “will add dates later” is not a pass on `test_exception_needs_owner_review_and_wcag`.
 
 ## Picture: accept with empty owner
 

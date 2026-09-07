@@ -7,7 +7,7 @@
 
 Review `labs/4.5/4.5-lab/vulnerable/` as a change to notes-app token acceptance. Check whether `accept_token` still returns true for `aud=other-api`.
 
-You already ran `test_wrong_audience_is_rejected`. A comment “will check aud later” is not.
+A comment “will check aud later” is not a pass on `test_wrong_audience_is_rejected`.
 
 ## Picture: verify signature, skip aud
 

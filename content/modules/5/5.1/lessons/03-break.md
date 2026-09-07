@@ -32,7 +32,7 @@ You do not need a live warehouse query. You must not run one. The leftover still
 
 Documented retention has to be actually carried out. Encrypting a warehouse you still keep is secrecy theater, not this privacy check.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
 Open `vulnerable/lifecycle.py`. `delete_account` only pops `NOTES`. Tests:
 

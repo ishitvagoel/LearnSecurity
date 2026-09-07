@@ -30,7 +30,7 @@ The second what must not happen is **`note_body` in logs** — `test_cannot_clos
 | Normal | done + ok → may close (may pass on both) |
 | Not claimed | live paging; a known-exploited list; an assurance gate; that restore actually ran |
 
-The test `test_cannot_close_without_recovery` is there so always-true `close_incident` cannot sneak through.
+The test `test_cannot_close_without_recovery` is there so always-true `close_incident` still fails.
 
 Honest recovery plus safe logs may pass on both implementations. That does not excuse the two deny tests. If the broken files do not fail `test_cannot_close_without_recovery`, the lab is miswired — fix the wiring, not the assertion.
 

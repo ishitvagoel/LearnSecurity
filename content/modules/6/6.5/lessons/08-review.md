@@ -7,7 +7,7 @@
 
 Review `labs/6.5/6.5-lab/vulnerable/` as a change to notes-app unfurl. Check whether `allowed` is still true for the named link-local metadata URL.
 
-You already ran `test_link_local_metadata_is_denied`. A comment “will allow-list later” is not.
+A comment “will allow-list later” is not a pass on `test_link_local_metadata_is_denied`.
 
 ## Picture: requests.get of the user URL / scheme-only allow
 

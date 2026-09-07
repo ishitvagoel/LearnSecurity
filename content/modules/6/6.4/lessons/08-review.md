@@ -7,7 +7,7 @@
 
 Review `labs/6.4/6.4-lab/vulnerable/` as a change to notes-app uploads. Check whether `resolve("../outside")` still leaves `/tmp/sc-lab`.
 
-You already ran `test_dotdot_does_not_escape_root`. A comment “will canonicalize later” is not.
+A comment “will canonicalize later” is not a pass on `test_dotdot_does_not_escape_root`.
 
 ## Picture: open(user_path) / join without canonicalize
 

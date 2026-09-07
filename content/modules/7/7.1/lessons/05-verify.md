@@ -28,7 +28,7 @@ If both pass, the check is not looking at extra keys.
 | Extra | Unknown keys do not become columns (`test_unknown_key_does_not_appear`) |
 | Not claimed | GraphQL cost; unused methods; production inventory matches OpenAPI |
 
-The checks live in `labs/7.1/7.1-lab/tests/test_property.py`. `test_is_admin_cannot_be_patched` is there so a binder that writes `is_admin` cannot sneak through.
+The checks are in `labs/7.1/7.1-lab/tests/test_property.py`. `test_is_admin_cannot_be_patched` is there so a binder that writes `is_admin` still fails.
 
 ```text
 python3 -m pytest labs/7.1/7.1-lab/tests --impl vulnerable

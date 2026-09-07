@@ -7,7 +7,7 @@
 
 This review is about a notes-app recovery confirm and a “risk register.” Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say which outcome (lockout, shortcut/secrecy, or a missing record) breaks if they ship. Start at the confirm widget and the register row, not at a scanner color or an accessibility badge.
 
-You already ran `test_recovery_control_is_usable_and_accessible`. A comment “will fix accessibility later” is not.
+A comment “will fix accessibility later” is not a pass on `test_recovery_control_is_usable_and_accessible`.
 
 ## Picture: problems to find (name them yourself)
 

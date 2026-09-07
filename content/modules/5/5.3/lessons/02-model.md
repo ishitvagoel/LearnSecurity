@@ -16,7 +16,7 @@ flowchart TD
   Name[api_key] --> Loc[Source vs current]
   Loc --> Owner[On-call]
   Owner --> Rotated[Last rotated]
-  Rotated --> Blast[Tenant blast radius]
+  Rotated --> Blast[How far a tenant break can spread]
 ```
 
 A missing row is how a worker default survives (later topic).

@@ -24,7 +24,7 @@ flowchart LR
 | When things break | Key-store uncertainty does not insert (not in this check; write it as leftover) |
 | Not claimed | Two first writes at the same time solved; worker stale shares gone; awareness-list “compliant”; payments safe |
 
-Lab tests: `test_single_share` and `test_retry_does_not_duplicate_side_effect` in `labs/2.4/2.4-state-time/tests/test_idempotency.py`. The second test calls `share_note` twice with `k1` and expects count 1. That check is there so a second grant cannot sneak through.
+Lab tests: `test_single_share` and `test_retry_does_not_duplicate_side_effect` in `labs/2.4/2.4-state-time/tests/test_idempotency.py`. The second test calls `share_note` twice with `k1` and expects count 1. That check is there so a second grant still fails.
 
 ```text
 python3 -m pytest labs/2.4/2.4-state-time/tests --impl vulnerable

@@ -9,7 +9,7 @@ A new rule can fire a new HIGH after `ship_ok` was “fixed once.” Do not log 
 
 ## Picture: unmapped HIGH is a signal
 
-A blocked ship is something you still have to notice and recover from, not an excuse to quote the finding payload in the paging channel. Notice names the finding id. Recover maps or fixes.
+A blocked ship is something you still have to notice and recover from, not an excuse to quote the finding payload in the paging channel. The notice should name the finding id. Recover maps or fixes.
 
 ```mermaid
 flowchart TD

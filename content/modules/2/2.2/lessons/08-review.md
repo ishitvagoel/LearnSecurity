@@ -7,7 +7,7 @@
 
 This review is about a notes-app edge cache. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say which outcome (company B reading company A’s body) breaks if they ship. Start at the store key, not at a scanner color or an HTTPS checkbox.
 
-Reconstruct whether the store still keys only on path. Compare that with the rule. Write changes a developer can verify. You already ran `test_other_tenant_does_not_receive_cached_body`. A comment “will add Vary later” is not.
+Reconstruct whether the store still keys only on path. Compare that with the rule. Write changes a developer can verify. A comment “will add Vary later” is not a pass on `test_other_tenant_does_not_receive_cached_body`.
 
 ## Picture: problems to find (name them yourself)
 

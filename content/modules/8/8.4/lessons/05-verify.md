@@ -28,7 +28,7 @@ If both pass, the check is not looking at debug-to-prod.
 | Extra | release + fail → false (`test_release_without_attest_is_denied`) |
 | Not claimed | real Play Integrity; R8; live signing; hardware-backed keys |
 
-The checks live in `labs/8.4/8.4-lab/tests/test_property.py`. `test_debug_build_cannot_call_prod_export` is there so an always-true `api_allowed` cannot sneak through.
+The checks are in `labs/8.4/8.4-lab/tests/test_property.py`. `test_debug_build_cannot_call_prod_export` is there so an always-true `api_allowed` still fails.
 
 ```text
 python3 -m pytest labs/8.4/8.4-lab/tests --impl vulnerable

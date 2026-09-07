@@ -26,7 +26,7 @@ flowchart TD
   NewR --> Ev[New evidence: keyboard check, logs without chart text]
 ```
 
-## Prompt A — clinic second factor
+## Write this for a clinic second factor
 
 The second factor is a mouse-only dialog over a patient chart.
 
@@ -39,7 +39,7 @@ Your answer must include:
 - leftover risk (coercion; SMS to a shared phone);
 - whether the human path must meet the web accessibility baseline (yes, as a baseline, not as a full badge).
 
-## Prompt B — banking re-auth
+## Write this for banking re-auth
 
 A bank “fixes” mouse-only by offering support that will read the one-time code aloud. State which who-is-allowed row changed (support × code × read-aloud) and why that is not a usability win.
 

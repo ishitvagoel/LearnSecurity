@@ -28,7 +28,7 @@ If both pass, the test is not looking at cluster-admin.
 | Abuse | Unknown roles still deny (fail closed) |
 | Not claimed | A live managed cluster; a CIS score; an assurance gate; that `"app"` is least privilege |
 
-The test `test_cluster_admin_pod_is_denied` is there so always-true `pod_ok` cannot sneak through.
+The test `test_cluster_admin_pod_is_denied` is there so always-true `pod_ok` still fails.
 
 Honest `"app"` may pass on both implementations. That does not excuse the cluster-admin deny test. If the broken files do not fail `test_cluster_admin_pod_is_denied`, the lab is miswired — fix the wiring, not the assertion.
 

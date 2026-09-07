@@ -34,7 +34,7 @@ If legal said yes while `accept_exception` is always true, the rule is gone. A m
 
 An empty owner still has to be denied. A complete record may still accept. Adding a HIPAA slide without the schema leaves `accept_exception` true on empty owner. The local check is `test_exception_needs_owner_review_and_wcag` — on a practice, not a live governance tool.
 
-## Prompt — clinic HIPAA exception
+## Write this for a clinic HIPAA exception
 
 1. who can act (calendar / silent accept — not a live clinic audit);
 2. what you trust (schema is the promise; maturity score, industry labels, and a pledge are not);

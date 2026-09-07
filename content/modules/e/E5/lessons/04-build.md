@@ -24,7 +24,7 @@ Do not accept “we enabled row-level rules” as membership in the session. Pro
 
 If the body company disagrees with the session, **log** `body_tenant_mismatch` and still use the session.
 
-Isolation has to be enforced. This week's check is about body-vs-session.
+Isolation has to be enforced. This week's check looks at body-vs-session.
 
 ## What the repaired files must show
 

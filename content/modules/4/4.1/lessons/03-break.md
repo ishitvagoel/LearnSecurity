@@ -32,7 +32,7 @@ You do not need a real cookie string. The leftover still returning true *is* the
 
 All active sessions have to be killed when an account is disabled or deleted. `DELETE FROM users` is a profile observation, not that kill.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
 Open `vulnerable/lifecycle.py`. `delete_user` only adds the user to `DELETED`. `session_valid` still returns `SESSIONS.get(user)`. Tests:
 

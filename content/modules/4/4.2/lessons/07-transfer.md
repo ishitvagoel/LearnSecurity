@@ -29,7 +29,7 @@ flowchart LR
 
 Step-up before export must bind origin too, or the second factor is theater. FastAPI, Next.js, and an SSO vendor dashboard do not compare RP ID. A mouse-only “approve” on the real origin still leaves the password leftover if the accessible path is broken. Authenticator guidance still calls OTP phishable even when the real identity provider later accepts it.
 
-## Prompt — clinic SSO and step-up export
+## Write this for a clinic SSO and step-up export
 
 Clinic staff SSO portal. Optionally: step-up for export — still origin-bound?
 

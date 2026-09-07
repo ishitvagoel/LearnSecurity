@@ -33,7 +33,7 @@ If support “needs the last chart” while `crash_report` copies the body, the 
 
 The fake name still has to be absent from the report. The stack may remain. Enabling a crash product and completing the store form without a body-omit test leaves `'name' in str(crash_report(name))` true. The local check is `test_crash_report_omits_note_body` — on a practice, not a live crash project.
 
-## Prompt — clinic crash with a fake patient name
+## Write this for a clinic crash with a fake patient name
 
 1. who can act (crash-platform operator, logcat reader — not a live clinic);
 2. what you trust (redact-before-send is the promise; the store form and a crash product set to automatic are not);

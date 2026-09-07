@@ -7,7 +7,7 @@
 
 Review `labs/7.3/7.3-lab/vulnerable/` as a change to a notes-app billing webhook. Check whether `accept("", "body", "lab-secret")` is still true.
 
-You already ran `test_missing_signature_is_rejected`. A comment “will HMAC later” is not. A famous-bugs ticket is not.
+A comment “will HMAC later” is not a pass on `test_missing_signature_is_rejected`. A famous-bugs ticket is not.
 
 ## Picture: accept always true / process because the path matched
 

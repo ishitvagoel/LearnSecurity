@@ -61,7 +61,7 @@ A settings library reading `.env` does not rotate anything. Vault without a rota
 
 ## Practice
 
-Inventory: name, location, owner, last rotated, blast radius. Then run:
+Inventory: name, location, owner, last rotated, how far a break can spread. Then run:
 
 ```text
 python3 -m pytest labs/5.3/5.3-lab/tests --impl vulnerable

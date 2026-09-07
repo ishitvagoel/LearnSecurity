@@ -30,7 +30,7 @@ The broken files show **cause** (no interpreter question), not an eval hunt. Wha
 
 You need to avoid `eval` and similar dynamic execution. Module 6.1 already said the name is data, not Python grammar. This check is **the merge gate that should have caught it**.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
 Open `vulnerable/review.py`. It returns true for every string. Tests:
 

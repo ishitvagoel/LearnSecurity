@@ -27,7 +27,7 @@ If both pass, the check is not looking at the body on disk.
 | Normal | save `'other'` → not reported as plaintext secret (may pass on both) |
 | Not claimed | Real AES; backup exclusion; screenshot `FLAG_SECURE`; Keystore hardware |
 
-The checks live in `labs/8.2/8.2-lab/tests/test_property.py`. `test_cached_note_is_not_plaintext_on_disk` is there so a text-file cache of `'secret'` cannot sneak through.
+The checks are in `labs/8.2/8.2-lab/tests/test_property.py`. `test_cached_note_is_not_plaintext_on_disk` is there so a text-file cache of `'secret'` still fails.
 
 ```text
 python3 -m pytest labs/8.2/8.2-lab/tests --impl vulnerable

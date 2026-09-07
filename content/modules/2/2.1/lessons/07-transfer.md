@@ -29,7 +29,7 @@ flowchart TD
   Ok -->|yes| AuthZ[Still a who-is-allowed decision]
 ```
 
-## Prompt — clinic REST and GraphQL
+## Write this for a clinic REST and GraphQL
 
 GraphQL and REST both ingest the same clinic appointment.
 

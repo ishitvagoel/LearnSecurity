@@ -30,7 +30,7 @@ You do not need GitHub. You must not merge in a live org. The true return *is* t
 
 The threat-modeling lessons (3.2) already said how to write the model. This check is **whether a citation exists before merge**. A poster is a belief. It does not put `threat_model` on the change.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
 Open `vulnerable/sdl.py`. It returns true for every dict. Tests:
 

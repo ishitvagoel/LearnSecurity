@@ -28,7 +28,7 @@ If both pass, the test is not looking at a missing sig.
 | Failure | If you cannot name the signature, do not accept |
 | Not claimed | Replay window; parse-before-MAC; 1.2; live Stripe |
 
-The test `test_missing_signature_is_rejected` is there so an always-true `accept` cannot sneak through.
+The test `test_missing_signature_is_rejected` is there so an always-true `accept` still fails.
 
 A test that only asserts HTTP 200 on `/webhook` is not this topic’s evidence. A test that only greps `hmac` in source without calling `accept("", "body", "lab-secret")` is not this topic’s evidence. This practice never POSTs a live webhook.
 

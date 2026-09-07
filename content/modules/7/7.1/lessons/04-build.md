@@ -22,7 +22,7 @@ flowchart TD
 
 The repaired files copy only keys in `ALLOWED`. Production still needs the same matrix restated for GraphQL mutation arguments and gRPC unknown fields (the map page). A denylist of `is_admin` only is not the contract — the next privileged field (`tenant_id`, billing flag) will slip through. Leftover `/v0` handlers are another binder of the same body.
 
-That per-action limit has to be implemented. This week's check is about `is_admin`.
+That per-action limit has to be implemented. This week's check looks at `is_admin`.
 
 ## What the repaired files must show
 

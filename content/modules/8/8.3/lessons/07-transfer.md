@@ -28,7 +28,7 @@ Renaming `as=admin` to `as=doctor` is not transfer. If the kiosk demo uses a ver
 | Server session is what you trust | Same; App Links and https are not identity |
 | WebView / custom-scheme leftover | Same extras family — name them, do not run them here |
 
-## Prompt — clinic deep link as=doctor
+## Write this for a clinic deep link as=doctor
 
 1. who can act (another app on the tablet sending extras — not a live clinic);
 2. what you trust (server session is what you trust; App Links and https are not identity);

@@ -27,7 +27,7 @@ If both pass, the check is not looking at identity keys.
 | Wrong input / abuse | `as=admin` keeps alice; broken files must fail (`test_deeplink_as_param_does_not_switch_user`) |
 | Not claimed | WebView; custom schemes; live OAuth; real `exported` flags |
 
-The checks live in `labs/8.3/8.3-lab/tests/test_property.py`. `test_deeplink_as_param_does_not_switch_user` is there so a link that switches the principal cannot sneak through.
+The checks are in `labs/8.3/8.3-lab/tests/test_property.py`. `test_deeplink_as_param_does_not_switch_user` is there so a link that switches the principal still fails.
 
 ```text
 python3 -m pytest labs/8.3/8.3-lab/tests --impl vulnerable

@@ -30,7 +30,7 @@ You do not need a SIEM. You must not query a live tenant. The true return for re
 
 Earlier lessons already said bodies stay out of logs. This check is **detect without recover is theater**.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
 Open `vulnerable/ir.py`. It returns true for every dict. Tests:
 

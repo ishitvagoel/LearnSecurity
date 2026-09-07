@@ -30,7 +30,7 @@ flowchart TD
 
 You do not need a production drain. The substring in the returned line *is* the leak.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
 Open `vulnerable/classify.py`. `log_event` returns `f"{event}: {note_body}"`. The test asserts the body substring is absent **and** a redaction marker (`redacted` or `confidential`) is present.
 

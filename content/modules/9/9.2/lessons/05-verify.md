@@ -28,7 +28,7 @@ If both pass, the test is not looking at eval-on-user.
 | Failure | If you cannot tell whether the diff grants an interpreter, reject |
 | Not claimed | complete check; other expression languages; live GitHub; `exec(` |
 
-The test `test_eval_on_user_input_is_rejected` is there so always-true `review_ok` cannot sneak through. Do not add a working eval payload to “make the test more real.” The lab string `x = eval(user)` is enough.
+The test `test_eval_on_user_input_is_rejected` is there so always-true `review_ok` still fails. Do not add a working eval payload to “make the test more real.” The lab string `x = eval(user)` is enough.
 
 A test that only greps `eval` in a policy PDF without calling `review_ok("x = eval(user)")` is not this topic’s evidence. This practice never runs eval on live input.
 

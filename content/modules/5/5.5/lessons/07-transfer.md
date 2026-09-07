@@ -32,7 +32,7 @@ If the search box is concatenated into SQL (or into a query language), the check
 
 The lookup helper returns `(sql, params)` (or an ORM bound construct), not a concatenated `str`. Switching to SQLAlchemy while interpolating the box into `text()` leaves the interpreter mixed. The local check is `test_query_is_bound_not_concatenated` — on a practice, not a live clinic system.
 
-## Prompt — clinic search box
+## Write this for a clinic search box
 
 1. who can act (clinician or kiosk user supplying search text — not a live clinic);
 2. what you trust (which API binds values; the ORM brand is not);

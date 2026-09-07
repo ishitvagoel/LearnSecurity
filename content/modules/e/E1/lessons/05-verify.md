@@ -28,7 +28,7 @@ If both pass, the test is not looking at `exec_sql`.
 | Abuse | Unknown tools still deny (fail closed) |
 | Not claimed | A live vendor API; a famous-bugs dashboard; an assurance gate; that `search_notes` is encoded |
 
-The test `test_exec_sql_tool_is_denied` is there so always-run `run_tool` cannot sneak through.
+The test `test_exec_sql_tool_is_denied` is there so always-run `run_tool` still fails.
 
 Honest `search_notes` may pass on both implementations. That does not excuse the `exec_sql` deny test. If the broken files do not fail `test_exec_sql_tool_is_denied`, the lab is miswired — fix the wiring, not the assertion.
 

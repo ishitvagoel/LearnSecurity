@@ -7,7 +7,7 @@
 
 This review is about notes-app persistence. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `fetch_sql` still returns a concatenated `str` if they ship. Start at concatenated SQL, not at a scanner color.
 
-You already ran `test_query_is_bound_not_concatenated`. A comment “will parameterize later” is not.
+A comment “will parameterize later” is not a pass on `test_query_is_bound_not_concatenated`.
 
 ## Picture: problems to find (name them yourself)
 

@@ -29,7 +29,7 @@ flowchart TD
 ```mermaid
 flowchart LR
   Pdf[whole checklist PDF] --> Paste[every row marked done]
-  Threat["1.2 isolation"] --> Test[pytest isolation assert]
+  Threat["1.2 isolation"] --> Test[isolation check]
   Paste --> False[false assurance]
 ```
 

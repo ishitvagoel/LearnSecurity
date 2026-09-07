@@ -7,7 +7,7 @@
 
 Review `labs/E4/e4-lab/vulnerable/` as a change to the notes app’s unpacker. Check whether `copy_into(4, b"abcdefgh", 4)` still returns more than 4 bytes.
 
-You already ran `test_copy_does_not_exceed_buffer`. A comment “will bound later” is not.
+A comment “will bound later” is not a pass on `test_copy_does_not_exceed_buffer`.
 
 ## Picture: copy returns full src / declared_len plus 8
 

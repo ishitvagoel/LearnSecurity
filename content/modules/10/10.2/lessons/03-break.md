@@ -30,7 +30,7 @@ You do not need npm. You must not fetch a live package. The true return *is* the
 
 The first lesson already refused a name as a digest. This practice is **whether the check compares bytes**. An SBOM is inventory. It does not compare `aaa` to `bbb`.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
 Open `vulnerable/lock.py`. It returns true for every pair. Tests:
 

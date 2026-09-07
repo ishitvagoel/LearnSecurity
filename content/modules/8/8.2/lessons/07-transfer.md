@@ -28,7 +28,7 @@ Renaming `save_note` to `save_chart` is not transfer. If “available offline”
 | Ciphertext stand-in is what you trust | Same; private folder and fingerprint UI are not |
 | iOS / Electron leftover | Keychain classes and desktop files — name them, do not image them here |
 
-## Prompt — clinic offline chart cache
+## Write this for a clinic offline chart cache
 
 1. who can act (lost clinic tablet / backup — not a live hospital);
 2. what you trust (Keystore-wrapped cache is what you trust; private folder and fingerprint UI are not);

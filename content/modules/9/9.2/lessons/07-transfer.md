@@ -34,7 +34,7 @@ If designers “need expressions” while `review_ok` is always true, the check 
 
 Eval-on-user still has to be rejected. Honest `int(user)` may still pass. Formatting the template without an interpreter question leaves `review_ok` true. The local check is `test_eval_on_user_input_is_rejected` — on a practice, not a live GitHub org.
 
-## Prompt — clinic eval in a report template
+## Write this for a clinic eval in a report template
 
 1. who can act (template author / compromised designer — not a live clinic);
 2. what you trust (review of interpreters is what you trust; formatter “looks good” is not);

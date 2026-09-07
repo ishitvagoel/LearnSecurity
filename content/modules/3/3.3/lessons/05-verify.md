@@ -24,7 +24,7 @@ flowchart LR
 | When things break | migrator cannot SELECT at runtime; connection is not `postgres` |
 | Not claimed | Production row-level security; replica fleet; SQL injection complete |
 
-The checks live in `labs/3.3/3.3-lab/tests/test_property.py`. `test_app_role_cannot_read_other_tenant` is there so a shared app role reading tA as tB cannot sneak through.
+The checks are in `labs/3.3/3.3-lab/tests/test_property.py`. `test_app_role_cannot_read_other_tenant` is there so a shared app role reading tA as tB still fails.
 
 ```text
 python3 -m pytest labs/3.3/3.3-lab/tests --impl vulnerable

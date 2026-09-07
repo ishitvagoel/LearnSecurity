@@ -23,7 +23,7 @@ If the partner-share POST keys only the login cookie, the rule is gone. FastAPI,
 
 A foreign origin without a token still has to be false, and same origin without a token still has to be false. Setting SameSite=Lax without an origin-and-token test leaves leftover cookies as consent. The local check is `test_foreign_origin_post_is_denied` plus `test_same_origin_without_token_is_denied` — on a practice, not a live clinic system.
 
-## Prompt — clinic sketch
+## Write this for a clinic sketch
 
 1. who can act (foreign origin using the victim browser as helper — **not** a live clinic);
 2. what you trust (origin + token are trusted; SameSite is not);

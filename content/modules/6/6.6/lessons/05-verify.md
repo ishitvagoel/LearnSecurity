@@ -28,7 +28,7 @@ If both pass, the test is not looking at the second `t1`. First accept of `t1` m
 | Failure | store error denies (named in review; fail-closed smell) |
 | Not claimed | threaded race; mail delivery; lock semantics |
 
-The test `test_invite_token_is_single_use` is there so a second true cannot sneak through. Sequential calls are enough; do not add a race harness.
+The test `test_invite_token_is_single_use` is there so a second true still fails. Sequential calls are enough; do not add a race harness.
 
 A test that only asserts HTTP 200 on `/accept` is not this topic's evidence. A test that only greps `UNIQUE` without calling `accept("t1")` twice is not this topic's evidence. This practice never opens a live mailer.
 

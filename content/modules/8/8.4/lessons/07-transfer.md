@@ -28,7 +28,7 @@ If testers share the prod API key while `api_allowed` is always true, the rule i
 | Server build-plus-attest is what you trust | Same; R8 and Play App Signing are not |
 | APK inventory leftover (10.2) | Name the list; do not unpack a store APK here |
 
-## Prompt — clinic debug vs prod FHIR
+## Write this for a clinic debug vs prod FHIR
 
 1. who can act (leaked debug APK — not a live hospital);
 2. what you trust (server build-plus-attest is what you trust; R8 and Play App Signing are not);

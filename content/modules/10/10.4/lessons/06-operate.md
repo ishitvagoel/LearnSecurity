@@ -9,7 +9,7 @@ A flag can still flip after `boot_ok` was “fixed once.” Do not log stack tra
 
 ## Picture: an illegal boot is a signal
 
-An illegal boot is something you still have to notice and recover from, not an excuse to quote the stack trace in the paging channel. Notice names env, debug, and deploy. Recover kills the process and rotates secrets that already leaked.
+An illegal boot is something you still have to notice and recover from, not an excuse to quote the stack trace in the paging channel. The notice should name env, debug, and deploy. Recover kills the process and rotates secrets that already leaked.
 
 ```mermaid
 flowchart TD

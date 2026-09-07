@@ -28,7 +28,7 @@ If both pass, the test is not looking at missing retest.
 | Abuse | Missing, fail, or scheduled still deny (fail closed) |
 | Not claimed | A live testing-guide list run; an assurance gate; a severity calculator; that pass hit the same URL |
 
-The test `test_cannot_close_without_retest` is there so always-true `close_finding` cannot sneak through.
+The test `test_cannot_close_without_retest` is there so always-true `close_finding` still fails.
 
 Honest `{retest: "pass"}` may pass on both implementations. That does not excuse the missing-retest deny test. If the broken files do not fail `test_cannot_close_without_retest`, the lab is miswired — fix the wiring, not the assertion.
 

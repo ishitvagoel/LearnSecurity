@@ -28,7 +28,7 @@ If both pass, the test is not looking at the fourth export.
 | Failure | If you cannot read the count, deny |
 | Not claimed | Per-IP fairness; GraphQL; live requests per second |
 
-The test `test_fourth_export_is_denied` is there so an unbounded fourth cannot sneak through.
+The test `test_fourth_export_is_denied` is there so an unbounded fourth still fails.
 
 A test that only asserts HTTP 200 on `/export` is not this topic’s evidence. A test that only greps an edge-proxy keyword without calling `allow(4)` is not this topic’s evidence. This practice never opens a public host.
 

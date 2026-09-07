@@ -22,7 +22,7 @@ This week's practice is this course's local files or official labs. Do not tell 
 ```mermaid
 flowchart TD
   Pdf[assessment PDF] --> Record[evidence of a test]
-  Retest["same isolation pytest pass"] --> Close[may close]
+  Retest["same isolation check"] --> Close[may close]
   Pdf --> NotClose[not close]
 ```
 

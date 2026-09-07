@@ -49,7 +49,7 @@ You do not need a new note id.
 | Why it happens | Policy only in the UI |
 | What has to be true first | `add_share` increments with no cap |
 | Trigger | Eight rapid POSTs or a disabled max (modeled as a loop) |
-| What it costs | Integrity of the share policy; extra readers; larger blast radius |
+| What it costs | Integrity of the share policy; extra readers; more places a break can reach |
 | How you stop it | Check count in the same write as insert; reject the 6th |
 | How you notice | `share_cap_denied`; anomaly on one note |
 | How you recover | Trim extra grants; tell the owner; do not log bodies |

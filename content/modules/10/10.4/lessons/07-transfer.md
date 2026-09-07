@@ -33,7 +33,7 @@ If support asked for five minutes while `boot_ok` is always true, the rule is go
 
 Prod plus debug still has to be denied. Prod without debug may still boot. Setting `NODE_ENV` without that both-at-once check leaves `boot_ok("prod", True)` true. The local check is `test_prod_debug_must_not_boot` — on a practice, not a live host.
 
-## Prompt — clinic Django DEBUG=True
+## Write this for a clinic Django DEBUG=True
 
 1. who can act (anyone who finds `/debug` or an error page — not a live clinic);
 2. what you trust (prod plus debug deny is the promise; `NODE_ENV`, a canary, and IaC are not);

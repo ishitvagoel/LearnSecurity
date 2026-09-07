@@ -31,7 +31,7 @@ The token is never consumed. Sequential double-accept is enough. You do not need
 
 Lock so a limited seat cannot be booked twice. This week's check is sequential consume-once, not a threaded race.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
 Open `vulnerable/invite.py`. It returns true every time. `reset()` exists so tests start clean. `_used` in the broken files is unused. Tests:
 

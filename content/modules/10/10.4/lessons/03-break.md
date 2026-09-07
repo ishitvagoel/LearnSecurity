@@ -30,7 +30,7 @@ You do not need Docker. You must not boot a live host. The true return for `("pr
 
 The secrets lesson already said keep secrets out of traces. This check is **the process must not start**.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
 Open `vulnerable/cfg.py`. It returns true for every pair. Tests:
 

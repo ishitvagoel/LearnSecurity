@@ -1,3 +1,19 @@
+function speakPromptTopic(rest: string): string {
+  if (rest.startsWith("clinic, ")) {
+    return `a clinic with ${rest.slice("clinic, ".length)}`;
+  }
+  if (rest.startsWith("clinic ")) {
+    return `a clinic ${rest.slice("clinic ".length)}`;
+  }
+  if (rest === "clinic") {
+    return "a clinic";
+  }
+  if (rest.startsWith("departing ") || rest.startsWith("React Native")) {
+    return `a ${rest}`;
+  }
+  return rest;
+}
+
 function stripMarks(raw: string): string {
   return raw
     .replace(/\*\*/g, "")
@@ -41,6 +57,7 @@ const HEADING_EXACT: Record<string, string> = {
   Misconceptions: "Common mix-ups",
   "Seeded smells (label them yourself)": "Problems to find (name them yourself)",
   "What to look at — cause, not a trophy": "What to look at: the cause, not a hunt",
+  "What to look at — cause, not a dump": "What to look at: the cause, not a hunt",
   "Signals that do not become a second leak": "Signals that should not become a second leak",
   "Step 2: write cells": "Step 2: write the rules",
   "Step 2: write cells the lab can fail": "Step 2: write the rules the check can fail",
@@ -77,6 +94,17 @@ export function displayHeading(raw: string): string {
       return "Step 1: name the pieces";
     }
     return `Step 1: name ${rest}`;
+  }
+  const promptHeading = text.match(/^Prompt(?: [AB])? — (.+)$/);
+  if (promptHeading) {
+    return `Write this for ${speakPromptTopic(promptHeading[1])}`;
+  }
+  if (text.startsWith("What to look at — cause, not a ")) {
+    const rest = text.slice("What to look at — cause, not a ".length);
+    if (rest === "dump" || rest === "trophy") {
+      return "What to look at: the cause, not a hunt";
+    }
+    return `What to look at: the cause, not a ${rest}`;
   }
   if (text.startsWith("Mental model:")) {
     return `Picture:${text.slice("Mental model:".length)}`;
@@ -193,7 +221,7 @@ export function plainLessonTitle(title: string): string {
   t = t.replace(/\bfixture\b/gi, "practice files");
   t = t.replace(/out_of_scope/g, "out of scope");
   t = t.replace(/phase1_skip_denied/g, "do not skip part 1");
-  t = t.replace(/\bpytest\b/g, "the check");
+  t = t.replace(/\bpytest\b(?!-cov)/g, "the check");
   t = t.replace(
     /bound the export blast radius/gi,
     "limit how far an export break can spread",
@@ -308,8 +336,10 @@ const PROSE_PHRASES: [RegExp, string][] = [
   ],
   [/ The broken files have to fail that case\. The repaired files have to pass it\.?/g, ""],
   [/ is a \*\*what must not happen\*\* (?:check|test|pair): /g, " is there so "],
-  [/ is not allowed to count as a pass/g, " cannot sneak through"],
-  [/ cannot count as a pass/g, " cannot sneak through"],
+  [/ is not allowed to count as a pass/g, " still fails"],
+  [/ cannot count as a pass/g, " still fails"],
+  [/ cannot sneak through as /g, " does not pass as "],
+  [/ cannot sneak through/g, " still fails"],
   [/Ask whether .+? still counts as a pass\. /g, ""],
   [/Ask whether .+? is allowed to count as a pass(?: for [^.]+)?\. /g, ""],
   [/You are here to see that the check treats/g, "Watch the check treat"],
@@ -319,7 +349,8 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/still counts as a passing control/g, "still counts as a pass"],
   [/count as a passing control/g, "count as a pass"],
   [/\bwhat-must-not-happen\b/g, "what must not happen"],
-  [/Practice checks live in /g, "The checks live in "],
+  [/Practice checks live in /g, "The checks are in "],
+  [/The checks live in /g, "The checks are in "],
   [/map-page row/g, "notes for this topic"],
   [/Attacker capability in this lab:/g, "Who could do this:"],
   [/Who can act in this story:/g, "Who could do this:"],
@@ -396,7 +427,8 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/opened a (\d+\.\d+) cell/g, "opened a leftover hole from topic $1"],
   [/\ba (\d+\.\d+) cell\b/g, "a leftover hole from topic $1"],
   [/\bambient authority\b/gi, "leftover permission"],
-  [/\bblast radius\b/gi, "how far a break can spread"],
+  [/a larger blast radius/gi, "more places a break can reach"],
+  [/larger blast radius/gi, "more places a break can reach"],
   [/\battack surfaces?\b/gi, "ways in"],
   [/\bTop 10\b/g, "a famous-bugs list"],
   [/\bawareness lists?\b/gi, "famous-bugs lists"],
@@ -404,12 +436,14 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/\bthe TCB\b/g, "what you trust"],
   [/\bTCB\b/g, "what you trust"],
   [/The local pytest analogue is /g, "The local check is "],
-  [/ is that sentence for /g, " covers "],
+  [/ is that sentence for /g, " looks at "],
   [/This pytest is /g, "This week's check is "],
-  [/This week's pytest is that sentence for /g, "This week's check covers "],
+  [/This week's pytest is that sentence for /g, "This week's check looks at "],
   [/name the pytest cases/g, "name the checks"],
   [/name pytest cases/g, "name the checks"],
-  [/The check below is that sentence for /g, "This week's check covers "],
+  [/The check below is that sentence for /g, "This week's check looks at "],
+  [/This week's check covers /g, "This week's check looks at "],
+  [/This week's check is about /g, "This week's check looks at "],
   [/The notes-app sentence was: /g, "On the notes app, "],
   [/The course sentence was: /g, "In this course, "],
   [/Do not answer with [^.]+ as the definition of security\. ?/g, ""],
@@ -517,12 +551,16 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/The folder (`[^`]+`) is the change\./g, ""],
   [/Treat the files in (`[^`]+`) as the pull request\./g, ""],
   [
-    /The check you already ran \((`[^`]+`)\) is the rule (?:test|check)\./g,
-    "You already ran $1.",
+    /You already ran (`[^`]+`)\. A (comment|banner) ([“"][^“”"]+[”"]) is not\./g,
+    "A $2 $3 is not a pass on $1.",
   ],
-  [/You already ran (`[^`]+`) — that is the rule\./g, "You already ran $1."],
-  [/Notice names the event\./g, ""],
-  [/Name the event when you notice it\./g, ""],
+  [
+    /The check you already ran \((`[^`]+`)\) is the rule (?:test|check)\./g,
+    "$1 is the check.",
+  ],
+  [/You already ran (`[^`]+`) — that is the rule\./g, "$1 is the check."],
+  [/Notice names ([^.]+)\./g, "The notice should name $1."],
+  [/Name the event when you notice it\./g, "The notice should name the event."],
   [/The ship gate stays not finished\./g, "This page does not finish the ship check-in."],
   [
     /Claiming you finished ([^.]+) from this page\./g,
@@ -582,7 +620,7 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/\bthis pytest\b/gi, "this check"],
   [/\bthe pytest\b/gi, "the check"],
   [/\bpytest cases\b/gi, "checks"],
-  [/\bpytest\b/g, "the check"],
+  [/\bpytest\b(?!-cov)/g, "the check"],
   [/\bthis cell is not\b/gi, "this rule is not"],
   [/This cell is/g, "This rule is"],
   [/\bthis cell\b/gi, "this rule"],
@@ -605,6 +643,7 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/\bWSTG\b/g, "the testing guide"],
   [/\bLO-\d+\b/g, "a later page"],
   [/\bWhat graders reject\b/g, "What is not good enough"],
+  [/\bthe lab oracle\b/gi, "what this local check looks at"],
   [/\bthe lab's oracle\b/gi, "what this check looks at"],
   [/\bthis lab's oracle\b/gi, "what this check looks at"],
   [/\boracle\b/gi, "check"],

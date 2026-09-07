@@ -30,7 +30,7 @@ You do not need a language model. You must not call a live model. The ran-string
 
 The interpreter lesson already said a string is not a safe argv. This check is **the same idea with the model as an untrusted client**.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
 Open `vulnerable/tools.py`. It returns `ran {name}` for every name. Tests:
 

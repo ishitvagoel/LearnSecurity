@@ -28,7 +28,7 @@ If both pass, the test is not looking at link-local.
 | Failure | If you cannot name the host, do not fetch |
 | Not claimed | Live fetch; DNS rebinding; redirects; IPv6 |
 
-The test `test_link_local_metadata_is_denied` is there so a scheme-only allow cannot sneak through. The destination is a **string** in the practice files — do not send packets to it.
+The test `test_link_local_metadata_is_denied` is there so a scheme-only allow still fails. The destination is a **string** in the practice files — do not send packets to it.
 
 A test that only asserts the preview image loaded is not this topic’s evidence. A test that only greps `https` in a prefix check without calling `allowed` on the link-local string is not this topic’s evidence. This practice never fetches.
 

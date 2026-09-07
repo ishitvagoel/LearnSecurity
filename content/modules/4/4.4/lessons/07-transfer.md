@@ -24,7 +24,7 @@ If the appointment grant feeds `can_read(chart)`, the rule is gone. FastAPI `Dep
 
 A grant on appointment A is not a grant on chart B, and a grant in clinic-acme is not a grant in clinic-globex. Copying the share table into a new resource while leaving `has_any_share` as the gate leaves the new table unused. That leftover permission is the same cause with new nouns. The local check is `test_grant_on_n1_is_not_grant_on_n2` plus a cross-company deny — on a practice, not a live clinic system.
 
-## Prompt — clinic sketch
+## Write this for a clinic sketch
 
 1. who can act (member with a real appointment grant who swaps chart id; clinic admin costume — **not** a live clinic system);
 2. what you trust (which lookup is trusted; the scheduling UI is not);

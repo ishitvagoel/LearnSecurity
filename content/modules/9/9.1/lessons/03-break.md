@@ -30,7 +30,7 @@ You do not need CI. You must not call a live checklist portal. The true return *
 
 The isolation lessons (1.2 / 4.4) already refused company B reading company A. This check is **whether the proof names a test that asserts that**. A pasted PDF is inventory. It does not assert isolation.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
 Open `vulnerable/trace.py`. It returns true if any test dict has `req == req_id`. Tests:
 

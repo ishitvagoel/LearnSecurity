@@ -33,7 +33,7 @@ If the namespace is "private" while `pod_ok` is always true, the rule is gone. A
 
 `cluster-admin` still has to be denied. The app may still run. Adding a namespace without an allow-list leaves `pod_ok("cluster-admin")` true. The local check is `test_cluster_admin_pod_is_denied` — on a practice, not a live cluster.
 
-## Prompt — clinic app SA is cluster-admin
+## Write this for a clinic app SA is cluster-admin
 
 1. who can act (compromised container / malicious chart — not a live clinic cluster);
 2. what you trust (allow-listed namespaced role is the promise; namespace, network policy, restricted pod profile, and CIS are not);

@@ -28,7 +28,7 @@ If both pass, the check is not looking at password-at-lookalike.
 | Wrong origin | webauthn at the lookalike origin fails |
 | Not claimed | Live authenticators; who-is-allowed; recovery SMS; prompt bombing |
 
-`test_password_is_not_phishing_resistant` is there so a password counted as phishing-resistant cannot sneak through.
+`test_password_is_not_phishing_resistant` is there so a password counted as phishing-resistant still fails.
 
 ```text
 python3 -m pytest labs/4.2/4.2-lab/tests --impl vulnerable

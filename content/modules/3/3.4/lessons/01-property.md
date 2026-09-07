@@ -9,7 +9,7 @@ The notes app lets an owner share a note with other people. The product rule is 
 
 > For a note in the notes app, eight `add_share` calls must leave `share_count() <= 5`. The sixth grant is denied on the **write path**. A React `max={5}`, a CDN filter, or an awareness-list sticker is not this sentence.
 
-What must not happen is **cap exceeded**: looping `add_share()` eight times yields `last > 5`. Extra rows are extra readers nobody intended: more people on the note, a larger blast radius, a noisier threat model.
+What must not happen is **cap exceeded**: looping `add_share()` eight times yields `last > 5`. Extra rows are extra readers nobody intended: more people on the note, more places a break can reach, a noisier threat model.
 
 The limit has to be written down, enforced on a trusted service, actually implemented, and locked so two parallel sixths cannot both land. Multi-user approval for a support override is an advanced extra, not a silent baseline. Awareness lists name unrestricted consumption after this sentence exists. They are not the syllabus.
 

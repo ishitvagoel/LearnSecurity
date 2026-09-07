@@ -7,7 +7,7 @@
 
 Review `labs/E1/e1-lab/vulnerable/` as a change to the notes app's summarizer agent. Check whether `run_tool("exec_sql", {})` still runs.
 
-Start at `run_tool` and the `exec_sql` row, not at a scanner color or a famous-bugs screenshot. You already ran `test_exec_sql_tool_is_denied`. A comment "will allow-list later" is not.
+Start at `run_tool` and the `exec_sql` row, not at a scanner color or a famous-bugs screenshot. A comment "will allow-list later" is not a pass on `test_exec_sql_tool_is_denied`.
 
 ## Picture: exec_sql available
 

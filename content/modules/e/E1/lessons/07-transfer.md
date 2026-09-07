@@ -33,7 +33,7 @@ If the model "only summarizes" while `run_tool` is always-run, the rule is gone.
 
 `exec_sql` denied, `search_notes` may run. Adding a prompt without an allow-list leaves `run_tool("exec_sql")` running. The local check is `test_exec_sql_tool_is_denied` — on a practice, not a live model.
 
-## Prompt — clinic summarizer over charts
+## Write this for a clinic summarizer over charts
 
 1. who can act (prompt injection in a chart note — not a live clinic model);
 2. what you trust (runtime allow-list is the promise; prompt, retrieval, and a famous-bugs map are not);

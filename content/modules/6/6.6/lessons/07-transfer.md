@@ -31,7 +31,7 @@ flowchart LR
 
 If the mail link always returns 200 and never writes used, the hole is open. A magic-link that stays a standing session is 4.3 — exchange it for a cookie; this week's check owns consume. Adding a unique index without a second-accept test leaves `accept` always true. The local check is `test_invite_token_is_single_use` — on a practice, not a live mail link.
 
-## Prompt — clinic invite-guardian
+## Write this for a clinic invite-guardian
 
 1. who can act (two clicks or a copied link — **not** a live clinic);
 2. what you trust (consume in the store is trusted; HTTP 400 is not);

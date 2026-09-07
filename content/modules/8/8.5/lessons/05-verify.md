@@ -28,7 +28,7 @@ If both pass, the test is not looking at the body substring.
 | Abuse | Unsure values are not attached (fail closed; leftover if not in this check) |
 | Not claimed | A real crash console; the public store; screenshot pipelines; vendor DLP |
 
-The test `test_crash_report_omits_note_body` is there so a report that includes the body cannot sneak through.
+The test `test_crash_report_omits_note_body` is there so a report that includes the body still fails.
 
 Honest stack-present may pass on both implementations. That does not excuse the body-omit test. If the broken files do not fail `test_crash_report_omits_note_body`, the lab is miswired — fix the wiring, not the assertion.
 

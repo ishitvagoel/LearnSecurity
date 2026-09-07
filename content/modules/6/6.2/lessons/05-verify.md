@@ -27,7 +27,7 @@ If both pass, the check is not looking at encoding.
 | Wrong input / abuse | `<` becomes `&lt;`; extra tags absent; broken files must fail |
 | Not claimed | Attribute / JavaScript / URL contexts; live page attacks; content-security enforcement |
 
-The checks live in `labs/6.2/6.2-lab/tests/test_property.py`. `test_angle_brackets_are_encoded` is there so unencoded markup cannot sneak through. The tame marker is enough; do not add an attack recipe to the check.
+The checks are in `labs/6.2/6.2-lab/tests/test_property.py`. `test_angle_brackets_are_encoded` is there so unencoded markup still fails. The tame marker is enough; do not add an attack recipe to the check.
 
 ```text
 python3 -m pytest labs/6.2/6.2-lab/tests --impl vulnerable
