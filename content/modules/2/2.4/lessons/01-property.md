@@ -11,7 +11,7 @@ The notes app lets an owner share a note. Sharing changes who may later read tha
 
 What must not happen is a **second grant**: `share_note("n1", idempotency_key="k1")` twice must not leave `share_count() == 2`. That extra row is someone else on the note who nobody meant to add.
 
-Awareness lists name “something went wrong” as a family. They are not this sentence. A business step to succeed all the way or roll back, and they want a last clinic slot not to be booked twice. This practice’s check is share-count under retry, not a payment network.
+A famous-bugs list may call this “something went wrong.” That is a family name, not the share-count rule. Clinics also want a last slot not booked twice, and a business step that either finishes or rolls back. This practice checks share-count under retry, not a payment network.
 
 ## Picture: a timeout splits “did it land?”
 
@@ -28,7 +28,7 @@ flowchart TD
 
 Nobody needs a new bug name. A retrying client, a load balancer that retries POST, or a worker that delivers at least once is enough. Trusting “the user will not click twice” is not what you trust.
 
-**A tool is not the rule.** FastAPI does not remember POSTs. HTTP 201 twice is still two rows. Disable-on-submit is a hint on the screen; users, proxies, and workers retry anyway. A “still working” status that people can hear must not mint a **new** key each time it speaks.
+FastAPI does not remember POSTs. HTTP 201 twice is still two rows. Disable-on-submit is a hint on the screen; users, proxies, and workers retry anyway. A “still working” status that people can hear must not mint a **new** key each time it speaks.
 
 ## Picture: the key binds the first outcome
 

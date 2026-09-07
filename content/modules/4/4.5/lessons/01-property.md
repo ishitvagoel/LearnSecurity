@@ -5,7 +5,7 @@
 
 ## The rule
 
-The notes app will later accept access tokens at its API. An access token is a capability **for a named audience**. A JWT that names `sub=alice` and `aud=other-api` must not spend the notes app. An ID token’s audience is the **client id** — that is a different name. A library that only checks the signature is not this sentence.
+The notes app will later accept access tokens at its API. An access token is a capability **for a named audience**. A JWT that names `sub=alice` and `aud=other-api` must not spend the notes app. An ID token’s audience is the **client id** — that is a different name. A library that only checks the signature is not the audience check.
 
 > `accept_token({"sub": "alice", "aud": "other-api"}, "securecollab-api")` must be false. Missing `aud` must be false. Expected `aud` may be true. PKCE, `state`, `nonce`, JWKS, `iss`, and DPoP are named leftovers — they are not proven by this practice. OAuth 2.1 is still a draft.
 
@@ -25,7 +25,7 @@ flowchart TD
 
 The attacker holds a token minted for another API (confused deputy), or replays a stolen bearer. Trusting “it verified” without checking `aud` is not what you trust.
 
-**A tool is not the rule.** Auth0, Authlib, or “we turned on OpenID Connect.”
+Auth0, Authlib, or “we turned on OpenID Connect” is not this check.
 
 ## Picture: three client shapes
 

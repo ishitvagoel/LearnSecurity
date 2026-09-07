@@ -11,7 +11,7 @@ The notes app uses an application API key. That key is not a user password, and 
 
 What must not happen is **the old hardcoded default still authenticates after rotation**. The service credential is treated as current even though you meant to kill it. Then who-is-allowed runs as whoever holds the clone.
 
-Secrets have to be created and stored outside source and build artifacts. There should be no default credentials. There has to be a key lifecycle. Timed rotation and a hardware box for crypto are advanced extras, not this check. A Python settings library reading `.env` is not this sentence. Planning for post-quantum crypto is agility planning, not a lab quantum attack.
+Secrets have to be created and stored outside source and build artifacts. There should be no default credentials. There has to be a key lifecycle. Timed rotation and a hardware box for crypto are advanced extras, not this check. A Python settings library reading `.env` is not the secret-store check. Planning for post-quantum crypto is agility planning, not a lab quantum attack.
 
 ## Picture: the secret outlives rotation
 
@@ -24,7 +24,7 @@ flowchart TD
 
 The attacker cloned the repo or an old image. Trusting `.gitignore` or “we use Vault” without a rotation test is not what you trust.
 
-**A tool is not the rule.** AWS Secrets Manager, a Python settings library, or a `.env` file.
+AWS Secrets Manager, a Python settings library, or a `.env` file is not this check.
 
 ## Picture: three secret classes
 

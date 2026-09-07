@@ -33,7 +33,7 @@ flowchart LR
   Set --> Not12[not the check]
 ```
 
-**A tool is not the rule.** A subdomain Host header, a JWT `org` claim copied from the client, a relationship-graph dashboard, a famous-bugs mapping.
+A subdomain Host header, a JWT `org` claim copied from the client, a relationship-graph dashboard, a famous-bugs mapping is not this check.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

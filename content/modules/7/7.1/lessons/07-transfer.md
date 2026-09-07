@@ -30,7 +30,7 @@ Here, `is_staff` is still `is_admin` for this rule. If “Edit profile” omits 
 
 ## Write this for a clinic PATCH is_staff
 
-1. who can act (authenticated clinician session sending extra JSON — not a live clinic);
+1. who might try (authenticated clinician session sending extra JSON — not a live clinic);
 2. what you trust (server `ALLOWED` is what you trust; SPA omit-checkbox and OpenAPI are not);
 3. what must not happen (`is_staff` becomes true, not “HIPAA”);
 4. a check idea on **local** practice files only (no public API);

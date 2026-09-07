@@ -11,7 +11,7 @@ The notes app may unfurl a link so a note can show a preview. That URL is **untr
 
 What must not happen is **a server-side fetch to link-local metadata allowed**. In a real cloud that is a secrecy failure of the machine’s own identity. Here the test fails closed on the string.
 
-Use an allow-list of protocols, hosts, paths, and ports before the server calls another service. Use an outbound allow-list. Open redirects still have to land on an allow-list. Telling the person they are about to leave the site is **advanced** work, not this check. A famous-bugs nickname for server-side requests is awareness after the cause. `requests.get` is not this sentence.
+Use an allow-list of protocols, hosts, paths, and ports before the server calls another service. Use an outbound allow-list. Open redirects still have to land on an allow-list. Telling the person they are about to leave the site is **advanced** work, not this check. A famous-bugs nickname for server-side requests is awareness after the cause. `requests.get` is not the allow-list check.
 
 ## Picture: the server is the deputy
 

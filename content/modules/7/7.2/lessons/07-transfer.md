@@ -34,10 +34,10 @@ Member × SSN still has to be false. Member × display name may still be true. H
 
 ## Write this for a clinic member cannot resolve SSN
 
-1. who can act (clinician session selecting extra fields — not a live clinic);
+1. who might try (clinician session selecting extra fields — not a live clinic);
 2. what you trust (server role×field is what you trust; UI omit and UUID are not);
 3. what must not happen (`resolve("member", "ssn")` true, not “HIPAA”);
-4. a test idea on **local** practice files only (no public EHR);
+4. a check on **local** practice files only (no public EHR);
 5. leftover (search snippets, CSV, later workers, stale serializer cache after a role change);
 6. the web accessibility baseline if a human path is in the claim (do not announce the SSN in an error).
 

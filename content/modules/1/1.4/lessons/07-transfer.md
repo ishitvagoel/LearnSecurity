@@ -32,10 +32,10 @@ The second factor is a mouse-only dialog over a patient chart.
 
 Your answer must include:
 
-- who can act (exhausted clinician; shared workstation; someone who wants the chart);
+- who might try (exhausted clinician; shared workstation; someone who wants the chart);
 - what you trust (the browser is hostile; the dialog is what you trust for this step);
 - what must not happen (keyboard-only clinician locked out **or** a shortcut that exposes the chart);
-- a test idea that would fail if the rule were false (check on name/keyboard/not-color-only — run only on a local practice you own, never on the real clinic);
+- a check that would fail if the rule were false (check on name/keyboard/not-color-only — run only on a local practice you own, never on the real clinic);
 - leftover risk (coercion; SMS to a shared phone);
 - whether the human path must meet the web accessibility baseline (yes, as a baseline, not as a full badge).
 

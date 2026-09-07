@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Stop[stop serving that parser version]
 ```
 
-When you see a broken copy, file bytes do not belong in the log.
+A broken copy must not put file bytes in the log.
 
 | Outcome | This topic |
 |---|---|
@@ -25,7 +25,7 @@ When you see a broken copy, file bytes do not belong in the log.
 | Recover | Quarantine blobs; patch the parser; do not ship an overflowed binary |
 | Leftover | Helpers that call C; integer wrap; existing C codecs |
 
-A language-name sticker does not prove this length rule. Re-run `test_copy_does_not_exceed_buffer` after any unpacker change; a green “we use Kotlin” tile is not that check. JNI / protobuf C extensions are the same family — inventory them before claiming recover.
+A language-name sticker does not prove this length rule. Re-run `test_copy_does_not_exceed_buffer` after any unpacker change. “We use Kotlin” does not cap the copy. JNI / protobuf C extensions are the same family — list those before you call the unpacker safe.
 
 ## What the framework does vs what you still have to check
 

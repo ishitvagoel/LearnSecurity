@@ -30,7 +30,7 @@ Here, `save_chart` is still `save_note` for this rule. If “available offline�
 
 ## Write this for a clinic offline chart cache
 
-1. who can act (lost clinic tablet / backup — not a live hospital);
+1. who might try (lost clinic tablet / backup — not a live hospital);
 2. what you trust (Keystore-wrapped cache is what you trust; private folder and fingerprint UI are not);
 3. what must not happen (`plaintext_on_disk` true, not “HIPAA”);
 4. a check idea on **local** practice files only (no personal-phone imaging);

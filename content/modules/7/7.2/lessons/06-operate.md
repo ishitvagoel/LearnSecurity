@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Rotate[Rotate if the value escaped]
 ```
 
-A GraphQL-gateway product name does not check role × field or prove field permission. Re-run `test_member_cannot_resolve_internal_field` after any serializer change; a green “field authz enabled” tile is not that check. Search highlighting and overnight export are other dumps of the same row — inventory them before you claim recover.
+A GraphQL-gateway product name does not check role × field or prove field permission. Re-run `test_member_cannot_resolve_internal_field` after any serializer change. “Field authz enabled” does not hide `secret_internal`. Search highlighting and overnight export are other dumps of the same row — list those before you call the field private.
 
 ## Signals that do not become a second leak
 

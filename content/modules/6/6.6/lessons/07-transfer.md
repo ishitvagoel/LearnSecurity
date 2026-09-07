@@ -33,10 +33,10 @@ If the mail link always returns 200 and never writes used, the hole is open. A m
 
 ## Write this for a clinic invite-guardian
 
-1. who can act (two clicks or a copied link — **not** a live clinic);
+1. who might try (two clicks or a copied link — **not** a live clinic);
 2. what you trust (consume in the store is trusted; HTTP 400 is not);
 3. what must not happen (second `accept` true);
-4. a test idea on **local** files only (first true, second false — never on the real clinic);
+4. a check on **local** files only (first true, second false — never on the real clinic);
 5. leftover (two accepts that both see unused; fail-open; token in URL; phishing; last-resort error handler is advanced);
 6. whether a human-read “link already used” status must not use color as the only cue.
 

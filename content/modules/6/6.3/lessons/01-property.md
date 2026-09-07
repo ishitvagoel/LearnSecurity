@@ -25,7 +25,7 @@ flowchart TD
 
 Picture a foreign origin that can cause the victim’s browser to send the leftover cookie. What you trust is local `allow_share(origin, expected, token)`. Do not visit other people’s sites.
 
-**A tool is not the rule.** SameSite=Lax, a CORS `*` reflex, or “JSON APIs cannot CSRF.”
+SameSite=Lax, a CORS `*` reflex, or “JSON APIs cannot CSRF” is not this check.
 
 ## Picture: origin and token and method
 

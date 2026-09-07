@@ -11,7 +11,7 @@ Do not log plaintext bodies. Do not paste an SSN into the ticket.
 
 ## Picture: CI is a detector
 
-When you see a known-plaintext Base64 hit, the body does not belong in the pager. Then re-protect and rotate keys.
+If Base64 still decodes to plaintext, the body does not belong in the pager. Then re-protect and rotate keys.
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ Not: plaintext `secret`, a real SSN, or “AES handled.”
 
 Putting plaintext `secret` or an SSN in the alert leaves a second copy in the pager.
 
-A green “encryption enabled” tile is not that check. Re-run `test_protect_is_not_mere_encoding` after any `protect` change. Workers and export jobs are other paths of the same rule — inventory them before claiming recover.
+An “encryption enabled” checkbox does not stop Base64. Re-run `test_protect_is_not_mere_encoding` after any `protect` change. Workers and export jobs are other paths of the same rule — list those before you call the bytes protected.
 
 Recovery is incomplete if the next deploy still wraps `b64encode` in a helper named `encrypt`. Grep workers and export jobs for Base64 of known plaintext the same day you rotate keys, or the next backup re-issues the leak. A key-service dashboard is not that grep.
 

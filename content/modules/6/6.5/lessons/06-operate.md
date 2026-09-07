@@ -11,7 +11,7 @@ Do not log full URLs if they contain tokens (4.3). Do not fetch the denied desti
 
 ## Picture: a denied host is a signal
 
-When you see a deny of a preview URL that is not on the allow-list, do not paste the URL into the pager. Then keep the deny. Neither fetches the destination.
+If a preview URL is not on the allow-list, do not paste the URL into the pager. Then keep the deny. Do not fetch the destination.
 
 ```mermaid
 flowchart TD
@@ -41,7 +41,7 @@ Not: a full URL with a query token, a note body, a live-fetch transcript, or “
 
 Putting a full URL with a query token in the alert leaves a second copy (4 in the pager.3).
 
-A green “HTTPS only” tile is not that check. Re-run `test_link_local_metadata_is_denied` after any importer change. Webhooks (7.3) are another path of the same deputy — inventory them before claiming recover.
+An “HTTPS only” toggle does not keep link-local URLs off the allow-list. Re-run `test_link_local_metadata_is_denied` after any importer change. Webhooks (7.3) are another path of the same deputy — list those before you fetch.
 
 Recovery is incomplete if the next worker still calls `requests.get` on the form URL. Grep importers the same day you keep the deny, and **do not fetch** the denied destination to confirm.
 

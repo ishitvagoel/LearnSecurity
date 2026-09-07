@@ -11,7 +11,7 @@ The notes app must know whether the **server socket** negotiated TLS. A browser 
 
 What must not happen is **a client-supplied Forwarded-Proto counted as TLS**. Cookies marked Secure and HSTS fire while the user stays on cleartext. That is an authenticity failure of the transport.
 
-TLS has to be on the public HTTP service with no cleartext fallback. A current TLS version (TLS 1.3 is the current handshake). Clients still have to check certificates — that is a different rule. OCSP stapling and encrypted client hello are advanced extras, not this check. A server flag that trusts proxy headers is not this sentence.
+TLS has to be on the public HTTP service with no cleartext fallback. A current TLS version (TLS 1.3 is the current handshake). Clients still have to check certificates — that is a different rule. OCSP stapling and encrypted client hello are advanced extras, not this check. A server flag that trusts proxy headers is not the hop-proof check.
 
 ## Picture: hop vs claim
 
@@ -25,7 +25,7 @@ flowchart TD
 
 Picture a client on cleartext who wants the app to think TLS is on. Trusting any `X-Forwarded-*` from the socket peer is not what you trust unless that peer is a locked load balancer you bound.
 
-**A tool is not the rule.** “Force HTTPS” in a dashboard, HSTS preload, or certificate pinning.
+“Force HTTPS” in a dashboard, HSTS preload, or certificate pinning is not this check.
 
 ## Picture: a trusted proxy is identity, not a header
 

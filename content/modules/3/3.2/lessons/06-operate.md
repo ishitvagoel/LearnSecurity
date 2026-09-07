@@ -18,7 +18,7 @@ flowchart TD
   Age -->|stale| Revisit[Re-run four questions]
 ```
 
-When you see a missing threat id, do not hide it by rewriting yesterday's date. Name the threat. Then add the row. Neither pretends you already had it.
+A missing threat id is not fixed by rewriting yesterday's date. Name the threat. Then add the row. Do not pretend you already had it.
 
 | Outcome | This topic |
 |---|---|

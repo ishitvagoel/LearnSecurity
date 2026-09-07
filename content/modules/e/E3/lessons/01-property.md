@@ -31,7 +31,7 @@ flowchart LR
   Stripe --> NotYours[not this rule]
 ```
 
-**A tool is not the rule.** A payment company's header, a filled-in questionnaire, or “we are high-assurance.”
+A payment company's header, a filled-in questionnaire, or “we are high-assurance” is not this check.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

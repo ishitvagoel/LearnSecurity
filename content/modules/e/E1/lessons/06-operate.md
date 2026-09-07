@@ -9,7 +9,7 @@ A new tool can still be registered after the allow-list was "set once." Do not l
 
 ## Picture: denied tool is a signal
 
-When you see a denied tool, name the tool. Leave the transcript off the pager. Then revoke leftover agent credentials.
+If a tool is denied, page the tool name — not the transcript. Then revoke leftover agent credentials.
 
 ```mermaid
 flowchart TD
@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Revoke[revoke agent creds]
 ```
 
-A vendor product is not the rule, and calling the tool gate an allow-list is not proof.
+A vendor product does not make the tool gate an allow-list. Calling it an allow-list is not that check.
 
-Re-run `test_exec_sql_tool_is_denied` after any tool-registration change. A green "prompt forbids SQL" tile is not that check. Coding-assistant install tools in CI are the same family — inventory them before you claim recover.
+Re-run `test_exec_sql_tool_is_denied` after any tool-registration change. A prompt that “forbids SQL” does not deny `exec_sql`. Coding-assistant install tools in CI are the same family — list those before you call the allow-list done.
 
 ## Signals that do not become a second leak
 

@@ -9,7 +9,7 @@ A closer can still mark Done after `close_finding` was "fixed once." Do not log 
 
 ## Picture: close without retest is a signal
 
-When you see a close that skipped retest, name the finding. Leave the finding off the pager. Then reopen and re-run the same isolation check.
+If a finding is closed without a retest, page the finding id — not the finding text. Then reopen and re-run the same isolation check.
 
 ```mermaid
 flowchart TD
@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Reopen[reopen]
 ```
 
-A ticket product is not the rule, and a retested-finding badge is not proof.
+Buying a ticket product does not retest the finding. A badge that says “retested” is not that check.
 
-Re-run `test_cannot_close_without_retest` after any close-workflow change. A green "PDF attached" tile is not that check. Extra fields on the note and a role-change cache are other bad results in the same family — inventory them before you claim recover.
+Re-run `test_cannot_close_without_retest` after any close-workflow change. Attaching a PDF does not prove the finding was retested. Extra fields on the note and a role-change cache are other ways the same hole comes back — list those before you close the ticket.
 
 ## Signals that do not become a second leak
 

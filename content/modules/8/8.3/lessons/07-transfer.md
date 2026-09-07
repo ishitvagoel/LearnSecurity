@@ -30,7 +30,7 @@ Here, `as=doctor` is still `as=admin` for this rule. If the kiosk demo uses a ve
 
 ## Write this for a clinic deep link as=doctor
 
-1. who can act (another app on the tablet sending extras — not a live clinic);
+1. who might try (another app on the tablet sending extras — not a live clinic);
 2. what you trust (server session is what you trust; App Links and https are not identity);
 3. what must not happen (`current_user` becomes doctor, not “HIPAA”);
 4. a check idea on **local** practice files only (no sideloaded malware);

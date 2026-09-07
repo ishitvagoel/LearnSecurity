@@ -9,7 +9,7 @@ Even after the button is fixed, someone will still fail recovery: a new exclusio
 
 ## Picture: the loop continues without lowering the bar
 
-When you see a broken recovery widget, name keyboard vs mouse. Support must not read codes aloud. The alternate path must still be a checked, usable control. Then restore access. Neither emails notes.
+A broken recovery widget still has to be usable from the keyboard, not only the mouse. Support must not read codes aloud. The other path still has to be a checked control. Then restore access. Do not email notes.
 
 ```mermaid
 flowchart TD
@@ -20,7 +20,7 @@ flowchart TD
   Sig --> Ev[Evidence: keyboard vs mouse and reason, never codes]
 ```
 
-A log product is not the rule, and a checklist is not proof.
+Buying a log product does not make recovery usable from the keyboard. Ticking a checklist does not restore the control.
 
 ## Signals that do not become a second leak
 

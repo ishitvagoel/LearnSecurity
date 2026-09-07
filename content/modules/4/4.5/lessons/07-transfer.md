@@ -11,10 +11,10 @@ Clinic: wrong-audience FHIR token. Also name native redirect (claimed HTTPS, not
 
 EHR-lite that accepts SMART-on-FHIR-shaped access tokens.
 
-1. who can act (token minted for another hospital API; stolen browser token; malicious phone app claiming a custom scheme — **not** a live clinic);
+1. who might try (token minted for another hospital API; stolen browser token; malicious phone app claiming a custom scheme — **not** a live clinic);
 2. what you trust (which resource-server `aud` check is trusted; the vendor “OpenID dashboard” is not);
 3. what must not happen (`accept_token` true for `other-hospital-fhir` — not a privacy-law name);
-4. a test idea on a **local** practice only (wrong aud and missing aud deny);
+4. a check on a **local** practice only (wrong aud and missing aud deny);
 5. leftover (PKCE, mix-up, DPoP advanced, object grants, WebView);
 6. whether a human consent screen must meet the web accessibility baseline (usable consent, not a mouse-only approve).
 

@@ -27,7 +27,7 @@ flowchart LR
 
 TLS to the public HTTP service. That is needed and not enough. A neighbor on a company inspecting proxy, or company B on the same CDN node, never needed to break TLS to read a path-only entry.
 
-**A tool is not the rule:** “We turned on HTTPS,” Next.js `fetch` cache defaults, FastAPI `HTTPException`, a CDN product name, or `Cache-Control: private` while the CDN is set to cache anyway.
+“We turned on HTTPS,” Next.js `fetch` cache defaults, FastAPI `HTTPException`, a CDN product name, or `Cache-Control: private` while the CDN is set to cache anyway is not this check.
 
 ## Picture: the key is the shared store
 

@@ -9,7 +9,7 @@ A closer can still mark Done after `close_incident` was “fixed once.” Do not
 
 ## Picture: illegal close is a signal
 
-When you see a close that skipped recovery, name the incident. Leave the incident note off the pager. Then reopen and run the restore drill.
+If an incident is closed without recovery, page the incident id — not the incident note. Then reopen and run the restore drill.
 
 ```mermaid
 flowchart TD
@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Reopen[reopen and restore]
 ```
 
-A SIEM product is not the rule, and a restore-ran tile is not proof.
+Buying a SIEM does not prove recovery ran. A tile that says restore ran is not that check.
 
-Re-run `test_cannot_close_without_recovery` after any close-workflow change. A green “alerts stopped” tile is not that check. Also re-run `test_cannot_close_when_logs_contain_note_body` — a second sink (crash reports, web telemetry) can reopen the leftover-body hole.
+Re-run `test_cannot_close_without_recovery` after any close-workflow change. Alerts stopping does not prove recovery ran. Also re-run `test_cannot_close_when_logs_contain_note_body` — a second sink (crash reports, web telemetry) can put the body back.
 
 ## Signals that do not become a second leak
 

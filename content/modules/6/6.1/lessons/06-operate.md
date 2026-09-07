@@ -11,7 +11,7 @@ Do not log export names that are patient identifiers. Do not paste filenames int
 
 ## Picture: unexpected child is a signal
 
-When you see a child whose program is `sh` after an export-helper change, leave filenames off the pager. Then kill the child and remove the concatenating path.
+If a child program is `sh` after an export-helper change, keep filenames out of the pager. Then kill the child and remove the concatenating path.
 
 ```mermaid
 flowchart TD
@@ -41,7 +41,7 @@ Not: a note body, a real email, a patient filename, or a shell-punctuation cookb
 
 Putting the full argv with a patient filename in the alert leaves a second copy (3 in the pager.1 / 5.1).
 
-A green “no shell in CI grep” tile is not that check. Plugin loaders are other paths of the same check — inventory them before claiming recover.
+A CI grep that finds no `sh` does not prove argv is a list. Plugin loaders are other concatenating paths — list those before you call the export helper safe.
 
 ## What the framework does vs what you still have to check
 

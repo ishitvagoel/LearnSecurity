@@ -25,7 +25,7 @@ flowchart TD
 
 Each arrow is a reader. Change the encoding, the grammar, or the duplicate-key policy and the value changes without the bytes changing. Unicode normalization (NFC vs NFD) is another reader *after* characters exist. A Unicode guide tells you how to write the same character the same way. It does not decide which company a note belongs to.
 
-**A tool is not this sentence.** Pydantic v2, FastAPI body parsing, or “JSON can’t have duplicate keys” is not the rule.
+Pydantic v2, FastAPI body parsing, or “JSON can’t have duplicate keys” does not pick which duplicate key wins.
 
 ## Picture: two readers, one blob
 

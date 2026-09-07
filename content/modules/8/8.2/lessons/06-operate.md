@@ -27,7 +27,7 @@ A checklist name does not prove the wrap.
 | Recover | Wipe; revoke sessions; exclude backup |
 | Leftover | Extracted keys; screenshots; clipboard; notifications |
 
-An MDM product name is not the check. Re-run `test_cached_note_is_not_plaintext_on_disk` after any cache-path change; a green “internal storage” tile is not that check. Screenshots, recents, and notification text are other copies of the same body — list them before you claim Recover.
+An MDM product name is not the check. Re-run `test_cached_note_is_not_plaintext_on_disk` after any cache-path change. Internal storage does not encrypt the cached note. Screenshots, recents, and notification text are other copies of the same body — list those before you call the disk clean.
 
 ## What the framework does vs what you still have to check
 

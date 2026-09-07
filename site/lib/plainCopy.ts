@@ -262,8 +262,9 @@ export function plainMechanismLead(text: string): string | null {
   if (!text.startsWith(prefix)) {
     return null;
   }
-  const rest = text.slice(prefix.length).trim();
-  return rest ? `A tool is not the rule: ${rest}` : "A tool is not the rule.";
+  let rest = text.slice(prefix.length).trim();
+  rest = rest.replace(/\.”$/, "”").replace(/\.$/, "");
+  return rest ? `${rest} is not this check.` : null;
 }
 
 const PROSE_PHRASES: [RegExp, string][] = [
@@ -584,8 +585,9 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/into the paging channel/g, "into the pager"],
   [/What has to be true first: /g, ""],
   [/\|\s*What has to be true first\s*\|/g, "| What's already wrong |"],
-  [/ still has to be noticed\./g, " still has to show up as an alert."],
-  [/The notice should name /g, "The alert should name "],
+  [/ still has to be noticed\./g, " still has to page someone."],
+  [/The notice should name /g, "Name "],
+  [/The alert should name /g, "Name "],
   [/Recovery should /g, "Then "],
   [/You do not need a new [^.]+\.\n/g, "\n"],
   [/ \*is\* the leak/g, " is already the leak"],
@@ -658,8 +660,8 @@ const PROSE_PHRASES: [RegExp, string][] = [
     "$1 is the check.",
   ],
   [/You already ran (`[^`]+`) — that is the rule\./g, "$1 is the check."],
-  [/Notice names ([^.]+)\./g, "The notice should name $1."],
-  [/Name the event when you notice it\./g, "The notice should name the event."],
+  [/Notice names ([^.]+)\./g, "Name $1."],
+  [/Name the event when you notice it\./g, "Name the event."],
   [/The ship gate stays not finished\./g, "This page does not finish the ship check-in."],
   [
     /Claiming you finished ([^.]+) from this page\./g,
@@ -784,31 +786,59 @@ const PROSE_PHRASES: [RegExp, string][] = [
   ],
   [
     /A (.+?) still has to show up as an alert\. Keep (.+?) out of the (pager|ticket)\. The alert should name (.+?)\. Then /g,
-    "When you see a $1, name $4. Leave $2 off the $3. Then ",
+    "Name $4 for a $1. Leave $2 off the $3. Then ",
   ],
   [
     /An (.+?) still has to show up as an alert\. Keep (.+?) out of the (pager|ticket)\. The alert should name (.+?)\. Then /g,
-    "When you see an $1, name $4. Leave $2 off the $3. Then ",
+    "Name $4 for an $1. Leave $2 off the $3. Then ",
   ],
   [
     /A (.+?) still has to show up as an alert\. Keep (.+?) out of the (pager|ticket)\. Then /g,
-    "When you see a $1, leave $2 off the $3. Then ",
+    "On a $1, leave $2 off the $3. Then ",
   ],
   [
     /An (.+?) still has to show up as an alert\. Keep (.+?) out of the (pager|ticket)\. Then /g,
-    "When you see an $1, leave $2 off the $3. Then ",
+    "On an $1, leave $2 off the $3. Then ",
   ],
   [
     /A (.+?) still has to show up as an alert\. Do not paste (.+?)\. The alert should name (.+?)\. Then /g,
-    "When you see a $1, name $3. Do not paste $2. Then ",
+    "Name $3 for a $1. Do not paste $2. Then ",
   ],
   [
     /A (.+?) still has to show up as an alert\. Do not paste (.+?)\. Then /g,
-    "When you see a $1, do not paste $2. Then ",
+    "On a $1, do not paste $2. Then ",
   ],
-  [/A (.+?) still has to show up as an alert\. /g, "When you see a $1, "],
-  [/An (.+?) still has to show up as an alert\. /g, "When you see an $1, "],
+  [/A (.+?) still has to show up as an alert\. /g, "On a $1, "],
+  [/An (.+?) still has to show up as an alert\. /g, "On an $1, "],
+  [
+    /When you see a (.+?), name (.+?)\. Leave (.+?) off the (pager|ticket)\. Then /g,
+    "Name $2 for a $1. Leave $3 off the $4. Then ",
+  ],
+  [
+    /When you see an (.+?), name (.+?)\. Leave (.+?) off the (pager|ticket)\. Then /g,
+    "Name $2 for an $1. Leave $3 off the $4. Then ",
+  ],
+  [
+    /When you see a (.+?), leave (.+?) off the (pager|ticket)\. Then /g,
+    "On a $1, leave $2 off the $3. Then ",
+  ],
+  [
+    /When you see an (.+?), leave (.+?) off the (pager|ticket)\. Then /g,
+    "On an $1, leave $2 off the $3. Then ",
+  ],
+  [/When you see a (.+?), /g, "On a $1, "],
+  [/When you see an (.+?), /g, "On an $1, "],
+  [/\*\*A tool is not the rule\.\*\* /g, ""],
+  [/\*\*A tool is not the rule:\*\* /g, ""],
+  [/\*\*A tool is not this sentence\.\*\* /g, ""],
+  [/A tool is not the rule: /g, ""],
+  [/A tool is not the rule\. /g, ""],
   [/The alert should name /g, "Name "],
+  [/ — inventory them before you claim recover\./g, "."],
+  [/ — inventory it before you claim recover\./g, "."],
+  [/ — inventory them before claiming recover\./g, "."],
+  [/ — inventory it before claiming recover\./g, "."],
+  [/ — list them before you claim Recover\./g, "."],
   [
     /If your alert includes (.+?), the pager now has (.+?)\./g,
     "Putting $1 in the alert means the pager now has $2.",

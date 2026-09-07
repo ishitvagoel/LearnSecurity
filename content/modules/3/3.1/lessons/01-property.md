@@ -32,7 +32,7 @@ flowchart TD
 
 A sticker on the field that does not change the log API is just a sticker. What you trust is the **logging API handlers actually call**, plus every other printer: `print`, an f-string, an exception dump, a slow-query log, a packet capture.
 
-The web framework does not know "Confidential." Access logs will store query strings — that is a later topic. A product name for data-loss tools is not this sentence.
+The web framework does not know "Confidential." Access logs will store query strings — that is a later topic. A product name for data-loss tools is not the redaction check.
 
 ## Picture: name the places before you redact
 

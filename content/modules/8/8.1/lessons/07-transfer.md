@@ -30,7 +30,7 @@ Here, `hipaaMode` is still `integrity` for this rule. If the Compose switch is �
 
 ## Write this for a clinic Android hipaaMode=true
 
-1. who can act (patched clinic app file — not a live hospital device);
+1. who might try (patched clinic app file — not a live hospital device);
 2. what you trust (server attest plus 1.2 is what you trust; client boolean and store listing are not);
 3. what must not happen (`allow_export` true on a client claim with failing attest, not “HIPAA”);
 4. a check idea on **local** practice files only (no live Play);

@@ -11,7 +11,7 @@ Do not log session cookies or note bodies (3.1 / 4.3). Do not attach the token t
 
 ## Picture: leftover session is a signal
 
-When you see a leftover cookie used as the principal, leave the cookie off the pager. Then keep the deny and rotate the worker.
+If a leftover cookie is used as the principal, keep the cookie out of the pager. Then keep the deny and rotate the worker.
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ Not: Alice’s session cookie, note bodies, a live broker dump, or a real clinic
 
 Putting Alice’s cookie or note bodies in the alert leaves a second copy in the pager.
 
-A green “service account enabled” tile is not that check. Overnight export, outbox, and notification fan-out are other jobs of the same principal — inventory them before claiming recover. Re-run `test_user_session_is_not_worker_identity` after any task-enqueue change.
+Enabling a service account does not stop a leftover cookie from being the principal. Overnight export, outbox, and notification fan-out are other jobs of the same principal — list those before you rotate the worker. Re-run `test_user_session_is_not_worker_identity` after any task-enqueue change.
 
 ## What the framework does vs what you still have to check
 

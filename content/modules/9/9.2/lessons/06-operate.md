@@ -11,7 +11,7 @@ Do not log the user string that would have been eval’d. Do not paste template 
 
 ## Picture: eval in a change is a signal
 
-When you see a pull request whose diff still grants `eval` on a user string, leave the payload off the pager. Then block the merge and keep the reject.
+If a pull request still grants `eval` on a user string, keep the payload out of the pager. Then block the merge and keep the reject.
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ Not: an eval payload, a note body, or a live GitHub trace.
 
 Putting the eval payload or note bodies in the alert leaves a second copy (logging topic / interpreter topic) in the pager.
 
-A green “formatter passed” tile is not that check. Re-run `test_eval_on_user_input_is_rejected` after any review-bot change. Terraform `local-exec` and GitHub Actions `run:` are other interpreter paths — inventory them before claiming recover. The lab substring is a stand-in: an `exec(` helper can skip it, so keep the human interpreter question even after this metric is green.
+A formatter passing does not reject `eval`. Re-run `test_eval_on_user_input_is_rejected` after any review-bot change. Terraform `local-exec` and GitHub Actions `run:` are other interpreter paths — list those before you merge. The lab substring is a stand-in: an `exec(` helper can skip it, so keep the human interpreter question even after this metric is green.
 
 ## What the framework does vs what you still have to check
 

@@ -11,10 +11,10 @@ Clinic SMS reminders — a new channel that HTTP scans will not enumerate.
 
 An EHR-lite booking card that texts “your appointment” to a phone number.
 
-1. who can act (number-swap; SMS intercept on an untrusted hop; an operator who pastes chart text into the template — **not** a live clinic, carrier, or public SMS API);
+1. who might try (number-swap; SMS intercept on an untrusted hop; an operator who pastes chart text into the template — **not** a live clinic, carrier, or public SMS API);
 2. what you trust (which assembler or markdown file is the list you keep; the SMS vendor questionnaire is not);
 3. what must not happen (empty model because “gateway questionnaire green,” or reminder body includes chart text — pick one and test it locally);
-4. a test idea on a **local** practice only (`sms-content-leak` present when `scanner_green=True`);
+4. a check on a **local** practice only (`sms-content-leak` present when `scanner_green=True`);
 5. leftover (carrier logs; support read-aloud; the data-centric modeling note is still a **draft**);
 6. whether a human path must meet WCAG 2.2 (for example, a usable “opt out of SMS” path). SMS content classification itself is not an accessibility problem.
 

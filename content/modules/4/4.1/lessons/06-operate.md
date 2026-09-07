@@ -11,7 +11,7 @@ Do not paste a personal email or a production cookie into the ticket. Do not log
 
 ## Picture: alert on use after deleted
 
-When you see a leftover cookie after delete, leave notes off the pager. Then mass-revoke.
+After delete, a leftover cookie must not put notes in the pager. Then mass-revoke.
 
 ```mermaid
 flowchart TD

@@ -9,7 +9,7 @@ A chart can still add a ClusterRoleBinding after admission was "set once." Do no
 
 ## Picture: god-mode binding is a signal
 
-When you see a god-mode binding, name the ServiceAccount. Leave kubeconfig off the pager. Then delete the binding and rotate cluster credentials.
+If a binding is cluster-admin, page the ServiceAccount — not the kubeconfig. Then delete the binding and rotate cluster credentials.
 
 ```mermaid
 flowchart TD
@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Rotate[rotate cluster creds]
 ```
 
-A CIS product is not the rule, and a least-privileged badge is not proof.
+A CIS dashboard does not delete cluster-admin. A badge that says least-privileged is not that check.
 
-Re-run `test_cluster_admin_pod_is_denied` after any Helm change. A green "namespace private" tile is not that check. Break-glass ClusterRoles are a later elective — inventory them before you claim recover.
+Re-run `test_cluster_admin_pod_is_denied` after any Helm change. A “private” namespace does not delete cluster-admin. Break-glass ClusterRoles are a later elective — list those before you call the binding gone.
 
 ## Signals that do not become a second leak
 

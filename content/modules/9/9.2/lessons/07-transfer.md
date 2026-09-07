@@ -36,10 +36,10 @@ Eval-on-user still has to be rejected. Honest `int(user)` may still pass. Format
 
 ## Write this for a clinic eval in a report template
 
-1. who can act (template author / compromised designer — not a live clinic);
+1. who might try (template author / compromised designer — not a live clinic);
 2. what you trust (review of interpreters is what you trust; formatter “looks good” is not);
 3. what must not happen (`review_ok` true for eval-on-user);
-4. a test idea on **local** practice files only (no weaponized eval — never on the real clinic);
+4. a check on **local** practice files only (no weaponized eval — never on the real clinic);
 5. leftover (substring stand-in, `exec(`, generated templates, later elective);
 6. whether a human-read “change blocked” status must say “eval on user input,” not only a code (readable error, not color alone).
 

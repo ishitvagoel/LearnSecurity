@@ -35,10 +35,10 @@ If the model "only summarizes" while `run_tool` is always-run, the rule is gone.
 
 ## Write this for a clinic summarizer over charts
 
-1. who can act (prompt injection in a chart note — not a live clinic model);
+1. who might try (prompt injection in a chart note — not a live clinic model);
 2. what you trust (runtime allow-list is the promise; prompt, retrieval, and a famous-bugs map are not);
 3. what must not happen (`run_tool("exec_sql")` runs);
-4. a test idea on **local** practice files only (no live vendor API);
+4. a check on **local** practice files only (no live vendor API);
 5. leftover (HTML from `search_notes`, hallucinated packages, cryptographically bound approvals);
 6. whether operators read the denial (say `exec_sql` not allow-listed, not color only). If an approval screen exists, operators must not auto-approve.
 

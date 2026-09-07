@@ -9,7 +9,7 @@ A cache or worker can still serve the old grant after `read` was “fixed once.�
 
 ## Picture: post-revoke read is a signal
 
-When you see a read that skipped the grant, name the note id and the person. Leave the note off the ticket. Then notify A and rotate links.
+If someone reads a note without a grant, page the note id and the person — not the note. Then tell A and rotate the links.
 
 ```mermaid
 flowchart TD
@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Notify[notify A rotate links]
 ```
 
-A scanner product is not the rule, and this next-read check is not proof.
+Turning on a scanner does not consult the grant on the next read. This next-read check is still the proof.
 
-Re-run `test_revoked_share_cannot_read` after any share-path change. A green “DELETE 200” tile is not that check. Phone cache and leftover worker sessions are other read paths of the same family — inventory them before you claim recover. Tabletop remains the restore week.
+Re-run `test_revoked_share_cannot_read` after any share-path change. HTTP 200 on DELETE does not prove B cannot read. Phone cache and leftover worker sessions are other read paths — list those before you call revoke done. Tabletop remains the restore week.
 
 ## Signals that do not become a second leak
 

@@ -9,7 +9,7 @@ A new “fast-track risk” form can drop `review_by` after the schema was “se
 
 ## Picture: incomplete row is a signal
 
-When you see an accept that skipped owner, review date, or accessibility, name the missing fields. Leave secrets off the ticket. Then expire the hole or re-accept with a complete record.
+If an accept skips owner, review date, or accessibility, page the missing fields — not the secrets. Then expire the hole or re-accept with a complete record.
 
 ```mermaid
 flowchart TD
@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Expire[expire or re-accept]
 ```
 
-A governance product is not the rule, and a schema screenshot is not proof.
+Buying a governance product does not fill owner, review date, and accessibility. A schema screenshot is not that check.
 
-Re-run `test_exception_needs_owner_review_and_wcag` after any register-form change. A green “maturity 2.5” tile is not that check. Expired `review_by` dates are the same family — inventory them before claiming recover.
+Re-run `test_exception_needs_owner_review_and_wcag` after any register-form change. A maturity 2.5 tile does not fill owner, review date, and accessibility. Expired `review_by` dates are the same hole — list those before you accept the exception.
 
 ## Signals that do not become a second leak
 

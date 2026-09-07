@@ -9,7 +9,7 @@ The notes app stores a note with a member-visible `display_name` and a service-o
 
 > `resolve("member", "secret_internal")` must be false. `resolve("member", "display_name")` may be true. `resolve("service", "secret_internal")` may be true.
 
-What must not happen is **a member resolves `secret_internal`**. That is who-is-allowed at field grain. Being able to call GET `/notes` is not this sentence. A UUID in the URL finds the row. It does not authorize every column.
+What must not happen is **a member resolves `secret_internal`**. That is who-is-allowed at field grain. Being able to call GET `/notes` does not authorize every column. A UUID in the URL finds the row. It does not authorize every column.
 
 Field-level access has to be limited to consumers with an explicit yes. Function-level permission is coarser. Object-level permission was 4.4. Applying a role change through every serializer right away is **advanced**, not this check. Famous “broken object / property / function” lists are awareness after this table exists. They are not the syllabus.
 
@@ -25,7 +25,7 @@ SQLAlchemy `to_dict()`, GraphQL default resolvers, and REST `?fields=` that echo
 
 Picture a member session that asks for extra fields — a clinic GraphQL `Patient { ssn }`, a REST `?fields=` dump, or a CSV exporter that serializes every ORM column. What you trust is local `resolve(role, field)` on the server. Hiding the key in the SPA is not the rule.
 
-**A tool is not the rule.** “Private JSON keys,” “GraphQL schema is typed,” “we already passed 4.4 object tests.”
+“Private JSON keys,” “GraphQL schema is typed,” “we already passed 4.4 object tests” is not this check.
 
 ## Picture: role times field is a table
 

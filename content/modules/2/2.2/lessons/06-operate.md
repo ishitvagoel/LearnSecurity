@@ -9,7 +9,7 @@ Even after the key includes the company, someone can still leak a body: a CDN co
 
 ## Picture: signal, purge, then secrecy work if bodies escaped
 
-When you see a wrong cache hit, the body does not belong in the log. Name the mismatch. Then purge. Neither writes `tenant-A-note`.
+A wrong cache hit must not write the body into the log. Name which companies collided. Then purge the entry. Do not write `tenant-A-note`.
 
 ```mermaid
 flowchart TD
@@ -22,7 +22,7 @@ flowchart TD
   Inc -->|no| Watch[Keep watching the live window]
 ```
 
-A log product is not the rule, and a checklist is not proof.
+Buying a log product does not put the company in the cache key. Ticking a checklist does not write the key.
 
 Certificate-failure drills belong to TLS deployment, not this cache-key sentence. Keep them in a separate note so they do not replace purge.
 

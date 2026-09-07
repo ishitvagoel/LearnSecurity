@@ -37,10 +37,10 @@ Also name the exception path (E6): an exception still names the missing threat m
 
 ## Write this for a clinic HIPAA training as merge
 
-1. who can act (schedule pressure — not a live clinic);
+1. who might try (schedule pressure — not a live clinic);
 2. what you trust (the merge check is the promise; CODEOWNERS, training, and a maturity score are not);
 3. what must not happen (`merge_ok({})` true);
-4. a test idea on **local** practice files only (no live GitHub org);
+4. a check on **local** practice files only (no live GitHub org);
 5. leftover (stale threat-model id, vanity ticket counts, exceptions without expiry);
 6. whether a human merge path exists (must say which surface needs a threat-model id).
 

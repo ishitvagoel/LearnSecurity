@@ -18,7 +18,7 @@ flowchart TD
   StoreDown[Key store unreachable] --> Closed["Fail closed — do not insert"]
 ```
 
-When you see a broken retry, fail closed, and keep the note out of the log.
+On a broken retry, fail closed, and keep the note out of the log.
 
 | Outcome | This topic |
 |---|---|

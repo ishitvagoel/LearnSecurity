@@ -9,7 +9,7 @@ A new SDK version can turn “include extras” back on after `crash_report` was
 
 ## Picture: body in telemetry is a signal
 
-When you see a crash-report redaction miss, name the crash. Leave the crash body off the pager. Then purge the vendor copy.
+If a crash report still holds the note, page the crash id — not the crash body. Then purge the vendor copy.
 
 ```mermaid
 flowchart TD
@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Purge[Purge vendor copy]
 ```
 
-A crash product is not the rule, and a clean crash report is not proof.
+Buying a crash product does not omit the note. A clean-looking report is not that check.
 
-Re-run `test_crash_report_omits_note_body` after any crash-SDK change. A green “store privacy form filled” tile is not that check. Tracker SDKs and web crash reports (10.5) are other places for the same body — inventory them before you claim recover.
+Re-run `test_crash_report_omits_note_body` after any crash-SDK change. Filling the store privacy form does not omit the note. Tracker SDKs and web crash reports (10.5) are other places for the same body — list those before you call redaction done.
 
 ## Signals that do not become a second leak
 

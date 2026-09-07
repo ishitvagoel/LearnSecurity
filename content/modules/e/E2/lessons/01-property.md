@@ -31,7 +31,7 @@ flowchart LR
   Csp --> NotEnc[not encoding]
 ```
 
-**A tool is not the rule.** Helmet defaults, a green reporting dashboard, or “we set a header.”
+Helmet defaults, a green reporting dashboard, or “we set a header” is not this check.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

@@ -36,7 +36,7 @@ flowchart LR
 
 The store listing and code signing prove *which package id was installed*, not *what that process will send next*.
 
-**A tool is not the rule.** Play Integrity, shrinking the app, SafetyNet brand names, “Kotlin is memory-safe.”
+Play Integrity, shrinking the app, SafetyNet brand names, “Kotlin is memory-safe” is not this check.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

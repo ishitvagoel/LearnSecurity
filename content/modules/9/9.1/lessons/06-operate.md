@@ -9,7 +9,7 @@ A new requirement can land without a test after `covered` was “fixed once.” 
 
 ## Picture: uncovered AUTHZ-1 is a signal
 
-When you see an unmapped requirement, name the requirement. Leave the requirement text off the pager. Then add the isolation test.
+If a requirement has no isolation test, page the requirement id — not the requirement text. Then add the isolation test.
 
 ```mermaid
 flowchart TD
@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Stop[block release]
 ```
 
-A governance product is not the rule, and a covered-requirement badge is not proof.
+Buying a governance product does not attach an isolation test. A badge that says the requirement is covered is not that check.
 
-Re-run `test_status_only_row_is_not_coverage` after any matrix change. A green “checklist imported” tile is not that check. Mobile storage rows (8.2) are other requirements of the same check — inventory them before you claim recover. A 200-only test that someone flagged `asserts_isolation` by mistake is a later lying-flag leftover (9.3), not a silent pass.
+Re-run `test_status_only_row_is_not_coverage` after any matrix change. Importing a checklist does not attach an isolation test. Mobile storage rows (8.2) are other requirements of the same check — list those before you call AUTHZ-1 covered. A 200-only test that someone flagged `asserts_isolation` by mistake is a later lying-flag leftover (9.3), not a silent pass.
 
 ## Signals that do not become a second leak
 

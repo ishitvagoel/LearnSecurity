@@ -11,10 +11,10 @@ Clinic: max 3 guardians per child. Optionally map invite tokens and export quota
 
 EHR-lite guardian list on a booking card.
 
-1. who can act (scripted add; disabled UI max; import — **not** a live clinic);
+1. who might try (scripted add; disabled UI max; import — **not** a live clinic);
 2. what you trust (which write path is trusted; HTML is not);
 3. what must not happen (`add_guardian` four times yields count 4 — not a privacy-law name and not an awareness-list name);
-4. a test idea on a **local** practice only (loop four times, last ≤ 3);
+4. a check on a **local** practice only (loop four times, last ≤ 3);
 5. leftover (honest family of 4 needs an owned exception; parallel adds need a lock);
 6. whether a human path must meet the web accessibility baseline (announce “guardian limit reached” if the denial is shown to a human).
 

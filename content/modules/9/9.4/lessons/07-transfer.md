@@ -37,10 +37,10 @@ Also name SCA: a CVE versus a function you actually call.
 
 ## Write this for a clinic with fifty unmapped HIGHs
 
-1. who can act (alert fatigue — not a live clinic);
+1. who might try (alert fatigue — not a live clinic);
 2. what you trust (the mapping check is the promise; the dashboard and a maturity score are not);
 3. what must not happen (`ship_ok([HIGH], {})` true);
-4. a test idea on **local** practice files only (no live GitHub);
+4. a check on **local** practice files only (no live GitHub);
 5. leftover (who-is-allowed blind spots, dependency confusion as an advanced leftover, mass suppressions);
 6. whether a human triage path exists (must say *why* F1 is blocked, in words).
 

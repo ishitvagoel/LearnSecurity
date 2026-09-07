@@ -9,7 +9,7 @@ A new endpoint can land with only 200 tests after `is_security_test` was “fixe
 
 ## Picture: missing isolation is a signal
 
-When you see a missing named what-must-not-happen, name the suite. Leave the note off the pager. Then add the isolation test.
+If the suite never names what must not happen, page the suite — not the note. Then add the isolation test.
 
 ```mermaid
 flowchart TD
@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Block[block release]
 ```
 
-A coverage product is not the rule, and an honest-suite badge is not proof.
+Buying a coverage product does not name what must not happen. A badge that says the suite is honest is not that check.
 
-Re-run `test_http_200_only_is_not_a_security_test` after any suite change. A green “94% coverage” tile is not that check. Field-level tests (7.2) and race-condition tests are other named what must not happen of the same shape — inventory them before you claim recover. Keep 200-only tests as product tests; do not delete them, and do not let them occupy the security-suite slot.
+Re-run `test_http_200_only_is_not_a_security_test` after any suite change. Ninety-four percent coverage does not name what must not happen. Field-level tests (7.2) and race-condition tests are other named bad results of the same shape — list those before you call the suite complete. Keep 200-only tests as product tests; do not delete them, and do not let them occupy the security-suite slot.
 
 ## Signals that do not become a second leak
 

@@ -9,7 +9,7 @@ A cache can serve old bytes after `install_ok` was “fixed once.” Do not log 
 
 ## Picture: digest mismatch is a signal
 
-When you see a denied mismatch, name the package and the two digest ids. Leave the registry token off the pager. Then pin known-good.
+If a digest does not match, page the package name and both digest ids — not the registry token. Then pin the known-good digest.
 
 ```mermaid
 flowchart TD
@@ -20,7 +20,7 @@ flowchart TD
 
 An SBOM vendor name does not prove the lockfile was checked.
 
-Re-run `test_hash_mismatch_refuses_install` after any installer change. A green “SBOM attached” tile is not that check. Cache poisoning and `@v1` Actions are sibling grains — inventory them before you claim recover.
+Re-run `test_hash_mismatch_refuses_install` after any installer change. Attaching an SBOM does not compare digests. Cache poisoning and `@v1` Actions are sibling leftovers — list those before you call the pin done.
 
 ## Signals that do not become a second leak
 

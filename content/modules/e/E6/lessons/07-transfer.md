@@ -36,10 +36,10 @@ An empty owner still has to be denied. A complete record may still accept. Addin
 
 ## Write this for a clinic HIPAA exception
 
-1. who can act (calendar / silent accept — not a live clinic audit);
+1. who might try (calendar / silent accept — not a live clinic audit);
 2. what you trust (schema is the promise; maturity score, industry labels, and a pledge are not);
 3. what must not happen (`accept_exception` true with empty owner);
-4. a test idea on **local** practice files only (no clinic governance tool);
+4. a check on **local** practice files only (no clinic governance tool);
 5. leftover (unread register, inaccessible recovery, extra advanced documentation);
 6. whether the exception records that patients can complete recovery (plain language, not color-only).
 

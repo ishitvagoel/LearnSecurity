@@ -25,7 +25,7 @@ flowchart TD
 | Recover | Audit B; take back the confused session |
 | Leftover | Copies; silent impersonation; GraphQL aliases |
 
-A row-level vendor name does not prove company isolation. Re-run `test_body_cannot_switch_tenant` after any query-layer change; a green “row-level rules on” tile is not that check. Search, cache, and lake copies are the same family — inventory them before you claim recover.
+A row-level vendor name does not prove company isolation. Re-run `test_body_cannot_switch_tenant` after any query-layer change. Turning row-level rules on does not stop a body switch. Search, cache, and lake copies are the same family — list those before you call companies apart.
 
 ## What the framework does vs what you still have to check
 

@@ -11,10 +11,10 @@ Clinic DICOM / image parser. Also name a protobuf C extension.
 
 EHR-lite “the app is mostly Kotlin so copies are safe,” plus “we mapped an awareness-list name so the unpacker is done.”
 
-1. who can act (hostile header length — not a live clinic binary attack);
+1. who might try (hostile header length — not a live clinic binary attack);
 2. what you trust (smallest of three at the **native** copy is what you trust; Kotlin / a company roadmap / an awareness-list name are not);
 3. what must not happen (`copy_into` length > bufsize, not a privacy-law name);
-4. a test idea on a **local** practice only (no third-party codec fuzzing);
+4. a check on a **local** practice only (no third-party codec fuzzing);
 5. leftover (helpers that call C, integer wrap, native unpacker leftover later and harder);
 6. whether a human “copy rejected” path must meet the web accessibility baseline (operators must read the error without a hex dump).
 

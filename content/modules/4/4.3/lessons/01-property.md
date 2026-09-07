@@ -25,7 +25,7 @@ flowchart TD
 
 The person who can hurt you here is a log operator, a Referer collector, or someone with a shared screenshot — not a brand-new JWT bug.
 
-**A tool is not the rule.** “We use JWTs,” NextAuth, or a blog titled SPA best practice 2016.
+“We use JWTs,” NextAuth, or a blog titled SPA best practice 2016 is not this check.
 
 ## Picture: three channels, one deny
 

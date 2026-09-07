@@ -27,7 +27,7 @@ A dashboard tile does not prove secrets stayed out of the APK.
 | Recover | Keep deny; rotate keys; fix the flavor |
 | Leftover | Stolen release keys; attestation farms |
 
-An R8 product name is not the check. Re-run `test_debug_build_cannot_call_prod_export` after any client-id change; a green “minifyEnabled” tile is not that check. Student flavors and leaked debug APKs are other channels of the same prod API — list them before you claim Recover.
+An R8 product name is not the check. Re-run `test_debug_build_cannot_call_prod_export` after any client-id change. `minifyEnabled` does not keep a debug build off the prod export. Student flavors and leaked debug APKs are other channels of the same prod API — list those before you call the client id private.
 
 ## What the framework does vs what you still have to check
 

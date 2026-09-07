@@ -30,7 +30,7 @@ Here, “charts” is still “notes” for this rule. If the dashboard is green
 
 ## Write this for a clinic Report-Only as a HIPAA header
 
-1. who can act (a script that would only be logged — not a live clinic script hunt);
+1. who might try (a script that would only be logged — not a live clinic script hunt);
 2. what you trust (the enforcing header name is what you trust; Report-Only, Helmet, and a dashboard are not);
 3. what must not happen (`isolation_enforced` true on Report-Only, not “HIPAA”);
 4. a check idea on a **local** practice only (no live page);

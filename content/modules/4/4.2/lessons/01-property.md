@@ -11,7 +11,7 @@ The notes app logs a browser user in at `https://app.securecollab.test`. A passw
 
 What must not happen is a **password (or wrong-origin WebAuthn) counted as phishing-resistant**. That is a login bound to the *wrong* site, then a session that acts as the victim.
 
-Authenticator guidance still treats passwords and OTP as phishable. “We turned on 2FA” is not this sentence. WebAuthn Level 3 is still a Candidate Recommendation, not a finished Rec. A later, stricter bar wants a hardware, user-intent, phishing-resistant factor. Treat that as later, not as this check.
+Authenticator guidance still treats passwords and OTP as phishable. “We turned on 2FA” is not the phishing-resistant check. WebAuthn Level 3 is still a Candidate Recommendation, not a finished Rec. A later, stricter bar wants a hardware, user-intent, phishing-resistant factor. Treat that as later, not as this check.
 
 ## Picture: the secret walks to the wrong site
 
@@ -25,7 +25,7 @@ flowchart TD
 
 Nobody needs a new bug name. A lookalike login page is enough. Trusting “the user will read the URL” is not what you trust.
 
-**A tool is not the rule.** A passkey vendor dashboard, `autocomplete=webauthn`, or “we turned on MFA” is not this sentence.
+A passkey vendor dashboard, `autocomplete=webauthn`, or “we turned on MFA” is not this check.
 
 ## Picture: origin binding vs a shared secret
 

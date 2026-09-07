@@ -11,7 +11,7 @@ Do not log tokens (4.3) or email addresses as if they were public ids. Do not pa
 
 ## Picture: second accept is a signal
 
-When you see a second accept after consume, leave the token off the pager. Then remove the extra membership.
+If a second accept lands after consume, keep the token out of the pager. Then remove the extra membership.
 
 ```mermaid
 flowchart TD
@@ -41,7 +41,7 @@ Not: the token, a note body, a real email, or “the mailer said clicked once.�
 
 Putting the raw token in the alert opens a 4.3 hole in the pager.
 
-A green “unique index” tile is not that check. A mail vendor dashboard will show “link clicked once” and stay silent when `/accept` still returns true the second time. Detection must observe **second `accept` false**, not a click counter. Password-reset consume is another path of the same family — inventory it before claiming recover.
+A unique-index screenshot does not consume the token. A mail vendor dashboard will show “link clicked once” and stay silent when `/accept` still returns true the second time. Detection must observe **second `accept` false**, not a click counter. Password-reset consume is another path of the same family — list it before you call the seat taken.
 
 ## What the framework does vs what you still have to check
 

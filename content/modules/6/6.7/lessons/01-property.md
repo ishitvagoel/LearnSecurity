@@ -11,7 +11,7 @@ The notes app lets a member export notes. Export copies note bodies into a CSV. 
 
 What must not happen is **unbounded exports (fourth allowed)**. That burns availability and cost. It also makes extra CSVs of note bodies, which is a second secrecy problem from the copies lesson (5.1).
 
-There has to be a stop against scripts that burn quota and costly work. Per-person and whole-app limits written down, then actually enforced. Human timing tricks are **advanced** work, not this check. An edge proxy’s request limit is not this sentence.
+There has to be a stop against scripts that burn quota and costly work. Per-person and whole-app limits written down, then actually enforced. Human timing tricks are **advanced** work, not this check. An edge proxy’s request limit is not the quota check.
 
 ## Picture: a resource account per person
 

@@ -11,7 +11,7 @@ Do not paste the chart into the ticket. Do not log bodies.
 
 ## Picture: hunt ids, not bodies
 
-When you see a leftover body after delete, leave leftover notes off the pager. Then purge the partition.
+After delete, a leftover body must not put leftover notes in the pager. Then purge the partition.
 
 ```mermaid
 flowchart TD
@@ -41,7 +41,7 @@ Not: a note body, a personal email, or “privacy law handled it.”
 
 Putting a note body in the alert leaves a leftover copy in the pager.
 
-A green dashboard tile that says “privacy mode” is not that check. If a replica warehouse still has `alice`, treat it as the same leftover body, not a separate “eventual consistency” pass. Search, analytics, and the appointment-card analogue are other paths of the same leftover — inventory them before claiming recover. An “account deleted” email is not recovery.
+A dashboard tile that says “privacy mode” does not wipe leftover notes. If a replica warehouse still has `alice`, treat it as the same leftover body, not a separate “eventual consistency” pass. Search, analytics, and the appointment-card analogue are other leftover copies — list those before you send the “account deleted” mail. That mail is not recovery.
 
 ## What the framework does vs what you still have to check
 

@@ -9,11 +9,11 @@ The notes app draws a note title as HTML text. The title is **data**. Angle brac
 
 Last topic (6.1) taught data versus interpreter grammar. The rule is the HTML parser.
 
-> `render` must turn `<` into `&lt;` when it writes HTML text. Encoding depends on where you write. A content-security header is not this sentence.
+> `render` must turn `<` into `&lt;` when it writes HTML text. Encoding depends on where you write. A content-security header is not the encoding check.
 
 What must not happen: **unencoded markup reaches the HTML interpreter**. That is an integrity failure of the HTML document. If the cookie is also readable by script (the cookie-jar topic, 2.3), it can become a secrecy failure of the session. This practice uses a tame marker (`<`). It is not an exploit kit. Do not paste attack recipes into notes.
 
-Output has to be encoded for the context you are writing into. A content-security policy that blocks objects and base tags is a **layer**, not a substitute. Reporting from that policy is extra, later, and advanced. The current content-security spec and Trusted Types are still **draft**. A famous-bugs nickname for “script in HTML” is awareness after the cause, not this sentence. React JSX is not this sentence.
+Output has to be encoded for the context you are writing into. A content-security policy that blocks objects and base tags is a **layer**, not a substitute. Reporting from that policy is extra, later, and advanced. The current content-security spec and Trusted Types are still **draft**. A famous-bugs nickname for “script in HTML” is a family name after the cause, not the encoding check. React JSX is not the encoding check.
 
 ## Picture: HTML grammar mixed with data
 
@@ -26,7 +26,7 @@ flowchart TD
 
 The attacker is a collaborator who can edit a title (stored), or anyone who can bounce a title through a reflected path. What you trust is local `render()`. Real browser sinks wait for later work. This practice is a string.
 
-**A tool is not the rule.** A content-security header, a scanner finding labeled “XSS,” or React’s defaults is not this sentence.
+A content-security header, a scanner finding labeled “XSS,” or React’s defaults is not this check.
 
 ## Picture: context is the encoding
 

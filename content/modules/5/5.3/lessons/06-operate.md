@@ -24,9 +24,9 @@ flowchart TD
 | Recover | Rotate; rebuild images; purge logs |
 | Leftover | Copies already cloned |
 
-A vendor name does not kill `DEFAULT`. Re-run `test_hardcoded_default_does_not_auth` after any `auth` change; a green “Vault enabled” tile is not that check. Images and workers are other copies of the same rule — inventory them before claiming recover.
+A vendor name does not kill `DEFAULT`. Re-run `test_hardcoded_default_does_not_auth` after any `auth` change. Enabling Vault does not stop the hardcoded default. Images and workers are other copies of the same secret — list those before you call the gist dead.
 
-Recovery is incomplete if the next image still ships `DEFAULT = "sk-lab-hardcoded"` as an or-clause. Rebuild and prove `test_missing_current_denies` the same day you rotate, or the next allow-when-missing still authenticates the gist copy. A vault tile is not that check.
+Recovery is incomplete if the next image still ships `DEFAULT = "sk-lab-hardcoded"` as an or-clause. Rebuild and prove `test_missing_current_denies` the same day you rotate, or the next allow-when-missing still authenticates the gist copy. A Vault dashboard is not that rebuild.
 
 ## What the framework does vs what you still have to check
 

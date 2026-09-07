@@ -30,7 +30,7 @@ If testers share the prod API key while `api_allowed` is always true, the rule i
 
 ## Write this for a clinic debug vs prod FHIR
 
-1. who can act (leaked debug APK — not a live hospital);
+1. who might try (leaked debug APK — not a live hospital);
 2. what you trust (server build-plus-attest is what you trust; R8 and Play App Signing are not);
 3. what must not happen (`api_allowed("debug","ok")` true, not “HIPAA”);
 4. a check idea on **local** practice files only (no store APK unpacking);

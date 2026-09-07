@@ -9,7 +9,7 @@ A new identity change can land after `merge_ok` was “fixed once.” Do not log
 
 ## Picture: missing threat-model id is a signal
 
-When you see a blocked merge, name the change. Leave the threat-model body off the pager. Then add the threat-model id.
+If merge is blocked, page the change id — not the threat-model body. Then add the missing threat-model id.
 
 ```mermaid
 flowchart TD
@@ -20,7 +20,7 @@ flowchart TD
 
 A GitHub product name does not prove the design-review practice exists. Someone still has to own the leftover.
 
-Re-run `test_merge_requires_threat_model_id` after any merge-bot change. A green “CODEOWNERS required” tile is not that check. Stale TM-12 that never mentions OAuth is a 3.2 leftover — inventory it before you claim recover.
+Re-run `test_merge_requires_threat_model_id` after any merge-bot change. Requiring CODEOWNERS does not put a threat-model id on the change. A stale TM-12 that never mentions OAuth is leftover from topic 3.2 — do not call the merge safe until that row exists.
 
 ## Signals that do not become a second leak
 

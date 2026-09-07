@@ -27,7 +27,7 @@ A checklist name does not copy “ignore identity keys.” Someone still has to 
 | Recover | Keep alice; force re-login if switched |
 | Leftover | WebView; custom scheme; attacker app installed |
 
-A mobile-filter product name is not the check. Re-run `test_deeplink_as_param_does_not_switch_user` after any exported-component change; a green “App Links verified” tile is not that check. OAuth redirects (4.5) and WebView bridges are other IPC paths of the same extras — list them before you claim Recover.
+A mobile-filter product name is not the check. Re-run `test_deeplink_as_param_does_not_switch_user` after any exported-component change. “App Links verified” does not ignore `as=`. OAuth redirects (4.5) and WebView bridges are other IPC paths of the same extras — list those before you call the deep link honest.
 
 ## What the framework does vs what you still have to check
 

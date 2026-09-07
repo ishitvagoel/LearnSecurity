@@ -27,10 +27,10 @@ Session A plus body B is still A. Matching A/A may still keep A. Enabling row-le
 
 ## Write this for a clinic sketch
 
-1. who can act (member of practice A sending practice B — not a live clinic company);
+1. who might try (member of practice A sending practice B — not a live clinic company);
 2. what you trust (session binding is trusted; a row-level variable from the body, a famous-bugs mapping, and a subdomain are not);
 3. what must not happen (`tenant_for({A},{B}) == B`);
-4. a test idea on **local** practice files only (no public clinic system);
+4. a check on **local** practice files only (no public clinic system);
 5. leftover (search/cache/lake, silent impersonation, immediate grant-change leftover);
 6. whether a support impersonation UI exists (must not look like the clinician’s own company; announce *acting as* in text).
 

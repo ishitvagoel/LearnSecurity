@@ -7,11 +7,11 @@
 
 The notes app lets an owner share a note with other people. The product rule is **at most five share grants per note**. That number is a business limit on who may later read the note, not a named bug. A scripted client, a disabled `max=5` select, an import path, or eight rapid POSTs will try to add a sixth reader. HTML is not what you trust.
 
-> For a note in the notes app, eight `add_share` calls must leave `share_count() <= 5`. The sixth grant is denied on the **write path**. A React `max={5}`, a CDN filter, or an awareness-list sticker is not this sentence.
+> For a note in the notes app, eight `add_share` calls must leave `share_count() <= 5`. The sixth grant is denied on the **write path**. A React `max={5}`, a CDN filter, or a famous-bugs sticker is not the write-path limit.
 
 What must not happen is **cap exceeded**: looping `add_share()` eight times yields `last > 5`. Extra rows are extra readers nobody intended: more people on the note, more places a break can reach, a noisier threat model.
 
-The limit has to be written down, enforced on a trusted service, actually implemented, and locked so two parallel sixths cannot both land. Multi-user approval for a support override is an advanced extra, not a silent baseline. Awareness lists name unrestricted consumption after this sentence exists. They are not the syllabus.
+The limit has to be written down, enforced on a trusted service, actually implemented, and locked so two parallel sixths cannot both land. Multi-user approval for a support override is an advanced extra, not a silent baseline. A famous-bugs list may mention unrestricted consumption after this sentence exists. That list is not the syllabus.
 
 ## Picture: UI max is not the write path
 
@@ -28,7 +28,7 @@ flowchart TD
 
 Nobody needs a new bug name. A loop, a retrying UI, or a support tool is enough. Trusting “the owner will stop at five” is not what you trust.
 
-**A tool is not the rule.** HTML `max`, nginx `limit_req`, or a filter named after an awareness list.
+HTML `max`, nginx `limit_req`, or a filter named after an awareness list is not this check.
 
 ## Picture: rate limit is not the product cap
 

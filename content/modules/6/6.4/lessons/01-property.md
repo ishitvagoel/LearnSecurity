@@ -11,7 +11,7 @@ The notes app stores an upload under a lab folder. The **filename is data**. Aft
 
 What must not happen is **a resolved path that leaves the lab folder**. That is a who-is-allowed failure of *which object*, plus whether the host store stays honest.
 
-Awareness lists name “path walk” as a family. They are not this sentence. Internally generated names or a hard check on user filenames, uploaded files not run as server code, and an extension that matches the content. Names inside zip files that walk out are a later, harder leftover — not this check. Starlette `UploadFile.filename` is not this sentence.
+A famous-bugs list may call this a “path walk.” The rule here is still the resolved prefix. Internally generated names, a hard check on user filenames, not running uploads as server code, and matching extension to content do not prove the object stayed under `/tmp/sc-lab`. Zip entries that walk out are a later leftover. Starlette `UploadFile.filename` is not the prefix check.
 
 ## Picture: path grammar mixed with data
 
@@ -24,7 +24,7 @@ flowchart TD
 
 Picture an uploader who controls a filename field. Local `resolve()` under `/tmp/sc-lab`. Do not open host files outside this practice.
 
-**A tool is not the rule.** A UUID stored name, an antivirus product, or a denylist of `..` is not this sentence.
+A UUID stored filename, an antivirus product, or a denylist of `..` is not this check.
 
 ## Picture: join, canonicalize, then prefix
 

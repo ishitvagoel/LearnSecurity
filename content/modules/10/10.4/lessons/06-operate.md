@@ -9,7 +9,7 @@ A flag can still flip after `boot_ok` was “fixed once.” Do not log stack tra
 
 ## Picture: an illegal boot is a signal
 
-When you see an illegal boot, name env, debug, and deploy. Leave the stack trace off the pager. Then kill the process and rotate secrets that already leaked.
+If production boots with debug on, page env, debug, and deploy — not the stack trace. Then kill the process and rotate secrets that already leaked.
 
 ```mermaid
 flowchart TD
@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Kill[kill and rotate trace secrets]
 ```
 
-A canary product is not the rule, and a boot-refused tile is not proof.
+A canary product does not keep debug off in production. A tile that says boot was refused is not that check.
 
-Re-run `test_prod_debug_must_not_boot` after any compose change. A green `NODE_ENV` tile is not that check. Emergency debug is E6 — inventory it before you claim recover.
+Re-run `test_prod_debug_must_not_boot` after any compose change. A green `NODE_ENV` tile does not keep debug off. Emergency debug is E6 — do not call production safe until that exception is on the register.
 
 ## Signals that do not become a second leak
 

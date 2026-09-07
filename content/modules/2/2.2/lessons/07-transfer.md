@@ -32,7 +32,7 @@ flowchart TD
 
 Your answer must include:
 
-- who can act (another patient on the same CDN; a neighbor on a TLS-inspecting proxy);
+- who might try (another patient on the same CDN; a neighbor on a TLS-inspecting proxy);
 - what you trust (which hop is TLS; which store is greedy; the client is hostile);
 - what must not happen (cross-patient cache hit, not “TLS stripped”);
 - a check idea that would fail if the rule were false (local practice only);

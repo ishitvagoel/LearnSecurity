@@ -34,10 +34,10 @@ The lookup helper returns `(sql, params)` (or an ORM bound construct), not a con
 
 ## Write this for a clinic search box
 
-1. who can act (clinician or kiosk user supplying search text — not a live clinic);
+1. who might try (clinician or kiosk user supplying search text — not a live clinic);
 2. what you trust (which API binds values; the ORM brand is not);
 3. what must not happen (`fetch`-like function returns concatenated query text);
-4. a test idea on **local** practice files only (shape is a tuple, not a `str` — never on the real clinic);
+4. a check on **local** practice files only (shape is a tuple, not a `str` — never on the real clinic);
 5. leftover (ORDER BY identifiers; replicas; row-level-rule theater; advanced logging);
 6. whether a human-read “search failed” status must not use color as the only cue (readable error, not a silent empty list that hides a parser crash).
 

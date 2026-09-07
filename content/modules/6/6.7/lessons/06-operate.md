@@ -11,7 +11,7 @@ Do not log note bodies in the CSV path (3.1 / 5.1). Do not attach the CSV to the
 
 ## Picture: the fourth try is a signal
 
-When you see a fourth export in the window, leave note bodies off the pager. Then keep the deny and revoke a stolen session.
+If a fourth export lands in the window, keep note bodies out of the pager. Then keep the deny and revoke a stolen session.
 
 ```mermaid
 flowchart TD
@@ -41,7 +41,7 @@ Not: a note body, a CSV attachment, a real email, or a live load trace against a
 
 Putting note bodies from the CSV in the alert leaves extra copies in the pager.
 
-A green “rate limit enabled” tile is not that check. Notification fan-out and extra formats are other paths of the same budget — inventory them before claiming recover. Re-run `test_fourth_export_is_denied` after any export-route change.
+Enabling a rate limit does not deny the fourth export. Notification fan-out and extra formats are other paths of the same budget — list those before you keep the deny. Re-run `test_fourth_export_is_denied` after any export-route change.
 
 ## What the framework does vs what you still have to check
 

@@ -26,7 +26,7 @@ flowchart TD
 
 Picture someone who controls a file header length. A local `copy_into(bufsize, src, declared_len)` that bounds the copy by destination size. Do not compile a native overflow.
 
-**A tool is not the rule.** “We use Kotlin,” a sanitizer in CI, or an awareness-list dashboard is not this sentence.
+“We use Kotlin,” a sanitizer in CI, or an awareness-list dashboard is not this check.
 
 ## Picture: language marketing is not the copy
 

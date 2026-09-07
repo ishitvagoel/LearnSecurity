@@ -9,7 +9,7 @@ A new rule can fire a new HIGH after `ship_ok` was “fixed once.” Do not log 
 
 ## Picture: unmapped HIGH is a signal
 
-When you see a blocked ship, name the finding id. Leave the finding payload off the pager. Then map or fix.
+If ship is blocked, page the finding id — not the finding payload. Then map it or fix it.
 
 ```mermaid
 flowchart TD
@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Stop[block ship]
 ```
 
-A scanner product is not the rule, and an owned-finding badge is not proof.
+Turning on a scanner does not own the HIGH. A badge that says the finding is owned is not that check.
 
-Re-run `test_unmapped_high_blocks_ship` after any scanner-rule change. A green “code scanning on” tile is not that check. SCA CVEs that are not actually called still need an *owner* on the map — inventory them before you claim recover.
+Re-run `test_unmapped_high_blocks_ship` after any scanner-rule change. Turning code scanning on does not own the HIGH. SCA CVEs that are not actually called still need an *owner* on the map — list those before you ship.
 
 ## Signals that do not become a second leak
 

@@ -11,7 +11,7 @@ The notes app opens notes from a link. The **session** is identity (4.3). The In
 
 What must not happen: **a deep link `as=` switches the signed-in user**. That is authenticity of the principal, not “the link was https.”
 
-IPC has to be used securely. A WebView is another HTML interpreter (6.2), not this session. Claimed HTTPS app links for OAuth redirects still leave custom schemes hijackable. “The link was https” is not this sentence.
+IPC has to be used securely. A WebView is another HTML interpreter (6.2), not this session. Claimed HTTPS app links for OAuth redirects still leave custom schemes hijackable. “The link was https” is not the claimed-link check.
 
 ## Picture: link locates, session authorizes
 
@@ -34,7 +34,7 @@ flowchart LR
 
 On older API levels `exported` defaults were surprising. Treat export as explicit.
 
-**A tool is not the rule.** “App Links verified,” “https,” “WebView is Chrome.”
+“App Links verified,” “https,” “WebView is Chrome” is not this check.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

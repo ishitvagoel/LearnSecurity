@@ -18,7 +18,7 @@ flowchart TD
   Decision -->|yes| Mediate[Hand the parse result to the who-is-allowed check]
 ```
 
-A log product is not the rule, and a checklist is not proof.
+Buying a log product does not pick the reader. Ticking a checklist does not pick it either.
 
 ## Signals that do not become a second leak
 

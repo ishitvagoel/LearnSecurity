@@ -28,7 +28,7 @@ A checklist name does not encode HTML.
 | Recover | Patch encoding; draw again; rotate cookies if they were readable by script |
 | Leftover | Report-only content-security policy; trusted admin HTML |
 
-Re-run `test_angle_brackets_are_encoded` after any renderer change; a green “content-security policy on” tile is not that check. Markdown and nickname fields are other paths of the same rule — list them before you claim Recover.
+Re-run `test_angle_brackets_are_encoded` after any renderer change. Turning a content-security policy on does not encode `<`. Markdown and nickname fields are other paths of the same rule — list those before you call the title encoded.
 
 ## What the framework does vs what you still have to check
 

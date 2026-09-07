@@ -34,10 +34,10 @@ The spawn helper returns a list whose program is not `sh`, and the name is one e
 
 ## Write this for a clinic CSV filename
 
-1. who can act (clerk-chosen filename — not a live clinic);
+1. who might try (clerk-chosen filename — not a live clinic);
 2. what you trust (argv list is what you trust; a denylist of punctuation is not);
 3. what must not happen (`argv_for_list` starts `sh -c`);
-4. a test idea on **local** practice files only (shape, no execution — never on the real clinic);
+4. a check on **local** practice files only (shape, no execution — never on the real clinic);
 5. leftover (argument injection; CSV formula leftover; plugin shells);
 6. whether a human-read “export failed” status must not use color as the only cue (readable error, not a silent missing file).
 

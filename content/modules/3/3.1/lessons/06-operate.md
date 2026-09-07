@@ -11,7 +11,7 @@ Do not paste the matching line into Slack, a ticket, or a lesson note.
 
 ## Picture: alert on the substring, then purge
 
-When you see a redaction miss, the secret does not belong in the pager. Then purge the line.
+If redaction misses, the secret does not belong in the pager. Then purge the line.
 
 ```mermaid
 flowchart TD
@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Purge[Purge matching lines]
 ```
 
-A log product is not the rule, and a clean line is not proof.
+Buying a log product does not redact the body. A clean-looking line is not that check.
 
 ## Signals that do not become a second leak
 

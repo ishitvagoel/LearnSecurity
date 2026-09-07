@@ -11,7 +11,7 @@ Do not log note bodies or bound parameter values that are bodies (3.1 / 5.1). Do
 
 ## Picture: error shape is a signal
 
-When you see a SQL syntax-error spike after a query helper change, leave note bodies off the pager. Then stop the concatenating path and restore if needed.
+If SQL syntax errors spike after a query helper change, keep note bodies out of the pager. Then stop the concatenating path and restore if needed.
 
 ```mermaid
 flowchart TD
@@ -41,7 +41,7 @@ Not: a note body, a full SQL string with values, a real email, or “the web fil
 
 Putting a full SQL string with values in the alert leaves the query text in the pager too.
 
-A green “web-filter SQLi rule” tile is not that check. Report paths and ORDER BY builders are other paths of the same check — inventory them before claiming recover. If a replica was not restored, treat it as the same leftover, not a separate “eventual consistency” pass.
+A web-filter SQLi rule does not bind the query helper. Report paths and ORDER BY builders are other concatenating paths — list those before you call SQL safe. If a replica was not restored, treat it as the same leftover, not a separate “eventual consistency” pass.
 
 ## What the framework does vs what you still have to check
 

@@ -35,7 +35,7 @@ flowchart LR
 
 A prompt that shows the list is not wrapping the cache key. A compromised OS can skip the prompt. That leftover stays even when local unlock looks polished.
 
-**A tool is not the rule.** EncryptedSharedPreferences on *some* prefs; `FLAG_SECURE` alone; “we use Room.”
+EncryptedSharedPreferences on *some* prefs; `FLAG_SECURE` alone; “we use Room” is not this check.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

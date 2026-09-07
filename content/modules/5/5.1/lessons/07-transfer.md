@@ -34,10 +34,10 @@ After patient delete, appointment-card notes and the analytics export still have
 
 ## Write this for leftover card notes
 
-1. who can act (insider analytics; partner CSV — **not** a live clinic);
+1. who might try (insider analytics; partner CSV — **not** a live clinic);
 2. what you trust (which delete path is trusted; the contract PDF is not);
 3. what must not happen (`body_retained` true after delete);
-4. a test idea on **local** files only (patient delete leaves card notes None — never on the real clinic);
+4. a check on **local** files only (patient delete leaves card notes None — never on the real clinic);
 5. leftover (backups; phone cache; legal hold);
 6. whether a human-read “account deleted” status must not use color as the only cue.
 
