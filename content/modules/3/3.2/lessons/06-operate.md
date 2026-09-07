@@ -27,7 +27,7 @@ A missing id is a notice-and-recover problem, not a licence to rewrite yesterday
 | Recover | Add the row, the tests, and an owner; **do not back-date** the file |
 | Leftover | Unknown unknowns; write down the next trigger |
 
-Noticing, responding, and recovering still need an owner. They do not pick a log product. They do not prove the seed. An awareness list is still awareness. Naming a SIEM product is not the rule.
+Someone still has to notice, respond, and recover. That work does not pick a log product. It does not prove the seed. An awareness list is still awareness. Naming a SIEM product is not the rule.
 
 ## What the framework does vs what you still have to check
 

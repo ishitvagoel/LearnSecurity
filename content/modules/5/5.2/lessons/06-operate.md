@@ -21,7 +21,7 @@ flowchart TD
   Metric --> Rotate[Rotate keys later]
 ```
 
-Noticing, responding, and recovering still need an owner. They do not encrypt the column. They do not pick a log product.
+Someone still has to notice, respond, and recover. That work does not encrypt the column. It does not pick a log product.
 
 ## Signals that do not become a second leak
 

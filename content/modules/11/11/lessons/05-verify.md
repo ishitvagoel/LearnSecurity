@@ -9,7 +9,7 @@
 
 ## Picture: a broken no-op revoke must fail the check
 
-A check that only counts passing tests can still look green while B after revoke still reads. The broken files have to fail that case. The repaired files have to pass it.
+A check that only counts passing tests can still look green while B after revoke still reads.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ flowchart LR
 
 If both pass, the test is not looking at B after revoke. If both fail, the fix is not structural or the check is wrong.
 
-## Four modes, even for a share dict
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,7 +28,7 @@ If both pass, the test is not looking at B after revoke. If both fail, the fix i
 | Normal | B before revoke → body (may pass on both) |
 | Not claimed | live clinic; an assurance gate; worker or cache wipe |
 
-The file is `labs/11/11-lab/tests/test_property.py`. The test `test_revoked_share_cannot_read` exists so no-op `revoke` cannot count as a pass. `conftest.py` calls `reset()` so grant state does not leak.
+The file is `labs/11/11-lab/tests/test_property.py`. The test `test_revoked_share_cannot_read` is there so no-op `revoke` cannot sneak through. `conftest.py` calls `reset()` so grant state does not leak.
 
 Honest owner-after-revoke and share-before-revoke may pass on both implementations. That does not excuse the B-after-revoke deny test. If the broken files do not fail `test_revoked_share_cannot_read`, the lab is miswired — fix the wiring, not the assertion.
 

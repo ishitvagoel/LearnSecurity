@@ -9,7 +9,7 @@
 
 ## Picture: a broken runtime must fail the check
 
-A check that only counts passing tests can still look green while `run_tool("exec_sql", {})` still returns a ran-string. The broken files have to fail that case. The repaired files have to pass it.
+A check that only counts passing tests can still look green while `run_tool("exec_sql", {})` still returns a ran-string.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ flowchart LR
 
 If both pass, the test is not looking at `exec_sql`. If both fail, the fix is not structural or the check is wrong.
 
-## Four modes, even for a tool name
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,7 +28,7 @@ If both pass, the test is not looking at `exec_sql`. If both fail, the fix is no
 | Abuse | Unknown tools still deny (fail closed) |
 | Not claimed | A live vendor API; a famous-bugs dashboard; an assurance gate; that `search_notes` is encoded |
 
-The file is `labs/E1/e1-lab/tests/test_property.py`. The test `test_exec_sql_tool_is_denied` exists so always-run `run_tool` cannot count as a pass.
+The file is `labs/E1/e1-lab/tests/test_property.py`. The test `test_exec_sql_tool_is_denied` is there so always-run `run_tool` cannot sneak through.
 
 Honest `search_notes` may pass on both implementations. That does not excuse the `exec_sql` deny test. If the broken files do not fail `test_exec_sql_tool_is_denied`, the lab is miswired — fix the wiring, not the assertion.
 

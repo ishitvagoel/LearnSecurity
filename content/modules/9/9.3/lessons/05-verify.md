@@ -9,7 +9,7 @@
 
 ## Picture: a broken suite must fail the check
 
-A check that only counts passing tests can still look green while 200-only still counts as security. The broken files have to fail that case. The repaired files have to pass it.
+A check that only counts passing tests can still look green while 200-only still counts as security.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ flowchart LR
 
 If both pass, the test is not looking at `status_asserted` alone. If both fail, the fix is not structural or the check is wrong.
 
-## Four modes, even for a tiny predicate
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,7 +28,7 @@ If both pass, the test is not looking at `status_asserted` alone. If both fail, 
 | Abuse | fuzz with no named bad result must not count as covered |
 | Not claimed | a real testing-guide assessment; a later gate; fuzz oracles; that the named case matches who-is-allowed |
 
-The file is `labs/9.3/9.3-lab/tests/test_property.py`. The test `test_http_200_only_is_not_a_security_test` exists so a 200-only row cannot count as a security test.
+The file is `labs/9.3/9.3-lab/tests/test_property.py`. The test `test_http_200_only_is_not_a_security_test` is there so a 200-only row cannot count as a security test.
 
 Honest `{forbidden_outcome: True, status_asserted: True}` may pass on both implementations. That does not excuse the 200-only deny test. If the broken files do not fail `test_http_200_only_is_not_a_security_test`, the lab is miswired — fix the wiring, not the assertion.
 

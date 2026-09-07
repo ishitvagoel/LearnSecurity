@@ -56,7 +56,7 @@ Do not invent a new catalogue. Take the merge check you already have and ask whi
 | CODEOWNERS only | merge | treat as a threat model | deny |
 | HIPAA training | merge | treat as a threat model | deny |
 
-A missing threat-model cell is how a required-reviewer list becomes false comfort. Write the hole.
+A missing threat-model cell is how a required-reviewer list becomes false assurance. Write the hole.
 
 ## Practice
 

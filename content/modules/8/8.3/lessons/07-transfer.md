@@ -1,4 +1,4 @@
-# Somewhere new: clinic deep link as=doctor
+# Same idea on a clinic deep link that sets as=doctor
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
@@ -13,19 +13,19 @@ The check you already ran (`test_duplicate_tenant_keys_are_one_meaning`) is the 
 
 ## Picture: problems to find (name them yourself)
 
-Start with this seeded smell: **`json.loads` used for store while ACL uses a different first-key scan**. Label it **rule**, **tool**, or **false comfort** before you accept the change.
+Look at this first: **`json.loads` used for store while ACL uses a different first-key scan**. Label it **rule**, **tool**, or **false assurance** before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[Change claim] --> Q{What would prove it false?}
   Q -->|a two-meaning ingest| Property[Rule — good if checked]
   Q -->|a library name| Mechanism[Tool — ask which rule]
-  Q -->|JSON cannot duplicate| False[False comfort]
+  Q -->|JSON cannot duplicate| False[False assurance]
 ```
 
-For each claim and each branch: label **rule**, **tool**, or **false comfort**.
+For each claim and each branch: label **rule**, **tool**, or **false assurance**.
 
-Seeded smells (label them yourself; do not open the keys file):
+Problems to find (name them yourself; do not open the keys file):
 
 - `json.loads` used for store while ACL uses a different first-key scan
 - Comment or belief that “JSON can’t have duplicate keys” (the spec recommends uniqueness; readers differ)
@@ -42,7 +42,7 @@ Also reject: trusting the client; concatenating readers; Report-Only as enforcem
 
 ## Practice
 
-Write three review notes a peer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_duplicate_tenant_keys_are_one_meaning`. Do not open the keys file.
+Write three review notes a peer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_duplicate_tenant_keys_are_one_meaning`. Do not open the keys file.
 
 ## Use it somewhere new
 

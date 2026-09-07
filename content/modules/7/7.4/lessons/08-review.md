@@ -3,31 +3,31 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships notes-app overnight export. Review `labs/7.4/7.4-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `exporter({"user_session": "alice", "service": None})` still returns `"alice"`, compare that with the rule, and write changes a developer can verify.
+A colleague ships notes-app overnight export. Review `labs/7.4/7.4-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `exporter({"user_session": "alice", "service": None})` still returns `"alice"`, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_user_session_is_not_worker_identity`) is the rule test. A comment “will bind service later” is not.
 
 ## Picture: user_session or service fallback / copy request cookies into the job
 
-Start with this seeded smell: **`user_session or service` fallback / copy request cookies into the job**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **`user_session or service` fallback / copy request cookies into the job**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|alice session is principal| Property["Rule - good if tested"]
   Q -->|VPC queue| Mechanism[Tool - network]
-  Q -->|zero trust dashboard| False[False comfort]
+  Q -->|zero trust dashboard| False[False assurance]
 ```
 
-Hold onto Alice session yields `None`. If that call is missing a `service == "worker-sc"` check, you still have a confused-deputy path. A private network without that check is still the same problem.
+Keep this: Alice session yields `None`. If that call never includes a `service == "worker-sc"` check, that confused-deputy path is still open. A private network without that check is still the same problem.
 
 A god-mode `DATABASE_URL` (3.3) and retry after revoke (2.4) are other worker holes — name them, do not skip `test_user_session_is_not_worker_identity`.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - `user_session or service` fallback / copy request cookies into the job
 - Worker uses a superuser `DATABASE_URL`
@@ -46,7 +46,7 @@ Also reject: live broker attacks; closing findings without re-running `test_user
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_user_session_is_not_worker_identity`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_user_session_is_not_worker_identity`. Do not open the keys file.
 
 ## Use it somewhere new
 

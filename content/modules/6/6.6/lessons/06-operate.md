@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Revoke[Remove extra membership if one landed]
 ```
 
-Noticing, responding, and recovering still need an owner. They do not pick a log product. They do not consume the token.
+Someone still has to notice, respond, and recover. That work does not pick a log product. It does not consume the token.
 
 ## Signals that do not become a second leak
 

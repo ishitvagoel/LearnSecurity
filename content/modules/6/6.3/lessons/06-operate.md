@@ -24,7 +24,7 @@ flowchart TD
 | Recover | Keep deny; revoke grants created in the window; notify the member |
 | Leftover | Lookalike UI the person clicked (phishing lesson); clickjacking |
 
-Noticing, responding, and recovering still need an owner. They do not bind origin and token. They do not prove the anti-forgery check. Naming a network-filter product is not the rule. Re-run `test_foreign_origin_post_is_denied` after any share-route change; a green “SameSite=Lax” tile is not that check. JSON share routes and GET mutate paths are other paths of the same rule — inventory them before you claim recover.
+Someone still has to notice, respond, and recover. That work does not bind origin and token. It does not prove the anti-forgery check. Naming a network-filter product is not the rule. Re-run `test_foreign_origin_post_is_denied` after any share-route change; a green “SameSite=Lax” tile is not that check. JSON share routes and GET mutate paths are other paths of the same rule — inventory them before you claim recover.
 
 ## What the framework does vs what you still have to check
 

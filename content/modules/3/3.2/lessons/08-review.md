@@ -3,27 +3,27 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships the notes-app threat list. Review `labs/3.2/3.2-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `threats_from_scan(True)` still omits `cross-tenant-read`, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes-app threat list. Review `labs/3.2/3.2-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `threats_from_scan(True)` still omits `cross-tenant-read`, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_green_scanner_is_not_an_empty_threat_model`) is the rule test. A comment “will threat-model later” is not.
 
 ## Picture: threats = [] if scanner_green
 
-Start with this seeded smell: **threats = [] if `scanner_green`**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **threats = [] if `scanner_green`**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would falsify it?"}
   Q -->|"cross-tenant-read missing on a green scan"| Property["Rule — good if tested"]
   Q -->|"we ran STRIDE"| Mechanism[Tool — no seed]
-  Q -->|"scanner was green"| False[False comfort]
+  Q -->|"scanner was green"| False[False assurance]
 ```
 
-Hold onto always-name id present on green. If that call is missing a seeded join, you still have a leftover path.
+Keep this: always-name id present on green. If that call never includes a seeded join, that leftover path is still open.
 
 ## Problems to find (name them yourself)
 
@@ -44,7 +44,7 @@ Also reject: treating the client as what you trust; an awareness list cited as a
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one to `test_green_scanner_is_not_an_empty_threat_model`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one to `test_green_scanner_is_not_an_empty_threat_model`. Do not open the keys file.
 
 ## Use it somewhere new
 

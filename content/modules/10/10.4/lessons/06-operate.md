@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Kill[kill and rotate trace secrets]
 ```
 
-Noticing, responding, and recovering still need an owner. A canary product is not the rule, and this boot refused prod plus debug is not proof.
+Someone still has to notice, respond, and recover. A canary product is not the rule, and a boot-refused tile is not proof.
 
 Re-run `test_prod_debug_must_not_boot` after any compose change. A green `NODE_ENV` tile is not that check. Emergency debug is E6 — inventory it before you claim recover.
 

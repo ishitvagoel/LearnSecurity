@@ -27,7 +27,7 @@ flowchart TD
 ```mermaid
 flowchart LR
   Reach[not reachable] --> Note[owner plus exception with expiry]
-  Silent[delete the finding] --> False[false comfort]
+  Silent[delete the finding] --> False[false assurance]
 ```
 
 A silent delete is how “not reachable” becomes “never happened.” Write the owner. Do not drop HIGH.

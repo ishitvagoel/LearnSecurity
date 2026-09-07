@@ -19,7 +19,7 @@ flowchart TD
   Log --> Rotate[Rotate session ids]
 ```
 
-Noticing, responding, and recovering still need an owner. They do not pick a log product. They do not prove a checklist. Report-Only CSP is a **different** notice path. It does not restore this rule.
+Someone still has to notice, respond, and recover. That work does not pick a log product. It does not prove a checklist. Report-Only CSP is a **different** notice path. It does not restore this rule.
 
 | Outcome | This topic |
 |---|---|

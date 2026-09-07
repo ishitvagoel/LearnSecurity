@@ -1,4 +1,4 @@
-# Somewhere new: an https page talking to an http API
+# An https page talking to an http API
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

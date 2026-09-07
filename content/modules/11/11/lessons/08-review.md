@@ -3,31 +3,31 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships the notes app’s share revoke. Review `labs/11/11-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `read("n1", "B")` after `revoke("n1", "B")` still returns the body, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app’s share revoke. Review `labs/11/11-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `read("n1", "B")` after `revoke("n1", "B")` still returns the body, compare that with the rule, and write changes a developer can verify.
 
 Start at `revoke` / `read` and the B-after-revoke row, not at a scanner color or a README screenshot. The check you already ran (`test_revoked_share_cannot_read`) is the rule test. A comment “will consult grants later” is not.
 
 ## Picture: read after revoke succeeds
 
-Start with this seeded smell: **read after revoke succeeds**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **read after revoke succeeds**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|B still reads| Property["Rule - good if tested"]
   Q -->|revoke returned 200| Mechanism[Tool - event]
-  Q -->|scanner green| False[False comfort]
+  Q -->|scanner green| False[False assurance]
 ```
 
-Hold onto this: B after revoke is None. If that call is missing owner-or-grant, you still have an always-read leftover. A scanner screenshot without that check is still the same problem.
+Keep this: B after revoke is None. If that call never includes owner-or-grant, that always-read leftover is still open. A scanner screenshot does not replace that check.
 
 Cache invalidation is a phone leftover. Worker leftover session is a delayed-job leftover. Do not skip `test_revoked_share_cannot_read`. This page does not mark you as finished. Do not hit a live tenant to prove the finding.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - read after revoke succeeds
 - Capstone README: scanner green = done
@@ -46,7 +46,7 @@ Also reject: live tenant attacks; merging without re-running `test_revoked_share
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_revoked_share_cannot_read`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_revoked_share_cannot_read`. Do not open the keys file.
 
 ## Use it somewhere new
 

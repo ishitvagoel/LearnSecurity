@@ -9,7 +9,7 @@
 
 ## Picture: second t1 must fail the check
 
-A check that only greps `UNIQUE` in a migration can still look green while `accept("t1")` is still true twice. The broken files have to fail that case. The repaired files have to pass it.
+A check that only greps `UNIQUE` in a migration can still look green while `accept("t1")` is still true twice.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ flowchart LR
 
 If both pass, the test is not looking at the second `t1`. If both fail, the fix is not structural or the check is wrong. First accept of `t1` may pass on both implementations. That does not excuse the second-accept test.
 
-## Four modes, even for one token
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,7 +28,7 @@ If both pass, the test is not looking at the second `t1`. If both fail, the fix 
 | Failure | store error denies (named in review; fail-closed smell) |
 | Not claimed | threaded race; mail delivery; lock semantics |
 
-The file is `labs/6.6/6.6-lab/tests/test_property.py`. The test `test_invite_token_is_single_use` exists so a second true cannot count as a pass. Sequential calls are enough; do not add a race harness.
+The file is `labs/6.6/6.6-lab/tests/test_property.py`. The test `test_invite_token_is_single_use` is there so a second true cannot sneak through. Sequential calls are enough; do not add a race harness.
 
 A test that only asserts HTTP 200 on `/accept` is not this topic's evidence. A test that only greps `UNIQUE` without calling `accept("t1")` twice is not this topic's evidence. This practice never opens a live mailer.
 

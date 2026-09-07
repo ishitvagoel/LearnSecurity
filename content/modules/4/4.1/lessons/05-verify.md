@@ -9,7 +9,7 @@
 
 ## Picture: a leftover session must fail the check
 
-A check that only asserts the profile is gone can still look green while the cookie still works. The broken files have to fail that case. The repaired files have to pass it.
+A check that only asserts the profile is gone can still look green while the cookie still works.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ flowchart LR
 
 If both pass, the test is not looking at `session_valid` after delete. If both fail, the fix is not structural or the check is wrong.
 
-## Four modes, even for one cookie
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,7 +28,7 @@ If both pass, the test is not looking at `session_valid` after delete. If both f
 | Failure | Resurrected map entry still denied (`test_deleted_denies_even_if_session_map_still_has_row`) |
 | Not claimed | Identity-provider logout; refresh tokens; phone cache; token denylist complete |
 
-The file is `labs/4.1/4.1-lab/tests/test_property.py`. The test `test_deleted_user_session_is_dead` calls `delete_user` then `session_valid`. That check exists so a leftover session that still works cannot count as a pass.
+The file is `labs/4.1/4.1-lab/tests/test_property.py`. The test `test_deleted_user_session_is_dead` calls `delete_user` then `session_valid`. That check is there so a leftover session that still works cannot sneak through.
 
 A test that only asserts HTTP 200 is not this topic's evidence. A test that only greps `DELETED.add` without calling `session_valid` after `delete_user` is not this topic's evidence. This practice never opens a live identity provider.
 

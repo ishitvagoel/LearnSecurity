@@ -3,27 +3,27 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships the notes app’s merge check. Review `labs/10.1/10.1-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `merge_ok({})` still returns true, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app’s merge check. Review `labs/10.1/10.1-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `merge_ok({})` still returns true, compare that with the rule, and write changes a developer can verify.
 
 Start at `merge_ok` and the empty dict, not at a scanner color or a training screenshot. The check you already ran (`test_merge_requires_threat_model_id`) is the rule test. A comment “will add a threat model later” is not.
 
 ## Picture: merge_ok True without a threat-model id
 
-Start with this seeded smell: **`merge_ok` True without a threat-model id**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **`merge_ok` True without a threat-model id**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|empty change merges| Property["Rule - good if tested"]
   Q -->|CODEOWNERS on| Mechanism[Tool - who clicks]
-  Q -->|HIPAA training| False[False comfort]
+  Q -->|HIPAA training| False[False assurance]
 ```
 
-Hold onto empty change denied. If that call is missing a truthy `threat_model`, you still have an always-merge path. A training screenshot without that check is still the same problem.
+Keep this: empty change denied. If that call never includes a truthy `threat_model`, that always-merge path is still open. A training screenshot does not replace that check.
 
 Stale TM-12 is 3.2. Governance evidence is 10.4. Do not skip `test_merge_requires_threat_model_id`. Do not claim Gate 10. Do not change a live org to prove the finding.
 
@@ -49,7 +49,7 @@ Also reject: live orgs; merging without re-running `test_merge_requires_threat_m
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_merge_requires_threat_model_id`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_merge_requires_threat_model_id`. Do not open the keys file.
 
 ## Use it somewhere new
 

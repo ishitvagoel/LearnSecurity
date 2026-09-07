@@ -3,29 +3,29 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships notes-app offboarding. Your job is to label each claim **rule**, **tool**, or **false comfort**, and to say whether `session_valid("alice")` is still true after `delete_user` if they ship. Start at the leftover session after delete, not at a scanner color or an HR ticket.
+A colleague ships notes-app offboarding. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `session_valid("alice")` is still true after `delete_user` if they ship. Start at the leftover session after delete, not at a scanner color or an HR ticket.
 
 The folder `labs/4.1/4.1-lab/vulnerable/` is the change. The check you already ran (`test_deleted_user_session_is_dead`) is the rule test. A comment “will revoke sessions later” is not.
 
 ## Picture: problems to find (name them yourself)
 
-Start with this seeded smell: **`DELETE FROM users` without session purge**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **`DELETE FROM users` without session purge**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|"session_valid true after delete"| Property["Rule - good if tested"]
   Q -->|"we emailed them"| Mechanism[Tool - no revoke]
-  Q -->|"single sign-on is on"| False[False comfort]
+  Q -->|"single sign-on is on"| False[False assurance]
 ```
 
-Hold onto session dead after delete. If that same delete is missing leftover-kill, you still have leftover.
+Keep this: session dead after delete. If that same delete never includes leftover-kill, the leftover is still there.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - `DELETE FROM users` without session purge
 - Token `exp` 30d ignored on delete
@@ -44,7 +44,7 @@ Also reject: trusting the browser as the vault; closing findings without re-runn
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_deleted_user_session_is_dead`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_deleted_user_session_is_dead`. Do not open the keys file.
 
 ## Use it somewhere new
 

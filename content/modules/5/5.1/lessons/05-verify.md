@@ -9,7 +9,7 @@
 
 ## Picture: leftover analytics or search must fail the check
 
-A check that only asserts the notes row is gone can still look green while the warehouse still holds the body. The broken files have to fail that case. The repaired files have to pass it.
+A check that only asserts the notes row is gone can still look green while the warehouse still holds the body.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ flowchart LR
 
 If both pass, the test is not looking at `body_retained` after delete. If both fail, the fix is not structural or the check is wrong.
 
-## Four modes, even for one body
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,7 +28,7 @@ If both pass, the test is not looking at `body_retained` after delete. If both f
 | Failure | Honest-path tests may pass on both; that does not excuse the leftover-copy tests |
 | Not claimed | Backups (later); a phone's offline cache (later); scheduled warehouse jobs |
 
-The file is `labs/5.1/5.1-lab/tests/test_property.py`. The test `test_deleted_account_leaves_no_analytics_body` calls `delete_account` then `body_retained`. That check exists so a leftover warehouse body cannot count as a pass.
+The file is `labs/5.1/5.1-lab/tests/test_property.py`. The test `test_deleted_account_leaves_no_analytics_body` calls `delete_account` then `body_retained`. That check is there so a leftover warehouse body cannot sneak through.
 
 A test that only asserts HTTP 200 is not this topic's evidence. A test that only greps `DELETE FROM notes` without calling `body_retained` is not this topic's evidence. This practice never opens a live warehouse.
 

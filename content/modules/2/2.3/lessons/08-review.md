@@ -3,27 +3,27 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships notes-app cookie policy. Review `labs/2.3/2.3-browser-policy/vulnerable/` as if it were that change. Your job is not to count suspicious lines. Reconstruct whether the jar still hands `sc_session` to script, compare that with the rule, and write changes a developer can verify.
+A colleague ships notes-app cookie policy. Review `labs/2.3/2.3-browser-policy/vulnerable/` as if it were that change. Don't just tally suspicious lines. Check whether the jar still hands `sc_session` to script, compare that with the rule, and write changes a developer can verify.
 
 Start at the cookie reader, not at a CSP badge.
 
 ## Picture: problems to find (name them yourself)
 
-Start with this seeded problem: **`document.cookie` used to persist session**. Label it rule, tool, or false comfort before you accept the change.
+Start with this seeded problem: **`document.cookie` used to persist session**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{What would falsify it?}
   Q -->|script reads HttpOnly session| Property["Rule - good if tested"]
   Q -->|we set Secure| Mechanism[Tool - sister rule]
-  Q -->|HttpOnly means no XSS| False[False comfort]
+  Q -->|HttpOnly means no XSS| False[False assurance]
 ```
 
-Hold onto script read of the session. If that read is missing an HttpOnly honor, you still have a leftover path.
+Keep this: script read of the session. If that read never includes an HttpOnly honor, that leftover path is still open.
 
 ## Problems to label yourself
 
@@ -44,7 +44,7 @@ Also reject: `localStorage` for session; trusting the client as what you trust; 
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one to `test_script_cannot_read_httponly_session`.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one to `test_script_cannot_read_httponly_session`.
 
 ## Use it somewhere new
 

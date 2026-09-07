@@ -3,31 +3,31 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships notes-app merge gating. Your job is to label each claim **rule**, **tool**, or **false comfort**, and to say whether `review_ok("x = eval(user)")` still returns true if they ship. Start at always-true `review_ok`, not at a scanner color.
+A colleague ships notes-app merge gating. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `review_ok("x = eval(user)")` still returns true if they ship. Start at always-true `review_ok`, not at a scanner color.
 
 The folder `labs/9.2/9.2-lab/vulnerable/` is the change. The check you already ran (`test_eval_on_user_input_is_rejected`) is the rule test. A comment “will ban eval later” is not.
 
 ## Picture: approved eval(user)
 
-Start with this seeded smell: **approved `eval(user)`**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **approved `eval(user)`**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[change claim] --> Q{"What would show it is false?"}
   Q -->|eval approved| Property["Rule - good if tested"]
   Q -->|formatter passed| Mechanism[Tool - formatter]
-  Q -->|bot looks good| False[False comfort]
+  Q -->|bot looks good| False[False assurance]
 ```
 
-Hold onto eval-on-user rejected. If that call is missing an interpreter question, you still have an always-approve leftover. A formatter screenshot without that check is still the same problem.
+Keep this: eval-on-user rejected. If that call never includes an interpreter question, that always-approve leftover is still open. A formatter screenshot does not replace that check.
 
 The lab substring is a stand-in — name `exec(` and generated code as leftover, do not skip `test_eval_on_user_input_is_rejected`. Do not dump weaponized eval. Do not claim a course gate.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - Approved `eval(user)`
 - Reviewer only read README
@@ -46,7 +46,7 @@ Also reject: weaponized eval; closing findings without re-running `test_eval_on_
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_eval_on_user_input_is_rejected`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_eval_on_user_input_is_rejected`. Do not open the keys file.
 
 ## Use it somewhere new
 

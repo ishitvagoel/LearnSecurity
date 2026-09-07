@@ -3,29 +3,29 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships notes-app persistence. Your job is to label each claim **rule**, **tool**, or **false comfort**, and to say whether `fetch_sql` still returns a concatenated `str` if they ship. Start at concatenated SQL, not at a scanner color.
+A colleague ships notes-app persistence. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `fetch_sql` still returns a concatenated `str` if they ship. Start at concatenated SQL, not at a scanner color.
 
 The folder `labs/5.5/5.5-lab/vulnerable/` is the change. The check you already ran (`test_query_is_bound_not_concatenated`) is the rule test. A comment “will parameterize later” is not.
 
 ## Picture: problems to find (name them yourself)
 
-Start with this seeded smell: **f-string `SELECT` that interpolates `note_id`**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **f-string `SELECT` that interpolates `note_id`**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|"concatenated str"| Property["Rule - good if tested"]
   Q -->|"quote denylist"| Mechanism[Tool - still grammar]
-  Q -->|"row-level rule in prod"| False[False comfort]
+  Q -->|"row-level rule in prod"| False[False assurance]
 ```
 
-Hold onto this: `fetch_sql` is a bound tuple. If that call is missing a params tuple, you still have a grammar mix. `%s` inside a concatenated string is still the same problem.
+Keep this: `fetch_sql` is a bound tuple. If that call never includes a params tuple, that grammar mix is still open. `%s` inside a concatenated string is still the same problem.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - f-string `SELECT` that interpolates `note_id`
 - ORM `.filter` with raw strings
@@ -44,7 +44,7 @@ Also reject: live SQL attacks; closing findings without re-running `test_query_i
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_query_is_bound_not_concatenated`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_query_is_bound_not_concatenated`. Do not open the keys file.
 
 ## Use it somewhere new
 

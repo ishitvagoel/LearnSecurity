@@ -3,31 +3,31 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships the notes app’s compose boot check. Review `labs/10.4/10.4-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `boot_ok("prod", True)` still returns true, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app’s compose boot check. Review `labs/10.4/10.4-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `boot_ok("prod", True)` still returns true, compare that with the rule, and write changes a developer can verify.
 
 Start at `boot_ok` and the prod-plus-debug pair, not at a scanner color or a `NODE_ENV` screenshot. The check you already ran (`test_prod_debug_must_not_boot`) is the rule test. A comment “will turn debug off later” is not.
 
 ## Picture: boot_ok true on prod plus debug
 
-Start with this seeded smell: **`boot_ok` true on prod plus debug**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **`boot_ok` true on prod plus debug**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|prod debug boots| Property["Rule - good if tested"]
   Q -->|NODE_ENV production| Mechanism[Tool - string]
-  Q -->|canary 10 percent| False[False comfort]
+  Q -->|canary 10 percent| False[False assurance]
 ```
 
-Hold onto prod plus debug denied. If that call is missing the both-at-once check, you still have an always-boot path. A `NODE_ENV` screenshot without that check is still the same problem.
+Keep this: prod plus debug denied. If that call never includes the both-at-once check, that always-boot path is still open. A `NODE_ENV` screenshot does not replace that check.
 
 Feature flags are leftover you still have to trust. Admin bound to all interfaces is leftover in the same family (docs and monitoring pages). Do not skip `test_prod_debug_must_not_boot`. This page does not mark you as finished. Do not boot a live host to prove the finding.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - `boot_ok` true on prod plus debug
 - Admin on all interfaces
@@ -46,7 +46,7 @@ Also reject: live production attacks; booting without re-running `test_prod_debu
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_prod_debug_must_not_boot`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_prod_debug_must_not_boot`. Do not open the keys file.
 
 ## Use it somewhere new
 

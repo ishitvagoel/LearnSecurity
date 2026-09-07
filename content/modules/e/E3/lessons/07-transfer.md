@@ -1,4 +1,4 @@
-# Somewhere new: health append-only audit
+# Same idea on a health append-only audit
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

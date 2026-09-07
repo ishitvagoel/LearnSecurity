@@ -20,7 +20,7 @@ flowchart TD
   Sig --> Ev[Evidence: keyboard vs mouse and reason, never codes]
 ```
 
-Noticing, responding, and recovering still need an owner. A log product is not the rule, and a checklist is not proof.
+Someone still has to notice, respond, and recover. A log product is not the rule, and a checklist is not proof.
 
 ## Signals that do not become a second leak
 

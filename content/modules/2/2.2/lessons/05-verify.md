@@ -9,7 +9,7 @@ On the happy path, HTTP 200 over HTTPS is not evidence. The check must be **fals
 
 ## Picture: a broken cache must fail the check
 
-A check that only asserts HTTPS can still look green while the key remains path-only. The broken files have to fail that case. The repaired files have to pass it.
+A check that only asserts HTTPS can still look green while the key remains path-only.
 
 ```mermaid
 flowchart LR
@@ -21,7 +21,7 @@ flowchart LR
 
 If both pass, the check is not looking at the cross-company get. If both fail, the fix is not structural or the check is wrong.
 
-## Four modes, even for a dict
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -30,7 +30,7 @@ If both pass, the check is not looking at the cross-company get. If both fail, t
 | When things break | Unknown company does not share the slot |
 | Not claimed | Live CDN `Vary`; browser `no-store`; DNS authenticity |
 
-The file is `labs/2.2/2.2-request-path/tests/test_cache_key.py`. The checks are `test_same_tenant_cache_hit` and `test_other_tenant_does_not_receive_cached_body`. They observe bodies, not HTTP 200. That check exists so a company B get of `tenant-A-note` cannot count as a passing cache.
+The file is `labs/2.2/2.2-request-path/tests/test_cache_key.py`. The checks are `test_same_tenant_cache_hit` and `test_other_tenant_does_not_receive_cached_body`. They observe bodies, not HTTP 200. That check is there so a company B get of `tenant-A-note` cannot sneak through as a cache hit.
 
 Map each check to a rule from the request-path map. Do not paste keys. If the broken files do not fail the cross-company get, the practice files are miswired — fix the wiring, not the assertion.
 

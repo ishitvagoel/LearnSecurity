@@ -6,13 +6,13 @@
 
 ## Review the practice files as if they were the course placement service
 
-Review `labs/0.2/0.2-bridge/vulnerable/` as a pull request for a course tool. Your job is not to count suspicious lines. Reconstruct whether `quiz_score_grants_phase1_skip(100)` still returns true, compare that with the rule, and write changes a developer can check.
+Review `labs/0.2/0.2-bridge/vulnerable/` as a pull request for a course tool. Don't just tally suspicious lines. Check whether `quiz_score_grants_phase1_skip(100)` still returns true, compare that with the rule, and write changes a developer can check.
 
-Intended findings live only in the isolated keys file — not here. Do not open the keys until your review has been evaluated.
+The answers are not on this page. Do not open the keys until your review has been evaluated.
 
 ## Picture: if score >= 80: skip part 1
 
-Start with this seeded smell: **`if score >= 80: skip_phase(1)`**. Label it a rule, a tool, or false assurance before you accept the change.
+Look at this first: **`if score >= 80: skip_phase(1)`**. Label it a rule, a tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -22,7 +22,7 @@ flowchart TD
   Q -->|job title mapped| False[False assurance]
 ```
 
-Hold onto part-1 skip denied. If that call is missing an always-false skip, you still have a leftover path.
+Keep this: part-1 skip denied. If that call never includes an always-false skip, that leftover path is still open.
 
 ## Problems to find (name them yourself)
 

@@ -24,7 +24,7 @@ flowchart TD
 | Recover | Revoke; purge matching logs |
 | Leftover | History and screenshots you cannot purge |
 
-Noticing, responding, and recovering still need an owner. They do not prove secrets stay out of the URL. A vendor name is not this week's rule. Re-run `test_query_string_token_is_rejected` after any parser change; a green TLS dashboard is not that check. History, screenshots, and chat pastes remain leftovers you cannot purge — revoke the token anyway.
+Someone still has to notice, respond, and recover. That work does not prove secrets stay out of the URL. A vendor name is not this week's rule. Re-run `test_query_string_token_is_rejected` after any parser change; a green TLS dashboard is not that check. History, screenshots, and chat pastes remain leftovers you cannot purge — revoke the token anyway.
 
 Recovery is incomplete if the next deploy still builds `?access_token=` in a Next.js share helper. Grep the frontend for query builders the same day you rotate the signing key, or the next copied URL re-issues the leak. uvicorn will keep printing the query unless the access-log format changes; notice still belongs in `session_from_request` before any log line is written.
 
@@ -48,4 +48,4 @@ A clinic example: notice `?token=` on appointment links; do not paste the URL in
 
 ## What this page is not doing
 
-A vendor name is not this week's rule. Live log dumps are out of scope. This site does not mark you as finished.
+Live log dumps are out of scope. This site does not mark you as finished.

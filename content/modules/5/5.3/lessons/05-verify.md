@@ -9,7 +9,7 @@
 
 ## Picture: leftover default must fail
 
-A check that only counts passing cases can still look green while a leftover default still counts as a valid key. The broken files have to fail that case. The repaired files have to pass it.
+A check that only counts passing cases can still look green while a leftover default still counts as a valid key.
 
 ```mermaid
 flowchart LR
@@ -23,7 +23,7 @@ flowchart LR
 | Wrong input / abuse | hardcoded default false after rotate; missing current denies; broken files must fail |
 | Not claimed | hardware box; timed rotation; worker second default |
 
-The checks live in `labs/5.3/5.3-lab/tests/test_property.py`. `test_hardcoded_default_does_not_auth` exists so a leftover default cannot count as a pass.
+The checks live in `labs/5.3/5.3-lab/tests/test_property.py`. `test_hardcoded_default_does_not_auth` is there so a leftover default cannot sneak through.
 
 ```text
 python3 -m pytest labs/5.3/5.3-lab/tests --impl vulnerable

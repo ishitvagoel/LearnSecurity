@@ -6,13 +6,13 @@
 
 ## Review the practice files as if they were the course helper
 
-Review `labs/0.1/0.1-orientation/vulnerable/` as a pull request for a course tool. Your job is not to count suspicious lines. Reconstruct whether `target_is_authorized` still returns true for a public host, compare that with the rule, and write changes a developer can check.
+Review `labs/0.1/0.1-orientation/vulnerable/` as a pull request for a course tool. Don't just tally suspicious lines. Check whether `target_is_authorized` still returns true for a public host, compare that with the rule, and write changes a developer can check.
 
-Intended findings live only in the isolated keys file — not here. Do not open the keys until your review has been evaluated.
+The answers are not on this page. Do not open the keys until your review has been evaluated.
 
 ## Picture: any URL the proxy can open
 
-Start with this seeded smell: **Any URL the proxy can open**. Label it a rule, a tool, or false assurance before you accept the change.
+Look at this first: **Any URL the proxy can open**. Label it a rule, a tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -22,7 +22,7 @@ flowchart TD
   Q -->|a guide mapped| False[False assurance]
 ```
 
-Hold onto public host denied. If that call is missing a hostname allow-list, you still have a leftover path.
+Keep this: public host denied. If that call never includes a hostname allow-list, that leftover path is still open.
 
 ## Problems to find (name them yourself)
 

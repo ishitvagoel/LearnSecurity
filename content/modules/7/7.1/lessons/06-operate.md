@@ -17,7 +17,7 @@ flowchart TD
   Shadow --> Demote[Demote is_admin if it escaped]
 ```
 
-Noticing, responding, and recovering still need an owner. They do not copy `ALLOWED`. They do not prove a checklist.
+Someone still has to notice, respond, and recover. That work does not copy `ALLOWED`. It does not prove a checklist.
 
 ## Signals that do not become a second leak
 

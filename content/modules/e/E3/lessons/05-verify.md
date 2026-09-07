@@ -9,7 +9,7 @@
 
 ## Picture: a second k1 that charges twice must fail
 
-A check that only greps a processor header can still look green while every capture still appends. The broken files have to fail that case. The repaired files have to pass it.
+A check that only greps a processor header can still look green while every capture still appends.
 
 ```mermaid
 flowchart LR
@@ -23,7 +23,7 @@ flowchart LR
 | Normal | first k1 → may charge (may pass on both) |
 | Not claimed | live Stripe; card-network scope; a course gate; webhook path |
 
-The checks live in `labs/E3/e3-lab/tests/test_property.py`. `test_duplicate_capture_does_not_double_charge` exists so always-append `capture` cannot count as a pass. `reset()` keeps ledger state from leaking.
+The checks live in `labs/E3/e3-lab/tests/test_property.py`. `test_duplicate_capture_does_not_double_charge` is there so always-append `capture` cannot sneak through. `reset()` keeps ledger state from leaking.
 
 ```text
 python3 -m pytest labs/E3/e3-lab/tests --impl vulnerable

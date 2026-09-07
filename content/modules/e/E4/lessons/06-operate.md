@@ -25,7 +25,7 @@ A broken copy is a notice-and-recover problem, not a licence to dump file bytes 
 | Recover | Quarantine blobs; patch the parser; do not ship an overflowed binary |
 | Leftover | Helpers that call C; integer wrap; existing C codecs |
 
-Noticing, responding, and recovering still need an owner. They do not pick a log product. They do not prove this length rule. A language-name sticker is not the rule. Re-run `test_copy_does_not_exceed_buffer` after any unpacker change; a green “we use Kotlin” tile is not that check. JNI / protobuf C extensions are the same family — inventory them before claiming recover.
+Someone still has to notice, respond, and recover. That work does not pick a log product. It does not prove this length rule. A language-name sticker is not the rule. Re-run `test_copy_does_not_exceed_buffer` after any unpacker change; a green “we use Kotlin” tile is not that check. JNI / protobuf C extensions are the same family — inventory them before claiming recover.
 
 ## What the framework does vs what you still have to check
 

@@ -20,7 +20,7 @@ flowchart TD
   Metric --> Revert[block merge]
 ```
 
-Noticing, responding, and recovering still need an owner. They do not prove avoid-eval. A bot-vendor name is not the rule. Someone still has to own the always-approve path.
+Someone still has to notice, respond, and recover. That work does not prove avoid-eval. A bot-vendor name is not the rule. Someone still has to own the always-approve path.
 
 ## Signals that do not become a second leak
 

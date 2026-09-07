@@ -3,31 +3,31 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships the notes app’s Android export. Review `labs/8.1/8.1-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `allow_export({"integrity": "ok"}, "fail")` still returns true, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app’s Android export. Review `labs/8.1/8.1-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `allow_export({"integrity": "ok"}, "fail")` still returns true, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_client_integrity_claim_is_not_authorization`) is the rule check. A comment “we will attest later” is not. A sticker about a mobile checklist is not this review.
 
 ## Picture: if integrity==ok: export
 
-Start with this seeded smell: **`if integrity==ok: export`**. Label it **rule**, **tool**, or **false comfort** before you accept the change.
+Look at this first: **`if integrity==ok: export`**. Label it **rule**, **tool**, or **false assurance** before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[Change claim] --> Q{"What would prove it false?"}
   Q -->|client ok plus attest fail exports| Property["Rule — good if checked"]
   Q -->|Compose disabled| Mechanism[Tool — UI]
-  Q -->|Play Integrity logo| False[False comfort]
+  Q -->|Play Integrity logo| False[False assurance]
 ```
 
-Hold onto client ok plus attest fail denied. If that call is missing a server-attest check, you still have a client-boolean path. A Play Integrity logo without that check is still the same problem.
+Keep this: client ok plus attest fail denied. If that call never includes a server-attest check, that client-boolean path is still open. A Play Integrity logo without that check is still the same problem.
 
 Shrinking the app and a platform-integrity check raise cost; they do not become 1.2. Feature flags and 8.4 debug clients are other hostile-client paths — name them, do not skip `test_client_integrity_claim_is_not_authorization`.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - `if integrity==ok: export`
 - No server-attest check
@@ -46,7 +46,7 @@ Also reject: live device farms; personal-phone cookbooks; closing findings witho
 
 ## Practice
 
-Write three review notes a peer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_client_integrity_claim_is_not_authorization`. Do not open the keys file.
+Write three review notes a peer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_client_integrity_claim_is_not_authorization`. Do not open the keys file.
 
 ## Use it somewhere new
 

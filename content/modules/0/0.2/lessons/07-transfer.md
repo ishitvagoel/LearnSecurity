@@ -1,4 +1,4 @@
-# Somewhere new: a clinic onboarding quiz
+# A clinic onboarding quiz
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

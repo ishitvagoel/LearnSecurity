@@ -17,7 +17,7 @@ flowchart TD
   Alert --> Patch[Patch renderer; rotate sessions if needed]
 ```
 
-Noticing, responding, and recovering still need an owner. They do not encode HTML. They do not prove a checklist.
+Someone still has to notice, respond, and recover. That work does not encode HTML. It does not prove a checklist.
 
 ## Signals that do not become a second leak
 
@@ -52,4 +52,4 @@ A clinic example: notice nickname fields with raw `<`; do not paste nicknames in
 
 ## What this page is not doing
 
-A vendor name is not this week's rule. Content-security policy in report-only mode is not this rule’s enforcement. Live attack hunts are out of scope. Opening this page does not finish a check-in.
+Content-security policy in report-only mode is not this rule’s enforcement. Live attack hunts are out of scope. Opening this page does not finish a check-in.

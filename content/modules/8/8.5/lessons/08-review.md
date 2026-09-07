@@ -3,31 +3,31 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships the notes app’s crash telemetry. Review `labs/8.5/8.5-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `crash_report("secret")` still contains `'secret'`, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app’s crash telemetry. Review `labs/8.5/8.5-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `crash_report("secret")` still contains `'secret'`, compare that with the rule, and write changes a developer can verify.
 
 Start at `crash_report` and the body×crash row, not at a scanner color or a store screenshot. The check you already ran (`test_crash_report_omits_note_body`) is the rule test. A comment “will redact later” is not.
 
 ## Picture: crash_report includes the body
 
-Start with this seeded smell: **`crash_report` includes the body**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **`crash_report` includes the body**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|body in crash JSON| Property["Rule - good if tested"]
   Q -->|Crashlytics HTTPS| Mechanism[Tool - channel]
-  Q -->|Play Data safety| False[False comfort]
+  Q -->|Play Data safety| False[False assurance]
 ```
 
-Hold onto `'secret'` absent. If that call is missing redact-before-send, you still have an extra copy. A store privacy screenshot without that check is still the same problem.
+Keep this: `'secret'` absent. If that call never includes redact-before-send, that extra copy is still open. A store privacy screenshot does not replace that check.
 
 Leftover `READ_LOGS`, tracker SDKs, and web crash reports (10.5) are other places — name them, do not skip `test_crash_report_omits_note_body`. A spreadsheet row without a test is 9.1.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - `crash_report` includes the body
 - Leftover `READ_LOGS`
@@ -46,7 +46,7 @@ Also reject: live vendor payloads; closing findings without re-running `test_cra
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_crash_report_omits_note_body`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_crash_report_omits_note_body`. Do not open the keys file.
 
 ## Use it somewhere new
 

@@ -15,7 +15,7 @@ export default function PolicyPage() {
         <section className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-4">
           <h2 className="mb-3 text-lg font-semibold">You may</h2>
           <ul className="list-disc space-y-2 pl-5 leading-relaxed">
-            <li>Study lessons and practice notes on this website.</li>
+            <li>Study lessons on this website.</li>
             <li>
               Run the checks in{" "}
               <code className="rounded bg-white/80 px-1">labs/</code> on your own

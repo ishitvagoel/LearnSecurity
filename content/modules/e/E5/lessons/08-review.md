@@ -3,31 +3,31 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships notes-app company binding. Your job is not to count suspicious lines. Reconstruct whether `tenant_for({"tenant": "A"}, {"tenant": "B"})` still returns `"B"`, compare that with the module rule, and write changes a developer can verify.
+A colleague ships notes-app company binding. Don't just tally suspicious lines. Check whether `tenant_for({"tenant": "A"}, {"tenant": "B"})` still returns `"B"`, compare that with the module rule, and write changes a developer can verify.
 
 The folder `labs/E5/e5-lab/vulnerable/` is the change. Review it as if it were the notes app’s note query. The check you already ran (`test_body_cannot_switch_tenant`) is the rule test. A comment “will bind later” is not. The JSON body is not the tenant. Body tenant overrides session is the smell. Bind tenant from the session is the structural change.
 
 ## Picture: company taken from the body
 
-Start with this seeded smell: **company taken from the body**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **company taken from the body**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|body B becomes tenant| Property["Rule - good if tested"]
   Q -->|RLS is on| Mechanism[Tool - session variable]
-  Q -->|famous-bugs mapped| False[False comfort]
+  Q -->|famous-bugs mapped| False[False assurance]
 ```
 
-Hold onto this: session A plus body B is A. If that call is missing session binding, you still have a body-wins path. A row-level screenshot without that check is still the same problem.
+Keep this: session A plus body B is A. If that call never includes session binding, that body-wins path is still open. A row-level screenshot does not replace that check.
 
 Cache keys without company are leftover. Silent impersonation is a later topic. Do not skip `test_body_cannot_switch_tenant`. Do not claim a course gate. Do not probe a live company to prove the finding.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - Company taken from the body
 - Row-level session variable set from JSON
@@ -46,7 +46,7 @@ Also reject: live product probes; shipping without re-running `test_body_cannot_
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one to `test_body_cannot_switch_tenant`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one to `test_body_cannot_switch_tenant`. Do not open the keys file.
 
 ## Use it somewhere new
 

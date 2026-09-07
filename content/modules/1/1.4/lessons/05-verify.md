@@ -9,7 +9,7 @@ On the happy path, “1 item collected” is not evidence. The check must be **f
 
 ## Picture: a broken recovery must fail the check
 
-A check that only asserts the confirm function exists can still look green while the control remains mouse-only. The broken files have to fail that case. The repaired files have to pass it.
+A check that only asserts the confirm function exists can still look green while the control remains mouse-only.
 
 ```mermaid
 flowchart TD
@@ -21,7 +21,7 @@ flowchart TD
 
 If both pass, the test is not looking at `mouse_only`, name, or keyboard. If both fail, the fix is not structural or the check is wrong.
 
-## Four modes, even for a widget
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -30,7 +30,7 @@ If both pass, the test is not looking at `mouse_only`, name, or keyboard. If bot
 | Abuse | Sharing an admin session to skip recovery is **out of band** here: record it as leftover risk, not as a check in this folder |
 | When things break | Missing name or keyboard fails closed (`is_usable_accessible` is false) |
 
-The file is `labs/1.4/1.4-risk-register/tests/test_recovery_a11y.py`. It calls `recovery.recovery_confirm_control()` and asserts `is_usable_accessible`. That check exists so inaccessible recovery cannot count as a pass.
+The file is `labs/1.4/1.4-risk-register/tests/test_recovery_a11y.py`. It calls `recovery.recovery_confirm_control()` and asserts `is_usable_accessible`. That check is there so inaccessible recovery cannot sneak through.
 
 A test that only asserts HTTP 200 is not this topic’s evidence. This practice never opens a network socket.
 

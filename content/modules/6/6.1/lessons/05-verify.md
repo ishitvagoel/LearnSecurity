@@ -9,7 +9,7 @@
 
 ## Picture: sh -c must fail the check
 
-A check that only counts passing cases can still look green while the name is still glued into a shell string. The broken files have to fail that case. The repaired files have to pass it.
+A check that only counts passing cases can still look green while the name is still glued into a shell string.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ flowchart LR
 
 If both pass, the test is not looking at `sh -c`. If both fail, the fix is not structural or the check is wrong.
 
-## Four modes, even for one list call
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,7 +28,7 @@ If both pass, the test is not looking at `sh -c`. If both fail, the fix is not s
 | Failure | If you cannot spawn without a shell, do not spawn |
 | Not claimed | live `ls`; argument-injection strings; CSV formula |
 
-The file is `labs/6.1/6.1-lab/tests/test_property.py`. The test `test_does_not_invoke_shell` exists so a shell string cannot count as a pass. Do not add a name from the hostile class — extra commands, substitutions, or pipes a shell would parse — to “make the test more real.” Honest `notes` is enough.
+The file is `labs/6.1/6.1-lab/tests/test_property.py`. The test `test_does_not_invoke_shell` is there so a shell string cannot sneak through. Do not add a name from the hostile class — extra commands, substitutions, or pipes a shell would parse — to “make the test more real.” Honest `notes` is enough.
 
 A test that only asserts HTTP 200 is not this topic's evidence. A test that only greps `shell=False` in a comment without calling `argv_for_list` is not this topic's evidence. This practice never starts a live process.
 

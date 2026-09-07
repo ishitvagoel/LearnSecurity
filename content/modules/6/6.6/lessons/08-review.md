@@ -3,31 +3,31 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships notes-app invite. Your job is to label each claim **rule**, **tool**, or **false comfort**, and to say whether second `accept("t1")` is still true if they ship. Start at consume-once, not at a scanner color or a mailer ticket.
+A colleague ships notes-app invite. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether second `accept("t1")` is still true if they ship. Start at consume-once, not at a scanner color or a mailer ticket.
 
 The folder `labs/6.6/6.6-lab/vulnerable/` is the change. The check you already ran (`test_invite_token_is_single_use`) is the rule test. A comment “will consume later” is not.
 
 ## Picture: problems to find (name them yourself)
 
-Start with this seeded smell: **`accept` always true**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **`accept` always true**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|"second t1 true"| Property["Rule - good if tested"]
   Q -->|"HTTP 400"| Mechanism[Tool - not consume]
-  Q -->|"fail-open DB"| False[False comfort]
+  Q -->|"fail-open DB"| False[False assurance]
 ```
 
-Hold onto second accept false. If that call is missing a used-write, you still have a replay path. HTTP 400 after membership already exists is still the same problem.
+Keep this: second accept false. If that call never includes a used-write, that replay path is still open. HTTP 400 after membership already exists is still the same problem.
 
 A unique index that is never written still leaves `accept` always true. Password-reset consume is the same family — name it as leftover, do not skip `test_invite_token_is_single_use`.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - `accept` always true
 - No unique constraint / no used write
@@ -46,7 +46,7 @@ Also reject: live race harnesses; closing findings without re-running `test_invi
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_invite_token_is_single_use`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_invite_token_is_single_use`. Do not open the keys file.
 
 ## Use it somewhere new
 

@@ -3,29 +3,29 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships notes-app export listing. Your job is to label each claim **rule**, **tool**, or **false comfort**, and to say whether `argv_for_list("notes")` still starts `["sh", "-c"]` if they ship. Start at `sh -c` concatenation, not at a scanner color.
+A colleague ships notes-app export listing. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `argv_for_list("notes")` still starts `["sh", "-c"]` if they ship. Start at `sh -c` concatenation, not at a scanner color.
 
 The folder `labs/6.1/6.1-lab/vulnerable/` is the change. The check you already ran (`test_does_not_invoke_shell`) is the rule test. A comment “will switch to argv later” is not.
 
 ## Picture: problems to find (name them yourself)
 
-Start with this seeded smell: **`shell=True` or `sh -c` concatenation**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **`shell=True` or `sh -c` concatenation**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|"sh -c concat"| Property["Rule - good if tested"]
   Q -->|"denylist of punctuation"| Mechanism[Tool - still a shell]
-  Q -->|"internal users"| False[False comfort]
+  Q -->|"internal users"| False[False assurance]
 ```
 
-Hold onto this: program is not `sh`; name is one element. If that call is missing an argv list, you still have a second parser. A denylist of punctuation while `uses_shell` stays true is still the same problem.
+Keep this: program is not `sh`; name is one element. If that call never includes an argv list, that second parser is still open. A denylist of punctuation while `uses_shell` stays true is still the same problem.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - `shell=True` or `sh -c` concatenation
 - Blacklist of punctuation as the fix
@@ -44,7 +44,7 @@ Also reject: live command execution; closing findings without re-running `test_d
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_does_not_invoke_shell`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_does_not_invoke_shell`. Do not open the keys file.
 
 ## Use it somewhere new
 

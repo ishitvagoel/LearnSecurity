@@ -3,31 +3,31 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships the notes app’s CI install check. Review `labs/10.2/10.2-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `install_ok("aaa", "bbb")` still returns true, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app’s CI install check. Review `labs/10.2/10.2-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `install_ok("aaa", "bbb")` still returns true, compare that with the rule, and write changes a developer can verify.
 
 Start at `install_ok` and the two hash strings, not at a scanner color or an SBOM screenshot. The check you already ran (`test_hash_mismatch_refuses_install`) is the rule test. A comment “will pin later” is not.
 
 ## Picture: install_ok true on hash mismatch
 
-Start with this seeded smell: **install_ok true on hash mismatch**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **install_ok true on hash mismatch**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|mismatch installs| Property["Rule - good if tested"]
   Q -->|SBOM attached| Mechanism[Tool - inventory]
-  Q -->|provenance badge| False[False comfort]
+  Q -->|provenance badge| False[False assurance]
 ```
 
-Hold onto mismatch denied. If that call is missing digest equality, you still have an always-install leftover. An SBOM screenshot without that check is still the same problem.
+Keep this: mismatch denied. If that call never includes digest equality, that always-install leftover is still open. An SBOM screenshot without that check is still the same problem.
 
 Unpinned Actions are a sibling grain. Secrets in fork pull requests are 5.3. Do not skip `test_hash_mismatch_refuses_install`. Do not claim the ship gate. Do not fetch a live package to prove the finding.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - install_ok true on hash mismatch
 - Unpinned action
@@ -47,7 +47,7 @@ Also reject: live registry attacks; installing without re-running `test_hash_mis
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_hash_mismatch_refuses_install`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_hash_mismatch_refuses_install`. Do not open the keys file.
 
 ## Use it somewhere new
 

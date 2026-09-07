@@ -30,7 +30,7 @@ flowchart LR
   Inventory --> NotE[not evidence]
 ```
 
-A list of things you might test is inventory. A pytest that names the bad case is evidence. Mixing them is how a checkbox becomes false comfort.
+A list of things you might test is inventory. A pytest that names the bad case is evidence. Mixing them is how a checkbox becomes false assurance.
 
 ## Step 1: name the pieces
 

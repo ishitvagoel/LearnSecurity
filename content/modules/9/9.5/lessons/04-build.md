@@ -22,7 +22,7 @@ flowchart TD
 
 The repaired files require `retest == "pass"`. Production still needs that pass to be the *same* bad result (bob must not read alice's note) — a well-labeled `"pass"` on a different URL is a lying retest. Extra fields on the same note are still leftover. If a role change is supposed to take effect right away, you still need a retest of *the cache after the role change*, not a different endpoint.
 
-Defect lists want bugs verified as fixed. This pytest is that sentence for close-without-retest.
+Defect lists want bugs verified as fixed. The check below is that sentence for close-without-retest.
 
 ## What the repaired files must show
 

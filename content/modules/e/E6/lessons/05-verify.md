@@ -9,7 +9,7 @@
 
 ## Picture: a broken register gate must fail the check
 
-A check that only counts passing tests can still look green while empty owner still accepts. The broken files have to fail that case. The repaired files have to pass it.
+A check that only counts passing tests can still look green while empty owner still accepts.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ flowchart LR
 
 If both pass, the test is not looking at empty owner. If both fail, the fix is not structural or the check is wrong.
 
-## Four modes, even for an exception dict
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,7 +28,7 @@ If both pass, the test is not looking at empty owner. If both fail, the fix is n
 | Normal | complete record may accept (may pass on both) |
 | Not claimed | a maturity dashboard; a pledge; an assurance gate; that anyone reads the register |
 
-The file is `labs/E6/e6-lab/tests/test_property.py`. The test `test_exception_needs_owner_review_and_wcag` exists so always-accept `accept_exception` cannot count as a pass.
+The file is `labs/E6/e6-lab/tests/test_property.py`. The test `test_exception_needs_owner_review_and_wcag` is there so always-accept `accept_exception` cannot sneak through.
 
 Honest complete exceptions may pass on both implementations. That does not excuse the empty-owner deny test. If the broken files do not fail `test_exception_needs_owner_review_and_wcag`, the lab is miswired — fix the wiring, not the assertion.
 

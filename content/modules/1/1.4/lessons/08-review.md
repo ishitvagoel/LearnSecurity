@@ -3,11 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships a notes-app recovery confirm and a “risk register.” Your job is to label each claim **rule**, **tool**, or **false comfort**, and to say which outcome (lockout, shortcut/secrecy, or a missing record) breaks if they ship. Start at the confirm widget and the register row, not at a scanner color or an accessibility badge.
+A colleague ships a notes-app recovery confirm and a “risk register.” Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say which outcome (lockout, shortcut/secrecy, or a missing record) breaks if they ship. Start at the confirm widget and the register row, not at a scanner color or an accessibility badge.
 
 The folder `labs/1.4/1.4-risk-register/vulnerable/` is the change. The check you already ran (`test_recovery_control_is_usable_and_accessible`) is the rule test. A comment “will fix accessibility later” is not.
 
@@ -20,7 +20,7 @@ flowchart TD
   PR[Proposed recovery change] --> Q1{Named keyboard control?}
   PR --> Q2{List names harm, owner, when to look again?}
   Q1 -->|no| Fail1[Rule fail: lockout or shortcut]
-  Q2 -->|no| Fail2[False comfort: fake leftover]
+  Q2 -->|no| Fail2[False assurance: fake leftover]
 ```
 
 - Confirm button has no accessible name
@@ -40,7 +40,7 @@ Also reject: trusting the browser as the vault; closing a finding without re-run
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_recovery_control_is_usable_and_accessible`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_recovery_control_is_usable_and_accessible`. Do not open the keys file.
 
 ## Use it somewhere new
 

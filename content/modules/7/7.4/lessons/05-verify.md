@@ -9,7 +9,7 @@
 
 ## Picture: leftover Alice must fail the check
 
-A check that only counts passing cases can still look green while leftover Alice still becomes the worker. The broken files have to fail that case. The repaired files have to pass it.
+A check that only counts passing cases can still look green while leftover Alice still becomes the worker.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ flowchart LR
 
 If both pass, the test is not looking at leftover Alice. If both fail, the fix is not structural or the check is wrong.
 
-## Four modes, even for one principal
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,7 +28,7 @@ If both pass, the test is not looking at leftover Alice. If both fail, the fix i
 | Mixed | alice + wrong service → `None` |
 | Not claimed | later originating-subject check (advanced); poison loops; live task library |
 
-The file is `labs/7.4/7.4-lab/tests/test_property.py`. The test `test_user_session_is_not_worker_identity` exists so a leftover cookie that becomes the principal cannot count as a pass.
+The file is `labs/7.4/7.4-lab/tests/test_property.py`. The test `test_user_session_is_not_worker_identity` is there so a leftover cookie that becomes the principal cannot sneak through.
 
 A test that only asserts the job was enqueued is not this topic’s evidence. A test that only greps `worker-sc` in a YAML file without calling `exporter({"user_session": "alice", "service": None})` is not this topic’s evidence. This practice never opens a public broker.
 

@@ -3,27 +3,27 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships notes-app share. Review `labs/2.4/2.4-state-time/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether a second `share_note` with `k1` still appends a row, compare that with the rule, and write changes a developer can verify.
+A colleague ships notes-app share. Review `labs/2.4/2.4-state-time/vulnerable/` as that change. Don't just tally suspicious lines. Check whether a second `share_note` with `k1` still appends a row, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_retry_does_not_duplicate_side_effect`) is the rule test. A comment “will add remembering later” is not.
 
 ## Picture: INSERT share on every POST
 
-Start with this seeded smell: **INSERT share on every POST**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **INSERT share on every POST**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would falsify it?"}
   Q -->|"two k1 calls yield two rows"| Property["Rule — good if tested"]
   Q -->|"we disable the button"| Mechanism[Tool — not the store]
-  Q -->|"HTTP 201 means once"| False[False comfort]
+  Q -->|"HTTP 201 means once"| False[False assurance]
 ```
 
-Hold onto share count under retry. If that second call is missing a remembered first outcome, you still have a leftover path.
+Keep this: share count under retry. If that second call never includes a remembered first outcome, that leftover path is still open.
 
 ## Problems to find (name them yourself)
 
@@ -45,7 +45,7 @@ Also reject: treating the client as what you trust; an awareness-list name as th
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one to `test_retry_does_not_duplicate_side_effect`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one to `test_retry_does_not_duplicate_side_effect`. Do not open the keys file.
 
 ## Use it somewhere new
 

@@ -1,4 +1,4 @@
-# Somewhere new: clinic org_id in JSON
+# Same idea when a clinic puts org_id in JSON
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

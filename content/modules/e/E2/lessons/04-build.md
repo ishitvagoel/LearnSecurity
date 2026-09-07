@@ -22,7 +22,7 @@ flowchart TD
 
 Do not accept Report-Only as the name. Production still needs encoding (6.2) — a well-named header does not replace encoding. A CDN can still strip the enforcing header (2.2). Trusted Types and the current content-security spec remain **draft**. Reporting from that policy is extra, later, and advanced: reports are the Report-Only kind of signal, not this check.
 
-Industry lists ask for a content-security policy as a layer after encoding. This pytest is that sentence for the header *name*.
+Industry lists ask for a content-security policy as a layer after encoding. The check below is that sentence for the header *name*.
 
 ## Why this fix works
 

@@ -9,7 +9,7 @@
 
 ## Picture: header https, socket http must fail
 
-A check that only asserts “HTTPS is on” can still look green while a client header still counts as TLS. The broken files have to fail that case. The repaired files have to pass it.
+A check that only asserts “HTTPS is on” can still look green while a client header still counts as TLS.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ flowchart LR
 
 If both pass, the test is not looking at header versus socket. If both fail, the fix is not structural or the check is wrong.
 
-## Four modes, even for one scheme helper
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,7 +28,7 @@ If both pass, the test is not looking at header versus socket. If both fail, the
 | Failure | unknown scheme does not count as https |
 | Not claimed | Certificate checks; mutual TLS; pinning; encrypted client hello |
 
-The file is `labs/5.4/5.4-lab/tests/test_property.py`. The test `test_client_forwarded_proto_is_not_tls` calls `channel_is_https` with header https and socket http. That check exists so a client header counted as TLS cannot count as a pass.
+The file is `labs/5.4/5.4-lab/tests/test_property.py`. The test `test_client_forwarded_proto_is_not_tls` calls `channel_is_https` with header https and socket http. That check is there so a client header counted as TLS cannot sneak through.
 
 A test that only asserts the site loads on port 443 is not this topic’s evidence. A test that only greps `https` in a dashboard without calling `channel_is_https` on the mismatch is not this topic’s evidence. This practice never opens a live load balancer.
 

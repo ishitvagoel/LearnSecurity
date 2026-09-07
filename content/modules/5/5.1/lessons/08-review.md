@@ -3,29 +3,29 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships notes-app deletion. Your job is to label each claim **rule**, **tool**, or **false comfort**, and to say whether `body_retained("alice")` is still `"secret"` after `delete_account("alice")` if they ship. Start at leftover analytics after delete, not at a scanner color or a contract ticket.
+A colleague ships notes-app deletion. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `body_retained("alice")` is still `"secret"` after `delete_account("alice")` if they ship. Start at leftover analytics after delete, not at a scanner color or a contract ticket.
 
 The folder `labs/5.1/5.1-lab/vulnerable/` is the change. The check you already ran (`test_deleted_account_leaves_no_analytics_body`) is the rule test. A comment “will add warehouse purge later” is not.
 
 ## Picture: problems to find (name them yourself)
 
-Start with this seeded smell: **`delete_account` only `NOTES.pop`**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **`delete_account` only `NOTES.pop`**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|"body_retained after delete"| Property["Rule - good if tested"]
   Q -->|"we anonymized ids"| Mechanism[Tool - body kept]
-  Q -->|"privacy policy"| False[False comfort]
+  Q -->|"privacy policy"| False[False assurance]
 ```
 
-Hold onto this: analytics and search bodies are None after delete. If that same delete is missing a pop of those copies, you still have a leftover path. “We anonymized user ids” while the body column remains is still the same problem.
+Keep this: analytics and search bodies are None after delete. If that same delete never includes a pop of those copies, that leftover path is still open. “We anonymized user ids” while the body column remains is still the same problem.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - `delete_account` only `NOTES.pop`
 - Analytics “immutable for ML” without an exception record
@@ -44,7 +44,7 @@ Also reject: trusting the client; closing findings without re-running `test_dele
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_deleted_account_leaves_no_analytics_body`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_deleted_account_leaves_no_analytics_body`. Do not open the keys file.
 
 ## Use it somewhere new
 

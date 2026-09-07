@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Rotate[Rotate if the value escaped]
 ```
 
-Noticing, responding, and recovering still need an owner. They do not check role × field. They do not prove field permission. Naming a GraphQL-gateway product is not the rule. Re-run `test_member_cannot_resolve_internal_field` after any serializer change; a green “field authz enabled” tile is not that check. Search highlighting and overnight export are other dumps of the same row — inventory them before you claim recover.
+Someone still has to notice, respond, and recover. That work does not check role × field. It does not prove field permission. Naming a GraphQL-gateway product is not the rule. Re-run `test_member_cannot_resolve_internal_field` after any serializer change; a green “field authz enabled” tile is not that check. Search highlighting and overnight export are other dumps of the same row — inventory them before you claim recover.
 
 ## Signals that do not become a second leak
 

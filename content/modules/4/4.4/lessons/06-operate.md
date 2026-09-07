@@ -24,7 +24,7 @@ flowchart TD
 | Recover | Take back leftover flags; re-run the table on search/export |
 | Leftover | An honest grant on n1 still reveals n1 |
 
-Noticing, responding, and recovering still need an owner. They do not key the grant. They do not prove the data-item check. A vendor name is not this week's rule. Re-run `test_grant_on_n1_is_not_grant_on_n2` after any path change; a green “roles enabled” tile is not that check. Search, export, and GraphQL `node(id)` are other paths of the same rule — inventory them before you claim recover.
+Someone still has to notice, respond, and recover. That work does not key the grant. It does not prove the data-item check. A vendor name is not this week's rule. Re-run `test_grant_on_n1_is_not_grant_on_n2` after any path change; a green “roles enabled” tile is not that check. Search, export, and GraphQL `node(id)` are other paths of the same rule — inventory them before you claim recover.
 
 ## What the framework does vs what you still have to check
 
@@ -50,4 +50,4 @@ A clinic example: notice chart-id swaps; do not paste the chart into the ticket.
 
 ## What this page is not doing
 
-A vendor name is not this week's rule. Live company dumps are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Live company dumps are out of scope. This site does not mark you as finished. Answer keys are not on this site.

@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: raw <
 
-A check that only counts passing cases can still look green while unencoded markup still reaches HTML. The broken files have to fail that case. The repaired files have to pass it.
+A check that only counts passing cases can still look green while unencoded markup still reaches HTML.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ flowchart LR
 
 If both pass, the check is not looking at encoding. If both fail, the fix is not structural or the check is wrong.
 
-## Four modes, even for a title
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -27,7 +27,7 @@ If both pass, the check is not looking at encoding. If both fail, the fix is not
 | Wrong input / abuse | `<` becomes `&lt;`; extra tags absent; broken files must fail |
 | Not claimed | Attribute / JavaScript / URL contexts; live page attacks; content-security enforcement |
 
-The checks live in `labs/6.2/6.2-lab/tests/test_property.py`. `test_angle_brackets_are_encoded` exists so unencoded markup cannot count as a pass. The tame marker is enough; do not add an attack recipe to the check.
+The checks live in `labs/6.2/6.2-lab/tests/test_property.py`. `test_angle_brackets_are_encoded` is there so unencoded markup cannot sneak through. The tame marker is enough; do not add an attack recipe to the check.
 
 ```text
 python3 -m pytest labs/6.2/6.2-lab/tests --impl vulnerable

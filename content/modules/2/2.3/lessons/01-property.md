@@ -17,7 +17,7 @@ Industry cookie lists want HttpOnly on tokens that scripts are not meant to see,
 
 ## Picture: two readers of the same cookie
 
-The cookie jar is a shared tool among navigation, subresource loads, and script. HttpOnly takes the script reader out of that share. It does not remove injected script: the script can still call APIs as the user, rewrite the page, and copy **note bodies** the page already loaded. That is why “HttpOnly means no XSS” is false comfort.
+The cookie jar is a shared tool among navigation, subresource loads, and script. HttpOnly takes the script reader out of that share. It does not remove injected script: the script can still call APIs as the user, rewrite the page, and copy **note bodies** the page already loaded. That is why “HttpOnly means no XSS” is false assurance.
 
 ```mermaid
 flowchart TD

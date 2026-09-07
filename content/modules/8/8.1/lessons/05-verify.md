@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: client ok plus attest fail
 
-A check that only counts passing cases can still look green while client `integrity=ok` still authorizes export. The broken files have to fail that case. The repaired files have to pass it.
+A check that only counts passing cases can still look green while client `integrity=ok` still authorizes export.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the check is not looking at the client boolean. If both fail, the 
 | Extra | missing client claim, attest fail → false (`test_missing_client_claim_does_not_authorize`) |
 | Not claimed | emulator farms; 4.4 object grant; live Play; platform integrity on a physical phone |
 
-The checks live in `labs/8.1/8.1-lab/tests/test_property.py`. `test_client_integrity_claim_is_not_authorization` exists so a client boolean that authorizes export cannot count as a pass.
+The checks live in `labs/8.1/8.1-lab/tests/test_property.py`. `test_client_integrity_claim_is_not_authorization` is there so a client boolean that authorizes export cannot sneak through.
 
 ```text
 python3 -m pytest labs/8.1/8.1-lab/tests --impl vulnerable

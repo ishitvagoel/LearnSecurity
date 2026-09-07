@@ -1,4 +1,4 @@
-# Somewhere new: an appointment card still holds notes
+# An appointment card that still holds notes
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

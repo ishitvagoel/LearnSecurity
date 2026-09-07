@@ -1,4 +1,4 @@
-# Somewhere new: clinic crash with a fake patient name
+# Same idea on a clinic crash that includes a fake patient name
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Purge[Purge vendor copy]
 ```
 
-Noticing, responding, and recovering still need an owner. A crash product is not the rule, and this report is clean is not proof.
+Someone still has to notice, respond, and recover. A crash product is not the rule, and a clean crash report is not proof.
 
 Re-run `test_crash_report_omits_note_body` after any crash-SDK change. A green “store privacy form filled” tile is not that check. Tracker SDKs and web crash reports (10.5) are other places for the same body — inventory them before you claim recover.
 
@@ -68,4 +68,4 @@ A clinic example: notice a crash that would have included a fake name; do not at
 
 ## What this page is not doing
 
-A vendor name is not this week's rule. Live vendor traces are out of scope. Answer keys are not on this site.
+Live vendor traces are out of scope. Answer keys are not on this site.

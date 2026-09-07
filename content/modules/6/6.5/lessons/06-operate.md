@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Stop[Do not fetch]
 ```
 
-Noticing, responding, and recovering still need an owner. They do not allow-list hosts. A vendor name is not this week's rule. Someone still has to own the importer path.
+Someone still has to notice, respond, and recover. That work does not allow-list hosts. A vendor name is not this week's rule. Someone still has to own the importer path.
 
 ## Signals that do not become a second leak
 
@@ -61,4 +61,4 @@ A clinic example: notice PDF fetches to hosts that are not on the allow-list; do
 
 ## What this page is not doing
 
-A vendor name is not this week's rule. A cloud web-filter name is not this check. Live metadata probes are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+A cloud web-filter name is not this check. Live metadata probes are out of scope. This site does not mark you as finished. Answer keys are not on this site.

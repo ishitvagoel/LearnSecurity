@@ -3,31 +3,31 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships the notes app’s HTML drawing. Review `labs/6.2/6.2-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `render` still leaves `<` as markup, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app’s HTML drawing. Review `labs/6.2/6.2-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `render` still leaves `<` as markup, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_angle_brackets_are_encoded`) is the rule check. A comment “we should encode later” is not.
 
 ## Picture: template concatenates title
 
-Start with this seeded smell: **template concatenates title**. Label it **rule**, **tool**, or **false comfort** before you accept the change.
+Look at this first: **template concatenates title**. Label it **rule**, **tool**, or **false assurance** before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[Change claim] --> Q{"What would prove it false?"}
   Q -->|"raw angle bracket in output"| Property["Rule — good if checked"]
   Q -->|"content-security report-only"| Mechanism[Tool — not encoding]
-  Q -->|"cleaner after innerHTML"| False[False comfort]
+  Q -->|"cleaner after innerHTML"| False[False assurance]
 ```
 
-Hold onto `&lt;` present, extra tags absent. If that sink is missing encoding, you still have a grammar mix. A content-security header in report-only mode without an encode check is still the same problem.
+Keep this: `&lt;` present, extra tags absent. If that sink never includes encoding, that grammar mix is still open. A content-security header in report-only mode without an encode check is still the same problem.
 
 A markdown pipeline that emits raw tags after this template is encoded is 2.1, not a reason to skip `test_angle_brackets_are_encoded`. HttpOnly cookies (2.3) do not encode HTML.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - Template concatenates title
 - Content-security policy in report-only mode as the fix
@@ -46,7 +46,7 @@ Also reject: attack-recipe payloads in the change description; closing findings 
 
 ## Practice
 
-Write three review notes a peer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_angle_brackets_are_encoded`. Do not open the keys file.
+Write three review notes a peer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_angle_brackets_are_encoded`. Do not open the keys file.
 
 ## Use it somewhere new
 

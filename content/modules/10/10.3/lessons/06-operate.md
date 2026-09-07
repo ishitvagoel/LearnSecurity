@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Rotate[rotate cluster creds]
 ```
 
-Noticing, responding, and recovering still need an owner. A CIS product is not the rule, and this ServiceAccount was least-privileged is not proof.
+Someone still has to notice, respond, and recover. A CIS product is not the rule, and a least-privileged badge is not proof.
 
 Re-run `test_cluster_admin_pod_is_denied` after any Helm change. A green "namespace private" tile is not that check. Break-glass ClusterRoles are a later elective — inventory them before you claim recover.
 

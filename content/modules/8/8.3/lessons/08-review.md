@@ -3,31 +3,31 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships the notes app’s App Link handling. Review `labs/8.3/8.3-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `open_link({"as": "admin"})` still switches `current_user()`, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app’s App Link handling. Review `labs/8.3/8.3-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `open_link({"as": "admin"})` still switches `current_user()`, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_deeplink_as_param_does_not_switch_user`) is the rule check. A comment “we should ignore extras later” is not. An App Links screenshot is not this review.
 
 ## Picture: current_user = extras['as']
 
-Start with this seeded smell: **`current_user = extras['as']`**. Label it **rule**, **tool**, or **false comfort** before you accept the change.
+Look at this first: **`current_user = extras['as']`**. Label it **rule**, **tool**, or **false assurance** before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[Change claim] --> Q{"What would prove it false?"}
   Q -->|as= switches user| Property["Rule — good if checked"]
   Q -->|https only| Mechanism[Tool — transport]
-  Q -->|App Links verified| False[False comfort]
+  Q -->|App Links verified| False[False assurance]
 ```
 
-Hold onto alice unchanged. If that call is missing “ignore identity keys”, you still have a session switch. An App Links screenshot without that check is still the same problem.
+Keep this: alice unchanged. If that call never includes “ignore identity keys”, that session switch is still open. An App Links screenshot without that check is still the same problem.
 
 WebView `addJavascriptInterface` and custom schemes are other IPC holes — name them, do not skip `test_deeplink_as_param_does_not_switch_user`.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - `current_user = extras['as']`
 - Exported Activity without a permission
@@ -46,7 +46,7 @@ Also reject: live malware APKs; closing findings without re-running `test_deepli
 
 ## Practice
 
-Write three review notes a peer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_deeplink_as_param_does_not_switch_user`. Do not open the keys file.
+Write three review notes a peer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_deeplink_as_param_does_not_switch_user`. Do not open the keys file.
 
 ## Use it somewhere new
 

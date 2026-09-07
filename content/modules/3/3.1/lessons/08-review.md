@@ -3,29 +3,29 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships notes-app logging. Your job is to label each claim **rule**, **tool**, or **false comfort**, and to say whether the body still lands in the log if they ship. Start at `log_event` and the body×log row, not at a scanner color or a spreadsheet.
+A colleague ships notes-app logging. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether the body still lands in the log if they ship. Start at `log_event` and the body×log row, not at a scanner color or a spreadsheet.
 
 The folder `labs/3.1/3.1-lab/vulnerable/` is the change. The check you already ran (`test_note_body_is_not_logged`) is the rule test. A comment “will redact later” is not.
 
 ## Picture: problems to find (name them yourself)
 
-Start with this seeded smell: **`logger.info('read %s', note.body)`**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **`logger.info('read %s', note.body)`**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|body substring in line| Property["Rule - good if tested"]
   Q -->|we have a spreadsheet| Mechanism[Tool - no sink]
-  Q -->|logs are internal| False[False comfort]
+  Q -->|logs are internal| False[False assurance]
 ```
 
-Hold onto body substring absent from this log. If that call is missing an allow-listed log API, you still have leftover.
+Keep this: body substring absent from this log. If that call never includes an allow-listed log API, the leftover is still there.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - `logger.info('read %s', note.body)`
 - Classification spreadsheet with no test
@@ -45,7 +45,7 @@ Also reject: trusting the browser as the vault; a data-loss product as the rule;
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_note_body_is_not_logged`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_note_body_is_not_logged`. Do not open the keys file.
 
 ## Use it somewhere new
 

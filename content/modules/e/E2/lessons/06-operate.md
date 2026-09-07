@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Flip[add enforcing header]
 ```
 
-Noticing, responding, and recovering still need an owner. They do not prove the enforcing header is present.
+Someone still has to notice, respond, and recover. That work does not prove the enforcing header is present.
 
 ## Signals that do not become a second leak
 
@@ -57,4 +57,4 @@ Cause vs cost stays split here too: the **cause** is Report-Only mistaken for on
 
 ## What this page is not doing
 
-A Helmet-vendor name is not the rule. Milestone M2 stays not finished. The current content-security spec stays draft.
+A Helmet-vendor name is not the rule. This page does not finish milestone M2. The current content-security spec stays draft.

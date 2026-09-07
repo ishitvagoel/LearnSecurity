@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Revoke[Revoke app session if automated]
 ```
 
-Noticing, responding, and recovering still need an owner. They do not prove the server attest.
+Someone still has to notice, respond, and recover. That work does not prove the server attest.
 
 ## Signals that do not become a second leak
 

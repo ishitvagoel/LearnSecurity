@@ -24,9 +24,9 @@ flowchart TD
   Token -->|yes| Allow[Allow]
 ```
 
-The lab’s repaired files are `session_cookie` then `origin == expected and token == "lab-csrf"`. Production still needs the token bound to the session (not a cookie the foreign origin can cause to be sent). GET `/share?to=` is a mutate-on-GET leftover. Clickjacking, postMessage, and a later open-redirect lesson stay named leftovers. CORS `*` with credentials is false comfort.
+The lab’s repaired files are `session_cookie` then `origin == expected and token == "lab-csrf"`. Production still needs the token bound to the session (not a cookie the foreign origin can cause to be sent). GET `/share?to=` is a mutate-on-GET leftover. Clickjacking, postMessage, and a later open-redirect lesson stay named leftovers. CORS `*` with credentials is false assurance.
 
-Industry lists ask for anti-forgery tokens or extra headers a simple form cannot set. This pytest is that sentence for `allow_share`. Extra rows about authenticated embeds and CORP are **advanced** — not this week's check.
+Industry lists ask for anti-forgery tokens or extra headers a simple form cannot set. The check below is that sentence for `allow_share`. Extra rows about authenticated embeds and CORP are **advanced** — not this week's check.
 
 ## What the repaired files must show
 

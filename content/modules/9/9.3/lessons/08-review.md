@@ -3,31 +3,31 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships the notes app’s security-suite gate. Review `labs/9.3/9.3-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `{status_asserted: True}` still counts as a security test, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app’s security-suite gate. Review `labs/9.3/9.3-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `{status_asserted: True}` still counts as a security test, compare that with the rule, and write changes a developer can verify.
 
 Start at `is_security_test` and the 200-only row, not at a scanner color or a coverage screenshot. The check you already ran (`test_http_200_only_is_not_a_security_test`) is the rule test. A comment “will add isolation later” is not.
 
 ## Picture: assert r.status_code==200 only
 
-Start with this seeded smell: **`assert r.status_code==200` only**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **`assert r.status_code==200` only**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|200-only counted as security| Property["Rule - good if tested"]
   Q -->|line coverage| Mechanism[Tool - coverage]
-  Q -->|testing-guide tick| False[False comfort]
+  Q -->|testing-guide tick| False[False assurance]
 ```
 
-Hold onto this: 200-only is not a security test. If that call is missing a named what must not happen, you still have a happy-path leftover. A coverage screenshot without that check is still the same problem.
+Keep this: 200-only is not a security test. If that call never includes a named what must not happen, that happy-path leftover is still open. A coverage screenshot does not replace that check.
 
 Fuzz with no named bad result is leftover 9.5. Field grain is 7.2. Do not skip `test_http_200_only_is_not_a_security_test`. Do not claim a later gate. Do not treat coverage percent as the isolation check.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - `assert r.status_code==200` only
 - No cross-company test
@@ -46,7 +46,7 @@ Also reject: live targets; closing findings without re-running `test_http_200_on
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_http_200_only_is_not_a_security_test`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_http_200_only_is_not_a_security_test`. Do not open the keys file.
 
 ## Use it somewhere new
 

@@ -3,27 +3,27 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships a notes-app billing webhook. Review `labs/7.3/7.3-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `accept("", "body", "lab-secret")` is still true, compare that with the rule, and write changes a developer can verify.
+A colleague ships a notes-app billing webhook. Review `labs/7.3/7.3-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `accept("", "body", "lab-secret")` is still true, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_missing_signature_is_rejected`) is the rule test. A comment “will HMAC later” is not. A famous-bugs ticket is not.
 
 ## Picture: accept always true / process because the path matched
 
-Start with this seeded smell: **Accept always true / process because the path matched**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **Accept always true / process because the path matched**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|empty sig accepted| Property["Rule - good if tested"]
   Q -->|TLS only| Mechanism[Tool - hop]
-  Q -->|vendor CIDR| False[False comfort]
+  Q -->|vendor CIDR| False[False assurance]
 ```
 
-Hold onto empty sig denied. If that call is missing a raw-body MAC, you still have a path-trust. A TLS terminator without that check is still the same problem.
+Keep this: empty sig denied. If that call never includes a raw-body MAC, that path-trust is still open. A TLS terminator without that check is still the same problem.
 
 Parse-before-MAC (2.1) and secret-in-query (4.3) are other authenticity holes — name them, do not skip `test_missing_signature_is_rejected`.
 
@@ -46,7 +46,7 @@ Also reject: live provider attacks; closing findings without re-running `test_mi
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_missing_signature_is_rejected`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_missing_signature_is_rejected`. Do not open the keys file.
 
 ## Use it somewhere new
 

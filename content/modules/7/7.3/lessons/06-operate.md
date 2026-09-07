@@ -20,7 +20,7 @@ flowchart TD
   Metric --> Rotate[Rotate disposable secret if events escaped]
 ```
 
-Noticing, responding, and recovering still need an owner. They do not compute the MAC. A vendor name is not this week's rule. Someone still has to own every callback path.
+Someone still has to notice, respond, and recover. That work does not compute the MAC. A vendor name is not this week's rule. Someone still has to own every callback path.
 
 ## Signals that do not become a second leak
 
@@ -64,4 +64,4 @@ Provider retries on 5xx can amplify load (6.7). Return 4xx on a bad MAC so retri
 
 ## What this page is not doing
 
-A vendor name is not this week's rule. A web-filter name is not this check. Live provider posts are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+A web-filter name is not this check. Live provider posts are out of scope. This site does not mark you as finished. Answer keys are not on this site.

@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: plaintext secret
 
-A check that only counts passing cases can still look green while the cache still holds `'secret'`. The broken files have to fail that case. The repaired files have to pass it.
+A check that only counts passing cases can still look green while the cache still holds `'secret'`.
 
 ```mermaid
 flowchart LR
@@ -27,7 +27,7 @@ If both pass, the check is not looking at the body on disk. If both fail, the fi
 | Normal | save `'other'` → not reported as plaintext secret (may pass on both) |
 | Not claimed | Real AES; backup exclusion; screenshot `FLAG_SECURE`; Keystore hardware |
 
-The checks live in `labs/8.2/8.2-lab/tests/test_property.py`. `test_cached_note_is_not_plaintext_on_disk` exists so a text-file cache of `'secret'` cannot count as a pass.
+The checks live in `labs/8.2/8.2-lab/tests/test_property.py`. `test_cached_note_is_not_plaintext_on_disk` is there so a text-file cache of `'secret'` cannot sneak through.
 
 ```text
 python3 -m pytest labs/8.2/8.2-lab/tests --impl vulnerable

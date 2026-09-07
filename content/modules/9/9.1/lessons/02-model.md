@@ -57,7 +57,7 @@ Do not invent a new catalogue. Take the isolation rule you already have and ask 
 | Wholesale checklist paste | matrix | treat as tailored | deny |
 | Unnamed extra advanced row | permission-change-immediate | count as done | deny |
 
-A missing isolation-assert cell is how a done checkbox becomes false comfort. Write the hole.
+A missing isolation-assert cell is how a done checkbox becomes false assurance. Write the hole.
 
 ## Practice
 

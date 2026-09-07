@@ -31,7 +31,7 @@ flowchart LR
   Label --> NotPromise[not the promise]
 ```
 
-Transparency is the label. Collecting less is the redaction. Mixing them is how a form becomes false comfort.
+Transparency is the label. Collecting less is the redaction. Mixing them is how a form becomes false assurance.
 
 ## Step 1: name the pieces
 

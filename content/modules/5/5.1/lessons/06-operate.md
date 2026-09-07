@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Purge[Purge partition]
 ```
 
-Noticing, responding, and recovering still need an owner. They do not pick a log product. They do not walk the deletion graph.
+Someone still has to notice, respond, and recover. That work does not pick a log product. It does not walk the deletion graph.
 
 ## Signals that do not become a second leak
 

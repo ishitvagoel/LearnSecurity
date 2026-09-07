@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: debug plus ok
 
-A check that only counts passing cases can still look green while debug still calls prod. The broken files have to fail that case. The repaired files have to pass it.
+A check that only counts passing cases can still look green while debug still calls prod.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the check is not looking at debug-to-prod. If both fail, the fix i
 | Extra | release + fail → false (`test_release_without_attest_is_denied`) |
 | Not claimed | real Play Integrity; R8; live signing; hardware-backed keys |
 
-The checks live in `labs/8.4/8.4-lab/tests/test_property.py`. `test_debug_build_cannot_call_prod_export` exists so an always-true `api_allowed` cannot count as a pass.
+The checks live in `labs/8.4/8.4-lab/tests/test_property.py`. `test_debug_build_cannot_call_prod_export` is there so an always-true `api_allowed` cannot sneak through.
 
 ```text
 python3 -m pytest labs/8.4/8.4-lab/tests --impl vulnerable

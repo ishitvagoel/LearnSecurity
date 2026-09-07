@@ -9,7 +9,7 @@
 
 ## Picture: concatenated SQL must fail the check
 
-A check that only counts passing cases can still look green while the query is still glued. The broken files have to fail that case. The repaired files have to pass it.
+A check that only counts passing cases can still look green while the query is still glued.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ flowchart LR
 
 If both pass, the test is not looking at concatenated SQL. If both fail, the fix is not structural or the check is wrong.
 
-## Four modes, even for one fetch
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,7 +28,7 @@ If both pass, the test is not looking at concatenated SQL. If both fail, the fix
 | Failure | If you cannot bind, do not query |
 | Not claimed | ORDER BY identifiers; live row-level rules; NoSQL operators |
 
-The file is `labs/5.5/5.5-lab/tests/test_property.py`. The test `test_query_is_bound_not_concatenated` exists so a concatenated `str` cannot count as a pass. The hostile `note_id` in that test is **data** for the params tuple — a class of extra grammar, not a cookbook to paste into a live query.
+The file is `labs/5.5/5.5-lab/tests/test_property.py`. The test `test_query_is_bound_not_concatenated` is there so a concatenated `str` cannot sneak through. The hostile `note_id` in that test is **data** for the params tuple — a class of extra grammar, not a cookbook to paste into a live query.
 
 A test that only asserts HTTP 200 is not this topic's evidence. A test that only greps `%s` inside a concatenated string without asserting the tuple shape is not this topic's evidence. This practice never opens a live database.
 

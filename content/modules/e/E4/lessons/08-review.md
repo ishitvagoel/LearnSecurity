@@ -3,27 +3,27 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships the notes app’s unpacker. Review `labs/E4/e4-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `copy_into(4, b"abcdefgh", 4)` still returns more than 4 bytes, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app’s unpacker. Review `labs/E4/e4-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `copy_into(4, b"abcdefgh", 4)` still returns more than 4 bytes, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_copy_does_not_exceed_buffer`) is the rule test. A comment “will bound later” is not.
 
 ## Picture: copy returns full src / declared_len plus 8
 
-Start with this seeded smell: **Copy returns full src / declared_len plus 8**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **Copy returns full src / declared_len plus 8**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would falsify it?"}
   Q -->|oversize copy length| Property["Rule — good if tested"]
   Q -->|we use Python| Mechanism[Tool — language]
-  Q -->|awareness-list mapped| False[False comfort]
+  Q -->|awareness-list mapped| False[False assurance]
 ```
 
-Hold onto length ≤ bufsize. If that call is missing the three-way min, you still have an oversize path. A language sticker without that check is still the same problem.
+Keep this: length ≤ bufsize. If that call never includes the three-way min, that oversize path is still open. A language sticker without that check is still the same problem.
 
 Helpers that call C are leftover. Integer wrap is leftover. Do not skip `test_copy_does_not_exceed_buffer`. Do not claim a course gate. Do not compile a native overflow to prove the finding.
 
@@ -48,7 +48,7 @@ Also reject: native exploit walkthroughs; shipping without re-running `test_copy
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one to `test_copy_does_not_exceed_buffer`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one to `test_copy_does_not_exceed_buffer`. Do not open the keys file.
 
 ## Use it somewhere new
 

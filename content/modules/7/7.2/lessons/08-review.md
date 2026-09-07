@@ -3,31 +3,31 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships the notes app’s note JSON. Review `labs/7.2/7.2-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `resolve("member", "secret_internal")` is still true, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app’s note JSON. Review `labs/7.2/7.2-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `resolve("member", "secret_internal")` is still true, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_member_cannot_resolve_internal_field`) is the rule check. A comment “will matrix later” is not.
 
 ## Picture: resolver / dump always true
 
-Start with this seeded smell: **resolver / dump always true**. Label it **rule**, **tool**, or **false comfort** before you accept the change.
+Look at this first: **resolver / dump always true**. Label it **rule**, **tool**, or **false assurance** before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would falsify it?"}
   Q -->|member sees secret_internal| Property["Rule - good if tested"]
   Q -->|SPA hides column| Mechanism[Tool - client]
-  Q -->|UUID obscure| False[False comfort]
+  Q -->|UUID obscure| False[False assurance]
 ```
 
-Hold onto member denied `secret_internal`. If that call is missing a server role×field check, you still have a dump path. A hidden SPA column without that check is still the same problem.
+Keep this: member denied `secret_internal`. If that call never includes a server role×field check, that dump path is still open. A hidden SPA column without that check is still the same problem.
 
 Identifiers find a row. They do not authorize fields. Object GET tests (4.4) do not bind this grain. CSV and later workers (7.4) are other serializers — name them, do not skip `test_member_cannot_resolve_internal_field`.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - Resolver / dump always true
 - GraphQL exposes all columns
@@ -46,7 +46,7 @@ Also reject: public GraphQL attacks; closing findings without re-running `test_m
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one to `test_member_cannot_resolve_internal_field`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one to `test_member_cannot_resolve_internal_field`. Do not open the keys file.
 
 ## Use it somewhere new
 

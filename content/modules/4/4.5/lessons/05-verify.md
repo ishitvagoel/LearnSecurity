@@ -9,7 +9,7 @@
 
 ## Picture: other-api and missing aud must fail
 
-A check that only asserts a library called `verify` can still look green while a wrong-audience token still counts as a session. The broken files have to fail that case. The repaired files have to pass it.
+A check that only asserts a library called `verify` can still look green while a wrong-audience token still counts as a session.
 
 ```mermaid
 flowchart LR
@@ -23,7 +23,7 @@ flowchart LR
 | Wrong input / abuse | `aud=other-api` and missing `aud` are false; broken files must fail |
 | Not claimed | PKCE; JWKS; DPoP; who-is-allowed on notes |
 
-The checks live in `labs/4.5/4.5-lab/tests/test_property.py`. `test_wrong_audience_is_rejected` exists so a wrong-audience token accepted as a session cannot count as a pass.
+The checks live in `labs/4.5/4.5-lab/tests/test_property.py`. `test_wrong_audience_is_rejected` is there so a wrong-audience token accepted as a session cannot sneak through.
 
 ```text
 python3 -m pytest labs/4.5/4.5-lab/tests --impl vulnerable

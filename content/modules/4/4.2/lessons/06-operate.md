@@ -17,7 +17,7 @@ flowchart TD
   Alert --> Revoke[Revoke sessions if a password was used]
 ```
 
-Noticing, responding, and recovering still need an owner. They do not bind RP ID. They do not pick a log product.
+Someone still has to notice, respond, and recover. That work does not bind RP ID. It does not pick a log product.
 
 ## Signals that do not become a second leak
 
@@ -59,4 +59,4 @@ Do not encode “phishing-resistant” as green-only. Keyboard users still need 
 
 ## What this page is not doing
 
-A vendor name is not this week's rule. Live phishing hunts are out of scope. Answer keys are not on this site.
+Live phishing hunts are out of scope. Answer keys are not on this site.

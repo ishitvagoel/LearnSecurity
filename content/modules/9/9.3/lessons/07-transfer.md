@@ -1,4 +1,4 @@
-# Somewhere new: clinic test_get_patient_200
+# Same idea on a clinic test that only checks 200
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
@@ -20,7 +20,7 @@ Renaming “note” to “patient” is not transfer. Object, bad case, and left
 | Isolation row is the requirement | Other clinician must not read this chart |
 | Owner GET 200 is a product test | Owner GET 200 is a product test |
 | `is_security_test({"status_asserted": True})` | Same predicate on a local practice files |
-| Happy-path suite as false comfort | Same readers — **not** a live clinic |
+| Happy-path suite as false assurance | Same readers — **not** a live clinic |
 | Cross-company GET never asserted | Other clinician GET never asserted |
 
 ```mermaid

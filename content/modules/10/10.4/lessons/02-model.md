@@ -57,7 +57,7 @@ Do not invent a new catalogue. Take the boot rule you already have and ask what 
 | `NODE_ENV=production` | boot | treat as the check | deny |
 | feature flag turns off authz | request | treat as leftover config | deny |
 
-A missing prod-plus-debug deny is how a compose slogan becomes false comfort. Write the hole.
+A missing prod-plus-debug deny is how a compose slogan becomes false assurance. Write the hole.
 
 ## Practice
 

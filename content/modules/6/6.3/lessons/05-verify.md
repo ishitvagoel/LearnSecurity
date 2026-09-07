@@ -9,7 +9,7 @@
 
 ## Picture: broken must fail foreign origin
 
-A check that only counts passing cases can still look green while leftover cookies still authorize a share. The broken files have to fail that case. The repaired files have to pass it — the deny plus the honest allow.
+A check that only counts passing cases can still look green while leftover cookies still authorize a share. Repaired files still have to pass both the deny and the honest allow.
 
 ```mermaid
 flowchart LR
@@ -25,7 +25,7 @@ flowchart LR
 | Normal / fail-closed | missing cookie → deny (may pass on both) |
 | Not claimed | GET mutate; clickjacking; CORS; postMessage |
 
-The file is `labs/6.3/6.3-lab/tests/test_property.py`. `test_foreign_origin_post_is_denied` exists so a cookie-only share cannot count as a pass.
+The file is `labs/6.3/6.3-lab/tests/test_property.py`. `test_foreign_origin_post_is_denied` is there so a cookie-only share cannot sneak through.
 
 ```text
 python3 -m pytest labs/6.3/6.3-lab/tests --impl vulnerable

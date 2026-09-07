@@ -9,7 +9,7 @@
 
 ## Picture: empty sig on the broken files must fail the check
 
-A check that only counts passing cases can still look green while an unsigned body is still accepted. The broken files have to fail that case. The repaired files have to pass it.
+A check that only counts passing cases can still look green while an unsigned body is still accepted.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ flowchart LR
 
 If both pass, the test is not looking at a missing sig. If both fail, the fix is not structural or the check is wrong.
 
-## Four modes, even for one callback
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,7 +28,7 @@ If both pass, the test is not looking at a missing sig. If both fail, the fix is
 | Failure | If you cannot name the signature, do not accept |
 | Not claimed | Replay window; parse-before-MAC; 1.2; live Stripe |
 
-The file is `labs/7.3/7.3-lab/tests/test_property.py`. The test `test_missing_signature_is_rejected` exists so an always-true `accept` cannot count as a pass.
+The file is `labs/7.3/7.3-lab/tests/test_property.py`. The test `test_missing_signature_is_rejected` is there so an always-true `accept` cannot sneak through.
 
 A test that only asserts HTTP 200 on `/webhook` is not this topic’s evidence. A test that only greps `hmac` in source without calling `accept("", "body", "lab-secret")` is not this topic’s evidence. This practice never POSTs a live webhook.
 

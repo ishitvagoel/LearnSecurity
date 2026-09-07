@@ -9,7 +9,7 @@
 
 ## Picture: a broken ship_ok must fail the check
 
-A check that only counts passing tests can still look green while unmapped HIGH still ships. The broken files have to fail that case. The repaired files have to pass it.
+A check that only counts passing tests can still look green while unmapped HIGH still ships.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ flowchart LR
 
 If both pass, the test is not looking at the empty map. If both fail, the fix is not structural or the check is wrong.
 
-## Four modes, even for a ship dict
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,7 +28,7 @@ If both pass, the test is not looking at the empty map. If both fail, the fix is
 | Abuse | Suppression with no owner is still deny (leftover if not in this check) |
 | Not claimed | A real GitHub tenant; the verification gate; a maturity score; that the mapped requirement is the right row |
 
-The file is `labs/9.4/9.4-lab/tests/test_property.py`. The test `test_unmapped_high_blocks_ship` exists so always-true `ship_ok` cannot count as a pass.
+The file is `labs/9.4/9.4-lab/tests/test_property.py`. The test `test_unmapped_high_blocks_ship` is there so always-true `ship_ok` cannot sneak through.
 
 Honest mapped HIGH may pass on both implementations. That does not excuse the empty-map deny test. If the broken files do not fail `test_unmapped_high_blocks_ship`, the lab is miswired — fix the wiring, not the assertion.
 

@@ -9,7 +9,7 @@
 
 ## Picture: a broken close gate must fail the check
 
-A check that only counts passing tests can still look green while recovery todo still closes. The broken files have to fail that case. The repaired files have to pass it.
+A check that only counts passing tests can still look green while recovery todo still closes.
 
 ```mermaid
 flowchart LR
@@ -21,7 +21,7 @@ If both pass, the test is not looking at recovery todo. If both fail, the fix is
 
 The second what must not happen is **`note_body` in logs** — `test_cannot_close_when_logs_contain_note_body` must also fail on the broken files.
 
-## Four modes, even for a close dict
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -30,7 +30,7 @@ The second what must not happen is **`note_body` in logs** — `test_cannot_clos
 | Normal | done + ok → may close (may pass on both) |
 | Not claimed | live paging; a known-exploited list; an assurance gate; that restore actually ran |
 
-The file is `labs/10.5/10.5-lab/tests/test_property.py`. The test `test_cannot_close_without_recovery` exists so always-true `close_incident` cannot count as a pass.
+The file is `labs/10.5/10.5-lab/tests/test_property.py`. The test `test_cannot_close_without_recovery` is there so always-true `close_incident` cannot sneak through.
 
 Honest recovery plus safe logs may pass on both implementations. That does not excuse the two deny tests. If the broken files do not fail `test_cannot_close_without_recovery`, the lab is miswired — fix the wiring, not the assertion.
 

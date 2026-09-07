@@ -19,7 +19,7 @@ flowchart LR
   Cookie3[leftover cookie] --> Reality[foreign origin can POST]
 ```
 
-If the partner-share POST keys only the login cookie, the rule is gone. FastAPI, SameSite=Lax, and a CORS allow-list do not bind origin and token. CORS `*` with credentials is false comfort. postMessage and clickjacking are named leftovers: they can still confuse the helper after this check is green.
+If the partner-share POST keys only the login cookie, the rule is gone. FastAPI, SameSite=Lax, and a CORS allow-list do not bind origin and token. CORS `*` with credentials is false assurance. postMessage and clickjacking are named leftovers: they can still confuse the helper after this check is green.
 
 The clinic rewrite still has to keep the notes-app fork: foreign origin without token is false, and same origin without token is also false. Setting SameSite=Lax without an origin-and-token test leaves leftover cookies as consent. The local pytest analogue is `test_foreign_origin_post_is_denied` plus `test_same_origin_without_token_is_denied` — on a practice, not a live clinic system.
 

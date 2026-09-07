@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Reopen[reopen]
 ```
 
-Noticing, responding, and recovering still need an owner. A ticket product is not the rule, and this finding was retested is not proof.
+Someone still has to notice, respond, and recover. A ticket product is not the rule, and a retested-finding badge is not proof.
 
 Re-run `test_cannot_close_without_retest` after any close-workflow change. A green "PDF attached" tile is not that check. Extra fields on the note and a role-change cache are other bad results in the same family — inventory them before you claim recover.
 
@@ -70,4 +70,4 @@ A clinic example: reopen the PDF-shelf ticket; do not attach patient rows. Do no
 
 ## What this page is not doing
 
-A vendor name is not this week's rule. This page does not mark you as finished. A known-exploited listing is not a scan licence. Answer keys are not on this site.
+This page does not mark you as finished. A known-exploited listing is not a scan licence. Answer keys are not on this site.

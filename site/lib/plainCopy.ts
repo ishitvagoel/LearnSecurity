@@ -94,14 +94,17 @@ export function displayHeading(raw: string): string {
   if (text.startsWith("Three observations")) {
     return "Three things to look at";
   }
+  if (text.startsWith("Four modes, even for")) {
+    return "What the check has to show";
+  }
   return text;
 }
 
 export function plainLessonTitle(title: string): string {
   let t = title.trim();
   t = t.replace(/^Local fixture:\s*/i, "Practice: ");
-  t = t.replace(/^Transfer:\s*/i, "Somewhere new: ");
-  t = t.replace(/^Same idea:\s*/i, "Somewhere new: ");
+  t = t.replace(/^Somewhere new:\s*/i, "Same idea on ");
+  t = t.replace(/^Transfer:\s*/i, "Same idea on ");
   t = t.replace(/^Review (.+) like a pull request$/i, "Would you merge this $1?");
   t = t.replace(/ as a PR$/i, " like a pull request");
   t = t.replace(
@@ -278,14 +281,16 @@ const PROSE_PHRASES: [RegExp, string][] = [
   ],
   [
     /Broken must fail that question\. Repaired must pass it/g,
-    "The broken files must fail that. The repaired files must pass it",
+    "The broken files must fail that check",
   ],
   [
     /A (?:check|test) that only (.+?) can pass while (.+?)\. Ask whether .+?\. (?:The )?[Bb]roken files must fail that(?: question)?\. (?:The )?[Rr]epaired files must pass it/g,
-    "A check that only $1 can still look green while $2. The broken files have to fail that case. The repaired files have to pass it",
+    "A check that only $1 can still look green while $2",
   ],
-  [/ is a \*\*what must not happen\*\* (?:check|test|pair): /g, " exists so "],
-  [/ is not allowed to count as a pass/g, " cannot count as a pass"],
+  [/ The broken files have to fail that case\. The repaired files have to pass it\.?/g, ""],
+  [/ is a \*\*what must not happen\*\* (?:check|test|pair): /g, " is there so "],
+  [/ is not allowed to count as a pass/g, " cannot sneak through"],
+  [/ cannot count as a pass/g, " cannot sneak through"],
   [/Ask whether .+? still counts as a pass\. /g, ""],
   [/Ask whether .+? is allowed to count as a pass(?: for [^.]+)?\. /g, ""],
   [/You are here to see that the check treats/g, "Watch the check treat"],
@@ -309,9 +314,14 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/are not what you trust for this rule\.?/g, "are not enough."],
   [/are not what you trust for this check\.?/g, "are not enough."],
   [/are not what you trust\.?/g, "are not enough."],
-  [/Classification starts at the protected effect/g, "Hold onto the rule"],
-  [/The review starts at the protected effect/g, "Hold onto the rule"],
-  [/Review starts at the protected effect/g, "Hold onto the rule"],
+  [/Classification starts at the protected effect/g, "Keep the rule"],
+  [/The review starts at the protected effect/g, "Keep the rule"],
+  [/Review starts at the protected effect/g, "Keep the rule"],
+  [/Hold onto the rule/g, "Keep the rule"],
+  [/Hold onto this:/g, "Keep this:"],
+  [/Start with this seeded smell:/g, "Look at this first:"],
+  [/\bseeded smell\b/gi, "first example"],
+  [/\bfalse comfort\b/gi, "false assurance"],
   [
     /the same smell, not a different finding class/g,
     "still the same problem",
@@ -325,11 +335,15 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/Industry lists want /g, "Industry lists ask for "],
   [
     /Industry lists name detect, respond, recover\./g,
-    "Noticing, responding, and recovering still need an owner.",
+    "Someone still has to notice, respond, and recover.",
   ],
   [
     /Industry lists talk about noticing, responding, and recovering\./g,
-    "Noticing, responding, and recovering still need an owner.",
+    "Someone still has to notice, respond, and recover.",
+  ],
+  [
+    /Noticing, responding, and recovering still need an owner\./g,
+    "Someone still has to notice, respond, and recover.",
   ],
   [/Naming a product is not the rule\./g, "A vendor name is not this week's rule."],
   [/A ([A-Za-z0-9.+-]+) product name is not the rule\./g, "A $1 name is not this week's rule."],

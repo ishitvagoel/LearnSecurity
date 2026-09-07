@@ -5,7 +5,7 @@
 
 ## Review
 
-Review targets: `labs/1.3/1.3-trust-boundaries/vulnerable/surface.py`, its `SECURITY.md`, and the seeded design record below. Do not open `content/assessment/keys/1.3.md` before submitting your review. Intended findings live only in that keys folder — not here.
+Review targets: `labs/1.3/1.3-trust-boundaries/vulnerable/surface.py`, its `SECURITY.md`, and the seeded design record below. Do not open `content/assessment/keys/1.3.md` before submitting your review. The answers live only in that keys folder — not here.
 
 ## The rule
 

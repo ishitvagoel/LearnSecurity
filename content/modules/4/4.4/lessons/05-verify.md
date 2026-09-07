@@ -9,7 +9,7 @@
 
 ## Picture: broken must fail the n2 and cross-company denies
 
-A check that only counts how many grants exist can still look green while leftover permission still opens n2. The broken files have to fail that case. The repaired files have to pass it.
+A check that only counts how many grants exist can still look green while leftover permission still opens n2.
 
 ```mermaid
 flowchart LR
@@ -23,7 +23,7 @@ flowchart LR
 | Wrong input / abuse | bob×n2, alice×n3, eve×n1, eve×n3 are false; broken files must fail |
 | Not claimed | Title vs body; search index; worker; row-level rules |
 
-The file is `labs/4.4/4.4-lab/tests/test_property.py`. `test_grant_on_n1_is_not_grant_on_n2` exists so leftover permission cannot count as a pass.
+The file is `labs/4.4/4.4-lab/tests/test_property.py`. `test_grant_on_n1_is_not_grant_on_n2` is there so leftover permission cannot sneak through.
 
 ```text
 python3 -m pytest labs/4.4/4.4-lab/tests --impl vulnerable

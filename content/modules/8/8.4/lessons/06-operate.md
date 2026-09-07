@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Revoke[Revoke debug client id]
 ```
 
-Noticing, responding, and recovering still need an owner. They do not prove secrets stayed out of the APK.
+Someone still has to notice, respond, and recover. That work does not prove secrets stayed out of the APK.
 
 ## Signals that do not become a second leak
 

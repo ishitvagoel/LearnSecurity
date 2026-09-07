@@ -21,7 +21,7 @@ flowchart TD
 
 The lab’s repaired files resolve `(ROOT / name)` and raise `ValueError("escape")` unless `ROOT` is `p` or in `p.parents`. Production still needs internally generated names as extra defense. Zip member paths are another parser of the same rule. XML/pickle/YAML are leftover of the earlier data-vs-grammar shape, not this prefix.
 
-Industry lists ask for a hard check on user filenames. This pytest is that sentence for `resolve`.
+Industry lists ask for a hard check on user filenames. The check below is that sentence for `resolve`.
 
 ## What the repaired files must show
 

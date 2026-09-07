@@ -9,7 +9,7 @@
 
 ## Picture: broken must fail — tB reads tA
 
-A check that only counts passing cases can still look green while tB still reads tA. The broken files have to fail that case. The repaired files have to pass it — deny the other company, and still allow own-company read.
+A check that only counts passing cases can still look green while tB still reads tA. Repaired files still have to deny the other company and still allow own-company read.
 
 ```mermaid
 flowchart LR
@@ -24,7 +24,7 @@ flowchart LR
 | When things break | migrator cannot SELECT at runtime; connection is not `postgres` |
 | Not claimed | Production row-level security; replica fleet; SQL injection complete |
 
-The checks live in `labs/3.3/3.3-lab/tests/test_property.py`. `test_app_role_cannot_read_other_tenant` exists so a shared app role reading tA as tB cannot count as a pass.
+The checks live in `labs/3.3/3.3-lab/tests/test_property.py`. `test_app_role_cannot_read_other_tenant` is there so a shared app role reading tA as tB cannot sneak through.
 
 ```text
 python3 -m pytest labs/3.3/3.3-lab/tests --impl vulnerable

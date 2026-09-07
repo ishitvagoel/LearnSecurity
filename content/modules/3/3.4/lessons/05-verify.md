@@ -9,7 +9,7 @@
 
 ## Picture: last greater than 5 must fail
 
-A check that only asserts a max attribute exists can still look green while eight calls still leave count 8. The broken files have to fail that case. The repaired files have to pass it.
+A check that only asserts a max attribute exists can still look green while eight calls still leave count 8.
 
 ```mermaid
 flowchart LR
@@ -24,7 +24,7 @@ flowchart LR
 | Sixth | Does not increment past 5 |
 | Not claimed | Production locks; GraphQL; rate limits; awareness-list compliance |
 
-The checks live in `labs/3.4/3.4-lab/tests/test_property.py`. `test_share_cap_is_enforced` exists so a sixth grant cannot count as a pass.
+The checks live in `labs/3.4/3.4-lab/tests/test_property.py`. `test_share_cap_is_enforced` is there so a sixth grant cannot sneak through.
 
 ```text
 python3 -m pytest labs/3.4/3.4-lab/tests --impl vulnerable

@@ -3,27 +3,27 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships the notes app’s database role. Review `labs/3.3/3.3-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `can_select("app", "tB", "tA")` is still true, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app’s database role. Review `labs/3.3/3.3-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `can_select("app", "tB", "tA")` is still true, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_app_role_cannot_read_other_tenant`) is the rule test. A comment “row-level security later” is not.
 
 ## Picture: DATABASE_URL uses superuser
 
-Start with this seeded smell: **`DATABASE_URL` uses superuser**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **`DATABASE_URL` uses superuser**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would falsify it?"}
   Q -->|"can_select app tB tA is True"| Property["Rule — good if tested"]
   Q -->|"we use microservices"| Mechanism[Tool — no same-company check]
-  Q -->|"VPC is isolation"| False[False comfort]
+  Q -->|"VPC is isolation"| False[False assurance]
 ```
 
-Hold onto tB cannot SELECT tA. If that call is missing a same-company check, you still have a leftover path.
+Keep this: tB cannot SELECT tA. If that call never includes a same-company check, that leftover path is still open.
 
 ## Problems to find (name them yourself)
 
@@ -44,7 +44,7 @@ Also reject: treating the client as what you trust; closing findings without re-
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one to `test_app_role_cannot_read_other_tenant`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one to `test_app_role_cannot_read_other_tenant`. Do not open the keys file.
 
 ## Use it somewhere new
 

@@ -3,27 +3,27 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships notes-app session parsing. Review `labs/4.3/4.3-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `session_from_request` still returns the query token, compare that with the rule, and write changes a developer can verify.
+A colleague ships notes-app session parsing. Review `labs/4.3/4.3-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `session_from_request` still returns the query token, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_query_string_token_is_rejected`) is the rule test. A comment “will move to cookies later” is not.
 
 ## Picture: session_from_request uses query
 
-Start with this seeded smell: **`session_from_request` uses query**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **`session_from_request` uses query**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would falsify it?"}
   Q -->|"query returns secret"| Property["Rule — good if tested"]
   Q -->|"we use JWT"| Mechanism[Tool — format]
-  Q -->|"TLS hides logs"| False[False comfort]
+  Q -->|"TLS hides logs"| False[False assurance]
 ```
 
-Hold onto query yields `None`. If that call is missing a dropped query channel, you still have a leftover path. “We use JWTs” and “SPA best practice” are tool slogans until the pytest fails on the broken files.
+Keep this: query yields `None`. If that call never includes a dropped query channel, that leftover path is still open. “We use JWTs” and “SPA best practice” are tool slogans until the pytest fails on the broken files.
 
 ## Problems to find (name them yourself)
 
@@ -44,7 +44,7 @@ Also reject: treating the client as what you trust; closing findings without re-
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one to `test_query_string_token_is_rejected`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one to `test_query_string_token_is_rejected`. Do not open the keys file.
 
 ## Use it somewhere new
 

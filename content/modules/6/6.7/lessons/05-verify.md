@@ -9,7 +9,7 @@
 
 ## Picture: unbounded allow must fail the check
 
-A check that only counts passing cases can still look green while the fourth export still goes through. The broken files have to fail that case. The repaired files have to pass it.
+A check that only counts passing cases can still look green while the fourth export still goes through.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ flowchart LR
 
 If both pass, the test is not looking at the fourth export. If both fail, the fix is not structural or the check is wrong.
 
-## Four modes, even for one quota
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,7 +28,7 @@ If both pass, the test is not looking at the fourth export. If both fail, the fi
 | Failure | If you cannot read the count, deny |
 | Not claimed | Per-IP fairness; GraphQL; live requests per second |
 
-The file is `labs/6.7/6.7-lab/tests/test_property.py`. The test `test_fourth_export_is_denied` exists so an unbounded fourth cannot count as a pass.
+The file is `labs/6.7/6.7-lab/tests/test_property.py`. The test `test_fourth_export_is_denied` is there so an unbounded fourth cannot sneak through.
 
 A test that only asserts HTTP 200 on `/export` is not this topic’s evidence. A test that only greps an edge-proxy keyword without calling `allow(4)` is not this topic’s evidence. This practice never opens a public host.
 

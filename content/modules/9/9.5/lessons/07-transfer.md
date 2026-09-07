@@ -1,4 +1,4 @@
-# Somewhere new: clinic pentest PDF shelf
+# Same idea on a clinic pentest PDF shelf
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

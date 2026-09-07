@@ -22,7 +22,7 @@ flowchart TD
 
 The lab’s repaired files are `bool(current) and presented == current`. Production still needs the secret created outside source, and a rebuild of images that shipped the old string. User-password lifecycle is a different authenticator. A hardware box for crypto is an advanced extra, not this check.
 
-Industry lists ask for no default credentials. This pytest is that sentence for `auth`.
+Industry lists ask for no default credentials. The check below is that sentence for `auth`.
 
 ## What the repaired files must show
 

@@ -9,7 +9,7 @@
 
 ## Picture: broken must fail eval-approve
 
-A check that only counts passing cases can still look green while eval on user input is still approved. The broken files have to fail that case. The repaired files have to pass it.
+A check that only counts passing cases can still look green while eval on user input is still approved.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ flowchart LR
 
 If both pass, the test is not looking at eval-on-user. If both fail, the fix is not structural or the check is wrong.
 
-## Four modes, even for one review helper
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,7 +28,7 @@ If both pass, the test is not looking at eval-on-user. If both fail, the fix is 
 | Failure | If you cannot tell whether the diff grants an interpreter, reject |
 | Not claimed | complete oracle; other expression languages; live GitHub; `exec(` |
 
-The file is `labs/9.2/9.2-lab/tests/test_property.py`. The test `test_eval_on_user_input_is_rejected` exists so always-true `review_ok` cannot count as a pass. Do not add a working eval payload to “make the test more real.” The lab string `x = eval(user)` is enough.
+The file is `labs/9.2/9.2-lab/tests/test_property.py`. The test `test_eval_on_user_input_is_rejected` is there so always-true `review_ok` cannot sneak through. Do not add a working eval payload to “make the test more real.” The lab string `x = eval(user)` is enough.
 
 A test that only greps `eval` in a policy PDF without calling `review_ok("x = eval(user)")` is not this topic’s evidence. This practice never runs eval on live input.
 

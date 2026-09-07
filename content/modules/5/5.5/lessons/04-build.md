@@ -23,7 +23,7 @@ flowchart TD
 
 The lab’s repaired files return SQL text with `tenant=%s AND id=%s` and a `(tenant, note_id)` tuple. Production still needs 1.2 object grants (4.4) and a 3.3 database role as *second* checks. Identifier concatenation for ORDER BY stays leftover: allow-list column names instead of binding them as values. NoSQL operators and GraphQL arguments wait for 7.1 as the same shape.
 
-Industry lists ask for parameterized queries. This pytest is that sentence for `fetch_sql`.
+Industry lists ask for parameterized queries. The check below is that sentence for `fetch_sql`.
 
 ## What the repaired files must show
 

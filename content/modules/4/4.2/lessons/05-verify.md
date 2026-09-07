@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: password at lookalike is true
 
-A check that only counts passing cases can still look green while a password is still labeled resistant. The broken files have to fail that case. The repaired files have to pass it.
+A check that only counts passing cases can still look green while a password is still labeled resistant.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ flowchart LR
 
 If both pass, the check is not looking at password-at-lookalike. If both fail, the fix is not structural or the check is wrong.
 
-## Four modes, even for a boolean
+## What the check has to show
 
 | Mode | Must show |
 |---|---|
@@ -28,7 +28,7 @@ If both pass, the check is not looking at password-at-lookalike. If both fail, t
 | Wrong origin | webauthn at the lookalike origin fails |
 | Not claimed | Live authenticators; who-is-allowed; recovery SMS; prompt bombing |
 
-The file is `labs/4.2/4.2-lab/tests/test_property.py`. `test_password_is_not_phishing_resistant` exists so a password counted as phishing-resistant cannot count as a pass.
+The file is `labs/4.2/4.2-lab/tests/test_property.py`. `test_password_is_not_phishing_resistant` is there so a password counted as phishing-resistant cannot sneak through.
 
 ```text
 python3 -m pytest labs/4.2/4.2-lab/tests --impl vulnerable

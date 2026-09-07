@@ -46,7 +46,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | `status_asserted` alone returns true | Happy path counted as security | “The owner can load a note” |
-| Isolation row mapped to that test | False comfort for who-is-allowed | A testing-guide chapter |
+| Isolation row mapped to that test | False assurance for who-is-allowed | A testing-guide chapter |
 | No named what must not happen | The predicate accepted status | “We have 94% coverage” |
 
 ## Why it happens vs what it costs

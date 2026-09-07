@@ -9,7 +9,7 @@
 
 ## Picture: a broken crash report must fail the check
 
-A check that only counts passing tests can still look green while the body is still in the report. The broken files have to fail that case. The repaired files have to pass it.
+A check that only counts passing tests can still look green while the body is still in the report.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ flowchart LR
 
 If both pass, the test is not looking at the body substring. If both fail, the fix is not structural or the check is wrong.
 
-## Four modes, even for a crash dict
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,7 +28,7 @@ If both pass, the test is not looking at the body substring. If both fail, the f
 | Abuse | Unsure values are not attached (fail closed; leftover if not in this check) |
 | Not claimed | A real crash console; the public store; screenshot pipelines; vendor DLP |
 
-The file is `labs/8.5/8.5-lab/tests/test_property.py`. The test `test_crash_report_omits_note_body` exists so a report that includes the body cannot count as a pass.
+The file is `labs/8.5/8.5-lab/tests/test_property.py`. The test `test_crash_report_omits_note_body` is there so a report that includes the body cannot sneak through.
 
 Honest stack-present may pass on both implementations. That does not excuse the body-omit test. If the broken files do not fail `test_crash_report_omits_note_body`, the lab is miswired — fix the wiring, not the assertion.
 

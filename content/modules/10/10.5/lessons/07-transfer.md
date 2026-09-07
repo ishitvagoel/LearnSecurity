@@ -1,4 +1,4 @@
-# Somewhere new: clinic close ticket when SIEM is green
+# Same idea on closing a clinic ticket because SIEM is green
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

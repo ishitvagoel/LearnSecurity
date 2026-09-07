@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Relogin[Force re-login if session already flipped]
 ```
 
-Noticing, responding, and recovering still need an owner. They do not copy “ignore identity keys.” They do not prove a checklist. Someone still has to own the leftover.
+Someone still has to notice, respond, and recover. That work does not copy “ignore identity keys.” They do not prove a checklist. Someone still has to own the leftover.
 
 ## Signals that do not become a second leak
 

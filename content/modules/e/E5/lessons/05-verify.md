@@ -9,7 +9,7 @@
 
 ## Picture: broken must fail: body switch
 
-A check that only counts how many row-level rules exist can still look green while a body-chosen company still wins. The broken files have to fail that case. The repaired files have to pass it.
+A check that only counts how many row-level rules exist can still look green while a body-chosen company still wins.
 
 ```mermaid
 flowchart LR
@@ -23,7 +23,7 @@ flowchart LR
 | Normal | session A, body A → A (may pass on both) |
 | Not claimed | relationship graph; famous-bugs dashboard; course gate; search/cache keys |
 
-The file is `labs/E5/e5-lab/tests/test_property.py`. `test_body_cannot_switch_tenant` exists so body-wins `tenant_for` cannot count as a pass.
+The file is `labs/E5/e5-lab/tests/test_property.py`. `test_body_cannot_switch_tenant` is there so body-wins `tenant_for` cannot sneak through.
 
 ```text
 python3 -m pytest labs/E5/e5-lab/tests --impl vulnerable

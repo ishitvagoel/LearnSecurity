@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Stop[block ship]
 ```
 
-Noticing, responding, and recovering still need an owner. A scanner product is not the rule, and this finding is owned is not proof.
+Someone still has to notice, respond, and recover. A scanner product is not the rule, and an owned-finding badge is not proof.
 
 Re-run `test_unmapped_high_blocks_ship` after any scanner-rule change. A green “code scanning on” tile is not that check. SCA CVEs that are not actually called still need an *owner* on the map — inventory them before you claim recover.
 
@@ -70,4 +70,4 @@ A clinic example: block a release with fifty unmapped HIGHs; do not paste scanne
 
 ## What this page is not doing
 
-A vendor name is not this week's rule. Live org traces are out of scope. Answer keys are not on this site.
+Live org traces are out of scope. Answer keys are not on this site.

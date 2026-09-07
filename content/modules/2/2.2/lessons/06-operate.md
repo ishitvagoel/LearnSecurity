@@ -22,7 +22,7 @@ flowchart TD
   Inc -->|no| Watch[Keep watching the live window]
 ```
 
-Noticing, responding, and recovering still need an owner. A log product is not the rule, and a checklist is not proof.
+Someone still has to notice, respond, and recover. A log product is not the rule, and a checklist is not proof.
 
 Certificate-failure drills belong to TLS deployment, not this cache-key sentence. Keep them in a separate note so they do not replace purge.
 

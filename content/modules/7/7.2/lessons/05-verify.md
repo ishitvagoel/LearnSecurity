@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail member × secret_internal
 
-A check that only counts passing cases can still look green while a member still resolves `secret_internal`. The broken files have to fail that case. The repaired files have to pass it. Honest `display_name` may pass on both — that is the product, not an excuse to skip the deny.
+A check that only counts passing cases can still look green while a member still resolves `secret_internal`. Honest `display_name` may pass on both — that is the product, not an excuse to skip the deny.
 
 ```mermaid
 flowchart LR
@@ -26,7 +26,7 @@ If both pass, the check is not looking at the field table. If both fail, the fix
 | Service | service × `secret_internal` true |
 | Not claimed | object×company (4.4); extra-key writes (7.1); advanced cache leftover |
 
-The checks live in `labs/7.2/7.2-lab/tests/test_property.py`. `test_member_cannot_resolve_internal_field` exists so a dump that always returns true cannot count as a pass. `test_member_can_resolve_display_name` is the honest path.
+The checks live in `labs/7.2/7.2-lab/tests/test_property.py`. `test_member_cannot_resolve_internal_field` is there so a dump that always returns true cannot sneak through. `test_member_can_resolve_display_name` is the honest path.
 
 ```text
 python3 -m pytest labs/7.2/7.2-lab/tests --impl vulnerable

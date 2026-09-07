@@ -9,7 +9,7 @@
 
 ## Picture: a broken log line must fail the check
 
-A check that only asserts logs exist can still look green while the body is still in the line. The broken files have to fail that case. The repaired files have to pass it.
+A check that only asserts logs exist can still look green while the body is still in the line.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ flowchart LR
 
 If both pass, the test is not looking at the body substring. If both fail, the fix is not structural or the check is wrong.
 
-## Four modes, even for a log line
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,7 +28,7 @@ If both pass, the test is not looking at the body substring. If both fail, the f
 | Abuse | Unsure values are not logged (fail closed; leftover if not in this check) |
 | Not claimed | All places covered; production logs clean; exception middleware safe; access logs safe |
 
-The file is `labs/3.1/3.1-lab/tests/test_property.py`. The test `test_note_body_is_not_logged` calls `log_event` with the synthetic body and asserts the substring is absent. That check exists so a confidential field in this log cannot count as a pass.
+The file is `labs/3.1/3.1-lab/tests/test_property.py`. The test `test_note_body_is_not_logged` calls `log_event` with the synthetic body and asserts the substring is absent. That check is there so a confidential field in this log cannot sneak through.
 
 A test that only asserts HTTP 200 is not this topic's evidence. A test that only greps `Confidential` in a spreadsheet without calling `log_event` is not this topic's evidence. This practice never opens a production drain.
 

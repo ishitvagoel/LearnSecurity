@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Stop[block release]
 ```
 
-Noticing, responding, and recovering still need an owner. A governance product is not the rule, and this requirement is covered is not proof.
+Someone still has to notice, respond, and recover. A governance product is not the rule, and a covered-requirement badge is not proof.
 
 Re-run `test_status_only_row_is_not_coverage` after any matrix change. A green “checklist imported” tile is not that check. Mobile storage rows (8.2) are other requirements of the same check — inventory them before you claim recover. A 200-only test that someone flagged `asserts_isolation` by mistake is a later lying-flag leftover (9.3), not a silent pass.
 
@@ -68,4 +68,4 @@ A clinic example: block a release when the HIPAA “done” column has no isolat
 
 ## What this page is not doing
 
-A vendor name is not this week's rule. Live portal traces are out of scope. This page does not finish the verification check-in. Answer keys are not on this site.
+Live portal traces are out of scope. This page does not finish the verification check-in. Answer keys are not on this site.

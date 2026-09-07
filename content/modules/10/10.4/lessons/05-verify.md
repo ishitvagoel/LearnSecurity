@@ -9,7 +9,7 @@
 
 ## Picture: a broken boot check must fail prod plus debug
 
-A check that only counts passing tests can still look green while production still boots with debug. The broken files have to fail that case. The repaired files have to pass it.
+A check that only counts passing tests can still look green while production still boots with debug.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ flowchart LR
 
 If both pass, the test is not looking at prod plus debug. If both fail, the fix is not structural or the check is wrong.
 
-## Four modes, even for a boot pair
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,7 +28,7 @@ If both pass, the test is not looking at prod plus debug. If both fail, the fix 
 | Abuse | Unsure flags are not a production boot (fail closed; leftover if not in this check) |
 | Not claimed | Live compose; a canary; an assurance gate; other flags |
 
-The file is `labs/10.4/10.4-lab/tests/test_property.py`. The test `test_prod_debug_must_not_boot` exists so always-true `boot_ok` cannot count as a pass.
+The file is `labs/10.4/10.4-lab/tests/test_property.py`. The test `test_prod_debug_must_not_boot` is there so always-true `boot_ok` cannot sneak through.
 
 Honest prod without debug may pass on both implementations. That does not excuse the prod-plus-debug deny test. If the broken files do not fail `test_prod_debug_must_not_boot`, the lab is miswired — fix the wiring, not the assertion.
 

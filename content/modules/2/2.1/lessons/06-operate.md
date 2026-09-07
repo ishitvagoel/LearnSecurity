@@ -18,7 +18,7 @@ flowchart TD
   Decision -->|yes| Mediate[Hand the parse result to the who-is-allowed check]
 ```
 
-Noticing, responding, and recovering still need an owner. A log product is not the rule, and a checklist is not proof.
+Someone still has to notice, respond, and recover. A log product is not the rule, and a checklist is not proof.
 
 ## Signals that do not become a second leak
 
@@ -56,4 +56,4 @@ GraphQL and REST both ingest the same note. Two refuse metrics, or one shared in
 
 ## What this page is not doing
 
-A vendor name is not this week's rule. Answer keys are not on this site.
+Answer keys are not on this site.

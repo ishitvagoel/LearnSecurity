@@ -3,27 +3,27 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships notes-app uploads. Review `labs/6.4/6.4-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `resolve("../outside")` still leaves `/tmp/sc-lab`, compare that with the rule, and write changes a developer can verify.
+A colleague ships notes-app uploads. Review `labs/6.4/6.4-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `resolve("../outside")` still leaves `/tmp/sc-lab`, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_dotdot_does_not_escape_root`) is the rule test. A comment “will canonicalize later” is not.
 
 ## Picture: open(user_path) / join without canonicalize
 
-Start with this seeded smell: **`open(user_path)` / join without canonicalize**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **`open(user_path)` / join without canonicalize**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would falsify it?"}
   Q -->|"../ leaves folder"| Property["Rule — good if tested"]
   Q -->|"denylist of .."| Mechanism[Tool — encodings remain]
-  Q -->|"Content-Type"| False[False comfort]
+  Q -->|"Content-Type"| False[False assurance]
 ```
 
-Hold onto canonical object still under the folder. If that call is missing join-canonicalize-prefix, you still have a leftover path. A `..` denylist without a prefix test is still the same problem.
+Keep this: canonical object still under the folder. If that call never includes join-canonicalize-prefix, that leftover path is still open. A `..` denylist without a prefix test is still the same problem.
 
 Zip member paths are another parser of this rule, not a reason to skip `test_dotdot_does_not_escape_root`. Starlette `UploadFile.filename` is still client data after the change “randomizes names.”
 
@@ -46,7 +46,7 @@ Also reject: host-file trophies; treating the client as what you trust; an aware
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one to `test_dotdot_does_not_escape_root`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one to `test_dotdot_does_not_escape_root`. Do not open the keys file.
 
 ## Use it somewhere new
 

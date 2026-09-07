@@ -24,7 +24,7 @@ flowchart TD
 
 The repaired files pop the session and check `DELETED` first. Production should also kill refresh tokens, worker `user_id`, and a phone's offline cache. Self-contained tokens need a denylist or a per-user not-before. Disabled and deleted are different product states. Both must fail `session_valid` in this week's freeze.
 
-Industry lists ask for all active sessions killed. This pytest is that sentence for one synthetic cookie, not proofing who someone is, and not a new login factor.
+Industry lists ask for all active sessions killed. The check below is that sentence for one synthetic cookie, not proofing who someone is, and not a new login factor.
 
 ## What the repaired files must show
 

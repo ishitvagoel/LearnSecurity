@@ -3,27 +3,27 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships notes-app at-rest protection. Review `labs/5.2/5.2-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether Base64 decode of `protect("secret")` still equals `"secret"`, compare that with the rule, and write changes a developer can verify.
+A colleague ships notes-app at-rest protection. Review `labs/5.2/5.2-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether Base64 decode of `protect("secret")` still equals `"secret"`, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_protect_is_not_mere_encoding`) is the rule test. A comment “will add AES later” is not.
 
 ## Picture: protect equals base64
 
-Start with this seeded smell: **`protect = base64`**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **`protect = base64`**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|"Base64 of secret"| Property["Rule - good if tested"]
   Q -->|"we use AES"| Mechanism[Tool - no test]
-  Q -->|"HTTPS"| False[False comfort]
+  Q -->|"HTTPS"| False[False assurance]
 ```
 
-Hold onto this: decode is not the plaintext. If `protect` is missing a keyed, non-encoding transform, you still have a reversible leftover. A comment that says AES without a round-trip test is tool theater.
+Keep this: decode is not the plaintext. If `protect` never includes a keyed, non-encoding transform, that reversible leftover is still open. A comment that says AES without a round-trip test is tool theater.
 
 ## Problems to find (name them yourself)
 
@@ -44,7 +44,7 @@ Also reject: rolling a cipher; closing findings without re-running `test_protect
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_protect_is_not_mere_encoding`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_protect_is_not_mere_encoding`. Do not open the keys file.
 
 ## Use it somewhere new
 

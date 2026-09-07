@@ -9,7 +9,7 @@
 
 ## Picture: broken must fail the oversize copy
 
-A check that only greps `Kotlin` in a README can still look green while `copy_into(4, b"abcdefgh", 4)` still returns 8 bytes. The broken files have to fail that case. The repaired files have to pass it.
+A check that only greps `Kotlin` in a README can still look green while `copy_into(4, b"abcdefgh", 4)` still returns 8 bytes.
 
 ```mermaid
 flowchart LR
@@ -23,7 +23,7 @@ flowchart LR
 | Normal | Short declared length may copy (may pass on both) |
 | Not claimed | A C walkthrough; an awareness-list dashboard; a course gate; integer wrap |
 
-The checks live in `labs/E4/e4-lab/tests/test_property.py`. `test_copy_does_not_exceed_buffer` exists so `declared_len` plus 8 cannot count as a pass.
+The checks live in `labs/E4/e4-lab/tests/test_property.py`. `test_copy_does_not_exceed_buffer` is there so `declared_len` plus 8 cannot sneak through.
 
 ```text
 python3 -m pytest labs/E4/e4-lab/tests --impl vulnerable

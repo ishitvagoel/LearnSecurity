@@ -9,7 +9,7 @@ A 200 on the happy path is not evidence. The check must be **false** on the brok
 
 ## Picture: broken files must fail the duplicate-key check
 
-A check that only counts passing cases can still look green while two readers still disagree. The broken files have to fail that case. The repaired files have to pass it.
+A check that only counts passing cases can still look green while two readers still disagree.
 
 ```mermaid
 flowchart LR
@@ -21,7 +21,7 @@ flowchart LR
 
 If both pass, the check is not looking at ACL tenant vs stored tenant. If both fail, the fix is not structural or the check is wrong.
 
-## Four modes, even for a parse
+## What the check has to show
 
 | Mode | Must show |
 |---|---|
@@ -29,7 +29,7 @@ If both pass, the check is not looking at ACL tenant vs stored tenant. If both f
 | Wrong input / abuse | Messy duplicate keys: refused **or** both tenants identical |
 | When things break | Uncertainty does not persist a body under a guessed company |
 
-The file is `labs/2.1/2.1-parser-boundaries/tests/test_parser.py`. The checks are `test_unambiguous_json_is_accepted` and `test_duplicate_tenant_keys_are_one_meaning`. The second exists so last-key-wins `acl_tenant != stored_tenant` cannot count as a pass.
+The file is `labs/2.1/2.1-parser-boundaries/tests/test_parser.py`. The checks are `test_unambiguous_json_is_accepted` and `test_duplicate_tenant_keys_are_one_meaning`. The second is there so last-key-wins `acl_tenant != stored_tenant` cannot sneak through.
 
 ```text
 python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl vulnerable

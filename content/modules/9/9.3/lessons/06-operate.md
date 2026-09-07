@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Block[block release]
 ```
 
-Noticing, responding, and recovering still need an owner. A coverage product is not the rule, and this suite is honest is not proof.
+Someone still has to notice, respond, and recover. A coverage product is not the rule, and an honest-suite badge is not proof.
 
 Re-run `test_http_200_only_is_not_a_security_test` after any suite change. A green “94% coverage” tile is not that check. Field-level tests (7.2) and race-condition tests are other named what must not happen of the same shape — inventory them before you claim recover. Keep 200-only tests as product tests; do not delete them, and do not let them occupy the security-suite slot.
 
@@ -68,4 +68,4 @@ A clinic example: notice `test_get_patient_200` as the only “security” test;
 
 ## What this page is not doing
 
-A vendor name is not this week's rule. Live fuzz traces are out of scope. Answer keys are not on this site.
+Live fuzz traces are out of scope. Answer keys are not on this site.

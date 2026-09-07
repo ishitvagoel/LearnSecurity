@@ -3,31 +3,31 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships the notes app’s leftover-risk register. Review `labs/E6/e6-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `accept_exception({"owner": "", "review_by": None})` still returns true, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app’s leftover-risk register. Review `labs/E6/e6-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `accept_exception({"owner": "", "review_by": None})` still returns true, compare that with the rule, and write changes a developer can verify.
 
 Start at `accept_exception` and the empty-owner row, not at a scanner color or a maturity screenshot. The check you already ran (`test_exception_needs_owner_review_and_wcag`) is the rule test. A comment “will add dates later” is not.
 
 ## Picture: accept with empty owner
 
-Start with this seeded smell: **Accept with empty owner**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **Accept with empty owner**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|empty owner accepted| Property["Rule - good if tested"]
   Q -->|ticket type named risk| Mechanism[Tool - ticket]
-  Q -->|maturity mapped| False[False comfort]
+  Q -->|maturity mapped| False[False assurance]
 ```
 
-Hold onto empty owner denied. If that call is missing the schema, you still have an always-accept leftover. A maturity screenshot without that check is still the same problem.
+Keep this: empty owner denied. If that call never includes the schema, that always-accept leftover is still open. A maturity screenshot does not replace that check.
 
 Unread register is leftover. Tech-debt rename is leftover. Do not skip `test_exception_needs_owner_review_and_wcag`. This page does not mark you as finished. Do not contact a live disclosure inbox to prove the finding.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - Accept with empty owner
 - No `review_by`
@@ -46,7 +46,7 @@ Also reject: live disclosure; shipping without re-running `test_exception_needs_
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_exception_needs_owner_review_and_wcag`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_exception_needs_owner_review_and_wcag`. Do not open the keys file.
 
 ## Use it somewhere new
 

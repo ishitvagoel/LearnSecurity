@@ -3,31 +3,31 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships notes-app share. Your job is not to count suspicious lines. Reconstruct whether `allow_share` for a foreign origin with `token=None` is still true, compare that with the module rule, and write changes a developer can verify.
+A colleague ships notes-app share. Don't just tally suspicious lines. Check whether `allow_share` for a foreign origin with `token=None` is still true, compare that with the module rule, and write changes a developer can verify.
 
 The folder `labs/6.3/6.3-lab/vulnerable/` is the change. The check you already ran (`test_foreign_origin_post_is_denied`) is the rule test. A comment “will add CSRF later” is not.
 
 ## Picture: leftover cookie auth + no Origin check
 
-Start with this seeded smell: **Cookie auth + no Origin check**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **Cookie auth + no Origin check**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|"foreign origin allowed"| Property["Rule - good if tested"]
   Q -->|"SameSite Lax"| Mechanism[Tool - helper]
-  Q -->|"CORS star"| False[False comfort]
+  Q -->|"CORS star"| False[False assurance]
 ```
 
-Hold onto foreign origin without token denied. If that call is missing origin-and-token, you still have a leftover-cookie path. SameSite=Lax without that test is still the same problem.
+Keep this: foreign origin without token denied. If that call never includes origin-and-token, that leftover-cookie path is still open. SameSite=Lax without that test is still the same problem.
 
 Leftover cookies are leftover permission from login — a signed-in session cookie that rides along — used as if it were consent for this person, this share, and this origin.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - Cookie auth + no Origin check
 - GET `/share?to=`
@@ -46,7 +46,7 @@ Also reject: live third-party CSRF; closing findings without re-running `test_fo
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one to `test_foreign_origin_post_is_denied`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one to `test_foreign_origin_post_is_denied`. Do not open the keys file.
 
 ## Use it somewhere new
 

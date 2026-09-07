@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Stop[block merge]
 ```
 
-Noticing, responding, and recovering still need an owner. They do not prove the design-review practice exists. They do not pick a GitHub product. A vendor name is not this week's rule. Someone still has to own the leftover.
+Someone still has to notice, respond, and recover. That work does not prove the design-review practice exists. It does not pick a GitHub product. A vendor name is not this week's rule. Someone still has to own the leftover.
 
 Re-run `test_merge_requires_threat_model_id` after any merge-bot change. A green “CODEOWNERS required” tile is not that check. Stale TM-12 that never mentions OAuth is a 3.2 leftover — inventory it before you claim recover.
 
@@ -68,4 +68,4 @@ A clinic example: block an identity change with no threat-model id; do not paste
 
 ## What this page is not doing
 
-A vendor name is not this week's rule. Live-org traces are out of scope. Gate 10 and M4 stay not finished. An unverified “secure by design” page stays unverified. A later draft of the design-review guide stays a draft. Answer keys are not on this site.
+Live-org traces are out of scope. This page does not finish check-in 10 or milestone M4. An unverified “secure by design” page stays unverified. A later draft of the design-review guide stays a draft. Answer keys are not on this site.

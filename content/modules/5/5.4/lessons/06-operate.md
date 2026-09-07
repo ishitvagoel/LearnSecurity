@@ -19,7 +19,7 @@ flowchart TD
   Alert --> Revoke[Revoke cookies issued on that path]
 ```
 
-Noticing, responding, and recovering still need an owner. They do not bind the socket. They do not pick a log product. Someone still has to own the mismatch.
+Someone still has to notice, respond, and recover. That work does not bind the socket. It does not pick a log product. Someone still has to own the mismatch.
 
 ## Signals that do not become a second leak
 

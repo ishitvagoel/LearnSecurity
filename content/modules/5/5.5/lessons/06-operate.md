@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Restore[Rotate creds; restore if mutated]
 ```
 
-Noticing, responding, and recovering still need an owner. They do not bind parameters. A vendor name is not this week's rule. Someone still has to own the concatenating path.
+Someone still has to notice, respond, and recover. That work does not bind parameters. A vendor name is not this week's rule. Someone still has to own the concatenating path.
 
 ## Signals that do not become a second leak
 
@@ -59,4 +59,4 @@ A clinic example: notice search-box syntax errors; do not paste patient names in
 
 ## What this page is not doing
 
-A vendor name is not this week's rule. A web filter is not this check. Live SQL hunts are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+A web filter is not this check. Live SQL hunts are out of scope. This site does not mark you as finished. Answer keys are not on this site.

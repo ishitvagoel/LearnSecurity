@@ -3,27 +3,27 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships the notes app's simulated copay. Review `labs/E3/e3-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether two `capture("k1")` still leave count 2, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app's simulated copay. Review `labs/E3/e3-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether two `capture("k1")` still leave count 2, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_duplicate_capture_does_not_double_charge`) is the rule test. A comment “will add SEEN later” is not.
 
 ## Picture: two capture(k1) charge twice
 
-Start with this seeded smell: **two capture(k1) charge twice**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **two capture(k1) charge twice**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would falsify it?"}
   Q -->|two k1 charge 2| Property["Rule — good if tested"]
   Q -->|Stripe header| Mechanism[Tool — processor]
-  Q -->|PCI SAQ| False[False comfort]
+  Q -->|PCI SAQ| False[False assurance]
 ```
 
-Hold onto two k1 → count 1. If that call is missing key identity, you still have an always-append leftover. A questionnaire screenshot without that check is still the same problem.
+Keep this: two k1 → count 1. If that call never includes key identity, that always-append leftover is still open. A questionnaire screenshot does not replace that check.
 
 Webhook races are leftover. New keys per click are leftover. Do not skip `test_duplicate_capture_does_not_double_charge`. Do not claim a course gate. Do not hit a live processor to prove the finding. Do not invent card numbers.
 
@@ -46,7 +46,7 @@ Also reject: live processors; shipping without re-running `test_duplicate_captur
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one to `test_duplicate_capture_does_not_double_charge`.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one to `test_duplicate_capture_does_not_double_charge`.
 
 ## Use it somewhere new
 

@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: Report-Only
 
-A check that only counts passing cases can still look green while Report-Only still counts as on. The broken files have to fail that case. The repaired files have to pass it.
+A check that only counts passing cases can still look green while Report-Only still counts as on.
 
 ```mermaid
 flowchart LR
@@ -25,7 +25,7 @@ If both pass, the check is not looking at Report-Only. If both fail, the fix is 
 | Normal | enforcing CSP → may count (may pass on both) |
 | Not claimed | a live script hunt; Helmet; check-in 7; that encoding exists |
 
-The checks live in `labs/E2/e2-lab/tests/test_property.py`. `test_report_only_is_not_enforcement` exists so Report-Only-as-on cannot count as a pass.
+The checks live in `labs/E2/e2-lab/tests/test_property.py`. `test_report_only_is_not_enforcement` is there so Report-Only-as-on cannot sneak through.
 
 ```text
 python3 -m pytest labs/E2/e2-lab/tests --impl vulnerable

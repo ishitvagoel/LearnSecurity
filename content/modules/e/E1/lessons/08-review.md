@@ -3,31 +3,31 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships the notes app's summarizer agent. Review `labs/E1/e1-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `run_tool("exec_sql", {})` still runs, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app's summarizer agent. Review `labs/E1/e1-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `run_tool("exec_sql", {})` still runs, compare that with the rule, and write changes a developer can verify.
 
 Start at `run_tool` and the `exec_sql` row, not at a scanner color or a famous-bugs screenshot. The check you already ran (`test_exec_sql_tool_is_denied`) is the rule test. A comment "will allow-list later" is not.
 
 ## Picture: exec_sql available
 
-Start with this seeded smell: **`exec_sql` available**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **`exec_sql` available**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|exec_sql runs| Property["Rule - good if tested"]
   Q -->|prompt forbids SQL| Mechanism[Tool - string]
-  Q -->|famous-bugs mapped| False[False comfort]
+  Q -->|famous-bugs mapped| False[False assurance]
 ```
 
-Hold onto this: `exec_sql` is None. If that call is missing allow-list membership, you still have an always-run leftover. A prompt screenshot without that check is still the same problem.
+Keep this: `exec_sql` is None. If that call never includes allow-list membership, that always-run leftover is still open. A prompt screenshot does not replace that check.
 
 Retrieved docs are untrusted. Coding-assistant install tools are a later leftover. Name them, do not skip `test_exec_sql_tool_is_denied`. This page does not mark you as finished. Do not call a live model to prove the finding.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - `exec_sql` available
 - Policy only in the system prompt
@@ -46,7 +46,7 @@ Also reject: live model attacks; shipping without re-running `test_exec_sql_tool
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_exec_sql_tool_is_denied`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_exec_sql_tool_is_denied`. Do not open the keys file.
 
 ## Use it somewhere new
 

@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Notify[notify A rotate links]
 ```
 
-Noticing, responding, and recovering still need an owner. A scanner product is not the rule, and this week’s next-read check is not proof.
+Someone still has to notice, respond, and recover. A scanner product is not the rule, and this week’s next-read check is not proof.
 
 Re-run `test_revoked_share_cannot_read` after any share-path change. A green “DELETE 200” tile is not that check. Phone cache and leftover worker sessions are other read paths of the same family — inventory them before you claim recover. Tabletop remains the restore week.
 

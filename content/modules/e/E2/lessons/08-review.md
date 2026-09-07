@@ -3,27 +3,27 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships the notes app’s header middleware. Review `labs/E2/e2-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether Report-Only still makes `isolation_enforced` true, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app’s header middleware. Review `labs/E2/e2-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether Report-Only still makes `isolation_enforced` true, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_report_only_is_not_enforcement`) is the rule check. A comment “we should enforce later” is not.
 
 ## Picture: Report-Only counted as on
 
-Start with this seeded smell: **Report-Only counted as on**. Label it **rule**, **tool**, or **false comfort** before you accept the change.
+Look at this first: **Report-Only counted as on**. Label it **rule**, **tool**, or **false assurance** before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[Change claim] --> Q{"What would prove it false?"}
   Q -->|Report-Only counts| Property["Rule - good if tested"]
   Q -->|Helmet added| Mechanism[Tool - library]
-  Q -->|dashboard green| False[False comfort]
+  Q -->|dashboard green| False[False assurance]
 ```
 
-Hold onto this: Report-Only is not enforcement. If that call is missing the enforcing header name, you still have an always-on leftover. A dashboard screenshot without that check is still the same problem.
+Keep this: Report-Only is not enforcement. If that call never includes the enforcing header name, that always-on leftover is still open. A dashboard screenshot does not replace that check.
 
 Encoding is 6.2. CDN strip is 2.2. Do not skip `test_report_only_is_not_enforcement`. Do not claim check-in 7. Do not load a live page to prove the finding.
 
@@ -46,7 +46,7 @@ Also reject: a live script hunt; shipping without re-running `test_report_only_i
 
 ## Practice
 
-Write three review notes a peer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_report_only_is_not_enforcement`. Do not open the keys file.
+Write three review notes a peer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_report_only_is_not_enforcement`. Do not open the keys file.
 
 ## Use it somewhere new
 

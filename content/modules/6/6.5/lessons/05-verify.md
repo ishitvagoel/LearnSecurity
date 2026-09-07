@@ -9,7 +9,7 @@
 
 ## Picture: link-local allowed must fail the check
 
-A check that only counts passing cases can still look green while link-local is still allowed. The broken files have to fail that case. The repaired files have to pass it.
+A check that only counts passing cases can still look green while link-local is still allowed.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ flowchart LR
 
 If both pass, the test is not looking at link-local. If both fail, the fix is not structural or the check is wrong.
 
-## Four modes, even for one preview URL
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,7 +28,7 @@ If both pass, the test is not looking at link-local. If both fail, the fix is no
 | Failure | If you cannot name the host, do not fetch |
 | Not claimed | Live fetch; DNS rebinding; redirects; IPv6 |
 
-The file is `labs/6.5/6.5-lab/tests/test_property.py`. The test `test_link_local_metadata_is_denied` exists so a scheme-only allow cannot count as a pass. The destination is a **string** in the practice files — do not send packets to it.
+The file is `labs/6.5/6.5-lab/tests/test_property.py`. The test `test_link_local_metadata_is_denied` is there so a scheme-only allow cannot sneak through. The destination is a **string** in the practice files — do not send packets to it.
 
 A test that only asserts the preview image loaded is not this topic’s evidence. A test that only greps `https` in a prefix check without calling `allowed` on the link-local string is not this topic’s evidence. This practice never fetches.
 

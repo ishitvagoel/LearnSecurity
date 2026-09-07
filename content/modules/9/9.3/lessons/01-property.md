@@ -22,7 +22,7 @@ flowchart TD
   Shape -->|yes| Sec[may be a security test]
 ```
 
-## Picture: happy path as false comfort
+## Picture: happy path as false assurance
 
 ```mermaid
 flowchart LR

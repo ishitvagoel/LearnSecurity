@@ -56,7 +56,7 @@ Do not invent a new catalogue. Take the install rule you already have and ask wh
 | SBOM present | install | treat as verify | deny |
 | unpinned action@v1 | workflow | treat as pinned | deny |
 
-A missing hash-compare cell is how a package name becomes false comfort. Write the hole.
+A missing hash-compare cell is how a package name becomes false assurance. Write the hole.
 
 ## Practice
 

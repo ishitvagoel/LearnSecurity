@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Reopen[reopen and restore]
 ```
 
-Noticing, responding, and recovering still need an owner. A SIEM product is not the rule, and this ticket’s restore ran is not proof.
+Someone still has to notice, respond, and recover. A SIEM product is not the rule, and a restore-ran tile is not proof.
 
 Re-run `test_cannot_close_without_recovery` after any close-workflow change. A green “alerts stopped” tile is not that check. Also re-run `test_cannot_close_when_logs_contain_note_body` — a second sink (crash reports, web telemetry) can reopen the leftover-body hole.
 

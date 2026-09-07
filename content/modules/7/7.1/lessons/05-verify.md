@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: is_admin
 
-A check that only counts passing cases can still look green while extra keys still write `is_admin`. The broken files have to fail that case. The repaired files have to pass it.
+A check that only counts passing cases can still look green while extra keys still write `is_admin`.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the check is not looking at extra keys. If both fail, the fix is n
 | Extra | Unknown keys do not become columns (`test_unknown_key_does_not_appear`) |
 | Not claimed | GraphQL cost; unused methods; production inventory matches OpenAPI |
 
-The checks live in `labs/7.1/7.1-lab/tests/test_property.py`. `test_is_admin_cannot_be_patched` exists so a binder that writes `is_admin` cannot count as a pass.
+The checks live in `labs/7.1/7.1-lab/tests/test_property.py`. `test_is_admin_cannot_be_patched` is there so a binder that writes `is_admin` cannot sneak through.
 
 ```text
 python3 -m pytest labs/7.1/7.1-lab/tests --impl vulnerable

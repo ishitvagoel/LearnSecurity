@@ -1,4 +1,4 @@
-# Somewhere new: clinic DICOM parser
+# Same idea on a clinic DICOM parser
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

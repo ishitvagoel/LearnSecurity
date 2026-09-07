@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Purge[Purge matching lines]
 ```
 
-Noticing, responding, and recovering still need an owner. A log product is not the rule, and this line is clean is not proof.
+Someone still has to notice, respond, and recover. A log product is not the rule, and a clean line is not proof.
 
 ## Signals that do not become a second leak
 
@@ -61,4 +61,4 @@ A clinic example: notice chart text in appointment logs; purge without pasting t
 
 ## What this page is not doing
 
-A vendor name is not this week's rule. Do not run live queries against production logs. Answer keys are not on this site.
+Do not run live queries against production logs. Answer keys are not on this site.

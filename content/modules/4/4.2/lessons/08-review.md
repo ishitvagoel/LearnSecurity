@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
@@ -13,19 +13,19 @@ The check you already ran (`test_password_is_not_phishing_resistant`) is the rul
 
 ## Picture: problems to find (name them yourself)
 
-Start with this seeded smell: **`phishing_resistant('password', evil, real)` True**. Label it **rule**, **tool**, or **false comfort** before you accept the change.
+Look at this first: **`phishing_resistant('password', evil, real)` True**. Label it **rule**, **tool**, or **false assurance** before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[Change claim] --> Q{"What would prove it false?"}
   Q -->|"password at lookalike is true"| Property["Rule — good if checked"]
   Q -->|"autocomplete webauthn"| Mechanism[Tool — no origin]
-  Q -->|"MFA equals resistant"| False[False comfort]
+  Q -->|"MFA equals resistant"| False[False assurance]
 ```
 
-For each claim and each branch: label **rule**, **tool**, or **false comfort**. Hold onto this: password at lookalike is false. If that call is missing origin binding, you still have leftover.
+For each claim and each branch: label **rule**, **tool**, or **false assurance**. Keep this: password at lookalike is false. If that call never includes origin binding, the leftover is still there.
 
-Seeded smells (label them yourself; do not open the keys file):
+Problems to find (name them yourself; do not open the keys file):
 
 - `phishing_resistant('password', evil, real)` True
 - Marketing copy “MFA = phishing resistant”
@@ -44,7 +44,7 @@ Also reject: trusting the client; closing findings without re-running `test_pass
 
 ## Practice
 
-Write three review notes a peer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_password_is_not_phishing_resistant`. Do not open the keys file.
+Write three review notes a peer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_password_is_not_phishing_resistant`. Do not open the keys file.
 
 ## Use it somewhere new
 

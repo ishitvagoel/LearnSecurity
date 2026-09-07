@@ -1,4 +1,4 @@
-# Somewhere new: a contractor asked to test a customer WordPress
+# A contractor asked to test a customer WordPress
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

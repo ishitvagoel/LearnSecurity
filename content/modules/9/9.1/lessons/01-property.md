@@ -30,7 +30,7 @@ flowchart TD
 flowchart LR
   Pdf[whole checklist PDF] --> Paste[every row marked done]
   Threat["1.2 isolation"] --> Test[pytest isolation assert]
-  Paste --> False[false comfort]
+  Paste --> False[false assurance]
 ```
 
 **A tool, not the rule:** the PDF, a tracker “done” column, a pytest-cov percentage, or a practice-guide attestation.

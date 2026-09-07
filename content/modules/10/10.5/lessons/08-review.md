@@ -3,31 +3,31 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
+The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
 ## What you are reviewing
 
-A colleague ships the notes app’s incident close. Review `labs/10.5/10.5-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `close_incident({"recovery": "todo", "logs": "ok"})` still returns true, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app’s incident close. Review `labs/10.5/10.5-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `close_incident({"recovery": "todo", "logs": "ok"})` still returns true, compare that with the rule, and write changes a developer can verify.
 
 Start at `close_incident` and the recovery-todo row, not at a scanner color or a SIEM screenshot. The check you already ran (`test_cannot_close_without_recovery`) is the rule test. A comment “will restore later” is not.
 
 ## Picture: close with recovery todo
 
-Start with this seeded smell: **close with recovery todo**. Label it rule, tool, or false comfort before you accept the change.
+Look at this first: **close with recovery todo**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|todo still closes| Property["Rule - good if tested"]
   Q -->|SIEM green| Mechanism[Tool - detect]
-  Q -->|known-exploited dashboard| False[False comfort]
+  Q -->|known-exploited dashboard| False[False assurance]
 ```
 
-Hold onto recovery todo denied. If that call is missing the conjunction, you still have an always-close leftover. A SIEM screenshot without that check is still the same problem.
+Keep this: recovery todo denied. If that call never includes the conjunction, that always-close leftover is still open. A SIEM screenshot does not replace that check.
 
 Note bodies in logs are the second what must not happen. Support-tool god-mode is leftover from earlier cluster lessons. Do not skip `test_cannot_close_without_recovery`. This page does not mark you as finished. Do not query a live SIEM to prove the finding.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - close with recovery todo
 - note bodies in logs
@@ -46,7 +46,7 @@ Also reject: live incident attacks; closing without re-running both deny tests; 
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_cannot_close_without_recovery`. Do not open the keys file.
+Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_cannot_close_without_recovery`. Do not open the keys file.
 
 ## Use it somewhere new
 
