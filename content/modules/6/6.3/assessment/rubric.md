@@ -1,6 +1,6 @@
 # 6.3 assessment (learner-facing — no answers)
 
-**Pass C.** Practical evidence, not a compensating average. States: not-attempted | developing | competent | transfer-ready.
+**Pass C.** Practical evidence, not a compensating average. States: not finished | developing | competent | transfer-ready.
 
 ## Module
 
@@ -10,8 +10,8 @@ Cross-site and cross-context attacks
 
 - [ ] Origin × token matrix and share-POST tests
 - [ ] Transfer task (clinic share-with-partner POST; postMessage/clickjacking/CORS named)
-- [ ] Lab `labs/6.3/6.3-lab`: forbidden outcome **cross-origin state-changing POST authorized by cookie alone**
-- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Lab `labs/6.3/6.3-lab`: what must not happen: **cross-origin state-changing POST authorized by cookie alone**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local practice files only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
 - [ ] Operate signal without cookies: `foreign_origin_post_denied`
 
@@ -19,8 +19,8 @@ Cross-site and cross-context attacks
 
 | Result | Meaning |
 |---|---|
-| Developing | Tools listed; missing attacker/trust; mechanism slogans |
-| Competent | System-specific invariant; lab mapped; operate present |
+| Developing | Tools listed; missing attacker/trust; tool slogans |
+| Competent | System-specific rule; lab mapped; operate present |
 | Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
 
 Knowledge check (retryable): distinguish property vs mechanism for **6.3**. Items live in the session worksheet, not here.

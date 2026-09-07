@@ -1,6 +1,6 @@
 # 6.5 assessment (learner-facing — no answers)
 
-**Pass C.** Practical evidence, not a compensating average. States: not-attempted | developing | competent | transfer-ready.
+**Pass C.** Practical evidence, not a compensating average. States: not finished | developing | competent | transfer-ready.
 
 ## Module
 
@@ -10,8 +10,8 @@ Server-side requests and protocol parsing
 
 - [ ] Egress allow-list and URL predicate tests (no live fetches)
 - [ ] Transfer task (clinic PDF URL; webhooks named)
-- [ ] Lab `labs/6.5/6.5-lab`: forbidden outcome **server-side fetch to link-local metadata is allowed**
-- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Lab `labs/6.5/6.5-lab`: what must not happen: **server-side fetch to link-local metadata is allowed**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local practice files only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
 - [ ] Operate signal without full URLs: `egress_denied`
 
@@ -19,8 +19,8 @@ Server-side requests and protocol parsing
 
 | Result | Meaning |
 |---|---|
-| Developing | Tools listed; missing attacker/trust; mechanism slogans |
-| Competent | System-specific invariant; lab mapped; operate present |
+| Developing | Tools listed; missing attacker/trust; tool slogans |
+| Competent | System-specific rule; lab mapped; operate present |
 | Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
 
 Knowledge check (retryable): distinguish property vs mechanism for **6.5**. Items live in the session worksheet, not here.

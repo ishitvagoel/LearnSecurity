@@ -1,6 +1,6 @@
 # E2 assessment (learner-facing — no answers)
 
-**Pass C.** Practical evidence, not a compensating average. States: not-attempted | developing | competent | transfer-ready. Gate 7 and M2 stay **not-attempted**. Elective.
+**Pass C.** Practical evidence, not a compensating average. States: not finished | developing | competent | transfer-ready. Check-in 7 and M2 stay **not finished**. Elective.
 
 ## Module
 
@@ -10,8 +10,8 @@ Advanced browser and edge security
 
 - [ ] Enforce vs Report-Only map; encoding labeled as not CSP
 - [ ] Transfer task (clinic HIPAA header; Trusted Types / COOP named)
-- [ ] Lab `labs/E2/e2-lab`: forbidden outcome **Report-Only treated as isolation enforcement**
-- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Lab `labs/E2/e2-lab`: what must not happen: **Report-Only treated as isolation enforcement**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local practice files only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
 - [ ] Operate signal without HTML: `csp_report_only_not_enforced`
 
@@ -20,7 +20,7 @@ Advanced browser and edge security
 | Result | Meaning |
 |---|---|
 | Developing | Tools listed; missing attacker/trust; “Helmet / CSP / dashboard” slogans |
-| Competent | System-specific invariant; lab mapped; operate present |
+| Competent | System-specific rule; lab mapped; operate present |
 | Transfer-ready | LO-07 done without Top 10/live-XSS/Gate-7 language as the definition of security |
 
 Knowledge check (retryable): distinguish property vs mechanism for **E2**. Items live in the session worksheet, not here.

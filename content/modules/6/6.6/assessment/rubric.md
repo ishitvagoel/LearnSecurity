@@ -1,6 +1,6 @@
 # 6.6 assessment (learner-facing — no answers)
 
-**Pass C.** Practical evidence, not a compensating average. States: not-attempted | developing | competent | transfer-ready.
+**Pass C.** Practical evidence, not a compensating average. States: not finished | developing | competent | transfer-ready.
 
 ## Module
 
@@ -10,8 +10,8 @@ Workflow, race, and exceptional-condition failures
 
 - [ ] Consume-once state map and second-accept tests
 - [ ] Transfer task (clinic invite-guardian; reset/jobs named)
-- [ ] Lab `labs/6.6/6.6-lab`: forbidden outcome **invite token accepted twice**
-- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Lab `labs/6.6/6.6-lab`: what must not happen: **invite token accepted twice**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local practice files only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
 - [ ] Operate signal without tokens: `invite_replay_denied`
 
@@ -19,8 +19,8 @@ Workflow, race, and exceptional-condition failures
 
 | Result | Meaning |
 |---|---|
-| Developing | Tools listed; missing attacker/trust; mechanism slogans |
-| Competent | System-specific invariant; lab mapped; operate present |
+| Developing | Tools listed; missing attacker/trust; tool slogans |
+| Competent | System-specific rule; lab mapped; operate present |
 | Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
 
 Knowledge check (retryable): distinguish property vs mechanism for **6.6**. Items live in the session worksheet, not here.

@@ -1,6 +1,6 @@
 # 4.4 assessment (learner-facing — no answers)
 
-**Pass C.** Practical evidence, not a compensating average. States: not-attempted | developing | competent | transfer-ready.
+**Pass C.** Practical evidence, not a compensating average. States: not finished | developing | competent | transfer-ready.
 
 ## Module
 
@@ -10,8 +10,8 @@ Authorization and tenant isolation
 
 - [ ] Executable authorization matrix and cross-tenant tests
 - [ ] Transfer task (Clinic: grant on appointment A ≠ chart B)
-- [ ] Lab `labs/4.4/4.4-lab`: forbidden outcome **Grant on n1 authorizes n2**
-- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Lab `labs/4.4/4.4-lab`: what must not happen: **Grant on n1 authorizes n2**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local practice files only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
 - [ ] Operate signal without note bodies / secrets: `authz_deny`; `grant_table_drift`
 
@@ -19,8 +19,8 @@ Authorization and tenant isolation
 
 | Result | Meaning |
 |---|---|
-| Developing | Tools listed; missing attacker/trust; mechanism slogans |
-| Competent | System-specific invariant; lab mapped; operate present |
+| Developing | Tools listed; missing attacker/trust; tool slogans |
+| Competent | System-specific rule; lab mapped; operate present |
 | Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
 
 Knowledge check (retryable): distinguish property vs mechanism for **4.4**. Items live in the session worksheet, not here.
