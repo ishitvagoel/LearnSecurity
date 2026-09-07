@@ -54,7 +54,7 @@ The check module already binds:
 
 ## Practice
 
-Run checks against the broken files (they **must fail** on two meanings). Record the check name `test_duplicate_tenant_keys_are_one_meaning`.
+Two meanings on the broken files **must fail**. Record the check name `test_duplicate_tenant_keys_are_one_meaning`.
 
 ```text
 python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl vulnerable

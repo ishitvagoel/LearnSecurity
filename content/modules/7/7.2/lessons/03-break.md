@@ -58,7 +58,7 @@ ORM dump helpers are convenience, not field permission. GraphQL will resolve any
 
 ## Practice
 
-Run checks against the broken files (they **must fail** on member × `secret_internal`). Record the check name `test_member_cannot_resolve_internal_field`.
+Member × `secret_internal` on the broken files **must fail**. Record the check name `test_member_cannot_resolve_internal_field`.
 
 ```text
 python3 -m pytest labs/7.2/7.2-lab/tests --impl vulnerable

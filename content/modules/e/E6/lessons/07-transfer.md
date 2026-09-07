@@ -39,7 +39,7 @@ An empty owner still has to be denied. A complete record may still accept. Addin
 1. who might try (calendar / silent accept — not a live clinic audit);
 2. what you trust (schema is the promise; maturity score, industry labels, and a pledge are not);
 3. what must not happen (`accept_exception` true with empty owner);
-4. run it on **local** practice files only (no clinic governance tool);
+4. empty owner is deny holds to **local** practice files (no clinic governance tool);
 5. leftover (unread register, inaccessible recovery, extra advanced documentation);
 6. whether the exception records that patients can complete recovery (plain language, not color-only).
 

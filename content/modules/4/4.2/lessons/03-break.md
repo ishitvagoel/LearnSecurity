@@ -60,7 +60,7 @@ FastAPI does not know the RP ID. A Next.js password field will happily POST to e
 
 ## Practice
 
-Run checks against the broken files (they **must fail** on the password-at-lookalike claim). Record the check name `test_password_is_not_phishing_resistant`.
+The password-at-lookalike claim on the broken files **must fail**. Record the check name `test_password_is_not_phishing_resistant`.
 
 ```text
 python3 -m pytest labs/4.2/4.2-lab/tests --impl vulnerable

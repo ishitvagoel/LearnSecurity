@@ -39,7 +39,7 @@ A small clinic app with an “Export all” button that is disabled in the brows
 1. who might try (scripted clinician session — not a live clinic);
 2. what you trust (server `n <= 3` is what you trust; the disabled button and an IP rate limit are not);
 3. what must not happen (`allow(4)` true);
-4. stay on **local** practice files only (fourth denied — never on the real clinic);
+4. fourth denied lives in **local** practice files (never on the real clinic);
 5. leftover (new accounts, GraphQL aliases, human timing as advanced work, extra copies from 5.1);
 6. whether a human-read “try tomorrow” must be announced, not a spinner that retries and burns the budget.
 

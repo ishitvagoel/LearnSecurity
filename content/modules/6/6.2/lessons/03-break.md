@@ -58,7 +58,7 @@ React JSX encodes text children by default; `dangerouslySetInnerHTML` does not. 
 
 ## Practice
 
-Run checks against the broken files (they **must fail** on unencoded markup). Record the check name `test_angle_brackets_are_encoded`.
+Unencoded markup on the broken files **must fail**. Record the check name `test_angle_brackets_are_encoded`.
 
 ```text
 python3 -m pytest labs/6.2/6.2-lab/tests --impl vulnerable

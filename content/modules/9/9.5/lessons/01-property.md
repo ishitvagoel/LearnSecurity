@@ -45,7 +45,7 @@ flowchart LR
 | Severity-only triage | Treat 9.8 as the close decision | Rank and move on | Score is input, not a passing check |
 | Someone who treats a known-exploited list as permission to scan | Point a scanner at a public clinic | "It's on the list" | Out of scope; still no local retest |
 
-You do not need a nation-state. Those three already close the finding without a retest.
+A Done ticket, a severity score, and a known-exploited listing already close the finding without a retest.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

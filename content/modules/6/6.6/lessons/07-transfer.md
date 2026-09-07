@@ -36,7 +36,7 @@ If the mail link always returns 200 and never writes used, the hole is open. A m
 1. who might try (two clicks or a copied link — **not** a live clinic);
 2. what you trust (consume in the store is trusted; HTTP 400 is not);
 3. what must not happen (second `accept` true);
-4. run it on **local** files only (first true, second false — never on the real clinic);
+4. first true, second false holds to **local** files (never on the real clinic);
 5. leftover (two accepts that both see unused; fail-open; token in URL; phishing; last-resort error handler is advanced);
 6. whether a human-read “link already used” status must not use color as the only cue.
 

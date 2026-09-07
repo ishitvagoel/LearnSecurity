@@ -57,7 +57,7 @@ Next.js `fetch` cache, FastAPI in-process dicts, and a CDN “HTTPS only” chec
 
 ## Practice
 
-Run checks against the broken files (they **must fail** on company B getting company A’s body). Record the check name `test_other_tenant_does_not_receive_cached_body`.
+Company B getting company A’s body on the broken files **must fail**. Record the check name `test_other_tenant_does_not_receive_cached_body`.
 
 ```text
 python3 -m pytest labs/2.2/2.2-request-path/tests --impl vulnerable

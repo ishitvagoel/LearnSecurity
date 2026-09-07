@@ -38,7 +38,7 @@ If the namespace is "private" while `pod_ok` is always true, the rule is gone. A
 1. who might try (compromised container / malicious chart — not a live clinic cluster);
 2. what you trust (allow-listed namespaced role is the promise; namespace, network policy, restricted pod profile, and CIS are not);
 3. what must not happen (`pod_ok("cluster-admin")` true);
-4. keep it on **local** practice files only (no live kube-apiserver);
+4. cluster-admin is deny belongs in **local** practice files (no live kube-apiserver);
 5. leftover (break-glass elective, metadata hop, documented cluster-API retry);
 6. whether engineers read the denial (say cluster-admin refused, not color only).
 

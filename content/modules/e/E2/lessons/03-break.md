@@ -57,7 +57,7 @@ Some templates ship Report-Only. Helmet will send whatever you configure. A CDN 
 
 ## Practice
 
-Run checks against the broken files (they **must fail** on Report-Only counted as on). Record the check name `test_report_only_is_not_enforcement`.
+Report-Only counted as on, on the broken files, **must fail**. Record the check name `test_report_only_is_not_enforcement`.
 
 ```text
 python3 -m pytest labs/E2/e2-lab/tests --impl vulnerable

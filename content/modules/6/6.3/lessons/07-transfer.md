@@ -28,7 +28,7 @@ A foreign origin without a token still has to be false, and same origin without 
 1. who might try (foreign origin using the victim browser as helper — **not** a live clinic);
 2. what you trust (origin + token are trusted; SameSite is not);
 3. what must not happen (`allow_share` true for foreign origin without token);
-4. run it on **local** practice files only (foreign origin + no token is false);
+4. origin mismatch holds to **local** practice files (foreign origin + no token is false);
 5. leftover (GET mutate; clickjacking; postMessage; CORS credentials; advanced embeds; lookalike UI from the phishing lesson);
 6. whether a human-seen “share blocked” path must be announced in text, not a silent no-op that pushes people to retry from a lookalike.
 
