@@ -196,6 +196,8 @@ export function plainLessonTitle(title: string): string {
   t = t.replace(/\bthe SecureCollab\b/g, "the notes app");
   t = t.replace(/\bSecureCollab\b/g, "the notes app");
   t = t.replace(/\ban empty the notes app\b/g, "an empty notes-app");
+  t = t.replace(/\ban the notes app\b/g, "a notes-app");
+  t = t.replace(/\ba the notes app\b/g, "a notes-app");
   t = t.replace(/\bthe the notes app\b/g, "the notes app");
   t = t.replace(/Build the the notes app /g, "Build the notes app ");
   t = t.replace(/invariant catalogue/gi, "list of rules");
@@ -459,8 +461,20 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/a larger blast radius/gi, "more places a break can reach"],
   [/larger blast radius/gi, "more places a break can reach"],
   [/\battack surfaces?\b/gi, "ways in"],
+  // Order matters: consume the article/number-specific phrasings first so
+  // the bare fallback below doesn't double an article that is already there
+  // ("a Top 10" -> "a a famous-bugs list") or flatten a singular into a
+  // plural ("an awareness list" -> "an famous-bugs lists").
+  [/\ba Top 10\b/g, "a famous-bugs list"],
+  [/\bA Top 10\b/g, "A famous-bugs list"],
   [/\bTop 10\b/g, "a famous-bugs list"],
-  [/\bawareness lists?\b/gi, "famous-bugs lists"],
+  [/\ban awareness list\b/g, "a famous-bugs list"],
+  [/\bAn awareness list\b/g, "A famous-bugs list"],
+  [/\bthe awareness list\b/g, "the famous-bugs list"],
+  [/\bawareness lists\b/g, "famous-bugs lists"],
+  [/\bAwareness lists\b/g, "Famous-bugs lists"],
+  [/\bawareness list\b/g, "a famous-bugs list"],
+  [/\bAwareness list\b/g, "A famous-bugs list"],
   [/\bthis origin\b/gi, "this website"],
   [/\bthe TCB\b/g, "what you trust"],
   [/\bTCB\b/g, "what you trust"],
@@ -1287,6 +1301,8 @@ function transformProseLine(line: string): string {
   next = next.replace(/you still have a to /g, "you still have to ");
   next = next.replace(/\bthe the notes app\b/g, "the notes app");
   next = next.replace(/\ban empty the notes app\b/g, "an empty notes-app");
+  next = next.replace(/\ban the notes app\b/g, "a notes-app");
+  next = next.replace(/\ba the notes app\b/g, "a notes-app");
   next = next.replace(/\ban rule\b/g, "a rule");
   next = next.replace(/\ban leftover\b/g, "a leftover");
   next = next.replace(/\bthe what you trust\b/g, "what you trust");

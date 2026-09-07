@@ -1,4 +1,7 @@
+import type { Metadata } from "next";
 import { PageHeader, PageShell } from "@/components/ui";
+
+export const metadata: Metadata = { title: "Word list" };
 
 const TERMS: { term: string; def: string }[] = [
   {

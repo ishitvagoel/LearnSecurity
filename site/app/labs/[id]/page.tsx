@@ -15,6 +15,12 @@ export function generateStaticParams() {
     .map((m) => ({ id: m.id }));
 }
 
+export async function generateMetadata({ params }: Props) {
+  const { id } = await params;
+  const mod = loadAllModules().find((m) => m.id === id);
+  return { title: mod ? `Practice — ${mod.id} ${topicTitle(mod)}` : "Practice" };
+}
+
 export default async function LabBriefPage({ params }: Props) {
   const { id } = await params;
   const exists = loadAllModules().some((m) => m.id === id);

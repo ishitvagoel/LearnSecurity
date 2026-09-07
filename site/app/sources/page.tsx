@@ -1,6 +1,9 @@
+import type { Metadata } from "next";
 import { PageHeader, PageShell } from "@/components/ui";
 import { pinStatusLabel } from "@/lib/catalog";
 import { loadPins } from "@/lib/loadCurriculum";
+
+export const metadata: Metadata = { title: "Where we got this" };
 
 type Pin = {
   id: string;

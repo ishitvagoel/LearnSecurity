@@ -1,7 +1,10 @@
+import type { Metadata } from "next";
 import { PhaseJump, PhaseSection } from "@/components/PhaseSection";
 import { PageHeader, PageShell } from "@/components/ui";
 import { phaseList } from "@/lib/catalog";
 import { loadAllModules } from "@/lib/loadCurriculum";
+
+export const metadata: Metadata = { title: "Lessons" };
 
 export default function LearnIndexPage() {
   const modules = loadAllModules();

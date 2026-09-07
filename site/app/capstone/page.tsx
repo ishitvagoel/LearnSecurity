@@ -1,5 +1,8 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { CardLink, PageHeader, PageShell } from "@/components/ui";
+
+export const metadata: Metadata = { title: "Final project" };
 
 export default function CapstonePage() {
   return (

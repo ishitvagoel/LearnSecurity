@@ -1,7 +1,10 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHeader, PageShell } from "@/components/ui";
 import { PHASES, phaseHeading, phaseList, topicTitle } from "@/lib/catalog";
 import { loadAllModules, moduleHref } from "@/lib/loadCurriculum";
+
+export const metadata: Metadata = { title: "Study order" };
 
 export default function RoadmapPage() {
   const modules = loadAllModules();

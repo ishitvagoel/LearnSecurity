@@ -1,5 +1,8 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHeader, PageShell } from "@/components/ui";
+
+export const metadata: Metadata = { title: "The notes app" };
 
 export default function ReferencePage() {
   return (

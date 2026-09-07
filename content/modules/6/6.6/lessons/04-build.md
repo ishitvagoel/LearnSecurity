@@ -9,7 +9,7 @@ A unique index you never write does not stop the second join. HTTP 400 after the
 
 Change this: `accept` **records `t1` as used when it returns true**. The next call denies. Consume is the accept. Same step. Not a follow-up ticket.
 
-Put this in a invite: write used, then allow once. By default, store errors **deny**. An unreachable database does not consume the invite. Production uses a transaction so the used-write and the membership commit together.
+Put this in an invite: write used, then allow once. By default, store errors **deny**. An unreachable database does not consume the invite. Production uses a transaction so the used-write and the membership commit together.
 
 ## Picture: write used, then allow once
 

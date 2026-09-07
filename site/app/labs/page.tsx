@@ -1,7 +1,10 @@
+import type { Metadata } from "next";
 import { PageHeader, PageShell } from "@/components/ui";
 import { phaseHeading, phaseList, topicBlurb, topicTitle } from "@/lib/catalog";
 import { loadAllModules } from "@/lib/loadCurriculum";
 import Link from "next/link";
+
+export const metadata: Metadata = { title: "Practice" };
 
 export default function LabsIndexPage() {
   const withLabs = loadAllModules().filter((m) => m.labSpec);

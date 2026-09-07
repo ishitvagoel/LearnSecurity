@@ -1,7 +1,10 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHeader, PageShell } from "@/components/ui";
 import { pinStatusLabel } from "@/lib/catalog";
 import { loadAllModules, loadPins, moduleHref } from "@/lib/loadCurriculum";
+
+export const metadata: Metadata = { title: "Industry lists" };
 
 type Pin = {
   id: string;
