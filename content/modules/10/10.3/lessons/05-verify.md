@@ -1,15 +1,15 @@
-# Fail on the broken files, then pass on the repaired ones
+# A broken admission must fail the check
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-"We use Kubernetes" is not evidence. "CIS is green" is a tool observation. The check is: `pod_ok("cluster-admin")` is false and `"app"` may run. That cluster-admin observation must be **false** on the broken files and **true** on the repaired files. Do not apply manifests to a live cluster.
+Running Kubernetes does not deny `cluster-admin`. A green CIS scan is a score. `pod_ok("cluster-admin")` has to be false, and `"app"` may run. On the broken helper, cluster-admin still runs. Repair refuses `cluster-admin`. Do not apply manifests to a live cluster.
 
 ## Picture: a broken admission must fail the check
 
-A test that only counts passing tests can pass while `pod_ok("cluster-admin")` still returns true. This check asks whether an app pod granted cluster-admin still counts as a passing control. Broken must fail that question. Repaired must pass it.
+`pod_ok("cluster-admin")` can still return true while the rest of the suite looks fine.
 
 ```mermaid
 flowchart LR
@@ -17,27 +17,27 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: cluster-admin denied]
 ```
 
-If both pass, the test is not looking at cluster-admin. If both fail, the fix is not structural or the check is wrong.
+If the broken admission still passes, cluster-admin was never the case under test.
 
-## Four modes, even for a role string
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
 | Normal | `app` → may run (may pass on both) |
 | Wrong input | cluster-admin → cannot run; broken files must fail |
-| Abuse | Unknown roles still deny (fail closed) |
-| Not claimed | A live managed cluster; a CIS score; an assurance gate; that `"app"` is least privilege |
+| Abuse | Unknown roles still deny |
+| Not claimed | A live managed cluster; a CIS score; a check-in; that `"app"` is least privilege |
 
-The file is `labs/10.3/10.3-lab/tests/test_property.py`. The test `test_cluster_admin_pod_is_denied` is a **what-must-not-happen** test: always-true `pod_ok` is not allowed to count as a passing control.
+`test_cluster_admin_pod_is_denied` catches a `pod_ok` that never returns false.
 
-Honest `"app"` may pass on both implementations. That does not excuse the cluster-admin deny test. If the broken files do not fail `test_cluster_admin_pod_is_denied`, the lab is miswired — fix the wiring, not the assertion.
+A pod using `"app"` may stay allowed. Deny cluster-admin. If the broken files do not fail `test_cluster_admin_pod_is_denied`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/10.3/10.3-lab/tests --impl vulnerable
 python3 -m pytest labs/10.3/10.3-lab/tests --impl fixed
 ```
 
-A test that only greps `namespace:` in a chart without calling `pod_ok("cluster-admin")` is not this topic's evidence. This practice never opens a live cluster.
+A `namespace:` line in a chart is not `pod_ok("cluster-admin")`. This practice never opens a live cluster.
 
 ## What the tests do not prove
 
@@ -46,25 +46,16 @@ A test that only greps `namespace:` in a chart without calling `pod_ok("cluster-
 - Instance metadata blocked
 - Helm chart supply chain
 - Documented cluster-API retry (extra, advanced)
-- An assurance gate complete
-
-Record those as leftover or later topics, not as silent passes.
+- This page does not finish a cluster check-in
 
 ## Practice
 
-Run both this session from the lab directory if needed:
-
-```text
-python3 -m pytest labs/10.3/10.3-lab/tests --impl vulnerable
-python3 -m pytest labs/10.3/10.3-lab/tests --impl fixed
-```
-
-Paste nothing from answer keys. Write fail/pass into your notes next to the cluster-admin row. Reject a "test" that only greps `namespace:` in a chart without calling `pod_ok("cluster-admin")`.
+Call `pod_ok("cluster-admin")`. A `namespace:` line in a chart is inventory.
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts "namespace exists" is not this topic. A live kube-apiserver is out of scope.
+A namespace that exists is inventory, not `pod_ok("cluster-admin")`. Do not use a live kube-apiserver.
 
 ## What this page is not doing
 
-Do not add a live-cluster trophy. Do not log kubeconfig. Answer keys are not on this site. Do not claim you finished an assurance gate.
+A live cluster screenshot is not `cluster-admin` denied. Do not log kubeconfig. Answer keys are not on this site. This page does not mark you as finished.

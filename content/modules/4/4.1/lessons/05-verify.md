@@ -1,15 +1,15 @@
-# Fail on the broken files, then pass on the repaired ones
+# A leftover session must fail the check
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-“We deleted the row” is not evidence. “Single sign-on is on” is a tool observation. The check is: after `delete_user("alice")`, `session_valid("alice")` is False. That observation must be **false** on the broken files (the helper still returns true) and **true** on the repaired files.
+Deleting the profile row does not kill the session. A single-sign-on toggle is a product. After `delete_user("alice")`, `session_valid("alice")` has to be False. Leftover: `session_valid("alice")` is still true. Repair makes it false after `delete_user`.
 
 ## Picture: a leftover session must fail the check
 
-A test that only asserts the profile is gone can pass while the cookie still works. This check asks whether a leftover session after delete still counts as a passing control. Broken must fail that question. Repaired must pass it.
+Asserting the profile is gone can still hide that the cookie still works.
 
 ```mermaid
 flowchart LR
@@ -17,9 +17,9 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: session_valid false]
 ```
 
-If both pass, the test is not looking at `session_valid` after delete. If both fail, the fix is not structural or the check is wrong.
+If the broken session store still passes, `session_valid` after delete was never the case.
 
-## Four modes, even for one cookie
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,41 +28,28 @@ If both pass, the test is not looking at `session_valid` after delete. If both f
 | Failure | Resurrected map entry still denied (`test_deleted_denies_even_if_session_map_still_has_row`) |
 | Not claimed | Identity-provider logout; refresh tokens; phone cache; token denylist complete |
 
-The file is `labs/4.1/4.1-lab/tests/test_property.py`. The test `test_deleted_user_session_is_dead` calls `delete_user` then `session_valid`. That is a **what-must-not-happen** test: a leftover session that still works is not allowed to count as a passing control.
+The test `test_deleted_user_session_is_dead` calls `delete_user` then `session_valid`. Leftover alice still valid is the fail.
 
-A test that only asserts HTTP 200 is not this topic's evidence. A test that only greps `DELETED.add` without calling `session_valid` after `delete_user` is not this topic's evidence. This practice never opens a live identity provider.
+A `DELETED.add` line is not `session_valid` after `delete_user`. This practice never opens a live identity provider.
 
 ```text
 python3 -m pytest labs/4.1/4.1-lab/tests --impl vulnerable
 python3 -m pytest labs/4.1/4.1-lab/tests --impl fixed
 ```
 
-Map the test to the deleted-alice × leftover-session row you wrote. If the broken files do not fail the leftover-session assertion, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
+Map the test to the deleted-alice × leftover-session row you wrote. If the broken files do not fail the leftover-session assertion, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
 - Refresh-token family (later)
 - Worker identity (later)
 - Backup leftover (later)
-- A phone's offline cache (later)
-- Revoking a stolen login factor (advanced; not this pytest)
-
-Record those as leftover or later topics, not as silent passes.
-
-## Practice
-
-Run both this session:
-
-```text
-python3 -m pytest labs/4.1/4.1-lab/tests --impl vulnerable
-python3 -m pytest labs/4.1/4.1-lab/tests --impl fixed
-```
-
-Paste nothing from answer keys. Write fail/pass into your notes next to the matrix row.
+- A phone cache still holding the session (later)
+- Revoking a stolen login factor (advanced; not this check)
 
 ## Use it somewhere new
 
-Clinic clinician. A test that only asserts HTTP 200 is not lifecycle evidence. A test that logs into a live chart system is out of scope.
+HTTP 200 after delete is not lifecycle evidence. Do not run a test that logs into a live chart system.
 
 ## What this page is not doing
 

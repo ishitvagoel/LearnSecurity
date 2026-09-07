@@ -5,24 +5,22 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **serverless function with a shared `admin` connection string**, or a **clinic billing replica** that should see invoice rows, not chart text. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: `can_select("app", "tB", "tA") is False`. Rewrite it for a new compute shape without changing the fork.
+You get a **serverless function with a shared `admin` connection string**, or a **clinic billing replica** that should see invoice rows, not chart text. `can_select("app", "tB", "tA") is False`.
 
-**Prompt:** Serverless function with a shared `admin` connection string.
+Serverless function with a shared `admin` connection string.
 
-**Product sketch:** Clinic billing replica that should see invoice rows, not chart text.
+A billing replica should see invoice rows, not chart text.
 
-Rewrite the notes-app sentence. Include:
-
-1. who can act (stolen function secret; forgotten handler filter; replica user with `SELECT` on notes — **not** a live clinic, cloud function, or managed database);
+1. who might try (stolen function secret; forgotten handler filter; replica user with `SELECT` on notes — **not** a live clinic, cloud function, or managed database);
 2. what you trust (which role is the second check; the cloud vendor IAM name is not);
 3. what must not happen (`admin` can read tA notes, or billing replica can read chart text — pick one);
-4. a test idea on a **local** practice only (`can_select` analogue);
+4. `can_select` analogue is pinned to **local** practice;
 5. leftover (IAM admin still exists; table-owner walk-around of a later row-level rule; a living pledge we have not verified here is not GRANT);
 6. whether a human path must meet the web accessibility baseline (role design itself is not an accessibility problem; skip unless you claim a human-mediated control).
 
 ## Picture: a new compute shape is still a role
 
-Renaming “app” to “function” is not transfer. Person, object, path, and leftover change. A shared `admin` string and a billing replica that can read chart text are new rules. Microservices and serverless still do not add a same-company check by existing.
+Treat the clinic function as the notes-app process. A shared `admin` string and a billing replica that can read chart text are new rules. Microservices and serverless still do not add a same-company check by existing.
 
 ```mermaid
 flowchart LR
@@ -41,13 +39,13 @@ A private subnet does not compare `tB` to `tA`. The replica is a second lane: in
 | “Private subnet” as the rule | Topology is not isolation |
 | Live clinic or real managed database | Course rules |
 | Row-level-security ticket without a test | Tool theater |
-| A manufacturer pledge as GRANT | Living guidance, not this pytest |
+| A manufacturer pledge as GRANT | Living guidance, not this check |
 | HTTP 200 as architecture evidence | Wrong observation |
 
 ## Practice
 
-One page. No keys. `labs/3.3/3.3-lab` is the only running system you may break. Do not deploy a function or open a replica.
+Split migrate from serve on the GRANT line. Keep the answer keys closed. `labs/3.3/3.3-lab` is the only running system you may break. Do not deploy a function or open a replica.
 
 ## What this page is not doing
 
-Live-target SQL. Real company dumps. Claiming a course gate from this page.
+Do not try live-target SQL. Do not use real company dumps. This page does not finish a check-in.

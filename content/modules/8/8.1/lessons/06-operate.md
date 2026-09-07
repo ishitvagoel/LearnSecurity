@@ -1,11 +1,11 @@
-# attest_fail_export_denied without logging the APK
+# Log the deny, not the app file
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A new client field (`premium`, `hipaaMode`) can skip the attest check after `allow_export` was “fixed once.” Pair notice and recover. Do not log note bodies or attestation blobs (3.1). Do not attach the Android app file to the ticket.
+`premium` or `hipaaMode` on the client can skip server attest. Note bodies, attestation blobs, and the Android app file do not belong in the ticket.
 
 ## Picture: failed attest is a signal
 
@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Revoke[Revoke app session if automated]
 ```
 
-Industry lists name detect, respond, recover. They do not prove the server attest. Someone still has to own the leftover.
+A green attest tile is not the server check.
 
 ## Signals that do not become a second leak
 
@@ -27,27 +27,25 @@ Industry lists name detect, respond, recover. They do not prove the server attes
 | Recover | Keep deny; revoke tokens; owned rooted-device policy |
 | Leftover | Attestation farms; 8.4 debug clients; old app files shipping the boolean |
 
-A mobile-device product name is not the rule. Re-run `test_client_integrity_claim_is_not_authorization` after any export-route change; a green “Play Integrity enabled” tile is not that pytest. Feature flags and `premium=true` are other client booleans of the same family — list them before you claim Recover.
+A mobile-device product name does not attest export. A client `premium` flag still has to fail `test_client_integrity_claim_is_not_authorization`. Enabling Play Integrity does not authorize the export. Feature flags and `premium=true` are other client booleans; the server is not the authority until those are named.
 
 ## What the framework does vs what you still have to check
 
-A Play Console dashboard will show attestation counts and stay silent when FastAPI still binds `integrity=ok`. Notice must observe **client ok plus attest fail is false**, not store-listing health. If the alert includes a Play Integrity token or note bodies, you have opened a logging leak (3.1 / 4.3).
+Play Console attestation volume is not FastAPI refusing `integrity=ok`. Hold **client ok plus attest fail is false**, not store-listing health. Keep a Play Integrity token and note bodies in the lab — they are a logging leak (3.1 / 4.3).
 
-The app’s promise is: **this** practice, `attest_fail_export_denied` fires without the app file, and a console product name is not this week’s rule.
+`attest_fail_export_denied` fires without the app file.
 
 ## Practice
-
-Write one log line you would accept in review. Tie it to `labs/8.1/8.1-lab`. Example shape (fake ids only):
 
 ```text
 log_denied reason=attest_fail_export_denied app_ver=1.0 request_id=req_81e
 ```
 
-Reject any line that includes note bodies, a Play Integrity token, or a live device trace.
+Note bodies, a Play Integrity token, or a live device trace would turn the log into a device dump.
 
 ## Use it somewhere new
 
-Clinic: notice `hipaaMode` client claims on a local helper; do not attach the chart to the ticket. Do not instrument a live hospital device.
+Notice `hipaaMode` client claims on a local helper; do not attach the chart to the ticket. Do not instrument a live hospital device.
 
 ## Can people still use it
 
@@ -55,4 +53,4 @@ If export is denied, say so in a readable message. Do not trap TalkBack users in
 
 ## What this page is not doing
 
-A mobile-device product name is not the rule. Live Play traces are out of scope. Gates 0–10 stay not-attempted.
+A Play Integrity sticker does not finish this page. Do not use live Play traces. Opening this page does not finish a check-in.

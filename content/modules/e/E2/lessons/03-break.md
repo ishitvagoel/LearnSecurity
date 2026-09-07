@@ -5,21 +5,19 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python model of header names. The failure is already in the dict: `isolation_enforced` treats Report-Only as on. You are here to see that Report-Only counted as isolation is **a failed rule**, not a trophy script.
-
-The rule under test:
+The practice is not a website you attack. `isolation_enforced` treats Report-Only as on. Counting Report-Only as isolation is the break, not an exploit recipe.
 
 > `isolation_enforced` must be false when the only header is `Content-Security-Policy-Report-Only`. An enforcing `Content-Security-Policy` header may count.
 
 ## Where you may practice
 
-Only `labs/E2/e2-lab` is in scope. The practice files are an in-process `isolation_enforced(headers)`. Fake header dicts only. It does not open a browser. Do not load a live page, probe a public host, or scan someone else’s site as this exercise.
+Stay inside `labs/E2/e2-lab`. Fake header dicts only go through `isolation_enforced(headers)`. It does not open a browser. Do not load a live page, probe a public host, or scan someone else’s site as this exercise.
 
-Do not paste this exercise onto a public site, employer board, or live clinic portal.
+Do not paste this exercise onto a public site, employer CDN, or live clinic portal.
 
-What must not happen: **Report-Only treated as isolation**. `isolation_enforced({"Content-Security-Policy-Report-Only": "default-src 'none'"})` returns true.
+`isolation_enforced({"Content-Security-Policy-Report-Only": "default-src 'none'"})` returning true is **Report-Only treated as isolation**.
 
-Attacker capability in this practice: a script that would only be logged. That stands in for “we ship Report-Only so scripts are blocked,” a Helmet default treated as encoding (6.2), or a green reporting dashboard treated as isolation. What you trust: `isolation_enforced` is supposed to require the **enforcing** header name. Next.js header helpers, a CDN, and FastAPI are not in what you trust for this rule.
+Picture a script that would only be logged — “we ship Report-Only so scripts are blocked,” a Helmet default treated as encoding (6.2), or a green reporting dashboard treated as isolation. `isolation_enforced` is supposed to require the **enforcing** header name — not Next.js header helpers, a CDN, or FastAPI.
 
 ## Picture: any CSP-looking header counts
 
@@ -28,9 +26,9 @@ flowchart TD
   Any[Report-Only or CSP] --> True[isolation_enforced true]
 ```
 
-The broken files show **cause** (Report-Only mistaken for on). Do not probe public hosts. What has to be true first: either header name makes the function true. You do not need a browser. You must not load a live page.
+Report-Only is mistaken for on. Do not probe public hosts. Either header name makes the function true. You do not need a browser. You must not load a live page.
 
-Encoding is already the rule in 6.2. This week’s check is **the header name that actually blocks**. Check-in 7 and milestone M2 stay **not finished**.
+Encoding is already the rule in 6.2. The check is **the header name that actually blocks**. Check-in 7 and milestone M2 stay **not finished**.
 
 ## What to read in the practice files
 
@@ -39,17 +37,13 @@ Encoding is already the rule in 6.2. This week’s check is **the header name th
 - `test_report_only_is_not_enforcement`
 - `test_enforcing_csp_header_may_count` — enforcing CSP may pass on both
 
-You do not need a new header. The failure of `test_report_only_is_not_enforcement` *is* the evidence.
-
-Do not open the repaired files yet. Diagnose the cause first.
-
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |
 |---|---|
 | Required rule | Report-Only only → `isolation_enforced` false |
 | Why it happens | Report-Only mistaken for on |
-| What has to be true first | Either header name ⇒ true |
+| What's already wrong | Either header name ⇒ true |
 | Trigger | A script that would only be logged |
 | What it costs | A script still runs; the dashboard looks green |
 | How you stop it | Count only `Content-Security-Policy` |
@@ -59,21 +53,21 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-Some templates ship Report-Only. Helmet will send whatever you configure. A CDN can strip the enforcing header (2.2). The app’s promise is: **this** practice, Report-Only only is false.
+Some templates ship Report-Only. Helmet will send whatever you configure. A CDN can strip the enforcing header (2.2). Report-Only only is false.
 
 ## Practice
 
-Run checks against the broken files (they **must fail** on Report-Only counted as on). Record the check name `test_report_only_is_not_enforcement`.
+Report-Only counted as on, on the broken files, **must fail**. Record the check name `test_report_only_is_not_enforcement`.
 
 ```text
 python3 -m pytest labs/E2/e2-lab/tests --impl vulnerable
 ```
 
-Run from `labs/E2/e2-lab` if a repo-root collection picks up `site/`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/E2/e2-lab` if a repo-root collection picks up `site/`. Do not “fix” the check to pass. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic HIPAA header: predict without leaving this directory. Do not load a live page.
+A HIPAA header that is Report-Only is not enforcement. Predict without leaving this directory. Do not load a live page.
 
 ## What this page is not doing
 

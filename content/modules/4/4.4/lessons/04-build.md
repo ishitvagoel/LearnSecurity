@@ -5,11 +5,11 @@
 
 ## The rule
 
-A denylist of yesterday’s ids is not the fix. Hiding the button is not the fix. Id length is not the fix. “They are a collaborator” is not the fix.
+The previous id list does not decide who may read. Hiding the button does not decide it. Making ids longer does not decide it. “They are a collaborator” is still theater.
 
-The structural change is: `can_read` **denies unless company matches and the user is the note owner or `GRANTS[(user, note_id)]` is true**. Structural means this object is checked — not leftover permission from the surroundings.
+The restore: `can_read` **denies unless company matches and the user is the note owner or `GRANTS[(user, note_id)]` is true**. Put simply, this object is checked — not leftover permission from the surroundings.
 
-The smallest restore for notes-app notes is: deny by default, then company equality, then owner or grant on **this** id. Fail closed: missing note, missing user, or missing grant is **deny**. Do not fail open because the id “looks valid.”
+Put this in notes: deny by default, then company equality, then owner or grant on **this** id. Missing note, missing user, or missing grant is **deny**. An id that “looks valid” is not a grant.
 
 ## Picture: deny default, then two keys
 
@@ -24,9 +24,9 @@ flowchart TD
   Own -->|yes| Allow[Allow]
 ```
 
-The repaired files compare company, then owner or grant. A later database-role check is a *second* gate; this table is still required. A clinic admin named Eve is not an `acme` capability. A later PostgreSQL row-level rule does not replace this cell.
+The repaired files compare company, then owner or grant. A later database-role check is a *second* gate; this table is still required. A clinic admin named Eve is not an `acme` capability. A later PostgreSQL row-level rule does not replace this rule.
 
-Industry checklists want the check on a trusted server, not in the Next.js client. This pytest is that sentence for `can_read`. Extra rows about applying grant changes immediately, and carrying the original person through a worker, are advanced — not this week’s pytest.
+The check belongs on a trusted server, not in the Next.js client — `can_read`. Extra rows about applying grant changes immediately, and carrying the original person through a worker, are advanced — not this check.
 
 ## What the repaired files must show
 
@@ -46,7 +46,7 @@ Industry checklists want the check on a trusted server, not in the Next.js clien
 ## What the tool cannot do
 
 - A hard-to-guess id is not a grant.
-- GraphQL `node(id)`, an export zip, a search index, and workers are other paths of the same cell.
+- GraphQL `node(id)`, an export zip, a search index, and workers are other paths of the same rule.
 - Title vs body is a later field-level topic. This week is object plus company.
 - An honest grant on n1 still reveals n1 — that is the product.
 - How fast a taken-back grant dies is an advanced leftover.
@@ -59,11 +59,9 @@ Name person, company, object, and the check. Run:
 python3 -m pytest labs/4.4/4.4-lab/tests --impl fixed
 ```
 
-It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
-Clinic: an appointment grant table keyed by chart id and company, not by “clinician role.”
+An appointment grant table keyed by chart id and company, not by “clinician role.”
 
 ## What can still go wrong
 
@@ -71,4 +69,4 @@ Search / export / GraphQL paths; grant take-back lag; honest n1 still readable; 
 
 ## What this page is not doing
 
-Do not connect a live company. Do not claim a course gate from a roles-product name.
+Do not connect a live company. A check-in is not a roles-product name.

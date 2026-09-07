@@ -9,9 +9,9 @@ The notes app already treats a share as a grant. Sharing a note is a **change th
 
 > `allow_share` from a foreign origin without a matching CSRF token must be false. Leftover cookies are not consent.
 
-What must not happen is **a cross-site POST that changes a share, authorized by cookie alone**. That is an integrity failure of share grants: an unwanted share, with the browser acting as a helper that sent the leftover cookie.
+Cookie-only **cross-site POST** already changes the share. That is an integrity failure of share grants: an unwanted share, with the browser acting as a helper that sent the leftover cookie.
 
-Industry checklists want an anti-forgery token, or an extra header that a simple cross-site form cannot set, when a CORS preflight is not the defense. They want unsafe methods (not GET) for changes, or a strict fetch-metadata check. They want SameSite set for the cookie’s purpose — a helper, not the whole rule. Extra rows about authenticated embeds and CORP are **advanced**, not this week’s pytest.
+Use an anti-forgery token, or an extra header that a simple cross-site form cannot set, when a CORS preflight is not the defense. Changes should use unsafe methods (not GET), or a strict fetch-metadata check. SameSite still has to match the cookie’s purpose — a helper, not the whole rule. Extra rows about authenticated embeds and CORP are **advanced**, not this check.
 
 ## Picture: leftover cookie authority without site-bound intent
 
@@ -23,9 +23,9 @@ flowchart TD
   App -->|cookie only| Share[unwanted share grant]
 ```
 
-Who can act here: a foreign origin that can cause the victim’s browser to send the leftover cookie. What you trust is local `allow_share(origin, expected, token)`. Do not visit other people’s sites.
+Picture a foreign origin that can cause the victim’s browser to send the leftover cookie. What you trust is local `allow_share(origin, expected, token)`. Do not visit other people’s sites.
 
-**A tool is not the rule.** SameSite=Lax, a CORS `*` reflex, or “JSON APIs cannot CSRF.”
+SameSite=Lax, a CORS `*` reflex, and “JSON APIs cannot CSRF” do not deny a foreign-origin POST.
 
 ## Picture: origin and token and method
 
@@ -44,7 +44,7 @@ A token you put on `Authorization` by hand is a **different helper**. It does no
 | Slice | For this rule |
 |---|---|
 | Why it happens | Cookie authority used without site-bound intent |
-| What has to be true first | `allow_share(evil, app, token=None)` is true |
+| What's already wrong | `allow_share(evil, app, token=None)` is true |
 | Trigger | Foreign-origin POST with leftover cookie |
 | What it costs | Integrity of share grants |
 | How you stop it | Reject foreign Origin; require a CSRF token for cookie sessions |
@@ -53,7 +53,7 @@ A token you put on `Authorization` by hand is a **different helper**. It does no
 
 ## What the framework does vs what you still have to check
 
-SameSite=Lax is not complete (top-level GET, browser exceptions, old clients). FastAPI does not add a CSRF token because you used cookies. CORS allowing `*` with credentials is a leak, not a CSRF defense. The app’s promise is this `allow_share` check. The local folder is `labs/6.3/6.3-lab`. No live foreign origin.
+SameSite=Lax is not complete (top-level GET, browser exceptions, old clients). FastAPI does not add a CSRF token because you used cookies. CORS allowing `*` with credentials is a leak, not a CSRF defense. This `allow_share` check is the local check — files in `labs/6.3/6.3-lab`. No live foreign origin.
 
 ## What the tool cannot do
 
@@ -74,12 +74,10 @@ python3 -m pytest labs/6.3/6.3-lab/tests --impl vulnerable
 python3 -m pytest labs/6.3/6.3-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
-Clinic “share record with partner” POST. postMessage, clickjacking, CORS `*` with credentials.
+A “share record with partner” POST is this grain. postMessage, clickjacking, and CORS `*` with credentials are leftovers.
 
 ## What this page is not doing
 
-Live third-party CSRF, clickjacking trophies, dumping lab Python into notes. Course gates stay unclaimed without learner or product evidence. Answer keys are not on this site.
+Do not use live third-party CSRF, clickjacking trophies. This page does not finish a check-in. Answer keys are not on this site.

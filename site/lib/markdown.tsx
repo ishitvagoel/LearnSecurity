@@ -179,13 +179,16 @@ export function Markdown({ source }: { source: string }): ReactNode {
     }
     const text = para.join(" ");
     para = [];
-    const mechanism = plainMechanismLead(text);
-    if (mechanism) {
-      pushNode(
-        <aside key={nextKey("mech")} className="lesson-mechanism">
-          {inline(mechanism)}
-        </aside>,
-      );
+    const mechanismPrefix = "**Mechanism (not the property):**";
+    if (text.startsWith(mechanismPrefix)) {
+      const mechanism = plainMechanismLead(text);
+      if (mechanism) {
+        pushNode(
+          <aside key={nextKey("mech")} className="lesson-mechanism">
+            {inline(mechanism)}
+          </aside>,
+        );
+      }
       return;
     }
     pushNode(

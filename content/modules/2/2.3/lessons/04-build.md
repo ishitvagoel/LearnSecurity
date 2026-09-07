@@ -5,9 +5,9 @@
 
 ## The rule
 
-`js_read_session` must return `None` when `httponly` is true. Structural means the cookie model actually branches on the flag — not a comment, not Report-Only CSP, not “we will encode later.”
+`js_read_session` must return `None` when `httponly` is true. Put simply, the cookie model actually branches on the flag — not a comment, not Report-Only CSP, not “we will encode later.”
 
-The smallest restore for the notes-app `sc_session` is: if the cookie is a session token, set HttpOnly, and make the script reader fail closed. Moving the token into `localStorage` enlarges the script share. Prefixes (`__Host-`) and `Secure` are sister rules; they do not replace this branch.
+Repair the notes-app `sc_session`: if the cookie is a session token, set HttpOnly, and make the script reader deny when it cannot tell. Moving the token into `localStorage` enlarges the script share. Prefixes (`__Host-`) and `Secure` are sister rules; they do not replace this branch.
 
 ## Picture: one rule restored
 
@@ -18,7 +18,7 @@ flowchart TD
   Flag -->|no| Value[Return value - not a session token]
 ```
 
-The repaired files honor the flag. XSS is **not** solved: encoding, CSP (draft), and Trusted Types (draft) remain later work. Fail-safe for a session token: if the flag is missing, treat it as a defect, not as “readable is fine.”
+The repaired files honor the flag. XSS is **not** solved: encoding, CSP (draft), and Trusted Types (draft) remain later work. If the session-token flag is missing, treat it as a defect, not as “readable is fine.”
 
 ## Why this restores the rule
 
@@ -28,7 +28,7 @@ The repaired files honor the flag. XSS is **not** solved: encoding, CSP (draft),
 | Cookie header to the origin | Still allowed; the jar may send `Cookie` |
 | Non-session cookies | May remain script-readable if that is the product intent; do not silently reuse the session name |
 
-Industry cookie lists want HttpOnly when the value is not meant for scripts. This practice is that sentence, not a full cookie catalogue.
+Cookie rules ask for HttpOnly when the value is not meant for scripts. The check is that cookie rule, not a full cookie list.
 
 ## What this is not
 
@@ -46,11 +46,9 @@ Name who (script in the origin), what (`sc_session` value), action (read), and t
 python3 -m pytest labs/2.3/2.3-browser-policy/tests --impl fixed
 ```
 
-It must pass.
-
 ## Use it somewhere new
 
-Clinic portal session cookie. The fix is still “script cannot read the session token,” not “we shipped a CSP.” If the clinic also has a WebView, the same check must hold on that bridge.
+The portal session cookie still has to keep script from reading the token — shipping a CSP does not finish that. If the portal also has a WebView, the same check must hold on that bridge.
 
 ## Leftover you will not delete
 

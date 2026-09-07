@@ -3,15 +3,15 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-Even after `allowed` was “fixed once,” a new webhook path can fetch again. Running it for real is the rest of the loop: notice, contain, and keep the deny.
+A new webhook path can fetch after `allowed` denies link-local hosts. Page the unexpected fetch, cut the webhook, and keep the deny.
 
-Do not log full URLs if they contain tokens (4.3). Do not fetch the denied destination “to confirm.”
+Keep token-bearing URLs out of the ticket. Do not fetch the denied destination “to confirm.”
 
 ## Picture: a denied host is a signal
 
-A deny of a preview URL that is not on the allow-list is a notice-and-recover problem, not a licence to paste the URL into the paging channel. Notice names the event. Recover keeps the deny. Neither fetches the destination.
+If a preview URL is not on the allow-list, leave the URL off Slack and the ticket. Then keep the deny. Do not fetch the destination.
 
 ```mermaid
 flowchart TD
@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Stop[Do not fetch]
 ```
 
-Industry lists name detect, respond, recover. They do not allow-list hosts. A log-product name is not the rule. Someone still has to own the importer path.
+An “HTTPS only” product does not put the preview host on the allow-list.
 
 ## Signals that do not become a second leak
 
@@ -33,32 +33,30 @@ Industry lists name detect, respond, recover. They do not allow-list hosts. A lo
 | Recover | Keep deny; do not rotate a real cloud role as homework |
 | Leftover | DNS rebinding; customer-URL proxy |
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=egress_denied class=link_local request_id=req_65e
 ```
 
-Not: a full URL with a query token, a note body, a live-fetch transcript, or “the web filter caught it.”
+A full URL with a query token, a note body, a live-fetch transcript, or “the web filter caught it” in the sample is a second fetch dump.
 
-If your alert includes a full URL with a query token, you have opened a second leak in the paging channel (4.3).
+A query token in a pasted URL is a second copy of the 4.3 leak for whoever is on call.
 
-A green “HTTPS only” tile is not that pytest. Re-run `test_link_local_metadata_is_denied` after any importer change. Webhooks (7.3) are another path of the same deputy — inventory them before claiming recover.
+An “HTTPS only” toggle does not keep link-local URLs off the allow-list. A link-local URL still has to fail `test_link_local_metadata_is_denied`. Webhook delivery (7.3) is another deputy; name it before you fetch.
 
-Recovery is incomplete if the next worker still calls `requests.get` on the form URL. Grep importers the same day you keep the deny, and **do not fetch** the denied destination to confirm.
+Form-URL `requests.get` still has to be gone from importers. Grep importers the same day you keep the deny, and **do not fetch** the denied destination to confirm.
 
 ## What the framework does vs what you still have to check
 
-A cloud dashboard will show “instance metadata requires a token” and stay silent when the unfurl helper still allows any https host. Detection must observe **`allowed` false before any GET**, not a packet capture. If the alert includes a full URL with a query token, you have opened a 4.3 cell. **Do not fetch to confirm.**
+“Instance metadata requires a token” on a cloud tile does not constrain the unfurl helper to allowed hosts. Require **`allowed` false before any GET**, not a packet capture. A query-token URL on `egress_denied` reopens topic 4.3. **Do not fetch to confirm.**
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no URL). Tie it to `labs/6.5/6.5-lab`. Reject any line that includes a full URL with a query token, a note body, or a live-fetch transcript.
+Denied host: ids and a reason, never the URL. A full URL with a query token, a note body, or a live-fetch transcript still holds the fetch.
 
 ## Use it somewhere new
 
-Clinic: notice PDF fetches to hosts that are not on the allow-list; do not paste the URL into the ticket if it has a token. Do not fetch.
+Notice PDF fetches to hosts that are not on the allow-list; do not paste the URL into the ticket if it has a token. Do not fetch.
 
 ## What this page is not doing
 
-A log-product name is not the rule. A cloud web-filter name is not this check. Live metadata probes are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+A cloud web-filter name does not deny link-local metadata. Do not use live metadata probes. This site does not mark you as finished. Answer keys are not on this site.

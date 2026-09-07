@@ -11,9 +11,9 @@ Coverage is a check over tests. The row must name a test that **asserts isolatio
 
 > `covered("AUTHZ-1", [{"req": "AUTHZ-1", "asserts_isolation": False}])` must be false.
 
-What must not happen: **a status-only row counted as AUTHZ-1 coverage**. That is honesty of the proof you show before a release. If the checkbox is green while the isolation test is missing, company-B holes ship with a green sticker.
+AUTHZ-1 can be marked covered by a status-only row. That is honesty of the proof you show before a release. If the checkbox is green while the isolation test is missing, company-B holes ship with a green sticker.
 
-A pasted industry checklist is inventory. It is not a tailored matrix. The usual web/API checklist is a backbone you still have to map. An extra advanced row — for example “permission changes apply immediately, including serializers” — still needs a test if you raise it. A development-practice guide that says “test the running code against the requirements” is vocabulary, not a finished verification gate. A later draft of that guide stays a **draft**.
+A pasted industry checklist is inventory. It is not a tailored matrix. The usual web/API checklist is a backbone you still have to map. An extra advanced row — for example “permission changes apply immediately, including serializers” — still needs a test if you raise it. A development-practice guide that says “test the running code against the requirements” is vocabulary, not a finished check-in. A later draft of that guide stays a **draft**.
 
 ## Picture: coverage is a question about the test
 
@@ -29,18 +29,18 @@ flowchart TD
 ```mermaid
 flowchart LR
   Pdf[whole checklist PDF] --> Paste[every row marked done]
-  Threat["1.2 isolation"] --> Test[pytest isolation assert]
-  Paste --> False[false comfort]
+  Threat["1.2 isolation"] --> Test[isolation check]
+  Paste --> False[false assurance]
 ```
 
-**A tool, not the rule:** the PDF, a tracker “done” column, a pytest-cov percentage, or a practice-guide attestation.
+The PDF, a tracker “done” column, a pytest-cov percentage, and a practice-guide attestation do not put an isolation assert on AUTHZ-1.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | For this rule |
 |---|---|
 | Why it happens | Status without an isolation assert |
-| What has to be true first | `covered` is true when `asserts_isolation` is false |
+| What's already wrong | `covered` is true when `asserts_isolation` is false |
 | Trigger | Release gated on the spreadsheet |
 | What it costs | 1.2 holes ship with a green verification sticker |
 | How you stop it | Coverage requires the isolation assert |
@@ -51,7 +51,7 @@ flowchart LR
 
 A green CI job is not AUTHZ-1. Copied-wholesale checklists are inventory, not a tailored matrix. Exceptions need an expiry date (E6) or they are silent uncovered rows.
 
-The app’s promise this week is: **this** local check, a status-only row is not covered. The folder is `labs/9.1/9.1-lab`. Fake requirement ids only. No live checklist portals.
+A status-only row is not covered — files in `labs/9.1/9.1-lab`. Fake requirement ids only. No live checklist portals.
 
 ## What the tool cannot do
 
@@ -61,7 +61,7 @@ The app’s promise this week is: **this** local check, a status-only row is not
 
 ## Can people still use it
 
-A human exception path must say what is still uncovered and when the exception expires. Do not hide the gap behind “see PDF.” Do not encode “uncovered” as color only.
+A human exception path must say what is still uncovered and when the exception expires. Pointing at a PDF is not that sentence. Do not encode “uncovered” as color only.
 
 ## Practice
 
@@ -72,12 +72,10 @@ python3 -m pytest labs/9.1/9.1-lab/tests --impl vulnerable
 python3 -m pytest labs/9.1/9.1-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 The mobile storage row from 8.2. A clinic HIPAA “done” column.
 
 ## What this page is not doing
 
-Live checklist portals, claiming you finished the verification gate, or weaponized scans. Gates stay **not-attempted**. Answer keys are not on this site.
+Do not use live checklist portals. This page does not finish a check-in. Do not use weaponized scans. This page does not finish a check-in. Answer keys are not on this site.

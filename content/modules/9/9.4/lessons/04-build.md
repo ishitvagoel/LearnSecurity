@@ -5,11 +5,11 @@
 
 ## The rule
 
-A green dashboard is not the fix. Hiding a scanner warning is not the fix. “We turned on code scanning” is not the fix.
+A green dashboard does not map HIGH findings. Turning off the scanner does not write the map. Turning on code scanning is not enough.
 
-The structural change is: `ship_ok` **is false unless every HIGH `id` is a key in `mappings`**. Missing map is deny. Structural means that join — not “the dashboard is green,” not a vendor default setup, not a maturity score.
+Do this: `ship_ok` **is false unless every HIGH `id` is a key in `mappings`**. Missing map is deny. In short, that join — not “the dashboard is green,” not a vendor default setup, not a maturity score.
 
-The smallest restore for the notes app’s ship gate is: HIGH plus empty map → deny. LOW and INFO without a map may still ship in this lab — name that leftover. Do not fail open because the scanner job ran. Do not accept “dashboard is green” as a mapping.
+Restore the notes app’s ship check with this: HIGH plus empty map → deny. LOW and INFO without a map may still ship in this lab — name that leftover. A scanner job running does not map HIGH findings. A green dashboard does not count as a mapping.
 
 ## Picture: HIGH gate
 
@@ -22,27 +22,27 @@ flowchart TD
   Map -->|no| Deny[deny]
 ```
 
-The repaired files require every HIGH `id` in `mappings`. Production still needs the mapped requirement to be the *right* coverage-map cell — mapping F1 to a leftover inventory row is a lying map. Who-is-allowed logic is a scanner blind spot: you still need review and isolation tests. Dependency confusion is an advanced leftover: mapping “no finding” is not coverage. A mapped HIGH you accept still needs an exception with an expiry.
+Every HIGH `id` has to appear in `mappings`. Mapping F1 to a leftover inventory row is a lying map. Who-is-allowed logic is a scanner blind spot: you still need review and isolation tests. Dependency confusion is an advanced leftover: mapping “no finding” is not coverage. A mapped HIGH you accept still needs an exception with an expiry.
 
-A triage checklist wants findings owned. This pytest is that sentence for unmapped HIGH.
+A triage checklist wants findings owned — unmapped HIGH.
 
 ## What the repaired files must show
 
-Read `fixed/sast.py` against this checklist. Do not treat the snippet as a production scanner product.
+`fixed/sast.py` is the unmapped-HIGH join, not a scanner product.
 
 | After the fix | Must be true |
 |---|---|
 | HIGH + empty map | `ship_ok` false |
 | HIGH + `{F1: AUTHZ-1}` | `ship_ok` true |
 
-Fail closed: if you are unsure whether a HIGH is mapped, deny. Uncertainty is a **no** on “this may ship,” not a yes because Friday’s dashboard looked quiet.
+By default, if you are unsure whether a HIGH is mapped, deny. A quiet Friday dashboard does not mean it may ship.
 
 ## What this is not
 
 - A vendor default setup.
 - A maturity score.
 - Reachability without an owner.
-- The verification gate.
+- This check-in.
 - Dependabot as the map.
 - A severity downgrade with no evidence.
 
@@ -65,8 +65,6 @@ Name the leftover (unmapped LOW; who-is-allowed blind spots). Run:
 ```text
 python3 -m pytest labs/9.4/9.4-lab/tests --impl fixed
 ```
-
-It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
 ## Use it somewhere new
 

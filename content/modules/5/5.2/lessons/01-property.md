@@ -9,9 +9,9 @@ The notes app stores a stand-in for a note body. Secrecy against someone who can
 
 > `protect("secret")` must not round-trip as Base64 of the plaintext. `looks_encrypted` is a teaching flag, not AES-GCM. The lab prefix `aesgcm:` is a **stand-in**, not a cipher you should ship.
 
-What must not happen: **`protect()` reversible as Base64 to `secret`**. Anyone who can read the stored field gets the body. That is a secrecy failure of the stored note. Encoding is not confidentiality.
+`protect()` must not be **reversible as Base64 to `secret`**. Anyone who can read the stored field gets the body. That is a secrecy failure of the stored note. Encoding is not confidentiality.
 
-Industry lists want a real, reviewed encryption library, not encoding dressed up as encryption. They want authenticated encryption (AES-GCM class), not ECB and not Base64. Password stretching (Argon2) is for passwords, not note bodies. Unique nonces and a post-quantum plan are advanced work, not this week's check. Keys still wait for a later lesson.
+Use a real, reviewed encryption library, not encoding dressed up as encryption. Authenticated encryption (AES-GCM class), not ECB and not Base64. Password stretching (Argon2) is for passwords, not note bodies. Unique nonces and a post-quantum plan are advanced work, not this check. Keys still wait for a later lesson.
 
 ## Picture: encoding vs encryption
 
@@ -25,7 +25,7 @@ flowchart TD
 
 The person who can hurt you here is an operator who can read the column, or someone with a stolen disk of the lab dict. Trusting the column name `encrypted_body` is not what you trust.
 
-**The tool (not the rule):** Fernet, libsodium, or “we turned on disk encryption.”
+**Not the rule:** Fernet, libsodium, or “we turned on disk encryption.”
 
 ## Picture: pick the rule first
 
@@ -44,7 +44,7 @@ A stronger algorithm does not fix a missing key story (later) or nonce reuse (ad
 | Slice | For this rule |
 |---|---|
 | Why it happens | The name “encrypted” was stuck on encoding |
-| What has to be true first | `protect` returns Base64 of the plaintext |
+| What's already wrong | `protect` returns Base64 of the plaintext |
 | Trigger | Someone who can read storage reads the field |
 | What it costs | The stored secret is no longer secret |
 | How you stop it | Real authenticated encryption with a managed key; tests forbid Base64 identity |
@@ -53,7 +53,7 @@ A stronger algorithm does not fix a missing key story (later) or nonce reuse (ad
 
 ## What the framework does vs what you still have to check
 
-Password libraries are for passwords, not note bodies. Disk encryption is not app-level secrecy against a database admin. The app's promise: Base64 decode of `protect("secret")` is not `"secret"`. The local check is `labs/5.2/5.2-lab`. Fake data only. No live key service.
+Password libraries are for passwords, not note bodies. Disk encryption is not app-level secrecy against a database admin. Base64 decode of `protect("secret")` is not `"secret"` — files in `labs/5.2/5.2-lab`. Fake data only. No live key service.
 
 ## What the tool cannot do
 
@@ -70,12 +70,10 @@ python3 -m pytest labs/5.2/5.2-lab/tests --impl vulnerable
 python3 -m pytest labs/5.2/5.2-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
-Clinic: an SSN column labeled “encrypted” that is Base64.
+An SSN column labeled “encrypted” that is Base64.
 
 ## What this page is not doing
 
-Live ciphertext attacks, rolling your own cipher, real SSN values. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live ciphertext attacks, rolling your own cipher, real SSN values. This site does not mark you as finished. Answer keys are not on this site.

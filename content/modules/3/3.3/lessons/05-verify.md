@@ -1,15 +1,15 @@
-# Fail on the broken files, then pass on the repaired ones
+# The broken files must fail when company B reads company A
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-“We have row-level security in the backlog” is not evidence. “Private subnet” is a topology observation. The check is: `can_select("app", "tB", "tA") is False`. That observation must be **false** on the broken files (the helper returns true) and **true** on the repaired files.
+A backlog ticket for row-level security does not stop the select. A private subnet is topology. `can_select("app", "tB", "tA")` has to be False. Leftover: app on tB can still select tA. Repair returns false.
 
 ## Picture: broken must fail — tB reads tA
 
-A test that only counts passing cases can pass while tB still reads tA. This check asks whether a shared app role reading tA as tB still counts as a passing control. Broken must fail that question. Repaired must pass it — deny the other company, and still allow own-company read.
+tB can still read tA even when the suite is green. Repaired files still have to deny the other company and still allow own-company read.
 
 ```mermaid
 flowchart LR
@@ -24,14 +24,14 @@ flowchart LR
 | When things break | migrator cannot SELECT at runtime; connection is not `postgres` |
 | Not claimed | Production row-level security; replica fleet; SQL injection complete |
 
-Lab tests in `labs/3.3/3.3-lab/tests/test_property.py`. `test_app_role_cannot_read_other_tenant` is a **what-must-not-happen** test: a shared app role reading tA as tB is not allowed to count as a passing control.
+`labs/3.3/3.3-lab/tests/test_property.py` is the check file. Watch `test_app_role_cannot_read_other_tenant` go red when a shared app role reads tA as tB.
 
 ```text
 python3 -m pytest labs/3.3/3.3-lab/tests --impl vulnerable
 python3 -m pytest labs/3.3/3.3-lab/tests --impl fixed
 ```
 
-Map each test to a row you wrote on the compartments page. Do not paste keys. If the broken files do not fail the cross-company check, the lab is miswired — fix the wiring, not the check. An environment error is not security evidence.
+Map each test to a row you wrote on the compartments page. Do not paste keys. If the broken files do not fail the cross-company check, the lab is miswired — fix the wiring, not the check. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
@@ -41,15 +41,13 @@ Map each test to a row you wrote on the compartments page. Do not paste keys. If
 - Kubernetes network policy
 - That who-is-allowed handler checks are present (they remain required)
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
-Run both this session. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `GRANT` in a migration without calling `can_select`.
+Call `can_select`. A `GRANT` line in a migration is a role, not the select.
 
 ## Use it somewhere new
 
-A serverless admin string. A test that only asserts HTTP 200 is not architecture evidence. A test that connects to a live cloud database is out of scope.
+A serverless admin string. Asserting HTTP 200 is not architecture evidence. Do not run a test that connects to a live cloud database.
 
 ## What this page is not doing
 

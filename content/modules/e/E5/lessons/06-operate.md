@@ -1,11 +1,11 @@
-# body_tenant_mismatch without logging note bodies
+# Log the company mismatch, not the note
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A new GraphQL field can reintroduce the body company after the binding was “set once.” Pair notice and recover. Do not log note bodies. Do not paste the chart note into the ticket.
+A new GraphQL field can reintroduce the body company. Keep note bodies and the chart note out of the ticket.
 
 The JSON body is not the tenant. If body tenant overrides session, you still bind tenant from the session — and you count the disagreement.
 
@@ -25,32 +25,30 @@ flowchart TD
 | Recover | Audit B; take back the confused session |
 | Leftover | Copies; silent impersonation; GraphQL aliases |
 
-Industry lists name detect, respond, recover. They do not prove company isolation. A row-level vendor name is not the rule. Re-run `test_body_cannot_switch_tenant` after any query-layer change; a green “row-level rules on” tile is not that pytest. Search, cache, and lake copies are the same family — inventory them before you claim recover.
+A row-level vendor name does not prove company isolation. Body tenant B still has to fail `test_body_cannot_switch_tenant`. Turning row-level rules on does not stop a body switch. Search, cache, and lake copies still take company from the body; companies are not apart until those copies are named.
 
 ## What the framework does vs what you still have to check
 
-A relationship-graph dashboard will show tuple counts and stay silent when CI’s `tenant_for` prefers the body. Notice must observe **session A plus body B is A**, not “row-level rules are enabled.” If the alert includes a note body or a GraphQL document dump, you have opened a logging cell.
+Relationship-graph tuple counts stay green while CI’s `tenant_for` prefers the body. Win **session A plus body B is A**, not “row-level rules are enabled.” The metric is session A plus body B is A. A note body or a GraphQL document dump is the chart.
 
 ## Can people still use it
 
 If support impersonation exists, the UI must not look like the clinician’s own company. Say *acting as* in text a screen reader can speak. That is a later audited path, not a body field.
 
-Why it happens vs what it costs stays split here too: the **cause** is client-chosen company treated as binding; the **cost** is read or write into another company; **how you stop it** is session win; **how you notice** is `body_tenant_mismatch`; **how you recover** is audit-and-revoke. What the tool cannot do: this alert does not prove cache keys include company and does not make grant change immediate.
+The failed decision is client-chosen company treated as binding. The leftover harm is read or write into another company. The repair is session win. The signal is `body_tenant_mismatch`. Recover by audit-and-revoke. Logging does not prove cache keys include company and does not make grant change immediate.
 
 ## Practice
-
-Write one log line you would accept. Tie it to `labs/E5/e5-lab`.
 
 ```text
 log_denied reason=body_tenant_mismatch session=A body=B actor=alice
 ```
 
-Reject any line that includes a note body, a GraphQL document dump, or “course gate complete.”
+`body_tenant_mismatch` already names session and body. A note body, a GraphQL document dump, and “course gate complete” are extra copies of the chart.
 
 ## Use it somewhere new
 
-Clinic: deny the `org_id` switch; do not paste the chart note into the ticket. Do not probe a live company.
+Deny the `org_id` switch; do not paste the chart note into the ticket. Do not probe a live company.
 
 ## What this page is not doing
 
-A row-level vendor name is not the rule. This site does not mark you as finished. A famous-bugs list is not this alert. Answer keys are not on this site.
+A row-level product does not bind company from the session. This site does not mark you as finished. A famous-bugs list does not stop a body switch. Answer keys are not on this site.

@@ -5,9 +5,9 @@
 
 ## Could someone else name checks from your model?
 
-A page of STRIDE letters is not this page. A reviewable model names **assets**, **flows**, **trust boundaries**, **threat ids**, **owners**, and **what would prove each row wrong**.
+A page of STRIDE letters still leaves out **assets**, **flows**, **trust boundaries**, **threat ids**, **owners**, and **what would prove each row wrong**.
 
-This week’s freeze: note body and id, share grant, session cookie, a local `assemble_threat_model` practice. No real Threat Dragon cloud. No production ticket tracker.
+Note body and id, share grant, session cookie, a local `assemble_threat_model` practice. No real Threat Dragon cloud. No production ticket tracker.
 
 ## Picture: data flow with one hostile hop
 
@@ -33,7 +33,7 @@ flowchart TD
 
 `scanner_green` does not delete the always-name list. Scanner ids may append. A missing owner is how “accepted risk” becomes nobody’s job.
 
-## Step 1: freeze who, what, and time
+## Step 1: name who, what, and when
 
 | Piece | This system |
 |---|---|
@@ -64,7 +64,7 @@ Each always-name id (`cross-tenant-read`, `hostile-browser`, `stolen-worker`) ne
 
 ## Practice
 
-Draw this map so someone else could name pytest cases. Point at `labs/3.2/3.2-lab` file `model.py`.
+Mark `model.py` under `labs/3.2/3.2-lab`.
 
 ## Use it somewhere new
 
@@ -76,4 +76,4 @@ Unknown unknowns. Review triggers exist for that. Privacy-method stickers wait f
 
 ## What this page is not doing
 
-Treating a Top 10 as the definition of security. Answer keys are not on this site.
+A scanner-ranked list does not insert `cross-tenant-read`. Answer keys are not on this site.

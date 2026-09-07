@@ -5,9 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python model that gives legitimate fake users too much leftover permission. There is no HTTP server and no real account. The failure happens inside a small in-process model, so you can see cause and effect without turning the exercise into a target walkthrough.
-
-The rule under test:
+The practice is not a website you attack. It is a small local model that gives legitimate fake users too much leftover permission. There is no HTTP server and no real account. The failure happens inside a small in-process model, so you can see cause and effect without turning the exercise into a target walkthrough.
 
 > Every in-scope operation must obtain a current yes over person, object, action, company, and relevant permission state. Unknown cases deny.
 
@@ -85,7 +83,7 @@ For each failed check, complete this table.
 |---|---|
 | The rule | Which exact effect should not have happened? |
 | Why it happens | Which who-is-allowed relation was absent, leftover, overbroad, stale, or default-allow? |
-| What has to be true first | Which legitimate identity, object state, role, or approval already existed? |
+| What's already wrong | Which legitimate identity, object state, role, or approval already existed? |
 | Trigger | Which operation and input caused the effect? |
 | What it costs | Which secrecy, integrity, accountability, or company-isolation rule failed? |
 | How you stop it | Which positive current rule and stop would restore the row? |
@@ -145,4 +143,4 @@ Imagine the same decision is made once, placed in a queue, and used ten minutes 
 
 ## What this page is not doing
 
-Live targets. Ready-made attack recipes. Real people’s data. Do not “fix” the practice by deleting the check.
+Do not use live targets. Do not use ready-made attack recipes. Do not use real people’s data. Do not “fix” the practice by deleting the check.

@@ -5,13 +5,13 @@
 
 ## The rule
 
-The notes app may list an export folder. The **name is data**. The operating system must not read that name as a shell program. Module 5.5 already taught parameters versus SQL grammar. This week's check is the same shape at the process boundary.
+The notes app may list an export folder. The **name is data**. The operating system must not read that name as a shell program. Module 5.5 already taught parameters versus SQL grammar. The check is the same shape at the process boundary.
 
 > `argv_for_list` must not start a shell. Pass the name as a list of arguments. A denylist of punctuation is incomplete — encodings from 2.1 still beat string filters.
 
-What must not happen is **a user-chosen name run through a shell string**. That is an integrity failure at the OS interpreter: extra words in the name can become extra commands. This practice checks **argv shape only**. It does not run a live OS command.
+Do not run **a user-chosen name through a shell string**. That is an integrity failure at the OS interpreter: extra words in the name can become extra commands. This practice checks **argv shape only**. It does not run a live OS command.
 
-Industry lists want OS calls that pass arguments as parameters. Encoding the name for a shell is a leftover, not this week's pytest. Formula characters in a CSV file are **advanced** work and show up in the clinic transfer, not this practice. FastAPI has no opinion about argv.
+OS calls have to pass arguments as parameters. Encoding the name for a shell is a leftover, not this check. Formula characters in a CSV file are **advanced** work and show up in the clinic transfer, not this practice. FastAPI has no opinion about argv.
 
 ## Picture: data vs shell grammar
 
@@ -22,9 +22,9 @@ flowchart TD
   Mix -->|no| Argv["argv: ls -- name"]
 ```
 
-Who can act: a member who chooses a note or export name, or a stolen client. What you trust in this practice: the local `argv.py` helper. Do not probe other hosts.
+Picture a member who chooses a note or export name, or a stolen client. What you trust: the local `argv.py` helper. Do not probe other hosts.
 
-**The tool (not the rule):** a `shell=False` comment, a denylist of punctuation, or a scanner finding.
+**A product name is not the rule:** a `shell=False` comment, a denylist of punctuation, or a scanner finding.
 
 ## Picture: same shape across interpreters
 
@@ -43,7 +43,7 @@ SQL, shell, templates, and mail headers fail the same way: untrusted data become
 | Slice | For this rule |
 |---|---|
 | Why it happens | Concatenating untrusted data into a shell string |
-| What has to be true first | `argv_for_list` returns `['sh', '-c', 'ls ' + name]` |
+| What's already wrong | `argv_for_list` returns `['sh', '-c', 'ls ' + name]` |
 | Trigger | User-chosen name (this practice checks shape, not execution) |
 | What it costs | Integrity of the OS interpreter boundary |
 | How you stop it | argv list; no shell; `--` before the name |
@@ -54,7 +54,7 @@ SQL, shell, templates, and mail headers fail the same way: untrusted data become
 
 Python `subprocess` is easy to misuse (`shell=True`, or a string instead of a list). FastAPI does not mediate OS calls. Next.js `child_process.exec` is a shell.
 
-The app's promise: `argv_for_list` is a list whose program is not `sh`. The folder is `labs/6.1/6.1-lab`. Fake names only. No live OS command.
+`argv_for_list` is a list whose program is not `sh` — files in `labs/6.1/6.1-lab`. Fake names only. No live OS command.
 
 ## What the tool cannot do
 
@@ -71,12 +71,10 @@ python3 -m pytest labs/6.1/6.1-lab/tests --impl vulnerable
 python3 -m pytest labs/6.1/6.1-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
-Clinic export-to-CSV filename. Jinja, SQL, mail headers.
+An export-to-CSV filename is a second interpreter — the same shape as Jinja, SQL, and mail headers.
 
 ## What this page is not doing
 
-Live command execution, shell-punctuation cookbooks, dumping lab Python into notes. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live command execution or shell-punctuation cookbooks. This site does not mark you as finished. Answer keys are not on this site.

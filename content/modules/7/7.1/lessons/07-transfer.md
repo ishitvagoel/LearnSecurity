@@ -5,11 +5,11 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a clinic PATCH patient `{is_staff:true}`. Also name GraphQL mutation arguments and gRPC unknown fields.
+You get a clinic PATCH patient `{is_staff:true}`. Also name GraphQL mutation arguments and gRPC unknown fields.
 
-Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: after `apply(user, {"is_admin": true})`, `is_admin` must still be false. Rewrite it for a clinic without changing the fork.
+After `apply(user, {"is_admin": true})`, `is_admin` must still be false.
 
-**Product sketch:** an EHR-lite “Edit profile” form with no staff checkbox in the SPA, plus a generated OpenAPI file.
+An EHR-lite “Edit profile” form with no staff checkbox in the SPA, plus a generated OpenAPI file.
 
 ## Picture: missing checkbox is not the contract
 
@@ -19,27 +19,25 @@ flowchart LR
   Extra["JSON still has is_staff"] --> Reality[binder writes if ALLOWED is missing]
 ```
 
-Renaming `is_admin` to `is_staff` is not transfer. Person, object, path, and leftover change. If “Edit profile” omits the staff checkbox while the server `apply` copies every key, the cell is gone. FastAPI, a generated OpenAPI file, and GraphQL “typed schema” do not copy `ALLOWED`. GraphQL mutation arguments and protobuf field numbers not in the writable set are the same binder family — name them, do not run those systems here. Honest `display_name` XSS is a 6.2 leftover even when extras are dropped.
+`is_staff` is `is_admin` in the PATCH body. If “Edit profile” omits the staff checkbox while the server `apply` copies every key, the rule is gone. FastAPI, a generated OpenAPI file, and GraphQL “typed schema” do not copy `ALLOWED`. GraphQL mutation arguments and protobuf field numbers not in the writable set are the same binder family — name them, do not run those systems here. Honest `display_name` XSS is a 6.2 leftover even when extras are dropped.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Signed-in member sending extra JSON | Authenticated clinician session sending extra JSON — not a live clinic |
 | `apply(user, {"is_admin": true})` | Clinic PATCH `{is_staff:true}` |
 | Server `ALLOWED` is what you trust | Same; SPA omit-checkbox and OpenAPI are not |
 | GraphQL / gRPC leftover | Mutation arguments and unknown fields — name them, do not run them here |
 
-## Prompt — clinic PATCH is_staff
+## Write this for a clinic PATCH is_staff
 
-Rewrite the notes-app sentence for this product. Your answer must include:
-
-1. who can act (authenticated clinician session sending extra JSON — not a live clinic);
+1. who might try (authenticated clinician session sending extra JSON — not a live clinic);
 2. what you trust (server `ALLOWED` is what you trust; SPA omit-checkbox and OpenAPI are not);
 3. what must not happen (`is_staff` becomes true, not “HIPAA”);
-4. a check idea on **local** practice files only (no public API);
+4. `is_admin` cannot be patched — **local** practice files (no public API);
 5. leftover risk (GraphQL/gRPC binders, leftover `/v0`, unused methods later and advanced, 6.2 on honest names);
-6. the web accessibility baseline if a human deny path is in the claim (readable “field not writable,” not a silent 200 that dropped the name too).
+6. when a human deny path is in the claim (readable “field not writable,” not a silent 200 that dropped the name too).
 
-The clinic rewrite still has to keep the notes-app fork: `is_staff` false after extra-key PATCH, `display_name` may change. Documenting the PATCH in OpenAPI without an `is_staff` deny check leaves the binder open. The local pytest analogue is `test_is_admin_cannot_be_patched` — on the practice files, not a live EHR PATCH.
+`is_staff` still has to be false after an extra-key PATCH. `display_name` may still change. Documenting the PATCH in OpenAPI without an `is_staff` deny check leaves the binder open. The local check is `test_is_admin_cannot_be_patched` — on the practice files, not a live EHR PATCH.
 
 ## What is not good enough
 
@@ -53,8 +51,8 @@ The clinic rewrite still has to keep the notes-app fork: `is_staff` false after 
 
 ## Practice
 
-One page. No keys. `labs/7.1/7.1-lab` is the only running system you may break. Do not probe a public host.
+Drop `is_staff` from the patient PATCH. Keep the answer keys closed. `labs/7.1/7.1-lab` is the only running system you may break. Do not probe a public host.
 
 ## What this page is not doing
 
-Live-target API attacks. Real staff flags. Claiming Gate 7 from this page.
+Do not try live-target API attacks. Do not use real staff flags. This page does not finish a check-in.

@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-“Workers use a service account” is not evidence. “The queue is internal” is a tool observation. The check is: `exporter({"user_session": "alice", "service": None})` is `None` and `exporter({"service": "worker-sc"})` is `"worker-sc"`. The Alice-session observation must be **false** on the broken files (returns `"alice"`) and **true** on the repaired files. Do not attach to live brokers.
+A worker service-account name in YAML does not bind who the exporter is. An “internal” queue is a network hope. `exporter({"user_session": "alice", "service": None})` has to be `None`, and `exporter({"service": "worker-sc"})` has to be `"worker-sc"`. The leftover files: the Alice session still returns `"alice"`. Repair stops a user session from counting as the exporter. Do not attach to live brokers.
 
 ## Picture: leftover Alice must fail the check
 
-A test that only counts passing cases can pass while leftover Alice still becomes the worker. This check asks whether a leftover cookie that becomes the principal still counts as a passing control. Broken must fail that question. Repaired must pass it.
+Leftover Alice can still become the worker under a green suite.
 
 ```mermaid
 flowchart LR
@@ -17,9 +17,9 @@ flowchart LR
   X["repaired files --impl fixed"] --> P["Must pass: None"]
 ```
 
-If both pass, the test is not looking at leftover Alice. If both fail, the fix is not structural or the check is wrong.
+If the broken worker still passes, leftover Alice was never the principal you caught.
 
-## Four modes, even for one principal
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,43 +28,34 @@ If both pass, the test is not looking at leftover Alice. If both fail, the fix i
 | Mixed | alice + wrong service → `None` |
 | Not claimed | later originating-subject check (advanced); poison loops; live task library |
 
-The file is `labs/7.4/7.4-lab/tests/test_property.py`. The test `test_user_session_is_not_worker_identity` is a **what-must-not-happen** test: a leftover cookie that becomes the principal is not allowed to count as a passing control.
+A leftover cookie becoming the principal is the miss `test_user_session_is_not_worker_identity` names.
 
-A test that only asserts the job was enqueued is not this topic’s evidence. A test that only greps `worker-sc` in a YAML file without calling `exporter({"user_session": "alice", "service": None})` is not this topic’s evidence. This practice never opens a public broker.
+A `worker-sc` string in YAML is not `exporter({"user_session": "alice", "service": None})`. This practice never opens a public broker.
 
 ```text
 python3 -m pytest labs/7.4/7.4-lab/tests --impl vulnerable
 python3 -m pytest labs/7.4/7.4-lab/tests --impl fixed
 ```
 
-Honest `service=worker-sc` may pass on both implementations. That does not excuse the leftover-session deny test. If the broken files do not fail `test_user_session_is_not_worker_identity`, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
+A worker labeled `service=worker-sc` can still look fine. Deny a leftover user session. If the broken files do not fail `test_user_session_is_not_worker_identity`, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
-- After the worker is the worker, choosing notes from Alice’s grant (advanced, not this pytest)
+- After the worker is the worker, choosing notes from Alice’s grant (advanced, not this check)
 - Least-privilege database role in production (beyond the principal name) (3.3)
 - Retry after revoke (2.4 / 4.1)
 - Broker access lists (10.3)
 - That a production task library does not re-copy request context
 - A zero-trust paper as a product check
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
-Run both this session from the lab directory if needed:
-
-```text
-python3 -m pytest labs/7.4/7.4-lab/tests --impl vulnerable
-python3 -m pytest labs/7.4/7.4-lab/tests --impl fixed
-```
-
-Paste nothing from answer keys. Write fail/pass into your notes next to the matrix row. Reject a “test” that only greps `worker-sc` in a YAML file without calling `exporter({"user_session": "alice", "service": None})`.
+Call `exporter({"user_session": "alice", "service": None})`. A `worker-sc` string in YAML is the account name, not the bind.
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts the job was enqueued is not this check. A live broker attach is out of scope.
+An enqueued job is not who the exporter is. Do not attach to a live broker.
 
 ## What this page is not doing
 
-Do not add a live task-library trophy. Do not log session cookies. Answer keys are not on this site.
+A live task-library screenshot is not the Alice session denied. Do not log session cookies. Answer keys are not on this site.

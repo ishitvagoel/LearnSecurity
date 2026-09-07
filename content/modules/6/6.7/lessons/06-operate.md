@@ -3,15 +3,15 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-Even after `allow` was “fixed once,” a new export format can skip the counter. Running it for real is the rest of the loop: notice, contain, and recover.
+A new export format can skip the counter after `allow` caps at three. Page the fourth export, contain the extra CSV, and restore the quota.
 
-Do not log note bodies in the CSV path (3.1 / 5.1). Do not attach the CSV to the ticket.
+Skip note bodies and the extra CSV in the ticket.
 
 ## Picture: the fourth try is a signal
 
-A fourth export in the window is a notice-and-recover problem, not a licence to quote note bodies in the paging channel. Notice names the event. Recover keeps the deny and revokes a stolen session. Neither reprints the CSV.
+If a fourth export lands in the window, name the cap miss — not the note CSV. Then keep the deny and revoke a stolen session.
 
 ```mermaid
 flowchart TD
@@ -21,7 +21,7 @@ flowchart TD
   Cost --> Stop[Disable token if stolen session]
 ```
 
-Industry lists name detect, respond, recover. They do not count exports. A filter-product name is not the rule. Someone still has to own the budget.
+A rate-limit dashboard tile does not increment `quota_denied` on the fourth CSV.
 
 ## Signals that do not become a second leak
 
@@ -33,29 +33,27 @@ Industry lists name detect, respond, recover. They do not count exports. A filte
 | Recover | Revoke the session if it looks automated; owned burst exception if it is written down; re-run `test_fourth_export_is_denied` |
 | Leftover | New accounts; GraphQL aliases (7.1) |
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=quota_denied n=4 subject=user_67e request_id=req_67e
 ```
 
-Not: a note body, a CSV attachment, a real email, or a live load trace against a public host.
+A note body, a CSV attachment, a real email, or a live load trace against a public host in the export sample is a live-target record.
 
-If your alert includes note bodies from the CSV, you have opened a second leak in the paging channel.
+Note bodies from the CSV in the fourth-export ticket are extra copies of the export.
 
-A green “rate limit enabled” tile is not that pytest. Notification fan-out and extra formats are other paths of the same budget — inventory them before claiming recover. Re-run `test_fourth_export_is_denied` after any export-route change.
+Enabling a rate limit does not deny the fourth export. Notification fan-out and extra formats still need the fourth-export deny. The fourth call still has to fail `test_fourth_export_is_denied`.
 
 ## What the framework does vs what you still have to check
 
-An edge dashboard will show 429s on an IP and stay silent when `/export.csv` still has no per-person counter. Detection must observe **`allow(4)` false**, not HTTP status counts. If the alert includes note bodies from the CSV, you have opened a 3.1 / 5.1 cell.
+Edge 429s on an IP do not put a per-person counter on `/export.csv`. Gate on **`allow(4)` false**, not HTTP status counts. CSV note bodies on `quota_denied` reopen topics 3.1 and 5.1.
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, n, no body). Tie it to `labs/6.7/6.7-lab`. Reject any line that includes note bodies, a real email, or a live load trace against a public host.
+A deny line needs ids, a reason, and n — not the CSV body. Note bodies, a real email, or a live load trace against a public host would make the deny line a live-target record.
 
 ## Use it somewhere new
 
-Clinic: notice bulk-export over quota; do not attach the CSV to the ticket. Do not load-test a live clinic system.
+Notice bulk-export over quota; do not attach the CSV to the ticket. Do not load-test a live clinic system.
 
 ## Can people still use it
 
@@ -63,4 +61,4 @@ If a human sees a quota deny, announce “try tomorrow.” A spinner that retrie
 
 ## What this page is not doing
 
-A filter-product name is not the rule. Public load tests are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Do not follow public load tests. This site does not mark you as finished. Answer keys are not on this site.

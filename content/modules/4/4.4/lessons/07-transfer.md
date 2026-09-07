@@ -1,15 +1,15 @@
-# Same idea: appointment A is not chart B
+# Appointment A is not chart B
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic sketch** with appointments, charts, and a company per clinic. Your job is to rewrite the loop, not to name a famous-bugs code.
+You get a **clinic sketch** with appointments, charts, and a company per clinic.
 
-The notes-app sentence was: `can_read("bob", "n2")` is false. Rewrite it for a clinic without changing the fork: a grant is keyed by person, company, and **this** object.
+`can_read("bob", "n2")` is false. For a clinic, a grant is keyed by person, company, and **this** object.
 
-**Prompt:** Clinic: grant on appointment A ≠ chart B.
+Appointment A and chart B are two grant tables.
 
 ## Picture: two object classes, two grant tables
 
@@ -20,18 +20,16 @@ flowchart LR
   Lookup[can_read analogue] --> Chart
 ```
 
-If the appointment grant feeds `can_read(chart)`, the cell is gone. FastAPI `Depends(get_user)` and a “clinician” role string do not key chart B. Id length is obscurity, not a grant. A clinic admin costume that crosses companies is the eve×n1 sibling: deny even if the role string says admin.
+If the appointment grant feeds `can_read(chart)`, the rule is gone. FastAPI `Depends(get_user)` and a “clinician” role string do not key chart B. Id length is obscurity, not a grant. A clinic admin costume that crosses companies is the eve×n1 sibling: deny even if the role string says admin.
 
-The clinic rewrite still has to keep the notes-app fork: a grant on appointment A is not a grant on chart B, and a grant in clinic-acme is not a grant in clinic-globex. Copying the share table into a new resource while leaving `has_any_share` as the gate leaves the new table unused. That leftover permission is the same cause with new nouns. The local pytest analogue is `test_grant_on_n1_is_not_grant_on_n2` plus a cross-company deny — on a practice, not a live clinic system.
+A grant on appointment A is not a grant on chart B, and a grant in clinic-acme is not a grant in clinic-globex. Copying the share table into a new resource while leaving `has_any_share` as the gate leaves the new table unused. That leftover permission is the same cause with new nouns. The local check is `test_grant_on_n1_is_not_grant_on_n2` plus a cross-company deny — on a practice, not a live clinic system.
 
-## Prompt — clinic sketch
+## Write this for a clinic sketch
 
-Rewrite the notes-app sentence. Include:
-
-1. who can act (member with a real appointment grant who swaps chart id; clinic admin costume — **not** a live clinic system);
+1. who might try (member with a real appointment grant who swaps chart id; clinic admin costume — **not** a live clinic system);
 2. what you trust (which lookup is trusted; the scheduling UI is not);
-3. what must not happen (`can_read` true for chart B, not a legal label and not “IDOR”);
-4. a test idea on a **local** practice files only (appointment grant does not allow chart B);
+3. what must not happen (`can_read` true for chart B, not “IDOR”);
+4. appointment grant on n1 does not allow chart B — **local** practice files;
 5. leftover (search index, export, worker, title-vs-body later);
 6. whether a human-seen “access denied” path must be announced in text, not a silent blank page that pushes people to share passwords.
 
@@ -47,8 +45,8 @@ Rewrite the notes-app sentence. Include:
 
 ## Practice
 
-One page. No answer keys. `labs/4.4/4.4-lab` is the only running system you may break. Do not guess ids on a live clinic system.
+Key appointment A apart from chart B. Keep the answer keys closed. `labs/4.4/4.4-lab` is the only running system you may break. Do not guess ids on a live clinic system.
 
 ## What this page is not doing
 
-Live-target id swaps. Real charts. Claiming a course gate from this page.
+Do not try live-target id swaps. Do not use real charts. This page does not finish a check-in.

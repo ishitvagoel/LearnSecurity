@@ -5,21 +5,19 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `session_from_request`. Fake token `secret`. It does not open uvicorn, a CDN, or a browser history. You are here to see that the check treats a query-string session as a **failed rule**, not as a trophy dump of a log.
-
-The rule under test:
+The practice is not a website you attack. `session_from_request` uses fake token `secret`. It does not open uvicorn, a CDN, or a browser history. A query-string session is the break; you do not need a log dump.
 
 > `session_from_request({"access_token": "secret"}, {}, None)` must return `None`. A session must not start from a query-string token.
 
 ## Where you may practice
 
-Only `labs/4.3/4.3-lab` is in scope. Restore the broken and repaired folders when you are done. Fake token `secret` only.
+Stay inside `labs/4.3/4.3-lab`. Restore the broken and repaired folders when you are done. Fake token `secret` only.
 
 Do not harvest Referer from a live site, dump production access logs, or replay a real session cookie.
 
-What must not happen: a session started from a query-string token. `session_from_request({"access_token": "secret"}, {}, None)` returns `"secret"`.
+`session_from_request({"access_token": "secret"}, {}, None)` returning `"secret"` is a session minted from the query string.
 
-Who can act here: a **log operator**, a Referer collector, or someone with a shared screenshot who can read the URL. What you are supposed to trust: the parser ignores query tokens. FastAPI query binding, the Next.js address bar, and “we use JWTs” are not what you trust for this cell.
+A **log operator**, a Referer collector, or someone with a shared screenshot who can read the URL is enough. The parser ignores query tokens — not FastAPI query binding, the Next.js address bar, or “we use JWTs”.
 
 TLS encrypts the hop. It does not encrypt the access log.
 
@@ -32,21 +30,17 @@ flowchart TD
   Sess --> Log[Would appear in URL copies]
 ```
 
-The broken files show **cause** (token in a logged, shared channel), not a trophy dump of production logs. What has to be true first: `session_from_request` prefers `query.get("access_token")`. You do not need a live GET. You must not fetch a URL that contains a real token.
+The token sits in a logged, shared channel — not a dump of production logs. `session_from_request` prefers `query.get("access_token")`. You do not need a live GET. You must not fetch a URL that contains a real token.
 
-Industry checklists want secrets in the body or headers, not in the URL. HTTPS is a hop tool, not that sentence.
+Secrets belong in the body or headers, not in the URL. HTTPS is a hop, not `session_from_request` ignoring the query token.
 
-## What to look at — cause, not a trophy
+## What to look at: the cause, not a hunt
 
-Read `vulnerable/token.py`. It returns `query.get("access_token")` first. Checks:
+`vulnerable/token.py` returns `query.get("access_token")` first. Checks:
 
 - `test_query_string_token_is_rejected` — query-only yields `None`
 - `test_cookie_session_still_works` — `sc_session` still works on the repaired files
 - `test_authorization_header_still_works`
-
-You do not need a new token string. The failure of `test_query_string_token_is_rejected` *is* the evidence.
-
-Do not open the repaired files yet. Diagnose the cause first.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
@@ -54,7 +48,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 |---|---|
 | The rule | Query `access_token` does not mint a session |
 | Why it happens | Token placed in a logged, shared channel |
-| What has to be true first | `session_from_request` prefers query |
+| What's already wrong | `session_from_request` prefers query |
 | Trigger | `session_from_request({"access_token": "secret"}, {}, None)` |
 | What it costs | The session secret is no longer secret; then whoever holds the URL can act as that person |
 | How you stop it | Ignore query tokens; cookie or Authorization only |
@@ -64,7 +58,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-FastAPI will bind query params. Next.js router will put them in the address bar. TLS encrypts the hop, not the log. The app’s promise is: **this** practice, query-only → `None`.
+FastAPI will bind query params. Next.js router will put them in the address bar. TLS encrypts the hop, not the log. Query-only → `None`.
 
 ## Practice
 
@@ -72,11 +66,11 @@ FastAPI will bind query params. Next.js router will put them in the address bar.
 python3 -m pytest labs/4.3/4.3-lab/tests --impl vulnerable
 ```
 
-Record `test_query_string_token_is_rejected`. Do not weaken it to “we use HTTPS.” An environment error is not security evidence.
+“We use HTTPS” is not `session_from_request` ignoring the query token. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic deep link with `?token=`. Predict without leaving this directory. Do not click a live appointment SMS.
+A deep link with `?token=` still carries the secret in the URL. Predict without leaving this directory. Do not click a live appointment SMS.
 
 ## What this page is not doing
 

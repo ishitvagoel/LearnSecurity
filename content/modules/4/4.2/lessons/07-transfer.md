@@ -5,17 +5,15 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic staff SSO** portal. Optionally: a second ceremony before chart export. A password or OTP typed at a lookalike identity provider is still a shared secret. WebAuthn that ignores origin is still theater.
+You get a **clinic staff SSO** portal. Optionally: a second ceremony before chart export. A password or OTP typed at a lookalike identity provider is still a shared secret. WebAuthn that ignores origin is still theater.
 
-Do not answer with a famous-bugs list or a scanner as the definition of security.
-
-The notes-app sentence was: `phishing_resistant("password", evil, real)` is false. Rewrite it for the clinic portal without changing that fork.
+`phishing_resistant("password", evil, real)` is false. The same rule has to hold on the clinic portal.
 
 ## Picture: MFA to the wrong identity provider is still phishing
 
-Renaming `"password"` to `"otp"` is not transfer. Person, object, path, and leftover change. A lookalike identity provider is still the wrong origin. Who-is-allowed still runs after login.
+`"otp"` is still a shared secret, like `"password"`. A lookalike identity provider is still the wrong origin. Who-is-allowed still runs after login.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Browser user at the notes-app origin | Clinician at the staff SSO portal |
 | Password or OTP at `https://evil.example` | Password or OTP at a lookalike identity provider |
@@ -31,18 +29,14 @@ flowchart LR
 
 Step-up before export must bind origin too, or the second factor is theater. FastAPI, Next.js, and an SSO vendor dashboard do not compare RP ID. A mouse-only “approve” on the real origin still leaves the password leftover if the accessible path is broken. Authenticator guidance still calls OTP phishable even when the real identity provider later accepts it.
 
-## Prompt — clinic SSO and step-up export
+## Write this for a clinic SSO and step-up export
 
-Clinic staff SSO portal. Optionally: step-up for export — still origin-bound?
+Bind this to a staff SSO portal. If export needs step-up, is that still origin-bound?
 
-Product sketch: a small EHR login plus a second ceremony before chart export.
-
-Rewrite the notes-app sentence for this product. Your answer must include:
-
-1. who can act (lookalike identity provider; intercepted OTP; tired clinician — **not** a live clinic or public phishing page);
+1. who might try (lookalike identity provider; intercepted OTP; tired clinician — **not** a live clinic or public phishing page);
 2. what you trust (which origin check is trusted; “we use Okta” is not);
 3. what must not happen (`phishing_resistant("otp", evil, real)` is true, or a step-up password counted as resistant);
-4. a check idea on a **local** helper only (password / OTP / webauthn × origin matrix);
+4. password / OTP / webauthn × origin matrix — a **local** helper;
 5. leftover (password leftover; recovery SMS; WebAuthn does not decide who may read a chart);
 6. whether a human path must meet the web accessibility baseline (keyboard, labels, not color-only).
 
@@ -56,12 +50,12 @@ Rewrite the notes-app sentence for this product. Your answer must include:
 | HTTP 200 as authenticator evidence | Wrong observation |
 | Unlabeled later hardware bar as baseline | That bar is later |
 
-Naming Okta, “we use SSO,” or a step-up checkbox on the real portal is not the helper. The clinic rewrite still has to keep the notes-app fork: `phishing_resistant("otp", evil, real)` is false, and a password typed at the lookalike identity provider is still a shared secret. The local analogue is still `test_password_is_not_phishing_resistant` plus a wrong-origin WebAuthn deny — run against a helper, not a live clinic identity provider. Recovery SMS and a mouse-only ceremony remain leftovers; they do not make OTP phishing-resistant.
+Naming Okta, “we use SSO,” or a step-up checkbox on the real portal is not the helper. `phishing_resistant("otp", evil, real)` is false, and a password typed at the lookalike identity provider is still a shared secret. The local analogue is still `test_password_is_not_phishing_resistant` plus a wrong-origin WebAuthn deny — run against a helper, not a live clinic identity provider. Recovery SMS and a mouse-only ceremony remain leftovers; they do not make OTP phishing-resistant.
 
 ## Practice
 
-One page. No keys. `labs/4.2/4.2-lab` is the only running system you may break. Do not visit a lookalike identity provider or export from a live EHR.
+Make a password at a lookalike fail. Keep the answer keys closed. `labs/4.2/4.2-lab` is the only running system you may break. Do not visit a lookalike identity provider or export from a live EHR.
 
 ## What this page is not doing
 
-Live phishing campaigns. Real staff credentials. Claiming a mastery gate from this page.
+Do not use live phishing campaigns. Do not use real staff credentials. This page does not finish a mastery gate.

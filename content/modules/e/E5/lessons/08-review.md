@@ -1,40 +1,38 @@
-# Review body-chosen company like a pull request
+# Would you merge this body-chosen company?
 
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
-
 ## What you are reviewing
 
-A colleague ships notes-app company binding. Your job is not to count suspicious lines. Reconstruct whether `tenant_for({"tenant": "A"}, {"tenant": "B"})` still returns `"B"`, compare that with the module rule, and write changes a developer can verify.
+This is a company-binding review. Does `tenant_for({"tenant": "A"}, {"tenant": "B"})` still return `"B"`?
 
-The folder `labs/E5/e5-lab/vulnerable/` is the change. Review it as if it were the notes app’s note query. The check you already ran (`test_body_cannot_switch_tenant`) is the rule test. A comment “will bind later” is not. The JSON body is not the tenant. Body tenant overrides session is the smell. Bind tenant from the session is the structural change.
+Review it as if it were the notes app’s note query. Writing “will bind later” does not make `test_body_cannot_switch_tenant` pass. The JSON body is not the tenant. Body tenant overrides session is the smell. Bind tenant from the session is the restore.
 
 ## Picture: company taken from the body
 
-Start with this seeded smell: **company taken from the body**. Label it rule, tool, or false comfort before you accept the change.
+**company taken from the body**.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|body B becomes tenant| Property["Rule - good if tested"]
   Q -->|RLS is on| Mechanism[Tool - session variable]
-  Q -->|famous-bugs mapped| False[False comfort]
+  Q -->|famous-bugs mapped| False[False assurance]
 ```
 
-Review starts at the protected effect (session A plus body B is A). Everything that is not session binding at that call is a candidate body-wins path. A row-level screenshot without that pytest is the same smell, not a different finding class.
+Session A plus body B is still A. If the change never binds the session, that body-wins path is still open. A row-level screenshot does not replace that check.
 
-Cache keys without company are leftover. Silent impersonation is a later topic. Do not skip `test_body_cannot_switch_tenant`. Do not claim a course gate. Do not probe a live company to prove the finding.
+Cache keys without company are leftover. Silent impersonation is a later topic. This page does not finish a check-in. Do not probe a live company to prove the finding.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - Company taken from the body
 - Row-level session variable set from JSON
 - Cache key without company
 - Support impersonation silent
 
-Also reject: live product probes; shipping without re-running `test_body_cannot_switch_tenant`; keys in lessons; claiming a course gate; treating a famous-bugs list as the syllabus.
+Also reject: live product probes; shipping without re-running `test_body_cannot_switch_tenant`; keys in lessons; treating this tenant-switch lesson as a check-in; treating a famous-bugs list as the syllabus.
 
 ## Common mix-ups
 
@@ -42,16 +40,12 @@ Also reject: live product probes; shipping without re-running `test_body_cannot_
 - Subdomain is an unforgeable company
 - Scale means identity products instead of who-is-allowed
 - A relationship-graph product is `tenant_for`
-- GraphQL `org_id` is a different cell
-
-## Practice
-
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one to `test_body_cannot_switch_tenant`. Do not open the keys file.
+- GraphQL `org_id` is a different rule
 
 ## Use it somewhere new
 
-Clinic change that “enabled row-level rules and mapped a famous-bugs list” without session binding is an incomplete review of a body-chosen company. Name the independent falsehood that would still keep body B from becoming the company.
+Row-level rules and a famous-bugs map, without session binding, still let the body choose the company. Row-level rules are not session binding — write the body-B deny.
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will bind later.” That comment is leftover without an owner. Do not send `org_id` to a public product to prove the finding.
+Do not ship a TODO that says you will bind later. Name who owns the bind. Do not send `org_id` to a public product to prove the finding.

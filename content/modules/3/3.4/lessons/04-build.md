@@ -5,9 +5,9 @@
 
 ## The rule
 
-`add_share` must not increment when `_n >= 5`. Structural means the **server write path** compares count to cap — not HTML `max`, not a filter, not “the owner will stop,” not a rate limit.
+`add_share` must not increment when `_n >= 5`. Namely the **server write path** compares count to cap — not HTML `max`, not a filter, not “the owner will stop,” not a rate limit.
 
-The smallest restore for notes-app share is: if count is already 5, return 5 and do not insert. Fail closed: if the count store is uncertain, **deny** the 6th. Five honest shares still succeed.
+Restore share with this: if count is already 5, return 5 and do not insert. If the count store is uncertain, **deny** the 6th. Five honest shares still succeed.
 
 ## Picture: deny at five, keep the count
 
@@ -23,7 +23,7 @@ flowchart TD
 
 The lab’s repaired files use `MAX = 5` and return `_n` when the ceiling is hit. Production should check count in the **same transaction** as insert so two parallel sixths cannot both land. This lab’s check is sequential count under a loop, not a true race.
 
-Industry checklists want enforcement at a trusted service layer. The Next.js client may help usability; it must not be the control.
+Enforcement belongs at a trusted service layer. The Next.js client may help usability; it must not be the control.
 
 ## What the repaired files must show
 
@@ -52,11 +52,9 @@ Name who (scripted client), what (share grants on one note), the check (count �
 python3 -m pytest labs/3.4/3.4-lab/tests --impl fixed
 ```
 
-It must pass.
-
 ## Use it somewhere new
 
-Clinic: `add_guardian` stops at 3. Invite redemption stops at one use. Export quotas cap bytes or rows — same shape, different cell.
+`add_guardian` stops at 3. Invite redemption stops at one use. Export quotas cap bytes or rows — same shape, different cell.
 
 ## Can people still use it
 

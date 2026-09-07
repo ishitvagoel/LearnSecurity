@@ -5,9 +5,9 @@
 
 ## Could someone else name the checks?
 
-“I approved the screenshot” is not this lesson. A map someone else can test names **data flow**, **who is allowed**, **the interpreter**, **state**, and **configuration**.
+“I approved the screenshot” still leaves out **data flow**, **who is allowed**, **the interpreter**, **state**, and **configuration**.
 
-The notes app this week: local `review_ok(diff)`. No live GitHub.
+`review_ok(diff)` — no live GitHub.
 
 > `eval` on a user string must not be approved. An honest helper that uses `int(user)` may pass.
 
@@ -26,9 +26,9 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-  Human[human diff] --> Review["this week's review"]
+  Human[human diff] --> Review["this review"]
   Gen[generated helper] --> Review
-  Bot["later review bot"] --> Aid[help, not an oracle]
+  Bot["later review bot"] --> Aid[help, not a check]
 ```
 
 A bot that later greps the tree (9.4) is a help. It does not replace the five questions.
@@ -53,13 +53,13 @@ A bot that later greps the tree (9.4) is a help. It does not replace the five qu
 | eval(user) | merge | approve | deny |
 | int(user) helper | merge | approve | may allow |
 | README only | merge | treat as reviewed | deny |
-| later bot “looks good” | merge | treat as oracle | deny |
+| later bot “looks good” | merge | treat as the whole check | deny |
 
 A missing “eval(user) × merge × deny” row is how “the screen still looks fine” becomes a yes. Write the hole.
 
 ## Practice
 
-Draw the five questions. Point at `labs/9.2/9.2-lab` file `review.py`. Fake diffs only.
+Read `review.py` under `labs/9.2/9.2-lab`. Fake diffs only.
 
 ## Use it somewhere new
 
@@ -71,4 +71,4 @@ Substring stand-in; `exec(`; other expression languages; generated code after re
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Do not run this map against a live GitHub org. Answer keys are not on this site.
+Do not run this map against a live GitHub org. Answer keys are not on this site.

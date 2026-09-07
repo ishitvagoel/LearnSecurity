@@ -5,9 +5,9 @@
 
 ## Could someone else name the checks?
 
-“Jobs run internally” is not this lesson. A map someone else can test names **who authenticates the worker** and **what the job is allowed to carry**.
+Until you have **who authenticates the worker** and **what the job is allowed to carry**, “Jobs run internally” is still a slogan.
 
-This week’s freeze: local `exporter(job)` with principal `worker-sc`. No live brokers.
+`exporter(job)` with principal `worker-sc` — no live brokers.
 
 > The person who clicked Export is a *parameter* (which export). It is not the worker’s login. Leftover Alice with no service is denied. The named worker may run.
 
@@ -59,7 +59,7 @@ A missing “Alice session × deny” row is how a leftover login becomes the wo
 
 ## Practice
 
-Draw the trace so someone else could name the pytest cases. Point at `labs/7.4/7.4-lab` file `worker.py`. Fake job dicts only.
+Mark `worker.py` under `labs/7.4/7.4-lab`. Fake job dicts only.
 
 ## Use it somewhere new
 
@@ -67,8 +67,8 @@ Outbox pattern. Event schemas that still carry `user_id` as data, not as login.
 
 ## What can still go wrong
 
-After the worker is the worker, choosing notes from Alice’s grant is advanced work, not this pytest. Poison loops. Field dumps from the worker (7.2). Hardcoded worker defaults (5.3).
+After the worker is the worker, choosing notes from Alice’s grant is advanced work, not this check. Poison loops. Field dumps from the worker (7.2). Hardcoded worker defaults (5.3).
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Do not run this map against a live clinic or a public broker. Answer keys are not on this site.
+Do not run this map against a live clinic or a public broker. Answer keys are not on this site.

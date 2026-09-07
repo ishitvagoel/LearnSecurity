@@ -3,15 +3,15 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-Even after `log_event` was fixed once, a new handler, an exception printer, or an APM agent can put the body back. Running it for real is the rest of the loop: notice, contain, purge, and refuse to “help” by logging the body again.
+A new handler, exception printer, or APM agent can put the body back after `log_event` redacts. Notice that line, contain the drain, purge it, and do not log the body again.
 
 Do not paste the matching line into Slack, a ticket, or a lesson note.
 
 ## Picture: alert on the substring, then purge
 
-A redaction miss is a notice-and-recover problem, not a licence to quote the secret in the paging channel. Notice names the event. Recover purges the line. Neither reprints the body.
+If redaction misses, page the omit — never the secret. Then purge the line.
 
 ```mermaid
 flowchart TD
@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Purge[Purge matching lines]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a log product. They do not prove this line is clean. Someone still has to own the leftover.
+Shipping a log pipeline does not redact the body.
 
 ## Signals that do not become a second leak
 
@@ -33,19 +33,17 @@ Industry lists name detect, respond, recover. They do not pick a log product. Th
 | Recover | Purge matching lines; rotate if tokens were present; re-run `test_note_body_is_not_logged` |
 | Leftover | Operators still see ids; write that row down; APM and access logs remain other places |
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=confidential_field event=note_read request_id=req_81aa
 ```
 
-Not: `tenant-A-secret-body`, a note body, a patient chart, or a card number.
+Skip `tenant-A-secret-body`, a note body, a patient chart, and a card number on the sample; they reprint the secret.
 
-If your alert includes the matching line, you have copied the leak into the paging channel.
+A redaction-miss line in the ticket is another copy of the secret for whoever is on call.
 
 ## What the framework does vs what you still have to check
 
-The same access logs, exception dumps, and APM drains that bypass the logger will also bypass a “scan our app logs” detector. Name those places before you claim recover. A log-product name is not the rule.
+The same access logs, exception dumps, and APM drains that bypass the logger will also bypass a “scan our app logs” detector.
 
 ## Can people still use it
 
@@ -53,12 +51,12 @@ If operators see a redaction-miss badge, do not encode it as color only. Give it
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body). Tie it to `labs/3.1/3.1-lab`. Reject any line that includes `tenant-A-secret-body`, a note body, a patient chart, or a card number.
+A usable deny line has ids and a reason, not the blob. `tenant-A-secret-body`, a note body, a patient chart, or a card number still holds the secret.
 
 ## Use it somewhere new
 
-Clinic: notice chart text in appointment logs; purge without pasting the chart into the ticket. Support tools: notice a paste of the body into a ticket the same way.
+Notice chart text in appointment logs; purge without pasting the chart into the ticket. Support tools: notice a paste of the body into a ticket the same way.
 
 ## What this page is not doing
 
-A log-product name is not the rule. Do not run live queries against production logs. Answer keys are not on this site.
+Do not run live queries against production logs. Answer keys are not on this site.

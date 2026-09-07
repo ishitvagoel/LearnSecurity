@@ -1,11 +1,11 @@
-# csp_report_only_not_enforced without logging HTML
+# Log that Report-Only is not enforcement, not the HTML
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A CDN can strip the enforcing header after deploy. Pair notice and recover. Do not log full HTML or note bodies (3.1). Do not paste the page source into the ticket.
+A CDN can strip the enforcing header after deploy. Keep full HTML, note bodies, and the page source out of the ticket.
 
 ## Picture: Report-Only-only is a signal
 
@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Flip[add enforcing header]
 ```
 
-Industry lists name detect, respond, recover. They do not prove the enforcing header is present. Someone still has to own the leftover.
+A green CSP tile is not an enforcing header.
 
 ## Signals that do not become a second leak
 
@@ -27,34 +27,32 @@ Industry lists name detect, respond, recover. They do not prove the enforcing he
 | Recover | Flip to enforcing after encoding (6.2) |
 | Leftover | XS-Leaks; cache strip; Trusted Types draft |
 
-A Helmet-product name is not the rule. Re-run `test_report_only_is_not_enforcement` after any header-middleware change; a green reporting dashboard is not that pytest. Encoding (6.2) still has to exist before you claim Recover — a content-security policy is a layer.
+While the header is Report-Only, `test_report_only_is_not_enforcement` is the check. A green reporting dashboard does not turn Report-Only into enforcement. Encoding (6.2) still has to exist first — a content-security policy is a layer.
 
 ## What the framework does vs what you still have to check
 
-A content-security reporting dashboard will show violation counts and stay silent when CI’s `isolation_enforced` treats Report-Only as on. Notice must observe **Report-Only is not enforcement**, not report volume. If the alert includes HTML, you have opened a logging leak (3.1). Reporting from a content-security policy is extra, later, and advanced — reports are not close.
+CSP violation counts do not mean CI’s `isolation_enforced` requires the enforcing header. Flip **Report-Only is not enforcement** to the enforcing name, not report volume. HTML next to a Report-Only-as-enforcement reading is a logging leak (3.1). Reporting from a content-security policy is extra, later, and advanced — reports are not close.
 
-The app’s promise is: **this** practice, `csp_report_only_not_enforced` fires without HTML, and a reporting dashboard is extra, not this week’s enforcement.
+`csp_report_only_not_enforced` fires without HTML, and a reporting dashboard is extra, not this enforcement.
 
 ## Practice
-
-Write one log line you would accept in review. Tie it to `labs/E2/e2-lab`. Example shape (fake routes only):
 
 ```text
 log_denied reason=csp_report_only_not_enforced route=/app
 ```
 
-Reject any line that includes HTML, a note body, or “check-in 7 complete.”
+`csp_report_only_not_enforced` already names the route. HTML, a note body, and “check-in 7 complete” are extra copies of the page.
 
 ## Use it somewhere new
 
-Clinic: deny the HIPAA-header claim; do not paste the page source into the ticket. Do not load a live page.
+Deny the HIPAA-header claim; do not paste the page source into the ticket. Do not load a live page.
 
 ## Can people still use it
 
 A blocked-script message (once enforcing) must be readable without color-only meaning (the web accessibility baseline).
 
-Cause vs cost stays split here too: the **cause** is Report-Only mistaken for on; the **cost** is a script that still runs; **how you stop it** is the enforcing name; **how you notice** is `csp_report_only_not_enforced`; **how you recover** is flip-after-encoding (6.2). What the tool cannot do: this alert does not prove encoding exists and does not survive a CDN strip.
+Report-Only mistaken for on opened the hole. A script that still runs is who gets hurt. Close it with the enforcing name. `csp_report_only_not_enforced` is the alert. Recover by flip-after-encoding (6.2). A green dashboard does not prove encoding exists and does not survive a CDN strip.
 
 ## What this page is not doing
 
-A Helmet-vendor name is not the rule. Milestone M2 stays not finished. The current content-security spec stays draft.
+A Helmet header does not turn Report-Only into enforcement. This page does not finish a check-in. The current content-security spec stays draft.

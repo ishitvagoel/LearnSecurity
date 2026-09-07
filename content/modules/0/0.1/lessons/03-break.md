@@ -8,9 +8,9 @@
 
 `labs/0.1/0.1-orientation` only. The practice files check a function called `target_is_authorized`. They do not open a network connection. The string `https://example.com/` is a **test literal**. Do **not** send HTTP to example.com, a customer site, a classmate preview, a recruiter staging URL, or a cloud Juice Shop you do not own.
 
-What must not happen: treating a host that is not on the list as allowed. `target_is_authorized("https://example.com/")` returns true.
+`target_is_authorized("https://example.com/")` returning true is the off-list host counted as allowed.
 
-Who you are standing in for: a tired learner with a proxy who can paste any URL. That stands in for “it has a login page,” “robots.txt allowed it,” or “the guide has a chapter on authorization.” What you are supposed to trust: the helper compares the hostname to a written list. A proxy, a scanner, a job title, and “it connected” are not that list.
+Picture a tired learner with a proxy who can paste any URL — “it has a login page,” “robots.txt allowed it,” or “the guide has a chapter on authorization.” The helper compares the hostname to a written list. A proxy, a scanner, a job title, and “it connected” are not that list.
 
 ## Picture: every URL is in
 
@@ -19,7 +19,7 @@ flowchart TD
   Any[any URL] --> True[authorized]
 ```
 
-`--impl vulnerable` returns true for every URL. The broken files show **why** (permission got mixed up with “the computer answered”), not a trophy scan of a public host. You do not need to fetch the host. You must not fetch the host.
+`--impl vulnerable` returns true for every URL. Permission got mixed up with “the computer answered” — not a scan of a public host. You do not need to fetch the host. You must not fetch the host.
 
 A testing guide names *how* to test an **in-scope** app. It does not put `example.com` on the list.
 
@@ -30,9 +30,7 @@ A testing guide names *how* to test an **in-scope** app. It does not put `exampl
 - `test_localhost_lab_is_in_scope` — `http://127.0.0.1:8000/notes` may be true (honest local practice)
 - `test_public_host_is_out_of_scope` — `https://example.com/` must be false
 
-You do not need a new URL. The failure of `test_public_host_is_out_of_scope` *is* the evidence.
-
-Do not open the repaired files yet. Diagnose the cause first. Do not paste the public host into a browser or proxy.
+Do not paste the public host into a browser or proxy.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
@@ -40,7 +38,7 @@ Do not open the repaired files yet. Diagnose the cause first. Do not paste the p
 |---|---|
 | The rule | Hosts not on the list are not allowed |
 | Why it happens | Permission collapsed into “the computer answered” (or into “any string is in”) |
-| What has to be true first | A proxy in hand; a public URL one paste away |
+| What's already wrong | A proxy in hand; a public URL one paste away |
 | Trigger | `target_is_authorized("https://example.com/")` |
 | What it costs | Unauthorized testing — legal trouble, expulsion, harm to uninvolved operators |
 | How you stop it | Parse the hostname; allow-list local names; if you are unsure, say no |
@@ -58,7 +56,7 @@ A proxy will open whatever you type. That is the bug class, not the rule. robots
 python3 -m pytest labs/0.1/0.1-orientation/tests --impl vulnerable
 ```
 
-Write down the failing check `test_public_host_is_out_of_scope`. Do not weaken the assertion. Do not probe public hosts. An environment error is not evidence.
+Write down the failing check `test_public_host_is_out_of_scope`. Do not weaken the assertion. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

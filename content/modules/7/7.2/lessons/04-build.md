@@ -5,11 +5,11 @@
 
 ## The rule
 
-Hiding the column in the SPA is not the fix. GraphQL `@hide` the client can skip is not the fix. A REST field name that starts with `_` is not the fix. “We already passed object GET tests” is not the fix.
+Hiding the column in the SPA does not hide `secret_internal` on the resolver. GraphQL `@hide` the client can skip still returns the field. A REST name that starts with `_` is a naming hope. Passing object GET tests is a different check.
 
-The structural change is: the trusted layer **checks role × field**. `resolve` must deny `secret_internal` unless `role == "service"`. Structural means that predicate — not a hidden SPA column.
+What has to change: the trusted layer **checks role × field**. `resolve` must deny `secret_internal` unless `role == "service"`. In plain words, that predicate — not a hidden SPA column.
 
-The smallest restore for the notes app’s note JSON is: deny member × `secret_internal`. Fail closed: unknown roles deny the internal field. Do not fail open because the serializer cache still holds yesterday’s dump.
+Repair the notes app’s note JSON: deny member × `secret_internal`. Unknown roles deny the internal field. Yesterday’s dump in the serializer cache does not copy the field.
 
 ## Picture: field deny unless listed
 
@@ -22,9 +22,9 @@ flowchart TD
   Secret -->|no| Public[allow display_name]
 ```
 
-The repaired files check `role == "service"` only for `secret_internal`. Production still needs the table restated for CSV, search snippets, debug toolbar, and later workers (7.4). Object GET success (4.4) is a coarser grain — identifiers find a row; they do not authorize fields. Extra-key *writes* remain 7.1.
+`resolve` allows `secret_internal` only when `role == "service"`. Restate that table for CSV, search snippets, debug toolbar, and later workers (7.4). Object GET success (4.4) is a coarser grain — identifiers find a row; they do not authorize fields. Extra-key *writes* remain 7.1.
 
-Industry checklists want that explicit permission implemented. This pytest is that sentence for member × `secret_internal`. Applying a role change through every serializer right away is **advanced**, not this week’s pytest.
+That explicit permission has to be implemented — member × `secret_internal`. Applying a role change through every serializer right away is **advanced**, not this check.
 
 ## What the repaired files must show
 
@@ -34,7 +34,7 @@ Industry checklists want that explicit permission implemented. This pytest is th
 | member × `display_name` | true |
 | service × `secret_internal` | true |
 
-Fail closed: unknown roles deny the internal field. Do not keep the dump because “the UI hides it.”
+Hiding the field in the UI does not copy it. The UI hiding it does not keep the dump.
 
 ## What this is not
 
@@ -45,7 +45,7 @@ Object GET tests only (4.4). Extra-key write tests only (7.1). UI omit. UUID as 
 - UI hide, GraphQL `__typename` tricks, and “private” naming are not mediation.
 - CSV export, search snippets, debug toolbar, and later workers (7.4) are additional serializers.
 - After a role change, a cached dump can still leak (advanced leftover).
-- Honest `display_name` XSS remains 6.2.
+- Encoding a display name is still 6.2, even after SSN is omitted.
 
 ## Practice
 
@@ -55,11 +55,9 @@ Name the predicate (`secret_internal` only if `role == "service"`). Run `--impl 
 python3 -m pytest labs/7.2/7.2-lab/tests --impl fixed
 ```
 
-Run from the lab directory if collection at repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
-Clinic: stop treating “SSN not in the member table UI” as field authorization.
+Stop treating “SSN not in the member table UI” as field authorization.
 
 ## What can still go wrong
 
@@ -67,4 +65,4 @@ CSV / search / later-worker serializers; stale cache after a role change (advanc
 
 ## What this page is not doing
 
-Do not query a public GraphQL host. Do not claim a course gate from a hidden-column screenshot.
+Do not query a public GraphQL host. A hidden-column screenshot does not mark you finished.

@@ -1,15 +1,15 @@
-# cluster_admin_denied without logging kubeconfig
+# Log the cluster-admin deny, not the kubeconfig
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A chart can still add a ClusterRoleBinding after admission was "set once." Pair notice and recover. Do not log kubeconfig, cloud tokens, or node credentials. Do not paste `~/.kube/config` into the ticket.
+A chart can still add a ClusterRoleBinding. Keep kubeconfig, cloud tokens, node credentials, and `~/.kube/config` out of the ticket.
 
 ## Picture: god-mode binding is a signal
 
-A god-mode binding is a notice-and-recover problem, not a licence to quote kubeconfig in the paging channel. Notice names the ServiceAccount. Recover deletes the binding and rotates cluster credentials. Neither reprints kubeconfig.
+If a binding is cluster-admin, page the ServiceAccount — not the kubeconfig. Then delete the binding and rotate cluster credentials.
 
 ```mermaid
 flowchart TD
@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Rotate[rotate cluster creds]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a CIS product. They do not prove this ServiceAccount was least-privileged. Someone still has to own the leftover.
+A CIS dashboard does not delete cluster-admin.
 
-Re-run `test_cluster_admin_pod_is_denied` after any Helm change. A green "namespace private" tile is not that pytest. Break-glass ClusterRoles are a later elective — inventory them before you claim recover.
+A cluster-admin Role still has to be denied in `test_cluster_admin_pod_is_denied`. A “private” namespace does not delete cluster-admin. Break-glass ClusterRoles can still admit cluster-admin; the binding is not gone until those roles are named.
 
 ## Signals that do not become a second leak
 
@@ -32,23 +32,21 @@ Re-run `test_cluster_admin_pod_is_denied` after any Helm change. A green "namesp
 | Recover | Delete the binding; rotate cluster credentials |
 | Leftover | Break-glass with a later elective; the metadata hop; Helm supply chain |
 
-A CIS dashboard will show benchmark scores and stay silent when CI's `pod_ok` is always true. Detection must observe **cluster-admin is deny**, not "we use Kubernetes." If the alert includes a kubeconfig or a cloud token, you have opened a leftover-secret leak.
-
-A log line a reviewer can accept looks like:
+CIS benchmark scores do not name CI's `pod_ok` staying always true. Page on **cluster-admin is deny**, not "we use Kubernetes." A kubeconfig or a cloud token next to that cluster-admin deny is leftover cluster credentials.
 
 ```text
 log_denied reason=cluster_admin_denied sa=app ns=sc-prod requested=cluster-admin
 ```
 
-Not: a kubeconfig, a cloud token, or "assurance gate complete."
+A kubeconfig, a cloud token, or "check-in complete" in the god-mode sample is cluster credentials twice.
 
-If your alert includes the matching kubeconfig, you have copied the leak into the paging channel.
+Attach a kubeconfig to the god-mode ticket and whoever is on call now has cluster credentials.
 
 ## What the framework does vs what you still have to check
 
-The same lying `"app"` Role, metadata hop, and Helm convenience ClusterRoles that bypass this practice will also bypass a "scan our CIS dashboard" detector. Name those places before you claim recover. A CIS-product name is not the rule.
+A lying `"app"` Role, metadata hop, and Helm convenience ClusterRoles still admit cluster-admin even if the CIS dashboard is green.
 
-Cause vs cost stays split here too: the **cause** is always-true admission (or a chart that adds ClusterRoleBinding); the **cost** is control-plane takeover from one app bug; **how you stop it** is the allow-list; **how you notice** is `cluster_admin_denied`; **how you recover** is delete-and-rotate. What the tool cannot do: this alert does not prove `"app"` is least privilege, and it does not block the metadata hop.
+Start from always-true admission (or a chart that adds ClusterRoleBinding). Control-plane takeover from one app bug is what follows. The allow-list is the repair. Page on `cluster_admin_denied`. Recover by delete-and-rotate. The page does not prove `"app"` is least privilege, and it does not block the metadata hop.
 
 ## Can people still use it
 
@@ -56,18 +54,16 @@ A denied admission must say *cluster-admin refused*, not only "assert False." Do
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/10.3/10.3-lab`.
-
 ```text
 log_denied reason=cluster_admin_denied sa=app ns=sc-prod requested=cluster-admin
 ```
 
-Reject any line that includes a kubeconfig, a cloud token, or "assurance gate complete."
+A kubeconfig, a cloud token, or "check-in complete" in the log is cluster credentials twice.
 
 ## Use it somewhere new
 
-Clinic: deny the ClusterRoleBinding; do not paste `~/.kube/config` into the ticket. Do not apply manifests to a live cluster.
+Deny the ClusterRoleBinding; do not paste `~/.kube/config` into the ticket. Do not apply manifests to a live cluster.
 
 ## What this page is not doing
 
-A CIS-benchmark product name is not the rule. Do not claim you finished an assurance gate. A restricted pod profile is not this alert. Answer keys are not on this site.
+A CIS-benchmark sticker does not deny cluster-admin. This page does not mark you as finished. A restricted pod profile does not delete the ClusterRoleBinding. Answer keys are not on this site.

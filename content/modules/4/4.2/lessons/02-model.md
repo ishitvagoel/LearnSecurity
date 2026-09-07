@@ -5,9 +5,9 @@
 
 ## Could someone else name the checks from your record?
 
-“We use MFA” is not this lesson. A reviewable record names **method**, **origin**, **whether the claim is phishing-resistant**, and **the leftover** if only passwords remain.
+“We use MFA” is not enough without **method**, **origin**, **whether the claim is phishing-resistant**, and **the leftover** if only passwords remain.
 
-This week’s freeze: a local `phishing_resistant` helper; origins `https://app.securecollab.test` vs `https://evil.example`. No live authenticators.
+`phishing_resistant` is a local helper; origins `https://app.securecollab.test` vs `https://evil.example`. No live authenticators.
 
 ## Picture: three methods, two origins
 
@@ -33,7 +33,7 @@ flowchart LR
 
 If WebAuthn is pointer-only, the leftover grows. People share passwords.
 
-## Step 1: freeze the pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|
@@ -58,11 +58,11 @@ The client, the lookalike page, and “the user will notice the URL” are hosti
 | user | webauthn | lookalike origin | deny |
 | user | webauthn | real origin | resistant-login-only |
 
-A missing step-up cell is how export theater appears. Write the hole even if this week has no export button.
+A missing step-up cell is how export theater appears. Write the hole even if this topic has no export button.
 
 ## Practice
 
-Draw this map so someone else could name the checks without opening the answer-key folder. Point at `labs/4.2/4.2-lab` file `authn.py`. Label password and OTP as phishable even at the real origin — the leftover is honest, not a silent pass.
+Look at `authn.py` under `labs/4.2/4.2-lab`. Label password and OTP as phishable even at the real origin — the leftover is honest, not a silent pass.
 
 ## Use it somewhere new
 
@@ -74,4 +74,4 @@ Password-only users. Recovery SMS. WebAuthn does not decide who may read a note.
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

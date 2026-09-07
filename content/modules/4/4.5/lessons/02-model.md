@@ -3,11 +3,11 @@
 **Kind:** design-exercise
 **Loop step:** 2 Model
 
-## Could someone else name pytest cases from your sequence?
+## Could someone else name the checks from your sequence?
 
-“We use OAuth” is not this page. A reviewable model names **authorization server, client, resource server, audience, and which secrets bind the transaction**.
+The testable picture is **authorization server, client, resource server, audience, and which secrets bind the transaction** — not “We use OAuth”.
 
-This week’s freeze: local `accept_token`. Expected audience `securecollab-api` (the notes app’s API name in this practice). No live authorization server.
+`accept_token` — Expected audience `securecollab-api` (the notes app’s API name in this practice). No live authorization server.
 
 ## Picture: code flow vs this practice’s one check
 
@@ -41,7 +41,7 @@ flowchart TD
 
 An earlier topic already refused “JWT means secure.” Here the same format carries different audience names.
 
-## Step 1: freeze who, what, and time
+## Step 1: name who, what, and when
 
 | Piece | This system |
 |---|---|
@@ -66,7 +66,7 @@ An earlier topic already refused “JWT means secure.” Here the same format ca
 
 ## Practice
 
-Draw this map so someone else could name pytest cases. Point at `labs/4.5/4.5-lab` file `jwt_aud.py`.
+Mark `jwt_aud.py` under `labs/4.5/4.5-lab`.
 
 ## Use it somewhere new
 
@@ -78,4 +78,4 @@ PKCE, nonce, mix-up, DPoP (advanced sender-constraint).
 
 ## What this page is not doing
 
-Treating an awareness list as the definition of security. Answer keys are not on this site.
+Naming “JWT” does not check `aud`. Answer keys are not on this site.

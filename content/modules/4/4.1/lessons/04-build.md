@@ -5,11 +5,11 @@
 
 ## The rule
 
-A later email is not the fix. “Disable the password” is not the fix. A logout product name is not the fix. `DELETE FROM users` alone is not the fix.
+A later email does not kill the session. Disabling the password leaves the cookie. A logout product name is a product. `DELETE FROM users` alone is not `session_valid`.
 
-The structural change is: `delete_user` **pops the session**, and `session_valid` **treats `DELETED` as deny**. Kill leftovers in the same use-case. Same delete. Not a follow-up ticket.
+The repair: `delete_user` **pops the session**, and `session_valid` **treats `DELETED` as deny**. Kill leftovers in the same use-case. Same delete. Not a follow-up ticket.
 
-The smallest restore for a notes-app offboard is: add `alice` to `DELETED`, pop `SESSIONS["alice"]`, and refuse authentication if the user is in `DELETED` even if someone writes the map back. Fail closed: if the session store is down, **deny** authentication for that user. Do not fail open.
+Repair an offboard: add `alice` to `DELETED`, pop `SESSIONS["alice"]`, and refuse authentication if the user is in `DELETED` even if someone writes the map back. If the session store is down, **deny** authentication for that user. Do not fail open.
 
 ## Picture: mark deleted and drop the session
 
@@ -22,13 +22,13 @@ flowchart TD
   Check -->|false| Pass[Rule true]
 ```
 
-The repaired files pop the session and check `DELETED` first. Production should also kill refresh tokens, worker `user_id`, and a phone's offline cache. Self-contained tokens need a denylist or a per-user not-before. Disabled and deleted are different product states. Both must fail `session_valid` in this week's freeze.
+The repaired files pop the session and check `DELETED` first. Production should also kill refresh tokens, worker `user_id`, and a phone's offline cache. Self-contained tokens need a denylist or a per-user not-before. Disabled and deleted are different product states. Both must fail `session_valid` in this practice.
 
-Industry lists want all active sessions killed. This pytest is that sentence for one synthetic cookie, not proofing who someone is, and not a new login factor.
+All active sessions have to be killed — one synthetic cookie, not proofing who someone is, and not a new login factor.
 
 ## What the repaired files must show
 
-Read `fixed/lifecycle.py` against this checklist. Do not treat the snippet as a production session store.
+Session kill in `fixed/lifecycle.py` is a dict helper, not a clinic store.
 
 | After the fix | Must be true |
 |---|---|
@@ -36,14 +36,14 @@ Read `fixed/lifecycle.py` against this checklist. Do not treat the snippet as a 
 | Before delete | honest session still valid |
 | Deleted set | even a resurrected `SESSIONS` entry is denied |
 
-Fail closed: if you cannot ask the session store, the answer is no. Uncertainty is a **deny**, not a yes because the dashboard still showed “signed in.”
+If you cannot ask the session store, the answer is no. A dashboard still showing “signed in” is not a session.
 
 ## What this is not
 
 - `DELETE FROM users` without session purge.
 - A token with `exp` in 30 days.
 - Worker `user_id` (later).
-- A phone's offline cache (later).
+- A phone cache still holding the session (later).
 - Single-sign-on logout as a product name.
 - SessionMiddleware defaults.
 
@@ -67,11 +67,9 @@ Name who (ex-employee with leftover cookie), what (`alice` session), and the che
 python3 -m pytest labs/4.1/4.1-lab/tests --impl fixed
 ```
 
-It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
-Clinic: disable the badge and kill chart sessions in one runbook. A badge vendor API is not the chart session store.
+Disable the badge and kill chart sessions in one runbook. A badge vendor API is not the chart session store.
 
 ## What can still go wrong
 

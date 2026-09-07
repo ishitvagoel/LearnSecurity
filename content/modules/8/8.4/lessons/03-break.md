@@ -5,21 +5,19 @@
 
 ## Try it
 
-The practice is not a store listing you unpack. It is a tiny Python `api_allowed(build_type, attest)`. The failure is already in the function: it returns true for every pair, so a debug build with `attest=ok` is allowed to call prod export. You are here to see that as **a failed rule**, not a trophy against a public APK.
-
-The rule under test:
+The practice is not a store listing you unpack. `api_allowed(build_type, attest)` returns true for every pair, so a debug build with `attest=ok` is allowed to call prod export, even with no public APK to unpack.
 
 > `api_allowed("debug", "ok")` must be false. A debug build must not call production export.
 
 ## Where you may practice
 
-Only `labs/8.4/8.4-lab` is in scope. The helper is an in-process `api_allowed(build_type, attest)`. Fake build-type strings (`debug`, `release`). It does not open a network. Do not probe a live Play Console, unpack a public APK, or paste anti-debug steps onto a store listing.
+Stay inside `labs/8.4/8.4-lab`. Fake build-type strings (`debug`, `release`) feed `api_allowed(build_type, attest)`. It does not open a network. Do not probe a live Play Console, unpack a public APK, or paste anti-debug steps onto a store listing.
 
 Do not paste this exercise onto a public host, employer clinic, or live store APK.
 
-What must not happen: **a debug build is allowed to call production export**. `api_allowed("debug", "ok")` returns true.
+`api_allowed("debug", "ok")` returning true is **a debug build calling production export**.
 
-Attacker capability in this practice: a leaked debug APK or student flavor. That stands in for a clinic debug flavor that reuses the prod application id and API key so testers can “hit real data.” What you trust: `api_allowed` is supposed to be a **server channel check** next to 8.1 attest. R8, Play App Signing, root detection, and `minifyEnabled` are not what you trust for this cell.
+Picture a leaked debug APK or student flavor — a clinic debug flavor that reuses the prod application id and API key so testers can “hit real data.” `api_allowed` is supposed to be a **server channel check** next to 8.1 attest — not R8, Play App Signing, root detection, or `minifyEnabled`.
 
 ## Picture: attest string is enough
 
@@ -28,21 +26,17 @@ flowchart TD
   Call["api_allowed debug ok"] --> True[returns true]
 ```
 
-The broken files show **cause** (prod trusts any build). Do not attack store listings. What has to be true first: `api_allowed` returns true for every pair. You do not need Gradle. You must not unpack a store APK.
+Prod trusts any build. Do not attack store listings. `api_allowed` returns true for every pair. You do not need Gradle. You must not unpack a store APK.
 
-Last topic (8.1) already said the APK is hostile. This cell is **debug must not call prod even if attest=ok**. Secrets in the APK are a 5.3 leftover, not this grant.
+Topic 8.1 already said the APK is hostile. This rule is **debug must not call prod even if attest=ok**. Secrets in the APK are a 5.3 leftover, not this grant.
 
 ## What to read in the broken files
 
-`vulnerable/build.py` returns true for every pair. Checks:
+`vulnerable/build.py` allows every build/attest pair. Checks:
 
 - `test_debug_build_cannot_call_prod_export`
 - `test_release_with_attest_may_call_prod`
 - `test_release_without_attest_is_denied` — 8.1 still applies to release
-
-You do not need a new flavor name. The failure of `test_debug_build_cannot_call_prod_export` *is* the evidence.
-
-Do not open the repaired files yet. Diagnose the cause first.
 
 ## Why it happens vs what it costs
 
@@ -50,7 +44,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 |---|---|
 | Required rule | `api_allowed("debug", "ok")` is false |
 | Why it happens | Prod API trusts `attest=ok` from any build |
-| What has to be true first | `api_allowed` is always true |
+| What's already wrong | `api_allowed` is always true |
 | Trigger | Leaked debug APK or student flavor |
 | What it costs | Debug keys and loggers against prod data |
 | How you stop it | Separate client ids; server checks build plus attest; no prod URLs in debug manifests |
@@ -60,7 +54,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-Gradle `debug` / `release` types are not a server check. R8 does not authorize. Play Console “app signing” is not “secrets stay out of the binary.” FastAPI will accept `attest=ok` from a debug client if you bind it. The app’s promise is: **this** helper, debug plus ok is false.
+Gradle `debug` / `release` types are not a server check. R8 does not authorize. Play Console “app signing” is not “secrets stay out of the binary.” FastAPI will accept `attest=ok` from a debug client if you bind it. Debug plus ok is false.
 
 ## Practice
 
@@ -68,11 +62,11 @@ Gradle `debug` / `release` types are not a server check. R8 does not authorize. 
 python3 -m pytest labs/8.4/8.4-lab/tests --impl vulnerable
 ```
 
-Run from `labs/8.4/8.4-lab` if a repo-root collection picks up `site/`. Record `test_debug_build_cannot_call_prod_export`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/8.4/8.4-lab` if a repo-root collection picks up `site/`. Do not “fix” the check to pass. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic debug vs FHIR. Predict without leaving this directory. Do not unpack a live clinic APK.
+A debug flavor can reuse the prod FHIR client id. Predict without leaving this directory. Do not unpack a live clinic APK.
 
 ## What this page is not doing
 

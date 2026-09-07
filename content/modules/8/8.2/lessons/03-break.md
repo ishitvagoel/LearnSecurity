@@ -5,21 +5,19 @@
 
 ## Try it
 
-The practice is not a phone you image. It is a tiny Python `save_note` / `plaintext_on_disk`. The failure is already in the function: it stores the body as-is, so after `save_note("secret")` the disk still holds `'secret'`. You are here to see that a **note body cached as plaintext** is **a failed rule**, not a trophy against a personal phone.
-
-The rule under test:
+The practice is not a phone you image. `save_note` / `plaintext_on_disk` store the body as-is, so after `save_note("secret")` the disk still holds `'secret'`. A personal-phone image is not required to see that.
 
 > After `save_note("secret")`, `plaintext_on_disk()` must be false. A private app folder is not encryption.
 
 ## Where you may practice
 
-Only `labs/8.2/8.2-lab` is in scope. The helper is an in-process `save_note` / `plaintext_on_disk`. Fake body `'secret'`. It does not open a network. Do not image a live phone, dump a personal backup, or run `adb backup` on a hospital tablet.
+Stay inside `labs/8.2/8.2-lab`. Fake body `'secret'` is stored through `save_note` / `plaintext_on_disk`. It does not open a network. Do not image a live phone, dump a personal backup, or run `adb backup` on a hospital tablet.
 
 Do not paste this exercise onto a public device, employer clinic, or live EHR tablet.
 
-What must not happen: **a note body cached as plaintext on disk**. After `save_note("secret")`, `plaintext_on_disk()` is true.
+After `save_note("secret")`, `plaintext_on_disk()` true is **a note body cached as plaintext on disk**.
 
-Attacker capability in this practice: a stolen USB backup or a phone whose cache is unlocked. That stands in for a clinic “available offline” write of `charts.json`, a Room SQLite dump, or a cloud backup of internal storage. What you trust: `save_note` is supposed to leave **ciphertext (or a stand-in) on disk**, not the body. `MODE_PRIVATE`, a fingerprint prompt, and EncryptedSharedPreferences on a *different* file are not what you trust for this cell.
+Picture a stolen USB backup or a phone whose cache is unlocked — a clinic “available offline” write of `charts.json`, a Room SQLite dump, or a cloud backup of internal storage. `save_note` is supposed to leave **ciphertext (or a stand-in) on disk**, not the body — not `MODE_PRIVATE`, a fingerprint prompt, or EncryptedSharedPreferences on a *different* file.
 
 ## Picture: write the body as the file
 
@@ -28,9 +26,9 @@ flowchart TD
   Save["save_note secret"] --> Disk["DISK note equals secret"]
 ```
 
-The broken files show **cause** (a text file). Do not dump personal device storage. What has to be true first: `save_note` stores the body as-is. You do not need an emulator. You must not image a phone.
+The note is stored as a text file. Do not dump personal device storage. `save_note` stores the body as-is. You do not need an emulator. You must not image a phone.
 
-Industry lists want sensitive data stored securely. Last crypto topic (5.2) already refused Base64; this cell is **the phone’s disk**. Last topic (8.1) already said the device is hostile.
+Sensitive data stored securely. Last crypto topic (5.2) already refused Base64; this rule is **the phone’s disk**. Topic 8.1 already said the device is hostile.
 
 ## What to read in the broken files
 
@@ -39,17 +37,13 @@ Industry lists want sensitive data stored securely. Last crypto topic (5.2) alre
 - `test_cached_note_is_not_plaintext_on_disk`
 - `test_other_body_is_not_reported_as_plaintext_secret` — honest `'other'` must not be reported as the secret
 
-You do not need a new filename. The failure of `test_cached_note_is_not_plaintext_on_disk` *is* the evidence.
-
-Do not open the repaired files yet. Diagnose the cause first.
-
 ## Why it happens vs what it costs
 
 | Slice | This practice |
 |---|---|
 | Required rule | After `save_note("secret")`, `plaintext_on_disk()` is false |
 | Why it happens | Bodies written as text files |
-| What has to be true first | `DISK['note']` equals the body |
+| What's already wrong | `DISK['note']` equals the body |
 | Trigger | Lost device, backup, USB |
 | What it costs | The note bodies are no longer secret on the device |
 | How you stop it | Encrypt the cache with keys held in Keystore; expire; wipe on logout or revoke |
@@ -59,7 +53,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-EncryptedSharedPreferences is not automatic for every file. Room defaults to plaintext SQLite. `MODE_PRIVATE` keeps other *apps* out on a healthy OS; root, backup agents, and USB still see bytes. The app’s promise is: **this** helper, `plaintext_on_disk()` is false after save.
+EncryptedSharedPreferences is not automatic for every file. Room defaults to plaintext SQLite. `MODE_PRIVATE` keeps other *apps* out on a healthy OS; root, backup agents, and USB still see bytes. `plaintext_on_disk()` is false after save.
 
 ## Practice
 
@@ -67,11 +61,11 @@ EncryptedSharedPreferences is not automatic for every file. Room defaults to pla
 python3 -m pytest labs/8.2/8.2-lab/tests --impl vulnerable
 ```
 
-Run from `labs/8.2/8.2-lab` if a repo-root collection picks up `site/`. Record `test_cached_note_is_not_plaintext_on_disk`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not image phones. An environment error is not security evidence.
+Run from `labs/8.2/8.2-lab` if a repo-root collection picks up `site/`. Do not “fix” the check to pass. Do not image phones. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic chart cache. Predict without leaving this directory. Do not image a live hospital tablet.
+An offline chart cache can outlive logout. Predict without leaving this directory. Do not image a live hospital tablet.
 
 ## What this page is not doing
 

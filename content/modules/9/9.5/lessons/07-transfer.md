@@ -1,24 +1,24 @@
-# Same idea: clinic pentest PDF shelf
+# Same idea on a clinic pentest PDF shelf
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic pentest PDF on a shelf**. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic pentest PDF on a shelf**.
 
-The notes-app sentence was: `close_finding({"retest": None})` must be false. Rewrite it for a clinic without changing the fork: missing retest denied, passing retest may close. A PDF on a shelf is still a report, not a retest.
+`close_finding({"retest": None})` must be false. For a clinic, missing retest denied, passing retest may close. A PDF on a shelf is still a report, not a retest.
 
-**Product sketch:** an EHR-lite "the assessor delivered a 40-page PDF with severity 9.8 so we closed isolation," plus "the known-exploited list says we must scan the hospital portal."
+An EHR-lite "the assessor delivered a 40-page PDF with severity 9.8 so we closed isolation," plus "the known-exploited list says we must scan the hospital portal."
 
 ## Picture: same close loop, clinical object
 
-Renaming "note" to "chart" is not transfer. Rule, retest, and leftover change. Filing the PDF and marking the ticket Done does not set `retest` to `"pass"`.
+Closing a clinic ticket is the close-without-retest rule. Filing the PDF and marking the ticket Done does not set `retest` to `"pass"`.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Bob must not read alice's note | A clinic staffer must not read another patient's chart |
-| Isolation pytest must pass before close | Same isolation pytest on a **local** practice files |
+| The isolation check must pass before close | Same isolation check on **local** practice files |
 | `close_finding({"retest": None})` | Same call — missing retest still denied |
 | Paper-compliance closer | Same closer — **not** a live clinic |
 | PDF / severity / known-exploited list | Same inputs — not the close decision |
@@ -29,18 +29,16 @@ flowchart LR
   None[retest None] --> Reality[rule still open]
 ```
 
-If the PDF is filed while `close_finding` is always true, the rule is gone. A ticket marked Done, a 9.8 severity, and a known-exploited listing do not set `retest` to `"pass"`. Extra fields and a role-change cache are the same close-loop family — name them, do not pentest a live clinic system here. A testing-catalogue draft is in development; the current final pin is the published catalogue. A known-exploited list is whether exploitation is *observed in the wild* for an internal-only bug, not a licence to scan a public clinic.
+If the PDF is filed while `close_finding` is always true, the rule is gone. A ticket marked Done, a 9.8 severity, and a known-exploited listing do not set `retest` to `"pass"`. Extra fields and a role-change cache are the same close-loop family — name them, do not pentest a live clinic system here. A testing-guide draft is in development; the current final pin is the published testing guide. A known-exploited list is whether exploitation is *observed in the wild* for an internal-only bug, not permission to scan a public clinic.
 
-The clinic rewrite still has to keep the notes-app fork: missing retest denied, passing retest may close. Uploading the PDF without a retest field leaves `close_finding({retest: None})` true. The local pytest analogue is `test_cannot_close_without_retest` — on a practice, not a live host.
+A missing retest still has to be denied. A passing retest may still close. Uploading the PDF without a retest field leaves `close_finding({retest: None})` true. The local check is `test_cannot_close_without_retest` — on a practice, not a live host.
 
-## Prompt — clinic pentest PDF on a shelf
+## Write this for a clinic pentest PDF on a shelf
 
-Rewrite the notes-app sentence. Include:
-
-1. who can act (paper-compliance closer — not a live clinic);
+1. who might try (paper-compliance closer — not a live clinic);
 2. what you trust (same-rule retest is the promise; PDF, severity score, and a known-exploited list are not);
-3. what must not happen (`close_finding({retest: None})` true, not a legal label);
-4. a test idea on a **local** practice files only (no live pentest);
+3. what must not happen (`close_finding({retest: None})` true);
+4. retest None must not close — **local** practice files (no live pentest);
 5. leftover (variants, role-change cache, business vs severity priority);
 6. whether engineers read the report (structure, not color-only severity).
 
@@ -54,14 +52,14 @@ Also name known-exploited list vs internal-only.
 |---|---|
 | "Severity 9.8 so we closed" | Input, not retest |
 | Live clinic / public known-exploited scan | Course rules |
-| A testing-catalogue draft as the current final pin | Draft, not this week's pin |
+| A testing-guide draft as the current final pin | Draft, not this pin |
 | Ticket Done as this topic | Workflow, not the check |
-| PDF attachment as `retest` | Report is not the same-rule pytest |
+| PDF attachment as `retest` | Report is not the same-rule check |
 
 ## Practice
 
-One page. No answer keys. `labs/9.5/9.5-lab` is the only running system you may break. Do not pentest a public host.
+Retest the same bad URL before you close. Keep the answer keys closed. `labs/9.5/9.5-lab` is the only running system you may break. Do not pentest a public host.
 
 ## What this page is not doing
 
-Live-target pentest. Real patient charts in findings. Claiming you finished an assurance gate from this page.
+Do not try live-target pentest. Do not use real patient charts in findings. This page does not finish a check-in.

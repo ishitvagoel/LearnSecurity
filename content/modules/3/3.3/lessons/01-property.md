@@ -11,9 +11,9 @@ Architecture is a **second** check: the role the app uses at request time must n
 
 > For a notes table, the runtime `app` role bound as company `tB` must not `SELECT` a row whose `note_tenant` is `tA`. SQLAlchemy, a private network, or “we use microservices” does not enforce this. A later row-level rule in the database is a later layer, not a comment that ships.
 
-What must not happen is a **shared app role that reads tA as tB**: `can_select("app", "tB", "tA") is True`. Who-is-allowed failed, and the database did not catch it. That is a secrecy failure.
+Stop a **shared app role that reads tA as tB**: `can_select("app", "tB", "tA") is True`. Who-is-allowed failed, and the database did not catch it. That is a secrecy failure.
 
-Industry checklists want a second check so work never hits another company’s rows, and they want that check on a trusted server, not in the Next.js client. Extra isolation around dangerous work is an advanced row, not this week’s pytest. A manufacturer-ownership pledge does not configure `GRANT`.
+There has to be a second check so work never hits another company’s rows, and that check belongs on a trusted server, not in the Next.js client. Extra isolation around dangerous work is an advanced row, not this check. A manufacturer-ownership pledge does not configure `GRANT`.
 
 ## Picture: two gates, one forgotten WHERE
 
@@ -29,7 +29,7 @@ flowchart TD
 
 What you trust for this topic is the **runtime connection role plus its grants** (lab stand-in: `can_select`). The handler is still required. Trusting ORM defaults or a pooler user named `app` without a same-company check is not what you trust.
 
-**A tool is not the rule.** SQLAlchemy `session`, a Kubernetes network policy, or a ticket titled “row-level security later.”
+A SQLAlchemy `session`, a Kubernetes network policy, and a ticket titled “row-level security later” do not stop tB from reading tA.
 
 ## Picture: the running app versus migrate and look-but-don’t-read
 
@@ -48,7 +48,7 @@ Migrator and superuser exist. They must not be `DATABASE_URL` at request time. A
 | Slice | For this rule |
 |---|---|
 | Why it happens | One all-powerful database user shared by the app and migrate |
-| What has to be true first | The runtime role can `SELECT` other companies |
+| What's already wrong | The runtime role can `SELECT` other companies |
 | Trigger | Forgotten WHERE, later SQL injection, or a stolen app password |
 | What it costs | Secrecy of company tA’s notes |
 | How you stop it | Least-privilege runtime role; same-company check in the role or a later row-level rule |
@@ -57,7 +57,7 @@ Migrator and superuser exist. They must not be `DATABASE_URL` at request time. A
 
 ## What the framework does vs what you still have to check
 
-FastAPI does not scope PostgreSQL. Splitting into microservices without new grants is a topology drawing. The app’s promise is: `can_select("app", "tB", "tA") is False` and the runtime connection is not `postgres`. The folder is `labs/3.3/3.3-lab`. No live databases.
+FastAPI does not scope PostgreSQL. Splitting into microservices without new grants is a topology drawing. `can_select("app", "tB", "tA") is False` and the runtime connection is not `postgres` — files in `labs/3.3/3.3-lab`. No live databases.
 
 ## What the tool cannot do
 
@@ -74,7 +74,7 @@ python3 -m pytest labs/3.3/3.3-lab/tests --impl vulnerable
 python3 -m pytest labs/3.3/3.3-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Tie the check to `tB` reading `tA`, not to a private-network diagram.
+Look at `tB` reading `tA`, not a private-network diagram.
 
 ## Use it somewhere new
 
@@ -82,4 +82,4 @@ A serverless function with a shared `admin` connection string. A clinic billing 
 
 ## What this page is not doing
 
-Live cloud databases, real company dumps, weaponized SQL, and “microservices isolate companies.” Course gates stay unclaimed without learner or product evidence. Answer keys are not on this site.
+Do not use live cloud databases, real company dumps, weaponized SQL, and “microservices isolate companies.” This page does not finish a check-in. Answer keys are not on this site.

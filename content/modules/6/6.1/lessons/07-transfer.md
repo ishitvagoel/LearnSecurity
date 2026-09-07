@@ -5,17 +5,17 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic export-to-CSV filename** chosen by a clerk. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic export-to-CSV filename** chosen by a clerk.
 
-The notes-app sentence was: `argv_for_list` must not start `sh -c`. Pass the name as one argv element. Rewrite it for a clinic without changing the fork: the spawn helper returns a list whose program is not `sh`, and the filename is one element.
+`argv_for_list` must not start `sh -c`. Pass the name as one argv element. For a clinic, the spawn helper returns a list whose program is not `sh`, and the filename is one element.
 
 Also name Jinja, SQL (5.5), and mail headers as the same shape, without running those systems.
 
 ## Picture: the filename is still an interpreter input
 
-Renaming “export name” to “CSV filename” is not transfer. The untrusted string changes. The fork does not.
+The CSV filename is the export name in argv.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | `name` glued into `sh -c` | Clerk-chosen filename glued into `sh -c` |
 | `argv_for_list` | Export-worker spawn helper |
@@ -30,16 +30,14 @@ flowchart LR
 
 If the clerk-chosen filename is concatenated into `sh -c`, the check is gone. FastAPI, a denylist of punctuation, and “internal clerk” trust do not bind argv. Jinja, SQL (5.5), and mail headers are the same shape at other parsers — name them, do not run those systems here. Formula characters in the CSV *body* are advanced leftover, a different residual.
 
-The clinic rewrite still has to keep the notes-app fork: the spawn helper returns a list whose program is not `sh`, and the name is one element. Stripping punctuation while still calling `sh -c` leaves the second parser. The local pytest analogue is `test_does_not_invoke_shell` — on a practice, not a live export worker.
+The spawn helper returns a list whose program is not `sh`, and the name is one element. Stripping punctuation while still calling `sh -c` leaves the second parser. The local check is `test_does_not_invoke_shell` — on a practice, not a live export worker.
 
-## Prompt — clinic CSV filename
+## Write this for a clinic CSV filename
 
-Rewrite the notes-app sentence. Include:
-
-1. who can act (clerk-chosen filename — not a live clinic);
+1. who might try (clerk-chosen filename — not a live clinic);
 2. what you trust (argv list is what you trust; a denylist of punctuation is not);
-3. what must not happen (`argv_for_list` starts `sh -c`, not a legal label);
-4. a test idea on a **local** practice files only (shape, no execution — never on the real clinic);
+3. what must not happen (`argv_for_list` starts `sh -c`);
+4. basename `sh` at spawn is the shape to reject — **local** practice files (no execution — never on the real clinic);
 5. leftover (argument injection; CSV formula leftover; plugin shells);
 6. whether a human-read “export failed” status must not use color as the only cue (readable error, not a silent missing file).
 
@@ -55,8 +53,8 @@ Rewrite the notes-app sentence. Include:
 
 ## Practice
 
-One page. No answer keys. The only running system you may break is `labs/6.1/6.1-lab`. Do not execute argv or run a live worker.
+Keep the export helper as argv, not `sh -c`. Keep the answer keys closed. The only running system you may break is `labs/6.1/6.1-lab`. Do not execute argv or run a live worker.
 
 ## What this page is not doing
 
-Live-target shells. Real patient filenames. Claiming a course gate from this page.
+Do not try live-target shells. Do not use real patient filenames. This page does not finish a check-in.

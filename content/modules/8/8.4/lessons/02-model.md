@@ -5,9 +5,9 @@
 
 ## Could someone else name the checks from your map?
 
-“R8 is on” is not this lesson. A map someone else can test names **build type, client id, and which API it may call**.
+Keep **build type, client id, and which API it may call**; “R8 is on” is not that list.
 
-This week’s freeze: the notes app’s local `api_allowed(build_type, attest)`. No live stores.
+`api_allowed(build_type, attest)` — no live stores.
 
 ## Picture: server owns the channel
 
@@ -29,7 +29,7 @@ flowchart LR
 
 That leftover is 5.3 — secrets in the artifact. Minify does not solve it.
 
-## Step 1: freeze the pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|
@@ -53,11 +53,11 @@ That leftover is 5.3 — secrets in the artifact. Minify does not solve it.
 
 ## Practice
 
-Draw the map. Point at `labs/8.4/8.4-lab` file `build.py`. Label the always-true helper even in the repaired tree — the fix is release plus attest, not pretending minify became a grant.
+Mark `build.py` under `labs/8.4/8.4-lab`. After repair, the always-true helper is still there: release plus attest, not minify-as-grant.
 
 ## Use it somewhere new
 
-Clinic FHIR flavors; a list of what shipped in the APK (10.2).
+FHIR flavors are this grain; a list of what shipped in the APK waits for 10.2.
 
 ## What can still go wrong
 
@@ -65,4 +65,4 @@ Key leak (5.3). Attestation farms. Resilience as cost, not as trust.
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

@@ -1,4 +1,4 @@
-# Review quiz-as-skip like a pull request
+# Would you merge this quiz-as-skip?
 
 **Kind:** code-review
 **Loop step:** Review
@@ -6,13 +6,11 @@
 
 ## Review the practice files as if they were the course placement service
 
-Review `labs/0.2/0.2-bridge/vulnerable/` as a pull request for a course tool. Your job is not to count suspicious lines. Reconstruct whether `quiz_score_grants_phase1_skip(100)` still returns true, compare that with the rule, and write changes a developer can check.
-
-Intended findings live only in the isolated keys file — not here. Do not open the keys until your review has been evaluated.
+Treat `labs/0.2/0.2-bridge/vulnerable/` as the quiz-bridge change. Does `quiz_score_grants_phase1_skip(100)` still return true?
 
 ## Picture: if score >= 80: skip part 1
 
-Start with this seeded smell: **`if score >= 80: skip_phase(1)`**. Label it a rule, a tool, or false assurance before you accept the change.
+**`if score >= 80: skip_phase(1)`**.
 
 ```mermaid
 flowchart TD
@@ -22,7 +20,7 @@ flowchart TD
   Q -->|job title mapped| False[False assurance]
 ```
 
-Classification starts at the protected effect (part-1 skip denied). Everything that is not an always-false skip at that call is a leftover path.
+A part-1 skip still has to be denied. Without an always-false skip, a 100 score still walks into part 1.
 
 ## Problems to find (name them yourself)
 
@@ -41,14 +39,10 @@ Also reject: live LMS attacks; keys in lessons; claiming check-in 0 or check-in 
 - A job-title competency is a 1.2 allow cell
 - An LMS percentage is industry-list coverage
 
-## Practice
-
-Write three review notes a maintainer could act on. Each note: what you saw, whether it is a rule or false assurance, a suggested structural change, leftover risk you will **not** delete. Tie at least one to `test_high_quiz_score_is_not_authorization`.
-
 ## Use it somewhere new
 
-A clinic change that “added an onboarding quiz and a job-title mapping” without keeping 1.2 required is a skipped-check review. Name the independent falsehood that would still keep score 100 from skipping isolation labs.
+An onboarding quiz and a job-title mapping, without keeping 1.2 required, skip the check. A 100 quiz is not a 1.2 skip — write the skip deny.
 
 ## What this page is not doing
 
-Do not merge by adding a comment “advanced learners may skip.” That comment is leftover risk without an owner. Do not attack an LMS to prove the finding.
+Do not ship a quiz-as-skip because a comment says advanced learners may skip. Nobody owns that leftover. Do not attack an LMS to prove the finding.

@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-Happy-path “1 item collected” is not evidence. The check must be **false** on the broken files and **true** on the repaired files.
+A collected-item count of 1 does not prove the confirm control works from the keyboard. Mouse-only color still has to fail on the broken files and pass on the repaired ones.
 
 ## Picture: a broken recovery must fail the check
 
-A test that only asserts the confirm function exists can pass while the control remains mouse-only. This check asks whether inaccessible recovery still counts as a passing control. Broken must fail that question. Repaired must pass it.
+Asserting the confirm function exists can still hide that the control remains mouse-only.
 
 ```mermaid
 flowchart TD
@@ -19,9 +19,9 @@ flowchart TD
   T -->|repaired| Pass[Must pass]
 ```
 
-If both pass, the test is not looking at `mouse_only`, name, or keyboard. If both fail, the fix is not structural or the check is wrong.
+If the broken widget also passes, you never checked `mouse_only`, the name, or the keyboard path.
 
-## Four modes, even for a widget
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -30,9 +30,9 @@ If both pass, the test is not looking at `mouse_only`, name, or keyboard. If bot
 | Abuse | Sharing an admin session to skip recovery is **out of band** here: record it as leftover risk, not as a check in this folder |
 | When things break | Missing name or keyboard fails closed (`is_usable_accessible` is false) |
 
-The file is `labs/1.4/1.4-risk-register/tests/test_recovery_a11y.py`. It calls `recovery.recovery_confirm_control()` and asserts `is_usable_accessible`. That is a **what-must-not-happen** test: inaccessible recovery is not allowed to count as a passing control.
+It calls `recovery.recovery_confirm_control()` and asserts `is_usable_accessible`. Inaccessible recovery keeps that assert red.
 
-A test that only asserts HTTP 200 is not this topic’s evidence. This practice never opens a network socket.
+HTTP 200 does not prove the confirm is named and keyboard-usable. This practice never opens a network socket.
 
 ## Map checks to the rows you wrote
 
@@ -44,18 +44,14 @@ A test that only asserts HTTP 200 is not this topic’s evidence. This practice 
 
 ## Practice
 
-Run both this session:
-
 ```text
 python -m pytest labs/1.4/1.4-risk-register/tests --impl vulnerable
 python -m pytest labs/1.4/1.4-risk-register/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail/pass into your notes next to the row.
-
 ## Use it somewhere new
 
-Clinic mouse-only second factor: write one test name you would want (`test_step_up_control_keyboard_operable`) and what must fail on the broken widget. Do not run it against a real clinic.
+Write a test name you would want for a mouse-only second factor (`test_step_up_control_keyboard_operable`) and what must fail on the broken widget. Do not run it against a real clinic.
 
 ## What this page is not doing
 

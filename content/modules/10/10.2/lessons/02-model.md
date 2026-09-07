@@ -5,11 +5,11 @@
 
 ## Could someone else name the install check?
 
-“We generate CycloneDX” is not this lesson. A drawing someone else can test names **the expected digest, the got digest, who can edit the lockfile, and that a fork pull request stays untrusted**.
+Keep **the expected digest, the got digest, who can edit the lockfile, and that a fork pull request stays untrusted**; “We generate CycloneDX” is not that list.
 
-This week’s freeze for the notes app: local `install_ok(expected, got)`. No live registries.
+`install_ok(expected, got)` — no live registries.
 
-> For a mismatch, `aaa` vs `bbb` is deny. A matching pair may install. Evidence that the deny is false: `install_ok("aaa", "bbb")` returns true.
+> For a mismatch, `aaa` vs `bbb` is deny. A matching pair may install. The leak shows up as: `install_ok("aaa", "bbb")` returns true.
 
 If the expected-vs-got cell is blank, the SBOM looks finished because nobody named the hash check.
 
@@ -34,7 +34,7 @@ Lockfile verify is the install check. An SBOM is inventory. Provenance is extra.
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the install rule you already have and ask which check would show it is false.
+Take the install rule you already have and ask which check would show it is false.
 
 | Piece | This system |
 |---|---|
@@ -56,11 +56,11 @@ Do not invent a new catalogue. Take the install rule you already have and ask wh
 | SBOM present | install | treat as verify | deny |
 | unpinned action@v1 | workflow | treat as pinned | deny |
 
-A missing hash-compare cell is how a package name becomes false comfort. Write the hole.
+A missing hash-compare cell is how a package name becomes false assurance. Write the hole.
 
 ## Practice
 
-Draw the map so someone else could name the checks. Point at `labs/10.2/10.2-lab` file `lock.py`.
+Look at `lock.py` under `labs/10.2/10.2-lab`.
 
 ## Use it somewhere new
 
@@ -72,4 +72,4 @@ Pinned malware. Cache poisoning. A lookalike package that wins because you still
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

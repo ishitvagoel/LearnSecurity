@@ -5,11 +5,11 @@
 
 ## The rule
 
-A `NODE_ENV` string is not the fix. A canary percentage is not the fix. “We meant to turn it off” is not the fix.
+A `NODE_ENV` string does not turn debug off. A canary percentage is a traffic split. “We meant to turn it off” still boots prod-plus-debug.
 
-The structural change is: `boot_ok` **returns false when `env == "prod"` and `debug` is true**. Fail-safe: production with debug denies. `NODE_ENV` may sit next to a match; it does not replace it. Structural means that both-at-once check — not a canary, not an IaC file that exists, not “support asked for five minutes.”
+The repair: `boot_ok` **returns false when `env == "prod"` and `debug` is true**. Production with debug denies. `NODE_ENV` may sit next to a match; it does not replace it. Namely that both-at-once check — not a canary, not an IaC file that exists, not “support asked for five minutes.”
 
-The smallest restore for the notes app’s FastAPI + Next.js compose is: prod + True → do not boot. Do not fail open because support asked for five minutes. Do not register debug routes after a denied boot.
+Put this in the notes app’s FastAPI + Next.js compose: prod + True → do not boot. Five minutes for support does not boot debug in prod. Do not register debug routes after a denied boot.
 
 ## Picture: prod and debug together
 
@@ -20,27 +20,27 @@ flowchart TD
   Both -->|no| Allow[may boot]
 ```
 
-The repaired files require that both-at-once check. Do not accept “`NODE_ENV` is production” as the check. Production still needs other flags — a feature flag that turns off authorization (1.2) is leftover, not this pytest. Docs and monitoring pages that stay public, and extra version leakage with debug already off, remain leftover. Emergency debug is E6, not a silent `return True`.
+Both flags have to fail together. A production `NODE_ENV` value does not count as the check. A feature flag that turns off authorization (1.2) is leftover, not this debug-off. Docs and monitoring pages that stay public, and extra version leakage with debug already off, remain leftover. Emergency debug is E6, not a silent `return True`.
 
-A checklist that wants debug off in production is that sentence for prod plus debug. This pytest is the local stand-in.
+A checklist that wants debug off in production covers prod plus debug. The check is the local stand-in.
 
 ## What the repaired files must show
 
-Read `fixed/cfg.py` against this checklist. Do not treat the snippet as a production compose product.
+Booting a live host is outside `fixed/cfg.py`.
 
 | After the fix | Must be true |
 |---|---|
 | prod + True | boot false |
 | prod + False | boot true |
 
-Fail closed: if you are unsure whether this boot is production with debug, do not start. Uncertainty is a **no** on boot, not a yes because support asked for five minutes.
+If you are unsure whether this boot is production with debug, do not start. Support asking for five minutes does not change that.
 
 ## What this is not
 
 - A canary.
 - An IaC file that exists.
 - A manufacturer-defaults program page we have not verified.
-- An assurance-gate sticker.
+- A “debug is off” check-in.
 - Other flags (leftover).
 - A famous-bugs list used as the syllabus.
 - “We meant to turn it off.”
@@ -65,8 +65,6 @@ Name who can edit compose. Run:
 python3 -m pytest labs/10.4/10.4-lab/tests --impl fixed
 ```
 
-It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 Django: `DEBUG` must be false when `ENV=prod`, not “we meant to turn it off.”
@@ -77,4 +75,4 @@ A feature flag that turns off authorization. Sidecar debug. Extra version leakag
 
 ## What this page is not doing
 
-Do not boot a live host. Do not claim you finished an assurance gate from a `NODE_ENV` screenshot. Do not present a manufacturer-defaults program page as verified.
+Do not boot a live host. This page does not mark you as finished. A `NODE_ENV` screenshot is not a check-in. Do not present a manufacturer-defaults program page as verified.

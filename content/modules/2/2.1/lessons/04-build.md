@@ -5,11 +5,11 @@
 
 ## The rule
 
-A denylist of yesterday’s string is not the fix. Hiding a scanner warning is not the fix. “Trust the framework” is not the fix.
+A list of last week’s bad strings does not bind the schema. Turning off the scanner does not bind it either. “Trust the framework” is still a slogan.
 
-The structural change is: the object **actually has one company meaning** before the who-is-allowed check runs. Refuse duplicate keys, or compare `acl_tenant == stored_tenant` and deny on mismatch.
+What has to change: the object **actually has one company meaning** before the who-is-allowed check runs. Refuse duplicate keys, or compare `acl_tenant == stored_tenant` and deny on mismatch.
 
-## Picture: fail closed on disagreement
+## Picture: deny when the copies disagree
 
 ```mermaid
 flowchart TD
@@ -31,7 +31,7 @@ The repaired files still *have* two readers. They restore the rule by **refusing
 | Messy duplicate keys | `accepted` is false, **or** ACL and store are identical |
 | Body on refuse | not persisted as a note |
 
-Fail closed: on uncertainty, **deny**. Do not repair by keeping the last key because “that is what Python does.”
+On uncertainty, **deny**. Do not repair by keeping the last key because “that is what Python does.”
 
 ## What this is not
 
@@ -43,13 +43,11 @@ Fail closed: on uncertainty, **deny**. Do not repair by keeping the last key bec
 
 ## Practice
 
-Name who, what, action, and the check that must be true after the fix. Run `--impl fixed` (must pass):
+Write who, what, the action, and the check that must be true after the fix. Run `--impl fixed` (must pass):
 
 ```text
 python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl fixed
 ```
-
-Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
 ## Use it somewhere new
 

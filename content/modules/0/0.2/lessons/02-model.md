@@ -6,9 +6,9 @@
 
 ## Can a second person name what a quiz may skip from your path map?
 
-“They’re advanced” is not this lesson. A reviewable picture names **tooling-bridge ids, required 1.2/1.3/1.4, and check-in 1 evidence**.
+The testable picture is **tooling-bridge ids, required 1.2/1.3/1.4, and check-in 1 evidence** — not “They’re advanced”.
 
-Notes-app freeze: local `quiz_score_grants_phase1_skip(score)`. No vendor LMS.
+`quiz_score_grants_phase1_skip(score)` — no vendor LMS.
 
 ## Picture: two skip classes
 
@@ -53,7 +53,7 @@ flowchart LR
 
 ## Practice
 
-Draw the map. Point at `labs/0.2/0.2-bridge` file `diagnostic.py`.
+Mark `diagnostic.py` under `labs/0.2/0.2-bridge`.
 
 ## Use it somewhere new
 
@@ -65,4 +65,4 @@ Memorized 1.2 answers. Real tooling gaps still need bridges.
 
 ## What this page is not doing
 
-A famous-bugs list as the definition of security. Keys stay out of lessons.
+Scoring a ranked-bugs quiz does not skip Phase 1. Keys stay out of lessons.

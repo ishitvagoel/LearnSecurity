@@ -5,13 +5,13 @@
 
 ## The rule
 
-The notes app this week has an Android phone client, written in Kotlin. The Android app file you install (the APK), the files on the phone, and every JSON field the app sends are **modifiable**. The phone's sandbox (a separate user id, permissions) raises the cost of *other apps* reading this process. It does not make *this* process honest. Last topic (1.2) still lives on the **server**.
+The notes app has an Android phone client, written in Kotlin. The Android app file you install (the APK), the files on the phone, and every JSON field the app sends are **modifiable**. The phone's sandbox (a separate user id, permissions) raises the cost of *other apps* reading this process. It does not make *this* process honest. Last topic (1.2) still lives on the **server**.
 
 > `allow_export({"integrity": "ok"}, "fail")` must be false. `allow_export({"integrity": "ok"}, "play_integrity_pass")` may be true.
 
-What must not happen: **a client `integrity=ok` claim authorizes export**. That is authorization decided on the attacker's CPU.
+A client **`integrity=ok`** bit is enough to grant export. That is authorization decided on the attacker's CPU.
 
-Industry lists talk about how the app talks to the OS and other apps. A platform-integrity check **raises cost**; it does not become 1.2. Play Integrity is a vendor **signal** the server may consult — not a grant. A famous-bugs nickname for “insecure client” is awareness after the cause, not this sentence.
+How the app talks to the OS and other apps is a platform topic, not this rule. A platform-integrity check **raises cost**; it does not become 1.2. Play Integrity is a vendor **signal** the server may consult — not a grant. A famous-bugs nickname for “insecure client” is awareness after the cause, not a grant.
 
 ## Picture: policy on the attacker's CPU
 
@@ -36,14 +36,14 @@ flowchart LR
 
 The store listing and code signing prove *which package id was installed*, not *what that process will send next*.
 
-**A tool is not the rule.** Play Integrity, shrinking the app, SafetyNet brand names, “Kotlin is memory-safe.”
+Play Integrity, shrinking the app, and SafetyNet brand names do not stop a patched APK from sending `integrity=ok`. “Kotlin is memory-safe” does not make this process honest.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | For this rule |
 |---|---|
 | Why it happens | Policy is decided on the attacker’s CPU |
-| What has to be true first | `allow_export({integrity: ok}, fail)` is true |
+| What's already wrong | `allow_export({integrity: ok}, fail)` is true |
 | Trigger | A modified client or a stolen boolean |
 | What it costs | Export without server authority |
 | How you stop it | Ignore client integrity for authorization; server attest plus session 1.2 |
@@ -54,7 +54,7 @@ The store listing and code signing prove *which package id was installed*, not *
 
 Android sandbox defaults are not 1.2. Jetpack libraries do not authorize export. FastAPI will accept `integrity=ok` if you bind it.
 
-The app’s promise is: **this** `allow_export`, client ok plus attest fail is false. The practice folder is `labs/8.1/8.1-lab`. It is local only. It is not a live phone, Play Console, or public app store listing.
+`allow_export`, client ok plus attest fail is false — files in `labs/8.1/8.1-lab`. It is local only. It is not a live phone, Play Console, or public app store listing.
 
 ## What the tool cannot do
 
@@ -68,19 +68,17 @@ If export is denied, say so in a readable message. Do not trap TalkBack users in
 
 ## Practice
 
-Responsibility matrix: client vs server for each 1.1 cell. Then run:
+Responsibility matrix: client vs server for each 1.1 rule. Then run:
 
 ```text
 python3 -m pytest labs/8.1/8.1-lab/tests --impl vulnerable
 python3 -m pytest labs/8.1/8.1-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
-Clinic Android `hipaaMode=true`. Feature flags in the app file. `premium=true`.
+Android `hipaaMode=true` is a client flag, not a server attest. Feature flags in the app file and `premium=true` are the same leftover.
 
 ## What this page is not doing
 
-Live Play Console, device-farm attacks, or instrumentation cookbooks against a personal phone. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not on this site.
+Do not use live Play Console, device-farm attacks, or instrumentation cookbooks against a personal phone. Opening this page does not finish a check-in. Answer keys are not on this site.

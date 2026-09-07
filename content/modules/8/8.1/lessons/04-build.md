@@ -5,11 +5,11 @@
 
 ## The rule
 
-A Compose switch that hides the button is not the fix. Play Integrity checked only in the app is not the fix. Shrinking the app is not the fix.
+A Compose switch that hides the button does not ignore the client boolean. Play Integrity checked only in the app is still the client talking. Shrinking the app does not change `allow_export`.
 
-The structural change is: the server **ignores the client integrity field**. `allow_export` must use `server_attest == "play_integrity_pass"` (a local stand-in for a *server-verified* attestation result). The client JSON is not an input to that check. The server attest decides; ignore the client boolean.
+Repair this: the server **ignores the client integrity field**. `allow_export` must use `server_attest == "play_integrity_pass"` (a local stand-in for a *server-verified* attestation result). The client JSON is not an input to that check. The server attest decides; ignore the client boolean.
 
-The smallest restore for the notes app’s Android export is: client ok plus attest fail denies. Fail-safe: unknown attest **denies**. Do not `or` the client boolean back in. Do not fail open because the attestation service was unreachable.
+Put this in the notes app’s Android export: client ok plus attest fail denies. Unknown attest **denies**. Do not `or` the client boolean back in. An unreachable attestation service is not an allow.
 
 ## Picture: attest on the trusted layer
 
@@ -20,9 +20,9 @@ flowchart TD
   Attest -->|no| Deny[deny]
 ```
 
-The repaired files ignore `client_claims` entirely. Production still needs a real server-side token verify (not this pytest) plus 1.2 session and 4.4 object grants. Play Integrity is a vendor **signal** the server may consult — not a grant. Honest users on rooted phones need an **owned** product policy, not a silent grant (the first page).
+`allow_export` ignores `client_claims` entirely. A real server-side token verify is later, plus 1.2 session and 4.4 object grants. Play Integrity is a vendor **signal** the server may consult — not a grant. Honest users on rooted phones need an **owned** product policy, not a silent grant (the first page).
 
-Industry lists want authorization enforced on a trusted service layer. This pytest is that sentence for `allow_export(..., "fail")`.
+Authorization has to be enforced on a trusted service layer — `allow_export(..., "fail")`.
 
 ## What the repaired files must show
 
@@ -32,7 +32,7 @@ Industry lists want authorization enforced on a trusted service layer. This pyte
 | client ok, attest pass | true |
 | empty client, attest fail | false |
 
-Fail closed: if attest is not `play_integrity_pass`, **do not export**. Do not keep `if integrity == ok` because “the store listing looks trusted.”
+When attest is not `play_integrity_pass`, **do not export**. A trusted-looking store listing does not make a client integrity field enough.
 
 ## What this is not
 
@@ -59,11 +59,9 @@ Name the predicate (`server_attest == "play_integrity_pass"`; client field ignor
 python3 -m pytest labs/8.1/8.1-lab/tests --impl fixed
 ```
 
-Must pass. Run from the lab directory if collection at repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
-Clinic: stop treating a client `hipaaMode` checkbox as the server’s BAA switch.
+Stop treating a client `hipaaMode` checkbox as the server’s BAA switch.
 
 ## What can still go wrong
 

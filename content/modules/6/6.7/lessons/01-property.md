@@ -5,13 +5,13 @@
 
 ## The rule
 
-The notes app lets a member export notes. Export copies note bodies into a CSV. If export can run forever, two things happen: you spend the machine and the bill, and you mint extra copies of the same bodies. Fairness is an **availability and cost** rule, not “ops will scale it.” Module 3.4 already put a cap on shares on the write path. This week’s check is **how many exports in a window**.
+The notes app lets a member export notes. Export copies note bodies into a CSV. If export can run forever, two things happen: you spend the machine and the bill, and you mint extra copies of the same bodies. Fairness is an **availability and cost** rule, not “ops will scale it.” Module 3.4 already put a cap on shares on the write path. The check is **how many exports in a window**.
 
 > `allow(4)` must be false in the lab window. `allow(3)` may be true. The fourth export is denied.
 
-What must not happen is **unbounded exports (fourth allowed)**. That burns availability and cost. It also makes extra CSVs of note bodies, which is a second secrecy problem from the copies lesson (5.1).
+The **fourth export** in the window must stay denied. That burns availability and cost. It also makes extra CSVs of note bodies, which is a second secrecy problem from the copies lesson (5.1).
 
-Industry lists want a stop against scripts that burn quota and costly work. They want per-person and whole-app limits written down, then actually enforced. Human timing tricks are **advanced** work, not this week’s pytest. An edge proxy’s request limit is not this sentence.
+There has to be a stop against scripts that burn quota and costly work. Per-person and whole-app limits written down, then actually enforced. Human timing tricks are **advanced** work, not this check. An edge proxy’s request limit is not the quota check.
 
 ## Picture: a resource account per person
 
@@ -23,9 +23,9 @@ flowchart TD
   Cap -->|no| Deny[Deny]
 ```
 
-Who can act: a scripted member, or anyone who stole a session. What you trust in this practice: local `allow(n)`. An IP limit at the edge with no identity is **shared fate**: people behind one office network share a bucket, and a stolen session is not a new IP.
+Picture a scripted member, or anyone who stole a session. What you trust: local `allow(n)`. An IP limit at the edge with no identity is **shared fate**: people behind one office network share a bucket, and a stolen session is not a new IP.
 
-**The tool (not the rule):** a CAPTCHA, autoscaling, or a frontend that disables the export button.
+**Not the rule:** a CAPTCHA, autoscaling, or a frontend that disables the export button.
 
 ## Picture: extra copies are still copies
 
@@ -42,7 +42,7 @@ A quota is not encryption and not deletion. It bounds how many copies you mint.
 | Slice | For this rule |
 |---|---|
 | Why it happens | No resource account |
-| What has to be true first | `allow(4)` is true |
+| What's already wrong | `allow(4)` is true |
 | Trigger | Fourth export in the window |
 | What it costs | Availability, cost, extra copies |
 | How you stop it | Per-person quota on the write path |
@@ -51,7 +51,7 @@ A quota is not encryption and not deletion. It bounds how many copies you mint.
 
 ## What the framework does vs what you still have to check
 
-A web page with `disabled={count>=3}` is not the server. FastAPI has no default export budget. Autoscaling spends more money; it does not enforce the cap. The app’s promise: `allow(4)` is false in the lab window. The folder is `labs/6.7/6.7-lab`. Fake counts only. No live traffic.
+A web page with `disabled={count>=3}` is not the server. FastAPI has no default export budget. Autoscaling spends more money; it does not enforce the cap. `allow(4)` is false in the lab window — files in `labs/6.7/6.7-lab`. Fake counts only. No live traffic.
 
 ## What the tool cannot do
 
@@ -72,12 +72,10 @@ python3 -m pytest labs/6.7/6.7-lab/tests --impl vulnerable
 python3 -m pytest labs/6.7/6.7-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
-Clinic bulk-export of patients. Notification fan-out. Search complexity later in 7.1.
+A bulk-export of patients is this grain. Notification fan-out is a sibling leftover. Search complexity waits for 7.1.
 
 ## What this page is not doing
 
-Live load tests against public hosts, dumping lab Python into notes. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live load tests against public hosts. This site does not mark you as finished. Answer keys are not on this site.

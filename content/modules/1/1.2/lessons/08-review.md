@@ -3,17 +3,15 @@
 **Kind:** code-review
 **Loop step:** 5 Verify and communicate
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
-
 ## Review
 
-Treat the broken files as a pull request proposing reusable who-is-allowed logic. Your job is not to count suspicious lines. Reconstruct the who-is-allowed relation the code actually implements, compare it with the notes-app rule, and write changes a developer can check.
+Treat the broken files as a pull request proposing reusable who-is-allowed logic. Reconstruct the who-is-allowed relation the code actually implements, compare it with the notes-app rule, and write changes a developer can check.
 
 The folders `labs/1.2/1.2-authority-matrix/vulnerable/authority.py` and `vulnerable/SECURITY.md` are the change.
 
 ## Picture: hunt leftover permission at the mutation
 
-Leftover identity hides in defaults: the function that “already signed in,” the role that lost company scope, the helper that serializes before `decide()`. Classification starts at the protected effect. Everything that is not a current grant check at that effect is a candidate leftover path.
+Leftover identity hides in defaults: the function that “already signed in,” the role that lost company scope, the helper that serializes before `decide()`. Keep the rule. If that effect never checks a current grant, leftover permission still mutates the note.
 
 ```mermaid
 flowchart TD
@@ -131,4 +129,4 @@ Take the broken files from the practice. Write the review that **blocks** them. 
 
 ## What this page is not doing
 
-Live-target steps. Ready-made attack recipes. Merging because a function is named `authorize`. Answer keys are not on this site.
+Do not try live-target steps. Do not use ready-made attack recipes. Do not merge because a function is named `authorize`. Answer keys are not on this site.

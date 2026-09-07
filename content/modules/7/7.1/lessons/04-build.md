@@ -5,11 +5,11 @@
 
 ## The rule
 
-An OpenAPI comment is not the fix. A frontend form that omits the checkbox is not the fix. A denylist of `is_admin` only is not the fix.
+An OpenAPI comment does not stop `is_admin` in the body. A frontend form that omits the checkbox is the client. A denylist of `is_admin` only still lets unknown keys through.
 
-The structural change is: the server **copies named fields**. `apply` must copy `display_name` when present and must not copy `is_admin`. Copy only the allowed display name.
+The restore: the server **copies named fields**. `apply` must copy `display_name` when present and must not copy `is_admin`. Copy only the allowed display name.
 
-The smallest restore for the notes app’s profile PATCH is: `ALLOWED = {"display_name"}`. Fail-safe: unknown keys are skipped (or rejected). Do not fail open because a nested model was allowed to keep extras.
+Restore the notes app’s profile PATCH with this: `ALLOWED = {"display_name"}`. Unknown keys are skipped (or rejected). A nested model keeping extras does not copy unknown keys.
 
 ## Picture: extras never reach the row
 
@@ -20,9 +20,9 @@ flowchart TD
   Allowed -->|no| Skip[skip]
 ```
 
-The repaired files copy only keys in `ALLOWED`. Production still needs the same matrix restated for GraphQL mutation arguments and gRPC unknown fields (the map page). A denylist of `is_admin` only is not the contract — the next privileged field (`tenant_id`, billing flag) will slip through. Leftover `/v0` handlers are another binder of the same body.
+`apply` copies only keys in `ALLOWED`. Restate that matrix for GraphQL mutation arguments and gRPC unknown fields (the map page). A denylist of `is_admin` only is not the contract — the next privileged field (`tenant_id`, billing flag) will slip through. Leftover `/v0` handlers are another binder of the same body.
 
-Industry lists want that per-action limit implemented. This pytest is that sentence for `is_admin`.
+That per-action limit has to be implemented — `is_admin`.
 
 ## What the repaired files must show
 
@@ -32,7 +32,7 @@ Industry lists want that per-action limit implemented. This pytest is that sente
 | PATCH `display_name` | name changes; `is_admin` unchanged |
 | PATCH unknown key | key does not appear on the user |
 
-Fail closed: if the key is not in `ALLOWED`, **do not copy it**. Do not keep `user.update(body)` because “the spec does not list `is_admin`.”
+If the key is not in `ALLOWED`, **do not copy it**. The spec omitting `is_admin` does not make `user.update(body)` safe.
 
 ## What this is not
 
@@ -48,7 +48,7 @@ Fail closed: if the key is not in `ALLOWED`, **do not copy it**. Do not keep `us
 - CSV import, admin BFF, and 7.4 job payloads are additional binders.
 - Unused HTTP methods can still hit a leftover handler (leftover, later, advanced).
 - GraphQL query cost can exhaust budget even when extras are dropped (6.7).
-- Honest `display_name` XSS remains 6.2.
+- A writable display name can still be markup — that is 6.2, not this binder.
 
 ## Practice
 
@@ -58,11 +58,9 @@ Name the predicate (`key in ALLOWED`). Run:
 python3 -m pytest labs/7.1/7.1-lab/tests --impl fixed
 ```
 
-Must pass. Run from the lab directory if collection at repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
-Clinic: stop treating “the form has no is_staff checkbox” as the server contract.
+Stop treating “the form has no is_staff checkbox” as the server contract.
 
 ## What can still go wrong
 

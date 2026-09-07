@@ -1,15 +1,15 @@
-# exception_incomplete_denied without logging secrets
+# Log the incomplete exception, not the secrets
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A new “fast-track risk” form can drop `review_by` after the schema was “set once.” Pair notice and recover. Do not log leftover-risk writeups that contain secrets. Do not paste chart text into the ticket.
+A “fast-track risk” form can drop `review_by`. Keep leftover-risk writeups that contain secrets, and chart text, out of the ticket.
 
 ## Picture: incomplete row is a signal
 
-An accept that skipped owner, review date, or accessibility is a notice-and-recover problem, not a licence to quote secrets in the ticket. Notice names the missing fields. Recover expires the hole or re-accepts with a complete record. Neither reprints a secret.
+If an accept skips owner, review date, or accessibility, page the missing fields — not the secrets. Then expire the hole or re-accept with a complete record.
 
 ```mermaid
 flowchart TD
@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Expire[expire or re-accept]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a governance product. They do not prove this schema. Someone still has to own the leftover.
+A schema screenshot still leaves owner, review date, and accessibility empty.
 
-Re-run `test_exception_needs_owner_review_and_wcag` after any register-form change. A green “maturity 2.5” tile is not that pytest. Expired `review_by` dates are the same family — inventory them before claiming recover.
+Blank owner or `review_by` still has to make `test_exception_needs_owner_review_and_wcag` fail. A maturity 2.5 tile does not fill owner, review date, and accessibility. Expired `review_by` dates are the same unowned hole; do not accept the exception until those rows are named.
 
 ## Signals that do not become a second leak
 
@@ -32,23 +32,21 @@ Re-run `test_exception_needs_owner_review_and_wcag` after any register-form chan
 | Recover | Expire; fix or re-accept with fields |
 | Leftover | Unread register; tech-debt rename |
 
-A governance dashboard will show exception counts and stay silent when CI’s `accept_exception` is always true. Detection must observe **empty owner is deny**, not “we have a risk register.” If the alert includes a secret writeup or chart text, you have opened a leftover-secret leak.
-
-A log line a reviewer can accept looks like:
+Governance exception counts do not mean CI’s `accept_exception` required an owner. Block accept on **empty owner is deny**, not “we have a risk register.” Empty owner is the metric. A secret writeup or chart text is the risk writeup.
 
 ```text
 log_denied reason=exception_incomplete_denied missing=owner,review_by
 ```
 
-Not: a secret, an “assurance gate complete,” or a pledge screenshot.
+A secret, a “check-in complete,” or a pledge screenshot in the exception sample is a trophy wall.
 
-If your alert includes the matching writeup, you have copied the leak into the ticket.
+A matching writeup in the exception alert copies the trophy into the ticket.
 
 ## What the framework does vs what you still have to check
 
-The same always-true accept, unread register, and tech-debt rename that bypass this practice will also bypass a “scan our risk dashboard” detector. Name those places before you claim recover. A maturity-model name is not the rule.
+Always-true accept, unread register rows, and renamed tech-debt still skip owner and `review_by` even if the risk dashboard is green. A maturity score does not fill those fields.
 
-Cause vs cost stays split here too: the **cause** is oral acceptance treated as a row; the **cost** is unowned leftover and inaccessible recovery kept; **how you stop it** is the schema; **how you notice** is `exception_incomplete_denied`; **how you recover** is expire-or-re-accept. What the tool cannot do: this alert does not prove anyone reads the register, and it does not verify the accessibility flag.
+Oral acceptance treated as a row is the skipped check. Unowned leftover and inaccessible recovery kept is what remains. Ship the schema. Page `exception_incomplete_denied`. Recover by expiring or re-accepting. The ticket does not prove anyone reads the register, and it does not verify the accessibility flag.
 
 ## Can people still use it
 
@@ -56,18 +54,16 @@ The exception must record whether people can complete recovery. The deny message
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/E6/e6-lab`.
-
 ```text
 log_denied reason=exception_incomplete_denied missing=owner,review_by
 ```
 
-Reject any line that includes a secret, an “assurance gate complete,” or a pledge screenshot.
+A secret, a “check-in complete,” or a pledge screenshot would turn the log into a trophy wall.
 
 ## Use it somewhere new
 
-Clinic: deny the HIPAA exception; do not paste chart text into the ticket. Do not open a live governance tenant.
+Deny the HIPAA exception; do not paste chart text into the ticket. Do not open a live governance tenant.
 
 ## What this page is not doing
 
-A maturity-model name is not the rule. Do not claim you finished an assurance gate. An unverified pledge stays unverified. Answer keys are not on this site.
+A maturity score does not fill owner and `review_by`. This page does not mark you as finished. An unverified pledge stays unverified. Answer keys are not on this site.

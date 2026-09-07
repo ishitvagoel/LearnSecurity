@@ -3,9 +3,9 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A new JSON share route can forget the token check after `allow_share` was “fixed once.” Pair notice and recover. Do not log cookie values or note bodies. Do not paste cookies into the ticket.
+A JSON share route can skip the token check. Cookies and note bodies do not go in the ticket.
 
 ## Picture: a denied foreign POST is a signal
 
@@ -24,11 +24,11 @@ flowchart TD
 | Recover | Keep deny; revoke grants created in the window; notify the member |
 | Leftover | Lookalike UI the person clicked (phishing lesson); clickjacking |
 
-Industry lists name detect, respond, recover. They do not bind origin and token. They do not prove the anti-forgery check. A network-filter product name is not the rule. Re-run `test_foreign_origin_post_is_denied` after any share-route change; a green “SameSite=Lax” tile is not that pytest. JSON share routes and GET mutate paths are other paths of the same cell — inventory them before you claim recover.
+A network-filter product name does not bind origin and token or prove the anti-forgery check. A foreign origin with no token still has to fail `test_foreign_origin_post_is_denied`. SameSite=Lax does not deny a foreign origin with no token. JSON share routes and GET mutate paths still CSRF if you only locked the HTML form.
 
 ## What the framework does vs what you still have to check
 
-A network filter will page on cross-site POST volume and stay silent when `/share.json` still keys only the cookie. Notice must observe **origin mismatch or missing token at `allow_share`**, not CORS error counts. If the alert includes a session cookie or CSRF token, you have opened a logging cell from an earlier topic.
+Cross-site POST volume can look noisy while `/share.json` still keys only the cookie. Test **origin mismatch or missing token at `allow_share`**, not CORS error counts. A session cookie or CSRF token on `allow_share` is a logging hole from an earlier topic.
 
 ## Can people still use it
 
@@ -36,18 +36,16 @@ If a human sees “share blocked,” announce it in text a screen reader can spe
 
 ## Practice
 
-Write one log line you would accept. Tie it to `labs/6.3/6.3-lab`.
-
 ```text
 log_denied reason=foreign_origin_post_denied expected_host=app.securecollab.test request_id=req_63c
 ```
 
-Reject any line that includes a session cookie, CSRF token, or note body.
+A session cookie, CSRF token, or note body belongs nowhere in this log.
 
 ## Use it somewhere new
 
-Clinic: notice partner-share POSTs from the wrong origin; do not paste cookies into the ticket. Do not visit a live foreign origin.
+Notice partner-share POSTs from the wrong origin; do not paste cookies into the ticket. Do not visit a live foreign origin.
 
 ## What this page is not doing
 
-A network-filter product name is not the rule. Live third-party CSRF is out of scope. This site does not mark you as finished. Answer keys are not on this site.
+A network-filter sticker does not bind origin and token. Do not use live third-party CSRF. This site does not mark you as finished. Answer keys are not on this site.

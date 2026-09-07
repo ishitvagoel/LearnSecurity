@@ -1,33 +1,31 @@
-# Review ORM dumps like a pull request
+# Would you merge this ORM dumps?
 
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
-
 ## What you are reviewing
 
-A colleague ships the notes app’s note JSON. Review `labs/7.2/7.2-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `resolve("member", "secret_internal")` is still true, compare that with the rule, and write changes a developer can verify.
+Read `labs/7.2/7.2-lab/vulnerable/` as a note-JSON change. Does `resolve("member", "secret_internal")` still return true?
 
-The check you already ran (`test_member_cannot_resolve_internal_field`) is the rule check. A comment “will matrix later” is not.
+Until `test_member_cannot_resolve_internal_field` passes, “will matrix later” is unfinished work.
 
 ## Picture: resolver / dump always true
 
-Start with this seeded smell: **resolver / dump always true**. Label it **rule**, **tool**, or **false comfort** before you accept the change.
+**resolver / dump always true**.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would falsify it?"}
   Q -->|member sees secret_internal| Property["Rule - good if tested"]
   Q -->|SPA hides column| Mechanism[Tool - client]
-  Q -->|UUID obscure| False[False comfort]
+  Q -->|UUID obscure| False[False assurance]
 ```
 
-Classification starts at the protected effect (member denied `secret_internal`). Everything that is not a server role×field check at that call is a candidate dump path. A hidden SPA column without that pytest is the same smell, not a different finding class.
+A member still has to be denied `secret_internal`. If the change never checks role×field on the server, that dump path is still open. A hidden SPA column without that check is still the same problem.
 
 Identifiers find a row. They do not authorize fields. Object GET tests (4.4) do not bind this grain. CSV and later workers (7.4) are other serializers — name them, do not skip `test_member_cannot_resolve_internal_field`.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - Resolver / dump always true
 - GraphQL exposes all columns
@@ -42,16 +40,12 @@ Also reject: public GraphQL attacks; closing findings without re-running `test_m
 - Private JSON keys are hidden
 - GraphQL resolvers inherit REST policy magically
 - A UUID is a capability
-- A famous-bugs nickname is the rule
-
-## Practice
-
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one to `test_member_cannot_resolve_internal_field`. Do not open the keys file.
+- A weakness nickname hides SSN
 
 ## Use it somewhere new
 
-A clinic change that “hid SSN in the table” without a member×field deny test is an incomplete mediation review. Name the independent falsehood that would still keep member × SSN false.
+Hiding SSN in the table without a member×field deny still skips mediation. Hiding SSN in the table is not field mediation — write the member×SSN deny.
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will matrix later.” That comment is leftover without an owner. Do not query a public GraphQL host to prove the finding.
+Do not ship a member-readable internal field because a comment promises a field matrix later. Do not query a public GraphQL host to prove the finding.

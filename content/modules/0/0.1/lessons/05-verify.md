@@ -1,16 +1,16 @@
-# Evidence is the public host denied, then a passing pair
+# The public host must be denied
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
-**Standards:** WSTG 4.2 as catalogue, not the oracle; CSF 2.0 GV as outcome language.
+**Standards:** WSTG 4.2 as a list, not the check; CSF 2.0 GV as outcome language.
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-“I’ll be careful” is not evidence. “The guide has an authorization chapter” is a catalogue observation. The check is: `target_is_authorized("https://example.com/")` is false. That must be **false** on `--impl vulnerable` (the helper returns true) and **true** on `--impl fixed`. Do not fetch example.com; the test string is enough.
+Saying you’ll be careful does not authorize the target. An authorization chapter is a heading. `target_is_authorized("https://example.com/")` has to be false. Leftover: `example.com` still counts as authorized. Repair keeps it false. Do not fetch example.com; the test string is enough.
 
 ## Picture: the broken files must fail on the public host
 
-The failing observation on `--impl vulnerable` is **public host**. A passing collection count is not this check.
+The failing observation on `--impl vulnerable` is **public host**. Counting passing tests does not show that example.com is denied.
 
 ```mermaid
 flowchart LR
@@ -25,14 +25,14 @@ flowchart LR
 | Failure | An unparseable host denies (leftover if not in this check) |
 | Not claimed | Following redirects is safe; `/etc/hosts` cannot lie; the first check-in is done; a testing-guide dashboard is green |
 
-The checks live in `labs/0.1/0.1-orientation/tests/test_scope.py`. The second one is a **what-must-not-happen** check: a public host treated as allowed must not count as a passing control.
+Open `labs/0.1/0.1-orientation/tests/test_scope.py`. Treat a public host as allowed and the second check has to stay red.
 
 ```text
 python3 -m pytest labs/0.1/0.1-orientation/tests --impl vulnerable
 python3 -m pytest labs/0.1/0.1-orientation/tests --impl fixed
 ```
 
-Honest localhost tests may pass on both. If the broken files do not fail the public-host assertion, the practice is miswired — fix the wiring, not the assertion.
+A localhost URL that is on the list may pass on both sides. If the broken files do not fail the public-host assertion, the practice is miswired — fix the wiring, not the assertion.
 
 ## What the checks do not prove
 
@@ -43,15 +43,13 @@ Honest localhost tests may pass on both. If the broken files do not fail the pub
 - Guide coverage of an in-scope app
 - The first check-in is done
 
-Write those down as leftover risk or later topics, not as silent passes.
-
 ## Practice
 
-Run both versions this session. Write the fail/pass pair next to your matrix row. Reject a “test” that only greps `ALLOWED_HOSTS` in a string without calling `target_is_authorized` on the public literal.
+Call `target_is_authorized` on the public literal. An `ALLOWED_HOSTS` string is the list name, not the public-host deny.
 
 ## Use it somewhere new
 
-Contractor: a test that only asserts “the guide says authorization testing exists” is not this check. A test that fetches the customer WordPress is out of scope.
+Contractor: a chapter titled authorization testing is a heading, not the public-host deny. Do not run a test that fetches the customer WordPress.
 
 ## What this page is not doing
 

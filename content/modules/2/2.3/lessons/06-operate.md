@@ -3,13 +3,13 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A new cookie, a WebView, a “debug” `Set-Cookie`, or a second name (`sc_refresh`) can drop the flag. Pair notice and recover. Do not log session values, note bodies, or recovery codes.
+A new cookie, a WebView, a “debug” `Set-Cookie`, or a second name (`sc_refresh`) can drop the flag. Do not log session values, note bodies, or recovery codes.
 
 ## Picture: scan the flags, rotate if script could have read
 
-A missing HttpOnly flag is a notice-and-recover problem, not a licence to paste the session into a ticket. Notice names the cookie. Recover rotates it. Neither logs the value.
+A missing HttpOnly flag should name the cookie — do not paste the session into a ticket. Then rotate it. Do not log the value.
 
 ```mermaid
 flowchart TD
@@ -19,7 +19,7 @@ flowchart TD
   Log --> Rotate[Rotate session ids]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a log product. They do not prove a checklist. Report-Only CSP is a **different** notice path. It does not restore this rule.
+A log product and a checklist name do not restore this rule. Report-Only CSP is a **different** notice path.
 
 | Outcome | This topic |
 |---|---|
@@ -29,21 +29,19 @@ Industry lists name detect, respond, recover. They do not pick a log product. Th
 | Recover | Rotate session ids; fix the setter; re-run `test_script_cannot_read_httponly_session` |
 | Leftover | Extensions; physical access; XSS that never needed the cookie |
 
-A log line a reviewer can accept looks like:
-
 ```text
 cookie_denied reason=missing_httponly name=sc_session env=staging request_id=req_4b11
 ```
 
-Not: `synthetic-session`, a note body, or a personal mailbox.
+Filing `synthetic-session`, a note body, or a personal mailbox with the sample is a second session dump.
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/2.3/2.3-browser-policy`. Reject any line that includes the dummy session value. Name who owns the WebView leftover and what trigger reopens it.
+The dummy session value has no place on the deny line. Page who owns the WebView leftover and what would reopen it — not the session value.
 
 ## Use it somewhere new
 
-Clinic portal. Staging scans must include WebView or second-cookie names, not only `sc_session`. A privacy-safe notice still has no chart text.
+Staging scans of the portal must include WebView or second-cookie names, not only `sc_session`. A privacy-safe notice still has no chart text.
 
 ## Can people still use it
 
@@ -51,4 +49,4 @@ The alternate path after rotation (sign in again) must itself meet keyboard, nam
 
 ## What this page is not doing
 
-A log-product name is not the rule. Answer keys are not on this site.
+Answer keys are not on this site.

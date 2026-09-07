@@ -1,15 +1,15 @@
-# finding_closed_without_retest without logging bodies
+# Notice a close without a retest, without logging notes
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A closer can still mark Done after `close_finding` was "fixed once." Pair notice and recover. Do not log note bodies from the original finding. Do not attach patient JSON to the ticket. Do not paste a live-target URL into chat.
+A closer can still mark Done without replaying the same isolation check. Skip original finding bodies and patient JSON in the ticket. Do not paste a live-target URL into chat.
 
 ## Picture: close without retest is a signal
 
-A close that skipped retest is a notice-and-recover problem, not a licence to quote the note in the paging channel. Notice names the finding. Recover reopens and re-runs the same isolation pytest. Neither reprints the body.
+If a finding is closed without a retest, page the finding id — not the finding text. Then reopen and re-run the same isolation check.
 
 ```mermaid
 flowchart TD
@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Reopen[reopen]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a ticket product. They do not prove this finding was retested. Someone still has to own the leftover.
+Moving a ticket to Done does not replay the finding.
 
-Re-run `test_cannot_close_without_retest` after any close-workflow change. A green "PDF attached" tile is not that pytest. Extra fields on the note and a role-change cache are other bad results in the same family — inventory them before you claim recover.
+Close without a pass on the same URL still has to fail `test_cannot_close_without_retest`. Attaching a PDF does not prove the finding was retested. Extra fields on the note and a role-change cache can reopen the same hole; do not close the ticket until those paths are named.
 
 ## Signals that do not become a second leak
 
@@ -29,26 +29,24 @@ Re-run `test_cannot_close_without_retest` after any close-workflow change. A gre
 | Notice | `finding_closed_without_retest` |
 | What the line holds | Finding id, rule id; **never** bodies |
 | Respond | Stop the closer that ignored retest; do not paste note text into chat |
-| Recover | Reopen; run the same isolation pytest |
+| Recover | Reopen; run the same isolation check |
 | Leftover | Variants; severity vs business priority; role-change caches |
 
-A ticket dashboard will show Done counts and stay silent when CI's `close_finding` is always true. Detection must observe **retest None is deny**, not ticket volume. If the alert includes a note body or a patient row, you have opened a leftover-body leak.
-
-A log line a reviewer can accept looks like:
+Ticket Done counts do not mean CI's `close_finding` required a retest. Reopen on **retest None is deny**, not ticket volume. File a note body or a patient row with the lab, not with `finding_closed_without_retest`.
 
 ```text
 log_denied reason=finding_closed_without_retest finding=F-authz-1
 ```
 
-Not: a note body, a live-target URL, or "assurance gate complete."
+A note body, a live-target URL, or "check-in complete" in the retest sample is a live-target list.
 
-If your alert includes the matching note, you have copied the leak into the paging channel.
+The retest ticket needs the finding id. Another copy of the note is the finding itself.
 
 ## What the framework does vs what you still have to check
 
-The same wrong-URL `"pass"`, extra-field variants, and role-change caches that bypass this practice will also bypass a "scan our ticket dashboard" detector. Name those places before you claim recover. A ticket-product name is not the rule.
+A `"pass"` on the wrong URL, extra-field variants, and role-change caches still close the ticket while the hole is open.
 
-Cause vs cost stays split here too: the **cause** is close looking at intent (PDF, ticket Done) instead of `retest == "pass"`; the **cost** is an isolation hole that looks fixed; **how you stop it** is the retest equality; **how you notice** is `finding_closed_without_retest`; **how you recover** is reopen and re-run the same isolation pytest. What the tool cannot do: this alert does not prove the `"pass"` hit the same URL, and it does not search extra fields or role-change caches.
+Close looking at intent (PDF, ticket Done) instead of `retest == "pass"` is the decision that failed. An isolation hole that looks fixed is the later mess. The retest equality belongs on the path. `finding_closed_without_retest` is the page. Recover by reopen and re-run the same isolation check. This alert does not prove the `"pass"` hit the same URL, and it does not search extra fields or role-change caches.
 
 ## Can people still use it
 
@@ -56,18 +54,16 @@ A reopen notice must say *why* the finding stayed open (missing retest), not onl
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/9.5/9.5-lab`.
-
 ```text
 log_denied reason=finding_closed_without_retest finding=F-authz-1
 ```
 
-Reject any line that includes a note body, a live-target URL, or "assurance gate complete."
+A note body, a live-target URL, or "check-in complete" would make the log a live-target list.
 
 ## Use it somewhere new
 
-Clinic: reopen the PDF-shelf ticket; do not attach patient rows. Do not pentest a live clinic system.
+Reopen the PDF-shelf ticket; do not attach patient rows. Do not pentest a live clinic system.
 
 ## What this page is not doing
 
-A ticket-product name is not the rule. Do not claim you finished an assurance gate. A known-exploited listing is not a scan licence. Answer keys are not on this site.
+This page does not mark you as finished. A known-exploited listing is not permission to scan. Answer keys are not on this site.

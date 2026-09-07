@@ -5,11 +5,11 @@
 
 ## Could someone else name the exception check from your roadmap?
 
-“We have a risk meeting” is not this lesson. A drawing someone else can test names **owner, review_by, wcag_checked, expiry, and who may accept**.
+Keep **owner, review_by, wcag_checked, expiry, and who may accept**; “We have a risk meeting” is not that list.
 
-This week’s freeze for the notes app: local `accept_exception(exc)`. No live disclosure inbox.
+`accept_exception(exc)` — no live disclosure inbox.
 
-> For accept, the rule is deny when owner is empty, deny when `review_by` is missing, and deny when `wcag_checked` is missing. A dated owner plus an accessibility flag may accept. Evidence that the deny is false: `accept_exception({"owner": "", "review_by": None})` returns true.
+> For accept, the rule is deny when owner is empty, deny when `review_by` is missing, and deny when `wcag_checked` is missing. A dated owner plus an accessibility flag may accept. You can see the hole: `accept_exception({"owner": "", "review_by": None})` returns true.
 
 If those three fields are blank, the hole ships because nobody named the check.
 
@@ -33,11 +33,11 @@ flowchart LR
   Road --> NotNow[not accept_exception]
 ```
 
-A one-year slide is a plan. It is not this week’s hole. A process-maturity score still does not write the row.
+A one-year slide is a plan. It is not the hole named above. A process-maturity score still does not write the row.
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the exception you already have and ask what would show it is still incomplete.
+Take the exception you already have and ask what would show it is still incomplete.
 
 | Piece | This system |
 |---|---|
@@ -63,11 +63,11 @@ A missing owner is how a spoken yes becomes “accepted.” Write the hole.
 
 ## Practice
 
-Draw the map so someone else could name the checks. Point at `labs/E6/e6-lab` file `risk.py`.
+Label `risk.py` under `labs/E6/e6-lab`.
 
 ## Use it somewhere new
 
-Clinic HIPAA exception with no review date. Same grain.
+A HIPAA exception with no review date is the same grain.
 
 ## What can still go wrong
 
@@ -75,4 +75,4 @@ Unread register. Inaccessible recovery left unchecked. Anyone can type an owner 
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

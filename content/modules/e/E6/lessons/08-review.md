@@ -1,40 +1,38 @@
-# Review always-accept exception like a pull request
+# Would you merge this always-accept exception?
 
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
-
 ## What you are reviewing
 
-A colleague ships the notes app’s leftover-risk register. Review `labs/E6/e6-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `accept_exception({"owner": "", "review_by": None})` still returns true, compare that with the rule, and write changes a developer can verify.
+The files in `labs/E6/e6-lab/vulnerable/` are the leftover-risk register. Does `accept_exception({"owner": "", "review_by": None})` still return true?
 
-Start at `accept_exception` and the empty-owner row, not at a scanner color or a maturity screenshot. The check you already ran (`test_exception_needs_owner_review_and_wcag`) is the rule test. A comment “will add dates later” is not.
+Read `accept_exception` and the empty-owner row first. A maturity screenshot can wait. `test_exception_needs_owner_review_and_wcag` still fails if the only change is “will add dates later.”
 
 ## Picture: accept with empty owner
 
-Start with this seeded smell: **Accept with empty owner**. Label it rule, tool, or false comfort before you accept the change.
+**Accept with empty owner**.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|empty owner accepted| Property["Rule - good if tested"]
   Q -->|ticket type named risk| Mechanism[Tool - ticket]
-  Q -->|maturity mapped| False[False comfort]
+  Q -->|maturity mapped| False[False assurance]
 ```
 
-Classification starts at the protected effect (empty owner denied). Everything that is not the schema at that call is a candidate always-accept path. A maturity screenshot without that pytest is the same smell, not a different finding class.
+An empty owner still has to be denied. If the change never checks the schema, that always-accept leftover is still open. A maturity screenshot does not replace that check.
 
-Unread register is leftover. Tech-debt rename is leftover. Do not skip `test_exception_needs_owner_review_and_wcag`. Do not claim you finished an assurance gate. Do not contact a live disclosure inbox to prove the finding.
+Unread register is leftover. Tech-debt rename is leftover. This page does not mark you as finished. Do not contact a live disclosure inbox to prove the finding.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - Accept with empty owner
 - No `review_by`
 - Accessibility not in the schema
 - Maturity slide as the exception
 
-Also reject: live disclosure; shipping without re-running `test_exception_needs_owner_review_and_wcag`; keys in learner notes; claiming an assurance gate; treating an unverified pledge as proven.
+Also reject: live disclosure; shipping without re-running `test_exception_needs_owner_review_and_wcag`; keys in learner notes; treating this exception lesson as a check-in; treating an unverified pledge as proven.
 
 ## Common mix-ups
 
@@ -44,13 +42,9 @@ Also reject: live disclosure; shipping without re-running `test_exception_needs_
 - A maturity score is the register
 - A HIPAA slide is `accept_exception`
 
-## Practice
-
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_exception_needs_owner_review_and_wcag`. Do not open the keys file.
-
 ## Use it somewhere new
 
-Clinic change that “added a HIPAA slide and a maturity score” without owner / review / accessibility is an incomplete register review. Name the independent falsehood that would still keep empty owner from accepting.
+A HIPAA slide and a maturity score, without owner / review / accessibility, do not fill the register. A HIPAA slide is not owner/review/accessibility — write the empty-owner reject.
 
 ## Can people still use it
 
@@ -58,4 +52,4 @@ A deny notice must say why the exception stayed incomplete (missing owner, revie
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will add dates later.” That comment is leftover without an owner. Do not email a vendor disclosure inbox to prove the finding.
+An exception row with no owner and only “will add dates later” is still unowned leftover. Do not email a vendor disclosure inbox to prove the finding.

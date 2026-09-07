@@ -1,15 +1,15 @@
-# crash_body_redacted without logging the body
+# Redact the crash report without logging the note
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A new SDK version can turn “include extras” back on after `crash_report` was “fixed once.” Pair notice and recover. Do not log the body you just redacted (3.1). Do not attach the report body to the ticket.
+A crash-SDK bump can turn “include extras” back on. Do not paste the redacted note or the report body back in.
 
 ## Picture: body in telemetry is a signal
 
-A redaction miss is a notice-and-recover problem, not a licence to quote the note in the paging channel. Notice names the crash. Recover purges the vendor copy. Neither reprints the body.
+If a crash report still holds the note, page the crash id — not the crash body. Then purge the vendor copy.
 
 ```mermaid
 flowchart TD
@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Purge[Purge vendor copy]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a crash product. They do not prove this report is clean. Someone still has to own the leftover.
+The crash vendor does not omit the note for you.
 
-Re-run `test_crash_report_omits_note_body` after any crash-SDK change. A green “store privacy form filled” tile is not that pytest. Tracker SDKs and web crash reports (10.5) are other places for the same body — inventory them before you claim recover.
+If the crash payload still holds the note, `test_crash_report_omits_note_body` is the check. Filling the store privacy form does not omit the note. Tracker SDKs and web crash reports (10.5) can still carry the note; redaction is not done until those sinks are named.
 
 ## Signals that do not become a second leak
 
@@ -32,21 +32,19 @@ Re-run `test_crash_report_omits_note_body` after any crash-SDK change. A green �
 | Recover | Keep the redact; purge the vendor copy; tell people if needed |
 | Leftover | The vendor as a processor; screenshots; frozen-app traces; leftover `READ_LOGS` |
 
-A crash dashboard will show crash counts and stay silent when the last extra still holds the note. Detection must observe **`'secret'` absent**, not vendor uptime. If the alert includes the note body, you have opened the same leak as a log line (3.1) and an extra vendor copy (5.1).
-
-A log line a reviewer can accept looks like:
+Crash-count tiles stay green even if the last extra still holds the note. Fail the extra on **`'secret'` absent**, not vendor uptime. The crash metric is `'secret'` absent. The note body is a log-line leak (3.1) and an extra vendor copy (5.1).
 
 ```text
 log_denied reason=crash_body_redacted crash_id=cr_85e app=release
 ```
 
-Not: a note body, a patient name, or a live crash payload.
+A note body, a patient name, or a live crash payload turns the crash sample into another dump.
 
-If your alert includes the matching report, you have copied the leak into the paging channel.
+The crash report belongs in the lab folder; the pager only needs the crash id.
 
 ## What the framework does vs what you still have to check
 
-The same leftover `READ_LOGS` path, tracker SDK extras, and web crash drains that bypass this practice will also bypass a “scan our crash dashboard” detector. Name those places before you claim recover. A crash-product name is not the rule.
+Leftover `READ_LOGS`, tracker extras, and web crash drains still carry the note even if the crash dashboard is green.
 
 ## Can people still use it
 
@@ -54,18 +52,16 @@ In-app “send feedback” must not require attaching a screenshot of the note t
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/8.5/8.5-lab`.
-
 ```text
 log_denied reason=crash_body_redacted crash_id=cr_85e app=release
 ```
 
-Reject any line that includes a note body, a patient name, or a live crash payload.
+A note body, a patient name, or a live crash payload in the log is a second crash dump.
 
 ## Use it somewhere new
 
-Clinic: notice a crash that would have included a fake name; do not attach the report body to the ticket. Do not call a live vendor.
+Notice a crash that would have included a fake name; do not attach the report body to the ticket. Do not call a live vendor.
 
 ## What this page is not doing
 
-A crash-product name is not the rule. Live vendor traces are out of scope. Answer keys are not on this site.
+Do not use live vendor traces. Answer keys are not on this site.

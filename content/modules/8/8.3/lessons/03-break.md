@@ -5,21 +5,19 @@
 
 ## Try it
 
-The practice is not a phone you attack. It is a tiny Python `open_link(query)` / `current_user()`. The failure is already in the function: extras become the user, so `as=admin` switches the session. You are here to see that a deep link `as=` switching the signed-in user is **a failed rule**, not a trophy against a public app.
-
-The rule under test:
+The practice is not a phone you attack. `open_link(query)` / `current_user()`: extras become the user, so `as=admin` switches the session. You do not need a public app to see that switch.
 
 > After `open_link({"as": "admin"})`, `current_user()` must still be `"alice"`. The Intent is untrusted input.
 
 ## Where you may practice
 
-Only `labs/8.3/8.3-lab` is in scope. The helper is an in-process `open_link(query)` / `current_user()`. Fake query dicts (`as`, `note`). It does not open a network. Do not send Intents at a live app, sideload an attacker APK, or probe a public deep link.
+Stay inside `labs/8.3/8.3-lab`. Fake query dicts (`as`, `note`) land in `open_link(query)` / `current_user()`. It does not open a network. Do not send Intents at a live app, sideload an attacker APK, or probe a public deep link.
 
 Do not paste this exercise onto a public app, employer clinic, or live EHR.
 
-What must not happen: **`as=admin` switches the session**. After `open_link({"as": "admin"})`, `current_user()` is `"admin"`.
+After `open_link({"as": "admin"})`, `current_user()` `"admin"` is the **`as=` switch**.
 
-Attacker capability in this practice: another app on the tablet sending extras, or a crafted link. That stands in for a clinic kiosk demo `as=doctor`, an exported Activity, or a WebView that forwards query identity. What you trust: `open_link` is supposed to treat extras as **data** (2.1 / 7.1); the session stays server-issued (4.3). Verified App Links, `https`, and `exported=false` without a test are not what you trust for this cell.
+Picture another app on the tablet sending extras, or a crafted link — a clinic kiosk demo `as=doctor`, an exported Activity, or a WebView that forwards query identity. `open_link` is supposed to treat extras as **data** (2.1 / 7.1); the session stays server-issued (4.3) — not Verified App Links, `https`, or `exported=false` without a test.
 
 ## Picture: extras become the user
 
@@ -28,9 +26,9 @@ flowchart TD
   Q["as admin"] --> Session["current_user admin"]
 ```
 
-The broken files show **cause** (identity from the link). Do not send Intents at anything except these local files. What has to be true first: `open_link` copies `as` onto the session. You do not need Android. You must not install a malware APK.
+Identity comes from the link. Do not send Intents at anything except these local files. `open_link` copies `as` onto the session. You do not need Android. You must not install a malware APK.
 
-Last topic already said the session is identity (4.3). This cell is **the Intent must not become the principal**.
+Last topic already said the session is identity (4.3). This rule is **the Intent must not become the principal**.
 
 ## What to read in the broken files
 
@@ -39,17 +37,13 @@ Last topic already said the session is identity (4.3). This cell is **the Intent
 - `test_deeplink_as_param_does_not_switch_user`
 - `test_note_deep_link_keeps_session` — locators must not switch users either
 
-You do not need a new query key. The failure of `test_deeplink_as_param_does_not_switch_user` *is* the evidence.
-
-Do not open the repaired files yet. Diagnose the cause first.
-
 ## Why it happens vs what it costs
 
 | Slice | This practice |
 |---|---|
 | Required rule | After `open_link({"as": "admin"})`, `current_user()` is still `"alice"` |
 | Why it happens | Identity taken from the link |
-| What has to be true first | `as` in the query is copied onto the session |
+| What's already wrong | `as` in the query is copied onto the session |
 | Trigger | Other app on the tablet, or a crafted link |
 | What it costs | Local privilege / account switch |
 | How you stop it | Do not take identity from links; session stays server-issued |
@@ -59,7 +53,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-`exported=true` defaults on old Android. Custom schemes are first-come, first-served. Verified App Links prove the *host* is associated with the app; they still deliver the query string. FastAPI will bind `as=admin` if you put it on a cookie. The app’s promise is: **this** helper, alice stays alice.
+`exported=true` defaults on old Android. Custom schemes are first-come, first-served. Verified App Links prove the *host* is associated with the app; they still deliver the query string. FastAPI will bind `as=admin` if you put it on a cookie. Alice stays alice.
 
 ## Practice
 
@@ -67,11 +61,11 @@ Do not open the repaired files yet. Diagnose the cause first.
 python3 -m pytest labs/8.3/8.3-lab/tests --impl vulnerable
 ```
 
-Run from `labs/8.3/8.3-lab` if a repo-root collection picks up `site/`. Record `test_deeplink_as_param_does_not_switch_user`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/8.3/8.3-lab` if a repo-root collection picks up `site/`. Do not “fix” the check to pass. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic `as=doctor`. Predict without leaving this directory. Do not send Intents at a live EHR.
+An exported Activity can copy `as=doctor` in extras. Predict without leaving this directory. Do not send Intents at a live EHR.
 
 ## What this page is not doing
 

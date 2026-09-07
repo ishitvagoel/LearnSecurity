@@ -5,11 +5,11 @@
 
 ## The rule
 
-A denylist of yesterday’s hostnames is not the fix. Training people to read the URL is not the fix. “We use Okta” is not the fix. `autocomplete=webauthn` is not the fix.
+Yesterday's hostname list does not stop a look-alike page. Training people to read the URL bar does not stop it either. An Okta logo does not stop a look-alike page. `autocomplete=webauthn` is extra encoding, not the check.
 
-The structural change is: `phishing_resistant` returns false unless the method is `webauthn` **and** `origin == expected`. Origin / RP ID is in the predicate.
+Change this: `phishing_resistant` returns false unless the method is `webauthn` **and** `origin == expected`. Origin / RP ID is in the predicate.
 
-The smallest restore for notes-app login copy is: passwords and OTP never claim resistance; WebAuthn claims it only when origin matches the relying party. Fail closed: an unknown method denies. Passwords at the *real* origin may still log someone in; they must not be *labeled* resistant.
+For login copy: passwords and OTP never claim resistance; WebAuthn claims it only when origin matches the relying party. An unknown method denies. Passwords at the *real* origin may still log someone in; they must not be *labeled* resistant.
 
 ## Picture: method, then origin
 
@@ -24,7 +24,7 @@ flowchart TD
 
 The repaired files branch on method, then origin equality. A live WebAuthn path still needs a keyboard and a name a screen reader can use. Prompt bombing and recovery SMS put a phishable secret back on the path — name them as leftovers, not silent passes.
 
-“2FA exists” is not this pytest. This pytest is the **phishing-resistant claim**.
+“2FA exists” does not make a password phishing-resistant. The check is the **phishing-resistant claim**.
 
 ## What the repaired files must show
 
@@ -35,7 +35,7 @@ The repaired files branch on method, then origin equality. A live WebAuthn path 
 | webauthn + lookalike origin | false |
 | webauthn + real origin | true |
 
-Fail closed: on an unknown method, **deny**. Do not repair by returning true because “the method is enrolled.”
+When facing an unknown method, **deny**. Do not repair by returning true because “the method is enrolled.”
 
 ## What this is not
 
@@ -61,8 +61,6 @@ Name method, origin, and the predicate (webauthn **and** origin == expected). Ru
 ```text
 python3 -m pytest labs/4.2/4.2-lab/tests --impl fixed
 ```
-
-Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
 ## Use it somewhere new
 

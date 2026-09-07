@@ -2,11 +2,11 @@
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** CSF 2.0 GV. WSTG 4.2 as method catalogue.
+**Standards:** CSF 2.0 GV. WSTG 4.2 as method list.
 
 ## Can a second person name the host check from your scope sheet?
 
-“I’ll be careful” is not this lesson. A reviewable picture names **allowed hosts, when you stop, and what you do not fetch**.
+“I’ll be careful” still leaves out **allowed hosts, when you stop, and what you do not fetch**.
 
 For the notes app: a local `target_is_authorized(url)` helper. Do not open example.com.
 
@@ -55,7 +55,7 @@ flowchart LR
 
 ## Practice
 
-Draw the map. Point at `labs/0.1/0.1-orientation` file `scope.py`.
+Start at `scope.py` under `labs/0.1/0.1-orientation`.
 
 ## Use it somewhere new
 
@@ -67,4 +67,4 @@ Redirects; hosts-file aliases.
 
 ## What this page is not doing
 
-A “top ten bugs” list as the definition of security. Answer keys are not on this site.
+Circling “top ten bugs” does not set `target_is_authorized`. Answer keys are not on this site.

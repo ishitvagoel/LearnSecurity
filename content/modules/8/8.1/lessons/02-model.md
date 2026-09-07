@@ -5,11 +5,11 @@
 
 ## Could someone else name the checks from your map?
 
-“The phone is sandboxed” is not this lesson. A map someone else can test names **which cell the server still owns**.
+“The phone is sandboxed” still leaves out **which cell the server still owns**.
 
-This week’s freeze: the notes app’s local `allow_export(client_claims, server_attest)`. Android and Kotlin first. No live phones.
+`allow_export(client_claims, server_attest)` — Android and Kotlin first. No live phones.
 
-## Picture: every 1.1 cell has an owner
+## Picture: every 1.1 rule has an owner
 
 ```mermaid
 flowchart TD
@@ -31,7 +31,7 @@ flowchart LR
 
 A missing or failed attest **denies**. A passed attest still needs the 1.2 grant (4.4 / 6.7 quota).
 
-## Step 1: freeze the pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|
@@ -55,7 +55,7 @@ A missing or failed attest **denies**. A passed attest still needs the 1.2 grant
 
 ## Practice
 
-Draw the matrix. Point at `labs/8.1/8.1-lab` file `client.py`. Label even in the repaired tree: the server attest decides; the client boolean is not what you trust.
+The sketch is `client.py` under `labs/8.1/8.1-lab`. After repair, the server attest still decides; the client boolean is still not what you trust.
 
 ## Use it somewhere new
 
@@ -67,4 +67,4 @@ Attestation farms (8.4); rooted honest users; iOS App Attest as a later mirror, 
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

@@ -1,7 +1,7 @@
 # Security is a claim about what must stay true
 
-**Kind:** concept-model  
-**Loop step:** 1 Property  
+**Kind:** concept-model 
+**Loop step:** 1 Property 
 **Standards:** Saltzer and Schroeder (1975, seminal) for named protection principles; NIST CSF 2.0 (final) for outcome functions, not a control catalogue.
 
 ## The question that comes before tools

@@ -1,33 +1,31 @@
-# Review always-true api_allowed like a pull request
+# Would you merge this always-true api_allowed?
 
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
-
 ## What you are reviewing
 
-A colleague ships the notes app’s prod export gating. Review `labs/8.4/8.4-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `api_allowed("debug", "ok")` still returns true, compare that with the rule, and write changes a developer can verify.
+The files in `labs/8.4/8.4-lab/vulnerable/` are the prod-export gate. Does `api_allowed("debug", "ok")` still return true?
 
-The check you already ran (`test_debug_build_cannot_call_prod_export`) is the rule check. A comment “we should split flavors later” is not. An R8 screenshot is not this review.
+If `test_debug_build_cannot_call_prod_export` still fails, “we should split flavors later” is not the review. An R8 screenshot does not split debug from prod.
 
 ## Picture: api_allowed debug+ok true
 
-Start with this seeded smell: **`api_allowed` debug+ok true**. Label it **rule**, **tool**, or **false comfort** before you accept the change.
+**`api_allowed` debug+ok true**.
 
 ```mermaid
 flowchart TD
   Claim[Change claim] --> Q{"What would prove it false?"}
   Q -->|debug plus ok allowed| Property["Rule — good if checked"]
   Q -->|minifyEnabled| Mechanism[Tool — cost]
-  Q -->|Play App Signing| False[False comfort]
+  Q -->|Play App Signing| False[False assurance]
 ```
 
-Classification starts at the protected effect (debug plus ok denied). Everything that is not a server `release` and attest check at that call is a candidate debug-to-prod path. An R8 screenshot without that pytest is the same smell, not a different finding class.
+Debug plus ok still has to be denied. If the change never checks a server `release` and attest, that debug-to-prod path is still open. An R8 screenshot without that check is still the same problem.
 
 Signing keys in the repo (5.3) and the same API key in debug and release are other leftover holes — name them, do not skip `test_debug_build_cannot_call_prod_export`. Resilience checklists raise cost; they do not become Gate 8 evidence.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - `api_allowed` debug+ok true
 - Signing key in the repo
@@ -42,16 +40,12 @@ Also reject: live store reverse engineering; closing findings without re-running
 - Play App Signing means we do not care
 - Anti-debug proves the server can trust the client
 - Mobile-app “R-level” is a current verification level
-- `minifyEnabled` is this cell
-
-## Practice
-
-Write three review notes a peer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_debug_build_cannot_call_prod_export`. Do not open the keys file.
+- `minifyEnabled` is this rule
 
 ## Use it somewhere new
 
-A clinic change that “enabled R8 and Play App Signing” without a debug-to-prod deny check is an incomplete channel review. Name the independent falsehood that would still keep debug plus ok false.
+R8 and Play App Signing without a debug-to-prod deny still leave the debug channel open. R8 is not a debug-to-prod deny — write that deny.
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will split flavors later.” That comment is leftover without an owner. Do not unpack a store APK to prove the finding.
+Someone still has to split debug from prod; “will split flavors later” does not do that. Do not unpack a store APK to prove the finding.

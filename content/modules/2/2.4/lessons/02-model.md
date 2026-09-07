@@ -5,9 +5,9 @@
 
 ## Could someone else name checks from your machine?
 
-A sequence diagram that says “owner clicks Share” is not this page. A state machine names **which events** may fire twice and **what the share table must still contain**.
+Until you have **which events** may fire twice and **what the share table must still contain**, A sequence diagram that says “owner clicks Share” is still a slogan.
 
-This week’s freeze: a local `share_note` practice. No payment processor, no live queue, no NTP lab.
+`share_note` is a local practice. No payment processor, no live queue, no NTP lab.
 
 ## Picture: pending, shared, and retry
 
@@ -25,7 +25,7 @@ flowchart TD
 
 If `RetrySame` draws a second arrow into a **new** row, the map already predicts `test_retry_does_not_duplicate_side_effect` will fail.
 
-## Step 1: freeze who, what, and time
+## Step 1: name who, what, and when
 
 | Piece | This system |
 |---|---|
@@ -44,9 +44,9 @@ If `RetrySame` draws a second arrow into a **new** row, the map already predicts
 |---|---|---|---|
 | owner | n1 | share once, key k1 | allow; count 1 |
 | owner | n1 | share retry, same k1 | no second row; count 1 |
-| owner | n1 | share new key k2 | who-is-allowed policy (cap, recipient); not this pytest |
+| owner | n1 | share new key k2 | who-is-allowed policy (cap, recipient); not this check |
 | worker | n1 | redeliver k1 | same as retry (write the hole) |
-| handler | key store down | share | fail closed; do not insert |
+| handler | key store down | share | deny; do not insert |
 
 ## Step 3: clocks and uniqueness
 
@@ -54,7 +54,7 @@ Do not use “timestamp rounded to the second” as the key. Skew and two client
 
 ## Practice
 
-Draw the machine so someone else could name pytest cases. Point at `labs/2.4/2.4-state-time` file `share.py`. Label missing-key behavior as leftover (the lab still shares once if the key is omitted).
+Start at `share.py` under `labs/2.4/2.4-state-time`. Label missing-key behavior as leftover (the lab still shares once if the key is omitted).
 
 ## Use it somewhere new
 
@@ -66,4 +66,4 @@ A lost first response still needs a path so the owner can see the existing share
 
 ## What this page is not doing
 
-Treating an awareness list as the definition of security. Answer keys are not on this site.
+Circling “race condition” does not add the share key. Answer keys are not on this site.

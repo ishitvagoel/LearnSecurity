@@ -3,13 +3,13 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-Even after the key includes the company, someone can still leak a body: a CDN config change, a new node, stale-while-revalidate serving an old path-only entry. Running it for real is the rest of the loop: notice, contain, restore, and refuse to “help” by logging note bodies.
+A CDN change, a new node, or stale-while-revalidate can still serve a path-only entry after the cache key includes the company. Purge that entry, restore the keyed slot, and do not log the body.
 
 ## Picture: signal, purge, then secrecy work if bodies escaped
 
-A wrong hit is a notice-and-recover problem, not a licence to print the body into the log. Notice names the mismatch. Recover purges. Neither writes `tenant-A-note`.
+A wrong cache hit must not write the body into the log. Name which companies collided. Then purge the entry. Do not write `tenant-A-note`.
 
 ```mermaid
 flowchart TD
@@ -22,7 +22,7 @@ flowchart TD
   Inc -->|no| Watch[Keep watching the live window]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a log product. They do not prove a checklist. Someone still has to own the leftover.
+A log pipeline does not put the company in the cache key.
 
 Certificate-failure drills belong to TLS deployment, not this cache-key sentence. Keep them in a separate note so they do not replace purge.
 
@@ -36,7 +36,7 @@ Certificate-failure drills belong to TLS deployment, not this cache-key sentence
 | Recover | Prefix is gone; keep watching the live window |
 | Leftover | Operator error at the CDN remains; this practice is not production telemetry |
 
-Varnish, Fastly, and Next.js data cache will still hit on whatever key you configured. `Cache-Control` is a hint. The app’s promise is: on **these** practice files, a company B get after a company A put is a miss, and the mismatch log never includes `tenant-A-note`.
+Varnish, Fastly, and Next.js data cache will still hit on whatever key you configured. `Cache-Control` is a hint. A company B get after a company A put is a miss, and the mismatch log never includes `tenant-A-note`.
 
 What the tool cannot do: purge without a prefix that includes company can widen who is down. Stale-while-revalidate at a new node is leftover. Cookie leakage from a cached body is later session work, not a log-product green.
 
@@ -47,17 +47,15 @@ What the tool cannot do: purge without a prefix that includes company can widen 
 | Recover | Purge the company-including prefix |
 | Leftover | CDN config drift; anonymous fill |
 
-A log line a reviewer can accept looks like:
-
 ```text
 cache_denied reason=tenant_mismatch path=/notes/n1 bound=tB logged=tA request_id=req_9f2e
 ```
 
-Not: `tenant-A-note`, or a raw body.
+The sample still holds `tenant-A-note` or a raw body; that is the cached note twice.
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body). Tie it to `labs/2.2/2.2-request-path`. Reject any line that includes `tenant-A-note` or a raw body.
+Sketch ids and a reason on the cache-mismatch line — never the body. Leave `tenant-A-note` and a raw body off that sketch.
 
 ## Use it somewhere new
 
@@ -65,4 +63,4 @@ Authenticated RSS or export CSV via CDN. Purge must name the **prefix including 
 
 ## What this page is not doing
 
-A log-product name is not the rule. Answer keys are not on this site.
+Answer keys are not on this site.

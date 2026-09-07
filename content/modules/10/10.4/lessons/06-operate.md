@@ -3,13 +3,13 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A flag can still flip after `boot_ok` was “fixed once.” Pair notice and recover. Do not log stack traces that contain secrets, session tokens, or note bodies. Do not paste the traceback into the ticket.
+Production can still boot with debug on. Do not paste secret-bearing stack traces or the traceback.
 
 ## Picture: an illegal boot is a signal
 
-An illegal boot is a notice-and-recover problem, not a licence to quote the stack trace in the paging channel. Notice names env, debug, and deploy. Recover kills the process and rotates secrets that already leaked. Neither reprints the body.
+If production boots with debug on, page env, debug, and deploy — not the stack trace. Then kill the process and rotate secrets that already leaked.
 
 ```mermaid
 flowchart TD
@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Kill[kill and rotate trace secrets]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a canary product. They do not prove this boot refused prod plus debug. Someone still has to own the leftover.
+A canary product does not keep debug off in production.
 
-Re-run `test_prod_debug_must_not_boot` after any compose change. A green `NODE_ENV` tile is not that pytest. Emergency debug is E6 — inventory it before you claim recover.
+Debug on in prod still has to refuse boot in `test_prod_debug_must_not_boot`. A green `NODE_ENV` tile does not keep debug off. Emergency debug is E6 — do not call production safe until that exception is on the register.
 
 ## Signals that do not become a second leak
 
@@ -32,23 +32,21 @@ Re-run `test_prod_debug_must_not_boot` after any compose change. A green `NODE_E
 | Recover | Kill; rotate secrets that appeared in traces |
 | Leftover | Other flags; E6 emergency debug; sidecar debug |
 
-A canary dashboard will show rollout percent and stay silent when CI’s `boot_ok` is always true. Detection must observe **prod plus debug is deny**, not “the container started.” If the alert includes a stack trace or a session token, you have opened the same leak as a log line.
-
-A log line a reviewer can accept looks like:
+Canary rollout percent looks fine while CI’s `boot_ok` is always true. Check **prod plus debug is deny**, not “the container started.” A stack trace or a session token next to that prod-debug deny is a log-line leak.
 
 ```text
 log_denied reason=prod_debug_forbidden env=prod debug=true deploy=sc-12
 ```
 
-Not: a stack trace, a secret, or “assurance gate complete.”
+Stack traces, secrets, and “check-in complete” turn the sample into another incident dump.
 
-If your alert includes the matching trace, you have copied the leak into the paging channel.
+The boot-deny ticket needs the env name. The stack belongs in the lab folder.
 
 ## What the framework does vs what you still have to check
 
-The same feature flags, sidecar debug, and public admin bind that bypass this practice will also bypass a “scan our canary dashboard” detector. Name those places before you claim recover. A canary-product name is not the rule.
+Feature flags, sidecar debug, and a public admin bind still boot even if the canary dashboard is green.
 
-Cause vs cost stays split here too: the **cause** is fail-open boot (debug ignored); the **cost** is traces and extra attack surface; **how you stop it** is the prod-and-debug check; **how you notice** is `prod_debug_forbidden`; **how you recover** is kill-and-rotate. What the tool cannot do: this alert does not catch a feature flag that turns off authorization (1.2), and it does not catch sidecar debug.
+Fail-open boot (debug ignored) caused this. Traces and extra attack surface is the bill. Stop it with the prod-and-debug check. Notice `prod_debug_forbidden`. Recover: kill-and-rotate. A green dashboard does not catch a feature flag that turns off authorization (1.2), and it does not catch sidecar debug.
 
 ## Can people still use it
 
@@ -56,18 +54,16 @@ A refused boot must say *prod debug refused*, not only “assert False.” Do no
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/10.4/10.4-lab`.
-
 ```text
 log_denied reason=prod_debug_forbidden env=prod debug=true deploy=sc-12
 ```
 
-Reject any line that includes a stack trace, a secret, or “assurance gate complete.”
+Prod-debug denials name env and a reason. A stack, a secret, or “check-in complete” is a second boot dump.
 
 ## Use it somewhere new
 
-Clinic: deny Django `DEBUG=True`; do not paste the traceback into the ticket. Do not hit a live `/debug`.
+Deny Django `DEBUG=True`; do not paste the traceback into the ticket. Do not hit a live `/debug`.
 
 ## What this page is not doing
 
-A canary-vendor name is not the rule. Do not claim you finished an assurance gate. A manufacturer-defaults program page stays unverified. Answer keys are not on this site.
+A canary sticker does not keep debug off. This page does not mark you as finished. A manufacturer-defaults program page stays unverified. Answer keys are not on this site.

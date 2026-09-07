@@ -5,21 +5,19 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `delete_user` and `session_valid`. The failure is already in the functions: delete marks the profile and leaves the session. You are here to see that the check treats that leftover as a **failed rule**, not as a cleanup nit.
-
-The rule under test:
+The practice is not a website you attack. `delete_user` and `session_valid`: delete marks the profile and leaves the session, so the leftover session still works.
 
 > After `delete_user("alice")`, `session_valid("alice")` must be false. If it is still true, a leftover session still works.
 
 ## Where you may practice
 
-Only `labs/4.1/4.1-lab` is in scope. The maps are in-process: `SESSIONS` and `DELETED`. The user is the synthetic name `alice`. It does not open an identity provider, a logout product, or a browser cookie jar.
+Stay inside `labs/4.1/4.1-lab`. `SESSIONS` and `DELETED` track the synthetic name `alice`. It does not open an identity provider, a logout product, or a browser cookie jar.
 
 Do not replay a production cookie. Do not replay an employer single-sign-on session. Do not replay a classmate login. Do not steal a cookie “to see what happens.”
 
-What you trust for this check: `delete_user` is supposed to kill leftovers in the same delete. HR email, “password disabled,” and a single-sign-on brand name are not what you trust.
+`delete_user` is supposed to kill leftovers in the same delete — not HR email, “password disabled,” or a single-sign-on brand name.
 
-Who can still get in, in this story: an ex-employee, or a copied cookie on a shared workstation, who can present `SESSIONS["alice"]` after offboarding. That stands in for a delayed worker still holding `user_id`.
+Picture an ex-employee, or a copied cookie on a shared workstation, who can present `SESSIONS["alice"]` after offboarding — a delayed worker still holding `user_id`.
 
 ## Picture: profile marked, cookie still live
 
@@ -30,21 +28,18 @@ flowchart TD
   Skip --> Valid["session_valid returns true"]
 ```
 
-The broken files take that path on purpose. You do not need a real cookie string. The leftover still returning true *is* the leak.
+You do not need a real cookie string. alice's leftover session is still valid.
 
-Industry lists want all active sessions killed when an account is disabled or deleted. `DELETE FROM users` is a profile observation, not that kill.
+All active sessions have to be killed when an account is disabled or deleted. `DELETE FROM users` is a profile observation, not that kill.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
-Read `vulnerable/lifecycle.py`. `delete_user` only adds the user to `DELETED`. `session_valid` still returns `SESSIONS.get(user)`. Tests:
+In `vulnerable/lifecycle.py`, `delete_user` only adds the user to `DELETED`. `session_valid` still returns `SESSIONS.get(user)`. Tests:
 
 - `test_active_session_is_valid` — honest path before delete
 - `test_deleted_user_session_is_dead` — `session_valid` false after delete
 - `test_deleted_denies_even_if_session_map_still_has_row` — resurrected map entry still denied on the repaired files
 
-You do not need a new username. The failure of `test_deleted_user_session_is_dead` *is* the evidence.
-
-Do not open the repaired files yet. Diagnose the cause first.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -57,7 +52,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 | Slice | Practice |
 |---|---|
 | Why it happens | The authentication leftover outlived the person |
-| What has to be true first | `delete_user` removes the profile only |
+| What's already wrong | `delete_user` removes the profile only |
 | Trigger | Cookie presented after they leave |
 | What it costs | The notes are still readable; secrecy over time |
 | How you stop it later | Kill sessions (and tokens, workers) in the same delete |
@@ -65,21 +60,19 @@ Do not open the repaired files yet. Diagnose the cause first.
 | How you recover later | Mass revoke; rotate signing keys if tokens self-verify |
 | Out of scope | A single-sign-on product name, SessionMiddleware, or “we emailed them” |
 
-SessionMiddleware does not know HR offboarding. A token with `exp` in 30 days still verifies unless you check a per-user not-before. The app's promise this week is: **these** local files, after `delete_user("alice")`, `session_valid("alice")` is False.
+SessionMiddleware does not know HR offboarding. A token with `exp` in 30 days still verifies unless you check a per-user not-before. After `delete_user("alice")`, `session_valid("alice")` is False.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/4.1/4.1-lab/tests --impl vulnerable
 ```
 
-Record the failing test `test_deleted_user_session_is_dead`. Do not weaken it to “the profile row is gone.” An environment error is not security evidence.
+Record the failing test `test_deleted_user_session_is_dead`. “The profile row is gone” is not that test. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic: badge off, chart cookie still valid. Predict, without leaving this directory, whether disabling the badge kills the session. Do not hit a clinic identity provider.
+Badge off, chart cookie still valid. Predict, without leaving this directory, whether disabling the badge kills the session. Do not hit a clinic identity provider.
 
 ## What this page is not doing
 

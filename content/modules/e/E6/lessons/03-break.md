@@ -5,21 +5,19 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `accept_exception` that returns true for every dict. The failure is already in the function: it never looks at owner, review date, or accessibility. You are here to see that the check treats that always-true accept as a **failed rule**, not as a paperwork nit.
-
-The rule under test:
+The practice is not a website you attack. `accept_exception` returns true for every dict: it never looks at owner, review date, or accessibility, so an incomplete hole already counts as accepted.
 
 > An exception must not be accepted without owner, review date, and an accessibility check. If `accept_exception({"owner": "", "review_by": None})` returns true, the register gate has failed as a security control.
 
 ## Where you may practice
 
-Only `labs/E6/e6-lab` is in scope. The practice is an in-process `accept_exception(exc)`. Owner strings are fake. Do **not** file a real public bug, email a vendor disclosure inbox, or accept a production exception as the exercise.
+Stay inside `labs/E6/e6-lab`. Owner strings are fake. Do **not** file a real public bug, email a vendor disclosure inbox, or accept a production exception as the exercise.
 
 Do not paste this exercise onto a public clinic, employer register, or live hospital portal “to see what happens.”
 
-What you trust for this check: `accept_exception` is supposed to require a **record** with owner, review date, and accessibility flag. A ticket type, a HIPAA slide, and a pledge page are not what you trust.
+`accept_exception` is supposed to require a **record** with owner, review date, and accessibility flag — not A ticket type, a HIPAA slide, or a pledge page.
 
-Who can accept without a record in this story: calendar pressure plus oral “we’ll accept it.” That stands in for “legal said yes,” a maturity score treated as the register, or a “secure by design” pledge treated as an assurance stamp.
+Picture calendar pressure plus oral “we’ll accept it” — “legal said yes,” a maturity score treated as the register, or a “secure by design” pledge treated as an assurance stamp.
 
 ## Picture: everything ships
 
@@ -28,20 +26,17 @@ flowchart TD
   Any[any dict] --> Acc[accepted]
 ```
 
-The broken files take that path on purpose. `--impl vulnerable` returns true for every payload, including empty owner. You do not need a governance product. You must not contact a live disclosure inbox. The true return for empty owner *is* the leak.
+`--impl vulnerable` returns true for every payload, including empty owner. You do not need a governance product. You must not contact a live disclosure inbox. Empty owner already accepts.
 
 Earlier lessons already said posters are not gates. This check is **accountability of leftover risk**.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
-Read `vulnerable/risk.py`. It returns true for every dict. Tests:
+`vulnerable/risk.py` accepts every exception dict. Tests:
 
 - `test_exception_needs_owner_review_and_wcag`
 - `test_complete_exception_may_be_accepted` — alice + date + accessibility flag may pass on both
 
-You do not need a new field. The failure of `test_exception_needs_owner_review_and_wcag` *is* the evidence.
-
-Do not open the repaired files yet. Diagnose the cause first.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -55,30 +50,28 @@ Do not open the repaired files yet. Diagnose the cause first.
 |---|---|
 | The rule | empty owner → `accept_exception` false |
 | Why it happens | Oral acceptance treated as a register row |
-| What has to be true first | always-true `accept_exception` |
+| What's already wrong | always-true `accept_exception` |
 | Trigger | Calendar; silent “we’ll ship anyway” |
 | What it costs | Unowned holes last; inaccessible recovery kept |
 | How you stop it later | Schema; refuse incomplete |
 | How you notice later | `exception_incomplete_denied`; never secret writeups |
 | How you recover later | Expire; fix or re-accept with fields |
-| Out of scope | A maturity dashboard; live disclosure; claiming an assurance gate |
+| Out of scope | A maturity dashboard; live disclosure; treating this exception lesson as a check-in |
 
-A ticket type named “risk” will close without dates if you let it. Industry “govern” labels name outcomes; they do not write the row. An unverified pledge is manufacturer talk, not this function. The notes app’s promise this week is: **this** practice, empty owner is deny.
+A ticket type named “risk” will close without dates if you let it. Industry “govern” labels name outcomes; they do not write the row. An unverified pledge is manufacturer talk, not this function. Empty owner is deny.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/E6/e6-lab/tests --impl vulnerable
 ```
 
-Run from `labs/E6/e6-lab` if a collection at the repo root picks up `site/`. Record `test_exception_needs_owner_review_and_wcag`. Do not contact live disclosure inboxes. An environment error is not security evidence.
+Run from `labs/E6/e6-lab` if a collection at the repo root picks up `site/`. Do not contact live disclosure inboxes. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic HIPAA exception: predict acceptance without leaving this directory. Do not open a live governance tenant.
+A HIPAA exception with no review date can still be accepted. Predict acceptance without leaving this directory. Do not open a live governance tenant.
 
 ## What this page is not doing
 
-No live-disclosure, production-exception, or public-bug-bounty instructions. Do not claim you finished an assurance gate. A later design-review draft stays a draft. An unverified pledge stays unverified.
+No live-disclosure, production-exception, or public-bug-bounty instructions. This page does not mark you as finished. A later design-review draft stays a draft. An unverified pledge stays unverified.

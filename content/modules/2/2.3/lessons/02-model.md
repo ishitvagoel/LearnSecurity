@@ -5,9 +5,9 @@
 
 ## Could someone else name the checks from your table?
 
-A poster of “we use CSP, cookies, and CORS” is not this page. A browser policy table names **which reader** may see `sc_session` and **which controls are not this week’s check**.
+A poster of “we use CSP, cookies, and CORS” is not enough without **which reader** may see `sc_session` and **which controls are not this check**.
 
-This week’s freeze: a local cookie-jar model. No real DOM exploit page, no third-party iframe product, no live CORS test against someone else’s site.
+A local cookie-jar model. No real DOM exploit page, no third-party iframe product, no live CORS test against someone else’s site.
 
 ## Picture: the jar sends; script must not read
 
@@ -47,7 +47,7 @@ If `JS` can reach the value while `httponly` is true, the map already predicts `
 
 A missing analytics row is how a second cookie quietly becomes a session. Write the hole.
 
-## Step 3: draft versus this week’s check
+## Step 3: draft versus this check
 
 | Control | Status in this snapshot | Relation to HttpOnly |
 |---|---|---|
@@ -55,11 +55,11 @@ A missing analytics row is how a second cookie quietly becomes a session. Write 
 | Secure | Final sister expectation | Sister rule; the practice object includes it |
 | CSP3 | Working Draft | Not a substitute; Report-Only is notice, not this rule |
 | Trusted Types | Working Draft | Sink typing; later encoding work |
-| SameSite | Sister cookie rule | CSRF-adjacent; not this week’s check |
+| SameSite | Sister cookie rule | CSRF-adjacent; not this check |
 
 ## Practice
 
-Draw the table so someone else could name the checks. Point at `labs/2.3/2.3-browser-policy` file `cookies.py`.
+Label `cookies.py` under `labs/2.3/2.3-browser-policy`.
 
 ## Use it somewhere new
 
@@ -71,4 +71,4 @@ Browser extensions; physical access; injected script that does not need the cook
 
 ## What this page is not doing
 
-A famous-bugs list as the definition of security. Answer keys are not on this site.
+Naming XSS on a slide does not set HttpOnly on `sc_session`. Answer keys are not on this site.

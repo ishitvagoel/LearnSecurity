@@ -1,15 +1,15 @@
-# Fail on the broken files, then pass on the repaired ones
+# A broken install check must fail the mismatch test
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-“SBOM generated” is not evidence. “Provenance badge” is a how-it-was-built observation. The check is: `install_ok("aaa", "bbb")` is false and matching hashes may install. That mismatch observation must be **false** on the broken files and **true** on the repaired files. Do not fetch live packages.
+Generating an SBOM does not compare hashes. A provenance badge is how-it-was-built theater. `install_ok("aaa", "bbb")` has to be false, and matching hashes may install. The leftover files: the mismatch still installs. Repair refuses `aaa` vs `bbb`. Do not fetch live packages.
 
 ## Picture: a broken install check must fail the mismatch test
 
-A test that only counts passing tests can pass while always-true `install_ok` still installs a mismatch. This check asks whether a digest mismatch still counts as a passing control. Broken must fail that question. Repaired must pass it.
+Always-yes `install_ok` can still install a mismatch under a green suite.
 
 ```mermaid
 flowchart LR
@@ -17,27 +17,27 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: mismatch is deny]
 ```
 
-If both pass, the test is not looking at digest equality. If both fail, the fix is not structural or the check is wrong.
+If the broken install still passes, you never compared digests.
 
-## Four modes, even for two hash strings
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
 | Normal | match → may install (may pass on both) |
 | Wrong input | mismatch → not install; broken files must fail |
-| Abuse | Unsure hashes are deny (fail closed) |
-| Not claimed | Live npm; provenance builders; the ship gate; that the pin is benign |
+| Abuse | Unsure hashes are deny |
+| Not claimed | Live npm; provenance builders; the ship check; that the pin is benign |
 
-The file is `labs/10.2/10.2-lab/tests/test_property.py`. The test `test_hash_mismatch_refuses_install` is a **what-must-not-happen** test: always-true `install_ok` is not allowed to count as a passing control.
+`test_hash_mismatch_refuses_install` is what stops `install_ok` from being a tautology.
 
-Honest matching hashes may pass on both implementations. That does not excuse the mismatch deny test. If the broken files do not fail `test_hash_mismatch_refuses_install`, the lab is miswired — fix the wiring, not the assertion.
+Matching digests is the honest path. Refuse a mismatch. If the broken files do not fail `test_hash_mismatch_refuses_install`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/10.2/10.2-lab/tests --impl vulnerable
 python3 -m pytest labs/10.2/10.2-lab/tests --impl fixed
 ```
 
-A test that only greps `CycloneDX` in CI without calling `install_ok("aaa", "bbb")` is not this topic’s evidence. This practice never opens a live registry.
+A CycloneDX filename in CI is not `install_ok("aaa", "bbb")`. This practice never opens a live registry.
 
 ## What the tests do not prove
 
@@ -45,25 +45,16 @@ A test that only greps `CycloneDX` in CI without calling `install_ok("aaa", "bbb
 - That provenance is authentic
 - Cache isolation
 - Index policy against lookalike packages
-- The ship gate complete
-
-Record those as leftover or later topics, not as silent passes.
+- Opening this install lesson as the ship check
 
 ## Practice
 
-Run both this session from the lab directory if needed:
-
-```text
-python3 -m pytest labs/10.2/10.2-lab/tests --impl vulnerable
-python3 -m pytest labs/10.2/10.2-lab/tests --impl fixed
-```
-
-Paste nothing from answer keys. Write fail/pass into your notes next to the mismatch row. Reject a “test” that only greps `CycloneDX` in CI without calling `install_ok("aaa", "bbb")`.
+Call `install_ok("aaa", "bbb")`. A CycloneDX filename in CI is the SBOM, not the digest.
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts “npm ci ran” is not this topic. A live registry is out of scope.
+`npm ci` that ran is the install, not matching hashes. Do not use a live registry.
 
 ## What this page is not doing
 
-Do not add a live-npm trophy. Do not log registry tokens. Answer keys are not on this site. The ship gate stays not-attempted.
+A live npm screenshot is not matching hashes. Do not log registry tokens. Answer keys are not on this site. This page does not finish the ship check-in.

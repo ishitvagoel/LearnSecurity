@@ -5,11 +5,11 @@
 
 ## Could someone else name the close check from your playbook?
 
-“Paging acked” is not this lesson. A drawing someone else can test names **recovery evidence, the log inventory, who can close, and whether note bodies can reach the SIEM**.
+“Paging acked” still leaves out **recovery evidence, the log inventory, who can close, and whether note bodies can reach the SIEM**.
 
-This week’s freeze for the notes app: local `close_incident({recovery, logs})`. No live SIEM.
+`close_incident({recovery, logs})` — no live SIEM.
 
-> For close, the rule is deny when recovery is still todo, and deny when logs contain `note_body`. Honest recovery plus safe logs may close. Evidence that the deny is false: `close_incident({"recovery": "todo", "logs": "ok"})` returns true.
+> For close, the rule is deny when recovery is still todo, and deny when logs contain `note_body`. Honest recovery plus safe logs may close. Recovery-todo still closes: `close_incident({"recovery": "todo", "logs": "ok"})` returns true.
 
 If the recovery × logs row is blank, the ticket closes because nobody named the check.
 
@@ -36,7 +36,7 @@ Industry detect / respond / recover labels name outcomes. They are not a product
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the ticket you already have and ask what would show recovery still has not run.
+Take the ticket you already have and ask what would show recovery still has not run.
 
 | Piece | This system |
 |---|---|
@@ -62,11 +62,11 @@ A missing recovery field is how a green tile becomes “Done.” Write the hole.
 
 ## Practice
 
-Draw the map so someone else could name the checks. Point at `labs/10.5/10.5-lab` file `ir.py`.
+Mark `ir.py` under `labs/10.5/10.5-lab`.
 
 ## Use it somewhere new
 
-Clinic SIEM-green close is the same grain with a dashboard instead of a dict.
+A SIEM-green close is the same grain with a dashboard instead of a dict.
 
 ## What can still go wrong
 
@@ -74,4 +74,4 @@ Imperfect forensics. Support-tool god-mode from earlier cluster lessons. Logging
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

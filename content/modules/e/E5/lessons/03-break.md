@@ -5,19 +5,17 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `tenant_for(session, body)`. The failure is already in the function: it prefers `body["tenant"]` when that key is present. You are here to see that a body-chosen company is **a failed rule**, not a trophy against a public product.
-
-The rule under test:
+The practice is not a website you attack. `tenant_for(session, body)` prefers `body["tenant"]` when that key is present, so a body-chosen company already wins. You do not need a public product.
 
 > The JSON body is not the tenant. `tenant_for({"tenant": "A"}, {"tenant": "B"})` must return `"A"`. If it returns `"B"`, body tenant overrides session.
 
 ## Where you may practice
 
-Only `labs/E5/e5-lab` is in scope. The check is an in-process `tenant_for(session, body)`. Fake companies A and B. It does not open a network. Do not send `org_id` to a live product, a clinic company, or a classmate preview.
+Stay inside `labs/E5/e5-lab`. Fake companies A and B go through `tenant_for(session, body)`. It does not open a network. Do not send `org_id` to a live product, a clinic company, or a classmate preview.
 
-What must not happen: the JSON body switches the bound company. `tenant_for({"tenant": "A"}, {"tenant": "B"})` returns `"B"`.
+`tenant_for({"tenant": "A"}, {"tenant": "B"})` returning `"B"` is the body switch.
 
-Who can act in this story: a member of A who can write a JSON (or GraphQL) field. That stands in for “row-level rules are on so companies are done,” a relationship-graph dashboard treated as who-is-allowed, or a famous-bugs mapping treated as this cell. What you trust: `tenant_for` is supposed to bind the company from the session. FastAPI body parsing, a Host header, and a row-level session variable set from JSON are not what you trust for this cell.
+Picture a member of A who can write a JSON (or GraphQL) field — “row-level rules are on so companies are done,” a relationship-graph dashboard treated as who-is-allowed, or a famous-bugs mapping treated as this rule. `tenant_for` is supposed to bind the company from the session — not FastAPI body parsing, a Host header, or a row-level session variable set from JSON.
 
 ## Picture: body wins
 
@@ -28,20 +26,18 @@ flowchart TD
   Fn --> Out[tenant B]
 ```
 
-The broken files (`--impl vulnerable`) prefer `body["tenant"]`. That is extra writable fields applied to the isolation key. What has to be true first: body tenant overrides session. You do not need GraphQL. You must not probe a live company.
+The broken files (`--impl vulnerable`) prefer `body["tenant"]`. That is extra writable fields applied to the isolation key. Body tenant overrides session. You do not need GraphQL. You must not probe a live company.
 
-Industry checklists want isolation of the object and the company. An earlier topic already said the object id is not the grant; this cell is **the company context is not a client field**. This site does not mark you as finished. 
+Isolation of the object and the company. An earlier topic already said the object id is not the grant; this rule is **the company context is not a client field**. This site does not mark you as finished.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
-Read `vulnerable/rls.py`. It returns the body company when present. Tests:
+`vulnerable/rls.py` returns the body company when present. Tests:
 
 - `test_body_cannot_switch_tenant`
 - `test_matching_body_may_keep_session_tenant` — A/A may pass on both
 
-You do not need a new company letter. The failure of `test_body_cannot_switch_tenant` *is* the evidence. Do not paste the practice files into a public API.
-
-Do not open the repaired files yet. Diagnose the cause first.
+Do not paste the practice files into a public API.
 
 ## Why it happens vs what it costs
 
@@ -49,30 +45,28 @@ Do not open the repaired files yet. Diagnose the cause first.
 |---|---|
 | Required rule | `tenant_for({A},{B}) == A` |
 | Why it happens | Client-chosen company treated as binding |
-| What has to be true first | body tenant overrides session |
+| What's already wrong | body tenant overrides session |
 | Trigger | Member of A sends tenant B in JSON or GraphQL |
 | What it costs | Read or write into another company through every copy |
 | How you stop it later | Bind from the session; ignore the body for isolation |
 | How you notice later | `body_tenant_mismatch`; never note bodies |
 | How you recover later | Audit B for A's actions; take back the confused session |
-| Out of scope | A famous-bugs name, a row-level product, a live company, a course gate |
+| Out of scope | A famous-bugs name, a row-level product, a live company, this GraphQL lesson as a finished check-in |
 
-FastAPI will bind whatever field you declare. PostgreSQL row-level rules will isolate whatever session variable you `SET`. A subdomain Host header is client-controlled. The app’s promise is: **this** practice, session A plus body B is A.
+FastAPI will bind whatever field you declare. PostgreSQL row-level rules will isolate whatever session variable you `SET`. A subdomain Host header is client-controlled. Session A plus body B is A.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/E5/e5-lab/tests --impl vulnerable
 ```
 
-Run from `labs/E5/e5-lab` if a repo-root collection picks up `site/`. Record `test_body_cannot_switch_tenant`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/E5/e5-lab` if a repo-root collection picks up `site/`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic group practice: predict the switch without leaving this directory. Do not hit a live clinic system.
+A group practice can switch `org_id` in JSON. Predict the switch without leaving this directory. Do not hit a live clinic system.
 
 ## What this page is not doing
 
-No live-product, production-company, or public GraphQL instructions. Do not claim a course gate. Famous-bugs lists stay awareness after the cause.
+No live-product, production-company, or public GraphQL instructions. This page does not finish a check-in. Famous-bugs lists stay awareness after the cause.

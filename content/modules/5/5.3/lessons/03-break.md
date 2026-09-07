@@ -5,21 +5,19 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `auth`. Disposable `sk-lab-hardcoded` and `rotated-now`. It does not open a vault or a cloud identity API. You are here to see that an old hardcoded default still counting as a valid key after rotation is a **failed rule**, not a trophy hunt for a live key.
-
-The rule under test:
+The practice is not a website you attack. `auth` uses disposable `sk-lab-hardcoded` and `rotated-now`. It does not open a vault or a cloud identity API. An old hardcoded default still counting as a valid key after rotation is the break; do not hunt a live key.
 
 > A rotated secret must kill the hardcoded default. `auth("sk-lab-hardcoded", current="rotated-now")` must be false.
 
 ## Where you may practice
 
-Only `labs/5.3/5.3-lab` is in scope. Restore the broken and repaired folders when you are done. Disposable lab strings only.
+Stay inside `labs/5.3/5.3-lab`. Restore the broken and repaired folders when you are done. Disposable lab strings only.
 
 Do not search public GitHub, an employer gist, or a classmate repo as this exercise.
 
-What must not happen: the old hardcoded default still authenticates after rotation. `auth("sk-lab-hardcoded", current="rotated-now")` returns true.
+`auth("sk-lab-hardcoded", current="rotated-now")` returning true is the leftover default after rotation.
 
-Who can act here: a **reader of the cloned repo**, an old container image, or a gist copy of `DEFAULT`. That stands in for a clinic lab API key that was “rotated in the wiki” while the default or-clause stayed. What you are supposed to trust: `auth` accepts only the current secret and denies when current is missing. A vault brand, `.gitignore`, and “we rotated” in a ticket are not what you trust for this cell.
+Picture a **reader of the cloned repo**, an old container image, or a gist copy of `DEFAULT` — a clinic lab API key that was “rotated in the wiki” while the default or-clause stayed. `auth` accepts only the current secret and denies when current is missing — not A vault brand, `.gitignore`, or “we rotated” in a ticket.
 
 ## Picture: DEFAULT still wins
 
@@ -29,21 +27,17 @@ flowchart TD
   Or -->|DEFAULT| True["returns true"]
 ```
 
-The broken files show **cause** (the default never died), not a scan of GitHub for real keys. What has to be true first: `auth` returns true if `current` is missing (allow when it should deny) **or** if presented equals `DEFAULT` **or** `current`. You do not need a live key. You must not search for one.
+The default never died — not a scan of GitHub for real keys. `auth` returns true if `current` is missing (allow when it should deny) **or** if presented equals `DEFAULT` **or** `current`. You do not need a live key. You must not search for one.
 
-A secrets-manager sticker is a tool observation, not that sentence.
+A secrets-manager sticker is not `auth` on the rotated secret.
 
-## What to look at — cause, not a trophy
+## What to look at: the cause, not a hunt
 
-Read `vulnerable/secrets.py`. `auth` keeps `DEFAULT = "sk-lab-hardcoded"` as an or-clause and allows when `current` is missing. Checks:
+In `vulnerable/secrets.py`, `auth` keeps `DEFAULT = "sk-lab-hardcoded"` as an or-clause and allows when `current` is missing. Checks:
 
 - `test_hardcoded_default_does_not_auth`
 - `test_missing_current_denies`
 - `test_current_secret_authenticates` — honest path on both trees if current matches
-
-You do not need a new key string. The failure of `test_hardcoded_default_does_not_auth` *is* the evidence.
-
-Do not open the repaired files yet. Diagnose the cause first.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
@@ -51,7 +45,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 |---|---|
 | The rule | Hardcoded default is dead after rotation |
 | Why it happens | Default credential never invalidated; missing current allows |
-| What has to be true first | `auth` accepts `DEFAULT` or missing `current` |
+| What's already wrong | `auth` accepts `DEFAULT` or missing `current` |
 | Trigger | `auth("sk-lab-hardcoded", current="rotated-now")` |
 | What it costs | Authenticity of the service credential; then who-is-allowed as whoever holds the clone |
 | How you stop it | Authenticate only `presented == current`; deny if current is missing |
@@ -61,7 +55,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-A settings library will still load a default if you leave one in code. FastAPI `Depends` does not rotate. A vault dashboard tile does not pop `DEFAULT`. The app’s promise is: **this** practice, `auth("sk-lab-hardcoded", current="rotated-now")` is False.
+A settings library will still load a default if you leave one in code. FastAPI `Depends` does not rotate. A vault dashboard tile does not pop `DEFAULT`. `auth("sk-lab-hardcoded", current="rotated-now")` is False.
 
 ## Practice
 
@@ -69,11 +63,11 @@ A settings library will still load a default if you leave one in code. FastAPI `
 python3 -m pytest labs/5.3/5.3-lab/tests --impl vulnerable
 ```
 
-Record `test_hardcoded_default_does_not_auth`. Do not search public GitHub. An environment error is not security evidence.
+Do not search public GitHub. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic gist of a lab API key. Predict without leaving this directory. Do not fetch a live gist.
+A gist that holds a lab API key is already a leak. Predict without leaving this directory. Do not fetch a live gist.
 
 ## What this page is not doing
 

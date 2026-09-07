@@ -3,36 +3,34 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
-
 ## What you are reviewing
 
-A colleague ships notes-app offboarding. Your job is to label each claim **rule**, **tool**, or **false comfort**, and to say whether `session_valid("alice")` is still true after `delete_user` if they ship. Start at the leftover session after delete, not at a scanner color or an HR ticket.
+Offboarding review starts at the leftover session after delete. Tag each claim **rule**, **tool**, or **false assurance**, and say whether `session_valid("alice")` is still true after `delete_user`. An HR ticket does not kill the cookie.
 
-The folder `labs/4.1/4.1-lab/vulnerable/` is the change. The check you already ran (`test_deleted_user_session_is_dead`) is the rule test. A comment “will revoke sessions later” is not.
+Leftover alice still passing `session_valid` blocks the merge. “will revoke sessions later” does not count.
 
 ## Picture: problems to find (name them yourself)
 
-Start with this seeded smell: **`DELETE FROM users` without session purge**. Label it rule, tool, or false comfort before you accept the change.
+**`DELETE FROM users` without session purge**.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|"session_valid true after delete"| Property["Rule - good if tested"]
   Q -->|"we emailed them"| Mechanism[Tool - no revoke]
-  Q -->|"single sign-on is on"| False[False comfort]
+  Q -->|"single sign-on is on"| False[False assurance]
 ```
 
-The review starts at the protected effect (session dead after delete). Everything that is not leftover-kill in that same delete is a candidate extra path.
+The session still has to be dead after delete. If that same delete never kills leftovers, the leftover is still there.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - `DELETE FROM users` without session purge
 - Token `exp` 30d ignored on delete
 - Worker still has `user_id`
 - No test `session_valid` after delete
 
-Also reject: trusting the browser as the vault; closing findings without re-running `test_deleted_user_session_is_dead`; keys in learner notes; real people's data in the practice files; production cookies in the review notes.
+Also reject: treating SSO logout as session kill; closing findings without re-running `test_deleted_user_session_is_dead`; keys in learner notes; real people's data in the practice files; production cookies in the review notes.
 
 ## Common mix-ups
 
@@ -42,13 +40,9 @@ Also reject: trusting the browser as the vault; closing findings without re-runn
 - SessionMiddleware knows HR
 - An “account deleted” email is the kill
 
-## Practice
-
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_deleted_user_session_is_dead`. Do not open the keys file.
-
 ## Use it somewhere new
 
-Clinic change that “disables the badge” without killing the chart session is an incomplete review of leftover access. Name the independent falsehood that would still keep `session_valid` false after offboard.
+Disabling the badge without killing the chart session still leaves leftover access. Which leftover still has to die so `session_valid` is false after offboard?
 
 ## Can people still use it
 
@@ -56,4 +50,4 @@ If the dashboard shows a signed-out badge, do not encode it as color only. That 
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will revoke sessions later.” That comment is leftover without an owner. Do not replay a live cookie to prove the finding.
+A deleted-user session with only “will revoke later” is still a live session nobody owns. Do not replay a live cookie to prove the finding.

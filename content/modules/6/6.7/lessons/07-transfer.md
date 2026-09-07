@@ -5,17 +5,17 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic bulk-export** of patients. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic bulk-export** of patients.
 
-The notes-app sentence was: `allow(4)` must be false in the lab window. Export has a resource account, not an unbounded loop. Rewrite it for a clinic without changing the fork: the fourth bulk-export is denied, the first three may be allowed.
+`allow(4)` must be false in the lab window. Export has a resource account, not an unbounded loop. For a clinic, the fourth bulk-export is denied, the first three may be allowed.
 
 Also name notification fan-out and search complexity as the same budget family (7.1), without running those systems.
 
 ## Picture: bulk export is still a budget row
 
-Renaming “export notes” to “export patients” is not transfer. The untrusted click changes. The fork does not.
+A patient bulk-export is the notes-app export budget.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | `allow(n)` on export | Bulk-export of patients |
 | Cap 3 in the lab window | Same shape: a per-person resource account |
@@ -30,18 +30,16 @@ flowchart LR
 
 If “Export all” is a disabled button in the browser while the server `allow` is always true, the check is gone. FastAPI, an IP limit at the edge, and a CAPTCHA do not count `n` per person. Notification fan-out and GraphQL search complexity (7.1) are the same budget family — name them, do not run those systems here. Extra CSVs are still copies from 5.1 even when the UI said “once.”
 
-The clinic rewrite still has to keep the notes-app fork: fourth export false, third true. Rate-limiting at the edge without a per-person fourth-export test leaves `allow(4)` true. The local pytest analogue is `test_fourth_export_is_denied` — on a practice, not a live clinic load test.
+The fourth export still has to be false. The third may still be true. Rate-limiting at the edge without a per-person fourth-export test leaves `allow(4)` true. The local check is `test_fourth_export_is_denied` — on a practice, not a live clinic load test.
 
-## Prompt — clinic bulk-export
+## Write this for a clinic bulk-export
 
-**Product sketch:** a small clinic app with an “Export all” button that is disabled in the browser.
+A small clinic app with an “Export all” button that is disabled in the browser.
 
-Rewrite the notes-app sentence. Include:
-
-1. who can act (scripted clinician session — not a live clinic);
+1. who might try (scripted clinician session — not a live clinic);
 2. what you trust (server `n <= 3` is what you trust; the disabled button and an IP rate limit are not);
-3. what must not happen (`allow(4)` true, not a legal label);
-4. a test idea on a **local** practice files only (fourth denied — never on the real clinic);
+3. what must not happen (`allow(4)` true);
+4. the fourth export is denied — **local** practice files (never on the real clinic);
 5. leftover (new accounts, GraphQL aliases, human timing as advanced work, extra copies from 5.1);
 6. whether a human-read “try tomorrow” must be announced, not a spinner that retries and burns the budget.
 
@@ -57,8 +55,8 @@ Rewrite the notes-app sentence. Include:
 
 ## Practice
 
-One page. No answer keys. The only running system you may break is `labs/6.7/6.7-lab`. Do not load-test a public host.
+Deny the fourth export in the window. Keep the answer keys closed. The only running system you may break is `labs/6.7/6.7-lab`. Do not load-test a public host.
 
 ## What this page is not doing
 
-Live-target load tests. Real patient CSVs. Claiming a course gate from this page.
+Do not try live-target load tests. Do not use real patient CSVs. This page does not finish a check-in.

@@ -5,11 +5,11 @@
 
 ## The rule
 
-A leftover cookie is not the fix. SameSite as the only check is not the fix. CORS as a stand-in is not the fix. “The user clicked something somewhere” is not the fix.
+A leftover cookie does not decide a cross-site share. SameSite as the only check still allows a foreign origin with `token=None`. CORS is an origin header, not the share. “The user clicked something somewhere” is a story.
 
-The structural change is: `allow_share` must require a session cookie **and** `origin == expected` **and** a matching CSRF token. Structural means site-bound intent — not leftover cookie authority from the surroundings.
+The repair: `allow_share` must require a session cookie **and** `origin == expected` **and** a matching CSRF token. In short, site-bound intent — not leftover cookie authority from the surroundings.
 
-The smallest restore for notes-app share is: all three, or deny. Fail closed: missing origin or token **denies**. Do not fail open because SameSite is Lax.
+Repair share: all three, or deny. A missing origin or token **denies**. SameSite Lax does not replace origin and token.
 
 ## Picture: all three, or deny
 
@@ -24,9 +24,9 @@ flowchart TD
   Token -->|yes| Allow[Allow]
 ```
 
-The lab’s repaired files are `session_cookie` then `origin == expected and token == "lab-csrf"`. Production still needs the token bound to the session (not a cookie the foreign origin can cause to be sent). GET `/share?to=` is a mutate-on-GET leftover. Clickjacking, postMessage, and a later open-redirect lesson stay named leftovers. CORS `*` with credentials is false comfort.
+Share requires `session_cookie`, then `origin == expected and token == "lab-csrf"`. Bind that token to the session, not a cookie a foreign origin can cause to be sent. GET `/share?to=` is a mutate-on-GET leftover. Clickjacking, postMessage, and a later open-redirect lesson stay named leftovers. CORS `*` with credentials is false assurance.
 
-Industry checklists want anti-forgery tokens or extra headers a simple form cannot set. This pytest is that sentence for `allow_share`. Extra rows about authenticated embeds and CORP are **advanced** — not this week’s pytest.
+Use anti-forgery tokens or extra headers a simple form cannot set — `allow_share`. Extra rows about authenticated embeds and CORP are **advanced** — not this check.
 
 ## What the repaired files must show
 
@@ -43,8 +43,8 @@ SameSite=Lax as complete. CORS `*` with credentials. Token stored in a cookie th
 
 ## What the tool cannot do
 
-- Clickjacking / who may frame the page is a different cell.
-- postMessage origin checks are a different cell.
+- Clickjacking / who may frame the page is a different rule.
+- postMessage origin checks are a different rule.
 - A later open-redirect lesson can still send the person somewhere else after a real click.
 - Authenticated embeds / CORP are advanced extras.
 - Lookalike UI from the phishing lesson: the person intended the *lookalike*, not this origin.
@@ -57,11 +57,9 @@ Name the check (cookie and origin == expected and token). Run:
 python3 -m pytest labs/6.3/6.3-lab/tests --impl fixed
 ```
 
-It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
-Clinic: stop treating “logged-in cookie” as consent to share with a partner.
+Stop treating “logged-in cookie” as consent to share with a partner.
 
 ## What can still go wrong
 
@@ -69,4 +67,4 @@ Clickjacking; postMessage; later open redirect; advanced embeds; lookalike UI; G
 
 ## What this page is not doing
 
-Do not visit a live foreign origin. Do not claim a course gate from SameSite=Lax.
+Do not visit a live foreign origin. SameSite=Lax does not finish a check-in.

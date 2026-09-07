@@ -5,11 +5,11 @@
 
 ## The rule
 
-A denylist of yesterday’s pull requests is not the fix. Hiding a scanner warning is not the fix. “We have CODEOWNERS” is not the fix.
+The old pull-request titles are not a threat-model id. Hiding a scan result does not fill `merge_ok`. A CODEOWNERS file does not finish this.
 
-The structural change is: `merge_ok` **is false unless the change has a truthy `threat_model`**. Fail-safe: a missing id is deny. Structural means that citation — not CODEOWNERS, not HIPAA training, not a maturity score.
+What has to change: `merge_ok` **is false unless the change has a truthy `threat_model`**. A missing id is deny. In short, that citation — not CODEOWNERS, not HIPAA training, not a maturity score.
 
-The smallest restore for the notes app’s merge culture is: `{}` → do not merge. Do not fail open because branch protection is “on.” Do not accept “training complete” as a threat-model id. The id is **opaque** — `"TM-12"` is enough for this lab. Whether the document actually covers this change is 3.2 and 10.4.
+Repair the notes app’s merge culture: `{}` → do not merge. Branch protection being “on” does not put a threat-model id on the change. Don't take “training complete” as a threat-model id. The id is **opaque** — `"TM-12"` is enough for this lab. Whether the document actually covers this change is 3.2 and 10.4.
 
 ## Picture: empty threat-model fails closed
 
@@ -20,30 +20,30 @@ flowchart TD
   Tm -->|no| Deny[deny]
 ```
 
-The repaired files require `bool(pr.get("threat_model"))`. Production still needs the cited model to *cover this change’s files* — citing `TM-12` that never mentions OAuth is a lying citation. Authorization surfaces remain 3.2. An extra advanced row about documenting a dangerous function is a reason to *require* a threat model. It is not this pytest.
+Merge has to see `bool(pr.get("threat_model"))`. Citing `TM-12` that never mentions OAuth is still a lying citation. Authorization surfaces remain 3.2. An extra advanced row about documenting a dangerous function is a reason to *require* a threat model. It does not put `threat_model` on the change.
 
-A design-review guide that wants security in the design is that sentence for empty-change merge. This pytest is the local stand-in.
+A design-review guide that wants security in the design covers empty-change merge. The check is the local stand-in.
 
 ## What the repaired files must show
 
-Read `fixed/sdl.py` against this checklist. Do not treat the snippet as a production merge bot.
+`fixed/sdl.py` is a merge-gate sketch, not GitHub.
 
 | After the fix | Must be true |
 |---|---|
 | `{}` | `merge_ok` false |
 | `{"threat_model": "TM-12"}` | `merge_ok` true |
 
-Fail closed: if you are unsure whether a threat-model id is present, the change does not merge. Uncertainty is a **no** on “this may merge,” not a yes because CODEOWNERS is on.
+When you are unsure whether a threat-model id is present, the change does not merge. CODEOWNERS being on does not change that.
 
 ## What this is not
 
 - GitHub branch protection.
 - CODEOWNERS.
-- A process-maturity score.
+- A maturity score as the merge check.
 - An unverified “secure by design” page treated as a product.
 - Gate 10 or M4 complete.
 - A threat-model quality review.
-- FastAPI defaults.
+- FastAPI defaults as the threat-model id.
 
 ## What the tool cannot do
 
@@ -55,7 +55,7 @@ Fail closed: if you are unsure whether a threat-model id is present, the change 
 
 ## Can people still use it
 
-The merge screen has to say *missing threat-model id*, in words, not only a red X. Do not hide the gap behind “see CODEOWNERS.”
+The merge screen has to say *missing threat-model id*, in words, not only a red X. CODEOWNERS being on is not the missing-id sentence.
 
 ## Practice
 
@@ -64,8 +64,6 @@ Name the leftover (a stale threat model; a docs exemption). Run:
 ```text
 python3 -m pytest labs/10.1/10.1-lab/tests --impl fixed
 ```
-
-It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
 ## Use it somewhere new
 

@@ -234,4 +234,4 @@ Archive this notes-app pack before the document-preview page. That service will 
 
 ## What this page is not doing
 
-Production networking. Cryptographic workload identity. A real queue. Deployed isolation. Live targets. Answer keys are not on this site.
+Do not use production networking. Cryptographic workload identity. A real queue. Deployed isolation. Do not use live targets. Answer keys are not on this site.

@@ -1,31 +1,29 @@
-# Review always-append capture like a pull request
+# Would you merge this always-append capture?
 
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
-
 ## What you are reviewing
 
-A colleague ships the notes app's simulated copay. Review `labs/E3/e3-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether two `capture("k1")` still leave count 2, compare that with the rule, and write changes a developer can verify.
+Treat `labs/E3/e3-lab/vulnerable/` as a copay change. Do two `capture("k1")` still leave count 2?
 
-The check you already ran (`test_duplicate_capture_does_not_double_charge`) is the rule test. A comment “will add SEEN later” is not.
+A TODO that says “will add SEEN later” does not satisfy `test_duplicate_capture_does_not_double_charge`.
 
 ## Picture: two capture(k1) charge twice
 
-Start with this seeded smell: **two capture(k1) charge twice**. Label it rule, tool, or false comfort before you accept the change.
+**two capture(k1) charge twice**.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would falsify it?"}
   Q -->|two k1 charge 2| Property["Rule — good if tested"]
   Q -->|Stripe header| Mechanism[Tool — processor]
-  Q -->|PCI SAQ| False[False comfort]
+  Q -->|PCI SAQ| False[False assurance]
 ```
 
-Classification starts at the protected effect (two k1 → count 1). Everything that is not key identity at that call is a candidate always-append path. A questionnaire screenshot without that pytest is the same smell, not a different finding class.
+Two k1 still have to count as 1. If the change never checks key identity, that always-append leftover is still open. A questionnaire screenshot does not replace that check.
 
-Webhook races are leftover. New keys per click are leftover. Do not skip `test_duplicate_capture_does_not_double_charge`. Do not claim a course gate. Do not hit a live processor to prove the finding. Do not invent card numbers.
+Webhook races are leftover. New keys per click are leftover. This page does not finish a check-in. Do not hit a live processor to prove the finding. Do not invent card numbers.
 
 ## Problems to find (name them yourself)
 
@@ -34,24 +32,20 @@ Webhook races are leftover. New keys per click are leftover. Do not skip `test_d
 - Webhook vs capture race ignored
 - Card-network scope claimed from this practice
 
-Also reject: live processors; shipping without re-running `test_duplicate_capture_does_not_double_charge`; keys in lessons; claiming a course gate or card-network scope.
+Also reject: live processors; shipping without re-running `test_duplicate_capture_does_not_double_charge`; keys in lessons; treating this capture lesson as card-network proof.
 
 ## Common mix-ups
 
-- A filled-in questionnaire is this cell
+- A filled-in questionnaire is this rule
 - Processor remembering is the local ledger
 - A new key on each retry is fine
 - HTTP 200 is once
 - This practice is in card-network scope
 
-## Practice
-
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one to `test_duplicate_capture_does_not_double_charge`.
-
 ## Use it somewhere new
 
-Clinic change that “added a payment company and a questionnaire PDF” without a duplicate-key deny is an incomplete ledger review. Name the independent falsehood that would still keep two k1 from charging twice.
+A payment company and a questionnaire PDF, without a duplicate-key deny, do not finish the ledger review. A questionnaire PDF is not a duplicate-key deny — write the second-capture deny.
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will add SEEN later.” That comment is leftover without an owner. Do not charge a public store to prove the finding.
+Leave “will add SEEN later” out of the merge until a named person owns the duplicate-charge deny. Do not charge a public store to prove the finding.

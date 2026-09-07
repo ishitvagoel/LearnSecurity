@@ -5,13 +5,13 @@
 
 ## The rule
 
-The notes app must know whether the **server socket** negotiated TLS. A browser can send `X-Forwarded-Proto: https` on cleartext. That header is a client claim. An earlier topic already taught hop versus cache key; this week’s cell is channel authenticity for cookies, HSTS, and redirects.
+The notes app must know whether the **server socket** negotiated TLS. A browser can send `X-Forwarded-Proto: https` on cleartext. That header is a client claim. An earlier topic already taught hop versus cache key; the rule here is channel authenticity for cookies, HSTS, and redirects.
 
 > `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` must be false. `channel_is_https({}, "https")` may be true. A trusted proxy is a **bound peer**, not a header name. This practice has no trusted proxy.
 
-What must not happen is **a client-supplied Forwarded-Proto counted as TLS**. Cookies marked Secure and HSTS fire while the user stays on cleartext. That is an authenticity failure of the transport.
+A **client-supplied Forwarded-Proto** is not TLS. Cookies marked Secure and HSTS fire while the user stays on cleartext. That is an authenticity failure of the transport.
 
-Industry lists want TLS on the public HTTP service with no cleartext fallback. They want a current TLS version (TLS 1.3 is the current handshake). Clients still have to check certificates — that is a different cell. OCSP stapling and encrypted client hello are advanced extras, not this week’s pytest. A server flag that trusts proxy headers is not this sentence.
+TLS has to be on the public HTTP service with no cleartext fallback. A current TLS version (TLS 1.3 is the current handshake). Clients still have to check certificates — that is a different rule. OCSP stapling and encrypted client hello are advanced extras, not this check. A server flag that trusts proxy headers is not the hop-proof check.
 
 ## Picture: hop vs claim
 
@@ -23,9 +23,9 @@ flowchart TD
   Sock["server_scheme http"] --> App
 ```
 
-Who can act: a client on cleartext who wants the app to think TLS is on. Trusting any `X-Forwarded-*` from the socket peer is not what you trust unless that peer is a locked load balancer you bound.
+Picture a client on cleartext who wants the app to think TLS is on. Trusting any `X-Forwarded-*` from the socket peer is not what you trust unless that peer is a locked load balancer you bound.
 
-**A tool is not the rule.** “Force HTTPS” in a dashboard, HSTS preload, or certificate pinning.
+“Force HTTPS” in a dashboard, HSTS preload, and certificate pinning do not stop a client `X-Forwarded-Proto` from counting as TLS.
 
 ## Picture: a trusted proxy is identity, not a header
 
@@ -45,7 +45,7 @@ Pinning on a phone (later) is leftover: operational breakage versus extra bindin
 | Slice | For this rule |
 |---|---|
 | Why it happens | The app believes the client about the channel |
-| What has to be true first | Header https + socket http counts as true |
+| What's already wrong | Header https + socket http counts as true |
 | Trigger | Cleartext client sets Forwarded-Proto |
 | What it costs | Authenticity of the transport; cookies and HSTS lie |
 | How you stop it | Ignore client proto unless the immediate peer is a bound proxy |
@@ -54,7 +54,7 @@ Pinning on a phone (later) is leftover: operational breakage versus extra bindin
 
 ## What the framework does vs what you still have to check
 
-A server flag that trusts proxy headers, with no trusted-proxy IP, is this bug. A browser `https://` in the page’s API client is not the API socket. The app’s promise is: `labs/5.4/5.4-lab`. No live load balancer.
+A server flag that trusts proxy headers, with no trusted-proxy IP, is this bug. A browser `https://` in the page’s API client is not the API socket. Files in `labs/5.4/5.4-lab`. No live load balancer.
 
 ## What the tool cannot do
 
@@ -71,12 +71,10 @@ python3 -m pytest labs/5.4/5.4-lab/tests --impl vulnerable
 python3 -m pytest labs/5.4/5.4-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
-Clinic: the page uses `https://` while the API socket is `http`. Mutual TLS names a service identity; that is not this header.
+The page uses `https://` while the API socket is `http`. Mutual TLS names a service identity; that is not this header.
 
 ## What this page is not doing
 
-Live TLS attacks, strip-attack walkthroughs, pinning exploits. Course gates stay unclaimed without product evidence. Answer keys are not on this site.
+Do not use live TLS attacks, strip-attack walkthroughs, pinning exploits. This site does not mark you as finished. Answer keys are not on this site.

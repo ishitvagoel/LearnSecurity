@@ -5,11 +5,11 @@
 
 ## The rule
 
-A system prompt is not the fix. Retrieval is not the fix. "We mapped a famous-bugs list so we shipped it" is not the fix.
+A system prompt does not block `exec_sql`. Retrieval does not block it. Mapping a famous-bugs list is a spreadsheet, not `run_tool`.
 
-The structural change is: `run_tool` **returns `None` unless `name in ALLOWED`**. Fail-safe: unknown tools deny. A denylist of the string `exec_sql` would still be every-other-interpreter. Structural means that membership — not "the prompt forbids SQL," not retrieval, not a famous-bugs mapping.
+Change this: `run_tool` **returns `None` unless `name in ALLOWED`**. Unknown tools deny. A denylist of the string `exec_sql` would still be every-other-interpreter. Read it as that membership — not "the prompt forbids SQL," not retrieval, not a famous-bugs mapping.
 
-The lab allow-list is a **stand-in** for runtime membership before invoke. It is not a production agent product. The smallest restore for the notes app's optional summarizer is: `exec_sql` → None, `search_notes` may run. Fail-safe: if you are unsure whether the name is allow-listed, deny. Do not fail open because the model "only summarizes." Do not add `exec_sql` to `ALLOWED` "for debugging."
+The lab allow-list is a **stand-in** for runtime membership before invoke. It is not a production agent product. For the notes app's optional summarizer: `exec_sql` → None, `search_notes` may run. If you are unsure whether the name is allow-listed, deny. A model that "only summarizes" is not an allow-list. Do not add `exec_sql` to `ALLOWED` "for debugging."
 
 ## Picture: tool-name allow-list gate
 
@@ -20,30 +20,30 @@ flowchart TD
   In -->|no| Deny[None]
 ```
 
-The repaired files require membership in `{"search_notes"}`. Production still needs that allow-list to be the *right* tools — `search_notes` that returns raw HTML is a lying encoding leftover. A coding assistant in CI that can `pip install` is the same allow-list grain on a different object. Cryptographically bound human approvals are extra, advanced work: a human click is not this pytest.
+`run_tool` has to sit in `{"search_notes"}`. A `search_notes` that returns raw HTML is still a lying encoding leftover. A coding assistant in CI that can `pip install` is the same allow-list grain on a different object. Cryptographically bound human approvals are extra, advanced work: a human click does not take `exec_sql` off always-run.
 
-Industry checklists want an allow-list before a tool runs. This pytest is that sentence for `exec_sql`.
+Use an allow-list before a tool runs — `exec_sql`.
 
 ## What the repaired files must show
 
-Read `fixed/tools.py` against this checklist. Do not treat the snippet as a production agent product.
+`fixed/tools.py` is the tool allow-list, not a model API client.
 
 | After the fix | Must be true |
 |---|---|
 | `exec_sql` | None |
 | `search_notes` | ran search_notes |
 
-Fail closed: if you are unsure whether the name is allow-listed, deny. Uncertainty is a **no** on run, not a yes because the prompt looks careful.
+If you are unsure whether the name is allow-listed, deny. A careful-looking prompt does not make it a run.
 
 ## What this is not
 
 - A system prompt.
 - Retrieval as trust.
 - A famous-bugs dashboard.
-- An assurance gate sticker.
+- An LLM-dashboard tile treated as done.
 - Cryptographically bound approvals (extra, advanced leftover).
 - Library defaults.
-- A guidance document as the oracle.
+- A guidance document as the check.
 
 ## What the tool cannot do
 
@@ -61,8 +61,6 @@ Name who can edit `ALLOWED`. Run:
 python3 -m pytest labs/E1/e1-lab/tests --impl fixed
 ```
 
-It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 Coding assistant: deny shell / install tools in CI the same way — runtime allow-list, not a prompt.
@@ -73,4 +71,4 @@ Allow-listed tool returns HTML. Hallucinated packages. Cryptographically bound a
 
 ## What this page is not doing
 
-Do not call a live model. Do not claim you finished an assurance gate from a famous-bugs screenshot. Do not present a system prompt as the allow-list.
+Do not call a live model. This page does not mark you as finished. A famous-bugs screenshot is not a check-in. Do not present a system prompt as the allow-list.

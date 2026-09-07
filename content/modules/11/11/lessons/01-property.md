@@ -9,13 +9,13 @@ The notes app shares note `n1` from person A with person B, then A revokes. **Pe
 
 > After `revoke("n1", "B")`, `read("n1", "B")` must be `None`. `read("n1", "A")` may still return the body. `read("n1", "B")` before revoke may return the body.
 
-So what must not happen: **a revoked share still reads the note**. That is the “check every access” idea from earlier weeks, stitched with time, revoke, delayed workers, and a phone cache.
+After revoke, B must not still **read the note**. That is the “check every access” idea from earlier weeks, stitched with time, revoke, delayed workers, and a phone cache.
 
-Industry lists want a permission check on every access, not a share event that is forgotten. Access rights changing inside an already-open session without signing in again is extra, advanced work — named so you do not confuse “we stored a revoke row” with “the next read is denied.”
+There has to be a permission check on every access, not a share event that is forgotten. Access rights changing inside an already-open session without signing in again is extra, advanced work — named so you do not confuse “we stored a revoke row” with “the next read is denied.”
 
 A numbered thirteen-item slogan is not the portable pack of tests, models, and restore notes this course asks for.
 
-This week’s practice is this course’s local files or official labs. Do not tell anyone to try attacks on public or third-party systems.
+The practice is this course’s local files or official labs. Do not tell anyone to try attacks on public or third-party systems.
 
 ## Picture: event vs next read
 
@@ -36,7 +36,7 @@ flowchart LR
   Scan --> NotPack[not the pack]
 ```
 
-**A tool, not the rule:** pytest coverage, a capstone scanner, “we finished the last phase.”
+pytest coverage, a capstone scanner, and “we finished the last phase” do not revoke B’s grant.
 
 ## People who can still read after revoke
 
@@ -46,16 +46,16 @@ flowchart LR
 | Delayed worker | Reuse a leftover user session | Finish a job | Same body on a path nobody checked |
 | Someone who treats a green scanner as done | Skip the next-read check | Look finished | Event recorded; grant never consulted |
 
-You do not need a nation-state this week. Those three already read after revoke.
+A former collaborator, a delayed worker, and a green scanner already read after revoke.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-Someone recorded revoke and never asked the grant on the next read. That is the cause. The person who later reads the body is a **result**, not the cause.
+Someone recorded revoke and never asked the grant on the next read. That's the skipped grant check. The person who later reads the body is what happened next.
 
 | Slice | For this rule |
 |---|---|
 | Why it happens | Grant not consulted after revoke |
-| What has to be true first | `read` after `revoke` still returns the body |
+| What's already wrong | `read` after `revoke` still returns the body |
 | Trigger | Former collaborator; cached id; delayed worker |
 | What it costs | Permission over time — ex-collaborator secrecy |
 | How you stop it | Check owner-or-grant on every read; drop stale caches |
@@ -64,9 +64,9 @@ Someone recorded revoke and never asked the grant on the next read. That is the 
 
 ## What the framework does vs what you still have to check
 
-FastAPI will not consult a grant you never check. A phone cache and a worker leftover session are extra grains of the same cell.
+FastAPI will not consult a grant you never check. A phone cache and a worker leftover session are extra grains of the same rule.
 
-The app’s promise is: **this** `read("n1", "B")` after `revoke("n1", "B")` is `None`, while A may still read, and B before revoke may still read. The local check is `labs/11/11-lab`. Fake data only. No live tenants.
+`read("n1", "B")` after `revoke("n1", "B")` is `None`, while A may still read, and B before revoke may still read — files in `labs/11/11-lab`. Fake data only. No live tenants.
 
 ## What the tool cannot do
 
@@ -88,12 +88,10 @@ python3 -m pytest labs/11/11-lab/tests --impl vulnerable
 python3 -m pytest labs/11/11-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
-Clinic: revoke a guardian. Full notes-app slice: the same cell across API, worker, and phone cache.
+Revoke a guardian. Full notes-app slice: the same rule across API, worker, and phone cache.
 
 ## What this page is not doing
 
-Live tenants, claiming you finished an assurance gate. Answer keys are not on this site.
+Do not use live tenants. This page does not finish a check-in. Answer keys are not on this site.

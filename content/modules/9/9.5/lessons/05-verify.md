@@ -1,15 +1,15 @@
-# Fail on the broken files, then pass on the repaired ones
+# A broken close gate must fail the check
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-"PDF delivered" is not evidence. "The severity is 9.8" is a priority input. The check is: `close_finding({"retest": None})` is false and `{retest: "pass"}` may close. That missing-retest observation must be **false** on the broken files and **true** on the repaired files. Do not pentest public hosts.
+Attaching a PDF does not close the finding. Severity 9.8 is a priority number. `close_finding({"retest": None})` has to be false, and `{retest: "pass"}` may close. On the broken helper, a missing retest still closes. Repair refuses a close with no retest. Do not pentest public hosts.
 
 ## Picture: a broken close gate must fail the check
 
-A test that only counts passing tests can pass while `{retest: None}` still closes. This check asks whether a finding closed without a retest still counts as a passing control. Broken must fail that question. Repaired must pass it.
+`{retest: None}` can still close under a green suite.
 
 ```mermaid
 flowchart LR
@@ -17,27 +17,27 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: retest None denied]
 ```
 
-If both pass, the test is not looking at missing retest. If both fail, the fix is not structural or the check is wrong.
+If the broken close still passes, missing retest was never what kept the finding open.
 
-## Four modes, even for a close dict
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
 | Normal | `retest pass` → may close (may pass on both) |
 | Wrong input | `retest None` → cannot close; broken files must fail |
-| Abuse | Missing, fail, or scheduled still deny (fail closed) |
-| Not claimed | A live testing catalogue run; an assurance gate; a severity calculator; that pass hit the same URL |
+| Abuse | Missing, fail, or scheduled still deny |
+| Not claimed | A live testing-guide list run; a check-in; a severity calculator; that pass hit the same URL |
 
-The file is `labs/9.5/9.5-lab/tests/test_property.py`. The test `test_cannot_close_without_retest` is a **what-must-not-happen** test: always-true `close_finding` is not allowed to count as a passing control.
+`test_cannot_close_without_retest` is the case that keeps `close_finding` from being a rubber stamp.
 
-Honest `{retest: "pass"}` may pass on both implementations. That does not excuse the missing-retest deny test. If the broken files do not fail `test_cannot_close_without_retest`, the lab is miswired — fix the wiring, not the assertion.
+A close with `retest` set to `"pass"` is not the whole check. Deny a close that skipped retest. If the broken files do not fail `test_cannot_close_without_retest`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/9.5/9.5-lab/tests --impl vulnerable
 python3 -m pytest labs/9.5/9.5-lab/tests --impl fixed
 ```
 
-A test that only greps `Done` in a ticket tracker without calling `close_finding({"retest": None})` is not this topic's evidence. This practice never opens a live host.
+A `Done` status in a ticket is not `close_finding({"retest": None})`. This practice never opens a live host.
 
 ## What the tests do not prove
 
@@ -45,25 +45,16 @@ A test that only greps `Done` in a ticket tracker without calling `close_finding
 - Variant coverage (extra fields on the note)
 - Whether a known-exploited listing applies
 - Role-change cache after a grant change (extra, advanced work)
-- An assurance gate complete
-
-Record those as leftover or later topics, not as silent passes.
+- This page does not close a finding check-in
 
 ## Practice
 
-Run both this session from the lab directory if needed:
-
-```text
-python3 -m pytest labs/9.5/9.5-lab/tests --impl vulnerable
-python3 -m pytest labs/9.5/9.5-lab/tests --impl fixed
-```
-
-Paste nothing from answer keys. Write fail/pass into your notes next to the close-without-retest row. Reject a "test" that only greps `Done` in a ticket without calling `close_finding({"retest": None})`.
+Call `close_finding({"retest": None})`. A `Done` status is the ticket, not the retest.
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts "ticket status Done" is not this topic. A live pentest is out of scope.
+Ticket status Done is the tracker, not the retest. Do not run a live pentest.
 
 ## What this page is not doing
 
-Do not add a live-host trophy. Do not log note bodies. Answer keys are not on this site. Do not claim you finished an assurance gate.
+A live host screenshot is not a retest on the finding. Do not log note bodies. Answer keys are not on this site. This page does not mark you as finished.

@@ -3,9 +3,9 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-An import job, a support tool, or a missed GraphQL mutation can still insert a sixth after `/share` was “capped once.” Pair notice and recover. Do not log note bodies. Do not paste member emails into the ticket.
+An import job, a support tool, or a missed GraphQL mutation can still insert a sixth share. Keep note bodies and member emails out of the ticket.
 
 ## Picture: metric on deny, then trim
 
@@ -24,25 +24,23 @@ flowchart TD
 | Recover | Trim extra grants; tell the owner |
 | Leftover | Teams >5 need an owned exception |
 
-Announce “share limit reached” so people can hear it. That announcement is not the cap. Industry lists name detect, respond, recover. They do not prove the write-path cap. A log-product name is not the rule.
+Announce “share limit reached” so people can hear it. That announcement is not the cap, and a vendor name does not prove the write-path cap.
 
 ## What the framework does vs what you still have to check
 
-A filter will page on request rate and stay silent when five slow grants plus a sixth import land. Notice must observe **share_count versus cap**, not requests per minute. If the alert includes a note body, you have opened a leak.
+Request-rate paging misses five slow grants plus a sixth import. Compare **share_count versus cap**, not requests per minute. Keep a note body out of the share-cap metric.
 
 ## Practice
-
-Write one log line you would accept. Tie it to `labs/3.4/3.4-lab`.
 
 ```text
 log_denied reason=share_cap note_id=n1 count=5 request_id=req_34bl
 ```
 
-Reject any line that includes a note body, a real email, “awareness list handled,” or a filter product name as the rule.
+A note body, a real email, “awareness list handled,” or a filter product name as the rule already overfills the log.
 
 ## Use it somewhere new
 
-Clinic: notice a 4th guardian; do not paste the child’s name into the ticket. Invite tokens: notice a second redeem without logging the token.
+Notice a 4th guardian; do not paste the child’s name into the ticket. Invite tokens: notice a second redeem without logging the token.
 
 ## Can people still use it
 
@@ -50,4 +48,4 @@ The owner-visible error must be something assistive tech can announce, not only 
 
 ## What this page is not doing
 
-A log-product name is not the rule. Live load tests are out of scope. Answer keys are not on this site.
+Do not use live load tests. Answer keys are not on this site.

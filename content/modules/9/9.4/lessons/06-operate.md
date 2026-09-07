@@ -1,15 +1,15 @@
-# unmapped_high_blocks without logging payloads
+# Block the unmapped HIGH without logging payloads
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A new rule can fire a new HIGH after `ship_ok` was “fixed once.” Pair notice and recover. Do not log secret-scanner payloads or note bodies. Do not paste scanner snippets with fake clinic text into Slack.
+A new scanner rule can fire a HIGH that nobody owns. Keep secret-scanner payloads and note bodies out of Slack, including fake clinic snippets.
 
 ## Picture: unmapped HIGH is a signal
 
-A blocked ship is a notice-and-recover problem, not a licence to quote the finding payload in the paging channel. Notice names the finding id. Recover maps or fixes. Neither reprints the payload.
+If ship is blocked, page the finding id — not the finding payload. Then map it or fix it.
 
 ```mermaid
 flowchart TD
@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Stop[block ship]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a scanner product. They do not prove this finding is owned. Someone still has to own the leftover.
+Turning on a scanner does not assign an owner to the HIGH.
 
-Re-run `test_unmapped_high_blocks_ship` after any scanner-rule change. A green “code scanning on” tile is not that pytest. SCA CVEs that are not actually called still need an *owner* on the map — inventory them before you claim recover.
+An unmapped HIGH still has to block ship in `test_unmapped_high_blocks_ship`. Turning code scanning on does not own the HIGH. SCA CVEs that are not actually called still need an *owner* on the map; do not ship an unmapped HIGH.
 
 ## Signals that do not become a second leak
 
@@ -32,42 +32,38 @@ Re-run `test_unmapped_high_blocks_ship` after any scanner-rule change. A green �
 | Recover | Map it or fix it; do not hide it quietly |
 | Leftover | Who-is-allowed blind spots; exceptions with expiry; mass suppressions |
 
-A vendor security dashboard will show finding counts and stay silent when CI’s `ship_ok` is always true. Detection must observe **empty map plus HIGH is deny**, not alert volume. If the alert includes a secret or a note body, you have opened the same leak as a log line and an extra vendor copy.
-
-A log line a reviewer can accept looks like:
+Vendor finding counts do not mean CI’s `ship_ok` maps HIGH. Block ship on **empty map plus HIGH is deny**, not alert volume. A secret or a note body next to that empty-map deny is a log-line leak and an extra vendor copy.
 
 ```text
 log_denied reason=unmapped_high_blocks finding=F1 sev=HIGH
 ```
 
-Not: a secret, a note body, or “verification gate complete.”
+If the sample still contains a secret, a note body, or “verification gate complete,” you have filed the finding twice.
 
-If your alert includes the matching scanner snippet, you have copied the leak into the paging channel.
+The unmapped-HIGH ticket needs the finding id, not the scanner snippet.
 
 ## What the framework does vs what you still have to check
 
-The same who-is-allowed holes that bypass this practice will also bypass a “scan our dashboard” detector. Name those places before you claim recover. A scanner-product name is not the rule.
+Who-is-allowed holes still ship under a green scanner dashboard if no owner is on the map.
 
 ## Can people still use it
 
 The triage screen must say *why* F1 is blocked, in words. Do not encode “blocked” as color only, or people will mass-suppress. If operators see a blocked-ship badge, do not encode it as color only.
 
-Cause vs cost stays split here too: the **cause** is CI’s `ship_ok` still always true (or a new HIGH with no map row); the **cost** is an unowned HIGH in production; **how you stop it** is the join; **how you notice** is `unmapped_high_blocks`; **how you recover** is map-or-fix, not a quiet severity downgrade. What the tool cannot do: this alert does not prove the mapped requirement is the right coverage-map cell, and it does not cover who-is-allowed blind spots.
+It broke because CI’s `ship_ok` still always true (or a new HIGH with no map row). Cost: an unowned HIGH in production. Fix: the join. Signal: `unmapped_high_blocks`. Recovery: map-or-fix, not a quiet severity downgrade. The ticket does not prove the mapped requirement is the right coverage-map row, and it does not cover who-is-allowed blind spots.
 
 ## Practice
-
-Write one log line you would accept in review. Tie it to `labs/9.4/9.4-lab`.
 
 ```text
 log_denied reason=unmapped_high_blocks finding=F1 sev=HIGH
 ```
 
-Reject any line that includes a secret, a note body, or “verification gate complete.”
+Unmapped-HIGH denials name the finding id. A secret, a note body, or “verification gate complete” is a second scanner dump.
 
 ## Use it somewhere new
 
-Clinic: block a release with fifty unmapped HIGHs; do not paste scanner snippets with fake patient text into Slack. Do not scan a live org.
+Block a release with fifty unmapped HIGHs; do not paste scanner snippets with fake patient text into Slack. Do not scan a live org.
 
 ## What this page is not doing
 
-A scanner-product name is not the rule. Live org traces are out of scope. Answer keys are not on this site.
+Do not use live org traces. Answer keys are not on this site.

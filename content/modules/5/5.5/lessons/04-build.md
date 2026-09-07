@@ -5,11 +5,11 @@
 
 ## The rule
 
-A denylist of quotes is not the fix. “The ORM will handle it” is not the fix. A later row-level rule on in production and off in tests is not the fix.
+A denylist of quotes does not make SQL a tuple. “The ORM will handle it” still concatenates. A later row-level rule on in production and off in tests is a different environment.
 
-Structural means the parser never sees those fields as grammar. Bind tenant and note id as parameters. `fetch_sql` must return `(sql, params)` with `%s` placeholders and a two-tuple of values.
+In plain words, the parser never sees those fields as grammar. Bind tenant and note id as parameters. `fetch_sql` must return `(sql, params)` with `%s` placeholders and a two-tuple of values.
 
-The smallest restore for notes-app note fetch is: program beside data. Fail closed: if you cannot bind, **do not query**. Do not fail open because the id “looks like a UUID.”
+Put this in note fetch: program beside data. If you cannot bind, **do not query**. An id that “looks like a UUID” is not a bind.
 
 ## Picture: program beside data
 
@@ -21,13 +21,13 @@ flowchart TD
   Bound -->|no| Deny[Deny]
 ```
 
-The lab’s repaired files return SQL text with `tenant=%s AND id=%s` and a `(tenant, note_id)` tuple. Production still needs 1.2 object grants (4.4) and a 3.3 database role as *second* checks. Identifier concatenation for ORDER BY stays leftover: allow-list column names instead of binding them as values. NoSQL operators and GraphQL arguments wait for 7.1 as the same shape.
+The query is `tenant=%s AND id=%s` with a `(tenant, note_id)` tuple. Object grants (4.4) and a 3.3 database role remain *second* checks. Identifier concatenation for ORDER BY stays leftover: allow-list column names instead of binding them as values. NoSQL operators and GraphQL arguments wait for 7.1 as the same shape.
 
-Industry lists want parameterized queries. This pytest is that sentence for `fetch_sql`.
+Use parameterized queries — `fetch_sql`.
 
 ## What the repaired files must show
 
-Read `fixed/query.py` against this checklist. Do not treat the snippet as a production query builder.
+`fixed/query.py` returns a bound pair, not a clinic database handle.
 
 | After the fix | Must be true |
 |---|---|
@@ -35,7 +35,7 @@ Read `fixed/query.py` against this checklist. Do not treat the snippet as a prod
 | hostile punctuation in `note_id` | still a param, still not a `str` query |
 | `is_bound` | true only for the tuple shape |
 
-Fail closed: if you cannot bind, the answer is no query. Uncertainty is a **deny**, not a yes because the id looked well-formed.
+When you cannot bind, the answer is no query. A well-formed id is not a bind.
 
 ## What this is not
 
@@ -57,11 +57,9 @@ Name the check (`tuple` ∧ `"%s"` in sql ∧ params length 2). Run:
 python3 -m pytest labs/5.5/5.5-lab/tests --impl fixed
 ```
 
-It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
-Clinic: stop treating the search box as SQL text; bind the lookup string.
+Stop treating the search box as SQL text; bind the lookup string.
 
 ## What can still go wrong
 
@@ -69,4 +67,4 @@ ORDER BY identifiers; replicas; row-level-rule theater; 3.3 role still required;
 
 ## What this page is not doing
 
-Do not connect a live company. Do not claim a course gate from an ORM brand.
+Do not connect a live company. A check-in is not an ORM brand.

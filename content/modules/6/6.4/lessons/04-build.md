@@ -5,9 +5,9 @@
 
 ## The rule
 
-`resolve` must join, canonicalize, and deny unless the result is the folder or a child of `/tmp/sc-lab`. Structural means that prefix check — not a denylist of `..`, not a UUID filename sticker, not trusting `Content-Type`.
+`resolve` must join, canonicalize, and deny unless the result is the folder or a child of `/tmp/sc-lab`. Here: that prefix check — not a denylist of `..`, not a UUID filename sticker, not trusting `Content-Type`.
 
-The smallest restore for notes-app uploads is: deny if not under the folder. Fail closed: if canonicalize is uncertain, **deny**. Do not fail open because the name “looks like notes/a.txt.”
+For uploads: deny if not under the folder. If canonicalize is uncertain, **deny**. A name that “looks like notes/a.txt.” is not a canonical path.
 
 ## Picture: deny if not under the folder
 
@@ -19,9 +19,9 @@ flowchart TD
   Under -->|no| Deny[ValueError]
 ```
 
-The lab’s repaired files resolve `(ROOT / name)` and raise `ValueError("escape")` unless `ROOT` is `p` or in `p.parents`. Production still needs internally generated names as extra defense. Zip member paths are another parser of the same cell. XML/pickle/YAML are leftover of the earlier data-vs-grammar shape, not this prefix.
+`resolve` uses `(ROOT / name)` and raises `ValueError("escape")` unless `ROOT` is `p` or in `p.parents`. Internally generated names remain extra defense. Zip member paths are another parser of the same rule. XML/pickle/YAML are leftover of the earlier data-vs-grammar shape, not this prefix.
 
-Industry checklists want a hard check on user filenames. This pytest is that sentence for `resolve`.
+User filenames still need a hard check — `resolve`.
 
 ## What the repaired files must show
 
@@ -37,7 +37,7 @@ A blacklist of `..` only. Trusting `Content-Type`. Running uploads as code. Unpa
 ## What can still go wrong
 
 - Zip members that still use user paths inside archives (later, harder leftover).
-- Magic-byte vs extension is a different cell.
+- Magic-byte vs extension is a different rule.
 - Uploads run as server code if you later serve from an interpreted directory.
 - Image codecs wait for a later elective.
 - XML entity expansion / pickle / YAML `load` are other parsers (same earlier shape).
@@ -51,12 +51,12 @@ Name who (uploader), what (file under the folder), action (`resolve`), and the c
 python3 -m pytest labs/6.4/6.4-lab/tests --impl fixed
 ```
 
-It must pass. Do not `open()` a path outside the lab folder.
+Do not `open()` a path outside the lab folder.
 
 ## Use it somewhere new
 
-Clinic: stop joining the original scan filename onto a public folder; canonicalize then prefix.
+Stop joining the original scan filename onto a public folder; canonicalize then prefix.
 
 ## What this page is not doing
 
-Do not trophy host files. Do not claim a course gate from a UUID filename.
+Do not hunt host files. Do not treat a UUID filename as a finished check-in.

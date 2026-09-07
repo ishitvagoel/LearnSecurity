@@ -1,29 +1,27 @@
-# Review path-trusted callbacks like a pull request
+# Would you merge this path-trusted callbacks?
 
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
-
 ## What you are reviewing
 
-A colleague ships a notes-app billing webhook. Review `labs/7.3/7.3-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `accept("", "body", "lab-secret")` is still true, compare that with the rule, and write changes a developer can verify.
+The files in `labs/7.3/7.3-lab/vulnerable/` are the billing-webhook change. Does `accept("", "body", "lab-secret")` still return true?
 
-The check you already ran (`test_missing_signature_is_rejected`) is the rule test. A comment “will HMAC later” is not. A famous-bugs ticket is not.
+“Will HMAC later” is a promise. `test_missing_signature_is_rejected` is the evidence. A famous-bugs ticket does not verify the signature.
 
 ## Picture: accept always true / process because the path matched
 
-Start with this seeded smell: **Accept always true / process because the path matched**. Label it rule, tool, or false comfort before you accept the change.
+**Accept always true / process because the path matched**.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|empty sig accepted| Property["Rule - good if tested"]
   Q -->|TLS only| Mechanism[Tool - hop]
-  Q -->|vendor CIDR| False[False comfort]
+  Q -->|vendor CIDR| False[False assurance]
 ```
 
-The review starts at the protected effect (empty sig denied). Everything that is not a raw-body MAC at that call is a candidate path-trust. A TLS terminator without that pytest is the same smell, not a different finding class.
+An empty sig still has to be denied. If the change never checks a raw-body MAC, that path-trust is still open. A TLS terminator without that check is still the same problem.
 
 Parse-before-MAC (2.1) and secret-in-query (4.3) are other authenticity holes — name them, do not skip `test_missing_signature_is_rejected`.
 
@@ -42,16 +40,12 @@ Also reject: live provider attacks; closing findings without re-running `test_mi
 - An IP allow-list is authenticity
 - Webhooks are just APIs in reverse so JWT login applies
 - Vendor SDK verify is the same as a custom MAC over parsed JSON
-- A famous-bugs nickname is the rule
-
-## Practice
-
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_missing_signature_is_rejected`. Do not open the keys file.
+- A famous-bugs label verifies HMAC
 
 ## Use it somewhere new
 
-Clinic change that “terminated TLS and allow-listed the vendor” without a missing-sig test is an incomplete review of path-trusted callbacks. Name the independent falsehood that would still keep empty sig false.
+TLS and a vendor allow-list, without a missing-sig test, still trust the path. TLS does not replace a missing-sig deny — write that deny.
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will HMAC later.” That comment is leftover without an owner. Do not POST a live provider to prove the finding.
+You cannot waive a missing signature with “will HMAC later.” Assign an owner or keep the finding open. Do not POST a live provider to prove the finding.

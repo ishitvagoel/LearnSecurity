@@ -3,36 +3,34 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
-
 ## What you are reviewing
 
-A colleague ships notes-app ingest. Review `labs/2.1/2.1-parser-boundaries/vulnerable/` as that change. Reconstruct whether ACL and store still parse the same bytes twice, compare that with the rule, and write changes a developer can verify.
+Treat `labs/2.1/2.1-parser-boundaries/vulnerable/` as an ingest PR. Reconstruct whether ACL and store still parse the same bytes twice.
 
-The check you already ran (`test_duplicate_tenant_keys_are_one_meaning`) is the rule check. A comment “JSON should not duplicate keys” is not.
+Do not treat “JSON should not duplicate keys” as a green `test_duplicate_tenant_keys_are_one_meaning`.
 
 ## Picture: problems to find (name them yourself)
 
-Start with this seeded smell: **`json.loads` used for store while ACL uses a different first-key scan**. Label it **rule**, **tool**, or **false comfort** before you accept the change.
+**`json.loads` used for store while ACL uses a different first-key scan**.
 
 ```mermaid
 flowchart TD
   Claim[Change claim] --> Q{What would prove it false?}
   Q -->|a two-meaning ingest| Property[Rule — good if checked]
   Q -->|a library name| Mechanism[Tool — ask which rule]
-  Q -->|JSON cannot duplicate| False[False comfort]
+  Q -->|JSON cannot duplicate| False[False assurance]
 ```
 
-For each claim and each branch: label **rule**, **tool**, or **false comfort**.
+A duplicate-key comment is **rule**, **tool**, or **false assurance** — pick one per reader.
 
-Seeded smells (label them yourself; do not open the keys file):
+Problems to find (name them yourself; do not open the keys file):
 
 - `json.loads` used for store while ACL uses a different first-key scan
 - Comment or belief that “JSON can’t have duplicate keys” (the spec recommends uniqueness; readers differ)
 - No corpus check for duplicate keys
 - Normalizing display names as a stand-in for company ids
 
-Also reject: trusting the client; concatenating readers; Report-Only as enforcement; closing findings without re-running the repaired-files check; keys in learner notes.
+Also reject: treating one JSON reader as all readers; concatenating readers; Report-Only as enforcement; closing findings without re-running the repaired-files check; keys in learner notes.
 
 ## Common mix-ups
 
@@ -40,14 +38,10 @@ Also reject: trusting the client; concatenating readers; Report-Only as enforcem
 - One reader is as good as another
 - Validation equals canonicalization
 
-## Practice
-
-Write three review notes a peer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_duplicate_tenant_keys_are_one_meaning`. Do not open the keys file.
-
 ## Use it somewhere new
 
-GraphQL and REST both ingest the same note — two grammars. A change that “validates JSON” on only one path is an incomplete review. Name the independent falsehood that would still stop a two-meaning ingest.
+GraphQL and REST both ingest the same note — two grammars. Validating JSON on only one path still leaves a two-meaning ingest. On both grammars, duplicate keys still need one meaning — write that check.
 
 ## What this page is not doing
 
-Do not merge by adding a comment “JSON should not duplicate keys.” The spec says should, not this check.
+Do not merge because RFC 8259 says JSON should not duplicate keys. Should is not `test_duplicate_tenant_keys_are_one_meaning`.

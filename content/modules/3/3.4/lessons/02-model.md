@@ -5,11 +5,11 @@
 
 ## Could someone else name checks from your machine?
 
-“We have a share limit” is not this page. A reviewable model names **states 0–5**, **the 6th transition**, **who may override**, and **which paths skip the cap**.
+“We have a share limit” does not name **states 0–5**, **the 6th transition**, **who may override**, and **which paths skip the cap**.
 
-This week’s freeze: one note, `add_share` counter, cap 5. No live GraphQL, no production filter.
+One note, `add_share` counter, cap 5. No live GraphQL, no production filter.
 
-## Picture: five allowed, sixth is a different cell
+## Picture: five allowed, sixth is a different rule
 
 ```mermaid
 stateDiagram-v2
@@ -34,7 +34,7 @@ flowchart TD
   Import["CSV import"] --> Same[Same cap]
 ```
 
-## Step 1: freeze who, what, and time
+## Step 1: name who, what, and when
 
 | Piece | This system |
 |---|---|
@@ -63,11 +63,11 @@ Write the cap down. Implement it on every write. Do not substitute a later rate 
 
 ## Practice
 
-Draw this map so someone else could name pytest cases. Point at `labs/3.4/3.4-lab` file `share_limit.py`.
+Open `share_limit.py` under `labs/3.4/3.4-lab`.
 
 ## Use it somewhere new
 
-Clinic: states `0..3` guardians. Invite tokens: one token ≠ unbounded redemption.
+States `0..3` guardians. Invite tokens: one token ≠ unbounded redemption.
 
 ## What can still go wrong
 
@@ -75,4 +75,4 @@ Legitimate teams >5 need an owned exception. Parallel sixths need locking from t
 
 ## What this page is not doing
 
-Treating an awareness list as the definition of security. Answer keys are not on this site.
+Circling “broken access control” does not cap `add_share`. Answer keys are not on this site.

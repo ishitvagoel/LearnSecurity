@@ -9,9 +9,9 @@ The notes app unpacks files and copies bytes into a destination. **Integrity of 
 
 > `copy_into(4, b"abcdefgh", 4)` must return a destination whose length is at most 4. A short honest copy may fit.
 
-What must not happen is **a copy that exceeds the destination**. This elective is a Python length stand-in. It is not a C exploit course.
+The copy is longer than the destination buffer. This elective is a Python length stand-in. It is not a C exploit course.
 
-Manufacturer guidance that tells a company to prefer memory-safe languages is not the lab check. Industry checklists want unstructured data handled so it does not become an unexpected overwrite. Native unpackers and leftover C codecs are leftover risk, later and harder — not this pytest. Do not invent a “memory safety” chapter id as the rule.
+Manufacturer guidance that tells a company to prefer memory-safe languages is not the lab check. Unstructured data handled so it does not become an unexpected overwrite. Native unpackers and leftover C codecs are leftover risk, later and harder — not this check. Do not invent a “memory safety” chapter id as the rule.
 
 ## Picture: destination size is the rule
 
@@ -24,9 +24,9 @@ flowchart TD
   Gate -->|declared_len only| Bad["len dst > bufsize"]
 ```
 
-Who can act: someone who controls a file header length. What you trust: a local `copy_into(bufsize, src, declared_len)` that bounds the copy by destination size. Do not compile a native overflow.
+Picture someone who controls a file header length. A local `copy_into(bufsize, src, declared_len)` that bounds the copy by destination size. Do not compile a native overflow.
 
-**A tool is not the rule.** “We use Kotlin,” a sanitizer in CI, or an awareness-list dashboard is not this sentence.
+“We use Kotlin,” a sanitizer in CI, and an awareness-list dashboard do not stop a copy from running past the buffer.
 
 ## Picture: language marketing is not the copy
 
@@ -44,7 +44,7 @@ A Python slice in this practice is a teaching stand-in. C will not do this for y
 | Slice | For this rule |
 |---|---|
 | Why it happens | Declared length trusted over destination size |
-| What has to be true first | `copy_into` copies `declared_len` plus 8 |
+| What's already wrong | `copy_into` copies `declared_len` plus 8 |
 | Trigger | Header claims 4; payload is 8 |
 | What it costs | The destination object is overwritten in space |
 | How you stop it | `min(bufsize, declared_len, len(src))` |
@@ -53,7 +53,7 @@ A Python slice in this practice is a teaching stand-in. C will not do this for y
 
 ## What the framework does vs what you still have to check
 
-Python slicing will not save a C copy. A memory-safe language reduces this class of overwrite **in that language**. Helpers that call C, and leftover codecs, still copy. The app’s promise is: **this** practice, length ≤ 4.
+Python slicing will not save a C copy. A memory-safe language reduces this class of overwrite **in that language**. Helpers that call C, and leftover codecs, still copy. Length ≤ 4.
 
 ## What the tool cannot do
 
@@ -71,14 +71,12 @@ python3 -m pytest labs/E4/e4-lab/tests --impl vulnerable
 python3 -m pytest labs/E4/e4-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 Parser error messages must be readable without dumping file bytes. Operators should be able to read “copy exceeds destination” without a hex dump.
 
 ## Use it somewhere new
 
-Clinic DICOM / image parser. Protobuf C extension.
+Sketch a DICOM or image parser on the notes app. Also name a protobuf C extension.
 
 ## What this page is not doing
 
-Weaponized native exploits. An awareness list as the syllabus. Course gates from this page. Answer keys are not on this site.
+Do not use weaponized native exploits. Do not treat an awareness list as the syllabus. This page does not finish a check-in. Answer keys are not on this site.

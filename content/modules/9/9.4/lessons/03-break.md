@@ -5,21 +5,19 @@
 
 ## Try it
 
-The practice is not a public repo you scan. It is a tiny Python `ship_ok` that takes findings and a map. The failure is already in the function: it returns true for every pair. You are here to see that the check treats that true as a **failed rule**, not as a green tile.
+The practice is not a public repo you scan. `ship_ok` takes findings and a map: it returns true for every pair, so an unmapped finding already ships.
 
-The rule under test:
-
-> An unmapped HIGH must not ship. If `ship_ok([{"id": "F1", "sev": "HIGH"}], {})` returns true, the ship gate has failed as a security control.
+> An unmapped HIGH must not ship. If `ship_ok([{"id": "F1", "sev": "HIGH"}], {})` returns true, the ship check has failed as a security control.
 
 ## Where you may practice
 
-Only `labs/9.4/9.4-lab` is in scope. The practice is an in-process `ship_ok(findings, mappings)`. The finding id is the synthetic string `F1`. No live GitHub Advanced Security, no scanning other people’s repositories, no Dependabot against a public clinic.
+Stay inside `labs/9.4/9.4-lab`. The finding id is the synthetic string `F1`. No live GitHub Advanced Security, no scanning other people’s repositories, no Dependabot against a public clinic.
 
 Do not paste this exercise onto a public GitHub org, employer dashboard, or live clinic “to see what the scanner finds.”
 
-What you trust for this check: `ship_ok` is supposed to **join scanner output to the coverage map**. A vendor default setup, a default Semgrep ruleset, and an empty dashboard are not what you trust.
+`ship_ok` is supposed to **join scanner output to the coverage map** — not A vendor default setup, a default Semgrep ruleset, or an empty dashboard.
 
-Who can make this go wrong in this story: alert fatigue plus an always-true gate. That stands in for “code scanning is on and the dashboard is noisy so we ship Fridays,” a maturity score on a slide, or fifty unmapped HIGHs treated as probable false positives.
+Alert fatigue plus an always-true gate — “code scanning is on and the dashboard is noisy so we ship Fridays,” a maturity score on a slide, or fifty unmapped HIGHs treated as probable false positives.
 
 ## Picture: every finding ships
 
@@ -28,20 +26,17 @@ flowchart TD
   Any[any findings] --> True[ship_ok true]
 ```
 
-The broken files take that path on purpose. You do not need a vendor console. You must not scan a public repo. The true return *is* the leak of the release decision.
+You do not need a vendor console. You must not scan a public repo. That true return already ships the unmapped HIGH.
 
 The coverage lesson already said status is not coverage. This check is **unowned HIGH must not ship**.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
-Read `vulnerable/sast.py`. It returns true for every pair. Tests:
+`vulnerable/sast.py` ships every findings/map pair. Tests:
 
 - `test_unmapped_high_blocks_ship`
 - `test_mapped_high_may_ship` — a mapped HIGH may pass on both
 
-You do not need a new finding id. The failure of `test_unmapped_high_blocks_ship` *is* the evidence.
-
-Do not open the repaired files yet. Diagnose the cause first.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -55,29 +50,27 @@ Do not open the repaired files yet. Diagnose the cause first.
 |---|---|
 | The rule | `ship_ok([HIGH], {})` is false |
 | Why it happens | Scanner output not joined to the coverage map |
-| What has to be true first | `ship_ok` true for every pair |
+| What's already wrong | `ship_ok` true for every pair |
 | Trigger | Release with an unmapped HIGH |
 | What it costs | Unknown HIGH in production |
 | How you stop it later | Block unmapped HIGH; a mapped HIGH you accept still needs an exception with an expiry |
 | How you notice later | `unmapped_high_blocks`; never the payload |
 | How you recover later | Map it or fix it; do not hide it quietly |
-| Out of scope | A product name, live GitHub, or claiming the verification gate is done |
+| Out of scope | A product name, live GitHub, or treating this SCA lesson as a check-in |
 
-A web framework will still ship if CI’s `ship_ok` is always true. The app’s promise this week is: **this** practice, empty map plus HIGH is deny.
+A web framework will still ship if CI’s `ship_ok` is always true. Empty map plus HIGH is deny.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/9.4/9.4-lab/tests --impl vulnerable
 ```
 
-Run from `labs/9.4/9.4-lab` if a collection at the repo root picks up `site/`. Record `test_unmapped_high_blocks_ship`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/9.4/9.4-lab` if a collection at the repo root picks up `site/`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic: fifty unmapped HIGHs — predict without leaving this directory. Do not scan a live GitHub org.
+Fifty unmapped HIGHs — predict without leaving this directory. Do not scan a live GitHub org.
 
 ## What this page is not doing
 

@@ -5,21 +5,19 @@
 
 ## Try it
 
-The practice is not a warehouse you attack. It is a tiny Python `delete_account` plus `body_retained` / `search_retained`. The failure is already in the functions: delete pops the notes map and leaves analytics. You are here to see that the check treats that leftover as a **failed rule**, not as a cleanup nit.
-
-The rule under test:
+The practice is not a warehouse you attack. `delete_account` plus `body_retained` / `search_retained`: delete pops the notes map and leaves analytics, so the leftover body still searches.
 
 > After `delete_account("alice")`, `body_retained("alice")` must be None. If it still returns `"secret"`, analytics still holds the note.
 
 ## Where you may practice
 
-Only `labs/5.1/5.1-lab` is in scope. The maps are in-process: `delete_account` plus `body_retained` / `search_retained`. The user is the synthetic name `alice` and the body is `secret`. It does not open a database, object storage, or a warehouse.
+Stay inside `labs/5.1/5.1-lab`. `delete_account` plus `body_retained` / `search_retained` use the synthetic name `alice` and the body `secret`. It does not open a database, object storage, or a warehouse.
 
 Do not dump a live analytics store. Do not dump an employer warehouse. Do not dump a classmate preview. Do not query a warehouse “to see what happens.”
 
-What you trust for this check: `delete_account` is supposed to walk every listed copy. A contract PDF, “we anonymized the user id,” and a database `DELETE FROM notes` are not what you trust.
+`delete_account` is supposed to walk every listed copy — not A contract PDF, “we anonymized the user id,” or a database `DELETE FROM notes`.
 
-Who can still read it, in this story: an insider with SELECT on `ANALYTICS`, or a buyer of a “de-identified” export that still contains bodies. That stands in for a partner CSV, a search-index replica, or an appointment-card note that outlived the patient row.
+Picture an insider with SELECT on `ANALYTICS`, or a buyer of a “de-identified” export that still contains bodies — a partner CSV, a search-index replica, or an appointment-card note that outlived the patient row.
 
 ## Picture: notes gone, copies live
 
@@ -30,21 +28,18 @@ flowchart TD
   Skip --> Hit["body_retained returns secret"]
 ```
 
-The broken files take that path on purpose. You do not need a live warehouse query. You must not run one. The leftover still returning `"secret"` *is* the leak.
+You do not need a live warehouse query. You must not run one. Leftover `"secret"` is still in the warehouse.
 
-Industry lists want documented retention actually carried out. Encrypting a warehouse you still keep is secrecy theater, not this privacy check.
+Documented retention has to be actually carried out. Encrypting a warehouse you still keep is secrecy theater, not this privacy check.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
-Read `vulnerable/lifecycle.py`. `delete_account` only pops `NOTES`. Tests:
+In `vulnerable/lifecycle.py`, `delete_account` only pops `NOTES`. Tests:
 
 - `test_deleted_account_leaves_no_analytics_body`
 - `test_deleted_account_leaves_no_search_copy`
 - `test_active_account_analytics_present` — honest product path; analytics exists *before* delete
 
-You do not need a new store name. The failure of `test_deleted_account_leaves_no_analytics_body` *is* the evidence.
-
-Do not open the repaired files yet. Diagnose the cause first.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -57,7 +52,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 | Slice | Practice |
 |---|---|
 | Why it happens | A second copy was not in the deletion graph |
-| What has to be true first | `delete_account` pops NOTES only |
+| What's already wrong | `delete_account` pops NOTES only |
 | Trigger | `delete_account("alice")` then `body_retained("alice")` |
 | What it costs | Privacy plus leftover confidential data after the person left |
 | How you stop it later | Inventory the copies; pop or unlink bodies in the same delete |
@@ -65,21 +60,19 @@ Do not open the repaired files yet. Diagnose the cause first.
 | How you recover later | Purge partitions; a named legal-hold owner |
 | Out of scope | A privacy-law name, a contract checkbox, or a live warehouse dump |
 
-A database `DELETE FROM notes` is not warehouse DELETE. The web app does not erase object-store analytics. An HTTP 200 on `/account` is not `body_retained is None`. The app's promise this week is: **these** local files, after delete, both copies are None.
+A database `DELETE FROM notes` is not warehouse DELETE. The web app does not erase object-store analytics. An HTTP 200 on `/account` is not `body_retained is None`. After delete, both copies are None.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/5.1/5.1-lab/tests --impl vulnerable
 ```
 
-Record the failing test `test_deleted_account_leaves_no_analytics_body`. Do not weaken it to “the notes row is gone.” An environment error is not security evidence.
+Record the failing test `test_deleted_account_leaves_no_analytics_body`. “The notes row is gone” is not that test. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic: patient deleted; appointment-card notes remain. Predict, without leaving this directory, whether deleting the patient row clears the card. Do not query a live warehouse.
+Patient deleted; appointment-card notes remain. Predict, without leaving this directory, whether deleting the patient row clears the card. Do not query a live warehouse.
 
 ## Can people still use it
 

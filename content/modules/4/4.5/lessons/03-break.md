@@ -5,21 +5,19 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `accept_token`. Fake claims. It does not open an identity provider or check a real signature. You are here to see that a JWT minted for another API still counting as a notes-app session is a **failed rule**, not a trophy dump of a production token.
-
-The rule under test:
+The practice is not a website you attack. `accept_token` uses fake claims. It does not open an identity provider or check a real signature. A JWT minted for another API still counting as a notes-app session is the break; you do not need a production token.
 
 > A token for another API is not a notes-app session. `accept_token({"sub": "alice", "aud": "other-api"}, "securecollab-api")` must be false.
 
 ## Where you may practice
 
-Only `labs/4.5/4.5-lab` is in scope. Restore the broken and repaired folders when you are done. Fake claims only.
+Stay inside `labs/4.5/4.5-lab`. Restore the broken and repaired folders when you are done. Fake claims only.
 
 Do not replay a production access token, an employer OpenID tenant, or a classmate Auth0 app.
 
-What must not happen: a JWT with the wrong audience accepted as a notes-app session. `accept_token({"sub": "alice", "aud": "other-api"}, "securecollab-api")` is true.
+`accept_token({"sub": "alice", "aud": "other-api"}, "securecollab-api")` true is a wrong-audience JWT treated as a notes-app session.
 
-Who can act here: a **bearer minted for another API** (confused deputy), or a stolen token whose `sub` looks familiar. What you are supposed to trust: the **resource server compares `aud` to itself** before who-is-allowed. Authlib “verify signature,” Auth0, and “we turned on OpenID Connect” are not what you trust for this cell.
+Picture a **bearer minted for another API** (confused deputy), or a stolen token whose `sub` looks familiar. The **resource server compares `aud` to itself** before who-is-allowed — not Authlib “verify signature,” Auth0, or “we turned on OpenID Connect”.
 
 ## Picture: sub without aud
 
@@ -30,21 +28,17 @@ flowchart TD
   Sub -->|no| False[False]
 ```
 
-The broken files show **cause** (audience never consulted), not a trophy dump of a production access token. What has to be true first: `accept_token` returns true when `sub` is in the dict. You do not need a signed JWT. You must not paste a live one.
+Audience is never consulted — not a dump of a production access token. `accept_token` returns true when `sub` is in the dict. You do not need a signed JWT. You must not paste a live one.
 
-A library saying the signature is fine is a tool observation, not that sentence.
+A library saying the signature is fine is not `accept_token` with a foreign audience.
 
-## What to look at — cause, not a trophy
+## What to look at: the cause, not a hunt
 
-Read `vulnerable/jwt_aud.py`. `accept_token` returns true when `sub` is in the dict. Checks:
+In `vulnerable/jwt_aud.py`, `accept_token` returns true when `sub` is in the dict. Checks:
 
 - `test_wrong_audience_is_rejected`
 - `test_missing_audience_is_rejected`
 - `test_expected_audience_is_accepted` — honest path (may pass on both)
-
-You do not need a new `aud` string. The failure of `test_wrong_audience_is_rejected` *is* the evidence.
-
-Do not open the repaired files yet. Diagnose the cause first.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
@@ -52,7 +46,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 |---|---|
 | The rule | Token for `other-api` is not a notes-app session |
 | Why it happens | Subject (or signature) accepted without audience |
-| What has to be true first | `accept_token` ignores `aud` |
+| What's already wrong | `accept_token` ignores `aud` |
 | Trigger | Bearer minted for `other-api` |
 | What it costs | Authenticity of the audience; then who-is-allowed as `sub` |
 | How you stop it | Exact `aud` match (or a constrained list) before who-is-allowed |
@@ -62,7 +56,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-Authlib and many JWT libraries will check a signature if you give them a key and skip `aud`. Next.js middleware that “has a Bearer” is not an audience check. The app’s promise is: **this** practice, wrong `aud` → false.
+Authlib and many JWT libraries will check a signature if you give them a key and skip `aud`. Next.js middleware that “has a Bearer” is not an audience check. Wrong `aud` → false.
 
 ## Practice
 
@@ -70,11 +64,11 @@ Authlib and many JWT libraries will check a signature if you give them a key and
 python3 -m pytest labs/4.5/4.5-lab/tests --impl vulnerable
 ```
 
-Record `test_wrong_audience_is_rejected`. Do not weaken it to “the JWT verifies.” An environment error is not security evidence.
+“The JWT verifies” is not `accept_token` with a foreign audience. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic: FHIR token minted for another hospital’s API. Predict without leaving this directory. Do not hit a live FHIR endpoint.
+FHIR token minted for another hospital’s API. Predict without leaving this directory. Do not hit a live FHIR endpoint.
 
 ## What this page is not doing
 

@@ -5,9 +5,9 @@
 
 ## The rule
 
-`share_note` with the same idempotency key must not increase `share_count`. Structural means the store actually remembers the first outcome — not a log comment, not disable-on-submit, not “FastAPI will remember,” not a unique constraint on `note_id` that also blocks a legitimate new key.
+`share_note` with the same idempotency key must not increase `share_count`. In short, the store actually remembers the first outcome — not a log comment, not disable-on-submit, not “FastAPI will remember,” not a unique constraint on `note_id` that also blocks a legitimate new key.
 
-The smallest restore for notes-app share is: if `k1` is already recorded, return the first share and do not append. Missing key still shares once in this lab (simplicity); production should **require** keys for high-impact shares (leftover). Fail closed: if the key store cannot be reached, **do not** insert a share “just this once.”
+For share: if `k1` is already recorded, return the first share and do not append. Missing key still shares once in this lab (simplicity); production should **require** keys for high-impact shares (leftover). If the key store cannot be reached, **do not** insert a share “just this once.”
 
 ## Picture: a seen key returns
 
@@ -20,7 +20,7 @@ flowchart TD
 
 The lab’s repaired files record keys in `_SEEN` and return on replay. Production should persist `(actor, key) → share_id` and return that id. The key the client sends is data: it must be scoped to the sharer so company B cannot replay company A’s key onto a different note. Clocks may skew; do not use wall time as the only uniqueness.
 
-Industry checklists want a business step to succeed all the way or roll back. The lab is that sentence for share-count under retry, not a payment network.
+A business step has to succeed all the way or roll back. The lab covers share-count under retry, not a payment network.
 
 ## What the repaired files must show
 
@@ -28,8 +28,8 @@ Industry checklists want a business step to succeed all the way or roll back. Th
 |---|---|
 | One call with k1 | `share_count() == 1` |
 | Two calls with k1 | `share_count() == 1` |
-| Two calls with different keys | not this pytest; who-is-allowed policy may still cap shares |
-| Key store unreachable | do not insert (not in this pytest; write it as leftover) |
+| Two calls with different keys | not this check; who-is-allowed policy may still cap shares |
+| Key store unreachable | do not insert (not in this check; write it as leftover) |
 
 ## What this is not
 
@@ -51,11 +51,9 @@ Name who (retrying client), what (share row for `n1`), action (append), and the 
 python3 -m pytest labs/2.4/2.4-state-time/tests --impl fixed
 ```
 
-It must pass.
-
 ## Use it somewhere new
 
-Clinic last slot: lock or unique booking key, not “the UI disabled the button.” Payment capture uses the same store shape: first capture id, not a second debit.
+The last slot needs a lock or unique booking key, not “the UI disabled the button.” Payment capture uses the same store shape: first capture id, not a second debit.
 
 ## Can people still use it
 

@@ -3,11 +3,11 @@
 **Kind:** design-exercise
 **Loop step:** 2 Model
 
-## Could someone else name pytest cases from your table?
+## Could someone else name the checks from your table?
 
-“We check authorization” is not this page. A table someone else can test names **people, companies, notes, actions, and every path** that can release a body.
+“We check authorization” still leaves out **people, companies, notes, actions, and every path** that can release a body.
 
-This week’s freeze: local `GRANTS` / `NOTES` / `USERS`. People `alice`, `bob`, `carol`, `eve`. No live identity product.
+`GRANTS` / `NOTES` / `USERS` — People `alice`, `bob`, `carol`, `eve`. No live identity product.
 
 ## Picture: four shapes, one cell
 
@@ -34,7 +34,7 @@ flowchart LR
 
 If a path is missing from the table, leftover permission appears there even if GET is correct. This lab runs GET-shaped `can_read` only.
 
-## Step 1: freeze pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|
@@ -61,11 +61,11 @@ If a path is missing from the table, leftover permission appears there even if G
 
 ## Practice
 
-Draw this map so someone else could name pytest cases. Point at `labs/4.4/4.4-lab` file `grant.py`.
+Start at `grant.py` under `labs/4.4/4.4-lab`.
 
 ## Use it somewhere new
 
-Clinic appointment A vs chart B. Title vs body is a later field-level topic.
+Appointment A vs chart B is this grain. Title vs body is a later field-level topic.
 
 ## What can still go wrong
 
@@ -73,4 +73,4 @@ Search, export, GraphQL, and workers are named holes. A later database-role chec
 
 ## What this page is not doing
 
-A famous-bugs list as the definition of security. Answer keys are not on this site.
+Circling IDOR does not bind Bob’s grant to `n2`. Answer keys are not on this site.

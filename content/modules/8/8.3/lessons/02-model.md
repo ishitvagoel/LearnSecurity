@@ -5,9 +5,9 @@
 
 ## Could someone else name the checks from your map?
 
-“App Links are verified” is not this lesson. A map someone else can test names **each exported entry and which query keys it may honor**.
+“App Links are verified” does not name **each exported entry and which query keys it may honor**.
 
-This week’s freeze: the notes app’s local `open_link` / `current_user`. No live apps.
+`open_link` / `current_user` — no live apps.
 
 ## Picture: locate versus impersonate
 
@@ -28,7 +28,7 @@ flowchart LR
 
 If App Links are verified and `open_link` still copies `as`, the map has a hole. The host check is how the OS *finds* the app. It is not the session.
 
-## Step 1: freeze the pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|
@@ -52,7 +52,7 @@ If App Links are verified and `open_link` still copies `as`, the map has a hole.
 
 ## Practice
 
-Draw the inventory. Point at `labs/8.3/8.3-lab` file `link.py`. Label the extras even in the repaired tree — the fix is ignore identity keys, not pretending a verified host became the session.
+Look at `link.py` under `labs/8.3/8.3-lab`. After repair, extra query keys are still leftover. Ignore identity keys; a verified host is not the session.
 
 ## Use it somewhere new
 
@@ -64,4 +64,4 @@ Custom scheme. WebView. User installs an attacker app. 8.2 clipboard.
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

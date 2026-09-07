@@ -5,11 +5,11 @@
 
 ## Could someone else name the checks?
 
-“We filled in the store’s privacy form” is not this lesson. A drawing someone else can test names **what may leave the device, to whom, and which field is forbidden**.
+“We filled in the store’s privacy form” is not enough without **what may leave the device, to whom, and which field is forbidden**.
 
-This week's freeze for the notes app: local `crash_report(note_body)`. No live vendors.
+`crash_report(note_body)` — no live vendors.
 
-> For the note body at `crash_report`, the rule is deny. A stack identifier may send. Evidence that the deny is false: `'secret'` in `str(crash_report("secret"))`.
+> For the note body at `crash_report`, the rule is deny. A stack identifier may send. You can see the hole: `'secret'` in `str(crash_report("secret"))`.
 
 If the body × crash-report row is blank, the field appears in telemetry because nobody named the place.
 
@@ -31,11 +31,11 @@ flowchart LR
   Label --> NotPromise[not the promise]
 ```
 
-Transparency is the label. Collecting less is the redaction. Mixing them is how a form becomes false comfort.
+Transparency is the label. Collecting less is the redaction. Mixing them is how a form becomes false assurance.
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the fields you already have and ask where each one may land.
+Take the fields you already have and ask which crash extra each one may reach.
 
 | Piece | This system |
 |---|---|
@@ -61,7 +61,7 @@ A missing body×crash row is how the body shows up as “debug extras.” Write 
 
 ## Practice
 
-Draw the map so someone else could name the checks. Point at `labs/8.5/8.5-lab` file `crash.py`.
+Start at `crash.py` under `labs/8.5/8.5-lab`.
 
 ## Use it somewhere new
 
@@ -73,4 +73,4 @@ The vendor as a processor. Screenshots. Frozen-app traces. A leftover `READ_LOGS
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

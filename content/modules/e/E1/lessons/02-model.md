@@ -5,11 +5,11 @@
 
 ## Could someone else name the tool check from your agent map?
 
-"The prompt says not to" is not this lesson. A drawing someone else can test names **ALLOWED tools, who may invoke them, whether a retrieved document is trusted, and whether a human must approve**.
+"The prompt says not to" is not enough without **ALLOWED tools, who may invoke them, whether a retrieved document is trusted, and whether a human must approve**.
 
-This week's freeze for the notes app: local `run_tool(name, args)`. No live model APIs.
+`run_tool(name, args)` — no live model APIs.
 
-> For tools, the rule is deny when the name is `exec_sql`. Allow-listed `search_notes` may run. Evidence that the deny is false: `run_tool("exec_sql", {})` returns a ran-string.
+> For tools, the rule is deny when the name is `exec_sql`. Allow-listed `search_notes` may run. The false allow: `run_tool("exec_sql", {})` returns a ran-string.
 
 If the tool × who-may-call row is blank, the tool runs because nobody named the check.
 
@@ -37,7 +37,7 @@ The model's context window is not the allow-list.
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the agent you already have and ask what would show `exec_sql` is still allowed.
+Take the agent you already have and ask what would show `exec_sql` is still allowed.
 
 | Piece | This system |
 |---|---|
@@ -63,11 +63,11 @@ A helpful prompt with `run_tool` always running is how "the model only summarize
 
 ## Practice
 
-Draw the map. Point at `labs/E1/e1-lab` file `tools.py`.
+Start at `tools.py` under `labs/E1/e1-lab`.
 
 ## Use it somewhere new
 
-A coding assistant in CI is the same cell with `pip install` as `exec_sql`.
+A coding assistant in CI is the same rule with `pip install` as `exec_sql`.
 
 ## What can still go wrong
 
@@ -75,4 +75,4 @@ Cryptographically bound human approvals are extra, advanced work. Hallucinated p
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

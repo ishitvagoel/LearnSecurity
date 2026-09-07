@@ -5,11 +5,11 @@
 
 ## The rule
 
-R8 is not the fix. Root detection is not the fix. Play App Signing is not the fix. A resilience sticker is not the fix.
+R8 shrinking does not keep the debug client id off the API. Root detection does not keep it off. Play App Signing is a store setting. A resilience sticker is not `api_allowed("debug", "ok")`.
 
-The structural change is: the server **checks build type**. `api_allowed` must require `build_type == "release"` **and** `attest == "ok"` (a stand-in here for server-checked attest from 8.1). Debug never reaches prod. Allow only release plus server attest.
+Change this: the server **checks build type**. `api_allowed` must require `build_type == "release"` **and** `attest == "ok"` (a stand-in here for server-checked attest from 8.1). Debug never reaches prod. Allow only release plus server attest.
 
-The smallest restore for the notes app’s prod export is: debug plus ok denies. Fail-safe: unknown build type denies. Do not accept a client-only minify flag. Do not fail open because “testers need real data.”
+Repair the notes app’s prod export: debug plus ok denies. Unknown build type denies. A client-only minify flag is not a release build. Testers needing real data does not export debug.
 
 ## Picture: attest and not-debug both gates
 
@@ -22,9 +22,9 @@ flowchart TD
   Att -->|no| Deny
 ```
 
-The repaired files require both gates. Production still needs separate client ids and no prod URLs in debug manifests. Play App Signing protects *store* signing; it does not stop a debug application id from using a leaked prod API key. Embedded API identifiers will be recovered — assume that. Root detection is bypassable (8.1).
+Both the debug-build deny and the client-id split have to hold. Debug manifests still need their own client ids and no prod URLs. Play App Signing protects *store* signing; it does not stop a debug application id from using a leaked prod API key. Embedded API identifiers will be recovered — assume that. Root detection is bypassable (8.1).
 
-Industry lists want a trusted service layer, and they want secrets out of artifacts. This pytest is that sentence for `api_allowed("debug", "ok")`.
+Use a trusted service layer, and keep secrets out of artifacts — `api_allowed("debug", "ok")`.
 
 ## What the repaired files must show
 
@@ -34,7 +34,7 @@ Industry lists want a trusted service layer, and they want secrets out of artifa
 | release + ok | true |
 | release + fail | false |
 
-Fail closed: if the build is not release, **do not allow prod export**. Do not keep an always-true helper because “minify is on.”
+If the build is not release, **do not allow prod export**. Minify being on does not make an always-true helper a release check.
 
 ## What this is not
 
@@ -63,11 +63,9 @@ Name the predicate (`build_type == "release"` and `attest == "ok"`). Run:
 python3 -m pytest labs/8.4/8.4-lab/tests --impl fixed
 ```
 
-Must pass. Run from the lab directory if collection at repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
-Clinic: stop pointing the debug flavor at production FHIR.
+Stop pointing the debug flavor at production FHIR.
 
 ## What can still go wrong
 

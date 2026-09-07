@@ -9,7 +9,7 @@ The notes app’s CI installs Python and JavaScript libraries from a lockfile. *
 
 > `install_ok("aaa", "bbb")` must be false. `install_ok("aaa", "aaa")` may be true.
 
-What must not happen: **a dependency installed when the digest does not match the lockfile**. That is integrity of the artifact you will run — someone else’s code inside the trusted computing base.
+Install with a digest mismatch is the lockfile miss. That is integrity of the artifact you will run — someone else’s code inside the trusted computing base.
 
 An SBOM is inventory — *what* you think you have. Provenance says *how* the artifact was built. Neither one is `install_ok`. A lookalike package on a public index wins when you install by name. Generating the SBOM file is still not the hash check.
 
@@ -32,14 +32,14 @@ flowchart LR
   Sbom --> NotHash[not install_ok]
 ```
 
-**A tool, not the rule:** npm audit, Dependabot, a provenance badge, or “we have an SBOM.”
+npm audit, Dependabot, a provenance badge, and “we have an SBOM” do not compare digests.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | For this rule |
 |---|---|
 | Why it happens | Name-only install |
-| What has to be true first | `install_ok('aaa','bbb')` true |
+| What's already wrong | `install_ok('aaa','bbb')` true |
 | Trigger | Lookalike name or a swapped tarball |
 | What it costs | Wrong bytes in the trusted computing base |
 | How you stop it | Hash pin; deny install scripts; provenance as extra |
@@ -50,7 +50,7 @@ flowchart LR
 
 pip and npm will fetch a name. A lockfile that is not *checked* is documentation. A private registry still serves whatever was published.
 
-The app’s promise this week is: **this** local check, `aaa` vs `bbb` is deny. The folder is `labs/10.2/10.2-lab`. Fake digest strings only. No live registries.
+`aaa` vs `bbb` is deny — files in `labs/10.2/10.2-lab`. Fake digest strings only. No live registries.
 
 ## What the tool cannot do
 
@@ -72,12 +72,10 @@ python3 -m pytest labs/10.2/10.2-lab/tests --impl vulnerable
 python3 -m pytest labs/10.2/10.2-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
-GitHub Actions third-party `action@v1`. Clinic: npm install in a prod pod.
+GitHub Actions third-party `action@v1`. `npm install` in a prod pod is the same unpinned fetch.
 
 ## What this page is not doing
 
-Live registry attacks, claiming you finished the ship gate. Answer keys are not on this site.
+Do not use live registry attacks. This page does not finish the ship check-in. Answer keys are not on this site.

@@ -5,7 +5,7 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic patient-portal** session cookie, and a **React Native WebView cookie bridge** as a second sketch. Renaming `sc_session` to `clinic_session` is not transfer. Person, object, reader, and leftover change. Chart access and a new bridge are new rules. You must rebuild the sentence.
+You get a **clinic patient-portal** session cookie, and a **React Native WebView cookie bridge** as a second sketch. `clinic_session` here is `sc_session`. Chart access and a new bridge are new rules. You must rebuild the sentence.
 
 Content Security Policy Level 3 and Trusted Types stay labeled **Working Drafts**. Do not cite a famous-bugs list as the definition of security.
 
@@ -21,7 +21,7 @@ flowchart TD
   WebView --> Bridge{Bridge exposes value to JS?}
 ```
 
-| Notes app this week | Clinic / WebView sketch |
+| Notes app | Clinic / WebView sketch |
 |---|---|
 | Member session cookie `sc_session` | Patient-portal session, or a copy into a WebView |
 | Browser jar vs page script | Browser jar **and** a bridge that may hand the value to JS |
@@ -30,11 +30,11 @@ flowchart TD
 
 Use only these dummy sketches. Do not inspect or operate a real hospital, app-store build, or third-party widget.
 
-## Prompt A — clinic patient portal session cookie
+## Write this for a clinic patient portal session cookie
 
 A second-factor or session cookie is set after login. One of the UIs is a shared workstation.
 
-## Prompt B — React Native WebView cookie bridge
+## Write this for a React Native WebView cookie bridge
 
 The same session is copied into a WebView that exposes cookies to injected JS.
 
@@ -52,14 +52,14 @@ The same session is copied into a WebView that exposes cookies to injected JS.
 | Reject | Why |
 |---|---|
 | HttpOnly means no XSS | Encoding work still exists |
-| CSP3 as this week’s check | Draft, different rule |
+| CSP3 as this check | Draft, different rule |
 | Live clinic or third-party CSRF test | Course rules |
 | `localStorage` as the “accessible” fix | Script share enlarged; usable login not helped |
 
 ## Practice
 
-One page. No keys. `labs/2.3/2.3-browser-policy` is the only running system you may break.
+Treat the portal cookie like `sc_session`. Keep the answer keys closed. `labs/2.3/2.3-browser-policy` is the only running system you may break.
 
 ## What this page is not doing
 
-Real clinics, real patient cookies, real WebView exploits.
+Do not use real clinics, real patient cookies, real WebView exploits.

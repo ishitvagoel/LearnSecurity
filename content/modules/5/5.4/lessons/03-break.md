@@ -5,21 +5,19 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `channel_is_https`. Fake headers and a `server_scheme` string. It does not open a socket or a CDN. You are here to see that a client `X-Forwarded-Proto: https` on an `http` socket still counting as TLS is a **failed rule**, not a trophy strip attack.
-
-The rule under test:
+The practice is not a website you attack. `channel_is_https` uses fake headers and a `server_scheme` string. It does not open a socket or a CDN. A client `X-Forwarded-Proto: https` on an `http` socket still counting as TLS is the break; you do not need a strip attack.
 
 > A client Forwarded-Proto header is not TLS. `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` must be false.
 
 ## Where you may practice
 
-Only `labs/5.4/5.4-lab` is in scope. Restore the broken and repaired folders when you are done. Fake headers only.
+Stay inside `labs/5.4/5.4-lab`. Restore the broken and repaired folders when you are done. Fake headers only.
 
 Do not probe a public host. Do not probe an employer load balancer. Do not probe a classmate preview.
 
-What must not happen: client-supplied `X-Forwarded-Proto: https` on an `http` socket counts as TLS. `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` returns true.
+`channel_is_https({"X-Forwarded-Proto": "https"}, "http")` returning true is a client header counted as TLS.
 
-Who can act here: a **cleartext client who can set `X-Forwarded-Proto`**. That stands in for a clinic page whose API client uses `https://` while the API socket is `http`, or a dashboard “Force HTTPS” toggle that trusts the header. What you are supposed to trust: `channel_is_https` binds the **server socket**, not a client claim. A server flag that trusts proxy headers, a CDN product name, and HSTS preload are not what you trust for this cell.
+Picture a **cleartext client who can set `X-Forwarded-Proto`** — a clinic page whose API client uses `https://` while the API socket is `http`, or a dashboard “Force HTTPS” toggle that trusts the header. `channel_is_https` binds the **server socket**, not a client claim — not A server flag that trusts proxy headers, a CDN product name, or HSTS preload.
 
 ## Picture: header OR socket
 
@@ -29,21 +27,18 @@ flowchart TD
   Or -->|header| True["returns true"]
 ```
 
-The broken files show **cause** (the app believes the client about the channel), not a strip-attack walkthrough. What has to be true first: `channel_is_https` returns true if the header is `https` **or** the socket is `https`. You do not need a live man-in-the-middle. You must not run one.
+The app believes the client about the channel — not a strip-attack walkthrough. `channel_is_https` returns true if the header is `https` **or** the socket is `https`. You do not need a live man-in-the-middle. You must not run one.
 
-Industry lists want TLS on the public HTTP service with no cleartext fallback. A client header is not that TLS.
+TLS has to be on the public HTTP service with no cleartext fallback. A client header is not that TLS.
 
-## What to look at — cause, not a trophy
+## What to look at: the cause, not a hunt
 
-Read `vulnerable/channel.py`. It returns true if the header is `https` **or** the socket is `https`. Checks:
+`vulnerable/channel.py` returns true if the header is `https` **or** the socket is `https`. Checks:
 
 - `test_client_forwarded_proto_is_not_tls`
 - `test_plain_http_is_not_https`
 - `test_server_https_counts` — honest socket-https path; may pass on both
 
-You do not need a new header name. The failure of `test_client_forwarded_proto_is_not_tls` *is* the evidence.
-
-Do not open the repaired files yet. Diagnose the cause first.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -57,7 +52,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 |---|---|
 | The rule | Client Forwarded-Proto does not make the channel TLS |
 | Why it happens | The app believes the client about the channel |
-| What has to be true first | Header `https` OR socket `https` returns true |
+| What's already wrong | Header `https` OR socket `https` returns true |
 | Trigger | `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` |
 | What it costs | Cookies and HSTS fire as if TLS while the hop is cleartext |
 | How you stop it | Bind scheme to `server_scheme == "https"` only; bound proxy identity later |
@@ -67,21 +62,19 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-A server flag that trusts proxy headers, with a wildcard trusted hop, will believe whoever sent the header. The request URL scheme after that middleware is not the socket. Headers the page reads in the browser are not TLS. The app’s promise is: **this** practice, header https + socket http is False.
+A server flag that trusts proxy headers, with a wildcard trusted hop, will believe whoever sent the header. The request URL scheme after that middleware is not the socket. Headers the page reads in the browser are not TLS. Header https + socket http is False.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/5.4/5.4-lab/tests --impl vulnerable
 ```
 
-Record the failing test `test_client_forwarded_proto_is_not_tls`. Do not weaken it to “HTTPS is on.” Do not probe public hosts. An environment error is not security evidence.
+Record the failing test `test_client_forwarded_proto_is_not_tls`. A “HTTPS is on” rewrite is not that test. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic: page API client `https://` versus API socket `http`. Predict without leaving this directory. Do not probe a live clinic.
+Page API client `https://` versus API socket `http`. Predict without leaving this directory. Do not probe a live clinic.
 
 ## What this page is not doing
 

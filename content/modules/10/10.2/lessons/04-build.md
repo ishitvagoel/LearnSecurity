@@ -5,11 +5,11 @@
 
 ## The rule
 
-A denylist of yesterday’s package names is not the fix. Hiding a scanner warning is not the fix. “We have an SBOM” is not the fix.
+Those package names are not a digest check. A silenced finding does not compare hashes. Generating an SBOM is still a slogan.
 
-The structural change is: `install_ok` **returns `expected_hash == got_hash`**. Fail-safe: a mismatch denies. Provenance and an SBOM may *sit next to* a match; they do not replace it. Structural means that equality — not package name, not Dependabot, not a provenance badge.
+Repair this: `install_ok` **returns `expected_hash == got_hash`**. A mismatch denies. Provenance and an SBOM may *sit next to* a match; they do not replace it. Here: that equality — not package name, not Dependabot, not a provenance badge.
 
-The smallest restore for the notes app’s CI is: `aaa` vs `bbb` → do not install. Do not fail open because “the SBOM lists the package.” Do not accept `@v1` as a digest.
+For the notes app’s CI: `aaa` vs `bbb` → do not install. An SBOM listing the package does not match the digest. `@v1` is not a digest.
 
 ## Picture: equality is the gate
 
@@ -20,27 +20,27 @@ flowchart TD
   Eq -->|no| Deny[deny]
 ```
 
-The repaired files require equality. Production still needs the pin to be *benign* — matching a malicious digest is a lying lockfile. Who can edit the lockfile is 10.1 / CODEOWNERS, not this check. A lookalike package still wins if you install by name somewhere else; equality is the local stand-in.
+Install has to compare digest equality. Matching a malicious digest is a lying lockfile — the pin still has to be benign. Who can edit the lockfile is 10.1 / CODEOWNERS, not this check. A lookalike package still wins if you install by name somewhere else; equality is the local stand-in.
 
 Provenance says *how* the artifact was built. It does not replace digest match. An SBOM can list hashes — generating the file is still not `install_ok`.
 
 ## What the repaired files must show
 
-Read `fixed/lock.py` against this checklist. Do not treat the snippet as a production installer.
+Treat `fixed/lock.py` as a hash compare, not `npm install`.
 
 | After the fix | Must be true |
 |---|---|
 | aaa vs bbb | install false |
 | aaa vs aaa | install true |
 
-Fail closed: if the hashes do not match, do not install. Uncertainty is a **no** on “this may install,” not a yes because the SBOM listed the name.
+If the hashes do not match, do not install. An SBOM listing the name does not mean it may install.
 
 ## What this is not
 
 - Dependabot.
 - A provenance badge.
 - A CISA-style SBOM file treated as verify.
-- The ship gate complete.
+- A ship-check sticker because you opened this lesson.
 - Pinning malware (leftover).
 - npm audit.
 - pip without a hash requirement as the trusted check.
@@ -49,7 +49,7 @@ Fail closed: if the hashes do not match, do not install. Uncertainty is a **no**
 
 - Matching a malicious pin still installs in this lab.
 - Cache poisoning can serve old bytes after a good pin.
-- Unpinned GitHub Actions `@v1` is a sibling grain, not this pytest.
+- Unpinned GitHub Actions `@v1` is a sibling grain, not this check.
 - Secrets in fork pull requests remain 5.3.
 - A lookalike on a public index still needs index policy beyond equality.
 
@@ -64,8 +64,6 @@ Name who can edit the lockfile. Run:
 ```text
 python3 -m pytest labs/10.2/10.2-lab/tests --impl fixed
 ```
-
-It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
 ## Use it somewhere new
 

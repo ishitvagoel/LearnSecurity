@@ -5,13 +5,13 @@
 
 ## The rule
 
-A private folder is not the fix. A fingerprint prompt is not the fix. EncryptedSharedPreferences on a *different* file is not the fix.
+A private folder does not hide the note. A fingerprint prompt does not hide it. EncryptedSharedPreferences on a *different* file still leaves `'secret'` on disk.
 
-The structural change is: the stored bytes are **not the body**. `save_note` must not write `'secret'` as the file contents. Store a ciphertext stand-in, not the body.
+Do this: the stored bytes are **not the body**. `save_note` must not write `'secret'` as the file contents. Store a ciphertext stand-in, not the body.
 
-The lab uses an `aead:` prefix plus length as a **stand-in** for Keystore-wrapped authenticated encryption — not a real cipher (5.2). Structural means that wrap.
+The lab uses an `aead:` prefix plus length as a **stand-in** for Keystore-wrapped authenticated encryption — not a real cipher (5.2). Here: that wrap.
 
-The smallest restore for the notes app’s offline cache is: `plaintext_on_disk()` false after save. Fail-safe: if wrap fails, **do not** fall back to plaintext. Do not fail open because Keystore was locked.
+The check in the notes app’s offline cache: `plaintext_on_disk()` false after save. If wrap fails, **do not** fall back to plaintext. A locked Keystore does not justify a plaintext cache.
 
 ## Picture: wrap then write
 
@@ -21,9 +21,9 @@ flowchart TD
   Wrap --> Disk[DISK]
 ```
 
-The repaired files write `'aead:'` plus length, never the body. Production still needs an Android Keystore key plus real authenticated encryption; iOS Keychain is a later mirror. A fingerprint gates the screen. It does not stop key extraction on a compromised OS. Screenshots, recents, clipboard, logs, auto backup, and WorkManager extras remain extra copies.
+The cache writes `'aead:'` plus length, never the body. Android Keystore plus real authenticated encryption is still required; iOS Keychain is a later mirror. A fingerprint gates the screen. It does not stop key extraction on a compromised OS. Screenshots, recents, clipboard, logs, auto backup, and WorkManager extras remain extra copies.
 
-Industry lists want that secure store implemented. This pytest is that sentence for `'secret'` on disk.
+That secure store has to be implemented — `'secret'` on disk.
 
 ## What the repaired files must show
 
@@ -32,7 +32,7 @@ Industry lists want that secure store implemented. This pytest is that sentence 
 | save `'secret'` | `plaintext_on_disk` false |
 | save `'other'` | `plaintext_on_disk` false |
 
-Fail closed: if wrap fails, **do not store the body**. Do not keep a text-file cache because “the folder is private.”
+If wrap fails, **do not store the body**. A private-looking folder does not justify a text-file cache.
 
 ## What this is not
 
@@ -59,11 +59,9 @@ Name the predicate (stored bytes ≠ body; no plaintext fallback). Run:
 python3 -m pytest labs/8.2/8.2-lab/tests --impl fixed
 ```
 
-Must pass. Run from the lab directory if collection at repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
-Clinic: stop treating “internal storage” as the chart-cache control.
+Stop treating “internal storage” as the chart-cache control.
 
 ## What can still go wrong
 

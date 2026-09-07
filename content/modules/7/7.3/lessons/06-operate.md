@@ -1,17 +1,17 @@
-# webhook_sig_fail without logging the body
+# Log the bad signature, not the body
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-Even after `accept` was “fixed once,” a new callback path can skip the MAC. Running it for real is the rest of the loop: notice, contain, and keep the deny.
+A new callback path can skip the MAC after `accept` hashes the body. Page the unsigned callback, cut the path, and keep the deny.
 
-Do not log bodies or `lab-secret` (3.1 / 5.3). Do not attach the HL7/JSON body to the ticket. Do not POST a live webhook “to confirm.”
+Skip callback bodies, `lab-secret`, and the HL7/JSON payload in the ticket. Do not POST a live webhook “to confirm.”
 
 ## Picture: a missing sig is a signal
 
-A deny of a callback with a missing or wrong MAC is a notice-and-recover problem, not a licence to paste the body into the paging channel. Notice names the event. Recover keeps the deny. Neither logs the body.
+If a callback is missing or has a wrong MAC, the reject is enough — do not attach the body. Then keep the deny. Do not log the body.
 
 ```mermaid
 flowchart TD
@@ -20,7 +20,7 @@ flowchart TD
   Metric --> Rotate[Rotate disposable secret if events escaped]
 ```
 
-Industry lists name detect, respond, recover. They do not compute the MAC. A log-product name is not the rule. Someone still has to own every callback path.
+A webhook-gateway product does not HMAC the callback.
 
 ## Signals that do not become a second leak
 
@@ -32,31 +32,29 @@ Industry lists name detect, respond, recover. They do not compute the MAC. A log
 | Recover | Keep deny; review accepted events; tighten 1.2 |
 | Leftover | Replay; 6.5 egress; provider compromise; parse-before-MAC |
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=webhook_sig_fail provider=lab-billing request_id=req_73e
 ```
 
-Not: the raw body, `lab-secret`, a real patient result, or a live provider trace.
+The raw body, `lab-secret`, a real patient result, or a live provider trace in the sample already names the callback.
 
-If your alert includes the raw body or `lab-secret`, you have opened a second leak in the paging channel (3.1 / 5.3).
+Quoting the raw body or `lab-secret` in the ticket is a second copy of the 3.1 / 5.3 leak.
 
-A green “webhooks signed” tile is not that pytest. Re-run `test_missing_signature_is_rejected` after any callback-route change. Billing, export-ready, and invite-used callbacks are other paths of the same MAC — inventory them before claiming recover.
+A “webhooks signed” checkbox does not reject a missing MAC. A missing MAC still has to fail `test_missing_signature_is_rejected`. Billing, export-ready, and invite-used callbacks still need the same missing-MAC deny.
 
-Recovery is incomplete if the next route still returns true for an empty header. Grep callback paths the same day you keep the deny, and **do not POST a live provider** to confirm.
+Empty-header true still has to be gone from callback paths. Grep callback paths the same day you keep the deny, and **do not POST a live provider** to confirm.
 
 ## What the framework does vs what you still have to check
 
-An nginx dashboard will show TLS handshakes and stay silent when `/webhook` still returns true for an empty header. Detection must observe **empty sig false**, not HTTP status counts. If the alert includes the raw body or `lab-secret`, you have opened a 3.1 / 5.3 cell. **Do not POST to confirm.**
+nginx TLS handshake volume is not an empty-header check on `/webhook`. Fail the webhook on **empty sig false**, not HTTP status counts. The raw body or `lab-secret` on empty-sig-false reopens topics 3.1 and 5.3. **Do not POST to confirm.**
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body). Tie it to `labs/7.3/7.3-lab`. Reject any line that includes the raw body, `lab-secret`, a real patient result, or a live provider trace.
+Log ids and a reason for the missing MAC — never the callback body. The raw body, `lab-secret`, a patient result, and a live provider trace name the callback.
 
 ## Use it somewhere new
 
-Clinic: notice unsigned lab-result posts on a local practice files; do not attach the HL7/JSON body to the ticket. Do not POST a live vendor.
+Notice unsigned lab-result posts on local practice files; do not attach the HL7/JSON body to the ticket. Do not POST a live vendor.
 
 ## Usability
 
@@ -64,4 +62,4 @@ Provider retries on 5xx can amplify load (6.7). Return 4xx on a bad MAC so retri
 
 ## What this page is not doing
 
-A log-product name is not the rule. A web-filter name is not this check. Live provider posts are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+A web-filter product name does not verify the HMAC. Do not use live provider posts. This site does not mark you as finished. Answer keys are not on this site.

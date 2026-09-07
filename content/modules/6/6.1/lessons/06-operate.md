@@ -3,15 +3,15 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-Even after `argv_for_list` was “fixed once,” a plugin path can bring `sh -c` back. Running it for real is the rest of the loop: notice, contain, and recover.
+A plugin path can glue `sh -c` after `argv_for_list` returns a list. Page the shell spawn, stop the process, and restore the list form.
 
-Do not log export names that are patient identifiers. Do not paste filenames into the ticket if they are patient data.
+Patient export names and filenames do not go in the ticket.
 
 ## Picture: unexpected child is a signal
 
-A child whose program is `sh` after an export-helper change is a notice-and-recover problem, not a licence to quote filenames in the paging channel. Notice names the event. Recover kills the child and removes the concatenating path. Neither reprints the name.
+If a child program is `sh` after an export-helper change, the alert names `sh`, not the filename. Then kill the child and remove the concatenating path.
 
 ```mermaid
 flowchart TD
@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Kill[Kill child; isolate plugin]
 ```
 
-Industry lists name detect, respond, recover. They do not build argv. A log-product name is not the rule. Someone still has to own the concatenating path.
+A process-monitor product does not turn `sh -c` into argv.
 
 ## Signals that do not become a second leak
 
@@ -33,30 +33,28 @@ Industry lists name detect, respond, recover. They do not build argv. A log-prod
 | Recover | Remove the concatenating path; re-run `test_does_not_invoke_shell` |
 | Leftover | Argument injection; host compromise if it left the lab (must not) |
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=child_process_anomaly program=sh request_id=req_61a
 ```
 
-Not: a note body, a real email, a patient filename, or a shell-punctuation cookbook.
+A sample that still contains a note body, a real email, a patient filename, or a shell-punctuation cookbook is a second argv dump.
 
-If your alert includes the full argv with a patient filename, you have opened a second leak in the paging channel (3.1 / 5.1).
+The full argv with a patient filename in the ticket is a second copy of the 3.1 / 5.1 leak.
 
-A green “no shell in CI grep” tile is not that pytest. Plugin loaders are other paths of the same check — inventory them before claiming recover.
+A CI grep that finds no `sh` does not prove argv is a list. Plugin loaders still glue into `sh -c` if you only fixed `argv_for_list`.
 
 ## What the framework does vs what you still have to check
 
-A host product will page on `sh` children and stay silent when the Python helper still returns `["sh", "-c", …]` in a test that nobody runs. Detection must observe **program basename `sh` at spawn**, not a scanner nickname. If the alert includes the full argv with a patient filename, you have opened a 3.1 / 5.1 cell.
+A host product paging on `sh` children stays quiet if the Python helper still returns `["sh", "-c", …]` in a test that nobody runs. See **program basename `sh` at spawn**, not a scanner nickname. The full argv with a patient filename on the spawn metric reopens topics 3.1 and 5.1.
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, program basename, no name). Tie it to `labs/6.1/6.1-lab`. Reject any line that includes a note body, a real email, a patient filename, or a shell cookbook.
+A deny line can hold ids, a reason, and the program basename — not the export name. A note body, a real email, a patient filename, or a shell cookbook names the argv.
 
 ## Use it somewhere new
 
-Clinic: notice unexpected `sh` under the export worker; do not paste filenames into the ticket if they are patient ids. Do not hunt a live worker.
+Notice unexpected `sh` under the export worker; do not paste filenames into the ticket if they are patient ids. Do not hunt a live worker.
 
 ## What this page is not doing
 
-A log-product name is not the rule. Live command execution is out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live command execution. This site does not mark you as finished. Answer keys are not on this site.

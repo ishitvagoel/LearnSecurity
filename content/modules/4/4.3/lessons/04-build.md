@@ -5,9 +5,9 @@
 
 ## The rule
 
-If `query` contains `access_token`, return `None` even if the value looks like a JWT. Then read cookie or Authorization. Structural means the parser **drops** the query channel — not a denylist of parameter names after logging, not a referrer policy as the only control, not “we use HTTPS.”
+If `query` contains `access_token`, return `None` even if the value looks like a JWT. Then read cookie or Authorization. In plain words, the parser **drops** the query channel — not a denylist of parameter names after logging, not a referrer policy as the only control, not “we use HTTPS.”
 
-The smallest restore for notes-app session parsing is: presence of a query token is enough to refuse — do not “fall through” to using it. Cookie `sc_session` (HttpOnly) and `Authorization` remain valid channels.
+Session parsing needs this: presence of a query token is enough to refuse — do not “fall through” to using it. Cookie `sc_session` (HttpOnly) and `Authorization` remain valid channels.
 
 ## Picture: deny query, then other channels
 
@@ -22,7 +22,7 @@ flowchart TD
 
 The lab’s repaired files return `None` whenever the query has `access_token`. A magic-link email is still a URL token — short-lived, one-use, then exchange for a cookie; do not keep the URL as the standing session.
 
-Industry checklists want secrets out of the URL. This pytest is that sentence for `access_token`, not a full catalogue of log redaction.
+Secrets have to stay out of the URL — `access_token`, not a full list of log redaction.
 
 ## What the repaired files must show
 
@@ -52,12 +52,10 @@ Name the channel (query) and the check (yields `None`). Run:
 python3 -m pytest labs/4.3/4.3-lab/tests --impl fixed
 ```
 
-It must pass.
-
 ## Use it somewhere new
 
 Magic-link: a one-time token in the URL is later work, then exchange for a cookie — do not keep the URL as the session. Clinic appointment SMS: same exchange, or deny.
 
 ## What this page is not doing
 
-Do not dump live access logs. Do not claim a course gate from a Referrer-Policy header.
+Do not dump live access logs. A Referrer-Policy header is not a check-in.

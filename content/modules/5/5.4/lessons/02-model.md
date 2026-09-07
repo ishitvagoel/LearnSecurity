@@ -5,9 +5,9 @@
 
 ## Could someone else name the checks?
 
-“We enabled HTTPS” is not this lesson. A map someone else can test names **each hop and who is allowed to assert the scheme**.
+Until you have **each hop and who is allowed to assert the scheme**, “We enabled HTTPS” is still a slogan.
 
-This week’s freeze: local `channel_is_https(headers, server_scheme)`. No live load balancer.
+`channel_is_https(headers, server_scheme)` — no live load balancer.
 
 > `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` must be false. If a hop is missing from the map, a client header can still count as TLS.
 
@@ -29,7 +29,7 @@ flowchart TD
   Sock[server_scheme] --> Trust[What you trust]
 ```
 
-An earlier topic used hop versus cache key. Here the hop is the channel-authenticity cell.
+An earlier topic used hop versus cache key. Here the hop is the channel-authenticity rule.
 
 ## Step 1: name the pieces
 
@@ -57,11 +57,11 @@ A missing “header https × socket http × deny” row is how the client header
 
 ## Practice
 
-Draw this map so someone else could name the pytest cases. Point at `labs/5.4/5.4-lab` file `channel.py`. Your artifact is a versioned list (even a table in your notes) with hop, who may assert proto, allow or deny, and what would show the deny is false. Fake data only.
+Label hops on `channel.py` under `labs/5.4/5.4-lab`. Name who may assert proto and the case that would prove the deny false. Fake data only.
 
 ## Use it somewhere new
 
-Clinic: mutual TLS as service identity. A page’s API client `https://` is not the API socket.
+Mutual TLS as service identity. A page’s API client `https://` is not the API socket.
 
 ## What can still go wrong
 
@@ -69,4 +69,4 @@ TLS to the load balancer is not end-to-end. Pinning is leftover. OCSP stapling a
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Do not run this map against a public clinic or a live load balancer. Answer keys are not on this site.
+Do not run this map against a public clinic or a live load balancer. Answer keys are not on this site.

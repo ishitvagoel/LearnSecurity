@@ -5,11 +5,11 @@
 
 ## Could someone else name the checks?
 
-“We ticked a testing-guide row” is not this lesson. A drawing someone else can test names **what must not happen, who is acting, and which object**.
+The testable picture is **what must not happen, who is acting, and which object** — not “We ticked a testing-guide row”.
 
-This week's freeze for the notes app: local `is_security_test(t)`. No live scanners.
+`is_security_test(t)` — no live scanners.
 
-> For a row with only `status_asserted`, the rule is deny. A named `forbidden_outcome` may count. Evidence that the deny is false: `is_security_test({"status_asserted": True})` is true.
+> For a row with only `status_asserted`, the rule is deny. A named `forbidden_outcome` may count. Watch it fail: `is_security_test({"status_asserted": True})` is true.
 
 If the isolation row is blank about what must not happen, the suite looks green because nobody named the bad case.
 
@@ -21,20 +21,20 @@ flowchart TD
   Forbid["cross-company must not 200"] --> Security[security test]
 ```
 
-## Picture: a catalogue checkbox is not a test
+## Picture: a checklist tick is not a test
 
 ```mermaid
 flowchart LR
-  Guide[testing-guide row] --> Inventory[catalogue]
-  Pytest[what-must-not-happen assert] --> Evidence[evidence]
+  Guide[testing-guide row] --> Inventory[list]
+  Pytest[what must not happen assert] --> Evidence[evidence]
   Inventory --> NotE[not evidence]
 ```
 
-A list of things you might test is inventory. A pytest that names the bad case is evidence. Mixing them is how a checkbox becomes false comfort.
+A list of things you might test is inventory. A check that names the bad case is evidence. Mixing them is how a checkbox becomes false assurance.
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the tests you already have and ask whether each one names a bad case.
+Take the tests you already have and ask whether each one names a bad case.
 
 | Piece | This system |
 |---|---|
@@ -42,7 +42,7 @@ Do not invent a new catalogue. Take the tests you already have and ask whether e
 | What | Isolation row; HTTP 200 assert |
 | Actions | `is_security_test` |
 | Paths | CI |
-| What you trust for this journey | The named-what-must-not-happen check |
+| What you trust for this journey | The named-what must not happen check |
 | What you do not trust | Line coverage; lint; a testing-guide checkbox |
 | Time | The suite grows; looking around remains 9.5 |
 | The rule | Honesty of the test suite |
@@ -60,11 +60,11 @@ A missing bad-case × isolation row is how 200-only occupies the security slot. 
 
 ## Practice
 
-Draw the two suites so someone else could name the checks. Point at `labs/9.3/9.3-lab` file `stest.py`.
+Open `stest.py` under `labs/9.3/9.3-lab`.
 
 ## Use it somewhere new
 
-A mobile testing-profile checkbox is catalogue, not shape.
+A mobile testing-profile checkbox is a list, not a test shape.
 
 ## What can still go wrong
 
@@ -72,4 +72,4 @@ Looking around (9.5). Field grain (7.2). A race-condition test with no named bad
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

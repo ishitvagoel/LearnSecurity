@@ -9,9 +9,9 @@ The notes app may unfurl a link so a note can show a preview. That URL is **untr
 
 > `allowed` must be false for a link-local metadata URL. HTTPS to the named lab host may be true. This practice checks the predicate only. It does not fetch.
 
-What must not happen is **a server-side fetch to link-local metadata allowed**. In a real cloud that is a secrecy failure of the machine’s own identity. Here the test fails closed on the string.
+The server must not **fetch link-local metadata**. In a real cloud that is a secrecy failure of the machine’s own identity. Here the test fails closed on the string.
 
-Industry lists want an allow-list of protocols, hosts, paths, and ports before the server calls another service. They want an outbound allow-list. They want open redirects onto an allow-list. Telling the person they are about to leave the site is **advanced** work, not this week’s pytest. A famous-bugs nickname for server-side requests is awareness after the cause. `requests.get` is not this sentence.
+Use an allow-list of protocols, hosts, paths, and ports before the server calls another service. Use an outbound allow-list. Open redirects still have to land on an allow-list. Telling the person they are about to leave the site is **advanced** work, not this check. A famous-bugs nickname for server-side requests is awareness after the cause. `requests.get` is not the allow-list check.
 
 ## Picture: the server is the deputy
 
@@ -23,9 +23,9 @@ flowchart TD
   Net -->|allow-listed host| Ok[named lab host]
 ```
 
-Who can act: a member who supplies a preview URL. What you trust in this practice: a local `allowed(url)` check. Do not probe cloud metadata, loopback services, or public hosts.
+Picture a member who supplies a preview URL. What you trust: a local `allowed(url)` check. Do not probe cloud metadata, loopback services, or public hosts.
 
-**The tool (not the rule):** “HTTPS only” as a string prefix, a web filter, or `requests` timeouts.
+**Tools, not the rule:** “HTTPS only” as a string prefix, a web filter, or `requests` timeouts.
 
 ## Picture: parse, then pin the host
 
@@ -43,7 +43,7 @@ A regex on the raw string still loses to encodings (2.1), decimal IPs, IPv6, and
 | Slice | For this rule |
 |---|---|
 | Why it happens | The server would fetch whoever the URL names |
-| What has to be true first | `allowed` is true for a link-local metadata URL |
+| What's already wrong | `allowed` is true for a link-local metadata URL |
 | Trigger | User-supplied preview URL |
 | What it costs | Secrecy of cloud identity; integrity of egress |
 | How you stop it | Parse, then allow-list host and scheme; block link-local and loopback; do not follow redirects off the list |
@@ -54,13 +54,13 @@ A regex on the raw string still loses to encodings (2.1), decimal IPs, IPv6, and
 
 `requests.get` is not an allow-list. urllib follows redirects unless you stop it. HTTPS to an IP is still the server’s network. FastAPI will dial whoever you pass.
 
-The app’s promise is: **this** `allowed` check, on **this** practice string, is false for link-local metadata. The folder is `labs/6.5/6.5-lab`. Fake URLs only. No live fetch.
+`allowed` is false for link-local metadata — files in `labs/6.5/6.5-lab`. Fake URLs only. No live fetch.
 
 ## What the tool cannot do
 
 - DNS rebinding after allow — pin the IP or use a dedicated egress proxy (named leftover).
 - `file:` scheme, IPv6, decimal IPs, redirect off the list.
-- Open redirect of the *browser* is a sister check, not this pytest.
+- Open redirect of the *browser* is a sister check, not this check.
 - Request splitting and cache-key confusion wait for hop work (2.2).
 
 ## Practice
@@ -72,12 +72,10 @@ python3 -m pytest labs/6.5/6.5-lab/tests --impl vulnerable
 python3 -m pytest labs/6.5/6.5-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
-Clinic “fetch lab result PDF from URL.” Webhooks wait for 7.3.
+“Fetch lab result PDF from URL” is this grain. Webhooks wait for 7.3.
 
 ## What this page is not doing
 
-Live metadata fetches, public server-side request hunts, dumping lab Python into notes. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live metadata fetches, public server-side request hunts. This site does not mark you as finished. Answer keys are not on this site.

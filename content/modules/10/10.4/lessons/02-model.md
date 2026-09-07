@@ -5,11 +5,11 @@
 
 ## Could someone else name the boot check from your compose map?
 
-“We set `NODE_ENV=production`” is not this lesson. A drawing someone else can test names **env, debug, who can edit compose, the admin bind address, whether a migration fails open, and rollback**.
+Until you have **env, debug, who can edit compose, the admin bind address, whether a migration fails open, and rollback**, “We set `NODE_ENV=production`” is still a slogan.
 
-This week’s freeze for the notes app: local `boot_ok(env, debug)`. No live production hosts.
+`boot_ok(env, debug)` — no live production hosts.
 
-> For boot, the rule is deny when `env` is `"prod"` and `debug` is true. Production without debug may boot. Evidence that the deny is false: `boot_ok("prod", True)` returns true.
+> For boot, the rule is deny when `env` is `"prod"` and `debug` is true. Production without debug may boot. The deny already lied when `boot_ok("prod", True)` returns true.
 
 If the env × debug row is blank, the process starts because nobody named the check.
 
@@ -31,11 +31,11 @@ flowchart LR
   Admin[admin bind] --> World["0.0.0.0"]
 ```
 
-`NODE_ENV` is a slogan until something compares `env` to `debug`. A feature flag that turns off authorization, a migration that fails open, and an admin port bound to the world are other leftover — same family, not this pytest.
+`NODE_ENV` is a slogan until something compares `env` to `debug`. A feature flag that turns off authorization, a migration that fails open, and an admin port bound to the world are other leftover — same family, not this check.
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the boot rule you already have and ask what would show production started with debug on.
+Take the boot rule you already have and ask what would show production started with debug on.
 
 | Piece | This system |
 |---|---|
@@ -57,11 +57,11 @@ Do not invent a new catalogue. Take the boot rule you already have and ask what 
 | `NODE_ENV=production` | boot | treat as the check | deny |
 | feature flag turns off authz | request | treat as leftover config | deny |
 
-A missing prod-plus-debug deny is how a compose slogan becomes false comfort. Write the hole.
+A missing prod-plus-debug deny is how a compose slogan becomes false assurance. Write the hole.
 
 ## Practice
 
-Draw the map so someone else could name the checks. Point at `labs/10.4/10.4-lab` file `cfg.py`.
+Start at `cfg.py` under `labs/10.4/10.4-lab`.
 
 ## Use it somewhere new
 
@@ -73,4 +73,4 @@ Other flags. A sidecar debug container. Extra version leakage with debug already
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

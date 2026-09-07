@@ -5,9 +5,9 @@
 
 ## Could someone else name the enforcement check from your header map?
 
-“We set a content-security policy” is not this lesson. A map someone else can test names **the enforcing header vs Report-Only, encoding (6.2), and whether the edge can strip it**.
+Until you have **the enforcing header vs Report-Only, encoding (6.2), and whether the edge can strip it**, “We set a content-security policy” is still a slogan.
 
-This week’s freeze for the notes app: local `isolation_enforced(headers)`. No live pages.
+`isolation_enforced(headers)` — no live pages.
 
 ## Picture: three layers
 
@@ -51,16 +51,16 @@ flowchart LR
 
 ## Practice
 
-Draw the map. Point at `labs/E2/e2-lab` file `csp.py`. Label Report-Only as a signal even in the repaired files — the fix is the enforcing header name, not pretending a report became a block.
+Mark `csp.py` under `labs/E2/e2-lab`. After repair, Report-Only is still only a signal. The restore is the enforcing header name, not a report as a block.
 
 ## Use it somewhere new
 
-Clinic HIPAA header: Report-Only is still a signal.
+A HIPAA header that is Report-Only is still a signal, not enforcement.
 
 ## What can still go wrong
 
-XS-Leaks. Trusted Types still **draft**. Reporting from a content-security policy is extra, later, and advanced — not this week’s enforcement.
+XS-Leaks. Trusted Types still **draft**. Reporting from a content-security policy is extra, later, and advanced — not this enforcement.
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

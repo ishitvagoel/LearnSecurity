@@ -5,11 +5,11 @@
 
 ## The rule
 
-A content-security header in report-only mode is not the fix. Cleaning after `innerHTML` is not the fix. “React will handle it” is not the fix.
+A report-only content-security header does not encode the note. Cleaning after `innerHTML` is late. “React will handle it” is a slogan.
 
-The structural change is: the parser **never sees extra tags**. `render` must HTML-escape the body for a text context (`<` → `&lt;`). Encode at the sink.
+Do this: the parser **never sees extra tags**. `render` must HTML-escape the body for a text context (`<` → `&lt;`). Encode at the sink.
 
-The smallest restore for the notes app’s title HTML is: escape, then wrap. Fail-safe: if you cannot encode for this context, **do not draw HTML**. Do not fail open because a content-security policy is “on.”
+Restore the notes app’s title HTML with this: escape, then wrap. If you cannot encode for this context, **do not draw HTML**. A content-security policy being “on” does not encode the title.
 
 ## Picture: escape, then wrap
 
@@ -19,9 +19,9 @@ flowchart TD
   Esc --> P["wrap in p"]
 ```
 
-The repaired files use `html.escape(body, quote=True)` then wrap in `<p>`. Production still needs encoding for attribute, JavaScript, and URL contexts as leftovers. Markdown is a second parser (2.1). A content-security policy that blocks objects and base tags is a layer after encoding, not a substitute.
+`render` is `html.escape(body, quote=True)` then wrap in `<p>`. Attribute, JavaScript, and URL contexts remain leftover encodings. Markdown is a second parser (2.1). A content-security policy that blocks objects and base tags is a layer after encoding, not a substitute.
 
-Industry checklists want output encoded for the context you are writing into. This pytest is that sentence for HTML text.
+Output has to be encoded for the context you are writing into — HTML text.
 
 ## What the repaired files must show
 
@@ -30,7 +30,7 @@ Industry checklists want output encoded for the context you are writing into. Th
 | body containing `<` | `&lt;` present, extra-tag marker `"<img"` absent |
 | honest “Weekly notes” | still visible as text |
 
-Fail closed: if you cannot encode for this context, **do not draw HTML**. Do not keep the raw string because “the header will catch it.”
+If you cannot encode for this context, **do not draw HTML**. The header catching it does not encode the raw string.
 
 ## What this is not
 
@@ -56,11 +56,9 @@ Name the check (`&lt;` present, extra-tag marker `"<img"` absent, honest title s
 python3 -m pytest labs/6.2/6.2-lab/tests --impl fixed
 ```
 
-Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
-Clinic: encode the nickname in HTML text; treat markdown as a second parser.
+Encode the nickname in HTML text; treat markdown as a second parser.
 
 ## What can still go wrong
 

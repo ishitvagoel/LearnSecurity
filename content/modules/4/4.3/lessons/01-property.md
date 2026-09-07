@@ -9,9 +9,9 @@ The notes app already carries a session from the last lesson. That session must 
 
 > `session_from_request({"access_token": "secret"}, {}, None)` must return `None`. A session may come from the cookie `sc_session` or from an Authorization header. Uvicorn access logs will store query strings. A JWT sitting in localStorage is a different leak: scripts can read it.
 
-What must not happen is a **session started from a query-string token**. The session secret is no longer secret. Anyone who can see the URL can then act as that person.
+Ban a **session started from a query-string token**. The session secret is no longer secret. Anyone who can see the URL can then act as that person.
 
-Industry checklists want secrets in the body or headers, not in the URL. They want a referrer policy so path and query do not leak to other sites. They want HttpOnly for session cookies that scripts cannot read. Putting an OAuth token in the URL the old implicit-grant way is obsolete. Copying that pattern is not those checklists.
+Secrets belong in the body or headers, not in the URL. Use a referrer policy so path and query do not leak to other sites. Session cookies that scripts cannot read still need HttpOnly. Putting an OAuth token in the URL the old implicit-grant way is obsolete. Copying that pattern is not those checklists.
 
 ## Picture: the URL is a postcard
 
@@ -25,7 +25,7 @@ flowchart TD
 
 The person who can hurt you here is a log operator, a Referer collector, or someone with a shared screenshot — not a brand-new JWT bug.
 
-**A tool is not the rule.** “We use JWTs,” NextAuth, or a blog titled SPA best practice 2016.
+“We use JWTs,” NextAuth, and a 2016 SPA blog post do not stop a token in the query string.
 
 ## Picture: three channels, one deny
 
@@ -43,7 +43,7 @@ The cookie lesson already separated cookie-jar sending from script readability. 
 | Slice | For this rule |
 |---|---|
 | Why it happens | Token placed in a logged, shared channel |
-| What has to be true first | `session_from_request` prefers query |
+| What's already wrong | `session_from_request` prefers query |
 | Trigger | Link clicked, logged, or referred |
 | What it costs | The session secret is no longer secret |
 | How you stop it | Ignore query tokens; cookie or Authorization only |
@@ -52,7 +52,7 @@ The cookie lesson already separated cookie-jar sending from script readability. 
 
 ## What the framework does vs what you still have to check
 
-FastAPI will bind query params. Next.js router will put them in the address bar. TLS encrypts the hop, not the log. The app’s promise: a query-only request yields `None`; cookie and header still work. The folder is `labs/4.3/4.3-lab`. No live CDNs.
+FastAPI will bind query params. Next.js router will put them in the address bar. TLS encrypts the hop, not the log. A query-only request yields `None`; cookie and header still work — files in `labs/4.3/4.3-lab`. No live CDNs.
 
 ## What the tool cannot do
 
@@ -69,12 +69,12 @@ python3 -m pytest labs/4.3/4.3-lab/tests --impl vulnerable
 python3 -m pytest labs/4.3/4.3-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Tie the check to query `access_token`, not to a JWT library name.
+The check is query `access_token`. A JWT library name is not it.
 
 ## Use it somewhere new
 
-Clinic appointment deep link. Magic-link email (still a URL token — later you exchange it).
+An appointment deep link is the same shape as a magic-link email (still a URL token — later you exchange it).
 
 ## What this page is not doing
 
-Live token replay, real session cookies, weaponized Referer harvesting. Course gates stay unclaimed without learner or product evidence. Answer keys are not on this site.
+Do not use live token replay, real session cookies, weaponized Referer harvesting. This page does not finish a check-in. Answer keys are not on this site.

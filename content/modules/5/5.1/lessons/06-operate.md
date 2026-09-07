@@ -3,15 +3,15 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-Even after `delete_account` was fixed once, a replica warehouse, a backup, or a support ticket can still hold the body. Running it for real is the rest of the loop: notice, contain, purge, and refuse to “help” by logging note bodies.
+A replica warehouse, backup, or support ticket can still hold the body after `delete_account` pops the maps. Notice that leftover, contain the replica, purge the body, and do not log note bodies.
 
-Do not paste the chart into the ticket. Do not log bodies.
+Keep the chart and leftover bodies out of the ticket.
 
 ## Picture: hunt ids, not bodies
 
-A leftover body after delete is a notice-and-recover problem, not a licence to quote notes in the paging channel. Notice names the event. Recover purges the partition. Neither reprints the body.
+After delete, a leftover body is a purge miss — leftover notes stay off the ticket. Then purge the partition.
 
 ```mermaid
 flowchart TD
@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Purge[Purge partition]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a log product. They do not walk the deletion graph. Someone still has to own the leftover.
+A log product does not walk the deletion graph.
 
 ## Signals that do not become a second leak
 
@@ -33,21 +33,19 @@ Industry lists name detect, respond, recover. They do not pick a log product. Th
 | Recover | Purge partitions; a named legal-hold owner; re-run `test_deleted_account_leaves_no_analytics_body` |
 | Leftover | Backups still contain the row (later); screenshots you cannot purge |
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=deleted_user_body_hits store=analytics user_id=alice request_id=req_51lc
 ```
 
-Not: a note body, a personal email, or “privacy law handled it.”
+Keep leftover chart text, a personal email, and “privacy law handled it” off that sample.
 
-If your alert includes a note body, you have opened a second leak in the paging channel.
+Paste a note body into the deletion alert and the pager now stores leftover analytics text.
 
-A green dashboard tile that says “privacy mode” is not that pytest. If a replica warehouse still has `alice`, treat it as the same leftover body, not a separate “eventual consistency” pass. Search, analytics, and the appointment-card analogue are other paths of the same leftover — inventory them before claiming recover. An “account deleted” email is not recovery.
+A dashboard tile that says “privacy mode” does not wipe leftover notes. If a replica warehouse still has `alice`, treat it as the same leftover body, not a separate “eventual consistency” pass. Search, analytics, and the appointment-card analogue still hold the body; do not send “account deleted” until those copies are gone. That mail is not recovery.
 
 ## What the framework does vs what you still have to check
 
-A warehouse dashboard will show “personal data redacted” and stay silent when the body column still holds `secret`. Detection must observe **user id still present in a listed store**, not a privacy-policy checkbox. If the alert includes the note body, you have opened a secrecy leak too.
+“Personal data redacted” on a warehouse tile does not prove the body column is empty of `secret`. Hunt **user id still present in a listed store**, not a privacy-policy checkbox. The note body on the leftover-user-id metric is a secrecy leak too.
 
 ## Can people still use it
 
@@ -55,12 +53,12 @@ If a human sees “account deleted,” announce it in text a screen reader can s
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, store name, no body). Tie it to `labs/5.1/5.1-lab`. Reject any line that includes a note body, a personal email, or a “privacy law handled” slogan.
+Log ids, a reason, and the store name — never the leftover body. A note body, a personal email, or a “privacy law handled” slogan would put leftover analytics in the warehouse ticket.
 
 ## Use it somewhere new
 
-Clinic: notice appointment-card notes after patient delete; do not paste the chart into the ticket. Do not query a live warehouse.
+Notice appointment-card notes after patient delete; do not paste the chart into the ticket. Do not query a live warehouse.
 
 ## What this page is not doing
 
-A log-product name is not the rule. Do not run live queries against a production warehouse. Answer keys are not on this site.
+Do not run live queries against a production warehouse. Answer keys are not on this site.

@@ -11,9 +11,9 @@ A HIGH finding that is not mapped to a row on the coverage map is **unowned**. U
 
 > `ship_ok([{"id": "F1", "sev": "HIGH"}], {})` must be false.
 
-What must not happen: **an unmapped HIGH is allowed to ship**. That is integrity of the release decision. An unknown HIGH lands in production because nobody owned it.
+An unmapped HIGH can still be in the ship set. That is integrity of the release decision. An unknown HIGH lands in production because nobody owned it.
 
-Industry lists want you to update components on a documented clock — that is an SCA *signal*, not the map. Dependency confusion is an **advanced leftover**: mapping “the scanner found nothing” is not coverage. A maturity score measures whether you *triage*. It is not `ship_ok`. A vendor’s default setup is not your policy.
+You need to update components on a documented clock — that is an SCA *signal*, not the map. Dependency confusion is an **advanced leftover**: mapping “the scanner found nothing” is not coverage. A maturity score measures whether you *triage*. It is not `ship_ok`. A vendor’s default setup is not your policy.
 
 ## Picture: the scanner is a signal
 
@@ -33,7 +33,7 @@ flowchart LR
   Authz[cross-tenant read] --> Reality[isolation still required]
 ```
 
-**A tool, not the rule:** a vendor’s default code scanning, a default Semgrep ruleset, Dependabot, or a maturity score on a slide.
+A vendor’s default code scanning, a default Semgrep ruleset, Dependabot, and a maturity score on a slide do not block an unmapped HIGH.
 
 ## Who can make an unmapped HIGH ship
 
@@ -43,16 +43,16 @@ flowchart LR
 | Vendor dashboard | Show empty or noisy counts | Look green | No join to the coverage map |
 | Someone with a score on a slide | Treat the score as the gate | Pass an audit | Same unowned HIGH |
 
-You do not need a live GitHub org this week. Those three already ship the finding.
+You do not need a live GitHub org. An alert-fatigued reviewer, an empty dashboard, and a slide score already ship an unmapped HIGH.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-Scanner output was never joined to the coverage map. That is the cause. The person who later reads production is a **result**, not the cause.
+Scanner output was never joined to the coverage map. That's the unmapped finding. The person who later reads production is who pays for it.
 
 | Slice | For this rule |
 |---|---|
 | Why it happens | Scanner output not joined to the coverage map |
-| What has to be true first | `ship_ok([HIGH], {})` is true |
+| What's already wrong | `ship_ok([HIGH], {})` is true |
 | Trigger | Release with an unmapped HIGH |
 | What it costs | Unknown HIGH in production |
 | How you stop it | Block unmapped HIGH; a mapped HIGH you accept still needs an exception with an expiry |
@@ -63,7 +63,7 @@ Scanner output was never joined to the coverage map. That is the cause. The pers
 
 A vendor “default setup” inventories *some* findings. Reachability may record a false positive — **with an owner** — it does not silently drop HIGH.
 
-The app’s promise is: **this** `ship_ok` with a HIGH and an empty map is deny. The local check is `labs/9.4/9.4-lab`. Fake finding id `F1` only. No live GitHub. No scanning other people’s repos.
+`ship_ok` with a HIGH and an empty map is deny — files in `labs/9.4/9.4-lab`. Fake finding id `F1` only. No live GitHub. No scanning other people’s repos.
 
 ## What the tool cannot do
 
@@ -84,12 +84,10 @@ python3 -m pytest labs/9.4/9.4-lab/tests --impl vulnerable
 python3 -m pytest labs/9.4/9.4-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
-SCA: a CVE versus a function you actually call. Clinic: fifty unmapped HIGHs.
+SCA: a CVE versus a function you actually call. Fifty unmapped HIGHs is the same unowned pile.
 
 ## What this page is not doing
 
-Live GitHub orgs, claiming the verification gate is done, and weaponized scanner dumps. Answer keys are not on this site.
+Do not use live GitHub orgs. This SCA lesson is not a finished check-in. Do not paste weaponized scanner dumps. Answer keys are not on this site.

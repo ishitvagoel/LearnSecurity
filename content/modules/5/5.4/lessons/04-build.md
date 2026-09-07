@@ -5,9 +5,9 @@
 
 ## The rule
 
-`channel_is_https` must use `server_scheme == "https"` only. Structural means a bound proxy identity if you add one later — not trusting a header name, not “Force HTTPS” in a UI, not an API-client `https://` base URL, not HSTS preload.
+`channel_is_https` must use `server_scheme == "https"` only. Namely a bound proxy identity if you add one later — not trusting a header name, not “Force HTTPS” in a UI, not an API-client `https://` base URL, not HSTS preload.
 
-The smallest restore for notes-app transport authenticity is: ignore the client proto. Fail closed: unknown scheme **denies** TLS claims (do not treat as https). Do not fail open because the header “looks right.”
+Transport authenticity needs this: ignore the client proto. By default, unknown scheme **denies** TLS claims (do not treat as https). A header that “looks right” is not the socket.
 
 ## Picture: ignore the client proto
 
@@ -18,13 +18,13 @@ flowchart TD
   Sock -->|no| Deny[Deny]
 ```
 
-The repaired files are `server_scheme == "https"`. Production still needs a bound load-balancer identity if you end TLS at the load balancer — that peer is what you trust, the header name is not. Pinning is leftover (later on phones), not a universal rule. Mutual TLS is a named leftover for service identity, not this header cell.
+`channel_is_https` is `server_scheme == "https"`. If you end TLS at the load balancer, bind that peer’s identity — the header name is not what you trust. Pinning is leftover (later on phones), not a universal rule. Mutual TLS is a named leftover for service identity, not this header rule.
 
-Industry lists want TLS with no cleartext fallback. This pytest is that sentence for the scheme check.
+TLS has to have no cleartext fallback — the scheme check.
 
 ## What the repaired files must show
 
-Read `fixed/channel.py` against this checklist. Do not treat the snippet as a production load balancer.
+`fixed/channel.py` inspects a tuple, not a TLS terminator.
 
 | After the fix | Must be true |
 |---|---|
@@ -32,7 +32,7 @@ Read `fixed/channel.py` against this checklist. Do not treat the snippet as a pr
 | socket http | false |
 | header https + socket http | false |
 
-Fail closed: if you cannot ask the socket, the answer is no. Uncertainty is a **deny**, not a yes because the dashboard still showed “HTTPS.”
+If you cannot ask the socket, the answer is no. A dashboard still showing “HTTPS” is not a yes.
 
 ## What this is not
 
@@ -47,7 +47,7 @@ Fail closed: if you cannot ask the socket, the answer is no. Uncertainty is a **
 
 - TLS ending at the load balancer still needs a **bound** hop, not a header from anyone.
 - End-to-end messaging and pinning versus breakage wait as leftover.
-- Certificate checks are a client cell, not this helper.
+- Certificate checks are a client-side rule, not this helper.
 - OCSP stapling and encrypted client hello are advanced extras.
 - Phone network checks wait for later.
 - Cookies already issued on the cleartext path still need revoke.
@@ -60,11 +60,9 @@ Name the check (`server_scheme == "https"`). Run:
 python3 -m pytest labs/5.4/5.4-lab/tests --impl fixed
 ```
 
-It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
-Clinic: stop treating the page’s `https://` API client as the API socket; bind cookies and HSTS to the server scheme.
+Stop treating the page’s `https://` API client as the API socket; bind cookies and HSTS to the server scheme.
 
 ## What can still go wrong
 
@@ -72,4 +70,4 @@ TLS to the load balancer; pinning leftover; OCSP and encrypted client hello as a
 
 ## What this page is not doing
 
-Do not probe a live host. Do not claim a course gate from an HSTS preload list.
+Do not probe a live host. An HSTS preload list is not a check-in.

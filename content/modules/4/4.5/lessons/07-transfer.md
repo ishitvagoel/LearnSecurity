@@ -5,18 +5,16 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic FHIR resource server**. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: `accept_token` is false for `aud=other-api`. Rewrite it for a clinic FHIR resource server without changing the fork.
+You get a **clinic FHIR resource server**. `accept_token` is false for `aud=other-api`. The same rule has to hold on a clinic FHIR resource server.
 
-**Prompt:** Clinic: wrong-audience FHIR token. Also name native redirect (claimed HTTPS, not a custom scheme) vs browser vs backend-for-frontend storage.
+A FHIR token minted for another hospital is the same wrong audience. Also name native redirect (claimed HTTPS, not a custom scheme) vs browser vs backend-for-frontend storage.
 
-**Product sketch:** EHR-lite that accepts SMART-on-FHIR-shaped access tokens.
+EHR-lite that accepts SMART-on-FHIR-shaped access tokens.
 
-Rewrite the notes-app sentence. Include:
-
-1. who can act (token minted for another hospital API; stolen browser token; malicious phone app claiming a custom scheme — **not** a live clinic);
+1. who might try (token minted for another hospital API; stolen browser token; malicious phone app claiming a custom scheme — **not** a live clinic);
 2. what you trust (which resource-server `aud` check is trusted; the vendor “OpenID dashboard” is not);
 3. what must not happen (`accept_token` true for `other-hospital-fhir` — not a privacy-law name);
-4. a test idea on a **local** practice only (wrong aud and missing aud deny);
+4. deny both a wrong aud and a missing aud — **local** practice;
 5. leftover (PKCE, mix-up, DPoP advanced, object grants, WebView);
 6. whether a human consent screen must meet the web accessibility baseline (usable consent, not a mouse-only approve).
 
@@ -43,7 +41,7 @@ TLS on the hop does not name the audience. Authlib signature-ok does not compare
 
 ## Practice
 
-One page. No keys. `labs/4.5/4.5-lab` is the only running system you may break. Do not replay a live FHIR token or register a malicious custom scheme against a real app.
+Reject a FHIR token minted for another hospital. Keep the answer keys closed. `labs/4.5/4.5-lab` is the only running system you may break. Do not replay a live FHIR token or register a malicious custom scheme against a real app.
 
 ## Can people still use it
 
@@ -51,4 +49,4 @@ If a human consent screen is in the claim, “approve” must be something keybo
 
 ## What this page is not doing
 
-Live-target token replay. Real patient tokens. Claiming a course gate from this page.
+Do not try live-target token replay. Do not use real patient tokens. This page does not finish a check-in.

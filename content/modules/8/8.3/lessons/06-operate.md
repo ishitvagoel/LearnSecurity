@@ -1,11 +1,11 @@
-# deeplink_identity_ignored without logging the URL
+# Log the dropped link, not the URL
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A new exported Activity can copy extras again after `open_link` was “fixed once.” Pair notice and recover. Do not log full URLs if they contain tokens (4.3). Do not attach the link to the ticket.
+An exported Activity can copy extras again and ignore `as=`. Do not paste token-bearing URLs or the dropped link.
 
 ## Picture: dropped as= is a signal
 
@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Relogin[Force re-login if session already flipped]
 ```
 
-Industry lists name detect, respond, recover. They do not copy “ignore identity keys.” They do not prove a checklist. Someone still has to own the leftover.
+An App Links checklist does not drop `as=` from extras.
 
 ## Signals that do not become a second leak
 
@@ -27,27 +27,25 @@ Industry lists name detect, respond, recover. They do not copy “ignore identit
 | Recover | Keep alice; force re-login if switched |
 | Leftover | WebView; custom scheme; attacker app installed |
 
-A mobile-filter product name is not the rule. Re-run `test_deeplink_as_param_does_not_switch_user` after any exported-component change; a green “App Links verified” tile is not that pytest. OAuth redirects (4.5) and WebView bridges are other IPC paths of the same extras — list them before you claim Recover.
+A mobile-filter product name does not ignore `as=`. `as=` on the link still has to fail `test_deeplink_as_param_does_not_switch_user`. “App Links verified” does not ignore extras. OAuth redirects (4.5) and WebView bridges are other IPC paths; the deep link is not honest until those extras are named.
 
 ## What the framework does vs what you still have to check
 
-Play Console App Link status will show verified hosts and stay silent when an exported Activity still copies `as`. Notice must observe **alice unchanged**, not host association. If the alert includes a full deep-link URL or an OAuth code, you have opened a logging leak (4.3).
+App Link verified hosts are not a check that an exported Activity dropped `as`. Leave **alice unchanged** as the miss, not host association. The Intent metric is alice unchanged. A full deep-link URL or an OAuth code is a logging leak (4.3).
 
-The app’s promise is: **this** practice, dropped `as=` fires without the URL, and a filter product name is not this week’s rule.
+Dropped `as=` fires without the URL.
 
 ## Practice
-
-Write one log line you would accept in review. Tie it to `labs/8.3/8.3-lab`. Example shape (fake ids only):
 
 ```text
 log_denied reason=deeplink_identity_ignored field=as request_id=req_83e
 ```
 
-Reject any line that includes a full deep-link URL, an OAuth code, or a live Intent dump.
+Deep-link denials should log `as` and a request id — not a full URL, an OAuth code, or a live Intent dump.
 
 ## Use it somewhere new
 
-Clinic: notice `as=doctor` probes on local practice files; do not attach the link to the ticket. Do not send Intents at a live EHR.
+Notice `as=doctor` probes on local practice files; do not attach the link to the ticket. Do not send Intents at a live EHR.
 
 ## Can people still use it
 
@@ -55,4 +53,4 @@ Deep-link errors must not trap people in a broken WebView with no keyboard-acces
 
 ## What this page is not doing
 
-A mobile-filter product name is not the rule. Live Intent dumps are out of scope. Gates 0–10 stay not-attempted.
+An App Links screenshot does not finish this page. Do not use live Intent dumps. Opening this page does not finish a check-in.

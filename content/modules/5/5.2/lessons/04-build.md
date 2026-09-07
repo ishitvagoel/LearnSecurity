@@ -5,11 +5,11 @@
 
 ## The rule
 
-A column rename is not the fix. HTTPS is not the fix. Volume encryption is not the fix. A denylist of the word “base64” in the function name is not the fix.
+A column rename does not encrypt the body. HTTPS is a hop. Volume encryption is the disk. Banning the word “base64” in the function name is not `protect("secret")`.
 
-The structural change is: the stored value is **not reversible as encoding**. Structural means a keyed transform the storage reader cannot invert — not a prettier name.
+Repair this: the stored value is **not reversible as encoding**. Here: a keyed transform the storage reader cannot invert — not a prettier name.
 
-The smallest restore for a notes-app body stand-in is: `protect` returns a value that does not round-trip as Base64, and `looks_encrypted` asserts a teaching flag. The lab prefix `aesgcm:` is a **teaching flag** that `looks_encrypted` can assert — not a cipher to copy into FastAPI. Fail closed: if the encryption library or the key is missing, **do not store plaintext** (refuse the write).
+Repair a body stand-in: `protect` returns a value that does not round-trip as Base64, and `looks_encrypted` asserts a teaching flag. The lab prefix `aesgcm:` is a **teaching flag** that `looks_encrypted` can assert — not a cipher to copy into FastAPI. By default, if the encryption library or the key is missing, **do not store plaintext** (refuse the write).
 
 ## Picture: stand-in now, real keys later
 
@@ -21,13 +21,13 @@ flowchart TD
   Flag --> Keys["Real key lifecycle - later"]
 ```
 
-The lab’s repaired files prefix `aesgcm:` plus length. Production still needs a reviewed authenticated-encryption library and a key that is not in the same row. Argon2 on a note body is the wrong rule. A JWT is not encryption.
+The prefix is `aesgcm:` plus length. A reviewed authenticated-encryption library still needs a key that is not in the same row. Argon2 on a note body is the wrong rule. A JWT is not encryption.
 
-Industry lists want approved authenticated encryption. This pytest is “not encoding,” not “we shipped AES-GCM.”
+Use approved authenticated encryption. The check is “not encoding,” not “we shipped AES-GCM.”
 
 ## What the repaired files must show
 
-Read `fixed/crypto.py` against this checklist. Do not treat the snippet as a production cipher.
+`fixed/crypto.py` is the protect helper, not a live SSN cipher.
 
 | After the fix | Must be true |
 |---|---|
@@ -35,7 +35,7 @@ Read `fixed/crypto.py` against this checklist. Do not treat the snippet as a pro
 | Base64 decode | not equal to `secret` |
 | `looks_encrypted` | true on the stand-in |
 
-Fail closed: if you cannot encrypt, the answer is refuse the write. Uncertainty is a **deny**, not a yes because the dashboard still showed “encrypted.”
+If you cannot encrypt, refuse the write. The dashboard still showing “encrypted” is not a store.
 
 ## What this is not
 
@@ -57,11 +57,9 @@ Name the rule and the check (not Base64 of plaintext, and the teaching flag). Ru
 python3 -m pytest labs/5.2/5.2-lab/tests --impl fixed
 ```
 
-It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
-Clinic: replace a Base64 column with authenticated encryption and a managed key, not a rename to `ssn_encrypted`.
+Replace a Base64 column with authenticated encryption and a managed key, not a rename to `ssn_encrypted`.
 
 ## What can still go wrong
 
@@ -69,4 +67,4 @@ Nonce reuse. Key in the same row. The stand-in mistaken for a shipped cipher. Op
 
 ## What this page is not doing
 
-Do not copy the teaching prefix into production. Do not claim a course gate from a cipher product name.
+Do not copy the teaching prefix into production. A cipher product name does not finish a check-in.

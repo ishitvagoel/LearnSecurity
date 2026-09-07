@@ -5,9 +5,9 @@
 
 ## Could someone else name the capture check from your ledger map?
 
-A slide that says “we use Stripe idempotency” is not this page. A map someone else can test names **the key, the SEEN set, the webhook path, and that no card number is present**.
+A slide that says “we use Stripe idempotency” still leaves out **the key, the SEEN set, the webhook path, and that no card number is present**.
 
-This week’s freeze for the notes app: a local `capture(key)` practice. Fake amounts only. No live processor.
+`capture(key)` is a local practice. Fake amounts only. No live processor.
 
 ## Picture: one key, one row
 
@@ -28,7 +28,7 @@ flowchart LR
 
 If both arrows append, the map already predicts `test_duplicate_capture_does_not_double_charge` will fail.
 
-## Step 1: freeze who, what, and time
+## Step 1: name who, what, and when
 
 | Piece | This system |
 |---|---|
@@ -48,11 +48,11 @@ If both arrows append, the map already predicts `test_duplicate_capture_does_not
 | second k1 | charge | append | deny |
 | first k1 | charge | append | may allow |
 | Stripe header | local count | treat as the check | deny |
-| Questionnaire | this cell | treat as proof | deny |
+| Questionnaire | this rule | treat as proof | deny |
 
 ## Practice
 
-Draw the map so someone else could name pytest cases. Point at `labs/E3/e3-lab` file `pay.py`.
+The ledger helper is `pay.py` under `labs/E3/e3-lab`.
 
 ## Use it somewhere new
 
@@ -64,4 +64,4 @@ A new key each click; webhook race; connection-pool limits are advanced leftover
 
 ## What this page is not doing
 
-Treating an awareness list as the definition of security. Answer keys are not on this site.
+Circling “double charge” does not stop the second `capture("k1")`. Answer keys are not on this site.

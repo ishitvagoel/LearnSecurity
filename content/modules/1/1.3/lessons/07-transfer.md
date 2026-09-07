@@ -9,7 +9,7 @@ Synthetic design exercise only. Use inert placeholder documents and local reason
 
 ## Use it somewhere new
 
-PreviewForge is a fictional service used by several companies that turns uploaded office documents into browser previews. The notes-app scaffolding goes away. The rule does not.
+PreviewForge is a fictional service used by several companies that turns uploaded office documents into browser previews. The rule does not.
 
 The proposed design is:
 
@@ -43,7 +43,7 @@ flowchart LR
 
 At least these assumptions change:
 
-| Notes app this week | PreviewForge challenge |
+| Notes app | PreviewForge challenge |
 |---|---|
 | Primary hostile influence arrives as request metadata | Hostile bytes become a **stored entry point** processed later by different code |
 | Protected effect is a direct summary export | Effects include parsing/execution-like behavior, resource consumption, file writes, egress, preview publication, and cached release |
@@ -246,4 +246,4 @@ Transfer is ready when the work:
 
 ## What this page is not doing
 
-Malicious documents. Real converters. Real object stores. Live upload systems. Answer keys are not on this site.
+Malicious documents. Do not use real converters. Do not use real object stores. Do not use live upload systems. Answer keys are not on this site.

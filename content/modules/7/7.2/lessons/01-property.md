@@ -5,13 +5,13 @@
 
 ## The rule
 
-The notes app this week stores a note with a member-visible `display_name` and a service-only `secret_internal` (a fake integration token in this practice, not a real secret). Last topic on object grants (4.4) already said: a share on this note is a yes for **this row**. This week’s cell is **which fields that share may read**. Extra keys on *write* were last week (7.1).
+The notes app stores a note with a member-visible `display_name` and a service-only `secret_internal` (a fake integration token in this practice, not a real secret). Last topic on object grants (4.4) already said: a share on this note is a yes for **this row**. The rule is **which fields that share may read**. Extra keys on *write* were last week (7.1).
 
 > `resolve("member", "secret_internal")` must be false. `resolve("member", "display_name")` may be true. `resolve("service", "secret_internal")` may be true.
 
-What must not happen is **a member resolves `secret_internal`**. That is who-is-allowed at field grain. Being able to call GET `/notes` is not this sentence. A UUID in the URL finds the row. It does not authorize every column.
+Field grain fails when a **member** can resolve `secret_internal`. That is who-is-allowed at field grain. Being able to call GET `/notes` does not authorize every column. A UUID in the URL finds the row. It does not authorize every column.
 
-Industry checklists want field-level access limited to consumers with an explicit yes. Function-level permission is coarser. Object-level permission was 4.4. Applying a role change through every serializer right away is **advanced**, not this week’s pytest. Famous “broken object / property / function” lists are awareness after this table exists. They are not the syllabus.
+Field-level access has to be limited to consumers with an explicit yes. Function-level permission is coarser. Object-level permission was 4.4. Applying a role change through every serializer right away is **advanced**, not this check. Famous “broken object / property / function” lists are awareness after this table exists. They are not the syllabus.
 
 ## Picture: the dump helper writes every column
 
@@ -23,9 +23,9 @@ flowchart TD
 
 SQLAlchemy `to_dict()`, GraphQL default resolvers, and REST `?fields=` that echo column names are the same shape: the serializer is not a policy.
 
-Who can act here: a member session that asks for extra fields. That stands in for a clinic GraphQL `Patient { ssn }`, a REST `?fields=` dump, or a CSV exporter that serializes every ORM column. What you trust is local `resolve(role, field)` on the server. Hiding the key in the SPA is not the cell.
+Picture a member session that asks for extra fields — a clinic GraphQL `Patient { ssn }`, a REST `?fields=` dump, or a CSV exporter that serializes every ORM column. What you trust is local `resolve(role, field)` on the server. Hiding the key in the SPA is not the rule.
 
-**A tool is not the rule.** “Private JSON keys,” “GraphQL schema is typed,” “we already passed 4.4 object tests.”
+Private JSON keys, a typed GraphQL schema, and a passing 4.4 object suite do not stop a member from resolving an internal field.
 
 ## Picture: role times field is a table
 
@@ -38,14 +38,14 @@ flowchart LR
   Allow -->|yes| Read[read]
 ```
 
-A UUID locates the row. It is not a capability for every column. Hiding the key in the SPA is not the cell.
+A UUID locates the row. It is not a capability for every column. Hiding the key in the SPA is not the rule.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | For this rule |
 |---|---|
 | Why it happens | Serializer dumps the ORM object |
-| What has to be true first | `resolve("member", "secret_internal")` is true |
+| What's already wrong | `resolve("member", "secret_internal")` is true |
 | Trigger | Member requests the field (REST, GraphQL, CSV, search) |
 | What it costs | Internal token or extra personal data |
 | How you stop it | Allow-list fields by role at the trusted layer |
@@ -56,7 +56,7 @@ A UUID locates the row. It is not a capability for every column. Hiding the key 
 
 ORM dump helpers are convenience, not field permission. GraphQL will resolve any field the schema exposes. FastAPI `response_model` helps only if it is the actual response, not an optional overlay.
 
-The app’s promise is: **this** `resolve`, member × `secret_internal` is false. The practice folder is `labs/7.2/7.2-lab`. It is local. No live GraphQL.
+`resolve`, member × `secret_internal` is false — files in `labs/7.2/7.2-lab`. No live GraphQL.
 
 ## What the tool cannot do
 
@@ -77,12 +77,12 @@ python3 -m pytest labs/7.2/7.2-lab/tests --impl vulnerable
 python3 -m pytest labs/7.2/7.2-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Tie the check to `resolve("member", "secret_internal")`, not to a scanner bug name.
+Look at `resolve("member", "secret_internal")`, not a scanner bug name.
 
 ## Use it somewhere new
 
-Clinic: a member cannot resolve SSN. Also name bulk update and search highlighting that leaks snippets.
+A member cannot resolve SSN. Also name bulk update and search highlighting that leaks snippets.
 
 ## What this page is not doing
 
-Live GraphQL attacks, dumping ORM models into notes. Course gates stay unclaimed without learner or product evidence. Answer keys are not on this site.
+Do not use live GraphQL attacks, dumping ORM models into notes. This page does not finish a check-in. Answer keys are not on this site.

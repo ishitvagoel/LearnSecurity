@@ -1,18 +1,16 @@
-# Review “any URL is in scope” like a pull request
+# Would you merge this “any URL is in scope”?
 
 **Kind:** code-review
 **Loop step:** Review
-**Standards:** CSF 2.0 GV. WSTG 4.2 as catalogue, not a licence.
+**Standards:** CSF 2.0 GV. WSTG 4.2 as a list, not a licence.
 
 ## Review the practice files as if they were the course helper
 
-Review `labs/0.1/0.1-orientation/vulnerable/` as a pull request for a course tool. Your job is not to count suspicious lines. Reconstruct whether `target_is_authorized` still returns true for a public host, compare that with the rule, and write changes a developer can check.
-
-Intended findings live only in the isolated keys file — not here. Do not open the keys until your review has been evaluated.
+Open `labs/0.1/0.1-orientation/vulnerable/` as a course-tool PR. Does `target_is_authorized` still return true for a public host?
 
 ## Picture: any URL the proxy can open
 
-Start with this seeded smell: **Any URL the proxy can open**. Label it a rule, a tool, or false assurance before you accept the change.
+**Any URL the proxy can open**.
 
 ```mermaid
 flowchart TD
@@ -22,7 +20,7 @@ flowchart TD
   Q -->|a guide mapped| False[False assurance]
 ```
 
-Classification starts at the protected effect (public host denied). Everything that is not a hostname allow-list at that call is a leftover path.
+A public host still has to be denied. Without a hostname allow-list, example.com stays authorized.
 
 ## Problems to find (name them yourself)
 
@@ -41,14 +39,10 @@ Also reject: fetching example.com; keys in lessons; claiming the first check-in;
 - The computer answering is permission
 - A cloud Juice Shop you found is in-scope because the project is “official training”
 
-## Practice
-
-Write three review notes a maintainer could act on. Each note: what you saw, whether it is a rule or false assurance, a suggested structural change, leftover risk you will **not** delete. Tie at least one to `test_public_host_is_out_of_scope`.
-
 ## Use it somewhere new
 
-A contractor change that “added the guide and a proxy” without a host allow-list is a skipped-check review. Name the independent falsehood that would still keep `example.com` false.
+Adding the guide and a proxy without a host allow-list skips the check. A proxy is not a host allow-list — write the `example.com` deny.
 
 ## What this page is not doing
 
-Do not merge by adding a comment “do not scan production.” That comment is leftover risk without an owner. Do not fetch a public host to prove the finding.
+A comment that says “do not scan production” does not own the allow-list. Keep the finding open until someone does. Do not fetch a public host to prove the finding.

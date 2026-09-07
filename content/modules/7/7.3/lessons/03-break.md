@@ -5,21 +5,19 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `accept`. It does not open a network. The failure is already in the function: it returns true for every triple. You are here to see that an unsigned body counting as authentic is a **failed rule**, not a trophy POST to a live provider.
-
-The rule under test:
+The practice is not a website you attack. `accept` does not open a network. It returns true for every triple, so an unsigned body already counts as authentic. Do not POST to a live provider.
 
 > An unsigned webhook body is not authentic. `accept("", "body", "lab-secret")` must be false. This practice checks the predicate only. It does not POST a live webhook.
 
 ## Where you may practice
 
-Only `labs/7.3/7.3-lab` is in scope. The maps are in-process: `accept(sig, body, secret)`. Disposable `lab-secret` and a synthetic `body`. Restore the broken and repaired folders when you are done.
+Stay inside `labs/7.3/7.3-lab`. Disposable `lab-secret` and a synthetic `body` go through `accept(sig, body, secret)`. Restore the broken and repaired folders when you are done.
 
 Do not POST to Stripe. Do not POST to GitHub. Do not POST to a clinic webhook. Do not POST to public hosts. Do not paste a live callback URL “to see what happens.”
 
-What must not happen: an unsigned webhook body is accepted. `accept` returns true for an empty signature.
+`accept` true for an empty signature is an unsigned webhook body accepted.
 
-Who can act here: anyone who can POST the callback URL with an empty or wrong signature. That stands in for a forged billing event, an “export-ready” callback, or a clinic lab-result post. What you are supposed to trust: `accept` is **message authenticity over raw bytes**. TLS to the path, a vendor address-range allow-list, and a vendor SDK name are not what you trust for this check.
+Picture anyone who can POST the callback URL with an empty or wrong signature — a forged billing event, an “export-ready” callback, or a clinic lab-result post. `accept` is **message authenticity over raw bytes** — not TLS to the path, a vendor address-range allow-list, or a vendor SDK name.
 
 ## Picture: hitting the path is enough
 
@@ -28,21 +26,18 @@ flowchart TD
   Call["accept empty sig"] --> True[returns true]
 ```
 
-The broken files show **cause** (the path was trusted). Do not POST anything except this practice. What has to be true first: `accept` returns true for every triple. You do not need HTTP. You must not POST a live provider.
+The path was trusted. Do not POST anything except this practice. `accept` returns true for every triple. You do not need HTTP. You must not POST a live provider.
 
-Industry lists want a standard-library MAC. Module 5.4 already said TLS proves a hop; this cell is **whether the message came from the provider**. HMAC here is a teaching stand-in, not “we are Stripe.” A famous-bugs nickname for unsafe consumption of APIs is awareness after the cause, not that check.
+Use a standard-library MAC. Module 5.4 already said TLS proves a hop; this rule is **whether the message came from the provider**. HMAC here is a teaching stand-in, not “we are Stripe.” A famous-bugs nickname for unsafe consumption of APIs is awareness after the cause, not that check.
 
-## What to look at — cause, not a live POST
+## What to look at: the cause, not a live POST
 
-Read `vulnerable/hook.py`. It returns true for every triple. Tests:
+`vulnerable/hook.py` accepts every signature triple. Tests:
 
 - `test_missing_signature_is_rejected`
 - `test_wrong_signature_is_rejected`
 - `test_matching_signature_is_accepted` — honest path; may pass on both
 
-You do not need a new secret. The failure of `test_missing_signature_is_rejected` *is* the evidence.
-
-Do not open the repaired files yet. Diagnose the cause first.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -56,31 +51,29 @@ Do not open the repaired files yet. Diagnose the cause first.
 |---|---|
 | The rule | `accept("", "body", "lab-secret")` is false |
 | Why it happens | The callback was trusted because it hit the path |
-| What has to be true first | `accept` is always true |
+| What's already wrong | `accept` is always true |
 | Trigger | An unauthenticated POST to the callback URL |
 | What it costs | Forged local event; in production, forged share, billing, or lab-result |
-| How you stop it | MAC over the raw body; fail closed on a missing or wrong sig |
+| How you stop it | MAC over the raw body; deny on a missing or wrong sig |
 | How you notice | `webhook_sig_fail`; never the body or secret |
 | How you recover | Keep deny; rotate the disposable secret if events escaped |
 | Not the lesson | A famous-bugs nickname, TLS as authenticity, or a live Stripe POST |
 
 ## What the framework does vs what you still have to check
 
-FastAPI will accept a POST with an empty header. nginx TLS termination proves a hop, not a MAC. A vendor address range is shared-fate (NAT, shared cloud egress). Next.js never sees the callback. The app’s promise is: **these** local files, empty sig is false. **Do not POST a live webhook.**
+FastAPI will accept a POST with an empty header. nginx TLS termination proves a hop, not a MAC. A vendor address range is shared-fate (NAT, shared cloud egress). Next.js never sees the callback. Empty sig is false. **Do not POST a live webhook.**
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/7.3/7.3-lab/tests --impl vulnerable
 ```
 
-Run from `labs/7.3/7.3-lab` if a repo-root collection picks up `site/`. Record `test_missing_signature_is_rejected`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/7.3/7.3-lab` if a repo-root collection picks up `site/`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic lab-result webhook. Predict without leaving this directory. Do not POST a live lab vendor.
+A lab-result webhook can skip the MAC. Predict without leaving this directory. Do not POST a live lab vendor.
 
 ## What this page is not doing
 

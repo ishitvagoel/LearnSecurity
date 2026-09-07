@@ -5,9 +5,9 @@
 
 ## The rule
 
-A denylist of yesterday’s CDN header is not the fix. Hiding a scanner warning is not the fix. “The CDN is compliant” is not the fix.
+Dropping last week’s CDN header name does not pin the cache key. Hiding a scanner warning does not pin it. A “compliant CDN” badge is not enough.
 
-The structural change is: `cache_get` may return a body only when the lookup uses the same **bound company** as `cache_put`. The store actually partitions by that company — not `Cache-Control` theater, not a scanner suppression. You do not restore secrecy by turning TLS ciphers up.
+Repair this: `cache_get` may return a body only when the lookup uses the same **bound company** as `cache_put`. The store actually partitions by that company — not `Cache-Control` theater, not a scanner suppression. You do not restore secrecy by turning TLS ciphers up.
 
 ## Picture: miss is fail-safe
 
@@ -22,13 +22,13 @@ The repaired files key `(path, tenant)`. Production may instead **refuse to cach
 
 Company in the key must be the company the who-is-allowed check already resolved, not `Host` or `X-Forwarded-*` from the client.
 
-Do not accept `Cache-Control: private` as membership in the key. Next.js `fetch` cache defaults do not encode company. A CDN that keys on path will still serve company A’s note to company B. `Vary: Cookie` is not a company id. The app’s promise is: on **these** practice files, `cache_get("/notes/n1", "tB")` after a company A put is `None`.
+`Cache-Control: private` does not count as membership in the key. Next.js `fetch` cache defaults do not encode company. A CDN that keys on path will still serve company A’s note to company B. `Vary: Cookie` is not a company id. `cache_get("/notes/n1", "tB")` after a company A put is `None`.
 
-Industry lists want cached sensitive data isolated. This check is that sentence for path-only keys.
+Cached sensitive data has to stay isolated. This check covers path-only keys.
 
 ## What the repaired files must show
 
-Read `fixed/cache.py` in the repaired files against this checklist. Do not treat the snippet as a production CDN.
+`fixed/cache.py` keys a dict, not a CDN.
 
 | After the fix | Must be true |
 |---|---|
@@ -36,7 +36,7 @@ Read `fixed/cache.py` in the repaired files against this checklist. Do not treat
 | Company A put then company B get | `None`, never `tenant-A-note` |
 | Anonymous fill | not in this practice; still deny at who-is-allowed |
 
-Fail closed: if the bound company is missing or unknown, do not share the slot. Uncertainty is a **miss**, not a yes because the path looked familiar.
+When the bound company is missing or unknown, do not share the slot. A familiar path is not a company.
 
 ## What this is not
 
@@ -47,13 +47,11 @@ Fail closed: if the bound company is missing or unknown, do not share the slot. 
 
 ## Practice
 
-Name who, what, action, and the check that must be true after the fix. Run:
+Say who, what, and the check that has to hold after the restore. Run:
 
 ```text
 python3 -m pytest labs/2.2/2.2-request-path/tests --impl fixed
 ```
-
-It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
 ## Use it somewhere new
 

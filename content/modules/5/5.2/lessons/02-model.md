@@ -3,11 +3,11 @@
 **Kind:** design-exercise
 **Loop step:** 2 Model
 
-## Could someone else name pytest cases from your table?
+## Could someone else name the checks from your table?
 
-“We use AES” is not this lesson. A map someone else can test names **the rule**, **the field**, **the algorithm family**, and **what it is not for**.
+Keep **the rule**, **the field**, **the algorithm family**, and **what it is not for**; “We use AES” is not that list.
 
-This week's freeze: local `protect` / `looks_encrypted`. Plaintext stand-in `secret`. No live key service.
+`protect` / `looks_encrypted` — Plaintext stand-in `secret`. No live key service.
 
 > `protect("secret")` must not round-trip as Base64. If the table mixes rows, the wrong tool lands on the wrong field.
 
@@ -57,7 +57,7 @@ A missing “storage reader × Base64 field × deny” row is how encoding gets 
 
 ## Practice
 
-Draw this table so someone else could name the pytest cases. Point at `labs/5.2/5.2-lab` file `crypto.py`. Your artifact is a versioned list (even a table in your notes) with field, tool, allow or deny, and what would show the deny is false. Fake data only.
+Look at `crypto.py` under `labs/5.2/5.2-lab`. Name field, tool, and the case that would prove the deny false. Fake data only.
 
 ## Use it somewhere new
 
@@ -69,4 +69,4 @@ Memory dumps. Operators who are allowed to hold the key. Real keys wait for a la
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Do not put keys in lessons. Do not run this map against a public clinic. Answer keys are not on this site.
+Do not put keys in lessons. Do not run this map against a public clinic. Answer keys are not on this site.

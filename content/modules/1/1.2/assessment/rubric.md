@@ -6,17 +6,17 @@ This file is learner-facing. It contains prompts and evaluation criteria, not an
 
 Submit one coherent pack containing:
 
-1. a scoped SecureCollab Phase 1 authority map;
+1. a scoped notes-app authority map for this stage;
 2. an access matrix with at least twelve explicit allow/deny cells and no implicit defaults;
 3. an enforcement inventory covering direct read, aggregate list, administrative mutation, revocation, unknown policy, and the modeled high-impact export decision;
 4. a delegation record with issuer, grantee, action/object scope, constraints, time, revocation, evidence, and mechanism limits;
 5. a causal diagnosis of every intended vulnerable-lab failure before comparison with the fixed tree;
 6. exact vulnerable and fixed lab commands/results plus a matrix-to-test trace;
-7. one policy-decision and enforcement-point design record with trusted attribute sources, rejected alternatives, failure behavior, and residual risk;
+7. one policy-decision and enforcement-point design record with trusted attribute sources, rejected alternatives, failure behavior, and leftover risk;
 8. a four-mode authority test matrix and at least one policy-removal counterfactual;
 9. an authority-lifecycle runbook covering grant, use, expiry, revocation, break-glass, evidence failure, recovery, and accessible administration;
 10. the LO-08 seeded review deliverables;
-11. a ReleaseDesk transfer pack and SecureCollab comparison memo.
+11. a ReleaseDesk transfer pack and the notes app comparison memo.
 
 Use only local synthetic course material. Do not include real credentials, real personal data, public-target instructions, or evidence from a system you are not authorized to test.
 
@@ -24,7 +24,7 @@ Use only local synthetic course material. Do not include real credentials, real 
 
 Answer each in two to five precise sentences.
 
-1. Why can authentication be correct while authorization is wrong? Give a SecureCollab example.
+1. Why can authentication be correct while authorization is wrong? Give an example from the notes app.
 2. What does an access matrix represent, and how do a role and an ACL relate to it?
 3. Why is a random note identifier not automatically a capability?
 4. What makes authority ambient? Name one application and one worker or infrastructure example.
@@ -39,7 +39,7 @@ Revise missed answers before resubmission. The knowledge result cannot compensat
 
 ## Authority-map and matrix task
 
-Model only the current SecureCollab Phase 1 design. Explicitly mark files, sharing links, support impersonation, workers, caches, queues, webhooks, mobile offline state, production deployment, and cloud administrators as deferred review triggers.
+Model only the notes app's current design at this stage. Explicitly mark files, sharing links, support impersonation, workers, caches, queues, webhooks, mobile offline state, production deployment, and cloud administrators as deferred review triggers.
 
 Your matrix must include:
 
@@ -87,7 +87,7 @@ Choose note-body read, membership revoke, or the modeled bulk export. Produce a 
 - revocation and policy-unavailable behavior;
 - two plausible rejected repairs and why they do not restore the property;
 - normal, negative, abuse, failure, and counterfactual evidence;
-- operations, human-factor limits, residual risk, and review triggers.
+- operations, human-factor limits, leftover risk, and review triggers.
 
 Do not edit the course’s vulnerable or fixed directories in place.
 
@@ -111,7 +111,7 @@ Write a runbook for membership revocation or the modeled export authority. Inclu
 - evidence-pipeline failure behavior;
 - narrow containment, root-cause repair, state/output recovery, retest, and communication;
 - one keyboard/assistive-technology path, clear completion state, and safe failure alternative;
-- one operator-compromise or shared-mechanism residual risk.
+- one operator-compromise or shared-mechanism leftover risk.
 
 ## Seeded code review
 
@@ -126,7 +126,7 @@ Submit the implemented-cell table and at least six actionable comments across fo
 
 Complete LO-07’s synthetic release-approval pack. It must include:
 
-- bounded production-deployment invariant and at least four forbidden effects;
+- bounded production-deployment rule and at least four forbidden effects;
 - originating/effective subjects, objects, state machine, authority sources, and trusted components;
 - at least twelve access-matrix cells;
 - two-person approval independence argument;
@@ -134,7 +134,7 @@ Complete LO-07’s synthetic release-approval pack. It must include:
 - enforcement points from proposal through execution/retry/emergency use;
 - normal, negative, abuse, and failure evidence;
 - privacy-safe operations and accessible recovery;
-- comparison memo explaining at least four SecureCollab assumptions that fail.
+- comparison memo explaining at least four the notes app assumptions that fail.
 
 The transfer may not target or use a real repository, CI provider, cloud account, or deployment.
 
@@ -154,14 +154,14 @@ Each critical dimension is evaluated independently.
 | Operations and human factors | “Log and revoke”; sensitive evidence or unusable admin | Privacy-safe evidence, bounded revocation, containment/recovery, accessible journey | Break-glass and evidence common-mode failure are handled honestly | yes |
 | Standards accuracy | Unversioned ASVS or checklist-as-proof | Exact v5.0.0 IDs, levels/applicability, and CISA unverified pin are represented accurately | Requirements are tailored to the changed system with explicit non-applicability | yes |
 | Review communication | “Needs auth” or generic best practice | Actionable comments tie policy gaps to effects, changes, tests, and limits | Review reconstructs a changed authority model and challenges assumptions | no |
-| Transfer | SecureCollab nouns renamed | ReleaseDesk changes actors, object, authority, state, time, and enforcement | Explains at least four failed assumptions and a non-obvious conflict | yes |
+| Transfer | the notes app nouns renamed | ReleaseDesk changes actors, object, authority, state, time, and enforcement | Explains at least four failed assumptions and a non-obvious conflict | yes |
 | Safety and editorial integrity | Real target/data or examiner content included | Local synthetic scope and isolated key boundary are preserved | Learner independently identifies and communicates safety/assurance limits | yes |
 
 ## Result rules
 
 - **Not attempted:** required evidence is absent.
 - **Developing:** any critical dimension is incomplete or unsafe.
-- **Competent:** every critical dimension is satisfactory for SecureCollab and material findings are corrected.
+- **Competent:** every critical dimension is satisfactory for the notes app and material findings are corrected.
 - **Transfer-ready:** competent evidence plus a satisfactory ReleaseDesk transfer and explicit limitation analysis.
 
-There is no compensating average. A polished transfer essay cannot compensate for a cross-tenant allow cell, default-allow unknown action, stale revocation, cosmetic approval, unsafe scope, or missing enforcement point. This module contributes evidence to Gate 1; it does not mark Gate 1 complete by itself.
+There is no compensating average. A polished transfer essay cannot compensate for a cross-tenant allow cell, default-allow unknown action, stale revocation, cosmetic approval, unsafe scope, or missing enforcement point. This module contributes evidence to check-in 1; it does not mark check-in 1 complete by itself.

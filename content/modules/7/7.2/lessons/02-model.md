@@ -3,11 +3,11 @@
 **Kind:** design-exercise
 **Loop step:** 2 Model
 
-## Could someone else name pytest cases from your field table?
+## Could someone else name the checks from your field table?
 
-“Object authz is on” is not this page. A table someone else can test names **role, field, and every serializer**.
+Keep **role, field, and every serializer**; “Object authz is on” is not that list.
 
-This week’s freeze: the notes app’s local `resolve(role, field)`. No live GraphQL.
+`resolve(role, field)` — no live GraphQL.
 
 ## Picture: three grains
 
@@ -30,7 +30,7 @@ flowchart LR
 
 Identifiers find a row. They do not authorize fields. Obscure identifiers are not capabilities. Famous “broken object / property / function” lists are awareness after this sentence.
 
-## Step 1: freeze the pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|
@@ -54,11 +54,11 @@ Identifiers find a row. They do not authorize fields. Obscure identifiers are no
 
 ## Practice
 
-Draw the table so someone else could name pytest cases. Point at `labs/7.2/7.2-lab` file `field.py`.
+Label `field.py` under `labs/7.2/7.2-lab`.
 
 ## Use it somewhere new
 
-Clinic SSN; search snippets; bulk update of hidden fields (write grain is 7.1, read grain is this map).
+SSN as a field, search snippets, and bulk update of hidden fields share this map (write grain is 7.1, read grain is here).
 
 ## What can still go wrong
 
@@ -66,4 +66,4 @@ Later worker dumps (7.4). Stale serializers after a role change (advanced). Debu
 
 ## What this page is not doing
 
-A famous-bugs list as the definition of security. Answer keys are not on this site.
+Naming mass assignment does not drop `secret_internal`. Answer keys are not on this site.

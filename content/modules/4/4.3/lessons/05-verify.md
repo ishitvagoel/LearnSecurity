@@ -1,15 +1,15 @@
-# Fail on the broken files, then pass on the repaired ones
+# A query that returns a secret must fail
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-“We set Referrer-Policy” is not evidence that the parser ignores query tokens. “HTTPS” is a hop observation. The check is: `session_from_request({"access_token": "secret"}, {}, None)` is `None`. That observation must be **false** on the broken files (returns `secret`) and **true** on the repaired files.
+A Referrer-Policy header does not prove the parser ignores query tokens. HTTPS is a hop. `session_from_request({"access_token": "secret"}, {}, None)` has to be `None`. On the broken helper, it returns `secret`. Repair ignores a token in the query string.
 
 ## Picture: query returns secret must fail
 
-A passing collection count is not this cell. The failing observation on the broken files is **query returns secret**.
+How many tests passed is the wrong scoreboard. The failing observation on the broken files is **query returns secret**.
 
 ```mermaid
 flowchart LR
@@ -24,14 +24,14 @@ flowchart LR
 | Header | Authorization still works |
 | Not claimed | Production Referer; magic-link exchange; HttpOnly on the wire |
 
-Lab tests in `labs/4.3/4.3-lab/tests/test_property.py`. `test_query_string_token_is_rejected` is a **what-must-not-happen** test: a query-minted session is not allowed to count as a passing control.
+Checks live at `labs/4.3/4.3-lab/tests/test_property.py`. A query-minted session is what `test_query_string_token_is_rejected` rejects.
 
 ```text
 python3 -m pytest labs/4.3/4.3-lab/tests --impl vulnerable
 python3 -m pytest labs/4.3/4.3-lab/tests --impl fixed
 ```
 
-Map each test to a row on the channel map you drew. If the broken files do not fail the query assertion, the lab is miswired — fix the wiring, not the check. Cookie and header honest-path tests may pass on both implementations; that does not excuse the query deny.
+Map each test to a row on the channel map you drew. If the broken files do not fail the query assertion, the lab is miswired — fix the wiring, not the check. Cookie and header honest-path tests can still look fine. Deny a token in the query.
 
 ## What the tests do not prove
 
@@ -40,15 +40,13 @@ Map each test to a row on the channel map you drew. If the broken files do not f
 - Clinic deep links (transfer)
 - CORS header-token leakage (later)
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
-Run both this session. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `Referrer-Policy` without calling `session_from_request` on a query dict.
+Call `session_from_request` on a query dict. A `Referrer-Policy` header is the referrer, not the query token.
 
 ## Use it somewhere new
 
-Clinic deep link. A test that only asserts HTTP 200 is not channel evidence. A test that clicks a live SMS is out of scope.
+HTTP 200 on a deep link is not channel evidence. Do not run a test that clicks a live SMS.
 
 ## What this page is not doing
 

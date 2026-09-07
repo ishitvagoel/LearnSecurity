@@ -5,11 +5,11 @@
 
 ## The rule
 
-A denylist of yesterday’s spreadsheet cells is not the fix. Hiding a scanner warning is not the fix. “We ran the checklist” is not the fix.
+The old spreadsheet cells are not an isolation assert. A silenced finding does not cover `AUTHZ-1`. Running the checklist once does not finish this.
 
-The structural change is: `covered` **requires `req == req_id` and `asserts_isolation`**. A row that only stores status is uncovered. Structural means that conjunction — not “we ran the checklist,” not pytest-cov, not a tracker Done column.
+What has to change: `covered` **requires `req == req_id` and `asserts_isolation`**. A row that only stores status is uncovered. Namely that conjunction — not “we ran the checklist,” not pytest-cov, not a tracker Done column.
 
-The smallest restore for the notes app’s AUTHZ-1 tracking is: status-only → not covered. Fail-safe: a missing flag is false. Do not fail open because the PDF was attached. Do not accept “we ran the checklist” as the isolation flag.
+The notes app’s AUTHZ-1 tracking needs this: status-only → not covered. A missing flag is false. An attached PDF does not mark AUTHZ-1 covered. Don't take “we ran the checklist” as the isolation flag.
 
 ## Picture: coverage and isolation are both gates
 
@@ -22,13 +22,13 @@ flowchart TD
   Iso -->|no| Deny
 ```
 
-The repaired files require both gates. Production still needs the later shape lesson (9.3): a test that sets `asserts_isolation` while only checking HTTP 200 is a lying flag. Extra advanced rows stay unmapped if you never raise them. Mobile storage without a matching test is the same hole on a phone (8.2). Exceptions need an expiry date (E6) or they are silent uncovered rows.
+Status and an isolation test both have to be present. A flag `asserts_isolation` on an HTTP-200-only test is a lying flag (9.3). Extra advanced rows stay unmapped if you never raise them. Mobile storage without a matching test is the same hole on a phone (8.2). Exceptions need an expiry date (E6) or they are silent uncovered rows.
 
-A development-practice guide that wants executable tests against requirements is that sentence for AUTHZ-1 status-only. This pytest is the local stand-in.
+A development-practice guide that wants executable tests against requirements covers AUTHZ-1 status-only. The check is the local stand-in.
 
 ## What the repaired files must show
 
-Read `fixed/trace.py` against this checklist. Do not treat the snippet as a production governance product.
+`fixed/trace.py` is a coverage-map helper, not a portal scraper.
 
 | After the fix | Must be true |
 |---|---|
@@ -36,7 +36,7 @@ Read `fixed/trace.py` against this checklist. Do not treat the snippet as a prod
 | isolation-assert row | `covered` true |
 | empty list | `covered` false |
 
-Fail closed: if you are unsure whether a test asserts isolation, it does not count. Uncertainty is a **no** on “this may count as coverage,” not a yes because the PDF was attached.
+If you are unsure whether a test asserts isolation, it does not count. Attaching the PDF does not turn it into coverage.
 
 ## What this is not
 
@@ -44,7 +44,7 @@ Fail closed: if you are unsure whether a test asserts isolation, it does not cou
 - A tracker done column.
 - Copied-wholesale checklists.
 - A later draft of a practice guide used as a sticker.
-- The verification gate complete.
+- A check-in sticker because you opened this lesson.
 - A test named `test_authz` that asserts HTTP 200 (9.3).
 
 ## What the tool cannot do
@@ -56,7 +56,7 @@ Fail closed: if you are unsure whether a test asserts isolation, it does not cou
 
 ## Can people still use it
 
-A human exception path must say what is still uncovered and when it expires. Do not hide the gap behind “see PDF.”
+A human exception path must say what is still uncovered and when it expires. A scan attachment is not the uncovered-row text.
 
 ## Practice
 
@@ -65,8 +65,6 @@ Name the check (`req` matches **and** `asserts_isolation`). Run:
 ```text
 python3 -m pytest labs/9.1/9.1-lab/tests --impl fixed
 ```
-
-It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
 ## Use it somewhere new
 

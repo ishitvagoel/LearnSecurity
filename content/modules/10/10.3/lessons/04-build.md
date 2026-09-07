@@ -5,11 +5,11 @@
 
 ## The rule
 
-A private namespace is not the fix. A network policy is not the fix. "The CIS scan is green so we shipped it" is not the fix.
+A private namespace does not deny `cluster-admin`. A network policy is a different cut. A green CIS scan is a score, not `pod_ok`.
 
-The structural change is: `pod_ok` **returns `role in ALLOWED_ROLES`** where `ALLOWED_ROLES` is `{"app"}`. Fail-safe: unknown roles deny. A denylist of the string `cluster-admin` would still be god-mode-minus-one-name. Structural means that membership — not namespace name, not a network policy, not a CIS score.
+Do this: `pod_ok` **returns `role in ALLOWED_ROLES`** where `ALLOWED_ROLES` is `{"app"}`. Unknown roles deny. A denylist of the string `cluster-admin` would still be god-mode-minus-one-name. Read it as that membership — not namespace name, not a network policy, not a CIS score.
 
-The lab allow-list is a **stand-in** for a namespaced Role plus RoleBinding plus a restricted pod profile. It is not kube-apiserver. The smallest restore for the notes app's API SA is: `cluster-admin` → do not run. Fail-safe: if you are unsure whether the role is namespaced, deny. Do not fail open because "it is in namespace sc-prod."
+The lab allow-list is a **stand-in** for a namespaced Role plus RoleBinding plus a restricted pod profile. It is not kube-apiserver. The notes app's API SA needs this: `cluster-admin` → do not run. If you are unsure whether the role is namespaced, deny. Sitting in namespace sc-prod does not make cluster-admin an app role.
 
 ## Picture: namespace is not cluster-admin
 
@@ -20,29 +20,29 @@ flowchart TD
   In -->|no| Deny[deny]
 ```
 
-The repaired files require membership in `{"app"}`. Production still needs that allow-list to be the *right* Role — `"app"` that can still list all Secrets is a lying least-privilege. A restricted pod profile remains a sibling grain. An outbound allow-list (the metadata hop) is not this pytest. Documented connection and retry toward the cluster API is extra, advanced work.
+The pod Role has to sit in `{"app"}`. An `"app"` Role that can still list all Secrets is lying least-privilege. A restricted pod profile remains a sibling grain. An outbound allow-list (the metadata hop) does not deny cluster-admin. Documented connection and retry toward the cluster API is extra, advanced work.
 
-Industry checklists want those accounts least-privileged. This pytest is that sentence for cluster-admin.
+Those accounts should be least-privileged — cluster-admin.
 
 ## What the repaired files must show
 
-Read `fixed/iam.py` against this checklist. Do not treat the snippet as a production cluster product.
+`fixed/iam.py` is the allow-list helper — no kube-apiserver in the loop.
 
 | After the fix | Must be true |
 |---|---|
 | cluster-admin | run false |
 | app | run true |
 
-Fail closed: if you are unsure whether the role is a namespaced app role, deny. Uncertainty is a **no** on run, not a yes because the namespace looks private.
+By default, if you are unsure whether the role is a namespaced app role, deny. A private-looking namespace does not make it a run.
 
 ## What this is not
 
 - A network policy.
 - A restricted pod profile alone.
 - A managed-cluster identity sticker.
-- An assurance gate sticker.
+- A CIS score treated as done.
 - Break-glass (leftover, later elective).
-- FastAPI defaults.
+- FastAPI defaults as the pod Role.
 - A CIS benchmark.
 
 ## What the tool cannot do
@@ -61,8 +61,6 @@ Name who can apply Helm ClusterRoles. Run:
 python3 -m pytest labs/10.3/10.3-lab/tests --impl fixed
 ```
 
-It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 Serverless: replace `ALLOWED_ROLES` with an IAM statement that is not `*`. Same allow-list idea, different object.
@@ -73,4 +71,4 @@ Break-glass ClusterRole. The metadata hop. Documented cluster-API retry (extra, 
 
 ## What this page is not doing
 
-Do not apply manifests to a live cluster. Do not claim you finished an assurance gate from a CIS screenshot. Do not present a restricted pod profile as who-is-allowed on the API.
+Do not apply manifests to a live cluster. This page does not mark you as finished. A CIS screenshot is not a check-in. Do not present a restricted pod profile as who-is-allowed on the API.

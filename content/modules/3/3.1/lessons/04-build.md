@@ -5,11 +5,11 @@
 
 ## The rule
 
-A denylist of yesterday's log format is not the fix. Hiding a scanner warning is not the fix. “We classified it Confidential” is not the fix.
+A prior log-format string is not redaction. A muted ticket does not keep the body out of the line. Labeling the spreadsheet Confidential does not fix the leftover.
 
-The structural change is: `log_event` **does not include the body string**. The logging API does not accept the body as a format argument. Not a regex after the fact. Not a spreadsheet label. Not `DEBUG=false` in one environment. Not a data-loss product name.
+Do this: `log_event` **does not include the body string**. The logging API does not accept the body as a format argument. Not a regex after the fact. Not a spreadsheet label. Not `DEBUG=false` in one environment. Not a data-loss product name.
 
-The smallest restore for a notes-app `note_read` is: return a redaction marker and never paste `note_body` into the line. Production should use structured fields (`event`, `note_id`, `tenant_id`) and never have a `body=` key. If you are unsure whether a value is Confidential, do not log it.
+A `note_read` needs this: return a redaction marker and never paste `note_body` into the line. Production should use structured fields (`event`, `note_id`, `tenant_id`) and never have a `body=` key. If you are unsure whether a value is Confidential, do not log it.
 
 ## Picture: redact at the API
 
@@ -28,7 +28,7 @@ Naming the field is empty until each place has a deny or allow. This check is th
 
 ## What the repaired files must show
 
-Read `fixed/classify.py` against this checklist. Do not treat the snippet as a production logger.
+`fixed/classify.py` is the omit helper — it does not ship clinic logs.
 
 | After the fix | Must be true |
 |---|---|
@@ -36,7 +36,7 @@ Read `fixed/classify.py` against this checklist. Do not treat the snippet as a p
 | Line | contains `redacted` or `confidential` (the local marker) |
 | Event name | still present so operators can debug *that a read happened* |
 
-Fail closed: if you are unsure, omit the value. Uncertainty is a **no** on “this may go in the line,” not a yes because the dashboard looked useful.
+By default, if you are unsure, omit the value. A useful-looking dashboard does not put it in the line.
 
 ## What this is not
 
@@ -67,11 +67,9 @@ Name field (note body), place (application log line), and the check that must be
 python3 -m pytest labs/3.1/3.1-lab/tests --impl fixed
 ```
 
-It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
-Clinic: log appointment time; never log chart text. Two classes, two places. A booking card that logs the chart fails this sentence even if the time is Internal.
+Log appointment time; never log chart text. Two classes, two places. A booking card that logs the chart fails this sentence even if the time is Internal.
 
 ## What can still go wrong
 

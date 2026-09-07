@@ -1,15 +1,15 @@
-# Fail on the broken files, then pass on the repaired ones
+# HTTPS in the header with HTTP on the socket must fail
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-“TLS is on” is not evidence. “Force HTTPS is checked” is a tool observation. The check is: `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` is False. That observation must be **false** on the broken files (the helper still returns true) and **true** on the repaired files.
+A TLS checkbox does not ignore a spoofed forwarded header. “Force HTTPS” is a dashboard tick. `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` has to be False. Leftover: a spoofed `X-Forwarded-Proto` still counts as HTTPS. Repair looks at the socket.
 
 ## Picture: header https, socket http must fail
 
-A test that only asserts “HTTPS is on” can pass while a client header still counts as TLS. This check asks whether a client header on an http socket still counts as a passing control. Broken must fail that question. Repaired must pass it.
+Asserting “HTTPS is on” can still hide that a client header still counts as TLS.
 
 ```mermaid
 flowchart LR
@@ -17,9 +17,9 @@ flowchart LR
   X["repaired files --impl fixed"] --> P["Must pass: mismatch is false"]
 ```
 
-If both pass, the test is not looking at header versus socket. If both fail, the fix is not structural or the check is wrong.
+If the broken channel check still passes, header-versus-socket was never compared.
 
-## Four modes, even for one scheme helper
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,41 +28,32 @@ If both pass, the test is not looking at header versus socket. If both fail, the
 | Failure | unknown scheme does not count as https |
 | Not claimed | Certificate checks; mutual TLS; pinning; encrypted client hello |
 
-The file is `labs/5.4/5.4-lab/tests/test_property.py`. The test `test_client_forwarded_proto_is_not_tls` calls `channel_is_https` with header https and socket http. That is a **what-must-not-happen** test: a client header counted as TLS is not allowed to count as a passing control.
+The test `test_client_forwarded_proto_is_not_tls` calls `channel_is_https` with header https and socket http. Counting a client header as TLS is why that call exists.
 
-A test that only asserts the site loads on port 443 is not this topic’s evidence. A test that only greps `https` in a dashboard without calling `channel_is_https` on the mismatch is not this topic’s evidence. This practice never opens a live load balancer.
+An `https` tile on a dashboard is not `channel_is_https` on the mismatch. This practice never opens a live load balancer.
 
 ```text
 python3 -m pytest labs/5.4/5.4-lab/tests --impl vulnerable
 python3 -m pytest labs/5.4/5.4-lab/tests --impl fixed
 ```
 
-Map the test to the header-https × socket-http row you wrote. Honest socket-https may pass on both implementations. That does not excuse the mismatch test. If the broken files do not fail header-https + socket-http, the lab is miswired — fix the wiring, not the check. An environment error is not security evidence.
+Map the test to the header-https × socket-http row you wrote. A socket that really is https is not the whole check. Catch header-https with a socket that is http. If the broken files do not fail header-https + socket-http, the lab is miswired — fix the wiring, not the check. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
-- Certificate checks (a client cell)
+- Certificate checks (a client-side rule)
 - OCSP stapling / encrypted client hello (advanced extras)
 - Phone network checks (later)
 - Bound load-balancer identity in production
 - Pinning as a requirement
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
-Run both this session:
-
-```text
-python3 -m pytest labs/5.4/5.4-lab/tests --impl vulnerable
-python3 -m pytest labs/5.4/5.4-lab/tests --impl fixed
-```
-
-Paste nothing from answer keys. Write fail/pass into your notes next to the matrix row. Reject a “test” that only greps `https` in a dashboard without calling `channel_is_https` on the mismatch.
+Call `channel_is_https` on the mismatch. An `https` tile on a dashboard is the hop, not the forwarded header.
 
 ## Use it somewhere new
 
-Clinic page. A test that only asserts the site loads on port 443 is not this cell (that wait belongs with later availability work). A test that probes a live clinic is out of scope.
+Loading a page on port 443 is availability, not a spoofed forwarded header. Do not run a test that probes a live clinic.
 
 ## What this page is not doing
 

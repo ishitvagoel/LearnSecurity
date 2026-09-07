@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python model of a shared cache. The failure is already in the object: the store keys only on path. You are here to see that the check treats that object as a **failed rule**, not as a performance nit.
+The practice is not a website you attack. Shared cache here keys only on path. That object is the break, not a performance nit.
 
 The rule:
 
@@ -13,7 +13,7 @@ The rule:
 
 ## Where you may practice
 
-Only `labs/2.2/2.2-request-path/` is in scope. No live CDN, no public cache, no third-party site, no classmate deployment. Restore the broken and repaired folders from git when you are done. Fake data only.
+Stay inside `labs/2.2/2.2-request-path/`. No live CDN, no public cache, no third-party site, no classmate deployment. Restore the broken and repaired folders from git when you are done. Fake data only.
 
 Do not paste this exercise onto a public CDN, employer origin, or live clinic portal. Do not paste cache-poison payloads.
 
@@ -27,9 +27,9 @@ flowchart TD
   Slot --> Leak["returns secretA"]
 ```
 
-The broken files show **cause** (shared store, incomplete key), not a trophy exploit. What has to be true first: shared dict; path-only key; company A filled the entry. What the attacker can do: a company B person who can `cache_get` the same path after company A’s put — no DNS hijack, no TLS break. What you trust: the origin’s bound company is the only identity allowed in the key. TLS is not even in the practice files — on purpose. If the rule needed TLS to be “off,” the practice would be teaching the wrong sentence.
+The store is shared and the key is incomplete — not an exploit recipe. The store is a shared dict keyed only by path, and company A filled the entry. Picture a company B person who can `cache_get` the same path after company A’s put — no DNS hijack, no TLS break. The origin’s bound company is the only identity allowed in the key. TLS is not even in the practice files — on purpose. If the rule needed TLS to be “off,” the practice would be teaching the wrong sentence.
 
-## What to look at — cause, not a trophy
+## What to look at: the cause, not a hunt
 
 Read `vulnerable/cache.py` in the broken files as a design note. It accepts a `tenant` argument on put and get, then stores and looks up **only** `path`. Company B’s get returns company A’s body. `X-Forwarded-Host` is not required.
 
@@ -43,7 +43,7 @@ Checks already bind:
 | Slice | Practice |
 |---|---|
 | Why it happens | Key omitted the bound company; shared store |
-| What has to be true first | Path-only key; company A filled the entry |
+| What's already wrong | Path-only key; company A filled the entry |
 | Trigger | Company B `cache_get` of the same path |
 | What it costs | Cross-company read without guessing ids |
 | Not the lesson | A scanner name, a famous-bugs code, or “TLS is broken” |
@@ -57,13 +57,13 @@ Next.js `fetch` cache, FastAPI in-process dicts, and a CDN “HTTPS only” chec
 
 ## Practice
 
-Run checks against the broken files (they **must fail** on company B getting company A’s body). Record the check name `test_other_tenant_does_not_receive_cached_body`.
+Company B getting company A’s body on the broken files **must fail**. Record the check name `test_other_tenant_does_not_receive_cached_body`.
 
 ```text
 python3 -m pytest labs/2.2/2.2-request-path/tests --impl vulnerable
 ```
 
-Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false.
+Do not “fix” the check to pass.
 
 ## Use it somewhere new
 

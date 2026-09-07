@@ -5,13 +5,13 @@
 
 ## The rule
 
-The notes app this week opens notes from a link. The **session** is identity (4.3). The Intent extras and the query string are **data** (2.1 / 7.1). A parameter `as=admin` must not become the signed-in user.
+The notes app opens notes from a link. The **session** is identity (4.3). The Intent extras and the query string are **data** (2.1 / 7.1). A parameter `as=admin` must not become the signed-in user.
 
 > After `open_link({"as": "admin"})`, `current_user()` must still be `"alice"`. An honest locator such as `note=n1` may still open a note.
 
-What must not happen: **a deep link `as=` switches the signed-in user**. That is authenticity of the principal, not “the link was https.”
+A deep-link **`as=`** flips the signed-in user. That is authenticity of the principal, not “the link was https.”
 
-Industry lists want IPC used securely. A WebView is another HTML interpreter (6.2), not this week’s session. Claimed HTTPS app links for OAuth redirects still leave custom schemes hijackable. “The link was https” is not this sentence.
+IPC has to be used securely. A WebView is another HTML interpreter (6.2), not this session. Claimed HTTPS app links for OAuth redirects still leave custom schemes hijackable. “The link was https” is not the claimed-link check.
 
 ## Picture: link locates, session authorizes
 
@@ -34,14 +34,14 @@ flowchart LR
 
 On older API levels `exported` defaults were surprising. Treat export as explicit.
 
-**A tool is not the rule.** “App Links verified,” “https,” “WebView is Chrome.”
+“App Links verified,” “https,” and “WebView is Chrome” do not stop a deep link from switching the signed-in user.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | For this rule |
 |---|---|
 | Why it happens | Identity taken from the link |
-| What has to be true first | `open_link({as: admin})` sets admin |
+| What's already wrong | `open_link({as: admin})` sets admin |
 | Trigger | Other app on the tablet, or a crafted link |
 | What it costs | Local privilege / account switch |
 | How you stop it | Do not take identity from links; session stays server-issued |
@@ -50,9 +50,9 @@ On older API levels `exported` defaults were surprising. Treat export as explici
 
 ## What the framework does vs what you still have to check
 
-`exported=true` defaults on old Android. Custom schemes are first-come, first-served. WebView `addJavascriptInterface` is a new IPC. None of those defaults is this week’s session.
+`exported=true` defaults on old Android. Custom schemes are first-come, first-served. WebView `addJavascriptInterface` is a new IPC. None of those defaults is this session.
 
-The app’s promise is: **this** `open_link`, `as=admin` does not become the user. The practice folder is `labs/8.3/8.3-lab`. It is local only. It is not a live app.
+`open_link`, `as=admin` does not become the user — files in `labs/8.3/8.3-lab`. It is local only. It is not a live app.
 
 ## What the tool cannot do
 
@@ -74,12 +74,10 @@ python3 -m pytest labs/8.3/8.3-lab/tests --impl vulnerable
 python3 -m pytest labs/8.3/8.3-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
-Clinic `as=doctor`. OAuth redirect to the app (4.5).
+`as=doctor` in extras is this grain. OAuth redirect to the app waits for 4.5.
 
 ## What this page is not doing
 
-Live malicious APKs, Intent cookbooks. Gates 0–10 and milestones M0–M5 stay **not-attempted**. Answer keys are not on this site.
+Do not use live malicious APKs, Intent cookbooks. Opening this page does not finish a check-in. Answer keys are not on this site.

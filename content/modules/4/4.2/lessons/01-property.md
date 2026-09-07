@@ -9,9 +9,9 @@ The notes app logs a browser user in at `https://app.securecollab.test`. A passw
 
 > `phishing_resistant("password", "https://evil.example", "https://app.securecollab.test")` must be false. `phishing_resistant("webauthn", "https://evil.example", "https://app.securecollab.test")` must be false. Passwords to the *real* origin are still phishable — do not advertise them as resistant. An HTML `autocomplete=webauthn` hint is not the ceremony.
 
-What must not happen is a **password (or wrong-origin WebAuthn) counted as phishing-resistant**. That is a login bound to the *wrong* site, then a session that acts as the victim.
+Refuse a **password (or wrong-origin WebAuthn) counted as phishing-resistant**. That is a login bound to the *wrong* site, then a session that acts as the victim.
 
-Authenticator guidance still treats passwords and OTP as phishable. “We turned on 2FA” is not this sentence. WebAuthn Level 3 is still a Candidate Recommendation, not a finished Rec. A later, stricter bar wants a hardware, user-intent, phishing-resistant factor. Treat that as later, not as this week’s pytest.
+Authenticator guidance still treats passwords and OTP as phishable. “We turned on 2FA” is not the phishing-resistant check. WebAuthn Level 3 is still a Candidate Recommendation, not a finished Rec. A later, stricter bar wants a hardware, user-intent, phishing-resistant factor. Treat that as later, not as this check.
 
 ## Picture: the secret walks to the wrong site
 
@@ -25,7 +25,7 @@ flowchart TD
 
 Nobody needs a new bug name. A lookalike login page is enough. Trusting “the user will read the URL” is not what you trust.
 
-**A tool is not the rule.** A passkey vendor dashboard, `autocomplete=webauthn`, or “we turned on MFA” is not this sentence.
+A passkey vendor dashboard, `autocomplete=webauthn`, and “we turned on MFA” do not make a password at a lookalike site fail.
 
 ## Picture: origin binding vs a shared secret
 
@@ -44,7 +44,7 @@ OTP is a second factor. It is still typed into the phishing page. Prompt bombing
 | Slice | For this rule |
 |---|---|
 | Why it happens | A shared secret that still works at the wrong site |
-| What has to be true first | The helper returns true for a password at the lookalike origin |
+| What's already wrong | The helper returns true for a password at the lookalike origin |
 | Trigger | A lookalike login page |
 | What it costs | Login is bound to the *wrong* site; the session then acts as the victim |
 | How you stop it | Bind the ceremony to origin / RP ID; do not call passwords resistant |
@@ -55,7 +55,7 @@ OTP is a second factor. It is still typed into the phishing page. Prompt bombing
 
 FastAPI does not know the RP ID. A Next.js password field will happily POST to evil.example. The login still has to work with a keyboard, a name a screen reader can use, and errors that are not color-only. A mouse-only WebAuthn button pushes people onto the password leftover — that is a security leftover, not polish.
 
-The app’s promise is the boolean helper, not a live authenticator. The practice folder is `labs/4.2/4.2-lab`. It is not a live phishing site.
+The boolean helper is the check, not a live authenticator — files in `labs/4.2/4.2-lab`. It is not a live phishing site.
 
 ## What the tool cannot do
 
@@ -73,12 +73,12 @@ python3 -m pytest labs/4.2/4.2-lab/tests --impl vulnerable
 python3 -m pytest labs/4.2/4.2-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Tie the check to the password-at-lookalike boolean, not to a vendor name.
+The password-at-lookalike boolean is what to measure. Ignore a vendor name.
 
 ## Use it somewhere new
 
-Step-up before export: still origin-bound? Clinic staff SSO: password MFA to a lookalike identity provider is still this sentence.
+Step-up before export: still origin-bound? Clinic staff SSO: password MFA to a lookalike identity provider is still origin-bound.
 
 ## What this page is not doing
 
-Live phishing campaigns, real user credentials, copy-paste kits. Practice stays in this folder. Answer keys are not on this site.
+Do not use live phishing campaigns, real user credentials, copy-paste kits. Practice stays in this folder. Answer keys are not on this site.

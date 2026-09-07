@@ -3,29 +3,27 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
-
 ## What you are reviewing
 
-A colleague ships a notes-app edge cache. Your job is to label each claim **rule**, **tool**, or **false comfort**, and to say which outcome (company B reading company A’s body) breaks if they ship. Start at the store key, not at a scanner color or an HTTPS checkbox.
+This edge-cache review starts at the store key. Mark each claim **rule**, **tool**, or **false assurance**, and say whether company B can read company A’s body if they ship. An HTTPS checkbox is the wrong starting place.
 
-The folder `labs/2.2/2.2-request-path/vulnerable/` is the change. Reconstruct whether the store still keys only on path. Compare that with the rule. Write changes a developer can verify. The check you already ran (`test_other_tenant_does_not_receive_cached_body`) is the rule check. A comment “will add Vary later” is not.
+Reconstruct whether the store still keys only on path. Compare that with the rule. Write changes a developer can verify. `test_other_tenant_does_not_receive_cached_body` still has to fail. A ticket that says “will add Vary later” is not that fail.
 
 ## Picture: problems to find (name them yourself)
 
-Start with this seeded smell: **`Cache-Control: public` on `/notes/{id}`**. Label it rule, tool, or false comfort before you accept the change.
+**`Cache-Control: public` on `/notes/{id}`**.
 
 ```mermaid
 flowchart TD
   Claim[Change claim] --> Q{What would falsify it?}
   Q -->|company B get returns company A body| Property["Rule - good if checked"]
   Q -->|"we use TLS 1.3"| Mechanism[Tool - ask which hop]
-  Q -->|HTTPS so cache is safe| False[False comfort]
+  Q -->|HTTPS so cache is safe| False[False assurance]
 ```
 
-For each claim and each branch: label **rule**, **tool**, or **false comfort**.
+“TLS so cache is safe” is **rule**, **tool**, or **false assurance** — pick one per hop.
 
-Seeded smells (label them yourself; do not open the keys file):
+Problems to find (name them yourself; do not open the keys file):
 
 - `Cache-Control: public` on `/notes/{id}`
 - Key is path only
@@ -42,14 +40,10 @@ Also reject: client `X-Tenant` as key input; `Vary: Cookie` as forever; Report-O
 - TLS 1.3 is the cache key
 - Next.js `fetch` cache defaults encode company
 
-## Practice
-
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_other_tenant_does_not_receive_cached_body`. Do not open the keys file.
-
 ## Use it somewhere new
 
-Authenticated RSS or export CSV via CDN. A change that “turns on HTTPS” on only the browser hop is an incomplete check-every-path review. Name the independent falsehood that would still stop company B from receiving company A’s body.
+Authenticated RSS or export CSV via CDN. HTTPS on only the browser hop does not check every cache path. HTTPS on the browser hop is not the cache key — write the bound-patient key.
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will add Vary later.” That comment is leftover risk without an owner.
+Shipping a path-only cache key plus “will add Vary later” leaves the cached body unowned.

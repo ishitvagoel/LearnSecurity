@@ -3,15 +3,15 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-Even after `protect` was “fixed once,” a new encoding wrapper can land in a worker. Running it for real is the rest of the loop: notice, contain, re-protect, and refuse to “help” by logging note bodies.
+A new encoding wrapper can land in a worker after `protect` prefixes `aesgcm:`. Notice that wrapper, contain the worker, re-protect the column, and do not log note bodies.
 
-Do not log plaintext bodies. Do not paste an SSN into the ticket.
+Keep plaintext bodies and SSNs out of the ticket.
 
 ## Picture: CI is a detector
 
-A known-plaintext Base64 hit is a notice-and-recover problem, not a licence to quote the body in the paging channel. Notice names the event. Recover re-protects and rotates keys. Neither reprints the body.
+If Base64 still decodes to plaintext, the ticket names the encoding miss, not the body. Then re-protect and rotate keys.
 
 ```mermaid
 flowchart TD
@@ -21,7 +21,7 @@ flowchart TD
   Metric --> Rotate[Rotate keys later]
 ```
 
-Industry lists name detect, respond, recover. They do not encrypt the column. They do not pick a log product. Someone still has to own the leftover.
+A log product does not encrypt the column.
 
 ## Signals that do not become a second leak
 
@@ -32,32 +32,30 @@ Industry lists name detect, respond, recover. They do not encrypt the column. Th
 | Recover | Re-protect with authenticated encryption; rotate keys |
 | Leftover | Memory dumps; operators who are allowed to hold the key |
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=encoding_labeled_encryption field=body request_id=req_52cr
 ```
 
-Not: plaintext `secret`, a real SSN, or “AES handled.”
+Plaintext `secret`, a real SSN, or “AES handled” in the key sample is a second key store.
 
-If your alert includes plaintext `secret` or an SSN, you have opened a second leak in the paging channel.
+A plaintext `secret` or an SSN in the encryption-miss ticket is another key dump.
 
-A green “encryption enabled” tile is not that pytest. Re-run `test_protect_is_not_mere_encoding` after any `protect` change. Workers and export jobs are other paths of the same cell — inventory them before claiming recover.
+An “encryption enabled” checkbox does not stop Base64. Touch `protect` and `test_protect_is_not_mere_encoding` has to stay red on Base64. Workers and export jobs still Base64 if you only wrap the note write.
 
-Recovery is incomplete if the next deploy still wraps `b64encode` in a helper named `encrypt`. Grep workers and export jobs for Base64 of known plaintext the same day you rotate keys, or the next backup re-issues the leak. A key-service dashboard is not that grep.
+Keep grepping for `b64encode` wrapped as `encrypt`. Grep workers and export jobs for Base64 of known plaintext the same day you rotate keys, or the next backup re-issues the leak. A key-service dashboard is not that grep.
 
 ## What the framework does vs what you still have to check
 
-A cloud key dashboard will show “key enabled” and stay silent when the column is still Base64. Detection must observe **the round-trip of a known plaintext**, not a product tile. If the alert includes plaintext `secret` or an SSN, you have opened a logging leak from an earlier lesson.
+“Key enabled” on a cloud key tile still looks healthy if the column is still Base64. Prove **the round-trip of a known plaintext**, not a product tile. Plaintext `secret` or an SSN on the encoding-miss metric is a logging leak from an earlier lesson.
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body). Tie it to `labs/5.2/5.2-lab`. Reject any line that includes plaintext `secret`, a real SSN, or “AES handled.”
+A deny line needs ids and a reason, not plaintext. Plaintext `secret`, a real SSN, or “AES handled” would turn the deny line into a second key store.
 
 ## Use it somewhere new
 
-Clinic: notice Base64 SSN columns; do not paste values into the ticket. Do not query a live clinic system.
+Notice Base64 SSN columns; do not paste values into the ticket. Do not query a live clinic system.
 
 ## What this page is not doing
 
-A log-product name is not the rule. Live column dumps are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live column dumps. This site does not mark you as finished. Answer keys are not on this site.

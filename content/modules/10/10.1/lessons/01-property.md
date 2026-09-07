@@ -9,7 +9,7 @@ The notes app treats a material change — identity, stored data, mobile, or a q
 
 > `merge_ok({})` must be false. `merge_ok({"threat_model": "TM-12"})` may be true.
 
-What must not happen: **merge without a threat-model identifier**. That is honesty of the process evidence you show before the change lands. If the merge is green while the identifier is missing, those surfaces ship with no 3.2 model.
+Merge with no threat-model identifier is the process miss. That is honesty of the process evidence you show before the change lands. If the merge is green while the identifier is missing, those surfaces ship with no 3.2 model.
 
 A design-review guide is vocabulary for “think about security while you design.” It is not `merge_ok`. A process-maturity score measures whether a practice exists somewhere in the company. An unverified “secure by design” page talks about manufacturer ownership. It does not stamp the pull request. An extra advanced row — for example “document the dangerous function” — is a reason to *require* a threat model. It is not the merge check itself. A later draft of the design-review guide stays a **draft**.
 
@@ -32,14 +32,14 @@ flowchart LR
   Owners --> NotTm["not 3.2"]
 ```
 
-**A tool, not the rule:** CODEOWNERS, a maturity score, a training checkbox, or a “secure by design” pledge.
+CODEOWNERS, a maturity score, a training checkbox, and a “secure by design” pledge do not require a threat-model id.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | For this rule |
 |---|---|
 | Why it happens | Security treated as a later phase |
-| What has to be true first | `merge_ok({})` is true |
+| What's already wrong | `merge_ok({})` is true |
 | Trigger | Identity, data, or mobile change with no threat-model id |
 | What it costs | Surfaces land without a 3.2 model |
 | How you stop it | Require a threat-model id on those surfaces |
@@ -50,7 +50,7 @@ flowchart LR
 
 Required reviewers on GitHub are not a threat model. A stale threat-model id is an age problem for 3.2 — still better than none, still not a rubber stamp forever.
 
-The app’s promise this week is: **this** local check, an empty change is deny. The folder is `labs/10.1/10.1-lab`. Fake pull-request dicts only. No live GitHub orgs.
+An empty change is deny — files in `labs/10.1/10.1-lab`. Fake pull-request dicts only. No live GitHub orgs.
 
 ## What the tool cannot do
 
@@ -60,7 +60,7 @@ The app’s promise this week is: **this** local check, an empty change is deny.
 
 ## Can people still use it
 
-The merge screen has to say which surface still needs a threat-model id, in words, not only a red X. Do not hide the gap behind a poster.
+The merge screen has to say which surface still needs a threat-model id, in words, not only a red X. A poster is not the missing-id sentence.
 
 ## Practice
 
@@ -71,12 +71,10 @@ python3 -m pytest labs/10.1/10.1-lab/tests --impl vulnerable
 python3 -m pytest labs/10.1/10.1-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 An exception path (E6) that still names the missing threat model and when it expires. A clinic that treats “HIPAA training complete” as enough to merge.
 
 ## What this page is not doing
 
-Live GitHub orgs, claiming you finished Gate 10 or M4, or ready-made attack recipes. Answer keys are not on this site.
+Do not use live GitHub orgs. This page does not finish Gate 10 or M4. Do not use ready-made attack recipes. Answer keys are not on this site.

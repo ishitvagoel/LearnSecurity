@@ -25,7 +25,7 @@ export default function CapstonePage() {
           </CardLink>
         </li>
         <li>
-          <CardLink href="/labs/11/" title="Practice note">
+          <CardLink href="/labs/11/" title="Practice files">
             Run the final-project files from git, on your computer.
           </CardLink>
         </li>

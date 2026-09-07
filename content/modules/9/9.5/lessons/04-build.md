@@ -5,11 +5,11 @@
 
 ## The rule
 
-A PDF attachment is not the fix. A ticket marked Done is not the fix. "The severity is 9.8 so we closed it" is not the fix.
+Attaching a PDF does not close the finding. Marking the ticket Done does not close it. Severity 9.8 is a priority number, not `close_finding` with a missing retest.
 
-The structural change is: `close_finding` **requires `retest == "pass"`**. Missing, `"fail"`, or `"scheduled"` is deny. That is the lab stand-in for "the same isolation command passed." Structural means that equality — not a PDF, not a Done column, not a severity number.
+The repair: `close_finding` **requires `retest == "pass"`**. Missing, `"fail"`, or `"scheduled"` is deny. That is the lab stand-in for "the same isolation command passed." Here: that equality — not a PDF, not a Done column, not a severity number.
 
-The smallest restore for the notes app's close loop is: `{retest: None}` cannot close. Fail-safe: a missing field is deny. Do not fail open because the report was filed. Do not accept a retest of `/health` as the isolation check.
+Repair the notes app's close loop: `{retest: None}` cannot close. A missing field is deny. Filing the report does not fill in the retest. A retest of `/health` is not the isolation check.
 
 ## Picture: missing retest fails closed
 
@@ -20,30 +20,30 @@ flowchart TD
   R -->|no| Deny[keep open]
 ```
 
-The repaired files require `retest == "pass"`. Production still needs that pass to be the *same* bad result (bob must not read alice's note) — a well-labeled `"pass"` on a different URL is a lying retest. Extra fields on the same note are still leftover. If a role change is supposed to take effect right away, you still need a retest of *the cache after the role change*, not a different endpoint.
+`retest` has to be `"pass"`. A well-labeled `"pass"` on a different URL is a lying retest — bob still must not read alice's note. Extra fields on the same note are still leftover. If a role change is supposed to take effect right away, you still need a retest of *the cache after the role change*, not a different endpoint.
 
-Defect lists want bugs verified as fixed. This pytest is that sentence for close-without-retest.
+Defect lists want bugs verified as fixed — close-without-retest.
 
 ## What the repaired files must show
 
-Read `fixed/pentest.py` against this checklist. Do not treat the snippet as a production ticket product.
+`fixed/pentest.py` is the retest gate, not a ticket console.
 
 | After the fix | Must be true |
 |---|---|
 | `{retest: None}` | close false |
 | `{retest: "pass"}` | close true |
 
-Fail closed: if you are unsure whether the retest hit the same isolation check, keep the finding open. Uncertainty is a **no** on close, not a yes because the PDF was filed.
+If you are unsure whether the retest hit the same isolation check, keep the finding open. Filing the PDF does not close it.
 
 ## What this is not
 
 - A severity score.
-- A known-exploited listing.
+- Close because the listing says exploited.
 - A ticket marked Done.
 - A PDF.
-- An assurance gate sticker.
+- A filed-report stamp treated as done.
 - A retest of `/health`.
-- Membership in a testing catalogue.
+- Membership in a testing-guide list.
 - Exploratory leftovers counted as close.
 
 ## What the tool cannot do
@@ -62,11 +62,9 @@ Name the leftover (variants; wrong endpoint). Run:
 python3 -m pytest labs/9.5/9.5-lab/tests --impl fixed
 ```
 
-It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
-Clinic: keep the finding open until the isolation pytest is green. The lab still uses fake strings.
+Keep the finding open until the isolation check is green. The lab still uses fake strings.
 
 ## What can still go wrong
 
@@ -74,4 +72,4 @@ Same-root-cause variants (extra fields). Role-change caches. Exploratory leftove
 
 ## What this page is not doing
 
-Do not pentest a public host. Do not claim you finished an assurance gate from a PDF. Do not present a testing-catalogue draft as the current final pin.
+Do not pentest a public host. This page does not mark you as finished. A PDF is not a check-in. Do not present a testing-guide draft as the current final pin.

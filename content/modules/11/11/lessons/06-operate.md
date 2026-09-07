@@ -1,15 +1,15 @@
-# revoked_share_read_denied without logging bodies
+# Log the revoked-share deny, not the note
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A cache or worker can still serve the old grant after `read` was “fixed once.” Pair notice and recover. Do not log note bodies, session tokens, or dump files into the ticket. Do not paste the chart into the ticket.
+A cache or worker can still serve the old grant after revoke. Skip note bodies, session tokens, dump files, and the chart in the ticket.
 
 ## Picture: post-revoke read is a signal
 
-A read that skipped the grant is a notice-and-recover problem, not a licence to quote the note in the ticket. Notice names the note id and the person. Recover notifies A and rotates links. Neither reprints the body.
+If someone reads a note without a grant, page the note id and the person — not the note. Then tell A and rotate the links.
 
 ```mermaid
 flowchart TD
@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Notify[notify A rotate links]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a scanner product. They do not prove this week’s next-read check. Someone still has to own the leftover.
+Turning on a scanner does not consult the grant on the next read. This next-read check is still the proof.
 
-Re-run `test_revoked_share_cannot_read` after any share-path change. A green “DELETE 200” tile is not that pytest. Phone cache and leftover worker sessions are other read paths of the same family — inventory them before you claim recover. Tabletop remains the restore week.
+After DELETE, `test_revoked_share_cannot_read` still has to go red if B can read. HTTP 200 on DELETE does not prove B cannot read. Phone cache and leftover worker sessions can still read after DELETE 200; revoke is not done until those paths are named. Tabletop remains the restore week.
 
 ## Signals that do not become a second leak
 
@@ -32,23 +32,21 @@ Re-run `test_revoked_share_cannot_read` after any share-path change. A green “
 | Recover | Notify A; rotate share links; wipe caches |
 | Leftover | Copies already sent; delayed worker; named exceptions later |
 
-A scanner dashboard will show coverage and stay silent when CI’s `read` ignores grants. Detection must observe **B after revoke is None**, not “revoke was called.” If the alert includes the note body, you have opened a leftover-body leak.
-
-A log line a reviewer can accept looks like:
+Scanner coverage can look complete while CI’s `read` ignores grants. Look for **B after revoke is None**, not “revoke was called.” The note body attached to `revoked_share_read_denied` is the share.
 
 ```text
 log_denied reason=revoked_share_read_denied note=n1 tenant=B
 ```
 
-Not: a note body, a session token, or “assurance gate complete.”
+The revoked-share sample should name the share id — not the note body, a session token, or “check-in complete.”
 
-If your alert includes the matching note, you have copied the leak into the ticket.
+A matching note in the revoke alert copies the leak into the ticket.
 
 ## What the framework does vs what you still have to check
 
-The same no-op revoke, always-body read, and leftover worker session that bypass this practice will also bypass a “scan our coverage dashboard” detector. Name those places before you claim recover. A scanner-product name is not the rule.
+No-op revoke, always-body read, and leftover worker sessions still serve the old grant even if the coverage dashboard is green.
 
-Cause vs cost stays split here too: the **cause** is grant not consulted; the **cost** is ex-collaborator secrecy; **how you stop it** is owner-or-grant on every read; **how you notice** is `revoked_share_read_denied`; **how you recover** is notify-and-rotate. What the tool cannot do: this alert does not wipe phone caches, and it does not recall copies already sent.
+Grant not consulted. That's the hole. Ex-collaborator secrecy is what you pay. Use owner-or-grant on every read. Alert on `revoked_share_read_denied`. Then notify-and-rotate. Logging does not wipe phone caches, and it does not recall copies already sent.
 
 ## Can people still use it
 
@@ -56,18 +54,16 @@ A deny must say *share revoked*, not only “assert False.” Under stress, do n
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/11/11-lab`.
-
 ```text
 log_denied reason=revoked_share_read_denied note=n1 tenant=B
 ```
 
-Reject any line that includes the note body, a session token, or “assurance gate complete.”
+The note body, a session token, or “check-in complete” should never land in this log.
 
 ## Use it somewhere new
 
-Clinic: deny the guardian read; do not paste the chart into the ticket. Do not hit a live clinic system.
+Deny the guardian read; do not paste the chart into the ticket. Do not hit a live clinic system.
 
 ## What this page is not doing
 
-A scanner-vendor name is not the rule. Do not claim you finished an assurance gate. A YAML pack is not this alert. Answer keys are not on this site.
+A coverage-dashboard sticker does not prove revoke. This page does not mark you as finished. A YAML pack does not watch leftover worker sessions. Answer keys are not on this site.

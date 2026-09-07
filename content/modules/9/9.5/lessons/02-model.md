@@ -5,11 +5,11 @@
 
 ## Could someone else name the retest from your report?
 
-"We delivered a PDF" is not this lesson. A drawing someone else can test names **the rule, what must not happen, the retest command, and variants**.
+Keep **the rule, what must not happen, the retest command, and variants**; "We delivered a PDF" is not that list.
 
-This week's freeze for the notes app: local `close_finding(f)`. No live clinics.
+`close_finding(f)` — no live clinics.
 
-> For close, the rule is deny when `retest` is missing. A passing retest of the same isolation check may close. Evidence that the deny is false: `close_finding({"retest": None})` returns true.
+> For close, the rule is deny when `retest` is missing. A passing retest of the same isolation check may close. A missing retest still closes: `close_finding({"retest": None})` returns true.
 
 If the rule × retest row is blank, the finding closes because nobody named the check.
 
@@ -17,9 +17,9 @@ If the rule × retest row is blank, the finding closes because nobody named the 
 
 ```mermaid
 flowchart TD
-  Cell[bob must not read alice's note] --> Test[isolation pytest]
+  Cell[bob must not read alice's note] --> Test[isolation check]
   Test --> Fix[structural fix]
-  Fix --> Retest[same pytest]
+  Fix --> Retest[same check]
   Retest --> Close[may close]
 ```
 
@@ -35,7 +35,7 @@ A health check that returns 200 is a product test. It is not the isolation check
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the finding you already have and ask what would show the hole is still there.
+Take the finding you already have and ask what would show the hole is still there.
 
 | Piece | This system |
 |---|---|
@@ -61,7 +61,7 @@ A missing retest field is how a PDF on a shelf becomes "Done." Write the hole.
 
 ## Practice
 
-Draw the loop so someone else could name the checks. Point at `labs/9.5/9.5-lab` file `pentest.py`.
+Label `pentest.py` under `labs/9.5/9.5-lab`.
 
 ## Use it somewhere new
 
@@ -69,8 +69,8 @@ Known-exploited list: a bug seen in the wild still needs a *local* retest if it 
 
 ## What can still go wrong
 
-Unknown variants. A role-change cache that still serves the old grant. That leftover is extra, advanced work, not this week's check.
+Unknown variants. A role-change cache that still serves the old grant. That leftover is extra, advanced work, not this check.
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

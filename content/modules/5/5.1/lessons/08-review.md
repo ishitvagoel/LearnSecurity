@@ -3,36 +3,34 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
-
 ## What you are reviewing
 
-A colleague ships notes-app deletion. Your job is to label each claim **rule**, **tool**, or **false comfort**, and to say whether `body_retained("alice")` is still `"secret"` after `delete_account("alice")` if they ship. Start at leftover analytics after delete, not at a scanner color or a contract ticket.
+On deletion, start at leftover analytics. For each claim, mark **rule**, **tool**, or **false assurance**, and say whether `body_retained("alice")` is still `"secret"` after `delete_account("alice")`. A contract ticket is the wrong starting place.
 
-The folder `labs/5.1/5.1-lab/vulnerable/` is the change. The check you already ran (`test_deleted_account_leaves_no_analytics_body`) is the rule test. A comment “will add warehouse purge later” is not.
+`test_deleted_account_leaves_no_analytics_body` has to go green. “Will add warehouse purge later” does not.
 
 ## Picture: problems to find (name them yourself)
 
-Start with this seeded smell: **`delete_account` only `NOTES.pop`**. Label it rule, tool, or false comfort before you accept the change.
+**`delete_account` only `NOTES.pop`**.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|"body_retained after delete"| Property["Rule - good if tested"]
   Q -->|"we anonymized ids"| Mechanism[Tool - body kept]
-  Q -->|"privacy policy"| False[False comfort]
+  Q -->|"privacy policy"| False[False assurance]
 ```
 
-The review starts at the protected effect (analytics and search bodies None after delete). Everything that is not a pop of that copy in the same delete is a candidate leftover path. “We anonymized user ids” while the body column remains is the same smell, not a different finding class.
+Analytics and search bodies still have to be None after delete. A delete that never pops those copies still leaves the body in the warehouse. “We anonymized user ids” while the body column remains is still the same problem.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - `delete_account` only `NOTES.pop`
 - Analytics “immutable for ML” without an exception record
 - No test `body_retained` after delete
 - Privacy policy PDF as the control
 
-Also reject: trusting the client; closing findings without re-running `test_deleted_account_leaves_no_analytics_body`; keys in learner notes; real people's data in the practice files; encryption of a kept warehouse as deletion.
+Also reject: treating a row DELETE as deletion; closing findings without re-running `test_deleted_account_leaves_no_analytics_body`; keys in learner notes; real people's data in the practice files; encryption of a kept warehouse as deletion.
 
 ## Common mix-ups
 
@@ -42,13 +40,9 @@ Also reject: trusting the client; closing findings without re-running `test_dele
 - A database DELETE is warehouse DELETE
 - HTTP 200 on `/account` is the graph
 
-## Practice
-
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_deleted_account_leaves_no_analytics_body`. Do not open the keys file.
-
 ## Use it somewhere new
 
-Clinic change that “deletes the patient” without walking the appointment-card notes is an incomplete review of leftover copies. Name the independent falsehood that would still keep `body_retained` None.
+Deleting the patient without walking appointment-card notes still leaves leftover copies. Deleting the patient row is not walking leftover notes — write the `body_retained` check.
 
 ## Can people still use it
 
@@ -56,4 +50,4 @@ If the dashboard shows an “account deleted” badge, do not encode it as color
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will add warehouse purge later.” That comment is leftover without an owner. Do not dump a live warehouse to prove the finding.
+Shipping “will add warehouse purge later” leaves the analytics body on disk with nobody assigned. Do not dump a live warehouse to prove the finding.

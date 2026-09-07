@@ -5,21 +5,19 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python model of note ingest. The failure is already in the object: a first-key scan for who is allowed, and `json.loads` for storage. You are here to see that the check treats two meanings of the same bytes as **a failed rule**, not as a JSON nit.
-
-The rule under test:
+The practice is not a website you attack. Note ingest here is a first-key scan for who is allowed, and `json.loads` for storage. Two meanings of the same bytes already disagree — not a JSON nit.
 
 > The same request bytes must yield one company meaning for both the who-is-allowed check and the stored row. If two readers would disagree, ingest refuses.
 
 ## Where you may practice
 
-Only `labs/2.1/2.1-parser-boundaries/` is in scope. No other hosts. Do not paste attack recipes into notes. The messy two-company object is the course practice, not a public exploit.
+Stay inside `labs/2.1/2.1-parser-boundaries/`. No other hosts. Do not paste attack recipes into notes. The messy two-company object is the course practice, not a public exploit.
 
 Restore the broken and repaired folders from git when you are done. Fake data only.
 
 Do not paste this exercise onto a public API, employer ingest, or live clinic portal.
 
-What must not happen: **ACL tenant disagrees with stored tenant**.
+Watch **ACL tenant disagree with stored tenant**.
 
 ## Picture: lock in the cause before the check
 
@@ -34,13 +32,13 @@ flowchart TD
   Accept --> Harm[Company A policy wraps company B body]
 ```
 
-The broken files show **cause** (two readers), not a trophy exploit. What has to be true first: duplicate company keys in one object; split parse.
+Two readers parse the same bytes — not an exploit recipe. Duplicate company keys sit in one object; the parsers split.
 
 ## What to read in the broken files
 
 `vulnerable/parse_note.py` uses a first-key scan for ACL and `json.loads` for storage, then returns `accepted: True` even when they disagree. CPython last-wins on duplicates is the store meaning. The scan is not a JSON parser; it is a second grammar that happens to look at similar text.
 
-You do not need a new payload. The check module already binds:
+The check module already binds:
 
 - CLEAN unique-key JSON for company A — must remain acceptable.
 - Messy duplicate `"tenant"` keys — must not yield two meanings.
@@ -50,19 +48,19 @@ You do not need a new payload. The check module already binds:
 | Slice | Practice |
 |---|---|
 | Why it happens | Two readers, two meanings of the same bytes |
-| What has to be true first | Duplicate company keys; ACL on first, store on last |
+| What's already wrong | Duplicate company keys; ACL on first, store on last |
 | What it costs | tB body stored as if it were tA, or ACL sees tA while disk sees tB |
 | Not the lesson | A scanner name, a bug-list nickname, or “JSON is broken” |
 
 ## Practice
 
-Run checks against the broken files (they **must fail** on two meanings). Record the check name `test_duplicate_tenant_keys_are_one_meaning`.
+Two meanings on the broken files **must fail**. Record the check name `test_duplicate_tenant_keys_are_one_meaning`.
 
 ```text
 python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl vulnerable
 ```
 
-Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false.
+Do not “fix” the check to pass.
 
 ## Use it somewhere new
 

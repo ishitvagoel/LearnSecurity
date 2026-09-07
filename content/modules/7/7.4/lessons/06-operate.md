@@ -1,17 +1,17 @@
-# worker_identity_wrong without logging the cookie
+# Log the wrong worker identity, not the cookie
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-Even after `exporter` was “fixed once,” a new task can inherit request context again. Running it for real is the rest of the loop: notice, contain, and recover.
+A new task can inherit the request cookie after `exporter` is bound to the service. Page the Alice-session export, stop the worker, and restore the service bind.
 
-Do not log session cookies or note bodies (3.1 / 4.3). Do not attach the token to the ticket.
+Session cookies, note bodies, and the leftover token do not go in the ticket.
 
 ## Picture: leftover session is a signal
 
-A leftover cookie used as the principal is a notice-and-recover problem, not a licence to quote the cookie in the paging channel. Notice names the event. Recover keeps the deny and rotates the worker. Neither reprints Alice’s session.
+If a leftover cookie is used as the principal, do not reprint the cookie on the alert. Then keep the deny and rotate the worker.
 
 ```mermaid
 flowchart TD
@@ -20,7 +20,7 @@ flowchart TD
   Metric --> Drain[Rotate service creds and drain queue]
 ```
 
-Industry lists name detect, respond, recover. They do not bind the principal. A zero-trust product name is not the rule. Someone still has to own the worker identity.
+A zero-trust sticker does not stop a leftover cookie from being the worker.
 
 ## Signals that do not become a second leak
 
@@ -32,29 +32,27 @@ Industry lists name detect, respond, recover. They do not bind the principal. A 
 | Recover | Rotate worker creds; drain; re-check revoke (4.1) vs retry (2.4); re-run `test_user_session_is_not_worker_identity` |
 | Leftover | God-mode database role (3.3); later originating-subject check (advanced); broker access lists (10.3) |
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=worker_identity_wrong expected=worker-sc job_id=job_74e
 ```
 
-Not: Alice’s session cookie, note bodies, a live broker dump, or a real clinician token.
+Alice’s session cookie, note bodies, a live broker dump, or a real clinician token in the sample already names the principal.
 
-If your alert includes Alice’s cookie or note bodies, you have opened a second leak in the paging channel.
+Alice’s cookie or note bodies in the worker ticket are the principal again.
 
-A green “service account enabled” tile is not that pytest. Overnight export, outbox, and notification fan-out are other jobs of the same principal — inventory them before claiming recover. Re-run `test_user_session_is_not_worker_identity` after any task-enqueue change.
+Enabling a service account does not stop a leftover cookie from being the principal. Overnight export, outbox, and notification fan-out can still inherit Alice’s cookie; do not rotate the worker until those jobs are named. A job that carries Alice’s cookie still has to fail `test_user_session_is_not_worker_identity`.
 
 ## What the framework does vs what you still have to check
 
-A task dashboard will show task success and stay silent when the task still used `job.get('user_session')`. Detection must observe **Alice session yields `None`**, not queue depth. If the alert includes Alice’s cookie or note bodies, you have opened a 3.1 / 4.3 cell.
+Queue success is not a check that the task dropped `job.get('user_session')`. Fail the job on **Alice session yields `None`**, not queue depth. Alice’s cookie or note bodies next to Alice-session-yields-None reopen topics 3.1 and 4.3.
 
 ## Practice
 
-Write one log line you would accept in review (job id, expected principal, no cookie). Tie it to `labs/7.4/7.4-lab`. Reject any line that includes Alice’s session cookie, note bodies, or a live broker dump.
+Log the job id and expected principal — never the leftover cookie. Alice’s session cookie, note bodies, and a live broker dump name the worker.
 
 ## Use it somewhere new
 
-Clinic: notice batch-export jobs running as a clinician session on a local practice files; do not attach the session token to the ticket. Do not attach to a live broker.
+Notice batch-export jobs running as a clinician session on local practice files; do not attach the session token to the ticket. Do not attach to a live broker.
 
 ## Can people still use it
 
@@ -62,4 +60,4 @@ Clinic: notice batch-export jobs running as a clinician session on a local pract
 
 ## What this page is not doing
 
-A zero-trust product name is not the rule. Live broker attaches are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+A zero-trust sticker does not bind worker identity. Do not use live broker attaches. This site does not mark you as finished. Answer keys are not on this site.

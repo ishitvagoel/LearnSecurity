@@ -9,13 +9,13 @@ The notes app may get an incident ticket with a `recovery` field and a `logs` bl
 
 > `close_incident({"recovery": "todo", "logs": "ok"})` must be false. `close_incident({"recovery": "done", "logs": "note_body leaked"})` must be false. Honest recovery plus safe logs may close.
 
-So what must not happen: **an incident closed without recovery evidence**, and **a note body in the logs**. Detect without recover is theater. Logs with bodies are leftover copies at the observability sink — the same family as earlier lessons on note bodies, extra copies, and crash dumps.
+Close needs **recovery evidence**, and logs must not hold **a note body**. Detect without recover is theater. Logs with bodies are leftover copies at the observability sink — the same family as earlier lessons on note bodies, extra copies, and crash dumps.
 
-A logging list names *what* you keep. It does not prove restore ran. Logs should match how sensitive the data is — note bodies are not “forensics.” Ship logs to a separate system so a breach of the app does not erase the evidence. Logging every authorization decision without the sensitive data is extra, advanced work, not this week’s check.
+A logging list names *what* you keep. It does not prove restore ran. Logs should match how sensitive the data is — note bodies are not “forensics.” Ship logs to a separate system so a breach of the app does not erase the evidence. Logging every authorization decision without the sensitive data is extra, advanced work, not this check.
 
-Industry “detect / respond / recover” labels name outcomes, not a product. A known-exploited list is useful for patch order. It is not a close decision, and it is not a licence to scan a public clinic.
+Industry “detect / respond / recover” labels name outcomes, not a product. A known-exploited list is useful for patch order. It is not a close decision, and it is not permission to scan a public clinic.
 
-This week’s practice is this course’s local files or official labs. Do not tell anyone to try attacks on public or third-party systems.
+The practice is this course’s local files or official labs. Do not tell anyone to try attacks on public or third-party systems.
 
 ## Picture: detect vs recover
 
@@ -38,7 +38,7 @@ flowchart LR
   Note --> NotForensics[not allowed in logs]
 ```
 
-**A tool, not the rule:** a paging ack, a SIEM dashboard, time-to-detect, “we have backups,” a known-exploited listing.
+A paging ack, a SIEM dashboard, time-to-detect, “we have backups,” and a known-exploited listing do not prove restore ran.
 
 ## People who can close without recovery
 
@@ -48,16 +48,16 @@ flowchart LR
 | Still-in attacker | Keep a foothold after the tile goes green | Stay in | Close hid that they are still there |
 | Someone who treats a known-exploited list as close | Patch-list as the ticket Done | “It’s on the list” | Awareness is not restore; still no local check |
 
-You do not need a nation-state this week. Those three already close the incident without recovery.
+An optimistic closer, a still-in attacker, and a patch-list already close the incident without recovery.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-Someone closed on detection quality. That is the cause. The system still broken, or extra note copies in logs, is a **result**, not the cause.
+Someone closed on detection quality. That's the close-on-green decision. A still-broken system, or extra note copies in logs, is what you notice later.
 
 | Slice | For this rule |
 |---|---|
 | Why it happens | Close looks at detection quality (green SIEM, paging ack) |
-| What has to be true first | `close_incident` true while recovery is todo |
+| What's already wrong | `close_incident` true while recovery is todo |
 | Trigger | Optimistic closer; still-in attacker |
 | What it costs | System still broken or attacker still in; extra note copies |
 | How you stop it | Require recovery evidence; omit bodies |
@@ -68,7 +68,7 @@ Someone closed on detection quality. That is the cause. The system still broken,
 
 A SIEM will go green when the *rule* stops firing. That is not a restore test. Untested backups are not recover. Support tools with cluster-admin are a second incident.
 
-The app’s promise is: **this** `close_incident({"recovery": "todo", "logs": "ok"})` is false, and a leaked `note_body` cannot close either. The local check is `labs/10.5/10.5-lab`. Fake data only. No live SIEM. No real people’s notes.
+`close_incident({"recovery": "todo", "logs": "ok"})` is false, and a leaked `note_body` cannot close either — files in `labs/10.5/10.5-lab`. Fake data only. No live SIEM. No real people’s notes.
 
 ## What the tool cannot do
 
@@ -90,12 +90,10 @@ python3 -m pytest labs/10.5/10.5-lab/tests --impl vulnerable
 python3 -m pytest labs/10.5/10.5-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
-Ransomware restore vs note-level integrity. Clinic: close ticket when SIEM is green.
+Ransomware restore vs note-level integrity. Closing the ticket because SIEM is green skips restore.
 
 ## What this page is not doing
 
-Live incident systems, claiming you finished an assurance gate. Answer keys are not on this site.
+Do not use live incident systems. This page does not finish a check-in. Answer keys are not on this site.

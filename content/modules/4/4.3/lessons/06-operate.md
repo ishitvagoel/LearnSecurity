@@ -3,9 +3,9 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A new magic link, a proxy that copies query into a header, or a screenshot can still leak after the parser was “fixed once.” Pair notice and recover. Do not log the token while investigating. Do not paste the URL into the ticket.
+A magic link, a proxy that copies query into a header, or a screenshot can still leak the token. Keep the token and the URL out of the ticket while you investigate.
 
 ## Picture: reject, metric, purge
 
@@ -24,28 +24,26 @@ flowchart TD
 | Recover | Revoke; purge matching logs |
 | Leftover | History and screenshots you cannot purge |
 
-Industry lists name detect, respond, recover. They do not prove secrets stay out of the URL. A log-product name is not the rule. Re-run `test_query_string_token_is_rejected` after any parser change; a green TLS dashboard is not that pytest. History, screenshots, and chat pastes remain leftovers you cannot purge — revoke the token anyway.
+A token in the query still has to fail `test_query_string_token_is_rejected`. A TLS tile does not keep secrets out of the URL. History, screenshots, and chat pastes remain leftovers you cannot purge — revoke the token anyway.
 
-Recovery is incomplete if the next deploy still builds `?access_token=` in a Next.js share helper. Grep the frontend for query builders the same day you rotate the signing key, or the next copied URL re-issues the leak. uvicorn will keep printing the query unless the access-log format changes; notice still belongs in `session_from_request` before any log line is written.
+`?access_token=` in the Next.js share helper is still a leak. Grep the frontend for query builders the same day you rotate the signing key, or the next copied URL re-issues the leak. uvicorn will keep printing the query unless the access-log format changes; notice still belongs in `session_from_request` before any log line is written.
 
 ## What the framework does vs what you still have to check
 
-uvicorn will still print query strings unless you change the access-log format. Notice must happen **in the parser** before the token is copied into a log line. If the alert includes `secret`, you have duplicated the leak into the paging channel.
+uvicorn will still print query strings unless you change the access-log format. Notice must happen **in the parser** before the token is copied into a log line. `secret` in the parser metric duplicates the leak into the ticket.
 
 ## Practice
-
-Write one log line you would accept. Tie it to `labs/4.3/4.3-lab`.
 
 ```text
 log_denied reason=query_token path=/notes request_id=req_43qs
 ```
 
-Reject any line that includes `secret`, a note body, or a full URL with a query token.
+`secret`, a note body, or a full URL with a query token would make the log a second secret store.
 
 ## Use it somewhere new
 
-Clinic: notice `?token=` on appointment links; do not paste the URL into the ticket. Do not fetch the SMS link.
+Notice `?token=` on appointment links; do not paste the URL into the ticket. Do not fetch the SMS link.
 
 ## What this page is not doing
 
-A log-product name is not the rule. Live log dumps are out of scope. This site does not mark you as finished.
+Do not use live log dumps. This site does not mark you as finished.

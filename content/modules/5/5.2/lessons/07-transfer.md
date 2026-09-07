@@ -1,23 +1,23 @@
-# Same idea: a column labeled encrypted that is Base64
+# A column labeled encrypted that is only Base64
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic SSN column**. The label on the column says encrypted. The bytes are Base64. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic SSN column**. The label on the column says encrypted. The bytes are Base64.
 
-The notes-app sentence was: `protect("secret")` must not round-trip as Base64. Rewrite it for a clinic without changing the fork: encoding is not secrecy.
+`protect("secret")` must not round-trip as Base64. For a clinic, encoding is not secrecy.
 
-**Prompt:** Clinic: SSN column labeled “encrypted” that is Base64. Also name password hashing vs field encryption vs backup encryption.
+The SSN column labeled “encrypted” is Base64. Also name password hashing vs field encryption vs backup encryption.
 
-**Product sketch:** a small clinic record with an `ssn_encrypted` column.
+A small clinic record with an `ssn_encrypted` column.
 
 ## Picture: the label is not the tool
 
-Renaming “secret” to “SSN” is not transfer. The leftover changes. A column named `ssn_encrypted` does not authorize leaving the bytes as Base64. A disk-encryption checkbox is not the pytest.
+The SSN is the secret in the column. A column named `ssn_encrypted` does not authorize leaving the bytes as Base64. A disk-encryption checkbox does not stop a round-trip decode.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | `protect("secret")` | `protect` analogue on the SSN stand-in |
 | Base64 of the body | Base64 of the SSN |
@@ -30,18 +30,16 @@ flowchart LR
   B64 --> Reader[Admin reads SSN]
 ```
 
-If the column name is `ssn_encrypted` and the bytes are Base64, the cell is gone. FastAPI, a Postgres `bytea` type, and a disk-encryption checkbox do not invert the reader. Argon2 on the SSN is the wrong rule (password stretching, not field encryption). HTTPS does not encrypt the column.
+If the column name is `ssn_encrypted` and the bytes are Base64, the rule is gone. FastAPI, a Postgres `bytea` type, and a disk-encryption checkbox do not invert the reader. Argon2 on the SSN is the wrong rule (password stretching, not field encryption). HTTPS does not encrypt the column.
 
-The clinic rewrite still has to keep the notes-app fork: Base64 decode of the stored stand-in is not the SSN. Renaming the column or wrapping `b64encode` in a function named `encrypt` leaves the reader unchanged. The local pytest analogue is `test_protect_is_not_mere_encoding` — on a practice, not a live clinic system.
+Base64 decode of the stored stand-in is not the SSN. Renaming the column or wrapping `b64encode` in a function named `encrypt` leaves the reader unchanged. The local check is `test_protect_is_not_mere_encoding` — on a practice, not a live clinic system.
 
-## Prompt — clinic SSN column
+## Write this for a clinic SSN column
 
-Rewrite the notes-app sentence. Include:
-
-1. who can act (database admin; stolen disk — **not** a live clinic);
+1. who might try (database admin; stolen disk — **not** a live clinic);
 2. what you trust (which authenticated encryption plus key is trusted; the column name is not);
-3. what must not happen (Base64 round-trip of the stand-in, not a legal label);
-4. a test idea on **local** files only (decode of `protect(ssn)` is not the SSN — never on the real clinic);
+3. what must not happen (Base64 round-trip of the stand-in);
+4. `protect(ssn)` must not round-trip as decode — **local** files (never on the real clinic);
 5. leftover (key in the same row; nonce reuse is advanced; HTTPS is not at rest);
 6. whether a human “show SSN” path must stay masked until an explicit view — do not use color as the only cue.
 
@@ -57,8 +55,8 @@ Rewrite the notes-app sentence. Include:
 
 ## Practice
 
-One page. No answer keys. The only running system you may break is `labs/5.2/5.2-lab`. Do not decode a live column.
+Treat a Base64 SSN column as not encrypted. Keep the answer keys closed. The only running system you may break is `labs/5.2/5.2-lab`. Do not decode a live column.
 
 ## What this page is not doing
 
-Live-target decoders. Real SSNs. Claiming a course gate from this page.
+Do not try live-target decoders. Do not use real SSNs. This page does not finish a check-in.

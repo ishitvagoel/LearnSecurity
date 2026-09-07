@@ -9,11 +9,11 @@ The notes app still has a reader from another company. It still has a browser cl
 
 A green SAST, DAST, or package scan is coverage for implementation bugs that happen to match a rule. It is not a model of what can go wrong for the notes, the grants, and the cookies.
 
-> For the notes app, a threat model you keep in version control must still list `cross-tenant-read`, `hostile-browser`, and `stolen-worker` when every scanner is green. Scanner findings are extra coverage, not the set. STRIDE letters with no assets, no owners, and no “what would prove this row wrong” are not this sentence.
+> For the notes app, a threat model you keep in version control must still list `cross-tenant-read`, `hostile-browser`, and `stolen-worker` when every scanner is green. Scanner findings are extra coverage, not the set. STRIDE letters with no assets, no owners, and no “what would prove this row wrong” are a sticker, not a checkable row.
 
-What must not happen is an **empty model on a green scan**. `threats_from_scan(scanner_green=True)` returns `[]`, so `cross-tenant-read` is missing. Then the story of what you already checked looks finished. Who may read a note, and where trust stops, were never even listed.
+A green scan with an **empty model** is the failure. `threats_from_scan(scanner_green=True)` returns `[]`, so `cross-tenant-read` is missing. Then the story of what you already checked looks finished. Who may read a note, and where trust stops, were never even listed.
 
-Awareness lists still say “model the design when it changes.” That is not a passing score you earn by pasting a tool report. Industry checklists want documented security decisions you can check in the running system. They want dangerous features called out in docs when you claim that bar. Neither sentence is “the scanner was green.”
+Awareness lists still say “model the design when it changes.” That is not a passing score you earn by pasting a tool report. You still need documented security decisions you can check in the running system. Call dangerous features out in docs when you claim that bar. Neither sentence is “the scanner was green.”
 
 ## Picture: the scanner is coverage, not the model
 
@@ -27,9 +27,9 @@ flowchart TD
   Empty --> Fail["The rule is false"]
 ```
 
-What you trust is the **versioned list with owners and triggers**, plus the check that those ids exist. The scanner process is not an oracle. FastAPI, Semgrep, and a vendor dashboard do not know `cross-tenant-read`.
+What you trust is the **versioned list with owners and triggers**, plus the check that those ids exist. The scanner process is not the whole check. FastAPI, Semgrep, and a vendor dashboard do not know `cross-tenant-read`.
 
-**A tool is not the rule.** Threat Dragon, a data-flow picture, or “we did STRIDE in the sprint.” A named product is not this sentence.
+Threat Dragon, a data-flow picture, and “we did STRIDE in the sprint” do not put `cross-tenant-read` on a green-scan model.
 
 ## Picture: four questions, not a sticker pack
 
@@ -51,7 +51,7 @@ NIST’s data-centric modeling note is still a **draft**. It says: pick the data
 | Slice | For this rule |
 |---|---|
 | Why it happens | Tool output is treated as thinking |
-| What has to be true first | `scanner_green=True`; the assembler copies that as “no threats” |
+| What's already wrong | `scanner_green=True`; the assembler copies that as “no threats” |
 | Trigger | CI or a reviewer asks “what’s in the model?” |
 | What it costs | The story of what you checked looks done; who-may-read and where-trust-stops were never listed |
 | How you stop it | Seed the threats you must always name; join scanner findings onto that list |
@@ -62,7 +62,7 @@ NIST’s data-centric modeling note is still a **draft**. It says: pick the data
 
 A “no High findings” ticket is not a threat model. Framework defaults such as HttpOnly cookies and parameterized queries are real later rows. They do not enumerate cross-tenant read.
 
-The app’s promise in this practice: the list still returns `cross-tenant-read` when the scanner is green. The folder is `labs/3.2/3.2-lab`. No live targets. No production scanner tenant.
+The list still returns `cross-tenant-read` when the scanner is green — files in `labs/3.2/3.2-lab`. No live targets. No production scanner tenant.
 
 ## What the tool cannot do
 
@@ -80,12 +80,12 @@ python3 -m pytest labs/3.2/3.2-lab/tests --impl vulnerable
 python3 -m pytest labs/3.2/3.2-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Tie the check to `cross-tenant-read` still present, not to a scanner product name.
+The check is `cross-tenant-read` still present. A scanner product name is not it.
 
 ## Use it somewhere new
 
-Clinic SMS reminders. The new channel is not in the notes-app HTTP model. Which threats appear that no CVE scanner will list?
+SMS reminders are a new channel that is not in the notes-app HTTP model. Which threats appear that no CVE scanner will list?
 
 ## What this page is not doing
 
-Live-target scanning, real personal data in the practice, copy-paste exploits, and “green scan means ship.” Answer keys are not on this site.
+Do not try live-target scanning, real personal data in the practice, copy-paste exploits, and “green scan means ship.” Answer keys are not on this site.

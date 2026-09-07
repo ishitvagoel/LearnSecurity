@@ -5,9 +5,9 @@
 
 ## Could someone else name the checks from your map?
 
-“We use EncryptedSharedPreferences” is not this lesson. A map someone else can test names **each store and whether it can hold a body**.
+The testable picture is **each store and whether it can hold a body** — not “We use EncryptedSharedPreferences”.
 
-This week’s freeze: the notes app’s local `save_note` / `plaintext_on_disk`. No live phones.
+`save_note` / `plaintext_on_disk` — no live phones.
 
 ## Picture: many sinks, one body
 
@@ -31,7 +31,7 @@ flowchart LR
   Offline --> Replay["8.1 hostile replay leftover"]
 ```
 
-## Step 1: freeze the pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|
@@ -55,11 +55,11 @@ flowchart LR
 
 ## Practice
 
-Draw the inventory. Point at `labs/8.2/8.2-lab` file `disk.py`. Label the store even in the repaired tree — the fix is the ciphertext stand-in, not pretending a private folder became encryption.
+Open `disk.py` under `labs/8.2/8.2-lab`. After repair, the store is still there: the restore is the ciphertext stand-in, not a private folder as encryption.
 
 ## Use it somewhere new
 
-Clinic chart cache; iOS Keychain classes as a later mirror.
+The chart cache is this grain; iOS Keychain classes are a later mirror.
 
 ## What can still go wrong
 
@@ -67,4 +67,4 @@ Extracted Keystore keys on a compromised OS; screenshot channel; 8.3 clipboard I
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

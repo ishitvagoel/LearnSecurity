@@ -1,11 +1,11 @@
-# logout_wipes_cache without logging the body
+# Wipe the cache without logging the note
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A new WorkManager blob can skip the cache wrapper after `save_note` was “fixed once.” Pair notice and recover. Do not log note bodies (3.1). Do not attach the chart to the ticket.
+WorkManager can persist a blob that never went through the `save_note` wrap. Skip the chart and the note body when you file the miss.
 
 ## Picture: leftover cache is a signal
 
@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Flag["backup_flag review"]
 ```
 
-Industry lists name detect, respond, recover. They do not prove the wrap. They do not prove a checklist. Someone still has to own the leftover.
+A checklist name does not prove the wrap.
 
 ## Signals that do not become a second leak
 
@@ -27,27 +27,25 @@ Industry lists name detect, respond, recover. They do not prove the wrap. They d
 | Recover | Wipe; revoke sessions; exclude backup |
 | Leftover | Extracted keys; screenshots; clipboard; notifications |
 
-An MDM product name is not the rule. Re-run `test_cached_note_is_not_plaintext_on_disk` after any cache-path change; a green “internal storage” tile is not that pytest. Screenshots, recents, and notification text are other copies of the same body — list them before you claim Recover.
+An MDM product name does not encrypt the cache. Plaintext on disk still has to fail `test_cached_note_is_not_plaintext_on_disk`. Internal storage does not wrap the note. Screenshots, recents, and notification text still copy the body; the disk is not clean until those copies are named.
 
 ## What the framework does vs what you still have to check
 
-Android Auto Backup can copy ciphertext *and* a poorly stored key while the pytest still says “not plaintext secret.” Notice must observe **`plaintext_on_disk()` false**, not a fingerprint prompt. If the alert includes note bodies, you have opened a logging leak (3.1 / 5.1).
+Android Auto Backup can copy ciphertext *and* a poorly stored key while the check still says “not plaintext secret.” Confirm **`plaintext_on_disk()` false** on disk, not a fingerprint prompt. The backup metric is `plaintext_on_disk()` false. Note bodies are a logging leak (3.1 / 5.1).
 
-The app’s promise is: **this** practice, leftover-cache signals fire without the body, and an MDM product name is not this week’s rule.
+Leftover-cache signals fire without the body.
 
 ## Practice
-
-Write one log line you would accept in review. Tie it to `labs/8.2/8.2-lab`. Example shape (fake ids only):
 
 ```text
 log_denied reason=plaintext_cache_forbidden store=offline_notes request_id=req_82e
 ```
 
-Reject any line that includes note bodies or a live `adb backup` of a personal phone.
+Note bodies or a live `adb backup` of a personal phone have no place in this write-up.
 
 ## Use it somewhere new
 
-Clinic: notice leftover chart cache after logout on a local helper; do not attach the chart to the ticket. Do not image a live tablet.
+Notice leftover chart cache after logout on a local helper; do not attach the chart to the ticket. Do not image a live tablet.
 
 ## Can people still use it
 
@@ -55,4 +53,4 @@ Unlock-with-fingerprint must still have a device-PIN fallback people can actuall
 
 ## What this page is not doing
 
-An MDM product name is not the rule. Personal-phone imaging is out of scope. Gates 0–10 stay not-attempted.
+An MDM sticker does not finish this page. Do not image a personal phone. Opening this page does not finish a check-in.

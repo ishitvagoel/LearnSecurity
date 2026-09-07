@@ -1,40 +1,38 @@
-# Review always-true install_ok like a pull request
+# Would you merge this always-true install_ok?
 
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
-
 ## What you are reviewing
 
-A colleague ships the notes app’s CI install check. Review `labs/10.2/10.2-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `install_ok("aaa", "bbb")` still returns true, compare that with the rule, and write changes a developer can verify.
+Treat `labs/10.2/10.2-lab/vulnerable/` as a CI-install change. Does `install_ok("aaa", "bbb")` still return true?
 
-Start at `install_ok` and the two hash strings, not at a scanner color or an SBOM screenshot. The check you already ran (`test_hash_mismatch_refuses_install`) is the rule test. A comment “will pin later” is not.
+Compare the two hash strings in `install_ok`. An SBOM screenshot can wait. Mismatched hashes that still install are the review fail. “will pin later” does not count.
 
 ## Picture: install_ok true on hash mismatch
 
-Start with this seeded smell: **install_ok true on hash mismatch**. Label it rule, tool, or false comfort before you accept the change.
+**install_ok true on hash mismatch**.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|mismatch installs| Property["Rule - good if tested"]
   Q -->|SBOM attached| Mechanism[Tool - inventory]
-  Q -->|provenance badge| False[False comfort]
+  Q -->|provenance badge| False[False assurance]
 ```
 
-Classification starts at the protected effect (mismatch denied). Everything that is not digest equality at that call is a candidate always-install path. An SBOM screenshot without that pytest is the same smell, not a different finding class.
+A digest mismatch still has to be denied. If the change never checks digest equality, that always-install leftover is still open. An SBOM screenshot without that check is still the same problem.
 
-Unpinned Actions are a sibling grain. Secrets in fork pull requests are 5.3. Do not skip `test_hash_mismatch_refuses_install`. Do not claim the ship gate. Do not fetch a live package to prove the finding.
+Unpinned Actions are a sibling grain. Secrets in fork pull requests are 5.3. This page does not finish the ship check-in. Do not fetch a live package to prove the finding.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - install_ok true on hash mismatch
 - Unpinned action
 - Secrets in PR from forks
 - SBOM generated but never used
 
-Also reject: live registry attacks; installing without re-running `test_hash_mismatch_refuses_install`; keys in learner notes; claiming the ship gate.
+Also reject: live registry attacks; installing without re-running `test_hash_mismatch_refuses_install`; keys in learner notes; treating this SBOM lesson as a check-in.
 
 ## Common mix-ups
 
@@ -43,15 +41,11 @@ Also reject: live registry attacks; installing without re-running `test_hash_mis
 - A provenance badge is the app’s hash check
 - Generating an SBOM verifies installs
 - Dependabot is `install_ok`
-- The ship gate follows from a green audit job
-
-## Practice
-
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_hash_mismatch_refuses_install`. Do not open the keys file.
+- A green audit job is not the ship check-in
 
 ## Use it somewhere new
 
-Clinic change that “added CycloneDX and Dependabot” without a digest check is an incomplete review of the install gate. Name the independent falsehood that would still keep mismatch from installing.
+CycloneDX and Dependabot without a digest check do not finish the install gate. An SBOM is not a digest check — write the hash-mismatch refuse.
 
 ## Can people still use it
 
@@ -59,4 +53,4 @@ A denied install must say *digest mismatch* in words. Do not hide the reason beh
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will pin later.” That comment is leftover without an owner. Do not typosquat a public registry to prove the finding.
+A hash mismatch that still installs, plus “will pin later,” has no owner. Do not typosquat a public registry to prove the finding.

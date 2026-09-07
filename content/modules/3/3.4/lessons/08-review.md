@@ -3,27 +3,25 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
-
 ## What you are reviewing
 
-A colleague ships notes-app share. Review `labs/3.4/3.4-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether eight `add_share` calls still leave `last > 5`, compare that with the rule, and write changes a developer can verify.
+Treat `labs/3.4/3.4-lab/vulnerable/` as a share-cap change. Do eight `add_share` calls still leave `last > 5`?
 
-The check you already ran (`test_share_cap_is_enforced`) is the rule test. A comment “will cap later” is not.
+A sticky note “will cap later” is not `test_share_cap_is_enforced` going green.
 
 ## Picture: cap in React only
 
-Start with this seeded smell: **Cap in React only**. Label it rule, tool, or false comfort before you accept the change.
+**Cap in React only**.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would falsify it?"}
   Q -->|"eight adds last greater than 5"| Property["Rule — good if tested"]
   Q -->|"max in React"| Mechanism[Tool — no write path]
-  Q -->|"filter has awareness rule"| False[False comfort]
+  Q -->|"filter has awareness rule"| False[False assurance]
 ```
 
-Classification starts at the protected effect (count ≤ 5 after eight writes). Everything that is not a write-path ceiling at that loop is a candidate leftover path.
+The count still has to be ≤ 5 after eight writes. A loop with no write-path ceiling still mints a sixth reader.
 
 ## Problems to find (name them yourself)
 
@@ -32,7 +30,7 @@ Classification starts at the protected effect (count ≤ 5 after eight writes). 
 - Test loops 8 times and expects success
 - Support tool bypasses cap without audit
 
-Also reject: treating the client as what you trust; closing findings without re-running `test_share_cap_is_enforced`; keys in learner notes; real personal data in practice files; a weakness nickname as the requirement; live load tests.
+Also reject: treating HTML max as the cap; closing findings without re-running `test_share_cap_is_enforced`; keys in learner notes; real personal data in practice files; a weakness nickname as the requirement; live load tests.
 
 ## Common mix-ups
 
@@ -42,13 +40,9 @@ Also reject: treating the client as what you trust; closing findings without re-
 - FastAPI or SQLAlchemy will stop at five
 - An accessible announcement is the cap
 
-## Practice
-
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one to `test_share_cap_is_enforced`. Do not open the keys file.
-
 ## Use it somewhere new
 
-Clinic change that “adds max=3 on the select” without a write-path test is an incomplete review. Name the independent falsehood that would still keep the fourth guardian out.
+`max=3` on the select without a write-path test still lets a fourth guardian land. `max=3` on the select is not a write-path cap — write the fourth-guardian fail.
 
 ## Can people still use it
 
@@ -56,4 +50,4 @@ Error “share limit reached” must be something assistive tech can announce, n
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will cap later.” That comment is leftover risk without an owner. Do not flood a public API to prove the finding.
+A sixth share that still lands, plus “will cap later,” is leftover with no owner. Do not flood a public API to prove the finding.

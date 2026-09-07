@@ -9,11 +9,11 @@ The notes app’s leadership may accept leftover risk. **Accountability of lefto
 
 > `accept_exception({"owner": "", "review_by": None})` must be false. A complete record may be accepted.
 
-What must not happen: **an incomplete exception accepted**. Unowned holes last forever. Inaccessible recovery (people cannot finish the reset path) is quietly kept.
+Incomplete exception rows still count as accepted. Unowned holes last forever. Inaccessible recovery (people cannot finish the reset path) is quietly kept.
 
-A process-maturity score measures whether a practice exists somewhere. It is not a row in the register. Industry “govern” labels name outcomes. They do not write the exception. A design-review guide is vocabulary for “think while you design.” It is not `accept_exception`. An unverified “secure by design” pledge page talks about manufacturer ownership. It is not this week’s check and not an assurance stamp. Extra advanced work — document the dangerous function — is a reason to *require* a record. It is not this pytest. A later draft of the design-review guide stays a **draft**.
+A process-maturity score measures whether a practice exists somewhere. It is not a row in the register. Industry “govern” labels name outcomes. They do not write the exception. A design-review guide is vocabulary for “think while you design.” It is not `accept_exception`. An unverified “secure by design” pledge page talks about manufacturer ownership. It does not write the exception and it is not an assurance stamp. Extra advanced work — document the dangerous function — is a reason to *require* a record. It does not fill the register. A later draft of the design-review guide stays a **draft**.
 
-This week’s practice is this course’s local files or official labs. Do not tell anyone to try attacks on public or third-party systems.
+The practice is this course’s local files or official labs. Do not tell anyone to try attacks on public or third-party systems.
 
 ## Picture: talk vs record
 
@@ -33,7 +33,7 @@ flowchart LR
   Score --> NotRow[not accept_exception]
 ```
 
-**A tool, not the rule:** a ticket type named “risk” with optional dates; a “secure by design” pledge; a one-year roadmap slide.
+A ticket type named “risk” with optional dates, a “secure by design” pledge, and a one-year roadmap slide do not fill owner and review date.
 
 ## Who can treat a spoken yes as a row
 
@@ -43,16 +43,16 @@ flowchart LR
 | Someone who treats a maturity score as the register | Point at a dashboard tile | “We already measure this” | The score is not owner, review date, or accessibility |
 | Someone who treats a pledge as done | Paste a manufacturer page | Looks like leadership | The incomplete record still accepted |
 
-You do not need a live disclosure inbox this week. Those three already accept the hole if `accept_exception` always says yes.
+You do not need a live disclosure inbox. A spoken yes, a maturity score, and a pledge already accept the hole if `accept_exception` always says yes.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-Oral acceptance treated as a register row. That is the cause. The unowned hole that lasts, or inaccessible recovery kept, is a **result**, not the cause.
+Oral acceptance treated as a register row. That's the oral yes. The unowned hole that lasts, or inaccessible recovery kept, is what remains.
 
 | Slice | For this rule |
 |---|---|
 | Why it happens | Oral acceptance treated as a register row |
-| What has to be true first | `accept_exception` true with empty owner |
+| What's already wrong | `accept_exception` true with empty owner |
 | Trigger | Calendar; silent “we’ll ship anyway” |
 | What it costs | Accountability of leftover risk — unowned holes; inaccessible recovery |
 | How you stop it | Schema; refuse incomplete |
@@ -63,7 +63,7 @@ Oral acceptance treated as a register row. That is the cause. The unowned hole t
 
 A ticket workflow named “risk” will accept whatever fields you leave optional. Optional owner is this bug.
 
-The app’s promise this week is: **this** `accept_exception({"owner": "", "review_by": None})` is false, and a complete record may accept. The folder is `labs/E6/e6-lab`. Fake owner strings only. No live disclosure inbox. No real people’s notes.
+`accept_exception({"owner": "", "review_by": None})` is false, and a complete record may accept — files in `labs/E6/e6-lab`. Fake owner strings only. No live disclosure inbox. No real people’s notes.
 
 ## What the tool cannot do
 
@@ -85,12 +85,10 @@ python3 -m pytest labs/E6/e6-lab/tests --impl vulnerable
 python3 -m pytest labs/E6/e6-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
-Clinic “HIPAA exception.” A procurement questionnaire vs this record.
+Sketch a “HIPAA exception” on the notes app. Compare a procurement questionnaire to this record.
 
 ## What this page is not doing
 
-Live disclosure inboxes. A maturity score as the syllabus. Claiming you finished an assurance gate. Answer keys are not on this site.
+Do not use live disclosure inboxes. Do not treat a maturity score as the syllabus. This page does not finish a check-in. Answer keys are not on this site.

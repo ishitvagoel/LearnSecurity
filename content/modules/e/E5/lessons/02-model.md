@@ -5,9 +5,9 @@
 
 ## Could someone else name the company check from your scale map?
 
-“We have row-level rules” is not this page. A map someone else can test names **session binding, body fields, where the database session variable comes from, cache/search/lake keys, and impersonation**.
+“We have row-level rules” does not name **session binding, body fields, where the database session variable comes from, cache/search/lake keys, and impersonation**.
 
-This week’s freeze: local `tenant_for(session, body)`. No public company. The notes app binds company from the session. The JSON body is not the tenant.
+`tenant_for(session, body)` — no public company. The notes app binds company from the session. The JSON body is not the tenant.
 
 ## Picture: one binding, many copies
 
@@ -29,7 +29,7 @@ flowchart LR
   Host --> NotBind["not who is allowed"]
 ```
 
-## Step 1: freeze pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|
@@ -53,11 +53,11 @@ flowchart LR
 
 ## Practice
 
-Draw this map so someone else could name pytest cases. Point at `labs/E5/e5-lab` file `rls.py`.
+Look at `rls.py` under `labs/E5/e5-lab`.
 
 ## Use it somewhere new
 
-Clinic `org_id` in a bulk GraphQL mutation. Same grain: body tenant overrides session must stay false.
+`org_id` in a bulk GraphQL mutation is the same grain: body tenant overrides session must stay false.
 
 ## What can still go wrong
 
@@ -65,4 +65,4 @@ Silent impersonation; lake jobs that re-key on a body field.
 
 ## What this page is not doing
 
-A famous-bugs list as the definition of security. Answer keys are not on this site.
+Naming “broken tenancy” does not bind company from the session. Answer keys are not on this site.

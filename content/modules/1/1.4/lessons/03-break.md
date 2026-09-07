@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python model of a recovery **confirm** control. The failure is already in the object: color without a name, mouse without a keyboard. You are here to see that the check treats that object as a **failed rule**, not as a UI nit.
+The practice is not a website you attack. It is a tiny Python model of a recovery **confirm** control. The failure is already in the object: color without a name, mouse without a keyboard. Watch the check treat that object as a **failed rule**, not as a UI nit.
 
 The rule under test:
 
@@ -41,7 +41,7 @@ python -m pytest labs/1.4/1.4-risk-register/tests --impl fixed
 
 `--impl vulnerable` **must fail** on `test_recovery_control_is_usable_and_accessible`. `--impl fixed` **must pass**. If both pass, you are not testing the rule.
 
-## What to look at — cause, not a trophy
+## What to look at: the cause, not a trophy
 
 Read `vulnerable/recovery.py` as a design note. Group what you see:
 

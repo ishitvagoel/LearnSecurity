@@ -5,9 +5,9 @@
 
 ## The rule
 
-`accept_token` must compare `aud` to `expected_aud`. Missing `aud` is deny. A list may contain the expected name; it must not succeed because `sub` exists. Structural means the audience is mediated — not “we use JWTs,” not Authlib defaults, not HTTPS, not “OpenID Connect is on.”
+`accept_token` must compare `aud` to `expected_aud`. Missing `aud` is deny. A list may contain the expected name; it must not succeed because `sub` exists. In short, the audience is mediated — not “we use JWTs,” not Authlib defaults, not HTTPS, not “OpenID Connect is on.”
 
-The smallest restore for notes-app token acceptance is: empty expected audience, missing claim, or mismatch is **deny**. Then who-is-allowed on the note. ID-token `aud` equals `client_id` is a different check.
+The check in token acceptance: empty expected audience, missing claim, or mismatch is **deny**. Then who-is-allowed on the note. ID-token `aud` equals `client_id` is a different check.
 
 ## Picture: name match, then who-is-allowed
 
@@ -20,9 +20,9 @@ flowchart TD
   Aud -->|yes| Next["who-is-allowed on the note"]
 ```
 
-The lab’s repaired files compare `aud` (string or list membership) to `expected_aud`. PKCE, `state`, `nonce`, JWKS, `iss`, and DPoP are named leftovers — they are not proven by this practice. Browser-app and native-app RFCs name client-shape holes; this pytest is the resource-server `aud` check only.
+The lab’s repaired files compare `aud` (string or list membership) to `expected_aud`. PKCE, `state`, `nonce`, JWKS, `iss`, and DPoP are named leftovers — they are not proven by this practice. Browser-app and native-app RFCs name client-shape holes; this check is the resource-server `aud` check only.
 
-Industry checklists want tokens intended for that service. This pytest is that sentence for `securecollab-api`.
+Tokens have to be intended for that service — `securecollab-api`.
 
 ## What the repaired files must show
 
@@ -39,7 +39,7 @@ ID-token `aud` equals `client_id`. PKCE. DPoP (advanced sender-constraint). Obje
 ## What can still go wrong
 
 - Correct `aud` still needs who-is-allowed on the note.
-- Empty `aud`; array tricks; `alg=none` — reject unknown algorithms; this page is not a payload catalogue.
+- Empty `aud`; array tricks; `alg=none` — reject unknown algorithms; this page is not a payload list.
 - PKCE, `state`, `nonce`, `iss`, `exp`, JWKS, mix-up, and sender-constraining stay out of this practice.
 - Leftover tokens after a client is removed.
 - A browser app holding the access token is leftover (prefer a backend-for-frontend).
@@ -52,11 +52,9 @@ Name expected audience and the check (`aud` matches, else deny). Run:
 python3 -m pytest labs/4.5/4.5-lab/tests --impl fixed
 ```
 
-It must pass.
-
 ## Use it somewhere new
 
-Clinic FHIR resource server with a hospital-specific `aud`. Native redirect (claimed HTTPS, not a custom scheme) is leftover, not this pytest.
+A FHIR resource server still needs a hospital-specific `aud`. Native redirect (claimed HTTPS, not a custom scheme) is leftover, not this check.
 
 ## What this page is not doing
 

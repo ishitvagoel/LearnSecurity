@@ -3,13 +3,13 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-Even after the button is fixed, someone will still fail recovery: a new exclusion you did not model, a library regression, a coercion event. Running it for real is the rest of the loop: notice, contain, restore, and refuse to “help” by emailing note bodies.
+A new exclusion, a library regression, or a coercion event can still fail recovery after the button is named and keyboard-usable. Notice that failure, contain the leftover path, restore access, and do not email note bodies.
 
 ## Picture: the loop continues without lowering the bar
 
-A broken recovery widget is a notice-and-recover problem, not a licence to let support read codes aloud. The alternate path must still be a checked, usable control. Notice names keyboard vs mouse. Recover restores access. Neither emails notes.
+A broken recovery widget still has to be usable from the keyboard, not only the mouse. Support must not read codes aloud. The other path still has to be a checked control. Then restore access. Do not email notes.
 
 ```mermaid
 flowchart TD
@@ -20,7 +20,7 @@ flowchart TD
   Sig --> Ev[Evidence: keyboard vs mouse and reason, never codes]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a log product. They do not prove a checklist. Someone still has to own the leftover.
+A log pipeline does not make recovery usable from the keyboard.
 
 ## Signals that do not become a second leak
 
@@ -31,8 +31,6 @@ Industry lists name detect, respond, recover. They do not pick a log product. Th
 | Respond | Stop pointing people at the broken widget; open the alternate checked path; do not grant support a read-aloud of codes |
 | Recover | Owner completes a usable confirm; revoke a shared admin session if that shortcut appeared |
 | Leftover | Coercion; this practice is not production telemetry |
-
-A log line a reviewer can accept looks like:
 
 ```text
 recovery_confirm fail account=a1 control=confirm-recovery modality=unknown reason=not_keyboard_operable
@@ -46,11 +44,11 @@ If the primary widget is broken, degradation is **another checked, usable path**
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/1.4/1.4-risk-register`. Write who owns the coercion leftover and what trigger reopens it.
+Draft a deny line with ids and a reason — never a body or a real email. Name who owns the coercion leftover and what trigger reopens it.
 
 ## Use it somewhere new
 
-Clinic second factor fails for keyboard-only clinicians. What notice is privacy-safe (no chart text), and what recover path stays checked (no “text me the one-time code on a shared phone”)?
+When the second factor fails for keyboard-only clinicians, what notice is privacy-safe (no chart text), and what recover path stays checked (no “text me the one-time code on a shared phone”)?
 
 ## Can people still use it
 
@@ -58,4 +56,4 @@ The alternate path must itself meet keyboard, name, and not-color-only. Those ru
 
 ## What this page is not doing
 
-A log-product name is not the rule. Answer keys are not on this site.
+Answer keys are not on this site.

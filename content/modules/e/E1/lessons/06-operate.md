@@ -1,15 +1,15 @@
-# tool_denied without logging transcripts
+# Log the denied tool, not the transcript
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A new tool can still be registered after the allow-list was "set once." Pair notice and recover. Do not log note bodies or full model transcripts. Do not paste the prompt into the ticket.
+A new tool can still be registered outside the allow-list. Keep note bodies, full model transcripts, and the prompt out of the ticket.
 
 ## Picture: denied tool is a signal
 
-A denied tool is a notice-and-recover problem, not a licence to quote a transcript in the paging channel. Notice names the tool. Recover revokes leftover agent credentials. Neither reprints the note body.
+If a tool is denied, page the tool name — not the transcript. Then revoke leftover agent credentials.
 
 ```mermaid
 flowchart TD
@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Revoke[revoke agent creds]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a vendor product. They do not prove this tool gate was the allow-list. Someone still has to own the leftover.
+A vendor product does not make the tool gate an allow-list.
 
-Re-run `test_exec_sql_tool_is_denied` after any tool-registration change. A green "prompt forbids SQL" tile is not that pytest. Coding-assistant install tools in CI are the same family — inventory them before you claim recover.
+`test_exec_sql_tool_is_denied` still has to catch `exec_sql` on always-run. A prompt that “forbids SQL” does not deny `exec_sql`. Coding-assistant install tools in CI still run unconstrained; the allow-list is not done until those tools are named.
 
 ## Signals that do not become a second leak
 
@@ -32,23 +32,21 @@ Re-run `test_exec_sql_tool_is_denied` after any tool-registration change. A gree
 | Recover | Revoke leftover agent credentials |
 | Leftover | Prompt-only policy; hallucinated packages; HTML from `search_notes` |
 
-A vendor agent dashboard will show token counts and stay silent when CI's `run_tool` is always-run. Detection must observe **`exec_sql` is None**, not "the model is on-policy." If the alert includes a transcript or a note body, you have opened a leftover-secret leak.
-
-A log line a reviewer can accept looks like:
+Agent token counts do not mean CI's `run_tool` refused `exec_sql`. Deny the tool on **`exec_sql` is None**, not "the model is on-policy." The metric is `exec_sql` is None. A transcript or a note body is the model output.
 
 ```text
 log_denied reason=tool_denied agent=sum-1 tool=exec_sql
 ```
 
-Not: a note body, a transcript, or "assurance gate complete."
+A note body, a transcript, or "check-in complete" in the tool-deny sample is another model dump.
 
-If your alert includes the matching transcript, you have copied the leak into the paging channel.
+Quote the tool name in the ticket. Quoting the transcript hands the model output to whoever is on call.
 
 ## What the framework does vs what you still have to check
 
-The same lying `search_notes` HTML, hallucinated packages, and prompt-only policy that bypass this practice will also bypass a "scan our agent dashboard" detector. Name those places before you claim recover. A vendor-product name is not the rule.
+Lying `search_notes` HTML, unconstrained installs, and prompt-only policy still run even if the agent dashboard is green.
 
-Cause vs cost stays split here too: the **cause** is model output treated as policy; the **cost** is an interpreter via English; **how you stop it** is the allow-list; **how you notice** is `tool_denied`; **how you recover** is revoke leftover agent credentials. What the tool cannot do: this alert does not encode `search_notes` HTML, and it does not stop hallucinated packages.
+Cause first: model output treated as policy. Then an interpreter via English. Put the allow-list in. Watch `tool_denied`. Recover by revoking leftover agent credentials. The page does not encode `search_notes` HTML, and it does not stop hallucinated packages.
 
 ## Can people still use it
 
@@ -56,18 +54,16 @@ A denied tool must say *exec_sql not allow-listed*, not only "assert False." Do 
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/E1/e1-lab`.
-
 ```text
 log_denied reason=tool_denied agent=sum-1 tool=exec_sql
 ```
 
-Reject any line that includes a note body, a transcript, or "assurance gate complete."
+A note body, a transcript, or "check-in complete" in the log is the model output twice.
 
 ## Use it somewhere new
 
-Clinic: deny the chart-SQL tool; do not paste the prompt into the ticket. Do not call a live model.
+Deny the chart-SQL tool; do not paste the prompt into the ticket. Do not call a live model.
 
 ## What this page is not doing
 
-A vendor-product name is not the rule. Do not claim you finished an assurance gate. A famous-bugs label is not this alert. Answer keys are not on this site.
+This page does not mark you as finished. A famous-bugs label does not deny `exec_sql`. Answer keys are not on this site.

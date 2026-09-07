@@ -5,9 +5,9 @@
 
 ## Could someone else name the length check from your unpacker map?
 
-“We wrote it in Python” is not this page. A reviewable model names **bufsize, declared_len, len(src), who may set each, and the copy site**.
+The testable picture is **bufsize, declared_len, len(src), who may set each, and the copy site** — not “We wrote it in Python”.
 
-This week’s freeze for the notes app: local `copy_into(bufsize, src, declared_len)`. No native overflow walkthrough.
+`copy_into(bufsize, src, declared_len)` — no native overflow walkthrough.
 
 ## Picture: three numbers, one destination
 
@@ -40,7 +40,7 @@ flowchart LR
 
 A header length is data. Treat it like any other field the requester sent.
 
-## Step 1: freeze who, what, and the copy
+## Step 1: name who, what, and the copy
 
 | Piece | This system |
 |---|---|
@@ -64,11 +64,11 @@ A header length is data. Treat it like any other field the requester sent.
 
 ## Practice
 
-Draw the map. Point at `labs/E4/e4-lab` file `copy.py`.
+Open `copy.py` under `labs/E4/e4-lab`.
 
 ## Use it somewhere new
 
-Clinic DICOM parser: the header length is still untrusted at the native codec.
+A DICOM parser still treats the header length as untrusted at the native codec.
 
 ## What can still go wrong
 
@@ -76,4 +76,4 @@ Integer wrap; time bugs (use-after-free); two parsers that disagree on length.
 
 ## What this page is not doing
 
-An awareness list as the definition of security. Answer keys are not on this site.
+Naming a memory-safety ranking does not cap `copy_into`. Answer keys are not on this site.

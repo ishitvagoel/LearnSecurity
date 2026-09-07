@@ -7,11 +7,11 @@
 
 The notes app lets an owner share a note with other people. The product rule is **at most five share grants per note**. That number is a business limit on who may later read the note, not a named bug. A scripted client, a disabled `max=5` select, an import path, or eight rapid POSTs will try to add a sixth reader. HTML is not what you trust.
 
-> For a note in the notes app, eight `add_share` calls must leave `share_count() <= 5`. The sixth grant is denied on the **write path**. A React `max={5}`, a CDN filter, or an awareness-list sticker is not this sentence.
+> For a note in the notes app, eight `add_share` calls must leave `share_count() <= 5`. The sixth grant is denied on the **write path**. A React `max={5}`, a CDN filter, or a famous-bugs sticker is not the write-path limit.
 
-What must not happen is **cap exceeded**: looping `add_share()` eight times yields `last > 5`. Extra rows are extra readers nobody intended: more people on the note, a larger blast radius, a noisier threat model.
+Keep the share **cap** at 5: looping `add_share()` eight times must not yield `last > 5`. Extra rows are extra readers nobody intended: more people on the note, more places a break can reach, a noisier threat model.
 
-Industry checklists want the limit written down, enforced on a trusted service, actually implemented, and locked so two parallel sixths cannot both land. Multi-user approval for a support override is an advanced extra, not a silent baseline. Awareness lists name unrestricted consumption after this sentence exists. They are not the syllabus.
+The limit has to be written down, enforced on a trusted service, actually implemented, and locked so two parallel sixths cannot both land. Multi-user approval for a support override is an advanced extra, not a silent baseline. A famous-bugs list may mention unrestricted consumption after the write-path cap exists. That list is not the syllabus.
 
 ## Picture: UI max is not the write path
 
@@ -28,7 +28,7 @@ flowchart TD
 
 Nobody needs a new bug name. A loop, a retrying UI, or a support tool is enough. Trusting “the owner will stop at five” is not what you trust.
 
-**A tool is not the rule.** HTML `max`, nginx `limit_req`, or a filter named after an awareness list.
+HTML `max`, nginx `limit_req`, and a filter named after an awareness list do not stop the sixth share on the write path.
 
 ## Picture: rate limit is not the product cap
 
@@ -47,7 +47,7 @@ A client that adds five grants slowly still must stop at five. A client that ham
 | Slice | For this rule |
 |---|---|
 | Why it happens | Policy only in the UI |
-| What has to be true first | `add_share` increments with no cap |
+| What's already wrong | `add_share` increments with no cap |
 | Trigger | Eight rapid POSTs or a disabled max |
 | What it costs | Integrity of the share policy; extra readers on the note |
 | How you stop it | Check count in the same write as insert; reject the 6th |
@@ -56,13 +56,13 @@ A client that adds five grants slowly still must stop at five. A client that ham
 
 ## What the framework does vs what you still have to check
 
-FastAPI does not know “five members.” SQLAlchemy `add()` will insert a sixth row. An accessible “share limit reached” message is something people can hear; that is not the cap. The app’s promise is: after eight `add_share` calls, `last <= 5`, and five honest shares still succeed. The folder is `labs/3.4/3.4-lab`. No live tenants.
+FastAPI does not know “five members.” SQLAlchemy `add()` will insert a sixth row. An accessible “share limit reached” message is something people can hear; that is not the cap. After eight `add_share` calls, `last <= 5`, and five honest shares still succeed — files in `labs/3.4/3.4-lab`. No live tenants.
 
 ## What the tool cannot do
 
 - Cap on `/share` but not `/import` or GraphQL.
 - Parallel sixths before commit (needs a transaction or lock — leftover from the retry lab).
-- Support override with no audit (advanced, not this pytest).
+- Support override with no audit (advanced, not this check).
 
 ## Practice
 
@@ -73,11 +73,11 @@ python3 -m pytest labs/3.4/3.4-lab/tests --impl vulnerable
 python3 -m pytest labs/3.4/3.4-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Tie the check to count ≤ 5, not to a filter product name.
+Count ≤ 5 is the check. A filter product name is a nickname.
 
 ## Use it somewhere new
 
-Clinic: max 3 guardians per child. Invite tokens and export quotas are different objects, same shape.
+Max 3 guardians per child. Invite tokens and export quotas are different objects, same shape.
 
 ## Can people still use it
 
@@ -85,4 +85,4 @@ Error “share limit reached” must be something assistive tech can announce, n
 
 ## What this page is not doing
 
-Live-target load tests, real member emails, weaponized bots, and “business logic is not security.” Answer keys are not on this site.
+Do not try live-target load tests, real member emails, weaponized bots, and “business logic is not security.” Answer keys are not on this site.

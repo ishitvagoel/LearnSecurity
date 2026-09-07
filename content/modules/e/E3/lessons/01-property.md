@@ -9,9 +9,9 @@ The notes app does not take card payments. This elective models a **lab ledger**
 
 > Two `capture("k1")` calls must leave `charge_count() == 1`. The first capture may succeed.
 
-What must not happen is a **duplicate capture that double-charges**. That is the same family as a retry that grants twice (2.4) and a token spent twice (6.6), at the grain of money. No real card numbers. No real PAN.
+A duplicate capture double-charges the ledger. That is the same family as a retry that grants twice (2.4) and a token spent twice (6.6), at the grain of money. No real card numbers. No real PAN.
 
-Industry checklists want locking so a limited thing cannot be booked twice. They want the step to succeed all the way or roll back. Documented connection-pool limits are advanced leftover, not this pytest. A card-network questionnaire is a sector-scope question — this practice is not in that scope.
+Lock so a limited thing cannot be booked twice. The step to succeed all the way or roll back. Documented connection-pool limits are advanced leftover, not this check. A card-network questionnaire is a sector-scope question — this practice is not in that scope.
 
 ## Picture: key vs append
 
@@ -28,17 +28,17 @@ flowchart TD
 flowchart LR
   Stripe[processor idempotency] --> Their[their side]
   Ledger[your SEEN set] --> Yours[your charge_count]
-  Stripe --> NotYours[not this cell]
+  Stripe --> NotYours[not this rule]
 ```
 
-**A tool is not the rule.** A payment company's header, a filled-in questionnaire, or “we are high-assurance.”
+A payment company’s header, a filled-in questionnaire, and “we are high-assurance” do not stop a duplicate capture from charging twice.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | For this rule |
 |---|---|
 | Why it happens | A side effect that is not bound to the key |
-| What has to be true first | two `capture(k1)` ⇒ count 2 |
+| What's already wrong | two `capture(k1)` ⇒ count 2 |
 | Trigger | Retry after 504; double-click |
 | What it costs | Integrity of money-like state |
 | How you stop it | Treat the key as the identity of the capture |
@@ -47,13 +47,13 @@ flowchart LR
 
 ## What the framework does vs what you still have to check
 
-A processor can remember its own side and still leave your row inserting twice. Payment screens that trap people cause retries (this bug). The app's promise is: **this** practice, two k1, count 1.
+A processor can remember its own side and still leave your row inserting twice. Payment screens that trap people cause retries (this bug). Two k1, count 1.
 
 ## What the tool cannot do
 
 - The client mints a new key each retry.
 - A webhook and a capture can both append (later topic 7.3).
-- A filled-in questionnaire is not this cell.
+- A filled-in questionnaire is not this rule.
 
 ## Can people still use it
 
@@ -68,12 +68,10 @@ python3 -m pytest labs/E3/e3-lab/tests --impl vulnerable
 python3 -m pytest labs/E3/e3-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 Health record append-only audit. Simulated copay.
 
 ## What this page is not doing
 
-Live processors, real card numbers, claiming a questionnaire or a course gate. Answer keys are not on this site.
+Do not use live processors, real card numbers, claiming a questionnaire or a check-in. Answer keys are not on this site.

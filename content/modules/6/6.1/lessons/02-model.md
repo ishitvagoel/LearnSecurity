@@ -5,9 +5,9 @@
 
 ## Could someone else name the checks?
 
-“We don’t use a shell” is not this lesson. A map someone else can test names **which process is started**, **which argv slots are data**, and **which interpreters are out of this practice**.
+The testable picture is **which process is started**, **which argv slots are data**, and **which interpreters are out of this practice** — not “We don’t use a shell”.
 
-This week's freeze: local `argv_for_list(name)` and `uses_shell`. No live `ls`.
+`argv_for_list(name)` and `uses_shell` — no live `ls`.
 
 > Pass the name as one argv element. The program must be a fixed binary. The shell must never see the name as grammar.
 
@@ -58,11 +58,11 @@ A missing “hostile name × shell grammar × deny” row is how `sh -c` concate
 
 ## Practice
 
-Draw SQL vs shell vs template on one page so someone else could name the pytest cases. Point at `labs/6.1/6.1-lab` file `argv.py`. Fake names only.
+Look at `argv.py` under `labs/6.1/6.1-lab`. Fake names only.
 
 ## Use it somewhere new
 
-Clinic CSV filename as a second interpreter. Jinja includes.
+A CSV filename is a second interpreter. Jinja includes are the same grain.
 
 ## What can still go wrong
 
@@ -70,4 +70,4 @@ Argument injection; plugin shells; formula characters in CSV cells.
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Do not run this map against a live clinic or a live export worker. Answer keys are not on this site.
+Do not run this map against a live clinic or a live export worker. Answer keys are not on this site.

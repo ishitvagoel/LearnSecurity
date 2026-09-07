@@ -5,24 +5,22 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get **clinic SMS reminders** — a new channel that HTTP scans of the notes app will not enumerate. Do not answer with a Top 10, a CWE, or a scanner as the definition of security. The notes-app sentence was: a green scan still lists `cross-tenant-read`. Rewrite it for a new hop without changing the fork.
+You get **clinic SMS reminders** — a new channel that HTTP scans of the notes app will not enumerate. A green scan still lists `cross-tenant-read`.
 
-**Prompt:** Clinic SMS reminders — a new channel that HTTP scans will not enumerate.
+SMS reminders are a new channel that HTTP scans will not enumerate.
 
-**Product sketch:** An EHR-lite booking card that texts “your appointment” to a phone number.
+An EHR-lite booking card that texts “your appointment” to a phone number.
 
-Rewrite the notes-app sentence. Include:
-
-1. who can act (number-swap; SMS intercept on an untrusted hop; an operator who pastes chart text into the template — **not** a live clinic, carrier, or public SMS API);
+1. who might try (number-swap; SMS intercept on an untrusted hop; an operator who pastes chart text into the template — **not** a live clinic, carrier, or public SMS API);
 2. what you trust (which assembler or markdown file is the list you keep; the SMS vendor questionnaire is not);
 3. what must not happen (empty model because “gateway questionnaire green,” or reminder body includes chart text — pick one and test it locally);
-4. a test idea on a **local** practice only (`sms-content-leak` present when `scanner_green=True`);
+4. `sms-content-leak` still listed when `scanner_green=True` — **local** practice;
 5. leftover (carrier logs; support read-aloud; the data-centric modeling note is still a **draft**);
 6. whether a human path must meet WCAG 2.2 (for example, a usable “opt out of SMS” path). SMS content classification itself is not an accessibility problem.
 
 ## Picture: a new hop is a new “what are we working on?”
 
-Renaming “note” to “reminder” is not transfer. Person, object, path, and leftover change. Content leak and number-swap are new rows. A vendor sticker is still not what you trust.
+A reminder here is a note. Content leak and number-swap are new rows. A vendor sticker does not write the always-name ids.
 
 ```mermaid
 flowchart LR
@@ -46,8 +44,8 @@ Question two now includes content leak and number-swap even if every HTTP scanne
 
 ## Practice
 
-One page. No keys. `labs/3.2/3.2-lab` is the only running system you may break. You may also name webhook threats as a second optional paragraph — still no live targets.
+Put SMS reminders on the threat map. Keep the answer keys closed. `labs/3.2/3.2-lab` is the only running system you may break. You may also name webhook threats as a second optional paragraph — still no live targets.
 
 ## What this page is not doing
 
-Live-target scanning. Real patient phone numbers. Claiming a course gate from this page.
+Do not try live-target scanning. Do not use real patient phone numbers. This page does not finish a check-in.

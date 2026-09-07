@@ -1,15 +1,15 @@
-# Fail on the broken files, then pass on the repaired ones
+# A leftover default secret must fail
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-“Secrets Manager is enabled” is not this topic’s evidence. “The wiki says we rotated” is a tool observation. The check is: `auth("sk-lab-hardcoded", current="rotated-now")` is False and `auth("rotated-now", current=None)` is False. That observation must be **false** on the broken files (default still authenticates / missing current allows) and **true** on the repaired files.
+Turning on Secrets Manager does not rotate the default. A wiki that says you rotated is a page. `auth("sk-lab-hardcoded", current="rotated-now")` has to be False, and `auth("rotated-now", current=None)` has to be False. The leftover files: the default still authenticates and a missing current still allows. Repair denies both leftover keys.
 
 ## Picture: leftover default must fail
 
-A test that only counts passing cases can pass while a leftover default still counts as a valid key. This check asks whether a leftover default is allowed to count as a passing control. Broken must fail that question. Repaired must pass it.
+A leftover default can still count as a valid key under a green suite.
 
 ```mermaid
 flowchart LR
@@ -23,14 +23,14 @@ flowchart LR
 | Wrong input / abuse | hardcoded default false after rotate; missing current denies; broken files must fail |
 | Not claimed | hardware box; timed rotation; worker second default |
 
-Lab tests in `labs/5.3/5.3-lab/tests/test_property.py`. `test_hardcoded_default_does_not_auth` is a **what-must-not-happen** test: a leftover default is not allowed to count as a passing control.
+In `labs/5.3/5.3-lab/tests/test_property.py`, leftover `DEFAULT` still authenticating is the fail `test_hardcoded_default_does_not_auth` names.
 
 ```text
 python3 -m pytest labs/5.3/5.3-lab/tests --impl vulnerable
 python3 -m pytest labs/5.3/5.3-lab/tests --impl fixed
 ```
 
-The honest current-secret test may pass on both. That does not excuse the default-dead and missing-current tests. If the broken files do not fail `sk-lab-hardcoded`, the lab is miswired — fix the wiring, not the check. An environment error is not security evidence.
+The current secret may authenticate on both sides. You still have to kill the hardcoded default, and deny a missing current secret. If the broken files do not fail `sk-lab-hardcoded`, the lab is miswired — fix the wiring, not the check. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
@@ -39,15 +39,13 @@ The honest current-secret test may pass on both. That does not excuse the defaul
 - Keys baked into a phone app (later topic)
 - A second default on a worker (later topic)
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
-Run both this session. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `Vault` in a README without calling `auth("sk-lab-hardcoded", current="rotated-now")`.
+Call `auth("sk-lab-hardcoded", current="rotated-now")`. A `Vault` mention in a README is the product, not the default dying.
 
 ## Use it somewhere new
 
-Clinic gist. A test that only asserts HTTP 200 on login is not rotation evidence (later testing topic). A test that fetches a live gist is out of scope.
+HTTP 200 on login is not rotation evidence. Do not run a test that fetches a live gist.
 
 ## What this page is not doing
 

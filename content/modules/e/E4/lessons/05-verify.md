@@ -1,15 +1,15 @@
-# Fail on the broken files, then pass on the repaired ones
+# The broken files must fail the oversize copy
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-“We use Kotlin” is not this topic’s evidence. “A sanitizer is on” is a tool observation. The check is: `len(copy_into(4, b"abcdefgh", 4)) <= 4` and a short honest copy may fit. The oversize observation must be **false** on the broken files (length 8) and **true** on the repaired files. Do not compile native exploits.
+Writing the copy in Kotlin does not bound the buffer. A sanitizer flag is a product. `len(copy_into(4, b"abcdefgh", 4))` has to be `<= 4`, and a short honest copy may fit. Broken: the oversize copy is length 8. Repair keeps the copy at length 4 or less. Do not compile native exploits.
 
 ## Picture: broken must fail the oversize copy
 
-A test that only greps `Kotlin` in a README can pass while `copy_into(4, b"abcdefgh", 4)` still returns 8 bytes. This check asks whether an oversize copy still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A grep for `Kotlin` in a README can still hide that `copy_into(4, b"abcdefgh", 4)` still returns 8 bytes.
 
 ```mermaid
 flowchart LR
@@ -21,16 +21,16 @@ flowchart LR
 |---|---|
 | Wrong input / abuse | `copy_into(4, b"abcdefgh", 4)` length <= 4; broken files must fail |
 | Normal | Short declared length may copy (may pass on both) |
-| Not claimed | A C walkthrough; an awareness-list dashboard; a course gate; integer wrap |
+| Not claimed | A C walkthrough; an awareness-list dashboard; this memory lesson as a check-in; integer wrap |
 
-Lab tests in `labs/E4/e4-lab/tests/test_property.py`. `test_copy_does_not_exceed_buffer` is a **what-must-not-happen** test: `declared_len` plus 8 is not allowed to count as a passing control.
+`labs/E4/e4-lab/tests/test_property.py` fails when `declared_len` plus 8 still copies.
 
 ```text
 python3 -m pytest labs/E4/e4-lab/tests --impl vulnerable
 python3 -m pytest labs/E4/e4-lab/tests --impl fixed
 ```
 
-Honest `test_short_copy_may_fit` may pass on both implementations. That does not excuse the oversize deny test. If the broken files do not fail `test_copy_does_not_exceed_buffer`, the lab is miswired — fix the wiring, not the check. An environment error is not security evidence.
+A short copy that fits the buffer may stay allowed. Deny a copy that overruns it. If the broken files do not fail `test_copy_does_not_exceed_buffer`, the lab is miswired — fix the wiring, not the check. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
@@ -38,18 +38,16 @@ Honest `test_short_copy_may_fit` may pass on both implementations. That does not
 - Integer wrap of `n` is impossible
 - Time bugs (use-after-free)
 - A company language roadmap is complete
-- A course gate is complete
-
-Record those as leftover or later topics, not as silent passes.
+- This memory lesson as a finished check-in
 
 ## Practice
 
-Run both this session from the lab directory if needed. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `Kotlin` in a README without calling `copy_into(4, b"abcdefgh", 4)`.
+Call `copy_into(4, b"abcdefgh", 4)`. A `Kotlin` mention in a README is the language, not the bound.
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts “the language is memory-safe” is not this cell. A third-party binary is out of scope.
+Calling the language memory-safe is the slogan, not `copy_into` bounded. Do not use a third-party binary.
 
 ## What this page is not doing
 
-Do not add a native-overflow trophy. Do not log file bytes. Answer keys are not on this site. Course gates stay not-attempted.
+Do not treat a native overflow as a prize. Do not log file bytes. Answer keys are not on this site. This page does not finish a check-in.

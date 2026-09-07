@@ -5,9 +5,9 @@
 
 ## Could someone else name checks from your decision record?
 
-“We use Postgres row-level security” is not this page. A reviewable architecture names **roles**, **lanes**, **what each may SELECT**, and **the rejected alternative** (one superuser in `DATABASE_URL`).
+The testable picture is **roles**, **lanes**, **what each may SELECT**, and **the rejected alternative** (one superuser in `DATABASE_URL`) — not “We use Postgres row-level security”.
 
-This week’s freeze: notes rows keyed by company; a local `can_select` stand-in. No live cluster, no production replica.
+Notes rows keyed by company; a local `can_select` stand-in. No live cluster, no production replica.
 
 ## Picture: topology is not isolation
 
@@ -33,7 +33,7 @@ flowchart LR
 
 Policy lives in one place (who may read). Enforcement happens in the handler **and** in the role. Hiding notes in the Next.js client is not a trusted-server check.
 
-## Step 1: freeze pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|
@@ -58,11 +58,11 @@ Policy lives in one place (who may read). Enforcement happens in the handler **a
 
 ## Step 3: write the rejected choice
 
-Rejected: one `postgres` URL for migrate and serve. Chosen: runtime `app` with a same-company check; migrator credential offline and short-lived. Writing that decision down is useful. It is not the pytest.
+Rejected: one `postgres` URL for migrate and serve. Chosen: runtime `app` with a same-company check; migrator credential offline and short-lived. Writing that decision down is useful. It is not the check.
 
 ## Practice
 
-Draw this map so someone else could name pytest cases. Point at `labs/3.3/3.3-lab` file `roles.py`.
+The helper is `roles.py` under `labs/3.3/3.3-lab`.
 
 ## Use it somewhere new
 
@@ -74,4 +74,4 @@ Stolen migrator; table-owner walk-around of a later row-level rule; a replica wi
 
 ## What this page is not doing
 
-Treating an awareness list as the definition of security. Answer keys are not on this site.
+A SQL-injection ranking does not drop the `postgres` role. Answer keys are not on this site.

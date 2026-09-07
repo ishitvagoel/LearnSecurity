@@ -5,9 +5,9 @@
 
 ## Could someone else name the checks?
 
-“We have a unique index” is not this lesson. A map someone else can test names **states**, **the consume step**, and **fail-closed on store errors**.
+“We have a unique index” still leaves out **states**, **the consume step**, and **deny on store errors**.
 
-This week's freeze: local `accept(token)` / `reset()`. No live mailer.
+`accept(token)` / `reset()` — no live mailer.
 
 > `accept('t1')` may be true once. The second `accept('t1')` must be false. If consume is missing from the map, a second join appears.
 
@@ -19,7 +19,7 @@ flowchart TD
   Slot --> Once{consumed?}
 ```
 
-Industry lists want locking so a limited seat cannot be booked twice. The seat is the invite.
+Lock so a limited seat cannot be booked twice. The seat is the invite.
 
 ## Picture: 2.4 retry vs this consume
 
@@ -51,13 +51,13 @@ Retry wants **one** success that can be repeated safely. Invite wants **one** su
 | first accept | `t1` | join | allow |
 | second accept | `t1` | join | deny |
 | first accept | `t2` | join | allow |
-| store error | any | join | deny (fail-closed) |
+| store error | any | join | deny |
 
 A missing “second accept × `t1` × deny” row is how the invite is accepted twice. Write the hole.
 
 ## Practice
 
-Draw the states so someone else could name the pytest cases. Point at `labs/6.6/6.6-lab` file `invite.py`. Your artifact is a versioned list (even a table in your notes) with state, consume, allow or deny, and what would show the deny is false. Fake tokens only.
+Use `invite.py` under `labs/6.6/6.6-lab`. Name state, consume, and the case that would prove the deny false. Fake tokens only.
 
 ## Use it somewhere new
 
@@ -69,4 +69,4 @@ Two accepts that both see unused before either writes. Email phishing (4.2). Tok
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Do not run this map against a public clinic or a live mailer. Answer keys are not on this site.
+Do not run this map against a public clinic or a live mailer. Answer keys are not on this site.

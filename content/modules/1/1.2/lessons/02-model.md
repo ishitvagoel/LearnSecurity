@@ -212,4 +212,4 @@ Add a field-level rule: members may list note titles, but a restricted note’s 
 
 ## What this page is not doing
 
-Live targets. Pretending deferred features are already protected. Answer keys are not on this site.
+Do not use live targets. Do not pretend deferred features are already protected. Answer keys are not on this site.

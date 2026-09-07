@@ -79,7 +79,7 @@ The evidence itself becomes a protected object. Who may read, export, modify, or
 
 ## Turn events into signals
 
-“Log denied access” is not a detection design. Name a pattern and the uncertainty it represents.
+“Log denied access” is not a detection design. Say which pattern you would page on, and what you still do not know.
 
 | Signal | Why it matters | Possible legitimate cause | Response boundary |
 |---|---|---|---|
@@ -195,4 +195,4 @@ Keyboard, named controls, and a reviewable summary before commitment apply to gr
 
 ## What this page is not doing
 
-Live mailboxes, real incident paging, production credentials. Answer keys are not on this site.
+Do not use live mailboxes, real incident paging, production credentials. Answer keys are not on this site.

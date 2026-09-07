@@ -3,27 +3,25 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
-
 ## What you are reviewing
 
-A colleague ships notes-app at-rest protection. Review `labs/5.2/5.2-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether Base64 decode of `protect("secret")` still equals `"secret"`, compare that with the rule, and write changes a developer can verify.
+Open `labs/5.2/5.2-lab/vulnerable/` as at-rest protection. Does Base64 decode of `protect("secret")` still equal `"secret"`?
 
-The check you already ran (`test_protect_is_not_mere_encoding`) is the rule test. A comment “will add AES later” is not.
+Shipping “will add AES later” leaves `test_protect_is_not_mere_encoding` failing.
 
 ## Picture: protect equals base64
 
-Start with this seeded smell: **`protect = base64`**. Label it rule, tool, or false comfort before you accept the change.
+**`protect = base64`**.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|"Base64 of secret"| Property["Rule - good if tested"]
   Q -->|"we use AES"| Mechanism[Tool - no test]
-  Q -->|"HTTPS"| False[False comfort]
+  Q -->|"HTTPS"| False[False assurance]
 ```
 
-The review starts at the protected effect (decode is not the plaintext). Everything that is not a keyed, non-encoding transform at `protect` is a candidate reversible path. A comment that says AES without a round-trip test is tool theater, not a different finding class.
+Decode still cannot be the plaintext. If `protect` never uses a keyed, non-encoding transform, that reversible leftover is still open. A comment that says AES without a round-trip test is tool theater.
 
 ## Problems to find (name them yourself)
 
@@ -42,14 +40,10 @@ Also reject: rolling a cipher; closing findings without re-running `test_protect
 - Column rename is secrecy
 - Argon2 belongs on the note body
 
-## Practice
-
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_protect_is_not_mere_encoding`. Do not open the keys file.
-
 ## Use it somewhere new
 
-Clinic change that renames a column to `ssn_encrypted` without a reversibility test is an incomplete review. Name the independent falsehood that would still keep Base64 from round-tripping the SSN.
+Renaming a column to `ssn_encrypted` without a reversibility test still leaves Base64. Renaming the column is not a reversibility test — write the Base64 fail.
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will add AES later.” That comment is leftover without an owner. Do not decode a live column to prove the finding.
+Base64 named as AES, plus “will add AES later,” is leftover with no owner. Do not decode a live column to prove the finding.

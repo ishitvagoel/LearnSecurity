@@ -5,13 +5,13 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic portal** that adds a second factor, and a **banking re-auth** dialog as a second sketch. One of the second-factor UIs is mouse-only. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic portal** that adds a second factor, and a **banking re-auth** dialog as a second sketch. One of the second-factor UIs is mouse-only.
 
 ## Picture: transfer changes the envelope, not the product name
 
-Renaming “recovery confirm” to “clinic step-up” is not transfer. Person, object, path, and leftover change. Keyboard lockout and chart-exposing shortcuts are new rules. Support reading a code aloud is a new who-is-allowed row, not a usability win.
+A clinic step-up is a recovery confirm. Keyboard lockout and chart-exposing shortcuts are new rules. Support reading a code aloud is a new who-is-allowed row, not a usability win.
 
-| Notes app this week | Clinic / bank sketch |
+| Notes app | Clinic / bank sketch |
 |---|---|
 | Owner recovering a notes account | Exhausted clinician or customer on a shared workstation |
 | Recovery confirm widget | Second-factor or re-auth dialog over a chart or balance |
@@ -26,20 +26,20 @@ flowchart TD
   NewR --> Ev[New evidence: keyboard check, logs without chart text]
 ```
 
-## Prompt A — clinic second factor
+## Write this for a clinic second factor
 
 The second factor is a mouse-only dialog over a patient chart.
 
 Your answer must include:
 
-- who can act (exhausted clinician; shared workstation; someone who wants the chart);
+- who might try (exhausted clinician; shared workstation; someone who wants the chart);
 - what you trust (the browser is hostile; the dialog is what you trust for this step);
 - what must not happen (keyboard-only clinician locked out **or** a shortcut that exposes the chart);
-- a test idea that would fail if the rule were false (check on name/keyboard/not-color-only — run only on a local practice you own, never on the real clinic);
+- a check that would fail if the rule were false (check on name/keyboard/not-color-only — run only on a local practice you own, never on the real clinic);
 - leftover risk (coercion; SMS to a shared phone);
 - whether the human path must meet the web accessibility baseline (yes, as a baseline, not as a full badge).
 
-## Prompt B — banking re-auth
+## Write this for banking re-auth
 
 A bank “fixes” mouse-only by offering support that will read the one-time code aloud. State which who-is-allowed row changed (support × code × read-aloud) and why that is not a usability win.
 
@@ -54,8 +54,8 @@ A bank “fixes” mouse-only by offering support that will read the one-time co
 
 ## Practice
 
-One page. No answer keys. The only running system you may break is `labs/1.4/1.4-risk-register`.
+Bind the recovery confirm on one page. Keep the answer keys closed. The only running system you may break is `labs/1.4/1.4-risk-register`.
 
 ## What this page is not doing
 
-Real clinics, real banks, real patient or financial data.
+Do not use real clinics, real banks, real patient or financial data.

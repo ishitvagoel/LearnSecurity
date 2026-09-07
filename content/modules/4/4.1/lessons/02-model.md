@@ -5,9 +5,9 @@
 
 ## Could someone else name the checks?
 
-“We delete the user” is not this lesson. A map someone else can test names **account states**, **leftovers that must die**, and **who may offboard**.
+Keep **account states**, **leftovers that must die**, and **who may offboard**; “We delete the user” is not that list.
 
-This week's freeze: local `SESSIONS` / `DELETED` maps; user `alice`. No live single sign-on.
+`SESSIONS` / `DELETED` maps; user `alice` — no live single sign-on.
 
 > After `delete_user("alice")`, `session_valid("alice")` must be false. If a leftover is missing from the map, leftover access appears.
 
@@ -25,7 +25,7 @@ flowchart LR
   Delete --> Mobile
 ```
 
-If any arrow is missing, leftover access appears. This week's check only runs the session arrow.
+If any arrow is missing, leftover access appears. The check only runs the session arrow.
 
 ## Picture: delete is a path, not a SQL statement
 
@@ -67,11 +67,11 @@ A missing “deleted alice × leftover session × deny” row is how the cookie 
 
 ## Practice
 
-Draw this map so someone else could name the pytest cases. Point at `labs/4.1/4.1-lab` file `lifecycle.py`. Your artifact is a versioned list (even a table in your notes) with state, leftover, allow or deny, and what would show the deny is false. Fake data only.
+Start at `lifecycle.py` under `labs/4.1/4.1-lab`. Name the state, the leftover, and the case that would prove the deny false. Fake data only.
 
 ## Use it somewhere new
 
-Clinic: a clinician leaves. Shared workstation cookie. Disabling the badge does not name the chart session.
+A clinician leaves. Shared workstation cookie. Disabling the badge does not name the chart session.
 
 ## What can still go wrong
 
@@ -79,4 +79,4 @@ Backups still contain the user row. A phone's offline cache. A self-contained to
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Do not run this map against a public clinic or a live identity provider. Answer keys are not on this site.
+Do not run this map against a public clinic or a live identity provider. Answer keys are not on this site.

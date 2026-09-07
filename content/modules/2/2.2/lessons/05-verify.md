@@ -1,15 +1,15 @@
-# Fail on the broken files, then pass on the repaired ones
+# A broken cache must fail the check
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot check it, it is still a slogan
+## Check it
 
-Happy-path HTTP 200 over HTTPS is not evidence. The check must be **false** on the broken files and **true** on the repaired files.
+HTTPS 200 on a cache hit does not finish this. A path-only cache key still has to fail on the broken files and pass on the repaired ones.
 
 ## Picture: a broken cache must fail the check
 
-A check that only asserts HTTPS can pass while the key remains path-only. This check asks whether company B getting company A’s body still counts as a passing cache. Broken files must fail that question. Repaired files must pass it.
+Asserting HTTPS can still hide that the key remains path-only.
 
 ```mermaid
 flowchart LR
@@ -19,9 +19,9 @@ flowchart LR
   P --> E2[Evidence the pair is now bound]
 ```
 
-If both pass, the check is not looking at the cross-company get. If both fail, the fix is not structural or the check is wrong.
+If the broken cache still passes, the cross-company get was never the miss you needed.
 
-## Four modes, even for a dict
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -30,11 +30,11 @@ If both pass, the check is not looking at the cross-company get. If both fail, t
 | When things break | Unknown company does not share the slot |
 | Not claimed | Live CDN `Vary`; browser `no-store`; DNS authenticity |
 
-The file is `labs/2.2/2.2-request-path/tests/test_cache_key.py`. The checks are `test_same_tenant_cache_hit` and `test_other_tenant_does_not_receive_cached_body`. They observe bodies, not HTTP 200. That is a **what-must-not-happen** pair: a company B get of `tenant-A-note` is not allowed to count as a passing cache.
+The checks are `test_same_tenant_cache_hit` and `test_other_tenant_does_not_receive_cached_body`. They observe bodies, not HTTP 200. Company B fetching `tenant-A-note` must not count as a cache hit.
 
-Map each check to a cell from the request-path map. Do not paste keys. If the broken files do not fail the cross-company get, the practice files are miswired — fix the wiring, not the assertion.
+Map each check to a rule from the request-path map. Do not paste keys. If the broken files do not fail the cross-company get, the practice files are miswired — fix the wiring, not the assertion.
 
-TLS 1.3 on the browser hop is not this check. A check that only asserts HTTPS is a tool observation.
+TLS 1.3 on the browser hop does not key the cache. HTTPS 200 is a hop, not the cache key.
 
 ## What the checks do not prove
 
@@ -47,18 +47,16 @@ Record those as leftover or later work, not as silent passes.
 
 ## Practice
 
-Run both this session:
-
 ```text
 python3 -m pytest labs/2.2/2.2-request-path/tests --impl vulnerable
 python3 -m pytest labs/2.2/2.2-request-path/tests --impl fixed
 ```
 
-Write the fail/pass pair next to the cache-key row. Reject a “check” that only greps `Cache-Control` without calling `cache_get` as company B. Paste nothing from answer keys.
+Call `cache_get` as company B. A `Cache-Control` header is the hop, not the other-tenant miss.
 
 ## Use it somewhere new
 
-Authenticated RSS or export CSV via CDN. A check that only asserts status 200 on `/export` is not cache-key evidence. A check against a live CDN is out of scope.
+Authenticated RSS or export CSV via CDN. Asserting status 200 on `/export` is not cache-key evidence. Do not run a check against a live CDN.
 
 ## What this page is not doing
 

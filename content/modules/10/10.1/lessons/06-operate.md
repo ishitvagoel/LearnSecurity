@@ -1,15 +1,15 @@
-# merge_blocked_no_tm without logging bodies
+# Block the merge without logging the threat-model body
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A new identity change can land after `merge_ok` was “fixed once.” Pair notice and recover. Do not log GitHub tokens or real org names (5.3). Do not paste private threat-model bodies into chat.
+A new identity change can merge with no threat-model id. GitHub tokens, real org names, and private threat-model bodies stay out of chat.
 
 ## Picture: missing threat-model id is a signal
 
-A blocked merge is a notice-and-recover problem, not a licence to quote the threat-model body in the paging channel. Notice names the change. Recover adds the threat-model id. Neither reprints the body.
+If merge is blocked, page the change id — not the threat-model body. Then add the missing threat-model id.
 
 ```mermaid
 flowchart TD
@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Stop[block merge]
 ```
 
-Industry lists name detect, respond, recover. They do not prove the design-review practice exists. They do not pick a GitHub product. A training-product name is not the rule. Someone still has to own the leftover.
+A GitHub CODEOWNERS file does not put `threat_model` on the change.
 
-Re-run `test_merge_requires_threat_model_id` after any merge-bot change. A green “CODEOWNERS required” tile is not that pytest. Stale TM-12 that never mentions OAuth is a 3.2 leftover — inventory it before you claim recover.
+No threat-model id still has to block merge in `test_merge_requires_threat_model_id`. Requiring CODEOWNERS does not put a threat-model id on the change. A stale TM-12 that never mentions OAuth is leftover from topic 3.2 — do not call the merge safe until that row exists.
 
 ## Signals that do not become a second leak
 
@@ -32,21 +32,19 @@ Re-run `test_merge_requires_threat_model_id` after any merge-bot change. A green
 | Recover | Add a threat-model id; re-run `merge_ok` |
 | Leftover | Stale threat models; docs exemptions; vanity ticket counts |
 
-GitHub’s audit log is not this lab’s trusted core. A maturity dashboard will show process scores and stay silent when CI’s `merge_ok` is always true. Detection must observe **empty change is deny**, not poster counts. If the alert includes a GitHub token, you have opened a secrets cell (5.3). If the alert includes the threat-model body, you have copied the model into the paging channel.
-
-A log line a reviewer can accept looks like:
+GitHub’s audit log is not this lab’s trusted core. Process scores on a maturity dashboard stay green while CI’s `merge_ok` is always true. Watch **empty change is deny**, not poster counts. A GitHub token is a secrets hole (5.3). A threat-model body copies the model into the ticket.
 
 ```text
 log_denied reason=merge_blocked_no_tm pr=123
 ```
 
-Not: a token, a real org name, a threat-model body, or “Gate 10 complete.”
+If the sample still has a token, a real org name, a threat-model body, or “Gate 10 complete,” the org name is already leaked.
 
 ## What the framework does vs what you still have to check
 
-The same always-true merge, stale TM-12, and docs exemptions that bypass this practice will also bypass a “scan our CODEOWNERS” detector. Name those places before you claim recover. A GitHub-product name is not the rule.
+Always-true merge, a stale TM-12, and docs exemptions still land without a threat-model id even if CODEOWNERS is green.
 
-Why it happens vs what it costs stays split here too: the **cause** is merge without a threat-model id; the **cost** is an identity surface that 3.2 never modelled; **how you stop it** is the truthy `threat_model` check; **how you notice** is `merge_blocked_no_tm`; **how you recover** is add a threat-model id and re-run `merge_ok`. What this alert cannot do: it does not prove TM-12 covers this change’s files, and it does not replace 3.2 authorship or 10.4 governance evidence.
+Merge without a threat-model id is why it broke. The damage is an identity surface that 3.2 never modelled. Put the truthy `threat_model` check in the path. Watch `merge_blocked_no_tm`. Recover by adding a threat-model id and re-running `merge_ok`. It does not prove TM-12 covers this change’s files, and it does not replace 3.2 authorship or 10.4 governance evidence.
 
 ## Can people still use it
 
@@ -54,18 +52,16 @@ A refused merge must say *why* (missing threat-model id), in words, not only “
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/10.1/10.1-lab`.
-
 ```text
 log_denied reason=merge_blocked_no_tm pr=123
 ```
 
-Reject any line that includes a token, a real org name, a threat-model body, or “Gate 10 complete.”
+A token, a real org name, a threat-model body, or “Gate 10 complete” should stay off this threat-model line.
 
 ## Use it somewhere new
 
-Clinic: block an identity change with no threat-model id; do not paste HIPAA training certificates into the ticket. Do not change a live org.
+Block an identity change with no threat-model id; do not paste HIPAA training certificates into the ticket. Do not change a live org.
 
 ## What this page is not doing
 
-A GitHub-product name is not the rule. Live-org traces are out of scope. Gate 10 and M4 stay not-attempted. An unverified “secure by design” page stays unverified. A later draft of the design-review guide stays a draft. Answer keys are not on this site.
+Do not run live-org traces. This page does not finish check-in 10 or milestone M4. An unverified “secure by design” page stays unverified. A later draft of the design-review guide stays a draft. Answer keys are not on this site.

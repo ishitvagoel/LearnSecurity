@@ -1,15 +1,15 @@
-# Fail on the broken files, then pass on the repaired ones
+# The broken files must fail when a look-alike site gets the password
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-“We use passkeys” is not evidence. “MFA is on” is a tool observation. The check is: `phishing_resistant("password", EVIL, REAL)` is false. That observation must be **false** on `--impl vulnerable` (the helper returns true) and **true** on `--impl fixed`.
+Saying you use passkeys does not stop a look-alike page. An MFA badge is a product. `phishing_resistant("password", EVIL, REAL)` has to be false. Leftover: a password at the look-alike origin still claims resistance. Repair returns false.
 
 ## Picture: broken files must fail: password at lookalike is true
 
-A check that only counts passing cases can pass while a password is still labeled resistant. This check asks whether a password counted as phishing-resistant still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A password can still be labeled resistant even when the suite is green.
 
 ```mermaid
 flowchart LR
@@ -17,9 +17,9 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass: origin-bound webauthn only"]
 ```
 
-If both pass, the check is not looking at password-at-lookalike. If both fail, the fix is not structural or the check is wrong.
+If the broken helper still passes, password-at-lookalike was never the failing assertion.
 
-## Four modes, even for a boolean
+## What the check has to show
 
 | Mode | Must show |
 |---|---|
@@ -28,14 +28,14 @@ If both pass, the check is not looking at password-at-lookalike. If both fail, t
 | Wrong origin | webauthn at the lookalike origin fails |
 | Not claimed | Live authenticators; who-is-allowed; recovery SMS; prompt bombing |
 
-The file is `labs/4.2/4.2-lab/tests/test_property.py`. `test_password_is_not_phishing_resistant` is a **what-must-not-happen** check: a password counted as phishing-resistant is not allowed to count as a passing control.
+Count a password as phishing-resistant and `test_password_is_not_phishing_resistant` has to stay red.
 
 ```text
 python3 -m pytest labs/4.2/4.2-lab/tests --impl vulnerable
 python3 -m pytest labs/4.2/4.2-lab/tests --impl fixed
 ```
 
-Map each check to a cell from the map page. If the broken files do not fail the password-at-lookalike assertion, the practice is miswired — fix the wiring, not the check. An environment error is not security evidence. WebAuthn Level 3 is still a Candidate Recommendation; this pair does not turn it into a finished Rec.
+Map each check to a rule from the map page. If the broken files do not fail the password-at-lookalike assertion, the practice is miswired — fix the wiring, not the check. A setup error is not proof the rule holds. WebAuthn Level 3 is still a Candidate Recommendation; this pair does not turn it into a finished Rec.
 
 | Slice | This practice |
 |---|---|
@@ -53,15 +53,13 @@ Map each check to a cell from the map page. If the broken files do not fail the 
 - That WebAuthn decides who may read a note
 - A later hardware bar as a silent baseline
 
-Record those as leftover risk or later topics, not as silent passes.
-
 ## Practice
 
-Run both implementations this session. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `webauthn` in HTML without calling `phishing_resistant` on the password / lookalike pair.
+Call `phishing_resistant` on the password / lookalike pair. A `webauthn` attribute in HTML is extra encoding.
 
 ## Use it somewhere new
 
-Clinic SSO. A check that only asserts HTTP 200 is not authenticator evidence. A check that loads a live identity provider is out of scope.
+HTTP 200 on SSO login is not authenticator evidence. Do not run a check that loads a live identity provider.
 
 ## What this page is not doing
 

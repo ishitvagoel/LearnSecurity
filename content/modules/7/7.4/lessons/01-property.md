@@ -9,9 +9,9 @@ The notes app can export after the web request is already over. Export still has
 
 > `exporter({"user_session": "alice", "service": None})` must be `None`. `exporter({"service": "worker-sc"})` may be `"worker-sc"`.
 
-What must not happen is **a leftover user session accepted as worker identity**. That is who the worker is allowed to be. It is also leftover Alice still exporting after delete-and-revoke (4.1).
+Overnight jobs still acting as leftover Alice is the identity mix-up. That is who the worker is allowed to be. It is also leftover Alice still exporting after delete-and-revoke (4.1).
 
-Industry lists want backend jobs logged in as their own short-lived service accounts, not leftover people. Those accounts should be small. After the worker is the worker, it may still need Alice’s grant (4.4) to choose *which* notes. That later check is **advanced** work. Do not collapse “the worker must not *be* Alice” with “the worker must still *check* Alice’s grant.”
+Backend jobs should log in as their own short-lived service accounts, not leftover people. Those accounts should be small. After the worker is the worker, it may still need Alice’s grant (4.4) to choose *which* notes. That later check is **advanced** work. Do not collapse “the worker must not *be* Alice” with “the worker must still *check* Alice’s grant.”
 
 ## Picture: HTTP subject versus worker principal
 
@@ -36,14 +36,14 @@ flowchart LR
 
 If the worker’s database role is god-mode (3.3), the deputy is worse: it can read every company.
 
-**The tool (not the rule):** an “internal” queue, a private network, a zero-trust product name, or signed broker messages.
+**A product name is not the rule:** an “internal” queue, a private network, a zero-trust product name, or signed broker messages.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | For this rule |
 |---|---|
 | Why it happens | Ambient user context in a system worker |
-| What has to be true first | `exporter({user_session: alice})` succeeds |
+| What's already wrong | `exporter({user_session: alice})` succeeds |
 | Trigger | Job with leftover session or inherited request context |
 | What it costs | User cookie drives privileged export; stale user still exports |
 | How you stop it | Jobs name `service=worker-sc`; workers authenticate as that principal |
@@ -54,15 +54,15 @@ If the worker’s database role is god-mode (3.3), the deputy is worse: it can r
 
 A task library can copy the request into the later job. FastAPI `Depends()` is gone once the HTTP worker returns. A message broker on a private network is still untrusted input (2.1).
 
-The app’s promise: leftover Alice is `None`; the named worker may run. The folder is `labs/7.4/7.4-lab`. Fake job dicts only. No live broker.
+Leftover Alice is `None`; the named worker may run — files in `labs/7.4/7.4-lab`. Fake job dicts only. No live broker.
 
 ## What the tool cannot do
 
 - A correctly named worker that is still a superuser database role (3.3).
 - Poison-message loops, and retries of revoked grants (2.4).
-- After the worker is `worker-sc`, it may still need Alice’s grant (4.4) to choose which notes — that later check is advanced work, not this pytest.
+- After the worker is `worker-sc`, it may still need Alice’s grant (4.4) to choose which notes — that later check is advanced work, not this check.
 - Broker access lists wait for 10.3.
-- A zero-trust architecture paper does not replace the pytest.
+- A zero-trust architecture paper does not replace the check.
 
 ## Can people still use it
 
@@ -77,12 +77,10 @@ python3 -m pytest labs/7.4/7.4-lab/tests --impl vulnerable
 python3 -m pytest labs/7.4/7.4-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
-Clinic batch-export worker. Outbox. Event schemas.
+A batch-export worker is this grain. Outbox and event schemas are sibling leftovers.
 
 ## What this page is not doing
 
-Live broker attacks, dumping task-library exploits into notes. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live broker attacks, dumping task-library exploits into notes. This site does not mark you as finished. Answer keys are not on this site.

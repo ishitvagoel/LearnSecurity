@@ -5,9 +5,9 @@
 
 ## Could someone else name the checks?
 
-“We rate-limit at the edge” is not this lesson. A map someone else can test names **the person**, **the window**, and **the cap**.
+The testable picture is **the person**, **the window**, and **the cap** — not “We rate-limit at the edge”.
 
-This week’s freeze: local `allow(n_calls)` with cap 3. No live traffic.
+`allow(n_calls)` with cap 3 — no live traffic.
 
 > A resource account is a count you can test. The fourth export in the lab window is denied. The first three may be allowed.
 
@@ -29,7 +29,7 @@ flowchart LR
   Impl --> Test[allow 4 is false]
 ```
 
-A wiki number is not the check. Someone else has to be able to name the pytest cases from your map.
+A wiki number is not the check. Someone else has to be able to name the checks from your map.
 
 ## Step 1: name the pieces
 
@@ -57,7 +57,7 @@ A missing “fourth export × deny” row is how an unbounded loop appears. Writ
 
 ## Practice
 
-Draw the budget so someone else could name the pytest cases. Point at `labs/6.7/6.7-lab` file `limit.py`. Fake counts only.
+Open `limit.py` under `labs/6.7/6.7-lab`. Fake counts only.
 
 ## Use it somewhere new
 
@@ -65,8 +65,8 @@ Notification fan-out. GraphQL aliases later in 7.1.
 
 ## What can still go wrong
 
-New accounts that reset the window. An owned burst exception with no owner. Human timing tricks (advanced, not this pytest).
+New accounts that reset the window. An owned burst exception with no owner. Human timing tricks (advanced, not this check).
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Do not run this map against a live clinic or a public host. Answer keys are not on this site.
+Do not run this map against a live clinic or a public host. Answer keys are not on this site.

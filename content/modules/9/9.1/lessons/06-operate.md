@@ -1,15 +1,15 @@
-# unmapped_req_blocks_release without logging bodies
+# Block the release without logging notes
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A new requirement can land without a test after `covered` was “fixed once.” Pair notice and recover. Do not log note bodies or company dumps from the failing test (3.1). Do not attach patient rows to the ticket.
+A new requirement can land with no isolation test attached. Skip failing-test note bodies, company dumps, and patient rows in the ticket.
 
 ## Picture: uncovered AUTHZ-1 is a signal
 
-An unmapped requirement is a notice-and-recover problem, not a licence to quote the note in the paging channel. Notice names the requirement. Recover adds the isolation test. Neither reprints the body.
+If a requirement has no isolation test, page the requirement id — not the requirement text. Then add the isolation test.
 
 ```mermaid
 flowchart TD
@@ -18,9 +18,9 @@ flowchart TD
   Metric --> Stop[block release]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a governance product. They do not prove this requirement is covered. Someone still has to own the leftover.
+Importing a governance catalog does not attach an isolation test to AUTHZ-1.
 
-Re-run `test_status_only_row_is_not_coverage` after any matrix change. A green “checklist imported” tile is not that pytest. Mobile storage rows (8.2) are other requirements of the same check — inventory them before you claim recover. A 200-only test that someone flagged `asserts_isolation` by mistake is a later lying-flag leftover (9.3), not a silent pass.
+A status-only row with no isolation test still has to fail `test_status_only_row_is_not_coverage`. Importing a checklist does not attach an isolation test. Mobile storage rows (8.2) still need an isolation test; a checklist tick does not cover AUTHZ-1. A 200-only test that someone flagged `asserts_isolation` by mistake is a later lying-flag leftover (9.3), not a silent pass.
 
 ## Signals that do not become a second leak
 
@@ -32,40 +32,36 @@ Re-run `test_status_only_row_is_not_coverage` after any matrix change. A green �
 | Recover | Add the isolation test; do not backfill done |
 | Leftover | Unnamed extra advanced rows; exceptions (E6); 9.3 lying flags |
 
-A tracker dashboard will show Done and stay silent when AUTHZ-1 still has `asserts_isolation: False`. Detection must observe **status-only is not covered**, not issue count. If the alert includes note bodies from the isolation test, you have opened the same leak as a log line (3.1).
-
-A log line a reviewer can accept looks like:
+Tracker Done does not mean AUTHZ-1 has `asserts_isolation` true. Score **status-only is not covered**, not issue count. Note bodies from the isolation test next to a status-only row are a log-line leak (3.1).
 
 ```text
 log_denied reason=unmapped_req_blocks_release req=AUTHZ-1 release=rel_91e
 ```
 
-Not: a note body, a patient name, or a live checklist portal trace.
+The requirement example is already in the sample if it still has a note body, a patient name, or a live checklist portal trace.
 
-If your alert includes the matching note, you have copied the leak into the paging channel.
+The coverage ticket needs the requirement id, not another copy of the example note.
 
 ## What the framework does vs what you still have to check
 
-The same HTTP-200 tests, unnamed extra rows, and expired exceptions that bypass this practice will also bypass a “scan our Done column” detector. Name those places before you claim recover. A governance-product name is not the rule.
+HTTP-200 tests, unnamed extra rows, and expired exceptions still look Done without an isolation test.
 
 ## Can people still use it
 
-A human exception path must say what is still uncovered and when it expires. Do not hide the gap behind “see PDF.” If operators see an unmapped-requirement badge, do not encode it as color only.
+A human exception path must say what is still uncovered and when it expires. An unmapped-requirement badge still has to be words, not a PDF shrug. If operators see an unmapped-requirement badge, do not encode it as color only.
 
 ## Practice
-
-Write one log line you would accept in review. Tie it to `labs/9.1/9.1-lab`.
 
 ```text
 log_denied reason=unmapped_req_blocks_release req=AUTHZ-1 release=rel_91e
 ```
 
-Reject any line that includes a note body, a live checklist portal trace, or “verification gate complete.”
+A note body, a live checklist portal trace, or “verification gate complete” should stay off this coverage line.
 
 ## Use it somewhere new
 
-Clinic: block a release when the HIPAA “done” column has no isolation test; do not attach patient rows to the ticket. Do not scrape a live governance product.
+Block a release when the HIPAA “done” column has no isolation test; do not attach patient rows to the ticket. Do not scrape a live governance product.
 
 ## What this page is not doing
 
-A governance-product name is not the rule. Live portal traces are out of scope. The verification gate stays not-attempted. Answer keys are not on this site.
+Do not use live portal traces. This page does not finish the verification check-in. Answer keys are not on this site.

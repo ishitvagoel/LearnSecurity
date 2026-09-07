@@ -3,9 +3,9 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A missed GraphQL path, a stale grant, or a worker can still release n2 after `can_read` was “fixed once.” Pair notice and recover. Do not log note bodies. Do not paste a personal email into the ticket.
+A missed GraphQL path, a stale grant, or a worker can still release n2. Skip personal emails and note bodies in the ticket.
 
 ## Picture: a deny is a signal, not a page footer
 
@@ -24,11 +24,11 @@ flowchart TD
 | Recover | Take back leftover flags; re-run the table on search/export |
 | Leftover | An honest grant on n1 still reveals n1 |
 
-Industry lists name detect, respond, recover. They do not key the grant. They do not prove the data-item check. A log-product name is not the rule. Re-run `test_grant_on_n1_is_not_grant_on_n2` after any path change; a green “roles enabled” tile is not that pytest. Search, export, and GraphQL `node(id)` are other paths of the same cell — inventory them before you claim recover.
+A vendor name does not key the grant or prove the data-item check. Bob with only n1 still has to fail `test_grant_on_n1_is_not_grant_on_n2` on n2. Enabling roles does not keep n2 off bob's grant. Search, export, and GraphQL `node(id)` still treat an n1 grant as n2 unless those paths are keyed too.
 
 ## What the framework does vs what you still have to check
 
-A network filter will page on 403 rate and stay silent when search still returns n2. Notice must observe **object-keyed deny**, not HTTP status counts. If the alert includes a note body, you have opened a logging cell from an earlier topic.
+403-rate paging is silent on search still returning n2. Key off **object-keyed deny**, not HTTP status counts. A note body on the object-keyed deny is a logging hole from an earlier topic.
 
 ## Can people still use it
 
@@ -36,18 +36,16 @@ If a human sees “access denied,” announce it in text a screen reader can spe
 
 ## Practice
 
-Write one log line you would accept. Tie it to `labs/4.4/4.4-lab`.
-
 ```text
 log_denied reason=authz_deny tenant=acme object_id=n2 user_id=bob request_id=req_44ac
 ```
 
-Reject any line that includes a note body, a personal email, or “IDOR handled.”
+A note body, a personal email, or “IDOR handled” already spoils the log.
 
 ## Use it somewhere new
 
-Clinic: notice chart-id swaps; do not paste the chart into the ticket. Do not hit a live clinic system.
+Notice chart-id swaps; do not paste the chart into the ticket. Do not hit a live clinic system.
 
 ## What this page is not doing
 
-A log-product name is not the rule. Live company dumps are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live company dumps. This site does not mark you as finished. Answer keys are not on this site.

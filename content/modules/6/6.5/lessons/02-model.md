@@ -5,9 +5,9 @@
 
 ## Could someone else name the checks?
 
-“We only allow HTTPS” is not this lesson. A map someone else can test names **scheme**, **host**, and **destinations that must deny**.
+Until you have **scheme**, **host**, and **destinations that must deny**, “We only allow HTTPS” is still a slogan.
 
-This week’s freeze for the notes app: local `allowed(url)`. No live fetches.
+`allowed(url)` — no live fetches.
 
 > Parse the URL. Require https. Require the hostname in a small allow-list. Link-local metadata and loopback must deny.
 
@@ -59,7 +59,7 @@ A missing “link-local metadata × fetch × deny” row is how a scheme-only ch
 
 ## Practice
 
-Draw parse → host → allow-list so someone else could name the pytest cases. Point at `labs/6.5/6.5-lab` file `ssrf.py`. Fake URLs only. Do not fetch.
+Draw on `ssrf.py` under `labs/6.5/6.5-lab`. Fake URLs only. Do not fetch.
 
 ## Use it somewhere new
 
@@ -71,4 +71,4 @@ DNS rebinding; IPv6; `file:`; telling the person they are leaving the site (adva
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Do not run this map against a live clinic or a live metadata service. Answer keys are not on this site.
+Do not run this map against a live clinic or a live metadata service. Answer keys are not on this site.

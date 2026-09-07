@@ -5,15 +5,13 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic booking** API. A JSON object (REST) and a GraphQL variable map can both carry `patient_id`. Duplicate keys, aliased fields, or a proxy that re-encodes Unicode can make the ACL patient disagree with the stored patient.
-
-Do not answer with a famous-bugs list or a scanner as the definition of security.
+You get a **clinic booking** API. A JSON object (REST) and a GraphQL variable map can both carry `patient_id`. Duplicate keys, aliased fields, or a proxy that re-encodes Unicode can make the ACL patient disagree with the stored patient.
 
 ## Picture: each grammar is a reader
 
-Renaming `"tenant"` to `patient_id` is not transfer. Person, object, path, and leftover change. Two grammars are two readers. Who-is-allowed still runs after one meaning exists.
+`patient_id` is the `"tenant"` key in both grammars. Two grammars are two readers. Who-is-allowed still runs after one meaning exists.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Poster sending a note | Someone who can POST or query an appointment |
 | `"tenant"` on a JSON note | `patient_id` on REST and on GraphQL variables |
@@ -31,16 +29,14 @@ flowchart TD
   Ok -->|yes| AuthZ[Still a who-is-allowed decision]
 ```
 
-## Prompt — clinic REST and GraphQL
+## Write this for a clinic REST and GraphQL
 
 GraphQL and REST both ingest the same clinic appointment.
 
-Rewrite the notes-app sentence for this product. Your answer must include:
-
-- who can act (who can POST or query);
+- who might try (who can POST or query);
 - what you trust (which reader is trusted; the client is not);
 - what must not happen (disagreement, not “injection”);
-- a check idea that would fail if the rule were false (local practice only);
+- REST and GraphQL must agree on `patient_id` in **local** practice (no live clinic API);
 - leftover risk (honest unique keys still need authorization; coercion/support paths if a person confirms);
 - whether a human path must meet the web accessibility baseline (only if a person must finish a control; parser disagreement itself is not an accessibility problem).
 
@@ -53,14 +49,14 @@ Rewrite the notes-app sentence for this product. Your answer must include:
 | A live-target plan or real patient ids | Course rules |
 | “Sanitize quotes” as the structural fix | Wrong slice |
 
-If REST “looks unique” while GraphQL variables keep two `patient_id` aliases, the cell is gone. A WAF quote filter and a JSON-spec citation do not put one meaning into both grammars. The clinic rewrite still has to keep the notes-app fork: CLEAN unique keys may accept, messy keys refuse or agree. The local analogue is `test_duplicate_tenant_keys_are_one_meaning` — on a practice object, not a live health record.
+If REST “looks unique” while GraphQL variables keep two `patient_id` aliases, the rule is gone. A WAF quote filter and a JSON-spec citation do not put one meaning into both grammars. CLEAN unique keys may accept, messy keys refuse or agree. The local analogue is `test_duplicate_tenant_keys_are_one_meaning` — on a practice object, not a live health record.
 
-A diagram of grammars is a later architecture bar. It is not this check.
+A diagram of grammars is a later architecture bar. It does not make duplicate keys one meaning.
 
 ## Practice
 
-One page. No keys. The practice `labs/2.1/2.1-parser-boundaries` stays the only running system you may break. Multipart filename encoding (two readers on the same bytes) is an acceptable alternate sketch pointing at a later upload topic — still local, still fake data.
+Show two readers on the same bytes. Keep the answer keys closed. The practice `labs/2.1/2.1-parser-boundaries` stays the only running system you may break. Multipart filename encoding (two readers on the same bytes) is an acceptable alternate sketch pointing at a later upload topic — still local, still fake data.
 
 ## What this page is not doing
 
-Real clinics, real patient identifiers, live GraphQL targets.
+Do not use real clinics, real patient identifiers, live GraphQL targets.

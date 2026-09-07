@@ -1,31 +1,29 @@
-# Review Report-Only-as-on like a pull request
+# Would you merge this Report-Only-as-on?
 
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
-
 ## What you are reviewing
 
-A colleague ships the notes app’s header middleware. Review `labs/E2/e2-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether Report-Only still makes `isolation_enforced` true, compare that with the rule, and write changes a developer can verify.
+Open `labs/E2/e2-lab/vulnerable/` as header middleware. Does Report-Only still make `isolation_enforced` true?
 
-The check you already ran (`test_report_only_is_not_enforcement`) is the rule check. A comment “we should enforce later” is not.
+“We should enforce later” does not close `test_report_only_is_not_enforcement`.
 
 ## Picture: Report-Only counted as on
 
-Start with this seeded smell: **Report-Only counted as on**. Label it **rule**, **tool**, or **false comfort** before you accept the change.
+**Report-Only counted as on**.
 
 ```mermaid
 flowchart TD
   Claim[Change claim] --> Q{"What would prove it false?"}
   Q -->|Report-Only counts| Property["Rule - good if tested"]
   Q -->|Helmet added| Mechanism[Tool - library]
-  Q -->|dashboard green| False[False comfort]
+  Q -->|dashboard green| False[False assurance]
 ```
 
-Classification starts at the protected effect (Report-Only is not enforcement). Everything that is not the enforcing header name at that call is a candidate always-on path. A dashboard screenshot without that pytest is the same smell, not a different finding class.
+Report-Only is not enforcement. If the change never uses the enforcing header name, that always-on leftover is still open. A dashboard screenshot does not replace that check.
 
-Encoding is 6.2. CDN strip is 2.2. Do not skip `test_report_only_is_not_enforcement`. Do not claim check-in 7. Do not load a live page to prove the finding.
+Encoding is 6.2. CDN strip is 2.2. Do not claim check-in 7. Do not load a live page to prove the finding.
 
 ## Problems to find (name them yourself)
 
@@ -34,24 +32,20 @@ Encoding is 6.2. CDN strip is 2.2. Do not skip `test_report_only_is_not_enforcem
 - Trusted Types claimed as encoding
 - Edge cache stripping CSP
 
-Also reject: a live script hunt; shipping without re-running `test_report_only_is_not_enforcement`; keys in learner notes; claiming check-in 7; presenting the current content-security spec as final.
+Also reject: a live script hunt; shipping without re-running `test_report_only_is_not_enforcement`; keys in learner notes; treating this CSP lesson as check-in 7; presenting the current content-security spec as final.
 
 ## Common mix-ups this topic refuses
 
 - Report-Only is isolation
 - Helmet defaults are the guarantee
-- A content-security policy replaces encoding
+- A Report-Only header is the encode check
 - A green reporting dashboard is encoding (6.2)
 - Trusted Types is encoding
 
-## Practice
-
-Write three review notes a peer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_report_only_is_not_enforcement`. Do not open the keys file.
-
 ## Use it somewhere new
 
-A clinic change that “added Report-Only and a dashboard” without an enforcing header is an incomplete isolation review. Name the independent falsehood that would still keep Report-Only from counting as on.
+Report-Only plus a dashboard, without an enforcing header, does not isolate. A green dashboard is not an enforcing header — write the Report-Only deny.
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will enforce later.” That comment is leftover without an owner. Do not load a public page to prove the finding.
+Report-Only counted as on, plus “will enforce later,” is still a header nobody owns. Do not load a public page to prove the finding.

@@ -1,15 +1,15 @@
-# Fail on the broken files, then pass on the repaired ones
+# The broken files must fail an approved eval
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-“We always approve after continuous integration” is not evidence. “The formatter passed” is a tool observation. The check is: `review_ok("x = eval(user)")` is false and `review_ok("x = int(user)")` may be true. The eval-approve observation must be **false** on `--impl vulnerable` (returns true) and **true** on `--impl fixed`. Do not run eval on live input.
+Approving because continuous integration passed does not reject `eval`. A formatter pass is style. `review_ok("x = eval(user)")` has to be false, and `review_ok("x = int(user)")` may be true. Vulnerable path: the eval line still returns true. Repair refuses `eval(` in the diff. Do not run eval on live input.
 
 ## Picture: broken must fail eval-approve
 
-A test that only counts passing cases can pass while eval on user input is still approved. This check asks whether always-true `review_ok` still counts as a passing control. Broken must fail that question. Repaired must pass it.
+Eval on user input can still be approved even when other tests pass.
 
 ```mermaid
 flowchart LR
@@ -17,53 +17,44 @@ flowchart LR
   X["repaired files --impl fixed"] --> P["Must pass: reject eval"]
 ```
 
-If both pass, the test is not looking at eval-on-user. If both fail, the fix is not structural or the check is wrong.
+If the broken review still passes, eval-on-user was never rejected.
 
-## Four modes, even for one review helper
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
 | Normal | Honest `int(user)` may approve (`test_honest_diff_without_eval_may_pass`; may pass on both) |
 | Wrong input / abuse | `eval(user)` is not approved; broken files must fail |
 | Failure | If you cannot tell whether the diff grants an interpreter, reject |
-| Not claimed | complete oracle; other expression languages; live GitHub; `exec(` |
+| Not claimed | complete check; other expression languages; live GitHub; `exec(` |
 
-The file is `labs/9.2/9.2-lab/tests/test_property.py`. The test `test_eval_on_user_input_is_rejected` is a **what-must-not-happen** test: always-true `review_ok` is not allowed to count as a passing control. Do not add a working eval payload to “make the test more real.” The lab string `x = eval(user)` is enough.
+Approving `eval(` has to fail `test_eval_on_user_input_is_rejected`. Do not add a working eval payload to “make the test more real.” The lab string `x = eval(user)` is enough.
 
-A test that only greps `eval` in a policy PDF without calling `review_ok("x = eval(user)")` is not this topic’s evidence. This practice never runs eval on live input.
+An `eval` mention in a policy PDF is not `review_ok("x = eval(user)")`. This practice never runs eval on live input.
 
 ```text
 python3 -m pytest labs/9.2/9.2-lab/tests --impl vulnerable
 python3 -m pytest labs/9.2/9.2-lab/tests --impl fixed
 ```
 
-Honest diffs without eval may pass on both implementations. That does not excuse the eval-reject test. If the broken files do not fail `test_eval_on_user_input_is_rejected`, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
+A diff that never calls eval is the honest path. Reject eval on a user string. If the broken files do not fail `test_eval_on_user_input_is_rejected`, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
 - That `exec(` is rejected
 - That generated code is reviewed (later elective)
 - That later review bots are honest
-- That the substring is a complete avoid-eval oracle
-- That a course gate is done
-
-Record those as leftover or later topics, not as silent passes.
+- That the substring is a complete avoid-eval check
+- That this page finished a check-in
 
 ## Practice
 
-Run both this session from the lab directory if needed:
-
-```text
-python3 -m pytest labs/9.2/9.2-lab/tests --impl vulnerable
-python3 -m pytest labs/9.2/9.2-lab/tests --impl fixed
-```
-
-Paste nothing from answer keys. Write fail/pass into your notes next to the matrix row. Reject a “test” that only greps `eval` in a policy PDF without calling `review_ok("x = eval(user)")`.
+Call `review_ok("x = eval(user)")`. An `eval` mention in a policy PDF is a warning, not a reject.
 
 ## Use it somewhere new
 
-Clinic: a review that only asserts “template still renders” is not this check. Live GitHub and weaponized eval are out of scope.
+A template that still renders is style, not `review_ok` on eval. Do not use live GitHub or weaponized eval.
 
 ## What this page is not doing
 
-Do not add a live-org trophy. Do not log eval payloads. Answer keys are not on this site. This site does not mark you as finished.
+A live org screenshot is not `review_ok` rejecting eval. Do not log eval payloads. Answer keys are not on this site. This site does not mark you as finished.

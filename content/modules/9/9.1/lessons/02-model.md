@@ -5,11 +5,11 @@
 
 ## Could someone else name the checks?
 
-“We imported the checklist” is not this lesson. A drawing someone else can test names **the threat, the requirement id, the test id, and the isolation assert**.
+Until you have **the threat, the requirement id, the test id, and the isolation assert**, “We imported the checklist” is still a slogan.
 
-This week’s freeze for the notes app: local `covered(req_id, tests)`. No live trackers.
+`covered(req_id, tests)` — no live trackers.
 
-> For AUTHZ-1, a status-only row is deny. A row that asserts isolation may count. Evidence that the deny is false: `covered("AUTHZ-1", [{"req": "AUTHZ-1", "asserts_isolation": False}])` returns true.
+> For AUTHZ-1, a status-only row is deny. A row that asserts isolation may count. The leak shows up as: `covered("AUTHZ-1", [{"req": "AUTHZ-1", "asserts_isolation": False}])` returns true.
 
 If the threat × test row is blank, the checkbox looks finished because nobody named the check.
 
@@ -35,7 +35,7 @@ The usual checklist is the living matrix. An extra advanced row is still a named
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the isolation rule you already have and ask which test would show it is false.
+Take the isolation rule you already have and ask which test would show it is false.
 
 | Piece | This system |
 |---|---|
@@ -57,15 +57,15 @@ Do not invent a new catalogue. Take the isolation rule you already have and ask 
 | Wholesale checklist paste | matrix | treat as tailored | deny |
 | Unnamed extra advanced row | permission-change-immediate | count as done | deny |
 
-A missing isolation-assert cell is how a done checkbox becomes false comfort. Write the hole.
+A missing isolation-assert cell is how a done checkbox becomes false assurance. Write the hole.
 
 ## Practice
 
-Draw the chain so someone else could name the checks. Point at `labs/9.1/9.1-lab` file `trace.py`.
+Mark `trace.py` under `labs/9.1/9.1-lab`.
 
 ## Use it somewhere new
 
-The mobile storage row from 8.2: same check, different catalogue.
+The mobile storage row from 8.2: same check, different list.
 
 ## What can still go wrong
 
@@ -73,4 +73,4 @@ Unmapped extra advanced rows. Expired exceptions. HTTP-200 tests that match the 
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

@@ -3,11 +3,11 @@
 **Kind:** design-exercise
 **Loop step:** 2 Model
 
-## Could someone else name pytest cases from your channel map?
+## Could someone else name the checks from your channel map?
 
-“We use HttpOnly” is not this page. A reviewable map names **query / cookie / header**, **who sees each**, and **deny on query**.
+Until you have **query / cookie / header**, **who sees each**, and **deny on query**, “We use HttpOnly” is still a slogan.
 
-This week’s freeze: local `session_from_request(query, cookie, header)`. Fake token `secret`. No live CDN.
+`session_from_request(query, cookie, header)` — Fake token `secret`. No live CDN.
 
 ## Picture: who can read the channel
 
@@ -30,7 +30,7 @@ flowchart LR
 
 How you sign the token is a later lesson. Which channel carries it is this page.
 
-## Step 1: freeze who, what, and time
+## Step 1: name who, what, and when
 
 | Piece | This system |
 |---|---|
@@ -54,7 +54,7 @@ How you sign the token is a later lesson. Which channel carries it is this page.
 
 ## Practice
 
-Draw this map so someone else could name pytest cases. Point at `labs/4.3/4.3-lab` file `token.py`.
+Label `token.py` under `labs/4.3/4.3-lab`.
 
 ## Use it somewhere new
 
@@ -66,4 +66,4 @@ First-party Referer; a screenshot of a cookie is out of scope here.
 
 ## What this page is not doing
 
-Treating an awareness list as the definition of security. Answer keys are not on this site.
+Naming “session fixation” does not stop `?token=` from minting a session. Answer keys are not on this site.

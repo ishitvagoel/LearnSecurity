@@ -1,15 +1,15 @@
-# Fail on the broken files, then pass on the repaired ones
+# A broken crash report must fail the check
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-“We filled in the store’s privacy form” is not evidence. “The crash product uses HTTPS” is a tool observation. The check is: `'secret' not in str(crash_report("secret"))` and an honest crash still has a `stack` key. That body-absent observation must be **false** on the broken files and **true** on the repaired files. Do not call a crash vendor.
+A filled-in store privacy form does not strip `secret` from the crash body. HTTPS to the crash product is a hop. `'secret'` must not appear in `str(crash_report("secret"))`, and an honest crash still has a `stack` key. On the broken helper, the body is still in the report. Repair keeps `'secret'` out of the crash payload. Do not call a crash vendor.
 
 ## Picture: a broken crash report must fail the check
 
-A test that only counts passing tests can pass while the body is still in the report. This check asks whether a confidential field in this crash JSON still counts as a passing control. Broken must fail that question. Repaired must pass it.
+The crash report can still hold the body even when tests pass.
 
 ```mermaid
 flowchart LR
@@ -17,27 +17,27 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: omit body]
 ```
 
-If both pass, the test is not looking at the body substring. If both fail, the fix is not structural or the check is wrong.
+If the broken crash report still passes, the body substring was never redacted.
 
-## Four modes, even for a crash dict
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
 | Normal | Honest crash still has a `stack` key (may pass on both) |
 | Wrong input | `'secret'` not in `str(crash_report('secret'))`; broken files must fail |
-| Abuse | Unsure values are not attached (fail closed; leftover if not in this pytest) |
+| Abuse | Unsure values are not attached (leftover if not in this check) |
 | Not claimed | A real crash console; the public store; screenshot pipelines; vendor DLP |
 
-The file is `labs/8.5/8.5-lab/tests/test_property.py`. The test `test_crash_report_omits_note_body` is a **what-must-not-happen** test: a report that includes the body is not allowed to count as a passing control.
+`test_crash_report_omits_note_body` watches for a report that still includes the body.
 
-Honest stack-present may pass on both implementations. That does not excuse the body-omit test. If the broken files do not fail `test_crash_report_omits_note_body`, the lab is miswired — fix the wiring, not the assertion.
+Keep a crash report that only proves the stack is present. Omit the body. If the broken files do not fail `test_crash_report_omits_note_body`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/8.5/8.5-lab/tests --impl vulnerable
 python3 -m pytest labs/8.5/8.5-lab/tests --impl fixed
 ```
 
-A test that only greps a crash product name in Gradle without calling `crash_report("secret")` is not this topic's evidence. This practice never opens a live crash project.
+A crash-product name in Gradle is not `crash_report("secret")`. This practice never opens a live crash project.
 
 ## What the tests do not prove
 
@@ -48,23 +48,14 @@ A test that only greps a crash product name in Gradle without calling `crash_rep
 - Last-chance error handlers (an advanced extra)
 - Web crash reports (10.5)
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
-Run both this session from the lab directory if needed:
-
-```text
-python3 -m pytest labs/8.5/8.5-lab/tests --impl vulnerable
-python3 -m pytest labs/8.5/8.5-lab/tests --impl fixed
-```
-
-Paste nothing from answer keys. Write fail/pass into your notes next to the body×crash row. Reject a “test” that only greps a crash product name without calling `crash_report("secret")`.
+Call `crash_report("secret")`. A crash-product name in Gradle is inventory.
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts “crash dialog shown” is not this topic. A test that only asserts HTTP 200 is the wrong observation. A live web-crash call is out of scope.
+A shown crash dialog is not a redacted body. HTTP 200 is the hop. Do not make a live web-crash call.
 
 ## What this page is not doing
 
-Do not add a live crash trophy. Do not log note bodies. Answer keys are not on this site.
+A live crash screenshot is not a redacted report body. Do not log note bodies. Answer keys are not on this site.

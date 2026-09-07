@@ -1,15 +1,15 @@
-# Fail on the broken files, then pass on the repaired ones
+# A Base64 round-trip must fail the check
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-“We use AES” is not evidence. “Column is bytea” is a tool observation. The check is: Base64 decode of `protect("secret")` is not `"secret"`, and `looks_encrypted` is true on the repaired stand-in. That observation must be **false** on the broken files (decode equals secret) and **true** on the repaired files.
+Naming AES in a comment does not encrypt the body. A `bytea` column type is storage. Base64 decode of `protect("secret")` must not be `"secret"`, and `looks_encrypted` has to be true on the repaired stand-in. Broken: decode still equals secret. Repair keeps decode from matching the body.
 
 ## Picture: Base64 round-trip must fail the check
 
-A passing collection count is not this cell. The failing observation on the broken files is **Base64 round-trip**.
+A green tally of passing tests is not the Base64 check. The failing observation on the broken files is **Base64 round-trip**.
 
 ```mermaid
 flowchart LR
@@ -17,9 +17,9 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: not reversible]
 ```
 
-If both pass, the test is not looking at Base64 decode of `protect("secret")`. If both fail, the fix is not structural or the check is wrong.
+If the broken protect still passes, you never decoded `protect("secret")` as Base64.
 
-## Four modes, even for one field
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,41 +28,32 @@ If both pass, the test is not looking at Base64 decode of `protect("secret")`. I
 | Failure | If the library is missing, refuse the write — do not store plaintext |
 | Not claimed | Real AES-GCM; key storage; nonce uniqueness |
 
-The file is `labs/5.2/5.2-lab/tests/test_property.py`. The test `test_protect_is_not_mere_encoding` is a **what-must-not-happen** test: reversible encoding is not allowed to count as a passing control.
+`test_protect_is_not_mere_encoding` stays red on reversible encoding.
 
-A test that only greps `AES` in a comment without decoding `protect("secret")` is not this topic's evidence. This practice never opens a live column.
+An `AES` comment is not a decode of `protect("secret")`. This practice never opens a live column.
 
 ```text
 python3 -m pytest labs/5.2/5.2-lab/tests --impl vulnerable
 python3 -m pytest labs/5.2/5.2-lab/tests --impl fixed
 ```
 
-`test_protect_does_not_return_plaintext` may pass on both if the broken files already Base64. That does not excuse the round-trip test. If the broken files do not fail Base64 decode, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
+Do not let `test_protect_does_not_return_plaintext` hide the leftover. Fail a round-trip decode. If the broken files do not fail Base64 decode, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
 - Key lifecycle (later)
 - TLS (later)
-- A post-quantum plan (advanced; not this pytest)
-- Nonce uniqueness (advanced; not this pytest)
+- A post-quantum plan (advanced; not this check)
+- Nonce uniqueness (advanced; not this check)
 - A production AES-GCM implementation
-
-Record those as leftover or later topics, not as silent passes.
 
 ## Practice
 
-Run both this session:
-
-```text
-python3 -m pytest labs/5.2/5.2-lab/tests --impl vulnerable
-python3 -m pytest labs/5.2/5.2-lab/tests --impl fixed
-```
-
-Paste nothing from answer keys. Write fail/pass into your notes next to the matrix row. Reject a “test” that only greps `AES` in a comment without decoding `protect("secret")`.
+Decode `protect("secret")`. An `AES` comment is a name, not ciphertext.
 
 ## Use it somewhere new
 
-Clinic SSN. A test that only asserts the column is non-null is not secrecy evidence. A test that decodes a live clinic column is out of scope.
+A non-null SSN column is not secrecy evidence. Do not run a test that decodes a live clinic column.
 
 ## What this page is not doing
 

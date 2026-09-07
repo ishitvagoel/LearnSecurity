@@ -3,9 +3,9 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A recovery SMS, a shared password, or a stolen authenticator can still mint a session after the helper was “fixed once.” Pair notice and recover. Do not log passwords, OTP, or note bodies. Do not paste a staff password into the ticket.
+A recovery SMS, a shared password, or a stolen authenticator can still mint a session. Do not write passwords, OTP, note bodies, or staff passwords into the ticket.
 
 ## Picture: origin mismatch, then revoke
 
@@ -17,7 +17,7 @@ flowchart TD
   Alert --> Revoke[Revoke sessions if a password was used]
 ```
 
-Industry lists name detect, respond, recover. They do not bind RP ID. They do not pick a log product. Someone still has to own the leftover.
+A log product does not bind RP ID.
 
 ## Signals that do not become a second leak
 
@@ -28,9 +28,9 @@ Industry lists name detect, respond, recover. They do not bind RP ID. They do no
 | Recover | Revoke sessions; force a re-bind |
 | Leftover | Password-only users; honest labeled leftover |
 
-A log-product name is not the rule. A green “MFA enabled” tile is not that pytest. Re-run `test_password_is_not_phishing_resistant` after any login-copy change. Origin-mismatch WebAuthn and password-at-lookalike are two observations of the same claim: do not close one without retesting the other.
+Turning MFA on does not make a password phishing-resistant. A password at a lookalike still has to fail `test_password_is_not_phishing_resistant`. Origin-mismatch WebAuthn and password-at-lookalike are two observations of the same claim: do not close one without retesting the other.
 
-An identity-provider dashboard will show “2FA enrolled” and stay silent when the login banner still says “phishing-resistant password.” Notice must look at the **helper boolean**, not the vendor tile. If the alert includes a password, you have opened a second leak.
+“2FA enrolled” on the identity-provider tile can hide a login banner that still says “phishing-resistant password.” Read the **helper boolean**, not the vendor tile. A password on the helper-boolean metric is a second leak.
 
 | Slice | This practice |
 |---|---|
@@ -41,17 +41,15 @@ An identity-provider dashboard will show “2FA enrolled” and stay silent when
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/4.2/4.2-lab`. Example shape (fake ids only):
-
 ```text
 log_denied reason=not_phishing_resistant method=password origin_class=mismatch request_id=req_42pr
 ```
 
-Reject any line that includes a password, OTP, note body, or “MFA handled.”
+A password, OTP, note body, or “MFA handled” in that log is a leak before anyone pages.
 
 ## Use it somewhere new
 
-Clinic: notice lookalike SSO; do not paste the staff password into the ticket. Do not visit a live lookalike.
+Notice lookalike SSO; do not paste the staff password into the ticket. Do not visit a live lookalike.
 
 ## A usable leftover
 
@@ -59,4 +57,4 @@ Do not encode “phishing-resistant” as green-only. Keyboard users still need 
 
 ## What this page is not doing
 
-A log-product name is not the rule. Live phishing hunts are out of scope. Answer keys are not on this site.
+Do not use live phishing hunts. Answer keys are not on this site.

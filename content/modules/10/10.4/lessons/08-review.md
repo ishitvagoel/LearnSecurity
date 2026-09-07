@@ -1,40 +1,38 @@
-# Review always-true boot_ok like a pull request
+# Would you merge this always-true boot_ok?
 
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
-
 ## What you are reviewing
 
-A colleague ships the notes app’s compose boot check. Review `labs/10.4/10.4-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `boot_ok("prod", True)` still returns true, compare that with the rule, and write changes a developer can verify.
+The files in `labs/10.4/10.4-lab/vulnerable/` are the boot-check change. Does `boot_ok("prod", True)` still return true?
 
-Start at `boot_ok` and the prod-plus-debug pair, not at a scanner color or a `NODE_ENV` screenshot. The check you already ran (`test_prod_debug_must_not_boot`) is the rule test. A comment “will turn debug off later” is not.
+Open `boot_ok` and the prod-plus-debug pair. A `NODE_ENV` screenshot is the wrong starting place. Writing “will turn debug off later” does not make `test_prod_debug_must_not_boot` pass.
 
 ## Picture: boot_ok true on prod plus debug
 
-Start with this seeded smell: **`boot_ok` true on prod plus debug**. Label it rule, tool, or false comfort before you accept the change.
+**`boot_ok` true on prod plus debug**.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|prod debug boots| Property["Rule - good if tested"]
   Q -->|NODE_ENV production| Mechanism[Tool - string]
-  Q -->|canary 10 percent| False[False comfort]
+  Q -->|canary 10 percent| False[False assurance]
 ```
 
-Classification starts at the protected effect (prod plus debug denied). Everything that is not the both-at-once check at that call is a candidate always-boot path. A `NODE_ENV` screenshot without that pytest is the same smell, not a different finding class.
+Prod plus debug still has to be denied. If the change never checks both at once, that always-boot path is still open. A `NODE_ENV` screenshot does not replace that check.
 
-Feature flags are leftover you still have to trust. Admin bound to all interfaces is leftover in the same family (docs and monitoring pages). Do not skip `test_prod_debug_must_not_boot`. Do not claim you finished an assurance gate. Do not boot a live host to prove the finding.
+Feature flags are leftover you still have to trust. Admin bound to all interfaces is leftover in the same family (docs and monitoring pages). This page does not mark you as finished. Do not boot a live host to prove the finding.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - `boot_ok` true on prod plus debug
 - Admin on all interfaces
 - Migration fail-open
 - No rollback drill
 
-Also reject: live production attacks; booting without re-running `test_prod_debug_must_not_boot`; keys in learner notes; claiming an assurance gate; treating a manufacturer-defaults program page as verified.
+Also reject: live production attacks; booting without re-running `test_prod_debug_must_not_boot`; keys in learner notes; treating this debug-off lesson as a check-in; treating a manufacturer-defaults program page as verified.
 
 ## Common mix-ups
 
@@ -42,15 +40,11 @@ Also reject: live production attacks; booting without re-running `test_prod_debu
 - Canary equals secure config
 - Feature flags are not something you trust
 - `NODE_ENV` is `boot_ok`
-- A famous-bugs list is this week’s rule
-
-## Practice
-
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_prod_debug_must_not_boot`. Do not open the keys file.
+- A known-exploited list is the boot check
 
 ## Use it somewhere new
 
-Clinic change that “set `NODE_ENV` and added a canary” without a prod-plus-debug deny is an incomplete boot-gate review. Name the independent falsehood that would still keep prod plus debug from booting.
+`NODE_ENV` plus a canary, without a prod-plus-debug deny, do not finish the boot gate. `NODE_ENV` is not a prod-plus-debug deny — write the boot refuse.
 
 ## Can people still use it
 
@@ -58,4 +52,4 @@ A refused boot must say *prod debug refused*, not only “will turn debug off la
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will turn debug off later.” That comment is leftover without an owner. Do not hit a public debug endpoint to prove the finding.
+Do not ship production-plus-debug because a comment promises to turn debug off later. Do not hit a public debug endpoint to prove the finding.

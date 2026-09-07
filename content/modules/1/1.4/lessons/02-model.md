@@ -9,7 +9,7 @@ A list that says “MFA,” “WAF,” and “users should be careful” is a to
 
 > For rule *I*, person *A* with ability *C* and motive *N* can cause harm *H* unless control *K* holds. Leftover *R* remains, owned by *O*, looked at again on trigger *T*. Evidence *E* would show *K* is false.
 
-This week’s freeze: companies, memberships, notes, and a **local recovery-confirm practice**. No live login provider, no files, no support-impersonation product, no real users.
+Companies, memberships, notes, and a **local recovery-confirm practice**. No live login provider, no files, no support-impersonation product, no real users.
 
 ## Picture: anatomy of a row
 
@@ -28,9 +28,9 @@ If any box is a product name or a color, the row is not ready.
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the rules you already wrote and ask what leftover they still carry when a human must confirm recovery.
+Take the rules you already wrote and ask what leftover they still carry when a human must confirm recovery.
 
-| Rule | Recovery leftover to name | Out of scope this week |
+| Rule | Recovery leftover to name | Out of scope here |
 |---|---|---|
 | Secrecy of note bodies | Shortcut: codes or bodies pasted into chat; shared admin session | Cloud operator with a database snapshot (already deferred) |
 | Owner can reach their notes | Mouse-only or color-only confirm blocks the owner | A future login provider going down in a region |
@@ -57,7 +57,7 @@ Minimum who-is-allowed rows:
 | Current owner | confirm control | keyboard confirm | allow if the control is usable |
 | Current owner | confirm control | color-only distinguish | deny: that is not a control |
 | Person present | confirm control | coerce pointer | leftover: record it; do not “fix” with CSS |
-| Support | backup codes | read aloud | deny this week; later topics add a check and a record |
+| Support | backup codes | read aloud | deny here; later topics add a check and a record |
 
 A missing support row is how leftover permission appears (“just tell us the code”). Write the hole.
 
@@ -81,11 +81,11 @@ Maturity scores, scanner yellow, and “256-bit” do not belong in the leftover
 
 ## Practice
 
-Draw the row picture so someone else could name the checks. Point at `labs/1.4/1.4-risk-register` file `recovery.py`. Your artifact is a versioned list (even a table in your notes) with rule, person, harm, control, leftover, owner, trigger, and evidence. No real people’s data.
+Open `recovery.py` under `labs/1.4/1.4-risk-register`. Write down rule, person, harm, control, leftover, owner, trigger, and evidence. No real people’s data.
 
 ## Use it somewhere new
 
-Clinic second factor: mouse-only. Add rows for a clinician on a shared workstation and a patient using only a keyboard. Which dimensions of “how far a break can spread” change (time, objects, hiding the evidence)?
+Map a mouse-only second factor. Add rows for a clinician on a shared workstation and a patient using only a keyboard. Which dimensions of “how far a break can spread” change (time, objects, hiding the evidence)?
 
 ## What can still go wrong
 
@@ -93,4 +93,4 @@ Coercion remains. Do not delete that row when the button becomes keyboard-operab
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list item. Do not run this list against a public clinic or bank. Answer keys are not on this site.
+Do not run this list against a public clinic or bank. Answer keys are not on this site.

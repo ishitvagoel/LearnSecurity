@@ -5,9 +5,9 @@
 
 ## Could someone else name the checks from your map?
 
-A boxes-and-arrows “client → API → database” sketch is not this lesson. A parser map names **which reader** produces the company used for the who-is-allowed check and **which reader** produces the company written to storage.
+A boxes-and-arrows “client → API → database” sketch does not name **which reader** produces the company used for the who-is-allowed check and **which reader** produces the company written to storage.
 
-This week’s freeze: companies, memberships, notes, and a **local JSON ingest practice**. No GraphQL product, no live proxy, no PostgreSQL `jsonb` claim, no Unicode attack corpus.
+Companies, memberships, notes, and a **local JSON ingest practice**. No GraphQL product, no live proxy, no PostgreSQL `jsonb` claim, no Unicode attack corpus.
 
 ## Picture: one parse result, many consumers
 
@@ -55,24 +55,24 @@ The client, the app, the model, or the prompt is hostile. What you trust is the 
 | poster tA | CLEAN unique-key JSON | ingest | allow; `acl_tenant == stored_tenant == tA` |
 | poster tB | duplicate company keys | ingest | deny, or accept only if both readers agree |
 | worker | re-parse stored bytes | persist-or-export | allow only if meaning matches the original result |
-| reader tA | stored body | read | who-is-allowed cell; ingest agreement does not grant a cross-company read |
+| reader tA | stored body | read | who-is-allowed check; ingest agreement does not grant a cross-company read |
 
-A missing worker cell is how delayed-machine transfer appears. Write the hole even if this week has no queue.
+A missing worker cell is how delayed-machine transfer appears. Write the hole even if this topic has no queue.
 
-## Step 4: a catalogue of messy objects, not a bug-list
+## Step 4: a list of messy objects, not a bug-list
 
 Write at least four rows a peer could turn into practice files. Fake identifiers only.
 
 1. Duplicate `"tenant"` keys (the messy two-company object).
 2. Unique keys, honest company A (the clean object).
-3. Missing company field (fail closed).
+3. Missing company field (deny).
 4. Same bytes later parsed by a second library (look-again trigger; not claimed fixed by this practice).
 
 Do not add public JSON bombs or live Unicode weaponization. Those are out of scope, not extra credit.
 
 ## Practice
 
-Draw the map so someone else could name the checks without opening the answer-key folder. Point at `labs/2.1/2.1-parser-boundaries` file `parse_note.py`. Label the first-key scan and `json.loads` as two readers even in the repaired tree — the fix is agreement-or-refuse, not pretending the scan became JSON.
+Open `parse_note.py` under `labs/2.1/2.1-parser-boundaries`. After repair, the first-key scan and `json.loads` are still two readers. The restore is agreement-or-refuse, not the scan as JSON.
 
 ## Use it somewhere new
 
@@ -84,4 +84,4 @@ Honest unique-key JSON still needs a who-is-allowed check. Parser agreement is n
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

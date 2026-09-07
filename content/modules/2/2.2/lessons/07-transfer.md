@@ -5,13 +5,13 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic portal** that caches `GET /patients/me` at the edge, and authenticated RSS or a CSV export on the same CDN as a second sketch. TLS ends at the load balancer. A second patient’s GET must not receive the first patient’s chart. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic portal** that caches `GET /patients/me` at the edge, and authenticated RSS or a CSV export on the same CDN as a second sketch. TLS ends at the load balancer. A second patient’s GET must not receive the first patient’s chart.
 
 ## Picture: `/me` is still a shared URL
 
-Renaming “note body” to “chart” is not transfer. Person, object, path, and leftover change. TLS on one hop stays hop proof. The cache key still decides who reads.
+The clinic chart is the cached note body. TLS on one hop stays hop proof. The cache key still decides who reads.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Company A / company B members | Two patients on the same CDN |
 | `GET /notes/n1` | `GET /patients/me` — same path string for everyone |
@@ -28,14 +28,14 @@ flowchart TD
 
 `/me` looks personal. The path string is identical for every patient. Personalization that is not in the key is ambient secrecy failure.
 
-## Prompt — clinic cache and the CDN export
+## Write this for a clinic cache and the CDN export
 
 Your answer must include:
 
-- who can act (another patient on the same CDN; a neighbor on a TLS-inspecting proxy);
+- who might try (another patient on the same CDN; a neighbor on a TLS-inspecting proxy);
 - what you trust (which hop is TLS; which store is greedy; the client is hostile);
 - what must not happen (cross-patient cache hit, not “TLS stripped”);
-- a check idea that would fail if the rule were false (local practice only);
+- a second patient must not get the first chart from a path-only key — **local** practice (no live CDN);
 - leftover risk (CDN config drift; `X-Forwarded-Proto` treated as the TLS property);
 - whether a human path must meet the web accessibility baseline (only if a person must finish a control; a cache key itself is not that kind of problem).
 
@@ -52,8 +52,8 @@ A reverse proxy that sets `X-Forwarded-Proto` is an acceptable extra sentence: t
 
 ## Practice
 
-One page. No answer keys. The only running system you may break is `labs/2.2/2.2-request-path`.
+Key the cache by path and company. Keep the answer keys closed. The only running system you may break is `labs/2.2/2.2-request-path`.
 
 ## What this page is not doing
 
-Real clinics, real patient charts, live CDNs.
+Do not use real clinics, real patient charts, live CDNs.

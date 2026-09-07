@@ -5,11 +5,11 @@
 
 ## The rule
 
-“Starts with https” is not the fix. A denylist of one IP is not the fix. Following redirects off the list is not the fix.
+“Starts with https” does not cover link-local metadata. A denylist of one IP misses the next address. Following redirects off the list still fetches.
 
-Structural means the host is a named peer. `allowed` must parse the URL, require `https`, require the hostname in a small allow-list, and deny link-local and loopback.
+Read it as the host is a named peer. `allowed` must parse the URL, require `https`, require the hostname in a small allow-list, and deny link-local and loopback.
 
-The smallest restore for notes-app unfurl is: host deny unless listed. Fail closed: unknown host **denies**. Do not fail open because the scheme is https.
+Unfurl needs this: host deny unless listed. Unknown host **denies**. https as a scheme does not put the host on the list.
 
 ## Picture: host deny unless listed
 
@@ -23,13 +23,13 @@ flowchart TD
   Host -->|yes| Allow[Allow]
 ```
 
-The lab’s repaired files require `https` and host in `{"lab.securecollab.test"}`, and deny named block hosts. Production still needs a dedicated egress proxy if customer sites must be fetched. DNS rebinding and IPv6 encodings remain leftover. Open-redirect UX is a sister check. Telling the person they are leaving the site is advanced work, not this pytest.
+The importer requires `https` and host in `{"lab.securecollab.test"}`, and denies named block hosts. Fetching customer sites still wants a dedicated egress proxy. DNS rebinding and IPv6 encodings remain leftover. Open-redirect UX is a sister check. Telling the person they are leaving the site is advanced work, not this check.
 
-Industry lists want the allow-list before calling another service. This pytest is that sentence for `allowed`. **Do not fetch.**
+The allow-list has to run before calling another service — `allowed`. **Do not fetch.**
 
 ## What the repaired files must show
 
-Read `fixed/ssrf.py` against this checklist. Do not treat the snippet as a production egress proxy.
+`fixed/ssrf.py` is the allow-list check, not a live fetch.
 
 | After the fix | Must be true |
 |---|---|
@@ -37,7 +37,7 @@ Read `fixed/ssrf.py` against this checklist. Do not treat the snippet as a produ
 | loopback | false |
 | `https://lab.securecollab.test/og` | true |
 
-Fail closed: if the host is not on the list, the answer is no. Uncertainty is a **deny**, not a yes because the scheme looked like https.
+If the host is not on the list, the answer is no. Looking like https does not put it on the list.
 
 ## What this is not
 
@@ -59,11 +59,11 @@ Name the check (https ∧ host in ALLOW ∧ not blocked). Run:
 python3 -m pytest labs/6.5/6.5-lab/tests --impl fixed
 ```
 
-It must pass. Do not fetch the URLs. Then write one sentence: which rule is restored, and which leftover you refused to delete.
+Do not fetch the URLs.
 
 ## Use it somewhere new
 
-Clinic: stop fetching whatever URL the form posted; parse then allow-list.
+Stop fetching whatever URL the form posted; parse then allow-list.
 
 ## What can still go wrong
 
@@ -71,4 +71,5 @@ DNS rebinding; IPv6 encodings; telling the person they left the site (advanced);
 
 ## What this page is not doing
 
-Do not curl metadata. Do not claim a course gate from an HTTPS prefix.
+Do not curl metadata. An HTTPS prefix is not a check-in.
+

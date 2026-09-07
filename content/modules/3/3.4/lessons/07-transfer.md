@@ -5,24 +5,22 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic guardian list**, an **invite token**, or an **export quota**. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: eight `add_share` calls leave count ≤ 5. Rewrite it for a different object without changing the fork.
+You get a **clinic guardian list**, an **invite token**, or an **export quota**. Eight `add_share` calls leave count ≤ 5.
 
-**Prompt:** Clinic: max 3 guardians per child. Optionally map invite tokens and export quotas as *different objects, same shape*.
+Cap guardians at 3 per child. Invite tokens and export quotas are *different objects, same shape*.
 
-**Product sketch:** EHR-lite guardian list on a booking card.
+EHR-lite guardian list on a booking card.
 
-Rewrite the notes-app sentence. Include:
-
-1. who can act (scripted add; disabled UI max; import — **not** a live clinic);
+1. who might try (scripted add; disabled UI max; import — **not** a live clinic);
 2. what you trust (which write path is trusted; HTML is not);
 3. what must not happen (`add_guardian` four times yields count 4 — not a privacy-law name and not an awareness-list name);
-4. a test idea on a **local** practice only (loop four times, last ≤ 3);
+4. loop four times; last ≤ 3 — **local** practice;
 5. leftover (honest family of 4 needs an owned exception; parallel adds need a lock);
 6. whether a human path must meet the web accessibility baseline (announce “guardian limit reached” if the denial is shown to a human).
 
 ## Picture: three is not five, the shape is the same
 
-Renaming “share” to “guardian” is not transfer. Person, object, path, and leftover change. A fourth guardian and a second invite redeem are new rules. HTML max is still not what you trust.
+A guardian invite is a share grant. A fourth guardian and a second invite redeem are new rules. HTML max does not stop the fourth grant.
 
 ```mermaid
 flowchart LR
@@ -39,15 +37,15 @@ Awareness-list names may appear in a regression checklist after the machine exis
 | Reject | Why |
 |---|---|
 | A weakness nickname as the rule | Weakness name ≠ cap |
-| Rate limit as the cap | Different cell |
+| Rate limit as the cap | A different rule |
 | Live clinic APIs | Course rules |
 | HTML max=3 as enforcement | Client is untrusted |
 | Awareness-list sticker | Awareness only |
 
 ## Practice
 
-One page. No keys. `labs/3.4/3.4-lab` is the only running system you may break. Do not load-test a clinic or an invite API.
+Cap guardians at three, same shape as five shares. Keep the answer keys closed. `labs/3.4/3.4-lab` is the only running system you may break. Do not load-test a clinic or an invite API.
 
 ## What this page is not doing
 
-Live-target bots. Real member emails. Claiming a course gate from this page.
+Do not try live-target bots. Do not use real member emails. This page does not finish a check-in.

@@ -5,9 +5,9 @@
 
 ## Could someone else name the checks?
 
-A list that says “PII, secrets, notes” is a pile of words. A list someone else can test names **fields**, **protection levels**, and **places** with allow or deny.
+A list that says “PII, secrets, notes” is a pile of words. Name **fields**, **protection levels**, and **places** with allow or deny.
 
-This week's freeze: note body, note id, tenant id, and a **local log line**. No live log product. No production backup vendor. Fake data only.
+Note body, note id, tenant id, and a **local log line**. No live log product. No production backup vendor. Fake data only.
 
 > For field *F* at place *S*, the rule is allow or deny. Evidence *E* would show the deny is false — here, the body substring in the log line.
 
@@ -26,7 +26,7 @@ If any box is a product name or a policy URL, the row is not ready.
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the fields you already have and ask where each one may land.
+Take the fields you already have and ask which log drain each one may reach.
 
 | Piece | This system |
 |---|---|
@@ -57,8 +57,8 @@ For Confidential bodies: no log, no raw APM payload, no paste into a support tic
 Write the backlog in sentences a peer can attack:
 
 1. **Log line.** The `note_read` line may hold event name, note id, tenant id. It may not hold the body.
-2. **Error dump.** Exception text and slow-query logs are other places. They get the same deny for the body, even if this week's check only covers `log_event`.
-3. **Support paste.** A ticket that quotes the body is a new place. Deny it this week; do not wait for a later product to “handle patient data.”
+2. **Error dump.** Exception text and slow-query logs are other places. They get the same deny for the body, even if this check only covers `log_event`.
+3. **Support paste.** A ticket that quotes the body is a new place. Deny it here; do not wait for a later product to “handle patient data.”
 
 ## Step 4: leftover, not a deleted row
 
@@ -72,11 +72,11 @@ A maturity score and a scanner color do not belong in this list.
 
 ## Practice
 
-Draw the inventory so someone else could name the checks. Point at `labs/3.1/3.1-lab` file `classify.py`. Your artifact is a versioned list (even a table in your notes) with field, level, place, allow or deny, and what would show the deny is false. No real people's data.
+Mark `classify.py` under `labs/3.1/3.1-lab`. Note field, level, place, and the row that would prove the deny false. No real people's data.
 
 ## Use it somewhere new
 
-Clinic chart text vs appointment time: two classes, two places. Logging the time does not authorize logging the chart.
+Chart text and appointment time are two classes, in two places. Logging the time does not authorize logging the chart.
 
 ## What can still go wrong
 
@@ -84,4 +84,4 @@ Operators still see ids. How long logs live after a note is deleted stays on the
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Do not run this list against a public clinic or a live log tenant. Answer keys are not on this site.
+Do not run this list against a public clinic or a live log tenant. Answer keys are not on this site.

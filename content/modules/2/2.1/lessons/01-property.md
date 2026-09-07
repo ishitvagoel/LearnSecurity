@@ -9,7 +9,7 @@ The notes app still takes in a JSON note that names a company. Login can be righ
 
 > For a notes-app ingest, the same request bytes yield one parse result used for both the who-is-allowed check and the stored row. If two readers would assign different company identifiers to those bytes, ingest refuses. Missing, duplicate, or unknown company meaning is a no. The client encoder, a reverse proxy that re-encodes Unicode, and PostgreSQL `jsonb` are not the agreed reader.
 
-So what must not happen: **ACL tenant ≠ stored tenant**. That is a secrecy failure caused by *disagreement*, not by a missing login.
+**ACL tenant ≠ stored tenant** is a secrecy failure caused by *disagreement*, not by a missing login.
 
 The JSON spec says names in an object **should** be unique. It does not say they must be. CPython `json.loads` keeps the last duplicate. A scan that looks for the first `"tenant"` field keeps the first. Neither bug is “JSON is insecure.” The bug is treating two meanings of one byte sequence as if they were one object.
 
@@ -25,7 +25,7 @@ flowchart TD
 
 Each arrow is a reader. Change the encoding, the grammar, or the duplicate-key policy and the value changes without the bytes changing. Unicode normalization (NFC vs NFD) is another reader *after* characters exist. A Unicode guide tells you how to write the same character the same way. It does not decide which company a note belongs to.
 
-**A tool is not this sentence.** Pydantic v2, FastAPI body parsing, or “JSON can’t have duplicate keys” is not the rule.
+Pydantic v2, FastAPI body parsing, or “JSON can’t have duplicate keys” does not pick which duplicate key wins.
 
 ## Picture: two readers, one blob
 
@@ -67,7 +67,7 @@ A WAF string that looks for `tenant` twice is fake cleaning. Whitespace, Unicode
 | Slice | For this rule |
 |---|---|
 | Why it happens | Two readers assigned two company meanings to one byte sequence |
-| What has to be true first | Duplicate or otherwise messy company fields; split ACL vs persist parse |
+| What's already wrong | Duplicate or otherwise messy company fields; split ACL vs persist parse |
 | Trigger | `ingest_note` on the messy two-company object, or a worker re-parse later |
 | What it costs | Secrecy: company B body stored under company A policy, or the reverse |
 | How you stop it | Refuse duplicate keys; pass one parse result to ACL and storage |
@@ -78,7 +78,7 @@ A WAF string that looks for `tenant` twice is fake cleaning. Whitespace, Unicode
 
 CPython `json.loads` last-wins is a language accident, not a security control. Pydantic v2 will happily model a unique `tenant: str` after the reader already collapsed duplicates. PostgreSQL `jsonb` is another reader. FastAPI will parse a body with whichever JSON library it is configured to use.
 
-The app’s promise is: **this** ingest function, on **this** practice object, either refuses the messy object or yields `acl_tenant == stored_tenant`. The practice folder is `labs/2.1/2.1-parser-boundaries`. It is not a live API and not a public JSON fuzzer.
+The ingest function either refuses the messy object or yields `acl_tenant == stored_tenant` — files in `labs/2.1/2.1-parser-boundaries`. It is not a live API and not a public JSON fuzzer.
 
 ## What the tool cannot do
 
@@ -96,7 +96,7 @@ python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl vulnerable
 python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Tie the check to two readers disagreeing, not to a bug-list nickname.
+The check is two readers disagreeing. A bug-list nickname is not it.
 
 ## Use it somewhere new
 
@@ -104,4 +104,4 @@ A clinic booking API accepts JSON where `patient_id` appears twice. REST and Gra
 
 ## What this page is not doing
 
-Live targets, public JSON bombs, real patient identifiers, copy-paste encoding attacks, and “JSON is insecure” as the definition of security. Answer keys are not on this site.
+Do not use live targets, public JSON bombs, real patient identifiers, copy-paste encoding attacks, and “JSON is insecure” as the definition of security. Answer keys are not on this site.

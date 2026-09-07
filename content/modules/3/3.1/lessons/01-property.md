@@ -13,7 +13,7 @@ A log line for `note_read` is a lower-trust store than the note table. Operators
 
 A sink is a place the field can land: the note table, a log line, an error dump.
 
-So what must not happen: **the confidential body in a lower-trust store**. `log_event("note_read", "tenant-A-secret-body")` must not include `tenant-A-secret-body`. That is a secrecy and privacy failure of the body.
+`log_event("note_read", "tenant-A-secret-body")` must not include `tenant-A-secret-body` — **the confidential body in a lower-trust store**. That is a secrecy and privacy failure of the body.
 
 Industry lists ask you to name sensitive data and to say how each level is logged. They do not redact this logger.
 
@@ -32,7 +32,7 @@ flowchart TD
 
 A sticker on the field that does not change the log API is just a sticker. What you trust is the **logging API handlers actually call**, plus every other printer: `print`, an f-string, an exception dump, a slow-query log, a packet capture.
 
-The web framework does not know "Confidential." Access logs will store query strings — that is a later topic. A product name for data-loss tools is not this sentence.
+The web framework does not know "Confidential." Access logs will store query strings — that is a later topic. A product name for data-loss tools is not the redaction check.
 
 ## Picture: name the places before you redact
 
@@ -58,12 +58,12 @@ If the list of places does not include the log drain, redacting `logger.info` is
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-Someone treated the body as debug context. That is the cause. The person who later reads the log is a **result**, not the cause.
+Someone treated the body as debug context. That's the debug-in-the-body choice. The person who later reads the log is who sees it.
 
 | Slice | For this rule |
 |---|---|
 | Why it happens | The body was treated as debug context |
-| What has to be true first | The handler logs the event payload, including the body |
+| What's already wrong | The handler logs the event payload, including the body |
 | Trigger | `log_event` for `note_read` |
 | What it costs | The body sits in a lower-trust store; operators and vendors can read it |
 | How you stop it | Structured logs with allow-listed fields; never paste the body into the line |
@@ -74,7 +74,7 @@ Someone treated the body as debug context. That is the cause. The person who lat
 
 Regex redaction after the fact misses encodings — a later topic. Error traces, slow-query logs, and full-packet dumps bypass the logger. FastAPI does not know Confidential.
 
-The app's promise is: **this** `log_event` line does not contain `tenant-A-secret-body` and does contain a redaction marker. The local check is `labs/3.1/3.1-lab`. Fake data only. No real people's data. No production log drain.
+`log_event` line does not contain `tenant-A-secret-body` and does contain a redaction marker — files in `labs/3.1/3.1-lab`. Fake data only. No real people's data. No production log drain.
 
 ## What the tool cannot do
 
@@ -92,7 +92,7 @@ python3 -m pytest labs/3.1/3.1-lab/tests --impl vulnerable
 python3 -m pytest labs/3.1/3.1-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Tie the check to the body in the log, not to a privacy-policy URL.
+The body in the log is what to measure. Ignore a privacy-policy URL.
 
 ## Use it somewhere new
 
@@ -100,4 +100,4 @@ A clinic booking card. Chart text vs appointment time are two classes and two pl
 
 ## What this page is not doing
 
-Live log tenants, real patient charts, production log dumps, and “we classified it so it is protected.” Answer keys are not on this site.
+Do not use live log tenants, real patient charts, production log dumps, and “we classified it so it is protected.” Answer keys are not on this site.

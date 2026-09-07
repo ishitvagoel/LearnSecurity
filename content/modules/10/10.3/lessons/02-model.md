@@ -5,11 +5,11 @@
 
 ## Could someone else name the admission check from your cluster map?
 
-"We put it in its own namespace" is not this lesson. A drawing someone else can test names **ServiceAccount, Role vs ClusterRole, pod-profile level, whether the pod can reach instance metadata, and who can apply Helm**.
+"We put it in its own namespace" is not enough without **ServiceAccount, Role vs ClusterRole, pod-profile level, whether the pod can reach instance metadata, and who can apply Helm**.
 
-This week's freeze for the notes app: local `pod_ok(role)`. No live kube-apiserver.
+`pod_ok(role)` — no live kube-apiserver.
 
-> For admission, the rule is deny when the role is `cluster-admin`. A namespaced app role may run. Evidence that the deny is false: `pod_ok("cluster-admin")` returns true.
+> For admission, the rule is deny when the role is `cluster-admin`. A namespaced app role may run. Watch it fail: `pod_ok("cluster-admin")` returns true.
 
 If the role × namespace row is blank, the pod runs because nobody named the check.
 
@@ -36,7 +36,7 @@ The cloud's hypervisor is not your ClusterRoleBinding.
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the cluster you already have and ask what would show cluster-admin is still allowed.
+Take the cluster you already have and ask what would show cluster-admin is still allowed.
 
 | Piece | This system |
 |---|---|
@@ -62,11 +62,11 @@ A private namespace with `pod_ok` always true is how "we isolated it" becomes cl
 
 ## Practice
 
-Draw the map. Point at `labs/10.3/10.3-lab` file `iam.py`.
+Label `iam.py` under `labs/10.3/10.3-lab`.
 
 ## Use it somewhere new
 
-Serverless IAM `*` is the same cell with different syntax.
+Serverless IAM `*` is the same rule with different syntax.
 
 ## What can still go wrong
 
@@ -74,4 +74,4 @@ Break-glass admin with a later elective. Documented connection and retry toward 
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

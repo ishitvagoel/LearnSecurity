@@ -5,17 +5,17 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic batch-export worker**. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic batch-export worker**.
 
-The notes-app sentence was: `exporter({"user_session": "alice", "service": None})` must be `None`. A leftover user session is not worker identity. Rewrite it for a clinic without changing the fork: leftover session denied, named worker allowed.
+`exporter({"user_session": "alice", "service": None})` must be `None`. A leftover user session is not worker identity. For a clinic, leftover session denied, named worker allowed.
 
 Also name outbox pattern and event schemas as the same identity family, without running those brokers here.
 
 ## Picture: cookie in the job is still a session
 
-Renaming “export notes” to “export patients overnight” is not transfer. The untrusted leftover changes. The fork does not.
+Overnight patient export is the notes-app worker job.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | `exporter(job)` | Batch-export worker |
 | Leftover `user_session` alice denied | Leftover clinician cookie denied |
@@ -30,18 +30,16 @@ flowchart LR
 
 If overnight export copies the clinician cookie into the task while `exporter` prefers `user_session`, the check is gone. A task library, a private network, and a zero-trust dashboard do not bind `service == "worker-sc"`. Outbox pattern and event schemas are the same identity family — name them, do not run those brokers here. A correctly named worker that is still a superuser database role is a 3.3 leftover even when Alice session is denied.
 
-The clinic rewrite still has to keep the notes-app fork: leftover session `None`, `service=worker-sc` allowed. Running on the hospital VLAN with “zero trust enabled” without a leftover-session deny test leaves `exporter({user_session: alice})` succeeding. The local pytest analogue is `test_user_session_is_not_worker_identity` — on a practice, not a live broker attach.
+A leftover session still has to be `None`. `service=worker-sc` may still be allowed. Running on the hospital VLAN with “zero trust enabled” without a leftover-session deny test leaves `exporter({user_session: alice})` succeeding. The local check is `test_user_session_is_not_worker_identity` — on a practice, not a live broker attach.
 
-## Prompt — clinic batch-export worker
+## Write this for a clinic batch-export worker
 
-**Product sketch:** a small clinic app with “Export overnight” that copies the clinician cookie into the task so “the job knows who asked.”
+A small clinic app with “Export overnight” that copies the clinician cookie into the task so “the job knows who asked.”
 
-Rewrite the notes-app sentence. Include:
-
-1. who can act (stolen session stuffed into a job, or inherited request context — not a live clinic);
+1. who might try (stolen session stuffed into a job, or inherited request context — not a live clinic);
 2. what you trust (worker authenticates as `worker-sc` is what you trust; VLAN, internal queue, and a zero-trust sticker are not);
-3. what must not happen (`exporter({user_session: alice})` succeeds, not a legal label);
-4. a test idea on a **local** practice files only (leftover session denied — never on the real clinic);
+3. what must not happen (`exporter({user_session: alice})` succeeds);
+4. leftover session must not run the exporter — **local** practice files (never on the real clinic);
 5. leftover (god-mode database role 3.3, retry after revoke 2.4, later originating-subject check as advanced work, field dumps 7.2);
 6. whether a human-read “queued as service” must be announced, not a spinner that retries forever.
 
@@ -57,8 +55,8 @@ Rewrite the notes-app sentence. Include:
 
 ## Practice
 
-One page. No answer keys. The only running system you may break is `labs/7.4/7.4-lab`. Do not attach to a public broker.
+Run the export as the worker, not Alice’s cookie. Keep the answer keys closed. The only running system you may break is `labs/7.4/7.4-lab`. Do not attach to a public broker.
 
 ## What this page is not doing
 
-Live-target queues. Real clinician cookies. Claiming a course gate from this page.
+Do not try live-target queues. Do not use real clinician cookies. This page does not finish a check-in.

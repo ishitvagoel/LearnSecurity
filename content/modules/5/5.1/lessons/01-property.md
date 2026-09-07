@@ -11,9 +11,9 @@ Encrypting a warehouse you still keep is not deletion. A privacy-policy PDF is n
 
 > After `delete_account("alice")`, `body_retained("alice")` must be None and `search_retained("alice")` must be None. Deletion is every copy of the body, not a notes-table DELETE. Clearing the notes row, and “we anonymized the user id,” do not by themselves remove the body.
 
-So what must not happen: **analytics (or search) still holds the note body after account deletion**. The body was already confidential. After the person leaves, keeping the field is leftover privacy too. Encryption without erasure still retains.
+After delete, **analytics (or search) still holding the note body** is the leftover copy. The body was already confidential. After the person leaves, keeping the field is leftover privacy too. Encryption without erasure still retains.
 
-Industry lists want you to name sensitive data, write down how long you keep it, not hand the body to a second party you do not control, and actually carry those rules out. A scheduled warehouse job that maybe runs later is advanced work, not this week's check. A published privacy framework names identify, govern, control, and communicate. A newer draft of that framework is still a draft. A threat-method name does not walk the copies. The local maps do. Phone privacy profiles come later. A country privacy-law name is awareness, not this pytest. A database DELETE is not this sentence.
+You need to name sensitive data, write down how long you keep it, not hand the body to a second party you do not control, and actually carry those rules out. A scheduled warehouse job that maybe runs later is advanced work, not this check. A published privacy framework names identify, govern, control, and communicate. A newer draft of that framework is still a draft. A threat-method name does not walk the copies. The local maps do. Phone privacy profiles come later. A country privacy-law name is awareness, not this check. A database DELETE is not the retention check.
 
 ## Picture: the deletion graph
 
@@ -30,7 +30,7 @@ flowchart TD
 
 The person who can still read it is an insider with warehouse SELECT, or a buyer of a “de-identified” export that still contains bodies. Trusting “analytics is anonymized” without checking the body field is not what you trust.
 
-**The tool (not the rule):** a database DELETE, an object-store lifecycle rule, or a contract checkbox.
+**Do not confuse these with the rule:** a database DELETE, an object-store lifecycle rule, or a contract checkbox.
 
 ## Picture: privacy is not secrecy
 
@@ -42,16 +42,16 @@ flowchart LR
   Kept -->|no| Gone["Deletion graph complete"]
 ```
 
-Secrecy can hold while privacy fails. The body was already classified confidential. This week's question is whether that field still exists after delete.
+Secrecy can hold while privacy fails. The body was already classified confidential. The question is whether that field still exists after delete.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
-Someone deleted the notes row and left the other copies. That is the cause. The person who later SELECTs the warehouse is a **result**, not the cause.
+Someone deleted the notes row and left the other copies. That's the leftover copy. The person who later SELECTs the warehouse is who still has it.
 
 | Slice | For this rule |
 |---|---|
 | Why it happens | A second copy was not in the deletion graph |
-| What has to be true first | `delete_account` pops NOTES only |
+| What's already wrong | `delete_account` pops NOTES only |
 | Trigger | Analytics or search read after they leave |
 | What it costs | Privacy plus leftover confidential bodies after the relationship ends |
 | How you stop it | Inventory the copies; delete or unlink the body in each |
@@ -60,7 +60,7 @@ Someone deleted the notes row and left the other copies. That is the cause. The 
 
 ## What the framework does vs what you still have to check
 
-A database DELETE is not warehouse DELETE. The web app does not erase object-store analytics. The app's promise: after `delete_account("alice")`, `body_retained("alice")` is None and `search_retained("alice")` is None. The local check is `labs/5.1/5.1-lab`. Fake data only. No live warehouse.
+A database DELETE is not warehouse DELETE. The web app does not erase object-store analytics. After `delete_account("alice")`, `body_retained("alice")` is None and `search_retained("alice")` is None — files in `labs/5.1/5.1-lab`. Fake data only. No live warehouse.
 
 ## What the tool cannot do
 
@@ -77,11 +77,11 @@ python3 -m pytest labs/5.1/5.1-lab/tests --impl vulnerable
 python3 -m pytest labs/5.1/5.1-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Tie the failures to `body_retained` / `search_retained`, not to a privacy-law name.
+Tie the failures to `body_retained` / `search_retained`, not to a privacy-law name.
 
 ## Use it somewhere new
 
-Clinic: an appointment card that still stores notes after the patient record is deleted.
+An appointment card that still stores notes after the patient record is deleted.
 
 ## Can people still use it
 
@@ -89,4 +89,4 @@ The delete-account journey must be completable with a keyboard and a clear statu
 
 ## What this page is not doing
 
-Live warehouses, real people's data, weaponized dumps. Answer keys are not on this site.
+Do not use live warehouses, real people's data, weaponized dumps. Answer keys are not on this site.

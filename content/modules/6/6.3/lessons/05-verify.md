@@ -1,15 +1,15 @@
-# Fail on the broken files, then pass on the repaired ones
+# The broken files must fail a request from another site
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-“SameSite is Lax” is not evidence. “CORS is configured” is a tool observation. The check is: `allow_share` for a foreign origin with `token=None` is False. That observation must be **false** on the broken files (returns true) and **true** on the repaired files.
+SameSite=Lax does not decide a cross-site share. A CORS list is an origin header. `allow_share` for a foreign origin with `token=None` has to be False. Leftover: a foreign origin with no token still shares. Repair returns false.
 
 ## Picture: broken must fail foreign origin
 
-A test that only counts passing cases can pass while leftover cookies still authorize a share. This check asks whether a cookie-only share is allowed to count as a passing control. Broken must fail that question. Repaired must pass it — the deny plus the honest allow.
+Leftover cookies can still authorize a share while tests pass. Repaired files still have to pass both the deny and the honest allow.
 
 ```mermaid
 flowchart LR
@@ -22,17 +22,17 @@ flowchart LR
 | Wrong input / abuse | foreign origin, no token → deny; broken files must fail |
 | Wrong input | same origin, no token → deny |
 | Normal | same origin, token, cookie → allow |
-| Normal / fail-closed | missing cookie → deny (may pass on both) |
+| Normal / deny when missing | missing cookie → deny (may pass on both) |
 | Not claimed | GET mutate; clickjacking; CORS; postMessage |
 
-The file is `labs/6.3/6.3-lab/tests/test_property.py`. `test_foreign_origin_post_is_denied` is a **what-must-not-happen** test: a cookie-only share is not allowed to count as a passing control.
+Foreign-origin POST with no token has to fail `test_foreign_origin_post_is_denied`.
 
 ```text
 python3 -m pytest labs/6.3/6.3-lab/tests --impl vulnerable
 python3 -m pytest labs/6.3/6.3-lab/tests --impl fixed
 ```
 
-Honest same-origin-with-token may pass on both (broken files allow any cookie). Missing cookie may pass on both. That does not excuse the foreign-origin and same-origin-without-token tests. If the broken files do not fail foreign origin, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
+Same-origin with a token is the honest path. Deny a foreign origin, and same-origin with no token. If the broken files do not fail foreign origin, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
@@ -42,22 +42,13 @@ Honest same-origin-with-token may pass on both (broken files allow any cookie). 
 - postMessage origin checks
 - Later open redirect
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
-Run both this session:
-
-```text
-python3 -m pytest labs/6.3/6.3-lab/tests --impl vulnerable
-python3 -m pytest labs/6.3/6.3-lab/tests --impl fixed
-```
-
-Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `SameSite` in a cookie helper without calling `allow_share` on a foreign origin.
+Call `allow_share` on a foreign origin. `SameSite` on a cookie helper is the cookie flag, not the share.
 
 ## Use it somewhere new
 
-Clinic partner-share. A test that only asserts HTTP 200 on `/share` is not this cell (see the later testing topic). A test that visits a live third-party page is out of scope.
+A green `/share` is not a foreign-origin deny. Do not run a test that visits a live third-party page.
 
 ## What this page is not doing
 

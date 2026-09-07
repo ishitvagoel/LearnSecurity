@@ -3,11 +3,11 @@
 **Kind:** design-exercise
 **Loop step:** 2 Model
 
-## Could someone else name pytest cases from your inventory?
+## Could someone else name the checks from your inventory?
 
-“We have a vault” is not this page. A reviewable model names **each secret, where it lives, who owns rotation, and what happens to the old value**.
+“We have a vault” is not enough without **each secret, where it lives, who owns rotation, and what happens to the old value**.
 
-This week’s freeze: local `auth(presented, current)`. Disposable `sk-lab-hardcoded`. No live vault.
+`auth(presented, current)` — Disposable `sk-lab-hardcoded`. No live vault.
 
 ## Picture: inventory row
 
@@ -16,7 +16,7 @@ flowchart TD
   Name[api_key] --> Loc[Source vs current]
   Loc --> Owner[On-call]
   Owner --> Rotated[Last rotated]
-  Rotated --> Blast[Tenant blast radius]
+  Rotated --> Blast[How far a tenant break can spread]
 ```
 
 A missing row is how a worker default survives (later topic).
@@ -31,7 +31,7 @@ flowchart LR
   Default[Hardcoded DEFAULT] --> Deny
 ```
 
-## Step 1: freeze who, what, and time
+## Step 1: name who, what, and when
 
 | Piece | This system |
 |---|---|
@@ -54,7 +54,7 @@ flowchart LR
 
 ## Practice
 
-Draw the inventory so someone else could name pytest cases. Point at `labs/5.3/5.3-lab` file `secrets.py`.
+Look at `secrets.py` under `labs/5.3/5.3-lab`.
 
 ## Use it somewhere new
 
@@ -66,4 +66,4 @@ Images already shipped; logs that captured the old value; a hardware box for cry
 
 ## What this page is not doing
 
-Treating an awareness list as the definition of security. Answer keys are not on this site.
+Circling “hardcoded secret” does not rotate `DEFAULT`. Answer keys are not on this site.

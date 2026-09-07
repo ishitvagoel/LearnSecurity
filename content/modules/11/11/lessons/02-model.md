@@ -5,11 +5,11 @@
 
 ## Could someone else name the revoke check from your share map?
 
-“We have a revoke endpoint” is not this lesson. A drawing someone else can test names **owner, grant, every read path (API, worker, cache), and leftover copies**.
+The testable picture is **owner, grant, every read path (API, worker, cache), and leftover copies** — not “We have a revoke endpoint”.
 
-This week’s freeze for the notes app: local `revoke` / `read`. No live tenants.
+`revoke` / `read` — no live tenants.
 
-> After revoke, the rule is deny when the reader is not the owner and not in the grant set. Honest owner read after revoke may still return the body. Honest share read *before* revoke may still return the body. Evidence that the deny is false: `read("n1", "B")` after `revoke("n1", "B")` still returns the body.
+> After revoke, the rule is deny when the reader is not the owner and not in the grant set. Honest owner read after revoke may still return the body. Honest share read *before* revoke may still return the body. The false allow: `read("n1", "B")` after `revoke("n1", "B")` still returns the body.
 
 If the owner-or-grant row is blank, B keeps reading because nobody named the check.
 
@@ -22,7 +22,7 @@ flowchart TD
   Revoked[B after revoke] --> Deny[None]
 ```
 
-## Picture: other grains of the same cell
+## Picture: other grains of the same rule
 
 ```mermaid
 flowchart LR
@@ -32,11 +32,11 @@ flowchart LR
   Mail[copy already sent] --> Residual[already sent]
 ```
 
-A copy already sitting in email is leftover, not this week’s pytest.
+A copy already sitting in email is leftover, not this check.
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the share you already have and ask what would show the grant was never consulted.
+Take the share you already have and ask what would show the grant was never consulted.
 
 | Piece | This system |
 |---|---|
@@ -62,16 +62,16 @@ A missing “B after revoke × body × deny” row is how a revoke event becomes
 
 ## Practice
 
-Draw the map so someone else could name the checks. Point at `labs/11/11-lab` file `capstone.py`.
+Work in `capstone.py` under `labs/11/11-lab`.
 
 ## Use it somewhere new
 
-Clinic guardian revoke is the same cell with a different relationship name.
+A clinic guardian revoke is the same rule with a different relationship name.
 
 ## What can still go wrong
 
-Copies already sent. Access-rights change in the same session without signing in again is extra, advanced work, not this pytest.
+Copies already sent. Access-rights change in the same session without signing in again is extra, advanced work, not this check.
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

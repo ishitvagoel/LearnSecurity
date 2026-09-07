@@ -9,7 +9,7 @@ The notes app still has a shared cache on the path: a CDN, a reverse proxy, or a
 
 > For `GET /notes/n1` in the notes app, a cache hit may return a note body only when the key includes the **company the app already bound you to** — not a client `Host`, `X-Tenant`, or `X-Forwarded-*` field. Company B must not receive company A’s body for the same path. Missing or unknown company meaning is a miss (or a deny), not a shared entry. TLS 1.3 on one hop proves that hop. It is not the cache-key rule.
 
-So what must not happen: **company B reads company A’s note from a shared cache**. The key was only the URL. Company A filled the slot. Company B’s later GET receives `tenant-A-note`. That is a secrecy failure caused by a **shared store**, not by a missing login.
+Shared cache, URL-only key: **company B reads company A’s note**. Company A filled the slot. Company B’s later GET receives `tenant-A-note`. That is a secrecy failure caused by a **shared store**, not by a missing login.
 
 HTTP rules say what may be cached and how `Vary` picks a representation. TLS 1.3 says how one hop proves itself. After the edge ends TLS, later hops and stores see HTTP the way you configured them. Neither rule puts the company into your key.
 
@@ -25,9 +25,9 @@ flowchart LR
   Origin --> Key["Key must include that company"]
 ```
 
-Industry lists want TLS to the public HTTP service. That is needed and not enough. A neighbor on a company inspecting proxy, or company B on the same CDN node, never needed to break TLS to read a path-only entry.
+TLS to the public HTTP service. That is needed and not enough. A neighbor on a company inspecting proxy, or company B on the same CDN node, never needed to break TLS to read a path-only entry.
 
-**A tool is not the rule:** “We turned on HTTPS,” Next.js `fetch` cache defaults, FastAPI `HTTPException`, a CDN product name, or `Cache-Control: private` while the CDN is set to cache anyway.
+HTTPS, Next.js `fetch` cache defaults, FastAPI `HTTPException`, and a CDN product name do not key the cache by company. `Cache-Control: private` while the CDN caches anyway still serves A’s body to B.
 
 ## Picture: the key is the shared store
 
@@ -46,7 +46,7 @@ The broken files’ `cache_put` ignores the company argument when storing. Compa
 
 Sensitive data in a load-balancer or application cache is one store. The browser’s `Cache-Control: no-store` is another. They are different stores. A correct origin `no-store` does not fix a CDN that keys on path. A correct CDN company key does not fix a browser that cached a note body.
 
-Web cache deception — unexpected types, files that do not exist — is a later, harder topic. This week’s check is company disagreement on the same path, not a public CDN poison.
+Web cache deception — unexpected types, files that do not exist — is a later, harder topic. The check is company disagreement on the same path, not a public CDN poison.
 
 ## Bound company versus forwarded identity
 
@@ -68,7 +68,7 @@ A path-only shared cache fails because **the designers trusted the URL as identi
 | Slice | For this rule |
 |---|---|
 | Why it happens | Shared cache keyed without the bound company |
-| What has to be true first | Shared store; path-only key; company A filled the entry |
+| What's already wrong | Shared store; path-only key; company A filled the entry |
 | Trigger | Company B `GET /notes/n1` while the entry is still live |
 | What it costs | Secrecy: a cross-company read without guessing ids |
 | How you stop it | Key = (bound company, route, representation); default no-store for notes |
@@ -79,7 +79,7 @@ A path-only shared cache fails because **the designers trusted the URL as identi
 
 Next.js `fetch` cache and FastAPI defaults do not encode company. `Vary: Accept-Encoding` is a compression selector, not a company selector. Stale-while-revalidate can serve company A to company B if the key is still path-only. HTTP/2 push and URL normalization are later surfaces; they do not delete this sentence.
 
-The app’s promise is: on **these** practice files, `cache_get("/notes/n1", "tB")` after a company A put is not `tenant-A-note`. The practice folder is the local check for that sentence. It is not a live CDN and not a public cache.
+`cache_get("/notes/n1", "tB")` after a company A put is not `tenant-A-note`. It is not a live CDN and not a public cache.
 
 ## What the tool cannot do
 
@@ -97,7 +97,7 @@ python3 -m pytest labs/2.2/2.2-request-path/tests --impl vulnerable
 python3 -m pytest labs/2.2/2.2-request-path/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Tie the check to path-only sharing, not to “TLS is off.”
+Look at path-only sharing, not “TLS is off.”
 
 ## Use it somewhere new
 
@@ -105,4 +105,4 @@ A clinic caches `GET /patients/me`. Authenticated RSS or a CSV export rides the 
 
 ## What this page is not doing
 
-Live CDNs, poisoning a public cache, DNS hijack labs, real patient charts, and “HTTPS means no cache bugs.” Answer keys are not on this site.
+Do not use live CDNs, poisoning a public cache, DNS hijack labs, real patient charts, and “HTTPS means no cache bugs.” Answer keys are not on this site.

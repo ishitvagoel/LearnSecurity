@@ -1,40 +1,38 @@
-# Review always-true ship_ok like a pull request
+# Would you merge this always-true ship_ok?
 
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
-
 ## What you are reviewing
 
-A colleague ships the notes app’s ship gate. Review `labs/9.4/9.4-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `ship_ok([HIGH], {})` still returns true, compare that with the rule, and write changes a developer can verify.
+Read `labs/9.4/9.4-lab/vulnerable/` as the ship check. Does `ship_ok([HIGH], {})` still return true?
 
-Start at `ship_ok` and the HIGH×map row, not at a scanner color or a dashboard screenshot. The check you already ran (`test_unmapped_high_blocks_ship`) is the rule test. A comment “will map later” is not.
+Read `ship_ok` and the HIGH×map row. A dashboard screenshot does not own the HIGH. A TODO to map later does not satisfy `test_unmapped_high_blocks_ship`.
 
 ## Picture: ship_ok true on unmapped HIGH
 
-Start with this seeded smell: **`ship_ok` true on unmapped HIGH**. Label it rule, tool, or false comfort before you accept the change.
+**`ship_ok` true on unmapped HIGH**.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|unmapped HIGH ships| Property["Rule - good if tested"]
   Q -->|code scanning on| Mechanism[Tool - signal]
-  Q -->|maturity score| False[False comfort]
+  Q -->|maturity score| False[False assurance]
 ```
 
-Classification starts at the protected effect (unmapped HIGH denied). Everything that is not a join to the coverage map at that call is a candidate always-ship path. A scanner screenshot without that pytest is the same smell, not a different finding class.
+An unmapped HIGH still has to be denied. If the change never joins to the coverage map, that always-ship leftover is still open. A scanner screenshot does not replace that check.
 
-Who-is-allowed blind spots are review and isolation tests — name them, do not skip `test_unmapped_high_blocks_ship`. Do not claim the verification gate is done. Do not scan a live tenant to prove the finding.
+Who-is-allowed blind spots are review and isolation tests — name them, do not skip `test_unmapped_high_blocks_ship`. Do not treat this as a finished check-in. Do not scan a live tenant to prove the finding.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - `ship_ok` true on unmapped HIGH
 - Suppressions without owner
-- SAST offered as the verification gate
+- SAST offered as the check-in
 - No blind-spot note for who-is-allowed / IDOR
 
-Also reject: live tenants; closing findings without re-running `test_unmapped_high_blocks_ship`; keys in learner notes; claiming the verification gate is done.
+Also reject: live tenants; closing findings without re-running `test_unmapped_high_blocks_ship`; keys in learner notes; treating this SCA lesson as a check-in.
 
 ## Common mix-ups
 
@@ -44,13 +42,9 @@ Also reject: live tenants; closing findings without re-running `test_unmapped_hi
 - A maturity score is `ship_ok`
 - A draft supply-chain paper is finished
 
-## Practice
-
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_unmapped_high_blocks_ship`. Do not open the keys file.
-
 ## Use it somewhere new
 
-Clinic change that “enabled code scanning” without a mapping check is an incomplete ship-gate review. Name the independent falsehood that would still keep unmapped HIGH from shipping.
+Code scanning without a mapping check does not own the HIGH at ship. Code scanning is not a mapping check — write the unmapped-HIGH block.
 
 ## Can people still use it
 
@@ -58,4 +52,4 @@ The triage screen must say *why* F1 is blocked, in words. Do not encode “block
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will map later.” That comment is leftover without an owner. Do not scan a public repo to prove the finding.
+Leave “will map later” out of the ship until someone owns the unmapped HIGH. Do not scan a public repo to prove the finding.

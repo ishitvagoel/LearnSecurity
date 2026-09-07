@@ -1,24 +1,24 @@
-# Same idea: clinic close ticket when SIEM is green
+# Same idea on closing a clinic ticket because SIEM is green
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic that closes the ticket when the SIEM is green**. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic that closes the ticket when the SIEM is green**.
 
-The notes-app sentence was: `close_incident({"recovery": "todo", "logs": "ok"})` must be false. Rewrite it for a clinic without changing the fork: recovery todo denied, `note_body` denied, done + ok may close. A green SIEM is still a detect tile, not recover.
+`close_incident({"recovery": "todo", "logs": "ok"})` must be false. For a clinic, recovery todo denied, `note_body` denied, done + ok may close. A green SIEM is still a detect tile, not recover.
 
-**Product sketch:** an EHR-lite “alerts stopped so we closed INC-12,” plus “we have nightly backups and a known-exploited dashboard.”
+An EHR-lite “alerts stopped so we closed INC-12,” plus “we have nightly backups and a known-exploited dashboard.”
 
 ## Picture: same close loop, clinical object
 
-Renaming “note” to “chart” is not transfer. Recovery evidence, log inventory, and leftover change. Filing a green tile and marking the ticket Done does not set `recovery` to `"done"`.
+Close a clinic incident only the way you close a restore drill. Filing a green tile and marking the ticket Done does not set `recovery` to `"done"`.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Incident ticket with recovery + logs | Clinic ticket with the same two fields |
-| Restore drill before close | Same restore evidence on a **local** practice files |
+| Restore drill before close | Same restore evidence on **local** practice files |
 | `close_incident({"recovery": "todo", "logs": "ok"})` | Same call — recovery todo still denied |
 | Optimistic closer / still-in actor | Same closer — **not** a live clinic SIEM |
 | SIEM green / paging / known-exploited list | Same inputs — not the close decision |
@@ -32,16 +32,14 @@ flowchart LR
 
 If alerts stopped while `close_incident` is always true, the rule is gone. Paging, a known-exploited listing, and untested nightly backups do not set `recovery` to `"done"`. Ransomware restore (disk image) is a different grain from note-level integrity (no extra chart copies) — name both, do not run a live incident exercise here. Industry “recover” is an outcome label. A known-exploited list is patch-order input, not close. Logging every authorization decision without the sensitive data is extra, advanced work.
 
-The clinic rewrite still has to keep the notes-app fork: recovery todo denied, `note_body` denied, done + ok may close. Wiring a paging product without the conjunction leaves `close_incident` true on todo. The local pytest analogue is `test_cannot_close_without_recovery` — on a practice, not a live SIEM.
+A recovery todo still has to be denied, and a note body still has to stay out. Done plus ok may still close. Wiring a paging product without the conjunction leaves `close_incident` true on todo. The local check is `test_cannot_close_without_recovery` — on a practice, not a live SIEM.
 
-## Prompt — clinic close ticket when SIEM is green
+## Write this for a clinic close ticket when SIEM is green
 
-Rewrite the notes-app sentence. Include:
-
-1. who can act (optimistic closer / still-in actor — not a live clinic SIEM attack);
+1. who might try (optimistic closer / still-in actor — not a live clinic SIEM attack);
 2. what you trust (recovery done and no `note_body` is the promise; SIEM, paging, known-exploited list, and untested backups are not);
-3. what must not happen (`close_incident` true while recovery is todo, not a legal label);
-4. a test idea on a **local** practice files only (no live paging);
+3. what must not happen (`close_incident` true while recovery is todo);
+4. recovery todo must not close the incident — **local** practice files (no live paging);
 5. leftover (imperfect forensics, observability as a way out, support-tool god-mode, logging every authorization decision without the sensitive data);
 6. whether engineers read the runbook under stress (plain language, not color-only severity).
 
@@ -57,12 +55,12 @@ Also name ransomware restore vs note-level integrity.
 | Live SIEM / ransomware tutorial | Course rules |
 | “known-exploited listed so we closed” | Awareness / patch input, not close |
 | “time-to-detect improved” | Detect metric, not recover |
-| “assurance gate complete” | Forbidden stamp |
+| “check-in complete” | Forbidden stamp |
 
 ## Practice
 
-One page. No answer keys. `labs/10.5/10.5-lab` is the only running system you may break. Do not query a live SIEM.
+Prove restore ran before you close the incident. Keep the answer keys closed. `labs/10.5/10.5-lab` is the only running system you may break. Do not query a live SIEM.
 
 ## What this page is not doing
 
-Live-incident attacks. Real patient charts in logs. Claiming you finished an assurance gate from this page.
+Do not run live-incident attacks. Do not use real patient charts in logs. This page does not finish a check-in.

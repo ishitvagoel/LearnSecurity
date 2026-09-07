@@ -5,9 +5,9 @@
 
 ## Could someone else name the checks?
 
-“We delete the user” is not this lesson. A map someone else can test names **every copy of the body** and **who may keep an exception**.
+“We delete the user” does not name **every copy of the body** and **who may keep an exception**.
 
-This week's freeze: local `NOTES` / `ANALYTICS` / `SEARCH`. User `alice`. No live warehouse.
+`NOTES` / `ANALYTICS` / `SEARCH` — user `alice`. No live warehouse.
 
 > After `delete_account("alice")`, `body_retained("alice")` must be None and `search_retained("alice")` must be None. If a copy is missing from the map, leftover retention appears.
 
@@ -24,7 +24,7 @@ flowchart LR
   Delete --> Search
 ```
 
-If an arrow is missing, leftover retention appears. This week's check runs notes, analytics, and search.
+If an arrow is missing, leftover retention appears. The check runs notes, analytics, and search.
 
 ## Picture: name the copies before you redact
 
@@ -65,16 +65,16 @@ A missing “deleted alice × analytics body × deny” row is how the warehouse
 
 ## Practice
 
-Draw this map so someone else could name the pytest cases. Point at `labs/5.1/5.1-lab` file `lifecycle.py`. Your artifact is a versioned list (even a table in your notes) with copy, allow or deny, and what would show the deny is false. Fake data only.
+Mark `lifecycle.py` under `labs/5.1/5.1-lab`. Name each copy and the case that would prove the deny false. Fake data only.
 
 ## Use it somewhere new
 
-Clinic: appointment card plus notes. Partner CSV export.
+Appointment card plus notes. Partner CSV export.
 
 ## What can still go wrong
 
-Backups still contain the row (later). A phone's offline cache (later). Tickets with paste.
+Backups still contain the row (later). A phone cache still holding the deleted chart (later). Tickets with paste.
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Do not run this map against a public clinic or a live warehouse. Answer keys are not on this site.
+Do not run this map against a public clinic or a live warehouse. Answer keys are not on this site.

@@ -24,7 +24,7 @@ export default function StandardsPage() {
           course order. A draft stays labeled as a draft.
         </p>
       </PageHeader>
-      <h2 className="mb-3 text-xl font-semibold">What we point at</h2>
+      <h2 className="mb-3 text-xl font-semibold">The lists and papers</h2>
       <div className="overflow-x-auto rounded-xl border border-stone-200 bg-white">
         <table className="w-full min-w-[36rem] text-left text-sm">
           <caption className="sr-only">Industry lists and papers</caption>

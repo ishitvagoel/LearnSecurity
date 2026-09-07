@@ -5,13 +5,13 @@
 
 ## The rule
 
-TLS is not the fix. An IP allow-list is not the fix. Hashing parsed JSON is not the fix. JWT login of the end user is not the fix.
+TLS does not reject an empty signature. An IP allow-list does not reject it. Hashing parsed JSON is the wrong bytes. JWT login of the end user is a different check.
 
-Structural means the MAC is checked before side effects. `accept` must compute HMAC-SHA256 over the raw body with the disposable secret and compare in constant time. Missing or wrong signatures deny.
+Put simply, the MAC is checked before side effects. `accept` must compute HMAC-SHA256 over the raw body with the disposable secret and compare in constant time. Missing or wrong signatures deny.
 
-The smallest restore for the notes-app billing webhook is: empty sig denies. Fail closed: empty signature **denies** without throwing into a 500 that providers retry (6.7). Do not fail open because the secret store was unreachable.
+For the notes-app billing webhook: empty sig denies. By default, empty signature **denies** without throwing into a 500 that providers retry (6.7). An unreachable secret store does not skip the signature.
 
-## Picture: fail closed on a missing sig
+## Picture: deny a missing signature
 
 ```mermaid
 flowchart TD
@@ -23,13 +23,13 @@ flowchart TD
   Cmp -->|no| Deny
 ```
 
-The lab’s repaired files hash the raw body string with stdlib HMAC-SHA256 and `compare_digest`. Production still needs the MAC **before** `json.loads` (2.1): parse-then-re-serialize is a different document than the provider signed. Replay of a valid MAC and stale timestamps are named leftovers, not this pytest. Outbound webhook URLs are 6.5, not this inbound MAC.
+`accept` hashes the raw body with stdlib HMAC-SHA256 and `compare_digest`. Compute the MAC **before** `json.loads` (2.1): parse-then-re-serialize is a different document than the provider signed. Replay of a valid MAC and stale timestamps are named leftovers, not this check. Outbound webhook URLs are 6.5, not this inbound MAC.
 
-Industry lists want that standard-library check. This pytest is that sentence for empty sig. **Do not POST a live provider.**
+Use that standard-library check — empty sig. **Do not POST a live provider.**
 
 ## What the repaired files must show
 
-Read `fixed/hook.py` against this checklist. Do not treat the snippet as a production Stripe integration.
+`fixed/hook.py` checks a MAC, not a Stripe endpoint.
 
 | After the fix | Must be true |
 |---|---|
@@ -37,7 +37,7 @@ Read `fixed/hook.py` against this checklist. Do not treat the snippet as a produ
 | wrong sig | false |
 | matching MAC over same body | true |
 
-Fail closed: if the signature is missing or wrong, the answer is no. Uncertainty is a **deny**, not a yes because TLS looked fine.
+If the signature is missing or wrong, the answer is no. TLS looking fine does not fill in the signature.
 
 ## What this is not
 
@@ -59,11 +59,9 @@ Name the check (empty sig denies; HMAC-SHA256 over the raw body; `compare_digest
 python3 -m pytest labs/7.3/7.3-lab/tests --impl fixed
 ```
 
-It must pass. Run from the lab directory if collection at repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
-Clinic: stop treating “the hospital’s IP range” as the lab-result authenticity check.
+Stop treating “the hospital’s IP range” as the lab-result authenticity check.
 
 ## What can still go wrong
 
@@ -71,4 +69,4 @@ Replay; freshness; parse-before-MAC (2.1); 1.2 on writes; 6.5 egress; per-messag
 
 ## What this page is not doing
 
-Do not POST a live provider. Do not claim a course gate from a TLS screenshot.
+Do not POST a live provider. A TLS screenshot does not finish a check-in.

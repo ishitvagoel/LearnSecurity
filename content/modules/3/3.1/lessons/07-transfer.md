@@ -5,15 +5,15 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic booking card**. Chart text and appointment time sit on the same card. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic booking card**. Chart text and appointment time sit on the same card.
 
-The notes-app sentence was: `log_event("note_read", "tenant-A-secret-body")` must not contain the body. Rewrite it for a booking card without changing the fork: field × place, allow or deny.
+`log_event("note_read", "tenant-A-secret-body")` must not contain the body. For a booking card, field × place, allow or deny.
 
 ## Picture: time is not the chart
 
-Renaming “note body” to “chart text” is not transfer. Field, place, and leftover change. Logging the time does not authorize logging the chart. A single “sensitive” sticker that does not name places is just a sticker.
+Chart text is still a note body wherever it is printed. Logging the time does not authorize logging the chart. A single “sensitive” sticker that does not name places is just a sticker.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Note body is Confidential | Chart text is Confidential |
 | Note id / tenant id may be Internal | Appointment time may be Internal |
@@ -29,14 +29,12 @@ flowchart LR
 
 Two classes on one card is the point.
 
-## Prompt — clinic booking card
+## Write this for a clinic booking card
 
-Rewrite the notes-app sentence. Include:
-
-1. who can act (operator with logs; vendor with the drain; another company on shared observability — **not** a live clinic);
+1. who might try (operator with logs; vendor with the drain; another company on shared observability — **not** a live clinic);
 2. what you trust (which logging API; the spreadsheet and the privacy policy are not);
-3. what must not happen (chart text in the log, not a legal label and not “we classified it”);
-4. a test idea on **local** files only (substring absent + marker present — never on the real clinic);
+3. what must not happen (chart text in the log, not “we classified it”);
+4. prove the chart substring is gone and the marker remains — **local** files (never on the real clinic);
 5. leftover (time is Internal and may be logged; ids remain; APM; exception dumps; query strings in access logs);
 6. whether a human-read badge must not use color as the only cue (classification itself is not an accessibility problem; color-only “Confidential” badges are).
 
@@ -47,13 +45,13 @@ Rewrite the notes-app sentence. Include:
 | Spreadsheet as the rule | No place named; no allow or deny |
 | Live clinic logs | Course rules |
 | Privacy-policy URL | A document is not the logger |
-| A legal label as the check | Awareness, not this pytest |
+| A famous-bugs name as the check | Awareness, not this check |
 | HTTP 200 as classification evidence | Wrong observation |
 
 ## Practice
 
-One page. No answer keys. The only running system you may break is `labs/3.1/3.1-lab`. Do not fetch a clinic, dump a production drain, or use real patient identifiers.
+Redact the clinic log the way you redact the note. Keep the answer keys closed. The only running system you may break is `labs/3.1/3.1-lab`. Do not fetch a clinic, dump a production drain, or use real patient identifiers.
 
 ## What this page is not doing
 
-Live log tenants. Real charts. Mixing a draft privacy list as if it were final.
+Do not use live log tenants. Do not use real charts. Do not mix a draft privacy list as if it were final.

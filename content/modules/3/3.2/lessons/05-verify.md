@@ -1,15 +1,15 @@
-# Fail on the broken files, then pass on the repaired ones
+# A missing cross-company check must fail
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-“We threat-modeled in the sprint” is not evidence. “Scanner was green” is a tool observation. The check is: `threats_from_scan(True)` contains `cross-tenant-read`. That observation must be **false** on the broken files and **true** on the repaired files.
+A sprint that “did threat modeling” does not name the leftover read. A green scanner tile is a score. `threats_from_scan(True)` still has to contain `cross-tenant-read`. Broken: that row is missing. Repair still lists `cross-tenant-read` on a green scan.
 
 ## Picture: missing cross-tenant-read must fail
 
-A test that only counts collection size can pass while `cross-tenant-read` is gone. This check asks whether an empty model on a green scan still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A check that only counts collection size can still hide that `cross-tenant-read` is gone.
 
 ```mermaid
 flowchart LR
@@ -24,14 +24,14 @@ flowchart LR
 | Additive | Scanner extras (`cve-extra`) do not replace the seed |
 | Not claimed | Completeness of all future threats; production scanner SaaS; STRIDE facilitation quality |
 
-Lab tests live in `labs/3.2/3.2-lab/tests/test_property.py`. `test_green_scanner_is_not_an_empty_threat_model` is a **what-must-not-happen** test: an empty model on a green scan is not allowed to count as a passing control.
+Look in `labs/3.2/3.2-lab/tests/test_property.py`. An empty model on a green scan keeps `test_green_scanner_is_not_an_empty_threat_model` failing.
 
 ```text
 python3 -m pytest labs/3.2/3.2-lab/tests --impl vulnerable
 python3 -m pytest labs/3.2/3.2-lab/tests --impl fixed
 ```
 
-Map each test to a row you wrote on the model page. If the broken files do not fail the missing-id check, the lab is miswired — fix the wiring, not the check. An environment error is not security evidence.
+Map each test to a row you wrote on the model page. If the broken files do not fail the missing-id check, the lab is miswired — fix the wiring, not the check. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
@@ -41,15 +41,13 @@ Map each test to a row you wrote on the model page. If the broken files do not f
 - Production scanner coverage
 - That `stolen-worker` is implemented (the worker is later work)
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
-Run both this session. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `STRIDE` in a markdown file without calling `threats_from_scan(True)`.
+Call `threats_from_scan(True)`. A `STRIDE` heading in markdown is a sticker, not `cross-tenant-read`.
 
 ## Use it somewhere new
 
-Clinic SMS. A test that only asserts HTTP 200 is not threat-model evidence. A test that scans a live clinic is out of scope.
+HTTP 200 on an SMS send is not a threat-model check. Do not run a test that scans a live clinic.
 
 ## What this page is not doing
 

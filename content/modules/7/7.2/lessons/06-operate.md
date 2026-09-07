@@ -1,11 +1,11 @@
-# field_denied without logging the secret
+# Log the denied field, not the secret
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A new CSV exporter or a later worker dump (7.4) can skip the GraphQL resolver after `resolve` was “fixed once.” Pair notice and recover. Do not log `secret_internal` values (3.1). Do not attach the field value to the ticket.
+A CSV exporter or a later worker dump (7.4) can skip the GraphQL resolver. Do not write `secret_internal` into the ticket.
 
 ## Picture: denied field is a signal
 
@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Rotate[Rotate if the value escaped]
 ```
 
-Industry lists name detect, respond, recover. They do not check role × field. They do not prove field permission. A GraphQL-gateway product name is not the rule. Re-run `test_member_cannot_resolve_internal_field` after any serializer change; a green “field authz enabled” tile is not that pytest. Search highlighting and overnight export are other dumps of the same row — inventory them before you claim recover.
+A GraphQL-gateway product name does not check role × field or prove field permission. A member session still has to fail `test_member_cannot_resolve_internal_field`. “Field authz enabled” does not hide `secret_internal`. Search highlighting and overnight export can still dump `secret_internal`; the field is not private until those dumps are named.
 
 ## Signals that do not become a second leak
 
@@ -29,9 +29,9 @@ Industry lists name detect, respond, recover. They do not check role × field. T
 
 ## What the framework does vs what you still have to check
 
-An APM dashboard will show GraphQL errors and stay silent when `/export.csv` still dumps every column. Notice must observe **member × `secret_internal` false**, not HTTP status counts. If the alert includes the field value, you have opened a logging leak (3.1).
+GraphQL error charts in APM can look busy while `/export.csv` still dumps every column. Resolve **member × `secret_internal` false**, not HTTP status counts. The field value on the field-deny metric is a logging leak (3.1).
 
-The app’s promise is: **this** practice, a `field_denied` line fires without the secret.
+A `field_denied` line fires without the secret.
 
 ## Can people still use it
 
@@ -39,18 +39,16 @@ If a human is denied a field they should not see, do not announce the secret in 
 
 ## Practice
 
-Write one log line you would accept. Tie it to `labs/7.2/7.2-lab`. Example shape (fake ids only):
-
 ```text
 log_denied reason=field_denied field=secret_internal subject=user_72e request_id=req_72e
 ```
 
-Reject any line that includes the field value, a real SSN, or a live GraphQL trace against a public host.
+GraphQL field denials should log the field name — not the value, a real SSN, or a live GraphQL trace against a public host.
 
 ## Use it somewhere new
 
-Clinic: detect SSN field probes on a local practice files; do not attach the SSN to the ticket. Do not query a live EHR.
+Detect SSN field probes on local practice files; do not attach the SSN to the ticket. Do not query a live EHR.
 
 ## What this page is not doing
 
-A GraphQL-gateway product name is not the rule. Public GraphQL probes are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+A GraphQL-gateway sticker does not hide `secret_internal`. Do not follow public GraphQL probes. This site does not mark you as finished. Answer keys are not on this site.

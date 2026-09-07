@@ -3,13 +3,13 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A misconfigured proxy can start trusting `*` again after `channel_is_https` was “fixed once.” Pair notice and recover. Do not log cookie values. Do not paste a session into the ticket.
+A proxy that trusts `*` again will mint cookies on a cleartext socket. Cookie values and the session do not go in the ticket.
 
 ## Picture: header versus socket mismatch is a signal
 
-A client header saying https while the socket is http is a notice-and-recover problem, not a licence to quote cookies in the paging channel. Notice names the event. Recover revokes the cleartext cookies. Neither reprints the cookie.
+If the client header says https while the socket is http, the alert is the mismatch, not the cookie values. Then revoke the cleartext cookies.
 
 ```mermaid
 flowchart TD
@@ -19,7 +19,7 @@ flowchart TD
   Alert --> Revoke[Revoke cookies issued on that path]
 ```
 
-Industry lists name detect, respond, recover. They do not bind the socket. They do not pick a log product. Someone still has to own the mismatch.
+A TLS dashboard does not compare the client header to the socket.
 
 ## Signals that do not become a second leak
 
@@ -31,21 +31,19 @@ Industry lists name detect, respond, recover. They do not bind the socket. They 
 | Recover | HSTS once TLS is real; revoke cleartext cookies; re-run `test_client_forwarded_proto_is_not_tls` |
 | Leftover | Pinning (later on phones); cookies already copied |
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=header_https_socket_http socket=http request_id=req_54ch
 ```
 
-Not: a session cookie, a note body, or “HSTS handled.”
+A session cookie, a note body, or “HSTS handled” turns that sample into a cookie store.
 
-If your alert includes a session cookie or a note body, you have opened a second leak in the paging channel.
+A session cookie or a note body in the header-versus-socket ticket is another cookie jar.
 
-A green “Force HTTPS” tile is not that pytest. Re-run `test_client_forwarded_proto_is_not_tls` after any proxy change. Page `https://` versus API socket `http` is another path of the same cell — inventory it before claiming recover.
+A “Force HTTPS” toggle does not prove the socket is TLS. A client `https` header on an http socket still has to fail `test_client_forwarded_proto_is_not_tls`. Page `https://` versus API socket `http` is another hop; do not call TLS done until that pair is named.
 
 ## What the framework does vs what you still have to check
 
-A CDN dashboard will show “HTTPS only” and stay silent when the app still trusts `X-Forwarded-Proto` from anyone. Notice must observe **header https and socket http**, not a preload list. A server flag that trusts proxy headers does not emit this alert for you.
+“HTTPS only” on a CDN tile does not see the app still trusting `X-Forwarded-Proto` from anyone. Pair **header https and socket http**, not a preload list. A server flag that trusts proxy headers does not emit this alert for you.
 
 ## Can people still use it
 
@@ -53,12 +51,12 @@ If a human sees a certificate or mixed-content warning, make the error readable.
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no cookie). Tie it to `labs/5.4/5.4-lab`. Reject any line that includes a session cookie, a note body, or “HSTS handled.”
+The header-versus-socket miss can show ids and a reason — never the cookie. A session cookie, a note body, or “HSTS handled” would turn the deny line into a cookie jar.
 
 ## Use it somewhere new
 
-Clinic: notice page-https versus API-http; do not paste cookies into the ticket. Do not probe a live clinic.
+Notice page-https versus API-http; do not paste cookies into the ticket. Do not probe a live clinic.
 
 ## What this page is not doing
 
-A log-product name is not the rule. Live TLS hunts are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live TLS hunts. This site does not mark you as finished. Answer keys are not on this site.

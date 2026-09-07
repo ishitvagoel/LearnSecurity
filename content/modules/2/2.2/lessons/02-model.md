@@ -5,9 +5,9 @@
 
 ## Could someone else name the checks from your map?
 
-A boxes-and-arrows “browser → CDN → API” sketch is not this lesson. A request-path map names **where TLS ends**, **what the cache key contains**, and **which bound company** that key is allowed to use.
+Keep **where TLS ends**, **what the cache key contains**, and **which bound company** that key is allowed to use; A boxes-and-arrows “browser → CDN → API” sketch is not that list.
 
-This week’s freeze: companies, notes, and a **local cache practice**. No live CDN, no DNSSEC claim, no mTLS mesh, no HTTP/3 product.
+Companies, notes, and a **local cache practice**. No live CDN, no DNSSEC claim, no mTLS mesh, no HTTP/3 product.
 
 ## Picture: every hop can change what is trusted
 
@@ -62,7 +62,7 @@ A missing anonymous cell is how `Cache-Control: public` on `/notes/{id}` appears
 
 ## Practice
 
-Draw the map so someone else could name the checks without opening the keys file. Point at `labs/2.2/2.2-request-path` file `cache.py`. Label path-only versus `(path, bound company)`.
+Look at `cache.py` under `labs/2.2/2.2-request-path`. Label path-only versus `(path, bound company)`.
 
 ## Use it somewhere new
 
@@ -74,4 +74,4 @@ An operator can still drop the company dimension at the CDN. Watch it and keep a
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list item. Answer keys are not on this site.
+Answer keys are not on this site.

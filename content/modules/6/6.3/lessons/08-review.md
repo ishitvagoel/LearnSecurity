@@ -3,31 +3,29 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
-
 ## What you are reviewing
 
-A colleague ships notes-app share. Your job is not to count suspicious lines. Reconstruct whether `allow_share` for a foreign origin with `token=None` is still true, compare that with the module rule, and write changes a developer can verify.
+This is a share-route review. Does `allow_share` still return true for a foreign origin with `token=None`?
 
-The folder `labs/6.3/6.3-lab/vulnerable/` is the change. The check you already ran (`test_foreign_origin_post_is_denied`) is the rule test. A comment “will add CSRF later” is not.
+If `test_foreign_origin_post_is_denied` still fails, “will add CSRF later” is not the review.
 
 ## Picture: leftover cookie auth + no Origin check
 
-Start with this seeded smell: **Cookie auth + no Origin check**. Label it rule, tool, or false comfort before you accept the change.
+**Cookie auth + no Origin check**.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|"foreign origin allowed"| Property["Rule - good if tested"]
   Q -->|"SameSite Lax"| Mechanism[Tool - helper]
-  Q -->|"CORS star"| False[False comfort]
+  Q -->|"CORS star"| False[False assurance]
 ```
 
-Review starts at the protected effect (foreign origin without token denied). Everything that is not origin-and-token at that call is a candidate leftover-cookie path. SameSite=Lax without that test is the same smell, not a different finding class.
+A foreign origin without a token still has to be denied. If the change never checks origin and token, that leftover-cookie path is still open. SameSite=Lax without that test is still the same problem.
 
 Leftover cookies are leftover permission from login — a signed-in session cookie that rides along — used as if it were consent for this person, this share, and this origin.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - Cookie auth + no Origin check
 - GET `/share?to=`
@@ -42,16 +40,12 @@ Also reject: live third-party CSRF; closing findings without re-running `test_fo
 - JSON APIs cannot CSRF
 - CORS is CSRF defense
 - Logged-in cookie is consent
-- Fetch metadata alone is this pytest
-
-## Practice
-
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one to `test_foreign_origin_post_is_denied`. Do not open the keys file.
+- Fetch metadata alone is this check
 
 ## Use it somewhere new
 
-Clinic change that “set SameSite=Lax” without an origin-and-token test is an incomplete review of leftover cookies. Name the independent falsehood that would still keep a foreign origin from sharing.
+SameSite=Lax without an origin-and-token test still leaves leftover cookies. SameSite=Lax is not origin-and-token — write the foreign-origin deny.
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will add CSRF later.” That comment is leftover without an owner. Do not visit a live third-party page to prove the finding.
+Postpone CSRF in a comment and nobody owns the foreign-origin deny. Do not visit a live third-party page to prove the finding.

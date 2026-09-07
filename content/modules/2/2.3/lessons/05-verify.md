@@ -1,15 +1,15 @@
-# Fail on the broken files, then pass on the repaired ones
+# The broken files must fail a script reading the cookie
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
 ## If you cannot fail a check, it is still a slogan
 
-A green CSP scanner is not this week’s evidence. “Set-Cookie is present” is a tool observation. The check is: for `HTTPONLY_SESSION`, `js_read_session` returns `None`. That observation must be **false** on `--impl vulnerable` and **true** on `--impl fixed`.
+A green CSP scanner does not prove the cookie is unreadable from script. A Set-Cookie header is a name, not HttpOnly. For `HTTPONLY_SESSION`, `js_read_session` has to return `None`. Broken: the reader still returns the session. Repair keeps script from reading it.
 
 ## Picture: broken must fail the HttpOnly read
 
-A test that only counts collected items can pass while the reader still returns the session. This check asks whether a script-readable session still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A check that only counts collected items can still hide that the reader still returns the session.
 
 ```mermaid
 flowchart LR
@@ -24,7 +24,7 @@ flowchart LR
 | When things break | Missing flag on a session name is a defect, not a silent readable default |
 | Not claimed | XSS impossible; CSP3 enforced; CORS correct; SameSite complete |
 
-The file is `labs/2.3/2.3-browser-policy/tests/test_httponly.py`. It calls `js_read_session` on a dummy cookie with `httponly: True` and `secure: True`. That is a **what-must-not-happen** test: a script-readable session is not allowed to count as a passing control.
+It calls `js_read_session` on a dummy cookie with `httponly: True` and `secure: True`. A script-readable session is the fail case.
 
 ```text
 python3 -m pytest labs/2.3/2.3-browser-policy/tests --impl vulnerable
@@ -43,15 +43,13 @@ Map the test to the script-read row you wrote. Do not paste keys. If broken does
 - WebView bridges (later mobile)
 - That note bodies in the page are unreadable to script
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
-Run both this session. Write the fail/pass pair next to the table row. Reject a “test” that only greps `HttpOnly` in a string without calling the reader.
+Call the cookie reader. An `HttpOnly` substring is the flag name, not `js_read_session`.
 
 ## Use it somewhere new
 
-Clinic patient portal. A test that only asserts `Set-Cookie` exists is not HttpOnly evidence. A test that loads the real clinic is out of scope.
+A `Set-Cookie` header on the patient portal is not HttpOnly evidence. Do not run a test that loads the real clinic.
 
 ## What this page is not doing
 

@@ -1,15 +1,15 @@
-# Fail on the broken files, then pass on the repaired ones
+# The broken files must fail when the secret is in plaintext
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-“EncryptedSharedPreferences is on” is not evidence. “Internal storage” is a tool observation. The check is: after `save_note("secret")`, `plaintext_on_disk()` is false. That observation must be **false** on `--impl vulnerable` (DISK holds `'secret'`) and **true** on `--impl fixed`. Do not image phones.
+EncryptedSharedPreferences on a different file does not hide the note. Internal storage is a folder. After `save_note("secret")`, `plaintext_on_disk()` has to be false. Broken: DISK still holds `'secret'`. Repair leaves DISK empty of `'secret'`. Do not image phones.
 
 ## Picture: broken files must fail: plaintext secret
 
-A check that only counts passing cases can pass while the cache still holds `'secret'`. This check asks whether a text-file cache of `'secret'` still counts as a passing control. Broken must fail that question. Repaired must pass it.
+The cache can still hold `'secret'` even when the suite is green.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass not plaintext"]
 ```
 
-If both pass, the check is not looking at the body on disk. If both fail, the fix is not structural or the check is wrong.
+If the broken cache still passes, the body on disk was never the leftover.
 
 ## Observations, even for a cache
 
@@ -27,14 +27,14 @@ If both pass, the check is not looking at the body on disk. If both fail, the fi
 | Normal | save `'other'` → not reported as plaintext secret (may pass on both) |
 | Not claimed | Real AES; backup exclusion; screenshot `FLAG_SECURE`; Keystore hardware |
 
-Practice checks live in `labs/8.2/8.2-lab/tests/test_property.py`. `test_cached_note_is_not_plaintext_on_disk` is a **what-must-not-happen** check: a text-file cache of `'secret'` is not allowed to count as a passing control.
+A text-file cache of `'secret'` is what `test_cached_note_is_not_plaintext_on_disk` watches in `labs/8.2/8.2-lab/tests/test_property.py`.
 
 ```text
 python3 -m pytest labs/8.2/8.2-lab/tests --impl vulnerable
 python3 -m pytest labs/8.2/8.2-lab/tests --impl fixed
 ```
 
-Honest `'other'` saves may pass on both implementations. That does not excuse the plaintext-secret deny check. If the broken files do not fail `test_cached_note_is_not_plaintext_on_disk`, the practice is miswired — fix the wiring, not the check.
+Saving a non-secret `'other'` value may stay allowed. Keep the cached note off plaintext disk. If the broken files do not fail `test_cached_note_is_not_plaintext_on_disk`, the practice is miswired — fix the wiring, not the check.
 
 ## What the checks do not prove
 
@@ -45,16 +45,14 @@ Honest `'other'` saves may pass on both implementations. That does not excuse th
 - That the lab `aead:` prefix is AES-GCM (it is a stand-in)
 - 4.1 logout wipe of the store
 
-Record those as leftover risk or later topics, not as silent passes.
-
 ## Practice
 
-Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the map-page row. Reject a “check” that only greps `EncryptedSharedPreferences` without calling `save_note("secret")` then `plaintext_on_disk()`. An environment error is not security evidence.
+Call `save_note("secret")` then `plaintext_on_disk()`. EncryptedSharedPreferences on another file is not this disk. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts Room `insert` succeeded is not this cell. Personal-phone imaging is out of scope.
+A Room `insert` that succeeded is the write, not plaintext-off-disk. Do not image a personal phone.
 
 ## What this page is not doing
 
-Do not add a live backup trophy. Do not log note bodies. Answer keys are not on this site. Do not claim the lab prefix is AES.
+A live backup screenshot is not plaintext-off-disk. Do not log note bodies. Answer keys are not on this site. Do not claim the lab prefix is AES.

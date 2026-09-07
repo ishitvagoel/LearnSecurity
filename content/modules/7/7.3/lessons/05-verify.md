@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-“Webhooks are signed” is not evidence. “TLS is on” is a tool observation. The check is: `accept("", "body", "lab-secret")` is false and a matching HMAC over the same raw body is true. The empty-sig observation must be **false** on the broken files (returns true) and **true** on the repaired files. Tests stay local. Do not hit live providers.
+A “webhooks are signed” slide does not reject an empty signature. TLS is a hop. `accept("", "body", "lab-secret")` has to be false, and a matching HMAC over the same raw body has to be true. Broken: the empty signature still returns true. Repair refuses a missing HMAC. Tests stay local. Do not hit live providers.
 
 ## Picture: empty sig on the broken files must fail the check
 
-A test that only counts passing cases can pass while an unsigned body is still accepted. This check asks whether an always-true `accept` still counts as a passing control. Broken must fail that question. Repaired must pass it.
+An unsigned body can still be accepted even when the suite is green.
 
 ```mermaid
 flowchart LR
@@ -17,9 +17,9 @@ flowchart LR
   X["repaired files --impl fixed"] --> P["Must pass: deny"]
 ```
 
-If both pass, the test is not looking at a missing sig. If both fail, the fix is not structural or the check is wrong.
+If the broken webhook still passes, a missing sig was never rejected.
 
-## Four modes, even for one callback
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,16 +28,16 @@ If both pass, the test is not looking at a missing sig. If both fail, the fix is
 | Failure | If you cannot name the signature, do not accept |
 | Not claimed | Replay window; parse-before-MAC; 1.2; live Stripe |
 
-The file is `labs/7.3/7.3-lab/tests/test_property.py`. The test `test_missing_signature_is_rejected` is a **what-must-not-happen** test: an always-true `accept` is not allowed to count as a passing control.
+`test_missing_signature_is_rejected` exists to catch always-true `accept`.
 
-A test that only asserts HTTP 200 on `/webhook` is not this topic’s evidence. A test that only greps `hmac` in source without calling `accept("", "body", "lab-secret")` is not this topic’s evidence. This practice never POSTs a live webhook.
+An `hmac` import is not `accept("", "body", "lab-secret")`. This practice never POSTs a live webhook.
 
 ```text
 python3 -m pytest labs/7.3/7.3-lab/tests --impl vulnerable
 python3 -m pytest labs/7.3/7.3-lab/tests --impl fixed
 ```
 
-Honest matching signatures may pass on both implementations. That does not excuse the missing-sig deny test. If the broken files do not fail `test_missing_signature_is_rejected`, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
+Keep a callback with a matching MAC. Deny a missing signature. If the broken files do not fail `test_missing_signature_is_rejected`, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
@@ -47,23 +47,14 @@ Honest matching signatures may pass on both implementations. That does not excus
 - Outbound URL ownership (6.5)
 - That a valid MAC still respects 1.2 on side effects
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
-Run both this session from the lab directory if needed:
-
-```text
-python3 -m pytest labs/7.3/7.3-lab/tests --impl vulnerable
-python3 -m pytest labs/7.3/7.3-lab/tests --impl fixed
-```
-
-Paste nothing from answer keys. Write fail/pass into your notes next to the matrix row. Reject a “test” that only greps `hmac` in source without calling `accept("", "body", "lab-secret")`.
+Call `accept("", "body", "lab-secret")`. An `hmac` import is the library, not the empty-sig deny.
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts HTTP 200 on `/webhook` is not this check. A live vendor POST is out of scope.
+An accepted `/webhook` can still have an empty sig. Do not send a live vendor POST.
 
 ## What this page is not doing
 
-Do not add a live Stripe trophy. Do not log bodies or `lab-secret`. Answer keys are not on this site.
+A live Stripe screenshot is not an empty signature denied. Do not log bodies or `lab-secret`. Answer keys are not on this site.

@@ -1,15 +1,15 @@
-# Fail on the broken files, then pass on the repaired ones
+# An unbounded allow must fail the check
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-“Rate limit is on” is not evidence. “The button is disabled” is a tool observation. The check is: `allow(4)` is false and `allow(3)` is true. That fourth-export observation must be **false** on the broken files (returns true) and **true** on the repaired files. Do not load-test public hosts.
+A rate-limit product name does not cap the fourth export. A disabled button is the UI. `allow(4)` has to be false and `allow(3)` has to be true. Vulnerable files: the fourth export still returns true. Repair refuses the fourth export. Do not load-test public hosts.
 
 ## Picture: unbounded allow must fail the check
 
-A test that only counts passing cases can pass while the fourth export still goes through. This check asks whether an unbounded fourth still counts as a passing control. Broken must fail that question. Repaired must pass it.
+The fourth export can still go through a green suite.
 
 ```mermaid
 flowchart LR
@@ -17,9 +17,9 @@ flowchart LR
   X["repaired files --impl fixed"] --> P["Must pass: deny at 4"]
 ```
 
-If both pass, the test is not looking at the fourth export. If both fail, the fix is not structural or the check is wrong.
+If the broken exporter still passes, the fourth export was never capped.
 
-## Four modes, even for one quota
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,42 +28,33 @@ If both pass, the test is not looking at the fourth export. If both fail, the fi
 | Failure | If you cannot read the count, deny |
 | Not claimed | Per-IP fairness; GraphQL; live requests per second |
 
-The file is `labs/6.7/6.7-lab/tests/test_property.py`. The test `test_fourth_export_is_denied` is a **what-must-not-happen** test: an unbounded fourth is not allowed to count as a passing control.
+Without `test_fourth_export_is_denied`, an unbounded fourth would ship.
 
-A test that only asserts HTTP 200 on `/export` is not this topic’s evidence. A test that only greps an edge-proxy keyword without calling `allow(4)` is not this topic’s evidence. This practice never opens a public host.
+An edge-proxy keyword is not `allow(4)`. This practice never opens a public host.
 
 ```text
 python3 -m pytest labs/6.7/6.7-lab/tests --impl vulnerable
 python3 -m pytest labs/6.7/6.7-lab/tests --impl fixed
 ```
 
-Honest `allow(3)` may pass on both implementations. That does not excuse the fourth-deny test. If the broken files do not fail `allow(4)`, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
+`allow(3)` may stay allowed. Deny the fourth export. If the broken files do not fail `allow(4)`, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
-- Human timing tricks (advanced, not this pytest)
+- Human timing tricks (advanced, not this check)
 - Per-person vs per-IP in production (named in the quota map)
 - File storage quotas (a different budget, later)
 - Cost of a real cloud bill
 - GraphQL alias multiplication (7.1)
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
-Run both this session:
-
-```text
-python3 -m pytest labs/6.7/6.7-lab/tests --impl vulnerable
-python3 -m pytest labs/6.7/6.7-lab/tests --impl fixed
-```
-
-Paste nothing from answer keys. Write fail/pass into your notes next to the matrix row. Reject a “test” that only greps an edge-proxy keyword without calling `allow(4)`.
+Call `allow(4)`. An edge-proxy keyword is someone else’s counter.
 
 ## Use it somewhere new
 
-Clinic bulk-export. A test that only asserts HTTP 200 on `/export` is not this check (see 9.3). A public load test is out of scope.
+Cap miss still looks like a successful `/export`. Do not use a public load test.
 
 ## What this page is not doing
 
-Do not add a live load trophy. Do not log CSV bodies. Answer keys are not on this site.
+A live load screenshot is not the fourth export denied. Do not log CSV bodies. Answer keys are not on this site.

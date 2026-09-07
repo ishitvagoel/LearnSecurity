@@ -5,21 +5,19 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `argv_for_list` and `uses_shell`. It does not start a process. The failure is already in the function: it glues the name into a shell string. You are here to see that the check treats that as a **failed rule**, not as a trophy command.
-
-The rule under test:
+The practice is not a website you attack. `argv_for_list` and `uses_shell` do not start a process. They glue the name into a shell string, so the name is already a command fragment.
 
 > The export name is an argv element, not shell grammar. `argv_for_list` must not start `sh -c`.
 
 ## Where you may practice
 
-Only `labs/6.1/6.1-lab` is in scope. The maps are in-process: `argv_for_list` / `uses_shell`. Fake name `notes`. It does not spawn a process.
+Stay inside `labs/6.1/6.1-lab`. Fake name `notes` is the input to `argv_for_list` / `uses_shell`. It does not spawn a process.
 
 Do not run a live OS command. Do not probe an employer export worker. Do not probe a classmate preview. Do not paste a live command “to see what happens.”
 
-What must not happen: a user-chosen name run through a shell string. `argv_for_list("notes")` starts with `["sh", "-c"]` and `uses_shell` is true.
+`argv_for_list("notes")` starting with `["sh", "-c"]` is the name run through a shell string (`uses_shell` true).
 
-Who can act here: a member who can choose an export name. That stands in for a clinic CSV filename, a Jinja template name, or a mail header later. What you are supposed to trust: `argv_for_list` passes the name as **one argv element** to a fixed binary. A denylist of punctuation, `shell=True` with “cleaned” strings, and “internal users are trusted” are not what you trust for this check.
+Picture a member who can choose an export name — a clinic CSV filename, a Jinja template name, or a mail header later. `argv_for_list` passes the name as **one argv element** to a fixed binary — not A denylist of punctuation, `shell=True` with “cleaned” strings, or “internal users are trusted”.
 
 ## Picture: sh -c is a second parser
 
@@ -29,26 +27,23 @@ flowchart TD
   Sh --> Shell[uses_shell true]
 ```
 
-The broken files show **cause** (name concatenated into a shell string), not a command-execution trophy. What has to be true first: `argv_for_list` returns `['sh', '-c', 'ls ' + name]` and `uses_shell` is true. You do not need to execute the list. You must not.
+The name is concatenated into a shell string — not a live command. `argv_for_list` returns `['sh', '-c', 'ls ' + name]` and `uses_shell` is true. You do not need to execute the list. You must not.
 
-Industry lists want OS calls that pass arguments as parameters. A scanner name for this family is a weakness label, not that check. The class of hostile names is text a shell would treat as extra grammar — extra commands, substitutions, or pipes. Treat it as data for one argv slot. Do not paste that class into notes as a cookbook. Honest name `notes` is enough, because the check looks at shape.
+OS calls have to pass arguments as parameters. A scanner name for this family is a weakness label, not that check. The class of hostile names is text a shell would treat as extra grammar — extra commands, substitutions, or pipes. Treat it as data for one argv slot. Do not paste that class into notes as a cookbook. Honest name `notes` is enough, because the check looks at shape.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
-Read `vulnerable/argv.py`. It concatenates the name into a `sh -c` string. Tests:
+`vulnerable/argv.py` concatenates the name into a `sh -c` string. Tests:
 
 - `test_does_not_invoke_shell`
 - `test_argv_is_program_then_name`
 
-You do not need a new name string. The failure of `test_does_not_invoke_shell` *is* the evidence.
-
-Do not open the repaired files yet. Diagnose the cause first.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | `argv_for_list` starts `sh -c` | Name glued into shell grammar | A scanner name |
 | `uses_shell` is true | Shell still in the path | “subprocess will handle it” |
-| Honest `notes` still glued in | Data treated as grammar | A live command trophy |
+| Honest `notes` still glued in | Data treated as grammar | A live command |
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
@@ -56,7 +51,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 |---|---|
 | The rule | Export name is an argv element, not shell grammar |
 | Why it happens | Concatenating untrusted data into a shell string |
-| What has to be true first | `argv_for_list` starts `sh -c`; `uses_shell` true |
+| What's already wrong | `argv_for_list` starts `sh -c`; `uses_shell` true |
 | Trigger | `argv_for_list("notes")` |
 | What it costs | Integrity of the OS interpreter boundary (structure only here) |
 | How you stop it | Argv list to a fixed binary; `--` before the name; no shell |
@@ -66,21 +61,19 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-FastAPI has no opinion about argv. `subprocess.run(..., shell=True)` will parse the name. Next.js `child_process.exec` is a shell. The app's promise is: **these** local files, `cmd[:2] != ["sh", "-c"]` and `uses_shell` is false.
+FastAPI has no opinion about argv. `subprocess.run(..., shell=True)` will parse the name. Next.js `child_process.exec` is a shell. `cmd[:2] != ["sh", "-c"]` and `uses_shell` is false.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/6.1/6.1-lab/tests --impl vulnerable
 ```
 
-Record `test_does_not_invoke_shell`. Do not probe public hosts. An environment error is not security evidence.
+Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic export filename. Predict without leaving this directory. Do not hit a live export worker.
+The export filename is a second interpreter. Predict without leaving this directory. Do not hit a live export worker.
 
 ## What this page is not doing
 

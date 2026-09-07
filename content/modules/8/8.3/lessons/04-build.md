@@ -5,11 +5,11 @@
 
 ## The rule
 
-Verified App Links are not the fix. `https` is not the fix. `exported=false` without a test is not the fix.
+Verified App Links do not ignore `as=admin`. An https scheme does not ignore it. `exported=false` without a test still leaves extras readable.
 
-The structural change is: `open_link` **does not copy identity keys onto `current_user`**. Locators such as `note=` may be honored later; this practice ignores extras entirely as the smallest fix. Ignore identity parameters on links.
+The repair: `open_link` **does not copy identity keys onto `current_user`**. Locators such as `note=` may be honored later; this practice ignores extras entirely as the smallest fix. Ignore identity parameters on links.
 
-The smallest restore for the notes app’s App Links is: `as=admin` keeps alice. Fail-safe: unknown keys do not switch users. Do not fail open because the Activity was exported “for sharing.”
+Restore the notes app’s App Links with this: `as=admin` keeps alice. Unknown keys do not switch users. Exporting the Activity “for sharing” does not switch the user.
 
 ## Picture: extras never become the principal
 
@@ -20,9 +20,9 @@ flowchart TD
   Id -->|no| Locate[optional locator]
 ```
 
-The repaired files ignore extras entirely (`open_link` returns without writing SESSION). Production may still honor locators such as `note=n1` after 1.2 / 4.4 — this pytest only requires the principal stay alice. Verified App Links still pass query strings. Custom schemes remain hijackable. WebView `addJavascriptInterface` is a new IPC (6.2).
+The repaired files ignore extras entirely (`open_link` returns without writing SESSION). Production may still honor locators such as `note=n1` after 1.2 / 4.4 — this check only requires the principal stay alice. Verified App Links still pass query strings. Custom schemes remain hijackable. WebView `addJavascriptInterface` is a new IPC (6.2).
 
-Industry lists want authorization on a trusted service layer. This pytest is that sentence for `open_link({"as": "admin"})`.
+Authorization belongs on a trusted service layer — `open_link({"as": "admin"})`.
 
 ## What the repaired files must show
 
@@ -31,7 +31,7 @@ Industry lists want authorization on a trusted service layer. This pytest is tha
 | `as=admin` | still alice |
 | `note=n1` | still alice |
 
-Fail closed: if the key is identity, **do not copy it**. Do not keep copying extras because “App Links are verified.”
+By default, if the key is identity, **do not copy it**. Verified App Links do not copy unknown extras.
 
 ## What this is not
 
@@ -57,11 +57,9 @@ Name the predicate (identity keys ignored; session stays server-issued). Run:
 python3 -m pytest labs/8.3/8.3-lab/tests --impl fixed
 ```
 
-Must pass. Run from the lab directory if collection at repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
-Clinic: stop treating `as=doctor` as a convenient demo login.
+Stop treating `as=doctor` as a convenient demo login.
 
 ## What can still go wrong
 

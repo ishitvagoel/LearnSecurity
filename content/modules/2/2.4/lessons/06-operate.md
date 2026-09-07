@@ -3,9 +3,9 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A new client that mints a key per retry, a lifetime that is too short, or a store outage can reintroduce duplicates after `_SEEN` was “set once.” Pair notice and recover. Do not log note bodies or session values. Do not fail open: if the idempotency store is unreachable, do not insert “just this once.”
+A client that mints a key per retry, a lifetime that is too short, or a store outage can reintroduce duplicates. Keep note bodies and session values out of the ticket. Do not fail open: if the idempotency store is unreachable, do not insert “just this once.”
 
 ## Picture: count versus unique keys
 
@@ -15,10 +15,10 @@ flowchart TD
   Dup -->|yes| Metric["idempotency_replay += 1"]
   Metric --> Log["reason=replay key_id=k1 note=n1 no body"]
   Dup -->|no| Insert[Insert one share]
-  StoreDown[Key store unreachable] --> Closed["Fail closed — do not insert"]
+  StoreDown[Key store unreachable] --> Closed["Deny — do not insert"]
 ```
 
-A broken retry is a notice-and-recover problem, not a licence to fail open or to dump the note into the log.
+On a broken retry, deny the extra insert, and keep the note out of the log.
 
 | Outcome | This topic |
 |---|---|
@@ -27,7 +27,7 @@ A broken retry is a notice-and-recover problem, not a licence to fail open or to
 | Recover | Take extra shares back; tell the owner; re-run `test_retry_does_not_duplicate_side_effect` |
 | Leftover | A lost first response needs a path so the owner can see the share; never fail open if the key store is down |
 
-Industry lists name detect, respond, recover. They do not pick a log product. They do not prove this share rule. An awareness-list name is not the runbook title. A SIEM product name is not the rule.
+A log product does not prove this share rule. A famous-bugs-list name is not the runbook title.
 
 ## What the framework does vs what you still have to check
 
@@ -35,17 +35,15 @@ uvicorn access logs, FastAPI exception handlers, and Next.js analytics will stor
 
 ## Practice
 
-Write one log line you would accept. Tie it to `labs/2.4/2.4-state-time`.
-
 ```text
 share_replay reason=same_idempotency_key note_id=n1 key_id=k1 actor=owner_a request_id=req_22c1
 ```
 
-Reject any line that includes a note body, a real email, a session value, or “awareness list handled.”
+A note body, a real email, a session value, or “awareness list handled” in the log is a leak of its own.
 
 ## Use it somewhere new
 
-Payment capture: notice a double capture without logging card numbers. Clinic: notice a double-book without logging the chart. Invite tokens: notice a replay without logging the token.
+Payment capture: notice a double capture without logging card numbers. Last-slot booking: notice a double-book without logging the chart. Invite tokens: notice a replay without logging the token.
 
 ## Can people still use it
 
@@ -53,4 +51,4 @@ Disable-on-submit is not the rule. Accessible “still working” must reuse the
 
 ## What this page is not doing
 
-A log-product name is not the rule. Do not instruct live load tests. Answer keys are not on this site.
+Do not instruct live load tests. Answer keys are not on this site.

@@ -4,9 +4,9 @@
 **Loop step:** 6 Operate
 **Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels. CSF names outcomes; it is not a pentest permit.
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A new “quick check” snippet can paste a public host after the allow-list was “set once.” Pair noticing with recovery. **Never** store response bodies from denied hosts. Never screenshot a public site “for the ticket.” Never continue after deny.
+A new “quick check” snippet can paste a public host. Pair noticing with recovery. **Never** store response bodies from denied hosts. Never screenshot a public site “for the ticket.” Never continue after deny.
 
 ## Picture: an out-of-scope host is a signal
 
@@ -24,7 +24,7 @@ flowchart TD
 | Recover | Stop; write it down; tell the instructor; do not continue; do not “just look” |
 | Leftover | Redirects; hosts-file aliases; DNS tricks; mouse-only consent |
 
-A scanner name is not the rule. A deny log does not finish the first check-in.
+A scanner product does not write the deny. A deny log does not finish the first check-in.
 
 ## What the framework does vs what you still have to check
 
@@ -32,13 +32,11 @@ A proxy, browser, or `curl` will fetch whatever you type and may cache the body.
 
 ## Practice
 
-Write one log line you would accept. Tie it to `labs/0.1/0.1-orientation`.
-
 ```text
 log_denied reason=out_of_scope host=example.com
 ```
 
-Reject any line that includes a response body, a screenshot of a public site, a customer URL you were asked to “quickly test,” or “first check-in complete.”
+A response body, a public-site screenshot, a customer URL you were asked to “quickly test,” or “first check-in complete” already leaks the deny line.
 
 ## Use it somewhere new
 
@@ -50,4 +48,4 @@ The stop control must work from the keyboard. Color-only “red = out of scope�
 
 ## What this page is not doing
 
-A scanner name is not the rule. Opening this page does not finish the first check-in. Do not instruct live fetches to prove the deny.
+A scanner sticker does not finish this page. Opening this page does not finish the first check-in. Do not instruct live fetches to prove the deny.

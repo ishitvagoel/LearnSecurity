@@ -3,36 +3,34 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
-
 ## What you are reviewing
 
-A colleague ships notes-app login copy. Review `labs/4.2/4.2-lab/vulnerable/` as that change. Reconstruct whether `phishing_resistant("password", EVIL, REAL)` is still true, compare that with the rule, and write changes a developer can verify.
+Read `labs/4.2/4.2-lab/vulnerable/` as login-copy. Reconstruct whether `phishing_resistant("password", EVIL, REAL)` is still true.
 
-The check you already ran (`test_password_is_not_phishing_resistant`) is the rule check. A banner “phishing-resistant password” is not.
+A banner that says “phishing-resistant password” does not make `test_password_is_not_phishing_resistant` pass.
 
 ## Picture: problems to find (name them yourself)
 
-Start with this seeded smell: **`phishing_resistant('password', evil, real)` True**. Label it **rule**, **tool**, or **false comfort** before you accept the change.
+**`phishing_resistant('password', evil, real)` True**.
 
 ```mermaid
 flowchart TD
   Claim[Change claim] --> Q{"What would prove it false?"}
   Q -->|"password at lookalike is true"| Property["Rule — good if checked"]
   Q -->|"autocomplete webauthn"| Mechanism[Tool — no origin]
-  Q -->|"MFA equals resistant"| False[False comfort]
+  Q -->|"MFA equals resistant"| False[False assurance]
 ```
 
-For each claim and each branch: label **rule**, **tool**, or **false comfort**. Classification starts at the protected effect (password at lookalike is false). Everything that is not origin binding at that call is a candidate extra path.
+For each claim and each branch, label **rule**, **tool**, or **false assurance**. A password at a lookalike still has to be false. If the change never checks origin binding, the leftover is still there.
 
-Seeded smells (label them yourself; do not open the keys file):
+Problems to find (name them yourself; do not open the keys file):
 
 - `phishing_resistant('password', evil, real)` True
 - Marketing copy “MFA = phishing resistant”
 - Recovery SMS as default
 - No wrong-origin WebAuthn check
 
-Also reject: trusting the client; closing findings without re-running `test_password_is_not_phishing_resistant`; keys in learner notes; real credentials in helpers; an unlabeled later hardware bar as baseline; live-kit language.
+Also reject: treating any 2FA as phishing-resistant; closing findings without re-running `test_password_is_not_phishing_resistant`; keys in learner notes; real credentials in helpers; an unlabeled later hardware bar as baseline; live-kit language.
 
 ## Common mix-ups
 
@@ -42,14 +40,10 @@ Also reject: trusting the client; closing findings without re-running `test_pass
 - A passkey vendor name is the rule
 - Training users to read the URL is what you trust
 
-## Practice
-
-Write three review notes a peer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_password_is_not_phishing_resistant`. Do not open the keys file.
-
 ## Use it somewhere new
 
-Clinic SSO change that “adds MFA” without an origin-fail check is an incomplete review. Name the independent falsehood that would still keep password-at-lookalike false.
+Adding MFA without an origin-fail check still counts a password at a lookalike as resistant. Adding MFA is not an origin-fail check — write the lookalike-password deny.
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will add WebAuthn later.” That comment is a leftover without an owner. Do not visit a live lookalike to prove the finding.
+Until `test_password_is_not_phishing_resistant` passes, “will add WebAuthn later” is unfinished work. Do not visit a live lookalike to prove the finding.

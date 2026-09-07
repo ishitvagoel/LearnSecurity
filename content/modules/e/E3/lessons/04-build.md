@@ -5,9 +5,9 @@
 
 ## The rule
 
-`capture` must add to `SEEN` and `CHARGES` only when the key is new. Fail-safe: a duplicate denies the extra charge. A processor header may *ride along* with a match; it does not replace your set. Structural means that identity — not a payment company, not a questionnaire, not HTTP 200.
+`capture` must add to `SEEN` and `CHARGES` only when the key is new. A duplicate denies the extra charge. A processor header may *ride along* with a match; it does not replace your set. Namely that identity — not a payment company, not a questionnaire, not HTTP 200.
 
-The smallest restore for the notes app's lab ledger is: two k1 → count 1, first k1 may charge. Do not fail open because the processor said ok. Do not mint a new key on every retry and call that remembering.
+Put this in the notes app's lab ledger: two k1 → count 1, first k1 may charge. The processor saying ok is not an allow. Do not mint a new key on every retry and call that remembering.
 
 ## Picture: seen gate
 
@@ -18,9 +18,9 @@ flowchart TD
   In -->|no| Add[append once]
 ```
 
-Do not accept “we sent the processor the header” as membership. Production still needs the webhook path to use the same key — a second insert from a webhook is a lying once. Clients that mint a new key each click walk around this pytest. Industry checklists want the step to succeed all the way or roll back. Connection-pool limits are advanced leftover.
+Sending the processor the header does not count as membership. The webhook path still has to use the same key — a second insert from a webhook is a lying once. Clients that mint a new key each click walk around this check. The step to succeed all the way or roll back. Connection-pool limits are advanced leftover.
 
-They also want no double-booking. This pytest is that sentence for two k1.
+There should also be no double-booking — two k1.
 
 ## What the repaired files must show
 
@@ -31,7 +31,7 @@ They also want no double-booking. This pytest is that sentence for two k1.
 
 ## What this is not
 
-A filled-in questionnaire. A payment company. A course gate. New-key retries (leftover). Health-record append-only as a different product (same grain).
+A filled-in questionnaire. A payment company. A check-in sticker. New-key retries (leftover). Health-record append-only as a different product (same grain).
 
 ## What can still go wrong
 
@@ -49,7 +49,7 @@ Name who can mint keys. Run:
 python3 -m pytest labs/E3/e3-lab/tests --impl fixed
 ```
 
-It must pass. Run from the practice folder if a run at the repo root is polluted.
+Run from the practice folder if a run at the repo root is polluted.
 
 ## Use it somewhere new
 

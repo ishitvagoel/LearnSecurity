@@ -3,27 +3,25 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
-
 ## What you are reviewing
 
-A colleague ships notes-app unfurl. Review `labs/6.5/6.5-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `allowed` is still true for the named link-local metadata URL, compare that with the rule, and write changes a developer can verify.
+Open `labs/6.5/6.5-lab/vulnerable/` as an unfurl change. Is `allowed` still true for the named link-local metadata URL?
 
-The check you already ran (`test_link_local_metadata_is_denied`) is the rule test. A comment “will allow-list later” is not.
+A TODO to allow-list later does not satisfy `test_link_local_metadata_is_denied`.
 
 ## Picture: requests.get of the user URL / scheme-only allow
 
-Start with this seeded smell: **`requests.get` of the user URL / scheme-only allow**. Label it rule, tool, or false comfort before you accept the change.
+**`requests.get` of the user URL / scheme-only allow**.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|"link-local allowed"| Property["Rule - good if tested"]
   Q -->|"https prefix"| Mechanism[Tool - still any host]
-  Q -->|"follows redirects"| False[False comfort]
+  Q -->|"follows redirects"| False[False assurance]
 ```
 
-The review starts at the protected effect (link-local denied). Everything that is not parse-then-allow-list at that call is a candidate deputy path. An HTTPS prefix without a host allow-list is the same smell, not a different finding class.
+Link-local still has to be denied. If the change never parses then allow-lists, that deputy path is still open. An HTTPS prefix without a host allow-list is still the same problem.
 
 ## Problems to find (name them yourself)
 
@@ -39,17 +37,13 @@ Also reject: live fetches; closing findings without re-running `test_link_local_
 - HTTPS URLs cannot steer the server
 - Private-IP denylists are complete
 - Open redirect is just a user-experience issue
-- A famous-bugs nickname is the rule
+- A Top 10 name is the host allow-list
 - Fetching the URL is how you test this check
-
-## Practice
-
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_link_local_metadata_is_denied`. Do not open the keys file.
 
 ## Use it somewhere new
 
-Clinic change that “switched the importer to HTTPS” without a host allow-list test is an incomplete review of scheme-only URL checks. Name the independent falsehood that would still keep link-local from being allowed.
+HTTPS-only on the importer, without a host allow-list, is still a scheme-only URL check. HTTPS-only is not a host allow-list — write the link-local deny.
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will allow-list later.” That comment is leftover without an owner. Do not fetch a live URL to prove the finding.
+Leave “will allow-list later” out of the merge until someone owns the link-local deny. Do not fetch a live URL to prove the finding.

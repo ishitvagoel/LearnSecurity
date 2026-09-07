@@ -5,11 +5,11 @@
 
 ## Could someone else name which changes need a threat model?
 
-“We have CODEOWNERS” is not this lesson. A drawing someone else can test names **the surfaces that trigger a threat model: identity, stored data, mobile, queues, and authorization**.
+“We have CODEOWNERS” does not name **the surfaces that trigger a threat model: identity, stored data, mobile, queues, and authorization**.
 
-This week’s freeze for the notes app: local `merge_ok(pr)`. No live orgs.
+`merge_ok(pr)` — no live orgs.
 
-> For an empty change, merge is deny. A change that names `threat_model` as `TM-12` may merge. Evidence that the deny is false: `merge_ok({})` returns true.
+> For an empty change, merge is deny. A change that names `threat_model` as `TM-12` may merge. You can see the hole: `merge_ok({})` returns true.
 
 If the trigger table is blank, CODEOWNERS looks finished because nobody named which files need a model.
 
@@ -34,7 +34,7 @@ CODEOWNERS says who must click. It does not say what changed. A closed-ticket co
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the merge check you already have and ask which surfaces would make an empty dict merge.
+Take the merge check you already have and ask which surfaces would make an empty dict merge.
 
 | Piece | This system |
 |---|---|
@@ -56,11 +56,11 @@ Do not invent a new catalogue. Take the merge check you already have and ask whi
 | CODEOWNERS only | merge | treat as a threat model | deny |
 | HIPAA training | merge | treat as a threat model | deny |
 
-A missing threat-model cell is how a required-reviewer list becomes false comfort. Write the hole.
+A missing threat-model cell is how a required-reviewer list becomes false assurance. Write the hole.
 
 ## Practice
 
-Draw the trigger table so someone else could name the checks. Point at `labs/10.1/10.1-lab` file `sdl.py`.
+Open `sdl.py` under `labs/10.1/10.1-lab`.
 
 ## Use it somewhere new
 
@@ -72,4 +72,4 @@ A stale threat-model id. Vanity ticket counts. An extra advanced row about docum
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

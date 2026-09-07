@@ -5,9 +5,9 @@
 
 ## Could someone else name the checks from your map?
 
-“We published OpenAPI” is not this lesson. A map someone else can test names **the action, the writable keys, and every protocol that binds a document**.
+“We published OpenAPI” does not name **the action, the writable keys, and every protocol that binds a document**.
 
-This week’s freeze: the notes app’s local `apply(user, body)` with `ALLOWED = {display_name}`. No live APIs.
+`apply(user, body)` with `ALLOWED = {display_name}` — no live APIs.
 
 ## Picture: three binders, one contract
 
@@ -31,7 +31,7 @@ flowchart LR
 
 A spec that does not match running code is leftover-endpoint awareness, not the allow-list. Versioning the path to `/v2` without retiring `/v0` is not a security control.
 
-## Step 1: freeze the pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|
@@ -56,7 +56,7 @@ A spec that does not match running code is leftover-endpoint awareness, not the 
 
 ## Practice
 
-Draw the matrix. Point at `labs/7.1/7.1-lab` file `patch.py`. Label the binder even in the repaired tree — the fix is the writable set, not pretending an OpenAPI file became the drop.
+Look at `patch.py` under `labs/7.1/7.1-lab`. After repair, the binder is still there: the writable set, not an OpenAPI file as the drop.
 
 ## Use it somewhere new
 
@@ -68,4 +68,4 @@ Honest `display_name` XSS (6.2). GraphQL cost (6.7). Unused methods (leftover, l
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

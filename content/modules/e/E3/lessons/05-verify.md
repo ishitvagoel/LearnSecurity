@@ -1,15 +1,15 @@
-# Fail on the broken files, then pass on the repaired ones
+# Charging twice with the same key must fail
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-“We use Stripe” is not evidence. “The questionnaire is filed” is a tool observation. The check is: two `capture("k1")` leave count 1 and the first capture may succeed. That two-k1 observation must be **false** on `--impl vulnerable` (count 2) and **true** on `--impl fixed`. Do not hit live processors.
+Naming Stripe does not make capture idempotent. A filed questionnaire is a PDF. Two `capture("k1")` calls have to leave count 1, and the first capture may succeed. The leftover build: the count becomes 2. Repair leaves the capture count at 1. Do not hit live processors.
 
 ## Picture: a second k1 that charges twice must fail
 
-A test that only greps a processor header can pass while every capture still appends. This check asks whether a double charge still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A grep for a processor header can still hide that every capture still appends.
 
 ```mermaid
 flowchart LR
@@ -21,16 +21,16 @@ flowchart LR
 |---|---|
 | Wrong input / abuse | two k1 → count 1; broken files must fail |
 | Normal | first k1 → may charge (may pass on both) |
-| Not claimed | live Stripe; card-network scope; a course gate; webhook path |
+| Not claimed | live Stripe; card-network scope; this payments lesson as a check-in; webhook path |
 
-Lab tests in `labs/E3/e3-lab/tests/test_property.py`. `test_duplicate_capture_does_not_double_charge` is a **what-must-not-happen** test: always-append `capture` is not allowed to count as a passing control. `reset()` keeps ledger state from leaking.
+Ledger always-append is why `test_duplicate_capture_does_not_double_charge` lives in `labs/E3/e3-lab/tests/test_property.py`. `reset()` keeps ledger state from leaking.
 
 ```text
 python3 -m pytest labs/E3/e3-lab/tests --impl vulnerable
 python3 -m pytest labs/E3/e3-lab/tests --impl fixed
 ```
 
-Honest first capture may pass on both implementations. That does not excuse the two-k1 deny test. If the broken files do not fail `test_duplicate_capture_does_not_double_charge`, the lab is miswired — fix the wiring, not the check.
+The first capture of `k1` is the honest path. Deny a second capture with the same key. If the broken files do not fail `test_duplicate_capture_does_not_double_charge`, the lab is miswired — fix the wiring, not the check.
 
 ## What the tests do not prove
 
@@ -38,18 +38,16 @@ Honest first capture may pass on both implementations. That does not excuse the 
 - The client cannot mint a new key
 - Connection-pool limits (advanced leftover)
 - Card-network scope
-- A course gate complete
-
-Record those as leftover or later topics, not as silent passes.
+- This payments lesson as a finished check-in
 
 ## Practice
 
-Run both this session from the practice folder if needed. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `Idempotency-Key` in a Stripe client without calling `capture("k1")` twice.
+Call `capture("k1")` twice. An `Idempotency-Key` header in a Stripe client is the product, not the count.
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts “the processor returned 200” is not this cell. A live processor is out of scope.
+A processor 200 is the hop, not two `capture("k1")` leaving count 1. Do not use a live processor.
 
 ## What this page is not doing
 
-Do not add a live-processor trophy. Do not log card-number-like strings. Answer keys are not on this site. This site does not mark you as finished.
+A live processor screenshot is not capture idempotent. Do not log card-number-like strings. Answer keys are not on this site. This site does not mark you as finished.

@@ -5,11 +5,11 @@
 
 ## The rule
 
-A green SIEM tile is not the fix. A paging ack is not the fix. “Alerts stopped firing so we closed it” is not the fix.
+A green SIEM tile does not close recovery-todo. A paging ack is an ack. “Alerts stopped firing so we closed it” still leaves `close_incident` open.
 
-The structural change is: `close_incident` **returns true only when `recovery == "done"` and `'note_body' not in logs`**. Missing recovery or a body in logs is deny. A green SIEM may *accompany* a match; it does not replace it.
+Change this: `close_incident` **returns true only when `recovery == "done"` and `'note_body' not in logs`**. Missing recovery or a body in logs is deny. A green SIEM may *accompany* a match; it does not replace it.
 
-The `note_body` substring is a **teaching stand-in** for “logs match how sensitive the data is.” It is not a complete leak scanner. The smallest restore for the notes app’s incident ticket is: recovery todo → stay open, and a leaked body → stay open. Fail-safe: a missing field is deny. Do not fail open because the dashboard went green. Do not accept “alerts stopped” as the conjunction.
+The `note_body` substring is a **teaching stand-in** for “logs match how sensitive the data is.” It is not a complete leak scanner. The check in the notes app’s incident ticket: recovery todo → stay open, and a leaked body → stay open. A missing field is deny. A green dashboard does not close a missing recovery todo. Don't take “alerts stopped” as the conjunction.
 
 ## Picture: recovery-done and no-body together
 
@@ -22,13 +22,13 @@ flowchart TD
   Body -->|no| Allow[may close]
 ```
 
-The repaired files require that conjunction. Production still needs restore to have *run* — `"done"` typed by an optimistic closer is a lying recovery. Untested backups remain leftover. Logs still belong on a separate system so an app breach does not erase evidence. Logging every authorization decision without the sensitive data is extra, advanced work.
+Close has to wait on both denies. `"done"` typed by an optimistic closer is a lying recovery — restore has to have run. Untested backups remain leftover. Logs still belong on a separate system so an app breach does not erase evidence. Logging every authorization decision without the sensitive data is extra, advanced work.
 
-Industry “recover” is an outcome. This pytest is that sentence for close-without-recovery.
+Industry “recover” is an outcome — close-without-recovery.
 
 ## What the repaired files must show
 
-Read `fixed/ir.py` against this checklist. Do not treat the snippet as a production incident product.
+`fixed/ir.py` is the close-gate, not an incident console.
 
 | After the fix | Must be true |
 |---|---|
@@ -36,17 +36,17 @@ Read `fixed/ir.py` against this checklist. Do not treat the snippet as a product
 | `note_body` in logs | close false |
 | done + ok | close true |
 
-Fail closed: if you are unsure whether restore ran, keep the ticket open. Uncertainty is a **no** on close, not a yes because the SIEM is green.
+If you are unsure whether restore ran, keep the ticket open. A green SIEM does not close it.
 
 ## What this is not
 
 - A paging product.
 - Time-to-detect.
-- A known-exploited listing.
-- An assurance-gate sticker.
+- Recover because the listing says patched.
+- A “incident closed” check-in.
 - Untested backups.
 - A SIEM vendor.
-- A logging cheat sheet as the oracle.
+- A logging cheat sheet as the check.
 
 ## What the tool cannot do
 
@@ -64,11 +64,9 @@ Name who can mark recovery done. Run:
 python3 -m pytest labs/10.5/10.5-lab/tests --impl fixed
 ```
 
-It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
-Clinic: restore-test evidence, not a green dashboard. The lab still uses fake strings.
+Restore-test evidence, not a green dashboard. The lab still uses fake strings.
 
 ## What can still go wrong
 
@@ -76,4 +74,4 @@ Imperfect forensics. Observability as a way out. Support-tool god-mode. Logging 
 
 ## What this page is not doing
 
-Do not query a live SIEM. Do not claim you finished an assurance gate from a green tile. Do not present a known-exploited list as close.
+Do not query a live SIEM. This page does not mark you as finished. A green tile is not a check-in. Do not present a known-exploited list as close.

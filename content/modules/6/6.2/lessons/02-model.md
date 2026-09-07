@@ -5,9 +5,9 @@
 
 ## Could someone else name the checks from your map?
 
-“We turned on a content-security policy” is not this lesson. A map someone else can test names **the sink, the context, and what encoding applies**.
+“We turned on a content-security policy” does not name **the sink, the context, and what encoding applies**.
 
-This week’s freeze: the notes app’s local `render(body)` wrapping a `<p>` text node. No live page. No real browser.
+`render(body)` wrapping a `<p>` text node — no live page. No real browser.
 
 ## Picture: one sink, one context in this practice
 
@@ -30,7 +30,7 @@ flowchart TD
 
 Framework defaults help only at the constructors you actually use.
 
-## Step 1: freeze the pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|
@@ -41,7 +41,7 @@ Framework defaults help only at the constructors you actually use.
 | What you trust | The HTML-text encoder |
 | What you do not trust | The title / body string |
 | Time | Stored title, later drawn |
-| Integrity cell | Integrity of the HTML interpreter |
+| Integrity rule | Integrity of the HTML interpreter |
 
 ## Step 2: write cells the practice can fail
 
@@ -54,16 +54,16 @@ Framework defaults help only at the constructors you actually use.
 
 ## Practice
 
-Draw text vs attribute vs JavaScript vs URL. Point at `labs/6.2/6.2-lab` file `html.py`. Label the sink as HTML text even in the repaired tree — the fix is encoding at that sink, not pretending a header became encoding.
+Draw text vs attribute vs JavaScript vs URL. Mark `html.py` under `labs/6.2/6.2-lab`. Encoding belongs at that sink after repair. A header is not encoding.
 
 ## Use it somewhere new
 
-Clinic nickname. Markdown pipeline.
+A nickname field still goes through the markdown pipeline.
 
 ## What can still go wrong
 
-Trusted admin HTML. Content-security policy in report-only mode. Encoding for a JavaScript string (a different cell).
+Trusted admin HTML. Content-security policy in report-only mode. Encoding for a JavaScript string (a different rule).
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

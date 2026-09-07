@@ -3,27 +3,25 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
-
 ## What you are reviewing
 
-A colleague ships notes-app share. Review `labs/2.4/2.4-state-time/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether a second `share_note` with `k1` still appends a row, compare that with the rule, and write changes a developer can verify.
+The files in `labs/2.4/2.4-state-time/vulnerable/` are the share change. Does a second `share_note` with `k1` still append a row?
 
-The check you already ran (`test_retry_does_not_duplicate_side_effect`) is the rule test. A comment “will add remembering later” is not.
+If `test_retry_does_not_duplicate_side_effect` still fails, “will add remembering later” is unfinished work.
 
 ## Picture: INSERT share on every POST
 
-Start with this seeded smell: **INSERT share on every POST**. Label it rule, tool, or false comfort before you accept the change.
+**INSERT share on every POST**.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would falsify it?"}
   Q -->|"two k1 calls yield two rows"| Property["Rule — good if tested"]
   Q -->|"we disable the button"| Mechanism[Tool — not the store]
-  Q -->|"HTTP 201 means once"| False[False comfort]
+  Q -->|"HTTP 201 means once"| False[False assurance]
 ```
 
-Classification starts at the protected effect (share count under retry). Everything that is not a remembered first outcome at that second call is a candidate leftover path.
+The share count still has to stay under retry. A second call that forgets the first outcome still doubles the side effect.
 
 ## Problems to find (name them yourself)
 
@@ -32,7 +30,7 @@ Classification starts at the protected effect (share count under retry). Everyth
 - Test only happy-path single click
 - Fail open on idempotency store timeout
 
-Also reject: treating the client as what you trust; an awareness-list name as the finding title; closing findings without re-running `test_retry_does_not_duplicate_side_effect`; keys in learner notes; live load tests against a public API; unique-on-`note_id` as if it were this rule.
+Also reject: treating disable-on-submit as the store; an awareness-list name as the finding title; closing findings without re-running `test_retry_does_not_duplicate_side_effect`; keys in learner notes; live load tests against a public API; unique-on-`note_id` as if it were this rule.
 
 ## Common mix-ups
 
@@ -43,13 +41,9 @@ Also reject: treating the client as what you trust; an awareness-list name as th
 - FastAPI or Next.js retries remember the share list
 - An awareness-list name as the definition of the finding
 
-## Practice
-
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one to `test_retry_does_not_duplicate_side_effect`. Do not open the keys file.
-
 ## Use it somewhere new
 
-Payment capture, invite token, or clinic last slot. A change that “handles the awareness list” without a replay test is an incomplete review. Name the independent falsehood that would still stop a second grant.
+Payment capture, invite token, or clinic last slot. Handling the awareness list without a replay test still doubles the side effect. Handling the awareness list is not a replay test — write the first-outcome remember.
 
 ## Can people still use it
 
@@ -57,4 +51,4 @@ Disable-on-submit is not the rule. Accessible “still working” must not mint 
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will add remembering later.” That comment is leftover risk without an owner.
+Someone still has to remember the first share outcome; “will add remembering later” does not do that.

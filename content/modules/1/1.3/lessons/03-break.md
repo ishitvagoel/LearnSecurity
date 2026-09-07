@@ -18,8 +18,6 @@ The broken files claim two layers protect a worker-only export:
 
 Both layers consume caller-controlled metadata. They are two checks but one trust assumption. The broken files also give the resulting worker path a broad, reusable ability instead of binding the protected effect to current company, action, object, expiry, and use state.
 
-The rule under test:
-
 > A public caller cannot become a worker by choosing metadata. Only a trusted worker adapter may establish worker origin, and the export effect requires a current, single-use grant bound to worker, company, action, and exact object set. Missing, unknown, malformed, expired, replayed, or evidence-failed context means no — before any output.
 
 The local practice is designed to make that rule observable without a network target, real credential, real personal data, or harmful payload.
@@ -212,4 +210,4 @@ On the document-preview page, hostile influence may arrive as stored document by
 
 ## What this page is not doing
 
-Live targets. Real credentials. Harmful payloads. Answer keys. Do not paste this exercise onto a public API, employer system, or classroom deployment.
+Do not use live targets. Do not use real credentials. Do not use harmful payloads. Answer keys. Do not paste this exercise onto a public API, employer system, or classroom deployment.

@@ -9,9 +9,9 @@ The notes app uses an application API key. That key is not a user password, and 
 
 > `auth("sk-lab-hardcoded", current="rotated-now")` must be false. Missing `current` must deny. An inventory plus a rotation check is leftover-path coverage over time — like an old session that still works after logout.
 
-What must not happen is **the old hardcoded default still authenticates after rotation**. The service credential is treated as current even though you meant to kill it. Then who-is-allowed runs as whoever holds the clone.
+After rotation, **the old hardcoded default must not still authenticate**. The service credential is treated as current even though you meant to kill it. Then who-is-allowed runs as whoever holds the clone.
 
-Industry checklists want secrets created and stored outside source and build artifacts. They want no default credentials. They want a key lifecycle. Timed rotation and a hardware box for crypto are advanced extras, not this pytest. A Python settings library reading `.env` is not this sentence. Planning for post-quantum crypto is agility planning, not a lab quantum attack.
+Secrets have to be created and stored outside source and build artifacts. There should be no default credentials. There has to be a key lifecycle. Timed rotation and a hardware box for crypto are advanced extras, not this check. A Python settings library reading `.env` is not the secret-store check. Planning for post-quantum crypto is agility planning, not a lab quantum attack.
 
 ## Picture: the secret outlives rotation
 
@@ -24,7 +24,7 @@ flowchart TD
 
 The attacker cloned the repo or an old image. Trusting `.gitignore` or “we use Vault” without a rotation test is not what you trust.
 
-**A tool is not the rule.** AWS Secrets Manager, a Python settings library, or a `.env` file.
+AWS Secrets Manager, a Python settings library, and a `.env` file do not kill a hardcoded default after rotate.
 
 ## Picture: three secret classes
 
@@ -42,7 +42,7 @@ Mixing classes is how a tenant id becomes a “key,” or a password becomes a s
 | Slice | For this rule |
 |---|---|
 | Why it happens | Default credential never invalidated |
-| What has to be true first | `auth(hardcoded)` is true while `current` is rotated |
+| What's already wrong | `auth(hardcoded)` is true while `current` is rotated |
 | Trigger | Clone presents `sk-lab-hardcoded` |
 | What it costs | Authenticity of the service credential over time |
 | How you stop it | Unique secrets; rotate; refuse known defaults; never commit |
@@ -51,7 +51,7 @@ Mixing classes is how a tenant id becomes a “key,” or a password becomes a s
 
 ## What the framework does vs what you still have to check
 
-A settings library reading `.env` does not rotate anything. Vault without a rotation test is a new dump. The app’s promise is: `labs/5.3/5.3-lab`. No live key service. The lab string is disposable.
+A settings library reading `.env` does not rotate anything. Vault without a rotation test is a new dump. Files in `labs/5.3/5.3-lab`. No live key service. The lab string is disposable.
 
 ## What the tool cannot do
 
@@ -61,19 +61,17 @@ A settings library reading `.env` does not rotate anything. Vault without a rota
 
 ## Practice
 
-Inventory: name, location, owner, last rotated, blast radius. Then run:
+Inventory: name, location, owner, last rotated, how far a break can spread. Then run:
 
 ```text
 python3 -m pytest labs/5.3/5.3-lab/tests --impl vulnerable
 python3 -m pytest labs/5.3/5.3-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
-Clinic lab API key in a gist. Envelope wrapping (data key vs wrapping key) on compromise.
+A lab API key in a gist is the leak. Envelope wrapping (data key vs wrapping key) is what you do on compromise.
 
 ## What this page is not doing
 
-Live cloud keys, real production secrets, quantum attack scripts. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live cloud keys, real production secrets, quantum attack scripts. This site does not mark you as finished. Answer keys are not on this site.

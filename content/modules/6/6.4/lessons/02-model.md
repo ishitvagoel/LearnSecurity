@@ -5,9 +5,9 @@
 
 ## Could someone else name checks from your map?
 
-“We store UUID names” is not this page. A reviewable model names **the folder, the canonicalize step, and which parsers are out of this practice**.
+“We store UUID names” is not enough without **the folder, the canonicalize step, and which parsers are out of this practice**.
 
-This week’s freeze: a local `resolve(name)` practice under `/tmp/sc-lab`. No live host reads.
+`resolve(name)` is a local practice under `/tmp/sc-lab`. No live host reads.
 
 ## Picture: the object is the canonical path
 
@@ -30,7 +30,7 @@ flowchart LR
 
 A random stored name is extra. It is not a substitute for the prefix check on any path you still join.
 
-## Step 1: freeze who, what, and the path
+## Step 1: name who, what, and the path
 
 | Piece | This system |
 |---|---|
@@ -54,11 +54,11 @@ A random stored name is extra. It is not a substitute for the prefix check on an
 
 ## Practice
 
-Draw join → canonicalize → prefix so someone else could name pytest cases. Point at `labs/6.4/6.4-lab` file `path.py`.
+Mark `path.py` under `labs/6.4/6.4-lab`.
 
 ## Use it somewhere new
 
-Clinic scan filename; zip member names.
+A scan filename is this grain; zip member names are the sibling leftover.
 
 ## What can still go wrong
 
@@ -66,4 +66,4 @@ Zip members that walk out; XML/pickle; image codecs later.
 
 ## What this page is not doing
 
-Treating an awareness list as the definition of security. Answer keys are not on this site.
+Circling “path traversal” does not keep uploads under the root. Answer keys are not on this site.

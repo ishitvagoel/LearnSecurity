@@ -5,21 +5,19 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `resolve(role, field)`. The failure is already in the function: it returns true for every pair. You are here to see that a member resolving `secret_internal` is **a failed rule**, not a trophy dump of an internal token.
-
-The rule under test:
+The practice is not a website you attack. `resolve(role, field)` returns true for every pair, so a member resolving `secret_internal` already gets the field. You do not need an internal-token dump.
 
 > `resolve("member", "secret_internal")` must be false. If it is true, the serializer dumped without a field table.
 
 ## Where you may practice
 
-Only `labs/7.2/7.2-lab` is in scope. The practice is an in-process `resolve(role, field)`. Fake roles (`member`, `service`) and field names (`display_name`, `secret_internal`). `secret_internal` is a lab label, not a production token. It does not open FastAPI or GraphQL. Do not query a public GraphQL host, an employer API, or a live clinic.
+Stay inside `labs/7.2/7.2-lab`. Fake roles (`member`, `service`) and field names (`display_name`, `secret_internal`). `secret_internal` is a lab label, not a production token. It does not open FastAPI or GraphQL. Do not query a public GraphQL host, an employer API, or a live clinic.
 
-Do not paste this exercise onto a public site, employer board, or live clinic portal.
+Do not paste this exercise onto a public GraphQL host, employer EHR, or live clinic API.
 
-What must not happen: **a member resolves `secret_internal`**. `resolve("member", "secret_internal")` returns true.
+`resolve("member", "secret_internal")` returning true is **a member resolving `secret_internal`**.
 
-Who can act in this story: a member session selecting extra fields. That stands in for a clinic GraphQL `Patient { ssn }`, a REST `?fields=` dump, or a CSV exporter that serializes every ORM column. What you trust: `resolve` is supposed to be a **role × field table** at the trusted layer. A SPA that omits the column, a UUID in the URL, and GraphQL `@hide` the client can skip are not what you trust for this cell.
+Picture a member session selecting extra fields — a clinic GraphQL `Patient { ssn }`, a REST `?fields=` dump, or a CSV exporter that serializes every ORM column. `resolve` is supposed to be a **role × field table** at the trusted layer — not A SPA that omits the column, a UUID in the URL, or GraphQL `@hide` the client can skip.
 
 ## Picture: every field is visible
 
@@ -28,21 +26,17 @@ flowchart TD
   Call["resolve member secret_internal"] --> True[returns true]
 ```
 
-The broken files show **cause** (no field table). Do not query anything except this practice. What has to be true first: `resolve` returns true for every pair. You do not need HTTP. You must not query a public GraphQL host.
+There is no field table. Do not query anything except this practice. `resolve` returns true for every pair. You do not need HTTP. You must not query a public GraphQL host.
 
-Identifiers find a row. They do not authorize fields. Object×company grants were 4.4; this cell is **which fields that grant may read**. Extra keys on *write* were 7.1.
+Identifiers find a row. They do not authorize fields. Object×company grants were 4.4; this rule is **which fields that grant may read**. Extra keys on *write* were 7.1.
 
 ## What to read in the broken files
 
-`vulnerable/field.py` returns true for every pair. Checks:
+`vulnerable/field.py` resolves every role/field pair. Checks:
 
 - `test_member_cannot_resolve_internal_field`
 - `test_member_can_resolve_display_name`
 - `test_service_can_resolve_internal_field` — honest service path; may pass on both
-
-You do not need a new secret name. The failure of `test_member_cannot_resolve_internal_field` *is* the evidence.
-
-Do not open the repaired files yet. Diagnose the cause first.
 
 ## Why it happens vs what it costs
 
@@ -50,7 +44,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 |---|---|
 | Required rule | `resolve("member", "secret_internal")` is false |
 | Why it happens | Serializer / resolver dumps without a table |
-| What has to be true first | `resolve` is always true |
+| What's already wrong | `resolve` is always true |
 | Trigger | Member requests the field (REST, GraphQL, CSV, search) |
 | What it costs | Internal field extra; in production, token or extra personal data |
 | How you stop it | Allow-list fields by role at the trusted layer |
@@ -60,21 +54,21 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-ORM dump helpers are convenience, not field permission. GraphQL will resolve any field the schema exposes. FastAPI `response_model` helps only if it is the actual response. Next.js hiding a table column does not bind `resolve`. The app’s promise is: **this** practice, member × `secret_internal` is false.
+ORM dump helpers are convenience, not field permission. GraphQL will resolve any field the schema exposes. FastAPI `response_model` helps only if it is the actual response. Next.js hiding a table column does not bind `resolve`. Member × `secret_internal` is false.
 
 ## Practice
 
-Run checks against the broken files (they **must fail** on member × `secret_internal`). Record the check name `test_member_cannot_resolve_internal_field`.
+Member × `secret_internal` on the broken files **must fail**. Record the check name `test_member_cannot_resolve_internal_field`.
 
 ```text
 python3 -m pytest labs/7.2/7.2-lab/tests --impl vulnerable
 ```
 
-Run from `labs/7.2/7.2-lab` if a repo-root collection picks up `site/`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/7.2/7.2-lab` if a repo-root collection picks up `site/`. Do not “fix” the check to pass. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic SSN as a *field name* on a local practice files. Predict without leaving this directory. Do not query a live EHR.
+SSN as a *field name* on local practice files is the leftover. Predict without leaving this directory. Do not query a live EHR.
 
 ## What this page is not doing
 

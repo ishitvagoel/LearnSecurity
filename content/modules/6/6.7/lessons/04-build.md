@@ -5,11 +5,11 @@
 
 ## The rule
 
-A disabled export button is not the fix. An IP bucket at the edge is not the fix. Autoscaling is not the fix. A CAPTCHA is not the quota.
+A disabled export button does not cap the fourth export. An IP bucket at the edge is someone else’s counter. Autoscaling adds capacity. A CAPTCHA is not the quota.
 
-Structural means the server counts. `allow(n)` must be `n <= 3`. That check lives on the export action — the write path — not in the browser.
+Namely the server counts. `allow(n)` must be `n <= 3`. That check lives on the export action — the write path — not in the browser.
 
-The smallest restore for notes-app export is: deny at four. Fail closed: if the count is unknown, **deny**. Do not fail open because the counter store was unreachable.
+The check in export: deny at four. If the count is unknown, **deny**. An unreachable counter store does not raise the cap.
 
 ## Picture: deny at four
 
@@ -20,13 +20,13 @@ flowchart TD
   Cap -->|no| Deny[Deny]
 ```
 
-The lab’s repaired files use `n_calls <= 3`. Production still needs a per-person counter (the map from the last page), not a global IP limit that punishes people on one office network. GraphQL aliases (7.1) are another path of the same budget. New accounts can reset the window — name that leftover. Human timing tricks are advanced work, not this pytest.
+`allow` is `n_calls <= 3`. Count per person (the map from the last page), not a global IP limit that punishes people on one office network. GraphQL aliases (7.1) are another path of the same budget. New accounts can reset the window — name that leftover. Human timing tricks are advanced work, not this check.
 
-Industry lists want documented limits actually implemented. This pytest is that sentence for `allow(4)`.
+Documented limits have to be actually implemented — `allow(4)`.
 
 ## What the repaired files must show
 
-Read `fixed/limit.py` against this checklist. Do not treat the snippet as a production rate limiter.
+`fixed/limit.py` counts in memory, not on a live export API.
 
 | After the fix | Must be true |
 |---|---|
@@ -34,7 +34,7 @@ Read `fixed/limit.py` against this checklist. Do not treat the snippet as a prod
 | `allow(4)` | false |
 | `allow(1)` | true |
 
-Fail closed: if you cannot read the count, the answer is deny. Uncertainty is a **no**, not a yes because the store was down.
+By default, if you cannot read the count, the answer is deny. A down store is not a yes.
 
 ## What this is not
 
@@ -56,11 +56,9 @@ Name the check (`n <= 3`). Run:
 python3 -m pytest labs/6.7/6.7-lab/tests --impl fixed
 ```
 
-It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
-Clinic: stop treating “Export” as unlimited; count on the server.
+Stop treating “Export” as unlimited; count on the server.
 
 ## What can still go wrong
 
@@ -68,4 +66,4 @@ New accounts; GraphQL aliases (7.1); human timing (advanced); owned burst except
 
 ## What this page is not doing
 
-Do not load-test a public host. Do not claim a course gate from an edge-proxy screenshot.
+Do not load-test a public host. A check-in is not an edge-proxy screenshot.

@@ -5,11 +5,11 @@
 
 ## Could someone else name the checks?
 
-“We turned on code scanning” is not this lesson. A drawing someone else can test names **finding id, severity, mapped requirement, and owner**.
+“We turned on code scanning” does not name **finding id, severity, mapped requirement, and owner**.
 
-This week’s freeze for the notes app: local `ship_ok(findings, mappings)`. No live tenants.
+`ship_ok(findings, mappings)` — no live tenants.
 
-> For a HIGH finding at `ship_ok`, the rule is deny unless that id is on the map. Evidence that the deny is false: `ship_ok([{"id": "F1", "sev": "HIGH"}], {})` returns true.
+> For a HIGH finding at `ship_ok`, the rule is deny unless that id is on the map. The deny already lied when `ship_ok([{"id": "F1", "sev": "HIGH"}], {})` returns true.
 
 If the HIGH × map row is blank, the finding ships because nobody named the owner.
 
@@ -27,14 +27,14 @@ flowchart TD
 ```mermaid
 flowchart LR
   Reach[not reachable] --> Note[owner plus exception with expiry]
-  Silent[delete the finding] --> False[false comfort]
+  Silent[delete the finding] --> False[false assurance]
 ```
 
 A silent delete is how “not reachable” becomes “never happened.” Write the owner. Do not drop HIGH.
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the findings you already have and ask which ones may ship.
+Take the findings you already have and ask which ones may ship.
 
 | Piece | This system |
 |---|---|
@@ -60,7 +60,7 @@ A missing HIGH×map row is how an unowned finding ships on Friday. Write the hol
 
 ## Practice
 
-Draw the join so someone else could name the checks. Point at `labs/9.4/9.4-lab` file `sast.py`.
+Look at `sast.py` under `labs/9.4/9.4-lab`.
 
 ## Use it somewhere new
 
@@ -72,4 +72,4 @@ Who-is-allowed blind spots. Dependency confusion as an advanced leftover. Mass s
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

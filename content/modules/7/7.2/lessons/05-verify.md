@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-“Field authz is on” is not evidence. “The SPA hides the column” is a tool observation. The check is: `resolve("member", "secret_internal")` is false **and** `resolve("member", "display_name")` is true. The member-internal observation must be **false** on `--impl vulnerable` (returns true) and **true** on `--impl fixed`. Do not query public GraphQL.
+A field-authz label does not hide `secret_internal` on the resolver. A SPA that hides the column is the client. `resolve("member", "secret_internal")` has to be false **and** `resolve("member", "display_name")` has to be true. On the broken helper, the member-internal call still returns true. Repair hides `secret_internal` from a member. Do not query public GraphQL.
 
 ## Picture: broken files must fail member × secret_internal
 
-A check that only counts passing cases can pass while a member still resolves `secret_internal`. This check asks whether that dump is allowed to count as a passing control. Broken must fail that question. Repaired must pass it. Honest `display_name` may pass on both — that is the product, not an excuse to skip the deny.
+A member can still resolve `secret_internal` under a green suite. Honest `display_name` may pass on both — that is the product, not an excuse to skip the deny.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass deny"]
 ```
 
-If both pass, the check is not looking at the field table. If both fail, the fix is not structural or the check is wrong.
+If the broken resolve still passes, the field table was never the deny.
 
 | Mode | Must show for this topic |
 |---|---|
@@ -26,14 +26,14 @@ If both pass, the check is not looking at the field table. If both fail, the fix
 | Service | service × `secret_internal` true |
 | Not claimed | object×company (4.4); extra-key writes (7.1); advanced cache leftover |
 
-Practice checks live in `labs/7.2/7.2-lab/tests/test_property.py`. `test_member_cannot_resolve_internal_field` is a **what-must-not-happen** check: a dump that always returns true is not allowed to count as a passing control. `test_member_can_resolve_display_name` is the honest path.
+`labs/7.2/7.2-lab/tests/test_property.py` includes `test_member_cannot_resolve_internal_field` — a dump that always returns true is the miss. `test_member_can_resolve_display_name` is the honest path.
 
 ```text
 python3 -m pytest labs/7.2/7.2-lab/tests --impl vulnerable
 python3 -m pytest labs/7.2/7.2-lab/tests --impl fixed
 ```
 
-Honest `display_name` may pass on both implementations. That does not excuse the member-internal deny test. If the broken files do not fail `test_member_cannot_resolve_internal_field`, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
+A member reading `display_name` is not the whole check. Deny `secret_internal`. If the broken files do not fail `test_member_cannot_resolve_internal_field`, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the checks do not prove
 
@@ -43,16 +43,14 @@ Honest `display_name` may pass on both implementations. That does not excuse the
 - Object×company (4.4) — a passing field test does not prove Bob cannot GET Alice’s note
 - Extra-key writes (7.1)
 
-Record those as leftover risk or later topics, not as silent passes.
-
 ## Practice
 
-Execute both implementations this session from the lab directory if needed. Write the fail/pass pair next to the table row. Reject a “test” that only greps `@hide` in a GraphQL schema without calling `resolve("member", "secret_internal")`.
+Call `resolve("member", "secret_internal")`. `@hide` in a schema is a client hint.
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts HTTP 200 on `/patients/{id}` is 4.4, not this cell. A public GraphQL query is out of scope.
+Asserting HTTP 200 on `/patients/{id}` is 4.4, not this check. Do not use a public GraphQL query.
 
 ## What this page is not doing
 
-Do not add a live schema trophy. Do not log `secret_internal` values. Answer keys are not on this site.
+A live schema screenshot is not `secret_internal` hidden on the resolver. Do not log `secret_internal` values. Answer keys are not on this site.

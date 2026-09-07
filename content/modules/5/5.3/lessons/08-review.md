@@ -3,27 +3,25 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
-
 ## What you are reviewing
 
-A colleague ships notes-app secret rotation. Review `labs/5.3/5.3-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `auth("sk-lab-hardcoded", current="rotated-now")` is still true, compare that with the rule, and write changes a developer can verify.
+Treat `labs/5.3/5.3-lab/vulnerable/` as a rotation change. Does `auth("sk-lab-hardcoded", current="rotated-now")` still return true?
 
-The check you already ran (`test_hardcoded_default_does_not_auth`) is the rule test. A comment “will rotate later” is not.
+`test_hardcoded_default_does_not_auth` is what merge waits on. “Will rotate later” is not a pass.
 
 ## Picture: DEFAULT still accepted
 
-Start with this seeded smell: **`DEFAULT = 'sk-lab-hardcoded'` still accepted**. Label it rule, tool, or false comfort before you accept the change.
+**`DEFAULT = 'sk-lab-hardcoded'` still accepted**.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would falsify it?"}
   Q -->|"default still authenticates"| Property["Rule — good if tested"]
   Q -->|"we use Vault"| Mechanism[Tool — no rotate]
-  Q -->|"gitignore"| False[False comfort]
+  Q -->|"gitignore"| False[False assurance]
 ```
 
-Classification starts at the protected effect (default dead after rotate; missing current denies). Everything that is not equality with current at that call is a candidate leftover path. A vault import without killing `DEFAULT` is the same smell, not a different finding class.
+The default still has to be dead after rotate, and a missing current still has to deny. Rotate without killing `DEFAULT` and the old secret still authenticates. A vault import without killing `DEFAULT` is still the same problem.
 
 ## Problems to find (name them yourself)
 
@@ -42,14 +40,10 @@ Also reject: real production keys in practice files; closing findings without re
 - Vault brand is the rule
 - Missing current should allow
 
-## Practice
-
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one to `test_hardcoded_default_does_not_auth`. Do not open the keys file.
-
 ## Use it somewhere new
 
-Clinic change that “moved the key to Vault” without killing the default is an incomplete review. Name the independent falsehood that would still keep `sk-lab-hardcoded` from authenticating.
+Moving the key to Vault without killing the default still leaves the old secret live. Moving the key to Vault is not killing the default — write the old-secret dead check.
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will rotate later.” That comment is leftover risk without an owner. Do not fetch a live gist to prove the finding.
+Shipping a hardcoded default plus “will rotate later” leaves the old secret live with nobody assigned. Do not fetch a live gist to prove the finding.

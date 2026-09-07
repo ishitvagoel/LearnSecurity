@@ -5,21 +5,19 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `share_note` list. It does not open a browser, talk to a payment network, or race a public API. The failure is already in the object: every call appends a row and ignores the key. You are here to see that the check treats that as a **failed rule**, not as a clumsy click.
-
-The rule under test:
+The practice is not a website you attack. `share_note` does not open a browser, talk to a payment network, or race a public API. Every call appends a row and ignores the key, so two calls are two grants.
 
 > Two `share_note` calls with the same idempotency key must produce one share. A retry is a second attempt, not a second grant.
 
 ## Where you may practice
 
-Only `labs/2.4/2.4-state-time` is in scope. Restore the broken and repaired folders from git when you are done. Fake note ids only.
+Stay inside `labs/2.4/2.4-state-time`. Restore the broken and repaired folders from git when you are done. Fake note ids only.
 
 Do not load-test third-party APIs. Do not run clock tricks against NTP. Do not point this exercise at a live clinic booking page, a classmate’s FastAPI, or an employer checkout.
 
-What must not happen: a retry creates a second share. Two `share_note("n1", idempotency_key="k1")` calls leave `share_count() == 2`.
+Two `share_note("n1", idempotency_key="k1")` calls leaving `share_count() == 2` is the retry minting a second share.
 
-Who can act here: a **retrying client** that can call `share_note` twice with the same key. That stands in for a 504, a double-click, a load balancer that retries POST, or a later worker that delivers at least once. What you are supposed to trust: the handler treats `k1` as “this attempt already landed.” FastAPI, Next.js `fetch` retries, HTTP retry logic, and “the user will not click twice” are not what you trust.
+Picture a **retrying client** that can call `share_note` twice with the same key — a 504, a double-click, a load balancer that retries POST, or a later worker that delivers at least once — not The handler treats `k1` as “this attempt already landed.” FastAPI, Next.js `fetch` retries, HTTP retry logic, or “the user will not click twice”.
 
 ## Picture: every call is a new row
 
@@ -29,20 +27,16 @@ flowchart TD
   Second["share_note n1 k1 again"] --> Row2["Count 2"]
 ```
 
-The broken files show **cause** (the share side effect is not bound to the key), not a trophy race. What has to be true first: two calls with the same key; the handler appends `note_id` every time and ignores `idempotency_key`. A 504 is modeled by the second call — you do not need a real timeout, a sleep, or a second process.
+The share side effect is not bound to the key — not a live race. Two calls with the same key; the handler appends `note_id` every time and ignores `idempotency_key`. A 504 is modeled by the second call — you do not need a real timeout, a sleep, or a second process.
 
 HTTP does not make POST happen once. HTTP 201 twice is still two rows. An awareness list that names “something went wrong” is not the failing check.
 
-## What to look at — cause, not a trophy
+## What to look at: the cause, not a hunt
 
-Read `vulnerable/share.py`. `share_note` appends `note_id` to `_SHARES` on every call. The parameter `idempotency_key` is accepted and discarded. Checks:
+In `vulnerable/share.py`, `share_note` appends `note_id` to `_SHARES` on every call. The parameter `idempotency_key` is accepted and discarded. Checks:
 
 - `test_single_share` — one call still creates one share (honest happy path)
 - `test_retry_does_not_duplicate_side_effect` — two calls with `k1` must leave `share_count() == 1`
-
-You do not need a new key string. The failure of `test_retry_does_not_duplicate_side_effect` *is* the evidence.
-
-Do not open the repaired files yet. Diagnose the cause first.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
@@ -50,7 +44,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 |---|---|
 | The rule | Two `share_note` calls with the same key produce one share |
 | Why it happens | A side effect that is not bound to the key, plus a retry; the key does not mediate the append |
-| What has to be true first | Note `n1`; key `k1`; the handler inserts on every POST |
+| What's already wrong | Note `n1`; key `k1`; the handler inserts on every POST |
 | Trigger | Second `share_note("n1", idempotency_key="k1")` |
 | What it costs | Who is allowed to read the note changes over time; an extra share nobody meant |
 | How you stop it | Persist key → first share; the second POST returns the first outcome |
@@ -60,7 +54,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-A FastAPI route, Next.js disable-on-submit, or “PostgreSQL will unique-constrain it” is not this pytest. A unique constraint on `(note_id)` would block **any** second share, including a legitimate new key — wrong check. The app’s promise is: **this** practice, two calls with `k1`, `share_count() == 1`.
+A FastAPI route, Next.js disable-on-submit, and “PostgreSQL will unique-constrain it” do not remember the first share outcome. A unique constraint on `(note_id)` would block **any** second share, including a legitimate new key — wrong check. Two calls with `k1`, `share_count() == 1`.
 
 ## Practice
 

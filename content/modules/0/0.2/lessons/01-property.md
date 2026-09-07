@@ -39,7 +39,7 @@ flowchart LR
 | Slice | For this rule |
 |---|---|
 | Why it happens | A number treated as a capability |
-| What has to be true first | `quiz_score_grants_phase1_skip` consults the score |
+| What's already wrong | `quiz_score_grants_phase1_skip` consults the score |
 | Trigger | A hurried learner; a hiring manager with a badge |
 | What it costs | Fake competency — later practice without a map |
 | How you stop it | Skip only missing tooling units; never skip the who-is-allowed labs |
@@ -52,7 +52,7 @@ An LMS will let you mark a topic complete from a percentage. That is this bug.
 
 ## What the tool cannot do
 
-- A better quiz still cannot observe whether you can write a deny cell.
+- A better quiz still cannot observe whether you can write a deny rule.
 - Memorizing 1.2 answers without running the practice.
 - Git/SQL/HTTP gaps still need bridges when diagnostics show the skill is missing.
 
@@ -69,8 +69,6 @@ python3 -m pytest labs/0.2/0.2-bridge/tests --impl vulnerable
 python3 -m pytest labs/0.2/0.2-bridge/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 A vendor cert used to skip a threat-model review. A clinic onboarding quiz.
@@ -81,4 +79,4 @@ Memorized answers; tooling gaps still real. Opening this page does not finish th
 
 ## What this page is not doing
 
-Live LMS attacks. A job-title list as the course. Check-in 1 from a score.
+Do not use live LMS attacks. A job-title list as the course. Check-in 1 from a score.

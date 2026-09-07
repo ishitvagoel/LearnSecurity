@@ -3,9 +3,9 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A migration can leave `GRANT ALL` on the runtime user. A pooler can switch to `postgres`. Pair notice and recover. Do not log note bodies. Do not paste a company dump into the ticket while investigating.
+A migration can leave `GRANT ALL` on the runtime user, and a pooler can switch to `postgres`. Keep note bodies and company dumps out of the ticket while you investigate.
 
 ## Picture: who connected, then rotate
 
@@ -17,32 +17,30 @@ flowchart TD
   Alert --> Rotate[Rotate and rewrite DATABASE_URL]
 ```
 
-A broken grant is a notice-and-recover problem, not a licence to dump the note into the log.
+A broken grant must not put the note in the log.
 
 | Outcome | This topic |
 |---|---|
 | Notice | `grant_drift` in CI; who connected; the local pair still red then green |
 | What the line holds | role name, request id; never the body |
 | Recover | Rotate password; fix `GRANT`; take migrator offline |
-| Leftover | Stolen `app` still reads one company; write that cell down |
+| Leftover | Stolen `app` still reads one company; write that rule down |
 
-Industry lists name detect, respond, recover. They do not configure `GRANT`. They do not prove this company rule. A log-product name is not the rule. Re-run `test_app_role_cannot_read_other_tenant` after any GRANT change; a green IAM dashboard is not that pytest.
+A log line does not configure `GRANT`. A cross-company SELECT still has to fail `test_app_role_cannot_read_other_tenant`.
 
 The migrate job is leftover you must keep named: it exists, it is offline at request time, and a leaked migrate secret is a different owner than a leaked `app` password. Do not collapse those two alerts into “database issue.”
 
 ## What the framework does vs what you still have to check
 
-Cloud IAM dashboards will show “database in a private subnet” and stay silent when the connection user is `postgres`. Notice must observe the **runtime role**, not the private network. If the alert includes a note body, you have opened a leak.
+“Database in a private subnet” on Cloud IAM does not name the connection user `postgres`. Watch the **runtime role**, not the private network. Leave the note body out of the IAM metric.
 
 ## Practice
-
-Write one log line you would accept. Tie it to `labs/3.3/3.3-lab`.
 
 ```text
 log_denied reason=wrong_db_role role=postgres request_id=req_33ar
 ```
 
-Reject any line that includes a note body, a real connection-string secret, or “VPC is isolation.”
+A note body, a real connection-string secret, or “VPC is isolation” is too much for that deny line.
 
 ## Use it somewhere new
 
@@ -50,4 +48,4 @@ Serverless: notice the function using the migrate secret. Clinic replica: notice
 
 ## What this page is not doing
 
-A log-product name is not the rule. Live GRANT dumps are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live GRANT dumps. This site does not mark you as finished. Answer keys are not on this site.

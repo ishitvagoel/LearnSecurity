@@ -1,15 +1,15 @@
-# Fail on the broken files, then pass on the repaired ones
+# Allowing a link-local address must fail the check
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-“We block private IPs” is not evidence. “HTTPS only” is a tool observation. The check is: `allowed` is false for the named link-local metadata URL and for loopback, and true for the named lab host on https. That observation must be **false** on the broken files (returns true for link-local) and **true** on the repaired files. Tests **must not** fetch.
+A private-IP denylist does not cover link-local metadata. “HTTPS only” is a scheme check. `allowed` has to be false for the named link-local metadata URL and for loopback, and true for the named lab host on https. The leftover files: link-local still returns true. Repair refuses the link-local metadata URL. Tests **must not** fetch.
 
 ## Picture: link-local allowed must fail the check
 
-A test that only counts passing cases can pass while link-local is still allowed. This check asks whether a scheme-only allow still counts as a passing control. Broken must fail that question. Repaired must pass it.
+Link-local can still be allowed even when the suite is green.
 
 ```mermaid
 flowchart LR
@@ -17,9 +17,9 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: deny plus lab host]
 ```
 
-If both pass, the test is not looking at link-local. If both fail, the fix is not structural or the check is wrong.
+If the broken unfurl still passes, the link-local deny was never the case.
 
-## Four modes, even for one preview URL
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,16 +28,16 @@ If both pass, the test is not looking at link-local. If both fail, the fix is no
 | Failure | If you cannot name the host, do not fetch |
 | Not claimed | Live fetch; DNS rebinding; redirects; IPv6 |
 
-The file is `labs/6.5/6.5-lab/tests/test_property.py`. The test `test_link_local_metadata_is_denied` is a **what-must-not-happen** test: a scheme-only allow is not allowed to count as a passing control. The destination is a **string** in the practice files — do not send packets to it.
+A scheme-only allow is the case `test_link_local_metadata_is_denied` exists to catch. The destination is a **string** in the practice files — do not send packets to it.
 
-A test that only asserts the preview image loaded is not this topic’s evidence. A test that only greps `https` in a prefix check without calling `allowed` on the link-local string is not this topic’s evidence. This practice never fetches.
+An `https` prefix check is not `allowed` on the link-local string. This practice never fetches.
 
 ```text
 python3 -m pytest labs/6.5/6.5-lab/tests --impl vulnerable
 python3 -m pytest labs/6.5/6.5-lab/tests --impl fixed
 ```
 
-Honest lab-host https may pass on both (broken files allow any https). That does not excuse the link-local and loopback tests. If the broken files do not fail link-local, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
+The named lab host on https can still look fine. Deny link-local and loopback. If the broken files do not fail link-local, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
@@ -47,22 +47,13 @@ Honest lab-host https may pass on both (broken files allow any https). That does
 - Webhook signing (7.3)
 - A production egress proxy
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
-Run both this session:
-
-```text
-python3 -m pytest labs/6.5/6.5-lab/tests --impl vulnerable
-python3 -m pytest labs/6.5/6.5-lab/tests --impl fixed
-```
-
-Paste nothing from answer keys. Write fail/pass into your notes next to the matrix row. Reject a “test” that only greps `https` in a prefix check without calling `allowed` on the link-local string.
+Call `allowed` on the link-local string. An `https` prefix is the scheme, not the destination.
 
 ## Use it somewhere new
 
-Clinic PDF URL. A test that only asserts the preview image loaded is not this check (see 9.3). A test that fetches a live URL is out of scope.
+A preview image that loaded is the fetch, not the link-local deny (see 9.3). Do not run a test that fetches a live URL.
 
 ## What this page is not doing
 

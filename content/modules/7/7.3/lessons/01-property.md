@@ -9,9 +9,9 @@ The notes app may accept provider callbacks (billing, export-ready, invite used)
 
 > `accept("", "body", "lab-secret")` must be false. A matching HMAC over the same raw body may be true.
 
-What must not happen is **an unsigned webhook body accepted**. That is authenticity and integrity of the inbound integration.
+An **unsigned webhook body** must stay rejected. That is authenticity and integrity of the inbound integration.
 
-Industry lists want a standard-library MAC, not a homemade hash. Replay and freshness are leftovers, not this week’s empty-sig check. Per-message digital signatures beyond HMAC are **advanced** work, not this pytest. A famous-bugs nickname for unsafe consumption of APIs is awareness after the cause. HMAC here is a teaching stand-in, not “we are Stripe.”
+Use a standard-library MAC, not a homemade hash. Replay and freshness are leftovers, not this empty-sig check. Per-message digital signatures beyond HMAC are **advanced** work, not this check. A famous-bugs nickname for unsafe consumption of APIs is awareness after the cause. HMAC here is a teaching stand-in, not “we are Stripe.”
 
 ## Picture: hitting the path versus authenticity
 
@@ -22,7 +22,7 @@ flowchart TD
   Path --> Forged["forged share event if no MAC"]
 ```
 
-Anyone who can POST the URL can send a body. An IP allow-list is shared-fate (NAT, shared cloud egress). It is not a MAC.
+Picture anyone who can POST the URL can send a body. An IP allow-list is shared-fate (NAT, shared cloud egress). It is not a MAC.
 
 ## Picture: MAC over raw bytes
 
@@ -35,25 +35,25 @@ flowchart LR
 
 If you parse JSON then re-serialize, the MAC is over a different document than the provider signed (2.1). A secret in a query string is 4.3.
 
-**The tool (not the rule):** “the vendor SDK,” “TLS is on,” “allow-list the provider’s address range.”
+**These are tools:** “the vendor SDK,” “TLS is on,” “allow-list the provider’s address range.”
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | For this rule |
 |---|---|
 | Why it happens | The callback was trusted because it hit the path |
-| What has to be true first | `accept("", body, secret)` is true |
+| What's already wrong | `accept("", body, secret)` is true |
 | Trigger | An unauthenticated POST to the callback URL |
 | What it costs | Forged share, billing, or lab-result events |
-| How you stop it | MAC over the raw body; fail closed on a missing or wrong sig |
+| How you stop it | MAC over the raw body; deny on a missing or wrong sig |
 | How you notice | `webhook_sig_fail` |
 | How you recover | Rotate the disposable secret; review accepted events |
 
 ## What the framework does vs what you still have to check
 
-FastAPI will accept a POST with an empty header. A vendor SDK’s verify helper is not your custom MAC if you hash parsed JSON. JWT login of the *user* is a different cell.
+FastAPI will accept a POST with an empty header. A vendor SDK’s verify helper is not your custom MAC if you hash parsed JSON. JWT login of the *user* is a different rule.
 
-The app’s promise is: **this** `accept` check, on **this** practice string, is false when the signature is missing. The folder is `labs/7.3/7.3-lab`. Local only. No live webhooks.
+`accept` is false when the signature is missing — files in `labs/7.3/7.3-lab`. Local only. No live webhooks.
 
 ## What the tool cannot do
 
@@ -76,12 +76,10 @@ python3 -m pytest labs/7.3/7.3-lab/tests --impl vulnerable
 python3 -m pytest labs/7.3/7.3-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
-Clinic lab-result webhook. Signed redirects. Outbound SSRF (6.5).
+A lab-result webhook is this grain. Signed redirects are leftover. Outbound SSRF waits for 6.5.
 
 ## What this page is not doing
 
-Live Stripe/GitHub attacks, dumping HMAC cookbooks against public endpoints. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live Stripe/GitHub attacks, dumping HMAC cookbooks against public endpoints. This site does not mark you as finished. Answer keys are not on this site.

@@ -5,11 +5,11 @@
 
 ## The rule
 
-An “internal” queue is not the fix. A private network is not the fix. A zero-trust dashboard is not the fix. Signed broker messages are not a substitute for who the worker is.
+An “internal” queue does not bind who the exporter is. A private network does not bind it. A zero-trust dashboard does not bind it. Signed broker messages still are not who the worker is.
 
-Structural means the worker authenticates as a service principal. `exporter` must return `"worker-sc"` only when `service == "worker-sc"`. Leftover `user_session` is ignored.
+In short, the worker authenticates as a service principal. `exporter` must return `"worker-sc"` only when `service == "worker-sc"`. Leftover `user_session` is ignored.
 
-The smallest restore for notes-app overnight export is: Alice session yields `None`. Fail closed: missing service denies. A fallback `user_session or service` is the bug. Do not fail open because the broker was “inside the private network.”
+Overnight export needs this: Alice session yields `None`. A missing service denies. A fallback `user_session or service` is the bug. A broker “inside the private network” is not a named worker.
 
 ## Picture: service or nothing
 
@@ -20,13 +20,13 @@ flowchart TD
   Svc -->|no| Deny["return none"]
 ```
 
-The lab’s repaired files return `"worker-sc"` only on an exact service match. Production still needs a least-privileged database role for that principal (3.3): a correctly named worker that is still god-mode can read every company. After the worker is `worker-sc`, it may still need Alice’s grant (4.4) to choose *which* notes. That later check is advanced work, not this pytest. Broker access lists wait for 10.3.
+`exporter` returns `"worker-sc"` only on an exact service match. A correctly named worker that is still god-mode can read every company — that principal still needs a least-privileged database role (3.3). After the worker is `worker-sc`, it may still need Alice’s grant (4.4) to choose *which* notes. That later check is advanced work, not this check. Broker access lists wait for 10.3.
 
-Industry lists want that individual service account. This pytest is that sentence for leftover Alice.
+Use that individual service account — leftover Alice.
 
 ## What the repaired files must show
 
-Read `fixed/worker.py` against this checklist. Do not treat the snippet as a production broker.
+`fixed/worker.py` is a principal helper, not a queue client.
 
 | After the fix | Must be true |
 |---|---|
@@ -34,7 +34,7 @@ Read `fixed/worker.py` against this checklist. Do not treat the snippet as a pro
 | `service=worker-sc` | `"worker-sc"` |
 | alice + wrong service | `None` |
 
-Fail closed: if the job does not name the worker, the answer is deny. Uncertainty is a **no**, not a yes because the queue was “internal.”
+If the job does not name the worker, the answer is deny. An “internal” queue does not name the worker.
 
 ## What this is not
 
@@ -44,11 +44,11 @@ God-mode database role (3.3) as this check. Passing Alice’s login through the 
 
 - Service role that is still god-mode (3.3).
 - Poison-message loops and retries of revoked grants (2.4).
-- After the worker is the worker, choosing notes from Alice’s grant is a different cell.
+- After the worker is the worker, choosing notes from Alice’s grant is a different rule.
 - Field dumps from the worker serializer (7.2).
 - Leftover default worker credentials (5.3).
 - Broker access lists wait for 10.3.
-- A zero-trust architecture paper does not replace the pytest.
+- A zero-trust architecture paper does not replace the check.
 
 ## Practice
 
@@ -58,11 +58,9 @@ Name the check (`service == "worker-sc"`; leftover session ignored). Run:
 python3 -m pytest labs/7.4/7.4-lab/tests --impl fixed
 ```
 
-It must pass. Run from the lab directory if collection at repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
-Clinic: stop treating “the batch job runs on the hospital VLAN” as worker identity.
+Stop treating “the batch job runs on the hospital VLAN” as worker identity.
 
 ## What can still go wrong
 
@@ -70,4 +68,4 @@ Poison loops; retry of revoked grants (2.4); field dumps (7.2); default worker c
 
 ## What this page is not doing
 
-Do not attach to a live broker. Do not claim a course gate from a zero-trust screenshot.
+Do not attach to a live broker. Do not treat a zero-trust screenshot as a finished check-in.

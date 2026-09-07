@@ -1,15 +1,15 @@
-# Fail on the broken files, then pass on the repaired ones
+# A broken suite must fail the check
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-“Coverage 92%” is not evidence. “The testing-guide row is ticked” is a tool observation. The check is: `is_security_test({"status_asserted": True})` is false and a row that names `forbidden_outcome` may count. That 200-only observation must be **false** on the broken files and **true** on the repaired files. Do not fuzz public hosts.
+Coverage at 92% does not name what must not happen. A ticked testing-guide row is a checkbox. `is_security_test({"status_asserted": True})` has to be false, and a row that names `forbidden_outcome` may count. Broken: a 200-only row still counts. Repair stops a 200-only row from counting as a security test. Do not fuzz public hosts.
 
 ## Picture: a broken suite must fail the check
 
-A test that only counts passing tests can pass while 200-only still counts as security. This check asks whether a status-only row still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A 200-only case can still occupy the security-suite slot under a green suite.
 
 ```mermaid
 flowchart LR
@@ -17,9 +17,9 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: 200-only denied]
 ```
 
-If both pass, the test is not looking at `status_asserted` alone. If both fail, the fix is not structural or the check is wrong.
+If the broken suite still passes, `status_asserted` alone was never refused as a security test.
 
-## Four modes, even for a tiny predicate
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,16 +28,16 @@ If both pass, the test is not looking at `status_asserted` alone. If both fail, 
 | Abuse | fuzz with no named bad result must not count as covered |
 | Not claimed | a real testing-guide assessment; a later gate; fuzz oracles; that the named case matches who-is-allowed |
 
-The file is `labs/9.3/9.3-lab/tests/test_property.py`. The test `test_http_200_only_is_not_a_security_test` is a **what-must-not-happen** test: a 200-only row is not allowed to count as a security test.
+`test_http_200_only_is_not_a_security_test` refuses to count a 200-only row as a security test.
 
-Honest `{forbidden_outcome: True, status_asserted: True}` may pass on both implementations. That does not excuse the 200-only deny test. If the broken files do not fail `test_http_200_only_is_not_a_security_test`, the lab is miswired — fix the wiring, not the assertion.
+A row that names the bad result and asserts status may stay allowed. Deny a test that only checks HTTP 200. If the broken files do not fail `test_http_200_only_is_not_a_security_test`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/9.3/9.3-lab/tests --impl vulnerable
 python3 -m pytest labs/9.3/9.3-lab/tests --impl fixed
 ```
 
-A test that only greps a testing-guide id in a checklist without calling `is_security_test({"status_asserted": True})` is not this topic's evidence. This practice never opens a live app.
+A testing-guide id in a checklist is not `is_security_test({"status_asserted": True})`. This practice never opens a live app.
 
 ## What the tests do not prove
 
@@ -47,23 +47,14 @@ A test that only greps a testing-guide id in a checklist without calling `is_sec
 - Race-condition tests with a named bad result
 - A later gate complete
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
-Run both this session from the lab directory if needed:
-
-```text
-python3 -m pytest labs/9.3/9.3-lab/tests --impl vulnerable
-python3 -m pytest labs/9.3/9.3-lab/tests --impl fixed
-```
-
-Paste nothing from answer keys. Write fail/pass into your notes next to the isolation row. Reject a “test” that only greps a catalogue name without calling `is_security_test({"status_asserted": True})`.
+Call `is_security_test({"status_asserted": True})`. A testing-guide id in a checklist is a tick, not the isolation assert.
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts the patient page loads is not this topic. A live fuzz call is out of scope.
+A patient page that loads is a 200, not a named isolation assert. Do not make a live fuzz call.
 
 ## What this page is not doing
 
-Do not add a live fuzz trophy. Do not log note bodies. Answer keys are not on this site.
+A live fuzz screenshot is not a named isolation assert. Do not log note bodies. Answer keys are not on this site.

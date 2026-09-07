@@ -5,21 +5,19 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `log_event` that returns a string. The failure is already in the function: it pastes the note body into the line. You are here to see that the check treats that line as a **failed rule**, not as a debug nit.
-
-The rule under test:
+The practice is not a website you attack. `log_event` returns a string: it pastes the note body into the line, so the log already holds the secret.
 
 > A confidential note body must not appear in this log line. If `log_event("note_read", "tenant-A-secret-body")` includes `tenant-A-secret-body`, logging has failed as a security control.
 
 ## Where you may practice
 
-Only `labs/3.1/3.1-lab` is in scope. The string is in-process. The body is the synthetic string `tenant-A-secret-body`. No production log drains, no real people's data, no live log tenant, no patient chart.
+Stay inside `labs/3.1/3.1-lab`. The body is the synthetic string `tenant-A-secret-body`. No production log drains, no real people's data, no live log tenant, no patient chart.
 
 Do not paste a real note body into the logger “to see what happens.” Do not paste this exercise onto a public log drain, employer dashboard, or live clinic.
 
-What you trust for this check: the logging API is supposed to deny the body. A spreadsheet sticker, a privacy-policy URL, `DEBUG=false` in one environment, and a data-loss product name are not what you trust.
+The logging API is supposed to deny the body — not A spreadsheet sticker, a privacy-policy URL, `DEBUG=false` in one environment, or a data-loss product name.
 
-Who can read the line in this story: an operator, a log vendor, or another company's admin on shared observability. That stands in for access logs, exception dumps, APM, and a support ticket.
+Picture an operator, a log vendor, or another company's admin on shared observability — access logs, exception dumps, APM, and a support ticket.
 
 ## Picture: debug context is the leak
 
@@ -30,15 +28,12 @@ flowchart TD
   Line --> Operator[Lower-trust reader]
 ```
 
-The broken files take that path on purpose. You do not need a production drain. The substring in the returned line *is* the leak.
+You do not need a production drain. The chart substring is already in the returned line.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
-Read `vulnerable/classify.py`. `log_event` returns `f"{event}: {note_body}"`. The test asserts the body substring is absent **and** a redaction marker (`redacted` or `confidential`) is present.
+In `vulnerable/classify.py`, `log_event` returns `f"{event}: {note_body}"`. The test asserts the body substring is absent **and** a redaction marker (`redacted` or `confidential`) is present.
 
-You do not need a new body string. The failure of `test_note_body_is_not_logged` *is* the evidence.
-
-Do not open the repaired files yet. Diagnose the cause first.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -51,7 +46,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 | Slice | Practice |
 |---|---|
 | Why it happens | The body was treated as debug context; the log accepted the field |
-| What has to be true first | A `note_read` event; a handler that pastes the body into the line |
+| What's already wrong | A `note_read` event; a handler that pastes the body into the line |
 | Trigger | `log_event("note_read", "tenant-A-secret-body")` |
 | What it costs | Secrecy and privacy of the body in a lower-trust store |
 | How you stop it later | Structured logs with allow-listed fields; never paste the body |
@@ -59,21 +54,19 @@ Do not open the repaired files yet. Diagnose the cause first.
 | How you recover later | Purge matching logs; rotate if tokens were present; do not log the body again while looking |
 | Out of scope | A privacy-policy URL, a data-loss product name, or “logs are internal” |
 
-FastAPI does not know Confidential. Access logs will store query strings — a later topic. Regex after the fact misses encodings — a later topic. The app's promise this week is: **this** line does not contain `tenant-A-secret-body`.
+FastAPI does not know Confidential. Access logs will store query strings — a later topic. Regex after the fact misses encodings — a later topic. Line does not contain `tenant-A-secret-body`.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/3.1/3.1-lab/tests --impl vulnerable
 ```
 
-Record the failing test `test_note_body_is_not_logged`. Do not weaken it to “logs exist.” An environment error is not security evidence.
+Record the failing test `test_note_body_is_not_logged`. “Logs exist” is not that test. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic chart text in an appointment log. Predict, without leaving this directory, whether logging the booking time is a different class from logging the chart. Do not fetch a clinic.
+Chart text in an appointment log is a different class from the booking time. Predict, without leaving this directory, whether logging the booking time is a different class from logging the chart. Do not fetch a clinic.
 
 ## What this page is not doing
 

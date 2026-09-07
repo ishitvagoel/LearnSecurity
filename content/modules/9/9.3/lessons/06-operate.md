@@ -1,52 +1,50 @@
-# security_suite_missing_isolation without logging bodies
+# Notice a missing isolation check, without logging notes
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A new endpoint can land with only 200 tests after `is_security_test` was “fixed once.” Pair notice and recover. Do not log note bodies from failed isolation cases (3.1). Do not attach patient JSON to the ticket.
+CI can ship a new endpoint whose only security cases are HTTP 200s. Keep failed isolation bodies and patient JSON out of the ticket.
 
 ## Picture: missing isolation is a signal
 
-A missing named what-must-not-happen is a notice-and-recover problem, not a licence to quote the note in the paging channel. Notice names the suite. Recover adds the isolation test. Neither reprints the body.
+If the suite never names what must not happen, page the suite — not the note. Then add the isolation test.
 
 ```mermaid
 flowchart TD
-  Suite[CI suite] --> Iso{isolation what-must-not-happen?}
+  Suite[CI suite] --> Iso{isolation what must not happen?}
   Iso -->|no| Metric["security_suite_missing_isolation plus 1"]
   Metric --> Block[block release]
 ```
 
-Industry lists name detect, respond, recover. They do not pick a coverage product. They do not prove this suite is honest. Someone still has to own the leftover.
+Coverage percent and an honesty badge do not name the isolation case.
 
-Re-run `test_http_200_only_is_not_a_security_test` after any suite change. A green “94% coverage” tile is not that pytest. Field-level tests (7.2) and race-condition tests are other named what-must-not-happen of the same shape — inventory them before you claim recover. Keep 200-only tests as product tests; do not delete them, and do not let them occupy the security-suite slot.
+A 200-only case is still not a security test — `test_http_200_only_is_not_a_security_test`. Ninety-four percent coverage does not name what must not happen. Field-level tests (7.2) and race-condition tests still need a named bad result; coverage percent does not complete the suite. Keep 200-only tests as product tests; do not delete them, and do not let them occupy the security-suite slot.
 
 ## Signals that do not become a second leak
 
 | Outcome | This topic |
 |---|---|
 | Notice | `security_suite_missing_isolation` |
-| What the line holds | Suite name, missing what-must-not-happen; **never** bodies |
+| What the line holds | Suite name, missing what must not happen; **never** bodies |
 | Respond | Stop the mapping that counted 200-only as security; do not paste a failed isolation body into chat |
 | Recover | Add the isolation test; keep 200-only as product tests |
 | Leftover | Looking around (9.5); fuzz with no named bad result; field grain (7.2) |
 
-A coverage dashboard will show line coverage and stay silent when the isolation row has only 200-only tests. Detection must observe **200-only is not a security test**, not percent covered. If the alert includes note bodies from a failed isolation case, you have opened the same leak as a log line (3.1).
-
-A log line a reviewer can accept looks like:
+Line coverage percent does not make a 200-only isolation row a security test. Treat **200-only is not a security test** as the miss, not percent covered. Note bodies from a failed isolation case next to a 200-only suite are a log-line leak (3.1).
 
 ```text
 log_denied reason=security_suite_missing_isolation req=isolation suite=api
 ```
 
-Not: a note body, a patient name, a live fuzz payload, or “later gate complete.”
+A note body, a patient name, a live fuzz payload, or “later gate complete” on that sample already overfills the fuzz log.
 
-If your alert includes the matching note body, you have copied the leak into the paging channel.
+Isolation-miss tickets that quote the note body already page the patient text.
 
 ## What the framework does vs what you still have to check
 
-The same field-grain holes, looking-around leftovers, and fuzz-with-no-named-bad-result that bypass this practice will also bypass a “scan our coverage dashboard” detector. Name those places before you claim recover. A coverage-product name is not the rule.
+Field-grain holes, looking-around leftovers, and fuzz with no named bad result still pass a green coverage dashboard.
 
 ## Can people still use it
 
@@ -54,18 +52,16 @@ A failing security test must say what must not happen in the assertion message, 
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/9.3/9.3-lab`.
-
 ```text
 log_denied reason=security_suite_missing_isolation req=isolation suite=api
 ```
 
-Reject any line that includes a note body, a live fuzz payload, or “later gate complete.”
+A note body, a live fuzz payload, or “later gate complete” already overfills this fuzz log.
 
 ## Use it somewhere new
 
-Clinic: notice `test_get_patient_200` as the only “security” test; do not attach patient JSON to the ticket. Do not fuzz a live clinic.
+Notice `test_get_patient_200` as the only “security” test; do not attach patient JSON to the ticket. Do not fuzz a live clinic.
 
 ## What this page is not doing
 
-A coverage-product name is not the rule. Live fuzz traces are out of scope. Answer keys are not on this site.
+Do not use live fuzz traces. Answer keys are not on this site.

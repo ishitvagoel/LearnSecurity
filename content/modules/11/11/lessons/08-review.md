@@ -1,40 +1,38 @@
-# Review no-op revoke like a pull request
+# Would you merge this no-op revoke?
 
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
-
 ## What you are reviewing
 
-A colleague ships the notes app’s share revoke. Review `labs/11/11-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `read("n1", "B")` after `revoke("n1", "B")` still returns the body, compare that with the rule, and write changes a developer can verify.
+Open `labs/11/11-lab/vulnerable/` as a revoke-share change. After `revoke("n1", "B")`, does `read("n1", "B")` still return the body?
 
-Start at `revoke` / `read` and the B-after-revoke row, not at a scanner color or a README screenshot. The check you already ran (`test_revoked_share_cannot_read`) is the rule test. A comment “will consult grants later” is not.
+Trace `revoke` / `read` and the B-after-revoke row. A README screenshot is decoration. `test_revoked_share_cannot_read` still has to fail B-after-revoke. “Will consult grants later” does not close that row.
 
 ## Picture: read after revoke succeeds
 
-Start with this seeded smell: **read after revoke succeeds**. Label it rule, tool, or false comfort before you accept the change.
+**read after revoke succeeds**.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would show it is false?"}
   Q -->|B still reads| Property["Rule - good if tested"]
   Q -->|revoke returned 200| Mechanism[Tool - event]
-  Q -->|scanner green| False[False comfort]
+  Q -->|scanner green| False[False assurance]
 ```
 
-Classification starts at the protected effect (B after revoke is None). Everything that is not owner-or-grant at that call is a candidate always-read path. A scanner screenshot without that pytest is the same smell, not a different finding class.
+B after revoke is still None. If the change never checks owner-or-grant, that always-read leftover is still open. A scanner screenshot does not replace that check.
 
-Cache invalidation is a phone leftover. Worker leftover session is a delayed-job leftover. Do not skip `test_revoked_share_cannot_read`. Do not claim you finished an assurance gate. Do not hit a live tenant to prove the finding.
+Cache invalidation is a phone leftover. Worker leftover session is a delayed-job leftover. This page does not mark you as finished. Do not hit a live tenant to prove the finding.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - read after revoke succeeds
 - Capstone README: scanner green = done
 - No cache invalidation
 - Assurance stamp claimed without artifacts
 
-Also reject: live tenant attacks; merging without re-running `test_revoked_share_cannot_read`; keys in learner notes; claiming an assurance gate.
+Also reject: live tenant attacks; merging without re-running `test_revoked_share_cannot_read`; keys in learner notes; treating this capstone lesson as a check-in.
 
 ## Common mix-ups
 
@@ -42,15 +40,11 @@ Also reject: live tenant attacks; merging without re-running `test_revoked_share
 - Milestones complete because lessons exist
 - A green scanner is the evidence pack
 - HTTP 200 on DELETE is the next-read check
-- Access-rights change in the same session is this pytest (it is leftover, advanced work)
-
-## Practice
-
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_revoked_share_cannot_read`. Do not open the keys file.
+- Access-rights change in the same session is this check (it is leftover, advanced work)
 
 ## Use it somewhere new
 
-Clinic change that “added DELETE /guardians and a scanner badge” without a post-revoke read deny is an incomplete next-read review. Name the independent falsehood that would still keep B from reading after revoke.
+DELETE /guardians plus a scanner badge, without a post-revoke read deny, does not finish the next-read review. A green scanner is not a post-revoke read deny — write that deny.
 
 ## Can people still use it
 
@@ -58,4 +52,4 @@ A deny notice must say why the read was refused (share revoked), not only “wil
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will consult grants later.” That comment is leftover without an owner. Do not scrape a public notes app to prove the finding.
+Shipping “will consult grants later” leaves a revoked share readable with nobody assigned. Do not scrape a public notes app to prove the finding.

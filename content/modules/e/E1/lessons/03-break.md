@@ -5,21 +5,19 @@
 
 ## Try it
 
-The practice is not a model you attack. It is a tiny Python `run_tool` that returns `ran {name}` for every name. The failure is already in the function: it never looks at the name. You are here to see that the check treats that always-run call as a **failed rule**, not as a paperwork nit.
-
-The rule under test:
+The practice is not a model you attack. `run_tool` returns `ran {name}` for every name: it never looks at the name, so every tool name already runs.
 
 > An agent must not run `exec_sql` because the model asked. If `run_tool("exec_sql", {})` returns a ran-string, the runtime has failed as a security control.
 
 ## Where you may practice
 
-Only `labs/E1/e1-lab` is in scope. The practice is an in-process `run_tool(name, args)`. The names are synthetic strings `exec_sql` / `search_notes`. Do **not** send prompts to a public language model, production agent, or clinic summarizer as the exercise.
+Stay inside `labs/E1/e1-lab`. The names are synthetic strings `exec_sql` / `search_notes`. Do **not** send prompts to a public language model, production agent, or clinic summarizer as the exercise.
 
 Do not paste this exercise onto a public API, employer agent, or live hospital summarizer "to see what happens."
 
-What you trust for this check: `run_tool` is supposed to **allow-list the name in the runtime**. Library defaults, a system prompt, and the web framework itself are not what you trust.
+`run_tool` is supposed to **allow-list the name in the runtime** — not Library defaults, a system prompt, or the web framework itself.
 
-Who can take the tools in this story: prompt injection in a note plus a confused-deputy runtime. That stands in for "the system prompt forbids SQL," a retrieval corpus treated as what you trust, or a famous-bugs mapping treated as mediation.
+Picture prompt injection in a note plus a confused-deputy runtime — "the system prompt forbids SQL," a retrieval corpus treated as what you trust, or a famous-bugs mapping treated as mediation.
 
 ## Picture: any name runs
 
@@ -28,20 +26,17 @@ flowchart TD
   Any[any tool name] --> Ran[ran name]
 ```
 
-The broken files take that path on purpose. You do not need a language model. You must not call a live model. The ran-string for `"exec_sql"` *is* the leak.
+You do not need a language model. You must not call a live model. The ran-string for `"exec_sql"` already is the tool call.
 
 The interpreter lesson already said a string is not a safe argv. This check is **the same idea with the model as an untrusted client**.
 
-## What to look at — cause, not a dump
+## What to look at: the cause, not a hunt
 
-Read `vulnerable/tools.py`. It returns `ran {name}` for every name. Tests:
+`vulnerable/tools.py` returns `ran {name}` for every name. Tests:
 
 - `test_exec_sql_tool_is_denied`
 - `test_allowlisted_search_notes_may_run` — `search_notes` may pass on both
 
-You do not need a new tool name. The failure of `test_exec_sql_tool_is_denied` *is* the evidence.
-
-Do not open the repaired files yet. Diagnose the cause first.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -55,30 +50,28 @@ Do not open the repaired files yet. Diagnose the cause first.
 |---|---|
 | The rule | `run_tool("exec_sql", {})` is None |
 | Why it happens | Model output treated as policy |
-| What has to be true first | `run_tool` runs every name |
+| What's already wrong | `run_tool` runs every name |
 | Trigger | Prompt injection in a note; poisoned retrieval |
 | What it costs | Interpreter via English |
 | How you stop it later | Allow-list; unknown tools deny |
 | How you notice later | `tool_denied`; never transcripts |
 | How you recover later | Revoke leftover agent credentials |
-| Out of scope | A famous-bugs product; a live vendor API; claiming an assurance gate |
+| Out of scope | A famous-bugs product; a live vendor API; treating this model-tool lesson as a check-in |
 
-A tool library will expose whatever tools you pass. A system prompt is another string the model may ignore. The web framework will still run whatever handler you wired. The notes app's summarizer will still run `exec_sql` if `run_tool` is always-run. The app's promise this week is: **this** practice, `exec_sql` is None.
+A tool library will expose whatever tools you pass. A system prompt is another string the model may ignore. The web framework will still run whatever handler you wired. The notes app's summarizer will still run `exec_sql` if `run_tool` is always-run. `exec_sql` is None.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/E1/e1-lab/tests --impl vulnerable
 ```
 
-Run from `labs/E1/e1-lab` if a collection at the repo root picks up `site/`. Record `test_exec_sql_tool_is_denied`. Do not probe public hosts. An environment error is not security evidence.
+Run from `labs/E1/e1-lab` if a collection at the repo root picks up `site/`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic summarizer: predict without leaving this directory. Do not call a live model.
+A summarizer that can still register `exec_sql` is the leftover. Predict without leaving this directory. Do not call a live model.
 
 ## What this page is not doing
 
-No live-model, production-agent, or public prompt-injection instructions. Do not claim you finished an assurance gate. Do not treat a famous-bugs list as the rulebook.
+No live-model, production-agent, or public prompt-injection instructions. This page does not mark you as finished. Do not treat a famous-bugs list as the rulebook.

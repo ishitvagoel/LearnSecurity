@@ -1,15 +1,15 @@
-# Fail on the broken files, then pass on the repaired ones
+# Glued-together SQL must fail the check
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-“We parameterized queries” is not evidence. “ORM is on” is a tool observation. The check is: `fetch_sql` is not a `str`, and `is_bound` is true for the `(sql, params)` shape. That observation must be **false** on the broken files (returns concatenated SQL) and **true** on the repaired files.
+Saying queries are parameterized does not prove the SQL is a tuple. An ORM toggle is a product. `fetch_sql` must not be a `str`, and `is_bound` has to be true for the `(sql, params)` shape. On the broken helper, the helper returns concatenated SQL. Repair returns `(sql, params)`.
 
 ## Picture: concatenated SQL must fail the check
 
-A test that only counts passing cases can pass while the query is still glued. This check asks whether concatenated SQL still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A glued query can still ship while the rest of the tests pass.
 
 ```mermaid
 flowchart LR
@@ -17,9 +17,9 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: is_bound]
 ```
 
-If both pass, the test is not looking at concatenated SQL. If both fail, the fix is not structural or the check is wrong.
+If the broken report still passes, concatenated SQL was never the failing query.
 
-## Four modes, even for one fetch
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,16 +28,16 @@ If both pass, the test is not looking at concatenated SQL. If both fail, the fix
 | Failure | If you cannot bind, do not query |
 | Not claimed | ORDER BY identifiers; live row-level rules; NoSQL operators |
 
-The file is `labs/5.5/5.5-lab/tests/test_property.py`. The test `test_query_is_bound_not_concatenated` is a **what-must-not-happen** test: a concatenated `str` is not allowed to count as a passing control. The hostile `note_id` in that test is **data** for the params tuple — a class of extra grammar, not a cookbook to paste into a live query.
+`test_query_is_bound_not_concatenated` catches a concatenated `str`. The hostile `note_id` in that test is **data** for the params tuple — a class of extra grammar, not a cookbook to paste into a live query.
 
-A test that only asserts HTTP 200 is not this topic's evidence. A test that only greps `%s` inside a concatenated string without asserting the tuple shape is not this topic's evidence. This practice never opens a live database.
+A `%s` inside concatenated SQL is not the `(sql, params)` shape. This practice never opens a live database.
 
 ```text
 python3 -m pytest labs/5.5/5.5-lab/tests --impl vulnerable
 python3 -m pytest labs/5.5/5.5-lab/tests --impl fixed
 ```
 
-Honest bound shape must pass on repaired. Concatenated `str` must fail on broken. If the broken files do not fail the `isinstance(q, str)` branch, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
+Honest bound shape must pass on repaired. Concatenated `str` must fail on broken. If the broken files do not fail the `isinstance(q, str)` branch, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
@@ -47,23 +47,14 @@ Honest bound shape must pass on repaired. Concatenated `str` must fail on broken
 - Advanced who-is-allowed-decision logging
 - GraphQL / NoSQL operator injection (7.1)
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
-Run both this session:
-
-```text
-python3 -m pytest labs/5.5/5.5-lab/tests --impl vulnerable
-python3 -m pytest labs/5.5/5.5-lab/tests --impl fixed
-```
-
-Paste nothing from answer keys. Write fail/pass into your notes next to the matrix row. Reject a “test” that only greps `%s` inside a concatenated string without asserting the tuple shape.
+Assert the `(sql, params)` shape. A `%s` inside concatenated SQL is still a string.
 
 ## Use it somewhere new
 
-Clinic search box. A test that only asserts HTTP 200 is not this check (see 9.3). A test that hits a live clinic system is out of scope.
+A green search still can be concatenated SQL. Do not run a test that hits a live clinic system.
 
 ## What this page is not doing
 
-Do not add a live SQL trophy. Do not log bound parameter values that are bodies. Answer keys are not on this site.
+A live SQL screenshot is not the bound tuple. Do not log bound parameter values that are bodies. Answer keys are not on this site.

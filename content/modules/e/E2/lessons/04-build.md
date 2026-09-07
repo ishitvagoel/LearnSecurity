@@ -5,11 +5,11 @@
 
 ## The rule
 
-A green reporting dashboard is not the fix. Helmet is not the fix. “We set a header” is not the fix.
+A green reporting dashboard does not enforce the policy. Helmet is a library import. Setting a header in Report-Only still fails `isolation_enforced`.
 
-The structural change is: `isolation_enforced` looks at the **enforcing** name. It must return true only when `Content-Security-Policy` is in the headers. Report-Only may *ride along*; it does not replace that name.
+The restore: `isolation_enforced` looks at the **enforcing** name. It must return true only when `Content-Security-Policy` is in the headers. Report-Only may *ride along*; it does not replace that name.
 
-The smallest restore for the notes app’s Next.js responses is: Report-Only only → false, enforcing CSP may count. Do not fail open because reports are arriving. Do not treat a policy string on the wrong header as isolation.
+The notes app’s Next.js responses needs this: Report-Only only → false, enforcing CSP may count. Arriving reports do not make Report-Only enforcing. Do not treat a policy string on the wrong header as isolation.
 
 ## Picture: name gate
 
@@ -20,9 +20,9 @@ flowchart TD
   Has -->|no| Off[false]
 ```
 
-Do not accept Report-Only as the name. Production still needs encoding (6.2) — a well-named header does not replace encoding. A CDN can still strip the enforcing header (2.2). Trusted Types and the current content-security spec remain **draft**. Reporting from that policy is extra, later, and advanced: reports are the Report-Only kind of signal, not this check.
+Report-Only is not the name. Encoding (6.2) still has to exist — a well-named header does not replace it. A CDN can still strip the enforcing header (2.2). Trusted Types and the current content-security spec remain **draft**. Reporting from that policy is extra, later, and advanced: reports are the Report-Only kind of signal, not this check.
 
-Industry checklists want a content-security policy as a layer after encoding. This pytest is that sentence for the header *name*.
+Use a content-security policy as a layer after encoding — the header *name*.
 
 ## Why this fix works
 
@@ -31,14 +31,14 @@ Industry checklists want a content-security policy as a layer after encoding. Th
 | Report-Only only | false |
 | enforcing CSP | true |
 
-Fail closed: if the enforcing name is missing, **do not claim isolation**. Do not keep Report-Only because “the dashboard is green.”
+If the enforcing name is missing, **do not claim isolation**. A green dashboard does not turn Report-Only into enforcing.
 
 ## What this is not
 
 - Encoding (6.2).
 - Helmet.
 - Check-in 7.
-- The current content-security spec as a complete catalogue (**draft**).
+- The current content-security spec as a complete list (**draft**).
 - COOP/COEP.
 - Trusted Types as encoding.
 
@@ -58,11 +58,9 @@ Name who can edit Next.js headers. Run `--impl fixed` (must pass):
 python3 -m pytest labs/E2/e2-lab/tests --impl fixed
 ```
 
-Run from the lab directory if collection at repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
-Clinic: send enforcing CSP, keep Report-Only as a *second* header if you still want reports.
+Send enforcing CSP, keep Report-Only as a *second* header if you still want reports.
 
 ## What can still go wrong
 

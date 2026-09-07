@@ -5,9 +5,9 @@
 
 ## The rule
 
-A denylist of yesterday’s CSS class is not the fix. Hiding a scanner warning is not the fix. “The component library is accessible” is not the fix.
+A leftover CSS class name is a denylist, not a named keyboard control. Silencing a scanner warning does not give the button a name. A vendor “accessible component” sticker is not the restore.
 
-The structural change is: the confirm object **is** a named, keyboard-operable control, and color is extra encoding only. The who-is-allowed decision (this person may confirm **this** account **now**) does not change. You do not restore access by emailing the password.
+The restore: the confirm object **is** a named, keyboard-operable control, and color is extra encoding only. The who-is-allowed decision (this person may confirm **this** account **now**) does not change. You do not restore access by emailing the password.
 
 ## Picture: extra cues, not a swap
 
@@ -23,7 +23,7 @@ If you remove Name or Key, the control is not a control. If you remove Color, a 
 
 ## What the repaired files must show
 
-Read `fixed/recovery.py` against this checklist. Do not treat the snippet as production React.
+`fixed/recovery.py` is not the clinic confirm widget.
 
 | Check | Why it is structural |
 |---|---|
@@ -32,7 +32,7 @@ Read `fixed/recovery.py` against this checklist. Do not treat the snippet as pro
 | `mouse_only` is false | A pointer is not secretly what you trust |
 | Color may remain | Extra, not the only, cue |
 
-Fail closed: if name or keyboard is missing, `is_usable_accessible` is false. Uncertainty is a **no** on “this control is an acceptable recovery gate,” not a yes because the demo looked fine.
+If name or keyboard is missing, `is_usable_accessible` is false. A polished demo does not make this an acceptable recovery gate.
 
 ## What this is not
 
@@ -52,8 +52,6 @@ Name who, what, action, and the check that must be true after the fix. Run:
 ```text
 python -m pytest labs/1.4/1.4-risk-register/tests --impl fixed
 ```
-
-It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
 
 ## Use it somewhere new
 

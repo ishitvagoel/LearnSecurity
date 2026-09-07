@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
-
 ## What you are reviewing
 
-A colleague ships a notes-app recovery confirm and a “risk register.” Your job is to label each claim **rule**, **tool**, or **false comfort**, and to say which outcome (lockout, shortcut/secrecy, or a missing record) breaks if they ship. Start at the confirm widget and the register row, not at a scanner color or an accessibility badge.
+Review the recovery confirm and the risk register. Mark each claim **rule**, **tool**, or **false assurance**, and say whether lockout, a shortcut that leaks, or a missing record would land if they ship. Open the confirm widget and the register row. An accessibility badge can wait.
 
-The folder `labs/1.4/1.4-risk-register/vulnerable/` is the change. The check you already ran (`test_recovery_control_is_usable_and_accessible`) is the rule test. A comment “will fix accessibility later” is not.
+The review is whether `test_recovery_control_is_usable_and_accessible` passes, not whether someone wrote “will fix accessibility later.”
 
 ## Picture: problems to find (name them yourself)
 
@@ -20,7 +18,7 @@ flowchart TD
   PR[Proposed recovery change] --> Q1{Named keyboard control?}
   PR --> Q2{List names harm, owner, when to look again?}
   Q1 -->|no| Fail1[Rule fail: lockout or shortcut]
-  Q2 -->|no| Fail2[False comfort: fake leftover]
+  Q2 -->|no| Fail2[False assurance: fake leftover]
 ```
 
 - Confirm button has no accessible name
@@ -38,13 +36,9 @@ Also reject: trusting the browser as the vault; closing a finding without re-run
 - A maturity score or scanner color is leftover risk
 - Coercion is solved by CSS
 
-## Practice
-
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_recovery_control_is_usable_and_accessible`. Do not open the keys file.
-
 ## Use it somewhere new
 
-Clinic mouse-only second factor: write the same four problem names as they would appear in that UI (unnamed dialog, color-only continue, pointer-only, leftover “clinicians should be careful”).
+On a mouse-only second-factor screen, write the same four problem names as they would appear in that UI (unnamed dialog, color-only continue, pointer-only, leftover “clinicians should be careful”).
 
 ## Can people still use it
 
@@ -52,4 +46,4 @@ Keyboard, not-color-alone, and a large enough target apply to the control. They 
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will fix accessibility later.” That comment is leftover risk without an owner.
+A mouse-only confirm with only “will fix accessibility later” is leftover lockout with no owner.

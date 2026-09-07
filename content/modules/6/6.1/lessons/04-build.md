@@ -5,11 +5,11 @@
 
 ## The rule
 
-A denylist of punctuation is not the fix. “subprocess will handle it” is not the fix. Commenting “internal users are trusted” is not the fix.
+A denylist of punctuation does not change argv. “subprocess will handle it” can still be `sh -c`. Commenting “internal users are trusted” is not `argv_for_list`.
 
-Structural means the shell never sees the name. `argv_for_list` must return a list whose program is `ls` (or another fixed binary), not `sh`. The name is one element. `--` before the name is the extra slot that closes argument injection as a *named* leftover.
+Put simply, the shell never sees the name. `argv_for_list` must return a list whose program is `ls` (or another fixed binary), not `sh`. The name is one element. `--` before the name is the extra slot that closes argument injection as a *named* leftover.
 
-The smallest restore for notes-app export listing is: list, not string. Fail closed: if you cannot spawn without a shell, **do not spawn**. Do not fail open because the name “looks like notes.”
+The check in export listing: list, not string. If you cannot spawn without a shell, **do not spawn**. A name that “looks like notes” is not an argv list.
 
 ## Picture: list, not string
 
@@ -21,13 +21,13 @@ flowchart TD
   Shell -->|yes| Deny[Deny]
 ```
 
-The lab’s repaired files return `["ls", "--", name]`. Production still has to call `subprocess.run` with that list and `shell=False`. A denylist of punctuation fails the 2.1 encoding lesson. Path traversal of the name is 6.4, a different check. Formula characters in the file *contents* are advanced leftover, not argv.
+`argv_for_list` returns `["ls", "--", name]`. `subprocess.run` still has to get that list with `shell=False`. A denylist of punctuation fails the 2.1 encoding lesson. Path traversal of the name is 6.4, a different check. Formula characters in the file *contents* are advanced leftover, not argv.
 
-Industry lists want arguments as parameters. This pytest is that sentence for `argv_for_list`.
+Pass arguments as parameters — `argv_for_list`.
 
 ## What the repaired files must show
 
-Read `fixed/argv.py` against this checklist. Do not treat the snippet as a production process launcher.
+`fixed/argv.py` builds a list, not a live export process.
 
 | After the fix | Must be true |
 |---|---|
@@ -35,7 +35,7 @@ Read `fixed/argv.py` against this checklist. Do not treat the snippet as a produ
 | `uses_shell` | false |
 | name slot | last element is the name, not `ls notes` as one string |
 
-Fail closed: if you cannot spawn without a shell, the answer is no spawn. Uncertainty is a **deny**, not a yes because the name looked well-formed.
+By default, if you cannot spawn without a shell, the answer is no spawn. A well-formed name is not a list.
 
 ## What this is not
 
@@ -57,11 +57,11 @@ Name the check (program ≠ `sh` ∧ last element is the name ∧ not `uses_shel
 python3 -m pytest labs/6.1/6.1-lab/tests --impl fixed
 ```
 
-It must pass. Do not execute the returned list. Then write one sentence: which rule is restored, and which leftover you refused to delete.
+Do not execute the returned list.
 
 ## Use it somewhere new
 
-Clinic: stop wrapping the export filename in `sh -c`; pass it as argv.
+Stop wrapping the export filename in `sh -c`; pass it as argv.
 
 ## What can still go wrong
 
@@ -69,4 +69,5 @@ Argument injection; plugin shells; CSV formula leftover; 6.4 path cells.
 
 ## What this page is not doing
 
-Do not spawn a live process. Do not claim a course gate from a denylist.
+Do not spawn a live process. A denylist does not mark you finished.
+

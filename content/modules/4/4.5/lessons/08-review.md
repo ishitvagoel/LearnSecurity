@@ -3,27 +3,25 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
-
 ## What you are reviewing
 
-A colleague ships notes-app token acceptance. Review `labs/4.5/4.5-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `accept_token` still returns true for `aud=other-api`, compare that with the rule, and write changes a developer can verify.
+Look at `labs/4.5/4.5-lab/vulnerable/` as a token-acceptance PR. Does `accept_token` still return true for `aud=other-api`?
 
-The check you already ran (`test_wrong_audience_is_rejected`) is the rule test. A comment “will check aud later” is not.
+`other-api` as a session is enough to reject. “will check aud later” does not count.
 
 ## Picture: verify signature, skip aud
 
-Start with this seeded smell: **verify signature, skip aud**. Label it rule, tool, or false comfort before you accept the change.
+**verify signature, skip aud**.
 
 ```mermaid
 flowchart TD
   Claim[PR claim] --> Q{"What would falsify it?"}
   Q -->|"other-api aud accepted"| Property["Rule — good if tested"]
   Q -->|"we verify JWT"| Mechanism[Tool — no aud]
-  Q -->|"OpenID Connect is on"| False[False comfort]
+  Q -->|"OpenID Connect is on"| False[False assurance]
 ```
 
-Classification starts at the protected effect (wrong aud denied). Everything that is not an `aud` comparison at that call is a candidate leftover path.
+A wrong `aud` still has to be denied. Skip the audience compare and another API’s token still works here.
 
 ## Problems to find (name them yourself)
 
@@ -32,7 +30,7 @@ Classification starts at the protected effect (wrong aud denied). Everything tha
 - Implicit flow in SPA README
 - No test other-api aud
 
-Also reject: treating the client as what you trust; closing findings without re-running `test_wrong_audience_is_rejected`; keys in learner notes; real tokens in practice files; OAuth 2.1 presented as final.
+Also reject: treating the OpenID dashboard as the aud check; closing findings without re-running `test_wrong_audience_is_rejected`; keys in learner notes; real tokens in practice files; OAuth 2.1 presented as final.
 
 ## Common mix-ups
 
@@ -42,14 +40,10 @@ Also reject: treating the client as what you trust; closing findings without re-
 - Authlib defaults check `aud`
 - TLS names the audience
 
-## Practice
-
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one to `test_wrong_audience_is_rejected`. Do not open the keys file.
-
 ## Use it somewhere new
 
-Clinic change that “enables SMART” without an `aud` test is an incomplete review. Name the independent falsehood that would still keep `other-api` from spending this resource server.
+Enabling SMART without an `aud` test still accepts another API’s token. Enabling SMART is not an `aud` check — write the other-api deny.
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will check aud later.” That comment is leftover risk without an owner. Do not replay a live token to prove the finding.
+A wrong-audience token that still authenticates, plus “will check aud later,” has no owner. Do not replay a live token to prove the finding.

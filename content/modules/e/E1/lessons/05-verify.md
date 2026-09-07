@@ -1,15 +1,15 @@
-# Fail on the broken files, then pass on the repaired ones
+# A broken runtime must fail the check
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-"We use retrieval" is not evidence. "The prompt forbids SQL" is a tool observation. The check is: `run_tool("exec_sql", {})` is None and `search_notes` may run. That `exec_sql` observation must be **false** on the broken files and **true** on the repaired files. Do not call live models.
+Turning on retrieval does not block `exec_sql`. A prompt that forbids SQL is a string. `run_tool("exec_sql", {})` has to be None, and `search_notes` may run. Vulnerable files: `exec_sql` still runs. Repair stops that tool from running. Do not call live models.
 
 ## Picture: a broken runtime must fail the check
 
-A test that only counts passing tests can pass while `run_tool("exec_sql", {})` still returns a ran-string. This check asks whether always-run `run_tool` still counts as a passing control. Broken must fail that question. Repaired must pass it.
+`run_tool("exec_sql", {})` can still return a ran-string even when tests pass.
 
 ```mermaid
 flowchart LR
@@ -17,27 +17,27 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: exec_sql denied]
 ```
 
-If both pass, the test is not looking at `exec_sql`. If both fail, the fix is not structural or the check is wrong.
+If the broken tool gate still passes, `exec_sql` was never denied.
 
-## Four modes, even for a tool name
+## What the check has to show
 
 | Mode | Must show for this topic |
 |---|---|
 | Normal | `search_notes` → may run (may pass on both) |
 | Wrong input | `exec_sql` → None; broken files must fail |
-| Abuse | Unknown tools still deny (fail closed) |
-| Not claimed | A live vendor API; a famous-bugs dashboard; an assurance gate; that `search_notes` is encoded |
+| Abuse | Unknown tools still deny |
+| Not claimed | A live vendor API; a famous-bugs dashboard; a check-in; that `search_notes` is encoded |
 
-The file is `labs/E1/e1-lab/tests/test_property.py`. The test `test_exec_sql_tool_is_denied` is a **what-must-not-happen** test: always-run `run_tool` is not allowed to count as a passing control.
+An unconstrained `exec_sql` tool has to fail `test_exec_sql_tool_is_denied`.
 
-Honest `search_notes` may pass on both implementations. That does not excuse the `exec_sql` deny test. If the broken files do not fail `test_exec_sql_tool_is_denied`, the lab is miswired — fix the wiring, not the assertion.
+Keep `search_notes`. Deny `exec_sql`. If the broken files do not fail `test_exec_sql_tool_is_denied`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/E1/e1-lab/tests --impl vulnerable
 python3 -m pytest labs/E1/e1-lab/tests --impl fixed
 ```
 
-A test that only greps `exec_sql` in a prompt file without calling `run_tool("exec_sql", {})` is not this topic's evidence. This practice never opens a live model.
+An `exec_sql` string in a prompt file is not `run_tool("exec_sql", {})`. This practice never opens a live model.
 
 ## What the tests do not prove
 
@@ -45,25 +45,16 @@ A test that only greps `exec_sql` in a prompt file without calling `run_tool("ex
 - Agent credentials rotate
 - A coding assistant cannot hallucinate packages
 - Cryptographically bound approvals (extra, advanced)
-- An assurance gate complete
-
-Record those as leftover or later topics, not as silent passes.
+- This page does not finish an AI-tooling check-in
 
 ## Practice
 
-Run both this session from the lab directory if needed:
-
-```text
-python3 -m pytest labs/E1/e1-lab/tests --impl vulnerable
-python3 -m pytest labs/E1/e1-lab/tests --impl fixed
-```
-
-Paste nothing from answer keys. Write fail/pass into your notes next to the `exec_sql` row. Reject a "test" that only greps `exec_sql` in a prompt file without calling `run_tool("exec_sql", {})`.
+Call `run_tool("exec_sql", {})`. An `exec_sql` string in a prompt file is the forbid-text, not the block.
 
 ## Use it somewhere new
 
-Clinic: a test that only asserts "the prompt mentions `exec_sql`" is not this topic. A live vendor tenant is out of scope.
+A prompt that mentions `exec_sql` is the forbid-text, not `run_tool`. Do not use a live vendor tenant.
 
 ## What this page is not doing
 
-Do not add a live-model trophy. Do not log transcripts. Answer keys are not on this site. Do not claim you finished an assurance gate.
+A live model screenshot is not `run_tool` denying `exec_sql`. Do not log transcripts. Answer keys are not on this site. This page does not mark you as finished.

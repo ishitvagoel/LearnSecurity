@@ -3,9 +3,9 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
-A new share path, a worker, or a webhook can make the model stale while every CVE scanner stays green. Pair notice and recover. Do not log note bodies while you look. Do not back-date the threat-model file after an incident so it looks as if the row was always there.
+A new share path, a worker, or a webhook can make the model stale while every CVE scanner stays green. Do not log note bodies while you look. Do not back-date the threat-model file after an incident so it looks as if the row was always there.
 
 ## Picture: age and missing-id gates
 
@@ -18,7 +18,7 @@ flowchart TD
   Age -->|stale| Revisit[Re-run four questions]
 ```
 
-A missing id is a notice-and-recover problem, not a licence to rewrite yesterday’s date. Notice names the threat. Recover adds the row. Neither pretends you already had it.
+A missing threat id is not fixed by rewriting yesterday's date. Name the threat. Then add the row. Do not pretend you already had it.
 
 | Outcome | This topic |
 |---|---|
@@ -27,7 +27,7 @@ A missing id is a notice-and-recover problem, not a licence to rewrite yesterday
 | Recover | Add the row, the tests, and an owner; **do not back-date** the file |
 | Leftover | Unknown unknowns; write down the next trigger |
 
-Industry lists name detect, respond, recover. They do not pick a log product. They do not prove the seed. An awareness list is still awareness. A SIEM product name is not the rule.
+A log product does not prove the seed is there. A famous-bugs list is still just a list.
 
 ## What the framework does vs what you still have to check
 
@@ -35,18 +35,16 @@ A scanner SaaS will page on new CVEs and stay silent on missing `cross-tenant-re
 
 ## Practice
 
-Write one log line you would accept. Tie it to `labs/3.2/3.2-lab`.
-
 ```text
 log_denied reason=missing_mandatory_threat id=cross-tenant-read owner=authz request_id=req_32tm
 ```
 
-Reject any line that includes a note body, a real email, a vendor scan PDF treated as the model, or “course gate complete.”
+A note body, a real email, a vendor scan PDF treated as the model, or “course gate complete” should stay off this deny line.
 
 ## Use it somewhere new
 
-Clinic: notice missing `sms-content-leak` after the reminder feature merges. Do not paste patient text into the ticket. Do not scan the clinic to prove the gap.
+Notice missing `sms-content-leak` after the reminder feature merges. Do not paste patient text into the ticket. Do not scan the clinic to prove the gap.
 
 ## What this page is not doing
 
-A log-product name is not the rule. Answer keys are not on this site. Do not claim a course gate without learner or product evidence.
+Answer keys are not on this site. Learner or product evidence is what a check-in needs.

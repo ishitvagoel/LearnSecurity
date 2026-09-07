@@ -5,11 +5,11 @@
 
 ## The rule
 
-A unique index you never write is not the fix. HTTP 400 after the membership already exists is not the fix. “We emailed them” is not the fix.
+A unique index you never write does not stop the second join. HTTP 400 after the membership already exists is late. Emailing them is not two `accept("t1")` calls.
 
-The structural change is: `accept` **records `t1` as used when it returns true**. The next call denies. Consume is the accept. Same step. Not a follow-up ticket.
+Change this: `accept` **records `t1` as used when it returns true**. The next call denies. Consume is the accept. Same step. Not a follow-up ticket.
 
-The smallest restore for a notes-app invite is: write used, then allow once. Fail closed: store errors **deny**. Do not fail open because the database was unreachable. Production uses a transaction so the used-write and the membership commit together.
+Put this in a invite: write used, then allow once. By default, store errors **deny**. An unreachable database does not consume the invite. Production uses a transaction so the used-write and the membership commit together.
 
 ## Picture: write used, then allow once
 
@@ -21,13 +21,13 @@ flowchart TD
   Add --> Allow[Allow]
 ```
 
-The repaired files use a `set` of consumed tokens. Production still needs a lock for true concurrent accepts — named leftover, not this sequential pytest. Token in the query string is 4.3. Email as proof of the recipient is 4.2. Password reset and later jobs (7.4) are the same family with different “once” meanings.
+Consumed tokens live in a `set`. True concurrent accepts still need a lock — named leftover, not this sequential check. Token in the query string is 4.3. Email as proof of the recipient is 4.2. Password reset and later jobs (7.4) are the same family with different “once” meanings.
 
-Industry lists want no double-booking. This pytest is that sentence for sequential `accept`.
+There should be no double-booking — sequential `accept`.
 
 ## What the repaired files must show
 
-Read `fixed/invite.py` against this checklist. Do not treat the snippet as a production invite store.
+`fixed/invite.py` consumes a dict token, not a mail link.
 
 | After the fix | Must be true |
 |---|---|
@@ -36,7 +36,7 @@ Read `fixed/invite.py` against this checklist. Do not treat the snippet as a pro
 | first `t2` | true |
 | second `t2` | false |
 
-Fail closed: if you cannot ask the store, the answer is no. Uncertainty is a **deny**, not a yes because the mailer still showed “clicked.”
+When you cannot ask the store, the answer is no. The mailer still showing “clicked” is not a yes.
 
 ## What this is not
 
@@ -53,7 +53,7 @@ Fail closed: if you cannot ask the store, the answer is no. Uncertainty is a **d
 - Fail-open on store errors re-opens the hole.
 - A last-resort error handler is advanced work, not this practice.
 - Phishable mail (4.2) still delivers the first consume to the wrong person.
-- A magic-link that stays a standing session is 4.3 — this week's check owns consume, not the cookie exchange.
+- A magic-link that stays a standing session is 4.3 — this check owns consume, not the cookie exchange.
 
 ## Can people still use it
 
@@ -67,12 +67,10 @@ Name the check (first true and second false per token). Run:
 python3 -m pytest labs/6.6/6.6-lab/tests --impl fixed
 ```
 
-It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
-Clinic: stop treating “link clicked” as unlimited joins; consume in the store.
+Stop treating “link clicked” as unlimited joins; consume in the store.
 
 ## What can still go wrong
 
-True concurrent accepts without a lock. Fail-open on store errors. Phishable mail. Token in the URL. A last-resort handler is not this pytest.
+True concurrent accepts without a lock. Fail-open on store errors. Phishable mail. Token in the URL. A last-resort handler does not consume the invite.

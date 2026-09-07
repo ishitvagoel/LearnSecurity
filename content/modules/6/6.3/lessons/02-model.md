@@ -3,11 +3,11 @@
 **Kind:** design-exercise
 **Loop step:** 2 Model
 
-## Could someone else name pytest cases from your origin map?
+## Could someone else name the checks from your origin map?
 
-“SameSite is on” is not this page. A map someone else can test names **who may POST share, with which cookie, origin, and token**.
+Keep **who may POST share, with which cookie, origin, and token**; “SameSite is on” is not that list.
 
-This week’s freeze: local `allow_share(origin, expected, token, session_cookie)`. No live browsers.
+`allow_share(origin, expected, token, session_cookie)` — no live browsers.
 
 ## Picture: three inputs, one decision
 
@@ -30,7 +30,7 @@ flowchart LR
 
 This lab is the leftover-cookie helper. Do not treat a Bearer-only API as “CSRF solved” if a cookie fallback still exists.
 
-## Step 1: freeze pieces
+## Step 1: name the pieces
 
 | Piece | This system |
 |---|---|
@@ -55,11 +55,11 @@ This lab is the leftover-cookie helper. Do not treat a Bearer-only API as “CSR
 
 ## Practice
 
-Fill the matrix. Point at `labs/6.3/6.3-lab` file `csrf.py`.
+Start at `csrf.py` under `labs/6.3/6.3-lab`.
 
 ## Use it somewhere new
 
-Clinic partner-share POST; postMessage origin check.
+A partner-share POST still needs the origin check; postMessage is the sibling leftover.
 
 ## What can still go wrong
 
@@ -67,4 +67,4 @@ Clickjacking; CORS credentials; advanced authenticated embeds; lookalike UI from
 
 ## What this page is not doing
 
-A famous-bugs list as the definition of security. Answer keys are not on this site.
+Naming CSRF does not require Origin on the share POST. Answer keys are not on this site.

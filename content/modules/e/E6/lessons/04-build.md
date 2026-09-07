@@ -5,11 +5,11 @@
 
 ## The rule
 
-A spoken “yes” is not the fix. A maturity score is not the fix. “The VP said yes so we shipped” is not the fix.
+A spoken “yes” does not fill an empty owner. A maturity score does not fill it. “The VP said yes so we shipped” still leaves `accept_exception` open.
 
-The structural change is: `accept_exception` **returns true only when `owner`, `review_by`, and `wcag_checked` are present**. Incomplete records deny. A maturity score may *accompany* the register; it does not replace the row. Structural means that schema — not “the VP said yes,” not a HIPAA slide, not a pledge.
+Repair this: `accept_exception` **returns true only when `owner`, `review_by`, and `wcag_checked` are present**. Incomplete records deny. A maturity score may *accompany* the register; it does not replace the row. In short, that schema — not “the VP said yes,” not a HIPAA slide, not a pledge.
 
-The smallest restore for the notes app’s leftover-risk record is: empty owner → false; alice + date + accessibility flag may accept. Fail-safe: a missing field is deny. Do not fail open because the meeting notes look complete. Do not silently extend past `review_by`.
+Repair the notes app’s leftover-risk record: empty owner → false; alice + date + accessibility flag may accept. A missing field is deny. Complete-looking meeting notes do not fill a missing owner. Do not silently extend past `review_by`.
 
 ## Picture: schema gate
 
@@ -20,29 +20,29 @@ flowchart TD
   Fields -->|no| Deny[false]
 ```
 
-The repaired files require those three fields. Production still needs someone to *read* the register — an unread complete row is leftover. Inaccessible recovery is recorded as a flag here, not proven. Extra advanced documentation of a dangerous function is documentation, not this pytest.
+Owner, `review_by`, and the accessibility flag have to be filled. An unread complete row is still leftover. Inaccessible recovery is recorded as a flag here, not proven. Extra advanced documentation of a dangerous function is documentation, not this check.
 
 Expire on `review_by`. Re-accept with fields or fix the hole. Do not silently extend.
 
-A design-review guide is vocabulary. This pytest is that sentence for incomplete exceptions.
+A design-review guide is vocabulary — incomplete exceptions.
 
 ## What the repaired files must show
 
-Read `fixed/risk.py` against this checklist. Do not treat the snippet as a production register product.
+`fixed/risk.py` is the exception-row helper, not a clinic register.
 
 | After the fix | Must be true |
 |---|---|
 | empty owner | false |
 | alice + date + accessibility flag | may be true |
 
-Fail closed: if you are unsure whether the record is complete, deny. Uncertainty is a **no** on accept, not a yes because the meeting happened.
+When you are unsure whether the record is complete, deny. A meeting that happened does not make the record complete.
 
 ## What this is not
 
-- A process-maturity score.
+- A maturity dashboard as the exception register.
 - An industry “govern” sticker.
 - An unverified pledge.
-- An assurance-gate stamp.
+- An exception check-in stamp.
 - Extra advanced documentation of a dangerous function.
 - A procurement questionnaire.
 
@@ -62,11 +62,9 @@ Name who can be `owner`. Run:
 python3 -m pytest labs/E6/e6-lab/tests --impl fixed
 ```
 
-It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
-Clinic: refuse a HIPAA exception with no review date the same way. The lab still uses fake strings.
+Refuse a HIPAA exception with no review date the same way. The lab still uses fake strings.
 
 ## What can still go wrong
 
@@ -74,4 +72,4 @@ Unread register; rename to tech-debt; inaccessible path still checked only as a 
 
 ## What this page is not doing
 
-Do not file a live exception. Do not claim you finished an assurance gate from a maturity screenshot. Do not present an unverified pledge as proven.
+Do not file a live exception. This page does not mark you as finished. A maturity screenshot is not a check-in. Do not present an unverified pledge as proven.

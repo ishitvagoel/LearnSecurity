@@ -1,33 +1,31 @@
-# Review client booleans like a pull request
+# Would you merge this client booleans?
 
 **Kind:** code-review
 **Loop step:** Review
 
-Intended findings live only in the answer-key folder — not here. Do not open that file until your review has been evaluated.
-
 ## What you are reviewing
 
-A colleague ships the notes app’s Android export. Review `labs/8.1/8.1-lab/vulnerable/` as that change. Your job is not to count suspicious lines. Reconstruct whether `allow_export({"integrity": "ok"}, "fail")` still returns true, compare that with the rule, and write changes a developer can verify.
+Open `labs/8.1/8.1-lab/vulnerable/` as an Android-export PR. Does `allow_export({"integrity": "ok"}, "fail")` still return true?
 
-The check you already ran (`test_client_integrity_claim_is_not_authorization`) is the rule check. A comment “we will attest later” is not. A sticker about a mobile checklist is not this review.
+Shipping “we will attest later” leaves `test_client_integrity_claim_is_not_authorization` failing. A sticker about a mobile checklist does not make the APK honest.
 
 ## Picture: if integrity==ok: export
 
-Start with this seeded smell: **`if integrity==ok: export`**. Label it **rule**, **tool**, or **false comfort** before you accept the change.
+**`if integrity==ok: export`**.
 
 ```mermaid
 flowchart TD
   Claim[Change claim] --> Q{"What would prove it false?"}
   Q -->|client ok plus attest fail exports| Property["Rule — good if checked"]
   Q -->|Compose disabled| Mechanism[Tool — UI]
-  Q -->|Play Integrity logo| False[False comfort]
+  Q -->|Play Integrity logo| False[False assurance]
 ```
 
-Classification starts at the protected effect (client ok plus attest fail denied). Everything that is not a server-attest check at that call is a candidate client-boolean path. A Play Integrity logo without that pytest is the same smell, not a different finding class.
+Client ok plus attest fail still has to be denied. If the change never checks a server attest, that client-boolean path is still open. A Play Integrity logo without that check is still the same problem.
 
 Shrinking the app and a platform-integrity check raise cost; they do not become 1.2. Feature flags and 8.4 debug clients are other hostile-client paths — name them, do not skip `test_client_integrity_claim_is_not_authorization`.
 
-## Seeded smells (label them yourself)
+## Problems to find (name them yourself)
 
 - `if integrity==ok: export`
 - No server-attest check
@@ -44,14 +42,10 @@ Also reject: live device farms; personal-phone cookbooks; closing findings witho
 - Play Integrity in the app is 1.2
 - Old numbered mobile levels are current
 
-## Practice
-
-Write three review notes a peer could act on. Each note: what you saw, rule or false comfort, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_client_integrity_claim_is_not_authorization`. Do not open the keys file.
-
 ## Use it somewhere new
 
-A clinic change that “enabled Play Integrity” without a failing-attest deny check is an incomplete review. Name the independent falsehood that would still keep client ok plus attest fail false.
+Enabling Play Integrity without a failing-attest deny still lets the client claim export. Play Integrity is not a failing-attest deny — write the export refuse.
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will attest later.” That comment is leftover without an owner. Do not instrument a live device to prove the finding.
+A client `integrity=ok` claim with only “will attest later” still has no owner on the server check. Do not instrument a live device to prove the finding.

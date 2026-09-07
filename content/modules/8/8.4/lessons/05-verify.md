@@ -1,15 +1,15 @@
-# Fail on the broken files, then pass on the repaired ones
+# The broken files must fail when a debug build looks ok
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-“`minifyEnabled` is true” is not evidence. “Play App Signing is on” is a tool observation. The check is: `api_allowed("debug", "ok")` is false, and `api_allowed("release", "ok")` may be true. The debug-plus-ok observation must be **false** on `--impl vulnerable` (returns true) and **true** on `--impl fixed`. Do not unpack store APKs.
+`minifyEnabled` true does not keep the debug client id off the API. Play App Signing is a store setting. `api_allowed("debug", "ok")` has to be false, and `api_allowed("release", "ok")` may be true. On the broken helper, debug-plus-ok still returns true. Repair refuses a debug client talking to prod. Do not unpack store APKs.
 
 ## Picture: broken files must fail: debug plus ok
 
-A check that only counts passing cases can pass while debug still calls prod. This check asks whether always-true `api_allowed` still counts as a passing control. Broken must fail that question. Repaired must pass it.
+Debug can still call prod even when the suite is green.
 
 ```mermaid
 flowchart LR
@@ -17,9 +17,9 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass deny"]
 ```
 
-If both pass, the check is not looking at debug-to-prod. If both fail, the fix is not structural or the check is wrong.
+If the broken flavor still passes, debug-to-prod was never denied.
 
-## Three observations, even for a channel
+## Three things to look at
 
 | Mode | Must show for this topic |
 |---|---|
@@ -28,14 +28,14 @@ If both pass, the check is not looking at debug-to-prod. If both fail, the fix i
 | Extra | release + fail → false (`test_release_without_attest_is_denied`) |
 | Not claimed | real Play Integrity; R8; live signing; hardware-backed keys |
 
-Practice checks live in `labs/8.4/8.4-lab/tests/test_property.py`. `test_debug_build_cannot_call_prod_export` is a **what-must-not-happen** check: an always-true `api_allowed` is not allowed to count as a passing control.
+Debug-plus-ok talking to prod is why `test_debug_build_cannot_call_prod_export` lives in `labs/8.4/8.4-lab/tests/test_property.py`.
 
 ```text
 python3 -m pytest labs/8.4/8.4-lab/tests --impl vulnerable
 python3 -m pytest labs/8.4/8.4-lab/tests --impl fixed
 ```
 
-Honest release plus ok may pass on both implementations. That does not excuse the debug-deny check. If the broken files do not fail `test_debug_build_cannot_call_prod_export`, the practice is miswired — fix the wiring, not the check.
+A release build talking to prod is not the whole check. Deny a debug build calling the prod export. If the broken files do not fail `test_debug_build_cannot_call_prod_export`, the practice is miswired — fix the wiring, not the check.
 
 ## What the checks do not prove
 
@@ -46,16 +46,14 @@ Honest release plus ok may pass on both implementations. That does not excuse th
 - That signing keys are absent from the repo (5.3)
 - Completeness of an APK inventory list (10.2)
 
-Record those as leftover risk or later topics, not as silent passes.
-
 ## Practice
 
-Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the map-page row. Reject a “check” that only greps `minifyEnabled` without calling `api_allowed("debug", "ok")`. An environment error is not security evidence.
+Call `api_allowed("debug", "ok")`. `minifyEnabled` is the shrink flag. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic: a check that only asserts the debug APK builds is not this cell. Store APK unpacking is out of scope.
+A debug APK that builds is the compile, not debug-client-id off. Do not unpack a store APK.
 
 ## What this page is not doing
 
-Do not add a live Play trophy. Do not log signing keys. Answer keys are not on this site.
+A live Play screenshot is not the debug client id off. Do not log signing keys. Answer keys are not on this site.

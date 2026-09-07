@@ -1,15 +1,15 @@
-# Fail on the broken files, then pass on the repaired ones
+# The broken files must fail the n2 and cross-company denies
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Check it
 
-“We have roles” is not evidence. “Ids are hard to guess” is a tool observation. The check is: `can_read("bob", "n2") is False`. That observation must be **false** on the broken files (returns true) and **true** on the repaired files.
+Having roles in a table does not decide who may read. “Ids are hard to guess” is a hope. `can_read("bob", "n2")` has to be False. Leftover: Bob can still read n2. Repair returns false.
 
 ## Picture: broken must fail the n2 and cross-company denies
 
-A test that only counts how many grants exist can pass while leftover permission still opens n2. This check asks whether a grant on n1 is allowed to count as a passing control for n2. Broken must fail that question. Repaired must pass it.
+A check that only counts how many grants exist can still hide that leftover permission still opens n2.
 
 ```mermaid
 flowchart LR
@@ -23,14 +23,14 @@ flowchart LR
 | Wrong input / abuse | bob×n2, alice×n3, eve×n1, eve×n3 are false; broken files must fail |
 | Not claimed | Title vs body; search index; worker; row-level rules |
 
-The file is `labs/4.4/4.4-lab/tests/test_property.py`. `test_grant_on_n1_is_not_grant_on_n2` is a **what-must-not-happen** test: leftover permission is not allowed to count as a passing control.
+`test_grant_on_n1_is_not_grant_on_n2` names leftover permission on n2 as the miss.
 
 ```text
 python3 -m pytest labs/4.4/4.4-lab/tests --impl vulnerable
 python3 -m pytest labs/4.4/4.4-lab/tests --impl fixed
 ```
 
-Honest-path tests may pass on both implementations. That does not excuse the deny tests. If the broken files do not fail bob×n2, the lab is miswired — fix the wiring, not the assertion. An environment error is not security evidence.
+Alice reading her own note is the honest path. Deny bob×n2. If the broken files do not fail bob×n2, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
@@ -39,22 +39,13 @@ Honest-path tests may pass on both implementations. That does not excuse the den
 - Worker originating person (advanced)
 - Database role (earlier second gate) or row-level rules (later)
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
-Run both this session:
-
-```text
-python3 -m pytest labs/4.4/4.4-lab/tests --impl vulnerable
-python3 -m pytest labs/4.4/4.4-lab/tests --impl fixed
-```
-
-Write the fail/pass pair next to the table row. Reject a “test” that only greps `admin` in a role list without calling `can_read("bob", "n2")`.
+Call `can_read("bob", "n2")`. An `admin` string in a role list is a label, not the read.
 
 ## Use it somewhere new
 
-Clinic appointment vs chart. A test that only asserts HTTP 200 is not who-is-allowed evidence. A test that hits a live clinic system is out of scope.
+HTTP 200 on a chart read is not who-is-allowed evidence. Do not run a test that hits a live clinic system.
 
 ## What this page is not doing
 

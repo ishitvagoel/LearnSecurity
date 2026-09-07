@@ -1,6 +1,6 @@
 # 6.1 assessment (learner-facing — no answers)
 
-**Pass C.** Practical evidence, not a compensating average. States: not-attempted | developing | competent | transfer-ready.
+**Pass C.** Practical evidence, not a compensating average. States: not finished | developing | competent | transfer-ready.
 
 ## Module
 
@@ -10,8 +10,8 @@ Interpreter confusion and injection
 
 - [ ] Multi-interpreter data-flow and argv-shape tests
 - [ ] Transfer task (clinic export-to-CSV filename; Jinja/SQL/mail named)
-- [ ] Lab `labs/6.1/6.1-lab`: forbidden outcome **user-controlled name executed via a shell string**
-- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Lab `labs/6.1/6.1-lab`: what must not happen: **user-controlled name executed via a shell string**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local practice files only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
 - [ ] Operate signal without PHI: `child_process_anomaly`
 
@@ -19,8 +19,8 @@ Interpreter confusion and injection
 
 | Result | Meaning |
 |---|---|
-| Developing | Tools listed; missing attacker/trust; mechanism slogans |
-| Competent | System-specific invariant; lab mapped; operate present |
+| Developing | Tools listed; missing attacker/trust; tool slogans |
+| Competent | System-specific rule; lab mapped; operate present |
 | Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
 
 Knowledge check (retryable): distinguish property vs mechanism for **6.1**. Items live in the session worksheet, not here.

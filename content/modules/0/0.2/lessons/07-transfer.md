@@ -1,4 +1,4 @@
-# Somewhere new: a clinic onboarding quiz
+# A clinic onboarding quiz
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
@@ -6,30 +6,28 @@
 
 ## Change the workplace; keep the quiz from meaning 1.2
 
-Do not answer with a famous-bugs list or a scanner as the definition of security. The course sentence was: `quiz_score_grants_phase1_skip(100)` is false. Rewrite it for a workplace onboarding quiz without changing the idea.
+In this course, `quiz_score_grants_phase1_skip(100)` is false. The same rule has to hold for a workplace onboarding quiz.
 
-**Prompt:** Onboarding at a clinic-booking product. Also name a vendor cert used to skip a threat-model review.
+Onboarding at a clinic-booking product. Also name a vendor cert used to skip a threat-model review.
 
-**Product sketch:** “They scored 100% so skip isolation labs,” plus “job-title competency so check-in 1 is done.”
-
-Rewrite the course sentence. Include:
+“They scored 100% so skip isolation labs,” plus “job-title competency so check-in 1 is done.”
 
 1. who might try (a hurried new hire or manager with a badge — **not** a live HR LMS attack);
 2. what you trust (the skip check; not a quiz, a job title, a badge, or an LMS percentage);
 3. what must not happen (`quiz_score_grants_phase1_skip(100)` true, not merely “unprofessional”);
-4. a check idea on **local** files only (no clinic LMS; reuse score 100 → false);
+4. score 100 → false on **local** files (no clinic LMS);
 5. leftover risk (tooling gaps, memorized answers, 1.4 hidden by a fast-track);
 6. if skip is shown in a UI, green-only is not evidence; 1.4 must remain reachable.
 
-## Picture: 100 percent vs a deny cell
+## Picture: 100 percent vs a deny rule
 
 ```mermaid
 flowchart LR
   Pct[100 percent] --> Belief[knows isolation]
-  Lab["1.2 deny cell"] --> Reality[evidence]
+  Lab["1.2 deny rule"] --> Reality[evidence]
 ```
 
-A percentage is a tool observation. A 1.2 deny cell is the evidence. A job-title list names jobs. An LMS stores numbers. Neither is check-in 1. FastAPI, Next.js, and a quiz vendor’s score report do not observe whether the new hire can write a company-B deny cell. Tooling-bridge skips (Git/SQL/HTTP) remain a different function: they must not be keyed off this 100%.
+A percentage is a dashboard number. A 1.2 deny rule is the check. A job-title list names jobs. An LMS stores numbers. Neither is check-in 1. FastAPI, Next.js, and a quiz vendor’s score report do not observe whether the new hire can write a company-B deny rule. Tooling-bridge skips (Git/SQL/HTTP) remain a different function: they must not be keyed off this 100%.
 
 ## What is not good enough
 
@@ -43,8 +41,8 @@ A percentage is a tool observation. A 1.2 deny cell is the evidence. A job-title
 
 ## Practice
 
-One page. No keys. `labs/0.2/0.2-bridge` is the only running system you may break. Do not log into a clinic LMS or a cert vendor portal.
+Map the LMS skip on one page. Keep the answer keys closed. `labs/0.2/0.2-bridge` is the only running system you may break. Do not log into a clinic LMS or a cert vendor portal.
 
 ## What this page is not doing
 
-Live-target walkthroughs. Claiming check-in 0 or check-in 1 from this page. Treating tooling-bridge skips as 1.2 skips.
+Do not try live-target walkthroughs. This page does not finish check-in 0 or check-in 1. Do not treat tooling-bridge skips as 1.2 skips.

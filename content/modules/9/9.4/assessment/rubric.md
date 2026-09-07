@@ -1,6 +1,6 @@
 # 9.4 assessment (learner-facing — no answers)
 
-**Pass C.** Practical evidence, not a compensating average. States: not-attempted | developing | competent | transfer-ready. Gate 9 stays **not-attempted**.
+**Pass C.** Practical evidence, not a compensating average. States: not finished | developing | competent | transfer-ready. Check-in 9 stays **not finished**.
 
 ## Module
 
@@ -10,8 +10,8 @@ Automated analysis and tool orchestration
 
 - [ ] Scanner-as-signal map; unmapped HIGH labeled unowned
 - [ ] Transfer task (clinic 50 HIGHs; SCA vs called function named)
-- [ ] Lab `labs/9.4/9.4-lab`: forbidden outcome **unmapped HIGH finding allows ship**
-- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local fixture only)
+- [ ] Lab `labs/9.4/9.4-lab`: what must not happen: **unmapped HIGH finding allows ship**
+- [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local practice files only)
 - [ ] Seeded review notes (LO-08) — do not look at keys
 - [ ] Operate signal without payloads: `unmapped_high_blocks`
 
@@ -20,7 +20,7 @@ Automated analysis and tool orchestration
 | Result | Meaning |
 |---|---|
 | Developing | Tools listed; missing attacker/trust; “scanner on / SAMM” slogans |
-| Competent | System-specific invariant; lab mapped; operate present |
+| Competent | System-specific rule; lab mapped; operate present |
 | Transfer-ready | LO-07 done without Top 10/scanner/Gate-9 language as the definition of security |
 
 Knowledge check (retryable): distinguish property vs mechanism for **9.4**. Items live in the session worksheet, not here.

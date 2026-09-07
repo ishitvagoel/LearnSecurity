@@ -5,11 +5,11 @@
 
 ## The rule
 
-A denylist of yesterday's crash fields is not the fix. Hiding a scanner warning is not the fix. “We filled in the store’s privacy form” is not the fix.
+Leftover crash-field names are not a redaction policy. Hiding a scan result does not strip `secret`. Filling in the store’s privacy form is not the restore.
 
-The structural change is: `crash_report` **does not copy `note_body` into the payload**. A constant `'[redacted]'` (the local stand-in) is the teaching shape. Structural means omit — not a crash product set to “automatic,” not a store form, not a tracker-SDK “privacy mode” sticker.
+The restore: `crash_report` **does not copy `note_body` into the payload**. A constant `'[redacted]'` (the local stand-in) is the teaching shape. Read it as omit — not a crash product set to “automatic,” not a store form, not a tracker-SDK “privacy mode” sticker.
 
-The smallest restore for the notes app’s crash telemetry is: `'secret'` absent from the report. Fail-safe: if the SDK offers “include last screen,” leave it off. Do not fail open because support “needs the last chart.” Do not attach the live note, the clipboard, or a screenshot.
+For the notes app’s crash telemetry: `'secret'` absent from the report. If the SDK offers “include last screen,” leave it off. Support “needing the last chart” does not put `secret` in the report. Do not attach the live note, the clipboard, or a screenshot.
 
 ## Picture: redact then send
 
@@ -21,20 +21,20 @@ flowchart TD
   Strip -->|no| Send
 ```
 
-The repaired files return `'note': '[redacted]'` and keep a `stack` key so the crash is still useful. Production still needs the same omit for screenshots, frozen-app traces, and leftover `READ_LOGS`. The vendor as a processor remains 5.1: redact does not make an already-sent copy disappear. Last-chance error handlers can still stringify arguments. That leftover stays.
+The report returns `'note': '[redacted]'` and keeps a `stack` key so the crash is still useful. Screenshots, frozen-app traces, and leftover `READ_LOGS` still have to omit the body. The vendor as a processor remains 5.1: redact does not make an already-sent copy disappear. Last-chance error handlers can still stringify arguments. That leftover stays.
 
-The log lesson (3.1) already said: log by protection level. This check is that sentence for `crash_report("secret")`.
+The log lesson (3.1) already said: log by protection level. This check covers `crash_report("secret")`.
 
 ## What the repaired files must show
 
-Read `fixed/crash.py` against this checklist. Do not treat the snippet as a production crash SDK.
+`fixed/crash.py` drops the body field, not a crash SDK call.
 
 | After the fix | Must be true |
 |---|---|
 | `crash_report('secret')` | `'secret'` not in the report |
 | stack key | still present so the crash is useful |
 
-Fail closed: if you are unsure whether a value is the note body, omit it. Uncertainty is a **no** on “this may go in the report,” not a yes because support wanted the last screen.
+If you are unsure whether a value is the note body, omit it. Support wanting the last screen does not put it in the report.
 
 ## What this is not
 
@@ -50,7 +50,7 @@ Fail closed: if you are unsure whether a value is the note body, omit it. Uncert
 - Screenshots in “send feedback.”
 - Frozen-app traces and logcat if a leftover `READ_LOGS` path still prints the body.
 - The vendor as a processor — a contract plus 5.1, not disappearance.
-- Last-chance error handlers that dump frames with arguments. That is an advanced extra, not this week's check.
+- Last-chance error handlers that dump frames with arguments. That is an advanced extra, not this check.
 - Web crash reports (10.5) are another place for the same body.
 
 ## Can people still use it
@@ -65,11 +65,9 @@ Name the check (body never in the payload; stack may remain). Run:
 python3 -m pytest labs/8.5/8.5-lab/tests --impl fixed
 ```
 
-It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
-Clinic: stop putting patient names in exception messages. The lab still uses fake strings.
+Stop putting patient names in exception messages. The lab still uses fake strings.
 
 ## What can still go wrong
 

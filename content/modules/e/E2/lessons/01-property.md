@@ -5,13 +5,13 @@
 
 ## The rule
 
-The notes app this week may send a content-security policy on its Next.js responses. **Isolation of script execution** is whether the *enforcing* header is present. `Content-Security-Policy-Report-Only` is a signal. It is not that check.
+The notes app may send a content-security policy on its Next.js responses. **Isolation of script execution** is whether the *enforcing* header is present. `Content-Security-Policy-Report-Only` is a signal. It is not that check.
 
 > `isolation_enforced({"Content-Security-Policy-Report-Only": "default-src 'none'"})` must be false. An enforcing `Content-Security-Policy` header may make it true.
 
-What must not happen is **Report-Only treated as isolation**. A script still runs. The dashboard looks green.
+**Report-Only is not isolation**. A script still runs. The dashboard looks green.
 
-Industry checklists want a content-security policy as a **layer** after encoding (6.2). Reporting from that policy is extra, later, and advanced — reporting is the Report-Only kind of signal, not enforcement. The current content-security spec and Trusted Types are still **draft**.
+A content-security policy as a **layer** after encoding (6.2). Reporting from that policy is extra, later, and advanced — reporting is the Report-Only kind of signal, not enforcement. The current content-security spec and Trusted Types are still **draft**.
 
 ## Picture: two header names
 
@@ -31,14 +31,14 @@ flowchart LR
   Csp --> NotEnc[not encoding]
 ```
 
-**A tool is not the rule.** Helmet defaults, a green reporting dashboard, or “we set a header.”
+Helmet defaults, a green reporting dashboard, and “we set a header” do not turn Report-Only into enforcement.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | For this rule |
 |---|---|
 | Why it happens | Report-Only mistaken for on |
-| What has to be true first | Report-Only counted as enforced |
+| What's already wrong | Report-Only counted as enforced |
 | Trigger | A script that would only be logged |
 | What it costs | Integrity of the browser policy |
 | How you stop it | Require the enforcing header; do not claim isolation otherwise |
@@ -49,7 +49,7 @@ flowchart LR
 
 Some templates ship Report-Only. A CDN can strip the enforcing header (2.2).
 
-The app’s promise is: **this** check, on **these** practice headers, Report-Only alone is not isolation. The practice folder is `labs/E2/e2-lab`. It is local only. It is not a live page and not a public site.
+Report-Only alone is not isolation — files in `labs/E2/e2-lab`. It is local only. It is not a live page and not a public site.
 
 ## What the tool cannot do
 
@@ -69,12 +69,10 @@ python3 -m pytest labs/E2/e2-lab/tests --impl vulnerable
 python3 -m pytest labs/E2/e2-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
-Trusted Types. COOP/COEP. Clinic: Report-Only as a “HIPAA header.”
+Trusted Types. COOP/COEP. Report-Only sold as a “HIPAA header” is still not enforcement.
 
 ## What this page is not doing
 
-Live script hunts, claiming check-in 7. Answer keys are not on this site.
+Do not use live script hunts. This CSP lesson is not check-in 7. Answer keys are not on this site.
