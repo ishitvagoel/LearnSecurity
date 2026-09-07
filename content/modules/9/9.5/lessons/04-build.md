@@ -7,7 +7,7 @@
 
 Attaching a PDF does not close the finding. Marking the ticket Done does not close it. Severity 9.8 is a priority number, not `close_finding` with a missing retest.
 
-The structural change is: `close_finding` **requires `retest == "pass"`**. Missing, `"fail"`, or `"scheduled"` is deny. That is the lab stand-in for "the same isolation command passed." Structural means that equality — not a PDF, not a Done column, not a severity number.
+The repair: `close_finding` **requires `retest == "pass"`**. Missing, `"fail"`, or `"scheduled"` is deny. That is the lab stand-in for "the same isolation command passed." Here: that equality — not a PDF, not a Done column, not a severity number.
 
 Repair the notes app's close loop: `{retest: None}` cannot close. Fail-safe: a missing field is deny. Do not skip the deny because the report was filed. Do not accept a retest of `/health` as the isolation check.
 

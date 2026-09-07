@@ -7,7 +7,7 @@
 
 A later warehouse job does not empty analytics. Anonymizing the user id keeps the body. Encrypting a kept row keeps the body. A privacy PDF is a document. `DELETE FROM notes` alone is not `body_retained`.
 
-The structural change is: `delete_account` **pops `NOTES`, `ANALYTICS`, and `SEARCH`**. Walk the inventory in the same use-case. Same delete. Not a follow-up ticket.
+What has to change: `delete_account` **pops `NOTES`, `ANALYTICS`, and `SEARCH`**. Walk the inventory in the same use-case. Same delete. Not a follow-up ticket.
 
 Restore bodies with this: one call walks every listed copy. Fail closed: if a listed copy cannot be reached, **do not claim delete complete** (refuse the use-case or alert). Do not fail open by returning 200 while analytics remains.
 

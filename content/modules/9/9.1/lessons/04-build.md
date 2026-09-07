@@ -7,7 +7,7 @@
 
 Last week’s spreadsheet cells are not an isolation assert. Muting a scanner finding does not cover `AUTHZ-1`. Running the checklist once is not the repair.
 
-The structural change is: `covered` **requires `req == req_id` and `asserts_isolation`**. A row that only stores status is uncovered. Structural means that conjunction — not “we ran the checklist,” not pytest-cov, not a tracker Done column.
+What has to change: `covered` **requires `req == req_id` and `asserts_isolation`**. A row that only stores status is uncovered. Namely that conjunction — not “we ran the checklist,” not pytest-cov, not a tracker Done column.
 
 The notes app’s AUTHZ-1 tracking needs this: status-only → not covered. Fail-safe: a missing flag is false. Do not skip the deny because the PDF was attached. Do not accept “we ran the checklist” as the isolation flag.
 

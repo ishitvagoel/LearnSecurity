@@ -7,7 +7,7 @@
 
 Hiding the column in the SPA does not hide `secret_internal` on the resolver. GraphQL `@hide` the client can skip still returns the field. A REST name that starts with `_` is a naming hope. Passing object GET tests is a different check.
 
-The structural change is: the trusted layer **checks role × field**. `resolve` must deny `secret_internal` unless `role == "service"`. Structural means that predicate — not a hidden SPA column.
+What has to change: the trusted layer **checks role × field**. `resolve` must deny `secret_internal` unless `role == "service"`. In plain words, that predicate — not a hidden SPA column.
 
 Repair the notes app’s note JSON: deny member × `secret_internal`. Fail closed: unknown roles deny the internal field. Do not skip the deny because the serializer cache still holds yesterday’s dump.
 

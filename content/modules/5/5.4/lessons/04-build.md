@@ -5,7 +5,7 @@
 
 ## The rule
 
-`channel_is_https` must use `server_scheme == "https"` only. Structural means a bound proxy identity if you add one later — not trusting a header name, not “Force HTTPS” in a UI, not an API-client `https://` base URL, not HSTS preload.
+`channel_is_https` must use `server_scheme == "https"` only. Namely a bound proxy identity if you add one later — not trusting a header name, not “Force HTTPS” in a UI, not an API-client `https://` base URL, not HSTS preload.
 
 Transport authenticity needs this: ignore the client proto. Fail closed: unknown scheme **denies** TLS claims (do not treat as https). Do not open the door because the header “looks right.”
 

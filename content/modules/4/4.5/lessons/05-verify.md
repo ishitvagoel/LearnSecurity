@@ -5,7 +5,7 @@
 
 ## Check it
 
-An OpenID Connect checkbox does not bind audience. A verified JWT is a signature check. `accept_token({"sub": "alice", "aud": "other-api"}, "securecollab-api")` has to be false. On the broken files it returns true. On the repaired files it does not.
+An OpenID Connect checkbox does not bind audience. A verified JWT is a signature check. `accept_token({"sub": "alice", "aud": "other-api"}, "securecollab-api")` has to be false. Broken still accepts the other-api audience; repaired does not.
 
 ## Picture: other-api and missing aud must fail
 

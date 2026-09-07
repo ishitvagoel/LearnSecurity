@@ -5,7 +5,7 @@
 
 ## The rule
 
-`add_share` must not increment when `_n >= 5`. Structural means the **server write path** compares count to cap — not HTML `max`, not a filter, not “the owner will stop,” not a rate limit.
+`add_share` must not increment when `_n >= 5`. Namely the **server write path** compares count to cap — not HTML `max`, not a filter, not “the owner will stop,” not a rate limit.
 
 Restore share with this: if count is already 5, return 5 and do not insert. Fail closed: if the count store is uncertain, **deny** the 6th. Five honest shares still succeed.
 

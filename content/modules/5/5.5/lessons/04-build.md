@@ -7,7 +7,7 @@
 
 A denylist of quotes does not make SQL a tuple. “The ORM will handle it” still concatenates. A later row-level rule on in production and off in tests is a different environment.
 
-Structural means the parser never sees those fields as grammar. Bind tenant and note id as parameters. `fetch_sql` must return `(sql, params)` with `%s` placeholders and a two-tuple of values.
+In plain words, the parser never sees those fields as grammar. Bind tenant and note id as parameters. `fetch_sql` must return `(sql, params)` with `%s` placeholders and a two-tuple of values.
 
 Put this in note fetch: program beside data. Fail closed: if you cannot bind, **do not query**. Do not allow just because the id “looks like a UUID.”
 

@@ -7,7 +7,7 @@
 
 Last week’s test names are not a “what must not happen” assert. Hiding a coverage warning does not turn a 200-check into a security test. Ticking a testing-guide row is not the repair.
 
-The structural change is: `is_security_test` **requires `forbidden_outcome`**. HTTP 200 alone is a product test. Structural means that flag — not line coverage, not testing-guide membership, not “status asserted and we listed a guide id.”
+Repair this: `is_security_test` **requires `forbidden_outcome`**. HTTP 200 alone is a product test. Put simply, that flag — not line coverage, not testing-guide membership, not “status asserted and we listed a guide id.”
 
 The check in the notes app’s isolation suite: 200-only → not a security test. Fail-safe: missing flag is false. Do not open the door because coverage is 94%. Do not accept a fuzzer with no named bad result as the flag.
 

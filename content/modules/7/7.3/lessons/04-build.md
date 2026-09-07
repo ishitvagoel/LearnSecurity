@@ -7,7 +7,7 @@
 
 TLS does not reject an empty signature. An IP allow-list does not reject it. Hashing parsed JSON is the wrong bytes. JWT login of the end user is a different check.
 
-Structural means the MAC is checked before side effects. `accept` must compute HMAC-SHA256 over the raw body with the disposable secret and compare in constant time. Missing or wrong signatures deny.
+Put simply, the MAC is checked before side effects. `accept` must compute HMAC-SHA256 over the raw body with the disposable secret and compare in constant time. Missing or wrong signatures deny.
 
 For the notes-app billing webhook: empty sig denies. Fail closed: empty signature **denies** without throwing into a 500 that providers retry (6.7). Do not count it as a pass because the secret store was unreachable.
 

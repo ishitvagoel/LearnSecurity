@@ -7,7 +7,7 @@
 
 Last week’s log-format string is not redaction. Muting a scanner finding does not keep the body out of the line. Labeling the spreadsheet Confidential is not the repair.
 
-The structural change is: `log_event` **does not include the body string**. The logging API does not accept the body as a format argument. Not a regex after the fact. Not a spreadsheet label. Not `DEBUG=false` in one environment. Not a data-loss product name.
+Do this: `log_event` **does not include the body string**. The logging API does not accept the body as a format argument. Not a regex after the fact. Not a spreadsheet label. Not `DEBUG=false` in one environment. Not a data-loss product name.
 
 A `note_read` needs this: return a redaction marker and never paste `note_body` into the line. Production should use structured fields (`event`, `note_id`, `tenant_id`) and never have a `body=` key. If you are unsure whether a value is Confidential, do not log it.
 

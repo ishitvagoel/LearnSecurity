@@ -7,7 +7,7 @@
 
 Last week’s hostname list does not stop a look-alike page. Training people to read the URL bar does not stop it either. An Okta logo is not the repair. `autocomplete=webauthn` is extra encoding, not the check.
 
-The structural change is: `phishing_resistant` returns false unless the method is `webauthn` **and** `origin == expected`. Origin / RP ID is in the predicate.
+Change this: `phishing_resistant` returns false unless the method is `webauthn` **and** `origin == expected`. Origin / RP ID is in the predicate.
 
 For login copy: passwords and OTP never claim resistance; WebAuthn claims it only when origin matches the relying party. Fail closed: an unknown method denies. Passwords at the *real* origin may still log someone in; they must not be *labeled* resistant.
 

@@ -7,7 +7,7 @@
 
 “Starts with https” does not cover link-local metadata. A denylist of one IP misses the next address. Following redirects off the list still fetches.
 
-Structural means the host is a named peer. `allowed` must parse the URL, require `https`, require the hostname in a small allow-list, and deny link-local and loopback.
+Read it as the host is a named peer. `allowed` must parse the URL, require `https`, require the hostname in a small allow-list, and deny link-local and loopback.
 
 Unfurl needs this: host deny unless listed. Fail closed: unknown host **denies**. Do not skip the deny because the scheme is https.
 

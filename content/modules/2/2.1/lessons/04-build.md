@@ -7,7 +7,7 @@
 
 A list of last week’s bad strings does not bind the schema. Muting a scanner finding does not bind it either. “Trust the framework” is still a slogan.
 
-The structural change is: the object **actually has one company meaning** before the who-is-allowed check runs. Refuse duplicate keys, or compare `acl_tenant == stored_tenant` and deny on mismatch.
+What has to change: the object **actually has one company meaning** before the who-is-allowed check runs. Refuse duplicate keys, or compare `acl_tenant == stored_tenant` and deny on mismatch.
 
 ## Picture: fail closed on disagreement
 

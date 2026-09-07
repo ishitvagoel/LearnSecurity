@@ -5,7 +5,7 @@
 
 ## Check it
 
-SameSite=Lax does not decide a cross-site share. A CORS list is an origin header. `allow_share` for a foreign origin with `token=None` has to be False. On the broken files it returns true. On the repaired files it does not.
+SameSite=Lax does not decide a cross-site share. A CORS list is an origin header. `allow_share` for a foreign origin with `token=None` has to be False. The broken files still return true; the repaired files do not.
 
 ## Picture: broken must fail foreign origin
 

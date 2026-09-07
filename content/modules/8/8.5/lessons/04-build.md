@@ -7,7 +7,7 @@
 
 Last week’s crash-field names are not a redaction policy. Muting a scanner finding does not strip `secret`. Filling in the store’s privacy form is not the repair.
 
-The structural change is: `crash_report` **does not copy `note_body` into the payload**. A constant `'[redacted]'` (the local stand-in) is the teaching shape. Structural means omit — not a crash product set to “automatic,” not a store form, not a tracker-SDK “privacy mode” sticker.
+The restore: `crash_report` **does not copy `note_body` into the payload**. A constant `'[redacted]'` (the local stand-in) is the teaching shape. Read it as omit — not a crash product set to “automatic,” not a store form, not a tracker-SDK “privacy mode” sticker.
 
 For the notes app’s crash telemetry: `'secret'` absent from the report. Fail-safe: if the SDK offers “include last screen,” leave it off. Do not allow just because support “needs the last chart.” Do not attach the live note, the clipboard, or a screenshot.
 

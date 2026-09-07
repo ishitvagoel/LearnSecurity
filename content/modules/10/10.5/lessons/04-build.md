@@ -7,7 +7,7 @@
 
 A green SIEM tile does not close recovery-todo. A paging ack is an ack. “Alerts stopped firing so we closed it” still leaves `close_incident` open.
 
-The structural change is: `close_incident` **returns true only when `recovery == "done"` and `'note_body' not in logs`**. Missing recovery or a body in logs is deny. A green SIEM may *accompany* a match; it does not replace it.
+Change this: `close_incident` **returns true only when `recovery == "done"` and `'note_body' not in logs`**. Missing recovery or a body in logs is deny. A green SIEM may *accompany* a match; it does not replace it.
 
 The `note_body` substring is a **teaching stand-in** for “logs match how sensitive the data is.” It is not a complete leak scanner. The check in the notes app’s incident ticket: recovery todo → stay open, and a leaked body → stay open. Fail-safe: a missing field is deny. Do not allow just because the dashboard went green. Do not accept “alerts stopped” as the conjunction.
 

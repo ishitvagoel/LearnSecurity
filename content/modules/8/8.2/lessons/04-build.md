@@ -7,9 +7,9 @@
 
 A private folder does not hide the note. A fingerprint prompt does not hide it. EncryptedSharedPreferences on a *different* file still leaves `'secret'` on disk.
 
-The structural change is: the stored bytes are **not the body**. `save_note` must not write `'secret'` as the file contents. Store a ciphertext stand-in, not the body.
+Do this: the stored bytes are **not the body**. `save_note` must not write `'secret'` as the file contents. Store a ciphertext stand-in, not the body.
 
-The lab uses an `aead:` prefix plus length as a **stand-in** for Keystore-wrapped authenticated encryption — not a real cipher (5.2). Structural means that wrap.
+The lab uses an `aead:` prefix plus length as a **stand-in** for Keystore-wrapped authenticated encryption — not a real cipher (5.2). Here: that wrap.
 
 The check in the notes app’s offline cache: `plaintext_on_disk()` false after save. Fail-safe: if wrap fails, **do not** fall back to plaintext. Do not skip the deny because Keystore was locked.
 

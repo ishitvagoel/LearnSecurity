@@ -7,7 +7,7 @@
 
 A later email does not kill the session. Disabling the password leaves the cookie. A logout product name is a product. `DELETE FROM users` alone is not `session_valid`.
 
-The structural change is: `delete_user` **pops the session**, and `session_valid` **treats `DELETED` as deny**. Kill leftovers in the same use-case. Same delete. Not a follow-up ticket.
+The repair: `delete_user` **pops the session**, and `session_valid` **treats `DELETED` as deny**. Kill leftovers in the same use-case. Same delete. Not a follow-up ticket.
 
 Repair a offboard: add `alice` to `DELETED`, pop `SESSIONS["alice"]`, and refuse authentication if the user is in `DELETED` even if someone writes the map back. Fail closed: if the session store is down, **deny** authentication for that user. Do not fail open.
 

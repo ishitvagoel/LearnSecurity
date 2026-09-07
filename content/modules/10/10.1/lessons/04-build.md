@@ -7,7 +7,7 @@
 
 Last week’s pull-request titles are not a threat-model id. Muting a scanner finding does not fill `merge_ok`. A CODEOWNERS file is not the repair.
 
-The structural change is: `merge_ok` **is false unless the change has a truthy `threat_model`**. Fail-safe: a missing id is deny. Structural means that citation — not CODEOWNERS, not HIPAA training, not a maturity score.
+What has to change: `merge_ok` **is false unless the change has a truthy `threat_model`**. Fail-safe: a missing id is deny. In short, that citation — not CODEOWNERS, not HIPAA training, not a maturity score.
 
 Repair the notes app’s merge culture: `{}` → do not merge. Do not allow just because branch protection is “on.” Do not accept “training complete” as a threat-model id. The id is **opaque** — `"TM-12"` is enough for this lab. Whether the document actually covers this change is 3.2 and 10.4.
 

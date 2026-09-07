@@ -7,7 +7,7 @@
 
 A disabled export button does not cap the fourth export. An IP bucket at the edge is someone else’s counter. Autoscaling adds capacity. A CAPTCHA is not the quota.
 
-Structural means the server counts. `allow(n)` must be `n <= 3`. That check lives on the export action — the write path — not in the browser.
+Namely the server counts. `allow(n)` must be `n <= 3`. That check lives on the export action — the write path — not in the browser.
 
 The check in export: deny at four. Fail closed: if the count is unknown, **deny**. Do not open the door because the counter store was unreachable.
 

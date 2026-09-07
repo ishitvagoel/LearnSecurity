@@ -7,7 +7,7 @@
 
 A Compose switch that hides the button does not ignore the client boolean. Play Integrity checked only in the app is still the client talking. Shrinking the app does not change `allow_export`.
 
-The structural change is: the server **ignores the client integrity field**. `allow_export` must use `server_attest == "play_integrity_pass"` (a local stand-in for a *server-verified* attestation result). The client JSON is not an input to that check. The server attest decides; ignore the client boolean.
+Repair this: the server **ignores the client integrity field**. `allow_export` must use `server_attest == "play_integrity_pass"` (a local stand-in for a *server-verified* attestation result). The client JSON is not an input to that check. The server attest decides; ignore the client boolean.
 
 Put this in the notes app’s Android export: client ok plus attest fail denies. Fail-safe: unknown attest **denies**. Do not `or` the client boolean back in. Do not allow just because the attestation service was unreachable.
 

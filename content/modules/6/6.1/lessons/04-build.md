@@ -7,7 +7,7 @@
 
 A denylist of punctuation does not change argv. “subprocess will handle it” can still be `sh -c`. Commenting “internal users are trusted” is not `argv_for_list`.
 
-Structural means the shell never sees the name. `argv_for_list` must return a list whose program is `ls` (or another fixed binary), not `sh`. The name is one element. `--` before the name is the extra slot that closes argument injection as a *named* leftover.
+Put simply, the shell never sees the name. `argv_for_list` must return a list whose program is `ls` (or another fixed binary), not `sh`. The name is one element. `--` before the name is the extra slot that closes argument injection as a *named* leftover.
 
 The check in export listing: list, not string. Fail closed: if you cannot spawn without a shell, **do not spawn**. Do not skip the deny because the name “looks like notes.”
 

@@ -5,7 +5,7 @@
 
 ## The rule
 
-`auth` must require a truthy `current` and equality with `presented`. Structural means the old value is dead — not `.gitignore`, not a vault brand, not “we rotated in the wiki,” not a comment that says TODO remove default.
+`auth` must require a truthy `current` and equality with `presented`. Read it as the old value is dead — not `.gitignore`, not a vault brand, not “we rotated in the wiki,” not a comment that says TODO remove default.
 
 For service credentials: current only, deny if current is missing. Do not fall back to `DEFAULT`. Do not allow because “the vault was unreachable.”
 
