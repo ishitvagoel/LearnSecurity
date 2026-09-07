@@ -61,4 +61,4 @@ A clinic example: notice appointment-card notes after patient delete; do not pas
 
 ## What this page is not doing
 
-A vendor name is not this week's rule. Do not run live queries against a production warehouse. Answer keys are not on this site.
+Do not run live queries against a production warehouse. Answer keys are not on this site.

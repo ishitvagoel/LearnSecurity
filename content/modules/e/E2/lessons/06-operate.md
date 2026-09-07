@@ -27,7 +27,7 @@ A dashboard tile does not prove the enforcing header is present.
 | Recover | Flip to enforcing after encoding (6.2) |
 | Leftover | XS-Leaks; cache strip; Trusted Types draft |
 
-A vendor name is not this week's rule. Re-run `test_report_only_is_not_enforcement` after any header-middleware change; a green reporting dashboard is not that check. Encoding (6.2) still has to exist before you claim Recover — a content-security policy is a layer.
+Re-run `test_report_only_is_not_enforcement` after any header-middleware change; a green reporting dashboard is not that check. Encoding (6.2) still has to exist before you claim Recover — a content-security policy is a layer.
 
 ## What the framework does vs what you still have to check
 

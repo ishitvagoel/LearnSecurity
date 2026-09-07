@@ -44,7 +44,7 @@ If your alert includes the matching trace, you have copied the leak into the pag
 
 ## What the framework does vs what you still have to check
 
-The same feature flags, sidecar debug, and public admin bind that bypass this practice will also bypass a “scan our canary dashboard” detector. Name those places before you claim recover. A vendor name is not this week's rule.
+The same feature flags, sidecar debug, and public admin bind that bypass this practice will also bypass a “scan our canary dashboard” detector. Name those places before you claim recover.
 
 Cause vs cost stays split here too: the **cause** is fail-open boot (debug ignored); the **cost** is traces and extra attack surface; **how you stop it** is the prod-and-debug check; **how you notice** is `prod_debug_forbidden`; **how you recover** is kill-and-rotate. What the tool cannot do: this alert does not catch a feature flag that turns off authorization (1.2), and it does not catch sidecar debug.
 

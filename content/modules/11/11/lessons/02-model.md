@@ -36,7 +36,7 @@ A copy already sitting in email is leftover, not this week's check.
 
 ## Step 1: name the pieces
 
-Do not start a new list from scratch. Take the share you already have and ask what would show the grant was never consulted.
+Take the share you already have and ask what would show the grant was never consulted.
 
 | Piece | This system |
 |---|---|

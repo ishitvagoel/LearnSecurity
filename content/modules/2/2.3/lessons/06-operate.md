@@ -49,4 +49,4 @@ The alternate path after rotation (sign in again) must itself meet keyboard, nam
 
 ## What this page is not doing
 
-A vendor name is not this week's rule. Answer keys are not on this site.
+Answer keys are not on this site.

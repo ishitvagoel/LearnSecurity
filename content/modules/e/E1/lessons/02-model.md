@@ -37,7 +37,7 @@ The model's context window is not the allow-list.
 
 ## Step 1: name the pieces
 
-Do not start a new list from scratch. Take the agent you already have and ask what would show `exec_sql` is still allowed.
+Take the agent you already have and ask what would show `exec_sql` is still allowed.
 
 | Piece | This system |
 |---|---|

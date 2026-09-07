@@ -44,7 +44,7 @@ If your alert includes the matching note body, you have copied the leak into the
 
 ## What the framework does vs what you still have to check
 
-The same field-grain holes, looking-around leftovers, and fuzz-with-no-named-bad-result that bypass this practice will also bypass a “scan our coverage dashboard” detector. Name those places before you claim recover. A vendor name is not this week's rule.
+The same field-grain holes, looking-around leftovers, and fuzz-with-no-named-bad-result that bypass this practice will also bypass a “scan our coverage dashboard” detector. Name those places before you claim recover.
 
 ## Can people still use it
 

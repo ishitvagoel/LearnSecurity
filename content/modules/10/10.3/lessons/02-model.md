@@ -36,7 +36,7 @@ The cloud's hypervisor is not your ClusterRoleBinding.
 
 ## Step 1: name the pieces
 
-Do not start a new list from scratch. Take the cluster you already have and ask what would show cluster-admin is still allowed.
+Take the cluster you already have and ask what would show cluster-admin is still allowed.
 
 | Piece | This system |
 |---|---|

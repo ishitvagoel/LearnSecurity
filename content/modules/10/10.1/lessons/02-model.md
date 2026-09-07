@@ -34,7 +34,7 @@ CODEOWNERS says who must click. It does not say what changed. A closed-ticket co
 
 ## Step 1: name the pieces
 
-Do not start a new list from scratch. Take the merge check you already have and ask which surfaces would make an empty dict merge.
+Take the merge check you already have and ask which surfaces would make an empty dict merge.
 
 | Piece | This system |
 |---|---|

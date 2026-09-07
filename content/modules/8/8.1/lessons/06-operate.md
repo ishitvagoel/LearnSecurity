@@ -33,7 +33,7 @@ Naming a mobile-device product is not the rule. Re-run `test_client_integrity_cl
 
 A Play Console dashboard will show attestation counts and stay silent when FastAPI still binds `integrity=ok`. Notice must observe **client ok plus attest fail is false**, not store-listing health. If the alert includes a Play Integrity token or note bodies, you have opened a logging leak (3.1 / 4.3).
 
-What this practice is supposed to show: `attest_fail_export_denied` fires without the app file. A vendor name is not this week's rule.
+What this practice is supposed to show: `attest_fail_export_denied` fires without the app file.
 
 ## Practice
 

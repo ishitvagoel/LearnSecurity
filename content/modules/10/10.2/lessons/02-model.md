@@ -34,7 +34,7 @@ Lockfile verify is the install check. An SBOM is inventory. Provenance is extra.
 
 ## Step 1: name the pieces
 
-Do not start a new list from scratch. Take the install rule you already have and ask which check would show it is false.
+Take the install rule you already have and ask which check would show it is false.
 
 | Piece | This system |
 |---|---|

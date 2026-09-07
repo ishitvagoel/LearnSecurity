@@ -36,7 +36,7 @@ Industry detect / respond / recover labels name outcomes. They are not a product
 
 ## Step 1: name the pieces
 
-Do not start a new list from scratch. Take the ticket you already have and ask what would show recovery still has not run.
+Take the ticket you already have and ask what would show recovery still has not run.
 
 | Piece | This system |
 |---|---|

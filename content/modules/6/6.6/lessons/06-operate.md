@@ -61,4 +61,4 @@ A clinic example: notice guardian-invite replays; do not paste the mail link int
 
 ## What this page is not doing
 
-A vendor name is not this week's rule. Live invite replay is out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Live invite replay is out of scope. This site does not mark you as finished. Answer keys are not on this site.

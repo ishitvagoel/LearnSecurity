@@ -34,7 +34,7 @@ A list of things you might test is inventory. A check that names the bad case is
 
 ## Step 1: name the pieces
 
-Do not start a new list from scratch. Take the tests you already have and ask whether each one names a bad case.
+Take the tests you already have and ask whether each one names a bad case.
 
 | Piece | This system |
 |---|---|

@@ -35,7 +35,7 @@ A health check that returns 200 is a product test. It is not the isolation check
 
 ## Step 1: name the pieces
 
-Do not start a new list from scratch. Take the finding you already have and ask what would show the hole is still there.
+Take the finding you already have and ask what would show the hole is still there.
 
 | Piece | This system |
 |---|---|

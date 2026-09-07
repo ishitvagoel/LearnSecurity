@@ -37,7 +37,7 @@ A one-year slide is a plan. It is not this week’s hole. A process-maturity sco
 
 ## Step 1: name the pieces
 
-Do not start a new list from scratch. Take the exception you already have and ask what would show it is still incomplete.
+Take the exception you already have and ask what would show it is still incomplete.
 
 | Piece | This system |
 |---|---|

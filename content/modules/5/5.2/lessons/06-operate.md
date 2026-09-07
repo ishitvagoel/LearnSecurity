@@ -58,4 +58,4 @@ A clinic example: notice Base64 SSN columns; do not paste values into the ticket
 
 ## What this page is not doing
 
-A vendor name is not this week's rule. Live column dumps are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Live column dumps are out of scope. This site does not mark you as finished. Answer keys are not on this site.

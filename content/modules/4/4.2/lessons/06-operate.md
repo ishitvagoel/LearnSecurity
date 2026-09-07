@@ -28,7 +28,7 @@ A log product does not bind RP ID.
 | Recover | Revoke sessions; force a re-bind |
 | Leftover | Password-only users; honest labeled leftover |
 
-A vendor name is not this week's rule. A green “MFA enabled” tile is not that check. Re-run `test_password_is_not_phishing_resistant` after any login-copy change. Origin-mismatch WebAuthn and password-at-lookalike are two observations of the same claim: do not close one without retesting the other.
+A green “MFA enabled” tile is not that check. Re-run `test_password_is_not_phishing_resistant` after any login-copy change. Origin-mismatch WebAuthn and password-at-lookalike are two observations of the same claim: do not close one without retesting the other.
 
 An identity-provider dashboard will show “2FA enrolled” and stay silent when the login banner still says “phishing-resistant password.” Notice must look at the **helper boolean**, not the vendor tile. If the alert includes a password, you have opened a second leak.
 

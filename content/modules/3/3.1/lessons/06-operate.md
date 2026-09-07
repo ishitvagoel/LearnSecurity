@@ -43,7 +43,7 @@ If your alert includes the matching line, you have copied the leak into the pagi
 
 ## What the framework does vs what you still have to check
 
-The same access logs, exception dumps, and APM drains that bypass the logger will also bypass a “scan our app logs” detector. Name those places before you claim recover. A vendor name is not this week's rule.
+The same access logs, exception dumps, and APM drains that bypass the logger will also bypass a “scan our app logs” detector. Name those places before you claim recover.
 
 ## Can people still use it
 

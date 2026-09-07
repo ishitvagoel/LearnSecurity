@@ -28,7 +28,7 @@ If any box is a product name or a color, the row is not ready.
 
 ## Step 1: name the pieces
 
-Do not start a new list from scratch. Take the rules you already wrote and ask what leftover they still carry when a human must confirm recovery.
+Take the rules you already wrote and ask what leftover they still carry when a human must confirm recovery.
 
 | Rule | Recovery leftover to name | Out of scope this week |
 |---|---|---|

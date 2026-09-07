@@ -35,7 +35,7 @@ flowchart LR
 
 ## Step 1: name the pieces
 
-Do not start a new list from scratch. Take the boot rule you already have and ask what would show production started with debug on.
+Take the boot rule you already have and ask what would show production started with debug on.
 
 | Piece | This system |
 |---|---|

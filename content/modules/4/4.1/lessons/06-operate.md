@@ -61,4 +61,4 @@ A clinic example: notice chart use after badge disable; do not paste the chart i
 
 ## What this page is not doing
 
-A vendor name is not this week's rule. Do not run live queries against a production identity provider. Answer keys are not on this site.
+Do not run live queries against a production identity provider. Answer keys are not on this site.

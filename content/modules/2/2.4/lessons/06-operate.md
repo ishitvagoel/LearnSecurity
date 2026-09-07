@@ -53,4 +53,4 @@ Disable-on-submit is not the rule. Accessible “still working” must reuse the
 
 ## What this page is not doing
 
-A vendor name is not this week's rule. Do not instruct live load tests. Answer keys are not on this site.
+Do not instruct live load tests. Answer keys are not on this site.

@@ -34,7 +34,7 @@ A silent delete is how “not reachable” becomes “never happened.” Write t
 
 ## Step 1: name the pieces
 
-Do not start a new list from scratch. Take the findings you already have and ask which ones may ship.
+Take the findings you already have and ask which ones may ship.
 
 | Piece | This system |
 |---|---|

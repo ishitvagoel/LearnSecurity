@@ -35,7 +35,7 @@ The usual checklist is the living matrix. An extra advanced row is still a named
 
 ## Step 1: name the pieces
 
-Do not start a new list from scratch. Take the isolation rule you already have and ask which test would show it is false.
+Take the isolation rule you already have and ask which test would show it is false.
 
 | Piece | This system |
 |---|---|

@@ -452,6 +452,9 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/Point at (`[^`]+`) file (`[^`]+`)\./g, "Look in $1, starting with $2."],
   [/Draw [^.]+ so someone else could name the checks\. ?/g, ""],
   [/Do not invent a new catalogue\./g, "Do not start a new list from scratch."],
+  [/Do not start a new list from scratch\. /g, ""],
+  [/A vendor name is not this week's rule\. /g, ""],
+  [/A vendor name is not this week's rule\./g, ""],
   [
     /The folder (`[^`]+`) is the change\./g,
     "Treat the files in $1 as the pull request.",

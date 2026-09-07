@@ -44,7 +44,7 @@ If your alert includes the matching report, you have copied the leak into the pa
 
 ## What the framework does vs what you still have to check
 
-The same leftover `READ_LOGS` path, tracker SDK extras, and web crash drains that bypass this practice will also bypass a “scan our crash dashboard” detector. Name those places before you claim recover. A vendor name is not this week's rule.
+The same leftover `READ_LOGS` path, tracker SDK extras, and web crash drains that bypass this practice will also bypass a “scan our crash dashboard” detector. Name those places before you claim recover.
 
 ## Can people still use it
 
