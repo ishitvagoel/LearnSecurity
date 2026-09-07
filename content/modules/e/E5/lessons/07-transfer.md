@@ -50,4 +50,4 @@ One page. No answer keys. `labs/E5/e5-lab` is the only running system you may br
 
 ## What this page is not doing
 
-Live-product probes. Production GraphQL. This page does not finish a check-in.
+Do not run live-product probes. Do not use production GraphQL. This page does not finish a check-in.

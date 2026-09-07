@@ -77,4 +77,4 @@ Clinic appointment deep link. Magic-link email (still a URL token — later you 
 
 ## What this page is not doing
 
-Live token replay, real session cookies, weaponized Referer harvesting. This page does not finish a check-in. Answer keys are not on this site.
+Do not use live token replay, real session cookies, weaponized Referer harvesting. This page does not finish a check-in. Answer keys are not on this site.

@@ -59,4 +59,4 @@ One page. No keys. The practice `labs/2.1/2.1-parser-boundaries` stays the only 
 
 ## What this page is not doing
 
-Real clinics, real patient identifiers, live GraphQL targets.
+Do not use real clinics, real patient identifiers, live GraphQL targets.

@@ -7,7 +7,7 @@
 
 Review `labs/10.1/10.1-lab/vulnerable/` as a change to the notes app’s merge check. Check whether `merge_ok({})` still returns true.
 
-Start at `merge_ok` and the empty dict, not at a scanner color or a training screenshot. You already ran `test_merge_requires_threat_model_id` — that is the rule. A comment “will add a threat model later” is not.
+Start at `merge_ok` and the empty dict, not at a scanner color or a training screenshot. You already ran `test_merge_requires_threat_model_id`. A comment “will add a threat model later” is not.
 
 ## Picture: merge_ok True without a threat-model id
 

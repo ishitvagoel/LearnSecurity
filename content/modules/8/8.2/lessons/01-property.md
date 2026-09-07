@@ -80,4 +80,4 @@ Clinic offline chart cache. iOS Keychain vs Android Keystore. Desktop Electron.
 
 ## What this page is not doing
 
-Live device imaging, dumping real AES into lessons. Opening this page does not finish a check-in. Answer keys are not on this site.
+Do not use live device imaging, dumping real AES into lessons. Opening this page does not finish a check-in. Answer keys are not on this site.

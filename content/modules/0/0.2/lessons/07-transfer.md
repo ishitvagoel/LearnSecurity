@@ -45,4 +45,4 @@ One page. No keys. `labs/0.2/0.2-bridge` is the only running system you may brea
 
 ## What this page is not doing
 
-Live-target walkthroughs. Claiming check-in 0 or check-in 1 from this page. Treating tooling-bridge skips as 1.2 skips.
+Do not try live-target walkthroughs. This page does not finish check-in 0 or check-in 1. Do not treat tooling-bridge skips as 1.2 skips.

@@ -49,4 +49,4 @@ One page. No answer keys. `labs/4.4/4.4-lab` is the only running system you may 
 
 ## What this page is not doing
 
-Live-target id swaps. Real charts. This page does not finish a check-in.
+Do not try live-target id swaps. Do not use real charts. This page does not finish a check-in.

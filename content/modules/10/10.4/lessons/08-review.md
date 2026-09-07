@@ -7,7 +7,7 @@
 
 Review `labs/10.4/10.4-lab/vulnerable/` as a change to the notes app’s compose boot check. Check whether `boot_ok("prod", True)` still returns true.
 
-Start at `boot_ok` and the prod-plus-debug pair, not at a scanner color or a `NODE_ENV` screenshot. You already ran `test_prod_debug_must_not_boot` — that is the rule. A comment “will turn debug off later” is not.
+Start at `boot_ok` and the prod-plus-debug pair, not at a scanner color or a `NODE_ENV` screenshot. You already ran `test_prod_debug_must_not_boot`. A comment “will turn debug off later” is not.
 
 ## Picture: boot_ok true on prod plus debug
 

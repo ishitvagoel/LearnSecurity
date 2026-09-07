@@ -7,7 +7,7 @@
 
 This review is about notes-app merge gating. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `review_ok("x = eval(user)")` still returns true if they ship. Start at always-true `review_ok`, not at a scanner color.
 
-You already ran `test_eval_on_user_input_is_rejected` — that is the rule. A comment “will ban eval later” is not.
+You already ran `test_eval_on_user_input_is_rejected`. A comment “will ban eval later” is not.
 
 ## Picture: approved eval(user)
 

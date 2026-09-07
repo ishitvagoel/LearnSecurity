@@ -7,7 +7,7 @@
 
 Review `labs/3.3/3.3-lab/vulnerable/` as a change to the notes app’s database role. Check whether `can_select("app", "tB", "tA")` is still true.
 
-You already ran `test_app_role_cannot_read_other_tenant` — that is the rule. A comment “row-level security later” is not.
+You already ran `test_app_role_cannot_read_other_tenant`. A comment “row-level security later” is not.
 
 ## Picture: DATABASE_URL uses superuser
 

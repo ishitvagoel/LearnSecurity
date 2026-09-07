@@ -11,7 +11,7 @@ Do not log note bodies or bound parameter values that are bodies (3.1 / 5.1). Do
 
 ## Picture: error shape is a signal
 
-A SQL syntax-error spike after a query helper change is a notice-and-recover problem, not a licence to quote note bodies in the paging channel. Name the event when you notice it. Recover stops the concatenating path and restores if needed. Neither reprints the body.
+A SQL syntax-error spike after a query helper change is a notice-and-recover problem, not a licence to quote note bodies in the paging channel. Recover stops the concatenating path and restores if needed. Neither reprints the body.
 
 ```mermaid
 flowchart TD
@@ -57,4 +57,4 @@ A clinic example: notice search-box syntax errors; do not paste patient names in
 
 ## What this page is not doing
 
-A web filter is not this check. Live SQL hunts are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+A web filter is not this check. Do not use live SQL hunts are out of scope. This site does not mark you as finished. Answer keys are not on this site.

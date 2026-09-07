@@ -78,4 +78,4 @@ A clinic example: wrong-audience FHIR token. Phone-app redirect (claimed HTTPS, 
 
 ## What this page is not doing
 
-Live identity providers, real patient tokens, weaponized `alg=none` copy-paste. This site does not mark you as finished. without product evidence. Answer keys are not on this site.
+Do not use live identity providers, real patient tokens, weaponized `alg=none` copy-paste. This site does not mark you as finished. without product evidence. Answer keys are not on this site.

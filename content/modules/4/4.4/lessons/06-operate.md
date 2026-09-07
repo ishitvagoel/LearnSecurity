@@ -48,4 +48,4 @@ A clinic example: notice chart-id swaps; do not paste the chart into the ticket.
 
 ## What this page is not doing
 
-Live company dumps are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live company dumps are out of scope. This site does not mark you as finished. Answer keys are not on this site.

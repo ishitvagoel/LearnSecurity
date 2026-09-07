@@ -85,4 +85,4 @@ Error “share limit reached” must be something assistive tech can announce, n
 
 ## What this page is not doing
 
-Live-target load tests, real member emails, weaponized bots, and “business logic is not security.” Answer keys are not on this site.
+Do not try live-target load tests, real member emails, weaponized bots, and “business logic is not security.” Answer keys are not on this site.

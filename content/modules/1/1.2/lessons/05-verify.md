@@ -9,7 +9,7 @@ A who-is-allowed check needs a property check. “The `authorize` function was c
 
 ## Picture: identity-only must fail the check
 
-The honest path is a person with a current grant. The negative path is a person without one. The abuse path is a person who presents identity and expects the write or release to succeed. The oracle does not ask whether `authorize()` was called. It asks whether the effect that must not happen happened.
+The honest path is a person with a current grant. The negative path is a person without one. The abuse path is a person who presents identity and expects the write or release to succeed. The check does not ask whether `authorize()` was called. It asks whether the effect that must not happen happened.
 
 ```mermaid
 flowchart TD
@@ -98,7 +98,7 @@ For this page’s scoped policy, unknown policy state denies. The product may ne
 
 The local suite should include at least these shapes:
 
-| Row or transition | Property oracle | Broken run | Repaired run |
+| Row or transition | Property check | Broken run | Repaired run |
 |---|---|---|---|
 | current A member × read × A note | intended body returned | pass | pass |
 | current B member × read × A note | no A body returned | fail | pass |
@@ -145,7 +145,7 @@ Mutation is diagnostic, not proof of completeness. A suite can kill selected pol
 
 Two forms of completeness are needed:
 
-1. **Policy coverage:** table rows, states, grants, and failure modes have oracles.
+1. **Policy coverage:** table rows, states, grants, and failure modes have checks.
 2. **Enforcement coverage:** every path capable of the protected effect consumes the relevant current decision.
 
 Create an enforcement table:
@@ -208,4 +208,4 @@ Green checks on this laptop are not a pentest of a website. They are evidence fo
 
 ## What this page is not doing
 
-Live targets. Ready-made attack recipes. Treating a status code as the check. Answer keys are not on this site.
+Do not use live targets. Do not use ready-made attack recipes. Do not treat a status code as the check. Answer keys are not on this site.

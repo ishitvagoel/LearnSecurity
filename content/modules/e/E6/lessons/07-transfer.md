@@ -63,4 +63,4 @@ One page. No answer keys. `labs/E6/e6-lab` is the only running system you may br
 
 ## What this page is not doing
 
-Live-disclosure. Production exceptions. Real patient charts in tickets. Claiming you finished an assurance gate from this page.
+Do not run live-disclosure. Do not use production exceptions. Do not use real patient charts in tickets. This page does not finish an assurance gate.

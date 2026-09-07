@@ -85,4 +85,4 @@ A clinic example: a clinician leaves. The badge is disabled. The chart cookie mu
 
 ## What this page is not doing
 
-Live identity providers, real HR exports, real session cookies from production, weaponized token replay. Answer keys are not on this site.
+Do not use live identity providers, real HR exports, real session cookies from production, weaponized token replay. Answer keys are not on this site.

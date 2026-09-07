@@ -51,4 +51,4 @@ A clinic example: detect SSN field probes on local practice files; do not attach
 
 ## What this page is not doing
 
-Naming a GraphQL-gateway product is not the rule. Public GraphQL probes are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Naming a GraphQL-gateway product is not the rule. Do not follow public GraphQL probes are out of scope. This site does not mark you as finished. Answer keys are not on this site.

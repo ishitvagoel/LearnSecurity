@@ -78,4 +78,4 @@ Clinic scan upload. XML entity expansion; pickle; YAML load.
 
 ## What this page is not doing
 
-Live filesystem trophies, zip-bomb cookbooks, dumping lab Python into notes, and treating an awareness list as the definition of security. Answer keys are not on this site.
+Do not use live filesystem trophies, zip-bomb cookbooks, dumping lab Python into notes, and treating an awareness list as the definition of security. Answer keys are not on this site.

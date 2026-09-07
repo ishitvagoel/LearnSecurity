@@ -83,4 +83,4 @@ Clinic batch-export worker. Outbox. Event schemas.
 
 ## What this page is not doing
 
-Live broker attacks, dumping task-library exploits into notes. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live broker attacks, dumping task-library exploits into notes. This site does not mark you as finished. Answer keys are not on this site.

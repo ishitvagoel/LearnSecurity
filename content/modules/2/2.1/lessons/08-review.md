@@ -7,7 +7,7 @@
 
 Review `labs/2.1/2.1-parser-boundaries/vulnerable/` as a change to notes-app ingest. Reconstruct whether ACL and store still parse the same bytes twice.
 
-You already ran `test_duplicate_tenant_keys_are_one_meaning` — that is the rule. A comment “JSON should not duplicate keys” is not.
+You already ran `test_duplicate_tenant_keys_are_one_meaning`. A comment “JSON should not duplicate keys” is not.
 
 ## Picture: problems to find (name them yourself)
 

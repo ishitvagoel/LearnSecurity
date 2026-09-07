@@ -78,4 +78,4 @@ Clinic `test_get_patient_200`. Fuzzing with no named bad result.
 
 ## What this page is not doing
 
-Live targets, claiming a later gate, weaponized fuzz campaigns. Answer keys are not on this site.
+Do not use live targets, claiming a later gate, weaponized fuzz campaigns. Answer keys are not on this site.

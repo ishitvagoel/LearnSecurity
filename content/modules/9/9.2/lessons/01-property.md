@@ -80,4 +80,4 @@ Terraform `local-exec`; GitHub Actions `run:` with untrusted input; clinic eval 
 
 ## What this page is not doing
 
-Weaponized eval payloads. Live GitHub orgs. This site does not mark you as finished. Answer keys are not on this site.
+Do not use weaponized eval payloads. Do not use live GitHub orgs. This site does not mark you as finished. Answer keys are not on this site.

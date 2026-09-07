@@ -57,4 +57,4 @@ One page. No answer keys. The only running system you may break is `labs/5.1/5.1
 
 ## What this page is not doing
 
-Live-target dumps. Real patient notes. This page does not finish a check-in.
+Do not try live-target dumps. Do not use real patient notes. This page does not finish a check-in.

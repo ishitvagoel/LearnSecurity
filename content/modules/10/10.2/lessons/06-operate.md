@@ -66,4 +66,4 @@ A clinic example: deny npm in the prod pod; do not paste `.npmrc` into the ticke
 
 ## What this page is not doing
 
-An SBOM-vendor name is not the rule. Live registry traces are out of scope. The ship gate stays not finished. A provenance badge is not this alert. Answer keys are not on this site.
+An SBOM-vendor name is not the rule. Do not use live registry traces are out of scope. This page does not finish the ship check-in. A provenance badge is not this alert. Answer keys are not on this site.

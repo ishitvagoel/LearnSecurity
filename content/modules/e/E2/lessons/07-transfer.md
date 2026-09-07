@@ -55,4 +55,4 @@ One page. No keys. `labs/E2/e2-lab` is the only running system you may break. Do
 
 ## What this page is not doing
 
-Live-page walkthroughs. Public-host scanning. Claiming check-in 7 or milestone M2 from this page.
+Do not run live-page walkthroughs. Do not do public-host scanning. This page does not finish check-in 7 or milestone M2.

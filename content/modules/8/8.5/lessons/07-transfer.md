@@ -60,4 +60,4 @@ One page. No answer keys. `labs/8.5/8.5-lab` is the only running system you may 
 
 ## What this page is not doing
 
-Live-target telemetry. Real patient charts. Claiming you finished a mobile gate from this page.
+Do not try live-target telemetry. Do not use real patient charts. This page does not finish a mobile gate.

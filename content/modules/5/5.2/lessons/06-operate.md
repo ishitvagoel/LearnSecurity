@@ -11,7 +11,7 @@ Do not log plaintext bodies. Do not paste an SSN into the ticket.
 
 ## Picture: CI is a detector
 
-A known-plaintext Base64 hit is a notice-and-recover problem, not a licence to quote the body in the paging channel. Name the event when you notice it. Recover re-protects and rotates keys. Neither reprints the body.
+A known-plaintext Base64 hit is a notice-and-recover problem, not a licence to quote the body in the paging channel. Recover re-protects and rotates keys. Neither reprints the body.
 
 ```mermaid
 flowchart TD
@@ -58,4 +58,4 @@ A clinic example: notice Base64 SSN columns; do not paste values into the ticket
 
 ## What this page is not doing
 
-Live column dumps are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live column dumps are out of scope. This site does not mark you as finished. Answer keys are not on this site.

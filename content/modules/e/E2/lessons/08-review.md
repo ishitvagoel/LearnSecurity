@@ -7,7 +7,7 @@
 
 Review `labs/E2/e2-lab/vulnerable/` as a change to the notes app’s header middleware. Check whether Report-Only still makes `isolation_enforced` true.
 
-You already ran `test_report_only_is_not_enforcement` — that is the rule. A comment “we should enforce later” is not.
+You already ran `test_report_only_is_not_enforcement`. A comment “we should enforce later” is not.
 
 ## Picture: Report-Only counted as on
 

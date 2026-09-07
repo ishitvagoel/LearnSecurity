@@ -62,4 +62,4 @@ One page. No answer keys. `labs/10.4/10.4-lab` is the only running system you ma
 
 ## What this page is not doing
 
-Live-production attacks. Public debug-endpoint walkthroughs. Claiming you finished an assurance gate from this page.
+Do not run live-production attacks. Do not follow public debug-endpoint walkthroughs. This page does not finish an assurance gate.

@@ -7,7 +7,7 @@
 
 Review `labs/7.1/7.1-lab/vulnerable/` as a change to the notes app’s profile PATCH. Check whether `apply(..., {"is_admin": true})` still writes true.
 
-You already ran `test_is_admin_cannot_be_patched` — that is the rule. A comment “we should allow-list later” is not. An inventory ticket about leftover endpoints is not this review.
+You already ran `test_is_admin_cannot_be_patched`. A comment “we should allow-list later” is not. An inventory ticket about leftover endpoints is not this review.
 
 ## Picture: user.update(body) / __dict__.update
 

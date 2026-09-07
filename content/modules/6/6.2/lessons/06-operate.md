@@ -50,4 +50,4 @@ A clinic example: notice nickname fields with raw `<`; do not paste nicknames in
 
 ## What this page is not doing
 
-Content-security policy in report-only mode is not this rule’s enforcement. Live attack hunts are out of scope. Opening this page does not finish a check-in.
+Content-security policy in report-only mode is not this rule’s enforcement. Do not use live attack hunts are out of scope. Opening this page does not finish a check-in.

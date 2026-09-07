@@ -63,4 +63,4 @@ One page. No answer keys. `labs/10.5/10.5-lab` is the only running system you ma
 
 ## What this page is not doing
 
-Live-incident attacks. Real patient charts in logs. Claiming you finished an assurance gate from this page.
+Do not run live-incident attacks. Do not use real patient charts in logs. This page does not finish an assurance gate.

@@ -7,7 +7,7 @@
 
 Review `labs/10.3/10.3-lab/vulnerable/` as a change to the notes app's cluster admission. Check whether `pod_ok("cluster-admin")` still returns true.
 
-Start at `pod_ok` and the cluster-admin row, not at a scanner color or a CIS screenshot. You already ran `test_cluster_admin_pod_is_denied` — that is the rule. A comment "will tighten RBAC later" is not.
+Start at `pod_ok` and the cluster-admin row, not at a scanner color or a CIS screenshot. You already ran `test_cluster_admin_pod_is_denied`. A comment "will tighten RBAC later" is not.
 
 ## Picture: cluster-admin on app SA
 

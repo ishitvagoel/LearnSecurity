@@ -7,7 +7,7 @@
 
 This review is about notes-app who-is-allowed. Check whether `can_read("bob", "n2")` is still true.
 
-You already ran `test_grant_on_n1_is_not_grant_on_n2` — that is the rule. A comment “will add object checks later” is not.
+You already ran `test_grant_on_n1_is_not_grant_on_n2`. A comment “will add object checks later” is not.
 
 ## Picture: if user.has_any_share: return note
 

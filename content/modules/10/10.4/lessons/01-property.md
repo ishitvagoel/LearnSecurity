@@ -92,4 +92,4 @@ A feature flag that turns off authorization. Clinic: Django `DEBUG=True`.
 
 ## What this page is not doing
 
-Live production hosts. Claiming you finished an assurance gate. Answer keys are not on this site.
+Do not use live production hosts. This page does not finish an assurance gate. Answer keys are not on this site.

@@ -51,4 +51,4 @@ One page. No keys. `labs/6.4/6.4-lab` is the only running system you may break. 
 
 ## What this page is not doing
 
-Live-target path trophies. Real patient filenames. This page does not finish a check-in.
+Do not try live-target path trophies. Do not use real patient filenames. This page does not finish a check-in.

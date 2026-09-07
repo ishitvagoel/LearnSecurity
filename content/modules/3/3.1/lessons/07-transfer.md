@@ -54,4 +54,4 @@ One page. No answer keys. The only running system you may break is `labs/3.1/3.1
 
 ## What this page is not doing
 
-Live log tenants. Real charts. Mixing a draft privacy list as if it were final.
+Do not use live log tenants. Do not use real charts. Do not mix a draft privacy list as if it were final.

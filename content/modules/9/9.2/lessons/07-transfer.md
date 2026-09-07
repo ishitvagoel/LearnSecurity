@@ -59,4 +59,4 @@ One page. No answer keys. The only running system you may break is `labs/9.2/9.2
 
 ## What this page is not doing
 
-Weaponized eval. Live orgs. This page does not finish a check-in.
+Do not use weaponized eval. Do not use live orgs. This page does not finish a check-in.

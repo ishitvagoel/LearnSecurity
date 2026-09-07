@@ -49,4 +49,4 @@ If a human consent screen is in the claim, “approve” must be something keybo
 
 ## What this page is not doing
 
-Live-target token replay. Real patient tokens. This page does not finish a check-in.
+Do not try live-target token replay. Do not use real patient tokens. This page does not finish a check-in.

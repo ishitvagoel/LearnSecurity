@@ -59,4 +59,4 @@ One page. No answer keys. The only running system you may break is `labs/6.7/6.7
 
 ## What this page is not doing
 
-Live-target load tests. Real patient CSVs. This page does not finish a check-in.
+Do not try live-target load tests. Do not use real patient CSVs. This page does not finish a check-in.

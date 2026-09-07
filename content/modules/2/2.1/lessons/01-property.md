@@ -104,4 +104,4 @@ A clinic booking API accepts JSON where `patient_id` appears twice. REST and Gra
 
 ## What this page is not doing
 
-Live targets, public JSON bombs, real patient identifiers, copy-paste encoding attacks, and “JSON is insecure” as the definition of security. Answer keys are not on this site.
+Do not use live targets, public JSON bombs, real patient identifiers, copy-paste encoding attacks, and “JSON is insecure” as the definition of security. Answer keys are not on this site.

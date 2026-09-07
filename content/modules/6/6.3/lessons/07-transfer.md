@@ -48,4 +48,4 @@ One page. No answer keys. `labs/6.3/6.3-lab` is the only running system you may 
 
 ## What this page is not doing
 
-Live-target CSRF. Real session cookies. This page does not finish a check-in.
+Do not try live-target CSRF. Do not use real session cookies. This page does not finish a check-in.

@@ -64,4 +64,4 @@ A clinic example: notice `test_get_patient_200` as the only “security” test;
 
 ## What this page is not doing
 
-Live fuzz traces are out of scope. Answer keys are not on this site.
+Do not use live fuzz traces are out of scope. Answer keys are not on this site.

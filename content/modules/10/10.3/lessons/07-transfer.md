@@ -62,4 +62,4 @@ One page. No answer keys. `labs/10.3/10.3-lab` is the only running system you ma
 
 ## What this page is not doing
 
-Live-cluster attacks. Real cloud-account takeover. Claiming you finished an assurance gate from this page.
+Do not run live-cluster attacks. Do not use real cloud-account takeover. This page does not finish an assurance gate.

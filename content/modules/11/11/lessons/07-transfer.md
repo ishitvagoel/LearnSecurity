@@ -62,4 +62,4 @@ One page. No answer keys. `labs/11/11-lab` is the only running system you may br
 
 ## What this page is not doing
 
-Live-tenant attacks. Real patient charts in notes. Claiming you finished an assurance gate from this page.
+Do not run live-tenant attacks. Do not use real patient charts in notes. This page does not finish an assurance gate.

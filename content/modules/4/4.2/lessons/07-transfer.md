@@ -60,4 +60,4 @@ One page. No keys. `labs/4.2/4.2-lab` is the only running system you may break. 
 
 ## What this page is not doing
 
-Live phishing campaigns. Real staff credentials. Claiming a mastery gate from this page.
+Do not use live phishing campaigns. Do not use real staff credentials. This page does not finish a mastery gate.

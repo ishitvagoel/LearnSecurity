@@ -53,4 +53,4 @@ If export is denied, say so in a readable message. Do not trap TalkBack users in
 
 ## What this page is not doing
 
-Naming a mobile-device product is not the rule. Live Play traces are out of scope. Opening this page does not finish a check-in.
+Naming a mobile-device product is not the rule. Do not use live Play traces are out of scope. Opening this page does not finish a check-in.

@@ -48,4 +48,4 @@ One page. No keys. `labs/3.3/3.3-lab` is the only running system you may break. 
 
 ## What this page is not doing
 
-Live-target SQL. Real company dumps. This page does not finish a check-in.
+Do not try live-target SQL. Do not use real company dumps. This page does not finish a check-in.

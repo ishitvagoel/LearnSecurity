@@ -193,4 +193,4 @@ A private network, TLS, and an internal-looking field can all be true while a pu
 
 ## What this page is not doing
 
-Live targets. Ready-made attack recipes. Treating a “top ten bugs” list as the course. Answer keys are not on this site.
+Do not use live targets. Do not use ready-made attack recipes. Do not treat a “top ten bugs” list as the course. Answer keys are not on this site.

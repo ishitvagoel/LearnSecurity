@@ -74,4 +74,4 @@ Clinic search box. NoSQL operators and GraphQL args wait for 7.1.
 
 ## What this page is not doing
 
-Live SQL attacks, weaponized cookbooks, dumping lab Python into notes. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live SQL attacks, weaponized cookbooks, dumping lab Python into notes. This site does not mark you as finished. Answer keys are not on this site.

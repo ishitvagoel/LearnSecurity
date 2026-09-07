@@ -56,4 +56,4 @@ One page. No answer keys. The only running system you may break is `labs/2.2/2.2
 
 ## What this page is not doing
 
-Real clinics, real patient charts, live CDNs.
+Do not use real clinics, real patient charts, live CDNs.

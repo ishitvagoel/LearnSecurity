@@ -83,4 +83,4 @@ A clinic example: a grant on appointment A is not a grant on chart B.
 
 ## What this page is not doing
 
-Live companies, real charts, weaponized id guessing, or a famous-bugs list as the definition of the rule. This page does not finish a check-in. Answer keys are not on this site.
+Do not use live companies, real charts, weaponized id guessing, or a famous-bugs list as the definition of the rule. This page does not finish a check-in. Answer keys are not on this site.

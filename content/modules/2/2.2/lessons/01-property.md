@@ -105,4 +105,4 @@ A clinic caches `GET /patients/me`. Authenticated RSS or a CSV export rides the 
 
 ## What this page is not doing
 
-Live CDNs, poisoning a public cache, DNS hijack labs, real patient charts, and “HTTPS means no cache bugs.” Answer keys are not on this site.
+Do not use live CDNs, poisoning a public cache, DNS hijack labs, real patient charts, and “HTTPS means no cache bugs.” Answer keys are not on this site.

@@ -129,4 +129,4 @@ Take the broken files from the practice. Write the review that **blocks** them. 
 
 ## What this page is not doing
 
-Live-target steps. Ready-made attack recipes. Merging because a function is named `authorize`. Answer keys are not on this site.
+Do not try live-target steps. Do not use ready-made attack recipes. Do not merge because a function is named `authorize`. Answer keys are not on this site.

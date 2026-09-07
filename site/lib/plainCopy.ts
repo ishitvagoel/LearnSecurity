@@ -463,9 +463,16 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/Treat the files in (`[^`]+`) as the pull request\./g, ""],
   [
     /The check you already ran \((`[^`]+`)\) is the rule (?:test|check)\./g,
-    "You already ran $1 — that is the rule.",
+    "You already ran $1.",
   ],
-  [/Notice names the event\./g, "Name the event when you notice it."],
+  [/You already ran (`[^`]+`) — that is the rule\./g, "You already ran $1."],
+  [/Notice names the event\./g, ""],
+  [/Name the event when you notice it\./g, ""],
+  [/The ship gate stays not finished\./g, "This page does not finish the ship check-in."],
+  [
+    /Claiming you finished ([^.]+) from this page\./g,
+    "This page does not finish $1.",
+  ],
   [/The failure of (`[^`]+`) \*is\* the evidence\./g, ""],
   [/When (`[^`]+`) fails, that is the evidence\./g, ""],
   [/Here is the rule:/g, ""],

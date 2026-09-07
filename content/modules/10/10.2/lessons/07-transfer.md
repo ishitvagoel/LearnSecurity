@@ -60,4 +60,4 @@ One page. No answer keys. `labs/10.2/10.2-lab` is the only running system you ma
 
 ## What this page is not doing
 
-Live-registry attacks. Real org poison-PRs. Claiming you finished the ship gate from this page.
+Do not run live-registry attacks. Do not use real org poison-PRs. This page does not finish the ship gate.

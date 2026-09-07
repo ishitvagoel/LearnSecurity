@@ -74,4 +74,4 @@ Clinic lab API key in a gist. Envelope wrapping (data key vs wrapping key) on co
 
 ## What this page is not doing
 
-Live cloud keys, real production secrets, quantum attack scripts. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live cloud keys, real production secrets, quantum attack scripts. This site does not mark you as finished. Answer keys are not on this site.

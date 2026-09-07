@@ -48,4 +48,4 @@ Serverless: notice the function using the migrate secret. Clinic replica: notice
 
 ## What this page is not doing
 
-Live GRANT dumps are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live GRANT dumps are out of scope. This site does not mark you as finished. Answer keys are not on this site.

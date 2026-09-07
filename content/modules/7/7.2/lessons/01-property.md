@@ -85,4 +85,4 @@ A clinic example: a member cannot resolve SSN. Also name bulk update and search 
 
 ## What this page is not doing
 
-Live GraphQL attacks, dumping ORM models into notes. This page does not finish a check-in. Answer keys are not on this site.
+Do not use live GraphQL attacks, dumping ORM models into notes. This page does not finish a check-in. Answer keys are not on this site.

@@ -11,7 +11,7 @@ Do not log bodies or `lab-secret` (3.1 / 5.3). Do not attach the HL7/JSON body t
 
 ## Picture: a missing sig is a signal
 
-A deny of a callback with a missing or wrong MAC is a notice-and-recover problem, not a licence to paste the body into the paging channel. Name the event when you notice it. Recover keeps the deny. Neither logs the body.
+A deny of a callback with a missing or wrong MAC is a notice-and-recover problem, not a licence to paste the body into the paging channel. Recover keeps the deny. Neither logs the body.
 
 ```mermaid
 flowchart TD
@@ -62,4 +62,4 @@ Provider retries on 5xx can amplify load (6.7). Return 4xx on a bad MAC so retri
 
 ## What this page is not doing
 
-A web-filter name is not this check. Live provider posts are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+A web-filter name is not this check. Do not use live provider posts are out of scope. This site does not mark you as finished. Answer keys are not on this site.

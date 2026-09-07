@@ -48,4 +48,4 @@ A clinic example: notice scan names that leave the imaging root; do not paste fi
 
 ## What this page is not doing
 
-Naming an antivirus product is not the rule. Live host reads are out of scope. This page does not finish a check-in. Answer keys are not on this site.
+Naming an antivirus product is not the rule. Do not use live host reads are out of scope. This page does not finish a check-in. Answer keys are not on this site.

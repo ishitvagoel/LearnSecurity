@@ -79,4 +79,4 @@ Memorized answers; tooling gaps still real. Opening this page does not finish th
 
 ## What this page is not doing
 
-Live LMS attacks. A job-title list as the course. Check-in 1 from a score.
+Do not use live LMS attacks. A job-title list as the course. Check-in 1 from a score.

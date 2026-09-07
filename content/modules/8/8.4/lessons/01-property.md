@@ -81,4 +81,4 @@ Clinic debug build against prod FHIR. A list of what shipped in the APK (10.2).
 
 ## What this page is not doing
 
-Live Play Console, unpacking public APKs, anti-debug cookbooks. Opening this page does not finish a check-in. Answer keys are not on this site.
+Do not use live Play Console, unpacking public APKs, anti-debug cookbooks. Opening this page does not finish a check-in. Answer keys are not on this site.

@@ -7,7 +7,7 @@
 
 Review `labs/7.4/7.4-lab/vulnerable/` as a change to notes-app overnight export. Check whether `exporter({"user_session": "alice", "service": None})` still returns `"alice"`.
 
-You already ran `test_user_session_is_not_worker_identity` — that is the rule. A comment “will bind service later” is not.
+You already ran `test_user_session_is_not_worker_identity`. A comment “will bind service later” is not.
 
 ## Picture: user_session or service fallback / copy request cookies into the job
 

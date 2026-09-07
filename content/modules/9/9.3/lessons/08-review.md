@@ -7,7 +7,7 @@
 
 Review `labs/9.3/9.3-lab/vulnerable/` as a change to the notes app’s security-suite gate. Check whether `{status_asserted: True}` still counts as a security test.
 
-Start at `is_security_test` and the 200-only row, not at a scanner color or a coverage screenshot. You already ran `test_http_200_only_is_not_a_security_test` — that is the rule. A comment “will add isolation later” is not.
+Start at `is_security_test` and the 200-only row, not at a scanner color or a coverage screenshot. You already ran `test_http_200_only_is_not_a_security_test`. A comment “will add isolation later” is not.
 
 ## Picture: assert r.status_code==200 only
 

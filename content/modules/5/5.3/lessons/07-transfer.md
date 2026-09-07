@@ -51,4 +51,4 @@ If a human rotation acknowledgement is in the claim, that step must be something
 
 ## What this page is not doing
 
-Live-target key hunts. Real API keys. This page does not finish a check-in.
+Do not try live-target key hunts. Do not use real API keys. This page does not finish a check-in.

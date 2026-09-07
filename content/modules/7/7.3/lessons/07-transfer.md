@@ -61,4 +61,4 @@ One page. No answer keys. The only running system you may break is `labs/7.3/7.3
 
 ## What this page is not doing
 
-Live-target webhooks. Real patient results. This page does not finish a check-in.
+Do not try live-target webhooks. Do not use real patient results. This page does not finish a check-in.

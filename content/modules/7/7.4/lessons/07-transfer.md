@@ -59,4 +59,4 @@ One page. No answer keys. The only running system you may break is `labs/7.4/7.4
 
 ## What this page is not doing
 
-Live-target queues. Real clinician cookies. This page does not finish a check-in.
+Do not try live-target queues. Do not use real clinician cookies. This page does not finish a check-in.

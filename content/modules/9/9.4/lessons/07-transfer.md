@@ -62,4 +62,4 @@ One page. No answer keys. `labs/9.4/9.4-lab` is the only running system you may 
 
 ## What this page is not doing
 
-Live-target scanning. Real patient findings. Claiming you finished the verification gate from this page.
+Do not try live-target scanning. Do not use real patient findings. This page does not finish the verification gate.

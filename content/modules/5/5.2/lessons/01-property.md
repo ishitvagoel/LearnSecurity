@@ -76,4 +76,4 @@ A clinic example: an SSN column labeled “encrypted” that is Base64.
 
 ## What this page is not doing
 
-Live ciphertext attacks, rolling your own cipher, real SSN values. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live ciphertext attacks, rolling your own cipher, real SSN values. This site does not mark you as finished. Answer keys are not on this site.

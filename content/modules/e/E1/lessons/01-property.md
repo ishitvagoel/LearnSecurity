@@ -83,4 +83,4 @@ A coding assistant in CI. Clinic summarizer over charts.
 
 ## What this page is not doing
 
-Live model APIs, claiming you finished an assurance gate from this page. Answer keys are not on this site.
+Do not use live model APIs. This page does not finish an assurance gate from this page. Answer keys are not on this site.

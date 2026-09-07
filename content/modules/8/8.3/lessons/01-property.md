@@ -80,4 +80,4 @@ Clinic `as=doctor`. OAuth redirect to the app (4.5).
 
 ## What this page is not doing
 
-Live malicious APKs, Intent cookbooks. Opening this page does not finish a check-in. Answer keys are not on this site.
+Do not use live malicious APKs, Intent cookbooks. Opening this page does not finish a check-in. Answer keys are not on this site.

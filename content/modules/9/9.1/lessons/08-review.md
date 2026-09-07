@@ -7,7 +7,7 @@
 
 Review `labs/9.1/9.1-lab/vulnerable/` as a change to the notes app’s coverage check. Check whether a status-only AUTHZ-1 row still counts as covered.
 
-Start at `covered` and the AUTHZ-1 row, not at a scanner color or a PDF screenshot. You already ran `test_status_only_row_is_not_coverage` — that is the rule. A comment “will map tests later” is not.
+Start at `covered` and the AUTHZ-1 row, not at a scanner color or a PDF screenshot. You already ran `test_status_only_row_is_not_coverage`. A comment “will map tests later” is not.
 
 ## Picture: matching any requirement id counts as covered
 

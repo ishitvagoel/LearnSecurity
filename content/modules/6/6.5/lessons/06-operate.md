@@ -11,7 +11,7 @@ Do not log full URLs if they contain tokens (4.3). Do not fetch the denied desti
 
 ## Picture: a denied host is a signal
 
-A deny of a preview URL that is not on the allow-list is a notice-and-recover problem, not a licence to paste the URL into the paging channel. Name the event when you notice it. Recover keeps the deny. Neither fetches the destination.
+A deny of a preview URL that is not on the allow-list is a notice-and-recover problem, not a licence to paste the URL into the paging channel. Recover keeps the deny. Neither fetches the destination.
 
 ```mermaid
 flowchart TD
@@ -59,4 +59,4 @@ A clinic example: notice PDF fetches to hosts that are not on the allow-list; do
 
 ## What this page is not doing
 
-A cloud web-filter name is not this check. Live metadata probes are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+A cloud web-filter name is not this check. Do not use live metadata probes are out of scope. This site does not mark you as finished. Answer keys are not on this site.

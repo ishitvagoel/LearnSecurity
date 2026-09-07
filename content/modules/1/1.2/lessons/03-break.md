@@ -143,4 +143,4 @@ Imagine the same decision is made once, placed in a queue, and used ten minutes 
 
 ## What this page is not doing
 
-Live targets. Ready-made attack recipes. Real people’s data. Do not “fix” the practice by deleting the check.
+Do not use live targets. Do not use ready-made attack recipes. Do not use real people’s data. Do not “fix” the practice by deleting the check.

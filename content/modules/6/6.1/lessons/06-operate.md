@@ -11,7 +11,7 @@ Do not log export names that are patient identifiers. Do not paste filenames int
 
 ## Picture: unexpected child is a signal
 
-A child whose program is `sh` after an export-helper change is a notice-and-recover problem, not a licence to quote filenames in the paging channel. Name the event when you notice it. Recover kills the child and removes the concatenating path. Neither reprints the name.
+A child whose program is `sh` after an export-helper change is a notice-and-recover problem, not a licence to quote filenames in the paging channel. Recover kills the child and removes the concatenating path. Neither reprints the name.
 
 ```mermaid
 flowchart TD
@@ -57,4 +57,4 @@ A clinic example: notice unexpected `sh` under the export worker; do not paste f
 
 ## What this page is not doing
 
-Live command execution is out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live command execution is out of scope. This site does not mark you as finished. Answer keys are not on this site.

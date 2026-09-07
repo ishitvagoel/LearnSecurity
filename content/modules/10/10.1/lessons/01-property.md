@@ -77,4 +77,4 @@ An exception path (E6) that still names the missing threat model and when it exp
 
 ## What this page is not doing
 
-Live GitHub orgs, claiming you finished Gate 10 or M4, or ready-made attack recipes. Answer keys are not on this site.
+Do not use live GitHub orgs. This page does not finish Gate 10 or M4. Do not use ready-made attack recipes. Answer keys are not on this site.

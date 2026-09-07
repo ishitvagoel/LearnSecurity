@@ -11,7 +11,7 @@ Do not log session cookies or note bodies (3.1 / 4.3). Do not attach the token t
 
 ## Picture: leftover session is a signal
 
-A leftover cookie used as the principal is a notice-and-recover problem, not a licence to quote the cookie in the paging channel. Name the event when you notice it. Recover keeps the deny and rotates the worker. Neither reprints Alice’s session.
+A leftover cookie used as the principal is a notice-and-recover problem, not a licence to quote the cookie in the paging channel. Recover keeps the deny and rotates the worker. Neither reprints Alice’s session.
 
 ```mermaid
 flowchart TD
@@ -60,4 +60,4 @@ A clinic example: notice batch-export jobs running as a clinician session on loc
 
 ## What this page is not doing
 
-Naming a zero-trust product is not the rule. Live broker attaches are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Naming a zero-trust product is not the rule. Do not use live broker attaches are out of scope. This site does not mark you as finished. Answer keys are not on this site.

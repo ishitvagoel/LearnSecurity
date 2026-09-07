@@ -53,7 +53,7 @@ A bot that later greps the tree (9.4) is a help. It does not replace the five qu
 | eval(user) | merge | approve | deny |
 | int(user) helper | merge | approve | may allow |
 | README only | merge | treat as reviewed | deny |
-| later bot “looks good” | merge | treat as oracle | deny |
+| later bot “looks good” | merge | treat as the whole check | deny |
 
 A missing “eval(user) × merge × deny” row is how “the screen still looks fine” becomes a yes. Write the hole.
 

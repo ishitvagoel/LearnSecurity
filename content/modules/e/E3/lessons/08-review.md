@@ -7,7 +7,7 @@
 
 Review `labs/E3/e3-lab/vulnerable/` as a change to the notes app's simulated copay. Check whether two `capture("k1")` still leave count 2.
 
-You already ran `test_duplicate_capture_does_not_double_charge` — that is the rule. A comment “will add SEEN later” is not.
+You already ran `test_duplicate_capture_does_not_double_charge`. A comment “will add SEEN later” is not.
 
 ## Picture: two capture(k1) charge twice
 

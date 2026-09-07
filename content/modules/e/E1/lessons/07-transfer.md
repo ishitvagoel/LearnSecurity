@@ -62,4 +62,4 @@ One page. No answer keys. `labs/E1/e1-lab` is the only running system you may br
 
 ## What this page is not doing
 
-Live-model attacks. Public prompt-injection walkthroughs. Claiming you finished an assurance gate from this page.
+Do not run live-model attacks. Do not follow public prompt-injection walkthroughs. This page does not finish an assurance gate.

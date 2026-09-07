@@ -57,4 +57,4 @@ One page. No answer keys. The only running system you may break is `labs/6.1/6.1
 
 ## What this page is not doing
 
-Live-target shells. Real patient filenames. This page does not finish a check-in.
+Do not try live-target shells. Do not use real patient filenames. This page does not finish a check-in.

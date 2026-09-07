@@ -7,7 +7,7 @@
 
 Review `labs/4.3/4.3-lab/vulnerable/` as a change to notes-app session parsing. Check whether `session_from_request` still returns the query token.
 
-You already ran `test_query_string_token_is_rejected` — that is the rule. A comment “will move to cookies later” is not.
+You already ran `test_query_string_token_is_rejected`. A comment “will move to cookies later” is not.
 
 ## Picture: session_from_request uses query
 

@@ -60,4 +60,4 @@ One page. No answer keys. `labs/9.1/9.1-lab` is the only running system you may 
 
 ## What this page is not doing
 
-Live-target governance products. Real patient charts. Claiming you finished the verification gate from this page.
+Do not try live-target governance products. Do not use real patient charts. This page does not finish the verification gate.

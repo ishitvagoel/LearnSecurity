@@ -9,7 +9,7 @@ A misconfigured proxy can start trusting `*` again after `channel_is_https` was 
 
 ## Picture: header versus socket mismatch is a signal
 
-A client header saying https while the socket is http is a notice-and-recover problem, not a licence to quote cookies in the paging channel. Name the event when you notice it. Recover revokes the cleartext cookies. Neither reprints the cookie.
+A client header saying https while the socket is http is a notice-and-recover problem, not a licence to quote cookies in the paging channel. Recover revokes the cleartext cookies. Neither reprints the cookie.
 
 ```mermaid
 flowchart TD
@@ -59,4 +59,4 @@ A clinic example: notice page-https versus API-http; do not paste cookies into t
 
 ## What this page is not doing
 
-Live TLS hunts are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live TLS hunts are out of scope. This site does not mark you as finished. Answer keys are not on this site.

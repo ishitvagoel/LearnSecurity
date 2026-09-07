@@ -63,4 +63,4 @@ One page. No answer keys. `labs/10.1/10.1-lab` is the only running system you ma
 
 ## What this page is not doing
 
-Live-org merge rules. Auto-generating threat models. Real patient charts. Claiming you finished Gate 10 or M4 from this page.
+Do not run live-org merge rules. Do not auto-generate threat models. Do not use real patient charts. This page does not finish Gate 10 or M4.

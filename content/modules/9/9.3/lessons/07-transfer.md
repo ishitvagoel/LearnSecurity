@@ -60,4 +60,4 @@ One page. No answer keys. `labs/9.3/9.3-lab` is the only running system you may 
 
 ## What this page is not doing
 
-Live-target fuzz. Real patient charts. Claiming you finished a later gate from this page.
+Do not try live-target fuzz. Do not use real patient charts. This page does not finish a later gate.

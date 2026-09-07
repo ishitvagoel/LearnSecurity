@@ -45,4 +45,4 @@ One page. No keys. `labs/0.1/0.1-orientation` is the only running system you may
 
 ## What this page is not doing
 
-Live-target walkthroughs. Claiming the first check-in from this page. Ready-made attack recipes “to demonstrate the guide.”
+Do not try live-target walkthroughs. This page does not finish the first check-in. Do not use ready-made attack recipes “to demonstrate the guide.”

@@ -54,4 +54,4 @@ If a human sees a field deny, announce “field not writable.” A silent 200 th
 
 ## What this page is not doing
 
-Naming an API gateway product is not the rule. Public API probes are out of scope. Opening this page does not finish a check-in.
+Naming an API gateway product is not the rule. Do not follow public API probes are out of scope. Opening this page does not finish a check-in.

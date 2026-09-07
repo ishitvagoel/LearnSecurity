@@ -44,4 +44,4 @@ A clinic example: notice FHIR tokens with the wrong hospital aud; do not paste t
 
 ## What this page is not doing
 
-Live identity-provider audits are out of scope. This site does not mark you as finished.
+Do not use live identity-provider audits are out of scope. This site does not mark you as finished.

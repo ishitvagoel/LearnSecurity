@@ -80,4 +80,4 @@ Clinic “share record with partner” POST. postMessage, clickjacking, CORS `*`
 
 ## What this page is not doing
 
-Live third-party CSRF, clickjacking trophies, dumping lab Python into notes. This page does not finish a check-in. Answer keys are not on this site.
+Do not use live third-party CSRF, clickjacking trophies, dumping lab Python into notes. This page does not finish a check-in. Answer keys are not on this site.

@@ -7,7 +7,7 @@
 
 Review `labs/8.3/8.3-lab/vulnerable/` as a change to the notes app’s App Link handling. Check whether `open_link({"as": "admin"})` still switches `current_user()`.
 
-You already ran `test_deeplink_as_param_does_not_switch_user` — that is the rule. A comment “we should ignore extras later” is not. An App Links screenshot is not this review.
+You already ran `test_deeplink_as_param_does_not_switch_user`. A comment “we should ignore extras later” is not. An App Links screenshot is not this review.
 
 ## Picture: current_user = extras['as']
 

@@ -62,4 +62,4 @@ One page. No keys. `labs/2.3/2.3-browser-policy` is the only running system you 
 
 ## What this page is not doing
 
-Real clinics, real patient cookies, real WebView exploits.
+Do not use real clinics, real patient cookies, real WebView exploits.

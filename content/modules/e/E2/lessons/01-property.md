@@ -75,4 +75,4 @@ Trusted Types. COOP/COEP. Clinic: Report-Only as a “HIPAA header.”
 
 ## What this page is not doing
 
-Live script hunts, claiming check-in 7. Answer keys are not on this site.
+Do not use live script hunts, claiming check-in 7. Answer keys are not on this site.

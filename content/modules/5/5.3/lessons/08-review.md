@@ -7,7 +7,7 @@
 
 Review `labs/5.3/5.3-lab/vulnerable/` as a change to notes-app secret rotation. Check whether `auth("sk-lab-hardcoded", current="rotated-now")` is still true.
 
-You already ran `test_hardcoded_default_does_not_auth` — that is the rule. A comment “will rotate later” is not.
+You already ran `test_hardcoded_default_does_not_auth`. A comment “will rotate later” is not.
 
 ## Picture: DEFAULT still accepted
 

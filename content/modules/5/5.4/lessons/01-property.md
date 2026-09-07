@@ -77,4 +77,4 @@ A clinic example: the page uses `https://` while the API socket is `http`. Mutua
 
 ## What this page is not doing
 
-Live TLS attacks, strip-attack walkthroughs, pinning exploits. This site does not mark you as finished. without product evidence. Answer keys are not on this site.
+Do not use live TLS attacks, strip-attack walkthroughs, pinning exploits. This site does not mark you as finished. without product evidence. Answer keys are not on this site.

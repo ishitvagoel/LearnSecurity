@@ -210,4 +210,4 @@ On the document-preview page, hostile influence may arrive as stored document by
 
 ## What this page is not doing
 
-Live targets. Real credentials. Harmful payloads. Answer keys. Do not paste this exercise onto a public API, employer system, or classroom deployment.
+Do not use live targets. Do not use real credentials. Do not use harmful payloads. Answer keys. Do not paste this exercise onto a public API, employer system, or classroom deployment.

@@ -11,7 +11,7 @@ Do not log the user string that would have been eval’d. Do not paste template 
 
 ## Picture: eval in a change is a signal
 
-A pull request whose diff still grants `eval` on a user string is a notice-and-recover problem, not a licence to quote the payload in the paging channel. Name the event when you notice it. Recover blocks the merge and keeps the reject. Neither reprints the payload.
+A pull request whose diff still grants `eval` on a user string is a notice-and-recover problem, not a licence to quote the payload in the paging channel. Recover blocks the merge and keeps the reject. Neither reprints the payload.
 
 ```mermaid
 flowchart TD

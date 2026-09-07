@@ -59,4 +59,4 @@ One page. No answer keys. The only running system you may break is `labs/5.2/5.2
 
 ## What this page is not doing
 
-Live-target decoders. Real SSNs. This page does not finish a check-in.
+Do not try live-target decoders. Do not use real SSNs. This page does not finish a check-in.

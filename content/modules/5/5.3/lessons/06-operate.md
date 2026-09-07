@@ -46,4 +46,4 @@ A clinic example: notice gist-key use; do not paste the key into the ticket. Do 
 
 ## What this page is not doing
 
-Live gist searches are out of scope. This site does not mark you as finished.
+Do not use live gist searches are out of scope. This site does not mark you as finished.

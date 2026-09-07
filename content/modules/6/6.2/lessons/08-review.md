@@ -7,7 +7,7 @@
 
 Review `labs/6.2/6.2-lab/vulnerable/` as a change to the notes app’s HTML drawing. Check whether `render` still leaves `<` as markup.
 
-You already ran `test_angle_brackets_are_encoded` — that is the rule. A comment “we should encode later” is not.
+You already ran `test_angle_brackets_are_encoded`. A comment “we should encode later” is not.
 
 ## Picture: template concatenates title
 

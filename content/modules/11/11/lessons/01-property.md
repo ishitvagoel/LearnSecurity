@@ -94,4 +94,4 @@ A clinic example: revoke a guardian. Full notes-app slice: the same rule across 
 
 ## What this page is not doing
 
-Live tenants, claiming you finished an assurance gate. Answer keys are not on this site.
+Do not use live tenants. This page does not finish an assurance gate. Answer keys are not on this site.

@@ -79,4 +79,4 @@ Clinic group practice switching `org_id` in JSON. A relationship-graph tuple vs 
 
 ## What this page is not doing
 
-Live companies. A famous-bugs list as the syllabus. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live companies. A famous-bugs list as the syllabus. This site does not mark you as finished. Answer keys are not on this site.

@@ -11,7 +11,7 @@ Do not log note bodies in the CSV path (3.1 / 5.1). Do not attach the CSV to the
 
 ## Picture: the fourth try is a signal
 
-A fourth export in the window is a notice-and-recover problem, not a licence to quote note bodies in the paging channel. Name the event when you notice it. Recover keeps the deny and revokes a stolen session. Neither reprints the CSV.
+A fourth export in the window is a notice-and-recover problem, not a licence to quote note bodies in the paging channel. Recover keeps the deny and revokes a stolen session. Neither reprints the CSV.
 
 ```mermaid
 flowchart TD
@@ -61,4 +61,4 @@ If a human sees a quota deny, announce “try tomorrow.” A spinner that retrie
 
 ## What this page is not doing
 
-Public load tests are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Do not follow public load tests are out of scope. This site does not mark you as finished. Answer keys are not on this site.

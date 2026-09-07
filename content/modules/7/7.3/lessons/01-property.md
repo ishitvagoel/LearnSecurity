@@ -82,4 +82,4 @@ Clinic lab-result webhook. Signed redirects. Outbound SSRF (6.5).
 
 ## What this page is not doing
 
-Live Stripe/GitHub attacks, dumping HMAC cookbooks against public endpoints. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live Stripe/GitHub attacks, dumping HMAC cookbooks against public endpoints. This site does not mark you as finished. Answer keys are not on this site.

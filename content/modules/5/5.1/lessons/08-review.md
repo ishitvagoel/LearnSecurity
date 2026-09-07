@@ -7,7 +7,7 @@
 
 This review is about notes-app deletion. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `body_retained("alice")` is still `"secret"` after `delete_account("alice")` if they ship. Start at leftover analytics after delete, not at a scanner color or a contract ticket.
 
-You already ran `test_deleted_account_leaves_no_analytics_body` — that is the rule. A comment “will add warehouse purge later” is not.
+You already ran `test_deleted_account_leaves_no_analytics_body`. A comment “will add warehouse purge later” is not.
 
 ## Picture: problems to find (name them yourself)
 

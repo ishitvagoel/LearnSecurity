@@ -55,4 +55,4 @@ One page. No keys. `labs/8.1/8.1-lab` is the only running system you may break. 
 
 ## What this page is not doing
 
-Live-target mobile attacks. Real BAA flags. This page does not finish a check-in.
+Do not try live-target mobile attacks. Do not use real BAA flags. This page does not finish a check-in.

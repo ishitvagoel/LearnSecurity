@@ -82,4 +82,4 @@ A clinic patient nickname field. Markdown-to-HTML cleaner as a second parser.
 
 ## What this page is not doing
 
-Weaponized attack recipes, live-target walkthroughs, dumping practice Python into notes. Opening this page does not finish a check-in. Answer keys are not on this site.
+Do not use weaponized attack recipes, live-target walkthroughs, dumping practice Python into notes. Opening this page does not finish a check-in. Answer keys are not on this site.

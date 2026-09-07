@@ -53,4 +53,4 @@ Deep-link errors must not trap people in a broken WebView with no keyboard-acces
 
 ## What this page is not doing
 
-Naming a mobile-filter product is not the rule. Live Intent dumps are out of scope. Opening this page does not finish a check-in.
+Naming a mobile-filter product is not the rule. Do not use live Intent dumps are out of scope. Opening this page does not finish a check-in.

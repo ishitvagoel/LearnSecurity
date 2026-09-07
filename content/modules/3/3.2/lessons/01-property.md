@@ -88,4 +88,4 @@ Clinic SMS reminders. The new channel is not in the notes-app HTTP model. Which 
 
 ## What this page is not doing
 
-Live-target scanning, real personal data in the practice, copy-paste exploits, and “green scan means ship.” Answer keys are not on this site.
+Do not try live-target scanning, real personal data in the practice, copy-paste exploits, and “green scan means ship.” Answer keys are not on this site.

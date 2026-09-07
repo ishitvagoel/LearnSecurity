@@ -88,4 +88,4 @@ A clinic patient-portal session cookie, or a React Native WebView cookie bridge.
 
 ## What this page is not doing
 
-Live sites, XSS recipes, copy-paste gadget chains, attacking third-party origins through CORS or CSRF. Answer keys are not on this site.
+Do not use live sites, XSS recipes, copy-paste gadget chains, attacking third-party origins through CORS or CSRF. Answer keys are not on this site.

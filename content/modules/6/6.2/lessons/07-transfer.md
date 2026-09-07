@@ -55,4 +55,4 @@ One page. No keys. `labs/6.2/6.2-lab` is the only running system you may break. 
 
 ## What this page is not doing
 
-Live-target attacks. Real nicknames as patient-data dumps. This page does not finish a check-in.
+Do not try live-target attacks. Do not use real nicknames as patient-data dumps. This page does not finish a check-in.

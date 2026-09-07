@@ -7,7 +7,7 @@
 
 This review is about notes-app logging. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether the body still lands in the log if they ship. Start at `log_event` and the body×log row, not at a scanner color or a spreadsheet.
 
-You already ran `test_note_body_is_not_logged` — that is the rule. A comment “will redact later” is not.
+You already ran `test_note_body_is_not_logged`. A comment “will redact later” is not.
 
 ## Picture: problems to find (name them yourself)
 

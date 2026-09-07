@@ -55,4 +55,4 @@ One page. No keys. `labs/8.3/8.3-lab` is the only running system you may break. 
 
 ## What this page is not doing
 
-Live-target IPC. Real doctor accounts. This page does not finish a check-in.
+Do not try live-target IPC. Do not use real doctor accounts. This page does not finish a check-in.

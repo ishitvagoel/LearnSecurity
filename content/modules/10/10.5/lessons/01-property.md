@@ -96,4 +96,4 @@ Ransomware restore vs note-level integrity. Clinic: close ticket when SIEM is gr
 
 ## What this page is not doing
 
-Live incident systems, claiming you finished an assurance gate. Answer keys are not on this site.
+Do not use live incident systems. This page does not finish an assurance gate. Answer keys are not on this site.

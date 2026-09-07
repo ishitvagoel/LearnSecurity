@@ -11,7 +11,7 @@ Do not log tokens (4.3) or email addresses as if they were public ids. Do not pa
 
 ## Picture: second accept is a signal
 
-A second accept after consume is a notice-and-recover problem, not a licence to quote the token in the paging channel. Name the event when you notice it. Recover removes the extra membership. Neither reprints the token.
+A second accept after consume is a notice-and-recover problem, not a licence to quote the token in the paging channel. Recover removes the extra membership. Neither reprints the token.
 
 ```mermaid
 flowchart TD
@@ -61,4 +61,4 @@ A clinic example: notice guardian-invite replays; do not paste the mail link int
 
 ## What this page is not doing
 
-Live invite replay is out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live invite replay is out of scope. This site does not mark you as finished. Answer keys are not on this site.

@@ -7,7 +7,7 @@
 
 Review `labs/3.2/3.2-lab/vulnerable/` as a change to the notes-app threat list. Check whether `threats_from_scan(True)` still omits `cross-tenant-read`.
 
-You already ran `test_green_scanner_is_not_an_empty_threat_model` — that is the rule. A comment “will threat-model later” is not.
+You already ran `test_green_scanner_is_not_an_empty_threat_model`. A comment “will threat-model later” is not.
 
 ## Picture: threats = [] if scanner_green
 

@@ -7,7 +7,7 @@
 
 Review `labs/8.5/8.5-lab/vulnerable/` as a change to the notes app’s crash telemetry. Check whether `crash_report("secret")` still contains `'secret'`.
 
-Start at `crash_report` and the body×crash row, not at a scanner color or a store screenshot. You already ran `test_crash_report_omits_note_body` — that is the rule. A comment “will redact later” is not.
+Start at `crash_report` and the body×crash row, not at a scanner color or a store screenshot. You already ran `test_crash_report_omits_note_body`. A comment “will redact later” is not.
 
 ## Picture: crash_report includes the body
 

@@ -53,4 +53,4 @@ Developers still need a debug build against **lab** data. Do not ship a spinner 
 
 ## What this page is not doing
 
-Naming an R8 product is not the rule. Live Play traces are out of scope. Opening this page does not finish a check-in.
+Naming an R8 product is not the rule. Do not use live Play traces are out of scope. Opening this page does not finish a check-in.

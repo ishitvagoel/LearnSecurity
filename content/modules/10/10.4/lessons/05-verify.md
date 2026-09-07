@@ -63,4 +63,4 @@ A clinic example: a test that only asserts “container started” is not this t
 
 ## What this page is not doing
 
-Do not treat a live host screenshot as proof. Do not log stack traces. Answer keys are not on this site. The assurance gate stays not finished.
+Do not treat a live host screenshot as proof. Do not log stack traces. Answer keys are not on this site. This page does not finish an assurance check-in.

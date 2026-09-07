@@ -55,4 +55,4 @@ One page. No keys. `labs/7.1/7.1-lab` is the only running system you may break. 
 
 ## What this page is not doing
 
-Live-target API attacks. Real staff flags. This page does not finish a check-in.
+Do not try live-target API attacks. Do not use real staff flags. This page does not finish a check-in.

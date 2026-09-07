@@ -78,4 +78,4 @@ Clinic bulk-export of patients. Notification fan-out. Search complexity later in
 
 ## What this page is not doing
 
-Live load tests against public hosts, dumping lab Python into notes. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live load tests against public hosts, dumping lab Python into notes. This site does not mark you as finished. Answer keys are not on this site.

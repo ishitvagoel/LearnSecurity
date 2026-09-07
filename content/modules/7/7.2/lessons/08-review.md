@@ -7,7 +7,7 @@
 
 Review `labs/7.2/7.2-lab/vulnerable/` as a change to the notes app’s note JSON. Check whether `resolve("member", "secret_internal")` is still true.
 
-You already ran `test_member_cannot_resolve_internal_field` — that is the rule. A comment “will matrix later” is not.
+You already ran `test_member_cannot_resolve_internal_field`. A comment “will matrix later” is not.
 
 ## Picture: resolver / dump always true
 

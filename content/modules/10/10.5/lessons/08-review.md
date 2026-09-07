@@ -7,7 +7,7 @@
 
 Review `labs/10.5/10.5-lab/vulnerable/` as a change to the notes app’s incident close. Check whether `close_incident({"recovery": "todo", "logs": "ok"})` still returns true.
 
-Start at `close_incident` and the recovery-todo row, not at a scanner color or a SIEM screenshot. You already ran `test_cannot_close_without_recovery` — that is the rule. A comment “will restore later” is not.
+Start at `close_incident` and the recovery-todo row, not at a scanner color or a SIEM screenshot. You already ran `test_cannot_close_without_recovery`. A comment “will restore later” is not.
 
 ## Picture: close with recovery todo
 

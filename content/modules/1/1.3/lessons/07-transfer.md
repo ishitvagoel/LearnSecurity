@@ -246,4 +246,4 @@ Transfer is ready when the work:
 
 ## What this page is not doing
 
-Malicious documents. Real converters. Real object stores. Live upload systems. Answer keys are not on this site.
+Malicious documents. Do not use real converters. Do not use real object stores. Do not use live upload systems. Answer keys are not on this site.

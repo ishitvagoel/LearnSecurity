@@ -49,7 +49,7 @@ The lookup helper returns `(sql, params)` (or an ORM bound construct), not a con
 | Live clinic probe | Course rules |
 | Row-level rule as the rule | Extra check, not this rule |
 | HTTP 200 as binding evidence | Wrong observation |
-| Scanner name as the invariant | Awareness after the cause |
+| Scanner name as the rule | Awareness after the cause |
 
 ## Practice
 
@@ -57,4 +57,4 @@ One page. No answer keys. The only running system you may break is `labs/5.5/5.5
 
 ## What this page is not doing
 
-Live-target SQL. Real patient rows. This page does not finish a check-in.
+Do not try live-target SQL. Do not use real patient rows. This page does not finish a check-in.

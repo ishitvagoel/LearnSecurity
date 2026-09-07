@@ -95,4 +95,4 @@ Clinic crash with a fake patient name. Web crash reports (10.5) are the same fie
 
 ## What this page is not doing
 
-Live crash consoles, the public store, public apps, and real people's data. Answer keys are not on this site.
+Do not use live crash consoles, the public store, public apps, and real people's data. Answer keys are not on this site.

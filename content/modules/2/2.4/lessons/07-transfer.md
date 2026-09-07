@@ -48,4 +48,4 @@ One page. No keys. `labs/2.4/2.4-state-time` is the only running system you may 
 
 ## What this page is not doing
 
-Live-target walkthroughs. Clock tricks against NTP. Real card numbers or patient identifiers. This page does not finish a check-in.
+Do not try live-target walkthroughs. Do not use clock tricks against NTP. Do not use real card numbers or patient identifiers. This page does not finish a check-in.

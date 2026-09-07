@@ -11,7 +11,7 @@ Do not paste the matching line into Slack, a ticket, or a lesson note.
 
 ## Picture: alert on the substring, then purge
 
-A redaction miss is a notice-and-recover problem, not a licence to quote the secret in the paging channel. Name the event when you notice it. Recover purges the line. Neither reprints the body.
+A redaction miss is a notice-and-recover problem, not a licence to quote the secret in the paging channel. Recover purges the line. Neither reprints the body.
 
 ```mermaid
 flowchart TD

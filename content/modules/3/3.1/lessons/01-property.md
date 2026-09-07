@@ -100,4 +100,4 @@ A clinic booking card. Chart text vs appointment time are two classes and two pl
 
 ## What this page is not doing
 
-Live log tenants, real patient charts, production log dumps, and “we classified it so it is protected.” Answer keys are not on this site.
+Do not use live log tenants, real patient charts, production log dumps, and “we classified it so it is protected.” Answer keys are not on this site.

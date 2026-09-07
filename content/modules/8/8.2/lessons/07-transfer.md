@@ -57,4 +57,4 @@ One page. No keys. `labs/8.2/8.2-lab` is the only running system you may break. 
 
 ## What this page is not doing
 
-Live-target device forensics. Real charts. This page does not finish a check-in.
+Do not try live-target device forensics. Do not use real charts. This page does not finish a check-in.

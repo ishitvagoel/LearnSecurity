@@ -62,4 +62,4 @@ One page. No answer keys. `labs/9.5/9.5-lab` is the only running system you may 
 
 ## What this page is not doing
 
-Live-target pentest. Real patient charts in findings. Claiming you finished an assurance gate from this page.
+Do not try live-target pentest. Do not use real patient charts in findings. This page does not finish an assurance gate.
