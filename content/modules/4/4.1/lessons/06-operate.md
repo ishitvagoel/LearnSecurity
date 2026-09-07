@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-Even after `delete_user` was repaired once, a replica session store, a refresh token, or a worker can still present `alice`. Then notice the leftover session, contain the replica store, mass-revoke `alice`, and refuse to “help” by logging note bodies.
+A replica session store, refresh token, or worker can still present `alice` after `delete_user` pops the session. Notice that leftover, contain the replica store, mass-revoke `alice`, and do not log note bodies.
 
 Do not paste a personal email or a production cookie into the ticket. Do not log note bodies.
 

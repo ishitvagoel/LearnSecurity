@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-Even after the key includes the company, someone can still leak a body: a CDN config change, a new node, stale-while-revalidate serving an old path-only entry. Then notice the cross-company cache hit, purge the path-only entry, restore the keyed slot, and refuse to “help” by logging note bodies.
+A CDN change, a new node, or stale-while-revalidate can still serve a path-only entry after the cache key includes the company. Purge that entry, restore the keyed slot, and do not log the body.
 
 ## Picture: signal, purge, then secrecy work if bodies escaped
 

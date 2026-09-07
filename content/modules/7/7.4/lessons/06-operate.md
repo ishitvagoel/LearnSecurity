@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-Even after `exporter` was repaired once, a new task can inherit request context again. Then page the Alice-session export, stop the worker, and restore the service bind.
+A new task can inherit the request cookie after `exporter` is bound to the service. Page the Alice-session export, stop the worker, and restore the service bind.
 
 Do not log session cookies or note bodies (3.1 / 4.3). Leave the token off the ticket.
 

@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-Even after `protect` was repaired once, a new encoding wrapper can land in a worker. Then notice the encoding wrapper, contain the worker, re-protect the column, and refuse to “help” by logging note bodies.
+A new encoding wrapper can land in a worker after `protect` prefixes `aesgcm:`. Notice that wrapper, contain the worker, re-protect the column, and do not log note bodies.
 
 Do not log plaintext bodies. Do not paste an SSN into the ticket.
 

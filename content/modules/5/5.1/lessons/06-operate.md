@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-Even after `delete_account` was repaired once, a replica warehouse, a backup, or a support ticket can still hold the body. Then notice the warehouse leftover, contain the replica, purge the body, and refuse to “help” by logging note bodies.
+A replica warehouse, backup, or support ticket can still hold the body after `delete_account` pops the maps. Notice that leftover, contain the replica, purge the body, and do not log note bodies.
 
 Do not paste the chart into the ticket. Do not log bodies.
 

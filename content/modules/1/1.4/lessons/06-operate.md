@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-Even after the button is fixed, someone will still fail recovery: a new exclusion you did not model, a library regression, a coercion event. Then notice the failed recovery, contain the leftover path, restore access, and refuse to “help” by emailing note bodies.
+A new exclusion, a library regression, or a coercion event can still fail recovery after the button is named and keyboard-usable. Notice that failure, contain the leftover path, restore access, and do not email note bodies.
 
 ## Picture: the loop continues without lowering the bar
 

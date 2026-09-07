@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-Even after `log_event` was repaired once, a new handler, an exception printer, or an APM agent can put the body back. Then notice the body in a new handler, contain the drain, purge the line, and refuse to “help” by logging the body again.
+A new handler, exception printer, or APM agent can put the body back after `log_event` redacts. Notice that line, contain the drain, purge it, and do not log the body again.
 
 Do not paste the matching line into Slack, a ticket, or a lesson note.
 

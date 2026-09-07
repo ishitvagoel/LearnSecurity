@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-Even after `review_ok` was repaired once, a later generated helper can put eval back. Then page the eval helper, quarantine the generated file, and restore the reject.
+A later generated helper can put `eval` back after `review_ok` is green. Page that helper, quarantine the file, and keep the reject.
 
 Do not log the user string that would have been eval’d. Do not paste template source with patient fields into chat.
 

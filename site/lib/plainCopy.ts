@@ -1086,6 +1086,14 @@ const PROSE_PHRASES: [RegExp, string][] = [
     /The repaired files ([^.]+)\. Production still needs /g,
     "Those files $1. You still need ",
   ],
+  [
+    /Even after (\u0000C\d+\u0000) was repaired once, /g,
+    "After $1 is green, ",
+  ],
+  [/Even after (.+?) was repaired once, /g, "After $1 is green, "],
+  [/Then page the /g, "Page the "],
+  [/Then notice the /g, "Notice the "],
+  [/ and refuse to [“"]help[”"] by /g, ", and do not "],
 ];
 
 const HIDDEN_LAB_NOTES = [

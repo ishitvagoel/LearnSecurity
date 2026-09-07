@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-Even after `argv_for_list` was repaired once, a plugin path can bring `sh -c` back. Then page the shell spawn, stop the process, and restore the list form.
+A plugin path can glue `sh -c` after `argv_for_list` returns a list. Page the shell spawn, stop the process, and restore the list form.
 
 Do not log export names that are patient identifiers. Do not paste filenames into the ticket if they are patient data.
 

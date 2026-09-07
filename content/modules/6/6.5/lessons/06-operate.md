@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-Even after `allowed` was repaired once, a new webhook path can fetch again. Then page the unexpected fetch, cut the webhook, and keep the deny.
+A new webhook path can fetch after `allowed` denies link-local hosts. Page the unexpected fetch, cut the webhook, and keep the deny.
 
 Do not log full URLs if they contain tokens (4.3). Do not fetch the denied destination “to confirm.”
 
