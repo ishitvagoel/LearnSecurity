@@ -11,7 +11,7 @@ Do not paste the matching line into Slack, a ticket, or a lesson note.
 
 ## Picture: alert on the substring, then purge
 
-If redaction misses, the secret does not belong in the pager. Then purge the line.
+If redaction misses, page the omit — never the secret. Then purge the line.
 
 ```mermaid
 flowchart TD

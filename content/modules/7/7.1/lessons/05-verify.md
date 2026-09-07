@@ -28,7 +28,7 @@ If the broken PATCH still passes, extra keys were never rejected.
 | Extra | Unknown keys do not become columns (`test_unknown_key_does_not_appear`) |
 | Not claimed | GraphQL cost; unused methods; production inventory matches OpenAPI |
 
-The checks are in `labs/7.1/7.1-lab/tests/test_property.py`. `test_is_admin_cannot_be_patched` is there so a binder that writes `is_admin` still fails.
+`labs/7.1/7.1-lab/tests/test_property.py` — a binder that writes `is_admin` must not pass `test_is_admin_cannot_be_patched`.
 
 ```text
 python3 -m pytest labs/7.1/7.1-lab/tests --impl vulnerable
@@ -52,7 +52,7 @@ Call `apply(..., {"is_admin": true})`. `extra = 'forbid'` on a Pydantic model is
 
 ## Use it somewhere new
 
-A 200 from `/patients/{id}` after PATCH `{is_staff:true}` does not prove `is_admin` stayed false (see 9.3). Do not use a public API probe.
+A successful PATCH can still have written `is_admin`. Do not use a public API probe.
 
 ## What this page is not doing
 

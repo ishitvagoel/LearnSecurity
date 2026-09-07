@@ -11,7 +11,7 @@ Keep the eval’d user string and template source with patient fields out of cha
 
 ## Picture: eval in a change is a signal
 
-If a pull request still grants `eval` on a user string, keep the payload out of the pager. Then block the merge and keep the reject.
+If a pull request still grants `eval` on a user string, the alert is the reject, not the payload. Then block the merge and keep the reject.
 
 ```mermaid
 flowchart TD

@@ -33,7 +33,7 @@ Lock so a limited seat cannot be booked twice. The check is sequential consume-o
 
 ## What to look at: the cause, not a hunt
 
-`vulnerable/invite.py` returns true every time. `reset()` exists so tests start clean. `_used` in the broken files is unused. Tests:
+`vulnerable/invite.py` never marks the token used. `reset()` exists so tests start clean. `_used` in the broken files is unused. Tests:
 
 - `test_invite_token_is_single_use` — second `accept("t1")` is false
 - `test_distinct_tokens_are_independent` — `t2` still succeeds once on the repaired files

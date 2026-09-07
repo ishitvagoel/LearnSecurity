@@ -11,7 +11,7 @@ Keep the chart and leftover bodies out of the ticket.
 
 ## Picture: hunt ids, not bodies
 
-After delete, a leftover body must not put leftover notes in the pager. Then purge the partition.
+After delete, a leftover body is a purge miss — leftover notes stay off the ticket. Then purge the partition.
 
 ```mermaid
 flowchart TD

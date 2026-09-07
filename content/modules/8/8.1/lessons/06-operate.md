@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Revoke[Revoke app session if automated]
 ```
 
-A dashboard tile does not prove the server attest.
+A green attest tile is not the server check.
 
 ## Signals that do not become a second leak
 

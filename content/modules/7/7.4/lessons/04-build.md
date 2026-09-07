@@ -26,7 +26,7 @@ Use that individual service account — leftover Alice.
 
 ## What the repaired files must show
 
-Do not treat `fixed/worker.py` as a production broker.
+`fixed/worker.py` is a principal helper, not a queue client.
 
 | After the fix | Must be true |
 |---|---|

@@ -23,7 +23,7 @@ flowchart LR
 | Normal | Short declared length may copy (may pass on both) |
 | Not claimed | A C walkthrough; an awareness-list dashboard; this memory lesson as a check-in; integer wrap |
 
-The checks are in `labs/E4/e4-lab/tests/test_property.py`. `test_copy_does_not_exceed_buffer` is there so `declared_len` plus 8 still fails.
+`labs/E4/e4-lab/tests/test_property.py` fails when `declared_len` plus 8 still copies.
 
 ```text
 python3 -m pytest labs/E4/e4-lab/tests --impl vulnerable

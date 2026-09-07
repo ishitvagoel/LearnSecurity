@@ -29,7 +29,7 @@ Use that standard-library check — empty sig. **Do not POST a live provider.**
 
 ## What the repaired files must show
 
-Do not treat `fixed/hook.py` as a production Stripe integration.
+`fixed/hook.py` checks a MAC, not a Stripe endpoint.
 
 | After the fix | Must be true |
 |---|---|

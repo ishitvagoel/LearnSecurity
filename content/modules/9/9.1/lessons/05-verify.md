@@ -28,7 +28,7 @@ If the broken coverage row still passes, `asserts_isolation` was never required.
 | Abuse | Unsure flags are not coverage (leftover if not in this check) |
 | Not claimed | A real checklist assessment; this check-in; a later draft of a practice guide; that the named test actually isolates |
 
-The test `test_status_only_row_is_not_coverage` is there so membership without an isolation assert cannot count as coverage.
+Membership without an isolation assert must not pass `test_status_only_row_is_not_coverage`.
 
 A row that actually asserts isolation can still look fine. Deny a status-only row. If the broken files do not fail `test_status_only_row_is_not_coverage`, the lab is miswired — fix the wiring, not the assertion.
 

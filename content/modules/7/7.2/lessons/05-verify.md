@@ -26,7 +26,7 @@ If the broken resolve still passes, the field table was never the deny.
 | Service | service × `secret_internal` true |
 | Not claimed | object×company (4.4); extra-key writes (7.1); advanced cache leftover |
 
-The checks are in `labs/7.2/7.2-lab/tests/test_property.py`. `test_member_cannot_resolve_internal_field` is there so a dump that always returns true still fails. `test_member_can_resolve_display_name` is the honest path.
+`labs/7.2/7.2-lab/tests/test_property.py` includes `test_member_cannot_resolve_internal_field` — a dump that always returns true is the miss. `test_member_can_resolve_display_name` is the honest path.
 
 ```text
 python3 -m pytest labs/7.2/7.2-lab/tests --impl vulnerable

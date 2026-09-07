@@ -25,7 +25,7 @@ flowchart LR
 | Normal / deny when missing | missing cookie → deny (may pass on both) |
 | Not claimed | GET mutate; clickjacking; CORS; postMessage |
 
-`test_foreign_origin_post_is_denied` is there so a cookie-only share still fails.
+Foreign-origin POST with no token has to fail `test_foreign_origin_post_is_denied`.
 
 ```text
 python3 -m pytest labs/6.3/6.3-lab/tests --impl vulnerable
@@ -48,7 +48,7 @@ Call `allow_share` on a foreign origin. `SameSite` on a cookie helper is the coo
 
 ## Use it somewhere new
 
-A 200 from `/share` does not prove a foreign origin with `token=None` was denied. Do not run a test that visits a live third-party page.
+A green `/share` is not a foreign-origin deny. Do not run a test that visits a live third-party page.
 
 ## What this page is not doing
 

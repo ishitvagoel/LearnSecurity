@@ -32,7 +32,7 @@ There has to be a stop against scripts that burn quota. Module 3.4 already cappe
 
 ## What to look at: the cause, not a hunt
 
-`vulnerable/limit.py` returns true for every `n`. Tests:
+`vulnerable/limit.py` allows every export count. Tests:
 
 - `test_fourth_export_is_denied`
 - `test_third_export_is_allowed`

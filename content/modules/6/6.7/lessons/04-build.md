@@ -26,7 +26,7 @@ Documented limits have to be actually implemented — `allow(4)`.
 
 ## What the repaired files must show
 
-Do not treat `fixed/limit.py` as a production rate limiter.
+`fixed/limit.py` counts in memory, not on a live export API.
 
 | After the fix | Must be true |
 |---|---|

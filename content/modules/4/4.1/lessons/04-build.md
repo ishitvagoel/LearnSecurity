@@ -28,7 +28,7 @@ All active sessions have to be killed — one synthetic cookie, not proofing who
 
 ## What the repaired files must show
 
-Do not treat `fixed/lifecycle.py` as a production session store.
+Session kill in `fixed/lifecycle.py` is a dict helper, not a clinic store.
 
 | After the fix | Must be true |
 |---|---|

@@ -27,7 +27,7 @@ Use approved authenticated encryption. The check is “not encoding,” not “w
 
 ## What the repaired files must show
 
-Do not treat `fixed/crypto.py` as a production cipher.
+`fixed/crypto.py` is the protect helper, not a live SSN cipher.
 
 | After the fix | Must be true |
 |---|---|

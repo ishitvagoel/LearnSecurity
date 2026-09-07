@@ -28,7 +28,7 @@ A triage checklist wants findings owned — unmapped HIGH.
 
 ## What the repaired files must show
 
-Do not treat `fixed/sast.py` as a production scanner product.
+`fixed/sast.py` is the unmapped-HIGH join, not a scanner product.
 
 | After the fix | Must be true |
 |---|---|

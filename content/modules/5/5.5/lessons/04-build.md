@@ -27,7 +27,7 @@ Use parameterized queries — `fetch_sql`.
 
 ## What the repaired files must show
 
-Do not treat `fixed/query.py` as a production query builder.
+`fixed/query.py` returns a bound pair, not a clinic database handle.
 
 | After the fix | Must be true |
 |---|---|

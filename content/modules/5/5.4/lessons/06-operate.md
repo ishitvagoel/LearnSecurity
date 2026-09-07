@@ -9,7 +9,7 @@ A proxy that trusts `*` again will mint cookies on a cleartext socket. Cookie va
 
 ## Picture: header versus socket mismatch is a signal
 
-If the client header says https while the socket is http, keep cookies out of the pager. Then revoke the cleartext cookies.
+If the client header says https while the socket is http, the alert is the mismatch, not the cookie values. Then revoke the cleartext cookies.
 
 ```mermaid
 flowchart TD

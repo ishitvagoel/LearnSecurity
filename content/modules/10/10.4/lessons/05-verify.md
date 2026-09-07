@@ -28,7 +28,7 @@ If the broken boot check also passes, prod-plus-debug was never exercised.
 | Abuse | Unsure flags are not a production boot (leftover if not in this check) |
 | Not claimed | Live compose; a canary; a check-in; other flags |
 
-`test_prod_debug_must_not_boot` is the case that an always-yes `boot_ok` cannot survive.
+Prod-plus-debug still booting has to fail `test_prod_debug_must_not_boot`.
 
 Do not let production with debug off hide the leftover. Deny production with debug on. If the broken files do not fail `test_prod_debug_must_not_boot`, the lab is miswired — fix the wiring, not the assertion.
 

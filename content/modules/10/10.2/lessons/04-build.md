@@ -26,7 +26,7 @@ Provenance says *how* the artifact was built. It does not replace digest match. 
 
 ## What the repaired files must show
 
-Do not treat `fixed/lock.py` as a production installer.
+Treat `fixed/lock.py` as a hash compare, not `npm install`.
 
 | After the fix | Must be true |
 |---|---|

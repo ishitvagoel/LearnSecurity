@@ -28,7 +28,7 @@ If the broken delete still passes, `body_retained` after delete was never checke
 | Failure | Honest-path tests may pass on both; you still need the leftover-copy tests |
 | Not claimed | Backups (later); a phone's offline cache (later); scheduled warehouse jobs |
 
-The test `test_deleted_account_leaves_no_analytics_body` calls `delete_account` then `body_retained`. That check is there so a leftover warehouse body still fails.
+The test `test_deleted_account_leaves_no_analytics_body` calls `delete_account` then `body_retained`. A leftover warehouse body fails that pair.
 
 A `DELETE FROM notes` string is not `body_retained`. This practice never opens a live warehouse.
 

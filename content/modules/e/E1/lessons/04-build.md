@@ -26,7 +26,7 @@ Use an allow-list before a tool runs — `exec_sql`.
 
 ## What the repaired files must show
 
-Do not treat `fixed/tools.py` as a production agent product.
+`fixed/tools.py` is the tool allow-list, not a model API client.
 
 | After the fix | Must be true |
 |---|---|

@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Revoke[Revoke debug client id]
 ```
 
-A dashboard tile does not prove secrets stayed out of the APK.
+A green secrets tile is not an APK grep.
 
 ## Signals that do not become a second leak
 

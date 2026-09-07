@@ -26,7 +26,7 @@ You need to avoid eval — the lab string.
 
 ## What the repaired files must show
 
-Do not treat `fixed/review.py` as a production review product.
+`fixed/review.py` rejects `eval`, not a review bot.
 
 | After the fix | Must be true |
 |---|---|

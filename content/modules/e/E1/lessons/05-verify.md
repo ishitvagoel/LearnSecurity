@@ -28,7 +28,7 @@ If the broken tool gate still passes, `exec_sql` was never denied.
 | Abuse | Unknown tools still deny |
 | Not claimed | A live vendor API; a famous-bugs dashboard; a check-in; that `search_notes` is encoded |
 
-The test `test_exec_sql_tool_is_denied` is there so always-run `run_tool` still fails.
+An unconstrained `exec_sql` tool has to fail `test_exec_sql_tool_is_denied`.
 
 Keep `search_notes`. Deny `exec_sql`. If the broken files do not fail `test_exec_sql_tool_is_denied`, the lab is miswired — fix the wiring, not the assertion.
 

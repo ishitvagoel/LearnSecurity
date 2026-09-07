@@ -28,7 +28,7 @@ If the broken review still passes, eval-on-user was never rejected.
 | Failure | If you cannot tell whether the diff grants an interpreter, reject |
 | Not claimed | complete check; other expression languages; live GitHub; `exec(` |
 
-`test_eval_on_user_input_is_rejected` is what an always-yes `review_ok` cannot pass. Do not add a working eval payload to “make the test more real.” The lab string `x = eval(user)` is enough.
+Approving `eval(` has to fail `test_eval_on_user_input_is_rejected`. Do not add a working eval payload to “make the test more real.” The lab string `x = eval(user)` is enough.
 
 An `eval` mention in a policy PDF is not `review_ok("x = eval(user)")`. This practice never runs eval on live input.
 

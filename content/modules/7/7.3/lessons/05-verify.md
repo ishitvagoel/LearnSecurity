@@ -28,7 +28,7 @@ If the broken webhook still passes, a missing sig was never rejected.
 | Failure | If you cannot name the signature, do not accept |
 | Not claimed | Replay window; parse-before-MAC; 1.2; live Stripe |
 
-The test `test_missing_signature_is_rejected` is there so an always-true `accept` still fails.
+`test_missing_signature_is_rejected` exists to catch always-true `accept`.
 
 An `hmac` import is not `accept("", "body", "lab-secret")`. This practice never POSTs a live webhook.
 
@@ -53,7 +53,7 @@ Call `accept("", "body", "lab-secret")`. An `hmac` import is the library, not th
 
 ## Use it somewhere new
 
-A 200 from `/webhook` does not prove an empty sig was denied. Do not send a live vendor POST.
+An accepted `/webhook` can still have an empty sig. Do not send a live vendor POST.
 
 ## What this page is not doing
 

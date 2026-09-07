@@ -28,7 +28,7 @@ A design-review guide is vocabulary — incomplete exceptions.
 
 ## What the repaired files must show
 
-Do not treat `fixed/risk.py` as a production register product.
+`fixed/risk.py` is the exception-row helper, not a clinic register.
 
 | After the fix | Must be true |
 |---|---|

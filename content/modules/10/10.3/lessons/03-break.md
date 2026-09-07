@@ -32,7 +32,7 @@ The database god-role lesson already said one shared admin is a blast-radius rul
 
 ## What to look at: the cause, not a hunt
 
-`vulnerable/iam.py` returns true for every role. Tests:
+`vulnerable/iam.py` admits every role. Tests:
 
 - `test_cluster_admin_pod_is_denied`
 - `test_namespaced_app_role_may_run` — `"app"` may pass on both

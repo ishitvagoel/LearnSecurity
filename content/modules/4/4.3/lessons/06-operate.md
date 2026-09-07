@@ -26,7 +26,7 @@ flowchart TD
 
 A token in the query still has to fail `test_query_string_token_is_rejected`. A TLS tile does not keep secrets out of the URL. History, screenshots, and chat pastes remain leftovers you cannot purge — revoke the token anyway.
 
-Recovery is incomplete if the next deploy still builds `?access_token=` in a Next.js share helper. Grep the frontend for query builders the same day you rotate the signing key, or the next copied URL re-issues the leak. uvicorn will keep printing the query unless the access-log format changes; notice still belongs in `session_from_request` before any log line is written.
+`?access_token=` in the Next.js share helper is still a leak. Grep the frontend for query builders the same day you rotate the signing key, or the next copied URL re-issues the leak. uvicorn will keep printing the query unless the access-log format changes; notice still belongs in `session_from_request` before any log line is written.
 
 ## What the framework does vs what you still have to check
 

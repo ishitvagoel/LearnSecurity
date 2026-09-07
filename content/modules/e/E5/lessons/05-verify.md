@@ -23,7 +23,7 @@ flowchart LR
 | Normal | session A, body A → A (may pass on both) |
 | Not claimed | relationship graph; famous-bugs dashboard; this GraphQL lesson as a check-in; search/cache keys |
 
-`test_body_cannot_switch_tenant` is there so body-wins `tenant_for` still fails.
+Switch company from the JSON body and `test_body_cannot_switch_tenant` has to stay red.
 
 ```text
 python3 -m pytest labs/E5/e5-lab/tests --impl vulnerable

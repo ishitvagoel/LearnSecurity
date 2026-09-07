@@ -27,7 +27,7 @@ If the broken renderer still passes, encoding was never the assertion.
 | Wrong input / abuse | `<` becomes `&lt;`; extra tags absent; broken files must fail |
 | Not claimed | Attribute / JavaScript / URL contexts; live page attacks; content-security enforcement |
 
-The checks are in `labs/6.2/6.2-lab/tests/test_property.py`. `test_angle_brackets_are_encoded` is there so unencoded markup still fails. The tame marker is enough; do not add an attack recipe to the check.
+Unencoded markup keeps `test_angle_brackets_are_encoded` red (`labs/6.2/6.2-lab/tests/test_property.py`). The tame marker is enough; do not add an attack recipe to the check.
 
 ```text
 python3 -m pytest labs/6.2/6.2-lab/tests --impl vulnerable
@@ -50,7 +50,7 @@ Call `render`. A `Content-Security-Policy` header is the policy name, not the en
 
 ## Use it somewhere new
 
-A 200 from a nickname save does not prove `<` was encoded (see 9.3). Do not run a check that loads a live board.
+A saved nickname can still echo raw `<`. Do not run a check that loads a live board.
 
 ## What this page is not doing
 

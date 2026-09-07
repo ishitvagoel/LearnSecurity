@@ -11,7 +11,7 @@ Keep token-bearing URLs out of the ticket. Do not fetch the denied destination �
 
 ## Picture: a denied host is a signal
 
-If a preview URL is not on the allow-list, do not paste the URL into the pager. Then keep the deny. Do not fetch the destination.
+If a preview URL is not on the allow-list, leave the URL off Slack and the ticket. Then keep the deny. Do not fetch the destination.
 
 ```mermaid
 flowchart TD
@@ -43,7 +43,7 @@ A query token in a pasted URL is a second copy of the 4.3 leak for whoever is on
 
 An “HTTPS only” toggle does not keep link-local URLs off the allow-list. A link-local URL still has to fail `test_link_local_metadata_is_denied`. Webhook delivery (7.3) is another deputy; name it before you fetch.
 
-Recovery is incomplete if the next worker still calls `requests.get` on the form URL. Grep importers the same day you keep the deny, and **do not fetch** the denied destination to confirm.
+Form-URL `requests.get` still has to be gone from importers. Grep importers the same day you keep the deny, and **do not fetch** the denied destination to confirm.
 
 ## What the framework does vs what you still have to check
 

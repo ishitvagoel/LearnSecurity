@@ -11,7 +11,7 @@ Keep personal emails, production cookies, and note bodies out of the ticket.
 
 ## Picture: alert on use after deleted
 
-After delete, a leftover cookie must not put notes in the pager. Then mass-revoke.
+After delete, a leftover cookie is a revoke miss — do not put notes on the alert. Then mass-revoke.
 
 ```mermaid
 flowchart TD

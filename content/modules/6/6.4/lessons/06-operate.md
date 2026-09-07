@@ -28,7 +28,7 @@ On a broken resolve, skip the patient filename on the log line.
 
 A log product and an antivirus name do not prove this path rule. `..` still has to fail `test_dotdot_does_not_escape_root`. UUID stored filenames do not bind the resolved prefix. Export and unzip paths still walk `..` if you only bound the upload helper.
 
-Recovery is incomplete if the next route still joins `UploadFile.filename` without canonicalize. Grep export and unzip helpers the same day you restore a stray file, or the next scan re-issues the escape.
+Raw `UploadFile.filename` joins still escape after restore. Grep export and unzip helpers the same day you restore a stray file, or the next scan re-issues the escape.
 
 ## What the framework does vs what you still have to check
 

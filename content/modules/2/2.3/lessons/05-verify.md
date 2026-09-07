@@ -24,7 +24,7 @@ flowchart LR
 | When things break | Missing flag on a session name is a defect, not a silent readable default |
 | Not claimed | XSS impossible; CSP3 enforced; CORS correct; SameSite complete |
 
-It calls `js_read_session` on a dummy cookie with `httponly: True` and `secure: True`. That check is there so a script-readable session still fails.
+It calls `js_read_session` on a dummy cookie with `httponly: True` and `secure: True`. A script-readable session is the fail case.
 
 ```text
 python3 -m pytest labs/2.3/2.3-browser-policy/tests --impl vulnerable

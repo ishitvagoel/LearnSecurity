@@ -32,7 +32,7 @@ You need to avoid `eval` and similar dynamic execution. Module 6.1 already said 
 
 ## What to look at: the cause, not a hunt
 
-`vulnerable/review.py` returns true for every string. Tests:
+`vulnerable/review.py` approves every diff string. Tests:
 
 - `test_eval_on_user_input_is_rejected`
 - `test_honest_diff_without_eval_may_pass` — `int(user)` may pass on both

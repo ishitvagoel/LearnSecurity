@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Flip[add enforcing header]
 ```
 
-A dashboard tile does not prove the enforcing header is present.
+A green CSP tile is not an enforcing header.
 
 ## Signals that do not become a second leak
 

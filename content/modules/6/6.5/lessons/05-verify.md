@@ -28,7 +28,7 @@ If the broken unfurl still passes, the link-local deny was never the case.
 | Failure | If you cannot name the host, do not fetch |
 | Not claimed | Live fetch; DNS rebinding; redirects; IPv6 |
 
-The test `test_link_local_metadata_is_denied` is there so a scheme-only allow still fails. The destination is a **string** in the practice files — do not send packets to it.
+A scheme-only allow is the case `test_link_local_metadata_is_denied` exists to catch. The destination is a **string** in the practice files — do not send packets to it.
 
 An `https` prefix check is not `allowed` on the link-local string. This practice never fetches.
 

@@ -23,7 +23,7 @@ flowchart LR
 | Wrong input / abuse | `aud=other-api` and missing `aud` are false; broken files must fail |
 | Not claimed | PKCE; JWKS; DPoP; who-is-allowed on notes |
 
-The checks are in `labs/4.5/4.5-lab/tests/test_property.py`. `test_wrong_audience_is_rejected` is there so a wrong-audience token accepted as a session still fails.
+`labs/4.5/4.5-lab/tests/test_property.py` names `test_wrong_audience_is_rejected`. A wrong-audience token accepted as a session is the miss.
 
 ```text
 python3 -m pytest labs/4.5/4.5-lab/tests --impl vulnerable

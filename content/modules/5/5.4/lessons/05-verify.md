@@ -28,7 +28,7 @@ If the broken channel check still passes, header-versus-socket was never compare
 | Failure | unknown scheme does not count as https |
 | Not claimed | Certificate checks; mutual TLS; pinning; encrypted client hello |
 
-The test `test_client_forwarded_proto_is_not_tls` calls `channel_is_https` with header https and socket http. That check is there so a client header counted as TLS still fails.
+The test `test_client_forwarded_proto_is_not_tls` calls `channel_is_https` with header https and socket http. Counting a client header as TLS is why that call exists.
 
 An `https` tile on a dashboard is not `channel_is_https` on the mismatch. This practice never opens a live load balancer.
 

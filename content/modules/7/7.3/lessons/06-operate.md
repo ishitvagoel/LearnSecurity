@@ -11,7 +11,7 @@ Skip callback bodies, `lab-secret`, and the HL7/JSON payload in the ticket. Do n
 
 ## Picture: a missing sig is a signal
 
-If a callback is missing or has a wrong MAC, do not paste the body into the pager. Then keep the deny. Do not log the body.
+If a callback is missing or has a wrong MAC, the reject is enough — do not attach the body. Then keep the deny. Do not log the body.
 
 ```mermaid
 flowchart TD
@@ -42,7 +42,7 @@ Quoting the raw body or `lab-secret` in the ticket is a second copy of the 3.1 /
 
 A “webhooks signed” checkbox does not reject a missing MAC. A missing MAC still has to fail `test_missing_signature_is_rejected`. Billing, export-ready, and invite-used callbacks still need the same missing-MAC deny.
 
-Recovery is incomplete if the next route still returns true for an empty header. Grep callback paths the same day you keep the deny, and **do not POST a live provider** to confirm.
+Empty-header true still has to be gone from callback paths. Grep callback paths the same day you keep the deny, and **do not POST a live provider** to confirm.
 
 ## What the framework does vs what you still have to check
 

@@ -24,7 +24,7 @@ TLS has to have no cleartext fallback — the scheme check.
 
 ## What the repaired files must show
 
-Do not treat `fixed/channel.py` as a production load balancer.
+`fixed/channel.py` inspects a tuple, not a TLS terminator.
 
 | After the fix | Must be true |
 |---|---|

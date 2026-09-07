@@ -28,7 +28,7 @@ If the broken crash report still passes, the body substring was never redacted.
 | Abuse | Unsure values are not attached (leftover if not in this check) |
 | Not claimed | A real crash console; the public store; screenshot pipelines; vendor DLP |
 
-The test `test_crash_report_omits_note_body` is there so a report that includes the body still fails.
+`test_crash_report_omits_note_body` watches for a report that still includes the body.
 
 Keep a crash report that only proves the stack is present. Omit the body. If the broken files do not fail `test_crash_report_omits_note_body`, the lab is miswired — fix the wiring, not the assertion.
 

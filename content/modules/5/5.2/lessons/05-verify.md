@@ -28,7 +28,7 @@ If the broken protect still passes, you never decoded `protect("secret")` as Bas
 | Failure | If the library is missing, refuse the write — do not store plaintext |
 | Not claimed | Real AES-GCM; key storage; nonce uniqueness |
 
-The test `test_protect_is_not_mere_encoding` is there so reversible encoding still fails.
+`test_protect_is_not_mere_encoding` stays red on reversible encoding.
 
 An `AES` comment is not a decode of `protect("secret")`. This practice never opens a live column.
 

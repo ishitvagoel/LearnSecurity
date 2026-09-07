@@ -28,7 +28,7 @@ If the broken read still passes, B-after-revoke was never the case you ran.
 | Normal | B before revoke → body (may pass on both) |
 | Not claimed | live clinic; a check-in; worker or cache wipe |
 
-The test `test_revoked_share_cannot_read` is there so no-op `revoke` still fails. `conftest.py` calls `reset()` so grant state does not leak.
+`test_revoked_share_cannot_read` watches no-op `revoke`. `conftest.py` calls `reset()` so grant state does not leak.
 
 Keep The owner after revoke, and B before revoke,. Deny B after revoke. If the broken files do not fail `test_revoked_share_cannot_read`, the lab is miswired — fix the wiring, not the assertion.
 
@@ -53,7 +53,7 @@ Call `read("n1", "B")` after `revoke("n1", "B")`. A README heading is not the ne
 
 ## Use it somewhere new
 
-A 200 from revoke is not the next `read`. Do not use a live clinic system.
+A successful revoke can still leave B able to `read`. Do not use a live clinic system.
 
 ## What this page is not doing
 

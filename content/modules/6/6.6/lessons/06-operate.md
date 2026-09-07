@@ -11,7 +11,7 @@ Keep tokens, email addresses, and the mail link out of the ticket.
 
 ## Picture: second accept is a signal
 
-If a second accept lands after consume, keep the token out of the pager. Then remove the extra membership.
+If a second accept lands after consume, name the extra membership — not the token. Then remove the extra membership.
 
 ```mermaid
 flowchart TD

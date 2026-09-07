@@ -7,7 +7,7 @@
 
 Treat `labs/10.2/10.2-lab/vulnerable/` as a CI-install change. Does `install_ok("aaa", "bbb")` still return true?
 
-Compare the two hash strings in `install_ok`. An SBOM screenshot can wait. The review is whether `test_hash_mismatch_refuses_install` passes, not whether someone wrote “will pin later.”
+Compare the two hash strings in `install_ok`. An SBOM screenshot can wait. Mismatched hashes that still install are the review fail. “will pin later” does not count.
 
 ## Picture: install_ok true on hash mismatch
 

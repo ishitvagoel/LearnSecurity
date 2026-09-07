@@ -28,7 +28,7 @@ If the broken accept still passes, empty owner was never rejected.
 | Normal | complete record may accept (may pass on both) |
 | Not claimed | a maturity dashboard; a pledge; a check-in; that anyone reads the register |
 
-The test `test_exception_needs_owner_review_and_wcag` is there so always-accept `accept_exception` still fails.
+Incomplete exception rows have to fail `test_exception_needs_owner_review_and_wcag`.
 
 A complete exception row is not the whole check. Deny a row with no owner. If the broken files do not fail `test_exception_needs_owner_review_and_wcag`, the lab is miswired — fix the wiring, not the assertion.
 

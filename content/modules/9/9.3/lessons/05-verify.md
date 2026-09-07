@@ -28,7 +28,7 @@ If the broken suite still passes, `status_asserted` alone was never refused as a
 | Abuse | fuzz with no named bad result must not count as covered |
 | Not claimed | a real testing-guide assessment; a later gate; fuzz oracles; that the named case matches who-is-allowed |
 
-The test `test_http_200_only_is_not_a_security_test` is there so a 200-only row cannot count as a security test.
+`test_http_200_only_is_not_a_security_test` refuses to count a 200-only row as a security test.
 
 A row that names the bad result and asserts status may stay allowed. Deny a test that only checks HTTP 200. If the broken files do not fail `test_http_200_only_is_not_a_security_test`, the lab is miswired — fix the wiring, not the assertion.
 

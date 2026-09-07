@@ -23,7 +23,7 @@ flowchart LR
 | Normal | first k1 → may charge (may pass on both) |
 | Not claimed | live Stripe; card-network scope; this payments lesson as a check-in; webhook path |
 
-The checks are in `labs/E3/e3-lab/tests/test_property.py`. `test_duplicate_capture_does_not_double_charge` is there so always-append `capture` still fails. `reset()` keeps ledger state from leaking.
+Ledger always-append is why `test_duplicate_capture_does_not_double_charge` lives in `labs/E3/e3-lab/tests/test_property.py`. `reset()` keeps ledger state from leaking.
 
 ```text
 python3 -m pytest labs/E3/e3-lab/tests --impl vulnerable

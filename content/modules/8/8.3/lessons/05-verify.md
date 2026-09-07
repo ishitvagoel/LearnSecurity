@@ -27,7 +27,7 @@ If the broken link still passes, identity keys in extras were never dropped.
 | Wrong input / abuse | `as=admin` keeps alice; broken files must fail (`test_deeplink_as_param_does_not_switch_user`) |
 | Not claimed | WebView; custom schemes; live OAuth; real `exported` flags |
 
-The checks are in `labs/8.3/8.3-lab/tests/test_property.py`. `test_deeplink_as_param_does_not_switch_user` is there so a link that switches the principal still fails.
+`labs/8.3/8.3-lab/tests/test_property.py` holds `test_deeplink_as_param_does_not_switch_user` because a link must not switch the principal.
 
 ```text
 python3 -m pytest labs/8.3/8.3-lab/tests --impl vulnerable

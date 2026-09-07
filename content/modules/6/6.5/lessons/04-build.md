@@ -29,7 +29,7 @@ The allow-list has to run before calling another service — `allowed`. **Do not
 
 ## What the repaired files must show
 
-Do not treat `fixed/ssrf.py` as a production egress proxy.
+`fixed/ssrf.py` is the allow-list check, not a live fetch.
 
 | After the fix | Must be true |
 |---|---|

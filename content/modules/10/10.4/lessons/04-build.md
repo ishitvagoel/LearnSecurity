@@ -26,7 +26,7 @@ A checklist that wants debug off in production covers prod plus debug. The check
 
 ## What the repaired files must show
 
-Do not treat `fixed/cfg.py` as a production compose product.
+Booting a live host is outside `fixed/cfg.py`.
 
 | After the fix | Must be true |
 |---|---|

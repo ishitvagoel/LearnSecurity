@@ -32,7 +32,7 @@ Earlier lessons already said posters are not gates. This check is **accountabili
 
 ## What to look at: the cause, not a hunt
 
-`vulnerable/risk.py` returns true for every dict. Tests:
+`vulnerable/risk.py` accepts every exception dict. Tests:
 
 - `test_exception_needs_owner_review_and_wcag`
 - `test_complete_exception_may_be_accepted` — alice + date + accessibility flag may pass on both

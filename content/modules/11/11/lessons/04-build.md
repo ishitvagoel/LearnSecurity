@@ -28,7 +28,7 @@ Permission has to be enforced — post-revoke read.
 
 ## What the repaired files must show
 
-Do not treat `fixed/capstone.py` as a production share product.
+The share map in `fixed/capstone.py` is local practice, not a clinic product.
 
 | After the fix | Must be true |
 |---|---|

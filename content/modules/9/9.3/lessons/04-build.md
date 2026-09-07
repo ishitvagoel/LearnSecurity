@@ -26,7 +26,7 @@ A testing standard that says “test against the requirement” is vocabulary �
 
 ## What the repaired files must show
 
-Do not treat `fixed/stest.py` as a production scanner.
+`fixed/stest.py` classifies a 200-only row, not a clinic suite.
 
 | After the fix | Must be true |
 |---|---|

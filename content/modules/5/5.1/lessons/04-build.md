@@ -29,7 +29,7 @@ Sensitive data must not be sent to an untrusted second party. The check is the d
 
 ## What the repaired files must show
 
-Do not treat `fixed/lifecycle.py` as a production warehouse.
+This `fixed/lifecycle.py` only clears a warehouse stub, not a clinic lake.
 
 | After the fix | Must be true |
 |---|---|

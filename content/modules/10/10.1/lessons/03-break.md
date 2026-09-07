@@ -32,7 +32,7 @@ The threat-modeling lessons (3.2) already said how to write the model. This chec
 
 ## What to look at: the cause, not a hunt
 
-`vulnerable/sdl.py` returns true for every dict. Tests:
+`vulnerable/sdl.py` merges every change dict. Tests:
 
 - `test_merge_requires_threat_model_id`
 - `test_pr_with_threat_model_may_merge` — `{"threat_model": "TM-12"}` may pass on both

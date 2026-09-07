@@ -30,7 +30,7 @@ If the broken widget also passes, you never checked `mouse_only`, the name, or t
 | Abuse | Sharing an admin session to skip recovery is **out of band** here: record it as leftover risk, not as a check in this folder |
 | When things break | Missing name or keyboard fails closed (`is_usable_accessible` is false) |
 
-It calls `recovery.recovery_confirm_control()` and asserts `is_usable_accessible`. That check is there so inaccessible recovery still fails.
+It calls `recovery.recovery_confirm_control()` and asserts `is_usable_accessible`. Inaccessible recovery keeps that assert red.
 
 HTTP 200 does not prove the confirm is named and keyboard-usable. This practice never opens a network socket.
 

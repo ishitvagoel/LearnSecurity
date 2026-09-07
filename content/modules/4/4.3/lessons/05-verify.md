@@ -24,7 +24,7 @@ flowchart LR
 | Header | Authorization still works |
 | Not claimed | Production Referer; magic-link exchange; HttpOnly on the wire |
 
-The checks are in `labs/4.3/4.3-lab/tests/test_property.py`. `test_query_string_token_is_rejected` is there so a query-minted session still fails.
+Checks live at `labs/4.3/4.3-lab/tests/test_property.py`. A query-minted session is what `test_query_string_token_is_rejected` rejects.
 
 ```text
 python3 -m pytest labs/4.3/4.3-lab/tests --impl vulnerable

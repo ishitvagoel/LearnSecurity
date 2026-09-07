@@ -28,7 +28,7 @@ Industry “recover” is an outcome — close-without-recovery.
 
 ## What the repaired files must show
 
-Do not treat `fixed/ir.py` as a production incident product.
+`fixed/ir.py` is the close-gate, not an incident console.
 
 | After the fix | Must be true |
 |---|---|

@@ -7,7 +7,7 @@
 
 Look at `labs/7.4/7.4-lab/vulnerable/` as overnight export. Does `exporter({"user_session": "alice", "service": None})` still return `"alice"`?
 
-The review is whether `test_user_session_is_not_worker_identity` passes, not whether someone wrote “will bind service later.”
+A leftover alice cookie on the job is the review fail. “will bind service later” does not count.
 
 ## Picture: user_session or service fallback / copy request cookies into the job
 

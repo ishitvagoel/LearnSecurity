@@ -28,7 +28,7 @@ If the broken export still passes, `sh -c` was never the child you inspected.
 | Failure | If you cannot spawn without a shell, do not spawn |
 | Not claimed | live `ls`; argument-injection strings; CSV formula |
 
-The test `test_does_not_invoke_shell` is there so a shell string still fails. Do not add a name from the hostile class — extra commands, substitutions, or pipes a shell would parse — to “make the test more real.” Honest `notes` is enough.
+A shell string is the miss `test_does_not_invoke_shell` is watching. Do not add a name from the hostile class — extra commands, substitutions, or pipes a shell would parse — to “make the test more real.” Honest `notes` is enough.
 
 A `shell=False` comment is not `argv_for_list`. This practice never starts a live process.
 

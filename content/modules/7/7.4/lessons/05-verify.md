@@ -28,7 +28,7 @@ If the broken worker still passes, leftover Alice was never the principal you ca
 | Mixed | alice + wrong service → `None` |
 | Not claimed | later originating-subject check (advanced); poison loops; live task library |
 
-The test `test_user_session_is_not_worker_identity` is there so a leftover cookie that becomes the principal still fails.
+A leftover cookie becoming the principal is the miss `test_user_session_is_not_worker_identity` names.
 
 A `worker-sc` string in YAML is not `exporter({"user_session": "alice", "service": None})`. This practice never opens a public broker.
 

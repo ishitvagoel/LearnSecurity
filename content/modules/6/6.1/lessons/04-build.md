@@ -27,7 +27,7 @@ Pass arguments as parameters — `argv_for_list`.
 
 ## What the repaired files must show
 
-Do not treat `fixed/argv.py` as a production process launcher.
+`fixed/argv.py` builds a list, not a live export process.
 
 | After the fix | Must be true |
 |---|---|

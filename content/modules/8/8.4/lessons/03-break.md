@@ -32,7 +32,7 @@ Topic 8.1 already said the APK is hostile. This rule is **debug must not call pr
 
 ## What to read in the broken files
 
-`vulnerable/build.py` returns true for every pair. Checks:
+`vulnerable/build.py` allows every build/attest pair. Checks:
 
 - `test_debug_build_cannot_call_prod_export`
 - `test_release_with_attest_may_call_prod`

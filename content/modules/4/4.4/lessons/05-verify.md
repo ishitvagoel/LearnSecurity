@@ -23,7 +23,7 @@ flowchart LR
 | Wrong input / abuse | bob×n2, alice×n3, eve×n1, eve×n3 are false; broken files must fail |
 | Not claimed | Title vs body; search index; worker; row-level rules |
 
-`test_grant_on_n1_is_not_grant_on_n2` is there so leftover permission still fails.
+`test_grant_on_n1_is_not_grant_on_n2` names leftover permission on n2 as the miss.
 
 ```text
 python3 -m pytest labs/4.4/4.4-lab/tests --impl vulnerable

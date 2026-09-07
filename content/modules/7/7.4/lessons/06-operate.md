@@ -11,7 +11,7 @@ Session cookies, note bodies, and the leftover token do not go in the ticket.
 
 ## Picture: leftover session is a signal
 
-If a leftover cookie is used as the principal, keep the cookie out of the pager. Then keep the deny and rotate the worker.
+If a leftover cookie is used as the principal, do not reprint the cookie on the alert. Then keep the deny and rotate the worker.
 
 ```mermaid
 flowchart TD

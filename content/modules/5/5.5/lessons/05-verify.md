@@ -28,7 +28,7 @@ If the broken report still passes, concatenated SQL was never the failing query.
 | Failure | If you cannot bind, do not query |
 | Not claimed | ORDER BY identifiers; live row-level rules; NoSQL operators |
 
-The test `test_query_is_bound_not_concatenated` is there so a concatenated `str` still fails. The hostile `note_id` in that test is **data** for the params tuple — a class of extra grammar, not a cookbook to paste into a live query.
+`test_query_is_bound_not_concatenated` catches a concatenated `str`. The hostile `note_id` in that test is **data** for the params tuple — a class of extra grammar, not a cookbook to paste into a live query.
 
 A `%s` inside concatenated SQL is not the `(sql, params)` shape. This practice never opens a live database.
 
@@ -53,7 +53,7 @@ Assert the `(sql, params)` shape. A `%s` inside concatenated SQL is still a stri
 
 ## Use it somewhere new
 
-A 200 from search does not prove the query was a bound tuple (see 9.3). Do not run a test that hits a live clinic system.
+A green search still can be concatenated SQL. Do not run a test that hits a live clinic system.
 
 ## What this page is not doing
 

@@ -32,7 +32,7 @@ The isolation lesson already said HTTP 200 is not a security test. This check is
 
 ## What to look at: the cause, not a hunt
 
-`vulnerable/pentest.py` returns true for every dict. Tests:
+`vulnerable/pentest.py` never looks at `retest`. Tests:
 
 - `test_cannot_close_without_retest`
 - `test_passing_retest_may_close` — `{retest: "pass"}` may pass on both

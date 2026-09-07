@@ -11,7 +11,7 @@ Patient export names and filenames do not go in the ticket.
 
 ## Picture: unexpected child is a signal
 
-If a child program is `sh` after an export-helper change, keep filenames out of the pager. Then kill the child and remove the concatenating path.
+If a child program is `sh` after an export-helper change, the alert names `sh`, not the filename. Then kill the child and remove the concatenating path.
 
 ```mermaid
 flowchart TD

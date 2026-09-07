@@ -29,7 +29,7 @@ If the broken ingest also passes, you never compared ACL tenant to stored tenant
 | Wrong input / abuse | Messy duplicate keys: refused **or** both tenants identical |
 | When things break | Uncertainty does not persist a body under a guessed company |
 
-The checks are `test_unambiguous_json_is_accepted` and `test_duplicate_tenant_keys_are_one_meaning`. The second is there so last-key-wins `acl_tenant != stored_tenant` still fails.
+The checks are `test_unambiguous_json_is_accepted` and `test_duplicate_tenant_keys_are_one_meaning`. Last-key-wins `acl_tenant != stored_tenant` is why the second one exists.
 
 ```text
 python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl vulnerable

@@ -28,7 +28,7 @@ If the broken accept still passes, the second `t1` was never denied. The first a
 | Failure | store error denies (named in review) |
 | Not claimed | threaded race; mail delivery; lock semantics |
 
-The test `test_invite_token_is_single_use` is there so a second true still fails. Sequential calls are enough; do not add a race harness.
+A second true is the miss `test_invite_token_is_single_use` records. Sequential calls are enough; do not add a race harness.
 
 A `UNIQUE` keyword is not two `accept("t1")` calls. This practice never opens a live mailer.
 
@@ -53,7 +53,7 @@ Call `accept("t1")` twice. A `UNIQUE` keyword in a migration is the index you st
 
 ## Use it somewhere new
 
-A 200 from `/accept` does not prove the second join was denied (see 9.3). Do not run a test that clicks a live mail link.
+`/accept` can return 200 on a second join. Do not run a test that clicks a live mail link.
 
 ## What this page is not doing
 

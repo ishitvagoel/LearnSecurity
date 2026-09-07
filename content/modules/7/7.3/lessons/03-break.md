@@ -32,7 +32,7 @@ Use a standard-library MAC. Module 5.4 already said TLS proves a hop; this rule 
 
 ## What to look at: the cause, not a live POST
 
-`vulnerable/hook.py` returns true for every triple. Tests:
+`vulnerable/hook.py` accepts every signature triple. Tests:
 
 - `test_missing_signature_is_rejected`
 - `test_wrong_signature_is_rejected`

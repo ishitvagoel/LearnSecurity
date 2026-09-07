@@ -11,7 +11,7 @@ Keep note bodies, bound parameter values that are bodies, and patient names out 
 
 ## Picture: error shape is a signal
 
-If SQL syntax errors spike after a query helper change, keep note bodies out of the pager. Then stop the concatenating path and restore if needed.
+If SQL syntax errors spike after a query helper change, page the concatenating helper — never the note text. Then stop the concatenating path and restore if needed.
 
 ```mermaid
 flowchart TD

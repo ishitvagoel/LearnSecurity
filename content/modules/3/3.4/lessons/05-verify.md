@@ -24,7 +24,7 @@ flowchart LR
 | Sixth | Does not increment past 5 |
 | Not claimed | Production locks; GraphQL; rate limits; awareness-list compliance |
 
-The checks are in `labs/3.4/3.4-lab/tests/test_property.py`. `test_share_cap_is_enforced` is there so a sixth grant still fails.
+Open `labs/3.4/3.4-lab/tests/test_property.py`. Cap 5 is a lie if a sixth grant still lands.
 
 ```text
 python3 -m pytest labs/3.4/3.4-lab/tests --impl vulnerable

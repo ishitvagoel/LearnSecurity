@@ -28,7 +28,7 @@ If the broken flavor still passes, debug-to-prod was never denied.
 | Extra | release + fail → false (`test_release_without_attest_is_denied`) |
 | Not claimed | real Play Integrity; R8; live signing; hardware-backed keys |
 
-The checks are in `labs/8.4/8.4-lab/tests/test_property.py`. `test_debug_build_cannot_call_prod_export` is there so an always-true `api_allowed` still fails.
+Debug-plus-ok talking to prod is why `test_debug_build_cannot_call_prod_export` lives in `labs/8.4/8.4-lab/tests/test_property.py`.
 
 ```text
 python3 -m pytest labs/8.4/8.4-lab/tests --impl vulnerable

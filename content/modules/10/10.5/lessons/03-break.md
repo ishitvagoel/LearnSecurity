@@ -32,7 +32,7 @@ Earlier lessons already said bodies stay out of logs. This check is **detect wit
 
 ## What to look at: the cause, not a hunt
 
-`vulnerable/ir.py` returns true for every dict. Tests:
+`vulnerable/ir.py` closes every incident dict. Tests:
 
 - `test_cannot_close_without_recovery`
 - `test_cannot_close_when_logs_contain_note_body`

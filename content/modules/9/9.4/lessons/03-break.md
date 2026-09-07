@@ -32,7 +32,7 @@ The coverage lesson already said status is not coverage. This check is **unowned
 
 ## What to look at: the cause, not a hunt
 
-`vulnerable/sast.py` returns true for every pair. Tests:
+`vulnerable/sast.py` ships every findings/map pair. Tests:
 
 - `test_unmapped_high_blocks_ship`
 - `test_mapped_high_may_ship` — a mapped HIGH may pass on both

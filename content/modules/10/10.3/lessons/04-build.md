@@ -26,7 +26,7 @@ Those accounts should be least-privileged — cluster-admin.
 
 ## What the repaired files must show
 
-Do not treat `fixed/iam.py` as a production cluster product.
+`fixed/iam.py` is the allow-list helper — no kube-apiserver in the loop.
 
 | After the fix | Must be true |
 |---|---|

@@ -28,7 +28,7 @@ If the broken session store still passes, `session_valid` after delete was never
 | Failure | Resurrected map entry still denied (`test_deleted_denies_even_if_session_map_still_has_row`) |
 | Not claimed | Identity-provider logout; refresh tokens; phone cache; token denylist complete |
 
-The test `test_deleted_user_session_is_dead` calls `delete_user` then `session_valid`. That check is there so a leftover session that still works still fails.
+The test `test_deleted_user_session_is_dead` calls `delete_user` then `session_valid`. Leftover alice still valid is the fail.
 
 A `DELETED.add` line is not `session_valid` after `delete_user`. This practice never opens a live identity provider.
 

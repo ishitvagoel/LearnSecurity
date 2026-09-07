@@ -11,7 +11,7 @@ Skip note bodies and the extra CSV in the ticket.
 
 ## Picture: the fourth try is a signal
 
-If a fourth export lands in the window, keep note bodies out of the pager. Then keep the deny and revoke a stolen session.
+If a fourth export lands in the window, name the cap miss — not the note CSV. Then keep the deny and revoke a stolen session.
 
 ```mermaid
 flowchart TD

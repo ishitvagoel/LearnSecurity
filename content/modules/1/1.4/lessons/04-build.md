@@ -23,7 +23,7 @@ If you remove Name or Key, the control is not a control. If you remove Color, a 
 
 ## What the repaired files must show
 
-Do not treat `fixed/recovery.py` as production React.
+`fixed/recovery.py` is not the clinic confirm widget.
 
 | Check | Why it is structural |
 |---|---|

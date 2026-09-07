@@ -7,7 +7,7 @@
 
 Offboarding review starts at the leftover session after delete. Tag each claim **rule**, **tool**, or **false assurance**, and say whether `session_valid("alice")` is still true after `delete_user`. An HR ticket does not kill the cookie.
 
-The review is whether `test_deleted_user_session_is_dead` passes, not whether someone wrote “will revoke sessions later.”
+Leftover alice still passing `session_valid` blocks the merge. “will revoke sessions later” does not count.
 
 ## Picture: problems to find (name them yourself)
 

@@ -32,7 +32,7 @@ Identifiers find a row. They do not authorize fields. Object×company grants wer
 
 ## What to read in the broken files
 
-`vulnerable/field.py` returns true for every pair. Checks:
+`vulnerable/field.py` resolves every role/field pair. Checks:
 
 - `test_member_cannot_resolve_internal_field`
 - `test_member_can_resolve_display_name`

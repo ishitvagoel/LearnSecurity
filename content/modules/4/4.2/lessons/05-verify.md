@@ -28,7 +28,7 @@ If the broken helper still passes, password-at-lookalike was never the failing a
 | Wrong origin | webauthn at the lookalike origin fails |
 | Not claimed | Live authenticators; who-is-allowed; recovery SMS; prompt bombing |
 
-`test_password_is_not_phishing_resistant` is there so a password counted as phishing-resistant still fails.
+Count a password as phishing-resistant and `test_password_is_not_phishing_resistant` has to stay red.
 
 ```text
 python3 -m pytest labs/4.2/4.2-lab/tests --impl vulnerable

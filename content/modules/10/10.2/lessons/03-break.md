@@ -32,7 +32,7 @@ The first lesson already refused a name as a digest. This practice is **whether 
 
 ## What to look at: the cause, not a hunt
 
-`vulnerable/lock.py` returns true for every pair. Tests:
+`vulnerable/lock.py` installs every hash pair. Tests:
 
 - `test_hash_mismatch_refuses_install`
 - `test_matching_digest_may_install` — matching hashes may pass on both

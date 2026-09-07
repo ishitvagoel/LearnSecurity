@@ -26,7 +26,7 @@ A design-review guide that wants security in the design covers empty-change merg
 
 ## What the repaired files must show
 
-Do not treat `fixed/sdl.py` as a production merge bot.
+`fixed/sdl.py` is a merge-gate sketch, not GitHub.
 
 | After the fix | Must be true |
 |---|---|

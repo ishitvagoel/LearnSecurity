@@ -28,7 +28,7 @@ Naming the field is empty until each place has a deny or allow. This check is th
 
 ## What the repaired files must show
 
-Do not treat `fixed/classify.py` as a production logger.
+`fixed/classify.py` is the omit helper — it does not ship clinic logs.
 
 | After the fix | Must be true |
 |---|---|

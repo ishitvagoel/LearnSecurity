@@ -28,7 +28,7 @@ If the broken exporter still passes, the fourth export was never capped.
 | Failure | If you cannot read the count, deny |
 | Not claimed | Per-IP fairness; GraphQL; live requests per second |
 
-The test `test_fourth_export_is_denied` is there so an unbounded fourth still fails.
+Without `test_fourth_export_is_denied`, an unbounded fourth would ship.
 
 An edge-proxy keyword is not `allow(4)`. This practice never opens a public host.
 
@@ -53,7 +53,7 @@ Call `allow(4)`. An edge-proxy keyword is someone else’s counter.
 
 ## Use it somewhere new
 
-A 200 from `/export` does not prove the fourth export was capped (see 9.3). Do not use a public load test.
+Cap miss still looks like a successful `/export`. Do not use a public load test.
 
 ## What this page is not doing
 

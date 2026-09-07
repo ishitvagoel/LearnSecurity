@@ -28,7 +28,7 @@ If the broken log line also passes, you never searched for the body substring.
 | Abuse | Unsure values are not logged (leftover if not in this check) |
 | Not claimed | All places covered; production logs clean; exception middleware safe; access logs safe |
 
-The test `test_note_body_is_not_logged` calls `log_event` with the synthetic body and asserts the substring is absent. That check is there so a confidential field in this log still fails.
+The test `test_note_body_is_not_logged` calls `log_event` with the synthetic body and asserts the substring is absent. A confidential field in this log has to fail that assert.
 
 A Confidential label in a spreadsheet is not `log_event`. This practice never opens a production drain.
 

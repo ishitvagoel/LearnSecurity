@@ -27,7 +27,7 @@ There should be no double-booking — sequential `accept`.
 
 ## What the repaired files must show
 
-Do not treat `fixed/invite.py` as a production invite store.
+`fixed/invite.py` consumes a dict token, not a mail link.
 
 | After the fix | Must be true |
 |---|---|

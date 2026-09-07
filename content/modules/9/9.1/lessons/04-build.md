@@ -28,7 +28,7 @@ A development-practice guide that wants executable tests against requirements co
 
 ## What the repaired files must show
 
-Do not treat `fixed/trace.py` as a production governance product.
+`fixed/trace.py` is a coverage-map helper, not a portal scraper.
 
 | After the fix | Must be true |
 |---|---|

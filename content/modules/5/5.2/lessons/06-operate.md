@@ -11,7 +11,7 @@ Keep plaintext bodies and SSNs out of the ticket.
 
 ## Picture: CI is a detector
 
-If Base64 still decodes to plaintext, the body does not belong in the pager. Then re-protect and rotate keys.
+If Base64 still decodes to plaintext, the ticket names the encoding miss, not the body. Then re-protect and rotate keys.
 
 ```mermaid
 flowchart TD
@@ -42,7 +42,7 @@ A plaintext `secret` or an SSN in the encryption-miss ticket is another key dump
 
 An “encryption enabled” checkbox does not stop Base64. Touch `protect` and `test_protect_is_not_mere_encoding` has to stay red on Base64. Workers and export jobs still Base64 if you only wrap the note write.
 
-Recovery is incomplete if the next deploy still wraps `b64encode` in a helper named `encrypt`. Grep workers and export jobs for Base64 of known plaintext the same day you rotate keys, or the next backup re-issues the leak. A key-service dashboard is not that grep.
+Keep grepping for `b64encode` wrapped as `encrypt`. Grep workers and export jobs for Base64 of known plaintext the same day you rotate keys, or the next backup re-issues the leak. A key-service dashboard is not that grep.
 
 ## What the framework does vs what you still have to check
 

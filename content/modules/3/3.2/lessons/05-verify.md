@@ -24,7 +24,7 @@ flowchart LR
 | Additive | Scanner extras (`cve-extra`) do not replace the seed |
 | Not claimed | Completeness of all future threats; production scanner SaaS; STRIDE facilitation quality |
 
-Lab tests live in `labs/3.2/3.2-lab/tests/test_property.py`. `test_green_scanner_is_not_an_empty_threat_model` is there so an empty model on a green scan still fails.
+Look in `labs/3.2/3.2-lab/tests/test_property.py`. An empty model on a green scan keeps `test_green_scanner_is_not_an_empty_threat_model` failing.
 
 ```text
 python3 -m pytest labs/3.2/3.2-lab/tests --impl vulnerable

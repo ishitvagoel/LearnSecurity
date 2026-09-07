@@ -26,7 +26,7 @@ Defect lists want bugs verified as fixed — close-without-retest.
 
 ## What the repaired files must show
 
-Do not treat `fixed/pentest.py` as a production ticket product.
+`fixed/pentest.py` is the retest gate, not a ticket console.
 
 | After the fix | Must be true |
 |---|---|
