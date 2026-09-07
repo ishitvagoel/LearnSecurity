@@ -30,7 +30,7 @@ Problems to find (name them yourself; do not open the keys file):
 - Recovery SMS as default
 - No wrong-origin WebAuthn check
 
-Also reject: trusting the client; closing findings without re-running `test_password_is_not_phishing_resistant`; keys in learner notes; real credentials in helpers; an unlabeled later hardware bar as baseline; live-kit language.
+Also reject: treating any 2FA as phishing-resistant; closing findings without re-running `test_password_is_not_phishing_resistant`; keys in learner notes; real credentials in helpers; an unlabeled later hardware bar as baseline; live-kit language.
 
 ## Common mix-ups
 

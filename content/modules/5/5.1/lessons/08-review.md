@@ -30,7 +30,7 @@ Analytics and search bodies still have to be None after delete. A delete that ne
 - No test `body_retained` after delete
 - Privacy policy PDF as the control
 
-Also reject: trusting the client; closing findings without re-running `test_deleted_account_leaves_no_analytics_body`; keys in learner notes; real people's data in the practice files; encryption of a kept warehouse as deletion.
+Also reject: treating a row DELETE as deletion; closing findings without re-running `test_deleted_account_leaves_no_analytics_body`; keys in learner notes; real people's data in the practice files; encryption of a kept warehouse as deletion.
 
 ## Common mix-ups
 

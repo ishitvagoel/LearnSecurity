@@ -30,7 +30,7 @@ A wrong `aud` still has to be denied. Skip the audience compare and another APIâ
 - Implicit flow in SPA README
 - No test other-api aud
 
-Also reject: treating the client as what you trust; closing findings without re-running `test_wrong_audience_is_rejected`; keys in learner notes; real tokens in practice files; OAuth 2.1 presented as final.
+Also reject: treating the OpenID dashboard as the aud check; closing findings without re-running `test_wrong_audience_is_rejected`; keys in learner notes; real tokens in practice files; OAuth 2.1 presented as final.
 
 ## Common mix-ups
 

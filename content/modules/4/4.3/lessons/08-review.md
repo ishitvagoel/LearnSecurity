@@ -30,7 +30,7 @@ The query still has to yield `None`. Tokens in the query string still leak if th
 - No Referer policy
 - Tokens printed in uvicorn logs
 
-Also reject: treating the client as what you trust; closing findings without re-running `test_query_string_token_is_rejected`; keys in learner notes; real tokens in practice files; “HTTPS so logs are fine.”
+Also reject: treating TLS as making query tokens safe; closing findings without re-running `test_query_string_token_is_rejected`; keys in learner notes; real tokens in practice files; “HTTPS so logs are fine.”
 
 ## Common mix-ups
 

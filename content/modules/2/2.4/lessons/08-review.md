@@ -30,7 +30,7 @@ The share count still has to stay under retry. A second call that forgets the fi
 - Test only happy-path single click
 - Fail open on idempotency store timeout
 
-Also reject: treating the client as what you trust; an awareness-list name as the finding title; closing findings without re-running `test_retry_does_not_duplicate_side_effect`; keys in learner notes; live load tests against a public API; unique-on-`note_id` as if it were this rule.
+Also reject: treating disable-on-submit as the store; an awareness-list name as the finding title; closing findings without re-running `test_retry_does_not_duplicate_side_effect`; keys in learner notes; live load tests against a public API; unique-on-`note_id` as if it were this rule.
 
 ## Common mix-ups
 

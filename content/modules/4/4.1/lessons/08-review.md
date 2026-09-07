@@ -30,7 +30,7 @@ The session still has to be dead after delete. If that same delete never kills l
 - Worker still has `user_id`
 - No test `session_valid` after delete
 
-Also reject: trusting the browser as the vault; closing findings without re-running `test_deleted_user_session_is_dead`; keys in learner notes; real people's data in the practice files; production cookies in the review notes.
+Also reject: treating SSO logout as session kill; closing findings without re-running `test_deleted_user_session_is_dead`; keys in learner notes; real people's data in the practice files; production cookies in the review notes.
 
 ## Common mix-ups
 

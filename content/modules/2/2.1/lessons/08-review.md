@@ -30,7 +30,7 @@ Problems to find (name them yourself; do not open the keys file):
 - No corpus check for duplicate keys
 - Normalizing display names as a stand-in for company ids
 
-Also reject: trusting the client; concatenating readers; Report-Only as enforcement; closing findings without re-running the repaired-files check; keys in learner notes.
+Also reject: treating one JSON reader as all readers; concatenating readers; Report-Only as enforcement; closing findings without re-running the repaired-files check; keys in learner notes.
 
 ## Common mix-ups
 

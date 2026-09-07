@@ -30,7 +30,7 @@ A script still has to be blocked from reading the session. If the jar ignores Ht
 - CSP Report-Only treated as enforcement
 - Missing Secure on the same cookie
 
-Also reject: `localStorage` for session; trusting the client as what you trust; closing a finding without re-running `test_script_cannot_read_httponly_session`; keys in learner notes; live-target CORS or CSRF against a public site.
+Also reject: `localStorage` for session; treating HttpOnly as XSS defense; closing a finding without re-running `test_script_cannot_read_httponly_session`; keys in learner notes; live-target CORS or CSRF against a public site.
 
 ## Common mix-ups this topic refuses
 

@@ -30,7 +30,7 @@ The count still has to be ≤ 5 after eight writes. A loop with no write-path ce
 - Test loops 8 times and expects success
 - Support tool bypasses cap without audit
 
-Also reject: treating the client as what you trust; closing findings without re-running `test_share_cap_is_enforced`; keys in learner notes; real personal data in practice files; a weakness nickname as the requirement; live load tests.
+Also reject: treating HTML max as the cap; closing findings without re-running `test_share_cap_is_enforced`; keys in learner notes; real personal data in practice files; a weakness nickname as the requirement; live load tests.
 
 ## Common mix-ups
 

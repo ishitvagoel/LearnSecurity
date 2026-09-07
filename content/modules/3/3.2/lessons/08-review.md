@@ -30,7 +30,7 @@ The always-name id still has to be present on green. A scan-only change still sh
 - Model not in version control (only a slide)
 - STRIDE letters without assets, owners, or “what would prove this row wrong”
 
-Also reject: treating the client as what you trust; an awareness list cited as a passing score; closing findings without re-running `test_green_scanner_is_not_an_empty_threat_model`; keys in learner notes; real personal data in the practice; a Top 10 as the threat list.
+Also reject: treating a green scan as the threat list; an awareness list cited as a passing score; closing findings without re-running `test_green_scanner_is_not_an_empty_threat_model`; keys in learner notes; real personal data in the practice; a Top 10 as the threat list.
 
 ## Common mix-ups
 

@@ -30,7 +30,7 @@ The body substring still has to be absent from this log. If the change never use
 - `DEBUG=True` in a “staging” that shares production data
 - Exception middleware dumps the request body
 
-Also reject: trusting the browser as the vault; a data-loss product as the rule; closing findings without re-running `test_note_body_is_not_logged`; keys in learner notes; real people's data in the practice files; a privacy-policy URL as the fix.
+Also reject: treating a Confidential badge as the log omit; a data-loss product as the rule; closing findings without re-running `test_note_body_is_not_logged`; keys in learner notes; real people's data in the practice files; a privacy-policy URL as the fix.
 
 ## Common mix-ups
 

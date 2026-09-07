@@ -32,7 +32,7 @@ Leftover permission is permission from the surroundings — a signed-in user, �
 - Admin boolean bypass without company
 - Search endpoint without a check
 
-Also reject: trusting the client; closing findings without re-running `test_grant_on_n1_is_not_grant_on_n2`; keys in lessons; real people's data in the practice files; “IDOR” as the requirement.
+Also reject: treating “is a clinician” as the grant; closing findings without re-running `test_grant_on_n1_is_not_grant_on_n2`; keys in lessons; real people's data in the practice files; “IDOR” as the requirement.
 
 ## Common mix-ups
 

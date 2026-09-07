@@ -32,7 +32,7 @@ Zip member paths are another parser of this rule, not a reason to skip `test_dot
 - Trust `Content-Type`
 - No prefix test
 
-Also reject: host-file trophies; treating the client as what you trust; an awareness-list name as the finding title; closing findings without re-running `test_dotdot_does_not_escape_root`; keys in learner notes; live walks against a public filesystem.
+Also reject: host-file trophies; treating a UUID rename as the path check; an awareness-list name as the finding title; closing findings without re-running `test_dotdot_does_not_escape_root`; keys in learner notes; live walks against a public filesystem.
 
 ## Common mix-ups
 
