@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `accept`. The failure is already in the function: `accept` returns true and never marks the token used. Watch the check treat a second true as a **failed rule**, not as a retry nit.
+The practice is not a website you attack. It is a tiny Python `accept`. The failure is already in the function: `accept` returns true and never marks the token used. A second true is a **failed rule**, not a retry nit.
 
 The rule under test:
 
@@ -31,7 +31,7 @@ flowchart TD
 
 The broken files take that path on purpose. The token is never consumed. Sequential double-accept is enough. You do not need a new token string. The leftover still returning true *is* the leak.
 
-Industry lists ask for locking so a limited seat cannot be booked twice. This pytest is sequential consume-once, not a threaded trophy.
+Industry lists ask for locking so a limited seat cannot be booked twice. This week's check is sequential consume-once, not a threaded trophy.
 
 ## What to look at — cause, not a dump
 

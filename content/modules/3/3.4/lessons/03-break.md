@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `add_share` counter. Fake share counts. It does not open FastAPI, a CDN filter, or a classmate API. Watch the check treat extra grants as a **failed rule**, not as a trophy flood.
+The practice is not a website you attack. It is a tiny in-process `add_share` counter. Fake share counts. It does not open FastAPI, a CDN filter, or a classmate API. Extra grants is a **failed rule**, not a trophy flood.
 
 The rule under test:
 

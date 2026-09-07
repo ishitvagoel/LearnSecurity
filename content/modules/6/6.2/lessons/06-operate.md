@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A markdown path can bring raw HTML back after `render` was “fixed once.” Pair notice and recover. Do not log title bodies if they are patient data (3.1). Do not paste nicknames into the ticket.
+A markdown path can bring raw HTML back after `render` was “fixed once.” Do not log title bodies if they are patient data (3.1). Do not paste nicknames into the ticket.
 
 ## Picture: stored field is a signal
 
@@ -17,7 +17,7 @@ flowchart TD
   Alert --> Patch[Patch renderer; rotate sessions if needed]
 ```
 
-This still does not encode HTML. It does not prove a checklist.
+A checklist name does not encode HTML.
 
 ## Signals that do not become a second leak
 

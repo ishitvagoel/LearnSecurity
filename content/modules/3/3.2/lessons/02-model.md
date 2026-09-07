@@ -64,7 +64,7 @@ Each always-name id (`cross-tenant-read`, `hostile-browser`, `stolen-worker`) ne
 
 ## Practice
 
-Draw this map so someone else could name pytest cases. Point at `labs/3.2/3.2-lab` file `model.py`.
+Draw this map so someone else could name the checks. Point at `labs/3.2/3.2-lab` file `model.py`.
 
 ## Use it somewhere new
 

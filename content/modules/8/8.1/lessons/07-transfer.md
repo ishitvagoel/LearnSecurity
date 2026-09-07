@@ -39,7 +39,7 @@ Rewrite the notes-app sentence for this product. Your answer must include:
 5. leftover risk (attestation farms, rooted honest clinicians, 8.4 debug builds);
 6. the accessibility baseline if a human deny path is in the claim (readable “export unavailable,” not a silent crash).
 
-The clinic rewrite still has to keep the notes-app fork: client claim plus failing attest false, server-pass may allow. Enabling Play Integrity without a failing-attest deny check leaves `allow_export({integrity: ok}, fail)` true. The local pytest analogue is `test_client_integrity_claim_is_not_authorization` — on the practice files, not a live hospital device.
+A client claim plus a failing attest still has to be false. A server-pass may still allow. Enabling Play Integrity without a failing-attest deny check leaves `allow_export({integrity: ok}, fail)` true. The local check is `test_client_integrity_claim_is_not_authorization` — on the practice files, not a live hospital device.
 
 ## What is not good enough
 

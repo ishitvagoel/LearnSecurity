@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new tool can still be registered after the allow-list was "set once." Pair notice and recover. Do not log note bodies or full model transcripts. Do not paste the prompt into the ticket.
+A new tool can still be registered after the allow-list was "set once." Do not log note bodies or full model transcripts. Do not paste the prompt into the ticket.
 
 ## Picture: denied tool is a signal
 

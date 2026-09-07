@@ -39,7 +39,7 @@ Rewrite the notes-app sentence for this product. Your answer must include:
 5. leftover risk (GraphQL/gRPC binders, leftover `/v0`, unused methods later and advanced, 6.2 on honest names);
 6. the web accessibility baseline if a human deny path is in the claim (readable “field not writable,” not a silent 200 that dropped the name too).
 
-The clinic rewrite still has to keep the notes-app fork: `is_staff` false after extra-key PATCH, `display_name` may change. Documenting the PATCH in OpenAPI without an `is_staff` deny check leaves the binder open. The local pytest analogue is `test_is_admin_cannot_be_patched` — on the practice files, not a live EHR PATCH.
+`is_staff` still has to be false after an extra-key PATCH. `display_name` may still change. Documenting the PATCH in OpenAPI without an `is_staff` deny check leaves the binder open. The local check is `test_is_admin_cannot_be_patched` — on the practice files, not a live EHR PATCH.
 
 ## What is not good enough
 

@@ -30,7 +30,7 @@ flowchart LR
 
 If overnight export copies the clinician cookie into the task while `exporter` prefers `user_session`, the check is gone. A task library, a private network, and a zero-trust dashboard do not bind `service == "worker-sc"`. Outbox pattern and event schemas are the same identity family — name them, do not run those brokers here. A correctly named worker that is still a superuser database role is a 3.3 leftover even when Alice session is denied.
 
-The clinic rewrite still has to keep the notes-app fork: leftover session `None`, `service=worker-sc` allowed. Running on the hospital VLAN with “zero trust enabled” without a leftover-session deny test leaves `exporter({user_session: alice})` succeeding. The local pytest analogue is `test_user_session_is_not_worker_identity` — on a practice, not a live broker attach.
+A leftover session still has to be `None`. `service=worker-sc` may still be allowed. Running on the hospital VLAN with “zero trust enabled” without a leftover-session deny test leaves `exporter({user_session: alice})` succeeding. The local check is `test_user_session_is_not_worker_identity` — on a practice, not a live broker attach.
 
 ## Prompt — clinic batch-export worker
 

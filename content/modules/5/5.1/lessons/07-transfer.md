@@ -11,7 +11,7 @@ The notes-app sentence was: after `delete_account("alice")`, `body_retained("ali
 
 ## Picture: the card is another copy
 
-Renaming “alice” to “patient” is not transfer. The leftover changes. Deleting the patient row does not authorize leaving the appointment-card notes alive. A “right to be forgotten” banner is not the pytest.
+Renaming “alice” to “patient” is not transfer. The leftover changes. Deleting the patient row does not authorize leaving the appointment-card notes alive. A “right to be forgotten” banner is not the check.
 
 | Notes app this week | Clinic sketch |
 |---|---|
@@ -28,9 +28,9 @@ flowchart LR
   Delete --> Card
 ```
 
-If delete only hits the patient row, the card still retains. An HTTP 200 on `/patients/{id}` and a privacy banner do not pop the card. Encrypting the card you still keep is secrecy, not this privacy check. A privacy-framework “control” label is an outcome name, not the pytest.
+If delete only hits the patient row, the card still retains. An HTTP 200 on `/patients/{id}` and a privacy banner do not pop the card. Encrypting the card you still keep is secrecy, not this privacy check. A privacy-framework “control” label is an outcome name, not the check.
 
-The clinic rewrite still has to keep the notes-app fork: after patient delete, appointment-card notes and the analytics export are None. Copying a delete handler that only drops the patient row leaves the card unused as a copy. The local pytest analogue is `test_deleted_account_leaves_no_analytics_body` plus the search-copy deny — on local files, not a live warehouse.
+After patient delete, appointment-card notes and the analytics export still have to be None. Copying a delete handler that only drops the patient row leaves the card unused as a copy. The local check is `test_deleted_account_leaves_no_analytics_body` plus the search-copy deny — on local files, not a live warehouse.
 
 ## Prompt — leftover card notes
 

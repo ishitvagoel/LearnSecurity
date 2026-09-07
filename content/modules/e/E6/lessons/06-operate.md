@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new “fast-track risk” form can drop `review_by` after the schema was “set once.” Pair notice and recover. Do not log leftover-risk writeups that contain secrets. Do not paste chart text into the ticket.
+A new “fast-track risk” form can drop `review_by` after the schema was “set once.” Do not log leftover-risk writeups that contain secrets. Do not paste chart text into the ticket.
 
 ## Picture: incomplete row is a signal
 

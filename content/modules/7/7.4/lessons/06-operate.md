@@ -20,7 +20,7 @@ flowchart TD
   Metric --> Drain[Rotate service creds and drain queue]
 ```
 
-This still does not bind the principal. Naming a zero-trust product is not the rule. Someone still has to own the worker identity.
+A zero-trust product name does not bind the principal. Someone still has to own the worker identity.
 
 ## Signals that do not become a second leak
 

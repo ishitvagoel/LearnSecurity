@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships notes-app ingest. Review `labs/2.1/2.1-parser-boundaries/vulnerable/` as that change. Reconstruct whether ACL and store still parse the same bytes twice, compare that with the rule, and write changes a developer can verify.
+Review `labs/2.1/2.1-parser-boundaries/vulnerable/` as a change to notes-app ingest. Reconstruct whether ACL and store still parse the same bytes twice, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_duplicate_tenant_keys_are_one_meaning`) is the rule check. A comment “JSON should not duplicate keys” is not.
 

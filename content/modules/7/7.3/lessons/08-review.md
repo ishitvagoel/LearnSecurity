@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships a notes-app billing webhook. Review `labs/7.3/7.3-lab/vulnerable/` as that change. Check whether `accept("", "body", "lab-secret")` is still true, compare that with the rule, and write changes a developer can verify.
+Review `labs/7.3/7.3-lab/vulnerable/` as a change to a notes-app billing webhook. Check whether `accept("", "body", "lab-secret")` is still true, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_missing_signature_is_rejected`) is the rule test. A comment “will HMAC later” is not. A famous-bugs ticket is not.
 
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|vendor CIDR| False[False assurance]
 ```
 
-What has to stay true: empty sig denied. If that call never includes a raw-body MAC, that path-trust is still open. A TLS terminator without that check is still the same problem.
+An empty sig still has to be denied. If the change never checks a raw-body MAC, that path-trust is still open. A TLS terminator without that check is still the same problem.
 
 Parse-before-MAC (2.1) and secret-in-query (4.3) are other authenticity holes — name them, do not skip `test_missing_signature_is_rejected`.
 

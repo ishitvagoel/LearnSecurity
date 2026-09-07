@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `assemble_threat_model` dictionary. It does not open a scanner tenant, a Semgrep cloud org, or a production dashboard. Fake threat ids only. Watch the check treat an empty list as a **failed rule**, not as a clean bill of health.
+The practice is not a website you attack. It is a tiny in-process `assemble_threat_model` dictionary. It does not open a scanner tenant, a Semgrep cloud org, or a production dashboard. Fake threat ids only. An empty list is a **failed rule**, not a clean bill of health.
 
 The rule under test:
 

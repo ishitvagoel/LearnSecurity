@@ -30,7 +30,7 @@ flowchart LR
 
 If the questionnaire is filed while `capture` always appends, the rule is gone. Processor headers and a card-network standard do not put `k1` in `SEEN`. A health append-only audit is the same grain: the document version id is the key, not “POST again.” Name it, do not hit a live processor here. This practice is not in card-network scope. Connection-pool limits are advanced leftover: pool size, not this check.
 
-The clinic rewrite still has to keep the notes-app fork: two k1 → count 1, first k1 may charge. Adding a payment company without a local seen-set leaves count 2. The local pytest analogue is `test_duplicate_capture_does_not_double_charge` — on a practice, not a live processor.
+Two k1 still have to count as 1. The first k1 may still charge. Adding a payment company without a local seen-set leaves count 2. The local check is `test_duplicate_capture_does_not_double_charge` — on a practice, not a live processor.
 
 ## What is not good enough
 

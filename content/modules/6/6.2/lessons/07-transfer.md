@@ -39,7 +39,7 @@ Rewrite the notes-app sentence for this product. Your answer must include:
 5. leftover risk (JavaScript / attribute / URL contexts; markdown pipeline; Trusted Types draft; content-security reporting as extra, advanced);
 6. the web accessibility baseline if a human “name could not be shown” path is in the claim (readable fallback, not a blank badge that hides the person).
 
-The clinic rewrite still has to keep the notes-app fork: `<` in the nickname becomes `&lt;` in the badge text. Adding a content-security policy without an encode check leaves the HTML interpreter mixed. The local pytest analogue is `test_angle_brackets_are_encoded` — on a practice, not a live board.
+`<` in the nickname becomes `&lt;` in the badge text. Adding a content-security policy without an encode check leaves the HTML interpreter mixed. The local check is `test_angle_brackets_are_encoded` — on a practice, not a live board.
 
 ## What is not good enough
 

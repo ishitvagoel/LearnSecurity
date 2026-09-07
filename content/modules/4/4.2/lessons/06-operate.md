@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A recovery SMS, a shared password, or a stolen authenticator can still mint a session after the helper was “fixed once.” Pair notice and recover. Do not log passwords, OTP, or note bodies. Do not paste a staff password into the ticket.
+A recovery SMS, a shared password, or a stolen authenticator can still mint a session after the helper was “fixed once.” Do not log passwords, OTP, or note bodies. Do not paste a staff password into the ticket.
 
 ## Picture: origin mismatch, then revoke
 
@@ -17,7 +17,7 @@ flowchart TD
   Alert --> Revoke[Revoke sessions if a password was used]
 ```
 
-This still does not bind RP ID. It does not pick a log product.
+A log product does not bind RP ID.
 
 ## Signals that do not become a second leak
 

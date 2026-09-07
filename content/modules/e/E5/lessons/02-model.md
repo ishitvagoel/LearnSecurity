@@ -53,7 +53,7 @@ flowchart LR
 
 ## Practice
 
-Draw this map so someone else could name pytest cases. Point at `labs/E5/e5-lab` file `rls.py`.
+Draw this map so someone else could name the checks. Point at `labs/E5/e5-lab` file `rls.py`.
 
 ## Use it somewhere new
 

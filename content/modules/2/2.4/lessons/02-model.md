@@ -54,7 +54,7 @@ Do not use “timestamp rounded to the second” as the key. Skew and two client
 
 ## Practice
 
-Draw the machine so someone else could name pytest cases. Point at `labs/2.4/2.4-state-time` file `share.py`. Label missing-key behavior as leftover (the lab still shares once if the key is omitted).
+Draw the machine so someone else could name the checks. Point at `labs/2.4/2.4-state-time` file `share.py`. Label missing-key behavior as leftover (the lab still shares once if the key is omitted).
 
 ## Use it somewhere new
 

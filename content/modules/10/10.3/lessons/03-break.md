@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a cluster you attack. It is a tiny Python `pod_ok` that returns true for every role. The failure is already in the function: it never looks at the role. Watch the check treat that always-true admission as a **failed rule**, not as a paperwork nit.
+The practice is not a cluster you attack. It is a tiny Python `pod_ok` that returns true for every role. The failure is already in the function: it never looks at the role. That always-true admission is a **failed rule**, not a paperwork nit.
 
 The rule under test:
 

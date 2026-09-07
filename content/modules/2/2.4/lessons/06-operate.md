@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new client that mints a key per retry, a lifetime that is too short, or a store outage can reintroduce duplicates after `_SEEN` was “set once.” Pair notice and recover. Do not log note bodies or session values. Do not fail open: if the idempotency store is unreachable, do not insert “just this once.”
+A new client that mints a key per retry, a lifetime that is too short, or a store outage can reintroduce duplicates after `_SEEN` was “set once.” Do not log note bodies or session values. Do not fail open: if the idempotency store is unreachable, do not insert “just this once.”
 
 ## Picture: count versus unique keys
 
@@ -27,7 +27,7 @@ A broken retry is a notice-and-recover problem, not a licence to fail open or to
 | Recover | Take extra shares back; tell the owner; re-run `test_retry_does_not_duplicate_side_effect` |
 | Leftover | A lost first response needs a path so the owner can see the share; never fail open if the key store is down |
 
-This still does not pick a log product. It does not prove this share rule. An awareness-list name is not the runbook title. Naming a SIEM product is not the rule.
+A log product does not prove this share rule. A famous-bugs-list name is not the runbook title.
 
 ## What the framework does vs what you still have to check
 

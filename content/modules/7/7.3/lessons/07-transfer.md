@@ -30,7 +30,7 @@ flowchart LR
 
 If the callback is TLS-terminated and address-range-allow-listed while `accept` is always true, the check is gone. FastAPI, nginx TLS, and a vendor SDK name do not hash the raw body. Parse-then-MAC (2.1) and outbound webhook URLs (6.5) are the same authenticity family — name them, do not run those systems here. A valid MAC still needs 1.2 on what the handler writes.
 
-The clinic rewrite still has to keep the notes-app fork: empty sig false, matching HMAC over the same raw body true. Terminating TLS and allow-listing the vendor without a missing-sig test leaves `accept("", ...)` true. The local pytest analogue is `test_missing_signature_is_rejected` — on a practice, not a live lab vendor POST.
+An empty sig still has to be false. A matching HMAC over the same raw body may still be true. Terminating TLS and allow-listing the vendor without a missing-sig test leaves `accept("", ...)` true. The local check is `test_missing_signature_is_rejected` — on a practice, not a live lab vendor POST.
 
 ## Prompt — clinic lab-result webhook
 

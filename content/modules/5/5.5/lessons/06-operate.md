@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Restore[Rotate creds; restore if mutated]
 ```
 
-This still does not bind parameters. A vendor name is not this week's rule. Someone still has to own the concatenating path.
+A vendor name does not bind parameters. Someone still has to own the concatenating path.
 
 ## Signals that do not become a second leak
 

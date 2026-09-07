@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a model you attack. It is a tiny Python `run_tool` that returns `ran {name}` for every name. The failure is already in the function: it never looks at the name. Watch the check treat that always-run call as a **failed rule**, not as a paperwork nit.
+The practice is not a model you attack. It is a tiny Python `run_tool` that returns `ran {name}` for every name. The failure is already in the function: it never looks at the name. That always-run call is a **failed rule**, not a paperwork nit.
 
 The rule under test:
 

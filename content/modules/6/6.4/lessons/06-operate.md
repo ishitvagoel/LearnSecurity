@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new export path can join a user filename again after `resolve` was “fixed once.” Pair notice and recover. Do not log original filenames if they are patient ids. Do not paste host paths into the ticket.
+A new export path can join a user filename again after `resolve` was “fixed once.” Do not log original filenames if they are patient ids. Do not paste host paths into the ticket.
 
 ## Picture: an escape attempt is a signal
 
@@ -26,7 +26,7 @@ A broken resolve is a notice-and-recover problem, not a licence to dump a patien
 | Recover | Deny; audit; restore if a file landed outside |
 | Leftover | Malware scan extra; zip/XML still open |
 
-This still does not pick a log product. It does not prove this path rule. An awareness-list name is not the runbook title. Naming an antivirus product is not the rule. Re-run `test_dotdot_does_not_escape_root` after any upload helper change; a green “UUID filenames” tile is not that check. Export and unzip paths are other parsers of the same rule — inventory them before claiming recover.
+A log product and an antivirus name do not prove this path rule. Re-run `test_dotdot_does_not_escape_root` after any upload helper change; a green “UUID filenames” tile is not that check. Export and unzip paths are other parsers of the same rule — inventory them before claiming recover.
 
 Recovery is incomplete if the next route still joins `UploadFile.filename` without canonicalize. Grep export and unzip helpers the same day you restore a stray file, or the next scan re-issues the escape.
 

@@ -62,7 +62,7 @@ The app’s promise: leftover Alice is `None`; the named worker may run. The fol
 - Poison-message loops, and retries of revoked grants (2.4).
 - After the worker is `worker-sc`, it may still need Alice’s grant (4.4) to choose which notes — that later check is advanced work, not this check.
 - Broker access lists wait for 10.3.
-- A zero-trust architecture paper does not replace the pytest.
+- A zero-trust architecture paper does not replace the check.
 
 ## Can people still use it
 

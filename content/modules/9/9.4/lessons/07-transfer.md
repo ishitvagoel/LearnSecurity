@@ -31,7 +31,7 @@ flowchart LR
 
 If the dashboard is noisy while `ship_ok` is always true, the rule is gone. A vendor default setup, a maturity score, and Dependabot do not join F1 to AUTHZ-1. SCA “we do not call that function” still records an owner — name it, do not scan a live org here. Who-is-allowed blind spots remain review and isolation tests.
 
-The clinic rewrite still has to keep the notes-app fork: unmapped HIGH denied, mapped HIGH may ship. Enabling code scanning without a mapping check leaves `ship_ok([HIGH], {})` true. The local pytest analogue is `test_unmapped_high_blocks_ship` — on a practice, not a live GitHub tenant.
+An unmapped HIGH still has to be denied. A mapped HIGH may still ship. Enabling code scanning without a mapping check leaves `ship_ok([HIGH], {})` true. The local check is `test_unmapped_high_blocks_ship` — on a practice, not a live GitHub tenant.
 
 Also name SCA: a CVE versus a function you actually call.
 

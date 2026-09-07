@@ -63,7 +63,7 @@ Write the cap down. Implement it on every write. Do not substitute a later rate 
 
 ## Practice
 
-Draw this map so someone else could name pytest cases. Point at `labs/3.4/3.4-lab` file `share_limit.py`.
+Draw this map so someone else could name the checks. Point at `labs/3.4/3.4-lab` file `share_limit.py`.
 
 ## Use it somewhere new
 

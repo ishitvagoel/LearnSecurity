@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships notes-app export. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `allow(4)` is still true if they ship. Start at unbounded allow, not at a famous API-abuse list.
+This review is about notes-app export. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `allow(4)` is still true if they ship. Start at unbounded allow, not at a famous API-abuse list.
 
 The folder `labs/6.7/6.7-lab/vulnerable/` is the change. The check you already ran (`test_fourth_export_is_denied`) is the rule test. A comment “will cap later” is not.
 
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"IP rate limit"| False[False assurance]
 ```
 
-What has to stay true: fourth denied. If that call never includes a server `n <= 3`, that unbounded path is still open. An IP bucket at the edge without that check is still the same problem.
+The fourth still has to be denied. If the change never checks a server `n <= 3`, that unbounded path is still open. An IP bucket at the edge without that check is still the same problem.
 
 A disabled button in the browser (the leftover 3.4 already named for shares) does not bind `allow(4)`. GraphQL aliases (7.1) are another budget path — name them, do not skip `test_fourth_export_is_denied`.
 

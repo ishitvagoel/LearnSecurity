@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships the notes app's close gate. Review `labs/9.5/9.5-lab/vulnerable/` as that change. Check whether `close_finding({"retest": None})` still returns true, compare that with the rule, and write changes a developer can verify.
+Review `labs/9.5/9.5-lab/vulnerable/` as a change to the notes app's close gate. Check whether `close_finding({"retest": None})` still returns true, compare that with the rule, and write changes a developer can verify.
 
 Start at `close_finding` and the missing-retest row, not at a scanner color or a PDF screenshot. The check you already ran (`test_cannot_close_without_retest`) is the rule test. A comment "will retest later" is not.
 
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"severity 9.8"| False[False assurance]
 ```
 
-What has to stay true: missing retest denied. If that call never includes `retest == "pass"`, that always-close leftover is still open. A PDF screenshot does not replace that check.
+A missing retest still has to be denied. If the change never checks `retest == "pass"`, that always-close leftover is still open. A PDF screenshot does not replace that check.
 
 Variants (extra fields) and a role-change cache are other leftover. Name them, do not skip `test_cannot_close_without_retest`. This page does not mark you as finished. Do not pentest a live tenant to prove the finding.
 

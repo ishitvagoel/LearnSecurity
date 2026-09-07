@@ -3,7 +3,7 @@
 **Kind:** design-exercise
 **Loop step:** 2 Model
 
-## Could someone else name pytest cases from your origin map?
+## Could someone else name the checks from your origin map?
 
 “SameSite is on” is not this page. A map someone else can test names **who may POST share, with which cookie, origin, and token**.
 

@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Purge[Purge partition]
 ```
 
-This still does not pick a log product. It does not walk the deletion graph.
+A log product does not walk the deletion graph.
 
 ## Signals that do not become a second leak
 

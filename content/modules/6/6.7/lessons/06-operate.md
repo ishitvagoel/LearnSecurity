@@ -21,7 +21,7 @@ flowchart TD
   Cost --> Stop[Disable token if stolen session]
 ```
 
-This still does not count exports. A vendor name is not this week's rule. Someone still has to own the budget.
+A vendor name does not count exports. Someone still has to own the budget.
 
 ## Signals that do not become a second leak
 

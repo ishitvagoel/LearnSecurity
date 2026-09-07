@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python helper named `phishing_resistant`. The failure is already in the function: any enrolled method returns true, and origin is ignored. Watch for this: a password at a lookalike origin counted as **resistant** is a failed rule, not a trophy kit.
+The practice is not a website you attack. It is a tiny Python helper named `phishing_resistant`. The failure is already in the function: any enrolled method returns true, and origin is ignored. A password at a lookalike origin counted as **resistant** is a failed rule, not a trophy kit.
 
 The rule under test:
 
@@ -84,4 +84,4 @@ A mouse-only WebAuthn button pushes people onto the password leftover. That is a
 
 ## What this page is not doing
 
-No live phishing campaigns. Synthetic origins only. Re-run pytest when you are done. No leftover state.
+No live phishing campaigns. Synthetic origins only. Re-run the checks when you are done. No leftover state.

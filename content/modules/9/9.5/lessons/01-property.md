@@ -42,7 +42,7 @@ flowchart LR
 | Person | What they can do here | Motive | Harm if close ignores retest |
 |---|---|---|---|
 | Paper-compliance closer | Mark the ticket Done after the PDF lands | Look finished | Isolation hole stays; leftover looks closed |
-| Severity-only triage | Treat 9.8 as the close decision | Rank and move on | Score is input, not a passing pytest |
+| Severity-only triage | Treat 9.8 as the close decision | Rank and move on | Score is input, not a passing check |
 | Someone who treats a known-exploited list as a scan licence | Point a scanner at a public clinic | "It's on the list" | Out of scope; still no local retest |
 
 You do not need a nation-state this week. Those three already close the finding without a retest.

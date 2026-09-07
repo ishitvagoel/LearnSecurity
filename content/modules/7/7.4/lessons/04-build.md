@@ -48,7 +48,7 @@ God-mode database role (3.3) as this check. Passing Alice’s login through the 
 - Field dumps from the worker serializer (7.2).
 - Leftover default worker credentials (5.3).
 - Broker access lists wait for 10.3.
-- A zero-trust architecture paper does not replace the pytest.
+- A zero-trust architecture paper does not replace the check.
 
 ## Practice
 

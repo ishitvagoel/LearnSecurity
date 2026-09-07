@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A missed GraphQL path, a stale grant, or a worker can still release n2 after `can_read` was “fixed once.” Pair notice and recover. Do not log note bodies. Do not paste a personal email into the ticket.
+A missed GraphQL path, a stale grant, or a worker can still release n2 after `can_read` was “fixed once.” Do not log note bodies. Do not paste a personal email into the ticket.
 
 ## Picture: a deny is a signal, not a page footer
 
@@ -24,7 +24,7 @@ flowchart TD
 | Recover | Take back leftover flags; re-run the table on search/export |
 | Leftover | An honest grant on n1 still reveals n1 |
 
-This still does not key the grant. It does not prove the data-item check. A vendor name is not this week's rule. Re-run `test_grant_on_n1_is_not_grant_on_n2` after any path change; a green “roles enabled” tile is not that check. Search, export, and GraphQL `node(id)` are other paths of the same rule — inventory them before you claim recover.
+A vendor name does not key the grant or prove the data-item check. Re-run `test_grant_on_n1_is_not_grant_on_n2` after any path change; a green “roles enabled” tile is not that check. Search, export, and GraphQL `node(id)` are other paths of the same rule — inventory them before you claim recover.
 
 ## What the framework does vs what you still have to check
 

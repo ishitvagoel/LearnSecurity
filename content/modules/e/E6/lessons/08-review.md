@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships the notes app’s leftover-risk register. Review `labs/E6/e6-lab/vulnerable/` as that change. Check whether `accept_exception({"owner": "", "review_by": None})` still returns true, compare that with the rule, and write changes a developer can verify.
+Review `labs/E6/e6-lab/vulnerable/` as a change to the notes app’s leftover-risk register. Check whether `accept_exception({"owner": "", "review_by": None})` still returns true, compare that with the rule, and write changes a developer can verify.
 
 Start at `accept_exception` and the empty-owner row, not at a scanner color or a maturity screenshot. The check you already ran (`test_exception_needs_owner_review_and_wcag`) is the rule test. A comment “will add dates later” is not.
 
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|maturity mapped| False[False assurance]
 ```
 
-What has to stay true: empty owner denied. If that call never includes the schema, that always-accept leftover is still open. A maturity screenshot does not replace that check.
+An empty owner still has to be denied. If the change never checks the schema, that always-accept leftover is still open. A maturity screenshot does not replace that check.
 
 Unread register is leftover. Tech-debt rename is leftover. Do not skip `test_exception_needs_owner_review_and_wcag`. This page does not mark you as finished. Do not contact a live disclosure inbox to prove the finding.
 

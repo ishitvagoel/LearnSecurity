@@ -30,7 +30,7 @@ flowchart LR
 
 If the clerk-chosen filename is concatenated into `sh -c`, the check is gone. FastAPI, a denylist of punctuation, and “internal clerk” trust do not bind argv. Jinja, SQL (5.5), and mail headers are the same shape at other parsers — name them, do not run those systems here. Formula characters in the CSV *body* are advanced leftover, a different residual.
 
-The clinic rewrite still has to keep the notes-app fork: the spawn helper returns a list whose program is not `sh`, and the name is one element. Stripping punctuation while still calling `sh -c` leaves the second parser. The local pytest analogue is `test_does_not_invoke_shell` — on a practice, not a live export worker.
+The spawn helper returns a list whose program is not `sh`, and the name is one element. Stripping punctuation while still calling `sh -c` leaves the second parser. The local check is `test_does_not_invoke_shell` — on a practice, not a live export worker.
 
 ## Prompt — clinic CSV filename
 

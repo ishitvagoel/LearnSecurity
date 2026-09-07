@@ -31,7 +31,7 @@ flowchart LR
 
 If support asked for five minutes while `boot_ok` is always true, the rule is gone. `NODE_ENV`, a canary, and an IaC file do not compare `env` to `debug`. A feature flag that turns off authorization is the same fail-open family — name it, do not hit a live `/debug` here. A famous-bugs list is a label *after* the fail-open cause, not this week’s rule. A manufacturer-defaults program page stays unverified. Extra version leakage can remain with debug off — extra, advanced work.
 
-The clinic rewrite still has to keep the notes-app fork: prod plus debug denied, prod without debug may boot. Setting `NODE_ENV` without that both-at-once check leaves `boot_ok("prod", True)` true. The local pytest analogue is `test_prod_debug_must_not_boot` — on a practice, not a live host.
+Prod plus debug still has to be denied. Prod without debug may still boot. Setting `NODE_ENV` without that both-at-once check leaves `boot_ok("prod", True)` true. The local check is `test_prod_debug_must_not_boot` — on a practice, not a live host.
 
 ## Prompt — clinic Django DEBUG=True
 

@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `protect` / `looks_encrypted`. Fake plaintext `secret`. It does not open a database or a cipher library. Watch the check treat Base64 labeled encryption as a **failed rule**, not as a trophy decoder.
+The practice is not a website you attack. It is a tiny in-process `protect` / `looks_encrypted`. Fake plaintext `secret`. It does not open a database or a cipher library. Base64 labeled encryption is a **failed rule**, not a trophy decoder.
 
 The rule under test:
 

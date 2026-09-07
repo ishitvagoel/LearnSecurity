@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships the notes app’s profile PATCH. Review `labs/7.1/7.1-lab/vulnerable/` as that change. Check whether `apply(..., {"is_admin": true})` still writes true, compare that with the rule, and write changes a developer can verify.
+Review `labs/7.1/7.1-lab/vulnerable/` as a change to the notes app’s profile PATCH. Check whether `apply(..., {"is_admin": true})` still writes true, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_is_admin_cannot_be_patched`) is the rule check. A comment “we should allow-list later” is not. An inventory ticket about leftover endpoints is not this review.
 
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|SPA omits checkbox| False[False assurance]
 ```
 
-`is_admin` still false. If that call never includes a server `ALLOWED` copy, that extra-key leftover is still open. An OpenAPI file without that check is still the same problem.
+`is_admin` is still false. If the change never copies a server `ALLOWED` list, that extra-key leftover is still open. An OpenAPI file without that check is still the same problem.
 
 A missing SPA checkbox (3.4’s client leftover, restated for fields) does not bind `apply`. Leftover `/v0` and GraphQL `input: JSON` are other binders — name them, do not skip `test_is_admin_cannot_be_patched`.
 

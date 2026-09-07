@@ -20,7 +20,7 @@ flowchart TD
   Metric --> Rotate[Rotate disposable secret if events escaped]
 ```
 
-This still does not compute the MAC. A vendor name is not this week's rule. Someone still has to own every callback path.
+A vendor name does not compute the MAC. Someone still has to own every callback path.
 
 ## Signals that do not become a second leak
 

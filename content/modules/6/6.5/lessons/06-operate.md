@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Stop[Do not fetch]
 ```
 
-This still does not allow-list hosts. A vendor name is not this week's rule. Someone still has to own the importer path.
+A vendor name does not allow-list hosts. Someone still has to own the importer path.
 
 ## Signals that do not become a second leak
 

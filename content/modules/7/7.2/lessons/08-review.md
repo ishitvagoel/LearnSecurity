@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships the notes app’s note JSON. Review `labs/7.2/7.2-lab/vulnerable/` as that change. Check whether `resolve("member", "secret_internal")` is still true, compare that with the rule, and write changes a developer can verify.
+Review `labs/7.2/7.2-lab/vulnerable/` as a change to the notes app’s note JSON. Check whether `resolve("member", "secret_internal")` is still true, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_member_cannot_resolve_internal_field`) is the rule check. A comment “will matrix later” is not.
 
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|UUID obscure| False[False assurance]
 ```
 
-What has to stay true: member denied `secret_internal`. If that call never includes a server role×field check, that dump path is still open. A hidden SPA column without that check is still the same problem.
+A member still has to be denied `secret_internal`. If the change never checks role×field on the server, that dump path is still open. A hidden SPA column without that check is still the same problem.
 
 Identifiers find a row. They do not authorize fields. Object GET tests (4.4) do not bind this grain. CSV and later workers (7.4) are other serializers — name them, do not skip `test_member_cannot_resolve_internal_field`.
 

@@ -23,7 +23,7 @@ flowchart LR
 
 If row-level rules are “on” while `tenant_for` prefers the body, the rule is gone. A relationship-graph tuple store and a famous-bugs mapping do not put session A in what you trust. GraphQL `org_id` is the same field. Name them, do not probe a live clinic here. Famous-bugs lists are a regression label *after* the body-wins cause, not the syllabus. Immediate grant-change leftover is advanced: in-session grant change, not this check.
 
-The clinic rewrite still has to keep the notes-app fork: session A plus body B is A, matching A/A may keep A. Enabling row-level rules without session binding leaves `tenant_for({A},{B}) == B`. The local pytest analogue is `test_body_cannot_switch_tenant` — on a practice, not a live clinic system.
+Session A plus body B is still A. Matching A/A may still keep A. Enabling row-level rules without session binding leaves `tenant_for({A},{B}) == B`. The local check is `test_body_cannot_switch_tenant` — on a practice, not a live clinic system.
 
 ## Prompt — clinic sketch
 

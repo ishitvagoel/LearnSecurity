@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new WorkManager blob can skip the cache wrapper after `save_note` was “fixed once.” Pair notice and recover. Do not log note bodies (3.1). Do not attach the chart to the ticket.
+A new WorkManager blob can skip the cache wrapper after `save_note` was “fixed once.” Do not log note bodies (3.1). Do not attach the chart to the ticket.
 
 ## Picture: leftover cache is a signal
 
@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Flag["backup_flag review"]
 ```
 
-This still does not prove the wrap. It does not prove a checklist.
+A checklist name does not prove the wrap.
 
 ## Signals that do not become a second leak
 
@@ -31,7 +31,7 @@ Naming an MDM product is not the rule. Re-run `test_cached_note_is_not_plaintext
 
 ## What the framework does vs what you still have to check
 
-Android Auto Backup can copy ciphertext *and* a poorly stored key while the pytest still says “not plaintext secret.” Notice must observe **`plaintext_on_disk()` false**, not a fingerprint prompt. If the alert includes note bodies, you have opened a logging leak (3.1 / 5.1).
+Android Auto Backup can copy ciphertext *and* a poorly stored key while the check still says “not plaintext secret.” Notice must observe **`plaintext_on_disk()` false**, not a fingerprint prompt. If the alert includes note bodies, you have opened a logging leak (3.1 / 5.1).
 
 What this practice is supposed to show: leftover-cache signals fire without the body. A vendor name is not this week's rule.
 

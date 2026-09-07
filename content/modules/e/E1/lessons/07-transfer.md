@@ -7,7 +7,7 @@
 
 The notes-app scaffolding goes away. You get a **clinic summarizer over charts**. Your job is to rewrite the loop, not to name a bug-list code.
 
-The notes-app sentence was: `run_tool("exec_sql", {})` must be None. Rewrite it for a clinic without changing the fork: `exec_sql` denied, `search_notes` may run. A system prompt is still English, not permission.
+The notes-app sentence was: `run_tool("exec_sql", {})` must be None. Rewrite it for a clinic without changing the fork: `exec_sql` still has to be denied. `search_notes` may still run. A system prompt is still English, not permission.
 
 **Product sketch:** an EHR-lite "the model is only allowed to summarize, the system prompt forbids SQL," plus "we mapped a famous-bugs list so the agent is done."
 
@@ -31,7 +31,7 @@ flowchart LR
 
 If the model "only summarizes" while `run_tool` is always-run, the rule is gone. A system prompt, retrieval, and a famous-bugs mapping do not put `exec_sql` outside `ALLOWED`. A coding assistant in CI that can install packages is the same allow-list grain — name it, do not jailbreak a live model here. Guidance documents on AI risk are not this check. Cryptographically bound approvals are extra, advanced work, not this week's check.
 
-The clinic rewrite still has to keep the notes-app fork: `exec_sql` denied, `search_notes` may run. Adding a prompt without an allow-list leaves `run_tool("exec_sql")` running. The local pytest analogue is `test_exec_sql_tool_is_denied` — on a practice, not a live model.
+`exec_sql` denied, `search_notes` may run. Adding a prompt without an allow-list leaves `run_tool("exec_sql")` running. The local check is `test_exec_sql_tool_is_denied` — on a practice, not a live model.
 
 ## Prompt — clinic summarizer over charts
 

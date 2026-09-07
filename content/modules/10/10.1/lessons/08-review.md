@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships the notes app’s merge check. Review `labs/10.1/10.1-lab/vulnerable/` as that change. Check whether `merge_ok({})` still returns true, compare that with the rule, and write changes a developer can verify.
+Review `labs/10.1/10.1-lab/vulnerable/` as a change to the notes app’s merge check. Check whether `merge_ok({})` still returns true, compare that with the rule, and write changes a developer can verify.
 
 Start at `merge_ok` and the empty dict, not at a scanner color or a training screenshot. The check you already ran (`test_merge_requires_threat_model_id`) is the rule test. A comment “will add a threat model later” is not.
 
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|HIPAA training| False[False assurance]
 ```
 
-What has to stay true: empty change denied. If that call never includes a truthy `threat_model`, that always-merge path is still open. A training screenshot does not replace that check.
+An empty change still has to be denied. If the change never checks a truthy `threat_model`, that always-merge path is still open. A training screenshot does not replace that check.
 
 Stale TM-12 is 3.2. Governance evidence is 10.4. Do not skip `test_merge_requires_threat_model_id`. Do not claim Gate 10. Do not change a live org to prove the finding.
 

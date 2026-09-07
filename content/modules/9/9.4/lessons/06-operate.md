@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new rule can fire a new HIGH after `ship_ok` was “fixed once.” Pair notice and recover. Do not log secret-scanner payloads or note bodies. Do not paste scanner snippets with fake clinic text into Slack.
+A new rule can fire a new HIGH after `ship_ok` was “fixed once.” Do not log secret-scanner payloads or note bodies. Do not paste scanner snippets with fake clinic text into Slack.
 
 ## Picture: unmapped HIGH is a signal
 

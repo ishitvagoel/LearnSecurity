@@ -3,7 +3,7 @@
 **Kind:** design-exercise
 **Loop step:** 2 Model
 
-## Could someone else name pytest cases from your sequence?
+## Could someone else name the checks from your sequence?
 
 “We use OAuth” is not this page. A reviewable model names **authorization server, client, resource server, audience, and which secrets bind the transaction**.
 
@@ -66,7 +66,7 @@ An earlier topic already refused “JWT means secure.” Here the same format ca
 
 ## Practice
 
-Draw this map so someone else could name pytest cases. Point at `labs/4.5/4.5-lab` file `jwt_aud.py`.
+Draw this map so someone else could name the checks. Point at `labs/4.5/4.5-lab` file `jwt_aud.py`.
 
 ## Use it somewhere new
 

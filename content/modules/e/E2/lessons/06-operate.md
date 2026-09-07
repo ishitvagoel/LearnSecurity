@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A CDN can strip the enforcing header after deploy. Pair notice and recover. Do not log full HTML or note bodies (3.1). Do not paste the page source into the ticket.
+A CDN can strip the enforcing header after deploy. Do not log full HTML or note bodies (3.1). Do not paste the page source into the ticket.
 
 ## Picture: Report-Only-only is a signal
 
@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Flip[add enforcing header]
 ```
 
-This still does not prove the enforcing header is present.
+A dashboard tile does not prove the enforcing header is present.
 
 ## Signals that do not become a second leak
 

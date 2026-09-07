@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships the notes app’s header middleware. Review `labs/E2/e2-lab/vulnerable/` as that change. Check whether Report-Only still makes `isolation_enforced` true, compare that with the rule, and write changes a developer can verify.
+Review `labs/E2/e2-lab/vulnerable/` as a change to the notes app’s header middleware. Check whether Report-Only still makes `isolation_enforced` true, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_report_only_is_not_enforcement`) is the rule check. A comment “we should enforce later” is not.
 
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|dashboard green| False[False assurance]
 ```
 
-Report-Only is not enforcement. If that call never includes the enforcing header name, that always-on leftover is still open. A dashboard screenshot does not replace that check.
+Report-Only is not enforcement. If the change never uses the enforcing header name, that always-on leftover is still open. A dashboard screenshot does not replace that check.
 
 Encoding is 6.2. CDN strip is 2.2. Do not skip `test_report_only_is_not_enforcement`. Do not claim check-in 7. Do not load a live page to prove the finding.
 

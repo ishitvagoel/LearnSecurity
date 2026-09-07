@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `apply(user, body)`. The failure is already in the function: `user.update(body)` copies every key, so `is_admin` becomes true. Watch for this: extra keys writing `is_admin` is **a failed rule**, not a trophy against a public API.
+The practice is not a website you attack. It is a tiny Python `apply(user, body)`. The failure is already in the function: `user.update(body)` copies every key, so `is_admin` becomes true. Extra keys writing `is_admin` is **a failed rule**, not a trophy against a public API.
 
 The rule under test:
 

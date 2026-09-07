@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new share path, a worker, or a webhook can make the model stale while every CVE scanner stays green. Pair notice and recover. Do not log note bodies while you look. Do not back-date the threat-model file after an incident so it looks as if the row was always there.
+A new share path, a worker, or a webhook can make the model stale while every CVE scanner stays green. Do not log note bodies while you look. Do not back-date the threat-model file after an incident so it looks as if the row was always there.
 
 ## Picture: age and missing-id gates
 
@@ -27,7 +27,7 @@ A missing id is a notice-and-recover problem, not a licence to rewrite yesterday
 | Recover | Add the row, the tests, and an owner; **do not back-date** the file |
 | Leftover | Unknown unknowns; write down the next trigger |
 
-This still does not pick a log product. It does not prove the seed. An awareness list is still awareness. Naming a SIEM product is not the rule.
+A log product does not prove the seed is there. A famous-bugs list is still just a list.
 
 ## What the framework does vs what you still have to check
 

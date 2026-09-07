@@ -31,7 +31,7 @@ flowchart LR
 
 If training is complete while `merge_ok` is always true, the rule is gone. CODEOWNERS, a maturity score, and a “secure by design” pledge do not put `threat_model` on the change. This topic is **cite a threat-model id**; 3.2 is **write the model**. Training without `merge_ok` produces binders. `merge_ok` without 3.2 produces citations of empty documents. You need both. A later draft of the design-review guide stays a draft. An unverified manufacturer-ownership page stays unverified.
 
-The clinic rewrite still has to keep the notes-app fork: empty change denied, TM-12 may merge. Turning on CODEOWNERS without a merge check leaves `merge_ok({})` true. The local pytest analogue is `test_merge_requires_threat_model_id` — on a practice, not a live GitHub org.
+An empty change still has to be denied. TM-12 may still merge. Turning on CODEOWNERS without a merge check leaves `merge_ok({})` true. The local check is `test_merge_requires_threat_model_id` — on a practice, not a live GitHub org.
 
 Also name the exception path (E6): an exception still names the missing threat model and when it expires.
 

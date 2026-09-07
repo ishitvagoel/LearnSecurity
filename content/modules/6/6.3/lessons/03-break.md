@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `allow_share`. The failure is already in the function: it treats a leftover session cookie as consent to share. Watch the check treat that as a **failed rule**, not as a trophy against another site.
+The practice is not a website you attack. It is a tiny Python `allow_share`. The failure is already in the function: it treats a leftover session cookie as consent to share. That is a **failed rule**, not a trophy against another site.
 
 The rule under test:
 
@@ -29,7 +29,7 @@ flowchart TD
 
 The broken files show **cause** (leftover cookie treated as consent), not a cross-site trophy against a public app. What has to be true first: `allow_share` returns `session_cookie` and ignores origin and token. You do not need a live third-party page. You must not build one.
 
-SameSite set for purpose is a helper, not complete. Industry lists ask for anti-forgery tokens (or extra headers a simple form cannot set). This practice is that sentence for `allow_share`.
+SameSite set for purpose is a helper, not complete. Industry lists ask for anti-forgery tokens (or extra headers a simple form cannot set). This practice covers `allow_share`.
 
 ## What to look at: the cause, not a trophy
 

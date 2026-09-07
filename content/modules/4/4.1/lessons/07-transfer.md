@@ -11,7 +11,7 @@ The notes-app sentence was: after `delete_user("alice")`, `session_valid("alice"
 
 ## Picture: badge off is not session off
 
-Renaming “alice” to “clinician” is not transfer. The leftover changes. Disabling the badge does not authorize leaving the chart cookie alive. A logout product name is not the pytest.
+Renaming “alice” to “clinician” is not transfer. The leftover changes. Disabling the badge does not authorize leaving the chart cookie alive. A logout product name is not the check.
 
 | Notes app this week | Clinic sketch |
 |---|---|

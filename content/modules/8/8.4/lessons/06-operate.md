@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new flavor can reuse the prod client id after `api_allowed` was “fixed once.” Pair notice and recover. Do not log binaries or secrets (5.3). Do not attach the APK to the ticket.
+A new flavor can reuse the prod client id after `api_allowed` was “fixed once.” Do not log binaries or secrets (5.3). Do not attach the APK to the ticket.
 
 ## Picture: debug hitting prod is a signal
 
@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Revoke[Revoke debug client id]
 ```
 
-This still does not prove secrets stayed out of the APK.
+A dashboard tile does not prove secrets stayed out of the APK.
 
 ## Signals that do not become a second leak
 

@@ -20,7 +20,7 @@ flowchart TD
   Metric --> Revert[block merge]
 ```
 
-This still does not prove avoid-eval. A bot-vendor name is not the rule. Someone still has to own the always-approve path.
+A bot-vendor name does not prove avoid-eval. Someone still has to own the always-approve path.
 
 ## Signals that do not become a second leak
 

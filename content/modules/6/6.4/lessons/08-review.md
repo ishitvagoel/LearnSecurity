@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships notes-app uploads. Review `labs/6.4/6.4-lab/vulnerable/` as that change. Check whether `resolve("../outside")` still leaves `/tmp/sc-lab`, compare that with the rule, and write changes a developer can verify.
+Review `labs/6.4/6.4-lab/vulnerable/` as a change to notes-app uploads. Check whether `resolve("../outside")` still leaves `/tmp/sc-lab`, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_dotdot_does_not_escape_root`) is the rule test. A comment “will canonicalize later” is not.
 
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"Content-Type"| False[False assurance]
 ```
 
-What has to stay true: canonical object still under the folder. If that call never includes join-canonicalize-prefix, that leftover path is still open. A `..` denylist without a prefix test is still the same problem.
+The canonical object still has to stay under the folder. If the change never joins, canonicalizes, and checks the prefix, that leftover path is still open. A `..` denylist without a prefix test is still the same problem.
 
 Zip member paths are another parser of this rule, not a reason to skip `test_dotdot_does_not_escape_root`. Starlette `UploadFile.filename` is still client data after the change “randomizes names.”
 

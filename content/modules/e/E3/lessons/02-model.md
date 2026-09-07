@@ -52,7 +52,7 @@ If both arrows append, the map already predicts `test_duplicate_capture_does_not
 
 ## Practice
 
-Draw the map so someone else could name pytest cases. Point at `labs/E3/e3-lab` file `pay.py`.
+Draw the map so someone else could name the checks. Point at `labs/E3/e3-lab` file `pay.py`.
 
 ## Use it somewhere new
 

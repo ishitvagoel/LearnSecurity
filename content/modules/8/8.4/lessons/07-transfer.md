@@ -39,7 +39,7 @@ Rewrite the notes-app sentence for this product. Your answer must include:
 5. leftover risk (stolen release keys, attestation farms, 8.1 hostile release APK);
 6. the web accessibility baseline if a human deny path is in the claim (readable “use the lab environment,” not a spinner that retries prod forever).
 
-The clinic rewrite still has to keep the notes-app fork: debug plus ok false, release plus ok may be true. Turning on R8 and Play App Signing without a debug-to-prod deny check leaves `api_allowed("debug","ok")` true. The local pytest analogue is `test_debug_build_cannot_call_prod_export` — on the practice files, not a store APK unpack.
+Debug plus ok still has to be false. Release plus ok may still be true. Turning on R8 and Play App Signing without a debug-to-prod deny check leaves `api_allowed("debug","ok")` true. The local check is `test_debug_build_cannot_call_prod_export` — on the practice files, not a store APK unpack.
 
 ## What is not good enough
 

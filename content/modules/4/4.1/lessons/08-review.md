@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships notes-app offboarding. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `session_valid("alice")` is still true after `delete_user` if they ship. Start at the leftover session after delete, not at a scanner color or an HR ticket.
+This review is about notes-app offboarding. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `session_valid("alice")` is still true after `delete_user` if they ship. Start at the leftover session after delete, not at a scanner color or an HR ticket.
 
 The folder `labs/4.1/4.1-lab/vulnerable/` is the change. The check you already ran (`test_deleted_user_session_is_dead`) is the rule test. A comment “will revoke sessions later” is not.
 
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"single sign-on is on"| False[False assurance]
 ```
 
-What has to stay true: session dead after delete. If that same delete never includes leftover-kill, the leftover is still there.
+The session still has to be dead after delete. If that same delete never kills leftovers, the leftover is still there.
 
 ## Problems to find (name them yourself)
 

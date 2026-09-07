@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a phone you image. It is a tiny Python `save_note` / `plaintext_on_disk`. The failure is already in the function: it stores the body as-is, so after `save_note("secret")` the disk still holds `'secret'`. Watch for this: a **note body cached as plaintext** is **a failed rule**, not a trophy against a personal phone.
+The practice is not a phone you image. It is a tiny Python `save_note` / `plaintext_on_disk`. The failure is already in the function: it stores the body as-is, so after `save_note("secret")` the disk still holds `'secret'`. A **note body cached as plaintext** is **a failed rule**, not a trophy against a personal phone.
 
 The rule under test:
 

@@ -57,7 +57,7 @@ A missing “second accept × `t1` × deny” row is how the invite is accepted 
 
 ## Practice
 
-Draw the states so someone else could name the pytest cases. Point at `labs/6.6/6.6-lab` file `invite.py`. Your artifact is a versioned list (even a table in your notes) with state, consume, allow or deny, and what would show the deny is false. Fake tokens only.
+Draw the states so someone else could name the checks. Point at `labs/6.6/6.6-lab` file `invite.py`. Your artifact is a versioned list (even a table in your notes) with state, consume, allow or deny, and what would show the deny is false. Fake tokens only.
 
 ## Use it somewhere new
 

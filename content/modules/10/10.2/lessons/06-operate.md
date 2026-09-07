@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A cache can serve old bytes after `install_ok` was “fixed once.” Pair notice and recover. Do not log registry tokens or signing keys (5.3). Do not paste `.npmrc` into the ticket.
+A cache can serve old bytes after `install_ok` was “fixed once.” Do not log registry tokens or signing keys (5.3). Do not paste `.npmrc` into the ticket.
 
 ## Picture: digest mismatch is a signal
 
@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Pin[repin known-good]
 ```
 
-This still does not pick an SBOM vendor. It does not prove the lockfile was checked.
+An SBOM vendor name does not prove the lockfile was checked.
 
 Re-run `test_hash_mismatch_refuses_install` after any installer change. A green “SBOM attached” tile is not that check. Cache poisoning and `@v1` Actions are sibling grains — inventory them before you claim recover.
 

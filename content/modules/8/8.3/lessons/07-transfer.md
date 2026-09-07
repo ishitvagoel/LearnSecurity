@@ -39,7 +39,7 @@ Rewrite the notes-app sentence for this product. Your answer must include:
 5. leftover risk (WebView, custom schemes, 4.5 audience);
 6. the web accessibility baseline if a human error path exists (exit the WebView with a keyboard).
 
-The clinic rewrite still has to keep the notes-app fork: `as=doctor` keeps the signed-in user. Verifying App Links without an `as=` deny check leaves the session switch. The local pytest analogue is `test_deeplink_as_param_does_not_switch_user` — on the practice files, not a sideloaded malware APK.
+`as=doctor` keeps the signed-in user. Verifying App Links without an `as=` deny check leaves the session switch. The local check is `test_deeplink_as_param_does_not_switch_user` — on the practice files, not a sideloaded malware APK.
 
 ## What is not good enough
 

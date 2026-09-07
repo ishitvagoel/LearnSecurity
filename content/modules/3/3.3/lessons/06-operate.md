@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A migration can leave `GRANT ALL` on the runtime user. A pooler can switch to `postgres`. Pair notice and recover. Do not log note bodies. Do not paste a company dump into the ticket while investigating.
+A migration can leave `GRANT ALL` on the runtime user. A pooler can switch to `postgres`. Do not log note bodies. Do not paste a company dump into the ticket while investigating.
 
 ## Picture: who connected, then rotate
 
@@ -26,7 +26,7 @@ A broken grant is a notice-and-recover problem, not a licence to dump the note i
 | Recover | Rotate password; fix `GRANT`; take migrator offline |
 | Leftover | Stolen `app` still reads one company; write that rule down |
 
-This still does not configure `GRANT`. It does not prove this company rule. A vendor name is not this week's rule. Re-run `test_app_role_cannot_read_other_tenant` after any GRANT change; a green IAM dashboard is not that check.
+A log line does not configure `GRANT` or prove this company rule. Re-run `test_app_role_cannot_read_other_tenant` after any GRANT change; a green IAM dashboard is not that check.
 
 The migrate job is leftover you must keep named: it exists, it is offline at request time, and a leaked migrate secret is a different owner than a leaked `app` password. Do not collapse those two alerts into “database issue.”
 

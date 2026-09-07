@@ -30,7 +30,7 @@ flowchart LR
 
 If the importer GETs whatever URL the form posted, the check is gone. FastAPI, an HTTPS prefix, and a private-IP denylist of one address do not name the peer. Webhook delivery (7.3) is the same deputy with a different verb. Open-redirect UX is a sister check; do not fetch to demonstrate it.
 
-The clinic rewrite still has to keep the notes-app fork: link-local and loopback are false; only the named lab (or clinic) host on https is true. Switching the importer to HTTPS without a host allow-list leaves the server as deputy. The local pytest analogue is `test_link_local_metadata_is_denied` — on a practice, not a live PDF or metadata endpoint.
+Link-local and loopback still have to be false; only the named lab (or clinic) host on https may be true. Switching the importer to HTTPS without a host allow-list leaves the server as deputy. The local check is `test_link_local_metadata_is_denied` — on a practice, not a live PDF or metadata endpoint.
 
 ## Prompt — clinic fetch of a lab-result PDF
 

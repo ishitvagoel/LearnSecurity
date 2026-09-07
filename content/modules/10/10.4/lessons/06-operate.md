@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A flag can still flip after `boot_ok` was “fixed once.” Pair notice and recover. Do not log stack traces that contain secrets, session tokens, or note bodies. Do not paste the traceback into the ticket.
+A flag can still flip after `boot_ok` was “fixed once.” Do not log stack traces that contain secrets, session tokens, or note bodies. Do not paste the traceback into the ticket.
 
 ## Picture: an illegal boot is a signal
 

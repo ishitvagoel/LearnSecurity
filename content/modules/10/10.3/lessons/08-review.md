@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships the notes app's cluster admission. Review `labs/10.3/10.3-lab/vulnerable/` as that change. Check whether `pod_ok("cluster-admin")` still returns true, compare that with the rule, and write changes a developer can verify.
+Review `labs/10.3/10.3-lab/vulnerable/` as a change to the notes app's cluster admission. Check whether `pod_ok("cluster-admin")` still returns true, compare that with the rule, and write changes a developer can verify.
 
 Start at `pod_ok` and the cluster-admin row, not at a scanner color or a CIS screenshot. The check you already ran (`test_cluster_admin_pod_is_denied`) is the rule test. A comment "will tighten RBAC later" is not.
 
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|CIS scan green| False[False assurance]
 ```
 
-What has to stay true: cluster-admin denied. If that call never includes allow-list membership, that always-run leftover is still open. A CIS screenshot does not replace that check.
+`cluster-admin` still has to be denied. If the change never checks allow-list membership, that always-run leftover is still open. A CIS screenshot does not replace that check.
 
 A restricted pod profile is pod spec. A network policy is egress. Instance metadata is a sibling leftover. Name them, do not skip `test_cluster_admin_pod_is_denied`. This page does not mark you as finished. Do not apply manifests to a live cluster to prove the finding.
 

@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-An import job, a support tool, or a missed GraphQL mutation can still insert a sixth after `/share` was “capped once.” Pair notice and recover. Do not log note bodies. Do not paste member emails into the ticket.
+An import job, a support tool, or a missed GraphQL mutation can still insert a sixth after `/share` was “capped once.” Do not log note bodies. Do not paste member emails into the ticket.
 
 ## Picture: metric on deny, then trim
 
@@ -24,7 +24,7 @@ flowchart TD
 | Recover | Trim extra grants; tell the owner |
 | Leftover | Teams >5 need an owned exception |
 
-Announce “share limit reached” so people can hear it. That announcement is not the cap. This still does not prove the write-path cap. A vendor name is not this week's rule.
+Announce “share limit reached” so people can hear it. That announcement is not the cap, and a vendor name does not prove the write-path cap.
 
 ## What the framework does vs what you still have to check
 

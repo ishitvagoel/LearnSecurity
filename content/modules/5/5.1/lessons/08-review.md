@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships notes-app deletion. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `body_retained("alice")` is still `"secret"` after `delete_account("alice")` if they ship. Start at leftover analytics after delete, not at a scanner color or a contract ticket.
+This review is about notes-app deletion. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `body_retained("alice")` is still `"secret"` after `delete_account("alice")` if they ship. Start at leftover analytics after delete, not at a scanner color or a contract ticket.
 
 The folder `labs/5.1/5.1-lab/vulnerable/` is the change. The check you already ran (`test_deleted_account_leaves_no_analytics_body`) is the rule test. A comment “will add warehouse purge later” is not.
 
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"privacy policy"| False[False assurance]
 ```
 
-What has to stay true: analytics and search bodies are None after delete. If that same delete never includes a pop of those copies, that leftover path is still open. “We anonymized user ids” while the body column remains is still the same problem.
+Analytics and search bodies still have to be None after delete. If that same delete never pops those copies, that leftover path is still open. “We anonymized user ids” while the body column remains is still the same problem.
 
 ## Problems to find (name them yourself)
 

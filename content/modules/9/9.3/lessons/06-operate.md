@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new endpoint can land with only 200 tests after `is_security_test` was “fixed once.” Pair notice and recover. Do not log note bodies from failed isolation cases (3.1). Do not attach patient JSON to the ticket.
+A new endpoint can land with only 200 tests after `is_security_test` was “fixed once.” Do not log note bodies from failed isolation cases (3.1). Do not attach patient JSON to the ticket.
 
 ## Picture: missing isolation is a signal
 

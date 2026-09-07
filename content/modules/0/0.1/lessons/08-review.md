@@ -22,7 +22,7 @@ flowchart TD
   Q -->|a guide mapped| False[False assurance]
 ```
 
-What has to stay true: public host denied. If that call never includes a hostname allow-list, that leftover path is still open.
+A public host still has to be denied. If the change never checks a hostname allow-list, that leftover path is still open.
 
 ## Problems to find (name them yourself)
 

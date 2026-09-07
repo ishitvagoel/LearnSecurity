@@ -59,7 +59,7 @@ A missing “unsigned POST × accept × deny” row is how a path-trusted callba
 
 ## Practice
 
-Draw the map so someone else could name the pytest cases. Point at `labs/7.3/7.3-lab` file `hook.py`. Local only. Do not POST a live webhook.
+Draw the map so someone else could name the checks. Point at `labs/7.3/7.3-lab` file `hook.py`. Local only. Do not POST a live webhook.
 
 ## Use it somewhere new
 

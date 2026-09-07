@@ -59,7 +59,7 @@ A missing “link-local metadata × fetch × deny” row is how a scheme-only ch
 
 ## Practice
 
-Draw parse → host → allow-list so someone else could name the pytest cases. Point at `labs/6.5/6.5-lab` file `ssrf.py`. Fake URLs only. Do not fetch.
+Draw parse → host → allow-list so someone else could name the checks. Point at `labs/6.5/6.5-lab` file `ssrf.py`. Fake URLs only. Do not fetch.
 
 ## Use it somewhere new
 

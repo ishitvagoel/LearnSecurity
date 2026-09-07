@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships notes-app share. Review `labs/2.4/2.4-state-time/vulnerable/` as that change. Check whether a second `share_note` with `k1` still appends a row, compare that with the rule, and write changes a developer can verify.
+Review `labs/2.4/2.4-state-time/vulnerable/` as a change to notes-app share. Check whether a second `share_note` with `k1` still appends a row, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_retry_does_not_duplicate_side_effect`) is the rule test. A comment “will add remembering later” is not.
 
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"HTTP 201 means once"| False[False assurance]
 ```
 
-What has to stay true: share count under retry. If that second call never includes a remembered first outcome, that leftover path is still open.
+The share count still has to stay under retry. If that second call never remembers the first outcome, that leftover path is still open.
 
 ## Problems to find (name them yourself)
 

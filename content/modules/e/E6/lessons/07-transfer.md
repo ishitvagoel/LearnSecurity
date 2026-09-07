@@ -32,7 +32,7 @@ flowchart LR
 
 If legal said yes while `accept_exception` is always true, the rule is gone. A maturity score, an industry “govern” sticker, and an unverified pledge do not put `owner` and `review_by` on the row. A procurement questionnaire is a different document — name it, do not open a live clinic audit here. Exceptions are not failure; hiding them is a dishonest register. A later design-review draft stays a draft. Extra advanced documentation of a dangerous function is documentation, not this check.
 
-The clinic rewrite still has to keep the notes-app fork: empty owner denied, complete record may accept. Adding a HIPAA slide without the schema leaves `accept_exception` true on empty owner. The local pytest analogue is `test_exception_needs_owner_review_and_wcag` — on a practice, not a live governance tool.
+An empty owner still has to be denied. A complete record may still accept. Adding a HIPAA slide without the schema leaves `accept_exception` true on empty owner. The local check is `test_exception_needs_owner_review_and_wcag` — on a practice, not a live governance tool.
 
 ## Prompt — clinic HIPAA exception
 

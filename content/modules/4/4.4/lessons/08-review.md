@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships notes-app who-is-allowed. Check whether `can_read("bob", "n2")` is still true, compare that with the module rule, and write changes a developer can verify.
+This review is about notes-app who-is-allowed. Check whether `can_read("bob", "n2")` is still true, compare that with the module rule, and write changes a developer can verify.
 
 The folder `labs/4.4/4.4-lab/vulnerable/` is the change. The check you already ran (`test_grant_on_n1_is_not_grant_on_n2`) is the rule test. A comment “will add object checks later” is not.
 
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"IDs are hard to guess"| False[False assurance]
 ```
 
-What has to stay true: n2 denied for Bob. If that call never includes an object-keyed lookup, that leftover path is still open. A role list named `admin` without a company comparison is the eve×n1 smell.
+n2 still has to be denied for Bob. If the change never uses an object-keyed lookup, that leftover path is still open. A role list named `admin` without a company comparison is the eve×n1 example.
 
 Leftover permission is permission from the surroundings — a signed-in user, “has any share,” an unscoped admin flag — used as if it were a yes for this person, this note, and this action.
 

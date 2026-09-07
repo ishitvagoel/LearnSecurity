@@ -41,7 +41,7 @@ Rewrite the notes-app sentence for this product. Your answer must include:
 
 Use fake labels. Do not use real patient charts.
 
-The clinic rewrite still has to keep the notes-app fork: `'secret'` not on disk after save. Storing charts internally with a fingerprint lock without a plaintext-on-disk check leaves `plaintext_on_disk()` true. The local pytest analogue is `test_cached_note_is_not_plaintext_on_disk` — on the practice files, not a live tablet image.
+`'secret'` still has to be off disk after save. Storing charts internally with a fingerprint lock without a plaintext-on-disk check leaves `plaintext_on_disk()` true. The local check is `test_cached_note_is_not_plaintext_on_disk` — on the practice files, not a live tablet image.
 
 ## What is not good enough
 

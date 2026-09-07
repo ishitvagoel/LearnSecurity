@@ -58,11 +58,11 @@ Policy lives in one place (who may read). Enforcement happens in the handler **a
 
 ## Step 3: write the rejected choice
 
-Rejected: one `postgres` URL for migrate and serve. Chosen: runtime `app` with a same-company check; migrator credential offline and short-lived. Writing that decision down is useful. It is not the pytest.
+Rejected: one `postgres` URL for migrate and serve. Chosen: runtime `app` with a same-company check; migrator credential offline and short-lived. Writing that decision down is useful. It is not the check.
 
 ## Practice
 
-Draw this map so someone else could name pytest cases. Point at `labs/3.3/3.3-lab` file `roles.py`.
+Draw this map so someone else could name the checks. Point at `labs/3.3/3.3-lab` file `roles.py`.
 
 ## Use it somewhere new
 

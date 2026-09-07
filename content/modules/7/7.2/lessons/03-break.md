@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `resolve(role, field)`. The failure is already in the function: it returns true for every pair. Watch for this: a member resolving `secret_internal` is **a failed rule**, not a trophy dump of an internal token.
+The practice is not a website you attack. It is a tiny Python `resolve(role, field)`. The failure is already in the function: it returns true for every pair. A member resolving `secret_internal` is **a failed rule**, not a trophy dump of an internal token.
 
 The rule under test:
 

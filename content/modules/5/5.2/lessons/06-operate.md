@@ -21,7 +21,7 @@ flowchart TD
   Metric --> Rotate[Rotate keys later]
 ```
 
-This still does not encrypt the column. It does not pick a log product.
+A log product does not encrypt the column.
 
 ## Signals that do not become a second leak
 

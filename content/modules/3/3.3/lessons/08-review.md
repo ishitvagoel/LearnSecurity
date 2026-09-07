@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships the notes app’s database role. Review `labs/3.3/3.3-lab/vulnerable/` as that change. Check whether `can_select("app", "tB", "tA")` is still true, compare that with the rule, and write changes a developer can verify.
+Review `labs/3.3/3.3-lab/vulnerable/` as a change to the notes app’s database role. Check whether `can_select("app", "tB", "tA")` is still true, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_app_role_cannot_read_other_tenant`) is the rule test. A comment “row-level security later” is not.
 
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"VPC is isolation"| False[False assurance]
 ```
 
-What has to stay true: tB cannot SELECT tA. If that call never includes a same-company check, that leftover path is still open.
+tB still cannot SELECT tA. If the change never checks the same company, that leftover path is still open.
 
 ## Problems to find (name them yourself)
 

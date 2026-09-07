@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `exporter`. It does not open a live queue. The failure is already in the function: leftover `user_session` wins if it is present. Watch the check treat that as a **failed rule**, not as a trophy against a public broker.
+The practice is not a website you attack. It is a tiny Python `exporter`. It does not open a live queue. The failure is already in the function: leftover `user_session` wins if it is present. That is a **failed rule**, not a trophy against a public broker.
 
 The rule under test:
 
@@ -31,7 +31,7 @@ flowchart TD
 
 The broken files show **cause** (ambient user context). Do not aim anything except this practice. What has to be true first: `exporter` returns `user_session` if present. You do not need a broker. You must not attach to a live queue.
 
-Industry lists ask for backend jobs logged in as their own accounts, not leftover people. Module 4.1 already revoked leftover HTTP sessions. This check is **whether the worker still is that session**. A zero-trust paper does not replace the pytest.
+Industry lists ask for backend jobs logged in as their own accounts, not leftover people. Module 4.1 already revoked leftover HTTP sessions. This check is **whether the worker still is that session**. A zero-trust paper does not replace the check.
 
 ## What to look at: the cause, not a trophy
 

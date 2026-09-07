@@ -3,7 +3,7 @@
 **Kind:** design-exercise
 **Loop step:** 2 Model
 
-## Could someone else name pytest cases from your field table?
+## Could someone else name the checks from your field table?
 
 “Object authz is on” is not this page. A table someone else can test names **role, field, and every serializer**.
 
@@ -54,7 +54,7 @@ Identifiers find a row. They do not authorize fields. Obscure identifiers are no
 
 ## Practice
 
-Draw the table so someone else could name pytest cases. Point at `labs/7.2/7.2-lab` file `field.py`.
+Draw the table so someone else could name the checks. Point at `labs/7.2/7.2-lab` file `field.py`.
 
 ## Use it somewhere new
 

@@ -7,7 +7,7 @@
 
 The notes-app scaffolding goes away. You get a **clinic that revokes a guardian**. Your job is to rewrite the loop, not to name a bug-list code.
 
-The notes-app sentence was: after `revoke("n1", "B")`, `read("n1", "B")` must be None. Rewrite it for a clinic without changing the fork: B after revoke denied, A still reads, B before revoke still reads. HTTP 200 on DELETE is still an event, not the next-read check.
+The notes-app sentence was: after `revoke("n1", "B")`, `read("n1", "B")` must be None. Rewrite it for a clinic without changing the fork: B after revoke still has to be denied. A still reads. B before revoke still reads. HTTP 200 on DELETE is still an event, not the next-read check.
 
 **Product sketch:** an EHR-lite “we hit DELETE /guardians/12 so the next chart read is fine,” plus “the capstone scanner is green so the assurance stamp is done.”
 
@@ -31,7 +31,7 @@ flowchart LR
 
 If DELETE returns 200 while `read` ignores grants, the rule is gone. A scanner, a YAML pack, and an assurance stamp in a README do not consult `GRANTS`. The full slice is API + delayed worker + phone cache — name them, do not hit a live clinic system here. Access-rights change in the same session without signing in again is extra, advanced work: in-session grant change, not “we stored a revoke row.” A numbered slogan is not the portable pack.
 
-The clinic rewrite still has to keep the notes-app fork: B after revoke denied, A still reads, B before revoke still reads. Adding DELETE without consulting grants leaves `read` returning the body. The local pytest analogue is `test_revoked_share_cannot_read` — on a practice, not a live tenant.
+B after revoke denied, A still reads, B before revoke still reads. Adding DELETE without consulting grants leaves `read` returning the body. The local check is `test_revoked_share_cannot_read` — on a practice, not a live tenant.
 
 ## Prompt — clinic revoke a guardian
 

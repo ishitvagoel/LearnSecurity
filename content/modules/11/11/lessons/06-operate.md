@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A cache or worker can still serve the old grant after `read` was “fixed once.” Pair notice and recover. Do not log note bodies, session tokens, or dump files into the ticket. Do not paste the chart into the ticket.
+A cache or worker can still serve the old grant after `read` was “fixed once.” Do not log note bodies, session tokens, or dump files into the ticket. Do not paste the chart into the ticket.
 
 ## Picture: post-revoke read is a signal
 

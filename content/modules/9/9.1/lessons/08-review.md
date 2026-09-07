@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships the notes app’s coverage check. Review `labs/9.1/9.1-lab/vulnerable/` as that change. Check whether a status-only AUTHZ-1 row still counts as covered, compare that with the rule, and write changes a developer can verify.
+Review `labs/9.1/9.1-lab/vulnerable/` as a change to the notes app’s coverage check. Check whether a status-only AUTHZ-1 row still counts as covered, compare that with the rule, and write changes a developer can verify.
 
 Start at `covered` and the AUTHZ-1 row, not at a scanner color or a PDF screenshot. The check you already ran (`test_status_only_row_is_not_coverage`) is the rule test. A comment “will map tests later” is not.
 
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|green CI| False[False assurance]
 ```
 
-What has to stay true: status-only not covered. If that call never includes `req` **and** `asserts_isolation`, that false-comfort path is still open. A checklist PDF without that check is still the same problem.
+Status-only still is not coverage. If the change never checks `req` **and** `asserts_isolation`, that false-assurance path is still open. A checklist PDF without that check is still the same problem.
 
 HTTP-200 tests that lie about isolation are 9.3. Exceptions without expiry are E6. Do not skip `test_status_only_row_is_not_coverage`. Do not claim the verification gate.
 

@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Kill[Kill child; isolate plugin]
 ```
 
-This still does not build argv. A vendor name is not this week's rule. Someone still has to own the concatenating path.
+A vendor name does not build argv. Someone still has to own the concatenating path.
 
 ## Signals that do not become a second leak
 

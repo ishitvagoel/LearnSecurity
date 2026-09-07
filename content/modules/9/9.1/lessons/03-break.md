@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `covered(req_id, tests)` that returns true or false. The failure is already in the function: any matching requirement id counts as coverage. Watch the check treat that as a **failed rule**, not as a missing spreadsheet cell.
+The practice is not a website you attack. It is a tiny Python `covered(req_id, tests)` that returns true or false. The failure is already in the function: any matching requirement id counts as coverage. That is a **failed rule**, not a missing spreadsheet cell.
 
 The rule under test:
 

@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `tenant_for(session, body)`. The failure is already in the function: it prefers `body["tenant"]` when that key is present. Watch for this: a body-chosen company is **a failed rule**, not a trophy against a public product.
+The practice is not a website you attack. It is a tiny Python `tenant_for(session, body)`. The failure is already in the function: it prefers `body["tenant"]` when that key is present. A body-chosen company is **a failed rule**, not a trophy against a public product.
 
 The rule under test:
 

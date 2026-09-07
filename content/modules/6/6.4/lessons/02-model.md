@@ -54,7 +54,7 @@ A random stored name is extra. It is not a substitute for the prefix check on an
 
 ## Practice
 
-Draw join → canonicalize → prefix so someone else could name pytest cases. Point at `labs/6.4/6.4-lab` file `path.py`.
+Draw join → canonicalize → prefix so someone else could name the checks. Point at `labs/6.4/6.4-lab` file `path.py`.
 
 ## Use it somewhere new
 

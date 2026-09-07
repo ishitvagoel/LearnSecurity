@@ -15,7 +15,7 @@ The notes-app sentence was: `protect("secret")` must not round-trip as Base64. R
 
 ## Picture: the label is not the tool
 
-Renaming “secret” to “SSN” is not transfer. The leftover changes. A column named `ssn_encrypted` does not authorize leaving the bytes as Base64. A disk-encryption checkbox is not the pytest.
+Renaming “secret” to “SSN” is not transfer. The leftover changes. A column named `ssn_encrypted` does not authorize leaving the bytes as Base64. A disk-encryption checkbox is not the check.
 
 | Notes app this week | Clinic sketch |
 |---|---|
@@ -32,7 +32,7 @@ flowchart LR
 
 If the column name is `ssn_encrypted` and the bytes are Base64, the rule is gone. FastAPI, a Postgres `bytea` type, and a disk-encryption checkbox do not invert the reader. Argon2 on the SSN is the wrong rule (password stretching, not field encryption). HTTPS does not encrypt the column.
 
-The clinic rewrite still has to keep the notes-app fork: Base64 decode of the stored stand-in is not the SSN. Renaming the column or wrapping `b64encode` in a function named `encrypt` leaves the reader unchanged. The local pytest analogue is `test_protect_is_not_mere_encoding` — on a practice, not a live clinic system.
+Base64 decode of the stored stand-in is not the SSN. Renaming the column or wrapping `b64encode` in a function named `encrypt` leaves the reader unchanged. The local check is `test_protect_is_not_mere_encoding` — on a practice, not a live clinic system.
 
 ## Prompt — clinic SSN column
 

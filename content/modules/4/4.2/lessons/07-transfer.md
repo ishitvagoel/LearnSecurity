@@ -56,7 +56,7 @@ Rewrite the notes-app sentence for this product. Your answer must include:
 | HTTP 200 as authenticator evidence | Wrong observation |
 | Unlabeled later hardware bar as baseline | That bar is later |
 
-Naming Okta, “we use SSO,” or a step-up checkbox on the real portal is not the helper. The clinic rewrite still has to keep the notes-app fork: `phishing_resistant("otp", evil, real)` is false, and a password typed at the lookalike identity provider is still a shared secret. The local analogue is still `test_password_is_not_phishing_resistant` plus a wrong-origin WebAuthn deny — run against a helper, not a live clinic identity provider. Recovery SMS and a mouse-only ceremony remain leftovers; they do not make OTP phishing-resistant.
+Naming Okta, “we use SSO,” or a step-up checkbox on the real portal is not the helper. `phishing_resistant("otp", evil, real)` is false, and a password typed at the lookalike identity provider is still a shared secret. The local analogue is still `test_password_is_not_phishing_resistant` plus a wrong-origin WebAuthn deny — run against a helper, not a live clinic identity provider. Recovery SMS and a mouse-only ceremony remain leftovers; they do not make OTP phishing-resistant.
 
 ## Practice
 

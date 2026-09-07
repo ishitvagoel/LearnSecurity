@@ -32,7 +32,7 @@ flowchart LR
 
 If designers “need expressions” while `review_ok` is always true, the check is gone. Formatter continuous integration, a linter, and “a bot reviewed it” (later, 9.4) do not ask the interpreter question. Terraform `local-exec` and GitHub Actions `run:` are the same interpreter family — name them, do not run those systems here. The lab substring is a stand-in, not a complete oracle.
 
-The clinic rewrite still has to keep the notes-app fork: eval-on-user rejected, honest `int(user)` may pass. Formatting the template without an interpreter question leaves `review_ok` true. The local pytest analogue is `test_eval_on_user_input_is_rejected` — on a practice, not a live GitHub org.
+Eval-on-user still has to be rejected. Honest `int(user)` may still pass. Formatting the template without an interpreter question leaves `review_ok` true. The local check is `test_eval_on_user_input_is_rejected` — on a practice, not a live GitHub org.
 
 ## Prompt — clinic eval in a report template
 

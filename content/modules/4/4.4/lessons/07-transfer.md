@@ -22,7 +22,7 @@ flowchart LR
 
 If the appointment grant feeds `can_read(chart)`, the rule is gone. FastAPI `Depends(get_user)` and a “clinician” role string do not key chart B. Id length is obscurity, not a grant. A clinic admin costume that crosses companies is the eve×n1 sibling: deny even if the role string says admin.
 
-The clinic rewrite still has to keep the notes-app fork: a grant on appointment A is not a grant on chart B, and a grant in clinic-acme is not a grant in clinic-globex. Copying the share table into a new resource while leaving `has_any_share` as the gate leaves the new table unused. That leftover permission is the same cause with new nouns. The local pytest analogue is `test_grant_on_n1_is_not_grant_on_n2` plus a cross-company deny — on a practice, not a live clinic system.
+A grant on appointment A is not a grant on chart B, and a grant in clinic-acme is not a grant in clinic-globex. Copying the share table into a new resource while leaving `has_any_share` as the gate leaves the new table unused. That leftover permission is the same cause with new nouns. The local check is `test_grant_on_n1_is_not_grant_on_n2` plus a cross-company deny — on a practice, not a live clinic system.
 
 ## Prompt — clinic sketch
 

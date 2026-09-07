@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python model of header names. The failure is already in the dict: `isolation_enforced` treats Report-Only as on. Watch for this: Report-Only counted as isolation is **a failed rule**, not a trophy script.
+The practice is not a website you attack. It is a tiny Python model of header names. The failure is already in the dict: `isolation_enforced` treats Report-Only as on. Report-Only counted as isolation is **a failed rule**, not a trophy script.
 
 The rule under test:
 

@@ -39,7 +39,7 @@ Rewrite the notes-app sentence for this product. Your answer must include:
 5. leftover risk (encoding skipped, CDN strip, XS-Leaks, Trusted Types **draft**, content-security reporting as extra, later, and advanced);
 6. the web accessibility baseline if a blocked-script message is shown (readable text, not color-only meaning).
 
-The clinic rewrite still has to keep the notes-app fork: Report-Only denied, enforcing CSP may count. Adding Report-Only without the enforcing name leaves `isolation_enforced` true. The local pytest analogue is `test_report_only_is_not_enforcement` — on practice files, not a live page.
+Report-Only still has to be denied. Enforcing CSP may still count. Adding Report-Only without the enforcing name leaves `isolation_enforced` true. The local check is `test_report_only_is_not_enforcement` — on practice files, not a live page.
 
 ## What is not good enough
 

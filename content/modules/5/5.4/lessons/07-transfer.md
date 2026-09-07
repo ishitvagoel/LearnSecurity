@@ -11,7 +11,7 @@ The notes-app sentence was: `channel_is_https({"X-Forwarded-Proto": "https"}, "h
 
 ## Picture: the URL bar is not the socket
 
-Renaming “notes app” to “clinic” is not transfer. The leftover changes. An https page does not authorize treating the API socket as TLS. A dashboard toggle is not the pytest.
+Renaming “notes app” to “clinic” is not transfer. The leftover changes. An https page does not authorize treating the API socket as TLS. A dashboard toggle is not the check.
 
 | Notes app this week | Clinic sketch |
 |---|---|
@@ -29,7 +29,7 @@ flowchart LR
 
 If the page URL is https and the API socket is http, the rule is gone. A server flag that trusts proxy headers from `*`, a “Force HTTPS” dashboard, and HSTS preload do not bind the socket. Mutual TLS names a **peer**, which is a different rule: it still must not treat a client header as that peer.
 
-The clinic rewrite still has to keep the notes-app fork: header https + socket http is false. Enabling a CDN “HTTPS only” tile while the app trusts `X-Forwarded-Proto` from anyone leaves the confused deputy. The local pytest analogue is `test_client_forwarded_proto_is_not_tls` — on a practice, not a live clinic.
+Header https plus socket http still has to be false. Enabling a CDN “HTTPS only” tile while the app trusts `X-Forwarded-Proto` from anyone leaves the confused deputy. The local check is `test_client_forwarded_proto_is_not_tls` — on a practice, not a live clinic.
 
 ## Prompt — clinic page vs API socket
 

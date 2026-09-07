@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships the notes app's summarizer agent. Review `labs/E1/e1-lab/vulnerable/` as that change. Check whether `run_tool("exec_sql", {})` still runs, compare that with the rule, and write changes a developer can verify.
+Review `labs/E1/e1-lab/vulnerable/` as a change to the notes app's summarizer agent. Check whether `run_tool("exec_sql", {})` still runs, compare that with the rule, and write changes a developer can verify.
 
 Start at `run_tool` and the `exec_sql` row, not at a scanner color or a famous-bugs screenshot. The check you already ran (`test_exec_sql_tool_is_denied`) is the rule test. A comment "will allow-list later" is not.
 
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|famous-bugs mapped| False[False assurance]
 ```
 
-`exec_sql` is None. If that call never includes allow-list membership, that always-run leftover is still open. A prompt screenshot does not replace that check.
+`exec_sql` is still None. If the change never checks allow-list membership, that always-run leftover is still open. A prompt screenshot does not replace that check.
 
 Retrieved docs are untrusted. Coding-assistant install tools are a later leftover. Name them, do not skip `test_exec_sql_tool_is_denied`. This page does not mark you as finished. Do not call a live model to prove the finding.
 

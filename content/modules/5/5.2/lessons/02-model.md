@@ -3,7 +3,7 @@
 **Kind:** design-exercise
 **Loop step:** 2 Model
 
-## Could someone else name pytest cases from your table?
+## Could someone else name the checks from your table?
 
 “We use AES” is not this lesson. A map someone else can test names **the rule**, **the field**, **the algorithm family**, and **what it is not for**.
 
@@ -57,7 +57,7 @@ A missing “storage reader × Base64 field × deny” row is how encoding gets 
 
 ## Practice
 
-Draw this table so someone else could name the pytest cases. Point at `labs/5.2/5.2-lab` file `crypto.py`. Your artifact is a versioned list (even a table in your notes) with field, tool, allow or deny, and what would show the deny is false. Fake data only.
+Draw this table so someone else could name the checks. Point at `labs/5.2/5.2-lab` file `crypto.py`. Your artifact is a versioned list (even a table in your notes) with field, tool, allow or deny, and what would show the deny is false. Fake data only.
 
 ## Use it somewhere new
 

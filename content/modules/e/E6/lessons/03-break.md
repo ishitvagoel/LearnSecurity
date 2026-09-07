@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `accept_exception` that returns true for every dict. The failure is already in the function: it never looks at owner, review date, or accessibility. Watch the check treat that always-true accept as a **failed rule**, not as a paperwork nit.
+The practice is not a website you attack. It is a tiny Python `accept_exception` that returns true for every dict. The failure is already in the function: it never looks at owner, review date, or accessibility. That always-true accept is a **failed rule**, not a paperwork nit.
 
 The rule under test:
 

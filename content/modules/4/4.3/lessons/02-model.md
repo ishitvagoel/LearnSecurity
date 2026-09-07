@@ -3,7 +3,7 @@
 **Kind:** design-exercise
 **Loop step:** 2 Model
 
-## Could someone else name pytest cases from your channel map?
+## Could someone else name the checks from your channel map?
 
 “We use HttpOnly” is not this page. A reviewable map names **query / cookie / header**, **who sees each**, and **deny on query**.
 
@@ -54,7 +54,7 @@ How you sign the token is a later lesson. Which channel carries it is this page.
 
 ## Practice
 
-Draw this map so someone else could name pytest cases. Point at `labs/4.3/4.3-lab` file `token.py`.
+Draw this map so someone else could name the checks. Point at `labs/4.3/4.3-lab` file `token.py`.
 
 ## Use it somewhere new
 

@@ -31,7 +31,7 @@ flowchart LR
 
 If the pod installs “latest” while `install_ok` is always true, the rule is gone. CycloneDX, provenance badges, and Dependabot do not compare `aaa` to `bbb`. Pinning Actions by SHA is the same equality idea on a different object — name it, do not typosquat a live registry here. A lookalike package wins when you install by name. An SBOM is inventory, not verify.
 
-The clinic rewrite still has to keep the notes-app fork: mismatch denied, match may install. Generating an SBOM without a digest check leaves `install_ok("aaa","bbb")` true. The local pytest analogue is `test_hash_mismatch_refuses_install` — on a practice, not a live npm.
+A digest mismatch still has to be denied. A match may still install. Generating an SBOM without a digest check leaves `install_ok("aaa","bbb")` true. The local check is `test_hash_mismatch_refuses_install` — on a practice, not a live npm.
 
 ## Prompt — clinic npm install in a prod pod
 

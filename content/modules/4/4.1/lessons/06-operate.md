@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Revoke[Mass revoke and rotate if JWT]
 ```
 
-This still does not pick a log product. It does not kill the cookie.
+A log product does not kill the cookie.
 
 ## Signals that do not become a second leak
 

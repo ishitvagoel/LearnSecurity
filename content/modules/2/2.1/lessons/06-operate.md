@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new JSON library, a worker re-parse, or a `jsonb` cast can bring two meanings back. Pair notice and recover. Do not log secrets or note bodies.
+A new JSON library, a worker re-parse, or a `jsonb` cast can bring two meanings back. Do not log secrets or note bodies.
 
 ## Picture: signal without the blob
 

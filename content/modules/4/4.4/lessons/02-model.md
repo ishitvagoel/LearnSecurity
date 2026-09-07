@@ -3,7 +3,7 @@
 **Kind:** design-exercise
 **Loop step:** 2 Model
 
-## Could someone else name pytest cases from your table?
+## Could someone else name the checks from your table?
 
 “We check authorization” is not this page. A table someone else can test names **people, companies, notes, actions, and every path** that can release a body.
 
@@ -61,7 +61,7 @@ If a path is missing from the table, leftover permission appears there even if G
 
 ## Practice
 
-Draw this map so someone else could name pytest cases. Point at `labs/4.4/4.4-lab` file `grant.py`.
+Draw this map so someone else could name the checks. Point at `labs/4.4/4.4-lab` file `grant.py`.
 
 ## Use it somewhere new
 

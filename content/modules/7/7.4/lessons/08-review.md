@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships notes-app overnight export. Review `labs/7.4/7.4-lab/vulnerable/` as that change. Check whether `exporter({"user_session": "alice", "service": None})` still returns `"alice"`, compare that with the rule, and write changes a developer can verify.
+Review `labs/7.4/7.4-lab/vulnerable/` as a change to notes-app overnight export. Check whether `exporter({"user_session": "alice", "service": None})` still returns `"alice"`, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_user_session_is_not_worker_identity`) is the rule test. A comment “will bind service later” is not.
 
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|zero trust dashboard| False[False assurance]
 ```
 
-Alice session yields `None`. If that call never includes a `service == "worker-sc"` check, that confused-deputy path is still open. A private network without that check is still the same problem.
+Alice's session still yields `None`. If the change never checks `service == "worker-sc"`, that confused-deputy path is still open. A private network without that check is still the same problem.
 
 A god-mode `DATABASE_URL` (3.3) and retry after revoke (2.4) are other worker holes — name them, do not skip `test_user_session_is_not_worker_identity`.
 
@@ -42,7 +42,7 @@ Also reject: live broker attacks; closing findings without re-running `test_user
 - Async means no authz
 - Service account should be superuser just for jobs
 - Zero trust as a product replaces worker identity tests
-- A zero-trust architecture paper is the pytest
+- A zero-trust architecture paper is the check
 
 ## Practice
 

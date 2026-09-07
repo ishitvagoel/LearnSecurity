@@ -31,7 +31,7 @@ flowchart LR
 
 If the namespace is "private" while `pod_ok` is always true, the rule is gone. A network policy, a restricted pod profile, and a CIS scan do not put `"app"` in `ALLOWED_ROLES`. Serverless IAM `*` is the same god-mode grain on a different object — name it, do not attack a live cloud account here. A container-stack guide names five layers; it does not make a managed cluster secure by default. Documented cluster-API retry is extra, advanced work, not this check.
 
-The clinic rewrite still has to keep the notes-app fork: cluster-admin denied, app may run. Adding a namespace without an allow-list leaves `pod_ok("cluster-admin")` true. The local pytest analogue is `test_cluster_admin_pod_is_denied` — on a practice, not a live cluster.
+`cluster-admin` still has to be denied. The app may still run. Adding a namespace without an allow-list leaves `pod_ok("cluster-admin")` true. The local check is `test_cluster_admin_pod_is_denied` — on a practice, not a live cluster.
 
 ## Prompt — clinic app SA is cluster-admin
 

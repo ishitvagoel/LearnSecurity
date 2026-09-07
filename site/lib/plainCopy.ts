@@ -85,6 +85,11 @@ export function displayHeading(raw: string): string {
   if (text.startsWith("Transfer ")) {
     return `Use it somewhere new: ${text.slice("Transfer ".length)}`;
   }
+  if (/^Could someone else name pytest cases from your /i.test(text)) {
+    return `Could someone else name the checks from your ${text.slice(
+      "Could someone else name pytest cases from your ".length,
+    )}`;
+  }
   if (/^Can a second engineer name pytest cases from your /i.test(text)) {
     return "Could someone else name the checks from your notes?";
   }
@@ -321,8 +326,9 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/The review starts at the protected effect/g, "Keep the rule"],
   [/Review starts at the protected effect/g, "Keep the rule"],
   [/Hold onto the rule/g, "Keep the rule"],
-  [/Hold onto this:/g, "Keep this:"],
-  [/Start with this seeded smell:/g, "Look at this first:"],
+  [/Hold onto this:/g, ""],
+  [/Start with this seeded smell:/g, ""],
+  [/Start with this seeded problem: /g, ""],
   [/\bseeded smell\b/gi, "first example"],
   [/\bfalse comfort\b/gi, "false assurance"],
   [
@@ -346,13 +352,16 @@ const PROSE_PHRASES: [RegExp, string][] = [
   ],
   [
     /Someone still has to notice, respond, and recover\. That work does not /g,
-    "This still does not ",
+    "Logging does not ",
   ],
   [/Someone still has to notice, respond, and recover\. /g, ""],
+  [/Pair notice and recover\. /g, ""],
   [/Look at this first: /g, ""],
   [/Keep this: /g, ""],
   [/Don't just tally suspicious lines\. /g, ""],
   [/This week's check is the one that covers /g, "This week's check covers "],
+  [/If that call never includes /g, "If the change never checks "],
+  [/If that loop never includes /g, "If the loop never checks "],
   [/Naming a product is not the rule\./g, "A vendor name is not this week's rule."],
   [/A ([A-Za-z0-9.+-]+) product name is not the rule\./g, "A $1 name is not this week's rule."],
   [/An ([A-Za-z0-9.+-]+) product name is not the rule\./g, "An $1 name is not this week's rule."],
@@ -381,8 +390,14 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/\bthis origin\b/gi, "this website"],
   [/\bthe TCB\b/g, "what you trust"],
   [/\bTCB\b/g, "what you trust"],
-  [/This week's pytest is that sentence for/g, "This week's check is the one that covers"],
-  [/The check below is that sentence for/g, "This week's check is the one that covers"],
+  [/The local pytest analogue is /g, "The local check is "],
+  [/ is that sentence for /g, " covers "],
+  [/This pytest is /g, "This week's check is "],
+  [/This week's pytest is that sentence for /g, "This week's check covers "],
+  [/name the pytest cases/g, "name the checks"],
+  [/name pytest cases/g, "name the checks"],
+  [/The check below is that sentence for /g, "This week's check covers "],
+  [/Watch for this: /g, ""],
   [/this week’s pytest/g, "this week's check"],
   [/\bthat pytest\b/gi, "that check"],
   [/\bthis pytest\b/gi, "this check"],

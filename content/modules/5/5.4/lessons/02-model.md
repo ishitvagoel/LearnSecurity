@@ -57,7 +57,7 @@ A missing “header https × socket http × deny” row is how the client header
 
 ## Practice
 
-Draw this map so someone else could name the pytest cases. Point at `labs/5.4/5.4-lab` file `channel.py`. Your artifact is a versioned list (even a table in your notes) with hop, who may assert proto, allow or deny, and what would show the deny is false. Fake data only.
+Draw this map so someone else could name the checks. Point at `labs/5.4/5.4-lab` file `channel.py`. Your artifact is a versioned list (even a table in your notes) with hop, who may assert proto, allow or deny, and what would show the deny is false. Fake data only.
 
 ## Use it somewhere new
 

@@ -31,7 +31,7 @@ flowchart LR
 
 If GET as owner returns 200 while the suite never asserts the other clinician, the rule is gone. Line coverage, testing-guide ticks, and a fuzzer with no named bad result do not name what must not happen. Field grain (7.2) and looking around (9.5) are the same shape family — name them, do not fuzz a live clinic here. A draft testing guide is not the current pin.
 
-The clinic rewrite still has to keep the notes-app fork: 200-only not a security test, named what must not happen may count. Adding `test_get_patient_200` as “the security test” leaves `is_security_test({status_asserted: True})` true. The local pytest analogue is `test_http_200_only_is_not_a_security_test` — on a practice, not a live clinic.
+200-only is still not a security test. A named what-must-not-happen may still count. Adding `test_get_patient_200` as “the security test” leaves `is_security_test({status_asserted: True})` true. The local check is `test_http_200_only_is_not_a_security_test` — on a practice, not a live clinic.
 
 ## Prompt — clinic test_get_patient_200
 

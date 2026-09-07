@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A chart can still add a ClusterRoleBinding after admission was "set once." Pair notice and recover. Do not log kubeconfig, cloud tokens, or node credentials. Do not paste `~/.kube/config` into the ticket.
+A chart can still add a ClusterRoleBinding after admission was "set once." Do not log kubeconfig, cloud tokens, or node credentials. Do not paste `~/.kube/config` into the ticket.
 
 ## Picture: god-mode binding is a signal
 

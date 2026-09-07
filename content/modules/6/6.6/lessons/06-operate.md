@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Revoke[Remove extra membership if one landed]
 ```
 
-This still does not pick a log product. It does not consume the token.
+A log product does not consume the token.
 
 ## Signals that do not become a second leak
 

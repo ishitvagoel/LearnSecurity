@@ -29,7 +29,7 @@ flowchart LR
   Impl --> Test[allow 4 is false]
 ```
 
-A wiki number is not the check. Someone else has to be able to name the pytest cases from your map.
+A wiki number is not the check. Someone else has to be able to name the checks from your map.
 
 ## Step 1: name the pieces
 
@@ -57,7 +57,7 @@ A missing “fourth export × deny” row is how an unbounded loop appears. Writ
 
 ## Practice
 
-Draw the budget so someone else could name the pytest cases. Point at `labs/6.7/6.7-lab` file `limit.py`. Fake counts only.
+Draw the budget so someone else could name the checks. Point at `labs/6.7/6.7-lab` file `limit.py`. Fake counts only.
 
 ## Use it somewhere new
 

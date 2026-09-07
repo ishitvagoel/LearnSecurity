@@ -31,7 +31,7 @@ flowchart LR
 
 If the HIPAA column is Done while `covered` only matches `req`, the rule is gone. A checklist PDF import, pytest-cov, and a later draft of a practice guide do not assert isolation. The mobile storage row from 8.2 is the same check family — name it, do not scrape a live mobile portal here. A 200-only test that sets the isolation flag by mistake is 9.3.
 
-The clinic rewrite still has to keep the notes-app fork: status-only not covered, isolation-assert may count. Marking HIPAA isolation done without an isolation assert leaves `covered("AUTHZ-1", status_only)` true. The local pytest analogue is `test_status_only_row_is_not_coverage` — on a practice, not a live governance product.
+Status-only still is not coverage. An isolation-assert may still count. Marking HIPAA isolation done without an isolation assert leaves `covered("AUTHZ-1", status_only)` true. The local check is `test_status_only_row_is_not_coverage` — on a practice, not a live governance product.
 
 ## Prompt — clinic HIPAA done column
 

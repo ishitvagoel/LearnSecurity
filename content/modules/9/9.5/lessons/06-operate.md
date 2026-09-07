@@ -5,11 +5,11 @@
 
 ## Fixing it once is not enough
 
-A closer can still mark Done after `close_finding` was "fixed once." Pair notice and recover. Do not log note bodies from the original finding. Do not attach patient JSON to the ticket. Do not paste a live-target URL into chat.
+A closer can still mark Done after `close_finding` was "fixed once." Do not log note bodies from the original finding. Do not attach patient JSON to the ticket. Do not paste a live-target URL into chat.
 
 ## Picture: close without retest is a signal
 
-A close that skipped retest is a notice-and-recover problem, not a licence to quote the note in the paging channel. Notice names the finding. Recover reopens and re-runs the same isolation pytest. Neither reprints the body.
+A close that skipped retest is a notice-and-recover problem, not a licence to quote the note in the paging channel. Notice names the finding. Recover reopens and re-runs the same isolation check. Neither reprints the body.
 
 ```mermaid
 flowchart TD
@@ -29,7 +29,7 @@ Re-run `test_cannot_close_without_retest` after any close-workflow change. A gre
 | Notice | `finding_closed_without_retest` |
 | What the line holds | Finding id, rule id; **never** bodies |
 | Respond | Stop the closer that ignored retest; do not paste note text into chat |
-| Recover | Reopen; run the same isolation pytest |
+| Recover | Reopen; run the same isolation check |
 | Leftover | Variants; severity vs business priority; role-change caches |
 
 A ticket dashboard will show Done counts and stay silent when CI's `close_finding` is always true. Detection must observe **retest None is deny**, not ticket volume. If the alert includes a note body or a patient row, you have opened a leftover-body leak.
@@ -48,7 +48,7 @@ If your alert includes the matching note, you have copied the leak into the pagi
 
 The same wrong-URL `"pass"`, extra-field variants, and role-change caches that bypass this practice will also bypass a "scan our ticket dashboard" detector. Name those places before you claim recover. A vendor name is not this week's rule.
 
-Cause vs cost stays split here too: the **cause** is close looking at intent (PDF, ticket Done) instead of `retest == "pass"`; the **cost** is an isolation hole that looks fixed; **how you stop it** is the retest equality; **how you notice** is `finding_closed_without_retest`; **how you recover** is reopen and re-run the same isolation pytest. What the tool cannot do: this alert does not prove the `"pass"` hit the same URL, and it does not search extra fields or role-change caches.
+Cause vs cost stays split here too: the **cause** is close looking at intent (PDF, ticket Done) instead of `retest == "pass"`; the **cost** is an isolation hole that looks fixed; **how you stop it** is the retest equality; **how you notice** is `finding_closed_without_retest`; **how you recover** is reopen and re-run the same isolation check. What the tool cannot do: this alert does not prove the `"pass"` hit the same URL, and it does not search extra fields or role-change caches.
 
 ## Can people still use it
 

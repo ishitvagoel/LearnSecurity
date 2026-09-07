@@ -30,7 +30,7 @@ flowchart LR
 
 Renaming “notes unpacker” to “DICOM parser” is not transfer. Person, object, path, and leftover change. If the app is “mostly Kotlin” while `copy_into` trusts `declared_len` plus 8, the rule is gone. A company language roadmap and an awareness-list mapping do not put `min(bufsize, declared_len, len(src))` next to the copy. A protobuf C extension is the same grain — name it, do not fuzz a third-party binary here. An awareness-list name is a regression label *after* the length cause, not the syllabus. Native unpacker leftover is later and harder: not this check.
 
-The clinic rewrite still has to keep the notes-app fork: oversize copy denied, short honest copy may fit. Adding a Kotlin rewrite without a destination bound leaves length > 4. The local pytest analogue is `test_copy_does_not_exceed_buffer` — on a practice, not a live codec.
+An oversize copy still has to be denied. A short honest copy may still fit. Adding a Kotlin rewrite without a destination bound leaves length > 4. The local check is `test_copy_does_not_exceed_buffer` — on a practice, not a live codec.
 
 Checking every path still means the native copy itself is bounded. A language sticker without that check leaves the length rule broken.
 

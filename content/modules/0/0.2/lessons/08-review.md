@@ -22,7 +22,7 @@ flowchart TD
   Q -->|job title mapped| False[False assurance]
 ```
 
-What has to stay true: part-1 skip denied. If that call never includes an always-false skip, that leftover path is still open.
+A part-1 skip still has to be denied. If the change never checks an always-false skip, that leftover path is still open.
 
 ## Problems to find (name them yourself)
 

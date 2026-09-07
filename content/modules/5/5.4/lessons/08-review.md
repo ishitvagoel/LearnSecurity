@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships notes-app channel binding. Review `labs/5.4/5.4-lab/vulnerable/` as that change. Check whether `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` is still true, compare that with the rule, and write changes a developer can verify.
+Review `labs/5.4/5.4-lab/vulnerable/` as a change to notes-app channel binding. Check whether `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` is still true, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_client_forwarded_proto_is_not_tls`) is the rule test. A comment “will bind the proxy later” is not.
 
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"HSTS preload"| False[False assurance]
 ```
 
-What has to stay true: mismatch false. If that call never includes `server_scheme == "https"`, the leftover is still there. A server flag that trusts proxy headers from `*` is still the same problem.
+A mismatch still has to be false. If the change never checks `server_scheme == "https"`, the leftover is still there. A server flag that trusts proxy headers from `*` is still the same problem.
 
 ## Problems to find (name them yourself)
 

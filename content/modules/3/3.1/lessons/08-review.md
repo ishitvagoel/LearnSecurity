@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships notes-app logging. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether the body still lands in the log if they ship. Start at `log_event` and the body×log row, not at a scanner color or a spreadsheet.
+This review is about notes-app logging. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether the body still lands in the log if they ship. Start at `log_event` and the body×log row, not at a scanner color or a spreadsheet.
 
 The folder `labs/3.1/3.1-lab/vulnerable/` is the change. The check you already ran (`test_note_body_is_not_logged`) is the rule test. A comment “will redact later” is not.
 
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|logs are internal| False[False assurance]
 ```
 
-What has to stay true: body substring absent from this log. If that call never includes an allow-listed log API, the leftover is still there.
+The body substring still has to be absent from this log. If the change never uses an allow-listed log API, the leftover is still there.
 
 ## Problems to find (name them yourself)
 

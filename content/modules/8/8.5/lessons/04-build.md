@@ -23,7 +23,7 @@ flowchart TD
 
 The repaired files return `'note': '[redacted]'` and keep a `stack` key so the crash is still useful. Production still needs the same omit for screenshots, frozen-app traces, and leftover `READ_LOGS`. The vendor as a processor remains 5.1: redact does not make an already-sent copy disappear. Last-chance error handlers can still stringify arguments. That leftover stays.
 
-The log lesson (3.1) already said: log by protection level. This check is that sentence for `crash_report("secret")`.
+The log lesson (3.1) already said: log by protection level. This check covers `crash_report("secret")`.
 
 ## What the repaired files must show
 

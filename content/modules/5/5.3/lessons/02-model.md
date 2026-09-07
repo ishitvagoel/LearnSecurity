@@ -3,7 +3,7 @@
 **Kind:** design-exercise
 **Loop step:** 2 Model
 
-## Could someone else name pytest cases from your inventory?
+## Could someone else name the checks from your inventory?
 
 “We have a vault” is not this page. A reviewable model names **each secret, where it lives, who owns rotation, and what happens to the old value**.
 
@@ -54,7 +54,7 @@ flowchart LR
 
 ## Practice
 
-Draw the inventory so someone else could name pytest cases. Point at `labs/5.3/5.3-lab` file `secrets.py`.
+Draw the inventory so someone else could name the checks. Point at `labs/5.3/5.3-lab` file `secrets.py`.
 
 ## Use it somewhere new
 

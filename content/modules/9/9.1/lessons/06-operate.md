@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new requirement can land without a test after `covered` was “fixed once.” Pair notice and recover. Do not log note bodies or company dumps from the failing test (3.1). Do not attach patient rows to the ticket.
+A new requirement can land without a test after `covered` was “fixed once.” Do not log note bodies or company dumps from the failing test (3.1). Do not attach patient rows to the ticket.
 
 ## Picture: uncovered AUTHZ-1 is a signal
 

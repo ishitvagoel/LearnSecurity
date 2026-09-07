@@ -23,7 +23,7 @@ flowchart LR
 
 If the table omits the SSN column while `resolve` is always true, the rule is gone. FastAPI `response_model`, GraphQL “typed schema,” and UUID length do not check role × field. Identifiers find a row. They do not authorize fields. Search highlighting and CSV export are the same dump family — name them, do not run those systems here. A passing 4.4 object GET is a coarser grain: the member may read the *row* and still must not read the *field*.
 
-The clinic rewrite still has to keep the notes-app fork: member × SSN false, member × display name true. Hiding SSN in the table without a member×field deny test leaves the serializer open. The local pytest analogue is `test_member_cannot_resolve_internal_field` — on a practice, not a live EHR GraphQL query.
+Member × SSN still has to be false. Member × display name may still be true. Hiding SSN in the table without a member×field deny test leaves the serializer open. The local check is `test_member_cannot_resolve_internal_field` — on a practice, not a live EHR GraphQL query.
 
 | Notes app this week | Clinic sketch |
 |---|---|

@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships notes-app persistence. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `fetch_sql` still returns a concatenated `str` if they ship. Start at concatenated SQL, not at a scanner color.
+This review is about notes-app persistence. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `fetch_sql` still returns a concatenated `str` if they ship. Start at concatenated SQL, not at a scanner color.
 
 The folder `labs/5.5/5.5-lab/vulnerable/` is the change. The check you already ran (`test_query_is_bound_not_concatenated`) is the rule test. A comment “will parameterize later” is not.
 
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"row-level rule in prod"| False[False assurance]
 ```
 
-`fetch_sql` is a bound tuple. If that call never includes a params tuple, that grammar mix is still open. `%s` inside a concatenated string is still the same problem.
+`fetch_sql` is a bound tuple. If the change never uses a params tuple, that grammar mix is still open. `%s` inside a concatenated string is still the same problem.
 
 ## Problems to find (name them yourself)
 

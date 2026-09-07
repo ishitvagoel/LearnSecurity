@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships notes-app login copy. Review `labs/4.2/4.2-lab/vulnerable/` as that change. Reconstruct whether `phishing_resistant("password", EVIL, REAL)` is still true, compare that with the rule, and write changes a developer can verify.
+Review `labs/4.2/4.2-lab/vulnerable/` as a change to notes-app login copy. Reconstruct whether `phishing_resistant("password", EVIL, REAL)` is still true, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_password_is_not_phishing_resistant`) is the rule check. A banner “phishing-resistant password” is not.
 
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"MFA equals resistant"| False[False assurance]
 ```
 
-For each claim and each branch: label **rule**, **tool**, or **false assurance**. What has to stay true: password at lookalike is false. If that call never includes origin binding, the leftover is still there.
+For each claim and each branch, label **rule**, **tool**, or **false assurance**. A password at a lookalike still has to be false. If the change never checks origin binding, the leftover is still there.
 
 Problems to find (name them yourself; do not open the keys file):
 

@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new GraphQL field can reintroduce the body company after the binding was “set once.” Pair notice and recover. Do not log note bodies. Do not paste the chart note into the ticket.
+A new GraphQL field can reintroduce the body company after the binding was “set once.” Do not log note bodies. Do not paste the chart note into the ticket.
 
 The JSON body is not the tenant. If body tenant overrides session, you still bind tenant from the session — and you count the disagreement.
 
@@ -25,7 +25,7 @@ flowchart TD
 | Recover | Audit B; take back the confused session |
 | Leftover | Copies; silent impersonation; GraphQL aliases |
 
-This still does not prove company isolation. A row-level vendor name is not the rule. Re-run `test_body_cannot_switch_tenant` after any query-layer change; a green “row-level rules on” tile is not that check. Search, cache, and lake copies are the same family — inventory them before you claim recover.
+A row-level vendor name does not prove company isolation. Re-run `test_body_cannot_switch_tenant` after any query-layer change; a green “row-level rules on” tile is not that check. Search, cache, and lake copies are the same family — inventory them before you claim recover.
 
 ## What the framework does vs what you still have to check
 

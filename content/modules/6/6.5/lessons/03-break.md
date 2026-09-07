@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `allowed`. It does not open a network. The failure is already in the function: it treats any `http` or `https` scheme as fine. Watch for this: a link-local metadata URL counting as an allowed peer is a **failed rule**, not a trophy fetch of cloud identity.
+The practice is not a website you attack. It is a tiny Python `allowed`. It does not open a network. The failure is already in the function: it treats any `http` or `https` scheme as fine. A link-local metadata URL counting as an allowed peer is a **failed rule**, not a trophy fetch of cloud identity.
 
 The rule under test:
 
@@ -31,7 +31,7 @@ flowchart TD
 
 The broken files show **cause** (the server would dial whoever the URL names). The link-local address is a **named destination string**. Do not send packets to it. What has to be true first: `allowed` returns true for any `http`/`https` scheme. You do not need a GET. You must not.
 
-Industry lists ask for an allow-list of protocols, hosts, paths, and ports before calling another service. This pytest is the predicate, not a network trophy. A famous-bugs nickname for server-side requests is awareness after the cause, not that check.
+Industry lists ask for an allow-list of protocols, hosts, paths, and ports before calling another service. This week's check is the predicate, not a network trophy. A famous-bugs nickname for server-side requests is awareness after the cause, not that check.
 
 ## What to look at — cause, not a fetch
 

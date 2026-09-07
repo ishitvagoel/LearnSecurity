@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a public repo you scan. It is a tiny Python `ship_ok` that takes findings and a map. The failure is already in the function: it returns true for every pair. Watch the check treat that true as a **failed rule**, not as a green tile.
+The practice is not a public repo you scan. It is a tiny Python `ship_ok` that takes findings and a map. The failure is already in the function: it returns true for every pair. That true is a **failed rule**, not a green tile.
 
 The rule under test:
 

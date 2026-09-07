@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships the notes app’s crash telemetry. Review `labs/8.5/8.5-lab/vulnerable/` as that change. Check whether `crash_report("secret")` still contains `'secret'`, compare that with the rule, and write changes a developer can verify.
+Review `labs/8.5/8.5-lab/vulnerable/` as a change to the notes app’s crash telemetry. Check whether `crash_report("secret")` still contains `'secret'`, compare that with the rule, and write changes a developer can verify.
 
 Start at `crash_report` and the body×crash row, not at a scanner color or a store screenshot. The check you already ran (`test_crash_report_omits_note_body`) is the rule test. A comment “will redact later” is not.
 
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|Play Data safety| False[False assurance]
 ```
 
-`'secret'` absent. If that call never includes redact-before-send, that extra copy is still open. A store privacy screenshot does not replace that check.
+`'secret'` is still absent. If the change never redacts before send, that extra copy is still open. A store privacy screenshot does not replace that check.
 
 Leftover `READ_LOGS`, tracker SDKs, and web crash reports (10.5) are other places — name them, do not skip `test_crash_report_omits_note_body`. A spreadsheet row without a test is 9.1.
 
