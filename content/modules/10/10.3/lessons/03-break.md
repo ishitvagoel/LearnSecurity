@@ -15,9 +15,9 @@ Stay inside `labs/10.3/10.3-lab`. The roles are synthetic strings `cluster-admin
 
 Do not paste this exercise onto a public cluster, employer account, or live hospital Kubernetes "to see what happens."
 
-What is supposed to stop this: `pod_ok` is supposed to allow **only namespaced app roles**. Managed-cluster defaults, a restricted pod profile, a network policy, and FastAPI itself are not enough.
+`pod_ok` is supposed to allow **only namespaced app roles**. Managed-cluster defaults, a restricted pod profile, a network policy, and FastAPI itself are not enough.
 
-Who can take the cluster in this story: a compromised container or a malicious Helm chart. That stands in for "the API namespace is private so ClusterRole is fine," a CIS Kubernetes scan treated as the who-is-allowed check, or a network policy treated as RBAC.
+Picture a compromised container or a malicious Helm chart — "the API namespace is private so ClusterRole is fine," a CIS Kubernetes scan treated as the who-is-allowed check, or a network policy treated as RBAC.
 
 ## Picture: admission always says yes
 
@@ -26,7 +26,7 @@ flowchart TD
   Any[any role] --> True[pod_ok true]
 ```
 
-You do not need a kube-apiserver. You must not bind a live cluster. The true return for `"cluster-admin"` *is* the leak.
+You do not need a kube-apiserver. You must not bind a live cluster. The true return for `"cluster-admin"` is already the leak.
 
 The database god-role lesson already said one shared admin is a blast-radius rule. This check is **the same idea at cluster grain**.
 
@@ -37,7 +37,6 @@ The database god-role lesson already said one shared admin is a blast-radius rul
 - `test_cluster_admin_pod_is_denied`
 - `test_namespaced_app_role_may_run` — `"app"` may pass on both
 
-You do not need a new role string.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -51,7 +50,7 @@ You do not need a new role string.
 |---|---|
 | The rule | `pod_ok("cluster-admin")` is false |
 | Why it happens | Always-true admission; god-mode for convenience |
-| What has to be true first | `pod_ok` true for every role |
+| What's already wrong | `pod_ok` true for every role |
 | Trigger | Compromised container or malicious chart |
 | What it costs | One app bug becomes control-plane takeover |
 | How you stop it later | Allow-list namespaced roles; unknown roles deny |

@@ -17,7 +17,7 @@ Do not harvest Referer from a live site, dump production access logs, or replay 
 
 What must not happen: a session started from a query-string token. `session_from_request({"access_token": "secret"}, {}, None)` returns `"secret"`.
 
-Who could do this: a **log operator**, a Referer collector, or someone with a shared screenshot who can read the URL. What is supposed to stop this: the parser ignores query tokens. FastAPI query binding, the Next.js address bar, and “we use JWTs” are not enough.
+A **log operator**, a Referer collector, or someone with a shared screenshot who can read the URL is enough. The parser ignores query tokens. FastAPI query binding, the Next.js address bar, and “we use JWTs” are not enough.
 
 TLS encrypts the hop. It does not encrypt the access log.
 
@@ -42,14 +42,13 @@ Secrets belong in the body or headers, not in the URL. HTTPS is a hop tool, not 
 - `test_cookie_session_still_works` — `sc_session` still works on the repaired files
 - `test_authorization_header_still_works`
 
-You do not need a new token string.
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |
 |---|---|
 | The rule | Query `access_token` does not mint a session |
 | Why it happens | Token placed in a logged, shared channel |
-| What has to be true first | `session_from_request` prefers query |
+| What's already wrong | `session_from_request` prefers query |
 | Trigger | `session_from_request({"access_token": "secret"}, {}, None)` |
 | What it costs | The session secret is no longer secret; then whoever holds the URL can act as that person |
 | How you stop it | Ignore query tokens; cookie or Authorization only |

@@ -17,7 +17,7 @@ Do not write a working exploit. Do not run eval on untrusted input outside this 
 
 What must not happen: eval on user input approved in review. `review_ok("x = eval(user)")` returns true.
 
-Who could do this: a helper that looks visually fine. That stands in for a clinic “designers can put expressions in the discharge template,” Terraform `local-exec`, or a GitHub Actions `run:` that interpolates untrusted input. What is supposed to stop this: `review_ok` asks the **interpreter question** (6.1 at review time). Formatter continuous integration, a scanner “looks good,” and “the screen still looks fine” are not enough.
+Picture a helper that looks visually fine — a clinic “designers can put expressions in the discharge template,” Terraform `local-exec`, or a GitHub Actions `run:` that interpolates untrusted input. `review_ok` asks the **interpreter question** (6.1 at review time). Formatter continuous integration, a scanner “looks good,” and “the screen still looks fine” are not enough.
 
 ## Picture: every diff is approved
 
@@ -37,7 +37,6 @@ You need to avoid `eval` and similar dynamic execution. Module 6.1 already said 
 - `test_eval_on_user_input_is_rejected`
 - `test_honest_diff_without_eval_may_pass` — `int(user)` may pass on both
 
-You do not need a new payload.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -51,7 +50,7 @@ You do not need a new payload.
 |---|---|
 | The rule | `review_ok("x = eval(user)")` is false |
 | Why it happens | The reviewer trusts that it looks fine / always-approve |
-| What has to be true first | `review_ok` true for every diff |
+| What's already wrong | `review_ok` true for every diff |
 | Trigger | The helper is merged |
 | What it costs | User input becomes Python grammar (6.1) |
 | How you stop it | Review data flow, who is allowed, and interpreters; reject eval |

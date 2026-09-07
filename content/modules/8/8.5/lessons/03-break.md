@@ -15,9 +15,9 @@ Stay inside `labs/8.5/8.5-lab`. The body is the synthetic string `secret`. No li
 
 Do not paste a real note body into a crash SDK “to see what happens.” Do not paste this exercise onto a public crash project, employer dashboard, or live clinic.
 
-What is supposed to stop this: `crash_report` is supposed to redact before send — the same extra-copy problem as logs (3.1) and vendors (5.1), now on a phone. A crash product set to “automatic,” a completed store privacy form, and HTTPS to the vendor are not enough.
+`crash_report` is supposed to redact before send — the same extra-copy problem as logs (3.1) and vendors (5.1), now on a phone. A crash product set to “automatic,” a completed store privacy form, and HTTPS to the vendor are not enough.
 
-Who can read the report in this story: a crash-platform operator or a logcat reader. That stands in for a clinic “debug crash includes the last chart so support can reproduce,” a tracker SDK extra, or a leftover `READ_LOGS` path.
+Picture a crash-platform operator or a logcat reader — a clinic “debug crash includes the last chart so support can reproduce,” a tracker SDK extra, or a leftover `READ_LOGS` path.
 
 ## Picture: the report copies the body
 
@@ -28,7 +28,7 @@ flowchart TD
   Report --> Vendor[would leave the device]
 ```
 
-You do not need an emulator. You must not call a crash vendor. The substring in the returned dict *is* the leak.
+You do not need an emulator. You must not call a crash vendor. The substring in the returned dict is already the leak.
 
 The log lesson (3.1) already refused bodies in logs. This check is **the mobile telemetry place**. The store form discloses. It does not redact.
 
@@ -39,7 +39,6 @@ The log lesson (3.1) already refused bodies in logs. This check is **the mobile 
 - `test_crash_report_omits_note_body`
 - `test_honest_crash_still_includes_stack` — a stack identifier may remain
 
-You do not need a new field name.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -53,7 +52,7 @@ You do not need a new field name.
 |---|---|
 | The rule | `'secret' not in str(crash_report("secret"))` |
 | Why it happens | The exception or report builder includes the note body |
-| What has to be true first | The `note` key holds the body |
+| What's already wrong | The `note` key holds the body |
 | Trigger | Crash on view-note, or verbose logcat |
 | What it costs | The body sits at a vendor; maybe public if their store is misconfigured (5.1 extra copy) |
 | How you stop it later | Do not put bodies in exceptions; redact before send |

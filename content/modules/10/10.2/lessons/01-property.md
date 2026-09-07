@@ -39,7 +39,7 @@ flowchart LR
 | Slice | For this rule |
 |---|---|
 | Why it happens | Name-only install |
-| What has to be true first | `install_ok('aaa','bbb')` true |
+| What's already wrong | `install_ok('aaa','bbb')` true |
 | Trigger | Lookalike name or a swapped tarball |
 | What it costs | Wrong bytes in the trusted computing base |
 | How you stop it | Hash pin; deny install scripts; provenance as extra |

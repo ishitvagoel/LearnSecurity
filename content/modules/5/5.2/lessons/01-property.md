@@ -44,7 +44,7 @@ A stronger algorithm does not fix a missing key story (later) or nonce reuse (ad
 | Slice | For this rule |
 |---|---|
 | Why it happens | The name “encrypted” was stuck on encoding |
-| What has to be true first | `protect` returns Base64 of the plaintext |
+| What's already wrong | `protect` returns Base64 of the plaintext |
 | Trigger | Someone who can read storage reads the field |
 | What it costs | The stored secret is no longer secret |
 | How you stop it | Real authenticated encryption with a managed key; tests forbid Base64 identity |

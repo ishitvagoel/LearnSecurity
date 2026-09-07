@@ -17,7 +17,7 @@ Do not probe a live database. Do not probe an employer replica. Do not probe a c
 
 What must not happen: a query built by concatenating untrusted strings into SQL. `fetch_sql` returns a `str` instead of a bound `(sql, params)` pair.
 
-Who could do this: a member who can supply `note_id` (or company) text that the SQL parser would treat as extra grammar. That stands in for a clinic search box, an ORDER BY column name, or a GraphQL argument later in 7.1. What is supposed to stop this: `fetch_sql` binds those fields as **data**. SQLAlchemy `text()` with an f-string, a quote denylist, and “row-level security is on in production” are not enough.
+Picture a member who can supply `note_id` (or company) text that the SQL parser would treat as extra grammar — a clinic search box, an ORDER BY column name, or a GraphQL argument later in 7.1. `fetch_sql` binds those fields as **data**. SQLAlchemy `text()` with an f-string, a quote denylist, and “row-level security is on in production” are not enough.
 
 ## Picture: one string is two languages
 
@@ -39,7 +39,6 @@ Use parameterized queries. A scanner name for this family is a weakness label, n
 - `test_query_is_bound_not_concatenated`
 - `test_honest_note_id_is_still_bound`
 
-You do not need a new payload.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -53,7 +52,7 @@ You do not need a new payload.
 |---|---|
 | The rule | Tenant and note id are bound parameters, not SQL grammar |
 | Why it happens | Data and program mixed in one string |
-| What has to be true first | `fetch_sql` returns a concatenated `str` |
+| What's already wrong | `fetch_sql` returns a concatenated `str` |
 | Trigger | `fetch_sql` with a hostile `note_id` (class of extra grammar, not a cookbook) |
 | What it costs | Secrecy and integrity of other companies’ rows |
 | How you stop it | Bound API `(sql, params)`; fail closed if you cannot bind |

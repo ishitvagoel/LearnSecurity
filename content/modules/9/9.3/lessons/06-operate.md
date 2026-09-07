@@ -9,7 +9,7 @@ A new endpoint can land with only 200 tests after `is_security_test` was “fixe
 
 ## Picture: missing isolation is a signal
 
-A missing named what-must-not-happen still has to be noticed. Leave the note out of the pager. The notice should name the suite. Recovery should add the isolation test.
+A missing named what-must-not-happen still has to show up as an alert. Keep the note out of the pager. The alert should name the suite. Then add the isolation test.
 
 ```mermaid
 flowchart TD

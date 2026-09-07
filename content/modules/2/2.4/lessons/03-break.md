@@ -17,7 +17,7 @@ Do not load-test third-party APIs. Do not run clock tricks against NTP. Do not p
 
 What must not happen: a retry creates a second share. Two `share_note("n1", idempotency_key="k1")` calls leave `share_count() == 2`.
 
-Who could do this: a **retrying client** that can call `share_note` twice with the same key. That stands in for a 504, a double-click, a load balancer that retries POST, or a later worker that delivers at least once. What is supposed to stop this: the handler treats `k1` as “this attempt already landed.” FastAPI, Next.js `fetch` retries, HTTP retry logic, and “the user will not click twice” are not enough.
+Picture a **retrying client** that can call `share_note` twice with the same key — a 504, a double-click, a load balancer that retries POST, or a later worker that delivers at least once. The handler treats `k1` as “this attempt already landed.” FastAPI, Next.js `fetch` retries, HTTP retry logic, and “the user will not click twice” are not enough.
 
 ## Picture: every call is a new row
 
@@ -38,14 +38,13 @@ In `vulnerable/share.py`, `share_note` appends `note_id` to `_SHARES` on every c
 - `test_single_share` — one call still creates one share (honest happy path)
 - `test_retry_does_not_duplicate_side_effect` — two calls with `k1` must leave `share_count() == 1`
 
-You do not need a new key string.
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |
 |---|---|
 | The rule | Two `share_note` calls with the same key produce one share |
 | Why it happens | A side effect that is not bound to the key, plus a retry; the key does not mediate the append |
-| What has to be true first | Note `n1`; key `k1`; the handler inserts on every POST |
+| What's already wrong | Note `n1`; key `k1`; the handler inserts on every POST |
 | Trigger | Second `share_note("n1", idempotency_key="k1")` |
 | What it costs | Who is allowed to read the note changes over time; an extra share nobody meant |
 | How you stop it | Persist key → first share; the second POST returns the first outcome |

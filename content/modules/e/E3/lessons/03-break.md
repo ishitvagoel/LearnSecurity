@@ -17,7 +17,7 @@ Do not charge, refund, or scrape a real processor, a clinic billing system, or a
 
 What must not happen: a duplicate capture double-charges the lab ledger. Two `capture("k1")` calls leave `charge_count() == 2`.
 
-Who could do this: a **retry after 504** or a **double-click**. That stands in for “the processor said retries are fine,” a filled-in questionnaire treated as this rule, or HTTP 200 treated as once. What is supposed to stop this: `capture` treats the **key as identity**. Processor headers, FastAPI, and a questionnaire PDF are not enough.
+Picture a **retry after 504** or a **double-click** — “the processor said retries are fine,” a filled-in questionnaire treated as this rule, or HTTP 200 treated as once. `capture` treats the **key as identity**. Processor headers, FastAPI, and a questionnaire PDF are not enough.
 
 ## Picture: every call appends
 
@@ -37,14 +37,13 @@ In `vulnerable/pay.py`, `capture` appends on every call. Checks:
 - `test_duplicate_capture_does_not_double_charge`
 - `test_first_capture_may_charge` — first `k1` may pass on both
 
-You do not need a new key.
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |
 |---|---|
 | The rule | two `capture("k1")` → charge_count 1 |
 | Why it happens | A side effect that is not bound to the key |
-| What has to be true first | every capture appends |
+| What's already wrong | every capture appends |
 | Trigger | Retry after 504; double-click |
 | What it costs | Integrity of money-like state |
 | How you stop it | Treat the key as identity; a duplicate is a no-op |

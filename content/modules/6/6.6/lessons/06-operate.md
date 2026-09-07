@@ -11,7 +11,7 @@ Do not log tokens (4.3) or email addresses as if they were public ids. Do not pa
 
 ## Picture: second accept is a signal
 
-A second accept after consume still has to be noticed. Leave the token out of the pager. Recovery should remove the extra membership.
+A second accept after consume still has to show up as an alert. Keep the token out of the pager. Then remove the extra membership.
 
 ```mermaid
 flowchart TD

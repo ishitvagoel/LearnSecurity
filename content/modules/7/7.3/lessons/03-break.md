@@ -17,7 +17,7 @@ Do not POST to Stripe. Do not POST to GitHub. Do not POST to a clinic webhook. D
 
 What must not happen: an unsigned webhook body is accepted. `accept` returns true for an empty signature.
 
-Who could do this: anyone who can POST the callback URL with an empty or wrong signature. That stands in for a forged billing event, an “export-ready” callback, or a clinic lab-result post. What is supposed to stop this: `accept` is **message authenticity over raw bytes**. TLS to the path, a vendor address-range allow-list, and a vendor SDK name are not enough.
+Picture anyone who can POST the callback URL with an empty or wrong signature — a forged billing event, an “export-ready” callback, or a clinic lab-result post. `accept` is **message authenticity over raw bytes**. TLS to the path, a vendor address-range allow-list, and a vendor SDK name are not enough.
 
 ## Picture: hitting the path is enough
 
@@ -38,7 +38,6 @@ Use a standard-library MAC. Module 5.4 already said TLS proves a hop; this rule 
 - `test_wrong_signature_is_rejected`
 - `test_matching_signature_is_accepted` — honest path; may pass on both
 
-You do not need a new secret.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -52,7 +51,7 @@ You do not need a new secret.
 |---|---|
 | The rule | `accept("", "body", "lab-secret")` is false |
 | Why it happens | The callback was trusted because it hit the path |
-| What has to be true first | `accept` is always true |
+| What's already wrong | `accept` is always true |
 | Trigger | An unauthenticated POST to the callback URL |
 | What it costs | Forged local event; in production, forged share, billing, or lab-result |
 | How you stop it | MAC over the raw body; fail closed on a missing or wrong sig |

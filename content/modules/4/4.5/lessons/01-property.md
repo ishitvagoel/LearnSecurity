@@ -43,7 +43,7 @@ This practice runs the resource-server `aud` check. Where the browser stores tok
 | Slice | For this rule |
 |---|---|
 | Why it happens | Subject (or signature) accepted without audience |
-| What has to be true first | `accept_token` ignores `aud` |
+| What's already wrong | `accept_token` ignores `aud` |
 | Trigger | Bearer minted for `other-api` |
 | What it costs | Authenticity of the audience; then who-is-allowed as `sub` |
 | How you stop it | Exact `aud` match (or a constrained list) before who-is-allowed |

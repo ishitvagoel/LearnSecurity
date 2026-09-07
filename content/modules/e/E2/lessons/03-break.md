@@ -17,7 +17,7 @@ Do not paste this exercise onto a public site, employer board, or live clinic po
 
 What must not happen: **Report-Only treated as isolation**. `isolation_enforced({"Content-Security-Policy-Report-Only": "default-src 'none'"})` returns true.
 
-Who could do this: a script that would only be logged. That stands in for “we ship Report-Only so scripts are blocked,” a Helmet default treated as encoding (6.2), or a green reporting dashboard treated as isolation. What is supposed to stop this: `isolation_enforced` is supposed to require the **enforcing** header name. Next.js header helpers, a CDN, and FastAPI are not enough.
+Picture a script that would only be logged — “we ship Report-Only so scripts are blocked,” a Helmet default treated as encoding (6.2), or a green reporting dashboard treated as isolation. `isolation_enforced` is supposed to require the **enforcing** header name. Next.js header helpers, a CDN, and FastAPI are not enough.
 
 ## Picture: any CSP-looking header counts
 
@@ -37,14 +37,13 @@ Encoding is already the rule in 6.2. The check is **the header name that actuall
 - `test_report_only_is_not_enforcement`
 - `test_enforcing_csp_header_may_count` — enforcing CSP may pass on both
 
-You do not need a new header.
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |
 |---|---|
 | Required rule | Report-Only only → `isolation_enforced` false |
 | Why it happens | Report-Only mistaken for on |
-| What has to be true first | Either header name ⇒ true |
+| What's already wrong | Either header name ⇒ true |
 | Trigger | A script that would only be logged |
 | What it costs | A script still runs; the dashboard looks green |
 | How you stop it | Count only `Content-Security-Policy` |

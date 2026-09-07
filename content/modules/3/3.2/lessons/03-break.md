@@ -15,7 +15,7 @@ Stay inside `labs/3.2/3.2-lab`. Do not run SAST or DAST against a public host, a
 
 What must not happen: a green scanner produces an empty notes-app threat model. `threats_from_scan(True)` returns `[]`, so `cross-tenant-read` is missing.
 
-Who could do this: a reviewer or CI job that can ask “what’s in the model?” after `scanner_green=True`. That stands in for a “no High findings” ticket, a Threat Dragon picture, or “we did STRIDE in the sprint.” What is supposed to stop this: the assembler **seeds** design threats that no CVE rule will list. FastAPI, Semgrep, and a vendor dashboard are not enough.
+Picture a reviewer or CI job that can ask “what’s in the model?” after `scanner_green=True` — a “no High findings” ticket, a Threat Dragon picture, or “we did STRIDE in the sprint.” The assembler **seeds** design threats that no CVE rule will list. FastAPI, Semgrep, and a vendor dashboard are not enough.
 
 ## Picture: green copies empty
 
@@ -38,14 +38,13 @@ In `vulnerable/model.py`, `assemble_threat_model` returns an empty list when `sc
 - `test_mandatory_threats_have_owners_and_triggers` — `cross-tenant-read`, `hostile-browser`, and `stolen-worker` each have `owner` and `trigger`
 - `test_scanner_findings_are_additive` — extras join; they do not replace the seed
 
-You do not need a new CVE id.
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |
 |---|---|
 | The rule | A green scan still lists `cross-tenant-read` |
 | Why it happens | Tool output is treated as thinking |
-| What has to be true first | `scanner_green=True`; the assembler copies that as “no threats” |
+| What's already wrong | `scanner_green=True`; the assembler copies that as “no threats” |
 | Trigger | `threats_from_scan(True)` |
 | What it costs | The story of what you checked looks done; who-may-read was never listed |
 | How you stop it | Seed the threats you must always name; join scanner findings onto that list |

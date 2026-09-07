@@ -51,7 +51,7 @@ Someone killed the profile row and left the session. That is the cause. The pers
 | Slice | For this rule |
 |---|---|
 | Why it happens | The authentication leftover outlived the person |
-| What has to be true first | `delete_user` removes the profile only |
+| What's already wrong | `delete_user` removes the profile only |
 | Trigger | Cookie presented after they leave |
 | What it costs | The notes are still readable; secrecy over time |
 | How you stop it | Kill sessions (and tokens, workers) in the same delete |

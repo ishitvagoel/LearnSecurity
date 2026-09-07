@@ -38,7 +38,7 @@ flowchart LR
 | Slice | For this rule |
 |---|---|
 | Why it happens | Report-Only mistaken for on |
-| What has to be true first | Report-Only counted as enforced |
+| What's already wrong | Report-Only counted as enforced |
 | Trigger | A script that would only be logged |
 | What it costs | Integrity of the browser policy |
 | How you stop it | Require the enforcing header; do not claim isolation otherwise |

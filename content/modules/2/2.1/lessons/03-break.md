@@ -38,7 +38,7 @@ Two readers parse the same bytes — not an exploit recipe. Duplicate company ke
 
 `vulnerable/parse_note.py` uses a first-key scan for ACL and `json.loads` for storage, then returns `accepted: True` even when they disagree. CPython last-wins on duplicates is the store meaning. The scan is not a JSON parser; it is a second grammar that happens to look at similar text.
 
-You do not need a new payload. The check module already binds:
+The check module already binds:
 
 - CLEAN unique-key JSON for company A — must remain acceptable.
 - Messy duplicate `"tenant"` keys — must not yield two meanings.
@@ -48,7 +48,7 @@ You do not need a new payload. The check module already binds:
 | Slice | Practice |
 |---|---|
 | Why it happens | Two readers, two meanings of the same bytes |
-| What has to be true first | Duplicate company keys; ACL on first, store on last |
+| What's already wrong | Duplicate company keys; ACL on first, store on last |
 | What it costs | tB body stored as if it were tA, or ACL sees tA while disk sees tB |
 | Not the lesson | A scanner name, a bug-list nickname, or “JSON is broken” |
 

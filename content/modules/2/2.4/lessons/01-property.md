@@ -48,7 +48,7 @@ If the key store is down, fail closed for share (do not insert “just this once
 | Slice | For this rule |
 |---|---|
 | Why it happens | A side effect that is not bound to the key, plus a retry |
-| What has to be true first | A timeout or double-submit; the handler inserts again |
+| What's already wrong | A timeout or double-submit; the handler inserts again |
 | Trigger | Second `share_note` with the same key |
 | What it costs | Who is allowed to read the note changes over time; an extra person on the note |
 | How you stop it | Persist key → first share; the second POST returns the first |

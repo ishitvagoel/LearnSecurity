@@ -39,7 +39,7 @@ flowchart LR
 | Slice | For this rule |
 |---|---|
 | Why it happens | A number treated as a capability |
-| What has to be true first | `quiz_score_grants_phase1_skip` consults the score |
+| What's already wrong | `quiz_score_grants_phase1_skip` consults the score |
 | Trigger | A hurried learner; a hiring manager with a badge |
 | What it costs | Fake competency — later practice without a map |
 | How you stop it | Skip only missing tooling units; never skip the who-is-allowed labs |

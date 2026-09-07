@@ -23,7 +23,7 @@ flowchart LR
   Second --> Dead[denied]
 ```
 
-Who could do this: two tabs, or anyone who copied the token from mail logs (4.3). What you trust in this practice: local `accept()`. Email is not proof of who received it (4.2).
+Picture two tabs, or anyone who copied the token from mail logs (4.3). What you trust: local `accept()`. Email is not proof of who received it (4.2).
 
 **The tool (not the rule):** a database unique constraint you never hit, HTTP 400, or “people will not double-click.”
 
@@ -42,7 +42,7 @@ A used flag without locking still races. This practice’s check is a sequential
 | Slice | For this rule |
 |---|---|
 | Why it happens | Check-then-set is not one step; the token is never marked used |
-| What has to be true first | A second `accept` still returns true |
+| What's already wrong | A second `accept` still returns true |
 | Trigger | Two accepts of `t1` |
 | What it costs | Integrity of membership: extra member, or replay after revoke |
 | How you stop it | Consume in the same step; expire; bind to the recipient |

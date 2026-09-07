@@ -22,7 +22,7 @@ flowchart TD
   Mix -->|no| Argv["argv: ls -- name"]
 ```
 
-Who could do this: a member who chooses a note or export name, or a stolen client. What you trust in this practice: the local `argv.py` helper. Do not probe other hosts.
+Picture a member who chooses a note or export name, or a stolen client. What you trust: the local `argv.py` helper. Do not probe other hosts.
 
 **The tool (not the rule):** a `shell=False` comment, a denylist of punctuation, or a scanner finding.
 
@@ -43,7 +43,7 @@ SQL, shell, templates, and mail headers fail the same way: untrusted data become
 | Slice | For this rule |
 |---|---|
 | Why it happens | Concatenating untrusted data into a shell string |
-| What has to be true first | `argv_for_list` returns `['sh', '-c', 'ls ' + name]` |
+| What's already wrong | `argv_for_list` returns `['sh', '-c', 'ls ' + name]` |
 | Trigger | User-chosen name (this practice checks shape, not execution) |
 | What it costs | Integrity of the OS interpreter boundary |
 | How you stop it | argv list; no shell; `--` before the name |

@@ -44,7 +44,7 @@ Someone granted god-mode for convenience. That is the cause. Cluster takeover fr
 | Slice | For this rule |
 |---|---|
 | Why it happens | God-mode for convenience |
-| What has to be true first | `pod_ok("cluster-admin")` true |
+| What's already wrong | `pod_ok("cluster-admin")` true |
 | Trigger | Compromised container or malicious chart |
 | What it costs | Authorization of the control plane |
 | How you stop it | Namespaced RoleBinding; restricted pod profile; IMDS hop denied |

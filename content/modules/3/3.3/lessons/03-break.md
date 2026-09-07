@@ -17,7 +17,7 @@ Do not run `SELECT` against a live cluster, an employer replica, or a public dem
 
 What must not happen: the app database role can read another company’s rows. `can_select("app", "tB", "tA") is True`.
 
-Who could do this: a forgotten `WHERE`, later injection into SQL, or a stolen app password that can call `can_select` as company `tB`. That stands in for an all-powerful `DATABASE_URL`. What is supposed to stop this: the runtime role is a **second** check after who-is-allowed. SQLAlchemy, a private network, and “we use microservices” are not enough.
+Picture a forgotten `WHERE`, later injection into SQL, or a stolen app password that can call `can_select` as company `tB` — an all-powerful `DATABASE_URL`. The runtime role is a **second** check after who-is-allowed. SQLAlchemy, a private network, and “we use microservices” are not enough.
 
 ## Picture: a role with no same-company check
 
@@ -41,14 +41,13 @@ In `vulnerable/roles.py`, `can_select` returns `True` for every role and company
 - `test_runtime_connection_is_not_superuser`
 - `test_app_role_can_read_own_tenant` — honest path (may fail on the broken files too)
 
-You do not need a new company id.
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |
 |---|---|
 | The rule | Runtime `app` bound as `tB` cannot read `tA` rows |
 | Why it happens | One all-powerful database user shared by the app and migrate |
-| What has to be true first | The runtime role can `SELECT` other companies |
+| What's already wrong | The runtime role can `SELECT` other companies |
 | Trigger | `can_select("app", "tB", "tA")` |
 | What it costs | Secrecy of tA notes; a who-is-allowed check the database did not catch |
 | How you stop it | Least-privilege runtime role; same-company check in the role or a later row-level rule |

@@ -50,7 +50,7 @@ A session value handed to the script reader fails because **the designers treate
 | Slice | For this rule |
 |---|---|
 | Why it happens | The session value is shown to the script reader |
-| What has to be true first | A cookie without HttpOnly, or a reader that ignores the flag; script runs |
+| What's already wrong | A cookie without HttpOnly, or a reader that ignores the flag; script runs |
 | Trigger | `js_read_session` on `sc_session` |
 | What it costs | Session secrecy against script; a thief then acts as the signed-in member |
 | How you stop it | Set HttpOnly; only `Set-Cookie` carries the value |

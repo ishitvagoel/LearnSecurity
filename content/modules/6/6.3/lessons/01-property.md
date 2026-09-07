@@ -23,7 +23,7 @@ flowchart TD
   App -->|cookie only| Share[unwanted share grant]
 ```
 
-Who could do this: a foreign origin that can cause the victim’s browser to send the leftover cookie. What you trust is local `allow_share(origin, expected, token)`. Do not visit other people’s sites.
+Picture a foreign origin that can cause the victim’s browser to send the leftover cookie. What you trust is local `allow_share(origin, expected, token)`. Do not visit other people’s sites.
 
 **A tool is not the rule.** SameSite=Lax, a CORS `*` reflex, or “JSON APIs cannot CSRF.”
 
@@ -44,7 +44,7 @@ A token you put on `Authorization` by hand is a **different helper**. It does no
 | Slice | For this rule |
 |---|---|
 | Why it happens | Cookie authority used without site-bound intent |
-| What has to be true first | `allow_share(evil, app, token=None)` is true |
+| What's already wrong | `allow_share(evil, app, token=None)` is true |
 | Trigger | Foreign-origin POST with leftover cookie |
 | What it costs | Integrity of share grants |
 | How you stop it | Reject foreign Origin; require a CSRF token for cookie sessions |

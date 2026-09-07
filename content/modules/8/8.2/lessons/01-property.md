@@ -42,7 +42,7 @@ A prompt that shows the list is not wrapping the cache key. A compromised OS can
 | Slice | For this rule |
 |---|---|
 | Why it happens | Bodies written as text files |
-| What has to be true first | `plaintext_on_disk` true after save |
+| What's already wrong | `plaintext_on_disk` true after save |
 | Trigger | Lost device, backup, USB |
 | What it costs | The note bodies are no longer secret on the device |
 | How you stop it | Encrypt the cache with keys held in Keystore; expire; wipe on logout or revoke |

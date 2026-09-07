@@ -43,7 +43,7 @@ The cookie lesson already separated cookie-jar sending from script readability. 
 | Slice | For this rule |
 |---|---|
 | Why it happens | Token placed in a logged, shared channel |
-| What has to be true first | `session_from_request` prefers query |
+| What's already wrong | `session_from_request` prefers query |
 | Trigger | Link clicked, logged, or referred |
 | What it costs | The session secret is no longer secret |
 | How you stop it | Ignore query tokens; cookie or Authorization only |

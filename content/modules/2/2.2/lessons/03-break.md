@@ -27,7 +27,7 @@ flowchart TD
   Slot --> Leak["returns secretA"]
 ```
 
-The store is shared and the key is incomplete — not an exploit recipe. Shared dict, path-only key; company A filled the entry. What the attacker can do: a company B person who can `cache_get` the same path after company A’s put — no DNS hijack, no TLS break. What is supposed to stop this: the origin’s bound company is the only identity allowed in the key. TLS is not even in the practice files — on purpose. If the rule needed TLS to be “off,” the practice would be teaching the wrong sentence.
+The store is shared and the key is incomplete — not an exploit recipe. The store is a shared dict keyed only by path, and company A filled the entry. Picture a company B person who can `cache_get` the same path after company A’s put — no DNS hijack, no TLS break. The origin’s bound company is the only identity allowed in the key. TLS is not even in the practice files — on purpose. If the rule needed TLS to be “off,” the practice would be teaching the wrong sentence.
 
 ## What to look at: the cause, not a hunt
 
@@ -43,7 +43,7 @@ Checks already bind:
 | Slice | Practice |
 |---|---|
 | Why it happens | Key omitted the bound company; shared store |
-| What has to be true first | Path-only key; company A filled the entry |
+| What's already wrong | Path-only key; company A filled the entry |
 | Trigger | Company B `cache_get` of the same path |
 | What it costs | Cross-company read without guessing ids |
 | Not the lesson | A scanner name, a famous-bugs code, or “TLS is broken” |

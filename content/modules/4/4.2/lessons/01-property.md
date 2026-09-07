@@ -44,7 +44,7 @@ OTP is a second factor. It is still typed into the phishing page. Prompt bombing
 | Slice | For this rule |
 |---|---|
 | Why it happens | A shared secret that still works at the wrong site |
-| What has to be true first | The helper returns true for a password at the lookalike origin |
+| What's already wrong | The helper returns true for a password at the lookalike origin |
 | Trigger | A lookalike login page |
 | What it costs | Login is bound to the *wrong* site; the session then acts as the victim |
 | How you stop it | Bind the ceremony to origin / RP ID; do not call passwords resistant |

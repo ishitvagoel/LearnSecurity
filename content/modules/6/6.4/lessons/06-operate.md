@@ -17,7 +17,7 @@ flowchart TD
   Alert --> Audit[Audit store; restore]
 ```
 
-A broken resolve still has to be noticed. A patient filename does not belong in the log.
+A broken resolve still has to show up as an alert. A patient filename does not belong in the log.
 
 | Outcome | This topic |
 |---|---|

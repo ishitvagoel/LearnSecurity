@@ -15,9 +15,9 @@ Stay inside `labs/4.1/4.1-lab`. `SESSIONS` and `DELETED` track the synthetic nam
 
 Do not replay a production cookie. Do not replay an employer single-sign-on session. Do not replay a classmate login. Do not steal a cookie “to see what happens.”
 
-What is supposed to stop this: `delete_user` is supposed to kill leftovers in the same delete. HR email, “password disabled,” and a single-sign-on brand name are not enough.
+`delete_user` is supposed to kill leftovers in the same delete. HR email, “password disabled,” and a single-sign-on brand name are not enough.
 
-Who can still get in, in this story: an ex-employee, or a copied cookie on a shared workstation, who can present `SESSIONS["alice"]` after offboarding. That stands in for a delayed worker still holding `user_id`.
+Picture an ex-employee, or a copied cookie on a shared workstation, who can present `SESSIONS["alice"]` after offboarding — a delayed worker still holding `user_id`.
 
 ## Picture: profile marked, cookie still live
 
@@ -28,7 +28,7 @@ flowchart TD
   Skip --> Valid["session_valid returns true"]
 ```
 
-You do not need a real cookie string. The leftover still returning true *is* the leak.
+You do not need a real cookie string. The leftover true session is already the leak.
 
 All active sessions have to be killed when an account is disabled or deleted. `DELETE FROM users` is a profile observation, not that kill.
 
@@ -40,7 +40,6 @@ In `vulnerable/lifecycle.py`, `delete_user` only adds the user to `DELETED`. `se
 - `test_deleted_user_session_is_dead` — `session_valid` false after delete
 - `test_deleted_denies_even_if_session_map_still_has_row` — resurrected map entry still denied on the repaired files
 
-You do not need a new username.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -53,7 +52,7 @@ You do not need a new username.
 | Slice | Practice |
 |---|---|
 | Why it happens | The authentication leftover outlived the person |
-| What has to be true first | `delete_user` removes the profile only |
+| What's already wrong | `delete_user` removes the profile only |
 | Trigger | Cookie presented after they leave |
 | What it costs | The notes are still readable; secrecy over time |
 | How you stop it later | Kill sessions (and tokens, workers) in the same delete |

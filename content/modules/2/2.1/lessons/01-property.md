@@ -67,7 +67,7 @@ A WAF string that looks for `tenant` twice is fake cleaning. Whitespace, Unicode
 | Slice | For this rule |
 |---|---|
 | Why it happens | Two readers assigned two company meanings to one byte sequence |
-| What has to be true first | Duplicate or otherwise messy company fields; split ACL vs persist parse |
+| What's already wrong | Duplicate or otherwise messy company fields; split ACL vs persist parse |
 | Trigger | `ingest_note` on the messy two-company object, or a worker re-parse later |
 | What it costs | Secrecy: company B body stored under company A policy, or the reverse |
 | How you stop it | Refuse duplicate keys; pass one parse result to ACL and storage |

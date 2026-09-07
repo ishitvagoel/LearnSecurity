@@ -13,7 +13,7 @@ Last topic (6.1) taught that a name is data, not a shell program. This week is t
 
 What must not happen is **eval on user input approved in review**. That is an integrity failure of the change-control gate — the interpreter boundary from 6.1, checked before the helper ships.
 
-You need to avoid `eval` and similar dynamic execution (template languages that run expressions, and kin). Writing down that eval is dangerous is later, stricter paperwork. It is not the same as rejecting the change. A review guide tells you *how to look* — data flow, who is allowed, state, configuration — not a sticker to paste on. “A person looks at the code” is vocabulary for this week, not a course gate. A later draft of that vocabulary stays a draft.
+You need to avoid `eval` and similar dynamic execution (template languages that run expressions, and kin). Writing down that eval is dangerous is later, stricter paperwork. It is not the same as rejecting the change. A review guide tells you *how to look* — data flow, who is allowed, state, configuration — not a sticker to paste on. “A person looks at the code” is vocabulary for this topic, not a course gate. A later draft of that vocabulary stays a draft.
 
 The practice uses `'eval(' not in diff`. That substring check is a **stand-in**, not a complete review check. `exec(`, other dynamic-execution languages, and generated code (later elective) can still slip past it.
 
@@ -42,7 +42,7 @@ flowchart LR
 | Slice | For this rule |
 |---|---|
 | Why it happens | The reviewer trusts that it looks like a helper |
-| What has to be true first | `review_ok` is true for `eval(user)` |
+| What's already wrong | `review_ok` is true for `eval(user)` |
 | Trigger | The helper is merged |
 | What it costs | User input becomes Python grammar (6.1) |
 | How you stop it | Review data flow, who is allowed, and interpreters; reject eval |

@@ -15,9 +15,9 @@ Stay inside `labs/10.2/10.2-lab`. The digests are the synthetic strings `aaa` an
 
 Do not publish, typosquat, or pull a real tarball “to see what happens.” Do not paste this exercise onto a public registry, employer CI, or live clinic.
 
-What is supposed to stop this: `install_ok` is supposed to require **expected digest equals got digest**. npm audit, Dependabot, SBOM generation, and framework install defaults are not enough.
+`install_ok` is supposed to require **expected digest equals got digest**. npm audit, Dependabot, SBOM generation, and framework install defaults are not enough.
 
-Who can slip a wrong tarball in this story: a name-only install. That stands in for “the prod pod runs npm install so we always get latest,” a CycloneDX file treated as verify, or a provenance badge treated as the hash check.
+Picture a name-only install — “the prod pod runs npm install so we always get latest,” a CycloneDX file treated as verify, or a provenance badge treated as the hash check.
 
 ## Picture: any pair is enough
 
@@ -26,7 +26,7 @@ flowchart TD
   Any[any pair] --> True[install_ok true]
 ```
 
-You do not need npm. You must not fetch a live package. The true return *is* the leak of integrity.
+You do not need npm. You must not fetch a live package. The true return is already the leak of integrity.
 
 The first lesson already refused a name as a digest. This practice is **whether the check compares bytes**. An SBOM is inventory. It does not compare `aaa` to `bbb`.
 
@@ -37,7 +37,6 @@ The first lesson already refused a name as a digest. This practice is **whether 
 - `test_hash_mismatch_refuses_install`
 - `test_matching_digest_may_install` — matching hashes may pass on both
 
-You do not need a new digest string.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -51,7 +50,7 @@ You do not need a new digest string.
 |---|---|
 | The rule | `install_ok("aaa", "bbb")` is false |
 | Why it happens | Name-only install; digests ignored |
-| What has to be true first | `install_ok` true for every pair |
+| What's already wrong | `install_ok` true for every pair |
 | Trigger | CI installs when claimed digest ≠ got |
 | What it costs | Wrong bytes in the trusted computing base |
 | How you stop it later | Require expected == got; mismatch deny |

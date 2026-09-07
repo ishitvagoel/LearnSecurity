@@ -17,7 +17,7 @@ Do not decode a live column. Do not decode an employer backup. Do not decode a c
 
 What must not happen: `protect()` is reversible as Base64 to `secret`.
 
-Who could do this: an honest storage reader — a database admin, a stolen disk, a backup tape — who can read the column. That stands in for a clinic SSN column named `ssn_encrypted` that is still encoding. What is supposed to stop this: `protect` is not reversible as encoding. HTTPS, volume encryption, a column rename, and “we use AES” in a README are not enough.
+Picture an honest storage reader — a database admin, a stolen disk, a backup tape — who can read the column — a clinic SSN column named `ssn_encrypted` that is still encoding. `protect` is not reversible as encoding. HTTPS, volume encryption, a column rename, and “we use AES” in a README are not enough.
 
 ## Picture: reversible encoding
 
@@ -38,7 +38,6 @@ In `vulnerable/crypto.py`, `protect` Base64-encodes the string. Tests:
 - `test_protect_is_not_mere_encoding`
 - `test_protect_does_not_return_plaintext`
 
-You do not need a new cipher name.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -52,7 +51,7 @@ You do not need a new cipher name.
 |---|---|
 | Required rule | Stored value is not Base64 of the plaintext |
 | Why it happens | Encoding labeled encryption |
-| What has to be true first | `protect` returns Base64; decode equals `secret` |
+| What's already wrong | `protect` returns Base64; decode equals `secret` |
 | Trigger | `protect("secret")` then Base64 decode |
 | What it costs | The body is readable to any column reader |
 | How you stop it later | Authenticated encryption with a managed key; refuse encoding as `protect` |

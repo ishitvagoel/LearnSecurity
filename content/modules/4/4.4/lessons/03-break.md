@@ -15,7 +15,7 @@ Stay inside `labs/4.4/4.4-lab`. Notes `n1` / `n2` / `n3` and companies `acme` / 
 
 What must not happen: a grant on n1 authorizes n2, plus owner/admin costumes that cross companies or skip the object key. `can_read("bob", "n2")` is true.
 
-Who could do this: a member with a real grant on `n1` who can swap `note_id`, or someone guessing ids. That stands in for Alice (acme owner) reading clinic `n3`, or Eve (`admin` in clinic) reading acme `n1`. What is supposed to stop this: `can_read` is supposed to key `(person, company, note_id)`. `Depends(get_user)`, Casbin, and id length are not enough.
+Picture a member with a real grant on `n1` who can swap `note_id`, or someone guessing ids — Alice (acme owner) reading clinic `n3`, or Eve (`admin` in clinic) reading acme `n1`. `can_read` is supposed to key `(person, company, note_id)`. `Depends(get_user)`, Casbin, and id length are not enough.
 
 ## Picture: any-grant becomes every-note
 
@@ -42,7 +42,7 @@ A scanner “IDOR” name is a weakness label, not that rule.
 |---|---|
 | Required rule | Grant on n1 does not authorize n2 |
 | Why it happens | Collection-level flag and role costume |
-| What has to be true first | `can_read(bob, n2)` true because Bob has n1 |
+| What's already wrong | `can_read(bob, n2)` true because Bob has n1 |
 | Trigger | Client-supplied `note_id` (modeled as `can_read("bob", "n2")`) |
 | What it costs | Secrecy of n2 / clinic notes; the who-is-allowed check never ran |
 | How you stop it later | Deny-by-default lookup `(person, company, note_id)` on every path |

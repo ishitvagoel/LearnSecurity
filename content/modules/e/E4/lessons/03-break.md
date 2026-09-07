@@ -17,7 +17,7 @@ Do not compile a C overflow. Do not spray a heap. Do not fuzz a third-party bina
 
 What must not happen: copy into a 4-byte lab buffer returns more than 4 bytes. `len(copy_into(4, b"abcdefgh", 4)) > 4`.
 
-Who could do this: a hostile header `declared_len`. That stands in for “the app is mostly Kotlin so copies are safe,” a sanitizer in CI treated as the rule, or an awareness-list mapping treated as this rule. What is supposed to stop this: `copy_into` bounds the copy by **destination size**. Python slicing, a company language roadmap, and FastAPI are not enough.
+Picture a hostile header `declared_len` — “the app is mostly Kotlin so copies are safe,” a sanitizer in CI treated as the rule, or an awareness-list mapping treated as this rule. `copy_into` bounds the copy by **destination size**. Python slicing, a company language roadmap, and FastAPI are not enough.
 
 ## Picture: extra eight bytes are not a gift
 
@@ -42,14 +42,13 @@ An earlier topic already said path length is checking every path for *which file
 - `test_copy_does_not_exceed_buffer`
 - `test_short_copy_may_fit` — short honest copy may pass on both
 
-You do not need a new source.
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |
 |---|---|
 | The rule | `len(copy_into(4, b"abcdefgh", 4)) <= 4` |
 | Why it happens | Declared length trusted over destination size |
-| What has to be true first | Copy uses `declared_len` plus 8 |
+| What's already wrong | Copy uses `declared_len` plus 8 |
 | Trigger | Header claims 4; payload is 8 |
 | What it costs | Destination longer than bufsize |
 | How you stop it | `min(bufsize, declared_len, len(src))` |

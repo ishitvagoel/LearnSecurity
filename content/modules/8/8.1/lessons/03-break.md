@@ -17,7 +17,7 @@ Do not paste this exercise onto a live phone, a hospital device, or a public And
 
 What must not happen: **client `integrity=ok` authorizes export**. `allow_export({"integrity": "ok"}, "fail")` returns true.
 
-Who could do this: a modified client or a stolen boolean. That stands in for a hex-edited Compose switch, a clinic `hipaaMode=true` JSON field, or a patched app file that always reports `integrity=ok`. What is supposed to stop this: `allow_export` is supposed to be a **server-side who-is-allowed check** that may consult a *server-verified* attestation result. Play Integrity checked only in the app, shrinking the app, the store listing, and the Android user-id sandbox are not enough.
+Picture a modified client or a stolen boolean — a hex-edited Compose switch, a clinic `hipaaMode=true` JSON field, or a patched app file that always reports `integrity=ok`. `allow_export` is supposed to be a **server-side who-is-allowed check** that may consult a *server-verified* attestation result. Play Integrity checked only in the app, shrinking the app, the store listing, and the Android user-id sandbox are not enough.
 
 ## Picture: the boolean is enough
 
@@ -38,14 +38,13 @@ The phone sandbox raises the cost of *other apps* reading this process; it does 
 - `test_server_attest_may_allow_export`
 - `test_missing_client_claim_does_not_authorize` — empty claims plus fail must deny
 
-You do not need a new boolean name.
 ## Why it happens vs what it costs
 
 | Slice | This practice |
 |---|---|
 | Required rule | `allow_export({"integrity": "ok"}, "fail")` is false |
 | Why it happens | Policy is decided on the attacker’s CPU |
-| What has to be true first | Client `integrity=ok` is treated as a grant |
+| What's already wrong | Client `integrity=ok` is treated as a grant |
 | Trigger | A modified client or a stolen boolean |
 | What it costs | Export without server authority |
 | How you stop it | Ignore client integrity for authorization; server attest plus session 1.2 |

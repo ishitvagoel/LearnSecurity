@@ -23,7 +23,7 @@ flowchart TD
   Net -->|allow-listed host| Ok[named lab host]
 ```
 
-Who could do this: a member who supplies a preview URL. What you trust in this practice: a local `allowed(url)` check. Do not probe cloud metadata, loopback services, or public hosts.
+Picture a member who supplies a preview URL. What you trust: a local `allowed(url)` check. Do not probe cloud metadata, loopback services, or public hosts.
 
 **The tool (not the rule):** “HTTPS only” as a string prefix, a web filter, or `requests` timeouts.
 
@@ -43,7 +43,7 @@ A regex on the raw string still loses to encodings (2.1), decimal IPs, IPv6, and
 | Slice | For this rule |
 |---|---|
 | Why it happens | The server would fetch whoever the URL names |
-| What has to be true first | `allowed` is true for a link-local metadata URL |
+| What's already wrong | `allowed` is true for a link-local metadata URL |
 | Trigger | User-supplied preview URL |
 | What it costs | Secrecy of cloud identity; integrity of egress |
 | How you stop it | Parse, then allow-list host and scheme; block link-local and loopback; do not follow redirects off the list |

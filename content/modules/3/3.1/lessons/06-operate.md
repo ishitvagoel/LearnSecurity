@@ -11,7 +11,7 @@ Do not paste the matching line into Slack, a ticket, or a lesson note.
 
 ## Picture: alert on the substring, then purge
 
-A redaction miss still has to be noticed. The secret does not belong in the pager. Recovery should purge the line.
+A redaction miss still has to show up as an alert. The secret does not belong in the pager. Then purge the line.
 
 ```mermaid
 flowchart TD

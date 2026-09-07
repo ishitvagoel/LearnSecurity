@@ -11,7 +11,7 @@ Do not log export names that are patient identifiers. Do not paste filenames int
 
 ## Picture: unexpected child is a signal
 
-A child whose program is `sh` after an export-helper change still has to be noticed. Leave filenames out of the pager. Recovery should kill the child and remove the concatenating path.
+A child whose program is `sh` after an export-helper change still has to show up as an alert. Keep filenames out of the pager. Then kill the child and remove the concatenating path.
 
 ```mermaid
 flowchart TD

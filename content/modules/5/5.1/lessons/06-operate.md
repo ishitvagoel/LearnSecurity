@@ -11,7 +11,7 @@ Do not paste the chart into the ticket. Do not log bodies.
 
 ## Picture: hunt ids, not bodies
 
-A leftover body after delete still has to be noticed. Leave leftover notes out of the pager. Recovery should purge the partition.
+A leftover body after delete still has to show up as an alert. Keep leftover notes out of the pager. Then purge the partition.
 
 ```mermaid
 flowchart TD

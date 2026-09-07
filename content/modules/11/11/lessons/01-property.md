@@ -55,7 +55,7 @@ Someone recorded revoke and never asked the grant on the next read. That is the 
 | Slice | For this rule |
 |---|---|
 | Why it happens | Grant not consulted after revoke |
-| What has to be true first | `read` after `revoke` still returns the body |
+| What's already wrong | `read` after `revoke` still returns the body |
 | Trigger | Former collaborator; cached id; delayed worker |
 | What it costs | Permission over time — ex-collaborator secrecy |
 | How you stop it | Check owner-or-grant on every read; drop stale caches |

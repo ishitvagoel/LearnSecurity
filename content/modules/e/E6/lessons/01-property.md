@@ -52,7 +52,7 @@ Oral acceptance treated as a register row. That is the cause. The unowned hole t
 | Slice | For this rule |
 |---|---|
 | Why it happens | Oral acceptance treated as a register row |
-| What has to be true first | `accept_exception` true with empty owner |
+| What's already wrong | `accept_exception` true with empty owner |
 | Trigger | Calendar; silent “we’ll ship anyway” |
 | What it costs | Accountability of leftover risk — unowned holes; inaccessible recovery |
 | How you stop it | Schema; refuse incomplete |

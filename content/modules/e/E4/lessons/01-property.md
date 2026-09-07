@@ -24,7 +24,7 @@ flowchart TD
   Gate -->|declared_len only| Bad["len dst > bufsize"]
 ```
 
-Who could do this: someone who controls a file header length. What is supposed to stop this: a local `copy_into(bufsize, src, declared_len)` that bounds the copy by destination size. Do not compile a native overflow.
+Picture someone who controls a file header length. A local `copy_into(bufsize, src, declared_len)` that bounds the copy by destination size. Do not compile a native overflow.
 
 **A tool is not the rule.** “We use Kotlin,” a sanitizer in CI, or an awareness-list dashboard is not this sentence.
 
@@ -44,7 +44,7 @@ A Python slice in this practice is a teaching stand-in. C will not do this for y
 | Slice | For this rule |
 |---|---|
 | Why it happens | Declared length trusted over destination size |
-| What has to be true first | `copy_into` copies `declared_len` plus 8 |
+| What's already wrong | `copy_into` copies `declared_len` plus 8 |
 | Trigger | Header claims 4; payload is 8 |
 | What it costs | The destination object is overwritten in space |
 | How you stop it | `min(bufsize, declared_len, len(src))` |

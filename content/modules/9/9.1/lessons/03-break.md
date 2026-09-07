@@ -15,9 +15,9 @@ Stay inside `labs/9.1/9.1-lab`. The requirement id is the synthetic string `AUTH
 
 Do not paste a real requirements matrix into a public tracker “to see what happens.” Do not paste this exercise onto a public checklist portal, employer dashboard, or live clinic.
 
-What is supposed to stop this: `covered` is supposed to be a **check over tests that assert isolation**. Checklist membership, pytest-cov, and a practice-guide attestation are not enough.
+`covered` is supposed to be a **check over tests that assert isolation**. Checklist membership, pytest-cov, and a practice-guide attestation are not enough.
 
-Who can mark the row done in this story: an optimistic status column. That stands in for “we imported the PDF and marked isolation done,” a tracker Done column, or a mobile storage spreadsheet checkbox without a matching test.
+Picture an optimistic status column — “we imported the PDF and marked isolation done,” a tracker Done column, or a mobile storage spreadsheet checkbox without a matching test.
 
 ## Picture: matching the id is enough
 
@@ -26,7 +26,7 @@ flowchart TD
   Row["req equals AUTHZ-1"] --> True[covered true]
 ```
 
-You do not need CI. You must not call a live checklist portal. The true return *is* the leak of honesty.
+You do not need CI. You must not call a live checklist portal. The true return is already the leak of honesty.
 
 The isolation lessons (1.2 / 4.4) already refused company B reading company A. This check is **whether the proof names a test that asserts that**. A pasted PDF is inventory. It does not assert isolation.
 
@@ -37,7 +37,6 @@ The isolation lessons (1.2 / 4.4) already refused company B reading company A. T
 - `test_status_only_row_is_not_coverage`
 - `test_isolation_assert_may_count_as_coverage` — an honest isolation flag may pass on both
 
-You do not need a new requirement id.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -51,7 +50,7 @@ You do not need a new requirement id.
 |---|---|
 | The rule | Status-only row → `covered` false |
 | Why it happens | Status / membership without an isolation assert |
-| What has to be true first | `covered` is true when `asserts_isolation` is false |
+| What's already wrong | `covered` is true when `asserts_isolation` is false |
 | Trigger | Release gated on the spreadsheet |
 | What it costs | 1.2 holes ship with a green verification sticker |
 | How you stop it later | Coverage requires the isolation assert |

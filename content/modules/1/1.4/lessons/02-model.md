@@ -30,7 +30,7 @@ If any box is a product name or a color, the row is not ready.
 
 Take the rules you already wrote and ask what leftover they still carry when a human must confirm recovery.
 
-| Rule | Recovery leftover to name | Out of scope this week |
+| Rule | Recovery leftover to name | Out of scope here |
 |---|---|---|
 | Secrecy of note bodies | Shortcut: codes or bodies pasted into chat; shared admin session | Cloud operator with a database snapshot (already deferred) |
 | Owner can reach their notes | Mouse-only or color-only confirm blocks the owner | A future login provider going down in a region |
@@ -57,7 +57,7 @@ Minimum who-is-allowed rows:
 | Current owner | confirm control | keyboard confirm | allow if the control is usable |
 | Current owner | confirm control | color-only distinguish | deny: that is not a control |
 | Person present | confirm control | coerce pointer | leftover: record it; do not “fix” with CSS |
-| Support | backup codes | read aloud | deny this week; later topics add a check and a record |
+| Support | backup codes | read aloud | deny here; later topics add a check and a record |
 
 A missing support row is how leftover permission appears (“just tell us the code”). Write the hole.
 

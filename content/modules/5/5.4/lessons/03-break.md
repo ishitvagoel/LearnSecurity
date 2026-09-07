@@ -17,7 +17,7 @@ Do not probe a public host. Do not probe an employer load balancer. Do not probe
 
 What must not happen: client-supplied `X-Forwarded-Proto: https` on an `http` socket counts as TLS. `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` returns true.
 
-Who could do this: a **cleartext client who can set `X-Forwarded-Proto`**. That stands in for a clinic page whose API client uses `https://` while the API socket is `http`, or a dashboard “Force HTTPS” toggle that trusts the header. What is supposed to stop this: `channel_is_https` binds the **server socket**, not a client claim. A server flag that trusts proxy headers, a CDN product name, and HSTS preload are not enough.
+Picture a **cleartext client who can set `X-Forwarded-Proto`** — a clinic page whose API client uses `https://` while the API socket is `http`, or a dashboard “Force HTTPS” toggle that trusts the header. `channel_is_https` binds the **server socket**, not a client claim. A server flag that trusts proxy headers, a CDN product name, and HSTS preload are not enough.
 
 ## Picture: header OR socket
 
@@ -39,7 +39,6 @@ TLS has to be on the public HTTP service with no cleartext fallback. A client he
 - `test_plain_http_is_not_https`
 - `test_server_https_counts` — honest socket-https path; may pass on both
 
-You do not need a new header name.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -53,7 +52,7 @@ You do not need a new header name.
 |---|---|
 | The rule | Client Forwarded-Proto does not make the channel TLS |
 | Why it happens | The app believes the client about the channel |
-| What has to be true first | Header `https` OR socket `https` returns true |
+| What's already wrong | Header `https` OR socket `https` returns true |
 | Trigger | `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` |
 | What it costs | Cookies and HSTS fire as if TLS while the hop is cleartext |
 | How you stop it | Bind scheme to `server_scheme == "https"` only; bound proxy identity later |

@@ -10,7 +10,7 @@
 
 What must not happen: using a quiz score as permission to skip 1.2 or check-in 1. `quiz_score_grants_phase1_skip(100)` returns true.
 
-Who you are standing in for: a hurried learner or hiring manager who can supply a high score. That stands in for “they’re a senior hire,” “job-title competency,” or “the LMS dashboard is green.” What is supposed to stop this: the skip function refuses part-1 rule skips. An LMS percentage, a vendor cert, and a job-title mapping are not that trust.
+Picture a hurried learner or hiring manager who can supply a high score — “they’re a senior hire,” “job-title competency,” or “the LMS dashboard is green.” The skip function refuses part-1 rule skips. An LMS percentage, a vendor cert, and a job-title mapping are not that trust.
 
 ## Picture: 80 percent ships
 
@@ -30,14 +30,13 @@ A 100% quiz cannot observe whether you can write a 1.2 deny rule. Check-in 1 evi
 - `test_high_quiz_score_is_not_authorization` — score 100 must be false
 - `test_low_score_does_not_skip` — score 0 must be false
 
-You do not need a new score.
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |
 |---|---|
 | The rule | No quiz score grants a part-1 skip |
 | Why it happens | A number treated as a capability |
-| What has to be true first | `quiz_score_grants_phase1_skip` consults the score |
+| What's already wrong | `quiz_score_grants_phase1_skip` consults the score |
 | Trigger | `quiz_score_grants_phase1_skip(100)` |
 | What it costs | Fake competency — later practice without a map |
 | How you stop it | Skip only missing tooling units; never skip the who-is-allowed labs |

@@ -11,7 +11,7 @@ Do not log the user string that would have been eval’d. Do not paste template 
 
 ## Picture: eval in a change is a signal
 
-A pull request whose diff still grants `eval` on a user string still has to be noticed. Leave the payload out of the pager. Recovery should block the merge and keep the reject.
+A pull request whose diff still grants `eval` on a user string still has to show up as an alert. Keep the payload out of the pager. Then block the merge and keep the reject.
 
 ```mermaid
 flowchart TD

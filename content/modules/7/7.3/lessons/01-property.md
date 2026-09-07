@@ -22,7 +22,7 @@ flowchart TD
   Path --> Forged["forged share event if no MAC"]
 ```
 
-Anyone who can POST the URL can send a body. An IP allow-list is shared-fate (NAT, shared cloud egress). It is not a MAC.
+Picture anyone who can POST the URL can send a body. An IP allow-list is shared-fate (NAT, shared cloud egress). It is not a MAC.
 
 ## Picture: MAC over raw bytes
 
@@ -42,7 +42,7 @@ If you parse JSON then re-serialize, the MAC is over a different document than t
 | Slice | For this rule |
 |---|---|
 | Why it happens | The callback was trusted because it hit the path |
-| What has to be true first | `accept("", body, secret)` is true |
+| What's already wrong | `accept("", body, secret)` is true |
 | Trigger | An unauthenticated POST to the callback URL |
 | What it costs | Forged share, billing, or lab-result events |
 | How you stop it | MAC over the raw body; fail closed on a missing or wrong sig |

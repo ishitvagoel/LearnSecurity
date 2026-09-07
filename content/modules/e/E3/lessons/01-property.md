@@ -38,7 +38,7 @@ flowchart LR
 | Slice | For this rule |
 |---|---|
 | Why it happens | A side effect that is not bound to the key |
-| What has to be true first | two `capture(k1)` ⇒ count 2 |
+| What's already wrong | two `capture(k1)` ⇒ count 2 |
 | Trigger | Retry after 504; double-click |
 | What it costs | Integrity of money-like state |
 | How you stop it | Treat the key as the identity of the capture |

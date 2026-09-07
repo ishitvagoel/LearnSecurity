@@ -39,7 +39,7 @@ flowchart LR
 | Slice | For this rule |
 |---|---|
 | Why it happens | Security treated as a later phase |
-| What has to be true first | `merge_ok({})` is true |
+| What's already wrong | `merge_ok({})` is true |
 | Trigger | Identity, data, or mobile change with no threat-model id |
 | What it costs | Surfaces land without a 3.2 model |
 | How you stop it | Require a threat-model id on those surfaces |

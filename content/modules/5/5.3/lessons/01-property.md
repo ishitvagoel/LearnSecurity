@@ -42,7 +42,7 @@ Mixing classes is how a tenant id becomes a “key,” or a password becomes a s
 | Slice | For this rule |
 |---|---|
 | Why it happens | Default credential never invalidated |
-| What has to be true first | `auth(hardcoded)` is true while `current` is rotated |
+| What's already wrong | `auth(hardcoded)` is true while `current` is rotated |
 | Trigger | Clone presents `sk-lab-hardcoded` |
 | What it costs | Authenticity of the service credential over time |
 | How you stop it | Unique secrets; rotate; refuse known defaults; never commit |

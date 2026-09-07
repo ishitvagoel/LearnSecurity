@@ -17,7 +17,7 @@ Do not paste this exercise onto a public site, employer board, or live clinic po
 
 What must not happen: **a member resolves `secret_internal`**. `resolve("member", "secret_internal")` returns true.
 
-Who could do this: a member session selecting extra fields. That stands in for a clinic GraphQL `Patient { ssn }`, a REST `?fields=` dump, or a CSV exporter that serializes every ORM column. What is supposed to stop this: `resolve` is supposed to be a **role × field table** at the trusted layer. A SPA that omits the column, a UUID in the URL, and GraphQL `@hide` the client can skip are not enough.
+Picture a member session selecting extra fields — a clinic GraphQL `Patient { ssn }`, a REST `?fields=` dump, or a CSV exporter that serializes every ORM column. `resolve` is supposed to be a **role × field table** at the trusted layer. A SPA that omits the column, a UUID in the URL, and GraphQL `@hide` the client can skip are not enough.
 
 ## Picture: every field is visible
 
@@ -38,14 +38,13 @@ Identifiers find a row. They do not authorize fields. Object×company grants wer
 - `test_member_can_resolve_display_name`
 - `test_service_can_resolve_internal_field` — honest service path; may pass on both
 
-You do not need a new secret name.
 ## Why it happens vs what it costs
 
 | Slice | This practice |
 |---|---|
 | Required rule | `resolve("member", "secret_internal")` is false |
 | Why it happens | Serializer / resolver dumps without a table |
-| What has to be true first | `resolve` is always true |
+| What's already wrong | `resolve` is always true |
 | Trigger | Member requests the field (REST, GraphQL, CSV, search) |
 | What it costs | Internal field extra; in production, token or extra personal data |
 | How you stop it | Allow-list fields by role at the trusted layer |

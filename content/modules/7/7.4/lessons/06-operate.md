@@ -11,7 +11,7 @@ Do not log session cookies or note bodies (3.1 / 4.3). Do not attach the token t
 
 ## Picture: leftover session is a signal
 
-A leftover cookie used as the principal still has to be noticed. Leave the cookie out of the pager. Recovery should keep the deny and rotate the worker.
+A leftover cookie used as the principal still has to show up as an alert. Keep the cookie out of the pager. Then keep the deny and rotate the worker.
 
 ```mermaid
 flowchart TD

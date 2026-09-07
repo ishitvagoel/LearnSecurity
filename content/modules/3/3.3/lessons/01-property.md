@@ -48,7 +48,7 @@ Migrator and superuser exist. They must not be `DATABASE_URL` at request time. A
 | Slice | For this rule |
 |---|---|
 | Why it happens | One all-powerful database user shared by the app and migrate |
-| What has to be true first | The runtime role can `SELECT` other companies |
+| What's already wrong | The runtime role can `SELECT` other companies |
 | Trigger | Forgotten WHERE, later SQL injection, or a stolen app password |
 | What it costs | Secrecy of company tA’s notes |
 | How you stop it | Least-privilege runtime role; same-company check in the role or a later row-level rule |

@@ -17,7 +17,7 @@ Do not load-test a public host. Do not probe an employer export API. Do not prob
 
 What must not happen: unbounded exports (fourth allowed in the lab window). `allow(4)` returns true.
 
-Who could do this: a scripted session that calls export more than three times. That stands in for a clinic “Export all” button, notification fan-out, or GraphQL aliases later in 7.1. What is supposed to stop this: `allow` is a **per-person resource account** on the export action. A disabled button in the browser, an IP bucket, a CAPTCHA, and autoscaling are not enough.
+Picture a scripted session that calls export more than three times — a clinic “Export all” button, notification fan-out, or GraphQL aliases later in 7.1. `allow` is a **per-person resource account** on the export action. A disabled button in the browser, an IP bucket, a CAPTCHA, and autoscaling are not enough.
 
 ## Picture: allow always true
 
@@ -38,7 +38,6 @@ There has to be a stop against scripts that burn quota. Module 3.4 already cappe
 - `test_third_export_is_allowed`
 - `test_first_export_is_allowed` — honest path; may pass on both
 
-You do not need a new `n`.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -52,7 +51,7 @@ You do not need a new `n`.
 |---|---|
 | The rule | Fourth export in the window is denied |
 | Why it happens | No resource account |
-| What has to be true first | `allow(n)` is always true |
+| What's already wrong | `allow(n)` is always true |
 | Trigger | `allow(4)` |
 | What it costs | Availability and cost, plus extra CSV copies of bodies (5.1) |
 | How you stop it | Server check `n <= 3` on the export action |

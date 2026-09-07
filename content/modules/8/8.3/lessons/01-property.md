@@ -41,7 +41,7 @@ On older API levels `exported` defaults were surprising. Treat export as explici
 | Slice | For this rule |
 |---|---|
 | Why it happens | Identity taken from the link |
-| What has to be true first | `open_link({as: admin})` sets admin |
+| What's already wrong | `open_link({as: admin})` sets admin |
 | Trigger | Other app on the tablet, or a crafted link |
 | What it costs | Local privilege / account switch |
 | How you stop it | Do not take identity from links; session stays server-issued |

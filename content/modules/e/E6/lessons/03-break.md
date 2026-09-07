@@ -15,9 +15,9 @@ Stay inside `labs/E6/e6-lab`. Owner strings are fake. Do **not** file a real pub
 
 Do not paste this exercise onto a public clinic, employer register, or live hospital portal “to see what happens.”
 
-What is supposed to stop this: `accept_exception` is supposed to require a **record** with owner, review date, and accessibility flag. A ticket type, a HIPAA slide, and a pledge page are not enough.
+`accept_exception` is supposed to require a **record** with owner, review date, and accessibility flag. A ticket type, a HIPAA slide, and a pledge page are not enough.
 
-Who can accept without a record in this story: calendar pressure plus oral “we’ll accept it.” That stands in for “legal said yes,” a maturity score treated as the register, or a “secure by design” pledge treated as an assurance stamp.
+Picture calendar pressure plus oral “we’ll accept it” — “legal said yes,” a maturity score treated as the register, or a “secure by design” pledge treated as an assurance stamp.
 
 ## Picture: everything ships
 
@@ -26,7 +26,7 @@ flowchart TD
   Any[any dict] --> Acc[accepted]
 ```
 
-`--impl vulnerable` returns true for every payload, including empty owner. You do not need a governance product. You must not contact a live disclosure inbox. The true return for empty owner *is* the leak.
+`--impl vulnerable` returns true for every payload, including empty owner. You do not need a governance product. You must not contact a live disclosure inbox. The true return for empty owner is already the leak.
 
 Earlier lessons already said posters are not gates. This check is **accountability of leftover risk**.
 
@@ -37,7 +37,6 @@ Earlier lessons already said posters are not gates. This check is **accountabili
 - `test_exception_needs_owner_review_and_wcag`
 - `test_complete_exception_may_be_accepted` — alice + date + accessibility flag may pass on both
 
-You do not need a new field.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -51,7 +50,7 @@ You do not need a new field.
 |---|---|
 | The rule | empty owner → `accept_exception` false |
 | Why it happens | Oral acceptance treated as a register row |
-| What has to be true first | always-true `accept_exception` |
+| What's already wrong | always-true `accept_exception` |
 | Trigger | Calendar; silent “we’ll ship anyway” |
 | What it costs | Unowned holes last; inaccessible recovery kept |
 | How you stop it later | Schema; refuse incomplete |

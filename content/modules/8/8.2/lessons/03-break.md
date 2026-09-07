@@ -17,7 +17,7 @@ Do not paste this exercise onto a public device, employer clinic, or live EHR ta
 
 What must not happen: **a note body cached as plaintext on disk**. After `save_note("secret")`, `plaintext_on_disk()` is true.
 
-Who could do this: a stolen USB backup or a phone whose cache is unlocked. That stands in for a clinic “available offline” write of `charts.json`, a Room SQLite dump, or a cloud backup of internal storage. What is supposed to stop this: `save_note` is supposed to leave **ciphertext (or a stand-in) on disk**, not the body. `MODE_PRIVATE`, a fingerprint prompt, and EncryptedSharedPreferences on a *different* file are not enough.
+Picture a stolen USB backup or a phone whose cache is unlocked — a clinic “available offline” write of `charts.json`, a Room SQLite dump, or a cloud backup of internal storage. `save_note` is supposed to leave **ciphertext (or a stand-in) on disk**, not the body. `MODE_PRIVATE`, a fingerprint prompt, and EncryptedSharedPreferences on a *different* file are not enough.
 
 ## Picture: write the body as the file
 
@@ -37,14 +37,13 @@ Sensitive data stored securely. Last crypto topic (5.2) already refused Base64; 
 - `test_cached_note_is_not_plaintext_on_disk`
 - `test_other_body_is_not_reported_as_plaintext_secret` — honest `'other'` must not be reported as the secret
 
-You do not need a new filename.
 ## Why it happens vs what it costs
 
 | Slice | This practice |
 |---|---|
 | Required rule | After `save_note("secret")`, `plaintext_on_disk()` is false |
 | Why it happens | Bodies written as text files |
-| What has to be true first | `DISK['note']` equals the body |
+| What's already wrong | `DISK['note']` equals the body |
 | Trigger | Lost device, backup, USB |
 | What it costs | The note bodies are no longer secret on the device |
 | How you stop it | Encrypt the cache with keys held in Keystore; expire; wipe on logout or revoke |

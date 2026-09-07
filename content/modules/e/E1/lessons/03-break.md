@@ -15,9 +15,9 @@ Stay inside `labs/E1/e1-lab`. The names are synthetic strings `exec_sql` / `sear
 
 Do not paste this exercise onto a public API, employer agent, or live hospital summarizer "to see what happens."
 
-What is supposed to stop this: `run_tool` is supposed to **allow-list the name in the runtime**. Library defaults, a system prompt, and the web framework itself are not enough.
+`run_tool` is supposed to **allow-list the name in the runtime**. Library defaults, a system prompt, and the web framework itself are not enough.
 
-Who can take the tools in this story: prompt injection in a note plus a confused-deputy runtime. That stands in for "the system prompt forbids SQL," a retrieval corpus treated as what you trust, or a famous-bugs mapping treated as mediation.
+Picture prompt injection in a note plus a confused-deputy runtime — "the system prompt forbids SQL," a retrieval corpus treated as what you trust, or a famous-bugs mapping treated as mediation.
 
 ## Picture: any name runs
 
@@ -26,7 +26,7 @@ flowchart TD
   Any[any tool name] --> Ran[ran name]
 ```
 
-You do not need a language model. You must not call a live model. The ran-string for `"exec_sql"` *is* the leak.
+You do not need a language model. You must not call a live model. The ran-string for `"exec_sql"` is already the leak.
 
 The interpreter lesson already said a string is not a safe argv. This check is **the same idea with the model as an untrusted client**.
 
@@ -37,7 +37,6 @@ The interpreter lesson already said a string is not a safe argv. This check is *
 - `test_exec_sql_tool_is_denied`
 - `test_allowlisted_search_notes_may_run` — `search_notes` may pass on both
 
-You do not need a new tool name.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -51,7 +50,7 @@ You do not need a new tool name.
 |---|---|
 | The rule | `run_tool("exec_sql", {})` is None |
 | Why it happens | Model output treated as policy |
-| What has to be true first | `run_tool` runs every name |
+| What's already wrong | `run_tool` runs every name |
 | Trigger | Prompt injection in a note; poisoned retrieval |
 | What it costs | Interpreter via English |
 | How you stop it later | Allow-list; unknown tools deny |

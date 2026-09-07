@@ -45,7 +45,7 @@ Encoding for HTML text is wrong inside a JavaScript string. Encoding for attribu
 | Slice | For this rule |
 |---|---|
 | Why it happens | HTML grammar mixed with data |
-| What has to be true first | `render` echoes `<` without encoding |
+| What's already wrong | `render` echoes `<` without encoding |
 | Trigger | A title that contains `<` (tame marker) |
 | What it costs | Integrity of the HTML interpreter |
 | How you stop it | Encode for HTML text; use safe constructors; content-security policy is extra |

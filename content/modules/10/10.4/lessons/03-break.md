@@ -15,9 +15,9 @@ Stay inside `labs/10.4/10.4-lab`. The flags are synthetic strings and booleans. 
 
 Do not paste this exercise onto a public clinic, employer cluster, or live hospital portal.
 
-What is supposed to stop this: `boot_ok` is supposed to refuse **prod plus debug**. Compose strings, FastAPI debug defaults, a canary percentage, and a manufacturer-defaults program page we have not verified are not enough.
+`boot_ok` is supposed to refuse **prod plus debug**. Compose strings, FastAPI debug defaults, a canary percentage, and a manufacturer-defaults program page we have not verified are not enough.
 
-Who can get the leak in this story: anyone who finds an error page or a debug route. That stands in for “we left DEBUG on for five minutes so support can see traces,” `NODE_ENV=production` treated as the check, or a 10% canary treated as hardening.
+Picture anyone who finds an error page or a debug route — “we left DEBUG on for five minutes so support can see traces,” `NODE_ENV=production` treated as the check, or a 10% canary treated as hardening.
 
 ## Picture: boot always says yes
 
@@ -26,7 +26,7 @@ flowchart TD
   Any[any env debug pair] --> True[boot_ok true]
 ```
 
-You do not need Docker. You must not boot a live host. The true return for `("prod", True)` *is* the leak.
+You do not need Docker. You must not boot a live host. The true return for `("prod", True)` is already the leak.
 
 The secrets lesson already said keep secrets out of traces. This check is **the process must not start**.
 
@@ -37,7 +37,6 @@ The secrets lesson already said keep secrets out of traces. This check is **the 
 - `test_prod_debug_must_not_boot`
 - `test_prod_without_debug_may_boot` — `("prod", False)` may pass on both
 
-You do not need a new flag.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -51,7 +50,7 @@ You do not need a new flag.
 |---|---|
 | The rule | `boot_ok("prod", True)` is false |
 | Why it happens | Fail-open defaults; debug ignored |
-| What has to be true first | `boot_ok` true for every pair |
+| What's already wrong | `boot_ok` true for every pair |
 | Trigger | Anyone who finds `/debug` or an error page |
 | What it costs | Traces, debugger, secret leak |
 | How you stop it later | Refuse boot when prod and debug |

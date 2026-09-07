@@ -40,7 +40,7 @@ Someone treated the owner’s 200 as proof that isolation works. That is the cau
 | Slice | For this rule |
 |---|---|
 | Why it happens | Happy path treated as assurance |
-| What has to be true first | `is_security_test` true when only `status_asserted` |
+| What's already wrong | `is_security_test` true when only `status_asserted` |
 | Trigger | Lesson 9.1 maps the isolation row to that test |
 | What it costs | Isolation holes ship with a green suite |
 | How you stop it | Require a named what must not happen |

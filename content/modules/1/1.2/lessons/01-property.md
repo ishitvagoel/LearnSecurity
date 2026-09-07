@@ -123,7 +123,7 @@ Bob reads Alice’s note by choosing `nA1`.
 | Slice | For this rule |
 |---|---|
 | Why it happens | The read path treats a signed-in identity as permission on the object and skips the person–object rule |
-| What has to be true first | Bob has a valid company B identity; Note A-17 exists; Bob can choose an identifier |
+| What's already wrong | Bob has a valid company B identity; Note A-17 exists; Bob can choose an identifier |
 | Trigger | The read reaches storage without a current yes for Bob × read-body × Note A-17 |
 | What it costs | Company A note secrecy fails. The identifier may also reveal that the note exists |
 | How you stop it | Resolve person and object on the server, judge the exact action, and enforce the answer before release |

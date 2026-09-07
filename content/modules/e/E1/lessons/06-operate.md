@@ -9,7 +9,7 @@ A new tool can still be registered after the allow-list was "set once." Do not l
 
 ## Picture: denied tool is a signal
 
-A denied tool still has to be noticed. Leave the transcript out of the pager. The notice should name the tool. Recovery should revoke leftover agent credentials.
+A denied tool still has to show up as an alert. Keep the transcript out of the pager. The alert should name the tool. Then revoke leftover agent credentials.
 
 ```mermaid
 flowchart TD

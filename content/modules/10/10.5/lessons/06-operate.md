@@ -9,7 +9,7 @@ A closer can still mark Done after `close_incident` was “fixed once.” Do not
 
 ## Picture: illegal close is a signal
 
-A close that skipped recovery still has to be noticed. Leave the incident note out of the pager. The notice should name the incident. Recovery should reopen and run the restore drill.
+A close that skipped recovery still has to show up as an alert. Keep the incident note out of the pager. The alert should name the incident. Then reopen and run the restore drill.
 
 ```mermaid
 flowchart TD

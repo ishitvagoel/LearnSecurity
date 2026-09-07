@@ -17,7 +17,7 @@ flowchart TD
   Alert --> Rotate[Rotate and rewrite DATABASE_URL]
 ```
 
-A broken grant still has to be noticed. The note does not belong in the log.
+A broken grant still has to show up as an alert. The note does not belong in the log.
 
 | Outcome | This topic |
 |---|---|

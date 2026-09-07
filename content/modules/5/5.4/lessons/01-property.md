@@ -23,7 +23,7 @@ flowchart TD
   Sock["server_scheme http"] --> App
 ```
 
-Who could do this: a client on cleartext who wants the app to think TLS is on. Trusting any `X-Forwarded-*` from the socket peer is not what you trust unless that peer is a locked load balancer you bound.
+Picture a client on cleartext who wants the app to think TLS is on. Trusting any `X-Forwarded-*` from the socket peer is not what you trust unless that peer is a locked load balancer you bound.
 
 **A tool is not the rule.** “Force HTTPS” in a dashboard, HSTS preload, or certificate pinning.
 
@@ -45,7 +45,7 @@ Pinning on a phone (later) is leftover: operational breakage versus extra bindin
 | Slice | For this rule |
 |---|---|
 | Why it happens | The app believes the client about the channel |
-| What has to be true first | Header https + socket http counts as true |
+| What's already wrong | Header https + socket http counts as true |
 | Trigger | Cleartext client sets Forwarded-Proto |
 | What it costs | Authenticity of the transport; cookies and HSTS lie |
 | How you stop it | Ignore client proto unless the immediate peer is a bound proxy |

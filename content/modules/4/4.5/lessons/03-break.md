@@ -17,7 +17,7 @@ Do not replay a production access token, an employer OpenID tenant, or a classma
 
 What must not happen: a JWT with the wrong audience accepted as a notes-app session. `accept_token({"sub": "alice", "aud": "other-api"}, "securecollab-api")` is true.
 
-Who could do this: a **bearer minted for another API** (confused deputy), or a stolen token whose `sub` looks familiar. What is supposed to stop this: the **resource server compares `aud` to itself** before who-is-allowed. Authlib “verify signature,” Auth0, and “we turned on OpenID Connect” are not enough.
+Picture a **bearer minted for another API** (confused deputy), or a stolen token whose `sub` looks familiar. The **resource server compares `aud` to itself** before who-is-allowed. Authlib “verify signature,” Auth0, and “we turned on OpenID Connect” are not enough.
 
 ## Picture: sub without aud
 
@@ -40,14 +40,13 @@ In `vulnerable/jwt_aud.py`, `accept_token` returns true when `sub` is in the dic
 - `test_missing_audience_is_rejected`
 - `test_expected_audience_is_accepted` — honest path (may pass on both)
 
-You do not need a new `aud` string.
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |
 |---|---|
 | The rule | Token for `other-api` is not a notes-app session |
 | Why it happens | Subject (or signature) accepted without audience |
-| What has to be true first | `accept_token` ignores `aud` |
+| What's already wrong | `accept_token` ignores `aud` |
 | Trigger | Bearer minted for `other-api` |
 | What it costs | Authenticity of the audience; then who-is-allowed as `sub` |
 | How you stop it | Exact `aud` match (or a constrained list) before who-is-allowed |

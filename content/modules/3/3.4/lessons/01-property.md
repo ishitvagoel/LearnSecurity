@@ -47,7 +47,7 @@ A client that adds five grants slowly still must stop at five. A client that ham
 | Slice | For this rule |
 |---|---|
 | Why it happens | Policy only in the UI |
-| What has to be true first | `add_share` increments with no cap |
+| What's already wrong | `add_share` increments with no cap |
 | Trigger | Eight rapid POSTs or a disabled max |
 | What it costs | Integrity of the share policy; extra readers on the note |
 | How you stop it | Check count in the same write as insert; reject the 6th |

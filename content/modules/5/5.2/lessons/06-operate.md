@@ -11,7 +11,7 @@ Do not log plaintext bodies. Do not paste an SSN into the ticket.
 
 ## Picture: CI is a detector
 
-A known-plaintext Base64 hit still has to be noticed. The body does not belong in the pager. Recovery should re-protect and rotate keys.
+A known-plaintext Base64 hit still has to show up as an alert. The body does not belong in the pager. Then re-protect and rotate keys.
 
 ```mermaid
 flowchart TD

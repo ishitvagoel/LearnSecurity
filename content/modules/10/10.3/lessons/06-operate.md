@@ -9,7 +9,7 @@ A chart can still add a ClusterRoleBinding after admission was "set once." Do no
 
 ## Picture: god-mode binding is a signal
 
-A god-mode binding still has to be noticed. Leave kubeconfig out of the pager. The notice should name the ServiceAccount. Recovery should delete the binding and rotate cluster credentials.
+A god-mode binding still has to show up as an alert. Keep kubeconfig out of the pager. The alert should name the ServiceAccount. Then delete the binding and rotate cluster credentials.
 
 ```mermaid
 flowchart TD

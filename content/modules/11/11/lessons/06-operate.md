@@ -9,7 +9,7 @@ A cache or worker can still serve the old grant after `read` was â€œfixed once.â
 
 ## Picture: post-revoke read is a signal
 
-A read that skipped the grant still has to be noticed. Leave the note out of the ticket. The notice should name the note id and the person. Recovery should notify A and rotate links.
+A read that skipped the grant still has to show up as an alert. Keep the note out of the ticket. The alert should name the note id and the person. Then notify A and rotate links.
 
 ```mermaid
 flowchart TD

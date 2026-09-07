@@ -40,7 +40,7 @@ flowchart LR
 | Slice | For this rule |
 |---|---|
 | Why it happens | Client-chosen company treated as binding |
-| What has to be true first | `tenant_for({A},{B}) == B` |
+| What's already wrong | `tenant_for({A},{B}) == B` |
 | Trigger | Member of A sends tenant B in JSON or GraphQL |
 | What it costs | Who is allowed for company context — read or write into another company |
 | How you stop it | Ignore the body company; bind from the session; row-level rules extra *after* that |

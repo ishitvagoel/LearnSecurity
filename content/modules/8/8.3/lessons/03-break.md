@@ -17,7 +17,7 @@ Do not paste this exercise onto a public app, employer clinic, or live EHR.
 
 What must not happen: **`as=admin` switches the session**. After `open_link({"as": "admin"})`, `current_user()` is `"admin"`.
 
-Who could do this: another app on the tablet sending extras, or a crafted link. That stands in for a clinic kiosk demo `as=doctor`, an exported Activity, or a WebView that forwards query identity. What is supposed to stop this: `open_link` is supposed to treat extras as **data** (2.1 / 7.1); the session stays server-issued (4.3). Verified App Links, `https`, and `exported=false` without a test are not enough.
+Picture another app on the tablet sending extras, or a crafted link — a clinic kiosk demo `as=doctor`, an exported Activity, or a WebView that forwards query identity. `open_link` is supposed to treat extras as **data** (2.1 / 7.1); the session stays server-issued (4.3). Verified App Links, `https`, and `exported=false` without a test are not enough.
 
 ## Picture: extras become the user
 
@@ -37,14 +37,13 @@ Last topic already said the session is identity (4.3). This rule is **the Intent
 - `test_deeplink_as_param_does_not_switch_user`
 - `test_note_deep_link_keeps_session` — locators must not switch users either
 
-You do not need a new query key.
 ## Why it happens vs what it costs
 
 | Slice | This practice |
 |---|---|
 | Required rule | After `open_link({"as": "admin"})`, `current_user()` is still `"alice"` |
 | Why it happens | Identity taken from the link |
-| What has to be true first | `as` in the query is copied onto the session |
+| What's already wrong | `as` in the query is copied onto the session |
 | Trigger | Other app on the tablet, or a crafted link |
 | What it costs | Local privilege / account switch |
 | How you stop it | Do not take identity from links; session stays server-issued |

@@ -15,9 +15,9 @@ Stay inside `labs/5.1/5.1-lab`. `delete_account` plus `body_retained` / `search_
 
 Do not dump a live analytics store. Do not dump an employer warehouse. Do not dump a classmate preview. Do not query a warehouse “to see what happens.”
 
-What is supposed to stop this: `delete_account` is supposed to walk every listed copy. A contract PDF, “we anonymized the user id,” and a database `DELETE FROM notes` are not enough.
+`delete_account` is supposed to walk every listed copy. A contract PDF, “we anonymized the user id,” and a database `DELETE FROM notes` are not enough.
 
-Who can still read it, in this story: an insider with SELECT on `ANALYTICS`, or a buyer of a “de-identified” export that still contains bodies. That stands in for a partner CSV, a search-index replica, or an appointment-card note that outlived the patient row.
+Picture an insider with SELECT on `ANALYTICS`, or a buyer of a “de-identified” export that still contains bodies — a partner CSV, a search-index replica, or an appointment-card note that outlived the patient row.
 
 ## Picture: notes gone, copies live
 
@@ -28,7 +28,7 @@ flowchart TD
   Skip --> Hit["body_retained returns secret"]
 ```
 
-You do not need a live warehouse query. You must not run one. The leftover still returning `"secret"` *is* the leak.
+You do not need a live warehouse query. You must not run one. The leftover `"secret"` is already the leak.
 
 Documented retention has to be actually carried out. Encrypting a warehouse you still keep is secrecy theater, not this privacy check.
 
@@ -40,7 +40,6 @@ In `vulnerable/lifecycle.py`, `delete_account` only pops `NOTES`. Tests:
 - `test_deleted_account_leaves_no_search_copy`
 - `test_active_account_analytics_present` — honest product path; analytics exists *before* delete
 
-You do not need a new store name.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -53,7 +52,7 @@ You do not need a new store name.
 | Slice | Practice |
 |---|---|
 | Why it happens | A second copy was not in the deletion graph |
-| What has to be true first | `delete_account` pops NOTES only |
+| What's already wrong | `delete_account` pops NOTES only |
 | Trigger | `delete_account("alice")` then `body_retained("alice")` |
 | What it costs | Privacy plus leftover confidential data after the person left |
 | How you stop it later | Inventory the copies; pop or unlink bodies in the same delete |

@@ -17,7 +17,7 @@ Do not paste this exercise onto a public site, employer board, or live clinic po
 
 What must not happen: **unencoded markup reaches the HTML interpreter**. `render` leaves `<` as a tag delimiter, so the extra-tag marker `"<img"` remains in the output.
 
-Who could do this: a member (or a stored title) who can supply a string containing `<`. That stands in for a clinic nickname on a shared board, or markdown left raw (2.1). What is supposed to stop this: `render` is supposed to encode for the **HTML text** context. A content-security header in report-only mode, cleaning after `innerHTML`, and React JSX defaults are not in what you trust for this rule.
+Picture a member (or a stored title) who can supply a string containing `<` — a clinic nickname on a shared board, or markdown left raw (2.1). `render` is supposed to encode for the **HTML text** context. A content-security header in report-only mode, cleaning after `innerHTML`, and React JSX defaults are not in what you trust for this rule.
 
 ## Picture: a raw angle bracket is already the break
 
@@ -38,14 +38,13 @@ A famous-bugs nickname for “script in HTML” is awareness after the cause, no
 - `test_angle_brackets_are_encoded`
 - `test_honest_title_survives` — honest “Weekly notes” still appears
 
-You do not need a new marker.
 ## Why it happens vs what it costs
 
 | Slice | This practice |
 |---|---|
 | Required rule | `<` in a title becomes `&lt;` in HTML text |
 | Why it happens | HTML grammar mixed with data |
-| What has to be true first | `render` concatenates the body into a tag |
+| What's already wrong | `render` concatenates the body into a tag |
 | Trigger | `render` of a string that contains `<` |
 | What it costs | Integrity of the HTML document; then 2.3 if cookies are readable by script |
 | How you stop it | Encode at the sink for this context; fail closed if you cannot |

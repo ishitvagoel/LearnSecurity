@@ -15,9 +15,9 @@ Stay inside `labs/3.1/3.1-lab`. The body is the synthetic string `tenant-A-secre
 
 Do not paste a real note body into the logger “to see what happens.” Do not paste this exercise onto a public log drain, employer dashboard, or live clinic.
 
-What is supposed to stop this: the logging API is supposed to deny the body. A spreadsheet sticker, a privacy-policy URL, `DEBUG=false` in one environment, and a data-loss product name are not enough.
+The logging API is supposed to deny the body. A spreadsheet sticker, a privacy-policy URL, `DEBUG=false` in one environment, and a data-loss product name are not enough.
 
-Who can read the line in this story: an operator, a log vendor, or another company's admin on shared observability. That stands in for access logs, exception dumps, APM, and a support ticket.
+Picture an operator, a log vendor, or another company's admin on shared observability — access logs, exception dumps, APM, and a support ticket.
 
 ## Picture: debug context is the leak
 
@@ -28,13 +28,12 @@ flowchart TD
   Line --> Operator[Lower-trust reader]
 ```
 
-You do not need a production drain. The substring in the returned line *is* the leak.
+You do not need a production drain. The substring in the returned line is already the leak.
 
 ## What to look at: the cause, not a hunt
 
 In `vulnerable/classify.py`, `log_event` returns `f"{event}: {note_body}"`. The test asserts the body substring is absent **and** a redaction marker (`redacted` or `confidential`) is present.
 
-You do not need a new body string.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -47,7 +46,7 @@ You do not need a new body string.
 | Slice | Practice |
 |---|---|
 | Why it happens | The body was treated as debug context; the log accepted the field |
-| What has to be true first | A `note_read` event; a handler that pastes the body into the line |
+| What's already wrong | A `note_read` event; a handler that pastes the body into the line |
 | Trigger | `log_event("note_read", "tenant-A-secret-body")` |
 | What it costs | Secrecy and privacy of the body in a lower-trust store |
 | How you stop it later | Structured logs with allow-listed fields; never paste the body |

@@ -17,7 +17,7 @@ Do not run a live OS command. Do not probe an employer export worker. Do not pro
 
 What must not happen: a user-chosen name run through a shell string. `argv_for_list("notes")` starts with `["sh", "-c"]` and `uses_shell` is true.
 
-Who could do this: a member who can choose an export name. That stands in for a clinic CSV filename, a Jinja template name, or a mail header later. What is supposed to stop this: `argv_for_list` passes the name as **one argv element** to a fixed binary. A denylist of punctuation, `shell=True` with “cleaned” strings, and “internal users are trusted” are not enough.
+Picture a member who can choose an export name — a clinic CSV filename, a Jinja template name, or a mail header later. `argv_for_list` passes the name as **one argv element** to a fixed binary. A denylist of punctuation, `shell=True` with “cleaned” strings, and “internal users are trusted” are not enough.
 
 ## Picture: sh -c is a second parser
 
@@ -38,7 +38,6 @@ OS calls have to pass arguments as parameters. A scanner name for this family is
 - `test_does_not_invoke_shell`
 - `test_argv_is_program_then_name`
 
-You do not need a new name string.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -52,7 +51,7 @@ You do not need a new name string.
 |---|---|
 | The rule | Export name is an argv element, not shell grammar |
 | Why it happens | Concatenating untrusted data into a shell string |
-| What has to be true first | `argv_for_list` starts `sh -c`; `uses_shell` true |
+| What's already wrong | `argv_for_list` starts `sh -c`; `uses_shell` true |
 | Trigger | `argv_for_list("notes")` |
 | What it costs | Integrity of the OS interpreter boundary (structure only here) |
 | How you stop it | Argv list to a fixed binary; `--` before the name; no shell |

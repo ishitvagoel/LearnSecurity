@@ -17,7 +17,7 @@ Do not open a live upload folder. Do not walk a public filesystem. Do not point 
 
 What must not happen: a resolved path leaves the lab folder. `resolve("../outside")` joins onto `/tmp/sc-lab` and, after canonicalize, is no longer that folder or a child of it.
 
-Who could do this: a member who can supply an upload **filename** (data). That stands in for a clinic scan name, a zip member path (leftover, later and harder), or `UploadFile.filename` from Starlette. What is supposed to stop this: `resolve` joins, canonicalizes, and denies unless the object is still `/tmp/sc-lab` or a child. A denylist of `..`, a UUID filename sticker, and `Content-Type` are not enough.
+Picture a member who can supply an upload **filename** (data) — a clinic scan name, a zip member path (leftover, later and harder), or `UploadFile.filename` from Starlette. `resolve` joins, canonicalizes, and denies unless the object is still `/tmp/sc-lab` or a child. A denylist of `..`, a UUID filename sticker, and `Content-Type` are not enough.
 
 ## Picture: join without canonicalize
 
@@ -38,14 +38,13 @@ An awareness list that names “path walk” is not the failing check.
 - `test_dotdot_does_not_escape_root` — `ValueError` **or** resolved path still under the folder
 - `test_honest_relative_stays_under_root`
 
-You do not need a new name.
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |
 |---|---|
 | The rule | Resolved object is still under `/tmp/sc-lab` |
 | Why it happens | Path grammar mixed with data; no canonicalization |
-| What has to be true first | `resolve` returns join without a prefix check |
+| What's already wrong | `resolve` returns join without a prefix check |
 | Trigger | `resolve("../outside")` |
 | What it costs | Who is allowed to pick *which object*; the host store can change |
 | How you stop it | Canonicalize then prefix; fail closed if uncertain |

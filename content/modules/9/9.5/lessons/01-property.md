@@ -54,7 +54,7 @@ Someone closed on intent. That is the cause. The remaining isolation hole is a *
 | Slice | For this rule |
 |---|---|
 | Why it happens | Close looks at intent (PDF, ticket Done) |
-| What has to be true first | `close_finding({retest: None})` is true |
+| What's already wrong | `close_finding({retest: None})` is true |
 | Trigger | Ticket marked Done after the PDF |
 | What it costs | Vulnerable still there; leftover looks closed |
 | How you stop it | Require a retest of the same rule |

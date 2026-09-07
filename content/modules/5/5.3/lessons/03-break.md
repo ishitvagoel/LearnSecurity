@@ -17,7 +17,7 @@ Do not search public GitHub, an employer gist, or a classmate repo as this exerc
 
 What must not happen: the old hardcoded default still authenticates after rotation. `auth("sk-lab-hardcoded", current="rotated-now")` returns true.
 
-Who could do this: a **reader of the cloned repo**, an old container image, or a gist copy of `DEFAULT`. That stands in for a clinic lab API key that was “rotated in the wiki” while the default or-clause stayed. What is supposed to stop this: `auth` accepts only the current secret and denies when current is missing. A vault brand, `.gitignore`, and “we rotated” in a ticket are not enough.
+Picture a **reader of the cloned repo**, an old container image, or a gist copy of `DEFAULT` — a clinic lab API key that was “rotated in the wiki” while the default or-clause stayed. `auth` accepts only the current secret and denies when current is missing. A vault brand, `.gitignore`, and “we rotated” in a ticket are not enough.
 
 ## Picture: DEFAULT still wins
 
@@ -39,14 +39,13 @@ In `vulnerable/secrets.py`, `auth` keeps `DEFAULT = "sk-lab-hardcoded"` as an or
 - `test_missing_current_denies`
 - `test_current_secret_authenticates` — honest path on both trees if current matches
 
-You do not need a new key string.
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |
 |---|---|
 | The rule | Hardcoded default is dead after rotation |
 | Why it happens | Default credential never invalidated; missing current allows |
-| What has to be true first | `auth` accepts `DEFAULT` or missing `current` |
+| What's already wrong | `auth` accepts `DEFAULT` or missing `current` |
 | Trigger | `auth("sk-lab-hardcoded", current="rotated-now")` |
 | What it costs | Authenticity of the service credential; then who-is-allowed as whoever holds the clone |
 | How you stop it | Authenticate only `presented == current`; deny if current is missing |

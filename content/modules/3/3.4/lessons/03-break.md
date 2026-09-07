@@ -17,7 +17,7 @@ Do not load-test a public host, an employer share endpoint, or a live clinic boo
 
 What must not happen: share grants exceed the product cap of 5. Looping `add_share()` eight times yields `last > 5`.
 
-Who could do this: a **scripted client** that can call `add_share` in a loop. That stands in for a disabled `max=5` select, an import path, or eight rapid POSTs. What is supposed to stop this: the **write path** denies the sixth grant. HTML, nginx `limit_req`, and a filter named after an awareness list are not enough.
+Picture a **scripted client** that can call `add_share` in a loop — a disabled `max=5` select, an import path, or eight rapid POSTs. The **write path** denies the sixth grant. HTML, nginx `limit_req`, and a filter named after an awareness list are not enough.
 
 ## Picture: increment with no ceiling
 
@@ -40,14 +40,13 @@ In `vulnerable/share_limit.py`, `add_share` always increments and returns `_n`. 
 - `test_five_shares_are_allowed` — honest path still reaches 5
 - `test_sixth_does_not_increment` — sixth call returns 5
 
-You do not need a new note id.
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |
 |---|---|
 | The rule | Eight `add_share` calls leave count ≤ 5 |
 | Why it happens | Policy only in the UI |
-| What has to be true first | `add_share` increments with no cap |
+| What's already wrong | `add_share` increments with no cap |
 | Trigger | Eight rapid POSTs or a disabled max (modeled as a loop) |
 | What it costs | Integrity of the share policy; extra readers; more places a break can reach |
 | How you stop it | Check count in the same write as insert; reject the 6th |

@@ -11,7 +11,7 @@ Do not log note bodies in the CSV path (3.1 / 5.1). Do not attach the CSV to the
 
 ## Picture: the fourth try is a signal
 
-A fourth export in the window still has to be noticed. Leave note bodies out of the pager. Recovery should keep the deny and revoke a stolen session.
+A fourth export in the window still has to show up as an alert. Keep note bodies out of the pager. Then keep the deny and revoke a stolen session.
 
 ```mermaid
 flowchart TD

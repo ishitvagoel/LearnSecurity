@@ -26,7 +26,7 @@ flowchart TD
   Lookup -->|no| Deny["Deny"]
 ```
 
-Who could do this: a member with a real grant on `n1` who swaps `note_id`, or someone guessing ids. Trusting “they are a collaborator” as a boolean is not what you trust.
+Picture a member with a real grant on `n1` who swaps `note_id`, or someone guessing ids. Trusting “they are a collaborator” as a boolean is not what you trust.
 
 **A tool is not the rule.** Casbin, OPA, a database row rule, or a signed note id.
 
@@ -48,7 +48,7 @@ A later database-role check is a *second* gate. This table is still required. A 
 | Slice | For this rule |
 |---|---|
 | Why it happens | A collection-level “has any grant” flag, or a role string treated as a grant |
-| What has to be true first | `can_read(bob, n2)` is true because Bob has n1; or owner/admin leftover |
+| What's already wrong | `can_read(bob, n2)` is true because Bob has n1; or owner/admin leftover |
 | Trigger | Client-supplied `note_id` or a guessed id |
 | What it costs | Secrecy of n2 / clinic notes; the who-is-allowed check never ran |
 | How you stop it | Deny-by-default lookup `(person, company, note_id)` on every path |

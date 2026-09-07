@@ -42,7 +42,7 @@ OpenAPI can *describe* the contract. It does not *enforce* the drop. A generated
 | Slice | For this rule |
 |---|---|
 | Why it happens | Binder maps any key onto the row |
-| What has to be true first | `apply(..., {"is_admin": true})` succeeds |
+| What's already wrong | `apply(..., {"is_admin": true})` succeeds |
 | Trigger | A signed-in member sends extra keys |
 | What it costs | Privilege lift; company or billing mutation |
 | How you stop it | Per-action writable set; ignore or reject extras |

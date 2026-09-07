@@ -57,7 +57,7 @@ Someone closed on detection quality. That is the cause. The system still broken,
 | Slice | For this rule |
 |---|---|
 | Why it happens | Close looks at detection quality (green SIEM, paging ack) |
-| What has to be true first | `close_incident` true while recovery is todo |
+| What's already wrong | `close_incident` true while recovery is todo |
 | Trigger | Optimistic closer; still-in attacker |
 | What it costs | System still broken or attacker still in; extra note copies |
 | How you stop it | Require recovery evidence; omit bodies |

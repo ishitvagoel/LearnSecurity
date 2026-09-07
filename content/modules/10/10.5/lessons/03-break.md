@@ -15,9 +15,9 @@ Stay inside `labs/10.5/10.5-lab`. The incident is a synthetic dict. Do **not** c
 
 Do not paste this exercise onto a public clinic, employer dashboard, or live hospital portal “to see what happens.”
 
-What is supposed to stop this: `close_incident` is supposed to require **recovery done and logs that are not a note store**. A paging ack, time-to-detect, untested backups, and framework access logs are not enough.
+`close_incident` is supposed to require **recovery done and logs that are not a note store**. A paging ack, time-to-detect, untested backups, and framework access logs are not enough.
 
-Who can close without recovery in this story: an optimistic closer while the actor is still in. That stands in for “alerts stopped so we closed INC-12,” a green SIEM treated as recover, or a known-exploited listing treated as close.
+Picture an optimistic closer while the actor is still in — “alerts stopped so we closed INC-12,” a green SIEM treated as recover, or a known-exploited listing treated as close.
 
 ## Picture: close always says yes
 
@@ -26,7 +26,7 @@ flowchart TD
   Any[any incident dict] --> True[close_incident true]
 ```
 
-You do not need a SIEM. You must not query a live tenant. The true return for recovery todo *is* the leak.
+You do not need a SIEM. You must not query a live tenant. The true return for recovery todo is already the leak.
 
 Earlier lessons already said bodies stay out of logs. This check is **detect without recover is theater**.
 
@@ -38,7 +38,6 @@ Earlier lessons already said bodies stay out of logs. This check is **detect wit
 - `test_cannot_close_when_logs_contain_note_body`
 - `test_close_with_recovery_and_safe_logs_may_succeed` — done + ok may pass on both
 
-You do not need a new incident key.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -52,7 +51,7 @@ You do not need a new incident key.
 |---|---|
 | The rule | recovery todo → close false; `note_body` in logs → close false |
 | Why it happens | Close on detection quality; logs as a second note store |
-| What has to be true first | `close_incident` true for every dict |
+| What's already wrong | `close_incident` true for every dict |
 | Trigger | Optimistic closer; still-in attacker |
 | What it costs | System still broken; extra note copies |
 | How you stop it later | Require recovery done and no `note_body` |

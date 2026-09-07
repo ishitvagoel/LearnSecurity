@@ -9,7 +9,7 @@ A new requirement can land without a test after `covered` was “fixed once.” 
 
 ## Picture: uncovered AUTHZ-1 is a signal
 
-An unmapped requirement still has to be noticed. Leave the requirement text out of the pager. The notice should name the requirement. Recovery should add the isolation test.
+An unmapped requirement still has to show up as an alert. Keep the requirement text out of the pager. The alert should name the requirement. Then add the isolation test.
 
 ```mermaid
 flowchart TD

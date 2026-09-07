@@ -15,9 +15,9 @@ Stay inside `labs/11/11-lab`. The practice is `revoke` / `read` over synthetic p
 
 Do not paste this exercise onto a public clinic, employer dashboard, or live hospital portal “to see what happens.”
 
-What is supposed to stop this: `read` is supposed to consult **owner or grant on every access**. pytest coverage, a YAML evidence pack, and FastAPI 200 are not enough.
+`read` is supposed to consult **owner or grant on every access**. pytest coverage, a YAML evidence pack, and FastAPI 200 are not enough.
 
-Who can still read after revoke in this story: a former collaborator with a cached note id. That stands in for “we hit DELETE so the next chart read is fine,” a capstone scanner treated as an assurance stamp, or HTTP 200 on revoke treated as the check.
+Picture a former collaborator with a cached note id — “we hit DELETE so the next chart read is fine,” a capstone scanner treated as an assurance stamp, or HTTP 200 on revoke treated as the check.
 
 ## Picture: revoke does nothing
 
@@ -27,7 +27,7 @@ flowchart TD
   Read[read] --> Body[always body]
 ```
 
-You do not need HTTP. You must not hit a live tenant. The body return after revoke *is* the leak.
+You do not need HTTP. You must not hit a live tenant. The body return after revoke is already the leak.
 
 Earlier weeks already said check every access. Time, revoke, leftover worker sessions, and phone cache are the other grains. This rule is **the stitch**. This page does not mark you as finished.
 
@@ -39,7 +39,7 @@ Earlier weeks already said check every access. Time, revoke, leftover worker ses
 - `test_owner_may_still_read_after_revoke` — A may pass on both
 - `test_share_may_read_before_revoke` — B before revoke may pass on both
 
-You do not need a new tenant. `conftest.py` calls `reset()` so grant state does not leak across tests.
+`conftest.py` calls `reset()` so grant state does not leak across tests.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -53,7 +53,7 @@ You do not need a new tenant. `conftest.py` calls `reset()` so grant state does 
 |---|---|
 | The rule | After revoke, `read("n1", "B")` is None |
 | Why it happens | Grant not consulted after revoke |
-| What has to be true first | `revoke` no-op; `read` always body |
+| What's already wrong | `revoke` no-op; `read` always body |
 | Trigger | Former collaborator; cached id; delayed worker |
 | What it costs | Ex-collaborator secrecy |
 | How you stop it later | Discard grant; consult owner-or-grant on every read |

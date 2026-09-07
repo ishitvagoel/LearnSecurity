@@ -23,7 +23,7 @@ flowchart TD
 
 SQLAlchemy `to_dict()`, GraphQL default resolvers, and REST `?fields=` that echo column names are the same shape: the serializer is not a policy.
 
-Who could do this: a member session that asks for extra fields. That stands in for a clinic GraphQL `Patient { ssn }`, a REST `?fields=` dump, or a CSV exporter that serializes every ORM column. What you trust is local `resolve(role, field)` on the server. Hiding the key in the SPA is not the rule.
+Picture a member session that asks for extra fields — a clinic GraphQL `Patient { ssn }`, a REST `?fields=` dump, or a CSV exporter that serializes every ORM column. What you trust is local `resolve(role, field)` on the server. Hiding the key in the SPA is not the rule.
 
 **A tool is not the rule.** “Private JSON keys,” “GraphQL schema is typed,” “we already passed 4.4 object tests.”
 
@@ -45,7 +45,7 @@ A UUID locates the row. It is not a capability for every column. Hiding the key 
 | Slice | For this rule |
 |---|---|
 | Why it happens | Serializer dumps the ORM object |
-| What has to be true first | `resolve("member", "secret_internal")` is true |
+| What's already wrong | `resolve("member", "secret_internal")` is true |
 | Trigger | Member requests the field (REST, GraphQL, CSV, search) |
 | What it costs | Internal token or extra personal data |
 | How you stop it | Allow-list fields by role at the trusted layer |

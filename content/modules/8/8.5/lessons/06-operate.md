@@ -9,7 +9,7 @@ A new SDK version can turn “include extras” back on after `crash_report` was
 
 ## Picture: body in telemetry is a signal
 
-A crash-report redaction miss still has to be noticed. Leave the crash body out of the pager. The notice should name the crash. Recovery should purge the vendor copy.
+A crash-report redaction miss still has to show up as an alert. Keep the crash body out of the pager. The alert should name the crash. Then purge the vendor copy.
 
 ```mermaid
 flowchart TD

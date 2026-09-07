@@ -56,7 +56,7 @@ Someone put the note body into the exception or the report builder. That is the 
 | Slice | For this rule |
 |---|---|
 | Why it happens | The exception or report builder includes the note body |
-| What has to be true first | `secret` is in `str(report)` |
+| What's already wrong | `secret` is in `str(report)` |
 | Trigger | Crash on view-note, or a verbose logcat line |
 | What it costs | The body sits at a vendor; maybe public if their store is misconfigured |
 | How you stop it | Do not put bodies in exceptions; redact before send; ask for fewer permissions |

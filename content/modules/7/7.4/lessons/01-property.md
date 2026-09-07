@@ -43,7 +43,7 @@ If the worker’s database role is god-mode (3.3), the deputy is worse: it can r
 | Slice | For this rule |
 |---|---|
 | Why it happens | Ambient user context in a system worker |
-| What has to be true first | `exporter({user_session: alice})` succeeds |
+| What's already wrong | `exporter({user_session: alice})` succeeds |
 | Trigger | Job with leftover session or inherited request context |
 | What it costs | User cookie drives privileged export; stale user still exports |
 | How you stop it | Jobs name `service=worker-sc`; workers authenticate as that principal |

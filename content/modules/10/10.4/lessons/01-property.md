@@ -52,7 +52,7 @@ Fail-open defaults. That is the cause. The person who later reads a stack trace 
 | Slice | For this rule |
 |---|---|
 | Why it happens | Fail-open defaults; debug is ignored |
-| What has to be true first | `boot_ok("prod", True)` is true |
+| What's already wrong | `boot_ok("prod", True)` is true |
 | Trigger | Anyone who finds `/debug` or an error page |
 | What it costs | Confidentiality of traces plus extra attack surface |
 | How you stop it | Refuse boot; do not register debug routes |

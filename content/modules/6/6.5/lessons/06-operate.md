@@ -11,7 +11,7 @@ Do not log full URLs if they contain tokens (4.3). Do not fetch the denied desti
 
 ## Picture: a denied host is a signal
 
-A deny of a preview URL that is not on the allow-list still has to be noticed. Do not paste the URL into the pager. Recovery should keep the deny. Neither fetches the destination.
+A deny of a preview URL that is not on the allow-list still has to show up as an alert. Do not paste the URL into the pager. Then keep the deny. Neither fetches the destination.
 
 ```mermaid
 flowchart TD

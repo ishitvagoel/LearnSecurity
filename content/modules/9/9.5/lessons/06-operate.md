@@ -9,7 +9,7 @@ A closer can still mark Done after `close_finding` was "fixed once." Do not log 
 
 ## Picture: close without retest is a signal
 
-A close that skipped retest still has to be noticed. Leave the finding out of the pager. The notice should name the finding. Recovery should reopen and re-run the same isolation check.
+A close that skipped retest still has to show up as an alert. Keep the finding out of the pager. The alert should name the finding. Then reopen and re-run the same isolation check.
 
 ```mermaid
 flowchart TD

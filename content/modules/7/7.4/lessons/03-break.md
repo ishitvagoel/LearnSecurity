@@ -17,7 +17,7 @@ Do not attach to a public broker. Do not probe an employer queue. Do not probe a
 
 What must not happen: a user session accepted as worker identity. `exporter({"user_session": "alice", "service": None})` returns `"alice"`.
 
-Who could do this: a leftover cookie stuffed into a job, or inherited request context. That stands in for a clinic “Export overnight” that copies the clinician cookie into the task so “the job knows who asked.” What is supposed to stop this: `exporter` authenticates as a **named service principal**. A private network, an “internal” queue, and a zero-trust dashboard are not enough.
+Picture a leftover cookie stuffed into a job, or inherited request context — a clinic “Export overnight” that copies the clinician cookie into the task so “the job knows who asked.” `exporter` authenticates as a **named service principal**. A private network, an “internal” queue, and a zero-trust dashboard are not enough.
 
 ## Picture: leftover cookie wins
 
@@ -39,7 +39,6 @@ Backend jobs should log in as their own accounts, not leftover people. Module 4.
 - `test_service_principal_is_worker_identity`
 - `test_alice_and_wrong_service_is_rejected` — leftover plus wrong service
 
-You do not need a new identity string.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -53,7 +52,7 @@ You do not need a new identity string.
 |---|---|
 | The rule | `exporter({"user_session": "alice", "service": None})` is `None` |
 | Why it happens | Ambient user context in a system worker |
-| What has to be true first | `user_session or service` fallback runs |
+| What's already wrong | `user_session or service` fallback runs |
 | Trigger | Job with leftover session or inherited request context |
 | What it costs | Export attributed to Alice’s session; stale user still exports after 4.1 revoke |
 | How you stop it | Jobs name `service=worker-sc`; workers authenticate as that principal |

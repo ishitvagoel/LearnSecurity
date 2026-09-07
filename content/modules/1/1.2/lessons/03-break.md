@@ -83,7 +83,7 @@ For each failed check, complete this table.
 |---|---|
 | The rule | Which exact effect should not have happened? |
 | Why it happens | Which who-is-allowed relation was absent, leftover, overbroad, stale, or default-allow? |
-| What has to be true first | Which legitimate identity, object state, role, or approval already existed? |
+| What's already wrong | Which legitimate identity, object state, role, or approval already existed? |
 | Trigger | Which operation and input caused the effect? |
 | What it costs | Which secrecy, integrity, accountability, or company-isolation rule failed? |
 | How you stop it | Which positive current rule and stop would restore the row? |

@@ -22,7 +22,7 @@ flowchart TD
   Mix -->|no| Prefix["stays under /tmp/sc-lab"]
 ```
 
-Who could do this: an uploader who controls a filename field. What is supposed to stop this: local `resolve()` under `/tmp/sc-lab`. Do not open host files outside this practice.
+Picture an uploader who controls a filename field. Local `resolve()` under `/tmp/sc-lab`. Do not open host files outside this practice.
 
 **A tool is not the rule.** A UUID stored name, an antivirus product, or a denylist of `..` is not this sentence.
 
@@ -43,7 +43,7 @@ Stripping `..` without canonicalize still fails on encodings. UUID names without
 | Slice | For this rule |
 |---|---|
 | Why it happens | Path grammar mixed with data; no canonicalization |
-| What has to be true first | `resolve('../outside')` leaves the folder |
+| What's already wrong | `resolve('../outside')` leaves the folder |
 | Trigger | User-supplied relative segments |
 | What it costs | Who is allowed to pick which file object; the host store can change |
 | How you stop it | Join + canonicalize + prefix; random stored names; never run uploads as code |

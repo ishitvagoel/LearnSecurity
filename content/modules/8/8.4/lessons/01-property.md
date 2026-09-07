@@ -41,7 +41,7 @@ Play App Signing protects *store* signing. It does not stop a debug application 
 | Slice | For this rule |
 |---|---|
 | Why it happens | Prod API trusts `attest=ok` from any build |
-| What has to be true first | `api_allowed('debug','ok')` is true |
+| What's already wrong | `api_allowed('debug','ok')` is true |
 | Trigger | Leaked debug APK or student flavor |
 | What it costs | Debug keys and loggers against prod data |
 | How you stop it | Separate client ids; server checks build plus attest; no prod URLs in debug manifests |

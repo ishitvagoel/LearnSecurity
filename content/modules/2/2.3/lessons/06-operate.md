@@ -9,7 +9,7 @@ A new cookie, a WebView, a “debug” `Set-Cookie`, or a second name (`sc_refre
 
 ## Picture: scan the flags, rotate if script could have read
 
-A missing HttpOnly flag still has to be noticed. Do not paste the session into a ticket. The notice should name the cookie. Recovery should rotate it. Neither logs the value.
+A missing HttpOnly flag still has to show up as an alert. Do not paste the session into a ticket. The alert should name the cookie. Then rotate it. Neither logs the value.
 
 ```mermaid
 flowchart TD
@@ -37,7 +37,7 @@ Not: `synthetic-session`, a note body, or a personal mailbox.
 
 ## Practice
 
-Reject any line that includes the dummy session value. Name who owns the WebView leftover and what trigger reopens it.
+Reject any line that includes the dummy session value. The alert should name who owns the WebView leftover and what trigger reopens it.
 
 ## Use it somewhere new
 

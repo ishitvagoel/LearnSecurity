@@ -15,9 +15,9 @@ Stay inside `labs/6.6/6.6-lab`. Synthetic tokens `t1` / `t2`. It does not send m
 
 Do not probe public invite links. Do not click a live mail link. Do not build a race harness. You do not need two processes. You must not.
 
-What is supposed to stop this: `accept` is supposed to consume the token in the same step that it returns true. A unique index you never write, HTTP 400 after membership already exists, and “the email proves the recipient” are not enough.
+`accept` is supposed to consume the token in the same step that it returns true. A unique index you never write, HTTP 400 after membership already exists, and “the email proves the recipient” are not enough.
 
-Who can act, in this story: two tabs, a copied link, or a retry of the same token. That stands in for a clinic guardian invite, a password-reset consume, or 2.4’s share retry.
+Picture two tabs, a copied link, or a retry of the same token — a clinic guardian invite, a password-reset consume, or 2.4’s share retry.
 
 ## Picture: accept always true
 
@@ -27,7 +27,7 @@ flowchart TD
   Again["accept t1 again"] --> True
 ```
 
-The token is never consumed. Sequential double-accept is enough. You do not need a new token string. The leftover still returning true *is* the leak.
+The token is never consumed. Sequential double-accept is enough. A second true return is already the leak.
 
 Lock so a limited seat cannot be booked twice. The check is sequential consume-once, not a threaded race.
 
@@ -38,7 +38,6 @@ Lock so a limited seat cannot be booked twice. The check is sequential consume-o
 - `test_invite_token_is_single_use` — second `accept("t1")` is false
 - `test_distinct_tokens_are_independent` — `t2` still succeeds once on the repaired files
 
-You do not need a new token string.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -52,7 +51,7 @@ You do not need a new token string.
 |---|---|
 | Required rule | Second accept of `t1` is false |
 | Why it happens | Token not marked used |
-| What has to be true first | `accept` always returns true |
+| What's already wrong | `accept` always returns true |
 | Trigger | `accept("t1")` then `accept("t1")` |
 | What it costs | Integrity of membership; extra member or replay after revoke |
 | How you stop it later | Write used in the same step; fail closed on store errors |

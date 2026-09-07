@@ -43,7 +43,7 @@ The store listing and code signing prove *which package id was installed*, not *
 | Slice | For this rule |
 |---|---|
 | Why it happens | Policy is decided on the attacker’s CPU |
-| What has to be true first | `allow_export({integrity: ok}, fail)` is true |
+| What's already wrong | `allow_export({integrity: ok}, fail)` is true |
 | Trigger | A modified client or a stolen boolean |
 | What it costs | Export without server authority |
 | How you stop it | Ignore client integrity for authorization; server attest plus session 1.2 |

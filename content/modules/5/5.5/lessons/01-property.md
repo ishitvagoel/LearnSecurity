@@ -22,7 +22,7 @@ flowchart TD
   Mix -->|no| Bind["params tuple: company and note id"]
 ```
 
-Who could do this: a member who types a note id that the SQL parser would treat as grammar, or anyone who steals the `app` role (3.3). What you trust in this practice: the bound API. A live database is not in scope.
+Picture a member who types a note id that the SQL parser would treat as grammar, or anyone who steals the `app` role (3.3). What you trust: the bound API. A live database is not in scope.
 
 **The tool (not the rule):** an ORM name, a web filter rule, or a denylist of quotes.
 
@@ -42,7 +42,7 @@ Parameters without 1.2 still leak through honest queries. Who-is-allowed without
 | Slice | For this rule |
 |---|---|
 | Why it happens | Data and program mixed in one string |
-| What has to be true first | `fetch_sql` returns a concatenated `str` |
+| What's already wrong | `fetch_sql` returns a concatenated `str` |
 | Trigger | Hostile `note_id` (this practice treats it as data only) |
 | What it costs | Secrecy and integrity of rows |
 | How you stop it | Bind tenant and note id as parameters; allow-list names for ORDER BY |

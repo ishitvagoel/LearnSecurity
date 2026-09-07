@@ -15,9 +15,9 @@ Stay inside `labs/10.1/10.1-lab`. The change is a synthetic dict. No live GitHub
 
 Do not turn off branch protection on a real org “to see what happens.” Do not paste this exercise onto a public GitHub org, employer repo, or live clinic.
 
-What is supposed to stop this: `merge_ok` is supposed to require a **truthy threat-model id**. Branch protection, CODEOWNERS, training checkboxes, and FastAPI defaults are not enough.
+`merge_ok` is supposed to require a **truthy threat-model id**. Branch protection, CODEOWNERS, training checkboxes, and FastAPI defaults are not enough.
 
-Who can merge in this story: schedule pressure plus an always-true merge check. That stands in for “CODEOWNERS plus annual HIPAA training so we merge identity changes,” a maturity score on a slide, or a champion poster treated as 3.2.
+Picture schedule pressure plus an always-true merge check — “CODEOWNERS plus annual HIPAA training so we merge identity changes,” a maturity score on a slide, or a champion poster treated as 3.2.
 
 ## Picture: every change merges
 
@@ -26,7 +26,7 @@ flowchart TD
   Any[any pr dict] --> True[merge_ok true]
 ```
 
-You do not need GitHub. You must not merge in a live org. The true return *is* the leak of honesty.
+You do not need GitHub. You must not merge in a live org. The true return is already the leak of honesty.
 
 The threat-modeling lessons (3.2) already said how to write the model. This check is **whether a citation exists before merge**. A poster is a belief. It does not put `threat_model` on the change.
 
@@ -37,7 +37,6 @@ The threat-modeling lessons (3.2) already said how to write the model. This chec
 - `test_merge_requires_threat_model_id`
 - `test_pr_with_threat_model_may_merge` — `{"threat_model": "TM-12"}` may pass on both
 
-You do not need a new pull-request key.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -51,7 +50,7 @@ You do not need a new pull-request key.
 |---|---|
 | The rule | `merge_ok({})` is false |
 | Why it happens | No threat-model id required; merge always true |
-| What has to be true first | `merge_ok` is true for every dict |
+| What's already wrong | `merge_ok` is true for every dict |
 | Trigger | An identity change merges with no 3.2 citation |
 | What it costs | Surfaces land without a threat model |
 | How you stop it later | Require a truthy `threat_model`; empty or None is deny |

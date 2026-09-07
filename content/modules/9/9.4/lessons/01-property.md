@@ -52,7 +52,7 @@ Scanner output was never joined to the coverage map. That is the cause. The pers
 | Slice | For this rule |
 |---|---|
 | Why it happens | Scanner output not joined to the coverage map |
-| What has to be true first | `ship_ok([HIGH], {})` is true |
+| What's already wrong | `ship_ok([HIGH], {})` is true |
 | Trigger | Release with an unmapped HIGH |
 | What it costs | Unknown HIGH in production |
 | How you stop it | Block unmapped HIGH; a mapped HIGH you accept still needs an exception with an expiry |

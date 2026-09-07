@@ -51,7 +51,7 @@ Someone deleted the notes row and left the other copies. That is the cause. The 
 | Slice | For this rule |
 |---|---|
 | Why it happens | A second copy was not in the deletion graph |
-| What has to be true first | `delete_account` pops NOTES only |
+| What's already wrong | `delete_account` pops NOTES only |
 | Trigger | Analytics or search read after they leave |
 | What it costs | Privacy plus leftover confidential bodies after the relationship ends |
 | How you stop it | Inventory the copies; delete or unlink the body in each |

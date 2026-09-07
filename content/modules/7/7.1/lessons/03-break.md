@@ -17,7 +17,7 @@ Do not paste this exercise onto a public API, employer clinic, or live EHR.
 
 What must not happen: **`user.update(body)` sets `is_admin`**. After `apply(user, {"is_admin": true})`, `is_admin` is true.
 
-Who could do this: a signed-in member sending extra JSON keys. That stands in for a clinic “Edit profile” form, a generated client that serializes every model field, or a GraphQL mutation that still binds `input: JSON`. What is supposed to stop this: `apply` is supposed to be a **per-action writable-field contract**. An OpenAPI file, a SPA that omits the admin checkbox, and FastAPI ignoring extras on a nested model you never applied are not enough.
+Picture a signed-in member sending extra JSON keys — a clinic “Edit profile” form, a generated client that serializes every model field, or a GraphQL mutation that still binds `input: JSON`. `apply` is supposed to be a **per-action writable-field contract**. An OpenAPI file, a SPA that omits the admin checkbox, and FastAPI ignoring extras on a nested model you never applied are not enough.
 
 ## Picture: every key becomes a column
 
@@ -39,14 +39,13 @@ Allowed fields have to be limited per action. Topic 1.2 already said who-is-allo
 - `test_display_name_can_be_patched`
 - `test_unknown_key_does_not_appear` — extras must not become columns
 
-You do not need a new privileged field.
 ## Why it happens vs what it costs
 
 | Slice | This practice |
 |---|---|
 | Required rule | After `apply(..., {"is_admin": true})`, `is_admin` is still false |
 | Why it happens | Binder maps any key onto the row |
-| What has to be true first | `user.update(body)` (or equivalent dump) runs |
+| What's already wrong | `user.update(body)` (or equivalent dump) runs |
 | Trigger | A signed-in member sends extra keys |
 | What it costs | Privilege lift on the local user dict; company or billing mutation in production |
 | How you stop it | Per-action writable set; ignore or reject extras |

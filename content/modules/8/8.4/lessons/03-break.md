@@ -17,7 +17,7 @@ Do not paste this exercise onto a public host, employer clinic, or live store AP
 
 What must not happen: **a debug build is allowed to call production export**. `api_allowed("debug", "ok")` returns true.
 
-Who could do this: a leaked debug APK or student flavor. That stands in for a clinic debug flavor that reuses the prod application id and API key so testers can “hit real data.” What is supposed to stop this: `api_allowed` is supposed to be a **server channel check** next to 8.1 attest. R8, Play App Signing, root detection, and `minifyEnabled` are not enough.
+Picture a leaked debug APK or student flavor — a clinic debug flavor that reuses the prod application id and API key so testers can “hit real data.” `api_allowed` is supposed to be a **server channel check** next to 8.1 attest. R8, Play App Signing, root detection, and `minifyEnabled` are not enough.
 
 ## Picture: attest string is enough
 
@@ -38,14 +38,13 @@ Topic 8.1 already said the APK is hostile. This rule is **debug must not call pr
 - `test_release_with_attest_may_call_prod`
 - `test_release_without_attest_is_denied` — 8.1 still applies to release
 
-You do not need a new flavor name.
 ## Why it happens vs what it costs
 
 | Slice | This practice |
 |---|---|
 | Required rule | `api_allowed("debug", "ok")` is false |
 | Why it happens | Prod API trusts `attest=ok` from any build |
-| What has to be true first | `api_allowed` is always true |
+| What's already wrong | `api_allowed` is always true |
 | Trigger | Leaked debug APK or student flavor |
 | What it costs | Debug keys and loggers against prod data |
 | How you stop it | Separate client ids; server checks build plus attest; no prod URLs in debug manifests |

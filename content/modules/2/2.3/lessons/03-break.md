@@ -15,7 +15,7 @@ Stay inside `labs/2.3/2.3-browser-policy`. Fake session value only. Restore the 
 
 Do not paste XSS recipes. Do not point this exercise at a public origin, an employer login cookie, or a classmate’s deployment.
 
-What an attacker can do here: a same-origin script reader that can call `js_read_session`. That stands in for injected script you will meet in later encoding work. What is supposed to stop this: the cookie jar is supposed to honor `httponly`. The Next.js client, a CSP scanner, and TLS on the hop are not enough.
+Picture a same-origin script reader that can call `js_read_session` — injected script you will meet in later encoding work. The cookie jar is supposed to honor `httponly`. The Next.js client, a CSP scanner, and TLS on the hop are not enough.
 
 ## Picture: the flag is present and ignored
 
@@ -30,14 +30,14 @@ The session value is handed to the script reader — not an exploit recipe. A co
 
 ## What to look at: the cause, not a hunt
 
-`vulnerable/cookies.py` `js_read_session` returns `session["value"]` whenever the name exists. The check binds `HTTPONLY_SESSION` with `httponly: True` and `secure: True` and expects `None`. You do not need a new cookie string.
+`vulnerable/cookies.py` `js_read_session` returns `session["value"]` whenever the name exists. The check binds `HTTPONLY_SESSION` with `httponly: True` and `secure: True` and expects `None`. 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |
 |---|---|
 | The rule | Script in the origin cannot read `sc_session` when HttpOnly is set |
 | Why it happens | The session value is a script-visible string; the flag is not consulted |
-| What has to be true first | Cookie named `sc_session`; `httponly: True`; a JS-shaped reader exists |
+| What's already wrong | Cookie named `sc_session`; `httponly: True`; a JS-shaped reader exists |
 | Trigger | `js_read_session(HTTPONLY_SESSION)` |
 | What it costs | Secrecy of the login token; with later XSS, company B can act as company A |
 | How you stop it | Honor HttpOnly in the jar model; do not store the session in `localStorage` |

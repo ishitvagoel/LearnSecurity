@@ -15,9 +15,9 @@ Stay inside `labs/9.4/9.4-lab`. The finding id is the synthetic string `F1`. No 
 
 Do not paste this exercise onto a public GitHub org, employer dashboard, or live clinic “to see what the scanner finds.”
 
-What is supposed to stop this: `ship_ok` is supposed to **join scanner output to the coverage map**. A vendor default setup, a default Semgrep ruleset, and an empty dashboard are not enough.
+`ship_ok` is supposed to **join scanner output to the coverage map**. A vendor default setup, a default Semgrep ruleset, and an empty dashboard are not enough.
 
-Who can make this go wrong in this story: alert fatigue plus an always-true gate. That stands in for “code scanning is on and the dashboard is noisy so we ship Fridays,” a maturity score on a slide, or fifty unmapped HIGHs treated as probable false positives.
+Alert fatigue plus an always-true gate — “code scanning is on and the dashboard is noisy so we ship Fridays,” a maturity score on a slide, or fifty unmapped HIGHs treated as probable false positives.
 
 ## Picture: every finding ships
 
@@ -26,7 +26,7 @@ flowchart TD
   Any[any findings] --> True[ship_ok true]
 ```
 
-You do not need a vendor console. You must not scan a public repo. The true return *is* the leak of the release decision.
+You do not need a vendor console. You must not scan a public repo. The true return is already the leak of the release decision.
 
 The coverage lesson already said status is not coverage. This check is **unowned HIGH must not ship**.
 
@@ -37,7 +37,6 @@ The coverage lesson already said status is not coverage. This check is **unowned
 - `test_unmapped_high_blocks_ship`
 - `test_mapped_high_may_ship` — a mapped HIGH may pass on both
 
-You do not need a new finding id.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -51,7 +50,7 @@ You do not need a new finding id.
 |---|---|
 | The rule | `ship_ok([HIGH], {})` is false |
 | Why it happens | Scanner output not joined to the coverage map |
-| What has to be true first | `ship_ok` true for every pair |
+| What's already wrong | `ship_ok` true for every pair |
 | Trigger | Release with an unmapped HIGH |
 | What it costs | Unknown HIGH in production |
 | How you stop it later | Block unmapped HIGH; a mapped HIGH you accept still needs an exception with an expiry |

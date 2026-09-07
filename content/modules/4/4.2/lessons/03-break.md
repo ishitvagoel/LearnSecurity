@@ -17,7 +17,7 @@ Do not load a lookalike login page, a public phishing kit, an employer SSO, or a
 
 What must not happen: **password (or wrong-origin WebAuthn) counted as phishing-resistant**. `phishing_resistant("password", EVIL, REAL)` returns true.
 
-Who could do this: a lookalike origin that can collect a typed secret. That stands in for OTP typed at evil.example, or a WebAuthn assertion asked for the wrong RP ID. What is supposed to stop this: the helper treats shared secrets as **not** resistant, and fails WebAuthn when origin ≠ expected. A passkey vendor dashboard, `autocomplete=webauthn`, and “we turned on MFA” are not in that set.
+Picture a lookalike origin that can collect a typed secret — OTP typed at evil.example, or a WebAuthn assertion asked for the wrong RP ID. The helper treats shared secrets as **not** resistant, and fails WebAuthn when origin ≠ expected. A passkey vendor dashboard, `autocomplete=webauthn`, and “we turned on MFA” are not in that set.
 
 ## Picture: any enrolled method returns true
 
@@ -40,14 +40,13 @@ A later hardware bar is not this check.
 - `test_webauthn_wrong_origin_fails`
 - `test_webauthn_matching_origin_is_resistant` — honest path on the repaired files
 
-You do not need a new origin string.
 ## Why it happens vs what it costs
 
 | Slice | Practice |
 |---|---|
 | Required rule | A password at the lookalike origin is not labeled phishing-resistant |
 | Why it happens | A shared secret that still works at the wrong site |
-| What has to be true first | The helper returns true for a password at the lookalike origin |
+| What's already wrong | The helper returns true for a password at the lookalike origin |
 | Trigger | `phishing_resistant("password", EVIL, REAL)` |
 | What it costs | Login is bound to the *wrong* site; the session then acts as the victim |
 | How you stop it | Bind origin / RP ID; do not call passwords resistant |

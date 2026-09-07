@@ -9,7 +9,7 @@ A new “fast-track risk” form can drop `review_by` after the schema was “se
 
 ## Picture: incomplete row is a signal
 
-An accept that skipped owner, review date, or accessibility still has to be noticed. Leave secrets out of the ticket. The notice should name the missing fields. Recovery should expire the hole or re-accept with a complete record.
+An accept that skipped owner, review date, or accessibility still has to show up as an alert. Keep secrets out of the ticket. The alert should name the missing fields. Then expire the hole or re-accept with a complete record.
 
 ```mermaid
 flowchart TD

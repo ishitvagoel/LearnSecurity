@@ -44,7 +44,7 @@ Someone treated model output as policy. That is the cause. An interpreter reache
 | Slice | For this rule |
 |---|---|
 | Why it happens | Model output treated as policy |
-| What has to be true first | `run_tool("exec_sql")` executes |
+| What's already wrong | `run_tool("exec_sql")` executes |
 | Trigger | Prompt injection in a note; poisoned retrieval |
 | What it costs | Authorization of tools — interpreter via English |
 | How you stop it | Allow-list; no `exec_sql`; human approval for high impact |

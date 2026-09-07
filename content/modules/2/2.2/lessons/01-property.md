@@ -68,7 +68,7 @@ A path-only shared cache fails because **the designers trusted the URL as identi
 | Slice | For this rule |
 |---|---|
 | Why it happens | Shared cache keyed without the bound company |
-| What has to be true first | Shared store; path-only key; company A filled the entry |
+| What's already wrong | Shared store; path-only key; company A filled the entry |
 | Trigger | Company B `GET /notes/n1` while the entry is still live |
 | What it costs | Secrecy: a cross-company read without guessing ids |
 | How you stop it | Key = (bound company, route, representation); default no-store for notes |

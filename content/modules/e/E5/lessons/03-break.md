@@ -15,7 +15,7 @@ Stay inside `labs/E5/e5-lab`. Fake companies A and B go through `tenant_for(sess
 
 What must not happen: the JSON body switches the bound company. `tenant_for({"tenant": "A"}, {"tenant": "B"})` returns `"B"`.
 
-Who could do this: a member of A who can write a JSON (or GraphQL) field. That stands in for “row-level rules are on so companies are done,” a relationship-graph dashboard treated as who-is-allowed, or a famous-bugs mapping treated as this rule. What is supposed to stop this: `tenant_for` is supposed to bind the company from the session. FastAPI body parsing, a Host header, and a row-level session variable set from JSON are not enough.
+Picture a member of A who can write a JSON (or GraphQL) field — “row-level rules are on so companies are done,” a relationship-graph dashboard treated as who-is-allowed, or a famous-bugs mapping treated as this rule. `tenant_for` is supposed to bind the company from the session. FastAPI body parsing, a Host header, and a row-level session variable set from JSON are not enough.
 
 ## Picture: body wins
 
@@ -37,7 +37,7 @@ Isolation of the object and the company. An earlier topic already said the objec
 - `test_body_cannot_switch_tenant`
 - `test_matching_body_may_keep_session_tenant` — A/A may pass on both
 
-You do not need a new company letter. Do not paste the practice files into a public API.
+Do not paste the practice files into a public API.
 
 ## Why it happens vs what it costs
 
@@ -45,7 +45,7 @@ You do not need a new company letter. Do not paste the practice files into a pub
 |---|---|
 | Required rule | `tenant_for({A},{B}) == A` |
 | Why it happens | Client-chosen company treated as binding |
-| What has to be true first | body tenant overrides session |
+| What's already wrong | body tenant overrides session |
 | Trigger | Member of A sends tenant B in JSON or GraphQL |
 | What it costs | Read or write into another company through every copy |
 | How you stop it later | Bind from the session; ignore the body for isolation |

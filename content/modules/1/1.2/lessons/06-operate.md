@@ -79,7 +79,7 @@ The evidence itself becomes a protected object. Who may read, export, modify, or
 
 ## Turn events into signals
 
-“Log denied access” is not a detection design. Name a pattern and the uncertainty it represents.
+“Log denied access” is not a detection design. The alert should name a pattern and the uncertainty it represents.
 
 | Signal | Why it matters | Possible legitimate cause | Response boundary |
 |---|---|---|---|

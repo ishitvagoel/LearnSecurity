@@ -15,7 +15,7 @@ Stay inside `labs/6.3/6.3-lab`. Origins `https://evil.example` and `https://app.
 
 What must not happen: a cross-site POST that changes a share, authorized by cookie alone. `allow_share("https://evil.example", expected, token=None)` returns true.
 
-Who could do this: a foreign origin that can cause the victim browser to POST while the session cookie is leftover. That stands in for a clinic “share with partner” button the person did not click on this site. What is supposed to stop this: `allow_share` is supposed to require cookie **and** origin match **and** a matching CSRF token. SameSite=Lax, CORS, and “the user is logged in” are not enough.
+Picture a foreign origin that can cause the victim browser to POST while the session cookie is leftover — a clinic “share with partner” button the person did not click on this site. `allow_share` is supposed to require cookie **and** origin match **and** a matching CSRF token. SameSite=Lax, CORS, and “the user is logged in” are not enough.
 
 ## Picture: leftover cookie is enough in the broken files
 
@@ -38,14 +38,13 @@ SameSite set for purpose is a helper, not complete. Anti-forgery tokens (or extr
 - `test_same_origin_with_token_is_allowed` — honest path; may pass on the broken files because a cookie is present
 - `test_missing_cookie_is_denied` — may pass on both
 
-You do not need a new origin string.
 ## Why it happens vs what it costs
 
 | Slice | Practice |
 |---|---|
 | Required rule | Foreign origin without token cannot share |
 | Why it happens | Cookie authority used without site-bound intent |
-| What has to be true first | `allow_share` returns true whenever `session_cookie` is true |
+| What's already wrong | `allow_share` returns true whenever `session_cookie` is true |
 | Trigger | `allow_share` with foreign origin and `token=None` |
 | What it costs | Integrity of share grants; unwanted collaborator |
 | How you stop it later | Cookie and origin == expected and matching token; fail closed |

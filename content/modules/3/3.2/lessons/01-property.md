@@ -51,7 +51,7 @@ NIST’s data-centric modeling note is still a **draft**. It says: pick the data
 | Slice | For this rule |
 |---|---|
 | Why it happens | Tool output is treated as thinking |
-| What has to be true first | `scanner_green=True`; the assembler copies that as “no threats” |
+| What's already wrong | `scanner_green=True`; the assembler copies that as “no threats” |
 | Trigger | CI or a reviewer asks “what’s in the model?” |
 | What it costs | The story of what you checked looks done; who-may-read and where-trust-stops were never listed |
 | How you stop it | Seed the threats you must always name; join scanner findings onto that list |

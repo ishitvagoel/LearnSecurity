@@ -63,7 +63,7 @@ Someone treated the body as debug context. That is the cause. The person who lat
 | Slice | For this rule |
 |---|---|
 | Why it happens | The body was treated as debug context |
-| What has to be true first | The handler logs the event payload, including the body |
+| What's already wrong | The handler logs the event payload, including the body |
 | Trigger | `log_event` for `note_read` |
 | What it costs | The body sits in a lower-trust store; operators and vendors can read it |
 | How you stop it | Structured logs with allow-listed fields; never paste the body into the line |

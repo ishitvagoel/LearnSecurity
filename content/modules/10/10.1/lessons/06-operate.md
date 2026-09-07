@@ -9,7 +9,7 @@ A new identity change can land after `merge_ok` was “fixed once.” Do not log
 
 ## Picture: missing threat-model id is a signal
 
-A blocked merge still has to be noticed. Leave the threat-model body out of the pager. The notice should name the change. Recovery should add the threat-model id.
+A blocked merge still has to show up as an alert. Keep the threat-model body out of the pager. The alert should name the change. Then add the threat-model id.
 
 ```mermaid
 flowchart TD

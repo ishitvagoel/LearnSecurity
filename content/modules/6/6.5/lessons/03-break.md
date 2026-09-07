@@ -17,7 +17,7 @@ Do not probe cloud metadata. Do not probe public hosts. Do not probe an employer
 
 What must not happen: a server-side fetch to link-local metadata is allowed. `allowed` returns true for a link-local metadata URL.
 
-Who could do this: a member who can supply a preview URL (untrusted structure, 2.1). That stands in for a clinic “fetch PDF from URL” field or a webhook target (7.3). What is supposed to stop this: `allowed` parses scheme **and** host against a small allow-list. “Starts with https,” a denylist of one IP, and `requests.get` are not enough.
+Picture a member who can supply a preview URL (untrusted structure, 2.1) — a clinic “fetch PDF from URL” field or a webhook target (7.3). `allowed` parses scheme **and** host against a small allow-list. “Starts with https,” a denylist of one IP, and `requests.get` are not enough.
 
 ## Picture: scheme-only is not an allow-list
 
@@ -39,7 +39,6 @@ Use an allow-list of protocols, hosts, paths, and ports before calling another s
 - `test_loopback_is_denied`
 - `test_lab_host_https_ok` — honest named host; may pass on the broken files because any https is true
 
-You do not need a new URL.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -53,7 +52,7 @@ You do not need a new URL.
 |---|---|
 | The rule | Link-local metadata URL is not an allowed peer |
 | Why it happens | The server would fetch whoever the URL names |
-| What has to be true first | `allowed` is true for any http/https scheme |
+| What's already wrong | `allowed` is true for any http/https scheme |
 | Trigger | `allowed` on the named link-local metadata URL |
 | What it costs | Secrecy of cloud identity in real systems; here the predicate fails closed |
 | How you stop it | Parse; require https; host in ALLOW; deny link-local and loopback |

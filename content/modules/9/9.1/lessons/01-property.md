@@ -40,7 +40,7 @@ flowchart LR
 | Slice | For this rule |
 |---|---|
 | Why it happens | Status without an isolation assert |
-| What has to be true first | `covered` is true when `asserts_isolation` is false |
+| What's already wrong | `covered` is true when `asserts_isolation` is false |
 | Trigger | Release gated on the spreadsheet |
 | What it costs | 1.2 holes ship with a green verification sticker |
 | How you stop it | Coverage requires the isolation assert |

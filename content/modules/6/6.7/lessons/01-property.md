@@ -23,7 +23,7 @@ flowchart TD
   Cap -->|no| Deny[Deny]
 ```
 
-Who could do this: a scripted member, or anyone who stole a session. What you trust in this practice: local `allow(n)`. An IP limit at the edge with no identity is **shared fate**: people behind one office network share a bucket, and a stolen session is not a new IP.
+Picture a scripted member, or anyone who stole a session. What you trust: local `allow(n)`. An IP limit at the edge with no identity is **shared fate**: people behind one office network share a bucket, and a stolen session is not a new IP.
 
 **The tool (not the rule):** a CAPTCHA, autoscaling, or a frontend that disables the export button.
 
@@ -42,7 +42,7 @@ A quota is not encryption and not deletion. It bounds how many copies you mint.
 | Slice | For this rule |
 |---|---|
 | Why it happens | No resource account |
-| What has to be true first | `allow(4)` is true |
+| What's already wrong | `allow(4)` is true |
 | Trigger | Fourth export in the window |
 | What it costs | Availability, cost, extra copies |
 | How you stop it | Per-person quota on the write path |
