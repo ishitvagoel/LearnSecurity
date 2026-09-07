@@ -38,7 +38,7 @@ Prod plus debug still has to be denied. Prod without debug may still boot. Setti
 1. who might try (anyone who finds `/debug` or an error page — not a live clinic);
 2. what you trust (prod plus debug deny is the promise; `NODE_ENV`, a canary, and IaC are not);
 3. what must not happen (`boot_ok("prod", True)` true);
-4. a check on **local** practice files only (no live Django);
+4. run it on **local** practice files only (no live Django);
 5. leftover (other flags, sidecar debug, extra version leakage, E6 emergency debug);
 6. whether engineers read the refused boot (say *prod debug refused*, not color only).
 

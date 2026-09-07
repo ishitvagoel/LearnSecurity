@@ -5,9 +5,9 @@
 
 ## The rule
 
-`copy_into` must return `src[:n]` where `n = min(bufsize, declared_len, len(src))`. By default: a lying header cannot grow the destination. A memory-safe language may *accompany* this check; it does not replace it when you call C. In plain words, that min — not “we use Kotlin,” not a sanitizer, not an awareness-list dashboard.
+`copy_into` must return `src[:n]` where `n = min(bufsize, declared_len, len(src))`. By default, a lying header cannot grow the destination. A memory-safe language may *accompany* this check; it does not replace it when you call C. In plain words, that min — not “we use Kotlin,” not a sanitizer, not an awareness-list dashboard.
 
-The check in unpackers: declared 4, src 8, buf 4 → length ≤ 4. Do not skip the deny because the language is Python. Do not treat `+ 8` slack as a feature.
+The check in unpackers: declared 4, src 8, buf 4 → length ≤ 4. That still denies — even if the language is Python. Do not treat `+ 8` slack as a feature.
 
 Checking every path here means the copy site itself compares three numbers. A parse-time check that the copy later ignores is not enough.
 

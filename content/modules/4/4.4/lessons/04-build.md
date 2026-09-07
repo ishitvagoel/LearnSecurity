@@ -9,7 +9,7 @@ The previous id list does not decide who may read. Hiding the button does not de
 
 The restore: `can_read` **denies unless company matches and the user is the note owner or `GRANTS[(user, note_id)]` is true**. Put simply, this object is checked — not leftover permission from the surroundings.
 
-Put this in notes: deny by default, then company equality, then owner or grant on **this** id. The safe answer: missing note, missing user, or missing grant is **deny**. Do not count it as a pass because the id “looks valid.”
+Put this in notes: deny by default, then company equality, then owner or grant on **this** id. Missing note, missing user, or missing grant is **deny**. Still not a pass even if the id “looks valid.”
 
 ## Picture: deny default, then two keys
 

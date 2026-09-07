@@ -33,9 +33,9 @@ The charts behind the dashboard are the notes. If the dashboard is green while `
 1. who might try (a script that would only be logged — not a live clinic script hunt);
 2. what you trust (the enforcing header name is what you trust; Report-Only, Helmet, and a dashboard are not);
 3. what must not happen (`isolation_enforced` true on Report-Only, not “HIPAA”);
-4. a check idea on a **local** practice only (no live page);
+4. try this on a **local** practice only (no live page);
 5. leftover risk (encoding skipped, CDN strip, XS-Leaks, Trusted Types **draft**, content-security reporting as extra, later, and advanced);
-6. the web accessibility baseline if a blocked-script message is shown (readable text, not color-only meaning).
+6. if a blocked-script message is shown (readable text, not color-only meaning).
 
 Report-Only still has to be denied. Enforcing CSP may still count. Adding Report-Only without the enforcing name leaves `isolation_enforced` true. The local check is `test_report_only_is_not_enforcement` — on practice files, not a live page.
 

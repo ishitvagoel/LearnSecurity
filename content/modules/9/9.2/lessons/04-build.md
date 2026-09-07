@@ -9,7 +9,7 @@ A formatter pass does not reject `eval`. A later review bot is later. Writing do
 
 In plain words, the review asks the interpreter question. `review_ok` must be false when the diff contains `eval(`. That is the **lab stand-in** for “user input is not Python grammar.”
 
-Put this in merge gating: `x = eval(user)` → not approved. The safe answer: unknown dynamic execution denies in a real review even if this practice’s substring misses it. Do not treat the denylist as the whole avoid-eval rule. Do not count it as a pass because continuous integration formatted the file.
+Put this in merge gating: `x = eval(user)` → not approved. Unknown dynamic execution denies in a real review even if this practice’s substring misses it. Do not treat the denylist as the whole avoid-eval rule. Don't count a pass just because continuous integration formatted the file.
 
 ## Picture: fail closed on eval
 

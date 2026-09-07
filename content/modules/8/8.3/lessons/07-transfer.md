@@ -33,9 +33,9 @@ flowchart LR
 1. who might try (another app on the tablet sending extras — not a live clinic);
 2. what you trust (server session is what you trust; App Links and https are not identity);
 3. what must not happen (`current_user` becomes doctor, not “HIPAA”);
-4. a check idea on **local** practice files only (no sideloaded malware);
+4. a sketch on **local** practice files only (no sideloaded malware);
 5. leftover risk (WebView, custom schemes, 4.5 audience);
-6. the web accessibility baseline if a human error path exists (exit the WebView with a keyboard).
+6. when a human error path exists (exit the WebView with a keyboard).
 
 `as=doctor` keeps the signed-in user. Verifying App Links without an `as=` deny check leaves the session switch. The local check is `test_deeplink_as_param_does_not_switch_user` — on the practice files, not a sideloaded malware APK.
 

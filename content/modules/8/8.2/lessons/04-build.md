@@ -11,7 +11,7 @@ Do this: the stored bytes are **not the body**. `save_note` must not write `'sec
 
 The lab uses an `aead:` prefix plus length as a **stand-in** for Keystore-wrapped authenticated encryption — not a real cipher (5.2). Here: that wrap.
 
-The check in the notes app’s offline cache: `plaintext_on_disk()` false after save. Fail-safe: if wrap fails, **do not** fall back to plaintext. Do not skip the deny because Keystore was locked.
+The check in the notes app’s offline cache: `plaintext_on_disk()` false after save. If wrap fails, **do not** fall back to plaintext. That still denies — even if Keystore was locked.
 
 ## Picture: wrap then write
 

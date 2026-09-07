@@ -744,6 +744,15 @@ const PROSE_PHRASES: [RegExp, string][] = [
     /Uncertainty is a \*\*no\*\* on (.+?), not a yes because (.+)\./g,
     "Don't treat $1 as a yes just because $2.",
   ],
+  [/Fail-safe: if /g, "If "],
+  [/Do not skip the deny because /g, "Don't waive the deny just because "],
+  [/Do not open the door because /g, "Don't open it just because "],
+  [/Do not count it as a pass because /g, "Don't count a pass just because "],
+  [/Do not allow just because /g, "Don't allow it just because "],
+  [/4\. a check on /g, "4. run it on "],
+  [/4\. a check idea on /g, "4. try this on "],
+  [/6\. the web accessibility baseline if /g, "6. if "],
+  [/By default: /g, "By default, "],
   [/, dumping lab Python into notes/g, ""],
   [/ dumping lab Python into notes/g, ""],
   [/\. without product evidence\./g, "."],
@@ -1287,6 +1296,8 @@ function transformProseLine(line: string): string {
   }
   next = next.replace(/^local /, "Local ");
   next = next.replace(/^a local /, "A local ");
+  next = next.replace(/Fail-safe: ([a-z])/g, (_, ch: string) => ch.toUpperCase());
+  next = next.replace(/Fail-safe: /g, "");
   next = next.replace(/you still have a to /g, "you still have to ");
   next = next.replace(/\bthe the notes app\b/g, "the notes app");
   next = next.replace(/\ban empty the notes app\b/g, "an empty notes-app");

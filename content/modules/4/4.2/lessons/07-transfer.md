@@ -36,7 +36,7 @@ Bind this to a staff SSO portal. If export needs step-up, is that still origin-b
 1. who might try (lookalike identity provider; intercepted OTP; tired clinician — **not** a live clinic or public phishing page);
 2. what you trust (which origin check is trusted; “we use Okta” is not);
 3. what must not happen (`phishing_resistant("otp", evil, real)` is true, or a step-up password counted as resistant);
-4. a check idea on a **local** helper only (password / OTP / webauthn × origin matrix);
+4. keep it on a **local** helper only (password / OTP / webauthn × origin matrix);
 5. leftover (password leftover; recovery SMS; WebAuthn does not decide who may read a chart);
 6. whether a human path must meet the web accessibility baseline (keyboard, labels, not color-only).
 

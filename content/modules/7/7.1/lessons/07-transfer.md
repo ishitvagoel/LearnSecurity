@@ -33,9 +33,9 @@ flowchart LR
 1. who might try (authenticated clinician session sending extra JSON — not a live clinic);
 2. what you trust (server `ALLOWED` is what you trust; SPA omit-checkbox and OpenAPI are not);
 3. what must not happen (`is_staff` becomes true, not “HIPAA”);
-4. a check idea on **local** practice files only (no public API);
+4. a sketch on **local** practice files only (no public API);
 5. leftover risk (GraphQL/gRPC binders, leftover `/v0`, unused methods later and advanced, 6.2 on honest names);
-6. the web accessibility baseline if a human deny path is in the claim (readable “field not writable,” not a silent 200 that dropped the name too).
+6. when a human deny path is in the claim (readable “field not writable,” not a silent 200 that dropped the name too).
 
 `is_staff` still has to be false after an extra-key PATCH. `display_name` may still change. Documenting the PATCH in OpenAPI without an `is_staff` deny check leaves the binder open. The local check is `test_is_admin_cannot_be_patched` — on the practice files, not a live EHR PATCH.
 

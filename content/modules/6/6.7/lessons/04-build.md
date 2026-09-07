@@ -9,7 +9,7 @@ A disabled export button does not cap the fourth export. An IP bucket at the edg
 
 Namely the server counts. `allow(n)` must be `n <= 3`. That check lives on the export action — the write path — not in the browser.
 
-The check in export: deny at four. In doubt, if the count is unknown, **deny**. Do not open the door because the counter store was unreachable.
+The check in export: deny at four. In doubt, if the count is unknown, **deny**. Don't open it just because the counter store was unreachable.
 
 ## Picture: deny at four
 

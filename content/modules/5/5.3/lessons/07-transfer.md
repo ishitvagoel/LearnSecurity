@@ -14,7 +14,7 @@ EHR-lite with a backend integration key.
 1. who might try (gist reader; old container — **not** a live clinic);
 2. what you trust (which current secret is trusted; the vault brand is not);
 3. what must not happen (`auth` true for the leaked string after rotate — not a privacy-law name);
-4. a check on a **local** practice only (leaked string false; missing current denies);
+4. keep it on a **local** practice only (leaked string false; missing current denies);
 5. leftover (images; logs; worker default; hardware box as an advanced extra);
 6. whether a human rotation acknowledgement must meet the web accessibility baseline — only if a human acknowledgement is in the claim.
 

@@ -9,7 +9,7 @@ Yesterday's hostname list does not stop a look-alike page. Training people to re
 
 Change this: `phishing_resistant` returns false unless the method is `webauthn` **and** `origin == expected`. Origin / RP ID is in the predicate.
 
-For login copy: passwords and OTP never claim resistance; WebAuthn claims it only when origin matches the relying party. Closed: an unknown method denies. Passwords at the *real* origin may still log someone in; they must not be *labeled* resistant.
+For login copy: passwords and OTP never claim resistance; WebAuthn claims it only when origin matches the relying party. An unknown method denies. Passwords at the *real* origin may still log someone in; they must not be *labeled* resistant.
 
 ## Picture: method, then origin
 

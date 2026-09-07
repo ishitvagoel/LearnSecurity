@@ -9,7 +9,7 @@
 
 Read it as the host is a named peer. `allowed` must parse the URL, require `https`, require the hostname in a small allow-list, and deny link-local and loopback.
 
-Unfurl needs this: host deny unless listed. The safe answer: unknown host **denies**. Do not skip the deny because the scheme is https.
+Unfurl needs this: host deny unless listed. Unknown host **denies**. Don't waive the deny just because the scheme is https.
 
 ## Picture: host deny unless listed
 

@@ -5,9 +5,9 @@
 
 ## The rule
 
-`capture` must add to `SEEN` and `CHARGES` only when the key is new. Fail-safe: a duplicate denies the extra charge. A processor header may *ride along* with a match; it does not replace your set. Namely that identity — not a payment company, not a questionnaire, not HTTP 200.
+`capture` must add to `SEEN` and `CHARGES` only when the key is new. A duplicate denies the extra charge. A processor header may *ride along* with a match; it does not replace your set. Namely that identity — not a payment company, not a questionnaire, not HTTP 200.
 
-Put this in the notes app's lab ledger: two k1 → count 1, first k1 may charge. Do not allow just because the processor said ok. Do not mint a new key on every retry and call that remembering.
+Put this in the notes app's lab ledger: two k1 → count 1, first k1 may charge. The processor saying ok is not an allow. Do not mint a new key on every retry and call that remembering.
 
 ## Picture: seen gate
 

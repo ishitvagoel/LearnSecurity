@@ -7,9 +7,9 @@
 
 A private namespace does not deny `cluster-admin`. A network policy is a different cut. A green CIS scan is a score, not `pod_ok`.
 
-Do this: `pod_ok` **returns `role in ALLOWED_ROLES`** where `ALLOWED_ROLES` is `{"app"}`. Fail-safe: unknown roles deny. A denylist of the string `cluster-admin` would still be god-mode-minus-one-name. Read it as that membership — not namespace name, not a network policy, not a CIS score.
+Do this: `pod_ok` **returns `role in ALLOWED_ROLES`** where `ALLOWED_ROLES` is `{"app"}`. Unknown roles deny. A denylist of the string `cluster-admin` would still be god-mode-minus-one-name. Read it as that membership — not namespace name, not a network policy, not a CIS score.
 
-The lab allow-list is a **stand-in** for a namespaced Role plus RoleBinding plus a restricted pod profile. It is not kube-apiserver. The notes app's API SA needs this: `cluster-admin` → do not run. Fail-safe: if you are unsure whether the role is namespaced, deny. Do not count it as a pass because "it is in namespace sc-prod."
+The lab allow-list is a **stand-in** for a namespaced Role plus RoleBinding plus a restricted pod profile. It is not kube-apiserver. The notes app's API SA needs this: `cluster-admin` → do not run. If you are unsure whether the role is namespaced, deny. Don't count a pass just because "it is in namespace sc-prod."
 
 ## Picture: namespace is not cluster-admin
 

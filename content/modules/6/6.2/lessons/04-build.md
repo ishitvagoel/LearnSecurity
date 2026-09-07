@@ -9,7 +9,7 @@ A report-only content-security header does not encode the note. Cleaning after `
 
 Do this: the parser **never sees extra tags**. `render` must HTML-escape the body for a text context (`<` → `&lt;`). Encode at the sink.
 
-Restore the notes app’s title HTML with this: escape, then wrap. Fail-safe: if you cannot encode for this context, **do not draw HTML**. Do not count it as a pass because a content-security policy is “on.”
+Restore the notes app’s title HTML with this: escape, then wrap. If you cannot encode for this context, **do not draw HTML**. That is not a pass — even if a content-security policy is “on.”
 
 ## Picture: escape, then wrap
 

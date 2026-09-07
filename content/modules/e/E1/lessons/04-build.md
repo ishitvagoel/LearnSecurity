@@ -7,9 +7,9 @@
 
 A system prompt does not block `exec_sql`. Retrieval does not block it. Mapping a famous-bugs list is a spreadsheet, not `run_tool`.
 
-Change this: `run_tool` **returns `None` unless `name in ALLOWED`**. Fail-safe: unknown tools deny. A denylist of the string `exec_sql` would still be every-other-interpreter. Read it as that membership — not "the prompt forbids SQL," not retrieval, not a famous-bugs mapping.
+Change this: `run_tool` **returns `None` unless `name in ALLOWED`**. Unknown tools deny. A denylist of the string `exec_sql` would still be every-other-interpreter. Read it as that membership — not "the prompt forbids SQL," not retrieval, not a famous-bugs mapping.
 
-The lab allow-list is a **stand-in** for runtime membership before invoke. It is not a production agent product. For the notes app's optional summarizer: `exec_sql` → None, `search_notes` may run. Fail-safe: if you are unsure whether the name is allow-listed, deny. Do not count it as a pass because the model "only summarizes." Do not add `exec_sql` to `ALLOWED` "for debugging."
+The lab allow-list is a **stand-in** for runtime membership before invoke. It is not a production agent product. For the notes app's optional summarizer: `exec_sql` → None, `search_notes` may run. If you are unsure whether the name is allow-listed, deny. Still not a pass even if the model "only summarizes." Do not add `exec_sql` to `ALLOWED` "for debugging."
 
 ## Picture: tool-name allow-list gate
 

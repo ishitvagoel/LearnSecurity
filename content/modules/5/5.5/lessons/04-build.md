@@ -9,7 +9,7 @@ A denylist of quotes does not make SQL a tuple. “The ORM will handle it” sti
 
 In plain words, the parser never sees those fields as grammar. Bind tenant and note id as parameters. `fetch_sql` must return `(sql, params)` with `%s` placeholders and a two-tuple of values.
 
-Put this in note fetch: program beside data. If you cannot bind, **do not query**. Do not allow just because the id “looks like a UUID.”
+Put this in note fetch: program beside data. If you cannot bind, **do not query**. An id that “looks like a UUID” is not a bind.
 
 ## Picture: program beside data
 

@@ -14,7 +14,7 @@ Two POSTs that book the last slot are that same shape.
 1. who might try (retry after 504; double-click; two tabs; load-balancer POST retry — **not** a live clinic, payment network, or public booking page);
 2. what you trust (whose store remembers the first booking; clocks may skew; the UI is not what you trust);
 3. what must not happen (two patients in one slot, two captures, or two invite redemptions — not an awareness-list name);
-4. a check on a **local** practice only (`share_count`-shaped: two calls, one booking);
+4. run it on a **local** practice only (`share_count`-shaped: two calls, one booking);
 5. leftover (key lifetime too short; fail open on store timeout; a “still working” status that mints a new key; a worker retry of a share that was **taken back** — later topic);
 6. whether a human path must meet the web accessibility baseline (status messages yes as baseline if you show “still working”; that still must reuse the key).
 

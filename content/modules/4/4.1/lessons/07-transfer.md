@@ -35,7 +35,7 @@ If offboard only hits the badge, the chart cookie still reads. Identity guidance
 1. who might try (copied cookie; shared workstation; delayed lab-result worker — **not** a live clinic or identity provider);
 2. what you trust (which delete path is trusted; the badge vendor is not);
 3. what must not happen (`session_valid` true after offboard);
-4. a check on **local** files only (`delete_user` analogue then `session_valid` false — never on the real clinic);
+4. keep it on **local** files only (`delete_user` analogue then `session_valid` false — never on the real clinic);
 5. leftover (backups; phone cache; token `exp`; worker `user_id`);
 6. whether a human-read “you are signed out” status must not use color as the only cue.
 

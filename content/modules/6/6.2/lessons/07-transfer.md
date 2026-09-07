@@ -33,9 +33,9 @@ The nickname is the title in the badge. If the nickname is concatenated into an 
 1. who might try (patient or clerk supplying a nickname — not a live clinic);
 2. what you trust (the HTML-text encoder is what you trust; a content-security header is not);
 3. what must not happen (`render` leaves `<` as markup, not “HIPAA”);
-4. a check idea on **local** practice files only (tame `<` marker);
+4. try this on **local** practice files only (tame `<` marker);
 5. leftover risk (JavaScript / attribute / URL contexts; markdown pipeline; Trusted Types draft; content-security reporting as extra, advanced);
-6. the web accessibility baseline if a human “name could not be shown” path is in the claim (readable fallback, not a blank badge that hides the person).
+6. if a human “name could not be shown” path is in the claim (readable fallback, not a blank badge that hides the person).
 
 `<` in the nickname becomes `&lt;` in the badge text. Adding a content-security policy without an encode check leaves the HTML interpreter mixed. The local check is `test_angle_brackets_are_encoded` — on a practice, not a live board.
 

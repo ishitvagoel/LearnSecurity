@@ -9,7 +9,7 @@ A spoken “yes” does not fill an empty owner. A maturity score does not fill 
 
 Repair this: `accept_exception` **returns true only when `owner`, `review_by`, and `wcag_checked` are present**. Incomplete records deny. A maturity score may *accompany* the register; it does not replace the row. In short, that schema — not “the VP said yes,” not a HIPAA slide, not a pledge.
 
-Repair the notes app’s leftover-risk record: empty owner → false; alice + date + accessibility flag may accept. Fail-safe: a missing field is deny. Do not open the door because the meeting notes look complete. Do not silently extend past `review_by`.
+Repair the notes app’s leftover-risk record: empty owner → false; alice + date + accessibility flag may accept. A missing field is deny. That still stays shut — even if the meeting notes look complete. Do not silently extend past `review_by`.
 
 ## Picture: schema gate
 

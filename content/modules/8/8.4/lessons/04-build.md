@@ -9,7 +9,7 @@ R8 shrinking does not keep the debug client id off the API. Root detection does 
 
 Change this: the server **checks build type**. `api_allowed` must require `build_type == "release"` **and** `attest == "ok"` (a stand-in here for server-checked attest from 8.1). Debug never reaches prod. Allow only release plus server attest.
 
-Repair the notes app’s prod export: debug plus ok denies. Fail-safe: unknown build type denies. Do not accept a client-only minify flag. Do not open the door because “testers need real data.”
+Repair the notes app’s prod export: debug plus ok denies. Unknown build type denies. Do not accept a client-only minify flag. That still stays shut — even if “testers need real data.”
 
 ## Picture: attest and not-debug both gates
 

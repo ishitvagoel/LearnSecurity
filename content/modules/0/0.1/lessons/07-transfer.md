@@ -15,7 +15,7 @@ A contractor asked to “quickly test our customer’s WordPress.” Also name a
 1. who might try (a tired paste of a customer host — **not** an instruction to hit the customer host, the staging URL, or a public login page);
 2. what you trust (the written allow-list; not a testing guide, a job title, a proxy, robots.txt, or “it connected”);
 3. what must not happen (`target_is_authorized` true for a public or customer host, not merely “unprofessional”);
-4. a check idea on **local** files only (do not fetch the WordPress; reuse the `example.com` literal shape);
+4. try this on **local** files only (do not fetch the WordPress; reuse the `example.com` literal shape);
 5. leftover risk (redirects, hosts-file, DNS tricks, a cloud Juice Shop you do not own);
 6. if a consent screen exists, it must work from the keyboard, not by color only.
 

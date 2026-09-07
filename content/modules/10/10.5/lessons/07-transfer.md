@@ -39,7 +39,7 @@ A recovery todo still has to be denied, and a note body still has to stay out. D
 1. who might try (optimistic closer / still-in actor — not a live clinic SIEM attack);
 2. what you trust (recovery done and no `note_body` is the promise; SIEM, paging, known-exploited list, and untested backups are not);
 3. what must not happen (`close_incident` true while recovery is todo);
-4. a check on **local** practice files only (no live paging);
+4. stay on **local** practice files only (no live paging);
 5. leftover (imperfect forensics, observability as a way out, support-tool god-mode, logging every authorization decision without the sensitive data);
 6. whether engineers read the runbook under stress (plain language, not color-only severity).
 

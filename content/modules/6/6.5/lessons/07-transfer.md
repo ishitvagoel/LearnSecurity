@@ -37,7 +37,7 @@ Link-local and loopback still have to be false; only the named lab (or clinic) h
 1. who might try (URL field — not a live clinic or cloud metadata probe);
 2. what you trust (parsed host allow-list; “https” prefix is not);
 3. what must not happen (`allowed` true for link-local);
-4. a check on **local** practice files only (predicate, no fetch — never on the real clinic);
+4. keep it on **local** practice files only (predicate, no fetch — never on the real clinic);
 5. leftover (redirects, DNS rebinding, IPv6, `file:`, telling the person they left the site);
 6. whether a human-read “could not fetch PDF” status must not use color as the only cue (readable error, not a spinner that retries the bad URL).
 
