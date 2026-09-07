@@ -38,9 +38,9 @@ A CIS dashboard will show benchmark scores and stay silent when CI's `pod_ok` is
 log_denied reason=cluster_admin_denied sa=app ns=sc-prod requested=cluster-admin
 ```
 
-That sample is cluster credentials twice if it still has a kubeconfig, a cloud token, or "check-in complete."
+A kubeconfig, a cloud token, or "check-in complete" on that sample is already cluster credentials twice.
 
-Putting the matching kubeconfig in the alert puts cluster credentials in the pager too.
+A matching kubeconfig in the god-mode alert already puts cluster credentials in the pager.
 
 ## What the framework does vs what you still have to check
 

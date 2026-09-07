@@ -78,4 +78,4 @@ python3 -m pytest labs/9.3/9.3-lab/tests --impl fixed
 
 ## What this page is not doing
 
-Do not use live targets, claiming a later gate, weaponized fuzz campaigns. Answer keys are not on this site.
+Do not use live targets. This testing lesson is not a later check-in. Do not paste weaponized fuzz campaigns. Answer keys are not on this site.

@@ -22,7 +22,7 @@ flowchart LR
 | Wrong input / abuse | foreign origin, no token → deny; broken files must fail |
 | Wrong input | same origin, no token → deny |
 | Normal | same origin, token, cookie → allow |
-| Normal / fail-closed | missing cookie → deny (may pass on both) |
+| Normal / deny when missing | missing cookie → deny (may pass on both) |
 | Not claimed | GET mutate; clickjacking; CORS; postMessage |
 
 `test_foreign_origin_post_is_denied` is there so a cookie-only share still fails.

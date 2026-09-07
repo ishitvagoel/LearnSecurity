@@ -56,7 +56,7 @@ The isolation lesson already said HTTP 200 is not a security test. This check is
 | How you stop it later | Require `retest == "pass"`; missing, fail, or scheduled deny |
 | How you notice later | `finding_closed_without_retest`; never note bodies |
 | How you recover later | Reopen; run the same isolation check |
-| Out of scope | A severity number; a live pentest; claiming a check-in |
+| Out of scope | A severity number; a live pentest; treating this retest lesson as a check-in |
 
 A ticket tracker will show Done. A pentest vendor PDF is evidence that *someone tested once*. A severity score ranks work. The notes app's API will still serve the hole if the close gate is always true. `retest` None is deny.
 

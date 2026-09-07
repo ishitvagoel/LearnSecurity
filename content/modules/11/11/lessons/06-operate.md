@@ -38,9 +38,9 @@ A scanner dashboard will show coverage and stay silent when CI’s `read` ignore
 log_denied reason=revoked_share_read_denied note=n1 tenant=B
 ```
 
-The sample already leaks if it still holds the note body, a session token, or “check-in complete.”
+The note body, a session token, or “check-in complete” on that sample already leaks the revoked share.
 
-Putting the matching note in the alert copies the leak into the ticket.
+A matching note in the revoke alert copies the leak into the ticket.
 
 ## What the framework does vs what you still have to check
 

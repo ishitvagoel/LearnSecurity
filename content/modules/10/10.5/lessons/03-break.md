@@ -57,7 +57,7 @@ Earlier lessons already said bodies stay out of logs. This check is **detect wit
 | How you stop it later | Require recovery done and no `note_body` |
 | How you notice later | `incident_closed_without_recovery`; never bodies |
 | How you recover later | This *is* the step — restore drill |
-| Out of scope | A SIEM product; live paging; claiming a check-in |
+| Out of scope | A SIEM product; live paging; treating this recovery lesson as a check-in |
 
 A SIEM dashboard turns green when alerts stop. A paging ack is a human click. The notes app’s API will log whatever you print. Recovery todo is deny and `note_body` in logs is deny.
 

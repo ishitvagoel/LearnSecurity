@@ -56,7 +56,7 @@ The secrets lesson already said keep secrets out of traces. This check is **the 
 | How you stop it later | Refuse boot when prod and debug |
 | How you notice later | `prod_debug_forbidden`; never trace bodies |
 | How you recover later | Kill the process; rotate secrets that appeared in traces |
-| Out of scope | A canary percentage; live compose; claiming a check-in |
+| Out of scope | A canary percentage; live compose; treating this debug-off lesson as a check-in |
 
 FastAPI `debug=True` is a developer default. Next.js will print stack traces when `NODE_ENV` is not production — and the string can lie. Compose will start whatever you wrote. Prod plus debug is deny.
 

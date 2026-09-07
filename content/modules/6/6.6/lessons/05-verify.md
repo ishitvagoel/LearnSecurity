@@ -25,7 +25,7 @@ If the broken accept still passes, the second `t1` was never denied. The first a
 |---|---|
 | Normal | first `t1` allowed; distinct `t2` allowed once |
 | Wrong input / abuse | second `t1` denied; broken files must fail |
-| Failure | store error denies (named in review; fail-closed smell) |
+| Failure | store error denies (named in review) |
 | Not claimed | threaded race; mail delivery; lock semantics |
 
 The test `test_invite_token_is_single_use` is there so a second true still fails. Sequential calls are enough; do not add a race harness.

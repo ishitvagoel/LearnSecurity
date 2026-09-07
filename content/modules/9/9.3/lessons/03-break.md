@@ -56,7 +56,7 @@ Checklists tell you *what* to consider. They do not make `assert r.status_code =
 | How you stop it later | Require a named what must not happen |
 | How you notice later | `security_suite_missing_isolation`; never bodies |
 | How you recover later | Add the isolation test; keep 200-only as product tests |
-| Out of scope | A testing-guide chapter; live fuzz; claiming a later gate |
+| Out of scope | A testing-guide chapter; live fuzz; treating this testing lesson as a later check-in |
 
 A FastAPI test client 200 is a product test. Snapshot tests are not isolation. Line coverage is not the isolation check. 200-only is not a security test.
 

@@ -38,9 +38,9 @@ A coverage dashboard will show line coverage and stay silent when the isolation 
 log_denied reason=security_suite_missing_isolation req=isolation suite=api
 ```
 
-That sample overfills the fuzz log if it still has a note body, a patient name, a live fuzz payload, or “later gate complete.”
+A note body, a patient name, a live fuzz payload, or “later gate complete” on that sample already overfills the fuzz log.
 
-Putting the matching note body in the alert puts the patient text in the pager too.
+A matching note body in the isolation-miss alert already puts the patient text in the pager.
 
 ## What the framework does vs what you still have to check
 

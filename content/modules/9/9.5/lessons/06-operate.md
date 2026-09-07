@@ -38,9 +38,9 @@ A ticket dashboard will show Done counts and stay silent when CI's `close_findin
 log_denied reason=finding_closed_without_retest finding=F-authz-1
 ```
 
-That sample is a live-target list if it still has a note body, a live-target URL, or "check-in complete."
+A note body, a live-target URL, or "check-in complete" on that sample is already a live-target list.
 
-Putting the matching note in the alert puts the finding in the pager too.
+A matching note in the retest alert already puts the finding in the pager.
 
 ## What the framework does vs what you still have to check
 

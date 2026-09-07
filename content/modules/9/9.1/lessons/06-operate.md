@@ -38,9 +38,9 @@ A tracker dashboard will show Done and stay silent when AUTHZ-1 still has `asser
 log_denied reason=unmapped_req_blocks_release req=AUTHZ-1 release=rel_91e
 ```
 
-That sample reprints the requirement example if it still has a note body, a patient name, or a live checklist portal trace.
+A note body, a patient name, or a live checklist portal trace on that sample already dumps the requirement example.
 
-Putting the matching note in the alert puts the requirement example in the pager too.
+A matching note in the coverage alert already puts the requirement example in the pager.
 
 ## What the framework does vs what you still have to check
 

@@ -56,7 +56,7 @@ The database god-role lesson already said one shared admin is a blast-radius rul
 | How you stop it later | Allow-list namespaced roles; unknown roles deny |
 | How you notice later | `cluster_admin_denied`; never kubeconfig |
 | How you recover later | Delete the binding; rotate cluster credentials |
-| Out of scope | A CIS score; a live managed cluster; claiming a check-in |
+| Out of scope | A CIS score; a live managed cluster; treating this cluster lesson as a check-in |
 
 A managed cluster will still accept a ClusterRoleBinding. A restricted pod profile hardens the *pod spec*. FastAPI will still run as whatever SA the chart mounts. The notes app's API will still take the cluster if admission is always true. `cluster-admin` is deny.
 

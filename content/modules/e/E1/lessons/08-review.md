@@ -32,7 +32,7 @@ Retrieved docs are untrusted. Coding-assistant install tools are a later leftove
 - No denied-tool test
 - Retrieved docs trusted
 
-Also reject: live model attacks; shipping without re-running `test_exec_sql_tool_is_denied`; keys in learner notes; claiming a check-in.
+Also reject: live model attacks; shipping without re-running `test_exec_sql_tool_is_denied`; keys in learner notes; treating this model-tool lesson as a check-in.
 
 ## Common mix-ups
 

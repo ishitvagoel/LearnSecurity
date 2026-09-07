@@ -37,7 +37,7 @@ An “HTTPS only” product does not put the preview host on the allow-list.
 log_denied reason=egress_denied class=link_local request_id=req_65e
 ```
 
-That sample reprints the fetch if it still has a full URL with a query token, a note body, a live-fetch transcript, or “the web filter caught it.”
+A full URL with a query token, a note body, a live-fetch transcript, or “the web filter caught it” on that sample already dumps the fetch.
 
 Paste a full URL with a query token into the alert and the pager now holds a second copy of the 4.3 leak.
 
@@ -51,7 +51,7 @@ A cloud dashboard will show “instance metadata requires a token” and stay si
 
 ## Practice
 
-Draft a deny line with ids and a reason — never the URL. A full URL with a query token, a note body, or a live-fetch transcript would reprint the fetch.
+Log ids and a reason for the denied host — never the URL. A full URL with a query token, a note body, or a live-fetch transcript would reprint the fetch.
 
 ## Use it somewhere new
 

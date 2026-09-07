@@ -37,9 +37,9 @@ Shipping a log pipeline does not redact the body.
 log_denied reason=confidential_field event=note_read request_id=req_81aa
 ```
 
-The sample is already wrong if it still has `tenant-A-secret-body`, a note body, a patient chart, or a card number.
+`tenant-A-secret-body`, a note body, a patient chart, or a card number on that sample already reprints the secret.
 
-Putting the matching line in the alert puts the secret in the pager too.
+A matching redaction-miss line in the alert already puts the secret in the pager.
 
 ## What the framework does vs what you still have to check
 

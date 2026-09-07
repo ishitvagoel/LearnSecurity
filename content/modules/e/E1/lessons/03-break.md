@@ -56,7 +56,7 @@ The interpreter lesson already said a string is not a safe argv. This check is *
 | How you stop it later | Allow-list; unknown tools deny |
 | How you notice later | `tool_denied`; never transcripts |
 | How you recover later | Revoke leftover agent credentials |
-| Out of scope | A famous-bugs product; a live vendor API; claiming a check-in |
+| Out of scope | A famous-bugs product; a live vendor API; treating this model-tool lesson as a check-in |
 
 A tool library will expose whatever tools you pass. A system prompt is another string the model may ignore. The web framework will still run whatever handler you wired. The notes app's summarizer will still run `exec_sql` if `run_tool` is always-run. `exec_sql` is None.
 

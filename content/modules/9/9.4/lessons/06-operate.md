@@ -38,9 +38,9 @@ A vendor security dashboard will show finding counts and stay silent when CI’s
 log_denied reason=unmapped_high_blocks finding=F1 sev=HIGH
 ```
 
-That sample reprints the finding if it still has a secret, a note body, or “verification gate complete.”
+A secret, a note body, or “verification gate complete” on that sample already dumps the finding.
 
-Putting the matching scanner snippet in the alert puts the finding payload in the pager too.
+A matching scanner snippet in the unmapped-HIGH alert already puts the finding payload in the pager.
 
 ## What the framework does vs what you still have to check
 

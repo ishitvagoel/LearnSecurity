@@ -36,7 +36,7 @@ A log product does not encrypt the column.
 log_denied reason=encoding_labeled_encryption field=body request_id=req_52cr
 ```
 
-That sample is already a second key store if it holds plaintext `secret`, a real SSN, or “AES handled.”
+Plaintext `secret`, a real SSN, or “AES handled” on that sample is already a second key store.
 
 Putting plaintext `secret` or an SSN in the alert leaves a second copy in the pager.
 

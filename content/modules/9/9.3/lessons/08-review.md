@@ -32,7 +32,7 @@ Fuzz with no named bad result is leftover 9.5. Field grain is 7.2. Do not claim 
 - Security suite empty
 - Chaos / fuzz with no who-is-allowed named bad result
 
-Also reject: live targets; closing findings without re-running `test_http_200_only_is_not_a_security_test`; keys in learner notes; claiming a later gate; treating coverage percent as the isolation check.
+Also reject: live targets; closing findings without re-running `test_http_200_only_is_not_a_security_test`; keys in learner notes; treating this testing lesson as a later check-in; treating coverage percent as the isolation check.
 
 ## Common mix-ups
 

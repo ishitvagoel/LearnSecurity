@@ -38,9 +38,9 @@ A vendor agent dashboard will show token counts and stay silent when CI's `run_t
 log_denied reason=tool_denied agent=sum-1 tool=exec_sql
 ```
 
-That sample is the model output twice if it still has a note body, a transcript, or "check-in complete."
+A note body, a transcript, or "check-in complete" on that sample is already the model output twice.
 
-Putting the matching transcript in the alert puts the model output in the pager too.
+A matching transcript in the tool-deny alert already puts the model output in the pager.
 
 ## What the framework does vs what you still have to check
 

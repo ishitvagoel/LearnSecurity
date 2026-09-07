@@ -32,7 +32,7 @@ Unread register is leftover. Tech-debt rename is leftover. This page does not ma
 - Accessibility not in the schema
 - Maturity slide as the exception
 
-Also reject: live disclosure; shipping without re-running `test_exception_needs_owner_review_and_wcag`; keys in learner notes; claiming a check-in; treating an unverified pledge as proven.
+Also reject: live disclosure; shipping without re-running `test_exception_needs_owner_review_and_wcag`; keys in learner notes; treating this exception lesson as a check-in; treating an unverified pledge as proven.
 
 ## Common mix-ups
 

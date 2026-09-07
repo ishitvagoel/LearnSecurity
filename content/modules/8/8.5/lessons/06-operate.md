@@ -38,9 +38,9 @@ A crash dashboard will show crash counts and stay silent when the last extra sti
 log_denied reason=crash_body_redacted crash_id=cr_85e app=release
 ```
 
-That sample is a second crash dump if it still has a note body, a patient name, or a live crash payload.
+A note body, a patient name, or a live crash payload on that sample is already a second crash dump.
 
-Putting the matching report in the alert puts the crash body in the pager too.
+A matching crash report in the alert already puts the crash body in the pager.
 
 ## What the framework does vs what you still have to check
 

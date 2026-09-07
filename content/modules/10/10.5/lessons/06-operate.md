@@ -40,7 +40,7 @@ log_denied reason=incident_closed_without_recovery id=INC-12 recovery=todo
 
 Leave the note body, the session token, and “check-in complete” off that incident sample.
 
-Putting the matching note in the alert puts the incident text in the pager too.
+A matching note in the incident alert already puts the incident text in the pager.
 
 ## What the framework does vs what you still have to check
 

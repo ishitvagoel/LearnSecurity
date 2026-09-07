@@ -37,7 +37,7 @@ A process-monitor product does not turn `sh -c` into argv.
 log_denied reason=child_process_anomaly program=sh request_id=req_61a
 ```
 
-That sample reprints the argv if it still has a note body, a real email, a patient filename, or a shell-punctuation cookbook.
+A note body, a real email, a patient filename, or a shell-punctuation cookbook on that sample already dumps the argv.
 
 Paste the full argv with a patient filename into the alert and the pager now holds a second copy of the 3.1 / 5.1 leak.
 

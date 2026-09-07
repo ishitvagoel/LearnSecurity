@@ -32,7 +32,7 @@ A restricted pod profile is pod spec. A network policy is egress. Instance metad
 - No admission test
 - IaC with `0.0.0.0/0`
 
-Also reject: live cluster attacks; admitting without re-running `test_cluster_admin_pod_is_denied`; keys in learner notes; claiming a check-in.
+Also reject: live cluster attacks; admitting without re-running `test_cluster_admin_pod_is_denied`; keys in learner notes; treating this cluster lesson as a check-in.
 
 ## Common mix-ups
 

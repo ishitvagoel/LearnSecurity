@@ -38,7 +38,7 @@ An npm audit dashboard will show advisory counts and stay silent when CI’s `in
 log_denied reason=hash_mismatch_denied pkg=demo expected=aaa got=bbb
 ```
 
-That sample is a keyring if it still has a token, a private key, or “ship gate complete.”
+A token, a private key, or “ship gate complete” on that sample is already a keyring.
 
 Putting the registry token in the alert puts a secret in the pager too.
 

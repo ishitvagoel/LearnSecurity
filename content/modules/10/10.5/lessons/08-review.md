@@ -32,7 +32,7 @@ Note bodies in logs are the second what must not happen. Support-tool god-mode i
 - no restore evidence
 - support tool is god-mode
 
-Also reject: live incident attacks; closing without re-running both deny tests; keys in learner notes; claiming a check-in; treating a known-exploited list as close.
+Also reject: live incident attacks; closing without re-running both deny tests; keys in learner notes; treating this recovery lesson as a check-in; treating a known-exploited list as close.
 
 ## Common mix-ups
 

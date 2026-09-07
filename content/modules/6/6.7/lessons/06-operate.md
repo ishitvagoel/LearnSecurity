@@ -37,7 +37,7 @@ A rate-limit dashboard tile does not increment `quota_denied` on the fourth CSV.
 log_denied reason=quota_denied n=4 subject=user_67e request_id=req_67e
 ```
 
-That sample is a live-target record if it still has a note body, a CSV attachment, a real email, or a live load trace against a public host.
+A note body, a CSV attachment, a real email, or a live load trace against a public host on that sample is already a live-target record.
 
 Putting note bodies from the CSV in the alert leaves extra copies in the pager.
 

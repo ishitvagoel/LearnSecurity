@@ -53,7 +53,7 @@ If a human sees “account deleted,” announce it in text a screen reader can s
 
 ## Practice
 
-Draft a deny line with ids, a reason, and the store name — never the body. A note body, a personal email, or a “privacy law handled” slogan would reprint the leftover body.
+Log ids, a reason, and the store name — never the leftover body. A note body, a personal email, or a “privacy law handled” slogan would reprint the leftover body.
 
 ## Use it somewhere new
 

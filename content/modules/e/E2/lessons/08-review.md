@@ -32,7 +32,7 @@ Encoding is 6.2. CDN strip is 2.2. Do not claim check-in 7. Do not load a live p
 - Trusted Types claimed as encoding
 - Edge cache stripping CSP
 
-Also reject: a live script hunt; shipping without re-running `test_report_only_is_not_enforcement`; keys in learner notes; claiming check-in 7; presenting the current content-security spec as final.
+Also reject: a live script hunt; shipping without re-running `test_report_only_is_not_enforcement`; keys in learner notes; treating this CSP lesson as check-in 7; presenting the current content-security spec as final.
 
 ## Common mix-ups this topic refuses
 

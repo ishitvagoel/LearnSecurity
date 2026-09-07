@@ -32,7 +32,7 @@ Variants (extra fields) and a role-change cache are other leftover. Name them, d
 - live-target language
 - no variant search
 
-Also reject: public pentest steps; closing findings without re-running `test_cannot_close_without_retest`; keys in learner notes; claiming a check-in; treating a known-exploited list as permission to scan.
+Also reject: public pentest steps; closing findings without re-running `test_cannot_close_without_retest`; keys in learner notes; treating this retest lesson as a check-in; treating a known-exploited list as permission to scan.
 
 ## Common mix-ups
 

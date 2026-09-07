@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks?
 
-“We have a unique index” still leaves out **states**, **the consume step**, and **fail-closed on store errors**.
+“We have a unique index” still leaves out **states**, **the consume step**, and **deny on store errors**.
 
 `accept(token)` / `reset()` — no live mailer.
 
@@ -51,7 +51,7 @@ Retry wants **one** success that can be repeated safely. Invite wants **one** su
 | first accept | `t1` | join | allow |
 | second accept | `t1` | join | deny |
 | first accept | `t2` | join | allow |
-| store error | any | join | deny (fail-closed) |
+| store error | any | join | deny |
 
 A missing “second accept × `t1` × deny” row is how the invite is accepted twice. Write the hole.
 

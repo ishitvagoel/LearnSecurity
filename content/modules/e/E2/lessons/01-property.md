@@ -75,4 +75,4 @@ Trusted Types. COOP/COEP. Report-Only sold as a “HIPAA header” is still not 
 
 ## What this page is not doing
 
-Do not use live script hunts, claiming check-in 7. Answer keys are not on this site.
+Do not use live script hunts. This CSP lesson is not check-in 7. Answer keys are not on this site.

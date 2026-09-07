@@ -18,7 +18,7 @@ flowchart TD
   Flag -->|no| Value[Return value - not a session token]
 ```
 
-The repaired files honor the flag. XSS is **not** solved: encoding, CSP (draft), and Trusted Types (draft) remain later work. Fail-safe for a session token: if the flag is missing, treat it as a defect, not as “readable is fine.”
+The repaired files honor the flag. XSS is **not** solved: encoding, CSP (draft), and Trusted Types (draft) remain later work. If the session-token flag is missing, treat it as a defect, not as “readable is fine.”
 
 ## Why this restores the rule
 

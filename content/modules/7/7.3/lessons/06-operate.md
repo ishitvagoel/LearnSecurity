@@ -36,7 +36,7 @@ A webhook-gateway product does not HMAC the callback.
 log_denied reason=webhook_sig_fail provider=lab-billing request_id=req_73e
 ```
 
-That sample reprints the callback if it still has the raw body, `lab-secret`, a real patient result, or a live provider trace.
+The raw body, `lab-secret`, a real patient result, or a live provider trace on that sample already dumps the callback.
 
 Paste the raw body or `lab-secret` into the alert and the pager now holds a second copy of the 3.1 / 5.3 leak.
 
@@ -50,7 +50,7 @@ An nginx dashboard will show TLS handshakes and stay silent when `/webhook` stil
 
 ## Practice
 
-Draft a deny line with ids and a reason — never the callback body. The raw body, `lab-secret`, a real patient result, or a live provider trace would reprint the callback.
+Log ids and a reason for the missing MAC — never the callback body. The raw body, `lab-secret`, a real patient result, or a live provider trace would reprint the callback.
 
 ## Use it somewhere new
 

@@ -38,9 +38,9 @@ A governance dashboard will show exception counts and stay silent when CI’s `a
 log_denied reason=exception_incomplete_denied missing=owner,review_by
 ```
 
-That sample is a trophy wall if it still has a secret, a “check-in complete,” or a pledge screenshot.
+A secret, a “check-in complete,” or a pledge screenshot on that sample is already a trophy wall.
 
-Putting the matching writeup in the alert copies the leak into the ticket.
+A matching writeup in the exception alert copies the trophy into the ticket.
 
 ## What the framework does vs what you still have to check
 
