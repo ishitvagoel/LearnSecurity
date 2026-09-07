@@ -9,7 +9,7 @@ The old spreadsheet cells are not an isolation assert. A silenced finding does n
 
 What has to change: `covered` **requires `req == req_id` and `asserts_isolation`**. A row that only stores status is uncovered. Namely that conjunction — not “we ran the checklist,” not pytest-cov, not a tracker Done column.
 
-The notes app’s AUTHZ-1 tracking needs this: status-only → not covered. A missing flag is false. Don't waive the deny just because the PDF was attached. Don't take “we ran the checklist” as the isolation flag.
+The notes app’s AUTHZ-1 tracking needs this: status-only → not covered. A missing flag is false. An attached PDF does not mark AUTHZ-1 covered. Don't take “we ran the checklist” as the isolation flag.
 
 ## Picture: coverage and isolation are both gates
 

@@ -9,7 +9,7 @@ A green reporting dashboard does not enforce the policy. Helmet is a library imp
 
 The restore: `isolation_enforced` looks at the **enforcing** name. It must return true only when `Content-Security-Policy` is in the headers. Report-Only may *ride along*; it does not replace that name.
 
-The notes app’s Next.js responses needs this: Report-Only only → false, enforcing CSP may count. Keep it closed even if reports are arriving. Do not treat a policy string on the wrong header as isolation.
+The notes app’s Next.js responses needs this: Report-Only only → false, enforcing CSP may count. Arriving reports do not make Report-Only enforcing. Do not treat a policy string on the wrong header as isolation.
 
 ## Picture: name gate
 
@@ -31,7 +31,7 @@ Use a content-security policy as a layer after encoding — the header *name*.
 | Report-Only only | false |
 | enforcing CSP | true |
 
-If the enforcing name is missing, **do not claim isolation**. Do not keep Report-Only because “the dashboard is green.”
+If the enforcing name is missing, **do not claim isolation**. A green dashboard does not turn Report-Only into enforcing.
 
 ## What this is not
 

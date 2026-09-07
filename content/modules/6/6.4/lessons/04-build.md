@@ -7,7 +7,7 @@
 
 `resolve` must join, canonicalize, and deny unless the result is the folder or a child of `/tmp/sc-lab`. Here: that prefix check — not a denylist of `..`, not a UUID filename sticker, not trusting `Content-Type`.
 
-For uploads: deny if not under the folder. If canonicalize is uncertain, **deny**. Don't allow it just because the name “looks like notes/a.txt.”
+For uploads: deny if not under the folder. If canonicalize is uncertain, **deny**. A name that “looks like notes/a.txt.” is not a canonical path.
 
 ## Picture: deny if not under the folder
 

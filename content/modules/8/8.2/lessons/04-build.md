@@ -11,7 +11,7 @@ Do this: the stored bytes are **not the body**. `save_note` must not write `'sec
 
 The lab uses an `aead:` prefix plus length as a **stand-in** for Keystore-wrapped authenticated encryption — not a real cipher (5.2). Here: that wrap.
 
-The check in the notes app’s offline cache: `plaintext_on_disk()` false after save. If wrap fails, **do not** fall back to plaintext. That still denies — even if Keystore was locked.
+The check in the notes app’s offline cache: `plaintext_on_disk()` false after save. If wrap fails, **do not** fall back to plaintext. A locked Keystore does not justify a plaintext cache.
 
 ## Picture: wrap then write
 
@@ -32,7 +32,7 @@ That secure store has to be implemented — `'secret'` on disk.
 | save `'secret'` | `plaintext_on_disk` false |
 | save `'other'` | `plaintext_on_disk` false |
 
-If wrap fails, **do not store the body**. Do not keep a text-file cache because “the folder is private.”
+If wrap fails, **do not store the body**. A private-looking folder does not justify a text-file cache.
 
 ## What this is not
 

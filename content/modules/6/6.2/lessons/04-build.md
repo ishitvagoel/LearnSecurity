@@ -9,7 +9,7 @@ A report-only content-security header does not encode the note. Cleaning after `
 
 Do this: the parser **never sees extra tags**. `render` must HTML-escape the body for a text context (`<` → `&lt;`). Encode at the sink.
 
-Restore the notes app’s title HTML with this: escape, then wrap. If you cannot encode for this context, **do not draw HTML**. That is not a pass — even if a content-security policy is “on.”
+Restore the notes app’s title HTML with this: escape, then wrap. If you cannot encode for this context, **do not draw HTML**. A content-security policy being “on” does not encode the title.
 
 ## Picture: escape, then wrap
 
@@ -30,7 +30,7 @@ Output has to be encoded for the context you are writing into — HTML text.
 | body containing `<` | `&lt;` present, extra-tag marker `"<img"` absent |
 | honest “Weekly notes” | still visible as text |
 
-If you cannot encode for this context, **do not draw HTML**. Do not keep the raw string because “the header will catch it.”
+If you cannot encode for this context, **do not draw HTML**. The header catching it does not encode the raw string.
 
 ## What this is not
 

@@ -9,7 +9,7 @@ Those test names are not a “what must not happen” assert. Hiding a coverage 
 
 Repair this: `is_security_test` **requires `forbidden_outcome`**. HTTP 200 alone is a product test. Put simply, that flag — not line coverage, not testing-guide membership, not “status asserted and we listed a guide id.”
 
-The check in the notes app’s isolation suite: 200-only → not a security test. Missing flag is false. Don't open it just because coverage is 94%. A fuzzer with no named bad result is not the flag.
+The check in the notes app’s isolation suite: 200-only → not a security test. Missing flag is false. 94% coverage does not make a 200-only row a security test. A fuzzer with no named bad result is not the flag.
 
 ## Picture: shape gate
 

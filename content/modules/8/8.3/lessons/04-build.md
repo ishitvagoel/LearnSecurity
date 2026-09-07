@@ -9,7 +9,7 @@ Verified App Links do not ignore `as=admin`. An https scheme does not ignore it.
 
 The repair: `open_link` **does not copy identity keys onto `current_user`**. Locators such as `note=` may be honored later; this practice ignores extras entirely as the smallest fix. Ignore identity parameters on links.
 
-Restore the notes app’s App Links with this: `as=admin` keeps alice. Unknown keys do not switch users. That is not a pass — even if the Activity was exported “for sharing.”
+Restore the notes app’s App Links with this: `as=admin` keeps alice. Unknown keys do not switch users. Exporting the Activity “for sharing” does not switch the user.
 
 ## Picture: extras never become the principal
 
@@ -31,7 +31,7 @@ Authorization belongs on a trusted service layer — `open_link({"as": "admin"})
 | `as=admin` | still alice |
 | `note=n1` | still alice |
 
-By default, if the key is identity, **do not copy it**. Do not keep copying extras because “App Links are verified.”
+By default, if the key is identity, **do not copy it**. Verified App Links do not copy unknown extras.
 
 ## What this is not
 

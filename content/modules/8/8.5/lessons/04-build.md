@@ -9,7 +9,7 @@ Leftover crash-field names are not a redaction policy. Hiding a scan result does
 
 The restore: `crash_report` **does not copy `note_body` into the payload**. A constant `'[redacted]'` (the local stand-in) is the teaching shape. Read it as omit — not a crash product set to “automatic,” not a store form, not a tracker-SDK “privacy mode” sticker.
 
-For the notes app’s crash telemetry: `'secret'` absent from the report. If the SDK offers “include last screen,” leave it off. Don't allow it just because support “needs the last chart.” Do not attach the live note, the clipboard, or a screenshot.
+For the notes app’s crash telemetry: `'secret'` absent from the report. If the SDK offers “include last screen,” leave it off. Support “needing the last chart” does not put `secret` in the report. Do not attach the live note, the clipboard, or a screenshot.
 
 ## Picture: redact then send
 

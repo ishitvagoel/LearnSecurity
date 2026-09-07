@@ -9,7 +9,7 @@ Prior company ids are not the session tenant. Hiding the company picker does not
 
 What has to change: `tenant_for` **returns `session["tenant"]`**. Put simply, the runtime ignores the body field for isolation. Bind tenant from the session. A lying body cannot switch company. Row-level rules may *accompany* this binding; they must not be `SET` from the body. Read it as session win — not a subdomain, not a relationship-graph tuple, not a famous-bugs mapping.
 
-Restore notes with this: session A, body B → A. That is not a pass — even if “row-level rules are on.” Do not “repair” a mismatch by trusting the body. The JSON body is not the tenant.
+Restore notes with this: session A, body B → A. Row-level rules being on does not bind the session. Do not “repair” a mismatch by trusting the body. The JSON body is not the tenant.
 
 ## Picture: session gate
 

@@ -9,7 +9,7 @@ An “internal” queue does not bind who the exporter is. A private network doe
 
 In short, the worker authenticates as a service principal. `exporter` must return `"worker-sc"` only when `service == "worker-sc"`. Leftover `user_session` is ignored.
 
-Overnight export needs this: Alice session yields `None`. A missing service denies. A fallback `user_session or service` is the bug. Keep it closed even if the broker was “inside the private network.”
+Overnight export needs this: Alice session yields `None`. A missing service denies. A fallback `user_session or service` is the bug. A broker “inside the private network” is not a named worker.
 
 ## Picture: service or nothing
 

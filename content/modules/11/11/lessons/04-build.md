@@ -9,7 +9,7 @@ A revoke *event* does not consult the grant on the next read. HTTP 200 is a stat
 
 The restore: `revoke` **discards the grant**, and `read` **returns the body only if `tenant == owner` or `(nid, tenant) in GRANTS`**. Missing grant denies. A revoke that is not consulted on the next read is still the break. In plain words, that consultation — not HTTP 200, not a scanner badge, not a YAML pack.
 
-Restore the notes app’s share with this: B after revoke → None, A still reads, B before revoke still reads. If you are unsure whether the grant still exists, deny. The deny still holds even if DELETE returned 200.
+Restore the notes app’s share with this: B after revoke → None, A still reads, B before revoke still reads. If you are unsure whether the grant still exists, deny. A 200 from DELETE does not reopen the grant.
 
 ## Picture: consult on the path
 

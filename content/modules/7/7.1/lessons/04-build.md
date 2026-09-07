@@ -9,7 +9,7 @@ An OpenAPI comment does not stop `is_admin` in the body. A frontend form that om
 
 The restore: the server **copies named fields**. `apply` must copy `display_name` when present and must not copy `is_admin`. Copy only the allowed display name.
 
-Restore the notes app’s profile PATCH with this: `ALLOWED = {"display_name"}`. Unknown keys are skipped (or rejected). Still denied even if a nested model was allowed to keep extras.
+Restore the notes app’s profile PATCH with this: `ALLOWED = {"display_name"}`. Unknown keys are skipped (or rejected). A nested model keeping extras does not copy unknown keys.
 
 ## Picture: extras never reach the row
 
@@ -32,7 +32,7 @@ That per-action limit has to be implemented — `is_admin`.
 | PATCH `display_name` | name changes; `is_admin` unchanged |
 | PATCH unknown key | key does not appear on the user |
 
-If the key is not in `ALLOWED`, **do not copy it**. Do not keep `user.update(body)` because “the spec does not list `is_admin`.”
+If the key is not in `ALLOWED`, **do not copy it**. The spec omitting `is_admin` does not make `user.update(body)` safe.
 
 ## What this is not
 
