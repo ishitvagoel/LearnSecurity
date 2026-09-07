@@ -39,7 +39,7 @@ log_denied reason=quota_denied n=4 subject=user_67e request_id=req_67e
 
 A note body, a CSV attachment, a real email, or a live load trace against a public host on that sample is already a live-target record.
 
-Putting note bodies from the CSV in the alert leaves extra copies in the pager.
+Note bodies from the CSV in the fourth-export ticket are extra copies of the export.
 
 Enabling a rate limit does not deny the fourth export. Notification fan-out and extra formats still need the fourth-export deny. The fourth call still has to fail `test_fourth_export_is_denied`.
 

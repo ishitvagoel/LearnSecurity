@@ -35,7 +35,7 @@ Transparency is the label. Collecting less is the redaction. Mixing them is how 
 
 ## Step 1: name the pieces
 
-Take the fields you already have and ask where each one may land.
+Take the fields you already have and ask which crash extra each one may reach.
 
 | Piece | This system |
 |---|---|

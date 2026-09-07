@@ -41,7 +41,7 @@ A content-security reporting dashboard will show violation counts and stay silen
 log_denied reason=csp_report_only_not_enforced route=/app
 ```
 
-HTML, a note body, or “check-in 7 complete” has no place on the CSP line.
+`csp_report_only_not_enforced` already names the route. HTML, a note body, and “check-in 7 complete” are extra copies of the page.
 
 ## Use it somewhere new
 

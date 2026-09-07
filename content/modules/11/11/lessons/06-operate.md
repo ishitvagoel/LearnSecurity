@@ -38,7 +38,7 @@ A scanner dashboard will show coverage and stay silent when CI’s `read` ignore
 log_denied reason=revoked_share_read_denied note=n1 tenant=B
 ```
 
-The note body, a session token, or “check-in complete” in the sample is the revoked share twice.
+The revoked-share sample should name the share id — not the note body, a session token, or “check-in complete.”
 
 A matching note in the revoke alert copies the leak into the ticket.
 

@@ -36,9 +36,9 @@ A review-bot vendor does not reject `eval` on a user string.
 log_denied reason=review_block_eval pr=pr_92e file=export.py
 ```
 
-Keep an eval payload, a note body, and a live GitHub trace off the sample; they leak the eval.
+An eval payload, a note body, or a live GitHub trace in the sample is another copy of the eval.
 
-Putting the eval payload or note bodies in the alert leaves a second copy (logging topic / interpreter topic) in the pager.
+An eval payload or note bodies in the review-block ticket are another copy of the eval (logging topic / interpreter topic).
 
 A formatter passing does not reject `eval`. If the review bot changes, `test_eval_on_user_input_is_rejected` still has to fail on the broken files. Terraform `local-exec` and GitHub Actions `run:` still eval user strings; do not merge until those interpreters are named. The lab substring is a stand-in: an `exec(` helper can skip it, so keep the human interpreter question even after this metric is green.
 

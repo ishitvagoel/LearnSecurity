@@ -36,9 +36,9 @@ A webhook-gateway product does not HMAC the callback.
 log_denied reason=webhook_sig_fail provider=lab-billing request_id=req_73e
 ```
 
-Keep the raw body, `lab-secret`, a real patient result, and a live provider trace off the sample; they dump the callback.
+The raw body, `lab-secret`, a real patient result, or a live provider trace in the sample already names the callback.
 
-Paste the raw body or `lab-secret` into the alert and the pager now holds a second copy of the 3.1 / 5.3 leak.
+Quoting the raw body or `lab-secret` in the ticket is a second copy of the 3.1 / 5.3 leak.
 
 A “webhooks signed” checkbox does not reject a missing MAC. A missing MAC still has to fail `test_missing_signature_is_rejected`. Billing, export-ready, and invite-used callbacks still need the same missing-MAC deny.
 
@@ -50,7 +50,7 @@ An nginx dashboard will show TLS handshakes and stay silent when `/webhook` stil
 
 ## Practice
 
-Name ids and a reason for the missing MAC — never the callback body. Skip the raw body, `lab-secret`, a real patient result, and a live provider trace on the MAC line.
+Name ids and a reason for the missing MAC — never the callback body. The raw body, `lab-secret`, a patient result, and a live provider trace name the callback.
 
 ## Use it somewhere new
 

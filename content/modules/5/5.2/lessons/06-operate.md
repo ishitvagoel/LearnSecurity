@@ -38,7 +38,7 @@ log_denied reason=encoding_labeled_encryption field=body request_id=req_52cr
 
 Plaintext `secret`, a real SSN, or “AES handled” on that sample is already a second key store.
 
-Putting plaintext `secret` or an SSN in the alert leaves a second copy in the pager.
+A plaintext `secret` or an SSN in the encryption-miss ticket is another key dump.
 
 An “encryption enabled” checkbox does not stop Base64. Touch `protect` and `test_protect_is_not_mere_encoding` has to stay red on Base64. Workers and export jobs still Base64 if you only wrap the note write.
 

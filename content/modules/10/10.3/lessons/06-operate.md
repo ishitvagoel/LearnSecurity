@@ -40,7 +40,7 @@ log_denied reason=cluster_admin_denied sa=app ns=sc-prod requested=cluster-admin
 
 A kubeconfig, a cloud token, or "check-in complete" on that sample is already cluster credentials twice.
 
-A matching kubeconfig in the god-mode alert already puts cluster credentials in the pager.
+Attach a kubeconfig to the god-mode ticket and whoever is on call now has cluster credentials.
 
 ## What the framework does vs what you still have to check
 

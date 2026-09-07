@@ -40,7 +40,7 @@ log_denied reason=finding_closed_without_retest finding=F-authz-1
 
 A note body, a live-target URL, or "check-in complete" on that sample is already a live-target list.
 
-A matching note in the retest alert already puts the finding in the pager.
+The retest ticket needs the finding id. Another copy of the note is the finding itself.
 
 ## What the framework does vs what you still have to check
 

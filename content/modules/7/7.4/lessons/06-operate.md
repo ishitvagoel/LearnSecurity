@@ -36,9 +36,9 @@ A zero-trust sticker does not stop a leftover cookie from being the worker.
 log_denied reason=worker_identity_wrong expected=worker-sc job_id=job_74e
 ```
 
-Keep Alice’s session cookie, note bodies, a live broker dump, and a real clinician token off the sample; they dump the principal.
+Alice’s session cookie, note bodies, a live broker dump, or a real clinician token in the sample already names the principal.
 
-Putting Alice’s cookie or note bodies in the alert leaves a second copy in the pager.
+Alice’s cookie or note bodies in the worker ticket are the principal again.
 
 Enabling a service account does not stop a leftover cookie from being the principal. Overnight export, outbox, and notification fan-out can still inherit Alice’s cookie; do not rotate the worker until those jobs are named. A job that carries Alice’s cookie still has to fail `test_user_session_is_not_worker_identity`.
 
@@ -48,7 +48,7 @@ A task dashboard will show task success and stay silent when the task still used
 
 ## Practice
 
-Log the job id and expected principal — never the leftover cookie. Skip Alice’s session cookie, note bodies, and a live broker dump on the worker line.
+Log the job id and expected principal — never the leftover cookie. Alice’s session cookie, note bodies, and a live broker dump name the worker.
 
 ## Use it somewhere new
 

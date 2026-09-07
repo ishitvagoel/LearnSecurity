@@ -37,7 +37,7 @@ log_denied reason=header_https_socket_http socket=http request_id=req_54ch
 
 A session cookie, a note body, or “HSTS handled” turns that sample into a cookie store.
 
-Putting a session cookie or a note body in the alert leaves a second copy in the pager.
+A session cookie or a note body in the header-versus-socket ticket is another cookie jar.
 
 A “Force HTTPS” toggle does not prove the socket is TLS. A client `https` header on an http socket still has to fail `test_client_forwarded_proto_is_not_tls`. Page `https://` versus API socket `http` is another hop; do not call TLS done until that pair is named.
 

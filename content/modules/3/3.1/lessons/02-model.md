@@ -26,7 +26,7 @@ If any box is a product name or a policy URL, the row is not ready.
 
 ## Step 1: name the pieces
 
-Take the fields you already have and ask where each one may land.
+Take the fields you already have and ask which log drain each one may reach.
 
 | Piece | This system |
 |---|---|

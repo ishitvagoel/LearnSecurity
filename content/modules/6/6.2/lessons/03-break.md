@@ -13,7 +13,7 @@ The practice is not a website you attack. `render` draws a title and leaves `<` 
 
 Stay inside `labs/6.2/6.2-lab`. Fake titles only. It does not open a browser. Do not load a live page, an employer board, or a classmate preview as this exercise.
 
-Do not paste this exercise onto a public site, employer board, or live clinic portal.
+Do not paste this exercise onto a public page, employer CMS, or live clinic portal.
 
 What must not happen: **unencoded markup reaches the HTML interpreter**. `render` leaves `<` as a tag delimiter, so the extra-tag marker `"<img"` remains in the output.
 

@@ -37,9 +37,9 @@ An “HTTPS only” product does not put the preview host on the allow-list.
 log_denied reason=egress_denied class=link_local request_id=req_65e
 ```
 
-Leave a full URL with a query token, a note body, a live-fetch transcript, and “the web filter caught it” off the sample.
+A full URL with a query token, a note body, a live-fetch transcript, or “the web filter caught it” in the sample is a second fetch dump.
 
-Paste a full URL with a query token into the alert and the pager now holds a second copy of the 4.3 leak.
+A query token in a pasted URL is a second copy of the 4.3 leak for whoever is on call.
 
 An “HTTPS only” toggle does not keep link-local URLs off the allow-list. A link-local URL still has to fail `test_link_local_metadata_is_denied`. Webhook delivery (7.3) is another deputy; name it before you fetch.
 
@@ -51,7 +51,7 @@ A cloud dashboard will show “instance metadata requires a token” and stay si
 
 ## Practice
 
-Name ids and a reason for the denied host — never the URL. Keep a full URL with a query token, a note body, and a live-fetch transcript off the host line.
+Name ids and a reason for the denied host — never the URL. A full URL with a query token, a note body, or a live-fetch transcript still holds the fetch.
 
 ## Use it somewhere new
 

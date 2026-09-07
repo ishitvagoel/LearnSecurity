@@ -40,7 +40,7 @@ log_denied reason=hash_mismatch_denied pkg=demo expected=aaa got=bbb
 
 A token, a private key, or “ship gate complete” on that sample is already a keyring.
 
-Putting the registry token in the alert puts a secret in the pager too.
+A registry token in the install-deny ticket is another secret dump.
 
 ## What the framework does vs what you still have to check
 

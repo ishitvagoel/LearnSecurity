@@ -13,7 +13,7 @@ The practice is not a website you attack. `revoke` does nothing and a `read` tha
 
 Stay inside `labs/11/11-lab`. The practice is `revoke` / `read` over synthetic people `A` / `B` and note `n1`. Do **not** revoke, read, or scrape a real notes app, clinic portal, or shared tenant as the exercise.
 
-Do not paste this exercise onto a public clinic, employer dashboard, or live hospital portal “to see what happens.”
+Do not paste this exercise onto a public clinic, employer notes app, or live hospital portal “to see what happens.”
 
 `read` is supposed to consult **owner or grant on every access** — not pytest coverage, a YAML evidence pack, or FastAPI 200.
 

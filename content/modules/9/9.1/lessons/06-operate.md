@@ -40,7 +40,7 @@ log_denied reason=unmapped_req_blocks_release req=AUTHZ-1 release=rel_91e
 
 The requirement example is already in the sample if it still has a note body, a patient name, or a live checklist portal trace.
 
-A matching note in the coverage alert already puts the requirement example in the pager.
+The coverage ticket needs the requirement id, not another copy of the example note.
 
 ## What the framework does vs what you still have to check
 

@@ -40,7 +40,7 @@ log_denied reason=security_suite_missing_isolation req=isolation suite=api
 
 A note body, a patient name, a live fuzz payload, or “later gate complete” on that sample already overfills the fuzz log.
 
-A matching note body in the isolation-miss alert already puts the patient text in the pager.
+Isolation-miss tickets that quote the note body already page the patient text.
 
 ## What the framework does vs what you still have to check
 

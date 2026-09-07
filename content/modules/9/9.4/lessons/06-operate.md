@@ -38,9 +38,9 @@ A vendor security dashboard will show finding counts and stay silent when CI’s
 log_denied reason=unmapped_high_blocks finding=F1 sev=HIGH
 ```
 
-Keep a secret, a note body, and “verification gate complete” off the sample; they leak the finding.
+If the sample still contains a secret, a note body, or “verification gate complete,” you have filed the finding twice.
 
-A matching scanner snippet in the unmapped-HIGH alert already puts the finding payload in the pager.
+The unmapped-HIGH ticket needs the finding id, not the scanner snippet.
 
 ## What the framework does vs what you still have to check
 
@@ -58,7 +58,7 @@ It broke because CI’s `ship_ok` still always true (or a new HIGH with no map r
 log_denied reason=unmapped_high_blocks finding=F1 sev=HIGH
 ```
 
-A secret, a note body, or “verification gate complete” has no place on the unmapped-HIGH line.
+Unmapped-HIGH denials name the finding id. A secret, a note body, or “verification gate complete” is a second scanner dump.
 
 ## Use it somewhere new
 

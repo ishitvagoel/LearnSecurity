@@ -13,7 +13,7 @@ The practice is not a website you attack. `resolve(role, field)` returns true fo
 
 Stay inside `labs/7.2/7.2-lab`. Fake roles (`member`, `service`) and field names (`display_name`, `secret_internal`). `secret_internal` is a lab label, not a production token. It does not open FastAPI or GraphQL. Do not query a public GraphQL host, an employer API, or a live clinic.
 
-Do not paste this exercise onto a public site, employer board, or live clinic portal.
+Do not paste this exercise onto a public GraphQL host, employer EHR, or live clinic API.
 
 What must not happen: **a member resolves `secret_internal`**. `resolve("member", "secret_internal")` returns true.
 

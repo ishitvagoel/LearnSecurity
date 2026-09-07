@@ -40,7 +40,7 @@ log_denied reason=crash_body_redacted crash_id=cr_85e app=release
 
 A note body, a patient name, or a live crash payload on that sample is already a second crash dump.
 
-A matching crash report in the alert already puts the crash body in the pager.
+The crash report belongs in the lab folder; the pager only needs the crash id.
 
 ## What the framework does vs what you still have to check
 

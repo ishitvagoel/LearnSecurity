@@ -37,9 +37,9 @@ A web-filter SQLi rule does not bind `fetch_sql`.
 log_denied reason=sql_error_spike tenant=tA request_id=req_55q stmt=fetch_note
 ```
 
-Bound values leak from a sample that still has a note body, a full SQL string with values, a real email, or “the web filter caught it.”
+A note body, a full SQL string with values, a real email, or “the web filter caught it” in the sample still holds bound values.
 
-Putting a full SQL string with values in the alert leaves the query text in the pager too.
+A full SQL string with values in the concat-deny ticket is the query itself.
 
 A web-filter SQLi rule does not bind the query helper. Report paths and ORDER BY builders still concatenate if you only bound `fetch_sql`. If a replica was not restored, treat it as the same leftover, not a separate “eventual consistency” pass.
 
@@ -49,7 +49,7 @@ A web filter will page on syntax errors and stay silent when the values were con
 
 ## Practice
 
-Log ids, a reason, and the statement name — never bound values. Keep a note body, a full SQL string with values, and a real email off the SQL deny line.
+Log ids, a reason, and the statement name — never bound values. A note body, a full SQL string with values, or a real email still holds those values.
 
 ## Use it somewhere new
 

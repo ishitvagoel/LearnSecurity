@@ -40,7 +40,7 @@ log_denied reason=incident_closed_without_recovery id=INC-12 recovery=todo
 
 Leave the note body, the session token, and “check-in complete” off that incident sample.
 
-A matching note in the incident alert already puts the incident text in the pager.
+Close-without-recovery tickets should name INC-12, not quote the note.
 
 ## What the framework does vs what you still have to check
 
@@ -58,7 +58,7 @@ A reopen notice must say *recovery still todo*, not only “assert False.” Und
 log_denied reason=incident_closed_without_recovery id=INC-12 recovery=todo
 ```
 
-A note body, a session token, or “check-in complete” has no place on this incident line.
+Incident denials name INC-12 and recovery=todo. A note body, a session token, or “check-in complete” is the note again.
 
 ## Use it somewhere new
 

@@ -37,9 +37,9 @@ A log product does not consume the token.
 log_denied reason=invite_replay_denied invite_id=inv_66a request_id=req_66a
 ```
 
-The mailer secret is sitting in the sample if it still holds the token, a note body, a real email, or “the mailer said clicked once.”
+A sample that still contains the token, a note body, a real email, or “the mailer said clicked once” is a second mailer dump.
 
-Putting the raw token in the alert opens a 4.3 hole in the pager.
+A raw token in the second-accept ticket is a 4.3 leftover.
 
 A unique-index screenshot does not consume the token. A mail vendor dashboard will show “link clicked once” and stay silent when `/accept` still returns true the second time. Detection must observe **second `accept` false**, not a click counter. Password-reset consume is another once-token; the seat is not taken until that path is named.
 
@@ -53,7 +53,7 @@ If a human sees “link already used,” announce it in text a screen reader can
 
 ## Practice
 
-Name ids and a reason for the second accept — never the token. Keep the token, a note body, and a real email off the second-accept line.
+Name ids and a reason for the second accept — never the token. The token, a note body, or a real email would expose the mailer secret.
 
 ## Use it somewhere new
 

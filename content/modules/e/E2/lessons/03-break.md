@@ -13,7 +13,7 @@ The practice is not a website you attack. `isolation_enforced` treats Report-Onl
 
 Stay inside `labs/E2/e2-lab`. Fake header dicts only go through `isolation_enforced(headers)`. It does not open a browser. Do not load a live page, probe a public host, or scan someone else’s site as this exercise.
 
-Do not paste this exercise onto a public site, employer board, or live clinic portal.
+Do not paste this exercise onto a public site, employer CDN, or live clinic portal.
 
 What must not happen: **Report-Only treated as isolation**. `isolation_enforced({"Content-Security-Policy-Report-Only": "default-src 'none'"})` returns true.
 

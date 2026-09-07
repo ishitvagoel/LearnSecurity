@@ -40,7 +40,7 @@ log_denied reason=tool_denied agent=sum-1 tool=exec_sql
 
 A note body, a transcript, or "check-in complete" on that sample is already the model output twice.
 
-A matching transcript in the tool-deny alert already puts the model output in the pager.
+Quote the tool name in the ticket. Quoting the transcript hands the model output to whoever is on call.
 
 ## What the framework does vs what you still have to check
 

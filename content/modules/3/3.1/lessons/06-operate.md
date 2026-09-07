@@ -39,7 +39,7 @@ log_denied reason=confidential_field event=note_read request_id=req_81aa
 
 Skip `tenant-A-secret-body`, a note body, a patient chart, and a card number on the sample; they reprint the secret.
 
-A matching redaction-miss line in the alert already puts the secret in the pager.
+A redaction-miss line in the ticket is another copy of the secret for whoever is on call.
 
 ## What the framework does vs what you still have to check
 
@@ -51,7 +51,7 @@ If operators see a redaction-miss badge, do not encode it as color only. Give it
 
 ## Practice
 
-A usable deny line has ids and a reason, not the blob. `tenant-A-secret-body`, a note body, a patient chart, or a card number would put the secret back on the deny line.
+A usable deny line has ids and a reason, not the blob. `tenant-A-secret-body`, a note body, a patient chart, or a card number still holds the secret.
 
 ## Use it somewhere new
 

@@ -42,7 +42,7 @@ Extra-key denials fire without the document.
 log_denied reason=unknown_field_rejected field=is_admin subject=user_71e request_id=req_71e
 ```
 
-Skip the PATCH JSON, a real email, and a live trace against a public API — they leak the mutation.
+PATCH denials should log the unknown key — not the JSON, a real email, or a live trace against a public API.
 
 ## Use it somewhere new
 
