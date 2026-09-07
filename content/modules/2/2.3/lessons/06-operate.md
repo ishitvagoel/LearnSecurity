@@ -33,7 +33,7 @@ A log product and a checklist name do not restore this rule. Report-Only CSP is 
 cookie_denied reason=missing_httponly name=sc_session env=staging request_id=req_4b11
 ```
 
-`synthetic-session`, a note body, or a personal mailbox on that sample already leaks the dummy session.
+`synthetic-session`, a note body, or a personal mailbox has no place on that sample.
 
 ## Practice
 

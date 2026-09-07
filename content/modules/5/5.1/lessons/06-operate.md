@@ -53,7 +53,7 @@ If a human sees “account deleted,” announce it in text a screen reader can s
 
 ## Practice
 
-Log ids, a reason, and the store name — never the leftover body. A note body, a personal email, or a “privacy law handled” slogan would reprint the leftover body.
+Log ids, a reason, and the store name — never the leftover body. A note body, a personal email, or a “privacy law handled” slogan would put leftover analytics in the warehouse ticket.
 
 ## Use it somewhere new
 

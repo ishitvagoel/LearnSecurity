@@ -36,7 +36,7 @@ A review-bot vendor does not reject `eval` on a user string.
 log_denied reason=review_block_eval pr=pr_92e file=export.py
 ```
 
-An eval payload, a note body, or a live GitHub trace on that sample already dumps the eval.
+The eval leaks from a sample that still has an eval payload, a note body, or a live GitHub trace.
 
 Putting the eval payload or note bodies in the alert leaves a second copy (logging topic / interpreter topic) in the pager.
 
@@ -52,7 +52,7 @@ A GitHub checks dashboard will show the formatter green and stay silent when `re
 log_denied reason=review_block_eval pr=pr_92e file=export.py
 ```
 
-Eval payloads, note bodies, or a live GitHub trace would reprint the eval in the log.
+Eval payloads, note bodies, or a live GitHub trace would dump the eval onto the review-deny line.
 
 ## Use it somewhere new
 

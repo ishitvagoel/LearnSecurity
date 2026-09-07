@@ -38,7 +38,7 @@ GitHub’s audit log is not this lab’s trusted core. A maturity dashboard will
 log_denied reason=merge_blocked_no_tm pr=123
 ```
 
-A token, a real org name, a threat-model body, or “Gate 10 complete” on that sample already dumps the org name.
+The org name leaks from a sample that still has a token, a real org name, a threat-model body, or “Gate 10 complete.”
 
 ## What the framework does vs what you still have to check
 

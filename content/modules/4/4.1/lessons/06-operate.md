@@ -37,7 +37,7 @@ A log product does not kill the cookie.
 log_denied reason=session_after_delete user_id=alice request_id=req_41lc
 ```
 
-A note body, a personal email, a production cookie, or “single sign-on revoked it” on that sample already leaks the leftover session.
+If the sample still has a note body, a personal email, a production cookie, or “single sign-on revoked it,” the leftover session is already in the ticket.
 
 Paste a note body into the session-after-delete alert and the pager now stores leftover notes.
 

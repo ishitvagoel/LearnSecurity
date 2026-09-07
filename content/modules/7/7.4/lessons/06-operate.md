@@ -36,7 +36,7 @@ A zero-trust sticker does not stop a leftover cookie from being the worker.
 log_denied reason=worker_identity_wrong expected=worker-sc job_id=job_74e
 ```
 
-Alice’s session cookie, note bodies, a live broker dump, or a real clinician token on that sample already dumps the principal.
+Keep Alice’s session cookie, note bodies, a live broker dump, and a real clinician token off the sample; they dump the principal.
 
 Putting Alice’s cookie or note bodies in the alert leaves a second copy in the pager.
 
@@ -48,7 +48,7 @@ A task dashboard will show task success and stay silent when the task still used
 
 ## Practice
 
-Log the job id and expected principal — never the leftover cookie. Alice’s session cookie, note bodies, or a live broker dump would reprint the principal.
+Log the job id and expected principal — never the leftover cookie. Alice’s session cookie, note bodies, or a live broker dump would dump the principal onto the worker-deny line.
 
 ## Use it somewhere new
 

@@ -43,7 +43,7 @@ The failed decision is client-chosen company treated as binding. The leftover ha
 log_denied reason=body_tenant_mismatch session=A body=B actor=alice
 ```
 
-A note body, a GraphQL document dump, or “course gate complete” would reprint the GraphQL document.
+A note body, a GraphQL document dump, or “course gate complete” would dump the GraphQL document onto the tenant-deny line.
 
 ## Use it somewhere new
 

@@ -38,7 +38,7 @@ A canary dashboard will show rollout percent and stay silent when CI’s `boot_o
 log_denied reason=prod_debug_forbidden env=prod debug=true deploy=sc-12
 ```
 
-A stack trace, a secret, or “check-in complete” on that sample already dumps the incident.
+The incident leaks from a sample that still has a stack trace, a secret, or “check-in complete.”
 
 A matching boot trace in the alert already puts the stack in the pager.
 
@@ -58,7 +58,7 @@ A refused boot must say *prod debug refused*, not only “assert False.” Do no
 log_denied reason=prod_debug_forbidden env=prod debug=true deploy=sc-12
 ```
 
-A stack trace, a secret, or “check-in complete” would reprint the incident in the log.
+A stack trace, a secret, or “check-in complete” would dump the incident onto the boot-deny line.
 
 ## Use it somewhere new
 

@@ -50,7 +50,7 @@ A cloud key dashboard will show “key enabled” and stay silent when the colum
 
 ## Practice
 
-A deny line needs ids and a reason, not plaintext. Plaintext `secret`, a real SSN, or “AES handled” would reprint the key material.
+A deny line needs ids and a reason, not plaintext. Plaintext `secret`, a real SSN, or “AES handled” would turn the deny line into a second key store.
 
 ## Use it somewhere new
 

@@ -37,7 +37,7 @@ A process-monitor product does not turn `sh -c` into argv.
 log_denied reason=child_process_anomaly program=sh request_id=req_61a
 ```
 
-A note body, a real email, a patient filename, or a shell-punctuation cookbook on that sample already dumps the argv.
+The argv is sitting in the sample if it still holds a note body, a real email, a patient filename, or a shell-punctuation cookbook.
 
 Paste the full argv with a patient filename into the alert and the pager now holds a second copy of the 3.1 / 5.1 leak.
 
@@ -49,7 +49,7 @@ A host product will page on `sh` children and stay silent when the Python helper
 
 ## Practice
 
-A deny line can hold ids, a reason, and the program basename — not the export name. A note body, a real email, a patient filename, or a shell cookbook would reprint the argv.
+A deny line can hold ids, a reason, and the program basename — not the export name. A note body, a real email, a patient filename, or a shell cookbook would dump the argv onto the child-process line.
 
 ## Use it somewhere new
 

@@ -51,7 +51,7 @@ What the tool cannot do: purge without a prefix that includes company can widen 
 cache_denied reason=tenant_mismatch path=/notes/n1 bound=tB logged=tA request_id=req_9f2e
 ```
 
-`tenant-A-note` or a raw body on that sample already leaks the cached note.
+The sample still holds `tenant-A-note` or a raw body; that is the cached note twice.
 
 ## Practice
 
