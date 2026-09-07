@@ -25,8 +25,8 @@ If the broken install still passes, you never compared digests.
 |---|---|
 | Normal | match → may install (may pass on both) |
 | Wrong input | mismatch → not install; broken files must fail |
-| Abuse | Unsure hashes are deny (fail closed) |
-| Not claimed | Live npm; provenance builders; the ship gate; that the pin is benign |
+| Abuse | Unsure hashes are deny |
+| Not claimed | Live npm; provenance builders; the ship check; that the pin is benign |
 
 `test_hash_mismatch_refuses_install` is what stops `install_ok` from being a tautology.
 
@@ -45,7 +45,7 @@ A CycloneDX filename in CI is not `install_ok("aaa", "bbb")`. This practice neve
 - That provenance is authentic
 - Cache isolation
 - Index policy against lookalike packages
-- The ship gate complete
+- This page as a finished ship check-in
 
 ## Practice
 

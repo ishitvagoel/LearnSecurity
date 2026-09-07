@@ -55,7 +55,7 @@ Use parameterized queries. A scanner name for this family is a weakness label, n
 | What's already wrong | `fetch_sql` returns a concatenated `str` |
 | Trigger | `fetch_sql` with a hostile `note_id` (class of extra grammar, not a cookbook) |
 | What it costs | Secrecy and integrity of other companies’ rows |
-| How you stop it | Bound API `(sql, params)`; fail closed if you cannot bind |
+| How you stop it | Bound API `(sql, params)`; deny if you cannot bind |
 | How you notice | `sql_error_spike` by statement name; never the body |
 | How you recover | Stop the concatenating path; rotate database passwords; restore if rows were changed |
 | Not the lesson | A scanner name, a famous-bugs mnemonic, or a live dump |

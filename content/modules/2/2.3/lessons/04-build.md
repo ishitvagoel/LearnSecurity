@@ -7,7 +7,7 @@
 
 `js_read_session` must return `None` when `httponly` is true. Put simply, the cookie model actually branches on the flag — not a comment, not Report-Only CSP, not “we will encode later.”
 
-Repair the notes-app `sc_session`: if the cookie is a session token, set HttpOnly, and make the script reader fail closed. Moving the token into `localStorage` enlarges the script share. Prefixes (`__Host-`) and `Secure` are sister rules; they do not replace this branch.
+Repair the notes-app `sc_session`: if the cookie is a session token, set HttpOnly, and make the script reader deny when it cannot tell. Moving the token into `localStorage` enlarges the script share. Prefixes (`__Host-`) and `Secure` are sister rules; they do not replace this branch.
 
 ## Picture: one rule restored
 

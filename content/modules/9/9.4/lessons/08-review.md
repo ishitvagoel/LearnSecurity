@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Read `labs/9.4/9.4-lab/vulnerable/` as the ship gate. Does `ship_ok([HIGH], {})` still return true?
+Read `labs/9.4/9.4-lab/vulnerable/` as the ship check. Does `ship_ok([HIGH], {})` still return true?
 
 Read `ship_ok` and the HIGH×map row. A dashboard screenshot does not own the HIGH. A TODO to map later does not satisfy `test_unmapped_high_blocks_ship`.
 
@@ -23,16 +23,16 @@ flowchart TD
 
 An unmapped HIGH still has to be denied. If the change never joins to the coverage map, that always-ship leftover is still open. A scanner screenshot does not replace that check.
 
-Who-is-allowed blind spots are review and isolation tests — name them, do not skip `test_unmapped_high_blocks_ship`. Do not claim the verification gate is done. Do not scan a live tenant to prove the finding.
+Who-is-allowed blind spots are review and isolation tests — name them, do not skip `test_unmapped_high_blocks_ship`. Do not treat this as a finished check-in. Do not scan a live tenant to prove the finding.
 
 ## Problems to find (name them yourself)
 
 - `ship_ok` true on unmapped HIGH
 - Suppressions without owner
-- SAST offered as the verification gate
+- SAST offered as the check-in
 - No blind-spot note for who-is-allowed / IDOR
 
-Also reject: live tenants; closing findings without re-running `test_unmapped_high_blocks_ship`; keys in learner notes; claiming the verification gate is done.
+Also reject: live tenants; closing findings without re-running `test_unmapped_high_blocks_ship`; keys in learner notes; claiming this page as a finished check-in.
 
 ## Common mix-ups
 

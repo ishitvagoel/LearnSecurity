@@ -47,7 +47,7 @@ A famous-bugs nickname for “script in HTML” is awareness after the cause, no
 | What's already wrong | `render` concatenates the body into a tag |
 | Trigger | `render` of a string that contains `<` |
 | What it costs | Integrity of the HTML document; then 2.3 if cookies are readable by script |
-| How you stop it | Encode at the sink for this context; fail closed if you cannot |
+| How you stop it | Encode at the sink for this context; deny if you cannot |
 | How you notice | `stored_field_review` by field name; never the title body if it is patient data |
 | How you recover | Patch encoding; draw again; rotate cookies if they were readable by script |
 | Not the lesson | A bug-list sticker, a content-security header, or an attack recipe |

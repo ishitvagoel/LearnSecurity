@@ -23,7 +23,7 @@ flowchart TD
 
 Status-only still is not coverage. If the change never checks `req` **and** `asserts_isolation`, that false-assurance path is still open. A checklist PDF without that check is still the same problem.
 
-HTTP-200 tests that lie about isolation are 9.3. Exceptions without expiry are E6. Do not claim the verification gate.
+HTTP-200 tests that lie about isolation are 9.3. Exceptions without expiry are E6. This page does not finish a check-in.
 
 ## Problems to find (name them yourself)
 
@@ -32,13 +32,13 @@ HTTP-200 tests that lie about isolation are 9.3. Exceptions without expiry are E
 - No isolation assert
 - Exceptions without expiry
 
-Also reject: live portals; closing findings without re-running `test_status_only_row_is_not_coverage`; keys in learner notes; claiming the verification gate; obsolete mobile-level stickers as the current bar.
+Also reject: live portals; closing findings without re-running `test_status_only_row_is_not_coverage`; keys in learner notes; claiming this page as a check-in; obsolete mobile-level stickers as the current bar.
 
 ## Common mix-ups
 
 - Checklist certification exists as a sticker
 - Number of tests is coverage
-- Green build is the verification gate
+- Green build is the check-in
 - A later draft of a practice guide is final
 - Old mobile-level stickers are current levels
 

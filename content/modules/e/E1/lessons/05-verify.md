@@ -25,7 +25,7 @@ If the broken tool gate still passes, `exec_sql` was never denied.
 |---|---|
 | Normal | `search_notes` → may run (may pass on both) |
 | Wrong input | `exec_sql` → None; broken files must fail |
-| Abuse | Unknown tools still deny (fail closed) |
+| Abuse | Unknown tools still deny |
 | Not claimed | A live vendor API; a famous-bugs dashboard; a check-in; that `search_notes` is encoded |
 
 The test `test_exec_sql_tool_is_denied` is there so always-run `run_tool` still fails.

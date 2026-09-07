@@ -45,7 +45,7 @@ If you parse JSON then re-serialize, the MAC is over a different document than t
 | What's already wrong | `accept("", body, secret)` is true |
 | Trigger | An unauthenticated POST to the callback URL |
 | What it costs | Forged share, billing, or lab-result events |
-| How you stop it | MAC over the raw body; fail closed on a missing or wrong sig |
+| How you stop it | MAC over the raw body; deny on a missing or wrong sig |
 | How you notice | `webhook_sig_fail` |
 | How you recover | Rotate the disposable secret; review accepted events |
 

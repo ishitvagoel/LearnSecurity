@@ -47,7 +47,7 @@ SameSite set for purpose is a helper, not complete. Anti-forgery tokens (or extr
 | What's already wrong | `allow_share` returns true whenever `session_cookie` is true |
 | Trigger | `allow_share` with foreign origin and `token=None` |
 | What it costs | Integrity of share grants; unwanted collaborator |
-| How you stop it later | Cookie and origin == expected and matching token; fail closed |
+| How you stop it later | Cookie and origin == expected and matching token; deny if any is missing |
 | How you notice later | `foreign_origin_post_denied` by expected host; never the cookie |
 | How you recover later | Keep deny; revoke grants created in the window |
 | Out of scope | SameSite as the definition, CORS, or a live third-party page |

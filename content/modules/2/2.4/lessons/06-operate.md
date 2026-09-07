@@ -15,7 +15,7 @@ flowchart TD
   Dup -->|yes| Metric["idempotency_replay += 1"]
   Metric --> Log["reason=replay key_id=k1 note=n1 no body"]
   Dup -->|no| Insert[Insert one share]
-  StoreDown[Key store unreachable] --> Closed["Fail closed — do not insert"]
+  StoreDown[Key store unreachable] --> Closed["Deny — do not insert"]
 ```
 
 On a broken retry, deny the extra insert, and keep the note out of the log.

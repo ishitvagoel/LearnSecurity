@@ -25,8 +25,8 @@ If the broken coverage row still passes, `asserts_isolation` was never required.
 |---|---|
 | Normal | Isolation assert → covered (may pass on both) |
 | Wrong input | status-only → not covered; broken files must fail |
-| Abuse | Unsure flags are not coverage (fail closed; leftover if not in this check) |
-| Not claimed | A real checklist assessment; the verification gate; a later draft of a practice guide; that the named test actually isolates |
+| Abuse | Unsure flags are not coverage (leftover if not in this check) |
+| Not claimed | A real checklist assessment; this check-in; a later draft of a practice guide; that the named test actually isolates |
 
 The test `test_status_only_row_is_not_coverage` is there so membership without an isolation assert cannot count as coverage.
 
@@ -45,7 +45,7 @@ An `AUTHZ-1` cell is not `covered(..., [{"asserts_isolation": False}])`. This pr
 - That an extra advanced row is covered
 - Mobile storage on a device (8.2)
 - A later draft of a practice guide as a product
-- The verification gate complete
+- This page as a finished check-in
 
 ## Practice
 

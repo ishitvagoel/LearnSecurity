@@ -54,7 +54,7 @@ Lock so a limited seat cannot be booked twice. The check is sequential consume-o
 | What's already wrong | `accept` always returns true |
 | Trigger | `accept("t1")` then `accept("t1")` |
 | What it costs | Integrity of membership; extra member or replay after revoke |
-| How you stop it later | Write used in the same step; fail closed on store errors |
+| How you stop it later | Write used in the same step; deny on store errors |
 | How you notice later | `invite_replay_denied`; never the raw token |
 | How you recover later | Keep deny; remove surprise members |
 | Out of scope | A famous-bugs list, HTTP 400, or a live race harness |

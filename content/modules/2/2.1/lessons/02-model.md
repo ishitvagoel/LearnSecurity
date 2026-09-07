@@ -65,7 +65,7 @@ Write at least four rows a peer could turn into practice files. Fake identifiers
 
 1. Duplicate `"tenant"` keys (the messy two-company object).
 2. Unique keys, honest company A (the clean object).
-3. Missing company field (fail closed).
+3. Missing company field (deny).
 4. Same bytes later parsed by a second library (look-again trigger; not claimed fixed by this practice).
 
 Do not add public JSON bombs or live Unicode weaponization. Those are out of scope, not extra credit.

@@ -25,7 +25,7 @@ If the broken admission still passes, cluster-admin was never the case under tes
 |---|---|
 | Normal | `app` → may run (may pass on both) |
 | Wrong input | cluster-admin → cannot run; broken files must fail |
-| Abuse | Unknown roles still deny (fail closed) |
+| Abuse | Unknown roles still deny |
 | Not claimed | A live managed cluster; a CIS score; a check-in; that `"app"` is least privilege |
 
 `test_cluster_admin_pod_is_denied` catches a `pod_ok` that never returns false.

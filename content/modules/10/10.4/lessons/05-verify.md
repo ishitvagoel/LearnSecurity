@@ -25,7 +25,7 @@ If the broken boot check also passes, prod-plus-debug was never exercised.
 |---|---|
 | Normal | prod without debug → may boot (may pass on both) |
 | Wrong input | prod plus debug → not boot; broken files must fail |
-| Abuse | Unsure flags are not a production boot (fail closed; leftover if not in this check) |
+| Abuse | Unsure flags are not a production boot (leftover if not in this check) |
 | Not claimed | Live compose; a canary; a check-in; other flags |
 
 `test_prod_debug_must_not_boot` is the case that an always-yes `boot_ok` cannot survive.
@@ -43,7 +43,7 @@ A `NODE_ENV` string in compose is not `boot_ok("prod", True)`. This practice nev
 
 - Feature flags cannot turn off authorization
 - Admin is not on all interfaces
-- Migrations fail closed
+- Migrations deny when unsure
 - Rollback actually works
 - Extra version leakage is gone (extra, advanced work)
 - That you finished a check-in

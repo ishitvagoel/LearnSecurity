@@ -54,7 +54,7 @@ Use fake labels. Do not use real patient findings.
 | Live GitHub org / public SCA | Course rules |
 | A maturity score as `ship_ok` | Measurement, not the check |
 | Empty dashboard as isolation | Wrong observation |
-| A draft supply-chain paper as a certificate | Draft; not the verification gate |
+| A draft supply-chain paper as a certificate | Draft; not the check-in |
 
 ## Practice
 
@@ -62,4 +62,4 @@ Map every HIGH before you ship. Keep the answer keys closed. `labs/9.4/9.4-lab` 
 
 ## What this page is not doing
 
-Do not try live-target scanning. Do not use real patient findings. This page does not finish the verification gate.
+Do not try live-target scanning. Do not use real patient findings. This page does not finish a check-in.

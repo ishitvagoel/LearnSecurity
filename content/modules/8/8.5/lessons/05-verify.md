@@ -25,7 +25,7 @@ If the broken crash report still passes, the body substring was never redacted.
 |---|---|
 | Normal | Honest crash still has a `stack` key (may pass on both) |
 | Wrong input | `'secret'` not in `str(crash_report('secret'))`; broken files must fail |
-| Abuse | Unsure values are not attached (fail closed; leftover if not in this check) |
+| Abuse | Unsure values are not attached (leftover if not in this check) |
 | Not claimed | A real crash console; the public store; screenshot pipelines; vendor DLP |
 
 The test `test_crash_report_omits_note_body` is there so a report that includes the body still fails.

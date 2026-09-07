@@ -54,7 +54,7 @@ Use a standard-library MAC. Module 5.4 already said TLS proves a hop; this rule 
 | What's already wrong | `accept` is always true |
 | Trigger | An unauthenticated POST to the callback URL |
 | What it costs | Forged local event; in production, forged share, billing, or lab-result |
-| How you stop it | MAC over the raw body; fail closed on a missing or wrong sig |
+| How you stop it | MAC over the raw body; deny on a missing or wrong sig |
 | How you notice | `webhook_sig_fail`; never the body or secret |
 | How you recover | Keep deny; rotate the disposable secret if events escaped |
 | Not the lesson | A famous-bugs nickname, TLS as authenticity, or a live Stripe POST |

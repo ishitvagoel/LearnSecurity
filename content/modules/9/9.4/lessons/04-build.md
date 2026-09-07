@@ -9,7 +9,7 @@ A green dashboard does not map HIGH findings. Turning off the scanner does not w
 
 Do this: `ship_ok` **is false unless every HIGH `id` is a key in `mappings`**. Missing map is deny. In short, that join — not “the dashboard is green,” not a vendor default setup, not a maturity score.
 
-Restore the notes app’s ship gate with this: HIGH plus empty map → deny. LOW and INFO without a map may still ship in this lab — name that leftover. A scanner job running does not map HIGH findings. A green dashboard does not count as a mapping.
+Restore the notes app’s ship check with this: HIGH plus empty map → deny. LOW and INFO without a map may still ship in this lab — name that leftover. A scanner job running does not map HIGH findings. A green dashboard does not count as a mapping.
 
 ## Picture: HIGH gate
 
@@ -42,7 +42,7 @@ By default, if you are unsure whether a HIGH is mapped, deny. A quiet Friday das
 - A vendor default setup.
 - A maturity score.
 - Reachability without an owner.
-- The verification gate.
+- This check-in.
 - Dependabot as the map.
 - A severity downgrade with no evidence.
 

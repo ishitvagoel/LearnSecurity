@@ -90,4 +90,4 @@ SCA: a CVE versus a function you actually call. Fifty unmapped HIGHs is the same
 
 ## What this page is not doing
 
-Do not use live GitHub orgs, claiming the verification gate is done, and weaponized scanner dumps. Answer keys are not on this site.
+Do not use live GitHub orgs, claiming this page as a finished check-in, and weaponized scanner dumps. Answer keys are not on this site.

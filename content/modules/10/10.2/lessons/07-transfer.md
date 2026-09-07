@@ -60,4 +60,4 @@ Compare digests; do not install by name. Keep the answer keys closed. `labs/10.2
 
 ## What this page is not doing
 
-Do not run live-registry attacks. Do not use real org poison-PRs. This page does not finish the ship gate.
+Do not run live-registry attacks. Do not use real org poison-PRs. This page does not finish the ship check-in.

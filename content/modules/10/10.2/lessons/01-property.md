@@ -78,4 +78,4 @@ GitHub Actions third-party `action@v1`. `npm install` in a prod pod is the same 
 
 ## What this page is not doing
 
-Do not use live registry attacks. This page does not finish the ship gate. Answer keys are not on this site.
+Do not use live registry attacks. This page does not finish the ship check-in. Answer keys are not on this site.

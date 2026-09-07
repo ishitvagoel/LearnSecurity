@@ -47,7 +47,7 @@ An awareness list that names “path walk” is not the failing check.
 | What's already wrong | `resolve` returns join without a prefix check |
 | Trigger | `resolve("../outside")` |
 | What it costs | Who is allowed to pick *which object*; the host store can change |
-| How you stop it | Canonicalize then prefix; fail closed if uncertain |
+| How you stop it | Canonicalize then prefix; deny if uncertain |
 | How you notice | `path_escape_denied`; never the raw filename if it is a patient id |
 | How you recover | Deny; audit; restore if a file landed outside |
 | Not the lesson | An awareness-list name, UUID rename, or a host-file hunt |

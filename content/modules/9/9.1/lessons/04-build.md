@@ -44,7 +44,7 @@ If you are unsure whether a test asserts isolation, it does not count. Attaching
 - A tracker done column.
 - Copied-wholesale checklists.
 - A later draft of a practice guide used as a sticker.
-- The verification gate complete.
+- This page as a finished check-in.
 - A test named `test_authz` that asserts HTTP 200 (9.3).
 
 ## What the tool cannot do

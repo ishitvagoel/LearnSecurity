@@ -7,7 +7,7 @@
 
 The notes app lets an owner share a note. Sharing changes who may later read that note. A client that times out, a double-click, or a later worker that delivers the same job again will try again. HTTP does not make POST happen once.
 
-> For a share of note `n1`, two requests that carry the same idempotency key must produce **one** share. Timeouts and retries are part of whether the share list stays honest, not only a smoother click. If the key store is missing or unknown, fail closed for this high-impact action: do not insert a second share because the store was slow.
+> For a share of note `n1`, two requests that carry the same idempotency key must produce **one** share. Timeouts and retries are part of whether the share list stays honest, not only a smoother click. If the key store is missing or unknown, deny this high-impact action: do not insert a second share because the store was slow.
 
 What must not happen is a **second grant**: `share_note("n1", idempotency_key="k1")` twice must not leave `share_count() == 2`. That extra row is someone else on the note who nobody meant to add.
 
@@ -41,7 +41,7 @@ flowchart LR
 
 What you trust is the **idempotency store** keyed by (actor, key) holding the first outcome. The key the client sends is data: it must be scoped to the sharer so company B cannot replay company A’s key onto a different note. Clocks may skew; do not use wall time as the only uniqueness.
 
-If the key store is down, fail closed for share (do not insert “just this once”). A lost first response still needs a path so the owner can see the existing share without minting another key.
+If the key store is down, deny the extra share (do not insert “just this once”). A lost first response still needs a path so the owner can see the existing share without minting another key.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

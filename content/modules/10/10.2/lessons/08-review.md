@@ -23,7 +23,7 @@ flowchart TD
 
 A digest mismatch still has to be denied. If the change never checks digest equality, that always-install leftover is still open. An SBOM screenshot without that check is still the same problem.
 
-Unpinned Actions are a sibling grain. Secrets in fork pull requests are 5.3. Do not claim the ship gate. Do not fetch a live package to prove the finding.
+Unpinned Actions are a sibling grain. Secrets in fork pull requests are 5.3. This page does not finish the ship check-in. Do not fetch a live package to prove the finding.
 
 ## Problems to find (name them yourself)
 
@@ -32,7 +32,7 @@ Unpinned Actions are a sibling grain. Secrets in fork pull requests are 5.3. Do 
 - Secrets in PR from forks
 - SBOM generated but never used
 
-Also reject: live registry attacks; installing without re-running `test_hash_mismatch_refuses_install`; keys in learner notes; claiming the ship gate.
+Also reject: live registry attacks; installing without re-running `test_hash_mismatch_refuses_install`; keys in learner notes; claiming this page as a check-in.
 
 ## Common mix-ups
 
@@ -41,7 +41,7 @@ Also reject: live registry attacks; installing without re-running `test_hash_mis
 - A provenance badge is the app’s hash check
 - Generating an SBOM verifies installs
 - Dependabot is `install_ok`
-- The ship gate follows from a green audit job
+- A green audit job is not the ship check-in
 
 ## Use it somewhere new
 

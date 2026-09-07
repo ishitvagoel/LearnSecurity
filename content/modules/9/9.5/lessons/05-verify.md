@@ -25,7 +25,7 @@ If the broken close still passes, missing retest was never what kept the finding
 |---|---|
 | Normal | `retest pass` → may close (may pass on both) |
 | Wrong input | `retest None` → cannot close; broken files must fail |
-| Abuse | Missing, fail, or scheduled still deny (fail closed) |
+| Abuse | Missing, fail, or scheduled still deny |
 | Not claimed | A live testing-guide list run; a check-in; a severity calculator; that pass hit the same URL |
 
 `test_cannot_close_without_retest` is the case that keeps `close_finding` from being a rubber stamp.

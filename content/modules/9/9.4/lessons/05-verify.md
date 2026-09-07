@@ -26,7 +26,7 @@ If the broken ship check still passes, the empty owner map was never a block.
 | Normal | Mapped HIGH may ship (may pass on both) |
 | Wrong input | Unmapped HIGH → not ship; broken files must fail |
 | Abuse | Suppression with no owner is still deny (leftover if not in this check) |
-| Not claimed | A real GitHub tenant; the verification gate; a maturity score; that the mapped requirement is the right row |
+| Not claimed | A real GitHub tenant; this check-in; a maturity score; that the mapped requirement is the right row |
 
 `test_unmapped_high_blocks_ship` exists so `ship_ok` cannot ignore an unmapped HIGH.
 
@@ -45,7 +45,7 @@ A scanner name in a workflow is not `ship_ok([HIGH], {})`. This practice never o
 - That an isolation test exists
 - Live SCA reachability
 - Dependency confusion as an advanced leftover
-- That the verification gate is done
+- That this check-in is done
 
 ## Practice
 

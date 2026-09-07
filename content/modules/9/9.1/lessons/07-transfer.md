@@ -50,7 +50,7 @@ Use fake labels. Do not use real patient names. Also name the mobile storage row
 |---|---|
 | “The checklist is imported” | Inventory, not coverage |
 | Live clinic / real patient data | Course rules |
-| A later draft of a practice guide as certified | Still a draft; not the verification gate |
+| A later draft of a practice guide as certified | Still a draft; not the check-in |
 | Green CI as AUTHZ-1 | Wrong observation |
 | An old mobile-level sticker as current | Obsolete labels |
 
@@ -60,4 +60,4 @@ Attach an isolation test to the HIPAA done column. Keep the answer keys closed. 
 
 ## What this page is not doing
 
-Do not try live-target governance products. Do not use real patient charts. This page does not finish the verification gate.
+Do not try live-target governance products. Do not use real patient charts. This page does not finish a check-in.

@@ -7,7 +7,7 @@
 
 The practice is not a public repo you scan. `ship_ok` takes findings and a map: it returns true for every pair, so an unmapped finding already ships.
 
-> An unmapped HIGH must not ship. If `ship_ok([{"id": "F1", "sev": "HIGH"}], {})` returns true, the ship gate has failed as a security control.
+> An unmapped HIGH must not ship. If `ship_ok([{"id": "F1", "sev": "HIGH"}], {})` returns true, the ship check has failed as a security control.
 
 ## Where you may practice
 
@@ -56,7 +56,7 @@ The coverage lesson already said status is not coverage. This check is **unowned
 | How you stop it later | Block unmapped HIGH; a mapped HIGH you accept still needs an exception with an expiry |
 | How you notice later | `unmapped_high_blocks`; never the payload |
 | How you recover later | Map it or fix it; do not hide it quietly |
-| Out of scope | A product name, live GitHub, or claiming the verification gate is done |
+| Out of scope | A product name, live GitHub, or claiming this page as a finished check-in |
 
 A web framework will still ship if CI’s `ship_ok` is always true. Empty map plus HIGH is deny.
 

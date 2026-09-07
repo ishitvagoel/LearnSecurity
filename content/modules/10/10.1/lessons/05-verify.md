@@ -25,7 +25,7 @@ Green on both sides means `threat_model` was never the failing case.
 |---|---|
 | Normal | `{"threat_model": "TM-12"}` → may merge (may pass on both) |
 | Wrong input | `{}` → not merge; empty threat-model change must fail merge |
-| Abuse | Unsure or empty ids are deny (fail closed; leftover if not in this check) |
+| Abuse | Unsure or empty ids are deny (leftover if not in this check) |
 | Not claimed | A live GitHub org; Gate 10; a maturity score; that TM-12 covers this change |
 
 `test_merge_requires_threat_model_id` exists because a `merge_ok` that always returns true would ship.

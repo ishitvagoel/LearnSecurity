@@ -40,7 +40,7 @@ If the hashes do not match, do not install. An SBOM listing the name does not me
 - Dependabot.
 - A provenance badge.
 - A CISA-style SBOM file treated as verify.
-- The ship gate complete.
+- This page as a finished ship check-in.
 - Pinning malware (leftover).
 - npm audit.
 - pip without a hash requirement as the trusted check.

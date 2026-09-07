@@ -25,7 +25,7 @@ If the broken log line also passes, you never searched for the body substring.
 |---|---|
 | Normal | After the fix, the line still names the event (`note_read`) |
 | Wrong input | Body substring absent; redaction marker present; broken files must fail |
-| Abuse | Unsure values are not logged (fail closed; leftover if not in this check) |
+| Abuse | Unsure values are not logged (leftover if not in this check) |
 | Not claimed | All places covered; production logs clean; exception middleware safe; access logs safe |
 
 The test `test_note_body_is_not_logged` calls `log_event` with the synthetic body and asserts the substring is absent. That check is there so a confidential field in this log still fails.

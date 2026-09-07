@@ -13,7 +13,7 @@ Coverage is a check over tests. The row must name a test that **asserts isolatio
 
 What must not happen: **a status-only row counted as AUTHZ-1 coverage**. That is honesty of the proof you show before a release. If the checkbox is green while the isolation test is missing, company-B holes ship with a green sticker.
 
-A pasted industry checklist is inventory. It is not a tailored matrix. The usual web/API checklist is a backbone you still have to map. An extra advanced row — for example “permission changes apply immediately, including serializers” — still needs a test if you raise it. A development-practice guide that says “test the running code against the requirements” is vocabulary, not a finished verification gate. A later draft of that guide stays a **draft**.
+A pasted industry checklist is inventory. It is not a tailored matrix. The usual web/API checklist is a backbone you still have to map. An extra advanced row — for example “permission changes apply immediately, including serializers” — still needs a test if you raise it. A development-practice guide that says “test the running code against the requirements” is vocabulary, not a finished check-in. A later draft of that guide stays a **draft**.
 
 ## Picture: coverage is a question about the test
 
@@ -78,4 +78,4 @@ The mobile storage row from 8.2. A clinic HIPAA “done” column.
 
 ## What this page is not doing
 
-Do not use live checklist portals. This page does not finish the verification gate. Do not use weaponized scans. This page does not finish a check-in. Answer keys are not on this site.
+Do not use live checklist portals. This page does not finish a check-in. Do not use weaponized scans. This page does not finish a check-in. Answer keys are not on this site.
