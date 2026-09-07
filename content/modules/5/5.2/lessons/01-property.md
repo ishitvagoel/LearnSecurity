@@ -72,7 +72,7 @@ python3 -m pytest labs/5.2/5.2-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: an SSN column labeled “encrypted” that is Base64.
+An SSN column labeled “encrypted” that is Base64.
 
 ## What this page is not doing
 

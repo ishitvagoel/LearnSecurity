@@ -11,7 +11,7 @@ Do not log plaintext bodies. Do not paste an SSN into the ticket.
 
 ## Picture: CI is a detector
 
-A known-plaintext Base64 hit still has to show up as an alert. The body does not belong in the pager. Then re-protect and rotate keys.
+When you see a known-plaintext Base64 hit, the body does not belong in the pager. Then re-protect and rotate keys.
 
 ```mermaid
 flowchart TD
@@ -38,7 +38,7 @@ log_denied reason=encoding_labeled_encryption field=body request_id=req_52cr
 
 Not: plaintext `secret`, a real SSN, or “AES handled.”
 
-If your alert includes plaintext `secret` or an SSN, the pager now holds a second copy.
+Putting plaintext `secret` or an SSN in the alert leaves a second copy in the pager.
 
 A green “encryption enabled” tile is not that check. Re-run `test_protect_is_not_mere_encoding` after any `protect` change. Workers and export jobs are other paths of the same rule — inventory them before claiming recover.
 
@@ -54,7 +54,7 @@ Write a log line (ids, reason, no body). Reject any line that includes plaintext
 
 ## Use it somewhere new
 
-A clinic example: notice Base64 SSN columns; do not paste values into the ticket. Do not query a live clinic system.
+Notice Base64 SSN columns; do not paste values into the ticket. Do not query a live clinic system.
 
 ## What this page is not doing
 

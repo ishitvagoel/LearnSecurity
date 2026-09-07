@@ -54,7 +54,7 @@ python3 -m pytest labs/3.4/3.4-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: `add_guardian` stops at 3. Invite redemption stops at one use. Export quotas cap bytes or rows — same shape, different cell.
+`add_guardian` stops at 3. Invite redemption stops at one use. Export quotas cap bytes or rows — same shape, different cell.
 
 ## Can people still use it
 

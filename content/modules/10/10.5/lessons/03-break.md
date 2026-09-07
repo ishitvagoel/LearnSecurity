@@ -15,7 +15,7 @@ Stay inside `labs/10.5/10.5-lab`. The incident is a synthetic dict. Do **not** c
 
 Do not paste this exercise onto a public clinic, employer dashboard, or live hospital portal “to see what happens.”
 
-`close_incident` is supposed to require **recovery done and logs that are not a note store**. A paging ack, time-to-detect, untested backups, and framework access logs are not enough.
+`close_incident` is supposed to require **recovery done and logs that are not a note store** — not A paging ack, time-to-detect, untested backups, or framework access logs.
 
 Picture an optimistic closer while the actor is still in — “alerts stopped so we closed INC-12,” a green SIEM treated as recover, or a known-exploited listing treated as close.
 

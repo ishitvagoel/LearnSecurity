@@ -17,7 +17,7 @@ Do not paste this exercise onto a public API, employer clinic, or live EHR.
 
 What must not happen: **`user.update(body)` sets `is_admin`**. After `apply(user, {"is_admin": true})`, `is_admin` is true.
 
-Picture a signed-in member sending extra JSON keys — a clinic “Edit profile” form, a generated client that serializes every model field, or a GraphQL mutation that still binds `input: JSON`. `apply` is supposed to be a **per-action writable-field contract**. An OpenAPI file, a SPA that omits the admin checkbox, and FastAPI ignoring extras on a nested model you never applied are not enough.
+Picture a signed-in member sending extra JSON keys — a clinic “Edit profile” form, a generated client that serializes every model field, or a GraphQL mutation that still binds `input: JSON`. `apply` is supposed to be a **per-action writable-field contract** — not An OpenAPI file, a SPA that omits the admin checkbox, or FastAPI ignoring extras on a nested model you never applied.
 
 ## Picture: every key becomes a column
 

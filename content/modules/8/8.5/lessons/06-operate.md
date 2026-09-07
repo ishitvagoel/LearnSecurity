@@ -9,7 +9,7 @@ A new SDK version can turn “include extras” back on after `crash_report` was
 
 ## Picture: body in telemetry is a signal
 
-A crash-report redaction miss still has to show up as an alert. Keep the crash body out of the pager. The alert should name the crash. Then purge the vendor copy.
+When you see a crash-report redaction miss, name the crash. Leave the crash body off the pager. Then purge the vendor copy.
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ log_denied reason=crash_body_redacted crash_id=cr_85e app=release
 
 Not: a note body, a patient name, or a live crash payload.
 
-If your alert includes the matching report, the pager now has the crash body too.
+Putting the matching report in the alert puts the crash body in the pager too.
 
 ## What the framework does vs what you still have to check
 
@@ -60,7 +60,7 @@ Reject any line that includes a note body, a patient name, or a live crash paylo
 
 ## Use it somewhere new
 
-A clinic example: notice a crash that would have included a fake name; do not attach the report body to the ticket. Do not call a live vendor.
+Notice a crash that would have included a fake name; do not attach the report body to the ticket. Do not call a live vendor.
 
 ## What this page is not doing
 

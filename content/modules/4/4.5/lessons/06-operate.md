@@ -40,7 +40,7 @@ Reject any line that includes a raw JWT, a note body, or “OpenID Connect handl
 
 ## Use it somewhere new
 
-A clinic example: notice FHIR tokens with the wrong hospital aud; do not paste the token into the ticket. Do not query a live FHIR server.
+Notice FHIR tokens with the wrong hospital aud; do not paste the token into the ticket. Do not query a live FHIR server.
 
 ## What this page is not doing
 

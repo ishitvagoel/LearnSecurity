@@ -60,7 +60,7 @@ python3 -m pytest labs/7.4/7.4-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: stop treating “the batch job runs on the hospital VLAN” as worker identity.
+Stop treating “the batch job runs on the hospital VLAN” as worker identity.
 
 ## What can still go wrong
 

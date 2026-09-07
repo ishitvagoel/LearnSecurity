@@ -9,7 +9,7 @@ A closer can still mark Done after `close_incident` was “fixed once.” Do not
 
 ## Picture: illegal close is a signal
 
-A close that skipped recovery still has to show up as an alert. Keep the incident note out of the pager. The alert should name the incident. Then reopen and run the restore drill.
+When you see a close that skipped recovery, name the incident. Leave the incident note off the pager. Then reopen and run the restore drill.
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ log_denied reason=incident_closed_without_recovery id=INC-12 recovery=todo
 
 Not: a note body, a session token, or “assurance gate complete.”
 
-If your alert includes the matching note, the pager now has the incident text too.
+Putting the matching note in the alert puts the incident text in the pager too.
 
 ## What the framework does vs what you still have to check
 
@@ -62,7 +62,7 @@ Reject any line that includes a note body, a session token, or “assurance gate
 
 ## Use it somewhere new
 
-A clinic example: reopen the SIEM-green ticket; do not paste note text into chat. Do not query a live SIEM.
+Reopen the SIEM-green ticket; do not paste note text into chat. Do not query a live SIEM.
 
 ## What this page is not doing
 

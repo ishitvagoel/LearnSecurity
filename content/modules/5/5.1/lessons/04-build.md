@@ -70,7 +70,7 @@ python3 -m pytest labs/5.1/5.1-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: delete the patient row and the appointment-card notes in one runbook, not a later ticket.
+Delete the patient row and the appointment-card notes in one runbook, not a later ticket.
 
 ## What can still go wrong
 

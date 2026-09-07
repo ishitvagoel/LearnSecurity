@@ -39,7 +39,7 @@ Reject any line that includes a card number, a note body, or “questionnaire co
 
 ## Use it somewhere new
 
-A clinic example: deny the second copay; do not paste billing dumps into the ticket. Do not hit a live processor.
+Deny the second copay; do not paste billing dumps into the ticket. Do not hit a live processor.
 
 ## Can people still use it
 

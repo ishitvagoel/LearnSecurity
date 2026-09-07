@@ -61,7 +61,7 @@ In `labs/5.4/5.4-lab`, mark `channel.py`. Write down hop, who may assert proto, 
 
 ## Use it somewhere new
 
-A clinic example: mutual TLS as service identity. A page’s API client `https://` is not the API socket.
+Mutual TLS as service identity. A page’s API client `https://` is not the API socket.
 
 ## What can still go wrong
 

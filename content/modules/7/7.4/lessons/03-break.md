@@ -17,7 +17,7 @@ Do not attach to a public broker. Do not probe an employer queue. Do not probe a
 
 What must not happen: a user session accepted as worker identity. `exporter({"user_session": "alice", "service": None})` returns `"alice"`.
 
-Picture a leftover cookie stuffed into a job, or inherited request context — a clinic “Export overnight” that copies the clinician cookie into the task so “the job knows who asked.” `exporter` authenticates as a **named service principal**. A private network, an “internal” queue, and a zero-trust dashboard are not enough.
+Picture a leftover cookie stuffed into a job, or inherited request context — a clinic “Export overnight” that copies the clinician cookie into the task so “the job knows who asked.” `exporter` authenticates as a **named service principal** — not A private network, an “internal” queue, or a zero-trust dashboard.
 
 ## Picture: leftover cookie wins
 

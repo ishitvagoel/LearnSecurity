@@ -17,7 +17,7 @@ Do not replay a production access token, an employer OpenID tenant, or a classma
 
 What must not happen: a JWT with the wrong audience accepted as a notes-app session. `accept_token({"sub": "alice", "aud": "other-api"}, "securecollab-api")` is true.
 
-Picture a **bearer minted for another API** (confused deputy), or a stolen token whose `sub` looks familiar. The **resource server compares `aud` to itself** before who-is-allowed. Authlib “verify signature,” Auth0, and “we turned on OpenID Connect” are not enough.
+Picture a **bearer minted for another API** (confused deputy), or a stolen token whose `sub` looks familiar. The **resource server compares `aud` to itself** before who-is-allowed — not Authlib “verify signature,” Auth0, or “we turned on OpenID Connect”.
 
 ## Picture: sub without aud
 
@@ -68,7 +68,7 @@ Do not weaken it to “the JWT verifies.” A setup error is not proof the rule 
 
 ## Use it somewhere new
 
-A clinic example: FHIR token minted for another hospital’s API. Predict without leaving this directory. Do not hit a live FHIR endpoint.
+FHIR token minted for another hospital’s API. Predict without leaving this directory. Do not hit a live FHIR endpoint.
 
 ## What this page is not doing
 

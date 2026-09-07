@@ -11,7 +11,7 @@ Do not paste the matching line into Slack, a ticket, or a lesson note.
 
 ## Picture: alert on the substring, then purge
 
-A redaction miss still has to show up as an alert. The secret does not belong in the pager. Then purge the line.
+When you see a redaction miss, the secret does not belong in the pager. Then purge the line.
 
 ```mermaid
 flowchart TD
@@ -39,7 +39,7 @@ log_denied reason=confidential_field event=note_read request_id=req_81aa
 
 Not: `tenant-A-secret-body`, a note body, a patient chart, or a card number.
 
-If your alert includes the matching line, the pager now has the secret too.
+Putting the matching line in the alert puts the secret in the pager too.
 
 ## What the framework does vs what you still have to check
 
@@ -55,7 +55,7 @@ Write a log line (ids, reason, no body). Reject any line that includes `tenant-A
 
 ## Use it somewhere new
 
-A clinic example: notice chart text in appointment logs; purge without pasting the chart into the ticket. Support tools: notice a paste of the body into a ticket the same way.
+Notice chart text in appointment logs; purge without pasting the chart into the ticket. Support tools: notice a paste of the body into a ticket the same way.
 
 ## What this page is not doing
 

@@ -17,7 +17,7 @@ Do not open a live upload folder. Do not walk a public filesystem. Do not point 
 
 What must not happen: a resolved path leaves the lab folder. `resolve("../outside")` joins onto `/tmp/sc-lab` and, after canonicalize, is no longer that folder or a child of it.
 
-Picture a member who can supply an upload **filename** (data) — a clinic scan name, a zip member path (leftover, later and harder), or `UploadFile.filename` from Starlette. `resolve` joins, canonicalizes, and denies unless the object is still `/tmp/sc-lab` or a child. A denylist of `..`, a UUID filename sticker, and `Content-Type` are not enough.
+Picture a member who can supply an upload **filename** (data) — a clinic scan name, a zip member path (leftover, later and harder), or `UploadFile.filename` from Starlette. `resolve` joins, canonicalizes, and denies unless the object is still `/tmp/sc-lab` or a child — not A denylist of `..`, a UUID filename sticker, or `Content-Type`.
 
 ## Picture: join without canonicalize
 

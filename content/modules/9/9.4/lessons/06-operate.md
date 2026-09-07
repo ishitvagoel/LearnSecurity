@@ -9,7 +9,7 @@ A new rule can fire a new HIGH after `ship_ok` was “fixed once.” Do not log 
 
 ## Picture: unmapped HIGH is a signal
 
-A blocked ship still has to show up as an alert. Keep the finding payload out of the pager. The alert should name the finding id. Then map or fix.
+When you see a blocked ship, name the finding id. Leave the finding payload off the pager. Then map or fix.
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ log_denied reason=unmapped_high_blocks finding=F1 sev=HIGH
 
 Not: a secret, a note body, or “verification gate complete.”
 
-If your alert includes the matching scanner snippet, the pager now has the finding payload too.
+Putting the matching scanner snippet in the alert puts the finding payload in the pager too.
 
 ## What the framework does vs what you still have to check
 
@@ -62,7 +62,7 @@ Reject any line that includes a secret, a note body, or “verification gate com
 
 ## Use it somewhere new
 
-A clinic example: block a release with fifty unmapped HIGHs; do not paste scanner snippets with fake patient text into Slack. Do not scan a live org.
+Block a release with fifty unmapped HIGHs; do not paste scanner snippets with fake patient text into Slack. Do not scan a live org.
 
 ## What this page is not doing
 

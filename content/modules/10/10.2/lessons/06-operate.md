@@ -9,7 +9,7 @@ A cache can serve old bytes after `install_ok` was “fixed once.” Do not log 
 
 ## Picture: digest mismatch is a signal
 
-A denied mismatch still has to show up as an alert. Keep the registry token out of the pager. The alert should name the package and the two digest ids. Then pin known-good.
+When you see a denied mismatch, name the package and the two digest ids. Leave the registry token off the pager. Then pin known-good.
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ log_denied reason=hash_mismatch_denied pkg=demo expected=aaa got=bbb
 
 Not: a token, a private key, or “ship gate complete.”
 
-If your alert includes the registry token, the pager now has a secret too.
+Putting the registry token in the alert puts a secret in the pager too.
 
 ## What the framework does vs what you still have to check
 
@@ -62,7 +62,7 @@ Reject any line that includes a token, a private key, or “ship gate complete.�
 
 ## Use it somewhere new
 
-A clinic example: deny npm in the prod pod; do not paste `.npmrc` into the ticket. Do not fetch a live package.
+Deny npm in the prod pod; do not paste `.npmrc` into the ticket. Do not fetch a live package.
 
 ## What this page is not doing
 

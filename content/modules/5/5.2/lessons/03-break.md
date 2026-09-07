@@ -17,7 +17,7 @@ Do not decode a live column. Do not decode an employer backup. Do not decode a c
 
 What must not happen: `protect()` is reversible as Base64 to `secret`.
 
-Picture an honest storage reader — a database admin, a stolen disk, a backup tape — who can read the column — a clinic SSN column named `ssn_encrypted` that is still encoding. `protect` is not reversible as encoding. HTTPS, volume encryption, a column rename, and “we use AES” in a README are not enough.
+Picture an honest storage reader — a database admin, a stolen disk, a backup tape — who can read the column — a clinic SSN column named `ssn_encrypted` that is still encoding. `protect` is not reversible as encoding — not HTTPS, volume encryption, a column rename, or “we use AES” in a README.
 
 ## Picture: reversible encoding
 

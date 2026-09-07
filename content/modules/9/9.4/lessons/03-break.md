@@ -15,7 +15,7 @@ Stay inside `labs/9.4/9.4-lab`. The finding id is the synthetic string `F1`. No 
 
 Do not paste this exercise onto a public GitHub org, employer dashboard, or live clinic “to see what the scanner finds.”
 
-`ship_ok` is supposed to **join scanner output to the coverage map**. A vendor default setup, a default Semgrep ruleset, and an empty dashboard are not enough.
+`ship_ok` is supposed to **join scanner output to the coverage map** — not A vendor default setup, a default Semgrep ruleset, or an empty dashboard.
 
 Alert fatigue plus an always-true gate — “code scanning is on and the dashboard is noisy so we ship Fridays,” a maturity score on a slide, or fifty unmapped HIGHs treated as probable false positives.
 
@@ -70,7 +70,7 @@ Run from `labs/9.4/9.4-lab` if a collection at the repo root picks up `site/`. D
 
 ## Use it somewhere new
 
-A clinic example: fifty unmapped HIGHs — predict without leaving this directory. Do not scan a live GitHub org.
+Fifty unmapped HIGHs — predict without leaving this directory. Do not scan a live GitHub org.
 
 ## What this page is not doing
 

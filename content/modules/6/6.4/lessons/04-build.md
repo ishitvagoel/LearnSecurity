@@ -55,7 +55,7 @@ Do not `open()` a path outside the lab folder.
 
 ## Use it somewhere new
 
-A clinic example: stop joining the original scan filename onto a public folder; canonicalize then prefix.
+Stop joining the original scan filename onto a public folder; canonicalize then prefix.
 
 ## What this page is not doing
 

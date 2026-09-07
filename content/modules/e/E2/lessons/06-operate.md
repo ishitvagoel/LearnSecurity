@@ -45,7 +45,7 @@ Reject any line that includes HTML, a note body, or “check-in 7 complete.”
 
 ## Use it somewhere new
 
-A clinic example: deny the HIPAA-header claim; do not paste the page source into the ticket. Do not load a live page.
+Deny the HIPAA-header claim; do not paste the page source into the ticket. Do not load a live page.
 
 ## Can people still use it
 

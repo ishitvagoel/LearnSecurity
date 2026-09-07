@@ -17,7 +17,7 @@ Do not load-test a public host. Do not probe an employer export API. Do not prob
 
 What must not happen: unbounded exports (fourth allowed in the lab window). `allow(4)` returns true.
 
-Picture a scripted session that calls export more than three times — a clinic “Export all” button, notification fan-out, or GraphQL aliases later in 7.1. `allow` is a **per-person resource account** on the export action. A disabled button in the browser, an IP bucket, a CAPTCHA, and autoscaling are not enough.
+Picture a scripted session that calls export more than three times — a clinic “Export all” button, notification fan-out, or GraphQL aliases later in 7.1. `allow` is a **per-person resource account** on the export action — not A disabled button in the browser, an IP bucket, a CAPTCHA, or autoscaling.
 
 ## Picture: allow always true
 

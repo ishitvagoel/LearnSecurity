@@ -64,7 +64,7 @@ python3 -m pytest labs/9.5/9.5-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: keep the finding open until the isolation check is green. The lab still uses fake strings.
+Keep the finding open until the isolation check is green. The lab still uses fake strings.
 
 ## What can still go wrong
 

@@ -62,7 +62,7 @@ python3 -m pytest labs/5.4/5.4-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: stop treating the page’s `https://` API client as the API socket; bind cookies and HSTS to the server scheme.
+Stop treating the page’s `https://` API client as the API socket; bind cookies and HSTS to the server scheme.
 
 ## What can still go wrong
 

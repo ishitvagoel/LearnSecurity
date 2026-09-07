@@ -15,7 +15,7 @@ Stay inside `labs/11/11-lab`. The practice is `revoke` / `read` over synthetic p
 
 Do not paste this exercise onto a public clinic, employer dashboard, or live hospital portal “to see what happens.”
 
-`read` is supposed to consult **owner or grant on every access**. pytest coverage, a YAML evidence pack, and FastAPI 200 are not enough.
+`read` is supposed to consult **owner or grant on every access** — not pytest coverage, a YAML evidence pack, or FastAPI 200.
 
 Picture a former collaborator with a cached note id — “we hit DELETE so the next chart read is fine,” a capstone scanner treated as an assurance stamp, or HTTP 200 on revoke treated as the check.
 

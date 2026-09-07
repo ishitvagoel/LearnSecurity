@@ -79,7 +79,7 @@ Tie the check to a second grant, not to an awareness-list name.
 
 ## Use it somewhere new
 
-A clinic example: two POSTs book the last slot. Payment capture and invite tokens are the same shape. A worker that delivers a share again after membership was taken back is a later topic.
+Two POSTs book the last slot. Payment capture and invite tokens are the same shape. A worker that delivers a share again after membership was taken back is a later topic.
 
 ## Can people still use it
 

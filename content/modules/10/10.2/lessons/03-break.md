@@ -15,7 +15,7 @@ Stay inside `labs/10.2/10.2-lab`. The digests are the synthetic strings `aaa` an
 
 Do not publish, typosquat, or pull a real tarball “to see what happens.” Do not paste this exercise onto a public registry, employer CI, or live clinic.
 
-`install_ok` is supposed to require **expected digest equals got digest**. npm audit, Dependabot, SBOM generation, and framework install defaults are not enough.
+`install_ok` is supposed to require **expected digest equals got digest** — not npm audit, Dependabot, SBOM generation, or framework install defaults.
 
 Picture a name-only install — “the prod pod runs npm install so we always get latest,” a CycloneDX file treated as verify, or a provenance badge treated as the hash check.
 
@@ -70,7 +70,7 @@ Run from `labs/10.2/10.2-lab` if a collection at the repo root picks up `site/`.
 
 ## Use it somewhere new
 
-A clinic example: predict npm install in a prod pod — still only this directory. Do not typosquat a live registry.
+Predict npm install in a prod pod — still only this directory. Do not typosquat a live registry.
 
 ## What this page is not doing
 

@@ -58,7 +58,7 @@ python3 -m pytest labs/6.7/6.7-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: stop treating “Export” as unlimited; count on the server.
+Stop treating “Export” as unlimited; count on the server.
 
 ## What can still go wrong
 

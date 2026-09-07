@@ -46,7 +46,7 @@ Reject any line that includes the PATCH JSON, a real email, or a live trace agai
 
 ## Use it somewhere new
 
-A clinic example: notice `is_staff` extras; do not attach the patient document to the ticket. Do not probe a live EHR.
+Notice `is_staff` extras; do not attach the patient document to the ticket. Do not probe a live EHR.
 
 ## Can people still use it
 

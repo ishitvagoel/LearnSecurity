@@ -17,7 +17,7 @@ Do not probe a public host. Do not probe an employer load balancer. Do not probe
 
 What must not happen: client-supplied `X-Forwarded-Proto: https` on an `http` socket counts as TLS. `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` returns true.
 
-Picture a **cleartext client who can set `X-Forwarded-Proto`** — a clinic page whose API client uses `https://` while the API socket is `http`, or a dashboard “Force HTTPS” toggle that trusts the header. `channel_is_https` binds the **server socket**, not a client claim. A server flag that trusts proxy headers, a CDN product name, and HSTS preload are not enough.
+Picture a **cleartext client who can set `X-Forwarded-Proto`** — a clinic page whose API client uses `https://` while the API socket is `http`, or a dashboard “Force HTTPS” toggle that trusts the header. `channel_is_https` binds the **server socket**, not a client claim — not A server flag that trusts proxy headers, a CDN product name, or HSTS preload.
 
 ## Picture: header OR socket
 
@@ -74,7 +74,7 @@ Record the failing test `test_client_forwarded_proto_is_not_tls`. Do not weaken 
 
 ## Use it somewhere new
 
-A clinic example: page API client `https://` versus API socket `http`. Predict without leaving this directory. Do not probe a live clinic.
+Page API client `https://` versus API socket `http`. Predict without leaving this directory. Do not probe a live clinic.
 
 ## What this page is not doing
 

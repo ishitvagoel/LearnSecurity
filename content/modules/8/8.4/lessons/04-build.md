@@ -65,7 +65,7 @@ python3 -m pytest labs/8.4/8.4-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: stop pointing the debug flavor at production FHIR.
+Stop pointing the debug flavor at production FHIR.
 
 ## What can still go wrong
 

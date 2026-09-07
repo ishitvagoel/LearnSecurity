@@ -71,7 +71,7 @@ In `labs/4.1/4.1-lab`, mark `lifecycle.py`. Write down state, leftover, allow or
 
 ## Use it somewhere new
 
-A clinic example: a clinician leaves. Shared workstation cookie. Disabling the badge does not name the chart session.
+A clinician leaves. Shared workstation cookie. Disabling the badge does not name the chart session.
 
 ## What can still go wrong
 

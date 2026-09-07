@@ -81,7 +81,7 @@ Tie the check to `session_valid` after delete, not to a single-sign-on product n
 
 ## Use it somewhere new
 
-A clinic example: a clinician leaves. The badge is disabled. The chart cookie must die the same day.
+A clinician leaves. The badge is disabled. The chart cookie must die the same day.
 
 ## What this page is not doing
 

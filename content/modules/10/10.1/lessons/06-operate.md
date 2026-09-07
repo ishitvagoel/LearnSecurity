@@ -9,7 +9,7 @@ A new identity change can land after `merge_ok` was “fixed once.” Do not log
 
 ## Picture: missing threat-model id is a signal
 
-A blocked merge still has to show up as an alert. Keep the threat-model body out of the pager. The alert should name the change. Then add the threat-model id.
+When you see a blocked merge, name the change. Leave the threat-model body off the pager. Then add the threat-model id.
 
 ```mermaid
 flowchart TD
@@ -60,7 +60,7 @@ Reject any line that includes a token, a real org name, a threat-model body, or 
 
 ## Use it somewhere new
 
-A clinic example: block an identity change with no threat-model id; do not paste HIPAA training certificates into the ticket. Do not change a live org.
+Block an identity change with no threat-model id; do not paste HIPAA training certificates into the ticket. Do not change a live org.
 
 ## What this page is not doing
 

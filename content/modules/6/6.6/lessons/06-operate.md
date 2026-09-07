@@ -11,7 +11,7 @@ Do not log tokens (4.3) or email addresses as if they were public ids. Do not pa
 
 ## Picture: second accept is a signal
 
-A second accept after consume still has to show up as an alert. Keep the token out of the pager. Then remove the extra membership.
+When you see a second accept after consume, leave the token off the pager. Then remove the extra membership.
 
 ```mermaid
 flowchart TD
@@ -39,7 +39,7 @@ log_denied reason=invite_replay_denied invite_id=inv_66a request_id=req_66a
 
 Not: the token, a note body, a real email, or “the mailer said clicked once.”
 
-If your alert includes the raw token, you have opened a 4.3 hole in the pager.
+Putting the raw token in the alert opens a 4.3 hole in the pager.
 
 A green “unique index” tile is not that check. A mail vendor dashboard will show “link clicked once” and stay silent when `/accept` still returns true the second time. Detection must observe **second `accept` false**, not a click counter. Password-reset consume is another path of the same family — inventory it before claiming recover.
 
@@ -57,7 +57,7 @@ Write a log line (ids, reason, no token). Reject any line that includes the toke
 
 ## Use it somewhere new
 
-A clinic example: notice guardian-invite replays; do not paste the mail link into the ticket. Do not click a live invite.
+Notice guardian-invite replays; do not paste the mail link into the ticket. Do not click a live invite.
 
 ## What this page is not doing
 

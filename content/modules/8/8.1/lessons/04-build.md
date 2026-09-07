@@ -61,7 +61,7 @@ python3 -m pytest labs/8.1/8.1-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: stop treating a client `hipaaMode` checkbox as the server’s BAA switch.
+Stop treating a client `hipaaMode` checkbox as the server’s BAA switch.
 
 ## What can still go wrong
 

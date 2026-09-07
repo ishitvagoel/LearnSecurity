@@ -59,7 +59,7 @@ python3 -m pytest labs/5.5/5.5-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: stop treating the search box as SQL text; bind the lookup string.
+Stop treating the search box as SQL text; bind the lookup string.
 
 ## What can still go wrong
 

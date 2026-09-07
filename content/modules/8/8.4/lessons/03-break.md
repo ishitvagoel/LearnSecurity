@@ -17,7 +17,7 @@ Do not paste this exercise onto a public host, employer clinic, or live store AP
 
 What must not happen: **a debug build is allowed to call production export**. `api_allowed("debug", "ok")` returns true.
 
-Picture a leaked debug APK or student flavor — a clinic debug flavor that reuses the prod application id and API key so testers can “hit real data.” `api_allowed` is supposed to be a **server channel check** next to 8.1 attest. R8, Play App Signing, root detection, and `minifyEnabled` are not enough.
+Picture a leaked debug APK or student flavor — a clinic debug flavor that reuses the prod application id and API key so testers can “hit real data.” `api_allowed` is supposed to be a **server channel check** next to 8.1 attest — not R8, Play App Signing, root detection, or `minifyEnabled`.
 
 ## Picture: attest string is enough
 

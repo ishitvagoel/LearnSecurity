@@ -40,7 +40,7 @@ Reject any line that includes a note body, a real email, “awareness list handl
 
 ## Use it somewhere new
 
-A clinic example: notice a 4th guardian; do not paste the child’s name into the ticket. Invite tokens: notice a second redeem without logging the token.
+Notice a 4th guardian; do not paste the child’s name into the ticket. Invite tokens: notice a second redeem without logging the token.
 
 ## Can people still use it
 

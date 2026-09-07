@@ -45,7 +45,7 @@ Reject any line that includes a full deep-link URL, an OAuth code, or a live Int
 
 ## Use it somewhere new
 
-A clinic example: notice `as=doctor` probes on local practice files; do not attach the link to the ticket. Do not send Intents at a live EHR.
+Notice `as=doctor` probes on local practice files; do not attach the link to the ticket. Do not send Intents at a live EHR.
 
 ## Can people still use it
 

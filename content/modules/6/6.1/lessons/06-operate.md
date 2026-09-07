@@ -11,7 +11,7 @@ Do not log export names that are patient identifiers. Do not paste filenames int
 
 ## Picture: unexpected child is a signal
 
-A child whose program is `sh` after an export-helper change still has to show up as an alert. Keep filenames out of the pager. Then kill the child and remove the concatenating path.
+When you see a child whose program is `sh` after an export-helper change, leave filenames off the pager. Then kill the child and remove the concatenating path.
 
 ```mermaid
 flowchart TD
@@ -39,7 +39,7 @@ log_denied reason=child_process_anomaly program=sh request_id=req_61a
 
 Not: a note body, a real email, a patient filename, or a shell-punctuation cookbook.
 
-If your alert includes the full argv with a patient filename, the pager now holds a second copy (3.1 / 5.1).
+Putting the full argv with a patient filename in the alert leaves a second copy (3 in the pager.1 / 5.1).
 
 A green “no shell in CI grep” tile is not that check. Plugin loaders are other paths of the same check — inventory them before claiming recover.
 
@@ -53,7 +53,7 @@ Write a log line (ids, reason, program basename, no name). Reject any line that 
 
 ## Use it somewhere new
 
-A clinic example: notice unexpected `sh` under the export worker; do not paste filenames into the ticket if they are patient ids. Do not hunt a live worker.
+Notice unexpected `sh` under the export worker; do not paste filenames into the ticket if they are patient ids. Do not hunt a live worker.
 
 ## What this page is not doing
 

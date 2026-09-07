@@ -15,7 +15,7 @@ Stay inside `labs/E1/e1-lab`. The names are synthetic strings `exec_sql` / `sear
 
 Do not paste this exercise onto a public API, employer agent, or live hospital summarizer "to see what happens."
 
-`run_tool` is supposed to **allow-list the name in the runtime**. Library defaults, a system prompt, and the web framework itself are not enough.
+`run_tool` is supposed to **allow-list the name in the runtime** — not Library defaults, a system prompt, or the web framework itself.
 
 Picture prompt injection in a note plus a confused-deputy runtime — "the system prompt forbids SQL," a retrieval corpus treated as what you trust, or a famous-bugs mapping treated as mediation.
 

@@ -17,7 +17,7 @@ Do not run `SELECT` against a live cluster, an employer replica, or a public dem
 
 What must not happen: the app database role can read another company’s rows. `can_select("app", "tB", "tA") is True`.
 
-Picture a forgotten `WHERE`, later injection into SQL, or a stolen app password that can call `can_select` as company `tB` — an all-powerful `DATABASE_URL`. The runtime role is a **second** check after who-is-allowed. SQLAlchemy, a private network, and “we use microservices” are not enough.
+Picture a forgotten `WHERE`, later injection into SQL, or a stolen app password that can call `can_select` as company `tB` — an all-powerful `DATABASE_URL`. The runtime role is a **second** check after who-is-allowed — not SQLAlchemy, a private network, or “we use microservices”.
 
 ## Picture: a role with no same-company check
 

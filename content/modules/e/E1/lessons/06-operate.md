@@ -9,7 +9,7 @@ A new tool can still be registered after the allow-list was "set once." Do not l
 
 ## Picture: denied tool is a signal
 
-A denied tool still has to show up as an alert. Keep the transcript out of the pager. The alert should name the tool. Then revoke leftover agent credentials.
+When you see a denied tool, name the tool. Leave the transcript off the pager. Then revoke leftover agent credentials.
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ log_denied reason=tool_denied agent=sum-1 tool=exec_sql
 
 Not: a note body, a transcript, or "assurance gate complete."
 
-If your alert includes the matching transcript, the pager now has the model output too.
+Putting the matching transcript in the alert puts the model output in the pager too.
 
 ## What the framework does vs what you still have to check
 
@@ -62,7 +62,7 @@ Reject any line that includes a note body, a transcript, or "assurance gate comp
 
 ## Use it somewhere new
 
-A clinic example: deny the chart-SQL tool; do not paste the prompt into the ticket. Do not call a live model.
+Deny the chart-SQL tool; do not paste the prompt into the ticket. Do not call a live model.
 
 ## What this page is not doing
 

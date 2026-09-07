@@ -15,7 +15,7 @@ Stay inside `labs/8.5/8.5-lab`. The body is the synthetic string `secret`. No li
 
 Do not paste a real note body into a crash SDK “to see what happens.” Do not paste this exercise onto a public crash project, employer dashboard, or live clinic.
 
-`crash_report` is supposed to redact before send — the same extra-copy problem as logs (3.1) and vendors (5.1), now on a phone. A crash product set to “automatic,” a completed store privacy form, and HTTPS to the vendor are not enough.
+`crash_report` is supposed to redact before send — the same extra-copy problem as logs (3.1) and vendors (5.1), now on a phone — not A crash product set to “automatic,” a completed store privacy form, or HTTPS to the vendor.
 
 Picture a crash-platform operator or a logcat reader — a clinic “debug crash includes the last chart so support can reproduce,” a tracker SDK extra, or a leftover `READ_LOGS` path.
 
@@ -72,7 +72,7 @@ Run from `labs/8.5/8.5-lab` if a collection at the repo root picks up `site/`. D
 
 ## Use it somewhere new
 
-A clinic example: predict a crash that includes a fake patient name — still only this directory. Do not call a live crash product.
+Predict a crash that includes a fake patient name — still only this directory. Do not call a live crash product.
 
 ## What this page is not doing
 

@@ -17,7 +17,7 @@ Do not harvest Referer from a live site, dump production access logs, or replay 
 
 What must not happen: a session started from a query-string token. `session_from_request({"access_token": "secret"}, {}, None)` returns `"secret"`.
 
-A **log operator**, a Referer collector, or someone with a shared screenshot who can read the URL is enough. The parser ignores query tokens. FastAPI query binding, the Next.js address bar, and “we use JWTs” are not enough.
+A **log operator**, a Referer collector, or someone with a shared screenshot who can read the URL is enough. The parser ignores query tokens — not FastAPI query binding, the Next.js address bar, or “we use JWTs”.
 
 TLS encrypts the hop. It does not encrypt the access log.
 

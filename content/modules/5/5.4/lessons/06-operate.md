@@ -9,7 +9,7 @@ A misconfigured proxy can start trusting `*` again after `channel_is_https` was 
 
 ## Picture: header versus socket mismatch is a signal
 
-A client header saying https while the socket is http still has to show up as an alert. Keep cookies out of the pager. Then revoke the cleartext cookies.
+When you see a client header saying https while the socket is http, leave cookies off the pager. Then revoke the cleartext cookies.
 
 ```mermaid
 flowchart TD
@@ -37,7 +37,7 @@ log_denied reason=header_https_socket_http socket=http request_id=req_54ch
 
 Not: a session cookie, a note body, or “HSTS handled.”
 
-If your alert includes a session cookie or a note body, the pager now holds a second copy.
+Putting a session cookie or a note body in the alert leaves a second copy in the pager.
 
 A green “Force HTTPS” tile is not that check. Re-run `test_client_forwarded_proto_is_not_tls` after any proxy change. Page `https://` versus API socket `http` is another path of the same rule — inventory it before claiming recover.
 
@@ -55,7 +55,7 @@ Write a log line (ids, reason, no cookie). Reject any line that includes a sessi
 
 ## Use it somewhere new
 
-A clinic example: notice page-https versus API-http; do not paste cookies into the ticket. Do not probe a live clinic.
+Notice page-https versus API-http; do not paste cookies into the ticket. Do not probe a live clinic.
 
 ## What this page is not doing
 

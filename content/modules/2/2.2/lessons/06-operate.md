@@ -9,7 +9,7 @@ Even after the key includes the company, someone can still leak a body: a CDN co
 
 ## Picture: signal, purge, then secrecy work if bodies escaped
 
-A wrong cache hit still has to show up as an alert. The body does not belong in the log. The alert should name the mismatch. Then purge. Neither writes `tenant-A-note`.
+When you see a wrong cache hit, the body does not belong in the log. Name the mismatch. Then purge. Neither writes `tenant-A-note`.
 
 ```mermaid
 flowchart TD

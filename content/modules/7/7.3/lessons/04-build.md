@@ -61,7 +61,7 @@ python3 -m pytest labs/7.3/7.3-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: stop treating “the hospital’s IP range” as the lab-result authenticity check.
+Stop treating “the hospital’s IP range” as the lab-result authenticity check.
 
 ## What can still go wrong
 

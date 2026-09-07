@@ -45,7 +45,7 @@ Reject any line that includes note bodies, a Play Integrity token, or a live dev
 
 ## Use it somewhere new
 
-A clinic example: notice `hipaaMode` client claims on a local helper; do not attach the chart to the ticket. Do not instrument a live hospital device.
+Notice `hipaaMode` client claims on a local helper; do not attach the chart to the ticket. Do not instrument a live hospital device.
 
 ## Can people still use it
 

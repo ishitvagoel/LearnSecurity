@@ -42,7 +42,7 @@ Reject any line that includes `sk-lab-hardcoded`, a real key, or “Vault handle
 
 ## Use it somewhere new
 
-A clinic example: notice gist-key use; do not paste the key into the ticket. Do not fetch a live gist.
+Notice gist-key use; do not paste the key into the ticket. Do not fetch a live gist.
 
 ## What this page is not doing
 

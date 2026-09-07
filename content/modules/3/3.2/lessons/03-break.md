@@ -15,7 +15,7 @@ Stay inside `labs/3.2/3.2-lab`. Do not run SAST or DAST against a public host, a
 
 What must not happen: a green scanner produces an empty notes-app threat model. `threats_from_scan(True)` returns `[]`, so `cross-tenant-read` is missing.
 
-Picture a reviewer or CI job that can ask “what’s in the model?” after `scanner_green=True` — a “no High findings” ticket, a Threat Dragon picture, or “we did STRIDE in the sprint.” The assembler **seeds** design threats that no CVE rule will list. FastAPI, Semgrep, and a vendor dashboard are not enough.
+Picture a reviewer or CI job that can ask “what’s in the model?” after `scanner_green=True` — a “no High findings” ticket, a Threat Dragon picture, or “we did STRIDE in the sprint.” The assembler **seeds** design threats that no CVE rule will list — not FastAPI, Semgrep, or a vendor dashboard.
 
 ## Picture: green copies empty
 

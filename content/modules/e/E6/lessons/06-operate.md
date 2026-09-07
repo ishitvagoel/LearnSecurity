@@ -9,7 +9,7 @@ A new “fast-track risk” form can drop `review_by` after the schema was “se
 
 ## Picture: incomplete row is a signal
 
-An accept that skipped owner, review date, or accessibility still has to show up as an alert. Keep secrets out of the ticket. The alert should name the missing fields. Then expire the hole or re-accept with a complete record.
+When you see an accept that skipped owner, review date, or accessibility, name the missing fields. Leave secrets off the ticket. Then expire the hole or re-accept with a complete record.
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ log_denied reason=exception_incomplete_denied missing=owner,review_by
 
 Not: a secret, an “assurance gate complete,” or a pledge screenshot.
 
-If your alert includes the matching writeup, you have copied the leak into the ticket.
+Putting the matching writeup in the alert copies the leak into the ticket.
 
 ## What the framework does vs what you still have to check
 
@@ -62,7 +62,7 @@ Reject any line that includes a secret, an “assurance gate complete,” or a p
 
 ## Use it somewhere new
 
-A clinic example: deny the HIPAA exception; do not paste chart text into the ticket. Do not open a live governance tenant.
+Deny the HIPAA exception; do not paste chart text into the ticket. Do not open a live governance tenant.
 
 ## What this page is not doing
 

@@ -15,7 +15,7 @@ Stay inside `labs/6.3/6.3-lab`. Origins `https://evil.example` and `https://app.
 
 What must not happen: a cross-site POST that changes a share, authorized by cookie alone. `allow_share("https://evil.example", expected, token=None)` returns true.
 
-Picture a foreign origin that can cause the victim browser to POST while the session cookie is leftover — a clinic “share with partner” button the person did not click on this site. `allow_share` is supposed to require cookie **and** origin match **and** a matching CSRF token. SameSite=Lax, CORS, and “the user is logged in” are not enough.
+Picture a foreign origin that can cause the victim browser to POST while the session cookie is leftover — a clinic “share with partner” button the person did not click on this site. `allow_share` is supposed to require cookie **and** origin match **and** a matching CSRF token — not SameSite=Lax, CORS, or “the user is logged in”.
 
 ## Picture: leftover cookie is enough in the broken files
 

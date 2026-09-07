@@ -15,7 +15,7 @@ Stay inside `labs/10.4/10.4-lab`. The flags are synthetic strings and booleans. 
 
 Do not paste this exercise onto a public clinic, employer cluster, or live hospital portal.
 
-`boot_ok` is supposed to refuse **prod plus debug**. Compose strings, FastAPI debug defaults, a canary percentage, and a manufacturer-defaults program page we have not verified are not enough.
+`boot_ok` is supposed to refuse **prod plus debug** — not Compose strings, FastAPI debug defaults, a canary percentage, or a manufacturer-defaults program page we have not verified.
 
 Picture anyone who finds an error page or a debug route — “we left DEBUG on for five minutes so support can see traces,” `NODE_ENV=production` treated as the check, or a 10% canary treated as hardening.
 

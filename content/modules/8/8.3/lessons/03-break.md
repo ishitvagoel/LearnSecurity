@@ -17,7 +17,7 @@ Do not paste this exercise onto a public app, employer clinic, or live EHR.
 
 What must not happen: **`as=admin` switches the session**. After `open_link({"as": "admin"})`, `current_user()` is `"admin"`.
 
-Picture another app on the tablet sending extras, or a crafted link — a clinic kiosk demo `as=doctor`, an exported Activity, or a WebView that forwards query identity. `open_link` is supposed to treat extras as **data** (2.1 / 7.1); the session stays server-issued (4.3). Verified App Links, `https`, and `exported=false` without a test are not enough.
+Picture another app on the tablet sending extras, or a crafted link — a clinic kiosk demo `as=doctor`, an exported Activity, or a WebView that forwards query identity. `open_link` is supposed to treat extras as **data** (2.1 / 7.1); the session stays server-issued (4.3) — not Verified App Links, `https`, or `exported=false` without a test.
 
 ## Picture: extras become the user
 

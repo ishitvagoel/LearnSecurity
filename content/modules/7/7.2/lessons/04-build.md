@@ -57,7 +57,7 @@ python3 -m pytest labs/7.2/7.2-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: stop treating “SSN not in the member table UI” as field authorization.
+Stop treating “SSN not in the member table UI” as field authorization.
 
 ## What can still go wrong
 

@@ -45,7 +45,7 @@ Reject any line that includes note bodies or a live `adb backup` of a personal p
 
 ## Use it somewhere new
 
-A clinic example: notice leftover chart cache after logout on a local helper; do not attach the chart to the ticket. Do not image a live tablet.
+Notice leftover chart cache after logout on a local helper; do not attach the chart to the ticket. Do not image a live tablet.
 
 ## Can people still use it
 

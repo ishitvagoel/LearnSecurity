@@ -69,7 +69,7 @@ python3 -m pytest labs/6.6/6.6-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: stop treating “link clicked” as unlimited joins; consume in the store.
+Stop treating “link clicked” as unlimited joins; consume in the store.
 
 ## What can still go wrong
 

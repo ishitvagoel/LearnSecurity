@@ -47,7 +47,7 @@ Reject any line that includes a note body, a GraphQL document dump, or “course
 
 ## Use it somewhere new
 
-A clinic example: deny the `org_id` switch; do not paste the chart note into the ticket. Do not probe a live company.
+Deny the `org_id` switch; do not paste the chart note into the ticket. Do not probe a live company.
 
 ## What this page is not doing
 

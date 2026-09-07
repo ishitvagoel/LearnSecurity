@@ -11,7 +11,7 @@ Do not paste a personal email or a production cookie into the ticket. Do not log
 
 ## Picture: alert on use after deleted
 
-A leftover cookie after delete still has to show up as an alert. Keep notes out of the pager. Then mass-revoke.
+When you see a leftover cookie after delete, leave notes off the pager. Then mass-revoke.
 
 ```mermaid
 flowchart TD
@@ -39,7 +39,7 @@ log_denied reason=session_after_delete user_id=alice request_id=req_41lc
 
 Not: a note body, a personal email, a production cookie, or “single sign-on revoked it.”
 
-If your alert includes a note body, the pager now holds a leftover copy.
+Putting a note body in the alert leaves a leftover copy in the pager.
 
 A green identity-provider tile that says “user disabled” is not that check. If a replica session store still has `alice`, treat it as the same leftover session, not a separate “eventual consistency” pass. An “account deleted” email is not recovery.
 
@@ -57,7 +57,7 @@ Write a log line (ids, reason, no body). Reject any line that includes a note bo
 
 ## Use it somewhere new
 
-A clinic example: notice chart use after badge disable; do not paste the chart into the ticket. Do not query a live identity provider.
+Notice chart use after badge disable; do not paste the chart into the ticket. Do not query a live identity provider.
 
 ## What this page is not doing
 

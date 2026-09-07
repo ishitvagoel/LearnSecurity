@@ -54,7 +54,7 @@ python3 -m pytest labs/5.3/5.3-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: rotate the gist-leaked key and prove the old string fails, including missing-current deny.
+Rotate the gist-leaked key and prove the old string fails, including missing-current deny.
 
 ## What this page is not doing
 

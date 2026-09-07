@@ -63,7 +63,7 @@ Do not fetch the URLs.
 
 ## Use it somewhere new
 
-A clinic example: stop fetching whatever URL the form posted; parse then allow-list.
+Stop fetching whatever URL the form posted; parse then allow-list.
 
 ## What can still go wrong
 

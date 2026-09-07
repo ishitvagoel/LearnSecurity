@@ -77,7 +77,7 @@ Tie the check to count ≤ 5, not to a filter product name.
 
 ## Use it somewhere new
 
-A clinic example: max 3 guardians per child. Invite tokens and export quotas are different objects, same shape.
+Max 3 guardians per child. Invite tokens and export quotas are different objects, same shape.
 
 ## Can people still use it
 

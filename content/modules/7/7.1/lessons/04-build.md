@@ -60,7 +60,7 @@ python3 -m pytest labs/7.1/7.1-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: stop treating “the form has no is_staff checkbox” as the server contract.
+Stop treating “the form has no is_staff checkbox” as the server contract.
 
 ## What can still go wrong
 

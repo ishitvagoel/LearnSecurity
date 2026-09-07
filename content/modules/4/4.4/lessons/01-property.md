@@ -79,7 +79,7 @@ The first command must fail on the deny tests. The second must pass. Map failure
 
 ## Use it somewhere new
 
-A clinic example: a grant on appointment A is not a grant on chart B.
+A grant on appointment A is not a grant on chart B.
 
 ## What this page is not doing
 

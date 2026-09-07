@@ -15,7 +15,7 @@ Stay inside `labs/10.3/10.3-lab`. The roles are synthetic strings `cluster-admin
 
 Do not paste this exercise onto a public cluster, employer account, or live hospital Kubernetes "to see what happens."
 
-`pod_ok` is supposed to allow **only namespaced app roles**. Managed-cluster defaults, a restricted pod profile, a network policy, and FastAPI itself are not enough.
+`pod_ok` is supposed to allow **only namespaced app roles** — not Managed-cluster defaults, a restricted pod profile, a network policy, or FastAPI itself.
 
 Picture a compromised container or a malicious Helm chart — "the API namespace is private so ClusterRole is fine," a CIS Kubernetes scan treated as the who-is-allowed check, or a network policy treated as RBAC.
 

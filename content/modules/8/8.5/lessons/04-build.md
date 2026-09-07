@@ -67,7 +67,7 @@ python3 -m pytest labs/8.5/8.5-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: stop putting patient names in exception messages. The lab still uses fake strings.
+Stop putting patient names in exception messages. The lab still uses fake strings.
 
 ## What can still go wrong
 

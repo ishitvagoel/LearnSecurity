@@ -15,7 +15,7 @@ Stay inside `labs/9.1/9.1-lab`. The requirement id is the synthetic string `AUTH
 
 Do not paste a real requirements matrix into a public tracker “to see what happens.” Do not paste this exercise onto a public checklist portal, employer dashboard, or live clinic.
 
-`covered` is supposed to be a **check over tests that assert isolation**. Checklist membership, pytest-cov, and a practice-guide attestation are not enough.
+`covered` is supposed to be a **check over tests that assert isolation** — not Checklist membership, pytest-cov, or a practice-guide attestation.
 
 Picture an optimistic status column — “we imported the PDF and marked isolation done,” a tracker Done column, or a mobile storage spreadsheet checkbox without a matching test.
 
@@ -70,7 +70,7 @@ Run from `labs/9.1/9.1-lab` if a collection at the repo root picks up `site/`. D
 
 ## Use it somewhere new
 
-A clinic example: predict a HIPAA “done” column with no isolation test — still only this directory. Do not scrape a live governance product.
+Predict a HIPAA “done” column with no isolation test — still only this directory. Do not scrape a live governance product.
 
 ## What this page is not doing
 

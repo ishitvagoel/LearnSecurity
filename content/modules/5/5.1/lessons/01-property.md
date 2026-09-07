@@ -81,7 +81,7 @@ Tie the failures to `body_retained` / `search_retained`, not to a privacy-law na
 
 ## Use it somewhere new
 
-A clinic example: an appointment card that still stores notes after the patient record is deleted.
+An appointment card that still stores notes after the patient record is deleted.
 
 ## Can people still use it
 

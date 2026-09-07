@@ -55,7 +55,7 @@ python3 -m pytest labs/E5/e5-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: ignore `org_id` in JSON the same way. Bind the company from the session.
+Ignore `org_id` in JSON the same way. Bind the company from the session.
 
 ## What can still go wrong
 

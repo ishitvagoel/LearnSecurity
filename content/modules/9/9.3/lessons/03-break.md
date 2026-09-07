@@ -17,7 +17,7 @@ Do not paste this exercise onto a public host, employer clinic, or live patient 
 
 What must not happen: **HTTP 200-only test counted as a security test**. `is_security_test({"status_asserted": True})` returns true.
 
-Picture a happy-path suite treated as assurance — clinic `test_get_patient_200`, line coverage at 94%, or a testing-guide checkbox ticked without a named what must not happen. `is_security_test` is supposed to require a **named what must not happen**. Coverage percentage, testing-guide membership, and a fuzzer with no named bad result are not enough.
+Picture a happy-path suite treated as assurance — clinic `test_get_patient_200`, line coverage at 94%, or a testing-guide checkbox ticked without a named what must not happen. `is_security_test` is supposed to require a **named what must not happen** — not Coverage percentage, testing-guide membership, or a fuzzer with no named bad result.
 
 ## Picture: status asserted is enough
 

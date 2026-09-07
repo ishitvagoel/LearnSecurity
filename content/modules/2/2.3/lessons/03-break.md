@@ -15,7 +15,7 @@ Stay inside `labs/2.3/2.3-browser-policy`. Fake session value only. Restore the 
 
 Do not paste XSS recipes. Do not point this exercise at a public origin, an employer login cookie, or a classmate’s deployment.
 
-Picture a same-origin script reader that can call `js_read_session` — injected script you will meet in later encoding work. The cookie jar is supposed to honor `httponly`. The Next.js client, a CSP scanner, and TLS on the hop are not enough.
+Picture a same-origin script reader that can call `js_read_session` — injected script you will meet in later encoding work. The cookie jar is supposed to honor `httponly` — not The Next.js client, a CSP scanner, or TLS on the hop.
 
 ## Picture: the flag is present and ignored
 

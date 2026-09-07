@@ -61,7 +61,7 @@ python3 -m pytest labs/4.4/4.4-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: an appointment grant table keyed by chart id and company, not by “clinician role.”
+An appointment grant table keyed by chart id and company, not by “clinician role.”
 
 ## What can still go wrong
 

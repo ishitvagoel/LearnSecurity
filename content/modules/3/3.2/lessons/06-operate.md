@@ -18,7 +18,7 @@ flowchart TD
   Age -->|stale| Revisit[Re-run four questions]
 ```
 
-A missing threat id still has to show up as an alert. Do not hide it by rewriting yesterday’s date. The alert should name the threat. Then add the row. Neither pretends you already had it.
+When you see a missing threat id, do not hide it by rewriting yesterday's date. Name the threat. Then add the row. Neither pretends you already had it.
 
 | Outcome | This topic |
 |---|---|
@@ -43,7 +43,7 @@ Reject any line that includes a note body, a real email, a vendor scan PDF treat
 
 ## Use it somewhere new
 
-A clinic example: notice missing `sms-content-leak` after the reminder feature merges. Do not paste patient text into the ticket. Do not scan the clinic to prove the gap.
+Notice missing `sms-content-leak` after the reminder feature merges. Do not paste patient text into the ticket. Do not scan the clinic to prove the gap.
 
 ## What this page is not doing
 

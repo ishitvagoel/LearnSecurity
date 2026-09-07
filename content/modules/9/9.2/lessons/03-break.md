@@ -17,7 +17,7 @@ Do not write a working exploit. Do not run eval on untrusted input outside this 
 
 What must not happen: eval on user input approved in review. `review_ok("x = eval(user)")` returns true.
 
-Picture a helper that looks visually fine — a clinic “designers can put expressions in the discharge template,” Terraform `local-exec`, or a GitHub Actions `run:` that interpolates untrusted input. `review_ok` asks the **interpreter question** (6.1 at review time). Formatter continuous integration, a scanner “looks good,” and “the screen still looks fine” are not enough.
+Picture a helper that looks visually fine — a clinic “designers can put expressions in the discharge template,” Terraform `local-exec`, or a GitHub Actions `run:` that interpolates untrusted input. `review_ok` asks the **interpreter question** (6.1 at review time) — not Formatter continuous integration, a scanner “looks good,” or “the screen still looks fine”.
 
 ## Picture: every diff is approved
 

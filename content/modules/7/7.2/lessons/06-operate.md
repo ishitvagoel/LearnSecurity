@@ -47,7 +47,7 @@ Reject any line that includes the field value, a real SSN, or a live GraphQL tra
 
 ## Use it somewhere new
 
-A clinic example: detect SSN field probes on local practice files; do not attach the SSN to the ticket. Do not query a live EHR.
+Detect SSN field probes on local practice files; do not attach the SSN to the ticket. Do not query a live EHR.
 
 ## What this page is not doing
 

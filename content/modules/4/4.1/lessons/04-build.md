@@ -69,7 +69,7 @@ python3 -m pytest labs/4.1/4.1-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: disable the badge and kill chart sessions in one runbook. A badge vendor API is not the chart session store.
+Disable the badge and kill chart sessions in one runbook. A badge vendor API is not the chart session store.
 
 ## What can still go wrong
 

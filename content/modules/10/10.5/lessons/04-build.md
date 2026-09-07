@@ -66,7 +66,7 @@ python3 -m pytest labs/10.5/10.5-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: restore-test evidence, not a green dashboard. The lab still uses fake strings.
+Restore-test evidence, not a green dashboard. The lab still uses fake strings.
 
 ## What can still go wrong
 

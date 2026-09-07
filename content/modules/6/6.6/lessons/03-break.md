@@ -15,7 +15,7 @@ Stay inside `labs/6.6/6.6-lab`. Synthetic tokens `t1` / `t2`. It does not send m
 
 Do not probe public invite links. Do not click a live mail link. Do not build a race harness. You do not need two processes. You must not.
 
-`accept` is supposed to consume the token in the same step that it returns true. A unique index you never write, HTTP 400 after membership already exists, and “the email proves the recipient” are not enough.
+`accept` is supposed to consume the token in the same step that it returns true — not A unique index you never write, HTTP 400 after membership already exists, or “the email proves the recipient”.
 
 Picture two tabs, a copied link, or a retry of the same token — a clinic guardian invite, a password-reset consume, or 2.4’s share retry.
 

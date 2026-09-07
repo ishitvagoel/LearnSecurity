@@ -17,7 +17,7 @@ Do not search public GitHub, an employer gist, or a classmate repo as this exerc
 
 What must not happen: the old hardcoded default still authenticates after rotation. `auth("sk-lab-hardcoded", current="rotated-now")` returns true.
 
-Picture a **reader of the cloned repo**, an old container image, or a gist copy of `DEFAULT` — a clinic lab API key that was “rotated in the wiki” while the default or-clause stayed. `auth` accepts only the current secret and denies when current is missing. A vault brand, `.gitignore`, and “we rotated” in a ticket are not enough.
+Picture a **reader of the cloned repo**, an old container image, or a gist copy of `DEFAULT` — a clinic lab API key that was “rotated in the wiki” while the default or-clause stayed. `auth` accepts only the current secret and denies when current is missing — not A vault brand, `.gitignore`, or “we rotated” in a ticket.
 
 ## Picture: DEFAULT still wins
 

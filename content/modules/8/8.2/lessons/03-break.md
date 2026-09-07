@@ -17,7 +17,7 @@ Do not paste this exercise onto a public device, employer clinic, or live EHR ta
 
 What must not happen: **a note body cached as plaintext on disk**. After `save_note("secret")`, `plaintext_on_disk()` is true.
 
-Picture a stolen USB backup or a phone whose cache is unlocked — a clinic “available offline” write of `charts.json`, a Room SQLite dump, or a cloud backup of internal storage. `save_note` is supposed to leave **ciphertext (or a stand-in) on disk**, not the body. `MODE_PRIVATE`, a fingerprint prompt, and EncryptedSharedPreferences on a *different* file are not enough.
+Picture a stolen USB backup or a phone whose cache is unlocked — a clinic “available offline” write of `charts.json`, a Room SQLite dump, or a cloud backup of internal storage. `save_note` is supposed to leave **ciphertext (or a stand-in) on disk**, not the body — not `MODE_PRIVATE`, a fingerprint prompt, or EncryptedSharedPreferences on a *different* file.
 
 ## Picture: write the body as the file
 

@@ -74,7 +74,7 @@ The first command must fail on the deny tests. The second must pass.
 
 ## Use it somewhere new
 
-A clinic example: wrong-audience FHIR token. Phone-app redirect (claimed HTTPS, not a custom scheme) and backend-for-frontend vs browser token storage.
+Wrong-audience FHIR token. Phone-app redirect (claimed HTTPS, not a custom scheme) and backend-for-frontend vs browser token storage.
 
 ## What this page is not doing
 

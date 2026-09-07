@@ -15,7 +15,7 @@ Stay inside `labs/4.4/4.4-lab`. Notes `n1` / `n2` / `n3` and companies `acme` / 
 
 What must not happen: a grant on n1 authorizes n2, plus owner/admin costumes that cross companies or skip the object key. `can_read("bob", "n2")` is true.
 
-Picture a member with a real grant on `n1` who can swap `note_id`, or someone guessing ids — Alice (acme owner) reading clinic `n3`, or Eve (`admin` in clinic) reading acme `n1`. `can_read` is supposed to key `(person, company, note_id)`. `Depends(get_user)`, Casbin, and id length are not enough.
+Picture a member with a real grant on `n1` who can swap `note_id`, or someone guessing ids — Alice (acme owner) reading clinic `n3`, or Eve (`admin` in clinic) reading acme `n1`. `can_read` is supposed to key `(person, company, note_id)` — not `Depends(get_user)`, Casbin, or id length.
 
 ## Picture: any-grant becomes every-note
 
@@ -62,7 +62,7 @@ Record `test_grant_on_n1_is_not_grant_on_n2` and the cross-company names. Do not
 
 ## Use it somewhere new
 
-A clinic example: shared appointment A, swapped chart id. Predict without leaving this directory. Do not hit a live clinic system.
+Shared appointment A, swapped chart id. Predict without leaving this directory. Do not hit a live clinic system.
 
 ## What this page is not doing
 

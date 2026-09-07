@@ -17,7 +17,7 @@ flowchart TD
   Alert --> Audit[Audit store; restore]
 ```
 
-A broken resolve still has to show up as an alert. A patient filename does not belong in the log.
+When you see a broken resolve, a patient filename does not belong in the log.
 
 | Outcome | This topic |
 |---|---|
@@ -44,7 +44,7 @@ Reject any line that includes a patient filename, a note body, or a host path co
 
 ## Use it somewhere new
 
-A clinic example: notice scan names that leave the imaging root; do not paste filenames into the ticket. Do not open a live imaging folder.
+Notice scan names that leave the imaging root; do not paste filenames into the ticket. Do not open a live imaging folder.
 
 ## What this page is not doing
 

@@ -61,7 +61,7 @@ python3 -m pytest labs/8.2/8.2-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: stop treating “internal storage” as the chart-cache control.
+Stop treating “internal storage” as the chart-cache control.
 
 ## What can still go wrong
 

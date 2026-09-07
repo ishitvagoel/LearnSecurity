@@ -46,7 +46,7 @@ Reject any line that includes the title text, a note body, or an attack cookbook
 
 ## Use it somewhere new
 
-A clinic example: notice nickname fields with raw `<`; do not paste nicknames into the ticket. Do not load a live board.
+Notice nickname fields with raw `<`; do not paste nicknames into the ticket. Do not load a live board.
 
 ## What this page is not doing
 

@@ -44,7 +44,7 @@ Reject any line that includes a note body, a personal email, or “IDOR handled.
 
 ## Use it somewhere new
 
-A clinic example: notice chart-id swaps; do not paste the chart into the ticket. Do not hit a live clinic system.
+Notice chart-id swaps; do not paste the chart into the ticket. Do not hit a live clinic system.
 
 ## What this page is not doing
 

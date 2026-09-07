@@ -11,7 +11,7 @@ Do not log note bodies in the CSV path (3.1 / 5.1). Do not attach the CSV to the
 
 ## Picture: the fourth try is a signal
 
-A fourth export in the window still has to show up as an alert. Keep note bodies out of the pager. Then keep the deny and revoke a stolen session.
+When you see a fourth export in the window, leave note bodies off the pager. Then keep the deny and revoke a stolen session.
 
 ```mermaid
 flowchart TD
@@ -39,7 +39,7 @@ log_denied reason=quota_denied n=4 subject=user_67e request_id=req_67e
 
 Not: a note body, a CSV attachment, a real email, or a live load trace against a public host.
 
-If your alert includes note bodies from the CSV, the pager now holds extra copies.
+Putting note bodies from the CSV in the alert leaves extra copies in the pager.
 
 A green “rate limit enabled” tile is not that check. Notification fan-out and extra formats are other paths of the same budget — inventory them before claiming recover. Re-run `test_fourth_export_is_denied` after any export-route change.
 
@@ -53,7 +53,7 @@ Write a log line (ids, reason, n, no body). Reject any line that includes note b
 
 ## Use it somewhere new
 
-A clinic example: notice bulk-export over quota; do not attach the CSV to the ticket. Do not load-test a live clinic system.
+Notice bulk-export over quota; do not attach the CSV to the ticket. Do not load-test a live clinic system.
 
 ## Can people still use it
 

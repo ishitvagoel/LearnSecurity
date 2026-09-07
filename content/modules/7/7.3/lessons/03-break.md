@@ -17,7 +17,7 @@ Do not POST to Stripe. Do not POST to GitHub. Do not POST to a clinic webhook. D
 
 What must not happen: an unsigned webhook body is accepted. `accept` returns true for an empty signature.
 
-Picture anyone who can POST the callback URL with an empty or wrong signature — a forged billing event, an “export-ready” callback, or a clinic lab-result post. `accept` is **message authenticity over raw bytes**. TLS to the path, a vendor address-range allow-list, and a vendor SDK name are not enough.
+Picture anyone who can POST the callback URL with an empty or wrong signature — a forged billing event, an “export-ready” callback, or a clinic lab-result post. `accept` is **message authenticity over raw bytes** — not TLS to the path, a vendor address-range allow-list, or a vendor SDK name.
 
 ## Picture: hitting the path is enough
 

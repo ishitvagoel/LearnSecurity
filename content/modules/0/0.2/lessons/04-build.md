@@ -51,7 +51,7 @@ Must pass.
 
 ## Use it somewhere new
 
-A clinic example: refuse a 100% onboarding quiz as a threat-model skip the same way. Vendor cert used to skip a design review: same always-false for the rule unit.
+Refuse a 100% onboarding quiz as a threat-model skip the same way. Vendor cert used to skip a design review: same always-false for the rule unit.
 
 ## What can still go wrong
 

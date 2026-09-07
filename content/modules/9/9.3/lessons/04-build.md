@@ -65,7 +65,7 @@ python3 -m pytest labs/9.3/9.3-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: replace `test_get_patient_200` with “other clinician must not 200.” The lab still uses fake descriptors.
+Replace `test_get_patient_200` with “other clinician must not 200.” The lab still uses fake descriptors.
 
 ## What can still go wrong
 

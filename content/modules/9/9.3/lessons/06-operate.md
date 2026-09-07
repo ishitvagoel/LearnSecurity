@@ -9,7 +9,7 @@ A new endpoint can land with only 200 tests after `is_security_test` was “fixe
 
 ## Picture: missing isolation is a signal
 
-A missing named what-must-not-happen still has to show up as an alert. Keep the note out of the pager. The alert should name the suite. Then add the isolation test.
+When you see a missing named what-must-not-happen, name the suite. Leave the note off the pager. Then add the isolation test.
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ log_denied reason=security_suite_missing_isolation req=isolation suite=api
 
 Not: a note body, a patient name, a live fuzz payload, or “later gate complete.”
 
-If your alert includes the matching note body, the pager now has the patient text too.
+Putting the matching note body in the alert puts the patient text in the pager too.
 
 ## What the framework does vs what you still have to check
 
@@ -60,7 +60,7 @@ Reject any line that includes a note body, a live fuzz payload, or “later gate
 
 ## Use it somewhere new
 
-A clinic example: notice `test_get_patient_200` as the only “security” test; do not attach patient JSON to the ticket. Do not fuzz a live clinic.
+Notice `test_get_patient_200` as the only “security” test; do not attach patient JSON to the ticket. Do not fuzz a live clinic.
 
 ## What this page is not doing
 

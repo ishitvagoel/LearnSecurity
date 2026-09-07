@@ -9,7 +9,7 @@ Even after the button is fixed, someone will still fail recovery: a new exclusio
 
 ## Picture: the loop continues without lowering the bar
 
-A broken recovery widget still has to show up as an alert. Support must not read codes aloud. The alternate path must still be a checked, usable control. The alert should name keyboard vs mouse. Then restore access. Neither emails notes.
+When you see a broken recovery widget, name keyboard vs mouse. Support must not read codes aloud. The alternate path must still be a checked, usable control. Then restore access. Neither emails notes.
 
 ```mermaid
 flowchart TD

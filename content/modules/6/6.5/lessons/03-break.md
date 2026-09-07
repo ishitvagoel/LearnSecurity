@@ -17,7 +17,7 @@ Do not probe cloud metadata. Do not probe public hosts. Do not probe an employer
 
 What must not happen: a server-side fetch to link-local metadata is allowed. `allowed` returns true for a link-local metadata URL.
 
-Picture a member who can supply a preview URL (untrusted structure, 2.1) — a clinic “fetch PDF from URL” field or a webhook target (7.3). `allowed` parses scheme **and** host against a small allow-list. “Starts with https,” a denylist of one IP, and `requests.get` are not enough.
+Picture a member who can supply a preview URL (untrusted structure, 2.1) — a clinic “fetch PDF from URL” field or a webhook target (7.3). `allowed` parses scheme **and** host against a small allow-list — not “Starts with https,” a denylist of one IP, or `requests.get`.
 
 ## Picture: scheme-only is not an allow-list
 

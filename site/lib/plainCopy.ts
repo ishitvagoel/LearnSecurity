@@ -782,6 +782,51 @@ const PROSE_PHRASES: [RegExp, string][] = [
     /Live GitHub and weaponized eval are out of scope\./g,
     "Do not use live GitHub or weaponized eval.",
   ],
+  [
+    /A (.+?) still has to show up as an alert\. Keep (.+?) out of the (pager|ticket)\. The alert should name (.+?)\. Then /g,
+    "When you see a $1, name $4. Leave $2 off the $3. Then ",
+  ],
+  [
+    /An (.+?) still has to show up as an alert\. Keep (.+?) out of the (pager|ticket)\. The alert should name (.+?)\. Then /g,
+    "When you see an $1, name $4. Leave $2 off the $3. Then ",
+  ],
+  [
+    /A (.+?) still has to show up as an alert\. Keep (.+?) out of the (pager|ticket)\. Then /g,
+    "When you see a $1, leave $2 off the $3. Then ",
+  ],
+  [
+    /An (.+?) still has to show up as an alert\. Keep (.+?) out of the (pager|ticket)\. Then /g,
+    "When you see an $1, leave $2 off the $3. Then ",
+  ],
+  [
+    /A (.+?) still has to show up as an alert\. Do not paste (.+?)\. The alert should name (.+?)\. Then /g,
+    "When you see a $1, name $3. Do not paste $2. Then ",
+  ],
+  [
+    /A (.+?) still has to show up as an alert\. Do not paste (.+?)\. Then /g,
+    "When you see a $1, do not paste $2. Then ",
+  ],
+  [/A (.+?) still has to show up as an alert\. /g, "When you see a $1, "],
+  [/An (.+?) still has to show up as an alert\. /g, "When you see an $1, "],
+  [/The alert should name /g, "Name "],
+  [
+    /If your alert includes (.+?), the pager now has (.+?)\./g,
+    "Putting $1 in the alert means the pager now has $2.",
+  ],
+  [
+    /If your alert includes (.+?), the pager now holds (.+?)\./g,
+    "Putting $1 in the alert leaves $2 in the pager.",
+  ],
+  [
+    /If your alert includes (.+?), you have copied the leak into the ticket\./g,
+    "Putting $1 in the alert copies the leak into the ticket.",
+  ],
+  [
+    /If your alert includes (.+?), you have opened (.+?)\./g,
+    "Putting $1 in the alert opens $2.",
+  ],
+  [/puts (.+) too in the pager\./g, "puts $1 in the pager too."],
+  [/leaves (.+) too in the pager\./g, "leaves $1 in the pager too."],
   [/Read (`[^`]+`) against this checklist\./g, "Check $1 against the list above."],
   [/Claiming a course gate from this page\./g, "This page does not finish a check-in."],
   [
@@ -901,6 +946,8 @@ function transformProseLine(line: string): string {
   next = next.replace(/\bThis practice files is\b/g, "This practice is");
   next = next.replace(/\bthat the check\b/g, "that check");
   next = next.replace(/\bthis the check\b/g, "this check");
+  next = next.replace(/^A clinic example: ([a-z])(.*)$/g, (_, ch: string, rest: string) => `${ch.toUpperCase()}${rest}`);
+  next = next.replace(/^A clinic example: /g, "");
   next = next.replace(/\s{2,}/g, " ");
   next = next.replace(/ \(Level \d+\)/g, "");
   return next.replace(/\u0000C(\d+)\u0000/g, (_, index) => codes[Number(index)] ?? "");

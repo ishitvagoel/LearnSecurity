@@ -15,7 +15,7 @@ Stay inside `labs/9.5/9.5-lab`. The finding is a synthetic dict. Do **not** scan
 
 Do not paste this exercise onto a public clinic, employer tracker, or live hospital portal "to see what happens."
 
-`close_finding` is supposed to require a **passing retest of the same isolation check** — bob must not read alice's note. A PDF, a ticket marked Done, a severity score, and a known-exploited listing are not enough.
+`close_finding` is supposed to require a **passing retest of the same isolation check** — bob must not read alice's note — not A PDF, a ticket marked Done, a severity score, or a known-exploited listing.
 
 Picture a paper-compliance closer — "the assessor delivered a 40-page PDF so we marked isolation Done," a 9.8 treated as the close decision, or a known-exploited listing used as permission to scan a hospital portal.
 

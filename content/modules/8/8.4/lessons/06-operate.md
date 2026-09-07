@@ -45,7 +45,7 @@ Reject any line that includes signing keys, an APK, or a live Play Console trace
 
 ## Use it somewhere new
 
-A clinic example: notice debug FHIR calls on a local helper; do not attach the APK to the ticket. Do not unpack a live clinic APK.
+Notice debug FHIR calls on a local helper; do not attach the APK to the ticket. Do not unpack a live clinic APK.
 
 ## Can people still use it
 

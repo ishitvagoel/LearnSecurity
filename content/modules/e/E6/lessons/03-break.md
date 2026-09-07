@@ -15,7 +15,7 @@ Stay inside `labs/E6/e6-lab`. Owner strings are fake. Do **not** file a real pub
 
 Do not paste this exercise onto a public clinic, employer register, or live hospital portal “to see what happens.”
 
-`accept_exception` is supposed to require a **record** with owner, review date, and accessibility flag. A ticket type, a HIPAA slide, and a pledge page are not enough.
+`accept_exception` is supposed to require a **record** with owner, review date, and accessibility flag — not A ticket type, a HIPAA slide, or a pledge page.
 
 Picture calendar pressure plus oral “we’ll accept it” — “legal said yes,” a maturity score treated as the register, or a “secure by design” pledge treated as an assurance stamp.
 

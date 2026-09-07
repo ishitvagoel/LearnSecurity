@@ -59,7 +59,7 @@ python3 -m pytest labs/6.3/6.3-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: stop treating “logged-in cookie” as consent to share with a partner.
+Stop treating “logged-in cookie” as consent to share with a partner.
 
 ## What can still go wrong
 

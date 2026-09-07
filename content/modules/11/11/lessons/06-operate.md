@@ -9,7 +9,7 @@ A cache or worker can still serve the old grant after `read` was “fixed once.�
 
 ## Picture: post-revoke read is a signal
 
-A read that skipped the grant still has to show up as an alert. Keep the note out of the ticket. The alert should name the note id and the person. Then notify A and rotate links.
+When you see a read that skipped the grant, name the note id and the person. Leave the note off the ticket. Then notify A and rotate links.
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ log_denied reason=revoked_share_read_denied note=n1 tenant=B
 
 Not: a note body, a session token, or “assurance gate complete.”
 
-If your alert includes the matching note, you have copied the leak into the ticket.
+Putting the matching note in the alert copies the leak into the ticket.
 
 ## What the framework does vs what you still have to check
 
@@ -62,7 +62,7 @@ Reject any line that includes the note body, a session token, or “assurance ga
 
 ## Use it somewhere new
 
-A clinic example: deny the guardian read; do not paste the chart into the ticket. Do not hit a live clinic system.
+Deny the guardian read; do not paste the chart into the ticket. Do not hit a live clinic system.
 
 ## What this page is not doing
 

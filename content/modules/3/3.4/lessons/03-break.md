@@ -17,7 +17,7 @@ Do not load-test a public host, an employer share endpoint, or a live clinic boo
 
 What must not happen: share grants exceed the product cap of 5. Looping `add_share()` eight times yields `last > 5`.
 
-Picture a **scripted client** that can call `add_share` in a loop — a disabled `max=5` select, an import path, or eight rapid POSTs. The **write path** denies the sixth grant. HTML, nginx `limit_req`, and a filter named after an awareness list are not enough.
+Picture a **scripted client** that can call `add_share` in a loop — a disabled `max=5` select, an import path, or eight rapid POSTs. The **write path** denies the sixth grant — not HTML, nginx `limit_req`, or a filter named after an awareness list.
 
 ## Picture: increment with no ceiling
 
@@ -68,7 +68,7 @@ Do not weaken it to “a max attribute exists.” A setup error is not proof the
 
 ## Use it somewhere new
 
-A clinic example: four `add_guardian` calls vs cap 3. Predict without leaving this directory. Do not hit a clinic API.
+Four `add_guardian` calls vs cap 3. Predict without leaving this directory. Do not hit a clinic API.
 
 ## Can people still use it
 

@@ -59,7 +59,7 @@ python3 -m pytest labs/5.2/5.2-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: replace a Base64 column with authenticated encryption and a managed key, not a rename to `ssn_encrypted`.
+Replace a Base64 column with authenticated encryption and a managed key, not a rename to `ssn_encrypted`.
 
 ## What can still go wrong
 

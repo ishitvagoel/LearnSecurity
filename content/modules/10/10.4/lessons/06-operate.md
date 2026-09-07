@@ -9,7 +9,7 @@ A flag can still flip after `boot_ok` was “fixed once.” Do not log stack tra
 
 ## Picture: an illegal boot is a signal
 
-An illegal boot still has to show up as an alert. Keep the stack trace out of the pager. The alert should name env, debug, and deploy. Then kill the process and rotate secrets that already leaked.
+When you see an illegal boot, name env, debug, and deploy. Leave the stack trace off the pager. Then kill the process and rotate secrets that already leaked.
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ log_denied reason=prod_debug_forbidden env=prod debug=true deploy=sc-12
 
 Not: a stack trace, a secret, or “assurance gate complete.”
 
-If your alert includes the matching trace, the pager now has the stack too.
+Putting the matching trace in the alert puts the stack in the pager too.
 
 ## What the framework does vs what you still have to check
 
@@ -62,7 +62,7 @@ Reject any line that includes a stack trace, a secret, or “assurance gate comp
 
 ## Use it somewhere new
 
-A clinic example: deny Django `DEBUG=True`; do not paste the traceback into the ticket. Do not hit a live `/debug`.
+Deny Django `DEBUG=True`; do not paste the traceback into the ticket. Do not hit a live `/debug`.
 
 ## What this page is not doing
 

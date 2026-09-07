@@ -15,7 +15,7 @@ Stay inside `labs/4.1/4.1-lab`. `SESSIONS` and `DELETED` track the synthetic nam
 
 Do not replay a production cookie. Do not replay an employer single-sign-on session. Do not replay a classmate login. Do not steal a cookie “to see what happens.”
 
-`delete_user` is supposed to kill leftovers in the same delete. HR email, “password disabled,” and a single-sign-on brand name are not enough.
+`delete_user` is supposed to kill leftovers in the same delete — not HR email, “password disabled,” or a single-sign-on brand name.
 
 Picture an ex-employee, or a copied cookie on a shared workstation, who can present `SESSIONS["alice"]` after offboarding — a delayed worker still holding `user_id`.
 
@@ -72,7 +72,7 @@ Record the failing test `test_deleted_user_session_is_dead`. Do not weaken it to
 
 ## Use it somewhere new
 
-A clinic example: badge off, chart cookie still valid. Predict, without leaving this directory, whether disabling the badge kills the session. Do not hit a clinic identity provider.
+Badge off, chart cookie still valid. Predict, without leaving this directory, whether disabling the badge kills the session. Do not hit a clinic identity provider.
 
 ## What this page is not doing
 

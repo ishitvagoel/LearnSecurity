@@ -15,7 +15,7 @@ Stay inside `labs/5.1/5.1-lab`. `delete_account` plus `body_retained` / `search_
 
 Do not dump a live analytics store. Do not dump an employer warehouse. Do not dump a classmate preview. Do not query a warehouse “to see what happens.”
 
-`delete_account` is supposed to walk every listed copy. A contract PDF, “we anonymized the user id,” and a database `DELETE FROM notes` are not enough.
+`delete_account` is supposed to walk every listed copy — not A contract PDF, “we anonymized the user id,” or a database `DELETE FROM notes`.
 
 Picture an insider with SELECT on `ANALYTICS`, or a buyer of a “de-identified” export that still contains bodies — a partner CSV, a search-index replica, or an appointment-card note that outlived the patient row.
 
@@ -72,7 +72,7 @@ Record the failing test `test_deleted_account_leaves_no_analytics_body`. Do not 
 
 ## Use it somewhere new
 
-A clinic example: patient deleted; appointment-card notes remain. Predict, without leaving this directory, whether deleting the patient row clears the card. Do not query a live warehouse.
+Patient deleted; appointment-card notes remain. Predict, without leaving this directory, whether deleting the patient row clears the card. Do not query a live warehouse.
 
 ## Can people still use it
 

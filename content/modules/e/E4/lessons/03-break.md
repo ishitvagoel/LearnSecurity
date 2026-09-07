@@ -17,7 +17,7 @@ Do not compile a C overflow. Do not spray a heap. Do not fuzz a third-party bina
 
 What must not happen: copy into a 4-byte lab buffer returns more than 4 bytes. `len(copy_into(4, b"abcdefgh", 4)) > 4`.
 
-Picture a hostile header `declared_len` — “the app is mostly Kotlin so copies are safe,” a sanitizer in CI treated as the rule, or an awareness-list mapping treated as this rule. `copy_into` bounds the copy by **destination size**. Python slicing, a company language roadmap, and FastAPI are not enough.
+Picture a hostile header `declared_len` — “the app is mostly Kotlin so copies are safe,” a sanitizer in CI treated as the rule, or an awareness-list mapping treated as this rule. `copy_into` bounds the copy by **destination size** — not Python slicing, a company language roadmap, or FastAPI.
 
 ## Picture: extra eight bytes are not a gift
 

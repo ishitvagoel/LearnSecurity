@@ -15,7 +15,7 @@ Stay inside `labs/3.1/3.1-lab`. The body is the synthetic string `tenant-A-secre
 
 Do not paste a real note body into the logger “to see what happens.” Do not paste this exercise onto a public log drain, employer dashboard, or live clinic.
 
-The logging API is supposed to deny the body. A spreadsheet sticker, a privacy-policy URL, `DEBUG=false` in one environment, and a data-loss product name are not enough.
+The logging API is supposed to deny the body — not A spreadsheet sticker, a privacy-policy URL, `DEBUG=false` in one environment, or a data-loss product name.
 
 Picture an operator, a log vendor, or another company's admin on shared observability — access logs, exception dumps, APM, and a support ticket.
 

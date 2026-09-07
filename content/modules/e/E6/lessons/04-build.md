@@ -64,7 +64,7 @@ python3 -m pytest labs/E6/e6-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: refuse a HIPAA exception with no review date the same way. The lab still uses fake strings.
+Refuse a HIPAA exception with no review date the same way. The lab still uses fake strings.
 
 ## What can still go wrong
 

@@ -81,7 +81,7 @@ Tie the check to `resolve("member", "secret_internal")`, not to a scanner bug na
 
 ## Use it somewhere new
 
-A clinic example: a member cannot resolve SSN. Also name bulk update and search highlighting that leaks snippets.
+A member cannot resolve SSN. Also name bulk update and search highlighting that leaks snippets.
 
 ## What this page is not doing
 

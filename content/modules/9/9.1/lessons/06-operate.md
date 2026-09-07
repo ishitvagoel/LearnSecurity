@@ -9,7 +9,7 @@ A new requirement can land without a test after `covered` was “fixed once.” 
 
 ## Picture: uncovered AUTHZ-1 is a signal
 
-An unmapped requirement still has to show up as an alert. Keep the requirement text out of the pager. The alert should name the requirement. Then add the isolation test.
+When you see an unmapped requirement, name the requirement. Leave the requirement text off the pager. Then add the isolation test.
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ log_denied reason=unmapped_req_blocks_release req=AUTHZ-1 release=rel_91e
 
 Not: a note body, a patient name, or a live checklist portal trace.
 
-If your alert includes the matching note, the pager now has the requirement example too.
+Putting the matching note in the alert puts the requirement example in the pager too.
 
 ## What the framework does vs what you still have to check
 
@@ -60,7 +60,7 @@ Reject any line that includes a note body, a live checklist portal trace, or “
 
 ## Use it somewhere new
 
-A clinic example: block a release when the HIPAA “done” column has no isolation test; do not attach patient rows to the ticket. Do not scrape a live governance product.
+Block a release when the HIPAA “done” column has no isolation test; do not attach patient rows to the ticket. Do not scrape a live governance product.
 
 ## What this page is not doing
 

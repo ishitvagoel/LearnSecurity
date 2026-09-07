@@ -59,7 +59,7 @@ python3 -m pytest labs/8.3/8.3-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: stop treating `as=doctor` as a convenient demo login.
+Stop treating `as=doctor` as a convenient demo login.
 
 ## What can still go wrong
 

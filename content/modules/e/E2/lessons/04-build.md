@@ -60,7 +60,7 @@ python3 -m pytest labs/E2/e2-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: send enforcing CSP, keep Report-Only as a *second* header if you still want reports.
+Send enforcing CSP, keep Report-Only as a *second* header if you still want reports.
 
 ## What can still go wrong
 

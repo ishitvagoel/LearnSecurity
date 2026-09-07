@@ -9,7 +9,7 @@ A chart can still add a ClusterRoleBinding after admission was "set once." Do no
 
 ## Picture: god-mode binding is a signal
 
-A god-mode binding still has to show up as an alert. Keep kubeconfig out of the pager. The alert should name the ServiceAccount. Then delete the binding and rotate cluster credentials.
+When you see a god-mode binding, name the ServiceAccount. Leave kubeconfig off the pager. Then delete the binding and rotate cluster credentials.
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ log_denied reason=cluster_admin_denied sa=app ns=sc-prod requested=cluster-admin
 
 Not: a kubeconfig, a cloud token, or "assurance gate complete."
 
-If your alert includes the matching kubeconfig, the pager now has cluster credentials too.
+Putting the matching kubeconfig in the alert puts cluster credentials in the pager too.
 
 ## What the framework does vs what you still have to check
 
@@ -62,7 +62,7 @@ Reject any line that includes a kubeconfig, a cloud token, or "assurance gate co
 
 ## Use it somewhere new
 
-A clinic example: deny the ClusterRoleBinding; do not paste `~/.kube/config` into the ticket. Do not apply manifests to a live cluster.
+Deny the ClusterRoleBinding; do not paste `~/.kube/config` into the ticket. Do not apply manifests to a live cluster.
 
 ## What this page is not doing
 

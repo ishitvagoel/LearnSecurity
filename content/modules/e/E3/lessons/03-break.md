@@ -17,7 +17,7 @@ Do not charge, refund, or scrape a real processor, a clinic billing system, or a
 
 What must not happen: a duplicate capture double-charges the lab ledger. Two `capture("k1")` calls leave `charge_count() == 2`.
 
-Picture a **retry after 504** or a **double-click** — “the processor said retries are fine,” a filled-in questionnaire treated as this rule, or HTTP 200 treated as once. `capture` treats the **key as identity**. Processor headers, FastAPI, and a questionnaire PDF are not enough.
+Picture a **retry after 504** or a **double-click** — “the processor said retries are fine,” a filled-in questionnaire treated as this rule, or HTTP 200 treated as once. `capture` treats the **key as identity** — not Processor headers, FastAPI, or a questionnaire PDF.
 
 ## Picture: every call appends
 

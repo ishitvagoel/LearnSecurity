@@ -9,7 +9,7 @@ A closer can still mark Done after `close_finding` was "fixed once." Do not log 
 
 ## Picture: close without retest is a signal
 
-A close that skipped retest still has to show up as an alert. Keep the finding out of the pager. The alert should name the finding. Then reopen and re-run the same isolation check.
+When you see a close that skipped retest, name the finding. Leave the finding off the pager. Then reopen and re-run the same isolation check.
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ log_denied reason=finding_closed_without_retest finding=F-authz-1
 
 Not: a note body, a live-target URL, or "assurance gate complete."
 
-If your alert includes the matching note, the pager now has the finding too.
+Putting the matching note in the alert puts the finding in the pager too.
 
 ## What the framework does vs what you still have to check
 
@@ -62,7 +62,7 @@ Reject any line that includes a note body, a live-target URL, or "assurance gate
 
 ## Use it somewhere new
 
-A clinic example: reopen the PDF-shelf ticket; do not attach patient rows. Do not pentest a live clinic system.
+Reopen the PDF-shelf ticket; do not attach patient rows. Do not pentest a live clinic system.
 
 ## What this page is not doing
 

@@ -69,7 +69,7 @@ In `labs/5.1/5.1-lab`, mark `lifecycle.py`. Write down copy, allow or deny, and 
 
 ## Use it somewhere new
 
-A clinic example: appointment card plus notes. Partner CSV export.
+Appointment card plus notes. Partner CSV export.
 
 ## What can still go wrong
 

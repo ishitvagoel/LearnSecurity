@@ -15,7 +15,7 @@ Stay inside `labs/E5/e5-lab`. Fake companies A and B go through `tenant_for(sess
 
 What must not happen: the JSON body switches the bound company. `tenant_for({"tenant": "A"}, {"tenant": "B"})` returns `"B"`.
 
-Picture a member of A who can write a JSON (or GraphQL) field — “row-level rules are on so companies are done,” a relationship-graph dashboard treated as who-is-allowed, or a famous-bugs mapping treated as this rule. `tenant_for` is supposed to bind the company from the session. FastAPI body parsing, a Host header, and a row-level session variable set from JSON are not enough.
+Picture a member of A who can write a JSON (or GraphQL) field — “row-level rules are on so companies are done,” a relationship-graph dashboard treated as who-is-allowed, or a famous-bugs mapping treated as this rule. `tenant_for` is supposed to bind the company from the session — not FastAPI body parsing, a Host header, or a row-level session variable set from JSON.
 
 ## Picture: body wins
 

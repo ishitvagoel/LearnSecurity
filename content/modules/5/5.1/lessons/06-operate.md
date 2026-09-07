@@ -11,7 +11,7 @@ Do not paste the chart into the ticket. Do not log bodies.
 
 ## Picture: hunt ids, not bodies
 
-A leftover body after delete still has to show up as an alert. Keep leftover notes out of the pager. Then purge the partition.
+When you see a leftover body after delete, leave leftover notes off the pager. Then purge the partition.
 
 ```mermaid
 flowchart TD
@@ -39,7 +39,7 @@ log_denied reason=deleted_user_body_hits store=analytics user_id=alice request_i
 
 Not: a note body, a personal email, or “privacy law handled it.”
 
-If your alert includes a note body, the pager now holds a leftover copy.
+Putting a note body in the alert leaves a leftover copy in the pager.
 
 A green dashboard tile that says “privacy mode” is not that check. If a replica warehouse still has `alice`, treat it as the same leftover body, not a separate “eventual consistency” pass. Search, analytics, and the appointment-card analogue are other paths of the same leftover — inventory them before claiming recover. An “account deleted” email is not recovery.
 
@@ -57,7 +57,7 @@ Write a log line (ids, reason, store name, no body). Reject any line that includ
 
 ## Use it somewhere new
 
-A clinic example: notice appointment-card notes after patient delete; do not paste the chart into the ticket. Do not query a live warehouse.
+Notice appointment-card notes after patient delete; do not paste the chart into the ticket. Do not query a live warehouse.
 
 ## What this page is not doing
 

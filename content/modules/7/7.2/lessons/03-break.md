@@ -17,7 +17,7 @@ Do not paste this exercise onto a public site, employer board, or live clinic po
 
 What must not happen: **a member resolves `secret_internal`**. `resolve("member", "secret_internal")` returns true.
 
-Picture a member session selecting extra fields — a clinic GraphQL `Patient { ssn }`, a REST `?fields=` dump, or a CSV exporter that serializes every ORM column. `resolve` is supposed to be a **role × field table** at the trusted layer. A SPA that omits the column, a UUID in the URL, and GraphQL `@hide` the client can skip are not enough.
+Picture a member session selecting extra fields — a clinic GraphQL `Patient { ssn }`, a REST `?fields=` dump, or a CSV exporter that serializes every ORM column. `resolve` is supposed to be a **role × field table** at the trusted layer — not A SPA that omits the column, a UUID in the URL, or GraphQL `@hide` the client can skip.
 
 ## Picture: every field is visible
 

@@ -17,7 +17,7 @@ Do not probe a live database. Do not probe an employer replica. Do not probe a c
 
 What must not happen: a query built by concatenating untrusted strings into SQL. `fetch_sql` returns a `str` instead of a bound `(sql, params)` pair.
 
-Picture a member who can supply `note_id` (or company) text that the SQL parser would treat as extra grammar — a clinic search box, an ORDER BY column name, or a GraphQL argument later in 7.1. `fetch_sql` binds those fields as **data**. SQLAlchemy `text()` with an f-string, a quote denylist, and “row-level security is on in production” are not enough.
+Picture a member who can supply `note_id` (or company) text that the SQL parser would treat as extra grammar — a clinic search box, an ORDER BY column name, or a GraphQL argument later in 7.1. `fetch_sql` binds those fields as **data** — not SQLAlchemy `text()` with an f-string, a quote denylist, or “row-level security is on in production”.
 
 ## Picture: one string is two languages
 

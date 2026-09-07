@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Stop[stop serving that parser version]
 ```
 
-A broken copy still has to show up as an alert. File bytes do not belong in the log.
+When you see a broken copy, file bytes do not belong in the log.
 
 | Outcome | This topic |
 |---|---|
@@ -45,7 +45,7 @@ Reject any line that includes file bytes, a hex dump, or “course gate complete
 
 ## Use it somewhere new
 
-A clinic example: deny the oversize DICOM copy; do not paste the image bytes into the ticket. Do not fuzz a third-party codec.
+Deny the oversize DICOM copy; do not paste the image bytes into the ticket. Do not fuzz a third-party codec.
 
 ## What this page is not doing
 

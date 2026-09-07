@@ -42,7 +42,7 @@ Reject any line that includes `secret`, a note body, or a full URL with a query 
 
 ## Use it somewhere new
 
-A clinic example: notice `?token=` on appointment links; do not paste the URL into the ticket. Do not fetch the SMS link.
+Notice `?token=` on appointment links; do not paste the URL into the ticket. Do not fetch the SMS link.
 
 ## What this page is not doing
 

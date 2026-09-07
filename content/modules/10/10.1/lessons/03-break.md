@@ -15,7 +15,7 @@ Stay inside `labs/10.1/10.1-lab`. The change is a synthetic dict. No live GitHub
 
 Do not turn off branch protection on a real org “to see what happens.” Do not paste this exercise onto a public GitHub org, employer repo, or live clinic.
 
-`merge_ok` is supposed to require a **truthy threat-model id**. Branch protection, CODEOWNERS, training checkboxes, and FastAPI defaults are not enough.
+`merge_ok` is supposed to require a **truthy threat-model id** — not Branch protection, CODEOWNERS, training checkboxes, or FastAPI defaults.
 
 Picture schedule pressure plus an always-true merge check — “CODEOWNERS plus annual HIPAA training so we merge identity changes,” a maturity score on a slide, or a champion poster treated as 3.2.
 
@@ -72,7 +72,7 @@ Run from `labs/10.1/10.1-lab` if a collection at the repo root picks up `site/`.
 
 ## Use it somewhere new
 
-A clinic example: predict “HIPAA training complete” used as merge — still only this directory. Do not change a live GitHub org.
+Predict “HIPAA training complete” used as merge — still only this directory. Do not change a live GitHub org.
 
 ## What this page is not doing
 

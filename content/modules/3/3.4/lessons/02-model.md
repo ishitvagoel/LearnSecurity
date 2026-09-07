@@ -67,7 +67,7 @@ In `labs/3.4/3.4-lab`, mark `share_limit.py`.
 
 ## Use it somewhere new
 
-A clinic example: states `0..3` guardians. Invite tokens: one token ≠ unbounded redemption.
+States `0..3` guardians. Invite tokens: one token ≠ unbounded redemption.
 
 ## What can still go wrong
 

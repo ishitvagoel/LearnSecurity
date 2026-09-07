@@ -49,7 +49,7 @@ Reject any line that includes a password, OTP, note body, or “MFA handled.”
 
 ## Use it somewhere new
 
-A clinic example: notice lookalike SSO; do not paste the staff password into the ticket. Do not visit a live lookalike.
+Notice lookalike SSO; do not paste the staff password into the ticket. Do not visit a live lookalike.
 
 ## A usable leftover
 

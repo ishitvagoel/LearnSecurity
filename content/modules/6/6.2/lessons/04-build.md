@@ -58,7 +58,7 @@ python3 -m pytest labs/6.2/6.2-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: encode the nickname in HTML text; treat markdown as a second parser.
+Encode the nickname in HTML text; treat markdown as a second parser.
 
 ## What can still go wrong
 

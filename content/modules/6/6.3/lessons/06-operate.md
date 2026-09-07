@@ -44,7 +44,7 @@ Reject any line that includes a session cookie, CSRF token, or note body.
 
 ## Use it somewhere new
 
-A clinic example: notice partner-share POSTs from the wrong origin; do not paste cookies into the ticket. Do not visit a live foreign origin.
+Notice partner-share POSTs from the wrong origin; do not paste cookies into the ticket. Do not visit a live foreign origin.
 
 ## What this page is not doing
 

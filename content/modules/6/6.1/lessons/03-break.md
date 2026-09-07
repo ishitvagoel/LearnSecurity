@@ -17,7 +17,7 @@ Do not run a live OS command. Do not probe an employer export worker. Do not pro
 
 What must not happen: a user-chosen name run through a shell string. `argv_for_list("notes")` starts with `["sh", "-c"]` and `uses_shell` is true.
 
-Picture a member who can choose an export name — a clinic CSV filename, a Jinja template name, or a mail header later. `argv_for_list` passes the name as **one argv element** to a fixed binary. A denylist of punctuation, `shell=True` with “cleaned” strings, and “internal users are trusted” are not enough.
+Picture a member who can choose an export name — a clinic CSV filename, a Jinja template name, or a mail header later. `argv_for_list` passes the name as **one argv element** to a fixed binary — not A denylist of punctuation, `shell=True` with “cleaned” strings, or “internal users are trusted”.
 
 ## Picture: sh -c is a second parser
 

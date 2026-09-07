@@ -90,7 +90,7 @@ python3 -m pytest labs/11/11-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A clinic example: revoke a guardian. Full notes-app slice: the same rule across API, worker, and phone cache.
+Revoke a guardian. Full notes-app slice: the same rule across API, worker, and phone cache.
 
 ## What this page is not doing
 

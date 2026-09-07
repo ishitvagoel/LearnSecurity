@@ -17,7 +17,7 @@ Do not paste this exercise onto a public site, employer board, or live clinic po
 
 What must not happen: **Report-Only treated as isolation**. `isolation_enforced({"Content-Security-Policy-Report-Only": "default-src 'none'"})` returns true.
 
-Picture a script that would only be logged — “we ship Report-Only so scripts are blocked,” a Helmet default treated as encoding (6.2), or a green reporting dashboard treated as isolation. `isolation_enforced` is supposed to require the **enforcing** header name. Next.js header helpers, a CDN, and FastAPI are not enough.
+Picture a script that would only be logged — “we ship Report-Only so scripts are blocked,” a Helmet default treated as encoding (6.2), or a green reporting dashboard treated as isolation. `isolation_enforced` is supposed to require the **enforcing** header name — not Next.js header helpers, a CDN, or FastAPI.
 
 ## Picture: any CSP-looking header counts
 

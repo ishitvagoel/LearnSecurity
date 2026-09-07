@@ -61,7 +61,7 @@ Do not execute the returned list.
 
 ## Use it somewhere new
 
-A clinic example: stop wrapping the export filename in `sh -c`; pass it as argv.
+Stop wrapping the export filename in `sh -c`; pass it as argv.
 
 ## What can still go wrong
 
