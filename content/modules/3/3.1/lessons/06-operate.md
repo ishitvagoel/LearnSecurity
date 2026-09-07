@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Purge[Purge matching lines]
 ```
 
-Buying a log product does not redact the body. A clean-looking line is not that check.
+Shipping a log pipeline does not redact the body.
 
 ## Signals that do not become a second leak
 

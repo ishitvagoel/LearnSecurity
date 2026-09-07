@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A chart can still add a ClusterRoleBinding after admission was "set once." Do not log kubeconfig, cloud tokens, or node credentials. Do not paste `~/.kube/config` into the ticket.
+A chart can still add a ClusterRoleBinding. Keep kubeconfig, cloud tokens, node credentials, and `~/.kube/config` out of the ticket.
 
 ## Picture: god-mode binding is a signal
 
@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Rotate[rotate cluster creds]
 ```
 
-A CIS dashboard does not delete cluster-admin. A badge that says least-privileged is not that check.
+A CIS dashboard does not delete cluster-admin.
 
 A cluster-admin Role still has to be denied in `test_cluster_admin_pod_is_denied`. A “private” namespace does not delete cluster-admin. Break-glass ClusterRoles can still admit cluster-admin; the binding is not gone until those roles are named.
 

@@ -62,4 +62,4 @@ Refuse the boot that still has debug on. Keep the answer keys closed. `labs/10.4
 
 ## What this page is not doing
 
-Do not run live-production attacks. Do not follow public debug-endpoint walkthroughs. This page does not finish an assurance gate.
+Do not run live-production attacks. Do not follow public debug-endpoint walkthroughs. This page does not finish a check-in.

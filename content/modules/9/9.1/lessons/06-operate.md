@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new requirement can land without a test after `covered` was repaired once. Do not log note bodies or company dumps from the failing test (3.1). Leave patient rows off the ticket.
+A new requirement can land with no isolation test attached. Skip failing-test note bodies, company dumps, and patient rows in the ticket.
 
 ## Picture: uncovered AUTHZ-1 is a signal
 
@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Stop[block release]
 ```
 
-Buying a governance product does not attach an isolation test. A badge that says the requirement is covered is not that check.
+Importing a governance catalog does not attach an isolation test to AUTHZ-1.
 
 A status-only row with no isolation test still has to fail `test_status_only_row_is_not_coverage`. Importing a checklist does not attach an isolation test. Mobile storage rows (8.2) still need an isolation test; a checklist tick does not cover AUTHZ-1. A 200-only test that someone flagged `asserts_isolation` by mistake is a later lying-flag leftover (9.3), not a silent pass.
 

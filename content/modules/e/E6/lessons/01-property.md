@@ -87,8 +87,8 @@ python3 -m pytest labs/E6/e6-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-Clinic “HIPAA exception.” A procurement questionnaire vs this record.
+Sketch a “HIPAA exception” on the notes app. Compare a procurement questionnaire to this record.
 
 ## What this page is not doing
 
-Do not use live disclosure inboxes. A maturity score as the syllabus. This page does not finish an assurance gate. Answer keys are not on this site.
+Do not use live disclosure inboxes. Do not treat a maturity score as the syllabus. This page does not finish a check-in. Answer keys are not on this site.

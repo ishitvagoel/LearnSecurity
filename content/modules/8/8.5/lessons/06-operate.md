@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new SDK version can turn “include extras” back on after `crash_report` was repaired once. Do not log the body you just redacted (3.1). Leave the report body off the ticket.
+A crash-SDK bump can turn “include extras” back on. Do not paste the redacted note or the report body back in.
 
 ## Picture: body in telemetry is a signal
 
@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Purge[Purge vendor copy]
 ```
 
-Buying a crash product does not omit the note. A clean-looking report is not that check.
+The crash vendor does not omit the note for you.
 
 If the crash payload still holds the note, `test_crash_report_omits_note_body` is the check. Filling the store privacy form does not omit the note. Tracker SDKs and web crash reports (10.5) can still carry the note; redaction is not done until those sinks are named.
 

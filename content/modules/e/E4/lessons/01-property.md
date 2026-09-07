@@ -75,8 +75,8 @@ Parser error messages must be readable without dumping file bytes. Operators sho
 
 ## Use it somewhere new
 
-Clinic DICOM / image parser. Protobuf C extension.
+Sketch a DICOM or image parser on the notes app. Also name a protobuf C extension.
 
 ## What this page is not doing
 
-Do not use weaponized native exploits. An awareness list as the syllabus. This page does not finish a check-in. Answer keys are not on this site.
+Do not use weaponized native exploits. Do not treat an awareness list as the syllabus. This page does not finish a check-in. Answer keys are not on this site.

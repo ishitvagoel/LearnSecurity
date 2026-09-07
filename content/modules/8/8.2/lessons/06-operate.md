@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new WorkManager blob can skip the cache wrapper after `save_note` was repaired once. Do not log note bodies (3.1). Leave the chart off the ticket.
+WorkManager can persist a blob that never went through the `save_note` wrap. Skip the chart and the note body when you file the miss.
 
 ## Picture: leftover cache is a signal
 

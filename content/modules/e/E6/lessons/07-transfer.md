@@ -63,4 +63,4 @@ Fill owner and `review_by` before you accept the exception. Keep the answer keys
 
 ## What this page is not doing
 
-Do not run live-disclosure. Do not use production exceptions. Do not use real patient charts in tickets. This page does not finish an assurance gate.
+Do not run live-disclosure. Do not use production exceptions. Do not use real patient charts in tickets. This page does not finish a check-in.

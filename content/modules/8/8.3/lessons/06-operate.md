@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new exported Activity can copy extras again after `open_link` was repaired once. Do not log full URLs if they contain tokens (4.3). Leave the link off the ticket.
+An exported Activity can copy extras again and ignore `as=`. Do not paste token-bearing URLs or the dropped link.
 
 ## Picture: dropped as= is a signal
 

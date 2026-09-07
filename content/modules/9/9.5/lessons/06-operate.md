@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A closer can still mark Done after `close_finding` was repaired once. Do not log note bodies from the original finding. Leave patient JSON off the ticket. Do not paste a live-target URL into chat.
+A closer can still mark Done without replaying the same isolation check. Skip original finding bodies and patient JSON in the ticket. Do not paste a live-target URL into chat.
 
 ## Picture: close without retest is a signal
 
@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Reopen[reopen]
 ```
 
-Buying a ticket product does not retest the finding. A badge that says “retested” is not that check.
+Moving a ticket to Done does not replay the finding.
 
 Close without a pass on the same URL still has to fail `test_cannot_close_without_retest`. Attaching a PDF does not prove the finding was retested. Extra fields on the note and a role-change cache can reopen the same hole; do not close the ticket until those paths are named.
 

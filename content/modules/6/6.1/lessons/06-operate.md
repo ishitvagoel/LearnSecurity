@@ -7,7 +7,7 @@
 
 A plugin path can glue `sh -c` after `argv_for_list` returns a list. Page the shell spawn, stop the process, and restore the list form.
 
-Do not log export names that are patient identifiers. Do not paste filenames into the ticket if they are patient data.
+Patient export names and filenames do not go in the ticket.
 
 ## Picture: unexpected child is a signal
 

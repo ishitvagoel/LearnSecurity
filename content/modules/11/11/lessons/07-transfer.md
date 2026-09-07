@@ -62,4 +62,4 @@ Prove B cannot read after the share is gone. Keep the answer keys closed. `labs/
 
 ## What this page is not doing
 
-Do not run live-tenant attacks. Do not use real patient charts in notes. This page does not finish an assurance gate.
+Do not run live-tenant attacks. Do not use real patient charts in notes. This page does not finish a check-in.

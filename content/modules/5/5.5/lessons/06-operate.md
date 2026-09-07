@@ -7,7 +7,7 @@
 
 A new report path can concatenate after `fetch_sql` is bound. Notice that report, contain the path, rotate the account, and restore if rows changed.
 
-Do not log note bodies or bound parameter values that are bodies (3.1 / 5.1). Do not paste patient names into the ticket.
+Keep note bodies, bound parameter values that are bodies, and patient names out of the ticket.
 
 ## Picture: error shape is a signal
 

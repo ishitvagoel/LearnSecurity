@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A recovery SMS, a shared password, or a stolen authenticator can still mint a session after the helper was repaired once. Do not log passwords, OTP, or note bodies. Leave a staff password out of the ticket.
+A recovery SMS, a shared password, or a stolen authenticator can still mint a session. Do not write passwords, OTP, note bodies, or staff passwords into the ticket.
 
 ## Picture: origin mismatch, then revoke
 

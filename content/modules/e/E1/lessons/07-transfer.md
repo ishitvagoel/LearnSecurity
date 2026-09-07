@@ -62,4 +62,4 @@ Keep `exec_sql` off the always-run list. Keep the answer keys closed. `labs/E1/e
 
 ## What this page is not doing
 
-Do not run live-model attacks. Do not follow public prompt-injection walkthroughs. This page does not finish an assurance gate.
+Do not run live-model attacks. Do not follow public prompt-injection walkthroughs. This page does not finish a check-in.

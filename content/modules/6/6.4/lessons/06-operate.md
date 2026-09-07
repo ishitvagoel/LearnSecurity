@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new export path can join a user filename again after `resolve` was repaired once. Do not log original filenames if they are patient ids. Leave host paths out of the ticket.
+An export path can join a user filename again and walk out of the folder. Skip patient filenames and host paths in the ticket.
 
 ## Picture: an escape attempt is a signal
 

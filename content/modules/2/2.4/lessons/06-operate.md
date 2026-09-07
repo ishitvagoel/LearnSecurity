@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new client that mints a key per retry, a lifetime that is too short, or a store outage can reintroduce duplicates after `_SEEN` was “set once.” Do not log note bodies or session values. Do not fail open: if the idempotency store is unreachable, do not insert “just this once.”
+A client that mints a key per retry, a lifetime that is too short, or a store outage can reintroduce duplicates. Keep note bodies and session values out of the ticket. Do not fail open: if the idempotency store is unreachable, do not insert “just this once.”
 
 ## Picture: count versus unique keys
 

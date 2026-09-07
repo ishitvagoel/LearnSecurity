@@ -22,7 +22,7 @@ flowchart TD
   Inc -->|no| Watch[Keep watching the live window]
 ```
 
-Buying a log product does not put the company in the cache key. Ticking a checklist does not write the key.
+A log pipeline does not put the company in the cache key.
 
 Certificate-failure drills belong to TLS deployment, not this cache-key sentence. Keep them in a separate note so they do not replace purge.
 

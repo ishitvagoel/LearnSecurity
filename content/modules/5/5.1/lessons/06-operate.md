@@ -7,7 +7,7 @@
 
 A replica warehouse, backup, or support ticket can still hold the body after `delete_account` pops the maps. Notice that leftover, contain the replica, purge the body, and do not log note bodies.
 
-Do not paste the chart into the ticket. Do not log bodies.
+Keep the chart and leftover bodies out of the ticket.
 
 ## Picture: hunt ids, not bodies
 

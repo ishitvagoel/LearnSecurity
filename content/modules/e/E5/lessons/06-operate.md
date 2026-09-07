@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new GraphQL field can reintroduce the body company after the binding was “set once.” Do not log note bodies. Do not paste the chart note into the ticket.
+A new GraphQL field can reintroduce the body company. Keep note bodies and the chart note out of the ticket.
 
 The JSON body is not the tenant. If body tenant overrides session, you still bind tenant from the session — and you count the disagreement.
 

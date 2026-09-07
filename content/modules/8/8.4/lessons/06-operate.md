@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new flavor can reuse the prod client id after `api_allowed` was repaired once. Do not log binaries or secrets (5.3). Leave the APK off the ticket.
+A debug flavor can reuse the prod client id. Do not attach binaries, secrets, or the APK.
 
 ## Picture: debug hitting prod is a signal
 

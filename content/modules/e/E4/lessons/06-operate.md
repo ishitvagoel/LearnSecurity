@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new unpacker can land after the min was “set once.” Do not log file bytes. Uploaded bytes can contain secrets. Do not paste image bytes into the ticket.
+A new unpacker can land without the length bound. Keep file bytes and uploaded image bytes out of the ticket — they can hold secrets.
 
 ## Picture: a rejected unpack is a signal
 

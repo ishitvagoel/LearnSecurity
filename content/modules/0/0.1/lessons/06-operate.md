@@ -6,7 +6,7 @@
 
 ## Fixing it once is not enough
 
-A new “quick check” snippet can paste a public host after the allow-list was “set once.” Pair noticing with recovery. **Never** store response bodies from denied hosts. Never screenshot a public site “for the ticket.” Never continue after deny.
+A new “quick check” snippet can paste a public host. Pair noticing with recovery. **Never** store response bodies from denied hosts. Never screenshot a public site “for the ticket.” Never continue after deny.
 
 ## Picture: an out-of-scope host is a signal
 

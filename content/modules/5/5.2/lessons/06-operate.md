@@ -7,7 +7,7 @@
 
 A new encoding wrapper can land in a worker after `protect` prefixes `aesgcm:`. Notice that wrapper, contain the worker, re-protect the column, and do not log note bodies.
 
-Do not log plaintext bodies. Do not paste an SSN into the ticket.
+Keep plaintext bodies and SSNs out of the ticket.
 
 ## Picture: CI is a detector
 

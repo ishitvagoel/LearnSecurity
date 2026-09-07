@@ -96,4 +96,4 @@ Ransomware restore vs note-level integrity. Closing the ticket because SIEM is g
 
 ## What this page is not doing
 
-Do not use live incident systems. This page does not finish an assurance gate. Answer keys are not on this site.
+Do not use live incident systems. This page does not finish a check-in. Answer keys are not on this site.

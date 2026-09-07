@@ -20,7 +20,7 @@ flowchart TD
   Sig --> Ev[Evidence: keyboard vs mouse and reason, never codes]
 ```
 
-Buying a log product does not make recovery usable from the keyboard. Ticking a checklist does not restore the control.
+A log pipeline does not make recovery usable from the keyboard.
 
 ## Signals that do not become a second leak
 

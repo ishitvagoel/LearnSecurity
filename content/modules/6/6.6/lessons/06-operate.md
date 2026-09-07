@@ -7,7 +7,7 @@
 
 A new accept route can skip consume after the token lives in a `set`. Notice the second join, keep the deny, remove a surprise member, and do not log the token.
 
-Do not log tokens (4.3) or email addresses as if they were public ids. Do not paste the mail link into the ticket.
+Keep tokens, email addresses, and the mail link out of the ticket.
 
 ## Picture: second accept is a signal
 

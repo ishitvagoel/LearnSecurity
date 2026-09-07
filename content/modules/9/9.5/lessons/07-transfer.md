@@ -62,4 +62,4 @@ Retest the same bad URL before you close. Keep the answer keys closed. `labs/9.5
 
 ## What this page is not doing
 
-Do not try live-target pentest. Do not use real patient charts in findings. This page does not finish an assurance gate.
+Do not try live-target pentest. Do not use real patient charts in findings. This page does not finish a check-in.

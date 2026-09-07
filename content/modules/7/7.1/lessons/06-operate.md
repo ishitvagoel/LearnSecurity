@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new GraphQL mutation or leftover `/v0` PATCH can skip the REST allow-list after `apply` was repaired once. Do not log the PATCH body (3.1 / 5.1). Leave the profile JSON off the ticket.
+A GraphQL mutation or leftover `/v0` PATCH can skip the REST allow-list. The PATCH body and the profile JSON do not go in the ticket.
 
 ## Picture: extra keys are a signal
 

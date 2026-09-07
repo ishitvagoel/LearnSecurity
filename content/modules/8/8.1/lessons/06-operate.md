@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new client field (`premium`, `hipaaMode`) can skip the attest check after `allow_export` was repaired once. Do not log note bodies or attestation blobs (3.1). Leave the Android app file off the ticket.
+`premium` or `hipaaMode` on the client can skip server attest. Note bodies, attestation blobs, and the Android app file do not belong in the ticket.
 
 ## Picture: failed attest is a signal
 

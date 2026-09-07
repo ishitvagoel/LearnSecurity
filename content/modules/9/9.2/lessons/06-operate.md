@@ -7,7 +7,7 @@
 
 A later generated helper can put `eval` back after `review_ok` is green. Page that helper, quarantine the file, and keep the reject.
 
-Do not log the user string that would have been eval’d. Do not paste template source with patient fields into chat.
+Keep the eval’d user string and template source with patient fields out of chat.
 
 ## Picture: eval in a change is a signal
 

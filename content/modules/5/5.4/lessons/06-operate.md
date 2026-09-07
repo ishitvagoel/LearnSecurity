@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A misconfigured proxy can start trusting `*` again after `channel_is_https` was repaired once. Do not log cookie values. Leave the session out of the ticket.
+A proxy that trusts `*` again will mint cookies on a cleartext socket. Cookie values and the session do not go in the ticket.
 
 ## Picture: header versus socket mismatch is a signal
 

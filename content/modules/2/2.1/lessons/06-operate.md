@@ -18,7 +18,7 @@ flowchart TD
   Decision -->|yes| Mediate[Hand the parse result to the who-is-allowed check]
 ```
 
-Buying a log product does not pick the reader. Ticking a checklist does not pick it either.
+A log pipeline does not pick which JSON reader you trust.
 
 ## Signals that do not become a second leak
 

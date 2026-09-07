@@ -23,7 +23,7 @@ flowchart TD
 | Recover | Credit extra in a runbook; still fail the test first |
 | Leftover | New-key retry; webhook race |
 
-A vendor name does not prove this ledger rule. A second `k1` still has to fail `test_duplicate_capture_does_not_double_charge`. “The processor remembers” does not stop a second capture. Webhook inserts can still double-charge; the ledger is not once until that path is named.
+A second `k1` still has to fail `test_duplicate_capture_does_not_double_charge`. The processor name does not remember captures for you. Webhook inserts can still double-charge; the ledger is not once until that path is named.
 
 ## What the framework does vs what you still have to check
 

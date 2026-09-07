@@ -7,7 +7,7 @@
 
 A replica session store, refresh token, or worker can still present `alice` after `delete_user` pops the session. Notice that leftover, contain the replica store, mass-revoke `alice`, and do not log note bodies.
 
-Do not paste a personal email or a production cookie into the ticket. Do not log note bodies.
+Keep personal emails, production cookies, and note bodies out of the ticket.
 
 ## Picture: alert on use after deleted
 

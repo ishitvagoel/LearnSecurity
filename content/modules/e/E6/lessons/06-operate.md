@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new “fast-track risk” form can drop `review_by` after the schema was “set once.” Do not log leftover-risk writeups that contain secrets. Do not paste chart text into the ticket.
+A “fast-track risk” form can drop `review_by`. Keep leftover-risk writeups that contain secrets, and chart text, out of the ticket.
 
 ## Picture: incomplete row is a signal
 
@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Expire[expire or re-accept]
 ```
 
-Buying a governance product does not fill owner, review date, and accessibility. A schema screenshot is not that check.
+A schema screenshot still leaves owner, review date, and accessibility empty.
 
 Blank owner or `review_by` still has to make `test_exception_needs_owner_review_and_wcag` fail. A maturity 2.5 tile does not fill owner, review date, and accessibility. Expired `review_by` dates are the same unowned hole; do not accept the exception until those rows are named.
 

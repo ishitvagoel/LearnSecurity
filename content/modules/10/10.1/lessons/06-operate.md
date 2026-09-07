@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new identity change can land after `merge_ok` was repaired once. Do not log GitHub tokens or real org names (5.3). Do not paste private threat-model bodies into chat.
+A new identity change can merge with no threat-model id. GitHub tokens, real org names, and private threat-model bodies stay out of chat.
 
 ## Picture: missing threat-model id is a signal
 

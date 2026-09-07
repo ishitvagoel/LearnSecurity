@@ -63,4 +63,4 @@ Prove restore ran before you close the incident. Keep the answer keys closed. `l
 
 ## What this page is not doing
 
-Do not run live-incident attacks. Do not use real patient charts in logs. This page does not finish an assurance gate.
+Do not run live-incident attacks. Do not use real patient charts in logs. This page does not finish a check-in.

@@ -83,4 +83,4 @@ Serverless IAM `*`. An app service account that is cluster-admin is the same god
 
 ## What this page is not doing
 
-Do not use live clusters. This page does not finish an assurance gate from this page. Answer keys are not on this site.
+Do not use live clusters. This page does not finish a check-in. Answer keys are not on this site.

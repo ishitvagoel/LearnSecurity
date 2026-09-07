@@ -92,4 +92,4 @@ A feature flag that turns off authorization. Django `DEBUG=True` is the same fai
 
 ## What this page is not doing
 
-Do not use live production hosts. This page does not finish an assurance gate. Answer keys are not on this site.
+Do not use live production hosts. This page does not finish a check-in. Answer keys are not on this site.

@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new rule can fire a new HIGH after `ship_ok` was repaired once. Do not log secret-scanner payloads or note bodies. Do not paste scanner snippets with fake clinic text into Slack.
+A new scanner rule can fire a HIGH that nobody owns. Keep secret-scanner payloads and note bodies out of Slack, including fake clinic snippets.
 
 ## Picture: unmapped HIGH is a signal
 
@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Stop[block ship]
 ```
 
-Turning on a scanner does not own the HIGH. A badge that says the finding is owned is not that check.
+Turning on a scanner does not assign an owner to the HIGH.
 
 An unmapped HIGH still has to block ship in `test_unmapped_high_blocks_ship`. Turning code scanning on does not own the HIGH. SCA CVEs that are not actually called still need an *owner* on the map; do not ship an unmapped HIGH.
 

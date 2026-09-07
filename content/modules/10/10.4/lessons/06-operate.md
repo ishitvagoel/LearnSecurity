@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A flag can still flip after `boot_ok` was repaired once. Do not log stack traces that contain secrets, session tokens, or note bodies. Leave the traceback out of the ticket.
+Production can still boot with debug on. Do not paste secret-bearing stack traces or the traceback.
 
 ## Picture: an illegal boot is a signal
 
@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Kill[kill and rotate trace secrets]
 ```
 
-A canary product does not keep debug off in production. A tile that says boot was refused is not that check.
+A canary product does not keep debug off in production.
 
 Debug on in prod still has to refuse boot in `test_prod_debug_must_not_boot`. A green `NODE_ENV` tile does not keep debug off. Emergency debug is E6 — do not call production safe until that exception is on the register.
 

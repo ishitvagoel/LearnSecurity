@@ -75,8 +75,8 @@ python3 -m pytest labs/E5/e5-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-Clinic group practice switching `org_id` in JSON. A relationship-graph tuple vs this binding.
+Sketch a group practice switching `org_id` in JSON. Compare a relationship-graph tuple to this binding.
 
 ## What this page is not doing
 
-Do not use live companies. A famous-bugs list as the syllabus. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live companies. Do not treat a famous-bugs list as the syllabus. This site does not mark you as finished. Answer keys are not on this site.

@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A closer can still mark Done after `close_incident` was repaired once. Do not log note bodies, session tokens, or dump files into the ticket. Do not paste note text into chat.
+A closer can still mark Done without a restore. Skip note bodies, session tokens, and dump files in the ticket. Do not paste note text into chat.
 
 ## Picture: illegal close is a signal
 
@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Reopen[reopen and restore]
 ```
 
-Buying a SIEM does not prove recovery ran. A tile that says restore ran is not that check.
+A green SIEM tile is not proof the restore ran.
 
 Close without restore still has to fail `test_cannot_close_without_recovery`. Alerts stopping does not prove recovery ran. `test_cannot_close_when_logs_contain_note_body` still has to catch a second sink — crash reports and web telemetry can put the body back.
 

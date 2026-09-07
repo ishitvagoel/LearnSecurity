@@ -94,4 +94,4 @@ Revoke a guardian. Full notes-app slice: the same rule across API, worker, and p
 
 ## What this page is not doing
 
-Do not use live tenants. This page does not finish an assurance gate. Answer keys are not on this site.
+Do not use live tenants. This page does not finish a check-in. Answer keys are not on this site.

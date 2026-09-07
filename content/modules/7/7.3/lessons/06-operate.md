@@ -7,7 +7,7 @@
 
 A new callback path can skip the MAC after `accept` hashes the body. Page the unsigned callback, cut the path, and keep the deny.
 
-Do not log bodies or `lab-secret` (3.1 / 5.3). Leave the HL7/JSON body off the ticket. Do not POST a live webhook “to confirm.”
+Skip callback bodies, `lab-secret`, and the HL7/JSON payload in the ticket. Do not POST a live webhook “to confirm.”
 
 ## Picture: a missing sig is a signal
 

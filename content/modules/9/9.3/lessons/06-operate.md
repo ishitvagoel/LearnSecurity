@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new endpoint can land with only 200 tests after `is_security_test` was repaired once. Do not log note bodies from failed isolation cases (3.1). Leave patient JSON off the ticket.
+CI can ship a new endpoint whose only security cases are HTTP 200s. Keep failed isolation bodies and patient JSON out of the ticket.
 
 ## Picture: missing isolation is a signal
 
@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Block[block release]
 ```
 
-Buying a coverage product does not name what must not happen. A badge that says the suite is honest is not that check.
+Coverage percent and an honesty badge do not name the isolation case.
 
 A 200-only case is still not a security test — `test_http_200_only_is_not_a_security_test`. Ninety-four percent coverage does not name what must not happen. Field-level tests (7.2) and race-condition tests still need a named bad result; coverage percent does not complete the suite. Keep 200-only tests as product tests; do not delete them, and do not let them occupy the security-suite slot.
 

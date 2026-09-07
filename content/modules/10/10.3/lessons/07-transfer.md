@@ -62,4 +62,4 @@ Deny the pod that is cluster-admin. Keep the answer keys closed. `labs/10.3/10.3
 
 ## What this page is not doing
 
-Do not run live-cluster attacks. Do not use real cloud-account takeover. This page does not finish an assurance gate.
+Do not run live-cluster attacks. Do not use real cloud-account takeover. This page does not finish a check-in.

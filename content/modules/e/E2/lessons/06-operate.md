@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A CDN can strip the enforcing header after deploy. Do not log full HTML or note bodies (3.1). Do not paste the page source into the ticket.
+A CDN can strip the enforcing header after deploy. Keep full HTML, note bodies, and the page source out of the ticket.
 
 ## Picture: Report-Only-only is a signal
 

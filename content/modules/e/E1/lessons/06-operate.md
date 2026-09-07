@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new tool can still be registered after the allow-list was "set once." Do not log note bodies or full model transcripts. Do not paste the prompt into the ticket.
+A new tool can still be registered outside the allow-list. Keep note bodies, full model transcripts, and the prompt out of the ticket.
 
 ## Picture: denied tool is a signal
 
@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Revoke[revoke agent creds]
 ```
 
-A vendor product does not make the tool gate an allow-list. Calling it an allow-list is not that check.
+A vendor product does not make the tool gate an allow-list.
 
 `test_exec_sql_tool_is_denied` still has to catch `exec_sql` on always-run. A prompt that “forbids SQL” does not deny `exec_sql`. Coding-assistant install tools in CI still run unconstrained; the allow-list is not done until those tools are named.
 

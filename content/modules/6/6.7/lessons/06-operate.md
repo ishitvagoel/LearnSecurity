@@ -7,7 +7,7 @@
 
 A new export format can skip the counter after `allow` caps at three. Page the fourth export, contain the extra CSV, and restore the quota.
 
-Do not log note bodies in the CSV path (3.1 / 5.1). Leave the CSV off the ticket.
+Skip note bodies and the extra CSV in the ticket.
 
 ## Picture: the fourth try is a signal
 

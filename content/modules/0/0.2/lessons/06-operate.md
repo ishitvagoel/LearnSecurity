@@ -6,7 +6,7 @@
 
 ## Fixing it once is not enough
 
-A new “fast-track seniors” flag can reintroduce score-as-skip after the check was “set once.” Pair noticing with recovery. Do not back-date check-in 1. Do not log quiz item text if it leaks practice keys. Do not treat a badge screenshot as recovery evidence.
+A new “fast-track seniors” flag can reintroduce score-as-skip. Pair noticing with recovery. Do not back-date check-in 1. Do not log quiz item text if it leaks practice keys. Do not treat a badge screenshot as recovery evidence.
 
 ## Picture: a denied skip is a signal
 

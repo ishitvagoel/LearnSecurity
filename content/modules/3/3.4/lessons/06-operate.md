@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-An import job, a support tool, or a missed GraphQL mutation can still insert a sixth after `/share` was “capped once.” Do not log note bodies. Do not paste member emails into the ticket.
+An import job, a support tool, or a missed GraphQL mutation can still insert a sixth share. Keep note bodies and member emails out of the ticket.
 
 ## Picture: metric on deny, then trim
 
