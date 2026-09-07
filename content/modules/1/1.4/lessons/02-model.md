@@ -85,7 +85,7 @@ In `labs/1.4/1.4-risk-register`, mark `recovery.py`. Write down rule, person, ha
 
 ## Use it somewhere new
 
-Clinic second factor: mouse-only. Add rows for a clinician on a shared workstation and a patient using only a keyboard. Which dimensions of “how far a break can spread” change (time, objects, hiding the evidence)?
+Map a mouse-only second factor. Add rows for a clinician on a shared workstation and a patient using only a keyboard. Which dimensions of “how far a break can spread” change (time, objects, hiding the evidence)?
 
 ## What can still go wrong
 

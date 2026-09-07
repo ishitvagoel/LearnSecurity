@@ -48,7 +48,7 @@ Call `allow_share` on a foreign origin. `SameSite` on a cookie helper is the coo
 
 ## Use it somewhere new
 
-Clinic partner-share. HTTP 200 on `/share` is the status, not a foreign origin with `token=None` (see the later testing topic). Do not run a test that visits a live third-party page.
+HTTP 200 on `/share` is the status, not a foreign origin with `token=None`. Do not run a test that visits a live third-party page.
 
 ## What this page is not doing
 

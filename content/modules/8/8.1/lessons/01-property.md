@@ -77,7 +77,7 @@ python3 -m pytest labs/8.1/8.1-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-Clinic Android `hipaaMode=true`. Feature flags in the app file. `premium=true`.
+Android `hipaaMode=true` is a client flag, not a server attest. Feature flags in the app file and `premium=true` are the same leftover.
 
 ## What this page is not doing
 

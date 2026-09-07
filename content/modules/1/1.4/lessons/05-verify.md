@@ -51,7 +51,7 @@ python -m pytest labs/1.4/1.4-risk-register/tests --impl fixed
 
 ## Use it somewhere new
 
-Clinic mouse-only second factor: write one test name you would want (`test_step_up_control_keyboard_operable`) and what must fail on the broken widget. Do not run it against a real clinic.
+Write a test name you would want for a mouse-only second factor (`test_step_up_control_keyboard_operable`) and what must fail on the broken widget. Do not run it against a real clinic.
 
 ## What this page is not doing
 

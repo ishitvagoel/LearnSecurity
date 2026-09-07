@@ -41,7 +41,7 @@ Fail closed: if you are unsure whether the retest hit the same isolation check, 
 - A known-exploited listing.
 - A ticket marked Done.
 - A PDF.
-- An assurance gate sticker.
+- A check-in sticker.
 - A retest of `/health`.
 - Membership in a testing-guide list.
 - Exploratory leftovers counted as close.

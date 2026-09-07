@@ -79,7 +79,7 @@ python3 -m pytest labs/7.4/7.4-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-Clinic batch-export worker. Outbox. Event schemas.
+A batch-export worker is this grain. Outbox and event schemas are sibling leftovers.
 
 ## What this page is not doing
 

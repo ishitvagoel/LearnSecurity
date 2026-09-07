@@ -57,7 +57,7 @@ Earlier lessons already said bodies stay out of logs. This check is **detect wit
 | How you stop it later | Require recovery done and no `note_body` |
 | How you notice later | `incident_closed_without_recovery`; never bodies |
 | How you recover later | This *is* the step — restore drill |
-| Out of scope | A SIEM product; live paging; claiming an assurance gate |
+| Out of scope | A SIEM product; live paging; claiming a check-in |
 
 A SIEM dashboard turns green when alerts stop. A paging ack is a human click. The notes app’s API will log whatever you print. Recovery todo is deny and `note_body` in logs is deny.
 
@@ -71,7 +71,7 @@ Run from `labs/10.5/10.5-lab` if a collection at the repo root picks up `site/`.
 
 ## Use it somewhere new
 
-Clinic SIEM-green close: predict without leaving this directory. Do not query a live SIEM.
+Closing an incident because the SIEM tile is green is the leftover. Predict without leaving this directory. Do not query a live SIEM.
 
 ## What this page is not doing
 

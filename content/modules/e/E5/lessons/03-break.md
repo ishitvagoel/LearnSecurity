@@ -65,7 +65,7 @@ Run from `labs/E5/e5-lab` if a repo-root collection picks up `site/`. Do not pro
 
 ## Use it somewhere new
 
-Clinic group practice: predict the switch without leaving this directory. Do not hit a live clinic system.
+A group practice can switch `org_id` in JSON. Predict the switch without leaving this directory. Do not hit a live clinic system.
 
 ## What this page is not doing
 

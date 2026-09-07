@@ -38,7 +38,7 @@ A ticket dashboard will show Done counts and stay silent when CI's `close_findin
 log_denied reason=finding_closed_without_retest finding=F-authz-1
 ```
 
-Not: a note body, a live-target URL, or "assurance gate complete."
+Not: a note body, a live-target URL, or "check-in complete."
 
 Putting the matching note in the alert puts the finding in the pager too.
 
@@ -58,7 +58,7 @@ A reopen notice must say *why* the finding stayed open (missing retest), not onl
 log_denied reason=finding_closed_without_retest finding=F-authz-1
 ```
 
-Reject any line that includes a note body, a live-target URL, or "assurance gate complete."
+Reject any line that includes a note body, a live-target URL, or "check-in complete."
 
 ## Use it somewhere new
 

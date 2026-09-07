@@ -74,7 +74,7 @@ python3 -m pytest labs/6.6/6.6-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-Clinic invite-guardian token. Password reset. 2.4 share retry. Later job delivery (7.4).
+An invite-guardian token is this grain — the same shape as password reset, a 2.4 share retry, and later job delivery (7.4).
 
 ## What this page is not doing
 

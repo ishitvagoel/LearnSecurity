@@ -64,7 +64,7 @@ Do not visit `evil.example` as a real host. A setup error is not proof the rule 
 
 ## Use it somewhere new
 
-Clinic partner-share. Predict without leaving this directory. Do not hit a live clinic system.
+A partner-share POST can skip the token check. Predict without leaving this directory. Do not hit a live clinic system.
 
 ## What this page is not doing
 

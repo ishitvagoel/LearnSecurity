@@ -67,7 +67,7 @@ Run from `labs/E2/e2-lab` if a repo-root collection picks up `site/`. Do not “
 
 ## Use it somewhere new
 
-Clinic HIPAA header: predict without leaving this directory. Do not load a live page.
+A HIPAA header that is Report-Only is not enforcement. Predict without leaving this directory. Do not load a live page.
 
 ## What this page is not doing
 

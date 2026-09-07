@@ -7,7 +7,7 @@
 
 You get **clinic SMS reminders** — a new channel that HTTP scans of the notes app will not enumerate. A green scan still lists `cross-tenant-read`.
 
-Clinic SMS reminders — a new channel that HTTP scans will not enumerate.
+SMS reminders are a new channel that HTTP scans will not enumerate.
 
 An EHR-lite booking card that texts “your appointment” to a phone number.
 

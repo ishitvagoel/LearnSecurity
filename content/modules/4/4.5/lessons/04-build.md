@@ -54,7 +54,7 @@ python3 -m pytest labs/4.5/4.5-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-Clinic FHIR resource server with a hospital-specific `aud`. Native redirect (claimed HTTPS, not a custom scheme) is leftover, not this check.
+A FHIR resource server still needs a hospital-specific `aud`. Native redirect (claimed HTTPS, not a custom scheme) is leftover, not this check.
 
 ## What this page is not doing
 

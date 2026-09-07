@@ -31,7 +31,7 @@ Step-up before export must bind origin too, or the second factor is theater. Fas
 
 ## Write this for a clinic SSO and step-up export
 
-Clinic staff SSO portal. Optionally: step-up for export — still origin-bound?
+Bind this to a staff SSO portal. If export needs step-up, is that still origin-bound?
 
 1. who might try (lookalike identity provider; intercepted OTP; tired clinician — **not** a live clinic or public phishing page);
 2. what you trust (which origin check is trusted; “we use Okta” is not);

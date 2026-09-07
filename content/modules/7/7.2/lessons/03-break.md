@@ -68,7 +68,7 @@ Run from `labs/7.2/7.2-lab` if a repo-root collection picks up `site/`. Do not â
 
 ## Use it somewhere new
 
-Clinic SSN as a *field name* on local practice files. Predict without leaving this directory. Do not query a live EHR.
+SSN as a *field name* on local practice files is the leftover. Predict without leaving this directory. Do not query a live EHR.
 
 ## What this page is not doing
 

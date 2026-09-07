@@ -53,7 +53,7 @@ Decode `protect("secret")`. An `AES` comment is a name, not ciphertext.
 
 ## Use it somewhere new
 
-Clinic SSN. Asserting the column is non-null is not secrecy evidence. Do not run a test that decodes a live clinic column.
+A non-null SSN column is not secrecy evidence. Do not run a test that decodes a live clinic column.
 
 ## What this page is not doing
 

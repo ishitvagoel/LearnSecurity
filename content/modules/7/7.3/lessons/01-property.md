@@ -78,7 +78,7 @@ python3 -m pytest labs/7.3/7.3-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-Clinic lab-result webhook. Signed redirects. Outbound SSRF (6.5).
+A lab-result webhook is this grain. Signed redirects are leftover. Outbound SSRF waits for 6.5.
 
 ## What this page is not doing
 

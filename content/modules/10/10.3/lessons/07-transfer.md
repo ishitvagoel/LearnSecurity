@@ -54,7 +54,7 @@ Also name serverless IAM `*`.
 | Live cluster / cloud takeover tutorial | Course rules |
 | "restricted pod profile so who-is-allowed is done" | Pod spec is not API authorization |
 | "CIS scan green" | Benchmark, not the predicate |
-| "assurance gate complete" | Forbidden stamp |
+| "check-in complete" | Forbidden stamp |
 
 ## Practice
 

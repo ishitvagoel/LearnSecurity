@@ -73,7 +73,7 @@ Run from `labs/7.3/7.3-lab` if a repo-root collection picks up `site/`. Do not p
 
 ## Use it somewhere new
 
-Clinic lab-result webhook. Predict without leaving this directory. Do not POST a live lab vendor.
+A lab-result webhook can skip the MAC. Predict without leaving this directory. Do not POST a live lab vendor.
 
 ## What this page is not doing
 

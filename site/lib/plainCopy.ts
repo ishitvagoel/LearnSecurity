@@ -1172,6 +1172,11 @@ function transformProseLine(line: string): string {
   if (line.startsWith("#")) {
     return line;
   }
+  // Leftover sketch labels ("Clinic SMS…") — do not match gold
+  // "Clinic second factor that is mouse-only".
+  if (/^Clinic (?=[A-Z`“"])/.test(line)) {
+    line = line.replace(/^Clinic /, "");
+  }
   const codes: string[] = [];
   const withPlaceholders = line.replace(/`([^`]+)`/g, (match, inner: string) => {
     if (!keepInlineCode(inner)) {

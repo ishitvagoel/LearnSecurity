@@ -76,7 +76,7 @@ python3 -m pytest labs/8.3/8.3-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-Clinic `as=doctor`. OAuth redirect to the app (4.5).
+`as=doctor` in extras is this grain. OAuth redirect to the app waits for 4.5.
 
 ## What this page is not doing
 

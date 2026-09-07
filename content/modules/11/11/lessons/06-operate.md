@@ -38,7 +38,7 @@ A scanner dashboard will show coverage and stay silent when CI’s `read` ignore
 log_denied reason=revoked_share_read_denied note=n1 tenant=B
 ```
 
-Not: a note body, a session token, or “assurance gate complete.”
+Not: a note body, a session token, or “check-in complete.”
 
 Putting the matching note in the alert copies the leak into the ticket.
 
@@ -58,7 +58,7 @@ A deny must say *share revoked*, not only “assert False.” Under stress, do n
 log_denied reason=revoked_share_read_denied note=n1 tenant=B
 ```
 
-Reject any line that includes the note body, a session token, or “assurance gate complete.”
+Reject any line that includes the note body, a session token, or “check-in complete.”
 
 ## Use it somewhere new
 

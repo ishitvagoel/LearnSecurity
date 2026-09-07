@@ -51,7 +51,7 @@ Map the test to the body×log row you wrote. If the broken files do not fail, th
 
 ## Use it somewhere new
 
-Clinic chart vs time. Asserting HTTP 200 is not classification evidence. Do not run a test that reads a live clinic log drain.
+HTTP 200 on an appointment log is not classification evidence. Do not run a test that reads a live clinic log drain.
 
 ## What this page is not doing
 

@@ -73,7 +73,7 @@ Tie the check to query `access_token`, not to a JWT library name.
 
 ## Use it somewhere new
 
-Clinic appointment deep link. Magic-link email (still a URL token — later you exchange it).
+An appointment deep link is the same shape as a magic-link email (still a URL token — later you exchange it).
 
 ## What this page is not doing
 

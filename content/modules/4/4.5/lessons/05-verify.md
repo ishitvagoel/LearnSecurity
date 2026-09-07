@@ -46,7 +46,7 @@ Compare `aud`. A `verify` call in Authlib is the signature, not the audience.
 
 ## Use it somewhere new
 
-Clinic FHIR. Asserting HTTP 200 is not audience evidence. Do not run a test that hits a live identity provider.
+HTTP 200 on a FHIR call is not audience evidence. Do not run a test that hits a live identity provider.
 
 ## What this page is not doing
 

@@ -53,7 +53,7 @@ Call `allowed` on the link-local string. An `https` prefix is the scheme, not th
 
 ## Use it somewhere new
 
-Clinic PDF URL. A preview image that loaded is the fetch, not the link-local deny (see 9.3). Do not run a test that fetches a live URL.
+A preview image that loaded is the fetch, not the link-local deny (see 9.3). Do not run a test that fetches a live URL.
 
 ## What this page is not doing
 

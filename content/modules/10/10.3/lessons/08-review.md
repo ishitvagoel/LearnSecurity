@@ -32,7 +32,7 @@ A restricted pod profile is pod spec. A network policy is egress. Instance metad
 - No admission test
 - IaC with `0.0.0.0/0`
 
-Also reject: live cluster attacks; admitting without re-running `test_cluster_admin_pod_is_denied`; keys in learner notes; claiming an assurance gate.
+Also reject: live cluster attacks; admitting without re-running `test_cluster_admin_pod_is_denied`; keys in learner notes; claiming a check-in.
 
 ## Common mix-ups
 
@@ -40,7 +40,7 @@ Also reject: live cluster attacks; admitting without re-running `test_cluster_ad
 - Managed Kubernetes is secure by default
 - A network policy is who-is-allowed on the API
 - A restricted pod profile is `pod_ok`
-- A CIS score is an assurance gate
+- A CIS score is not a check-in
 
 ## Use it somewhere new
 

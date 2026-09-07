@@ -70,7 +70,7 @@ Do not “fix” the check to pass. “We have 2FA” is not `phishing_resistant
 
 ## Use it somewhere new
 
-Clinic SSO lookalike. Predict without leaving this directory. Do not open a clinic identity provider or a public phishing page.
+An SSO lookalike page is the leftover. Predict without leaving this directory. Do not open a clinic identity provider or a public phishing page.
 
 ## A usable leftover
 

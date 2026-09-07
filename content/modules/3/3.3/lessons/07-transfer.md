@@ -9,7 +9,7 @@ You get a **serverless function with a shared `admin` connection string**, or a 
 
 Serverless function with a shared `admin` connection string.
 
-Clinic billing replica that should see invoice rows, not chart text.
+A billing replica should see invoice rows, not chart text.
 
 1. who might try (stolen function secret; forgotten handler filter; replica user with `SELECT` on notes — **not** a live clinic, cloud function, or managed database);
 2. what you trust (which role is the second check; the cloud vendor IAM name is not);

@@ -70,7 +70,7 @@ Run from `labs/E4/e4-lab` if a repo-root collection picks up `site/`. Do not com
 
 ## Use it somewhere new
 
-Clinic image parser: predict the oversize copy without leaving this directory. Do not fuzz a third-party codec.
+An image parser can copy past the native buffer. Predict the oversize copy without leaving this directory. Do not fuzz a third-party codec.
 
 ## What this page is not doing
 

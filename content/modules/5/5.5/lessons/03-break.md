@@ -74,7 +74,7 @@ Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic search box. Predict without leaving this directory. Do not hit a live clinic system.
+The search box is a second interpreter. Predict without leaving this directory. Do not hit a live clinic system.
 
 ## What this page is not doing
 

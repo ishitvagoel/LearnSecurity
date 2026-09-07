@@ -66,7 +66,7 @@ In `labs/10.5/10.5-lab`, mark `ir.py`.
 
 ## Use it somewhere new
 
-Clinic SIEM-green close is the same grain with a dashboard instead of a dict.
+A SIEM-green close is the same grain with a dashboard instead of a dict.
 
 ## What can still go wrong
 

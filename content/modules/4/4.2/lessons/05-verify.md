@@ -59,7 +59,7 @@ Call `phishing_resistant` on the password / lookalike pair. A `webauthn` attribu
 
 ## Use it somewhere new
 
-Clinic SSO. Asserting HTTP 200 is not authenticator evidence. Do not run a check that loads a live identity provider.
+HTTP 200 on SSO login is not authenticator evidence. Do not run a check that loads a live identity provider.
 
 ## What this page is not doing
 

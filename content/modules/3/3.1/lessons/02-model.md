@@ -76,7 +76,7 @@ In `labs/3.1/3.1-lab`, mark `classify.py`. Write down field, level, place, allow
 
 ## Use it somewhere new
 
-Clinic chart text vs appointment time: two classes, two places. Logging the time does not authorize logging the chart.
+Chart text and appointment time are two classes, in two places. Logging the time does not authorize logging the chart.
 
 ## What can still go wrong
 

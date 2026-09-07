@@ -55,7 +55,7 @@ Also name ransomware restore vs note-level integrity.
 | Live SIEM / ransomware tutorial | Course rules |
 | “known-exploited listed so we closed” | Awareness / patch input, not close |
 | “time-to-detect improved” | Detect metric, not recover |
-| “assurance gate complete” | Forbidden stamp |
+| “check-in complete” | Forbidden stamp |
 
 ## Practice
 

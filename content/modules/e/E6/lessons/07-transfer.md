@@ -55,7 +55,7 @@ Also name a procurement questionnaire vs this record.
 | Live clinic governance / live audit | Course rules |
 | “exceptions are failure so we hide them” | Dishonest register |
 | “later design-review draft certified” | Still a draft |
-| “assurance gate complete” | Forbidden stamp |
+| “check-in complete” | Forbidden stamp |
 
 ## Practice
 

@@ -9,9 +9,9 @@ You get a **clinic sketch** with group practices and an `org_id` in JSON.
 
 `tenant_for({"tenant": "A"}, {"tenant": "B"})` must be `"A"`. The JSON body is not the tenant. For a clinic, bind tenant from the session; body tenant overrides session must stay false.
 
-Clinic group practice switching `org_id` in JSON. Also name a relationship-graph tuple vs this binding.
+A group practice switching `org_id` in JSON is the same job. Also name a relationship-graph tuple vs this binding.
 
-Clinic-lite “PostgreSQL row-level rules are on so companies are done,” plus “we mapped a famous-bugs list so isolation is done.”
+False assurance looks like “PostgreSQL row-level rules are on so companies are done,” plus “we mapped a famous-bugs list so isolation is done.”
 
 ## Picture: row-level sticker vs binding
 

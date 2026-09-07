@@ -70,7 +70,7 @@ python3 -m pytest labs/4.3/4.3-lab/tests --impl vulnerable
 
 ## Use it somewhere new
 
-Clinic deep link with `?token=`. Predict without leaving this directory. Do not click a live appointment SMS.
+A deep link with `?token=` still carries the secret in the URL. Predict without leaving this directory. Do not click a live appointment SMS.
 
 ## What this page is not doing
 

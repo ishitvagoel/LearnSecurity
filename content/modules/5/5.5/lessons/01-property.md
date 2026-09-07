@@ -70,7 +70,7 @@ python3 -m pytest labs/5.5/5.5-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-Clinic search box. NoSQL operators and GraphQL args wait for 7.1.
+The search box is a second interpreter. NoSQL operators and GraphQL args wait for 7.1.
 
 ## What this page is not doing
 

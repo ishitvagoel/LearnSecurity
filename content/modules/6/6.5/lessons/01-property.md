@@ -74,7 +74,7 @@ python3 -m pytest labs/6.5/6.5-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-Clinic “fetch lab result PDF from URL.” Webhooks wait for 7.3.
+“Fetch lab result PDF from URL” is this grain. Webhooks wait for 7.3.
 
 ## What this page is not doing
 

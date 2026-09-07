@@ -53,7 +53,7 @@ Call `channel_is_https` on the mismatch. An `https` tile on a dashboard is the h
 
 ## Use it somewhere new
 
-Clinic page. Loading on port 443 is availability, not a spoofed forwarded header. Do not run a test that probes a live clinic.
+Loading a page on port 443 is availability, not a spoofed forwarded header. Do not run a test that probes a live clinic.
 
 ## What this page is not doing
 

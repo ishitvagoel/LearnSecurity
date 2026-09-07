@@ -67,7 +67,7 @@ In `labs/E6/e6-lab`, mark `risk.py`.
 
 ## Use it somewhere new
 
-Clinic HIPAA exception with no review date. Same grain.
+A HIPAA exception with no review date is the same grain.
 
 ## What can still go wrong
 

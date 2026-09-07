@@ -55,7 +55,7 @@ In `labs/E2/e2-lab`, mark `csp.py`. Report-Only as a signal even in the repaired
 
 ## Use it somewhere new
 
-Clinic HIPAA header: Report-Only is still a signal.
+A HIPAA header that is Report-Only is still a signal, not enforcement.
 
 ## What can still go wrong
 

@@ -49,7 +49,7 @@ Map the test to the deleted-alice × leftover-session row you wrote. If the brok
 
 ## Use it somewhere new
 
-Clinic clinician. Asserting HTTP 200 is not lifecycle evidence. Do not run a test that logs into a live chart system.
+HTTP 200 after delete is not lifecycle evidence. Do not run a test that logs into a live chart system.
 
 ## What this page is not doing
 

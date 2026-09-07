@@ -74,7 +74,7 @@ Tie the check to a path that left the folder, not to an awareness-list name.
 
 ## Use it somewhere new
 
-Clinic scan upload. XML entity expansion; pickle; YAML load.
+A scan upload is this grain. XML entity expansion, pickle, and YAML load are the same parser shape.
 
 ## What this page is not doing
 

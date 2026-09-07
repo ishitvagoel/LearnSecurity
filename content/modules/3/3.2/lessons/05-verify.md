@@ -47,7 +47,7 @@ Call `threats_from_scan(True)`. A `STRIDE` heading in markdown is a sticker, not
 
 ## Use it somewhere new
 
-Clinic SMS. Asserting HTTP 200 is not threat-model evidence. Do not run a test that scans a live clinic.
+HTTP 200 on an SMS send is not a threat-model check. Do not run a test that scans a live clinic.
 
 ## What this page is not doing
 

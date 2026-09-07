@@ -32,7 +32,7 @@ Cache invalidation is a phone leftover. Worker leftover session is a delayed-job
 - No cache invalidation
 - Assurance stamp claimed without artifacts
 
-Also reject: live tenant attacks; merging without re-running `test_revoked_share_cannot_read`; keys in learner notes; claiming an assurance gate.
+Also reject: live tenant attacks; merging without re-running `test_revoked_share_cannot_read`; keys in learner notes; claiming a check-in.
 
 ## Common mix-ups
 

@@ -52,7 +52,7 @@ Call `body_retained`. A `DELETE FROM notes` string is the notes table, not analy
 
 ## Use it somewhere new
 
-Clinic appointment card. Asserting HTTP 200 on delete is not retention evidence. Do not run a test that hits a live warehouse.
+HTTP 200 on deleting an appointment card is not retention evidence. Do not run a test that hits a live warehouse.
 
 ## What this page is not doing
 

@@ -65,7 +65,7 @@ Run from `labs/E3/e3-lab` if a run at the repo root picks up `site/`. Do not pro
 
 ## Use it somewhere new
 
-Clinic copay retry: predict without leaving this directory. Do not hit a live processor.
+A copay retry can capture `k1` twice. Predict without leaving this directory. Do not hit a live processor.
 
 ## What this page is not doing
 

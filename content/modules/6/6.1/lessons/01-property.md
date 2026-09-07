@@ -73,7 +73,7 @@ python3 -m pytest labs/6.1/6.1-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-Clinic export-to-CSV filename. Jinja, SQL, mail headers.
+An export-to-CSV filename is a second interpreter — the same shape as Jinja, SQL, and mail headers.
 
 ## What this page is not doing
 

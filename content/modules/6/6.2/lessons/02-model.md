@@ -58,7 +58,7 @@ Draw text vs attribute vs JavaScript vs URL. In `labs/6.2/6.2-lab`, mark `html.p
 
 ## Use it somewhere new
 
-Clinic nickname. Markdown pipeline.
+A nickname field still goes through the markdown pipeline.
 
 ## What can still go wrong
 

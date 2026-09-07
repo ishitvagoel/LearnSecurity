@@ -68,7 +68,7 @@ In `labs/E4/e4-lab`, mark `copy.py`.
 
 ## Use it somewhere new
 
-Clinic DICOM parser: the header length is still untrusted at the native codec.
+A DICOM parser still treats the header length as untrusted at the native codec.
 
 ## What can still go wrong
 

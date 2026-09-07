@@ -77,7 +77,7 @@ python3 -m pytest labs/7.1/7.1-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-Clinic change `{is_staff:true}`. GraphQL mutation arguments. gRPC unknown fields.
+A change `{is_staff:true}` is this grain. GraphQL mutation arguments and gRPC unknown fields are the same extra-key leftover.
 
 ## What this page is not doing
 

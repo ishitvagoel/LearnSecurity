@@ -7,7 +7,7 @@
 
 You get a **clinic appointment deep link**. Optionally: a **magic-link email** (still a URL token — short-lived, one-time). Query `access_token` yields `None`. The same rule has to hold on a clinic link.
 
-Clinic appointment deep link. Optionally: magic-link email (still a URL token — short-lived, one-time).
+Bind this to an appointment deep link. A magic-link email is still a URL token — short-lived, one-time.
 
 EHR-lite “open this visit” SMS or email.
 

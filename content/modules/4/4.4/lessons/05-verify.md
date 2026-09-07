@@ -45,7 +45,7 @@ Call `can_read("bob", "n2")`. An `admin` string in a role list is a label, not t
 
 ## Use it somewhere new
 
-Clinic appointment vs chart. Asserting HTTP 200 is not who-is-allowed evidence. Do not run a test that hits a live clinic system.
+HTTP 200 on a chart read is not who-is-allowed evidence. Do not run a test that hits a live clinic system.
 
 ## What this page is not doing
 

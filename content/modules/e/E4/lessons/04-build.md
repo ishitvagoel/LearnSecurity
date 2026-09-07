@@ -54,7 +54,7 @@ python3 -m pytest labs/E4/e4-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-Clinic JNI codec: deny a copy that exceeds the native buffer the same way.
+A JNI codec still has to deny a copy that exceeds the native buffer the same way.
 
 ## What this page is not doing
 

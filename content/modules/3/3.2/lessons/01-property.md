@@ -84,7 +84,7 @@ Tie the check to `cross-tenant-read` still present, not to a scanner product nam
 
 ## Use it somewhere new
 
-Clinic SMS reminders. The new channel is not in the notes-app HTTP model. Which threats appear that no CVE scanner will list?
+SMS reminders are a new channel that is not in the notes-app HTTP model. Which threats appear that no CVE scanner will list?
 
 ## What this page is not doing
 

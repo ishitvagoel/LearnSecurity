@@ -49,7 +49,7 @@ Call the cookie reader. An `HttpOnly` substring is the flag name, not `js_read_s
 
 ## Use it somewhere new
 
-Clinic patient portal. Asserting `Set-Cookie` exists is not HttpOnly evidence. Do not run a test that loads the real clinic.
+A `Set-Cookie` header on the patient portal is not HttpOnly evidence. Do not run a test that loads the real clinic.
 
 ## What this page is not doing
 

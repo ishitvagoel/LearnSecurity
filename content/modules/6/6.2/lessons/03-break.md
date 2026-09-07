@@ -68,7 +68,7 @@ Do not “fix” the check to pass. Do not probe public hosts. A setup error is 
 
 ## Use it somewhere new
 
-Clinic nickname. Predict without leaving this directory. Do not load a live board.
+A nickname field can still hold raw HTML. Predict without leaving this directory. Do not load a live board.
 
 ## What this page is not doing
 

@@ -52,7 +52,7 @@ Also name the full notes-app slice (API + worker + phone cache).
 |---|---|
 | “scanner green” | Not the pack |
 | Live clinic / guardian tutorial | Course rules |
-| “assurance gate complete” | Forbidden stamp |
+| “check-in complete” | Forbidden stamp |
 | “DELETE 200” | Event, not next-read check |
 | “mastery because lessons exist” | File presence is not mastery |
 

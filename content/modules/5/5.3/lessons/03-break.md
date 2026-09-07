@@ -67,7 +67,7 @@ Do not search public GitHub. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic gist of a lab API key. Predict without leaving this directory. Do not fetch a live gist.
+A gist that holds a lab API key is already a leak. Predict without leaving this directory. Do not fetch a live gist.
 
 ## What this page is not doing
 

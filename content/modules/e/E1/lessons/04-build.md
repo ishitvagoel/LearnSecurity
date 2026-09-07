@@ -40,7 +40,7 @@ Fail closed: if you are unsure whether the name is allow-listed, deny. Uncertain
 - A system prompt.
 - Retrieval as trust.
 - A famous-bugs dashboard.
-- An assurance gate sticker.
+- A check-in sticker.
 - Cryptographically bound approvals (extra, advanced leftover).
 - Library defaults.
 - A guidance document as the check.

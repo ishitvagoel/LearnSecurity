@@ -46,7 +46,7 @@ Call `session_from_request` on a query dict. A `Referrer-Policy` header is the r
 
 ## Use it somewhere new
 
-Clinic deep link. Asserting HTTP 200 is not channel evidence. Do not run a test that clicks a live SMS.
+HTTP 200 on a deep link is not channel evidence. Do not run a test that clicks a live SMS.
 
 ## What this page is not doing
 

@@ -66,7 +66,7 @@ Record the failing test `test_note_body_is_not_logged`. “Logs exist” is not 
 
 ## Use it somewhere new
 
-Clinic chart text in an appointment log. Predict, without leaving this directory, whether logging the booking time is a different class from logging the chart. Do not fetch a clinic.
+Chart text in an appointment log is a different class from the booking time. Predict, without leaving this directory, whether logging the booking time is a different class from logging the chart. Do not fetch a clinic.
 
 ## What this page is not doing
 

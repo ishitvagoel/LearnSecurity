@@ -65,7 +65,7 @@ In `labs/4.4/4.4-lab`, mark `grant.py`.
 
 ## Use it somewhere new
 
-Clinic appointment A vs chart B. Title vs body is a later field-level topic.
+Appointment A vs chart B is this grain. Title vs body is a later field-level topic.
 
 ## What can still go wrong
 

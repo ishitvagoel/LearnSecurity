@@ -54,7 +54,7 @@ Also name a feature flag that turns off authorization.
 | Live Django / public `/debug` tutorial | Course rules |
 | A famous-bugs list as “then 1.2 is done” | Awareness after the cause |
 | “canary 10%” | Rollout, not `boot_ok` |
-| “assurance gate complete” | Forbidden stamp |
+| “check-in complete” | Forbidden stamp |
 
 ## Practice
 

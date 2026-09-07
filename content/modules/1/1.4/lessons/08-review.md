@@ -38,7 +38,7 @@ Also reject: trusting the browser as the vault; closing a finding without re-run
 
 ## Use it somewhere new
 
-Clinic mouse-only second factor: write the same four problem names as they would appear in that UI (unnamed dialog, color-only continue, pointer-only, leftover “clinicians should be careful”).
+On a mouse-only second-factor screen, write the same four problem names as they would appear in that UI (unnamed dialog, color-only continue, pointer-only, leftover “clinicians should be careful”).
 
 ## Can people still use it
 

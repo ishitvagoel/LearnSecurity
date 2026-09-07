@@ -76,7 +76,7 @@ python3 -m pytest labs/8.2/8.2-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-Clinic offline chart cache. iOS Keychain vs Android Keystore. Desktop Electron.
+An offline chart cache is this grain. iOS Keychain vs Android Keystore is a later mirror. Desktop Electron is leftover.
 
 ## What this page is not doing
 

@@ -74,7 +74,7 @@ python3 -m pytest labs/9.3/9.3-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-Clinic `test_get_patient_200`. Fuzzing with no named bad result.
+`test_get_patient_200` does not name what must not happen. Fuzzing with no named bad result is the same hole.
 
 ## What this page is not doing
 

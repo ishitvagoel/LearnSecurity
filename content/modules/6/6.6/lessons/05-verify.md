@@ -53,7 +53,7 @@ Call `accept("t1")` twice. A `UNIQUE` keyword in a migration is the index you st
 
 ## Use it somewhere new
 
-Clinic guardian invite. HTTP 200 on `/accept` is the status, not the second-join deny (see 9.3). Do not run a test that clicks a live mail link.
+HTTP 200 on `/accept` is the status, not the second-join deny (see 9.3). Do not run a test that clicks a live mail link.
 
 ## What this page is not doing
 

@@ -26,7 +26,7 @@ If both pass, you are not looking at B after revoke.
 | Wrong input / abuse | B after revoke → None; broken files must fail |
 | Normal | A after revoke → body (may pass on both) |
 | Normal | B before revoke → body (may pass on both) |
-| Not claimed | live clinic; an assurance gate; worker or cache wipe |
+| Not claimed | live clinic; a check-in; worker or cache wipe |
 
 The test `test_revoked_share_cannot_read` is there so no-op `revoke` still fails. `conftest.py` calls `reset()` so grant state does not leak.
 

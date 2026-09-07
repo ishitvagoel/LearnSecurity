@@ -48,7 +48,7 @@ Write a log line (ids, reason, no body, no real email). Write who owns the coerc
 
 ## Use it somewhere new
 
-Clinic second factor fails for keyboard-only clinicians. What notice is privacy-safe (no chart text), and what recover path stays checked (no “text me the one-time code on a shared phone”)?
+When the second factor fails for keyboard-only clinicians, what notice is privacy-safe (no chart text), and what recover path stays checked (no “text me the one-time code on a shared phone”)?
 
 ## Can people still use it
 

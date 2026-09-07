@@ -56,7 +56,7 @@ Earlier lessons already said posters are not gates. This check is **accountabili
 | How you stop it later | Schema; refuse incomplete |
 | How you notice later | `exception_incomplete_denied`; never secret writeups |
 | How you recover later | Expire; fix or re-accept with fields |
-| Out of scope | A maturity dashboard; live disclosure; claiming an assurance gate |
+| Out of scope | A maturity dashboard; live disclosure; claiming a check-in |
 
 A ticket type named “risk” will close without dates if you let it. Industry “govern” labels name outcomes; they do not write the row. An unverified pledge is manufacturer talk, not this function. Empty owner is deny.
 
@@ -70,7 +70,7 @@ Run from `labs/E6/e6-lab` if a collection at the repo root picks up `site/`. Do 
 
 ## Use it somewhere new
 
-Clinic HIPAA exception: predict acceptance without leaving this directory. Do not open a live governance tenant.
+A HIPAA exception with no review date can still be accepted. Predict acceptance without leaving this directory. Do not open a live governance tenant.
 
 ## What this page is not doing
 

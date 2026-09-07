@@ -65,7 +65,7 @@ python3 -m pytest labs/11/11-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-Clinic guardian: the next chart read must consult the grant, not the last login.
+After a guardian is revoked, the next chart read must consult the grant, not the last login.
 
 ## What can still go wrong
 

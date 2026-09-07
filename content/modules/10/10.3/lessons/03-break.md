@@ -56,7 +56,7 @@ The database god-role lesson already said one shared admin is a blast-radius rul
 | How you stop it later | Allow-list namespaced roles; unknown roles deny |
 | How you notice later | `cluster_admin_denied`; never kubeconfig |
 | How you recover later | Delete the binding; rotate cluster credentials |
-| Out of scope | A CIS score; a live managed cluster; claiming an assurance gate |
+| Out of scope | A CIS score; a live managed cluster; claiming a check-in |
 
 A managed cluster will still accept a ClusterRoleBinding. A restricted pod profile hardens the *pod spec*. FastAPI will still run as whatever SA the chart mounts. The notes app's API will still take the cluster if admission is always true. `cluster-admin` is deny.
 
@@ -70,7 +70,7 @@ Run from `labs/10.3/10.3-lab` if a collection at the repo root picks up `site/`.
 
 ## Use it somewhere new
 
-Clinic app SA is cluster-admin: predict without leaving this directory. Do not apply manifests to a live cluster.
+An app service account that is cluster-admin is the same god-mode. Predict without leaving this directory. Do not apply manifests to a live cluster.
 
 ## What this page is not doing
 

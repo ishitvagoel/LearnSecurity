@@ -66,7 +66,7 @@ Run from `labs/8.1/8.1-lab` if a repo-root collection picks up `site/`. Do not â
 
 ## Use it somewhere new
 
-Clinic `hipaaMode=true`. Predict without leaving this directory. Do not instrument a live hospital device.
+`hipaaMode=true` in the app file is not a server attest. Predict without leaving this directory. Do not instrument a live hospital device.
 
 ## What this page is not doing
 

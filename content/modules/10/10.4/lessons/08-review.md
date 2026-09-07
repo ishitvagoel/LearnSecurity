@@ -32,7 +32,7 @@ Feature flags are leftover you still have to trust. Admin bound to all interface
 - Migration fail-open
 - No rollback drill
 
-Also reject: live production attacks; booting without re-running `test_prod_debug_must_not_boot`; keys in learner notes; claiming an assurance gate; treating a manufacturer-defaults program page as verified.
+Also reject: live production attacks; booting without re-running `test_prod_debug_must_not_boot`; keys in learner notes; claiming a check-in; treating a manufacturer-defaults program page as verified.
 
 ## Common mix-ups
 

@@ -53,7 +53,7 @@ Call `allow(4)`. An edge-proxy keyword is someone else’s counter.
 
 ## Use it somewhere new
 
-Clinic bulk-export. HTTP 200 on `/export` is the status, not the fourth-export cap (see 9.3). Do not use a public load test.
+HTTP 200 on `/export` is the status, not the fourth-export cap (see 9.3). Do not use a public load test.
 
 ## What this page is not doing
 

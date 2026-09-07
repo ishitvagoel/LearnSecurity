@@ -26,7 +26,7 @@ If both pass, you are not looking at missing retest.
 | Normal | `retest pass` → may close (may pass on both) |
 | Wrong input | `retest None` → cannot close; broken files must fail |
 | Abuse | Missing, fail, or scheduled still deny (fail closed) |
-| Not claimed | A live testing-guide list run; an assurance gate; a severity calculator; that pass hit the same URL |
+| Not claimed | A live testing-guide list run; a check-in; a severity calculator; that pass hit the same URL |
 
 The test `test_cannot_close_without_retest` is there so always-true `close_finding` still fails.
 

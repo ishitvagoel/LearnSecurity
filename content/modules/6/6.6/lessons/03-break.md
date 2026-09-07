@@ -71,7 +71,7 @@ Record the failing test `test_invite_token_is_single_use`. Do not probe public i
 
 ## Use it somewhere new
 
-Clinic guardian invite. Predict, without leaving this directory, whether a second click still joins. Do not click a live mail link.
+A guardian-invite token can still join on a second click. Predict, without leaving this directory, whether a second click still joins. Do not click a live mail link.
 
 ## What this page is not doing
 

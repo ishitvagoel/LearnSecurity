@@ -28,7 +28,7 @@ The second what must not happen is **`note_body` in logs** — `test_cannot_clos
 | Wrong input | recovery todo → cannot close; broken files must fail |
 | Abuse | `note_body` in logs → cannot close |
 | Normal | done + ok → may close (may pass on both) |
-| Not claimed | live paging; a known-exploited list; an assurance gate; that restore actually ran |
+| Not claimed | live paging; a known-exploited list; a check-in; that restore actually ran |
 
 The test `test_cannot_close_without_recovery` is there so always-true `close_incident` still fails.
 

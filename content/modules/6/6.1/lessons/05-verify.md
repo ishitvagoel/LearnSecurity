@@ -53,7 +53,7 @@ Call `argv_for_list`. A `shell=False` comment is a hope, not argv.
 
 ## Use it somewhere new
 
-Clinic CSV filename. An export file that exists is the bytes on disk, not list-form argv (see 9.3). Do not run a test that executes argv.
+An export file on disk is the bytes, not list-form argv (see 9.3). Do not run a test that executes argv.
 
 ## What this page is not doing
 

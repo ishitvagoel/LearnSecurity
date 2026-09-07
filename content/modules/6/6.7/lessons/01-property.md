@@ -74,7 +74,7 @@ python3 -m pytest labs/6.7/6.7-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-Clinic bulk-export of patients. Notification fan-out. Search complexity later in 7.1.
+A bulk-export of patients is this grain. Notification fan-out is a sibling leftover. Search complexity waits for 7.1.
 
 ## What this page is not doing
 

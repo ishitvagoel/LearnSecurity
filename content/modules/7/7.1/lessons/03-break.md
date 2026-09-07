@@ -67,7 +67,7 @@ Run from `labs/7.1/7.1-lab` if a repo-root collection picks up `site/`. Do not â
 
 ## Use it somewhere new
 
-Clinic PATCH `{is_staff:true}`. Predict without leaving this directory. Do not PATCH a live EHR.
+A PATCH `{is_staff:true}` can skip the REST allow-list. Predict without leaving this directory. Do not PATCH a live EHR.
 
 ## What this page is not doing
 

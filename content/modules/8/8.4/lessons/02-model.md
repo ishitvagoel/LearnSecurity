@@ -57,7 +57,7 @@ In `labs/8.4/8.4-lab`, mark `build.py`. Label the always-true helper even in the
 
 ## Use it somewhere new
 
-Clinic FHIR flavors; a list of what shipped in the APK (10.2).
+FHIR flavors are this grain; a list of what shipped in the APK waits for 10.2.
 
 ## What can still go wrong
 

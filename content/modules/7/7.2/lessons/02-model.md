@@ -58,7 +58,7 @@ In `labs/7.2/7.2-lab`, mark `field.py`.
 
 ## Use it somewhere new
 
-Clinic SSN; search snippets; bulk update of hidden fields (write grain is 7.1, read grain is this map).
+SSN as a field, search snippets, and bulk update of hidden fields share this map (write grain is 7.1, read grain is here).
 
 ## What can still go wrong
 

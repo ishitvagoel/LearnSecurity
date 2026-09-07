@@ -59,7 +59,7 @@ In `labs/6.3/6.3-lab`, mark `csrf.py`.
 
 ## Use it somewhere new
 
-Clinic partner-share POST; postMessage origin check.
+A partner-share POST still needs the origin check; postMessage is the sibling leftover.
 
 ## What can still go wrong
 

@@ -41,7 +41,7 @@ Reject any line that includes the dummy session value. Page who owns the WebView
 
 ## Use it somewhere new
 
-Clinic portal. Staging scans must include WebView or second-cookie names, not only `sc_session`. A privacy-safe notice still has no chart text.
+Staging scans of the portal must include WebView or second-cookie names, not only `sc_session`. A privacy-safe notice still has no chart text.
 
 ## Can people still use it
 

@@ -77,7 +77,7 @@ python3 -m pytest labs/8.4/8.4-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-Clinic debug build against prod FHIR. A list of what shipped in the APK (10.2).
+A debug build against prod FHIR is this grain. A list of what shipped in the APK waits for 10.2.
 
 ## What this page is not doing
 

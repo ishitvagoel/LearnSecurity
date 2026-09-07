@@ -53,7 +53,7 @@ python3 -m pytest labs/2.4/2.4-state-time/tests --impl fixed
 
 ## Use it somewhere new
 
-Clinic last slot: lock or unique booking key, not “the UI disabled the button.” Payment capture uses the same store shape: first capture id, not a second debit.
+The last slot needs a lock or unique booking key, not “the UI disabled the button.” Payment capture uses the same store shape: first capture id, not a second debit.
 
 ## Can people still use it
 

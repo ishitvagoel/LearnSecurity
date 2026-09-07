@@ -50,7 +50,7 @@ Call `render`. A `Content-Security-Policy` header is the policy name, not the en
 
 ## Use it somewhere new
 
-Clinic nickname. HTTP 200 is the status, not encoded `<` (see 9.3). Do not run a check that loads a live board.
+HTTP 200 on a nickname save is the status, not encoded `<` (see 9.3). Do not run a check that loads a live board.
 
 ## What this page is not doing
 

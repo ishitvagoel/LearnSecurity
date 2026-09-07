@@ -9,7 +9,7 @@ You get a **clinic sketch** with a “share record with partner” POST that rel
 
 `allow_share` from a foreign origin without a matching CSRF token is false. For a clinic, leftover cookies are not consent to share.
 
-Clinic “share record with partner” POST. Also name postMessage, clickjacking, and CORS `*` with credentials as leftovers — do not run them against a live clinic.
+A “share record with partner” POST is the same job. Also name postMessage, clickjacking, and CORS `*` with credentials as leftovers — do not run them against a live clinic.
 
 ## Picture: partner share is still a grant POST
 

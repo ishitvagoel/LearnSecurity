@@ -70,7 +70,7 @@ python3 -m pytest labs/5.3/5.3-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-Clinic lab API key in a gist. Envelope wrapping (data key vs wrapping key) on compromise.
+A lab API key in a gist is the leak. Envelope wrapping (data key vs wrapping key) is what you do on compromise.
 
 ## What this page is not doing
 

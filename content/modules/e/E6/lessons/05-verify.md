@@ -26,7 +26,7 @@ If both pass, you are not looking at empty owner.
 | Wrong input | empty owner → false; broken files must fail |
 | Abuse | missing `review_by` or `wcag_checked` → deny |
 | Normal | complete record may accept (may pass on both) |
-| Not claimed | a maturity dashboard; a pledge; an assurance gate; that anyone reads the register |
+| Not claimed | a maturity dashboard; a pledge; a check-in; that anyone reads the register |
 
 The test `test_exception_needs_owner_review_and_wcag` is there so always-accept `accept_exception` still fails.
 

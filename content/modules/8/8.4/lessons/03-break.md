@@ -66,7 +66,7 @@ Run from `labs/8.4/8.4-lab` if a repo-root collection picks up `site/`. Do not â
 
 ## Use it somewhere new
 
-Clinic debug vs FHIR. Predict without leaving this directory. Do not unpack a live clinic APK.
+A debug flavor can reuse the prod FHIR client id. Predict without leaving this directory. Do not unpack a live clinic APK.
 
 ## What this page is not doing
 

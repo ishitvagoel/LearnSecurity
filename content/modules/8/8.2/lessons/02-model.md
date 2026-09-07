@@ -59,7 +59,7 @@ In `labs/8.2/8.2-lab`, mark `disk.py`. Label the store even in the repaired tree
 
 ## Use it somewhere new
 
-Clinic chart cache; iOS Keychain classes as a later mirror.
+The chart cache is this grain; iOS Keychain classes are a later mirror.
 
 ## What can still go wrong
 

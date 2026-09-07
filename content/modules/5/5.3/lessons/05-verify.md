@@ -45,7 +45,7 @@ Call `auth("sk-lab-hardcoded", current="rotated-now")`. A `Vault` mention in a R
 
 ## Use it somewhere new
 
-Clinic gist. Asserting HTTP 200 on login is not rotation evidence (later testing topic). Do not run a test that fetches a live gist.
+HTTP 200 on login is not rotation evidence. Do not run a test that fetches a live gist.
 
 ## What this page is not doing
 

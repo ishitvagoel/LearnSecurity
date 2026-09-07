@@ -9,7 +9,7 @@ You get a **clinic sketch** with a patient page that omits the SSN column in the
 
 `resolve("member", "secret_internal")` must be false.
 
-Clinic member cannot resolve SSN. Also name bulk update and search highlighting leaking snippets.
+A member still must not resolve SSN. Also name bulk update and search highlighting leaking snippets.
 
 EHR-lite patient page that omits the SSN column in the table, plus GraphQL `Patient { ssn }`.
 

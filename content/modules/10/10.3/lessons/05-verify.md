@@ -26,7 +26,7 @@ If both pass, you are not looking at cluster-admin.
 | Normal | `app` → may run (may pass on both) |
 | Wrong input | cluster-admin → cannot run; broken files must fail |
 | Abuse | Unknown roles still deny (fail closed) |
-| Not claimed | A live managed cluster; a CIS score; an assurance gate; that `"app"` is least privilege |
+| Not claimed | A live managed cluster; a CIS score; a check-in; that `"app"` is least privilege |
 
 The test `test_cluster_admin_pod_is_denied` is there so always-true `pod_ok` still fails.
 

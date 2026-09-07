@@ -63,7 +63,7 @@ In `labs/7.3/7.3-lab`, mark `hook.py`. Local only. Do not POST a live webhook.
 
 ## Use it somewhere new
 
-Clinic lab-result webhook. Signed redirects.
+A lab-result webhook still needs the MAC. Signed redirects are leftover.
 
 ## What can still go wrong
 

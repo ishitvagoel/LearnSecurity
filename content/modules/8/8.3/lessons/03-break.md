@@ -65,7 +65,7 @@ Run from `labs/8.3/8.3-lab` if a repo-root collection picks up `site/`. Do not â
 
 ## Use it somewhere new
 
-Clinic `as=doctor`. Predict without leaving this directory. Do not send Intents at a live EHR.
+An exported Activity can copy `as=doctor` in extras. Predict without leaving this directory. Do not send Intents at a live EHR.
 
 ## What this page is not doing
 

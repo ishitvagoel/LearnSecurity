@@ -70,7 +70,7 @@ Run from `labs/9.3/9.3-lab` if a collection at the repo root picks up `site/`. D
 
 ## Use it somewhere new
 
-Clinic `test_get_patient_200`: predict without leaving this directory. Do not fuzz a live clinic.
+`test_get_patient_200` does not name what must not happen. Predict without leaving this directory. Do not fuzz a live clinic.
 
 ## What this page is not doing
 

@@ -74,7 +74,7 @@ Run from `labs/7.4/7.4-lab` if a repo-root collection picks up `site/`. Do not p
 
 ## Use it somewhere new
 
-Clinic batch-export. Predict without leaving this directory. Do not attach to a live hospital broker.
+A batch-export worker can inherit the request cookie. Predict without leaving this directory. Do not attach to a live hospital broker.
 
 ## What this page is not doing
 

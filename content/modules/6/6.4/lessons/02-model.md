@@ -58,7 +58,7 @@ In `labs/6.4/6.4-lab`, mark `path.py`.
 
 ## Use it somewhere new
 
-Clinic scan filename; zip member names.
+A scan filename is this grain; zip member names are the sibling leftover.
 
 ## What can still go wrong
 

@@ -38,7 +38,7 @@ A canary dashboard will show rollout percent and stay silent when CI’s `boot_o
 log_denied reason=prod_debug_forbidden env=prod debug=true deploy=sc-12
 ```
 
-Not: a stack trace, a secret, or “assurance gate complete.”
+Not: a stack trace, a secret, or “check-in complete.”
 
 Putting the matching trace in the alert puts the stack in the pager too.
 
@@ -58,7 +58,7 @@ A refused boot must say *prod debug refused*, not only “assert False.” Do no
 log_denied reason=prod_debug_forbidden env=prod debug=true deploy=sc-12
 ```
 
-Reject any line that includes a stack trace, a secret, or “assurance gate complete.”
+Reject any line that includes a stack trace, a secret, or “check-in complete.”
 
 ## Use it somewhere new
 

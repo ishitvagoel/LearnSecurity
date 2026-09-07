@@ -53,7 +53,7 @@ Assert the `(sql, params)` shape. A `%s` inside concatenated SQL is still a stri
 
 ## Use it somewhere new
 
-Clinic search box. HTTP 200 is the status, not the bound tuple (see 9.3). Do not run a test that hits a live clinic system.
+HTTP 200 on search is the status, not the bound tuple (see 9.3). Do not run a test that hits a live clinic system.
 
 ## What this page is not doing
 

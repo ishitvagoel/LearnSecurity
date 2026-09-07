@@ -62,7 +62,7 @@ In `labs/6.1/6.1-lab`, mark `argv.py`. Fake names only.
 
 ## Use it somewhere new
 
-Clinic CSV filename as a second interpreter. Jinja includes.
+A CSV filename is a second interpreter. Jinja includes are the same grain.
 
 ## What can still go wrong
 

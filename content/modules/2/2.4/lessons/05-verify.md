@@ -49,7 +49,7 @@ Call `share_note` twice. An `idempotency` substring is the word, not the count.
 
 ## Use it somewhere new
 
-Clinic last slot. Asserting HTTP 201 once is not double-book evidence. Do not run a test that loads the real clinic.
+One HTTP 201 on the last slot is not double-book evidence. Do not run a test that loads the real clinic.
 
 ## What this page is not doing
 

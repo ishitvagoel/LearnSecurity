@@ -76,7 +76,7 @@ python3 -m pytest labs/6.3/6.3-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-Clinic “share record with partner” POST. postMessage, clickjacking, CORS `*` with credentials.
+A “share record with partner” POST is this grain. postMessage, clickjacking, and CORS `*` with credentials are leftovers.
 
 ## What this page is not doing
 

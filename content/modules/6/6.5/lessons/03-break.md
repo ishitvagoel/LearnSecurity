@@ -74,7 +74,7 @@ Do not fetch. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic PDF URL. Predict without leaving this directory. Do not fetch a live PDF or a metadata endpoint.
+Fetching a lab-result PDF from a URL can hit link-local hosts. Predict without leaving this directory. Do not fetch a live PDF or a metadata endpoint.
 
 ## What this page is not doing
 

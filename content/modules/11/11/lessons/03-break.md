@@ -59,7 +59,7 @@ Earlier weeks already said check every access. Time, revoke, leftover worker ses
 | How you stop it later | Discard grant; consult owner-or-grant on every read |
 | How you notice later | `revoked_share_read_denied`; never bodies |
 | How you recover later | Notify A; rotate links; wipe caches |
-| Out of scope | A capstone scanner; live clinic; claiming an assurance gate |
+| Out of scope | A capstone scanner; live clinic; claiming a check-in |
 
 FastAPI will return 200 for DELETE if you wrote that route. A scanner will stay green if the suite never reads after revoke. B after revoke is None.
 
@@ -73,7 +73,7 @@ Run from `labs/11/11-lab` if a collection at the repo root picks up `site/`. Do 
 
 ## Use it somewhere new
 
-Clinic revoke a guardian: predict without leaving this directory. Do not hit a live clinic system.
+Revoking a guardian still has to fail the next chart read. Predict without leaving this directory. Do not hit a live clinic system.
 
 ## What this page is not doing
 

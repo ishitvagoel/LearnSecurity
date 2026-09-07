@@ -66,7 +66,7 @@ Record the failing tests, starting with `test_green_scanner_is_not_an_empty_thre
 
 ## Use it somewhere new
 
-Clinic SMS reminders. Predict an empty model if the only input is “SMS gateway vendor scan green.” Stay in this directory. Do not scan a clinic or a carrier.
+SMS reminders are a channel the HTTP model never listed. Predict an empty model if the only input is “SMS gateway vendor scan green.” Stay in this directory. Do not scan a clinic or a carrier.
 
 ## What this page is not doing
 

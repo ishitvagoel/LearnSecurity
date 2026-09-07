@@ -72,7 +72,7 @@ Run from `labs/9.2/9.2-lab` if a repo-root collection picks up `site/`. Do not p
 
 ## Use it somewhere new
 
-Clinic report template with eval: predict without leaving this directory. Do not run eval on live input.
+A report template that still grants `eval` is the leftover. Predict without leaving this directory. Do not run eval on live input.
 
 ## What this page is not doing
 

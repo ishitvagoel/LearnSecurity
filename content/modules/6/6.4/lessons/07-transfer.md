@@ -7,7 +7,7 @@
 
 You get a **clinic scan upload** whose original filename is kept. `resolve` must not return a path outside `/tmp/sc-lab`.
 
-Clinic scan upload whose original filename is kept. Also name XML entity expansion, pickle, and YAML load as other parsers (same earlier data-vs-grammar shape).
+A scan upload that keeps the original filename is the same job. Also name XML entity expansion, pickle, and YAML load as other parsers (same earlier data-vs-grammar shape).
 
 EHR-lite “attach imaging” that joins the filename onto a public folder.
 

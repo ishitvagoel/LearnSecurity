@@ -54,7 +54,7 @@ Also name a coding assistant in CI.
 | Live model / jailbreak tutorial | Course rules |
 | "famous-bugs map so mediation is done" | Awareness after the cause |
 | "we use retrieval" | Retrieval is still untrusted |
-| "assurance gate complete" | Forbidden stamp |
+| "check-in complete" | Forbidden stamp |
 
 ## Practice
 

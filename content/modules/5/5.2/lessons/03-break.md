@@ -71,7 +71,7 @@ Record the failing test `test_protect_is_not_mere_encoding`. Do not add a live d
 
 ## Use it somewhere new
 
-Clinic SSN column labeled `ssn_encrypted`. Predict, without leaving this directory, whether the label keeps the number secret. Do not query a live clinic system.
+A column labeled `ssn_encrypted` can still hold plaintext. Predict, without leaving this directory, whether the label keeps the number secret. Do not query a live clinic system.
 
 ## What this page is not doing
 

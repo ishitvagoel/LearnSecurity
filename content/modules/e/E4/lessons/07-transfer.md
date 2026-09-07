@@ -7,7 +7,7 @@
 
 You get a **clinic DICOM / image parser**. `len(copy_into(4, b"abcdefgh", 4))` must be ≤ 4.
 
-Clinic DICOM / image parser. Also name a protobuf C extension.
+Bind this to a DICOM or image parser. Also name a protobuf C extension.
 
 EHR-lite “the app is mostly Kotlin so copies are safe,” plus “we mapped an awareness-list name so the unpacker is done.”
 

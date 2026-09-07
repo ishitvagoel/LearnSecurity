@@ -7,7 +7,7 @@
 
 You get a **clinic lab API key in a gist**. `auth("sk-lab-hardcoded", current="rotated-now")` is false.
 
-Clinic lab API key in a gist. Also sketch envelope wrapping (data key vs wrapping key) on compromise.
+A lab API key in a gist is the same leak. Also sketch envelope wrapping (data key vs wrapping key) on compromise.
 
 EHR-lite with a backend integration key.
 

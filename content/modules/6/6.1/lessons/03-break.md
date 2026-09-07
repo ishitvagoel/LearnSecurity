@@ -73,7 +73,7 @@ Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic export filename. Predict without leaving this directory. Do not hit a live export worker.
+The export filename is a second interpreter. Predict without leaving this directory. Do not hit a live export worker.
 
 ## What this page is not doing
 

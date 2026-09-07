@@ -65,7 +65,7 @@ Run from `labs/8.2/8.2-lab` if a repo-root collection picks up `site/`. Do not â
 
 ## Use it somewhere new
 
-Clinic chart cache. Predict without leaving this directory. Do not image a live hospital tablet.
+An offline chart cache can outlive logout. Predict without leaving this directory. Do not image a live hospital tablet.
 
 ## What this page is not doing
 

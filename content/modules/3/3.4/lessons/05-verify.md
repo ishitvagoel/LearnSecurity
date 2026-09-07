@@ -47,7 +47,7 @@ Call `add_share` eight times. A `max={5}` attribute in JSX is the form, not the 
 
 ## Use it somewhere new
 
-Clinic guardians. Asserting HTTP 200 is not cap evidence. Do not run a test that load-tests a live clinic.
+HTTP 200 on add-share is not cap evidence. Do not run a test that load-tests a live clinic.
 
 ## What this page is not doing
 

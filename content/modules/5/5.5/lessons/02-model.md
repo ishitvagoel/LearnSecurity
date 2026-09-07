@@ -63,7 +63,7 @@ In `labs/5.5/5.5-lab`, mark `query.py`. Fake data only.
 
 ## Use it somewhere new
 
-Clinic search box as a second interpreter (query language).
+The search box is a second interpreter (query language).
 
 ## What can still go wrong
 

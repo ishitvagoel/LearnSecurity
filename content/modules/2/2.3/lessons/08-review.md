@@ -42,7 +42,7 @@ Also reject: `localStorage` for session; trusting the client as what you trust; 
 
 ## Use it somewhere new
 
-Clinic portal or WebView bridge. CSP3 without HttpOnly on the session still lets script read the token. What would still stop script from reading the token if CSP3 is on?
+On a portal or WebView bridge, CSP3 without HttpOnly on the session still lets script read the token. What would still stop script from reading the token if CSP3 is on?
 
 ## What this page is not doing
 

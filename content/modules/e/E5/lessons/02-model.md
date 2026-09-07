@@ -57,7 +57,7 @@ In `labs/E5/e5-lab`, mark `rls.py`.
 
 ## Use it somewhere new
 
-Clinic `org_id` in a bulk GraphQL mutation. Same grain: body tenant overrides session must stay false.
+`org_id` in a bulk GraphQL mutation is the same grain: body tenant overrides session must stay false.
 
 ## What can still go wrong
 

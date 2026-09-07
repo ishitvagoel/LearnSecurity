@@ -52,7 +52,7 @@ Call `apply(..., {"is_admin": true})`. `extra = 'forbid'` on a Pydantic model is
 
 ## Use it somewhere new
 
-Clinic PATCH `{is_staff:true}`. HTTP 200 on `/patients/{id}` is the status, not `is_admin` staying false (see 9.3). Do not use a public API probe.
+HTTP 200 on `/patients/{id}` after PATCH `{is_staff:true}` is the status, not `is_admin` staying false (see 9.3). Do not use a public API probe.
 
 ## What this page is not doing
 

@@ -32,7 +32,7 @@ Variants (extra fields) and a role-change cache are other leftover. Name them, d
 - live-target language
 - no variant search
 
-Also reject: public pentest steps; closing findings without re-running `test_cannot_close_without_retest`; keys in learner notes; claiming an assurance gate; treating a known-exploited list as permission to scan.
+Also reject: public pentest steps; closing findings without re-running `test_cannot_close_without_retest`; keys in learner notes; claiming a check-in; treating a known-exploited list as permission to scan.
 
 ## Common mix-ups
 
@@ -40,7 +40,7 @@ Also reject: public pentest steps; closing findings without re-running `test_can
 - Severity 9.8 is the close decision
 - A known-exploited listing authorizes scanning public systems
 - A testing-guide draft is the current final pin
-- An assurance gate follows from a filed report
+- A filed report does not finish a check-in
 
 ## Use it somewhere new
 

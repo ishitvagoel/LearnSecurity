@@ -73,7 +73,7 @@ Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic bulk-export. Predict without leaving this directory. Do not load-test a live clinic system.
+A bulk-export can skip the three-export cap. Predict without leaving this directory. Do not load-test a live clinic system.
 
 ## What this page is not doing
 

@@ -26,7 +26,7 @@ If both pass, you are not looking at prod plus debug.
 | Normal | prod without debug → may boot (may pass on both) |
 | Wrong input | prod plus debug → not boot; broken files must fail |
 | Abuse | Unsure flags are not a production boot (fail closed; leftover if not in this check) |
-| Not claimed | Live compose; a canary; an assurance gate; other flags |
+| Not claimed | Live compose; a canary; a check-in; other flags |
 
 The test `test_prod_debug_must_not_boot` is there so always-true `boot_ok` still fails.
 
@@ -46,7 +46,7 @@ A `NODE_ENV` string in compose is not `boot_ok("prod", True)`. This practice nev
 - Migrations fail closed
 - Rollback actually works
 - Extra version leakage is gone (extra, advanced work)
-- An assurance gate is complete
+- That you finished a check-in
 
 ## Practice
 

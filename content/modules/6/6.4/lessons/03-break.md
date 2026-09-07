@@ -66,7 +66,7 @@ Record the failing test `test_dotdot_does_not_escape_root`. Do not open host fil
 
 ## Use it somewhere new
 
-Clinic scan upload. Predict, without leaving this directory, whether joining the original scan name onto a public folder still leaves the imaging root. Do not touch a live imaging folder.
+A scan upload can join the original filename onto a public folder. Predict, without leaving this directory, whether that join still leaves the imaging root. Do not touch a live imaging folder.
 
 ## What this page is not doing
 
