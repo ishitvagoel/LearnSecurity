@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/10.4/10.4-lab/vulnerable/` as a change to the notes app’s compose boot check. Check whether `boot_ok("prod", True)` still returns true.
+The files in `labs/10.4/10.4-lab/vulnerable/` are the boot-check change. Does `boot_ok("prod", True)` still return true?
 
 Open `boot_ok` and the prod-plus-debug pair. A `NODE_ENV` screenshot is the wrong starting place. Writing “will turn debug off later” does not make `test_prod_debug_must_not_boot` pass.
 

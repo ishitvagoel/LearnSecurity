@@ -5,9 +5,9 @@
 
 ## What you are reviewing
 
-Review `labs/8.2/8.2-lab/vulnerable/` as a change to the notes app’s offline cache. Check whether `save_note("secret")` still leaves `'secret'` on disk.
+Treat `labs/8.2/8.2-lab/vulnerable/` as an offline-cache change. Does `save_note("secret")` still leave `'secret'` on disk?
 
-`test_cached_note_is_not_plaintext_on_disk` is the check. “We should wrap later” is a postponement. A storage sticker in the ticket does not encrypt the cache.
+`test_cached_note_is_not_plaintext_on_disk` still has to fail the leftover cache. “We should wrap later” is not that fail. A storage sticker in the ticket does not encrypt the cache.
 
 ## Picture: write body to cache.txt
 

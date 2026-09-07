@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-You are reviewing company binding. Check whether `tenant_for({"tenant": "A"}, {"tenant": "B"})` still returns `"B"`.
+This is a company-binding review. Does `tenant_for({"tenant": "A"}, {"tenant": "B"})` still return `"B"`?
 
 Review it as if it were the notes app’s note query. Writing “will bind later” does not make `test_body_cannot_switch_tenant` pass. The JSON body is not the tenant. Body tenant overrides session is the smell. Bind tenant from the session is the structural change.
 

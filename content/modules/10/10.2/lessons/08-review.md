@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/10.2/10.2-lab/vulnerable/` as a change to the notes app’s CI install check. Check whether `install_ok("aaa", "bbb")` still returns true.
+Treat `labs/10.2/10.2-lab/vulnerable/` as a CI-install change. Does `install_ok("aaa", "bbb")` still return true?
 
 Compare the two hash strings in `install_ok`. An SBOM screenshot can wait. The review is whether `test_hash_mismatch_refuses_install` passes, not whether someone wrote “will pin later.”
 

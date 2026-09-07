@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/2.4/2.4-state-time/vulnerable/` as a change to notes-app share. Check whether a second `share_note` with `k1` still appends a row.
+The files in `labs/2.4/2.4-state-time/vulnerable/` are the share change. Does a second `share_note` with `k1` still append a row?
 
 If `test_retry_does_not_duplicate_side_effect` still fails, “will add remembering later” is unfinished work.
 

@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/E4/e4-lab/vulnerable/` as a change to the notes app’s unpacker. Check whether `copy_into(4, b"abcdefgh", 4)` still returns more than 4 bytes.
+Read `labs/E4/e4-lab/vulnerable/` as the unpacker. Does `copy_into(4, b"abcdefgh", 4)` still return more than 4 bytes?
 
 A sticky note “will bound later” is not `test_copy_does_not_exceed_buffer` going green.
 

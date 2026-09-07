@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/4.2/4.2-lab/vulnerable/` as a change to notes-app login copy. Reconstruct whether `phishing_resistant("password", EVIL, REAL)` is still true.
+Read `labs/4.2/4.2-lab/vulnerable/` as login-copy. Reconstruct whether `phishing_resistant("password", EVIL, REAL)` is still true.
 
 A banner that says “phishing-resistant password” does not make `test_password_is_not_phishing_resistant` pass.
 

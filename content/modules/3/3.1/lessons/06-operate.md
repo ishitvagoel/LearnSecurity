@@ -51,7 +51,7 @@ If operators see a redaction-miss badge, do not encode it as color only. Give it
 
 ## Practice
 
-Write a log line (ids, reason, no body). Reject any line that includes `tenant-A-secret-body`, a note body, a patient chart, or a card number.
+A usable deny line has ids and a reason, not the blob. A line is wrong if it includes `tenant-A-secret-body`, a note body, a patient chart, or a card number.
 
 ## Use it somewhere new
 

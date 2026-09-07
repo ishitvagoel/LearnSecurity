@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/10.3/10.3-lab/vulnerable/` as a change to the notes app's cluster admission. Check whether `pod_ok("cluster-admin")` still returns true.
+Read `labs/10.3/10.3-lab/vulnerable/` the way you would review cluster admission. Does `pod_ok("cluster-admin")` still return true?
 
 Look at `pod_ok` and the cluster-admin row. A CIS screenshot can wait. Shipping "will tighten RBAC later" leaves `test_cluster_admin_pod_is_denied` failing.
 

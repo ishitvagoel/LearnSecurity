@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/E1/e1-lab/vulnerable/` as a change to the notes app's summarizer agent. Check whether `run_tool("exec_sql", {})` still runs.
+Look at `labs/E1/e1-lab/vulnerable/` as a summarizer-agent PR. Does `run_tool("exec_sql", {})` still run?
 
 Start with `run_tool` and the `exec_sql` row. A famous-bugs screenshot is the wrong evidence. Until `test_exec_sql_tool_is_denied` passes, "will allow-list later" is unfinished work.
 

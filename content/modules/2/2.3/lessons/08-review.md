@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/2.3/2.3-browser-policy/vulnerable/` as a change to notes-app cookie policy. Check whether the jar still hands `sc_session` to script.
+Read `labs/2.3/2.3-browser-policy/vulnerable/` as a cookie-policy change. Does the jar still hand `sc_session` to script?
 
 Start at the cookie reader, not at a CSP badge.
 

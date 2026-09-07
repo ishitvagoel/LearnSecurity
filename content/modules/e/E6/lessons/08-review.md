@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/E6/e6-lab/vulnerable/` as a change to the notes app’s leftover-risk register. Check whether `accept_exception({"owner": "", "review_by": None})` still returns true.
+The files in `labs/E6/e6-lab/vulnerable/` are the leftover-risk register. Does `accept_exception({"owner": "", "review_by": None})` still return true?
 
 Read `accept_exception` and the empty-owner row first. A maturity screenshot can wait. `test_exception_needs_owner_review_and_wcag` still fails if the only change is “will add dates later.”
 

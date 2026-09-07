@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/6.2/6.2-lab/vulnerable/` as a change to the notes app’s HTML drawing. Check whether `render` still leaves `<` as markup.
+The files in `labs/6.2/6.2-lab/vulnerable/` are the HTML-drawing change. Does `render` still leave `<` as markup?
 
 If `test_angle_brackets_are_encoded` still fails, “we should encode later” is unfinished work.
 

@@ -7,7 +7,7 @@
 
 On deletion, start at leftover analytics. For each claim, mark **rule**, **tool**, or **false assurance**, and say whether `body_retained("alice")` is still `"secret"` after `delete_account("alice")`. A contract ticket is the wrong starting place.
 
-`test_deleted_account_leaves_no_analytics_body` is the check. “Will add warehouse purge later” is a postponement.
+`test_deleted_account_leaves_no_analytics_body` has to go green. “Will add warehouse purge later” does not.
 
 ## Picture: problems to find (name them yourself)
 

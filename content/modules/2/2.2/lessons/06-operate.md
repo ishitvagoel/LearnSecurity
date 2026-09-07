@@ -55,7 +55,7 @@ Not: `tenant-A-note`, or a raw body.
 
 ## Practice
 
-Write a log line (ids, reason, no body). Reject any line that includes `tenant-A-note` or a raw body.
+Draft a deny line with ids and a reason — never the body. Drop any line that includes `tenant-A-note` or a raw body.
 
 ## Use it somewhere new
 

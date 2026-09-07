@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/7.2/7.2-lab/vulnerable/` as a change to the notes app’s note JSON. Check whether `resolve("member", "secret_internal")` is still true.
+Read `labs/7.2/7.2-lab/vulnerable/` as a note-JSON change. Does `resolve("member", "secret_internal")` still return true?
 
 Until `test_member_cannot_resolve_internal_field` passes, “will matrix later” is unfinished work.
 

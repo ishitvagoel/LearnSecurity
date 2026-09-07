@@ -7,7 +7,7 @@
 
 This edge-cache review starts at the store key. Mark each claim **rule**, **tool**, or **false assurance**, and say whether company B can read company A’s body if they ship. An HTTPS checkbox is the wrong starting place.
 
-Reconstruct whether the store still keys only on path. Compare that with the rule. Write changes a developer can verify. `test_other_tenant_does_not_receive_cached_body` is the check. “Will add Vary later” is a postponement.
+Reconstruct whether the store still keys only on path. Compare that with the rule. Write changes a developer can verify. `test_other_tenant_does_not_receive_cached_body` still has to fail. A ticket that says “will add Vary later” is not that fail.
 
 ## Picture: problems to find (name them yourself)
 

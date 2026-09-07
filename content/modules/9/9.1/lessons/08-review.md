@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/9.1/9.1-lab/vulnerable/` as a change to the notes app’s coverage check. Check whether a status-only AUTHZ-1 row still counts as covered.
+Open `labs/9.1/9.1-lab/vulnerable/` as a coverage-check PR. Does a status-only AUTHZ-1 row still count as covered?
 
 Begin at `covered` and the AUTHZ-1 row, not with a PDF. Do not treat “will map tests later” as a green `test_status_only_row_is_not_coverage`.
 

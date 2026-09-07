@@ -581,7 +581,7 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/sister cells/g, "related leftover"],
   [
     /Write one log line you would accept(?: in review)?(?: \(([^)]+)\))?\. Tie it to (`[^`]+`)\./g,
-    "Write a log line you would accept.",
+    "Sketch a deny line you would keep.",
   ],
   [/ Example shape \(fake (?:ids|routes) only\):/g, ""],
   [/Point at (`[^`]+`) file (`[^`]+`)\./g, "In $1, mark $2."],
@@ -625,8 +625,9 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/The maps are in-process: /g, "The files are "],
   [/The practice is in-process /g, "The practice is "],
   [/It is a tiny in-process /g, ""],
-  [/For `[^`]+`, write a log line you would accept\./g, ""],
-  [/For `[^`]+`, write a log line( \([^)]+\))/g, "Write a log line$1"],
+  [/For (?:\u0000C\d+\u0000|`[^`]+`), write a log line you would accept\./g, ""],
+  [/For (?:\u0000C\d+\u0000|`[^`]+`), write a log line( \([^)]+\))/g, "Draft a deny line$1"],
+  [/Write a log line( \([^)]+\))/g, "Draft a deny line$1"],
   [/Draw [^.]+ so someone else could name the checks\. ?/g, ""],
   [/Do not invent a new catalogue\./g, ""],
   [/Do not start a new list from scratch\. /g, ""],
@@ -652,7 +653,19 @@ const PROSE_PHRASES: [RegExp, string][] = [
     /HTTP 200 on ([^.]+?) is the status, not ([^.]+)\./g,
     "A 200 from $1 does not prove $2.",
   ],
-  [/This review is about notes-app /g, "You are reviewing "],
+  [/This review is about notes-app /g, "This page reviews "],
+  [
+    /Review (\u0000C\d+\u0000) as a (?:change to|pull request for) [^.]+?\. Check whether /g,
+    "Open $1. Does ",
+  ],
+  [
+    /Review (\u0000C\d+\u0000) as a (?:change to|pull request for) [^.]+?\. Reconstruct whether /g,
+    "Open $1. Reconstruct whether ",
+  ],
+  [
+    /You are reviewing (?!a change that)([^.]+)\. Check whether /g,
+    "This is a $1 review. Does ",
+  ],
   [
     /Your job is to label each claim \*\*rule\*\*, \*\*tool\*\*, or \*\*false assurance\*\*, and to say whether /g,
     "Label each claim **rule**, **tool**, or **false assurance**. Say whether ",
@@ -675,10 +688,18 @@ const PROSE_PHRASES: [RegExp, string][] = [
     "$3 does not make $1 pass.",
   ],
   [
-    /The check you already ran \((`[^`]+`)\) is the rule (?:test|check)\./g,
-    "$1 is the check.",
+    /The check you already ran \((\u0000C\d+\u0000|`[^`]+`)\) is the rule (?:test|check)\./g,
+    "$1 still has to fail.",
   ],
-  [/You already ran (`[^`]+`) — that is the rule\./g, "$1 is the check."],
+  [/You already ran (\u0000C\d+\u0000|`[^`]+`) — that is the rule\./g, "$1 still has to fail."],
+  [
+    /(\u0000C\d+\u0000) is the check\. [“"](?:Will |We should )[^“”"]+[”"] is a postponement\./g,
+    "$1 still has to fail. A later ticket is not that fail.",
+  ],
+  [
+    /(\u0000C\d+\u0000) is the check; [“"]will [^“”"]+[”"] is a postponement\./g,
+    "$1 still has to fail. A later ticket is not that fail.",
+  ],
   [/Notice names ([^.]+)\./g, "Name $1."],
   [/Name the event when you notice it\./g, "Name the event."],
   [/The ship gate stays not finished\./g, "This page does not finish the ship check-in."],

@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/E2/e2-lab/vulnerable/` as a change to the notes app’s header middleware. Check whether Report-Only still makes `isolation_enforced` true.
+Open `labs/E2/e2-lab/vulnerable/` as header middleware. Does Report-Only still make `isolation_enforced` true?
 
 “We should enforce later” does not close `test_report_only_is_not_enforcement`.
 

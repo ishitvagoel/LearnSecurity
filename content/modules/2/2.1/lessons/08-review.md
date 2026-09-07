@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/2.1/2.1-parser-boundaries/vulnerable/` as a change to notes-app ingest. Reconstruct whether ACL and store still parse the same bytes twice.
+Treat `labs/2.1/2.1-parser-boundaries/vulnerable/` as an ingest PR. Reconstruct whether ACL and store still parse the same bytes twice.
 
 Do not treat “JSON should not duplicate keys” as a green `test_duplicate_tenant_keys_are_one_meaning`.
 

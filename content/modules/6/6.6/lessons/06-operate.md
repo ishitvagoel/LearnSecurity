@@ -53,7 +53,7 @@ If a human sees “link already used,” announce it in text a screen reader can
 
 ## Practice
 
-Write a log line (ids, reason, no token). Reject any line that includes the token, a note body, or a real email.
+Sketch a deny line with ids and a reason — never the token. A line is wrong if it includes the token, a note body, or a real email.
 
 ## Use it somewhere new
 

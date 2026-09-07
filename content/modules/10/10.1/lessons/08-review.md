@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/10.1/10.1-lab/vulnerable/` as a change to the notes app’s merge check. Check whether `merge_ok({})` still returns true.
+Open `labs/10.1/10.1-lab/vulnerable/` as if it were a merge-check PR. Does `merge_ok({})` still return true?
 
 Look at `merge_ok` and the empty dict. A training screenshot is not the merge check. “Will add a threat model later” is a promise; `test_merge_requires_threat_model_id` is the evidence.
 

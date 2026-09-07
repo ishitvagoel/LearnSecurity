@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/5.4/5.4-lab/vulnerable/` as a change to notes-app channel binding. Check whether `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` is still true.
+Read `labs/5.4/5.4-lab/vulnerable/` as channel binding. Does `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` still return true?
 
 Do not treat “will bind the proxy later” as a green `test_client_forwarded_proto_is_not_tls`.
 

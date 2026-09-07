@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/7.1/7.1-lab/vulnerable/` as a change to the notes app’s profile PATCH. Check whether `apply(..., {"is_admin": true})` still writes true.
+Treat `labs/7.1/7.1-lab/vulnerable/` as a profile-PATCH PR. Does `apply(..., {"is_admin": true})` still write true?
 
 A sticky note “we should allow-list later” is not `test_is_admin_cannot_be_patched` going green. An inventory ticket about leftover endpoints does not drop `is_admin`.
 

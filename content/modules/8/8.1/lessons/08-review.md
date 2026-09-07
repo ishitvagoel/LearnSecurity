@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/8.1/8.1-lab/vulnerable/` as a change to the notes app’s Android export. Check whether `allow_export({"integrity": "ok"}, "fail")` still returns true.
+Open `labs/8.1/8.1-lab/vulnerable/` as an Android-export PR. Does `allow_export({"integrity": "ok"}, "fail")` still return true?
 
 Shipping “we will attest later” leaves `test_client_integrity_claim_is_not_authorization` failing. A sticker about a mobile checklist does not make the APK honest.
 

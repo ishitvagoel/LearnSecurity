@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/8.5/8.5-lab/vulnerable/` as a change to the notes app’s crash telemetry. Check whether `crash_report("secret")` still contains `'secret'`.
+Look at `labs/8.5/8.5-lab/vulnerable/` as crash telemetry. Does `crash_report("secret")` still contain `'secret'`?
 
 Look at `crash_report` and the body×crash row before a store form. “Will redact later” does not close `test_crash_report_omits_note_body`.
 

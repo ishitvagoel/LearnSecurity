@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/E3/e3-lab/vulnerable/` as a change to the notes app's simulated copay. Check whether two `capture("k1")` still leave count 2.
+Treat `labs/E3/e3-lab/vulnerable/` as a copay change. Do two `capture("k1")` still leave count 2?
 
 A TODO that says “will add SEEN later” does not satisfy `test_duplicate_capture_does_not_double_charge`.
 

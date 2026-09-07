@@ -48,7 +48,7 @@ A task dashboard will show task success and stay silent when the task still used
 
 ## Practice
 
-Write a log line (job id, expected principal, no cookie). Reject any line that includes Alice’s session cookie, note bodies, or a live broker dump.
+Sketch a deny line with the job id and expected principal — never the cookie. Drop any line that includes Alice’s session cookie, note bodies, or a live broker dump.
 
 ## Use it somewhere new
 

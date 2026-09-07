@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/6.5/6.5-lab/vulnerable/` as a change to notes-app unfurl. Check whether `allowed` is still true for the named link-local metadata URL.
+Open `labs/6.5/6.5-lab/vulnerable/` as an unfurl change. Is `allowed` still true for the named link-local metadata URL?
 
 A TODO to allow-list later does not satisfy `test_link_local_metadata_is_denied`.
 

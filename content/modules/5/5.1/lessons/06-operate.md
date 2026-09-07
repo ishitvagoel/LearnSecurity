@@ -53,7 +53,7 @@ If a human sees “account deleted,” announce it in text a screen reader can s
 
 ## Practice
 
-Write a log line (ids, reason, store name, no body). Reject any line that includes a note body, a personal email, or a “privacy law handled” slogan.
+Draft a deny line with ids, a reason, and the store name — never the body. Throw out a line that includes a note body, a personal email, or a “privacy law handled” slogan.
 
 ## Use it somewhere new
 

@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/6.4/6.4-lab/vulnerable/` as a change to notes-app uploads. Check whether `resolve("../outside")` still leaves `/tmp/sc-lab`.
+Look at `labs/6.4/6.4-lab/vulnerable/` as an upload PR. Does `resolve("../outside")` still leave `/tmp/sc-lab`?
 
 “Will canonicalize later” does not close `test_dotdot_does_not_escape_root`.
 

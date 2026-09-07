@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/5.2/5.2-lab/vulnerable/` as a change to notes-app at-rest protection. Check whether Base64 decode of `protect("secret")` still equals `"secret"`.
+Open `labs/5.2/5.2-lab/vulnerable/` as at-rest protection. Does Base64 decode of `protect("secret")` still equal `"secret"`?
 
 Shipping “will add AES later” leaves `test_protect_is_not_mere_encoding` failing.
 

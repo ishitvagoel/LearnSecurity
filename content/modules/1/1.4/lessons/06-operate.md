@@ -44,7 +44,7 @@ If the primary widget is broken, degradation is **another checked, usable path**
 
 ## Practice
 
-Write a log line (ids, reason, no body, no real email). Write who owns the coercion leftover and what trigger reopens it.
+Draft a deny line with ids and a reason — never a body or a real email. Name who owns the coercion leftover and what trigger reopens it.
 
 ## Use it somewhere new
 

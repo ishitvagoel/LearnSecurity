@@ -50,7 +50,7 @@ A cloud key dashboard will show “key enabled” and stay silent when the colum
 
 ## Practice
 
-Write a log line (ids, reason, no body). Reject any line that includes plaintext `secret`, a real SSN, or “AES handled.”
+A deny line needs ids and a reason, not plaintext. Drop any line that includes plaintext `secret`, a real SSN, or “AES handled.”
 
 ## Use it somewhere new
 

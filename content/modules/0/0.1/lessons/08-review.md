@@ -6,7 +6,7 @@
 
 ## Review the practice files as if they were the course helper
 
-Review `labs/0.1/0.1-orientation/vulnerable/` as a pull request for a course tool. Check whether `target_is_authorized` still returns true for a public host.
+Open `labs/0.1/0.1-orientation/vulnerable/` as a course-tool PR. Does `target_is_authorized` still return true for a public host?
 
 ## Picture: any URL the proxy can open
 

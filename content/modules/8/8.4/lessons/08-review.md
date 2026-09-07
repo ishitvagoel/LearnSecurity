@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/8.4/8.4-lab/vulnerable/` as a change to the notes app’s prod export gating. Check whether `api_allowed("debug", "ok")` still returns true.
+The files in `labs/8.4/8.4-lab/vulnerable/` are the prod-export gate. Does `api_allowed("debug", "ok")` still return true?
 
 If `test_debug_build_cannot_call_prod_export` still fails, “we should split flavors later” is not the review. An R8 screenshot does not split debug from prod.
 

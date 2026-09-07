@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/4.5/4.5-lab/vulnerable/` as a change to notes-app token acceptance. Check whether `accept_token` still returns true for `aud=other-api`.
+Look at `labs/4.5/4.5-lab/vulnerable/` as a token-acceptance PR. Does `accept_token` still return true for `aud=other-api`?
 
 The review is whether `test_wrong_audience_is_rejected` passes, not whether someone wrote “will check aud later.”
 

@@ -6,7 +6,7 @@
 
 ## Review the practice files as if they were the course placement service
 
-Review `labs/0.2/0.2-bridge/vulnerable/` as a pull request for a course tool. Check whether `quiz_score_grants_phase1_skip(100)` still returns true.
+Treat `labs/0.2/0.2-bridge/vulnerable/` as the quiz-bridge change. Does `quiz_score_grants_phase1_skip(100)` still return true?
 
 ## Picture: if score >= 80: skip part 1
 

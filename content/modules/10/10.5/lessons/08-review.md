@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/10.5/10.5-lab/vulnerable/` as a change to the notes app’s incident close. Check whether `close_incident({"recovery": "todo", "logs": "ok"})` still returns true.
+Look at `labs/10.5/10.5-lab/vulnerable/` as an incident-close PR. Does `close_incident({"recovery": "todo", "logs": "ok"})` still return true?
 
 Read `close_incident` and the recovery-todo row before a SIEM tile. Shipping “will restore later” leaves `test_cannot_close_without_recovery` failing.
 

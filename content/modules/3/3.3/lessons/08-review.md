@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/3.3/3.3-lab/vulnerable/` as a change to the notes app’s database role. Check whether `can_select("app", "tB", "tA")` is still true.
+Open `labs/3.3/3.3-lab/vulnerable/` as if it were a database-role PR. Does `can_select("app", "tB", "tA")` still return true?
 
 “Row-level security later” does not close `test_app_role_cannot_read_other_tenant`.
 

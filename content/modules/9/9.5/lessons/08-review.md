@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/9.5/9.5-lab/vulnerable/` as a change to the notes app's close gate. Check whether `close_finding({"retest": None})` still returns true.
+The files in `labs/9.5/9.5-lab/vulnerable/` are the close-gate change. Does `close_finding({"retest": None})` still return true?
 
 Open `close_finding` and the missing-retest row, not a PDF on a shelf. A sticky note "will retest later" is not `test_cannot_close_without_retest` going green.
 

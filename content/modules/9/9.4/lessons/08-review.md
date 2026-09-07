@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/9.4/9.4-lab/vulnerable/` as a change to the notes app’s ship gate. Check whether `ship_ok([HIGH], {})` still returns true.
+Read `labs/9.4/9.4-lab/vulnerable/` as the ship gate. Does `ship_ok([HIGH], {})` still return true?
 
 Read `ship_ok` and the HIGH×map row. A dashboard screenshot does not own the HIGH. A TODO to map later does not satisfy `test_unmapped_high_blocks_ship`.
 

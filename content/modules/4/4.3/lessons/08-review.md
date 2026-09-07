@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/4.3/4.3-lab/vulnerable/` as a change to notes-app session parsing. Check whether `session_from_request` still returns the query token.
+The files in `labs/4.3/4.3-lab/vulnerable/` are the session-parser change. Does `session_from_request` still return the query token?
 
 “Will move to cookies later” is a promise. `test_query_string_token_is_rejected` is the evidence.
 

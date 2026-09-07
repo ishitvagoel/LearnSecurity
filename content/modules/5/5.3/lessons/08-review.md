@@ -5,9 +5,9 @@
 
 ## What you are reviewing
 
-Review `labs/5.3/5.3-lab/vulnerable/` as a change to notes-app secret rotation. Check whether `auth("sk-lab-hardcoded", current="rotated-now")` is still true.
+Treat `labs/5.3/5.3-lab/vulnerable/` as a rotation change. Does `auth("sk-lab-hardcoded", current="rotated-now")` still return true?
 
-`test_hardcoded_default_does_not_auth` is the check. “Will rotate later” is a postponement.
+`test_hardcoded_default_does_not_auth` is what merge waits on. “Will rotate later” is not a pass.
 
 ## Picture: DEFAULT still accepted
 

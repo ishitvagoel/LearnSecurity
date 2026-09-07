@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/7.3/7.3-lab/vulnerable/` as a change to a notes-app billing webhook. Check whether `accept("", "body", "lab-secret")` is still true.
+The files in `labs/7.3/7.3-lab/vulnerable/` are the billing-webhook change. Does `accept("", "body", "lab-secret")` still return true?
 
 “Will HMAC later” is a promise. `test_missing_signature_is_rejected` is the evidence. A famous-bugs ticket does not verify the signature.
 

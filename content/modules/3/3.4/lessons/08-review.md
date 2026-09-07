@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/3.4/3.4-lab/vulnerable/` as a change to notes-app share. Check whether eight `add_share` calls still leave `last > 5`.
+Treat `labs/3.4/3.4-lab/vulnerable/` as a share-cap change. Do eight `add_share` calls still leave `last > 5`?
 
 A sticky note “will cap later” is not `test_share_cap_is_enforced` going green.
 

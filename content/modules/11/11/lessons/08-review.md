@@ -5,9 +5,9 @@
 
 ## What you are reviewing
 
-Review `labs/11/11-lab/vulnerable/` as a change to the notes app’s share revoke. Check whether `read("n1", "B")` after `revoke("n1", "B")` still returns the body.
+Open `labs/11/11-lab/vulnerable/` as a revoke-share change. After `revoke("n1", "B")`, does `read("n1", "B")` still return the body?
 
-Trace `revoke` / `read` and the B-after-revoke row. A README screenshot is decoration. `test_revoked_share_cannot_read` is the check; “will consult grants later” is a postponement.
+Trace `revoke` / `read` and the B-after-revoke row. A README screenshot is decoration. `test_revoked_share_cannot_read` still has to fail B-after-revoke. “Will consult grants later” does not close that row.
 
 ## Picture: read after revoke succeeds
 

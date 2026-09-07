@@ -49,7 +49,7 @@ A web filter will page on syntax errors and stay silent when the values were con
 
 ## Practice
 
-Write a log line (ids, reason, statement name, no body). Reject any line that includes a note body, a full SQL string with values, or a real email.
+Sketch a deny line with ids, a reason, and the statement name — never bound values. Do not accept a line that includes a note body, a full SQL string with values, or a real email.
 
 ## Use it somewhere new
 

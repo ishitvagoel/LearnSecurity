@@ -49,7 +49,7 @@ A host product will page on `sh` children and stay silent when the Python helper
 
 ## Practice
 
-Write a log line (ids, reason, program basename, no name). Reject any line that includes a note body, a real email, a patient filename, or a shell cookbook.
+A deny line can hold ids, a reason, and the program basename — not the export name. Throw out a line that includes a note body, a real email, a patient filename, or a shell cookbook.
 
 ## Use it somewhere new
 

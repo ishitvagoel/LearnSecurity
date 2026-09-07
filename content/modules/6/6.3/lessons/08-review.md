@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-You are reviewing share. Check whether `allow_share` for a foreign origin with `token=None` is still true.
+This is a share-route review. Does `allow_share` still return true for a foreign origin with `token=None`?
 
 If `test_foreign_origin_post_is_denied` still fails, “will add CSRF later” is not the review.
 

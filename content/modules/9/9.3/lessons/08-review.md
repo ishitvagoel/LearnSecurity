@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-Review `labs/9.3/9.3-lab/vulnerable/` as a change to the notes app’s security-suite gate. Check whether `{status_asserted: True}` still counts as a security test.
+Treat `labs/9.3/9.3-lab/vulnerable/` as a security-suite change. Does `{status_asserted: True}` still count as a security test?
 
 Look at `is_security_test` and the 200-only row. Coverage color is not the review. If `test_http_200_only_is_not_a_security_test` still fails, “will add isolation later” is unfinished work.
 

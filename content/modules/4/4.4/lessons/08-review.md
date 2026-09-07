@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-You are reviewing who-is-allowed. Check whether `can_read("bob", "n2")` is still true.
+This is a who-is-allowed review. Does `can_read("bob", "n2")` still return true?
 
 Shipping “will add object checks later” leaves `test_grant_on_n1_is_not_grant_on_n2` failing.
 
