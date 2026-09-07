@@ -14,7 +14,7 @@ EHR-lite “the app is mostly Kotlin so copies are safe,” plus “we mapped an
 1. who might try (hostile header length — not a live clinic binary attack);
 2. what you trust (smallest of three at the **native** copy is what you trust; Kotlin / a company roadmap / an awareness-list name are not);
 3. what must not happen (`copy_into` length > bufsize, not a privacy-law name);
-4. stay on a **local** practice only (no third-party codec fuzzing);
+4. copy must not exceed buffer — **local** practice (no third-party codec fuzzing);
 5. leftover (helpers that call C, integer wrap, native unpacker leftover later and harder);
 6. whether a human “copy rejected” path must meet the web accessibility baseline (operators must read the error without a hex dump).
 

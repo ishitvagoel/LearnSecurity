@@ -33,7 +33,7 @@ flowchart LR
 1. who might try (lost clinic tablet / backup — not a live hospital);
 2. what you trust (Keystore-wrapped cache is what you trust; private folder and fingerprint UI are not);
 3. what must not happen (`plaintext_on_disk` true, not “HIPAA”);
-4. try this on **local** practice files only (no personal-phone imaging);
+4. cached note must not be plaintext on disk — **local** practice files (no personal-phone imaging);
 5. leftover risk (backups, screenshots, notifications, extracted keys, clipboard);
 6. if a human unlock path exists (device-PIN fallback, no plaintext debug overlay).
 

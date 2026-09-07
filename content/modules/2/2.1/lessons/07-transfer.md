@@ -36,7 +36,7 @@ GraphQL and REST both ingest the same clinic appointment.
 - who might try (who can POST or query);
 - what you trust (which reader is trusted; the client is not);
 - what must not happen (disagreement, not “injection”);
-- a check idea that would fail if the rule were false (local practice only);
+- REST and GraphQL must agree on `patient_id` in **local** practice (no live clinic API);
 - leftover risk (honest unique keys still need authorization; coercion/support paths if a person confirms);
 - whether a human path must meet the web accessibility baseline (only if a person must finish a control; parser disagreement itself is not an accessibility problem).
 

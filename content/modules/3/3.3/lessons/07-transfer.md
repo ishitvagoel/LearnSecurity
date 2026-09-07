@@ -14,7 +14,7 @@ A billing replica should see invoice rows, not chart text.
 1. who might try (stolen function secret; forgotten handler filter; replica user with `SELECT` on notes — **not** a live clinic, cloud function, or managed database);
 2. what you trust (which role is the second check; the cloud vendor IAM name is not);
 3. what must not happen (`admin` can read tA notes, or billing replica can read chart text — pick one);
-4. run it on a **local** practice only (`can_select` analogue);
+4. `can_select` analogue is pinned to **local** practice;
 5. leftover (IAM admin still exists; table-owner walk-around of a later row-level rule; a living pledge we have not verified here is not GRANT);
 6. whether a human path must meet the web accessibility baseline (role design itself is not an accessibility problem; skip unless you claim a human-mediated control).
 

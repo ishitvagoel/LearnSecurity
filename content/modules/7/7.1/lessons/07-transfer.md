@@ -33,7 +33,7 @@ flowchart LR
 1. who might try (authenticated clinician session sending extra JSON — not a live clinic);
 2. what you trust (server `ALLOWED` is what you trust; SPA omit-checkbox and OpenAPI are not);
 3. what must not happen (`is_staff` becomes true, not “HIPAA”);
-4. a sketch on **local** practice files only (no public API);
+4. `is_admin` cannot be patched — **local** practice files (no public API);
 5. leftover risk (GraphQL/gRPC binders, leftover `/v0`, unused methods later and advanced, 6.2 on honest names);
 6. when a human deny path is in the claim (readable “field not writable,” not a silent 200 that dropped the name too).
 

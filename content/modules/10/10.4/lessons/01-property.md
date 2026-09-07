@@ -43,7 +43,7 @@ flowchart LR
 | Support who asked for five minutes | Flip debug so they can see a trace | Help a user | The process is still a production boot |
 | Someone who trusts `NODE_ENV=production` | Treat a string as the check | Looks like prod | `boot_ok("prod", True)` still returns true |
 
-You do not need a live production host. Those three already get the leak if boot always says yes.
+You do not need a live production host. A `/debug` finder, a five-minute support flip, and a `NODE_ENV` string already leak if boot always says yes.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

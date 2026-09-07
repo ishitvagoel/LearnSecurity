@@ -43,7 +43,7 @@ flowchart LR
 | Someone who treats a maturity score as the register | Point at a dashboard tile | “We already measure this” | The score is not owner, review date, or accessibility |
 | Someone who treats a pledge as done | Paste a manufacturer page | Looks like leadership | The incomplete record still accepted |
 
-You do not need a live disclosure inbox. Those three already accept the hole if `accept_exception` always says yes.
+You do not need a live disclosure inbox. A spoken yes, a maturity score, and a pledge already accept the hole if `accept_exception` always says yes.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

@@ -15,7 +15,7 @@ Onboarding at a clinic-booking product. Also name a vendor cert used to skip a t
 1. who might try (a hurried new hire or manager with a badge — **not** a live HR LMS attack);
 2. what you trust (the skip check; not a quiz, a job title, a badge, or an LMS percentage);
 3. what must not happen (`quiz_score_grants_phase1_skip(100)` true, not merely “unprofessional”);
-4. a sketch on **local** files only (no clinic LMS; reuse score 100 → false);
+4. score 100 → false on **local** files (no clinic LMS);
 5. leftover risk (tooling gaps, memorized answers, 1.4 hidden by a fast-track);
 6. if skip is shown in a UI, green-only is not evidence; 1.4 must remain reachable.
 

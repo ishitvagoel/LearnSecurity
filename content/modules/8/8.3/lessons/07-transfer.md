@@ -33,7 +33,7 @@ flowchart LR
 1. who might try (another app on the tablet sending extras — not a live clinic);
 2. what you trust (server session is what you trust; App Links and https are not identity);
 3. what must not happen (`current_user` becomes doctor, not “HIPAA”);
-4. a sketch on **local** practice files only (no sideloaded malware);
+4. deeplink must not switch user — **local** practice files (no sideloaded malware);
 5. leftover risk (WebView, custom schemes, 4.5 audience);
 6. when a human error path exists (exit the WebView with a keyboard).
 

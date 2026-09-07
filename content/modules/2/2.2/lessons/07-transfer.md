@@ -35,7 +35,7 @@ Your answer must include:
 - who might try (another patient on the same CDN; a neighbor on a TLS-inspecting proxy);
 - what you trust (which hop is TLS; which store is greedy; the client is hostile);
 - what must not happen (cross-patient cache hit, not “TLS stripped”);
-- a check idea that would fail if the rule were false (local practice only);
+- a second patient must not get the first chart from a path-only key — **local** practice (no live CDN);
 - leftover risk (CDN config drift; `X-Forwarded-Proto` treated as the TLS property);
 - whether a human path must meet the web accessibility baseline (only if a person must finish a control; a cache key itself is not that kind of problem).
 
