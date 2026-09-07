@@ -9,7 +9,7 @@ Turning on Secrets Manager does not rotate the default. A wiki that says you rot
 
 ## Picture: leftover default must fail
 
-A passing-test tally can still hide that a leftover default still counts as a valid key.
+A leftover default can still count as a valid key under a green suite.
 
 ```mermaid
 flowchart LR

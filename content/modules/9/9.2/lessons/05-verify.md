@@ -9,7 +9,7 @@ Approving because continuous integration passed does not reject `eval`. A format
 
 ## Picture: broken must fail eval-approve
 
-A passing-test tally can still hide that eval on user input is still approved.
+Eval on user input can still be approved even when other tests pass.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P["Must pass: reject eval"]
 ```
 
-If both pass, you are not looking at eval-on-user.
+If the broken review still passes, eval-on-user was never rejected.
 
 ## What the check has to show
 
@@ -28,7 +28,7 @@ If both pass, you are not looking at eval-on-user.
 | Failure | If you cannot tell whether the diff grants an interpreter, reject |
 | Not claimed | complete check; other expression languages; live GitHub; `exec(` |
 
-The test `test_eval_on_user_input_is_rejected` is there so always-true `review_ok` still fails. Do not add a working eval payload to “make the test more real.” The lab string `x = eval(user)` is enough.
+`test_eval_on_user_input_is_rejected` is what an always-yes `review_ok` cannot pass. Do not add a working eval payload to “make the test more real.” The lab string `x = eval(user)` is enough.
 
 An `eval` mention in a policy PDF is not `review_ok("x = eval(user)")`. This practice never runs eval on live input.
 

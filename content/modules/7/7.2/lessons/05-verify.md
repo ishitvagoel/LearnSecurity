@@ -9,7 +9,7 @@ A field-authz label does not hide `secret_internal` on the resolver. A SPA that 
 
 ## Picture: broken files must fail member × secret_internal
 
-A passing-test tally can still hide that a member still resolves `secret_internal`. Honest `display_name` may pass on both — that is the product, not an excuse to skip the deny.
+A member can still resolve `secret_internal` under a green suite. Honest `display_name` may pass on both — that is the product, not an excuse to skip the deny.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass deny"]
 ```
 
-If both pass, you are not looking at the field table.
+If the broken resolve still passes, the field table was never the deny.
 
 | Mode | Must show for this topic |
 |---|---|

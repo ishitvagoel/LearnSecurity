@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: redaction marker]
 ```
 
-If both pass, you are not looking at the body substring.
+If the broken log line also passes, you never searched for the body substring.
 
 ## What the check has to show
 

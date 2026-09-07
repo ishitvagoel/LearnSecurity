@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: debug plus ok
 
-A passing-test tally can still hide that debug still calls prod.
+Debug can still call prod even when the suite is green.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass deny"]
 ```
 
-If both pass, you are not looking at debug-to-prod.
+If the broken flavor still passes, debug-to-prod was never denied.
 
 ## Three things to look at
 

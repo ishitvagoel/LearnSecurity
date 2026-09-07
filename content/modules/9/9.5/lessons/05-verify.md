@@ -9,7 +9,7 @@ Attaching a PDF does not close the finding. Severity 9.8 is a priority number. `
 
 ## Picture: a broken close gate must fail the check
 
-A passing-test tally can still hide that `{retest: None}` still closes.
+`{retest: None}` can still close under a green suite.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: retest None denied]
 ```
 
-If both pass, you are not looking at missing retest.
+If the broken close still passes, missing retest was never what kept the finding open.
 
 ## What the check has to show
 
@@ -28,7 +28,7 @@ If both pass, you are not looking at missing retest.
 | Abuse | Missing, fail, or scheduled still deny (fail closed) |
 | Not claimed | A live testing-guide list run; a check-in; a severity calculator; that pass hit the same URL |
 
-The test `test_cannot_close_without_retest` is there so always-true `close_finding` still fails.
+`test_cannot_close_without_retest` is the case that keeps `close_finding` from being a rubber stamp.
 
 A close with `retest` set to `"pass"` may pass on both sides. You still have to deny a close that skipped retest. If the broken files do not fail `test_cannot_close_without_retest`, the lab is miswired — fix the wiring, not the assertion.
 

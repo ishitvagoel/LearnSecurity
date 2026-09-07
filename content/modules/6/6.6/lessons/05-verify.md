@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P["Must pass: consume-once"]
 ```
 
-If both pass, you are not looking at the second `t1`. The first accept of `t1` may pass on both sides. You still have to deny the second accept.
+If the broken accept still passes, the second `t1` was never denied. The first accept of `t1` may pass on both sides. You still have to deny the second accept.
 
 ## What the check has to show
 
@@ -53,7 +53,7 @@ Call `accept("t1")` twice. A `UNIQUE` keyword in a migration is the index you st
 
 ## Use it somewhere new
 
-HTTP 200 on `/accept` is the status, not the second-join deny (see 9.3). Do not run a test that clicks a live mail link.
+A 200 from `/accept` does not prove the second join was denied (see 9.3). Do not run a test that clicks a live mail link.
 
 ## What this page is not doing
 

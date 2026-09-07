@@ -9,7 +9,7 @@ SameSite=Lax does not decide a cross-site share. A CORS list is an origin header
 
 ## Picture: broken must fail foreign origin
 
-A passing-test tally can still hide that leftover cookies still authorize a share. Repaired files still have to pass both the deny and the honest allow.
+Leftover cookies can still authorize a share while tests pass. Repaired files still have to pass both the deny and the honest allow.
 
 ```mermaid
 flowchart LR
@@ -48,7 +48,7 @@ Call `allow_share` on a foreign origin. `SameSite` on a cookie helper is the coo
 
 ## Use it somewhere new
 
-HTTP 200 on `/share` is the status, not a foreign origin with `token=None`. Do not run a test that visits a live third-party page.
+A 200 from `/share` does not prove a foreign origin with `token=None` was denied. Do not run a test that visits a live third-party page.
 
 ## What this page is not doing
 

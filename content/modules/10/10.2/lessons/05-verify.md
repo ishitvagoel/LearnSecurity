@@ -9,7 +9,7 @@ Generating an SBOM does not compare hashes. A provenance badge is how-it-was-bui
 
 ## Picture: a broken install check must fail the mismatch test
 
-A passing-test tally can still hide that always-true `install_ok` still installs a mismatch.
+Always-yes `install_ok` can still install a mismatch under a green suite.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: mismatch is deny]
 ```
 
-If both pass, you are not looking at digest equality.
+If the broken install still passes, you never compared digests.
 
 ## What the check has to show
 
@@ -28,7 +28,7 @@ If both pass, you are not looking at digest equality.
 | Abuse | Unsure hashes are deny (fail closed) |
 | Not claimed | Live npm; provenance builders; the ship gate; that the pin is benign |
 
-The test `test_hash_mismatch_refuses_install` is there so always-true `install_ok` still fails.
+`test_hash_mismatch_refuses_install` is what stops `install_ok` from being a tautology.
 
 Matching digests may pass on both sides. You still have to refuse a mismatch. If the broken files do not fail `test_hash_mismatch_refuses_install`, the lab is miswired — fix the wiring, not the assertion.
 

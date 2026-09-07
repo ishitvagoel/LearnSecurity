@@ -19,7 +19,7 @@ flowchart TD
   T -->|repaired| Pass[Must pass]
 ```
 
-If both pass, you are not looking at `mouse_only`, name, or keyboard.
+If the broken widget also passes, you never checked `mouse_only`, the name, or the keyboard path.
 
 ## What the check has to show
 

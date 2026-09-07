@@ -38,7 +38,7 @@ A governance dashboard will show exception counts and stay silent when CI’s `a
 log_denied reason=exception_incomplete_denied missing=owner,review_by
 ```
 
-Not: a secret, an “check-in complete,” or a pledge screenshot.
+Not: a secret, a “check-in complete,” or a pledge screenshot.
 
 Putting the matching writeup in the alert copies the leak into the ticket.
 

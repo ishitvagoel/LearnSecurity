@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: both None]
 ```
 
-If both pass, you are not looking at `body_retained` after delete.
+If the broken delete still passes, `body_retained` after delete was never checked.
 
 ## What the check has to show
 

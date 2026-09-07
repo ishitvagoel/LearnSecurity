@@ -19,7 +19,7 @@ flowchart LR
   P --> E2[Evidence the pair is now bound]
 ```
 
-If both pass, you are not looking at the cross-company get.
+If the broken cache still passes, the cross-company get was never the miss you needed.
 
 ## What the check has to show
 

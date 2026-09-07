@@ -9,7 +9,7 @@ Importing a matrix spreadsheet does not prove `AUTHZ-1` has an isolation assert.
 
 ## Picture: a broken coverage check must fail the status-only test
 
-A passing-test tally can still hide that a status-only row still counts as coverage.
+A status-only row can still count as coverage under a green suite.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: status-only is not covered]
 ```
 
-If both pass, you are not looking at `asserts_isolation`.
+If the broken coverage row still passes, `asserts_isolation` was never required.
 
 ## What the check has to show
 

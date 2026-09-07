@@ -9,7 +9,7 @@ EncryptedSharedPreferences on a different file does not hide the note. Internal 
 
 ## Picture: broken files must fail: plaintext secret
 
-A passing-test tally can still hide that the cache still holds `'secret'`.
+The cache can still hold `'secret'` even when the suite is green.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass not plaintext"]
 ```
 
-If both pass, you are not looking at the body on disk.
+If the broken cache still passes, the body on disk was never the leftover.
 
 ## Observations, even for a cache
 

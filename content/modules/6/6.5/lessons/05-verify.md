@@ -9,7 +9,7 @@ A private-IP denylist does not cover link-local metadata. “HTTPS only” is a 
 
 ## Picture: link-local allowed must fail the check
 
-A passing-test tally can still hide that link-local is still allowed.
+Link-local can still be allowed even when the suite is green.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: deny plus lab host]
 ```
 
-If both pass, you are not looking at link-local.
+If the broken unfurl still passes, the link-local deny was never the case.
 
 ## What the check has to show
 

@@ -40,7 +40,7 @@ Fail closed: if you are unsure whether the role is a namespaced app role, deny. 
 - A network policy.
 - A restricted pod profile alone.
 - A managed-cluster identity sticker.
-- A check-in sticker.
+- A CIS score treated as done.
 - Break-glass (leftover, later elective).
 - FastAPI defaults.
 - A CIS benchmark.

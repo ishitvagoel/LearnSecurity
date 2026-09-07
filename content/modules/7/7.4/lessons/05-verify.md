@@ -9,7 +9,7 @@ A worker service-account name in YAML does not bind who the exporter is. An “i
 
 ## Picture: leftover Alice must fail the check
 
-A passing-test tally can still hide that leftover Alice still becomes the worker.
+Leftover Alice can still become the worker under a green suite.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P["Must pass: None"]
 ```
 
-If both pass, you are not looking at leftover Alice.
+If the broken worker still passes, leftover Alice was never the principal you caught.
 
 ## What the check has to show
 

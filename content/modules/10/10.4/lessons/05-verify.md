@@ -9,7 +9,7 @@
 
 ## Picture: a broken boot check must fail prod plus debug
 
-A passing-test tally can still hide that production still boots with debug.
+Debug-on production can still boot even when the pass count looks healthy.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: prod plus debug denied]
 ```
 
-If both pass, you are not looking at prod plus debug.
+If the broken boot check also passes, prod-plus-debug was never exercised.
 
 ## What the check has to show
 
@@ -28,7 +28,7 @@ If both pass, you are not looking at prod plus debug.
 | Abuse | Unsure flags are not a production boot (fail closed; leftover if not in this check) |
 | Not claimed | Live compose; a canary; a check-in; other flags |
 
-The test `test_prod_debug_must_not_boot` is there so always-true `boot_ok` still fails.
+`test_prod_debug_must_not_boot` is the case that an always-yes `boot_ok` cannot survive.
 
 Production with debug off may pass on both sides. You still have to deny production with debug on. If the broken files do not fail `test_prod_debug_must_not_boot`, the lab is miswired — fix the wiring, not the assertion.
 

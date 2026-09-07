@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: session_valid false]
 ```
 
-If both pass, you are not looking at `session_valid` after delete.
+If the broken session store still passes, `session_valid` after delete was never the case.
 
 ## What the check has to show
 

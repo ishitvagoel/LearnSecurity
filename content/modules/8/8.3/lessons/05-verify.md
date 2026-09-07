@@ -9,7 +9,7 @@ Verified App Links do not ignore `as=admin`. An https link is a scheme. After `o
 
 ## Picture: broken files must fail: as=admin
 
-A passing-test tally can still hide that `as=` still switches the session.
+`as=` can still switch the session even when other tests pass.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass alice"]
 ```
 
-If both pass, you are not looking at identity keys.
+If the broken link still passes, identity keys in extras were never dropped.
 
 ## Three things to look at
 

@@ -9,7 +9,7 @@ A maturity score does not accept an empty owner. “Legal said yes” is a conve
 
 ## Picture: a broken register gate must fail the check
 
-A passing-test tally can still hide that empty owner still accepts.
+Empty owner can still accept even when the suite is green.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: schema]
 ```
 
-If both pass, you are not looking at empty owner.
+If the broken accept still passes, empty owner was never rejected.
 
 ## What the check has to show
 

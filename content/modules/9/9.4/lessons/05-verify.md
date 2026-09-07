@@ -9,7 +9,7 @@ Turning on code scanning does not map HIGH findings. A high maturity score is a 
 
 ## Picture: a broken ship_ok must fail the check
 
-A passing-test tally can still hide that unmapped HIGH still ships.
+Unmapped HIGH can still ship even when the suite is green.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: deny unmapped HIGH]
 ```
 
-If both pass, you are not looking at the empty map.
+If the broken ship check still passes, the empty owner map was never a block.
 
 ## What the check has to show
 
@@ -28,7 +28,7 @@ If both pass, you are not looking at the empty map.
 | Abuse | Suppression with no owner is still deny (leftover if not in this check) |
 | Not claimed | A real GitHub tenant; the verification gate; a maturity score; that the mapped requirement is the right row |
 
-The test `test_unmapped_high_blocks_ship` is there so always-true `ship_ok` still fails.
+`test_unmapped_high_blocks_ship` exists so `ship_ok` cannot ignore an unmapped HIGH.
 
 A HIGH with an owner on the map may pass on both sides. You still have to deny an unmapped HIGH. If the broken files do not fail `test_unmapped_high_blocks_ship`, the lab is miswired — fix the wiring, not the assertion.
 

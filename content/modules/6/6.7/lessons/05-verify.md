@@ -9,7 +9,7 @@ A rate-limit product name does not cap the fourth export. A disabled button is t
 
 ## Picture: unbounded allow must fail the check
 
-A passing-test tally can still hide that the fourth export still goes through.
+The fourth export can still go through a green suite.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P["Must pass: deny at 4"]
 ```
 
-If both pass, you are not looking at the fourth export.
+If the broken exporter still passes, the fourth export was never capped.
 
 ## What the check has to show
 
@@ -53,7 +53,7 @@ Call `allow(4)`. An edge-proxy keyword is someone else’s counter.
 
 ## Use it somewhere new
 
-HTTP 200 on `/export` is the status, not the fourth-export cap (see 9.3). Do not use a public load test.
+A 200 from `/export` does not prove the fourth export was capped (see 9.3). Do not use a public load test.
 
 ## What this page is not doing
 

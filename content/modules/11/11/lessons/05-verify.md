@@ -9,7 +9,7 @@ A green capstone scanner does not consult the grant on the next read. HTTP 200 o
 
 ## Picture: a broken no-op revoke must fail the check
 
-A passing-test tally can still hide that B after revoke still reads.
+B can still read after revoke even when the rest of the suite is green.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: deny]
 ```
 
-If both pass, you are not looking at B after revoke.
+If the broken read still passes, B-after-revoke was never the case you ran.
 
 ## What the check has to show
 

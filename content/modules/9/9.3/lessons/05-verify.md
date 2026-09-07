@@ -9,7 +9,7 @@ Coverage at 92% does not name what must not happen. A ticked testing-guide row i
 
 ## Picture: a broken suite must fail the check
 
-A passing-test tally can still hide that 200-only still counts as security.
+A 200-only case can still occupy the security-suite slot under a green suite.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: 200-only denied]
 ```
 
-If both pass, you are not looking at `status_asserted` alone.
+If the broken suite still passes, `status_asserted` alone was never refused as a security test.
 
 ## What the check has to show
 

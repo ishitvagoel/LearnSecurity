@@ -9,7 +9,7 @@ Adding a content-security header does not encode the note. A React import is a l
 
 ## Picture: broken files must fail: raw <
 
-A passing-test tally can still hide that unencoded markup still reaches HTML.
+Unencoded markup can still reach HTML while the suite stays green.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass encoded lt"]
 ```
 
-If both pass, you are not looking at encoding.
+If the broken renderer still passes, encoding was never the assertion.
 
 ## What the check has to show
 
@@ -50,7 +50,7 @@ Call `render`. A `Content-Security-Policy` header is the policy name, not the en
 
 ## Use it somewhere new
 
-HTTP 200 on a nickname save is the status, not encoded `<` (see 9.3). Do not run a check that loads a live board.
+A 200 from a nickname save does not prove `<` was encoded (see 9.3). Do not run a check that loads a live board.
 
 ## What this page is not doing
 

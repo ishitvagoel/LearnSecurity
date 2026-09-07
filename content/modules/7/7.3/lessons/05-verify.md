@@ -9,7 +9,7 @@ A “webhooks are signed” slide does not reject an empty signature. TLS is a h
 
 ## Picture: empty sig on the broken files must fail the check
 
-A passing-test tally can still hide that an unsigned body is still accepted.
+An unsigned body can still be accepted even when the suite is green.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P["Must pass: deny"]
 ```
 
-If both pass, you are not looking at a missing sig.
+If the broken webhook still passes, a missing sig was never rejected.
 
 ## What the check has to show
 
@@ -53,7 +53,7 @@ Call `accept("", "body", "lab-secret")`. An `hmac` import is the library, not th
 
 ## Use it somewhere new
 
-HTTP 200 on `/webhook` is the status, not the empty-sig deny. Do not send a live vendor POST.
+A 200 from `/webhook` does not prove an empty sig was denied. Do not send a live vendor POST.
 
 ## What this page is not doing
 

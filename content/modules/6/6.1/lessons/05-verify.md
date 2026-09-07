@@ -9,7 +9,7 @@ A comment that says you don’t use a shell does not change argv. A sanitized fi
 
 ## Picture: sh -c must fail the check
 
-A passing-test tally can still hide that the name is still glued into a shell string.
+A filename can still be glued into a shell string even when other tests pass.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: argv list]
 ```
 
-If both pass, you are not looking at `sh -c`.
+If the broken export still passes, `sh -c` was never the child you inspected.
 
 ## What the check has to show
 

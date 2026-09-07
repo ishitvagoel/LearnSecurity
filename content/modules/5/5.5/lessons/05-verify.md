@@ -9,7 +9,7 @@ Saying queries are parameterized does not prove the SQL is a tuple. An ORM toggl
 
 ## Picture: concatenated SQL must fail the check
 
-A passing-test tally can still hide that the query is still glued.
+A glued query can still ship while the rest of the tests pass.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: is_bound]
 ```
 
-If both pass, you are not looking at concatenated SQL.
+If the broken report still passes, concatenated SQL was never the failing query.
 
 ## What the check has to show
 
@@ -53,7 +53,7 @@ Assert the `(sql, params)` shape. A `%s` inside concatenated SQL is still a stri
 
 ## Use it somewhere new
 
-HTTP 200 on search is the status, not the bound tuple (see 9.3). Do not run a test that hits a live clinic system.
+A 200 from search does not prove the query was a bound tuple (see 9.3). Do not run a test that hits a live clinic system.
 
 ## What this page is not doing
 

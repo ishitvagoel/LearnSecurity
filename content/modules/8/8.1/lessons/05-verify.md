@@ -9,7 +9,7 @@ Naming Play Integrity in a README does not ignore the client boolean. A disabled
 
 ## Picture: broken files must fail: client ok plus attest fail
 
-A passing-test tally can still hide that client `integrity=ok` still authorizes export.
+Client `integrity=ok` can still authorize export even when tests pass.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass deny"]
 ```
 
-If both pass, you are not looking at the client boolean.
+If the broken export still passes, the client boolean was never ignored.
 
 ## Three things to look at
 

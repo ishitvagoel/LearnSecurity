@@ -9,7 +9,7 @@ Saying you use passkeys does not stop a look-alike page. An MFA badge is a produ
 
 ## Picture: broken files must fail: password at lookalike is true
 
-A passing-test tally can still hide that a password is still labeled resistant.
+A password can still be labeled resistant even when the suite is green.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass: origin-bound webauthn only"]
 ```
 
-If both pass, you are not looking at password-at-lookalike.
+If the broken helper still passes, password-at-lookalike was never the failing assertion.
 
 ## What the check has to show
 

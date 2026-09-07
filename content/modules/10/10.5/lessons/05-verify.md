@@ -9,7 +9,7 @@ A green SIEM tile does not close an incident with recovery still todo. An ack on
 
 ## Picture: a broken close gate must fail the check
 
-A passing-test tally can still hide that recovery todo still closes.
+A close with recovery still marked todo can go through a green suite.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: recovery todo denied]
 ```
 
-If both pass, you are not looking at recovery todo.
+If the broken close still passes, recovery-todo was never the failing close.
 
 The second what must not happen is **`note_body` in logs** — `test_cannot_close_when_logs_contain_note_body` must also fail on the broken files.
 
@@ -30,7 +30,7 @@ The second what must not happen is **`note_body` in logs** — `test_cannot_clos
 | Normal | done + ok → may close (may pass on both) |
 | Not claimed | live paging; a known-exploited list; a check-in; that restore actually ran |
 
-The test `test_cannot_close_without_recovery` is there so always-true `close_incident` still fails.
+`test_cannot_close_without_recovery` keeps `close_incident` from always returning true.
 
 A close with recovery done and safe logs may pass on both sides. You still have to deny a close that skipped recovery, and a close whose logs hold a note. If the broken files do not fail `test_cannot_close_without_recovery`, the lab is miswired — fix the wiring, not the assertion.
 

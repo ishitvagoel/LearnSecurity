@@ -9,7 +9,7 @@ A filled-in store privacy form does not strip `secret` from the crash body. HTTP
 
 ## Picture: a broken crash report must fail the check
 
-A passing-test tally can still hide that the body is still in the report.
+The crash report can still hold the body even when tests pass.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: omit body]
 ```
 
-If both pass, you are not looking at the body substring.
+If the broken crash report still passes, the body substring was never redacted.
 
 ## What the check has to show
 

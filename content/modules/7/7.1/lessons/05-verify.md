@@ -9,7 +9,7 @@ An OpenAPI file does not stop `is_admin` in the body. A SPA that hides the check
 
 ## Picture: broken files must fail: is_admin
 
-A passing-test tally can still hide that extra keys still write `is_admin`.
+Extra keys can still write `is_admin` even when other tests pass.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass is_admin false"]
 ```
 
-If both pass, you are not looking at extra keys.
+If the broken PATCH still passes, extra keys were never rejected.
 
 ## Three things to look at
 
@@ -52,7 +52,7 @@ Call `apply(..., {"is_admin": true})`. `extra = 'forbid'` on a Pydantic model is
 
 ## Use it somewhere new
 
-HTTP 200 on `/patients/{id}` after PATCH `{is_staff:true}` is the status, not `is_admin` staying false (see 9.3). Do not use a public API probe.
+A 200 from `/patients/{id}` after PATCH `{is_staff:true}` does not prove `is_admin` stayed false (see 9.3). Do not use a public API probe.
 
 ## What this page is not doing
 

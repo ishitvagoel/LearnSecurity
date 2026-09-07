@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P["Must pass: mismatch is false"]
 ```
 
-If both pass, you are not looking at header versus socket.
+If the broken channel check still passes, header-versus-socket was never compared.
 
 ## What the check has to show
 

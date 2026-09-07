@@ -9,7 +9,7 @@ HTTP 200 on a clean object does not finish the duplicate-key check. Last-key-win
 
 ## Picture: broken files must fail the duplicate-key check
 
-A passing-test tally can still hide that two readers still disagree.
+The two readers can disagree even when every product test passes.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ flowchart LR
   P --> E2[Evidence the check is now true]
 ```
 
-If both pass, you are not looking at ACL tenant vs stored tenant.
+If the broken ingest also passes, you never compared ACL tenant to stored tenant.
 
 ## What the check has to show
 

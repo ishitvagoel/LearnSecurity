@@ -635,14 +635,23 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/Do not (use|follow|run) (.+?) (is|are) out of scope\./g, "Do not $1 $2."],
   [
     /A check that only counts passing (?:tests|cases|checks) can still look green while /g,
-    "A passing-test tally can still hide that ",
+    "Passing tests can still miss that ",
   ],
   [
     /A (?:check|test) that only greps (.+?) can still look green while /g,
     "A grep for $1 can still hide that ",
   ],
   [/ can still look green while /g, " can still hide that "],
-  [/If both pass, the (?:test|check) is not looking at /g, "If both pass, you are not looking at "],
+  [/If both pass, the (?:test|check) is not looking at /g, "Green on both sides does not prove you checked "],
+  [/If both pass, you are not looking at /g, "Green on both sides does not prove you checked "],
+  [
+    /The test (\u0000C\d+\u0000) is there so always-(?:true|yes) (\u0000C\d+\u0000) still fails\./g,
+    "$1 exists because $2 cannot always return true.",
+  ],
+  [
+    /HTTP 200 on ([^.]+?) is the status, not ([^.]+)\./g,
+    "A 200 from $1 does not prove $2.",
+  ],
   [/This review is about notes-app /g, "You are reviewing "],
   [
     /Your job is to label each claim \*\*rule\*\*, \*\*tool\*\*, or \*\*false assurance\*\*, and to say whether /g,

@@ -9,7 +9,7 @@ A Report-Only content-security header does not enforce the policy. A Helmet impo
 
 ## Picture: broken files must fail: Report-Only
 
-A passing-test tally can still hide that Report-Only still counts as on.
+Report-Only can still count as on under a green suite.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass deny"]
 ```
 
-If both pass, you are not looking at Report-Only.
+If the broken header check still passes, Report-Only was never treated as off.
 
 | Mode | Must show for this topic |
 |---|---|

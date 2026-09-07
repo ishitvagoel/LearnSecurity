@@ -9,7 +9,7 @@ A backlog ticket for row-level security does not stop the select. A private subn
 
 ## Picture: broken must fail — tB reads tA
 
-A passing-test tally can still hide that tB still reads tA. Repaired files still have to deny the other company and still allow own-company read.
+tB can still read tA even when the suite is green. Repaired files still have to deny the other company and still allow own-company read.
 
 ```mermaid
 flowchart LR

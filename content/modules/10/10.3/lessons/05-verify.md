@@ -9,7 +9,7 @@ Running Kubernetes does not deny `cluster-admin`. A green CIS scan is a score. `
 
 ## Picture: a broken admission must fail the check
 
-A passing-test tally can still hide that `pod_ok("cluster-admin")` still returns true.
+`pod_ok("cluster-admin")` can still return true while the rest of the suite looks fine.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: cluster-admin denied]
 ```
 
-If both pass, you are not looking at cluster-admin.
+If the broken admission still passes, cluster-admin was never the case under test.
 
 ## What the check has to show
 
@@ -28,7 +28,7 @@ If both pass, you are not looking at cluster-admin.
 | Abuse | Unknown roles still deny (fail closed) |
 | Not claimed | A live managed cluster; a CIS score; a check-in; that `"app"` is least privilege |
 
-The test `test_cluster_admin_pod_is_denied` is there so always-true `pod_ok` still fails.
+`test_cluster_admin_pod_is_denied` catches a `pod_ok` that never returns false.
 
 A pod using `"app"` may pass on both sides. You still have to deny cluster-admin. If the broken files do not fail `test_cluster_admin_pod_is_denied`, the lab is miswired — fix the wiring, not the assertion.
 

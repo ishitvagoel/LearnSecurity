@@ -9,7 +9,7 @@ A CODEOWNERS file does not require a threat-model id. Maturity Level 3 is a scor
 
 ## Picture: a broken merge check must fail the empty-change test
 
-A passing-test tally can still hide that an empty dict still merges.
+Merge can succeed on `{}` even when every other test is green.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: empty change is deny]
 ```
 
-If both pass, you are not looking at `threat_model`.
+Green on both sides means `threat_model` was never the failing case.
 
 ## What the check has to show
 
@@ -28,7 +28,7 @@ If both pass, you are not looking at `threat_model`.
 | Abuse | Unsure or empty ids are deny (fail closed; leftover if not in this check) |
 | Not claimed | A live GitHub org; Gate 10; a maturity score; that TM-12 covers this change |
 
-The test `test_merge_requires_threat_model_id` is there so always-true `merge_ok` still fails.
+`test_merge_requires_threat_model_id` exists because a `merge_ok` that always returns true would ship.
 
 A change that already cites `TM-12` may pass on both sides. You still have to deny a change with no threat-model id. If the broken files do not fail `test_merge_requires_threat_model_id`, the lab is miswired — fix the wiring, not the assertion.
 

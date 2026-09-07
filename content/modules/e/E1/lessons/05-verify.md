@@ -9,7 +9,7 @@ Turning on retrieval does not block `exec_sql`. A prompt that forbids SQL is a s
 
 ## Picture: a broken runtime must fail the check
 
-A passing-test tally can still hide that `run_tool("exec_sql", {})` still returns a ran-string.
+`run_tool("exec_sql", {})` can still return a ran-string even when tests pass.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: exec_sql denied]
 ```
 
-If both pass, you are not looking at `exec_sql`.
+If the broken tool gate still passes, `exec_sql` was never denied.
 
 ## What the check has to show
 

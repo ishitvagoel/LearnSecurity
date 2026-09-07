@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: not reversible]
 ```
 
-If both pass, you are not looking at Base64 decode of `protect("secret")`.
+If the broken protect still passes, you never decoded `protect("secret")` as Base64.
 
 ## What the check has to show
 

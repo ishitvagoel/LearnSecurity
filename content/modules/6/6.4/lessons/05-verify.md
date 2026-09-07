@@ -47,7 +47,7 @@ Call `resolve("../outside")`. A `uuid` in a filename helper is the name scheme, 
 
 ## Use it somewhere new
 
-HTTP 200 on a scan upload is the status, not `../` staying in the folder. Do not run a test that opens host files outside the lab folder.
+A 200 from a scan upload does not prove `../` stayed in the folder. Do not run a test that opens host files outside the lab folder.
 
 ## What this page is not doing
 
