@@ -36,7 +36,7 @@ Do not treat `fixed/cache.py` as a production CDN.
 | Company A put then company B get | `None`, never `tenant-A-note` |
 | Anonymous fill | not in this practice; still deny at who-is-allowed |
 
-Fail closed: if the bound company is missing or unknown, do not share the slot. Uncertainty is a **miss**, not a yes because the path looked familiar.
+When the bound company is missing or unknown, do not share the slot. A familiar path is not a company.
 
 ## What this is not
 

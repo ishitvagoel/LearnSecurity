@@ -32,7 +32,7 @@ That per-action limit has to be implemented — `is_admin`.
 | PATCH `display_name` | name changes; `is_admin` unchanged |
 | PATCH unknown key | key does not appear on the user |
 
-Fail closed: if the key is not in `ALLOWED`, **do not copy it**. Do not keep `user.update(body)` because “the spec does not list `is_admin`.”
+If the key is not in `ALLOWED`, **do not copy it**. Do not keep `user.update(body)` because “the spec does not list `is_admin`.”
 
 ## What this is not
 

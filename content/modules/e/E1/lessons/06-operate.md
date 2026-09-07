@@ -58,7 +58,7 @@ A denied tool must say *exec_sql not allow-listed*, not only "assert False." Do 
 log_denied reason=tool_denied agent=sum-1 tool=exec_sql
 ```
 
-Reject any line that includes a note body, a transcript, or "check-in complete."
+The log is a leak if it has a note body, a transcript, or "check-in complete."
 
 ## Use it somewhere new
 

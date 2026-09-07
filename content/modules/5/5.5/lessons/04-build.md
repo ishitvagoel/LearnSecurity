@@ -9,7 +9,7 @@ A denylist of quotes does not make SQL a tuple. “The ORM will handle it” sti
 
 In plain words, the parser never sees those fields as grammar. Bind tenant and note id as parameters. `fetch_sql` must return `(sql, params)` with `%s` placeholders and a two-tuple of values.
 
-Put this in note fetch: program beside data. Fail closed: if you cannot bind, **do not query**. Do not allow just because the id “looks like a UUID.”
+Put this in note fetch: program beside data. If you cannot bind, **do not query**. Do not allow just because the id “looks like a UUID.”
 
 ## Picture: program beside data
 
@@ -35,7 +35,7 @@ Do not treat `fixed/query.py` as a production query builder.
 | hostile punctuation in `note_id` | still a param, still not a `str` query |
 | `is_bound` | true only for the tuple shape |
 
-Fail closed: if you cannot bind, the answer is no query. Uncertainty is a **deny**, not a yes because the id looked well-formed.
+When you cannot bind, the answer is no query. A well-formed id is not a bind.
 
 ## What this is not
 

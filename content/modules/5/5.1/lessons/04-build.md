@@ -9,7 +9,7 @@ A later warehouse job does not empty analytics. Anonymizing the user id keeps th
 
 What has to change: `delete_account` **pops `NOTES`, `ANALYTICS`, and `SEARCH`**. Walk the inventory in the same use-case. Same delete. Not a follow-up ticket.
 
-Restore bodies with this: one call walks every listed copy. Fail closed: if a listed copy cannot be reached, **do not claim delete complete** (refuse the use-case or alert). Do not fail open by returning 200 while analytics remains.
+Restore bodies with this: one call walks every listed copy. When a listed copy cannot be reached, **do not claim delete complete** (refuse the use-case or alert). Do not fail open by returning 200 while analytics remains.
 
 ## Picture: one call, three pops
 
@@ -36,7 +36,7 @@ Do not treat `fixed/lifecycle.py` as a production warehouse.
 | After delete | `body_retained` and `search_retained` are None |
 | Before delete | analytics body still present (honest product) |
 
-Fail closed: if you cannot reach a listed copy, the answer is “delete is not complete.” Uncertainty is a **refuse**, not a yes because the dashboard still showed “account deleted.”
+In doubt, if you cannot reach a listed copy, the answer is “delete is not complete.” A dashboard that still showed “account deleted” does not finish delete.
 
 ## What this is not
 

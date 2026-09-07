@@ -58,7 +58,7 @@ A reopen notice must say *recovery still todo*, not only “assert False.” Und
 log_denied reason=incident_closed_without_recovery id=INC-12 recovery=todo
 ```
 
-Reject any line that includes a note body, a session token, or “check-in complete.”
+Throw out a line that has a note body, a session token, or “check-in complete.”
 
 ## Use it somewhere new
 

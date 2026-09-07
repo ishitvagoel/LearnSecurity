@@ -36,7 +36,7 @@ An LMS will happily store “topic complete” from a percentage and export it t
 log_denied reason=phase1_skip_denied learner=dev-1 requested=1.2
 ```
 
-Reject any line that includes quiz keys, a badge screenshot, a job-title id treated as done, or “check-in 1 complete.”
+A line that holds quiz keys, a badge screenshot, a job-title id treated as done, or “check-in 1 complete” is already a leak.
 
 ## Use it somewhere new
 

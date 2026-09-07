@@ -36,7 +36,7 @@ Do not treat `fixed/ir.py` as a production incident product.
 | `note_body` in logs | close false |
 | done + ok | close true |
 
-Fail closed: if you are unsure whether restore ran, keep the ticket open. Uncertainty is a **no** on close, not a yes because the SIEM is green.
+Unless you know otherwise, if you are unsure whether restore ran, keep the ticket open. A green SIEM does not close it.
 
 ## What this is not
 

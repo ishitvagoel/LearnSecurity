@@ -33,7 +33,7 @@ Do not treat `fixed/tools.py` as a production agent product.
 | `exec_sql` | None |
 | `search_notes` | ran search_notes |
 
-Fail closed: if you are unsure whether the name is allow-listed, deny. Uncertainty is a **no** on run, not a yes because the prompt looks careful.
+Unless you know otherwise, if you are unsure whether the name is allow-listed, deny. A careful-looking prompt does not make it a run.
 
 ## What this is not
 

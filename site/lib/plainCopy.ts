@@ -721,6 +721,29 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/may pass on both sides\. You still have to /g, "can still look fine. Still need to "],
   [/Do not claim a course gate from ([^.]+)\./g, "That is not a check-in — $1."],
   [/\*\*The tool \(not the rule\):\*\* /g, "**Tools, not the rule:** "],
+  [/Reject any line that includes /g, "Throw out a line that has "],
+  [/Fail closed: if /g, "If "],
+  [/Fail closed: on /g, "On "],
+  [
+    /Uncertainty is a \*\*deny\*\*, not a yes because /g,
+    "A maybe is still no — not because ",
+  ],
+  [
+    /Uncertainty is a \*\*no\*\*, not a yes because /g,
+    "Don't treat that as a yes just because ",
+  ],
+  [
+    /Uncertainty is a \*\*refuse\*\*, not a yes because /g,
+    "Still a no, even when ",
+  ],
+  [
+    /Uncertainty is a \*\*miss\*\*, not a yes because /g,
+    "That is still deny, even if ",
+  ],
+  [
+    /Uncertainty is a \*\*no\*\* on (.+?), not a yes because (.+)\./g,
+    "Don't treat $1 as a yes just because $2.",
+  ],
   [/, dumping lab Python into notes/g, ""],
   [/ dumping lab Python into notes/g, ""],
   [/\. without product evidence\./g, "."],

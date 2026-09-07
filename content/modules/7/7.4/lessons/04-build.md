@@ -9,7 +9,7 @@ An “internal” queue does not bind who the exporter is. A private network doe
 
 In short, the worker authenticates as a service principal. `exporter` must return `"worker-sc"` only when `service == "worker-sc"`. Leftover `user_session` is ignored.
 
-Overnight export needs this: Alice session yields `None`. Fail closed: missing service denies. A fallback `user_session or service` is the bug. Do not open the door because the broker was “inside the private network.”
+Overnight export needs this: Alice session yields `None`. Closed: missing service denies. A fallback `user_session or service` is the bug. Do not open the door because the broker was “inside the private network.”
 
 ## Picture: service or nothing
 
@@ -34,7 +34,7 @@ Do not treat `fixed/worker.py` as a production broker.
 | `service=worker-sc` | `"worker-sc"` |
 | alice + wrong service | `None` |
 
-Fail closed: if the job does not name the worker, the answer is deny. Uncertainty is a **no**, not a yes because the queue was “internal.”
+If the job does not name the worker, the answer is deny. An “internal” queue does not name the worker.
 
 ## What this is not
 

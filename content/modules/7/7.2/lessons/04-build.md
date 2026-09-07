@@ -9,7 +9,7 @@ Hiding the column in the SPA does not hide `secret_internal` on the resolver. Gr
 
 What has to change: the trusted layer **checks role × field**. `resolve` must deny `secret_internal` unless `role == "service"`. In plain words, that predicate — not a hidden SPA column.
 
-Repair the notes app’s note JSON: deny member × `secret_internal`. Fail closed: unknown roles deny the internal field. Do not skip the deny because the serializer cache still holds yesterday’s dump.
+Repair the notes app’s note JSON: deny member × `secret_internal`. Closed: unknown roles deny the internal field. Do not skip the deny because the serializer cache still holds yesterday’s dump.
 
 ## Picture: field deny unless listed
 
@@ -34,7 +34,7 @@ That explicit permission has to be implemented — member × `secret_internal`. 
 | member × `display_name` | true |
 | service × `secret_internal` | true |
 
-Fail closed: unknown roles deny the internal field. Do not keep the dump because “the UI hides it.”
+The safe answer: unknown roles deny the internal field. Do not keep the dump because “the UI hides it.”
 
 ## What this is not
 

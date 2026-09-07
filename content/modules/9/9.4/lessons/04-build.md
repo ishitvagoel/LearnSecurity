@@ -35,7 +35,7 @@ Do not treat `fixed/sast.py` as a production scanner product.
 | HIGH + empty map | `ship_ok` false |
 | HIGH + `{F1: AUTHZ-1}` | `ship_ok` true |
 
-Fail closed: if you are unsure whether a HIGH is mapped, deny. Uncertainty is a **no** on “this may ship,” not a yes because Friday’s dashboard looked quiet.
+By default, if you are unsure whether a HIGH is mapped, deny. A quiet Friday dashboard does not mean it may ship.
 
 ## What this is not
 

@@ -31,7 +31,7 @@ Use a content-security policy as a layer after encoding — the header *name*.
 | Report-Only only | false |
 | enforcing CSP | true |
 
-Fail closed: if the enforcing name is missing, **do not claim isolation**. Do not keep Report-Only because “the dashboard is green.”
+If the enforcing name is missing, **do not claim isolation**. Do not keep Report-Only because “the dashboard is green.”
 
 ## What this is not
 

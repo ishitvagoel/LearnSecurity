@@ -7,7 +7,7 @@
 
 `channel_is_https` must use `server_scheme == "https"` only. Namely a bound proxy identity if you add one later — not trusting a header name, not “Force HTTPS” in a UI, not an API-client `https://` base URL, not HSTS preload.
 
-Transport authenticity needs this: ignore the client proto. Fail closed: unknown scheme **denies** TLS claims (do not treat as https). Do not open the door because the header “looks right.”
+Transport authenticity needs this: ignore the client proto. By default: unknown scheme **denies** TLS claims (do not treat as https). Do not open the door because the header “looks right.”
 
 ## Picture: ignore the client proto
 
@@ -32,7 +32,7 @@ Do not treat `fixed/channel.py` as a production load balancer.
 | socket http | false |
 | header https + socket http | false |
 
-Fail closed: if you cannot ask the socket, the answer is no. Uncertainty is a **deny**, not a yes because the dashboard still showed “HTTPS.”
+Unless you know otherwise, if you cannot ask the socket, the answer is no. A dashboard still showing “HTTPS” is not a yes.
 
 ## What this is not
 

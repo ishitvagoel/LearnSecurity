@@ -31,7 +31,7 @@ Authorization belongs on a trusted service layer — `open_link({"as": "admin"})
 | `as=admin` | still alice |
 | `note=n1` | still alice |
 
-Fail closed: if the key is identity, **do not copy it**. Do not keep copying extras because “App Links are verified.”
+By default, if the key is identity, **do not copy it**. Do not keep copying extras because “App Links are verified.”
 
 ## What this is not
 

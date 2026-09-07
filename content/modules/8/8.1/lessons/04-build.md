@@ -32,7 +32,7 @@ Authorization has to be enforced on a trusted service layer — `allow_export(..
 | client ok, attest pass | true |
 | empty client, attest fail | false |
 
-Fail closed: if attest is not `play_integrity_pass`, **do not export**. Do not keep `if integrity == ok` because “the store listing looks trusted.”
+When attest is not `play_integrity_pass`, **do not export**. Do not keep `if integrity == ok` because “the store listing looks trusted.”
 
 ## What this is not
 

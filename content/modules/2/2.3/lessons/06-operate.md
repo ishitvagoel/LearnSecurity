@@ -37,7 +37,7 @@ Not: `synthetic-session`, a note body, or a personal mailbox.
 
 ## Practice
 
-Reject any line that includes the dummy session value. Page who owns the WebView leftover and what would reopen it — not the session value.
+Don't keep a line with the dummy session value. Page who owns the WebView leftover and what would reopen it — not the session value.
 
 ## Use it somewhere new
 

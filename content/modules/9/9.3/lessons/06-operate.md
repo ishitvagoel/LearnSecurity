@@ -56,7 +56,7 @@ A failing security test must say what must not happen in the assertion message, 
 log_denied reason=security_suite_missing_isolation req=isolation suite=api
 ```
 
-Reject any line that includes a note body, a live fuzz payload, or “later gate complete.”
+A line that holds a note body, a live fuzz payload, or “later gate complete” is too much for the log.
 
 ## Use it somewhere new
 

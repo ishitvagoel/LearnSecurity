@@ -56,7 +56,7 @@ A refused merge must say *why* (missing threat-model id), in words, not only “
 log_denied reason=merge_blocked_no_tm pr=123
 ```
 
-Reject any line that includes a token, a real org name, a threat-model body, or “Gate 10 complete.”
+If the line includes a token, a real org name, a threat-model body, or “Gate 10 complete”, drop it.
 
 ## Use it somewhere new
 

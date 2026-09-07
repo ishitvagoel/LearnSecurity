@@ -36,7 +36,7 @@ A filter will page on request rate and stay silent when five slow grants plus a 
 log_denied reason=share_cap note_id=n1 count=5 request_id=req_34bl
 ```
 
-Reject any line that includes a note body, a real email, “awareness list handled,” or a filter product name as the rule.
+A line that holds a note body, a real email, “awareness list handled,” or a filter product name as the rule is too much for the log.
 
 ## Use it somewhere new
 

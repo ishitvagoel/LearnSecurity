@@ -58,7 +58,7 @@ A denied admission must say *cluster-admin refused*, not only "assert False." Do
 log_denied reason=cluster_admin_denied sa=app ns=sc-prod requested=cluster-admin
 ```
 
-Reject any line that includes a kubeconfig, a cloud token, or "check-in complete."
+The log is a leak if it has a kubeconfig, a cloud token, or "check-in complete."
 
 ## Use it somewhere new
 

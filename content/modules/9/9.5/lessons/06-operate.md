@@ -58,7 +58,7 @@ A reopen notice must say *why* the finding stayed open (missing retest), not onl
 log_denied reason=finding_closed_without_retest finding=F-authz-1
 ```
 
-Reject any line that includes a note body, a live-target URL, or "check-in complete."
+Don't keep a line with a note body, a live-target URL, or "check-in complete."
 
 ## Use it somewhere new
 

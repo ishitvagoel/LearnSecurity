@@ -38,7 +38,7 @@ A vault dashboard will show “rotation enabled” and stay silent when `DEFAULT
 log_denied reason=default_secret_used secret_id=lab_default request_id=req_53sk
 ```
 
-Reject any line that includes `sk-lab-hardcoded`, a real key, or “Vault handled.”
+Throw out a line that has `sk-lab-hardcoded`, a real key, or “Vault handled.”
 
 ## Use it somewhere new
 

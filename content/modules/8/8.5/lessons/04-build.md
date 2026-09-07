@@ -34,7 +34,7 @@ Do not treat `fixed/crash.py` as a production crash SDK.
 | `crash_report('secret')` | `'secret'` not in the report |
 | stack key | still present so the crash is useful |
 
-Fail closed: if you are unsure whether a value is the note body, omit it. Uncertainty is a **no** on “this may go in the report,” not a yes because support wanted the last screen.
+Unless you know otherwise, if you are unsure whether a value is the note body, omit it. Support wanting the last screen does not put it in the report.
 
 ## What this is not
 

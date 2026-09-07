@@ -36,7 +36,7 @@ A proxy, browser, or `curl` will fetch whatever you type and may cache the body.
 log_denied reason=out_of_scope host=example.com
 ```
 
-Reject any line that includes a response body, a screenshot of a public site, a customer URL you were asked to “quickly test,” or “first check-in complete.”
+Throw out a line that has a response body, a screenshot of a public site, a customer URL you were asked to “quickly test,” or “first check-in complete.”
 
 ## Use it somewhere new
 

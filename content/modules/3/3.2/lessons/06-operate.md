@@ -39,7 +39,7 @@ A scanner SaaS will page on new CVEs and stay silent on missing `cross-tenant-re
 log_denied reason=missing_mandatory_threat id=cross-tenant-read owner=authz request_id=req_32tm
 ```
 
-Reject any line that includes a note body, a real email, a vendor scan PDF treated as the model, or “course gate complete.”
+Skip any line with a note body, a real email, a vendor scan PDF treated as the model, or “course gate complete.”
 
 ## Use it somewhere new
 

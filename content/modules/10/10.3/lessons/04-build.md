@@ -33,7 +33,7 @@ Do not treat `fixed/iam.py` as a production cluster product.
 | cluster-admin | run false |
 | app | run true |
 
-Fail closed: if you are unsure whether the role is a namespaced app role, deny. Uncertainty is a **no** on run, not a yes because the namespace looks private.
+By default, if you are unsure whether the role is a namespaced app role, deny. A private-looking namespace does not make it a run.
 
 ## What this is not
 

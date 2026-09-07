@@ -41,7 +41,7 @@ Dropped `as=` fires without the URL.
 log_denied reason=deeplink_identity_ignored field=as request_id=req_83e
 ```
 
-Reject any line that includes a full deep-link URL, an OAuth code, or a live Intent dump.
+If the line includes a full deep-link URL, an OAuth code, or a live Intent dump, do not write it.
 
 ## Use it somewhere new
 

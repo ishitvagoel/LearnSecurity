@@ -34,7 +34,7 @@ Use a trusted service layer, and keep secrets out of artifacts — `api_allowed(
 | release + ok | true |
 | release + fail | false |
 
-Fail closed: if the build is not release, **do not allow prod export**. Do not keep an always-true helper because “minify is on.”
+If the build is not release, **do not allow prod export**. Do not keep an always-true helper because “minify is on.”
 
 ## What this is not
 

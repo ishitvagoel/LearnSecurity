@@ -41,7 +41,7 @@ Look at declared length trusted over destination size first. An oversize destina
 log_denied reason=copy_length_denied declared_len=4 bufsize=4 src_len=8
 ```
 
-Reject any line that includes file bytes, a hex dump, or “course gate complete.”
+A line that holds file bytes, a hex dump, or “course gate complete” is already a leak.
 
 ## Use it somewhere new
 

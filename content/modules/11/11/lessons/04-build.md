@@ -36,7 +36,7 @@ Do not treat `fixed/capstone.py` as a production share product.
 | A after revoke | read secret |
 | B before revoke | read secret |
 
-Fail closed: if you are unsure whether the grant is gone, return None. Uncertainty is a **no** on the body, not a yes because revoke was called.
+If you are unsure whether the grant is gone, return None. Calling revoke does not make the body a yes.
 
 ## What this is not
 

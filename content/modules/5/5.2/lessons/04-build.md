@@ -9,7 +9,7 @@ A column rename does not encrypt the body. HTTPS is a hop. Volume encryption is 
 
 Repair this: the stored value is **not reversible as encoding**. Here: a keyed transform the storage reader cannot invert — not a prettier name.
 
-Repair a body stand-in: `protect` returns a value that does not round-trip as Base64, and `looks_encrypted` asserts a teaching flag. The lab prefix `aesgcm:` is a **teaching flag** that `looks_encrypted` can assert — not a cipher to copy into FastAPI. Fail closed: if the encryption library or the key is missing, **do not store plaintext** (refuse the write).
+Repair a body stand-in: `protect` returns a value that does not round-trip as Base64, and `looks_encrypted` asserts a teaching flag. The lab prefix `aesgcm:` is a **teaching flag** that `looks_encrypted` can assert — not a cipher to copy into FastAPI. By default, if the encryption library or the key is missing, **do not store plaintext** (refuse the write).
 
 ## Picture: stand-in now, real keys later
 
@@ -35,7 +35,7 @@ Do not treat `fixed/crypto.py` as a production cipher.
 | Base64 decode | not equal to `secret` |
 | `looks_encrypted` | true on the stand-in |
 
-Fail closed: if you cannot encrypt, the answer is refuse the write. Uncertainty is a **deny**, not a yes because the dashboard still showed “encrypted.”
+If you cannot encrypt, refuse the write. The dashboard still showing “encrypted” is not a store.
 
 ## What this is not
 

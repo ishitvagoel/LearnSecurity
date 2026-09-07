@@ -31,7 +31,7 @@ The repaired files still *have* two readers. They restore the rule by **refusing
 | Messy duplicate keys | `accepted` is false, **or** ACL and store are identical |
 | Body on refuse | not persisted as a note |
 
-Fail closed: on uncertainty, **deny**. Do not repair by keeping the last key because “that is what Python does.”
+On uncertainty, **deny**. Do not repair by keeping the last key because “that is what Python does.”
 
 ## What this is not
 

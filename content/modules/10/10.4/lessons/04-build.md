@@ -33,7 +33,7 @@ Do not treat `fixed/cfg.py` as a production compose product.
 | prod + True | boot false |
 | prod + False | boot true |
 
-Fail closed: if you are unsure whether this boot is production with debug, do not start. Uncertainty is a **no** on boot, not a yes because support asked for five minutes.
+If you are unsure whether this boot is production with debug, do not start. Support asking for five minutes does not change that.
 
 ## What this is not
 

@@ -30,7 +30,7 @@ Output has to be encoded for the context you are writing into — HTML text.
 | body containing `<` | `&lt;` present, extra-tag marker `"<img"` absent |
 | honest “Weekly notes” | still visible as text |
 
-Fail closed: if you cannot encode for this context, **do not draw HTML**. Do not keep the raw string because “the header will catch it.”
+If you cannot encode for this context, **do not draw HTML**. Do not keep the raw string because “the header will catch it.”
 
 ## What this is not
 

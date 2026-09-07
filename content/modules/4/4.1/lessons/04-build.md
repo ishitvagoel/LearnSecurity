@@ -9,7 +9,7 @@ A later email does not kill the session. Disabling the password leaves the cooki
 
 The repair: `delete_user` **pops the session**, and `session_valid` **treats `DELETED` as deny**. Kill leftovers in the same use-case. Same delete. Not a follow-up ticket.
 
-Repair a offboard: add `alice` to `DELETED`, pop `SESSIONS["alice"]`, and refuse authentication if the user is in `DELETED` even if someone writes the map back. Fail closed: if the session store is down, **deny** authentication for that user. Do not fail open.
+Repair a offboard: add `alice` to `DELETED`, pop `SESSIONS["alice"]`, and refuse authentication if the user is in `DELETED` even if someone writes the map back. Unless you know otherwise, if the session store is down, **deny** authentication for that user. Do not fail open.
 
 ## Picture: mark deleted and drop the session
 
@@ -36,7 +36,7 @@ Do not treat `fixed/lifecycle.py` as a production session store.
 | Before delete | honest session still valid |
 | Deleted set | even a resurrected `SESSIONS` entry is denied |
 
-Fail closed: if you cannot ask the session store, the answer is no. Uncertainty is a **deny**, not a yes because the dashboard still showed “signed in.”
+If you cannot ask the session store, the answer is no. A dashboard still showing “signed in” is not a session.
 
 ## What this is not
 

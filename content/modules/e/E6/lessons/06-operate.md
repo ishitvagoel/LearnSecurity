@@ -58,7 +58,7 @@ The exception must record whether people can complete recovery. The deny message
 log_denied reason=exception_incomplete_denied missing=owner,review_by
 ```
 
-Reject any line that includes a secret, a “check-in complete,” or a pledge screenshot.
+Don't keep a line with a secret, a “check-in complete,” or a pledge screenshot.
 
 ## Use it somewhere new
 

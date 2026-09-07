@@ -41,7 +41,7 @@ A content-security reporting dashboard will show violation counts and stay silen
 log_denied reason=csp_report_only_not_enforced route=/app
 ```
 
-Reject any line that includes HTML, a note body, or “check-in 7 complete.”
+Skip any line with HTML, a note body, or “check-in 7 complete.”
 
 ## Use it somewhere new
 

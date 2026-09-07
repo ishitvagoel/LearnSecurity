@@ -58,7 +58,7 @@ It broke because CI’s `ship_ok` still always true (or a new HIGH with no map r
 log_denied reason=unmapped_high_blocks finding=F1 sev=HIGH
 ```
 
-Reject any line that includes a secret, a note body, or “verification gate complete.”
+If the line includes a secret, a note body, or “verification gate complete”, throw that line away.
 
 ## Use it somewhere new
 

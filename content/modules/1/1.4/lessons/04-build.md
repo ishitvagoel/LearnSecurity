@@ -32,7 +32,7 @@ Do not treat `fixed/recovery.py` as production React.
 | `mouse_only` is false | A pointer is not secretly what you trust |
 | Color may remain | Extra, not the only, cue |
 
-Fail closed: if name or keyboard is missing, `is_usable_accessible` is false. Uncertainty is a **no** on “this control is an acceptable recovery gate,” not a yes because the demo looked fine.
+If name or keyboard is missing, `is_usable_accessible` is false. A polished demo does not make this an acceptable recovery gate.
 
 ## What this is not
 

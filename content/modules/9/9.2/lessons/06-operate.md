@@ -52,7 +52,7 @@ A GitHub checks dashboard will show the formatter green and stay silent when `re
 log_denied reason=review_block_eval pr=pr_92e file=export.py
 ```
 
-Reject any line that includes eval payloads, note bodies, or a live GitHub trace.
+Throw out a line that has eval payloads, note bodies, or a live GitHub trace.
 
 ## Use it somewhere new
 

@@ -9,7 +9,7 @@ A denylist of punctuation does not change argv. “subprocess will handle it” 
 
 Put simply, the shell never sees the name. `argv_for_list` must return a list whose program is `ls` (or another fixed binary), not `sh`. The name is one element. `--` before the name is the extra slot that closes argument injection as a *named* leftover.
 
-The check in export listing: list, not string. Fail closed: if you cannot spawn without a shell, **do not spawn**. Do not skip the deny because the name “looks like notes.”
+The check in export listing: list, not string. In doubt, if you cannot spawn without a shell, **do not spawn**. Do not skip the deny because the name “looks like notes.”
 
 ## Picture: list, not string
 
@@ -35,7 +35,7 @@ Do not treat `fixed/argv.py` as a production process launcher.
 | `uses_shell` | false |
 | name slot | last element is the name, not `ls notes` as one string |
 
-Fail closed: if you cannot spawn without a shell, the answer is no spawn. Uncertainty is a **deny**, not a yes because the name looked well-formed.
+By default, if you cannot spawn without a shell, the answer is no spawn. A well-formed name is not a list.
 
 ## What this is not
 

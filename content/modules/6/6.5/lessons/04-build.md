@@ -9,7 +9,7 @@
 
 Read it as the host is a named peer. `allowed` must parse the URL, require `https`, require the hostname in a small allow-list, and deny link-local and loopback.
 
-Unfurl needs this: host deny unless listed. Fail closed: unknown host **denies**. Do not skip the deny because the scheme is https.
+Unfurl needs this: host deny unless listed. The safe answer: unknown host **denies**. Do not skip the deny because the scheme is https.
 
 ## Picture: host deny unless listed
 
@@ -37,7 +37,7 @@ Do not treat `fixed/ssrf.py` as a production egress proxy.
 | loopback | false |
 | `https://lab.securecollab.test/og` | true |
 
-Fail closed: if the host is not on the list, the answer is no. Uncertainty is a **deny**, not a yes because the scheme looked like https.
+If the host is not on the list, the answer is no. Looking like https does not put it on the list.
 
 ## What this is not
 

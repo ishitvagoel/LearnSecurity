@@ -33,7 +33,7 @@ Do not treat `fixed/sdl.py` as a production merge bot.
 | `{}` | `merge_ok` false |
 | `{"threat_model": "TM-12"}` | `merge_ok` true |
 
-Fail closed: if you are unsure whether a threat-model id is present, the change does not merge. Uncertainty is a **no** on “this may merge,” not a yes because CODEOWNERS is on.
+When you are unsure whether a threat-model id is present, the change does not merge. CODEOWNERS being on does not change that.
 
 ## What this is not
 

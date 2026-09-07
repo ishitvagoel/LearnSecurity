@@ -36,7 +36,7 @@ Do not treat `fixed/classify.py` as a production logger.
 | Line | contains `redacted` or `confidential` (the local marker) |
 | Event name | still present so operators can debug *that a read happened* |
 
-Fail closed: if you are unsure, omit the value. Uncertainty is a **no** on “this may go in the line,” not a yes because the dashboard looked useful.
+By default, if you are unsure, omit the value. A useful-looking dashboard does not put it in the line.
 
 ## What this is not
 

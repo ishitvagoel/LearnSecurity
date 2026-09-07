@@ -36,7 +36,7 @@ Do not treat `fixed/trace.py` as a production governance product.
 | isolation-assert row | `covered` true |
 | empty list | `covered` false |
 
-Fail closed: if you are unsure whether a test asserts isolation, it does not count. Uncertainty is a **no** on “this may count as coverage,” not a yes because the PDF was attached.
+If you are unsure whether a test asserts isolation, it does not count. Attaching the PDF does not turn it into coverage.
 
 ## What this is not
 

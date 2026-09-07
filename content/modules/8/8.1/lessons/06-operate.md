@@ -41,7 +41,7 @@ A Play Console dashboard will show attestation counts and stay silent when FastA
 log_denied reason=attest_fail_export_denied app_ver=1.0 request_id=req_81e
 ```
 
-Reject any line that includes note bodies, a Play Integrity token, or a live device trace.
+Throw out a line that has note bodies, a Play Integrity token, or a live device trace.
 
 ## Use it somewhere new
 

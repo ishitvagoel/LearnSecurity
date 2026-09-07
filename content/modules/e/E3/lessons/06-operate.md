@@ -35,7 +35,7 @@ A processor dashboard will show successful captures and stay silent when CI’s 
 log_denied reason=duplicate_capture_denied key=k1
 ```
 
-Reject any line that includes a card number, a note body, or “questionnaire complete.”
+Throw out a line that has a card number, a note body, or “questionnaire complete.”
 
 ## Use it somewhere new
 

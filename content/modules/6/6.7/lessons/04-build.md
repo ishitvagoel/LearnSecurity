@@ -9,7 +9,7 @@ A disabled export button does not cap the fourth export. An IP bucket at the edg
 
 Namely the server counts. `allow(n)` must be `n <= 3`. That check lives on the export action — the write path — not in the browser.
 
-The check in export: deny at four. Fail closed: if the count is unknown, **deny**. Do not open the door because the counter store was unreachable.
+The check in export: deny at four. In doubt, if the count is unknown, **deny**. Do not open the door because the counter store was unreachable.
 
 ## Picture: deny at four
 
@@ -34,7 +34,7 @@ Do not treat `fixed/limit.py` as a production rate limiter.
 | `allow(4)` | false |
 | `allow(1)` | true |
 
-Fail closed: if you cannot read the count, the answer is deny. Uncertainty is a **no**, not a yes because the store was down.
+By default, if you cannot read the count, the answer is deny. A down store is not a yes.
 
 ## What this is not
 

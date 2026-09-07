@@ -58,7 +58,7 @@ A denied install must say *digest mismatch* in words, not only “assert False.�
 log_denied reason=hash_mismatch_denied pkg=demo expected=aaa got=bbb
 ```
 
-Reject any line that includes a token, a private key, or “ship gate complete.”
+Don't keep a line with a token, a private key, or “ship gate complete.”
 
 ## Use it somewhere new
 

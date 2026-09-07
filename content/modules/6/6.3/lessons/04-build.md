@@ -9,7 +9,7 @@ A leftover cookie does not decide a cross-site share. SameSite as the only check
 
 The repair: `allow_share` must require a session cookie **and** `origin == expected` **and** a matching CSRF token. In short, site-bound intent — not leftover cookie authority from the surroundings.
 
-Repair share: all three, or deny. Fail closed: missing origin or token **denies**. Do not open the door because SameSite is Lax.
+Repair share: all three, or deny. Closed: missing origin or token **denies**. Do not open the door because SameSite is Lax.
 
 ## Picture: all three, or deny
 

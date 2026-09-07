@@ -35,7 +35,7 @@ Do not treat `fixed/risk.py` as a production register product.
 | empty owner | false |
 | alice + date + accessibility flag | may be true |
 
-Fail closed: if you are unsure whether the record is complete, deny. Uncertainty is a **no** on accept, not a yes because the meeting happened.
+When you are unsure whether the record is complete, deny. A meeting that happened does not make the record complete.
 
 ## What this is not
 

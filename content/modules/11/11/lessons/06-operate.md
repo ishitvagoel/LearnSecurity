@@ -58,7 +58,7 @@ A deny must say *share revoked*, not only “assert False.” Under stress, do n
 log_denied reason=revoked_share_read_denied note=n1 tenant=B
 ```
 
-Reject any line that includes the note body, a session token, or “check-in complete.”
+A line that holds the note body, a session token, or “check-in complete” should never be written.
 
 ## Use it somewhere new
 

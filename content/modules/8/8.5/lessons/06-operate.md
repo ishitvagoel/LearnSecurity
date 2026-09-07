@@ -56,7 +56,7 @@ In-app “send feedback” must not require attaching a screenshot of the note t
 log_denied reason=crash_body_redacted crash_id=cr_85e app=release
 ```
 
-Reject any line that includes a note body, a patient name, or a live crash payload.
+The log is a leak if it has a note body, a patient name, or a live crash payload.
 
 ## Use it somewhere new
 

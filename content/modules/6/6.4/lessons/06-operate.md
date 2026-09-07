@@ -40,7 +40,7 @@ A WAF will page on `../` in the URL and stay silent when `UploadFile.filename` s
 log_denied reason=path_escape_denied request_id=req_64p
 ```
 
-Reject any line that includes a patient filename, a note body, or a host path cookbook.
+Don't keep a line with a patient filename, a note body, or a host path cookbook.
 
 ## Use it somewhere new
 

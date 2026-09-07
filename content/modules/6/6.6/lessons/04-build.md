@@ -9,7 +9,7 @@ A unique index you never write does not stop the second join. HTTP 400 after the
 
 Change this: `accept` **records `t1` as used when it returns true**. The next call denies. Consume is the accept. Same step. Not a follow-up ticket.
 
-Put this in a invite: write used, then allow once. Fail closed: store errors **deny**. Do not count it as a pass because the database was unreachable. Production uses a transaction so the used-write and the membership commit together.
+Put this in a invite: write used, then allow once. By default: store errors **deny**. Do not count it as a pass because the database was unreachable. Production uses a transaction so the used-write and the membership commit together.
 
 ## Picture: write used, then allow once
 
@@ -36,7 +36,7 @@ Do not treat `fixed/invite.py` as a production invite store.
 | first `t2` | true |
 | second `t2` | false |
 
-Fail closed: if you cannot ask the store, the answer is no. Uncertainty is a **deny**, not a yes because the mailer still showed “clicked.”
+When you cannot ask the store, the answer is no. The mailer still showing “clicked” is not a yes.
 
 ## What this is not
 

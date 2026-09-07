@@ -33,7 +33,7 @@ Do not treat `fixed/pentest.py` as a production ticket product.
 | `{retest: None}` | close false |
 | `{retest: "pass"}` | close true |
 
-Fail closed: if you are unsure whether the retest hit the same isolation check, keep the finding open. Uncertainty is a **no** on close, not a yes because the PDF was filed.
+If you are unsure whether the retest hit the same isolation check, keep the finding open. Filing the PDF does not close it.
 
 ## What this is not
 

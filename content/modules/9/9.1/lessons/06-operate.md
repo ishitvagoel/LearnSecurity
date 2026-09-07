@@ -56,7 +56,7 @@ A human exception path must say what is still uncovered and when it expires. Do 
 log_denied reason=unmapped_req_blocks_release req=AUTHZ-1 release=rel_91e
 ```
 
-Reject any line that includes a note body, a live checklist portal trace, or “verification gate complete.”
+Skip any line with a note body, a live checklist portal trace, or “verification gate complete.”
 
 ## Use it somewhere new
 

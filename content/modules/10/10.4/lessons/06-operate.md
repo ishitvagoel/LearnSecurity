@@ -58,7 +58,7 @@ A refused boot must say *prod debug refused*, not only “assert False.” Do no
 log_denied reason=prod_debug_forbidden env=prod debug=true deploy=sc-12
 ```
 
-Reject any line that includes a stack trace, a secret, or “check-in complete.”
+Skip any line with a stack trace, a secret, or “check-in complete.”
 
 ## Use it somewhere new
 
