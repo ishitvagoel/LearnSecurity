@@ -28,7 +28,7 @@ If both pass, the test is not looking at `sh -c`. If both fail, the fix is not s
 | Failure | If you cannot spawn without a shell, do not spawn |
 | Not claimed | live `ls`; argument-injection strings; CSV formula |
 
-The file is `labs/6.1/6.1-lab/tests/test_property.py`. The test `test_does_not_invoke_shell` is there so a shell string cannot sneak through. Do not add a name from the hostile class — extra commands, substitutions, or pipes a shell would parse — to “make the test more real.” Honest `notes` is enough.
+The test `test_does_not_invoke_shell` is there so a shell string cannot sneak through. Do not add a name from the hostile class — extra commands, substitutions, or pipes a shell would parse — to “make the test more real.” Honest `notes` is enough.
 
 A test that only asserts HTTP 200 is not this topic's evidence. A test that only greps `shell=False` in a comment without calling `argv_for_list` is not this topic's evidence. This practice never starts a live process.
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/6.1/6.1-lab/tests --impl vulnerable
 python3 -m pytest labs/6.1/6.1-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail or pass next to the matrix row. Reject a “test” that only greps `shell=False` in a comment without calling `argv_for_list`.
+Paste nothing from answer keys. Reject a “test” that only greps `shell=False` in a comment without calling `argv_for_list`.
 
 ## Use it somewhere new
 

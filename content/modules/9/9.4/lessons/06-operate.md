@@ -44,7 +44,7 @@ If your alert includes the matching scanner snippet, you have copied the leak in
 
 ## What the framework does vs what you still have to check
 
-The same who-is-allowed holes that bypass this practice will also bypass a “scan our dashboard” detector. Name those places before you claim recover.
+The same who-is-allowed holes that bypass this practice will also bypass a “scan our dashboard” detector.
 
 ## Can people still use it
 
@@ -53,8 +53,6 @@ The triage screen must say *why* F1 is blocked, in words. Do not encode “block
 Cause vs cost stays split here too: the **cause** is CI’s `ship_ok` still always true (or a new HIGH with no map row); the **cost** is an unowned HIGH in production; **how you stop it** is the join; **how you notice** is `unmapped_high_blocks`; **how you recover** is map-or-fix, not a quiet severity downgrade. What the tool cannot do: this alert does not prove the mapped requirement is the right coverage-map row, and it does not cover who-is-allowed blind spots.
 
 ## Practice
-
-For `labs/9.4/9.4-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=unmapped_high_blocks finding=F1 sev=HIGH

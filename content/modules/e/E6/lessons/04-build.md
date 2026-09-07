@@ -28,7 +28,7 @@ A design-review guide is vocabulary. This week's check covers incomplete excepti
 
 ## What the repaired files must show
 
-Read `fixed/risk.py` against this checklist. Do not treat the snippet as a production register product.
+Check `fixed/risk.py` against the list above. Do not treat the snippet as a production register product.
 
 | After the fix | Must be true |
 |---|---|

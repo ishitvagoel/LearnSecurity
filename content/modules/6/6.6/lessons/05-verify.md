@@ -28,7 +28,7 @@ If both pass, the test is not looking at the second `t1`. If both fail, the fix 
 | Failure | store error denies (named in review; fail-closed smell) |
 | Not claimed | threaded race; mail delivery; lock semantics |
 
-The file is `labs/6.6/6.6-lab/tests/test_property.py`. The test `test_invite_token_is_single_use` is there so a second true cannot sneak through. Sequential calls are enough; do not add a race harness.
+The test `test_invite_token_is_single_use` is there so a second true cannot sneak through. Sequential calls are enough; do not add a race harness.
 
 A test that only asserts HTTP 200 on `/accept` is not this topic's evidence. A test that only greps `UNIQUE` without calling `accept("t1")` twice is not this topic's evidence. This practice never opens a live mailer.
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/6.6/6.6-lab/tests --impl vulnerable
 python3 -m pytest labs/6.6/6.6-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail or pass next to the matrix row. Reject a “test” that only greps `UNIQUE` in a migration without calling `accept("t1")` twice.
+Paste nothing from answer keys. Reject a “test” that only greps `UNIQUE` in a migration without calling `accept("t1")` twice.
 
 ## Use it somewhere new
 

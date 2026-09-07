@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny Python `is_security_test` that returns a boolean. The failure is already in the function: it returns true when `status_asserted` is set. That count is a **failed rule**, not a missing checklist tick.
 
-Here is the rule:
-
 > HTTP 200-only must not count as a security test. If `is_security_test({"status_asserted": True})` is true, the suite has failed as a security control.
 
 ## Where you may practice
@@ -28,7 +26,7 @@ flowchart TD
   Row["status_asserted true"] --> True[is_security_test true]
 ```
 
-The broken files take that path on purpose. You do not need a running notes server. You must not fuzz a public host. The true return *is* the leak of the suite’s honesty.
+You do not need a running notes server. You must not fuzz a public host. The true return *is* the leak of the suite’s honesty.
 
 Checklists tell you *what* to consider. They do not make `assert r.status_code == 200` a security test. Lesson 9.1 can mark the isolation row “covered” with a test that never isolates if this shape gate is missing.
 
@@ -39,7 +37,7 @@ Read `vulnerable/stest.py`. It returns true when `status_asserted` is set. Tests
 - `test_http_200_only_is_not_a_security_test`
 - `test_forbidden_outcome_named_is_a_security_test` — named what must not happen (and maybe status too) may pass on both
 
-You do not need a new descriptor key. When `test_http_200_only_is_not_a_security_test` fails, that is the evidence.
+You do not need a new descriptor key.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -69,7 +67,7 @@ A FastAPI test client 200 is a product test. Snapshot tests are not isolation. L
 python3 -m pytest labs/9.3/9.3-lab/tests --impl vulnerable
 ```
 
-Run from `labs/9.3/9.3-lab` if a collection at the repo root picks up `site/`. Record `test_http_200_only_is_not_a_security_test`. Do not probe public hosts. A setup error is not proof the rule holds.
+Run from `labs/9.3/9.3-lab` if a collection at the repo root picks up `site/`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

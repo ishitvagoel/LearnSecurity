@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny Python `resolve(role, field)`. The failure is already in the function: it returns true for every pair. A member resolving `secret_internal` is **a failed rule**, not a trophy dump of an internal token.
 
-Here is the rule:
-
 > `resolve("member", "secret_internal")` must be false. If it is true, the serializer dumped without a field table.
 
 ## Where you may practice
@@ -40,8 +38,7 @@ Identifiers find a row. They do not authorize fields. Object×company grants wer
 - `test_member_can_resolve_display_name`
 - `test_service_can_resolve_internal_field` — honest service path; may pass on both
 
-You do not need a new secret name. When `test_member_cannot_resolve_internal_field` fails, that is the evidence.
-
+You do not need a new secret name.
 ## Why it happens vs what it costs
 
 | Slice | This practice |

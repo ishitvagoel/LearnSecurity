@@ -13,7 +13,7 @@ Also name webhook delivery (7.3) as the same egress deputy, without running thos
 
 ## Picture: the PDF URL is still a steering wheel
 
-Renaming “preview URL” to “PDF URL” is not transfer.
+Calling it “PDF URL” instead of “preview URL” does not move the work.
 
 | Notes app this week | Clinic sketch |
 |---|---|

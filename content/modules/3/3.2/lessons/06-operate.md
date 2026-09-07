@@ -35,8 +35,6 @@ A scanner SaaS will page on new CVEs and stay silent on missing `cross-tenant-re
 
 ## Practice
 
-For `labs/3.2/3.2-lab`, write a log line you would accept.
-
 ```text
 log_denied reason=missing_mandatory_threat id=cross-tenant-read owner=authz request_id=req_32tm
 ```

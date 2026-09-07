@@ -20,7 +20,7 @@ You get a **clinic guardian list**, an **invite token**, or an **export quota**.
 
 ## Picture: three is not five, the shape is the same
 
-Renaming “share” to “guardian” is not transfer. A fourth guardian and a second invite redeem are new rules. HTML max is still not what you trust.
+Calling it “guardian” instead of “share” does not move the work. A fourth guardian and a second invite redeem are new rules. HTML max is still not what you trust.
 
 ```mermaid
 flowchart LR

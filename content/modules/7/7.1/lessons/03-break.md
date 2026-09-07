@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny Python `apply(user, body)`. The failure is already in the function: `user.update(body)` copies every key, so `is_admin` becomes true. Extra keys writing `is_admin` is **a failed rule**, not a trophy against a public API.
 
-Here is the rule:
-
 > After `apply(user, {"is_admin": true})`, `is_admin` must still be false. Extra keys are not writable fields.
 
 ## Where you may practice
@@ -41,8 +39,7 @@ Allowed fields have to be limited per action. Topic 1.2 already said who-is-allo
 - `test_display_name_can_be_patched`
 - `test_unknown_key_does_not_appear` — extras must not become columns
 
-You do not need a new privileged field. When `test_is_admin_cannot_be_patched` fails, that is the evidence.
-
+You do not need a new privileged field.
 ## Why it happens vs what it costs
 
 | Slice | This practice |
@@ -67,7 +64,7 @@ FastAPI will bind extra fields if the model allows it. Pydantic allowing extras 
 python3 -m pytest labs/7.1/7.1-lab/tests --impl vulnerable
 ```
 
-Run from `labs/7.1/7.1-lab` if a repo-root collection picks up `site/`. Record `test_is_admin_cannot_be_patched`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. A setup error is not proof the rule holds.
+Run from `labs/7.1/7.1-lab` if a repo-root collection picks up `site/`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

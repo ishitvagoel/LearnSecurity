@@ -40,10 +40,6 @@ Also reject: rolling a cipher; closing findings without re-running `test_protect
 - Column rename is secrecy
 - Argon2 belongs on the note body
 
-## Practice
-
-Write the review that would block this change. Name `test_protect_is_not_mere_encoding`.
-
 ## Use it somewhere new
 
 Clinic change that renames a column to `ssn_encrypted` without a reversibility test is an incomplete review. Name the independent falsehood that would still keep Base64 from round-tripping the SSN.

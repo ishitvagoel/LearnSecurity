@@ -66,7 +66,7 @@ An earlier topic already refused “JWT means secure.” Here the same format ca
 
 ## Practice
 
-Look in `labs/4.5/4.5-lab`, starting with `jwt_aud.py`.
+Open `jwt_aud.py` in `labs/4.5/4.5-lab`.
 
 ## Use it somewhere new
 

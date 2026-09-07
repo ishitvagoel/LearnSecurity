@@ -43,7 +43,7 @@ Honest relative names may pass on both implementations. That does not excuse the
 
 ## Practice
 
-Write fail or pass next to the matrix row. Reject a “test” that only greps `uuid` in a filename helper without calling `resolve("../outside")`.
+Reject a “test” that only greps `uuid` in a filename helper without calling `resolve("../outside")`.
 
 ## Use it somewhere new
 

@@ -41,10 +41,6 @@ Also reject: treating the client as what you trust; an awareness-list name as th
 - FastAPI or Next.js retries remember the share list
 - An awareness-list name as the definition of the finding
 
-## Practice
-
-Write the review that would block this change. Name `test_retry_does_not_duplicate_side_effect`.
-
 ## Use it somewhere new
 
 Payment capture, invite token, or clinic last slot. A change that “handles the awareness list” without a replay test is an incomplete review. Name the independent falsehood that would still stop a second grant.

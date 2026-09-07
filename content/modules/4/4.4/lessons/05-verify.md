@@ -23,7 +23,7 @@ flowchart LR
 | Wrong input / abuse | bob×n2, alice×n3, eve×n1, eve×n3 are false; broken files must fail |
 | Not claimed | Title vs body; search index; worker; row-level rules |
 
-The file is `labs/4.4/4.4-lab/tests/test_property.py`. `test_grant_on_n1_is_not_grant_on_n2` is there so leftover permission cannot sneak through.
+`test_grant_on_n1_is_not_grant_on_n2` is there so leftover permission cannot sneak through.
 
 ```text
 python3 -m pytest labs/4.4/4.4-lab/tests --impl vulnerable
@@ -46,7 +46,7 @@ python3 -m pytest labs/4.4/4.4-lab/tests --impl vulnerable
 python3 -m pytest labs/4.4/4.4-lab/tests --impl fixed
 ```
 
-Write fail or pass next to the table row. Reject a “test” that only greps `admin` in a role list without calling `can_read("bob", "n2")`.
+Reject a “test” that only greps `admin` in a role list without calling `can_read("bob", "n2")`.
 
 ## Use it somewhere new
 

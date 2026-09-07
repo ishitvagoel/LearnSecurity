@@ -62,7 +62,7 @@ A missing “B after revoke × body × deny” row is how a revoke event becomes
 
 ## Practice
 
-Look in `labs/11/11-lab`, starting with `capstone.py`.
+Open `capstone.py` in `labs/11/11-lab`.
 
 ## Use it somewhere new
 

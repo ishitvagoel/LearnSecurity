@@ -59,7 +59,7 @@ A missing analytics row is how a second cookie quietly becomes a session. Write 
 
 ## Practice
 
-Look in `labs/2.3/2.3-browser-policy`, starting with `cookies.py`.
+Open `cookies.py` in `labs/2.3/2.3-browser-policy`.
 
 ## Use it somewhere new
 

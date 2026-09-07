@@ -20,7 +20,7 @@ You get a **clinic last slot**, a **payment capture**, or an **invite token**. O
 
 ## Picture: limited quantity is the same fork
 
-Renaming “share” to “booking” is not transfer. Double-book and a second debit are new rules. Disable-on-submit is still not what you trust.
+Calling it “booking” instead of “share” does not move the work. Double-book and a second debit are new rules. Disable-on-submit is still not what you trust.
 
 ```mermaid
 flowchart TD

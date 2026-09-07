@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny in-process `capture(key)` / `charge_count()` list. It does not open a browser, talk to a payment network, or scrape a clinic billing page. The failure is already in the object: every call appends a charge and ignores whether the key was seen. That is a **failed rule**, not a clumsy click.
 
-Here is the rule:
-
 > Two `capture("k1")` calls must leave `charge_count() == 1`. The first capture may succeed.
 
 ## Where you may practice
@@ -39,8 +37,7 @@ Read `vulnerable/pay.py`. `capture` appends on every call. Checks:
 - `test_duplicate_capture_does_not_double_charge`
 - `test_first_capture_may_charge` — first `k1` may pass on both
 
-You do not need a new key. When `test_duplicate_capture_does_not_double_charge` fails, that is the evidence.
-
+You do not need a new key.
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |
@@ -65,7 +62,7 @@ A processor can remember its own side and still leave your row inserting twice. 
 python3 -m pytest labs/E3/e3-lab/tests --impl vulnerable
 ```
 
-Run from `labs/E3/e3-lab` if a run at the repo root picks up `site/`. Record `test_duplicate_capture_does_not_double_charge`. Do not probe public hosts. A setup error is not proof the rule holds.
+Run from `labs/E3/e3-lab` if a run at the repo root picks up `site/`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

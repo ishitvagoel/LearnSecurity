@@ -25,7 +25,7 @@ flowchart LR
 | Normal / fail-closed | missing cookie → deny (may pass on both) |
 | Not claimed | GET mutate; clickjacking; CORS; postMessage |
 
-The file is `labs/6.3/6.3-lab/tests/test_property.py`. `test_foreign_origin_post_is_denied` is there so a cookie-only share cannot sneak through.
+`test_foreign_origin_post_is_denied` is there so a cookie-only share cannot sneak through.
 
 ```text
 python3 -m pytest labs/6.3/6.3-lab/tests --impl vulnerable
@@ -49,7 +49,7 @@ python3 -m pytest labs/6.3/6.3-lab/tests --impl vulnerable
 python3 -m pytest labs/6.3/6.3-lab/tests --impl fixed
 ```
 
-Write fail or pass next to the matrix row. Reject a “test” that only greps `SameSite` in a cookie helper without calling `allow_share` on a foreign origin.
+Reject a “test” that only greps `SameSite` in a cookie helper without calling `allow_share` on a foreign origin.
 
 ## Use it somewhere new
 

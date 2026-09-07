@@ -26,7 +26,7 @@ You need to avoid eval. This week's check covers the lab string.
 
 ## What the repaired files must show
 
-Read `fixed/review.py` against this checklist. Do not treat the snippet as a production review product.
+Check `fixed/review.py` against the list above. Do not treat the snippet as a production review product.
 
 | After the fix | Must be true |
 |---|---|

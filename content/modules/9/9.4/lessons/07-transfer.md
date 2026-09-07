@@ -13,7 +13,7 @@ On the notes app, `ship_ok([HIGH], {})` must be false. For a clinic, finding × 
 
 ## Picture: same join, clinical object
 
-Renaming “note finding” to “clinic finding” is not transfer. Finding, map, and leftover change. Enabling code scanning without a mapping check does not own the HIGH.
+Calling it “clinic finding” instead of “note finding” does not move the work. Finding, map, and leftover change. Enabling code scanning without a mapping check does not own the HIGH.
 
 | Notes app this week | Clinic sketch |
 |---|---|

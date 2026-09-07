@@ -40,10 +40,6 @@ Also reject: treating the client as what you trust; closing findings without re-
 - NextAuth defaults are the channel guarantee
 - Magic-link URL is a standing session
 
-## Practice
-
-Write the review that would block this change. Name `test_query_string_token_is_rejected`.
-
 ## Use it somewhere new
 
 Clinic deep-link change that “adds a token query param for convenience” is an incomplete review. Name the independent falsehood that would still keep query-only requests at `None`.

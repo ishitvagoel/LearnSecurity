@@ -13,7 +13,7 @@ On the notes app, `boot_ok("prod", True)` must be false. For a clinic, prod plus
 
 ## Picture: five minutes vs a boot
 
-Renaming “note” to “chart” is not transfer. Env, debug, and leftover change. Leaving DEBUG on for five minutes is still a production boot.
+Calling it “chart” instead of “note” does not move the work. Env, debug, and leftover change. Leaving DEBUG on for five minutes is still a production boot.
 
 | Notes app this week | Clinic sketch |
 |---|---|

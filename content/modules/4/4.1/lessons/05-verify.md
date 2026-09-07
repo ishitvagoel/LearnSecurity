@@ -28,7 +28,7 @@ If both pass, the test is not looking at `session_valid` after delete. If both f
 | Failure | Resurrected map entry still denied (`test_deleted_denies_even_if_session_map_still_has_row`) |
 | Not claimed | Identity-provider logout; refresh tokens; phone cache; token denylist complete |
 
-The file is `labs/4.1/4.1-lab/tests/test_property.py`. The test `test_deleted_user_session_is_dead` calls `delete_user` then `session_valid`. That check is there so a leftover session that still works cannot sneak through.
+The test `test_deleted_user_session_is_dead` calls `delete_user` then `session_valid`. That check is there so a leftover session that still works cannot sneak through.
 
 A test that only asserts HTTP 200 is not this topic's evidence. A test that only greps `DELETED.add` without calling `session_valid` after `delete_user` is not this topic's evidence. This practice never opens a live identity provider.
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/4.1/4.1-lab/tests --impl vulnerable
 python3 -m pytest labs/4.1/4.1-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail or pass next to the matrix row.
+Paste nothing from answer keys. row.
 
 ## Use it somewhere new
 

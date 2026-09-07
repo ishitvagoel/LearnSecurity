@@ -28,7 +28,7 @@ If both pass, the test is not looking at digest equality. If both fail, the fix 
 | Abuse | Unsure hashes are deny (fail closed) |
 | Not claimed | Live npm; provenance builders; the ship gate; that the pin is benign |
 
-The file is `labs/10.2/10.2-lab/tests/test_property.py`. The test `test_hash_mismatch_refuses_install` is there so always-true `install_ok` cannot sneak through.
+The test `test_hash_mismatch_refuses_install` is there so always-true `install_ok` cannot sneak through.
 
 Honest matching hashes may pass on both implementations. That does not excuse the mismatch deny test. If the broken files do not fail `test_hash_mismatch_refuses_install`, the lab is miswired — fix the wiring, not the assertion.
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/10.2/10.2-lab/tests --impl vulnerable
 python3 -m pytest labs/10.2/10.2-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail or pass next to the mismatch row. Reject a “test” that only greps `CycloneDX` in CI without calling `install_ok("aaa", "bbb")`.
+Paste nothing from answer keys. Reject a “test” that only greps `CycloneDX` in CI without calling `install_ok("aaa", "bbb")`.
 
 ## Use it somewhere new
 

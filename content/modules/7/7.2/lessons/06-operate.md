@@ -39,8 +39,6 @@ If a human is denied a field they should not see, do not announce the secret in 
 
 ## Practice
 
-For `labs/7.2/7.2-lab`, write a log line you would accept.
-
 ```text
 log_denied reason=field_denied field=secret_internal subject=user_72e request_id=req_72e
 ```

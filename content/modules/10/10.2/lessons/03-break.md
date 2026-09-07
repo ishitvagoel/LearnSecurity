@@ -7,8 +7,6 @@
 
 The practice is not a registry you attack. It is a tiny Python `install_ok(expected_hash, got_hash)` that returns true or false. The failure is already in the function: every pair is allowed. That is a **failed rule**, not a missing package name.
 
-Here is the rule:
-
 > A digest mismatch must not install. If `install_ok("aaa", "bbb")` is true, the bytes you will run have failed as a security control.
 
 ## Where you may practice
@@ -28,7 +26,7 @@ flowchart TD
   Any[any pair] --> True[install_ok true]
 ```
 
-The broken files take that path on purpose. You do not need npm. You must not fetch a live package. The true return *is* the leak of integrity.
+You do not need npm. You must not fetch a live package. The true return *is* the leak of integrity.
 
 The first lesson already refused a name as a digest. This practice is **whether the check compares bytes**. An SBOM is inventory. It does not compare `aaa` to `bbb`.
 
@@ -39,7 +37,7 @@ Read `vulnerable/lock.py`. It returns true for every pair. Tests:
 - `test_hash_mismatch_refuses_install`
 - `test_matching_digest_may_install` — matching hashes may pass on both
 
-You do not need a new digest string. When `test_hash_mismatch_refuses_install` fails, that is the evidence.
+You do not need a new digest string.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -69,7 +67,7 @@ You do not need a new digest string. When `test_hash_mismatch_refuses_install` f
 python3 -m pytest labs/10.2/10.2-lab/tests --impl vulnerable
 ```
 
-Run from `labs/10.2/10.2-lab` if a collection at the repo root picks up `site/`. Record `test_hash_mismatch_refuses_install`. Do not probe public hosts. A setup error is not proof the rule holds.
+Run from `labs/10.2/10.2-lab` if a collection at the repo root picks up `site/`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

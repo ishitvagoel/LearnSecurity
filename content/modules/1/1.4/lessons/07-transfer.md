@@ -9,7 +9,7 @@ You get a **clinic portal** that adds a second factor, and a **banking re-auth**
 
 ## Picture: transfer changes the envelope, not the product name
 
-Renaming “recovery confirm” to “clinic step-up” is not transfer. Keyboard lockout and chart-exposing shortcuts are new rules. Support reading a code aloud is a new who-is-allowed row, not a usability win.
+Calling it “clinic step-up” instead of “recovery confirm” does not move the work. Keyboard lockout and chart-exposing shortcuts are new rules. Support reading a code aloud is a new who-is-allowed row, not a usability win.
 
 | Notes app this week | Clinic / bank sketch |
 |---|---|

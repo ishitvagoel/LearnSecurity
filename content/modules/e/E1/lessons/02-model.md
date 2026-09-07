@@ -63,7 +63,7 @@ A helpful prompt with `run_tool` always running is how "the model only summarize
 
 ## Practice
 
-Draw the map. Look in `labs/E1/e1-lab`, starting with `tools.py`.
+Open `tools.py` in `labs/E1/e1-lab`.
 
 ## Use it somewhere new
 

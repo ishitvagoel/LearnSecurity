@@ -42,7 +42,7 @@ Honest `test_short_copy_may_fit` may pass on both implementations. That does not
 
 ## Practice
 
-Write fail or pass next to the matrix row. Reject a “test” that only greps `Kotlin` in a README without calling `copy_into(4, b"abcdefgh", 4)`.
+Reject a “test” that only greps `Kotlin` in a README without calling `copy_into(4, b"abcdefgh", 4)`.
 
 ## Use it somewhere new
 

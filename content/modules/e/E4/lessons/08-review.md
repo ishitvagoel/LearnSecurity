@@ -44,10 +44,6 @@ Also reject: native exploit walkthroughs; shipping without re-running `test_copy
 - A sanitizer is `copy_into`
 - A company language roadmap is this check
 
-## Practice
-
-Write the review that would block this change. Name `test_copy_does_not_exceed_buffer`.
-
 ## Use it somewhere new
 
 Clinic change that “added a Kotlin rewrite and an awareness-list mapping” without a destination bound is an incomplete copy-gate review. Name the independent falsehood that would still keep length ≤ bufsize.

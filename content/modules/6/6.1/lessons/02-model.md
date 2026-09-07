@@ -58,7 +58,7 @@ A missing “hostile name × shell grammar × deny” row is how `sh -c` concate
 
 ## Practice
 
-Look in `labs/6.1/6.1-lab`, starting with `argv.py`. Fake names only.
+Open `argv.py` in `labs/6.1/6.1-lab`. Fake names only.
 
 ## Use it somewhere new
 

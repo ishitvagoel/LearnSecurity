@@ -28,7 +28,7 @@ If both pass, the test is not looking at header versus socket. If both fail, the
 | Failure | unknown scheme does not count as https |
 | Not claimed | Certificate checks; mutual TLS; pinning; encrypted client hello |
 
-The file is `labs/5.4/5.4-lab/tests/test_property.py`. The test `test_client_forwarded_proto_is_not_tls` calls `channel_is_https` with header https and socket http. That check is there so a client header counted as TLS cannot sneak through.
+The test `test_client_forwarded_proto_is_not_tls` calls `channel_is_https` with header https and socket http. That check is there so a client header counted as TLS cannot sneak through.
 
 A test that only asserts the site loads on port 443 is not this topic’s evidence. A test that only greps `https` in a dashboard without calling `channel_is_https` on the mismatch is not this topic’s evidence. This practice never opens a live load balancer.
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/5.4/5.4-lab/tests --impl vulnerable
 python3 -m pytest labs/5.4/5.4-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail or pass next to the matrix row. Reject a “test” that only greps `https` in a dashboard without calling `channel_is_https` on the mismatch.
+Paste nothing from answer keys. Reject a “test” that only greps `https` in a dashboard without calling `channel_is_https` on the mismatch.
 
 ## Use it somewhere new
 

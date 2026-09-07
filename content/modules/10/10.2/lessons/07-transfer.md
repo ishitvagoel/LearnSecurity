@@ -13,7 +13,7 @@ On the notes app, `install_ok("aaa", "bbb")` must be false. For a clinic, mismat
 
 ## Picture: latest vs lockfile
 
-Renaming “note” to “chart” is not transfer. Expected digest, got digest, and leftover change. Marking “npm install ran” does not compare hashes.
+Calling it “chart” instead of “note” does not move the work. Expected digest, got digest, and leftover change. Marking “npm install ran” does not compare hashes.
 
 | Notes app this week | Clinic sketch |
 |---|---|

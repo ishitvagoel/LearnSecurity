@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny Python `revoke` that does nothing and a `read` that always returns the body. The failure is already in the functions: revoke never drops the grant, and read never asks. That no-op revoke is a **failed rule**, not a paperwork nit.
 
-Here is the rule:
-
 > After `revoke("n1", "B")`, `read("n1", "B")` must be None. If it still returns the body, a revoked share still reads the note.
 
 ## Where you may practice
@@ -29,7 +27,7 @@ flowchart TD
   Read[read] --> Body[always body]
 ```
 
-The broken files take that path on purpose. You do not need HTTP. You must not hit a live tenant. The body return after revoke *is* the leak.
+You do not need HTTP. You must not hit a live tenant. The body return after revoke *is* the leak.
 
 Earlier weeks already said check every access. Time, revoke, leftover worker sessions, and phone cache are the other grains. This rule is **the stitch**. This page does not mark you as finished.
 
@@ -41,7 +39,7 @@ Read `vulnerable/capstone.py`. It ignores `revoke` and returns the body. Tests:
 - `test_owner_may_still_read_after_revoke` — A may pass on both
 - `test_share_may_read_before_revoke` — B before revoke may pass on both
 
-You do not need a new tenant. When `test_revoked_share_cannot_read` fails, that is the evidence. `conftest.py` calls `reset()` so grant state does not leak across tests.
+You do not need a new tenant. `conftest.py` calls `reset()` so grant state does not leak across tests.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -71,7 +69,7 @@ FastAPI will return 200 for DELETE if you wrote that route. A scanner will stay 
 python3 -m pytest labs/11/11-lab/tests --impl vulnerable
 ```
 
-Run from `labs/11/11-lab` if a collection at the repo root picks up `site/`. Record `test_revoked_share_cannot_read`. Do not probe public hosts. A setup error is not proof the rule holds.
+Run from `labs/11/11-lab` if a collection at the repo root picks up `site/`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

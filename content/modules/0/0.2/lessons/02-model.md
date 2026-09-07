@@ -53,7 +53,7 @@ flowchart LR
 
 ## Practice
 
-Draw the map. Look in `labs/0.2/0.2-bridge`, starting with `diagnostic.py`.
+Open `diagnostic.py` in `labs/0.2/0.2-bridge`.
 
 ## Use it somewhere new
 

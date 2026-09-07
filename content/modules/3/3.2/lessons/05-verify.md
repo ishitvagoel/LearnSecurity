@@ -43,7 +43,7 @@ Map each test to a row you wrote on the model page. If the broken files do not f
 
 ## Practice
 
-Write fail or pass next to the matrix row. Reject a “test” that only greps `STRIDE` in a markdown file without calling `threats_from_scan(True)`.
+Reject a “test” that only greps `STRIDE` in a markdown file without calling `threats_from_scan(True)`.
 
 ## Use it somewhere new
 

@@ -45,10 +45,6 @@ Also reject: live orgs; merging without re-running `test_merge_requires_threat_m
 - A later draft of the design-review guide is final
 - Gate 10 follows from a green merge bot
 
-## Practice
-
-Write the review that would block this change. Name `test_merge_requires_threat_model_id`.
-
 ## Use it somewhere new
 
 Clinic change that “added annual HIPAA training” without a merge check is an incomplete review of the culture. Name the independent falsehood that would still keep empty changes from merging.

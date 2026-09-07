@@ -7,7 +7,7 @@
 
 This review is about notes-app offboarding. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `session_valid("alice")` is still true after `delete_user` if they ship. Start at the leftover session after delete, not at a scanner color or an HR ticket.
 
-Treat the files in `labs/4.1/4.1-lab/vulnerable/` as the pull request. You already ran `test_deleted_user_session_is_dead` — that is the rule. A comment “will revoke sessions later” is not.
+You already ran `test_deleted_user_session_is_dead` — that is the rule. A comment “will revoke sessions later” is not.
 
 ## Picture: problems to find (name them yourself)
 
@@ -39,10 +39,6 @@ Also reject: trusting the browser as the vault; closing findings without re-runn
 - Deleted means gone from backups
 - SessionMiddleware knows HR
 - An “account deleted” email is the kill
-
-## Practice
-
-Write the review that would block this change. Name `test_deleted_user_session_is_dead`.
 
 ## Use it somewhere new
 

@@ -49,7 +49,7 @@ An edge dashboard will show 429s on an IP and stay silent when `/export.csv` sti
 
 ## Practice
 
-For `labs/6.7/6.7-lab`, write a log line (ids, reason, n, no body). Reject any line that includes note bodies, a real email, or a live load trace against a public host.
+Write a log line (ids, reason, n, no body). Reject any line that includes note bodies, a real email, or a live load trace against a public host.
 
 ## Use it somewhere new
 

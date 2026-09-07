@@ -42,10 +42,6 @@ Also reject: live device imaging; closing findings without re-running `test_cach
 - EncryptedSharedPreferences covers every file
 - A storage nickname is the rule
 
-## Practice
-
-Write the review that would block this change. Name `test_cached_note_is_not_plaintext_on_disk`.
-
 ## Use it somewhere new
 
 A clinic change that “stored charts internally with a fingerprint lock” without a plaintext-on-disk check is an incomplete review. Name the independent falsehood that would still keep `'secret'` off disk.

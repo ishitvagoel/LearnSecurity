@@ -28,7 +28,7 @@ A triage checklist wants findings owned. This week's check covers unmapped HIGH.
 
 ## What the repaired files must show
 
-Read `fixed/sast.py` against this checklist. Do not treat the snippet as a production scanner product.
+Check `fixed/sast.py` against the list above. Do not treat the snippet as a production scanner product.
 
 | After the fix | Must be true |
 |---|---|

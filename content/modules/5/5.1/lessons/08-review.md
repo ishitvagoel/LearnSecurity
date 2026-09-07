@@ -7,7 +7,7 @@
 
 This review is about notes-app deletion. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `body_retained("alice")` is still `"secret"` after `delete_account("alice")` if they ship. Start at leftover analytics after delete, not at a scanner color or a contract ticket.
 
-Treat the files in `labs/5.1/5.1-lab/vulnerable/` as the pull request. You already ran `test_deleted_account_leaves_no_analytics_body` — that is the rule. A comment “will add warehouse purge later” is not.
+You already ran `test_deleted_account_leaves_no_analytics_body` — that is the rule. A comment “will add warehouse purge later” is not.
 
 ## Picture: problems to find (name them yourself)
 
@@ -39,10 +39,6 @@ Also reject: trusting the client; closing findings without re-running `test_dele
 - A privacy-law footer is the rule
 - A database DELETE is warehouse DELETE
 - HTTP 200 on `/account` is the graph
-
-## Practice
-
-Write the review that would block this change. Name `test_deleted_account_leaves_no_analytics_body`.
 
 ## Use it somewhere new
 

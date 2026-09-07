@@ -40,10 +40,6 @@ Also reject: treating the client as what you trust; closing findings without re-
 - SQLAlchemy session is the same-company check
 - A managed-database product name is the second check
 
-## Practice
-
-Write the review that would block this change. Name `test_app_role_cannot_read_other_tenant`.
-
 ## Use it somewhere new
 
 A serverless change that “uses a managed database” without a same-company check is an incomplete review. Name the independent falsehood that would still keep `tB` from reading `tA`.

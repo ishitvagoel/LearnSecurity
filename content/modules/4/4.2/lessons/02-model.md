@@ -62,7 +62,7 @@ A missing step-up cell is how export theater appears. Write the hole even if thi
 
 ## Practice
 
-Draw this map so someone else could name the checks without opening the answer-key folder. Look in `labs/4.2/4.2-lab`, starting with `authn.py`. Label password and OTP as phishable even at the real origin — the leftover is honest, not a silent pass.
+Draw this map so someone else could name the checks without opening the answer-key folder. Open `authn.py` in `labs/4.2/4.2-lab`. Label password and OTP as phishable even at the real origin — the leftover is honest, not a silent pass.
 
 ## Use it somewhere new
 

@@ -40,10 +40,6 @@ Also reject: treating the client as what you trust; closing findings without re-
 - FastAPI or SQLAlchemy will stop at five
 - An accessible announcement is the cap
 
-## Practice
-
-Write the review that would block this change. Name `test_share_cap_is_enforced`.
-
 ## Use it somewhere new
 
 Clinic change that “adds max=3 on the select” without a write-path test is an incomplete review. Name the independent falsehood that would still keep the fourth guardian out.

@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny Python `accept_exception` that returns true for every dict. The failure is already in the function: it never looks at owner, review date, or accessibility. That always-true accept is a **failed rule**, not a paperwork nit.
 
-Here is the rule:
-
 > An exception must not be accepted without owner, review date, and an accessibility check. If `accept_exception({"owner": "", "review_by": None})` returns true, the register gate has failed as a security control.
 
 ## Where you may practice
@@ -28,7 +26,7 @@ flowchart TD
   Any[any dict] --> Acc[accepted]
 ```
 
-The broken files take that path on purpose. `--impl vulnerable` returns true for every payload, including empty owner. You do not need a governance product. You must not contact a live disclosure inbox. The true return for empty owner *is* the leak.
+`--impl vulnerable` returns true for every payload, including empty owner. You do not need a governance product. You must not contact a live disclosure inbox. The true return for empty owner *is* the leak.
 
 Earlier lessons already said posters are not gates. This check is **accountability of leftover risk**.
 
@@ -39,7 +37,7 @@ Read `vulnerable/risk.py`. It returns true for every dict. Tests:
 - `test_exception_needs_owner_review_and_wcag`
 - `test_complete_exception_may_be_accepted` — alice + date + accessibility flag may pass on both
 
-You do not need a new field. When `test_exception_needs_owner_review_and_wcag` fails, that is the evidence.
+You do not need a new field.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -69,7 +67,7 @@ A ticket type named “risk” will close without dates if you let it. Industry 
 python3 -m pytest labs/E6/e6-lab/tests --impl vulnerable
 ```
 
-Run from `labs/E6/e6-lab` if a collection at the repo root picks up `site/`. Record `test_exception_needs_owner_review_and_wcag`. Do not contact live disclosure inboxes. A setup error is not proof the rule holds.
+Run from `labs/E6/e6-lab` if a collection at the repo root picks up `site/`. Do not contact live disclosure inboxes. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

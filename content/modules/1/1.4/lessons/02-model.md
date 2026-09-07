@@ -81,7 +81,7 @@ Maturity scores, scanner yellow, and “256-bit” do not belong in the leftover
 
 ## Practice
 
-Look in `labs/1.4/1.4-risk-register`, starting with `recovery.py`. Your artifact is a versioned list (even a table in your notes) with rule, person, harm, control, leftover, owner, trigger, and evidence. No real people’s data.
+Open `recovery.py` in `labs/1.4/1.4-risk-register`. Your artifact is a versioned list (even a table in your notes) with rule, person, harm, control, leftover, owner, trigger, and evidence. No real people’s data.
 
 ## Use it somewhere new
 

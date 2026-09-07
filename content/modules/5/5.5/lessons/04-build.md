@@ -27,7 +27,7 @@ Use parameterized queries. This week's check covers `fetch_sql`.
 
 ## What the repaired files must show
 
-Read `fixed/query.py` against this checklist. Do not treat the snippet as a production query builder.
+Check `fixed/query.py` against the list above. Do not treat the snippet as a production query builder.
 
 | After the fix | Must be true |
 |---|---|

@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny Python `tenant_for(session, body)`. The failure is already in the function: it prefers `body["tenant"]` when that key is present. A body-chosen company is **a failed rule**, not a trophy against a public product.
 
-Here is the rule:
-
 > The JSON body is not the tenant. `tenant_for({"tenant": "A"}, {"tenant": "B"})` must return `"A"`. If it returns `"B"`, body tenant overrides session.
 
 ## Where you may practice
@@ -39,7 +37,7 @@ Read `vulnerable/rls.py`. It returns the body company when present. Tests:
 - `test_body_cannot_switch_tenant`
 - `test_matching_body_may_keep_session_tenant` — A/A may pass on both
 
-You do not need a new company letter. When `test_body_cannot_switch_tenant` fails, that is the evidence. Do not paste the practice files into a public API.
+You do not need a new company letter. Do not paste the practice files into a public API.
 
 ## Why it happens vs what it costs
 
@@ -63,7 +61,7 @@ FastAPI will bind whatever field you declare. PostgreSQL row-level rules will is
 python3 -m pytest labs/E5/e5-lab/tests --impl vulnerable
 ```
 
-Run from `labs/E5/e5-lab` if a repo-root collection picks up `site/`. Record `test_body_cannot_switch_tenant`. Do not probe public hosts. A setup error is not proof the rule holds.
+Run from `labs/E5/e5-lab` if a repo-root collection picks up `site/`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

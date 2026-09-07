@@ -7,8 +7,6 @@
 
 The practice is not a public repo you scan. It is a tiny Python `ship_ok` that takes findings and a map. The failure is already in the function: it returns true for every pair. That true is a **failed rule**, not a green tile.
 
-Here is the rule:
-
 > An unmapped HIGH must not ship. If `ship_ok([{"id": "F1", "sev": "HIGH"}], {})` returns true, the ship gate has failed as a security control.
 
 ## Where you may practice
@@ -28,7 +26,7 @@ flowchart TD
   Any[any findings] --> True[ship_ok true]
 ```
 
-The broken files take that path on purpose. You do not need a vendor console. You must not scan a public repo. The true return *is* the leak of the release decision.
+You do not need a vendor console. You must not scan a public repo. The true return *is* the leak of the release decision.
 
 The coverage lesson already said status is not coverage. This check is **unowned HIGH must not ship**.
 
@@ -39,7 +37,7 @@ Read `vulnerable/sast.py`. It returns true for every pair. Tests:
 - `test_unmapped_high_blocks_ship`
 - `test_mapped_high_may_ship` — a mapped HIGH may pass on both
 
-You do not need a new finding id. When `test_unmapped_high_blocks_ship` fails, that is the evidence.
+You do not need a new finding id.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -69,7 +67,7 @@ A web framework will still ship if CI’s `ship_ok` is always true. The app’s 
 python3 -m pytest labs/9.4/9.4-lab/tests --impl vulnerable
 ```
 
-Run from `labs/9.4/9.4-lab` if a collection at the repo root picks up `site/`. Record `test_unmapped_high_blocks_ship`. Do not probe public hosts. A setup error is not proof the rule holds.
+Run from `labs/9.4/9.4-lab` if a collection at the repo root picks up `site/`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

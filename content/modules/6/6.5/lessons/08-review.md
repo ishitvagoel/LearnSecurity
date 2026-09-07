@@ -40,10 +40,6 @@ Also reject: live fetches; closing findings without re-running `test_link_local_
 - A famous-bugs nickname is the rule
 - Fetching the URL is how you test this check
 
-## Practice
-
-Write the review that would block this change. Name `test_link_local_metadata_is_denied`.
-
 ## Use it somewhere new
 
 Clinic change that “switched the importer to HTTPS” without a host allow-list test is an incomplete review of scheme-only URL checks. Name the independent falsehood that would still keep link-local from being allowed.

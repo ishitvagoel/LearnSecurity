@@ -54,7 +54,7 @@ Do not use “timestamp rounded to the second” as the key. Skew and two client
 
 ## Practice
 
-Look in `labs/2.4/2.4-state-time`, starting with `share.py`. Label missing-key behavior as leftover (the lab still shares once if the key is omitted).
+Open `share.py` in `labs/2.4/2.4-state-time`. Label missing-key behavior as leftover (the lab still shares once if the key is omitted).
 
 ## Use it somewhere new
 

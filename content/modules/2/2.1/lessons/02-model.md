@@ -72,7 +72,7 @@ Do not add public JSON bombs or live Unicode weaponization. Those are out of sco
 
 ## Practice
 
-Draw the map so someone else could name the checks without opening the answer-key folder. Look in `labs/2.1/2.1-parser-boundaries`, starting with `parse_note.py`. Label the first-key scan and `json.loads` as two readers even in the repaired tree — the fix is agreement-or-refuse, not pretending the scan became JSON.
+Draw the map so someone else could name the checks without opening the answer-key folder. Open `parse_note.py` in `labs/2.1/2.1-parser-boundaries`. Label the first-key scan and `json.loads` as two readers even in the repaired tree — the fix is agreement-or-refuse, not pretending the scan became JSON.
 
 ## Use it somewhere new
 

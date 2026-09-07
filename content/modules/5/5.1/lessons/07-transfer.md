@@ -11,7 +11,7 @@ On the notes app, after `delete_account("alice")`, `body_retained("alice")` is N
 
 ## Picture: the card is another copy
 
-Renaming “alice” to “patient” is not transfer. Deleting the patient row does not authorize leaving the appointment-card notes alive. A “right to be forgotten” banner is not the check.
+Calling it “patient” instead of “alice” does not move the work. Deleting the patient row does not authorize leaving the appointment-card notes alive. A “right to be forgotten” banner is not the check.
 
 | Notes app this week | Clinic sketch |
 |---|---|

@@ -7,8 +7,6 @@
 
 The practice is not a model you attack. It is a tiny Python `run_tool` that returns `ran {name}` for every name. The failure is already in the function: it never looks at the name. That always-run call is a **failed rule**, not a paperwork nit.
 
-Here is the rule:
-
 > An agent must not run `exec_sql` because the model asked. If `run_tool("exec_sql", {})` returns a ran-string, the runtime has failed as a security control.
 
 ## Where you may practice
@@ -28,7 +26,7 @@ flowchart TD
   Any[any tool name] --> Ran[ran name]
 ```
 
-The broken files take that path on purpose. You do not need a language model. You must not call a live model. The ran-string for `"exec_sql"` *is* the leak.
+You do not need a language model. You must not call a live model. The ran-string for `"exec_sql"` *is* the leak.
 
 The interpreter lesson already said a string is not a safe argv. This check is **the same idea with the model as an untrusted client**.
 
@@ -39,7 +37,7 @@ Read `vulnerable/tools.py`. It returns `ran {name}` for every name. Tests:
 - `test_exec_sql_tool_is_denied`
 - `test_allowlisted_search_notes_may_run` — `search_notes` may pass on both
 
-You do not need a new tool name. When `test_exec_sql_tool_is_denied` fails, that is the evidence.
+You do not need a new tool name.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -69,7 +67,7 @@ A tool library will expose whatever tools you pass. A system prompt is another s
 python3 -m pytest labs/E1/e1-lab/tests --impl vulnerable
 ```
 
-Run from `labs/E1/e1-lab` if a collection at the repo root picks up `site/`. Record `test_exec_sql_tool_is_denied`. Do not probe public hosts. A setup error is not proof the rule holds.
+Run from `labs/E1/e1-lab` if a collection at the repo root picks up `site/`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny in-process `share_note` list. It does not open a browser, talk to a payment network, or race a public API. The failure is already in the object: every call appends a row and ignores the key. That is a **failed rule**, not a clumsy click.
 
-Here is the rule:
-
 > Two `share_note` calls with the same idempotency key must produce one share. A retry is a second attempt, not a second grant.
 
 ## Where you may practice
@@ -40,8 +38,7 @@ Read `vulnerable/share.py`. `share_note` appends `note_id` to `_SHARES` on every
 - `test_single_share` — one call still creates one share (honest happy path)
 - `test_retry_does_not_duplicate_side_effect` — two calls with `k1` must leave `share_count() == 1`
 
-You do not need a new key string. When `test_retry_does_not_duplicate_side_effect` fails, that is the evidence.
-
+You do not need a new key string.
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |

@@ -7,8 +7,6 @@
 
 The practice is not a phone you attack. It is a tiny Python `open_link(query)` / `current_user()`. The failure is already in the function: extras become the user, so `as=admin` switches the session. A deep link `as=` switching the signed-in user is **a failed rule**, not a trophy against a public app.
 
-Here is the rule:
-
 > After `open_link({"as": "admin"})`, `current_user()` must still be `"alice"`. The Intent is untrusted input.
 
 ## Where you may practice
@@ -39,8 +37,7 @@ Last topic already said the session is identity (4.3). This rule is **the Intent
 - `test_deeplink_as_param_does_not_switch_user`
 - `test_note_deep_link_keeps_session` — locators must not switch users either
 
-You do not need a new query key. When `test_deeplink_as_param_does_not_switch_user` fails, that is the evidence.
-
+You do not need a new query key.
 ## Why it happens vs what it costs
 
 | Slice | This practice |
@@ -65,7 +62,7 @@ You do not need a new query key. When `test_deeplink_as_param_does_not_switch_us
 python3 -m pytest labs/8.3/8.3-lab/tests --impl vulnerable
 ```
 
-Run from `labs/8.3/8.3-lab` if a repo-root collection picks up `site/`. Record `test_deeplink_as_param_does_not_switch_user`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. A setup error is not proof the rule holds.
+Run from `labs/8.3/8.3-lab` if a repo-root collection picks up `site/`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny in-process `protect` / `looks_encrypted`. Fake plaintext `secret`. It does not open a database or a cipher library. Base64 labeled encryption is a **failed rule**, not a trophy decoder.
 
-Here is the rule:
-
 > `protect("secret")` must not round-trip as Base64 of the plaintext. If `base64.b64decode(protect("secret"))` equals `"secret"`, encoding was sold as secrecy.
 
 ## Where you may practice
@@ -40,7 +38,7 @@ Read `vulnerable/crypto.py`. `protect` Base64-encodes the string. Tests:
 - `test_protect_is_not_mere_encoding`
 - `test_protect_does_not_return_plaintext`
 
-You do not need a new cipher name. When `test_protect_is_not_mere_encoding` fails, that is the evidence.
+You do not need a new cipher name.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|

@@ -26,7 +26,7 @@ A testing standard that says “test against the requirement” is vocabulary. T
 
 ## What the repaired files must show
 
-Read `fixed/stest.py` against this checklist. Do not treat the snippet as a production scanner.
+Check `fixed/stest.py` against the list above. Do not treat the snippet as a production scanner.
 
 | After the fix | Must be true |
 |---|---|

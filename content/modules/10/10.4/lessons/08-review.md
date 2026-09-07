@@ -42,10 +42,6 @@ Also reject: live production attacks; booting without re-running `test_prod_debu
 - `NODE_ENV` is `boot_ok`
 - A famous-bugs list is this week’s rule
 
-## Practice
-
-Write the review that would block this change. Name `test_prod_debug_must_not_boot`.
-
 ## Use it somewhere new
 
 Clinic change that “set `NODE_ENV` and added a canary” without a prod-plus-debug deny is an incomplete boot-gate review. Name the independent falsehood that would still keep prod plus debug from booting.

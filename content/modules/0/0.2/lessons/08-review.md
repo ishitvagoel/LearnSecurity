@@ -39,10 +39,6 @@ Also reject: live LMS attacks; keys in lessons; claiming check-in 0 or check-in 
 - A job-title competency is a 1.2 allow cell
 - An LMS percentage is industry-list coverage
 
-## Practice
-
-Write the review that would block this change. Name `test_high_quiz_score_is_not_authorization`.
-
 ## Use it somewhere new
 
 A clinic change that “added an onboarding quiz and a job-title mapping” without keeping 1.2 required is a skipped-check review. Name the independent falsehood that would still keep score 100 from skipping isolation labs.

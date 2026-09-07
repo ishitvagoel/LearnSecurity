@@ -15,7 +15,7 @@ On the notes app, `protect("secret")` must not round-trip as Base64. For a clini
 
 ## Picture: the label is not the tool
 
-Renaming “secret” to “SSN” is not transfer. A column named `ssn_encrypted` does not authorize leaving the bytes as Base64. A disk-encryption checkbox is not the check.
+Calling it “SSN” instead of “secret” does not move the work. A column named `ssn_encrypted` does not authorize leaving the bytes as Base64. A disk-encryption checkbox is not the check.
 
 | Notes app this week | Clinic sketch |
 |---|---|

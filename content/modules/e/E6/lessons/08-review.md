@@ -42,10 +42,6 @@ Also reject: live disclosure; shipping without re-running `test_exception_needs_
 - A maturity score is the register
 - A HIPAA slide is `accept_exception`
 
-## Practice
-
-Write the review that would block this change. Name `test_exception_needs_owner_review_and_wcag`.
-
 ## Use it somewhere new
 
 Clinic change that “added a HIPAA slide and a maturity score” without owner / review / accessibility is an incomplete register review. Name the independent falsehood that would still keep empty owner from accepting.

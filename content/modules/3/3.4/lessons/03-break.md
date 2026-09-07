@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny in-process `add_share` counter. Fake share counts. It does not open FastAPI, a CDN filter, or a classmate API. Extra grants is a **failed rule**, not a trophy flood.
 
-Here is the rule:
-
 > Eight `add_share` calls must leave count ≤ 5. Share grants must not go past the product cap of 5.
 
 ## Where you may practice
@@ -42,8 +40,7 @@ Read `vulnerable/share_limit.py`. `add_share` always increments and returns `_n`
 - `test_five_shares_are_allowed` — honest path still reaches 5
 - `test_sixth_does_not_increment` — sixth call returns 5
 
-You do not need a new note id. When `test_share_cap_is_enforced` fails, that is the evidence.
-
+You do not need a new note id.
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |
@@ -68,7 +65,7 @@ FastAPI does not know “five members.” SQLAlchemy `add()` will insert a sixth
 python3 -m pytest labs/3.4/3.4-lab/tests --impl vulnerable
 ```
 
-Record `test_share_cap_is_enforced`. Do not weaken it to “a max attribute exists.” A setup error is not proof the rule holds.
+Do not weaken it to “a max attribute exists.” A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

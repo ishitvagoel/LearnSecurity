@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny Python `can_read`. The failure is already in the function: it treats “Bob has a share somewhere” as a yes for every note. That is a **failed rule**, not a trophy dump of another company’s body.
 
-Here is the rule:
-
 > A grant on n1 does not authorize n2. If `can_read("bob", "n2")` is true because Bob has n1, leftover permission has replaced the rule.
 
 ## Where you may practice

@@ -49,7 +49,7 @@ A host product will page on `sh` children and stay silent when the Python helper
 
 ## Practice
 
-For `labs/6.1/6.1-lab`, write a log line (ids, reason, program basename, no name). Reject any line that includes a note body, a real email, a patient filename, or a shell cookbook.
+Write a log line (ids, reason, program basename, no name). Reject any line that includes a note body, a real email, a patient filename, or a shell cookbook.
 
 ## Use it somewhere new
 

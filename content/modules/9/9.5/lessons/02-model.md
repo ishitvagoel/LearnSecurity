@@ -61,7 +61,7 @@ A missing retest field is how a PDF on a shelf becomes "Done." Write the hole.
 
 ## Practice
 
-Look in `labs/9.5/9.5-lab`, starting with `pentest.py`.
+Open `pentest.py` in `labs/9.5/9.5-lab`.
 
 ## Use it somewhere new
 

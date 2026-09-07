@@ -43,7 +43,7 @@ If your alert includes the matching line, you have copied the leak into the pagi
 
 ## What the framework does vs what you still have to check
 
-The same access logs, exception dumps, and APM drains that bypass the logger will also bypass a “scan our app logs” detector. Name those places before you claim recover.
+The same access logs, exception dumps, and APM drains that bypass the logger will also bypass a “scan our app logs” detector.
 
 ## Can people still use it
 
@@ -51,7 +51,7 @@ If operators see a redaction-miss badge, do not encode it as color only. Give it
 
 ## Practice
 
-For `labs/3.1/3.1-lab`, write a log line (ids, reason, no body). Reject any line that includes `tenant-A-secret-body`, a note body, a patient chart, or a card number.
+Write a log line (ids, reason, no body). Reject any line that includes `tenant-A-secret-body`, a note body, a patient chart, or a card number.
 
 ## Use it somewhere new
 

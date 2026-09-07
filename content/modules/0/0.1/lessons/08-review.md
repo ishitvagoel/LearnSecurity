@@ -39,10 +39,6 @@ Also reject: fetching example.com; keys in lessons; claiming the first check-in;
 - The computer answering is permission
 - A cloud Juice Shop you found is in-scope because the project is “official training”
 
-## Practice
-
-Write the review that would block this change. Name `test_public_host_is_out_of_scope`.
-
 ## Use it somewhere new
 
 A contractor change that “added the guide and a proxy” without a host allow-list is a skipped-check review. Name the independent falsehood that would still keep `example.com` false.

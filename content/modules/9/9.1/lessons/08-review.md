@@ -42,10 +42,6 @@ Also reject: live portals; closing findings without re-running `test_status_only
 - A later draft of a practice guide is final
 - Old mobile-level stickers are current levels
 
-## Practice
-
-Write the review that would block this change. Name `test_status_only_row_is_not_coverage`.
-
 ## Use it somewhere new
 
 Clinic change that “marked HIPAA isolation done” without an isolation assert is an incomplete review of the proof. Name the independent falsehood that would still keep status-only uncovered.

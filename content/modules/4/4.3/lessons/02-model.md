@@ -54,7 +54,7 @@ How you sign the token is a later lesson. Which channel carries it is this page.
 
 ## Practice
 
-Look in `labs/4.3/4.3-lab`, starting with `token.py`.
+Open `token.py` in `labs/4.3/4.3-lab`.
 
 ## Use it somewhere new
 

@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny Python `crash_report` that returns a dict. The failure is already in the function: it copies the note body into the report. That JSON is a **failed rule**, not a debug nit.
 
-Here is the rule:
-
 > A confidential note body must not appear in this crash report. If `crash_report("secret")` includes `secret`, telemetry has failed as a security control.
 
 ## Where you may practice
@@ -30,7 +28,7 @@ flowchart TD
   Report --> Vendor[would leave the device]
 ```
 
-The broken files take that path on purpose. You do not need an emulator. You must not call a crash vendor. The substring in the returned dict *is* the leak.
+You do not need an emulator. You must not call a crash vendor. The substring in the returned dict *is* the leak.
 
 The log lesson (3.1) already refused bodies in logs. This check is **the mobile telemetry place**. The store form discloses. It does not redact.
 
@@ -41,7 +39,7 @@ Read `vulnerable/crash.py`. It returns a dict with `'note': note_body`. Tests:
 - `test_crash_report_omits_note_body`
 - `test_honest_crash_still_includes_stack` — a stack identifier may remain
 
-You do not need a new field name. When `test_crash_report_omits_note_body` fails, that is the evidence.
+You do not need a new field name.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -71,7 +69,7 @@ A crash SDK will ship whatever you attach. Private storage on the phone (8.2) do
 python3 -m pytest labs/8.5/8.5-lab/tests --impl vulnerable
 ```
 
-Run from `labs/8.5/8.5-lab` if a collection at the repo root picks up `site/`. Record `test_crash_report_omits_note_body`. Do not probe public hosts. A setup error is not proof the rule holds.
+Run from `labs/8.5/8.5-lab` if a collection at the repo root picks up `site/`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

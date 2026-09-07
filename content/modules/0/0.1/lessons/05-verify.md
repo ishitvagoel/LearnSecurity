@@ -45,7 +45,7 @@ Honest localhost tests may pass on both. If the broken files do not fail the pub
 
 ## Practice
 
-Run both versions this session. Write fail or pass next to your matrix row. Reject a “test” that only greps `ALLOWED_HOSTS` in a string without calling `target_is_authorized` on the public literal.
+Run both versions this session. Reject a “test” that only greps `ALLOWED_HOSTS` in a string without calling `target_is_authorized` on the public literal.
 
 ## Use it somewhere new
 

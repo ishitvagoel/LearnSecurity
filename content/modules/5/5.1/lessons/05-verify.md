@@ -28,7 +28,7 @@ If both pass, the test is not looking at `body_retained` after delete. If both f
 | Failure | Honest-path tests may pass on both; that does not excuse the leftover-copy tests |
 | Not claimed | Backups (later); a phone's offline cache (later); scheduled warehouse jobs |
 
-The file is `labs/5.1/5.1-lab/tests/test_property.py`. The test `test_deleted_account_leaves_no_analytics_body` calls `delete_account` then `body_retained`. That check is there so a leftover warehouse body cannot sneak through.
+The test `test_deleted_account_leaves_no_analytics_body` calls `delete_account` then `body_retained`. That check is there so a leftover warehouse body cannot sneak through.
 
 A test that only asserts HTTP 200 is not this topic's evidence. A test that only greps `DELETE FROM notes` without calling `body_retained` is not this topic's evidence. This practice never opens a live warehouse.
 
@@ -53,7 +53,7 @@ python3 -m pytest labs/5.1/5.1-lab/tests --impl vulnerable
 python3 -m pytest labs/5.1/5.1-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail or pass next to the matrix row. Reject a “test” that only greps `DELETE FROM notes` without calling `body_retained`.
+Paste nothing from answer keys. Reject a “test” that only greps `DELETE FROM notes` without calling `body_retained`.
 
 ## Use it somewhere new
 

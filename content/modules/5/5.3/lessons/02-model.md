@@ -54,7 +54,7 @@ flowchart LR
 
 ## Practice
 
-Look in `labs/5.3/5.3-lab`, starting with `secrets.py`.
+Open `secrets.py` in `labs/5.3/5.3-lab`.
 
 ## Use it somewhere new
 

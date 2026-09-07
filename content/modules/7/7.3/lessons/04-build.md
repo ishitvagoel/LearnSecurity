@@ -29,7 +29,7 @@ Use that standard-library check. This week's check covers empty sig. **Do not PO
 
 ## What the repaired files must show
 
-Read `fixed/hook.py` against this checklist. Do not treat the snippet as a production Stripe integration.
+Check `fixed/hook.py` against the list above. Do not treat the snippet as a production Stripe integration.
 
 | After the fix | Must be true |
 |---|---|

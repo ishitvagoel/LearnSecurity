@@ -13,7 +13,7 @@ On the notes app, `crash_report("secret")` must not contain `secret`. For a clin
 
 ## Picture: same place, clinical object
 
-Renaming “note body” to “patient name” is not transfer. Field, place, and leftover change. Enabling a crash product and filling the store form does not omit the field.
+Calling it “patient name” instead of “note body” does not move the work. Field, place, and leftover change. Enabling a crash product and filling the store form does not omit the field.
 
 | Notes app this week | Clinic sketch |
 |---|---|

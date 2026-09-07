@@ -37,8 +37,6 @@ What this practice is supposed to show: leftover-cache signals fire without the 
 
 ## Practice
 
-For `labs/8.2/8.2-lab`, write a log line you would accept.
-
 ```text
 log_denied reason=plaintext_cache_forbidden store=offline_notes request_id=req_82e
 ```

@@ -7,8 +7,6 @@
 
 The practice is not a phone you attack. It is a tiny Python `allow_export(client_claims, server_attest)`. The failure is already in the function: it returns true when the client says `integrity=ok`, so a failing server attest still exports. **Client `integrity=ok` authorizes export** is a failed rule, not a trophy against a device farm.
 
-Here is the rule:
-
 > `allow_export({"integrity": "ok"}, "fail")` must be false. A client integrity claim is not authorization.
 
 ## Where you may practice
@@ -40,8 +38,7 @@ The phone sandbox raises the cost of *other apps* reading this process; it does 
 - `test_server_attest_may_allow_export`
 - `test_missing_client_claim_does_not_authorize` — empty claims plus fail must deny
 
-You do not need a new boolean name. When `test_client_integrity_claim_is_not_authorization` fails, that is the evidence.
-
+You do not need a new boolean name.
 ## Why it happens vs what it costs
 
 | Slice | This practice |
@@ -66,7 +63,7 @@ Android sandbox defaults are not 1.2. Jetpack libraries do not authorize export.
 python3 -m pytest labs/8.1/8.1-lab/tests --impl vulnerable
 ```
 
-Run from `labs/8.1/8.1-lab` if a repo-root collection picks up `site/`. Record `test_client_integrity_claim_is_not_authorization`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. A setup error is not proof the rule holds.
+Run from `labs/8.1/8.1-lab` if a repo-root collection picks up `site/`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

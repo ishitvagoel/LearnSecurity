@@ -28,7 +28,7 @@ If both pass, the test is not looking at concatenated SQL. If both fail, the fix
 | Failure | If you cannot bind, do not query |
 | Not claimed | ORDER BY identifiers; live row-level rules; NoSQL operators |
 
-The file is `labs/5.5/5.5-lab/tests/test_property.py`. The test `test_query_is_bound_not_concatenated` is there so a concatenated `str` cannot sneak through. The hostile `note_id` in that test is **data** for the params tuple — a class of extra grammar, not a cookbook to paste into a live query.
+The test `test_query_is_bound_not_concatenated` is there so a concatenated `str` cannot sneak through. The hostile `note_id` in that test is **data** for the params tuple — a class of extra grammar, not a cookbook to paste into a live query.
 
 A test that only asserts HTTP 200 is not this topic's evidence. A test that only greps `%s` inside a concatenated string without asserting the tuple shape is not this topic's evidence. This practice never opens a live database.
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/5.5/5.5-lab/tests --impl vulnerable
 python3 -m pytest labs/5.5/5.5-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail or pass next to the matrix row. Reject a “test” that only greps `%s` inside a concatenated string without asserting the tuple shape.
+Paste nothing from answer keys. Reject a “test” that only greps `%s` inside a concatenated string without asserting the tuple shape.
 
 ## Use it somewhere new
 

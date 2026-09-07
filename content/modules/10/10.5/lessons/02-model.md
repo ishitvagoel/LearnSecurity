@@ -62,7 +62,7 @@ A missing recovery field is how a green tile becomes “Done.” Write the hole.
 
 ## Practice
 
-Look in `labs/10.5/10.5-lab`, starting with `ir.py`.
+Open `ir.py` in `labs/10.5/10.5-lab`.
 
 ## Use it somewhere new
 

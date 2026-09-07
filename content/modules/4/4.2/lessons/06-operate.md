@@ -41,8 +41,6 @@ An identity-provider dashboard will show “2FA enrolled” and stay silent when
 
 ## Practice
 
-For `labs/4.2/4.2-lab`, write a log line you would accept.
-
 ```text
 log_denied reason=not_phishing_resistant method=password origin_class=mismatch request_id=req_42pr
 ```

@@ -42,10 +42,6 @@ Also reject: public GraphQL attacks; closing findings without re-running `test_m
 - A UUID is a capability
 - A famous-bugs nickname is the rule
 
-## Practice
-
-Write the review that would block this change. Name `test_member_cannot_resolve_internal_field`.
-
 ## Use it somewhere new
 
 A clinic change that “hid SSN in the table” without a member×field deny test is an incomplete mediation review. Name the independent falsehood that would still keep member × SSN false.

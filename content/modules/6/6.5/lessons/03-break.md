@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny Python `allowed`. It does not open a network. The failure is already in the function: it treats any `http` or `https` scheme as fine. A link-local metadata URL counting as an allowed peer is a **failed rule**, not a trophy fetch of cloud identity.
 
-Here is the rule:
-
 > A link-local metadata URL is not an allowed peer. `allowed` must be false for that named string. This practice checks the predicate only. It does not fetch.
 
 ## Where you may practice
@@ -41,7 +39,7 @@ Read `vulnerable/ssrf.py`. It returns true for any `http`/`https` scheme. Tests:
 - `test_loopback_is_denied`
 - `test_lab_host_https_ok` — honest named host; may pass on the broken files because any https is true
 
-You do not need a new URL. When `test_link_local_metadata_is_denied` fails, that is the evidence.
+You do not need a new URL.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -73,7 +71,7 @@ You do not need a new URL. When `test_link_local_metadata_is_denied` fails, that
 python3 -m pytest labs/6.5/6.5-lab/tests --impl vulnerable
 ```
 
-Record `test_link_local_metadata_is_denied`. Do not fetch. A setup error is not proof the rule holds.
+Do not fetch. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

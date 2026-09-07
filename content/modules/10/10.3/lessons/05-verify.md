@@ -28,7 +28,7 @@ If both pass, the test is not looking at cluster-admin. If both fail, the fix is
 | Abuse | Unknown roles still deny (fail closed) |
 | Not claimed | A live managed cluster; a CIS score; an assurance gate; that `"app"` is least privilege |
 
-The file is `labs/10.3/10.3-lab/tests/test_property.py`. The test `test_cluster_admin_pod_is_denied` is there so always-true `pod_ok` cannot sneak through.
+The test `test_cluster_admin_pod_is_denied` is there so always-true `pod_ok` cannot sneak through.
 
 Honest `"app"` may pass on both implementations. That does not excuse the cluster-admin deny test. If the broken files do not fail `test_cluster_admin_pod_is_denied`, the lab is miswired — fix the wiring, not the assertion.
 
@@ -55,7 +55,7 @@ python3 -m pytest labs/10.3/10.3-lab/tests --impl vulnerable
 python3 -m pytest labs/10.3/10.3-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail or pass next to the cluster-admin row. Reject a "test" that only greps `namespace:` in a chart without calling `pod_ok("cluster-admin")`.
+Paste nothing from answer keys. Reject a "test" that only greps `namespace:` in a chart without calling `pod_ok("cluster-admin")`.
 
 ## Use it somewhere new
 

@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny Python `log_event` that returns a string. The failure is already in the function: it pastes the note body into the line. That line is a **failed rule**, not a debug nit.
 
-Here is the rule:
-
 > A confidential note body must not appear in this log line. If `log_event("note_read", "tenant-A-secret-body")` includes `tenant-A-secret-body`, logging has failed as a security control.
 
 ## Where you may practice
@@ -30,13 +28,13 @@ flowchart TD
   Line --> Operator[Lower-trust reader]
 ```
 
-The broken files take that path on purpose. You do not need a production drain. The substring in the returned line *is* the leak.
+You do not need a production drain. The substring in the returned line *is* the leak.
 
 ## What to look at — cause, not a dump
 
 Read `vulnerable/classify.py`. `log_event` returns `f"{event}: {note_body}"`. The test asserts the body substring is absent **and** a redaction marker (`redacted` or `confidential`) is present.
 
-You do not need a new body string. When `test_note_body_is_not_logged` fails, that is the evidence.
+You do not need a new body string.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|

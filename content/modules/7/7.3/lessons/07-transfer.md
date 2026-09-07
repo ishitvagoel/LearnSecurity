@@ -13,7 +13,7 @@ Also name signed redirects and outbound webhook SSRF (6.5) as the same authentic
 
 ## Picture: the vendor’s IP range is still not a MAC
 
-Renaming “billing webhook” to “lab-result webhook” is not transfer.
+Calling it “lab-result webhook” instead of “billing webhook” does not move the work.
 
 | Notes app this week | Clinic sketch |
 |---|---|

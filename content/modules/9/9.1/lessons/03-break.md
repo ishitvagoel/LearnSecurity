@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny Python `covered(req_id, tests)` that returns true or false. The failure is already in the function: any matching requirement id counts as coverage. That is a **failed rule**, not a missing spreadsheet cell.
 
-Here is the rule:
-
 > A status-only AUTHZ-1 row must not count as coverage. If `covered("AUTHZ-1", [{"req": "AUTHZ-1", "asserts_isolation": False}])` is true, the proof you show before a release has failed as a security control.
 
 ## Where you may practice
@@ -28,7 +26,7 @@ flowchart TD
   Row["req equals AUTHZ-1"] --> True[covered true]
 ```
 
-The broken files take that path on purpose. You do not need CI. You must not call a live checklist portal. The true return *is* the leak of honesty.
+You do not need CI. You must not call a live checklist portal. The true return *is* the leak of honesty.
 
 The isolation lessons (1.2 / 4.4) already refused company B reading company A. This check is **whether the proof names a test that asserts that**. A pasted PDF is inventory. It does not assert isolation.
 
@@ -39,7 +37,7 @@ Read `vulnerable/trace.py`. It returns true if any test dict has `req == req_id`
 - `test_status_only_row_is_not_coverage`
 - `test_isolation_assert_may_count_as_coverage` — an honest isolation flag may pass on both
 
-You do not need a new requirement id. When `test_status_only_row_is_not_coverage` fails, that is the evidence.
+You do not need a new requirement id.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -69,7 +67,7 @@ A green CI job is not AUTHZ-1. Copied-wholesale checklists are inventory, not a 
 python3 -m pytest labs/9.1/9.1-lab/tests --impl vulnerable
 ```
 
-Run from `labs/9.1/9.1-lab` if a collection at the repo root picks up `site/`. Record `test_status_only_row_is_not_coverage`. Do not probe public hosts. A setup error is not proof the rule holds.
+Run from `labs/9.1/9.1-lab` if a collection at the repo root picks up `site/`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

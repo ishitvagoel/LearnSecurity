@@ -49,7 +49,7 @@ A web filter will page on syntax errors and stay silent when the values were con
 
 ## Practice
 
-For `labs/5.5/5.5-lab`, write a log line (ids, reason, statement name, no body). Reject any line that includes a note body, a full SQL string with values, or a real email.
+Write a log line (ids, reason, statement name, no body). Reject any line that includes a note body, a full SQL string with values, or a real email.
 
 ## Use it somewhere new
 

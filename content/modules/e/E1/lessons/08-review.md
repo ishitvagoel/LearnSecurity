@@ -42,10 +42,6 @@ Also reject: live model attacks; shipping without re-running `test_exec_sql_tool
 - A system prompt is complete mediation
 - A famous-bugs mapping is `run_tool`
 
-## Practice
-
-Write the review that would block this change. Name `test_exec_sql_tool_is_denied`.
-
 ## Use it somewhere new
 
 Clinic change that "added a system prompt and a famous-bugs mapping" without an allow-list is an incomplete tool-gate review. Name the independent falsehood that would still keep `exec_sql` from running.

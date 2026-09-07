@@ -42,10 +42,6 @@ Also reject: live targets; closing findings without re-running `test_http_200_on
 - A draft testing guide is the current pin
 - A later gate follows from a green suite
 
-## Practice
-
-Write the review that would block this change. Name `test_http_200_only_is_not_a_security_test`.
-
 ## Use it somewhere new
 
 Clinic change that “added test_get_patient_200 as the security test” is an incomplete review of whether 200-only still counts as security. Name the independent falsehood that would still keep 200-only from counting as security.

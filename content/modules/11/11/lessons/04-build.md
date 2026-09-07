@@ -28,7 +28,7 @@ Permission has to be enforced. This week's check covers post-revoke read.
 
 ## What the repaired files must show
 
-Read `fixed/capstone.py` against this checklist. Do not treat the snippet as a production share product.
+Check `fixed/capstone.py` against the list above. Do not treat the snippet as a production share product.
 
 | After the fix | Must be true |
 |---|---|

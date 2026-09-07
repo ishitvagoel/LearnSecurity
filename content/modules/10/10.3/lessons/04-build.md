@@ -26,7 +26,7 @@ Those accounts should be least-privileged. This week's check covers cluster-admi
 
 ## What the repaired files must show
 
-Read `fixed/iam.py` against this checklist. Do not treat the snippet as a production cluster product.
+Check `fixed/iam.py` against the list above. Do not treat the snippet as a production cluster product.
 
 | After the fix | Must be true |
 |---|---|

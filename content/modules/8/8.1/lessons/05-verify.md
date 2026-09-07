@@ -48,7 +48,7 @@ Honest server-pass may pass on both implementations. That does not excuse the fa
 
 ## Practice
 
-Run both implementations this session from the lab directory if needed. Write fail or pass next to the notes for this topic. Reject a “check” that only greps `PlayIntegrity` in Gradle without calling `allow_export({"integrity": "ok"}, "fail")`. A setup error is not proof the rule holds.
+Run both implementations this session from the lab directory if needed. Reject a “check” that only greps `PlayIntegrity` in Gradle without calling `allow_export({"integrity": "ok"}, "fail")`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

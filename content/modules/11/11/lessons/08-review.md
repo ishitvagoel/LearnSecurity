@@ -42,10 +42,6 @@ Also reject: live tenant attacks; merging without re-running `test_revoked_share
 - HTTP 200 on DELETE is the next-read check
 - Access-rights change in the same session is this check (it is leftover, advanced work)
 
-## Practice
-
-Write the review that would block this change. Name `test_revoked_share_cannot_read`.
-
 ## Use it somewhere new
 
 Clinic change that “added DELETE /guardians and a scanner badge” without a post-revoke read deny is an incomplete next-read review. Name the independent falsehood that would still keep B from reading after revoke.

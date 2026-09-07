@@ -55,7 +55,7 @@ flowchart LR
 
 ## Practice
 
-Draw the inventory. Look in `labs/8.2/8.2-lab`, starting with `disk.py`. Label the store even in the repaired tree — the fix is the ciphertext stand-in, not pretending a private folder became encryption.
+Open `disk.py` in `labs/8.2/8.2-lab`. Label the store even in the repaired tree — the fix is the ciphertext stand-in, not pretending a private folder became encryption.
 
 ## Use it somewhere new
 

@@ -53,7 +53,7 @@ flowchart LR
 
 ## Practice
 
-Look in `labs/E5/e5-lab`, starting with `rls.py`.
+Open `rls.py` in `labs/E5/e5-lab`.
 
 ## Use it somewhere new
 

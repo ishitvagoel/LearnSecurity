@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny in-process `resolve`. It does not open a live upload folder, an employer imaging store, or a classmate preview. The failure is already in the object: the name is joined onto the folder and returned as a string, with no canonicalize-and-prefix. That is a **failed rule**, not a clumsy filename.
 
-Here is the rule:
-
 > After join and canonicalize, `resolve` must still be `/tmp/sc-lab` or a child. A filename is data, not a filesystem object.
 
 ## Where you may practice
@@ -40,8 +38,7 @@ Read `vulnerable/path.py`. It joins the name onto `/tmp/sc-lab` and returns the 
 - `test_dotdot_does_not_escape_root` — `ValueError` **or** resolved path still under the folder
 - `test_honest_relative_stays_under_root`
 
-You do not need a new name. When `test_dotdot_does_not_escape_root` fails, that is the evidence.
-
+You do not need a new name.
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |

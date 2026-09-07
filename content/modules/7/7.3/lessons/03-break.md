@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny Python `accept`. It does not open a network. The failure is already in the function: it returns true for every triple. An unsigned body counting as authentic is a **failed rule**, not a trophy POST to a live provider.
 
-Here is the rule:
-
 > An unsigned webhook body is not authentic. `accept("", "body", "lab-secret")` must be false. This practice checks the predicate only. It does not POST a live webhook.
 
 ## Where you may practice
@@ -40,7 +38,7 @@ Read `vulnerable/hook.py`. It returns true for every triple. Tests:
 - `test_wrong_signature_is_rejected`
 - `test_matching_signature_is_accepted` — honest path; may pass on both
 
-You do not need a new secret. When `test_missing_signature_is_rejected` fails, that is the evidence.
+You do not need a new secret.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -72,7 +70,7 @@ FastAPI will accept a POST with an empty header. nginx TLS termination proves a 
 python3 -m pytest labs/7.3/7.3-lab/tests --impl vulnerable
 ```
 
-Run from `labs/7.3/7.3-lab` if a repo-root collection picks up `site/`. Record `test_missing_signature_is_rejected`. Do not probe public hosts. A setup error is not proof the rule holds.
+Run from `labs/7.3/7.3-lab` if a repo-root collection picks up `site/`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

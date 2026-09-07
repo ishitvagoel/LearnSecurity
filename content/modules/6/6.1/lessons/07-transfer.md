@@ -13,7 +13,7 @@ Also name Jinja, SQL (5.5), and mail headers as the same shape, without running 
 
 ## Picture: the filename is still an interpreter input
 
-Renaming “export name” to “CSV filename” is not transfer.
+Calling it “CSV filename” instead of “export name” does not move the work.
 
 | Notes app this week | Clinic sketch |
 |---|---|

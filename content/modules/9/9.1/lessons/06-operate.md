@@ -44,15 +44,13 @@ If your alert includes the matching note, you have copied the leak into the pagi
 
 ## What the framework does vs what you still have to check
 
-The same HTTP-200 tests, unnamed extra rows, and expired exceptions that bypass this practice will also bypass a “scan our Done column” detector. Name those places before you claim recover.
+The same HTTP-200 tests, unnamed extra rows, and expired exceptions that bypass this practice will also bypass a “scan our Done column” detector.
 
 ## Can people still use it
 
 A human exception path must say what is still uncovered and when it expires. Do not hide the gap behind “see PDF.” If operators see an unmapped-requirement badge, do not encode it as color only.
 
 ## Practice
-
-For `labs/9.1/9.1-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=unmapped_req_blocks_release req=AUTHZ-1 release=rel_91e

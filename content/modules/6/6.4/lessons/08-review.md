@@ -42,10 +42,6 @@ Also reject: host-file trophies; treating the client as what you trust; an aware
 - An awareness-list name is the rule
 - Starlette `UploadFile` already canonicalizes
 
-## Practice
-
-Write the review that would block this change. Name `test_dotdot_does_not_escape_root`.
-
 ## Use it somewhere new
 
 Clinic change that “randomized filenames” without a prefix test is an incomplete review. Name the independent falsehood that would still keep `../outside` from leaving the imaging root.

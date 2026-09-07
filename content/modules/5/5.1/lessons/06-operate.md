@@ -53,7 +53,7 @@ If a human sees “account deleted,” announce it in text a screen reader can s
 
 ## Practice
 
-For `labs/5.1/5.1-lab`, write a log line (ids, reason, store name, no body). Reject any line that includes a note body, a personal email, or a “privacy law handled” slogan.
+Write a log line (ids, reason, store name, no body). Reject any line that includes a note body, a personal email, or a “privacy law handled” slogan.
 
 ## Use it somewhere new
 

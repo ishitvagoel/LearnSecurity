@@ -45,7 +45,7 @@ Map each test to the retry row you wrote on the state-machine page. Do not paste
 
 ## Practice
 
-Write fail or pass next to the matrix row. Reject a “test” that only greps `idempotency` in a string without calling `share_note` twice.
+Reject a “test” that only greps `idempotency` in a string without calling `share_note` twice.
 
 ## Use it somewhere new
 

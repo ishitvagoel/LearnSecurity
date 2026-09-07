@@ -65,7 +65,7 @@ A missing “deleted alice × analytics body × deny” row is how the warehouse
 
 ## Practice
 
-Look in `labs/5.1/5.1-lab`, starting with `lifecycle.py`. Your artifact is a versioned list (even a table in your notes) with copy, allow or deny, and what would show the deny is false. Fake data only.
+Open `lifecycle.py` in `labs/5.1/5.1-lab`. Your artifact is a versioned list (even a table in your notes) with copy, allow or deny, and what would show the deny is false. Fake data only.
 
 ## Use it somewhere new
 

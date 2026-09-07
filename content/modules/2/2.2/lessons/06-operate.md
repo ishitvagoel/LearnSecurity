@@ -55,7 +55,7 @@ Not: `tenant-A-note`, or a raw body.
 
 ## Practice
 
-For `labs/2.2/2.2-request-path`, write a log line (ids, reason, no body). Reject any line that includes `tenant-A-note` or a raw body.
+Write a log line (ids, reason, no body). Reject any line that includes `tenant-A-note` or a raw body.
 
 ## Use it somewhere new
 

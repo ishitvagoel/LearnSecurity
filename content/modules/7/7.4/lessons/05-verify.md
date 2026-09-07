@@ -28,7 +28,7 @@ If both pass, the test is not looking at leftover Alice. If both fail, the fix i
 | Mixed | alice + wrong service → `None` |
 | Not claimed | later originating-subject check (advanced); poison loops; live task library |
 
-The file is `labs/7.4/7.4-lab/tests/test_property.py`. The test `test_user_session_is_not_worker_identity` is there so a leftover cookie that becomes the principal cannot sneak through.
+The test `test_user_session_is_not_worker_identity` is there so a leftover cookie that becomes the principal cannot sneak through.
 
 A test that only asserts the job was enqueued is not this topic’s evidence. A test that only greps `worker-sc` in a YAML file without calling `exporter({"user_session": "alice", "service": None})` is not this topic’s evidence. This practice never opens a public broker.
 
@@ -55,7 +55,7 @@ python3 -m pytest labs/7.4/7.4-lab/tests --impl vulnerable
 python3 -m pytest labs/7.4/7.4-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail or pass next to the matrix row. Reject a “test” that only greps `worker-sc` in a YAML file without calling `exporter({"user_session": "alice", "service": None})`.
+Paste nothing from answer keys. Reject a “test” that only greps `worker-sc` in a YAML file without calling `exporter({"user_session": "alice", "service": None})`.
 
 ## Use it somewhere new
 

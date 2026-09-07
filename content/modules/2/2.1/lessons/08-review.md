@@ -38,10 +38,6 @@ Also reject: trusting the client; concatenating readers; Report-Only as enforcem
 - One reader is as good as another
 - Validation equals canonicalization
 
-## Practice
-
-Write the review that would block this change. Name `test_duplicate_tenant_keys_are_one_meaning`.
-
 ## Use it somewhere new
 
 GraphQL and REST both ingest the same note — two grammars. A change that “validates JSON” on only one path is an incomplete review. Name the independent falsehood that would still stop a two-meaning ingest.

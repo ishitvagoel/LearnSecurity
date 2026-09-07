@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny Python `boot_ok(env, debug)` that returns true for every pair. The failure is already in the function: it never looks at `env` or `debug`. That always-true boot is a **failed rule**, not a missing compose comment.
 
-Here is the rule:
-
 > Production must not boot with debug on. If `boot_ok("prod", True)` returns true, the boot gate has failed as a security control.
 
 ## Where you may practice
@@ -28,7 +26,7 @@ flowchart TD
   Any[any env debug pair] --> True[boot_ok true]
 ```
 
-The broken files take that path on purpose. You do not need Docker. You must not boot a live host. The true return for `("prod", True)` *is* the leak.
+You do not need Docker. You must not boot a live host. The true return for `("prod", True)` *is* the leak.
 
 The secrets lesson already said keep secrets out of traces. This check is **the process must not start**.
 
@@ -39,7 +37,7 @@ Read `vulnerable/cfg.py`. It returns true for every pair. Tests:
 - `test_prod_debug_must_not_boot`
 - `test_prod_without_debug_may_boot` — `("prod", False)` may pass on both
 
-You do not need a new flag. When `test_prod_debug_must_not_boot` fails, that is the evidence.
+You do not need a new flag.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -69,7 +67,7 @@ FastAPI `debug=True` is a developer default. Next.js will print stack traces whe
 python3 -m pytest labs/10.4/10.4-lab/tests --impl vulnerable
 ```
 
-Run from `labs/10.4/10.4-lab` if a collection at the repo root picks up `site/`. Record `test_prod_debug_must_not_boot`. Do not probe public hosts. A setup error is not proof the rule holds.
+Run from `labs/10.4/10.4-lab` if a collection at the repo root picks up `site/`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

@@ -13,7 +13,7 @@ On the notes app, `close_incident({"recovery": "todo", "logs": "ok"})` must be f
 
 ## Picture: same close loop, clinical object
 
-Renaming “note” to “chart” is not transfer. Recovery evidence, log inventory, and leftover change. Filing a green tile and marking the ticket Done does not set `recovery` to `"done"`.
+Calling it “chart” instead of “note” does not move the work. Recovery evidence, log inventory, and leftover change. Filing a green tile and marking the ticket Done does not set `recovery` to `"done"`.
 
 | Notes app this week | Clinic sketch |
 |---|---|

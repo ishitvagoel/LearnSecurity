@@ -40,10 +40,6 @@ Also reject: live TLS attacks; closing findings without re-running `test_client_
 - HSTS preload is the rule
 - A CDN “HTTPS only” tile binds the socket
 
-## Practice
-
-Write the review that would block this change. Name `test_client_forwarded_proto_is_not_tls`.
-
 ## Use it somewhere new
 
 Clinic change that “enabled HTTPS” by trusting Forwarded-Proto is an incomplete review of channel binding. Name the independent falsehood that would still keep the header from counting as TLS.

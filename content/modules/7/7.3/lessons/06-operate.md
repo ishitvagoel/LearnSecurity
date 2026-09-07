@@ -50,7 +50,7 @@ An nginx dashboard will show TLS handshakes and stay silent when `/webhook` stil
 
 ## Practice
 
-For `labs/7.3/7.3-lab`, write a log line (ids, reason, no body). Reject any line that includes the raw body, `lab-secret`, a real patient result, or a live provider trace.
+Write a log line (ids, reason, no body). Reject any line that includes the raw body, `lab-secret`, a real patient result, or a live provider trace.
 
 ## Use it somewhere new
 

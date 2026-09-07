@@ -30,8 +30,7 @@ A 100% quiz cannot observe whether you can write a 1.2 deny rule. Check-in 1 evi
 - `test_high_quiz_score_is_not_authorization` — score 100 must be false
 - `test_low_score_does_not_skip` — score 0 must be false
 
-You do not need a new score. When `test_high_quiz_score_is_not_authorization` fails, that is the evidence.
-
+You do not need a new score.
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |

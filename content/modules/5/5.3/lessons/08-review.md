@@ -40,10 +40,6 @@ Also reject: real production keys in practice files; closing findings without re
 - Vault brand is the rule
 - Missing current should allow
 
-## Practice
-
-Write the review that would block this change. Name `test_hardcoded_default_does_not_auth`.
-
 ## Use it somewhere new
 
 Clinic change that “moved the key to Vault” without killing the default is an incomplete review. Name the independent falsehood that would still keep `sk-lab-hardcoded` from authenticating.

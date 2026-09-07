@@ -72,7 +72,7 @@ A maturity score and a scanner color do not belong in this list.
 
 ## Practice
 
-Look in `labs/3.1/3.1-lab`, starting with `classify.py`. Your artifact is a versioned list (even a table in your notes) with field, level, place, allow or deny, and what would show the deny is false. No real people's data.
+Open `classify.py` in `labs/3.1/3.1-lab`. Your artifact is a versioned list (even a table in your notes) with field, level, place, allow or deny, and what would show the deny is false. No real people's data.
 
 ## Use it somewhere new
 

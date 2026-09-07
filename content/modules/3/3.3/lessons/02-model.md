@@ -62,7 +62,7 @@ Rejected: one `postgres` URL for migrate and serve. Chosen: runtime `app` with a
 
 ## Practice
 
-Look in `labs/3.3/3.3-lab`, starting with `roles.py`.
+Open `roles.py` in `labs/3.3/3.3-lab`.
 
 ## Use it somewhere new
 

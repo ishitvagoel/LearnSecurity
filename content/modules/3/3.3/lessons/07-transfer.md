@@ -20,7 +20,7 @@ You get a **serverless function with a shared `admin` connection string**, or a 
 
 ## Picture: a new compute shape is still a role
 
-Renaming “app” to “function” is not transfer. A shared `admin` string and a billing replica that can read chart text are new rules. Microservices and serverless still do not add a same-company check by existing.
+Calling it “function” instead of “app” does not move the work. A shared `admin` string and a billing replica that can read chart text are new rules. Microservices and serverless still do not add a same-company check by existing.
 
 ```mermaid
 flowchart LR

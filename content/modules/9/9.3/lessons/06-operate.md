@@ -44,15 +44,13 @@ If your alert includes the matching note body, you have copied the leak into the
 
 ## What the framework does vs what you still have to check
 
-The same field-grain holes, looking-around leftovers, and fuzz-with-no-named-bad-result that bypass this practice will also bypass a “scan our coverage dashboard” detector. Name those places before you claim recover.
+The same field-grain holes, looking-around leftovers, and fuzz-with-no-named-bad-result that bypass this practice will also bypass a “scan our coverage dashboard” detector.
 
 ## Can people still use it
 
 A failing security test must say what must not happen in the assertion message, not only “assert False.” If operators see a missing-isolation badge, do not encode it as color only.
 
 ## Practice
-
-For `labs/9.3/9.3-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=security_suite_missing_isolation req=isolation suite=api

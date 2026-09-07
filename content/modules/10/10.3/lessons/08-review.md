@@ -42,10 +42,6 @@ Also reject: live cluster attacks; admitting without re-running `test_cluster_ad
 - A restricted pod profile is `pod_ok`
 - A CIS score is an assurance gate
 
-## Practice
-
-Write the review that would block this change. Name `test_cluster_admin_pod_is_denied`.
-
 ## Use it somewhere new
 
 Clinic change that "added a namespace and a CIS scan" without a ClusterRole deny is an incomplete admission review. Name the independent falsehood that would still keep cluster-admin from running.

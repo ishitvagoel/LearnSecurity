@@ -7,7 +7,7 @@
 
 This review is about notes-app who-is-allowed. Check whether `can_read("bob", "n2")` is still true.
 
-Treat the files in `labs/4.4/4.4-lab/vulnerable/` as the pull request. You already ran `test_grant_on_n1_is_not_grant_on_n2` — that is the rule. A comment “will add object checks later” is not.
+You already ran `test_grant_on_n1_is_not_grant_on_n2` — that is the rule. A comment “will add object checks later” is not.
 
 ## Picture: if user.has_any_share: return note
 
@@ -41,10 +41,6 @@ Also reject: trusting the client; closing findings without re-running `test_gran
 - Signed ids are capabilities
 - `Depends(get_user)` is who-is-allowed
 - Id length is the grant
-
-## Practice
-
-Write the review that would block this change. Name `test_grant_on_n1_is_not_grant_on_n2`.
 
 ## Use it somewhere new
 

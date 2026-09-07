@@ -27,7 +27,7 @@ There should be no double-booking. This week's check covers sequential `accept`.
 
 ## What the repaired files must show
 
-Read `fixed/invite.py` against this checklist. Do not treat the snippet as a production invite store.
+Check `fixed/invite.py` against the list above. Do not treat the snippet as a production invite store.
 
 | After the fix | Must be true |
 |---|---|

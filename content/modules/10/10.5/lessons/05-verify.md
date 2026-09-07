@@ -30,7 +30,7 @@ The second what must not happen is **`note_body` in logs** — `test_cannot_clos
 | Normal | done + ok → may close (may pass on both) |
 | Not claimed | live paging; a known-exploited list; an assurance gate; that restore actually ran |
 
-The file is `labs/10.5/10.5-lab/tests/test_property.py`. The test `test_cannot_close_without_recovery` is there so always-true `close_incident` cannot sneak through.
+The test `test_cannot_close_without_recovery` is there so always-true `close_incident` cannot sneak through.
 
 Honest recovery plus safe logs may pass on both implementations. That does not excuse the two deny tests. If the broken files do not fail `test_cannot_close_without_recovery`, the lab is miswired — fix the wiring, not the assertion.
 
@@ -57,7 +57,7 @@ python3 -m pytest labs/10.5/10.5-lab/tests --impl vulnerable
 python3 -m pytest labs/10.5/10.5-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail or pass next to the close-without-recovery row. Reject a “test” that only greps a paging product name without calling `close_incident({"recovery": "todo", "logs": "ok"})`.
+Paste nothing from answer keys. Reject a “test” that only greps a paging product name without calling `close_incident({"recovery": "todo", "logs": "ok"})`.
 
 ## Use it somewhere new
 

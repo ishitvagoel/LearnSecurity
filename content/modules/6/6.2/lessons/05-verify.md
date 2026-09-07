@@ -46,7 +46,7 @@ Honest titles may pass on both implementations. That does not excuse the encode 
 
 ## Practice
 
-Run both implementations this session. Write fail or pass next to the notes for this topic. Reject a “check” that only greps `Content-Security-Policy` without calling `render`. A setup error is not proof the rule holds.
+Run both implementations this session. Reject a “check” that only greps `Content-Security-Policy` without calling `render`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

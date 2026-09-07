@@ -42,10 +42,6 @@ Also reject: live malware APKs; closing findings without re-running `test_deepli
 - `exported=false` without a test is this rule
 - A verified-host tile is the rule
 
-## Practice
-
-Write the review that would block this change. Name `test_deeplink_as_param_does_not_switch_user`.
-
 ## Use it somewhere new
 
 A clinic change that “verified App Links” without an `as=` deny check is an incomplete review. Name the independent falsehood that would still keep alice.

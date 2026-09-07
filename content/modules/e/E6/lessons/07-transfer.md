@@ -13,7 +13,7 @@ On the notes app, `accept_exception({"owner": "", "review_by": None})` must be f
 
 ## Picture: same accept loop, clinical object
 
-Renaming “note” to “chart” is not transfer. Owner, review date, and accessibility flag still have to be on the row. Filing a HIPAA slide and marking the hole Accepted does not set `owner` or `review_by`.
+Calling it “chart” instead of “note” does not move the work. Owner, review date, and accessibility flag still have to be on the row. Filing a HIPAA slide and marking the hole Accepted does not set `owner` or `review_by`.
 
 | Notes app this week | Clinic sketch |
 |---|---|

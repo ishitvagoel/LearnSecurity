@@ -43,10 +43,6 @@ Also reject: live registry attacks; installing without re-running `test_hash_mis
 - Dependabot is `install_ok`
 - The ship gate follows from a green audit job
 
-## Practice
-
-Write the review that would block this change. Name `test_hash_mismatch_refuses_install`.
-
 ## Use it somewhere new
 
 Clinic change that “added CycloneDX and Dependabot” without a digest check is an incomplete review of the install gate. Name the independent falsehood that would still keep mismatch from installing.

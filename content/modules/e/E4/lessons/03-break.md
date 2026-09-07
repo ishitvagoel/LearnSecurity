@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny in-process `copy_into(bufsize, src, declared_len)`. It does not compile a C overflow, spray a heap, or fuzz a third-party binary. The failure is already in the object: the copy uses `declared_len` plus 8. That is a **failed rule**, not extra slack you needed.
 
-Here is the rule:
-
 > `len(copy_into(4, b"abcdefgh", 4))` must be ≤ 4. A short honest copy may fit. Checking every path here means the copy is bounded by destination size.
 
 ## Where you may practice
@@ -44,8 +42,7 @@ Read `vulnerable/copy.py`. It returns more than `bufsize` bytes. Checks:
 - `test_copy_does_not_exceed_buffer`
 - `test_short_copy_may_fit` — short honest copy may pass on both
 
-You do not need a new source. When `test_copy_does_not_exceed_buffer` fails, that is the evidence.
-
+You do not need a new source.
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |
@@ -70,7 +67,7 @@ Python slicing will not save a C copy. A memory-safe language reduces this overw
 python3 -m pytest labs/E4/e4-lab/tests --impl vulnerable
 ```
 
-Run from `labs/E4/e4-lab` if a repo-root collection picks up `site/`. Record `test_copy_does_not_exceed_buffer`. Do not compile native walkthroughs. A setup error is not proof the rule holds.
+Run from `labs/E4/e4-lab` if a repo-root collection picks up `site/`. Do not compile native walkthroughs. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

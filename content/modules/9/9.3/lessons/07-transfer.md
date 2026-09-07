@@ -13,7 +13,7 @@ On the notes app, `is_security_test({"status_asserted": True})` must be false. F
 
 ## Picture: same 200, clinical object
 
-Renaming “note” to “patient” is not transfer. Object, bad case, and leftover change. Enabling a coverage product and ticking the guide does not name what must not happen.
+Calling it “patient” instead of “note” does not move the work. Object, bad case, and leftover change. Enabling a coverage product and ticking the guide does not name what must not happen.
 
 | Notes app this week | Clinic sketch |
 |---|---|

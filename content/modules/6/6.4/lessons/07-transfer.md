@@ -20,7 +20,7 @@ You get a **clinic scan upload** whose original filename is kept. On the notes a
 
 ## Picture: the scan filename is still a path parser input
 
-Renaming “notes upload” to “scan upload” is not transfer. FastAPI, a UUID rename, and an antivirus scanner still do not bind the object.
+Calling it “scan upload” instead of “notes upload” does not move the work. FastAPI, a UUID rename, and an antivirus scanner still do not bind the object.
 
 ```mermaid
 flowchart LR

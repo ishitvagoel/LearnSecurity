@@ -62,7 +62,7 @@ A private namespace with `pod_ok` always true is how "we isolated it" becomes cl
 
 ## Practice
 
-Draw the map. Look in `labs/10.3/10.3-lab`, starting with `iam.py`.
+Open `iam.py` in `labs/10.3/10.3-lab`.
 
 ## Use it somewhere new
 

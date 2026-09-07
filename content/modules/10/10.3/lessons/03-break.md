@@ -7,8 +7,6 @@
 
 The practice is not a cluster you attack. It is a tiny Python `pod_ok` that returns true for every role. The failure is already in the function: it never looks at the role. That always-true admission is a **failed rule**, not a paperwork nit.
 
-Here is the rule:
-
 > An app pod must not run as cluster-admin. If `pod_ok("cluster-admin")` returns true, admission has failed as a security control.
 
 ## Where you may practice
@@ -28,7 +26,7 @@ flowchart TD
   Any[any role] --> True[pod_ok true]
 ```
 
-The broken files take that path on purpose. You do not need a kube-apiserver. You must not bind a live cluster. The true return for `"cluster-admin"` *is* the leak.
+You do not need a kube-apiserver. You must not bind a live cluster. The true return for `"cluster-admin"` *is* the leak.
 
 The database god-role lesson already said one shared admin is a blast-radius rule. This check is **the same idea at cluster grain**.
 
@@ -39,7 +37,7 @@ Read `vulnerable/iam.py`. It returns true for every role. Tests:
 - `test_cluster_admin_pod_is_denied`
 - `test_namespaced_app_role_may_run` — `"app"` may pass on both
 
-You do not need a new role string. When `test_cluster_admin_pod_is_denied` fails, that is the evidence.
+You do not need a new role string.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -69,7 +67,7 @@ A managed cluster will still accept a ClusterRoleBinding. A restricted pod profi
 python3 -m pytest labs/10.3/10.3-lab/tests --impl vulnerable
 ```
 
-Run from `labs/10.3/10.3-lab` if a collection at the repo root picks up `site/`. Record `test_cluster_admin_pod_is_denied`. Do not probe public hosts. A setup error is not proof the rule holds.
+Run from `labs/10.3/10.3-lab` if a collection at the repo root picks up `site/`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

@@ -34,8 +34,6 @@ A vault dashboard will show “rotation enabled” and stay silent when `DEFAULT
 
 ## Practice
 
-For `labs/5.3/5.3-lab`, write a log line you would accept.
-
 ```text
 log_denied reason=default_secret_used secret_id=lab_default request_id=req_53sk
 ```

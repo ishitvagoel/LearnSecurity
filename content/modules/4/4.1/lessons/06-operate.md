@@ -53,7 +53,7 @@ If operators see a “signed out” badge, do not encode it as color only. Give 
 
 ## Practice
 
-For `labs/4.1/4.1-lab`, write a log line (ids, reason, no body). Reject any line that includes a note body, a personal email, a production cookie, or “single sign-on revoked it.”
+Write a log line (ids, reason, no body). Reject any line that includes a note body, a personal email, a production cookie, or “single sign-on revoked it.”
 
 ## Use it somewhere new
 

@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny in-process `auth`. Disposable `sk-lab-hardcoded` and `rotated-now`. It does not open a vault or a cloud identity API. An old hardcoded default still counting as a valid key after rotation is a **failed rule**, not a trophy hunt for a live key.
 
-Here is the rule:
-
 > A rotated secret must kill the hardcoded default. `auth("sk-lab-hardcoded", current="rotated-now")` must be false.
 
 ## Where you may practice
@@ -41,8 +39,7 @@ Read `vulnerable/secrets.py`. `auth` keeps `DEFAULT = "sk-lab-hardcoded"` as an 
 - `test_missing_current_denies`
 - `test_current_secret_authenticates` — honest path on both trees if current matches
 
-You do not need a new key string. When `test_hardcoded_default_does_not_auth` fails, that is the evidence.
-
+You do not need a new key string.
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |
@@ -67,7 +64,7 @@ A settings library will still load a default if you leave one in code. FastAPI `
 python3 -m pytest labs/5.3/5.3-lab/tests --impl vulnerable
 ```
 
-Record `test_hardcoded_default_does_not_auth`. Do not search public GitHub. A setup error is not proof the rule holds.
+Do not search public GitHub. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

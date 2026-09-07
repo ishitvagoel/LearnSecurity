@@ -40,10 +40,6 @@ Also reject: trusting the client; closing findings without re-running `test_pass
 - A passkey vendor name is the rule
 - Training users to read the URL is what you trust
 
-## Practice
-
-Write the review that would block this change. Name `test_password_is_not_phishing_resistant`.
-
 ## Use it somewhere new
 
 Clinic SSO change that “adds MFA” without an origin-fail check is an incomplete review. Name the independent falsehood that would still keep password-at-lookalike false.

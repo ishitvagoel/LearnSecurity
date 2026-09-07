@@ -13,7 +13,7 @@ On the notes app, `covered("AUTHZ-1", [status-only])` must be false. For a clini
 
 ## Picture: same check, clinical checklist
 
-Renaming “note” to “chart” is not transfer. Threat, requirement, test, and leftover change. Marking HIPAA isolation done does not assert isolation.
+Calling it “chart” instead of “note” does not move the work. Threat, requirement, test, and leftover change. Marking HIPAA isolation done does not assert isolation.
 
 | Notes app this week | Clinic sketch |
 |---|---|

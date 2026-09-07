@@ -44,15 +44,13 @@ If your alert includes the matching report, you have copied the leak into the pa
 
 ## What the framework does vs what you still have to check
 
-The same leftover `READ_LOGS` path, tracker SDK extras, and web crash drains that bypass this practice will also bypass a “scan our crash dashboard” detector. Name those places before you claim recover.
+The same leftover `READ_LOGS` path, tracker SDK extras, and web crash drains that bypass this practice will also bypass a “scan our crash dashboard” detector.
 
 ## Can people still use it
 
 In-app “send feedback” must not require attaching a screenshot of the note to continue. Offer a text field. Redact that field before send. If operators see a redaction-miss badge, do not encode it as color only.
 
 ## Practice
-
-For `labs/8.5/8.5-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=crash_body_redacted crash_id=cr_85e app=release

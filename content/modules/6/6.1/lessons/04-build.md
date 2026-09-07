@@ -27,7 +27,7 @@ Pass arguments as parameters. This week's check covers `argv_for_list`.
 
 ## What the repaired files must show
 
-Read `fixed/argv.py` against this checklist. Do not treat the snippet as a production process launcher.
+Check `fixed/argv.py` against the list above. Do not treat the snippet as a production process launcher.
 
 | After the fix | Must be true |
 |---|---|

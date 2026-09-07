@@ -15,7 +15,7 @@ Also name Terraform `local-exec` and GitHub Actions yaml as the same interpreter
 
 ## Picture: same interpreter, clinical object
 
-Renaming “export helper” to “report template” is not transfer.
+Calling it “report template” instead of “export helper” does not move the work.
 
 | Notes app this week | Clinic sketch |
 |---|---|

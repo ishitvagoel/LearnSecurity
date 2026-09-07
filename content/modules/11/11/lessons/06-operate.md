@@ -44,7 +44,7 @@ If your alert includes the matching note, you have copied the leak into the tick
 
 ## What the framework does vs what you still have to check
 
-The same no-op revoke, always-body read, and leftover worker session that bypass this practice will also bypass a “scan our coverage dashboard” detector. Name those places before you claim recover.
+The same no-op revoke, always-body read, and leftover worker session that bypass this practice will also bypass a “scan our coverage dashboard” detector.
 
 Cause vs cost stays split here too: the **cause** is grant not consulted; the **cost** is ex-collaborator secrecy; **how you stop it** is owner-or-grant on every read; **how you notice** is `revoked_share_read_denied`; **how you recover** is notify-and-rotate. What the tool cannot do: this alert does not wipe phone caches, and it does not recall copies already sent.
 
@@ -53,8 +53,6 @@ Cause vs cost stays split here too: the **cause** is grant not consulted; the **
 A deny must say *share revoked*, not only “assert False.” Under stress, do not use color-only severity.
 
 ## Practice
-
-For `labs/11/11-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=revoked_share_read_denied note=n1 tenant=B

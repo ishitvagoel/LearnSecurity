@@ -28,7 +28,7 @@ If both pass, the test is not looking at a missing sig. If both fail, the fix is
 | Failure | If you cannot name the signature, do not accept |
 | Not claimed | Replay window; parse-before-MAC; 1.2; live Stripe |
 
-The file is `labs/7.3/7.3-lab/tests/test_property.py`. The test `test_missing_signature_is_rejected` is there so an always-true `accept` cannot sneak through.
+The test `test_missing_signature_is_rejected` is there so an always-true `accept` cannot sneak through.
 
 A test that only asserts HTTP 200 on `/webhook` is not this topic’s evidence. A test that only greps `hmac` in source without calling `accept("", "body", "lab-secret")` is not this topic’s evidence. This practice never POSTs a live webhook.
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/7.3/7.3-lab/tests --impl vulnerable
 python3 -m pytest labs/7.3/7.3-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail or pass next to the matrix row. Reject a “test” that only greps `hmac` in source without calling `accept("", "body", "lab-secret")`.
+Paste nothing from answer keys. Reject a “test” that only greps `hmac` in source without calling `accept("", "body", "lab-secret")`.
 
 ## Use it somewhere new
 

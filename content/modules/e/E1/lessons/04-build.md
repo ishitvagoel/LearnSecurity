@@ -26,7 +26,7 @@ Use an allow-list before a tool runs. This week's check covers `exec_sql`.
 
 ## What the repaired files must show
 
-Read `fixed/tools.py` against this checklist. Do not treat the snippet as a production agent product.
+Check `fixed/tools.py` against the list above. Do not treat the snippet as a production agent product.
 
 | After the fix | Must be true |
 |---|---|

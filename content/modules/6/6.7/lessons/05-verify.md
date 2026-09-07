@@ -28,7 +28,7 @@ If both pass, the test is not looking at the fourth export. If both fail, the fi
 | Failure | If you cannot read the count, deny |
 | Not claimed | Per-IP fairness; GraphQL; live requests per second |
 
-The file is `labs/6.7/6.7-lab/tests/test_property.py`. The test `test_fourth_export_is_denied` is there so an unbounded fourth cannot sneak through.
+The test `test_fourth_export_is_denied` is there so an unbounded fourth cannot sneak through.
 
 A test that only asserts HTTP 200 on `/export` is not this topic’s evidence. A test that only greps an edge-proxy keyword without calling `allow(4)` is not this topic’s evidence. This practice never opens a public host.
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/6.7/6.7-lab/tests --impl vulnerable
 python3 -m pytest labs/6.7/6.7-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail or pass next to the matrix row. Reject a “test” that only greps an edge-proxy keyword without calling `allow(4)`.
+Paste nothing from answer keys. Reject a “test” that only greps an edge-proxy keyword without calling `allow(4)`.
 
 ## Use it somewhere new
 

@@ -42,7 +42,7 @@ The honest expected-aud test may pass on both. That does not excuse the deny tes
 
 ## Practice
 
-Write fail or pass next to the matrix row. Reject a “test” that only greps `verify` in an Authlib call without comparing `aud`.
+Reject a “test” that only greps `verify` in an Authlib call without comparing `aud`.
 
 ## Use it somewhere new
 

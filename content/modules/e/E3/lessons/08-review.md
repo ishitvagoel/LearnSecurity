@@ -42,10 +42,6 @@ Also reject: live processors; shipping without re-running `test_duplicate_captur
 - HTTP 200 is once
 - This practice is in card-network scope
 
-## Practice
-
-Write the review that would block this change. Name `test_duplicate_capture_does_not_double_charge`.
-
 ## Use it somewhere new
 
 Clinic change that “added a payment company and a questionnaire PDF” without a duplicate-key deny is an incomplete ledger review. Name the independent falsehood that would still keep two k1 from charging twice.

@@ -61,7 +61,7 @@ A missing body×crash row is how the body shows up as “debug extras.” Write 
 
 ## Practice
 
-Look in `labs/8.5/8.5-lab`, starting with `crash.py`.
+Open `crash.py` in `labs/8.5/8.5-lab`.
 
 ## Use it somewhere new
 

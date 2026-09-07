@@ -43,7 +43,7 @@ Map each test to a row you wrote on the compartments page. Do not paste keys. If
 
 ## Practice
 
-Write fail or pass next to the matrix row. Reject a “test” that only greps `GRANT` in a migration without calling `can_select`.
+Reject a “test” that only greps `GRANT` in a migration without calling `can_select`.
 
 ## Use it somewhere new
 

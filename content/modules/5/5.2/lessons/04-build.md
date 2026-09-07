@@ -27,7 +27,7 @@ Use approved authenticated encryption. This week's check is “not encoding,” 
 
 ## What the repaired files must show
 
-Read `fixed/crypto.py` against this checklist. Do not treat the snippet as a production cipher.
+Check `fixed/crypto.py` against the list above. Do not treat the snippet as a production cipher.
 
 | After the fix | Must be true |
 |---|---|

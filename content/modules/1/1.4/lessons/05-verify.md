@@ -30,7 +30,7 @@ If both pass, the test is not looking at `mouse_only`, name, or keyboard. If bot
 | Abuse | Sharing an admin session to skip recovery is **out of band** here: record it as leftover risk, not as a check in this folder |
 | When things break | Missing name or keyboard fails closed (`is_usable_accessible` is false) |
 
-The file is `labs/1.4/1.4-risk-register/tests/test_recovery_a11y.py`. It calls `recovery.recovery_confirm_control()` and asserts `is_usable_accessible`. That check is there so inaccessible recovery cannot sneak through.
+It calls `recovery.recovery_confirm_control()` and asserts `is_usable_accessible`. That check is there so inaccessible recovery cannot sneak through.
 
 A test that only asserts HTTP 200 is not this topic’s evidence. This practice never opens a network socket.
 
@@ -49,7 +49,7 @@ python -m pytest labs/1.4/1.4-risk-register/tests --impl vulnerable
 python -m pytest labs/1.4/1.4-risk-register/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail or pass next to the row.
+Paste nothing from answer keys. row.
 
 ## Use it somewhere new
 

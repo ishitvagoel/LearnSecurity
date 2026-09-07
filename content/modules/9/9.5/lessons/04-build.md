@@ -26,7 +26,7 @@ Defect lists want bugs verified as fixed. This week's check covers close-without
 
 ## What the repaired files must show
 
-Read `fixed/pentest.py` against this checklist. Do not treat the snippet as a production ticket product.
+Check `fixed/pentest.py` against the list above. Do not treat the snippet as a production ticket product.
 
 | After the fix | Must be true |
 |---|---|

@@ -28,7 +28,7 @@ Industry “recover” is an outcome. This week's check covers close-without-rec
 
 ## What the repaired files must show
 
-Read `fixed/ir.py` against this checklist. Do not treat the snippet as a production incident product.
+Check `fixed/ir.py` against the list above. Do not treat the snippet as a production incident product.
 
 | After the fix | Must be true |
 |---|---|

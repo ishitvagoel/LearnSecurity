@@ -28,7 +28,7 @@ If both pass, the check is not looking at password-at-lookalike. If both fail, t
 | Wrong origin | webauthn at the lookalike origin fails |
 | Not claimed | Live authenticators; who-is-allowed; recovery SMS; prompt bombing |
 
-The file is `labs/4.2/4.2-lab/tests/test_property.py`. `test_password_is_not_phishing_resistant` is there so a password counted as phishing-resistant cannot sneak through.
+`test_password_is_not_phishing_resistant` is there so a password counted as phishing-resistant cannot sneak through.
 
 ```text
 python3 -m pytest labs/4.2/4.2-lab/tests --impl vulnerable
@@ -55,7 +55,7 @@ Map each check to a rule from the map page. If the broken files do not fail the 
 
 ## Practice
 
-Run both implementations this session. Write fail or pass next to the matrix row. Reject a “test” that only greps `webauthn` in HTML without calling `phishing_resistant` on the password / lookalike pair.
+Run both implementations this session. Reject a “test” that only greps `webauthn` in HTML without calling `phishing_resistant` on the password / lookalike pair.
 
 ## Use it somewhere new
 

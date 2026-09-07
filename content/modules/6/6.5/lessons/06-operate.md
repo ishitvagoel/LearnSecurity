@@ -51,7 +51,7 @@ A cloud dashboard will show “instance metadata requires a token” and stay si
 
 ## Practice
 
-For `labs/6.5/6.5-lab`, write a log line (ids, reason, no URL). Reject any line that includes a full URL with a query token, a note body, or a live-fetch transcript.
+Write a log line (ids, reason, no URL). Reject any line that includes a full URL with a query token, a note body, or a live-fetch transcript.
 
 ## Use it somewhere new
 

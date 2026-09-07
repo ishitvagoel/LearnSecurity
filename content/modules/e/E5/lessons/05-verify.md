@@ -23,7 +23,7 @@ flowchart LR
 | Normal | session A, body A → A (may pass on both) |
 | Not claimed | relationship graph; famous-bugs dashboard; course gate; search/cache keys |
 
-The file is `labs/E5/e5-lab/tests/test_property.py`. `test_body_cannot_switch_tenant` is there so body-wins `tenant_for` cannot sneak through.
+`test_body_cannot_switch_tenant` is there so body-wins `tenant_for` cannot sneak through.
 
 ```text
 python3 -m pytest labs/E5/e5-lab/tests --impl vulnerable
@@ -47,7 +47,7 @@ python3 -m pytest labs/E5/e5-lab/tests --impl vulnerable
 python3 -m pytest labs/E5/e5-lab/tests --impl fixed
 ```
 
-Write fail or pass next to the table row. Reject a “test” that only greps `ENABLE ROW LEVEL SECURITY` without calling `tenant_for({"tenant": "A"}, {"tenant": "B"})`.
+Reject a “test” that only greps `ENABLE ROW LEVEL SECURITY` without calling `tenant_for({"tenant": "A"}, {"tenant": "B"})`.
 
 ## Use it somewhere new
 

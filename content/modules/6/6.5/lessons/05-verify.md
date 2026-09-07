@@ -28,7 +28,7 @@ If both pass, the test is not looking at link-local. If both fail, the fix is no
 | Failure | If you cannot name the host, do not fetch |
 | Not claimed | Live fetch; DNS rebinding; redirects; IPv6 |
 
-The file is `labs/6.5/6.5-lab/tests/test_property.py`. The test `test_link_local_metadata_is_denied` is there so a scheme-only allow cannot sneak through. The destination is a **string** in the practice files — do not send packets to it.
+The test `test_link_local_metadata_is_denied` is there so a scheme-only allow cannot sneak through. The destination is a **string** in the practice files — do not send packets to it.
 
 A test that only asserts the preview image loaded is not this topic’s evidence. A test that only greps `https` in a prefix check without calling `allowed` on the link-local string is not this topic’s evidence. This practice never fetches.
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/6.5/6.5-lab/tests --impl vulnerable
 python3 -m pytest labs/6.5/6.5-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail or pass next to the matrix row. Reject a “test” that only greps `https` in a prefix check without calling `allowed` on the link-local string.
+Paste nothing from answer keys. Reject a “test” that only greps `https` in a prefix check without calling `allowed` on the link-local string.
 
 ## Use it somewhere new
 

@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny Python `merge_ok(pr)` that returns true or false. The failure is already in the function: every dict is allowed to merge. That is a **failed rule**, not a missing GitHub setting.
 
-Here is the rule:
-
 > An empty change must not merge. If `merge_ok({})` is true, the process evidence you show before merge has failed as a security control.
 
 ## Where you may practice
@@ -28,7 +26,7 @@ flowchart TD
   Any[any pr dict] --> True[merge_ok true]
 ```
 
-The broken files take that path on purpose. You do not need GitHub. You must not merge in a live org. The true return *is* the leak of honesty.
+You do not need GitHub. You must not merge in a live org. The true return *is* the leak of honesty.
 
 The threat-modeling lessons (3.2) already said how to write the model. This check is **whether a citation exists before merge**. A poster is a belief. It does not put `threat_model` on the change.
 
@@ -39,7 +37,7 @@ Read `vulnerable/sdl.py`. It returns true for every dict. Tests:
 - `test_merge_requires_threat_model_id`
 - `test_pr_with_threat_model_may_merge` — `{"threat_model": "TM-12"}` may pass on both
 
-You do not need a new pull-request key. When `test_merge_requires_threat_model_id` fails, that is the evidence.
+You do not need a new pull-request key.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -71,7 +69,7 @@ A design-review guide is vocabulary, not this check. Gate 10 and M4 stay **not f
 python3 -m pytest labs/10.1/10.1-lab/tests --impl vulnerable
 ```
 
-Run from `labs/10.1/10.1-lab` if a collection at the repo root picks up `site/`. Record `test_merge_requires_threat_model_id`. Do not probe public hosts. A setup error is not proof the rule holds.
+Run from `labs/10.1/10.1-lab` if a collection at the repo root picks up `site/`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

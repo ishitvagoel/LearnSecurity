@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny in-process `assemble_threat_model` dictionary. It does not open a scanner tenant, a Semgrep cloud org, or a production dashboard. Fake threat ids only. An empty list is a **failed rule**, not a clean bill of health.
 
-Here is the rule:
-
 > A green scan still lists `cross-tenant-read`. `threats_from_scan(True)` must not return `[]`.
 
 ## Where you may practice
@@ -40,8 +38,7 @@ Read `vulnerable/model.py`. `assemble_threat_model` returns an empty list when `
 - `test_mandatory_threats_have_owners_and_triggers` — `cross-tenant-read`, `hostile-browser`, and `stolen-worker` each have `owner` and `trigger`
 - `test_scanner_findings_are_additive` — extras join; they do not replace the seed
 
-You do not need a new CVE id. When `test_green_scanner_is_not_an_empty_threat_model` fails, that is the evidence.
-
+You do not need a new CVE id.
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |

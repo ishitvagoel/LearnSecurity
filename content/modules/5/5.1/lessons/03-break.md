@@ -7,8 +7,6 @@
 
 The practice is not a warehouse you attack. It is a tiny Python `delete_account` plus `body_retained` / `search_retained`. The failure is already in the functions: delete pops the notes map and leaves analytics. That leftover is a **failed rule**, not a cleanup nit.
 
-Here is the rule:
-
 > After `delete_account("alice")`, `body_retained("alice")` must be None. If it still returns `"secret"`, analytics still holds the note.
 
 ## Where you may practice
@@ -30,7 +28,7 @@ flowchart TD
   Skip --> Hit["body_retained returns secret"]
 ```
 
-The broken files take that path on purpose. You do not need a live warehouse query. You must not run one. The leftover still returning `"secret"` *is* the leak.
+You do not need a live warehouse query. You must not run one. The leftover still returning `"secret"` *is* the leak.
 
 Documented retention has to be actually carried out. Encrypting a warehouse you still keep is secrecy theater, not this privacy check.
 
@@ -42,7 +40,7 @@ Read `vulnerable/lifecycle.py`. `delete_account` only pops `NOTES`. Tests:
 - `test_deleted_account_leaves_no_search_copy`
 - `test_active_account_analytics_present` — honest product path; analytics exists *before* delete
 
-You do not need a new store name. When `test_deleted_account_leaves_no_analytics_body` fails, that is the evidence.
+You do not need a new store name.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|

@@ -11,7 +11,7 @@ On the notes app, `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` is 
 
 ## Picture: the URL bar is not the socket
 
-Renaming “notes app” to “clinic” is not transfer. An https page does not authorize treating the API socket as TLS. A dashboard toggle is not the check.
+Calling it “clinic” instead of “notes app” does not move the work. An https page does not authorize treating the API socket as TLS. A dashboard toggle is not the check.
 
 | Notes app this week | Clinic sketch |
 |---|---|

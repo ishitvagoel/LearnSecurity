@@ -11,7 +11,7 @@ On the notes app, after `delete_user("alice")`, `session_valid("alice")` is fals
 
 ## Picture: badge off is not session off
 
-Renaming “alice” to “clinician” is not transfer. Disabling the badge does not authorize leaving the chart cookie alive. A logout product name is not the check.
+Calling it “clinician” instead of “alice” does not move the work. Disabling the badge does not authorize leaving the chart cookie alive. A logout product name is not the check.
 
 | Notes app this week | Clinic sketch |
 |---|---|

@@ -42,10 +42,6 @@ Also reject: public pentest steps; closing findings without re-running `test_can
 - A testing-guide draft is the current final pin
 - An assurance gate follows from a filed report
 
-## Practice
-
-Write the review that would block this change. Name `test_cannot_close_without_retest`.
-
 ## Use it somewhere new
 
 Clinic change that "uploaded the pentest PDF" without a retest field is an incomplete close-gate review. Name the independent falsehood that would still keep missing retest from closing.

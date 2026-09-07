@@ -42,10 +42,6 @@ Also reject: a live script hunt; shipping without re-running `test_report_only_i
 - A green reporting dashboard is encoding (6.2)
 - Trusted Types is encoding
 
-## Practice
-
-Write the review that would block this change. Name `test_report_only_is_not_enforcement`.
-
 ## Use it somewhere new
 
 A clinic change that “added Report-Only and a dashboard” without an enforcing header is an incomplete isolation review. Name the independent falsehood that would still keep Report-Only from counting as on.

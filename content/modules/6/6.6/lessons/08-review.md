@@ -7,7 +7,7 @@
 
 This review is about notes-app invite. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether second `accept("t1")` is still true if they ship. Start at consume-once, not at a scanner color or a mailer ticket.
 
-Treat the files in `labs/6.6/6.6-lab/vulnerable/` as the pull request. You already ran `test_invite_token_is_single_use` — that is the rule. A comment “will consume later” is not.
+You already ran `test_invite_token_is_single_use` — that is the rule. A comment “will consume later” is not.
 
 ## Picture: problems to find (name them yourself)
 
@@ -41,10 +41,6 @@ Also reject: live race harnesses; closing findings without re-running `test_invi
 - Races are only performance
 - A famous-bugs list is the rule
 - A unique-index screenshot is consume
-
-## Practice
-
-Write the review that would block this change. Name `test_invite_token_is_single_use`.
 
 ## Use it somewhere new
 

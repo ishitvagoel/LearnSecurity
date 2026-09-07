@@ -26,7 +26,7 @@ Use that individual service account. This week's check covers leftover Alice.
 
 ## What the repaired files must show
 
-Read `fixed/worker.py` against this checklist. Do not treat the snippet as a production broker.
+Check `fixed/worker.py` against the list above. Do not treat the snippet as a production broker.
 
 | After the fix | Must be true |
 |---|---|

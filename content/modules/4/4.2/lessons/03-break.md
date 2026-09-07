@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny Python helper named `phishing_resistant`. The failure is already in the function: any enrolled method returns true, and origin is ignored. A password at a lookalike origin counted as **resistant** is a failed rule, not a trophy kit.
 
-Here is the rule:
-
 > A password or OTP at a lookalike origin is not phishing-resistant. WebAuthn at the wrong origin must fail.
 
 ## Where you may practice
@@ -42,8 +40,7 @@ A later hardware bar is not this check.
 - `test_webauthn_wrong_origin_fails`
 - `test_webauthn_matching_origin_is_resistant` — honest path on the repaired files
 
-You do not need a new origin string. When `test_password_is_not_phishing_resistant` fails, that is the evidence.
-
+You do not need a new origin string.
 ## Why it happens vs what it costs
 
 | Slice | Practice |

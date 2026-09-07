@@ -52,7 +52,7 @@ If App Links are verified and `open_link` still copies `as`, the map has a hole.
 
 ## Practice
 
-Draw the inventory. Look in `labs/8.3/8.3-lab`, starting with `link.py`. Label the extras even in the repaired tree — the fix is ignore identity keys, not pretending a verified host became the session.
+Open `link.py` in `labs/8.3/8.3-lab`. Label the extras even in the repaired tree — the fix is ignore identity keys, not pretending a verified host became the session.
 
 ## Use it somewhere new
 

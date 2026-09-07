@@ -48,8 +48,6 @@ A GitHub checks dashboard will show the formatter green and stay silent when `re
 
 ## Practice
 
-For `labs/9.2/9.2-lab`, write a log line you would accept.
-
 ```text
 log_denied reason=review_block_eval pr=pr_92e file=export.py
 ```

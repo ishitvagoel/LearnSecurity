@@ -13,7 +13,7 @@ On the notes app, after `revoke("n1", "B")`, `read("n1", "B")` must be None. For
 
 ## Picture: same revoke loop, clinical object
 
-Renaming “note” to “chart” is not transfer. Owner, grant, and leftover change. Filing DELETE 200 does not consult `GRANTS` on the next read.
+Calling it “chart” instead of “note” does not move the work. Owner, grant, and leftover change. Filing DELETE 200 does not consult `GRANTS` on the next read.
 
 | Notes app this week | Clinic sketch |
 |---|---|

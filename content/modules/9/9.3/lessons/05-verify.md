@@ -28,7 +28,7 @@ If both pass, the test is not looking at `status_asserted` alone. If both fail, 
 | Abuse | fuzz with no named bad result must not count as covered |
 | Not claimed | a real testing-guide assessment; a later gate; fuzz oracles; that the named case matches who-is-allowed |
 
-The file is `labs/9.3/9.3-lab/tests/test_property.py`. The test `test_http_200_only_is_not_a_security_test` is there so a 200-only row cannot count as a security test.
+The test `test_http_200_only_is_not_a_security_test` is there so a 200-only row cannot count as a security test.
 
 Honest `{forbidden_outcome: True, status_asserted: True}` may pass on both implementations. That does not excuse the 200-only deny test. If the broken files do not fail `test_http_200_only_is_not_a_security_test`, the lab is miswired — fix the wiring, not the assertion.
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/9.3/9.3-lab/tests --impl vulnerable
 python3 -m pytest labs/9.3/9.3-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail or pass next to the isolation row. Reject a “test” that only greps a guide name without calling `is_security_test({"status_asserted": True})`.
+Paste nothing from answer keys. Reject a “test” that only greps a guide name without calling `is_security_test({"status_asserted": True})`.
 
 ## Use it somewhere new
 

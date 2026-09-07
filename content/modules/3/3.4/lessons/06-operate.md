@@ -32,8 +32,6 @@ A filter will page on request rate and stay silent when five slow grants plus a 
 
 ## Practice
 
-For `labs/3.4/3.4-lab`, write a log line you would accept.
-
 ```text
 log_denied reason=share_cap note_id=n1 count=5 request_id=req_34bl
 ```

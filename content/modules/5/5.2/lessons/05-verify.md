@@ -28,7 +28,7 @@ If both pass, the test is not looking at Base64 decode of `protect("secret")`. I
 | Failure | If the library is missing, refuse the write — do not store plaintext |
 | Not claimed | Real AES-GCM; key storage; nonce uniqueness |
 
-The file is `labs/5.2/5.2-lab/tests/test_property.py`. The test `test_protect_is_not_mere_encoding` is there so reversible encoding cannot sneak through.
+The test `test_protect_is_not_mere_encoding` is there so reversible encoding cannot sneak through.
 
 A test that only greps `AES` in a comment without decoding `protect("secret")` is not this topic's evidence. This practice never opens a live column.
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/5.2/5.2-lab/tests --impl vulnerable
 python3 -m pytest labs/5.2/5.2-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail or pass next to the matrix row. Reject a “test” that only greps `AES` in a comment without decoding `protect("secret")`.
+Paste nothing from answer keys. Reject a “test” that only greps `AES` in a comment without decoding `protect("secret")`.
 
 ## Use it somewhere new
 

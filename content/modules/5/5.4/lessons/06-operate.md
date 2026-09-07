@@ -51,7 +51,7 @@ If a human sees a certificate or mixed-content warning, make the error readable.
 
 ## Practice
 
-For `labs/5.4/5.4-lab`, write a log line (ids, reason, no cookie). Reject any line that includes a session cookie, a note body, or “HSTS handled.”
+Write a log line (ids, reason, no cookie). Reject any line that includes a session cookie, a note body, or “HSTS handled.”
 
 ## Use it somewhere new
 

@@ -40,10 +40,6 @@ Also reject: treating the client as what you trust; an awareness list cited as a
 - Threat Dragon is the rule
 - The data-centric modeling note (**draft**) is a verification list
 
-## Practice
-
-Write the review that would block this change. Name `test_green_scanner_is_not_an_empty_threat_model`.
-
 ## Use it somewhere new
 
 Clinic SMS change that “adds a HIPAA sticker” without seeding `sms-content-leak` is an incomplete review. Name the independent falsehood that would still keep `cross-tenant-read` present on green.

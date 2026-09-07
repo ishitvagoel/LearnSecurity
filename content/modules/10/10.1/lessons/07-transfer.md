@@ -13,7 +13,7 @@ On the notes app, `merge_ok({})` must be false. For a clinic, empty change is de
 
 ## Picture: same check, clinical training
 
-Renaming “note” to “chart” is not transfer. Surfaces, threat-model id, and leftover change. Marking HIPAA training complete does not put `threat_model` on the change.
+Calling it “chart” instead of “note” does not move the work. Surfaces, threat-model id, and leftover change. Marking HIPAA training complete does not put `threat_model` on the change.
 
 | Notes app this week | Clinic sketch |
 |---|---|

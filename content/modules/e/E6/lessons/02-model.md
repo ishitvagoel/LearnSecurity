@@ -63,7 +63,7 @@ A missing owner is how a spoken yes becomes “accepted.” Write the hole.
 
 ## Practice
 
-Look in `labs/E6/e6-lab`, starting with `risk.py`.
+Open `risk.py` in `labs/E6/e6-lab`.
 
 ## Use it somewhere new
 

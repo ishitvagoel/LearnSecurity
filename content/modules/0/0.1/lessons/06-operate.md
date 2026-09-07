@@ -32,8 +32,6 @@ A proxy, browser, or `curl` will fetch whatever you type and may cache the body.
 
 ## Practice
 
-For `labs/0.1/0.1-orientation`, write a log line you would accept.
-
 ```text
 log_denied reason=out_of_scope host=example.com
 ```

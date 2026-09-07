@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny Python `argv_for_list` and `uses_shell`. It does not start a process. The failure is already in the function: it glues the name into a shell string. That is a **failed rule**, not a trophy command.
 
-Here is the rule:
-
 > The export name is an argv element, not shell grammar. `argv_for_list` must not start `sh -c`.
 
 ## Where you may practice
@@ -40,7 +38,7 @@ Read `vulnerable/argv.py`. It concatenates the name into a `sh -c` string. Tests
 - `test_does_not_invoke_shell`
 - `test_argv_is_program_then_name`
 
-You do not need a new name string. When `test_does_not_invoke_shell` fails, that is the evidence.
+You do not need a new name string.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -72,7 +70,7 @@ FastAPI has no opinion about argv. `subprocess.run(..., shell=True)` will parse 
 python3 -m pytest labs/6.1/6.1-lab/tests --impl vulnerable
 ```
 
-Record `test_does_not_invoke_shell`. Do not probe public hosts. A setup error is not proof the rule holds.
+Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

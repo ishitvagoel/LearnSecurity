@@ -67,7 +67,7 @@ A missing “deleted alice × leftover session × deny” row is how the cookie 
 
 ## Practice
 
-Look in `labs/4.1/4.1-lab`, starting with `lifecycle.py`. Your artifact is a versioned list (even a table in your notes) with state, leftover, allow or deny, and what would show the deny is false. Fake data only.
+Open `lifecycle.py` in `labs/4.1/4.1-lab`. Your artifact is a versioned list (even a table in your notes) with state, leftover, allow or deny, and what would show the deny is false. Fake data only.
 
 ## Use it somewhere new
 

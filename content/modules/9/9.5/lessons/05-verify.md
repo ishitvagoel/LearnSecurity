@@ -28,7 +28,7 @@ If both pass, the test is not looking at missing retest. If both fail, the fix i
 | Abuse | Missing, fail, or scheduled still deny (fail closed) |
 | Not claimed | A live testing-guide list run; an assurance gate; a severity calculator; that pass hit the same URL |
 
-The file is `labs/9.5/9.5-lab/tests/test_property.py`. The test `test_cannot_close_without_retest` is there so always-true `close_finding` cannot sneak through.
+The test `test_cannot_close_without_retest` is there so always-true `close_finding` cannot sneak through.
 
 Honest `{retest: "pass"}` may pass on both implementations. That does not excuse the missing-retest deny test. If the broken files do not fail `test_cannot_close_without_retest`, the lab is miswired — fix the wiring, not the assertion.
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/9.5/9.5-lab/tests --impl vulnerable
 python3 -m pytest labs/9.5/9.5-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail or pass next to the close-without-retest row. Reject a "test" that only greps `Done` in a ticket without calling `close_finding({"retest": None})`.
+Paste nothing from answer keys. Reject a "test" that only greps `Done` in a ticket without calling `close_finding({"retest": None})`.
 
 ## Use it somewhere new
 

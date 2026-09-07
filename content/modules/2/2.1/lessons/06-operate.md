@@ -42,8 +42,6 @@ A metric without a quarantine playbook still leaves a disagreeing row if a worke
 
 ## Practice
 
-For `labs/2.1/2.1-parser-boundaries`, write a log line you would accept.
-
 ```text
 ingest_denied reason=duplicate_tenant_key request_id=req_7c3a practice=2.1-parser-boundaries
 ```

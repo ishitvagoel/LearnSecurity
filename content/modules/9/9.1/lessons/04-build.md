@@ -28,7 +28,7 @@ A development-practice guide that wants executable tests against requirements co
 
 ## What the repaired files must show
 
-Read `fixed/trace.py` against this checklist. Do not treat the snippet as a production governance product.
+Check `fixed/trace.py` against the list above. Do not treat the snippet as a production governance product.
 
 | After the fix | Must be true |
 |---|---|

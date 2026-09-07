@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny Python model of drawing a title. The failure is already in the string: `render` leaves `<` as a tag delimiter, so extra tags stay in the output. Unencoded markup reaching HTML is **a failed rule**, not a trophy script.
 
-Here is the rule:
-
 > `render` must encode `<` as `&lt;` in HTML text. Unencoded markup must not reach the HTML interpreter.
 
 ## Where you may practice
@@ -40,8 +38,7 @@ A famous-bugs nickname for “script in HTML” is awareness after the cause, no
 - `test_angle_brackets_are_encoded`
 - `test_honest_title_survives` — honest “Weekly notes” still appears
 
-You do not need a new marker. When `test_angle_brackets_are_encoded` fails, that is the evidence.
-
+You do not need a new marker.
 ## Why it happens vs what it costs
 
 | Slice | This practice |

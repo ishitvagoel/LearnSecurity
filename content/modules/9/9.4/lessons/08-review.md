@@ -42,10 +42,6 @@ Also reject: live tenants; closing findings without re-running `test_unmapped_hi
 - A maturity score is `ship_ok`
 - A draft supply-chain paper is finished
 
-## Practice
-
-Write the review that would block this change. Name `test_unmapped_high_blocks_ship`.
-
 ## Use it somewhere new
 
 Clinic change that “enabled code scanning” without a mapping check is an incomplete ship-gate review. Name the independent falsehood that would still keep unmapped HIGH from shipping.

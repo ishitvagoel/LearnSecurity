@@ -7,7 +7,7 @@
 
 This review is about a notes-app edge cache. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say which outcome (company B reading company A’s body) breaks if they ship. Start at the store key, not at a scanner color or an HTTPS checkbox.
 
-Treat the files in `labs/2.2/2.2-request-path/vulnerable/` as the pull request. Reconstruct whether the store still keys only on path. Compare that with the rule. Write changes a developer can verify. You already ran `test_other_tenant_does_not_receive_cached_body` — that is the rule. A comment “will add Vary later” is not.
+Reconstruct whether the store still keys only on path. Compare that with the rule. Write changes a developer can verify. You already ran `test_other_tenant_does_not_receive_cached_body` — that is the rule. A comment “will add Vary later” is not.
 
 ## Picture: problems to find (name them yourself)
 
@@ -39,10 +39,6 @@ Also reject: client `X-Tenant` as key input; `Vary: Cookie` as forever; Report-O
 - `Vary: Cookie` is enough forever
 - TLS 1.3 is the cache key
 - Next.js `fetch` cache defaults encode company
-
-## Practice
-
-Write the review that would block this change. Name `test_other_tenant_does_not_receive_cached_body`.
 
 ## Use it somewhere new
 

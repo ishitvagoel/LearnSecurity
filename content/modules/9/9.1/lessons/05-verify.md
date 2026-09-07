@@ -28,7 +28,7 @@ If both pass, the test is not looking at `asserts_isolation`. If both fail, the 
 | Abuse | Unsure flags are not coverage (fail closed; leftover if not in this check) |
 | Not claimed | A real checklist assessment; the verification gate; a later draft of a practice guide; that the named test actually isolates |
 
-The file is `labs/9.1/9.1-lab/tests/test_property.py`. The test `test_status_only_row_is_not_coverage` is there so membership without an isolation assert cannot count as coverage.
+The test `test_status_only_row_is_not_coverage` is there so membership without an isolation assert cannot count as coverage.
 
 Honest isolation-assert rows may pass on both implementations. That does not excuse the status-only deny test. If the broken files do not fail `test_status_only_row_is_not_coverage`, the lab is miswired — fix the wiring, not the assertion.
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/9.1/9.1-lab/tests --impl vulnerable
 python3 -m pytest labs/9.1/9.1-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail or pass next to the AUTHZ-1 row. Reject a “test” that only greps `AUTHZ-1` in a spreadsheet without calling `covered(..., [{"asserts_isolation": False}])`.
+Paste nothing from answer keys. Reject a “test” that only greps `AUTHZ-1` in a spreadsheet without calling `covered(..., [{"asserts_isolation": False}])`.
 
 ## Use it somewhere new
 

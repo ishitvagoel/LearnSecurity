@@ -28,7 +28,7 @@ If both pass, the test is not looking at `exec_sql`. If both fail, the fix is no
 | Abuse | Unknown tools still deny (fail closed) |
 | Not claimed | A live vendor API; a famous-bugs dashboard; an assurance gate; that `search_notes` is encoded |
 
-The file is `labs/E1/e1-lab/tests/test_property.py`. The test `test_exec_sql_tool_is_denied` is there so always-run `run_tool` cannot sneak through.
+The test `test_exec_sql_tool_is_denied` is there so always-run `run_tool` cannot sneak through.
 
 Honest `search_notes` may pass on both implementations. That does not excuse the `exec_sql` deny test. If the broken files do not fail `test_exec_sql_tool_is_denied`, the lab is miswired — fix the wiring, not the assertion.
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/E1/e1-lab/tests --impl vulnerable
 python3 -m pytest labs/E1/e1-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail or pass next to the `exec_sql` row. Reject a "test" that only greps `exec_sql` in a prompt file without calling `run_tool("exec_sql", {})`.
+Paste nothing from answer keys. Reject a "test" that only greps `exec_sql` in a prompt file without calling `run_tool("exec_sql", {})`.
 
 ## Use it somewhere new
 

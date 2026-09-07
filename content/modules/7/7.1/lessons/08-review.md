@@ -42,10 +42,6 @@ Also reject: public API attacks; closing findings without re-running `test_is_ad
 - A complete OpenAPI file proves extra keys are ignored
 - A leftover-endpoint nickname is the rule
 
-## Practice
-
-Write the review that would block this change. Name `test_is_admin_cannot_be_patched`.
-
 ## Use it somewhere new
 
 A clinic change that “documented the PATCH in OpenAPI” without an `is_staff` deny check is an incomplete review. Name the independent falsehood that would still keep `is_staff` false.

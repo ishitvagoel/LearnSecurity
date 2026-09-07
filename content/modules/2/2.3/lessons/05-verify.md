@@ -24,7 +24,7 @@ flowchart LR
 | When things break | Missing flag on a session name is a defect, not a silent readable default |
 | Not claimed | XSS impossible; CSP3 enforced; CORS correct; SameSite complete |
 
-The file is `labs/2.3/2.3-browser-policy/tests/test_httponly.py`. It calls `js_read_session` on a dummy cookie with `httponly: True` and `secure: True`. That check is there so a script-readable session cannot sneak through.
+It calls `js_read_session` on a dummy cookie with `httponly: True` and `secure: True`. That check is there so a script-readable session cannot sneak through.
 
 ```text
 python3 -m pytest labs/2.3/2.3-browser-policy/tests --impl vulnerable
@@ -45,7 +45,7 @@ Map the test to the script-read row you wrote. Do not paste keys. If broken does
 
 ## Practice
 
-Write fail or pass next to the table row. Reject a “test” that only greps `HttpOnly` in a string without calling the reader.
+Reject a “test” that only greps `HttpOnly` in a string without calling the reader.
 
 ## Use it somewhere new
 

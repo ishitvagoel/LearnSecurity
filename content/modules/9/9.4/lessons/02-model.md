@@ -60,7 +60,7 @@ A missing HIGH×map row is how an unowned finding ships on Friday. Write the hol
 
 ## Practice
 
-Look in `labs/9.4/9.4-lab`, starting with `sast.py`.
+Open `sast.py` in `labs/9.4/9.4-lab`.
 
 ## Use it somewhere new
 

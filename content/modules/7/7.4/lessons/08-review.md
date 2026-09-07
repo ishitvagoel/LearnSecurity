@@ -42,10 +42,6 @@ Also reject: live broker attacks; closing findings without re-running `test_user
 - Zero trust as a product replaces worker identity tests
 - A zero-trust architecture paper is the check
 
-## Practice
-
-Write the review that would block this change. Name `test_user_session_is_not_worker_identity`.
-
 ## Use it somewhere new
 
 Clinic change that “runs on the hospital VLAN with zero trust” without a leftover-session deny test is an incomplete review of inherited request context. Name the independent falsehood that would still keep Alice session `None`.

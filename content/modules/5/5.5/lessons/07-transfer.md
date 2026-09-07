@@ -13,7 +13,7 @@ Also name NoSQL operators and GraphQL arguments as the same shape (7.1), without
 
 ## Picture: the search box is still an interpreter
 
-Renaming “note id” to “search box” is not transfer.
+Calling it “search box” instead of “note id” does not move the work.
 
 | Notes app this week | Clinic sketch |
 |---|---|

@@ -55,7 +55,7 @@ flowchart LR
 
 ## Practice
 
-Draw the map. Look in `labs/0.1/0.1-orientation`, starting with `scope.py`.
+Open `scope.py` in `labs/0.1/0.1-orientation`.
 
 ## Use it somewhere new
 

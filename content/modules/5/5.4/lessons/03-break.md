@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny in-process `channel_is_https`. Fake headers and a `server_scheme` string. It does not open a socket or a CDN. A client `X-Forwarded-Proto: https` on an `http` socket still counting as TLS is a **failed rule**, not a trophy strip attack.
 
-Here is the rule:
-
 > A client Forwarded-Proto header is not TLS. `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` must be false.
 
 ## Where you may practice
@@ -41,7 +39,7 @@ Read `vulnerable/channel.py`. It returns true if the header is `https` **or** th
 - `test_plain_http_is_not_https`
 - `test_server_https_counts` — honest socket-https path; may pass on both
 
-You do not need a new header name. When `test_client_forwarded_proto_is_not_tls` fails, that is the evidence.
+You do not need a new header name.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|

@@ -57,7 +57,7 @@ A missing “second accept × `t1` × deny” row is how the invite is accepted 
 
 ## Practice
 
-Look in `labs/6.6/6.6-lab`, starting with `invite.py`. Your artifact is a versioned list (even a table in your notes) with state, consume, allow or deny, and what would show the deny is false. Fake tokens only.
+Open `invite.py` in `labs/6.6/6.6-lab`. Your artifact is a versioned list (even a table in your notes) with state, consume, allow or deny, and what would show the deny is false. Fake tokens only.
 
 ## Use it somewhere new
 

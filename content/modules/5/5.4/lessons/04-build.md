@@ -24,7 +24,7 @@ TLS has to have no cleartext fallback. This week's check covers the scheme check
 
 ## What the repaired files must show
 
-Read `fixed/channel.py` against this checklist. Do not treat the snippet as a production load balancer.
+Check `fixed/channel.py` against the list above. Do not treat the snippet as a production load balancer.
 
 | After the fix | Must be true |
 |---|---|

@@ -28,7 +28,7 @@ If both pass, the test is not looking at eval-on-user. If both fail, the fix is 
 | Failure | If you cannot tell whether the diff grants an interpreter, reject |
 | Not claimed | complete check; other expression languages; live GitHub; `exec(` |
 
-The file is `labs/9.2/9.2-lab/tests/test_property.py`. The test `test_eval_on_user_input_is_rejected` is there so always-true `review_ok` cannot sneak through. Do not add a working eval payload to “make the test more real.” The lab string `x = eval(user)` is enough.
+The test `test_eval_on_user_input_is_rejected` is there so always-true `review_ok` cannot sneak through. Do not add a working eval payload to “make the test more real.” The lab string `x = eval(user)` is enough.
 
 A test that only greps `eval` in a policy PDF without calling `review_ok("x = eval(user)")` is not this topic’s evidence. This practice never runs eval on live input.
 
@@ -54,7 +54,7 @@ python3 -m pytest labs/9.2/9.2-lab/tests --impl vulnerable
 python3 -m pytest labs/9.2/9.2-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail or pass next to the matrix row. Reject a “test” that only greps `eval` in a policy PDF without calling `review_ok("x = eval(user)")`.
+Paste nothing from answer keys. Reject a “test” that only greps `eval` in a policy PDF without calling `review_ok("x = eval(user)")`.
 
 ## Use it somewhere new
 

@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny in-process `session_from_request`. Fake token `secret`. It does not open uvicorn, a CDN, or a browser history. A query-string session is a **failed rule**, not a trophy dump of a log.
 
-Here is the rule:
-
 > `session_from_request({"access_token": "secret"}, {}, None)` must return `None`. A session must not start from a query-string token.
 
 ## Where you may practice
@@ -44,8 +42,7 @@ Read `vulnerable/token.py`. It returns `query.get("access_token")` first. Checks
 - `test_cookie_session_still_works` — `sc_session` still works on the repaired files
 - `test_authorization_header_still_works`
 
-You do not need a new token string. When `test_query_string_token_is_rejected` fails, that is the evidence.
-
+You do not need a new token string.
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |
@@ -70,7 +67,7 @@ FastAPI will bind query params. Next.js router will put them in the address bar.
 python3 -m pytest labs/4.3/4.3-lab/tests --impl vulnerable
 ```
 
-Record `test_query_string_token_is_rejected`. Do not weaken it to “we use HTTPS.” A setup error is not proof the rule holds.
+Do not weaken it to “we use HTTPS.” A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

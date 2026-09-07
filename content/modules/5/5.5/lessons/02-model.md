@@ -59,7 +59,7 @@ A missing “hostile note id × SQL grammar × deny” row is how concatenated S
 
 ## Practice
 
-Look in `labs/5.5/5.5-lab`, starting with `query.py`. Fake data only.
+Open `query.py` in `labs/5.5/5.5-lab`. Fake data only.
 
 ## Use it somewhere new
 

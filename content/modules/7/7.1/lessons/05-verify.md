@@ -48,7 +48,7 @@ Honest `display_name` may pass on both implementations. That does not excuse the
 
 ## Practice
 
-Run both implementations this session from the lab directory if needed. Write fail or pass next to the notes for this topic. Reject a “check” that only greps `extra = 'forbid'` in a Pydantic model without calling `apply(..., {"is_admin": true})`. A setup error is not proof the rule holds.
+Run both implementations this session from the lab directory if needed. Reject a “check” that only greps `extra = 'forbid'` in a Pydantic model without calling `apply(..., {"is_admin": true})`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

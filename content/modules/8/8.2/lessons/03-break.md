@@ -7,8 +7,6 @@
 
 The practice is not a phone you image. It is a tiny Python `save_note` / `plaintext_on_disk`. The failure is already in the function: it stores the body as-is, so after `save_note("secret")` the disk still holds `'secret'`. A **note body cached as plaintext** is **a failed rule**, not a trophy against a personal phone.
 
-Here is the rule:
-
 > After `save_note("secret")`, `plaintext_on_disk()` must be false. A private app folder is not encryption.
 
 ## Where you may practice
@@ -39,8 +37,7 @@ Sensitive data stored securely. Last crypto topic (5.2) already refused Base64; 
 - `test_cached_note_is_not_plaintext_on_disk`
 - `test_other_body_is_not_reported_as_plaintext_secret` — honest `'other'` must not be reported as the secret
 
-You do not need a new filename. When `test_cached_note_is_not_plaintext_on_disk` fails, that is the evidence.
-
+You do not need a new filename.
 ## Why it happens vs what it costs
 
 | Slice | This practice |
@@ -65,7 +62,7 @@ EncryptedSharedPreferences is not automatic for every file. Room defaults to pla
 python3 -m pytest labs/8.2/8.2-lab/tests --impl vulnerable
 ```
 
-Run from `labs/8.2/8.2-lab` if a repo-root collection picks up `site/`. Record `test_cached_note_is_not_plaintext_on_disk`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not image phones. A setup error is not proof the rule holds.
+Run from `labs/8.2/8.2-lab` if a repo-root collection picks up `site/`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not image phones. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

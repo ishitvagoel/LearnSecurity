@@ -7,8 +7,6 @@
 
 The practice is not a store listing you unpack. It is a tiny Python `api_allowed(build_type, attest)`. The failure is already in the function: it returns true for every pair, so a debug build with `attest=ok` is allowed to call prod export. That is a **failed rule**, not a trophy against a public APK.
 
-Here is the rule:
-
 > `api_allowed("debug", "ok")` must be false. A debug build must not call production export.
 
 ## Where you may practice
@@ -40,8 +38,7 @@ Topic 8.1 already said the APK is hostile. This rule is **debug must not call pr
 - `test_release_with_attest_may_call_prod`
 - `test_release_without_attest_is_denied` — 8.1 still applies to release
 
-You do not need a new flavor name. When `test_debug_build_cannot_call_prod_export` fails, that is the evidence.
-
+You do not need a new flavor name.
 ## Why it happens vs what it costs
 
 | Slice | This practice |
@@ -66,7 +63,7 @@ Gradle `debug` / `release` types are not a server check. R8 does not authorize. 
 python3 -m pytest labs/8.4/8.4-lab/tests --impl vulnerable
 ```
 
-Run from `labs/8.4/8.4-lab` if a repo-root collection picks up `site/`. Record `test_debug_build_cannot_call_prod_export`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. A setup error is not proof the rule holds.
+Run from `labs/8.4/8.4-lab` if a repo-root collection picks up `site/`. Do not “fix” the check to pass. The failure *is* the evidence that the rule is currently false. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

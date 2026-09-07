@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny in-process `can_select` check. It does not open PostgreSQL, a cloud database, or a classmate’s replica. The failure is already in the object: every role can read every company. That is a **failed rule**, not a topology drawing.
 
-Here is the rule:
-
 > The runtime `app` role bound as company `tB` must not `SELECT` a row whose company is `tA`. Architecture is a second check, not a substitute for who-is-allowed.
 
 ## Where you may practice
@@ -43,8 +41,7 @@ Read `vulnerable/roles.py`. `can_select` returns `True` for every role and compa
 - `test_runtime_connection_is_not_superuser`
 - `test_app_role_can_read_own_tenant` — honest path (may fail on the broken files too)
 
-You do not need a new company id. When `test_app_role_cannot_read_other_tenant` fails, that is the evidence.
-
+You do not need a new company id.
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |
@@ -69,7 +66,7 @@ FastAPI does not scope PostgreSQL. Splitting into microservices without new gran
 python3 -m pytest labs/3.3/3.3-lab/tests --impl vulnerable
 ```
 
-Record `test_app_role_cannot_read_other_tenant`. Do not weaken it to “a role named app exists.” A setup error is not proof the rule holds.
+Do not weaken it to “a role named app exists.” A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny Python `exporter`. It does not open a live queue. The failure is already in the function: leftover `user_session` wins if it is present. That is a **failed rule**, not a trophy against a public broker.
 
-Here is the rule:
-
 > A leftover user session is not worker identity. `exporter({"user_session": "alice", "service": None})` must be `None`. `exporter({"service": "worker-sc"})` may be `"worker-sc"`.
 
 ## Where you may practice
@@ -41,7 +39,7 @@ Read `vulnerable/worker.py`. It returns `user_session` if present. Tests:
 - `test_service_principal_is_worker_identity`
 - `test_alice_and_wrong_service_is_rejected` — leftover plus wrong service
 
-You do not need a new identity string. When `test_user_session_is_not_worker_identity` fails, that is the evidence.
+You do not need a new identity string.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -73,7 +71,7 @@ A task library can copy the request into the later job. FastAPI `Depends()` is g
 python3 -m pytest labs/7.4/7.4-lab/tests --impl vulnerable
 ```
 
-Run from `labs/7.4/7.4-lab` if a repo-root collection picks up `site/`. Record `test_user_session_is_not_worker_identity`. Do not probe public hosts. A setup error is not proof the rule holds.
+Run from `labs/7.4/7.4-lab` if a repo-root collection picks up `site/`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

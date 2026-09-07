@@ -42,10 +42,6 @@ Also reject: live incident attacks; closing without re-running both deny tests; 
 - A green SIEM is recover
 - Logging note bodies is forensics
 
-## Practice
-
-Write the review that would block this change. Name `test_cannot_close_without_recovery`.
-
 ## Use it somewhere new
 
 Clinic change that “wired paging and a known-exploited feed” without a recovery-done check is an incomplete close-gate review. Name the independent falsehood that would still keep todo from closing.

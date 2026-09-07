@@ -41,7 +41,7 @@ The honest current-secret test may pass on both. That does not excuse the defaul
 
 ## Practice
 
-Write fail or pass next to the matrix row. Reject a “test” that only greps `Vault` in a README without calling `auth("sk-lab-hardcoded", current="rotated-now")`.
+Reject a “test” that only greps `Vault` in a README without calling `auth("sk-lab-hardcoded", current="rotated-now")`.
 
 ## Use it somewhere new
 

@@ -13,7 +13,7 @@ Also name password reset, 2.4 share retry, and later jobs (7.4) as the same fami
 
 ## Picture: guardian invite is still a limited seat
 
-Renaming “t1” to “guardian” is not transfer. A click counter is not consume. FastAPI, a unique-index screenshot, and “we emailed the guardian” do not consume.
+Calling it “guardian” instead of “t1” does not move the work. A click counter is not consume. FastAPI, a unique-index screenshot, and “we emailed the guardian” do not consume.
 
 | Notes app this week | Clinic sketch |
 |---|---|

@@ -37,8 +37,6 @@ What this practice is supposed to show: debug-to-prod denials fire without the A
 
 ## Practice
 
-For `labs/8.4/8.4-lab`, write a log line you would accept.
-
 ```text
 log_denied reason=debug_to_prod_denied client=debug request_id=req_84e
 ```

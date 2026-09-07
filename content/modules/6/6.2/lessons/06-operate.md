@@ -38,8 +38,6 @@ What this practice is supposed to show: a stored-field review fires without the 
 
 ## Practice
 
-For `labs/6.2/6.2-lab`, write a log line you would accept.
-
 ```text
 log_denied reason=stored_field_review field=title request_id=req_62h
 ```

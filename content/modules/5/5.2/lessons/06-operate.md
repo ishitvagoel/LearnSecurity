@@ -50,7 +50,7 @@ A cloud key dashboard will show “key enabled” and stay silent when the colum
 
 ## Practice
 
-For `labs/5.2/5.2-lab`, write a log line (ids, reason, no body). Reject any line that includes plaintext `secret`, a real SSN, or “AES handled.”
+Write a log line (ids, reason, no body). Reject any line that includes plaintext `secret`, a real SSN, or “AES handled.”
 
 ## Use it somewhere new
 

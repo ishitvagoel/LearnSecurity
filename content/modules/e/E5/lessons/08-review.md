@@ -7,7 +7,7 @@
 
 This review is about notes-app company binding. Check whether `tenant_for({"tenant": "A"}, {"tenant": "B"})` still returns `"B"`.
 
-Treat the files in `labs/E5/e5-lab/vulnerable/` as the pull request. Review it as if it were the notes app’s note query. You already ran `test_body_cannot_switch_tenant` — that is the rule. A comment “will bind later” is not. The JSON body is not the tenant. Body tenant overrides session is the smell. Bind tenant from the session is the structural change.
+Review it as if it were the notes app’s note query. You already ran `test_body_cannot_switch_tenant` — that is the rule. A comment “will bind later” is not. The JSON body is not the tenant. Body tenant overrides session is the smell. Bind tenant from the session is the structural change.
 
 ## Picture: company taken from the body
 
@@ -41,10 +41,6 @@ Also reject: live product probes; shipping without re-running `test_body_cannot_
 - Scale means identity products instead of who-is-allowed
 - A relationship-graph product is `tenant_for`
 - GraphQL `org_id` is a different rule
-
-## Practice
-
-Write the review that would block this change. Name `test_body_cannot_switch_tenant`.
 
 ## Use it somewhere new
 

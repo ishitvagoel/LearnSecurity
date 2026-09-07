@@ -64,7 +64,7 @@ Each always-name id (`cross-tenant-read`, `hostile-browser`, `stolen-worker`) ne
 
 ## Practice
 
-Look in `labs/3.2/3.2-lab`, starting with `model.py`.
+Open `model.py` in `labs/3.2/3.2-lab`.
 
 ## Use it somewhere new
 

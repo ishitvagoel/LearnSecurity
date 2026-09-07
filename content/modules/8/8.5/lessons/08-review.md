@@ -42,10 +42,6 @@ Also reject: live vendor payloads; closing findings without re-running `test_cra
 - HTTPS to the vendor is redaction
 - An old privacy-level sticker is the current bar
 
-## Practice
-
-Write the review that would block this change. Name `test_crash_report_omits_note_body`.
-
 ## Use it somewhere new
 
 Clinic change that “turned on a crash product and completed the store form” without a body-omit test is an incomplete review of where the field can land. Name the independent falsehood that would still keep `'secret'` out of the report.

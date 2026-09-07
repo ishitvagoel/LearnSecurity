@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny Python `allow_share`. The failure is already in the function: it treats a leftover session cookie as consent to share. That is a **failed rule**, not a trophy against another site.
 
-Here is the rule:
-
 > Leftover cookies are not consent to share. If `allow_share` from a foreign origin with `token=None` is true, leftover cookie authority has replaced site-bound intent.
 
 ## Where you may practice
@@ -40,8 +38,7 @@ Read `vulnerable/csrf.py`. It returns `session_cookie` and ignores origin and to
 - `test_same_origin_with_token_is_allowed` — honest path; may pass on the broken files because a cookie is present
 - `test_missing_cookie_is_denied` — may pass on both
 
-You do not need a new origin string. When `test_foreign_origin_post_is_denied` fails, that is the evidence.
-
+You do not need a new origin string.
 ## Why it happens vs what it costs
 
 | Slice | Practice |
@@ -64,7 +61,7 @@ FastAPI `Request.cookies` will attach whatever the browser sent. Starlette CORS 
 python3 -m pytest labs/6.3/6.3-lab/tests --impl vulnerable
 ```
 
-Record `test_foreign_origin_post_is_denied`. Do not visit `evil.example` as a real host. A setup error is not proof the rule holds.
+Do not visit `evil.example` as a real host. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

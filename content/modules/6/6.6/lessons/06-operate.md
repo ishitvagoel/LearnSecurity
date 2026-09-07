@@ -53,7 +53,7 @@ If a human sees “link already used,” announce it in text a screen reader can
 
 ## Practice
 
-For `labs/6.6/6.6-lab`, write a log line (ids, reason, no token). Reject any line that includes the token, a note body, or a real email.
+Write a log line (ids, reason, no token). Reject any line that includes the token, a note body, or a real email.
 
 ## Use it somewhere new
 

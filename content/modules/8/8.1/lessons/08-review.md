@@ -42,10 +42,6 @@ Also reject: live device farms; personal-phone cookbooks; closing findings witho
 - Play Integrity in the app is 1.2
 - Old numbered mobile levels are current
 
-## Practice
-
-Write the review that would block this change. Name `test_client_integrity_claim_is_not_authorization`.
-
 ## Use it somewhere new
 
 A clinic change that “enabled Play Integrity” without a failing-attest deny check is an incomplete review. Name the independent falsehood that would still keep client ok plus attest fail false.

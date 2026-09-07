@@ -42,10 +42,6 @@ Also reject: attack-recipe payloads in the change description; closing findings 
 - React everywhere means this template is encoded
 - A famous-bugs nickname is the rule
 
-## Practice
-
-Write the review that would block this change. Name `test_angle_brackets_are_encoded`.
-
 ## Use it somewhere new
 
 A clinic change that “added a content-security policy” without an encode check is an incomplete review. Name the independent falsehood that would still keep `<` from remaining markup.

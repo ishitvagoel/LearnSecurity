@@ -26,7 +26,7 @@ A design-review guide that wants security in the design covers empty-change merg
 
 ## What the repaired files must show
 
-Read `fixed/sdl.py` against this checklist. Do not treat the snippet as a production merge bot.
+Check `fixed/sdl.py` against the list above. Do not treat the snippet as a production merge bot.
 
 | After the fix | Must be true |
 |---|---|

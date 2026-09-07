@@ -13,7 +13,7 @@ Also name outbox pattern and event schemas as the same identity family, without 
 
 ## Picture: cookie in the job is still a session
 
-Renaming “export notes” to “export patients overnight” is not transfer.
+Calling it “export patients overnight” instead of “export notes” does not move the work.
 
 | Notes app this week | Clinic sketch |
 |---|---|

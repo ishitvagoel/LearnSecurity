@@ -42,10 +42,6 @@ Also reject: live provider attacks; closing findings without re-running `test_mi
 - Vendor SDK verify is the same as a custom MAC over parsed JSON
 - A famous-bugs nickname is the rule
 
-## Practice
-
-Write the review that would block this change. Name `test_missing_signature_is_rejected`.
-
 ## Use it somewhere new
 
 Clinic change that “terminated TLS and allow-listed the vendor” without a missing-sig test is an incomplete review of path-trusted callbacks. Name the independent falsehood that would still keep empty sig false.

@@ -48,7 +48,7 @@ A task dashboard will show task success and stay silent when the task still used
 
 ## Practice
 
-For `labs/7.4/7.4-lab`, write a log line (job id, expected principal, no cookie). Reject any line that includes Alice’s session cookie, note bodies, or a live broker dump.
+Write a log line (job id, expected principal, no cookie). Reject any line that includes Alice’s session cookie, note bodies, or a live broker dump.
 
 ## Use it somewhere new
 

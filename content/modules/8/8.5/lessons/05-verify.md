@@ -28,7 +28,7 @@ If both pass, the test is not looking at the body substring. If both fail, the f
 | Abuse | Unsure values are not attached (fail closed; leftover if not in this check) |
 | Not claimed | A real crash console; the public store; screenshot pipelines; vendor DLP |
 
-The file is `labs/8.5/8.5-lab/tests/test_property.py`. The test `test_crash_report_omits_note_body` is there so a report that includes the body cannot sneak through.
+The test `test_crash_report_omits_note_body` is there so a report that includes the body cannot sneak through.
 
 Honest stack-present may pass on both implementations. That does not excuse the body-omit test. If the broken files do not fail `test_crash_report_omits_note_body`, the lab is miswired — fix the wiring, not the assertion.
 
@@ -55,7 +55,7 @@ python3 -m pytest labs/8.5/8.5-lab/tests --impl vulnerable
 python3 -m pytest labs/8.5/8.5-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail or pass next to the body×crash row. Reject a “test” that only greps a crash product name without calling `crash_report("secret")`.
+Paste nothing from answer keys. Reject a “test” that only greps a crash product name without calling `crash_report("secret")`.
 
 ## Use it somewhere new
 

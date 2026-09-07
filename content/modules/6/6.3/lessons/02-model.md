@@ -55,7 +55,7 @@ This lab is the leftover-cookie helper. Do not treat a Bearer-only API as “CSR
 
 ## Practice
 
-Fill the matrix. Look in `labs/6.3/6.3-lab`, starting with `csrf.py`.
+Open `csrf.py` in `labs/6.3/6.3-lab`.
 
 ## Use it somewhere new
 

@@ -26,7 +26,7 @@ Documented limits have to be actually implemented. This week's check covers `all
 
 ## What the repaired files must show
 
-Read `fixed/limit.py` against this checklist. Do not treat the snippet as a production rate limiter.
+Check `fixed/limit.py` against the list above. Do not treat the snippet as a production rate limiter.
 
 | After the fix | Must be true |
 |---|---|

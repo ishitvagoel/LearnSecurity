@@ -36,8 +36,6 @@ Cloud IAM dashboards will show “database in a private subnet” and stay silen
 
 ## Practice
 
-For `labs/3.3/3.3-lab`, write a log line you would accept.
-
 ```text
 log_denied reason=wrong_db_role role=postgres request_id=req_33ar
 ```

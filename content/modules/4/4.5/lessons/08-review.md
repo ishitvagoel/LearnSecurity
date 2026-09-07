@@ -40,10 +40,6 @@ Also reject: treating the client as what you trust; closing findings without re-
 - Authlib defaults check `aud`
 - TLS names the audience
 
-## Practice
-
-Write the review that would block this change. Name `test_wrong_audience_is_rejected`.
-
 ## Use it somewhere new
 
 Clinic change that “enables SMART” without an `aud` test is an incomplete review. Name the independent falsehood that would still keep `other-api` from spending this resource server.

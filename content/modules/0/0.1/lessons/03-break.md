@@ -30,8 +30,7 @@ A testing guide names *how* to test an **in-scope** app. It does not put `exampl
 - `test_localhost_lab_is_in_scope` — `http://127.0.0.1:8000/notes` may be true (honest local practice)
 - `test_public_host_is_out_of_scope` — `https://example.com/` must be false
 
-You do not need a new URL. When `test_public_host_is_out_of_scope` fails, that is the evidence.
-
+You do not need a new URL.
 Do not paste the public host into a browser or proxy.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover

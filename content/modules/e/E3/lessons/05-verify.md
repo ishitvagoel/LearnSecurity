@@ -42,7 +42,7 @@ Honest first capture may pass on both implementations. That does not excuse the 
 
 ## Practice
 
-Write fail or pass next to the matrix row. Reject a “test” that only greps `Idempotency-Key` in a Stripe client without calling `capture("k1")` twice.
+Reject a “test” that only greps `Idempotency-Key` in a Stripe client without calling `capture("k1")` twice.
 
 ## Use it somewhere new
 

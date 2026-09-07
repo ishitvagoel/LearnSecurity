@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny Python `close_incident` that returns true for every dict. The failure is already in the function: it never looks at recovery or logs. That always-true close is a **failed rule**, not a paperwork nit.
 
-Here is the rule:
-
 > An incident must not close without recovery done, and logs must not hold a note body. If `close_incident({"recovery": "todo", "logs": "ok"})` returns true, the close gate has failed as a security control. If `close_incident({"recovery": "done", "logs": "note_body leaked"})` returns true, the log sink has failed the same way.
 
 ## Where you may practice
@@ -28,7 +26,7 @@ flowchart TD
   Any[any incident dict] --> True[close_incident true]
 ```
 
-The broken files take that path on purpose. You do not need a SIEM. You must not query a live tenant. The true return for recovery todo *is* the leak.
+You do not need a SIEM. You must not query a live tenant. The true return for recovery todo *is* the leak.
 
 Earlier lessons already said bodies stay out of logs. This check is **detect without recover is theater**.
 
@@ -40,7 +38,7 @@ Read `vulnerable/ir.py`. It returns true for every dict. Tests:
 - `test_cannot_close_when_logs_contain_note_body`
 - `test_close_with_recovery_and_safe_logs_may_succeed` — done + ok may pass on both
 
-You do not need a new incident key. When `test_cannot_close_without_recovery` fails, that is the evidence.
+You do not need a new incident key.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -70,7 +68,7 @@ A SIEM dashboard turns green when alerts stop. A paging ack is a human click. Th
 python3 -m pytest labs/10.5/10.5-lab/tests --impl vulnerable
 ```
 
-Run from `labs/10.5/10.5-lab` if a collection at the repo root picks up `site/`. Record `test_cannot_close_without_recovery`. Do not probe public hosts. A setup error is not proof the rule holds.
+Run from `labs/10.5/10.5-lab` if a collection at the repo root picks up `site/`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

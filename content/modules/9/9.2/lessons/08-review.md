@@ -7,7 +7,7 @@
 
 This review is about notes-app merge gating. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `review_ok("x = eval(user)")` still returns true if they ship. Start at always-true `review_ok`, not at a scanner color.
 
-Treat the files in `labs/9.2/9.2-lab/vulnerable/` as the pull request. You already ran `test_eval_on_user_input_is_rejected` — that is the rule. A comment “will ban eval later” is not.
+You already ran `test_eval_on_user_input_is_rejected` — that is the rule. A comment “will ban eval later” is not.
 
 ## Picture: approved eval(user)
 
@@ -41,10 +41,6 @@ Also reject: weaponized eval; closing findings without re-running `test_eval_on_
 - A later review bot replaces this week
 - Writing down that eval is dangerous is rejecting eval
 - A later draft vocabulary is final
-
-## Practice
-
-Write the review that would block this change. Name `test_eval_on_user_input_is_rejected`.
 
 ## Use it somewhere new
 

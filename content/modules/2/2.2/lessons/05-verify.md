@@ -30,7 +30,7 @@ If both pass, the check is not looking at the cross-company get. If both fail, t
 | When things break | Unknown company does not share the slot |
 | Not claimed | Live CDN `Vary`; browser `no-store`; DNS authenticity |
 
-The file is `labs/2.2/2.2-request-path/tests/test_cache_key.py`. The checks are `test_same_tenant_cache_hit` and `test_other_tenant_does_not_receive_cached_body`. They observe bodies, not HTTP 200. That check is there so a company B get of `tenant-A-note` cannot sneak through as a cache hit.
+The checks are `test_same_tenant_cache_hit` and `test_other_tenant_does_not_receive_cached_body`. They observe bodies, not HTTP 200. That check is there so a company B get of `tenant-A-note` cannot sneak through as a cache hit.
 
 Map each check to a rule from the request-path map. Do not paste keys. If the broken files do not fail the cross-company get, the practice files are miswired — fix the wiring, not the assertion.
 
@@ -52,7 +52,7 @@ python3 -m pytest labs/2.2/2.2-request-path/tests --impl vulnerable
 python3 -m pytest labs/2.2/2.2-request-path/tests --impl fixed
 ```
 
-Write fail or pass next to the cache-key row. Reject a “check” that only greps `Cache-Control` without calling `cache_get` as company B. Paste nothing from answer keys.
+Reject a “check” that only greps `Cache-Control` without calling `cache_get` as company B. Paste nothing from answer keys.
 
 ## Use it somewhere new
 

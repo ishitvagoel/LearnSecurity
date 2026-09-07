@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny Python `accept`. The failure is already in the function: `accept` returns true and never marks the token used. A second true is a **failed rule**, not a retry nit.
 
-Here is the rule:
-
 > `accept("t1")` may be true once. The second `accept("t1")` must be false. If it is still true, an invite token was accepted twice.
 
 ## Where you may practice
@@ -29,7 +27,7 @@ flowchart TD
   Again["accept t1 again"] --> True
 ```
 
-The broken files take that path on purpose. The token is never consumed. Sequential double-accept is enough. You do not need a new token string. The leftover still returning true *is* the leak.
+The token is never consumed. Sequential double-accept is enough. You do not need a new token string. The leftover still returning true *is* the leak.
 
 Lock so a limited seat cannot be booked twice. This week's check is sequential consume-once, not a threaded trophy.
 
@@ -40,7 +38,7 @@ Read `vulnerable/invite.py`. It returns true every time. `reset()` exists so tes
 - `test_invite_token_is_single_use` — second `accept("t1")` is false
 - `test_distinct_tokens_are_independent` — `t2` still succeeds once on the repaired files
 
-You do not need a new token string. When `test_invite_token_is_single_use` fails, that is the evidence.
+You do not need a new token string.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|

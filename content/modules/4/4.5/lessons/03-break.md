@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny in-process `accept_token`. Fake claims. It does not open an identity provider or check a real signature. A JWT minted for another API still counting as a notes-app session is a **failed rule**, not a trophy dump of a production token.
 
-Here is the rule:
-
 > A token for another API is not a notes-app session. `accept_token({"sub": "alice", "aud": "other-api"}, "securecollab-api")` must be false.
 
 ## Where you may practice
@@ -42,8 +40,7 @@ Read `vulnerable/jwt_aud.py`. `accept_token` returns true when `sub` is in the d
 - `test_missing_audience_is_rejected`
 - `test_expected_audience_is_accepted` — honest path (may pass on both)
 
-You do not need a new `aud` string. When `test_wrong_audience_is_rejected` fails, that is the evidence.
-
+You do not need a new `aud` string.
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |
@@ -68,7 +65,7 @@ Authlib and many JWT libraries will check a signature if you give them a key and
 python3 -m pytest labs/4.5/4.5-lab/tests --impl vulnerable
 ```
 
-Record `test_wrong_audience_is_rejected`. Do not weaken it to “the JWT verifies.” A setup error is not proof the rule holds.
+Do not weaken it to “the JWT verifies.” A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

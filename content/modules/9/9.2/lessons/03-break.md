@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny Python `review_ok(diff)`. It does not merge anything. The failure is already in the function: it returns true for every string. That is a **failed rule**, not a trophy eval.
 
-Here is the rule:
-
 > Eval on user input must not be approved. `review_ok("x = eval(user)")` must be false.
 
 ## Where you may practice
@@ -39,7 +37,7 @@ Read `vulnerable/review.py`. It returns true for every string. Tests:
 - `test_eval_on_user_input_is_rejected`
 - `test_honest_diff_without_eval_may_pass` — `int(user)` may pass on both
 
-You do not need a new payload. When `test_eval_on_user_input_is_rejected` fails, that is the evidence.
+You do not need a new payload.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -71,7 +69,7 @@ GitHub’s “approve” button is not this rule. Formatters do not see eval as 
 python3 -m pytest labs/9.2/9.2-lab/tests --impl vulnerable
 ```
 
-Run from `labs/9.2/9.2-lab` if a repo-root collection picks up `site/`. Record `test_eval_on_user_input_is_rejected`. Do not probe public hosts. A setup error is not proof the rule holds.
+Run from `labs/9.2/9.2-lab` if a repo-root collection picks up `site/`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

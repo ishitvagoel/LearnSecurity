@@ -44,7 +44,7 @@ If your alert includes the matching kubeconfig, you have copied the leak into th
 
 ## What the framework does vs what you still have to check
 
-The same lying `"app"` Role, metadata hop, and Helm convenience ClusterRoles that bypass this practice will also bypass a "scan our CIS dashboard" detector. Name those places before you claim recover.
+The same lying `"app"` Role, metadata hop, and Helm convenience ClusterRoles that bypass this practice will also bypass a "scan our CIS dashboard" detector.
 
 Cause vs cost stays split here too: the **cause** is always-true admission (or a chart that adds ClusterRoleBinding); the **cost** is control-plane takeover from one app bug; **how you stop it** is the allow-list; **how you notice** is `cluster_admin_denied`; **how you recover** is delete-and-rotate. What the tool cannot do: this alert does not prove `"app"` is least privilege, and it does not block the metadata hop.
 
@@ -53,8 +53,6 @@ Cause vs cost stays split here too: the **cause** is always-true admission (or a
 A denied admission must say *cluster-admin refused*, not only "assert False." Do not encode that reason as color only.
 
 ## Practice
-
-For `labs/10.3/10.3-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=cluster_admin_denied sa=app ns=sc-prod requested=cluster-admin

@@ -57,7 +57,7 @@ A missing “storage reader × Base64 field × deny” row is how encoding gets 
 
 ## Practice
 
-Look in `labs/5.2/5.2-lab`, starting with `crypto.py`. Your artifact is a versioned list (even a table in your notes) with field, tool, allow or deny, and what would show the deny is false. Fake data only.
+Open `crypto.py` in `labs/5.2/5.2-lab`. Your artifact is a versioned list (even a table in your notes) with field, tool, allow or deny, and what would show the deny is false. Fake data only.
 
 ## Use it somewhere new
 

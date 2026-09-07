@@ -13,7 +13,7 @@ Also name notification fan-out and search complexity as the same budget family (
 
 ## Picture: bulk export is still a budget row
 
-Renaming “export notes” to “export patients” is not transfer.
+Calling it “export patients” instead of “export notes” does not move the work.
 
 | Notes app this week | Clinic sketch |
 |---|---|

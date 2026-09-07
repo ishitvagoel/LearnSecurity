@@ -60,7 +60,7 @@ A missing hash-compare cell is how a package name becomes false assurance. Write
 
 ## Practice
 
-Look in `labs/10.2/10.2-lab`, starting with `lock.py`.
+Open `lock.py` in `labs/10.2/10.2-lab`.
 
 ## Use it somewhere new
 

@@ -28,7 +28,7 @@ If both pass, the test is not looking at prod plus debug. If both fail, the fix 
 | Abuse | Unsure flags are not a production boot (fail closed; leftover if not in this check) |
 | Not claimed | Live compose; a canary; an assurance gate; other flags |
 
-The file is `labs/10.4/10.4-lab/tests/test_property.py`. The test `test_prod_debug_must_not_boot` is there so always-true `boot_ok` cannot sneak through.
+The test `test_prod_debug_must_not_boot` is there so always-true `boot_ok` cannot sneak through.
 
 Honest prod without debug may pass on both implementations. That does not excuse the prod-plus-debug deny test. If the broken files do not fail `test_prod_debug_must_not_boot`, the lab is miswired — fix the wiring, not the assertion.
 
@@ -55,7 +55,7 @@ python3 -m pytest labs/10.4/10.4-lab/tests --impl vulnerable
 python3 -m pytest labs/10.4/10.4-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail or pass next to the matrix row. Reject a “test” that only greps `NODE_ENV` in compose without calling `boot_ok("prod", True)`.
+Paste nothing from answer keys. Reject a “test” that only greps `NODE_ENV` in compose without calling `boot_ok("prod", True)`.
 
 ## Use it somewhere new
 

@@ -26,7 +26,7 @@ A checklist that wants debug off in production covers prod plus debug. This week
 
 ## What the repaired files must show
 
-Read `fixed/cfg.py` against this checklist. Do not treat the snippet as a production compose product.
+Check `fixed/cfg.py` against the list above. Do not treat the snippet as a production compose product.
 
 | After the fix | Must be true |
 |---|---|

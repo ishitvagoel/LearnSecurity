@@ -42,10 +42,6 @@ Also reject: live store reverse engineering; closing findings without re-running
 - Mobile-app “R-level” is a current verification level
 - `minifyEnabled` is this rule
 
-## Practice
-
-Write the review that would block this change. Name `test_debug_build_cannot_call_prod_export`.
-
 ## Use it somewhere new
 
 A clinic change that “enabled R8 and Play App Signing” without a debug-to-prod deny check is an incomplete channel review. Name the independent falsehood that would still keep debug plus ok false.

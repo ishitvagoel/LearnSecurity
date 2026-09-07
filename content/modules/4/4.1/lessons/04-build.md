@@ -28,7 +28,7 @@ All active sessions have to be killed. This week's check covers one synthetic co
 
 ## What the repaired files must show
 
-Read `fixed/lifecycle.py` against this checklist. Do not treat the snippet as a production session store.
+Check `fixed/lifecycle.py` against the list above. Do not treat the snippet as a production session store.
 
 | After the fix | Must be true |
 |---|---|

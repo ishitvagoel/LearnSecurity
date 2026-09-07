@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny Python `close_finding` that returns true for every dict. The failure is already in the function: it never looks at `retest`. That always-true close is a **failed rule**, not a paperwork nit.
 
-Here is the rule:
-
 > A finding must not close without a passing retest of the same bad result. If `close_finding({"retest": None})` returns true, the close gate has failed as a security control.
 
 ## Where you may practice
@@ -28,7 +26,7 @@ flowchart TD
   Any[any finding dict] --> True[close_finding true]
 ```
 
-The broken files take that path on purpose. You do not need a testing-guide list. You must not pentest a public host. The true return for `{retest: None}` *is* the leak.
+You do not need a testing-guide list. You must not pentest a public host. The true return for `{retest: None}` *is* the leak.
 
 The isolation lesson already said HTTP 200 is not a security test. This check is **the same isolation check must pass before close**.
 
@@ -39,7 +37,7 @@ Read `vulnerable/pentest.py`. It returns true for every dict. Tests:
 - `test_cannot_close_without_retest`
 - `test_passing_retest_may_close` — `{retest: "pass"}` may pass on both
 
-You do not need a new finding key. When `test_cannot_close_without_retest` fails, that is the evidence.
+You do not need a new finding key.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -69,7 +67,7 @@ A ticket tracker will show Done. A pentest vendor PDF is evidence that *someone 
 python3 -m pytest labs/9.5/9.5-lab/tests --impl vulnerable
 ```
 
-Run from `labs/9.5/9.5-lab` if a collection at the repo root picks up `site/`. Record `test_cannot_close_without_retest`. Do not probe public hosts. A setup error is not proof the rule holds.
+Run from `labs/9.5/9.5-lab` if a collection at the repo root picks up `site/`. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

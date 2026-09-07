@@ -20,7 +20,7 @@ You get **clinic SMS reminders** — a new channel that HTTP scans of the notes 
 
 ## Picture: a new hop is a new “what are we working on?”
 
-Renaming “note” to “reminder” is not transfer. Content leak and number-swap are new rows. A vendor sticker is still not what you trust.
+Calling it “reminder” instead of “note” does not move the work. Content leak and number-swap are new rows. A vendor sticker is still not what you trust.
 
 ```mermaid
 flowchart LR

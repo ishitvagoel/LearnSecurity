@@ -59,7 +59,7 @@ A missing “unsigned POST × accept × deny” row is how a path-trusted callba
 
 ## Practice
 
-Look in `labs/7.3/7.3-lab`, starting with `hook.py`. Local only. Do not POST a live webhook.
+Open `hook.py` in `labs/7.3/7.3-lab`. Local only. Do not POST a live webhook.
 
 ## Use it somewhere new
 

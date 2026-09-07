@@ -29,7 +29,7 @@ If both pass, the check is not looking at ACL tenant vs stored tenant. If both f
 | Wrong input / abuse | Messy duplicate keys: refused **or** both tenants identical |
 | When things break | Uncertainty does not persist a body under a guessed company |
 
-The file is `labs/2.1/2.1-parser-boundaries/tests/test_parser.py`. The checks are `test_unambiguous_json_is_accepted` and `test_duplicate_tenant_keys_are_one_meaning`. The second is there so last-key-wins `acl_tenant != stored_tenant` cannot sneak through.
+The checks are `test_unambiguous_json_is_accepted` and `test_duplicate_tenant_keys_are_one_meaning`. The second is there so last-key-wins `acl_tenant != stored_tenant` cannot sneak through.
 
 ```text
 python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl vulnerable
@@ -55,7 +55,7 @@ Run from `labs/2.1/2.1-parser-boundaries` if a repo-root collection picks up `si
 
 ## Practice
 
-Run both implementations this session. If the broken files do not fail, the practice is miswired — fix the wiring, not the check. Write fail or pass next to the ingest rule from the map page.
+Run both implementations this session. If the broken files do not fail, the practice is miswired — fix the wiring, not the check. page.
 
 ## Use it somewhere new
 

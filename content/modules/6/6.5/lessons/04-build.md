@@ -29,7 +29,7 @@ The allow-list has to run before calling another service. This week's check cove
 
 ## What the repaired files must show
 
-Read `fixed/ssrf.py` against this checklist. Do not treat the snippet as a production egress proxy.
+Check `fixed/ssrf.py` against the list above. Do not treat the snippet as a production egress proxy.
 
 | After the fix | Must be true |
 |---|---|

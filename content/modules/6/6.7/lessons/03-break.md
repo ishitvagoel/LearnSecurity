@@ -7,8 +7,6 @@
 
 The practice is not a website you attack. It is a tiny Python `allow`. It does not open a live export API. The failure is already in the function: it says yes for every `n`. That is a **failed rule**, not a trophy against a public host.
 
-Here is the rule:
-
 > Export has a resource account, not an unbounded loop. `allow(4)` must be false in the lab window. `allow(3)` may be true.
 
 ## Where you may practice
@@ -40,7 +38,7 @@ Read `vulnerable/limit.py`. It returns true for every `n`. Tests:
 - `test_third_export_is_allowed`
 - `test_first_export_is_allowed` — honest path; may pass on both
 
-You do not need a new `n`. When `test_fourth_export_is_denied` fails, that is the evidence.
+You do not need a new `n`.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -72,7 +70,7 @@ An IP limit at the edge is a bucket per address, not a per-person export account
 python3 -m pytest labs/6.7/6.7-lab/tests --impl vulnerable
 ```
 
-Record `test_fourth_export_is_denied`. Do not probe public hosts. A setup error is not proof the rule holds.
+Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
