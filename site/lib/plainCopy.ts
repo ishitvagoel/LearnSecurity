@@ -147,6 +147,9 @@ export function displayHeading(raw: string): string {
   if (text.startsWith("Four modes, even for")) {
     return "What the check has to show";
   }
+  if (text.startsWith("HITL")) {
+    return "Can people still use it";
+  }
   return text;
 }
 
@@ -155,8 +158,8 @@ export function plainLessonTitle(title: string): string {
   t = t.replace(/^Local fixture:\s*/i, "Practice: ");
   t = t.replace(/^Somewhere new:\s*/i, "Same idea on ");
   t = t.replace(/^Transfer:\s*/i, "Same idea on ");
-  t = t.replace(/^Review (.+) like a pull request$/i, "Would you merge this $1?");
   t = t.replace(/ as a PR$/i, " like a pull request");
+  t = t.replace(/^Review (.+) like a pull request$/i, "Would you merge this $1?");
   t = t.replace(
     /^Fail on the broken files, then pass on the repaired ones$/i,
     "The broken files must fail this check",
@@ -1069,7 +1072,6 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/\*\*A tool is not this sentence\.\*\* /g, ""],
   [/A tool is not the rule: /g, ""],
   [/A tool is not the rule\. /g, ""],
-  [/The alert should name /g, "Name "],
   [/ — inventory them before you claim recover\./g, "."],
   [/ — inventory it before you claim recover\./g, "."],
   [/ — inventory them before claiming recover\./g, "."],
