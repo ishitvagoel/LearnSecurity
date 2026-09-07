@@ -48,8 +48,6 @@ A test that only greps a maturity name in a slide without calling `accept_except
 - Extra advanced documentation of a dangerous function
 - An assurance gate complete
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session from the lab directory if needed:

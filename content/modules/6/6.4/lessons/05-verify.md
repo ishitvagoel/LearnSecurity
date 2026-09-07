@@ -41,8 +41,6 @@ Honest relative names may pass on both implementations. That does not excuse the
 - Antivirus — extra, not the rule
 - XML/pickle/YAML parsers
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `uuid` in a filename helper without calling `resolve("../outside")`.

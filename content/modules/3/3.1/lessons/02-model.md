@@ -84,4 +84,4 @@ Operators still see ids. How long logs live after a note is deleted stays on the
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Do not run this list against a public clinic or a live log tenant. Answer keys are not on this site.
+Do not run this list against a public clinic or a live log tenant. Answer keys are not on this site.

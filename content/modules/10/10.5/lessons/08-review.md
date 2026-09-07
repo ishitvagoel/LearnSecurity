@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ Start at `close_incident` and the recovery-todo row, not at a scanner color or a
 
 ## Picture: close with recovery todo
 
-**close with recovery todo**. Label it rule, tool, or false assurance before you accept the change.
+**close with recovery todo**.
 
 ```mermaid
 flowchart TD

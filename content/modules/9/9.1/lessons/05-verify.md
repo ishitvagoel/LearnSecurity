@@ -47,8 +47,6 @@ A test that only greps `AUTHZ-1` in a spreadsheet without calling `covered(..., 
 - A later draft of a practice guide as a product
 - The verification gate complete
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session from the lab directory if needed:

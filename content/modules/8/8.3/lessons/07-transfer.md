@@ -7,7 +7,7 @@
 
 You get a clinic deep link `as=doctor`. Also name OAuth redirect to the app (4.5).
 
-Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: after `open_link({"as": "admin"})`, `current_user()` must still be `"alice"`. Rewrite it for a clinic.
+On the notes app, after `open_link({"as": "admin"})`, `current_user()` must still be `"alice"`.
 
 **Product sketch:** an EHR-lite claimed HTTPS app link `open?as=doctor` “for kiosk demos,” plus App Links verified.
 
@@ -19,7 +19,7 @@ flowchart LR
   As["as=doctor still bound"] --> Reality[session switch]
 ```
 
-Renaming `as=admin` to `as=doctor` is not transfer. Person, object, path, and leftover change. If the kiosk demo uses a verified host while `open_link` copies `as`, the rule is gone. HTTPS, App Links, and `exported=false` without a test do not keep alice. OAuth redirect to the app (4.5) and WebView bridges are the same extras family — name them, do not run those systems here. Claimed HTTPS still wants a real host; custom schemes remain hijackable.
+Renaming `as=admin` to `as=doctor` is not transfer. If the kiosk demo uses a verified host while `open_link` copies `as`, the rule is gone. HTTPS, App Links, and `exported=false` without a test do not keep alice. OAuth redirect to the app (4.5) and WebView bridges are the same extras family — name them, do not run those systems here. Claimed HTTPS still wants a real host; custom schemes remain hijackable.
 
 | Notes app this week | Clinic sketch |
 |---|---|
@@ -30,7 +30,7 @@ Renaming `as=admin` to `as=doctor` is not transfer. Person, object, path, and le
 
 ## Prompt — clinic deep link as=doctor
 
-Rewrite the notes-app sentence for this product. Your answer must include:
+Write the same rule here. Include:
 
 1. who can act (another app on the tablet sending extras — not a live clinic);
 2. what you trust (server session is what you trust; App Links and https are not identity);

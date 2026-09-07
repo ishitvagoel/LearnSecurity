@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ The check you already ran (`test_dotdot_does_not_escape_root`) is the rule test.
 
 ## Picture: open(user_path) / join without canonicalize
 
-**`open(user_path)` / join without canonicalize**. Label it rule, tool, or false assurance before you accept the change.
+**`open(user_path)` / join without canonicalize**.
 
 ```mermaid
 flowchart TD

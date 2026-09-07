@@ -47,8 +47,6 @@ python3 -m pytest labs/5.2/5.2-lab/tests --impl fixed
 - Nonce uniqueness (advanced; not this check)
 - A production AES-GCM implementation
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session:

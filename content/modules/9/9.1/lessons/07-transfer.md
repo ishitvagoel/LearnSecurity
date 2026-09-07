@@ -7,7 +7,7 @@
 
 You get a **clinic HIPAA “done” column**. A fake isolation row sits in a checklist.
 
-The notes-app sentence was: `covered("AUTHZ-1", [status-only])` must be false. Rewrite it for a clinic: status-only is not coverage; an isolation assert may count. A pasted checklist is still inventory, not a tailored matrix.
+On the notes app, `covered("AUTHZ-1", [status-only])` must be false. For a clinic, status-only is not coverage; an isolation assert may count. A pasted checklist is still inventory, not a tailored matrix.
 
 **Product sketch:** an EHR-lite “we imported the HIPAA checklist and marked isolation done,” plus a green CI.
 
@@ -35,7 +35,7 @@ Status-only still is not coverage. An isolation-assert may still count. Marking 
 
 ## Prompt — clinic HIPAA done column
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (optimistic status column — not a live hospital);
 2. what you trust (the coverage check is the promise; checklist membership is not);

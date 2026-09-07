@@ -7,7 +7,7 @@
 
 You get a **clinic sketch** with group practices and an `org_id` in JSON.
 
-The notes-app sentence was: `tenant_for({"tenant": "A"}, {"tenant": "B"})` must be `"A"`. The JSON body is not the tenant. Rewrite it for a clinic: bind tenant from the session; body tenant overrides session must stay false.
+On the notes app, `tenant_for({"tenant": "A"}, {"tenant": "B"})` must be `"A"`. The JSON body is not the tenant. For a clinic, bind tenant from the session; body tenant overrides session must stay false.
 
 **Prompt:** Clinic group practice switching `org_id` in JSON. Also name a relationship-graph tuple vs this binding.
 
@@ -27,7 +27,7 @@ Session A plus body B is still A. Matching A/A may still keep A. Enabling row-le
 
 ## Prompt — clinic sketch
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (member of practice A sending practice B — not a live clinic company);
 2. what you trust (session binding is trusted; a row-level variable from the body, a famous-bugs mapping, and a subdomain are not);

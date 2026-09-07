@@ -43,8 +43,6 @@ Map the test to the script-read row you wrote. Do not paste keys. If broken does
 - WebView bridges (later mobile)
 - That note bodies in the page are unreadable to script
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session. Write the fail/pass pair next to the table row. Reject a “test” that only greps `HttpOnly` in a string without calling the reader.

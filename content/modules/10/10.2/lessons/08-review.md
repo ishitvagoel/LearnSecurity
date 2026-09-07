@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ Start at `install_ok` and the two hash strings, not at a scanner color or an SBO
 
 ## Picture: install_ok true on hash mismatch
 
-**install_ok true on hash mismatch**. Label it rule, tool, or false assurance before you accept the change.
+**install_ok true on hash mismatch**.
 
 ```mermaid
 flowchart TD

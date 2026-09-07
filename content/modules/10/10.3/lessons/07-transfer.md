@@ -7,7 +7,7 @@
 
 You get a **clinic app ServiceAccount that is cluster-admin**.
 
-The notes-app sentence was: `pod_ok("cluster-admin")` must be false. Rewrite it for a clinic: cluster-admin denied, app may run. A private namespace is still a name, not isolation.
+On the notes app, `pod_ok("cluster-admin")` must be false. For a clinic, cluster-admin denied, app may run. A private namespace is still a name, not isolation.
 
 **Product sketch:** an EHR-lite "the API namespace is private so ClusterRole is fine," plus "we attached a network policy and a CIS Kubernetes scan."
 
@@ -35,7 +35,7 @@ If the namespace is "private" while `pod_ok` is always true, the rule is gone. A
 
 ## Prompt — clinic app SA is cluster-admin
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (compromised container / malicious chart — not a live clinic cluster);
 2. what you trust (allow-listed namespaced role is the promise; namespace, network policy, restricted pod profile, and CIS are not);

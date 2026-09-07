@@ -48,8 +48,6 @@ A test that only greps a crash product name in Gradle without calling `crash_rep
 - Last-chance error handlers (an advanced extra)
 - Web crash reports (10.5)
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session from the lab directory if needed:

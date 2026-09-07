@@ -7,7 +7,7 @@
 
 You get a **clinic sketch** with a “share record with partner” POST that relies on the login cookie.
 
-The notes-app sentence was: `allow_share` from a foreign origin without a matching CSRF token is false. Rewrite it for a clinic: leftover cookies are not consent to share.
+On the notes app, `allow_share` from a foreign origin without a matching CSRF token is false. For a clinic, leftover cookies are not consent to share.
 
 **Prompt:** Clinic “share record with partner” POST. Also name postMessage, clickjacking, and CORS `*` with credentials as leftovers — do not run them against a live clinic.
 
@@ -25,7 +25,7 @@ A foreign origin without a token still has to be false, and same origin without 
 
 ## Prompt — clinic sketch
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (foreign origin using the victim browser as helper — **not** a live clinic);
 2. what you trust (origin + token are trusted; SameSite is not);

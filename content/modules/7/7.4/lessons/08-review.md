@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ The check you already ran (`test_user_session_is_not_worker_identity`) is the ru
 
 ## Picture: user_session or service fallback / copy request cookies into the job
 
-**`user_session or service` fallback / copy request cookies into the job**. Label it rule, tool, or false assurance before you accept the change.
+**`user_session or service` fallback / copy request cookies into the job**.
 
 ```mermaid
 flowchart TD

@@ -42,8 +42,6 @@ Honest same-origin-with-token may pass on both (broken files allow any cookie). 
 - postMessage origin checks
 - Later open redirect
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session:

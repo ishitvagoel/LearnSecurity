@@ -5,13 +5,13 @@
 
 ## Use it somewhere new
 
-You get a **clinic guardian list**, an **invite token**, or an **export quota**. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: eight `add_share` calls leave count ≤ 5. Rewrite it for a different object.
+You get a **clinic guardian list**, an **invite token**, or an **export quota**. On the notes app, eight `add_share` calls leave count ≤ 5.
 
 **Prompt:** Clinic: max 3 guardians per child. Optionally map invite tokens and export quotas as *different objects, same shape*.
 
 **Product sketch:** EHR-lite guardian list on a booking card.
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (scripted add; disabled UI max; import — **not** a live clinic);
 2. what you trust (which write path is trusted; HTML is not);
@@ -22,7 +22,7 @@ Rewrite the notes-app sentence. Include:
 
 ## Picture: three is not five, the shape is the same
 
-Renaming “share” to “guardian” is not transfer. Person, object, path, and leftover change. A fourth guardian and a second invite redeem are new rules. HTML max is still not what you trust.
+Renaming “share” to “guardian” is not transfer. A fourth guardian and a second invite redeem are new rules. HTML max is still not what you trust.
 
 ```mermaid
 flowchart LR

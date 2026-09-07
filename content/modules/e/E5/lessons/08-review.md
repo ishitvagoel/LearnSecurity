@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ The folder `labs/E5/e5-lab/vulnerable/` is the change. Review it as if it were t
 
 ## Picture: company taken from the body
 
-**company taken from the body**. Label it rule, tool, or false assurance before you accept the change.
+**company taken from the body**.
 
 ```mermaid
 flowchart TD

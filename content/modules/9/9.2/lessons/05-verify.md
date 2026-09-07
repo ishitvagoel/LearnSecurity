@@ -47,8 +47,6 @@ Honest diffs without eval may pass on both implementations. That does not excuse
 - That the substring is a complete avoid-eval oracle
 - That a course gate is done
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session from the lab directory if needed:

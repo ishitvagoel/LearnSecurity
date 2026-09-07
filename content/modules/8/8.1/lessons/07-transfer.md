@@ -7,7 +7,7 @@
 
 You get a clinic Android client that sends `hipaaMode=true`. Also name feature flags in the app file and `premium=true`.
 
-Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: `allow_export({"integrity": "ok"}, "fail")` must be false. Rewrite it for a clinic.
+On the notes app, `allow_export({"integrity": "ok"}, "fail")` must be false.
 
 **Product sketch:** an EHR-lite Compose switch “HIPAA mode” that the API trusts as a boolean.
 
@@ -19,7 +19,7 @@ flowchart LR
   Json["JSON hipaaMode true"] --> Reality[server grant if unchecked]
 ```
 
-Renaming `integrity` to `hipaaMode` is not transfer. Person, object, path, and leftover change. If the Compose switch is “HIPAA mode” while the server binds `hipaaMode=true` as a grant, the rule is gone. Play Integrity in the app, shrinking the app, and the store listing do not ignore the client boolean. Feature flags and `premium=true` are the same claim family — name them, do not run those app files here. The phone sandbox still does not put this process in what you trust (the first page).
+Renaming `integrity` to `hipaaMode` is not transfer. If the Compose switch is “HIPAA mode” while the server binds `hipaaMode=true` as a grant, the rule is gone. Play Integrity in the app, shrinking the app, and the store listing do not ignore the client boolean. Feature flags and `premium=true` are the same claim family — name them, do not run those app files here. The phone sandbox still does not put this process in what you trust (the first page).
 
 | Notes app this week | Clinic sketch |
 |---|---|
@@ -30,7 +30,7 @@ Renaming `integrity` to `hipaaMode` is not transfer. Person, object, path, and l
 
 ## Prompt — clinic Android hipaaMode=true
 
-Rewrite the notes-app sentence for this product. Your answer must include:
+Write the same rule here. Include:
 
 1. who can act (patched clinic app file — not a live hospital device);
 2. what you trust (server attest plus 1.2 is what you trust; client boolean and store listing are not);

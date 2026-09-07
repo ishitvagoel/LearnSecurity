@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ The check you already ran (`test_green_scanner_is_not_an_empty_threat_model`) is
 
 ## Picture: threats = [] if scanner_green
 
-**threats = [] if `scanner_green`**. Label it rule, tool, or false assurance before you accept the change.
+**threats = [] if `scanner_green`**.
 
 ```mermaid
 flowchart TD

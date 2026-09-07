@@ -7,7 +7,7 @@
 
 You get a clinic debug build against prod FHIR. Also name an APK inventory list (10.2).
 
-Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: `api_allowed("debug", "ok")` must be false. Rewrite it for a clinic.
+On the notes app, `api_allowed("debug", "ok")` must be false.
 
 **Product sketch:** an EHR-lite “debug flavor uses the same application id and API key so testers can hit real data,” plus R8 on release.
 
@@ -30,7 +30,7 @@ If testers share the prod API key while `api_allowed` is always true, the rule i
 
 ## Prompt — clinic debug vs prod FHIR
 
-Rewrite the notes-app sentence for this product. Your answer must include:
+Write the same rule here. Include:
 
 1. who can act (leaked debug APK — not a live hospital);
 2. what you trust (server build-plus-attest is what you trust; R8 and Play App Signing are not);

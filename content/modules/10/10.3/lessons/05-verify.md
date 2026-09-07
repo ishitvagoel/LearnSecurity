@@ -48,8 +48,6 @@ A test that only greps `namespace:` in a chart without calling `pod_ok("cluster-
 - Documented cluster-API retry (extra, advanced)
 - An assurance gate complete
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session from the lab directory if needed:

@@ -7,7 +7,7 @@
 
 You get a **clinic that closes the ticket when the SIEM is green**.
 
-The notes-app sentence was: `close_incident({"recovery": "todo", "logs": "ok"})` must be false. Rewrite it for a clinic: recovery todo denied, `note_body` denied, done + ok may close. A green SIEM is still a detect tile, not recover.
+On the notes app, `close_incident({"recovery": "todo", "logs": "ok"})` must be false. For a clinic, recovery todo denied, `note_body` denied, done + ok may close. A green SIEM is still a detect tile, not recover.
 
 **Product sketch:** an EHR-lite “alerts stopped so we closed INC-12,” plus “we have nightly backups and a known-exploited dashboard.”
 
@@ -36,7 +36,7 @@ A recovery todo still has to be denied, and a note body still has to stay out. D
 
 ## Prompt — clinic close ticket when SIEM is green
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (optimistic closer / still-in actor — not a live clinic SIEM attack);
 2. what you trust (recovery done and no `note_body` is the promise; SIEM, paging, known-exploited list, and untested backups are not);

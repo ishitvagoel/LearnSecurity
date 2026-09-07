@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ The check you already ran (`test_protect_is_not_mere_encoding`) is the rule test
 
 ## Picture: protect equals base64
 
-**`protect = base64`**. Label it rule, tool, or false assurance before you accept the change.
+**`protect = base64`**.
 
 ```mermaid
 flowchart TD

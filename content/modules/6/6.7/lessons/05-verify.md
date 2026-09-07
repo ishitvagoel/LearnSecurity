@@ -47,8 +47,6 @@ Honest `allow(3)` may pass on both implementations. That does not excuse the fou
 - Cost of a real cloud bill
 - GraphQL alias multiplication (7.1)
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session:

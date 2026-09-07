@@ -47,8 +47,6 @@ Map the test to the header-https × socket-http row you wrote. Honest socket-htt
 - Bound load-balancer identity in production
 - Pinning as a requirement
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session:

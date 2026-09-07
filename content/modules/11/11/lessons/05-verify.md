@@ -47,8 +47,6 @@ A test that only greps `revoke` in a README without calling `read("n1", "B")` af
 - Access-rights change in the same session without signing in again
 - An assurance gate complete
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session from the lab directory if needed:

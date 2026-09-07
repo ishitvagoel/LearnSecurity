@@ -7,13 +7,13 @@
 
 You get a **clinic bulk-export** of patients.
 
-The notes-app sentence was: `allow(4)` must be false in the lab window. Export has a resource account, not an unbounded loop. Rewrite it for a clinic: the fourth bulk-export is denied, the first three may be allowed.
+On the notes app, `allow(4)` must be false in the lab window. Export has a resource account, not an unbounded loop. For a clinic, the fourth bulk-export is denied, the first three may be allowed.
 
 Also name notification fan-out and search complexity as the same budget family (7.1), without running those systems.
 
 ## Picture: bulk export is still a budget row
 
-Renaming “export notes” to “export patients” is not transfer. The untrusted click changes. The fork does not.
+Renaming “export notes” to “export patients” is not transfer.
 
 | Notes app this week | Clinic sketch |
 |---|---|
@@ -36,7 +36,7 @@ The fourth export still has to be false. The third may still be true. Rate-limit
 
 **Product sketch:** a small clinic app with an “Export all” button that is disabled in the browser.
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (scripted clinician session — not a live clinic);
 2. what you trust (server `n <= 3` is what you trust; the disabled button and an IP rate limit are not);

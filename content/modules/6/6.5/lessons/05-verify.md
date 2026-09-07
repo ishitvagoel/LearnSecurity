@@ -47,8 +47,6 @@ Honest lab-host https may pass on both (broken files allow any https). That does
 - Webhook signing (7.3)
 - A production egress proxy
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session:

@@ -7,7 +7,7 @@
 
 You get a **clinic record delete**. A patient row and an appointment card sit next to each other.
 
-The notes-app sentence was: after `delete_account("alice")`, `body_retained("alice")` is None. Rewrite it for a clinic: every copy of the notes must die in the same delete.
+On the notes app, after `delete_account("alice")`, `body_retained("alice")` is None. For a clinic, every copy of the notes must die in the same delete.
 
 ## Picture: the card is another copy
 
@@ -34,7 +34,7 @@ After patient delete, appointment-card notes and the analytics export still have
 
 ## Prompt — leftover card notes
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (insider analytics; partner CSV — **not** a live clinic);
 2. what you trust (which delete path is trusted; the contract PDF is not);

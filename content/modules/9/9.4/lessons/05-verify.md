@@ -47,8 +47,6 @@ A test that only greps a scanner name in a workflow without calling `ship_ok([HI
 - Dependency confusion as an advanced leftover
 - That the verification gate is done
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session from the lab directory if needed:

@@ -40,8 +40,6 @@ Map each test to a row on the channel map you drew. If the broken files do not f
 - Clinic deep links (transfer)
 - CORS header-token leakage (later)
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `Referrer-Policy` without calling `session_from_request` on a query dict.

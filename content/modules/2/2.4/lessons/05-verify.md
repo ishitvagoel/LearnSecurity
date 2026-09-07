@@ -43,8 +43,6 @@ Map each test to the retry row you wrote on the state-machine page. Do not paste
 - Awareness-list compliance
 - That GET is safe (HTTP still does not make POST happen once, and GET must not share)
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `idempotency` in a string without calling `share_note` twice.

@@ -5,13 +5,13 @@
 
 ## Use it somewhere new
 
-You get a **health-record append-only audit**, plus a **simulated copay**. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: two `capture("k1")` must leave count 1. Rewrite it for a clinic. A processor sticker must not mean the ledger is once.
+You get a **health-record append-only audit**, plus a **simulated copay**. On the notes app, two `capture("k1")` must leave count 1. A processor sticker must not mean the ledger is once.
 
 **Prompt:** Health record append-only audit. Also name a simulated copay.
 
 **Product sketch:** EHR-lite “the processor said retries are fine,” plus “we filed a questionnaire so high-assurance is done.”
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (504 retry / double-click — not a live clinic processor attack);
 2. what you trust (key identity is what you trust; a payment company and a questionnaire are not);

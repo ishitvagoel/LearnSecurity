@@ -7,7 +7,7 @@
 
 You get a **clinic invite-guardian token**. An “add guardian” mail link always returns 200.
 
-The notes-app sentence was: second `accept('t1')` must be false. Rewrite it for a clinic: consume-once, first true, second false.
+On the notes app, second `accept('t1')` must be false. For a clinic, consume-once, first true, second false.
 
 Also name password reset, 2.4 share retry, and later jobs (7.4) as the same family with different “once” meanings.
 
@@ -33,7 +33,7 @@ If the mail link always returns 200 and never writes used, the hole is open. A m
 
 ## Prompt — clinic invite-guardian
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (two clicks or a copied link — **not** a live clinic);
 2. what you trust (consume in the store is trusted; HTTP 400 is not);

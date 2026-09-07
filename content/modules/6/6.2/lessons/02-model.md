@@ -66,4 +66,4 @@ Trusted admin HTML. Content-security policy in report-only mode. Encoding for a 
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

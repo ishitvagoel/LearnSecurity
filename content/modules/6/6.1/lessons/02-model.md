@@ -70,4 +70,4 @@ Argument injection; plugin shells; formula characters in CSV cells.
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Do not run this map against a live clinic or a live export worker. Answer keys are not on this site.
+Do not run this map against a live clinic or a live export worker. Answer keys are not on this site.

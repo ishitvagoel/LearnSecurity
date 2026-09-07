@@ -7,7 +7,7 @@
 
 You get a **clinic that files a “HIPAA exception.”**
 
-The notes-app sentence was: `accept_exception({"owner": "", "review_by": None})` must be false. Rewrite it for a clinic: empty owner denied, complete record may accept. “Legal said we accept it” is still a spoken yes, not a register row.
+On the notes app, `accept_exception({"owner": "", "review_by": None})` must be false. For a clinic, empty owner denied, complete record may accept. “Legal said we accept it” is still a spoken yes, not a register row.
 
 **Product sketch:** an EHR-lite “legal said we accept it,” plus “our maturity score is 2.5 so exceptions are done.”
 
@@ -36,7 +36,7 @@ An empty owner still has to be denied. A complete record may still accept. Addin
 
 ## Prompt — clinic HIPAA exception
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (calendar / silent accept — not a live clinic audit);
 2. what you trust (schema is the promise; maturity score, industry labels, and a pledge are not);

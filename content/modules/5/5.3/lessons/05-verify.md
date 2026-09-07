@@ -39,8 +39,6 @@ The honest current-secret test may pass on both. That does not excuse the defaul
 - Keys baked into a phone app (later topic)
 - A second default on a worker (later topic)
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `Vault` in a README without calling `auth("sk-lab-hardcoded", current="rotated-now")`.

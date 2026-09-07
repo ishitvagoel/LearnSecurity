@@ -47,8 +47,6 @@ A test that only greps a testing-guide id in a checklist without calling `is_sec
 - Race-condition tests with a named bad result
 - A later gate complete
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session from the lab directory if needed:

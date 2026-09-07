@@ -7,7 +7,7 @@
 
 You get a **clinic page** whose API client uses `https://` while the API socket is `http`. A dashboard that “forces HTTPS” sits next to that socket.
 
-The notes-app sentence was: `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` is false. Rewrite it for a clinic: a client header is not TLS.
+On the notes app, `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` is false. For a clinic, a client header is not TLS.
 
 ## Picture: the URL bar is not the socket
 
@@ -33,7 +33,7 @@ Header https plus socket http still has to be false. Enabling a CDN “HTTPS onl
 
 ## Prompt — clinic page vs API socket
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (cleartext client setting Forwarded-Proto — **not** a live clinic);
 2. what you trust (which socket or bound load balancer is trusted; the dashboard toggle is not);

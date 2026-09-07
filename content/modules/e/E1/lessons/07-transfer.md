@@ -7,7 +7,7 @@
 
 You get a **clinic summarizer over charts**.
 
-The notes-app sentence was: `run_tool("exec_sql", {})` must be None. Rewrite it for a clinic: `exec_sql` still has to be denied. `search_notes` may still run. A system prompt is still English, not permission.
+On the notes app, `run_tool("exec_sql", {})` must be None. For a clinic, `exec_sql` still has to be denied. `search_notes` may still run. A system prompt is still English, not permission.
 
 **Product sketch:** an EHR-lite "the model is only allowed to summarize, the system prompt forbids SQL," plus "we mapped a famous-bugs list so the agent is done."
 
@@ -35,7 +35,7 @@ If the model "only summarizes" while `run_tool` is always-run, the rule is gone.
 
 ## Prompt — clinic summarizer over charts
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (prompt injection in a chart note — not a live clinic model);
 2. what you trust (runtime allow-list is the promise; prompt, retrieval, and a famous-bugs map are not);

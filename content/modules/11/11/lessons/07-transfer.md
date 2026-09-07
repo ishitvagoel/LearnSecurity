@@ -7,7 +7,7 @@
 
 You get a **clinic that revokes a guardian**.
 
-The notes-app sentence was: after `revoke("n1", "B")`, `read("n1", "B")` must be None. Rewrite it for a clinic: B after revoke still has to be denied. A still reads. B before revoke still reads. HTTP 200 on DELETE is still an event, not the next-read check.
+On the notes app, after `revoke("n1", "B")`, `read("n1", "B")` must be None. For a clinic, B after revoke still has to be denied. A still reads. B before revoke still reads. HTTP 200 on DELETE is still an event, not the next-read check.
 
 **Product sketch:** an EHR-lite “we hit DELETE /guardians/12 so the next chart read is fine,” plus “the capstone scanner is green so the assurance stamp is done.”
 
@@ -35,7 +35,7 @@ B after revoke denied, A still reads, B before revoke still reads. Adding DELETE
 
 ## Prompt — clinic revoke a guardian
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (former guardian with a cached chart id — not a live clinic attack);
 2. what you trust (owner-or-grant on every read is the promise; scanner, YAML pack, and HTTP 200 are not);

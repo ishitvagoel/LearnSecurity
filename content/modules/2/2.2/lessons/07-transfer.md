@@ -9,7 +9,7 @@ You get a **clinic portal** that caches `GET /patients/me` at the edge, and auth
 
 ## Picture: `/me` is still a shared URL
 
-Renaming “note body” to “chart” is not transfer. Person, object, path, and leftover change. TLS on one hop stays hop proof. The cache key still decides who reads.
+Renaming “note body” to “chart” is not transfer. TLS on one hop stays hop proof. The cache key still decides who reads.
 
 | Notes app this week | Clinic sketch |
 |---|---|

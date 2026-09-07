@@ -7,13 +7,13 @@
 
 You get a **clinic batch-export worker**.
 
-The notes-app sentence was: `exporter({"user_session": "alice", "service": None})` must be `None`. A leftover user session is not worker identity. Rewrite it for a clinic: leftover session denied, named worker allowed.
+On the notes app, `exporter({"user_session": "alice", "service": None})` must be `None`. A leftover user session is not worker identity. For a clinic, leftover session denied, named worker allowed.
 
 Also name outbox pattern and event schemas as the same identity family, without running those brokers here.
 
 ## Picture: cookie in the job is still a session
 
-Renaming “export notes” to “export patients overnight” is not transfer. The untrusted leftover changes. The fork does not.
+Renaming “export notes” to “export patients overnight” is not transfer.
 
 | Notes app this week | Clinic sketch |
 |---|---|
@@ -36,7 +36,7 @@ A leftover session still has to be `None`. `service=worker-sc` may still be allo
 
 **Product sketch:** a small clinic app with “Export overnight” that copies the clinician cookie into the task so “the job knows who asked.”
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (stolen session stuffed into a job, or inherited request context — not a live clinic);
 2. what you trust (worker authenticates as `worker-sc` is what you trust; VLAN, internal queue, and a zero-trust sticker are not);

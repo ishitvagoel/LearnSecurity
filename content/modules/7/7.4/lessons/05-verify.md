@@ -48,8 +48,6 @@ Honest `service=worker-sc` may pass on both implementations. That does not excus
 - That a production task library does not re-copy request context
 - A zero-trust paper as a product check
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session from the lab directory if needed:

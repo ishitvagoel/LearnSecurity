@@ -47,8 +47,6 @@ Honest bound shape must pass on repaired. Concatenated `str` must fail on broken
 - Advanced who-is-allowed-decision logging
 - GraphQL / NoSQL operator injection (7.1)
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session:

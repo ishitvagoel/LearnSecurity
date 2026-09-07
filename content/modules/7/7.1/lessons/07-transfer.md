@@ -7,7 +7,7 @@
 
 You get a clinic PATCH patient `{is_staff:true}`. Also name GraphQL mutation arguments and gRPC unknown fields.
 
-Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: after `apply(user, {"is_admin": true})`, `is_admin` must still be false. Rewrite it for a clinic.
+On the notes app, after `apply(user, {"is_admin": true})`, `is_admin` must still be false.
 
 **Product sketch:** an EHR-lite “Edit profile” form with no staff checkbox in the SPA, plus a generated OpenAPI file.
 
@@ -19,7 +19,7 @@ flowchart LR
   Extra["JSON still has is_staff"] --> Reality[binder writes if ALLOWED is missing]
 ```
 
-Renaming `is_admin` to `is_staff` is not transfer. Person, object, path, and leftover change. If “Edit profile” omits the staff checkbox while the server `apply` copies every key, the rule is gone. FastAPI, a generated OpenAPI file, and GraphQL “typed schema” do not copy `ALLOWED`. GraphQL mutation arguments and protobuf field numbers not in the writable set are the same binder family — name them, do not run those systems here. Honest `display_name` XSS is a 6.2 leftover even when extras are dropped.
+Renaming `is_admin` to `is_staff` is not transfer. If “Edit profile” omits the staff checkbox while the server `apply` copies every key, the rule is gone. FastAPI, a generated OpenAPI file, and GraphQL “typed schema” do not copy `ALLOWED`. GraphQL mutation arguments and protobuf field numbers not in the writable set are the same binder family — name them, do not run those systems here. Honest `display_name` XSS is a 6.2 leftover even when extras are dropped.
 
 | Notes app this week | Clinic sketch |
 |---|---|
@@ -30,7 +30,7 @@ Renaming `is_admin` to `is_staff` is not transfer. Person, object, path, and lef
 
 ## Prompt — clinic PATCH is_staff
 
-Rewrite the notes-app sentence for this product. Your answer must include:
+Write the same rule here. Include:
 
 1. who can act (authenticated clinician session sending extra JSON — not a live clinic);
 2. what you trust (server `ALLOWED` is what you trust; SPA omit-checkbox and OpenAPI are not);

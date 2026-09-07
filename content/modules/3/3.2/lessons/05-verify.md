@@ -41,8 +41,6 @@ Map each test to a row you wrote on the model page. If the broken files do not f
 - Production scanner coverage
 - That `stolen-worker` is implemented (the worker is later work)
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `STRIDE` in a markdown file without calling `threats_from_scan(True)`.

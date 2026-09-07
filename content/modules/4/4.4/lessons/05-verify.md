@@ -39,8 +39,6 @@ Honest-path tests may pass on both implementations. That does not excuse the den
 - Worker originating person (advanced)
 - Database role (earlier second gate) or row-level rules (later)
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session:

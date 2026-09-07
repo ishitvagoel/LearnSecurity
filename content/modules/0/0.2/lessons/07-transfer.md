@@ -6,13 +6,13 @@
 
 ## Change the workplace; keep the quiz from meaning 1.2
 
-Do not answer with a famous-bugs list or a scanner as the definition of security. The course sentence was: `quiz_score_grants_phase1_skip(100)` is false. Rewrite it for a workplace onboarding quiz without changing the idea.
+In this course, `quiz_score_grants_phase1_skip(100)` is false. The same rule has to hold for a workplace onboarding quiz.
 
 **Prompt:** Onboarding at a clinic-booking product. Also name a vendor cert used to skip a threat-model review.
 
 **Product sketch:** “They scored 100% so skip isolation labs,” plus “job-title competency so check-in 1 is done.”
 
-Rewrite the course sentence. Include:
+Write the same rule here. Include:
 
 1. who might try (a hurried new hire or manager with a badge — **not** a live HR LMS attack);
 2. what you trust (the skip check; not a quiz, a job title, a badge, or an LMS percentage);

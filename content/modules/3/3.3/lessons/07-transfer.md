@@ -5,13 +5,13 @@
 
 ## Use it somewhere new
 
-You get a **serverless function with a shared `admin` connection string**, or a **clinic billing replica** that should see invoice rows, not chart text. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: `can_select("app", "tB", "tA") is False`. Rewrite it for a new compute shape.
+You get a **serverless function with a shared `admin` connection string**, or a **clinic billing replica** that should see invoice rows, not chart text. On the notes app, `can_select("app", "tB", "tA") is False`.
 
 **Prompt:** Serverless function with a shared `admin` connection string.
 
 **Product sketch:** Clinic billing replica that should see invoice rows, not chart text.
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (stolen function secret; forgotten handler filter; replica user with `SELECT` on notes — **not** a live clinic, cloud function, or managed database);
 2. what you trust (which role is the second check; the cloud vendor IAM name is not);
@@ -22,7 +22,7 @@ Rewrite the notes-app sentence. Include:
 
 ## Picture: a new compute shape is still a role
 
-Renaming “app” to “function” is not transfer. Person, object, path, and leftover change. A shared `admin` string and a billing replica that can read chart text are new rules. Microservices and serverless still do not add a same-company check by existing.
+Renaming “app” to “function” is not transfer. A shared `admin` string and a billing replica that can read chart text are new rules. Microservices and serverless still do not add a same-company check by existing.
 
 ```mermaid
 flowchart LR

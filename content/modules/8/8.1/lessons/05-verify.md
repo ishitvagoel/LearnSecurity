@@ -46,8 +46,6 @@ Honest server-pass may pass on both implementations. That does not excuse the fa
 - 4.4 object grants after export is allowed
 - 6.7 quota
 
-Write those down as leftover risk or later topics, not as silent passes.
-
 ## Practice
 
 Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the notes for this topic. Reject a “check” that only greps `PlayIntegrity` in Gradle without calling `allow_export({"integrity": "ok"}, "fail")`. A setup error is not proof the rule holds.

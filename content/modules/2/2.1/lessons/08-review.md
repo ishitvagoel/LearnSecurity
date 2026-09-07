@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ The check you already ran (`test_duplicate_tenant_keys_are_one_meaning`) is the 
 
 ## Picture: problems to find (name them yourself)
 
-**`json.loads` used for store while ACL uses a different first-key scan**. Label it **rule**, **tool**, or **false assurance** before you accept the change.
+**`json.loads` used for store while ACL uses a different first-key scan**.
 
 ```mermaid
 flowchart TD

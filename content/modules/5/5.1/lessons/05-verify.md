@@ -46,8 +46,6 @@ Map the test to the deleted-alice × leftover-analytics row you wrote. If the br
 - Automatic retention schedule (advanced; not this check)
 - Legal-hold exception handling (named later)
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session:

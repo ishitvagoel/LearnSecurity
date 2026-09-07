@@ -7,7 +7,7 @@
 
 You get a **clinic offboard**. A badge system and a browser session sit next to each other.
 
-The notes-app sentence was: after `delete_user("alice")`, `session_valid("alice")` is false. Rewrite it for a clinician leaving: leftover must die in the same delete.
+On the notes app, after `delete_user("alice")`, `session_valid("alice")` is false. When a clinician leaves, leftover must die in the same delete.
 
 ## Picture: badge off is not session off
 
@@ -32,7 +32,7 @@ If offboard only hits the badge, the chart cookie still reads. Identity guidance
 
 ## Prompt — departing clinician
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (copied cookie; shared workstation; delayed lab-result worker — **not** a live clinic or identity provider);
 2. what you trust (which delete path is trusted; the badge vendor is not);

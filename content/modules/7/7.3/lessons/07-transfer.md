@@ -7,13 +7,13 @@
 
 You get a clinic that **accepts a lab-result webhook**.
 
-The notes-app sentence was: `accept("", "body", "lab-secret")` must be false. HMAC over the raw body. Rewrite it for a clinic: the handler must not treat a POST that hit the path as proof the lab sent it.
+On the notes app, `accept("", "body", "lab-secret")` must be false. HMAC over the raw body. For a clinic, the handler must not treat a POST that hit the path as proof the lab sent it.
 
 Also name signed redirects and outbound webhook SSRF (6.5) as the same authenticity family, without running those systems.
 
 ## Picture: the vendor’s IP range is still not a MAC
 
-Renaming “billing webhook” to “lab-result webhook” is not transfer. The untrusted POST changes. The fork does not.
+Renaming “billing webhook” to “lab-result webhook” is not transfer.
 
 | Notes app this week | Clinic sketch |
 |---|---|
@@ -36,7 +36,7 @@ An empty sig still has to be false. A matching HMAC over the same raw body may s
 
 **Product sketch:** EHR-lite `POST /lab-results` behind TLS, IP-allow-listed to “the lab vendor,” no MAC.
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (anyone who can POST the clinic callback URL — not a live clinic);
 2. what you trust (raw-body HMAC + `compare_digest`; TLS and vendor address range are not);

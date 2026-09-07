@@ -6,13 +6,13 @@
 
 ## Change the workplace; keep “it answered” from meaning permission
 
-Do not answer with a “top ten bugs” list or a scanner as the definition of security. The course sentence was: `target_is_authorized("https://example.com/")` is false. Rewrite it for a workplace paste without changing the idea.
+In this course, `target_is_authorized("https://example.com/")` is false. The same rule has to hold for a workplace paste.
 
 **Prompt:** A contractor asked to “quickly test our customer’s WordPress.” Also name a company staging URL.
 
 **Product sketch:** “It has a login page so it’s a lab,” plus “the guide has an authorization chapter so we can hit it.”
 
-Rewrite the course sentence. Include:
+Write the same rule here. Include:
 
 1. who might try (a tired paste of a customer host — **not** an instruction to hit the customer host, the staging URL, or a public login page);
 2. what you trust (the written allow-list; not a testing guide, a job title, a proxy, robots.txt, or “it connected”);

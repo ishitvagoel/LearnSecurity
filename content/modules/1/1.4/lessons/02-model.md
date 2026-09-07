@@ -93,4 +93,4 @@ Coercion remains. Do not delete that row when the button becomes keyboard-operab
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list item. Do not run this list against a public clinic or bank. Answer keys are not on this site.
+Do not run this list against a public clinic or bank. Answer keys are not on this site.

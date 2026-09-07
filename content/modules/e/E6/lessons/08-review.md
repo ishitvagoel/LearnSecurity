@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ Start at `accept_exception` and the empty-owner row, not at a scanner color or a
 
 ## Picture: accept with empty owner
 
-**Accept with empty owner**. Label it rule, tool, or false assurance before you accept the change.
+**Accept with empty owner**.
 
 ```mermaid
 flowchart TD

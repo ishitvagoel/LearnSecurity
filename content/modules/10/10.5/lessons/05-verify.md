@@ -50,8 +50,6 @@ A test that only greps `PagerDuty` in a runbook without calling `close_incident(
 - Logging every authorization decision without the sensitive data
 - An assurance gate complete
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session from the lab directory if needed:

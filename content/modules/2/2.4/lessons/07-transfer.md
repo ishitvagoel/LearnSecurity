@@ -5,13 +5,13 @@
 
 ## Use it somewhere new
 
-You get a **clinic last slot**, a **payment capture**, or an **invite token**. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: two `share_note` calls with `k1` leave one share. Rewrite it for a different object.
+You get a **clinic last slot**, a **payment capture**, or an **invite token**. On the notes app, two `share_note` calls with `k1` leave one share.
 
 **Prompt:** Payment capture and invite tokens are the same shape.
 
 **Product sketch:** Clinic: two POSTs book the last slot.
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (retry after 504; double-click; two tabs; load-balancer POST retry — **not** a live clinic, payment network, or public booking page);
 2. what you trust (whose store remembers the first booking; clocks may skew; the UI is not what you trust);
@@ -22,7 +22,7 @@ Rewrite the notes-app sentence. Include:
 
 ## Picture: limited quantity is the same fork
 
-Renaming “share” to “booking” is not transfer. Person, object, path, and leftover change. Double-book and a second debit are new rules. Disable-on-submit is still not what you trust.
+Renaming “share” to “booking” is not transfer. Double-book and a second debit are new rules. Disable-on-submit is still not what you trust.
 
 ```mermaid
 flowchart TD

@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ The check you already ran (`test_copy_does_not_exceed_buffer`) is the rule test.
 
 ## Picture: copy returns full src / declared_len plus 8
 
-**Copy returns full src / declared_len plus 8**. Label it rule, tool, or false assurance before you accept the change.
+**Copy returns full src / declared_len plus 8**.
 
 ```mermaid
 flowchart TD

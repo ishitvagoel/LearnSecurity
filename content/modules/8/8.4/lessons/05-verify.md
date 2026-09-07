@@ -46,8 +46,6 @@ Honest release plus ok may pass on both implementations. That does not excuse th
 - That signing keys are absent from the repo (5.3)
 - Completeness of an APK inventory list (10.2)
 
-Write those down as leftover risk or later topics, not as silent passes.
-
 ## Practice
 
 Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the notes for this topic. Reject a “check” that only greps `minifyEnabled` without calling `api_allowed("debug", "ok")`. A setup error is not proof the rule holds.

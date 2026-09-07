@@ -5,13 +5,13 @@
 
 ## Use it somewhere new
 
-You get a **clinic appointment deep link**. Optionally: a **magic-link email** (still a URL token — short-lived, one-time). Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: query `access_token` yields `None`. Rewrite it for a clinic link.
+You get a **clinic appointment deep link**. Optionally: a **magic-link email** (still a URL token — short-lived, one-time). On the notes app, query `access_token` yields `None`. The same rule has to hold on a clinic link.
 
 **Prompt:** Clinic appointment deep link. Optionally: magic-link email (still a URL token — short-lived, one-time).
 
 **Product sketch:** EHR-lite “open this visit” SMS or email.
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (Referer to a tracking pixel; SMS forward; access-log operator — **not** a live clinic);
 2. what you trust (which parser is trusted; the SMS vendor is not);

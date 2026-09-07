@@ -7,7 +7,7 @@
 
 You get a clinic offline chart cache. Also name iOS Keychain vs Android Keystore and desktop Electron.
 
-Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: after `save_note("secret")`, `plaintext_on_disk()` must be false. Rewrite it for a clinic.
+On the notes app, after `save_note("secret")`, `plaintext_on_disk()` must be false.
 
 **Product sketch:** an EHR-lite “available offline” that writes the chart as `charts.json` in internal storage, plus a fingerprint prompt to open the app.
 
@@ -19,7 +19,7 @@ flowchart LR
   File["charts.json plaintext"] --> Reality[backup yields bodies]
 ```
 
-Renaming `save_note` to `save_chart` is not transfer. Person, object, path, and leftover change. If “available offline” writes `charts.json` while a fingerprint prompt unlocks the app screen, the rule is gone. `MODE_PRIVATE`, Room, and a local fingerprint do not wrap the file. iOS Keychain vs Android Keystore and desktop Electron are the same disk family — name them, do not image those devices here. The lab `aead:` prefix is a stand-in, not AES.
+Renaming `save_note` to `save_chart` is not transfer. If “available offline” writes `charts.json` while a fingerprint prompt unlocks the app screen, the rule is gone. `MODE_PRIVATE`, Room, and a local fingerprint do not wrap the file. iOS Keychain vs Android Keystore and desktop Electron are the same disk family — name them, do not image those devices here. The lab `aead:` prefix is a stand-in, not AES.
 
 | Notes app this week | Clinic sketch |
 |---|---|
@@ -30,7 +30,7 @@ Renaming `save_note` to `save_chart` is not transfer. Person, object, path, and 
 
 ## Prompt — clinic offline chart cache
 
-Rewrite the notes-app sentence for this product. Your answer must include:
+Write the same rule here. Include:
 
 1. who can act (lost clinic tablet / backup — not a live hospital);
 2. what you trust (Keystore-wrapped cache is what you trust; private folder and fingerprint UI are not);

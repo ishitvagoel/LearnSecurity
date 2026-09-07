@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ Start at `close_finding` and the missing-retest row, not at a scanner color or a
 
 ## Picture: close without retest
 
-**close without retest**. Label it rule, tool, or false assurance before you accept the change.
+**close without retest**.
 
 ```mermaid
 flowchart TD

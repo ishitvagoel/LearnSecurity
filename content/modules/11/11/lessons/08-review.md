@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ Start at `revoke` / `read` and the B-after-revoke row, not at a scanner color or
 
 ## Picture: read after revoke succeeds
 
-**read after revoke succeeds**. Label it rule, tool, or false assurance before you accept the change.
+**read after revoke succeeds**.
 
 ```mermaid
 flowchart TD

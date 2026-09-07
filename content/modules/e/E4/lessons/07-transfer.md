@@ -5,13 +5,13 @@
 
 ## Use it somewhere new
 
-You get a **clinic DICOM / image parser**. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: `len(copy_into(4, b"abcdefgh", 4))` must be ≤ 4. Rewrite it for a clinic.
+You get a **clinic DICOM / image parser**. On the notes app, `len(copy_into(4, b"abcdefgh", 4))` must be ≤ 4.
 
 **Prompt:** Clinic DICOM / image parser. Also name a protobuf C extension.
 
 **Product sketch:** EHR-lite “the app is mostly Kotlin so copies are safe,” plus “we mapped an awareness-list name so the unpacker is done.”
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (hostile header length — not a live clinic binary attack);
 2. what you trust (smallest of three at the **native** copy is what you trust; Kotlin / a company roadmap / an awareness-list name are not);
@@ -28,7 +28,7 @@ flowchart LR
   Jni[JNI copy] --> Reality[needs smallest of three]
 ```
 
-Renaming “notes unpacker” to “DICOM parser” is not transfer. Person, object, path, and leftover change. If the app is “mostly Kotlin” while `copy_into` trusts `declared_len` plus 8, the rule is gone. A company language roadmap and an awareness-list mapping do not put `min(bufsize, declared_len, len(src))` next to the copy. A protobuf C extension is the same grain — name it, do not fuzz a third-party binary here. An awareness-list name is a regression label *after* the length cause, not the syllabus. Native unpacker leftover is later and harder: not this check.
+Renaming “notes unpacker” to “DICOM parser” is not transfer. If the app is “mostly Kotlin” while `copy_into` trusts `declared_len` plus 8, the rule is gone. A company language roadmap and an awareness-list mapping do not put `min(bufsize, declared_len, len(src))` next to the copy. A protobuf C extension is the same grain — name it, do not fuzz a third-party binary here. An awareness-list name is a regression label *after* the length cause, not the syllabus. Native unpacker leftover is later and harder: not this check.
 
 An oversize copy still has to be denied. A short honest copy may still fit. Adding a Kotlin rewrite without a destination bound leaves length > 4. The local check is `test_copy_does_not_exceed_buffer` — on a practice, not a live codec.
 

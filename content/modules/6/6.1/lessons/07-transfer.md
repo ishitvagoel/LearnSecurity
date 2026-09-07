@@ -7,13 +7,13 @@
 
 You get a **clinic export-to-CSV filename** chosen by a clerk.
 
-The notes-app sentence was: `argv_for_list` must not start `sh -c`. Pass the name as one argv element. Rewrite it for a clinic: the spawn helper returns a list whose program is not `sh`, and the filename is one element.
+On the notes app, `argv_for_list` must not start `sh -c`. Pass the name as one argv element. For a clinic, the spawn helper returns a list whose program is not `sh`, and the filename is one element.
 
 Also name Jinja, SQL (5.5), and mail headers as the same shape, without running those systems.
 
 ## Picture: the filename is still an interpreter input
 
-Renaming “export name” to “CSV filename” is not transfer. The untrusted string changes. The fork does not.
+Renaming “export name” to “CSV filename” is not transfer.
 
 | Notes app this week | Clinic sketch |
 |---|---|
@@ -34,7 +34,7 @@ The spawn helper returns a list whose program is not `sh`, and the name is one e
 
 ## Prompt — clinic CSV filename
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (clerk-chosen filename — not a live clinic);
 2. what you trust (argv list is what you trust; a denylist of punctuation is not);

@@ -7,13 +7,13 @@
 
 You get a clinic form that **fetches a lab-result PDF from a URL**.
 
-The notes-app sentence was: `allowed` must be false for a link-local metadata URL. Parse, then allow-list host and scheme. Rewrite it for a clinic: the importer must not treat the posted URL as permission to dial.
+On the notes app, `allowed` must be false for a link-local metadata URL. Parse, then allow-list host and scheme. For a clinic, the importer must not treat the posted URL as permission to dial.
 
 Also name webhook delivery (7.3) as the same egress deputy, without running those systems.
 
 ## Picture: the PDF URL is still a steering wheel
 
-Renaming “preview URL” to “PDF URL” is not transfer. The untrusted string changes. The fork does not.
+Renaming “preview URL” to “PDF URL” is not transfer.
 
 | Notes app this week | Clinic sketch |
 |---|---|
@@ -34,7 +34,7 @@ Link-local and loopback still have to be false; only the named lab (or clinic) h
 
 ## Prompt — clinic fetch of a lab-result PDF
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (URL field — not a live clinic or cloud metadata probe);
 2. what you trust (parsed host allow-list; “https” prefix is not);

@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ The check you already ran (`test_cached_note_is_not_plaintext_on_disk`) is the r
 
 ## Picture: write body to cache.txt
 
-**Write body to cache.txt**. Label it **rule**, **tool**, or **false assurance** before you accept the change.
+**Write body to cache.txt**.
 
 ```mermaid
 flowchart TD

@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ The folder `labs/5.5/5.5-lab/vulnerable/` is the change. The check you already r
 
 ## Picture: problems to find (name them yourself)
 
-**f-string `SELECT` that interpolates `note_id`**. Label it rule, tool, or false assurance before you accept the change.
+**f-string `SELECT` that interpolates `note_id`**.
 
 ```mermaid
 flowchart TD

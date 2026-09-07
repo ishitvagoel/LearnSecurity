@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ The check you already ran (`test_hardcoded_default_does_not_auth`) is the rule t
 
 ## Picture: DEFAULT still accepted
 
-**`DEFAULT = 'sk-lab-hardcoded'` still accepted**. Label it rule, tool, or false assurance before you accept the change.
+**`DEFAULT = 'sk-lab-hardcoded'` still accepted**.
 
 ```mermaid
 flowchart TD

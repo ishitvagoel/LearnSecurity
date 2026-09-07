@@ -40,8 +40,6 @@ The honest expected-aud test may pass on both. That does not excuse the deny tes
 - Note authorization (who-is-allowed)
 - Native redirect safety (claimed HTTPS, not a custom scheme)
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `verify` in an Authlib call without comparing `aud`.

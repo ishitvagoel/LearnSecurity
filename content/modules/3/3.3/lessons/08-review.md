@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ The check you already ran (`test_app_role_cannot_read_other_tenant`) is the rule
 
 ## Picture: DATABASE_URL uses superuser
 
-**`DATABASE_URL` uses superuser**. Label it rule, tool, or false assurance before you accept the change.
+**`DATABASE_URL` uses superuser**.
 
 ```mermaid
 flowchart TD

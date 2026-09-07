@@ -7,7 +7,7 @@
 
 You get a **clinic patient nickname** field drawn on a shared board. Also name markdown-to-HTML as a second parser (2.1).
 
-Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: `render` encodes `<` as `&lt;` in HTML text. Rewrite it for a clinic.
+On the notes app, `render` encodes `<` as `&lt;` in HTML text.
 
 **Product sketch:** an EHR-lite “preferred name” that concatenates into an HTML badge.
 
@@ -19,7 +19,7 @@ flowchart LR
   HTML[HTML badge] --> Reality[grammar mixed with data]
 ```
 
-Renaming “title” to “nickname” is not transfer. Person, object, path, and leftover change. If the nickname is concatenated into an HTML badge, the rule is gone. FastAPI, a content-security header in report-only mode, and React defaults on a different component do not encode this sink. Markdown-to-HTML is 2.1’s second parser: even a well-encoded badge fails if markdown emits raw tags later. Trusted Types remain draft.
+Renaming “title” to “nickname” is not transfer. If the nickname is concatenated into an HTML badge, the rule is gone. FastAPI, a content-security header in report-only mode, and React defaults on a different component do not encode this sink. Markdown-to-HTML is 2.1’s second parser: even a well-encoded badge fails if markdown emits raw tags later. Trusted Types remain draft.
 
 | Notes app this week | Clinic sketch |
 |---|---|
@@ -30,7 +30,7 @@ Renaming “title” to “nickname” is not transfer. Person, object, path, an
 
 ## Prompt — clinic nickname field
 
-Rewrite the notes-app sentence for this product. Your answer must include:
+Write the same rule here. Include:
 
 1. who can act (patient or clerk supplying a nickname — not a live clinic);
 2. what you trust (the HTML-text encoder is what you trust; a content-security header is not);

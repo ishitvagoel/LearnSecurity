@@ -5,13 +5,13 @@
 
 ## Use it somewhere new
 
-You get a **clinic scan upload** whose original filename is kept. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: `resolve` must not return a path outside `/tmp/sc-lab`. Rewrite it for a clinic.
+You get a **clinic scan upload** whose original filename is kept. On the notes app, `resolve` must not return a path outside `/tmp/sc-lab`.
 
 **Prompt:** Clinic scan upload whose original filename is kept. Also name XML entity expansion, pickle, and YAML load as other parsers (same earlier data-vs-grammar shape).
 
 **Product sketch:** EHR-lite “attach imaging” that joins the filename onto a public folder.
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (patient or device supplying a filename — **not** a live clinic);
 2. what you trust (canonical prefix is what you trust; a UUID sticker is not);
@@ -22,7 +22,7 @@ Rewrite the notes-app sentence. Include:
 
 ## Picture: the scan filename is still a path parser input
 
-Renaming “notes upload” to “scan upload” is not transfer. Person, object, path, and leftover change. FastAPI, a UUID rename, and an antivirus scanner still do not bind the object.
+Renaming “notes upload” to “scan upload” is not transfer. FastAPI, a UUID rename, and an antivirus scanner still do not bind the object.
 
 ```mermaid
 flowchart LR

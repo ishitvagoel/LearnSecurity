@@ -42,8 +42,6 @@ Honest low-score tests may pass on both. If the broken files do not fail the sco
 - Job-title competency
 - Check-in 0 or check-in 1 evidence
 
-Write those down as leftover risk or later topics, not as silent passes.
-
 ## Practice
 
 Run both versions this session. Write the fail/pass pair next to your matrix row. Reject a “test” that only greps `return False` in a string without calling `quiz_score_grants_phase1_skip(100)`.

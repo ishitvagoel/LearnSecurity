@@ -53,8 +53,6 @@ Run from `labs/2.1/2.1-parser-boundaries` if a repo-root collection picks up `si
 - Unicode identifier spoofing
 - Authorization for an honest unique-key object (that is the who-is-allowed topic)
 
-Write those down as leftover risk or later topics, not as silent passes.
-
 ## Practice
 
 Run both implementations this session. If the broken files do not fail, the practice is miswired — fix the wiring, not the check. Write the fail/pass pair next to the ingest rule from the map page.

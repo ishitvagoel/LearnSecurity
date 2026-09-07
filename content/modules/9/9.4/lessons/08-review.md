@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ Start at `ship_ok` and the HIGH×map row, not at a scanner color or a dashboard 
 
 ## Picture: ship_ok true on unmapped HIGH
 
-**`ship_ok` true on unmapped HIGH**. Label it rule, tool, or false assurance before you accept the change.
+**`ship_ok` true on unmapped HIGH**.
 
 ```mermaid
 flowchart TD

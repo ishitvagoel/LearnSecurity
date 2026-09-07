@@ -7,7 +7,7 @@
 
 You get a **clinic sketch** with a patient page that omits the SSN column in the table, plus GraphQL `Patient { ssn }`. Also name bulk update and search highlighting that leaks snippets.
 
-Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: `resolve("member", "secret_internal")` must be false. Rewrite it for a clinic.
+On the notes app, `resolve("member", "secret_internal")` must be false.
 
 **Prompt:** Clinic member cannot resolve SSN. Also name bulk update and search highlighting leaking snippets.
 
@@ -34,7 +34,7 @@ Member × SSN still has to be false. Member × display name may still be true. H
 
 ## Prompt — clinic member cannot resolve SSN
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (clinician session selecting extra fields — not a live clinic);
 2. what you trust (server role×field is what you trust; UI omit and UUID are not);

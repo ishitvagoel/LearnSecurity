@@ -74,4 +74,4 @@ An operator can still drop the company dimension at the CDN. Watch it and keep a
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list item. Answer keys are not on this site.
+Answer keys are not on this site.

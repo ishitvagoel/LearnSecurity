@@ -44,8 +44,6 @@ Honest titles may pass on both implementations. That does not excuse the encode 
 - A markdown cleaner (2.1)
 - HttpOnly cookies (2.3)
 
-Write those down as leftover risk or later topics, not as silent passes.
-
 ## Practice
 
 Run both implementations this session. Write the fail/pass pair next to the notes for this topic. Reject a “check” that only greps `Content-Security-Policy` without calling `render`. A setup error is not proof the rule holds.

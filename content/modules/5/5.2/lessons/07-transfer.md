@@ -7,7 +7,7 @@
 
 You get a **clinic SSN column**. The label on the column says encrypted. The bytes are Base64.
 
-The notes-app sentence was: `protect("secret")` must not round-trip as Base64. Rewrite it for a clinic: encoding is not secrecy.
+On the notes app, `protect("secret")` must not round-trip as Base64. For a clinic, encoding is not secrecy.
 
 **Prompt:** Clinic: SSN column labeled “encrypted” that is Base64. Also name password hashing vs field encryption vs backup encryption.
 
@@ -36,7 +36,7 @@ Base64 decode of the stored stand-in is not the SSN. Renaming the column or wrap
 
 ## Prompt — clinic SSN column
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (database admin; stolen disk — **not** a live clinic);
 2. what you trust (which authenticated encryption plus key is trusted; the column name is not);

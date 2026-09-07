@@ -7,11 +7,9 @@
 
 You get a **clinic booking** API. A JSON object (REST) and a GraphQL variable map can both carry `patient_id`. Duplicate keys, aliased fields, or a proxy that re-encodes Unicode can make the ACL patient disagree with the stored patient.
 
-Do not answer with a famous-bugs list or a scanner as the definition of security.
-
 ## Picture: each grammar is a reader
 
-Renaming `"tenant"` to `patient_id` is not transfer. Person, object, path, and leftover change. Two grammars are two readers. Who-is-allowed still runs after one meaning exists.
+Renaming `"tenant"` to `patient_id` is not transfer. Two grammars are two readers. Who-is-allowed still runs after one meaning exists.
 
 | Notes app this week | Clinic sketch |
 |---|---|
@@ -35,7 +33,7 @@ flowchart TD
 
 GraphQL and REST both ingest the same clinic appointment.
 
-Rewrite the notes-app sentence for this product. Your answer must include:
+Write the same rule here. Include:
 
 - who can act (who can POST or query);
 - what you trust (which reader is trusted; the client is not);

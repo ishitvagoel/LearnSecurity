@@ -7,7 +7,7 @@
 
 You get a **clinic page test**. `test_get_patient_200` asserts the owner’s GET returns 200.
 
-The notes-app sentence was: `is_security_test({"status_asserted": True})` must be false. Rewrite it for a clinic: 200-only is not a security test; a named what must not happen may count. A testing-guide checkbox is still catalogue, not shape.
+On the notes app, `is_security_test({"status_asserted": True})` must be false. For a clinic, 200-only is not a security test; a named what must not happen may count. A testing-guide checkbox is still catalogue, not shape.
 
 **Product sketch:** an EHR-lite “we have 94% coverage and GET /patient/1 returns 200,” plus a testing-guide checklist ticked.
 
@@ -35,7 +35,7 @@ If GET as owner returns 200 while the suite never asserts the other clinician, t
 
 ## Prompt — clinic test_get_patient_200
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (another clinician’s token — not a live clinic);
 2. what you trust (named-what must not happen tests are the promise; coverage percent and testing-guide ticks are not);

@@ -47,8 +47,6 @@ Honest matching signatures may pass on both implementations. That does not excus
 - Outbound URL ownership (6.5)
 - That a valid MAC still respects 1.2 on side effects
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session from the lab directory if needed:

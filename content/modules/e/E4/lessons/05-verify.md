@@ -40,8 +40,6 @@ Honest `test_short_copy_may_fit` may pass on both implementations. That does not
 - A company language roadmap is complete
 - A course gate is complete
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session from the lab directory if needed. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `Kotlin` in a README without calling `copy_into(4, b"abcdefgh", 4)`.

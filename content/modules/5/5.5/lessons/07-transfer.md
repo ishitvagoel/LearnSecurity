@@ -7,13 +7,13 @@
 
 You get a **clinic search box** that builds a patient lookup.
 
-The notes-app sentence was: `fetch_sql` returns a bound pair, not a concatenated string. Bind tenant and note id as parameters. Rewrite it for a clinic: the lookup helper returns bound values, not glued query text.
+On the notes app, `fetch_sql` returns a bound pair, not a concatenated string. Bind tenant and note id as parameters. For a clinic, the lookup helper returns bound values, not glued query text.
 
 Also name NoSQL operators and GraphQL arguments as the same shape (7.1), without running those systems.
 
 ## Picture: the search box is still an interpreter
 
-Renaming “note id” to “search box” is not transfer. The untrusted string changes. The fork does not.
+Renaming “note id” to “search box” is not transfer.
 
 | Notes app this week | Clinic sketch |
 |---|---|
@@ -34,7 +34,7 @@ The lookup helper returns `(sql, params)` (or an ORM bound construct), not a con
 
 ## Prompt — clinic search box
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (clinician or kiosk user supplying search text — not a live clinic);
 2. what you trust (which API binds values; the ORM brand is not);

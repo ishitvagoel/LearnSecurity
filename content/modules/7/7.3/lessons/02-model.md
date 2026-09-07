@@ -71,4 +71,4 @@ Replay; freshness; 1.2 on side effects; 6.5 outbound; per-message signatures bey
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Do not run this map against a live clinic or a live provider. Answer keys are not on this site.
+Do not run this map against a live clinic or a live provider. Answer keys are not on this site.

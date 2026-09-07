@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ The check you already ran (`test_is_admin_cannot_be_patched`) is the rule check.
 
 ## Picture: user.update(body) / __dict__.update
 
-**`user.update(body)` / `__dict__.update`**. Label it **rule**, **tool**, or **false assurance** before you accept the change.
+**`user.update(body)` / `__dict__.update`**.
 
 ```mermaid
 flowchart TD

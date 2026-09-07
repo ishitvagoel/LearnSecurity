@@ -7,7 +7,7 @@
 
 You get a **clinic pentest PDF on a shelf**.
 
-The notes-app sentence was: `close_finding({"retest": None})` must be false. Rewrite it for a clinic: missing retest denied, passing retest may close. A PDF on a shelf is still a report, not a retest.
+On the notes app, `close_finding({"retest": None})` must be false. For a clinic, missing retest denied, passing retest may close. A PDF on a shelf is still a report, not a retest.
 
 **Product sketch:** an EHR-lite "the assessor delivered a 40-page PDF with severity 9.8 so we closed isolation," plus "the known-exploited list says we must scan the hospital portal."
 
@@ -35,7 +35,7 @@ A missing retest still has to be denied. A passing retest may still close. Uploa
 
 ## Prompt — clinic pentest PDF on a shelf
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (paper-compliance closer — not a live clinic);
 2. what you trust (same-rule retest is the promise; PDF, severity score, and a known-exploited list are not);

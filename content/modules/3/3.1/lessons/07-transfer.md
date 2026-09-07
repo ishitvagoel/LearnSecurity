@@ -7,7 +7,7 @@
 
 You get a **clinic booking card**. Chart text and appointment time sit on the same card.
 
-The notes-app sentence was: `log_event("note_read", "tenant-A-secret-body")` must not contain the body. Rewrite it for a booking card: field × place, allow or deny.
+On the notes app, `log_event("note_read", "tenant-A-secret-body")` must not contain the body. For a booking card, field × place, allow or deny.
 
 ## Picture: time is not the chart
 
@@ -31,7 +31,7 @@ Two classes on one card is the point.
 
 ## Prompt — clinic booking card
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (operator with logs; vendor with the drain; another company on shared observability — **not** a live clinic);
 2. what you trust (which logging API; the spreadsheet and the privacy policy are not);

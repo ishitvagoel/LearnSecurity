@@ -71,4 +71,4 @@ DNS rebinding; IPv6; `file:`; telling the person they are leaving the site (adva
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Do not run this map against a live clinic or a live metadata service. Answer keys are not on this site.
+Do not run this map against a live clinic or a live metadata service. Answer keys are not on this site.

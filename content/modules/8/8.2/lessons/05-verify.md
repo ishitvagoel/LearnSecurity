@@ -45,8 +45,6 @@ Honest `'other'` saves may pass on both implementations. That does not excuse th
 - That the lab `aead:` prefix is AES-GCM (it is a stand-in)
 - 4.1 logout wipe of the store
 
-Write those down as leftover risk or later topics, not as silent passes.
-
 ## Practice
 
 Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the notes for this topic. Reject a “check” that only greps `EncryptedSharedPreferences` without calling `save_note("secret")` then `plaintext_on_disk()`. A setup error is not proof the rule holds.

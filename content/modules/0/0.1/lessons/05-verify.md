@@ -43,8 +43,6 @@ Honest localhost tests may pass on both. If the broken files do not fail the pub
 - Guide coverage of an in-scope app
 - The first check-in is done
 
-Write those down as leftover risk or later topics, not as silent passes.
-
 ## Practice
 
 Run both versions this session. Write the fail/pass pair next to your matrix row. Reject a “test” that only greps `ALLOWED_HOSTS` in a string without calling `target_is_authorized` on the public literal.

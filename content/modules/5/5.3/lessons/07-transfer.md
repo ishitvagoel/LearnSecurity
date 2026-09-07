@@ -5,13 +5,13 @@
 
 ## Use it somewhere new
 
-You get a **clinic lab API key in a gist**. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: `auth("sk-lab-hardcoded", current="rotated-now")` is false. Rewrite it for a clinic.
+You get a **clinic lab API key in a gist**. On the notes app, `auth("sk-lab-hardcoded", current="rotated-now")` is false.
 
 **Prompt:** Clinic lab API key in a gist. Also sketch envelope wrapping (data key vs wrapping key) on compromise.
 
 **Product sketch:** EHR-lite with a backend integration key.
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (gist reader; old container — **not** a live clinic);
 2. what you trust (which current secret is trusted; the vault brand is not);

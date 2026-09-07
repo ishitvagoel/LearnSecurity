@@ -64,4 +64,4 @@ Custom scheme. WebView. User installs an attacker app. 8.2 clipboard.
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

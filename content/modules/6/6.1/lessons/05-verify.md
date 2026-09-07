@@ -47,8 +47,6 @@ Honest argv shape must pass on repaired. `sh -c` must fail on broken. If the bro
 - That `subprocess.run` in production uses this list (you still have to call it)
 - Argument injection when `--` is omitted
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session:

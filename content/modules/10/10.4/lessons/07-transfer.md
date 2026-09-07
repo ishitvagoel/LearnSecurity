@@ -7,7 +7,7 @@
 
 You get a **clinic Django `DEBUG=True`**.
 
-The notes-app sentence was: `boot_ok("prod", True)` must be false. Rewrite it for a clinic: prod plus debug denied, prod without debug may boot. Setting `NODE_ENV` without comparing `env` to `debug` still leaves `boot_ok("prod", True)` true.
+On the notes app, `boot_ok("prod", True)` must be false. For a clinic, prod plus debug denied, prod without debug may boot. Setting `NODE_ENV` without comparing `env` to `debug` still leaves `boot_ok("prod", True)` true.
 
 **Product sketch:** an EHR-lite “we left DEBUG on for five minutes so support can see traces,” plus “`NODE_ENV` is production and we canary 10%.”
 
@@ -35,7 +35,7 @@ Prod plus debug still has to be denied. Prod without debug may still boot. Setti
 
 ## Prompt — clinic Django DEBUG=True
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (anyone who finds `/debug` or an error page — not a live clinic);
 2. what you trust (prod plus debug deny is the promise; `NODE_ENV`, a canary, and IaC are not);

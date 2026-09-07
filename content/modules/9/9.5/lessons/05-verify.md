@@ -47,8 +47,6 @@ A test that only greps `Done` in a ticket tracker without calling `close_finding
 - Role-change cache after a grant change (extra, advanced work)
 - An assurance gate complete
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session from the lab directory if needed:

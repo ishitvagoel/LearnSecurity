@@ -47,8 +47,6 @@ A test that only greps `CycloneDX` in CI without calling `install_ok("aaa", "bbb
 - Index policy against lookalike packages
 - The ship gate complete
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session from the lab directory if needed:

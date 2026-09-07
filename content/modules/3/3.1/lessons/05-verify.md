@@ -49,8 +49,6 @@ Map the test to the body×log row you wrote. If the broken files do not fail, th
 - That ids in logs are acceptable (write that row separately)
 - A draft privacy-framework checklist
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session:

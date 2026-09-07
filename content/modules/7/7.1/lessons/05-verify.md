@@ -46,8 +46,6 @@ Honest `display_name` may pass on both implementations. That does not excuse the
 - Field *reads* of privileged columns (7.2)
 - Job-payload binders (7.4)
 
-Write those down as leftover risk or later topics, not as silent passes.
-
 ## Practice
 
 Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the notes for this topic. Reject a “check” that only greps `extra = 'forbid'` in a Pydantic model without calling `apply(..., {"is_admin": true})`. A setup error is not proof the rule holds.

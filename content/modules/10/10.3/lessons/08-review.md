@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ Start at `pod_ok` and the cluster-admin row, not at a scanner color or a CIS scr
 
 ## Picture: cluster-admin on app SA
 
-**cluster-admin on app SA**. Label it rule, tool, or false assurance before you accept the change.
+**cluster-admin on app SA**.
 
 ```mermaid
 flowchart TD

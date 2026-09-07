@@ -8,11 +8,11 @@
 
 Review `labs/0.1/0.1-orientation/vulnerable/` as a pull request for a course tool. Check whether `target_is_authorized` still returns true for a public host.
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## Picture: any URL the proxy can open
 
-**Any URL the proxy can open**. Label it a rule, a tool, or false assurance before you accept the change.
+**Any URL the proxy can open**.
 
 ```mermaid
 flowchart TD

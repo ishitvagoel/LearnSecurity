@@ -44,8 +44,6 @@ Honest note locators may pass on both implementations. That does not excuse the 
 - 4.5 audience after a valid OAuth redirect
 - That a locator `note=n1` is authorized (4.4)
 
-Write those down as leftover risk or later topics, not as silent passes.
-
 ## Practice
 
 Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the notes for this topic. Reject a “check” that only greps `android:autoVerify` without calling `open_link({"as": "admin"})`. A setup error is not proof the rule holds.

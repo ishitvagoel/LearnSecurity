@@ -8,11 +8,11 @@
 
 Review `labs/0.2/0.2-bridge/vulnerable/` as a pull request for a course tool. Check whether `quiz_score_grants_phase1_skip(100)` still returns true.
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## Picture: if score >= 80: skip part 1
 
-**`if score >= 80: skip_phase(1)`**. Label it a rule, a tool, or false assurance before you accept the change.
+**`if score >= 80: skip_phase(1)`**.
 
 ```mermaid
 flowchart TD

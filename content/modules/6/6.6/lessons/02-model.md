@@ -69,4 +69,4 @@ Two accepts that both see unused before either writes. Email phishing (4.2). Tok
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Do not run this map against a public clinic or a live mailer. Answer keys are not on this site.
+Do not run this map against a public clinic or a live mailer. Answer keys are not on this site.

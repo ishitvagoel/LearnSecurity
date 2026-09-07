@@ -7,13 +7,11 @@
 
 You get a **clinic staff SSO** portal. Optionally: a second ceremony before chart export. A password or OTP typed at a lookalike identity provider is still a shared secret. WebAuthn that ignores origin is still theater.
 
-Do not answer with a famous-bugs list or a scanner as the definition of security.
-
-The notes-app sentence was: `phishing_resistant("password", evil, real)` is false. Rewrite it for the clinic portal without changing that fork.
+On the notes app, `phishing_resistant("password", evil, real)` is false. The same rule has to hold on the clinic portal.
 
 ## Picture: MFA to the wrong identity provider is still phishing
 
-Renaming `"password"` to `"otp"` is not transfer. Person, object, path, and leftover change. A lookalike identity provider is still the wrong origin. Who-is-allowed still runs after login.
+Renaming `"password"` to `"otp"` is not transfer. A lookalike identity provider is still the wrong origin. Who-is-allowed still runs after login.
 
 | Notes app this week | Clinic sketch |
 |---|---|
@@ -37,7 +35,7 @@ Clinic staff SSO portal. Optionally: step-up for export — still origin-bound?
 
 Product sketch: a small EHR login plus a second ceremony before chart export.
 
-Rewrite the notes-app sentence for this product. Your answer must include:
+Write the same rule here. Include:
 
 1. who can act (lookalike identity provider; intercepted OTP; tired clinician — **not** a live clinic or public phishing page);
 2. what you trust (which origin check is trusted; “we use Okta” is not);

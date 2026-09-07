@@ -47,8 +47,6 @@ Map the test to the deleted-alice × leftover-session row you wrote. If the brok
 - A phone's offline cache (later)
 - Revoking a stolen login factor (advanced; not this check)
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session:

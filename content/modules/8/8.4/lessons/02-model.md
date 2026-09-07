@@ -65,4 +65,4 @@ Key leak (5.3). Attestation farms. Resilience as cost, not as trust.
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

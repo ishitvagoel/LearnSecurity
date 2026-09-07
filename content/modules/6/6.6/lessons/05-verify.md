@@ -47,8 +47,6 @@ Map the test to the second-`t1` deny row you wrote. If the broken files do not f
 - Last-resort error handler (advanced; not this check)
 - Mail delivery or recipient authenticity (4.2)
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session:

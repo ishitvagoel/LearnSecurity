@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ The check you already ran (`test_retry_does_not_duplicate_side_effect`) is the r
 
 ## Picture: INSERT share on every POST
 
-**INSERT share on every POST**. Label it rule, tool, or false assurance before you accept the change.
+**INSERT share on every POST**.
 
 ```mermaid
 flowchart TD

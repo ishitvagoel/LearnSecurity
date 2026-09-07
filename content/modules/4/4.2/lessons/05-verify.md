@@ -53,8 +53,6 @@ Map each check to a rule from the map page. If the broken files do not fail the 
 - That WebAuthn decides who may read a note
 - A later hardware bar as a silent baseline
 
-Write those down as leftover risk or later topics, not as silent passes.
-
 ## Practice
 
 Run both implementations this session. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `webauthn` in HTML without calling `phishing_resistant` on the password / lookalike pair.

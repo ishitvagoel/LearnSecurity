@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ Start at `is_security_test` and the 200-only row, not at a scanner color or a co
 
 ## Picture: assert r.status_code==200 only
 
-**`assert r.status_code==200` only**. Label it rule, tool, or false assurance before you accept the change.
+**`assert r.status_code==200` only**.
 
 ```mermaid
 flowchart TD

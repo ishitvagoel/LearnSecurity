@@ -43,8 +43,6 @@ Honest enforcing CSP may pass on both implementations. That does not excuse the 
 - Quality of content-security reporting (extra, later, and advanced)
 - Check-in 7 / milestone M2 complete
 
-Write those down as leftover risk or later topics, not as silent passes.
-
 ## Practice
 
 Run both implementations this session from the lab directory if needed. Write the fail/pass pair next to the notes for this topic. Reject a “check” that only greps `Content-Security-Policy` in HTML without calling `isolation_enforced` on a Report-Only dict. A setup error is not proof the rule holds.

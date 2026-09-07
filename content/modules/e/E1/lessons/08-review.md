@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ Start at `run_tool` and the `exec_sql` row, not at a scanner color or a famous-b
 
 ## Picture: exec_sql available
 
-**`exec_sql` available**. Label it rule, tool, or false assurance before you accept the change.
+**`exec_sql` available**.
 
 ```mermaid
 flowchart TD

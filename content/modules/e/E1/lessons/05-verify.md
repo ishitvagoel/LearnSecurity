@@ -47,8 +47,6 @@ A test that only greps `exec_sql` in a prompt file without calling `run_tool("ex
 - Cryptographically bound approvals (extra, advanced)
 - An assurance gate complete
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session from the lab directory if needed:

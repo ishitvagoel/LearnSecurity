@@ -43,8 +43,6 @@ Honest `display_name` may pass on both implementations. That does not excuse the
 - Object×company (4.4) — a passing field test does not prove Bob cannot GET Alice’s note
 - Extra-key writes (7.1)
 
-Write those down as leftover risk or later topics, not as silent passes.
-
 ## Practice
 
 Execute both implementations this session from the lab directory if needed. Write the fail/pass pair next to the table row. Reject a “test” that only greps `@hide` in a GraphQL schema without calling `resolve("member", "secret_internal")`.

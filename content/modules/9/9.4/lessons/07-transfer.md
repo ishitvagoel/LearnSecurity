@@ -7,7 +7,7 @@
 
 You get a **clinic dashboard**. Fifty HIGH findings sit unmapped.
 
-The notes-app sentence was: `ship_ok([HIGH], {})` must be false. Rewrite it for a clinic: finding × map, allow or deny. A noisy dashboard is still noise, not a map.
+On the notes app, `ship_ok([HIGH], {})` must be false. For a clinic, finding × map, allow or deny. A noisy dashboard is still noise, not a map.
 
 **Product sketch:** an EHR-lite “code scanning is on and the dashboard is noisy so we ship Fridays,” plus a maturity score on a slide.
 
@@ -37,7 +37,7 @@ Also name SCA: a CVE versus a function you actually call.
 
 ## Prompt — clinic, fifty unmapped HIGHs
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (alert fatigue — not a live clinic);
 2. what you trust (the mapping check is the promise; the dashboard and a maturity score are not);

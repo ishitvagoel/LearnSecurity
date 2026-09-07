@@ -77,4 +77,4 @@ Backups still contain the row (later). A phone's offline cache (later). Tickets 
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Do not run this map against a public clinic or a live warehouse. Answer keys are not on this site.
+Do not run this map against a public clinic or a live warehouse. Answer keys are not on this site.

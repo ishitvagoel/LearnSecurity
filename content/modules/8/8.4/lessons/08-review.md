@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ The check you already ran (`test_debug_build_cannot_call_prod_export`) is the ru
 
 ## Picture: api_allowed debug+ok true
 
-**`api_allowed` debug+ok true**. Label it **rule**, **tool**, or **false assurance** before you accept the change.
+**`api_allowed` debug+ok true**.
 
 ```mermaid
 flowchart TD

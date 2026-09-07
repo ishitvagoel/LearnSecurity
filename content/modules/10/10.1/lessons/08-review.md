@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ Start at `merge_ok` and the empty dict, not at a scanner color or a training scr
 
 ## Picture: merge_ok True without a threat-model id
 
-**`merge_ok` True without a threat-model id**. Label it rule, tool, or false assurance before you accept the change.
+**`merge_ok` True without a threat-model id**.
 
 ```mermaid
 flowchart TD

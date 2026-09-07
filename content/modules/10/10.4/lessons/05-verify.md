@@ -48,8 +48,6 @@ A test that only greps `NODE_ENV` in compose without calling `boot_ok("prod", Tr
 - Extra version leakage is gone (extra, advanced work)
 - An assurance gate is complete
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session from the lab directory if needed:

@@ -7,7 +7,7 @@
 
 You get a **clinic report template** where designers can put expressions.
 
-The notes-app sentence was: `review_ok("x = eval(user)")` must be false. Rewrite it for a clinic: eval on user input is not approved; honest `int(user)` may pass.
+On the notes app, `review_ok("x = eval(user)")` must be false. For a clinic, eval on user input is not approved; honest `int(user)` may pass.
 
 Also name Terraform `local-exec` and GitHub Actions yaml as the same interpreter family, without running those systems.
 
@@ -15,7 +15,7 @@ Also name Terraform `local-exec` and GitHub Actions yaml as the same interpreter
 
 ## Picture: same interpreter, clinical object
 
-Renaming “export helper” to “report template” is not transfer. The untrusted string changes. The fork does not.
+Renaming “export helper” to “report template” is not transfer.
 
 | Notes app this week | Clinic sketch |
 |---|---|
@@ -36,7 +36,7 @@ Eval-on-user still has to be rejected. Honest `int(user)` may still pass. Format
 
 ## Prompt — clinic eval in a report template
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (template author / compromised designer — not a live clinic);
 2. what you trust (review of interpreters is what you trust; formatter “looks good” is not);

@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ The folder `labs/6.7/6.7-lab/vulnerable/` is the change. The check you already r
 
 ## Picture: problems to find (name them yourself)
 
-**No cap (`allow` always true)**. Label it rule, tool, or false assurance before you accept the change.
+**No cap (`allow` always true)**.
 
 ```mermaid
 flowchart TD

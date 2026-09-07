@@ -68,4 +68,4 @@ Honest `display_name` XSS (6.2). GraphQL cost (6.7). Unused methods (leftover, l
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

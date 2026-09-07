@@ -7,7 +7,7 @@
 
 You get a **clinic crash**. A fake patient name sits in the last chart.
 
-The notes-app sentence was: `crash_report("secret")` must not contain `secret`. Rewrite it for a clinic: field × place, allow or deny. The store’s privacy form is still disclosure, not redaction.
+On the notes app, `crash_report("secret")` must not contain `secret`. For a clinic, field × place, allow or deny. The store’s privacy form is still disclosure, not redaction.
 
 **Product sketch:** an EHR-lite “debug crash includes the last chart so support can reproduce,” plus a completed store privacy form.
 
@@ -35,7 +35,7 @@ The fake name still has to be absent from the report. The stack may remain. Enab
 
 ## Prompt — clinic crash with a fake patient name
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (crash-platform operator, logcat reader — not a live clinic);
 2. what you trust (redact-before-send is the promise; the store form and a crash product set to automatic are not);

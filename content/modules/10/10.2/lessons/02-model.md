@@ -72,4 +72,4 @@ Pinned malware. Cache poisoning. A lookalike package that wins because you still
 
 ## What this page is not doing
 
-Do not define security as a famous-bugs list. Answer keys are not on this site.
+Answer keys are not on this site.

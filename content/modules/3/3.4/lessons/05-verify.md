@@ -41,8 +41,6 @@ Map each test to the state-machine row you wrote. If the broken files do not fai
 - Support override audit (advanced)
 - That the accessible status message exists (leftover)
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `max={5}` in JSX without calling `add_share` eight times.

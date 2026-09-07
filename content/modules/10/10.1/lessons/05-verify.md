@@ -47,8 +47,6 @@ A test that only greps `CODEOWNERS` in a repo without calling `merge_ok({})` is 
 - Extra advanced software-lifecycle evidence about documenting dangerous functions
 - Gate 10 or M4 complete
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session from the lab directory if needed:

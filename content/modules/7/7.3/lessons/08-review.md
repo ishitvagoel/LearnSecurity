@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ The check you already ran (`test_missing_signature_is_rejected`) is the rule tes
 
 ## Picture: accept always true / process because the path matched
 
-**Accept always true / process because the path matched**. Label it rule, tool, or false assurance before you accept the change.
+**Accept always true / process because the path matched**.
 
 ```mermaid
 flowchart TD

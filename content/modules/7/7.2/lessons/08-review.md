@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ The check you already ran (`test_member_cannot_resolve_internal_field`) is the r
 
 ## Picture: resolver / dump always true
 
-**resolver / dump always true**. Label it **rule**, **tool**, or **false assurance** before you accept the change.
+**resolver / dump always true**.
 
 ```mermaid
 flowchart TD

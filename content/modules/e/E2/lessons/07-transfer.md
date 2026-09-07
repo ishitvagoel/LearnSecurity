@@ -7,7 +7,7 @@
 
 You get a **clinic** that ships Report-Only and calls it a “HIPAA header.” Also name Trusted Types and COOP/COEP.
 
-Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: Report-Only must not make `isolation_enforced` true. Rewrite it for a clinic.
+On the notes app, Report-Only must not make `isolation_enforced` true.
 
 **Product sketch:** an EHR-lite “we ship Content-Security-Policy-Report-Only so scripts are blocked,” plus “the reporting dashboard is green.”
 
@@ -19,7 +19,7 @@ flowchart LR
   Ro[Report-Only] --> Reality[script ran]
 ```
 
-Renaming “notes” to “charts” is not transfer. Person, object, path, and leftover change. If the dashboard is green while `isolation_enforced` treats Report-Only as on, the rule is gone. Helmet, a HIPAA sticker, and the current content-security spec do not put the enforcing name on the response. Trusted Types and COOP/COEP are sibling isolation leftovers — name them, do not load a live clinic here. The current content-security spec is still a **draft**; encoding (6.2) remains the first rule. Reporting from that policy is extra, later, and advanced: reporting, not enforcement.
+Renaming “notes” to “charts” is not transfer. If the dashboard is green while `isolation_enforced` treats Report-Only as on, the rule is gone. Helmet, a HIPAA sticker, and the current content-security spec do not put the enforcing name on the response. Trusted Types and COOP/COEP are sibling isolation leftovers — name them, do not load a live clinic here. The current content-security spec is still a **draft**; encoding (6.2) remains the first rule. Reporting from that policy is extra, later, and advanced: reporting, not enforcement.
 
 | Notes app this week | Clinic sketch |
 |---|---|
@@ -30,7 +30,7 @@ Renaming “notes” to “charts” is not transfer. Person, object, path, and 
 
 ## Prompt — clinic Report-Only as a HIPAA header
 
-Rewrite the notes-app sentence for this product. Your answer must include:
+Write the same rule here. Include:
 
 1. who can act (a script that would only be logged — not a live clinic script hunt);
 2. what you trust (the enforcing header name is what you trust; Report-Only, Helmet, and a dashboard are not);

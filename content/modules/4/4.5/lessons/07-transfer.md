@@ -5,13 +5,13 @@
 
 ## Use it somewhere new
 
-You get a **clinic FHIR resource server**. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: `accept_token` is false for `aud=other-api`. Rewrite it for a clinic FHIR resource server.
+You get a **clinic FHIR resource server**. On the notes app, `accept_token` is false for `aud=other-api`. The same rule has to hold on a clinic FHIR resource server.
 
 **Prompt:** Clinic: wrong-audience FHIR token. Also name native redirect (claimed HTTPS, not a custom scheme) vs browser vs backend-for-frontend storage.
 
 **Product sketch:** EHR-lite that accepts SMART-on-FHIR-shaped access tokens.
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (token minted for another hospital API; stolen browser token; malicious phone app claiming a custom scheme — **not** a live clinic);
 2. what you trust (which resource-server `aud` check is trusted; the vendor “OpenID dashboard” is not);

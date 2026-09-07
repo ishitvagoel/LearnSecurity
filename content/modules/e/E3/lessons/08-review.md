@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ The check you already ran (`test_duplicate_capture_does_not_double_charge`) is t
 
 ## Picture: two capture(k1) charge twice
 
-**two capture(k1) charge twice**. Label it rule, tool, or false assurance before you accept the change.
+**two capture(k1) charge twice**.
 
 ```mermaid
 flowchart TD

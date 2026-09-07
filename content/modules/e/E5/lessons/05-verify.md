@@ -40,8 +40,6 @@ Honest matching-company tests may pass on both implementations. That does not ex
 - GraphQL aliases are gone (extra writable fields)
 - A course gate is complete
 
-Record those as leftover or later topics, not as silent passes.
-
 ## Practice
 
 Run both this session from the lab directory if needed:

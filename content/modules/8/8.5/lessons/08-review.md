@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ Start at `crash_report` and the body×crash row, not at a scanner color or a sto
 
 ## Picture: crash_report includes the body
 
-**`crash_report` includes the body**. Label it rule, tool, or false assurance before you accept the change.
+**`crash_report` includes the body**.
 
 ```mermaid
 flowchart TD

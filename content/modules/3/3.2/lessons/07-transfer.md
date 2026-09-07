@@ -5,13 +5,13 @@
 
 ## Use it somewhere new
 
-You get **clinic SMS reminders** — a new channel that HTTP scans of the notes app will not enumerate. Do not answer with a Top 10, a CWE, or a scanner as the definition of security. The notes-app sentence was: a green scan still lists `cross-tenant-read`. Rewrite it for a new hop.
+You get **clinic SMS reminders** — a new channel that HTTP scans of the notes app will not enumerate. On the notes app, a green scan still lists `cross-tenant-read`.
 
 **Prompt:** Clinic SMS reminders — a new channel that HTTP scans will not enumerate.
 
 **Product sketch:** An EHR-lite booking card that texts “your appointment” to a phone number.
 
-Rewrite the notes-app sentence. Include:
+Write the same rule here. Include:
 
 1. who can act (number-swap; SMS intercept on an untrusted hop; an operator who pastes chart text into the template — **not** a live clinic, carrier, or public SMS API);
 2. what you trust (which assembler or markdown file is the list you keep; the SMS vendor questionnaire is not);
@@ -22,7 +22,7 @@ Rewrite the notes-app sentence. Include:
 
 ## Picture: a new hop is a new “what are we working on?”
 
-Renaming “note” to “reminder” is not transfer. Person, object, path, and leftover change. Content leak and number-swap are new rows. A vendor sticker is still not what you trust.
+Renaming “note” to “reminder” is not transfer. Content leak and number-swap are new rows. A vendor sticker is still not what you trust.
 
 ```mermaid
 flowchart LR

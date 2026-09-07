@@ -3,7 +3,7 @@
 **Kind:** code-review
 **Loop step:** Review
 
-The answers are not on this page. Do not open the keys file until someone has looked at your review.
+Wait until someone has looked at your review before opening the keys.
 
 ## What you are reviewing
 
@@ -13,7 +13,7 @@ Start at `boot_ok` and the prod-plus-debug pair, not at a scanner color or a `NO
 
 ## Picture: boot_ok true on prod plus debug
 
-**`boot_ok` true on prod plus debug**. Label it rule, tool, or false assurance before you accept the change.
+**`boot_ok` true on prod plus debug**.
 
 ```mermaid
 flowchart TD
