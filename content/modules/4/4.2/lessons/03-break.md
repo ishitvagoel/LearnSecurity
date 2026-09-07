@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny Python helper named `phishing_resistant`. The failure is already in the function: any enrolled method returns true, and origin is ignored. A password at a lookalike origin counted as **resistant** is a failed rule, not a trophy kit.
 
-The rule under test:
+Here is the rule:
 
 > A password or OTP at a lookalike origin is not phishing-resistant. WebAuthn at the wrong origin must fail.
 
 ## Where you may practice
 
-Only `labs/4.2/4.2-lab/` is in scope. No other hosts. The helper is in-process. Synthetic origins `https://evil.example` and `https://app.securecollab.test`. It does not open a browser or an authenticator.
+Stay inside `labs/4.2/4.2-lab/`. No other hosts. The helper is in-process. Synthetic origins `https://evil.example` and `https://app.securecollab.test`. It does not open a browser or an authenticator.
 
 Do not load a lookalike login page, a public phishing kit, an employer SSO, or a classmate preview as this exercise.
 
@@ -42,7 +42,7 @@ A later hardware bar is not this check.
 - `test_webauthn_wrong_origin_fails`
 - `test_webauthn_matching_origin_is_resistant` — honest path on the repaired files
 
-You do not need a new origin string. The failure of `test_password_is_not_phishing_resistant` *is* the evidence.
+You do not need a new origin string. When `test_password_is_not_phishing_resistant` fails, that is the evidence.
 
 ## Why it happens vs what it costs
 

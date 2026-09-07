@@ -54,7 +54,7 @@ The exception must record whether people can complete recovery. The deny message
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/E6/e6-lab`.
+For `labs/E6/e6-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=exception_incomplete_denied missing=owner,review_by

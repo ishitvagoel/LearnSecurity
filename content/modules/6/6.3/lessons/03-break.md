@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny Python `allow_share`. The failure is already in the function: it treats a leftover session cookie as consent to share. That is a **failed rule**, not a trophy against another site.
 
-The rule under test:
+Here is the rule:
 
 > Leftover cookies are not consent to share. If `allow_share` from a foreign origin with `token=None` is true, leftover cookie authority has replaced site-bound intent.
 
 ## Where you may practice
 
-Only `labs/6.3/6.3-lab` is in scope. The check is in-process `allow_share`. Origins `https://evil.example` and `https://app.securecollab.test` are fake. It does not open a browser. Do not visit a lookalike page, an employer share endpoint, or a classmate preview as this exercise.
+Stay inside `labs/6.3/6.3-lab`. The check is in-process `allow_share`. Origins `https://evil.example` and `https://app.securecollab.test` are fake. It does not open a browser. Do not visit a lookalike page, an employer share endpoint, or a classmate preview as this exercise.
 
 What must not happen: a cross-site POST that changes a share, authorized by cookie alone. `allow_share("https://evil.example", expected, token=None)` returns true.
 
@@ -40,7 +40,7 @@ Read `vulnerable/csrf.py`. It returns `session_cookie` and ignores origin and to
 - `test_same_origin_with_token_is_allowed` — honest path; may pass on the broken files because a cookie is present
 - `test_missing_cookie_is_denied` — may pass on both
 
-You do not need a new origin string. The failure of `test_foreign_origin_post_is_denied` *is* the evidence.
+You do not need a new origin string. When `test_foreign_origin_post_is_denied` fails, that is the evidence.
 
 ## Why it happens vs what it costs
 
@@ -59,8 +59,6 @@ You do not need a new origin string. The failure of `test_foreign_origin_post_is
 FastAPI `Request.cookies` will attach whatever the browser sent. Starlette CORS middleware is not CSRF. Next.js server actions still need origin and token at the grant. What this practice is supposed to show: foreign origin + no token is False.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/6.3/6.3-lab/tests --impl vulnerable

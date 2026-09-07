@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny Python model of note ingest. The failure is already in the object: a first-key scan for who is allowed, and `json.loads` for storage. Two meanings of the same bytes are **a failed rule**, not a JSON nit.
 
-The rule under test:
+Here is the rule:
 
 > The same request bytes must yield one company meaning for both the who-is-allowed check and the stored row. If two readers would disagree, ingest refuses.
 
 ## Where you may practice
 
-Only `labs/2.1/2.1-parser-boundaries/` is in scope. No other hosts. Do not paste attack recipes into notes. The messy two-company object is the course practice, not a public exploit.
+Stay inside `labs/2.1/2.1-parser-boundaries/`. No other hosts. Do not paste attack recipes into notes. The messy two-company object is the course practice, not a public exploit.
 
 Restore the broken and repaired folders from git when you are done. Fake data only.
 

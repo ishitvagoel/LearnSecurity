@@ -54,7 +54,7 @@ A denied install must say *digest mismatch* in words, not only â€œassert False.â
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/10.2/10.2-lab`.
+For `labs/10.2/10.2-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=hash_mismatch_denied pkg=demo expected=aaa got=bbb

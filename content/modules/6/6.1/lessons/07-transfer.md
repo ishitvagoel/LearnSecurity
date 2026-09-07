@@ -37,7 +37,7 @@ The spawn helper returns a list whose program is not `sh`, and the name is one e
 1. who can act (clerk-chosen filename — not a live clinic);
 2. what you trust (argv list is what you trust; a denylist of punctuation is not);
 3. what must not happen (`argv_for_list` starts `sh -c`, not a legal label);
-4. a test idea on a **local** practice files only (shape, no execution — never on the real clinic);
+4. a test idea on **local** practice files only (shape, no execution — never on the real clinic);
 5. leftover (argument injection; CSV formula leftover; plugin shells);
 6. whether a human-read “export failed” status must not use color as the only cue (readable error, not a silent missing file).
 
@@ -57,4 +57,4 @@ One page. No answer keys. The only running system you may break is `labs/6.1/6.1
 
 ## What this page is not doing
 
-Live-target shells. Real patient filenames. Claiming a course gate from this page.
+Live-target shells. Real patient filenames. This page does not finish a check-in.

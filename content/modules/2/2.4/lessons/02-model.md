@@ -54,7 +54,7 @@ Do not use “timestamp rounded to the second” as the key. Skew and two client
 
 ## Practice
 
-Draw the machine so someone else could name the checks. Point at `labs/2.4/2.4-state-time` file `share.py`. Label missing-key behavior as leftover (the lab still shares once if the key is omitted).
+Look in `labs/2.4/2.4-state-time`, starting with `share.py`. Label missing-key behavior as leftover (the lab still shares once if the key is omitted).
 
 ## Use it somewhere new
 
@@ -66,4 +66,4 @@ A lost first response still needs a path so the owner can see the existing share
 
 ## What this page is not doing
 
-Treating an awareness list as the definition of security. Answer keys are not on this site.
+Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.

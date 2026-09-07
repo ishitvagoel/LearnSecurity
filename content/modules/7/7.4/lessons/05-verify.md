@@ -50,14 +50,12 @@ Honest `service=worker-sc` may pass on both implementations. That does not excus
 
 ## Practice
 
-Run both this session from the lab directory if needed:
-
 ```text
 python3 -m pytest labs/7.4/7.4-lab/tests --impl vulnerable
 python3 -m pytest labs/7.4/7.4-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail/pass into your notes next to the matrix row. Reject a “test” that only greps `worker-sc` in a YAML file without calling `exporter({"user_session": "alice", "service": None})`.
+Paste nothing from answer keys. Write fail or pass next to the matrix row. Reject a “test” that only greps `worker-sc` in a YAML file without calling `exporter({"user_session": "alice", "service": None})`.
 
 ## Use it somewhere new
 

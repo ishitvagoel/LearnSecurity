@@ -11,7 +11,7 @@ Do not paste the chart into the ticket. Do not log bodies.
 
 ## Picture: hunt ids, not bodies
 
-A leftover body after delete is a notice-and-recover problem, not a licence to quote notes in the paging channel. Notice names the event. Recover purges the partition. Neither reprints the body.
+A leftover body after delete is a notice-and-recover problem, not a licence to quote notes in the paging channel. Name the event when you notice it. Recover purges the partition. Neither reprints the body.
 
 ```mermaid
 flowchart TD
@@ -53,7 +53,7 @@ If a human sees “account deleted,” announce it in text a screen reader can s
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, store name, no body). Tie it to `labs/5.1/5.1-lab`. Reject any line that includes a note body, a personal email, or a “privacy law handled” slogan.
+For `labs/5.1/5.1-lab`, write a log line (ids, reason, store name, no body). Reject any line that includes a note body, a personal email, or a “privacy law handled” slogan.
 
 ## Use it somewhere new
 

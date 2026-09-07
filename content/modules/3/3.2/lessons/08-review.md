@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/3.2/3.2-lab/vulnerable/` as a change to the notes-app threat list. Check whether `threats_from_scan(True)` still omits `cross-tenant-read`.
 
-The check you already ran (`test_green_scanner_is_not_an_empty_threat_model`) is the rule test. A comment “will threat-model later” is not.
+You already ran `test_green_scanner_is_not_an_empty_threat_model` — that is the rule. A comment “will threat-model later” is not.
 
 ## Picture: threats = [] if scanner_green
 
@@ -40,11 +38,11 @@ Also reject: treating the client as what you trust; an awareness list cited as a
 - Threat models are pre-code only
 - Awareness lists are the threat list
 - Threat Dragon is the rule
-- The data-centric modeling note (**draft**) is a verification catalogue
+- The data-centric modeling note (**draft**) is a verification list
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_green_scanner_is_not_an_empty_threat_model`.
+Write the review that would block this change. Name `test_green_scanner_is_not_an_empty_threat_model`.
 
 ## Use it somewhere new
 

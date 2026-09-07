@@ -54,7 +54,7 @@ A random stored name is extra. It is not a substitute for the prefix check on an
 
 ## Practice
 
-Draw join → canonicalize → prefix so someone else could name the checks. Point at `labs/6.4/6.4-lab` file `path.py`.
+Look in `labs/6.4/6.4-lab`, starting with `path.py`.
 
 ## Use it somewhere new
 
@@ -66,4 +66,4 @@ Zip members that walk out; XML/pickle; image codecs later.
 
 ## What this page is not doing
 
-Treating an awareness list as the definition of security. Answer keys are not on this site.
+Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.

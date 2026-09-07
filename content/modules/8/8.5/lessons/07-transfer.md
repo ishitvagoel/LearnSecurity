@@ -19,7 +19,7 @@ Renaming “note body” to “patient name” is not transfer. Field, place, an
 |---|---|
 | Note body is confidential | Fake patient name / chart text is confidential |
 | Stack identifier may send | Stack identifier may send |
-| `crash_report("secret")` | `crash_report(name)` on a local practice files |
+| `crash_report("secret")` | `crash_report(name)` on local practice files |
 | Crash-platform operator / logcat reader | Same readers — **not** a live clinic |
 | Body substring in the JSON | Name substring in the JSON |
 
@@ -38,7 +38,7 @@ The fake name still has to be absent from the report. The stack may remain. Enab
 1. who can act (crash-platform operator, logcat reader — not a live clinic);
 2. what you trust (redact-before-send is the promise; the store form and a crash product set to automatic are not);
 3. what must not happen (`'name' in str(crash_report(name))`, not a legal label);
-4. a test idea on a **local** practice files only (no live web-crash call);
+4. a test idea on **local** practice files only (no live web-crash call);
 5. leftover (vendor as processor, screenshots, frozen-app traces, leftover `READ_LOGS`);
 6. whether a human feedback path exists (must not require a screenshot of the chart to continue).
 

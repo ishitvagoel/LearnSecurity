@@ -19,7 +19,7 @@ Renaming “note finding” to “clinic finding” is not transfer. Finding, ma
 |---|---|
 | HIGH finding is unowned until mapped | Same — fifty unmapped HIGHs |
 | Coverage-map requirement id | Same join, clinic requirement names |
-| `ship_ok([HIGH], {})` | `ship_ok` on a local practice files |
+| `ship_ok([HIGH], {})` | `ship_ok` on local practice files |
 | Alert-fatigued reviewer | Same reader — **not** a live clinic |
 | Empty map ships the finding | Empty map ships the finding |
 
@@ -40,7 +40,7 @@ Also name SCA: a CVE versus a function you actually call.
 1. who can act (alert fatigue — not a live clinic);
 2. what you trust (the mapping check is the promise; the dashboard and a maturity score are not);
 3. what must not happen (`ship_ok([HIGH], {})` true, not a legal label);
-4. a test idea on a **local** practice files only (no live GitHub);
+4. a test idea on **local** practice files only (no live GitHub);
 5. leftover (who-is-allowed blind spots, dependency confusion as an advanced leftover, mass suppressions);
 6. whether a human triage path exists (must say *why* F1 is blocked, in words).
 

@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny in-process `assemble_threat_model` dictionary. It does not open a scanner tenant, a Semgrep cloud org, or a production dashboard. Fake threat ids only. An empty list is a **failed rule**, not a clean bill of health.
 
-The rule under test:
+Here is the rule:
 
 > A green scan still lists `cross-tenant-read`. `threats_from_scan(True)` must not return `[]`.
 
 ## Where you may practice
 
-Only `labs/3.2/3.2-lab` is in scope. Do not run SAST or DAST against a public host, an employer repo, or a classmate preview as this exercise.
+Stay inside `labs/3.2/3.2-lab`. Do not run SAST or DAST against a public host, an employer repo, or a classmate preview as this exercise.
 
 What must not happen: a green scanner produces an empty notes-app threat model. `threats_from_scan(True)` returns `[]`, so `cross-tenant-read` is missing.
 
@@ -40,7 +40,7 @@ Read `vulnerable/model.py`. `assemble_threat_model` returns an empty list when `
 - `test_mandatory_threats_have_owners_and_triggers` — `cross-tenant-read`, `hostile-browser`, and `stolen-worker` each have `owner` and `trigger`
 - `test_scanner_findings_are_additive` — extras join; they do not replace the seed
 
-You do not need a new CVE id. The failure of `test_green_scanner_is_not_an_empty_threat_model` *is* the evidence.
+You do not need a new CVE id. When `test_green_scanner_is_not_an_empty_threat_model` fails, that is the evidence.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

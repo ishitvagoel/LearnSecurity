@@ -47,14 +47,12 @@ Record those as leftover or later work, not as silent passes.
 
 ## Practice
 
-Run both this session:
-
 ```text
 python3 -m pytest labs/2.2/2.2-request-path/tests --impl vulnerable
 python3 -m pytest labs/2.2/2.2-request-path/tests --impl fixed
 ```
 
-Write the fail/pass pair next to the cache-key row. Reject a “check” that only greps `Cache-Control` without calling `cache_get` as company B. Paste nothing from answer keys.
+Write fail or pass next to the cache-key row. Reject a “check” that only greps `Cache-Control` without calling `cache_get` as company B. Paste nothing from answer keys.
 
 ## Use it somewhere new
 

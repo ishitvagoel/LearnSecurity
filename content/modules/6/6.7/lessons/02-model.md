@@ -57,7 +57,7 @@ A missing “fourth export × deny” row is how an unbounded loop appears. Writ
 
 ## Practice
 
-Draw the budget so someone else could name the checks. Point at `labs/6.7/6.7-lab` file `limit.py`. Fake counts only.
+Look in `labs/6.7/6.7-lab`, starting with `limit.py`. Fake counts only.
 
 ## Use it somewhere new
 

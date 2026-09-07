@@ -11,7 +11,7 @@ The notes app may get an authorized check of isolation: bob must not read alice'
 
 So what must not happen: **a finding closed without a retest**. That is honesty of the fix loop — the hole can still be there.
 
-A testing catalogue names *what* an authorized web check may try. It does not close tickets. A severity score tells you how to rank work. A 9.8 does not make the close decision for you. A known-exploited list says whether someone has seen the bug used in the wild. That is useful context for an internal-only bug. It is not a licence to scan a public clinic.
+A testing-guide list names *what* an authorized web check may try. It does not close tickets. A severity score tells you how to rank work. A 9.8 does not make the close decision for you. A known-exploited list says whether someone has seen the bug used in the wild. That is useful context for an internal-only bug. It is not a licence to scan a public clinic.
 
 If you later require that a role change takes effect right away, retest the cache after the role change, not a different URL. That is extra, advanced work, not this week's check.
 
@@ -93,4 +93,4 @@ Known-exploited list vs an internal-only bug. Clinic pentest PDF on a shelf.
 
 ## What this page is not doing
 
-Live-target pentests, real people's data, copy-paste exploits. This page does not mark you as finished. from this page. Answer keys are not on this site.
+Live-target pentests, real people's data, copy-paste exploits. This page does not mark you as finished. Answer keys are not on this site.

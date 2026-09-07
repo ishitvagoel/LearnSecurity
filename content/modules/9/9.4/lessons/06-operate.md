@@ -54,7 +54,7 @@ Cause vs cost stays split here too: the **cause** is CI’s `ship_ok` still alwa
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/9.4/9.4-lab`.
+For `labs/9.4/9.4-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=unmapped_high_blocks finding=F1 sev=HIGH

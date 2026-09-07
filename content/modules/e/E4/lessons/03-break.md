@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny in-process `copy_into(bufsize, src, declared_len)`. It does not compile a C overflow, spray a heap, or fuzz a third-party binary. The failure is already in the object: the copy uses `declared_len` plus 8. That is a **failed rule**, not extra slack you needed.
 
-The rule under test:
+Here is the rule:
 
 > `len(copy_into(4, b"abcdefgh", 4))` must be ≤ 4. A short honest copy may fit. Checking every path here means the copy is bounded by destination size.
 
 ## Where you may practice
 
-Only `labs/E4/e4-lab` is in scope. Fake bytes: `abcdefgh`. Restore the broken and repaired folders when you are done.
+Stay inside `labs/E4/e4-lab`. Fake bytes: `abcdefgh`. Restore the broken and repaired folders when you are done.
 
 Do not compile a C overflow. Do not spray a heap. Do not fuzz a third-party binary, an employer codec, or anyone else’s unpacker.
 
@@ -44,7 +44,7 @@ Read `vulnerable/copy.py`. It returns more than `bufsize` bytes. Checks:
 - `test_copy_does_not_exceed_buffer`
 - `test_short_copy_may_fit` — short honest copy may pass on both
 
-You do not need a new source. The failure of `test_copy_does_not_exceed_buffer` *is* the evidence.
+You do not need a new source. When `test_copy_does_not_exceed_buffer` fails, that is the evidence.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

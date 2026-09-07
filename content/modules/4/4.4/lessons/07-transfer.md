@@ -29,7 +29,7 @@ A grant on appointment A is not a grant on chart B, and a grant in clinic-acme i
 1. who can act (member with a real appointment grant who swaps chart id; clinic admin costume — **not** a live clinic system);
 2. what you trust (which lookup is trusted; the scheduling UI is not);
 3. what must not happen (`can_read` true for chart B, not a legal label and not “IDOR”);
-4. a test idea on a **local** practice files only (appointment grant does not allow chart B);
+4. a test idea on **local** practice files only (appointment grant does not allow chart B);
 5. leftover (search index, export, worker, title-vs-body later);
 6. whether a human-seen “access denied” path must be announced in text, not a silent blank page that pushes people to share passwords.
 
@@ -49,4 +49,4 @@ One page. No answer keys. `labs/4.4/4.4-lab` is the only running system you may 
 
 ## What this page is not doing
 
-Live-target id swaps. Real charts. Claiming a course gate from this page.
+Live-target id swaps. Real charts. This page does not finish a check-in.

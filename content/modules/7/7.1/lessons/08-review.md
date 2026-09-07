@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/7.1/7.1-lab/vulnerable/` as a change to the notes app’s profile PATCH. Check whether `apply(..., {"is_admin": true})` still writes true.
 
-The check you already ran (`test_is_admin_cannot_be_patched`) is the rule check. A comment “we should allow-list later” is not. An inventory ticket about leftover endpoints is not this review.
+You already ran `test_is_admin_cannot_be_patched` — that is the rule. A comment “we should allow-list later” is not. An inventory ticket about leftover endpoints is not this review.
 
 ## Picture: user.update(body) / __dict__.update
 
@@ -46,7 +44,7 @@ Also reject: public API attacks; closing findings without re-running `test_is_ad
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_is_admin_cannot_be_patched`.
+Write the review that would block this change. Name `test_is_admin_cannot_be_patched`.
 
 ## Use it somewhere new
 

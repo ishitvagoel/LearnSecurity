@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny Python `resolve(role, field)`. The failure is already in the function: it returns true for every pair. A member resolving `secret_internal` is **a failed rule**, not a trophy dump of an internal token.
 
-The rule under test:
+Here is the rule:
 
 > `resolve("member", "secret_internal")` must be false. If it is true, the serializer dumped without a field table.
 
 ## Where you may practice
 
-Only `labs/7.2/7.2-lab` is in scope. The practice is an in-process `resolve(role, field)`. Fake roles (`member`, `service`) and field names (`display_name`, `secret_internal`). `secret_internal` is a lab label, not a production token. It does not open FastAPI or GraphQL. Do not query a public GraphQL host, an employer API, or a live clinic.
+Stay inside `labs/7.2/7.2-lab`. The practice is an in-process `resolve(role, field)`. Fake roles (`member`, `service`) and field names (`display_name`, `secret_internal`). `secret_internal` is a lab label, not a production token. It does not open FastAPI or GraphQL. Do not query a public GraphQL host, an employer API, or a live clinic.
 
 Do not paste this exercise onto a public site, employer board, or live clinic portal.
 
@@ -40,7 +40,7 @@ Identifiers find a row. They do not authorize fields. Object×company grants wer
 - `test_member_can_resolve_display_name`
 - `test_service_can_resolve_internal_field` — honest service path; may pass on both
 
-You do not need a new secret name. The failure of `test_member_cannot_resolve_internal_field` *is* the evidence.
+You do not need a new secret name. When `test_member_cannot_resolve_internal_field` fails, that is the evidence.
 
 ## Why it happens vs what it costs
 
@@ -72,7 +72,7 @@ Run from `labs/7.2/7.2-lab` if a repo-root collection picks up `site/`. Do not �
 
 ## Use it somewhere new
 
-Clinic SSN as a *field name* on a local practice files. Predict without leaving this directory. Do not query a live EHR.
+Clinic SSN as a *field name* on local practice files. Predict without leaving this directory. Do not query a live EHR.
 
 ## What this page is not doing
 

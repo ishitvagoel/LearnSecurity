@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/5.2/5.2-lab/vulnerable/` as a change to notes-app at-rest protection. Check whether Base64 decode of `protect("secret")` still equals `"secret"`.
 
-The check you already ran (`test_protect_is_not_mere_encoding`) is the rule test. A comment “will add AES later” is not.
+You already ran `test_protect_is_not_mere_encoding` — that is the rule. A comment “will add AES later” is not.
 
 ## Picture: protect equals base64
 
@@ -44,7 +42,7 @@ Also reject: rolling a cipher; closing findings without re-running `test_protect
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_protect_is_not_mere_encoding`.
+Write the review that would block this change. Name `test_protect_is_not_mere_encoding`.
 
 ## Use it somewhere new
 

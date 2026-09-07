@@ -45,7 +45,7 @@ Fail closed: if you are unsure whether the grant is gone, return None. Uncertain
 - An assurance-gate sticker.
 - Cache wipe (phone leftover).
 - Copies already sent.
-- A mobile testing profile used as a web oracle.
+- A mobile testing profile used as a web check.
 
 ## What the tool cannot do
 
@@ -73,4 +73,4 @@ Delayed worker. Phone cache. Access-rights change in the same session. Email alr
 
 ## What this page is not doing
 
-Do not hit a live tenant. This page does not mark you as finished. from a scanner screenshot. Do not treat a README checklist as mastery.
+Do not hit a live tenant. This page does not mark you as finished. A scanner screenshot is not a check-in. Do not treat a README checklist as mastery.

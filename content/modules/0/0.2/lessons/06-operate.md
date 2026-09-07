@@ -32,7 +32,7 @@ An LMS will happily store “topic complete” from a percentage and export it t
 
 ## Practice
 
-Write one log line you would accept. Tie it to `labs/0.2/0.2-bridge`.
+For `labs/0.2/0.2-bridge`, write a log line you would accept.
 
 ```text
 log_denied reason=phase1_skip_denied learner=dev-1 requested=1.2

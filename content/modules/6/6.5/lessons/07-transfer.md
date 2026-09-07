@@ -37,7 +37,7 @@ Link-local and loopback still have to be false; only the named lab (or clinic) h
 1. who can act (URL field — not a live clinic or cloud metadata probe);
 2. what you trust (parsed host allow-list; “https” prefix is not);
 3. what must not happen (`allowed` true for link-local, not a legal label);
-4. a test idea on a **local** practice files only (predicate, no fetch — never on the real clinic);
+4. a test idea on **local** practice files only (predicate, no fetch — never on the real clinic);
 5. leftover (redirects, DNS rebinding, IPv6, `file:`, telling the person they left the site);
 6. whether a human-read “could not fetch PDF” status must not use color as the only cue (readable error, not a spinner that retries the bad URL).
 
@@ -57,4 +57,4 @@ One page. No answer keys. The only running system you may break is `labs/6.5/6.5
 
 ## What this page is not doing
 
-Live-target server-side requests. Real PDFs or metadata. Claiming a course gate from this page.
+Live-target server-side requests. Real PDFs or metadata. This page does not finish a check-in.

@@ -39,7 +39,7 @@ Why it happens vs what it costs stays split here too: the **cause** is client-ch
 
 ## Practice
 
-Write one log line you would accept. Tie it to `labs/E5/e5-lab`.
+For `labs/E5/e5-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=body_tenant_mismatch session=A body=B actor=alice

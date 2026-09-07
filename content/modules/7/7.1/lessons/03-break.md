@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny Python `apply(user, body)`. The failure is already in the function: `user.update(body)` copies every key, so `is_admin` becomes true. Extra keys writing `is_admin` is **a failed rule**, not a trophy against a public API.
 
-The rule under test:
+Here is the rule:
 
 > After `apply(user, {"is_admin": true})`, `is_admin` must still be false. Extra keys are not writable fields.
 
 ## Where you may practice
 
-Only `labs/7.1/7.1-lab` is in scope. The helper is an in-process `apply(user, body)`. Fake profile dicts (`display_name`, `is_admin`). It does not open a network. Do not probe a live API, a public OpenAPI host, or an employer clinic change.
+Stay inside `labs/7.1/7.1-lab`. The helper is an in-process `apply(user, body)`. Fake profile dicts (`display_name`, `is_admin`). It does not open a network. Do not probe a live API, a public OpenAPI host, or an employer clinic change.
 
 Do not paste this exercise onto a public API, employer clinic, or live EHR.
 
@@ -41,7 +41,7 @@ Allowed fields have to be limited per action. Topic 1.2 already said who-is-allo
 - `test_display_name_can_be_patched`
 - `test_unknown_key_does_not_appear` — extras must not become columns
 
-You do not need a new privileged field. The failure of `test_is_admin_cannot_be_patched` *is* the evidence.
+You do not need a new privileged field. When `test_is_admin_cannot_be_patched` fails, that is the evidence.
 
 ## Why it happens vs what it costs
 

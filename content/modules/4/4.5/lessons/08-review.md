@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/4.5/4.5-lab/vulnerable/` as a change to notes-app token acceptance. Check whether `accept_token` still returns true for `aud=other-api`.
 
-The check you already ran (`test_wrong_audience_is_rejected`) is the rule test. A comment “will check aud later” is not.
+You already ran `test_wrong_audience_is_rejected` — that is the rule. A comment “will check aud later” is not.
 
 ## Picture: verify signature, skip aud
 
@@ -44,7 +42,7 @@ Also reject: treating the client as what you trust; closing findings without re-
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_wrong_audience_is_rejected`.
+Write the review that would block this change. Name `test_wrong_audience_is_rejected`.
 
 ## Use it somewhere new
 

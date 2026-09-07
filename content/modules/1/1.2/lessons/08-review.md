@@ -3,8 +3,6 @@
 **Kind:** code-review
 **Loop step:** 5 Verify and communicate
 
-Wait until someone has looked at your review before opening the keys.
-
 ## Review
 
 Treat the broken files as a pull request proposing reusable who-is-allowed logic. Reconstruct the who-is-allowed relation the code actually implements, compare it with the notes-app rule, and write changes a developer can check.

@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/6.4/6.4-lab/vulnerable/` as a change to notes-app uploads. Check whether `resolve("../outside")` still leaves `/tmp/sc-lab`.
 
-The check you already ran (`test_dotdot_does_not_escape_root`) is the rule test. A comment “will canonicalize later” is not.
+You already ran `test_dotdot_does_not_escape_root` — that is the rule. A comment “will canonicalize later” is not.
 
 ## Picture: open(user_path) / join without canonicalize
 
@@ -46,7 +44,7 @@ Also reject: host-file trophies; treating the client as what you trust; an aware
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_dotdot_does_not_escape_root`.
+Write the review that would block this change. Name `test_dotdot_does_not_escape_root`.
 
 ## Use it somewhere new
 

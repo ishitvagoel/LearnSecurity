@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/4.3/4.3-lab/vulnerable/` as a change to notes-app session parsing. Check whether `session_from_request` still returns the query token.
 
-The check you already ran (`test_query_string_token_is_rejected`) is the rule test. A comment “will move to cookies later” is not.
+You already ran `test_query_string_token_is_rejected` — that is the rule. A comment “will move to cookies later” is not.
 
 ## Picture: session_from_request uses query
 
@@ -44,7 +42,7 @@ Also reject: treating the client as what you trust; closing findings without re-
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_query_string_token_is_rejected`.
+Write the review that would block this change. Name `test_query_string_token_is_rejected`.
 
 ## Use it somewhere new
 

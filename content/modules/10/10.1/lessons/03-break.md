@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny Python `merge_ok(pr)` that returns true or false. The failure is already in the function: every dict is allowed to merge. That is a **failed rule**, not a missing GitHub setting.
 
-The rule under test:
+Here is the rule:
 
 > An empty change must not merge. If `merge_ok({})` is true, the process evidence you show before merge has failed as a security control.
 
 ## Where you may practice
 
-Only `labs/10.1/10.1-lab` is in scope. The practice is an in-process `merge_ok(pr)`. The change is a synthetic dict. No live GitHub orgs, no employer repos, no clinic systems. Do not send the dict anywhere.
+Stay inside `labs/10.1/10.1-lab`. The practice is an in-process `merge_ok(pr)`. The change is a synthetic dict. No live GitHub orgs, no employer repos, no clinic systems. Do not send the dict anywhere.
 
 Do not turn off branch protection on a real org “to see what happens.” Do not paste this exercise onto a public GitHub org, employer repo, or live clinic.
 
@@ -39,7 +39,7 @@ Read `vulnerable/sdl.py`. It returns true for every dict. Tests:
 - `test_merge_requires_threat_model_id`
 - `test_pr_with_threat_model_may_merge` — `{"threat_model": "TM-12"}` may pass on both
 
-You do not need a new pull-request key. The failure of `test_merge_requires_threat_model_id` *is* the evidence.
+You do not need a new pull-request key. When `test_merge_requires_threat_model_id` fails, that is the evidence.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -66,8 +66,6 @@ Required reviewers on GitHub are off until someone turns them on, and an admin c
 A design-review guide is vocabulary, not this check. Gate 10 and M4 stay **not finished**.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/10.1/10.1-lab/tests --impl vulnerable

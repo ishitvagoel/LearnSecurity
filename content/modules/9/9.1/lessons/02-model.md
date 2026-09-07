@@ -35,7 +35,7 @@ The usual checklist is the living matrix. An extra advanced row is still a named
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the isolation rule you already have and ask which test would show it is false.
+Do not start a new list from scratch. Take the isolation rule you already have and ask which test would show it is false.
 
 | Piece | This system |
 |---|---|
@@ -61,11 +61,11 @@ A missing isolation-assert cell is how a done checkbox becomes false assurance. 
 
 ## Practice
 
-Draw the chain so someone else could name the checks. Point at `labs/9.1/9.1-lab` file `trace.py`.
+Look in `labs/9.1/9.1-lab`, starting with `trace.py`.
 
 ## Use it somewhere new
 
-The mobile storage row from 8.2: same check, different catalogue.
+The mobile storage row from 8.2: same check, different list.
 
 ## What can still go wrong
 

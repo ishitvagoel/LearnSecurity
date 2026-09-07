@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny Python `close_incident` that returns true for every dict. The failure is already in the function: it never looks at recovery or logs. That always-true close is a **failed rule**, not a paperwork nit.
 
-The rule under test:
+Here is the rule:
 
 > An incident must not close without recovery done, and logs must not hold a note body. If `close_incident({"recovery": "todo", "logs": "ok"})` returns true, the close gate has failed as a security control. If `close_incident({"recovery": "done", "logs": "note_body leaked"})` returns true, the log sink has failed the same way.
 
 ## Where you may practice
 
-Only `labs/10.5/10.5-lab` is in scope. The practice is an in-process `close_incident(inc)`. The incident is a synthetic dict. Do **not** close, page, or query a real SIEM, paging product, or clinic incident system as the exercise.
+Stay inside `labs/10.5/10.5-lab`. The practice is an in-process `close_incident(inc)`. The incident is a synthetic dict. Do **not** close, page, or query a real SIEM, paging product, or clinic incident system as the exercise.
 
 Do not paste this exercise onto a public clinic, employer dashboard, or live hospital portal “to see what happens.”
 
@@ -40,7 +40,7 @@ Read `vulnerable/ir.py`. It returns true for every dict. Tests:
 - `test_cannot_close_when_logs_contain_note_body`
 - `test_close_with_recovery_and_safe_logs_may_succeed` — done + ok may pass on both
 
-You do not need a new incident key. The failure of `test_cannot_close_without_recovery` *is* the evidence.
+You do not need a new incident key. When `test_cannot_close_without_recovery` fails, that is the evidence.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -65,8 +65,6 @@ You do not need a new incident key. The failure of `test_cannot_close_without_re
 A SIEM dashboard turns green when alerts stop. A paging ack is a human click. The notes app’s API will log whatever you print. The app’s promise this week is: **this** practice, recovery todo is deny and `note_body` in logs is deny.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/10.5/10.5-lab/tests --impl vulnerable

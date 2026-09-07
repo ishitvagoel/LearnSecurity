@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny Python `can_read`. The failure is already in the function: it treats “Bob has a share somewhere” as a yes for every note. That is a **failed rule**, not a trophy dump of another company’s body.
 
-The rule under test:
+Here is the rule:
 
 > A grant on n1 does not authorize n2. If `can_read("bob", "n2")` is true because Bob has n1, leftover permission has replaced the rule.
 
 ## Where you may practice
 
-Only `labs/4.4/4.4-lab` is in scope. The check is in-process `can_read`. Notes `n1` / `n2` / `n3` and companies `acme` / `clinic` are fake. It does not open FastAPI or PostgreSQL. Do not guess ids against a live company, an employer API, or a classmate preview.
+Stay inside `labs/4.4/4.4-lab`. The check is in-process `can_read`. Notes `n1` / `n2` / `n3` and companies `acme` / `clinic` are fake. It does not open FastAPI or PostgreSQL. Do not guess ids against a live company, an employer API, or a classmate preview.
 
 What must not happen: a grant on n1 authorizes n2, plus owner/admin costumes that cross companies or skip the object key. `can_read("bob", "n2")` is true.
 
@@ -55,8 +55,6 @@ Read `vulnerable/grant.py`. It never compares `note_id` or company. Tests requir
 `Depends(get_user)` is not `Depends(can_read_note)`. Starlette and Next.js middleware do not key the grant. What this practice is supposed to show: `can_read("bob", "n2") is False`.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/4.4/4.4-lab/tests --impl vulnerable

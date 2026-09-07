@@ -53,7 +53,7 @@ flowchart LR
 
 ## Practice
 
-Draw the map. Point at `labs/0.2/0.2-bridge` file `diagnostic.py`.
+Draw the map. Look in `labs/0.2/0.2-bridge`, starting with `diagnostic.py`.
 
 ## Use it somewhere new
 
@@ -65,4 +65,4 @@ Memorized 1.2 answers. Real tooling gaps still need bridges.
 
 ## What this page is not doing
 
-A famous-bugs list as the definition of security. Keys stay out of lessons.
+Do not treat a famous-bugs list as the definition of security. Keys stay out of lessons.

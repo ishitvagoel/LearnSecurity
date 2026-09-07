@@ -33,7 +33,7 @@ Renaming “title” to “nickname” is not transfer. If the nickname is conca
 1. who can act (patient or clerk supplying a nickname — not a live clinic);
 2. what you trust (the HTML-text encoder is what you trust; a content-security header is not);
 3. what must not happen (`render` leaves `<` as markup, not “HIPAA”);
-4. a check idea on a **local** practice files only (tame `<` marker);
+4. a check idea on **local** practice files only (tame `<` marker);
 5. leftover risk (JavaScript / attribute / URL contexts; markdown pipeline; Trusted Types draft; content-security reporting as extra, advanced);
 6. the web accessibility baseline if a human “name could not be shown” path is in the claim (readable fallback, not a blank badge that hides the person).
 

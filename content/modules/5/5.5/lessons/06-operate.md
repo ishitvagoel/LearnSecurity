@@ -11,7 +11,7 @@ Do not log note bodies or bound parameter values that are bodies (3.1 / 5.1). Do
 
 ## Picture: error shape is a signal
 
-A SQL syntax-error spike after a query helper change is a notice-and-recover problem, not a licence to quote note bodies in the paging channel. Notice names the event. Recover stops the concatenating path and restores if needed. Neither reprints the body.
+A SQL syntax-error spike after a query helper change is a notice-and-recover problem, not a licence to quote note bodies in the paging channel. Name the event when you notice it. Recover stops the concatenating path and restores if needed. Neither reprints the body.
 
 ```mermaid
 flowchart TD
@@ -49,7 +49,7 @@ A web filter will page on syntax errors and stay silent when the values were con
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, statement name, no body). Tie it to `labs/5.5/5.5-lab`. Reject any line that includes a note body, a full SQL string with values, or a real email.
+For `labs/5.5/5.5-lab`, write a log line (ids, reason, statement name, no body). Reject any line that includes a note body, a full SQL string with values, or a real email.
 
 ## Use it somewhere new
 

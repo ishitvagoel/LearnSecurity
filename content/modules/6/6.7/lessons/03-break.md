@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny Python `allow`. It does not open a live export API. The failure is already in the function: it says yes for every `n`. That is a **failed rule**, not a trophy against a public host.
 
-The rule under test:
+Here is the rule:
 
 > Export has a resource account, not an unbounded loop. `allow(4)` must be false in the lab window. `allow(3)` may be true.
 
 ## Where you may practice
 
-Only `labs/6.7/6.7-lab` is in scope. The practice is an in-process `allow`. Fake call counts. It does not talk to the network.
+Stay inside `labs/6.7/6.7-lab`. The practice is an in-process `allow`. Fake call counts. It does not talk to the network.
 
 Do not load-test a public host. Do not probe an employer export API. Do not probe a classmate preview. Do not paste a live export “to see what happens.”
 
@@ -40,7 +40,7 @@ Read `vulnerable/limit.py`. It returns true for every `n`. Tests:
 - `test_third_export_is_allowed`
 - `test_first_export_is_allowed` — honest path; may pass on both
 
-You do not need a new `n`. The failure of `test_fourth_export_is_denied` *is* the evidence.
+You do not need a new `n`. When `test_fourth_export_is_denied` fails, that is the evidence.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -67,8 +67,6 @@ You do not need a new `n`. The failure of `test_fourth_export_is_denied` *is* th
 An IP limit at the edge is a bucket per address, not a per-person export account. FastAPI will run export as often as you call it. Next.js disabling a button does not bind `n`. What this practice is supposed to show: `allow(4)` is false.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/6.7/6.7-lab/tests --impl vulnerable

@@ -49,14 +49,12 @@ Map the test to the deleted-alice × leftover-session row you wrote. If the brok
 
 ## Practice
 
-Run both this session:
-
 ```text
 python3 -m pytest labs/4.1/4.1-lab/tests --impl vulnerable
 python3 -m pytest labs/4.1/4.1-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail/pass into your notes next to the matrix row.
+Paste nothing from answer keys. Write fail or pass next to the matrix row.
 
 ## Use it somewhere new
 

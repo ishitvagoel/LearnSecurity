@@ -11,7 +11,7 @@ Do not log the user string that would have been eval’d. Do not paste template 
 
 ## Picture: eval in a change is a signal
 
-A pull request whose diff still grants `eval` on a user string is a notice-and-recover problem, not a licence to quote the payload in the paging channel. Notice names the event. Recover blocks the merge and keeps the reject. Neither reprints the payload.
+A pull request whose diff still grants `eval` on a user string is a notice-and-recover problem, not a licence to quote the payload in the paging channel. Name the event when you notice it. Recover blocks the merge and keeps the reject. Neither reprints the payload.
 
 ```mermaid
 flowchart TD
@@ -48,7 +48,7 @@ A GitHub checks dashboard will show the formatter green and stay silent when `re
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/9.2/9.2-lab`.
+For `labs/9.2/9.2-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=review_block_eval pr=pr_92e file=export.py

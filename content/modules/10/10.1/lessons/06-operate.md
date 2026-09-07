@@ -52,7 +52,7 @@ A refused merge must say *why* (missing threat-model id), in words, not only “
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/10.1/10.1-lab`.
+For `labs/10.1/10.1-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=merge_blocked_no_tm pr=123

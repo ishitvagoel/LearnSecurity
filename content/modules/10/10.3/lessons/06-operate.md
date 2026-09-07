@@ -54,7 +54,7 @@ A denied admission must say *cluster-admin refused*, not only "assert False." Do
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/10.3/10.3-lab`.
+For `labs/10.3/10.3-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=cluster_admin_denied sa=app ns=sc-prod requested=cluster-admin

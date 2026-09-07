@@ -26,7 +26,7 @@ If any box is a product name or a policy URL, the row is not ready.
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the fields you already have and ask where each one may land.
+Do not start a new list from scratch. Take the fields you already have and ask where each one may land.
 
 | Piece | This system |
 |---|---|
@@ -72,7 +72,7 @@ A maturity score and a scanner color do not belong in this list.
 
 ## Practice
 
-Draw the inventory so someone else could name the checks. Point at `labs/3.1/3.1-lab` file `classify.py`. Your artifact is a versioned list (even a table in your notes) with field, level, place, allow or deny, and what would show the deny is false. No real people's data.
+Look in `labs/3.1/3.1-lab`, starting with `classify.py`. Your artifact is a versioned list (even a table in your notes) with field, level, place, allow or deny, and what would show the deny is false. No real people's data.
 
 ## Use it somewhere new
 

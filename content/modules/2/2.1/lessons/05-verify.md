@@ -55,7 +55,7 @@ Run from `labs/2.1/2.1-parser-boundaries` if a repo-root collection picks up `si
 
 ## Practice
 
-Run both implementations this session. If the broken files do not fail, the practice is miswired — fix the wiring, not the check. Write the fail/pass pair next to the ingest rule from the map page.
+Run both implementations this session. If the broken files do not fail, the practice is miswired — fix the wiring, not the check. Write fail or pass next to the ingest rule from the map page.
 
 ## Use it somewhere new
 

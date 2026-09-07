@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/2.4/2.4-state-time/vulnerable/` as a change to notes-app share. Check whether a second `share_note` with `k1` still appends a row.
 
-The check you already ran (`test_retry_does_not_duplicate_side_effect`) is the rule test. A comment “will add remembering later” is not.
+You already ran `test_retry_does_not_duplicate_side_effect` — that is the rule. A comment “will add remembering later” is not.
 
 ## Picture: INSERT share on every POST
 
@@ -45,7 +43,7 @@ Also reject: treating the client as what you trust; an awareness-list name as th
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_retry_does_not_duplicate_side_effect`.
+Write the review that would block this change. Name `test_retry_does_not_duplicate_side_effect`.
 
 ## Use it somewhere new
 

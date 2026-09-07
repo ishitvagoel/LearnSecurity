@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny in-process `share_note` list. It does not open a browser, talk to a payment network, or race a public API. The failure is already in the object: every call appends a row and ignores the key. That is a **failed rule**, not a clumsy click.
 
-The rule under test:
+Here is the rule:
 
 > Two `share_note` calls with the same idempotency key must produce one share. A retry is a second attempt, not a second grant.
 
 ## Where you may practice
 
-Only `labs/2.4/2.4-state-time` is in scope. Restore the broken and repaired folders from git when you are done. Fake note ids only.
+Stay inside `labs/2.4/2.4-state-time`. Restore the broken and repaired folders from git when you are done. Fake note ids only.
 
 Do not load-test third-party APIs. Do not run clock tricks against NTP. Do not point this exercise at a live clinic booking page, a classmate’s FastAPI, or an employer checkout.
 
@@ -40,7 +40,7 @@ Read `vulnerable/share.py`. `share_note` appends `note_id` to `_SHARES` on every
 - `test_single_share` — one call still creates one share (honest happy path)
 - `test_retry_does_not_duplicate_side_effect` — two calls with `k1` must leave `share_count() == 1`
 
-You do not need a new key string. The failure of `test_retry_does_not_duplicate_side_effect` *is* the evidence.
+You do not need a new key string. When `test_retry_does_not_duplicate_side_effect` fails, that is the evidence.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

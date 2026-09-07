@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/6.5/6.5-lab/vulnerable/` as a change to notes-app unfurl. Check whether `allowed` is still true for the named link-local metadata URL.
 
-The check you already ran (`test_link_local_metadata_is_denied`) is the rule test. A comment “will allow-list later” is not.
+You already ran `test_link_local_metadata_is_denied` — that is the rule. A comment “will allow-list later” is not.
 
 ## Picture: requests.get of the user URL / scheme-only allow
 
@@ -44,7 +42,7 @@ Also reject: live fetches; closing findings without re-running `test_link_local_
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_link_local_metadata_is_denied`.
+Write the review that would block this change. Name `test_link_local_metadata_is_denied`.
 
 ## Use it somewhere new
 

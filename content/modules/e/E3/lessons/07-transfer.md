@@ -46,4 +46,4 @@ One page. No keys. `labs/E3/e3-lab` is the only running system you may break. Do
 
 ## What this page is not doing
 
-Live-processor attacks. Real card data. Claiming a course gate, a milestone, or card-network scope from this page.
+Live-processor attacks. Real card data. This page does not finish a check-in, a milestone, or card-network scope.

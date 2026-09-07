@@ -48,4 +48,4 @@ One page. No keys. `labs/3.4/3.4-lab` is the only running system you may break. 
 
 ## What this page is not doing
 
-Live-target bots. Real member emails. Claiming a course gate from this page.
+Live-target bots. Real member emails. This page does not finish a check-in.

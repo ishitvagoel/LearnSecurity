@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/8.1/8.1-lab/vulnerable/` as a change to the notes app’s Android export. Check whether `allow_export({"integrity": "ok"}, "fail")` still returns true.
 
-The check you already ran (`test_client_integrity_claim_is_not_authorization`) is the rule check. A comment “we will attest later” is not. A sticker about a mobile checklist is not this review.
+You already ran `test_client_integrity_claim_is_not_authorization` — that is the rule. A comment “we will attest later” is not. A sticker about a mobile checklist is not this review.
 
 ## Picture: if integrity==ok: export
 
@@ -46,7 +44,7 @@ Also reject: live device farms; personal-phone cookbooks; closing findings witho
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_client_integrity_claim_is_not_authorization`.
+Write the review that would block this change. Name `test_client_integrity_claim_is_not_authorization`.
 
 ## Use it somewhere new
 

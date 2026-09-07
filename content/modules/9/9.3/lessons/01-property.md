@@ -11,7 +11,7 @@ The notes app has a who-is-allowed check: a member of company B must not read a 
 
 So what must not happen: **HTTP 200-only test counted as a security test**. That is honesty of the test suite — lesson 9.1 can mark the isolation row “covered” with a test that never isolates.
 
-Industry catalogues tell you *what* to consider (who is allowed, sessions, storage). They do not make `assert r.status_code == 200` a security test. If you add a race-condition test, it still needs a named what must not happen (“the race must not grant”), not “the fuzzer ran.”
+Checklists tell you *what* to consider (who is allowed, sessions, storage). They do not make `assert r.status_code == 200` a security test. If you add a race-condition test, it still needs a named what must not happen (“the race must not grant”), not “the fuzzer ran.”
 
 ## Picture: named what must not happen
 

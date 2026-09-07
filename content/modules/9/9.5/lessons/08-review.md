@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/9.5/9.5-lab/vulnerable/` as a change to the notes app's close gate. Check whether `close_finding({"retest": None})` still returns true.
 
-Start at `close_finding` and the missing-retest row, not at a scanner color or a PDF screenshot. The check you already ran (`test_cannot_close_without_retest`) is the rule test. A comment "will retest later" is not.
+Start at `close_finding` and the missing-retest row, not at a scanner color or a PDF screenshot. You already ran `test_cannot_close_without_retest` — that is the rule. A comment "will retest later" is not.
 
 ## Picture: close without retest
 
@@ -41,12 +39,12 @@ Also reject: public pentest steps; closing findings without re-running `test_can
 - A PDF report is the fix
 - Severity 9.8 is the close decision
 - A known-exploited listing authorizes scanning public systems
-- A testing-catalogue draft is the current final pin
+- A testing-guide draft is the current final pin
 - An assurance gate follows from a filed report
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_cannot_close_without_retest`.
+Write the review that would block this change. Name `test_cannot_close_without_retest`.
 
 ## Use it somewhere new
 

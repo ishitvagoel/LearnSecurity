@@ -42,7 +42,7 @@ Map each test to a row on the channel map you drew. If the broken files do not f
 
 ## Practice
 
-Run both this session. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `Referrer-Policy` without calling `session_from_request` on a query dict.
+Write fail or pass next to the matrix row. Reject a “test” that only greps `Referrer-Policy` without calling `session_from_request` on a query dict.
 
 ## Use it somewhere new
 

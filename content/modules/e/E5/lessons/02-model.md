@@ -53,7 +53,7 @@ flowchart LR
 
 ## Practice
 
-Draw this map so someone else could name the checks. Point at `labs/E5/e5-lab` file `rls.py`.
+Look in `labs/E5/e5-lab`, starting with `rls.py`.
 
 ## Use it somewhere new
 
@@ -65,4 +65,4 @@ Silent impersonation; lake jobs that re-key on a body field.
 
 ## What this page is not doing
 
-A famous-bugs list as the definition of security. Answer keys are not on this site.
+Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.

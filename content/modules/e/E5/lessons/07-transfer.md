@@ -30,7 +30,7 @@ Session A plus body B is still A. Matching A/A may still keep A. Enabling row-le
 1. who can act (member of practice A sending practice B — not a live clinic company);
 2. what you trust (session binding is trusted; a row-level variable from the body, a famous-bugs mapping, and a subdomain are not);
 3. what must not happen (`tenant_for({A},{B}) == B`, not a legal label);
-4. a test idea on a **local** practice files only (no public clinic system);
+4. a test idea on **local** practice files only (no public clinic system);
 5. leftover (search/cache/lake, silent impersonation, immediate grant-change leftover);
 6. whether a support impersonation UI exists (must not look like the clinician’s own company; announce *acting as* in text).
 
@@ -50,4 +50,4 @@ One page. No answer keys. `labs/E5/e5-lab` is the only running system you may br
 
 ## What this page is not doing
 
-Live-product probes. Production GraphQL. Claiming a course gate from this page.
+Live-product probes. Production GraphQL. This page does not finish a check-in.

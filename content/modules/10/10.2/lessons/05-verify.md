@@ -49,14 +49,12 @@ A test that only greps `CycloneDX` in CI without calling `install_ok("aaa", "bbb
 
 ## Practice
 
-Run both this session from the lab directory if needed:
-
 ```text
 python3 -m pytest labs/10.2/10.2-lab/tests --impl vulnerable
 python3 -m pytest labs/10.2/10.2-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail/pass into your notes next to the mismatch row. Reject a “test” that only greps `CycloneDX` in CI without calling `install_ok("aaa", "bbb")`.
+Paste nothing from answer keys. Write fail or pass next to the mismatch row. Reject a “test” that only greps `CycloneDX` in CI without calling `install_ok("aaa", "bbb")`.
 
 ## Use it somewhere new
 

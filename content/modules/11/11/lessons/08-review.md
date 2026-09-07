@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/11/11-lab/vulnerable/` as a change to the notes app’s share revoke. Check whether `read("n1", "B")` after `revoke("n1", "B")` still returns the body.
 
-Start at `revoke` / `read` and the B-after-revoke row, not at a scanner color or a README screenshot. The check you already ran (`test_revoked_share_cannot_read`) is the rule test. A comment “will consult grants later” is not.
+Start at `revoke` / `read` and the B-after-revoke row, not at a scanner color or a README screenshot. You already ran `test_revoked_share_cannot_read` — that is the rule. A comment “will consult grants later” is not.
 
 ## Picture: read after revoke succeeds
 
@@ -46,7 +44,7 @@ Also reject: live tenant attacks; merging without re-running `test_revoked_share
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_revoked_share_cannot_read`.
+Write the review that would block this change. Name `test_revoked_share_cannot_read`.
 
 ## Use it somewhere new
 

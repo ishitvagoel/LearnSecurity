@@ -54,7 +54,7 @@ A reopen notice must say *recovery still todo*, not only “assert False.” Und
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/10.5/10.5-lab`.
+For `labs/10.5/10.5-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=incident_closed_without_recovery id=INC-12 recovery=todo

@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny Python `log_event` that returns a string. The failure is already in the function: it pastes the note body into the line. That line is a **failed rule**, not a debug nit.
 
-The rule under test:
+Here is the rule:
 
 > A confidential note body must not appear in this log line. If `log_event("note_read", "tenant-A-secret-body")` includes `tenant-A-secret-body`, logging has failed as a security control.
 
 ## Where you may practice
 
-Only `labs/3.1/3.1-lab` is in scope. The string is in-process. The body is the synthetic string `tenant-A-secret-body`. No production log drains, no real people's data, no live log tenant, no patient chart.
+Stay inside `labs/3.1/3.1-lab`. The string is in-process. The body is the synthetic string `tenant-A-secret-body`. No production log drains, no real people's data, no live log tenant, no patient chart.
 
 Do not paste a real note body into the logger “to see what happens.” Do not paste this exercise onto a public log drain, employer dashboard, or live clinic.
 
@@ -36,7 +36,7 @@ The broken files take that path on purpose. You do not need a production drain. 
 
 Read `vulnerable/classify.py`. `log_event` returns `f"{event}: {note_body}"`. The test asserts the body substring is absent **and** a redaction marker (`redacted` or `confidential`) is present.
 
-You do not need a new body string. The failure of `test_note_body_is_not_logged` *is* the evidence.
+You do not need a new body string. When `test_note_body_is_not_logged` fails, that is the evidence.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -60,8 +60,6 @@ You do not need a new body string. The failure of `test_note_body_is_not_logged`
 FastAPI does not know Confidential. Access logs will store query strings — a later topic. Regex after the fact misses encodings — a later topic. The app's promise this week is: **this** line does not contain `tenant-A-secret-body`.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/3.1/3.1-lab/tests --impl vulnerable

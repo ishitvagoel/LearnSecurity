@@ -36,7 +36,7 @@ If a human sees “share blocked,” announce it in text a screen reader can spe
 
 ## Practice
 
-Write one log line you would accept. Tie it to `labs/6.3/6.3-lab`.
+For `labs/6.3/6.3-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=foreign_origin_post_denied expected_host=app.securecollab.test request_id=req_63c

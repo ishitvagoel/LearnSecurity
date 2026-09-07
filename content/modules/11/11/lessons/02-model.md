@@ -36,7 +36,7 @@ A copy already sitting in email is leftover, not this week's check.
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the share you already have and ask what would show the grant was never consulted.
+Do not start a new list from scratch. Take the share you already have and ask what would show the grant was never consulted.
 
 | Piece | This system |
 |---|---|
@@ -62,7 +62,7 @@ A missing “B after revoke × body × deny” row is how a revoke event becomes
 
 ## Practice
 
-Draw the map so someone else could name the checks. Point at `labs/11/11-lab` file `capstone.py`.
+Look in `labs/11/11-lab`, starting with `capstone.py`.
 
 ## Use it somewhere new
 

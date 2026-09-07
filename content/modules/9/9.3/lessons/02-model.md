@@ -21,11 +21,11 @@ flowchart TD
   Forbid["cross-company must not 200"] --> Security[security test]
 ```
 
-## Picture: a catalogue checkbox is not a test
+## Picture: a checklist tick is not a test
 
 ```mermaid
 flowchart LR
-  Guide[testing-guide row] --> Inventory[catalogue]
+  Guide[testing-guide row] --> Inventory[list]
   Pytest[what must not happen assert] --> Evidence[evidence]
   Inventory --> NotE[not evidence]
 ```
@@ -34,7 +34,7 @@ A list of things you might test is inventory. A check that names the bad case is
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the tests you already have and ask whether each one names a bad case.
+Do not start a new list from scratch. Take the tests you already have and ask whether each one names a bad case.
 
 | Piece | This system |
 |---|---|
@@ -60,11 +60,11 @@ A missing bad-case × isolation row is how 200-only occupies the security slot. 
 
 ## Practice
 
-Draw the two suites so someone else could name the checks. Point at `labs/9.3/9.3-lab` file `stest.py`.
+Look in `labs/9.3/9.3-lab`, starting with `stest.py`.
 
 ## Use it somewhere new
 
-A mobile testing-profile checkbox is catalogue, not shape.
+A mobile testing-profile checkbox is a list, not a test shape.
 
 ## What can still go wrong
 

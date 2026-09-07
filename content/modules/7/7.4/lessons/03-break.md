@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny Python `exporter`. It does not open a live queue. The failure is already in the function: leftover `user_session` wins if it is present. That is a **failed rule**, not a trophy against a public broker.
 
-The rule under test:
+Here is the rule:
 
 > A leftover user session is not worker identity. `exporter({"user_session": "alice", "service": None})` must be `None`. `exporter({"service": "worker-sc"})` may be `"worker-sc"`.
 
 ## Where you may practice
 
-Only `labs/7.4/7.4-lab` is in scope. The practice is an in-process `exporter(job)`. Fake job dicts (`alice`, `worker-sc`). It does not talk to Redis, RabbitMQ, or a live task library.
+Stay inside `labs/7.4/7.4-lab`. The practice is an in-process `exporter(job)`. Fake job dicts (`alice`, `worker-sc`). It does not talk to Redis, RabbitMQ, or a live task library.
 
 Do not attach to a public broker. Do not probe an employer queue. Do not probe a classmate preview. Do not paste a live cookie “to see what happens.”
 
@@ -41,7 +41,7 @@ Read `vulnerable/worker.py`. It returns `user_session` if present. Tests:
 - `test_service_principal_is_worker_identity`
 - `test_alice_and_wrong_service_is_rejected` — leftover plus wrong service
 
-You do not need a new identity string. The failure of `test_user_session_is_not_worker_identity` *is* the evidence.
+You do not need a new identity string. When `test_user_session_is_not_worker_identity` fails, that is the evidence.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -68,8 +68,6 @@ You do not need a new identity string. The failure of `test_user_session_is_not_
 A task library can copy the request into the later job. FastAPI `Depends()` is gone once the HTTP worker returns. A message broker on a private network is still untrusted input (2.1). Next.js never sees the overnight job. What this practice is supposed to show: Alice session yields `None`.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/7.4/7.4-lab/tests --impl vulnerable

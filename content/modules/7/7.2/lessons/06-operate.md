@@ -39,7 +39,7 @@ If a human is denied a field they should not see, do not announce the secret in 
 
 ## Practice
 
-Write one log line you would accept. Tie it to `labs/7.2/7.2-lab`. Example shape (fake ids only):
+For `labs/7.2/7.2-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=field_denied field=secret_internal subject=user_72e request_id=req_72e
@@ -49,7 +49,7 @@ Reject any line that includes the field value, a real SSN, or a live GraphQL tra
 
 ## Use it somewhere new
 
-A clinic example: detect SSN field probes on a local practice files; do not attach the SSN to the ticket. Do not query a live EHR.
+A clinic example: detect SSN field probes on local practice files; do not attach the SSN to the ticket. Do not query a live EHR.
 
 ## What this page is not doing
 

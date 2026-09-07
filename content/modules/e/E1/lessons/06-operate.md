@@ -54,7 +54,7 @@ A denied tool must say *exec_sql not allow-listed*, not only "assert False." Do 
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/E1/e1-lab`.
+For `labs/E1/e1-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=tool_denied agent=sum-1 tool=exec_sql

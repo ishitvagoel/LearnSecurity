@@ -49,14 +49,12 @@ Map the test to the header-https × socket-http row you wrote. Honest socket-htt
 
 ## Practice
 
-Run both this session:
-
 ```text
 python3 -m pytest labs/5.4/5.4-lab/tests --impl vulnerable
 python3 -m pytest labs/5.4/5.4-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail/pass into your notes next to the matrix row. Reject a “test” that only greps `https` in a dashboard without calling `channel_is_https` on the mismatch.
+Paste nothing from answer keys. Write fail or pass next to the matrix row. Reject a “test” that only greps `https` in a dashboard without calling `channel_is_https` on the mismatch.
 
 ## Use it somewhere new
 

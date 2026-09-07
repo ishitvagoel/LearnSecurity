@@ -11,7 +11,7 @@ Do not log bodies or `lab-secret` (3.1 / 5.3). Do not attach the HL7/JSON body t
 
 ## Picture: a missing sig is a signal
 
-A deny of a callback with a missing or wrong MAC is a notice-and-recover problem, not a licence to paste the body into the paging channel. Notice names the event. Recover keeps the deny. Neither logs the body.
+A deny of a callback with a missing or wrong MAC is a notice-and-recover problem, not a licence to paste the body into the paging channel. Name the event when you notice it. Recover keeps the deny. Neither logs the body.
 
 ```mermaid
 flowchart TD
@@ -50,11 +50,11 @@ An nginx dashboard will show TLS handshakes and stay silent when `/webhook` stil
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body). Tie it to `labs/7.3/7.3-lab`. Reject any line that includes the raw body, `lab-secret`, a real patient result, or a live provider trace.
+For `labs/7.3/7.3-lab`, write a log line (ids, reason, no body). Reject any line that includes the raw body, `lab-secret`, a real patient result, or a live provider trace.
 
 ## Use it somewhere new
 
-A clinic example: notice unsigned lab-result posts on a local practice files; do not attach the HL7/JSON body to the ticket. Do not POST a live vendor.
+A clinic example: notice unsigned lab-result posts on local practice files; do not attach the HL7/JSON body to the ticket. Do not POST a live vendor.
 
 ## Usability
 

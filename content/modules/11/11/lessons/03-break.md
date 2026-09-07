@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny Python `revoke` that does nothing and a `read` that always returns the body. The failure is already in the functions: revoke never drops the grant, and read never asks. That no-op revoke is a **failed rule**, not a paperwork nit.
 
-The rule under test:
+Here is the rule:
 
 > After `revoke("n1", "B")`, `read("n1", "B")` must be None. If it still returns the body, a revoked share still reads the note.
 
 ## Where you may practice
 
-Only `labs/11/11-lab` is in scope. The practice is in-process `revoke` / `read` over synthetic people `A` / `B` and note `n1`. Do **not** revoke, read, or scrape a real notes app, clinic portal, or shared tenant as the exercise.
+Stay inside `labs/11/11-lab`. The practice is in-process `revoke` / `read` over synthetic people `A` / `B` and note `n1`. Do **not** revoke, read, or scrape a real notes app, clinic portal, or shared tenant as the exercise.
 
 Do not paste this exercise onto a public clinic, employer dashboard, or live hospital portal “to see what happens.”
 
@@ -41,7 +41,7 @@ Read `vulnerable/capstone.py`. It ignores `revoke` and returns the body. Tests:
 - `test_owner_may_still_read_after_revoke` — A may pass on both
 - `test_share_may_read_before_revoke` — B before revoke may pass on both
 
-You do not need a new tenant. The failure of `test_revoked_share_cannot_read` *is* the evidence. `conftest.py` calls `reset()` so grant state does not leak across tests.
+You do not need a new tenant. When `test_revoked_share_cannot_read` fails, that is the evidence. `conftest.py` calls `reset()` so grant state does not leak across tests.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -66,8 +66,6 @@ You do not need a new tenant. The failure of `test_revoked_share_cannot_read` *i
 FastAPI will return 200 for DELETE if you wrote that route. A scanner will stay green if the suite never reads after revoke. The notes app’s promise this week is: **this** practice, B after revoke is None.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/11/11-lab/tests --impl vulnerable

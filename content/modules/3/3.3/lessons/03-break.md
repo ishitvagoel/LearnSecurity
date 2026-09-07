@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny in-process `can_select` check. It does not open PostgreSQL, a cloud database, or a classmate’s replica. The failure is already in the object: every role can read every company. That is a **failed rule**, not a topology drawing.
 
-The rule under test:
+Here is the rule:
 
 > The runtime `app` role bound as company `tB` must not `SELECT` a row whose company is `tA`. Architecture is a second check, not a substitute for who-is-allowed.
 
 ## Where you may practice
 
-Only `labs/3.3/3.3-lab` is in scope. Fake company ids `tA` / `tB`. Restore the broken and repaired folders when you are done.
+Stay inside `labs/3.3/3.3-lab`. Fake company ids `tA` / `tB`. Restore the broken and repaired folders when you are done.
 
 Do not run `SELECT` against a live cluster, an employer replica, or a public demo database. Do not point this exercise at a classmate’s FastAPI or a production notes app.
 
@@ -43,7 +43,7 @@ Read `vulnerable/roles.py`. `can_select` returns `True` for every role and compa
 - `test_runtime_connection_is_not_superuser`
 - `test_app_role_can_read_own_tenant` — honest path (may fail on the broken files too)
 
-You do not need a new company id. The failure of `test_app_role_cannot_read_other_tenant` *is* the evidence.
+You do not need a new company id. When `test_app_role_cannot_read_other_tenant` fails, that is the evidence.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny in-process `channel_is_https`. Fake headers and a `server_scheme` string. It does not open a socket or a CDN. A client `X-Forwarded-Proto: https` on an `http` socket still counting as TLS is a **failed rule**, not a trophy strip attack.
 
-The rule under test:
+Here is the rule:
 
 > A client Forwarded-Proto header is not TLS. `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` must be false.
 
 ## Where you may practice
 
-Only `labs/5.4/5.4-lab` is in scope. Restore the broken and repaired folders when you are done. Fake headers only.
+Stay inside `labs/5.4/5.4-lab`. Restore the broken and repaired folders when you are done. Fake headers only.
 
 Do not probe a public host. Do not probe an employer load balancer. Do not probe a classmate preview.
 
@@ -41,7 +41,7 @@ Read `vulnerable/channel.py`. It returns true if the header is `https` **or** th
 - `test_plain_http_is_not_https`
 - `test_server_https_counts` — honest socket-https path; may pass on both
 
-You do not need a new header name. The failure of `test_client_forwarded_proto_is_not_tls` *is* the evidence.
+You do not need a new header name. When `test_client_forwarded_proto_is_not_tls` fails, that is the evidence.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -68,8 +68,6 @@ You do not need a new header name. The failure of `test_client_forwarded_proto_i
 A server flag that trusts proxy headers, with a wildcard trusted hop, will believe whoever sent the header. The request URL scheme after that middleware is not the socket. Headers the page reads in the browser are not TLS. What this practice is supposed to show: header https + socket http is False.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/5.4/5.4-lab/tests --impl vulnerable

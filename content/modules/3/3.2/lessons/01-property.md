@@ -27,7 +27,7 @@ flowchart TD
   Empty --> Fail["The rule is false"]
 ```
 
-What you trust is the **versioned list with owners and triggers**, plus the check that those ids exist. The scanner process is not an oracle. FastAPI, Semgrep, and a vendor dashboard do not know `cross-tenant-read`.
+What you trust is the **versioned list with owners and triggers**, plus the check that those ids exist. The scanner process is not the whole check. FastAPI, Semgrep, and a vendor dashboard do not know `cross-tenant-read`.
 
 **A tool is not the rule.** Threat Dragon, a data-flow picture, or “we did STRIDE in the sprint.” A named product is not this sentence.
 

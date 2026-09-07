@@ -75,4 +75,4 @@ A feature flag that turns off authorization. Sidecar debug. Extra version leakag
 
 ## What this page is not doing
 
-Do not boot a live host. This page does not mark you as finished. from a `NODE_ENV` screenshot. Do not present a manufacturer-defaults program page as verified.
+Do not boot a live host. This page does not mark you as finished. A `NODE_ENV` screenshot is not a check-in. Do not present a manufacturer-defaults program page as verified.

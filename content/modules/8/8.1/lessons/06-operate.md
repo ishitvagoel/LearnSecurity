@@ -37,7 +37,7 @@ What this practice is supposed to show: `attest_fail_export_denied` fires withou
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/8.1/8.1-lab`. Example shape (fake ids only):
+For `labs/8.1/8.1-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=attest_fail_export_denied app_ver=1.0 request_id=req_81e

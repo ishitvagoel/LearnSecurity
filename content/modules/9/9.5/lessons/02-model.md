@@ -35,7 +35,7 @@ A health check that returns 200 is a product test. It is not the isolation check
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the finding you already have and ask what would show the hole is still there.
+Do not start a new list from scratch. Take the finding you already have and ask what would show the hole is still there.
 
 | Piece | This system |
 |---|---|
@@ -61,7 +61,7 @@ A missing retest field is how a PDF on a shelf becomes "Done." Write the hole.
 
 ## Practice
 
-Draw the loop so someone else could name the checks. Point at `labs/9.5/9.5-lab` file `pentest.py`.
+Look in `labs/9.5/9.5-lab`, starting with `pentest.py`.
 
 ## Use it somewhere new
 

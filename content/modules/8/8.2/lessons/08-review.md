@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/8.2/8.2-lab/vulnerable/` as a change to the notes app’s offline cache. Check whether `save_note("secret")` still leaves `'secret'` on disk.
 
-The check you already ran (`test_cached_note_is_not_plaintext_on_disk`) is the rule check. A comment “we should wrap later” is not. A storage sticker in the ticket is not this review.
+You already ran `test_cached_note_is_not_plaintext_on_disk` — that is the rule. A comment “we should wrap later” is not. A storage sticker in the ticket is not this review.
 
 ## Picture: write body to cache.txt
 
@@ -46,7 +44,7 @@ Also reject: live device imaging; closing findings without re-running `test_cach
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_cached_note_is_not_plaintext_on_disk`.
+Write the review that would block this change. Name `test_cached_note_is_not_plaintext_on_disk`.
 
 ## Use it somewhere new
 

@@ -36,7 +36,7 @@ A WAF will page on `../` in the URL and stay silent when `UploadFile.filename` s
 
 ## Practice
 
-Write one log line you would accept. Tie it to `labs/6.4/6.4-lab`.
+For `labs/6.4/6.4-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=path_escape_denied request_id=req_64p

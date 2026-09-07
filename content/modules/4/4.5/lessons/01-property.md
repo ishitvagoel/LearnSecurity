@@ -57,7 +57,7 @@ Authlib and many JWT libraries will check a signature if you give them a key and
 ## What the tool cannot do
 
 - Correct `aud` still needs who-is-allowed on the note.
-- Empty `aud`; array tricks; `alg=none` — reject unknown algorithms; this page is not a payload catalogue.
+- Empty `aud`; array tricks; `alg=none` — reject unknown algorithms; this page is not a payload list.
 - PKCE, `state`, `nonce`, `iss`, JWKS, and sender-constraining stay out of this practice.
 - Leftover tokens after a client is removed.
 

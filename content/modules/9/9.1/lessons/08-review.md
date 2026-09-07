@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/9.1/9.1-lab/vulnerable/` as a change to the notes app’s coverage check. Check whether a status-only AUTHZ-1 row still counts as covered.
 
-Start at `covered` and the AUTHZ-1 row, not at a scanner color or a PDF screenshot. The check you already ran (`test_status_only_row_is_not_coverage`) is the rule test. A comment “will map tests later” is not.
+Start at `covered` and the AUTHZ-1 row, not at a scanner color or a PDF screenshot. You already ran `test_status_only_row_is_not_coverage` — that is the rule. A comment “will map tests later” is not.
 
 ## Picture: matching any requirement id counts as covered
 
@@ -46,7 +44,7 @@ Also reject: live portals; closing findings without re-running `test_status_only
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_status_only_row_is_not_coverage`.
+Write the review that would block this change. Name `test_status_only_row_is_not_coverage`.
 
 ## Use it somewhere new
 

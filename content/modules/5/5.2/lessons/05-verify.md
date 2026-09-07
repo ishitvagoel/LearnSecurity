@@ -49,14 +49,12 @@ python3 -m pytest labs/5.2/5.2-lab/tests --impl fixed
 
 ## Practice
 
-Run both this session:
-
 ```text
 python3 -m pytest labs/5.2/5.2-lab/tests --impl vulnerable
 python3 -m pytest labs/5.2/5.2-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail/pass into your notes next to the matrix row. Reject a “test” that only greps `AES` in a comment without decoding `protect("secret")`.
+Paste nothing from answer keys. Write fail or pass next to the matrix row. Reject a “test” that only greps `AES` in a comment without decoding `protect("secret")`.
 
 ## Use it somewhere new
 

@@ -38,7 +38,7 @@ Fail closed: if the enforcing name is missing, **do not claim isolation**. Do no
 - Encoding (6.2).
 - Helmet.
 - Check-in 7.
-- The current content-security spec as a complete catalogue (**draft**).
+- The current content-security spec as a complete list (**draft**).
 - COOP/COEP.
 - Trusted Types as encoding.
 

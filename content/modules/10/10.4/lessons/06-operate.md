@@ -54,7 +54,7 @@ A refused boot must say *prod debug refused*, not only “assert False.” Do no
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/10.4/10.4-lab`.
+For `labs/10.4/10.4-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=prod_debug_forbidden env=prod debug=true deploy=sc-12

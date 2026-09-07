@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny Python `accept_exception` that returns true for every dict. The failure is already in the function: it never looks at owner, review date, or accessibility. That always-true accept is a **failed rule**, not a paperwork nit.
 
-The rule under test:
+Here is the rule:
 
 > An exception must not be accepted without owner, review date, and an accessibility check. If `accept_exception({"owner": "", "review_by": None})` returns true, the register gate has failed as a security control.
 
 ## Where you may practice
 
-Only `labs/E6/e6-lab` is in scope. The practice is an in-process `accept_exception(exc)`. Owner strings are fake. Do **not** file a real public bug, email a vendor disclosure inbox, or accept a production exception as the exercise.
+Stay inside `labs/E6/e6-lab`. The practice is an in-process `accept_exception(exc)`. Owner strings are fake. Do **not** file a real public bug, email a vendor disclosure inbox, or accept a production exception as the exercise.
 
 Do not paste this exercise onto a public clinic, employer register, or live hospital portal “to see what happens.”
 
@@ -39,7 +39,7 @@ Read `vulnerable/risk.py`. It returns true for every dict. Tests:
 - `test_exception_needs_owner_review_and_wcag`
 - `test_complete_exception_may_be_accepted` — alice + date + accessibility flag may pass on both
 
-You do not need a new field. The failure of `test_exception_needs_owner_review_and_wcag` *is* the evidence.
+You do not need a new field. When `test_exception_needs_owner_review_and_wcag` fails, that is the evidence.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -64,8 +64,6 @@ You do not need a new field. The failure of `test_exception_needs_owner_review_a
 A ticket type named “risk” will close without dates if you let it. Industry “govern” labels name outcomes; they do not write the row. An unverified pledge is manufacturer talk, not this function. The notes app’s promise this week is: **this** practice, empty owner is deny.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/E6/e6-lab/tests --impl vulnerable

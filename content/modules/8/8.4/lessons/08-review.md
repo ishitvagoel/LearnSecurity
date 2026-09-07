@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/8.4/8.4-lab/vulnerable/` as a change to the notes app’s prod export gating. Check whether `api_allowed("debug", "ok")` still returns true.
 
-The check you already ran (`test_debug_build_cannot_call_prod_export`) is the rule check. A comment “we should split flavors later” is not. An R8 screenshot is not this review.
+You already ran `test_debug_build_cannot_call_prod_export` — that is the rule. A comment “we should split flavors later” is not. An R8 screenshot is not this review.
 
 ## Picture: api_allowed debug+ok true
 
@@ -46,7 +44,7 @@ Also reject: live store reverse engineering; closing findings without re-running
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_debug_build_cannot_call_prod_export`.
+Write the review that would block this change. Name `test_debug_build_cannot_call_prod_export`.
 
 ## Use it somewhere new
 

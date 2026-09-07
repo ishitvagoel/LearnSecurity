@@ -7,13 +7,13 @@
 
 The practice is not a public repo you scan. It is a tiny Python `ship_ok` that takes findings and a map. The failure is already in the function: it returns true for every pair. That true is a **failed rule**, not a green tile.
 
-The rule under test:
+Here is the rule:
 
 > An unmapped HIGH must not ship. If `ship_ok([{"id": "F1", "sev": "HIGH"}], {})` returns true, the ship gate has failed as a security control.
 
 ## Where you may practice
 
-Only `labs/9.4/9.4-lab` is in scope. The practice is an in-process `ship_ok(findings, mappings)`. The finding id is the synthetic string `F1`. No live GitHub Advanced Security, no scanning other people’s repositories, no Dependabot against a public clinic.
+Stay inside `labs/9.4/9.4-lab`. The practice is an in-process `ship_ok(findings, mappings)`. The finding id is the synthetic string `F1`. No live GitHub Advanced Security, no scanning other people’s repositories, no Dependabot against a public clinic.
 
 Do not paste this exercise onto a public GitHub org, employer dashboard, or live clinic “to see what the scanner finds.”
 
@@ -39,7 +39,7 @@ Read `vulnerable/sast.py`. It returns true for every pair. Tests:
 - `test_unmapped_high_blocks_ship`
 - `test_mapped_high_may_ship` — a mapped HIGH may pass on both
 
-You do not need a new finding id. The failure of `test_unmapped_high_blocks_ship` *is* the evidence.
+You do not need a new finding id. When `test_unmapped_high_blocks_ship` fails, that is the evidence.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -64,8 +64,6 @@ You do not need a new finding id. The failure of `test_unmapped_high_blocks_ship
 A web framework will still ship if CI’s `ship_ok` is always true. The app’s promise this week is: **this** practice, empty map plus HIGH is deny.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/9.4/9.4-lab/tests --impl vulnerable

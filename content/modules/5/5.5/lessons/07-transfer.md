@@ -37,7 +37,7 @@ The lookup helper returns `(sql, params)` (or an ORM bound construct), not a con
 1. who can act (clinician or kiosk user supplying search text — not a live clinic);
 2. what you trust (which API binds values; the ORM brand is not);
 3. what must not happen (`fetch`-like function returns concatenated query text, not a legal label);
-4. a test idea on a **local** practice files only (shape is a tuple, not a `str` — never on the real clinic);
+4. a test idea on **local** practice files only (shape is a tuple, not a `str` — never on the real clinic);
 5. leftover (ORDER BY identifiers; replicas; row-level-rule theater; advanced logging);
 6. whether a human-read “search failed” status must not use color as the only cue (readable error, not a silent empty list that hides a parser crash).
 
@@ -57,4 +57,4 @@ One page. No answer keys. The only running system you may break is `labs/5.5/5.5
 
 ## What this page is not doing
 
-Live-target SQL. Real patient rows. Claiming a course gate from this page.
+Live-target SQL. Real patient rows. This page does not finish a check-in.

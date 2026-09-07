@@ -49,14 +49,12 @@ Honest `allow(3)` may pass on both implementations. That does not excuse the fou
 
 ## Practice
 
-Run both this session:
-
 ```text
 python3 -m pytest labs/6.7/6.7-lab/tests --impl vulnerable
 python3 -m pytest labs/6.7/6.7-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail/pass into your notes next to the matrix row. Reject a “test” that only greps an edge-proxy keyword without calling `allow(4)`.
+Paste nothing from answer keys. Write fail or pass next to the matrix row. Reject a “test” that only greps an edge-proxy keyword without calling `allow(4)`.
 
 ## Use it somewhere new
 

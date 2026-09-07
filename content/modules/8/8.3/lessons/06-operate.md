@@ -37,7 +37,7 @@ What this practice is supposed to show: dropped `as=` fires without the URL. A v
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/8.3/8.3-lab`. Example shape (fake ids only):
+For `labs/8.3/8.3-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=deeplink_identity_ignored field=as request_id=req_83e

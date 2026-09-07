@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny Python `fetch_sql` and `is_bound`. It does not open PostgreSQL. The failure is already in the function: it glues company and note id into the SQL text. That is a **failed rule**, not a trophy dump of another company.
 
-The rule under test:
+Here is the rule:
 
 > Tenant and note id are bound parameters, not SQL grammar. `fetch_sql` must return a bound pair, not a concatenated string.
 
 ## Where you may practice
 
-Only `labs/5.5/5.5-lab` is in scope. The maps are in-process: `fetch_sql` / `is_bound`. Fake company `tA` and note ids. It does not open PostgreSQL.
+Stay inside `labs/5.5/5.5-lab`. The maps are in-process: `fetch_sql` / `is_bound`. Fake company `tA` and note ids. It does not open PostgreSQL.
 
 Do not probe a live database. Do not probe an employer replica. Do not probe a classmate preview. Do not paste a live query “to see what happens.”
 
@@ -41,7 +41,7 @@ Read `vulnerable/query.py`. It interpolates `tenant` and `note_id` into the SQL 
 - `test_query_is_bound_not_concatenated`
 - `test_honest_note_id_is_still_bound`
 
-You do not need a new payload. The failure of `test_query_is_bound_not_concatenated` *is* the evidence.
+You do not need a new payload. When `test_query_is_bound_not_concatenated` fails, that is the evidence.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -68,8 +68,6 @@ You do not need a new payload. The failure of `test_query_is_bound_not_concatena
 SQLAlchemy `text()` with an f-string is still concatenation. A later row-level rule in Postgres does not parse parameters for you. FastAPI will pass whatever string you interpolate. What this practice is supposed to show: `fetch_sql` is not a `str`.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/5.5/5.5-lab/tests --impl vulnerable

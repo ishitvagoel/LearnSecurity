@@ -50,14 +50,12 @@ A test that only greps `namespace:` in a chart without calling `pod_ok("cluster-
 
 ## Practice
 
-Run both this session from the lab directory if needed:
-
 ```text
 python3 -m pytest labs/10.3/10.3-lab/tests --impl vulnerable
 python3 -m pytest labs/10.3/10.3-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail/pass into your notes next to the cluster-admin row. Reject a "test" that only greps `namespace:` in a chart without calling `pod_ok("cluster-admin")`.
+Paste nothing from answer keys. Write fail or pass next to the cluster-admin row. Reject a "test" that only greps `namespace:` in a chart without calling `pod_ok("cluster-admin")`.
 
 ## Use it somewhere new
 

@@ -11,7 +11,7 @@ Do not log tokens (4.3) or email addresses as if they were public ids. Do not pa
 
 ## Picture: second accept is a signal
 
-A second accept after consume is a notice-and-recover problem, not a licence to quote the token in the paging channel. Notice names the event. Recover removes the extra membership. Neither reprints the token.
+A second accept after consume is a notice-and-recover problem, not a licence to quote the token in the paging channel. Name the event when you notice it. Recover removes the extra membership. Neither reprints the token.
 
 ```mermaid
 flowchart TD
@@ -53,7 +53,7 @@ If a human sees “link already used,” announce it in text a screen reader can
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no token). Tie it to `labs/6.6/6.6-lab`. Reject any line that includes the token, a note body, or a real email.
+For `labs/6.6/6.6-lab`, write a log line (ids, reason, no token). Reject any line that includes the token, a note body, or a real email.
 
 ## Use it somewhere new
 

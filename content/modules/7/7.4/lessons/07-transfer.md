@@ -39,7 +39,7 @@ A leftover session still has to be `None`. `service=worker-sc` may still be allo
 1. who can act (stolen session stuffed into a job, or inherited request context — not a live clinic);
 2. what you trust (worker authenticates as `worker-sc` is what you trust; VLAN, internal queue, and a zero-trust sticker are not);
 3. what must not happen (`exporter({user_session: alice})` succeeds, not a legal label);
-4. a test idea on a **local** practice files only (leftover session denied — never on the real clinic);
+4. a test idea on **local** practice files only (leftover session denied — never on the real clinic);
 5. leftover (god-mode database role 3.3, retry after revoke 2.4, later originating-subject check as advanced work, field dumps 7.2);
 6. whether a human-read “queued as service” must be announced, not a spinner that retries forever.
 
@@ -59,4 +59,4 @@ One page. No answer keys. The only running system you may break is `labs/7.4/7.4
 
 ## What this page is not doing
 
-Live-target queues. Real clinician cookies. Claiming a course gate from this page.
+Live-target queues. Real clinician cookies. This page does not finish a check-in.

@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/4.2/4.2-lab/vulnerable/` as a change to notes-app login copy. Reconstruct whether `phishing_resistant("password", EVIL, REAL)` is still true.
 
-The check you already ran (`test_password_is_not_phishing_resistant`) is the rule check. A banner “phishing-resistant password” is not.
+You already ran `test_password_is_not_phishing_resistant` — that is the rule. A banner “phishing-resistant password” is not.
 
 ## Picture: problems to find (name them yourself)
 
@@ -44,7 +42,7 @@ Also reject: trusting the client; closing findings without re-running `test_pass
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_password_is_not_phishing_resistant`.
+Write the review that would block this change. Name `test_password_is_not_phishing_resistant`.
 
 ## Use it somewhere new
 

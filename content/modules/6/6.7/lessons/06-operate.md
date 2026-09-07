@@ -11,7 +11,7 @@ Do not log note bodies in the CSV path (3.1 / 5.1). Do not attach the CSV to the
 
 ## Picture: the fourth try is a signal
 
-A fourth export in the window is a notice-and-recover problem, not a licence to quote note bodies in the paging channel. Notice names the event. Recover keeps the deny and revokes a stolen session. Neither reprints the CSV.
+A fourth export in the window is a notice-and-recover problem, not a licence to quote note bodies in the paging channel. Name the event when you notice it. Recover keeps the deny and revokes a stolen session. Neither reprints the CSV.
 
 ```mermaid
 flowchart TD
@@ -49,7 +49,7 @@ An edge dashboard will show 429s on an IP and stay silent when `/export.csv` sti
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, n, no body). Tie it to `labs/6.7/6.7-lab`. Reject any line that includes note bodies, a real email, or a live load trace against a public host.
+For `labs/6.7/6.7-lab`, write a log line (ids, reason, n, no body). Reject any line that includes note bodies, a real email, or a live load trace against a public host.
 
 ## Use it somewhere new
 

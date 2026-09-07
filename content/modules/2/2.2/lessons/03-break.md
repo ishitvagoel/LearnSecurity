@@ -13,7 +13,7 @@ The rule:
 
 ## Where you may practice
 
-Only `labs/2.2/2.2-request-path/` is in scope. No live CDN, no public cache, no third-party site, no classmate deployment. Restore the broken and repaired folders from git when you are done. Fake data only.
+Stay inside `labs/2.2/2.2-request-path/`. No live CDN, no public cache, no third-party site, no classmate deployment. Restore the broken and repaired folders from git when you are done. Fake data only.
 
 Do not paste this exercise onto a public CDN, employer origin, or live clinic portal. Do not paste cache-poison payloads.
 

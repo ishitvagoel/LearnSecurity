@@ -15,7 +15,7 @@ What must not happen is **eval on user input approved in review**. That is an in
 
 You need to avoid `eval` and similar dynamic execution (template languages that run expressions, and kin). Writing down that eval is dangerous is later, stricter paperwork. It is not the same as rejecting the change. A review guide tells you *how to look* — data flow, who is allowed, state, configuration — not a sticker to paste on. “A person looks at the code” is vocabulary for this week, not a course gate. A later draft of that vocabulary stays a draft.
 
-The practice uses `'eval(' not in diff`. That substring check is a **stand-in**, not a complete review oracle. `exec(`, other dynamic-execution languages, and generated code (later elective) can still slip past it.
+The practice uses `'eval(' not in diff`. That substring check is a **stand-in**, not a complete review check. `exec(`, other dynamic-execution languages, and generated code (later elective) can still slip past it.
 
 ## Picture: looks fine vs following the data
 
@@ -51,7 +51,7 @@ flowchart LR
 
 ## What the framework does vs what you still have to check
 
-GitHub’s “approve” button is not this rule. Formatters do not see eval as a grant of Python. Later review bots (9.4) are a help, not an oracle.
+GitHub’s “approve” button is not this rule. Formatters do not see eval as a grant of Python. Later review bots (9.4) are a help, not the whole check.
 
 The app’s promise: **this** review helper, `review_ok("x = eval(user)")` is false. The folder is `labs/9.2/9.2-lab`. Fake diffs only. Local only.
 
@@ -80,4 +80,4 @@ Terraform `local-exec`; GitHub Actions `run:` with untrusted input; clinic eval 
 
 ## What this page is not doing
 
-Weaponized eval payloads. Live GitHub orgs. Claiming a course gate. This site does not mark you as finished. Answer keys are not on this site.
+Weaponized eval payloads. Live GitHub orgs. This site does not mark you as finished. Answer keys are not on this site.

@@ -55,7 +55,7 @@ Map each check to a rule from the map page. If the broken files do not fail the 
 
 ## Practice
 
-Run both implementations this session. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `webauthn` in HTML without calling `phishing_resistant` on the password / lookalike pair.
+Run both implementations this session. Write fail or pass next to the matrix row. Reject a “test” that only greps `webauthn` in HTML without calling `phishing_resistant` on the password / lookalike pair.
 
 ## Use it somewhere new
 

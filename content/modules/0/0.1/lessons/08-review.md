@@ -2,13 +2,11 @@
 
 **Kind:** code-review
 **Loop step:** Review
-**Standards:** CSF 2.0 GV. WSTG 4.2 as catalogue, not a licence.
+**Standards:** CSF 2.0 GV. WSTG 4.2 as a list, not a licence.
 
 ## Review the practice files as if they were the course helper
 
 Review `labs/0.1/0.1-orientation/vulnerable/` as a pull request for a course tool. Check whether `target_is_authorized` still returns true for a public host.
-
-Wait until someone has looked at your review before opening the keys.
 
 ## Picture: any URL the proxy can open
 
@@ -43,7 +41,7 @@ Also reject: fetching example.com; keys in lessons; claiming the first check-in;
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_public_host_is_out_of_scope`.
+Write the review that would block this change. Name `test_public_host_is_out_of_scope`.
 
 ## Use it somewhere new
 

@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/8.3/8.3-lab/vulnerable/` as a change to the notes app’s App Link handling. Check whether `open_link({"as": "admin"})` still switches `current_user()`.
 
-The check you already ran (`test_deeplink_as_param_does_not_switch_user`) is the rule check. A comment “we should ignore extras later” is not. An App Links screenshot is not this review.
+You already ran `test_deeplink_as_param_does_not_switch_user` — that is the rule. A comment “we should ignore extras later” is not. An App Links screenshot is not this review.
 
 ## Picture: current_user = extras['as']
 
@@ -46,7 +44,7 @@ Also reject: live malware APKs; closing findings without re-running `test_deepli
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_deeplink_as_param_does_not_switch_user`.
+Write the review that would block this change. Name `test_deeplink_as_param_does_not_switch_user`.
 
 ## Use it somewhere new
 

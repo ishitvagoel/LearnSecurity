@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny Python `argv_for_list` and `uses_shell`. It does not start a process. The failure is already in the function: it glues the name into a shell string. That is a **failed rule**, not a trophy command.
 
-The rule under test:
+Here is the rule:
 
 > The export name is an argv element, not shell grammar. `argv_for_list` must not start `sh -c`.
 
 ## Where you may practice
 
-Only `labs/6.1/6.1-lab` is in scope. The maps are in-process: `argv_for_list` / `uses_shell`. Fake name `notes`. It does not spawn a process.
+Stay inside `labs/6.1/6.1-lab`. The maps are in-process: `argv_for_list` / `uses_shell`. Fake name `notes`. It does not spawn a process.
 
 Do not run a live OS command. Do not probe an employer export worker. Do not probe a classmate preview. Do not paste a live command “to see what happens.”
 
@@ -40,7 +40,7 @@ Read `vulnerable/argv.py`. It concatenates the name into a `sh -c` string. Tests
 - `test_does_not_invoke_shell`
 - `test_argv_is_program_then_name`
 
-You do not need a new name string. The failure of `test_does_not_invoke_shell` *is* the evidence.
+You do not need a new name string. When `test_does_not_invoke_shell` fails, that is the evidence.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -67,8 +67,6 @@ You do not need a new name string. The failure of `test_does_not_invoke_shell` *
 FastAPI has no opinion about argv. `subprocess.run(..., shell=True)` will parse the name. Next.js `child_process.exec` is a shell. What this practice is supposed to show: `cmd[:2] != ["sh", "-c"]` and `uses_shell` is false.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/6.1/6.1-lab/tests --impl vulnerable

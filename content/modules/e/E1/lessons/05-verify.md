@@ -49,14 +49,12 @@ A test that only greps `exec_sql` in a prompt file without calling `run_tool("ex
 
 ## Practice
 
-Run both this session from the lab directory if needed:
-
 ```text
 python3 -m pytest labs/E1/e1-lab/tests --impl vulnerable
 python3 -m pytest labs/E1/e1-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail/pass into your notes next to the `exec_sql` row. Reject a "test" that only greps `exec_sql` in a prompt file without calling `run_tool("exec_sql", {})`.
+Paste nothing from answer keys. Write fail or pass next to the `exec_sql` row. Reject a "test" that only greps `exec_sql` in a prompt file without calling `run_tool("exec_sql", {})`.
 
 ## Use it somewhere new
 

@@ -43,7 +43,7 @@ Map each test to the state-machine row you wrote. If the broken files do not fai
 
 ## Practice
 
-Run both this session. Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `max={5}` in JSX without calling `add_share` eight times.
+Write fail or pass next to the matrix row. Reject a “test” that only greps `max={5}` in JSX without calling `add_share` eight times.
 
 ## Use it somewhere new
 

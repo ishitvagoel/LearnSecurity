@@ -52,7 +52,7 @@ If both arrows append, the map already predicts `test_duplicate_capture_does_not
 
 ## Practice
 
-Draw the map so someone else could name the checks. Point at `labs/E3/e3-lab` file `pay.py`.
+Look in `labs/E3/e3-lab`, starting with `pay.py`.
 
 ## Use it somewhere new
 
@@ -64,4 +64,4 @@ A new key each click; webhook race; connection-pool limits are advanced leftover
 
 ## What this page is not doing
 
-Treating an awareness list as the definition of security. Answer keys are not on this site.
+Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.

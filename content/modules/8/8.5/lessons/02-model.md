@@ -35,7 +35,7 @@ Transparency is the label. Collecting less is the redaction. Mixing them is how 
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the fields you already have and ask where each one may land.
+Do not start a new list from scratch. Take the fields you already have and ask where each one may land.
 
 | Piece | This system |
 |---|---|
@@ -61,7 +61,7 @@ A missing body×crash row is how the body shows up as “debug extras.” Write 
 
 ## Practice
 
-Draw the map so someone else could name the checks. Point at `labs/8.5/8.5-lab` file `crash.py`.
+Look in `labs/8.5/8.5-lab`, starting with `crash.py`.
 
 ## Use it somewhere new
 

@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/2.1/2.1-parser-boundaries/vulnerable/` as a change to notes-app ingest. Reconstruct whether ACL and store still parse the same bytes twice.
 
-The check you already ran (`test_duplicate_tenant_keys_are_one_meaning`) is the rule check. A comment “JSON should not duplicate keys” is not.
+You already ran `test_duplicate_tenant_keys_are_one_meaning` — that is the rule. A comment “JSON should not duplicate keys” is not.
 
 ## Picture: problems to find (name them yourself)
 
@@ -42,7 +40,7 @@ Also reject: trusting the client; concatenating readers; Report-Only as enforcem
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_duplicate_tenant_keys_are_one_meaning`.
+Write the review that would block this change. Name `test_duplicate_tenant_keys_are_one_meaning`.
 
 ## Use it somewhere new
 

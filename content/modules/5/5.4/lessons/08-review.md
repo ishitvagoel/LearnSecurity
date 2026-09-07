@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/5.4/5.4-lab/vulnerable/` as a change to notes-app channel binding. Check whether `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` is still true.
 
-The check you already ran (`test_client_forwarded_proto_is_not_tls`) is the rule test. A comment “will bind the proxy later” is not.
+You already ran `test_client_forwarded_proto_is_not_tls` — that is the rule. A comment “will bind the proxy later” is not.
 
 ## Picture: problems to find (name them yourself)
 
@@ -44,7 +42,7 @@ Also reject: live TLS attacks; closing findings without re-running `test_client_
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_client_forwarded_proto_is_not_tls`.
+Write the review that would block this change. Name `test_client_forwarded_proto_is_not_tls`.
 
 ## Use it somewhere new
 

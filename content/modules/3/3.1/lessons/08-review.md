@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 This review is about notes-app logging. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether the body still lands in the log if they ship. Start at `log_event` and the body×log row, not at a scanner color or a spreadsheet.
 
-The folder `labs/3.1/3.1-lab/vulnerable/` is the change. The check you already ran (`test_note_body_is_not_logged`) is the rule test. A comment “will redact later” is not.
+Treat the files in `labs/3.1/3.1-lab/vulnerable/` as the pull request. You already ran `test_note_body_is_not_logged` — that is the rule. A comment “will redact later” is not.
 
 ## Picture: problems to find (name them yourself)
 
@@ -45,7 +43,7 @@ Also reject: trusting the browser as the vault; a data-loss product as the rule;
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_note_body_is_not_logged`.
+Write the review that would block this change. Name `test_note_body_is_not_logged`.
 
 ## Use it somewhere new
 

@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/10.4/10.4-lab/vulnerable/` as a change to the notes app’s compose boot check. Check whether `boot_ok("prod", True)` still returns true.
 
-Start at `boot_ok` and the prod-plus-debug pair, not at a scanner color or a `NODE_ENV` screenshot. The check you already ran (`test_prod_debug_must_not_boot`) is the rule test. A comment “will turn debug off later” is not.
+Start at `boot_ok` and the prod-plus-debug pair, not at a scanner color or a `NODE_ENV` screenshot. You already ran `test_prod_debug_must_not_boot` — that is the rule. A comment “will turn debug off later” is not.
 
 ## Picture: boot_ok true on prod plus debug
 
@@ -46,7 +44,7 @@ Also reject: live production attacks; booting without re-running `test_prod_debu
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_prod_debug_must_not_boot`.
+Write the review that would block this change. Name `test_prod_debug_must_not_boot`.
 
 ## Use it somewhere new
 

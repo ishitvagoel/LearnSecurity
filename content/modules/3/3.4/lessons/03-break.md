@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny in-process `add_share` counter. Fake share counts. It does not open FastAPI, a CDN filter, or a classmate API. Extra grants is a **failed rule**, not a trophy flood.
 
-The rule under test:
+Here is the rule:
 
 > Eight `add_share` calls must leave count ≤ 5. Share grants must not go past the product cap of 5.
 
 ## Where you may practice
 
-Only `labs/3.4/3.4-lab` is in scope. Restore the broken and repaired folders when you are done. Fake counts only.
+Stay inside `labs/3.4/3.4-lab`. Restore the broken and repaired folders when you are done. Fake counts only.
 
 Do not load-test a public host, an employer share endpoint, or a live clinic booking page.
 
@@ -42,7 +42,7 @@ Read `vulnerable/share_limit.py`. `add_share` always increments and returns `_n`
 - `test_five_shares_are_allowed` — honest path still reaches 5
 - `test_sixth_does_not_increment` — sixth call returns 5
 
-You do not need a new note id. The failure of `test_share_cap_is_enforced` *is* the evidence.
+You do not need a new note id. When `test_share_cap_is_enforced` fails, that is the evidence.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

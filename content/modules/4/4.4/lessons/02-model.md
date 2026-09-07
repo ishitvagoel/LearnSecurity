@@ -61,7 +61,7 @@ If a path is missing from the table, leftover permission appears there even if G
 
 ## Practice
 
-Draw this map so someone else could name the checks. Point at `labs/4.4/4.4-lab` file `grant.py`.
+Look in `labs/4.4/4.4-lab`, starting with `grant.py`.
 
 ## Use it somewhere new
 
@@ -73,4 +73,4 @@ Search, export, GraphQL, and workers are named holes. A later database-role chec
 
 ## What this page is not doing
 
-A famous-bugs list as the definition of security. Answer keys are not on this site.
+Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.

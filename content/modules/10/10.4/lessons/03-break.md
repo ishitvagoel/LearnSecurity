@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny Python `boot_ok(env, debug)` that returns true for every pair. The failure is already in the function: it never looks at `env` or `debug`. That always-true boot is a **failed rule**, not a missing compose comment.
 
-The rule under test:
+Here is the rule:
 
 > Production must not boot with debug on. If `boot_ok("prod", True)` returns true, the boot gate has failed as a security control.
 
 ## Where you may practice
 
-Only `labs/10.4/10.4-lab` is in scope. The practice is an in-process `boot_ok(env, debug)`. The flags are synthetic strings and booleans. Do **not** turn debug on a real production host, staging SaaS, or someone else’s compose “to see what happens.”
+Stay inside `labs/10.4/10.4-lab`. The practice is an in-process `boot_ok(env, debug)`. The flags are synthetic strings and booleans. Do **not** turn debug on a real production host, staging SaaS, or someone else’s compose “to see what happens.”
 
 Do not paste this exercise onto a public clinic, employer cluster, or live hospital portal.
 
@@ -39,7 +39,7 @@ Read `vulnerable/cfg.py`. It returns true for every pair. Tests:
 - `test_prod_debug_must_not_boot`
 - `test_prod_without_debug_may_boot` — `("prod", False)` may pass on both
 
-You do not need a new flag. The failure of `test_prod_debug_must_not_boot` *is* the evidence.
+You do not need a new flag. When `test_prod_debug_must_not_boot` fails, that is the evidence.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -64,8 +64,6 @@ You do not need a new flag. The failure of `test_prod_debug_must_not_boot` *is* 
 FastAPI `debug=True` is a developer default. Next.js will print stack traces when `NODE_ENV` is not production — and the string can lie. Compose will start whatever you wrote. The notes app’s promise this week is: **this** practice, prod plus debug is deny.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/10.4/10.4-lab/tests --impl vulnerable

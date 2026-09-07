@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/9.4/9.4-lab/vulnerable/` as a change to the notes app’s ship gate. Check whether `ship_ok([HIGH], {})` still returns true.
 
-Start at `ship_ok` and the HIGH×map row, not at a scanner color or a dashboard screenshot. The check you already ran (`test_unmapped_high_blocks_ship`) is the rule test. A comment “will map later” is not.
+Start at `ship_ok` and the HIGH×map row, not at a scanner color or a dashboard screenshot. You already ran `test_unmapped_high_blocks_ship` — that is the rule. A comment “will map later” is not.
 
 ## Picture: ship_ok true on unmapped HIGH
 
@@ -46,7 +44,7 @@ Also reject: live tenants; closing findings without re-running `test_unmapped_hi
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_unmapped_high_blocks_ship`.
+Write the review that would block this change. Name `test_unmapped_high_blocks_ship`.
 
 ## Use it somewhere new
 

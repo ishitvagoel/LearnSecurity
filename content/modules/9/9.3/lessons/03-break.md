@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny Python `is_security_test` that returns a boolean. The failure is already in the function: it returns true when `status_asserted` is set. That count is a **failed rule**, not a missing checklist tick.
 
-The rule under test:
+Here is the rule:
 
 > HTTP 200-only must not count as a security test. If `is_security_test({"status_asserted": True})` is true, the suite has failed as a security control.
 
 ## Where you may practice
 
-Only `labs/9.3/9.3-lab` is in scope. The practice is an in-process `is_security_test(t)`. Synthetic test descriptors. No live apps, no fuzz campaigns against other hosts. Do not send the descriptors anywhere.
+Stay inside `labs/9.3/9.3-lab`. The practice is an in-process `is_security_test(t)`. Synthetic test descriptors. No live apps, no fuzz campaigns against other hosts. Do not send the descriptors anywhere.
 
 Do not paste this exercise onto a public host, employer clinic, or live patient system. You do not need HTTP. You must not fuzz a public host.
 
@@ -30,7 +30,7 @@ flowchart TD
 
 The broken files take that path on purpose. You do not need a running notes server. You must not fuzz a public host. The true return *is* the leak of the suite’s honesty.
 
-Industry catalogues tell you *what* to consider. They do not make `assert r.status_code == 200` a security test. Lesson 9.1 can mark the isolation row “covered” with a test that never isolates if this shape gate is missing.
+Checklists tell you *what* to consider. They do not make `assert r.status_code == 200` a security test. Lesson 9.1 can mark the isolation row “covered” with a test that never isolates if this shape gate is missing.
 
 ## What to look at — cause, not a dump
 
@@ -39,7 +39,7 @@ Read `vulnerable/stest.py`. It returns true when `status_asserted` is set. Tests
 - `test_http_200_only_is_not_a_security_test`
 - `test_forbidden_outcome_named_is_a_security_test` — named what must not happen (and maybe status too) may pass on both
 
-You do not need a new descriptor key. The failure of `test_http_200_only_is_not_a_security_test` *is* the evidence.
+You do not need a new descriptor key. When `test_http_200_only_is_not_a_security_test` fails, that is the evidence.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -64,8 +64,6 @@ You do not need a new descriptor key. The failure of `test_http_200_only_is_not_
 A FastAPI test client 200 is a product test. Snapshot tests are not isolation. Line coverage is not the isolation check. The app's promise this week is: **this** practice, 200-only is not a security test.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/9.3/9.3-lab/tests --impl vulnerable

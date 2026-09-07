@@ -37,7 +37,7 @@ Why it happens vs what it costs stays split here too: the **cause** is declared 
 
 ## Practice
 
-Write one log line you would accept. Tie it to `labs/E4/e4-lab`.
+For `labs/E4/e4-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=copy_length_denied declared_len=4 bufsize=4 src_len=8

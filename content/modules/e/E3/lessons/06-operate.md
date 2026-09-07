@@ -31,7 +31,7 @@ A processor dashboard will show successful captures and stay silent when CI’s 
 
 ## Practice
 
-Write one log line you would accept. Tie it to `labs/E3/e3-lab`.
+For `labs/E3/e3-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=duplicate_capture_denied key=k1

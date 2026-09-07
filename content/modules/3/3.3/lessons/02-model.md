@@ -62,7 +62,7 @@ Rejected: one `postgres` URL for migrate and serve. Chosen: runtime `app` with a
 
 ## Practice
 
-Draw this map so someone else could name the checks. Point at `labs/3.3/3.3-lab` file `roles.py`.
+Look in `labs/3.3/3.3-lab`, starting with `roles.py`.
 
 ## Use it somewhere new
 
@@ -74,4 +74,4 @@ Stolen migrator; table-owner walk-around of a later row-level rule; a replica wi
 
 ## What this page is not doing
 
-Treating an awareness list as the definition of security. Answer keys are not on this site.
+Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.

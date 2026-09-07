@@ -11,7 +11,7 @@ Do not log full URLs if they contain tokens (4.3). Do not fetch the denied desti
 
 ## Picture: a denied host is a signal
 
-A deny of a preview URL that is not on the allow-list is a notice-and-recover problem, not a licence to paste the URL into the paging channel. Notice names the event. Recover keeps the deny. Neither fetches the destination.
+A deny of a preview URL that is not on the allow-list is a notice-and-recover problem, not a licence to paste the URL into the paging channel. Name the event when you notice it. Recover keeps the deny. Neither fetches the destination.
 
 ```mermaid
 flowchart TD
@@ -51,7 +51,7 @@ A cloud dashboard will show “instance metadata requires a token” and stay si
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no URL). Tie it to `labs/6.5/6.5-lab`. Reject any line that includes a full URL with a query token, a note body, or a live-fetch transcript.
+For `labs/6.5/6.5-lab`, write a log line (ids, reason, no URL). Reject any line that includes a full URL with a query token, a note body, or a live-fetch transcript.
 
 ## Use it somewhere new
 

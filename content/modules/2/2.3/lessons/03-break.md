@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny in-process model of `document.cookie`. It does not open a browser, load a page, or talk to a network. The failure is already in the reader: the HttpOnly flag is present and ignored. That is a **failed rule**, not a trophy exploit.
 
-The rule under test:
+Here is the rule:
 
 > Script in the origin cannot read `sc_session` when HttpOnly is set.
 
 ## Where you may practice
 
-Only `labs/2.3/2.3-browser-policy` is in scope. Fake session value only. Restore the broken and repaired folders from git when you are done.
+Stay inside `labs/2.3/2.3-browser-policy`. Fake session value only. Restore the broken and repaired folders from git when you are done.
 
 Do not paste XSS recipes. Do not point this exercise at a public origin, an employer login cookie, or a classmate’s deployment.
 
@@ -32,7 +32,7 @@ The broken files show **cause** (the session value is handed to the script reade
 
 ## What to look at: the cause, not a trophy
 
-`vulnerable/cookies.py` `js_read_session` returns `session["value"]` whenever the name exists. The check binds `HTTPONLY_SESSION` with `httponly: True` and `secure: True` and expects `None`. You do not need a new cookie string. The failure of `test_script_cannot_read_httponly_session` *is* the evidence.
+`vulnerable/cookies.py` `js_read_session` returns `session["value"]` whenever the name exists. The check binds `HTTPONLY_SESSION` with `httponly: True` and `secure: True` and expects `None`. You do not need a new cookie string. When `test_script_cannot_read_httponly_session` fails, that is the evidence.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

@@ -34,7 +34,7 @@ CODEOWNERS says who must click. It does not say what changed. A closed-ticket co
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the merge check you already have and ask which surfaces would make an empty dict merge.
+Do not start a new list from scratch. Take the merge check you already have and ask which surfaces would make an empty dict merge.
 
 | Piece | This system |
 |---|---|
@@ -60,7 +60,7 @@ A missing threat-model cell is how a required-reviewer list becomes false assura
 
 ## Practice
 
-Draw the trigger table so someone else could name the checks. Point at `labs/10.1/10.1-lab` file `sdl.py`.
+Look in `labs/10.1/10.1-lab`, starting with `sdl.py`.
 
 ## Use it somewhere new
 

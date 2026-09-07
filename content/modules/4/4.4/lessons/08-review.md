@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 This review is about notes-app who-is-allowed. Check whether `can_read("bob", "n2")` is still true.
 
-The folder `labs/4.4/4.4-lab/vulnerable/` is the change. The check you already ran (`test_grant_on_n1_is_not_grant_on_n2`) is the rule test. A comment “will add object checks later” is not.
+Treat the files in `labs/4.4/4.4-lab/vulnerable/` as the pull request. You already ran `test_grant_on_n1_is_not_grant_on_n2` — that is the rule. A comment “will add object checks later” is not.
 
 ## Picture: if user.has_any_share: return note
 
@@ -46,7 +44,7 @@ Also reject: trusting the client; closing findings without re-running `test_gran
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_grant_on_n1_is_not_grant_on_n2`.
+Write the review that would block this change. Name `test_grant_on_n1_is_not_grant_on_n2`.
 
 ## Use it somewhere new
 

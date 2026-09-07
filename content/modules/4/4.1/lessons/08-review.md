@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 This review is about notes-app offboarding. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `session_valid("alice")` is still true after `delete_user` if they ship. Start at the leftover session after delete, not at a scanner color or an HR ticket.
 
-The folder `labs/4.1/4.1-lab/vulnerable/` is the change. The check you already ran (`test_deleted_user_session_is_dead`) is the rule test. A comment “will revoke sessions later” is not.
+Treat the files in `labs/4.1/4.1-lab/vulnerable/` as the pull request. You already ran `test_deleted_user_session_is_dead` — that is the rule. A comment “will revoke sessions later” is not.
 
 ## Picture: problems to find (name them yourself)
 
@@ -44,7 +42,7 @@ Also reject: trusting the browser as the vault; closing findings without re-runn
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_deleted_user_session_is_dead`.
+Write the review that would block this change. Name `test_deleted_user_session_is_dead`.
 
 ## Use it somewhere new
 

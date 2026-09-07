@@ -37,7 +37,7 @@ Not: `synthetic-session`, a note body, or a personal mailbox.
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/2.3/2.3-browser-policy`. Reject any line that includes the dummy session value. Name who owns the WebView leftover and what trigger reopens it.
+For `labs/2.3/2.3-browser-policy`, write a log line you would accept. Reject any line that includes the dummy session value. Name who owns the WebView leftover and what trigger reopens it.
 
 ## Use it somewhere new
 

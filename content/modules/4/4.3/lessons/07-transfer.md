@@ -47,4 +47,4 @@ One page. No keys. `labs/4.3/4.3-lab` is the only running system you may break. 
 
 ## What this page is not doing
 
-Live token replay. Real session cookies. Claiming a course gate from this page.
+Live token replay. Real session cookies. This page does not finish a check-in.

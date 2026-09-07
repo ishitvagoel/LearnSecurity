@@ -48,4 +48,4 @@ One page. No keys. `labs/E4/e4-lab` is the only running system you may break. Do
 
 ## What this page is not doing
 
-Weaponized overflow walkthroughs. Third-party binary fuzzing. Claiming a course gate from this page.
+Weaponized overflow walkthroughs. Third-party binary fuzzing. This page does not finish a check-in.

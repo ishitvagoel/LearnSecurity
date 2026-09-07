@@ -72,4 +72,4 @@ Unread register; rename to tech-debt; inaccessible path still checked only as a 
 
 ## What this page is not doing
 
-Do not file a live exception. This page does not mark you as finished. from a maturity screenshot. Do not present an unverified pledge as proven.
+Do not file a live exception. This page does not mark you as finished. A maturity screenshot is not a check-in. Do not present an unverified pledge as proven.

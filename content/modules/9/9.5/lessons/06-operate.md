@@ -54,7 +54,7 @@ A reopen notice must say *why* the finding stayed open (missing retest), not onl
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/9.5/9.5-lab`.
+For `labs/9.5/9.5-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=finding_closed_without_retest finding=F-authz-1

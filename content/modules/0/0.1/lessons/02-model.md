@@ -2,7 +2,7 @@
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** CSF 2.0 GV. WSTG 4.2 as method catalogue.
+**Standards:** CSF 2.0 GV. WSTG 4.2 as method list.
 
 ## Can a second person name the host check from your scope sheet?
 
@@ -55,7 +55,7 @@ flowchart LR
 
 ## Practice
 
-Draw the map. Point at `labs/0.1/0.1-orientation` file `scope.py`.
+Draw the map. Look in `labs/0.1/0.1-orientation`, starting with `scope.py`.
 
 ## Use it somewhere new
 

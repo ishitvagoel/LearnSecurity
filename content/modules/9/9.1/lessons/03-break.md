@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny Python `covered(req_id, tests)` that returns true or false. The failure is already in the function: any matching requirement id counts as coverage. That is a **failed rule**, not a missing spreadsheet cell.
 
-The rule under test:
+Here is the rule:
 
 > A status-only AUTHZ-1 row must not count as coverage. If `covered("AUTHZ-1", [{"req": "AUTHZ-1", "asserts_isolation": False}])` is true, the proof you show before a release has failed as a security control.
 
 ## Where you may practice
 
-Only `labs/9.1/9.1-lab` is in scope. The practice is an in-process `covered(req_id, tests)`. The requirement id is the synthetic string `AUTHZ-1`. No live checklist portals, no governance products, no clinic systems. Do not send the spreadsheet anywhere.
+Stay inside `labs/9.1/9.1-lab`. The practice is an in-process `covered(req_id, tests)`. The requirement id is the synthetic string `AUTHZ-1`. No live checklist portals, no governance products, no clinic systems. Do not send the spreadsheet anywhere.
 
 Do not paste a real requirements matrix into a public tracker “to see what happens.” Do not paste this exercise onto a public checklist portal, employer dashboard, or live clinic.
 
@@ -39,7 +39,7 @@ Read `vulnerable/trace.py`. It returns true if any test dict has `req == req_id`
 - `test_status_only_row_is_not_coverage`
 - `test_isolation_assert_may_count_as_coverage` — an honest isolation flag may pass on both
 
-You do not need a new requirement id. The failure of `test_status_only_row_is_not_coverage` *is* the evidence.
+You do not need a new requirement id. When `test_status_only_row_is_not_coverage` fails, that is the evidence.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -64,8 +64,6 @@ You do not need a new requirement id. The failure of `test_status_only_row_is_no
 A green CI job is not AUTHZ-1. Copied-wholesale checklists are inventory, not a tailored matrix. A FastAPI TestClient 200 is a product test (9.3). The app’s promise this week is: **this** practice, status-only is not covered.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/9.1/9.1-lab/tests --impl vulnerable

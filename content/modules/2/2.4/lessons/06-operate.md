@@ -35,7 +35,7 @@ uvicorn access logs, FastAPI exception handlers, and Next.js analytics will stor
 
 ## Practice
 
-Write one log line you would accept. Tie it to `labs/2.4/2.4-state-time`.
+For `labs/2.4/2.4-state-time`, write a log line you would accept.
 
 ```text
 share_replay reason=same_idempotency_key note_id=n1 key_id=k1 actor=owner_a request_id=req_22c1

@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/10.1/10.1-lab/vulnerable/` as a change to the notes app’s merge check. Check whether `merge_ok({})` still returns true.
 
-Start at `merge_ok` and the empty dict, not at a scanner color or a training screenshot. The check you already ran (`test_merge_requires_threat_model_id`) is the rule test. A comment “will add a threat model later” is not.
+Start at `merge_ok` and the empty dict, not at a scanner color or a training screenshot. You already ran `test_merge_requires_threat_model_id` — that is the rule. A comment “will add a threat model later” is not.
 
 ## Picture: merge_ok True without a threat-model id
 
@@ -49,7 +47,7 @@ Also reject: live orgs; merging without re-running `test_merge_requires_threat_m
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_merge_requires_threat_model_id`.
+Write the review that would block this change. Name `test_merge_requires_threat_model_id`.
 
 ## Use it somewhere new
 

@@ -7,13 +7,13 @@
 
 The practice is not a cluster you attack. It is a tiny Python `pod_ok` that returns true for every role. The failure is already in the function: it never looks at the role. That always-true admission is a **failed rule**, not a paperwork nit.
 
-The rule under test:
+Here is the rule:
 
 > An app pod must not run as cluster-admin. If `pod_ok("cluster-admin")` returns true, admission has failed as a security control.
 
 ## Where you may practice
 
-Only `labs/10.3/10.3-lab` is in scope. The practice is an in-process `pod_ok(role)`. The roles are synthetic strings `cluster-admin` / `app`. Do **not** apply ClusterRoleBindings to a real cluster, cloud account, or shared lab Kubernetes as the exercise.
+Stay inside `labs/10.3/10.3-lab`. The practice is an in-process `pod_ok(role)`. The roles are synthetic strings `cluster-admin` / `app`. Do **not** apply ClusterRoleBindings to a real cluster, cloud account, or shared lab Kubernetes as the exercise.
 
 Do not paste this exercise onto a public cluster, employer account, or live hospital Kubernetes "to see what happens."
 
@@ -39,7 +39,7 @@ Read `vulnerable/iam.py`. It returns true for every role. Tests:
 - `test_cluster_admin_pod_is_denied`
 - `test_namespaced_app_role_may_run` — `"app"` may pass on both
 
-You do not need a new role string. The failure of `test_cluster_admin_pod_is_denied` *is* the evidence.
+You do not need a new role string. When `test_cluster_admin_pod_is_denied` fails, that is the evidence.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -64,8 +64,6 @@ You do not need a new role string. The failure of `test_cluster_admin_pod_is_den
 A managed cluster will still accept a ClusterRoleBinding. A restricted pod profile hardens the *pod spec*. FastAPI will still run as whatever SA the chart mounts. The notes app's API will still take the cluster if admission is always true. The app's promise this week is: **this** practice, `cluster-admin` is deny.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/10.3/10.3-lab/tests --impl vulnerable

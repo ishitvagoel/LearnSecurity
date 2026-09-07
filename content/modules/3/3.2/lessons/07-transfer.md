@@ -48,4 +48,4 @@ One page. No keys. `labs/3.2/3.2-lab` is the only running system you may break. 
 
 ## What this page is not doing
 
-Live-target scanning. Real patient phone numbers. Claiming a course gate from this page.
+Live-target scanning. Real patient phone numbers. This page does not finish a check-in.

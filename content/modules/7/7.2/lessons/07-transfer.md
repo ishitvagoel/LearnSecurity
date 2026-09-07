@@ -37,11 +37,11 @@ Member × SSN still has to be false. Member × display name may still be true. H
 1. who can act (clinician session selecting extra fields — not a live clinic);
 2. what you trust (server role×field is what you trust; UI omit and UUID are not);
 3. what must not happen (`resolve("member", "ssn")` true, not “HIPAA”);
-4. a test idea on a **local** practice files only (no public EHR);
+4. a test idea on **local** practice files only (no public EHR);
 5. leftover (search snippets, CSV, later workers, stale serializer cache after a role change);
 6. the web accessibility baseline if a human path is in the claim (do not announce the SSN in an error).
 
-Use synthetic labels (`ssn` as a field name in a local practice files). Do not use real patient identifiers.
+Use synthetic labels (`ssn` as a field name in local practice files). Do not use real patient identifiers.
 
 ## What is not good enough
 
@@ -59,4 +59,4 @@ One page. No keys. `labs/7.2/7.2-lab` is the only running system you may break. 
 
 ## What this page is not doing
 
-Live-target GraphQL. Real SSNs. Claiming a course gate from this page.
+Live-target GraphQL. Real SSNs. This page does not finish a check-in.

@@ -52,7 +52,7 @@ In-app “send feedback” must not require attaching a screenshot of the note t
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/8.5/8.5-lab`.
+For `labs/8.5/8.5-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=crash_body_redacted crash_id=cr_85e app=release

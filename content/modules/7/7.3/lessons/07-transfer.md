@@ -39,7 +39,7 @@ An empty sig still has to be false. A matching HMAC over the same raw body may s
 1. who can act (anyone who can POST the clinic callback URL — not a live clinic);
 2. what you trust (raw-body HMAC + `compare_digest`; TLS and vendor address range are not);
 3. what must not happen (`accept("", body, secret)` true, not a legal label);
-4. a test idea on a **local** practice files only (never on the real lab vendor);
+4. a test idea on **local** practice files only (never on the real lab vendor);
 5. leftover (replay, parse-before-MAC, 1.2 on writing results, 6.5 if the clinic *calls out*, advanced signatures beyond HMAC);
 6. whether a human-read deny must not dump the result payload into an error (readable status, not the lab JSON on the page).
 
@@ -61,4 +61,4 @@ One page. No answer keys. The only running system you may break is `labs/7.3/7.3
 
 ## What this page is not doing
 
-Live-target webhooks. Real patient results. Claiming a course gate from this page.
+Live-target webhooks. Real patient results. This page does not finish a check-in.

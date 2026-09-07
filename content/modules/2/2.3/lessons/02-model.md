@@ -59,7 +59,7 @@ A missing analytics row is how a second cookie quietly becomes a session. Write 
 
 ## Practice
 
-Draw the table so someone else could name the checks. Point at `labs/2.3/2.3-browser-policy` file `cookies.py`.
+Look in `labs/2.3/2.3-browser-policy`, starting with `cookies.py`.
 
 ## Use it somewhere new
 
@@ -71,4 +71,4 @@ Browser extensions; physical access; injected script that does not need the cook
 
 ## What this page is not doing
 
-A famous-bugs list as the definition of security. Answer keys are not on this site.
+Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.

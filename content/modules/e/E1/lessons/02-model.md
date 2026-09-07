@@ -37,7 +37,7 @@ The model's context window is not the allow-list.
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the agent you already have and ask what would show `exec_sql` is still allowed.
+Do not start a new list from scratch. Take the agent you already have and ask what would show `exec_sql` is still allowed.
 
 | Piece | This system |
 |---|---|
@@ -63,7 +63,7 @@ A helpful prompt with `run_tool` always running is how "the model only summarize
 
 ## Practice
 
-Draw the map. Point at `labs/E1/e1-lab` file `tools.py`.
+Draw the map. Look in `labs/E1/e1-lab`, starting with `tools.py`.
 
 ## Use it somewhere new
 

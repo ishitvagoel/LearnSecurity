@@ -52,14 +52,12 @@ A test that only greps `PagerDuty` in a runbook without calling `close_incident(
 
 ## Practice
 
-Run both this session from the lab directory if needed:
-
 ```text
 python3 -m pytest labs/10.5/10.5-lab/tests --impl vulnerable
 python3 -m pytest labs/10.5/10.5-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail/pass into your notes next to the close-without-recovery row. Reject a “test” that only greps a paging product name without calling `close_incident({"recovery": "todo", "logs": "ok"})`.
+Paste nothing from answer keys. Write fail or pass next to the close-without-recovery row. Reject a “test” that only greps a paging product name without calling `close_incident({"recovery": "todo", "logs": "ok"})`.
 
 ## Use it somewhere new
 

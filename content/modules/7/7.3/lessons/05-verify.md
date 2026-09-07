@@ -49,14 +49,12 @@ Honest matching signatures may pass on both implementations. That does not excus
 
 ## Practice
 
-Run both this session from the lab directory if needed:
-
 ```text
 python3 -m pytest labs/7.3/7.3-lab/tests --impl vulnerable
 python3 -m pytest labs/7.3/7.3-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail/pass into your notes next to the matrix row. Reject a “test” that only greps `hmac` in source without calling `accept("", "body", "lab-secret")`.
+Paste nothing from answer keys. Write fail or pass next to the matrix row. Reject a “test” that only greps `hmac` in source without calling `accept("", "body", "lab-secret")`.
 
 ## Use it somewhere new
 

@@ -45,7 +45,7 @@ Honest `display_name` may pass on both implementations. That does not excuse the
 
 ## Practice
 
-Execute both implementations this session from the lab directory if needed. Write the fail/pass pair next to the table row. Reject a “test” that only greps `@hide` in a GraphQL schema without calling `resolve("member", "secret_internal")`.
+Execute both implementations this session from the lab directory if needed. Write fail or pass next to the table row. Reject a “test” that only greps `@hide` in a GraphQL schema without calling `resolve("member", "secret_internal")`.
 
 ## Use it somewhere new
 

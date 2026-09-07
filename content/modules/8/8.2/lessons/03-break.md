@@ -7,13 +7,13 @@
 
 The practice is not a phone you image. It is a tiny Python `save_note` / `plaintext_on_disk`. The failure is already in the function: it stores the body as-is, so after `save_note("secret")` the disk still holds `'secret'`. A **note body cached as plaintext** is **a failed rule**, not a trophy against a personal phone.
 
-The rule under test:
+Here is the rule:
 
 > After `save_note("secret")`, `plaintext_on_disk()` must be false. A private app folder is not encryption.
 
 ## Where you may practice
 
-Only `labs/8.2/8.2-lab` is in scope. The helper is an in-process `save_note` / `plaintext_on_disk`. Fake body `'secret'`. It does not open a network. Do not image a live phone, dump a personal backup, or run `adb backup` on a hospital tablet.
+Stay inside `labs/8.2/8.2-lab`. The helper is an in-process `save_note` / `plaintext_on_disk`. Fake body `'secret'`. It does not open a network. Do not image a live phone, dump a personal backup, or run `adb backup` on a hospital tablet.
 
 Do not paste this exercise onto a public device, employer clinic, or live EHR tablet.
 
@@ -39,7 +39,7 @@ Sensitive data stored securely. Last crypto topic (5.2) already refused Base64; 
 - `test_cached_note_is_not_plaintext_on_disk`
 - `test_other_body_is_not_reported_as_plaintext_secret` — honest `'other'` must not be reported as the secret
 
-You do not need a new filename. The failure of `test_cached_note_is_not_plaintext_on_disk` *is* the evidence.
+You do not need a new filename. When `test_cached_note_is_not_plaintext_on_disk` fails, that is the evidence.
 
 ## Why it happens vs what it costs
 

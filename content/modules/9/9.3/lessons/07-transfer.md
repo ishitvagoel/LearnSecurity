@@ -7,7 +7,7 @@
 
 You get a **clinic page test**. `test_get_patient_200` asserts the owner’s GET returns 200.
 
-On the notes app, `is_security_test({"status_asserted": True})` must be false. For a clinic, 200-only is not a security test; a named what must not happen may count. A testing-guide checkbox is still catalogue, not shape.
+On the notes app, `is_security_test({"status_asserted": True})` must be false. For a clinic, 200-only is not a security test; a named what must not happen may count. A testing-guide checkbox is still a list, not a test shape.
 
 **Product sketch:** an EHR-lite “we have 94% coverage and GET /patient/1 returns 200,” plus a testing-guide checklist ticked.
 
@@ -19,7 +19,7 @@ Renaming “note” to “patient” is not transfer. Object, bad case, and left
 |---|---|
 | Isolation row is the requirement | Other clinician must not read this chart |
 | Owner GET 200 is a product test | Owner GET 200 is a product test |
-| `is_security_test({"status_asserted": True})` | Same predicate on a local practice files |
+| `is_security_test({"status_asserted": True})` | Same predicate on local practice files |
 | Happy-path suite as false assurance | Same readers — **not** a live clinic |
 | Cross-company GET never asserted | Other clinician GET never asserted |
 
@@ -38,7 +38,7 @@ If GET as owner returns 200 while the suite never asserts the other clinician, t
 1. who can act (another clinician’s token — not a live clinic);
 2. what you trust (named-what must not happen tests are the promise; coverage percent and testing-guide ticks are not);
 3. what must not happen (`is_security_test({status_asserted: True})` true, not a legal label);
-4. a test idea on a **local** practice files only (other clinician must not 200);
+4. a test idea on **local** practice files only (other clinician must not 200);
 5. leftover (looking around 9.5, fuzzing with no named bad result, field grain 7.2);
 6. whether a human-read CI path exists (assertion message names what must not happen).
 

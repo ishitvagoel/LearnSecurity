@@ -43,7 +43,7 @@ Fail closed: if you are unsure whether the name is allow-listed, deny. Uncertain
 - An assurance gate sticker.
 - Cryptographically bound approvals (extra, advanced leftover).
 - Library defaults.
-- A guidance document as the oracle.
+- A guidance document as the check.
 
 ## What the tool cannot do
 
@@ -71,4 +71,4 @@ Allow-listed tool returns HTML. Hallucinated packages. Cryptographically bound a
 
 ## What this page is not doing
 
-Do not call a live model. This page does not mark you as finished. from a famous-bugs screenshot. Do not present a system prompt as the allow-list.
+Do not call a live model. This page does not mark you as finished. A famous-bugs screenshot is not a check-in. Do not present a system prompt as the allow-list.

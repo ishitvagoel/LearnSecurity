@@ -54,7 +54,7 @@ How you sign the token is a later lesson. Which channel carries it is this page.
 
 ## Practice
 
-Draw this map so someone else could name the checks. Point at `labs/4.3/4.3-lab` file `token.py`.
+Look in `labs/4.3/4.3-lab`, starting with `token.py`.
 
 ## Use it somewhere new
 
@@ -66,4 +66,4 @@ First-party Referer; a screenshot of a cookie is out of scope here.
 
 ## What this page is not doing
 
-Treating an awareness list as the definition of security. Answer keys are not on this site.
+Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.

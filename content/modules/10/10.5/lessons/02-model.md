@@ -36,7 +36,7 @@ Industry detect / respond / recover labels name outcomes. They are not a product
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the ticket you already have and ask what would show recovery still has not run.
+Do not start a new list from scratch. Take the ticket you already have and ask what would show recovery still has not run.
 
 | Piece | This system |
 |---|---|
@@ -62,7 +62,7 @@ A missing recovery field is how a green tile becomes “Done.” Write the hole.
 
 ## Practice
 
-Draw the map so someone else could name the checks. Point at `labs/10.5/10.5-lab` file `ir.py`.
+Look in `labs/10.5/10.5-lab`, starting with `ir.py`.
 
 ## Use it somewhere new
 

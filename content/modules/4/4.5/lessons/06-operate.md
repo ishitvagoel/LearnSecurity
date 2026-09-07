@@ -32,7 +32,7 @@ An identity provider will page on failed logins and stay silent when this API ac
 
 ## Practice
 
-Write one log line you would accept. Tie it to `labs/4.5/4.5-lab`.
+For `labs/4.5/4.5-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=jwt_aud_mismatch expected_aud=securecollab-api client_id=sc_web request_id=req_45oa

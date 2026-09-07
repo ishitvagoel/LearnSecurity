@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny Python `accept`. The failure is already in the function: `accept` returns true and never marks the token used. A second true is a **failed rule**, not a retry nit.
 
-The rule under test:
+Here is the rule:
 
 > `accept("t1")` may be true once. The second `accept("t1")` must be false. If it is still true, an invite token was accepted twice.
 
 ## Where you may practice
 
-Only `labs/6.6/6.6-lab` is in scope. The practice is an in-process `accept` with synthetic tokens `t1` / `t2`. It does not send mail, open two hosts, or touch an employer invite link.
+Stay inside `labs/6.6/6.6-lab`. The practice is an in-process `accept` with synthetic tokens `t1` / `t2`. It does not send mail, open two hosts, or touch an employer invite link.
 
 Do not probe public invite links. Do not click a live mail link. Do not build a race harness. You do not need two processes. You must not.
 
@@ -40,7 +40,7 @@ Read `vulnerable/invite.py`. It returns true every time. `reset()` exists so tes
 - `test_invite_token_is_single_use` — second `accept("t1")` is false
 - `test_distinct_tokens_are_independent` — `t2` still succeeds once on the repaired files
 
-You do not need a new token string. The failure of `test_invite_token_is_single_use` *is* the evidence.
+You do not need a new token string. When `test_invite_token_is_single_use` fails, that is the evidence.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -65,8 +65,6 @@ You do not need a new token string. The failure of `test_invite_token_is_single_
 FastAPI will run `accept` twice if two requests arrive. Postgres unique indexes do nothing until you write the used row. Next.js will happily POST the mail link again. The app's promise this week is: **these** local files, second `t1` is False.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/6.6/6.6-lab/tests --impl vulnerable

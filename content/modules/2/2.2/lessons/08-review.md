@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 This review is about a notes-app edge cache. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say which outcome (company B reading company A’s body) breaks if they ship. Start at the store key, not at a scanner color or an HTTPS checkbox.
 
-The folder `labs/2.2/2.2-request-path/vulnerable/` is the change. Reconstruct whether the store still keys only on path. Compare that with the rule. Write changes a developer can verify. The check you already ran (`test_other_tenant_does_not_receive_cached_body`) is the rule check. A comment “will add Vary later” is not.
+Treat the files in `labs/2.2/2.2-request-path/vulnerable/` as the pull request. Reconstruct whether the store still keys only on path. Compare that with the rule. Write changes a developer can verify. You already ran `test_other_tenant_does_not_receive_cached_body` — that is the rule. A comment “will add Vary later” is not.
 
 ## Picture: problems to find (name them yourself)
 
@@ -44,7 +42,7 @@ Also reject: client `X-Tenant` as key input; `Vary: Cookie` as forever; Report-O
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_other_tenant_does_not_receive_cached_body`.
+Write the review that would block this change. Name `test_other_tenant_does_not_receive_cached_body`.
 
 ## Use it somewhere new
 

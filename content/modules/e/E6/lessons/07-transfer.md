@@ -18,7 +18,7 @@ Renaming “note” to “chart” is not transfer. Owner, review date, and acce
 | Notes app this week | Clinic sketch |
 |---|---|
 | Exception dict with owner + review_by + wcag_checked | Clinic exception with the same three fields |
-| Schema before accept | Same schema on a **local** practice files |
+| Schema before accept | Same schema on **local** practice files |
 | `accept_exception({"owner": "", "review_by": None})` | Same call — empty owner still denied |
 | Calendar / silent accept | Same pressure — **not** a live clinic audit |
 | Maturity score / pledge / HIPAA slide | Same inputs — not the accept decision |
@@ -39,7 +39,7 @@ An empty owner still has to be denied. A complete record may still accept. Addin
 1. who can act (calendar / silent accept — not a live clinic audit);
 2. what you trust (schema is the promise; maturity score, industry labels, and a pledge are not);
 3. what must not happen (`accept_exception` true with empty owner, not a legal label);
-4. a test idea on a **local** practice files only (no clinic governance tool);
+4. a test idea on **local** practice files only (no clinic governance tool);
 5. leftover (unread register, inaccessible recovery, extra advanced documentation);
 6. whether the exception records that patients can complete recovery (plain language, not color-only).
 

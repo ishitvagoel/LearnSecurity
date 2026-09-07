@@ -7,13 +7,13 @@
 
 The practice is not a store listing you unpack. It is a tiny Python `api_allowed(build_type, attest)`. The failure is already in the function: it returns true for every pair, so a debug build with `attest=ok` is allowed to call prod export. That is a **failed rule**, not a trophy against a public APK.
 
-The rule under test:
+Here is the rule:
 
 > `api_allowed("debug", "ok")` must be false. A debug build must not call production export.
 
 ## Where you may practice
 
-Only `labs/8.4/8.4-lab` is in scope. The helper is an in-process `api_allowed(build_type, attest)`. Fake build-type strings (`debug`, `release`). It does not open a network. Do not probe a live Play Console, unpack a public APK, or paste anti-debug steps onto a store listing.
+Stay inside `labs/8.4/8.4-lab`. The helper is an in-process `api_allowed(build_type, attest)`. Fake build-type strings (`debug`, `release`). It does not open a network. Do not probe a live Play Console, unpack a public APK, or paste anti-debug steps onto a store listing.
 
 Do not paste this exercise onto a public host, employer clinic, or live store APK.
 
@@ -40,7 +40,7 @@ Topic 8.1 already said the APK is hostile. This rule is **debug must not call pr
 - `test_release_with_attest_may_call_prod`
 - `test_release_without_attest_is_denied` — 8.1 still applies to release
 
-You do not need a new flavor name. The failure of `test_debug_build_cannot_call_prod_export` *is* the evidence.
+You do not need a new flavor name. When `test_debug_build_cannot_call_prod_export` fails, that is the evidence.
 
 ## Why it happens vs what it costs
 

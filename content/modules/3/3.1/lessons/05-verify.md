@@ -51,14 +51,12 @@ Map the test to the body×log row you wrote. If the broken files do not fail, th
 
 ## Practice
 
-Run both this session:
-
 ```text
 python3 -m pytest labs/3.1/3.1-lab/tests --impl vulnerable
 python3 -m pytest labs/3.1/3.1-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail/pass into your notes next to the body×log row.
+Paste nothing from answer keys. Write fail or pass next to the body×log row.
 
 ## Use it somewhere new
 

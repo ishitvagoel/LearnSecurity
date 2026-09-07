@@ -2,11 +2,11 @@
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
-**Standards:** WSTG 4.2 as catalogue, not the oracle; CSF 2.0 GV as outcome language.
+**Standards:** WSTG 4.2 as a list, not the check; CSF 2.0 GV as outcome language.
 
 ## Check it
 
-“I’ll be careful” is not evidence. “The guide has an authorization chapter” is a catalogue observation. The check is: `target_is_authorized("https://example.com/")` is false. That must be **false** on `--impl vulnerable` (the helper returns true) and **true** on `--impl fixed`. Do not fetch example.com; the test string is enough.
+“I’ll be careful” is not evidence. “The guide has an authorization chapter” is noticing a chapter title. The check is: `target_is_authorized("https://example.com/")` is false. That must be **false** on `--impl vulnerable` (the helper returns true) and **true** on `--impl fixed`. Do not fetch example.com; the test string is enough.
 
 ## Picture: the broken files must fail on the public host
 
@@ -45,7 +45,7 @@ Honest localhost tests may pass on both. If the broken files do not fail the pub
 
 ## Practice
 
-Run both versions this session. Write the fail/pass pair next to your matrix row. Reject a “test” that only greps `ALLOWED_HOSTS` in a string without calling `target_is_authorized` on the public literal.
+Run both versions this session. Write fail or pass next to your matrix row. Reject a “test” that only greps `ALLOWED_HOSTS` in a string without calling `target_is_authorized` on the public literal.
 
 ## Use it somewhere new
 

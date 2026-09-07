@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny Python `tenant_for(session, body)`. The failure is already in the function: it prefers `body["tenant"]` when that key is present. A body-chosen company is **a failed rule**, not a trophy against a public product.
 
-The rule under test:
+Here is the rule:
 
 > The JSON body is not the tenant. `tenant_for({"tenant": "A"}, {"tenant": "B"})` must return `"A"`. If it returns `"B"`, body tenant overrides session.
 
 ## Where you may practice
 
-Only `labs/E5/e5-lab` is in scope. The check is an in-process `tenant_for(session, body)`. Fake companies A and B. It does not open a network. Do not send `org_id` to a live product, a clinic company, or a classmate preview.
+Stay inside `labs/E5/e5-lab`. The check is an in-process `tenant_for(session, body)`. Fake companies A and B. It does not open a network. Do not send `org_id` to a live product, a clinic company, or a classmate preview.
 
 What must not happen: the JSON body switches the bound company. `tenant_for({"tenant": "A"}, {"tenant": "B"})` returns `"B"`.
 
@@ -39,7 +39,7 @@ Read `vulnerable/rls.py`. It returns the body company when present. Tests:
 - `test_body_cannot_switch_tenant`
 - `test_matching_body_may_keep_session_tenant` — A/A may pass on both
 
-You do not need a new company letter. The failure of `test_body_cannot_switch_tenant` *is* the evidence. Do not paste the practice files into a public API.
+You do not need a new company letter. When `test_body_cannot_switch_tenant` fails, that is the evidence. Do not paste the practice files into a public API.
 
 ## Why it happens vs what it costs
 
@@ -58,8 +58,6 @@ You do not need a new company letter. The failure of `test_body_cannot_switch_te
 FastAPI will bind whatever field you declare. PostgreSQL row-level rules will isolate whatever session variable you `SET`. A subdomain Host header is client-controlled. What this practice is supposed to show: session A plus body B is A.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/E5/e5-lab/tests --impl vulnerable

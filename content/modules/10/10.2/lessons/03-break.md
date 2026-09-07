@@ -7,13 +7,13 @@
 
 The practice is not a registry you attack. It is a tiny Python `install_ok(expected_hash, got_hash)` that returns true or false. The failure is already in the function: every pair is allowed. That is a **failed rule**, not a missing package name.
 
-The rule under test:
+Here is the rule:
 
 > A digest mismatch must not install. If `install_ok("aaa", "bbb")` is true, the bytes you will run have failed as a security control.
 
 ## Where you may practice
 
-Only `labs/10.2/10.2-lab` is in scope. The practice is an in-process `install_ok(expected_hash, got_hash)`. The digests are the synthetic strings `aaa` and `bbb`. No live registries, no public indexes, no clinic clusters. Do not fetch a live package.
+Stay inside `labs/10.2/10.2-lab`. The practice is an in-process `install_ok(expected_hash, got_hash)`. The digests are the synthetic strings `aaa` and `bbb`. No live registries, no public indexes, no clinic clusters. Do not fetch a live package.
 
 Do not publish, typosquat, or pull a real tarball “to see what happens.” Do not paste this exercise onto a public registry, employer CI, or live clinic.
 
@@ -39,7 +39,7 @@ Read `vulnerable/lock.py`. It returns true for every pair. Tests:
 - `test_hash_mismatch_refuses_install`
 - `test_matching_digest_may_install` — matching hashes may pass on both
 
-You do not need a new digest string. The failure of `test_hash_mismatch_refuses_install` *is* the evidence.
+You do not need a new digest string. When `test_hash_mismatch_refuses_install` fails, that is the evidence.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -64,8 +64,6 @@ You do not need a new digest string. The failure of `test_hash_mismatch_refuses_
 `npm install` latest is a convenience default. Dependabot opens pull requests; it does not verify bytes at install. A pip install without a hash requirement will take whatever the index returns. The app’s promise this week is: **this** practice, `aaa` vs `bbb` is deny.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/10.2/10.2-lab/tests --impl vulnerable

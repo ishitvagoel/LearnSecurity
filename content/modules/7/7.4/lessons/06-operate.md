@@ -11,7 +11,7 @@ Do not log session cookies or note bodies (3.1 / 4.3). Do not attach the token t
 
 ## Picture: leftover session is a signal
 
-A leftover cookie used as the principal is a notice-and-recover problem, not a licence to quote the cookie in the paging channel. Notice names the event. Recover keeps the deny and rotates the worker. Neither reprints Alice’s session.
+A leftover cookie used as the principal is a notice-and-recover problem, not a licence to quote the cookie in the paging channel. Name the event when you notice it. Recover keeps the deny and rotates the worker. Neither reprints Alice’s session.
 
 ```mermaid
 flowchart TD
@@ -48,11 +48,11 @@ A task dashboard will show task success and stay silent when the task still used
 
 ## Practice
 
-Write one log line you would accept in review (job id, expected principal, no cookie). Tie it to `labs/7.4/7.4-lab`. Reject any line that includes Alice’s session cookie, note bodies, or a live broker dump.
+For `labs/7.4/7.4-lab`, write a log line (job id, expected principal, no cookie). Reject any line that includes Alice’s session cookie, note bodies, or a live broker dump.
 
 ## Use it somewhere new
 
-A clinic example: notice batch-export jobs running as a clinician session on a local practice files; do not attach the session token to the ticket. Do not attach to a live broker.
+A clinic example: notice batch-export jobs running as a clinician session on local practice files; do not attach the session token to the ticket. Do not attach to a live broker.
 
 ## Can people still use it
 

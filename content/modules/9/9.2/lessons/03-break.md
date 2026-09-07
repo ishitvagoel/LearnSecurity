@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny Python `review_ok(diff)`. It does not merge anything. The failure is already in the function: it returns true for every string. That is a **failed rule**, not a trophy eval.
 
-The rule under test:
+Here is the rule:
 
 > Eval on user input must not be approved. `review_ok("x = eval(user)")` must be false.
 
 ## Where you may practice
 
-Only `labs/9.2/9.2-lab` is in scope. The helper is in-process: `review_ok(diff)`. Fake diff string `x = eval(user)` — the lab’s stand-in identifier, not a working exploit.
+Stay inside `labs/9.2/9.2-lab`. The helper is in-process: `review_ok(diff)`. Fake diff string `x = eval(user)` — the lab’s stand-in identifier, not a working exploit.
 
 Do not write a working exploit. Do not run eval on untrusted input outside this practice. Do not probe a live GitHub org. Do not paste eval payloads “to see what happens.”
 
@@ -39,7 +39,7 @@ Read `vulnerable/review.py`. It returns true for every string. Tests:
 - `test_eval_on_user_input_is_rejected`
 - `test_honest_diff_without_eval_may_pass` — `int(user)` may pass on both
 
-You do not need a new payload. The failure of `test_eval_on_user_input_is_rejected` *is* the evidence.
+You do not need a new payload. When `test_eval_on_user_input_is_rejected` fails, that is the evidence.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -63,11 +63,9 @@ You do not need a new payload. The failure of `test_eval_on_user_input_is_reject
 
 ## What the framework does vs what you still have to check
 
-GitHub’s “approve” button is not this rule. Formatters do not see eval as a grant of Python. Later review bots are a help, not an oracle. What this practice is supposed to show: eval-on-user is not approved.
+GitHub’s “approve” button is not this rule. Formatters do not see eval as a grant of Python. Later review bots are a help, not the whole check. What this practice is supposed to show: eval-on-user is not approved.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/9.2/9.2-lab/tests --impl vulnerable

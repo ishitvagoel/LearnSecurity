@@ -59,7 +59,7 @@ A missing “Alice session × deny” row is how a leftover login becomes the wo
 
 ## Practice
 
-Draw the trace so someone else could name the checks. Point at `labs/7.4/7.4-lab` file `worker.py`. Fake job dicts only.
+Look in `labs/7.4/7.4-lab`, starting with `worker.py`. Fake job dicts only.
 
 ## Use it somewhere new
 

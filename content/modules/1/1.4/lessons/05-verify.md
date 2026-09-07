@@ -44,14 +44,12 @@ A test that only asserts HTTP 200 is not this topic’s evidence. This practice 
 
 ## Practice
 
-Run both this session:
-
 ```text
 python -m pytest labs/1.4/1.4-risk-register/tests --impl vulnerable
 python -m pytest labs/1.4/1.4-risk-register/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail/pass into your notes next to the row.
+Paste nothing from answer keys. Write fail or pass next to the row.
 
 ## Use it somewhere new
 

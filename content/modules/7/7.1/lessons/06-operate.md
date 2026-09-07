@@ -38,7 +38,7 @@ What this practice is supposed to show: extra-key denials fire without the docum
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/7.1/7.1-lab`. Example shape (fake ids only):
+For `labs/7.1/7.1-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=unknown_field_rejected field=is_admin subject=user_71e request_id=req_71e

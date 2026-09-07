@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/7.4/7.4-lab/vulnerable/` as a change to notes-app overnight export. Check whether `exporter({"user_session": "alice", "service": None})` still returns `"alice"`.
 
-The check you already ran (`test_user_session_is_not_worker_identity`) is the rule test. A comment “will bind service later” is not.
+You already ran `test_user_session_is_not_worker_identity` — that is the rule. A comment “will bind service later” is not.
 
 ## Picture: user_session or service fallback / copy request cookies into the job
 
@@ -46,7 +44,7 @@ Also reject: live broker attacks; closing findings without re-running `test_user
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_user_session_is_not_worker_identity`.
+Write the review that would block this change. Name `test_user_session_is_not_worker_identity`.
 
 ## Use it somewhere new
 

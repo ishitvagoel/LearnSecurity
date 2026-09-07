@@ -37,7 +37,7 @@ What this practice is supposed to show: `csp_report_only_not_enforced` fires wit
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/E2/e2-lab`. Example shape (fake routes only):
+For `labs/E2/e2-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=csp_report_only_not_enforced route=/app

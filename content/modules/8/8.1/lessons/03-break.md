@@ -7,13 +7,13 @@
 
 The practice is not a phone you attack. It is a tiny Python `allow_export(client_claims, server_attest)`. The failure is already in the function: it returns true when the client says `integrity=ok`, so a failing server attest still exports. **Client `integrity=ok` authorizes export** is a failed rule, not a trophy against a device farm.
 
-The rule under test:
+Here is the rule:
 
 > `allow_export({"integrity": "ok"}, "fail")` must be false. A client integrity claim is not authorization.
 
 ## Where you may practice
 
-Only `labs/8.1/8.1-lab` is in scope. The helper is an in-process `allow_export(client_claims, server_attest)`. Fake claim dicts (`integrity`, `play_integrity_pass`). It does not open a network. Do not call live Play Integrity. Do not instrument a personal phone, a public app, or an employer clinic device.
+Stay inside `labs/8.1/8.1-lab`. The helper is an in-process `allow_export(client_claims, server_attest)`. Fake claim dicts (`integrity`, `play_integrity_pass`). It does not open a network. Do not call live Play Integrity. Do not instrument a personal phone, a public app, or an employer clinic device.
 
 Do not paste this exercise onto a live phone, a hospital device, or a public Android package.
 
@@ -40,7 +40,7 @@ The phone sandbox raises the cost of *other apps* reading this process; it does 
 - `test_server_attest_may_allow_export`
 - `test_missing_client_claim_does_not_authorize` — empty claims plus fail must deny
 
-You do not need a new boolean name. The failure of `test_client_integrity_claim_is_not_authorization` *is* the evidence.
+You do not need a new boolean name. When `test_client_integrity_claim_is_not_authorization` fails, that is the evidence.
 
 ## Why it happens vs what it costs
 

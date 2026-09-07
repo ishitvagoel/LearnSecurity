@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/7.2/7.2-lab/vulnerable/` as a change to the notes app’s note JSON. Check whether `resolve("member", "secret_internal")` is still true.
 
-The check you already ran (`test_member_cannot_resolve_internal_field`) is the rule check. A comment “will matrix later” is not.
+You already ran `test_member_cannot_resolve_internal_field` — that is the rule. A comment “will matrix later” is not.
 
 ## Picture: resolver / dump always true
 
@@ -46,7 +44,7 @@ Also reject: public GraphQL attacks; closing findings without re-running `test_m
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_member_cannot_resolve_internal_field`.
+Write the review that would block this change. Name `test_member_cannot_resolve_internal_field`.
 
 ## Use it somewhere new
 

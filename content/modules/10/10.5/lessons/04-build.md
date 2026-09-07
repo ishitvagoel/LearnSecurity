@@ -46,7 +46,7 @@ Fail closed: if you are unsure whether restore ran, keep the ticket open. Uncert
 - An assurance-gate sticker.
 - Untested backups.
 - A SIEM vendor.
-- A logging cheat sheet as the oracle.
+- A logging cheat sheet as the check.
 
 ## What the tool cannot do
 
@@ -74,4 +74,4 @@ Imperfect forensics. Observability as a way out. Support-tool god-mode. Logging 
 
 ## What this page is not doing
 
-Do not query a live SIEM. This page does not mark you as finished. from a green tile. Do not present a known-exploited list as close.
+Do not query a live SIEM. This page does not mark you as finished. A green tile is not a check-in. Do not present a known-exploited list as close.

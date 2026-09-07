@@ -5,9 +5,9 @@
 
 ## The rule
 
-A who-is-allowed check needs a property oracle. “The `authorize` function was called” is a tool observation. “Bob receives no company A note body and no partial state is committed through any in-scope path” is a property observation.
+A who-is-allowed check needs a property check. “The `authorize` function was called” is a tool observation. “Bob receives no company A note body and no partial state is committed through any in-scope path” is a property observation.
 
-## Picture: identity-only must fail the oracle
+## Picture: identity-only must fail the check
 
 The honest path is a person with a current grant. The negative path is a person without one. The abuse path is a person who presents identity and expects the write or release to succeed. The oracle does not ask whether `authorize()` was called. It asks whether the effect that must not happen happened.
 
@@ -169,7 +169,7 @@ issuer authorized
 -> evidence identifies grant and policy versions without exposing secrets
 ```
 
-Also check duplicate delivery, replay, clock disagreement, and unavailable revocation state according to the mechanism’s model. If the grant is a bearer capability, adjust the person oracle: possession may intentionally be the grant, but scope, authenticity, time, and revocation still need evidence.
+Also check duplicate delivery, replay, clock disagreement, and unavailable revocation state according to the mechanism’s model. If the grant is a bearer capability, adjust the person check: possession may intentionally be the grant, but scope, authenticity, time, and revocation still need evidence.
 
 ## Practice
 
@@ -181,7 +181,7 @@ Produce:
 2. two negative cases differing in person or grant;
 3. one abuse case using list or projection rather than direct read;
 4. one failure case for unavailable or stale grant state;
-5. the property oracle for each;
+5. the property check for each;
 6. one policy-removal counterfactual;
 7. one leftover gap.
 
@@ -208,4 +208,4 @@ Green checks on this laptop are not a pentest of a website. They are evidence fo
 
 ## What this page is not doing
 
-Live targets. Ready-made attack recipes. Treating a status code as the oracle. Answer keys are not on this site.
+Live targets. Ready-made attack recipes. Treating a status code as the check. Answer keys are not on this site.

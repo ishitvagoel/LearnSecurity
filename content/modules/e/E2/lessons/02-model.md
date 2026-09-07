@@ -51,7 +51,7 @@ flowchart LR
 
 ## Practice
 
-Draw the map. Point at `labs/E2/e2-lab` file `csp.py`. Label Report-Only as a signal even in the repaired files — the fix is the enforcing header name, not pretending a report became a block.
+Draw the map. Look in `labs/E2/e2-lab`, starting with `csp.py`. Label Report-Only as a signal even in the repaired files — the fix is the enforcing header name, not pretending a report became a block.
 
 ## Use it somewhere new
 

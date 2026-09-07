@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/E3/e3-lab/vulnerable/` as a change to the notes app's simulated copay. Check whether two `capture("k1")` still leave count 2.
 
-The check you already ran (`test_duplicate_capture_does_not_double_charge`) is the rule test. A comment “will add SEEN later” is not.
+You already ran `test_duplicate_capture_does_not_double_charge` — that is the rule. A comment “will add SEEN later” is not.
 
 ## Picture: two capture(k1) charge twice
 
@@ -46,7 +44,7 @@ Also reject: live processors; shipping without re-running `test_duplicate_captur
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_duplicate_capture_does_not_double_charge`.
+Write the review that would block this change. Name `test_duplicate_capture_does_not_double_charge`.
 
 ## Use it somewhere new
 

@@ -50,14 +50,12 @@ A test that only greps `NODE_ENV` in compose without calling `boot_ok("prod", Tr
 
 ## Practice
 
-Run both this session from the lab directory if needed:
-
 ```text
 python3 -m pytest labs/10.4/10.4-lab/tests --impl vulnerable
 python3 -m pytest labs/10.4/10.4-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail/pass into your notes next to the matrix row. Reject a “test” that only greps `NODE_ENV` in compose without calling `boot_ok("prod", True)`.
+Paste nothing from answer keys. Write fail or pass next to the matrix row. Reject a “test” that only greps `NODE_ENV` in compose without calling `boot_ok("prod", True)`.
 
 ## Use it somewhere new
 

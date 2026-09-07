@@ -49,14 +49,12 @@ A test that only greps a testing-guide id in a checklist without calling `is_sec
 
 ## Practice
 
-Run both this session from the lab directory if needed:
-
 ```text
 python3 -m pytest labs/9.3/9.3-lab/tests --impl vulnerable
 python3 -m pytest labs/9.3/9.3-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail/pass into your notes next to the isolation row. Reject a “test” that only greps a catalogue name without calling `is_security_test({"status_asserted": True})`.
+Paste nothing from answer keys. Write fail or pass next to the isolation row. Reject a “test” that only greps a guide name without calling `is_security_test({"status_asserted": True})`.
 
 ## Use it somewhere new
 

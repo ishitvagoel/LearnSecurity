@@ -11,7 +11,7 @@ Do not log export names that are patient identifiers. Do not paste filenames int
 
 ## Picture: unexpected child is a signal
 
-A child whose program is `sh` after an export-helper change is a notice-and-recover problem, not a licence to quote filenames in the paging channel. Notice names the event. Recover kills the child and removes the concatenating path. Neither reprints the name.
+A child whose program is `sh` after an export-helper change is a notice-and-recover problem, not a licence to quote filenames in the paging channel. Name the event when you notice it. Recover kills the child and removes the concatenating path. Neither reprints the name.
 
 ```mermaid
 flowchart TD
@@ -49,7 +49,7 @@ A host product will page on `sh` children and stay silent when the Python helper
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, program basename, no name). Tie it to `labs/6.1/6.1-lab`. Reject any line that includes a note body, a real email, a patient filename, or a shell cookbook.
+For `labs/6.1/6.1-lab`, write a log line (ids, reason, program basename, no name). Reject any line that includes a note body, a real email, a patient filename, or a shell cookbook.
 
 ## Use it somewhere new
 

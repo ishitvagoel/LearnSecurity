@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/6.2/6.2-lab/vulnerable/` as a change to the notes app’s HTML drawing. Check whether `render` still leaves `<` as markup.
 
-The check you already ran (`test_angle_brackets_are_encoded`) is the rule check. A comment “we should encode later” is not.
+You already ran `test_angle_brackets_are_encoded` — that is the rule. A comment “we should encode later” is not.
 
 ## Picture: template concatenates title
 
@@ -46,7 +44,7 @@ Also reject: attack-recipe payloads in the change description; closing findings 
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_angle_brackets_are_encoded`.
+Write the review that would block this change. Name `test_angle_brackets_are_encoded`.
 
 ## Use it somewhere new
 

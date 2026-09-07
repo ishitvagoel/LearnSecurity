@@ -44,7 +44,7 @@ If the primary widget is broken, degradation is **another checked, usable path**
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body, no real email). Tie it to `labs/1.4/1.4-risk-register`. Write who owns the coercion leftover and what trigger reopens it.
+For `labs/1.4/1.4-risk-register`, write a log line (ids, reason, no body, no real email). Write who owns the coercion leftover and what trigger reopens it.
 
 ## Use it somewhere new
 

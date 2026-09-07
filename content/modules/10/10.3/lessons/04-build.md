@@ -71,4 +71,4 @@ Break-glass ClusterRole. The metadata hop. Documented cluster-API retry (extra, 
 
 ## What this page is not doing
 
-Do not apply manifests to a live cluster. This page does not mark you as finished. from a CIS screenshot. Do not present a restricted pod profile as who-is-allowed on the API.
+Do not apply manifests to a live cluster. This page does not mark you as finished. A CIS screenshot is not a check-in. Do not present a restricted pod profile as who-is-allowed on the API.

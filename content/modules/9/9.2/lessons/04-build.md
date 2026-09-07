@@ -37,7 +37,7 @@ Fail closed: if you cannot tell whether the diff grants an interpreter, the answ
 
 ## What this is not
 
-A complete review oracle. A formatter. A later review bot. Writing down that eval is dangerous without rejecting it. A chat bot saying “looks safe.” A draft vocabulary sticker.
+A complete review check. A formatter. A later review bot. Writing down that eval is dangerous without rejecting it. A chat bot saying “looks safe.” A draft vocabulary sticker.
 
 ## What the tool cannot do
 

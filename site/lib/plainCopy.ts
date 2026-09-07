@@ -411,9 +411,10 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/Rewrite it for a clinic: /g, "For a clinic, "],
   [/Rewrite it for a clinic\. /g, ""],
   [
-    /The answers are not on this page\. Do not open the keys file until someone has looked at your review\./g,
-    "Wait until someone has looked at your review before opening the keys.",
+    /The answers are not on this page\. Do not open the keys file until someone has looked at your review\.\n?/g,
+    "",
   ],
+  [/Wait until someone has looked at your review before opening the keys\.\n?/g, ""],
   [/Rewrite the notes-app sentence\. Include:\n?/g, ""],
   [
     /Rewrite the notes-app sentence for this product\. Your answer must include:\n?/g,
@@ -423,14 +424,69 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/Write the same rule here\. Include:\n?/g, ""],
   [
     /Write three notes a (?:maintainer|peer) could act on, and tie at least one to (`[^`]+`)\. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover(?: risk)? you will \*\*not\*\* delete\./g,
-    "Write the review that blocks this change. Mention $1.",
+    "Write the review that would block this change. Name $1.",
   ],
   [
     /Do not open the repaired files yet\. Diagnose the cause first\. Do not paste the public host into a browser or proxy\./g,
     "Do not paste the public host into a browser or proxy.",
   ],
   [/Do not open the repaired files yet\. (?:Diagnose|Name) the cause first\.\n?/g, ""],
-  [/A log line a reviewer can accept looks like:\n?/g, ""],
+  [
+    /Write the review that blocks this change\. Mention (`[^`]+`)\./g,
+    "Write the review that would block this change. Name $1.",
+  ],
+  [
+    /Your blocking review has to cite (`[^`]+`)\./g,
+    "Write the review that would block this change. Name $1.",
+  ],
+  [/Run both this session from the lab directory if needed:\n?/g, ""],
+  [/Run both this session from the lab directory if needed\. /g, ""],
+  [/Run both this session from the practice folder if needed\. /g, ""],
+  [/Run both this session:/g, ""],
+  [/Run both this session\. /g, ""],
+  [
+    /Write one log line you would accept(?: in review)?(?: \(([^)]+)\))?\. Tie it to (`[^`]+`)\./g,
+    "For $2, write a log line you would accept.",
+  ],
+  [/ Example shape \(fake (?:ids|routes) only\):/g, ""],
+  [/Point at (`[^`]+`) file (`[^`]+`)\./g, "Look in $1, starting with $2."],
+  [/Draw [^.]+ so someone else could name the checks\. ?/g, ""],
+  [/Do not invent a new catalogue\./g, "Do not start a new list from scratch."],
+  [
+    /The folder (`[^`]+`) is the change\./g,
+    "Treat the files in $1 as the pull request.",
+  ],
+  [
+    /The check you already ran \((`[^`]+`)\) is the rule (?:test|check)\./g,
+    "You already ran $1 — that is the rule.",
+  ],
+  [/Notice names the event\./g, "Name the event when you notice it."],
+  [
+    /The failure of (`[^`]+`) \*is\* the evidence\./g,
+    "When $1 fails, that is the evidence.",
+  ],
+  [/Write fail\/pass into your notes next to/g, "Write fail or pass next to"],
+  [/Write the fail\/pass pair next to/g, "Write fail or pass next to"],
+  [/Claiming a course gate from this page\./g, "This page does not finish a check-in."],
+  [
+    /Treating an awareness list as the definition of security\./g,
+    "Do not treat a famous-bugs list as the definition of security.",
+  ],
+  [
+    /A famous-bugs list as the definition of security\./g,
+    "Do not treat a famous-bugs list as the definition of security.",
+  ],
+  [
+    /This page does not mark you as finished\. from this page\./g,
+    "This page does not mark you as finished.",
+  ],
+  [
+    /This page does not mark you as finished\. from a ([^.]+)\./g,
+    "This page does not mark you as finished. A $1 is not a check-in.",
+  ],
+  [/on a \*\*local\*\* practice files/g, "on **local** practice files"],
+  [/on a local practice files/g, "on local practice files"],
+  [/a local practice files/g, "local practice files"],
   [
     /It must pass\. Run from the lab directory if (?:a )?collection at (?:the )?repo root is polluted\. ?/g,
     "",

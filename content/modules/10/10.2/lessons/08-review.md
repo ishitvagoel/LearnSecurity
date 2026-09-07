@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/10.2/10.2-lab/vulnerable/` as a change to the notes app’s CI install check. Check whether `install_ok("aaa", "bbb")` still returns true.
 
-Start at `install_ok` and the two hash strings, not at a scanner color or an SBOM screenshot. The check you already ran (`test_hash_mismatch_refuses_install`) is the rule test. A comment “will pin later” is not.
+Start at `install_ok` and the two hash strings, not at a scanner color or an SBOM screenshot. You already ran `test_hash_mismatch_refuses_install` — that is the rule. A comment “will pin later” is not.
 
 ## Picture: install_ok true on hash mismatch
 
@@ -47,7 +45,7 @@ Also reject: live registry attacks; installing without re-running `test_hash_mis
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_hash_mismatch_refuses_install`.
+Write the review that would block this change. Name `test_hash_mismatch_refuses_install`.
 
 ## Use it somewhere new
 

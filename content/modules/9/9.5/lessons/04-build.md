@@ -43,7 +43,7 @@ Fail closed: if you are unsure whether the retest hit the same isolation check, 
 - A PDF.
 - An assurance gate sticker.
 - A retest of `/health`.
-- Membership in a testing catalogue.
+- Membership in a testing-guide list.
 - Exploratory leftovers counted as close.
 
 ## What the tool cannot do
@@ -72,4 +72,4 @@ Same-root-cause variants (extra fields). Role-change caches. Exploratory leftove
 
 ## What this page is not doing
 
-Do not pentest a public host. This page does not mark you as finished. from a PDF. Do not present a testing-catalogue draft as the current final pin.
+Do not pentest a public host. This page does not mark you as finished. A PDF is not a check-in. Do not present a testing-guide draft as the current final pin.

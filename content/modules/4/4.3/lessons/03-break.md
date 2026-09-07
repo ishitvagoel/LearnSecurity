@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny in-process `session_from_request`. Fake token `secret`. It does not open uvicorn, a CDN, or a browser history. A query-string session is a **failed rule**, not a trophy dump of a log.
 
-The rule under test:
+Here is the rule:
 
 > `session_from_request({"access_token": "secret"}, {}, None)` must return `None`. A session must not start from a query-string token.
 
 ## Where you may practice
 
-Only `labs/4.3/4.3-lab` is in scope. Restore the broken and repaired folders when you are done. Fake token `secret` only.
+Stay inside `labs/4.3/4.3-lab`. Restore the broken and repaired folders when you are done. Fake token `secret` only.
 
 Do not harvest Referer from a live site, dump production access logs, or replay a real session cookie.
 
@@ -44,7 +44,7 @@ Read `vulnerable/token.py`. It returns `query.get("access_token")` first. Checks
 - `test_cookie_session_still_works` — `sc_session` still works on the repaired files
 - `test_authorization_header_still_works`
 
-You do not need a new token string. The failure of `test_query_string_token_is_rejected` *is* the evidence.
+You do not need a new token string. When `test_query_string_token_is_rejected` fails, that is the evidence.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

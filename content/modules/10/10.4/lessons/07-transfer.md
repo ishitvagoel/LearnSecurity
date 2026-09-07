@@ -18,7 +18,7 @@ Renaming “note” to “chart” is not transfer. Env, debug, and leftover cha
 | Notes app this week | Clinic sketch |
 |---|---|
 | Production must not boot with debug | Clinic Django must not run with `DEBUG=True` |
-| `boot_ok("prod", True)` is false | Same call on a **local** practice files |
+| `boot_ok("prod", True)` is false | Same call on **local** practice files |
 | Anyone who finds `/debug` | Same actor — **not** a live clinic |
 | `NODE_ENV` / canary / IaC file | Same slogans — not the check |
 | Feature flag that turns off authz | Same leftover family |
@@ -38,7 +38,7 @@ Prod plus debug still has to be denied. Prod without debug may still boot. Setti
 1. who can act (anyone who finds `/debug` or an error page — not a live clinic);
 2. what you trust (prod plus debug deny is the promise; `NODE_ENV`, a canary, and IaC are not);
 3. what must not happen (`boot_ok("prod", True)` true, not a legal label);
-4. a test idea on a **local** practice files only (no live Django);
+4. a test idea on **local** practice files only (no live Django);
 5. leftover (other flags, sidecar debug, extra version leakage, E6 emergency debug);
 6. whether engineers read the refused boot (say *prod debug refused*, not color only).
 

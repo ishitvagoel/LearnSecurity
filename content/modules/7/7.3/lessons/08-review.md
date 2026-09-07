@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/7.3/7.3-lab/vulnerable/` as a change to a notes-app billing webhook. Check whether `accept("", "body", "lab-secret")` is still true.
 
-The check you already ran (`test_missing_signature_is_rejected`) is the rule test. A comment “will HMAC later” is not. A famous-bugs ticket is not.
+You already ran `test_missing_signature_is_rejected` — that is the rule. A comment “will HMAC later” is not. A famous-bugs ticket is not.
 
 ## Picture: accept always true / process because the path matched
 
@@ -46,7 +44,7 @@ Also reject: live provider attacks; closing findings without re-running `test_mi
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_missing_signature_is_rejected`.
+Write the review that would block this change. Name `test_missing_signature_is_rejected`.
 
 ## Use it somewhere new
 

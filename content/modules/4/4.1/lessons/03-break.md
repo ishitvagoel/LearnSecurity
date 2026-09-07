@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny Python `delete_user` and `session_valid`. The failure is already in the functions: delete marks the profile and leaves the session. That leftover is a **failed rule**, not a cleanup nit.
 
-The rule under test:
+Here is the rule:
 
 > After `delete_user("alice")`, `session_valid("alice")` must be false. If it is still true, a leftover session still works.
 
 ## Where you may practice
 
-Only `labs/4.1/4.1-lab` is in scope. The maps are in-process: `SESSIONS` and `DELETED`. The user is the synthetic name `alice`. It does not open an identity provider, a logout product, or a browser cookie jar.
+Stay inside `labs/4.1/4.1-lab`. The maps are in-process: `SESSIONS` and `DELETED`. The user is the synthetic name `alice`. It does not open an identity provider, a logout product, or a browser cookie jar.
 
 Do not replay a production cookie. Do not replay an employer single-sign-on session. Do not replay a classmate login. Do not steal a cookie “to see what happens.”
 
@@ -42,7 +42,7 @@ Read `vulnerable/lifecycle.py`. `delete_user` only adds the user to `DELETED`. `
 - `test_deleted_user_session_is_dead` — `session_valid` false after delete
 - `test_deleted_denies_even_if_session_map_still_has_row` — resurrected map entry still denied on the repaired files
 
-You do not need a new username. The failure of `test_deleted_user_session_is_dead` *is* the evidence.
+You do not need a new username. When `test_deleted_user_session_is_dead` fails, that is the evidence.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -66,8 +66,6 @@ You do not need a new username. The failure of `test_deleted_user_session_is_dea
 SessionMiddleware does not know HR offboarding. A token with `exp` in 30 days still verifies unless you check a per-user not-before. The app's promise this week is: **these** local files, after `delete_user("alice")`, `session_valid("alice")` is False.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/4.1/4.1-lab/tests --impl vulnerable

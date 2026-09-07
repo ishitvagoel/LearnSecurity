@@ -8,8 +8,6 @@
 
 Review `labs/0.2/0.2-bridge/vulnerable/` as a pull request for a course tool. Check whether `quiz_score_grants_phase1_skip(100)` still returns true.
 
-Wait until someone has looked at your review before opening the keys.
-
 ## Picture: if score >= 80: skip part 1
 
 **`if score >= 80: skip_phase(1)`**.
@@ -43,7 +41,7 @@ Also reject: live LMS attacks; keys in lessons; claiming check-in 0 or check-in 
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_high_quiz_score_is_not_authorization`.
+Write the review that would block this change. Name `test_high_quiz_score_is_not_authorization`.
 
 ## Use it somewhere new
 

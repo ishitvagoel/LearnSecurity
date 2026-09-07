@@ -66,7 +66,7 @@ An earlier topic already refused “JWT means secure.” Here the same format ca
 
 ## Practice
 
-Draw this map so someone else could name the checks. Point at `labs/4.5/4.5-lab` file `jwt_aud.py`.
+Look in `labs/4.5/4.5-lab`, starting with `jwt_aud.py`.
 
 ## Use it somewhere new
 
@@ -78,4 +78,4 @@ PKCE, nonce, mix-up, DPoP (advanced sender-constraint).
 
 ## What this page is not doing
 
-Treating an awareness list as the definition of security. Answer keys are not on this site.
+Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.

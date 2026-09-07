@@ -41,14 +41,12 @@ Honest-path tests may pass on both implementations. That does not excuse the den
 
 ## Practice
 
-Run both this session:
-
 ```text
 python3 -m pytest labs/4.4/4.4-lab/tests --impl vulnerable
 python3 -m pytest labs/4.4/4.4-lab/tests --impl fixed
 ```
 
-Write the fail/pass pair next to the table row. Reject a “test” that only greps `admin` in a role list without calling `can_read("bob", "n2")`.
+Write fail or pass next to the table row. Reject a “test” that only greps `admin` in a role list without calling `can_read("bob", "n2")`.
 
 ## Use it somewhere new
 

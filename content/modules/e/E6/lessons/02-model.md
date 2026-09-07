@@ -37,7 +37,7 @@ A one-year slide is a plan. It is not this week’s hole. A process-maturity sco
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the exception you already have and ask what would show it is still incomplete.
+Do not start a new list from scratch. Take the exception you already have and ask what would show it is still incomplete.
 
 | Piece | This system |
 |---|---|
@@ -63,7 +63,7 @@ A missing owner is how a spoken yes becomes “accepted.” Write the hole.
 
 ## Practice
 
-Draw the map so someone else could name the checks. Point at `labs/E6/e6-lab` file `risk.py`.
+Look in `labs/E6/e6-lab`, starting with `risk.py`.
 
 ## Use it somewhere new
 

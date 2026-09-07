@@ -7,13 +7,13 @@
 
 The practice is not a warehouse you attack. It is a tiny Python `delete_account` plus `body_retained` / `search_retained`. The failure is already in the functions: delete pops the notes map and leaves analytics. That leftover is a **failed rule**, not a cleanup nit.
 
-The rule under test:
+Here is the rule:
 
 > After `delete_account("alice")`, `body_retained("alice")` must be None. If it still returns `"secret"`, analytics still holds the note.
 
 ## Where you may practice
 
-Only `labs/5.1/5.1-lab` is in scope. The maps are in-process: `delete_account` plus `body_retained` / `search_retained`. The user is the synthetic name `alice` and the body is `secret`. It does not open a database, object storage, or a warehouse.
+Stay inside `labs/5.1/5.1-lab`. The maps are in-process: `delete_account` plus `body_retained` / `search_retained`. The user is the synthetic name `alice` and the body is `secret`. It does not open a database, object storage, or a warehouse.
 
 Do not dump a live analytics store. Do not dump an employer warehouse. Do not dump a classmate preview. Do not query a warehouse “to see what happens.”
 
@@ -42,7 +42,7 @@ Read `vulnerable/lifecycle.py`. `delete_account` only pops `NOTES`. Tests:
 - `test_deleted_account_leaves_no_search_copy`
 - `test_active_account_analytics_present` — honest product path; analytics exists *before* delete
 
-You do not need a new store name. The failure of `test_deleted_account_leaves_no_analytics_body` *is* the evidence.
+You do not need a new store name. When `test_deleted_account_leaves_no_analytics_body` fails, that is the evidence.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -66,8 +66,6 @@ You do not need a new store name. The failure of `test_deleted_account_leaves_no
 A database `DELETE FROM notes` is not warehouse DELETE. The web app does not erase object-store analytics. An HTTP 200 on `/account` is not `body_retained is None`. The app's promise this week is: **these** local files, after delete, both copies are None.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/5.1/5.1-lab/tests --impl vulnerable

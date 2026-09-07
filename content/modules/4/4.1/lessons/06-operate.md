@@ -11,7 +11,7 @@ Do not paste a personal email or a production cookie into the ticket. Do not log
 
 ## Picture: alert on use after deleted
 
-A leftover cookie after delete is a notice-and-recover problem, not a licence to quote notes in the paging channel. Notice names the event. Recover mass-revokes. Neither reprints the body.
+A leftover cookie after delete is a notice-and-recover problem, not a licence to quote notes in the paging channel. Name the event when you notice it. Recover mass-revokes. Neither reprints the body.
 
 ```mermaid
 flowchart TD
@@ -53,7 +53,7 @@ If operators see a “signed out” badge, do not encode it as color only. Give 
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body). Tie it to `labs/4.1/4.1-lab`. Reject any line that includes a note body, a personal email, a production cookie, or “single sign-on revoked it.”
+For `labs/4.1/4.1-lab`, write a log line (ids, reason, no body). Reject any line that includes a note body, a personal email, a production cookie, or “single sign-on revoked it.”
 
 ## Use it somewhere new
 

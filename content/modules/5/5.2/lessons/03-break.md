@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny in-process `protect` / `looks_encrypted`. Fake plaintext `secret`. It does not open a database or a cipher library. Base64 labeled encryption is a **failed rule**, not a trophy decoder.
 
-The rule under test:
+Here is the rule:
 
 > `protect("secret")` must not round-trip as Base64 of the plaintext. If `base64.b64decode(protect("secret"))` equals `"secret"`, encoding was sold as secrecy.
 
 ## Where you may practice
 
-Only `labs/5.2/5.2-lab` is in scope. The maps are in-process. Restore the broken and repaired folders when you are done. Fake plaintext `secret` only.
+Stay inside `labs/5.2/5.2-lab`. The maps are in-process. Restore the broken and repaired folders when you are done. Fake plaintext `secret` only.
 
 Do not decode a live column. Do not decode an employer backup. Do not decode a classmate dump. Do not “just try Base64” on someone else's file.
 
@@ -40,7 +40,7 @@ Read `vulnerable/crypto.py`. `protect` Base64-encodes the string. Tests:
 - `test_protect_is_not_mere_encoding`
 - `test_protect_does_not_return_plaintext`
 
-You do not need a new cipher name. The failure of `test_protect_is_not_mere_encoding` *is* the evidence.
+You do not need a new cipher name. When `test_protect_is_not_mere_encoding` fails, that is the evidence.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -65,8 +65,6 @@ You do not need a new cipher name. The failure of `test_protect_is_not_mere_enco
 Postgres `bytea` is not authenticated encryption. FastAPI will store whatever string you hand it. Next.js does not encrypt the column. The app's promise this week is: **these** local files, Base64 decode of `protect("secret")` is not `"secret"`.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/5.2/5.2-lab/tests --impl vulnerable

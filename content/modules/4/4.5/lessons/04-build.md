@@ -39,7 +39,7 @@ ID-token `aud` equals `client_id`. PKCE. DPoP (advanced sender-constraint). Obje
 ## What can still go wrong
 
 - Correct `aud` still needs who-is-allowed on the note.
-- Empty `aud`; array tricks; `alg=none` — reject unknown algorithms; this page is not a payload catalogue.
+- Empty `aud`; array tricks; `alg=none` — reject unknown algorithms; this page is not a payload list.
 - PKCE, `state`, `nonce`, `iss`, `exp`, JWKS, mix-up, and sender-constraining stay out of this practice.
 - Leftover tokens after a client is removed.
 - A browser app holding the access token is leftover (prefer a backend-for-frontend).

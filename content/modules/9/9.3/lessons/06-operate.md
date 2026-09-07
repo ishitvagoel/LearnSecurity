@@ -52,7 +52,7 @@ A failing security test must say what must not happen in the assertion message, 
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/9.3/9.3-lab`.
+For `labs/9.3/9.3-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=security_suite_missing_isolation req=isolation suite=api

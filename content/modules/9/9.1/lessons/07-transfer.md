@@ -19,7 +19,7 @@ Renaming “note” to “chart” is not transfer. Threat, requirement, test, a
 |---|---|
 | AUTHZ-1 is the isolation row | Fake HIPAA isolation row |
 | Status-only must not count | Done column must not count |
-| `covered("AUTHZ-1", status_only)` | `covered("AUTHZ-1", status_only)` on a local practice files |
+| `covered("AUTHZ-1", status_only)` | `covered("AUTHZ-1", status_only)` on local practice files |
 | Optimistic project manager | Same actor — **not** a live clinic |
 | Isolation assert in the dict | Isolation assert in the dict |
 
@@ -38,7 +38,7 @@ Status-only still is not coverage. An isolation-assert may still count. Marking 
 1. who can act (optimistic status column — not a live hospital);
 2. what you trust (the coverage check is the promise; checklist membership is not);
 3. what must not happen (`covered("AUTHZ-1", status_only)` true, not a legal label);
-4. a test idea on a **local** practice files only (no live governance scrape);
+4. a test idea on **local** practice files only (no live governance scrape);
 5. leftover (unnamed extra advanced rows, exceptions without expiry);
 6. whether a human exception path exists (must state what is uncovered and when it expires).
 

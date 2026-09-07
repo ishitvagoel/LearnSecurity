@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/E4/e4-lab/vulnerable/` as a change to the notes app’s unpacker. Check whether `copy_into(4, b"abcdefgh", 4)` still returns more than 4 bytes.
 
-The check you already ran (`test_copy_does_not_exceed_buffer`) is the rule test. A comment “will bound later” is not.
+You already ran `test_copy_does_not_exceed_buffer` — that is the rule. A comment “will bound later” is not.
 
 ## Picture: copy returns full src / declared_len plus 8
 
@@ -48,7 +46,7 @@ Also reject: native exploit walkthroughs; shipping without re-running `test_copy
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_copy_does_not_exceed_buffer`.
+Write the review that would block this change. Name `test_copy_does_not_exceed_buffer`.
 
 ## Use it somewhere new
 

@@ -54,7 +54,7 @@ A deny must say *share revoked*, not only “assert False.” Under stress, do n
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/11/11-lab`.
+For `labs/11/11-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=revoked_share_read_denied note=n1 tenant=B

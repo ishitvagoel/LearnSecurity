@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny Python `crash_report` that returns a dict. The failure is already in the function: it copies the note body into the report. That JSON is a **failed rule**, not a debug nit.
 
-The rule under test:
+Here is the rule:
 
 > A confidential note body must not appear in this crash report. If `crash_report("secret")` includes `secret`, telemetry has failed as a security control.
 
 ## Where you may practice
 
-Only `labs/8.5/8.5-lab` is in scope. The practice is an in-process `crash_report(note_body)`. The body is the synthetic string `secret`. No live crash consoles, no public store, no public apps. Do not send the JSON anywhere.
+Stay inside `labs/8.5/8.5-lab`. The practice is an in-process `crash_report(note_body)`. The body is the synthetic string `secret`. No live crash consoles, no public store, no public apps. Do not send the JSON anywhere.
 
 Do not paste a real note body into a crash SDK “to see what happens.” Do not paste this exercise onto a public crash project, employer dashboard, or live clinic.
 
@@ -41,7 +41,7 @@ Read `vulnerable/crash.py`. It returns a dict with `'note': note_body`. Tests:
 - `test_crash_report_omits_note_body`
 - `test_honest_crash_still_includes_stack` — a stack identifier may remain
 
-You do not need a new field name. The failure of `test_crash_report_omits_note_body` *is* the evidence.
+You do not need a new field name. When `test_crash_report_omits_note_body` fails, that is the evidence.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -66,8 +66,6 @@ You do not need a new field name. The failure of `test_crash_report_omits_note_b
 A crash SDK will ship whatever you attach. Private storage on the phone (8.2) does not encrypt the HTTPS payload. A web crash product (10.5) is the same field on the server. The app's promise this week is: **this** practice, `'secret'` is absent from the report.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/8.5/8.5-lab/tests --impl vulnerable

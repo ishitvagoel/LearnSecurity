@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/5.3/5.3-lab/vulnerable/` as a change to notes-app secret rotation. Check whether `auth("sk-lab-hardcoded", current="rotated-now")` is still true.
 
-The check you already ran (`test_hardcoded_default_does_not_auth`) is the rule test. A comment “will rotate later” is not.
+You already ran `test_hardcoded_default_does_not_auth` — that is the rule. A comment “will rotate later” is not.
 
 ## Picture: DEFAULT still accepted
 
@@ -44,7 +42,7 @@ Also reject: real production keys in practice files; closing findings without re
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_hardcoded_default_does_not_auth`.
+Write the review that would block this change. Name `test_hardcoded_default_does_not_auth`.
 
 ## Use it somewhere new
 

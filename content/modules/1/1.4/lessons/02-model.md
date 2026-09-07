@@ -28,7 +28,7 @@ If any box is a product name or a color, the row is not ready.
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the rules you already wrote and ask what leftover they still carry when a human must confirm recovery.
+Do not start a new list from scratch. Take the rules you already wrote and ask what leftover they still carry when a human must confirm recovery.
 
 | Rule | Recovery leftover to name | Out of scope this week |
 |---|---|---|
@@ -81,7 +81,7 @@ Maturity scores, scanner yellow, and “256-bit” do not belong in the leftover
 
 ## Practice
 
-Draw the row picture so someone else could name the checks. Point at `labs/1.4/1.4-risk-register` file `recovery.py`. Your artifact is a versioned list (even a table in your notes) with rule, person, harm, control, leftover, owner, trigger, and evidence. No real people’s data.
+Look in `labs/1.4/1.4-risk-register`, starting with `recovery.py`. Your artifact is a versioned list (even a table in your notes) with rule, person, harm, control, leftover, owner, trigger, and evidence. No real people’s data.
 
 ## Use it somewhere new
 

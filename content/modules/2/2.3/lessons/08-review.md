@@ -3,8 +3,6 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/2.3/2.3-browser-policy/vulnerable/` as a change to notes-app cookie policy. Check whether the jar still hands `sc_session` to script.
@@ -44,7 +42,7 @@ Also reject: `localStorage` for session; trusting the client as what you trust; 
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_script_cannot_read_httponly_session`.
+Write the review that would block this change. Name `test_script_cannot_read_httponly_session`.
 
 ## Use it somewhere new
 

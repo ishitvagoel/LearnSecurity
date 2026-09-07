@@ -54,7 +54,7 @@ flowchart LR
 
 ## Practice
 
-Draw the inventory so someone else could name the checks. Point at `labs/5.3/5.3-lab` file `secrets.py`.
+Look in `labs/5.3/5.3-lab`, starting with `secrets.py`.
 
 ## Use it somewhere new
 
@@ -66,4 +66,4 @@ Images already shipped; logs that captured the old value; a hardware box for cry
 
 ## What this page is not doing
 
-Treating an awareness list as the definition of security. Answer keys are not on this site.
+Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.

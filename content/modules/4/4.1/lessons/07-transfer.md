@@ -55,4 +55,4 @@ One page. No answer keys. The only running system you may break is `labs/4.1/4.1
 
 ## What this page is not doing
 
-Live-target token replay. Real HR exports. Claiming a course gate from this page.
+Live-target token replay. Real HR exports. This page does not finish a check-in.

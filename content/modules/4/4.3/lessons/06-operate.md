@@ -34,7 +34,7 @@ uvicorn will still print query strings unless you change the access-log format. 
 
 ## Practice
 
-Write one log line you would accept. Tie it to `labs/4.3/4.3-lab`.
+For `labs/4.3/4.3-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=query_token path=/notes request_id=req_43qs

@@ -50,14 +50,12 @@ A test that only greps a maturity name in a slide without calling `accept_except
 
 ## Practice
 
-Run both this session from the lab directory if needed:
-
 ```text
 python3 -m pytest labs/E6/e6-lab/tests --impl vulnerable
 python3 -m pytest labs/E6/e6-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail/pass into your notes next to the incomplete-exception row. Reject a “test” that only greps a maturity name without calling `accept_exception({"owner": "", "review_by": None})`.
+Paste nothing from answer keys. Write fail or pass next to the incomplete-exception row. Reject a “test” that only greps a maturity name without calling `accept_exception({"owner": "", "review_by": None})`.
 
 ## Use it somewhere new
 

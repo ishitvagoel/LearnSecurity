@@ -63,7 +63,7 @@ Write the cap down. Implement it on every write. Do not substitute a later rate 
 
 ## Practice
 
-Draw this map so someone else could name the checks. Point at `labs/3.4/3.4-lab` file `share_limit.py`.
+Look in `labs/3.4/3.4-lab`, starting with `share_limit.py`.
 
 ## Use it somewhere new
 
@@ -75,4 +75,4 @@ Legitimate teams >5 need an owned exception. Parallel sixths need locking from t
 
 ## What this page is not doing
 
-Treating an awareness list as the definition of security. Answer keys are not on this site.
+Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.

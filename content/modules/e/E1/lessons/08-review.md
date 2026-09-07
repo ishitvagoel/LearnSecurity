@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/E1/e1-lab/vulnerable/` as a change to the notes app's summarizer agent. Check whether `run_tool("exec_sql", {})` still runs.
 
-Start at `run_tool` and the `exec_sql` row, not at a scanner color or a famous-bugs screenshot. The check you already ran (`test_exec_sql_tool_is_denied`) is the rule test. A comment "will allow-list later" is not.
+Start at `run_tool` and the `exec_sql` row, not at a scanner color or a famous-bugs screenshot. You already ran `test_exec_sql_tool_is_denied` — that is the rule. A comment "will allow-list later" is not.
 
 ## Picture: exec_sql available
 
@@ -46,7 +44,7 @@ Also reject: live model attacks; shipping without re-running `test_exec_sql_tool
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_exec_sql_tool_is_denied`.
+Write the review that would block this change. Name `test_exec_sql_tool_is_denied`.
 
 ## Use it somewhere new
 

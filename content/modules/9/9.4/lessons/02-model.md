@@ -34,7 +34,7 @@ A silent delete is how “not reachable” becomes “never happened.” Write t
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the findings you already have and ask which ones may ship.
+Do not start a new list from scratch. Take the findings you already have and ask which ones may ship.
 
 | Piece | This system |
 |---|---|
@@ -60,7 +60,7 @@ A missing HIGH×map row is how an unowned finding ships on Friday. Write the hol
 
 ## Practice
 
-Draw the join so someone else could name the checks. Point at `labs/9.4/9.4-lab` file `sast.py`.
+Look in `labs/9.4/9.4-lab`, starting with `sast.py`.
 
 ## Use it somewhere new
 

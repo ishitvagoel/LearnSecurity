@@ -49,14 +49,12 @@ Map the test to the second-`t1` deny row you wrote. If the broken files do not f
 
 ## Practice
 
-Run both this session:
-
 ```text
 python3 -m pytest labs/6.6/6.6-lab/tests --impl vulnerable
 python3 -m pytest labs/6.6/6.6-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail/pass into your notes next to the matrix row. Reject a “test” that only greps `UNIQUE` in a migration without calling `accept("t1")` twice.
+Paste nothing from answer keys. Write fail or pass next to the matrix row. Reject a “test” that only greps `UNIQUE` in a migration without calling `accept("t1")` twice.
 
 ## Use it somewhere new
 

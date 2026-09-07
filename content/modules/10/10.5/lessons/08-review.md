@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/10.5/10.5-lab/vulnerable/` as a change to the notes app’s incident close. Check whether `close_incident({"recovery": "todo", "logs": "ok"})` still returns true.
 
-Start at `close_incident` and the recovery-todo row, not at a scanner color or a SIEM screenshot. The check you already ran (`test_cannot_close_without_recovery`) is the rule test. A comment “will restore later” is not.
+Start at `close_incident` and the recovery-todo row, not at a scanner color or a SIEM screenshot. You already ran `test_cannot_close_without_recovery` — that is the rule. A comment “will restore later” is not.
 
 ## Picture: close with recovery todo
 
@@ -46,7 +44,7 @@ Also reject: live incident attacks; closing without re-running both deny tests; 
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_cannot_close_without_recovery`.
+Write the review that would block this change. Name `test_cannot_close_without_recovery`.
 
 ## Use it somewhere new
 

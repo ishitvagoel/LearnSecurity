@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 This review is about notes-app export. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `allow(4)` is still true if they ship. Start at unbounded allow, not at a famous API-abuse list.
 
-The folder `labs/6.7/6.7-lab/vulnerable/` is the change. The check you already ran (`test_fourth_export_is_denied`) is the rule test. A comment “will cap later” is not.
+Treat the files in `labs/6.7/6.7-lab/vulnerable/` as the pull request. You already ran `test_fourth_export_is_denied` — that is the rule. A comment “will cap later” is not.
 
 ## Picture: problems to find (name them yourself)
 
@@ -46,7 +44,7 @@ Also reject: public load tests; closing findings without re-running `test_fourth
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_fourth_export_is_denied`.
+Write the review that would block this change. Name `test_fourth_export_is_denied`.
 
 ## Use it somewhere new
 

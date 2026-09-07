@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny Python `accept`. It does not open a network. The failure is already in the function: it returns true for every triple. An unsigned body counting as authentic is a **failed rule**, not a trophy POST to a live provider.
 
-The rule under test:
+Here is the rule:
 
 > An unsigned webhook body is not authentic. `accept("", "body", "lab-secret")` must be false. This practice checks the predicate only. It does not POST a live webhook.
 
 ## Where you may practice
 
-Only `labs/7.3/7.3-lab` is in scope. The maps are in-process: `accept(sig, body, secret)`. Disposable `lab-secret` and a synthetic `body`. Restore the broken and repaired folders when you are done.
+Stay inside `labs/7.3/7.3-lab`. The maps are in-process: `accept(sig, body, secret)`. Disposable `lab-secret` and a synthetic `body`. Restore the broken and repaired folders when you are done.
 
 Do not POST to Stripe. Do not POST to GitHub. Do not POST to a clinic webhook. Do not POST to public hosts. Do not paste a live callback URL “to see what happens.”
 
@@ -40,7 +40,7 @@ Read `vulnerable/hook.py`. It returns true for every triple. Tests:
 - `test_wrong_signature_is_rejected`
 - `test_matching_signature_is_accepted` — honest path; may pass on both
 
-You do not need a new secret. The failure of `test_missing_signature_is_rejected` *is* the evidence.
+You do not need a new secret. When `test_missing_signature_is_rejected` fails, that is the evidence.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -67,8 +67,6 @@ You do not need a new secret. The failure of `test_missing_signature_is_rejected
 FastAPI will accept a POST with an empty header. nginx TLS termination proves a hop, not a MAC. A vendor address range is shared-fate (NAT, shared cloud egress). Next.js never sees the callback. What this practice is supposed to show: empty sig is false. **Do not POST a live webhook.**
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/7.3/7.3-lab/tests --impl vulnerable

@@ -26,7 +26,7 @@ If both pass, the test is not looking at eval-on-user. If both fail, the fix is 
 | Normal | Honest `int(user)` may approve (`test_honest_diff_without_eval_may_pass`; may pass on both) |
 | Wrong input / abuse | `eval(user)` is not approved; broken files must fail |
 | Failure | If you cannot tell whether the diff grants an interpreter, reject |
-| Not claimed | complete oracle; other expression languages; live GitHub; `exec(` |
+| Not claimed | complete check; other expression languages; live GitHub; `exec(` |
 
 The file is `labs/9.2/9.2-lab/tests/test_property.py`. The test `test_eval_on_user_input_is_rejected` is there so always-true `review_ok` cannot sneak through. Do not add a working eval payload to “make the test more real.” The lab string `x = eval(user)` is enough.
 
@@ -44,19 +44,17 @@ Honest diffs without eval may pass on both implementations. That does not excuse
 - That `exec(` is rejected
 - That generated code is reviewed (later elective)
 - That later review bots are honest
-- That the substring is a complete avoid-eval oracle
+- That the substring is a complete avoid-eval check
 - That a course gate is done
 
 ## Practice
-
-Run both this session from the lab directory if needed:
 
 ```text
 python3 -m pytest labs/9.2/9.2-lab/tests --impl vulnerable
 python3 -m pytest labs/9.2/9.2-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail/pass into your notes next to the matrix row. Reject a “test” that only greps `eval` in a policy PDF without calling `review_ok("x = eval(user)")`.
+Paste nothing from answer keys. Write fail or pass next to the matrix row. Reject a “test” that only greps `eval` in a policy PDF without calling `review_ok("x = eval(user)")`.
 
 ## Use it somewhere new
 

@@ -54,7 +54,7 @@ Identifiers find a row. They do not authorize fields. Obscure identifiers are no
 
 ## Practice
 
-Draw the table so someone else could name the checks. Point at `labs/7.2/7.2-lab` file `field.py`.
+Look in `labs/7.2/7.2-lab`, starting with `field.py`.
 
 ## Use it somewhere new
 
@@ -66,4 +66,4 @@ Later worker dumps (7.4). Stale serializers after a role change (advanced). Debu
 
 ## What this page is not doing
 
-A famous-bugs list as the definition of security. Answer keys are not on this site.
+Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.

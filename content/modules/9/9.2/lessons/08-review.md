@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 This review is about notes-app merge gating. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `review_ok("x = eval(user)")` still returns true if they ship. Start at always-true `review_ok`, not at a scanner color.
 
-The folder `labs/9.2/9.2-lab/vulnerable/` is the change. The check you already ran (`test_eval_on_user_input_is_rejected`) is the rule test. A comment “will ban eval later” is not.
+Treat the files in `labs/9.2/9.2-lab/vulnerable/` as the pull request. You already ran `test_eval_on_user_input_is_rejected` — that is the rule. A comment “will ban eval later” is not.
 
 ## Picture: approved eval(user)
 
@@ -34,7 +32,7 @@ The lab substring is a stand-in — name `exec(` and generated code as leftover,
 - Framework-generated SQL ignored
 - No who-is-allowed question
 
-Also reject: weaponized eval; closing findings without re-running `test_eval_on_user_input_is_rejected`; keys in learner notes; claiming a course gate; treating the substring as a complete oracle.
+Also reject: weaponized eval; closing findings without re-running `test_eval_on_user_input_is_rejected`; keys in learner notes; claiming a course gate; treating the substring as a complete check.
 
 ## Common mix-ups
 
@@ -46,7 +44,7 @@ Also reject: weaponized eval; closing findings without re-running `test_eval_on_
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_eval_on_user_input_is_rejected`.
+Write the review that would block this change. Name `test_eval_on_user_input_is_rejected`.
 
 ## Use it somewhere new
 

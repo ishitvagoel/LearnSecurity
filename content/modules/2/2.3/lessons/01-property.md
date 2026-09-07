@@ -13,7 +13,7 @@ The notes app’s session cookie `sc_session` is the login token. If page script
 
 So what must not happen: **script reads the session**. In the practice files, `js_read_session` must not return the dummy value `synthetic-session` for a cookie whose `httponly` flag is true.
 
-Industry cookie lists want HttpOnly on tokens that scripts are not meant to see, and `Secure` on cookies that should not travel in the clear. This week’s check is script-readability, not the whole cookie catalog. A newer cookie RFC is still a **draft** if you cite it. Cookie behavior in the HTML living standard is the living document.
+Cookie rules ask for HttpOnly on tokens that scripts are not meant to see, and `Secure` on cookies that should not travel in the clear. This week’s check is script-readability, not the whole cookie catalog. A newer cookie RFC is still a **draft** if you cite it. Cookie behavior in the HTML living standard is the living document.
 
 ## Picture: two readers of the same cookie
 

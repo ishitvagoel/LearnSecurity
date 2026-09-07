@@ -37,7 +37,7 @@ What this practice is supposed to show: debug-to-prod denials fire without the A
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/8.4/8.4-lab`. Example shape (fake ids only):
+For `labs/8.4/8.4-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=debug_to_prod_denied client=debug request_id=req_84e

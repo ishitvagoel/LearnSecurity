@@ -49,14 +49,12 @@ Honest bound shape must pass on repaired. Concatenated `str` must fail on broken
 
 ## Practice
 
-Run both this session:
-
 ```text
 python3 -m pytest labs/5.5/5.5-lab/tests --impl vulnerable
 python3 -m pytest labs/5.5/5.5-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail/pass into your notes next to the matrix row. Reject a “test” that only greps `%s` inside a concatenated string without asserting the tuple shape.
+Paste nothing from answer keys. Write fail or pass next to the matrix row. Reject a “test” that only greps `%s` inside a concatenated string without asserting the tuple shape.
 
 ## Use it somewhere new
 

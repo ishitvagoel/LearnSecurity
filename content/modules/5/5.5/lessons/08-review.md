@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 This review is about notes-app persistence. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `fetch_sql` still returns a concatenated `str` if they ship. Start at concatenated SQL, not at a scanner color.
 
-The folder `labs/5.5/5.5-lab/vulnerable/` is the change. The check you already ran (`test_query_is_bound_not_concatenated`) is the rule test. A comment “will parameterize later” is not.
+Treat the files in `labs/5.5/5.5-lab/vulnerable/` as the pull request. You already ran `test_query_is_bound_not_concatenated` — that is the rule. A comment “will parameterize later” is not.
 
 ## Picture: problems to find (name them yourself)
 
@@ -44,7 +42,7 @@ Also reject: live SQL attacks; closing findings without re-running `test_query_i
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_query_is_bound_not_concatenated`.
+Write the review that would block this change. Name `test_query_is_bound_not_concatenated`.
 
 ## Use it somewhere new
 

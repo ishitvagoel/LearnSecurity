@@ -64,7 +64,7 @@ A header length is data. Treat it like any other field the requester sent.
 
 ## Practice
 
-Draw the map. Point at `labs/E4/e4-lab` file `copy.py`.
+Draw the map. Look in `labs/E4/e4-lab`, starting with `copy.py`.
 
 ## Use it somewhere new
 

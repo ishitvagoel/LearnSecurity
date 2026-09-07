@@ -7,13 +7,13 @@
 
 The practice is not a model you attack. It is a tiny Python `run_tool` that returns `ran {name}` for every name. The failure is already in the function: it never looks at the name. That always-run call is a **failed rule**, not a paperwork nit.
 
-The rule under test:
+Here is the rule:
 
 > An agent must not run `exec_sql` because the model asked. If `run_tool("exec_sql", {})` returns a ran-string, the runtime has failed as a security control.
 
 ## Where you may practice
 
-Only `labs/E1/e1-lab` is in scope. The practice is an in-process `run_tool(name, args)`. The names are synthetic strings `exec_sql` / `search_notes`. Do **not** send prompts to a public language model, production agent, or clinic summarizer as the exercise.
+Stay inside `labs/E1/e1-lab`. The practice is an in-process `run_tool(name, args)`. The names are synthetic strings `exec_sql` / `search_notes`. Do **not** send prompts to a public language model, production agent, or clinic summarizer as the exercise.
 
 Do not paste this exercise onto a public API, employer agent, or live hospital summarizer "to see what happens."
 
@@ -39,7 +39,7 @@ Read `vulnerable/tools.py`. It returns `ran {name}` for every name. Tests:
 - `test_exec_sql_tool_is_denied`
 - `test_allowlisted_search_notes_may_run` — `search_notes` may pass on both
 
-You do not need a new tool name. The failure of `test_exec_sql_tool_is_denied` *is* the evidence.
+You do not need a new tool name. When `test_exec_sql_tool_is_denied` fails, that is the evidence.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -64,8 +64,6 @@ You do not need a new tool name. The failure of `test_exec_sql_tool_is_denied` *
 A tool library will expose whatever tools you pass. A system prompt is another string the model may ignore. The web framework will still run whatever handler you wired. The notes app's summarizer will still run `exec_sql` if `run_tool` is always-run. The app's promise this week is: **this** practice, `exec_sql` is None.
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/E1/e1-lab/tests --impl vulnerable

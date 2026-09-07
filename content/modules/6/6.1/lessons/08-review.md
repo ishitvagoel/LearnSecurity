@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 This review is about notes-app export listing. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `argv_for_list("notes")` still starts `["sh", "-c"]` if they ship. Start at `sh -c` concatenation, not at a scanner color.
 
-The folder `labs/6.1/6.1-lab/vulnerable/` is the change. The check you already ran (`test_does_not_invoke_shell`) is the rule test. A comment “will switch to argv later” is not.
+Treat the files in `labs/6.1/6.1-lab/vulnerable/` as the pull request. You already ran `test_does_not_invoke_shell` — that is the rule. A comment “will switch to argv later” is not.
 
 ## Picture: problems to find (name them yourself)
 
@@ -44,7 +42,7 @@ Also reject: live command execution; closing findings without re-running `test_d
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_does_not_invoke_shell`.
+Write the review that would block this change. Name `test_does_not_invoke_shell`.
 
 ## Use it somewhere new
 

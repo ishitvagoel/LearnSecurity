@@ -55,7 +55,7 @@ A missing or failed attest **denies**. A passed attest still needs the 1.2 grant
 
 ## Practice
 
-Draw the matrix. Point at `labs/8.1/8.1-lab` file `client.py`. Label even in the repaired tree: the server attest decides; the client boolean is not what you trust.
+Draw the matrix. Look in `labs/8.1/8.1-lab`, starting with `client.py`. Label even in the repaired tree: the server attest decides; the client boolean is not what you trust.
 
 ## Use it somewhere new
 

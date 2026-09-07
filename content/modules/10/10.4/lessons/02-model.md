@@ -35,7 +35,7 @@ flowchart LR
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the boot rule you already have and ask what would show production started with debug on.
+Do not start a new list from scratch. Take the boot rule you already have and ask what would show production started with debug on.
 
 | Piece | This system |
 |---|---|
@@ -61,7 +61,7 @@ A missing prod-plus-debug deny is how a compose slogan becomes false assurance. 
 
 ## Practice
 
-Draw the map so someone else could name the checks. Point at `labs/10.4/10.4-lab` file `cfg.py`.
+Look in `labs/10.4/10.4-lab`, starting with `cfg.py`.
 
 ## Use it somewhere new
 

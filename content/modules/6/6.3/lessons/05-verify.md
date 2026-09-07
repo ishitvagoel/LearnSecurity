@@ -44,14 +44,12 @@ Honest same-origin-with-token may pass on both (broken files allow any cookie). 
 
 ## Practice
 
-Run both this session:
-
 ```text
 python3 -m pytest labs/6.3/6.3-lab/tests --impl vulnerable
 python3 -m pytest labs/6.3/6.3-lab/tests --impl fixed
 ```
 
-Write the fail/pass pair next to the matrix row. Reject a “test” that only greps `SameSite` in a cookie helper without calling `allow_share` on a foreign origin.
+Write fail or pass next to the matrix row. Reject a “test” that only greps `SameSite` in a cookie helper without calling `allow_share` on a foreign origin.
 
 ## Use it somewhere new
 

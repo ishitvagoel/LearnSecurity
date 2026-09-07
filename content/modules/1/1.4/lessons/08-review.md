@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 This review is about a notes-app recovery confirm and a “risk register.” Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say which outcome (lockout, shortcut/secrecy, or a missing record) breaks if they ship. Start at the confirm widget and the register row, not at a scanner color or an accessibility badge.
 
-The folder `labs/1.4/1.4-risk-register/vulnerable/` is the change. The check you already ran (`test_recovery_control_is_usable_and_accessible`) is the rule test. A comment “will fix accessibility later” is not.
+Treat the files in `labs/1.4/1.4-risk-register/vulnerable/` as the pull request. You already ran `test_recovery_control_is_usable_and_accessible` — that is the rule. A comment “will fix accessibility later” is not.
 
 ## Picture: problems to find (name them yourself)
 
@@ -40,7 +38,7 @@ Also reject: trusting the browser as the vault; closing a finding without re-run
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_recovery_control_is_usable_and_accessible`.
+Write the review that would block this change. Name `test_recovery_control_is_usable_and_accessible`.
 
 ## Use it somewhere new
 

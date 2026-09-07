@@ -50,14 +50,12 @@ A test that only greps a crash product name in Gradle without calling `crash_rep
 
 ## Practice
 
-Run both this session from the lab directory if needed:
-
 ```text
 python3 -m pytest labs/8.5/8.5-lab/tests --impl vulnerable
 python3 -m pytest labs/8.5/8.5-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail/pass into your notes next to the body×crash row. Reject a “test” that only greps a crash product name without calling `crash_report("secret")`.
+Paste nothing from answer keys. Write fail or pass next to the body×crash row. Reject a “test” that only greps a crash product name without calling `crash_report("secret")`.
 
 ## Use it somewhere new
 

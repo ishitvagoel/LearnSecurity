@@ -11,7 +11,7 @@ Do not paste the matching line into Slack, a ticket, or a lesson note.
 
 ## Picture: alert on the substring, then purge
 
-A redaction miss is a notice-and-recover problem, not a licence to quote the secret in the paging channel. Notice names the event. Recover purges the line. Neither reprints the body.
+A redaction miss is a notice-and-recover problem, not a licence to quote the secret in the paging channel. Name the event when you notice it. Recover purges the line. Neither reprints the body.
 
 ```mermaid
 flowchart TD
@@ -51,7 +51,7 @@ If operators see a redaction-miss badge, do not encode it as color only. Give it
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body). Tie it to `labs/3.1/3.1-lab`. Reject any line that includes `tenant-A-secret-body`, a note body, a patient chart, or a card number.
+For `labs/3.1/3.1-lab`, write a log line (ids, reason, no body). Reject any line that includes `tenant-A-secret-body`, a note body, a patient chart, or a card number.
 
 ## Use it somewhere new
 

@@ -64,7 +64,7 @@ Each always-name id (`cross-tenant-read`, `hostile-browser`, `stolen-worker`) ne
 
 ## Practice
 
-Draw this map so someone else could name the checks. Point at `labs/3.2/3.2-lab` file `model.py`.
+Look in `labs/3.2/3.2-lab`, starting with `model.py`.
 
 ## Use it somewhere new
 
@@ -76,4 +76,4 @@ Unknown unknowns. Review triggers exist for that. Privacy-method stickers wait f
 
 ## What this page is not doing
 
-Treating a Top 10 as the definition of security. Answer keys are not on this site.
+Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.

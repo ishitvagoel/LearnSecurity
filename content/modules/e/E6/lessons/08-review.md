@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/E6/e6-lab/vulnerable/` as a change to the notes app’s leftover-risk register. Check whether `accept_exception({"owner": "", "review_by": None})` still returns true.
 
-Start at `accept_exception` and the empty-owner row, not at a scanner color or a maturity screenshot. The check you already ran (`test_exception_needs_owner_review_and_wcag`) is the rule test. A comment “will add dates later” is not.
+Start at `accept_exception` and the empty-owner row, not at a scanner color or a maturity screenshot. You already ran `test_exception_needs_owner_review_and_wcag` — that is the rule. A comment “will add dates later” is not.
 
 ## Picture: accept with empty owner
 
@@ -46,7 +44,7 @@ Also reject: live disclosure; shipping without re-running `test_exception_needs_
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_exception_needs_owner_review_and_wcag`.
+Write the review that would block this change. Name `test_exception_needs_owner_review_and_wcag`.
 
 ## Use it somewhere new
 

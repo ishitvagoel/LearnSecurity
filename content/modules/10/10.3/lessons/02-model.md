@@ -36,7 +36,7 @@ The cloud's hypervisor is not your ClusterRoleBinding.
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the cluster you already have and ask what would show cluster-admin is still allowed.
+Do not start a new list from scratch. Take the cluster you already have and ask what would show cluster-admin is still allowed.
 
 | Piece | This system |
 |---|---|
@@ -62,7 +62,7 @@ A private namespace with `pod_ok` always true is how "we isolated it" becomes cl
 
 ## Practice
 
-Draw the map. Point at `labs/10.3/10.3-lab` file `iam.py`.
+Draw the map. Look in `labs/10.3/10.3-lab`, starting with `iam.py`.
 
 ## Use it somewhere new
 

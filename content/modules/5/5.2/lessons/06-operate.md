@@ -11,7 +11,7 @@ Do not log plaintext bodies. Do not paste an SSN into the ticket.
 
 ## Picture: CI is a detector
 
-A known-plaintext Base64 hit is a notice-and-recover problem, not a licence to quote the body in the paging channel. Notice names the event. Recover re-protects and rotates keys. Neither reprints the body.
+A known-plaintext Base64 hit is a notice-and-recover problem, not a licence to quote the body in the paging channel. Name the event when you notice it. Recover re-protects and rotates keys. Neither reprints the body.
 
 ```mermaid
 flowchart TD
@@ -50,7 +50,7 @@ A cloud key dashboard will show “key enabled” and stay silent when the colum
 
 ## Practice
 
-Write one log line you would accept in review (ids, reason, no body). Tie it to `labs/5.2/5.2-lab`. Reject any line that includes plaintext `secret`, a real SSN, or “AES handled.”
+For `labs/5.2/5.2-lab`, write a log line (ids, reason, no body). Reject any line that includes plaintext `secret`, a real SSN, or “AES handled.”
 
 ## Use it somewhere new
 

@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 This review is about notes-app share. Check whether `allow_share` for a foreign origin with `token=None` is still true.
 
-The folder `labs/6.3/6.3-lab/vulnerable/` is the change. The check you already ran (`test_foreign_origin_post_is_denied`) is the rule test. A comment “will add CSRF later” is not.
+Treat the files in `labs/6.3/6.3-lab/vulnerable/` as the pull request. You already ran `test_foreign_origin_post_is_denied` — that is the rule. A comment “will add CSRF later” is not.
 
 ## Picture: leftover cookie auth + no Origin check
 
@@ -46,7 +44,7 @@ Also reject: live third-party CSRF; closing findings without re-running `test_fo
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_foreign_origin_post_is_denied`.
+Write the review that would block this change. Name `test_foreign_origin_post_is_denied`.
 
 ## Use it somewhere new
 

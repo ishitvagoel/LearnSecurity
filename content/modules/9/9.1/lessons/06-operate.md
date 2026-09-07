@@ -52,7 +52,7 @@ A human exception path must say what is still uncovered and when it expires. Do 
 
 ## Practice
 
-Write one log line you would accept in review. Tie it to `labs/9.1/9.1-lab`.
+For `labs/9.1/9.1-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=unmapped_req_blocks_release req=AUTHZ-1 release=rel_91e

@@ -55,7 +55,7 @@ This lab is the leftover-cookie helper. Do not treat a Bearer-only API as “CSR
 
 ## Practice
 
-Fill the matrix. Point at `labs/6.3/6.3-lab` file `csrf.py`.
+Fill the matrix. Look in `labs/6.3/6.3-lab`, starting with `csrf.py`.
 
 ## Use it somewhere new
 
@@ -67,4 +67,4 @@ Clickjacking; CORS credentials; advanced authenticated embeds; lookalike UI from
 
 ## What this page is not doing
 
-A famous-bugs list as the definition of security. Answer keys are not on this site.
+Do not treat a famous-bugs list as the definition of security. Answer keys are not on this site.

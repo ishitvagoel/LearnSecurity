@@ -49,14 +49,12 @@ A test that only greps a scanner name in a workflow without calling `ship_ok([HI
 
 ## Practice
 
-Run both this session from the lab directory if needed:
-
 ```text
 python3 -m pytest labs/9.4/9.4-lab/tests --impl vulnerable
 python3 -m pytest labs/9.4/9.4-lab/tests --impl fixed
 ```
 
-Paste nothing from answer keys. Write fail/pass into your notes next to the HIGH×map row. Reject a “test” that only greps `codeql` in a workflow without calling `ship_ok([HIGH], {})`.
+Paste nothing from answer keys. Write fail or pass next to the HIGH×map row. Reject a “test” that only greps `codeql` in a workflow without calling `ship_ok([HIGH], {})`.
 
 ## Use it somewhere new
 

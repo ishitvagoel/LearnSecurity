@@ -59,7 +59,7 @@ The client, the app, the model, or the prompt is hostile. What you trust is the 
 
 A missing worker cell is how delayed-machine transfer appears. Write the hole even if this week has no queue.
 
-## Step 4: a catalogue of messy objects, not a bug-list
+## Step 4: a list of messy objects, not a bug-list
 
 Write at least four rows a peer could turn into practice files. Fake identifiers only.
 
@@ -72,7 +72,7 @@ Do not add public JSON bombs or live Unicode weaponization. Those are out of sco
 
 ## Practice
 
-Draw the map so someone else could name the checks without opening the answer-key folder. Point at `labs/2.1/2.1-parser-boundaries` file `parse_note.py`. Label the first-key scan and `json.loads` as two readers even in the repaired tree — the fix is agreement-or-refuse, not pretending the scan became JSON.
+Draw the map so someone else could name the checks without opening the answer-key folder. Look in `labs/2.1/2.1-parser-boundaries`, starting with `parse_note.py`. Label the first-key scan and `json.loads` as two readers even in the repaired tree — the fix is agreement-or-refuse, not pretending the scan became JSON.
 
 ## Use it somewhere new
 

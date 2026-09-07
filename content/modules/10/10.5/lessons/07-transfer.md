@@ -18,7 +18,7 @@ Renaming “note” to “chart” is not transfer. Recovery evidence, log inven
 | Notes app this week | Clinic sketch |
 |---|---|
 | Incident ticket with recovery + logs | Clinic ticket with the same two fields |
-| Restore drill before close | Same restore evidence on a **local** practice files |
+| Restore drill before close | Same restore evidence on **local** practice files |
 | `close_incident({"recovery": "todo", "logs": "ok"})` | Same call — recovery todo still denied |
 | Optimistic closer / still-in actor | Same closer — **not** a live clinic SIEM |
 | SIEM green / paging / known-exploited list | Same inputs — not the close decision |
@@ -39,7 +39,7 @@ A recovery todo still has to be denied, and a note body still has to stay out. D
 1. who can act (optimistic closer / still-in actor — not a live clinic SIEM attack);
 2. what you trust (recovery done and no `note_body` is the promise; SIEM, paging, known-exploited list, and untested backups are not);
 3. what must not happen (`close_incident` true while recovery is todo, not a legal label);
-4. a test idea on a **local** practice files only (no live paging);
+4. a test idea on **local** practice files only (no live paging);
 5. leftover (imperfect forensics, observability as a way out, support-tool god-mode, logging every authorization decision without the sensitive data);
 6. whether engineers read the runbook under stress (plain language, not color-only severity).
 

@@ -21,7 +21,7 @@ Renaming “export helper” to “report template” is not transfer.
 |---|---|
 | `x = eval(user)` approved | Template eval of a patient field approved |
 | `review_ok` | Template-change review helper |
-| `'eval(' not in diff` stand-in | Same stand-in on a local practice files |
+| `'eval(' not in diff` stand-in | Same stand-in on local practice files |
 | Optimistic reviewer | Compromised designer — **not** a live clinic |
 
 ```mermaid
@@ -30,7 +30,7 @@ flowchart LR
   Eval[eval of field] --> Reality[patient field becomes code]
 ```
 
-If designers “need expressions” while `review_ok` is always true, the check is gone. Formatter continuous integration, a linter, and “a bot reviewed it” (later, 9.4) do not ask the interpreter question. Terraform `local-exec` and GitHub Actions `run:` are the same interpreter family — name them, do not run those systems here. The lab substring is a stand-in, not a complete oracle.
+If designers “need expressions” while `review_ok` is always true, the check is gone. Formatter continuous integration, a linter, and “a bot reviewed it” (later, 9.4) do not ask the interpreter question. Terraform `local-exec` and GitHub Actions `run:` are the same interpreter family — name them, do not run those systems here. The lab substring is a stand-in, not a complete check.
 
 Eval-on-user still has to be rejected. Honest `int(user)` may still pass. Formatting the template without an interpreter question leaves `review_ok` true. The local check is `test_eval_on_user_input_is_rejected` — on a practice, not a live GitHub org.
 
@@ -39,7 +39,7 @@ Eval-on-user still has to be rejected. Honest `int(user)` may still pass. Format
 1. who can act (template author / compromised designer — not a live clinic);
 2. what you trust (review of interpreters is what you trust; formatter “looks good” is not);
 3. what must not happen (`review_ok` true for eval-on-user, not a legal label);
-4. a test idea on a **local** practice files only (no weaponized eval — never on the real clinic);
+4. a test idea on **local** practice files only (no weaponized eval — never on the real clinic);
 5. leftover (substring stand-in, `exec(`, generated templates, later elective);
 6. whether a human-read “change blocked” status must say “eval on user input,” not only a code (readable error, not color alone).
 
@@ -59,4 +59,4 @@ One page. No answer keys. The only running system you may break is `labs/9.2/9.2
 
 ## What this page is not doing
 
-Weaponized eval. Live orgs. Claiming a course gate from this page.
+Weaponized eval. Live orgs. This page does not finish a check-in.

@@ -53,7 +53,7 @@ That leftover is 5.3 — secrets in the artifact. Minify does not solve it.
 
 ## Practice
 
-Draw the map. Point at `labs/8.4/8.4-lab` file `build.py`. Label the always-true helper even in the repaired tree — the fix is release plus attest, not pretending minify became a grant.
+Draw the map. Look in `labs/8.4/8.4-lab`, starting with `build.py`. Label the always-true helper even in the repaired tree — the fix is release plus attest, not pretending minify became a grant.
 
 ## Use it somewhere new
 

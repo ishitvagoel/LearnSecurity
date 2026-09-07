@@ -36,7 +36,7 @@ If a human sees “access denied,” announce it in text a screen reader can spe
 
 ## Practice
 
-Write one log line you would accept. Tie it to `labs/4.4/4.4-lab`.
+For `labs/4.4/4.4-lab`, write a log line you would accept.
 
 ```text
 log_denied reason=authz_deny tenant=acme object_id=n2 user_id=bob request_id=req_44ac

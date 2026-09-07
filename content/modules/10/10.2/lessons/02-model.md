@@ -34,7 +34,7 @@ Lockfile verify is the install check. An SBOM is inventory. Provenance is extra.
 
 ## Step 1: name the pieces
 
-Do not invent a new catalogue. Take the install rule you already have and ask which check would show it is false.
+Do not start a new list from scratch. Take the install rule you already have and ask which check would show it is false.
 
 | Piece | This system |
 |---|---|
@@ -60,7 +60,7 @@ A missing hash-compare cell is how a package name becomes false assurance. Write
 
 ## Practice
 
-Draw the map so someone else could name the checks. Point at `labs/10.2/10.2-lab` file `lock.py`.
+Look in `labs/10.2/10.2-lab`, starting with `lock.py`.
 
 ## Use it somewhere new
 

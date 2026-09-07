@@ -18,7 +18,7 @@ Renaming “note” to “chart” is not transfer. Surfaces, threat-model id, a
 | Notes app this week | Clinic sketch |
 |---|---|
 | Empty change must not merge | Empty change must not merge |
-| `merge_ok({})` | `merge_ok({})` on a local practice files |
+| `merge_ok({})` | `merge_ok({})` on local practice files |
 | Schedule pressure | Same actor — **not** a live clinic |
 | `{"threat_model": "TM-12"}` may merge | Same dict on the local practice files |
 | CODEOWNERS is who clicks | CODEOWNERS plus a training checkbox |
@@ -40,7 +40,7 @@ Also name the exception path (E6): an exception still names the missing threat m
 1. who can act (schedule pressure — not a live clinic);
 2. what you trust (the merge check is the promise; CODEOWNERS, training, and a maturity score are not);
 3. what must not happen (`merge_ok({})` true, not a legal label);
-4. a test idea on a **local** practice files only (no live GitHub org);
+4. a test idea on **local** practice files only (no live GitHub org);
 5. leftover (stale threat-model id, vanity ticket counts, exceptions without expiry);
 6. whether a human merge path exists (must say which surface needs a threat-model id).
 

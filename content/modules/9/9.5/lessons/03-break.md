@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny Python `close_finding` that returns true for every dict. The failure is already in the function: it never looks at `retest`. That always-true close is a **failed rule**, not a paperwork nit.
 
-The rule under test:
+Here is the rule:
 
 > A finding must not close without a passing retest of the same bad result. If `close_finding({"retest": None})` returns true, the close gate has failed as a security control.
 
 ## Where you may practice
 
-Only `labs/9.5/9.5-lab` is in scope. The practice is an in-process `close_finding(f)`. The finding is a synthetic dict. Do **not** scan, exploit, or "verify" any public or third-party system.
+Stay inside `labs/9.5/9.5-lab`. The practice is an in-process `close_finding(f)`. The finding is a synthetic dict. Do **not** scan, exploit, or "verify" any public or third-party system.
 
 Do not paste this exercise onto a public clinic, employer tracker, or live hospital portal "to see what happens."
 
@@ -28,7 +28,7 @@ flowchart TD
   Any[any finding dict] --> True[close_finding true]
 ```
 
-The broken files take that path on purpose. You do not need a testing catalogue. You must not pentest a public host. The true return for `{retest: None}` *is* the leak.
+The broken files take that path on purpose. You do not need a testing-guide list. You must not pentest a public host. The true return for `{retest: None}` *is* the leak.
 
 The isolation lesson already said HTTP 200 is not a security test. This check is **the same isolation check must pass before close**.
 
@@ -39,7 +39,7 @@ Read `vulnerable/pentest.py`. It returns true for every dict. Tests:
 - `test_cannot_close_without_retest`
 - `test_passing_retest_may_close` — `{retest: "pass"}` may pass on both
 
-You do not need a new finding key. The failure of `test_cannot_close_without_retest` *is* the evidence.
+You do not need a new finding key. When `test_cannot_close_without_retest` fails, that is the evidence.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -65,8 +65,6 @@ A ticket tracker will show Done. A pentest vendor PDF is evidence that *someone 
 
 ## Practice
 
-From the repository root, in a throwaway environment:
-
 ```text
 python3 -m pytest labs/9.5/9.5-lab/tests --impl vulnerable
 ```
@@ -79,4 +77,4 @@ Clinic PDF on a shelf: predict without leaving this directory. Do not pentest a 
 
 ## What this page is not doing
 
-No live-target, weaponized, or copy-paste exploit instructions. Fake finding dicts only. This page does not mark you as finished. If you mention a newer testing-catalogue draft, say it is a draft.
+No live-target, weaponized, or copy-paste exploit instructions. Fake finding dicts only. This page does not mark you as finished. If you mention a newer testing-guide draft, say it is a draft.

@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny Python `allowed`. It does not open a network. The failure is already in the function: it treats any `http` or `https` scheme as fine. A link-local metadata URL counting as an allowed peer is a **failed rule**, not a trophy fetch of cloud identity.
 
-The rule under test:
+Here is the rule:
 
 > A link-local metadata URL is not an allowed peer. `allowed` must be false for that named string. This practice checks the predicate only. It does not fetch.
 
 ## Where you may practice
 
-Only `labs/6.5/6.5-lab` is in scope. The maps are in-process: `allowed`. Fake URLs. **Do not fetch.** Restore the broken and repaired folders when you are done.
+Stay inside `labs/6.5/6.5-lab`. The maps are in-process: `allowed`. Fake URLs. **Do not fetch.** Restore the broken and repaired folders when you are done.
 
 Do not probe cloud metadata. Do not probe public hosts. Do not probe an employer PDF importer. Do not paste a live URL “to see what happens.”
 
@@ -41,7 +41,7 @@ Read `vulnerable/ssrf.py`. It returns true for any `http`/`https` scheme. Tests:
 - `test_loopback_is_denied`
 - `test_lab_host_https_ok` — honest named host; may pass on the broken files because any https is true
 
-You do not need a new URL. The failure of `test_link_local_metadata_is_denied` *is* the evidence.
+You do not need a new URL. When `test_link_local_metadata_is_denied` fails, that is the evidence.
 
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
@@ -68,8 +68,6 @@ You do not need a new URL. The failure of `test_link_local_metadata_is_denied` *
 `requests.get(user_url)` will dial whoever you pass. FastAPI has no outbound allow-list. urllib `urlparse` is not a policy. What this practice is supposed to show: a link-local metadata URL is False. **Do not curl anything.**
 
 ## Practice
-
-From the repository root, in a throwaway environment:
 
 ```text
 python3 -m pytest labs/6.5/6.5-lab/tests --impl vulnerable

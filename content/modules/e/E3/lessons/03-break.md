@@ -7,13 +7,13 @@
 
 The practice is not a website you attack. It is a tiny in-process `capture(key)` / `charge_count()` list. It does not open a browser, talk to a payment network, or scrape a clinic billing page. The failure is already in the object: every call appends a charge and ignores whether the key was seen. That is a **failed rule**, not a clumsy click.
 
-The rule under test:
+Here is the rule:
 
 > Two `capture("k1")` calls must leave `charge_count() == 1`. The first capture may succeed.
 
 ## Where you may practice
 
-Only `labs/E3/e3-lab` is in scope. Fake keys only. Restore the broken and repaired folders when you are done.
+Stay inside `labs/E3/e3-lab`. Fake keys only. Restore the broken and repaired folders when you are done.
 
 Do not charge, refund, or scrape a real processor, a clinic billing system, or a public store as the exercise. No real card numbers. No real PAN.
 
@@ -39,7 +39,7 @@ Read `vulnerable/pay.py`. `capture` appends on every call. Checks:
 - `test_duplicate_capture_does_not_double_charge`
 - `test_first_capture_may_charge` — first `k1` may pass on both
 
-You do not need a new key. The failure of `test_duplicate_capture_does_not_double_charge` *is* the evidence.
+You do not need a new key. When `test_duplicate_capture_does_not_double_charge` fails, that is the evidence.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

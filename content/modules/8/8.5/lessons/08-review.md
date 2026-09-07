@@ -3,13 +3,11 @@
 **Kind:** code-review
 **Loop step:** Review
 
-Wait until someone has looked at your review before opening the keys.
-
 ## What you are reviewing
 
 Review `labs/8.5/8.5-lab/vulnerable/` as a change to the notes app’s crash telemetry. Check whether `crash_report("secret")` still contains `'secret'`.
 
-Start at `crash_report` and the body×crash row, not at a scanner color or a store screenshot. The check you already ran (`test_crash_report_omits_note_body`) is the rule test. A comment “will redact later” is not.
+Start at `crash_report` and the body×crash row, not at a scanner color or a store screenshot. You already ran `test_crash_report_omits_note_body` — that is the rule. A comment “will redact later” is not.
 
 ## Picture: crash_report includes the body
 
@@ -40,13 +38,13 @@ Also reject: live vendor payloads; closing findings without re-running `test_cra
 
 - Store privacy labels are controls
 - Debug logs stay on the device
-- A testing catalogue is a scanner
+- A testing-guide list is a scanner
 - HTTPS to the vendor is redaction
 - An old privacy-level sticker is the current bar
 
 ## Practice
 
-Write the review that blocks this change. Mention `test_crash_report_omits_note_body`.
+Write the review that would block this change. Name `test_crash_report_omits_note_body`.
 
 ## Use it somewhere new
 
