@@ -40,7 +40,7 @@ Also reject: trusting the client; concatenating readers; Report-Only as enforcem
 
 ## Use it somewhere new
 
-GraphQL and REST both ingest the same note — two grammars. A change that “validates JSON” on only one path is an incomplete review. Name the independent falsehood that would still stop a two-meaning ingest.
+GraphQL and REST both ingest the same note — two grammars. A change that “validates JSON” on only one path is an incomplete review. What would still make duplicate keys one meaning on both grammars?
 
 ## What this page is not doing
 

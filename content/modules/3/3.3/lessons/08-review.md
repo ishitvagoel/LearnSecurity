@@ -42,7 +42,7 @@ Also reject: treating the client as what you trust; closing findings without re-
 
 ## Use it somewhere new
 
-A serverless change that “uses a managed database” without a same-company check is an incomplete review. Name the independent falsehood that would still keep `tB` from reading `tA`.
+A serverless change that “uses a managed database” without a same-company check is an incomplete review. What would still stop `tB` from reading `tA` on a managed database?
 
 ## What this page is not doing
 

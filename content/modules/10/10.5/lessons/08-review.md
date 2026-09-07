@@ -44,7 +44,7 @@ Also reject: live incident attacks; closing without re-running both deny tests; 
 
 ## Use it somewhere new
 
-Clinic change that “wired paging and a known-exploited feed” without a recovery-done check is an incomplete close-gate review. Name the independent falsehood that would still keep todo from closing.
+Clinic change that “wired paging and a known-exploited feed” without a recovery-done check is an incomplete close-gate review. What would still keep a recovery-todo incident from closing?
 
 ## Can people still use it
 

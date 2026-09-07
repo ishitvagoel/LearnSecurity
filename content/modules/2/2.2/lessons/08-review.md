@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-You are reviewing a notes-app edge cache. Label each claim **rule**, **tool**, or **false assurance**. Say whether company B can read company A’s body if they ship. Start at the store key. An HTTPS checkbox is the wrong starting place.
+This edge-cache review starts at the store key. Mark each claim **rule**, **tool**, or **false assurance**, and say whether company B can read company A’s body if they ship. An HTTPS checkbox is the wrong starting place.
 
 Reconstruct whether the store still keys only on path. Compare that with the rule. Write changes a developer can verify. `test_other_tenant_does_not_receive_cached_body` is the check. “Will add Vary later” is a postponement.
 
@@ -42,7 +42,7 @@ Also reject: client `X-Tenant` as key input; `Vary: Cookie` as forever; Report-O
 
 ## Use it somewhere new
 
-Authenticated RSS or export CSV via CDN. A change that “turns on HTTPS” on only the browser hop is an incomplete check-every-path review. Name the independent falsehood that would still stop company B from receiving company A’s body.
+Authenticated RSS or export CSV via CDN. A change that “turns on HTTPS” on only the browser hop is an incomplete check-every-path review. What still has to be in the cache key so B cannot read A’s body over HTTPS?
 
 ## What this page is not doing
 

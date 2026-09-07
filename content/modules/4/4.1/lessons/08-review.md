@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-You are reviewing offboarding. Label each claim **rule**, **tool**, or **false assurance**. Say whether `session_valid("alice")` is still true after `delete_user` if they ship. Start at the leftover session after delete. An HR ticket does not kill the cookie.
+Offboarding review starts at the leftover session after delete. Tag each claim **rule**, **tool**, or **false assurance**, and say whether `session_valid("alice")` is still true after `delete_user`. An HR ticket does not kill the cookie.
 
 The review is whether `test_deleted_user_session_is_dead` passes, not whether someone wrote “will revoke sessions later.”
 
@@ -42,7 +42,7 @@ Also reject: trusting the browser as the vault; closing findings without re-runn
 
 ## Use it somewhere new
 
-Clinic change that “disables the badge” without killing the chart session is an incomplete review of leftover access. Name the independent falsehood that would still keep `session_valid` false after offboard.
+Clinic change that “disables the badge” without killing the chart session is an incomplete review of leftover access. Which leftover still has to die so `session_valid` is false after offboard?
 
 ## Can people still use it
 

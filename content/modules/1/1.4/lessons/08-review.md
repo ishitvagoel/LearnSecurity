@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-You are reviewing a notes-app recovery confirm and a “risk register.” Label each claim **rule**, **tool**, or **false assurance**. Say which outcome (lockout, shortcut/secrecy, or a missing record) breaks if they ship. Open the confirm widget and the register row. An accessibility badge can wait.
+Review the recovery confirm and the risk register. Mark each claim **rule**, **tool**, or **false assurance**, and say whether lockout, a shortcut that leaks, or a missing record would land if they ship. Open the confirm widget and the register row. An accessibility badge can wait.
 
 The review is whether `test_recovery_control_is_usable_and_accessible` passes, not whether someone wrote “will fix accessibility later.”
 

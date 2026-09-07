@@ -42,7 +42,7 @@ Also reject: `localStorage` for session; trusting the client as what you trust; 
 
 ## Use it somewhere new
 
-Clinic portal or WebView bridge. A change that “adds CSP3” without HttpOnly on the session is an incomplete review. Name the independent falsehood that would still stop script from reading the token.
+Clinic portal or WebView bridge. A change that “adds CSP3” without HttpOnly on the session is an incomplete review. What would still stop script from reading the token if CSP3 is on?
 
 ## What this page is not doing
 

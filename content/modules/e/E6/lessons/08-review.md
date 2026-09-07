@@ -44,7 +44,7 @@ Also reject: live disclosure; shipping without re-running `test_exception_needs_
 
 ## Use it somewhere new
 
-Clinic change that “added a HIPAA slide and a maturity score” without owner / review / accessibility is an incomplete register review. Name the independent falsehood that would still keep empty owner from accepting.
+Clinic change that “added a HIPAA slide and a maturity score” without owner / review / accessibility is an incomplete register review. What would still keep an empty-owner exception from being accepted?
 
 ## Can people still use it
 

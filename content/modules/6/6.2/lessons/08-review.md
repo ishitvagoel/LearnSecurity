@@ -44,7 +44,7 @@ Also reject: attack-recipe payloads in the change description; closing findings 
 
 ## Use it somewhere new
 
-A clinic change that “added a content-security policy” without an encode check is an incomplete review. Name the independent falsehood that would still keep `<` from remaining markup.
+A clinic change that “added a content-security policy” without an encode check is an incomplete review. What still has to encode `<` even if a content-security policy is set?
 
 ## What this page is not doing
 

@@ -44,7 +44,7 @@ Also reject: live tenants; closing findings without re-running `test_unmapped_hi
 
 ## Use it somewhere new
 
-Clinic change that “enabled code scanning” without a mapping check is an incomplete ship-gate review. Name the independent falsehood that would still keep unmapped HIGH from shipping.
+Clinic change that “enabled code scanning” without a mapping check is an incomplete ship-gate review. What would still block an unmapped HIGH after code scanning is on?
 
 ## Can people still use it
 

@@ -44,7 +44,7 @@ Also reject: a live script hunt; shipping without re-running `test_report_only_i
 
 ## Use it somewhere new
 
-A clinic change that “added Report-Only and a dashboard” without an enforcing header is an incomplete isolation review. Name the independent falsehood that would still keep Report-Only from counting as on.
+A clinic change that “added Report-Only and a dashboard” without an enforcing header is an incomplete isolation review. What would still keep Report-Only from counting as enforcement?
 
 ## What this page is not doing
 

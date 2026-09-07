@@ -44,7 +44,7 @@ Also reject: live store reverse engineering; closing findings without re-running
 
 ## Use it somewhere new
 
-A clinic change that “enabled R8 and Play App Signing” without a debug-to-prod deny check is an incomplete channel review. Name the independent falsehood that would still keep debug plus ok false.
+A clinic change that “enabled R8 and Play App Signing” without a debug-to-prod deny check is an incomplete channel review. What would still keep a debug build from calling prod even if R8 is on?
 
 ## What this page is not doing
 

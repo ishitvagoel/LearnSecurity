@@ -1029,6 +1029,14 @@ const PROSE_PHRASES: [RegExp, string][] = [
   ],
   [/, not at a scanner color or an? ([^.]+)\./g, ". A $1 can wait."],
   [/, not at a scanner color\./g, "."],
+  [
+    /Name the independent falsehood that would still keep /g,
+    "What would still keep ",
+  ],
+  [
+    /Name the independent falsehood that would still stop /g,
+    "What would still stop ",
+  ],
 ];
 
 const HIDDEN_LAB_NOTES = [

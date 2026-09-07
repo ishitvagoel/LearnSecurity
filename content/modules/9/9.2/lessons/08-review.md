@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-You are reviewing merge gating. Label each claim **rule**, **tool**, or **false assurance**. Say whether `review_ok("x = eval(user)")` still returns true if they ship. Start at always-true `review_ok`, not at a coverage tile.
+This merge-gate review starts at always-true `review_ok`. For each claim, mark **rule**, **tool**, or **false assurance** — and whether `review_ok("x = eval(user)")` is still true if they ship. Skip the coverage tile.
 
 `test_eval_on_user_input_is_rejected` still fails if the only change is a note about banning eval later.
 
@@ -44,7 +44,7 @@ Also reject: weaponized eval; closing findings without re-running `test_eval_on_
 
 ## Use it somewhere new
 
-Clinic change that “continuous integration formatted the template” without an interpreter question is an incomplete review. Name the independent falsehood that would still keep eval-on-user rejected.
+Clinic change that “continuous integration formatted the template” without an interpreter question is an incomplete review. Which assumption still rejects eval on a user string even if CI formatted the template?
 
 ## What this page is not doing
 

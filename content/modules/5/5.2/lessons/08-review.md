@@ -42,7 +42,7 @@ Also reject: rolling a cipher; closing findings without re-running `test_protect
 
 ## Use it somewhere new
 
-Clinic change that renames a column to `ssn_encrypted` without a reversibility test is an incomplete review. Name the independent falsehood that would still keep Base64 from round-tripping the SSN.
+Clinic change that renames a column to `ssn_encrypted` without a reversibility test is an incomplete review. What still has to fail so Base64 cannot round-trip the SSN?
 
 ## What this page is not doing
 

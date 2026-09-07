@@ -47,7 +47,7 @@ Also reject: live orgs; merging without re-running `test_merge_requires_threat_m
 
 ## Use it somewhere new
 
-Clinic change that “added annual HIPAA training” without a merge check is an incomplete review of the culture. Name the independent falsehood that would still keep empty changes from merging.
+Clinic change that “added annual HIPAA training” without a merge check is an incomplete review of the culture. What still has to be on the change so empty threat-model ids cannot merge?
 
 ## Can people still use it
 

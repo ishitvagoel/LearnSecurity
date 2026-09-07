@@ -42,7 +42,7 @@ Also reject: treating the client as what you trust; an awareness list cited as a
 
 ## Use it somewhere new
 
-Clinic SMS change that “adds a HIPAA sticker” without seeding `sms-content-leak` is an incomplete review. Name the independent falsehood that would still keep `cross-tenant-read` present on green.
+Clinic SMS change that “adds a HIPAA sticker” without seeding `sms-content-leak` is an incomplete review. What still has to be on the model so `cross-tenant-read` survives a green scan?
 
 ## What this page is not doing
 

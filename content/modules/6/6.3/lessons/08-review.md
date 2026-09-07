@@ -44,7 +44,7 @@ Also reject: live third-party CSRF; closing findings without re-running `test_fo
 
 ## Use it somewhere new
 
-Clinic change that “set SameSite=Lax” without an origin-and-token test is an incomplete review of leftover cookies. Name the independent falsehood that would still keep a foreign origin from sharing.
+Clinic change that “set SameSite=Lax” without an origin-and-token test is an incomplete review of leftover cookies. What would still stop a foreign origin from posting after SameSite=Lax?
 
 ## What this page is not doing
 

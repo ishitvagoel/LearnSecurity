@@ -44,7 +44,7 @@ Also reject: live device imaging; closing findings without re-running `test_cach
 
 ## Use it somewhere new
 
-A clinic change that “stored charts internally with a fingerprint lock” without a plaintext-on-disk check is an incomplete review. Name the independent falsehood that would still keep `'secret'` off disk.
+A clinic change that “stored charts internally with a fingerprint lock” without a plaintext-on-disk check is an incomplete review. What still has to wrap the file so `'secret'` is not plaintext on disk?
 
 ## What this page is not doing
 

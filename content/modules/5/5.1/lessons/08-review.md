@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-You are reviewing deletion. Label each claim **rule**, **tool**, or **false assurance**. Say whether `body_retained("alice")` is still `"secret"` after `delete_account("alice")` if they ship. Start at leftover analytics after delete. A contract ticket is the wrong starting place.
+On deletion, start at leftover analytics. For each claim, mark **rule**, **tool**, or **false assurance**, and say whether `body_retained("alice")` is still `"secret"` after `delete_account("alice")`. A contract ticket is the wrong starting place.
 
 `test_deleted_account_leaves_no_analytics_body` is the check. “Will add warehouse purge later” is a postponement.
 
@@ -42,7 +42,7 @@ Also reject: trusting the client; closing findings without re-running `test_dele
 
 ## Use it somewhere new
 
-Clinic change that “deletes the patient” without walking the appointment-card notes is an incomplete review of leftover copies. Name the independent falsehood that would still keep `body_retained` None.
+Clinic change that “deletes the patient” without walking the appointment-card notes is an incomplete review of leftover copies. What would still keep `body_retained` None after the patient row is gone?
 
 ## Can people still use it
 

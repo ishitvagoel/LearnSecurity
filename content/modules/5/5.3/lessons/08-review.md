@@ -42,7 +42,7 @@ Also reject: real production keys in practice files; closing findings without re
 
 ## Use it somewhere new
 
-Clinic change that “moved the key to Vault” without killing the default is an incomplete review. Name the independent falsehood that would still keep `sk-lab-hardcoded` from authenticating.
+Clinic change that “moved the key to Vault” without killing the default is an incomplete review. What still has to be dead so `sk-lab-hardcoded` cannot authenticate after a Vault move?
 
 ## What this page is not doing
 

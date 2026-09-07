@@ -42,7 +42,7 @@ Also reject: live fetches; closing findings without re-running `test_link_local_
 
 ## Use it somewhere new
 
-Clinic change that “switched the importer to HTTPS” without a host allow-list test is an incomplete review of scheme-only URL checks. Name the independent falsehood that would still keep link-local from being allowed.
+Clinic change that “switched the importer to HTTPS” without a host allow-list test is an incomplete review of scheme-only URL checks. What would still deny link-local after the importer is HTTPS-only?
 
 ## What this page is not doing
 

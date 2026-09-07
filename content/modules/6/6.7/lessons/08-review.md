@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-You are reviewing export. Label each claim **rule**, **tool**, or **false assurance**. Say whether `allow(4)` is still true if they ship. Start at unbounded allow, not at a famous API-abuse list.
+Export review starts at unbounded allow. Classify each claim as **rule**, **tool**, or **false assurance**, and say whether `allow(4)` is still true if they ship. A famous API-abuse list is not the fourth-export deny.
 
 A TODO to cap later does not satisfy `test_fourth_export_is_denied`.
 
@@ -44,7 +44,7 @@ Also reject: public load tests; closing findings without re-running `test_fourth
 
 ## Use it somewhere new
 
-Clinic change that “rate-limited at the edge” without a per-person fourth-export test is an incomplete review of unbounded allow. Name the independent falsehood that would still keep `allow(4)` false.
+Clinic change that “rate-limited at the edge” without a per-person fourth-export test is an incomplete review of unbounded allow. What still has to deny so `allow(4)` is false after an edge rate limit?
 
 ## What this page is not doing
 

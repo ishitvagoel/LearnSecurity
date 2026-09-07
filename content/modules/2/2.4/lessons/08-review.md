@@ -43,7 +43,7 @@ Also reject: treating the client as what you trust; an awareness-list name as th
 
 ## Use it somewhere new
 
-Payment capture, invite token, or clinic last slot. A change that “handles the awareness list” without a replay test is an incomplete review. Name the independent falsehood that would still stop a second grant.
+Payment capture, invite token, or clinic last slot. A change that “handles the awareness list” without a replay test is an incomplete review. What still has to be remembered so a second grant cannot land?
 
 ## Can people still use it
 

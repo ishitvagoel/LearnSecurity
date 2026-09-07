@@ -44,7 +44,7 @@ Also reject: live device farms; personal-phone cookbooks; closing findings witho
 
 ## Use it somewhere new
 
-A clinic change that “enabled Play Integrity” without a failing-attest deny check is an incomplete review. Name the independent falsehood that would still keep client ok plus attest fail false.
+A clinic change that “enabled Play Integrity” without a failing-attest deny check is an incomplete review. What still has to deny so client `ok` plus attest fail cannot export?
 
 ## What this page is not doing
 

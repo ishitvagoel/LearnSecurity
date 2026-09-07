@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-You are reviewing logging. Label each claim **rule**, **tool**, or **false assurance**. Say whether the body still lands in the log if they ship. Open `log_event` and the body×log row. A scanner color or a spreadsheet can wait.
+Open `log_event` and the body×log row. For each claim, mark **rule**, **tool**, or **false assurance**, and say whether the body still lands in the log if they ship. A spreadsheet can wait.
 
 “Will redact later” is a promise. `test_note_body_is_not_logged` is the evidence.
 
@@ -43,7 +43,7 @@ Also reject: trusting the browser as the vault; a data-loss product as the rule;
 
 ## Use it somewhere new
 
-Clinic booking card. A change that “adds a Confidential label” without a log test is an incomplete review of where the field can land. Name the independent falsehood that would still keep chart text out of the appointment log.
+Clinic booking card. A change that “adds a Confidential label” without a log test is an incomplete review of where the field can land. What still has to be true so chart text never lands in the appointment log?
 
 ## Can people still use it
 

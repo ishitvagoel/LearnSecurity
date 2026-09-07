@@ -44,7 +44,7 @@ Also reject: live model attacks; shipping without re-running `test_exec_sql_tool
 
 ## Use it somewhere new
 
-Clinic change that "added a system prompt and a famous-bugs mapping" without an allow-list is an incomplete tool-gate review. Name the independent falsehood that would still keep `exec_sql` from running.
+Clinic change that "added a system prompt and a famous-bugs mapping" without an allow-list is an incomplete tool-gate review. What would still keep `exec_sql` from running after a “safe” system prompt?
 
 ## Can people still use it
 

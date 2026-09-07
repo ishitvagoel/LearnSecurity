@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-You are reviewing invite. Label each claim **rule**, **tool**, or **false assurance**. Say whether second `accept("t1")` is still true if they ship. Start at consume-once. A mailer ticket can wait.
+Start at consume-once on the invite. Classify each claim as **rule**, **tool**, or **false assurance**, and say whether a second `accept("t1")` is still true. A mailer ticket can wait.
 
 “Will consume later” does not close `test_invite_token_is_single_use`.
 
@@ -44,7 +44,7 @@ Also reject: live race harnesses; closing findings without re-running `test_invi
 
 ## Use it somewhere new
 
-Clinic change that “added a unique index” without a second-accept test is an incomplete review of consume. Name the independent falsehood that would still keep the second `t1` from succeeding.
+Clinic change that “added a unique index” without a second-accept test is an incomplete review of consume. Write the fact that still stops the second `t1` even if a unique index exists.
 
 ## Can people still use it
 

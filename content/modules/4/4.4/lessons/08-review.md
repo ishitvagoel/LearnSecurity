@@ -44,7 +44,7 @@ Also reject: trusting the client; closing findings without re-running `test_gran
 
 ## Use it somewhere new
 
-Clinic change that “checks the user is a clinician” without keying the chart is an incomplete review of leftover permission. Name the independent falsehood that would still keep Bob from reading n2.
+Clinic change that “checks the user is a clinician” without keying the chart is an incomplete review of leftover permission. What still has to key the object so Bob cannot read n2 with an n1 grant?
 
 ## What this page is not doing
 

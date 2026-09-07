@@ -44,7 +44,7 @@ Also reject: live tenant attacks; merging without re-running `test_revoked_share
 
 ## Use it somewhere new
 
-Clinic change that “added DELETE /guardians and a scanner badge” without a post-revoke read deny is an incomplete next-read review. Name the independent falsehood that would still keep B from reading after revoke.
+Clinic change that “added DELETE /guardians and a scanner badge” without a post-revoke read deny is an incomplete next-read review. What would still keep B from reading after DELETE if a scanner badge is green?
 
 ## Can people still use it
 

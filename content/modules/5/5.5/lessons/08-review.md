@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-You are reviewing persistence. Label each claim **rule**, **tool**, or **false assurance**. Say whether `fetch_sql` still returns a concatenated `str` if they ship. Start at concatenated SQL, not at an ORM sticker.
+Start at concatenated SQL. Mark each claim **rule**, **tool**, or **false assurance**, and say whether `fetch_sql` still returns a `str` if they ship. An ORM sticker is not the review.
 
 Do not treat “will parameterize later” as a green `test_query_is_bound_not_concatenated`.
 
@@ -42,7 +42,7 @@ Also reject: live SQL attacks; closing findings without re-running `test_query_i
 
 ## Use it somewhere new
 
-Clinic change that “switched to SQLAlchemy” without a bound-tuple test is an incomplete review of concatenated SQL. Name the independent falsehood that would still keep `fetch_sql` from returning a `str`.
+Clinic change that “switched to SQLAlchemy” without a bound-tuple test is an incomplete review of concatenated SQL. What still has to be false so `fetch_sql` is not a concatenated `str`?
 
 ## What this page is not doing
 

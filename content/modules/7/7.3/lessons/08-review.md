@@ -44,7 +44,7 @@ Also reject: live provider attacks; closing findings without re-running `test_mi
 
 ## Use it somewhere new
 
-Clinic change that “terminated TLS and allow-listed the vendor” without a missing-sig test is an incomplete review of path-trusted callbacks. Name the independent falsehood that would still keep empty sig false.
+Clinic change that “terminated TLS and allow-listed the vendor” without a missing-sig test is an incomplete review of path-trusted callbacks. What would still reject a missing signature after TLS and a vendor allow-list?
 
 ## What this page is not doing
 

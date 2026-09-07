@@ -44,7 +44,7 @@ Also reject: host-file trophies; treating the client as what you trust; an aware
 
 ## Use it somewhere new
 
-Clinic change that “randomized filenames” without a prefix test is an incomplete review. Name the independent falsehood that would still keep `../outside` from leaving the imaging root.
+Clinic change that “randomized filenames” without a prefix test is an incomplete review. What still has to hold so `../outside` cannot leave the imaging root?
 
 ## What this page is not doing
 

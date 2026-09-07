@@ -41,7 +41,7 @@ Also reject: fetching example.com; keys in lessons; claiming the first check-in;
 
 ## Use it somewhere new
 
-A contractor change that “added the guide and a proxy” without a host allow-list is a skipped-check review. Name the independent falsehood that would still keep `example.com` false.
+A contractor change that “added the guide and a proxy” without a host allow-list is a skipped-check review. What would still keep `example.com` out of scope after someone adds a proxy?
 
 ## What this page is not doing
 

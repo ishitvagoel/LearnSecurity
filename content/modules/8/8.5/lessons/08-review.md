@@ -44,7 +44,7 @@ Also reject: live vendor payloads; closing findings without re-running `test_cra
 
 ## Use it somewhere new
 
-Clinic change that “turned on a crash product and completed the store form” without a body-omit test is an incomplete review of where the field can land. Name the independent falsehood that would still keep `'secret'` out of the report.
+Clinic change that “turned on a crash product and completed the store form” without a body-omit test is an incomplete review of where the field can land. What would still keep `'secret'` out of the crash report after the store form is filled?
 
 ## Can people still use it
 

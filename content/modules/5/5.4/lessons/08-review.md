@@ -42,7 +42,7 @@ Also reject: live TLS attacks; closing findings without re-running `test_client_
 
 ## Use it somewhere new
 
-Clinic change that “enabled HTTPS” by trusting Forwarded-Proto is an incomplete review of channel binding. Name the independent falsehood that would still keep the header from counting as TLS.
+Clinic change that “enabled HTTPS” by trusting Forwarded-Proto is an incomplete review of channel binding. What would still keep `X-Forwarded-Proto` from counting as TLS?
 
 ## Can people still use it
 

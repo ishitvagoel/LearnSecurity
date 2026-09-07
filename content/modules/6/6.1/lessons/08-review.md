@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-You are reviewing export listing. Label each claim **rule**, **tool**, or **false assurance**. Say whether `argv_for_list("notes")` still starts `["sh", "-c"]` if they ship. Start at `sh -c` concatenation, not at a green scan.
+Export listing: start at `sh -c` concatenation. For each claim, say **rule**, **tool**, or **false assurance**, and whether `argv_for_list("notes")` still starts `["sh", "-c"]`. Skip the green scan.
 
 Someone still has to make `test_does_not_invoke_shell` pass; “will switch to argv later” does not do that.
 
@@ -42,7 +42,7 @@ Also reject: live command execution; closing findings without re-running `test_d
 
 ## Use it somewhere new
 
-Clinic change that “sanitized the filename” and still calls `sh -c` is an incomplete review of concatenating into a shell. Name the independent falsehood that would still keep `argv_for_list` from starting `sh -c`.
+Clinic change that “sanitized the filename” and still calls `sh -c` is an incomplete review of concatenating into a shell. What would still keep `argv_for_list` off `sh -c` after the filename is sanitized?
 
 ## What this page is not doing
 

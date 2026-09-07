@@ -44,7 +44,7 @@ Also reject: public pentest steps; closing findings without re-running `test_can
 
 ## Use it somewhere new
 
-Clinic change that "uploaded the pentest PDF" without a retest field is an incomplete close-gate review. Name the independent falsehood that would still keep missing retest from closing.
+Clinic change that "uploaded the pentest PDF" without a retest field is an incomplete close-gate review. What would still keep a missing-retest finding from closing?
 
 ## Can people still use it
 
