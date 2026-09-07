@@ -11,7 +11,7 @@ You get a **clinic page** whose API client uses `https://` while the API socket 
 
 ## Picture: the URL bar is not the socket
 
-Here, a clinic is this topic’s notes app. An https page does not authorize treating the API socket as TLS. A dashboard toggle is not the check.
+The clinic site is the notes app on a different channel. An https page does not authorize treating the API socket as TLS. A dashboard toggle does not bind the channel.
 
 | Notes app | Clinic sketch |
 |---|---|

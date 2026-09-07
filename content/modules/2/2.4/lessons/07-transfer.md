@@ -20,7 +20,7 @@ Clinic: two POSTs book the last slot.
 
 ## Picture: limited quantity is the same fork
 
-Here, a booking is this topic’s share. Double-book and a second debit are new rules. Disable-on-submit is still not what you trust.
+A booking is a share with a side effect. Double-book and a second debit are new rules. Disable-on-submit does not remember the first outcome.
 
 ```mermaid
 flowchart TD

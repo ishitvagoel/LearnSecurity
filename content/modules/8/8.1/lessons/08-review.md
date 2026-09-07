@@ -44,7 +44,7 @@ Also reject: live device farms; personal-phone cookbooks; closing findings witho
 
 ## Use it somewhere new
 
-A clinic change that “enabled Play Integrity” without a failing-attest deny check is an incomplete review. What still has to deny so client `ok` plus attest fail cannot export?
+Enabling Play Integrity without a failing-attest deny still lets the client claim export. What still has to deny so client `ok` plus attest fail cannot export?
 
 ## What this page is not doing
 

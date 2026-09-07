@@ -44,7 +44,7 @@ Also reject: live processors; shipping without re-running `test_duplicate_captur
 
 ## Use it somewhere new
 
-Clinic change that “added a payment company and a questionnaire PDF” without a duplicate-key deny is an incomplete ledger review. What still has to be seen so two `k1` captures cannot charge twice?
+A payment company and a questionnaire PDF, without a duplicate-key deny, do not finish the ledger review. What still has to be seen so two `k1` captures cannot charge twice?
 
 ## What this page is not doing
 

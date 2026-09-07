@@ -19,7 +19,7 @@ flowchart LR
   Extra["JSON still has is_staff"] --> Reality[binder writes if ALLOWED is missing]
 ```
 
-Here, `is_staff` is this topic’s `is_admin`. If “Edit profile” omits the staff checkbox while the server `apply` copies every key, the rule is gone. FastAPI, a generated OpenAPI file, and GraphQL “typed schema” do not copy `ALLOWED`. GraphQL mutation arguments and protobuf field numbers not in the writable set are the same binder family — name them, do not run those systems here. Honest `display_name` XSS is a 6.2 leftover even when extras are dropped.
+`is_staff` is `is_admin` in the PATCH body. If “Edit profile” omits the staff checkbox while the server `apply` copies every key, the rule is gone. FastAPI, a generated OpenAPI file, and GraphQL “typed schema” do not copy `ALLOWED`. GraphQL mutation arguments and protobuf field numbers not in the writable set are the same binder family — name them, do not run those systems here. Honest `display_name` XSS is a 6.2 leftover even when extras are dropped.
 
 | Notes app | Clinic sketch |
 |---|---|

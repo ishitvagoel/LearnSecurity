@@ -44,7 +44,7 @@ Also reject: weaponized eval; closing findings without re-running `test_eval_on_
 
 ## Use it somewhere new
 
-Clinic change that “continuous integration formatted the template” without an interpreter question is an incomplete review. Which assumption still rejects eval on a user string even if CI formatted the template?
+CI that only formatted the template never asked the interpreter question. Which assumption still rejects eval on a user string even if CI formatted the template?
 
 ## What this page is not doing
 

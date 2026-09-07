@@ -42,7 +42,7 @@ Also reject: trusting the browser as the vault; closing findings without re-runn
 
 ## Use it somewhere new
 
-Clinic change that “disables the badge” without killing the chart session is an incomplete review of leftover access. Which leftover still has to die so `session_valid` is false after offboard?
+Disabling the badge without killing the chart session still leaves leftover access. Which leftover still has to die so `session_valid` is false after offboard?
 
 ## Can people still use it
 

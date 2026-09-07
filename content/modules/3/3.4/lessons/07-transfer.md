@@ -20,7 +20,7 @@ EHR-lite guardian list on a booking card.
 
 ## Picture: three is not five, the shape is the same
 
-Here, a guardian invite is this topic’s share. A fourth guardian and a second invite redeem are new rules. HTML max is still not what you trust.
+A guardian invite is a share grant. A fourth guardian and a second invite redeem are new rules. HTML max does not stop the fourth grant.
 
 ```mermaid
 flowchart LR

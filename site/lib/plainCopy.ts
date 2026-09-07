@@ -1037,6 +1037,12 @@ const PROSE_PHRASES: [RegExp, string][] = [
     /Name the independent falsehood that would still stop /g,
     "What would still stop ",
   ],
+  [/Here, (.+?) is this topic['’]s (.+?)\./g, "$1 here is the same job as $2."],
+  [/Here, (.+?) are this topic['’]s (.+?)\./g, "$1 here are the same job as $2."],
+  [/ is an incomplete review of ([^.]+)\./g, " still misses $1."],
+  [/ is an incomplete [a-z-]+ review\./g, " still misses that review."],
+  [/ is an incomplete review\./g, " still misses the rule."],
+  [/ is a skipped-check review\./g, " still skips the check."],
 ];
 
 const HIDDEN_LAB_NOTES = [

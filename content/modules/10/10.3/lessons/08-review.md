@@ -44,7 +44,7 @@ Also reject: live cluster attacks; admitting without re-running `test_cluster_ad
 
 ## Use it somewhere new
 
-Clinic change that "added a namespace and a CIS scan" without a ClusterRole deny is an incomplete admission review. Which deny still has to hold so cluster-admin cannot run in that namespace?
+A namespace and a CIS scan, without a ClusterRole deny, do not finish admission. Which deny still has to hold so cluster-admin cannot run in that namespace?
 
 ## Can people still use it
 

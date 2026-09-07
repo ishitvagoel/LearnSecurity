@@ -44,7 +44,7 @@ Also reject: live portals; closing findings without re-running `test_status_only
 
 ## Use it somewhere new
 
-Clinic change that “marked HIPAA isolation done” without an isolation assert is an incomplete review of the proof. What still has to be asserted so a status-only row is not coverage?
+Marking HIPAA isolation done without an isolation assert is not the proof. What still has to be asserted so a status-only row is not coverage?
 
 ## Can people still use it
 

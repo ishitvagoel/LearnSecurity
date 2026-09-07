@@ -9,7 +9,7 @@ You get a **clinic booking** API. A JSON object (REST) and a GraphQL variable ma
 
 ## Picture: each grammar is a reader
 
-Here, `patient_id` is this topic’s `"tenant"`. Two grammars are two readers. Who-is-allowed still runs after one meaning exists.
+`patient_id` is the `"tenant"` key in both grammars. Two grammars are two readers. Who-is-allowed still runs after one meaning exists.
 
 | Notes app | Clinic sketch |
 |---|---|

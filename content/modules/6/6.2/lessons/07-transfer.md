@@ -19,7 +19,7 @@ flowchart LR
   HTML[HTML badge] --> Reality[grammar mixed with data]
 ```
 
-Here, a nickname is this topic’s title. If the nickname is concatenated into an HTML badge, the rule is gone. FastAPI, a content-security header in report-only mode, and React defaults on a different component do not encode this sink. Markdown-to-HTML is 2.1’s second parser: even a well-encoded badge fails if markdown emits raw tags later. Trusted Types remain draft.
+The nickname is the title in the badge. If the nickname is concatenated into an HTML badge, the rule is gone. FastAPI, a content-security header in report-only mode, and React defaults on a different component do not encode this sink. Markdown-to-HTML is 2.1’s second parser: even a well-encoded badge fails if markdown emits raw tags later. Trusted Types remain draft.
 
 | Notes app | Clinic sketch |
 |---|---|

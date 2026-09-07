@@ -42,7 +42,7 @@ Also reject: treating the client as what you trust; closing findings without re-
 
 ## Use it somewhere new
 
-Clinic deep-link change that “adds a token query param for convenience” is an incomplete review. What would still keep a query-only token from becoming a session?
+A convenience token in the query string still puts the session in the URL. What would still keep a query-only token from becoming a session?
 
 ## What this page is not doing
 

@@ -44,7 +44,7 @@ Also reject: public GraphQL attacks; closing findings without re-running `test_m
 
 ## Use it somewhere new
 
-A clinic change that “hid SSN in the table” without a member×field deny test is an incomplete mediation review. What still has to deny so a member cannot resolve SSN?
+Hiding SSN in the table without a member×field deny still skips mediation. What still has to deny so a member cannot resolve SSN?
 
 ## What this page is not doing
 

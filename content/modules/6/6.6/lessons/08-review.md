@@ -44,7 +44,7 @@ Also reject: live race harnesses; closing findings without re-running `test_invi
 
 ## Use it somewhere new
 
-Clinic change that “added a unique index” without a second-accept test is an incomplete review of consume. Write the fact that still stops the second `t1` even if a unique index exists.
+A unique index without a second-accept test does not consume the invite. Write the fact that still stops the second `t1` even if a unique index exists.
 
 ## Can people still use it
 

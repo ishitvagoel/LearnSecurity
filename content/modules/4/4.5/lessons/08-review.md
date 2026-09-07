@@ -42,7 +42,7 @@ Also reject: treating the client as what you trust; closing findings without re-
 
 ## Use it somewhere new
 
-Clinic change that “enables SMART” without an `aud` test is an incomplete review. What would still stop an `other-api` token from spending this resource server?
+Enabling SMART without an `aud` test still accepts another API’s token. What would still stop an `other-api` token from spending this resource server?
 
 ## What this page is not doing
 

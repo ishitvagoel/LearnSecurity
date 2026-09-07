@@ -44,7 +44,7 @@ Also reject: live production attacks; booting without re-running `test_prod_debu
 
 ## Use it somewhere new
 
-Clinic change that “set `NODE_ENV` and added a canary” without a prod-plus-debug deny is an incomplete boot-gate review. What still has to refuse boot so prod plus debug cannot start?
+`NODE_ENV` plus a canary, without a prod-plus-debug deny, do not finish the boot gate. What still has to refuse boot so prod plus debug cannot start?
 
 ## Can people still use it
 

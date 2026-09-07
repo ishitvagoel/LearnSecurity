@@ -11,7 +11,7 @@ After `delete_user("alice")`, `session_valid("alice")` is false. When a clinicia
 
 ## Picture: badge off is not session off
 
-Here, a clinician is this topic’s alice. Disabling the badge does not authorize leaving the chart cookie alive. A logout product name is not the check.
+The clinician is alice after offboard. Disabling the badge does not authorize leaving the chart cookie alive. A logout product name does not kill the session.
 
 | Notes app | Clinic sketch |
 |---|---|

@@ -43,7 +43,7 @@ Also reject: trusting the browser as the vault; a data-loss product as the rule;
 
 ## Use it somewhere new
 
-Clinic booking card. A change that “adds a Confidential label” without a log test is an incomplete review of where the field can land. What still has to be true so chart text never lands in the appointment log?
+On a clinic booking card, a Confidential label without a log test does not say where the field can land. What still has to be true so chart text never lands in the appointment log?
 
 ## Can people still use it
 

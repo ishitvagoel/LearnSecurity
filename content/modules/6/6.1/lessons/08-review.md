@@ -42,7 +42,7 @@ Also reject: live command execution; closing findings without re-running `test_d
 
 ## Use it somewhere new
 
-Clinic change that “sanitized the filename” and still calls `sh -c` is an incomplete review of concatenating into a shell. What would still keep `argv_for_list` off `sh -c` after the filename is sanitized?
+Sanitizing the filename and still calling `sh -c` still concatenates into a shell. What would still keep `argv_for_list` off `sh -c` after the filename is sanitized?
 
 ## What this page is not doing
 

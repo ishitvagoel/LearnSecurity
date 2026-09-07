@@ -44,7 +44,7 @@ Also reject: live malware APKs; closing findings without re-running `test_deepli
 
 ## Use it somewhere new
 
-A clinic change that “verified App Links” without an `as=` deny check is an incomplete review. What would still keep alice signed in when `as=` arrives on a verified App Link?
+Verified App Links without an `as=` deny still let the extras switch the user. What would still keep alice signed in when `as=` arrives on a verified App Link?
 
 ## What this page is not doing
 

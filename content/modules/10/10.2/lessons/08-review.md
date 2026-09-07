@@ -45,7 +45,7 @@ Also reject: live registry attacks; installing without re-running `test_hash_mis
 
 ## Use it somewhere new
 
-Clinic change that “added CycloneDX and Dependabot” without a digest check is an incomplete review of the install gate. What still has to compare so a hash mismatch cannot install?
+CycloneDX and Dependabot without a digest check do not finish the install gate. What still has to compare so a hash mismatch cannot install?
 
 ## Can people still use it
 

@@ -42,7 +42,7 @@ Also reject: treating the client as what you trust; closing findings without re-
 
 ## Use it somewhere new
 
-Clinic change that “adds max=3 on the select” without a write-path test is an incomplete review. What still has to fail so a fourth guardian cannot land?
+`max=3` on the select without a write-path test still lets a fourth guardian land. What still has to fail so a fourth guardian cannot land?
 
 ## Can people still use it
 

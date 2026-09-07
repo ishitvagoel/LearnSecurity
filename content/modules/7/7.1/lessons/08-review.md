@@ -44,7 +44,7 @@ Also reject: public API attacks; closing findings without re-running `test_is_ad
 
 ## Use it somewhere new
 
-A clinic change that “documented the PATCH in OpenAPI” without an `is_staff` deny check is an incomplete review. What would still keep `is_staff` false after an OpenAPI PATCH doc?
+Documenting the PATCH in OpenAPI without an `is_staff` deny still writes the extra key. What would still keep `is_staff` false after an OpenAPI PATCH doc?
 
 ## What this page is not doing
 

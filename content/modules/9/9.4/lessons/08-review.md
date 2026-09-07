@@ -44,7 +44,7 @@ Also reject: live tenants; closing findings without re-running `test_unmapped_hi
 
 ## Use it somewhere new
 
-Clinic change that “enabled code scanning” without a mapping check is an incomplete ship-gate review. What would still block an unmapped HIGH after code scanning is on?
+Code scanning without a mapping check does not own the HIGH at ship. What would still block an unmapped HIGH after code scanning is on?
 
 ## Can people still use it
 

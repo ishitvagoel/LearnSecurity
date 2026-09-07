@@ -42,7 +42,7 @@ Also reject: live TLS attacks; closing findings without re-running `test_client_
 
 ## Use it somewhere new
 
-Clinic change that “enabled HTTPS” by trusting Forwarded-Proto is an incomplete review of channel binding. What would still keep `X-Forwarded-Proto` from counting as TLS?
+“Enabled HTTPS” by trusting Forwarded-Proto does not bind the channel. What would still keep `X-Forwarded-Proto` from counting as TLS?
 
 ## Can people still use it
 

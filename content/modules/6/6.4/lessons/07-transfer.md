@@ -20,7 +20,7 @@ EHR-lite “attach imaging” that joins the filename onto a public folder.
 
 ## Picture: the scan filename is still a path parser input
 
-Here, a scan upload is this topic’s notes upload. FastAPI, a UUID rename, and an antivirus scanner still do not bind the object.
+The scan upload is the notes upload path. FastAPI, a UUID rename, and an antivirus scanner still do not bind the object.
 
 ```mermaid
 flowchart LR

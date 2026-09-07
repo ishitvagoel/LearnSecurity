@@ -20,7 +20,7 @@ An EHR-lite booking card that texts “your appointment” to a phone number.
 
 ## Picture: a new hop is a new “what are we working on?”
 
-Here, a reminder is this topic’s note. Content leak and number-swap are new rows. A vendor sticker is still not what you trust.
+A reminder here is a note. Content leak and number-swap are new rows. A vendor sticker does not write the always-name ids.
 
 ```mermaid
 flowchart LR

@@ -15,7 +15,7 @@ A small clinic record with an `ssn_encrypted` column.
 
 ## Picture: the label is not the tool
 
-Here, an SSN is this topic’s secret. A column named `ssn_encrypted` does not authorize leaving the bytes as Base64. A disk-encryption checkbox is not the check.
+The SSN is the secret in the column. A column named `ssn_encrypted` does not authorize leaving the bytes as Base64. A disk-encryption checkbox does not stop a round-trip decode.
 
 | Notes app | Clinic sketch |
 |---|---|

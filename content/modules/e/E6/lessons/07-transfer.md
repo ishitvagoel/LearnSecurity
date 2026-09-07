@@ -13,7 +13,7 @@ An EHR-lite “legal said we accept it,” plus “our maturity score is 2.5 so 
 
 ## Picture: same accept loop, clinical object
 
-Here, a clinic chart is this topic’s note. Owner, review date, and accessibility flag still have to be on the row. Filing a HIPAA slide and marking the hole Accepted does not set `owner` or `review_by`.
+The clinic chart is the note in the register. Owner, review date, and accessibility flag still have to be on the row. Filing a HIPAA slide and marking the hole Accepted does not set `owner` or `review_by`.
 
 | Notes app | Clinic sketch |
 |---|---|

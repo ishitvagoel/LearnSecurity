@@ -19,7 +19,7 @@ flowchart LR
   File["charts.json plaintext"] --> Reality[backup yields bodies]
 ```
 
-Here, `save_chart` is this topic’s `save_note`. If “available offline” writes `charts.json` while a fingerprint prompt unlocks the app screen, the rule is gone. `MODE_PRIVATE`, Room, and a local fingerprint do not wrap the file. iOS Keychain vs Android Keystore and desktop Electron are the same disk family — name them, do not image those devices here. The lab `aead:` prefix is a stand-in, not AES.
+`save_chart` is `save_note` on disk. If “available offline” writes `charts.json` while a fingerprint prompt unlocks the app screen, the rule is gone. `MODE_PRIVATE`, Room, and a local fingerprint do not wrap the file. iOS Keychain vs Android Keystore and desktop Electron are the same disk family — name them, do not image those devices here. The lab `aead:` prefix is a stand-in, not AES.
 
 | Notes app | Clinic sketch |
 |---|---|

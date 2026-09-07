@@ -44,7 +44,7 @@ Also reject: live broker attacks; closing findings without re-running `test_user
 
 ## Use it somewhere new
 
-Clinic change that “runs on the hospital VLAN with zero trust” without a leftover-session deny test is an incomplete review of inherited request context. What still has to drop Alice’s session so a worker path cannot inherit it?
+VLAN plus zero-trust labels, without a leftover-session deny, still inherit the request context. What still has to drop Alice’s session so a worker path cannot inherit it?
 
 ## What this page is not doing
 

@@ -13,7 +13,7 @@ Also name Jinja, SQL (5.5), and mail headers as the same shape, without running 
 
 ## Picture: the filename is still an interpreter input
 
-Here, a CSV filename is this topic’s export name.
+The CSV filename is the export name in argv.
 
 | Notes app | Clinic sketch |
 |---|---|

@@ -41,7 +41,7 @@ Also reject: live LMS attacks; keys in lessons; claiming check-in 0 or check-in 
 
 ## Use it somewhere new
 
-A clinic change that “added an onboarding quiz and a job-title mapping” without keeping 1.2 required is a skipped-check review. What would still keep a 100 quiz score from skipping isolation labs?
+An onboarding quiz and a job-title mapping, without keeping 1.2 required, skip the check. What would still keep a 100 quiz score from skipping isolation labs?
 
 ## What this page is not doing
 
