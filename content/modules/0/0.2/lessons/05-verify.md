@@ -44,11 +44,11 @@ A low quiz score that does not skip part 1 may pass on both sides. If the broken
 
 ## Practice
 
-Do not treat a grep for `return False` in a string as the check. Call `quiz_score_grants_phase1_skip(100)`.
+Call `quiz_score_grants_phase1_skip(100)`. A `return False` substring is the source text, not the skip.
 
 ## Use it somewhere new
 
-Asserting “onboarding quiz exists” is not this check. Do not run a test that logs into the clinic LMS.
+An onboarding quiz that exists is a form, not a 100% skip of part 1. Do not run a test that logs into the clinic LMS.
 
 ## What this page is not doing
 

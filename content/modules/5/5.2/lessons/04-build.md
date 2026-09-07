@@ -5,7 +5,7 @@
 
 ## The rule
 
-A column rename is not the fix. HTTPS is not the fix. Volume encryption is not the fix. A denylist of the word “base64” in the function name is not the fix.
+A column rename does not encrypt the body. HTTPS is a hop. Volume encryption is the disk. Banning the word “base64” in the function name is not `protect("secret")`.
 
 The structural change is: the stored value is **not reversible as encoding**. Structural means a keyed transform the storage reader cannot invert — not a prettier name.
 

@@ -50,12 +50,12 @@ A `namespace:` line in a chart is not `pod_ok("cluster-admin")`. This practice n
 
 ## Practice
 
-Do not treat a grep for `namespace:` in a chart as the check. Call `pod_ok("cluster-admin")`.
+Call `pod_ok("cluster-admin")`. A `namespace:` line in a chart is inventory.
 
 ## Use it somewhere new
 
-Asserting "namespace exists" is not this check. Do not use a live kube-apiserver.
+A namespace that exists is inventory, not `pod_ok("cluster-admin")`. Do not use a live kube-apiserver.
 
 ## What this page is not doing
 
-Do not treat a live cluster screenshot as proof. Do not log kubeconfig. Answer keys are not on this site. This page does not mark you as finished.
+A live cluster screenshot is not `cluster-admin` denied. Do not log kubeconfig. Answer keys are not on this site. This page does not mark you as finished.

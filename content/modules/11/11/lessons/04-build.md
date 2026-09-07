@@ -5,7 +5,7 @@
 
 ## The rule
 
-A revoke *event* is not the fix. HTTP 200 is not the fix. A scanner badge is not the fix. “We called revoke” is not the fix.
+A revoke *event* does not consult the grant on the next read. HTTP 200 is a status. A scanner badge is a score. “We called revoke” is not `read` after `revoke`.
 
 The structural change is: `revoke` **discards the grant**, and `read` **returns the body only if `tenant == owner` or `(nid, tenant) in GRANTS`**. Missing grant denies. A revoke that is not consulted on the next read is still the break. Structural means that consultation — not HTTP 200, not a scanner badge, not a YAML pack.
 

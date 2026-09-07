@@ -5,7 +5,7 @@
 
 ## The rule
 
-A green reporting dashboard is not the fix. Helmet is not the fix. “We set a header” is not the fix.
+A green reporting dashboard does not enforce the policy. Helmet is a library import. Setting a header in Report-Only still fails `isolation_enforced`.
 
 The structural change is: `isolation_enforced` looks at the **enforcing** name. It must return true only when `Content-Security-Policy` is in the headers. Report-Only may *ride along*; it does not replace that name.
 

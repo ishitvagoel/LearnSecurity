@@ -5,7 +5,7 @@
 
 ## The rule
 
-A denylist of quotes is not the fix. “The ORM will handle it” is not the fix. A later row-level rule on in production and off in tests is not the fix.
+A denylist of quotes does not make SQL a tuple. “The ORM will handle it” still concatenates. A later row-level rule on in production and off in tests is a different environment.
 
 Structural means the parser never sees those fields as grammar. Bind tenant and note id as parameters. `fetch_sql` must return `(sql, params)` with `%s` placeholders and a two-tuple of values.
 

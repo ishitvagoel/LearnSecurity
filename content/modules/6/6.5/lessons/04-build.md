@@ -5,7 +5,7 @@
 
 ## The rule
 
-“Starts with https” is not the fix. A denylist of one IP is not the fix. Following redirects off the list is not the fix.
+“Starts with https” does not cover link-local metadata. A denylist of one IP misses the next address. Following redirects off the list still fetches.
 
 Structural means the host is a named peer. `allowed` must parse the URL, require `https`, require the hostname in a small allow-list, and deny link-local and loopback.
 

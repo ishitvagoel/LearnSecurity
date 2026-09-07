@@ -49,12 +49,12 @@ A callback with a matching MAC may pass on both sides. You still have to deny a 
 
 ## Practice
 
-Do not treat a grep for `hmac` in source as the check. Call `accept("", "body", "lab-secret")`.
+Call `accept("", "body", "lab-secret")`. An `hmac` import is the library, not the empty-sig deny.
 
 ## Use it somewhere new
 
-Asserting HTTP 200 on `/webhook` is not this check. Do not send a live vendor POST.
+HTTP 200 on `/webhook` is the status, not the empty-sig deny. Do not send a live vendor POST.
 
 ## What this page is not doing
 
-Do not treat a live Stripe screenshot as proof. Do not log bodies or `lab-secret`. Answer keys are not on this site.
+A live Stripe screenshot is not an empty signature denied. Do not log bodies or `lab-secret`. Answer keys are not on this site.

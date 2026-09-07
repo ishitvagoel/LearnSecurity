@@ -5,7 +5,7 @@
 
 ## The rule
 
-A system prompt is not the fix. Retrieval is not the fix. "We mapped a famous-bugs list so we shipped it" is not the fix.
+A system prompt does not block `exec_sql`. Retrieval does not block it. Mapping a famous-bugs list is a spreadsheet, not `run_tool`.
 
 The structural change is: `run_tool` **returns `None` unless `name in ALLOWED`**. Fail-safe: unknown tools deny. A denylist of the string `exec_sql` would still be every-other-interpreter. Structural means that membership — not "the prompt forbids SQL," not retrieval, not a famous-bugs mapping.
 

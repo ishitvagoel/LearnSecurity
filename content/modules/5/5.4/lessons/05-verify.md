@@ -49,11 +49,11 @@ Map the test to the header-https × socket-http row you wrote. A socket that rea
 
 ## Practice
 
-Do not treat a grep for `https` in a dashboard as the check. Call `channel_is_https` on the mismatch.
+Call `channel_is_https` on the mismatch. An `https` tile on a dashboard is the hop, not the forwarded header.
 
 ## Use it somewhere new
 
-Clinic page. Asserting the site loads on port 443 is not this check (that wait belongs with later availability work). Do not run a test that probes a live clinic.
+Clinic page. Loading on port 443 is availability, not a spoofed forwarded header. Do not run a test that probes a live clinic.
 
 ## What this page is not doing
 

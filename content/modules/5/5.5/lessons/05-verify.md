@@ -49,12 +49,12 @@ Honest bound shape must pass on repaired. Concatenated `str` must fail on broken
 
 ## Practice
 
-Do not treat a grep for `%s` inside a concatenated string as the check. Assert the tuple shape.
+Assert the `(sql, params)` shape. A `%s` inside concatenated SQL is still a string.
 
 ## Use it somewhere new
 
-Clinic search box. Asserting HTTP 200 is not this check (see 9.3). Do not run a test that hits a live clinic system.
+Clinic search box. HTTP 200 is the status, not the bound tuple (see 9.3). Do not run a test that hits a live clinic system.
 
 ## What this page is not doing
 
-Do not treat a live SQL screenshot as proof. Do not log bound parameter values that are bodies. Answer keys are not on this site.
+A live SQL screenshot is not the bound tuple. Do not log bound parameter values that are bodies. Answer keys are not on this site.

@@ -49,7 +49,7 @@ python3 -m pytest labs/5.2/5.2-lab/tests --impl fixed
 
 ## Practice
 
-Do not treat a grep for `AES` in a comment as the check. Decode `protect("secret")`.
+Decode `protect("secret")`. An `AES` comment is a name, not ciphertext.
 
 ## Use it somewhere new
 

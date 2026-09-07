@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-Even after `delete_account` was fixed once, a replica warehouse, a backup, or a support ticket can still hold the body. Running it for real is the rest of the loop: notice, contain, purge, and refuse to “help” by logging note bodies.
+Even after `delete_account` was repaired once, a replica warehouse, a backup, or a support ticket can still hold the body. Then notice the warehouse leftover, contain the replica, purge the body, and refuse to “help” by logging note bodies.
 
 Do not paste the chart into the ticket. Do not log bodies.
 

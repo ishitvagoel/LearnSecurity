@@ -5,7 +5,7 @@
 
 ## The rule
 
-A content-security header in report-only mode is not the fix. Cleaning after `innerHTML` is not the fix. “React will handle it” is not the fix.
+A report-only content-security header does not encode the note. Cleaning after `innerHTML` is late. “React will handle it” is a slogan.
 
 The structural change is: the parser **never sees extra tags**. `render` must HTML-escape the body for a text context (`<` → `&lt;`). Encode at the sink.
 

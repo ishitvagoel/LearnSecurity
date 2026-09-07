@@ -9,7 +9,7 @@ The notes app still has a reader from another company. It still has a browser cl
 
 A green SAST, DAST, or package scan is coverage for implementation bugs that happen to match a rule. It is not a model of what can go wrong for the notes, the grants, and the cookies.
 
-> For the notes app, a threat model you keep in version control must still list `cross-tenant-read`, `hostile-browser`, and `stolen-worker` when every scanner is green. Scanner findings are extra coverage, not the set. STRIDE letters with no assets, no owners, and no “what would prove this row wrong” are not this sentence.
+> For the notes app, a threat model you keep in version control must still list `cross-tenant-read`, `hostile-browser`, and `stolen-worker` when every scanner is green. Scanner findings are extra coverage, not the set. STRIDE letters with no assets, no owners, and no “what would prove this row wrong” are a sticker, not a checkable row.
 
 What must not happen is an **empty model on a green scan**. `threats_from_scan(scanner_green=True)` returns `[]`, so `cross-tenant-read` is missing. Then the story of what you already checked looks finished. Who may read a note, and where trust stops, were never even listed.
 

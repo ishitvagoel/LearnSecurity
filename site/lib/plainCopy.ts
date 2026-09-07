@@ -768,12 +768,29 @@ const PROSE_PHRASES: [RegExp, string][] = [
   ],
   [
     /Reject a [“"](?:test|check)[”"] that only greps (`[^`]+`) without calling (`[^`]+`)\./g,
-    "Do not treat a grep for $1 as the check. Call $2.",
+    "Call $2. $1 is the string, not the call.",
   ],
   [
     /Reject a [“"](?:test|check)[”"] that only greps (`[^`]+`) without (decoding|asserting|comparing) (`[^`]+`)\./g,
-    "Do not treat a grep for $1 as the check. $2 $3.",
+    "Call $2 $3. $1 is the string, not the call.",
   ],
+  [
+    /Do not treat a grep for (.+) as the check\. Call (.+)\./g,
+    "Call $2. $1 is the string, not the call.",
+  ],
+  [
+    /Do not treat a live (.+) screenshot as proof\./g,
+    "A live $1 screenshot is not the check.",
+  ],
+  [
+    /Do not attach (.+) to the ticket\./g,
+    "Leave $1 off the ticket.",
+  ],
+  [/ was [“"]fixed once\.[”"]?/g, " was repaired once."],
+  [/ was fixed once,/g, " was repaired once,"],
+  [/Running it for real is the rest of the loop: /g, "Then "],
+  [/ is not this sentence\./g, " is not the rule here."],
+  [/ is not the fix\./g, " does not restore the rule."],
   [/as the check\. decoding /g, "as the check. Decode "],
   [/as the check\. asserting /g, "as the check. Assert "],
   [/as the check\. comparing /g, "as the check. Compare "],
@@ -791,8 +808,8 @@ const PROSE_PHRASES: [RegExp, string][] = [
   ],
   [/\bA (?:test|check|review) that only asserts /g, "Asserting "],
   [
-    /Asserting ([^\n]+?) is not this (?:topic|rule)((?: \([^)]+\))?)\./g,
-    "Asserting $1 is not this check$2.",
+    /Asserting ([^\n]+?) is not this (?:topic|rule|check)((?: \([^)]+\))?)\./g,
+    "$1 does not finish this$2.",
   ],
   [/ is 4\.4, not this rule\./g, " is 4.4, not this check."],
   [

@@ -5,7 +5,7 @@
 
 ## The rule
 
-Hiding the column in the SPA is not the fix. GraphQL `@hide` the client can skip is not the fix. A REST field name that starts with `_` is not the fix. “We already passed object GET tests” is not the fix.
+Hiding the column in the SPA does not hide `secret_internal` on the resolver. GraphQL `@hide` the client can skip still returns the field. A REST name that starts with `_` is a naming hope. Passing object GET tests is a different check.
 
 The structural change is: the trusted layer **checks role × field**. `resolve` must deny `secret_internal` unless `role == "service"`. Structural means that predicate — not a hidden SPA column.
 

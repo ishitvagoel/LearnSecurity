@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-Even after `log_event` was fixed once, a new handler, an exception printer, or an APM agent can put the body back. Running it for real is the rest of the loop: notice, contain, purge, and refuse to “help” by logging the body again.
+Even after `log_event` was repaired once, a new handler, an exception printer, or an APM agent can put the body back. Then notice the body in a new handler, contain the drain, purge the line, and refuse to “help” by logging the body again.
 
 Do not paste the matching line into Slack, a ticket, or a lesson note.
 

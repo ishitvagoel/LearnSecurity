@@ -49,12 +49,12 @@ A `revoke` heading in a README is not `read("n1", "B")` after `revoke("n1", "B")
 
 ## Practice
 
-Do not treat a grep for `revoke` in a README as the check. Call `read("n1", "B")` after `revoke("n1", "B")`.
+Call `read("n1", "B")` after `revoke("n1", "B")`. A README heading is not the next read.
 
 ## Use it somewhere new
 
-Asserting “revoke returned 200” is not this check. Do not use a live clinic system.
+A 200 from revoke is not the next `read`. Do not use a live clinic system.
 
 ## What this page is not doing
 
-Do not treat a live tenant screenshot as proof. Do not log note bodies. Answer keys are not on this site. This page does not mark you as finished.
+A live tenant screenshot is not `read` after revoke. Do not log note bodies. Answer keys are not on this site. This page does not mark you as finished.

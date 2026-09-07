@@ -42,12 +42,12 @@ The first capture of `k1` may pass on both sides. You still have to deny a secon
 
 ## Practice
 
-Do not treat a grep for `Idempotency-Key` in a Stripe client as the check. Call `capture("k1")` twice.
+Call `capture("k1")` twice. An `Idempotency-Key` header in a Stripe client is the product, not the count.
 
 ## Use it somewhere new
 
-Asserting “the processor returned 200” is not this check. Do not use a live processor.
+A processor 200 is the hop, not two `capture("k1")` leaving count 1. Do not use a live processor.
 
 ## What this page is not doing
 
-Do not treat a live processor screenshot as proof. Do not log card-number-like strings. Answer keys are not on this site. This site does not mark you as finished.
+A live processor screenshot is not capture idempotent. Do not log card-number-like strings. Answer keys are not on this site. This site does not mark you as finished.

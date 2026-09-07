@@ -5,7 +5,7 @@
 
 ## The rule
 
-A private folder is not the fix. A fingerprint prompt is not the fix. EncryptedSharedPreferences on a *different* file is not the fix.
+A private folder does not hide the note. A fingerprint prompt does not hide it. EncryptedSharedPreferences on a *different* file still leaves `'secret'` on disk.
 
 The structural change is: the stored bytes are **not the body**. `save_note` must not write `'secret'` as the file contents. Store a ciphertext stand-in, not the body.
 

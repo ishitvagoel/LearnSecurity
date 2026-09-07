@@ -5,9 +5,9 @@
 
 ## Fixing it once is not enough
 
-Even after `allow` was “fixed once,” a new export format can skip the counter. Running it for real is the rest of the loop: notice, contain, and recover.
+Even after `allow` was repaired once, a new export format can skip the counter. Then page the fourth export, contain the extra CSV, and restore the quota.
 
-Do not log note bodies in the CSV path (3.1 / 5.1). Do not attach the CSV to the ticket.
+Do not log note bodies in the CSV path (3.1 / 5.1). Leave the CSV off the ticket.
 
 ## Picture: the fourth try is a signal
 

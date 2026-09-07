@@ -49,12 +49,12 @@ A scanner name in a workflow is not `ship_ok([HIGH], {})`. This practice never o
 
 ## Practice
 
-Do not treat a grep for `codeql` in a workflow as the check. Call `ship_ok([HIGH], {})`.
+Call `ship_ok([HIGH], {})`. A `codeql` job in a workflow is the scanner, not the map.
 
 ## Use it somewhere new
 
-Asserting “scanner job ran” is not this check. Do not use a live GitHub tenant.
+A scanner job that ran is the workflow, not a mapped HIGH. Do not use a live GitHub tenant.
 
 ## What this page is not doing
 
-Do not treat a live org screenshot as proof. Do not log secret-scanner payloads. Answer keys are not on this site.
+A live org screenshot is not a mapped HIGH. Do not log secret-scanner payloads. Answer keys are not on this site.

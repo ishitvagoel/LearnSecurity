@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A closer can still mark Done after `close_incident` was “fixed once.” Do not log note bodies, session tokens, or dump files into the ticket. Do not paste note text into chat.
+A closer can still mark Done after `close_incident` was repaired once. Do not log note bodies, session tokens, or dump files into the ticket. Do not paste note text into chat.
 
 ## Picture: illegal close is a signal
 

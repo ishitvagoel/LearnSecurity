@@ -43,7 +43,7 @@ Map each test to the state-machine row you wrote. If the broken files do not fai
 
 ## Practice
 
-Do not treat a grep for `max={5}` in JSX as the check. Call `add_share` eight times.
+Call `add_share` eight times. A `max={5}` attribute in JSX is the form, not the cap.
 
 ## Use it somewhere new
 

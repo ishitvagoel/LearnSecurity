@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new WorkManager blob can skip the cache wrapper after `save_note` was “fixed once.” Do not log note bodies (3.1). Do not attach the chart to the ticket.
+A new WorkManager blob can skip the cache wrapper after `save_note` was repaired once. Do not log note bodies (3.1). Leave the chart off the ticket.
 
 ## Picture: leftover cache is a signal
 

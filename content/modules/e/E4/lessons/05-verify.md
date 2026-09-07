@@ -42,11 +42,11 @@ A short copy that fits the buffer may pass on both sides. You still have to deny
 
 ## Practice
 
-Do not treat a grep for `Kotlin` in a README as the check. Call `copy_into(4, b"abcdefgh", 4)`.
+Call `copy_into(4, b"abcdefgh", 4)`. A `Kotlin` mention in a README is the language, not the bound.
 
 ## Use it somewhere new
 
-Asserting “the language is memory-safe” is not this check. Do not use a third-party binary.
+Calling the language memory-safe is the slogan, not `copy_into` bounded. Do not use a third-party binary.
 
 ## What this page is not doing
 

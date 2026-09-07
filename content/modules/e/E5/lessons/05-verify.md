@@ -42,12 +42,12 @@ A query that stays in the same company may pass on both sides. You still have to
 
 ## Practice
 
-Do not treat a grep for `ENABLE ROW LEVEL SECURITY` as the check. Call `tenant_for({"tenant": "A"}, {"tenant": "B"})`.
+Call `tenant_for({"tenant": "A"}, {"tenant": "B"})`. `ENABLE ROW LEVEL SECURITY` is the database, not the session tenant.
 
 ## Use it somewhere new
 
-Asserting “row-level rules are on” is not this check. Do not use a live clinic system.
+Row-level rules in the database are not the session tenant. Do not use a live clinic system.
 
 ## What this page is not doing
 
-Do not treat a live company screenshot as proof. Do not log note bodies. Answer keys are not on this site. This site does not mark you as finished.
+A live company screenshot is not the session tenant. Do not log note bodies. Answer keys are not on this site. This site does not mark you as finished.

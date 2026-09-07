@@ -55,7 +55,7 @@ Map each check to a rule from the map page. If the broken files do not fail the 
 
 ## Practice
 
-Do not treat a grep for `webauthn` in HTML as the check. Call `phishing_resistant` on the password / lookalike pair.
+Call `phishing_resistant` on the password / lookalike pair. A `webauthn` attribute in HTML is extra encoding.
 
 ## Use it somewhere new
 

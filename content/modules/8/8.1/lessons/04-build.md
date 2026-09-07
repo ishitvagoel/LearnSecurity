@@ -5,7 +5,7 @@
 
 ## The rule
 
-A Compose switch that hides the button is not the fix. Play Integrity checked only in the app is not the fix. Shrinking the app is not the fix.
+A Compose switch that hides the button does not ignore the client boolean. Play Integrity checked only in the app is still the client talking. Shrinking the app does not change `allow_export`.
 
 The structural change is: the server **ignores the client integrity field**. `allow_export` must use `server_attest == "play_integrity_pass"` (a local stand-in for a *server-verified* attestation result). The client JSON is not an input to that check. The server attest decides; ignore the client boolean.
 

@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A markdown path can bring raw HTML back after `render` was “fixed once.” Do not log title bodies if they are patient data (3.1). Do not paste nicknames into the ticket.
+A markdown path can bring raw HTML back after `render` was repaired once. Do not log title bodies if they are patient data (3.1). Leave nicknames out of the ticket.
 
 ## Picture: stored field is a signal
 

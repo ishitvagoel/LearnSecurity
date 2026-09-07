@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new exported Activity can copy extras again after `open_link` was “fixed once.” Do not log full URLs if they contain tokens (4.3). Do not attach the link to the ticket.
+A new exported Activity can copy extras again after `open_link` was repaired once. Do not log full URLs if they contain tokens (4.3). Leave the link off the ticket.
 
 ## Picture: dropped as= is a signal
 

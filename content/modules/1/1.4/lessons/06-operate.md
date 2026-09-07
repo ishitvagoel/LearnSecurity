@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-Even after the button is fixed, someone will still fail recovery: a new exclusion you did not model, a library regression, a coercion event. Running it for real is the rest of the loop: notice, contain, restore, and refuse to “help” by emailing note bodies.
+Even after the button is fixed, someone will still fail recovery: a new exclusion you did not model, a library regression, a coercion event. Then notice the failed recovery, contain the leftover path, restore access, and refuse to “help” by emailing note bodies.
 
 ## Picture: the loop continues without lowering the bar
 

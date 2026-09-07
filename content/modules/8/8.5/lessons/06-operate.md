@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new SDK version can turn “include extras” back on after `crash_report` was “fixed once.” Do not log the body you just redacted (3.1). Do not attach the report body to the ticket.
+A new SDK version can turn “include extras” back on after `crash_report` was repaired once. Do not log the body you just redacted (3.1). Leave the report body off the ticket.
 
 ## Picture: body in telemetry is a signal
 

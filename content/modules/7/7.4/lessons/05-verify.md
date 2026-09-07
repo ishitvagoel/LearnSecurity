@@ -50,12 +50,12 @@ A worker labeled `service=worker-sc` may pass on both sides. You still have to d
 
 ## Practice
 
-Do not treat a grep for `worker-sc` in a YAML file as the check. Call `exporter({"user_session": "alice", "service": None})`.
+Call `exporter({"user_session": "alice", "service": None})`. A `worker-sc` string in YAML is the account name, not the bind.
 
 ## Use it somewhere new
 
-Asserting the job was enqueued is not this check. Do not attach to a live broker.
+An enqueued job is not who the exporter is. Do not attach to a live broker.
 
 ## What this page is not doing
 
-Do not treat a live task-library screenshot as proof. Do not log session cookies. Answer keys are not on this site.
+A live task-library screenshot is not the Alice session denied. Do not log session cookies. Answer keys are not on this site.

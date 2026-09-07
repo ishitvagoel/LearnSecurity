@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-Even after the key includes the company, someone can still leak a body: a CDN config change, a new node, stale-while-revalidate serving an old path-only entry. Running it for real is the rest of the loop: notice, contain, restore, and refuse to “help” by logging note bodies.
+Even after the key includes the company, someone can still leak a body: a CDN config change, a new node, stale-while-revalidate serving an old path-only entry. Then notice the cross-company cache hit, purge the path-only entry, restore the keyed slot, and refuse to “help” by logging note bodies.
 
 ## Picture: signal, purge, then secrecy work if bodies escaped
 

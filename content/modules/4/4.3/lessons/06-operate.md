@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new magic link, a proxy that copies query into a header, or a screenshot can still leak after the parser was “fixed once.” Do not log the token while investigating. Do not paste the URL into the ticket.
+A new magic link, a proxy that copies query into a header, or a screenshot can still leak after the parser was repaired once. Do not log the token while investigating. Leave the URL out of the ticket.
 
 ## Picture: reject, metric, purge
 

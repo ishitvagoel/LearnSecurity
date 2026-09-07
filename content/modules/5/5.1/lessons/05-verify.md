@@ -48,7 +48,7 @@ Map the test to the deleted-alice × leftover-analytics row you wrote. If the br
 
 ## Practice
 
-Do not treat a grep for `DELETE FROM notes` as the check. Call `body_retained`.
+Call `body_retained`. A `DELETE FROM notes` string is the notes table, not analytics.
 
 ## Use it somewhere new
 

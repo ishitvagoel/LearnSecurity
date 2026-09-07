@@ -45,7 +45,7 @@ Map the test to the script-read row you wrote. Do not paste keys. If broken does
 
 ## Practice
 
-Do not treat a grep for `HttpOnly` in a string as the check. Call the reader.
+Call the cookie reader. An `HttpOnly` substring is the flag name, not `js_read_session`.
 
 ## Use it somewhere new
 

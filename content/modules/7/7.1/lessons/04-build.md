@@ -5,7 +5,7 @@
 
 ## The rule
 
-An OpenAPI comment is not the fix. A frontend form that omits the checkbox is not the fix. A denylist of `is_admin` only is not the fix.
+An OpenAPI comment does not stop `is_admin` in the body. A frontend form that omits the checkbox is the client. A denylist of `is_admin` only still lets unknown keys through.
 
 The structural change is: the server **copies named fields**. `apply` must copy `display_name` when present and must not copy `is_admin`. Copy only the allowed display name.
 

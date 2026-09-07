@@ -5,7 +5,7 @@
 
 ## The rule
 
-A later email is not the fix. “Disable the password” is not the fix. A logout product name is not the fix. `DELETE FROM users` alone is not the fix.
+A later email does not kill the session. Disabling the password leaves the cookie. A logout product name is a product. `DELETE FROM users` alone is not `session_valid`.
 
 The structural change is: `delete_user` **pops the session**, and `session_valid` **treats `DELETED` as deny**. Kill leftovers in the same use-case. Same delete. Not a follow-up ticket.
 

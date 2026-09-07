@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-An old image or a worker can still present `sk-lab-hardcoded` after `auth` was “fixed once.” Do not log the secret. Do not paste the key into the ticket.
+An old image or a worker can still present `sk-lab-hardcoded` after `auth` was repaired once. Do not log the secret. Leave the key out of the ticket.
 
 ## Picture: alert on the default string id, not the value
 

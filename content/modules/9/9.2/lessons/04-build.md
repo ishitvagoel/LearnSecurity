@@ -5,7 +5,7 @@
 
 ## The rule
 
-A formatter is not the fix. A later review bot is not the fix. Writing down that eval is dangerous without rejecting it is not the fix.
+A formatter pass does not reject `eval`. A later review bot is later. Writing down that eval is dangerous without rejecting it still returns true.
 
 Structural means the review asks the interpreter question. `review_ok` must be false when the diff contains `eval(`. That is the **lab stand-in** for “user input is not Python grammar.”
 

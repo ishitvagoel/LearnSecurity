@@ -42,7 +42,7 @@ A token whose `aud` is this API may pass on both sides. You still have to deny `
 
 ## Practice
 
-Do not treat a grep for `verify` in an Authlib call as the check. Compare `aud`.
+Compare `aud`. A `verify` call in Authlib is the signature, not the audience.
 
 ## Use it somewhere new
 

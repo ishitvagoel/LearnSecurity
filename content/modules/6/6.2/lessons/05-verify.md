@@ -46,11 +46,11 @@ An honest title may survive on both sides. You still have to encode `<`. If the 
 
 ## Practice
 
-Do not treat a grep for `Content-Security-Policy` as the check. Call `render`. A setup error is not proof the rule holds.
+Call `render`. A `Content-Security-Policy` header is the policy name, not the encoded note. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic nickname. Asserting HTTP 200 is not this check (see 9.3). Do not run a check that loads a live board.
+Clinic nickname. HTTP 200 is the status, not encoded `<` (see 9.3). Do not run a check that loads a live board.
 
 ## What this page is not doing
 

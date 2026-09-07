@@ -50,12 +50,12 @@ A maturity name on a slide is not `accept_exception({"owner": "", "review_by": N
 
 ## Practice
 
-Do not treat a grep for a maturity name as the check. Call `accept_exception({"owner": "", "review_by": None})`.
+Call `accept_exception({"owner": "", "review_by": None})`. A maturity name on a slide is a score, not the schema.
 
 ## Use it somewhere new
 
-Asserting “we have a HIPAA slide” is not this check. Do not use a live governance tool.
+A HIPAA slide is a deck, not an owner on the exception. Do not use a live governance tool.
 
 ## What this page is not doing
 
-Do not treat a live disclosure screenshot as proof. Do not log secret writeups. Answer keys are not on this site. This page does not mark you as finished.
+A live disclosure screenshot is not an owner on the exception. Do not log secret writeups. Answer keys are not on this site. This page does not mark you as finished.

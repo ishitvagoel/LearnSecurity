@@ -49,11 +49,11 @@ Honest argv shape must pass on repaired. `sh -c` must fail on broken. If the bro
 
 ## Practice
 
-Do not treat a grep for `shell=False` in a comment as the check. Call `argv_for_list`.
+Call `argv_for_list`. A `shell=False` comment is a hope, not argv.
 
 ## Use it somewhere new
 
-Clinic CSV filename. Asserting the export file exists is not this check (see 9.3). Do not run a test that executes argv.
+Clinic CSV filename. An export file that exists is the bytes on disk, not list-form argv (see 9.3). Do not run a test that executes argv.
 
 ## What this page is not doing
 

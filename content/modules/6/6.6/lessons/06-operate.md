@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-Even after `accept` was fixed once, a new accept route can skip consume. Running it for real is the rest of the loop: notice, keep deny, remove a surprise member, and refuse to “help” by logging the token.
+Even after `accept` was repaired once, a new accept route can skip consume. Then notice the second join, keep the deny, remove a surprise member, and refuse to “help” by logging the token.
 
 Do not log tokens (4.3) or email addresses as if they were public ids. Do not paste the mail link into the ticket.
 

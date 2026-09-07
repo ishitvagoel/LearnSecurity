@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new CSV exporter or a later worker dump (7.4) can skip the GraphQL resolver after `resolve` was “fixed once.” Do not log `secret_internal` values (3.1). Do not attach the field value to the ticket.
+A new CSV exporter or a later worker dump (7.4) can skip the GraphQL resolver after `resolve` was repaired once. Do not log `secret_internal` values (3.1). Leave the field value off the ticket.
 
 ## Picture: denied field is a signal
 

@@ -46,12 +46,12 @@ A deep link that only names the note may pass on both sides. You still have to i
 
 ## Practice
 
-Do not treat a grep for `android:autoVerify` as the check. Call `open_link({"as": "admin"})`. A setup error is not proof the rule holds.
+Call `open_link({"as": "admin"})`. `android:autoVerify` is the App Link flag. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Asserting the Activity launched is not this check. Do not use a sideloaded malware APK.
+An Activity that launched is the Intent, not `current_user()` still alice. Do not use a sideloaded malware APK.
 
 ## What this page is not doing
 
-Do not treat a live Intent screenshot as proof. Do not log full URLs that contain tokens. Answer keys are not on this site.
+A live Intent screenshot is not `current_user()` still alice. Do not log full URLs that contain tokens. Answer keys are not on this site.

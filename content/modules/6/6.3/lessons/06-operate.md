@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new JSON share route can forget the token check after `allow_share` was “fixed once.” Do not log cookie values or note bodies. Do not paste cookies into the ticket.
+A new JSON share route can forget the token check after `allow_share` was repaired once. Do not log cookie values or note bodies. Leave cookies out of the ticket.
 
 ## Picture: a denied foreign POST is a signal
 

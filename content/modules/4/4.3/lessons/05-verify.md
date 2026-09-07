@@ -42,7 +42,7 @@ Map each test to a row on the channel map you drew. If the broken files do not f
 
 ## Practice
 
-Do not treat a grep for `Referrer-Policy` as the check. Call `session_from_request` on a query dict.
+Call `session_from_request` on a query dict. A `Referrer-Policy` header is the referrer, not the query token.
 
 ## Use it somewhere new
 

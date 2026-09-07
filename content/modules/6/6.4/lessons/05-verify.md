@@ -43,12 +43,12 @@ A relative name under the lab folder may pass on both sides. You still have to s
 
 ## Practice
 
-Do not treat a grep for `uuid` in a filename helper as the check. Call `resolve("../outside")`.
+Call `resolve("../outside")`. A `uuid` in a filename helper is the name scheme, not the folder.
 
 ## Use it somewhere new
 
-Clinic scan filename. Asserting HTTP 200 on upload is not this check. Do not run a test that opens host files outside the lab folder.
+Clinic scan filename. HTTP 200 on upload is the status, not `../` staying in the folder. Do not run a test that opens host files outside the lab folder.
 
 ## What this page is not doing
 
-Do not treat a host-file screenshot as proof. Do not log original filenames if they are patient ids. Answer keys are not on this site.
+A host-file screenshot is not `../` staying in the folder. Do not log original filenames if they are patient ids. Answer keys are not on this site.

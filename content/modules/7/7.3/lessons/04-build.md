@@ -5,7 +5,7 @@
 
 ## The rule
 
-TLS is not the fix. An IP allow-list is not the fix. Hashing parsed JSON is not the fix. JWT login of the end user is not the fix.
+TLS does not reject an empty signature. An IP allow-list does not reject it. Hashing parsed JSON is the wrong bytes. JWT login of the end user is a different check.
 
 Structural means the MAC is checked before side effects. `accept` must compute HMAC-SHA256 over the raw body with the disposable secret and compare in constant time. Missing or wrong signatures deny.
 

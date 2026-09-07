@@ -5,7 +5,7 @@
 
 ## The rule
 
-An “internal” queue is not the fix. A private network is not the fix. A zero-trust dashboard is not the fix. Signed broker messages are not a substitute for who the worker is.
+An “internal” queue does not bind who the exporter is. A private network does not bind it. A zero-trust dashboard does not bind it. Signed broker messages still are not who the worker is.
 
 Structural means the worker authenticates as a service principal. `exporter` must return `"worker-sc"` only when `service == "worker-sc"`. Leftover `user_session` is ignored.
 

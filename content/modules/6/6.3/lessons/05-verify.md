@@ -44,11 +44,11 @@ Same-origin with a token may pass on both sides (broken files allow any cookie).
 
 ## Practice
 
-Do not treat a grep for `SameSite` in a cookie helper as the check. Call `allow_share` on a foreign origin.
+Call `allow_share` on a foreign origin. `SameSite` on a cookie helper is the cookie flag, not the share.
 
 ## Use it somewhere new
 
-Clinic partner-share. Asserting HTTP 200 on `/share` is not this check (see the later testing topic). Do not run a test that visits a live third-party page.
+Clinic partner-share. HTTP 200 on `/share` is the status, not a foreign origin with `token=None` (see the later testing topic). Do not run a test that visits a live third-party page.
 
 ## What this page is not doing
 

@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A closer can still mark Done after `close_finding` was "fixed once." Do not log note bodies from the original finding. Do not attach patient JSON to the ticket. Do not paste a live-target URL into chat.
+A closer can still mark Done after `close_finding` was repaired once. Do not log note bodies from the original finding. Leave patient JSON off the ticket. Do not paste a live-target URL into chat.
 
 ## Picture: close without retest is a signal
 

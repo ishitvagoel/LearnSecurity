@@ -5,7 +5,7 @@
 
 ## The rule
 
-A later warehouse job is not the fix. “Anonymize the user id” is not the fix. Encrypting a kept row is not the fix. A privacy PDF is not the fix. `DELETE FROM notes` alone is not the fix.
+A later warehouse job does not empty analytics. Anonymizing the user id keeps the body. Encrypting a kept row keeps the body. A privacy PDF is a document. `DELETE FROM notes` alone is not `body_retained`.
 
 The structural change is: `delete_account` **pops `NOTES`, `ANALYTICS`, and `SEARCH`**. Walk the inventory in the same use-case. Same delete. Not a follow-up ticket.
 

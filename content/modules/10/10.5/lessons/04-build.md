@@ -5,7 +5,7 @@
 
 ## The rule
 
-A green SIEM tile is not the fix. A paging ack is not the fix. “Alerts stopped firing so we closed it” is not the fix.
+A green SIEM tile does not close recovery-todo. A paging ack is an ack. “Alerts stopped firing so we closed it” still leaves `close_incident` open.
 
 The structural change is: `close_incident` **returns true only when `recovery == "done"` and `'note_body' not in logs`**. Missing recovery or a body in logs is deny. A green SIEM may *accompany* a match; it does not replace it.
 

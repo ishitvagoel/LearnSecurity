@@ -5,7 +5,7 @@
 
 ## The rule
 
-A unique index you never write is not the fix. HTTP 400 after the membership already exists is not the fix. “We emailed them” is not the fix.
+A unique index you never write does not stop the second join. HTTP 400 after the membership already exists is late. Emailing them is not two `accept("t1")` calls.
 
 The structural change is: `accept` **records `t1` as used when it returns true**. The next call denies. Consume is the accept. Same step. Not a follow-up ticket.
 

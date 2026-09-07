@@ -43,7 +43,7 @@ Map each test to a row you wrote on the compartments page. Do not paste keys. If
 
 ## Practice
 
-Do not treat a grep for `GRANT` in a migration as the check. Call `can_select`.
+Call `can_select`. A `GRANT` line in a migration is a role, not the select.
 
 ## Use it somewhere new
 

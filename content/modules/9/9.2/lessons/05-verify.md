@@ -49,12 +49,12 @@ A diff that never calls eval may pass on both sides. You still have to reject ev
 
 ## Practice
 
-Do not treat a grep for `eval` in a policy PDF as the check. Call `review_ok("x = eval(user)")`.
+Call `review_ok("x = eval(user)")`. An `eval` mention in a policy PDF is a warning, not a reject.
 
 ## Use it somewhere new
 
-Asserting “template still renders” is not this check. Do not use live GitHub or weaponized eval.
+A template that still renders is style, not `review_ok` on eval. Do not use live GitHub or weaponized eval.
 
 ## What this page is not doing
 
-Do not treat a live org screenshot as proof. Do not log eval payloads. Answer keys are not on this site. This site does not mark you as finished.
+A live org screenshot is not `review_ok` rejecting eval. Do not log eval payloads. Answer keys are not on this site. This site does not mark you as finished.

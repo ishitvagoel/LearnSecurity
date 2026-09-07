@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A cache can serve old bytes after `install_ok` was “fixed once.” Do not log registry tokens or signing keys (5.3). Do not paste `.npmrc` into the ticket.
+A cache can serve old bytes after `install_ok` was repaired once. Do not log registry tokens or signing keys (5.3). Leave `.npmrc` out of the ticket.
 
 ## Picture: digest mismatch is a signal
 

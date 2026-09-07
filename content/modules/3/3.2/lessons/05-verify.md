@@ -43,7 +43,7 @@ Map each test to a row you wrote on the model page. If the broken files do not f
 
 ## Practice
 
-Do not treat a grep for `STRIDE` in a markdown file as the check. Call `threats_from_scan(True)`.
+Call `threats_from_scan(True)`. A `STRIDE` heading in markdown is a sticker, not `cross-tenant-read`.
 
 ## Use it somewhere new
 

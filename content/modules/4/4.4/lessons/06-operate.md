@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A missed GraphQL path, a stale grant, or a worker can still release n2 after `can_read` was “fixed once.” Do not log note bodies. Do not paste a personal email into the ticket.
+A missed GraphQL path, a stale grant, or a worker can still release n2 after `can_read` was repaired once. Do not log note bodies. Leave a personal email out of the ticket.
 
 ## Picture: a deny is a signal, not a page footer
 

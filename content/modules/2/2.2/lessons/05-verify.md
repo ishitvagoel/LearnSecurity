@@ -52,7 +52,7 @@ python3 -m pytest labs/2.2/2.2-request-path/tests --impl vulnerable
 python3 -m pytest labs/2.2/2.2-request-path/tests --impl fixed
 ```
 
-Do not treat a grep for `Cache-Control` as the check. Call `cache_get` as company B. 
+Call `cache_get` as company B. A `Cache-Control` header is the hop, not the other-tenant miss.
 
 ## Use it somewhere new
 

@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A misconfigured proxy can start trusting `*` again after `channel_is_https` was “fixed once.” Do not log cookie values. Do not paste a session into the ticket.
+A misconfigured proxy can start trusting `*` again after `channel_is_https` was repaired once. Do not log cookie values. Leave the session out of the ticket.
 
 ## Picture: header versus socket mismatch is a signal
 

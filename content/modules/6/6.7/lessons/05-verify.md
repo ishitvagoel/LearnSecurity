@@ -49,12 +49,12 @@ python3 -m pytest labs/6.7/6.7-lab/tests --impl fixed
 
 ## Practice
 
-Do not treat a grep for an edge-proxy keyword as the check. Call `allow(4)`.
+Call `allow(4)`. An edge-proxy keyword is someone else’s counter.
 
 ## Use it somewhere new
 
-Clinic bulk-export. Asserting HTTP 200 on `/export` is not this check (see 9.3). Do not use a public load test.
+Clinic bulk-export. HTTP 200 on `/export` is the status, not the fourth-export cap (see 9.3). Do not use a public load test.
 
 ## What this page is not doing
 
-Do not treat a live load screenshot as proof. Do not log CSV bodies. Answer keys are not on this site.
+A live load screenshot is not the fourth export denied. Do not log CSV bodies. Answer keys are not on this site.

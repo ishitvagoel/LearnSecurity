@@ -52,12 +52,12 @@ A paging-product name in a runbook is not `close_incident({"recovery": "todo", "
 
 ## Practice
 
-Do not treat a grep for a paging product name as the check. Call `close_incident({"recovery": "todo", "logs": "ok"})`.
+Call `close_incident({"recovery": "todo", "logs": "ok"})`. A paging-product name in a runbook is a vendor, not the close.
 
 ## Use it somewhere new
 
-Asserting “alert fired” is not this check. Do not use a live SIEM.
+An alert that fired is the page, not recovery-todo closed. Do not use a live SIEM.
 
 ## What this page is not doing
 
-Do not treat a live incident screenshot as proof. Do not log note bodies. Answer keys are not on this site. This page does not mark you as finished.
+A live incident screenshot is not recovery-todo closed. Do not log note bodies. Answer keys are not on this site. This page does not mark you as finished.

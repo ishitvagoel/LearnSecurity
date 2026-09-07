@@ -5,7 +5,7 @@
 
 ## The rule
 
-A private namespace is not the fix. A network policy is not the fix. "The CIS scan is green so we shipped it" is not the fix.
+A private namespace does not deny `cluster-admin`. A network policy is a different cut. A green CIS scan is a score, not `pod_ok`.
 
 The structural change is: `pod_ok` **returns `role in ALLOWED_ROLES`** where `ALLOWED_ROLES` is `{"app"}`. Fail-safe: unknown roles deny. A denylist of the string `cluster-admin` would still be god-mode-minus-one-name. Structural means that membership — not namespace name, not a network policy, not a CIS score.
 

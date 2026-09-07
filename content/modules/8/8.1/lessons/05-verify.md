@@ -48,12 +48,12 @@ A server that already says yes may pass on both sides. You still have to deny a 
 
 ## Practice
 
-Do not treat a grep for `PlayIntegrity` in Gradle as the check. Call `allow_export({"integrity": "ok"}, "fail")`. A setup error is not proof the rule holds.
+Call `allow_export({"integrity": "ok"}, "fail")`. A `PlayIntegrity` line in Gradle is the client library. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Asserting the Android button is disabled is not this check. Do not make a live Play Console call.
+A disabled Android button is the UI, not server attest. Do not make a live Play Console call.
 
 ## What this page is not doing
 
-Do not treat a device-farm screenshot as proof. Do not log attestation blobs. Answer keys are not on this site.
+A device-farm screenshot is not server attest. Do not log attestation blobs. Answer keys are not on this site.

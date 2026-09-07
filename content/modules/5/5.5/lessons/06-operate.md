@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-Even after `fetch_sql` was “fixed once,” a new report path can concatenate again. Running it for real is the rest of the loop: notice, contain, rotate, and restore if rows were changed.
+Even after `fetch_sql` was repaired once, a new report path can concatenate again. Then notice the concatenated report, contain the path, rotate the account, and restore if rows were changed.
 
 Do not log note bodies or bound parameter values that are bodies (3.1 / 5.1). Do not paste patient names into the ticket.
 

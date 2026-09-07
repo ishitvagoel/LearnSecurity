@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new export path can join a user filename again after `resolve` was “fixed once.” Do not log original filenames if they are patient ids. Do not paste host paths into the ticket.
+A new export path can join a user filename again after `resolve` was repaired once. Do not log original filenames if they are patient ids. Leave host paths out of the ticket.
 
 ## Picture: an escape attempt is a signal
 

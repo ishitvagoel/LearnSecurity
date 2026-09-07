@@ -5,7 +5,7 @@
 
 ## The rule
 
-A PDF attachment is not the fix. A ticket marked Done is not the fix. "The severity is 9.8 so we closed it" is not the fix.
+Attaching a PDF does not close the finding. Marking the ticket Done does not close it. Severity 9.8 is a priority number, not `close_finding` with a missing retest.
 
 The structural change is: `close_finding` **requires `retest == "pass"`**. Missing, `"fail"`, or `"scheduled"` is deny. That is the lab stand-in for "the same isolation command passed." Structural means that equality — not a PDF, not a Done column, not a severity number.
 

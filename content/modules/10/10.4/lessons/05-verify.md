@@ -50,12 +50,12 @@ A `NODE_ENV` string in compose is not `boot_ok("prod", True)`. This practice nev
 
 ## Practice
 
-Do not treat a grep for `NODE_ENV` in compose as the check. Call `boot_ok("prod", True)`.
+Call `boot_ok("prod", True)`. A `NODE_ENV` string in compose is the label, not debug-off.
 
 ## Use it somewhere new
 
-Asserting “container started” is not this check. Do not use a live Django host.
+A container that started is the process, not prod-plus-debug off. Do not use a live Django host.
 
 ## What this page is not doing
 
-Do not treat a live host screenshot as proof. Do not log stack traces. Answer keys are not on this site. This page does not finish an assurance check-in.
+A live host screenshot is not prod-plus-debug off. Do not log stack traces. Answer keys are not on this site. This page does not finish an assurance check-in.

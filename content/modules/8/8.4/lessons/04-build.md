@@ -5,7 +5,7 @@
 
 ## The rule
 
-R8 is not the fix. Root detection is not the fix. Play App Signing is not the fix. A resilience sticker is not the fix.
+R8 shrinking does not keep the debug client id off the API. Root detection does not keep it off. Play App Signing is a store setting. A resilience sticker is not `api_allowed("debug", "ok")`.
 
 The structural change is: the server **checks build type**. `api_allowed` must require `build_type == "release"` **and** `attest == "ok"` (a stand-in here for server-checked attest from 8.1). Debug never reaches prod. Allow only release plus server attest.
 

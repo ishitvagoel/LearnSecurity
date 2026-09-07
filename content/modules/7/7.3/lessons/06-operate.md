@@ -5,9 +5,9 @@
 
 ## Fixing it once is not enough
 
-Even after `accept` was “fixed once,” a new callback path can skip the MAC. Running it for real is the rest of the loop: notice, contain, and keep the deny.
+Even after `accept` was repaired once, a new callback path can skip the MAC. Then page the unsigned callback, cut the path, and keep the deny.
 
-Do not log bodies or `lab-secret` (3.1 / 5.3). Do not attach the HL7/JSON body to the ticket. Do not POST a live webhook “to confirm.”
+Do not log bodies or `lab-secret` (3.1 / 5.3). Leave the HL7/JSON body off the ticket. Do not POST a live webhook “to confirm.”
 
 ## Picture: a missing sig is a signal
 

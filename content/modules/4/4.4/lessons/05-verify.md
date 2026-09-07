@@ -41,7 +41,7 @@ Alice reading her own note may pass on both sides. You still have to deny bob×n
 
 ## Practice
 
-Do not treat a grep for `admin` in a role list as the check. Call `can_read("bob", "n2")`.
+Call `can_read("bob", "n2")`. An `admin` string in a role list is a label, not the read.
 
 ## Use it somewhere new
 

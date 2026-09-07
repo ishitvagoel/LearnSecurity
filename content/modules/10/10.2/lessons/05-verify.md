@@ -49,12 +49,12 @@ A CycloneDX filename in CI is not `install_ok("aaa", "bbb")`. This practice neve
 
 ## Practice
 
-Do not treat a grep for `CycloneDX` in CI as the check. Call `install_ok("aaa", "bbb")`.
+Call `install_ok("aaa", "bbb")`. A CycloneDX filename in CI is the SBOM, not the digest.
 
 ## Use it somewhere new
 
-Asserting “npm ci ran” is not this check. Do not use a live registry.
+`npm ci` that ran is the install, not matching hashes. Do not use a live registry.
 
 ## What this page is not doing
 
-Do not treat a live npm screenshot as proof. Do not log registry tokens. Answer keys are not on this site. This page does not finish the ship check-in.
+A live npm screenshot is not matching hashes. Do not log registry tokens. Answer keys are not on this site. This page does not finish the ship check-in.

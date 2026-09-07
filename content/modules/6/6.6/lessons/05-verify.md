@@ -49,11 +49,11 @@ Map the test to the second-`t1` deny row you wrote. If the broken files do not f
 
 ## Practice
 
-Do not treat a grep for `UNIQUE` in a migration as the check. Call `accept("t1")` twice.
+Call `accept("t1")` twice. A `UNIQUE` keyword in a migration is the index you still have to write.
 
 ## Use it somewhere new
 
-Clinic guardian invite. Asserting HTTP 200 on `/accept` is not this check (see 9.3). Do not run a test that clicks a live mail link.
+Clinic guardian invite. HTTP 200 on `/accept` is the status, not the second-join deny (see 9.3). Do not run a test that clicks a live mail link.
 
 ## What this page is not doing
 

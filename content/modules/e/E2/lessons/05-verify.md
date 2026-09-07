@@ -45,12 +45,12 @@ An enforcing content-security policy may pass on both sides. You still have to d
 
 ## Practice
 
-Do not treat a grep for `Content-Security-Policy` in HTML as the check. Call `isolation_enforced` on a Report-Only dict. A setup error is not proof the rule holds.
+Call `isolation_enforced` on a Report-Only dict. A `Content-Security-Policy` name in HTML can still be Report-Only. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Asserting “a CSP-looking header exists” is not this check. Do not use a live page.
+A CSP-looking header can still be Report-Only. Do not use a live page.
 
 ## What this page is not doing
 
-Do not treat a live script screenshot as proof. Do not log HTML. Answer keys are not on this site. This page does not finish check-in 7.
+A live script screenshot is not an enforcing policy. Do not log HTML. Answer keys are not on this site. This page does not finish check-in 7.

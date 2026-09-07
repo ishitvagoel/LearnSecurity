@@ -49,12 +49,12 @@ A `CODEOWNERS` file in the repo is not `merge_ok({})`. This practice never opens
 
 ## Practice
 
-Do not treat a grep for `CODEOWNERS` in a repo as the check. Call `merge_ok({})`.
+Call `merge_ok({})`. A `CODEOWNERS` file is review routing, not the threat-model id.
 
 ## Use it somewhere new
 
-Asserting “HIPAA training complete” is not this check. Do not use a live GitHub org.
+HIPAA training complete is a course tile, not a threat-model id on the change. Do not use a live GitHub org.
 
 ## What this page is not doing
 
-Do not treat a live org screenshot as proof. Do not log GitHub tokens. Answer keys are not on this site. This page does not finish check-in 10.
+A live org screenshot is not a threat-model id on the change. Do not log GitHub tokens. Answer keys are not on this site. This page does not finish check-in 10.

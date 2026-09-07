@@ -49,12 +49,12 @@ An `exec_sql` string in a prompt file is not `run_tool("exec_sql", {})`. This pr
 
 ## Practice
 
-Do not treat a grep for `exec_sql` in a prompt file as the check. Call `run_tool("exec_sql", {})`.
+Call `run_tool("exec_sql", {})`. An `exec_sql` string in a prompt file is the forbid-text, not the block.
 
 ## Use it somewhere new
 
-Asserting "the prompt mentions `exec_sql`" is not this check. Do not use a live vendor tenant.
+A prompt that mentions `exec_sql` is the forbid-text, not `run_tool`. Do not use a live vendor tenant.
 
 ## What this page is not doing
 
-Do not treat a live model screenshot as proof. Do not log transcripts. Answer keys are not on this site. This page does not mark you as finished.
+A live model screenshot is not `run_tool` denying `exec_sql`. Do not log transcripts. Answer keys are not on this site. This page does not mark you as finished.

@@ -47,12 +47,12 @@ Saving a non-secret `'other'` value may pass on both sides. You still have to ke
 
 ## Practice
 
-Do not treat a grep for `EncryptedSharedPreferences` as the check. Call `save_note("secret")` then `plaintext_on_disk()`. A setup error is not proof the rule holds.
+Call `save_note("secret")` then `plaintext_on_disk()`. EncryptedSharedPreferences on another file is not this disk. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Asserting Room `insert` succeeded is not this check. Do not image a personal phone.
+A Room `insert` that succeeded is the write, not plaintext-off-disk. Do not image a personal phone.
 
 ## What this page is not doing
 
-Do not treat a live backup screenshot as proof. Do not log note bodies. Answer keys are not on this site. Do not claim the lab prefix is AES.
+A live backup screenshot is not plaintext-off-disk. Do not log note bodies. Answer keys are not on this site. Do not claim the lab prefix is AES.

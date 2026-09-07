@@ -45,7 +45,7 @@ Map each test to the retry row you wrote on the state-machine page. Do not paste
 
 ## Practice
 
-Do not treat a grep for `idempotency` in a string as the check. Call `share_note` twice.
+Call `share_note` twice. An `idempotency` substring is the word, not the count.
 
 ## Use it somewhere new
 

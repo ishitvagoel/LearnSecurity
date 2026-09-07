@@ -5,7 +5,7 @@
 
 ## The rule
 
-Verified App Links are not the fix. `https` is not the fix. `exported=false` without a test is not the fix.
+Verified App Links do not ignore `as=admin`. An https scheme does not ignore it. `exported=false` without a test still leaves extras readable.
 
 The structural change is: `open_link` **does not copy identity keys onto `current_user`**. Locators such as `note=` may be honored later; this practice ignores extras entirely as the smallest fix. Ignore identity parameters on links.
 

@@ -5,7 +5,7 @@
 
 ## The rule
 
-A disabled export button is not the fix. An IP bucket at the edge is not the fix. Autoscaling is not the fix. A CAPTCHA is not the quota.
+A disabled export button does not cap the fourth export. An IP bucket at the edge is someone else’s counter. Autoscaling adds capacity. A CAPTCHA is not the quota.
 
 Structural means the server counts. `allow(n)` must be `n <= 3`. That check lives on the export action — the write path — not in the browser.
 

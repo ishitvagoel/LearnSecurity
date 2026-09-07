@@ -49,12 +49,12 @@ A `Done` status in a ticket is not `close_finding({"retest": None})`. This pract
 
 ## Practice
 
-Do not treat a grep for `Done` in a ticket as the check. Call `close_finding({"retest": None})`.
+Call `close_finding({"retest": None})`. A `Done` status is the ticket, not the retest.
 
 ## Use it somewhere new
 
-Asserting "ticket status Done" is not this check. Do not run a live pentest.
+Ticket status Done is the tracker, not the retest. Do not run a live pentest.
 
 ## What this page is not doing
 
-Do not treat a live host screenshot as proof. Do not log note bodies. Answer keys are not on this site. This page does not mark you as finished.
+A live host screenshot is not a retest on the finding. Do not log note bodies. Answer keys are not on this site. This page does not mark you as finished.

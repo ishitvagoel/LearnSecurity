@@ -5,7 +5,7 @@
 
 ## The rule
 
-A spoken “yes” is not the fix. A maturity score is not the fix. “The VP said yes so we shipped” is not the fix.
+A spoken “yes” does not fill an empty owner. A maturity score does not fill it. “The VP said yes so we shipped” still leaves `accept_exception` open.
 
 The structural change is: `accept_exception` **returns true only when `owner`, `review_by`, and `wcag_checked` are present**. Incomplete records deny. A maturity score may *accompany* the register; it does not replace the row. Structural means that schema — not “the VP said yes,” not a HIPAA slide, not a pledge.
 

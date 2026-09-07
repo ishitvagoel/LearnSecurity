@@ -49,11 +49,11 @@ The named lab host on https may pass on both sides (broken files allow any https
 
 ## Practice
 
-Do not treat a grep for `https` in a prefix check as the check. Call `allowed` on the link-local string.
+Call `allowed` on the link-local string. An `https` prefix is the scheme, not the destination.
 
 ## Use it somewhere new
 
-Clinic PDF URL. Asserting the preview image loaded is not this check (see 9.3). Do not run a test that fetches a live URL.
+Clinic PDF URL. A preview image that loaded is the fetch, not the link-local deny (see 9.3). Do not run a test that fetches a live URL.
 
 ## What this page is not doing
 

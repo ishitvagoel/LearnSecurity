@@ -49,12 +49,12 @@ A testing-guide id in a checklist is not `is_security_test({"status_asserted": T
 
 ## Practice
 
-Do not treat a grep for a guide name as the check. Call `is_security_test({"status_asserted": True})`.
+Call `is_security_test({"status_asserted": True})`. A testing-guide id in a checklist is a tick, not the isolation assert.
 
 ## Use it somewhere new
 
-Asserting the patient page loads is not this check. Do not make a live fuzz call.
+A patient page that loads is a 200, not a named isolation assert. Do not make a live fuzz call.
 
 ## What this page is not doing
 
-Do not treat a live fuzz screenshot as proof. Do not log note bodies. Answer keys are not on this site.
+A live fuzz screenshot is not a named isolation assert. Do not log note bodies. Answer keys are not on this site.

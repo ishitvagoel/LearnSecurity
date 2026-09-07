@@ -49,12 +49,12 @@ An `AUTHZ-1` cell is not `covered(..., [{"asserts_isolation": False}])`. This pr
 
 ## Practice
 
-Do not treat a grep for `AUTHZ-1` in a spreadsheet as the check. Call `covered(..., [{"asserts_isolation": False}])`.
+Call `covered(..., [{"asserts_isolation": False}])`. An `AUTHZ-1` cell is the row id, not the isolation flag.
 
 ## Use it somewhere new
 
-Asserting the spreadsheet exports is not this check. Do not run a live governance scrape.
+A spreadsheet that exports is a file, not `covered` with isolation. Do not run a live governance scrape.
 
 ## What this page is not doing
 
-Do not treat a live checklist screenshot as proof. Do not log note bodies. Answer keys are not on this site. This page does not finish the verification check-in.
+A live checklist screenshot is not `covered` with isolation. Do not log note bodies. Answer keys are not on this site. This page does not finish the verification check-in.

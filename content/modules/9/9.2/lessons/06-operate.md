@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-Even after `review_ok` was “fixed once,” a later generated helper can put eval back. Running it for real is the rest of the loop: notice, contain, and recover.
+Even after `review_ok` was repaired once, a later generated helper can put eval back. Then page the eval helper, quarantine the generated file, and restore the reject.
 
 Do not log the user string that would have been eval’d. Do not paste template source with patient fields into chat.
 

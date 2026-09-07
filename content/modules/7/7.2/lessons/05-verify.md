@@ -45,7 +45,7 @@ A member reading `display_name` may pass on both sides. You still have to deny `
 
 ## Practice
 
-Do not treat a grep for `@hide` in a GraphQL schema as the check. Call `resolve("member", "secret_internal")`.
+Call `resolve("member", "secret_internal")`. `@hide` in a schema is a client hint.
 
 ## Use it somewhere new
 
@@ -53,4 +53,4 @@ Asserting HTTP 200 on `/patients/{id}` is 4.4, not this check. Do not use a publ
 
 ## What this page is not doing
 
-Do not treat a live schema screenshot as proof. Do not log `secret_internal` values. Answer keys are not on this site.
+A live schema screenshot is not `secret_internal` hidden on the resolver. Do not log `secret_internal` values. Answer keys are not on this site.

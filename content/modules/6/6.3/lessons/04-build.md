@@ -5,7 +5,7 @@
 
 ## The rule
 
-A leftover cookie is not the fix. SameSite as the only check is not the fix. CORS as a stand-in is not the fix. “The user clicked something somewhere” is not the fix.
+A leftover cookie does not decide a cross-site share. SameSite as the only check still allows a foreign origin with `token=None`. CORS is an origin header, not the share. “The user clicked something somewhere” is a story.
 
 The structural change is: `allow_share` must require a session cookie **and** `origin == expected` **and** a matching CSRF token. Structural means site-bound intent — not leftover cookie authority from the surroundings.
 

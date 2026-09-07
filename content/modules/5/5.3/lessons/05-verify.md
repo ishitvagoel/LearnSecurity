@@ -41,7 +41,7 @@ The current secret may authenticate on both sides. You still have to kill the ha
 
 ## Practice
 
-Do not treat a grep for `Vault` in a README as the check. Call `auth("sk-lab-hardcoded", current="rotated-now")`.
+Call `auth("sk-lab-hardcoded", current="rotated-now")`. A `Vault` mention in a README is the product, not the default dying.
 
 ## Use it somewhere new
 

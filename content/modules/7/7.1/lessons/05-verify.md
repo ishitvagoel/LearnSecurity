@@ -48,12 +48,12 @@ Patching `display_name` may pass on both sides. You still have to drop `is_admin
 
 ## Practice
 
-Do not treat a grep for `extra = 'forbid'` in a Pydantic model as the check. Call `apply(..., {"is_admin": true})`. A setup error is not proof the rule holds.
+Call `apply(..., {"is_admin": true})`. `extra = 'forbid'` on a Pydantic model is the schema file. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Clinic PATCH `{is_staff:true}`. Asserting HTTP 200 on `/patients/{id}` is not this check (see 9.3). Do not use a public API probe.
+Clinic PATCH `{is_staff:true}`. HTTP 200 on `/patients/{id}` is the status, not `is_admin` staying false (see 9.3). Do not use a public API probe.
 
 ## What this page is not doing
 
-Do not treat a live OpenAPI screenshot as proof. Do not log PATCH bodies. Answer keys are not on this site.
+A live OpenAPI screenshot is not `is_admin` staying false. Do not log PATCH bodies. Answer keys are not on this site.

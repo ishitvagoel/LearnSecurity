@@ -48,12 +48,12 @@ A release build talking to prod may pass on both sides. You still have to deny a
 
 ## Practice
 
-Do not treat a grep for `minifyEnabled` as the check. Call `api_allowed("debug", "ok")`. A setup error is not proof the rule holds.
+Call `api_allowed("debug", "ok")`. `minifyEnabled` is the shrink flag. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 
-Asserting the debug APK builds is not this check. Do not unpack a store APK.
+A debug APK that builds is the compile, not debug-client-id off. Do not unpack a store APK.
 
 ## What this page is not doing
 
-Do not treat a live Play screenshot as proof. Do not log signing keys. Answer keys are not on this site.
+A live Play screenshot is not the debug client id off. Do not log signing keys. Answer keys are not on this site.

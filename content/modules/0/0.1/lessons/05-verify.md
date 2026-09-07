@@ -45,11 +45,11 @@ A localhost URL that is on the list may pass on both sides. If the broken files 
 
 ## Practice
 
-Do not treat a grep for `ALLOWED_HOSTS` in a string as the check. Call `target_is_authorized` on the public literal.
+Call `target_is_authorized` on the public literal. An `ALLOWED_HOSTS` string is the list name, not the public-host deny.
 
 ## Use it somewhere new
 
-Contractor: Asserting “the guide says authorization testing exists” is not this check. Do not run a test that fetches the customer WordPress.
+Contractor: a chapter titled authorization testing is a heading, not the public-host deny. Do not run a test that fetches the customer WordPress.
 
 ## What this page is not doing
 

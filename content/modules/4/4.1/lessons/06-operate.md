@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-Even after `delete_user` was fixed once, a replica session store, a refresh token, or a worker can still present `alice`. Running it for real is the rest of the loop: notice, contain, mass-revoke, and refuse to “help” by logging note bodies.
+Even after `delete_user` was repaired once, a replica session store, a refresh token, or a worker can still present `alice`. Then notice the leftover session, contain the replica store, mass-revoke `alice`, and refuse to “help” by logging note bodies.
 
 Do not paste a personal email or a production cookie into the ticket. Do not log note bodies.
 

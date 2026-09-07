@@ -50,12 +50,12 @@ A crash-product name in Gradle is not `crash_report("secret")`. This practice ne
 
 ## Practice
 
-Do not treat a grep for a crash product name as the check. Call `crash_report("secret")`.
+Call `crash_report("secret")`. A crash-product name in Gradle is inventory.
 
 ## Use it somewhere new
 
-Asserting “crash dialog shown” is not this check. Asserting HTTP 200 is the wrong observation. Do not make a live web-crash call.
+A shown crash dialog is not a redacted body. HTTP 200 is the hop. Do not make a live web-crash call.
 
 ## What this page is not doing
 
-Do not treat a live crash screenshot as proof. Do not log note bodies. Answer keys are not on this site.
+A live crash screenshot is not a redacted report body. Do not log note bodies. Answer keys are not on this site.
