@@ -20,7 +20,7 @@ flowchart TD
 
 A canary product does not keep debug off in production. A tile that says boot was refused is not that check.
 
-Re-run `test_prod_debug_must_not_boot` after any compose change. A green `NODE_ENV` tile does not keep debug off. Emergency debug is E6 — do not call production safe until that exception is on the register.
+Debug on in prod still has to refuse boot in `test_prod_debug_must_not_boot`. A green `NODE_ENV` tile does not keep debug off. Emergency debug is E6 — do not call production safe until that exception is on the register.
 
 ## Signals that do not become a second leak
 

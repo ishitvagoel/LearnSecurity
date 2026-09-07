@@ -41,7 +41,7 @@ Not: a full URL with a query token, a note body, a live-fetch transcript, or “
 
 Putting a full URL with a query token in the alert leaves a second copy (4 in the pager.3).
 
-An “HTTPS only” toggle does not keep link-local URLs off the allow-list. Re-run `test_link_local_metadata_is_denied` after any importer change. Webhook delivery (7.3) is another deputy; name it before you fetch.
+An “HTTPS only” toggle does not keep link-local URLs off the allow-list. A link-local URL still has to fail `test_link_local_metadata_is_denied`. Webhook delivery (7.3) is another deputy; name it before you fetch.
 
 Recovery is incomplete if the next worker still calls `requests.get` on the form URL. Grep importers the same day you keep the deny, and **do not fetch** the denied destination to confirm.
 

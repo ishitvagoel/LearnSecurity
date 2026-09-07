@@ -20,7 +20,7 @@ flowchart TD
 
 A vendor product does not make the tool gate an allow-list. Calling it an allow-list is not that check.
 
-Re-run `test_exec_sql_tool_is_denied` after any tool-registration change. A prompt that “forbids SQL” does not deny `exec_sql`. Coding-assistant install tools in CI still run unconstrained; the allow-list is not done until those tools are named.
+`test_exec_sql_tool_is_denied` still has to catch `exec_sql` on always-run. A prompt that “forbids SQL” does not deny `exec_sql`. Coding-assistant install tools in CI still run unconstrained; the allow-list is not done until those tools are named.
 
 ## Signals that do not become a second leak
 

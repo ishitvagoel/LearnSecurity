@@ -40,7 +40,7 @@ Not: an eval payload, a note body, or a live GitHub trace.
 
 Putting the eval payload or note bodies in the alert leaves a second copy (logging topic / interpreter topic) in the pager.
 
-A formatter passing does not reject `eval`. Re-run `test_eval_on_user_input_is_rejected` after any review-bot change. Terraform `local-exec` and GitHub Actions `run:` still eval user strings; do not merge until those interpreters are named. The lab substring is a stand-in: an `exec(` helper can skip it, so keep the human interpreter question even after this metric is green.
+A formatter passing does not reject `eval`. If the review bot changes, `test_eval_on_user_input_is_rejected` still has to fail on the broken files. Terraform `local-exec` and GitHub Actions `run:` still eval user strings; do not merge until those interpreters are named. The lab substring is a stand-in: an `exec(` helper can skip it, so keep the human interpreter question even after this metric is green.
 
 ## What the framework does vs what you still have to check
 

@@ -1096,6 +1096,15 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/Then page the /g, "Page the "],
   [/Then notice the /g, "Notice the "],
   [/ and refuse to [“"]help[”"] by /g, ", and do not "],
+  [
+    /Re-run (\u0000C\d+\u0000) after any ([^.]+) change\./g,
+    "Keep $1 when $2 changes.",
+  ],
+  [
+    /Re-run (\u0000C\d+\u0000) after any ([^.;]+) change;/g,
+    "Keep $1 when $2 changes;",
+  ],
+  [/Also re-run (\u0000C\d+\u0000)/g, "Also keep $1"],
 ];
 
 const HIDDEN_LAB_NOTES = [

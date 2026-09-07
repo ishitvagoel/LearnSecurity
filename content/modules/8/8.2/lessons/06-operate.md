@@ -27,7 +27,7 @@ A checklist name does not prove the wrap.
 | Recover | Wipe; revoke sessions; exclude backup |
 | Leftover | Extracted keys; screenshots; clipboard; notifications |
 
-An MDM product name does not encrypt the cache. Re-run `test_cached_note_is_not_plaintext_on_disk` after any cache-path change. Internal storage does not wrap the note. Screenshots, recents, and notification text still copy the body; the disk is not clean until those copies are named.
+An MDM product name does not encrypt the cache. Plaintext on disk still has to fail `test_cached_note_is_not_plaintext_on_disk`. Internal storage does not wrap the note. Screenshots, recents, and notification text still copy the body; the disk is not clean until those copies are named.
 
 ## What the framework does vs what you still have to check
 

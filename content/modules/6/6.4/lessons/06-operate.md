@@ -26,7 +26,7 @@ On a broken resolve, a patient filename does not belong in the log.
 | Recover | Deny; audit; restore if a file landed outside |
 | Leftover | Malware scan extra; zip/XML still open |
 
-A log product and an antivirus name do not prove this path rule. Re-run `test_dotdot_does_not_escape_root` after any upload helper change. UUID stored filenames do not bind the resolved prefix. Export and unzip paths still walk `..` if you only bound the upload helper.
+A log product and an antivirus name do not prove this path rule. `..` still has to fail `test_dotdot_does_not_escape_root`. UUID stored filenames do not bind the resolved prefix. Export and unzip paths still walk `..` if you only bound the upload helper.
 
 Recovery is incomplete if the next route still joins `UploadFile.filename` without canonicalize. Grep export and unzip helpers the same day you restore a stray file, or the next scan re-issues the escape.
 

@@ -20,7 +20,7 @@ flowchart TD
 
 An SBOM vendor name does not prove the lockfile was checked.
 
-Re-run `test_hash_mismatch_refuses_install` after any installer change. Attaching an SBOM does not compare digests. Cache poisoning and `@v1` Actions still install by name; the pin is not done until those paths are named.
+A digest mismatch still has to refuse install in `test_hash_mismatch_refuses_install`. Attaching an SBOM does not compare digests. Cache poisoning and `@v1` Actions still install by name; the pin is not done until those paths are named.
 
 ## Signals that do not become a second leak
 

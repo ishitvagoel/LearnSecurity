@@ -20,7 +20,7 @@ flowchart TD
 
 A CIS dashboard does not delete cluster-admin. A badge that says least-privileged is not that check.
 
-Re-run `test_cluster_admin_pod_is_denied` after any Helm change. A “private” namespace does not delete cluster-admin. Break-glass ClusterRoles can still admit cluster-admin; the binding is not gone until those roles are named.
+A cluster-admin Role still has to be denied in `test_cluster_admin_pod_is_denied`. A “private” namespace does not delete cluster-admin. Break-glass ClusterRoles can still admit cluster-admin; the binding is not gone until those roles are named.
 
 ## Signals that do not become a second leak
 

@@ -27,7 +27,7 @@ A dashboard tile does not prove the enforcing header is present.
 | Recover | Flip to enforcing after encoding (6.2) |
 | Leftover | XS-Leaks; cache strip; Trusted Types draft |
 
-Re-run `test_report_only_is_not_enforcement` after any header-middleware change. A green reporting dashboard does not turn Report-Only into enforcement. Encoding (6.2) still has to exist first — a content-security policy is a layer.
+While the header is Report-Only, `test_report_only_is_not_enforcement` is the check. A green reporting dashboard does not turn Report-Only into enforcement. Encoding (6.2) still has to exist first — a content-security policy is a layer.
 
 ## What the framework does vs what you still have to check
 

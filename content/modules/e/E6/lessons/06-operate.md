@@ -20,7 +20,7 @@ flowchart TD
 
 Buying a governance product does not fill owner, review date, and accessibility. A schema screenshot is not that check.
 
-Re-run `test_exception_needs_owner_review_and_wcag` after any register-form change. A maturity 2.5 tile does not fill owner, review date, and accessibility. Expired `review_by` dates are the same unowned hole; do not accept the exception until those rows are named.
+Blank owner or `review_by` still has to make `test_exception_needs_owner_review_and_wcag` fail. A maturity 2.5 tile does not fill owner, review date, and accessibility. Expired `review_by` dates are the same unowned hole; do not accept the exception until those rows are named.
 
 ## Signals that do not become a second leak
 

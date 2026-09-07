@@ -27,7 +27,7 @@ An App Links checklist does not drop `as=` from extras.
 | Recover | Keep alice; force re-login if switched |
 | Leftover | WebView; custom scheme; attacker app installed |
 
-A mobile-filter product name does not ignore `as=`. Re-run `test_deeplink_as_param_does_not_switch_user` after any exported-component change. “App Links verified” does not ignore extras. OAuth redirects (4.5) and WebView bridges are other IPC paths; the deep link is not honest until those extras are named.
+A mobile-filter product name does not ignore `as=`. `as=` on the link still has to fail `test_deeplink_as_param_does_not_switch_user`. “App Links verified” does not ignore extras. OAuth redirects (4.5) and WebView bridges are other IPC paths; the deep link is not honest until those extras are named.
 
 ## What the framework does vs what you still have to check
 

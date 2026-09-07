@@ -27,7 +27,7 @@ A dashboard tile does not prove secrets stayed out of the APK.
 | Recover | Keep deny; rotate keys; fix the flavor |
 | Leftover | Stolen release keys; attestation farms |
 
-Minify does not keep a debug build off prod export. Re-run `test_debug_build_cannot_call_prod_export` after any client-id change. `minifyEnabled` is shrink, not a channel split. Student flavors and leaked debug APKs still hit the same prod API; the client id is not private until those channels are named.
+Minify does not keep a debug build off prod export. A debug build still has to fail `test_debug_build_cannot_call_prod_export`. `minifyEnabled` is shrink, not a channel split. Student flavors and leaked debug APKs still hit the same prod API; the client id is not private until those channels are named.
 
 ## What the framework does vs what you still have to check
 

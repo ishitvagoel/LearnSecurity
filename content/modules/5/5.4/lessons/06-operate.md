@@ -39,7 +39,7 @@ Not: a session cookie, a note body, or “HSTS handled.”
 
 Putting a session cookie or a note body in the alert leaves a second copy in the pager.
 
-A “Force HTTPS” toggle does not prove the socket is TLS. Re-run `test_client_forwarded_proto_is_not_tls` after any proxy change. Page `https://` versus API socket `http` is another hop; do not call TLS done until that pair is named.
+A “Force HTTPS” toggle does not prove the socket is TLS. A client `https` header on an http socket still has to fail `test_client_forwarded_proto_is_not_tls`. Page `https://` versus API socket `http` is another hop; do not call TLS done until that pair is named.
 
 ## What the framework does vs what you still have to check
 

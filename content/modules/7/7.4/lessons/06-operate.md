@@ -40,7 +40,7 @@ Not: Alice’s session cookie, note bodies, a live broker dump, or a real clinic
 
 Putting Alice’s cookie or note bodies in the alert leaves a second copy in the pager.
 
-Enabling a service account does not stop a leftover cookie from being the principal. Overnight export, outbox, and notification fan-out can still inherit Alice’s cookie; do not rotate the worker until those jobs are named. Re-run `test_user_session_is_not_worker_identity` after any task-enqueue change.
+Enabling a service account does not stop a leftover cookie from being the principal. Overnight export, outbox, and notification fan-out can still inherit Alice’s cookie; do not rotate the worker until those jobs are named. A job that carries Alice’s cookie still has to fail `test_user_session_is_not_worker_identity`.
 
 ## What the framework does vs what you still have to check
 

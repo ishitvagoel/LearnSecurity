@@ -24,7 +24,7 @@ flowchart TD
 | Recover | Rotate; rebuild images; purge logs |
 | Leftover | Copies already cloned |
 
-A vendor name does not kill `DEFAULT`. Re-run `test_hardcoded_default_does_not_auth` after any `auth` change. Enabling Vault does not stop the hardcoded default. Images and workers can still hold `DEFAULT`; the gist is not dead until those copies are named.
+A vendor name does not kill `DEFAULT`. Touch `auth` and `test_hardcoded_default_does_not_auth` has to stay red on `DEFAULT`. Enabling Vault does not stop the hardcoded default. Images and workers can still hold `DEFAULT`; the gist is not dead until those copies are named.
 
 Recovery is incomplete if the next image still ships `DEFAULT = "sk-lab-hardcoded"` as an or-clause. Rebuild and prove `test_missing_current_denies` the same day you rotate, or the next allow-when-missing still authenticates the gist copy. A Vault dashboard is not that rebuild.
 

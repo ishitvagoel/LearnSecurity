@@ -20,7 +20,7 @@ flowchart TD
 
 Buying a crash product does not omit the note. A clean-looking report is not that check.
 
-Re-run `test_crash_report_omits_note_body` after any crash-SDK change. Filling the store privacy form does not omit the note. Tracker SDKs and web crash reports (10.5) can still carry the note; redaction is not done until those sinks are named.
+If the crash payload still holds the note, `test_crash_report_omits_note_body` is the check. Filling the store privacy form does not omit the note. Tracker SDKs and web crash reports (10.5) can still carry the note; redaction is not done until those sinks are named.
 
 ## Signals that do not become a second leak
 

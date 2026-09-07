@@ -20,7 +20,7 @@ flowchart TD
 
 Buying a ticket product does not retest the finding. A badge that says “retested” is not that check.
 
-Re-run `test_cannot_close_without_retest` after any close-workflow change. Attaching a PDF does not prove the finding was retested. Extra fields on the note and a role-change cache can reopen the same hole; do not close the ticket until those paths are named.
+Close without a pass on the same URL still has to fail `test_cannot_close_without_retest`. Attaching a PDF does not prove the finding was retested. Extra fields on the note and a role-change cache can reopen the same hole; do not close the ticket until those paths are named.
 
 ## Signals that do not become a second leak
 

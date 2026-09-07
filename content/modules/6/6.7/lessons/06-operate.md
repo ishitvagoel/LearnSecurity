@@ -41,7 +41,7 @@ Not: a note body, a CSV attachment, a real email, or a live load trace against a
 
 Putting note bodies from the CSV in the alert leaves extra copies in the pager.
 
-Enabling a rate limit does not deny the fourth export. Notification fan-out and extra formats still need the fourth-export deny. Re-run `test_fourth_export_is_denied` after any export-route change.
+Enabling a rate limit does not deny the fourth export. Notification fan-out and extra formats still need the fourth-export deny. The fourth call still has to fail `test_fourth_export_is_denied`.
 
 ## What the framework does vs what you still have to check
 

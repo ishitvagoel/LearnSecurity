@@ -45,7 +45,7 @@ A unique-index screenshot does not consume the token. A mail vendor dashboard wi
 
 ## What the framework does vs what you still have to check
 
-A mailer dashboard is not consume. FastAPI does not emit `invite_replay_denied` for you. Re-run `test_invite_token_is_single_use` after any accept-route change.
+A mailer dashboard is not consume. FastAPI does not emit `invite_replay_denied` for you. A second join still has to fail `test_invite_token_is_single_use`.
 
 ## Can people still use it
 

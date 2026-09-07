@@ -20,7 +20,7 @@ flowchart TD
 
 Turning on a scanner does not own the HIGH. A badge that says the finding is owned is not that check.
 
-Re-run `test_unmapped_high_blocks_ship` after any scanner-rule change. Turning code scanning on does not own the HIGH. SCA CVEs that are not actually called still need an *owner* on the map; do not ship an unmapped HIGH.
+An unmapped HIGH still has to block ship in `test_unmapped_high_blocks_ship`. Turning code scanning on does not own the HIGH. SCA CVEs that are not actually called still need an *owner* on the map; do not ship an unmapped HIGH.
 
 ## Signals that do not become a second leak
 

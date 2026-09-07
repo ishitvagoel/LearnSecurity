@@ -20,7 +20,7 @@ flowchart TD
 
 A GitHub CODEOWNERS file does not put `threat_model` on the change.
 
-Re-run `test_merge_requires_threat_model_id` after any merge-bot change. Requiring CODEOWNERS does not put a threat-model id on the change. A stale TM-12 that never mentions OAuth is leftover from topic 3.2 — do not call the merge safe until that row exists.
+No threat-model id still has to block merge in `test_merge_requires_threat_model_id`. Requiring CODEOWNERS does not put a threat-model id on the change. A stale TM-12 that never mentions OAuth is leftover from topic 3.2 — do not call the merge safe until that row exists.
 
 ## Signals that do not become a second leak
 

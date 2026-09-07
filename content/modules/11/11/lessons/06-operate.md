@@ -20,7 +20,7 @@ flowchart TD
 
 Turning on a scanner does not consult the grant on the next read. This next-read check is still the proof.
 
-Re-run `test_revoked_share_cannot_read` after any share-path change. HTTP 200 on DELETE does not prove B cannot read. Phone cache and leftover worker sessions can still read after DELETE 200; revoke is not done until those paths are named. Tabletop remains the restore week.
+After DELETE, `test_revoked_share_cannot_read` still has to go red if B can read. HTTP 200 on DELETE does not prove B cannot read. Phone cache and leftover worker sessions can still read after DELETE 200; revoke is not done until those paths are named. Tabletop remains the restore week.
 
 ## Signals that do not become a second leak
 

@@ -27,7 +27,7 @@ A dashboard tile does not prove the server attest.
 | Recover | Keep deny; revoke tokens; owned rooted-device policy |
 | Leftover | Attestation farms; 8.4 debug clients; old app files shipping the boolean |
 
-A mobile-device product name does not attest export. Re-run `test_client_integrity_claim_is_not_authorization` after any export-route change. Enabling Play Integrity does not authorize the export. Feature flags and `premium=true` are other client booleans; the server is not the authority until those are named.
+A mobile-device product name does not attest export. A client `premium` flag still has to fail `test_client_integrity_claim_is_not_authorization`. Enabling Play Integrity does not authorize the export. Feature flags and `premium=true` are other client booleans; the server is not the authority until those are named.
 
 ## What the framework does vs what you still have to check
 

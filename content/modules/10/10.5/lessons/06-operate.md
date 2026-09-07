@@ -20,7 +20,7 @@ flowchart TD
 
 Buying a SIEM does not prove recovery ran. A tile that says restore ran is not that check.
 
-Re-run `test_cannot_close_without_recovery` after any close-workflow change. Alerts stopping does not prove recovery ran. Also re-run `test_cannot_close_when_logs_contain_note_body` — a second sink (crash reports, web telemetry) can put the body back.
+Close without restore still has to fail `test_cannot_close_without_recovery`. Alerts stopping does not prove recovery ran. `test_cannot_close_when_logs_contain_note_body` still has to catch a second sink — crash reports and web telemetry can put the body back.
 
 ## Signals that do not become a second leak
 
