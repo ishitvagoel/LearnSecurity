@@ -40,7 +40,7 @@ Also reject: public GraphQL attacks; closing findings without re-running `test_m
 - Private JSON keys are hidden
 - GraphQL resolvers inherit REST policy magically
 - A UUID is a capability
-- A famous-bugs nickname is the rule
+- A weakness nickname hides SSN
 
 ## Use it somewhere new
 

@@ -37,7 +37,7 @@ Also reject: live fetches; closing findings without re-running `test_link_local_
 - HTTPS URLs cannot steer the server
 - Private-IP denylists are complete
 - Open redirect is just a user-experience issue
-- A famous-bugs nickname is the rule
+- A Top 10 name is the host allow-list
 - Fetching the URL is how you test this check
 
 ## Use it somewhere new

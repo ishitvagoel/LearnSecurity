@@ -38,7 +38,7 @@ Also reject: a live script hunt; shipping without re-running `test_report_only_i
 
 - Report-Only is isolation
 - Helmet defaults are the guarantee
-- A content-security policy replaces encoding
+- A Report-Only header is the encode check
 - A green reporting dashboard is encoding (6.2)
 - Trusted Types is encoding
 

@@ -40,7 +40,7 @@ Also reject: attack-recipe payloads in the change description; closing findings 
 - HttpOnly makes script in the page harmless
 - Markdown is inert
 - React everywhere means this template is encoded
-- A famous-bugs nickname is the rule
+- A CWE name encodes HTML
 
 ## Use it somewhere new
 

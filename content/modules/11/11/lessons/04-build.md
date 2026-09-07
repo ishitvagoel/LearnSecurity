@@ -42,7 +42,7 @@ If you are unsure whether the grant is gone, return None. Calling revoke does no
 
 - Scanner green.
 - A YAML pack.
-- An assurance-gate sticker.
+- A “capstone passed” check-in.
 - Cache wipe (phone leftover).
 - Copies already sent.
 - A mobile testing profile used as a web check.

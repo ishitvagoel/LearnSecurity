@@ -40,7 +40,7 @@ Also reject: live provider attacks; closing findings without re-running `test_mi
 - An IP allow-list is authenticity
 - Webhooks are just APIs in reverse so JWT login applies
 - Vendor SDK verify is the same as a custom MAC over parsed JSON
-- A famous-bugs nickname is the rule
+- A famous-bugs label verifies HMAC
 
 ## Use it somewhere new
 

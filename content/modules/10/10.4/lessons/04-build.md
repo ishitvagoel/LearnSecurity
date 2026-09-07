@@ -40,7 +40,7 @@ If you are unsure whether this boot is production with debug, do not start. Supp
 - A canary.
 - An IaC file that exists.
 - A manufacturer-defaults program page we have not verified.
-- An assurance-gate sticker.
+- A “debug is off” check-in.
 - Other flags (leftover).
 - A famous-bugs list used as the syllabus.
 - “We meant to turn it off.”
