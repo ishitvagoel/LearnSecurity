@@ -11,7 +11,7 @@ The notes app stores notes per company. Bob has a share on note `n1` in company 
 
 What must not happen is **a grant on n1 authorizes n2**, plus the sibling **owner or admin costume that walks into another company**. That is a secrecy failure because who-is-allowed never ran on the requested object.
 
-Industry lists ask for function permissions and data-item permissions, checked on a trusted server, not in the Next.js client. They also want work never to hit another company’s rows. Extra rows about applying grant changes immediately, and carrying the original person through a worker, are advanced — not this week's check. Famous “broken object / property / function” lists are a later awareness check after this table exists. They are not the syllabus.
+Function permissions and data-item permissions have to be checked on a trusted server, not in the Next.js client. They also want work never to hit another company’s rows. Extra rows about applying grant changes immediately, and carrying the original person through a worker, are advanced — not this week's check. Famous “broken object / property / function” lists are a later awareness check after this table exists. They are not the syllabus.
 
 ## Picture: a collection flag vs a grant on this note
 

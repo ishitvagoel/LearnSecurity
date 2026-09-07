@@ -30,7 +30,7 @@ flowchart TD
 
 The broken files show **cause** (no interpreter question), not an eval trophy. What has to be true first: `review_ok` returns true for every string. You do not need GitHub. You must not run eval on live input.
 
-Industry lists ask for you to avoid `eval` and similar dynamic execution. Module 6.1 already said the name is data, not Python grammar. This check is **the merge gate that should have caught it**.
+You need to avoid `eval` and similar dynamic execution. Module 6.1 already said the name is data, not Python grammar. This check is **the merge gate that should have caught it**.
 
 ## What to look at — cause, not a dump
 

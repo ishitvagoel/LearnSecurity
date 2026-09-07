@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/2.3/2.3-browser-policy/vulnerable/` as a change to notes-app cookie policy. Check whether the jar still hands `sc_session` to script, compare that with the rule, and write changes a developer can verify.
+Review `labs/2.3/2.3-browser-policy/vulnerable/` as a change to notes-app cookie policy. Check whether the jar still hands `sc_session` to script.
 
 Start at the cookie reader, not at a CSP badge.
 
@@ -44,7 +44,7 @@ Also reject: `localStorage` for session; trusting the client as what you trust; 
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one to `test_script_cannot_read_httponly_session`.
+Write three notes a maintainer could act on, and tie at least one to `test_script_cannot_read_httponly_session`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

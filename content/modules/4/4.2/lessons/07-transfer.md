@@ -5,7 +5,7 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic staff SSO** portal. Optionally: a second ceremony before chart export. A password or OTP typed at a lookalike identity provider is still a shared secret. WebAuthn that ignores origin is still theater.
+You get a **clinic staff SSO** portal. Optionally: a second ceremony before chart export. A password or OTP typed at a lookalike identity provider is still a shared secret. WebAuthn that ignores origin is still theater.
 
 Do not answer with a famous-bugs list or a scanner as the definition of security.
 

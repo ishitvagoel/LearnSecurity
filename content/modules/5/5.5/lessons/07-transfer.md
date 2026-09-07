@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic search box** that builds a patient lookup. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic search box** that builds a patient lookup.
 
-The notes-app sentence was: `fetch_sql` returns a bound pair, not a concatenated string. Bind tenant and note id as parameters. Rewrite it for a clinic without changing the fork: the lookup helper returns bound values, not glued query text.
+The notes-app sentence was: `fetch_sql` returns a bound pair, not a concatenated string. Bind tenant and note id as parameters. Rewrite it for a clinic: the lookup helper returns bound values, not glued query text.
 
 Also name NoSQL operators and GraphQL arguments as the same shape (7.1), without running those systems.
 

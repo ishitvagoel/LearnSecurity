@@ -22,7 +22,7 @@ flowchart TD
 
 The lab’s repaired files use `RUNTIME_SELECT_ROLES = {"app"}` and a company equality check. Production should bind the session to a company so a forgotten WHERE still fails closed. Migrator and superuser exist; they must not be `DATABASE_URL` at request time.
 
-Industry lists ask for enforcement on a trusted server, not in the Next.js client. This week's check is the **database** half of that sentence. Who-is-allowed in the handler remains required.
+Enforcement belongs on a trusted server, not in the Next.js client. This week's check is the **database** half of that sentence. Who-is-allowed in the handler remains required.
 
 ## What the repaired files must show
 

@@ -31,7 +31,7 @@ flowchart TD
 
 The broken files show **cause** (the app believes the client about the channel), not a strip-attack walkthrough. What has to be true first: `channel_is_https` returns true if the header is `https` **or** the socket is `https`. You do not need a live man-in-the-middle. You must not run one.
 
-Industry lists ask for TLS on the public HTTP service with no cleartext fallback. A client header is not that TLS.
+TLS has to be on the public HTTP service with no cleartext fallback. A client header is not that TLS.
 
 ## What to look at: the cause, not a trophy
 

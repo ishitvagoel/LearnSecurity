@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic SSN column**. The label on the column says encrypted. The bytes are Base64. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic SSN column**. The label on the column says encrypted. The bytes are Base64.
 
-The notes-app sentence was: `protect("secret")` must not round-trip as Base64. Rewrite it for a clinic without changing the fork: encoding is not secrecy.
+The notes-app sentence was: `protect("secret")` must not round-trip as Base64. Rewrite it for a clinic: encoding is not secrecy.
 
 **Prompt:** Clinic: SSN column labeled “encrypted” that is Base64. Also name password hashing vs field encryption vs backup encryption.
 
@@ -15,7 +15,7 @@ The notes-app sentence was: `protect("secret")` must not round-trip as Base64. R
 
 ## Picture: the label is not the tool
 
-Renaming “secret” to “SSN” is not transfer. The leftover changes. A column named `ssn_encrypted` does not authorize leaving the bytes as Base64. A disk-encryption checkbox is not the check.
+Renaming “secret” to “SSN” is not transfer. A column named `ssn_encrypted` does not authorize leaving the bytes as Base64. A disk-encryption checkbox is not the check.
 
 | Notes app this week | Clinic sketch |
 |---|---|

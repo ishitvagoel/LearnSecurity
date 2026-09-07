@@ -26,7 +26,7 @@ flowchart TD
 
 The repaired files compare company, then owner or grant. A later database-role check is a *second* gate; this table is still required. A clinic admin named Eve is not an `acme` capability. A later PostgreSQL row-level rule does not replace this rule.
 
-Industry lists ask for the check on a trusted server, not in the Next.js client. This week's check covers `can_read`. Extra rows about applying grant changes immediately, and carrying the original person through a worker, are advanced — not this week's check.
+The check belongs on a trusted server, not in the Next.js client. This week's check covers `can_read`. Extra rows about applying grant changes immediately, and carrying the original person through a worker, are advanced — not this week's check.
 
 ## What the repaired files must show
 

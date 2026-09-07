@@ -5,7 +5,7 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic FHIR resource server**. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: `accept_token` is false for `aud=other-api`. Rewrite it for a clinic FHIR resource server without changing the fork.
+You get a **clinic FHIR resource server**. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: `accept_token` is false for `aud=other-api`. Rewrite it for a clinic FHIR resource server.
 
 **Prompt:** Clinic: wrong-audience FHIR token. Also name native redirect (claimed HTTPS, not a custom scheme) vs browser vs backend-for-frontend storage.
 

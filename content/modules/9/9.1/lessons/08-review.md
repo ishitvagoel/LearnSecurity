@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/9.1/9.1-lab/vulnerable/` as a change to the notes app’s coverage check. Check whether a status-only AUTHZ-1 row still counts as covered, compare that with the rule, and write changes a developer can verify.
+Review `labs/9.1/9.1-lab/vulnerable/` as a change to the notes app’s coverage check. Check whether a status-only AUTHZ-1 row still counts as covered.
 
 Start at `covered` and the AUTHZ-1 row, not at a scanner color or a PDF screenshot. The check you already ran (`test_status_only_row_is_not_coverage`) is the rule test. A comment “will map tests later” is not.
 
@@ -46,7 +46,7 @@ Also reject: live portals; closing findings without re-running `test_status_only
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_status_only_row_is_not_coverage`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_status_only_row_is_not_coverage`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

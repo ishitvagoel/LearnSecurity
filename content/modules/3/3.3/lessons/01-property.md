@@ -13,7 +13,7 @@ Architecture is a **second** check: the role the app uses at request time must n
 
 What must not happen is a **shared app role that reads tA as tB**: `can_select("app", "tB", "tA") is True`. Who-is-allowed failed, and the database did not catch it. That is a secrecy failure.
 
-Industry lists ask for a second check so work never hits another company’s rows, and they want that check on a trusted server, not in the Next.js client. Extra isolation around dangerous work is an advanced row, not this week's check. A manufacturer-ownership pledge does not configure `GRANT`.
+There has to be a second check so work never hits another company’s rows, and that check belongs on a trusted server, not in the Next.js client. Extra isolation around dangerous work is an advanced row, not this week's check. A manufacturer-ownership pledge does not configure `GRANT`.
 
 ## Picture: two gates, one forgotten WHERE
 

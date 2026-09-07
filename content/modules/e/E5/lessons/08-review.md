@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-This review is about notes-app company binding. Check whether `tenant_for({"tenant": "A"}, {"tenant": "B"})` still returns `"B"`, compare that with the module rule, and write changes a developer can verify.
+This review is about notes-app company binding. Check whether `tenant_for({"tenant": "A"}, {"tenant": "B"})` still returns `"B"`.
 
 The folder `labs/E5/e5-lab/vulnerable/` is the change. Review it as if it were the notes app’s note query. The check you already ran (`test_body_cannot_switch_tenant`) is the rule test. A comment “will bind later” is not. The JSON body is not the tenant. Body tenant overrides session is the smell. Bind tenant from the session is the structural change.
 
@@ -46,7 +46,7 @@ Also reject: live product probes; shipping without re-running `test_body_cannot_
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one to `test_body_cannot_switch_tenant`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_body_cannot_switch_tenant`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

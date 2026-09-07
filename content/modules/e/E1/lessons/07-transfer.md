@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic summarizer over charts**. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic summarizer over charts**.
 
-The notes-app sentence was: `run_tool("exec_sql", {})` must be None. Rewrite it for a clinic without changing the fork: `exec_sql` still has to be denied. `search_notes` may still run. A system prompt is still English, not permission.
+The notes-app sentence was: `run_tool("exec_sql", {})` must be None. Rewrite it for a clinic: `exec_sql` still has to be denied. `search_notes` may still run. A system prompt is still English, not permission.
 
 **Product sketch:** an EHR-lite "the model is only allowed to summarize, the system prompt forbids SQL," plus "we mapped a famous-bugs list so the agent is done."
 

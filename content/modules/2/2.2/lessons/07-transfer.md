@@ -5,7 +5,7 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic portal** that caches `GET /patients/me` at the edge, and authenticated RSS or a CSV export on the same CDN as a second sketch. TLS ends at the load balancer. A second patient’s GET must not receive the first patient’s chart. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic portal** that caches `GET /patients/me` at the edge, and authenticated RSS or a CSV export on the same CDN as a second sketch. TLS ends at the load balancer. A second patient’s GET must not receive the first patient’s chart.
 
 ## Picture: `/me` is still a shared URL
 

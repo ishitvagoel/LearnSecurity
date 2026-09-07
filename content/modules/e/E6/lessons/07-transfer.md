@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic that files a “HIPAA exception.”** Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic that files a “HIPAA exception.”**
 
-The notes-app sentence was: `accept_exception({"owner": "", "review_by": None})` must be false. Rewrite it for a clinic without changing the fork: empty owner denied, complete record may accept. “Legal said we accept it” is still a spoken yes, not a register row.
+The notes-app sentence was: `accept_exception({"owner": "", "review_by": None})` must be false. Rewrite it for a clinic: empty owner denied, complete record may accept. “Legal said we accept it” is still a spoken yes, not a register row.
 
 **Product sketch:** an EHR-lite “legal said we accept it,” plus “our maturity score is 2.5 so exceptions are done.”
 

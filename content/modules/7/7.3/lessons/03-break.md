@@ -30,7 +30,7 @@ flowchart TD
 
 The broken files show **cause** (the path was trusted). Do not POST anything except this practice. What has to be true first: `accept` returns true for every triple. You do not need HTTP. You must not POST a live provider.
 
-Industry lists ask for a standard-library MAC. Module 5.4 already said TLS proves a hop; this rule is **whether the message came from the provider**. HMAC here is a teaching stand-in, not “we are Stripe.” A famous-bugs nickname for unsafe consumption of APIs is awareness after the cause, not that check.
+Use a standard-library MAC. Module 5.4 already said TLS proves a hop; this rule is **whether the message came from the provider**. HMAC here is a teaching stand-in, not “we are Stripe.” A famous-bugs nickname for unsafe consumption of APIs is awareness after the cause, not that check.
 
 ## What to look at — cause, not a live POST
 

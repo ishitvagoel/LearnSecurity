@@ -340,8 +340,10 @@ const PROSE_PHRASES: [RegExp, string][] = [
     "still the same problem",
   ],
   [/, not a different finding class/g, ""],
-  [/Industry checklists want /g, "Industry lists ask for "],
-  [/Industry lists want /g, "Industry lists ask for "],
+  [/Industry checklists want /g, ""],
+  [/Industry lists want /g, ""],
+  [/Industry lists ask for you to /g, "You need to "],
+  [/Industry lists ask for /g, ""],
   [
     /Industry lists name detect, respond, recover\./g,
     "",

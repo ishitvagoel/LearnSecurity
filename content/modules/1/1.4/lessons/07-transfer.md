@@ -5,7 +5,7 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic portal** that adds a second factor, and a **banking re-auth** dialog as a second sketch. One of the second-factor UIs is mouse-only. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic portal** that adds a second factor, and a **banking re-auth** dialog as a second sketch. One of the second-factor UIs is mouse-only.
 
 ## Picture: transfer changes the envelope, not the product name
 

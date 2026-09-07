@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic crash**. A fake patient name sits in the last chart. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic crash**. A fake patient name sits in the last chart.
 
-The notes-app sentence was: `crash_report("secret")` must not contain `secret`. Rewrite it for a clinic without changing the fork: field × place, allow or deny. The store’s privacy form is still disclosure, not redaction.
+The notes-app sentence was: `crash_report("secret")` must not contain `secret`. Rewrite it for a clinic: field × place, allow or deny. The store’s privacy form is still disclosure, not redaction.
 
 **Product sketch:** an EHR-lite “debug crash includes the last chart so support can reproduce,” plus a completed store privacy form.
 

@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/11/11-lab/vulnerable/` as a change to the notes app’s share revoke. Check whether `read("n1", "B")` after `revoke("n1", "B")` still returns the body, compare that with the rule, and write changes a developer can verify.
+Review `labs/11/11-lab/vulnerable/` as a change to the notes app’s share revoke. Check whether `read("n1", "B")` after `revoke("n1", "B")` still returns the body.
 
 Start at `revoke` / `read` and the B-after-revoke row, not at a scanner color or a README screenshot. The check you already ran (`test_revoked_share_cannot_read`) is the rule test. A comment “will consult grants later” is not.
 
@@ -46,7 +46,7 @@ Also reject: live tenant attacks; merging without re-running `test_revoked_share
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_revoked_share_cannot_read`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_revoked_share_cannot_read`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

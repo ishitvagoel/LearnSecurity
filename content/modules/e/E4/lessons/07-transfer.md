@@ -5,7 +5,7 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic DICOM / image parser**. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: `len(copy_into(4, b"abcdefgh", 4))` must be ≤ 4. Rewrite it for a clinic without changing the fork.
+You get a **clinic DICOM / image parser**. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: `len(copy_into(4, b"abcdefgh", 4))` must be ≤ 4. Rewrite it for a clinic.
 
 **Prompt:** Clinic DICOM / image parser. Also name a protobuf C extension.
 

@@ -13,7 +13,7 @@ A HIGH finding that is not mapped to a row on the coverage map is **unowned**. U
 
 What must not happen: **an unmapped HIGH is allowed to ship**. That is integrity of the release decision. An unknown HIGH lands in production because nobody owned it.
 
-Industry lists ask for you to update components on a documented clock — that is an SCA *signal*, not the map. Dependency confusion is an **advanced leftover**: mapping “the scanner found nothing” is not coverage. A maturity score measures whether you *triage*. It is not `ship_ok`. A vendor’s default setup is not your policy.
+You need to update components on a documented clock — that is an SCA *signal*, not the map. Dependency confusion is an **advanced leftover**: mapping “the scanner found nothing” is not coverage. A maturity score measures whether you *triage*. It is not `ship_ok`. A vendor’s default setup is not your policy.
 
 ## Picture: the scanner is a signal
 

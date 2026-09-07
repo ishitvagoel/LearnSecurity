@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic batch-export worker**. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic batch-export worker**.
 
-The notes-app sentence was: `exporter({"user_session": "alice", "service": None})` must be `None`. A leftover user session is not worker identity. Rewrite it for a clinic without changing the fork: leftover session denied, named worker allowed.
+The notes-app sentence was: `exporter({"user_session": "alice", "service": None})` must be `None`. A leftover user session is not worker identity. Rewrite it for a clinic: leftover session denied, named worker allowed.
 
 Also name outbox pattern and event schemas as the same identity family, without running those brokers here.
 

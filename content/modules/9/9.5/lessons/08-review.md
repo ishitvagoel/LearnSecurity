@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/9.5/9.5-lab/vulnerable/` as a change to the notes app's close gate. Check whether `close_finding({"retest": None})` still returns true, compare that with the rule, and write changes a developer can verify.
+Review `labs/9.5/9.5-lab/vulnerable/` as a change to the notes app's close gate. Check whether `close_finding({"retest": None})` still returns true.
 
 Start at `close_finding` and the missing-retest row, not at a scanner color or a PDF screenshot. The check you already ran (`test_cannot_close_without_retest`) is the rule test. A comment "will retest later" is not.
 
@@ -46,7 +46,7 @@ Also reject: public pentest steps; closing findings without re-running `test_can
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_cannot_close_without_retest`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_cannot_close_without_retest`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

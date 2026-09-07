@@ -5,7 +5,7 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic lab API key in a gist**. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: `auth("sk-lab-hardcoded", current="rotated-now")` is false. Rewrite it for a clinic without changing the fork.
+You get a **clinic lab API key in a gist**. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: `auth("sk-lab-hardcoded", current="rotated-now")` is false. Rewrite it for a clinic.
 
 **Prompt:** Clinic lab API key in a gist. Also sketch envelope wrapping (data key vs wrapping key) on compromise.
 

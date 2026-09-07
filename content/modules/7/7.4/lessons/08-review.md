@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/7.4/7.4-lab/vulnerable/` as a change to notes-app overnight export. Check whether `exporter({"user_session": "alice", "service": None})` still returns `"alice"`, compare that with the rule, and write changes a developer can verify.
+Review `labs/7.4/7.4-lab/vulnerable/` as a change to notes-app overnight export. Check whether `exporter({"user_session": "alice", "service": None})` still returns `"alice"`.
 
 The check you already ran (`test_user_session_is_not_worker_identity`) is the rule test. A comment “will bind service later” is not.
 
@@ -46,7 +46,7 @@ Also reject: live broker attacks; closing findings without re-running `test_user
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_user_session_is_not_worker_identity`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_user_session_is_not_worker_identity`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

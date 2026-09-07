@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-This review is about notes-app who-is-allowed. Check whether `can_read("bob", "n2")` is still true, compare that with the module rule, and write changes a developer can verify.
+This review is about notes-app who-is-allowed. Check whether `can_read("bob", "n2")` is still true.
 
 The folder `labs/4.4/4.4-lab/vulnerable/` is the change. The check you already ran (`test_grant_on_n1_is_not_grant_on_n2`) is the rule test. A comment “will add object checks later” is not.
 
@@ -46,7 +46,7 @@ Also reject: trusting the client; closing findings without re-running `test_gran
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one to `test_grant_on_n1_is_not_grant_on_n2`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_grant_on_n1_is_not_grant_on_n2`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

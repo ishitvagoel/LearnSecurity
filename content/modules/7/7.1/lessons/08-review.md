@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/7.1/7.1-lab/vulnerable/` as a change to the notes app’s profile PATCH. Check whether `apply(..., {"is_admin": true})` still writes true, compare that with the rule, and write changes a developer can verify.
+Review `labs/7.1/7.1-lab/vulnerable/` as a change to the notes app’s profile PATCH. Check whether `apply(..., {"is_admin": true})` still writes true.
 
 The check you already ran (`test_is_admin_cannot_be_patched`) is the rule check. A comment “we should allow-list later” is not. An inventory ticket about leftover endpoints is not this review.
 
@@ -46,7 +46,7 @@ Also reject: public API attacks; closing findings without re-running `test_is_ad
 
 ## Practice
 
-Write three review notes a peer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_is_admin_cannot_be_patched`. Do not open the keys file.
+Write three notes a peer could act on, and tie at least one to `test_is_admin_cannot_be_patched`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

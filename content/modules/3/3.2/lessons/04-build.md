@@ -24,7 +24,7 @@ flowchart TD
 
 The lab’s repaired files always include the three always-name ids with `owner` and `trigger`. Scanner findings append if new. What you trust is that versioned list, plus the check that those ids exist. Threat Dragon, a data-flow picture, and Semgrep are not oracles.
 
-Industry lists ask for documented security decisions. This week's check covers three notes-app ids, not a complete future catalogue.
+Documented security decisions still have to be checkable. This week's check covers three notes-app ids, not a complete future catalogue.
 
 ## What the repaired files must show
 

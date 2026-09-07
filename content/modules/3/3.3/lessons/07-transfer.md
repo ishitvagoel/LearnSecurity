@@ -5,7 +5,7 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **serverless function with a shared `admin` connection string**, or a **clinic billing replica** that should see invoice rows, not chart text. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: `can_select("app", "tB", "tA") is False`. Rewrite it for a new compute shape without changing the fork.
+You get a **serverless function with a shared `admin` connection string**, or a **clinic billing replica** that should see invoice rows, not chart text. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: `can_select("app", "tB", "tA") is False`. Rewrite it for a new compute shape.
 
 **Prompt:** Serverless function with a shared `admin` connection string.
 

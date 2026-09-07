@@ -5,7 +5,7 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic scan upload** whose original filename is kept. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: `resolve` must not return a path outside `/tmp/sc-lab`. Rewrite it for a clinic without changing the fork.
+You get a **clinic scan upload** whose original filename is kept. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: `resolve` must not return a path outside `/tmp/sc-lab`. Rewrite it for a clinic.
 
 **Prompt:** Clinic scan upload whose original filename is kept. Also name XML entity expansion, pickle, and YAML load as other parsers (same earlier data-vs-grammar shape).
 
@@ -34,7 +34,7 @@ If the original scan filename is joined onto a public folder without canonicaliz
 
 After join and canonicalize, the object is still the imaging root or a child. Randomizing filenames without a prefix test leaves `../` encodings live. The local check is `test_dotdot_does_not_escape_root` — on a practice, not a live imaging store.
 
-Industry lists ask for a hard check on user filenames. That is the clinic transfer. Neither sentence is an awareness-list name.
+User filenames still need a hard check. That is the clinic transfer. Neither sentence is an awareness-list name.
 
 ## What is not good enough
 

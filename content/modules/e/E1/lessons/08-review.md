@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/E1/e1-lab/vulnerable/` as a change to the notes app's summarizer agent. Check whether `run_tool("exec_sql", {})` still runs, compare that with the rule, and write changes a developer can verify.
+Review `labs/E1/e1-lab/vulnerable/` as a change to the notes app's summarizer agent. Check whether `run_tool("exec_sql", {})` still runs.
 
 Start at `run_tool` and the `exec_sql` row, not at a scanner color or a famous-bugs screenshot. The check you already ran (`test_exec_sql_tool_is_denied`) is the rule test. A comment "will allow-list later" is not.
 
@@ -46,7 +46,7 @@ Also reject: live model attacks; shipping without re-running `test_exec_sql_tool
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_exec_sql_tool_is_denied`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_exec_sql_tool_is_denied`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

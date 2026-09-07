@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic booking card**. Chart text and appointment time sit on the same card. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic booking card**. Chart text and appointment time sit on the same card.
 
-The notes-app sentence was: `log_event("note_read", "tenant-A-secret-body")` must not contain the body. Rewrite it for a booking card without changing the fork: field × place, allow or deny.
+The notes-app sentence was: `log_event("note_read", "tenant-A-secret-body")` must not contain the body. Rewrite it for a booking card: field × place, allow or deny.
 
 ## Picture: time is not the chart
 

@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/2.4/2.4-state-time/vulnerable/` as a change to notes-app share. Check whether a second `share_note` with `k1` still appends a row, compare that with the rule, and write changes a developer can verify.
+Review `labs/2.4/2.4-state-time/vulnerable/` as a change to notes-app share. Check whether a second `share_note` with `k1` still appends a row.
 
 The check you already ran (`test_retry_does_not_duplicate_side_effect`) is the rule test. A comment “will add remembering later” is not.
 
@@ -45,7 +45,7 @@ Also reject: treating the client as what you trust; an awareness-list name as th
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one to `test_retry_does_not_duplicate_side_effect`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_retry_does_not_duplicate_side_effect`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

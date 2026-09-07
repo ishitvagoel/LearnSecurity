@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a clinic form that **fetches a lab-result PDF from a URL**. Your job is to rewrite the loop, not to name a bug-list code.
+You get a clinic form that **fetches a lab-result PDF from a URL**.
 
-The notes-app sentence was: `allowed` must be false for a link-local metadata URL. Parse, then allow-list host and scheme. Rewrite it for a clinic without changing the fork: the importer must not treat the posted URL as permission to dial.
+The notes-app sentence was: `allowed` must be false for a link-local metadata URL. Parse, then allow-list host and scheme. Rewrite it for a clinic: the importer must not treat the posted URL as permission to dial.
 
 Also name webhook delivery (7.3) as the same egress deputy, without running those systems.
 

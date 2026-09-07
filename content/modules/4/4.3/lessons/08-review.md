@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/4.3/4.3-lab/vulnerable/` as a change to notes-app session parsing. Check whether `session_from_request` still returns the query token, compare that with the rule, and write changes a developer can verify.
+Review `labs/4.3/4.3-lab/vulnerable/` as a change to notes-app session parsing. Check whether `session_from_request` still returns the query token.
 
 The check you already ran (`test_query_string_token_is_rejected`) is the rule test. A comment “will move to cookies later” is not.
 
@@ -44,7 +44,7 @@ Also reject: treating the client as what you trust; closing findings without re-
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one to `test_query_string_token_is_rejected`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_query_string_token_is_rejected`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

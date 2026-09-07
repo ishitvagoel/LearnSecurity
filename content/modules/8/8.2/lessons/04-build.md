@@ -23,7 +23,7 @@ flowchart TD
 
 The repaired files write `'aead:'` plus length, never the body. Production still needs an Android Keystore key plus real authenticated encryption; iOS Keychain is a later mirror. A fingerprint gates the screen. It does not stop key extraction on a compromised OS. Screenshots, recents, clipboard, logs, auto backup, and WorkManager extras remain extra copies.
 
-Industry lists ask for that secure store implemented. This week's check covers `'secret'` on disk.
+That secure store has to be implemented. This week's check covers `'secret'` on disk.
 
 ## What the repaired files must show
 

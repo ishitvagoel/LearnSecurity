@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/E4/e4-lab/vulnerable/` as a change to the notes app’s unpacker. Check whether `copy_into(4, b"abcdefgh", 4)` still returns more than 4 bytes, compare that with the rule, and write changes a developer can verify.
+Review `labs/E4/e4-lab/vulnerable/` as a change to the notes app’s unpacker. Check whether `copy_into(4, b"abcdefgh", 4)` still returns more than 4 bytes.
 
 The check you already ran (`test_copy_does_not_exceed_buffer`) is the rule test. A comment “will bound later” is not.
 
@@ -48,7 +48,7 @@ Also reject: native exploit walkthroughs; shipping without re-running `test_copy
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one to `test_copy_does_not_exceed_buffer`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_copy_does_not_exceed_buffer`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/E2/e2-lab/vulnerable/` as a change to the notes app’s header middleware. Check whether Report-Only still makes `isolation_enforced` true, compare that with the rule, and write changes a developer can verify.
+Review `labs/E2/e2-lab/vulnerable/` as a change to the notes app’s header middleware. Check whether Report-Only still makes `isolation_enforced` true.
 
 The check you already ran (`test_report_only_is_not_enforcement`) is the rule check. A comment “we should enforce later” is not.
 
@@ -46,7 +46,7 @@ Also reject: a live script hunt; shipping without re-running `test_report_only_i
 
 ## Practice
 
-Write three review notes a peer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_report_only_is_not_enforcement`. Do not open the keys file.
+Write three notes a peer could act on, and tie at least one to `test_report_only_is_not_enforcement`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

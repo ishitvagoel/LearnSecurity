@@ -19,7 +19,7 @@ flowchart TD
   Slot --> Once{consumed?}
 ```
 
-Industry lists ask for locking so a limited seat cannot be booked twice. The seat is the invite.
+Lock so a limited seat cannot be booked twice. The seat is the invite.
 
 ## Picture: 2.4 retry vs this consume
 

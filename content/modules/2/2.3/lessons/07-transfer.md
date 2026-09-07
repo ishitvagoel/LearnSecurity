@@ -5,7 +5,7 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic patient-portal** session cookie, and a **React Native WebView cookie bridge** as a second sketch. Renaming `sc_session` to `clinic_session` is not transfer. Person, object, reader, and leftover change. Chart access and a new bridge are new rules. You must rebuild the sentence.
+You get a **clinic patient-portal** session cookie, and a **React Native WebView cookie bridge** as a second sketch. Renaming `sc_session` to `clinic_session` is not transfer. Person, object, reader, and leftover change. Chart access and a new bridge are new rules. You must rebuild the sentence.
 
 Content Security Policy Level 3 and Trusted Types stay labeled **Working Drafts**. Do not cite a famous-bugs list as the definition of security.
 

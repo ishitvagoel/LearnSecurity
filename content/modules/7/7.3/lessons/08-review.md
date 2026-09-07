@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/7.3/7.3-lab/vulnerable/` as a change to a notes-app billing webhook. Check whether `accept("", "body", "lab-secret")` is still true, compare that with the rule, and write changes a developer can verify.
+Review `labs/7.3/7.3-lab/vulnerable/` as a change to a notes-app billing webhook. Check whether `accept("", "body", "lab-secret")` is still true.
 
 The check you already ran (`test_missing_signature_is_rejected`) is the rule test. A comment “will HMAC later” is not. A famous-bugs ticket is not.
 
@@ -46,7 +46,7 @@ Also reject: live provider attacks; closing findings without re-running `test_mi
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_missing_signature_is_rejected`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_missing_signature_is_rejected`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

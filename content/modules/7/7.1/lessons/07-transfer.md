@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a clinic PATCH patient `{is_staff:true}`. Also name GraphQL mutation arguments and gRPC unknown fields.
+You get a clinic PATCH patient `{is_staff:true}`. Also name GraphQL mutation arguments and gRPC unknown fields.
 
-Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: after `apply(user, {"is_admin": true})`, `is_admin` must still be false. Rewrite it for a clinic without changing the fork.
+Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: after `apply(user, {"is_admin": true})`, `is_admin` must still be false. Rewrite it for a clinic.
 
 **Product sketch:** an EHR-lite “Edit profile” form with no staff checkbox in the SPA, plus a generated OpenAPI file.
 

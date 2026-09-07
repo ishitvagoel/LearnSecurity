@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/8.2/8.2-lab/vulnerable/` as a change to the notes app’s offline cache. Check whether `save_note("secret")` still leaves `'secret'` on disk, compare that with the rule, and write changes a developer can verify.
+Review `labs/8.2/8.2-lab/vulnerable/` as a change to the notes app’s offline cache. Check whether `save_note("secret")` still leaves `'secret'` on disk.
 
 The check you already ran (`test_cached_note_is_not_plaintext_on_disk`) is the rule check. A comment “we should wrap later” is not. A storage sticker in the ticket is not this review.
 
@@ -46,7 +46,7 @@ Also reject: live device imaging; closing findings without re-running `test_cach
 
 ## Practice
 
-Write three review notes a peer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_cached_note_is_not_plaintext_on_disk`. Do not open the keys file.
+Write three notes a peer could act on, and tie at least one to `test_cached_note_is_not_plaintext_on_disk`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

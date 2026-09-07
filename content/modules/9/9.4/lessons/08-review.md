@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/9.4/9.4-lab/vulnerable/` as a change to the notes app’s ship gate. Check whether `ship_ok([HIGH], {})` still returns true, compare that with the rule, and write changes a developer can verify.
+Review `labs/9.4/9.4-lab/vulnerable/` as a change to the notes app’s ship gate. Check whether `ship_ok([HIGH], {})` still returns true.
 
 Start at `ship_ok` and the HIGH×map row, not at a scanner color or a dashboard screenshot. The check you already ran (`test_unmapped_high_blocks_ship`) is the rule test. A comment “will map later” is not.
 
@@ -46,7 +46,7 @@ Also reject: live tenants; closing findings without re-running `test_unmapped_hi
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_unmapped_high_blocks_ship`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_unmapped_high_blocks_ship`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

@@ -5,7 +5,7 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic appointment deep link**. Optionally: a **magic-link email** (still a URL token — short-lived, one-time). Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: query `access_token` yields `None`. Rewrite it for a clinic link without changing the fork.
+You get a **clinic appointment deep link**. Optionally: a **magic-link email** (still a URL token — short-lived, one-time). Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: query `access_token` yields `None`. Rewrite it for a clinic link.
 
 **Prompt:** Clinic appointment deep link. Optionally: magic-link email (still a URL token — short-lived, one-time).
 

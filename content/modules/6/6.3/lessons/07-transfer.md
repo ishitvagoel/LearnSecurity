@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic sketch** with a “share record with partner” POST that relies on the login cookie. Your job is to rewrite the loop, not to name a famous-bugs code.
+You get a **clinic sketch** with a “share record with partner” POST that relies on the login cookie.
 
-The notes-app sentence was: `allow_share` from a foreign origin without a matching CSRF token is false. Rewrite it for a clinic without changing the fork: leftover cookies are not consent to share.
+The notes-app sentence was: `allow_share` from a foreign origin without a matching CSRF token is false. Rewrite it for a clinic: leftover cookies are not consent to share.
 
 **Prompt:** Clinic “share record with partner” POST. Also name postMessage, clickjacking, and CORS `*` with credentials as leftovers — do not run them against a live clinic.
 

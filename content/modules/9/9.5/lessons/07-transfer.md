@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic pentest PDF on a shelf**. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic pentest PDF on a shelf**.
 
-The notes-app sentence was: `close_finding({"retest": None})` must be false. Rewrite it for a clinic without changing the fork: missing retest denied, passing retest may close. A PDF on a shelf is still a report, not a retest.
+The notes-app sentence was: `close_finding({"retest": None})` must be false. Rewrite it for a clinic: missing retest denied, passing retest may close. A PDF on a shelf is still a report, not a retest.
 
 **Product sketch:** an EHR-lite "the assessor delivered a 40-page PDF with severity 9.8 so we closed isolation," plus "the known-exploited list says we must scan the hospital portal."
 

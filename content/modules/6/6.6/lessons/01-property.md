@@ -11,7 +11,7 @@ The notes app invites people with a token. That token is a **join once**. Module
 
 So what must not happen: **an invite token accepted twice**. That is an integrity failure of membership. You get an extra member, or a replay after you meant to revoke.
 
-Industry lists ask for locking so a limited seat cannot be booked twice. They want the join to succeed entirely or roll back. They want fail-closed when the store errors. A last-resort error handler is advanced work, not this week's check. A famous-bugs list is awareness after the cause. A unique index is not this sentence until the consume actually writes it.
+Lock so a limited seat cannot be booked twice. The join has to succeed entirely or roll back. Fail closed when the store errors. A last-resort error handler is advanced work, not this week's check. A famous-bugs list is awareness after the cause. A unique index is not this sentence until the consume actually writes it.
 
 ## Picture: issued, then consumed, then dead
 

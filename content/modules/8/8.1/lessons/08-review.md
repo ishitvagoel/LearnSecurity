@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/8.1/8.1-lab/vulnerable/` as a change to the notes app’s Android export. Check whether `allow_export({"integrity": "ok"}, "fail")` still returns true, compare that with the rule, and write changes a developer can verify.
+Review `labs/8.1/8.1-lab/vulnerable/` as a change to the notes app’s Android export. Check whether `allow_export({"integrity": "ok"}, "fail")` still returns true.
 
 The check you already ran (`test_client_integrity_claim_is_not_authorization`) is the rule check. A comment “we will attest later” is not. A sticker about a mobile checklist is not this review.
 
@@ -46,7 +46,7 @@ Also reject: live device farms; personal-phone cookbooks; closing findings witho
 
 ## Practice
 
-Write three review notes a peer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_client_integrity_claim_is_not_authorization`. Do not open the keys file.
+Write three notes a peer could act on, and tie at least one to `test_client_integrity_claim_is_not_authorization`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

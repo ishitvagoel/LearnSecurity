@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/9.3/9.3-lab/vulnerable/` as a change to the notes app’s security-suite gate. Check whether `{status_asserted: True}` still counts as a security test, compare that with the rule, and write changes a developer can verify.
+Review `labs/9.3/9.3-lab/vulnerable/` as a change to the notes app’s security-suite gate. Check whether `{status_asserted: True}` still counts as a security test.
 
 Start at `is_security_test` and the 200-only row, not at a scanner color or a coverage screenshot. The check you already ran (`test_http_200_only_is_not_a_security_test`) is the rule test. A comment “will add isolation later” is not.
 
@@ -46,7 +46,7 @@ Also reject: live targets; closing findings without re-running `test_http_200_on
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_http_200_only_is_not_a_security_test`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_http_200_only_is_not_a_security_test`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

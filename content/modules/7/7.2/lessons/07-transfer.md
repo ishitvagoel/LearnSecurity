@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic sketch** with a patient page that omits the SSN column in the table, plus GraphQL `Patient { ssn }`. Also name bulk update and search highlighting that leaks snippets.
+You get a **clinic sketch** with a patient page that omits the SSN column in the table, plus GraphQL `Patient { ssn }`. Also name bulk update and search highlighting that leaks snippets.
 
-Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: `resolve("member", "secret_internal")` must be false. Rewrite it for a clinic without changing the fork.
+Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: `resolve("member", "secret_internal")` must be false. Rewrite it for a clinic.
 
 **Prompt:** Clinic member cannot resolve SSN. Also name bulk update and search highlighting leaking snippets.
 

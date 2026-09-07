@@ -32,7 +32,7 @@ flowchart TD
 
 The broken files take that path on purpose. You do not need a real cookie string. The leftover still returning true *is* the leak.
 
-Industry lists ask for all active sessions killed when an account is disabled or deleted. `DELETE FROM users` is a profile observation, not that kill.
+All active sessions have to be killed when an account is disabled or deleted. `DELETE FROM users` is a profile observation, not that kill.
 
 ## What to look at — cause, not a dump
 

@@ -32,7 +32,7 @@ flowchart TD
 
 The broken files take that path on purpose. You do not need a live warehouse query. You must not run one. The leftover still returning `"secret"` *is* the leak.
 
-Industry lists ask for documented retention actually carried out. Encrypting a warehouse you still keep is secrecy theater, not this privacy check.
+Documented retention has to be actually carried out. Encrypting a warehouse you still keep is secrecy theater, not this privacy check.
 
 ## What to look at — cause, not a dump
 

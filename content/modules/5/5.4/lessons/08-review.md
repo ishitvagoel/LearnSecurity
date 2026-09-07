@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/5.4/5.4-lab/vulnerable/` as a change to notes-app channel binding. Check whether `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` is still true, compare that with the rule, and write changes a developer can verify.
+Review `labs/5.4/5.4-lab/vulnerable/` as a change to notes-app channel binding. Check whether `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` is still true.
 
 The check you already ran (`test_client_forwarded_proto_is_not_tls`) is the rule test. A comment “will bind the proxy later” is not.
 
@@ -44,7 +44,7 @@ Also reject: live TLS attacks; closing findings without re-running `test_client_
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_client_forwarded_proto_is_not_tls`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_client_forwarded_proto_is_not_tls`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

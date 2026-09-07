@@ -11,7 +11,7 @@ The notes app lets an owner share a note. Sharing changes who may later read tha
 
 What must not happen is a **second grant**: `share_note("n1", idempotency_key="k1")` twice must not leave `share_count() == 2`. That extra row is someone else on the note who nobody meant to add.
 
-Awareness lists name “something went wrong” as a family. They are not this sentence. Industry lists ask for a business step to succeed all the way or roll back, and they want a last clinic slot not to be booked twice. This practice’s check is share-count under retry, not a payment network.
+Awareness lists name “something went wrong” as a family. They are not this sentence. A business step to succeed all the way or roll back, and they want a last clinic slot not to be booked twice. This practice’s check is share-count under retry, not a payment network.
 
 ## Picture: a timeout splits “did it land?”
 

@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/8.4/8.4-lab/vulnerable/` as a change to the notes app’s prod export gating. Check whether `api_allowed("debug", "ok")` still returns true, compare that with the rule, and write changes a developer can verify.
+Review `labs/8.4/8.4-lab/vulnerable/` as a change to the notes app’s prod export gating. Check whether `api_allowed("debug", "ok")` still returns true.
 
 The check you already ran (`test_debug_build_cannot_call_prod_export`) is the rule check. A comment “we should split flavors later” is not. An R8 screenshot is not this review.
 
@@ -46,7 +46,7 @@ Also reject: live store reverse engineering; closing findings without re-running
 
 ## Practice
 
-Write three review notes a peer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_debug_build_cannot_call_prod_export`. Do not open the keys file.
+Write three notes a peer could act on, and tie at least one to `test_debug_build_cannot_call_prod_export`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

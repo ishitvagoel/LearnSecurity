@@ -5,13 +5,13 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic page** whose API client uses `https://` while the API socket is `http`. A dashboard that “forces HTTPS” sits next to that socket. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic page** whose API client uses `https://` while the API socket is `http`. A dashboard that “forces HTTPS” sits next to that socket.
 
-The notes-app sentence was: `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` is false. Rewrite it for a clinic without changing the fork: a client header is not TLS.
+The notes-app sentence was: `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` is false. Rewrite it for a clinic: a client header is not TLS.
 
 ## Picture: the URL bar is not the socket
 
-Renaming “notes app” to “clinic” is not transfer. The leftover changes. An https page does not authorize treating the API socket as TLS. A dashboard toggle is not the check.
+Renaming “notes app” to “clinic” is not transfer. An https page does not authorize treating the API socket as TLS. A dashboard toggle is not the check.
 
 | Notes app this week | Clinic sketch |
 |---|---|

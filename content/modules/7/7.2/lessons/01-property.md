@@ -11,7 +11,7 @@ The notes app this week stores a note with a member-visible `display_name` and a
 
 What must not happen is **a member resolves `secret_internal`**. That is who-is-allowed at field grain. Being able to call GET `/notes` is not this sentence. A UUID in the URL finds the row. It does not authorize every column.
 
-Industry lists ask for field-level access limited to consumers with an explicit yes. Function-level permission is coarser. Object-level permission was 4.4. Applying a role change through every serializer right away is **advanced**, not this week's check. Famous “broken object / property / function” lists are awareness after this table exists. They are not the syllabus.
+Field-level access has to be limited to consumers with an explicit yes. Function-level permission is coarser. Object-level permission was 4.4. Applying a role change through every serializer right away is **advanced**, not this week's check. Famous “broken object / property / function” lists are awareness after this table exists. They are not the syllabus.
 
 ## Picture: the dump helper writes every column
 

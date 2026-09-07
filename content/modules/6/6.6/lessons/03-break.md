@@ -31,7 +31,7 @@ flowchart TD
 
 The broken files take that path on purpose. The token is never consumed. Sequential double-accept is enough. You do not need a new token string. The leftover still returning true *is* the leak.
 
-Industry lists ask for locking so a limited seat cannot be booked twice. This week's check is sequential consume-once, not a threaded trophy.
+Lock so a limited seat cannot be booked twice. This week's check is sequential consume-once, not a threaded trophy.
 
 ## What to look at — cause, not a dump
 

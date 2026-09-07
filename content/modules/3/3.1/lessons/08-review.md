@@ -45,7 +45,7 @@ Also reject: trusting the browser as the vault; a data-loss product as the rule;
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_note_body_is_not_logged`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_note_body_is_not_logged`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

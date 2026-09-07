@@ -13,7 +13,7 @@ A green SAST, DAST, or package scan is coverage for implementation bugs that hap
 
 What must not happen is an **empty model on a green scan**. `threats_from_scan(scanner_green=True)` returns `[]`, so `cross-tenant-read` is missing. Then the story of what you already checked looks finished. Who may read a note, and where trust stops, were never even listed.
 
-Awareness lists still say “model the design when it changes.” That is not a passing score you earn by pasting a tool report. Industry lists ask for documented security decisions you can check in the running system. They want dangerous features called out in docs when you claim that bar. Neither sentence is “the scanner was green.”
+Awareness lists still say “model the design when it changes.” That is not a passing score you earn by pasting a tool report. You still need documented security decisions you can check in the running system. Call dangerous features out in docs when you claim that bar. Neither sentence is “the scanner was green.”
 
 ## Picture: the scanner is coverage, not the model
 

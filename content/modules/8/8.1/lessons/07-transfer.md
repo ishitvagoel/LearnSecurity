@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a clinic Android client that sends `hipaaMode=true`. Also name feature flags in the app file and `premium=true`.
+You get a clinic Android client that sends `hipaaMode=true`. Also name feature flags in the app file and `premium=true`.
 
-Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: `allow_export({"integrity": "ok"}, "fail")` must be false. Rewrite it for a clinic without changing the fork.
+Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: `allow_export({"integrity": "ok"}, "fail")` must be false. Rewrite it for a clinic.
 
 **Product sketch:** an EHR-lite Compose switch “HIPAA mode” that the API trusts as a boolean.
 

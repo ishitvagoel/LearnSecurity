@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic sketch** with appointments, charts, and a company per clinic. Your job is to rewrite the loop, not to name a famous-bugs code.
+You get a **clinic sketch** with appointments, charts, and a company per clinic.
 
-The notes-app sentence was: `can_read("bob", "n2")` is false. Rewrite it for a clinic without changing the fork: a grant is keyed by person, company, and **this** object.
+The notes-app sentence was: `can_read("bob", "n2")` is false. Rewrite it for a clinic: a grant is keyed by person, company, and **this** object.
 
 **Prompt:** Clinic: grant on appointment A ≠ chart B.
 

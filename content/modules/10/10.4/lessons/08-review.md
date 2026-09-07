@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/10.4/10.4-lab/vulnerable/` as a change to the notes app’s compose boot check. Check whether `boot_ok("prod", True)` still returns true, compare that with the rule, and write changes a developer can verify.
+Review `labs/10.4/10.4-lab/vulnerable/` as a change to the notes app’s compose boot check. Check whether `boot_ok("prod", True)` still returns true.
 
 Start at `boot_ok` and the prod-plus-debug pair, not at a scanner color or a `NODE_ENV` screenshot. The check you already ran (`test_prod_debug_must_not_boot`) is the rule test. A comment “will turn debug off later” is not.
 
@@ -46,7 +46,7 @@ Also reject: live production attacks; booting without re-running `test_prod_debu
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_prod_debug_must_not_boot`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_prod_debug_must_not_boot`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

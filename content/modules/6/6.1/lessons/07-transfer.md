@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic export-to-CSV filename** chosen by a clerk. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic export-to-CSV filename** chosen by a clerk.
 
-The notes-app sentence was: `argv_for_list` must not start `sh -c`. Pass the name as one argv element. Rewrite it for a clinic without changing the fork: the spawn helper returns a list whose program is not `sh`, and the filename is one element.
+The notes-app sentence was: `argv_for_list` must not start `sh -c`. Pass the name as one argv element. Rewrite it for a clinic: the spawn helper returns a list whose program is not `sh`, and the filename is one element.
 
 Also name Jinja, SQL (5.5), and mail headers as the same shape, without running those systems.
 

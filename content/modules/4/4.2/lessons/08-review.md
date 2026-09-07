@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/4.2/4.2-lab/vulnerable/` as a change to notes-app login copy. Reconstruct whether `phishing_resistant("password", EVIL, REAL)` is still true, compare that with the rule, and write changes a developer can verify.
+Review `labs/4.2/4.2-lab/vulnerable/` as a change to notes-app login copy. Reconstruct whether `phishing_resistant("password", EVIL, REAL)` is still true.
 
 The check you already ran (`test_password_is_not_phishing_resistant`) is the rule check. A banner “phishing-resistant password” is not.
 
@@ -44,7 +44,7 @@ Also reject: trusting the client; closing findings without re-running `test_pass
 
 ## Practice
 
-Write three review notes a peer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_password_is_not_phishing_resistant`. Do not open the keys file.
+Write three notes a peer could act on, and tie at least one to `test_password_is_not_phishing_resistant`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

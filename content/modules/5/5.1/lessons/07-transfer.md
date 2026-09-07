@@ -5,13 +5,13 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic record delete**. A patient row and an appointment card sit next to each other. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic record delete**. A patient row and an appointment card sit next to each other.
 
-The notes-app sentence was: after `delete_account("alice")`, `body_retained("alice")` is None. Rewrite it for a clinic without changing the fork: every copy of the notes must die in the same delete.
+The notes-app sentence was: after `delete_account("alice")`, `body_retained("alice")` is None. Rewrite it for a clinic: every copy of the notes must die in the same delete.
 
 ## Picture: the card is another copy
 
-Renaming “alice” to “patient” is not transfer. The leftover changes. Deleting the patient row does not authorize leaving the appointment-card notes alive. A “right to be forgotten” banner is not the check.
+Renaming “alice” to “patient” is not transfer. Deleting the patient row does not authorize leaving the appointment-card notes alive. A “right to be forgotten” banner is not the check.
 
 | Notes app this week | Clinic sketch |
 |---|---|

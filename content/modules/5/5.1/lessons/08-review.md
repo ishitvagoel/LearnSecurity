@@ -44,7 +44,7 @@ Also reject: trusting the client; closing findings without re-running `test_dele
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_deleted_account_leaves_no_analytics_body`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_deleted_account_leaves_no_analytics_body`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

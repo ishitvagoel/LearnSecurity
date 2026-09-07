@@ -31,7 +31,7 @@ flowchart TD
 
 The broken files show **cause** (encoding named encryption), not a decoder script for production. What has to be true first: `protect` returns `base64.b64encode(p)`; `looks_encrypted` is `t != "secret"`. You do not need a live column. You must not decode one.
 
-Industry lists ask for approved authenticated encryption, not encoding. Argon2 is for **passwords**, not this field.
+Use approved authenticated encryption, not encoding. Argon2 is for **passwords**, not this field.
 
 ## What to look at: the cause, not a trophy
 

@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a clinic that **accepts a lab-result webhook**. Your job is to rewrite the loop, not to name a bug-list code.
+You get a clinic that **accepts a lab-result webhook**.
 
-The notes-app sentence was: `accept("", "body", "lab-secret")` must be false. HMAC over the raw body. Rewrite it for a clinic without changing the fork: the handler must not treat a POST that hit the path as proof the lab sent it.
+The notes-app sentence was: `accept("", "body", "lab-secret")` must be false. HMAC over the raw body. Rewrite it for a clinic: the handler must not treat a POST that hit the path as proof the lab sent it.
 
 Also name signed redirects and outbound webhook SSRF (6.5) as the same authenticity family, without running those systems.
 

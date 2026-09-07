@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic sketch** with group practices and an `org_id` in JSON. Your job is to rewrite the loop, not to name a famous-bugs code.
+You get a **clinic sketch** with group practices and an `org_id` in JSON.
 
-The notes-app sentence was: `tenant_for({"tenant": "A"}, {"tenant": "B"})` must be `"A"`. The JSON body is not the tenant. Rewrite it for a clinic without changing the fork: bind tenant from the session; body tenant overrides session must stay false.
+The notes-app sentence was: `tenant_for({"tenant": "A"}, {"tenant": "B"})` must be `"A"`. The JSON body is not the tenant. Rewrite it for a clinic: bind tenant from the session; body tenant overrides session must stay false.
 
 **Prompt:** Clinic group practice switching `org_id` in JSON. Also name a relationship-graph tuple vs this binding.
 

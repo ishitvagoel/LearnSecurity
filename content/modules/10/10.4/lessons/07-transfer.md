@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic Django `DEBUG=True`**. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic Django `DEBUG=True`**.
 
-The notes-app sentence was: `boot_ok("prod", True)` must be false. Rewrite it for a clinic without changing the fork: prod plus debug denied, prod without debug may boot. Setting `NODE_ENV` without comparing `env` to `debug` still leaves `boot_ok("prod", True)` true.
+The notes-app sentence was: `boot_ok("prod", True)` must be false. Rewrite it for a clinic: prod plus debug denied, prod without debug may boot. Setting `NODE_ENV` without comparing `env` to `debug` still leaves `boot_ok("prod", True)` true.
 
 **Product sketch:** an EHR-lite “we left DEBUG on for five minutes so support can see traces,” plus “`NODE_ENV` is production and we canary 10%.”
 

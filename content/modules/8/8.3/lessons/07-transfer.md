@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a clinic deep link `as=doctor`. Also name OAuth redirect to the app (4.5).
+You get a clinic deep link `as=doctor`. Also name OAuth redirect to the app (4.5).
 
-Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: after `open_link({"as": "admin"})`, `current_user()` must still be `"alice"`. Rewrite it for a clinic without changing the fork.
+Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: after `open_link({"as": "admin"})`, `current_user()` must still be `"alice"`. Rewrite it for a clinic.
 
 **Product sketch:** an EHR-lite claimed HTTPS app link `open?as=doctor` “for kiosk demos,” plus App Links verified.
 

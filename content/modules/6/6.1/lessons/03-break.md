@@ -31,7 +31,7 @@ flowchart TD
 
 The broken files show **cause** (name concatenated into a shell string), not a command-execution trophy. What has to be true first: `argv_for_list` returns `['sh', '-c', 'ls ' + name]` and `uses_shell` is true. You do not need to execute the list. You must not.
 
-Industry lists ask for OS calls that pass arguments as parameters. A scanner name for this family is a weakness label, not that check. The class of hostile names is text a shell would treat as extra grammar — extra commands, substitutions, or pipes. Treat it as data for one argv slot. Do not paste that class into notes as a cookbook. Honest name `notes` is enough, because the check looks at shape.
+OS calls have to pass arguments as parameters. A scanner name for this family is a weakness label, not that check. The class of hostile names is text a shell would treat as extra grammar — extra commands, substitutions, or pipes. Treat it as data for one argv slot. Do not paste that class into notes as a cookbook. Honest name `notes` is enough, because the check looks at shape.
 
 ## What to look at — cause, not a dump
 

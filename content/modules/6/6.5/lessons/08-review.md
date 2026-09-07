@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/6.5/6.5-lab/vulnerable/` as a change to notes-app unfurl. Check whether `allowed` is still true for the named link-local metadata URL, compare that with the rule, and write changes a developer can verify.
+Review `labs/6.5/6.5-lab/vulnerable/` as a change to notes-app unfurl. Check whether `allowed` is still true for the named link-local metadata URL.
 
 The check you already ran (`test_link_local_metadata_is_denied`) is the rule test. A comment “will allow-list later” is not.
 
@@ -44,7 +44,7 @@ Also reject: live fetches; closing findings without re-running `test_link_local_
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_link_local_metadata_is_denied`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_link_local_metadata_is_denied`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

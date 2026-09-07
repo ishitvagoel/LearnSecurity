@@ -31,7 +31,7 @@ flowchart TD
 
 The broken files show **cause** (ambient user context). Do not aim anything except this practice. What has to be true first: `exporter` returns `user_session` if present. You do not need a broker. You must not attach to a live queue.
 
-Industry lists ask for backend jobs logged in as their own accounts, not leftover people. Module 4.1 already revoked leftover HTTP sessions. This check is **whether the worker still is that session**. A zero-trust paper does not replace the check.
+Backend jobs should log in as their own accounts, not leftover people. Module 4.1 already revoked leftover HTTP sessions. This check is **whether the worker still is that session**. A zero-trust paper does not replace the check.
 
 ## What to look at: the cause, not a trophy
 

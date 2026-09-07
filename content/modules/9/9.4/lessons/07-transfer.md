@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic dashboard**. Fifty HIGH findings sit unmapped. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic dashboard**. Fifty HIGH findings sit unmapped.
 
-The notes-app sentence was: `ship_ok([HIGH], {})` must be false. Rewrite it for a clinic without changing the fork: finding × map, allow or deny. A noisy dashboard is still noise, not a map.
+The notes-app sentence was: `ship_ok([HIGH], {})` must be false. Rewrite it for a clinic: finding × map, allow or deny. A noisy dashboard is still noise, not a map.
 
 **Product sketch:** an EHR-lite “code scanning is on and the dashboard is noisy so we ship Fridays,” plus a maturity score on a slide.
 

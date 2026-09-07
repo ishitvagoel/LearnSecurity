@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/7.2/7.2-lab/vulnerable/` as a change to the notes app’s note JSON. Check whether `resolve("member", "secret_internal")` is still true, compare that with the rule, and write changes a developer can verify.
+Review `labs/7.2/7.2-lab/vulnerable/` as a change to the notes app’s note JSON. Check whether `resolve("member", "secret_internal")` is still true.
 
 The check you already ran (`test_member_cannot_resolve_internal_field`) is the rule check. A comment “will matrix later” is not.
 
@@ -46,7 +46,7 @@ Also reject: public GraphQL attacks; closing findings without re-running `test_m
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one to `test_member_cannot_resolve_internal_field`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_member_cannot_resolve_internal_field`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

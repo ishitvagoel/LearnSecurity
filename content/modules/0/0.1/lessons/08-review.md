@@ -6,7 +6,7 @@
 
 ## Review the practice files as if they were the course helper
 
-Review `labs/0.1/0.1-orientation/vulnerable/` as a pull request for a course tool. Check whether `target_is_authorized` still returns true for a public host, compare that with the rule, and write changes a developer can check.
+Review `labs/0.1/0.1-orientation/vulnerable/` as a pull request for a course tool. Check whether `target_is_authorized` still returns true for a public host.
 
 The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
@@ -43,7 +43,7 @@ Also reject: fetching example.com; keys in lessons; claiming the first check-in;
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, whether it is a rule or false assurance, a suggested structural change, leftover risk you will **not** delete. Tie at least one to `test_public_host_is_out_of_scope`.
+Write three notes a maintainer could act on, and tie at least one to `test_public_host_is_out_of_scope`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover risk you will **not** delete.
 
 ## Use it somewhere new
 

@@ -34,7 +34,7 @@ flowchart TD
 
 The broken files show **cause** (token in a logged, shared channel), not a trophy dump of production logs. What has to be true first: `session_from_request` prefers `query.get("access_token")`. You do not need a live GET. You must not fetch a URL that contains a real token.
 
-Industry lists ask for secrets in the body or headers, not in the URL. HTTPS is a hop tool, not that sentence.
+Secrets belong in the body or headers, not in the URL. HTTPS is a hop tool, not that sentence.
 
 ## What to look at: the cause, not a trophy
 

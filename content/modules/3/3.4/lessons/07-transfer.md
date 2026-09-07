@@ -5,7 +5,7 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic guardian list**, an **invite token**, or an **export quota**. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: eight `add_share` calls leave count ≤ 5. Rewrite it for a different object without changing the fork.
+You get a **clinic guardian list**, an **invite token**, or an **export quota**. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: eight `add_share` calls leave count ≤ 5. Rewrite it for a different object.
 
 **Prompt:** Clinic: max 3 guardians per child. Optionally map invite tokens and export quotas as *different objects, same shape*.
 

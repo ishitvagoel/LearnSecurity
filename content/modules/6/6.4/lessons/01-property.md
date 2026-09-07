@@ -11,7 +11,7 @@ The notes app stores an upload under a lab folder. The **filename is data**. Aft
 
 What must not happen is **a resolved path that leaves the lab folder**. That is a who-is-allowed failure of *which object*, plus whether the host store stays honest.
 
-Awareness lists name “path walk” as a family. They are not this sentence. Industry lists ask for internally generated names or a hard check on user filenames, uploaded files not run as server code, and an extension that matches the content. Names inside zip files that walk out are a later, harder leftover — not this check. Starlette `UploadFile.filename` is not this sentence.
+Awareness lists name “path walk” as a family. They are not this sentence. Internally generated names or a hard check on user filenames, uploaded files not run as server code, and an extension that matches the content. Names inside zip files that walk out are a later, harder leftover — not this check. Starlette `UploadFile.filename` is not this sentence.
 
 ## Picture: path grammar mixed with data
 

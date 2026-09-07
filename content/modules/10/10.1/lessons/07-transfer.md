@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic that treats “HIPAA training complete” as enough to merge**. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic that treats “HIPAA training complete” as enough to merge**.
 
-The notes-app sentence was: `merge_ok({})` must be false. Rewrite it for a clinic without changing the fork: empty change is deny; a threat-model id may merge. A training checkbox is still a belief, not a threat model.
+The notes-app sentence was: `merge_ok({})` must be false. Rewrite it for a clinic: empty change is deny; a threat-model id may merge. A training checkbox is still a belief, not a threat model.
 
 **Product sketch:** an EHR-lite “CODEOWNERS plus annual HIPAA training so we merge identity changes,” plus a maturity score on a slide.
 

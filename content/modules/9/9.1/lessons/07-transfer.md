@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic HIPAA “done” column**. A fake isolation row sits in a checklist. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic HIPAA “done” column**. A fake isolation row sits in a checklist.
 
-The notes-app sentence was: `covered("AUTHZ-1", [status-only])` must be false. Rewrite it for a clinic without changing the fork: status-only is not coverage; an isolation assert may count. A pasted checklist is still inventory, not a tailored matrix.
+The notes-app sentence was: `covered("AUTHZ-1", [status-only])` must be false. Rewrite it for a clinic: status-only is not coverage; an isolation assert may count. A pasted checklist is still inventory, not a tailored matrix.
 
 **Product sketch:** an EHR-lite “we imported the HIPAA checklist and marked isolation done,” plus a green CI.
 

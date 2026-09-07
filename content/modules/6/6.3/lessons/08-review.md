@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-This review is about notes-app share. Check whether `allow_share` for a foreign origin with `token=None` is still true, compare that with the module rule, and write changes a developer can verify.
+This review is about notes-app share. Check whether `allow_share` for a foreign origin with `token=None` is still true.
 
 The folder `labs/6.3/6.3-lab/vulnerable/` is the change. The check you already ran (`test_foreign_origin_post_is_denied`) is the rule test. A comment “will add CSRF later” is not.
 
@@ -46,7 +46,7 @@ Also reject: live third-party CSRF; closing findings without re-running `test_fo
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one to `test_foreign_origin_post_is_denied`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_foreign_origin_post_is_denied`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic that runs npm install in a prod pod**. A fake “always get latest” install sits next to an SBOM. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic that runs npm install in a prod pod**. A fake “always get latest” install sits next to an SBOM.
 
-The notes-app sentence was: `install_ok("aaa", "bbb")` must be false. Rewrite it for a clinic without changing the fork: mismatch is deny; a matching pair may install. An SBOM is still inventory, not verify.
+The notes-app sentence was: `install_ok("aaa", "bbb")` must be false. Rewrite it for a clinic: mismatch is deny; a matching pair may install. An SBOM is still inventory, not verify.
 
 **Product sketch:** an EHR-lite “prod pod runs npm install so we always get latest,” plus “we attach a CycloneDX SBOM and a provenance badge.”
 

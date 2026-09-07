@@ -11,7 +11,7 @@ The notes app does not take card payments. This elective models a **lab ledger**
 
 What must not happen is a **duplicate capture that double-charges**. That is the same family as a retry that grants twice (2.4) and a token spent twice (6.6), at the grain of money. No real card numbers. No real PAN.
 
-Industry lists ask for locking so a limited thing cannot be booked twice. They want the step to succeed all the way or roll back. Documented connection-pool limits are advanced leftover, not this check. A card-network questionnaire is a sector-scope question — this practice is not in that scope.
+Lock so a limited thing cannot be booked twice. The step to succeed all the way or roll back. Documented connection-pool limits are advanced leftover, not this check. A card-network questionnaire is a sector-scope question — this practice is not in that scope.
 
 ## Picture: key vs append
 

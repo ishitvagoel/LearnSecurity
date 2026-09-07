@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/3.3/3.3-lab/vulnerable/` as a change to the notes app’s database role. Check whether `can_select("app", "tB", "tA")` is still true, compare that with the rule, and write changes a developer can verify.
+Review `labs/3.3/3.3-lab/vulnerable/` as a change to the notes app’s database role. Check whether `can_select("app", "tB", "tA")` is still true.
 
 The check you already ran (`test_app_role_cannot_read_other_tenant`) is the rule test. A comment “row-level security later” is not.
 
@@ -44,7 +44,7 @@ Also reject: treating the client as what you trust; closing findings without re-
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one to `test_app_role_cannot_read_other_tenant`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_app_role_cannot_read_other_tenant`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

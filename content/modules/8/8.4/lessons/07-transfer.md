@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a clinic debug build against prod FHIR. Also name an APK inventory list (10.2).
+You get a clinic debug build against prod FHIR. Also name an APK inventory list (10.2).
 
-Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: `api_allowed("debug", "ok")` must be false. Rewrite it for a clinic without changing the fork.
+Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: `api_allowed("debug", "ok")` must be false. Rewrite it for a clinic.
 
 **Product sketch:** an EHR-lite “debug flavor uses the same application id and API key so testers can hit real data,” plus R8 on release.
 

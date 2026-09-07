@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/E6/e6-lab/vulnerable/` as a change to the notes app’s leftover-risk register. Check whether `accept_exception({"owner": "", "review_by": None})` still returns true, compare that with the rule, and write changes a developer can verify.
+Review `labs/E6/e6-lab/vulnerable/` as a change to the notes app’s leftover-risk register. Check whether `accept_exception({"owner": "", "review_by": None})` still returns true.
 
 Start at `accept_exception` and the empty-owner row, not at a scanner color or a maturity screenshot. The check you already ran (`test_exception_needs_owner_review_and_wcag`) is the rule test. A comment “will add dates later” is not.
 
@@ -46,7 +46,7 @@ Also reject: live disclosure; shipping without re-running `test_exception_needs_
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_exception_needs_owner_review_and_wcag`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_exception_needs_owner_review_and_wcag`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

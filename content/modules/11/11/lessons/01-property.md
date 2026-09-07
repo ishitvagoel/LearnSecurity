@@ -11,7 +11,7 @@ The notes app shares note `n1` from person A with person B, then A revokes. **Pe
 
 So what must not happen: **a revoked share still reads the note**. That is the “check every access” idea from earlier weeks, stitched with time, revoke, delayed workers, and a phone cache.
 
-Industry lists ask for a permission check on every access, not a share event that is forgotten. Access rights changing inside an already-open session without signing in again is extra, advanced work — named so you do not confuse “we stored a revoke row” with “the next read is denied.”
+There has to be a permission check on every access, not a share event that is forgotten. Access rights changing inside an already-open session without signing in again is extra, advanced work — named so you do not confuse “we stored a revoke row” with “the next read is denied.”
 
 A numbered thirteen-item slogan is not the portable pack of tests, models, and restore notes this course asks for.
 

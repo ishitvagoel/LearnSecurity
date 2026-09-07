@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic** that ships Report-Only and calls it a “HIPAA header.” Also name Trusted Types and COOP/COEP.
+You get a **clinic** that ships Report-Only and calls it a “HIPAA header.” Also name Trusted Types and COOP/COEP.
 
-Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: Report-Only must not make `isolation_enforced` true. Rewrite it for a clinic without changing the fork.
+Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: Report-Only must not make `isolation_enforced` true. Rewrite it for a clinic.
 
 **Product sketch:** an EHR-lite “we ship Content-Security-Policy-Report-Only so scripts are blocked,” plus “the reporting dashboard is green.”
 

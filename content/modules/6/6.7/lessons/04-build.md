@@ -22,7 +22,7 @@ flowchart TD
 
 The lab’s repaired files use `n_calls <= 3`. Production still needs a per-person counter (the map from the last page), not a global IP limit that punishes people on one office network. GraphQL aliases (7.1) are another path of the same budget. New accounts can reset the window — name that leftover. Human timing tricks are advanced work, not this check.
 
-Industry lists ask for documented limits actually implemented. This week's check covers `allow(4)`.
+Documented limits have to be actually implemented. This week's check covers `allow(4)`.
 
 ## What the repaired files must show
 

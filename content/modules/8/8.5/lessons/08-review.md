@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/8.5/8.5-lab/vulnerable/` as a change to the notes app’s crash telemetry. Check whether `crash_report("secret")` still contains `'secret'`, compare that with the rule, and write changes a developer can verify.
+Review `labs/8.5/8.5-lab/vulnerable/` as a change to the notes app’s crash telemetry. Check whether `crash_report("secret")` still contains `'secret'`.
 
 Start at `crash_report` and the body×crash row, not at a scanner color or a store screenshot. The check you already ran (`test_crash_report_omits_note_body`) is the rule test. A comment “will redact later” is not.
 
@@ -46,7 +46,7 @@ Also reject: live vendor payloads; closing findings without re-running `test_cra
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_crash_report_omits_note_body`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_crash_report_omits_note_body`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

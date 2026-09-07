@@ -22,7 +22,7 @@ flowchart TD
 
 The repaired files require membership in `{"search_notes"}`. Production still needs that allow-list to be the *right* tools — `search_notes` that returns raw HTML is a lying encoding leftover. A coding assistant in CI that can `pip install` is the same allow-list grain on a different object. Cryptographically bound human approvals are extra, advanced work: a human click is not this check.
 
-Industry lists ask for an allow-list before a tool runs. This week's check covers `exec_sql`.
+Use an allow-list before a tool runs. This week's check covers `exec_sql`.
 
 ## What the repaired files must show
 

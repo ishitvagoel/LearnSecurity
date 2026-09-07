@@ -29,7 +29,7 @@ flowchart TD
 
 The broken files show **cause** (leftover cookie treated as consent), not a cross-site trophy against a public app. What has to be true first: `allow_share` returns `session_cookie` and ignores origin and token. You do not need a live third-party page. You must not build one.
 
-SameSite set for purpose is a helper, not complete. Industry lists ask for anti-forgery tokens (or extra headers a simple form cannot set). This practice covers `allow_share`.
+SameSite set for purpose is a helper, not complete. Anti-forgery tokens (or extra headers a simple form cannot set). This practice covers `allow_share`.
 
 ## What to look at: the cause, not a trophy
 

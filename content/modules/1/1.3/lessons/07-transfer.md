@@ -9,7 +9,7 @@ Synthetic design exercise only. Use inert placeholder documents and local reason
 
 ## Use it somewhere new
 
-PreviewForge is a fictional service used by several companies that turns uploaded office documents into browser previews. The notes-app scaffolding goes away. The rule does not.
+PreviewForge is a fictional service used by several companies that turns uploaded office documents into browser previews. The rule does not.
 
 The proposed design is:
 

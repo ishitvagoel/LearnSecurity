@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/10.5/10.5-lab/vulnerable/` as a change to the notes app’s incident close. Check whether `close_incident({"recovery": "todo", "logs": "ok"})` still returns true, compare that with the rule, and write changes a developer can verify.
+Review `labs/10.5/10.5-lab/vulnerable/` as a change to the notes app’s incident close. Check whether `close_incident({"recovery": "todo", "logs": "ok"})` still returns true.
 
 Start at `close_incident` and the recovery-todo row, not at a scanner color or a SIEM screenshot. The check you already ran (`test_cannot_close_without_recovery`) is the rule test. A comment “will restore later” is not.
 
@@ -46,7 +46,7 @@ Also reject: live incident attacks; closing without re-running both deny tests; 
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_cannot_close_without_recovery`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_cannot_close_without_recovery`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

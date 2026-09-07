@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic that revokes a guardian**. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic that revokes a guardian**.
 
-The notes-app sentence was: after `revoke("n1", "B")`, `read("n1", "B")` must be None. Rewrite it for a clinic without changing the fork: B after revoke still has to be denied. A still reads. B before revoke still reads. HTTP 200 on DELETE is still an event, not the next-read check.
+The notes-app sentence was: after `revoke("n1", "B")`, `read("n1", "B")` must be None. Rewrite it for a clinic: B after revoke still has to be denied. A still reads. B before revoke still reads. HTTP 200 on DELETE is still an event, not the next-read check.
 
 **Product sketch:** an EHR-lite “we hit DELETE /guardians/12 so the next chart read is fine,” plus “the capstone scanner is green so the assurance stamp is done.”
 

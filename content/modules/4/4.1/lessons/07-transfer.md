@@ -5,13 +5,13 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic offboard**. A badge system and a browser session sit next to each other. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic offboard**. A badge system and a browser session sit next to each other.
 
-The notes-app sentence was: after `delete_user("alice")`, `session_valid("alice")` is false. Rewrite it for a clinician leaving without changing the fork: leftover must die in the same delete.
+The notes-app sentence was: after `delete_user("alice")`, `session_valid("alice")` is false. Rewrite it for a clinician leaving: leftover must die in the same delete.
 
 ## Picture: badge off is not session off
 
-Renaming “alice” to “clinician” is not transfer. The leftover changes. Disabling the badge does not authorize leaving the chart cookie alive. A logout product name is not the check.
+Renaming “alice” to “clinician” is not transfer. Disabling the badge does not authorize leaving the chart cookie alive. A logout product name is not the check.
 
 | Notes app this week | Clinic sketch |
 |---|---|

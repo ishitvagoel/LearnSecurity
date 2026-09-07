@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/10.1/10.1-lab/vulnerable/` as a change to the notes app’s merge check. Check whether `merge_ok({})` still returns true, compare that with the rule, and write changes a developer can verify.
+Review `labs/10.1/10.1-lab/vulnerable/` as a change to the notes app’s merge check. Check whether `merge_ok({})` still returns true.
 
 Start at `merge_ok` and the empty dict, not at a scanner color or a training screenshot. The check you already ran (`test_merge_requires_threat_model_id`) is the rule test. A comment “will add a threat model later” is not.
 
@@ -49,7 +49,7 @@ Also reject: live orgs; merging without re-running `test_merge_requires_threat_m
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_merge_requires_threat_model_id`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_merge_requires_threat_model_id`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/E3/e3-lab/vulnerable/` as a change to the notes app's simulated copay. Check whether two `capture("k1")` still leave count 2, compare that with the rule, and write changes a developer can verify.
+Review `labs/E3/e3-lab/vulnerable/` as a change to the notes app's simulated copay. Check whether two `capture("k1")` still leave count 2.
 
 The check you already ran (`test_duplicate_capture_does_not_double_charge`) is the rule test. A comment “will add SEEN later” is not.
 
@@ -46,7 +46,7 @@ Also reject: live processors; shipping without re-running `test_duplicate_captur
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one to `test_duplicate_capture_does_not_double_charge`.
+Write three notes a maintainer could act on, and tie at least one to `test_duplicate_capture_does_not_double_charge`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

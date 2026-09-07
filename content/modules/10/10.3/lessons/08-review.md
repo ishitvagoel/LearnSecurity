@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/10.3/10.3-lab/vulnerable/` as a change to the notes app's cluster admission. Check whether `pod_ok("cluster-admin")` still returns true, compare that with the rule, and write changes a developer can verify.
+Review `labs/10.3/10.3-lab/vulnerable/` as a change to the notes app's cluster admission. Check whether `pod_ok("cluster-admin")` still returns true.
 
 Start at `pod_ok` and the cluster-admin row, not at a scanner color or a CIS screenshot. The check you already ran (`test_cluster_admin_pod_is_denied`) is the rule test. A comment "will tighten RBAC later" is not.
 
@@ -46,7 +46,7 @@ Also reject: live cluster attacks; admitting without re-running `test_cluster_ad
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_cluster_admin_pod_is_denied`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_cluster_admin_pod_is_denied`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

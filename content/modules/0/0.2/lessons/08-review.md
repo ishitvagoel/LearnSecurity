@@ -6,7 +6,7 @@
 
 ## Review the practice files as if they were the course placement service
 
-Review `labs/0.2/0.2-bridge/vulnerable/` as a pull request for a course tool. Check whether `quiz_score_grants_phase1_skip(100)` still returns true, compare that with the rule, and write changes a developer can check.
+Review `labs/0.2/0.2-bridge/vulnerable/` as a pull request for a course tool. Check whether `quiz_score_grants_phase1_skip(100)` still returns true.
 
 The answers are not on this page. Do not open the keys file until someone has looked at your review.
 
@@ -43,7 +43,7 @@ Also reject: live LMS attacks; keys in lessons; claiming check-in 0 or check-in 
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, whether it is a rule or false assurance, a suggested structural change, leftover risk you will **not** delete. Tie at least one to `test_high_quiz_score_is_not_authorization`.
+Write three notes a maintainer could act on, and tie at least one to `test_high_quiz_score_is_not_authorization`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover risk you will **not** delete.
 
 ## Use it somewhere new
 

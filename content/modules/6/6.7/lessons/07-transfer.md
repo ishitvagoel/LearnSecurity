@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic bulk-export** of patients. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic bulk-export** of patients.
 
-The notes-app sentence was: `allow(4)` must be false in the lab window. Export has a resource account, not an unbounded loop. Rewrite it for a clinic without changing the fork: the fourth bulk-export is denied, the first three may be allowed.
+The notes-app sentence was: `allow(4)` must be false in the lab window. Export has a resource account, not an unbounded loop. Rewrite it for a clinic: the fourth bulk-export is denied, the first three may be allowed.
 
 Also name notification fan-out and search complexity as the same budget family (7.1), without running those systems.
 

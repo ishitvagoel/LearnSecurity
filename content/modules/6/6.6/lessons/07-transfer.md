@@ -5,15 +5,15 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic invite-guardian token**. An “add guardian” mail link always returns 200. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic invite-guardian token**. An “add guardian” mail link always returns 200.
 
-The notes-app sentence was: second `accept('t1')` must be false. Rewrite it for a clinic without changing the fork: consume-once, first true, second false.
+The notes-app sentence was: second `accept('t1')` must be false. Rewrite it for a clinic: consume-once, first true, second false.
 
 Also name password reset, 2.4 share retry, and later jobs (7.4) as the same family with different “once” meanings.
 
 ## Picture: guardian invite is still a limited seat
 
-Renaming “t1” to “guardian” is not transfer. The leftover changes. A click counter is not consume. FastAPI, a unique-index screenshot, and “we emailed the guardian” do not consume.
+Renaming “t1” to “guardian” is not transfer. A click counter is not consume. FastAPI, a unique-index screenshot, and “we emailed the guardian” do not consume.
 
 | Notes app this week | Clinic sketch |
 |---|---|

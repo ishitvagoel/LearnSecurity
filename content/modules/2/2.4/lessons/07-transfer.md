@@ -5,7 +5,7 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic last slot**, a **payment capture**, or an **invite token**. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: two `share_note` calls with `k1` leave one share. Rewrite it for a different object without changing the fork.
+You get a **clinic last slot**, a **payment capture**, or an **invite token**. Do not answer with an awareness-list name, a CWE, or a scanner as the definition of security. The notes-app sentence was: two `share_note` calls with `k1` leave one share. Rewrite it for a different object.
 
 **Prompt:** Payment capture and invite tokens are the same shape.
 
@@ -32,7 +32,7 @@ flowchart TD
   Timeout -->|new key k2| Two["Double-book"]
 ```
 
-Industry lists ask for locking so a limited quantity cannot be booked twice. That is the clinic transfer. They also want a business step to succeed all the way or roll back. Neither sentence is an awareness-list name. HTTP still does not make POST happen once.
+Locking so a limited quantity cannot be booked twice. That is the clinic transfer. They also want a business step to succeed all the way or roll back. Neither sentence is an awareness-list name. HTTP still does not make POST happen once.
 
 ## What is not good enough
 

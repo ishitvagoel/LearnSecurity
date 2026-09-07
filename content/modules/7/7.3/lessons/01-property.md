@@ -11,7 +11,7 @@ The notes app may accept provider callbacks (billing, export-ready, invite used)
 
 What must not happen is **an unsigned webhook body accepted**. That is authenticity and integrity of the inbound integration.
 
-Industry lists ask for a standard-library MAC, not a homemade hash. Replay and freshness are leftovers, not this week’s empty-sig check. Per-message digital signatures beyond HMAC are **advanced** work, not this check. A famous-bugs nickname for unsafe consumption of APIs is awareness after the cause. HMAC here is a teaching stand-in, not “we are Stripe.”
+Use a standard-library MAC, not a homemade hash. Replay and freshness are leftovers, not this week’s empty-sig check. Per-message digital signatures beyond HMAC are **advanced** work, not this check. A famous-bugs nickname for unsafe consumption of APIs is awareness after the cause. HMAC here is a teaching stand-in, not “we are Stripe.”
 
 ## Picture: hitting the path versus authenticity
 

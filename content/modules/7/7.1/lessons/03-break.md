@@ -31,7 +31,7 @@ flowchart TD
 
 The broken files show **cause** (the binder maps any key). Do not send extra keys at anything except these local files. What has to be true first: `apply` copies every item from `body` onto `user`. You do not need HTTP. You must not probe a public API.
 
-Industry lists ask for allowed fields limited per action. Topic 1.2 already said who-is-allowed is a rule; this rule is **which keys that rule may write**. GraphQL query cost is 6.7’s resource account, not this PATCH.
+Allowed fields have to be limited per action. Topic 1.2 already said who-is-allowed is a rule; this rule is **which keys that rule may write**. GraphQL query cost is 6.7’s resource account, not this PATCH.
 
 ## What to read in the broken files
 

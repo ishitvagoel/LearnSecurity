@@ -5,7 +5,7 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get **clinic SMS reminders** — a new channel that HTTP scans of the notes app will not enumerate. Do not answer with a Top 10, a CWE, or a scanner as the definition of security. The notes-app sentence was: a green scan still lists `cross-tenant-read`. Rewrite it for a new hop without changing the fork.
+You get **clinic SMS reminders** — a new channel that HTTP scans of the notes app will not enumerate. Do not answer with a Top 10, a CWE, or a scanner as the definition of security. The notes-app sentence was: a green scan still lists `cross-tenant-read`. Rewrite it for a new hop.
 
 **Prompt:** Clinic SMS reminders — a new channel that HTTP scans will not enumerate.
 

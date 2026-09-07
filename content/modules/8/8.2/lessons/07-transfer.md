@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a clinic offline chart cache. Also name iOS Keychain vs Android Keystore and desktop Electron.
+You get a clinic offline chart cache. Also name iOS Keychain vs Android Keystore and desktop Electron.
 
-Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: after `save_note("secret")`, `plaintext_on_disk()` must be false. Rewrite it for a clinic without changing the fork.
+Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: after `save_note("secret")`, `plaintext_on_disk()` must be false. Rewrite it for a clinic.
 
 **Product sketch:** an EHR-lite “available offline” that writes the chart as `charts.json` in internal storage, plus a fingerprint prompt to open the app.
 

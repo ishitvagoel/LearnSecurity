@@ -30,7 +30,7 @@ flowchart TD
 
 The broken files show **cause** (no resource account). Do not aim a load generator at anything except this practice. What has to be true first: `allow` returns true for every `n`. You do not need HTTP. You must not load-test a public host.
 
-Industry lists ask for a stop against scripts that burn quota. Module 3.4 already capped shares on the write path. This check is how many **exports** in a window. A famous API-abuse list is a later name, not this check.
+There has to be a stop against scripts that burn quota. Module 3.4 already capped shares on the write path. This check is how many **exports** in a window. A famous API-abuse list is a later name, not this check.
 
 ## What to look at: the cause, not a trophy
 

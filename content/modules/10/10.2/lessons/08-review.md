@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-Review `labs/10.2/10.2-lab/vulnerable/` as a change to the notes app’s CI install check. Check whether `install_ok("aaa", "bbb")` still returns true, compare that with the rule, and write changes a developer can verify.
+Review `labs/10.2/10.2-lab/vulnerable/` as a change to the notes app’s CI install check. Check whether `install_ok("aaa", "bbb")` still returns true.
 
 Start at `install_ok` and the two hash strings, not at a scanner color or an SBOM screenshot. The check you already ran (`test_hash_mismatch_refuses_install`) is the rule test. A comment “will pin later” is not.
 
@@ -47,7 +47,7 @@ Also reject: live registry attacks; installing without re-running `test_hash_mis
 
 ## Practice
 
-Write three review notes a maintainer could act on. Each note: what you saw, rule or false assurance, suggested structural change, leftover you will **not** delete. Tie at least one note to `test_hash_mismatch_refuses_install`. Do not open the keys file.
+Write three notes a maintainer could act on, and tie at least one to `test_hash_mismatch_refuses_install`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
 
 ## Use it somewhere new
 

@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic page test**. `test_get_patient_200` asserts the owner’s GET returns 200. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic page test**. `test_get_patient_200` asserts the owner’s GET returns 200.
 
-The notes-app sentence was: `is_security_test({"status_asserted": True})` must be false. Rewrite it for a clinic without changing the fork: 200-only is not a security test; a named what must not happen may count. A testing-guide checkbox is still catalogue, not shape.
+The notes-app sentence was: `is_security_test({"status_asserted": True})` must be false. Rewrite it for a clinic: 200-only is not a security test; a named what must not happen may count. A testing-guide checkbox is still catalogue, not shape.
 
 **Product sketch:** an EHR-lite “we have 94% coverage and GET /patient/1 returns 200,” plus a testing-guide checklist ticked.
 

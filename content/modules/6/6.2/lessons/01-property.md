@@ -13,7 +13,7 @@ Last topic (6.1) taught data versus interpreter grammar. This week's rule is the
 
 What must not happen: **unencoded markup reaches the HTML interpreter**. That is an integrity failure of the HTML document. If the cookie is also readable by script (the cookie-jar topic, 2.3), it can become a secrecy failure of the session. This practice uses a tame marker (`<`). It is not an exploit kit. Do not paste attack recipes into notes.
 
-Industry lists ask for output encoded for the context you are writing into. A content-security policy that blocks objects and base tags is a **layer**, not a substitute. Reporting from that policy is extra, later, and advanced. The current content-security spec and Trusted Types are still **draft**. A famous-bugs nickname for “script in HTML” is awareness after the cause, not this sentence. React JSX is not this sentence.
+Output has to be encoded for the context you are writing into. A content-security policy that blocks objects and base tags is a **layer**, not a substitute. Reporting from that policy is extra, later, and advanced. The current content-security spec and Trusted Types are still **draft**. A famous-bugs nickname for “script in HTML” is awareness after the cause, not this sentence. React JSX is not this sentence.
 
 ## Picture: HTML grammar mixed with data
 

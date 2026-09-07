@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic patient nickname** field drawn on a shared board. Also name markdown-to-HTML as a second parser (2.1).
+You get a **clinic patient nickname** field drawn on a shared board. Also name markdown-to-HTML as a second parser (2.1).
 
-Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: `render` encodes `<` as `&lt;` in HTML text. Rewrite it for a clinic without changing the fork.
+Do not answer with a famous-bugs list, a CWE, or a scanner as the definition of security. The notes-app sentence was: `render` encodes `<` as `&lt;` in HTML text. Rewrite it for a clinic.
 
 **Product sketch:** an EHR-lite “preferred name” that concatenates into an HTML badge.
 

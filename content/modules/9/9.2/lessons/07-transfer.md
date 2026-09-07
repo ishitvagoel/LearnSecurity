@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-The notes-app scaffolding goes away. You get a **clinic report template** where designers can put expressions. Your job is to rewrite the loop, not to name a bug-list code.
+You get a **clinic report template** where designers can put expressions.
 
-The notes-app sentence was: `review_ok("x = eval(user)")` must be false. Rewrite it for a clinic without changing the fork: eval on user input is not approved; honest `int(user)` may pass.
+The notes-app sentence was: `review_ok("x = eval(user)")` must be false. Rewrite it for a clinic: eval on user input is not approved; honest `int(user)` may pass.
 
 Also name Terraform `local-exec` and GitHub Actions yaml as the same interpreter family, without running those systems.
 
