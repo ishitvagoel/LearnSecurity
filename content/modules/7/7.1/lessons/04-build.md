@@ -48,7 +48,7 @@ If the key is not in `ALLOWED`, **do not copy it**. The spec omitting `is_admin`
 - CSV import, admin BFF, and 7.4 job payloads are additional binders.
 - Unused HTTP methods can still hit a leftover handler (leftover, later, advanced).
 - GraphQL query cost can exhaust budget even when extras are dropped (6.7).
-- Honest `display_name` XSS remains 6.2.
+- A writable display name can still be markup — that is 6.2, not this binder.
 
 ## Practice
 

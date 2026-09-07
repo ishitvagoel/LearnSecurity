@@ -38,7 +38,7 @@ A missing retest still has to be denied. A passing retest may still close. Uploa
 1. who might try (paper-compliance closer — not a live clinic);
 2. what you trust (same-rule retest is the promise; PDF, severity score, and a known-exploited list are not);
 3. what must not happen (`close_finding({retest: None})` true);
-4. retest None is deny lives in **local** practice files (no live pentest);
+4. retest None must not close — **local** practice files (no live pentest);
 5. leftover (variants, role-change cache, business vs severity priority);
 6. whether engineers read the report (structure, not color-only severity).
 

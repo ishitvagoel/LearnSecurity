@@ -33,7 +33,7 @@ flowchart LR
 1. who might try (patched clinic app file — not a live hospital device);
 2. what you trust (server attest plus 1.2 is what you trust; client boolean and store listing are not);
 3. what must not happen (`allow_export` true on a client claim with failing attest, not “HIPAA”);
-4. client-ok plus attest-fail belongs in **local** practice files (no live Play);
+4. client-ok plus attest-fail must not export — **local** practice files (no live Play);
 5. leftover risk (attestation farms, rooted honest clinicians, 8.4 debug builds);
 6. the accessibility baseline if a human deny path is in the claim (readable “export unavailable,” not a silent crash).
 

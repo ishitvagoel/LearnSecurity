@@ -21,7 +21,7 @@ flowchart TD
   Q -->|HTTPS so cache is safe| False[False assurance]
 ```
 
-For each claim and each branch: label **rule**, **tool**, or **false assurance**.
+“TLS so cache is safe” is **rule**, **tool**, or **false assurance** — pick one per hop.
 
 Problems to find (name them yourself; do not open the keys file):
 

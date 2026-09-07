@@ -45,7 +45,7 @@ Object GET tests only (4.4). Extra-key write tests only (7.1). UI omit. UUID as 
 - UI hide, GraphQL `__typename` tricks, and “private” naming are not mediation.
 - CSV export, search snippets, debug toolbar, and later workers (7.4) are additional serializers.
 - After a role change, a cached dump can still leak (advanced leftover).
-- Honest `display_name` XSS remains 6.2.
+- Encoding a display name is still 6.2, even after SSN is omitted.
 
 ## Practice
 

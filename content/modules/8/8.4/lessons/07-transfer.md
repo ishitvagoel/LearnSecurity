@@ -33,7 +33,7 @@ If testers share the prod API key while `api_allowed` is always true, the rule i
 1. who might try (leaked debug APK — not a live hospital);
 2. what you trust (server build-plus-attest is what you trust; R8 and Play App Signing are not);
 3. what must not happen (`api_allowed("debug","ok")` true, not “HIPAA”);
-4. debug-plus-ok-is-false belongs in **local** practice files (no store APK unpacking);
+4. debug plus attest-ok must not call prod — **local** practice files (no store APK unpacking);
 5. leftover risk (stolen release keys, attestation farms, 8.1 hostile release APK);
 6. whenever a human deny path is in the claim (readable “use the lab environment,” not a spinner that retries prod forever).
 

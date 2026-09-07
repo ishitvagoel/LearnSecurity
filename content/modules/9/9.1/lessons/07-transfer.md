@@ -38,7 +38,7 @@ Status-only still is not coverage. An isolation-assert may still count. Marking 
 1. who might try (optimistic status column — not a live hospital);
 2. what you trust (the coverage check is the promise; checklist membership is not);
 3. what must not happen (`covered("AUTHZ-1", status_only)` true);
-4. status-only is not covered holds to **local** practice files (no live governance scrape);
+4. status-only is not covered — **local** practice files (no live governance scrape);
 5. leftover (unnamed extra advanced rows, exceptions without expiry);
 6. whether a human exception path exists (must state what is uncovered and when it expires).
 

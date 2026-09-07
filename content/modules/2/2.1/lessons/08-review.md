@@ -21,7 +21,7 @@ flowchart TD
   Q -->|JSON cannot duplicate| False[False assurance]
 ```
 
-For each claim and each branch: label **rule**, **tool**, or **false assurance**.
+A duplicate-key comment is **rule**, **tool**, or **false assurance** — pick one per reader.
 
 Problems to find (name them yourself; do not open the keys file):
 

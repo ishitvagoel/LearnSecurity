@@ -36,7 +36,7 @@ Header https plus socket http still has to be false. Enabling a CDN “HTTPS onl
 1. who might try (cleartext client setting Forwarded-Proto — **not** a live clinic);
 2. what you trust (which socket or bound load balancer is trusted; the dashboard toggle is not);
 3. what must not happen (`channel_is_https` true on header/socket mismatch);
-4. header https + socket http is false holds to **local** files (never on the real clinic);
+4. header https + socket http is false — **local** files (never on the real clinic);
 5. leftover (TLS to the load balancer; pinning versus breakage; OCSP / encrypted client hello as advanced extras);
 6. whether a human-read certificate warning must not use color as the only cue, and must not silently push people onto http.
 

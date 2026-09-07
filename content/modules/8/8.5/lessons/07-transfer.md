@@ -38,7 +38,7 @@ The fake name still has to be absent from the report. The stack may remain. Enab
 1. who might try (crash-platform operator, logcat reader — not a live clinic);
 2. what you trust (redact-before-send is the promise; the store form and a crash product set to automatic are not);
 3. what must not happen (`'name' in str(crash_report(name))`);
-4. `'secret'` absent belongs in **local** practice files (no live web-crash call);
+4. `'secret'` is absent from the crash report — **local** practice files (no live web-crash call);
 5. leftover (vendor as processor, screenshots, frozen-app traces, leftover `READ_LOGS`);
 6. whether a human feedback path exists (must not require a screenshot of the chart to continue).
 

@@ -40,7 +40,7 @@ Also name the exception path (E6): an exception still names the missing threat m
 1. who might try (schedule pressure — not a live clinic);
 2. what you trust (the merge check is the promise; CODEOWNERS, training, and a maturity score are not);
 3. what must not happen (`merge_ok({})` true);
-4. empty change is deny holds to **local** practice files (no live GitHub org);
+4. empty change must not merge — **local** practice files (no live GitHub org);
 5. leftover (stale threat-model id, vanity ticket counts, exceptions without expiry);
 6. whether a human merge path exists (must say which surface needs a threat-model id).
 
