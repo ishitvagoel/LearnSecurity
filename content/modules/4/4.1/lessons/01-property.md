@@ -77,7 +77,7 @@ python3 -m pytest labs/4.1/4.1-lab/tests --impl vulnerable
 python3 -m pytest labs/4.1/4.1-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Tie the check to `session_valid` after delete, not to a single-sign-on product name.
+Tie the check to `session_valid` after delete, not to a single-sign-on product name.
 
 ## Use it somewhere new
 

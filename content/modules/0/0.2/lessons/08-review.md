@@ -43,7 +43,7 @@ Also reject: live LMS attacks; keys in lessons; claiming check-in 0 or check-in 
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_high_quiz_score_is_not_authorization`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover risk you will **not** delete.
+Write the review that blocks this change. Mention `test_high_quiz_score_is_not_authorization`.
 
 ## Use it somewhere new
 

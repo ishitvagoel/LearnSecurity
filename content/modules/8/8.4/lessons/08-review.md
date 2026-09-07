@@ -46,7 +46,7 @@ Also reject: live store reverse engineering; closing findings without re-running
 
 ## Practice
 
-Write three notes a peer could act on, and tie at least one to `test_debug_build_cannot_call_prod_export`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_debug_build_cannot_call_prod_export`.
 
 ## Use it somewhere new
 

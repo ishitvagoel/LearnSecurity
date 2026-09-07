@@ -42,8 +42,6 @@ Read `vulnerable/share.py`. `share_note` appends `note_id` to `_SHARES` on every
 
 You do not need a new key string. The failure of `test_retry_does_not_duplicate_side_effect` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |

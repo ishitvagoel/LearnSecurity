@@ -44,7 +44,7 @@ Also reject: `localStorage` for session; trusting the client as what you trust; 
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_script_cannot_read_httponly_session`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_script_cannot_read_httponly_session`.
 
 ## Use it somewhere new
 

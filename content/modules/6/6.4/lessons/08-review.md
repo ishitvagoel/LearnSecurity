@@ -46,7 +46,7 @@ Also reject: host-file trophies; treating the client as what you trust; an aware
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_dotdot_does_not_escape_root`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_dotdot_does_not_escape_root`.
 
 ## Use it somewhere new
 

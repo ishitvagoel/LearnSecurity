@@ -41,8 +41,6 @@ Encoding is already the rule in 6.2. This week’s check is **the header name th
 
 You do not need a new header. The failure of `test_report_only_is_not_enforcement` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |

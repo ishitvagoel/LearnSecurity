@@ -32,8 +32,6 @@ A log product does not encrypt the column.
 | Recover | Re-protect with authenticated encryption; rotate keys |
 | Leftover | Memory dumps; operators who are allowed to hold the key |
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=encoding_labeled_encryption field=body request_id=req_52cr
 ```

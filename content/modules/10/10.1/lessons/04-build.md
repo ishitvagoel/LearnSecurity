@@ -65,8 +65,6 @@ Name the leftover (a stale threat model; a docs exemption). Run:
 python3 -m pytest labs/10.1/10.1-lab/tests --impl fixed
 ```
 
-It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 A “docs: update README” change with no threat-model id still fails `merge_ok` in this lab. If you exempt it, write the exemption in the check.

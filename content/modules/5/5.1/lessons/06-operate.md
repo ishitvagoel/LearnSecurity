@@ -33,8 +33,6 @@ A log product does not walk the deletion graph.
 | Recover | Purge partitions; a named legal-hold owner; re-run `test_deleted_account_leaves_no_analytics_body` |
 | Leftover | Backups still contain the row (later); screenshots you cannot purge |
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=deleted_user_body_hits store=analytics user_id=alice request_id=req_51lc
 ```

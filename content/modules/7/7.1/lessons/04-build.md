@@ -58,8 +58,6 @@ Name the predicate (`key in ALLOWED`). Run:
 python3 -m pytest labs/7.1/7.1-lab/tests --impl fixed
 ```
 
-Must pass. Run from the lab directory if collection at repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 A clinic example: stop treating “the form has no is_staff checkbox” as the server contract.

@@ -47,7 +47,7 @@ Also reject: live registry attacks; installing without re-running `test_hash_mis
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_hash_mismatch_refuses_install`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_hash_mismatch_refuses_install`.
 
 ## Use it somewhere new
 

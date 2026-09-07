@@ -35,8 +35,6 @@ If the model "only summarizes" while `run_tool` is always-run, the rule is gone.
 
 ## Prompt — clinic summarizer over charts
 
-Write the same rule here. Include:
-
 1. who can act (prompt injection in a chart note — not a live clinic model);
 2. what you trust (runtime allow-list is the promise; prompt, retrieval, and a famous-bugs map are not);
 3. what must not happen (`run_tool("exec_sql")` runs, not a legal label);

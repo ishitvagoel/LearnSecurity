@@ -71,8 +71,6 @@ python3 -m pytest labs/6.1/6.1-lab/tests --impl vulnerable
 python3 -m pytest labs/6.1/6.1-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 Clinic export-to-CSV filename. Jinja, SQL, mail headers.

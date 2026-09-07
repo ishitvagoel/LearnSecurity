@@ -53,8 +53,6 @@ Name who, what, action, and the check that must be true after the fix. Run:
 python3 -m pytest labs/2.2/2.2-request-path/tests --impl fixed
 ```
 
-It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 Authenticated RSS or export CSV via CDN. The fix is still “bound identity in the key, or do not store,” not “more TLS ciphers.”

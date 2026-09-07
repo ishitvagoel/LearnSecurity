@@ -11,8 +11,6 @@ You get a **clinic guardian list**, an **invite token**, or an **export quota**.
 
 **Product sketch:** EHR-lite guardian list on a booking card.
 
-Write the same rule here. Include:
-
 1. who can act (scripted add; disabled UI max; import — **not** a live clinic);
 2. what you trust (which write path is trusted; HTML is not);
 3. what must not happen (`add_guardian` four times yields count 4 — not a privacy-law name and not an awareness-list name);

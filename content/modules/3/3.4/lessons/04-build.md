@@ -52,8 +52,6 @@ Name who (scripted client), what (share grants on one note), the check (count â‰
 python3 -m pytest labs/3.4/3.4-lab/tests --impl fixed
 ```
 
-It must pass.
-
 ## Use it somewhere new
 
 A clinic example: `add_guardian` stops at 3. Invite redemption stops at one use. Export quotas cap bytes or rows â€” same shape, different cell.

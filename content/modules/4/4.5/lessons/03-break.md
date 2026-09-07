@@ -44,8 +44,6 @@ Read `vulnerable/jwt_aud.py`. `accept_token` returns true when `sub` is in the d
 
 You do not need a new `aud` string. The failure of `test_wrong_audience_is_rejected` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |

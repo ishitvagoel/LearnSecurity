@@ -52,8 +52,6 @@ Name the channel (query) and the check (yields `None`). Run:
 python3 -m pytest labs/4.3/4.3-lab/tests --impl fixed
 ```
 
-It must pass.
-
 ## Use it somewhere new
 
 Magic-link: a one-time token in the URL is later work, then exchange for a cookie — do not keep the URL as the session. Clinic appointment SMS: same exchange, or deny.

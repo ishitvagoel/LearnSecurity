@@ -67,8 +67,6 @@ Name who (ex-employee with leftover cookie), what (`alice` session), and the che
 python3 -m pytest labs/4.1/4.1-lab/tests --impl fixed
 ```
 
-It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 A clinic example: disable the badge and kill chart sessions in one runbook. A badge vendor API is not the chart session store.

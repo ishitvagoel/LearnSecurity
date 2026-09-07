@@ -44,8 +44,6 @@ Read `vulnerable/share_limit.py`. `add_share` always increments and returns `_n`
 
 You do not need a new note id. The failure of `test_share_cap_is_enforced` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |

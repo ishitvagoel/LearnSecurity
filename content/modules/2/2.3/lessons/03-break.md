@@ -34,8 +34,6 @@ The broken files show **cause** (the session value is handed to the script reade
 
 `vulnerable/cookies.py` `js_read_session` returns `session["value"]` whenever the name exists. The check binds `HTTPONLY_SESSION` with `httponly: True` and `secure: True` and expects `None`. You do not need a new cookie string. The failure of `test_script_cannot_read_httponly_session` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |

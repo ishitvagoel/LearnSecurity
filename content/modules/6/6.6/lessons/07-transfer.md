@@ -33,8 +33,6 @@ If the mail link always returns 200 and never writes used, the hole is open. A m
 
 ## Prompt — clinic invite-guardian
 
-Write the same rule here. Include:
-
 1. who can act (two clicks or a copied link — **not** a live clinic);
 2. what you trust (consume in the store is trusted; HTTP 400 is not);
 3. what must not happen (second `accept` true, not a legal label);

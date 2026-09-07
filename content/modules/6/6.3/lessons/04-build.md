@@ -57,8 +57,6 @@ Name the check (cookie and origin == expected and token). Run:
 python3 -m pytest labs/6.3/6.3-lab/tests --impl fixed
 ```
 
-It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 A clinic example: stop treating “logged-in cookie” as consent to share with a partner.

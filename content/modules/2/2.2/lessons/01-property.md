@@ -97,7 +97,7 @@ python3 -m pytest labs/2.2/2.2-request-path/tests --impl vulnerable
 python3 -m pytest labs/2.2/2.2-request-path/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Tie the check to path-only sharing, not to “TLS is off.”
+Tie the check to path-only sharing, not to “TLS is off.”
 
 ## Use it somewhere new
 

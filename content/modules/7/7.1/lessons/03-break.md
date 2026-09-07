@@ -43,8 +43,6 @@ Allowed fields have to be limited per action. Topic 1.2 already said who-is-allo
 
 You do not need a new privileged field. The failure of `test_is_admin_cannot_be_patched` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 ## Why it happens vs what it costs
 
 | Slice | This practice |

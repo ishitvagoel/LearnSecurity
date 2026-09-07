@@ -33,8 +33,6 @@ A vendor name does not count exports. Someone still has to own the budget.
 | Recover | Revoke the session if it looks automated; owned burst exception if it is written down; re-run `test_fourth_export_is_denied` |
 | Leftover | New accounts; GraphQL aliases (7.1) |
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=quota_denied n=4 subject=user_67e request_id=req_67e
 ```

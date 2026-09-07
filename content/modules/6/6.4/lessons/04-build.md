@@ -51,7 +51,7 @@ Name who (uploader), what (file under the folder), action (`resolve`), and the c
 python3 -m pytest labs/6.4/6.4-lab/tests --impl fixed
 ```
 
-It must pass. Do not `open()` a path outside the lab folder.
+Do not `open()` a path outside the lab folder.
 
 ## Use it somewhere new
 

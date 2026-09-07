@@ -86,8 +86,6 @@ python3 -m pytest labs/10.4/10.4-lab/tests --impl vulnerable
 python3 -m pytest labs/10.4/10.4-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 A feature flag that turns off authorization. Clinic: Django `DEBUG=True`.

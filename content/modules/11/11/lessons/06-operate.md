@@ -34,8 +34,6 @@ Re-run `test_revoked_share_cannot_read` after any share-path change. A green “
 
 A scanner dashboard will show coverage and stay silent when CI’s `read` ignores grants. Detection must observe **B after revoke is None**, not “revoke was called.” If the alert includes the note body, you have opened a leftover-body leak.
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=revoked_share_read_denied note=n1 tenant=B
 ```

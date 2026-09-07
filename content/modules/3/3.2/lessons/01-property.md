@@ -80,7 +80,7 @@ python3 -m pytest labs/3.2/3.2-lab/tests --impl vulnerable
 python3 -m pytest labs/3.2/3.2-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Tie the check to `cross-tenant-read` still present, not to a scanner product name.
+Tie the check to `cross-tenant-read` still present, not to a scanner product name.
 
 ## Use it somewhere new
 

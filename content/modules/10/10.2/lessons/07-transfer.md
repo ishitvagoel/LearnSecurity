@@ -35,8 +35,6 @@ A digest mismatch still has to be denied. A match may still install. Generating 
 
 ## Prompt — clinic npm install in a prod pod
 
-Write the same rule here. Include:
-
 1. who can act (lookalike / compromised maintainer — not a live clinic registry attack);
 2. what you trust (digest equality is the promise; SBOM / provenance / Dependabot are not);
 3. what must not happen (`install_ok("aaa","bbb")` true, not a legal label);

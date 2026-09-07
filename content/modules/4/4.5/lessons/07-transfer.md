@@ -11,8 +11,6 @@ You get a **clinic FHIR resource server**. On the notes app, `accept_token` is f
 
 **Product sketch:** EHR-lite that accepts SMART-on-FHIR-shaped access tokens.
 
-Write the same rule here. Include:
-
 1. who can act (token minted for another hospital API; stolen browser token; malicious phone app claiming a custom scheme — **not** a live clinic);
 2. what you trust (which resource-server `aud` check is trusted; the vendor “OpenID dashboard” is not);
 3. what must not happen (`accept_token` true for `other-hospital-fhir` — not a privacy-law name);

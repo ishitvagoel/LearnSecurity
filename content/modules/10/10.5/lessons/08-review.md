@@ -46,7 +46,7 @@ Also reject: live incident attacks; closing without re-running both deny tests; 
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_cannot_close_without_recovery`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_cannot_close_without_recovery`.
 
 ## Use it somewhere new
 

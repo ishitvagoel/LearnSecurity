@@ -65,8 +65,6 @@ Name the check (body never in the payload; stack may remain). Run:
 python3 -m pytest labs/8.5/8.5-lab/tests --impl fixed
 ```
 
-It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 A clinic example: stop putting patient names in exception messages. The lab still uses fake strings.

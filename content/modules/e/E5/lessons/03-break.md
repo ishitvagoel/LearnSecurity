@@ -41,8 +41,6 @@ Read `vulnerable/rls.py`. It returns the body company when present. Tests:
 
 You do not need a new company letter. The failure of `test_body_cannot_switch_tenant` *is* the evidence. Do not paste the practice files into a public API.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 ## Why it happens vs what it costs
 
 | Slice | Practice |

@@ -30,8 +30,6 @@ Renaming “notes” to “charts” is not transfer. If the dashboard is green 
 
 ## Prompt — clinic Report-Only as a HIPAA header
 
-Write the same rule here. Include:
-
 1. who can act (a script that would only be logged — not a live clinic script hunt);
 2. what you trust (the enforcing header name is what you trust; Report-Only, Helmet, and a dashboard are not);
 3. what must not happen (`isolation_enforced` true on Report-Only, not “HIPAA”);

@@ -34,8 +34,6 @@ The lookup helper returns `(sql, params)` (or an ORM bound construct), not a con
 
 ## Prompt — clinic search box
 
-Write the same rule here. Include:
-
 1. who can act (clinician or kiosk user supplying search text — not a live clinic);
 2. what you trust (which API binds values; the ORM brand is not);
 3. what must not happen (`fetch`-like function returns concatenated query text, not a legal label);

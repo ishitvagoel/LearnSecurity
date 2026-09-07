@@ -32,8 +32,6 @@ A 100% quiz cannot observe whether you can write a 1.2 deny rule. Check-in 1 evi
 
 You do not need a new score. The failure of `test_high_quiz_score_is_not_authorization` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |

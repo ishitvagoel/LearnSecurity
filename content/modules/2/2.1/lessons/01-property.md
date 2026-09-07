@@ -96,7 +96,7 @@ python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl vulnerable
 python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Tie the check to two readers disagreeing, not to a bug-list nickname.
+Tie the check to two readers disagreeing, not to a bug-list nickname.
 
 ## Use it somewhere new
 

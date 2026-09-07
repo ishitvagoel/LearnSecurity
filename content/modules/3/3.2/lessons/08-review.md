@@ -44,7 +44,7 @@ Also reject: treating the client as what you trust; an awareness list cited as a
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_green_scanner_is_not_an_empty_threat_model`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_green_scanner_is_not_an_empty_threat_model`.
 
 ## Use it somewhere new
 

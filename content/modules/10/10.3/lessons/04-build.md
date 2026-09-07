@@ -61,8 +61,6 @@ Name who can apply Helm ClusterRoles. Run:
 python3 -m pytest labs/10.3/10.3-lab/tests --impl fixed
 ```
 
-It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 Serverless: replace `ALLOWED_ROLES` with an IAM statement that is not `*`. Same allow-list idea, different object.

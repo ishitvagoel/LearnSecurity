@@ -44,8 +44,6 @@ Read `vulnerable/lifecycle.py`. `delete_user` only adds the user to `DELETED`. `
 
 You do not need a new username. The failure of `test_deleted_user_session_is_dead` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | Profile in `DELETED`, session still true | Leftover outlived the person | “The row is gone” |

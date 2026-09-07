@@ -73,7 +73,7 @@ python3 -m pytest labs/3.4/3.4-lab/tests --impl vulnerable
 python3 -m pytest labs/3.4/3.4-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Tie the check to count ≤ 5, not to a filter product name.
+Tie the check to count ≤ 5, not to a filter product name.
 
 ## Use it somewhere new
 

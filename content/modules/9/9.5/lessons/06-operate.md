@@ -34,8 +34,6 @@ Re-run `test_cannot_close_without_retest` after any close-workflow change. A gre
 
 A ticket dashboard will show Done counts and stay silent when CI's `close_finding` is always true. Detection must observe **retest None is deny**, not ticket volume. If the alert includes a note body or a patient row, you have opened a leftover-body leak.
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=finding_closed_without_retest finding=F-authz-1
 ```

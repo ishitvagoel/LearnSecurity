@@ -46,7 +46,7 @@ Also reject: live portals; closing findings without re-running `test_status_only
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_status_only_row_is_not_coverage`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_status_only_row_is_not_coverage`.
 
 ## Use it somewhere new
 

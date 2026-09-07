@@ -42,8 +42,6 @@ Read `vulnerable/invite.py`. It returns true every time. `reset()` exists so tes
 
 You do not need a new token string. The failure of `test_invite_token_is_single_use` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | `accept` returns true every time | Token never marked used | “We return 400” |

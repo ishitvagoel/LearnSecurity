@@ -32,8 +32,6 @@ A vendor name does not compute the MAC. Someone still has to own every callback 
 | Recover | Keep deny; review accepted events; tighten 1.2 |
 | Leftover | Replay; 6.5 egress; provider compromise; parse-before-MAC |
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=webhook_sig_fail provider=lab-billing request_id=req_73e
 ```

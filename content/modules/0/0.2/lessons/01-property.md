@@ -69,8 +69,6 @@ python3 -m pytest labs/0.2/0.2-bridge/tests --impl vulnerable
 python3 -m pytest labs/0.2/0.2-bridge/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 A vendor cert used to skip a threat-model review. A clinic onboarding quiz.

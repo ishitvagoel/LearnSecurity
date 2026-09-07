@@ -46,7 +46,7 @@ Also reject: live vendor payloads; closing findings without re-running `test_cra
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_crash_report_omits_note_body`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_crash_report_omits_note_body`.
 
 ## Use it somewhere new
 

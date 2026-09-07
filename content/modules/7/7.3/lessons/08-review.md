@@ -46,7 +46,7 @@ Also reject: live provider attacks; closing findings without re-running `test_mi
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_missing_signature_is_rejected`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_missing_signature_is_rejected`.
 
 ## Use it somewhere new
 

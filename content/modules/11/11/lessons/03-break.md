@@ -43,8 +43,6 @@ Read `vulnerable/capstone.py`. It ignores `revoke` and returns the body. Tests:
 
 You do not need a new tenant. The failure of `test_revoked_share_cannot_read` *is* the evidence. `conftest.py` calls `reset()` so grant state does not leak across tests.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | `revoke` is `pass` | No-op revoke; grant never dropped | “DELETE returned 200” |

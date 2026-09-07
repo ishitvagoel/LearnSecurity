@@ -41,8 +41,6 @@ Read `vulnerable/stest.py`. It returns true when `status_asserted` is set. Tests
 
 You do not need a new descriptor key. The failure of `test_http_200_only_is_not_a_security_test` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | `status_asserted` alone returns true | Happy path counted as security | “The owner can load a note” |

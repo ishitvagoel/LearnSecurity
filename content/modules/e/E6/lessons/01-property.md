@@ -85,8 +85,6 @@ python3 -m pytest labs/E6/e6-lab/tests --impl vulnerable
 python3 -m pytest labs/E6/e6-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 Clinic “HIPAA exception.” A procurement questionnaire vs this record.

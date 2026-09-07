@@ -69,8 +69,6 @@ python3 -m pytest labs/E2/e2-lab/tests --impl vulnerable
 python3 -m pytest labs/E2/e2-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 Trusted Types. COOP/COEP. Clinic: Report-Only as a “HIPAA header.”

@@ -46,7 +46,7 @@ Also reject: a live script hunt; shipping without re-running `test_report_only_i
 
 ## Practice
 
-Write three notes a peer could act on, and tie at least one to `test_report_only_is_not_enforcement`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_report_only_is_not_enforcement`.
 
 ## Use it somewhere new
 

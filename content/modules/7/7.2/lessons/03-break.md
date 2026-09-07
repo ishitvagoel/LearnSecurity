@@ -42,8 +42,6 @@ Identifiers find a row. They do not authorize fields. Object×company grants wer
 
 You do not need a new secret name. The failure of `test_member_cannot_resolve_internal_field` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 ## Why it happens vs what it costs
 
 | Slice | This practice |

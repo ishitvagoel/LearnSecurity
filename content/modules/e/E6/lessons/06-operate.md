@@ -34,8 +34,6 @@ Re-run `test_exception_needs_owner_review_and_wcag` after any register-form chan
 
 A governance dashboard will show exception counts and stay silent when CI’s `accept_exception` is always true. Detection must observe **empty owner is deny**, not “we have a risk register.” If the alert includes a secret writeup or chart text, you have opened a leftover-secret leak.
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=exception_incomplete_denied missing=owner,review_by
 ```

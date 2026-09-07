@@ -72,8 +72,6 @@ python3 -m pytest labs/6.7/6.7-lab/tests --impl vulnerable
 python3 -m pytest labs/6.7/6.7-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 Clinic bulk-export of patients. Notification fan-out. Search complexity later in 7.1.

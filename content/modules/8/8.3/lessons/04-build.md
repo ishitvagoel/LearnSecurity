@@ -57,8 +57,6 @@ Name the predicate (identity keys ignored; session stays server-issued). Run:
 python3 -m pytest labs/8.3/8.3-lab/tests --impl fixed
 ```
 
-Must pass. Run from the lab directory if collection at repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 A clinic example: stop treating `as=doctor` as a convenient demo login.

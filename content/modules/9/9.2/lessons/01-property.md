@@ -74,8 +74,6 @@ python3 -m pytest labs/9.2/9.2-lab/tests --impl vulnerable
 python3 -m pytest labs/9.2/9.2-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 Terraform `local-exec`; GitHub Actions `run:` with untrusted input; clinic eval in a report template.

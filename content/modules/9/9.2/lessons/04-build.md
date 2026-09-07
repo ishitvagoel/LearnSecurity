@@ -54,8 +54,6 @@ Name the leftover (substring is a stand-in). Run:
 python3 -m pytest labs/9.2/9.2-lab/tests --impl fixed
 ```
 
-It must pass. Run from the lab directory if collection at repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 Terraform: reject `local-exec` interpolating untrusted names the same way 6.1 rejects a shell string.

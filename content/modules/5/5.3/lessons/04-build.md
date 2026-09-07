@@ -52,8 +52,6 @@ Name the check (`current` truthy and `presented == current`). Run:
 python3 -m pytest labs/5.3/5.3-lab/tests --impl fixed
 ```
 
-It must pass.
-
 ## Use it somewhere new
 
 A clinic example: rotate the gist-leaked key and prove the old string fails, including missing-current deny.

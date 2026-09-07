@@ -34,8 +34,6 @@ Re-run `test_http_200_only_is_not_a_security_test` after any suite change. A gre
 
 A coverage dashboard will show line coverage and stay silent when the isolation row has only 200-only tests. Detection must observe **200-only is not a security test**, not percent covered. If the alert includes note bodies from a failed isolation case, you have opened the same leak as a log line (3.1).
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=security_suite_missing_isolation req=isolation suite=api
 ```

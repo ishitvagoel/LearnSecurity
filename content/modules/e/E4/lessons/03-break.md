@@ -46,8 +46,6 @@ Read `vulnerable/copy.py`. It returns more than `bufsize` bytes. Checks:
 
 You do not need a new source. The failure of `test_copy_does_not_exceed_buffer` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |

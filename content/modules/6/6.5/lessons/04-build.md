@@ -59,7 +59,7 @@ Name the check (https ∧ host in ALLOW ∧ not blocked). Run:
 python3 -m pytest labs/6.5/6.5-lab/tests --impl fixed
 ```
 
-It must pass. Do not fetch the URLs. Then write one sentence: which rule is restored, and which leftover you refused to delete.
+Do not fetch the URLs.
 
 ## Use it somewhere new
 
@@ -72,3 +72,4 @@ DNS rebinding; IPv6 encodings; telling the person they left the site (advanced);
 ## What this page is not doing
 
 Do not curl metadata. Do not claim a course gate from an HTTPS prefix.
+

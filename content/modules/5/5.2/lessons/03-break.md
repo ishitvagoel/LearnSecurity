@@ -42,8 +42,6 @@ Read `vulnerable/crypto.py`. `protect` Base64-encodes the string. Tests:
 
 You do not need a new cipher name. The failure of `test_protect_is_not_mere_encoding` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | `protect` returns Base64 | Encoding labeled encryption | “The bytes look scrambled” |

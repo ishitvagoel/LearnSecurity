@@ -77,7 +77,7 @@ python3 -m pytest labs/5.1/5.1-lab/tests --impl vulnerable
 python3 -m pytest labs/5.1/5.1-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Tie the failures to `body_retained` / `search_retained`, not to a privacy-law name.
+Tie the failures to `body_retained` / `search_retained`, not to a privacy-law name.
 
 ## Use it somewhere new
 

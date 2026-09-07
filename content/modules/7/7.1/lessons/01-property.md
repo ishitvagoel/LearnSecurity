@@ -75,8 +75,6 @@ python3 -m pytest labs/7.1/7.1-lab/tests --impl vulnerable
 python3 -m pytest labs/7.1/7.1-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 Clinic change `{is_staff:true}`. GraphQL mutation arguments. gRPC unknown fields.

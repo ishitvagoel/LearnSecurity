@@ -47,8 +47,6 @@ What the tool cannot do: purge without a prefix that includes company can widen 
 | Recover | Purge the company-including prefix |
 | Leftover | CDN config drift; anonymous fill |
 
-A log line a reviewer can accept looks like:
-
 ```text
 cache_denied reason=tenant_mismatch path=/notes/n1 bound=tB logged=tA request_id=req_9f2e
 ```

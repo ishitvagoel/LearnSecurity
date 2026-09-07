@@ -41,8 +41,6 @@ Read `vulnerable/cfg.py`. It returns true for every pair. Tests:
 
 You do not need a new flag. The failure of `test_prod_debug_must_not_boot` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | `return True` for every pair | Fail-open; debug ignored | “`NODE_ENV` is production” |

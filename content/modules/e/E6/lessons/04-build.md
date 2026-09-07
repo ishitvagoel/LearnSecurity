@@ -62,8 +62,6 @@ Name who can be `owner`. Run:
 python3 -m pytest labs/E6/e6-lab/tests --impl fixed
 ```
 
-It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 A clinic example: refuse a HIPAA exception with no review date the same way. The lab still uses fake strings.

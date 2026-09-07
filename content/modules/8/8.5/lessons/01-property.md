@@ -89,8 +89,6 @@ python3 -m pytest labs/8.5/8.5-lab/tests --impl vulnerable
 python3 -m pytest labs/8.5/8.5-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 Clinic crash with a fake patient name. Web crash reports (10.5) are the same field in another place.

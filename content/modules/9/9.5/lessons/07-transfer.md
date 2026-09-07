@@ -35,8 +35,6 @@ A missing retest still has to be denied. A passing retest may still close. Uploa
 
 ## Prompt — clinic pentest PDF on a shelf
 
-Write the same rule here. Include:
-
 1. who can act (paper-compliance closer — not a live clinic);
 2. what you trust (same-rule retest is the promise; PDF, severity score, and a known-exploited list are not);
 3. what must not happen (`close_finding({retest: None})` true, not a legal label);

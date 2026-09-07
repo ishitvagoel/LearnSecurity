@@ -77,8 +77,6 @@ python3 -m pytest labs/10.3/10.3-lab/tests --impl vulnerable
 python3 -m pytest labs/10.3/10.3-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 Serverless IAM `*`. Clinic: app SA is cluster-admin.

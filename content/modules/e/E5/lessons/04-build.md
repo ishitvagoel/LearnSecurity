@@ -53,8 +53,6 @@ Name who can mint the session company. Run:
 python3 -m pytest labs/E5/e5-lab/tests --impl fixed
 ```
 
-It must pass. Run from the lab directory if collection at repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 A clinic example: ignore `org_id` in JSON the same way. Bind the company from the session.

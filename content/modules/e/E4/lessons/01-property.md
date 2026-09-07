@@ -71,8 +71,6 @@ python3 -m pytest labs/E4/e4-lab/tests --impl vulnerable
 python3 -m pytest labs/E4/e4-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 Parser error messages must be readable without dumping file bytes. Operators should be able to read “copy exceeds destination” without a hex dump.
 
 ## Use it somewhere new

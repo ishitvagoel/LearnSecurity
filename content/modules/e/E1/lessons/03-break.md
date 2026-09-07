@@ -41,8 +41,6 @@ Read `vulnerable/tools.py`. It returns `ran {name}` for every name. Tests:
 
 You do not need a new tool name. The failure of `test_exec_sql_tool_is_denied` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | `ran {name}` for every name | Always-run `run_tool`; model output treated as policy | "The prompt forbids SQL" |

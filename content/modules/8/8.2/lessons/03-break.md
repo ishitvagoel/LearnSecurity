@@ -41,8 +41,6 @@ Sensitive data stored securely. Last crypto topic (5.2) already refused Base64; 
 
 You do not need a new filename. The failure of `test_cached_note_is_not_plaintext_on_disk` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 ## Why it happens vs what it costs
 
 | Slice | This practice |

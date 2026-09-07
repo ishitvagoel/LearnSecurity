@@ -33,8 +33,6 @@ flowchart TD
 
 GraphQL and REST both ingest the same clinic appointment.
 
-Write the same rule here. Include:
-
 - who can act (who can POST or query);
 - what you trust (which reader is trusted; the client is not);
 - what must not happen (disagreement, not “injection”);

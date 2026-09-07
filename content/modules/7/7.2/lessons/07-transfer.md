@@ -34,8 +34,6 @@ Member × SSN still has to be false. Member × display name may still be true. H
 
 ## Prompt — clinic member cannot resolve SSN
 
-Write the same rule here. Include:
-
 1. who can act (clinician session selecting extra fields — not a live clinic);
 2. what you trust (server role×field is what you trust; UI omit and UUID are not);
 3. what must not happen (`resolve("member", "ssn")` true, not “HIPAA”);

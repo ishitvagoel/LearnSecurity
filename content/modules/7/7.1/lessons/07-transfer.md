@@ -30,8 +30,6 @@ Renaming `is_admin` to `is_staff` is not transfer. If “Edit profile” omits t
 
 ## Prompt — clinic PATCH is_staff
 
-Write the same rule here. Include:
-
 1. who can act (authenticated clinician session sending extra JSON — not a live clinic);
 2. what you trust (server `ALLOWED` is what you trust; SPA omit-checkbox and OpenAPI are not);
 3. what must not happen (`is_staff` becomes true, not “HIPAA”);

@@ -48,7 +48,7 @@ Also reject: native exploit walkthroughs; shipping without re-running `test_copy
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_copy_does_not_exceed_buffer`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_copy_does_not_exceed_buffer`.
 
 ## Use it somewhere new
 

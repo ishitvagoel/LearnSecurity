@@ -36,8 +36,6 @@ The fourth export still has to be false. The third may still be true. Rate-limit
 
 **Product sketch:** a small clinic app with an “Export all” button that is disabled in the browser.
 
-Write the same rule here. Include:
-
 1. who can act (scripted clinician session — not a live clinic);
 2. what you trust (server `n <= 3` is what you trust; the disabled button and an IP rate limit are not);
 3. what must not happen (`allow(4)` true, not a legal label);

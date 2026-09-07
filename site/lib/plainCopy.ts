@@ -414,12 +414,31 @@ const PROSE_PHRASES: [RegExp, string][] = [
     /The answers are not on this page\. Do not open the keys file until someone has looked at your review\./g,
     "Wait until someone has looked at your review before opening the keys.",
   ],
-  [/Rewrite the notes-app sentence\. Include:/g, "Write the same rule here. Include:"],
+  [/Rewrite the notes-app sentence\. Include:\n?/g, ""],
   [
-    /Rewrite the notes-app sentence for this product\. Your answer must include:/g,
-    "Write the same rule here. Include:",
+    /Rewrite the notes-app sentence for this product\. Your answer must include:\n?/g,
+    "",
   ],
-  [/Rewrite the course sentence\. Include:/g, "Write the same rule here. Include:"],
+  [/Rewrite the course sentence\. Include:\n?/g, ""],
+  [/Write the same rule here\. Include:\n?/g, ""],
+  [
+    /Write three notes a (?:maintainer|peer) could act on, and tie at least one to (`[^`]+`)\. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover(?: risk)? you will \*\*not\*\* delete\./g,
+    "Write the review that blocks this change. Mention $1.",
+  ],
+  [
+    /Do not open the repaired files yet\. Diagnose the cause first\. Do not paste the public host into a browser or proxy\./g,
+    "Do not paste the public host into a browser or proxy.",
+  ],
+  [/Do not open the repaired files yet\. (?:Diagnose|Name) the cause first\.\n?/g, ""],
+  [/A log line a reviewer can accept looks like:\n?/g, ""],
+  [
+    /It must pass\. Run from the lab directory if (?:a )?collection at (?:the )?repo root is polluted\. ?/g,
+    "",
+  ],
+  [
+    /Then write one sentence: which rule is restored, and which leftover you refused to delete\.\n?/g,
+    "",
+  ],
   [/Do not define security as a famous-bugs list(?: item)?\. /g, ""],
   [/Record those as leftover or later topics, not as silent passes\. ?/g, ""],
   [

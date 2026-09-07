@@ -46,8 +46,6 @@ Name who (script in the origin), what (`sc_session` value), action (read), and t
 python3 -m pytest labs/2.3/2.3-browser-policy/tests --impl fixed
 ```
 
-It must pass.
-
 ## Use it somewhere new
 
 Clinic portal session cookie. The fix is still “script cannot read the session token,” not “we shipped a CSP.” If the clinic also has a WebView, the same check must hold on that bridge.

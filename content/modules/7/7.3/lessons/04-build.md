@@ -59,8 +59,6 @@ Name the check (empty sig denies; HMAC-SHA256 over the raw body; `compare_digest
 python3 -m pytest labs/7.3/7.3-lab/tests --impl fixed
 ```
 
-It must pass. Run from the lab directory if collection at repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 A clinic example: stop treating “the hospital’s IP range” as the lab-result authenticity check.

@@ -63,8 +63,6 @@ Name every read path. Run:
 python3 -m pytest labs/11/11-lab/tests --impl fixed
 ```
 
-It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 Clinic guardian: the next chart read must consult the grant, not the last login.

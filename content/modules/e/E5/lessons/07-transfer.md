@@ -27,8 +27,6 @@ Session A plus body B is still A. Matching A/A may still keep A. Enabling row-le
 
 ## Prompt — clinic sketch
 
-Write the same rule here. Include:
-
 1. who can act (member of practice A sending practice B — not a live clinic company);
 2. what you trust (session binding is trusted; a row-level variable from the body, a famous-bugs mapping, and a subdomain are not);
 3. what must not happen (`tenant_for({A},{B}) == B`, not a legal label);

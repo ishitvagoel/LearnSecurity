@@ -58,8 +58,6 @@ Name the check (`service == "worker-sc"`; leftover session ignored). Run:
 python3 -m pytest labs/7.4/7.4-lab/tests --impl fixed
 ```
 
-It must pass. Run from the lab directory if collection at repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 A clinic example: stop treating “the batch job runs on the hospital VLAN” as worker identity.

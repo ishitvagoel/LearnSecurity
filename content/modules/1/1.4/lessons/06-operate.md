@@ -32,8 +32,6 @@ A log product is not the rule, and a checklist is not proof.
 | Recover | Owner completes a usable confirm; revoke a shared admin session if that shortcut appeared |
 | Leftover | Coercion; this practice is not production telemetry |
 
-A log line a reviewer can accept looks like:
-
 ```text
 recovery_confirm fail account=a1 control=confirm-recovery modality=unknown reason=not_keyboard_operable
 ```

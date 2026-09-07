@@ -57,8 +57,6 @@ Name the rule and the check (not Base64 of plaintext, and the teaching flag). Ru
 python3 -m pytest labs/5.2/5.2-lab/tests --impl fixed
 ```
 
-It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 A clinic example: replace a Base64 column with authenticated encryption and a managed key, not a rename to `ssn_encrypted`.

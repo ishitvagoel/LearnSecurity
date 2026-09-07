@@ -32,8 +32,6 @@ A bot-vendor name does not prove avoid-eval. Someone still has to own the always
 | Recover | Keep reject; add tests (9.3); review generated code |
 | Leftover | Substring stand-in; generated code; later review bots |
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=review_block_eval pr=pr_92e file=export.py
 ```

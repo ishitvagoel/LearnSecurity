@@ -55,8 +55,6 @@ Name the predicate (`secret_internal` only if `role == "service"`). Run `--impl 
 python3 -m pytest labs/7.2/7.2-lab/tests --impl fixed
 ```
 
-Run from the lab directory if collection at repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 A clinic example: stop treating “SSN not in the member table UI” as field authorization.

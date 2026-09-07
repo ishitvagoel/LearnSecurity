@@ -34,8 +34,6 @@ Re-run `test_exec_sql_tool_is_denied` after any tool-registration change. A gree
 
 A vendor agent dashboard will show token counts and stay silent when CI's `run_tool` is always-run. Detection must observe **`exec_sql` is None**, not "the model is on-policy." If the alert includes a transcript or a note body, you have opened a leftover-secret leak.
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=tool_denied agent=sum-1 tool=exec_sql
 ```

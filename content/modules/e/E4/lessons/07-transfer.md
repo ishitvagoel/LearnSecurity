@@ -11,8 +11,6 @@ You get a **clinic DICOM / image parser**. On the notes app, `len(copy_into(4, b
 
 **Product sketch:** EHR-lite “the app is mostly Kotlin so copies are safe,” plus “we mapped an awareness-list name so the unpacker is done.”
 
-Write the same rule here. Include:
-
 1. who can act (hostile header length — not a live clinic binary attack);
 2. what you trust (smallest of three at the **native** copy is what you trust; Kotlin / a company roadmap / an awareness-list name are not);
 3. what must not happen (`copy_into` length > bufsize, not a privacy-law name);

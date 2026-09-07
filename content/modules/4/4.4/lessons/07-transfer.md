@@ -26,8 +26,6 @@ A grant on appointment A is not a grant on chart B, and a grant in clinic-acme i
 
 ## Prompt — clinic sketch
 
-Write the same rule here. Include:
-
 1. who can act (member with a real appointment grant who swaps chart id; clinic admin costume — **not** a live clinic system);
 2. what you trust (which lookup is trusted; the scheduling UI is not);
 3. what must not happen (`can_read` true for chart B, not a legal label and not “IDOR”);

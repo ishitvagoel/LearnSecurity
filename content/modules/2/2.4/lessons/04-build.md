@@ -51,8 +51,6 @@ Name who (retrying client), what (share row for `n1`), action (append), and the 
 python3 -m pytest labs/2.4/2.4-state-time/tests --impl fixed
 ```
 
-It must pass.
-
 ## Use it somewhere new
 
 Clinic last slot: lock or unique booking key, not “the UI disabled the button.” Payment capture uses the same store shape: first capture id, not a second debit.

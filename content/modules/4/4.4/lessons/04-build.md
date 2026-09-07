@@ -59,8 +59,6 @@ Name person, company, object, and the check. Run:
 python3 -m pytest labs/4.4/4.4-lab/tests --impl fixed
 ```
 
-It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 A clinic example: an appointment grant table keyed by chart id and company, not by “clinician role.”

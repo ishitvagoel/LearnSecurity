@@ -34,8 +34,6 @@ Re-run `test_prod_debug_must_not_boot` after any compose change. A green `NODE_E
 
 A canary dashboard will show rollout percent and stay silent when CI’s `boot_ok` is always true. Detection must observe **prod plus debug is deny**, not “the container started.” If the alert includes a stack trace or a session token, you have opened the same leak as a log line.
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=prod_debug_forbidden env=prod debug=true deploy=sc-12
 ```

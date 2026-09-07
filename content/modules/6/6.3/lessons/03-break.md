@@ -42,8 +42,6 @@ Read `vulnerable/csrf.py`. It returns `session_cookie` and ignores origin and to
 
 You do not need a new origin string. The failure of `test_foreign_origin_post_is_denied` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 ## Why it happens vs what it costs
 
 | Slice | Practice |

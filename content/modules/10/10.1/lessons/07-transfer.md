@@ -37,8 +37,6 @@ Also name the exception path (E6): an exception still names the missing threat m
 
 ## Prompt — clinic HIPAA training as merge
 
-Write the same rule here. Include:
-
 1. who can act (schedule pressure — not a live clinic);
 2. what you trust (the merge check is the promise; CODEOWNERS, training, and a maturity score are not);
 3. what must not happen (`merge_ok({})` true, not a legal label);

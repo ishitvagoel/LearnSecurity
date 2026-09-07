@@ -33,8 +33,6 @@ Header https plus socket http still has to be false. Enabling a CDN “HTTPS onl
 
 ## Prompt — clinic page vs API socket
 
-Write the same rule here. Include:
-
 1. who can act (cleartext client setting Forwarded-Proto — **not** a live clinic);
 2. what you trust (which socket or bound load balancer is trusted; the dashboard toggle is not);
 3. what must not happen (`channel_is_https` true on header/socket mismatch, not a legal label);

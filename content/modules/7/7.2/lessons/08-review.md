@@ -46,7 +46,7 @@ Also reject: public GraphQL attacks; closing findings without re-running `test_m
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_member_cannot_resolve_internal_field`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_member_cannot_resolve_internal_field`.
 
 ## Use it somewhere new
 

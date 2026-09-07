@@ -35,8 +35,6 @@ Status-only still is not coverage. An isolation-assert may still count. Marking 
 
 ## Prompt — clinic HIPAA done column
 
-Write the same rule here. Include:
-
 1. who can act (optimistic status column — not a live hospital);
 2. what you trust (the coverage check is the promise; checklist membership is not);
 3. what must not happen (`covered("AUTHZ-1", status_only)` true, not a legal label);

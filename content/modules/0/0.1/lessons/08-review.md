@@ -43,7 +43,7 @@ Also reject: fetching example.com; keys in lessons; claiming the first check-in;
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_public_host_is_out_of_scope`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover risk you will **not** delete.
+Write the review that blocks this change. Mention `test_public_host_is_out_of_scope`.
 
 ## Use it somewhere new
 

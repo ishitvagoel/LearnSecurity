@@ -42,8 +42,6 @@ Read `vulnerable/ir.py`. It returns true for every dict. Tests:
 
 You do not need a new incident key. The failure of `test_cannot_close_without_recovery` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | `return True` for every dict | Close on detection quality; recovery ignored | “The SIEM is green” |

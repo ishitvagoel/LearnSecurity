@@ -42,7 +42,7 @@ Also reject: trusting the client; concatenating readers; Report-Only as enforcem
 
 ## Practice
 
-Write three notes a peer could act on, and tie at least one to `test_duplicate_tenant_keys_are_one_meaning`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_duplicate_tenant_keys_are_one_meaning`.
 
 ## Use it somewhere new
 

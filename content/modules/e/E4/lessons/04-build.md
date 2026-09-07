@@ -52,8 +52,6 @@ Name who can change `bufsize`. Run:
 python3 -m pytest labs/E4/e4-lab/tests --impl fixed
 ```
 
-It must pass. Run from the lab directory if collection at repo root is polluted.
-
 ## Use it somewhere new
 
 Clinic JNI codec: deny a copy that exceeds the native buffer the same way.

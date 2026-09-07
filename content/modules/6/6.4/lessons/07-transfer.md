@@ -11,8 +11,6 @@ You get a **clinic scan upload** whose original filename is kept. On the notes a
 
 **Product sketch:** EHR-lite “attach imaging” that joins the filename onto a public folder.
 
-Write the same rule here. Include:
-
 1. who can act (patient or device supplying a filename — **not** a live clinic);
 2. what you trust (canonical prefix is what you trust; a UUID sticker is not);
 3. what must not happen (`resolve` leaves the imaging root — not a privacy-law name);

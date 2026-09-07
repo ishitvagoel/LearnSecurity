@@ -33,8 +33,6 @@ A vendor name does not build argv. Someone still has to own the concatenating pa
 | Recover | Remove the concatenating path; re-run `test_does_not_invoke_shell` |
 | Leftover | Argument injection; host compromise if it left the lab (must not) |
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=child_process_anomaly program=sh request_id=req_61a
 ```

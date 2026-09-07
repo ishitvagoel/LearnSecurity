@@ -36,8 +36,6 @@ Base64 decode of the stored stand-in is not the SSN. Renaming the column or wrap
 
 ## Prompt — clinic SSN column
 
-Write the same rule here. Include:
-
 1. who can act (database admin; stolen disk — **not** a live clinic);
 2. what you trust (which authenticated encryption plus key is trusted; the column name is not);
 3. what must not happen (Base64 round-trip of the stand-in, not a legal label);

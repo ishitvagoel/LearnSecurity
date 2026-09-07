@@ -40,7 +40,7 @@ Also reject: trusting the browser as the vault; closing a finding without re-run
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_recovery_control_is_usable_and_accessible`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_recovery_control_is_usable_and_accessible`.
 
 ## Use it somewhere new
 

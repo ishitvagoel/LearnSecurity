@@ -41,8 +41,6 @@ Read `vulnerable/lock.py`. It returns true for every pair. Tests:
 
 You do not need a new digest string. The failure of `test_hash_mismatch_refuses_install` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | Any pair returns true | Name-only install; digests ignored | “We have an SBOM” |

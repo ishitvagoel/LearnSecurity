@@ -88,8 +88,6 @@ python3 -m pytest labs/11/11-lab/tests --impl vulnerable
 python3 -m pytest labs/11/11-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 A clinic example: revoke a guardian. Full notes-app slice: the same rule across API, worker, and phone cache.

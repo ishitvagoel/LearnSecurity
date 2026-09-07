@@ -36,8 +36,6 @@ A recovery todo still has to be denied, and a note body still has to stay out. D
 
 ## Prompt — clinic close ticket when SIEM is green
 
-Write the same rule here. Include:
-
 1. who can act (optimistic closer / still-in actor — not a live clinic SIEM attack);
 2. what you trust (recovery done and no `note_body` is the promise; SIEM, paging, known-exploited list, and untested backups are not);
 3. what must not happen (`close_incident` true while recovery is todo, not a legal label);

@@ -32,7 +32,7 @@ A testing guide names *how* to test an **in-scope** app. It does not put `exampl
 
 You do not need a new URL. The failure of `test_public_host_is_out_of_scope` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first. Do not paste the public host into a browser or proxy.
+Do not paste the public host into a browser or proxy.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

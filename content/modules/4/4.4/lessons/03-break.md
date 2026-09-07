@@ -38,8 +38,6 @@ A scanner “IDOR” name is a weakness label, not that rule.
 
 Read `vulnerable/grant.py`. It never compares `note_id` or company. Tests require n2, n3, and eve×n1 to stay false, and honest n1 / owner-n2 to stay true. Record `test_grant_on_n1_is_not_grant_on_n2` first.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 ## Why it happens vs what it costs
 
 | Slice | Practice |

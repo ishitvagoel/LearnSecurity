@@ -34,8 +34,6 @@ Re-run `test_cannot_close_without_recovery` after any close-workflow change. A g
 
 A SIEM dashboard will show time-to-detect and stay silent when CI’s `close_incident` is always true. Detection must observe **recovery todo is deny**, not alert volume. If the alert includes a note body, you have opened a leftover-body leak.
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=incident_closed_without_recovery id=INC-12 recovery=todo
 ```

@@ -90,8 +90,6 @@ python3 -m pytest labs/10.5/10.5-lab/tests --impl vulnerable
 python3 -m pytest labs/10.5/10.5-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 Ransomware restore vs note-level integrity. Clinic: close ticket when SIEM is green.

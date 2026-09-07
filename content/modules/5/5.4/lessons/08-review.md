@@ -44,7 +44,7 @@ Also reject: live TLS attacks; closing findings without re-running `test_client_
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_client_forwarded_proto_is_not_tls`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_client_forwarded_proto_is_not_tls`.
 
 ## Use it somewhere new
 

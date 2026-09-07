@@ -44,8 +44,6 @@ A later hardware bar is not this check.
 
 You do not need a new origin string. The failure of `test_password_is_not_phishing_resistant` *is* the evidence.
 
-Do not open the repaired files yet. Name the cause first.
-
 ## Why it happens vs what it costs
 
 | Slice | Practice |

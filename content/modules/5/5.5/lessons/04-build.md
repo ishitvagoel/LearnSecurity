@@ -57,8 +57,6 @@ Name the check (`tuple` ∧ `"%s"` in sql ∧ params length 2). Run:
 python3 -m pytest labs/5.5/5.5-lab/tests --impl fixed
 ```
 
-It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 A clinic example: stop treating the search box as SQL text; bind the lookup string.

@@ -74,8 +74,6 @@ python3 -m pytest labs/8.3/8.3-lab/tests --impl vulnerable
 python3 -m pytest labs/8.3/8.3-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 Clinic `as=doctor`. OAuth redirect to the app (4.5).

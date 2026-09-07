@@ -74,8 +74,6 @@ python3 -m pytest labs/8.2/8.2-lab/tests --impl vulnerable
 python3 -m pytest labs/8.2/8.2-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 Clinic offline chart cache. iOS Keychain vs Android Keystore. Desktop Electron.

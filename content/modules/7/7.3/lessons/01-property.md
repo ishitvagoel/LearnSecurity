@@ -76,8 +76,6 @@ python3 -m pytest labs/7.3/7.3-lab/tests --impl vulnerable
 python3 -m pytest labs/7.3/7.3-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 Clinic lab-result webhook. Signed redirects. Outbound SSRF (6.5).

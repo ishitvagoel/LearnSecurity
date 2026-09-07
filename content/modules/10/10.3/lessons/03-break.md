@@ -41,8 +41,6 @@ Read `vulnerable/iam.py`. It returns true for every role. Tests:
 
 You do not need a new role string. The failure of `test_cluster_admin_pod_is_denied` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | `return True` for every role | Always-true admission; god-mode for convenience | "The namespace is private" |

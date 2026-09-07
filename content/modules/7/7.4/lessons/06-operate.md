@@ -32,8 +32,6 @@ A zero-trust product name does not bind the principal. Someone still has to own 
 | Recover | Rotate worker creds; drain; re-check revoke (4.1) vs retry (2.4); re-run `test_user_session_is_not_worker_identity` |
 | Leftover | God-mode database role (3.3); later originating-subject check (advanced); broker access lists (10.3) |
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=worker_identity_wrong expected=worker-sc job_id=job_74e
 ```

@@ -35,8 +35,6 @@ If GET as owner returns 200 while the suite never asserts the other clinician, t
 
 ## Prompt — clinic test_get_patient_200
 
-Write the same rule here. Include:
-
 1. who can act (another clinician’s token — not a live clinic);
 2. what you trust (named-what must not happen tests are the promise; coverage percent and testing-guide ticks are not);
 3. what must not happen (`is_security_test({status_asserted: True})` true, not a legal label);

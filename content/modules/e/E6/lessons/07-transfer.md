@@ -36,8 +36,6 @@ An empty owner still has to be denied. A complete record may still accept. Addin
 
 ## Prompt — clinic HIPAA exception
 
-Write the same rule here. Include:
-
 1. who can act (calendar / silent accept — not a live clinic audit);
 2. what you trust (schema is the promise; maturity score, industry labels, and a pledge are not);
 3. what must not happen (`accept_exception` true with empty owner, not a legal label);

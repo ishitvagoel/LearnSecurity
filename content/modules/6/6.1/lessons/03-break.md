@@ -42,8 +42,6 @@ Read `vulnerable/argv.py`. It concatenates the name into a `sh -c` string. Tests
 
 You do not need a new name string. The failure of `test_does_not_invoke_shell` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | `argv_for_list` starts `sh -c` | Name glued into shell grammar | A scanner name |

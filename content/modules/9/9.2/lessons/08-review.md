@@ -46,7 +46,7 @@ Also reject: weaponized eval; closing findings without re-running `test_eval_on_
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_eval_on_user_input_is_rejected`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_eval_on_user_input_is_rejected`.
 
 ## Use it somewhere new
 

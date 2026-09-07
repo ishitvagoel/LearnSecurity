@@ -30,8 +30,6 @@ Renaming `save_note` to `save_chart` is not transfer. If “available offline”
 
 ## Prompt — clinic offline chart cache
 
-Write the same rule here. Include:
-
 1. who can act (lost clinic tablet / backup — not a live hospital);
 2. what you trust (Keystore-wrapped cache is what you trust; private folder and fingerprint UI are not);
 3. what must not happen (`plaintext_on_disk` true, not “HIPAA”);

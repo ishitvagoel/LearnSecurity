@@ -33,8 +33,6 @@ A vendor name does not bind parameters. Someone still has to own the concatenati
 | Recover | Rotate database passwords; restore from backup if rows were changed; re-run `test_query_is_bound_not_concatenated` |
 | Leftover | Superuser tools; replicas that were not restored |
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=sql_error_spike tenant=tA request_id=req_55q stmt=fetch_note
 ```

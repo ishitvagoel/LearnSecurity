@@ -87,8 +87,6 @@ python3 -m pytest labs/9.5/9.5-lab/tests --impl vulnerable
 python3 -m pytest labs/9.5/9.5-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 Known-exploited list vs an internal-only bug. Clinic pentest PDF on a shelf.

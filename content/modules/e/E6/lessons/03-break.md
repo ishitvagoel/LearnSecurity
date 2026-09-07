@@ -41,8 +41,6 @@ Read `vulnerable/risk.py`. It returns true for every dict. Tests:
 
 You do not need a new field. The failure of `test_exception_needs_owner_review_and_wcag` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | `return True` for every dict | Oral acceptance treated as a row | “Legal said yes” |

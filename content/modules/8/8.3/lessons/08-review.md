@@ -46,7 +46,7 @@ Also reject: live malware APKs; closing findings without re-running `test_deepli
 
 ## Practice
 
-Write three notes a peer could act on, and tie at least one to `test_deeplink_as_param_does_not_switch_user`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_deeplink_as_param_does_not_switch_user`.
 
 ## Use it somewhere new
 

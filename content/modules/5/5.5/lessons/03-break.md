@@ -43,8 +43,6 @@ Read `vulnerable/query.py`. It interpolates `tenant` and `note_id` into the SQL 
 
 You do not need a new payload. The failure of `test_query_is_bound_not_concatenated` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | `fetch_sql` returns a `str` | Concatenated SQL | A scanner name |

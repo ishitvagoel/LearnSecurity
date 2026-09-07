@@ -71,8 +71,6 @@ python3 -m pytest labs/5.4/5.4-lab/tests --impl vulnerable
 python3 -m pytest labs/5.4/5.4-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 A clinic example: the page uses `https://` while the API socket is `http`. Mutual TLS names a service identity; that is not this header.

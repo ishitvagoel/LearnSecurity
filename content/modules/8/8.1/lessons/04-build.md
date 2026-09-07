@@ -59,8 +59,6 @@ Name the predicate (`server_attest == "play_integrity_pass"`; client field ignor
 python3 -m pytest labs/8.1/8.1-lab/tests --impl fixed
 ```
 
-Must pass. Run from the lab directory if collection at repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 A clinic example: stop treating a client `hipaaMode` checkbox as the server’s BAA switch.

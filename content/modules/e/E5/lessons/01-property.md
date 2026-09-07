@@ -73,8 +73,6 @@ python3 -m pytest labs/E5/e5-lab/tests --impl vulnerable
 python3 -m pytest labs/E5/e5-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 Clinic group practice switching `org_id` in JSON. A relationship-graph tuple vs this binding.

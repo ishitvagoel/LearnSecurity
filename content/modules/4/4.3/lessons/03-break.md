@@ -46,8 +46,6 @@ Read `vulnerable/token.py`. It returns `query.get("access_token")` first. Checks
 
 You do not need a new token string. The failure of `test_query_string_token_is_rejected` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |

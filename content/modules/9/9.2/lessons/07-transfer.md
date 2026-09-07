@@ -36,8 +36,6 @@ Eval-on-user still has to be rejected. Honest `int(user)` may still pass. Format
 
 ## Prompt — clinic eval in a report template
 
-Write the same rule here. Include:
-
 1. who can act (template author / compromised designer — not a live clinic);
 2. what you trust (review of interpreters is what you trust; formatter “looks good” is not);
 3. what must not happen (`review_ok` true for eval-on-user, not a legal label);

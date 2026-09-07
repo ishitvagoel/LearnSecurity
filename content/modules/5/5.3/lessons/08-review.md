@@ -44,7 +44,7 @@ Also reject: real production keys in practice files; closing findings without re
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_hardcoded_default_does_not_auth`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_hardcoded_default_does_not_auth`.
 
 ## Use it somewhere new
 

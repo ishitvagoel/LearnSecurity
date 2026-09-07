@@ -34,8 +34,6 @@ Re-run `test_hash_mismatch_refuses_install` after any installer change. A green 
 
 An npm audit dashboard will show advisory counts and stay silent when CI’s `install_ok` is always true. Detection must observe **aaa vs bbb is deny**, not CVE volume. If the alert includes a registry token, you have opened the same leak as a log line (5.3).
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=hash_mismatch_denied pkg=demo expected=aaa got=bbb
 ```

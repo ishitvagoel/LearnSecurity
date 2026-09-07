@@ -43,8 +43,6 @@ Read `vulnerable/ssrf.py`. It returns true for any `http`/`https` scheme. Tests:
 
 You do not need a new URL. The failure of `test_link_local_metadata_is_denied` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | `allowed` true for link-local | Scheme-only check | A live metadata GET |

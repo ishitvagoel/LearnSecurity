@@ -34,8 +34,6 @@ After patient delete, appointment-card notes and the analytics export still have
 
 ## Prompt — leftover card notes
 
-Write the same rule here. Include:
-
 1. who can act (insider analytics; partner CSV — **not** a live clinic);
 2. what you trust (which delete path is trusted; the contract PDF is not);
 3. what must not happen (`body_retained` true after delete, not a legal label);

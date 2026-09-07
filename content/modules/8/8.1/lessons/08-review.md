@@ -46,7 +46,7 @@ Also reject: live device farms; personal-phone cookbooks; closing findings witho
 
 ## Practice
 
-Write three notes a peer could act on, and tie at least one to `test_client_integrity_claim_is_not_authorization`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_client_integrity_claim_is_not_authorization`.
 
 ## Use it somewhere new
 

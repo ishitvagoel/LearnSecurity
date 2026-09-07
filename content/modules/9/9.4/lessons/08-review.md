@@ -46,7 +46,7 @@ Also reject: live tenants; closing findings without re-running `test_unmapped_hi
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_unmapped_high_blocks_ship`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_unmapped_high_blocks_ship`.
 
 ## Use it somewhere new
 

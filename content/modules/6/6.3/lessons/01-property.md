@@ -74,8 +74,6 @@ python3 -m pytest labs/6.3/6.3-lab/tests --impl vulnerable
 python3 -m pytest labs/6.3/6.3-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 Clinic “share record with partner” POST. postMessage, clickjacking, CORS `*` with credentials.

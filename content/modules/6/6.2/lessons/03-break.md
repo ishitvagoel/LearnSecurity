@@ -42,8 +42,6 @@ A famous-bugs nickname for “script in HTML” is awareness after the cause, no
 
 You do not need a new marker. The failure of `test_angle_brackets_are_encoded` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 ## Why it happens vs what it costs
 
 | Slice | This practice |

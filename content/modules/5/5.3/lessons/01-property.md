@@ -68,8 +68,6 @@ python3 -m pytest labs/5.3/5.3-lab/tests --impl vulnerable
 python3 -m pytest labs/5.3/5.3-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 Clinic lab API key in a gist. Envelope wrapping (data key vs wrapping key) on compromise.

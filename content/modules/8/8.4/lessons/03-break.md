@@ -42,8 +42,6 @@ Topic 8.1 already said the APK is hostile. This rule is **debug must not call pr
 
 You do not need a new flavor name. The failure of `test_debug_build_cannot_call_prod_export` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 ## Why it happens vs what it costs
 
 | Slice | This practice |

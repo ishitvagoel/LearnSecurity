@@ -65,8 +65,6 @@ Name who can edit the lockfile. Run:
 python3 -m pytest labs/10.2/10.2-lab/tests --impl fixed
 ```
 
-It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 Pin Actions by SHA, not `@v1`. That is the same equality idea on a different object.

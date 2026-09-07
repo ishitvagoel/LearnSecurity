@@ -72,8 +72,6 @@ python3 -m pytest labs/9.3/9.3-lab/tests --impl vulnerable
 python3 -m pytest labs/9.3/9.3-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 Clinic `test_get_patient_200`. Fuzzing with no named bad result.

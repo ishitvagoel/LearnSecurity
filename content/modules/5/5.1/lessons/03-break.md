@@ -44,8 +44,6 @@ Read `vulnerable/lifecycle.py`. `delete_account` only pops `NOTES`. Tests:
 
 You do not need a new store name. The failure of `test_deleted_account_leaves_no_analytics_body` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | Notes gone, analytics still has `secret` | Copy missing from the graph | “The notes row is gone” |

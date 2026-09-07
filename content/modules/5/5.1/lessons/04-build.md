@@ -68,8 +68,6 @@ Name the copies and the checks (`body_retained is None` and `search_retained is 
 python3 -m pytest labs/5.1/5.1-lab/tests --impl fixed
 ```
 
-It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 A clinic example: delete the patient row and the appointment-card notes in one runbook, not a later ticket.

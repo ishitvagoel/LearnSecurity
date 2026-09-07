@@ -44,7 +44,7 @@ Also reject: rolling a cipher; closing findings without re-running `test_protect
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_protect_is_not_mere_encoding`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_protect_is_not_mere_encoding`.
 
 ## Use it somewhere new
 

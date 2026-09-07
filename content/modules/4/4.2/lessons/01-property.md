@@ -73,7 +73,7 @@ python3 -m pytest labs/4.2/4.2-lab/tests --impl vulnerable
 python3 -m pytest labs/4.2/4.2-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Tie the check to the password-at-lookalike boolean, not to a vendor name.
+Tie the check to the password-at-lookalike boolean, not to a vendor name.
 
 ## Use it somewhere new
 

@@ -60,8 +60,6 @@ Name the check (`server_scheme == "https"`). Run:
 python3 -m pytest labs/5.4/5.4-lab/tests --impl fixed
 ```
 
-It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 A clinic example: stop treating the page’s `https://` API client as the API socket; bind cookies and HSTS to the server scheme.

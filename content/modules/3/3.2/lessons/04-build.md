@@ -54,8 +54,6 @@ Name who (assembler / CI), what (threat-id list), and the check (`cross-tenant-r
 python3 -m pytest labs/3.2/3.2-lab/tests --impl fixed
 ```
 
-It must pass.
-
 ## Use it somewhere new
 
 A clinic example: seed `sms-content-leak` and `number-swap` even if the gateway vendor’s questionnaire is green. HIPAA stickers and vendor scans are not those rows.

@@ -41,8 +41,6 @@ Last topic already said the session is identity (4.3). This rule is **the Intent
 
 You do not need a new query key. The failure of `test_deeplink_as_param_does_not_switch_user` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 ## Why it happens vs what it costs
 
 | Slice | This practice |

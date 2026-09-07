@@ -46,7 +46,7 @@ Also reject: public API attacks; closing findings without re-running `test_is_ad
 
 ## Practice
 
-Write three notes a peer could act on, and tie at least one to `test_is_admin_cannot_be_patched`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_is_admin_cannot_be_patched`.
 
 ## Use it somewhere new
 

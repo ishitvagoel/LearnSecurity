@@ -33,8 +33,6 @@ A vendor name does not allow-list hosts. Someone still has to own the importer p
 | Recover | Keep deny; do not rotate a real cloud role as homework |
 | Leftover | DNS rebinding; customer-URL proxy |
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=egress_denied class=link_local request_id=req_65e
 ```

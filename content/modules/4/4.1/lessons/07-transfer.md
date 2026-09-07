@@ -32,8 +32,6 @@ If offboard only hits the badge, the chart cookie still reads. Identity guidance
 
 ## Prompt — departing clinician
 
-Write the same rule here. Include:
-
 1. who can act (copied cookie; shared workstation; delayed lab-result worker — **not** a live clinic or identity provider);
 2. what you trust (which delete path is trusted; the badge vendor is not);
 3. what must not happen (`session_valid` true after offboard, not a legal label);

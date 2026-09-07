@@ -70,7 +70,7 @@ python3 -m pytest labs/6.4/6.4-lab/tests --impl vulnerable
 python3 -m pytest labs/6.4/6.4-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Tie the check to a path that left the folder, not to an awareness-list name.
+Tie the check to a path that left the folder, not to an awareness-list name.
 
 ## Use it somewhere new
 

@@ -56,8 +56,6 @@ Name the check (`&lt;` present, extra-tag marker `"<img"` absent, honest title s
 python3 -m pytest labs/6.2/6.2-lab/tests --impl fixed
 ```
 
-Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 A clinic example: encode the nickname in HTML text; treat markdown as a second parser.

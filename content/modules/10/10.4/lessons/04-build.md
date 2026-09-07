@@ -65,8 +65,6 @@ Name who can edit compose. Run:
 python3 -m pytest labs/10.4/10.4-lab/tests --impl fixed
 ```
 
-It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 Django: `DEBUG` must be false when `ENV=prod`, not “we meant to turn it off.”

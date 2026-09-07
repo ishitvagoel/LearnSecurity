@@ -35,8 +35,6 @@ Clinic staff SSO portal. Optionally: step-up for export — still origin-bound?
 
 Product sketch: a small EHR login plus a second ceremony before chart export.
 
-Write the same rule here. Include:
-
 1. who can act (lookalike identity provider; intercepted OTP; tired clinician — **not** a live clinic or public phishing page);
 2. what you trust (which origin check is trusted; “we use Okta” is not);
 3. what must not happen (`phishing_resistant("otp", evil, real)` is true, or a step-up password counted as resistant);

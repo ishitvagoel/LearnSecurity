@@ -43,8 +43,6 @@ Read `vulnerable/worker.py`. It returns `user_session` if present. Tests:
 
 You do not need a new identity string. The failure of `test_user_session_is_not_worker_identity` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | `exporter` returns `"alice"` | Ambient user context | A zero-trust sticker |

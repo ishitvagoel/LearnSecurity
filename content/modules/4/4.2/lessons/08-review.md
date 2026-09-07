@@ -44,7 +44,7 @@ Also reject: trusting the client; closing findings without re-running `test_pass
 
 ## Practice
 
-Write three notes a peer could act on, and tie at least one to `test_password_is_not_phishing_resistant`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_password_is_not_phishing_resistant`.
 
 ## Use it somewhere new
 

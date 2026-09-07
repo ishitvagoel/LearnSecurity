@@ -35,8 +35,6 @@ B after revoke denied, A still reads, B before revoke still reads. Adding DELETE
 
 ## Prompt — clinic revoke a guardian
 
-Write the same rule here. Include:
-
 1. who can act (former guardian with a cached chart id — not a live clinic attack);
 2. what you trust (owner-or-grant on every read is the promise; scanner, YAML pack, and HTTP 200 are not);
 3. what must not happen (`read` after `revoke` still returns the body, not a legal label);

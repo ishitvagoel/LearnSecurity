@@ -33,8 +33,6 @@ A log product is not the rule, and a clean line is not proof.
 | Recover | Purge matching lines; rotate if tokens were present; re-run `test_note_body_is_not_logged` |
 | Leftover | Operators still see ids; write that row down; APM and access logs remain other places |
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=confidential_field event=note_read request_id=req_81aa
 ```

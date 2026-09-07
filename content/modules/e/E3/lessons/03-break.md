@@ -41,8 +41,6 @@ Read `vulnerable/pay.py`. `capture` appends on every call. Checks:
 
 You do not need a new key. The failure of `test_duplicate_capture_does_not_double_charge` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |

@@ -37,8 +37,6 @@ Also name SCA: a CVE versus a function you actually call.
 
 ## Prompt — clinic, fifty unmapped HIGHs
 
-Write the same rule here. Include:
-
 1. who can act (alert fatigue — not a live clinic);
 2. what you trust (the mapping check is the promise; the dashboard and a maturity score are not);
 3. what must not happen (`ship_ok([HIGH], {})` true, not a legal label);

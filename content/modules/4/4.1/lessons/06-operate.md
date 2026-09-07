@@ -33,8 +33,6 @@ A log product does not kill the cookie.
 | Recover | Mass revoke; rotate signing keys if tokens self-verify; re-run `test_deleted_user_session_is_dead` |
 | Leftover | Backups still contain the row; workers; a phone's offline cache |
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=session_after_delete user_id=alice request_id=req_41lc
 ```

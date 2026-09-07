@@ -11,8 +11,6 @@ You get a **clinic last slot**, a **payment capture**, or an **invite token**. O
 
 **Product sketch:** Clinic: two POSTs book the last slot.
 
-Write the same rule here. Include:
-
 1. who can act (retry after 504; double-click; two tabs; load-balancer POST retry — **not** a live clinic, payment network, or public booking page);
 2. what you trust (whose store remembers the first booking; clocks may skew; the UI is not what you trust);
 3. what must not happen (two patients in one slot, two captures, or two invite redemptions — not an awareness-list name);

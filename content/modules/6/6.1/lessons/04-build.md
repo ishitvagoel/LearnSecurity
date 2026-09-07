@@ -57,7 +57,7 @@ Name the check (program ≠ `sh` ∧ last element is the name ∧ not `uses_shel
 python3 -m pytest labs/6.1/6.1-lab/tests --impl fixed
 ```
 
-It must pass. Do not execute the returned list. Then write one sentence: which rule is restored, and which leftover you refused to delete.
+Do not execute the returned list.
 
 ## Use it somewhere new
 
@@ -70,3 +70,4 @@ Argument injection; plugin shells; CSV formula leftover; 6.4 path cells.
 ## What this page is not doing
 
 Do not spawn a live process. Do not claim a course gate from a denylist.
+

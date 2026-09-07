@@ -42,8 +42,6 @@ Read `vulnerable/path.py`. It joins the name onto `/tmp/sc-lab` and returns the 
 
 You do not need a new name. The failure of `test_dotdot_does_not_escape_root` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
 | Slice | This practice |

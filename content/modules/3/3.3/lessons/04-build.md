@@ -53,8 +53,6 @@ Name who (runtime role `app` as `tB`), what (`tA` note row), check (SELECT denie
 python3 -m pytest labs/3.3/3.3-lab/tests --impl fixed
 ```
 
-It must pass.
-
 ## Use it somewhere new
 
 Serverless: the function role is the runtime role. Clinic replica: the replica role is another lane and must not `SELECT` chart text.

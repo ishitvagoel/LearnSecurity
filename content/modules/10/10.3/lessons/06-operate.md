@@ -34,8 +34,6 @@ Re-run `test_cluster_admin_pod_is_denied` after any Helm change. A green "namesp
 
 A CIS dashboard will show benchmark scores and stay silent when CI's `pod_ok` is always true. Detection must observe **cluster-admin is deny**, not "we use Kubernetes." If the alert includes a kubeconfig or a cloud token, you have opened a leftover-secret leak.
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=cluster_admin_denied sa=app ns=sc-prod requested=cluster-admin
 ```

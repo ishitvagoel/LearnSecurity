@@ -46,7 +46,7 @@ Also reject: live device imaging; closing findings without re-running `test_cach
 
 ## Practice
 
-Write three notes a peer could act on, and tie at least one to `test_cached_note_is_not_plaintext_on_disk`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_cached_note_is_not_plaintext_on_disk`.
 
 ## Use it somewhere new
 

@@ -56,8 +56,6 @@ Name the check (`n <= 3`). Run:
 python3 -m pytest labs/6.7/6.7-lab/tests --impl fixed
 ```
 
-It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 A clinic example: stop treating “Export” as unlimited; count on the server.

@@ -66,8 +66,6 @@ Name the leftover (unmapped LOW; who-is-allowed blind spots). Run:
 python3 -m pytest labs/9.4/9.4-lab/tests --impl fixed
 ```
 
-It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 SCA: mapping a CVE to “we do not call it” still records the owner.

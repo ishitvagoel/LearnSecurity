@@ -41,8 +41,6 @@ Read `vulnerable/trace.py`. It returns true if any test dict has `req == req_id`
 
 You do not need a new requirement id. The failure of `test_status_only_row_is_not_coverage` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | `req == req_id` is enough | Status / membership without an isolation assert | “We imported the PDF” |

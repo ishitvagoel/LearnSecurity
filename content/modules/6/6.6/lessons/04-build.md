@@ -67,8 +67,6 @@ Name the check (first true and second false per token). Run:
 python3 -m pytest labs/6.6/6.6-lab/tests --impl fixed
 ```
 
-It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 A clinic example: stop treating “link clicked” as unlimited joins; consume in the store.

@@ -58,8 +58,6 @@ Name who can edit Next.js headers. Run `--impl fixed` (must pass):
 python3 -m pytest labs/E2/e2-lab/tests --impl fixed
 ```
 
-Run from the lab directory if collection at repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 A clinic example: send enforcing CSP, keep Report-Only as a *second* header if you still want reports.

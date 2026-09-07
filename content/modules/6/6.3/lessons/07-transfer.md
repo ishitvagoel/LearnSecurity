@@ -25,8 +25,6 @@ A foreign origin without a token still has to be false, and same origin without 
 
 ## Prompt — clinic sketch
 
-Write the same rule here. Include:
-
 1. who can act (foreign origin using the victim browser as helper — **not** a live clinic);
 2. what you trust (origin + token are trusted; SameSite is not);
 3. what must not happen (`allow_share` true for foreign origin without token, not a legal label);

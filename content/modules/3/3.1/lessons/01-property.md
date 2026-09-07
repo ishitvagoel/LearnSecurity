@@ -92,7 +92,7 @@ python3 -m pytest labs/3.1/3.1-lab/tests --impl vulnerable
 python3 -m pytest labs/3.1/3.1-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Tie the check to the body in the log, not to a privacy-policy URL.
+Tie the check to the body in the log, not to a privacy-policy URL.
 
 ## Use it somewhere new
 

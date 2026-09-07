@@ -11,8 +11,6 @@ You get a **clinic appointment deep link**. Optionally: a **magic-link email** (
 
 **Product sketch:** EHR-lite “open this visit” SMS or email.
 
-Write the same rule here. Include:
-
 1. who can act (Referer to a tracking pixel; SMS forward; access-log operator — **not** a live clinic);
 2. what you trust (which parser is trusted; the SMS vendor is not);
 3. what must not happen (`?token=` mints a standing session, not a privacy-law name);

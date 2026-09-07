@@ -42,8 +42,6 @@ Read `vulnerable/limit.py`. It returns true for every `n`. Tests:
 
 You do not need a new `n`. The failure of `test_fourth_export_is_denied` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | `allow(4)` is true | No resource account | A famous API-abuse list |

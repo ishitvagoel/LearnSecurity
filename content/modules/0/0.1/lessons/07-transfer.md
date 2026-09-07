@@ -12,8 +12,6 @@ In this course, `target_is_authorized("https://example.com/")` is false. The sam
 
 **Product sketch:** “It has a login page so it’s a lab,” plus “the guide has an authorization chapter so we can hit it.”
 
-Write the same rule here. Include:
-
 1. who might try (a tired paste of a customer host — **not** an instruction to hit the customer host, the staging URL, or a public login page);
 2. what you trust (the written allow-list; not a testing guide, a job title, a proxy, robots.txt, or “it connected”);
 3. what must not happen (`target_is_authorized` true for a public or customer host, not merely “unprofessional”);

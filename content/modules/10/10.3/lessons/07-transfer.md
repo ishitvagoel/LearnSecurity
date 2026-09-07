@@ -35,8 +35,6 @@ If the namespace is "private" while `pod_ok` is always true, the rule is gone. A
 
 ## Prompt — clinic app SA is cluster-admin
 
-Write the same rule here. Include:
-
 1. who can act (compromised container / malicious chart — not a live clinic cluster);
 2. what you trust (allow-listed namespaced role is the promise; namespace, network policy, restricted pod profile, and CIS are not);
 3. what must not happen (`pod_ok("cluster-admin")` true, not a legal label);

@@ -53,8 +53,6 @@ Name who, what, action, and the check that must be true after the fix. Run:
 python -m pytest labs/1.4/1.4-risk-register/tests --impl fixed
 ```
 
-It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 Banking re-auth dialog: if the bank “fixes” mouse-only by sending a one-time code in SMS that support will read back, what who-is-allowed row did they quietly change?

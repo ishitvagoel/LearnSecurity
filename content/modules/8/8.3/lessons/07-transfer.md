@@ -30,8 +30,6 @@ Renaming `as=admin` to `as=doctor` is not transfer. If the kiosk demo uses a ver
 
 ## Prompt — clinic deep link as=doctor
 
-Write the same rule here. Include:
-
 1. who can act (another app on the tablet sending extras — not a live clinic);
 2. what you trust (server session is what you trust; App Links and https are not identity);
 3. what must not happen (`current_user` becomes doctor, not “HIPAA”);

@@ -41,8 +41,6 @@ Read `vulnerable/sdl.py`. It returns true for every dict. Tests:
 
 You do not need a new pull-request key. The failure of `test_merge_requires_threat_model_id` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | `merge_ok` true for every dict | No threat-model id required | “We have CODEOWNERS” |

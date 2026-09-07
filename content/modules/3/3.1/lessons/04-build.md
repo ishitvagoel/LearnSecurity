@@ -67,8 +67,6 @@ Name field (note body), place (application log line), and the check that must be
 python3 -m pytest labs/3.1/3.1-lab/tests --impl fixed
 ```
 
-It must pass. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 A clinic example: log appointment time; never log chart text. Two classes, two places. A booking card that logs the chart fails this sentence even if the time is Internal.

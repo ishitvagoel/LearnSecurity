@@ -80,7 +80,7 @@ python3 -m pytest labs/2.3/2.3-browser-policy/tests --impl vulnerable
 python3 -m pytest labs/2.3/2.3-browser-policy/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Tie the check to script readability, not to “XSS is fixed.”
+Tie the check to script readability, not to “XSS is fixed.”
 
 ## Use it somewhere new
 

@@ -71,8 +71,6 @@ python3 -m pytest labs/10.1/10.1-lab/tests --impl vulnerable
 python3 -m pytest labs/10.1/10.1-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 An exception path (E6) that still names the missing threat model and when it expires. A clinic that treats “HIPAA training complete” as enough to merge.

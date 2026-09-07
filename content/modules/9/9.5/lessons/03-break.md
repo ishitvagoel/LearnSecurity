@@ -41,8 +41,6 @@ Read `vulnerable/pentest.py`. It returns true for every dict. Tests:
 
 You do not need a new finding key. The failure of `test_cannot_close_without_retest` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | `return True` for every dict | Close on intent; retest field ignored | "The PDF is the retest" |

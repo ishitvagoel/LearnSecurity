@@ -46,7 +46,7 @@ Also reject: live production attacks; booting without re-running `test_prod_debu
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_prod_debug_must_not_boot`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_prod_debug_must_not_boot`.
 
 ## Use it somewhere new
 

@@ -12,8 +12,6 @@ In this course, `quiz_score_grants_phase1_skip(100)` is false. The same rule has
 
 **Product sketch:** “They scored 100% so skip isolation labs,” plus “job-title competency so check-in 1 is done.”
 
-Write the same rule here. Include:
-
 1. who might try (a hurried new hire or manager with a badge — **not** a live HR LMS attack);
 2. what you trust (the skip check; not a quiz, a job title, a badge, or an LMS percentage);
 3. what must not happen (`quiz_score_grants_phase1_skip(100)` true, not merely “unprofessional”);

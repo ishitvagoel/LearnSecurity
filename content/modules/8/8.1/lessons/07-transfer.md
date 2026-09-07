@@ -30,8 +30,6 @@ Renaming `integrity` to `hipaaMode` is not transfer. If the Compose switch is �
 
 ## Prompt — clinic Android hipaaMode=true
 
-Write the same rule here. Include:
-
 1. who can act (patched clinic app file — not a live hospital device);
 2. what you trust (server attest plus 1.2 is what you trust; client boolean and store listing are not);
 3. what must not happen (`allow_export` true on a client claim with failing attest, not “HIPAA”);

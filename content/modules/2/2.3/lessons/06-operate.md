@@ -29,8 +29,6 @@ A log product and a checklist name do not restore this rule. Report-Only CSP is 
 | Recover | Rotate session ids; fix the setter; re-run `test_script_cannot_read_httponly_session` |
 | Leftover | Extensions; physical access; XSS that never needed the cookie |
 
-A log line a reviewer can accept looks like:
-
 ```text
 cookie_denied reason=missing_httponly name=sc_session env=staging request_id=req_4b11
 ```

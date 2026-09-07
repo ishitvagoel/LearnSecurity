@@ -64,8 +64,6 @@ Name who can mark recovery done. Run:
 python3 -m pytest labs/10.5/10.5-lab/tests --impl fixed
 ```
 
-It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 A clinic example: restore-test evidence, not a green dashboard. The lab still uses fake strings.

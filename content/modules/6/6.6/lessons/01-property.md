@@ -72,8 +72,6 @@ python3 -m pytest labs/6.6/6.6-lab/tests --impl vulnerable
 python3 -m pytest labs/6.6/6.6-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 Clinic invite-guardian token. Password reset. 2.4 share retry. Later job delivery (7.4).

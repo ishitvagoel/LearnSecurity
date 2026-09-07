@@ -49,7 +49,7 @@ Also reject: live orgs; merging without re-running `test_merge_requires_threat_m
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_merge_requires_threat_model_id`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_merge_requires_threat_model_id`.
 
 ## Use it somewhere new
 

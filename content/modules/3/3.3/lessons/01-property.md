@@ -74,7 +74,7 @@ python3 -m pytest labs/3.3/3.3-lab/tests --impl vulnerable
 python3 -m pytest labs/3.3/3.3-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass. Tie the check to `tB` reading `tA`, not to a private-network diagram.
+Tie the check to `tB` reading `tA`, not to a private-network diagram.
 
 ## Use it somewhere new
 

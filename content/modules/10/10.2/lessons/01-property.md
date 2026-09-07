@@ -72,8 +72,6 @@ python3 -m pytest labs/10.2/10.2-lab/tests --impl vulnerable
 python3 -m pytest labs/10.2/10.2-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 GitHub Actions third-party `action@v1`. Clinic: npm install in a prod pod.

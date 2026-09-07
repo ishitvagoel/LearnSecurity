@@ -34,8 +34,6 @@ Re-run `test_unmapped_high_blocks_ship` after any scanner-rule change. A green â
 
 A vendor security dashboard will show finding counts and stay silent when CIâ€™s `ship_ok` is always true. Detection must observe **empty map plus HIGH is deny**, not alert volume. If the alert includes a secret or a note body, you have opened the same leak as a log line and an extra vendor copy.
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=unmapped_high_blocks finding=F1 sev=HIGH
 ```

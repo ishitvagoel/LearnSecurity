@@ -35,8 +35,6 @@ Prod plus debug still has to be denied. Prod without debug may still boot. Setti
 
 ## Prompt — clinic Django DEBUG=True
 
-Write the same rule here. Include:
-
 1. who can act (anyone who finds `/debug` or an error page — not a live clinic);
 2. what you trust (prod plus debug deny is the promise; `NODE_ENV`, a canary, and IaC are not);
 3. what must not happen (`boot_ok("prod", True)` true, not a legal label);

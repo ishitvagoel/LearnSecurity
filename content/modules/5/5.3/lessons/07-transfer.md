@@ -11,8 +11,6 @@ You get a **clinic lab API key in a gist**. On the notes app, `auth("sk-lab-hard
 
 **Product sketch:** EHR-lite with a backend integration key.
 
-Write the same rule here. Include:
-
 1. who can act (gist reader; old container — **not** a live clinic);
 2. what you trust (which current secret is trusted; the vault brand is not);
 3. what must not happen (`auth` true for the leaked string after rotate — not a privacy-law name);

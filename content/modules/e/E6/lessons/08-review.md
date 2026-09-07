@@ -46,7 +46,7 @@ Also reject: live disclosure; shipping without re-running `test_exception_needs_
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_exception_needs_owner_review_and_wcag`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_exception_needs_owner_review_and_wcag`.
 
 ## Use it somewhere new
 

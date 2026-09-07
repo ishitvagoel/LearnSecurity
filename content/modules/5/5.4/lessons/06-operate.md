@@ -31,8 +31,6 @@ A log product does not bind the socket. Someone still has to own the mismatch.
 | Recover | HSTS once TLS is real; revoke cleartext cookies; re-run `test_client_forwarded_proto_is_not_tls` |
 | Leftover | Pinning (later on phones); cookies already copied |
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=header_https_socket_http socket=http request_id=req_54ch
 ```

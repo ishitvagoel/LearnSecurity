@@ -30,8 +30,6 @@ Renaming “title” to “nickname” is not transfer. If the nickname is conca
 
 ## Prompt — clinic nickname field
 
-Write the same rule here. Include:
-
 1. who can act (patient or clerk supplying a nickname — not a live clinic);
 2. what you trust (the HTML-text encoder is what you trust; a content-security header is not);
 3. what must not happen (`render` leaves `<` as markup, not “HIPAA”);

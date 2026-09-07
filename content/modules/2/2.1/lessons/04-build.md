@@ -49,8 +49,6 @@ Name who, what, action, and the check that must be true after the fix. Run `--im
 python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl fixed
 ```
 
-Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 GraphQL and REST both ingest the same note — two grammars. The fix is still “one meaning or refuse,” not “sanitize quotes.”

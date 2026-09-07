@@ -46,7 +46,7 @@ Also reject: live model attacks; shipping without re-running `test_exec_sql_tool
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_exec_sql_tool_is_denied`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_exec_sql_tool_is_denied`.
 
 ## Use it somewhere new
 

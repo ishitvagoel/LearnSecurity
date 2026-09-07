@@ -68,8 +68,6 @@ python3 -m pytest labs/E3/e3-lab/tests --impl vulnerable
 python3 -m pytest labs/E3/e3-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 Health record append-only audit. Simulated copay.

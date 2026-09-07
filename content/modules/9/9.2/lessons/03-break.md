@@ -41,8 +41,6 @@ Read `vulnerable/review.py`. It returns true for every string. Tests:
 
 You do not need a new payload. The failure of `test_eval_on_user_input_is_rejected` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | `review_ok` true for every string | Always-approve; no interpreter question | A scanner name |

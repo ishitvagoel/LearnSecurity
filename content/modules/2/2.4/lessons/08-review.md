@@ -45,7 +45,7 @@ Also reject: treating the client as what you trust; an awareness-list name as th
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_retry_does_not_duplicate_side_effect`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_retry_does_not_duplicate_side_effect`.
 
 ## Use it somewhere new
 

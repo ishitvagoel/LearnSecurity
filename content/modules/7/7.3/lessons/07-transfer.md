@@ -36,8 +36,6 @@ An empty sig still has to be false. A matching HMAC over the same raw body may s
 
 **Product sketch:** EHR-lite `POST /lab-results` behind TLS, IP-allow-listed to “the lab vendor,” no MAC.
 
-Write the same rule here. Include:
-
 1. who can act (anyone who can POST the clinic callback URL — not a live clinic);
 2. what you trust (raw-body HMAC + `compare_digest`; TLS and vendor address range are not);
 3. what must not happen (`accept("", body, secret)` true, not a legal label);

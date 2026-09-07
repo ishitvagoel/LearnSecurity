@@ -11,8 +11,6 @@ You get **clinic SMS reminders** — a new channel that HTTP scans of the notes 
 
 **Product sketch:** An EHR-lite booking card that texts “your appointment” to a phone number.
 
-Write the same rule here. Include:
-
 1. who can act (number-swap; SMS intercept on an untrusted hop; an operator who pastes chart text into the template — **not** a live clinic, carrier, or public SMS API);
 2. what you trust (which assembler or markdown file is the list you keep; the SMS vendor questionnaire is not);
 3. what must not happen (empty model because “gateway questionnaire green,” or reminder body includes chart text — pick one and test it locally);

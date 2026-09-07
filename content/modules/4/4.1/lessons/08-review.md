@@ -44,7 +44,7 @@ Also reject: trusting the browser as the vault; closing findings without re-runn
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_deleted_user_session_is_dead`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_deleted_user_session_is_dead`.
 
 ## Use it somewhere new
 

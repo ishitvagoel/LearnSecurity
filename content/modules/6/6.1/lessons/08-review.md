@@ -44,7 +44,7 @@ Also reject: live command execution; closing findings without re-running `test_d
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_does_not_invoke_shell`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_does_not_invoke_shell`.
 
 ## Use it somewhere new
 

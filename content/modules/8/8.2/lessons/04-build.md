@@ -59,8 +59,6 @@ Name the predicate (stored bytes ≠ body; no plaintext fallback). Run:
 python3 -m pytest labs/8.2/8.2-lab/tests --impl fixed
 ```
 
-Must pass. Run from the lab directory if collection at repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 A clinic example: stop treating “internal storage” as the chart-cache control.

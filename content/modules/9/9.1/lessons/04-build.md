@@ -66,8 +66,6 @@ Name the check (`req` matches **and** `asserts_isolation`). Run:
 python3 -m pytest labs/9.1/9.1-lab/tests --impl fixed
 ```
 
-It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 Mobile storage (8.2): require a matching test id, not a control-group checkbox.

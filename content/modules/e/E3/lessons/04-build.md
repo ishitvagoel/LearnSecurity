@@ -49,7 +49,7 @@ Name who can mint keys. Run:
 python3 -m pytest labs/E3/e3-lab/tests --impl fixed
 ```
 
-It must pass. Run from the practice folder if a run at the repo root is polluted.
+Run from the practice folder if a run at the repo root is polluted.
 
 ## Use it somewhere new
 

@@ -34,8 +34,6 @@ Re-run `test_crash_report_omits_note_body` after any crash-SDK change. A green â
 
 A crash dashboard will show crash counts and stay silent when the last extra still holds the note. Detection must observe **`'secret'` absent**, not vendor uptime. If the alert includes the note body, you have opened the same leak as a log line (3.1) and an extra vendor copy (5.1).
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=crash_body_redacted crash_id=cr_85e app=release
 ```

@@ -42,8 +42,6 @@ Read `vulnerable/hook.py`. It returns true for every triple. Tests:
 
 You do not need a new secret. The failure of `test_missing_signature_is_rejected` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | `accept` true for empty sig | Path trusted | A live provider POST |

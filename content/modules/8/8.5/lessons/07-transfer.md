@@ -35,8 +35,6 @@ The fake name still has to be absent from the report. The stack may remain. Enab
 
 ## Prompt — clinic crash with a fake patient name
 
-Write the same rule here. Include:
-
 1. who can act (crash-platform operator, logcat reader — not a live clinic);
 2. what you trust (redact-before-send is the promise; the store form and a crash product set to automatic are not);
 3. what must not happen (`'name' in str(crash_report(name))`, not a legal label);

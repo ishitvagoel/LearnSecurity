@@ -41,8 +41,6 @@ Read `vulnerable/sast.py`. It returns true for every pair. Tests:
 
 You do not need a new finding id. The failure of `test_unmapped_high_blocks_ship` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | `return True` for every pair | No join to the coverage map | “Code scanning is on” |

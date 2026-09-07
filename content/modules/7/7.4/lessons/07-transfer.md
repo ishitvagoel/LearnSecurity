@@ -36,8 +36,6 @@ A leftover session still has to be `None`. `service=worker-sc` may still be allo
 
 **Product sketch:** a small clinic app with “Export overnight” that copies the clinician cookie into the task so “the job knows who asked.”
 
-Write the same rule here. Include:
-
 1. who can act (stolen session stuffed into a job, or inherited request context — not a live clinic);
 2. what you trust (worker authenticates as `worker-sc` is what you trust; VLAN, internal queue, and a zero-trust sticker are not);
 3. what must not happen (`exporter({user_session: alice})` succeeds, not a legal label);

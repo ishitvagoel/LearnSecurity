@@ -62,8 +62,6 @@ Name method, origin, and the predicate (webauthn **and** origin == expected). Ru
 python3 -m pytest labs/4.2/4.2-lab/tests --impl fixed
 ```
 
-Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 Step-up before export still needs origin binding. Clinic staff SSO: OTP to a lookalike identity provider stays false.

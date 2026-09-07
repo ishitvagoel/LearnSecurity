@@ -45,7 +45,7 @@ Also reject: trusting the browser as the vault; a data-loss product as the rule;
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_note_body_is_not_logged`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_note_body_is_not_logged`.
 
 ## Use it somewhere new
 

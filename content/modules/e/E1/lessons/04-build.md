@@ -61,8 +61,6 @@ Name who can edit `ALLOWED`. Run:
 python3 -m pytest labs/E1/e1-lab/tests --impl fixed
 ```
 
-It must pass. Run from the lab directory if a collection at the repo root is polluted. Then write one sentence: which rule is restored, and which leftover you refused to delete.
-
 ## Use it somewhere new
 
 Coding assistant: deny shell / install tools in CI the same way — runtime allow-list, not a prompt.

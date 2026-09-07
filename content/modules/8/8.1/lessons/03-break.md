@@ -42,8 +42,6 @@ The phone sandbox raises the cost of *other apps* reading this process; it does 
 
 You do not need a new boolean name. The failure of `test_client_integrity_claim_is_not_authorization` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 ## Why it happens vs what it costs
 
 | Slice | This practice |

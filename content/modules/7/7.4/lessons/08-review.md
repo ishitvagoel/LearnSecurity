@@ -46,7 +46,7 @@ Also reject: live broker attacks; closing findings without re-running `test_user
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_user_session_is_not_worker_identity`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_user_session_is_not_worker_identity`.
 
 ## Use it somewhere new
 

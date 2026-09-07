@@ -43,8 +43,6 @@ Read `vulnerable/channel.py`. It returns true if the header is `https` **or** th
 
 You do not need a new header name. The failure of `test_client_forwarded_proto_is_not_tls` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | Header https, socket http, helper true | The app believes the client about the channel | “HTTPS is on” |

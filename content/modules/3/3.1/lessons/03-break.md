@@ -38,8 +38,6 @@ Read `vulnerable/classify.py`. `log_event` returns `f"{event}: {note_body}"`. Th
 
 You do not need a new body string. The failure of `test_note_body_is_not_logged` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | Body interpolated into the line | Confidential field in a lower-trust store | “Logs are internal” |

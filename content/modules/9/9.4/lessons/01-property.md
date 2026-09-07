@@ -84,8 +84,6 @@ python3 -m pytest labs/9.4/9.4-lab/tests --impl vulnerable
 python3 -m pytest labs/9.4/9.4-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 SCA: a CVE versus a function you actually call. Clinic: fifty unmapped HIGHs.

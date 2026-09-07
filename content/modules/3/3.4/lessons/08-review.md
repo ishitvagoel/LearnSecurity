@@ -44,7 +44,7 @@ Also reject: treating the client as what you trust; closing findings without re-
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_share_cap_is_enforced`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_share_cap_is_enforced`.
 
 ## Use it somewhere new
 

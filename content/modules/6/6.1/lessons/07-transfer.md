@@ -34,8 +34,6 @@ The spawn helper returns a list whose program is not `sh`, and the name is one e
 
 ## Prompt — clinic CSV filename
 
-Write the same rule here. Include:
-
 1. who can act (clerk-chosen filename — not a live clinic);
 2. what you trust (argv list is what you trust; a denylist of punctuation is not);
 3. what must not happen (`argv_for_list` starts `sh -c`, not a legal label);

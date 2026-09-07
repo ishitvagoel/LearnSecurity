@@ -44,7 +44,7 @@ Also reject: client `X-Tenant` as key input; `Vary: Cookie` as forever; Report-O
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_other_tenant_does_not_receive_cached_body`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_other_tenant_does_not_receive_cached_body`.
 
 ## Use it somewhere new
 

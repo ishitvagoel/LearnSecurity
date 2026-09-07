@@ -33,8 +33,6 @@ A log product does not consume the token.
 | Recover | Remove surprise members; rotate the token scheme if leaked; re-run `test_invite_token_is_single_use` |
 | Leftover | Email phishing (4.2) |
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=invite_replay_denied invite_id=inv_66a request_id=req_66a
 ```

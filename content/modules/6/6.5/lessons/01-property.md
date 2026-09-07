@@ -72,8 +72,6 @@ python3 -m pytest labs/6.5/6.5-lab/tests --impl vulnerable
 python3 -m pytest labs/6.5/6.5-lab/tests --impl fixed
 ```
 
-The first command must fail. The second must pass.
-
 ## Use it somewhere new
 
 Clinic “fetch lab result PDF from URL.” Webhooks wait for 7.3.

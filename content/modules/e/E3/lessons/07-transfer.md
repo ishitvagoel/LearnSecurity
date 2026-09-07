@@ -11,8 +11,6 @@ You get a **health-record append-only audit**, plus a **simulated copay**. On th
 
 **Product sketch:** EHR-lite “the processor said retries are fine,” plus “we filed a questionnaire so high-assurance is done.”
 
-Write the same rule here. Include:
-
 1. who can act (504 retry / double-click — not a live clinic processor attack);
 2. what you trust (key identity is what you trust; a payment company and a questionnaire are not);
 3. what must not happen (two `k1` → count 2, not a privacy-law name);

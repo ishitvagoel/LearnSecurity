@@ -43,8 +43,6 @@ Read `vulnerable/crash.py`. It returns a dict with `'note': note_body`. Tests:
 
 You do not need a new field name. The failure of `test_crash_report_omits_note_body` *is* the evidence.
 
-Do not open the repaired files yet. Diagnose the cause first.
-
 | What you see | What kind of failure | Not the lesson |
 |---|---|---|
 | `'note': note_body` in the dict | Confidential field in a lower-trust store | “Crashes stay on the device” |

@@ -34,8 +34,6 @@ Re-run `test_merge_requires_threat_model_id` after any merge-bot change. A green
 
 GitHub’s audit log is not this lab’s trusted core. A maturity dashboard will show process scores and stay silent when CI’s `merge_ok` is always true. Detection must observe **empty change is deny**, not poster counts. If the alert includes a GitHub token, you have opened a secrets hole (5.3). If the alert includes the threat-model body, you have copied the model into the paging channel.
 
-A log line a reviewer can accept looks like:
-
 ```text
 log_denied reason=merge_blocked_no_tm pr=123
 ```

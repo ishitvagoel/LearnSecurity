@@ -46,7 +46,7 @@ Also reject: attack-recipe payloads in the change description; closing findings 
 
 ## Practice
 
-Write three notes a peer could act on, and tie at least one to `test_angle_brackets_are_encoded`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_angle_brackets_are_encoded`.
 
 ## Use it somewhere new
 

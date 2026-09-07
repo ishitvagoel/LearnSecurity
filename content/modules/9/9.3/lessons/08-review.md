@@ -46,7 +46,7 @@ Also reject: live targets; closing findings without re-running `test_http_200_on
 
 ## Practice
 
-Write three notes a maintainer could act on, and tie at least one to `test_http_200_only_is_not_a_security_test`. For each: what you saw, whether it is a rule or false assurance, a structural change, leftover you will **not** delete.
+Write the review that blocks this change. Mention `test_http_200_only_is_not_a_security_test`.
 
 ## Use it somewhere new
 
