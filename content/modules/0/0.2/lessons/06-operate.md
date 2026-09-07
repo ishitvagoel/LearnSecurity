@@ -24,7 +24,7 @@ flowchart TD
 | Recover | Re-open 1.2; do not back-date check-in 1; do not mark 1.4 hidden |
 | Leftover | Memorized answers; tooling gaps; color-only skip UI |
 
-A job-title name is not the rule. Opening this page does not finish the first check-in.
+A job-title mapping does not prove you can fail a check. Opening this page does not finish the first check-in.
 
 ## What the framework does vs what you still have to check
 
@@ -48,4 +48,4 @@ Do not encode the deny as red-only. Keyboard users must still reach 1.2. Adaptiv
 
 ## What this page is not doing
 
-A job-title name is not the rule. Opening this page does not finish the first check-in. Do not instruct live LMS audits.
+A job-title sticker does not finish this page. Opening this page does not finish the first check-in. Do not instruct live LMS audits.

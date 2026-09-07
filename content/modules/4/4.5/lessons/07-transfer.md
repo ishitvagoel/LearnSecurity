@@ -7,7 +7,7 @@
 
 You get a **clinic FHIR resource server**. `accept_token` is false for `aud=other-api`. The same rule has to hold on a clinic FHIR resource server.
 
-Clinic: wrong-audience FHIR token. Also name native redirect (claimed HTTPS, not a custom scheme) vs browser vs backend-for-frontend storage.
+A FHIR token minted for another hospital is the same wrong audience. Also name native redirect (claimed HTTPS, not a custom scheme) vs browser vs backend-for-frontend storage.
 
 EHR-lite that accepts SMART-on-FHIR-shaped access tokens.
 

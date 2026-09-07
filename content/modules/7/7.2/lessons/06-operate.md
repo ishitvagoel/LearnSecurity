@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Rotate[Rotate if the value escaped]
 ```
 
-A GraphQL-gateway product name does not check role × field or prove field permission. Re-run `test_member_cannot_resolve_internal_field` after any serializer change. “Field authz enabled” does not hide `secret_internal`. Search highlighting and overnight export are other dumps of the same row — list those before you call the field private.
+A GraphQL-gateway product name does not check role × field or prove field permission. Re-run `test_member_cannot_resolve_internal_field` after any serializer change. “Field authz enabled” does not hide `secret_internal`. Search highlighting and overnight export can still dump `secret_internal`; the field is not private until those dumps are named.
 
 ## Signals that do not become a second leak
 
@@ -51,4 +51,4 @@ Detect SSN field probes on local practice files; do not attach the SSN to the ti
 
 ## What this page is not doing
 
-A GraphQL-gateway product name is not the check. Do not follow public GraphQL probes. This site does not mark you as finished. Answer keys are not on this site.
+A GraphQL-gateway sticker does not hide `secret_internal`. Do not follow public GraphQL probes. This site does not mark you as finished. Answer keys are not on this site.

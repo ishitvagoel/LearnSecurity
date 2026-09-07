@@ -32,7 +32,7 @@ If both pass, you are not looking at `mouse_only`, name, or keyboard.
 
 It calls `recovery.recovery_confirm_control()` and asserts `is_usable_accessible`. That check is there so inaccessible recovery still fails.
 
-HTTP 200 is not this check. This practice never opens a network socket.
+HTTP 200 does not prove the confirm is named and keyboard-usable. This practice never opens a network socket.
 
 ## Map checks to the rows you wrote
 

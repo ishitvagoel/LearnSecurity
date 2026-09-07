@@ -20,7 +20,7 @@ flowchart TD
 
 Turning on a scanner does not own the HIGH. A badge that says the finding is owned is not that check.
 
-Re-run `test_unmapped_high_blocks_ship` after any scanner-rule change. Turning code scanning on does not own the HIGH. SCA CVEs that are not actually called still need an *owner* on the map — list those before you ship.
+Re-run `test_unmapped_high_blocks_ship` after any scanner-rule change. Turning code scanning on does not own the HIGH. SCA CVEs that are not actually called still need an *owner* on the map; do not ship an unmapped HIGH.
 
 ## Signals that do not become a second leak
 
@@ -44,7 +44,7 @@ Putting the matching scanner snippet in the alert puts the finding payload in th
 
 ## What the framework does vs what you still have to check
 
-The same who-is-allowed holes that bypass this practice will also bypass a “scan our dashboard” detector.
+Who-is-allowed holes still ship under a green scanner dashboard if no owner is on the map.
 
 ## Can people still use it
 

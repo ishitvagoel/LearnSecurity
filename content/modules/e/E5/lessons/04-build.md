@@ -40,7 +40,7 @@ A relationship-graph product. Identity-at-scale as a substitute. Subdomain routi
 ## What the tool cannot do
 
 - Search, cache, and lake keys without company remain copies.
-- Silent impersonation is not this check.
+- Silent impersonation is leftover, not this session bind.
 - GraphQL `org_id` is the same field under another name.
 - A JWT `org` copied from the client is the same bug.
 - A row-level variable set from the body reintroduces the break in SQL.

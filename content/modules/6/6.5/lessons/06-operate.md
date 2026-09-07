@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Stop[Do not fetch]
 ```
 
-A vendor name does not allow-list hosts. Someone still has to own the importer path.
+An “HTTPS only” product does not put the preview host on the allow-list.
 
 ## Signals that do not become a second leak
 
@@ -41,7 +41,7 @@ Not: a full URL with a query token, a note body, a live-fetch transcript, or “
 
 Putting a full URL with a query token in the alert leaves a second copy (4 in the pager.3).
 
-An “HTTPS only” toggle does not keep link-local URLs off the allow-list. Re-run `test_link_local_metadata_is_denied` after any importer change. Webhooks (7.3) are another path of the same deputy — list those before you fetch.
+An “HTTPS only” toggle does not keep link-local URLs off the allow-list. Re-run `test_link_local_metadata_is_denied` after any importer change. Webhook delivery (7.3) is another deputy; name it before you fetch.
 
 Recovery is incomplete if the next worker still calls `requests.get` on the form URL. Grep importers the same day you keep the deny, and **do not fetch** the denied destination to confirm.
 

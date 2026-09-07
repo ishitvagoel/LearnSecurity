@@ -7,7 +7,7 @@
 
 You get a **clinic guardian list**, an **invite token**, or an **export quota**. Eight `add_share` calls leave count ≤ 5.
 
-Clinic: max 3 guardians per child. Optionally map invite tokens and export quotas as *different objects, same shape*.
+Cap guardians at 3 per child. Invite tokens and export quotas are *different objects, same shape*.
 
 EHR-lite guardian list on a booking card.
 

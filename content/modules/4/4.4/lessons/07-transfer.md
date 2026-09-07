@@ -9,7 +9,7 @@ You get a **clinic sketch** with appointments, charts, and a company per clinic.
 
 `can_read("bob", "n2")` is false. For a clinic, a grant is keyed by person, company, and **this** object.
 
-Clinic: grant on appointment A ≠ chart B.
+Appointment A and chart B are two grant tables.
 
 ## Picture: two object classes, two grant tables
 

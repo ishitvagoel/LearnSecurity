@@ -25,7 +25,7 @@ A broken copy must not put file bytes in the log.
 | Recover | Quarantine blobs; patch the parser; do not ship an overflowed binary |
 | Leftover | Helpers that call C; integer wrap; existing C codecs |
 
-A language-name sticker does not prove this length rule. Re-run `test_copy_does_not_exceed_buffer` after any unpacker change. “We use Kotlin” does not cap the copy. JNI / protobuf C extensions are the same family — list those before you call the unpacker safe.
+A language-name sticker does not prove this length rule. Re-run `test_copy_does_not_exceed_buffer` after any unpacker change. “We use Kotlin” does not cap the copy. JNI / protobuf C extensions still copy past the buffer; the unpacker is not safe until those copies are named.
 
 ## What the framework does vs what you still have to check
 
@@ -49,4 +49,4 @@ Deny the oversize DICOM copy; do not paste the image bytes into the ticket. Do n
 
 ## What this page is not doing
 
-A language-name sticker is not the rule. This page does not finish a check-in. An awareness-list name is not this alert.
+“We use Kotlin” does not cap the copy. This page does not finish a check-in. An awareness-list name does not bound `declared_len`.

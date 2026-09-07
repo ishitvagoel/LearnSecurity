@@ -20,7 +20,7 @@ flowchart TD
 
 A vendor product does not make the tool gate an allow-list. Calling it an allow-list is not that check.
 
-Re-run `test_exec_sql_tool_is_denied` after any tool-registration change. A prompt that “forbids SQL” does not deny `exec_sql`. Coding-assistant install tools in CI are the same family — list those before you call the allow-list done.
+Re-run `test_exec_sql_tool_is_denied` after any tool-registration change. A prompt that “forbids SQL” does not deny `exec_sql`. Coding-assistant install tools in CI still run unconstrained; the allow-list is not done until those tools are named.
 
 ## Signals that do not become a second leak
 
@@ -44,7 +44,7 @@ Putting the matching transcript in the alert puts the model output in the pager 
 
 ## What the framework does vs what you still have to check
 
-The same lying `search_notes` HTML, hallucinated packages, and prompt-only policy that bypass this practice will also bypass a "scan our agent dashboard" detector.
+Lying `search_notes` HTML, unconstrained installs, and prompt-only policy still run even if the agent dashboard is green.
 
 The **cause** is model output treated as policy; the **cost** is an interpreter via English; **how you stop it** is the allow-list; **how you notice** is `tool_denied`; **how you recover** is revoke leftover agent credentials. What the tool cannot do: this alert does not encode `search_notes` HTML, and it does not stop hallucinated packages.
 
@@ -66,4 +66,4 @@ Deny the chart-SQL tool; do not paste the prompt into the ticket. Do not call a 
 
 ## What this page is not doing
 
-This page does not mark you as finished. A famous-bugs label is not this alert. Answer keys are not on this site.
+This page does not mark you as finished. A famous-bugs label does not deny `exec_sql`. Answer keys are not on this site.

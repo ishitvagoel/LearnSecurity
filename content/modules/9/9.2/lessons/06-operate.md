@@ -20,7 +20,7 @@ flowchart TD
   Metric --> Revert[block merge]
 ```
 
-A bot-vendor name does not prove avoid-eval. Someone still has to own the always-approve path.
+A review-bot vendor does not reject `eval` on a user string.
 
 ## Signals that do not become a second leak
 
@@ -40,7 +40,7 @@ Not: an eval payload, a note body, or a live GitHub trace.
 
 Putting the eval payload or note bodies in the alert leaves a second copy (logging topic / interpreter topic) in the pager.
 
-A formatter passing does not reject `eval`. Re-run `test_eval_on_user_input_is_rejected` after any review-bot change. Terraform `local-exec` and GitHub Actions `run:` are other interpreter paths — list those before you merge. The lab substring is a stand-in: an `exec(` helper can skip it, so keep the human interpreter question even after this metric is green.
+A formatter passing does not reject `eval`. Re-run `test_eval_on_user_input_is_rejected` after any review-bot change. Terraform `local-exec` and GitHub Actions `run:` still eval user strings; do not merge until those interpreters are named. The lab substring is a stand-in: an `exec(` helper can skip it, so keep the human interpreter question even after this metric is green.
 
 ## What the framework does vs what you still have to check
 
@@ -64,4 +64,4 @@ A blocked review must say *why* in plain language (eval on user input), not only
 
 ## What this page is not doing
 
-A bot-vendor name is not the rule. This site does not mark you as finished. Answer keys are not on this site.
+A review-bot sticker does not reject `eval`. This site does not mark you as finished. Answer keys are not on this site.

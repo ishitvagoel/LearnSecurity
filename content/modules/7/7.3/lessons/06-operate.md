@@ -20,7 +20,7 @@ flowchart TD
   Metric --> Rotate[Rotate disposable secret if events escaped]
 ```
 
-A vendor name does not compute the MAC. Someone still has to own every callback path.
+A webhook-gateway product does not HMAC the callback.
 
 ## Signals that do not become a second leak
 
@@ -40,7 +40,7 @@ Not: the raw body, `lab-secret`, a real patient result, or a live provider trace
 
 Putting the raw body or `lab-secret` in the alert leaves a second copy (3 in the pager.1 / 5.3).
 
-A “webhooks signed” checkbox does not reject a missing MAC. Re-run `test_missing_signature_is_rejected` after any callback-route change. Billing, export-ready, and invite-used callbacks are other paths of the same MAC — list those before you keep the deny.
+A “webhooks signed” checkbox does not reject a missing MAC. Re-run `test_missing_signature_is_rejected` after any callback-route change. Billing, export-ready, and invite-used callbacks still need the same missing-MAC deny.
 
 Recovery is incomplete if the next route still returns true for an empty header. Grep callback paths the same day you keep the deny, and **do not POST a live provider** to confirm.
 

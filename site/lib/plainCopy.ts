@@ -657,8 +657,8 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/ dumping lab Python into notes/g, ""],
   [/\. without product evidence\./g, "."],
   [/ without product evidence\./g, "."],
-  [/Naming an ([^.]+?) product is not the rule\./g, "An $1 product name is not the check."],
-  [/Naming a ([^.]+?) product is not the rule\./g, "A $1 product name is not the check."],
+  [/Naming an ([^.]+?) product is not the rule\./g, "An $1 name does not finish this."],
+  [/Naming a ([^.]+?) product is not the rule\./g, "A $1 name does not finish this."],
   [/The folder (`[^`]+`) is the change\./g, ""],
   [/Treat the files in (`[^`]+`) as the pull request\./g, ""],
   [
@@ -786,7 +786,7 @@ const PROSE_PHRASES: [RegExp, string][] = [
   ],
   [
     /Do not treat a live (.+) screenshot as proof\./g,
-    "A live $1 screenshot is not the check.",
+    "Do not use a live $1 screenshot as the check.",
   ],
   [
     /Do not attach (.+) to the ticket\./g,
@@ -1043,6 +1043,37 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/ is an incomplete [a-z-]+ review\./g, " still misses that review."],
   [/ is an incomplete review\./g, " still misses the rule."],
   [/ is a skipped-check review\./g, " still skips the check."],
+  [/ — list those before you [^.]+./g, "."],
+  [/ — list it before you [^.]+./g, "."],
+  [
+    /An? (.+) product name is not the check\./g,
+    "A $1 sticker does not finish this.",
+  ],
+  [
+    / that bypass this practice will also bypass a [“"]scan our ([^”"]+)[”"] detector\./g,
+    " still slip past a green $1.",
+  ],
+  [
+    /This page does not finish an assurance gate(?: from this page)?\./g,
+    "This page does not finish a check-in.",
+  ],
+  [
+    /This page does not finish the verification gate\./g,
+    "This page does not finish a check-in.",
+  ],
+  [
+    /This page does not finish the ship gate\./g,
+    "This page does not finish the ship check-in.",
+  ],
+  [/claiming an assurance gate/g, "claiming a check-in"],
+  [/claiming the verification gate(?: is done)?/g, "claiming a check-in"],
+  [/claiming the ship gate/g, "claiming a check-in"],
+  [/[“"]assurance gate complete[”"]/g, "“check-in complete”"],
+  [/[“"]verification gate complete[”"]/g, "“check-in complete”"],
+  [/[“"]ship gate complete[”"]/g, "“check-in complete”"],
+  [/\ban assurance gate\b/g, "a check-in"],
+  [/\bthe verification gate\b/g, "the verification check-in"],
+  [/\bthe ship gate\b/g, "the ship check-in"],
 ];
 
 const HIDDEN_LAB_NOTES = [
@@ -1092,6 +1123,9 @@ function transformProseLine(line: string): string {
   next = next.replace(/\bthis the check\b/g, "this check");
   next = next.replace(/^A clinic example: ([a-z])(.*)$/g, (_, ch: string, rest: string) => `${ch.toUpperCase()}${rest}`);
   next = next.replace(/^A clinic example: /g, "");
+  next = next.replace(/^Clinic: ([a-z])(.*)$/g, (_, ch: string, rest: string) => `${ch.toUpperCase()}${rest}`);
+  next = next.replace(/^Clinic: /g, "");
+  next = next.replace(/ Clinic: /g, " ");
   next = next.replace(/\s{2,}/g, " ");
   next = next.replace(/ \(Level \d+\)/g, "");
   return next.replace(/\u0000C(\d+)\u0000/g, (_, index) => codes[Number(index)] ?? "");

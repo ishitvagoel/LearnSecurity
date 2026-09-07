@@ -88,7 +88,7 @@ python3 -m pytest labs/10.4/10.4-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-A feature flag that turns off authorization. Clinic: Django `DEBUG=True`.
+A feature flag that turns off authorization. Django `DEBUG=True` is the same fail-open boot.
 
 ## What this page is not doing
 

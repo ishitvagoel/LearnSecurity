@@ -71,7 +71,7 @@ python3 -m pytest labs/E2/e2-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-Trusted Types. COOP/COEP. Clinic: Report-Only as a “HIPAA header.”
+Trusted Types. COOP/COEP. Report-Only sold as a “HIPAA header” is still not enforcement.
 
 ## What this page is not doing
 

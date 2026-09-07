@@ -20,7 +20,7 @@ flowchart TD
 
 Buying a coverage product does not name what must not happen. A badge that says the suite is honest is not that check.
 
-Re-run `test_http_200_only_is_not_a_security_test` after any suite change. Ninety-four percent coverage does not name what must not happen. Field-level tests (7.2) and race-condition tests are other named bad results of the same shape — list those before you call the suite complete. Keep 200-only tests as product tests; do not delete them, and do not let them occupy the security-suite slot.
+Re-run `test_http_200_only_is_not_a_security_test` after any suite change. Ninety-four percent coverage does not name what must not happen. Field-level tests (7.2) and race-condition tests still need a named bad result; coverage percent does not complete the suite. Keep 200-only tests as product tests; do not delete them, and do not let them occupy the security-suite slot.
 
 ## Signals that do not become a second leak
 
@@ -44,7 +44,7 @@ Putting the matching note body in the alert puts the patient text in the pager t
 
 ## What the framework does vs what you still have to check
 
-The same field-grain holes, looking-around leftovers, and fuzz-with-no-named-bad-result that bypass this practice will also bypass a “scan our coverage dashboard” detector.
+Field-grain holes, looking-around leftovers, and fuzz with no named bad result still pass a green coverage dashboard.
 
 ## Can people still use it
 

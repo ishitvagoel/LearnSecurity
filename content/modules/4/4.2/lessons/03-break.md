@@ -29,7 +29,7 @@ flowchart TD
 
 A shared secret is treated as resistant — not an exploit recipe against a public site. Method is in `{password, otp, webauthn}`; origin is ignored. You do not need a live phishing page. You must not build one.
 
-A later hardware bar is not this check.
+A later hardware bar does not make a password at a lookalike fail.
 
 ## What to read in the broken files
 

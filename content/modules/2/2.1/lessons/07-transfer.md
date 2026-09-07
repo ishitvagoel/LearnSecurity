@@ -51,7 +51,7 @@ GraphQL and REST both ingest the same clinic appointment.
 
 If REST “looks unique” while GraphQL variables keep two `patient_id` aliases, the rule is gone. A WAF quote filter and a JSON-spec citation do not put one meaning into both grammars. CLEAN unique keys may accept, messy keys refuse or agree. The local analogue is `test_duplicate_tenant_keys_are_one_meaning` — on a practice object, not a live health record.
 
-A diagram of grammars is a later architecture bar. It is not this check.
+A diagram of grammars is a later architecture bar. It does not make duplicate keys one meaning.
 
 ## Practice
 

@@ -21,7 +21,7 @@ flowchart TD
   Cost --> Stop[Disable token if stolen session]
 ```
 
-A vendor name does not count exports. Someone still has to own the budget.
+A rate-limit dashboard tile does not increment `quota_denied` on the fourth CSV.
 
 ## Signals that do not become a second leak
 
@@ -41,7 +41,7 @@ Not: a note body, a CSV attachment, a real email, or a live load trace against a
 
 Putting note bodies from the CSV in the alert leaves extra copies in the pager.
 
-Enabling a rate limit does not deny the fourth export. Notification fan-out and extra formats are other paths of the same budget — list those before you keep the deny. Re-run `test_fourth_export_is_denied` after any export-route change.
+Enabling a rate limit does not deny the fourth export. Notification fan-out and extra formats still need the fourth-export deny. Re-run `test_fourth_export_is_denied` after any export-route change.
 
 ## What the framework does vs what you still have to check
 

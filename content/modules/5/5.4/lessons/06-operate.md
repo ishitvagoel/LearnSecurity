@@ -19,7 +19,7 @@ flowchart TD
   Alert --> Revoke[Revoke cookies issued on that path]
 ```
 
-A log product does not bind the socket. Someone still has to own the mismatch.
+A TLS dashboard does not compare the client header to the socket.
 
 ## Signals that do not become a second leak
 
@@ -39,7 +39,7 @@ Not: a session cookie, a note body, or “HSTS handled.”
 
 Putting a session cookie or a note body in the alert leaves a second copy in the pager.
 
-A “Force HTTPS” toggle does not prove the socket is TLS. Re-run `test_client_forwarded_proto_is_not_tls` after any proxy change. Page `https://` versus API socket `http` is another path of the same rule — list it before you call the hop safe.
+A “Force HTTPS” toggle does not prove the socket is TLS. Re-run `test_client_forwarded_proto_is_not_tls` after any proxy change. Page `https://` versus API socket `http` is another hop; do not call TLS done until that pair is named.
 
 ## What the framework does vs what you still have to check
 

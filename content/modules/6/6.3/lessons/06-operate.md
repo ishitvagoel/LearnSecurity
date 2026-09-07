@@ -24,7 +24,7 @@ flowchart TD
 | Recover | Keep deny; revoke grants created in the window; notify the member |
 | Leftover | Lookalike UI the person clicked (phishing lesson); clickjacking |
 
-A network-filter product name does not bind origin and token or prove the anti-forgery check. Re-run `test_foreign_origin_post_is_denied` after any share-route change. SameSite=Lax does not deny a foreign origin with no token. JSON share routes and GET mutate paths are other paths of the same rule — list those before you call the share honest.
+A network-filter product name does not bind origin and token or prove the anti-forgery check. Re-run `test_foreign_origin_post_is_denied` after any share-route change. SameSite=Lax does not deny a foreign origin with no token. JSON share routes and GET mutate paths still CSRF if you only locked the HTML form.
 
 ## What the framework does vs what you still have to check
 
@@ -48,4 +48,4 @@ Notice partner-share POSTs from the wrong origin; do not paste cookies into the 
 
 ## What this page is not doing
 
-A network-filter product name is not the check. Do not use live third-party CSRF. This site does not mark you as finished. Answer keys are not on this site.
+A network-filter sticker does not bind origin and token. Do not use live third-party CSRF. This site does not mark you as finished. Answer keys are not on this site.

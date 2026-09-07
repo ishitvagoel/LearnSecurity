@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Stop[block merge]
 ```
 
-A GitHub product name does not prove the design-review practice exists. Someone still has to own the leftover.
+A GitHub CODEOWNERS file does not put `threat_model` on the change.
 
 Re-run `test_merge_requires_threat_model_id` after any merge-bot change. Requiring CODEOWNERS does not put a threat-model id on the change. A stale TM-12 that never mentions OAuth is leftover from topic 3.2 — do not call the merge safe until that row exists.
 
@@ -42,7 +42,7 @@ Not: a token, a real org name, a threat-model body, or “Gate 10 complete.”
 
 ## What the framework does vs what you still have to check
 
-The same always-true merge, stale TM-12, and docs exemptions that bypass this practice will also bypass a “scan our CODEOWNERS” detector.
+Always-true merge, a stale TM-12, and docs exemptions still land without a threat-model id even if CODEOWNERS is green.
 
 The **cause** is merge without a threat-model id; the **cost** is an identity surface that 3.2 never modelled; **how you stop it** is the truthy `threat_model` check; **how you notice** is `merge_blocked_no_tm`; **how you recover** is add a threat-model id and re-run `merge_ok`. What this alert cannot do: it does not prove TM-12 covers this change’s files, and it does not replace 3.2 authorship or 10.4 governance evidence.
 

@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Restore[Rotate creds; restore if mutated]
 ```
 
-A vendor name does not bind parameters. Someone still has to own the concatenating path.
+A web-filter SQLi rule does not bind `fetch_sql`.
 
 ## Signals that do not become a second leak
 
@@ -41,7 +41,7 @@ Not: a note body, a full SQL string with values, a real email, or “the web fil
 
 Putting a full SQL string with values in the alert leaves the query text in the pager too.
 
-A web-filter SQLi rule does not bind the query helper. Report paths and ORDER BY builders are other concatenating paths — list those before you call SQL safe. If a replica was not restored, treat it as the same leftover, not a separate “eventual consistency” pass.
+A web-filter SQLi rule does not bind the query helper. Report paths and ORDER BY builders still concatenate if you only bound `fetch_sql`. If a replica was not restored, treat it as the same leftover, not a separate “eventual consistency” pass.
 
 ## What the framework does vs what you still have to check
 

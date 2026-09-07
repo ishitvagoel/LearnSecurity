@@ -44,7 +44,7 @@ Putting the matching note in the alert puts the incident text in the pager too.
 
 ## What the framework does vs what you still have to check
 
-The same always-true close, leftover bodies, and support-tool god-mode that bypass this practice will also bypass a “scan our SIEM dashboard” detector.
+Always-true close, leftover bodies, and support-tool god-mode still close the incident even if SIEM is green.
 
 The **cause** is close looking at detection quality instead of recovery done and no `note_body`; the **cost** is an attacker still in plus extra note copies; **how you stop it** is the conjunction; **how you notice** is `incident_closed_without_recovery`; **how you recover** is reopen and restore. What the tool cannot do: this alert does not prove the restore drill ran, and it does not ship logs to a separate system.
 
@@ -66,4 +66,4 @@ Reopen the SIEM-green ticket; do not paste note text into chat. Do not query a l
 
 ## What this page is not doing
 
-A SIEM-vendor name is not the rule. This page does not mark you as finished. A known-exploited listing is not close. Answer keys are not on this site.
+A green SIEM tile does not prove restore ran. This page does not mark you as finished. A known-exploited listing is not close. Answer keys are not on this site.

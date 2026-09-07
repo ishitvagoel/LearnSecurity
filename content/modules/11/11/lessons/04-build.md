@@ -52,7 +52,7 @@ Fail closed: if you are unsure whether the grant is gone, return None. Uncertain
 - Delayed worker leftover session is a different grain from an earlier week.
 - Phone cache is a different grain.
 - Email already sent is leftover copies.
-- Access-rights change in the same session without signing in again is not this check.
+- Access-rights change in the same session without signing in again is leftover, not this revoke-on-read.
 - A second note `n2` is not in the practice files.
 
 ## Practice

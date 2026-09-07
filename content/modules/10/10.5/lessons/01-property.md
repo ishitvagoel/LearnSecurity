@@ -92,7 +92,7 @@ python3 -m pytest labs/10.5/10.5-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-Ransomware restore vs note-level integrity. Clinic: close ticket when SIEM is green.
+Ransomware restore vs note-level integrity. Closing the ticket because SIEM is green skips restore.
 
 ## What this page is not doing
 

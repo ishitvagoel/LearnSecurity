@@ -20,7 +20,7 @@ flowchart TD
 
 Buying a ticket product does not retest the finding. A badge that says “retested” is not that check.
 
-Re-run `test_cannot_close_without_retest` after any close-workflow change. Attaching a PDF does not prove the finding was retested. Extra fields on the note and a role-change cache are other ways the same hole comes back — list those before you close the ticket.
+Re-run `test_cannot_close_without_retest` after any close-workflow change. Attaching a PDF does not prove the finding was retested. Extra fields on the note and a role-change cache can reopen the same hole; do not close the ticket until those paths are named.
 
 ## Signals that do not become a second leak
 
@@ -44,7 +44,7 @@ Putting the matching note in the alert puts the finding in the pager too.
 
 ## What the framework does vs what you still have to check
 
-The same wrong-URL `"pass"`, extra-field variants, and role-change caches that bypass this practice will also bypass a "scan our ticket dashboard" detector.
+A `"pass"` on the wrong URL, extra-field variants, and role-change caches still close the ticket while the hole is open.
 
 The **cause** is close looking at intent (PDF, ticket Done) instead of `retest == "pass"`; the **cost** is an isolation hole that looks fixed; **how you stop it** is the retest equality; **how you notice** is `finding_closed_without_retest`; **how you recover** is reopen and re-run the same isolation check. What the tool cannot do: this alert does not prove the `"pass"` hit the same URL, and it does not search extra fields or role-change caches.
 

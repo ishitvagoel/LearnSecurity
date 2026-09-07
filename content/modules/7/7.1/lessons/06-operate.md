@@ -28,7 +28,7 @@ A checklist name does not copy `ALLOWED`.
 | Recover | Keep deny; demote privilege flags; retire ghost routes |
 | Leftover | GraphQL/gRPC binders; unused methods (later, advanced); 7.4 job payloads |
 
-An API gateway product name is not the check. Re-run `test_is_admin_cannot_be_patched` after any profile-write change. Publishing OpenAPI does not drop `is_admin` from PATCH. GraphQL `input: JSON` and leftover `/v0` are other binders of the same body — list those before you call the profile write honest.
+An API gateway sticker does not drop `is_admin`. Re-run `test_is_admin_cannot_be_patched` after any profile-write change. Publishing OpenAPI does not filter PATCH. GraphQL `input: JSON` and leftover `/v0` still copy extra keys; the profile write is not honest until those binders are named.
 
 ## What the framework does vs what you still have to check
 
@@ -54,4 +54,4 @@ If a human sees a field deny, announce “field not writable.” A silent 200 th
 
 ## What this page is not doing
 
-An API gateway product name is not the check. Do not follow public API probes. Opening this page does not finish a check-in.
+An OpenAPI file does not finish this page. Do not follow public API probes. Opening this page does not finish a check-in.

@@ -73,4 +73,4 @@ Stop treating “link clicked” as unlimited joins; consume in the store.
 
 ## What can still go wrong
 
-True concurrent accepts without a lock. Fail-open on store errors. Phishable mail. Token in the URL. A last-resort handler is not this check.
+True concurrent accepts without a lock. Fail-open on store errors. Phishable mail. Token in the URL. A last-resort handler does not consume the invite.

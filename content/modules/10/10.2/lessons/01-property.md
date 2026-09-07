@@ -74,7 +74,7 @@ python3 -m pytest labs/10.2/10.2-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-GitHub Actions third-party `action@v1`. Clinic: npm install in a prod pod.
+GitHub Actions third-party `action@v1`. `npm install` in a prod pod is the same unpinned fetch.
 
 ## What this page is not doing
 

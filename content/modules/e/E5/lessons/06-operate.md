@@ -25,7 +25,7 @@ flowchart TD
 | Recover | Audit B; take back the confused session |
 | Leftover | Copies; silent impersonation; GraphQL aliases |
 
-A row-level vendor name does not prove company isolation. Re-run `test_body_cannot_switch_tenant` after any query-layer change. Turning row-level rules on does not stop a body switch. Search, cache, and lake copies are the same family — list those before you call companies apart.
+A row-level vendor name does not prove company isolation. Re-run `test_body_cannot_switch_tenant` after any query-layer change. Turning row-level rules on does not stop a body switch. Search, cache, and lake copies still take company from the body; companies are not apart until those copies are named.
 
 ## What the framework does vs what you still have to check
 
@@ -51,4 +51,4 @@ Deny the `org_id` switch; do not paste the chart note into the ticket. Do not pr
 
 ## What this page is not doing
 
-A row-level vendor name is not the rule. This site does not mark you as finished. A famous-bugs list is not this alert. Answer keys are not on this site.
+A row-level product does not bind company from the session. This site does not mark you as finished. A famous-bugs list does not stop a body switch. Answer keys are not on this site.

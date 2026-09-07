@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Kill[Kill child; isolate plugin]
 ```
 
-A vendor name does not build argv. Someone still has to own the concatenating path.
+A process-monitor product does not turn `sh -c` into argv.
 
 ## Signals that do not become a second leak
 
@@ -41,7 +41,7 @@ Not: a note body, a real email, a patient filename, or a shell-punctuation cookb
 
 Putting the full argv with a patient filename in the alert leaves a second copy (3 in the pager.1 / 5.1).
 
-A CI grep that finds no `sh` does not prove argv is a list. Plugin loaders are other concatenating paths — list those before you call the export helper safe.
+A CI grep that finds no `sh` does not prove argv is a list. Plugin loaders still glue into `sh -c` if you only fixed `argv_for_list`.
 
 ## What the framework does vs what you still have to check
 

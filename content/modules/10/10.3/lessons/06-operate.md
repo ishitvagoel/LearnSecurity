@@ -20,7 +20,7 @@ flowchart TD
 
 A CIS dashboard does not delete cluster-admin. A badge that says least-privileged is not that check.
 
-Re-run `test_cluster_admin_pod_is_denied` after any Helm change. A “private” namespace does not delete cluster-admin. Break-glass ClusterRoles are a later elective — list those before you call the binding gone.
+Re-run `test_cluster_admin_pod_is_denied` after any Helm change. A “private” namespace does not delete cluster-admin. Break-glass ClusterRoles can still admit cluster-admin; the binding is not gone until those roles are named.
 
 ## Signals that do not become a second leak
 
@@ -44,7 +44,7 @@ Putting the matching kubeconfig in the alert puts cluster credentials in the pag
 
 ## What the framework does vs what you still have to check
 
-The same lying `"app"` Role, metadata hop, and Helm convenience ClusterRoles that bypass this practice will also bypass a "scan our CIS dashboard" detector.
+A lying `"app"` Role, metadata hop, and Helm convenience ClusterRoles still admit cluster-admin even if the CIS dashboard is green.
 
 The **cause** is always-true admission (or a chart that adds ClusterRoleBinding); the **cost** is control-plane takeover from one app bug; **how you stop it** is the allow-list; **how you notice** is `cluster_admin_denied`; **how you recover** is delete-and-rotate. What the tool cannot do: this alert does not prove `"app"` is least privilege, and it does not block the metadata hop.
 
@@ -66,4 +66,4 @@ Deny the ClusterRoleBinding; do not paste `~/.kube/config` into the ticket. Do n
 
 ## What this page is not doing
 
-A CIS-benchmark product name is not the check. This page does not mark you as finished. A restricted pod profile is not this alert. Answer keys are not on this site.
+A CIS-benchmark sticker does not deny cluster-admin. This page does not mark you as finished. A restricted pod profile does not delete the ClusterRoleBinding. Answer keys are not on this site.

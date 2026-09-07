@@ -20,7 +20,7 @@ flowchart TD
 
 Buying a governance product does not attach an isolation test. A badge that says the requirement is covered is not that check.
 
-Re-run `test_status_only_row_is_not_coverage` after any matrix change. Importing a checklist does not attach an isolation test. Mobile storage rows (8.2) are other requirements of the same check — list those before you call AUTHZ-1 covered. A 200-only test that someone flagged `asserts_isolation` by mistake is a later lying-flag leftover (9.3), not a silent pass.
+Re-run `test_status_only_row_is_not_coverage` after any matrix change. Importing a checklist does not attach an isolation test. Mobile storage rows (8.2) still need an isolation test; a checklist tick does not cover AUTHZ-1. A 200-only test that someone flagged `asserts_isolation` by mistake is a later lying-flag leftover (9.3), not a silent pass.
 
 ## Signals that do not become a second leak
 
@@ -44,7 +44,7 @@ Putting the matching note in the alert puts the requirement example in the pager
 
 ## What the framework does vs what you still have to check
 
-The same HTTP-200 tests, unnamed extra rows, and expired exceptions that bypass this practice will also bypass a “scan our Done column” detector.
+HTTP-200 tests, unnamed extra rows, and expired exceptions still look Done without an isolation test.
 
 ## Can people still use it
 

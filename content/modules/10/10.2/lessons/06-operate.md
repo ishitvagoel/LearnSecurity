@@ -20,7 +20,7 @@ flowchart TD
 
 An SBOM vendor name does not prove the lockfile was checked.
 
-Re-run `test_hash_mismatch_refuses_install` after any installer change. Attaching an SBOM does not compare digests. Cache poisoning and `@v1` Actions are sibling leftovers — list those before you call the pin done.
+Re-run `test_hash_mismatch_refuses_install` after any installer change. Attaching an SBOM does not compare digests. Cache poisoning and `@v1` Actions still install by name; the pin is not done until those paths are named.
 
 ## Signals that do not become a second leak
 
@@ -44,7 +44,7 @@ Putting the registry token in the alert puts a secret in the pager too.
 
 ## What the framework does vs what you still have to check
 
-The same always-true installer, poisoned cache, and unpinned `@v1` Actions that bypass this practice will also bypass a “scan our advisory count” detector. An SBOM-vendor name is not the rule.
+An always-true installer, poisoned cache, and unpinned `@v1` Actions still install by name even if the advisory count is green. An SBOM file does not compare digests.
 
 The **cause** is install without comparing digests; the **cost** is wrong bytes in the trusted computing base; **how you stop it** is `expected_hash == got_hash`; **how you notice** is `hash_mismatch_denied`; **how you recover** is pin known-good and rotate CI secrets (5.3). What the tool cannot do: this alert does not prove the pin is benign, does not authenticate provenance, and does not stop cache poisoning or `@v1` Actions. Equality is the local stand-in, not index policy.
 
@@ -66,4 +66,4 @@ Deny npm in the prod pod; do not paste `.npmrc` into the ticket. Do not fetch a 
 
 ## What this page is not doing
 
-An SBOM-vendor name is not the rule. Do not use live registry traces. This page does not finish the ship check-in. A provenance badge is not this alert. Answer keys are not on this site.
+An SBOM attachment does not compare digests. Do not use live registry traces. This page does not finish the ship check-in. A provenance badge does not pin `@v1`. Answer keys are not on this site.

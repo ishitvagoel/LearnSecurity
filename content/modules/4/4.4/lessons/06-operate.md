@@ -24,7 +24,7 @@ flowchart TD
 | Recover | Take back leftover flags; re-run the table on search/export |
 | Leftover | An honest grant on n1 still reveals n1 |
 
-A vendor name does not key the grant or prove the data-item check. Re-run `test_grant_on_n1_is_not_grant_on_n2` after any path change. Enabling roles does not keep n2 off bob's grant. Search, export, and GraphQL `node(id)` are other paths of the same rule — list those before you call the companies apart.
+A vendor name does not key the grant or prove the data-item check. Re-run `test_grant_on_n1_is_not_grant_on_n2` after any path change. Enabling roles does not keep n2 off bob's grant. Search, export, and GraphQL `node(id)` still treat an n1 grant as n2 unless those paths are keyed too.
 
 ## What the framework does vs what you still have to check
 

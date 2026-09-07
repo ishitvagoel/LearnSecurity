@@ -24,7 +24,7 @@ flowchart TD
 | Recover | Stop; write it down; tell the instructor; do not continue; do not “just look” |
 | Leftover | Redirects; hosts-file aliases; DNS tricks; mouse-only consent |
 
-A scanner name is not the rule. A deny log does not finish the first check-in.
+A scanner product does not write the deny. A deny log does not finish the first check-in.
 
 ## What the framework does vs what you still have to check
 
@@ -48,4 +48,4 @@ The stop control must work from the keyboard. Color-only “red = out of scope�
 
 ## What this page is not doing
 
-A scanner name is not the rule. Opening this page does not finish the first check-in. Do not instruct live fetches to prove the deny.
+A scanner sticker does not finish this page. Opening this page does not finish the first check-in. Do not instruct live fetches to prove the deny.

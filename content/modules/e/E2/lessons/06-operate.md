@@ -55,4 +55,4 @@ The **cause** is Report-Only mistaken for on; the **cost** is a script that stil
 
 ## What this page is not doing
 
-A Helmet-vendor name is not the rule. This page does not finish milestone M2. The current content-security spec stays draft.
+A Helmet header does not turn Report-Only into enforcement. This page does not finish a check-in. The current content-security spec stays draft.

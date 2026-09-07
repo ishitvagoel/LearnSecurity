@@ -20,7 +20,7 @@ flowchart TD
 
 Buying a crash product does not omit the note. A clean-looking report is not that check.
 
-Re-run `test_crash_report_omits_note_body` after any crash-SDK change. Filling the store privacy form does not omit the note. Tracker SDKs and web crash reports (10.5) are other places for the same body — list those before you call redaction done.
+Re-run `test_crash_report_omits_note_body` after any crash-SDK change. Filling the store privacy form does not omit the note. Tracker SDKs and web crash reports (10.5) can still carry the note; redaction is not done until those sinks are named.
 
 ## Signals that do not become a second leak
 
@@ -44,7 +44,7 @@ Putting the matching report in the alert puts the crash body in the pager too.
 
 ## What the framework does vs what you still have to check
 
-The same leftover `READ_LOGS` path, tracker SDK extras, and web crash drains that bypass this practice will also bypass a “scan our crash dashboard” detector.
+Leftover `READ_LOGS`, tracker extras, and web crash drains still carry the note even if the crash dashboard is green.
 
 ## Can people still use it
 

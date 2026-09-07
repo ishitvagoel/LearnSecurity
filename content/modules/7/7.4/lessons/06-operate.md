@@ -20,7 +20,7 @@ flowchart TD
   Metric --> Drain[Rotate service creds and drain queue]
 ```
 
-A zero-trust product name does not bind the principal. Someone still has to own the worker identity.
+A zero-trust sticker does not stop a leftover cookie from being the worker.
 
 ## Signals that do not become a second leak
 
@@ -40,7 +40,7 @@ Not: Alice’s session cookie, note bodies, a live broker dump, or a real clinic
 
 Putting Alice’s cookie or note bodies in the alert leaves a second copy in the pager.
 
-Enabling a service account does not stop a leftover cookie from being the principal. Overnight export, outbox, and notification fan-out are other jobs of the same principal — list those before you rotate the worker. Re-run `test_user_session_is_not_worker_identity` after any task-enqueue change.
+Enabling a service account does not stop a leftover cookie from being the principal. Overnight export, outbox, and notification fan-out can still inherit Alice’s cookie; do not rotate the worker until those jobs are named. Re-run `test_user_session_is_not_worker_identity` after any task-enqueue change.
 
 ## What the framework does vs what you still have to check
 
@@ -60,4 +60,4 @@ Notice batch-export jobs running as a clinician session on local practice files;
 
 ## What this page is not doing
 
-A zero-trust product name is not the check. Do not use live broker attaches. This site does not mark you as finished. Answer keys are not on this site.
+A zero-trust sticker does not bind worker identity. Do not use live broker attaches. This site does not mark you as finished. Answer keys are not on this site.

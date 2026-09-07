@@ -79,7 +79,7 @@ python3 -m pytest labs/10.3/10.3-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-Serverless IAM `*`. Clinic: app SA is cluster-admin.
+Serverless IAM `*`. An app service account that is cluster-admin is the same god-mode.
 
 ## What this page is not doing
 

@@ -20,7 +20,7 @@ flowchart TD
 
 Turning on a scanner does not consult the grant on the next read. This next-read check is still the proof.
 
-Re-run `test_revoked_share_cannot_read` after any share-path change. HTTP 200 on DELETE does not prove B cannot read. Phone cache and leftover worker sessions are other read paths — list those before you call revoke done. Tabletop remains the restore week.
+Re-run `test_revoked_share_cannot_read` after any share-path change. HTTP 200 on DELETE does not prove B cannot read. Phone cache and leftover worker sessions can still read after DELETE 200; revoke is not done until those paths are named. Tabletop remains the restore week.
 
 ## Signals that do not become a second leak
 
@@ -44,7 +44,7 @@ Putting the matching note in the alert copies the leak into the ticket.
 
 ## What the framework does vs what you still have to check
 
-The same no-op revoke, always-body read, and leftover worker session that bypass this practice will also bypass a “scan our coverage dashboard” detector.
+No-op revoke, always-body read, and leftover worker sessions still serve the old grant even if the coverage dashboard is green.
 
 The **cause** is grant not consulted; the **cost** is ex-collaborator secrecy; **how you stop it** is owner-or-grant on every read; **how you notice** is `revoked_share_read_denied`; **how you recover** is notify-and-rotate. What the tool cannot do: this alert does not wipe phone caches, and it does not recall copies already sent.
 
@@ -66,4 +66,4 @@ Deny the guardian read; do not paste the chart into the ticket. Do not hit a liv
 
 ## What this page is not doing
 
-A scanner-vendor name is not the rule. This page does not mark you as finished. A YAML pack is not this alert. Answer keys are not on this site.
+A coverage-dashboard sticker does not prove revoke. This page does not mark you as finished. A YAML pack does not watch leftover worker sessions. Answer keys are not on this site.

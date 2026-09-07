@@ -44,7 +44,7 @@ Putting the matching trace in the alert puts the stack in the pager too.
 
 ## What the framework does vs what you still have to check
 
-The same feature flags, sidecar debug, and public admin bind that bypass this practice will also bypass a “scan our canary dashboard” detector.
+Feature flags, sidecar debug, and a public admin bind still boot even if the canary dashboard is green.
 
 The **cause** is fail-open boot (debug ignored); the **cost** is traces and extra attack surface; **how you stop it** is the prod-and-debug check; **how you notice** is `prod_debug_forbidden`; **how you recover** is kill-and-rotate. What the tool cannot do: this alert does not catch a feature flag that turns off authorization (1.2), and it does not catch sidecar debug.
 
@@ -66,4 +66,4 @@ Deny Django `DEBUG=True`; do not paste the traceback into the ticket. Do not hit
 
 ## What this page is not doing
 
-A canary-vendor name is not the rule. This page does not mark you as finished. A manufacturer-defaults program page stays unverified. Answer keys are not on this site.
+A canary sticker does not keep debug off. This page does not mark you as finished. A manufacturer-defaults program page stays unverified. Answer keys are not on this site.

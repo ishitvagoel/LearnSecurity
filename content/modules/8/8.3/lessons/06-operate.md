@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Relogin[Force re-login if session already flipped]
 ```
 
-A checklist name does not copy “ignore identity keys.” Someone still has to own the leftover.
+An App Links checklist does not drop `as=` from extras.
 
 ## Signals that do not become a second leak
 
@@ -27,7 +27,7 @@ A checklist name does not copy “ignore identity keys.” Someone still has to 
 | Recover | Keep alice; force re-login if switched |
 | Leftover | WebView; custom scheme; attacker app installed |
 
-A mobile-filter product name is not the check. Re-run `test_deeplink_as_param_does_not_switch_user` after any exported-component change. “App Links verified” does not ignore `as=`. OAuth redirects (4.5) and WebView bridges are other IPC paths of the same extras — list those before you call the deep link honest.
+A mobile-filter product name does not ignore `as=`. Re-run `test_deeplink_as_param_does_not_switch_user` after any exported-component change. “App Links verified” does not ignore extras. OAuth redirects (4.5) and WebView bridges are other IPC paths; the deep link is not honest until those extras are named.
 
 ## What the framework does vs what you still have to check
 
@@ -53,4 +53,4 @@ Deep-link errors must not trap people in a broken WebView with no keyboard-acces
 
 ## What this page is not doing
 
-A mobile-filter product name is not the check. Do not use live Intent dumps. Opening this page does not finish a check-in.
+An App Links screenshot does not finish this page. Do not use live Intent dumps. Opening this page does not finish a check-in.

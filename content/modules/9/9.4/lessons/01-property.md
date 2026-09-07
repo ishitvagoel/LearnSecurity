@@ -86,7 +86,7 @@ python3 -m pytest labs/9.4/9.4-lab/tests --impl fixed
 
 ## Use it somewhere new
 
-SCA: a CVE versus a function you actually call. Clinic: fifty unmapped HIGHs.
+SCA: a CVE versus a function you actually call. Fifty unmapped HIGHs is the same unowned pile.
 
 ## What this page is not doing
 

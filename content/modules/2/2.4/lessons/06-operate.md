@@ -43,7 +43,7 @@ Reject any line that includes a note body, a real email, a session value, or “
 
 ## Use it somewhere new
 
-Payment capture: notice a double capture without logging card numbers. Clinic: notice a double-book without logging the chart. Invite tokens: notice a replay without logging the token.
+Payment capture: notice a double capture without logging card numbers. Last-slot booking: notice a double-book without logging the chart. Invite tokens: notice a replay without logging the token.
 
 ## Can people still use it
 

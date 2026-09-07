@@ -9,7 +9,7 @@ You get a **clinic SSN column**. The label on the column says encrypted. The byt
 
 `protect("secret")` must not round-trip as Base64. For a clinic, encoding is not secrecy.
 
-Clinic: SSN column labeled “encrypted” that is Base64. Also name password hashing vs field encryption vs backup encryption.
+The SSN column labeled “encrypted” is Base64. Also name password hashing vs field encryption vs backup encryption.
 
 A small clinic record with an `ssn_encrypted` column.
 

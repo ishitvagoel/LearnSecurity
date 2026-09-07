@@ -23,7 +23,7 @@ flowchart TD
 | Recover | Credit extra in a runbook; still fail the test first |
 | Leftover | New-key retry; webhook race |
 
-A vendor name does not prove this ledger rule. Re-run `test_duplicate_capture_does_not_double_charge` after any capture-path change. “The processor remembers” does not stop a second capture. Webhook inserts are the same family — list those before you call the charge once.
+A vendor name does not prove this ledger rule. Re-run `test_duplicate_capture_does_not_double_charge` after any capture-path change. “The processor remembers” does not stop a second capture. Webhook inserts can still double-charge; the ledger is not once until that path is named.
 
 ## What the framework does vs what you still have to check
 
@@ -49,4 +49,4 @@ The **cause** is an append that is not bound to the key; the **cost** is a doubl
 
 ## What this page is not doing
 
-A payment-vendor name is not the rule. Course milestones stay unclaimed. A filled-in questionnaire is not this alert.
+A processor dashboard does not make capture once. This page does not finish a check-in. A filled-in questionnaire does not lock the ledger.

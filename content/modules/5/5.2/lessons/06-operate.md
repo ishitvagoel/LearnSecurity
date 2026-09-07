@@ -40,7 +40,7 @@ Not: plaintext `secret`, a real SSN, or “AES handled.”
 
 Putting plaintext `secret` or an SSN in the alert leaves a second copy in the pager.
 
-An “encryption enabled” checkbox does not stop Base64. Re-run `test_protect_is_not_mere_encoding` after any `protect` change. Workers and export jobs are other paths of the same rule — list those before you call the bytes protected.
+An “encryption enabled” checkbox does not stop Base64. Re-run `test_protect_is_not_mere_encoding` after any `protect` change. Workers and export jobs still Base64 if you only wrap the note write.
 
 Recovery is incomplete if the next deploy still wraps `b64encode` in a helper named `encrypt`. Grep workers and export jobs for Base64 of known plaintext the same day you rotate keys, or the next backup re-issues the leak. A key-service dashboard is not that grep.
 

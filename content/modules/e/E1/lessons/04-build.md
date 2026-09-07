@@ -20,7 +20,7 @@ flowchart TD
   In -->|no| Deny[None]
 ```
 
-The repaired files require membership in `{"search_notes"}`. Production still needs that allow-list to be the *right* tools — `search_notes` that returns raw HTML is a lying encoding leftover. A coding assistant in CI that can `pip install` is the same allow-list grain on a different object. Cryptographically bound human approvals are extra, advanced work: a human click is not this check.
+The repaired files require membership in `{"search_notes"}`. Production still needs that allow-list to be the *right* tools — `search_notes` that returns raw HTML is a lying encoding leftover. A coding assistant in CI that can `pip install` is the same allow-list grain on a different object. Cryptographically bound human approvals are extra, advanced work: a human click does not take `exec_sql` off always-run.
 
 Use an allow-list before a tool runs — `exec_sql`.
 

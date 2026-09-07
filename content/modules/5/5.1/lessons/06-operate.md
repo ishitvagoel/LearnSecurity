@@ -41,7 +41,7 @@ Not: a note body, a personal email, or “privacy law handled it.”
 
 Putting a note body in the alert leaves a leftover copy in the pager.
 
-A dashboard tile that says “privacy mode” does not wipe leftover notes. If a replica warehouse still has `alice`, treat it as the same leftover body, not a separate “eventual consistency” pass. Search, analytics, and the appointment-card analogue are other leftover copies — list those before you send the “account deleted” mail. That mail is not recovery.
+A dashboard tile that says “privacy mode” does not wipe leftover notes. If a replica warehouse still has `alice`, treat it as the same leftover body, not a separate “eventual consistency” pass. Search, analytics, and the appointment-card analogue still hold the body; do not send “account deleted” until those copies are gone. That mail is not recovery.
 
 ## What the framework does vs what you still have to check
 

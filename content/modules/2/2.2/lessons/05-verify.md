@@ -34,7 +34,7 @@ The checks are `test_same_tenant_cache_hit` and `test_other_tenant_does_not_rece
 
 Map each check to a rule from the request-path map. Do not paste keys. If the broken files do not fail the cross-company get, the practice files are miswired — fix the wiring, not the assertion.
 
-TLS 1.3 on the browser hop is not this check. HTTPS 200 is a hop, not the cache key.
+TLS 1.3 on the browser hop does not key the cache. HTTPS 200 is a hop, not the cache key.
 
 ## What the checks do not prove
 
