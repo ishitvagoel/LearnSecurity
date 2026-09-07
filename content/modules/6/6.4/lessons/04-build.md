@@ -59,4 +59,4 @@ Stop joining the original scan filename onto a public folder; canonicalize then 
 
 ## What this page is not doing
 
-Do not hunt host files. Do not claim a course gate from a UUID filename.
+Do not hunt host files. Do not treat a UUID filename as a finished check-in.

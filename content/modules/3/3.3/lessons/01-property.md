@@ -74,7 +74,7 @@ python3 -m pytest labs/3.3/3.3-lab/tests --impl vulnerable
 python3 -m pytest labs/3.3/3.3-lab/tests --impl fixed
 ```
 
-Tie the check to `tB` reading `tA`, not to a private-network diagram.
+Look at `tB` reading `tA`, not a private-network diagram.
 
 ## Use it somewhere new
 

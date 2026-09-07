@@ -80,7 +80,7 @@ python3 -m pytest labs/3.2/3.2-lab/tests --impl vulnerable
 python3 -m pytest labs/3.2/3.2-lab/tests --impl fixed
 ```
 
-Tie the check to `cross-tenant-read` still present, not to a scanner product name.
+The check is `cross-tenant-read` still present. A scanner product name is not it.
 
 ## Use it somewhere new
 

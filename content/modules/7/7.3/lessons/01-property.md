@@ -35,7 +35,7 @@ flowchart LR
 
 If you parse JSON then re-serialize, the MAC is over a different document than the provider signed (2.1). A secret in a query string is 4.3.
 
-**The tool (not the rule):** “the vendor SDK,” “TLS is on,” “allow-list the provider’s address range.”
+**These are tools:** “the vendor SDK,” “TLS is on,” “allow-list the provider’s address range.”
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

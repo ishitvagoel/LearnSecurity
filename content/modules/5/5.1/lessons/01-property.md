@@ -30,7 +30,7 @@ flowchart TD
 
 The person who can still read it is an insider with warehouse SELECT, or a buyer of a “de-identified” export that still contains bodies. Trusting “analytics is anonymized” without checking the body field is not what you trust.
 
-**The tool (not the rule):** a database DELETE, an object-store lifecycle rule, or a contract checkbox.
+**Do not confuse these with the rule:** a database DELETE, an object-store lifecycle rule, or a contract checkbox.
 
 ## Picture: privacy is not secrecy
 

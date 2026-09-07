@@ -30,7 +30,7 @@ If the broken crash report still passes, the body substring was never redacted.
 
 The test `test_crash_report_omits_note_body` is there so a report that includes the body still fails.
 
-A crash report that only proves the stack is present may pass on both sides. You still have to omit the body. If the broken files do not fail `test_crash_report_omits_note_body`, the lab is miswired — fix the wiring, not the assertion.
+Keep a crash report that only proves the stack is present. Omit the body. If the broken files do not fail `test_crash_report_omits_note_body`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/8.5/8.5-lab/tests --impl vulnerable

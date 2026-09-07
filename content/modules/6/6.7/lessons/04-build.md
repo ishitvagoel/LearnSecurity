@@ -66,4 +66,4 @@ New accounts; GraphQL aliases (7.1); human timing (advanced); owned burst except
 
 ## What this page is not doing
 
-Do not load-test a public host. Do not claim a course gate from an edge-proxy screenshot.
+Do not load-test a public host. A check-in is not an edge-proxy screenshot.

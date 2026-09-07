@@ -77,7 +77,7 @@ python3 -m pytest labs/7.2/7.2-lab/tests --impl vulnerable
 python3 -m pytest labs/7.2/7.2-lab/tests --impl fixed
 ```
 
-Tie the check to `resolve("member", "secret_internal")`, not to a scanner bug name.
+Look at `resolve("member", "secret_internal")`, not a scanner bug name.
 
 ## Use it somewhere new
 

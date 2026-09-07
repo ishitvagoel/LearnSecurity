@@ -58,4 +58,4 @@ A JNI codec still has to deny a copy that exceeds the native buffer the same way
 
 ## What this page is not doing
 
-Do not compile a native overflow. Do not claim a course gate from a Kotlin rewrite. Do not present an awareness-list name as the syllabus.
+Do not compile a native overflow. A check-in is not a Kotlin rewrite. Do not present an awareness-list name as the syllabus.

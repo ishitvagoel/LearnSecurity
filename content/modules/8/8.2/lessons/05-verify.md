@@ -34,7 +34,7 @@ python3 -m pytest labs/8.2/8.2-lab/tests --impl vulnerable
 python3 -m pytest labs/8.2/8.2-lab/tests --impl fixed
 ```
 
-Saving a non-secret `'other'` value may pass on both sides. You still have to keep the cached note off plaintext disk. If the broken files do not fail `test_cached_note_is_not_plaintext_on_disk`, the practice is miswired — fix the wiring, not the check.
+Saving a non-secret `'other'` value may stay allowed. Keep the cached note off plaintext disk. If the broken files do not fail `test_cached_note_is_not_plaintext_on_disk`, the practice is miswired — fix the wiring, not the check.
 
 ## What the checks do not prove
 

@@ -58,4 +58,4 @@ Rotate the gist-leaked key and prove the old string fails, including missing-cur
 
 ## What this page is not doing
 
-Do not search live gists. Do not claim a course gate from a vault product name.
+Do not search live gists. Do not treat a vault product name as a finished check-in.

@@ -25,7 +25,7 @@ flowchart TD
 
 The person who can hurt you here is an operator who can read the column, or someone with a stolen disk of the lab dict. Trusting the column name `encrypted_body` is not what you trust.
 
-**The tool (not the rule):** Fernet, libsodium, or “we turned on disk encryption.”
+**Not the rule:** Fernet, libsodium, or “we turned on disk encryption.”
 
 ## Picture: pick the rule first
 

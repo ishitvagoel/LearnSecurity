@@ -46,7 +46,7 @@ Putting the matching trace in the alert puts the stack in the pager too.
 
 Feature flags, sidecar debug, and a public admin bind still boot even if the canary dashboard is green.
 
-The **cause** is fail-open boot (debug ignored); the **cost** is traces and extra attack surface; **how you stop it** is the prod-and-debug check; **how you notice** is `prod_debug_forbidden`; **how you recover** is kill-and-rotate. What the tool cannot do: this alert does not catch a feature flag that turns off authorization (1.2), and it does not catch sidecar debug.
+Fail-open boot (debug ignored) caused this. Traces and extra attack surface is the bill. Stop it with the prod-and-debug check. Notice `prod_debug_forbidden`. Recover: kill-and-rotate. A green dashboard does not catch a feature flag that turns off authorization (1.2), and it does not catch sidecar debug.
 
 ## Can people still use it
 

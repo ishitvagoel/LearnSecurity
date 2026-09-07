@@ -45,7 +45,7 @@ Deny the second copay; do not paste billing dumps into the ticket. Do not hit a 
 
 A duplicate deny must say *key already captured*, not only “assert False.” Confirmations that trap people into retry are leftover that *causes* this bug.
 
-The **cause** is an append that is not bound to the key; the **cost** is a double charge on the lab ledger; **how you stop it** is the seen gate; **how you notice** is `duplicate_capture_denied`; **how you recover** is runbook credit after the test fails. What the tool cannot do: this alert does not stop a new key per click and does not serialize webhooks.
+An append that is not bound to the key — that's why. A double charge on the lab ledger is the harm. Repair is the seen gate. Notice is `duplicate_capture_denied`. Recovery is runbook credit after the test fails. The metric does not stop a new key per click and does not serialize webhooks.
 
 ## What this page is not doing
 

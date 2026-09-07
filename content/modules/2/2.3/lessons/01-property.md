@@ -80,7 +80,7 @@ python3 -m pytest labs/2.3/2.3-browser-policy/tests --impl vulnerable
 python3 -m pytest labs/2.3/2.3-browser-policy/tests --impl fixed
 ```
 
-Tie the check to script readability, not to “XSS is fixed.”
+Script readability is the check. “XSS is fixed.” is a nickname.
 
 ## Use it somewhere new
 

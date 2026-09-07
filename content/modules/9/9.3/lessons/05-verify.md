@@ -30,7 +30,7 @@ If the broken suite still passes, `status_asserted` alone was never refused as a
 
 The test `test_http_200_only_is_not_a_security_test` is there so a 200-only row cannot count as a security test.
 
-A row that names the bad result and asserts status may pass on both sides. You still have to deny a test that only checks HTTP 200. If the broken files do not fail `test_http_200_only_is_not_a_security_test`, the lab is miswired — fix the wiring, not the assertion.
+A row that names the bad result and asserts status may stay allowed. Deny a test that only checks HTTP 200. If the broken files do not fail `test_http_200_only_is_not_a_security_test`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/9.3/9.3-lab/tests --impl vulnerable

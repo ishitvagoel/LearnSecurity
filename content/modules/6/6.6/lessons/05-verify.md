@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P["Must pass: consume-once"]
 ```
 
-If the broken accept still passes, the second `t1` was never denied. The first accept of `t1` may pass on both sides. You still have to deny the second accept.
+If the broken accept still passes, the second `t1` was never denied. The first accept of `t1` is the honest path. Deny the second accept.
 
 ## What the check has to show
 

@@ -63,4 +63,4 @@ Copies keyed without company; silent impersonation; honest super-admin; immediat
 
 ## What this page is not doing
 
-Do not probe a live company. Do not claim a course gate from a row-level screenshot. Do not present a famous-bugs list as the syllabus.
+Do not probe a live company. A row-level screenshot does not mark you finished. Do not present a famous-bugs list as the syllabus.

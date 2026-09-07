@@ -44,7 +44,7 @@ Not: a token, a real org name, a threat-model body, or “Gate 10 complete.”
 
 Always-true merge, a stale TM-12, and docs exemptions still land without a threat-model id even if CODEOWNERS is green.
 
-The **cause** is merge without a threat-model id; the **cost** is an identity surface that 3.2 never modelled; **how you stop it** is the truthy `threat_model` check; **how you notice** is `merge_blocked_no_tm`; **how you recover** is add a threat-model id and re-run `merge_ok`. What this alert cannot do: it does not prove TM-12 covers this change’s files, and it does not replace 3.2 authorship or 10.4 governance evidence.
+Merge without a threat-model id is why it broke. The damage is an identity surface that 3.2 never modelled. Put the truthy `threat_model` check in the path. Watch `merge_blocked_no_tm`. Recover by adding a threat-model id and re-running `merge_ok`. It does not prove TM-12 covers this change’s files, and it does not replace 3.2 authorship or 10.4 governance evidence.
 
 ## Can people still use it
 

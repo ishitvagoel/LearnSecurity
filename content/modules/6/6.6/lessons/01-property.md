@@ -25,7 +25,7 @@ flowchart LR
 
 Picture two tabs, or anyone who copied the token from mail logs (4.3). What you trust: local `accept()`. Email is not proof of who received it (4.2).
 
-**The tool (not the rule):** a database unique constraint you never hit, HTTP 400, or “people will not double-click.”
+**Do not confuse these with the rule:** a database unique constraint you never hit, HTTP 400, or “people will not double-click.”
 
 ## Picture: check-then-set is two steps
 

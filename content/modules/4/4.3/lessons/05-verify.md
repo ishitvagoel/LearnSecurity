@@ -31,7 +31,7 @@ python3 -m pytest labs/4.3/4.3-lab/tests --impl vulnerable
 python3 -m pytest labs/4.3/4.3-lab/tests --impl fixed
 ```
 
-Map each test to a row on the channel map you drew. If the broken files do not fail the query assertion, the lab is miswired — fix the wiring, not the check. Cookie and header honest-path tests may pass on both sides; you still have to deny a token in the query.
+Map each test to a row on the channel map you drew. If the broken files do not fail the query assertion, the lab is miswired — fix the wiring, not the check. Cookie and header honest-path tests can still look fine. Deny a token in the query.
 
 ## What the tests do not prove
 

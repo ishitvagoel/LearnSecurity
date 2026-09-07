@@ -46,7 +46,7 @@ Putting the registry token in the alert puts a secret in the pager too.
 
 An always-true installer, poisoned cache, and unpinned `@v1` Actions still install by name even if the advisory count is green. An SBOM file does not compare digests.
 
-The **cause** is install without comparing digests; the **cost** is wrong bytes in the trusted computing base; **how you stop it** is `expected_hash == got_hash`; **how you notice** is `hash_mismatch_denied`; **how you recover** is pin known-good and rotate CI secrets (5.3). What the tool cannot do: this alert does not prove the pin is benign, does not authenticate provenance, and does not stop cache poisoning or `@v1` Actions. Equality is the local stand-in, not index policy.
+Why it broke: install without comparing digests. You pay wrong bytes in the trusted computing base. Repair with `expected_hash == got_hash`. The signal is `hash_mismatch_denied`. Then pin known-good and rotate CI secrets (5.3). This alert does not prove the pin is benign, does not authenticate provenance, and does not stop cache poisoning or `@v1` Actions. Equality is the local stand-in, not index policy.
 
 ## Can people still use it
 

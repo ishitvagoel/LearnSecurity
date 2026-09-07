@@ -35,7 +35,7 @@ python3 -m pytest labs/8.1/8.1-lab/tests --impl vulnerable
 python3 -m pytest labs/8.1/8.1-lab/tests --impl fixed
 ```
 
-A server that already says yes may pass on both sides. You still have to deny a failing client integrity claim. If the broken files do not fail `test_client_integrity_claim_is_not_authorization`, the practice is miswired — fix the wiring, not the check.
+A server that already says yes is the honest path. Deny a failing client integrity claim. If the broken files do not fail `test_client_integrity_claim_is_not_authorization`, the practice is miswired — fix the wiring, not the check.
 
 ## What the checks do not prove
 

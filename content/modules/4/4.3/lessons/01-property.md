@@ -69,7 +69,7 @@ python3 -m pytest labs/4.3/4.3-lab/tests --impl vulnerable
 python3 -m pytest labs/4.3/4.3-lab/tests --impl fixed
 ```
 
-Tie the check to query `access_token`, not to a JWT library name.
+The check is query `access_token`. A JWT library name is not it.
 
 ## Use it somewhere new
 

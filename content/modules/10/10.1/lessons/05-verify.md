@@ -30,7 +30,7 @@ Green on both sides means `threat_model` was never the failing case.
 
 `test_merge_requires_threat_model_id` exists because a `merge_ok` that always returns true would ship.
 
-A change that already cites `TM-12` may pass on both sides. You still have to deny a change with no threat-model id. If the broken files do not fail `test_merge_requires_threat_model_id`, the lab is miswired — fix the wiring, not the assertion.
+A change that already cites `TM-12` can still look fine. Deny a change with no threat-model id. If the broken files do not fail `test_merge_requires_threat_model_id`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/10.1/10.1-lab/tests --impl vulnerable

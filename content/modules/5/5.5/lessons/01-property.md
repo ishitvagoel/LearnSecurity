@@ -24,7 +24,7 @@ flowchart TD
 
 Picture a member who types a note id that the SQL parser would treat as grammar, or anyone who steals the `app` role (3.3). What you trust: the bound API. A live database is not in scope.
 
-**The tool (not the rule):** an ORM name, a web filter rule, or a denylist of quotes.
+**These are tools:** an ORM name, a web filter rule, or a denylist of quotes.
 
 ## Picture: three checks, not one sticker
 

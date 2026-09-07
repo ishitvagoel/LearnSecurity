@@ -46,7 +46,7 @@ Putting the matching transcript in the alert puts the model output in the pager 
 
 Lying `search_notes` HTML, unconstrained installs, and prompt-only policy still run even if the agent dashboard is green.
 
-The **cause** is model output treated as policy; the **cost** is an interpreter via English; **how you stop it** is the allow-list; **how you notice** is `tool_denied`; **how you recover** is revoke leftover agent credentials. What the tool cannot do: this alert does not encode `search_notes` HTML, and it does not stop hallucinated packages.
+Cause first: model output treated as policy. Then an interpreter via English. Put the allow-list in. Watch `tool_denied`. Recover by revoking leftover agent credentials. The page does not encode `search_notes` HTML, and it does not stop hallucinated packages.
 
 ## Can people still use it
 

@@ -35,7 +35,7 @@ A relationship-graph dashboard will show tuple counts and stay silent when CI’
 
 If support impersonation exists, the UI must not look like the clinician’s own company. Say *acting as* in text a screen reader can speak. That is a later audited path, not a body field.
 
-The **cause** is client-chosen company treated as binding; the **cost** is read or write into another company; **how you stop it** is session win; **how you notice** is `body_tenant_mismatch`; **how you recover** is audit-and-revoke. What the tool cannot do: this alert does not prove cache keys include company and does not make grant change immediate.
+The failed decision is client-chosen company treated as binding. The leftover harm is read or write into another company. The repair is session win. The signal is `body_tenant_mismatch`. Recover by audit-and-revoke. Logging does not prove cache keys include company and does not make grant change immediate.
 
 ## Practice
 

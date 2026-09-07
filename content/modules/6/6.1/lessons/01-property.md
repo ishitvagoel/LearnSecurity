@@ -24,7 +24,7 @@ flowchart TD
 
 Picture a member who chooses a note or export name, or a stolen client. What you trust: the local `argv.py` helper. Do not probe other hosts.
 
-**The tool (not the rule):** a `shell=False` comment, a denylist of punctuation, or a scanner finding.
+**A product name is not the rule:** a `shell=False` comment, a denylist of punctuation, or a scanner finding.
 
 ## Picture: same shape across interpreters
 

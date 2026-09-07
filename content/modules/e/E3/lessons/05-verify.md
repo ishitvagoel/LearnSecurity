@@ -30,7 +30,7 @@ python3 -m pytest labs/E3/e3-lab/tests --impl vulnerable
 python3 -m pytest labs/E3/e3-lab/tests --impl fixed
 ```
 
-The first capture of `k1` may pass on both sides. You still have to deny a second capture with the same key. If the broken files do not fail `test_duplicate_capture_does_not_double_charge`, the lab is miswired — fix the wiring, not the check.
+The first capture of `k1` is the honest path. Deny a second capture with the same key. If the broken files do not fail `test_duplicate_capture_does_not_double_charge`, the lab is miswired — fix the wiring, not the check.
 
 ## What the tests do not prove
 

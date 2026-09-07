@@ -37,7 +37,7 @@ python3 -m pytest labs/5.4/5.4-lab/tests --impl vulnerable
 python3 -m pytest labs/5.4/5.4-lab/tests --impl fixed
 ```
 
-Map the test to the header-https × socket-http row you wrote. A socket that really is https may pass on both sides. You still have to catch header-https with a socket that is http. If the broken files do not fail header-https + socket-http, the lab is miswired — fix the wiring, not the check. A setup error is not proof the rule holds.
+Map the test to the header-https × socket-http row you wrote. A socket that really is https is not the whole check. Catch header-https with a socket that is http. If the broken files do not fail header-https + socket-http, the lab is miswired — fix the wiring, not the check. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 

@@ -67,4 +67,4 @@ Nonce reuse. Key in the same row. The stand-in mistaken for a shipped cipher. Op
 
 ## What this page is not doing
 
-Do not copy the teaching prefix into production. Do not claim a course gate from a cipher product name.
+Do not copy the teaching prefix into production. A cipher product name does not finish a check-in.

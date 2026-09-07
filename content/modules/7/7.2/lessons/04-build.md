@@ -65,4 +65,4 @@ CSV / search / later-worker serializers; stale cache after a role change (advanc
 
 ## What this page is not doing
 
-Do not query a public GraphQL host. Do not claim a course gate from a hidden-column screenshot.
+Do not query a public GraphQL host. A hidden-column screenshot does not mark you finished.

@@ -46,7 +46,7 @@ Putting the matching writeup in the alert copies the leak into the ticket.
 
 Always-true accept, unread register rows, and renamed tech-debt still skip owner and `review_by` even if the risk dashboard is green. A maturity score does not fill those fields.
 
-The **cause** is oral acceptance treated as a row; the **cost** is unowned leftover and inaccessible recovery kept; **how you stop it** is the schema; **how you notice** is `exception_incomplete_denied`; **how you recover** is expire-or-re-accept. What the tool cannot do: this alert does not prove anyone reads the register, and it does not verify the accessibility flag.
+Oral acceptance treated as a row is the skipped check. Unowned leftover and inaccessible recovery kept is what remains. Ship the schema. Page `exception_incomplete_denied`. Recover by expiring or re-accepting. The ticket does not prove anyone reads the register, and it does not verify the accessibility flag.
 
 ## Can people still use it
 

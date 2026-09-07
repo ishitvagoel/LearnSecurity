@@ -30,7 +30,7 @@ If the broken ship check still passes, the empty owner map was never a block.
 
 `test_unmapped_high_blocks_ship` exists so `ship_ok` cannot ignore an unmapped HIGH.
 
-A HIGH with an owner on the map may pass on both sides. You still have to deny an unmapped HIGH. If the broken files do not fail `test_unmapped_high_blocks_ship`, the lab is miswired — fix the wiring, not the assertion.
+Do not let a HIGH with an owner on the map hide the leftover. Deny an unmapped HIGH. If the broken files do not fail `test_unmapped_high_blocks_ship`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/9.4/9.4-lab/tests --impl vulnerable

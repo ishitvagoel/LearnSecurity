@@ -71,5 +71,5 @@ DNS rebinding; IPv6 encodings; telling the person they left the site (advanced);
 
 ## What this page is not doing
 
-Do not curl metadata. Do not claim a course gate from an HTTPS prefix.
+Do not curl metadata. An HTTPS prefix is not a check-in.
 

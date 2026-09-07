@@ -59,4 +59,4 @@ Serverless: the function role is the runtime role. Clinic replica: the replica r
 
 ## What this page is not doing
 
-Do not connect to a live cloud database. Do not claim a course gate from a role name.
+Do not connect to a live cloud database. Do not treat a role name as a finished check-in.

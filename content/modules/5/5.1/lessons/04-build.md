@@ -78,4 +78,4 @@ Legal hold. Backups. Support-ticket paste. A scheduled purge used as a substitut
 
 ## What this page is not doing
 
-Do not connect a live warehouse. Do not claim a course gate from a privacy-policy PDF.
+Do not connect a live warehouse. A privacy-policy PDF does not mark you finished.

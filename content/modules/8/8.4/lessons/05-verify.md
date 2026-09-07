@@ -35,7 +35,7 @@ python3 -m pytest labs/8.4/8.4-lab/tests --impl vulnerable
 python3 -m pytest labs/8.4/8.4-lab/tests --impl fixed
 ```
 
-A release build talking to prod may pass on both sides. You still have to deny a debug build calling the prod export. If the broken files do not fail `test_debug_build_cannot_call_prod_export`, the practice is miswired — fix the wiring, not the check.
+A release build talking to prod is not the whole check. Deny a debug build calling the prod export. If the broken files do not fail `test_debug_build_cannot_call_prod_export`, the practice is miswired — fix the wiring, not the check.
 
 ## What the checks do not prove
 

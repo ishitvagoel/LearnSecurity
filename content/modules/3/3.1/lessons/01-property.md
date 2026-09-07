@@ -92,7 +92,7 @@ python3 -m pytest labs/3.1/3.1-lab/tests --impl vulnerable
 python3 -m pytest labs/3.1/3.1-lab/tests --impl fixed
 ```
 
-Tie the check to the body in the log, not to a privacy-policy URL.
+The body in the log is what to measure. Ignore a privacy-policy URL.
 
 ## Use it somewhere new
 

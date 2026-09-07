@@ -36,7 +36,7 @@ flowchart LR
 
 If the worker’s database role is god-mode (3.3), the deputy is worse: it can read every company.
 
-**The tool (not the rule):** an “internal” queue, a private network, a zero-trust product name, or signed broker messages.
+**A product name is not the rule:** an “internal” queue, a private network, a zero-trust product name, or signed broker messages.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

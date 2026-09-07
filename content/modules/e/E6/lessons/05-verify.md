@@ -30,7 +30,7 @@ If the broken accept still passes, empty owner was never rejected.
 
 The test `test_exception_needs_owner_review_and_wcag` is there so always-accept `accept_exception` still fails.
 
-A complete exception row may pass on both sides. You still have to deny a row with no owner. If the broken files do not fail `test_exception_needs_owner_review_and_wcag`, the lab is miswired — fix the wiring, not the assertion.
+A complete exception row is not the whole check. Deny a row with no owner. If the broken files do not fail `test_exception_needs_owner_review_and_wcag`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/E6/e6-lab/tests --impl vulnerable

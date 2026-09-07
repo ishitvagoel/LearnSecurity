@@ -60,4 +60,4 @@ Seed `sms-content-leak` and `number-swap` even if the gateway vendor’s questio
 
 ## What this page is not doing
 
-Do not connect a production scanner. Do not claim a course gate from a green join.
+Do not connect a production scanner. A green join does not finish a check-in.

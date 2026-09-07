@@ -33,7 +33,7 @@ A sanitizer dashboard will show hits in languages that run under it and stay sil
 
 An operator reject screen must say *copy exceeds destination* without requiring a hex dump. People should be able to read that error without a dump of the file.
 
-The **cause** is declared length trusted over destination size; the **cost** is an oversize destination object; **how you stop it** is the three-way min; **how you notice** is `copy_length_denied`; **how you recover** is quarantine-and-patch. What this alert cannot do: it does not bound a leftover C codec and does not catch integer wrap.
+Look at declared length trusted over destination size first. An oversize destination object is the fallout. The three-way min is what to ship. `copy_length_denied` tells you it happened. Recover by quarantine-and-patch. It does not bound a leftover C codec and does not catch integer wrap.
 
 ## Practice
 

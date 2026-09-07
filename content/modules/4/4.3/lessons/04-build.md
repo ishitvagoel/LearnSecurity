@@ -58,4 +58,4 @@ Magic-link: a one-time token in the URL is later work, then exchange for a cooki
 
 ## What this page is not doing
 
-Do not dump live access logs. Do not claim a course gate from a Referrer-Policy header.
+Do not dump live access logs. A Referrer-Policy header is not a check-in.

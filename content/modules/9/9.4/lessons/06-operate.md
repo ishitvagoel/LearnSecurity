@@ -50,7 +50,7 @@ Who-is-allowed holes still ship under a green scanner dashboard if no owner is o
 
 The triage screen must say *why* F1 is blocked, in words. Do not encode “blocked” as color only, or people will mass-suppress. If operators see a blocked-ship badge, do not encode it as color only.
 
-The **cause** is CI’s `ship_ok` still always true (or a new HIGH with no map row); the **cost** is an unowned HIGH in production; **how you stop it** is the join; **how you notice** is `unmapped_high_blocks`; **how you recover** is map-or-fix, not a quiet severity downgrade. What the tool cannot do: this alert does not prove the mapped requirement is the right coverage-map row, and it does not cover who-is-allowed blind spots.
+It broke because CI’s `ship_ok` still always true (or a new HIGH with no map row). Cost: an unowned HIGH in production. Fix: the join. Signal: `unmapped_high_blocks`. Recovery: map-or-fix, not a quiet severity downgrade. The ticket does not prove the mapped requirement is the right coverage-map row, and it does not cover who-is-allowed blind spots.
 
 ## Practice
 

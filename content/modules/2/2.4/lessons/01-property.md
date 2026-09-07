@@ -75,7 +75,7 @@ python3 -m pytest labs/2.4/2.4-state-time/tests --impl vulnerable
 python3 -m pytest labs/2.4/2.4-state-time/tests --impl fixed
 ```
 
-Tie the check to a second grant, not to an awareness-list name.
+Fail or pass a second grant. An awareness-list name is not the check.
 
 ## Use it somewhere new
 

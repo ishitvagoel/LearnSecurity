@@ -74,7 +74,7 @@ python3 -m pytest labs/6.2/6.2-lab/tests --impl vulnerable
 python3 -m pytest labs/6.2/6.2-lab/tests --impl fixed
 ```
 
-Tie the check to encoding at the HTML text sink, not to a bug-list nickname.
+Look at encoding at the HTML text sink, not a bug-list nickname.
 
 ## Use it somewhere new
 

@@ -30,7 +30,7 @@ If the broken read still passes, B-after-revoke was never the case you ran.
 
 The test `test_revoked_share_cannot_read` is there so no-op `revoke` still fails. `conftest.py` calls `reset()` so grant state does not leak.
 
-The owner after revoke, and B before revoke, may pass on both sides. You still have to deny B after revoke. If the broken files do not fail `test_revoked_share_cannot_read`, the lab is miswired — fix the wiring, not the assertion.
+Keep The owner after revoke, and B before revoke,. Deny B after revoke. If the broken files do not fail `test_revoked_share_cannot_read`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/11/11-lab/tests --impl vulnerable

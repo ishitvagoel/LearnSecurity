@@ -46,7 +46,7 @@ Putting the matching note in the alert puts the incident text in the pager too.
 
 Always-true close, leftover bodies, and support-tool god-mode still close the incident even if SIEM is green.
 
-The **cause** is close looking at detection quality instead of recovery done and no `note_body`; the **cost** is an attacker still in plus extra note copies; **how you stop it** is the conjunction; **how you notice** is `incident_closed_without_recovery`; **how you recover** is reopen and restore. What the tool cannot do: this alert does not prove the restore drill ran, and it does not ship logs to a separate system.
+The hole is close looking at detection quality instead of recovery done and no `note_body`. The bill is an attacker still in plus extra note copies. The conjunction closes it. `incident_closed_without_recovery` is how you see it. Recover by reopen and restore. The metric does not prove the restore drill ran, and it does not ship logs to a separate system.
 
 ## Can people still use it
 

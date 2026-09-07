@@ -67,4 +67,4 @@ ORDER BY identifiers; replicas; row-level-rule theater; 3.3 role still required;
 
 ## What this page is not doing
 
-Do not connect a live company. Do not claim a course gate from an ORM brand.
+Do not connect a live company. A check-in is not an ORM brand.

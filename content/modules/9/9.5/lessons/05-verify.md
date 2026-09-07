@@ -30,7 +30,7 @@ If the broken close still passes, missing retest was never what kept the finding
 
 `test_cannot_close_without_retest` is the case that keeps `close_finding` from being a rubber stamp.
 
-A close with `retest` set to `"pass"` may pass on both sides. You still have to deny a close that skipped retest. If the broken files do not fail `test_cannot_close_without_retest`, the lab is miswired — fix the wiring, not the assertion.
+A close with `retest` set to `"pass"` is not the whole check. Deny a close that skipped retest. If the broken files do not fail `test_cannot_close_without_retest`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/9.5/9.5-lab/tests --impl vulnerable

@@ -25,7 +25,7 @@ flowchart TD
 
 Picture a member who supplies a preview URL. What you trust: a local `allowed(url)` check. Do not probe cloud metadata, loopback services, or public hosts.
 
-**The tool (not the rule):** “HTTPS only” as a string prefix, a web filter, or `requests` timeouts.
+**Tools, not the rule:** “HTTPS only” as a string prefix, a web filter, or `requests` timeouts.
 
 ## Picture: parse, then pin the host
 

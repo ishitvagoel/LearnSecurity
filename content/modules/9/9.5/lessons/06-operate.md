@@ -46,7 +46,7 @@ Putting the matching note in the alert puts the finding in the pager too.
 
 A `"pass"` on the wrong URL, extra-field variants, and role-change caches still close the ticket while the hole is open.
 
-The **cause** is close looking at intent (PDF, ticket Done) instead of `retest == "pass"`; the **cost** is an isolation hole that looks fixed; **how you stop it** is the retest equality; **how you notice** is `finding_closed_without_retest`; **how you recover** is reopen and re-run the same isolation check. What the tool cannot do: this alert does not prove the `"pass"` hit the same URL, and it does not search extra fields or role-change caches.
+Close looking at intent (PDF, ticket Done) instead of `retest == "pass"` is the decision that failed. An isolation hole that looks fixed is the later mess. The retest equality belongs on the path. `finding_closed_without_retest` is the page. Recover by reopen and re-run the same isolation check. This alert does not prove the `"pass"` hit the same URL, and it does not search extra fields or role-change caches.
 
 ## Can people still use it
 

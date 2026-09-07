@@ -30,7 +30,7 @@ If the broken tool gate still passes, `exec_sql` was never denied.
 
 The test `test_exec_sql_tool_is_denied` is there so always-run `run_tool` still fails.
 
-`search_notes` may pass on both sides. You still have to deny `exec_sql`. If the broken files do not fail `test_exec_sql_tool_is_denied`, the lab is miswired — fix the wiring, not the assertion.
+Keep `search_notes`. Deny `exec_sql`. If the broken files do not fail `test_exec_sql_tool_is_denied`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/E1/e1-lab/tests --impl vulnerable

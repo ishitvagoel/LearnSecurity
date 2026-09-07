@@ -25,7 +25,7 @@ flowchart TD
 
 Picture a scripted member, or anyone who stole a session. What you trust: local `allow(n)`. An IP limit at the edge with no identity is **shared fate**: people behind one office network share a bucket, and a stolen session is not a new IP.
 
-**The tool (not the rule):** a CAPTCHA, autoscaling, or a frontend that disables the export button.
+**Not the rule:** a CAPTCHA, autoscaling, or a frontend that disables the export button.
 
 ## Picture: extra copies are still copies
 

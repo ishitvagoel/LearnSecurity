@@ -28,7 +28,7 @@ flowchart TD
 
 The person who can still get in is an ex-employee with a copied cookie, or a delayed worker still holding `user_id`. Trusting HR email or “login is disabled” is not what you trust.
 
-**The tool (not the rule):** SessionMiddleware, a single-sign-on logout product, or `DELETE FROM users`.
+**Tools, not the rule:** SessionMiddleware, a single-sign-on logout product, or `DELETE FROM users`.
 
 ## Picture: states, not a login screen
 
@@ -77,7 +77,7 @@ python3 -m pytest labs/4.1/4.1-lab/tests --impl vulnerable
 python3 -m pytest labs/4.1/4.1-lab/tests --impl fixed
 ```
 
-Tie the check to `session_valid` after delete, not to a single-sign-on product name.
+Fail or pass `session_valid` after delete. A single-sign-on product name is not the check.
 
 ## Use it somewhere new
 

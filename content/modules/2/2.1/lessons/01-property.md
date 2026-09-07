@@ -96,7 +96,7 @@ python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl vulnerable
 python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl fixed
 ```
 
-Tie the check to two readers disagreeing, not to a bug-list nickname.
+The check is two readers disagreeing. A bug-list nickname is not it.
 
 ## Use it somewhere new
 

@@ -46,7 +46,7 @@ Putting the matching note in the alert copies the leak into the ticket.
 
 No-op revoke, always-body read, and leftover worker sessions still serve the old grant even if the coverage dashboard is green.
 
-The **cause** is grant not consulted; the **cost** is ex-collaborator secrecy; **how you stop it** is owner-or-grant on every read; **how you notice** is `revoked_share_read_denied`; **how you recover** is notify-and-rotate. What the tool cannot do: this alert does not wipe phone caches, and it does not recall copies already sent.
+Grant not consulted. That's the hole. Ex-collaborator secrecy is what you pay. Use owner-or-grant on every read. Alert on `revoked_share_read_denied`. Then notify-and-rotate. Logging does not wipe phone caches, and it does not recall copies already sent.
 
 ## Can people still use it
 

@@ -30,7 +30,7 @@ If the broken install still passes, you never compared digests.
 
 `test_hash_mismatch_refuses_install` is what stops `install_ok` from being a tautology.
 
-Matching digests may pass on both sides. You still have to refuse a mismatch. If the broken files do not fail `test_hash_mismatch_refuses_install`, the lab is miswired — fix the wiring, not the assertion.
+Matching digests is the honest path. Refuse a mismatch. If the broken files do not fail `test_hash_mismatch_refuses_install`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/10.2/10.2-lab/tests --impl vulnerable

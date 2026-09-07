@@ -69,4 +69,4 @@ Replay; freshness; parse-before-MAC (2.1); 1.2 on writes; 6.5 egress; per-messag
 
 ## What this page is not doing
 
-Do not POST a live provider. Do not claim a course gate from a TLS screenshot.
+Do not POST a live provider. A TLS screenshot does not finish a check-in.

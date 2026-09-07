@@ -69,4 +69,4 @@ Search / export / GraphQL paths; grant take-back lag; honest n1 still readable; 
 
 ## What this page is not doing
 
-Do not connect a live company. Do not claim a course gate from a roles-product name.
+Do not connect a live company. A check-in is not a roles-product name.

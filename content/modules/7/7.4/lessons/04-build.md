@@ -68,4 +68,4 @@ Poison loops; retry of revoked grants (2.4); field dumps (7.2); default worker c
 
 ## What this page is not doing
 
-Do not attach to a live broker. Do not claim a course gate from a zero-trust screenshot.
+Do not attach to a live broker. Do not treat a zero-trust screenshot as a finished check-in.

@@ -30,7 +30,7 @@ If the broken boot check also passes, prod-plus-debug was never exercised.
 
 `test_prod_debug_must_not_boot` is the case that an always-yes `boot_ok` cannot survive.
 
-Production with debug off may pass on both sides. You still have to deny production with debug on. If the broken files do not fail `test_prod_debug_must_not_boot`, the lab is miswired — fix the wiring, not the assertion.
+Do not let production with debug off hide the leftover. Deny production with debug on. If the broken files do not fail `test_prod_debug_must_not_boot`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/10.4/10.4-lab/tests --impl vulnerable

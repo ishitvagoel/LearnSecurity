@@ -67,4 +67,4 @@ Clickjacking; postMessage; later open redirect; advanced embeds; lookalike UI; G
 
 ## What this page is not doing
 
-Do not visit a live foreign origin. Do not claim a course gate from SameSite=Lax.
+Do not visit a live foreign origin. SameSite=Lax does not finish a check-in.

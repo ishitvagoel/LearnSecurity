@@ -64,4 +64,4 @@ Substring stand-in; generated reintroduction; `exec(` / other expression languag
 
 ## What this page is not doing
 
-Do not weaponize eval. Do not claim a course gate from a formatter screenshot. Do not present a draft vocabulary as final.
+Do not weaponize eval. A formatter screenshot is not a check-in. Do not present a draft vocabulary as final.

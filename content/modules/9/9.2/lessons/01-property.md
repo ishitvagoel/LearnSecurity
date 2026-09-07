@@ -35,7 +35,7 @@ flowchart LR
   Interp[eval of user] --> Reality[user string becomes Python]
 ```
 
-**The tool (not the rule):** formatter continuous integration, a scanner “looks good,” a chat bot saying “looks safe,” or the lab substring itself.
+**Tools, not the rule:** formatter continuous integration, a scanner “looks good,” a chat bot saying “looks safe,” or the lab substring itself.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

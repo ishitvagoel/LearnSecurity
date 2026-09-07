@@ -46,7 +46,7 @@ Putting the matching kubeconfig in the alert puts cluster credentials in the pag
 
 A lying `"app"` Role, metadata hop, and Helm convenience ClusterRoles still admit cluster-admin even if the CIS dashboard is green.
 
-The **cause** is always-true admission (or a chart that adds ClusterRoleBinding); the **cost** is control-plane takeover from one app bug; **how you stop it** is the allow-list; **how you notice** is `cluster_admin_denied`; **how you recover** is delete-and-rotate. What the tool cannot do: this alert does not prove `"app"` is least privilege, and it does not block the metadata hop.
+Start from always-true admission (or a chart that adds ClusterRoleBinding). Control-plane takeover from one app bug is what follows. The allow-list is the repair. Page on `cluster_admin_denied`. Recover by delete-and-rotate. The page does not prove `"app"` is least privilege, and it does not block the metadata hop.
 
 ## Can people still use it
 

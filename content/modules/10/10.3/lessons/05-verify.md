@@ -30,7 +30,7 @@ If the broken admission still passes, cluster-admin was never the case under tes
 
 `test_cluster_admin_pod_is_denied` catches a `pod_ok` that never returns false.
 
-A pod using `"app"` may pass on both sides. You still have to deny cluster-admin. If the broken files do not fail `test_cluster_admin_pod_is_denied`, the lab is miswired — fix the wiring, not the assertion.
+A pod using `"app"` may stay allowed. Deny cluster-admin. If the broken files do not fail `test_cluster_admin_pod_is_denied`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/10.3/10.3-lab/tests --impl vulnerable

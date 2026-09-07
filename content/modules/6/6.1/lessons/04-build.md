@@ -69,5 +69,5 @@ Argument injection; plugin shells; CSV formula leftover; 6.4 path cells.
 
 ## What this page is not doing
 
-Do not spawn a live process. Do not claim a course gate from a denylist.
+Do not spawn a live process. A denylist does not mark you finished.
 

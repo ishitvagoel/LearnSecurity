@@ -35,7 +35,7 @@ python3 -m pytest labs/7.1/7.1-lab/tests --impl vulnerable
 python3 -m pytest labs/7.1/7.1-lab/tests --impl fixed
 ```
 
-Patching `display_name` may pass on both sides. You still have to drop `is_admin` from the body. If the broken files do not fail `test_is_admin_cannot_be_patched`, the practice is miswired — fix the wiring, not the check.
+Do not let patching `display_name` hide the leftover. Drop `is_admin` from the body. If the broken files do not fail `test_is_admin_cannot_be_patched`, the practice is miswired — fix the wiring, not the check.
 
 ## What the checks do not prove
 

@@ -70,4 +70,4 @@ TLS to the load balancer; pinning leftover; OCSP and encrypted client hello as a
 
 ## What this page is not doing
 
-Do not probe a live host. Do not claim a course gate from an HSTS preload list.
+Do not probe a live host. An HSTS preload list is not a check-in.
