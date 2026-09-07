@@ -3,7 +3,7 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## Until you can fail it, it is still a slogan
+## Check it
 
 HTTP 200 on a single click is not this topic’s evidence. “The button is disabled” is a tool observation. The check is: for two `share_note("n1", idempotency_key="k1")` calls, `share_count() == 1`. That observation must be **false** on the broken files and **true** on the repaired files.
 

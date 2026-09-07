@@ -3,7 +3,7 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## Until you can fail it, it is still a slogan
+## Check it
 
 “We have a classification spreadsheet” is not evidence. “Logs are internal” is a trust assumption, not an observation. The check is: `log_event("note_read", "tenant-A-secret-body")` does not contain `tenant-A-secret-body` and does contain a redaction marker. That observation must be **false** on the broken files and **true** on the repaired files.
 

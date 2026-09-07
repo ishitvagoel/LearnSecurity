@@ -3,7 +3,7 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## Until you can fail it, it is still a slogan
+## Check it
 
 “Coverage 92%” is not evidence. “The testing-guide row is ticked” is a tool observation. The check is: `is_security_test({"status_asserted": True})` is false and a row that names `forbidden_outcome` may count. That 200-only observation must be **false** on the broken files and **true** on the repaired files. Do not fuzz public hosts.
 

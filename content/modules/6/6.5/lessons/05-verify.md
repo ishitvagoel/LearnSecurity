@@ -3,7 +3,7 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## Until you can fail it, it is still a slogan
+## Check it
 
 “We block private IPs” is not evidence. “HTTPS only” is a tool observation. The check is: `allowed` is false for the named link-local metadata URL and for loopback, and true for the named lab host on https. That observation must be **false** on the broken files (returns true for link-local) and **true** on the repaired files. Tests **must not** fetch.
 

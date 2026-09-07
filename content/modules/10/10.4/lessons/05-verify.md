@@ -3,7 +3,7 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## Until you can fail it, it is still a slogan
+## Check it
 
 “`NODE_ENV=production`” is not evidence. “Canary 10%” is a tool observation. The check is: `boot_ok("prod", True)` is false and `("prod", False)` may boot. That prod-plus-debug observation must be **false** on the broken files and **true** on the repaired files. Do not boot a live host.
 

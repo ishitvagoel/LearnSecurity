@@ -25,7 +25,7 @@ flowchart TD
 
 The lab’s repaired files require `https` and host in `{"lab.securecollab.test"}`, and deny named block hosts. Production still needs a dedicated egress proxy if customer sites must be fetched. DNS rebinding and IPv6 encodings remain leftover. Open-redirect UX is a sister check. Telling the person they are leaving the site is advanced work, not this check.
 
-Industry lists ask for the allow-list before calling another service. The check below is that sentence for `allowed`. **Do not fetch.**
+Industry lists ask for the allow-list before calling another service. This week's check is the one that covers `allowed`. **Do not fetch.**
 
 ## What the repaired files must show
 

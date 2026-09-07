@@ -20,11 +20,13 @@ const HEADING_EXACT: Record<string, string> = {
   "Usability and accessibility": "Can people still use it",
   "HITL / WCAG 2.2": "Can people still use it",
   "An invariant that cannot fail a test is still a slogan":
-    "Until you can fail it, it is still a slogan",
+    "Check it",
   "If you cannot test it, it is still a slogan":
-    "Until you can fail it, it is still a slogan",
+    "Check it",
   "If you cannot check it, it is still a slogan":
-    "Until you can fail it, it is still a slogan",
+    "Check it",
+  "Until you can fail it, it is still a slogan":
+    "Check it",
   "What this is not": "What this is not",
   "The claim this module owns": "The rule",
   "Start with the claim": "Start with the rule",
@@ -373,7 +375,8 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/\bthis origin\b/gi, "this website"],
   [/\bthe TCB\b/g, "what you trust"],
   [/\bTCB\b/g, "what you trust"],
-  [/this week's pytest/g, "this week's check"],
+  [/This week's pytest is that sentence for/g, "This week's check is the one that covers"],
+  [/The check below is that sentence for/g, "This week's check is the one that covers"],
   [/this week’s pytest/g, "this week's check"],
   [/\bthat pytest\b/gi, "that check"],
   [/\bthis pytest\b/gi, "this check"],

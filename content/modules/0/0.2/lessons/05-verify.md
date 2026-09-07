@@ -4,7 +4,7 @@
 **Loop step:** 5 Verify
 **Standards:** Gate 1 evidence rules of this course. NICE is vocabulary, not the oracle.
 
-## Until you can fail it, it is still a slogan
+## Check it
 
 “They’re advanced” is not evidence. “LMS mastery is 100%” is a tool observation. The check is: `quiz_score_grants_phase1_skip(100)` is false. That must be **false** on `--impl vulnerable` (the helper returns true) and **true** on `--impl fixed`. Do not hack an LMS; the integer is enough.
 

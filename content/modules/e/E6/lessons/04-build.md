@@ -24,7 +24,7 @@ The repaired files require those three fields. Production still needs someone to
 
 Expire on `review_by`. Re-accept with fields or fix the hole. Do not silently extend.
 
-A design-review guide is vocabulary. The check below is that sentence for incomplete exceptions.
+A design-review guide is vocabulary. This week's check is the one that covers incomplete exceptions.
 
 ## What the repaired files must show
 

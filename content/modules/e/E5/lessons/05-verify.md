@@ -3,7 +3,7 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## Until you can fail it, it is still a slogan
+## Check it
 
 “We have row-level rules” is not evidence. “A famous-bugs list is mapped” is a tool observation. The check is: `tenant_for({"tenant": "A"}, {"tenant": "B"}) == "A"` and matching A/A may keep A. The JSON body is not the tenant. The body-switch observation must be **false** on the broken files (returns B: body tenant overrides session) and **true** on the repaired files (bind tenant from the session). Do not hit public companies.
 

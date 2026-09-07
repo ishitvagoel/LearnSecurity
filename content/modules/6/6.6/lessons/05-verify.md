@@ -3,7 +3,7 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## Until you can fail it, it is still a slogan
+## Check it
 
 “Unique constraint exists” is not evidence. “We return 400” is a tool observation. The check is: first `accept("t1")` is true and second `accept("t1")` is false. That second observation must be **false** on the broken files (the helper still returns true) and **true** on the repaired files.
 

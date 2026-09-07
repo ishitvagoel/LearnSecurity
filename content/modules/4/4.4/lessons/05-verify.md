@@ -3,7 +3,7 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## Until you can fail it, it is still a slogan
+## Check it
 
 “We have roles” is not evidence. “Ids are hard to guess” is a tool observation. The check is: `can_read("bob", "n2") is False`. That observation must be **false** on the broken files (returns true) and **true** on the repaired files.
 

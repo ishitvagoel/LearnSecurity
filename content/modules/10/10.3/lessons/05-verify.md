@@ -3,7 +3,7 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## Until you can fail it, it is still a slogan
+## Check it
 
 "We use Kubernetes" is not evidence. "CIS is green" is a tool observation. The check is: `pod_ok("cluster-admin")` is false and `"app"` may run. That cluster-admin observation must be **false** on the broken files and **true** on the repaired files. Do not apply manifests to a live cluster.
 

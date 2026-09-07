@@ -3,7 +3,7 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## Until you can fail it, it is still a slogan
+## Check it
 
 “CODEOWNERS is on” is not evidence. “Maturity Level 3” is a tool observation. The check is: `merge_ok({})` is false and `{"threat_model": "TM-12"}` may merge. That empty-change observation must be **false** on the broken files (they return true) and **true** on the repaired files. Do not merge in a live GitHub org.
 

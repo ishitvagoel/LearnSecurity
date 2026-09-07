@@ -22,7 +22,7 @@ flowchart TD
 
 The lab’s repaired files return `None` whenever the query has `access_token`. A magic-link email is still a URL token — short-lived, one-use, then exchange for a cookie; do not keep the URL as the standing session.
 
-Industry lists ask for secrets out of the URL. The check below is that sentence for `access_token`, not a full catalogue of log redaction.
+Industry lists ask for secrets out of the URL. This week's check is the one that covers `access_token`, not a full catalogue of log redaction.
 
 ## What the repaired files must show
 

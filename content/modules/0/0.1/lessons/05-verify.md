@@ -4,7 +4,7 @@
 **Loop step:** 5 Verify
 **Standards:** WSTG 4.2 as catalogue, not the oracle; CSF 2.0 GV as outcome language.
 
-## Until you can fail it, it is still a slogan
+## Check it
 
 “I’ll be careful” is not evidence. “The guide has an authorization chapter” is a catalogue observation. The check is: `target_is_authorized("https://example.com/")` is false. That must be **false** on `--impl vulnerable` (the helper returns true) and **true** on `--impl fixed`. Do not fetch example.com; the test string is enough.
 

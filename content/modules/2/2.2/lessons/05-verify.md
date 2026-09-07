@@ -3,7 +3,7 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## Until you can fail it, it is still a slogan
+## Check it
 
 On the happy path, HTTP 200 over HTTPS is not evidence. The check must be **false** on the broken files and **true** on the repaired files.
 

@@ -3,7 +3,7 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## Until you can fail it, it is still a slogan
+## Check it
 
 “We don’t use a shell” is not evidence. “Filename is sanitized” is a tool observation. The check is: `argv_for_list("notes")[:2] != ["sh", "-c"]` and `uses_shell("notes") is False`. That observation must be **false** on the broken files (returns `sh -c`) and **true** on the repaired files. Tests **must not** execute the argv.
 

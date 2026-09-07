@@ -3,7 +3,7 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## Until you can fail it, it is still a slogan
+## Check it
 
 “SameSite is Lax” is not evidence. “CORS is configured” is a tool observation. The check is: `allow_share` for a foreign origin with `token=None` is False. That observation must be **false** on the broken files (returns true) and **true** on the repaired files.
 

@@ -24,7 +24,7 @@ flowchart TD
 
 Do not accept “we called revoke” as consultation. The repaired files require owner-or-grant on this `read`. Production still needs every *other* read path — delayed workers and phone caches can serve the old grant. Copies already sent are gone from what this check can prove. Access-rights change inside an already-open session without signing in again is extra, advanced work: storing a revoke row is not in-session deny.
 
-Industry lists ask for permission enforced. The check below is that sentence for post-revoke read.
+Industry lists ask for permission enforced. This week's check is the one that covers post-revoke read.
 
 ## What the repaired files must show
 

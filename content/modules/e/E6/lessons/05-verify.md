@@ -3,7 +3,7 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## Until you can fail it, it is still a slogan
+## Check it
 
 “We measure maturity” is not evidence. “Legal said yes” is a tool observation. The check is: `accept_exception({"owner": "", "review_by": None})` is false and a complete record may accept. The empty-owner observation must be **false** on the broken files and **true** on the repaired files. Do not file live exceptions.
 

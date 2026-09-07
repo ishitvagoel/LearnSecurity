@@ -3,7 +3,7 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## Until you can fail it, it is still a slogan
+## Check it
 
 “We threat-modeled in the sprint” is not evidence. “Scanner was green” is a tool observation. The check is: `threats_from_scan(True)` contains `cross-tenant-read`. That observation must be **false** on the broken files and **true** on the repaired files.
 

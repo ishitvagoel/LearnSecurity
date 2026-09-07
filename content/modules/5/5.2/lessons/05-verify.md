@@ -3,7 +3,7 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## Until you can fail it, it is still a slogan
+## Check it
 
 “We use AES” is not evidence. “Column is bytea” is a tool observation. The check is: Base64 decode of `protect("secret")` is not `"secret"`, and `looks_encrypted` is true on the repaired stand-in. That observation must be **false** on the broken files (decode equals secret) and **true** on the repaired files.
 

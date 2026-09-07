@@ -22,7 +22,7 @@ flowchart TD
 
 The repaired files ignore extras entirely (`open_link` returns without writing SESSION). Production may still honor locators such as `note=n1` after 1.2 / 4.4 — this check only requires the principal stay alice. Verified App Links still pass query strings. Custom schemes remain hijackable. WebView `addJavascriptInterface` is a new IPC (6.2).
 
-Industry lists ask for authorization on a trusted service layer. The check below is that sentence for `open_link({"as": "admin"})`.
+Industry lists ask for authorization on a trusted service layer. This week's check is the one that covers `open_link({"as": "admin"})`.
 
 ## What the repaired files must show
 

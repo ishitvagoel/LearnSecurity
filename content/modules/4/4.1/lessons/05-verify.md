@@ -3,7 +3,7 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## Until you can fail it, it is still a slogan
+## Check it
 
 “We deleted the row” is not evidence. “Single sign-on is on” is a tool observation. The check is: after `delete_user("alice")`, `session_valid("alice")` is False. That observation must be **false** on the broken files (the helper still returns true) and **true** on the repaired files.
 

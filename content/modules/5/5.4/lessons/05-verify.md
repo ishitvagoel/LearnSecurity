@@ -3,7 +3,7 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## Until you can fail it, it is still a slogan
+## Check it
 
 “TLS is on” is not evidence. “Force HTTPS is checked” is a tool observation. The check is: `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` is False. That observation must be **false** on the broken files (the helper still returns true) and **true** on the repaired files.
 

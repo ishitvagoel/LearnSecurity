@@ -3,7 +3,7 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## Until you can fail it, it is still a slogan
+## Check it
 
 “Matrix imported” is not evidence. “CI is green” is a tool observation. The check is: `covered("AUTHZ-1", [status-only])` is false and `covered("AUTHZ-1", [isolation assert])` may be true. That status-only observation must be **false** on the broken files and **true** on the repaired files. Do not call a live checklist portal.
 

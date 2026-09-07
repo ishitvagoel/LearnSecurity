@@ -3,7 +3,7 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## Until you can fail it, it is still a slogan
+## Check it
 
 “Rate limit is on” is not evidence. “The button is disabled” is a tool observation. The check is: `allow(4)` is false and `allow(3)` is true. That fourth-export observation must be **false** on the broken files (returns true) and **true** on the repaired files. Do not load-test public hosts.
 

@@ -3,7 +3,7 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## Until you can fail it, it is still a slogan
+## Check it
 
 “We put max on the select” is not this topic’s evidence. “The filter has an awareness-list rule” is a tool observation. The check is: after eight `add_share()` calls, `last <= 5`. That observation must be **false** on the broken files and **true** on the repaired files.
 
