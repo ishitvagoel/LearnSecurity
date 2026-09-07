@@ -25,7 +25,7 @@ If both pass, you are not looking at `body_retained` after delete.
 |---|---|
 | Normal | Analytics present before delete (`test_active_account_analytics_present`; may pass on both) |
 | Wrong input / abuse | Analytics and search bodies gone after delete; broken files must fail |
-| Failure | Honest-path tests may pass on both; that does not excuse the leftover-copy tests |
+| Failure | Honest-path tests may pass on both; you still need the leftover-copy tests |
 | Not claimed | Backups (later); a phone's offline cache (later); scheduled warehouse jobs |
 
 The test `test_deleted_account_leaves_no_analytics_body` calls `delete_account` then `body_retained`. That check is there so a leftover warehouse body still fails.

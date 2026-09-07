@@ -716,6 +716,14 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/ Rule, retest, and leftover change\./g, ""],
   [/ Env, debug, and leftover change\./g, ""],
   [/ Person, object, reader, and leftover change\./g, ""],
+  [
+    /Honest (.+?) may pass on both implementations\. That does not excuse the (.+?)\./g,
+    "$1 may pass on both sides. You still need the $2.",
+  ],
+  [
+    /may pass on both implementations; that does not excuse the /g,
+    "may pass on both sides; you still have to deny the ",
+  ],
   [/One page\. No answer keys\. /g, "Write one page. Leave the answer keys closed. "],
   [/One page\. No keys\. /g, "Write one page. Leave the keys closed. "],
   [/Why it happens vs what it costs stays split here too: the /g, "The "],

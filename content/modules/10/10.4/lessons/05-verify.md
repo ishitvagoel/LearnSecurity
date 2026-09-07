@@ -30,7 +30,7 @@ If both pass, you are not looking at prod plus debug.
 
 The test `test_prod_debug_must_not_boot` is there so always-true `boot_ok` still fails.
 
-Honest prod without debug may pass on both implementations. That does not excuse the prod-plus-debug deny test. If the broken files do not fail `test_prod_debug_must_not_boot`, the lab is miswired — fix the wiring, not the assertion.
+Production with debug off may pass on both sides. You still have to deny production with debug on. If the broken files do not fail `test_prod_debug_must_not_boot`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/10.4/10.4-lab/tests --impl vulnerable

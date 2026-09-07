@@ -30,7 +30,7 @@ If both pass, you are not looking at cluster-admin.
 
 The test `test_cluster_admin_pod_is_denied` is there so always-true `pod_ok` still fails.
 
-Honest `"app"` may pass on both implementations. That does not excuse the cluster-admin deny test. If the broken files do not fail `test_cluster_admin_pod_is_denied`, the lab is miswired — fix the wiring, not the assertion.
+A pod using `"app"` may pass on both sides. You still have to deny cluster-admin. If the broken files do not fail `test_cluster_admin_pod_is_denied`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/10.3/10.3-lab/tests --impl vulnerable

@@ -30,7 +30,7 @@ python3 -m pytest labs/4.5/4.5-lab/tests --impl vulnerable
 python3 -m pytest labs/4.5/4.5-lab/tests --impl fixed
 ```
 
-The honest expected-aud test may pass on both. That does not excuse the deny tests. If the broken files do not fail other-api, the lab is miswired — fix the wiring, not the check. A setup error is not proof the rule holds.
+A token whose `aud` is this API may pass on both sides. You still have to deny `other-api` and a missing audience. If the broken files do not fail other-api, the lab is miswired — fix the wiring, not the check. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 

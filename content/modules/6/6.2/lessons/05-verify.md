@@ -34,7 +34,7 @@ python3 -m pytest labs/6.2/6.2-lab/tests --impl vulnerable
 python3 -m pytest labs/6.2/6.2-lab/tests --impl fixed
 ```
 
-Honest titles may pass on both implementations. That does not excuse the encode check. If the broken files do not fail `"<img" not in out`, the practice is miswired — fix the wiring, not the check.
+An honest title may survive on both sides. You still have to encode `<`. If the broken files do not fail `"<img" not in out`, the practice is miswired — fix the wiring, not the check.
 
 ## What the checks do not prove
 

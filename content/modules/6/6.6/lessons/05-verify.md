@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P["Must pass: consume-once"]
 ```
 
-If both pass, you are not looking at the second `t1`. First accept of `t1` may pass on both implementations. That does not excuse the second-accept test.
+If both pass, you are not looking at the second `t1`. The first accept of `t1` may pass on both sides. You still have to deny the second accept.
 
 ## What the check has to show
 

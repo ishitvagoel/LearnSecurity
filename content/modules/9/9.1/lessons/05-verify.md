@@ -30,7 +30,7 @@ If both pass, you are not looking at `asserts_isolation`.
 
 The test `test_status_only_row_is_not_coverage` is there so membership without an isolation assert cannot count as coverage.
 
-Honest isolation-assert rows may pass on both implementations. That does not excuse the status-only deny test. If the broken files do not fail `test_status_only_row_is_not_coverage`, the lab is miswired — fix the wiring, not the assertion.
+A row that actually asserts isolation may pass on both sides. You still have to deny a status-only row. If the broken files do not fail `test_status_only_row_is_not_coverage`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/9.1/9.1-lab/tests --impl vulnerable

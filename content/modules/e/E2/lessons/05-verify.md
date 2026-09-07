@@ -32,7 +32,7 @@ python3 -m pytest labs/E2/e2-lab/tests --impl vulnerable
 python3 -m pytest labs/E2/e2-lab/tests --impl fixed
 ```
 
-Honest enforcing CSP may pass on both implementations. That does not excuse the Report-Only deny check. If the broken files do not fail `test_report_only_is_not_enforcement`, the practice is miswired — fix the wiring, not the check.
+An enforcing content-security policy may pass on both sides. You still have to deny Report-Only treated as on. If the broken files do not fail `test_report_only_is_not_enforcement`, the practice is miswired — fix the wiring, not the check.
 
 ## What the checks do not prove
 

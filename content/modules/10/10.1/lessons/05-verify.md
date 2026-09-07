@@ -30,7 +30,7 @@ If both pass, you are not looking at `threat_model`.
 
 The test `test_merge_requires_threat_model_id` is there so always-true `merge_ok` still fails.
 
-Honest `{"threat_model": "TM-12"}` may pass on both implementations. That does not excuse the empty-change deny test. If the broken files do not fail `test_merge_requires_threat_model_id`, the lab is miswired — fix the wiring, not the assertion.
+A change that already cites `TM-12` may pass on both sides. You still have to deny a change with no threat-model id. If the broken files do not fail `test_merge_requires_threat_model_id`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/10.1/10.1-lab/tests --impl vulnerable

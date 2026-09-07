@@ -32,7 +32,7 @@ python3 -m pytest labs/6.3/6.3-lab/tests --impl vulnerable
 python3 -m pytest labs/6.3/6.3-lab/tests --impl fixed
 ```
 
-Honest same-origin-with-token may pass on both (broken files allow any cookie). Missing cookie may pass on both. That does not excuse the foreign-origin and same-origin-without-token tests. If the broken files do not fail foreign origin, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
+Same-origin with a token may pass on both sides (broken files allow any cookie). A missing cookie may also pass on both. You still have to deny a foreign origin, and same-origin with no token. If the broken files do not fail foreign origin, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 

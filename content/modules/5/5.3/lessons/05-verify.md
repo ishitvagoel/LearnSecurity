@@ -30,7 +30,7 @@ python3 -m pytest labs/5.3/5.3-lab/tests --impl vulnerable
 python3 -m pytest labs/5.3/5.3-lab/tests --impl fixed
 ```
 
-The honest current-secret test may pass on both. That does not excuse the default-dead and missing-current tests. If the broken files do not fail `sk-lab-hardcoded`, the lab is miswired — fix the wiring, not the check. A setup error is not proof the rule holds.
+The current secret may authenticate on both sides. You still have to kill the hardcoded default, and deny a missing current secret. If the broken files do not fail `sk-lab-hardcoded`, the lab is miswired — fix the wiring, not the check. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 

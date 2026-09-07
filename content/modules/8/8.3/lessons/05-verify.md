@@ -34,7 +34,7 @@ python3 -m pytest labs/8.3/8.3-lab/tests --impl vulnerable
 python3 -m pytest labs/8.3/8.3-lab/tests --impl fixed
 ```
 
-Honest note locators may pass on both implementations. That does not excuse the `as=` deny check. If the broken files do not fail `test_deeplink_as_param_does_not_switch_user`, the practice is miswired — fix the wiring, not the check.
+A deep link that only names the note may pass on both sides. You still have to ignore `as=`. If the broken files do not fail `test_deeplink_as_param_does_not_switch_user`, the practice is miswired — fix the wiring, not the check.
 
 ## What the checks do not prove
 

@@ -32,7 +32,7 @@ python3 -m pytest labs/0.2/0.2-bridge/tests --impl vulnerable
 python3 -m pytest labs/0.2/0.2-bridge/tests --impl fixed
 ```
 
-Honest low-score tests may pass on both. If the broken files do not fail the score-100 assertion, the practice is miswired — fix the wiring, not the assertion.
+A low quiz score that does not skip part 1 may pass on both sides. If the broken files do not fail the score-100 assertion, the practice is miswired — fix the wiring, not the assertion.
 
 ## What the checks do not prove
 

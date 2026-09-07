@@ -32,7 +32,7 @@ The second what must not happen is **`note_body` in logs** — `test_cannot_clos
 
 The test `test_cannot_close_without_recovery` is there so always-true `close_incident` still fails.
 
-Honest recovery plus safe logs may pass on both implementations. That does not excuse the two deny tests. If the broken files do not fail `test_cannot_close_without_recovery`, the lab is miswired — fix the wiring, not the assertion.
+A close with recovery done and safe logs may pass on both sides. You still have to deny a close that skipped recovery, and a close whose logs hold a note. If the broken files do not fail `test_cannot_close_without_recovery`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/10.5/10.5-lab/tests --impl vulnerable

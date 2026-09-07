@@ -31,7 +31,7 @@ python3 -m pytest labs/6.4/6.4-lab/tests --impl vulnerable
 python3 -m pytest labs/6.4/6.4-lab/tests --impl fixed
 ```
 
-Honest relative names may pass on both implementations. That does not excuse the escape test. Map each test to the prefix row you wrote on the map page. If the broken files do not fail the prefix check, the lab is miswired — fix the wiring, not the check. A setup error is not proof the rule holds.
+A relative name under the lab folder may pass on both sides. You still have to stop `../` from leaving it. Map each test to the prefix row you wrote on the map page. If the broken files do not fail the prefix check, the lab is miswired — fix the wiring, not the check. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 

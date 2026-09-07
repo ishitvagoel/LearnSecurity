@@ -32,7 +32,7 @@ python3 -m pytest labs/0.1/0.1-orientation/tests --impl vulnerable
 python3 -m pytest labs/0.1/0.1-orientation/tests --impl fixed
 ```
 
-Honest localhost tests may pass on both. If the broken files do not fail the public-host assertion, the practice is miswired — fix the wiring, not the assertion.
+A localhost URL that is on the list may pass on both sides. If the broken files do not fail the public-host assertion, the practice is miswired — fix the wiring, not the assertion.
 
 ## What the checks do not prove
 

@@ -30,7 +30,7 @@ If both pass, you are not looking at digest equality.
 
 The test `test_hash_mismatch_refuses_install` is there so always-true `install_ok` still fails.
 
-Honest matching hashes may pass on both implementations. That does not excuse the mismatch deny test. If the broken files do not fail `test_hash_mismatch_refuses_install`, the lab is miswired — fix the wiring, not the assertion.
+Matching digests may pass on both sides. You still have to refuse a mismatch. If the broken files do not fail `test_hash_mismatch_refuses_install`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/10.2/10.2-lab/tests --impl vulnerable

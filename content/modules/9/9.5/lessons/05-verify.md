@@ -30,7 +30,7 @@ If both pass, you are not looking at missing retest.
 
 The test `test_cannot_close_without_retest` is there so always-true `close_finding` still fails.
 
-Honest `{retest: "pass"}` may pass on both implementations. That does not excuse the missing-retest deny test. If the broken files do not fail `test_cannot_close_without_retest`, the lab is miswired — fix the wiring, not the assertion.
+A close with `retest` set to `"pass"` may pass on both sides. You still have to deny a close that skipped retest. If the broken files do not fail `test_cannot_close_without_retest`, the lab is miswired — fix the wiring, not the assertion.
 
 ```text
 python3 -m pytest labs/9.5/9.5-lab/tests --impl vulnerable

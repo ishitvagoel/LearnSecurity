@@ -30,7 +30,7 @@ python3 -m pytest labs/E4/e4-lab/tests --impl vulnerable
 python3 -m pytest labs/E4/e4-lab/tests --impl fixed
 ```
 
-Honest `test_short_copy_may_fit` may pass on both implementations. That does not excuse the oversize deny test. If the broken files do not fail `test_copy_does_not_exceed_buffer`, the lab is miswired — fix the wiring, not the check. A setup error is not proof the rule holds.
+A short copy that fits the buffer may pass on both sides. You still have to deny a copy that overruns it. If the broken files do not fail `test_copy_does_not_exceed_buffer`, the lab is miswired — fix the wiring, not the check. A setup error is not proof the rule holds.
 
 ## What the tests do not prove
 
