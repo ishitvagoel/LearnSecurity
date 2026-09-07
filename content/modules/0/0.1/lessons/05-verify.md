@@ -6,7 +6,7 @@
 
 ## Check it
 
-“I’ll be careful” is not evidence. “The guide has an authorization chapter” is noticing a chapter title. The check is: `target_is_authorized("https://example.com/")` is false. That must be **false** on `--impl vulnerable` (the helper returns true) and **true** on `--impl fixed`. Do not fetch example.com; the test string is enough.
+Saying you’ll be careful does not authorize the target. An authorization chapter is a heading. `target_is_authorized("https://example.com/")` has to be false. On `--impl vulnerable` the helper returns true. On `--impl fixed` it returns false. Do not fetch example.com; the test string is enough.
 
 ## Picture: the broken files must fail on the public host
 

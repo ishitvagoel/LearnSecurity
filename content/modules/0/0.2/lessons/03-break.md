@@ -54,7 +54,7 @@ An LMS will let you mark a topic complete from a percentage. That is this bug cl
 python3 -m pytest labs/0.2/0.2-bridge/tests --impl vulnerable
 ```
 
-Write down the failing check `test_high_quiz_score_is_not_authorization`. Do not weaken the assertion. Do not probe live LMS hosts. An environment error is not evidence.
+Write down the failing check `test_high_quiz_score_is_not_authorization`. Do not weaken the assertion. Do not probe live LMS hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

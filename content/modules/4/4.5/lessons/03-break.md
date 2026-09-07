@@ -30,7 +30,7 @@ flowchart TD
 
 Audience is never consulted — not a dump of a production access token. `accept_token` returns true when `sub` is in the dict. You do not need a signed JWT. You must not paste a live one.
 
-A library saying the signature is fine is a tool observation, not that sentence.
+A library saying the signature is fine is not `accept_token` with a foreign audience.
 
 ## What to look at: the cause, not a hunt
 
@@ -64,7 +64,7 @@ Authlib and many JWT libraries will check a signature if you give them a key and
 python3 -m pytest labs/4.5/4.5-lab/tests --impl vulnerable
 ```
 
-Do not weaken it to “the JWT verifies.” A setup error is not proof the rule holds.
+“The JWT verifies” is not `accept_token` with a foreign audience. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

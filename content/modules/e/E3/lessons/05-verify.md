@@ -5,7 +5,7 @@
 
 ## Check it
 
-“We use Stripe” is not evidence. “The questionnaire is filed” is a tool observation. The check is: two `capture("k1")` leave count 1 and the first capture may succeed. That two-k1 observation must be **false** on `--impl vulnerable` (count 2) and **true** on `--impl fixed`. Do not hit live processors.
+Naming Stripe does not make capture idempotent. A filed questionnaire is a PDF. Two `capture("k1")` calls have to leave count 1, and the first capture may succeed. On `--impl vulnerable` the count becomes 2. On `--impl fixed` it stays 1. Do not hit live processors.
 
 ## Picture: a second k1 that charges twice must fail
 

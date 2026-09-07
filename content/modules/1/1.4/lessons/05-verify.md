@@ -5,7 +5,7 @@
 
 ## Check it
 
-On the happy path, “1 item collected” is not evidence. The check must be **false** on the broken files and **true** on the repaired files.
+A collected-item count of 1 does not prove the confirm control works from the keyboard. Mouse-only color still has to fail on the broken files and pass on the repaired ones.
 
 ## Picture: a broken recovery must fail the check
 

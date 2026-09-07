@@ -5,7 +5,7 @@
 
 ## The rule
 
-A green dashboard is not the fix. Hiding a scanner warning is not the fix. “We turned on code scanning” is not the fix.
+A green dashboard does not map HIGH findings. Muting a scanner finding does not write the map. Turning on code scanning is not the repair.
 
 The structural change is: `ship_ok` **is false unless every HIGH `id` is a key in `mappings`**. Missing map is deny. Structural means that join — not “the dashboard is green,” not a vendor default setup, not a maturity score.
 

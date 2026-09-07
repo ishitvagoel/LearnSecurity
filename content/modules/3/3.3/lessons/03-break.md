@@ -65,7 +65,7 @@ FastAPI does not scope PostgreSQL. Splitting into microservices without new gran
 python3 -m pytest labs/3.3/3.3-lab/tests --impl vulnerable
 ```
 
-Do not weaken it to “a role named app exists.” A setup error is not proof the rule holds.
+A role named `app` is not `can_select("app", "tB", "tA")`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

@@ -5,7 +5,7 @@
 
 ## Check it
 
-“We always approve after continuous integration” is not evidence. “The formatter passed” is a tool observation. The check is: `review_ok("x = eval(user)")` is false and `review_ok("x = int(user)")` may be true. The eval-approve observation must be **false** on `--impl vulnerable` (returns true) and **true** on `--impl fixed`. Do not run eval on live input.
+Approving because continuous integration passed does not reject `eval`. A formatter pass is style. `review_ok("x = eval(user)")` has to be false, and `review_ok("x = int(user)")` may be true. On `--impl vulnerable` the eval line still returns true. On `--impl fixed` it does not. Do not run eval on live input.
 
 ## Picture: broken must fail eval-approve
 
@@ -30,7 +30,7 @@ If both pass, you are not looking at eval-on-user.
 
 The test `test_eval_on_user_input_is_rejected` is there so always-true `review_ok` still fails. Do not add a working eval payload to “make the test more real.” The lab string `x = eval(user)` is enough.
 
-Searching for `eval` in a policy PDF without calling `review_ok("x = eval(user)")` is not evidence. This practice never runs eval on live input.
+An `eval` mention in a policy PDF is not `review_ok("x = eval(user)")`. This practice never runs eval on live input.
 
 ```text
 python3 -m pytest labs/9.2/9.2-lab/tests --impl vulnerable

@@ -5,7 +5,7 @@
 
 ## Check it
 
-“`minifyEnabled` is true” is not evidence. “Play App Signing is on” is a tool observation. The check is: `api_allowed("debug", "ok")` is false, and `api_allowed("release", "ok")` may be true. The debug-plus-ok observation must be **false** on `--impl vulnerable` (returns true) and **true** on `--impl fixed`. Do not unpack store APKs.
+`minifyEnabled` true does not keep the debug client id off the API. Play App Signing is a store setting. `api_allowed("debug", "ok")` has to be false, and `api_allowed("release", "ok")` may be true. On `--impl vulnerable` debug-plus-ok still returns true. On `--impl fixed` it does not. Do not unpack store APKs.
 
 ## Picture: broken files must fail: debug plus ok
 

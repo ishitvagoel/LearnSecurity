@@ -5,7 +5,7 @@
 
 ## Check it
 
-"We use retrieval" is not evidence. "The prompt forbids SQL" is a tool observation. The check is: `run_tool("exec_sql", {})` is None and `search_notes` may run. That `exec_sql` observation must be **false** on the broken files and **true** on the repaired files. Do not call live models.
+Turning on retrieval does not block `exec_sql`. A prompt that forbids SQL is a string. `run_tool("exec_sql", {})` has to be None, and `search_notes` may run. On the broken files `exec_sql` still runs. On the repaired files it does not. Do not call live models.
 
 ## Picture: a broken runtime must fail the check
 
@@ -37,7 +37,7 @@ python3 -m pytest labs/E1/e1-lab/tests --impl vulnerable
 python3 -m pytest labs/E1/e1-lab/tests --impl fixed
 ```
 
-Searching for `exec_sql` in a prompt file without calling `run_tool("exec_sql", {})` is not evidence. This practice never opens a live model.
+An `exec_sql` string in a prompt file is not `run_tool("exec_sql", {})`. This practice never opens a live model.
 
 ## What the tests do not prove
 
@@ -45,7 +45,7 @@ Searching for `exec_sql` in a prompt file without calling `run_tool("exec_sql", 
 - Agent credentials rotate
 - A coding assistant cannot hallucinate packages
 - Cryptographically bound approvals (extra, advanced)
-- An assurance gate complete
+- This page does not finish an AI-tooling check-in
 
 ## Practice
 

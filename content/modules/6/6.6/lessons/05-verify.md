@@ -5,7 +5,7 @@
 
 ## Check it
 
-“Unique constraint exists” is not evidence. “We return 400” is a tool observation. The check is: first `accept("t1")` is true and second `accept("t1")` is false. That second observation must be **false** on the broken files (the helper still returns true) and **true** on the repaired files.
+A unique index you never write does not stop the second join. Returning 400 after the row exists is late. First `accept("t1")` has to be true and the second `accept("t1")` has to be false. On the broken files the helper still returns true the second time. On the repaired files it does not.
 
 ## Picture: second t1 must fail the check
 
@@ -30,7 +30,7 @@ If both pass, you are not looking at the second `t1`. The first accept of `t1` m
 
 The test `test_invite_token_is_single_use` is there so a second true still fails. Sequential calls are enough; do not add a race harness.
 
-Searching for `UNIQUE` without calling `accept("t1")` twice is not evidence. This practice never opens a live mailer.
+A `UNIQUE` keyword is not two `accept("t1")` calls. This practice never opens a live mailer.
 
 ```text
 python3 -m pytest labs/6.6/6.6-lab/tests --impl vulnerable

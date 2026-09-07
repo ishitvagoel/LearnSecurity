@@ -5,7 +5,7 @@
 
 ## Check it
 
-“CODEOWNERS is on” is not evidence. “Maturity Level 3” is a tool observation. The check is: `merge_ok({})` is false and `{"threat_model": "TM-12"}` may merge. That empty-change observation must be **false** on the broken files (they return true) and **true** on the repaired files. Do not merge in a live GitHub org.
+A CODEOWNERS file does not require a threat-model id. Maturity Level 3 is a score. `merge_ok({})` has to be false, and `{"threat_model": "TM-12"}` may merge. On the broken files the empty change still returns true. On the repaired files it does not. Do not merge in a live GitHub org.
 
 ## Picture: a broken merge check must fail the empty-change test
 
@@ -37,7 +37,7 @@ python3 -m pytest labs/10.1/10.1-lab/tests --impl vulnerable
 python3 -m pytest labs/10.1/10.1-lab/tests --impl fixed
 ```
 
-Searching for `CODEOWNERS` in a repo without calling `merge_ok({})` is not evidence. This practice never opens a live GitHub org.
+A `CODEOWNERS` file in the repo is not `merge_ok({})`. This practice never opens a live GitHub org.
 
 ## What the checks do not prove
 

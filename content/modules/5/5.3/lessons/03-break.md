@@ -29,7 +29,7 @@ flowchart TD
 
 The default never died — not a scan of GitHub for real keys. `auth` returns true if `current` is missing (allow when it should deny) **or** if presented equals `DEFAULT` **or** `current`. You do not need a live key. You must not search for one.
 
-A secrets-manager sticker is a tool observation, not that sentence.
+A secrets-manager sticker is not `auth` on the rotated secret.
 
 ## What to look at: the cause, not a hunt
 

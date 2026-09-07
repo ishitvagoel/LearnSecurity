@@ -5,7 +5,7 @@
 
 ## Check it
 
-“SBOM generated” is not evidence. “Provenance badge” is a how-it-was-built observation. The check is: `install_ok("aaa", "bbb")` is false and matching hashes may install. That mismatch observation must be **false** on the broken files and **true** on the repaired files. Do not fetch live packages.
+Generating an SBOM does not compare hashes. A provenance badge is how-it-was-built theater. `install_ok("aaa", "bbb")` has to be false, and matching hashes may install. On the broken files the mismatch still installs. On the repaired files it does not. Do not fetch live packages.
 
 ## Picture: a broken install check must fail the mismatch test
 
@@ -37,7 +37,7 @@ python3 -m pytest labs/10.2/10.2-lab/tests --impl vulnerable
 python3 -m pytest labs/10.2/10.2-lab/tests --impl fixed
 ```
 
-Searching for `CycloneDX` in CI without calling `install_ok("aaa", "bbb")` is not evidence. This practice never opens a live registry.
+A CycloneDX filename in CI is not `install_ok("aaa", "bbb")`. This practice never opens a live registry.
 
 ## What the tests do not prove
 

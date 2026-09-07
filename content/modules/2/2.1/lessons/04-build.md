@@ -5,7 +5,7 @@
 
 ## The rule
 
-A denylist of yesterday’s string is not the fix. Hiding a scanner warning is not the fix. “Trust the framework” is not the fix.
+A list of last week’s bad strings does not bind the schema. Muting a scanner finding does not bind it either. “Trust the framework” is still a slogan.
 
 The structural change is: the object **actually has one company meaning** before the who-is-allowed check runs. Refuse duplicate keys, or compare `acl_tenant == stored_tenant` and deny on mismatch.
 

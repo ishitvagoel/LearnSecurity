@@ -5,7 +5,7 @@
 
 ## Check it
 
-“We block private IPs” is not evidence. “HTTPS only” is a tool observation. The check is: `allowed` is false for the named link-local metadata URL and for loopback, and true for the named lab host on https. That observation must be **false** on the broken files (returns true for link-local) and **true** on the repaired files. Tests **must not** fetch.
+A private-IP denylist does not cover link-local metadata. “HTTPS only” is a scheme check. `allowed` has to be false for the named link-local metadata URL and for loopback, and true for the named lab host on https. On the broken files link-local still returns true. On the repaired files it does not. Tests **must not** fetch.
 
 ## Picture: link-local allowed must fail the check
 
@@ -30,7 +30,7 @@ If both pass, you are not looking at link-local.
 
 The test `test_link_local_metadata_is_denied` is there so a scheme-only allow still fails. The destination is a **string** in the practice files — do not send packets to it.
 
-Searching for `https` in a prefix check without calling `allowed` on the link-local string is not evidence. This practice never fetches.
+An `https` prefix check is not `allowed` on the link-local string. This practice never fetches.
 
 ```text
 python3 -m pytest labs/6.5/6.5-lab/tests --impl vulnerable

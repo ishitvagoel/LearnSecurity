@@ -5,7 +5,7 @@
 
 ## Check it
 
-“Coverage 92%” is not evidence. “The testing-guide row is ticked” is a tool observation. The check is: `is_security_test({"status_asserted": True})` is false and a row that names `forbidden_outcome` may count. That 200-only observation must be **false** on the broken files and **true** on the repaired files. Do not fuzz public hosts.
+Coverage at 92% does not name what must not happen. A ticked testing-guide row is a checkbox. `is_security_test({"status_asserted": True})` has to be false, and a row that names `forbidden_outcome` may count. On the broken files a 200-only row still counts. On the repaired files it does not. Do not fuzz public hosts.
 
 ## Picture: a broken suite must fail the check
 
@@ -37,7 +37,7 @@ python3 -m pytest labs/9.3/9.3-lab/tests --impl vulnerable
 python3 -m pytest labs/9.3/9.3-lab/tests --impl fixed
 ```
 
-Searching for a testing-guide id in a checklist without calling `is_security_test({"status_asserted": True})` is not evidence. This practice never opens a live app.
+A testing-guide id in a checklist is not `is_security_test({"status_asserted": True})`. This practice never opens a live app.
 
 ## What the tests do not prove
 

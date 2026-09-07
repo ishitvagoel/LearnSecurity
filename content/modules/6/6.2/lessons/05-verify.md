@@ -5,7 +5,7 @@
 
 ## Check it
 
-“We added a content-security policy” is not evidence. “React is on” is a tool observation. The check is: `render` of a string containing `<` has `&lt;` and does not contain the extra-tag marker `"<img"`. That observation must be **false** on `--impl vulnerable` (raw `<` remains) and **true** on `--impl fixed`.
+Adding a content-security header does not encode the note. A React import is a library. `render` of a string containing `<` has to include `&lt;` and must not include the extra-tag marker `"<img"`. On `--impl vulnerable` the raw `<` remains. On `--impl fixed` it is encoded.
 
 ## Picture: broken files must fail: raw <
 

@@ -5,7 +5,7 @@
 
 ## Check it
 
-“We use UUID names” is not this topic’s evidence. “We strip `..`” is a tool observation. The check is: `resolve("../outside")` raises `ValueError` **or** the canonical path is still `/tmp/sc-lab` or a child. That observation must be **false** on the broken files (join leaves the folder) and **true** on the repaired files. Tests must not read host files outside the lab folder.
+UUID filenames do not keep `../` inside the folder. Stripping `..` in one place is a string munge. `resolve("../outside")` has to raise `ValueError` **or** stay under `/tmp/sc-lab`. On the broken files join leaves the folder. On the repaired files it does not. Tests must not read host files outside the lab folder.
 
 ## Picture: a path that leaves the folder must fail
 

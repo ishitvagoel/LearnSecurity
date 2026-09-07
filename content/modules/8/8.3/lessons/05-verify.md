@@ -5,7 +5,7 @@
 
 ## Check it
 
-“App Links are verified” is not evidence. “The link is https” is a tool observation. The check is: after `open_link({"as": "admin"})`, `current_user()` is still `"alice"`. The `as=admin` observation must be **false** on `--impl vulnerable` (session becomes admin) and **true** on `--impl fixed`. Do not fire live Intents.
+Verified App Links do not ignore `as=admin`. An https link is a scheme. After `open_link({"as": "admin"})`, `current_user()` has to stay `"alice"`. On `--impl vulnerable` the session becomes admin. On `--impl fixed` it does not. Do not fire live Intents.
 
 ## Picture: broken files must fail: as=admin
 

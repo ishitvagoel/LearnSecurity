@@ -5,7 +5,7 @@
 
 ## The rule
 
-A denylist of yesterday's log format is not the fix. Hiding a scanner warning is not the fix. “We classified it Confidential” is not the fix.
+Last week’s log-format string is not redaction. Muting a scanner finding does not keep the body out of the line. Labeling the spreadsheet Confidential is not the repair.
 
 The structural change is: `log_event` **does not include the body string**. The logging API does not accept the body as a format argument. Not a regex after the fact. Not a spreadsheet label. Not `DEBUG=false` in one environment. Not a data-loss product name.
 

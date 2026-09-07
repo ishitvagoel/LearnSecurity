@@ -56,7 +56,7 @@ A proxy will open whatever you type. That is the bug class, not the rule. robots
 python3 -m pytest labs/0.1/0.1-orientation/tests --impl vulnerable
 ```
 
-Write down the failing check `test_public_host_is_out_of_scope`. Do not weaken the assertion. Do not probe public hosts. An environment error is not evidence.
+Write down the failing check `test_public_host_is_out_of_scope`. Do not weaken the assertion. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

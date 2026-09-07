@@ -31,7 +31,7 @@ Buying a log product does not pick the reader. Ticking a checklist does not pick
 
 FastAPI will still parse whatever JSON library you wired. PostgreSQL `jsonb` will keep one key if you cast. Messy keys do not persist two companies, and the deny log never includes the blob.
 
-A metric without a quarantine playbook still leaves a disagreeing row if a worker stored first. Unicode lookalike keys are leftover risk. Honest unique-key JSON still needs who-is-allowed. A dashboard green is not that sentence.
+A metric without a quarantine playbook still leaves a disagreeing row if a worker stored first. Unicode lookalike keys are leftover risk. Honest unique-key JSON still needs who-is-allowed. A green dashboard does not make duplicate keys one meaning.
 
 | Slice | This practice |
 |---|---|

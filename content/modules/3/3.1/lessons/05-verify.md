@@ -5,7 +5,7 @@
 
 ## Check it
 
-“We have a classification spreadsheet” is not evidence. “Logs are internal” is a trust assumption, not an observation. The check is: `log_event("note_read", "tenant-A-secret-body")` does not contain `tenant-A-secret-body` and does contain a redaction marker. That observation must be **false** on the broken files and **true** on the repaired files.
+A classification spreadsheet does not keep the note body out of the log. “Logs are internal” is a trust assumption, not an observation. After `log_event("note_read", "tenant-A-secret-body")`, the line must not contain `tenant-A-secret-body` and must contain a redaction marker. On the broken files the body is still in the line. On the repaired files it is not.
 
 ## Picture: a broken log line must fail the check
 
@@ -30,7 +30,7 @@ If both pass, you are not looking at the body substring.
 
 The test `test_note_body_is_not_logged` calls `log_event` with the synthetic body and asserts the substring is absent. That check is there so a confidential field in this log still fails.
 
-Searching for `Confidential` in a spreadsheet without calling `log_event` is not evidence. This practice never opens a production drain.
+A Confidential label in a spreadsheet is not `log_event`. This practice never opens a production drain.
 
 ```text
 python3 -m pytest labs/3.1/3.1-lab/tests --impl vulnerable

@@ -5,7 +5,7 @@
 
 ## Check it
 
-“SIEM green” is not evidence. “Paging acked” is a tool observation. The check is: recovery todo is false, `note_body` in logs is false, and done + ok may close. The recovery-todo observation must be **false** on the broken files and **true** on the repaired files. Do not query a live SIEM.
+A green SIEM tile does not close an incident with recovery still todo. An ack on the pager is an ack. Recovery todo has to stay unclosed, `note_body` must stay out of the logs, and done + ok may close. On the broken files recovery-todo still closes. On the repaired files it does not. Do not query a live SIEM.
 
 ## Picture: a broken close gate must fail the check
 
@@ -39,7 +39,7 @@ python3 -m pytest labs/10.5/10.5-lab/tests --impl vulnerable
 python3 -m pytest labs/10.5/10.5-lab/tests --impl fixed
 ```
 
-Searching for `PagerDuty` in a runbook without calling `close_incident({"recovery": "todo", "logs": "ok"})` is not evidence. This practice never opens a live host.
+A paging-product name in a runbook is not `close_incident({"recovery": "todo", "logs": "ok"})`. This practice never opens a live host.
 
 ## What the tests do not prove
 
@@ -48,7 +48,7 @@ Searching for `PagerDuty` in a runbook without calling `close_incident({"recover
 - That logs live on a separate system
 - That the support tool is least privilege
 - Logging every authorization decision without the sensitive data
-- An assurance gate complete
+- This page does not close an incident check-in
 
 ## Practice
 

@@ -5,7 +5,7 @@
 
 ## Check it
 
-“We set Referrer-Policy” is not evidence that the parser ignores query tokens. “HTTPS” is a hop observation. The check is: `session_from_request({"access_token": "secret"}, {}, None)` is `None`. That observation must be **false** on the broken files (returns `secret`) and **true** on the repaired files.
+A Referrer-Policy header does not prove the parser ignores query tokens. HTTPS is a hop. `session_from_request({"access_token": "secret"}, {}, None)` has to be `None`. On the broken files it returns `secret`. On the repaired files it does not.
 
 ## Picture: query returns secret must fail
 

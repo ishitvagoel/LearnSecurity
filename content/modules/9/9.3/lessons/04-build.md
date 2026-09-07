@@ -5,7 +5,7 @@
 
 ## The rule
 
-A denylist of yesterday’s test names is not the fix. Hiding a coverage warning is not the fix. “We ticked a testing-guide row” is not the fix.
+Last week’s test names are not a “what must not happen” assert. Hiding a coverage warning does not turn a 200-check into a security test. Ticking a testing-guide row is not the repair.
 
 The structural change is: `is_security_test` **requires `forbidden_outcome`**. HTTP 200 alone is a product test. Structural means that flag — not line coverage, not testing-guide membership, not “status asserted and we listed a guide id.”
 

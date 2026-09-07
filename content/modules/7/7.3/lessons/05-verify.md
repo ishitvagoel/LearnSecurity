@@ -5,7 +5,7 @@
 
 ## Check it
 
-“Webhooks are signed” is not evidence. “TLS is on” is a tool observation. The check is: `accept("", "body", "lab-secret")` is false and a matching HMAC over the same raw body is true. The empty-sig observation must be **false** on the broken files (returns true) and **true** on the repaired files. Tests stay local. Do not hit live providers.
+A “webhooks are signed” slide does not reject an empty signature. TLS is a hop. `accept("", "body", "lab-secret")` has to be false, and a matching HMAC over the same raw body has to be true. On the broken files the empty signature still returns true. On the repaired files it does not. Tests stay local. Do not hit live providers.
 
 ## Picture: empty sig on the broken files must fail the check
 
@@ -30,7 +30,7 @@ If both pass, you are not looking at a missing sig.
 
 The test `test_missing_signature_is_rejected` is there so an always-true `accept` still fails.
 
-Searching for `hmac` in source without calling `accept("", "body", "lab-secret")` is not evidence. This practice never POSTs a live webhook.
+An `hmac` import is not `accept("", "body", "lab-secret")`. This practice never POSTs a live webhook.
 
 ```text
 python3 -m pytest labs/7.3/7.3-lab/tests --impl vulnerable

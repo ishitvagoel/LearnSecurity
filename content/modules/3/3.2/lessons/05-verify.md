@@ -5,7 +5,7 @@
 
 ## Check it
 
-“We threat-modeled in the sprint” is not evidence. “Scanner was green” is a tool observation. The check is: `threats_from_scan(True)` contains `cross-tenant-read`. That observation must be **false** on the broken files and **true** on the repaired files.
+A sprint that “did threat modeling” does not name the leftover read. A green scanner tile is a score. `threats_from_scan(True)` still has to contain `cross-tenant-read`. On the broken files that row is missing. On the repaired files it is there.
 
 ## Picture: missing cross-tenant-read must fail
 

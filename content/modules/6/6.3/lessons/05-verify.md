@@ -5,7 +5,7 @@
 
 ## Check it
 
-“SameSite is Lax” is not evidence. “CORS is configured” is a tool observation. The check is: `allow_share` for a foreign origin with `token=None` is False. That observation must be **false** on the broken files (returns true) and **true** on the repaired files.
+SameSite=Lax does not decide a cross-site share. A CORS list is an origin header. `allow_share` for a foreign origin with `token=None` has to be False. On the broken files it returns true. On the repaired files it does not.
 
 ## Picture: broken must fail foreign origin
 

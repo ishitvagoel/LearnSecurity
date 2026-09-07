@@ -5,7 +5,7 @@
 
 ## Check it
 
-“We don’t use a shell” is not evidence. “Filename is sanitized” is a tool observation. The check is: `argv_for_list("notes")[:2] != ["sh", "-c"]` and `uses_shell("notes") is False`. That observation must be **false** on the broken files (returns `sh -c`) and **true** on the repaired files. Tests **must not** execute the argv.
+A comment that says you don’t use a shell does not change argv. A sanitized filename is a string munge. `argv_for_list("notes")[:2]` must not be `["sh", "-c"]`, and `uses_shell("notes")` has to be False. On the broken files it still returns `sh -c`. On the repaired files it does not. Tests **must not** execute the argv.
 
 ## Picture: sh -c must fail the check
 
@@ -30,7 +30,7 @@ If both pass, you are not looking at `sh -c`.
 
 The test `test_does_not_invoke_shell` is there so a shell string still fails. Do not add a name from the hostile class — extra commands, substitutions, or pipes a shell would parse — to “make the test more real.” Honest `notes` is enough.
 
-Searching for `shell=False` in a comment without calling `argv_for_list` is not evidence. This practice never starts a live process.
+A `shell=False` comment is not `argv_for_list`. This practice never starts a live process.
 
 ```text
 python3 -m pytest labs/6.1/6.1-lab/tests --impl vulnerable

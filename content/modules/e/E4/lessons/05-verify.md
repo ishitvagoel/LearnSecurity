@@ -5,7 +5,7 @@
 
 ## Check it
 
-“We use Kotlin” is not this topic’s evidence. “A sanitizer is on” is a tool observation. The check is: `len(copy_into(4, b"abcdefgh", 4)) <= 4` and a short honest copy may fit. The oversize observation must be **false** on the broken files (length 8) and **true** on the repaired files. Do not compile native exploits.
+Writing the copy in Kotlin does not bound the buffer. A sanitizer flag is a product. `len(copy_into(4, b"abcdefgh", 4))` has to be `<= 4`, and a short honest copy may fit. On the broken files the oversize copy is length 8. On the repaired files it is not. Do not compile native exploits.
 
 ## Picture: broken must fail the oversize copy
 

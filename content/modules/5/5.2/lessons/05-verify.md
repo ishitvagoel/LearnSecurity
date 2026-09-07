@@ -5,7 +5,7 @@
 
 ## Check it
 
-“We use AES” is not evidence. “Column is bytea” is a tool observation. The check is: Base64 decode of `protect("secret")` is not `"secret"`, and `looks_encrypted` is true on the repaired stand-in. That observation must be **false** on the broken files (decode equals secret) and **true** on the repaired files.
+Naming AES in a comment does not encrypt the body. A `bytea` column type is storage. Base64 decode of `protect("secret")` must not be `"secret"`, and `looks_encrypted` has to be true on the repaired stand-in. On the broken files decode still equals secret. On the repaired files it does not.
 
 ## Picture: Base64 round-trip must fail the check
 
@@ -30,7 +30,7 @@ If both pass, you are not looking at Base64 decode of `protect("secret")`.
 
 The test `test_protect_is_not_mere_encoding` is there so reversible encoding still fails.
 
-Searching for `AES` in a comment without decoding `protect("secret")` is not evidence. This practice never opens a live column.
+An `AES` comment is not a decode of `protect("secret")`. This practice never opens a live column.
 
 ```text
 python3 -m pytest labs/5.2/5.2-lab/tests --impl vulnerable

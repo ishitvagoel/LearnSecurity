@@ -68,7 +68,7 @@ SessionMiddleware does not know HR offboarding. A token with `exp` in 30 days st
 python3 -m pytest labs/4.1/4.1-lab/tests --impl vulnerable
 ```
 
-Record the failing test `test_deleted_user_session_is_dead`. Do not weaken it to “the profile row is gone.” A setup error is not proof the rule holds.
+Record the failing test `test_deleted_user_session_is_dead`. “The profile row is gone” is not that test. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

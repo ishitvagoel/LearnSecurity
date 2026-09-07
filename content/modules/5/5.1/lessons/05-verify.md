@@ -5,7 +5,7 @@
 
 ## Check it
 
-“We have a contract” is not evidence. “The notes row is gone” is a tool observation. The check is: after `delete_account("alice")`, `body_retained("alice") is None` and `search_retained("alice") is None`. That observation must be **false** on the broken files (the helper still returns `"secret"`) and **true** on the repaired files.
+A deletion contract on paper does not empty analytics. Seeing the notes row gone is a SQL observation. After `delete_account("alice")`, `body_retained("alice")` and `search_retained("alice")` both have to be None. On the broken files the helper still returns `"secret"`. On the repaired files those lookups stay empty.
 
 ## Picture: leftover analytics or search must fail the check
 
@@ -30,7 +30,7 @@ If both pass, you are not looking at `body_retained` after delete.
 
 The test `test_deleted_account_leaves_no_analytics_body` calls `delete_account` then `body_retained`. That check is there so a leftover warehouse body still fails.
 
-Searching for `DELETE FROM notes` without calling `body_retained` is not evidence. This practice never opens a live warehouse.
+A `DELETE FROM notes` string is not `body_retained`. This practice never opens a live warehouse.
 
 ```text
 python3 -m pytest labs/5.1/5.1-lab/tests --impl vulnerable

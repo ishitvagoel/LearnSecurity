@@ -5,7 +5,7 @@
 
 ## Check it
 
-“`NODE_ENV=production`” is not evidence. “Canary 10%” is a tool observation. The check is: `boot_ok("prod", True)` is false and `("prod", False)` may boot. That prod-plus-debug observation must be **false** on the broken files and **true** on the repaired files. Do not boot a live host.
+`NODE_ENV=production` does not turn debug off. A 10% canary is a traffic split. `boot_ok("prod", True)` has to be false, and `("prod", False)` may boot. On the broken files prod-plus-debug still boots. On the repaired files it does not. Do not boot a live host.
 
 ## Picture: a broken boot check must fail prod plus debug
 
@@ -37,7 +37,7 @@ python3 -m pytest labs/10.4/10.4-lab/tests --impl vulnerable
 python3 -m pytest labs/10.4/10.4-lab/tests --impl fixed
 ```
 
-Searching for `NODE_ENV` in compose without calling `boot_ok("prod", True)` is not evidence. This practice never opens a live host.
+A `NODE_ENV` string in compose is not `boot_ok("prod", True)`. This practice never opens a live host.
 
 ## What the tests do not prove
 

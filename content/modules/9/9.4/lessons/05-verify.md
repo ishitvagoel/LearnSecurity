@@ -5,7 +5,7 @@
 
 ## Check it
 
-“Code scanning on” is not evidence. “We have a high maturity score” is a tool observation. The check is: `ship_ok([HIGH], {})` is false and a mapped HIGH may ship. That empty-map observation must be **false** on the broken files and **true** on the repaired files. Do not scan public repos.
+Turning on code scanning does not map HIGH findings. A high maturity score is a dashboard. `ship_ok([HIGH], {})` has to be false, and a mapped HIGH may ship. On the broken files the empty map still ships. On the repaired files it does not. Do not scan public repos.
 
 ## Picture: a broken ship_ok must fail the check
 
@@ -37,7 +37,7 @@ python3 -m pytest labs/9.4/9.4-lab/tests --impl vulnerable
 python3 -m pytest labs/9.4/9.4-lab/tests --impl fixed
 ```
 
-Searching for a scanner name in a workflow without calling `ship_ok([HIGH], {})` is not evidence. This practice never opens a live GitHub org.
+A scanner name in a workflow is not `ship_ok([HIGH], {})`. This practice never opens a live GitHub org.
 
 ## What the tests do not prove
 

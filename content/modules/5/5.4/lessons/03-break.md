@@ -70,7 +70,7 @@ A server flag that trusts proxy headers, with a wildcard trusted hop, will belie
 python3 -m pytest labs/5.4/5.4-lab/tests --impl vulnerable
 ```
 
-Record the failing test `test_client_forwarded_proto_is_not_tls`. Do not weaken it to “HTTPS is on.” Do not probe public hosts. A setup error is not proof the rule holds.
+Record the failing test `test_client_forwarded_proto_is_not_tls`. A “HTTPS is on” rewrite is not that test. Do not probe public hosts. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

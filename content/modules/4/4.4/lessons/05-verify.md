@@ -5,7 +5,7 @@
 
 ## Check it
 
-“We have roles” is not evidence. “Ids are hard to guess” is a tool observation. The check is: `can_read("bob", "n2") is False`. That observation must be **false** on the broken files (returns true) and **true** on the repaired files.
+Having roles in a table does not decide who may read. “Ids are hard to guess” is a hope. `can_read("bob", "n2")` has to be False. On the broken files it returns true. On the repaired files it does not.
 
 ## Picture: broken must fail the n2 and cross-company denies
 

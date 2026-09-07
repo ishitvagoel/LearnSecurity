@@ -5,7 +5,7 @@
 
 ## Check it
 
-“Rate limit is on” is not evidence. “The button is disabled” is a tool observation. The check is: `allow(4)` is false and `allow(3)` is true. That fourth-export observation must be **false** on the broken files (returns true) and **true** on the repaired files. Do not load-test public hosts.
+A rate-limit product name does not cap the fourth export. A disabled button is the UI. `allow(4)` has to be false and `allow(3)` has to be true. On the broken files the fourth export still returns true. On the repaired files it does not. Do not load-test public hosts.
 
 ## Picture: unbounded allow must fail the check
 
@@ -30,7 +30,7 @@ If both pass, you are not looking at the fourth export.
 
 The test `test_fourth_export_is_denied` is there so an unbounded fourth still fails.
 
-Searching for an edge-proxy keyword without calling `allow(4)` is not evidence. This practice never opens a public host.
+An edge-proxy keyword is not `allow(4)`. This practice never opens a public host.
 
 ```text
 python3 -m pytest labs/6.7/6.7-lab/tests --impl vulnerable

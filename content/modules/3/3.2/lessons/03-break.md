@@ -28,7 +28,7 @@ flowchart TD
 
 Tool output is treated as thinking — not a dump of a vendor report. `scanner_green` is true; the assembler returns `{"threats": []}`. You do not need a live scan. You must not point a scanner at someone else’s system.
 
-A green dashboard is a tool observation. It is not documented security decisions you can check.
+A green dashboard is not documented security decisions you can check.
 
 ## What to look at: the cause, not a hunt
 

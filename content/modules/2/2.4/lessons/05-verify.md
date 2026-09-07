@@ -5,7 +5,7 @@
 
 ## Check it
 
-HTTP 200 on a single click is not this topic’s evidence. “The button is disabled” is a tool observation. The check is: for two `share_note("n1", idempotency_key="k1")` calls, `share_count() == 1`. That observation must be **false** on the broken files and **true** on the repaired files.
+One 200 from a single Share click does not prove idempotency. A disabled button is the UI, not the count. Two `share_note("n1", idempotency_key="k1")` calls have to leave `share_count() == 1`. On the broken files the count still climbs. On the repaired files it stays 1.
 
 ## Picture: a retry that appends twice must fail
 

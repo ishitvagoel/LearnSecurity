@@ -5,7 +5,7 @@
 
 ## The rule
 
-A denylist of yesterday’s pull requests is not the fix. Hiding a scanner warning is not the fix. “We have CODEOWNERS” is not the fix.
+Last week’s pull-request titles are not a threat-model id. Muting a scanner finding does not fill `merge_ok`. A CODEOWNERS file is not the repair.
 
 The structural change is: `merge_ok` **is false unless the change has a truthy `threat_model`**. Fail-safe: a missing id is deny. Structural means that citation — not CODEOWNERS, not HIPAA training, not a maturity score.
 

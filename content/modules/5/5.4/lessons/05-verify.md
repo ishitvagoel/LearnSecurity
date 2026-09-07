@@ -5,7 +5,7 @@
 
 ## Check it
 
-“TLS is on” is not evidence. “Force HTTPS is checked” is a tool observation. The check is: `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` is False. That observation must be **false** on the broken files (the helper still returns true) and **true** on the repaired files.
+A TLS checkbox does not ignore a spoofed forwarded header. “Force HTTPS” is a dashboard tick. `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` has to be False. On the broken files the helper still returns true. On the repaired files it does not.
 
 ## Picture: header https, socket http must fail
 
@@ -30,7 +30,7 @@ If both pass, you are not looking at header versus socket.
 
 The test `test_client_forwarded_proto_is_not_tls` calls `channel_is_https` with header https and socket http. That check is there so a client header counted as TLS still fails.
 
-Searching for `https` in a dashboard without calling `channel_is_https` on the mismatch is not evidence. This practice never opens a live load balancer.
+An `https` tile on a dashboard is not `channel_is_https` on the mismatch. This practice never opens a live load balancer.
 
 ```text
 python3 -m pytest labs/5.4/5.4-lab/tests --impl vulnerable

@@ -422,11 +422,15 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/Naming a product is not the rule\./g, ""],
   [/A ([A-Za-z0-9.+-]+) product name is not the rule\./g, ""],
   [/An ([A-Za-z0-9.+-]+) product name is not the rule\./g, ""],
-  [/Do not add a live-([a-z-]+) trophy\./g, "Do not treat a live $1 screenshot as proof."],
-  [/Do not add a live ([A-Za-z]+) trophy\./g, "Do not treat a live $1 screenshot as proof."],
+  [/Do not add a live-([a-z-]+) trophy\./g, "Do not use a live $1 as the check."],
+  [/Do not add a live ([A-Za-z]+) trophy\./g, "Do not use a live $1 as the check."],
   [/Do not add a native-overflow trophy\./g, "Do not treat a native overflow as a prize."],
   [
     /An environment error is not security evidence\./g,
+    "A setup error is not proof the rule holds.",
+  ],
+  [
+    /An environment error is not evidence\./g,
     "A setup error is not proof the rule holds.",
   ],
   [/Last topic \((\d+\.\d+)\) already said/g, "Topic $1 already said"],
@@ -561,7 +565,7 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/not a trophy /g, "not a hunt "],
   [/, not a trophy/g, ", not a hunt"],
   [/not an eval trophy/g, "not an eval hunt"],
-  [/Do not add a ([A-Za-z-]+) trophy\./g, "Do not treat a $1 screenshot as proof."],
+  [/Do not add a ([A-Za-z-]+) trophy\./g, "Do not use a $1 screenshot as the check."],
   [/The app['’]s promise this week is:\s*\*\*these\*\* local files, /g, ""],
   [/The (?:notes )?app['’]s promise this week is:\s*\*\*this\*\* practice, /g, ""],
   [/The app['’]s promise this week is:\s*\*\*this\*\* local check, /g, ""],
@@ -733,12 +737,34 @@ const PROSE_PHRASES: [RegExp, string][] = [
   ],
   [/Cause vs cost stays split here too: the /g, "The "],
   [
+    /[“"]([^“”"]+)[”"] is not evidence\. [“"]([^“”"]+)[”"] is a tool observation\. The check is:/g,
+    "$1 does not finish this. $2 is only what a tool showed. Ask:",
+  ],
+  [
+    /[“"]([^“”"]+)[”"] is not this topic['’]s evidence\. [“"]([^“”"]+)[”"] is a tool observation\. The check is:/g,
+    "$1 does not finish this. $2 is only what a tool showed. Ask:",
+  ],
+  [
+    /Searching for (.+) is not evidence\./g,
+    "Looking up $1 does not finish this.",
+  ],
+  [
+    /A denylist of yesterday['’]s (.+) is not the fix\./g,
+    "A list of old $1 does not restore the rule.",
+  ],
+  [/Hiding a scanner warning is not the fix\./g, "Muting a scanner finding does not restore the rule."],
+  [
+    /Do not weaken it to [“"]([^“”"]+)[”"]\./g,
+    "Do not swap the failing test for “$1.”",
+  ],
+  [/- An assurance gate complete/g, "- This page does not finish a check-in"],
+  [
     /A test that only greps (`[^`]+`) without calling (`[^`]+`) is not this topic['’]s evidence\./g,
-    "Searching for $1 without calling $2 is not evidence.",
+    "Looking up $1 without calling $2 does not finish this.",
   ],
   [
     /A test that only greps (`[^`]+`) without (decoding|asserting|comparing) (`[^`]+`) is not this topic['’]s evidence\./g,
-    "Searching for $1 without $2 $3 is not evidence.",
+    "Looking up $1 without $2 $3 does not finish this.",
   ],
   [
     /Reject a [“"](?:test|check)[”"] that only greps (`[^`]+`) without calling (`[^`]+`)\./g,

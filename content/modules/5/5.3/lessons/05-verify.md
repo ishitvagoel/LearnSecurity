@@ -5,7 +5,7 @@
 
 ## Check it
 
-“Secrets Manager is enabled” is not this topic’s evidence. “The wiki says we rotated” is a tool observation. The check is: `auth("sk-lab-hardcoded", current="rotated-now")` is False and `auth("rotated-now", current=None)` is False. That observation must be **false** on the broken files (default still authenticates / missing current allows) and **true** on the repaired files.
+Turning on Secrets Manager does not rotate the default. A wiki that says you rotated is a page. `auth("sk-lab-hardcoded", current="rotated-now")` has to be False, and `auth("rotated-now", current=None)` has to be False. On the broken files the default still authenticates and a missing current still allows. On the repaired files both deny.
 
 ## Picture: leftover default must fail
 

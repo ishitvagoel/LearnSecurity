@@ -5,7 +5,7 @@
 
 ## Check it
 
-"We use Kubernetes" is not evidence. "CIS is green" is a tool observation. The check is: `pod_ok("cluster-admin")` is false and `"app"` may run. That cluster-admin observation must be **false** on the broken files and **true** on the repaired files. Do not apply manifests to a live cluster.
+Running Kubernetes does not deny `cluster-admin`. A green CIS scan is a score. `pod_ok("cluster-admin")` has to be false, and `"app"` may run. On the broken files cluster-admin still runs. On the repaired files it does not. Do not apply manifests to a live cluster.
 
 ## Picture: a broken admission must fail the check
 
@@ -37,7 +37,7 @@ python3 -m pytest labs/10.3/10.3-lab/tests --impl vulnerable
 python3 -m pytest labs/10.3/10.3-lab/tests --impl fixed
 ```
 
-Searching for `namespace:` in a chart without calling `pod_ok("cluster-admin")` is not evidence. This practice never opens a live cluster.
+A `namespace:` line in a chart is not `pod_ok("cluster-admin")`. This practice never opens a live cluster.
 
 ## What the tests do not prove
 
@@ -46,7 +46,7 @@ Searching for `namespace:` in a chart without calling `pod_ok("cluster-admin")` 
 - Instance metadata blocked
 - Helm chart supply chain
 - Documented cluster-API retry (extra, advanced)
-- An assurance gate complete
+- This page does not finish a cluster check-in
 
 ## Practice
 

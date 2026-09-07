@@ -68,7 +68,7 @@ A database `DELETE FROM notes` is not warehouse DELETE. The web app does not era
 python3 -m pytest labs/5.1/5.1-lab/tests --impl vulnerable
 ```
 
-Record the failing test `test_deleted_account_leaves_no_analytics_body`. Do not weaken it to “the notes row is gone.” A setup error is not proof the rule holds.
+Record the failing test `test_deleted_account_leaves_no_analytics_body`. “The notes row is gone” is not that test. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

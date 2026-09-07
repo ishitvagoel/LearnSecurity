@@ -66,7 +66,7 @@ Run checks against the broken files (they **must fail** on the password-at-looka
 python3 -m pytest labs/4.2/4.2-lab/tests --impl vulnerable
 ```
 
-Do not “fix” the check to pass. Do not weaken it to “we have 2FA.” A setup error is not proof the rule holds.
+Do not “fix” the check to pass. “We have 2FA” is not `phishing_resistant`. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

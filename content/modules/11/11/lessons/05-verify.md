@@ -5,7 +5,7 @@
 
 ## Check it
 
-“Capstone scanner green” is not evidence. “DELETE returned 200” is a tool observation. The check is: B after revoke is None, A after revoke still reads, B before revoke still reads. The B-after-revoke observation must be **false** on the broken files (returns the body) and **true** on the repaired files. Do not hit live tenants.
+A green capstone scanner does not consult the grant on the next read. HTTP 200 on DELETE is a status. After revoke, B has to read None, A has to still read, and B before revoke has to still read. On the broken files B-after-revoke still returns the body. On the repaired files it does not. Do not hit live tenants.
 
 ## Picture: a broken no-op revoke must fail the check
 
@@ -37,7 +37,7 @@ python3 -m pytest labs/11/11-lab/tests --impl vulnerable
 python3 -m pytest labs/11/11-lab/tests --impl fixed
 ```
 
-Searching for `revoke` in a README without calling `read("n1", "B")` after `revoke("n1", "B")` is not evidence. This practice never opens a live host.
+A `revoke` heading in a README is not `read("n1", "B")` after `revoke("n1", "B")`. This practice never opens a live host.
 
 ## What the tests do not prove
 
@@ -45,7 +45,7 @@ Searching for `revoke` in a README without calling `read("n1", "B")` after `revo
 - Phone cache is wiped
 - Copies already sent are gone
 - Access-rights change in the same session without signing in again
-- An assurance gate complete
+- This page does not finish the capstone check-in
 
 ## Practice
 

@@ -5,7 +5,7 @@
 
 ## The rule
 
-A denylist of yesterday’s spreadsheet cells is not the fix. Hiding a scanner warning is not the fix. “We ran the checklist” is not the fix.
+Last week’s spreadsheet cells are not an isolation assert. Muting a scanner finding does not cover `AUTHZ-1`. Running the checklist once is not the repair.
 
 The structural change is: `covered` **requires `req == req_id` and `asserts_isolation`**. A row that only stores status is uncovered. Structural means that conjunction — not “we ran the checklist,” not pytest-cov, not a tracker Done column.
 

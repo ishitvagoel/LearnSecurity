@@ -5,7 +5,7 @@
 
 ## Check it
 
-“OpenID Connect is configured” is not this topic’s evidence. “The JWT verifies” is a tool observation. The check is: `accept_token({"sub": "alice", "aud": "other-api"}, "securecollab-api")` is false. That observation must be **false** on the broken files (returns true) and **true** on the repaired files.
+An OpenID Connect checkbox does not bind audience. A verified JWT is a signature check. `accept_token({"sub": "alice", "aud": "other-api"}, "securecollab-api")` has to be false. On the broken files it returns true. On the repaired files it does not.
 
 ## Picture: other-api and missing aud must fail
 

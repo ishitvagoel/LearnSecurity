@@ -27,7 +27,7 @@ flowchart LR
   Write[written hosts] --> Reality[permission]
 ```
 
-A login page is a tool observation. Written hosts are the permission check. A testing guide tells you *how* to test after the host is on the list. A job-title list names jobs. Neither enlarges the list.
+A login page is a product. Written hosts are the permission check. A testing guide tells you *how* to test after the host is on the list. A job-title list names jobs. Neither enlarges the list.
 
 ## What is not good enough
 

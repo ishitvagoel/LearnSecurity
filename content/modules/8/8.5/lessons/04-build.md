@@ -5,7 +5,7 @@
 
 ## The rule
 
-A denylist of yesterday's crash fields is not the fix. Hiding a scanner warning is not the fix. “We filled in the store’s privacy form” is not the fix.
+Last week’s crash-field names are not a redaction policy. Muting a scanner finding does not strip `secret`. Filling in the store’s privacy form is not the repair.
 
 The structural change is: `crash_report` **does not copy `note_body` into the payload**. A constant `'[redacted]'` (the local stand-in) is the teaching shape. Structural means omit — not a crash product set to “automatic,” not a store form, not a tracker-SDK “privacy mode” sticker.
 

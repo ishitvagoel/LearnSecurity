@@ -5,7 +5,7 @@
 
 ## Check it
 
-“We parameterized queries” is not evidence. “ORM is on” is a tool observation. The check is: `fetch_sql` is not a `str`, and `is_bound` is true for the `(sql, params)` shape. That observation must be **false** on the broken files (returns concatenated SQL) and **true** on the repaired files.
+Saying queries are parameterized does not prove the SQL is a tuple. An ORM toggle is a product. `fetch_sql` must not be a `str`, and `is_bound` has to be true for the `(sql, params)` shape. On the broken files the helper returns concatenated SQL. On the repaired files it returns the bound pair.
 
 ## Picture: concatenated SQL must fail the check
 
@@ -30,7 +30,7 @@ If both pass, you are not looking at concatenated SQL.
 
 The test `test_query_is_bound_not_concatenated` is there so a concatenated `str` still fails. The hostile `note_id` in that test is **data** for the params tuple — a class of extra grammar, not a cookbook to paste into a live query.
 
-Searching for `%s` inside a concatenated string without asserting the tuple shape is not evidence. This practice never opens a live database.
+A `%s` inside concatenated SQL is not the `(sql, params)` shape. This practice never opens a live database.
 
 ```text
 python3 -m pytest labs/5.5/5.5-lab/tests --impl vulnerable

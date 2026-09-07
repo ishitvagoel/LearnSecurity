@@ -5,7 +5,7 @@
 
 ## Check it
 
-“We filled in the store’s privacy form” is not evidence. “The crash product uses HTTPS” is a tool observation. The check is: `'secret' not in str(crash_report("secret"))` and an honest crash still has a `stack` key. That body-absent observation must be **false** on the broken files and **true** on the repaired files. Do not call a crash vendor.
+A filled-in store privacy form does not strip `secret` from the crash body. HTTPS to the crash product is a hop. `'secret'` must not appear in `str(crash_report("secret"))`, and an honest crash still has a `stack` key. On the broken files the body is still in the report. On the repaired files it is not. Do not call a crash vendor.
 
 ## Picture: a broken crash report must fail the check
 
@@ -37,7 +37,7 @@ python3 -m pytest labs/8.5/8.5-lab/tests --impl vulnerable
 python3 -m pytest labs/8.5/8.5-lab/tests --impl fixed
 ```
 
-Searching for a crash product name in Gradle without calling `crash_report("secret")` is not evidence. This practice never opens a live crash project.
+A crash-product name in Gradle is not `crash_report("secret")`. This practice never opens a live crash project.
 
 ## What the tests do not prove
 

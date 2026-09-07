@@ -62,7 +62,7 @@ FastAPI does not know Confidential. Access logs will store query strings — a l
 python3 -m pytest labs/3.1/3.1-lab/tests --impl vulnerable
 ```
 
-Record the failing test `test_note_body_is_not_logged`. Do not weaken it to “logs exist.” A setup error is not proof the rule holds.
+Record the failing test `test_note_body_is_not_logged`. “Logs exist” is not that test. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

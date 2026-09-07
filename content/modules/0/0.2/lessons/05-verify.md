@@ -6,7 +6,7 @@
 
 ## Check it
 
-“They’re advanced” is not evidence. “LMS mastery is 100%” is a tool observation. The check is: `quiz_score_grants_phase1_skip(100)` is false. That must be **false** on `--impl vulnerable` (the helper returns true) and **true** on `--impl fixed`. Do not hack an LMS; the integer is enough.
+Calling someone advanced does not skip part 1. A 100% LMS tile is a dashboard number. `quiz_score_grants_phase1_skip(100)` has to be false. On `--impl vulnerable` the helper returns true. On `--impl fixed` it returns false. Do not hack an LMS; the integer is enough.
 
 ## Picture: the broken files must fail on score 100 skip
 

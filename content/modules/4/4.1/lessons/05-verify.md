@@ -5,7 +5,7 @@
 
 ## Check it
 
-“We deleted the row” is not evidence. “Single sign-on is on” is a tool observation. The check is: after `delete_user("alice")`, `session_valid("alice")` is False. That observation must be **false** on the broken files (the helper still returns true) and **true** on the repaired files.
+Deleting the profile row does not kill the session. A single-sign-on toggle is a product. After `delete_user("alice")`, `session_valid("alice")` has to be False. On the broken files the helper still returns true. On the repaired files it does not.
 
 ## Picture: a leftover session must fail the check
 
@@ -30,7 +30,7 @@ If both pass, you are not looking at `session_valid` after delete.
 
 The test `test_deleted_user_session_is_dead` calls `delete_user` then `session_valid`. That check is there so a leftover session that still works still fails.
 
-Searching for `DELETED.add` without calling `session_valid` after `delete_user` is not evidence. This practice never opens a live identity provider.
+A `DELETED.add` line is not `session_valid` after `delete_user`. This practice never opens a live identity provider.
 
 ```text
 python3 -m pytest labs/4.1/4.1-lab/tests --impl vulnerable

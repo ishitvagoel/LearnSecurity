@@ -5,7 +5,7 @@
 
 ## Check it
 
-“Workers use a service account” is not evidence. “The queue is internal” is a tool observation. The check is: `exporter({"user_session": "alice", "service": None})` is `None` and `exporter({"service": "worker-sc"})` is `"worker-sc"`. The Alice-session observation must be **false** on the broken files (returns `"alice"`) and **true** on the repaired files. Do not attach to live brokers.
+A worker service-account name in YAML does not bind who the exporter is. An “internal” queue is a network hope. `exporter({"user_session": "alice", "service": None})` has to be `None`, and `exporter({"service": "worker-sc"})` has to be `"worker-sc"`. On the broken files the Alice session still returns `"alice"`. On the repaired files it does not. Do not attach to live brokers.
 
 ## Picture: leftover Alice must fail the check
 
@@ -30,7 +30,7 @@ If both pass, you are not looking at leftover Alice.
 
 The test `test_user_session_is_not_worker_identity` is there so a leftover cookie that becomes the principal still fails.
 
-Searching for `worker-sc` in a YAML file without calling `exporter({"user_session": "alice", "service": None})` is not evidence. This practice never opens a public broker.
+A `worker-sc` string in YAML is not `exporter({"user_session": "alice", "service": None})`. This practice never opens a public broker.
 
 ```text
 python3 -m pytest labs/7.4/7.4-lab/tests --impl vulnerable

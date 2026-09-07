@@ -5,7 +5,7 @@
 
 ## The rule
 
-A denylist of yesterday’s CDN header is not the fix. Hiding a scanner warning is not the fix. “The CDN is compliant” is not the fix.
+Dropping last week’s CDN header name does not pin the cache key. Hiding a scanner warning does not pin it. A “compliant CDN” badge is not the repair.
 
 The structural change is: `cache_get` may return a body only when the lookup uses the same **bound company** as `cache_put`. The store actually partitions by that company — not `Cache-Control` theater, not a scanner suppression. You do not restore secrecy by turning TLS ciphers up.
 

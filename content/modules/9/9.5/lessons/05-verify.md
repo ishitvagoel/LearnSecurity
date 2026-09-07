@@ -5,7 +5,7 @@
 
 ## Check it
 
-"PDF delivered" is not evidence. "The severity is 9.8" is a priority input. The check is: `close_finding({"retest": None})` is false and `{retest: "pass"}` may close. That missing-retest observation must be **false** on the broken files and **true** on the repaired files. Do not pentest public hosts.
+Attaching a PDF does not close the finding. Severity 9.8 is a priority number. `close_finding({"retest": None})` has to be false, and `{retest: "pass"}` may close. On the broken files a missing retest still closes. On the repaired files it does not. Do not pentest public hosts.
 
 ## Picture: a broken close gate must fail the check
 
@@ -37,7 +37,7 @@ python3 -m pytest labs/9.5/9.5-lab/tests --impl vulnerable
 python3 -m pytest labs/9.5/9.5-lab/tests --impl fixed
 ```
 
-Searching for `Done` in a ticket tracker without calling `close_finding({"retest": None})` is not evidence. This practice never opens a live host.
+A `Done` status in a ticket is not `close_finding({"retest": None})`. This practice never opens a live host.
 
 ## What the tests do not prove
 
@@ -45,7 +45,7 @@ Searching for `Done` in a ticket tracker without calling `close_finding({"retest
 - Variant coverage (extra fields on the note)
 - Whether a known-exploited listing applies
 - Role-change cache after a grant change (extra, advanced work)
-- An assurance gate complete
+- This page does not close a finding check-in
 
 ## Practice
 

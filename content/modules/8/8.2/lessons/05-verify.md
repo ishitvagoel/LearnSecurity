@@ -5,7 +5,7 @@
 
 ## Check it
 
-“EncryptedSharedPreferences is on” is not evidence. “Internal storage” is a tool observation. The check is: after `save_note("secret")`, `plaintext_on_disk()` is false. That observation must be **false** on `--impl vulnerable` (DISK holds `'secret'`) and **true** on `--impl fixed`. Do not image phones.
+EncryptedSharedPreferences on a different file does not hide the note. Internal storage is a folder. After `save_note("secret")`, `plaintext_on_disk()` has to be false. On `--impl vulnerable` DISK still holds `'secret'`. On `--impl fixed` it does not. Do not image phones.
 
 ## Picture: broken files must fail: plaintext secret
 

@@ -5,7 +5,7 @@
 
 ## Check it
 
-“We use passkeys” is not evidence. “MFA is on” is a tool observation. The check is: `phishing_resistant("password", EVIL, REAL)` is false. That observation must be **false** on `--impl vulnerable` (the helper returns true) and **true** on `--impl fixed`.
+Saying you use passkeys does not stop a look-alike page. An MFA badge is a product. `phishing_resistant("password", EVIL, REAL)` has to be false. On `--impl vulnerable` the helper returns true. On `--impl fixed` it returns false.
 
 ## Picture: broken files must fail: password at lookalike is true
 

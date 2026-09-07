@@ -32,7 +32,7 @@ flowchart TD
 
 The token sits in a logged, shared channel — not a dump of production logs. `session_from_request` prefers `query.get("access_token")`. You do not need a live GET. You must not fetch a URL that contains a real token.
 
-Secrets belong in the body or headers, not in the URL. HTTPS is a hop tool, not that sentence.
+Secrets belong in the body or headers, not in the URL. HTTPS is a hop, not `session_from_request` ignoring the query token.
 
 ## What to look at: the cause, not a hunt
 
@@ -66,7 +66,7 @@ FastAPI will bind query params. Next.js router will put them in the address bar.
 python3 -m pytest labs/4.3/4.3-lab/tests --impl vulnerable
 ```
 
-Do not weaken it to “we use HTTPS.” A setup error is not proof the rule holds.
+“We use HTTPS” is not `session_from_request` ignoring the query token. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

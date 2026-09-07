@@ -5,7 +5,7 @@
 
 ## Check it
 
-“Field authz is on” is not evidence. “The SPA hides the column” is a tool observation. The check is: `resolve("member", "secret_internal")` is false **and** `resolve("member", "display_name")` is true. The member-internal observation must be **false** on `--impl vulnerable` (returns true) and **true** on `--impl fixed`. Do not query public GraphQL.
+A field-authz label does not hide `secret_internal` on the resolver. A SPA that hides the column is the client. `resolve("member", "secret_internal")` has to be false **and** `resolve("member", "display_name")` has to be true. On `--impl vulnerable` the member-internal call still returns true. On `--impl fixed` it does not. Do not query public GraphQL.
 
 ## Picture: broken files must fail member × secret_internal
 

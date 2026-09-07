@@ -5,7 +5,7 @@
 
 ## Check it
 
-“We measure maturity” is not evidence. “Legal said yes” is a tool observation. The check is: `accept_exception({"owner": "", "review_by": None})` is false and a complete record may accept. The empty-owner observation must be **false** on the broken files and **true** on the repaired files. Do not file live exceptions.
+A maturity score does not accept an empty owner. “Legal said yes” is a conversation. `accept_exception({"owner": "", "review_by": None})` has to be false, and a complete record may accept. On the broken files the empty owner still accepts. On the repaired files it does not. Do not file live exceptions.
 
 ## Picture: a broken register gate must fail the check
 
@@ -37,7 +37,7 @@ python3 -m pytest labs/E6/e6-lab/tests --impl vulnerable
 python3 -m pytest labs/E6/e6-lab/tests --impl fixed
 ```
 
-Searching for a maturity name in a slide without calling `accept_exception({"owner": "", "review_by": None})` is not evidence. This practice never opens a live host.
+A maturity name on a slide is not `accept_exception({"owner": "", "review_by": None})`. This practice never opens a live host.
 
 ## What the tests do not prove
 
@@ -46,7 +46,7 @@ Searching for a maturity name in a slide without calling `accept_exception({"own
 - A later design-review draft (still a draft)
 - An unverified “secure by design” pledge
 - Extra advanced documentation of a dangerous function
-- An assurance gate complete
+- This page does not finish a maturity check-in
 
 ## Practice
 

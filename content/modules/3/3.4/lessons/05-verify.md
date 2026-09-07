@@ -5,7 +5,7 @@
 
 ## Check it
 
-“We put max on the select” is not this topic’s evidence. “The filter has an awareness-list rule” is a tool observation. The check is: after eight `add_share()` calls, `last <= 5`. That observation must be **false** on the broken files and **true** on the repaired files.
+Putting max on a select is a form field, not the cap. An awareness-list rule on a filter is a label. After eight `add_share()` calls, `last` has to be `<= 5`. On the broken files the eighth share still lands. On the repaired files it does not.
 
 ## Picture: last greater than 5 must fail
 

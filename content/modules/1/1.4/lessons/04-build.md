@@ -5,7 +5,7 @@
 
 ## The rule
 
-A denylist of yesterday’s CSS class is not the fix. Hiding a scanner warning is not the fix. “The component library is accessible” is not the fix.
+Last week’s CSS class name is a denylist, not a named keyboard control. Silencing a scanner warning does not give the button a name. A vendor “accessible component” sticker is not the repair.
 
 The structural change is: the confirm object **is** a named, keyboard-operable control, and color is extra encoding only. The who-is-allowed decision (this person may confirm **this** account **now**) does not change. You do not restore access by emailing the password.
 

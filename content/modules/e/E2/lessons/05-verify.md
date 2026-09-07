@@ -5,7 +5,7 @@
 
 ## Check it
 
-“A content-security header is present” is not evidence if the name is Report-Only. “Helmet is on” is a tool observation. The check is: Report-Only only is false, and an enforcing `Content-Security-Policy` may count. That Report-Only observation must be **false** on `--impl vulnerable` (returns true) and **true** on `--impl fixed`. Do not load a live page.
+A Report-Only content-security header does not enforce the policy. A Helmet import is a library. Report-Only only has to be false, and an enforcing `Content-Security-Policy` may count. On `--impl vulnerable` Report-Only still returns true. On `--impl fixed` it does not. Do not load a live page.
 
 ## Picture: broken files must fail: Report-Only
 

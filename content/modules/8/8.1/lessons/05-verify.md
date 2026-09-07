@@ -5,7 +5,7 @@
 
 ## Check it
 
-“We use Play Integrity” is not evidence. “The Compose button is disabled” is a tool observation. The check is: `allow_export({"integrity": "ok"}, "fail")` is false, and `allow_export({"integrity": "ok"}, "play_integrity_pass")` may be true. The client-ok-plus-attest-fail observation must be **false** on `--impl vulnerable` (returns true) and **true** on `--impl fixed`. Do not call live attestation APIs.
+Naming Play Integrity in a README does not ignore the client boolean. A disabled Compose button is the UI. `allow_export({"integrity": "ok"}, "fail")` has to be false, and `allow_export({"integrity": "ok"}, "play_integrity_pass")` may be true. On `--impl vulnerable` client-ok-plus-attest-fail still returns true. On `--impl fixed` it does not. Do not call live attestation APIs.
 
 ## Picture: broken files must fail: client ok plus attest fail
 

@@ -5,7 +5,7 @@
 
 ## Check it
 
-“We have OpenAPI” is not evidence. “The SPA has no admin checkbox” is a tool observation. The check is three observations, not one: an honest rename may change `display_name`; after `apply(user, {"is_admin": true})`, `is_admin` is false; unknown keys do not become columns. The `is_admin` observation must be **false** on `--impl vulnerable` (`user.update(body)` writes true) and **true** on `--impl fixed`. Do not probe public APIs.
+An OpenAPI file does not stop `is_admin` in the body. A SPA that hides the checkbox is the client. Three observations: an honest rename may change `display_name`; after `apply(user, {"is_admin": true})`, `is_admin` stays false; unknown keys do not become columns. On `--impl vulnerable`, `user.update(body)` writes true. On `--impl fixed` it does not. Do not probe public APIs.
 
 ## Picture: broken files must fail: is_admin
 

@@ -5,7 +5,7 @@
 
 ## The rule
 
-A denylist of yesterday’s ids is not the fix. Hiding the button is not the fix. Id length is not the fix. “They are a collaborator” is not the fix.
+Last week’s id list does not decide who may read. Hiding the button does not decide it. Making ids longer does not decide it. “They are a collaborator” is not the repair.
 
 The structural change is: `can_read` **denies unless company matches and the user is the note owner or `GRANTS[(user, note_id)]` is true**. Structural means this object is checked — not leftover permission from the surroundings.
 

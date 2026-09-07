@@ -27,7 +27,7 @@ flowchart LR
   Lab["1.2 deny rule"] --> Reality[evidence]
 ```
 
-A percentage is a tool observation. A 1.2 deny rule is the evidence. A job-title list names jobs. An LMS stores numbers. Neither is check-in 1. FastAPI, Next.js, and a quiz vendor’s score report do not observe whether the new hire can write a company-B deny rule. Tooling-bridge skips (Git/SQL/HTTP) remain a different function: they must not be keyed off this 100%.
+A percentage is a dashboard number. A 1.2 deny rule is the check. A job-title list names jobs. An LMS stores numbers. Neither is check-in 1. FastAPI, Next.js, and a quiz vendor’s score report do not observe whether the new hire can write a company-B deny rule. Tooling-bridge skips (Git/SQL/HTTP) remain a different function: they must not be keyed off this 100%.
 
 ## What is not good enough
 

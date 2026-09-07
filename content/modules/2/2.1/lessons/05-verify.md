@@ -5,7 +5,7 @@
 
 ## Check it
 
-A 200 on the happy path is not evidence. The check must be **false** on the broken files and **true** on the repaired files, against a named “what must not happen.”
+HTTP 200 on a clean object does not finish the duplicate-key check. Last-key-wins still has to fail on the broken files and pass on the repaired ones — name what must not happen.
 
 ## Picture: broken files must fail the duplicate-key check
 

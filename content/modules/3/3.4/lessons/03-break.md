@@ -64,7 +64,7 @@ FastAPI does not know “five members.” SQLAlchemy `add()` will insert a sixth
 python3 -m pytest labs/3.4/3.4-lab/tests --impl vulnerable
 ```
 
-Do not weaken it to “a max attribute exists.” A setup error is not proof the rule holds.
+A max attribute on the form is not `last <= 5` after eight shares. A setup error is not proof the rule holds.
 
 ## Use it somewhere new
 

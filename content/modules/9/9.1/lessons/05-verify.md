@@ -5,7 +5,7 @@
 
 ## Check it
 
-“Matrix imported” is not evidence. “CI is green” is a tool observation. The check is: `covered("AUTHZ-1", [status-only])` is false and `covered("AUTHZ-1", [isolation assert])` may be true. That status-only observation must be **false** on the broken files and **true** on the repaired files. Do not call a live checklist portal.
+Importing a matrix spreadsheet does not prove `AUTHZ-1` has an isolation assert. A green CI tile is a score. `covered("AUTHZ-1", [status-only])` has to be false, and `covered("AUTHZ-1", [isolation assert])` may be true. On the broken files status-only still counts. On the repaired files it does not. Do not call a live checklist portal.
 
 ## Picture: a broken coverage check must fail the status-only test
 
@@ -37,7 +37,7 @@ python3 -m pytest labs/9.1/9.1-lab/tests --impl vulnerable
 python3 -m pytest labs/9.1/9.1-lab/tests --impl fixed
 ```
 
-Searching for `AUTHZ-1` in a spreadsheet without calling `covered(..., [{"asserts_isolation": False}])` is not evidence. This practice never opens a live checklist portal.
+An `AUTHZ-1` cell is not `covered(..., [{"asserts_isolation": False}])`. This practice never opens a live checklist portal.
 
 ## What the tests do not prove
 

@@ -5,7 +5,7 @@
 
 ## The rule
 
-A denylist of yesterday’s company ids is not the fix. Hiding the company picker is not the fix. “Row-level rules are on” is not the fix. Trusting a mismatch because the body “looks honest” is not the fix.
+Last week’s company ids are not the session tenant. Hiding the company picker does not bind `tenant_for`. Turning on row-level rules is not the repair. Trusting a mismatch because the body “looks honest” still fails.
 
 The structural change is: `tenant_for` **returns `session["tenant"]`**. Structural means the runtime ignores the body field for isolation. Bind tenant from the session. Fail closed: a lying body cannot switch company. Row-level rules may *accompany* this binding; they must not be `SET` from the body. Structural means session win — not a subdomain, not a relationship-graph tuple, not a famous-bugs mapping.
 
