@@ -23,7 +23,7 @@ flowchart TD
   Host -->|yes| Allow[Allow]
 ```
 
-The lab’s repaired files require `https` and host in `{"lab.securecollab.test"}`, and deny named block hosts. Production still needs a dedicated egress proxy if customer sites must be fetched. DNS rebinding and IPv6 encodings remain leftover. Open-redirect UX is a sister check. Telling the person they are leaving the site is advanced work, not this check.
+The importer requires `https` and host in `{"lab.securecollab.test"}`, and denies named block hosts. Fetching customer sites still wants a dedicated egress proxy. DNS rebinding and IPv6 encodings remain leftover. Open-redirect UX is a sister check. Telling the person they are leaving the site is advanced work, not this check.
 
 The allow-list has to run before calling another service — `allowed`. **Do not fetch.**
 

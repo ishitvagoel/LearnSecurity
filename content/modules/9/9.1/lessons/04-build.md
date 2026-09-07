@@ -22,7 +22,7 @@ flowchart TD
   Iso -->|no| Deny
 ```
 
-The repaired files require both gates. Production still needs the later shape lesson (9.3): a test that sets `asserts_isolation` while only checking HTTP 200 is a lying flag. Extra advanced rows stay unmapped if you never raise them. Mobile storage without a matching test is the same hole on a phone (8.2). Exceptions need an expiry date (E6) or they are silent uncovered rows.
+Status and an isolation test both have to be present. A flag `asserts_isolation` on an HTTP-200-only test is a lying flag (9.3). Extra advanced rows stay unmapped if you never raise them. Mobile storage without a matching test is the same hole on a phone (8.2). Exceptions need an expiry date (E6) or they are silent uncovered rows.
 
 A development-practice guide that wants executable tests against requirements covers AUTHZ-1 status-only. The check is the local stand-in.
 

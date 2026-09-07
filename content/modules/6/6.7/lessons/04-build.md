@@ -20,7 +20,7 @@ flowchart TD
   Cap -->|no| Deny[Deny]
 ```
 
-The lab’s repaired files use `n_calls <= 3`. Production still needs a per-person counter (the map from the last page), not a global IP limit that punishes people on one office network. GraphQL aliases (7.1) are another path of the same budget. New accounts can reset the window — name that leftover. Human timing tricks are advanced work, not this check.
+`allow` is `n_calls <= 3`. Count per person (the map from the last page), not a global IP limit that punishes people on one office network. GraphQL aliases (7.1) are another path of the same budget. New accounts can reset the window — name that leftover. Human timing tricks are advanced work, not this check.
 
 Documented limits have to be actually implemented — `allow(4)`.
 

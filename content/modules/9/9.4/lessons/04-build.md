@@ -22,7 +22,7 @@ flowchart TD
   Map -->|no| Deny[deny]
 ```
 
-The repaired files require every HIGH `id` in `mappings`. Production still needs the mapped requirement to be the *right* coverage-map row — mapping F1 to a leftover inventory row is a lying map. Who-is-allowed logic is a scanner blind spot: you still need review and isolation tests. Dependency confusion is an advanced leftover: mapping “no finding” is not coverage. A mapped HIGH you accept still needs an exception with an expiry.
+Every HIGH `id` has to appear in `mappings`. Mapping F1 to a leftover inventory row is a lying map. Who-is-allowed logic is a scanner blind spot: you still need review and isolation tests. Dependency confusion is an advanced leftover: mapping “no finding” is not coverage. A mapped HIGH you accept still needs an exception with an expiry.
 
 A triage checklist wants findings owned — unmapped HIGH.
 

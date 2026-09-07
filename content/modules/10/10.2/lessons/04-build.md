@@ -20,7 +20,7 @@ flowchart TD
   Eq -->|no| Deny[deny]
 ```
 
-The repaired files require equality. Production still needs the pin to be *benign* — matching a malicious digest is a lying lockfile. Who can edit the lockfile is 10.1 / CODEOWNERS, not this check. A lookalike package still wins if you install by name somewhere else; equality is the local stand-in.
+Install has to compare digest equality. Matching a malicious digest is a lying lockfile — the pin still has to be benign. Who can edit the lockfile is 10.1 / CODEOWNERS, not this check. A lookalike package still wins if you install by name somewhere else; equality is the local stand-in.
 
 Provenance says *how* the artifact was built. It does not replace digest match. An SBOM can list hashes — generating the file is still not `install_ok`.
 

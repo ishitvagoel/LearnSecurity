@@ -22,7 +22,7 @@ flowchart TD
   Body -->|no| Allow[may close]
 ```
 
-The repaired files require that conjunction. Production still needs restore to have *run* — `"done"` typed by an optimistic closer is a lying recovery. Untested backups remain leftover. Logs still belong on a separate system so an app breach does not erase evidence. Logging every authorization decision without the sensitive data is extra, advanced work.
+Close has to wait on both denies. `"done"` typed by an optimistic closer is a lying recovery — restore has to have run. Untested backups remain leftover. Logs still belong on a separate system so an app breach does not erase evidence. Logging every authorization decision without the sensitive data is extra, advanced work.
 
 Industry “recover” is an outcome — close-without-recovery.
 

@@ -20,7 +20,7 @@ flowchart TD
   Body[body tenant] --> Ignore[log mismatch only]
 ```
 
-Do not accept “we enabled row-level rules” as membership in the session. Production still needs copies (search, cache, lake) to *include* the company — a note id without company is a sibling grain. Honest super-admin impersonation is a later audited path, not a body field. Applying grant changes immediately is advanced — not this check.
+Do not accept “we enabled row-level rules” as membership in the session. Search, cache, and lake copies still have to *include* the company — a note id without company is a sibling grain. Honest super-admin impersonation is a later audited path, not a body field. Applying grant changes immediately is advanced — not this check.
 
 If the body company disagrees with the session, **log** `body_tenant_mismatch` and still use the session.
 

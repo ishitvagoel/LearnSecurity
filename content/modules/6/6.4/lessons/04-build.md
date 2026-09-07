@@ -19,7 +19,7 @@ flowchart TD
   Under -->|no| Deny[ValueError]
 ```
 
-The lab’s repaired files resolve `(ROOT / name)` and raise `ValueError("escape")` unless `ROOT` is `p` or in `p.parents`. Production still needs internally generated names as extra defense. Zip member paths are another parser of the same rule. XML/pickle/YAML are leftover of the earlier data-vs-grammar shape, not this prefix.
+`resolve` uses `(ROOT / name)` and raises `ValueError("escape")` unless `ROOT` is `p` or in `p.parents`. Internally generated names remain extra defense. Zip member paths are another parser of the same rule. XML/pickle/YAML are leftover of the earlier data-vs-grammar shape, not this prefix.
 
 User filenames still need a hard check — `resolve`.
 

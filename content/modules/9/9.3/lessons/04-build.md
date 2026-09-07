@@ -20,7 +20,7 @@ flowchart TD
   Fo -->|no| Deny[not]
 ```
 
-The repaired files require `forbidden_outcome`. Production still needs the named case to *match* who-is-allowed (Bob must not read Alice’s note) — a well-shaped test can still miss field grain (7.2). Looking around remains 9.5. Race-condition tests still need a named bad result (“the race must not grant”), not “the fuzzer ran.”
+The test has to name `forbidden_outcome`. A well-shaped test can still miss field grain (7.2) if the named case is not Bob-must-not-read-Alice. Looking around remains 9.5. Race-condition tests still need a named bad result (“the race must not grant”), not “the fuzzer ran.”
 
 A testing standard that says “test against the requirement” is vocabulary — 200-only.
 

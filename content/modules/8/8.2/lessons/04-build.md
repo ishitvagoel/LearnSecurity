@@ -21,7 +21,7 @@ flowchart TD
   Wrap --> Disk[DISK]
 ```
 
-The repaired files write `'aead:'` plus length, never the body. Production still needs an Android Keystore key plus real authenticated encryption; iOS Keychain is a later mirror. A fingerprint gates the screen. It does not stop key extraction on a compromised OS. Screenshots, recents, clipboard, logs, auto backup, and WorkManager extras remain extra copies.
+The cache writes `'aead:'` plus length, never the body. Android Keystore plus real authenticated encryption is still required; iOS Keychain is a later mirror. A fingerprint gates the screen. It does not stop key extraction on a compromised OS. Screenshots, recents, clipboard, logs, auto backup, and WorkManager extras remain extra copies.
 
 That secure store has to be implemented — `'secret'` on disk.
 

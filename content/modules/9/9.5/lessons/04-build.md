@@ -20,7 +20,7 @@ flowchart TD
   R -->|no| Deny[keep open]
 ```
 
-The repaired files require `retest == "pass"`. Production still needs that pass to be the *same* bad result (bob must not read alice's note) — a well-labeled `"pass"` on a different URL is a lying retest. Extra fields on the same note are still leftover. If a role change is supposed to take effect right away, you still need a retest of *the cache after the role change*, not a different endpoint.
+`retest` has to be `"pass"`. A well-labeled `"pass"` on a different URL is a lying retest — bob still must not read alice's note. Extra fields on the same note are still leftover. If a role change is supposed to take effect right away, you still need a retest of *the cache after the role change*, not a different endpoint.
 
 Defect lists want bugs verified as fixed — close-without-retest.
 

@@ -22,7 +22,7 @@ flowchart TD
   Att -->|no| Deny
 ```
 
-The repaired files require both gates. Production still needs separate client ids and no prod URLs in debug manifests. Play App Signing protects *store* signing; it does not stop a debug application id from using a leaked prod API key. Embedded API identifiers will be recovered — assume that. Root detection is bypassable (8.1).
+Both the debug-build deny and the client-id split have to hold. Debug manifests still need their own client ids and no prod URLs. Play App Signing protects *store* signing; it does not stop a debug application id from using a leaked prod API key. Embedded API identifiers will be recovered — assume that. Root detection is bypassable (8.1).
 
 Use a trusted service layer, and keep secrets out of artifacts — `api_allowed("debug", "ok")`.
 

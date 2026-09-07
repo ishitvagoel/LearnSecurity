@@ -21,7 +21,7 @@ flowchart TD
   Flag --> Keys["Real key lifecycle - later"]
 ```
 
-The lab’s repaired files prefix `aesgcm:` plus length. Production still needs a reviewed authenticated-encryption library and a key that is not in the same row. Argon2 on a note body is the wrong rule. A JWT is not encryption.
+The prefix is `aesgcm:` plus length. A reviewed authenticated-encryption library still needs a key that is not in the same row. Argon2 on a note body is the wrong rule. A JWT is not encryption.
 
 Use approved authenticated encryption. The check is “not encoding,” not “we shipped AES-GCM.”
 

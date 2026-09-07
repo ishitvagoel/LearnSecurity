@@ -20,7 +20,7 @@ flowchart TD
   Attest -->|no| Deny[deny]
 ```
 
-The repaired files ignore `client_claims` entirely. Production still needs a real server-side token verify (not this check) plus 1.2 session and 4.4 object grants. Play Integrity is a vendor **signal** the server may consult — not a grant. Honest users on rooted phones need an **owned** product policy, not a silent grant (the first page).
+`allow_export` ignores `client_claims` entirely. A real server-side token verify is later, plus 1.2 session and 4.4 object grants. Play Integrity is a vendor **signal** the server may consult — not a grant. Honest users on rooted phones need an **owned** product policy, not a silent grant (the first page).
 
 Authorization has to be enforced on a trusted service layer — `allow_export(..., "fail")`.
 

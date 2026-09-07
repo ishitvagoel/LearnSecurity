@@ -19,7 +19,7 @@ flowchart TD
   Esc --> P["wrap in p"]
 ```
 
-The repaired files use `html.escape(body, quote=True)` then wrap in `<p>`. Production still needs encoding for attribute, JavaScript, and URL contexts as leftovers. Markdown is a second parser (2.1). A content-security policy that blocks objects and base tags is a layer after encoding, not a substitute.
+`render` is `html.escape(body, quote=True)` then wrap in `<p>`. Attribute, JavaScript, and URL contexts remain leftover encodings. Markdown is a second parser (2.1). A content-security policy that blocks objects and base tags is a layer after encoding, not a substitute.
 
 Output has to be encoded for the context you are writing into — HTML text.
 

@@ -21,7 +21,7 @@ flowchart TD
   Add --> Allow[Allow]
 ```
 
-The repaired files use a `set` of consumed tokens. Production still needs a lock for true concurrent accepts — named leftover, not this sequential check. Token in the query string is 4.3. Email as proof of the recipient is 4.2. Password reset and later jobs (7.4) are the same family with different “once” meanings.
+Consumed tokens live in a `set`. True concurrent accepts still need a lock — named leftover, not this sequential check. Token in the query string is 4.3. Email as proof of the recipient is 4.2. Password reset and later jobs (7.4) are the same family with different “once” meanings.
 
 There should be no double-booking — sequential `accept`.
 

@@ -24,7 +24,7 @@ flowchart TD
   Token -->|yes| Allow[Allow]
 ```
 
-The lab’s repaired files are `session_cookie` then `origin == expected and token == "lab-csrf"`. Production still needs the token bound to the session (not a cookie the foreign origin can cause to be sent). GET `/share?to=` is a mutate-on-GET leftover. Clickjacking, postMessage, and a later open-redirect lesson stay named leftovers. CORS `*` with credentials is false assurance.
+Share requires `session_cookie`, then `origin == expected and token == "lab-csrf"`. Bind that token to the session, not a cookie a foreign origin can cause to be sent. GET `/share?to=` is a mutate-on-GET leftover. Clickjacking, postMessage, and a later open-redirect lesson stay named leftovers. CORS `*` with credentials is false assurance.
 
 Use anti-forgery tokens or extra headers a simple form cannot set — `allow_share`. Extra rows about authenticated embeds and CORP are **advanced** — not this check.
 

@@ -1074,6 +1074,18 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/\ban assurance gate\b/g, "a check-in"],
   [/\bthe verification gate\b/g, "the verification check-in"],
   [/\bthe ship gate\b/g, "the ship check-in"],
+  [
+    /The repaired files require ([^.]+)\. Production still needs /g,
+    "Those files need $1. You still need ",
+  ],
+  [
+    /The lab[’']s repaired files ([^.]+)\. Production still needs /g,
+    "Those files $1. You still need ",
+  ],
+  [
+    /The repaired files ([^.]+)\. Production still needs /g,
+    "Those files $1. You still need ",
+  ],
 ];
 
 const HIDDEN_LAB_NOTES = [

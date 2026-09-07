@@ -20,7 +20,7 @@ flowchart TD
   Both -->|no| Allow[may boot]
 ```
 
-The repaired files require that both-at-once check. Do not accept “`NODE_ENV` is production” as the check. Production still needs other flags — a feature flag that turns off authorization (1.2) is leftover, not this check. Docs and monitoring pages that stay public, and extra version leakage with debug already off, remain leftover. Emergency debug is E6, not a silent `return True`.
+Both flags have to fail together. Do not accept “`NODE_ENV` is production” as the check. A feature flag that turns off authorization (1.2) is leftover, not this debug-off. Docs and monitoring pages that stay public, and extra version leakage with debug already off, remain leftover. Emergency debug is E6, not a silent `return True`.
 
 A checklist that wants debug off in production covers prod plus debug. The check is the local stand-in.
 

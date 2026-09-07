@@ -20,7 +20,7 @@ flowchart TD
   Eq -->|yes| Allow[Allow]
 ```
 
-The lab’s repaired files are `bool(current) and presented == current`. Production still needs the secret created outside source, and a rebuild of images that shipped the old string. User-password lifecycle is a different authenticator. A hardware box for crypto is an advanced extra, not this check.
+`auth` is `bool(current) and presented == current`. Create the secret outside source, and rebuild images that shipped the old string. User-password lifecycle is a different authenticator. A hardware box for crypto is an advanced extra, not this check.
 
 There should be no default credentials — `auth`.
 

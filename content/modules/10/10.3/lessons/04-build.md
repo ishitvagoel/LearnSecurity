@@ -20,7 +20,7 @@ flowchart TD
   In -->|no| Deny[deny]
 ```
 
-The repaired files require membership in `{"app"}`. Production still needs that allow-list to be the *right* Role — `"app"` that can still list all Secrets is a lying least-privilege. A restricted pod profile remains a sibling grain. An outbound allow-list (the metadata hop) does not deny cluster-admin. Documented connection and retry toward the cluster API is extra, advanced work.
+The pod Role has to sit in `{"app"}`. An `"app"` Role that can still list all Secrets is lying least-privilege. A restricted pod profile remains a sibling grain. An outbound allow-list (the metadata hop) does not deny cluster-admin. Documented connection and retry toward the cluster API is extra, advanced work.
 
 Those accounts should be least-privileged — cluster-admin.
 

@@ -19,7 +19,7 @@ flowchart TD
   M --> Out["src slice n"]
 ```
 
-Do not accept “we use Python” as membership in the min. Production still needs integer wrap of size fields to be handled — a wrapped `n` is a lying min. Leftover C codecs (JNI, protobuf extensions) are sibling copies. Native unpackers and leftover C codecs stay leftover risk, later and harder — not this check.
+Do not accept “we use Python” as membership in the min. Integer wrap of size fields still has to be handled — a wrapped `n` is a lying min. Leftover C codecs (JNI, protobuf extensions) are sibling copies. Native unpackers and leftover C codecs stay leftover risk, later and harder — not this check.
 
 A production unpacker should **fail closed** on header/source mismatch rather than silently truncate without an error the caller can handle. This lab returns a short copy as the smallest trustworthy bound.
 

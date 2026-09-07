@@ -20,7 +20,7 @@ flowchart TD
   Svc -->|no| Deny["return none"]
 ```
 
-The lab’s repaired files return `"worker-sc"` only on an exact service match. Production still needs a least-privileged database role for that principal (3.3): a correctly named worker that is still god-mode can read every company. After the worker is `worker-sc`, it may still need Alice’s grant (4.4) to choose *which* notes. That later check is advanced work, not this check. Broker access lists wait for 10.3.
+`exporter` returns `"worker-sc"` only on an exact service match. A correctly named worker that is still god-mode can read every company — that principal still needs a least-privileged database role (3.3). After the worker is `worker-sc`, it may still need Alice’s grant (4.4) to choose *which* notes. That later check is advanced work, not this check. Broker access lists wait for 10.3.
 
 Use that individual service account — leftover Alice.
 

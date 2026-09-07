@@ -21,7 +21,7 @@ flowchart TD
   Bound -->|no| Deny[Deny]
 ```
 
-The lab’s repaired files return SQL text with `tenant=%s AND id=%s` and a `(tenant, note_id)` tuple. Production still needs 1.2 object grants (4.4) and a 3.3 database role as *second* checks. Identifier concatenation for ORDER BY stays leftover: allow-list column names instead of binding them as values. NoSQL operators and GraphQL arguments wait for 7.1 as the same shape.
+The query is `tenant=%s AND id=%s` with a `(tenant, note_id)` tuple. Object grants (4.4) and a 3.3 database role remain *second* checks. Identifier concatenation for ORDER BY stays leftover: allow-list column names instead of binding them as values. NoSQL operators and GraphQL arguments wait for 7.1 as the same shape.
 
 Use parameterized queries — `fetch_sql`.
 

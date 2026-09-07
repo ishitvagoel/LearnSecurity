@@ -18,7 +18,7 @@ flowchart TD
   Sock -->|no| Deny[Deny]
 ```
 
-The repaired files are `server_scheme == "https"`. Production still needs a bound load-balancer identity if you end TLS at the load balancer — that peer is what you trust, the header name is not. Pinning is leftover (later on phones), not a universal rule. Mutual TLS is a named leftover for service identity, not this header rule.
+`channel_is_https` is `server_scheme == "https"`. If you end TLS at the load balancer, bind that peer’s identity — the header name is not what you trust. Pinning is leftover (later on phones), not a universal rule. Mutual TLS is a named leftover for service identity, not this header rule.
 
 TLS has to have no cleartext fallback — the scheme check.
 

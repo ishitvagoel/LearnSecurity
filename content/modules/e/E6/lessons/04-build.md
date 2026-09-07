@@ -20,7 +20,7 @@ flowchart TD
   Fields -->|no| Deny[false]
 ```
 
-The repaired files require those three fields. Production still needs someone to *read* the register — an unread complete row is leftover. Inaccessible recovery is recorded as a flag here, not proven. Extra advanced documentation of a dangerous function is documentation, not this check.
+Owner, `review_by`, and the accessibility flag have to be filled. An unread complete row is still leftover. Inaccessible recovery is recorded as a flag here, not proven. Extra advanced documentation of a dangerous function is documentation, not this check.
 
 Expire on `review_by`. Re-accept with fields or fix the hole. Do not silently extend.
 
