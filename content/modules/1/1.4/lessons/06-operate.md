@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 Even after the button is fixed, someone will still fail recovery: a new exclusion you did not model, a library regression, a coercion event. Running it for real is the rest of the loop: notice, contain, restore, and refuse to “help” by emailing note bodies.
 
@@ -20,7 +20,7 @@ flowchart TD
   Sig --> Ev[Evidence: keyboard vs mouse and reason, never codes]
 ```
 
-Someone still has to notice, respond, and recover. A log product is not the rule, and a checklist is not proof.
+A log product is not the rule, and a checklist is not proof.
 
 ## Signals that do not become a second leak
 

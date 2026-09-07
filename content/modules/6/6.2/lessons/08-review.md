@@ -7,13 +7,13 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships the notes app’s HTML drawing. Review `labs/6.2/6.2-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `render` still leaves `<` as markup, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app’s HTML drawing. Review `labs/6.2/6.2-lab/vulnerable/` as that change. Check whether `render` still leaves `<` as markup, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_angle_brackets_are_encoded`) is the rule check. A comment “we should encode later” is not.
 
 ## Picture: template concatenates title
 
-Look at this first: **template concatenates title**. Label it **rule**, **tool**, or **false assurance** before you accept the change.
+**template concatenates title**. Label it **rule**, **tool**, or **false assurance** before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"cleaner after innerHTML"| False[False assurance]
 ```
 
-Keep this: `&lt;` present, extra tags absent. If that sink never includes encoding, that grammar mix is still open. A content-security header in report-only mode without an encode check is still the same problem.
+`&lt;` present, extra tags absent. If that sink never includes encoding, that grammar mix is still open. A content-security header in report-only mode without an encode check is still the same problem.
 
 A markdown pipeline that emits raw tags after this template is encoded is 2.1, not a reason to skip `test_angle_brackets_are_encoded`. HttpOnly cookies (2.3) do not encode HTML.
 

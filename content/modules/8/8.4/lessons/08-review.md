@@ -7,13 +7,13 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships the notes app’s prod export gating. Review `labs/8.4/8.4-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `api_allowed("debug", "ok")` still returns true, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app’s prod export gating. Review `labs/8.4/8.4-lab/vulnerable/` as that change. Check whether `api_allowed("debug", "ok")` still returns true, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_debug_build_cannot_call_prod_export`) is the rule check. A comment “we should split flavors later” is not. An R8 screenshot is not this review.
 
 ## Picture: api_allowed debug+ok true
 
-Look at this first: **`api_allowed` debug+ok true**. Label it **rule**, **tool**, or **false assurance** before you accept the change.
+**`api_allowed` debug+ok true**. Label it **rule**, **tool**, or **false assurance** before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|Play App Signing| False[False assurance]
 ```
 
-Keep this: debug plus ok denied. If that call never includes a server `release` and attest check, that debug-to-prod path is still open. An R8 screenshot without that check is still the same problem.
+What has to stay true: debug plus ok denied. If that call never includes a server `release` and attest check, that debug-to-prod path is still open. An R8 screenshot without that check is still the same problem.
 
 Signing keys in the repo (5.3) and the same API key in debug and release are other leftover holes — name them, do not skip `test_debug_build_cannot_call_prod_export`. Resilience checklists raise cost; they do not become Gate 8 evidence.
 

@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 Even after `delete_user` was fixed once, a replica session store, a refresh token, or a worker can still present `alice`. Running it for real is the rest of the loop: notice, contain, mass-revoke, and refuse to “help” by logging note bodies.
 
@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Revoke[Mass revoke and rotate if JWT]
 ```
 
-Someone still has to notice, respond, and recover. That work does not pick a log product. It does not kill the cookie.
+This still does not pick a log product. It does not kill the cookie.
 
 ## Signals that do not become a second leak
 

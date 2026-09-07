@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A new requirement can land without a test after `covered` was “fixed once.” Pair notice and recover. Do not log note bodies or company dumps from the failing test (3.1). Do not attach patient rows to the ticket.
 
@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Stop[block release]
 ```
 
-Someone still has to notice, respond, and recover. A governance product is not the rule, and a covered-requirement badge is not proof.
+A governance product is not the rule, and a covered-requirement badge is not proof.
 
 Re-run `test_status_only_row_is_not_coverage` after any matrix change. A green “checklist imported” tile is not that check. Mobile storage rows (8.2) are other requirements of the same check — inventory them before you claim recover. A 200-only test that someone flagged `asserts_isolation` by mistake is a later lying-flag leftover (9.3), not a silent pass.
 

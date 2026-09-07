@@ -13,7 +13,7 @@ The folder `labs/6.1/6.1-lab/vulnerable/` is the change. The check you already r
 
 ## Picture: problems to find (name them yourself)
 
-Look at this first: **`shell=True` or `sh -c` concatenation**. Label it rule, tool, or false assurance before you accept the change.
+**`shell=True` or `sh -c` concatenation**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"internal users"| False[False assurance]
 ```
 
-Keep this: program is not `sh`; name is one element. If that call never includes an argv list, that second parser is still open. A denylist of punctuation while `uses_shell` stays true is still the same problem.
+What has to stay true: program is not `sh`; name is one element. If that call never includes an argv list, that second parser is still open. A denylist of punctuation while `uses_shell` stays true is still the same problem.
 
 ## Problems to find (name them yourself)
 

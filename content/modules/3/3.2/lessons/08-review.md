@@ -7,13 +7,13 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships the notes-app threat list. Review `labs/3.2/3.2-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `threats_from_scan(True)` still omits `cross-tenant-read`, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes-app threat list. Review `labs/3.2/3.2-lab/vulnerable/` as that change. Check whether `threats_from_scan(True)` still omits `cross-tenant-read`, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_green_scanner_is_not_an_empty_threat_model`) is the rule test. A comment “will threat-model later” is not.
 
 ## Picture: threats = [] if scanner_green
 
-Look at this first: **threats = [] if `scanner_green`**. Label it rule, tool, or false assurance before you accept the change.
+**threats = [] if `scanner_green`**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"scanner was green"| False[False assurance]
 ```
 
-Keep this: always-name id present on green. If that call never includes a seeded join, that leftover path is still open.
+What has to stay true: always-name id present on green. If that call never includes a seeded join, that leftover path is still open.
 
 ## Problems to find (name them yourself)
 

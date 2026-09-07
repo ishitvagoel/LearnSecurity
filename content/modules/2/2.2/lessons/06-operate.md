@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 Even after the key includes the company, someone can still leak a body: a CDN config change, a new node, stale-while-revalidate serving an old path-only entry. Running it for real is the rest of the loop: notice, contain, restore, and refuse to “help” by logging note bodies.
 
@@ -22,7 +22,7 @@ flowchart TD
   Inc -->|no| Watch[Keep watching the live window]
 ```
 
-Someone still has to notice, respond, and recover. A log product is not the rule, and a checklist is not proof.
+A log product is not the rule, and a checklist is not proof.
 
 Certificate-failure drills belong to TLS deployment, not this cache-key sentence. Keep them in a separate note so they do not replace purge.
 

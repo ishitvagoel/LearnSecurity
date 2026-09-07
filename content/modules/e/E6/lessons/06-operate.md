@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A new “fast-track risk” form can drop `review_by` after the schema was “set once.” Pair notice and recover. Do not log leftover-risk writeups that contain secrets. Do not paste chart text into the ticket.
 
@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Expire[expire or re-accept]
 ```
 
-Someone still has to notice, respond, and recover. A governance product is not the rule, and a schema screenshot is not proof.
+A governance product is not the rule, and a schema screenshot is not proof.
 
 Re-run `test_exception_needs_owner_review_and_wcag` after any register-form change. A green “maturity 2.5” tile is not that check. Expired `review_by` dates are the same family — inventory them before claiming recover.
 

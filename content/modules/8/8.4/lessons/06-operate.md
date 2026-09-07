@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A new flavor can reuse the prod client id after `api_allowed` was “fixed once.” Pair notice and recover. Do not log binaries or secrets (5.3). Do not attach the APK to the ticket.
 
@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Revoke[Revoke debug client id]
 ```
 
-Someone still has to notice, respond, and recover. That work does not prove secrets stayed out of the APK.
+This still does not prove secrets stayed out of the APK.
 
 ## Signals that do not become a second leak
 

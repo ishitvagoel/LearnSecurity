@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## Review
 
-Treat the broken files as a pull request proposing reusable who-is-allowed logic. Don't just tally suspicious lines. Reconstruct the who-is-allowed relation the code actually implements, compare it with the notes-app rule, and write changes a developer can check.
+Treat the broken files as a pull request proposing reusable who-is-allowed logic. Reconstruct the who-is-allowed relation the code actually implements, compare it with the notes-app rule, and write changes a developer can check.
 
 The folders `labs/1.2/1.2-authority-matrix/vulnerable/authority.py` and `vulnerable/SECURITY.md` are the change.
 

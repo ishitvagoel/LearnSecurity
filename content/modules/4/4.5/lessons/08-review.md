@@ -7,13 +7,13 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships notes-app token acceptance. Review `labs/4.5/4.5-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `accept_token` still returns true for `aud=other-api`, compare that with the rule, and write changes a developer can verify.
+A colleague ships notes-app token acceptance. Review `labs/4.5/4.5-lab/vulnerable/` as that change. Check whether `accept_token` still returns true for `aud=other-api`, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_wrong_audience_is_rejected`) is the rule test. A comment “will check aud later” is not.
 
 ## Picture: verify signature, skip aud
 
-Look at this first: **verify signature, skip aud**. Label it rule, tool, or false assurance before you accept the change.
+**verify signature, skip aud**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"OpenID Connect is on"| False[False assurance]
 ```
 
-Keep this: wrong aud denied. If that call never includes an `aud` comparison, that leftover path is still open.
+What has to stay true: wrong aud denied. If that call never includes an `aud` comparison, that leftover path is still open.
 
 ## Problems to find (name them yourself)
 

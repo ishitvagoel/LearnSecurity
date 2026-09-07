@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A new tool can still be registered after the allow-list was "set once." Pair notice and recover. Do not log note bodies or full model transcripts. Do not paste the prompt into the ticket.
 
@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Revoke[revoke agent creds]
 ```
 
-Someone still has to notice, respond, and recover. A vendor product is not the rule, and calling the tool gate an allow-list is not proof.
+A vendor product is not the rule, and calling the tool gate an allow-list is not proof.
 
 Re-run `test_exec_sql_tool_is_denied` after any tool-registration change. A green "prompt forbids SQL" tile is not that check. Coding-assistant install tools in CI are the same family — inventory them before you claim recover.
 

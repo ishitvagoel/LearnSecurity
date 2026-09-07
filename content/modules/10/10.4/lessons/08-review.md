@@ -7,13 +7,13 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships the notes app’s compose boot check. Review `labs/10.4/10.4-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `boot_ok("prod", True)` still returns true, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app’s compose boot check. Review `labs/10.4/10.4-lab/vulnerable/` as that change. Check whether `boot_ok("prod", True)` still returns true, compare that with the rule, and write changes a developer can verify.
 
 Start at `boot_ok` and the prod-plus-debug pair, not at a scanner color or a `NODE_ENV` screenshot. The check you already ran (`test_prod_debug_must_not_boot`) is the rule test. A comment “will turn debug off later” is not.
 
 ## Picture: boot_ok true on prod plus debug
 
-Look at this first: **`boot_ok` true on prod plus debug**. Label it rule, tool, or false assurance before you accept the change.
+**`boot_ok` true on prod plus debug**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|canary 10 percent| False[False assurance]
 ```
 
-Keep this: prod plus debug denied. If that call never includes the both-at-once check, that always-boot path is still open. A `NODE_ENV` screenshot does not replace that check.
+What has to stay true: prod plus debug denied. If that call never includes the both-at-once check, that always-boot path is still open. A `NODE_ENV` screenshot does not replace that check.
 
 Feature flags are leftover you still have to trust. Admin bound to all interfaces is leftover in the same family (docs and monitoring pages). Do not skip `test_prod_debug_must_not_boot`. This page does not mark you as finished. Do not boot a live host to prove the finding.
 

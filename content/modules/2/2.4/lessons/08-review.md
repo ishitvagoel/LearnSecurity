@@ -7,13 +7,13 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships notes-app share. Review `labs/2.4/2.4-state-time/vulnerable/` as that change. Don't just tally suspicious lines. Check whether a second `share_note` with `k1` still appends a row, compare that with the rule, and write changes a developer can verify.
+A colleague ships notes-app share. Review `labs/2.4/2.4-state-time/vulnerable/` as that change. Check whether a second `share_note` with `k1` still appends a row, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_retry_does_not_duplicate_side_effect`) is the rule test. A comment “will add remembering later” is not.
 
 ## Picture: INSERT share on every POST
 
-Look at this first: **INSERT share on every POST**. Label it rule, tool, or false assurance before you accept the change.
+**INSERT share on every POST**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"HTTP 201 means once"| False[False assurance]
 ```
 
-Keep this: share count under retry. If that second call never includes a remembered first outcome, that leftover path is still open.
+What has to stay true: share count under retry. If that second call never includes a remembered first outcome, that leftover path is still open.
 
 ## Problems to find (name them yourself)
 

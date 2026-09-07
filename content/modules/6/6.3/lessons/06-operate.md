@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A new JSON share route can forget the token check after `allow_share` was “fixed once.” Pair notice and recover. Do not log cookie values or note bodies. Do not paste cookies into the ticket.
 
@@ -24,7 +24,7 @@ flowchart TD
 | Recover | Keep deny; revoke grants created in the window; notify the member |
 | Leftover | Lookalike UI the person clicked (phishing lesson); clickjacking |
 
-Someone still has to notice, respond, and recover. That work does not bind origin and token. It does not prove the anti-forgery check. Naming a network-filter product is not the rule. Re-run `test_foreign_origin_post_is_denied` after any share-route change; a green “SameSite=Lax” tile is not that check. JSON share routes and GET mutate paths are other paths of the same rule — inventory them before you claim recover.
+This still does not bind origin and token. It does not prove the anti-forgery check. Naming a network-filter product is not the rule. Re-run `test_foreign_origin_post_is_denied` after any share-route change; a green “SameSite=Lax” tile is not that check. JSON share routes and GET mutate paths are other paths of the same rule — inventory them before you claim recover.
 
 ## What the framework does vs what you still have to check
 

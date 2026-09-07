@@ -7,13 +7,13 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships the notes app’s CI install check. Review `labs/10.2/10.2-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `install_ok("aaa", "bbb")` still returns true, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app’s CI install check. Review `labs/10.2/10.2-lab/vulnerable/` as that change. Check whether `install_ok("aaa", "bbb")` still returns true, compare that with the rule, and write changes a developer can verify.
 
 Start at `install_ok` and the two hash strings, not at a scanner color or an SBOM screenshot. The check you already ran (`test_hash_mismatch_refuses_install`) is the rule test. A comment “will pin later” is not.
 
 ## Picture: install_ok true on hash mismatch
 
-Look at this first: **install_ok true on hash mismatch**. Label it rule, tool, or false assurance before you accept the change.
+**install_ok true on hash mismatch**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|provenance badge| False[False assurance]
 ```
 
-Keep this: mismatch denied. If that call never includes digest equality, that always-install leftover is still open. An SBOM screenshot without that check is still the same problem.
+What has to stay true: mismatch denied. If that call never includes digest equality, that always-install leftover is still open. An SBOM screenshot without that check is still the same problem.
 
 Unpinned Actions are a sibling grain. Secrets in fork pull requests are 5.3. Do not skip `test_hash_mismatch_refuses_install`. Do not claim the ship gate. Do not fetch a live package to prove the finding.
 

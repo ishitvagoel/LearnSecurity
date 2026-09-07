@@ -7,13 +7,13 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships the notes app’s unpacker. Review `labs/E4/e4-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `copy_into(4, b"abcdefgh", 4)` still returns more than 4 bytes, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app’s unpacker. Review `labs/E4/e4-lab/vulnerable/` as that change. Check whether `copy_into(4, b"abcdefgh", 4)` still returns more than 4 bytes, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_copy_does_not_exceed_buffer`) is the rule test. A comment “will bound later” is not.
 
 ## Picture: copy returns full src / declared_len plus 8
 
-Look at this first: **Copy returns full src / declared_len plus 8**. Label it rule, tool, or false assurance before you accept the change.
+**Copy returns full src / declared_len plus 8**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|awareness-list mapped| False[False assurance]
 ```
 
-Keep this: length ≤ bufsize. If that call never includes the three-way min, that oversize path is still open. A language sticker without that check is still the same problem.
+What has to stay true: length ≤ bufsize. If that call never includes the three-way min, that oversize path is still open. A language sticker without that check is still the same problem.
 
 Helpers that call C are leftover. Integer wrap is leftover. Do not skip `test_copy_does_not_exceed_buffer`. Do not claim a course gate. Do not compile a native overflow to prove the finding.
 

@@ -13,7 +13,7 @@ The folder `labs/9.2/9.2-lab/vulnerable/` is the change. The check you already r
 
 ## Picture: approved eval(user)
 
-Look at this first: **approved `eval(user)`**. Label it rule, tool, or false assurance before you accept the change.
+**approved `eval(user)`**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|bot looks good| False[False assurance]
 ```
 
-Keep this: eval-on-user rejected. If that call never includes an interpreter question, that always-approve leftover is still open. A formatter screenshot does not replace that check.
+What has to stay true: eval-on-user rejected. If that call never includes an interpreter question, that always-approve leftover is still open. A formatter screenshot does not replace that check.
 
 The lab substring is a stand-in — name `exec(` and generated code as leftover, do not skip `test_eval_on_user_input_is_rejected`. Do not dump weaponized eval. Do not claim a course gate.
 

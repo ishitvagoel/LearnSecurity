@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A cache or worker can still serve the old grant after `read` was “fixed once.” Pair notice and recover. Do not log note bodies, session tokens, or dump files into the ticket. Do not paste the chart into the ticket.
 
@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Notify[notify A rotate links]
 ```
 
-Someone still has to notice, respond, and recover. A scanner product is not the rule, and this week’s next-read check is not proof.
+A scanner product is not the rule, and this week’s next-read check is not proof.
 
 Re-run `test_revoked_share_cannot_read` after any share-path change. A green “DELETE 200” tile is not that check. Phone cache and leftover worker sessions are other read paths of the same family — inventory them before you claim recover. Tabletop remains the restore week.
 

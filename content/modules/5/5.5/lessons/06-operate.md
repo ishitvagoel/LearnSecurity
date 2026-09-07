@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 Even after `fetch_sql` was “fixed once,” a new report path can concatenate again. Running it for real is the rest of the loop: notice, contain, rotate, and restore if rows were changed.
 
@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Restore[Rotate creds; restore if mutated]
 ```
 
-Someone still has to notice, respond, and recover. That work does not bind parameters. A vendor name is not this week's rule. Someone still has to own the concatenating path.
+This still does not bind parameters. A vendor name is not this week's rule. Someone still has to own the concatenating path.
 
 ## Signals that do not become a second leak
 

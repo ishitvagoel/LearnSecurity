@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 Even after `log_event` was fixed once, a new handler, an exception printer, or an APM agent can put the body back. Running it for real is the rest of the loop: notice, contain, purge, and refuse to “help” by logging the body again.
 
@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Purge[Purge matching lines]
 ```
 
-Someone still has to notice, respond, and recover. A log product is not the rule, and a clean line is not proof.
+A log product is not the rule, and a clean line is not proof.
 
 ## Signals that do not become a second leak
 

@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A new endpoint can land with only 200 tests after `is_security_test` was “fixed once.” Pair notice and recover. Do not log note bodies from failed isolation cases (3.1). Do not attach patient JSON to the ticket.
 
@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Block[block release]
 ```
 
-Someone still has to notice, respond, and recover. A coverage product is not the rule, and an honest-suite badge is not proof.
+A coverage product is not the rule, and an honest-suite badge is not proof.
 
 Re-run `test_http_200_only_is_not_a_security_test` after any suite change. A green “94% coverage” tile is not that check. Field-level tests (7.2) and race-condition tests are other named what must not happen of the same shape — inventory them before you claim recover. Keep 200-only tests as product tests; do not delete them, and do not let them occupy the security-suite slot.
 

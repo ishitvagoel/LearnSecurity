@@ -7,13 +7,13 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships notes-app secret rotation. Review `labs/5.3/5.3-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `auth("sk-lab-hardcoded", current="rotated-now")` is still true, compare that with the rule, and write changes a developer can verify.
+A colleague ships notes-app secret rotation. Review `labs/5.3/5.3-lab/vulnerable/` as that change. Check whether `auth("sk-lab-hardcoded", current="rotated-now")` is still true, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_hardcoded_default_does_not_auth`) is the rule test. A comment “will rotate later” is not.
 
 ## Picture: DEFAULT still accepted
 
-Look at this first: **`DEFAULT = 'sk-lab-hardcoded'` still accepted**. Label it rule, tool, or false assurance before you accept the change.
+**`DEFAULT = 'sk-lab-hardcoded'` still accepted**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"gitignore"| False[False assurance]
 ```
 
-Keep this: default dead after rotate; missing current denies. If that call never includes equality with current, that leftover path is still open. A vault import without killing `DEFAULT` is still the same problem.
+What has to stay true: default dead after rotate; missing current denies. If that call never includes equality with current, that leftover path is still open. A vault import without killing `DEFAULT` is still the same problem.
 
 ## Problems to find (name them yourself)
 

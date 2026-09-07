@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A closer can still mark Done after `close_incident` was “fixed once.” Pair notice and recover. Do not log note bodies, session tokens, or dump files into the ticket. Do not paste note text into chat.
 
@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Reopen[reopen and restore]
 ```
 
-Someone still has to notice, respond, and recover. A SIEM product is not the rule, and a restore-ran tile is not proof.
+A SIEM product is not the rule, and a restore-ran tile is not proof.
 
 Re-run `test_cannot_close_without_recovery` after any close-workflow change. A green “alerts stopped” tile is not that check. Also re-run `test_cannot_close_when_logs_contain_note_body` — a second sink (crash reports, web telemetry) can reopen the leftover-body hole.
 

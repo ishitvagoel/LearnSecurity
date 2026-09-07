@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 Even after `review_ok` was “fixed once,” a later generated helper can put eval back. Running it for real is the rest of the loop: notice, contain, and recover.
 
@@ -20,7 +20,7 @@ flowchart TD
   Metric --> Revert[block merge]
 ```
 
-Someone still has to notice, respond, and recover. That work does not prove avoid-eval. A bot-vendor name is not the rule. Someone still has to own the always-approve path.
+This still does not prove avoid-eval. A bot-vendor name is not the rule. Someone still has to own the always-approve path.
 
 ## Signals that do not become a second leak
 

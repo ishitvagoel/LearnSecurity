@@ -22,7 +22,7 @@ flowchart TD
 
 The lab’s repaired files return `"worker-sc"` only on an exact service match. Production still needs a least-privileged database role for that principal (3.3): a correctly named worker that is still god-mode can read every company. After the worker is `worker-sc`, it may still need Alice’s grant (4.4) to choose *which* notes. That later check is advanced work, not this check. Broker access lists wait for 10.3.
 
-Industry lists ask for that individual service account. This week's check is the one that covers leftover Alice.
+Industry lists ask for that individual service account. This week's check covers leftover Alice.
 
 ## What the repaired files must show
 

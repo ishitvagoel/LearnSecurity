@@ -7,13 +7,13 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships notes-app uploads. Review `labs/6.4/6.4-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `resolve("../outside")` still leaves `/tmp/sc-lab`, compare that with the rule, and write changes a developer can verify.
+A colleague ships notes-app uploads. Review `labs/6.4/6.4-lab/vulnerable/` as that change. Check whether `resolve("../outside")` still leaves `/tmp/sc-lab`, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_dotdot_does_not_escape_root`) is the rule test. A comment “will canonicalize later” is not.
 
 ## Picture: open(user_path) / join without canonicalize
 
-Look at this first: **`open(user_path)` / join without canonicalize**. Label it rule, tool, or false assurance before you accept the change.
+**`open(user_path)` / join without canonicalize**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"Content-Type"| False[False assurance]
 ```
 
-Keep this: canonical object still under the folder. If that call never includes join-canonicalize-prefix, that leftover path is still open. A `..` denylist without a prefix test is still the same problem.
+What has to stay true: canonical object still under the folder. If that call never includes join-canonicalize-prefix, that leftover path is still open. A `..` denylist without a prefix test is still the same problem.
 
 Zip member paths are another parser of this rule, not a reason to skip `test_dotdot_does_not_escape_root`. Starlette `UploadFile.filename` is still client data after the change “randomizes names.”
 

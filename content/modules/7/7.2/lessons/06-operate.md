@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A new CSV exporter or a later worker dump (7.4) can skip the GraphQL resolver after `resolve` was “fixed once.” Pair notice and recover. Do not log `secret_internal` values (3.1). Do not attach the field value to the ticket.
 
@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Rotate[Rotate if the value escaped]
 ```
 
-Someone still has to notice, respond, and recover. That work does not check role × field. It does not prove field permission. Naming a GraphQL-gateway product is not the rule. Re-run `test_member_cannot_resolve_internal_field` after any serializer change; a green “field authz enabled” tile is not that check. Search highlighting and overnight export are other dumps of the same row — inventory them before you claim recover.
+This still does not check role × field. It does not prove field permission. Naming a GraphQL-gateway product is not the rule. Re-run `test_member_cannot_resolve_internal_field` after any serializer change; a green “field authz enabled” tile is not that check. Search highlighting and overnight export are other dumps of the same row — inventory them before you claim recover.
 
 ## Signals that do not become a second leak
 

@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A new JSON library, a worker re-parse, or a `jsonb` cast can bring two meanings back. Pair notice and recover. Do not log secrets or note bodies.
 
@@ -18,7 +18,7 @@ flowchart TD
   Decision -->|yes| Mediate[Hand the parse result to the who-is-allowed check]
 ```
 
-Someone still has to notice, respond, and recover. A log product is not the rule, and a checklist is not proof.
+A log product is not the rule, and a checklist is not proof.
 
 ## Signals that do not become a second leak
 

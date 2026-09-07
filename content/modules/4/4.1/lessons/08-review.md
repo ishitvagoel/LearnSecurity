@@ -13,7 +13,7 @@ The folder `labs/4.1/4.1-lab/vulnerable/` is the change. The check you already r
 
 ## Picture: problems to find (name them yourself)
 
-Look at this first: **`DELETE FROM users` without session purge**. Label it rule, tool, or false assurance before you accept the change.
+**`DELETE FROM users` without session purge**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"single sign-on is on"| False[False assurance]
 ```
 
-Keep this: session dead after delete. If that same delete never includes leftover-kill, the leftover is still there.
+What has to stay true: session dead after delete. If that same delete never includes leftover-kill, the leftover is still there.
 
 ## Problems to find (name them yourself)
 

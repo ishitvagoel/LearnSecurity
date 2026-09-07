@@ -7,13 +7,13 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships the notes app’s security-suite gate. Review `labs/9.3/9.3-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `{status_asserted: True}` still counts as a security test, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app’s security-suite gate. Review `labs/9.3/9.3-lab/vulnerable/` as that change. Check whether `{status_asserted: True}` still counts as a security test, compare that with the rule, and write changes a developer can verify.
 
 Start at `is_security_test` and the 200-only row, not at a scanner color or a coverage screenshot. The check you already ran (`test_http_200_only_is_not_a_security_test`) is the rule test. A comment “will add isolation later” is not.
 
 ## Picture: assert r.status_code==200 only
 
-Look at this first: **`assert r.status_code==200` only**. Label it rule, tool, or false assurance before you accept the change.
+**`assert r.status_code==200` only**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|testing-guide tick| False[False assurance]
 ```
 
-Keep this: 200-only is not a security test. If that call never includes a named what must not happen, that happy-path leftover is still open. A coverage screenshot does not replace that check.
+200-only is not a security test. If that call never includes a named what must not happen, that happy-path leftover is still open. A coverage screenshot does not replace that check.
 
 Fuzz with no named bad result is leftover 9.5. Field grain is 7.2. Do not skip `test_http_200_only_is_not_a_security_test`. Do not claim a later gate. Do not treat coverage percent as the isolation check.
 

@@ -7,13 +7,13 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships notes-app at-rest protection. Review `labs/5.2/5.2-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether Base64 decode of `protect("secret")` still equals `"secret"`, compare that with the rule, and write changes a developer can verify.
+A colleague ships notes-app at-rest protection. Review `labs/5.2/5.2-lab/vulnerable/` as that change. Check whether Base64 decode of `protect("secret")` still equals `"secret"`, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_protect_is_not_mere_encoding`) is the rule test. A comment “will add AES later” is not.
 
 ## Picture: protect equals base64
 
-Look at this first: **`protect = base64`**. Label it rule, tool, or false assurance before you accept the change.
+**`protect = base64`**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"HTTPS"| False[False assurance]
 ```
 
-Keep this: decode is not the plaintext. If `protect` never includes a keyed, non-encoding transform, that reversible leftover is still open. A comment that says AES without a round-trip test is tool theater.
+What has to stay true: decode is not the plaintext. If `protect` never includes a keyed, non-encoding transform, that reversible leftover is still open. A comment that says AES without a round-trip test is tool theater.
 
 ## Problems to find (name them yourself)
 

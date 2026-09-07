@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A new cookie, a WebView, a “debug” `Set-Cookie`, or a second name (`sc_refresh`) can drop the flag. Pair notice and recover. Do not log session values, note bodies, or recovery codes.
 
@@ -19,7 +19,7 @@ flowchart TD
   Log --> Rotate[Rotate session ids]
 ```
 
-Someone still has to notice, respond, and recover. That work does not pick a log product. It does not prove a checklist. Report-Only CSP is a **different** notice path. It does not restore this rule.
+This still does not pick a log product. It does not prove a checklist. Report-Only CSP is a **different** notice path. It does not restore this rule.
 
 | Outcome | This topic |
 |---|---|

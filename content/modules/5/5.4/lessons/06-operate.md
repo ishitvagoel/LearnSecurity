@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A misconfigured proxy can start trusting `*` again after `channel_is_https` was “fixed once.” Pair notice and recover. Do not log cookie values. Do not paste a session into the ticket.
 
@@ -19,7 +19,7 @@ flowchart TD
   Alert --> Revoke[Revoke cookies issued on that path]
 ```
 
-Someone still has to notice, respond, and recover. That work does not bind the socket. It does not pick a log product. Someone still has to own the mismatch.
+This still does not bind the socket. It does not pick a log product. Someone still has to own the mismatch.
 
 ## Signals that do not become a second leak
 

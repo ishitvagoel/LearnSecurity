@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A CDN can strip the enforcing header after deploy. Pair notice and recover. Do not log full HTML or note bodies (3.1). Do not paste the page source into the ticket.
 
@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Flip[add enforcing header]
 ```
 
-Someone still has to notice, respond, and recover. That work does not prove the enforcing header is present.
+This still does not prove the enforcing header is present.
 
 ## Signals that do not become a second leak
 

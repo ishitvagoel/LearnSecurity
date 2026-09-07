@@ -13,7 +13,7 @@ The folder `labs/6.7/6.7-lab/vulnerable/` is the change. The check you already r
 
 ## Picture: problems to find (name them yourself)
 
-Look at this first: **No cap (`allow` always true)**. Label it rule, tool, or false assurance before you accept the change.
+**No cap (`allow` always true)**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"IP rate limit"| False[False assurance]
 ```
 
-Keep this: fourth denied. If that call never includes a server `n <= 3`, that unbounded path is still open. An IP bucket at the edge without that check is still the same problem.
+What has to stay true: fourth denied. If that call never includes a server `n <= 3`, that unbounded path is still open. An IP bucket at the edge without that check is still the same problem.
 
 A disabled button in the browser (the leftover 3.4 already named for shares) does not bind `allow(4)`. GraphQL aliases (7.1) are another budget path — name them, do not skip `test_fourth_export_is_denied`.
 

@@ -4,7 +4,7 @@
 **Loop step:** 6 Operate
 **Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels. CSF names outcomes; it is not a pentest permit.
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A new “quick check” snippet can paste a public host after the allow-list was “set once.” Pair noticing with recovery. **Never** store response bodies from denied hosts. Never screenshot a public site “for the ticket.” Never continue after deny.
 

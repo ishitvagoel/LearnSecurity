@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A chart can still add a ClusterRoleBinding after admission was "set once." Pair notice and recover. Do not log kubeconfig, cloud tokens, or node credentials. Do not paste `~/.kube/config` into the ticket.
 
@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Rotate[rotate cluster creds]
 ```
 
-Someone still has to notice, respond, and recover. A CIS product is not the rule, and a least-privileged badge is not proof.
+A CIS product is not the rule, and a least-privileged badge is not proof.
 
 Re-run `test_cluster_admin_pod_is_denied` after any Helm change. A green "namespace private" tile is not that check. Break-glass ClusterRoles are a later elective — inventory them before you claim recover.
 

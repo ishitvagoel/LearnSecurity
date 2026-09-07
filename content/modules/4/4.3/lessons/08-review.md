@@ -7,13 +7,13 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships notes-app session parsing. Review `labs/4.3/4.3-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `session_from_request` still returns the query token, compare that with the rule, and write changes a developer can verify.
+A colleague ships notes-app session parsing. Review `labs/4.3/4.3-lab/vulnerable/` as that change. Check whether `session_from_request` still returns the query token, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_query_string_token_is_rejected`) is the rule test. A comment “will move to cookies later” is not.
 
 ## Picture: session_from_request uses query
 
-Look at this first: **`session_from_request` uses query**. Label it rule, tool, or false assurance before you accept the change.
+**`session_from_request` uses query**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"TLS hides logs"| False[False assurance]
 ```
 
-Keep this: query yields `None`. If that call never includes a dropped query channel, that leftover path is still open. “We use JWTs” and “SPA best practice” are tool slogans until the pytest fails on the broken files.
+What has to stay true: query yields `None`. If that call never includes a dropped query channel, that leftover path is still open. “We use JWTs” and “SPA best practice” are tool slogans until the pytest fails on the broken files.
 
 ## Problems to find (name them yourself)
 

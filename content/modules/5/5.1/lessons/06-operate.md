@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 Even after `delete_account` was fixed once, a replica warehouse, a backup, or a support ticket can still hold the body. Running it for real is the rest of the loop: notice, contain, purge, and refuse to “help” by logging note bodies.
 
@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Purge[Purge partition]
 ```
 
-Someone still has to notice, respond, and recover. That work does not pick a log product. It does not walk the deletion graph.
+This still does not pick a log product. It does not walk the deletion graph.
 
 ## Signals that do not become a second leak
 

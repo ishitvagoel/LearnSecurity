@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 Even after `allow` was “fixed once,” a new export format can skip the counter. Running it for real is the rest of the loop: notice, contain, and recover.
 
@@ -21,7 +21,7 @@ flowchart TD
   Cost --> Stop[Disable token if stolen session]
 ```
 
-Someone still has to notice, respond, and recover. That work does not count exports. A vendor name is not this week's rule. Someone still has to own the budget.
+This still does not count exports. A vendor name is not this week's rule. Someone still has to own the budget.
 
 ## Signals that do not become a second leak
 

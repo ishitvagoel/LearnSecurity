@@ -7,7 +7,7 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships notes-app cookie policy. Review `labs/2.3/2.3-browser-policy/vulnerable/` as if it were that change. Don't just tally suspicious lines. Check whether the jar still hands `sc_session` to script, compare that with the rule, and write changes a developer can verify.
+A colleague ships notes-app cookie policy. Review `labs/2.3/2.3-browser-policy/vulnerable/` as if it were that change. Check whether the jar still hands `sc_session` to script, compare that with the rule, and write changes a developer can verify.
 
 Start at the cookie reader, not at a CSP badge.
 
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|HttpOnly means no XSS| False[False assurance]
 ```
 
-Keep this: script read of the session. If that read never includes an HttpOnly honor, that leftover path is still open.
+What has to stay true: script read of the session. If that read never includes an HttpOnly honor, that leftover path is still open.
 
 ## Problems to label yourself
 

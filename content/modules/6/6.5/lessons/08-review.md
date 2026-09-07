@@ -7,13 +7,13 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships notes-app unfurl. Review `labs/6.5/6.5-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `allowed` is still true for the named link-local metadata URL, compare that with the rule, and write changes a developer can verify.
+A colleague ships notes-app unfurl. Review `labs/6.5/6.5-lab/vulnerable/` as that change. Check whether `allowed` is still true for the named link-local metadata URL, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_link_local_metadata_is_denied`) is the rule test. A comment “will allow-list later” is not.
 
 ## Picture: requests.get of the user URL / scheme-only allow
 
-Look at this first: **`requests.get` of the user URL / scheme-only allow**. Label it rule, tool, or false assurance before you accept the change.
+**`requests.get` of the user URL / scheme-only allow**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"follows redirects"| False[False assurance]
 ```
 
-Keep this: link-local denied. If that call never includes parse-then-allow-list, that deputy path is still open. An HTTPS prefix without a host allow-list is still the same problem.
+What has to stay true: link-local denied. If that call never includes parse-then-allow-list, that deputy path is still open. An HTTPS prefix without a host allow-list is still the same problem.
 
 ## Problems to find (name them yourself)
 

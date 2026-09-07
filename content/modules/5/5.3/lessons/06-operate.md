@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 An old image or a worker can still present `sk-lab-hardcoded` after `auth` was “fixed once.” Pair notice and recover. Do not log the secret. Do not paste the key into the ticket.
 
@@ -24,7 +24,7 @@ flowchart TD
 | Recover | Rotate; rebuild images; purge logs |
 | Leftover | Copies already cloned |
 
-Someone still has to notice, respond, and recover. That work does not kill `DEFAULT`. A vendor name is not this week's rule. Re-run `test_hardcoded_default_does_not_auth` after any `auth` change; a green “Vault enabled” tile is not that check. Images and workers are other copies of the same rule — inventory them before claiming recover.
+This still does not kill `DEFAULT`. A vendor name is not this week's rule. Re-run `test_hardcoded_default_does_not_auth` after any `auth` change; a green “Vault enabled” tile is not that check. Images and workers are other copies of the same rule — inventory them before claiming recover.
 
 Recovery is incomplete if the next image still ships `DEFAULT = "sk-lab-hardcoded"` as an or-clause. Rebuild and prove `test_missing_current_denies` the same day you rotate, or the next allow-when-missing still authenticates the gist copy. A vault tile is not that check.
 

@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A new SDK version can turn “include extras” back on after `crash_report` was “fixed once.” Pair notice and recover. Do not log the body you just redacted (3.1). Do not attach the report body to the ticket.
 
@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Purge[Purge vendor copy]
 ```
 
-Someone still has to notice, respond, and recover. A crash product is not the rule, and a clean crash report is not proof.
+A crash product is not the rule, and a clean crash report is not proof.
 
 Re-run `test_crash_report_omits_note_body` after any crash-SDK change. A green “store privacy form filled” tile is not that check. Tracker SDKs and web crash reports (10.5) are other places for the same body — inventory them before you claim recover.
 

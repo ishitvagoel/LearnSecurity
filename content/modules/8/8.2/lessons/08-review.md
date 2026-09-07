@@ -7,13 +7,13 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships the notes app’s offline cache. Review `labs/8.2/8.2-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `save_note("secret")` still leaves `'secret'` on disk, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app’s offline cache. Review `labs/8.2/8.2-lab/vulnerable/` as that change. Check whether `save_note("secret")` still leaves `'secret'` on disk, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_cached_note_is_not_plaintext_on_disk`) is the rule check. A comment “we should wrap later” is not. A storage sticker in the ticket is not this review.
 
 ## Picture: write body to cache.txt
 
-Look at this first: **Write body to cache.txt**. Label it **rule**, **tool**, or **false assurance** before you accept the change.
+**Write body to cache.txt**. Label it **rule**, **tool**, or **false assurance** before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|MODE_PRIVATE| False[False assurance]
 ```
 
-Keep this: `plaintext_on_disk()` false. If that call never includes a wrap-then-write, that plaintext path is still open. A fingerprint prompt without that check is still the same problem.
+`plaintext_on_disk()` false. If that call never includes a wrap-then-write, that plaintext path is still open. A fingerprint prompt without that check is still the same problem.
 
 `MODE_PRIVATE` keeps other apps out on a healthy OS; it does not encrypt. Backups and 4.1 logout wipe are other copies — name them, do not skip `test_cached_note_is_not_plaintext_on_disk`. Do not claim the lab `aead:` prefix is AES.
 

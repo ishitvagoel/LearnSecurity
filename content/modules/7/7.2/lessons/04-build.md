@@ -24,7 +24,7 @@ flowchart TD
 
 The repaired files check `role == "service"` only for `secret_internal`. Production still needs the table restated for CSV, search snippets, debug toolbar, and later workers (7.4). Object GET success (4.4) is a coarser grain — identifiers find a row; they do not authorize fields. Extra-key *writes* remain 7.1.
 
-Industry lists ask for that explicit permission implemented. This week's check is the one that covers member × `secret_internal`. Applying a role change through every serializer right away is **advanced**, not this week's check.
+Industry lists ask for that explicit permission implemented. This week's check covers member × `secret_internal`. Applying a role change through every serializer right away is **advanced**, not this week's check.
 
 ## What the repaired files must show
 

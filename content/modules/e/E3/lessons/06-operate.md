@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A webhook can still append. Pair notice and recover. There is no card number in this practice — keep it that way (5.1). Do not paste billing dumps into the ticket.
 
@@ -23,7 +23,7 @@ flowchart TD
 | Recover | Credit extra in a runbook; still fail the test first |
 | Leftover | New-key retry; webhook race |
 
-Someone still has to notice, respond, and recover. That work does not prove this ledger rule. A vendor name is not this week's rule. Re-run `test_duplicate_capture_does_not_double_charge` after any capture-path change; a green “processor remembers” tile is not that check. Webhook inserts are the same family — inventory them before claiming recover.
+This still does not prove this ledger rule. A vendor name is not this week's rule. Re-run `test_duplicate_capture_does_not_double_charge` after any capture-path change; a green “processor remembers” tile is not that check. Webhook inserts are the same family — inventory them before claiming recover.
 
 ## What the framework does vs what you still have to check
 

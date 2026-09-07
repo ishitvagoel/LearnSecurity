@@ -7,13 +7,13 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships notes-app company binding. Don't just tally suspicious lines. Check whether `tenant_for({"tenant": "A"}, {"tenant": "B"})` still returns `"B"`, compare that with the module rule, and write changes a developer can verify.
+A colleague ships notes-app company binding. Check whether `tenant_for({"tenant": "A"}, {"tenant": "B"})` still returns `"B"`, compare that with the module rule, and write changes a developer can verify.
 
 The folder `labs/E5/e5-lab/vulnerable/` is the change. Review it as if it were the notes app’s note query. The check you already ran (`test_body_cannot_switch_tenant`) is the rule test. A comment “will bind later” is not. The JSON body is not the tenant. Body tenant overrides session is the smell. Bind tenant from the session is the structural change.
 
 ## Picture: company taken from the body
 
-Look at this first: **company taken from the body**. Label it rule, tool, or false assurance before you accept the change.
+**company taken from the body**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|famous-bugs mapped| False[False assurance]
 ```
 
-Keep this: session A plus body B is A. If that call never includes session binding, that body-wins path is still open. A row-level screenshot does not replace that check.
+What has to stay true: session A plus body B is A. If that call never includes session binding, that body-wins path is still open. A row-level screenshot does not replace that check.
 
 Cache keys without company are leftover. Silent impersonation is a later topic. Do not skip `test_body_cannot_switch_tenant`. Do not claim a course gate. Do not probe a live company to prove the finding.
 

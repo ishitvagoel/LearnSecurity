@@ -13,7 +13,7 @@ The folder `labs/5.5/5.5-lab/vulnerable/` is the change. The check you already r
 
 ## Picture: problems to find (name them yourself)
 
-Look at this first: **f-string `SELECT` that interpolates `note_id`**. Label it rule, tool, or false assurance before you accept the change.
+**f-string `SELECT` that interpolates `note_id`**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"row-level rule in prod"| False[False assurance]
 ```
 
-Keep this: `fetch_sql` is a bound tuple. If that call never includes a params tuple, that grammar mix is still open. `%s` inside a concatenated string is still the same problem.
+`fetch_sql` is a bound tuple. If that call never includes a params tuple, that grammar mix is still open. `%s` inside a concatenated string is still the same problem.
 
 ## Problems to find (name them yourself)
 

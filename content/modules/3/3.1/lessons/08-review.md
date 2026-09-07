@@ -13,7 +13,7 @@ The folder `labs/3.1/3.1-lab/vulnerable/` is the change. The check you already r
 
 ## Picture: problems to find (name them yourself)
 
-Look at this first: **`logger.info('read %s', note.body)`**. Label it rule, tool, or false assurance before you accept the change.
+**`logger.info('read %s', note.body)`**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|logs are internal| False[False assurance]
 ```
 
-Keep this: body substring absent from this log. If that call never includes an allow-listed log API, the leftover is still there.
+What has to stay true: body substring absent from this log. If that call never includes an allow-listed log API, the leftover is still there.
 
 ## Problems to find (name them yourself)
 

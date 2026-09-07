@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 Even after `accept` was fixed once, a new accept route can skip consume. Running it for real is the rest of the loop: notice, keep deny, remove a surprise member, and refuse to “help” by logging the token.
 
@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Revoke[Remove extra membership if one landed]
 ```
 
-Someone still has to notice, respond, and recover. That work does not pick a log product. It does not consume the token.
+This still does not pick a log product. It does not consume the token.
 
 ## Signals that do not become a second leak
 

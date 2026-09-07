@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A new rule can fire a new HIGH after `ship_ok` was “fixed once.” Pair notice and recover. Do not log secret-scanner payloads or note bodies. Do not paste scanner snippets with fake clinic text into Slack.
 
@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Stop[block ship]
 ```
 
-Someone still has to notice, respond, and recover. A scanner product is not the rule, and an owned-finding badge is not proof.
+A scanner product is not the rule, and an owned-finding badge is not proof.
 
 Re-run `test_unmapped_high_blocks_ship` after any scanner-rule change. A green “code scanning on” tile is not that check. SCA CVEs that are not actually called still need an *owner* on the map — inventory them before you claim recover.
 

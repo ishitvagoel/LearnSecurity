@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 Even after `protect` was “fixed once,” a new encoding wrapper can land in a worker. Running it for real is the rest of the loop: notice, contain, re-protect, and refuse to “help” by logging note bodies.
 
@@ -21,7 +21,7 @@ flowchart TD
   Metric --> Rotate[Rotate keys later]
 ```
 
-Someone still has to notice, respond, and recover. That work does not encrypt the column. It does not pick a log product.
+This still does not encrypt the column. It does not pick a log product.
 
 ## Signals that do not become a second leak
 

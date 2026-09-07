@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A markdown path can bring raw HTML back after `render` was “fixed once.” Pair notice and recover. Do not log title bodies if they are patient data (3.1). Do not paste nicknames into the ticket.
 
@@ -17,7 +17,7 @@ flowchart TD
   Alert --> Patch[Patch renderer; rotate sessions if needed]
 ```
 
-Someone still has to notice, respond, and recover. That work does not encode HTML. It does not prove a checklist.
+This still does not encode HTML. It does not prove a checklist.
 
 ## Signals that do not become a second leak
 

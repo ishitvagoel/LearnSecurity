@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A new exported Activity can copy extras again after `open_link` was “fixed once.” Pair notice and recover. Do not log full URLs if they contain tokens (4.3). Do not attach the link to the ticket.
 
@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Relogin[Force re-login if session already flipped]
 ```
 
-Someone still has to notice, respond, and recover. That work does not copy “ignore identity keys.” They do not prove a checklist. Someone still has to own the leftover.
+This still does not copy “ignore identity keys.” They do not prove a checklist. Someone still has to own the leftover.
 
 ## Signals that do not become a second leak
 

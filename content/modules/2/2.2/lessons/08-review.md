@@ -13,7 +13,7 @@ The folder `labs/2.2/2.2-request-path/vulnerable/` is the change. Reconstruct wh
 
 ## Picture: problems to find (name them yourself)
 
-Look at this first: **`Cache-Control: public` on `/notes/{id}`**. Label it rule, tool, or false assurance before you accept the change.
+**`Cache-Control: public` on `/notes/{id}`**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD

@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A new WorkManager blob can skip the cache wrapper after `save_note` was “fixed once.” Pair notice and recover. Do not log note bodies (3.1). Do not attach the chart to the ticket.
 
@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Flag["backup_flag review"]
 ```
 
-Someone still has to notice, respond, and recover. That work does not prove the wrap. It does not prove a checklist.
+This still does not prove the wrap. It does not prove a checklist.
 
 ## Signals that do not become a second leak
 

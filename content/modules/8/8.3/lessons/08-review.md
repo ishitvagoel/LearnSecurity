@@ -7,13 +7,13 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships the notes app’s App Link handling. Review `labs/8.3/8.3-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `open_link({"as": "admin"})` still switches `current_user()`, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app’s App Link handling. Review `labs/8.3/8.3-lab/vulnerable/` as that change. Check whether `open_link({"as": "admin"})` still switches `current_user()`, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_deeplink_as_param_does_not_switch_user`) is the rule check. A comment “we should ignore extras later” is not. An App Links screenshot is not this review.
 
 ## Picture: current_user = extras['as']
 
-Look at this first: **`current_user = extras['as']`**. Label it **rule**, **tool**, or **false assurance** before you accept the change.
+**`current_user = extras['as']`**. Label it **rule**, **tool**, or **false assurance** before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|App Links verified| False[False assurance]
 ```
 
-Keep this: alice unchanged. If that call never includes “ignore identity keys”, that session switch is still open. An App Links screenshot without that check is still the same problem.
+What has to stay true: alice unchanged. If that call never includes “ignore identity keys”, that session switch is still open. An App Links screenshot without that check is still the same problem.
 
 WebView `addJavascriptInterface` and custom schemes are other IPC holes — name them, do not skip `test_deeplink_as_param_does_not_switch_user`.
 

@@ -4,7 +4,7 @@
 **Loop step:** 6 Operate
 **Standards:** NIST CSF 2.0 (final) DE/RS/RC as outcome labels. CSF names outcomes; it does not mint Gate 1.
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A new “fast-track seniors” flag can reintroduce score-as-skip after the check was “set once.” Pair noticing with recovery. Do not back-date check-in 1. Do not log quiz item text if it leaks practice keys. Do not treat a badge screenshot as recovery evidence.
 

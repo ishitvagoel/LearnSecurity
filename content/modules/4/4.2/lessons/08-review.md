@@ -13,7 +13,7 @@ The check you already ran (`test_password_is_not_phishing_resistant`) is the rul
 
 ## Picture: problems to find (name them yourself)
 
-Look at this first: **`phishing_resistant('password', evil, real)` True**. Label it **rule**, **tool**, or **false assurance** before you accept the change.
+**`phishing_resistant('password', evil, real)` True**. Label it **rule**, **tool**, or **false assurance** before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"MFA equals resistant"| False[False assurance]
 ```
 
-For each claim and each branch: label **rule**, **tool**, or **false assurance**. Keep this: password at lookalike is false. If that call never includes origin binding, the leftover is still there.
+For each claim and each branch: label **rule**, **tool**, or **false assurance**. What has to stay true: password at lookalike is false. If that call never includes origin binding, the leftover is still there.
 
 Problems to find (name them yourself; do not open the keys file):
 

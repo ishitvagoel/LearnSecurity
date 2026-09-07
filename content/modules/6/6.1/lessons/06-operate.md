@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 Even after `argv_for_list` was “fixed once,” a plugin path can bring `sh -c` back. Running it for real is the rest of the loop: notice, contain, and recover.
 
@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Kill[Kill child; isolate plugin]
 ```
 
-Someone still has to notice, respond, and recover. That work does not build argv. A vendor name is not this week's rule. Someone still has to own the concatenating path.
+This still does not build argv. A vendor name is not this week's rule. Someone still has to own the concatenating path.
 
 ## Signals that do not become a second leak
 

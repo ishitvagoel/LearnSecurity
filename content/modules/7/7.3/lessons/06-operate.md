@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 Even after `accept` was “fixed once,” a new callback path can skip the MAC. Running it for real is the rest of the loop: notice, contain, and keep the deny.
 
@@ -20,7 +20,7 @@ flowchart TD
   Metric --> Rotate[Rotate disposable secret if events escaped]
 ```
 
-Someone still has to notice, respond, and recover. That work does not compute the MAC. A vendor name is not this week's rule. Someone still has to own every callback path.
+This still does not compute the MAC. A vendor name is not this week's rule. Someone still has to own every callback path.
 
 ## Signals that do not become a second leak
 

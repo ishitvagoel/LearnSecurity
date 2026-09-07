@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A new magic link, a proxy that copies query into a header, or a screenshot can still leak after the parser was “fixed once.” Pair notice and recover. Do not log the token while investigating. Do not paste the URL into the ticket.
 
@@ -24,7 +24,7 @@ flowchart TD
 | Recover | Revoke; purge matching logs |
 | Leftover | History and screenshots you cannot purge |
 
-Someone still has to notice, respond, and recover. That work does not prove secrets stay out of the URL. A vendor name is not this week's rule. Re-run `test_query_string_token_is_rejected` after any parser change; a green TLS dashboard is not that check. History, screenshots, and chat pastes remain leftovers you cannot purge — revoke the token anyway.
+This still does not prove secrets stay out of the URL. A vendor name is not this week's rule. Re-run `test_query_string_token_is_rejected` after any parser change; a green TLS dashboard is not that check. History, screenshots, and chat pastes remain leftovers you cannot purge — revoke the token anyway.
 
 Recovery is incomplete if the next deploy still builds `?access_token=` in a Next.js share helper. Grep the frontend for query builders the same day you rotate the signing key, or the next copied URL re-issues the leak. uvicorn will keep printing the query unless the access-log format changes; notice still belongs in `session_from_request` before any log line is written.
 

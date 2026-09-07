@@ -7,13 +7,13 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships notes-app share. Review `labs/3.4/3.4-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether eight `add_share` calls still leave `last > 5`, compare that with the rule, and write changes a developer can verify.
+A colleague ships notes-app share. Review `labs/3.4/3.4-lab/vulnerable/` as that change. Check whether eight `add_share` calls still leave `last > 5`, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_share_cap_is_enforced`) is the rule test. A comment “will cap later” is not.
 
 ## Picture: cap in React only
 
-Look at this first: **Cap in React only**. Label it rule, tool, or false assurance before you accept the change.
+**Cap in React only**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"filter has awareness rule"| False[False assurance]
 ```
 
-Keep this: count ≤ 5 after eight writes. If that loop never includes a write-path ceiling, that leftover path is still open.
+What has to stay true: count ≤ 5 after eight writes. If that loop never includes a write-path ceiling, that leftover path is still open.
 
 ## Problems to find (name them yourself)
 

@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A flag can still flip after `boot_ok` was “fixed once.” Pair notice and recover. Do not log stack traces that contain secrets, session tokens, or note bodies. Do not paste the traceback into the ticket.
 
@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Kill[kill and rotate trace secrets]
 ```
 
-Someone still has to notice, respond, and recover. A canary product is not the rule, and a boot-refused tile is not proof.
+A canary product is not the rule, and a boot-refused tile is not proof.
 
 Re-run `test_prod_debug_must_not_boot` after any compose change. A green `NODE_ENV` tile is not that check. Emergency debug is E6 — inventory it before you claim recover.
 

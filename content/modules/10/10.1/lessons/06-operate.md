@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A new identity change can land after `merge_ok` was “fixed once.” Pair notice and recover. Do not log GitHub tokens or real org names (5.3). Do not paste private threat-model bodies into chat.
 
@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Stop[block merge]
 ```
 
-Someone still has to notice, respond, and recover. That work does not prove the design-review practice exists. It does not pick a GitHub product. A vendor name is not this week's rule. Someone still has to own the leftover.
+This still does not prove the design-review practice exists. It does not pick a GitHub product. A vendor name is not this week's rule. Someone still has to own the leftover.
 
 Re-run `test_merge_requires_threat_model_id` after any merge-bot change. A green “CODEOWNERS required” tile is not that check. Stale TM-12 that never mentions OAuth is a 3.2 leftover — inventory it before you claim recover.
 

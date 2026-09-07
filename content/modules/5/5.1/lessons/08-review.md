@@ -13,7 +13,7 @@ The folder `labs/5.1/5.1-lab/vulnerable/` is the change. The check you already r
 
 ## Picture: problems to find (name them yourself)
 
-Look at this first: **`delete_account` only `NOTES.pop`**. Label it rule, tool, or false assurance before you accept the change.
+**`delete_account` only `NOTES.pop`**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"privacy policy"| False[False assurance]
 ```
 
-Keep this: analytics and search bodies are None after delete. If that same delete never includes a pop of those copies, that leftover path is still open. “We anonymized user ids” while the body column remains is still the same problem.
+What has to stay true: analytics and search bodies are None after delete. If that same delete never includes a pop of those copies, that leftover path is still open. “We anonymized user ids” while the body column remains is still the same problem.
 
 ## Problems to find (name them yourself)
 

@@ -7,13 +7,13 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships the notes app’s incident close. Review `labs/10.5/10.5-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `close_incident({"recovery": "todo", "logs": "ok"})` still returns true, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app’s incident close. Review `labs/10.5/10.5-lab/vulnerable/` as that change. Check whether `close_incident({"recovery": "todo", "logs": "ok"})` still returns true, compare that with the rule, and write changes a developer can verify.
 
 Start at `close_incident` and the recovery-todo row, not at a scanner color or a SIEM screenshot. The check you already ran (`test_cannot_close_without_recovery`) is the rule test. A comment “will restore later” is not.
 
 ## Picture: close with recovery todo
 
-Look at this first: **close with recovery todo**. Label it rule, tool, or false assurance before you accept the change.
+**close with recovery todo**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|known-exploited dashboard| False[False assurance]
 ```
 
-Keep this: recovery todo denied. If that call never includes the conjunction, that always-close leftover is still open. A SIEM screenshot does not replace that check.
+What has to stay true: recovery todo denied. If that call never includes the conjunction, that always-close leftover is still open. A SIEM screenshot does not replace that check.
 
 Note bodies in logs are the second what must not happen. Support-tool god-mode is leftover from earlier cluster lessons. Do not skip `test_cannot_close_without_recovery`. This page does not mark you as finished. Do not query a live SIEM to prove the finding.
 

@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 Even after `exporter` was “fixed once,” a new task can inherit request context again. Running it for real is the rest of the loop: notice, contain, and recover.
 
@@ -20,7 +20,7 @@ flowchart TD
   Metric --> Drain[Rotate service creds and drain queue]
 ```
 
-Someone still has to notice, respond, and recover. That work does not bind the principal. Naming a zero-trust product is not the rule. Someone still has to own the worker identity.
+This still does not bind the principal. Naming a zero-trust product is not the rule. Someone still has to own the worker identity.
 
 ## Signals that do not become a second leak
 

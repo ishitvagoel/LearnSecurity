@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A new client field (`premium`, `hipaaMode`) can skip the attest check after `allow_export` was “fixed once.” Pair notice and recover. Do not log note bodies or attestation blobs (3.1). Do not attach the Android app file to the ticket.
 
@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Revoke[Revoke app session if automated]
 ```
 
-Someone still has to notice, respond, and recover. That work does not prove the server attest.
+This still does not prove the server attest.
 
 ## Signals that do not become a second leak
 

@@ -7,13 +7,13 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships the notes app’s Android export. Review `labs/8.1/8.1-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `allow_export({"integrity": "ok"}, "fail")` still returns true, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app’s Android export. Review `labs/8.1/8.1-lab/vulnerable/` as that change. Check whether `allow_export({"integrity": "ok"}, "fail")` still returns true, compare that with the rule, and write changes a developer can verify.
 
 The check you already ran (`test_client_integrity_claim_is_not_authorization`) is the rule check. A comment “we will attest later” is not. A sticker about a mobile checklist is not this review.
 
 ## Picture: if integrity==ok: export
 
-Look at this first: **`if integrity==ok: export`**. Label it **rule**, **tool**, or **false assurance** before you accept the change.
+**`if integrity==ok: export`**. Label it **rule**, **tool**, or **false assurance** before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|Play Integrity logo| False[False assurance]
 ```
 
-Keep this: client ok plus attest fail denied. If that call never includes a server-attest check, that client-boolean path is still open. A Play Integrity logo without that check is still the same problem.
+What has to stay true: client ok plus attest fail denied. If that call never includes a server-attest check, that client-boolean path is still open. A Play Integrity logo without that check is still the same problem.
 
 Shrinking the app and a platform-integrity check raise cost; they do not become 1.2. Feature flags and 8.4 debug clients are other hostile-client paths — name them, do not skip `test_client_integrity_claim_is_not_authorization`.
 

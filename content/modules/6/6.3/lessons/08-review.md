@@ -7,13 +7,13 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships notes-app share. Don't just tally suspicious lines. Check whether `allow_share` for a foreign origin with `token=None` is still true, compare that with the module rule, and write changes a developer can verify.
+A colleague ships notes-app share. Check whether `allow_share` for a foreign origin with `token=None` is still true, compare that with the module rule, and write changes a developer can verify.
 
 The folder `labs/6.3/6.3-lab/vulnerable/` is the change. The check you already ran (`test_foreign_origin_post_is_denied`) is the rule test. A comment “will add CSRF later” is not.
 
 ## Picture: leftover cookie auth + no Origin check
 
-Look at this first: **Cookie auth + no Origin check**. Label it rule, tool, or false assurance before you accept the change.
+**Cookie auth + no Origin check**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"CORS star"| False[False assurance]
 ```
 
-Keep this: foreign origin without token denied. If that call never includes origin-and-token, that leftover-cookie path is still open. SameSite=Lax without that test is still the same problem.
+What has to stay true: foreign origin without token denied. If that call never includes origin-and-token, that leftover-cookie path is still open. SameSite=Lax without that test is still the same problem.
 
 Leftover cookies are leftover permission from login — a signed-in session cookie that rides along — used as if it were consent for this person, this share, and this origin.
 

@@ -7,13 +7,13 @@ The answers are not on this page. Do not open the keys file until someone has lo
 
 ## What you are reviewing
 
-A colleague ships the notes app’s share revoke. Review `labs/11/11-lab/vulnerable/` as that change. Don't just tally suspicious lines. Check whether `read("n1", "B")` after `revoke("n1", "B")` still returns the body, compare that with the rule, and write changes a developer can verify.
+A colleague ships the notes app’s share revoke. Review `labs/11/11-lab/vulnerable/` as that change. Check whether `read("n1", "B")` after `revoke("n1", "B")` still returns the body, compare that with the rule, and write changes a developer can verify.
 
 Start at `revoke` / `read` and the B-after-revoke row, not at a scanner color or a README screenshot. The check you already ran (`test_revoked_share_cannot_read`) is the rule test. A comment “will consult grants later” is not.
 
 ## Picture: read after revoke succeeds
 
-Look at this first: **read after revoke succeeds**. Label it rule, tool, or false assurance before you accept the change.
+**read after revoke succeeds**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|scanner green| False[False assurance]
 ```
 
-Keep this: B after revoke is None. If that call never includes owner-or-grant, that always-read leftover is still open. A scanner screenshot does not replace that check.
+B after revoke is None. If that call never includes owner-or-grant, that always-read leftover is still open. A scanner screenshot does not replace that check.
 
 Cache invalidation is a phone leftover. Worker leftover session is a delayed-job leftover. Do not skip `test_revoked_share_cannot_read`. This page does not mark you as finished. Do not hit a live tenant to prove the finding.
 

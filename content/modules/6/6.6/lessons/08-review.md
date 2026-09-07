@@ -13,7 +13,7 @@ The folder `labs/6.6/6.6-lab/vulnerable/` is the change. The check you already r
 
 ## Picture: problems to find (name them yourself)
 
-Look at this first: **`accept` always true**. Label it rule, tool, or false assurance before you accept the change.
+**`accept` always true**. Label it rule, tool, or false assurance before you accept the change.
 
 ```mermaid
 flowchart TD
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"fail-open DB"| False[False assurance]
 ```
 
-Keep this: second accept false. If that call never includes a used-write, that replay path is still open. HTTP 400 after membership already exists is still the same problem.
+What has to stay true: second accept false. If that call never includes a used-write, that replay path is still open. HTTP 400 after membership already exists is still the same problem.
 
 A unique index that is never written still leaves `accept` always true. Password-reset consume is the same family — name it as leftover, do not skip `test_invite_token_is_single_use`.
 

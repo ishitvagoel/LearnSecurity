@@ -3,7 +3,7 @@
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Stopping it is not enough
+## Fixing it once is not enough
 
 A new GraphQL mutation or leftover `/v0` PATCH can skip the REST allow-list after `apply` was “fixed once.” Pair notice and recover. Do not log the PATCH body (3.1 / 5.1). Do not attach the profile JSON to the ticket.
 
@@ -17,7 +17,7 @@ flowchart TD
   Shadow --> Demote[Demote is_admin if it escaped]
 ```
 
-Someone still has to notice, respond, and recover. That work does not copy `ALLOWED`. It does not prove a checklist.
+This still does not copy `ALLOWED`. It does not prove a checklist.
 
 ## Signals that do not become a second leak
 
