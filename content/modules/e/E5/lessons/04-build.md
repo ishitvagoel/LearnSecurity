@@ -9,7 +9,7 @@ A denylist of yesterday’s company ids is not the fix. Hiding the company picke
 
 The structural change is: `tenant_for` **returns `session["tenant"]`**. Structural means the runtime ignores the body field for isolation. Bind tenant from the session. Fail closed: a lying body cannot switch company. Row-level rules may *accompany* this binding; they must not be `SET` from the body. Structural means session win — not a subdomain, not a relationship-graph tuple, not a famous-bugs mapping.
 
-The smallest restore for notes-app notes is: session A, body B → A. Do not fail open because “row-level rules are on.” Do not “repair” a mismatch by trusting the body. The JSON body is not the tenant.
+The smallest fix for notes is: session A, body B → A. Do not fail open because “row-level rules are on.” Do not “repair” a mismatch by trusting the body. The JSON body is not the tenant.
 
 ## Picture: session gate
 

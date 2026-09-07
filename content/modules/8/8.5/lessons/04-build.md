@@ -9,7 +9,7 @@ A denylist of yesterday's crash fields is not the fix. Hiding a scanner warning 
 
 The structural change is: `crash_report` **does not copy `note_body` into the payload**. A constant `'[redacted]'` (the local stand-in) is the teaching shape. Structural means omit — not a crash product set to “automatic,” not a store form, not a tracker-SDK “privacy mode” sticker.
 
-The smallest restore for the notes app’s crash telemetry is: `'secret'` absent from the report. Fail-safe: if the SDK offers “include last screen,” leave it off. Do not fail open because support “needs the last chart.” Do not attach the live note, the clipboard, or a screenshot.
+The smallest fix for the notes app’s crash telemetry is: `'secret'` absent from the report. Fail-safe: if the SDK offers “include last screen,” leave it off. Do not fail open because support “needs the last chart.” Do not attach the live note, the clipboard, or a screenshot.
 
 ## Picture: redact then send
 

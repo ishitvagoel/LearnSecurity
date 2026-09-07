@@ -7,7 +7,7 @@
 
 `js_read_session` must return `None` when `httponly` is true. Structural means the cookie model actually branches on the flag — not a comment, not Report-Only CSP, not “we will encode later.”
 
-The smallest restore for the notes-app `sc_session` is: if the cookie is a session token, set HttpOnly, and make the script reader fail closed. Moving the token into `localStorage` enlarges the script share. Prefixes (`__Host-`) and `Secure` are sister rules; they do not replace this branch.
+The smallest fix for the notes-app `sc_session` is: if the cookie is a session token, set HttpOnly, and make the script reader fail closed. Moving the token into `localStorage` enlarges the script share. Prefixes (`__Host-`) and `Secure` are sister rules; they do not replace this branch.
 
 ## Picture: one rule restored
 

@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-This review is about notes-app deletion. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `body_retained("alice")` is still `"secret"` after `delete_account("alice")` if they ship. Start at leftover analytics after delete, not at a scanner color or a contract ticket.
+You are reviewing deletion. Label each claim **rule**, **tool**, or **false assurance**. Say whether `body_retained("alice")` is still `"secret"` after `delete_account("alice")` if they ship. Start at leftover analytics after delete, not at a scanner color or a contract ticket.
 
 A comment “will add warehouse purge later” is not a pass on `test_deleted_account_leaves_no_analytics_body`.
 

@@ -9,7 +9,7 @@ A private namespace is not the fix. A network policy is not the fix. "The CIS sc
 
 The structural change is: `pod_ok` **returns `role in ALLOWED_ROLES`** where `ALLOWED_ROLES` is `{"app"}`. Fail-safe: unknown roles deny. A denylist of the string `cluster-admin` would still be god-mode-minus-one-name. Structural means that membership — not namespace name, not a network policy, not a CIS score.
 
-The lab allow-list is a **stand-in** for a namespaced Role plus RoleBinding plus a restricted pod profile. It is not kube-apiserver. The smallest restore for the notes app's API SA is: `cluster-admin` → do not run. Fail-safe: if you are unsure whether the role is namespaced, deny. Do not fail open because "it is in namespace sc-prod."
+The lab allow-list is a **stand-in** for a namespaced Role plus RoleBinding plus a restricted pod profile. It is not kube-apiserver. The smallest fix for the notes app's API SA is: `cluster-admin` → do not run. Fail-safe: if you are unsure whether the role is namespaced, deny. Do not fail open because "it is in namespace sc-prod."
 
 ## Picture: namespace is not cluster-admin
 

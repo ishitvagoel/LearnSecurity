@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: raw <
 
-A check that only counts passing cases can still look green while unencoded markup still reaches HTML.
+A passing-test tally can still hide that unencoded markup still reaches HTML.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass encoded lt"]
 ```
 
-If both pass, the check is not looking at encoding.
+If both pass, you are not looking at encoding.
 
 ## What the check has to show
 

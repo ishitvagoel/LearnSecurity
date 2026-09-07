@@ -19,7 +19,7 @@ flowchart TD
   T -->|repaired| Pass[Must pass]
 ```
 
-If both pass, the test is not looking at `mouse_only`, name, or keyboard.
+If both pass, you are not looking at `mouse_only`, name, or keyboard.
 
 ## What the check has to show
 

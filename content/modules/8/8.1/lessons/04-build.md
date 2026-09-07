@@ -9,7 +9,7 @@ A Compose switch that hides the button is not the fix. Play Integrity checked on
 
 The structural change is: the server **ignores the client integrity field**. `allow_export` must use `server_attest == "play_integrity_pass"` (a local stand-in for a *server-verified* attestation result). The client JSON is not an input to that check. The server attest decides; ignore the client boolean.
 
-The smallest restore for the notes app’s Android export is: client ok plus attest fail denies. Fail-safe: unknown attest **denies**. Do not `or` the client boolean back in. Do not fail open because the attestation service was unreachable.
+The smallest fix for the notes app’s Android export is: client ok plus attest fail denies. Fail-safe: unknown attest **denies**. Do not `or` the client boolean back in. Do not fail open because the attestation service was unreachable.
 
 ## Picture: attest on the trusted layer
 

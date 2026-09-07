@@ -48,4 +48,4 @@ The owner-visible error must be something assistive tech can announce, not only 
 
 ## What this page is not doing
 
-Do not use live load tests are out of scope. Answer keys are not on this site.
+Do not use live load tests. Answer keys are not on this site.

@@ -9,7 +9,7 @@
 
 ## Picture: a broken runtime must fail the check
 
-A check that only counts passing tests can still look green while `run_tool("exec_sql", {})` still returns a ran-string.
+A passing-test tally can still hide that `run_tool("exec_sql", {})` still returns a ran-string.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: exec_sql denied]
 ```
 
-If both pass, the test is not looking at `exec_sql`.
+If both pass, you are not looking at `exec_sql`.
 
 ## What the check has to show
 

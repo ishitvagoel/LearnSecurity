@@ -46,4 +46,4 @@ A clinic example: notice `?token=` on appointment links; do not paste the URL in
 
 ## What this page is not doing
 
-Do not use live log dumps are out of scope. This site does not mark you as finished.
+Do not use live log dumps. This site does not mark you as finished.

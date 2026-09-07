@@ -57,4 +57,4 @@ Do not encode “phishing-resistant” as green-only. Keyboard users still need 
 
 ## What this page is not doing
 
-Do not use live phishing hunts are out of scope. Answer keys are not on this site.
+Do not use live phishing hunts. Answer keys are not on this site.

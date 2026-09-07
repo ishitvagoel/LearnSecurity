@@ -61,4 +61,4 @@ If a human sees a quota deny, announce “try tomorrow.” A spinner that retrie
 
 ## What this page is not doing
 
-Do not follow public load tests are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Do not follow public load tests. This site does not mark you as finished. Answer keys are not on this site.

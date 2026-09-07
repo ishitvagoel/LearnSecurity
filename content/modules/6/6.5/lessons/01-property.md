@@ -78,4 +78,4 @@ Clinic “fetch lab result PDF from URL.” Webhooks wait for 7.3.
 
 ## What this page is not doing
 
-Do not use live metadata fetches, public server-side request hunts, dumping lab Python into notes. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live metadata fetches, public server-side request hunts. This site does not mark you as finished. Answer keys are not on this site.

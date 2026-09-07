@@ -9,7 +9,7 @@
 
 ## Picture: broken must fail foreign origin
 
-A check that only counts passing cases can still look green while leftover cookies still authorize a share. Repaired files still have to pass both the deny and the honest allow.
+A passing-test tally can still hide that leftover cookies still authorize a share. Repaired files still have to pass both the deny and the honest allow.
 
 ```mermaid
 flowchart LR

@@ -48,4 +48,4 @@ A clinic example: notice partner-share POSTs from the wrong origin; do not paste
 
 ## What this page is not doing
 
-Naming a network-filter product is not the rule. Do not use live third-party CSRF is out of scope. This site does not mark you as finished. Answer keys are not on this site.
+A network-filter product name is not the check. Do not use live third-party CSRF. This site does not mark you as finished. Answer keys are not on this site.

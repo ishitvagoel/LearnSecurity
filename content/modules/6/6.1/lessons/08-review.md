@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-This review is about notes-app export listing. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `argv_for_list("notes")` still starts `["sh", "-c"]` if they ship. Start at `sh -c` concatenation, not at a scanner color.
+You are reviewing export listing. Label each claim **rule**, **tool**, or **false assurance**. Say whether `argv_for_list("notes")` still starts `["sh", "-c"]` if they ship. Start at `sh -c` concatenation, not at a scanner color.
 
 A comment “will switch to argv later” is not a pass on `test_does_not_invoke_shell`.
 

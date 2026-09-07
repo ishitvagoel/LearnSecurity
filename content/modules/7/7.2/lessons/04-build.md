@@ -9,7 +9,7 @@ Hiding the column in the SPA is not the fix. GraphQL `@hide` the client can skip
 
 The structural change is: the trusted layer **checks role × field**. `resolve` must deny `secret_internal` unless `role == "service"`. Structural means that predicate — not a hidden SPA column.
 
-The smallest restore for the notes app’s note JSON is: deny member × `secret_internal`. Fail closed: unknown roles deny the internal field. Do not fail open because the serializer cache still holds yesterday’s dump.
+The smallest fix for the notes app’s note JSON is: deny member × `secret_internal`. Fail closed: unknown roles deny the internal field. Do not fail open because the serializer cache still holds yesterday’s dump.
 
 ## Picture: field deny unless listed
 

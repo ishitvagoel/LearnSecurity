@@ -27,7 +27,7 @@ A dashboard tile does not prove secrets stayed out of the APK.
 | Recover | Keep deny; rotate keys; fix the flavor |
 | Leftover | Stolen release keys; attestation farms |
 
-Naming an R8 product is not the rule. Re-run `test_debug_build_cannot_call_prod_export` after any client-id change; a green “minifyEnabled” tile is not that check. Student flavors and leaked debug APKs are other channels of the same prod API — list them before you claim Recover.
+An R8 product name is not the check. Re-run `test_debug_build_cannot_call_prod_export` after any client-id change; a green “minifyEnabled” tile is not that check. Student flavors and leaked debug APKs are other channels of the same prod API — list them before you claim Recover.
 
 ## What the framework does vs what you still have to check
 
@@ -53,4 +53,4 @@ Developers still need a debug build against **lab** data. Do not ship a spinner 
 
 ## What this page is not doing
 
-Naming an R8 product is not the rule. Do not use live Play traces are out of scope. Opening this page does not finish a check-in.
+An R8 product name is not the check. Do not use live Play traces. Opening this page does not finish a check-in.

@@ -9,7 +9,7 @@
 
 ## Picture: a broken close gate must fail the check
 
-A check that only counts passing tests can still look green while recovery todo still closes.
+A passing-test tally can still hide that recovery todo still closes.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: recovery todo denied]
 ```
 
-If both pass, the test is not looking at recovery todo.
+If both pass, you are not looking at recovery todo.
 
 The second what must not happen is **`note_body` in logs** — `test_cannot_close_when_logs_contain_note_body` must also fail on the broken files.
 

@@ -59,4 +59,4 @@ A clinic example: notice PDF fetches to hosts that are not on the allow-list; do
 
 ## What this page is not doing
 
-A cloud web-filter name is not this check. Do not use live metadata probes are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+A cloud web-filter name is not this check. Do not use live metadata probes. This site does not mark you as finished. Answer keys are not on this site.

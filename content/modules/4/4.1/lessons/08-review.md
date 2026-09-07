@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-This review is about notes-app offboarding. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `session_valid("alice")` is still true after `delete_user` if they ship. Start at the leftover session after delete, not at a scanner color or an HR ticket.
+You are reviewing offboarding. Label each claim **rule**, **tool**, or **false assurance**. Say whether `session_valid("alice")` is still true after `delete_user` if they ship. Start at the leftover session after delete, not at a scanner color or an HR ticket.
 
 A comment “will revoke sessions later” is not a pass on `test_deleted_user_session_is_dead`.
 

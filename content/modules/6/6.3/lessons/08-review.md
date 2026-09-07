@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-This review is about notes-app share. Check whether `allow_share` for a foreign origin with `token=None` is still true.
+You are reviewing share. Check whether `allow_share` for a foreign origin with `token=None` is still true.
 
 A comment “will add CSRF later” is not a pass on `test_foreign_origin_post_is_denied`.
 

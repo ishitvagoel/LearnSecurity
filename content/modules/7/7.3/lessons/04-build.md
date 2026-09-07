@@ -9,7 +9,7 @@ TLS is not the fix. An IP allow-list is not the fix. Hashing parsed JSON is not 
 
 Structural means the MAC is checked before side effects. `accept` must compute HMAC-SHA256 over the raw body with the disposable secret and compare in constant time. Missing or wrong signatures deny.
 
-The smallest restore for the notes-app billing webhook is: empty sig denies. Fail closed: empty signature **denies** without throwing into a 500 that providers retry (6.7). Do not fail open because the secret store was unreachable.
+The smallest fix for the notes-app billing webhook is: empty sig denies. Fail closed: empty signature **denies** without throwing into a 500 that providers retry (6.7). Do not fail open because the secret store was unreachable.
 
 ## Picture: fail closed on a missing sig
 

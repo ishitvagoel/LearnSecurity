@@ -9,7 +9,7 @@ A unique index you never write is not the fix. HTTP 400 after the membership alr
 
 The structural change is: `accept` **records `t1` as used when it returns true**. The next call denies. Consume is the accept. Same step. Not a follow-up ticket.
 
-The smallest restore for a notes-app invite is: write used, then allow once. Fail closed: store errors **deny**. Do not fail open because the database was unreachable. Production uses a transaction so the used-write and the membership commit together.
+The smallest fix for a invite is: write used, then allow once. Fail closed: store errors **deny**. Do not fail open because the database was unreachable. Production uses a transaction so the used-write and the membership commit together.
 
 ## Picture: write used, then allow once
 

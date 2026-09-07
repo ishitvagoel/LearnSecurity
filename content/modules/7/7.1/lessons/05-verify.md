@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: is_admin
 
-A check that only counts passing cases can still look green while extra keys still write `is_admin`.
+A passing-test tally can still hide that extra keys still write `is_admin`.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass is_admin false"]
 ```
 
-If both pass, the check is not looking at extra keys.
+If both pass, you are not looking at extra keys.
 
 ## Three things to look at
 

@@ -9,7 +9,7 @@ Verified App Links are not the fix. `https` is not the fix. `exported=false` wit
 
 The structural change is: `open_link` **does not copy identity keys onto `current_user`**. Locators such as `note=` may be honored later; this practice ignores extras entirely as the smallest fix. Ignore identity parameters on links.
 
-The smallest restore for the notes app’s App Links is: `as=admin` keeps alice. Fail-safe: unknown keys do not switch users. Do not fail open because the Activity was exported “for sharing.”
+The smallest fix for the notes app’s App Links is: `as=admin` keeps alice. Fail-safe: unknown keys do not switch users. Do not fail open because the Activity was exported “for sharing.”
 
 ## Picture: extras never become the principal
 

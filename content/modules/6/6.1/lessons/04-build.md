@@ -9,7 +9,7 @@ A denylist of punctuation is not the fix. “subprocess will handle it” is not
 
 Structural means the shell never sees the name. `argv_for_list` must return a list whose program is `ls` (or another fixed binary), not `sh`. The name is one element. `--` before the name is the extra slot that closes argument injection as a *named* leftover.
 
-The smallest restore for notes-app export listing is: list, not string. Fail closed: if you cannot spawn without a shell, **do not spawn**. Do not fail open because the name “looks like notes.”
+The smallest fix for export listing is: list, not string. Fail closed: if you cannot spawn without a shell, **do not spawn**. Do not fail open because the name “looks like notes.”
 
 ## Picture: list, not string
 

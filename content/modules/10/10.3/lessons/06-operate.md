@@ -66,4 +66,4 @@ A clinic example: deny the ClusterRoleBinding; do not paste `~/.kube/config` int
 
 ## What this page is not doing
 
-Naming a CIS-benchmark product is not the rule. This page does not mark you as finished. A restricted pod profile is not this alert. Answer keys are not on this site.
+A CIS-benchmark product name is not the check. This page does not mark you as finished. A restricted pod profile is not this alert. Answer keys are not on this site.

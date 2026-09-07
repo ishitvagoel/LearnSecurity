@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: plaintext secret
 
-A check that only counts passing cases can still look green while the cache still holds `'secret'`.
+A passing-test tally can still hide that the cache still holds `'secret'`.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass not plaintext"]
 ```
 
-If both pass, the check is not looking at the body on disk.
+If both pass, you are not looking at the body on disk.
 
 ## Observations, even for a cache
 

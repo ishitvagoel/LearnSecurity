@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: password at lookalike is true
 
-A check that only counts passing cases can still look green while a password is still labeled resistant.
+A passing-test tally can still hide that a password is still labeled resistant.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass: origin-bound webauthn only"]
 ```
 
-If both pass, the check is not looking at password-at-lookalike.
+If both pass, you are not looking at password-at-lookalike.
 
 ## What the check has to show
 

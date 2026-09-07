@@ -9,7 +9,7 @@ A revoke *event* is not the fix. HTTP 200 is not the fix. A scanner badge is not
 
 The structural change is: `revoke` **discards the grant**, and `read` **returns the body only if `tenant == owner` or `(nid, tenant) in GRANTS`**. Missing grant denies. A revoke that is not consulted on the next read is still the break. Structural means that consultation — not HTTP 200, not a scanner badge, not a YAML pack.
 
-The smallest restore for the notes app’s share is: B after revoke → None, A still reads, B before revoke still reads. Fail-safe: if you are unsure whether the grant still exists, deny. Do not fail open because DELETE returned 200.
+The smallest fix for the notes app’s share is: B after revoke → None, A still reads, B before revoke still reads. Fail-safe: if you are unsure whether the grant still exists, deny. Do not fail open because DELETE returned 200.
 
 ## Picture: consult on the path
 

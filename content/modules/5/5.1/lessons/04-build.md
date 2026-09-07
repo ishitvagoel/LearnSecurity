@@ -9,7 +9,7 @@ A later warehouse job is not the fix. “Anonymize the user id” is not the fix
 
 The structural change is: `delete_account` **pops `NOTES`, `ANALYTICS`, and `SEARCH`**. Walk the inventory in the same use-case. Same delete. Not a follow-up ticket.
 
-The smallest restore for notes-app bodies is: one call walks every listed copy. Fail closed: if a listed copy cannot be reached, **do not claim delete complete** (refuse the use-case or alert). Do not fail open by returning 200 while analytics remains.
+The smallest fix for bodies is: one call walks every listed copy. Fail closed: if a listed copy cannot be reached, **do not claim delete complete** (refuse the use-case or alert). Do not fail open by returning 200 while analytics remains.
 
 ## Picture: one call, three pops
 

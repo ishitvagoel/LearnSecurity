@@ -9,7 +9,7 @@ A spoken “yes” is not the fix. A maturity score is not the fix. “The VP sa
 
 The structural change is: `accept_exception` **returns true only when `owner`, `review_by`, and `wcag_checked` are present**. Incomplete records deny. A maturity score may *accompany* the register; it does not replace the row. Structural means that schema — not “the VP said yes,” not a HIPAA slide, not a pledge.
 
-The smallest restore for the notes app’s leftover-risk record is: empty owner → false; alice + date + accessibility flag may accept. Fail-safe: a missing field is deny. Do not fail open because the meeting notes look complete. Do not silently extend past `review_by`.
+The smallest fix for the notes app’s leftover-risk record is: empty owner → false; alice + date + accessibility flag may accept. Fail-safe: a missing field is deny. Do not fail open because the meeting notes look complete. Do not silently extend past `review_by`.
 
 ## Picture: schema gate
 

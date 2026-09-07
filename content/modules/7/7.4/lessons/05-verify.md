@@ -9,7 +9,7 @@
 
 ## Picture: leftover Alice must fail the check
 
-A check that only counts passing cases can still look green while leftover Alice still becomes the worker.
+A passing-test tally can still hide that leftover Alice still becomes the worker.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P["Must pass: None"]
 ```
 
-If both pass, the test is not looking at leftover Alice.
+If both pass, you are not looking at leftover Alice.
 
 ## What the check has to show
 

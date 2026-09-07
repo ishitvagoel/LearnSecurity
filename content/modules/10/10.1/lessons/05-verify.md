@@ -9,7 +9,7 @@
 
 ## Picture: a broken merge check must fail the empty-change test
 
-A check that only counts passing checks can still look green while an empty dict still merges.
+A passing-test tally can still hide that an empty dict still merges.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: empty change is deny]
 ```
 
-If both pass, the test is not looking at `threat_model`.
+If both pass, you are not looking at `threat_model`.
 
 ## What the check has to show
 

@@ -7,7 +7,7 @@
 
 `auth` must require a truthy `current` and equality with `presented`. Structural means the old value is dead — not `.gitignore`, not a vault brand, not “we rotated in the wiki,” not a comment that says TODO remove default.
 
-The smallest restore for notes-app service credentials is: current only, deny if current is missing. Do not fall back to `DEFAULT`. Do not allow because “the vault was unreachable.”
+The smallest fix for service credentials is: current only, deny if current is missing. Do not fall back to `DEFAULT`. Do not allow because “the vault was unreachable.”
 
 ## Picture: current only, deny if missing
 

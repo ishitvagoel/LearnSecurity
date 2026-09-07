@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: client ok plus attest fail
 
-A check that only counts passing cases can still look green while client `integrity=ok` still authorizes export.
+A passing-test tally can still hide that client `integrity=ok` still authorizes export.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass deny"]
 ```
 
-If both pass, the check is not looking at the client boolean.
+If both pass, you are not looking at the client boolean.
 
 ## Three things to look at
 

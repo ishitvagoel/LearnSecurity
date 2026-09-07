@@ -7,7 +7,7 @@
 
 If `query` contains `access_token`, return `None` even if the value looks like a JWT. Then read cookie or Authorization. Structural means the parser **drops** the query channel — not a denylist of parameter names after logging, not a referrer policy as the only control, not “we use HTTPS.”
 
-The smallest restore for notes-app session parsing is: presence of a query token is enough to refuse — do not “fall through” to using it. Cookie `sc_session` (HttpOnly) and `Authorization` remain valid channels.
+The smallest fix for session parsing is: presence of a query token is enough to refuse — do not “fall through” to using it. Cookie `sc_session` (HttpOnly) and `Authorization` remain valid channels.
 
 ## Picture: deny query, then other channels
 

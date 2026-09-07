@@ -9,7 +9,7 @@
 
 ## Picture: link-local allowed must fail the check
 
-A check that only counts passing cases can still look green while link-local is still allowed.
+A passing-test tally can still hide that link-local is still allowed.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: deny plus lab host]
 ```
 
-If both pass, the test is not looking at link-local.
+If both pass, you are not looking at link-local.
 
 ## What the check has to show
 

@@ -9,7 +9,7 @@ R8 is not the fix. Root detection is not the fix. Play App Signing is not the fi
 
 The structural change is: the server **checks build type**. `api_allowed` must require `build_type == "release"` **and** `attest == "ok"` (a stand-in here for server-checked attest from 8.1). Debug never reaches prod. Allow only release plus server attest.
 
-The smallest restore for the notes app’s prod export is: debug plus ok denies. Fail-safe: unknown build type denies. Do not accept a client-only minify flag. Do not fail open because “testers need real data.”
+The smallest fix for the notes app’s prod export is: debug plus ok denies. Fail-safe: unknown build type denies. Do not accept a client-only minify flag. Do not fail open because “testers need real data.”
 
 ## Picture: attest and not-debug both gates
 

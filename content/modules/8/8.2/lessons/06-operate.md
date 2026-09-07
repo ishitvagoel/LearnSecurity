@@ -27,7 +27,7 @@ A checklist name does not prove the wrap.
 | Recover | Wipe; revoke sessions; exclude backup |
 | Leftover | Extracted keys; screenshots; clipboard; notifications |
 
-Naming an MDM product is not the rule. Re-run `test_cached_note_is_not_plaintext_on_disk` after any cache-path change; a green “internal storage” tile is not that check. Screenshots, recents, and notification text are other copies of the same body — list them before you claim Recover.
+An MDM product name is not the check. Re-run `test_cached_note_is_not_plaintext_on_disk` after any cache-path change; a green “internal storage” tile is not that check. Screenshots, recents, and notification text are other copies of the same body — list them before you claim Recover.
 
 ## What the framework does vs what you still have to check
 
@@ -53,4 +53,4 @@ Unlock-with-fingerprint must still have a device-PIN fallback people can actuall
 
 ## What this page is not doing
 
-Naming an MDM product is not the rule. Personal-phone imaging is out of scope. Opening this page does not finish a check-in.
+An MDM product name is not the check. Personal-phone imaging is out of scope. Opening this page does not finish a check-in.

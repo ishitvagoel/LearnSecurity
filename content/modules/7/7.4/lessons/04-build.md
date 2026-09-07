@@ -9,7 +9,7 @@ An “internal” queue is not the fix. A private network is not the fix. A zero
 
 Structural means the worker authenticates as a service principal. `exporter` must return `"worker-sc"` only when `service == "worker-sc"`. Leftover `user_session` is ignored.
 
-The smallest restore for notes-app overnight export is: Alice session yields `None`. Fail closed: missing service denies. A fallback `user_session or service` is the bug. Do not fail open because the broker was “inside the private network.”
+The smallest fix for overnight export is: Alice session yields `None`. Fail closed: missing service denies. A fallback `user_session or service` is the bug. Do not fail open because the broker was “inside the private network.”
 
 ## Picture: service or nothing
 

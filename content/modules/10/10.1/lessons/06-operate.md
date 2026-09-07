@@ -64,4 +64,4 @@ A clinic example: block an identity change with no threat-model id; do not paste
 
 ## What this page is not doing
 
-Do not run live-org traces are out of scope. This page does not finish check-in 10 or milestone M4. An unverified “secure by design” page stays unverified. A later draft of the design-review guide stays a draft. Answer keys are not on this site.
+Do not run live-org traces. This page does not finish check-in 10 or milestone M4. An unverified “secure by design” page stays unverified. A later draft of the design-review guide stays a draft. Answer keys are not on this site.

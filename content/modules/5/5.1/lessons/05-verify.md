@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: both None]
 ```
 
-If both pass, the test is not looking at `body_retained` after delete.
+If both pass, you are not looking at `body_retained` after delete.
 
 ## What the check has to show
 

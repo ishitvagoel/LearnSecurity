@@ -61,4 +61,4 @@ A clinic example: notice guardian-invite replays; do not paste the mail link int
 
 ## What this page is not doing
 
-Do not use live invite replay is out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live invite replay. This site does not mark you as finished. Answer keys are not on this site.

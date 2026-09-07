@@ -58,4 +58,4 @@ A clinic example: notice Base64 SSN columns; do not paste values into the ticket
 
 ## What this page is not doing
 
-Do not use live column dumps are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live column dumps. This site does not mark you as finished. Answer keys are not on this site.

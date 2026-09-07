@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail member × secret_internal
 
-A check that only counts passing cases can still look green while a member still resolves `secret_internal`. Honest `display_name` may pass on both — that is the product, not an excuse to skip the deny.
+A passing-test tally can still hide that a member still resolves `secret_internal`. Honest `display_name` may pass on both — that is the product, not an excuse to skip the deny.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass deny"]
 ```
 
-If both pass, the check is not looking at the field table.
+If both pass, you are not looking at the field table.
 
 | Mode | Must show for this topic |
 |---|---|

@@ -9,7 +9,7 @@ A disabled export button is not the fix. An IP bucket at the edge is not the fix
 
 Structural means the server counts. `allow(n)` must be `n <= 3`. That check lives on the export action — the write path — not in the browser.
 
-The smallest restore for notes-app export is: deny at four. Fail closed: if the count is unknown, **deny**. Do not fail open because the counter store was unreachable.
+The smallest fix for export is: deny at four. Fail closed: if the count is unknown, **deny**. Do not fail open because the counter store was unreachable.
 
 ## Picture: deny at four
 

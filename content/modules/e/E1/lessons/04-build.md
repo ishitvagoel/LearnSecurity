@@ -9,7 +9,7 @@ A system prompt is not the fix. Retrieval is not the fix. "We mapped a famous-bu
 
 The structural change is: `run_tool` **returns `None` unless `name in ALLOWED`**. Fail-safe: unknown tools deny. A denylist of the string `exec_sql` would still be every-other-interpreter. Structural means that membership — not "the prompt forbids SQL," not retrieval, not a famous-bugs mapping.
 
-The lab allow-list is a **stand-in** for runtime membership before invoke. It is not a production agent product. The smallest restore for the notes app's optional summarizer is: `exec_sql` → None, `search_notes` may run. Fail-safe: if you are unsure whether the name is allow-listed, deny. Do not fail open because the model "only summarizes." Do not add `exec_sql` to `ALLOWED` "for debugging."
+The lab allow-list is a **stand-in** for runtime membership before invoke. It is not a production agent product. The smallest fix for the notes app's optional summarizer is: `exec_sql` → None, `search_notes` may run. Fail-safe: if you are unsure whether the name is allow-listed, deny. Do not fail open because the model "only summarizes." Do not add `exec_sql` to `ALLOWED` "for debugging."
 
 ## Picture: tool-name allow-list gate
 

@@ -9,7 +9,7 @@
 
 ## Picture: unbounded allow must fail the check
 
-A check that only counts passing cases can still look green while the fourth export still goes through.
+A passing-test tally can still hide that the fourth export still goes through.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P["Must pass: deny at 4"]
 ```
 
-If both pass, the test is not looking at the fourth export.
+If both pass, you are not looking at the fourth export.
 
 ## What the check has to show
 

@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: as=admin
 
-A check that only counts passing cases can still look green while `as=` still switches the session.
+A passing-test tally can still hide that `as=` still switches the session.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass alice"]
 ```
 
-If both pass, the check is not looking at identity keys.
+If both pass, you are not looking at identity keys.
 
 ## Three things to look at
 

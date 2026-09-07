@@ -9,7 +9,7 @@ A denylist of yesterday’s package names is not the fix. Hiding a scanner warni
 
 The structural change is: `install_ok` **returns `expected_hash == got_hash`**. Fail-safe: a mismatch denies. Provenance and an SBOM may *sit next to* a match; they do not replace it. Structural means that equality — not package name, not Dependabot, not a provenance badge.
 
-The smallest restore for the notes app’s CI is: `aaa` vs `bbb` → do not install. Do not fail open because “the SBOM lists the package.” Do not accept `@v1` as a digest.
+The smallest fix for the notes app’s CI is: `aaa` vs `bbb` → do not install. Do not fail open because “the SBOM lists the package.” Do not accept `@v1` as a digest.
 
 ## Picture: equality is the gate
 

@@ -59,4 +59,4 @@ A clinic example: notice page-https versus API-http; do not paste cookies into t
 
 ## What this page is not doing
 
-Do not use live TLS hunts are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live TLS hunts. This site does not mark you as finished. Answer keys are not on this site.

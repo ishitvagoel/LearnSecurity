@@ -9,7 +9,7 @@
 
 ## Picture: a broken boot check must fail prod plus debug
 
-A check that only counts passing tests can still look green while production still boots with debug.
+A passing-test tally can still hide that production still boots with debug.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: prod plus debug denied]
 ```
 
-If both pass, the test is not looking at prod plus debug.
+If both pass, you are not looking at prod plus debug.
 
 ## What the check has to show
 

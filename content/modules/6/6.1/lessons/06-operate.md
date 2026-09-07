@@ -57,4 +57,4 @@ A clinic example: notice unexpected `sh` under the export worker; do not paste f
 
 ## What this page is not doing
 
-Do not use live command execution is out of scope. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live command execution. This site does not mark you as finished. Answer keys are not on this site.

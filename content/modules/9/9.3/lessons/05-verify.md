@@ -9,7 +9,7 @@
 
 ## Picture: a broken suite must fail the check
 
-A check that only counts passing tests can still look green while 200-only still counts as security.
+A passing-test tally can still hide that 200-only still counts as security.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: 200-only denied]
 ```
 
-If both pass, the test is not looking at `status_asserted` alone.
+If both pass, you are not looking at `status_asserted` alone.
 
 ## What the check has to show
 

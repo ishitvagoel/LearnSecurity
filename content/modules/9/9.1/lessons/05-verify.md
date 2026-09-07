@@ -9,7 +9,7 @@
 
 ## Picture: a broken coverage check must fail the status-only test
 
-A check that only counts passing tests can still look green while a status-only row still counts as coverage.
+A passing-test tally can still hide that a status-only row still counts as coverage.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: status-only is not covered]
 ```
 
-If both pass, the test is not looking at `asserts_isolation`.
+If both pass, you are not looking at `asserts_isolation`.
 
 ## What the check has to show
 

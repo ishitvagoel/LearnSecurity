@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-This review is about notes-app who-is-allowed. Check whether `can_read("bob", "n2")` is still true.
+You are reviewing who-is-allowed. Check whether `can_read("bob", "n2")` is still true.
 
 A comment “will add object checks later” is not a pass on `test_grant_on_n1_is_not_grant_on_n2`.
 

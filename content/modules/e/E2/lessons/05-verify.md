@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: Report-Only
 
-A check that only counts passing cases can still look green while Report-Only still counts as on.
+A passing-test tally can still hide that Report-Only still counts as on.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass deny"]
 ```
 
-If both pass, the check is not looking at Report-Only.
+If both pass, you are not looking at Report-Only.
 
 | Mode | Must show for this topic |
 |---|---|

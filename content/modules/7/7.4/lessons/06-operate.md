@@ -60,4 +60,4 @@ A clinic example: notice batch-export jobs running as a clinician session on loc
 
 ## What this page is not doing
 
-Naming a zero-trust product is not the rule. Do not use live broker attaches are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+A zero-trust product name is not the check. Do not use live broker attaches. This site does not mark you as finished. Answer keys are not on this site.

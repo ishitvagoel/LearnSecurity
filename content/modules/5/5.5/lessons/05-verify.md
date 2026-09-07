@@ -9,7 +9,7 @@
 
 ## Picture: concatenated SQL must fail the check
 
-A check that only counts passing cases can still look green while the query is still glued.
+A passing-test tally can still hide that the query is still glued.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: is_bound]
 ```
 
-If both pass, the test is not looking at concatenated SQL.
+If both pass, you are not looking at concatenated SQL.
 
 ## What the check has to show
 

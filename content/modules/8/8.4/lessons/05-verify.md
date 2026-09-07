@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: debug plus ok
 
-A check that only counts passing cases can still look green while debug still calls prod.
+A passing-test tally can still hide that debug still calls prod.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["--impl fixed"] --> P["Must pass deny"]
 ```
 
-If both pass, the check is not looking at debug-to-prod.
+If both pass, you are not looking at debug-to-prod.
 
 ## Three things to look at
 

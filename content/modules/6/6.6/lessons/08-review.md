@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-This review is about notes-app invite. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether second `accept("t1")` is still true if they ship. Start at consume-once, not at a scanner color or a mailer ticket.
+You are reviewing invite. Label each claim **rule**, **tool**, or **false assurance**. Say whether second `accept("t1")` is still true if they ship. Start at consume-once, not at a scanner color or a mailer ticket.
 
 A comment “will consume later” is not a pass on `test_invite_token_is_single_use`.
 

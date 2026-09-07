@@ -9,7 +9,7 @@ A denylist of yesterday's log format is not the fix. Hiding a scanner warning is
 
 The structural change is: `log_event` **does not include the body string**. The logging API does not accept the body as a format argument. Not a regex after the fact. Not a spreadsheet label. Not `DEBUG=false` in one environment. Not a data-loss product name.
 
-The smallest restore for a notes-app `note_read` is: return a redaction marker and never paste `note_body` into the line. Production should use structured fields (`event`, `note_id`, `tenant_id`) and never have a `body=` key. If you are unsure whether a value is Confidential, do not log it.
+The smallest fix for a `note_read` is: return a redaction marker and never paste `note_body` into the line. Production should use structured fields (`event`, `note_id`, `tenant_id`) and never have a `body=` key. If you are unsure whether a value is Confidential, do not log it.
 
 ## Picture: redact at the API
 

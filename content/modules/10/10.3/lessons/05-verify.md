@@ -9,7 +9,7 @@
 
 ## Picture: a broken admission must fail the check
 
-A check that only counts passing tests can still look green while `pod_ok("cluster-admin")` still returns true.
+A passing-test tally can still hide that `pod_ok("cluster-admin")` still returns true.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: cluster-admin denied]
 ```
 
-If both pass, the test is not looking at cluster-admin.
+If both pass, you are not looking at cluster-admin.
 
 ## What the check has to show
 

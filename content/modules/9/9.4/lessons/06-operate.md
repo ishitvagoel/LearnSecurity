@@ -66,4 +66,4 @@ A clinic example: block a release with fifty unmapped HIGHs; do not paste scanne
 
 ## What this page is not doing
 
-Do not use live org traces are out of scope. Answer keys are not on this site.
+Do not use live org traces. Answer keys are not on this site.

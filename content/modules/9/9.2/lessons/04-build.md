@@ -9,7 +9,7 @@ A formatter is not the fix. A later review bot is not the fix. Writing down that
 
 Structural means the review asks the interpreter question. `review_ok` must be false when the diff contains `eval(`. That is the **lab stand-in** for “user input is not Python grammar.”
 
-The smallest restore for notes-app merge gating is: `x = eval(user)` → not approved. Fail closed: unknown dynamic execution denies in a real review even if this practice’s substring misses it. Do not treat the denylist as the whole avoid-eval rule. Do not fail open because continuous integration formatted the file.
+The smallest fix for merge gating is: `x = eval(user)` → not approved. Fail closed: unknown dynamic execution denies in a real review even if this practice’s substring misses it. Do not treat the denylist as the whole avoid-eval rule. Do not fail open because continuous integration formatted the file.
 
 ## Picture: fail closed on eval
 

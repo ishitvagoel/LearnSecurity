@@ -9,7 +9,7 @@
 
 ## Picture: a broken install check must fail the mismatch test
 
-A check that only counts passing tests can still look green while always-true `install_ok` still installs a mismatch.
+A passing-test tally can still hide that always-true `install_ok` still installs a mismatch.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: mismatch is deny]
 ```
 
-If both pass, the test is not looking at digest equality.
+If both pass, you are not looking at digest equality.
 
 ## What the check has to show
 

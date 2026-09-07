@@ -19,7 +19,7 @@ flowchart LR
   P --> E2[Evidence the pair is now bound]
 ```
 
-If both pass, the check is not looking at the cross-company get.
+If both pass, you are not looking at the cross-company get.
 
 ## What the check has to show
 

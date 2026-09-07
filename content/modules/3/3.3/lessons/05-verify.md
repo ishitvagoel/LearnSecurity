@@ -9,7 +9,7 @@
 
 ## Picture: broken must fail — tB reads tA
 
-A check that only counts passing cases can still look green while tB still reads tA. Repaired files still have to deny the other company and still allow own-company read.
+A passing-test tally can still hide that tB still reads tA. Repaired files still have to deny the other company and still allow own-company read.
 
 ```mermaid
 flowchart LR

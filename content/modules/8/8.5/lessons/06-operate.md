@@ -64,4 +64,4 @@ A clinic example: notice a crash that would have included a fake name; do not at
 
 ## What this page is not doing
 
-Do not use live vendor traces are out of scope. Answer keys are not on this site.
+Do not use live vendor traces. Answer keys are not on this site.

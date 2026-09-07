@@ -9,7 +9,7 @@ A leftover cookie is not the fix. SameSite as the only check is not the fix. COR
 
 The structural change is: `allow_share` must require a session cookie **and** `origin == expected` **and** a matching CSRF token. Structural means site-bound intent — not leftover cookie authority from the surroundings.
 
-The smallest restore for notes-app share is: all three, or deny. Fail closed: missing origin or token **denies**. Do not fail open because SameSite is Lax.
+The smallest fix for share is: all three, or deny. Fail closed: missing origin or token **denies**. Do not fail open because SameSite is Lax.
 
 ## Picture: all three, or deny
 

@@ -9,7 +9,7 @@
 
 ## Picture: broken must fail eval-approve
 
-A check that only counts passing cases can still look green while eval on user input is still approved.
+A passing-test tally can still hide that eval on user input is still approved.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P["Must pass: reject eval"]
 ```
 
-If both pass, the test is not looking at eval-on-user.
+If both pass, you are not looking at eval-on-user.
 
 ## What the check has to show
 

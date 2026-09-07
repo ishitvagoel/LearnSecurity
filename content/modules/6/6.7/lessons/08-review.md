@@ -5,7 +5,7 @@
 
 ## What you are reviewing
 
-This review is about notes-app export. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say whether `allow(4)` is still true if they ship. Start at unbounded allow, not at a famous API-abuse list.
+You are reviewing export. Label each claim **rule**, **tool**, or **false assurance**. Say whether `allow(4)` is still true if they ship. Start at unbounded allow, not at a famous API-abuse list.
 
 A comment “will cap later” is not a pass on `test_fourth_export_is_denied`.
 

@@ -9,7 +9,7 @@
 
 ## Picture: a broken register gate must fail the check
 
-A check that only counts passing tests can still look green while empty owner still accepts.
+A passing-test tally can still hide that empty owner still accepts.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: schema]
 ```
 
-If both pass, the test is not looking at empty owner.
+If both pass, you are not looking at empty owner.
 
 ## What the check has to show
 

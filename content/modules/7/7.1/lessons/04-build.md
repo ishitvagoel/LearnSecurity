@@ -9,7 +9,7 @@ An OpenAPI comment is not the fix. A frontend form that omits the checkbox is no
 
 The structural change is: the server **copies named fields**. `apply` must copy `display_name` when present and must not copy `is_admin`. Copy only the allowed display name.
 
-The smallest restore for the notes app’s profile PATCH is: `ALLOWED = {"display_name"}`. Fail-safe: unknown keys are skipped (or rejected). Do not fail open because a nested model was allowed to keep extras.
+The smallest fix for the notes app’s profile PATCH is: `ALLOWED = {"display_name"}`. Fail-safe: unknown keys are skipped (or rejected). Do not fail open because a nested model was allowed to keep extras.
 
 ## Picture: extras never reach the row
 

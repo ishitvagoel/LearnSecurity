@@ -57,4 +57,4 @@ A clinic example: notice search-box syntax errors; do not paste patient names in
 
 ## What this page is not doing
 
-A web filter is not this check. Do not use live SQL hunts are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+A web filter is not this check. Do not use live SQL hunts. This site does not mark you as finished. Answer keys are not on this site.

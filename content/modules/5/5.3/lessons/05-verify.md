@@ -9,7 +9,7 @@
 
 ## Picture: leftover default must fail
 
-A check that only counts passing cases can still look green while a leftover default still counts as a valid key.
+A passing-test tally can still hide that a leftover default still counts as a valid key.
 
 ```mermaid
 flowchart LR

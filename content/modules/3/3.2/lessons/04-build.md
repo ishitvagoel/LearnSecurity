@@ -7,7 +7,7 @@
 
 `assemble_threat_model` must still emit `cross-tenant-read`, `hostile-browser`, and `stolen-worker` with owner and trigger when the scanner is green. Structural means the assembler **joins** an always-name set with scanner findings — not a denylist of yesterday’s CVE, not “trust the dashboard,” not a STRIDE sticker with no row, not an awareness list cited as a passing score.
 
-The smallest restore for the notes app is: always write the three always-name rows, then append scanner ids that are not already present. If you are unsure whether a design threat is “in scope,” keep the row and name what is left — do not delete it because the scan was clean.
+The smallest fix for the notes app is: always write the three always-name rows, then append scanner ids that are not already present. If you are unsure whether a design threat is “in scope,” keep the row and name what is left — do not delete it because the scan was clean.
 
 ## Picture: seed then join
 

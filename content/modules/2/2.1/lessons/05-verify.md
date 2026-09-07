@@ -9,7 +9,7 @@ A 200 on the happy path is not evidence. The check must be **false** on the brok
 
 ## Picture: broken files must fail the duplicate-key check
 
-A check that only counts passing cases can still look green while two readers still disagree.
+A passing-test tally can still hide that two readers still disagree.
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,7 @@ flowchart LR
   P --> E2[Evidence the check is now true]
 ```
 
-If both pass, the check is not looking at ACL tenant vs stored tenant.
+If both pass, you are not looking at ACL tenant vs stored tenant.
 
 ## What the check has to show
 

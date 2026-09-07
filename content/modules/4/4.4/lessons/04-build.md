@@ -9,7 +9,7 @@ A denylist of yesterday’s ids is not the fix. Hiding the button is not the fix
 
 The structural change is: `can_read` **denies unless company matches and the user is the note owner or `GRANTS[(user, note_id)]` is true**. Structural means this object is checked — not leftover permission from the surroundings.
 
-The smallest restore for notes-app notes is: deny by default, then company equality, then owner or grant on **this** id. Fail closed: missing note, missing user, or missing grant is **deny**. Do not fail open because the id “looks valid.”
+The smallest fix for notes is: deny by default, then company equality, then owner or grant on **this** id. Fail closed: missing note, missing user, or missing grant is **deny**. Do not fail open because the id “looks valid.”
 
 ## Picture: deny default, then two keys
 

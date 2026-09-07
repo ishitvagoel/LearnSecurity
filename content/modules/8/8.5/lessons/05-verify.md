@@ -9,7 +9,7 @@
 
 ## Picture: a broken crash report must fail the check
 
-A check that only counts passing tests can still look green while the body is still in the report.
+A passing-test tally can still hide that the body is still in the report.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: omit body]
 ```
 
-If both pass, the test is not looking at the body substring.
+If both pass, you are not looking at the body substring.
 
 ## What the check has to show
 

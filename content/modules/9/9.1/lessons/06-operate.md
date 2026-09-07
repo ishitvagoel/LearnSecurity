@@ -64,4 +64,4 @@ A clinic example: block a release when the HIPAA “done” column has no isolat
 
 ## What this page is not doing
 
-Do not use live portal traces are out of scope. This page does not finish the verification check-in. Answer keys are not on this site.
+Do not use live portal traces. This page does not finish the verification check-in. Answer keys are not on this site.

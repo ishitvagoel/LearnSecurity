@@ -9,7 +9,7 @@
 
 ## Picture: a broken no-op revoke must fail the check
 
-A check that only counts passing tests can still look green while B after revoke still reads.
+A passing-test tally can still hide that B after revoke still reads.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: deny]
 ```
 
-If both pass, the test is not looking at B after revoke.
+If both pass, you are not looking at B after revoke.
 
 ## What the check has to show
 

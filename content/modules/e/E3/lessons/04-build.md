@@ -7,7 +7,7 @@
 
 `capture` must add to `SEEN` and `CHARGES` only when the key is new. Fail-safe: a duplicate denies the extra charge. A processor header may *ride along* with a match; it does not replace your set. Structural means that identity — not a payment company, not a questionnaire, not HTTP 200.
 
-The smallest restore for the notes app's lab ledger is: two k1 → count 1, first k1 may charge. Do not fail open because the processor said ok. Do not mint a new key on every retry and call that remembering.
+The smallest fix for the notes app's lab ledger is: two k1 → count 1, first k1 may charge. Do not fail open because the processor said ok. Do not mint a new key on every retry and call that remembering.
 
 ## Picture: seen gate
 

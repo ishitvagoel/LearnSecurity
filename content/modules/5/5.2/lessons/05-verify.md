@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: not reversible]
 ```
 
-If both pass, the test is not looking at Base64 decode of `protect("secret")`.
+If both pass, you are not looking at Base64 decode of `protect("secret")`.
 
 ## What the check has to show
 

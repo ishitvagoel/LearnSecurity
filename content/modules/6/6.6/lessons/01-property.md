@@ -78,4 +78,4 @@ Clinic invite-guardian token. Password reset. 2.4 share retry. Later job deliver
 
 ## What this page is not doing
 
-Do not use live race exploits, dumping lab Python into notes. This site does not mark you as finished. Answer keys are not on this site.
+Do not use live race exploits. This site does not mark you as finished. Answer keys are not on this site.

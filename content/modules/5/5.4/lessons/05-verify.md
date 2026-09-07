@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P["Must pass: mismatch is false"]
 ```
 
-If both pass, the test is not looking at header versus socket.
+If both pass, you are not looking at header versus socket.
 
 ## What the check has to show
 

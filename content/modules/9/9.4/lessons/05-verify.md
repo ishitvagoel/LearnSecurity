@@ -9,7 +9,7 @@
 
 ## Picture: a broken ship_ok must fail the check
 
-A check that only counts passing tests can still look green while unmapped HIGH still ships.
+A passing-test tally can still hide that unmapped HIGH still ships.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: deny unmapped HIGH]
 ```
 
-If both pass, the test is not looking at the empty map.
+If both pass, you are not looking at the empty map.
 
 ## What the check has to show
 

@@ -9,7 +9,7 @@
 
 ## Picture: empty sig on the broken files must fail the check
 
-A check that only counts passing cases can still look green while an unsigned body is still accepted.
+A passing-test tally can still hide that an unsigned body is still accepted.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P["Must pass: deny"]
 ```
 
-If both pass, the test is not looking at a missing sig.
+If both pass, you are not looking at a missing sig.
 
 ## What the check has to show
 

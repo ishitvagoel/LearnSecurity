@@ -9,7 +9,7 @@
 
 ## Picture: a broken close gate must fail the check
 
-A check that only counts passing tests can still look green while `{retest: None}` still closes.
+A passing-test tally can still hide that `{retest: None}` still closes.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
   X["repaired files --impl fixed"] --> P[Must pass: retest None denied]
 ```
 
-If both pass, the test is not looking at missing retest.
+If both pass, you are not looking at missing retest.
 
 ## What the check has to show
 
