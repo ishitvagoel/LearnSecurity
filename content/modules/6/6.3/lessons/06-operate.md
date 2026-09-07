@@ -28,7 +28,7 @@ A network-filter product name does not bind origin and token or prove the anti-f
 
 ## What the framework does vs what you still have to check
 
-A network filter will page on cross-site POST volume and stay silent when `/share.json` still keys only the cookie. Notice must observe **origin mismatch or missing token at `allow_share`**, not CORS error counts. If the alert includes a session cookie or CSRF token, you have opened a logging hole from an earlier topic.
+A network filter will page on cross-site POST volume and stay silent when `/share.json` still keys only the cookie. Notice must observe **origin mismatch or missing token at `allow_share`**, not CORS error counts. A session cookie or CSRF token on that share page is a logging hole from an earlier topic.
 
 ## Can people still use it
 

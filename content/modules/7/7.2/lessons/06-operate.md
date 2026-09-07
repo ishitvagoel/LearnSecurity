@@ -29,7 +29,7 @@ A GraphQL-gateway product name does not check role × field or prove field permi
 
 ## What the framework does vs what you still have to check
 
-An APM dashboard will show GraphQL errors and stay silent when `/export.csv` still dumps every column. Notice must observe **member × `secret_internal` false**, not HTTP status counts. If the alert includes the field value, you have opened a logging leak (3.1).
+An APM dashboard will show GraphQL errors and stay silent when `/export.csv` still dumps every column. Notice must observe **member × `secret_internal` false**, not HTTP status counts. The field value on that GraphQL page is a logging leak (3.1).
 
 A `field_denied` line fires without the secret.
 

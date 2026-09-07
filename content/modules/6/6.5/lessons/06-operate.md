@@ -47,7 +47,7 @@ Recovery is incomplete if the next worker still calls `requests.get` on the form
 
 ## What the framework does vs what you still have to check
 
-A cloud dashboard will show “instance metadata requires a token” and stay silent when the unfurl helper still allows any https host. Detection must observe **`allowed` false before any GET**, not a packet capture. If the alert includes a full URL with a query token, you have opened a leftover hole from topic 4.3. **Do not fetch to confirm.**
+A cloud dashboard will show “instance metadata requires a token” and stay silent when the unfurl helper still allows any https host. Detection must observe **`allowed` false before any GET**, not a packet capture. A full URL with a query token on that host page is a leftover hole from topic 4.3. **Do not fetch to confirm.**
 
 ## Practice
 

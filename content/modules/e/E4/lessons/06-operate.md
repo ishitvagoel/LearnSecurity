@@ -29,7 +29,7 @@ A language-name sticker does not prove this length rule. An oversized `declared_
 
 ## What the framework does vs what you still have to check
 
-A sanitizer dashboard will show hits in languages that run under it and stay silent when a Python stand-in (or a C wheel) copies by `declared_len`. Notice must observe **length ≤ bufsize**, not “the language is memory-safe.” If the alert includes file bytes or a hex dump, you have opened a leak.
+A sanitizer dashboard will show hits in languages that run under it and stay silent when a Python stand-in (or a C wheel) copies by `declared_len`. Notice must observe **length ≤ bufsize**, not “the language is memory-safe.” File bytes or a hex dump on that length page are leftover buffer text.
 
 An operator reject screen must say *copy exceeds destination* without requiring a hex dump. People should be able to read that error without a dump of the file.
 

@@ -44,7 +44,7 @@ Enabling a service account does not stop a leftover cookie from being the princi
 
 ## What the framework does vs what you still have to check
 
-A task dashboard will show task success and stay silent when the task still used `job.get('user_session')`. Detection must observe **Alice session yields `None`**, not queue depth. If the alert includes Alice’s cookie or note bodies, you have opened a leftover hole from topics 3.1 and 4.3.
+A task dashboard will show task success and stay silent when the task still used `job.get('user_session')`. Detection must observe **Alice session yields `None`**, not queue depth. Alice’s cookie or note bodies on that worker page are a leftover hole from topics 3.1 and 4.3.
 
 ## Practice
 

@@ -29,7 +29,7 @@ A row-level vendor name does not prove company isolation. Body tenant B still ha
 
 ## What the framework does vs what you still have to check
 
-A relationship-graph dashboard will show tuple counts and stay silent when CI’s `tenant_for` prefers the body. Notice must observe **session A plus body B is A**, not “row-level rules are enabled.” If the alert includes a note body or a GraphQL document dump, you have opened a logging hole.
+A relationship-graph dashboard will show tuple counts and stay silent when CI’s `tenant_for` prefers the body. Notice must observe **session A plus body B is A**, not “row-level rules are enabled.” A note body or a GraphQL document dump on that tenant page is leftover chart text.
 
 ## Can people still use it
 

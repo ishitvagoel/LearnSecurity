@@ -45,7 +45,7 @@ Enabling a rate limit does not deny the fourth export. Notification fan-out and 
 
 ## What the framework does vs what you still have to check
 
-An edge dashboard will show 429s on an IP and stay silent when `/export.csv` still has no per-person counter. Detection must observe **`allow(4)` false**, not HTTP status counts. If the alert includes note bodies from the CSV, you have opened a leftover hole from topics 3.1 and 5.1.
+An edge dashboard will show 429s on an IP and stay silent when `/export.csv` still has no per-person counter. Detection must observe **`allow(4)` false**, not HTTP status counts. Note bodies from the CSV on that export page are a leftover hole from topics 3.1 and 5.1.
 
 ## Practice
 

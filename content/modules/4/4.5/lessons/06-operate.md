@@ -28,7 +28,7 @@ flowchart TD
 
 ## What the framework does vs what you still have to check
 
-An identity provider will page on failed logins and stay silent when this API accepts `aud=other-api`. Notice must observe the **resource-server comparison**, not the identity-provider tile. If the alert includes a raw JWT, you have opened a leak.
+An identity provider will page on failed logins and stay silent when this API accepts `aud=other-api`. Notice must observe the **resource-server comparison**, not the identity-provider tile. A raw JWT on that audience page is leftover bearer text.
 
 ## Practice
 

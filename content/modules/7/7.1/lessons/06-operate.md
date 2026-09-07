@@ -32,7 +32,7 @@ An API gateway sticker does not drop `is_admin`. `is_admin` in the PATCH body st
 
 ## What the framework does vs what you still have to check
 
-A web filter will show 400s on a schema mismatch and stay silent when `/v0/users` still runs `user.update(body)`. Notice must observe **`is_admin` still false**, not HTTP status counts. If the alert includes the PATCH JSON, you have opened a logging leak (3.1 / 5.1).
+A web filter will show 400s on a schema mismatch and stay silent when `/v0/users` still runs `user.update(body)`. Notice must observe **`is_admin` still false**, not HTTP status counts. The PATCH JSON on that extra-key page is a logging leak (3.1 / 5.1).
 
 Extra-key denials fire without the document.
 

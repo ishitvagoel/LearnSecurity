@@ -32,7 +32,7 @@ If the crash payload still holds the note, `test_crash_report_omits_note_body` i
 | Recover | Keep the redact; purge the vendor copy; tell people if needed |
 | Leftover | The vendor as a processor; screenshots; frozen-app traces; leftover `READ_LOGS` |
 
-A crash dashboard will show crash counts and stay silent when the last extra still holds the note. Detection must observe **`'secret'` absent**, not vendor uptime. If the alert includes the note body, you have opened the same leak as a log line (3.1) and an extra vendor copy (5.1).
+A crash dashboard will show crash counts and stay silent when the last extra still holds the note. Detection must observe **`'secret'` absent**, not vendor uptime. The note body on that crash page is the same leak as a log line (3.1) and an extra vendor copy (5.1).
 
 ```text
 log_denied reason=crash_body_redacted crash_id=cr_85e app=release

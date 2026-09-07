@@ -32,7 +32,7 @@ Debug on in prod still has to refuse boot in `test_prod_debug_must_not_boot`. A 
 | Recover | Kill; rotate secrets that appeared in traces |
 | Leftover | Other flags; E6 emergency debug; sidecar debug |
 
-A canary dashboard will show rollout percent and stay silent when CI’s `boot_ok` is always true. Detection must observe **prod plus debug is deny**, not “the container started.” If the alert includes a stack trace or a session token, you have opened the same leak as a log line.
+A canary dashboard will show rollout percent and stay silent when CI’s `boot_ok` is always true. Detection must observe **prod plus debug is deny**, not “the container started.” A stack trace or a session token on that canary page is the same leak as a log line.
 
 ```text
 log_denied reason=prod_debug_forbidden env=prod debug=true deploy=sc-12

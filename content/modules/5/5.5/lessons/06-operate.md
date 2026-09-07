@@ -45,7 +45,7 @@ A web-filter SQLi rule does not bind the query helper. Report paths and ORDER BY
 
 ## What the framework does vs what you still have to check
 
-A web filter will page on syntax errors and stay silent when the values were concatenated but happened to parse. Detection must observe **concatenated `str` from `fetch_sql`**, not HTTP 500 counts. If the alert includes a full SQL string with values, you have opened a leftover hole from topic 3.1.
+A web filter will page on syntax errors and stay silent when the values were concatenated but happened to parse. Detection must observe **concatenated `str` from `fetch_sql`**, not HTTP 500 counts. A full SQL string with values on that concat page is a leftover hole from topic 3.1.
 
 ## Practice
 

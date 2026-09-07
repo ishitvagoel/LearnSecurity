@@ -31,7 +31,7 @@ Minify does not keep a debug build off prod export. A debug build still has to f
 
 ## What the framework does vs what you still have to check
 
-A Play Console dashboard will show signing status and stay silent when FastAPI still allows `build_type=debug`. Notice must observe **debug plus ok is false**, not store health. If the alert includes signing keys or an APK, you have opened a leftover hole from topic 5.3.
+A Play Console dashboard will show signing status and stay silent when FastAPI still allows `build_type=debug`. Notice must observe **debug plus ok is false**, not store health. Signing keys or an APK on that debug-build page are a leftover hole from topic 5.3.
 
 Debug-to-prod denials fire without the APK.
 

@@ -31,7 +31,7 @@ An MDM product name does not encrypt the cache. Plaintext on disk still has to f
 
 ## What the framework does vs what you still have to check
 
-Android Auto Backup can copy ciphertext *and* a poorly stored key while the check still says “not plaintext secret.” Notice must observe **`plaintext_on_disk()` false**, not a fingerprint prompt. If the alert includes note bodies, you have opened a logging leak (3.1 / 5.1).
+Android Auto Backup can copy ciphertext *and* a poorly stored key while the check still says “not plaintext secret.” Notice must observe **`plaintext_on_disk()` false**, not a fingerprint prompt. Note bodies on that backup page are a logging leak (3.1 / 5.1).
 
 Leftover-cache signals fire without the body.
 

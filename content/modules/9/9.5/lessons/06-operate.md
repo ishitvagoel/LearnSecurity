@@ -32,7 +32,7 @@ Close without a pass on the same URL still has to fail `test_cannot_close_withou
 | Recover | Reopen; run the same isolation check |
 | Leftover | Variants; severity vs business priority; role-change caches |
 
-A ticket dashboard will show Done counts and stay silent when CI's `close_finding` is always true. Detection must observe **retest None is deny**, not ticket volume. If the alert includes a note body or a patient row, you have opened a leftover-body leak.
+A ticket dashboard will show Done counts and stay silent when CI's `close_finding` is always true. Detection must observe **retest None is deny**, not ticket volume. A note body or a patient row on that retest page is leftover finding text.
 
 ```text
 log_denied reason=finding_closed_without_retest finding=F-authz-1

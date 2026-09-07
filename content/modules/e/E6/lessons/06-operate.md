@@ -32,7 +32,7 @@ Blank owner or `review_by` still has to make `test_exception_needs_owner_review_
 | Recover | Expire; fix or re-accept with fields |
 | Leftover | Unread register; tech-debt rename |
 
-A governance dashboard will show exception counts and stay silent when CI’s `accept_exception` is always true. Detection must observe **empty owner is deny**, not “we have a risk register.” If the alert includes a secret writeup or chart text, you have opened a leftover-secret leak.
+A governance dashboard will show exception counts and stay silent when CI’s `accept_exception` is always true. Detection must observe **empty owner is deny**, not “we have a risk register.” A secret writeup or chart text on that exception page is leftover risk text.
 
 ```text
 log_denied reason=exception_incomplete_denied missing=owner,review_by

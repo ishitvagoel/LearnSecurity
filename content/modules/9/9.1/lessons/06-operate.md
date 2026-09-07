@@ -32,7 +32,7 @@ A status-only row with no isolation test still has to fail `test_status_only_row
 | Recover | Add the isolation test; do not backfill done |
 | Leftover | Unnamed extra advanced rows; exceptions (E6); 9.3 lying flags |
 
-A tracker dashboard will show Done and stay silent when AUTHZ-1 still has `asserts_isolation: False`. Detection must observe **status-only is not covered**, not issue count. If the alert includes note bodies from the isolation test, you have opened the same leak as a log line (3.1).
+A tracker dashboard will show Done and stay silent when AUTHZ-1 still has `asserts_isolation: False`. Detection must observe **status-only is not covered**, not issue count. Note bodies from the isolation test on that coverage page are the same leak as a log line (3.1).
 
 ```text
 log_denied reason=unmapped_req_blocks_release req=AUTHZ-1 release=rel_91e

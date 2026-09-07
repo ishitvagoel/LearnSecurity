@@ -27,7 +27,7 @@ A second `k1` still has to fail `test_duplicate_capture_does_not_double_charge`.
 
 ## What the framework does vs what you still have to check
 
-A processor dashboard will show successful captures and stay silent when CI’s `capture` always appends. Notice must observe **two k1 → count 1**, not processor 200s. If the alert includes a card number, you have opened a leftover hole from topic 5.1 this elective forbids.
+A processor dashboard will show successful captures and stay silent when CI’s `capture` always appends. Notice must observe **two k1 → count 1**, not processor 200s. A card number on that capture page is a leftover hole from topic 5.1 this elective forbids.
 
 ## Practice
 
