@@ -28,7 +28,7 @@ flowchart TD
   Report --> Vendor[would leave the device]
 ```
 
-You do not need an emulator. You must not call a crash vendor. The substring in the returned dict is already the leak.
+You do not need an emulator. You must not call a crash vendor. The name is already in the returned crash dict.
 
 The log lesson (3.1) already refused bodies in logs. This check is **the mobile telemetry place**. The store form discloses. It does not redact.
 

@@ -26,7 +26,7 @@ flowchart TD
   Any[any dict] --> Acc[accepted]
 ```
 
-`--impl vulnerable` returns true for every payload, including empty owner. You do not need a governance product. You must not contact a live disclosure inbox. The true return for empty owner is already the leak.
+`--impl vulnerable` returns true for every payload, including empty owner. You do not need a governance product. You must not contact a live disclosure inbox. Empty owner already accepts.
 
 Earlier lessons already said posters are not gates. This check is **accountability of leftover risk**.
 

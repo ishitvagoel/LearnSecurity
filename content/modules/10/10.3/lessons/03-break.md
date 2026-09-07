@@ -26,7 +26,7 @@ flowchart TD
   Any[any role] --> True[pod_ok true]
 ```
 
-You do not need a kube-apiserver. You must not bind a live cluster. The true return for `"cluster-admin"` is already the leak.
+You do not need a kube-apiserver. You must not bind a live cluster. `"cluster-admin"` already is the pod Role.
 
 The database god-role lesson already said one shared admin is a blast-radius rule. This check is **the same idea at cluster grain**.
 

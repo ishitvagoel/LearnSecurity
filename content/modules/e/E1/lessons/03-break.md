@@ -26,7 +26,7 @@ flowchart TD
   Any[any tool name] --> Ran[ran name]
 ```
 
-You do not need a language model. You must not call a live model. The ran-string for `"exec_sql"` is already the leak.
+You do not need a language model. You must not call a live model. The ran-string for `"exec_sql"` already is the tool call.
 
 The interpreter lesson already said a string is not a safe argv. This check is **the same idea with the model as an untrusted client**.
 

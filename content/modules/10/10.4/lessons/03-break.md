@@ -26,7 +26,7 @@ flowchart TD
   Any[any env debug pair] --> True[boot_ok true]
 ```
 
-You do not need Docker. You must not boot a live host. The true return for `("prod", True)` is already the leak.
+You do not need Docker. You must not boot a live host. `("prod", True)` already boots debug.
 
 The secrets lesson already said keep secrets out of traces. This check is **the process must not start**.
 

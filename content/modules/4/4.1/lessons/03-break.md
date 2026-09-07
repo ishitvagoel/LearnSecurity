@@ -28,7 +28,7 @@ flowchart TD
   Skip --> Valid["session_valid returns true"]
 ```
 
-You do not need a real cookie string. The leftover true session is already the leak.
+You do not need a real cookie string. alice's leftover session is still valid.
 
 All active sessions have to be killed when an account is disabled or deleted. `DELETE FROM users` is a profile observation, not that kill.
 

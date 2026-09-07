@@ -28,7 +28,7 @@ flowchart TD
   Skip --> Hit["body_retained returns secret"]
 ```
 
-You do not need a live warehouse query. You must not run one. The leftover `"secret"` is already the leak.
+You do not need a live warehouse query. You must not run one. Leftover `"secret"` is still in the warehouse.
 
 Documented retention has to be actually carried out. Encrypting a warehouse you still keep is secrecy theater, not this privacy check.
 

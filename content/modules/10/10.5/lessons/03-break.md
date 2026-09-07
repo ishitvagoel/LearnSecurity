@@ -26,7 +26,7 @@ flowchart TD
   Any[any incident dict] --> True[close_incident true]
 ```
 
-You do not need a SIEM. You must not query a live tenant. The true return for recovery todo is already the leak.
+You do not need a SIEM. You must not query a live tenant. Recovery todo already closes the incident.
 
 Earlier lessons already said bodies stay out of logs. This check is **detect without recover is theater**.
 

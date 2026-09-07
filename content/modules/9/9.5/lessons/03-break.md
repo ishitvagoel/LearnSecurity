@@ -26,7 +26,7 @@ flowchart TD
   Any[any finding dict] --> True[close_finding true]
 ```
 
-You do not need a testing-guide list. You must not pentest a public host. The true return for `{retest: None}` is already the leak.
+You do not need a testing-guide list. You must not pentest a public host. `{retest: None}` already closes without a retest.
 
 The isolation lesson already said HTTP 200 is not a security test. This check is **the same isolation check must pass before close**.
 

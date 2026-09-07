@@ -27,7 +27,7 @@ flowchart TD
   Again["accept t1 again"] --> True
 ```
 
-The token is never consumed. Sequential double-accept is enough. A second true return is already the leak.
+The token is never consumed. Sequential double-accept is enough. A second true accept already is two guardians.
 
 Lock so a limited seat cannot be booked twice. The check is sequential consume-once, not a threaded race.
 

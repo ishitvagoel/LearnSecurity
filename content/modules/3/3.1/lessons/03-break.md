@@ -28,7 +28,7 @@ flowchart TD
   Line --> Operator[Lower-trust reader]
 ```
 
-You do not need a production drain. The substring in the returned line is already the leak.
+You do not need a production drain. The chart substring is already in the returned line.
 
 ## What to look at: the cause, not a hunt
 
