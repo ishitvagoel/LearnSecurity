@@ -32,7 +32,7 @@ Unpinned Actions are a sibling grain. Secrets in fork pull requests are 5.3. Thi
 - Secrets in PR from forks
 - SBOM generated but never used
 
-Also reject: live registry attacks; installing without re-running `test_hash_mismatch_refuses_install`; keys in learner notes; claiming this page as a check-in.
+Also reject: live registry attacks; installing without re-running `test_hash_mismatch_refuses_install`; keys in learner notes; treating this SBOM lesson as a check-in.
 
 ## Common mix-ups
 

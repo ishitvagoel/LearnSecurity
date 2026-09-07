@@ -54,7 +54,7 @@ An earlier topic already said path length is checking every path for *which file
 | How you stop it | `min(bufsize, declared_len, len(src))` |
 | How you notice | `copy_length_denied`; never file bytes |
 | How you recover | Reject the blob; patch the parser |
-| Not the lesson | A C exploit, an awareness-list dashboard, or this page as a finished check-in |
+| Not the lesson | A C exploit, an awareness-list dashboard, or this memory lesson as a finished check-in |
 
 ## What the framework does vs what you still have to check
 

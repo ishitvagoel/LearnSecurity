@@ -35,7 +35,7 @@ A TLS dashboard does not compare the client header to the socket.
 log_denied reason=header_https_socket_http socket=http request_id=req_54ch
 ```
 
-Not: a session cookie, a note body, or “HSTS handled.”
+That sample reprints the cookie if it still has a session cookie, a note body, or “HSTS handled.”
 
 Putting a session cookie or a note body in the alert leaves a second copy in the pager.
 
@@ -51,7 +51,7 @@ If a human sees a certificate or mixed-content warning, make the error readable.
 
 ## Practice
 
-Draft a deny line with ids and a reason — never the cookie. A line is wrong if it includes a session cookie, a note body, or “HSTS handled.”
+Draft a deny line with ids and a reason — never the cookie. A session cookie, a note body, or “HSTS handled” would reprint the cookie.
 
 ## Use it somewhere new
 

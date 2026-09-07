@@ -37,7 +37,7 @@ A web-filter SQLi rule does not bind `fetch_sql`.
 log_denied reason=sql_error_spike tenant=tA request_id=req_55q stmt=fetch_note
 ```
 
-Not: a note body, a full SQL string with values, a real email, or “the web filter caught it.”
+That sample reprints the query if it still has a note body, a full SQL string with values, a real email, or “the web filter caught it.”
 
 Putting a full SQL string with values in the alert leaves the query text in the pager too.
 
@@ -49,7 +49,7 @@ A web filter will page on syntax errors and stay silent when the values were con
 
 ## Practice
 
-Sketch a deny line with ids, a reason, and the statement name — never bound values. Don't keep a line with a note body, a full SQL string with values, or a real email.
+Sketch a deny line with ids, a reason, and the statement name — never bound values. A note body, a full SQL string with values, or a real email would reprint the query in the log.
 
 ## Use it somewhere new
 

@@ -38,7 +38,7 @@ A vendor security dashboard will show finding counts and stay silent when CI’s
 log_denied reason=unmapped_high_blocks finding=F1 sev=HIGH
 ```
 
-Not: a secret, a note body, or “verification gate complete.”
+That sample reprints the finding if it still has a secret, a note body, or “verification gate complete.”
 
 Putting the matching scanner snippet in the alert puts the finding payload in the pager too.
 
@@ -58,7 +58,7 @@ It broke because CI’s `ship_ok` still always true (or a new HIGH with no map r
 log_denied reason=unmapped_high_blocks finding=F1 sev=HIGH
 ```
 
-If the line includes a secret, a note body, or “verification gate complete”, throw that line away.
+A secret, a note body, or “verification gate complete” would reprint the finding in the log.
 
 ## Use it somewhere new
 

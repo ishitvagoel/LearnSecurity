@@ -37,9 +37,9 @@ A log product does not kill the cookie.
 log_denied reason=session_after_delete user_id=alice request_id=req_41lc
 ```
 
-Not: a note body, a personal email, a production cookie, or “single sign-on revoked it.”
+The sample is already a leak if it still has a note body, a personal email, a production cookie, or “single sign-on revoked it.”
 
-Putting a note body in the alert leaves a leftover copy in the pager.
+Paste a note body into the session-after-delete alert and the pager now stores leftover notes.
 
 A green identity-provider tile that says “user disabled” is not that check. If a replica session store still has `alice`, treat it as the same leftover session, not a separate “eventual consistency” pass. An “account deleted” email is not recovery.
 
@@ -53,7 +53,7 @@ If operators see a “signed out” badge, do not encode it as color only. Give 
 
 ## Practice
 
-Sketch a deny line with ids and a reason — never the body. Skip any line with a note body, a personal email, a production cookie, or “single sign-on revoked it.”
+Sketch a deny line with ids and a reason — never the body. Leave the note body, the personal email, the production cookie, and “single sign-on revoked it” off it.
 
 ## Use it somewhere new
 

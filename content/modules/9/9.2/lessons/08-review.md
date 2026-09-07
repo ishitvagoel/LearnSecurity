@@ -32,7 +32,7 @@ The lab substring is a stand-in — name `exec(` and generated code as leftover,
 - Framework-generated SQL ignored
 - No who-is-allowed question
 
-Also reject: weaponized eval; closing findings without re-running `test_eval_on_user_input_is_rejected`; keys in learner notes; claiming this page as a check-in; treating the substring as a complete check.
+Also reject: weaponized eval; closing findings without re-running `test_eval_on_user_input_is_rejected`; keys in learner notes; treating this eval lesson as a check-in; treating the substring as a complete check.
 
 ## Common mix-ups
 

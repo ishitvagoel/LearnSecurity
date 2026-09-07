@@ -41,7 +41,7 @@ Debug-to-prod denials fire without the APK.
 log_denied reason=debug_to_prod_denied client=debug request_id=req_84e
 ```
 
-Don't keep a line with signing keys, an APK, or a live Play Console trace.
+Signing keys, an APK, or a live Play Console trace would make the log a signing leak.
 
 ## Use it somewhere new
 

@@ -56,7 +56,7 @@ The first lesson already refused a name as a digest. This practice is **whether 
 | How you stop it later | Require expected == got; mismatch deny |
 | How you notice later | `hash_mismatch_denied`; never registry tokens |
 | How you recover later | Pin known-good; rotate CI secrets (5.3) |
-| Out of scope | An SBOM product, live npm, or claiming this page as a check-in |
+| Out of scope | An SBOM product, live npm, or treating this install lesson as a check-in |
 
 `npm install` latest is a convenience default. Dependabot opens pull requests; it does not verify bytes at install. A pip install without a hash requirement will take whatever the index returns. `aaa` vs `bbb` is deny.
 

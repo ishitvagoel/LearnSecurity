@@ -32,7 +32,7 @@ HTTP-200 tests that lie about isolation are 9.3. Exceptions without expiry are E
 - No isolation assert
 - Exceptions without expiry
 
-Also reject: live portals; closing findings without re-running `test_status_only_row_is_not_coverage`; keys in learner notes; claiming this page as a check-in; obsolete mobile-level stickers as the current bar.
+Also reject: live portals; closing findings without re-running `test_status_only_row_is_not_coverage`; keys in learner notes; treating this mapping lesson as coverage; obsolete mobile-level stickers as the current bar.
 
 ## Common mix-ups
 

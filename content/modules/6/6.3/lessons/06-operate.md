@@ -40,7 +40,7 @@ If a human sees “share blocked,” announce it in text a screen reader can spe
 log_denied reason=foreign_origin_post_denied expected_host=app.securecollab.test request_id=req_63c
 ```
 
-If the line includes a session cookie, CSRF token, or note body, drop it.
+A session cookie, CSRF token, or note body belongs nowhere in this log.
 
 ## Use it somewhere new
 

@@ -36,7 +36,7 @@ A log product does not encrypt the column.
 log_denied reason=encoding_labeled_encryption field=body request_id=req_52cr
 ```
 
-Not: plaintext `secret`, a real SSN, or “AES handled.”
+That sample is already a second key store if it holds plaintext `secret`, a real SSN, or “AES handled.”
 
 Putting plaintext `secret` or an SSN in the alert leaves a second copy in the pager.
 
@@ -50,7 +50,7 @@ A cloud key dashboard will show “key enabled” and stay silent when the colum
 
 ## Practice
 
-A deny line needs ids and a reason, not plaintext. Drop any line that includes plaintext `secret`, a real SSN, or “AES handled.”
+A deny line needs ids and a reason, not plaintext. Plaintext `secret`, a real SSN, or “AES handled” would reprint the key material.
 
 ## Use it somewhere new
 

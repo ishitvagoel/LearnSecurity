@@ -39,7 +39,7 @@ uvicorn access logs, FastAPI exception handlers, and Next.js analytics will stor
 share_replay reason=same_idempotency_key note_id=n1 key_id=k1 actor=owner_a request_id=req_22c1
 ```
 
-The log is a leak if it has a note body, a real email, a session value, or “awareness list handled.”
+A note body, a real email, a session value, or “awareness list handled” in the log is a leak of its own.
 
 ## Use it somewhere new
 

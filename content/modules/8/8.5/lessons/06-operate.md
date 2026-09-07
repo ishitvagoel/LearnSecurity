@@ -38,7 +38,7 @@ A crash dashboard will show crash counts and stay silent when the last extra sti
 log_denied reason=crash_body_redacted crash_id=cr_85e app=release
 ```
 
-Not: a note body, a patient name, or a live crash payload.
+That sample is a second crash dump if it still has a note body, a patient name, or a live crash payload.
 
 Putting the matching report in the alert puts the crash body in the pager too.
 
@@ -56,7 +56,7 @@ In-app “send feedback” must not require attaching a screenshot of the note t
 log_denied reason=crash_body_redacted crash_id=cr_85e app=release
 ```
 
-The log is a leak if it has a note body, a patient name, or a live crash payload.
+A note body, a patient name, or a live crash payload in the log is a second crash dump.
 
 ## Use it somewhere new
 

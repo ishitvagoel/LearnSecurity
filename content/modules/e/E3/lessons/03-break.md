@@ -49,7 +49,7 @@ In `vulnerable/pay.py`, `capture` appends on every call. Checks:
 | How you stop it | Treat the key as identity; a duplicate is a no-op |
 | How you notice | `duplicate_capture_denied`; never card-number-like strings |
 | How you recover | Credit the extra in a runbook; still fail the test first |
-| Not the lesson | A questionnaire product; live Stripe; this page as a finished check-in |
+| Not the lesson | A questionnaire product; live Stripe; this payments lesson as a finished check-in |
 
 ## What the framework does vs what you still have to check
 

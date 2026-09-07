@@ -32,7 +32,7 @@ Who-is-allowed blind spots are review and isolation tests — name them, do not 
 - SAST offered as the check-in
 - No blind-spot note for who-is-allowed / IDOR
 
-Also reject: live tenants; closing findings without re-running `test_unmapped_high_blocks_ship`; keys in learner notes; claiming this page as a finished check-in.
+Also reject: live tenants; closing findings without re-running `test_unmapped_high_blocks_ship`; keys in learner notes; treating this SCA lesson as a check-in.
 
 ## Common mix-ups
 

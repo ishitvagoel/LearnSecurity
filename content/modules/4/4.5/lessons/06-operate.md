@@ -36,7 +36,7 @@ An identity provider will page on failed logins and stay silent when this API ac
 log_denied reason=jwt_aud_mismatch expected_aud=securecollab-api client_id=sc_web request_id=req_45oa
 ```
 
-Skip any line with a raw JWT, a note body, or “OpenID Connect handled.”
+A raw JWT, a note body, or “OpenID Connect handled” has no business in the log.
 
 ## Use it somewhere new
 

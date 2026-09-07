@@ -45,7 +45,7 @@ An identity-provider dashboard will show “2FA enrolled” and stay silent when
 log_denied reason=not_phishing_resistant method=password origin_class=mismatch request_id=req_42pr
 ```
 
-If the line includes a password, OTP, note body, or “MFA handled”, throw that line away.
+A password, OTP, note body, or “MFA handled” in that log is a leak before anyone pages.
 
 ## Use it somewhere new
 

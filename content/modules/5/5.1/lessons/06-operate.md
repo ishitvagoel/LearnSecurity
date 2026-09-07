@@ -37,9 +37,9 @@ A log product does not walk the deletion graph.
 log_denied reason=deleted_user_body_hits store=analytics user_id=alice request_id=req_51lc
 ```
 
-Not: a note body, a personal email, or “privacy law handled it.”
+Keep leftover chart text, a personal email, and “privacy law handled it” off that sample.
 
-Putting a note body in the alert leaves a leftover copy in the pager.
+Paste a note body into the deletion alert and the pager now stores leftover analytics text.
 
 A dashboard tile that says “privacy mode” does not wipe leftover notes. If a replica warehouse still has `alice`, treat it as the same leftover body, not a separate “eventual consistency” pass. Search, analytics, and the appointment-card analogue still hold the body; do not send “account deleted” until those copies are gone. That mail is not recovery.
 
@@ -53,7 +53,7 @@ If a human sees “account deleted,” announce it in text a screen reader can s
 
 ## Practice
 
-Draft a deny line with ids, a reason, and the store name — never the body. Throw out a line that includes a note body, a personal email, or a “privacy law handled” slogan.
+Draft a deny line with ids, a reason, and the store name — never the body. A note body, a personal email, or a “privacy law handled” slogan would reprint the leftover body.
 
 ## Use it somewhere new
 

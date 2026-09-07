@@ -56,7 +56,7 @@ The coverage lesson already said status is not coverage. This check is **unowned
 | How you stop it later | Block unmapped HIGH; a mapped HIGH you accept still needs an exception with an expiry |
 | How you notice later | `unmapped_high_blocks`; never the payload |
 | How you recover later | Map it or fix it; do not hide it quietly |
-| Out of scope | A product name, live GitHub, or claiming this page as a finished check-in |
+| Out of scope | A product name, live GitHub, or treating this SCA lesson as a check-in |
 
 A web framework will still ship if CI’s `ship_ok` is always true. Empty map plus HIGH is deny.
 

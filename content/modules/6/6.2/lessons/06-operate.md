@@ -42,7 +42,7 @@ A stored-field review fires without the title body, and a content-security repor
 log_denied reason=stored_field_review field=title request_id=req_62h
 ```
 
-A line that holds the title text, a note body, or an attack cookbook is already a leak.
+The title text, a note body, or an attack cookbook would turn the log into a cookbook.
 
 ## Use it somewhere new
 

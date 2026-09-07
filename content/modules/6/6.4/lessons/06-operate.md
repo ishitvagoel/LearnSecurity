@@ -17,7 +17,7 @@ flowchart TD
   Alert --> Audit[Audit store; restore]
 ```
 
-On a broken resolve, a patient filename does not belong in the log.
+On a broken resolve, skip the patient filename on the log line.
 
 | Outcome | This topic |
 |---|---|
@@ -40,7 +40,7 @@ A WAF will page on `../` in the URL and stay silent when `UploadFile.filename` s
 log_denied reason=path_escape_denied request_id=req_64p
 ```
 
-Don't keep a line with a patient filename, a note body, or a host path cookbook.
+A patient filename, a note body, or a host path cookbook would reprint the escape in the log.
 
 ## Use it somewhere new
 

@@ -41,7 +41,7 @@ Leftover-cache signals fire without the body.
 log_denied reason=plaintext_cache_forbidden store=offline_notes request_id=req_82e
 ```
 
-A line that holds note bodies or a live `adb backup` of a personal phone should never be written.
+Note bodies or a live `adb backup` of a personal phone have no place in this write-up.
 
 ## Use it somewhere new
 

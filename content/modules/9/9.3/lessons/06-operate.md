@@ -38,7 +38,7 @@ A coverage dashboard will show line coverage and stay silent when the isolation 
 log_denied reason=security_suite_missing_isolation req=isolation suite=api
 ```
 
-Not: a note body, a patient name, a live fuzz payload, or “later gate complete.”
+That sample overfills the fuzz log if it still has a note body, a patient name, a live fuzz payload, or “later gate complete.”
 
 Putting the matching note body in the alert puts the patient text in the pager too.
 
@@ -56,7 +56,7 @@ A failing security test must say what must not happen in the assertion message, 
 log_denied reason=security_suite_missing_isolation req=isolation suite=api
 ```
 
-A line that holds a note body, a live fuzz payload, or “later gate complete” is too much for the log.
+A note body, a live fuzz payload, or “later gate complete” already overfills this fuzz log.
 
 ## Use it somewhere new
 

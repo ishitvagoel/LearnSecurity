@@ -51,11 +51,11 @@ What the tool cannot do: purge without a prefix that includes company can widen 
 cache_denied reason=tenant_mismatch path=/notes/n1 bound=tB logged=tA request_id=req_9f2e
 ```
 
-Not: `tenant-A-note`, or a raw body.
+The sample still leaks if it carries `tenant-A-note` or a raw body.
 
 ## Practice
 
-Draft a deny line with ids and a reason — never the body. Drop any line that includes `tenant-A-note` or a raw body.
+Draft a deny line with ids and a reason — never the body. Leave `tenant-A-note` and a raw body off that sketch.
 
 ## Use it somewhere new
 

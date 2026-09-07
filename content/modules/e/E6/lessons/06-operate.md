@@ -38,7 +38,7 @@ A governance dashboard will show exception counts and stay silent when CI’s `a
 log_denied reason=exception_incomplete_denied missing=owner,review_by
 ```
 
-Not: a secret, a “check-in complete,” or a pledge screenshot.
+That sample is a trophy wall if it still has a secret, a “check-in complete,” or a pledge screenshot.
 
 Putting the matching writeup in the alert copies the leak into the ticket.
 
@@ -58,7 +58,7 @@ The exception must record whether people can complete recovery. The deny message
 log_denied reason=exception_incomplete_denied missing=owner,review_by
 ```
 
-Don't keep a line with a secret, a “check-in complete,” or a pledge screenshot.
+A secret, a “check-in complete,” or a pledge screenshot would turn the log into a trophy wall.
 
 ## Use it somewhere new
 

@@ -38,7 +38,7 @@ A vendor agent dashboard will show token counts and stay silent when CI's `run_t
 log_denied reason=tool_denied agent=sum-1 tool=exec_sql
 ```
 
-Not: a note body, a transcript, or "check-in complete."
+That sample is the model output twice if it still has a note body, a transcript, or "check-in complete."
 
 Putting the matching transcript in the alert puts the model output in the pager too.
 
@@ -58,7 +58,7 @@ A denied tool must say *exec_sql not allow-listed*, not only "assert False." Do 
 log_denied reason=tool_denied agent=sum-1 tool=exec_sql
 ```
 
-The log is a leak if it has a note body, a transcript, or "check-in complete."
+A note body, a transcript, or "check-in complete" in the log is the model output twice.
 
 ## Use it somewhere new
 

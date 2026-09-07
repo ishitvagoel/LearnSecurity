@@ -32,7 +32,7 @@ Webhook races are leftover. New keys per click are leftover. This page does not 
 - Webhook vs capture race ignored
 - Card-network scope claimed from this practice
 
-Also reject: live processors; shipping without re-running `test_duplicate_capture_does_not_double_charge`; keys in lessons; claiming this page as a check-in or as card-network proof.
+Also reject: live processors; shipping without re-running `test_duplicate_capture_does_not_double_charge`; keys in lessons; treating this capture lesson as card-network proof.
 
 ## Common mix-ups
 

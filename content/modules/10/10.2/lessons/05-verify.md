@@ -45,7 +45,7 @@ A CycloneDX filename in CI is not `install_ok("aaa", "bbb")`. This practice neve
 - That provenance is authentic
 - Cache isolation
 - Index policy against lookalike packages
-- This page as a finished ship check-in
+- Opening this install lesson as the ship check
 
 ## Practice
 

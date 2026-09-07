@@ -34,7 +34,7 @@ Checking every path here means every copy site, including ones that look “safe
 - Unsafe call into C treated as bounded because the app is Kotlin
 - “Python so we are memory safe” with a C wheel
 
-Also reject: native exploit walkthroughs; shipping without re-running `test_copy_does_not_exceed_buffer`; keys in lessons; claiming this page as a check-in; treating an awareness list as the syllabus.
+Also reject: native exploit walkthroughs; shipping without re-running `test_copy_does_not_exceed_buffer`; keys in lessons; treating this buffer lesson as a check-in; treating an awareness list as the syllabus.
 
 ## Common mix-ups
 

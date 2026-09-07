@@ -56,7 +56,7 @@ The isolation lessons (1.2 / 4.4) already refused company B reading company A. T
 | How you stop it later | Coverage requires the isolation assert |
 | How you notice later | `unmapped_req_blocks_release`; never note bodies |
 | How you recover later | Add the test; do not backfill “done” |
-| Out of scope | A checklist PDF page, a live portal, or claiming this page as a check-in |
+| Out of scope | A checklist PDF page, a live portal, or treating this checklist lesson as coverage |
 
 A green CI job is not AUTHZ-1. Copied-wholesale checklists are inventory, not a tailored matrix. A FastAPI TestClient 200 is a product test (9.3). Status-only is not covered.
 

@@ -38,7 +38,7 @@ A CIS dashboard will show benchmark scores and stay silent when CI's `pod_ok` is
 log_denied reason=cluster_admin_denied sa=app ns=sc-prod requested=cluster-admin
 ```
 
-Not: a kubeconfig, a cloud token, or "check-in complete."
+That sample is cluster credentials twice if it still has a kubeconfig, a cloud token, or "check-in complete."
 
 Putting the matching kubeconfig in the alert puts cluster credentials in the pager too.
 
@@ -58,7 +58,7 @@ A denied admission must say *cluster-admin refused*, not only "assert False." Do
 log_denied reason=cluster_admin_denied sa=app ns=sc-prod requested=cluster-admin
 ```
 
-The log is a leak if it has a kubeconfig, a cloud token, or "check-in complete."
+A kubeconfig, a cloud token, or "check-in complete" in the log is cluster credentials twice.
 
 ## Use it somewhere new
 

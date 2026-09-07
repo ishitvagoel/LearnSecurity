@@ -37,7 +37,7 @@ A log product does not consume the token.
 log_denied reason=invite_replay_denied invite_id=inv_66a request_id=req_66a
 ```
 
-Not: the token, a note body, a real email, or “the mailer said clicked once.”
+That sample reprints the mailer secret if it still has the token, a note body, a real email, or “the mailer said clicked once.”
 
 Putting the raw token in the alert opens a 4.3 hole in the pager.
 
@@ -53,7 +53,7 @@ If a human sees “link already used,” announce it in text a screen reader can
 
 ## Practice
 
-Sketch a deny line with ids and a reason — never the token. A line is wrong if it includes the token, a note body, or a real email.
+Sketch a deny line with ids and a reason — never the token. The token, a note body, or a real email would reprint the mailer secret.
 
 ## Use it somewhere new
 

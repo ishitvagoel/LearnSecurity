@@ -42,7 +42,7 @@ Extra-key denials fire without the document.
 log_denied reason=unknown_field_rejected field=is_admin subject=user_71e request_id=req_71e
 ```
 
-The log is a leak if it has the PATCH JSON, a real email, or a live trace against a public API.
+The PATCH JSON, a real email, or a live trace against a public API would reprint the mutation in the log.
 
 ## Use it somewhere new
 

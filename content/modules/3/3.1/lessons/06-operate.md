@@ -37,7 +37,7 @@ Shipping a log pipeline does not redact the body.
 log_denied reason=confidential_field event=note_read request_id=req_81aa
 ```
 
-Not: `tenant-A-secret-body`, a note body, a patient chart, or a card number.
+The sample is already wrong if it still has `tenant-A-secret-body`, a note body, a patient chart, or a card number.
 
 Putting the matching line in the alert puts the secret in the pager too.
 
@@ -51,7 +51,7 @@ If operators see a redaction-miss badge, do not encode it as color only. Give it
 
 ## Practice
 
-A usable deny line has ids and a reason, not the blob. A line is wrong if it includes `tenant-A-secret-body`, a note body, a patient chart, or a card number.
+A usable deny line has ids and a reason, not the blob. `tenant-A-secret-body`, a note body, a patient chart, or a card number would reprint the secret.
 
 ## Use it somewhere new
 

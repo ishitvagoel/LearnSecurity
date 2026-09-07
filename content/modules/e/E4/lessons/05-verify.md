@@ -21,7 +21,7 @@ flowchart LR
 |---|---|
 | Wrong input / abuse | `copy_into(4, b"abcdefgh", 4)` length <= 4; broken files must fail |
 | Normal | Short declared length may copy (may pass on both) |
-| Not claimed | A C walkthrough; an awareness-list dashboard; this page as a check-in; integer wrap |
+| Not claimed | A C walkthrough; an awareness-list dashboard; this memory lesson as a check-in; integer wrap |
 
 The checks are in `labs/E4/e4-lab/tests/test_property.py`. `test_copy_does_not_exceed_buffer` is there so `declared_len` plus 8 still fails.
 
@@ -38,7 +38,7 @@ A short copy that fits the buffer may stay allowed. Deny a copy that overruns it
 - Integer wrap of `n` is impossible
 - Time bugs (use-after-free)
 - A company language roadmap is complete
-- This page as a finished check-in
+- This memory lesson as a finished check-in
 
 ## Practice
 

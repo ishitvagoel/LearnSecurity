@@ -38,7 +38,7 @@ A SIEM dashboard will show time-to-detect and stay silent when CI’s `close_inc
 log_denied reason=incident_closed_without_recovery id=INC-12 recovery=todo
 ```
 
-Not: a note body, a session token, or “check-in complete.”
+Leave the note body, the session token, and “check-in complete” off that incident sample.
 
 Putting the matching note in the alert puts the incident text in the pager too.
 
@@ -58,7 +58,7 @@ A reopen notice must say *recovery still todo*, not only “assert False.” Und
 log_denied reason=incident_closed_without_recovery id=INC-12 recovery=todo
 ```
 
-Throw out a line that has a note body, a session token, or “check-in complete.”
+A note body, a session token, or “check-in complete” has no place on this incident line.
 
 ## Use it somewhere new
 

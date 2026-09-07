@@ -33,11 +33,11 @@ A log product and a checklist name do not restore this rule. Report-Only CSP is 
 cookie_denied reason=missing_httponly name=sc_session env=staging request_id=req_4b11
 ```
 
-Not: `synthetic-session`, a note body, or a personal mailbox.
+That sample still leaks if it carries `synthetic-session`, a note body, or a personal mailbox.
 
 ## Practice
 
-Don't keep a line with the dummy session value. Page who owns the WebView leftover and what would reopen it — not the session value.
+The dummy session value has no place on the deny line. Page who owns the WebView leftover and what would reopen it — not the session value.
 
 ## Use it somewhere new
 

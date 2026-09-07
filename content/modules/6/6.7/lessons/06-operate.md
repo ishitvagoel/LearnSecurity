@@ -37,7 +37,7 @@ A rate-limit dashboard tile does not increment `quota_denied` on the fourth CSV.
 log_denied reason=quota_denied n=4 subject=user_67e request_id=req_67e
 ```
 
-Not: a note body, a CSV attachment, a real email, or a live load trace against a public host.
+That sample is a live-target record if it still has a note body, a CSV attachment, a real email, or a live load trace against a public host.
 
 Putting note bodies from the CSV in the alert leaves extra copies in the pager.
 
@@ -49,7 +49,7 @@ An edge dashboard will show 429s on an IP and stay silent when `/export.csv` sti
 
 ## Practice
 
-A deny line needs ids, a reason, and n — not the CSV body. A line with note bodies, a real email, or a live load trace against a public host is already a leak.
+A deny line needs ids, a reason, and n — not the CSV body. Note bodies, a real email, or a live load trace against a public host would make the deny line a live-target record.
 
 ## Use it somewhere new
 

@@ -38,7 +38,7 @@ An npm audit dashboard will show advisory counts and stay silent when CI’s `in
 log_denied reason=hash_mismatch_denied pkg=demo expected=aaa got=bbb
 ```
 
-Not: a token, a private key, or “ship gate complete.”
+That sample is a keyring if it still has a token, a private key, or “ship gate complete.”
 
 Putting the registry token in the alert puts a secret in the pager too.
 
@@ -58,7 +58,7 @@ A denied install must say *digest mismatch* in words, not only “assert False.�
 log_denied reason=hash_mismatch_denied pkg=demo expected=aaa got=bbb
 ```
 
-Don't keep a line with a token, a private key, or “ship gate complete.”
+A token, a private key, or “ship gate complete” would turn the log into a keyring.
 
 ## Use it somewhere new
 

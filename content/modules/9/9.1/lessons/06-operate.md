@@ -38,7 +38,7 @@ A tracker dashboard will show Done and stay silent when AUTHZ-1 still has `asser
 log_denied reason=unmapped_req_blocks_release req=AUTHZ-1 release=rel_91e
 ```
 
-Not: a note body, a patient name, or a live checklist portal trace.
+That sample reprints the requirement example if it still has a note body, a patient name, or a live checklist portal trace.
 
 Putting the matching note in the alert puts the requirement example in the pager too.
 
@@ -56,7 +56,7 @@ A human exception path must say what is still uncovered and when it expires. An 
 log_denied reason=unmapped_req_blocks_release req=AUTHZ-1 release=rel_91e
 ```
 
-Skip any line with a note body, a live checklist portal trace, or “verification gate complete.”
+A note body, a live checklist portal trace, or “verification gate complete” should stay off this coverage line.
 
 ## Use it somewhere new
 

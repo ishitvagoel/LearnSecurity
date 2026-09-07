@@ -51,7 +51,7 @@ Do not paste the practice files into a public API.
 | How you stop it later | Bind from the session; ignore the body for isolation |
 | How you notice later | `body_tenant_mismatch`; never note bodies |
 | How you recover later | Audit B for A's actions; take back the confused session |
-| Out of scope | A famous-bugs name, a row-level product, a live company, this page as a finished check-in |
+| Out of scope | A famous-bugs name, a row-level product, a live company, this GraphQL lesson as a finished check-in |
 
 FastAPI will bind whatever field you declare. PostgreSQL row-level rules will isolate whatever session variable you `SET`. A subdomain Host header is client-controlled. Session A plus body B is A.
 

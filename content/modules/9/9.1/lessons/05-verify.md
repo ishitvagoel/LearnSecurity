@@ -45,7 +45,7 @@ An `AUTHZ-1` cell is not `covered(..., [{"asserts_isolation": False}])`. This pr
 - That an extra advanced row is covered
 - Mobile storage on a device (8.2)
 - A later draft of a practice guide as a product
-- This page as a finished check-in
+- Opening this lesson as coverage
 
 ## Practice
 

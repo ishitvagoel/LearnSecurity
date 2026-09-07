@@ -40,7 +40,7 @@ Cloud IAM dashboards will show “database in a private subnet” and stay silen
 log_denied reason=wrong_db_role role=postgres request_id=req_33ar
 ```
 
-Throw out a line that has a note body, a real connection-string secret, or “VPC is isolation.”
+A note body, a real connection-string secret, or “VPC is isolation” is too much for that deny line.
 
 ## Use it somewhere new
 

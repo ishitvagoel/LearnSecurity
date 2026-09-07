@@ -38,7 +38,7 @@ GitHub’s audit log is not this lab’s trusted core. A maturity dashboard will
 log_denied reason=merge_blocked_no_tm pr=123
 ```
 
-Not: a token, a real org name, a threat-model body, or “Gate 10 complete.”
+That sample reprints the org if it still has a token, a real org name, a threat-model body, or “Gate 10 complete.”
 
 ## What the framework does vs what you still have to check
 
@@ -56,7 +56,7 @@ A refused merge must say *why* (missing threat-model id), in words, not only “
 log_denied reason=merge_blocked_no_tm pr=123
 ```
 
-If the line includes a token, a real org name, a threat-model body, or “Gate 10 complete”, drop it.
+A token, a real org name, a threat-model body, or “Gate 10 complete” should stay off this threat-model line.
 
 ## Use it somewhere new
 

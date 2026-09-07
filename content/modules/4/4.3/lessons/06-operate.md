@@ -38,7 +38,7 @@ uvicorn will still print query strings unless you change the access-log format. 
 log_denied reason=query_token path=/notes request_id=req_43qs
 ```
 
-Don't keep a line with `secret`, a note body, or a full URL with a query token.
+`secret`, a note body, or a full URL with a query token would make the log a second secret store.
 
 ## Use it somewhere new
 

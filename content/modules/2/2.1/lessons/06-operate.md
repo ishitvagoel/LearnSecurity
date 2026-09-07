@@ -46,7 +46,7 @@ A metric without a quarantine playbook still leaves a disagreeing row if a worke
 ingest_denied reason=duplicate_tenant_key request_id=req_7c3a practice=2.1-parser-boundaries
 ```
 
-If the line includes `body`, note text, or a raw JSON blob, do not write it.
+`body`, note text, or a raw JSON blob would turn this deny line into a second store.
 
 ## Use it somewhere new
 

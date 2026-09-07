@@ -32,7 +32,7 @@ Cache keys without company are leftover. Silent impersonation is a later topic. 
 - Cache key without company
 - Support impersonation silent
 
-Also reject: live product probes; shipping without re-running `test_body_cannot_switch_tenant`; keys in lessons; claiming this page as a check-in; treating a famous-bugs list as the syllabus.
+Also reject: live product probes; shipping without re-running `test_body_cannot_switch_tenant`; keys in lessons; treating this tenant-switch lesson as a check-in; treating a famous-bugs list as the syllabus.
 
 ## Common mix-ups
 
