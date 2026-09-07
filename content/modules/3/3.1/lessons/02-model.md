@@ -72,7 +72,7 @@ A maturity score and a scanner color do not belong in this list.
 
 ## Practice
 
-In `labs/3.1/3.1-lab`, mark `classify.py`. Write down field, level, place, allow or deny, and what would show the deny is false. No real people's data.
+Mark `classify.py` under `labs/3.1/3.1-lab`. Note field, level, place, and the row that would prove the deny false. No real people's data.
 
 ## Use it somewhere new
 

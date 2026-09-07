@@ -57,7 +57,7 @@ A missing “second accept × `t1` × deny” row is how the invite is accepted 
 
 ## Practice
 
-In `labs/6.6/6.6-lab`, mark `invite.py`. Write down state, consume, allow or deny, and what would show the deny is false. Fake tokens only.
+The file to label is `invite.py` under `labs/6.6/6.6-lab`. Name state, consume, and the case that would prove the deny false. Fake tokens only.
 
 ## Use it somewhere new
 

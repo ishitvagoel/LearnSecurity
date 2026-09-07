@@ -67,7 +67,7 @@ A missing “deleted alice × leftover session × deny” row is how the cookie 
 
 ## Practice
 
-In `labs/4.1/4.1-lab`, mark `lifecycle.py`. Write down state, leftover, allow or deny, and what would show the deny is false. Fake data only.
+Start at `lifecycle.py` under `labs/4.1/4.1-lab`. Name the state, the leftover, and the case that would prove the deny false. Fake data only.
 
 ## Use it somewhere new
 
