@@ -5,7 +5,7 @@
 
 ## Could someone else name the install check?
 
-“We generate CycloneDX” is not this lesson. A drawing someone else can test names **the expected digest, the got digest, who can edit the lockfile, and that a fork pull request stays untrusted**.
+Keep **the expected digest, the got digest, who can edit the lockfile, and that a fork pull request stays untrusted**; “We generate CycloneDX” is not that list.
 
 `install_ok(expected, got)` — no live registries.
 
@@ -60,7 +60,7 @@ A missing hash-compare cell is how a package name becomes false assurance. Write
 
 ## Practice
 
-In `labs/10.2/10.2-lab`, mark `lock.py`.
+Look at `lock.py` under `labs/10.2/10.2-lab`.
 
 ## Use it somewhere new
 

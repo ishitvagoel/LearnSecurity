@@ -584,6 +584,8 @@ const PROSE_PHRASES: [RegExp, string][] = [
     "Sketch a deny line you would keep.",
   ],
   [/ Example shape \(fake (?:ids|routes) only\):/g, ""],
+  [/ is not this (?:lesson|page)\. A [^.]+? names /g, " still has to name "],
+  [/In (\u0000C\d+\u0000|`labs\/[^`]+`), mark (\u0000C\d+\u0000|`[^`]+`)\./g, "Start at $2 under $1."],
   [/Point at (`[^`]+`) file (`[^`]+`)\./g, "Start at $2 in $1."],
   [/Look in (`[^`]+`), starting with (`[^`]+`)\./g, "Start at $2 in $1."],
   [/Open (`[^`]+`) in (`labs\/[^`]+`)\./g, "Start at $1 in $2."],

@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks?
 
-“We use an ORM” is not this lesson. A map someone else can test names **what is SQL text**, **what is a bound parameter**, and **which role runs it**.
+“We use an ORM” still leaves out **what is SQL text**, **what is a bound parameter**, and **which role runs it**.
 
 `fetch_sql(tenant, note_id)` and `is_bound` — no live PostgreSQL.
 
@@ -59,7 +59,7 @@ A missing “hostile note id × SQL grammar × deny” row is how concatenated S
 
 ## Practice
 
-In `labs/5.5/5.5-lab`, mark `query.py`. Fake data only.
+Open `query.py` under `labs/5.5/5.5-lab`. Fake data only.
 
 ## Use it somewhere new
 

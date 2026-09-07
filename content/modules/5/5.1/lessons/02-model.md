@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks?
 
-“We delete the user” is not this lesson. A map someone else can test names **every copy of the body** and **who may keep an exception**.
+“We delete the user” does not name **every copy of the body** and **who may keep an exception**.
 
 `NOTES` / `ANALYTICS` / `SEARCH` — user `alice`. No live warehouse.
 

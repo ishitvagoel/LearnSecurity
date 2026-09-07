@@ -5,7 +5,7 @@
 
 ## Could someone else name checks from your model?
 
-A page of STRIDE letters is not this page. A reviewable model names **assets**, **flows**, **trust boundaries**, **threat ids**, **owners**, and **what would prove each row wrong**.
+A page of STRIDE letters still leaves out **assets**, **flows**, **trust boundaries**, **threat ids**, **owners**, and **what would prove each row wrong**.
 
 Note body and id, share grant, session cookie, a local `assemble_threat_model` practice. No real Threat Dragon cloud. No production ticket tracker.
 
@@ -64,7 +64,7 @@ Each always-name id (`cross-tenant-read`, `hostile-browser`, `stolen-worker`) ne
 
 ## Practice
 
-In `labs/3.2/3.2-lab`, mark `model.py`.
+Mark `model.py` under `labs/3.2/3.2-lab`.
 
 ## Use it somewhere new
 

@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks from your channel map?
 
-“We use HttpOnly” is not this page. A reviewable map names **query / cookie / header**, **who sees each**, and **deny on query**.
+Until you have **query / cookie / header**, **who sees each**, and **deny on query**, “We use HttpOnly” is still a slogan.
 
 `session_from_request(query, cookie, header)` — Fake token `secret`. No live CDN.
 
@@ -54,7 +54,7 @@ How you sign the token is a later lesson. Which channel carries it is this page.
 
 ## Practice
 
-In `labs/4.3/4.3-lab`, mark `token.py`.
+Label `token.py` under `labs/4.3/4.3-lab`.
 
 ## Use it somewhere new
 

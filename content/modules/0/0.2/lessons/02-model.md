@@ -6,7 +6,7 @@
 
 ## Can a second person name what a quiz may skip from your path map?
 
-“They’re advanced” is not this lesson. A reviewable picture names **tooling-bridge ids, required 1.2/1.3/1.4, and check-in 1 evidence**.
+The testable picture is **tooling-bridge ids, required 1.2/1.3/1.4, and check-in 1 evidence** — not “They’re advanced”.
 
 `quiz_score_grants_phase1_skip(score)` — no vendor LMS.
 
@@ -53,7 +53,7 @@ flowchart LR
 
 ## Practice
 
-In `labs/0.2/0.2-bridge`, mark `diagnostic.py`.
+Mark `diagnostic.py` under `labs/0.2/0.2-bridge`.
 
 ## Use it somewhere new
 

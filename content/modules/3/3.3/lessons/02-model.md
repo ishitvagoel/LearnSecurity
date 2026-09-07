@@ -5,7 +5,7 @@
 
 ## Could someone else name checks from your decision record?
 
-“We use Postgres row-level security” is not this page. A reviewable architecture names **roles**, **lanes**, **what each may SELECT**, and **the rejected alternative** (one superuser in `DATABASE_URL`).
+The testable picture is **roles**, **lanes**, **what each may SELECT**, and **the rejected alternative** (one superuser in `DATABASE_URL`) — not “We use Postgres row-level security”.
 
 Notes rows keyed by company; a local `can_select` stand-in. No live cluster, no production replica.
 
@@ -62,7 +62,7 @@ Rejected: one `postgres` URL for migrate and serve. Chosen: runtime `app` with a
 
 ## Practice
 
-In `labs/3.3/3.3-lab`, mark `roles.py`.
+The file to label is `roles.py` under `labs/3.3/3.3-lab`.
 
 ## Use it somewhere new
 

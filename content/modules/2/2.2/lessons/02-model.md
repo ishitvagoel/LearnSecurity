@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks from your map?
 
-A boxes-and-arrows “browser → CDN → API” sketch is not this lesson. A request-path map names **where TLS ends**, **what the cache key contains**, and **which bound company** that key is allowed to use.
+Keep **where TLS ends**, **what the cache key contains**, and **which bound company** that key is allowed to use; A boxes-and-arrows “browser → CDN → API” sketch is not that list.
 
 Companies, notes, and a **local cache practice**. No live CDN, no DNSSEC claim, no mTLS mesh, no HTTP/3 product.
 
@@ -62,7 +62,7 @@ A missing anonymous cell is how `Cache-Control: public` on `/notes/{id}` appears
 
 ## Practice
 
-In `labs/2.2/2.2-request-path`, mark `cache.py`. Label path-only versus `(path, bound company)`.
+Look at `cache.py` under `labs/2.2/2.2-request-path`. Label path-only versus `(path, bound company)`.
 
 ## Use it somewhere new
 

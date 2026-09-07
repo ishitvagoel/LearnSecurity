@@ -5,7 +5,7 @@
 
 ## Could someone else name checks from your machine?
 
-A sequence diagram that says “owner clicks Share” is not this page. A state machine names **which events** may fire twice and **what the share table must still contain**.
+Until you have **which events** may fire twice and **what the share table must still contain**, A sequence diagram that says “owner clicks Share” is still a slogan.
 
 `share_note` is a local practice. No payment processor, no live queue, no NTP lab.
 
@@ -54,7 +54,7 @@ Do not use “timestamp rounded to the second” as the key. Skew and two client
 
 ## Practice
 
-In `labs/2.4/2.4-state-time`, mark `share.py`. Label missing-key behavior as leftover (the lab still shares once if the key is omitted).
+Start at `share.py` under `labs/2.4/2.4-state-time`. Label missing-key behavior as leftover (the lab still shares once if the key is omitted).
 
 ## Use it somewhere new
 

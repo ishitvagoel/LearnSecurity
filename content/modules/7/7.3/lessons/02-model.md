@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks?
 
-“TLS terminates at the edge” is not this lesson. A map someone else can test names **raw body**, **MAC**, **secret**, and **what happens on a missing sig**.
+“TLS terminates at the edge” is not enough without **raw body**, **MAC**, **secret**, and **what happens on a missing sig**.
 
 `accept(sig, body, secret)` with disposable `lab-secret` — no live providers.
 
@@ -59,7 +59,7 @@ A missing “unsigned POST × accept × deny” row is how a path-trusted callba
 
 ## Practice
 
-In `labs/7.3/7.3-lab`, mark `hook.py`. Local only. Do not POST a live webhook.
+Start at `hook.py` under `labs/7.3/7.3-lab`. Local only. Do not POST a live webhook.
 
 ## Use it somewhere new
 

@@ -5,7 +5,7 @@
 
 ## Could someone else name the boot check from your compose map?
 
-“We set `NODE_ENV=production`” is not this lesson. A drawing someone else can test names **env, debug, who can edit compose, the admin bind address, whether a migration fails open, and rollback**.
+Until you have **env, debug, who can edit compose, the admin bind address, whether a migration fails open, and rollback**, “We set `NODE_ENV=production`” is still a slogan.
 
 `boot_ok(env, debug)` — no live production hosts.
 
@@ -61,7 +61,7 @@ A missing prod-plus-debug deny is how a compose slogan becomes false assurance. 
 
 ## Practice
 
-In `labs/10.4/10.4-lab`, mark `cfg.py`.
+Start at `cfg.py` under `labs/10.4/10.4-lab`.
 
 ## Use it somewhere new
 

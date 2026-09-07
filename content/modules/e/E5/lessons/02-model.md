@@ -5,7 +5,7 @@
 
 ## Could someone else name the company check from your scale map?
 
-“We have row-level rules” is not this page. A map someone else can test names **session binding, body fields, where the database session variable comes from, cache/search/lake keys, and impersonation**.
+“We have row-level rules” does not name **session binding, body fields, where the database session variable comes from, cache/search/lake keys, and impersonation**.
 
 `tenant_for(session, body)` — no public company. The notes app binds company from the session. The JSON body is not the tenant.
 
@@ -53,7 +53,7 @@ flowchart LR
 
 ## Practice
 
-In `labs/E5/e5-lab`, mark `rls.py`.
+Look at `rls.py` under `labs/E5/e5-lab`.
 
 ## Use it somewhere new
 

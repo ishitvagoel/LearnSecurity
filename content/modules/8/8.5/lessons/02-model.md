@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks?
 
-“We filled in the store’s privacy form” is not this lesson. A drawing someone else can test names **what may leave the device, to whom, and which field is forbidden**.
+“We filled in the store’s privacy form” is not enough without **what may leave the device, to whom, and which field is forbidden**.
 
 `crash_report(note_body)` — no live vendors.
 
@@ -61,7 +61,7 @@ A missing body×crash row is how the body shows up as “debug extras.” Write 
 
 ## Practice
 
-In `labs/8.5/8.5-lab`, mark `crash.py`.
+Start at `crash.py` under `labs/8.5/8.5-lab`.
 
 ## Use it somewhere new
 

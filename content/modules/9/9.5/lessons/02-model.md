@@ -5,7 +5,7 @@
 
 ## Could someone else name the retest from your report?
 
-"We delivered a PDF" is not this lesson. A drawing someone else can test names **the rule, what must not happen, the retest command, and variants**.
+Keep **the rule, what must not happen, the retest command, and variants**; "We delivered a PDF" is not that list.
 
 `close_finding(f)` — no live clinics.
 
@@ -61,7 +61,7 @@ A missing retest field is how a PDF on a shelf becomes "Done." Write the hole.
 
 ## Practice
 
-In `labs/9.5/9.5-lab`, mark `pentest.py`.
+Label `pentest.py` under `labs/9.5/9.5-lab`.
 
 ## Use it somewhere new
 

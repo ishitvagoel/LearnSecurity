@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks?
 
-“We delete the user” is not this lesson. A map someone else can test names **account states**, **leftovers that must die**, and **who may offboard**.
+Keep **account states**, **leftovers that must die**, and **who may offboard**; “We delete the user” is not that list.
 
 `SESSIONS` / `DELETED` maps; user `alice` — no live single sign-on.
 

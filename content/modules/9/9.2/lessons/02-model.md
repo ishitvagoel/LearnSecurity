@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks?
 
-“I approved the screenshot” is not this lesson. A map someone else can test names **data flow**, **who is allowed**, **the interpreter**, **state**, and **configuration**.
+“I approved the screenshot” still leaves out **data flow**, **who is allowed**, **the interpreter**, **state**, and **configuration**.
 
 `review_ok(diff)` — no live GitHub.
 
@@ -59,7 +59,7 @@ A missing “eval(user) × merge × deny” row is how “the screen still looks
 
 ## Practice
 
-In `labs/9.2/9.2-lab`, mark `review.py`. Fake diffs only.
+The file to label is `review.py` under `labs/9.2/9.2-lab`. Fake diffs only.
 
 ## Use it somewhere new
 

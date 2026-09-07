@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks?
 
-“We imported the checklist” is not this lesson. A drawing someone else can test names **the threat, the requirement id, the test id, and the isolation assert**.
+Until you have **the threat, the requirement id, the test id, and the isolation assert**, “We imported the checklist” is still a slogan.
 
 `covered(req_id, tests)` — no live trackers.
 
@@ -61,7 +61,7 @@ A missing isolation-assert cell is how a done checkbox becomes false assurance. 
 
 ## Practice
 
-In `labs/9.1/9.1-lab`, mark `trace.py`.
+Mark `trace.py` under `labs/9.1/9.1-lab`.
 
 ## Use it somewhere new
 

@@ -5,7 +5,7 @@
 
 ## Could someone else name the revoke check from your share map?
 
-“We have a revoke endpoint” is not this lesson. A drawing someone else can test names **owner, grant, every read path (API, worker, cache), and leftover copies**.
+The testable picture is **owner, grant, every read path (API, worker, cache), and leftover copies** — not “We have a revoke endpoint”.
 
 `revoke` / `read` — no live tenants.
 
@@ -62,7 +62,7 @@ A missing “B after revoke × body × deny” row is how a revoke event becomes
 
 ## Practice
 
-In `labs/11/11-lab`, mark `capstone.py`.
+The file to label is `capstone.py` under `labs/11/11-lab`.
 
 ## Use it somewhere new
 

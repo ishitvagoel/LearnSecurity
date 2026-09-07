@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks from your map?
 
-“We published OpenAPI” is not this lesson. A map someone else can test names **the action, the writable keys, and every protocol that binds a document**.
+“We published OpenAPI” does not name **the action, the writable keys, and every protocol that binds a document**.
 
 `apply(user, body)` with `ALLOWED = {display_name}` — no live APIs.
 
@@ -56,7 +56,7 @@ A spec that does not match running code is leftover-endpoint awareness, not the 
 
 ## Practice
 
-In `labs/7.1/7.1-lab`, mark `patch.py`. Label the binder even in the repaired tree — the fix is the writable set, not pretending an OpenAPI file became the drop.
+Look at `patch.py` under `labs/7.1/7.1-lab`. Label the binder even in the repaired tree — the fix is the writable set, not pretending an OpenAPI file became the drop.
 
 ## Use it somewhere new
 

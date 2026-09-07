@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks from your field table?
 
-“Object authz is on” is not this page. A table someone else can test names **role, field, and every serializer**.
+Keep **role, field, and every serializer**; “Object authz is on” is not that list.
 
 `resolve(role, field)` — no live GraphQL.
 
@@ -54,7 +54,7 @@ Identifiers find a row. They do not authorize fields. Obscure identifiers are no
 
 ## Practice
 
-In `labs/7.2/7.2-lab`, mark `field.py`.
+Label `field.py` under `labs/7.2/7.2-lab`.
 
 ## Use it somewhere new
 

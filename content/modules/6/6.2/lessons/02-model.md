@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks from your map?
 
-“We turned on a content-security policy” is not this lesson. A map someone else can test names **the sink, the context, and what encoding applies**.
+“We turned on a content-security policy” does not name **the sink, the context, and what encoding applies**.
 
 `render(body)` wrapping a `<p>` text node — no live page. No real browser.
 
@@ -54,7 +54,7 @@ Framework defaults help only at the constructors you actually use.
 
 ## Practice
 
-Draw text vs attribute vs JavaScript vs URL. In `labs/6.2/6.2-lab`, mark `html.py`. Label the sink as HTML text even in the repaired tree — the fix is encoding at that sink, not pretending a header became encoding.
+Draw text vs attribute vs JavaScript vs URL. Mark `html.py` under `labs/6.2/6.2-lab`. Label the sink as HTML text even in the repaired tree — the fix is encoding at that sink, not pretending a header became encoding.
 
 ## Use it somewhere new
 

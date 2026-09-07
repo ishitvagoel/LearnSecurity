@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks?
 
-“We rate-limit at the edge” is not this lesson. A map someone else can test names **the person**, **the window**, and **the cap**.
+The testable picture is **the person**, **the window**, and **the cap** — not “We rate-limit at the edge”.
 
 `allow(n_calls)` with cap 3 — no live traffic.
 
@@ -57,7 +57,7 @@ A missing “fourth export × deny” row is how an unbounded loop appears. Writ
 
 ## Practice
 
-In `labs/6.7/6.7-lab`, mark `limit.py`. Fake counts only.
+Open `limit.py` under `labs/6.7/6.7-lab`. Fake counts only.
 
 ## Use it somewhere new
 

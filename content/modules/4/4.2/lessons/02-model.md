@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks from your record?
 
-“We use MFA” is not this lesson. A reviewable record names **method**, **origin**, **whether the claim is phishing-resistant**, and **the leftover** if only passwords remain.
+“We use MFA” is not enough without **method**, **origin**, **whether the claim is phishing-resistant**, and **the leftover** if only passwords remain.
 
 `phishing_resistant` is a local helper; origins `https://app.securecollab.test` vs `https://evil.example`. No live authenticators.
 
@@ -62,7 +62,7 @@ A missing step-up cell is how export theater appears. Write the hole even if thi
 
 ## Practice
 
-In `labs/4.2/4.2-lab`, mark `authn.py`. Label password and OTP as phishable even at the real origin — the leftover is honest, not a silent pass.
+Look at `authn.py` under `labs/4.2/4.2-lab`. Label password and OTP as phishable even at the real origin — the leftover is honest, not a silent pass.
 
 ## Use it somewhere new
 

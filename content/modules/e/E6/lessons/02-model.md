@@ -5,7 +5,7 @@
 
 ## Could someone else name the exception check from your roadmap?
 
-“We have a risk meeting” is not this lesson. A drawing someone else can test names **owner, review_by, wcag_checked, expiry, and who may accept**.
+Keep **owner, review_by, wcag_checked, expiry, and who may accept**; “We have a risk meeting” is not that list.
 
 `accept_exception(exc)` — no live disclosure inbox.
 
@@ -63,7 +63,7 @@ A missing owner is how a spoken yes becomes “accepted.” Write the hole.
 
 ## Practice
 
-In `labs/E6/e6-lab`, mark `risk.py`.
+Label `risk.py` under `labs/E6/e6-lab`.
 
 ## Use it somewhere new
 

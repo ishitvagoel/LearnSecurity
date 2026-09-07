@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks?
 
-“We don’t use a shell” is not this lesson. A map someone else can test names **which process is started**, **which argv slots are data**, and **which interpreters are out of this practice**.
+The testable picture is **which process is started**, **which argv slots are data**, and **which interpreters are out of this practice** — not “We don’t use a shell”.
 
 `argv_for_list(name)` and `uses_shell` — no live `ls`.
 
@@ -58,7 +58,7 @@ A missing “hostile name × shell grammar × deny” row is how `sh -c` concate
 
 ## Practice
 
-In `labs/6.1/6.1-lab`, mark `argv.py`. Fake names only.
+Look at `argv.py` under `labs/6.1/6.1-lab`. Fake names only.
 
 ## Use it somewhere new
 

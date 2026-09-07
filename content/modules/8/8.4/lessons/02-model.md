@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks from your map?
 
-“R8 is on” is not this lesson. A map someone else can test names **build type, client id, and which API it may call**.
+Keep **build type, client id, and which API it may call**; “R8 is on” is not that list.
 
 `api_allowed(build_type, attest)` — no live stores.
 
@@ -53,7 +53,7 @@ That leftover is 5.3 — secrets in the artifact. Minify does not solve it.
 
 ## Practice
 
-In `labs/8.4/8.4-lab`, mark `build.py`. Label the always-true helper even in the repaired tree — the fix is release plus attest, not pretending minify became a grant.
+Mark `build.py` under `labs/8.4/8.4-lab`. Label the always-true helper even in the repaired tree — the fix is release plus attest, not pretending minify became a grant.
 
 ## Use it somewhere new
 

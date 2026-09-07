@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks?
 
-“We have a unique index” is not this lesson. A map someone else can test names **states**, **the consume step**, and **fail-closed on store errors**.
+“We have a unique index” still leaves out **states**, **the consume step**, and **fail-closed on store errors**.
 
 `accept(token)` / `reset()` — no live mailer.
 

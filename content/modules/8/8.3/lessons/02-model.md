@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks from your map?
 
-“App Links are verified” is not this lesson. A map someone else can test names **each exported entry and which query keys it may honor**.
+“App Links are verified” does not name **each exported entry and which query keys it may honor**.
 
 `open_link` / `current_user` — no live apps.
 
@@ -52,7 +52,7 @@ If App Links are verified and `open_link` still copies `as`, the map has a hole.
 
 ## Practice
 
-In `labs/8.3/8.3-lab`, mark `link.py`. Label the extras even in the repaired tree — the fix is ignore identity keys, not pretending a verified host became the session.
+Look at `link.py` under `labs/8.3/8.3-lab`. Label the extras even in the repaired tree — the fix is ignore identity keys, not pretending a verified host became the session.
 
 ## Use it somewhere new
 

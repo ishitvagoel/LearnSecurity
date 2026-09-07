@@ -5,7 +5,7 @@
 
 ## Could someone else name the length check from your unpacker map?
 
-“We wrote it in Python” is not this page. A reviewable model names **bufsize, declared_len, len(src), who may set each, and the copy site**.
+The testable picture is **bufsize, declared_len, len(src), who may set each, and the copy site** — not “We wrote it in Python”.
 
 `copy_into(bufsize, src, declared_len)` — no native overflow walkthrough.
 
@@ -64,7 +64,7 @@ A header length is data. Treat it like any other field the requester sent.
 
 ## Practice
 
-In `labs/E4/e4-lab`, mark `copy.py`.
+Open `copy.py` under `labs/E4/e4-lab`.
 
 ## Use it somewhere new
 

@@ -5,7 +5,7 @@
 
 ## Could someone else name checks from your map?
 
-“We store UUID names” is not this page. A reviewable model names **the folder, the canonicalize step, and which parsers are out of this practice**.
+“We store UUID names” is not enough without **the folder, the canonicalize step, and which parsers are out of this practice**.
 
 `resolve(name)` is a local practice under `/tmp/sc-lab`. No live host reads.
 
@@ -54,7 +54,7 @@ A random stored name is extra. It is not a substitute for the prefix check on an
 
 ## Practice
 
-In `labs/6.4/6.4-lab`, mark `path.py`.
+Mark `path.py` under `labs/6.4/6.4-lab`.
 
 ## Use it somewhere new
 

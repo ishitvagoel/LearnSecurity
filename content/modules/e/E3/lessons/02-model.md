@@ -5,7 +5,7 @@
 
 ## Could someone else name the capture check from your ledger map?
 
-A slide that says “we use Stripe idempotency” is not this page. A map someone else can test names **the key, the SEEN set, the webhook path, and that no card number is present**.
+A slide that says “we use Stripe idempotency” still leaves out **the key, the SEEN set, the webhook path, and that no card number is present**.
 
 `capture(key)` is a local practice. Fake amounts only. No live processor.
 
@@ -52,7 +52,7 @@ If both arrows append, the map already predicts `test_duplicate_capture_does_not
 
 ## Practice
 
-In `labs/E3/e3-lab`, mark `pay.py`.
+The file to label is `pay.py` under `labs/E3/e3-lab`.
 
 ## Use it somewhere new
 

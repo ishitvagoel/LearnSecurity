@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks?
 
-“We turned on code scanning” is not this lesson. A drawing someone else can test names **finding id, severity, mapped requirement, and owner**.
+“We turned on code scanning” does not name **finding id, severity, mapped requirement, and owner**.
 
 `ship_ok(findings, mappings)` — no live tenants.
 
@@ -60,7 +60,7 @@ A missing HIGH×map row is how an unowned finding ships on Friday. Write the hol
 
 ## Practice
 
-In `labs/9.4/9.4-lab`, mark `sast.py`.
+Look at `sast.py` under `labs/9.4/9.4-lab`.
 
 ## Use it somewhere new
 

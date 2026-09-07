@@ -5,7 +5,7 @@
 
 ## Could someone else name the tool check from your agent map?
 
-"The prompt says not to" is not this lesson. A drawing someone else can test names **ALLOWED tools, who may invoke them, whether a retrieved document is trusted, and whether a human must approve**.
+"The prompt says not to" is not enough without **ALLOWED tools, who may invoke them, whether a retrieved document is trusted, and whether a human must approve**.
 
 `run_tool(name, args)` — no live model APIs.
 
@@ -63,7 +63,7 @@ A helpful prompt with `run_tool` always running is how "the model only summarize
 
 ## Practice
 
-In `labs/E1/e1-lab`, mark `tools.py`.
+Start at `tools.py` under `labs/E1/e1-lab`.
 
 ## Use it somewhere new
 

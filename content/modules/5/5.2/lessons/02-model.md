@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks from your table?
 
-“We use AES” is not this lesson. A map someone else can test names **the rule**, **the field**, **the algorithm family**, and **what it is not for**.
+Keep **the rule**, **the field**, **the algorithm family**, and **what it is not for**; “We use AES” is not that list.
 
 `protect` / `looks_encrypted` — Plaintext stand-in `secret`. No live key service.
 

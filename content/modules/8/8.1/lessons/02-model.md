@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks from your map?
 
-“The phone is sandboxed” is not this lesson. A map someone else can test names **which cell the server still owns**.
+“The phone is sandboxed” still leaves out **which cell the server still owns**.
 
 `allow_export(client_claims, server_attest)` — Android and Kotlin first. No live phones.
 
@@ -55,7 +55,7 @@ A missing or failed attest **denies**. A passed attest still needs the 1.2 grant
 
 ## Practice
 
-In `labs/8.1/8.1-lab`, mark `client.py`. Label even in the repaired tree: the server attest decides; the client boolean is not what you trust.
+The file to label is `client.py` under `labs/8.1/8.1-lab`. Label even in the repaired tree: the server attest decides; the client boolean is not what you trust.
 
 ## Use it somewhere new
 

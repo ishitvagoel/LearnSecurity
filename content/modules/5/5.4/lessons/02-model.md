@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks?
 
-“We enabled HTTPS” is not this lesson. A map someone else can test names **each hop and who is allowed to assert the scheme**.
+Until you have **each hop and who is allowed to assert the scheme**, “We enabled HTTPS” is still a slogan.
 
 `channel_is_https(headers, server_scheme)` — no live load balancer.
 

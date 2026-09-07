@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks from your sequence?
 
-“We use OAuth” is not this page. A reviewable model names **authorization server, client, resource server, audience, and which secrets bind the transaction**.
+The testable picture is **authorization server, client, resource server, audience, and which secrets bind the transaction** — not “We use OAuth”.
 
 `accept_token` — Expected audience `securecollab-api` (the notes app’s API name in this practice). No live authorization server.
 
@@ -66,7 +66,7 @@ An earlier topic already refused “JWT means secure.” Here the same format ca
 
 ## Practice
 
-In `labs/4.5/4.5-lab`, mark `jwt_aud.py`.
+Mark `jwt_aud.py` under `labs/4.5/4.5-lab`.
 
 ## Use it somewhere new
 

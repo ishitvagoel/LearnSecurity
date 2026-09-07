@@ -5,7 +5,7 @@
 
 ## Could someone else name the admission check from your cluster map?
 
-"We put it in its own namespace" is not this lesson. A drawing someone else can test names **ServiceAccount, Role vs ClusterRole, pod-profile level, whether the pod can reach instance metadata, and who can apply Helm**.
+"We put it in its own namespace" is not enough without **ServiceAccount, Role vs ClusterRole, pod-profile level, whether the pod can reach instance metadata, and who can apply Helm**.
 
 `pod_ok(role)` — no live kube-apiserver.
 
@@ -62,7 +62,7 @@ A private namespace with `pod_ok` always true is how "we isolated it" becomes cl
 
 ## Practice
 
-In `labs/10.3/10.3-lab`, mark `iam.py`.
+Label `iam.py` under `labs/10.3/10.3-lab`.
 
 ## Use it somewhere new
 

@@ -5,7 +5,7 @@
 
 ## Could someone else name which changes need a threat model?
 
-“We have CODEOWNERS” is not this lesson. A drawing someone else can test names **the surfaces that trigger a threat model: identity, stored data, mobile, queues, and authorization**.
+“We have CODEOWNERS” does not name **the surfaces that trigger a threat model: identity, stored data, mobile, queues, and authorization**.
 
 `merge_ok(pr)` — no live orgs.
 
@@ -60,7 +60,7 @@ A missing threat-model cell is how a required-reviewer list becomes false assura
 
 ## Practice
 
-In `labs/10.1/10.1-lab`, mark `sdl.py`.
+Open `sdl.py` under `labs/10.1/10.1-lab`.
 
 ## Use it somewhere new
 

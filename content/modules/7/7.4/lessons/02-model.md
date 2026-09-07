@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks?
 
-“Jobs run internally” is not this lesson. A map someone else can test names **who authenticates the worker** and **what the job is allowed to carry**.
+Until you have **who authenticates the worker** and **what the job is allowed to carry**, “Jobs run internally” is still a slogan.
 
 `exporter(job)` with principal `worker-sc` — no live brokers.
 
@@ -59,7 +59,7 @@ A missing “Alice session × deny” row is how a leftover login becomes the wo
 
 ## Practice
 
-In `labs/7.4/7.4-lab`, mark `worker.py`. Fake job dicts only.
+Mark `worker.py` under `labs/7.4/7.4-lab`. Fake job dicts only.
 
 ## Use it somewhere new
 

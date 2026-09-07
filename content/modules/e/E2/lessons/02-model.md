@@ -5,7 +5,7 @@
 
 ## Could someone else name the enforcement check from your header map?
 
-“We set a content-security policy” is not this lesson. A map someone else can test names **the enforcing header vs Report-Only, encoding (6.2), and whether the edge can strip it**.
+Until you have **the enforcing header vs Report-Only, encoding (6.2), and whether the edge can strip it**, “We set a content-security policy” is still a slogan.
 
 `isolation_enforced(headers)` — no live pages.
 
@@ -51,7 +51,7 @@ flowchart LR
 
 ## Practice
 
-In `labs/E2/e2-lab`, mark `csp.py`. Report-Only as a signal even in the repaired files — the fix is the enforcing header name, not pretending a report became a block.
+Mark `csp.py` under `labs/E2/e2-lab`. Report-Only as a signal even in the repaired files — the fix is the enforcing header name, not pretending a report became a block.
 
 ## Use it somewhere new
 

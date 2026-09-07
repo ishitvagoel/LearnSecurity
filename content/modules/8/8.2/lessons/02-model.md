@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks from your map?
 
-“We use EncryptedSharedPreferences” is not this lesson. A map someone else can test names **each store and whether it can hold a body**.
+The testable picture is **each store and whether it can hold a body** — not “We use EncryptedSharedPreferences”.
 
 `save_note` / `plaintext_on_disk` — no live phones.
 
@@ -55,7 +55,7 @@ flowchart LR
 
 ## Practice
 
-In `labs/8.2/8.2-lab`, mark `disk.py`. Label the store even in the repaired tree — the fix is the ciphertext stand-in, not pretending a private folder became encryption.
+Open `disk.py` under `labs/8.2/8.2-lab`. Label the store even in the repaired tree — the fix is the ciphertext stand-in, not pretending a private folder became encryption.
 
 ## Use it somewhere new
 

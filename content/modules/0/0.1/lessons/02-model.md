@@ -6,7 +6,7 @@
 
 ## Can a second person name the host check from your scope sheet?
 
-“I’ll be careful” is not this lesson. A reviewable picture names **allowed hosts, when you stop, and what you do not fetch**.
+“I’ll be careful” still leaves out **allowed hosts, when you stop, and what you do not fetch**.
 
 For the notes app: a local `target_is_authorized(url)` helper. Do not open example.com.
 
@@ -55,7 +55,7 @@ flowchart LR
 
 ## Practice
 
-In `labs/0.1/0.1-orientation`, mark `scope.py`.
+Start at `scope.py` under `labs/0.1/0.1-orientation`.
 
 ## Use it somewhere new
 

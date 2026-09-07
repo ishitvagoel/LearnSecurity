@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks from your table?
 
-“We check authorization” is not this page. A table someone else can test names **people, companies, notes, actions, and every path** that can release a body.
+“We check authorization” still leaves out **people, companies, notes, actions, and every path** that can release a body.
 
 `GRANTS` / `NOTES` / `USERS` — People `alice`, `bob`, `carol`, `eve`. No live identity product.
 
@@ -61,7 +61,7 @@ If a path is missing from the table, leftover permission appears there even if G
 
 ## Practice
 
-In `labs/4.4/4.4-lab`, mark `grant.py`.
+Start at `grant.py` under `labs/4.4/4.4-lab`.
 
 ## Use it somewhere new
 

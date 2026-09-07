@@ -5,7 +5,7 @@
 
 ## Could someone else name the close check from your playbook?
 
-“Paging acked” is not this lesson. A drawing someone else can test names **recovery evidence, the log inventory, who can close, and whether note bodies can reach the SIEM**.
+“Paging acked” still leaves out **recovery evidence, the log inventory, who can close, and whether note bodies can reach the SIEM**.
 
 `close_incident({recovery, logs})` — no live SIEM.
 
@@ -62,7 +62,7 @@ A missing recovery field is how a green tile becomes “Done.” Write the hole.
 
 ## Practice
 
-In `labs/10.5/10.5-lab`, mark `ir.py`.
+Mark `ir.py` under `labs/10.5/10.5-lab`.
 
 ## Use it somewhere new
 

@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks?
 
-“We ticked a testing-guide row” is not this lesson. A drawing someone else can test names **what must not happen, who is acting, and which object**.
+The testable picture is **what must not happen, who is acting, and which object** — not “We ticked a testing-guide row”.
 
 `is_security_test(t)` — no live scanners.
 
@@ -60,7 +60,7 @@ A missing bad-case × isolation row is how 200-only occupies the security slot. 
 
 ## Practice
 
-In `labs/9.3/9.3-lab`, mark `stest.py`.
+Open `stest.py` under `labs/9.3/9.3-lab`.
 
 ## Use it somewhere new
 
