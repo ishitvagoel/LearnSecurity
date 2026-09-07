@@ -9,7 +9,7 @@
 
 ## Picture: a broken boot check must fail prod plus debug
 
-A test that only counts passing tests can pass while production still boots with debug. This check asks whether always-true `boot_ok` still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A test that only counts passing tests can pass while production still boots with debug. Ask whether always-true `boot_ok` still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

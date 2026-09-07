@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `tenant_for(session, body)`. The failure is already in the function: it prefers `body["tenant"]` when that key is present. You are here to see that a body-chosen company is **a failed rule**, not a trophy against a public product.
+The practice is not a website you attack. It is a tiny Python `tenant_for(session, body)`. The failure is already in the function: it prefers `body["tenant"]` when that key is present. The point is to see that a body-chosen company is **a failed rule**, not a trophy against a public product.
 
 The rule under test:
 
@@ -57,7 +57,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 | How you recover later | Audit B for A's actions; take back the confused session |
 | Out of scope | A famous-bugs name, a row-level product, a live company, a course gate |
 
-FastAPI will bind whatever field you declare. PostgreSQL row-level rules will isolate whatever session variable you `SET`. A subdomain Host header is client-controlled. The app’s promise is: **this** practice, session A plus body B is A.
+FastAPI will bind whatever field you declare. PostgreSQL row-level rules will isolate whatever session variable you `SET`. A subdomain Host header is client-controlled. What this practice is supposed to show: session A plus body B is A.
 
 ## Practice
 

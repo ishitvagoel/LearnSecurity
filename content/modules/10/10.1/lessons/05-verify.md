@@ -9,7 +9,7 @@
 
 ## Picture: a broken merge check must fail the empty-change test
 
-A test that only counts passing checks can pass while an empty dict still merges. This check asks whether merge without a threat-model id still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A test that only counts passing checks can pass while an empty dict still merges. Ask whether merge without a threat-model id still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `boot_ok(env, debug)` that returns true for every pair. The failure is already in the function: it never looks at `env` or `debug`. You are here to see that the check treats that always-true boot as a **failed rule**, not as a missing compose comment.
+The practice is not a website you attack. It is a tiny Python `boot_ok(env, debug)` that returns true for every pair. The failure is already in the function: it never looks at `env` or `debug`. The point is to see that the check treats that always-true boot as a **failed rule**, not as a missing compose comment.
 
 The rule under test:
 

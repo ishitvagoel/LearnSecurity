@@ -54,7 +54,7 @@ A regex on the raw string still loses to encodings (2.1), decimal IPs, IPv6, and
 
 `requests.get` is not an allow-list. urllib follows redirects unless you stop it. HTTPS to an IP is still the server’s network. FastAPI will dial whoever you pass.
 
-The app’s promise is: **this** `allowed` check, on **this** practice string, is false for link-local metadata. The folder is `labs/6.5/6.5-lab`. Fake URLs only. No live fetch.
+What this practice is supposed to show: `allowed` check, on **this** practice string, is false for link-local metadata. The folder is `labs/6.5/6.5-lab`. Fake URLs only. No live fetch.
 
 ## What the tool cannot do
 

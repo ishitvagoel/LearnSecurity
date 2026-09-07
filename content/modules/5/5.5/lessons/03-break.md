@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `fetch_sql` and `is_bound`. It does not open PostgreSQL. The failure is already in the function: it glues company and note id into the SQL text. You are here to see that the check treats that as a **failed rule**, not as a trophy dump of another company.
+The practice is not a website you attack. It is a tiny Python `fetch_sql` and `is_bound`. It does not open PostgreSQL. The failure is already in the function: it glues company and note id into the SQL text. The point is to see that the check treats that as a **failed rule**, not as a trophy dump of another company.
 
 The rule under test:
 
@@ -67,7 +67,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-SQLAlchemy `text()` with an f-string is still concatenation. A later row-level rule in Postgres does not parse parameters for you. FastAPI will pass whatever string you interpolate. The app's promise is: **these** local files, `fetch_sql` is not a `str`.
+SQLAlchemy `text()` with an f-string is still concatenation. A later row-level rule in Postgres does not parse parameters for you. FastAPI will pass whatever string you interpolate. What this practice is supposed to show: `fetch_sql` is not a `str`.
 
 ## Practice
 

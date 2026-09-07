@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `accept`. The failure is already in the function: `accept` returns true and never marks the token used. You are here to see that the check treats a second true as a **failed rule**, not as a retry nit.
+The practice is not a website you attack. It is a tiny Python `accept`. The failure is already in the function: `accept` returns true and never marks the token used. The point is to see that the check treats a second true as a **failed rule**, not as a retry nit.
 
 The rule under test:
 

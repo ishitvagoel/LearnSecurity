@@ -9,7 +9,7 @@ HTTP 200 on a single click is not this topic’s evidence. “The button is disa
 
 ## Picture: a retry that appends twice must fail
 
-A test that only asserts HTTP 200 once can pass while a retry still appends a second share. This check asks whether a second grant still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A test that only asserts HTTP 200 once can pass while a retry still appends a second share. Ask whether a second grant still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

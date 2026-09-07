@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: raw <
 
-A check that only counts passing cases can pass while unencoded markup still reaches HTML. This check asks whether unencoded markup still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A check that only counts passing cases can pass while unencoded markup still reaches HTML. Ask whether unencoded markup still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

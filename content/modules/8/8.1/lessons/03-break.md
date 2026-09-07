@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a phone you attack. It is a tiny Python `allow_export(client_claims, server_attest)`. The failure is already in the function: it returns true when the client says `integrity=ok`, so a failing server attest still exports. You are here to see that **client `integrity=ok` authorizes export** is a failed rule, not a trophy against a device farm.
+The practice is not a phone you attack. It is a tiny Python `allow_export(client_claims, server_attest)`. The failure is already in the function: it returns true when the client says `integrity=ok`, so a failing server attest still exports. The point is to see that **client `integrity=ok` authorizes export** is a failed rule, not a trophy against a device farm.
 
 The rule under test:
 
@@ -60,7 +60,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-Android sandbox defaults are not 1.2. Jetpack libraries do not authorize export. FastAPI will accept `integrity=ok` if you bind it. Compose `enabled=false` does not bind `allow_export`. The app’s promise is: **this** helper, client ok plus attest fail is false.
+Android sandbox defaults are not 1.2. Jetpack libraries do not authorize export. FastAPI will accept `integrity=ok` if you bind it. Compose `enabled=false` does not bind `allow_export`. What this practice is supposed to show: client ok plus attest fail is false.
 
 ## Practice
 

@@ -52,7 +52,7 @@ This practice runs the resource-server `aud` check. Where the browser stores tok
 
 ## What the framework does vs what you still have to check
 
-Authlib and many JWT libraries will check a signature if you give them a key and skip `aud`. Next.js middleware that “has a Bearer” is not an audience check. The app’s promise is: `labs/4.5/4.5-lab`. No live identity provider.
+Authlib and many JWT libraries will check a signature if you give them a key and skip `aud`. Next.js middleware that “has a Bearer” is not an audience check. What this practice is supposed to show: `labs/4.5/4.5-lab`. No live identity provider.
 
 ## What the tool cannot do
 

@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: password at lookalike is true
 
-A check that only counts passing cases can pass while a password is still labeled resistant. This check asks whether a password counted as phishing-resistant still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A check that only counts passing cases can pass while a password is still labeled resistant. Ask whether a password counted as phishing-resistant still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

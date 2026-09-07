@@ -9,7 +9,7 @@
 
 ## Picture: header https, socket http must fail
 
-A test that only asserts “HTTPS is on” can pass while a client header still counts as TLS. This check asks whether a client header on an http socket still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A test that only asserts “HTTPS is on” can pass while a client header still counts as TLS. Ask whether a client header on an http socket still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

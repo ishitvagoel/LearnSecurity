@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `revoke` that does nothing and a `read` that always returns the body. The failure is already in the functions: revoke never drops the grant, and read never asks. You are here to see that the check treats that no-op revoke as a **failed rule**, not as a paperwork nit.
+The practice is not a website you attack. It is a tiny Python `revoke` that does nothing and a `read` that always returns the body. The failure is already in the functions: revoke never drops the grant, and read never asks. The point is to see that the check treats that no-op revoke as a **failed rule**, not as a paperwork nit.
 
 The rule under test:
 

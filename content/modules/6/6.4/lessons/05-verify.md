@@ -9,7 +9,7 @@
 
 ## Picture: a path that leaves the folder must fail
 
-A test that only greps `uuid` in a filename helper can pass while `resolve("../outside")` still leaves the folder. This check asks whether an escaped object still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A test that only greps `uuid` in a filename helper can pass while `resolve("../outside")` still leaves the folder. Ask whether an escaped object still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

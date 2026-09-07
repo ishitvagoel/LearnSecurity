@@ -9,7 +9,7 @@
 
 ## Picture: broken must fail: body switch
 
-A test that only counts how many row-level rules exist can pass while a body-chosen company still wins. This check asks whether body-wins `tenant_for` is allowed to count as a passing control. Broken must fail that question. Repaired must pass it.
+A test that only counts how many row-level rules exist can pass while a body-chosen company still wins. Ask whether body-wins `tenant_for` is allowed to count as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

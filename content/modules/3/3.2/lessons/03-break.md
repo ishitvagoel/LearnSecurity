@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `assemble_threat_model` dictionary. It does not open a scanner tenant, a Semgrep cloud org, or a production dashboard. Fake threat ids only. You are here to see that the check treats an empty list as a **failed rule**, not as a clean bill of health.
+The practice is not a website you attack. It is a tiny in-process `assemble_threat_model` dictionary. It does not open a scanner tenant, a Semgrep cloud org, or a production dashboard. Fake threat ids only. The point is to see that the check treats an empty list as a **failed rule**, not as a clean bill of health.
 
 The rule under test:
 
@@ -60,7 +60,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-A “no High findings” ticket is not a threat model. HttpOnly cookies and parameterized queries are real later rows. They do not enumerate cross-tenant read. The app’s promise is: **this** practice still returns `cross-tenant-read` when the scanner is green.
+A “no High findings” ticket is not a threat model. HttpOnly cookies and parameterized queries are real later rows. They do not enumerate cross-tenant read. What this practice is supposed to show: the helper still returns `cross-tenant-read` when the scanner is green.
 
 ## Practice
 

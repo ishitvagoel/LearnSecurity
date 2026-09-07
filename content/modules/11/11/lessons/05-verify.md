@@ -9,7 +9,7 @@
 
 ## Picture: a broken no-op revoke must fail the check
 
-A test that only counts passing tests can pass while B after revoke still reads. This check asks whether a revoked share still reading the note counts as a passing control. Broken must fail that question. Repaired must pass it.
+A test that only counts passing tests can pass while B after revoke still reads. Ask whether a revoked share still reading the note counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

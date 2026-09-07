@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: debug plus ok
 
-A check that only counts passing cases can pass while debug still calls prod. This check asks whether always-true `api_allowed` still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A check that only counts passing cases can pass while debug still calls prod. Ask whether always-true `api_allowed` still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `allowed`. It does not open a network. The failure is already in the function: it treats any `http` or `https` scheme as fine. You are here to see that a link-local metadata URL counting as an allowed peer is a **failed rule**, not a trophy fetch of cloud identity.
+The practice is not a website you attack. It is a tiny Python `allowed`. It does not open a network. The failure is already in the function: it treats any `http` or `https` scheme as fine. The point is to see that a link-local metadata URL counting as an allowed peer is a **failed rule**, not a trophy fetch of cloud identity.
 
 The rule under test:
 
@@ -67,7 +67,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-`requests.get(user_url)` will dial whoever you pass. FastAPI has no outbound allow-list. urllib `urlparse` is not a policy. The app’s promise is: **these** local files, a link-local metadata URL is False. **Do not curl anything.**
+`requests.get(user_url)` will dial whoever you pass. FastAPI has no outbound allow-list. urllib `urlparse` is not a policy. What this practice is supposed to show: a link-local metadata URL is False. **Do not curl anything.**
 
 ## Practice
 

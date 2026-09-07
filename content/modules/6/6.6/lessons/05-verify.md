@@ -9,7 +9,7 @@
 
 ## Picture: second t1 must fail the check
 
-A test that only greps `UNIQUE` in a migration can pass while `accept("t1")` is still true twice. This check asks whether a second true still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A test that only greps `UNIQUE` in a migration can pass while `accept("t1")` is still true twice. Ask whether a second true still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

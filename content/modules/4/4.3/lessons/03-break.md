@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `session_from_request`. Fake token `secret`. It does not open uvicorn, a CDN, or a browser history. You are here to see that the check treats a query-string session as a **failed rule**, not as a trophy dump of a log.
+The practice is not a website you attack. It is a tiny in-process `session_from_request`. Fake token `secret`. It does not open uvicorn, a CDN, or a browser history. The point is to see that the check treats a query-string session as a **failed rule**, not as a trophy dump of a log.
 
 The rule under test:
 
@@ -64,7 +64,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-FastAPI will bind query params. Next.js router will put them in the address bar. TLS encrypts the hop, not the log. The app’s promise is: **this** practice, query-only → `None`.
+FastAPI will bind query params. Next.js router will put them in the address bar. TLS encrypts the hop, not the log. What this practice is supposed to show: query-only → `None`.
 
 ## Practice
 

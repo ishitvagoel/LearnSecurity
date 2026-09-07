@@ -9,7 +9,7 @@
 
 ## Picture: link-local allowed must fail the check
 
-A test that only counts passing cases can pass while link-local is still allowed. This check asks whether a scheme-only allow still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A test that only counts passing cases can pass while link-local is still allowed. Ask whether a scheme-only allow still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

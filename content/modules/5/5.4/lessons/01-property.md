@@ -54,7 +54,7 @@ Pinning on a phone (later) is leftover: operational breakage versus extra bindin
 
 ## What the framework does vs what you still have to check
 
-A server flag that trusts proxy headers, with no trusted-proxy IP, is this bug. A browser `https://` in the page’s API client is not the API socket. The app’s promise is: `labs/5.4/5.4-lab`. No live load balancer.
+A server flag that trusts proxy headers, with no trusted-proxy IP, is this bug. A browser `https://` in the page’s API client is not the API socket. What this practice is supposed to show: `labs/5.4/5.4-lab`. No live load balancer.
 
 ## What the tool cannot do
 

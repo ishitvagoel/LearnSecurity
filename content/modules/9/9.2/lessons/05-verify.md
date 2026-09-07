@@ -9,7 +9,7 @@
 
 ## Picture: broken must fail eval-approve
 
-A test that only counts passing cases can pass while eval on user input is still approved. This check asks whether always-true `review_ok` still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A test that only counts passing cases can pass while eval on user input is still approved. Ask whether always-true `review_ok` still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

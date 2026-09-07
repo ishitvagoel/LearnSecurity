@@ -67,7 +67,7 @@ Someone put the note body into the exception or the report builder. That is the 
 
 A crash SDK will ship whatever you attach. Private storage on the phone (8.2) does not encrypt the HTTPS payload. The same protection-level rule as the log lesson (3.1) now applies at this mobile place.
 
-The app's promise is: **this** `crash_report("secret")` does not contain `secret`. The local check is `labs/8.5/8.5-lab`. Fake data only. No live crash product. No real people's notes.
+What this practice is supposed to show: `crash_report("secret")` does not contain `secret`. The local check is `labs/8.5/8.5-lab`. Fake data only. No live crash product. No real people's notes.
 
 ## What the tool cannot do
 

@@ -9,7 +9,7 @@
 
 ## Picture: empty sig on the broken files must fail the check
 
-A test that only counts passing cases can pass while an unsigned body is still accepted. This check asks whether an always-true `accept` still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A test that only counts passing cases can pass while an unsigned body is still accepted. Ask whether an always-true `accept` still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

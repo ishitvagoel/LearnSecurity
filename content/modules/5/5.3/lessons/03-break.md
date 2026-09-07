@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `auth`. Disposable `sk-lab-hardcoded` and `rotated-now`. It does not open a vault or a cloud identity API. You are here to see that an old hardcoded default still counting as a valid key after rotation is a **failed rule**, not a trophy hunt for a live key.
+The practice is not a website you attack. It is a tiny in-process `auth`. Disposable `sk-lab-hardcoded` and `rotated-now`. It does not open a vault or a cloud identity API. The point is to see that an old hardcoded default still counting as a valid key after rotation is a **failed rule**, not a trophy hunt for a live key.
 
 The rule under test:
 
@@ -61,7 +61,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-A settings library will still load a default if you leave one in code. FastAPI `Depends` does not rotate. A vault dashboard tile does not pop `DEFAULT`. The app’s promise is: **this** practice, `auth("sk-lab-hardcoded", current="rotated-now")` is False.
+A settings library will still load a default if you leave one in code. FastAPI `Depends` does not rotate. A vault dashboard tile does not pop `DEFAULT`. What this practice is supposed to show: `auth("sk-lab-hardcoded", current="rotated-now")` is False.
 
 ## Practice
 

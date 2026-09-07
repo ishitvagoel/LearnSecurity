@@ -53,7 +53,7 @@ OpenAPI can *describe* the contract. It does not *enforce* the drop. A generated
 
 FastAPI will bind extra fields if the model allows it. GraphQL will accept mutation arguments that the schema names — and will still honor extras if you pass a generic `input: JSON`. gRPC unknown fields are a third binder. None of those defaults is 1.2.
 
-The app’s promise is: **this** `apply`, extra keys are not writable fields. The practice folder is `labs/7.1/7.1-lab`. It is local only. It is not a live API.
+What this practice is supposed to show: `apply`, extra keys are not writable fields. The practice folder is `labs/7.1/7.1-lab`. It is local only. It is not a live API.
 
 ## What the tool cannot do
 

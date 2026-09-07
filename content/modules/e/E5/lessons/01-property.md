@@ -51,7 +51,7 @@ flowchart LR
 
 PostgreSQL row-level rules will isolate whatever session variable you set. If you set it from the body, the database enforces the **attacker's** company.
 
-The app’s promise is: **this** `tenant_for`, session A plus body B is A. The practice folder is `labs/E5/e5-lab`. It is local only. It is not a live company.
+What this practice is supposed to show: `tenant_for`, session A plus body B is A. The practice folder is `labs/E5/e5-lab`. It is local only. It is not a live company.
 
 ## What the tool cannot do
 

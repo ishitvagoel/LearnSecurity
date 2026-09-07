@@ -9,7 +9,7 @@
 
 ## Picture: leftover Alice must fail the check
 
-A test that only counts passing cases can pass while leftover Alice still becomes the worker. This check asks whether a leftover cookie that becomes the principal still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A test that only counts passing cases can pass while leftover Alice still becomes the worker. Ask whether a leftover cookie that becomes the principal still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: client ok plus attest fail
 
-A check that only counts passing cases can pass while client `integrity=ok` still authorizes export. This check asks whether that grant still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A check that only counts passing cases can pass while client `integrity=ok` still authorizes export. Ask whether that grant still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a store listing you unpack. It is a tiny Python `api_allowed(build_type, attest)`. The failure is already in the function: it returns true for every pair, so a debug build with `attest=ok` is allowed to call prod export. You are here to see that as **a failed rule**, not a trophy against a public APK.
+The practice is not a store listing you unpack. It is a tiny Python `api_allowed(build_type, attest)`. The failure is already in the function: it returns true for every pair, so a debug build with `attest=ok` is allowed to call prod export. The point is to see that as **a failed rule**, not a trophy against a public APK.
 
 The rule under test:
 
@@ -60,7 +60,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-Gradle `debug` / `release` types are not a server check. R8 does not authorize. Play Console “app signing” is not “secrets stay out of the binary.” FastAPI will accept `attest=ok` from a debug client if you bind it. The app’s promise is: **this** helper, debug plus ok is false.
+Gradle `debug` / `release` types are not a server check. R8 does not authorize. Play Console “app signing” is not “secrets stay out of the binary.” FastAPI will accept `attest=ok` from a debug client if you bind it. What this practice is supposed to show: debug plus ok is false.
 
 ## Practice
 

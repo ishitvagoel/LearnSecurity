@@ -63,7 +63,7 @@ Scanner output was never joined to the coverage map. That is the cause. The pers
 
 A vendor “default setup” inventories *some* findings. Reachability may record a false positive — **with an owner** — it does not silently drop HIGH.
 
-The app’s promise is: **this** `ship_ok` with a HIGH and an empty map is deny. The local check is `labs/9.4/9.4-lab`. Fake finding id `F1` only. No live GitHub. No scanning other people’s repos.
+What this practice is supposed to show: `ship_ok` with a HIGH and an empty map is deny. The local check is `labs/9.4/9.4-lab`. Fake finding id `F1` only. No live GitHub. No scanning other people’s repos.
 
 ## What the tool cannot do
 

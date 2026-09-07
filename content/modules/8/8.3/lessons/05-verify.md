@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: as=admin
 
-A check that only counts passing cases can pass while `as=` still switches the session. This check asks whether a link that switches the principal still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A check that only counts passing cases can pass while `as=` still switches the session. Ask whether a link that switches the principal still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

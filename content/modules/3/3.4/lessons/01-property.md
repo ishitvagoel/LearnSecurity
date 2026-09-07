@@ -56,7 +56,7 @@ A client that adds five grants slowly still must stop at five. A client that ham
 
 ## What the framework does vs what you still have to check
 
-FastAPI does not know “five members.” SQLAlchemy `add()` will insert a sixth row. An accessible “share limit reached” message is something people can hear; that is not the cap. The app’s promise is: after eight `add_share` calls, `last <= 5`, and five honest shares still succeed. The folder is `labs/3.4/3.4-lab`. No live tenants.
+FastAPI does not know “five members.” SQLAlchemy `add()` will insert a sixth row. An accessible “share limit reached” message is something people can hear; that is not the cap. What this practice is supposed to show: after eight `add_share` calls, `last <= 5`, and five honest shares still succeed. The folder is `labs/3.4/3.4-lab`. No live tenants.
 
 ## What the tool cannot do
 

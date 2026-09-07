@@ -9,7 +9,7 @@ A green CSP scanner is not this week’s evidence. “Set-Cookie is present” i
 
 ## Picture: broken must fail the HttpOnly read
 
-A test that only counts collected items can pass while the reader still returns the session. This check asks whether a script-readable session still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A test that only counts collected items can pass while the reader still returns the session. Ask whether a script-readable session still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

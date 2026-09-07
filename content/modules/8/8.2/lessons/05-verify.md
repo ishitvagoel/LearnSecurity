@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: plaintext secret
 
-A check that only counts passing cases can pass while the cache still holds `'secret'`. This check asks whether a text-file cache of `'secret'` still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A check that only counts passing cases can pass while the cache still holds `'secret'`. Ask whether a text-file cache of `'secret'` still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

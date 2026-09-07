@@ -9,7 +9,7 @@
 
 ## Picture: broken must fail foreign origin
 
-A test that only counts passing cases can pass while leftover cookies still authorize a share. This check asks whether a cookie-only share is allowed to count as a passing control. Broken must fail that question. Repaired must pass it — the deny plus the honest allow.
+A test that only counts passing cases can pass while leftover cookies still authorize a share. Ask whether a cookie-only share is allowed to count as a passing control. The broken files must fail that. The repaired files must pass it — the deny plus the honest allow.
 
 ```mermaid
 flowchart LR

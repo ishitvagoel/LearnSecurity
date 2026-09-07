@@ -91,7 +91,7 @@ A demo recovery control that is green and mouse-only fails because **the designe
 
 A React library can ship accessible pieces. FastAPI does not see the button. Next.js defaults do not name this confirm. Accessibility documents list success criteria; they do not walk your practice files.
 
-The app’s promise is: **this** confirm, on **this** recovery, works without a mouse, has a name, and does not use color as the only cue. The practice folder is the local check for that sentence. It is not a live login provider and not a real mailbox.
+What this practice is supposed to show: the confirm control works without a mouse, has a name, and does not use color as the only cue. The practice folder is the local check for that sentence. It is not a live login provider and not a real mailbox.
 
 ## What the tool cannot do
 

@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a warehouse you attack. It is a tiny Python `delete_account` plus `body_retained` / `search_retained`. The failure is already in the functions: delete pops the notes map and leaves analytics. You are here to see that the check treats that leftover as a **failed rule**, not as a cleanup nit.
+The practice is not a warehouse you attack. It is a tiny Python `delete_account` plus `body_retained` / `search_retained`. The failure is already in the functions: delete pops the notes map and leaves analytics. The point is to see that the check treats that leftover as a **failed rule**, not as a cleanup nit.
 
 The rule under test:
 

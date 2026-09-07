@@ -9,7 +9,7 @@
 
 ## Picture: broken must fail the oversize copy
 
-A test that only greps `Kotlin` in a README can pass while `copy_into(4, b"abcdefgh", 4)` still returns 8 bytes. This check asks whether an oversize copy still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A test that only greps `Kotlin` in a README can pass while `copy_into(4, b"abcdefgh", 4)` still returns 8 bytes. Ask whether an oversize copy still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

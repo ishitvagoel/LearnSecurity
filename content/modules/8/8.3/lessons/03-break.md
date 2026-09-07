@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a phone you attack. It is a tiny Python `open_link(query)` / `current_user()`. The failure is already in the function: extras become the user, so `as=admin` switches the session. You are here to see that a deep link `as=` switching the signed-in user is **a failed rule**, not a trophy against a public app.
+The practice is not a phone you attack. It is a tiny Python `open_link(query)` / `current_user()`. The failure is already in the function: extras become the user, so `as=admin` switches the session. The point is to see that a deep link `as=` switching the signed-in user is **a failed rule**, not a trophy against a public app.
 
 The rule under test:
 
@@ -59,7 +59,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-`exported=true` defaults on old Android. Custom schemes are first-come, first-served. Verified App Links prove the *host* is associated with the app; they still deliver the query string. FastAPI will bind `as=admin` if you put it on a cookie. The app’s promise is: **this** helper, alice stays alice.
+`exported=true` defaults on old Android. Custom schemes are first-come, first-served. Verified App Links prove the *host* is associated with the app; they still deliver the query string. FastAPI will bind `as=admin` if you put it on a cookie. What this practice is supposed to show: alice stays alice.
 
 ## Practice
 

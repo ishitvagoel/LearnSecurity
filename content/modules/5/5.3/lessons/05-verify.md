@@ -9,7 +9,7 @@
 
 ## Picture: leftover default must fail
 
-A test that only counts passing cases can pass while a leftover default still counts as a valid key. This check asks whether a leftover default is allowed to count as a passing control. Broken must fail that question. Repaired must pass it.
+A test that only counts passing cases can pass while a leftover default still counts as a valid key. Ask whether a leftover default is allowed to count as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

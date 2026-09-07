@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `review_ok(diff)`. It does not merge anything. The failure is already in the function: it returns true for every string. You are here to see that the check treats that as a **failed rule**, not as a trophy eval.
+The practice is not a website you attack. It is a tiny Python `review_ok(diff)`. It does not merge anything. The failure is already in the function: it returns true for every string. The point is to see that the check treats that as a **failed rule**, not as a trophy eval.
 
 The rule under test:
 
@@ -65,7 +65,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-GitHub’s “approve” button is not this rule. Formatters do not see eval as a grant of Python. Later review bots are a help, not an oracle. The app’s promise is: **these** local files, eval-on-user is not approved.
+GitHub’s “approve” button is not this rule. Formatters do not see eval as a grant of Python. Later review bots are a help, not an oracle. What this practice is supposed to show: eval-on-user is not approved.
 
 ## Practice
 

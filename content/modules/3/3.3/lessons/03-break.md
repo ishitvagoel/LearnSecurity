@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `can_select` check. It does not open PostgreSQL, a cloud database, or a classmate’s replica. The failure is already in the object: every role can read every company. You are here to see that the check treats that as a **failed rule**, not as a topology drawing.
+The practice is not a website you attack. It is a tiny in-process `can_select` check. It does not open PostgreSQL, a cloud database, or a classmate’s replica. The failure is already in the object: every role can read every company. The point is to see that the check treats that as a **failed rule**, not as a topology drawing.
 
 The rule under test:
 
@@ -63,7 +63,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-FastAPI does not scope PostgreSQL. Splitting into microservices without new grants is a topology drawing. The app’s promise is: **this** practice, `can_select("app", "tB", "tA") is False`.
+FastAPI does not scope PostgreSQL. Splitting into microservices without new grants is a topology drawing. What this practice is supposed to show: `can_select("app", "tB", "tA") is False`.
 
 ## Practice
 

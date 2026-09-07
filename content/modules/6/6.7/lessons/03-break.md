@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `allow`. It does not open a live export API. The failure is already in the function: it says yes for every `n`. You are here to see that the check treats that as a **failed rule**, not as a trophy against a public host.
+The practice is not a website you attack. It is a tiny Python `allow`. It does not open a live export API. The failure is already in the function: it says yes for every `n`. The point is to see that the check treats that as a **failed rule**, not as a trophy against a public host.
 
 The rule under test:
 
@@ -66,7 +66,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-An IP limit at the edge is a bucket per address, not a per-person export account. FastAPI will run export as often as you call it. Next.js disabling a button does not bind `n`. The app’s promise is: **this** practice, `allow(4)` is false.
+An IP limit at the edge is a bucket per address, not a per-person export account. FastAPI will run export as often as you call it. Next.js disabling a button does not bind `n`. What this practice is supposed to show: `allow(4)` is false.
 
 ## Practice
 

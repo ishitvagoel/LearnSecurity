@@ -9,7 +9,7 @@
 
 ## Picture: a broken admission must fail the check
 
-A test that only counts passing tests can pass while `pod_ok("cluster-admin")` still returns true. This check asks whether an app pod granted cluster-admin still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A test that only counts passing tests can pass while `pod_ok("cluster-admin")` still returns true. Ask whether an app pod granted cluster-admin still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

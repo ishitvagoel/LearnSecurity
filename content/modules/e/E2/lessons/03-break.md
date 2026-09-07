@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python model of header names. The failure is already in the dict: `isolation_enforced` treats Report-Only as on. You are here to see that Report-Only counted as isolation is **a failed rule**, not a trophy script.
+The practice is not a website you attack. It is a tiny Python model of header names. The failure is already in the dict: `isolation_enforced` treats Report-Only as on. The point is to see that Report-Only counted as isolation is **a failed rule**, not a trophy script.
 
 The rule under test:
 
@@ -59,7 +59,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-Some templates ship Report-Only. Helmet will send whatever you configure. A CDN can strip the enforcing header (2.2). The app’s promise is: **this** practice, Report-Only only is false.
+Some templates ship Report-Only. Helmet will send whatever you configure. A CDN can strip the enforcing header (2.2). What this practice is supposed to show: Report-Only only is false.
 
 ## Practice
 

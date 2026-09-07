@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a phone you image. It is a tiny Python `save_note` / `plaintext_on_disk`. The failure is already in the function: it stores the body as-is, so after `save_note("secret")` the disk still holds `'secret'`. You are here to see that a **note body cached as plaintext** is **a failed rule**, not a trophy against a personal phone.
+The practice is not a phone you image. It is a tiny Python `save_note` / `plaintext_on_disk`. The failure is already in the function: it stores the body as-is, so after `save_note("secret")` the disk still holds `'secret'`. The point is to see that a **note body cached as plaintext** is **a failed rule**, not a trophy against a personal phone.
 
 The rule under test:
 
@@ -59,7 +59,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-EncryptedSharedPreferences is not automatic for every file. Room defaults to plaintext SQLite. `MODE_PRIVATE` keeps other *apps* out on a healthy OS; root, backup agents, and USB still see bytes. The app’s promise is: **this** helper, `plaintext_on_disk()` is false after save.
+EncryptedSharedPreferences is not automatic for every file. Room defaults to plaintext SQLite. `MODE_PRIVATE` keeps other *apps* out on a healthy OS; root, backup agents, and USB still see bytes. What this practice is supposed to show: `plaintext_on_disk()` is false after save.
 
 ## Practice
 

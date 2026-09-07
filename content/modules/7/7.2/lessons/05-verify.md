@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail member × secret_internal
 
-A check that only counts passing cases can pass while a member still resolves `secret_internal`. This check asks whether that dump is allowed to count as a passing control. Broken must fail that question. Repaired must pass it. Honest `display_name` may pass on both — that is the product, not an excuse to skip the deny.
+A check that only counts passing cases can pass while a member still resolves `secret_internal`. Ask whether that dump is allowed to count as a passing control. The broken files must fail that. The repaired files must pass it. Honest `display_name` may pass on both — that is the product, not an excuse to skip the deny.
 
 ```mermaid
 flowchart LR

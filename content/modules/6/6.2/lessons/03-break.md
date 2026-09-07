@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python model of drawing a title. The failure is already in the string: `render` leaves `<` as a tag delimiter, so extra tags stay in the output. You are here to see that unencoded markup reaching HTML is **a failed rule**, not a trophy script.
+The practice is not a website you attack. It is a tiny Python model of drawing a title. The failure is already in the string: `render` leaves `<` as a tag delimiter, so extra tags stay in the output. The point is to see that unencoded markup reaching HTML is **a failed rule**, not a trophy script.
 
 The rule under test:
 
@@ -60,7 +60,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-React JSX encodes text children by default; `dangerouslySetInnerHTML` does not. FastAPI `HTMLResponse` will ship whatever string you build. Jinja autoescape is off unless you turn it on. The app’s promise is: **this** practice, the extra-tag marker `"<img"` is absent and `&lt;` is present.
+React JSX encodes text children by default; `dangerouslySetInnerHTML` does not. FastAPI `HTMLResponse` will ship whatever string you build. Jinja autoescape is off unless you turn it on. What this practice is supposed to show: the extra-tag marker `"<img"` is absent and `&lt;` is present.
 
 ## Practice
 

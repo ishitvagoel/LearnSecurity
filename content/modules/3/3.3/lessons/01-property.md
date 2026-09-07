@@ -57,7 +57,7 @@ Migrator and superuser exist. They must not be `DATABASE_URL` at request time. A
 
 ## What the framework does vs what you still have to check
 
-FastAPI does not scope PostgreSQL. Splitting into microservices without new grants is a topology drawing. The app’s promise is: `can_select("app", "tB", "tA") is False` and the runtime connection is not `postgres`. The folder is `labs/3.3/3.3-lab`. No live databases.
+FastAPI does not scope PostgreSQL. Splitting into microservices without new grants is a topology drawing. What this practice is supposed to show: `can_select("app", "tB", "tA") is False` and the runtime connection is not `postgres`. The folder is `labs/3.3/3.3-lab`. No live databases.
 
 ## What the tool cannot do
 

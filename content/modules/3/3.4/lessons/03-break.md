@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `add_share` counter. Fake share counts. It does not open FastAPI, a CDN filter, or a classmate API. You are here to see that the check treats extra grants as a **failed rule**, not as a trophy flood.
+The practice is not a website you attack. It is a tiny in-process `add_share` counter. Fake share counts. It does not open FastAPI, a CDN filter, or a classmate API. The point is to see that the check treats extra grants as a **failed rule**, not as a trophy flood.
 
 The rule under test:
 
@@ -62,7 +62,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-FastAPI does not know “five members.” SQLAlchemy `add()` will insert a sixth row. An accessible denial is not the cap. The app’s promise is: **this** practice, after eight calls, `last <= 5`.
+FastAPI does not know “five members.” SQLAlchemy `add()` will insert a sixth row. An accessible denial is not the cap. What this practice is supposed to show: after eight calls, `last <= 5`.
 
 ## Practice
 

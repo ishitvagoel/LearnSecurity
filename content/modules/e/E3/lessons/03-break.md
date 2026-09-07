@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `capture(key)` / `charge_count()` list. It does not open a browser, talk to a payment network, or scrape a clinic billing page. The failure is already in the object: every call appends a charge and ignores whether the key was seen. You are here to see that the check treats that as a **failed rule**, not as a clumsy click.
+The practice is not a website you attack. It is a tiny in-process `capture(key)` / `charge_count()` list. It does not open a browser, talk to a payment network, or scrape a clinic billing page. The failure is already in the object: every call appends a charge and ignores whether the key was seen. The point is to see that the check treats that as a **failed rule**, not as a clumsy click.
 
 The rule under test:
 
@@ -59,7 +59,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-A processor can remember its own side and still leave your row inserting twice. FastAPI will retry whatever the client repeats. Payment screens that trap people cause retries (this bug). The app's promise is: **this** practice, two k1 → count 1.
+A processor can remember its own side and still leave your row inserting twice. FastAPI will retry whatever the client repeats. Payment screens that trap people cause retries (this bug). What this practice is supposed to show: two k1 → count 1.
 
 ## Practice
 

@@ -9,7 +9,7 @@
 
 ## Picture: broken must fail — tB reads tA
 
-A test that only counts passing cases can pass while tB still reads tA. This check asks whether a shared app role reading tA as tB still counts as a passing control. Broken must fail that question. Repaired must pass it — deny the other company, and still allow own-company read.
+A test that only counts passing cases can pass while tB still reads tA. Ask whether a shared app role reading tA as tB still counts as a passing control. The broken files must fail that. The repaired files must pass it — deny the other company, and still allow own-company read.
 
 ```mermaid
 flowchart LR

@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `log_event` that returns a string. The failure is already in the function: it pastes the note body into the line. You are here to see that the check treats that line as a **failed rule**, not as a debug nit.
+The practice is not a website you attack. It is a tiny Python `log_event` that returns a string. The failure is already in the function: it pastes the note body into the line. The point is to see that the check treats that line as a **failed rule**, not as a debug nit.
 
 The rule under test:
 

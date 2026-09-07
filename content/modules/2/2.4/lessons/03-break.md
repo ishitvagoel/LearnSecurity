@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `share_note` list. It does not open a browser, talk to a payment network, or race a public API. The failure is already in the object: every call appends a row and ignores the key. You are here to see that the check treats that as a **failed rule**, not as a clumsy click.
+The practice is not a website you attack. It is a tiny in-process `share_note` list. It does not open a browser, talk to a payment network, or race a public API. The failure is already in the object: every call appends a row and ignores the key. The point is to see that the check treats that as a **failed rule**, not as a clumsy click.
 
 The rule under test:
 
@@ -60,7 +60,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-A FastAPI route, Next.js disable-on-submit, or “PostgreSQL will unique-constrain it” is not this check. A unique constraint on `(note_id)` would block **any** second share, including a legitimate new key — wrong check. The app’s promise is: **this** practice, two calls with `k1`, `share_count() == 1`.
+A FastAPI route, Next.js disable-on-submit, or “PostgreSQL will unique-constrain it” is not this check. A unique constraint on `(note_id)` would block **any** second share, including a legitimate new key — wrong check. What this practice is supposed to show: two calls with `k1`, `share_count() == 1`.
 
 ## Practice
 

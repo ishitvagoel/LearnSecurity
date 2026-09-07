@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `exporter`. It does not open a live queue. The failure is already in the function: leftover `user_session` wins if it is present. You are here to see that the check treats that as a **failed rule**, not as a trophy against a public broker.
+The practice is not a website you attack. It is a tiny Python `exporter`. It does not open a live queue. The failure is already in the function: leftover `user_session` wins if it is present. The point is to see that the check treats that as a **failed rule**, not as a trophy against a public broker.
 
 The rule under test:
 
@@ -67,7 +67,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-A task library can copy the request into the later job. FastAPI `Depends()` is gone once the HTTP worker returns. A message broker on a private network is still untrusted input (2.1). Next.js never sees the overnight job. The app’s promise is: **this** practice, Alice session yields `None`.
+A task library can copy the request into the later job. FastAPI `Depends()` is gone once the HTTP worker returns. A message broker on a private network is still untrusted input (2.1). Next.js never sees the overnight job. What this practice is supposed to show: Alice session yields `None`.
 
 ## Practice
 

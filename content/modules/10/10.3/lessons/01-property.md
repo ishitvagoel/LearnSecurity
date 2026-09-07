@@ -55,7 +55,7 @@ Someone granted god-mode for convenience. That is the cause. Cluster takeover fr
 
 A default ServiceAccount in a namespace often mounts a token. Managed Kubernetes still accepts a ClusterRoleBinding you apply. `Dockerfile USER root` and `hostNetwork` are extra grains, not this rule.
 
-The app's promise is: **this** `pod_ok("cluster-admin")` is false. The local check is `labs/10.3/10.3-lab`. Fake role strings only. No live clusters.
+What this practice is supposed to show: `pod_ok("cluster-admin")` is false. The local check is `labs/10.3/10.3-lab`. Fake role strings only. No live clusters.
 
 ## What the tool cannot do
 

@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: Report-Only
 
-A check that only counts passing cases can pass while Report-Only still counts as on. This check asks whether Report-Only-as-on still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A check that only counts passing cases can pass while Report-Only still counts as on. Ask whether Report-Only-as-on still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

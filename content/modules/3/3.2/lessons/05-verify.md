@@ -9,7 +9,7 @@
 
 ## Picture: missing cross-tenant-read must fail
 
-A test that only counts collection size can pass while `cross-tenant-read` is gone. This check asks whether an empty model on a green scan still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A test that only counts collection size can pass while `cross-tenant-read` is gone. Ask whether an empty model on a green scan still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

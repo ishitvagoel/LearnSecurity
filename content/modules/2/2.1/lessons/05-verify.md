@@ -9,7 +9,7 @@ Happy-path HTTP 200 is not evidence. The check must be **false** on the broken f
 
 ## Picture: broken files must fail the duplicate-key check
 
-A check that only counts passing cases can pass while two readers still disagree. This check asks whether two company meanings still count as a passing control. Broken must fail that question. Repaired must pass it.
+A check that only counts passing cases can pass while two readers still disagree. Ask whether two company meanings still count as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

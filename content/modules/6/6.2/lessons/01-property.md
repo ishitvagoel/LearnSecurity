@@ -56,7 +56,7 @@ Encoding for HTML text is wrong inside a JavaScript string. Encoding for attribu
 
 React JSX encodes text by default. `dangerouslySetInnerHTML` and a FastAPI HTML template do not. HttpOnly (2.3) does not stop script in the origin; it only hides the cookie from script.
 
-The app’s promise is: **this** `render`, on **this** practice title, turns `<` into `&lt;` in HTML text. The practice folder is `labs/6.2/6.2-lab`. It is not a live page and not a public site.
+What this practice is supposed to show: `render`, on **this** practice title, turns `<` into `&lt;` in HTML text. The practice folder is `labs/6.2/6.2-lab`. It is not a live page and not a public site.
 
 ## What the tool cannot do
 

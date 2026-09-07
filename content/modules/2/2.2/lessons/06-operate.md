@@ -36,7 +36,7 @@ Certificate-failure drills belong to TLS deployment, not this cache-key sentence
 | Recover | Prefix is gone; keep watching the live window |
 | Leftover | Operator error at the CDN remains; this practice is not production telemetry |
 
-Varnish, Fastly, and Next.js data cache will still hit on whatever key you configured. `Cache-Control` is a hint. The app’s promise is: on **these** practice files, a company B get after a company A put is a miss, and the mismatch log never includes `tenant-A-note`.
+Varnish, Fastly, and Next.js data cache will still hit on whatever key you configured. `Cache-Control` is a hint. What this practice is supposed to show: on **these** practice files, a company B get after a company A put is a miss, and the mismatch log never includes `tenant-A-note`.
 
 What the tool cannot do: purge without a prefix that includes company can widen who is down. Stale-while-revalidate at a new node is leftover. Cookie leakage from a cached body is later session work, not a log-product green.
 

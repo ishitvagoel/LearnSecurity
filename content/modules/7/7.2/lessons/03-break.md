@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `resolve(role, field)`. The failure is already in the function: it returns true for every pair. You are here to see that a member resolving `secret_internal` is **a failed rule**, not a trophy dump of an internal token.
+The practice is not a website you attack. It is a tiny Python `resolve(role, field)`. The failure is already in the function: it returns true for every pair. The point is to see that a member resolving `secret_internal` is **a failed rule**, not a trophy dump of an internal token.
 
 The rule under test:
 
@@ -60,7 +60,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-ORM dump helpers are convenience, not field permission. GraphQL will resolve any field the schema exposes. FastAPI `response_model` helps only if it is the actual response. Next.js hiding a table column does not bind `resolve`. The app’s promise is: **this** practice, member × `secret_internal` is false.
+ORM dump helpers are convenience, not field permission. GraphQL will resolve any field the schema exposes. FastAPI `response_model` helps only if it is the actual response. Next.js hiding a table column does not bind `resolve`. What this practice is supposed to show: member × `secret_internal` is false.
 
 ## Practice
 

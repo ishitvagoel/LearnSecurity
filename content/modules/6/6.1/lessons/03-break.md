@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `argv_for_list` and `uses_shell`. It does not start a process. The failure is already in the function: it glues the name into a shell string. You are here to see that the check treats that as a **failed rule**, not as a trophy command.
+The practice is not a website you attack. It is a tiny Python `argv_for_list` and `uses_shell`. It does not start a process. The failure is already in the function: it glues the name into a shell string. The point is to see that the check treats that as a **failed rule**, not as a trophy command.
 
 The rule under test:
 
@@ -66,7 +66,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-FastAPI has no opinion about argv. `subprocess.run(..., shell=True)` will parse the name. Next.js `child_process.exec` is a shell. The app's promise is: **these** local files, `cmd[:2] != ["sh", "-c"]` and `uses_shell` is false.
+FastAPI has no opinion about argv. `subprocess.run(..., shell=True)` will parse the name. Next.js `child_process.exec` is a shell. What this practice is supposed to show: `cmd[:2] != ["sh", "-c"]` and `uses_shell` is false.
 
 ## Practice
 

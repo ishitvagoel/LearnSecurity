@@ -9,7 +9,7 @@
 
 ## Picture: leftover analytics or search must fail the check
 
-A test that only asserts the notes row is gone can pass while the warehouse still holds the body. This check asks whether leftover analytics or search after delete still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A test that only asserts the notes row is gone can pass while the warehouse still holds the body. Ask whether leftover analytics or search after delete still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

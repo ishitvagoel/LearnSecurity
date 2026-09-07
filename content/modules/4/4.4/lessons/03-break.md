@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `can_read`. The failure is already in the function: it treats “Bob has a share somewhere” as a yes for every note. You are here to see that the check treats that as a **failed rule**, not as a trophy dump of another company’s body.
+The practice is not a website you attack. It is a tiny Python `can_read`. The failure is already in the function: it treats “Bob has a share somewhere” as a yes for every note. The point is to see that the check treats that as a **failed rule**, not as a trophy dump of another company’s body.
 
 The rule under test:
 
@@ -54,7 +54,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 | How you recover later | Take back the leftover flag; audit Bob’s reads of n2 |
 | Out of scope | A scanner “IDOR” name, a roles product, or id length |
 
-`Depends(get_user)` is not `Depends(can_read_note)`. Starlette and Next.js middleware do not key the grant. The app’s promise is: **this** check, `can_read("bob", "n2") is False`.
+`Depends(get_user)` is not `Depends(can_read_note)`. Starlette and Next.js middleware do not key the grant. What this practice is supposed to show: `can_read("bob", "n2") is False`.
 
 ## Practice
 

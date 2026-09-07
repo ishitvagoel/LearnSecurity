@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `channel_is_https`. Fake headers and a `server_scheme` string. It does not open a socket or a CDN. You are here to see that a client `X-Forwarded-Proto: https` on an `http` socket still counting as TLS is a **failed rule**, not a trophy strip attack.
+The practice is not a website you attack. It is a tiny in-process `channel_is_https`. Fake headers and a `server_scheme` string. It does not open a socket or a CDN. The point is to see that a client `X-Forwarded-Proto: https` on an `http` socket still counting as TLS is a **failed rule**, not a trophy strip attack.
 
 The rule under test:
 
@@ -67,7 +67,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-A server flag that trusts proxy headers, with a wildcard trusted hop, will believe whoever sent the header. The request URL scheme after that middleware is not the socket. Headers the page reads in the browser are not TLS. The app’s promise is: **this** practice, header https + socket http is False.
+A server flag that trusts proxy headers, with a wildcard trusted hop, will believe whoever sent the header. The request URL scheme after that middleware is not the socket. Headers the page reads in the browser are not TLS. What this practice is supposed to show: header https + socket http is False.
 
 ## Practice
 

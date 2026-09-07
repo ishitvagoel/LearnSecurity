@@ -9,7 +9,7 @@ Happy-path “1 item collected” is not evidence. The check must be **false** o
 
 ## Picture: a broken recovery must fail the check
 
-A test that only asserts the confirm function exists can pass while the control remains mouse-only. This check asks whether inaccessible recovery still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A test that only asserts the confirm function exists can pass while the control remains mouse-only. Ask whether inaccessible recovery still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart TD

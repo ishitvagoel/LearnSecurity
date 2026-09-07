@@ -9,7 +9,7 @@
 
 ## Picture: broken files must fail: is_admin
 
-A check that only counts passing cases can pass while extra keys still write `is_admin`. This check asks whether writing `is_admin` still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A check that only counts passing cases can pass while extra keys still write `is_admin`. Ask whether writing `is_admin` still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

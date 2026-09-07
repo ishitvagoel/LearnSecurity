@@ -29,7 +29,7 @@ Industry lists talk about noticing, responding, and recovering. They do not pick
 | Recover | Quarantine rows whose ACL and store disagree; do not guess a company |
 | Leftover | Honest unique-key JSON still needs a who-is-allowed check |
 
-Naming a product is not the rule. FastAPI will still parse whatever JSON library you wired. PostgreSQL `jsonb` will keep one key if you cast. The app’s promise is: **this** practice, messy keys do not persist two companies, and the deny log never includes the blob.
+Naming a product is not the rule. FastAPI will still parse whatever JSON library you wired. PostgreSQL `jsonb` will keep one key if you cast. What this practice is supposed to show: messy keys do not persist two companies, and the deny log never includes the blob.
 
 A metric without a quarantine playbook still leaves a disagreeing row if a worker stored first. Unicode lookalike keys are leftover risk. Honest unique-key JSON still needs who-is-allowed. A dashboard green is not that sentence.
 

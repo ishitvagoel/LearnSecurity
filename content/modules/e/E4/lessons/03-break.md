@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `copy_into(bufsize, src, declared_len)`. It does not compile a C overflow, spray a heap, or fuzz a third-party binary. The failure is already in the object: the copy uses `declared_len` plus 8. You are here to see that the check treats that as a **failed rule**, not as extra slack you needed.
+The practice is not a website you attack. It is a tiny in-process `copy_into(bufsize, src, declared_len)`. It does not compile a C overflow, spray a heap, or fuzz a third-party binary. The failure is already in the object: the copy uses `declared_len` plus 8. The point is to see that the check treats that as a **failed rule**, not as extra slack you needed.
 
 The rule under test:
 
@@ -64,7 +64,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-Python slicing will not save a C copy. A memory-safe language reduces this overwrite class **in that language**. Helpers that call C, and leftover codecs, still copy. The app’s promise is: **this** practice, length ≤ 4.
+Python slicing will not save a C copy. A memory-safe language reduces this overwrite class **in that language**. Helpers that call C, and leftover codecs, still copy. What this practice is supposed to show: length ≤ 4.
 
 ## Practice
 

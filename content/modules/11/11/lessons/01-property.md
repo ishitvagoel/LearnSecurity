@@ -66,7 +66,7 @@ Someone recorded revoke and never asked the grant on the next read. That is the 
 
 FastAPI will not consult a grant you never check. A phone cache and a worker leftover session are extra grains of the same rule.
 
-The app’s promise is: **this** `read("n1", "B")` after `revoke("n1", "B")` is `None`, while A may still read, and B before revoke may still read. The local check is `labs/11/11-lab`. Fake data only. No live tenants.
+What this practice is supposed to show: `read("n1", "B")` after `revoke("n1", "B")` is `None`, while A may still read, and B before revoke may still read. The local check is `labs/11/11-lab`. Fake data only. No live tenants.
 
 ## What the tool cannot do
 

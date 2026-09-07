@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python helper named `phishing_resistant`. The failure is already in the function: any enrolled method returns true, and origin is ignored. You are here to see that a password at a lookalike origin counted as **resistant** is a failed rule, not a trophy kit.
+The practice is not a website you attack. It is a tiny Python helper named `phishing_resistant`. The failure is already in the function: any enrolled method returns true, and origin is ignored. The point is to see that a password at a lookalike origin counted as **resistant** is a failed rule, not a trophy kit.
 
 The rule under test:
 
@@ -62,7 +62,7 @@ Do not open the repaired files yet. Name the cause first.
 
 ## What the framework does vs what you still have to check
 
-FastAPI does not know the RP ID. A Next.js password field will happily POST to evil.example. The app’s promise is: **this** helper, password at the lookalike origin → false.
+FastAPI does not know the RP ID. A Next.js password field will happily POST to evil.example. What this practice is supposed to show: password at the lookalike origin → false.
 
 ## Practice
 

@@ -33,7 +33,7 @@ Naming a product is not the rule. Re-run `test_report_only_is_not_enforcement` a
 
 A content-security reporting dashboard will show violation counts and stay silent when CI’s `isolation_enforced` treats Report-Only as on. Notice must observe **Report-Only is not enforcement**, not report volume. If the alert includes HTML, you have opened a logging leak (3.1). Reporting from a content-security policy is extra, later, and advanced — reports are not close.
 
-The app’s promise is: **this** practice, `csp_report_only_not_enforced` fires without HTML, and a reporting dashboard is extra, not this week’s enforcement.
+What this practice is supposed to show: `csp_report_only_not_enforced` fires without HTML, and a reporting dashboard is extra, not this week’s enforcement.
 
 ## Practice
 

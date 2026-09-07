@@ -34,7 +34,7 @@ Naming an API gateway product is not the rule. Re-run `test_is_admin_cannot_be_p
 
 A web filter will show 400s on a schema mismatch and stay silent when `/v0/users` still runs `user.update(body)`. Notice must observe **`is_admin` still false**, not HTTP status counts. If the alert includes the PATCH JSON, you have opened a logging leak (3.1 / 5.1).
 
-The app’s promise is: **this** practice, extra-key denials fire without the document, and Naming a product is not this week's rule.
+What this practice is supposed to show: extra-key denials fire without the document. Naming a product is not the rule.
 
 ## Practice
 

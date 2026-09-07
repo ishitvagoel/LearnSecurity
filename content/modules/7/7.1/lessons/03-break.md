@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `apply(user, body)`. The failure is already in the function: `user.update(body)` copies every key, so `is_admin` becomes true. You are here to see that extra keys writing `is_admin` is **a failed rule**, not a trophy against a public API.
+The practice is not a website you attack. It is a tiny Python `apply(user, body)`. The failure is already in the function: `user.update(body)` copies every key, so `is_admin` becomes true. The point is to see that extra keys writing `is_admin` is **a failed rule**, not a trophy against a public API.
 
 The rule under test:
 
@@ -61,7 +61,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-FastAPI will bind extra fields if the model allows it. Pydantic allowing extras and `user.update(body)` are the same shape. Next.js omitting a checkbox does not bind the server. A generated OpenAPI file is inventory, not the drop. The app’s promise is: **this** helper, `is_admin` stays false.
+FastAPI will bind extra fields if the model allows it. Pydantic allowing extras and `user.update(body)` are the same shape. Next.js omitting a checkbox does not bind the server. A generated OpenAPI file is inventory, not the drop. What this practice is supposed to show: `is_admin` stays false.
 
 ## Practice
 

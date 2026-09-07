@@ -9,7 +9,7 @@
 
 ## Picture: a broken register gate must fail the check
 
-A test that only counts passing tests can pass while empty owner still accepts. This check asks whether an incomplete exception still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A test that only counts passing tests can pass while empty owner still accepts. Ask whether an incomplete exception still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

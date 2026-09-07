@@ -33,7 +33,7 @@ Naming an MDM product is not the rule. Re-run `test_cached_note_is_not_plaintext
 
 Android Auto Backup can copy ciphertext *and* a poorly stored key while the pytest still says “not plaintext secret.” Notice must observe **`plaintext_on_disk()` false**, not a fingerprint prompt. If the alert includes note bodies, you have opened a logging leak (3.1 / 5.1).
 
-The app’s promise is: **this** practice, leftover-cache signals fire without the body, and Naming a product is not this week's rule.
+What this practice is supposed to show: leftover-cache signals fire without the body. Naming a product is not the rule.
 
 ## Practice
 

@@ -9,7 +9,7 @@
 
 ## Picture: a second k1 that charges twice must fail
 
-A test that only greps a processor header can pass while every capture still appends. This check asks whether a double charge still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A test that only greps a processor header can pass while every capture still appends. Ask whether a double charge still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

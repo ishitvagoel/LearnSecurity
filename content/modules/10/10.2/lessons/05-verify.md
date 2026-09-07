@@ -9,7 +9,7 @@
 
 ## Picture: a broken install check must fail the mismatch test
 
-A test that only counts passing tests can pass while always-true `install_ok` still installs a mismatch. This check asks whether a digest mismatch still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A test that only counts passing tests can pass while always-true `install_ok` still installs a mismatch. Ask whether a digest mismatch still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

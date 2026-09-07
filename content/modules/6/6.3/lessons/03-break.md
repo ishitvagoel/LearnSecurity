@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `allow_share`. The failure is already in the function: it treats a leftover session cookie as consent to share. You are here to see that the check treats that as a **failed rule**, not as a trophy against another site.
+The practice is not a website you attack. It is a tiny Python `allow_share`. The failure is already in the function: it treats a leftover session cookie as consent to share. The point is to see that the check treats that as a **failed rule**, not as a trophy against another site.
 
 The rule under test:
 
@@ -58,7 +58,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 | How you recover later | Keep deny; revoke grants created in the window |
 | Out of scope | SameSite as the definition, CORS, or a live third-party page |
 
-FastAPI `Request.cookies` will attach whatever the browser sent. Starlette CORS middleware is not CSRF. Next.js server actions still need origin and token at the grant. The app’s promise is: **this** check, foreign origin + no token is False.
+FastAPI `Request.cookies` will attach whatever the browser sent. Starlette CORS middleware is not CSRF. Next.js server actions still need origin and token at the grant. What this practice is supposed to show: foreign origin + no token is False.
 
 ## Practice
 

@@ -78,7 +78,7 @@ A WAF string that looks for `tenant` twice is fake cleaning. Whitespace, Unicode
 
 CPython `json.loads` last-wins is a language accident, not a security control. Pydantic v2 will happily model a unique `tenant: str` after the reader already collapsed duplicates. PostgreSQL `jsonb` is another reader. FastAPI will parse a body with whichever JSON library it is configured to use.
 
-The app’s promise is: **this** ingest function, on **this** practice object, either refuses the messy object or yields `acl_tenant == stored_tenant`. The practice folder is `labs/2.1/2.1-parser-boundaries`. It is not a live API and not a public JSON fuzzer.
+What this practice is supposed to show: the ingest function, on this practice object, either refuses the messy object or yields `acl_tenant == stored_tenant`. The practice folder is `labs/2.1/2.1-parser-boundaries`. It is not a live API and not a public JSON fuzzer.
 
 ## What the tool cannot do
 

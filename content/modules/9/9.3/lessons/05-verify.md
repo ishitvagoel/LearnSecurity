@@ -9,7 +9,7 @@
 
 ## Picture: a broken suite must fail the check
 
-A test that only counts passing tests can pass while 200-only still counts as security. This check asks whether a status-only row still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A test that only counts passing tests can pass while 200-only still counts as security. Ask whether a status-only row still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

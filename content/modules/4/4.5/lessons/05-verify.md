@@ -9,7 +9,7 @@
 
 ## Picture: other-api and missing aud must fail
 
-A test that only asserts a library called `verify` can pass while a wrong-audience token still counts as a session. This check asks whether a token for another API still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A test that only asserts a library called `verify` can pass while a wrong-audience token still counts as a session. Ask whether a token for another API still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR

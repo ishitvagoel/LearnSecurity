@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `accept`. It does not open a network. The failure is already in the function: it returns true for every triple. You are here to see that an unsigned body counting as authentic is a **failed rule**, not a trophy POST to a live provider.
+The practice is not a website you attack. It is a tiny Python `accept`. It does not open a network. The failure is already in the function: it returns true for every triple. The point is to see that an unsigned body counting as authentic is a **failed rule**, not a trophy POST to a live provider.
 
 The rule under test:
 
@@ -66,7 +66,7 @@ Do not open the repaired files yet. Diagnose the cause first.
 
 ## What the framework does vs what you still have to check
 
-FastAPI will accept a POST with an empty header. nginx TLS termination proves a hop, not a MAC. A vendor address range is shared-fate (NAT, shared cloud egress). Next.js never sees the callback. The app’s promise is: **these** local files, empty sig is false. **Do not POST a live webhook.**
+FastAPI will accept a POST with an empty header. nginx TLS termination proves a hop, not a MAC. A vendor address range is shared-fate (NAT, shared cloud egress). Next.js never sees the callback. What this practice is supposed to show: empty sig is false. **Do not POST a live webhook.**
 
 ## Practice
 

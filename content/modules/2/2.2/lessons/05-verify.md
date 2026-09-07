@@ -9,7 +9,7 @@ Happy-path HTTP 200 over HTTPS is not evidence. The check must be **false** on t
 
 ## Picture: a broken cache must fail the check
 
-A check that only asserts HTTPS can pass while the key remains path-only. This check asks whether company B getting company A’s body still counts as a passing cache. Broken files must fail that question. Repaired files must pass it.
+A check that only asserts HTTPS can pass while the key remains path-only. Ask whether company B getting company A’s body still counts as a passing cache. Broken files must fail that question. Repaired files must pass it.
 
 ```mermaid
 flowchart LR

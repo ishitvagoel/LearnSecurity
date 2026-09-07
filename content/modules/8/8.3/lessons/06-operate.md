@@ -33,7 +33,7 @@ Naming a mobile-filter product is not the rule. Re-run `test_deeplink_as_param_d
 
 Play Console App Link status will show verified hosts and stay silent when an exported Activity still copies `as`. Notice must observe **alice unchanged**, not host association. If the alert includes a full deep-link URL or an OAuth code, you have opened a logging leak (4.3).
 
-The app’s promise is: **this** practice, dropped `as=` fires without the URL, and Naming a product is not this week's rule.
+What this practice is supposed to show: dropped `as=` fires without the URL. Naming a product is not the rule.
 
 ## Practice
 

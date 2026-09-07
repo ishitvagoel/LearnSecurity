@@ -9,7 +9,7 @@
 
 ## Picture: last greater than 5 must fail
 
-A test that only asserts a max attribute exists can pass while eight calls still leave count 8. This check asks whether a sixth grant still counts as a passing control. Broken must fail that question. Repaired must pass it.
+A test that only asserts a max attribute exists can pass while eight calls still leave count 8. Ask whether a sixth grant still counts as a passing control. The broken files must fail that. The repaired files must pass it.
 
 ```mermaid
 flowchart LR
