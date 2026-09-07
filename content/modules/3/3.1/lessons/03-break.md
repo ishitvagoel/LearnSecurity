@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. `log_event` is a tiny Python helper that returns a string. The failure is already in the function: it pastes the note body into the line. That line is a **failed rule**, not a debug nit.
+The practice is not a website you attack. `log_event` returns a string: it pastes the note body into the line. That line is a **failed rule**, not a debug nit.
 
 > A confidential note body must not appear in this log line. If `log_event("note_read", "tenant-A-secret-body")` includes `tenant-A-secret-body`, logging has failed as a security control.
 
 ## Where you may practice
 
-Stay inside `labs/3.1/3.1-lab`. The string is in-process. The body is the synthetic string `tenant-A-secret-body`. No production log drains, no real people's data, no live log tenant, no patient chart.
+Stay inside `labs/3.1/3.1-lab`. The body is the synthetic string `tenant-A-secret-body`. No production log drains, no real people's data, no live log tenant, no patient chart.
 
 Do not paste a real note body into the logger “to see what happens.” Do not paste this exercise onto a public log drain, employer dashboard, or live clinic.
 

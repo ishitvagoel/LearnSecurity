@@ -7,7 +7,7 @@
 
 “We have a vault” is not this page. A reviewable model names **each secret, where it lives, who owns rotation, and what happens to the old value**.
 
-`auth(presented, current)` is local. Disposable `sk-lab-hardcoded`. No live vault.
+`auth(presented, current)` — Disposable `sk-lab-hardcoded`. No live vault.
 
 ## Picture: inventory row
 

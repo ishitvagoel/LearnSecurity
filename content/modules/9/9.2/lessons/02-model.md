@@ -7,7 +7,7 @@
 
 “I approved the screenshot” is not this lesson. A map someone else can test names **data flow**, **who is allowed**, **the interpreter**, **state**, and **configuration**.
 
-`review_ok(diff)` is local. No live GitHub.
+`review_ok(diff)` — no live GitHub.
 
 > `eval` on a user string must not be approved. An honest helper that uses `int(user)` may pass.
 

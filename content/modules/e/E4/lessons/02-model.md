@@ -7,7 +7,7 @@
 
 “We wrote it in Python” is not this page. A reviewable model names **bufsize, declared_len, len(src), who may set each, and the copy site**.
 
-`copy_into(bufsize, src, declared_len)` is local. No native overflow walkthrough.
+`copy_into(bufsize, src, declared_len)` — no native overflow walkthrough.
 
 ## Picture: three numbers, one destination
 

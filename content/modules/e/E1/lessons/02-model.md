@@ -7,7 +7,7 @@
 
 "The prompt says not to" is not this lesson. A drawing someone else can test names **ALLOWED tools, who may invoke them, whether a retrieved document is trusted, and whether a human must approve**.
 
-`run_tool(name, args)` is local. No live model APIs.
+`run_tool(name, args)` — no live model APIs.
 
 > For tools, the rule is deny when the name is `exec_sql`. Allow-listed `search_notes` may run. Evidence that the deny is false: `run_tool("exec_sql", {})` returns a ran-string.
 

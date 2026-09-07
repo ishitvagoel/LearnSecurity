@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python model of header names. The failure is already in the dict: `isolation_enforced` treats Report-Only as on. Report-Only counted as isolation is **a failed rule**, not an exploit recipe.
+The practice is not a website you attack. This is a local model of header names. `isolation_enforced` treats Report-Only as on. Report-Only counted as isolation is **a failed rule**, not an exploit recipe.
 
 > `isolation_enforced` must be false when the only header is `Content-Security-Policy-Report-Only`. An enforcing `Content-Security-Policy` header may count.
 
 ## Where you may practice
 
-Stay inside `labs/E2/e2-lab`. The practice files are an in-process `isolation_enforced(headers)`. Fake header dicts only. It does not open a browser. Do not load a live page, probe a public host, or scan someone else’s site as this exercise.
+Stay inside `labs/E2/e2-lab`. The practice files are `isolation_enforced(headers)`. Fake header dicts only. It does not open a browser. Do not load a live page, probe a public host, or scan someone else’s site as this exercise.
 
 Do not paste this exercise onto a public site, employer board, or live clinic portal.
 

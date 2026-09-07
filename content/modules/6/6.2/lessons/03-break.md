@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python model of drawing a title. The failure is already in the string: `render` leaves `<` as a tag delimiter, so extra tags stay in the output. Unencoded markup reaching HTML is **a failed rule**, not an exploit recipe.
+The practice is not a website you attack. This is a local model of drawing a title. `render` leaves `<` as a tag delimiter, so extra tags stay in the output. Unencoded markup reaching HTML is **a failed rule**, not an exploit recipe.
 
 > `render` must encode `<` as `&lt;` in HTML text. Unencoded markup must not reach the HTML interpreter.
 
 ## Where you may practice
 
-Stay inside `labs/6.2/6.2-lab` — in-process `render`. Fake titles only. It does not open a browser. Do not load a live page, an employer board, or a classmate preview as this exercise.
+Stay inside `labs/6.2/6.2-lab`. Fake titles only. It does not open a browser. Do not load a live page, an employer board, or a classmate preview as this exercise.
 
 Do not paste this exercise onto a public site, employer board, or live clinic portal.
 

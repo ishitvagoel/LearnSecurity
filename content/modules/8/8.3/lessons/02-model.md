@@ -7,7 +7,7 @@
 
 “App Links are verified” is not this lesson. A map someone else can test names **each exported entry and which query keys it may honor**.
 
-`open_link` / `current_user` is local. No live apps.
+`open_link` / `current_user` — no live apps.
 
 ## Picture: locate versus impersonate
 

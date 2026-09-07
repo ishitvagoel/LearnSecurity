@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. `accept_exception` is a tiny Python helper that returns true for every dict. The failure is already in the function: it never looks at owner, review date, or accessibility. That always-true accept is a **failed rule**, not a paperwork nit.
+The practice is not a website you attack. `accept_exception` returns true for every dict: it never looks at owner, review date, or accessibility. That always-true accept is a **failed rule**, not a paperwork nit.
 
 > An exception must not be accepted without owner, review date, and an accessibility check. If `accept_exception({"owner": "", "review_by": None})` returns true, the register gate has failed as a security control.
 
 ## Where you may practice
 
-Stay inside `labs/E6/e6-lab` — in-process `accept_exception(exc)`. Owner strings are fake. Do **not** file a real public bug, email a vendor disclosure inbox, or accept a production exception as the exercise.
+Stay inside `labs/E6/e6-lab`. Owner strings are fake. Do **not** file a real public bug, email a vendor disclosure inbox, or accept a production exception as the exercise.
 
 Do not paste this exercise onto a public clinic, employer register, or live hospital portal “to see what happens.”
 

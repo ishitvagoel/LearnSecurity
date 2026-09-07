@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. `allowed` is a tiny Python helper. It does not open a network. The failure is already in the function: it treats any `http` or `https` scheme as fine. A link-local metadata URL counting as an allowed peer is a **failed rule**, not a live fetch of cloud identity.
+The practice is not a website you attack. `allowed` does not open a network. It treats any `http` or `https` scheme as fine. A link-local metadata URL counting as an allowed peer is a **failed rule**, not a live fetch of cloud identity.
 
 > A link-local metadata URL is not an allowed peer. `allowed` must be false for that named string. This practice checks the predicate only. It does not fetch.
 
 ## Where you may practice
 
-Stay inside `labs/6.5/6.5-lab`. The maps are in-process: `allowed`. Fake URLs. **Do not fetch.** Restore the broken and repaired folders when you are done.
+Stay inside `labs/6.5/6.5-lab`. The files are `allowed`. Fake URLs. **Do not fetch.** Restore the broken and repaired folders when you are done.
 
 Do not probe cloud metadata. Do not probe public hosts. Do not probe an employer PDF importer. Do not paste a live URL “to see what happens.”
 

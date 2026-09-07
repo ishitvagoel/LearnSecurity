@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. `exporter` is a tiny Python helper. It does not open a live queue. The failure is already in the function: leftover `user_session` wins if it is present. That is a **failed rule**, not an attack on a public broker.
+The practice is not a website you attack. `exporter` does not open a live queue: leftover `user_session` wins if it is present. That is a **failed rule**, not an attack on a public broker.
 
 > A leftover user session is not worker identity. `exporter({"user_session": "alice", "service": None})` must be `None`. `exporter({"service": "worker-sc"})` may be `"worker-sc"`.
 
 ## Where you may practice
 
-Stay inside `labs/7.4/7.4-lab` — in-process `exporter(job)`. Fake job dicts (`alice`, `worker-sc`). It does not talk to Redis, RabbitMQ, or a live task library.
+Stay inside `labs/7.4/7.4-lab`. Fake job dicts (`alice`, `worker-sc`). It does not talk to Redis, RabbitMQ, or a live task library.
 
 Do not attach to a public broker. Do not probe an employer queue. Do not probe a classmate preview. Do not paste a live cookie “to see what happens.”
 

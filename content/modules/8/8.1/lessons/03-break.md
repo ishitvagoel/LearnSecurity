@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a phone you attack. `allow_export(client_claims, server_attest)` is a tiny Python helper. The failure is already in the function: it returns true when the client says `integrity=ok`, so a failing server attest still exports. **Client `integrity=ok` authorizes export** is a failed rule, not an attack on a device farm.
+The practice is not a phone you attack. `allow_export(client_claims, server_attest)` returns true when the client says `integrity=ok`, so a failing server attest still exports. **Client `integrity=ok` authorizes export** is a failed rule, not an attack on a device farm.
 
 > `allow_export({"integrity": "ok"}, "fail")` must be false. A client integrity claim is not authorization.
 
 ## Where you may practice
 
-Stay inside `labs/8.1/8.1-lab`. The helper is an in-process `allow_export(client_claims, server_attest)`. Fake claim dicts (`integrity`, `play_integrity_pass`). It does not open a network. Do not call live Play Integrity. Do not instrument a personal phone, a public app, or an employer clinic device.
+Stay inside `labs/8.1/8.1-lab`. The helper is `allow_export(client_claims, server_attest)`. Fake claim dicts (`integrity`, `play_integrity_pass`). It does not open a network. Do not call live Play Integrity. Do not instrument a personal phone, a public app, or an employer clinic device.
 
 Do not paste this exercise onto a live phone, a hospital device, or a public Android package.
 

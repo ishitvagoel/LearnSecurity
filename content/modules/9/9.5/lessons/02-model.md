@@ -7,7 +7,7 @@
 
 "We delivered a PDF" is not this lesson. A drawing someone else can test names **the rule, what must not happen, the retest command, and variants**.
 
-`close_finding(f)` is local. No live clinics.
+`close_finding(f)` — no live clinics.
 
 > For close, the rule is deny when `retest` is missing. A passing retest of the same isolation check may close. Evidence that the deny is false: `close_finding({"retest": None})` returns true.
 

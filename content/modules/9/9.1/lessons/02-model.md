@@ -7,7 +7,7 @@
 
 “We imported the checklist” is not this lesson. A drawing someone else can test names **the threat, the requirement id, the test id, and the isolation assert**.
 
-`covered(req_id, tests)` is local. No live trackers.
+`covered(req_id, tests)` — no live trackers.
 
 > For AUTHZ-1, a status-only row is deny. A row that asserts isolation may count. Evidence that the deny is false: `covered("AUTHZ-1", [{"req": "AUTHZ-1", "asserts_isolation": False}])` returns true.
 

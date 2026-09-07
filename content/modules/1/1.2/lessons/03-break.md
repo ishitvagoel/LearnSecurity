@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python model that gives legitimate fake users too much leftover permission. There is no HTTP server and no real account. The failure happens inside a small in-process model, so you can see cause and effect without turning the exercise into a target walkthrough.
+The practice is not a website you attack. It is a small local model that gives legitimate fake users too much leftover permission. There is no HTTP server and no real account. The failure happens inside a small in-process model, so you can see cause and effect without turning the exercise into a target walkthrough.
 
 > Every in-scope operation must obtain a current yes over person, object, action, company, and relevant permission state. Unknown cases deny.
 

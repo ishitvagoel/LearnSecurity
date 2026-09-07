@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `protect` / `looks_encrypted`. Fake plaintext `secret`. It does not open a database or a cipher library. Base64 labeled encryption is a **failed rule**, not a decoder to run on live data.
+The practice is not a website you attack. `protect` / `looks_encrypted` uses fake plaintext `secret`. It does not open a database or a cipher library. Base64 labeled encryption is a **failed rule**, not a decoder to run on live data.
 
 > `protect("secret")` must not round-trip as Base64 of the plaintext. If `base64.b64decode(protect("secret"))` equals `"secret"`, encoding was sold as secrecy.
 
 ## Where you may practice
 
-Stay inside `labs/5.2/5.2-lab`. The maps are in-process. Restore the broken and repaired folders when you are done. Fake plaintext `secret` only.
+Stay inside `labs/5.2/5.2-lab`. Restore the broken and repaired folders when you are done. Fake plaintext `secret` only.
 
 Do not decode a live column. Do not decode an employer backup. Do not decode a classmate dump. Do not “just try Base64” on someone else's file.
 

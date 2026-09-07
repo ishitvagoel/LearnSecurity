@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python model of a shared cache. The failure is already in the object: the store keys only on path. That object is a **failed rule**, not a performance nit.
+The practice is not a website you attack. This is a local model of a shared cache. The store keys only on path. That object is a **failed rule**, not a performance nit.
 
 The rule:
 

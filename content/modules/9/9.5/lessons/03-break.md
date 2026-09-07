@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. `close_finding` is a tiny Python helper that returns true for every dict. The failure is already in the function: it never looks at `retest`. That always-true close is a **failed rule**, not a paperwork nit.
+The practice is not a website you attack. `close_finding` returns true for every dict: it never looks at `retest`. That always-true close is a **failed rule**, not a paperwork nit.
 
 > A finding must not close without a passing retest of the same bad result. If `close_finding({"retest": None})` returns true, the close gate has failed as a security control.
 
 ## Where you may practice
 
-Stay inside `labs/9.5/9.5-lab` — in-process `close_finding(f)`. The finding is a synthetic dict. Do **not** scan, exploit, or "verify" any public or third-party system.
+Stay inside `labs/9.5/9.5-lab`. The finding is a synthetic dict. Do **not** scan, exploit, or "verify" any public or third-party system.
 
 Do not paste this exercise onto a public clinic, employer tracker, or live hospital portal "to see what happens."
 

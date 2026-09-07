@@ -7,7 +7,7 @@
 
 “We rate-limit at the edge” is not this lesson. A map someone else can test names **the person**, **the window**, and **the cap**.
 
-`allow(n_calls)` with cap 3 is local. No live traffic.
+`allow(n_calls)` with cap 3 — no live traffic.
 
 > A resource account is a count you can test. The fourth export in the lab window is denied. The first three may be allowed.
 

@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `can_select` check. It does not open PostgreSQL, a cloud database, or a classmate’s replica. The failure is already in the object: every role can read every company. That is a **failed rule**, not a topology drawing.
+The practice is not a website you attack. `can_select` does not open PostgreSQL, a cloud database, or a classmate’s replica. Every role can read every company. That is a **failed rule**, not a topology drawing.
 
 > The runtime `app` role bound as company `tB` must not `SELECT` a row whose company is `tA`. Architecture is a second check, not a substitute for who-is-allowed.
 

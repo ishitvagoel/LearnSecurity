@@ -7,7 +7,7 @@
 
 “The phone is sandboxed” is not this lesson. A map someone else can test names **which cell the server still owns**.
 
-`allow_export(client_claims, server_attest)` is local. Android and Kotlin first. No live phones.
+`allow_export(client_claims, server_attest)` — Android and Kotlin first. No live phones.
 
 ## Picture: every 1.1 rule has an owner
 

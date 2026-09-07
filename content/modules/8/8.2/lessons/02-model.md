@@ -7,7 +7,7 @@
 
 “We use EncryptedSharedPreferences” is not this lesson. A map someone else can test names **each store and whether it can hold a body**.
 
-`save_note` / `plaintext_on_disk` is local. No live phones.
+`save_note` / `plaintext_on_disk` — no live phones.
 
 ## Picture: many sinks, one body
 

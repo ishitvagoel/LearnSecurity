@@ -7,7 +7,7 @@
 
 “We delete the user” is not this lesson. A map someone else can test names **every copy of the body** and **who may keep an exception**.
 
-`NOTES` / `ANALYTICS` / `SEARCH` is local. User `alice`. No live warehouse.
+`NOTES` / `ANALYTICS` / `SEARCH` — user `alice`. No live warehouse.
 
 > After `delete_account("alice")`, `body_retained("alice")` must be None and `search_retained("alice")` must be None. If a copy is missing from the map, leftover retention appears.
 

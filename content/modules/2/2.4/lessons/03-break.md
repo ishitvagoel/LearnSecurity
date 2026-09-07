@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `share_note` list. It does not open a browser, talk to a payment network, or race a public API. The failure is already in the object: every call appends a row and ignores the key. That is a **failed rule**, not a clumsy click.
+The practice is not a website you attack. `share_note` does not open a browser, talk to a payment network, or race a public API. Every call appends a row and ignores the key. That is a **failed rule**, not a clumsy click.
 
 > Two `share_note` calls with the same idempotency key must produce one share. A retry is a second attempt, not a second grant.
 

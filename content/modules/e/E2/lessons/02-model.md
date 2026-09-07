@@ -7,7 +7,7 @@
 
 “We set a content-security policy” is not this lesson. A map someone else can test names **the enforcing header vs Report-Only, encoding (6.2), and whether the edge can strip it**.
 
-`isolation_enforced(headers)` is local. No live pages.
+`isolation_enforced(headers)` — no live pages.
 
 ## Picture: three layers
 

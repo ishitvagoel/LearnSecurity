@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a registry you attack. `install_ok(expected_hash, got_hash)` is a tiny Python helper that returns true or false. The failure is already in the function: every pair is allowed. That is a **failed rule**, not a missing package name.
+The practice is not a registry you attack. `install_ok(expected_hash, got_hash)` returns true or false: every pair is allowed. That is a **failed rule**, not a missing package name.
 
 > A digest mismatch must not install. If `install_ok("aaa", "bbb")` is true, the bytes you will run have failed as a security control.
 
 ## Where you may practice
 
-Stay inside `labs/10.2/10.2-lab` — in-process `install_ok(expected_hash, got_hash)`. The digests are the synthetic strings `aaa` and `bbb`. No live registries, no public indexes, no clinic clusters. Do not fetch a live package.
+Stay inside `labs/10.2/10.2-lab`. The digests are the synthetic strings `aaa` and `bbb`. No live registries, no public indexes, no clinic clusters. Do not fetch a live package.
 
 Do not publish, typosquat, or pull a real tarball “to see what happens.” Do not paste this exercise onto a public registry, employer CI, or live clinic.
 

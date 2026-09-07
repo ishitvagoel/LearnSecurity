@@ -7,7 +7,7 @@
 
 “We only allow HTTPS” is not this lesson. A map someone else can test names **scheme**, **host**, and **destinations that must deny**.
 
-`allowed(url)` is local. No live fetches.
+`allowed(url)` — no live fetches.
 
 > Parse the URL. Require https. Require the hostname in a small allow-list. Link-local metadata and loopback must deny.
 

@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a cluster you attack. `pod_ok` is a tiny Python helper that returns true for every role. The failure is already in the function: it never looks at the role. That always-true admission is a **failed rule**, not a paperwork nit.
+The practice is not a cluster you attack. `pod_ok` returns true for every role: it never looks at the role. That always-true admission is a **failed rule**, not a paperwork nit.
 
 > An app pod must not run as cluster-admin. If `pod_ok("cluster-admin")` returns true, admission has failed as a security control.
 
 ## Where you may practice
 
-Stay inside `labs/10.3/10.3-lab` — in-process `pod_ok(role)`. The roles are synthetic strings `cluster-admin` / `app`. Do **not** apply ClusterRoleBindings to a real cluster, cloud account, or shared lab Kubernetes as the exercise.
+Stay inside `labs/10.3/10.3-lab`. The roles are synthetic strings `cluster-admin` / `app`. Do **not** apply ClusterRoleBindings to a real cluster, cloud account, or shared lab Kubernetes as the exercise.
 
 Do not paste this exercise onto a public cluster, employer account, or live hospital Kubernetes "to see what happens."
 

@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. `accept` is a tiny Python helper. The failure is already in the function: `accept` returns true and never marks the token used. A second true is a **failed rule**, not a retry nit.
+The practice is not a website you attack. `accept` returns true and never marks the token used. A second true is a **failed rule**, not a retry nit.
 
 > `accept("t1")` may be true once. The second `accept("t1")` must be false. If it is still true, an invite token was accepted twice.
 
 ## Where you may practice
 
-Stay inside `labs/6.6/6.6-lab` — in-process `accept` with synthetic tokens `t1` / `t2`. It does not send mail, open two hosts, or touch an employer invite link.
+Stay inside `labs/6.6/6.6-lab`. Synthetic tokens `t1` / `t2`. It does not send mail, open two hosts, or touch an employer invite link.
 
 Do not probe public invite links. Do not click a live mail link. Do not build a race harness. You do not need two processes. You must not.
 

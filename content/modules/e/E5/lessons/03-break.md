@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. `tenant_for(session, body)` is a tiny Python helper. The failure is already in the function: it prefers `body["tenant"]` when that key is present. A body-chosen company is **a failed rule**, not an attack on a public product.
+The practice is not a website you attack. `tenant_for(session, body)` prefers `body["tenant"]` when that key is present. A body-chosen company is **a failed rule**, not an attack on a public product.
 
 > The JSON body is not the tenant. `tenant_for({"tenant": "A"}, {"tenant": "B"})` must return `"A"`. If it returns `"B"`, body tenant overrides session.
 
 ## Where you may practice
 
-Stay inside `labs/E5/e5-lab`. The check is an in-process `tenant_for(session, body)`. Fake companies A and B. It does not open a network. Do not send `org_id` to a live product, a clinic company, or a classmate preview.
+Stay inside `labs/E5/e5-lab`. The check is `tenant_for(session, body)`. Fake companies A and B. It does not open a network. Do not send `org_id` to a live product, a clinic company, or a classmate preview.
 
 What must not happen: the JSON body switches the bound company. `tenant_for({"tenant": "A"}, {"tenant": "B"})` returns `"B"`.
 

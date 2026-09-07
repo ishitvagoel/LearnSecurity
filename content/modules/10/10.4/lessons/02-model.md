@@ -7,7 +7,7 @@
 
 “We set `NODE_ENV=production`” is not this lesson. A drawing someone else can test names **env, debug, who can edit compose, the admin bind address, whether a migration fails open, and rollback**.
 
-`boot_ok(env, debug)` is local. No live production hosts.
+`boot_ok(env, debug)` — no live production hosts.
 
 > For boot, the rule is deny when `env` is `"prod"` and `debug` is true. Production without debug may boot. Evidence that the deny is false: `boot_ok("prod", True)` returns true.
 

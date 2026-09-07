@@ -7,7 +7,7 @@
 
 “We have a unique index” is not this lesson. A map someone else can test names **states**, **the consume step**, and **fail-closed on store errors**.
 
-`accept(token)` / `reset()` is local. No live mailer.
+`accept(token)` / `reset()` — no live mailer.
 
 > `accept('t1')` may be true once. The second `accept('t1')` must be false. If consume is missing from the map, a second join appears.
 

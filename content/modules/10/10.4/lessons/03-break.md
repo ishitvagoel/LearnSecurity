@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. `boot_ok(env, debug)` is a tiny Python helper that returns true for every pair. The failure is already in the function: it never looks at `env` or `debug`. That always-true boot is a **failed rule**, not a missing compose comment.
+The practice is not a website you attack. `boot_ok(env, debug)` returns true for every pair: it never looks at `env` or `debug`. That always-true boot is a **failed rule**, not a missing compose comment.
 
 > Production must not boot with debug on. If `boot_ok("prod", True)` returns true, the boot gate has failed as a security control.
 
 ## Where you may practice
 
-Stay inside `labs/10.4/10.4-lab` — in-process `boot_ok(env, debug)`. The flags are synthetic strings and booleans. Do **not** turn debug on a real production host, staging SaaS, or someone else’s compose “to see what happens.”
+Stay inside `labs/10.4/10.4-lab`. The flags are synthetic strings and booleans. Do **not** turn debug on a real production host, staging SaaS, or someone else’s compose “to see what happens.”
 
 Do not paste this exercise onto a public clinic, employer cluster, or live hospital portal.
 

@@ -7,7 +7,7 @@
 
 “We use OAuth” is not this page. A reviewable model names **authorization server, client, resource server, audience, and which secrets bind the transaction**.
 
-`accept_token` is local. Expected audience `securecollab-api` (the notes app’s API name in this practice). No live authorization server.
+`accept_token` — Expected audience `securecollab-api` (the notes app’s API name in this practice). No live authorization server.
 
 ## Picture: code flow vs this practice’s one check
 

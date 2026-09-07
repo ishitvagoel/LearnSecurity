@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a public repo you scan. `ship_ok` is a tiny Python helper that takes findings and a map. The failure is already in the function: it returns true for every pair. That true is a **failed rule**, not a green tile.
+The practice is not a public repo you scan. `ship_ok` takes findings and a map: it returns true for every pair. That true is a **failed rule**, not a green tile.
 
 > An unmapped HIGH must not ship. If `ship_ok([{"id": "F1", "sev": "HIGH"}], {})` returns true, the ship gate has failed as a security control.
 
 ## Where you may practice
 
-Stay inside `labs/9.4/9.4-lab` — in-process `ship_ok(findings, mappings)`. The finding id is the synthetic string `F1`. No live GitHub Advanced Security, no scanning other people’s repositories, no Dependabot against a public clinic.
+Stay inside `labs/9.4/9.4-lab`. The finding id is the synthetic string `F1`. No live GitHub Advanced Security, no scanning other people’s repositories, no Dependabot against a public clinic.
 
 Do not paste this exercise onto a public GitHub org, employer dashboard, or live clinic “to see what the scanner finds.”
 

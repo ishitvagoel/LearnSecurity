@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a phone you attack. `open_link(query)` is a tiny Python helper / `current_user()`. The failure is already in the function: extras become the user, so `as=admin` switches the session. A deep link `as=` switching the signed-in user is **a failed rule**, not an attack on a public app.
+The practice is not a phone you attack. `open_link(query)` / `current_user()`: extras become the user, so `as=admin` switches the session. A deep link `as=` switching the signed-in user is **a failed rule**, not an attack on a public app.
 
 > After `open_link({"as": "admin"})`, `current_user()` must still be `"alice"`. The Intent is untrusted input.
 
 ## Where you may practice
 
-Stay inside `labs/8.3/8.3-lab`. The helper is an in-process `open_link(query)` / `current_user()`. Fake query dicts (`as`, `note`). It does not open a network. Do not send Intents at a live app, sideload an attacker APK, or probe a public deep link.
+Stay inside `labs/8.3/8.3-lab`. The helper is `open_link(query)` / `current_user()`. Fake query dicts (`as`, `note`). It does not open a network. Do not send Intents at a live app, sideload an attacker APK, or probe a public deep link.
 
 Do not paste this exercise onto a public app, employer clinic, or live EHR.
 

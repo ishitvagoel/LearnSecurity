@@ -7,7 +7,7 @@
 
 “We check authorization” is not this page. A table someone else can test names **people, companies, notes, actions, and every path** that can release a body.
 
-`GRANTS` / `NOTES` / `USERS` is local. People `alice`, `bob`, `carol`, `eve`. No live identity product.
+`GRANTS` / `NOTES` / `USERS` — People `alice`, `bob`, `carol`, `eve`. No live identity product.
 
 ## Picture: four shapes, one cell
 

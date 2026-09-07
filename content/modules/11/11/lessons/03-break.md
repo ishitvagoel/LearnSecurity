@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. `revoke` is a tiny Python helper that does nothing and a `read` that always returns the body. The failure is already in the functions: revoke never drops the grant, and read never asks. That no-op revoke is a **failed rule**, not a paperwork nit.
+The practice is not a website you attack. `revoke` does nothing and a `read` that always returns the body: revoke never drops the grant, and read never asks. That no-op revoke is a **failed rule**, not a paperwork nit.
 
 > After `revoke("n1", "B")`, `read("n1", "B")` must be None. If it still returns the body, a revoked share still reads the note.
 
 ## Where you may practice
 
-Stay inside `labs/11/11-lab`. The practice is in-process `revoke` / `read` over synthetic people `A` / `B` and note `n1`. Do **not** revoke, read, or scrape a real notes app, clinic portal, or shared tenant as the exercise.
+Stay inside `labs/11/11-lab`. The practice is `revoke` / `read` over synthetic people `A` / `B` and note `n1`. Do **not** revoke, read, or scrape a real notes app, clinic portal, or shared tenant as the exercise.
 
 Do not paste this exercise onto a public clinic, employer dashboard, or live hospital portal “to see what happens.”
 

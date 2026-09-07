@@ -7,7 +7,7 @@
 
 “R8 is on” is not this lesson. A map someone else can test names **build type, client id, and which API it may call**.
 
-`api_allowed(build_type, attest)` is local. No live stores.
+`api_allowed(build_type, attest)` — no live stores.
 
 ## Picture: server owns the channel
 

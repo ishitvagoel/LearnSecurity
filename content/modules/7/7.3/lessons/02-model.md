@@ -7,7 +7,7 @@
 
 “TLS terminates at the edge” is not this lesson. A map someone else can test names **raw body**, **MAC**, **secret**, and **what happens on a missing sig**.
 
-`accept(sig, body, secret)` with disposable `lab-secret` is local. No live providers.
+`accept(sig, body, secret)` with disposable `lab-secret` — no live providers.
 
 > HMAC over the raw body bytes. Compare with `compare_digest`. An empty signature must deny. Parsed JSON is a second document.
 

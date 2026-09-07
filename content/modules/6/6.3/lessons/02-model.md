@@ -7,7 +7,7 @@
 
 “SameSite is on” is not this page. A map someone else can test names **who may POST share, with which cookie, origin, and token**.
 
-`allow_share(origin, expected, token, session_cookie)` is local. No live browsers.
+`allow_share(origin, expected, token, session_cookie)` — no live browsers.
 
 ## Picture: three inputs, one decision
 

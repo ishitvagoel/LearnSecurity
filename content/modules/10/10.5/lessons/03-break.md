@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. `close_incident` is a tiny Python helper that returns true for every dict. The failure is already in the function: it never looks at recovery or logs. That always-true close is a **failed rule**, not a paperwork nit.
+The practice is not a website you attack. `close_incident` returns true for every dict: it never looks at recovery or logs. That always-true close is a **failed rule**, not a paperwork nit.
 
 > An incident must not close without recovery done, and logs must not hold a note body. If `close_incident({"recovery": "todo", "logs": "ok"})` returns true, the close gate has failed as a security control. If `close_incident({"recovery": "done", "logs": "note_body leaked"})` returns true, the log sink has failed the same way.
 
 ## Where you may practice
 
-Stay inside `labs/10.5/10.5-lab` — in-process `close_incident(inc)`. The incident is a synthetic dict. Do **not** close, page, or query a real SIEM, paging product, or clinic incident system as the exercise.
+Stay inside `labs/10.5/10.5-lab`. The incident is a synthetic dict. Do **not** close, page, or query a real SIEM, paging product, or clinic incident system as the exercise.
 
 Do not paste this exercise onto a public clinic, employer dashboard, or live hospital portal “to see what happens.”
 

@@ -7,7 +7,7 @@
 
 “We published OpenAPI” is not this lesson. A map someone else can test names **the action, the writable keys, and every protocol that binds a document**.
 
-`apply(user, body)` with `ALLOWED = {display_name}` is local. No live APIs.
+`apply(user, body)` with `ALLOWED = {display_name}` — no live APIs.
 
 ## Picture: three binders, one contract
 

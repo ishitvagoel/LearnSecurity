@@ -7,7 +7,7 @@
 
 “We use an ORM” is not this lesson. A map someone else can test names **what is SQL text**, **what is a bound parameter**, and **which role runs it**.
 
-`fetch_sql(tenant, note_id)` and `is_bound` is local. No live PostgreSQL.
+`fetch_sql(tenant, note_id)` and `is_bound` — no live PostgreSQL.
 
 > Bind tenant and note id as parameters. The parser must receive a fixed program. Company and id travel beside it.
 

@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. `merge_ok(pr)` is a tiny Python helper that returns true or false. The failure is already in the function: every dict is allowed to merge. That is a **failed rule**, not a missing GitHub setting.
+The practice is not a website you attack. `merge_ok(pr)` returns true or false: every dict is allowed to merge. That is a **failed rule**, not a missing GitHub setting.
 
 > An empty change must not merge. If `merge_ok({})` is true, the process evidence you show before merge has failed as a security control.
 
 ## Where you may practice
 
-Stay inside `labs/10.1/10.1-lab` — in-process `merge_ok(pr)`. The change is a synthetic dict. No live GitHub orgs, no employer repos, no clinic systems. Do not send the dict anywhere.
+Stay inside `labs/10.1/10.1-lab`. The change is a synthetic dict. No live GitHub orgs, no employer repos, no clinic systems. Do not send the dict anywhere.
 
 Do not turn off branch protection on a real org “to see what happens.” Do not paste this exercise onto a public GitHub org, employer repo, or live clinic.
 

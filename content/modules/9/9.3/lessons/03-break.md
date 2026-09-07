@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. `is_security_test` is a tiny Python helper that returns a boolean. The failure is already in the function: it returns true when `status_asserted` is set. That count is a **failed rule**, not a missing checklist tick.
+The practice is not a website you attack. `is_security_test` returns a boolean: it returns true when `status_asserted` is set. That count is a **failed rule**, not a missing checklist tick.
 
 > HTTP 200-only must not count as a security test. If `is_security_test({"status_asserted": True})` is true, the suite has failed as a security control.
 
 ## Where you may practice
 
-Stay inside `labs/9.3/9.3-lab` — in-process `is_security_test(t)`. Synthetic test descriptors. No live apps, no fuzz campaigns against other hosts. Do not send the descriptors anywhere.
+Stay inside `labs/9.3/9.3-lab`. Synthetic test descriptors. No live apps, no fuzz campaigns against other hosts. Do not send the descriptors anywhere.
 
 Do not paste this exercise onto a public host, employer clinic, or live patient system. You do not need HTTP. You must not fuzz a public host.
 

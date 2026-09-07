@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a model you attack. `run_tool` is a tiny Python helper that returns `ran {name}` for every name. The failure is already in the function: it never looks at the name. That always-run call is a **failed rule**, not a paperwork nit.
+The practice is not a model you attack. `run_tool` returns `ran {name}` for every name: it never looks at the name. That always-run call is a **failed rule**, not a paperwork nit.
 
 > An agent must not run `exec_sql` because the model asked. If `run_tool("exec_sql", {})` returns a ran-string, the runtime has failed as a security control.
 
 ## Where you may practice
 
-Stay inside `labs/E1/e1-lab` — in-process `run_tool(name, args)`. The names are synthetic strings `exec_sql` / `search_notes`. Do **not** send prompts to a public language model, production agent, or clinic summarizer as the exercise.
+Stay inside `labs/E1/e1-lab`. The names are synthetic strings `exec_sql` / `search_notes`. Do **not** send prompts to a public language model, production agent, or clinic summarizer as the exercise.
 
 Do not paste this exercise onto a public API, employer agent, or live hospital summarizer "to see what happens."
 

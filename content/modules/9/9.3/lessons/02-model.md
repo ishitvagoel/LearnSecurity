@@ -7,7 +7,7 @@
 
 “We ticked a testing-guide row” is not this lesson. A drawing someone else can test names **what must not happen, who is acting, and which object**.
 
-`is_security_test(t)` is local. No live scanners.
+`is_security_test(t)` — no live scanners.
 
 > For a row with only `status_asserted`, the rule is deny. A named `forbidden_outcome` may count. Evidence that the deny is false: `is_security_test({"status_asserted": True})` is true.
 

@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a warehouse you attack. `delete_account` is a tiny Python helper plus `body_retained` / `search_retained`. The failure is already in the functions: delete pops the notes map and leaves analytics. That leftover is a **failed rule**, not a cleanup nit.
+The practice is not a warehouse you attack. `delete_account` plus `body_retained` / `search_retained`: delete pops the notes map and leaves analytics. That leftover is a **failed rule**, not a cleanup nit.
 
 > After `delete_account("alice")`, `body_retained("alice")` must be None. If it still returns `"secret"`, analytics still holds the note.
 
 ## Where you may practice
 
-Stay inside `labs/5.1/5.1-lab`. The maps are in-process: `delete_account` plus `body_retained` / `search_retained`. The user is the synthetic name `alice` and the body is `secret`. It does not open a database, object storage, or a warehouse.
+Stay inside `labs/5.1/5.1-lab`. The files are `delete_account` plus `body_retained` / `search_retained`. The user is the synthetic name `alice` and the body is `secret`. It does not open a database, object storage, or a warehouse.
 
 Do not dump a live analytics store. Do not dump an employer warehouse. Do not dump a classmate preview. Do not query a warehouse “to see what happens.”
 

@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python helper named `phishing_resistant`. The failure is already in the function: any enrolled method returns true, and origin is ignored. A password at a lookalike origin counted as **resistant** is a failed rule, not an exploit recipe.
+The practice is not a website you attack. `phishing_resistant` treats any enrolled method as true, and origin is ignored. A password at a lookalike origin counted as **resistant** is a failed rule, not an exploit recipe.
 
 > A password or OTP at a lookalike origin is not phishing-resistant. WebAuthn at the wrong origin must fail.
 
 ## Where you may practice
 
-Stay inside `labs/4.2/4.2-lab/`. No other hosts. The helper is in-process. Synthetic origins `https://evil.example` and `https://app.securecollab.test`. It does not open a browser or an authenticator.
+Stay inside `labs/4.2/4.2-lab/`. No other hosts. Synthetic origins `https://evil.example` and `https://app.securecollab.test`. It does not open a browser or an authenticator.
 
 Do not load a lookalike login page, a public phishing kit, an employer SSO, or a classmate preview as this exercise.
 

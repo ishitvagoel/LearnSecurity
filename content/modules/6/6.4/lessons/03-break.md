@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `resolve`. It does not open a live upload folder, an employer imaging store, or a classmate preview. The failure is already in the object: the name is joined onto the folder and returned as a string, with no canonicalize-and-prefix. That is a **failed rule**, not a clumsy filename.
+The practice is not a website you attack. `resolve` does not open a live upload folder, an employer imaging store, or a classmate preview. The name is joined onto the folder and returned as a string, with no canonicalize-and-prefix. That is a **failed rule**, not a clumsy filename.
 
 > After join and canonicalize, `resolve` must still be `/tmp/sc-lab` or a child. A filename is data, not a filesystem object.
 

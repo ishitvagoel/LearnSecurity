@@ -7,7 +7,7 @@
 
 “Paging acked” is not this lesson. A drawing someone else can test names **recovery evidence, the log inventory, who can close, and whether note bodies can reach the SIEM**.
 
-`close_incident({recovery, logs})` is local. No live SIEM.
+`close_incident({recovery, logs})` — no live SIEM.
 
 > For close, the rule is deny when recovery is still todo, and deny when logs contain `note_body`. Honest recovery plus safe logs may close. Evidence that the deny is false: `close_incident({"recovery": "todo", "logs": "ok"})` returns true.
 

@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process model of `document.cookie`. It does not open a browser, load a page, or talk to a network. The failure is already in the reader: the HttpOnly flag is present and ignored. That is a **failed rule**, not an exploit recipe.
+The practice is not a website you attack. `document.cookie` does not open a browser, load a page, or talk to a network. The HttpOnly flag is present and ignored. That is a **failed rule**, not an exploit recipe.
 
 > Script in the origin cannot read `sc_session` when HttpOnly is set.
 

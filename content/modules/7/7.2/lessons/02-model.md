@@ -7,7 +7,7 @@
 
 “Object authz is on” is not this page. A table someone else can test names **role, field, and every serializer**.
 
-`resolve(role, field)` is local. No live GraphQL.
+`resolve(role, field)` — no live GraphQL.
 
 ## Picture: three grains
 

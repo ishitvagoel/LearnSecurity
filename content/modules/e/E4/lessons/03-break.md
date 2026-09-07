@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `copy_into(bufsize, src, declared_len)`. It does not compile a C overflow, spray a heap, or fuzz a third-party binary. The failure is already in the object: the copy uses `declared_len` plus 8. That is a **failed rule**, not extra slack you needed.
+The practice is not a website you attack. `copy_into(bufsize, src, declared_len)` does not compile a C overflow, spray a heap, or fuzz a third-party binary. The copy uses `declared_len` plus 8. That is a **failed rule**, not extra slack you needed.
 
 > `len(copy_into(4, b"abcdefgh", 4))` must be ≤ 4. A short honest copy may fit. Checking every path here means the copy is bounded by destination size.
 

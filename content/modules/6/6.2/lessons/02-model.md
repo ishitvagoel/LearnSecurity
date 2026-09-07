@@ -7,7 +7,7 @@
 
 “We turned on a content-security policy” is not this lesson. A map someone else can test names **the sink, the context, and what encoding applies**.
 
-`render(body)` wrapping a `<p>` text node is local. No live page. No real browser.
+`render(body)` wrapping a `<p>` text node — no live page. No real browser.
 
 ## Picture: one sink, one context in this practice
 

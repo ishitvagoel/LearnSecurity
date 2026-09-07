@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a phone you image. `save_note` is a tiny Python helper / `plaintext_on_disk`. The failure is already in the function: it stores the body as-is, so after `save_note("secret")` the disk still holds `'secret'`. A **note body cached as plaintext** is **a failed rule**, not an attack on a personal phone.
+The practice is not a phone you image. `save_note` / `plaintext_on_disk`. It stores the body as-is, so after `save_note("secret")` the disk still holds `'secret'`. A **note body cached as plaintext** is **a failed rule**, not an attack on a personal phone.
 
 > After `save_note("secret")`, `plaintext_on_disk()` must be false. A private app folder is not encryption.
 
 ## Where you may practice
 
-Stay inside `labs/8.2/8.2-lab`. The helper is an in-process `save_note` / `plaintext_on_disk`. Fake body `'secret'`. It does not open a network. Do not image a live phone, dump a personal backup, or run `adb backup` on a hospital tablet.
+Stay inside `labs/8.2/8.2-lab`. The helper is `save_note` / `plaintext_on_disk`. Fake body `'secret'`. It does not open a network. Do not image a live phone, dump a personal backup, or run `adb backup` on a hospital tablet.
 
 Do not paste this exercise onto a public device, employer clinic, or live EHR tablet.
 
