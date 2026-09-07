@@ -42,7 +42,7 @@ If you are unsure whether restore ran, keep the ticket open. A green SIEM does n
 
 - A paging product.
 - Time-to-detect.
-- A known-exploited listing.
+- Recover because the listing says patched.
 - A “incident closed” check-in.
 - Untested backups.
 - A SIEM vendor.

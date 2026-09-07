@@ -39,10 +39,10 @@ When you are unsure whether the record is complete, deny. A meeting that happene
 
 ## What this is not
 
-- A process-maturity score.
+- A maturity dashboard as the exception register.
 - An industry “govern” sticker.
 - An unverified pledge.
-- An assurance-gate stamp.
+- An exception check-in stamp.
 - Extra advanced documentation of a dangerous function.
 - A procurement questionnaire.
 

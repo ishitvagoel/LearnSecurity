@@ -37,7 +37,7 @@ Also reject: live SQL attacks; closing findings without re-running `test_query_i
 - ORM means no injection
 - A later row-level rule replaces parameterization
 - A denylist of quotes is complete mediation
-- A scanner finding is the rule
+- A SQL-injection finding is the bound tuple
 - HTTP 500 absence means the query was bound
 
 ## Use it somewhere new

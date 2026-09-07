@@ -43,7 +43,7 @@ If you cannot reach a listed copy, the answer is “delete is not complete.” A
 - `DELETE FROM notes` only.
 - Encrypted warehouse you still keep.
 - Backup purge (later).
-- A phone's offline cache (later).
+- A phone cache still holding the deleted chart (later).
 - Anonymize-id-keep-body.
 - A contract signature.
 - A scheduled warehouse job as a substitute for this call.

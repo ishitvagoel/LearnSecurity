@@ -73,7 +73,7 @@ Appointment card plus notes. Partner CSV export.
 
 ## What can still go wrong
 
-Backups still contain the row (later). A phone's offline cache (later). Tickets with paste.
+Backups still contain the row (later). A phone cache still holding the deleted chart (later). Tickets with paste.
 
 ## What this page is not doing
 

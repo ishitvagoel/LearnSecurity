@@ -38,7 +38,7 @@ If you are unsure whether the retest hit the same isolation check, keep the find
 ## What this is not
 
 - A severity score.
-- A known-exploited listing.
+- Close because the listing says exploited.
 - A ticket marked Done.
 - A PDF.
 - A filed-report stamp treated as done.

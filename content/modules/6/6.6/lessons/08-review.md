@@ -39,7 +39,7 @@ Also reject: live race harnesses; closing findings without re-running `test_invi
 - 400 errors are fail-safe
 - Email links prove who received them
 - Races are only performance
-- A famous-bugs list is the rule
+- A CWE name consumes the invite
 - A unique-index screenshot is consume
 
 ## Use it somewhere new

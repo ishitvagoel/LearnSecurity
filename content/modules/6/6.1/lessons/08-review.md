@@ -36,7 +36,7 @@ Also reject: live command execution; closing findings without re-running `test_d
 
 - Injection is one scanner name
 - subprocess wrappers auto-escape shells
-- A scanner finding is the rule
+- A command-injection finding is argv-not-shell
 - Internal users make a shell safe
 - Executing argv is how you test this rule
 

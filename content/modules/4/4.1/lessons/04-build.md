@@ -43,7 +43,7 @@ If you cannot ask the session store, the answer is no. A dashboard still showing
 - `DELETE FROM users` without session purge.
 - A token with `exp` in 30 days.
 - Worker `user_id` (later).
-- A phone's offline cache (later).
+- A phone cache still holding the session (later).
 - Single-sign-on logout as a product name.
 - SessionMiddleware defaults.
 

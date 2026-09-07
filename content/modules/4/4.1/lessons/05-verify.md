@@ -44,7 +44,7 @@ Map the test to the deleted-alice × leftover-session row you wrote. If the brok
 - Refresh-token family (later)
 - Worker identity (later)
 - Backup leftover (later)
-- A phone's offline cache (later)
+- A phone cache still holding the session (later)
 - Revoking a stolen login factor (advanced; not this check)
 
 ## Use it somewhere new

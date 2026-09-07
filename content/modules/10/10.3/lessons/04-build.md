@@ -42,7 +42,7 @@ By default, if you are unsure whether the role is a namespaced app role, deny. A
 - A managed-cluster identity sticker.
 - A CIS score treated as done.
 - Break-glass (leftover, later elective).
-- FastAPI defaults.
+- FastAPI defaults as the pod Role.
 - A CIS benchmark.
 
 ## What the tool cannot do

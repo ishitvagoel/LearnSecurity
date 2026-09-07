@@ -39,11 +39,11 @@ When you are unsure whether a threat-model id is present, the change does not me
 
 - GitHub branch protection.
 - CODEOWNERS.
-- A process-maturity score.
+- A maturity score as the merge check.
 - An unverified “secure by design” page treated as a product.
 - Gate 10 or M4 complete.
 - A threat-model quality review.
-- FastAPI defaults.
+- FastAPI defaults as the threat-model id.
 
 ## What the tool cannot do
 
