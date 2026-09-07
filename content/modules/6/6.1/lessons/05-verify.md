@@ -49,11 +49,6 @@ Honest argv shape must pass on repaired. `sh -c` must fail on broken. If the bro
 
 ## Practice
 
-```text
-python3 -m pytest labs/6.1/6.1-lab/tests --impl vulnerable
-python3 -m pytest labs/6.1/6.1-lab/tests --impl fixed
-```
-
 Do not treat a grep for `shell=False` in a comment as the check. Call `argv_for_list`.
 
 ## Use it somewhere new

@@ -49,11 +49,6 @@ Honest diffs without eval may pass on both implementations. That does not excuse
 
 ## Practice
 
-```text
-python3 -m pytest labs/9.2/9.2-lab/tests --impl vulnerable
-python3 -m pytest labs/9.2/9.2-lab/tests --impl fixed
-```
-
 Do not treat a grep for `eval` in a policy PDF as the check. Call `review_ok("x = eval(user)")`.
 
 ## Use it somewhere new

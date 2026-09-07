@@ -47,13 +47,6 @@ Map the test to the deleted-alice × leftover-session row you wrote. If the brok
 - A phone's offline cache (later)
 - Revoking a stolen login factor (advanced; not this check)
 
-## Practice
-
-```text
-python3 -m pytest labs/4.1/4.1-lab/tests --impl vulnerable
-python3 -m pytest labs/4.1/4.1-lab/tests --impl fixed
-```
-
 ## Use it somewhere new
 
 Clinic clinician. Asserting HTTP 200 is not lifecycle evidence. Do not run a test that logs into a live chart system.

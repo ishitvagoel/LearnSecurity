@@ -50,11 +50,6 @@ Searching for a maturity name in a slide without calling `accept_exception({"own
 
 ## Practice
 
-```text
-python3 -m pytest labs/E6/e6-lab/tests --impl vulnerable
-python3 -m pytest labs/E6/e6-lab/tests --impl fixed
-```
-
 Do not treat a grep for a maturity name as the check. Call `accept_exception({"owner": "", "review_by": None})`.
 
 ## Use it somewhere new

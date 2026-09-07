@@ -41,11 +41,6 @@ Honest-path tests may pass on both implementations. That does not excuse the den
 
 ## Practice
 
-```text
-python3 -m pytest labs/4.4/4.4-lab/tests --impl vulnerable
-python3 -m pytest labs/4.4/4.4-lab/tests --impl fixed
-```
-
 Do not treat a grep for `admin` in a role list as the check. Call `can_read("bob", "n2")`.
 
 ## Use it somewhere new

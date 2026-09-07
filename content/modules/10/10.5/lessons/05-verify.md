@@ -52,11 +52,6 @@ Searching for `PagerDuty` in a runbook without calling `close_incident({"recover
 
 ## Practice
 
-```text
-python3 -m pytest labs/10.5/10.5-lab/tests --impl vulnerable
-python3 -m pytest labs/10.5/10.5-lab/tests --impl fixed
-```
-
 Do not treat a grep for a paging product name as the check. Call `close_incident({"recovery": "todo", "logs": "ok"})`.
 
 ## Use it somewhere new

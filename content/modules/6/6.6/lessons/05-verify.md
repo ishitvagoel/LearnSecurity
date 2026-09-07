@@ -49,11 +49,6 @@ Map the test to the second-`t1` deny row you wrote. If the broken files do not f
 
 ## Practice
 
-```text
-python3 -m pytest labs/6.6/6.6-lab/tests --impl vulnerable
-python3 -m pytest labs/6.6/6.6-lab/tests --impl fixed
-```
-
 Do not treat a grep for `UNIQUE` in a migration as the check. Call `accept("t1")` twice.
 
 ## Use it somewhere new

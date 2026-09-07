@@ -49,11 +49,6 @@ Searching for `AUTHZ-1` in a spreadsheet without calling `covered(..., [{"assert
 
 ## Practice
 
-```text
-python3 -m pytest labs/9.1/9.1-lab/tests --impl vulnerable
-python3 -m pytest labs/9.1/9.1-lab/tests --impl fixed
-```
-
 Do not treat a grep for `AUTHZ-1` in a spreadsheet as the check. Call `covered(..., [{"asserts_isolation": False}])`.
 
 ## Use it somewhere new

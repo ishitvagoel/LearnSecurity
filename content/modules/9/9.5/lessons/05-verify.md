@@ -49,11 +49,6 @@ Searching for `Done` in a ticket tracker without calling `close_finding({"retest
 
 ## Practice
 
-```text
-python3 -m pytest labs/9.5/9.5-lab/tests --impl vulnerable
-python3 -m pytest labs/9.5/9.5-lab/tests --impl fixed
-```
-
 Do not treat a grep for `Done` in a ticket as the check. Call `close_finding({"retest": None})`.
 
 ## Use it somewhere new

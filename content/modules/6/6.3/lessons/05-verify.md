@@ -44,11 +44,6 @@ Honest same-origin-with-token may pass on both (broken files allow any cookie). 
 
 ## Practice
 
-```text
-python3 -m pytest labs/6.3/6.3-lab/tests --impl vulnerable
-python3 -m pytest labs/6.3/6.3-lab/tests --impl fixed
-```
-
 Do not treat a grep for `SameSite` in a cookie helper as the check. Call `allow_share` on a foreign origin.
 
 ## Use it somewhere new

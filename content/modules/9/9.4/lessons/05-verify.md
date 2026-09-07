@@ -49,11 +49,6 @@ Searching for a scanner name in a workflow without calling `ship_ok([HIGH], {})`
 
 ## Practice
 
-```text
-python3 -m pytest labs/9.4/9.4-lab/tests --impl vulnerable
-python3 -m pytest labs/9.4/9.4-lab/tests --impl fixed
-```
-
 Do not treat a grep for `codeql` in a workflow as the check. Call `ship_ok([HIGH], {})`.
 
 ## Use it somewhere new

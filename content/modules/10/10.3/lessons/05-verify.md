@@ -50,11 +50,6 @@ Searching for `namespace:` in a chart without calling `pod_ok("cluster-admin")` 
 
 ## Practice
 
-```text
-python3 -m pytest labs/10.3/10.3-lab/tests --impl vulnerable
-python3 -m pytest labs/10.3/10.3-lab/tests --impl fixed
-```
-
 Do not treat a grep for `namespace:` in a chart as the check. Call `pod_ok("cluster-admin")`.
 
 ## Use it somewhere new

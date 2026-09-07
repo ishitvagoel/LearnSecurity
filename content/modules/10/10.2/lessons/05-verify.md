@@ -49,11 +49,6 @@ Searching for `CycloneDX` in CI without calling `install_ok("aaa", "bbb")` is no
 
 ## Practice
 
-```text
-python3 -m pytest labs/10.2/10.2-lab/tests --impl vulnerable
-python3 -m pytest labs/10.2/10.2-lab/tests --impl fixed
-```
-
 Do not treat a grep for `CycloneDX` in CI as the check. Call `install_ok("aaa", "bbb")`.
 
 ## Use it somewhere new

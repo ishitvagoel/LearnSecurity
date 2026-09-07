@@ -49,13 +49,6 @@ Map the test to the body×log row you wrote. If the broken files do not fail, th
 - That ids in logs are acceptable (write that row separately)
 - A draft privacy-framework checklist
 
-## Practice
-
-```text
-python3 -m pytest labs/3.1/3.1-lab/tests --impl vulnerable
-python3 -m pytest labs/3.1/3.1-lab/tests --impl fixed
-```
-
 ## Use it somewhere new
 
 Clinic chart vs time. Asserting HTTP 200 is not classification evidence. Do not run a test that reads a live clinic log drain.

@@ -50,11 +50,6 @@ Searching for `NODE_ENV` in compose without calling `boot_ok("prod", True)` is n
 
 ## Practice
 
-```text
-python3 -m pytest labs/10.4/10.4-lab/tests --impl vulnerable
-python3 -m pytest labs/10.4/10.4-lab/tests --impl fixed
-```
-
 Do not treat a grep for `NODE_ENV` in compose as the check. Call `boot_ok("prod", True)`.
 
 ## Use it somewhere new

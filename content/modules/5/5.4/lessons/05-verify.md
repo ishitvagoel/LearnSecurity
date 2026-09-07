@@ -49,11 +49,6 @@ Map the test to the header-https × socket-http row you wrote. Honest socket-htt
 
 ## Practice
 
-```text
-python3 -m pytest labs/5.4/5.4-lab/tests --impl vulnerable
-python3 -m pytest labs/5.4/5.4-lab/tests --impl fixed
-```
-
 Do not treat a grep for `https` in a dashboard as the check. Call `channel_is_https` on the mismatch.
 
 ## Use it somewhere new

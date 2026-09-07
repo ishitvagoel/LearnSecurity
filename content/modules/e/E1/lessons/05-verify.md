@@ -49,11 +49,6 @@ Searching for `exec_sql` in a prompt file without calling `run_tool("exec_sql", 
 
 ## Practice
 
-```text
-python3 -m pytest labs/E1/e1-lab/tests --impl vulnerable
-python3 -m pytest labs/E1/e1-lab/tests --impl fixed
-```
-
 Do not treat a grep for `exec_sql` in a prompt file as the check. Call `run_tool("exec_sql", {})`.
 
 ## Use it somewhere new

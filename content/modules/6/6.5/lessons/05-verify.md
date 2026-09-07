@@ -49,11 +49,6 @@ Honest lab-host https may pass on both (broken files allow any https). That does
 
 ## Practice
 
-```text
-python3 -m pytest labs/6.5/6.5-lab/tests --impl vulnerable
-python3 -m pytest labs/6.5/6.5-lab/tests --impl fixed
-```
-
 Do not treat a grep for `https` in a prefix check as the check. Call `allowed` on the link-local string.
 
 ## Use it somewhere new

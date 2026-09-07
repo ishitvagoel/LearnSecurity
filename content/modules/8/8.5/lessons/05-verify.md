@@ -50,11 +50,6 @@ Searching for a crash product name in Gradle without calling `crash_report("secr
 
 ## Practice
 
-```text
-python3 -m pytest labs/8.5/8.5-lab/tests --impl vulnerable
-python3 -m pytest labs/8.5/8.5-lab/tests --impl fixed
-```
-
 Do not treat a grep for a crash product name as the check. Call `crash_report("secret")`.
 
 ## Use it somewhere new

@@ -48,11 +48,6 @@ Map the test to the deleted-alice × leftover-analytics row you wrote. If the br
 
 ## Practice
 
-```text
-python3 -m pytest labs/5.1/5.1-lab/tests --impl vulnerable
-python3 -m pytest labs/5.1/5.1-lab/tests --impl fixed
-```
-
 Do not treat a grep for `DELETE FROM notes` as the check. Call `body_retained`.
 
 ## Use it somewhere new

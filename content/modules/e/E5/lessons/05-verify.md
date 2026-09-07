@@ -42,11 +42,6 @@ Honest matching-company tests may pass on both implementations. That does not ex
 
 ## Practice
 
-```text
-python3 -m pytest labs/E5/e5-lab/tests --impl vulnerable
-python3 -m pytest labs/E5/e5-lab/tests --impl fixed
-```
-
 Do not treat a grep for `ENABLE ROW LEVEL SECURITY` as the check. Call `tenant_for({"tenant": "A"}, {"tenant": "B"})`.
 
 ## Use it somewhere new

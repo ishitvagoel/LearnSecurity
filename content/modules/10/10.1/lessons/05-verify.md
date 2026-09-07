@@ -49,11 +49,6 @@ Searching for `CODEOWNERS` in a repo without calling `merge_ok({})` is not evide
 
 ## Practice
 
-```text
-python3 -m pytest labs/10.1/10.1-lab/tests --impl vulnerable
-python3 -m pytest labs/10.1/10.1-lab/tests --impl fixed
-```
-
 Do not treat a grep for `CODEOWNERS` in a repo as the check. Call `merge_ok({})`.
 
 ## Use it somewhere new

@@ -50,11 +50,6 @@ Honest `service=worker-sc` may pass on both implementations. That does not excus
 
 ## Practice
 
-```text
-python3 -m pytest labs/7.4/7.4-lab/tests --impl vulnerable
-python3 -m pytest labs/7.4/7.4-lab/tests --impl fixed
-```
-
 Do not treat a grep for `worker-sc` in a YAML file as the check. Call `exporter({"user_session": "alice", "service": None})`.
 
 ## Use it somewhere new

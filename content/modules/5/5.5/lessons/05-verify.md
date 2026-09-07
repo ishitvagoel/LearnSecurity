@@ -49,11 +49,6 @@ Honest bound shape must pass on repaired. Concatenated `str` must fail on broken
 
 ## Practice
 
-```text
-python3 -m pytest labs/5.5/5.5-lab/tests --impl vulnerable
-python3 -m pytest labs/5.5/5.5-lab/tests --impl fixed
-```
-
 Do not treat a grep for `%s` inside a concatenated string as the check. Assert the tuple shape.
 
 ## Use it somewhere new

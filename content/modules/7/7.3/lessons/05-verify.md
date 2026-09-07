@@ -49,11 +49,6 @@ Honest matching signatures may pass on both implementations. That does not excus
 
 ## Practice
 
-```text
-python3 -m pytest labs/7.3/7.3-lab/tests --impl vulnerable
-python3 -m pytest labs/7.3/7.3-lab/tests --impl fixed
-```
-
 Do not treat a grep for `hmac` in source as the check. Call `accept("", "body", "lab-secret")`.
 
 ## Use it somewhere new

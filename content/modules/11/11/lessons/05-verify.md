@@ -49,11 +49,6 @@ Searching for `revoke` in a README without calling `read("n1", "B")` after `revo
 
 ## Practice
 
-```text
-python3 -m pytest labs/11/11-lab/tests --impl vulnerable
-python3 -m pytest labs/11/11-lab/tests --impl fixed
-```
-
 Do not treat a grep for `revoke` in a README as the check. Call `read("n1", "B")` after `revoke("n1", "B")`.
 
 ## Use it somewhere new

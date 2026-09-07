@@ -49,11 +49,6 @@ Searching for a testing-guide id in a checklist without calling `is_security_tes
 
 ## Practice
 
-```text
-python3 -m pytest labs/9.3/9.3-lab/tests --impl vulnerable
-python3 -m pytest labs/9.3/9.3-lab/tests --impl fixed
-```
-
 Do not treat a grep for a guide name as the check. Call `is_security_test({"status_asserted": True})`.
 
 ## Use it somewhere new
