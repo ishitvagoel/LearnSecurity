@@ -32,7 +32,7 @@ An unmapped HIGH still has to block ship in `test_unmapped_high_blocks_ship`. Tu
 | Recover | Map it or fix it; do not hide it quietly |
 | Leftover | Who-is-allowed blind spots; exceptions with expiry; mass suppressions |
 
-A vendor security dashboard will show finding counts and stay silent when CI’s `ship_ok` is always true. Detection must observe **empty map plus HIGH is deny**, not alert volume. A secret or a note body on that unmapped-HIGH page is the same leak as a log line and an extra vendor copy.
+A vendor security dashboard will show finding counts and stay silent when CI’s `ship_ok` is always true. Detection must observe **empty map plus HIGH is deny**, not alert volume. A secret or a note body next to that empty-map deny is a log-line leak and an extra vendor copy.
 
 ```text
 log_denied reason=unmapped_high_blocks finding=F1 sev=HIGH

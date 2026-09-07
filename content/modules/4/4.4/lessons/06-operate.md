@@ -28,7 +28,7 @@ A vendor name does not key the grant or prove the data-item check. Bob with only
 
 ## What the framework does vs what you still have to check
 
-A network filter will page on 403 rate and stay silent when search still returns n2. Notice must observe **object-keyed deny**, not HTTP status counts. A note body on that object-deny page is a logging hole from an earlier topic.
+A network filter will page on 403 rate and stay silent when search still returns n2. Notice must observe **object-keyed deny**, not HTTP status counts. A note body on the object-keyed deny is a logging hole from an earlier topic.
 
 ## Can people still use it
 

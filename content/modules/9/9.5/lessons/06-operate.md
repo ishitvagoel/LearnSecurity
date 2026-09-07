@@ -32,13 +32,13 @@ Close without a pass on the same URL still has to fail `test_cannot_close_withou
 | Recover | Reopen; run the same isolation check |
 | Leftover | Variants; severity vs business priority; role-change caches |
 
-A ticket dashboard will show Done counts and stay silent when CI's `close_finding` is always true. Detection must observe **retest None is deny**, not ticket volume. A note body or a patient row on that retest page is leftover finding text.
+A ticket dashboard will show Done counts and stay silent when CI's `close_finding` is always true. Detection must observe **retest None is deny**, not ticket volume. File a note body or a patient row with the lab, not with `finding_closed_without_retest`.
 
 ```text
 log_denied reason=finding_closed_without_retest finding=F-authz-1
 ```
 
-A note body, a live-target URL, or "check-in complete" on that sample is already a live-target list.
+A note body, a live-target URL, or "check-in complete" in the retest sample is a live-target list.
 
 The retest ticket needs the finding id. Another copy of the note is the finding itself.
 

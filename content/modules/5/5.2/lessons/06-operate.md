@@ -36,7 +36,7 @@ A log product does not encrypt the column.
 log_denied reason=encoding_labeled_encryption field=body request_id=req_52cr
 ```
 
-Plaintext `secret`, a real SSN, or “AES handled” on that sample is already a second key store.
+Plaintext `secret`, a real SSN, or “AES handled” in the key sample is a second key store.
 
 A plaintext `secret` or an SSN in the encryption-miss ticket is another key dump.
 
@@ -46,7 +46,7 @@ Recovery is incomplete if the next deploy still wraps `b64encode` in a helper na
 
 ## What the framework does vs what you still have to check
 
-A cloud key dashboard will show “key enabled” and stay silent when the column is still Base64. Detection must observe **the round-trip of a known plaintext**, not a product tile. Plaintext `secret` or an SSN on that key page is a logging leak from an earlier lesson.
+A cloud key dashboard will show “key enabled” and stay silent when the column is still Base64. Detection must observe **the round-trip of a known plaintext**, not a product tile. Plaintext `secret` or an SSN on the encoding-miss metric is a logging leak from an earlier lesson.
 
 ## Practice
 

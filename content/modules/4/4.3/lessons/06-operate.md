@@ -30,7 +30,7 @@ Recovery is incomplete if the next deploy still builds `?access_token=` in a Nex
 
 ## What the framework does vs what you still have to check
 
-uvicorn will still print query strings unless you change the access-log format. Notice must happen **in the parser** before the token is copied into a log line. `secret` on that parser page duplicates the leak into the ticket.
+uvicorn will still print query strings unless you change the access-log format. Notice must happen **in the parser** before the token is copied into a log line. `secret` in the parser metric duplicates the leak into the ticket.
 
 ## Practice
 

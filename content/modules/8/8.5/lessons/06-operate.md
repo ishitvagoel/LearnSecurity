@@ -32,13 +32,13 @@ If the crash payload still holds the note, `test_crash_report_omits_note_body` i
 | Recover | Keep the redact; purge the vendor copy; tell people if needed |
 | Leftover | The vendor as a processor; screenshots; frozen-app traces; leftover `READ_LOGS` |
 
-A crash dashboard will show crash counts and stay silent when the last extra still holds the note. Detection must observe **`'secret'` absent**, not vendor uptime. The note body on that crash page is the same leak as a log line (3.1) and an extra vendor copy (5.1).
+A crash dashboard will show crash counts and stay silent when the last extra still holds the note. Detection must observe **`'secret'` absent**, not vendor uptime. The crash metric is `'secret'` absent. The note body is a log-line leak (3.1) and an extra vendor copy (5.1).
 
 ```text
 log_denied reason=crash_body_redacted crash_id=cr_85e app=release
 ```
 
-A note body, a patient name, or a live crash payload on that sample is already a second crash dump.
+A note body, a patient name, or a live crash payload turns the crash sample into another dump.
 
 The crash report belongs in the lab folder; the pager only needs the crash id.
 

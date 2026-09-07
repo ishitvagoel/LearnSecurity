@@ -32,13 +32,13 @@ A vendor product does not make the tool gate an allow-list.
 | Recover | Revoke leftover agent credentials |
 | Leftover | Prompt-only policy; hallucinated packages; HTML from `search_notes` |
 
-A vendor agent dashboard will show token counts and stay silent when CI's `run_tool` is always-run. Detection must observe **`exec_sql` is None**, not "the model is on-policy." A transcript or a note body on that tool-deny page is leftover model output.
+A vendor agent dashboard will show token counts and stay silent when CI's `run_tool` is always-run. Detection must observe **`exec_sql` is None**, not "the model is on-policy." The metric is `exec_sql` is None. A transcript or a note body is the model output.
 
 ```text
 log_denied reason=tool_denied agent=sum-1 tool=exec_sql
 ```
 
-A note body, a transcript, or "check-in complete" on that sample is already the model output twice.
+A note body, a transcript, or "check-in complete" in the tool-deny sample is another model dump.
 
 Quote the tool name in the ticket. Quoting the transcript hands the model output to whoever is on call.
 

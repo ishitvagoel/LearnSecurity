@@ -47,11 +47,11 @@ Recovery is incomplete if the next worker still calls `requests.get` on the form
 
 ## What the framework does vs what you still have to check
 
-A cloud dashboard will show “instance metadata requires a token” and stay silent when the unfurl helper still allows any https host. Detection must observe **`allowed` false before any GET**, not a packet capture. A full URL with a query token on that host page is a leftover hole from topic 4.3. **Do not fetch to confirm.**
+A cloud dashboard will show “instance metadata requires a token” and stay silent when the unfurl helper still allows any https host. Detection must observe **`allowed` false before any GET**, not a packet capture. A query-token URL on `egress_denied` reopens topic 4.3. **Do not fetch to confirm.**
 
 ## Practice
 
-Name ids and a reason for the denied host — never the URL. A full URL with a query token, a note body, or a live-fetch transcript still holds the fetch.
+Denied host: ids and a reason, never the URL. A full URL with a query token, a note body, or a live-fetch transcript still holds the fetch.
 
 ## Use it somewhere new
 

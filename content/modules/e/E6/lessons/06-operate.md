@@ -32,13 +32,13 @@ Blank owner or `review_by` still has to make `test_exception_needs_owner_review_
 | Recover | Expire; fix or re-accept with fields |
 | Leftover | Unread register; tech-debt rename |
 
-A governance dashboard will show exception counts and stay silent when CI’s `accept_exception` is always true. Detection must observe **empty owner is deny**, not “we have a risk register.” A secret writeup or chart text on that exception page is leftover risk text.
+A governance dashboard will show exception counts and stay silent when CI’s `accept_exception` is always true. Detection must observe **empty owner is deny**, not “we have a risk register.” Empty owner is the metric. A secret writeup or chart text is the risk writeup.
 
 ```text
 log_denied reason=exception_incomplete_denied missing=owner,review_by
 ```
 
-A secret, a “check-in complete,” or a pledge screenshot on that sample is already a trophy wall.
+A secret, a “check-in complete,” or a pledge screenshot in the exception sample is a trophy wall.
 
 A matching writeup in the exception alert copies the trophy into the ticket.
 

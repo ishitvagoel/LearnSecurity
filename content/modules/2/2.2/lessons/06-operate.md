@@ -55,7 +55,7 @@ The sample still holds `tenant-A-note` or a raw body; that is the cached note tw
 
 ## Practice
 
-Name ids and a reason on the cache-mismatch line — never the body. Leave `tenant-A-note` and a raw body off that sketch.
+Sketch ids and a reason on the cache-mismatch line — never the body. Leave `tenant-A-note` and a raw body off that sketch.
 
 ## Use it somewhere new
 

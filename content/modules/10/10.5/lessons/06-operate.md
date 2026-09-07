@@ -32,7 +32,7 @@ Close without restore still has to fail `test_cannot_close_without_recovery`. Al
 | Recover | Reopen; run restore drill; revoke leftover sessions |
 | Leftover | Imperfect forensics; observability as a way out; recovery marked “not applicable” without an exception process |
 
-A SIEM dashboard will show time-to-detect and stay silent when CI’s `close_incident` is always true. Detection must observe **recovery todo is deny**, not alert volume. A note body on that SIEM page is leftover incident text.
+A SIEM dashboard will show time-to-detect and stay silent when CI’s `close_incident` is always true. Detection must observe **recovery todo is deny**, not alert volume. A note body attached to `incident_closed_without_recovery` is the incident.
 
 ```text
 log_denied reason=incident_closed_without_recovery id=INC-12 recovery=todo

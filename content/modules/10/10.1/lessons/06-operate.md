@@ -32,7 +32,7 @@ No threat-model id still has to block merge in `test_merge_requires_threat_model
 | Recover | Add a threat-model id; re-run `merge_ok` |
 | Leftover | Stale threat models; docs exemptions; vanity ticket counts |
 
-GitHub’s audit log is not this lab’s trusted core. A maturity dashboard will show process scores and stay silent when CI’s `merge_ok` is always true. Detection must observe **empty change is deny**, not poster counts. A GitHub token on that page is a secrets hole (5.3). A threat-model body on that page copies the model into the ticket.
+GitHub’s audit log is not this lab’s trusted core. A maturity dashboard will show process scores and stay silent when CI’s `merge_ok` is always true. Detection must observe **empty change is deny**, not poster counts. A GitHub token is a secrets hole (5.3). A threat-model body copies the model into the ticket.
 
 ```text
 log_denied reason=merge_blocked_no_tm pr=123

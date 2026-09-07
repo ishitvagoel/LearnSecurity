@@ -45,7 +45,7 @@ A dashboard tile that says “privacy mode” does not wipe leftover notes. If a
 
 ## What the framework does vs what you still have to check
 
-A warehouse dashboard will show “personal data redacted” and stay silent when the body column still holds `secret`. Detection must observe **user id still present in a listed store**, not a privacy-policy checkbox. The note body on that warehouse page is a secrecy leak too.
+A warehouse dashboard will show “personal data redacted” and stay silent when the body column still holds `secret`. Detection must observe **user id still present in a listed store**, not a privacy-policy checkbox. The note body on the leftover-user-id metric is a secrecy leak too.
 
 ## Can people still use it
 

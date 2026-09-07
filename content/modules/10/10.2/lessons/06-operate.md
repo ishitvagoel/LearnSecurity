@@ -32,13 +32,13 @@ A digest mismatch still has to refuse install in `test_hash_mismatch_refuses_ins
 | Recover | Pin known-good; rotate CI secrets |
 | Leftover | Malicious pin; cache poisoning; unpinned actions |
 
-An npm audit dashboard will show advisory counts and stay silent when CI’s `install_ok` is always true. Detection must observe **aaa vs bbb is deny**, not CVE volume. Quote aaa vs bbb, not a registry token — that is the same leak as a log line (5.3).
+An npm audit dashboard will show advisory counts and stay silent when CI’s `install_ok` is always true. Detection must observe **aaa vs bbb is deny**, not CVE volume. A registry token next to the aaa-vs-bbb deny is the same leak as a log line (5.3).
 
 ```text
 log_denied reason=hash_mismatch_denied pkg=demo expected=aaa got=bbb
 ```
 
-A token, a private key, or “ship gate complete” on that sample is already a keyring.
+A token, a private key, or “ship gate complete” in the install sample is a keyring.
 
 A registry token in the install-deny ticket is another secret dump.
 

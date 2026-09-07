@@ -30,7 +30,7 @@ Recovery is incomplete if the next image still ships `DEFAULT = "sk-lab-hardcode
 
 ## What the framework does vs what you still have to check
 
-A vault dashboard will show “rotation enabled” and stay silent when `DEFAULT` is still an or-clause. Notice must observe **presented equals the retired secret id**, not a product tile. `sk-lab-hardcoded` or a real key on that vault page is leftover secret text.
+A vault dashboard will show “rotation enabled” and stay silent when `DEFAULT` is still an or-clause. Notice must observe **presented equals the retired secret id**, not a product tile. The retired secret id is the metric. `sk-lab-hardcoded` or a real key is the secret.
 
 ## Practice
 

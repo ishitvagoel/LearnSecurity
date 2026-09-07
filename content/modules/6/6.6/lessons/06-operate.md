@@ -53,7 +53,7 @@ If a human sees “link already used,” announce it in text a screen reader can
 
 ## Practice
 
-Name ids and a reason for the second accept — never the token. The token, a note body, or a real email would expose the mailer secret.
+Second accept: ids and a reason, never the token. The token, a note body, or a real email would expose the mailer secret.
 
 ## Use it somewhere new
 

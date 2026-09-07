@@ -44,7 +44,7 @@ A formatter passing does not reject `eval`. If the review bot changes, `test_eva
 
 ## What the framework does vs what you still have to check
 
-A GitHub checks dashboard will show the formatter green and stay silent when `review_ok` is always true. Detection must observe **eval-on-user rejected**, not check count. The eval payload or note bodies on that review page are a second leak.
+A GitHub checks dashboard will show the formatter green and stay silent when `review_ok` is always true. Detection must observe **eval-on-user rejected**, not check count. The eval payload or note bodies on eval-on-user-rejected are a second leak.
 
 ## Practice
 

@@ -28,7 +28,7 @@ Announce “share limit reached” so people can hear it. That announcement is n
 
 ## What the framework does vs what you still have to check
 
-A filter will page on request rate and stay silent when five slow grants plus a sixth import land. Notice must observe **share_count versus cap**, not requests per minute. Keep a note body out of the share-cap page.
+A filter will page on request rate and stay silent when five slow grants plus a sixth import land. Notice must observe **share_count versus cap**, not requests per minute. Keep a note body out of the share-cap metric.
 
 ## Practice
 

@@ -32,7 +32,7 @@ A 200-only case is still not a security test — `test_http_200_only_is_not_a_se
 | Recover | Add the isolation test; keep 200-only as product tests |
 | Leftover | Looking around (9.5); fuzz with no named bad result; field grain (7.2) |
 
-A coverage dashboard will show line coverage and stay silent when the isolation row has only 200-only tests. Detection must observe **200-only is not a security test**, not percent covered. Note bodies from a failed isolation case on that suite page are the same leak as a log line (3.1).
+A coverage dashboard will show line coverage and stay silent when the isolation row has only 200-only tests. Detection must observe **200-only is not a security test**, not percent covered. Note bodies from a failed isolation case next to a 200-only suite are a log-line leak (3.1).
 
 ```text
 log_denied reason=security_suite_missing_isolation req=isolation suite=api

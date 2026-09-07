@@ -32,13 +32,13 @@ A cluster-admin Role still has to be denied in `test_cluster_admin_pod_is_denied
 | Recover | Delete the binding; rotate cluster credentials |
 | Leftover | Break-glass with a later elective; the metadata hop; Helm supply chain |
 
-A CIS dashboard will show benchmark scores and stay silent when CI's `pod_ok` is always true. Detection must observe **cluster-admin is deny**, not "we use Kubernetes." Do not attach a kubeconfig or a cloud token; those are leftover cluster credentials.
+A CIS dashboard will show benchmark scores and stay silent when CI's `pod_ok` is always true. Detection must observe **cluster-admin is deny**, not "we use Kubernetes." A kubeconfig or a cloud token next to that cluster-admin deny is leftover cluster credentials.
 
 ```text
 log_denied reason=cluster_admin_denied sa=app ns=sc-prod requested=cluster-admin
 ```
 
-A kubeconfig, a cloud token, or "check-in complete" on that sample is already cluster credentials twice.
+A kubeconfig, a cloud token, or "check-in complete" in the god-mode sample is cluster credentials twice.
 
 Attach a kubeconfig to the god-mode ticket and whoever is on call now has cluster credentials.
 
