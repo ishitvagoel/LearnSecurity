@@ -53,7 +53,7 @@ If operators see a “signed out” badge, do not encode it as color only. Give 
 
 ## Practice
 
-Sketch a deny line with ids and a reason — never the body. Do not accept a line that includes a note body, a personal email, a production cookie, or “single sign-on revoked it.”
+Sketch a deny line with ids and a reason — never the body. Skip any line with a note body, a personal email, a production cookie, or “single sign-on revoked it.”
 
 ## Use it somewhere new
 

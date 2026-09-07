@@ -22,7 +22,7 @@ The repaired files key `(path, tenant)`. Production may instead **refuse to cach
 
 Company in the key must be the company the who-is-allowed check already resolved, not `Host` or `X-Forwarded-*` from the client.
 
-Do not accept `Cache-Control: private` as membership in the key. Next.js `fetch` cache defaults do not encode company. A CDN that keys on path will still serve company A’s note to company B. `Vary: Cookie` is not a company id. `cache_get("/notes/n1", "tB")` after a company A put is `None`.
+`Cache-Control: private` does not count as membership in the key. Next.js `fetch` cache defaults do not encode company. A CDN that keys on path will still serve company A’s note to company B. `Vary: Cookie` is not a company id. `cache_get("/notes/n1", "tB")` after a company A put is `None`.
 
 Cached sensitive data has to stay isolated. This check covers path-only keys.
 
@@ -47,7 +47,7 @@ When the bound company is missing or unknown, do not share the slot. A familiar 
 
 ## Practice
 
-Name who, what, action, and the check that must be true after the fix. Run:
+Say who, what, and the check that has to hold after the restore. Run:
 
 ```text
 python3 -m pytest labs/2.2/2.2-request-path/tests --impl fixed

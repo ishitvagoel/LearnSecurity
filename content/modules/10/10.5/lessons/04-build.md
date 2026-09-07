@@ -9,7 +9,7 @@ A green SIEM tile does not close recovery-todo. A paging ack is an ack. “Alert
 
 Change this: `close_incident` **returns true only when `recovery == "done"` and `'note_body' not in logs`**. Missing recovery or a body in logs is deny. A green SIEM may *accompany* a match; it does not replace it.
 
-The `note_body` substring is a **teaching stand-in** for “logs match how sensitive the data is.” It is not a complete leak scanner. The check in the notes app’s incident ticket: recovery todo → stay open, and a leaked body → stay open. A missing field is deny. Still denied even if the dashboard went green. Do not accept “alerts stopped” as the conjunction.
+The `note_body` substring is a **teaching stand-in** for “logs match how sensitive the data is.” It is not a complete leak scanner. The check in the notes app’s incident ticket: recovery todo → stay open, and a leaked body → stay open. A missing field is deny. Still denied even if the dashboard went green. Don't take “alerts stopped” as the conjunction.
 
 ## Picture: recovery-done and no-body together
 
@@ -36,7 +36,7 @@ Do not treat `fixed/ir.py` as a production incident product.
 | `note_body` in logs | close false |
 | done + ok | close true |
 
-Unless you know otherwise, if you are unsure whether restore ran, keep the ticket open. A green SIEM does not close it.
+If you are unsure whether restore ran, keep the ticket open. A green SIEM does not close it.
 
 ## What this is not
 

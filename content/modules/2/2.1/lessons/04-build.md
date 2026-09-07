@@ -43,7 +43,7 @@ On uncertainty, **deny**. Do not repair by keeping the last key because “that 
 
 ## Practice
 
-Name who, what, action, and the check that must be true after the fix. Run `--impl fixed` (must pass):
+Write who, what, the action, and the check that must be true after the fix. Run `--impl fixed` (must pass):
 
 ```text
 python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl fixed

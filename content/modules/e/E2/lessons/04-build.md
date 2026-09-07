@@ -20,7 +20,7 @@ flowchart TD
   Has -->|no| Off[false]
 ```
 
-Do not accept Report-Only as the name. Encoding (6.2) still has to exist — a well-named header does not replace it. A CDN can still strip the enforcing header (2.2). Trusted Types and the current content-security spec remain **draft**. Reporting from that policy is extra, later, and advanced: reports are the Report-Only kind of signal, not this check.
+Report-Only is not the name. Encoding (6.2) still has to exist — a well-named header does not replace it. A CDN can still strip the enforcing header (2.2). Trusted Types and the current content-security spec remain **draft**. Reporting from that policy is extra, later, and advanced: reports are the Report-Only kind of signal, not this check.
 
 Use a content-security policy as a layer after encoding — the header *name*.
 

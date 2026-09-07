@@ -32,7 +32,7 @@ Do not treat `fixed/channel.py` as a production load balancer.
 | socket http | false |
 | header https + socket http | false |
 
-Unless you know otherwise, if you cannot ask the socket, the answer is no. A dashboard still showing “HTTPS” is not a yes.
+If you cannot ask the socket, the answer is no. A dashboard still showing “HTTPS” is not a yes.
 
 ## What this is not
 

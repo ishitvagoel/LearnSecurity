@@ -755,6 +755,8 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/By default: /g, "By default, "],
   [/Do not hide the gap behind /g, "Don't paper over the gap with "],
   [/In doubt, if /g, "If "],
+  [/Unless you know otherwise, if /g, "If "],
+  [/Do not accept a line that includes /g, "Don't keep a line with "],
   [/, dumping lab Python into notes/g, ""],
   [/ dumping lab Python into notes/g, ""],
   [/\. without product evidence\./g, "."],

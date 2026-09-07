@@ -22,7 +22,7 @@ flowchart TD
   G -->|no| Deny[None]
 ```
 
-Do not accept “we called revoke” as consultation. This `read` has to check owner-or-grant. Delayed workers and phone caches can still serve the old grant until those paths do the same. Copies already sent are gone from what this check can prove. Access-rights change inside an already-open session without signing in again is extra, advanced work: storing a revoke row is not in-session deny.
+Calling revoke is not consultation. This `read` has to check owner-or-grant. Delayed workers and phone caches can still serve the old grant until those paths do the same. Copies already sent are gone from what this check can prove. Access-rights change inside an already-open session without signing in again is extra, advanced work: storing a revoke row is not in-session deny.
 
 Permission has to be enforced — post-revoke read.
 

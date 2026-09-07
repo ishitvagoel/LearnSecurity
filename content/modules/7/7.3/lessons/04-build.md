@@ -37,7 +37,7 @@ Do not treat `fixed/hook.py` as a production Stripe integration.
 | wrong sig | false |
 | matching MAC over same body | true |
 
-Unless you know otherwise, if the signature is missing or wrong, the answer is no. TLS looking fine does not fill in the signature.
+If the signature is missing or wrong, the answer is no. TLS looking fine does not fill in the signature.
 
 ## What this is not
 

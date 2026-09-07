@@ -17,7 +17,7 @@ flowchart TD
   Call[quiz_score_grants_phase1_skip] --> Out[false]
 ```
 
-The repaired files return `False` unconditionally. Do not accept “they’re a senior hire” as membership. Do not accept a vendor cert screenshot as check-in 1. Tooling-bridge skips remain allowed **when a separate diagnostic shows a Git/SQL/HTTP gap** — not because the part-1 quiz was high.
+The repaired files return `False` unconditionally. A “senior hire” title is not membership. A vendor cert screenshot does not count as check-in 1. Tooling-bridge skips remain allowed **when a separate diagnostic shows a Git/SQL/HTTP gap** — not because the part-1 quiz was high.
 
 ## Why this fix works
 

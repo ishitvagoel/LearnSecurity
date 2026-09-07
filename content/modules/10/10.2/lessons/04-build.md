@@ -9,7 +9,7 @@ Those package names are not a digest check. A silenced finding does not compare 
 
 Repair this: `install_ok` **returns `expected_hash == got_hash`**. A mismatch denies. Provenance and an SBOM may *sit next to* a match; they do not replace it. Here: that equality — not package name, not Dependabot, not a provenance badge.
 
-For the notes app’s CI: `aaa` vs `bbb` → do not install. Don't waive the deny just because “the SBOM lists the package.” Do not accept `@v1` as a digest.
+For the notes app’s CI: `aaa` vs `bbb` → do not install. Don't waive the deny just because “the SBOM lists the package.” `@v1` is not a digest.
 
 ## Picture: equality is the gate
 
