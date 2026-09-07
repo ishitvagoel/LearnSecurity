@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a registry you attack. `install_ok(expected_hash, got_hash)` returns true or false: every pair is allowed. That is a **failed rule**, not a missing package name.
+The practice is not a registry you attack. `install_ok(expected_hash, got_hash)` returns true or false: every pair is allowed, even with no lockfile name to blame.
 
 > A digest mismatch must not install. If `install_ok("aaa", "bbb")` is true, the bytes you will run have failed as a security control.
 

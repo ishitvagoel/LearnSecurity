@@ -9,7 +9,7 @@ A cache can serve old bytes after `install_ok` was “fixed once.” Do not log 
 
 ## Picture: digest mismatch is a signal
 
-A denied mismatch still has to be noticed and recovered from — not an excuse to quote a registry token in the paging channel. The notice should name the package and the two digest ids. Recovery should pin known-good.
+A denied mismatch still has to be noticed. Leave the registry token out of the pager. The notice should name the package and the two digest ids. Recovery should pin known-good.
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ log_denied reason=hash_mismatch_denied pkg=demo expected=aaa got=bbb
 
 Not: a token, a private key, or “ship gate complete.”
 
-If your alert includes the registry token, you have copied the leak into the paging channel.
+If your alert includes the registry token, the pager now has a secret too.
 
 ## What the framework does vs what you still have to check
 

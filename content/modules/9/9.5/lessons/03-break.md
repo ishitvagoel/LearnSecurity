@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `close_finding` returns true for every dict: it never looks at `retest`. That always-true close is a **failed rule**, not a paperwork nit.
+The practice is not a website you attack. `close_finding` returns true for every dict: it never looks at `retest`, so a ticket can close without a retest.
 
 > A finding must not close without a passing retest of the same bad result. If `close_finding({"retest": None})` returns true, the close gate has failed as a security control.
 

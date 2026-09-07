@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `is_security_test` returns a boolean: it returns true when `status_asserted` is set. That count is a **failed rule**, not a missing checklist tick.
+The practice is not a website you attack. `is_security_test` returns a boolean: it returns true when `status_asserted` is set, so a status assert already counts as a security test.
 
 > HTTP 200-only must not count as a security test. If `is_security_test({"status_asserted": True})` is true, the suite has failed as a security control.
 

@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. `allow_share` treats a leftover session cookie as consent to share. That is a **failed rule**, not an attack on another site.
+The practice is not a website you attack. `allow_share` treats a leftover session cookie as consent to share, even with no other site involved.
 
 > Leftover cookies are not consent to share. If `allow_share` from a foreign origin with `token=None` is true, leftover cookie authority has replaced site-bound intent.
 
 ## Where you may practice
 
-Stay inside `labs/6.3/6.3-lab`. The check is `allow_share`. Origins `https://evil.example` and `https://app.securecollab.test` are fake. It does not open a browser. Do not visit a lookalike page, an employer share endpoint, or a classmate preview as this exercise.
+Stay inside `labs/6.3/6.3-lab`. Origins `https://evil.example` and `https://app.securecollab.test` are fake inputs to `allow_share`. It does not open a browser. Do not visit a lookalike page, an employer share endpoint, or a classmate preview as this exercise.
 
 What must not happen: a cross-site POST that changes a share, authorized by cookie alone. `allow_share("https://evil.example", expected, token=None)` returns true.
 

@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `document.cookie` does not open a browser, load a page, or talk to a network. The HttpOnly flag is present and ignored. That is a **failed rule**, not an exploit recipe.
+The practice is not a website you attack. `document.cookie` does not open a browser, load a page, or talk to a network. The HttpOnly flag is present and ignored, so a script can still read the cookie string.
 
 > Script in the origin cannot read `sc_session` when HttpOnly is set.
 

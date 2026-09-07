@@ -9,7 +9,7 @@ A new identity change can land after `merge_ok` was “fixed once.” Do not log
 
 ## Picture: missing threat-model id is a signal
 
-A blocked merge still has to be noticed and recovered from — not an excuse to quote the threat-model body in the paging channel. The notice should name the change. Recovery should add the threat-model id.
+A blocked merge still has to be noticed. Leave the threat-model body out of the pager. The notice should name the change. Recovery should add the threat-model id.
 
 ```mermaid
 flowchart TD
@@ -32,7 +32,7 @@ Re-run `test_merge_requires_threat_model_id` after any merge-bot change. A green
 | Recover | Add a threat-model id; re-run `merge_ok` |
 | Leftover | Stale threat models; docs exemptions; vanity ticket counts |
 
-GitHub’s audit log is not this lab’s trusted core. A maturity dashboard will show process scores and stay silent when CI’s `merge_ok` is always true. Detection must observe **empty change is deny**, not poster counts. If the alert includes a GitHub token, you have opened a secrets hole (5.3). If the alert includes the threat-model body, you have copied the model into the paging channel.
+GitHub’s audit log is not this lab’s trusted core. A maturity dashboard will show process scores and stay silent when CI’s `merge_ok` is always true. Detection must observe **empty change is deny**, not poster counts. If the alert includes a GitHub token, you have opened a secrets hole (5.3). If the alert includes the threat-model body, you have copied the model into the pager.
 
 ```text
 log_denied reason=merge_blocked_no_tm pr=123

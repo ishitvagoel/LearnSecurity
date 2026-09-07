@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `phishing_resistant` treats any enrolled method as true, and origin is ignored. A password at a lookalike origin counted as **resistant** is a failed rule, not an exploit recipe.
+The practice is not a website you attack. `phishing_resistant` treats any enrolled method as true, and origin is ignored, so a password at a lookalike origin already counts as **resistant**.
 
 > A password or OTP at a lookalike origin is not phishing-resistant. WebAuthn at the wrong origin must fail.
 

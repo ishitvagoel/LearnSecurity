@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `session_from_request` uses fake token `secret`. It does not open uvicorn, a CDN, or a browser history. A query-string session is a **failed rule**, not a dump of a log.
+The practice is not a website you attack. `session_from_request` uses fake token `secret`. It does not open uvicorn, a CDN, or a browser history. A query-string session is already a broken rule; you do not need a log dump.
 
 > `session_from_request({"access_token": "secret"}, {}, None)` must return `None`. A session must not start from a query-string token.
 

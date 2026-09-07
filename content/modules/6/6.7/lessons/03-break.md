@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `allow` does not open a live export API. It says yes for every `n`. That is a **failed rule**, not an attack on a public host.
+The practice is not a website you attack. `allow` does not open a live export API. It says yes for every `n`, even with no live export to flood.
 
 > Export has a resource account, not an unbounded loop. `allow(4)` must be false in the lab window. `allow(3)` may be true.
 

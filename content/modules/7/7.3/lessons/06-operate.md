@@ -11,7 +11,7 @@ Do not log bodies or `lab-secret` (3.1 / 5.3). Do not attach the HL7/JSON body t
 
 ## Picture: a missing sig is a signal
 
-A deny of a callback with a missing or wrong MAC still has to be noticed and recovered from — not an excuse to paste the body into the paging channel. Recovery should keep the deny. Neither logs the body.
+A deny of a callback with a missing or wrong MAC still has to be noticed. Do not paste the body into the pager. Recovery should keep the deny. Neither logs the body.
 
 ```mermaid
 flowchart TD
@@ -38,7 +38,7 @@ log_denied reason=webhook_sig_fail provider=lab-billing request_id=req_73e
 
 Not: the raw body, `lab-secret`, a real patient result, or a live provider trace.
 
-If your alert includes the raw body or `lab-secret`, you have opened a second leak in the paging channel (3.1 / 5.3).
+If your alert includes the raw body or `lab-secret`, the pager now holds a second copy (3.1 / 5.3).
 
 A green “webhooks signed” tile is not that check. Re-run `test_missing_signature_is_rejected` after any callback-route change. Billing, export-ready, and invite-used callbacks are other paths of the same MAC — inventory them before claiming recover.
 

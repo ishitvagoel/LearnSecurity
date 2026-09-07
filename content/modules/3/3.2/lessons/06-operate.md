@@ -18,7 +18,7 @@ flowchart TD
   Age -->|stale| Revisit[Re-run four questions]
 ```
 
-A missing id still has to be noticed and recovered from — not an excuse to rewrite yesterday’s date. The notice should name the threat. Recovery should add the row. Neither pretends you already had it.
+A missing threat id still has to be noticed. Do not hide it by rewriting yesterday’s date. The notice should name the threat. Recovery should add the row. Neither pretends you already had it.
 
 | Outcome | This topic |
 |---|---|

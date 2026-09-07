@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `exporter` does not open a live queue: leftover `user_session` wins if it is present. That is a **failed rule**, not an attack on a public broker.
+The practice is not a website you attack. `exporter` does not open a live queue: leftover `user_session` wins if it is present, even when no broker is running.
 
 > A leftover user session is not worker identity. `exporter({"user_session": "alice", "service": None})` must be `None`. `exporter({"service": "worker-sc"})` may be `"worker-sc"`.
 

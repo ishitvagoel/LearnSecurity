@@ -9,7 +9,7 @@ A closer can still mark Done after `close_incident` was “fixed once.” Do not
 
 ## Picture: illegal close is a signal
 
-A close that skipped recovery still has to be noticed and recovered from — not an excuse to quote the note in the paging channel. The notice should name the incident. Recovery should reopen and run the restore drill.
+A close that skipped recovery still has to be noticed. Leave the incident note out of the pager. The notice should name the incident. Recovery should reopen and run the restore drill.
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ log_denied reason=incident_closed_without_recovery id=INC-12 recovery=todo
 
 Not: a note body, a session token, or “assurance gate complete.”
 
-If your alert includes the matching note, you have copied the leak into the paging channel.
+If your alert includes the matching note, the pager now has the incident text too.
 
 ## What the framework does vs what you still have to check
 

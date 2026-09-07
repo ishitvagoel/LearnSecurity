@@ -11,7 +11,7 @@ Do not log the user string that would have been eval’d. Do not paste template 
 
 ## Picture: eval in a change is a signal
 
-A pull request whose diff still grants `eval` on a user string still has to be noticed and recovered from — not an excuse to quote the payload in the paging channel. Recovery should block the merge and keep the reject.
+A pull request whose diff still grants `eval` on a user string still has to be noticed. Leave the payload out of the pager. Recovery should block the merge and keep the reject.
 
 ```mermaid
 flowchart TD
@@ -38,7 +38,7 @@ log_denied reason=review_block_eval pr=pr_92e file=export.py
 
 Not: an eval payload, a note body, or a live GitHub trace.
 
-If your alert includes the eval payload or note bodies, you have opened a second leak in the paging channel (logging topic / interpreter topic).
+If your alert includes the eval payload or note bodies, the pager now holds a second copy (logging topic / interpreter topic).
 
 A green “formatter passed” tile is not that check. Re-run `test_eval_on_user_input_is_rejected` after any review-bot change. Terraform `local-exec` and GitHub Actions `run:` are other interpreter paths — inventory them before claiming recover. The lab substring is a stand-in: an `exec(` helper can skip it, so keep the human interpreter question even after this metric is green.
 

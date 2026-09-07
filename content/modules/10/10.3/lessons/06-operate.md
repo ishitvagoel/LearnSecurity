@@ -9,7 +9,7 @@ A chart can still add a ClusterRoleBinding after admission was "set once." Do no
 
 ## Picture: god-mode binding is a signal
 
-A god-mode binding still has to be noticed and recovered from — not an excuse to quote kubeconfig in the paging channel. The notice should name the ServiceAccount. Recovery should delete the binding and rotate cluster credentials.
+A god-mode binding still has to be noticed. Leave kubeconfig out of the pager. The notice should name the ServiceAccount. Recovery should delete the binding and rotate cluster credentials.
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ log_denied reason=cluster_admin_denied sa=app ns=sc-prod requested=cluster-admin
 
 Not: a kubeconfig, a cloud token, or "assurance gate complete."
 
-If your alert includes the matching kubeconfig, you have copied the leak into the paging channel.
+If your alert includes the matching kubeconfig, the pager now has cluster credentials too.
 
 ## What the framework does vs what you still have to check
 

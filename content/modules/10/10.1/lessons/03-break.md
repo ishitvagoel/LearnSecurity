@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `merge_ok(pr)` returns true or false: every dict is allowed to merge. That is a **failed rule**, not a missing GitHub setting.
+The practice is not a website you attack. `merge_ok(pr)` returns true or false: every dict is allowed to merge, even with no GitHub required-review setting to blame.
 
 > An empty change must not merge. If `merge_ok({})` is true, the process evidence you show before merge has failed as a security control.
 

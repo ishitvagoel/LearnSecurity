@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `copy_into(bufsize, src, declared_len)` does not compile a C overflow, spray a heap, or fuzz a third-party binary. The copy uses `declared_len` plus 8. That is a **failed rule**, not extra slack you needed.
+The practice is not a website you attack. `copy_into(bufsize, src, declared_len)` does not compile a C overflow, spray a heap, or fuzz a third-party binary. The copy uses `declared_len` plus 8, so the extra eight bytes are already past the buffer you named.
 
 > `len(copy_into(4, b"abcdefgh", 4))` must be ≤ 4. A short honest copy may fit. Checking every path here means the copy is bounded by destination size.
 

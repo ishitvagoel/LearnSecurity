@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `resolve(role, field)` returns true for every pair. A member resolving `secret_internal` is **a failed rule**, not a dump of an internal token.
+The practice is not a website you attack. `resolve(role, field)` returns true for every pair, so a member resolving `secret_internal` already gets the field. You do not need an internal-token dump.
 
 > `resolve("member", "secret_internal")` must be false. If it is true, the serializer dumped without a field table.
 

@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `protect` / `looks_encrypted` uses fake plaintext `secret`. It does not open a database or a cipher library. Base64 labeled encryption is a **failed rule**, not a decoder to run on live data.
+The practice is not a website you attack. `protect` / `looks_encrypted` uses fake plaintext `secret`. It does not open a database or a cipher library. Base64 labeled encryption is already a broken rule; do not decode live data.
 
 > `protect("secret")` must not round-trip as Base64 of the plaintext. If `base64.b64decode(protect("secret"))` equals `"secret"`, encoding was sold as secrecy.
 

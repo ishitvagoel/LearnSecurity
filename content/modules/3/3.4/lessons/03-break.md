@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `add_share` uses fake share counts. It does not open FastAPI, a CDN filter, or a classmate API. Extra grants is a **failed rule**, not a load test.
+The practice is not a website you attack. `add_share` uses fake share counts. It does not open FastAPI, a CDN filter, or a classmate API. Extra grants are already the break; you do not need a load test.
 
 > Eight `add_share` calls must leave count ≤ 5. Share grants must not go past the product cap of 5.
 

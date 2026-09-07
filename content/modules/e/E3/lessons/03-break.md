@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `capture(key)` / `charge_count()` does not open a browser, talk to a payment network, or scrape a clinic billing page. Every call appends a charge and ignores whether the key was seen. That is a **failed rule**, not a clumsy click.
+The practice is not a website you attack. `capture(key)` / `charge_count()` does not open a browser, talk to a payment network, or scrape a clinic billing page. Every call appends a charge and ignores whether the key was seen, so two captures are two charges.
 
 > Two `capture("k1")` calls must leave `charge_count() == 1`. The first capture may succeed.
 

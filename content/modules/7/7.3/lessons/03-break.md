@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. `accept` does not open a network. It returns true for every triple. An unsigned body counting as authentic is a **failed rule**, not a live POST to a live provider.
+The practice is not a website you attack. `accept` does not open a network. It returns true for every triple, so an unsigned body already counts as authentic. Do not POST to a live provider.
 
 > An unsigned webhook body is not authentic. `accept("", "body", "lab-secret")` must be false. This practice checks the predicate only. It does not POST a live webhook.
 
 ## Where you may practice
 
-Stay inside `labs/7.3/7.3-lab`. The files are `accept(sig, body, secret)`. Disposable `lab-secret` and a synthetic `body`. Restore the broken and repaired folders when you are done.
+Stay inside `labs/7.3/7.3-lab`. Disposable `lab-secret` and a synthetic `body` go through `accept(sig, body, secret)`. Restore the broken and repaired folders when you are done.
 
 Do not POST to Stripe. Do not POST to GitHub. Do not POST to a clinic webhook. Do not POST to public hosts. Do not paste a live callback URL “to see what happens.”
 

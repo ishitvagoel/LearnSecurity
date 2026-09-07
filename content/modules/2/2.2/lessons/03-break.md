@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. This is a local model of a shared cache. The store keys only on path. That object is a **failed rule**, not a performance nit.
+The practice is not a website you attack. Shared cache here keys only on path. That object is already a broken rule, not a performance nit.
 
 The rule:
 

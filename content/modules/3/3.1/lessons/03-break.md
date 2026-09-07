@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `log_event` returns a string: it pastes the note body into the line. That line is a **failed rule**, not a debug nit.
+The practice is not a website you attack. `log_event` returns a string: it pastes the note body into the line, so the log already holds the secret.
 
 > A confidential note body must not appear in this log line. If `log_event("note_read", "tenant-A-secret-body")` includes `tenant-A-secret-body`, logging has failed as a security control.
 

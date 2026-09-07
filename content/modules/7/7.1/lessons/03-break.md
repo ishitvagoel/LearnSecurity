@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. `apply(user, body)`: `user.update(body)` copies every key, so `is_admin` becomes true. Extra keys writing `is_admin` is **a failed rule**, not an attack on a public API.
+The practice is not a website you attack. `apply(user, body)`: `user.update(body)` copies every key, so `is_admin` becomes true. Extra keys writing `is_admin` is already a broken rule; you do not need a public API.
 
 > After `apply(user, {"is_admin": true})`, `is_admin` must still be false. Extra keys are not writable fields.
 
 ## Where you may practice
 
-Stay inside `labs/7.1/7.1-lab`. The helper is `apply(user, body)`. Fake profile dicts (`display_name`, `is_admin`). It does not open a network. Do not probe a live API, a public OpenAPI host, or an employer clinic change.
+Stay inside `labs/7.1/7.1-lab`. Fake profile dicts (`display_name`, `is_admin`) pass through `apply(user, body)`. It does not open a network. Do not probe a live API, a public OpenAPI host, or an employer clinic change.
 
 Do not paste this exercise onto a public API, employer clinic, or live EHR.
 

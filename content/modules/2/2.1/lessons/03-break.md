@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. This is a local model of note ingest. A first-key scan for who is allowed, and `json.loads` for storage. Two meanings of the same bytes are **a failed rule**, not a JSON nit.
+The practice is not a website you attack. Note ingest here is a first-key scan for who is allowed, and `json.loads` for storage. Two meanings of the same bytes are already a broken rule, not a JSON nit.
 
 > The same request bytes must yield one company meaning for both the who-is-allowed check and the stored row. If two readers would disagree, ingest refuses.
 

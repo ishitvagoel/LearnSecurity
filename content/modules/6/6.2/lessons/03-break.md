@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. This is a local model of drawing a title. `render` leaves `<` as a tag delimiter, so extra tags stay in the output. Unencoded markup reaching HTML is **a failed rule**, not an exploit recipe.
+The practice is not a website you attack. `render` draws a title and leaves `<` as a tag delimiter, so extra tags stay in the output. Unencoded markup in HTML is already a broken rule, not an exploit recipe.
 
 > `render` must encode `<` as `&lt;` in HTML text. Unencoded markup must not reach the HTML interpreter.
 

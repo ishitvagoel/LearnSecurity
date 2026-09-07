@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a cluster you attack. `pod_ok` returns true for every role: it never looks at the role. That always-true admission is a **failed rule**, not a paperwork nit.
+The practice is not a cluster you attack. `pod_ok` returns true for every role: it never looks at the role, so any role already gets in.
 
 > An app pod must not run as cluster-admin. If `pod_ok("cluster-admin")` returns true, admission has failed as a security control.
 

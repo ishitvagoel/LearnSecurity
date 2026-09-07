@@ -11,7 +11,7 @@ Do not log plaintext bodies. Do not paste an SSN into the ticket.
 
 ## Picture: CI is a detector
 
-A known-plaintext Base64 hit still has to be noticed and recovered from — not an excuse to quote the body in the paging channel. Recovery should re-protect and rotate keys.
+A known-plaintext Base64 hit still has to be noticed. The body does not belong in the pager. Recovery should re-protect and rotate keys.
 
 ```mermaid
 flowchart TD
@@ -38,7 +38,7 @@ log_denied reason=encoding_labeled_encryption field=body request_id=req_52cr
 
 Not: plaintext `secret`, a real SSN, or “AES handled.”
 
-If your alert includes plaintext `secret` or an SSN, you have opened a second leak in the paging channel.
+If your alert includes plaintext `secret` or an SSN, the pager now holds a second copy.
 
 A green “encryption enabled” tile is not that check. Re-run `test_protect_is_not_mere_encoding` after any `protect` change. Workers and export jobs are other paths of the same rule — inventory them before claiming recover.
 

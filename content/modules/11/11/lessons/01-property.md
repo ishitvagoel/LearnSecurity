@@ -46,7 +46,7 @@ flowchart LR
 | Delayed worker | Reuse a leftover user session | Finish a job | Same body on a path nobody checked |
 | Someone who treats a green scanner as done | Skip the next-read check | Look finished | Event recorded; grant never consulted |
 
-You do not need a nation-state this week. Those three already read after revoke.
+You do not need a nation-state. Those three already read after revoke.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

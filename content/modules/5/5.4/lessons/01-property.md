@@ -5,7 +5,7 @@
 
 ## The rule
 
-The notes app must know whether the **server socket** negotiated TLS. A browser can send `X-Forwarded-Proto: https` on cleartext. That header is a client claim. An earlier topic already taught hop versus cache key; this week's rule is channel authenticity for cookies, HSTS, and redirects.
+The notes app must know whether the **server socket** negotiated TLS. A browser can send `X-Forwarded-Proto: https` on cleartext. That header is a client claim. An earlier topic already taught hop versus cache key; the rule here is channel authenticity for cookies, HSTS, and redirects.
 
 > `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` must be false. `channel_is_https({}, "https")` may be true. A trusted proxy is a **bound peer**, not a header name. This practice has no trusted proxy.
 

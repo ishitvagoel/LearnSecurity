@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `boot_ok(env, debug)` returns true for every pair: it never looks at `env` or `debug`. That always-true boot is a **failed rule**, not a missing compose comment.
+The practice is not a website you attack. `boot_ok(env, debug)` returns true for every pair: it never looks at `env` or `debug`, so prod plus debug already boots.
 
 > Production must not boot with debug on. If `boot_ok("prod", True)` returns true, the boot gate has failed as a security control.
 

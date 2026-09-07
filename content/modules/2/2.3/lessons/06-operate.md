@@ -9,7 +9,7 @@ A new cookie, a WebView, a “debug” `Set-Cookie`, or a second name (`sc_refre
 
 ## Picture: scan the flags, rotate if script could have read
 
-A missing HttpOnly flag still has to be noticed and recovered from — not an excuse to paste the session into a ticket. The notice should name the cookie. Recovery should rotate it. Neither logs the value.
+A missing HttpOnly flag still has to be noticed. Do not paste the session into a ticket. The notice should name the cookie. Recovery should rotate it. Neither logs the value.
 
 ```mermaid
 flowchart TD

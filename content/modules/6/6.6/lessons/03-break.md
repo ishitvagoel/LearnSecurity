@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `accept` returns true and never marks the token used. A second true is a **failed rule**, not a retry nit.
+The practice is not a website you attack. `accept` returns true and never marks the token used, so a second call is already a second join.
 
 > `accept("t1")` may be true once. The second `accept("t1")` must be false. If it is still true, an invite token was accepted twice.
 

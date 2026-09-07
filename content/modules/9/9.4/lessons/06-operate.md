@@ -9,7 +9,7 @@ A new rule can fire a new HIGH after `ship_ok` was “fixed once.” Do not log 
 
 ## Picture: unmapped HIGH is a signal
 
-A blocked ship still has to be noticed and recovered from — not an excuse to quote the finding payload in the paging channel. The notice should name the finding id. Recovery should map or fix.
+A blocked ship still has to be noticed. Leave the finding payload out of the pager. The notice should name the finding id. Recovery should map or fix.
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ log_denied reason=unmapped_high_blocks finding=F1 sev=HIGH
 
 Not: a secret, a note body, or “verification gate complete.”
 
-If your alert includes the matching scanner snippet, you have copied the leak into the paging channel.
+If your alert includes the matching scanner snippet, the pager now has the finding payload too.
 
 ## What the framework does vs what you still have to check
 

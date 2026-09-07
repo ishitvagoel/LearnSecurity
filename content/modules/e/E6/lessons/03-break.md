@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `accept_exception` returns true for every dict: it never looks at owner, review date, or accessibility. That always-true accept is a **failed rule**, not a paperwork nit.
+The practice is not a website you attack. `accept_exception` returns true for every dict: it never looks at owner, review date, or accessibility, so an incomplete hole already counts as accepted.
 
 > An exception must not be accepted without owner, review date, and an accessibility check. If `accept_exception({"owner": "", "review_by": None})` returns true, the register gate has failed as a security control.
 

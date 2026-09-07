@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a model you attack. `run_tool` returns `ran {name}` for every name: it never looks at the name. That always-run call is a **failed rule**, not a paperwork nit.
+The practice is not a model you attack. `run_tool` returns `ran {name}` for every name: it never looks at the name, so every tool name already runs.
 
 > An agent must not run `exec_sql` because the model asked. If `run_tool("exec_sql", {})` returns a ran-string, the runtime has failed as a security control.
 

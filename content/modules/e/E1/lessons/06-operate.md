@@ -9,7 +9,7 @@ A new tool can still be registered after the allow-list was "set once." Do not l
 
 ## Picture: denied tool is a signal
 
-A denied tool still has to be noticed and recovered from — not an excuse to quote a transcript in the paging channel. The notice should name the tool. Recovery should revoke leftover agent credentials.
+A denied tool still has to be noticed. Leave the transcript out of the pager. The notice should name the tool. Recovery should revoke leftover agent credentials.
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ log_denied reason=tool_denied agent=sum-1 tool=exec_sql
 
 Not: a note body, a transcript, or "assurance gate complete."
 
-If your alert includes the matching transcript, you have copied the leak into the paging channel.
+If your alert includes the matching transcript, the pager now has the model output too.
 
 ## What the framework does vs what you still have to check
 

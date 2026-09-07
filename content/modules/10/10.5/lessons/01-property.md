@@ -48,7 +48,7 @@ flowchart LR
 | Still-in attacker | Keep a foothold after the tile goes green | Stay in | Close hid that they are still there |
 | Someone who treats a known-exploited list as close | Patch-list as the ticket Done | “It’s on the list” | Awareness is not restore; still no local check |
 
-You do not need a nation-state this week. Those three already close the incident without recovery.
+You do not need a nation-state. Those three already close the incident without recovery.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

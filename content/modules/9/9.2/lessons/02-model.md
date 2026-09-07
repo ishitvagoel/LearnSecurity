@@ -26,9 +26,9 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-  Human[human diff] --> Review["this week's review"]
+  Human[human diff] --> Review["this review"]
   Gen[generated helper] --> Review
-  Bot["later review bot"] --> Aid[help, not an oracle]
+  Bot["later review bot"] --> Aid[help, not a check]
 ```
 
 A bot that later greps the tree (9.4) is a help. It does not replace the five questions.

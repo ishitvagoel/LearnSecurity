@@ -11,7 +11,7 @@ Do not log note bodies in the CSV path (3.1 / 5.1). Do not attach the CSV to the
 
 ## Picture: the fourth try is a signal
 
-A fourth export in the window still has to be noticed and recovered from — not an excuse to quote note bodies in the paging channel. Recovery should keep the deny and revoke a stolen session.
+A fourth export in the window still has to be noticed. Leave note bodies out of the pager. Recovery should keep the deny and revoke a stolen session.
 
 ```mermaid
 flowchart TD
@@ -39,7 +39,7 @@ log_denied reason=quota_denied n=4 subject=user_67e request_id=req_67e
 
 Not: a note body, a CSV attachment, a real email, or a live load trace against a public host.
 
-If your alert includes note bodies from the CSV, you have opened a second leak in the paging channel.
+If your alert includes note bodies from the CSV, the pager now holds extra copies.
 
 A green “rate limit enabled” tile is not that check. Notification fan-out and extra formats are other paths of the same budget — inventory them before claiming recover. Re-run `test_fourth_export_is_denied` after any export-route change.
 

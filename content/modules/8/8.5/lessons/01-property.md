@@ -47,7 +47,7 @@ flowchart LR
 | Analytics vendor | Index extras the tracker SDK shipped | Run the product | Same body, second vendor |
 | Support | Paste “what the user saw” so they can reproduce | Close a ticket | The body leaves the device and lands in a ticket |
 
-You do not need a nation-state this week. Those four already get the body.
+You do not need a nation-state. Those four already get the body.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

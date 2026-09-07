@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `covered(req_id, tests)` returns true or false: any matching requirement id counts as coverage. That is a **failed rule**, not a missing spreadsheet cell.
+The practice is not a website you attack. `covered(req_id, tests)` returns true or false: any matching requirement id counts as coverage, even if the spreadsheet already has a tick.
 
 > A status-only AUTHZ-1 row must not count as coverage. If `covered("AUTHZ-1", [{"req": "AUTHZ-1", "asserts_isolation": False}])` is true, the proof you show before a release has failed as a security control.
 

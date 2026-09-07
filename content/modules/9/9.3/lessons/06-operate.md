@@ -9,7 +9,7 @@ A new endpoint can land with only 200 tests after `is_security_test` was “fixe
 
 ## Picture: missing isolation is a signal
 
-A missing named what must not happen still has to be noticed and recovered from — not an excuse to quote the note in the paging channel. The notice should name the suite. Recovery should add the isolation test.
+A missing named what-must-not-happen still has to be noticed. Leave the note out of the pager. The notice should name the suite. Recovery should add the isolation test.
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ log_denied reason=security_suite_missing_isolation req=isolation suite=api
 
 Not: a note body, a patient name, a live fuzz payload, or “later gate complete.”
 
-If your alert includes the matching note body, you have copied the leak into the paging channel.
+If your alert includes the matching note body, the pager now has the patient text too.
 
 ## What the framework does vs what you still have to check
 

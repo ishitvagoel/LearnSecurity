@@ -11,7 +11,7 @@ Do not log session cookies or note bodies (3.1 / 4.3). Do not attach the token t
 
 ## Picture: leftover session is a signal
 
-A leftover cookie used as the principal still has to be noticed and recovered from — not an excuse to quote the cookie in the paging channel. Recovery should keep the deny and rotate the worker.
+A leftover cookie used as the principal still has to be noticed. Leave the cookie out of the pager. Recovery should keep the deny and rotate the worker.
 
 ```mermaid
 flowchart TD
@@ -38,7 +38,7 @@ log_denied reason=worker_identity_wrong expected=worker-sc job_id=job_74e
 
 Not: Alice’s session cookie, note bodies, a live broker dump, or a real clinician token.
 
-If your alert includes Alice’s cookie or note bodies, you have opened a second leak in the paging channel.
+If your alert includes Alice’s cookie or note bodies, the pager now holds a second copy.
 
 A green “service account enabled” tile is not that check. Overnight export, outbox, and notification fan-out are other jobs of the same principal — inventory them before claiming recover. Re-run `test_user_session_is_not_worker_identity` after any task-enqueue change.
 

@@ -11,7 +11,7 @@ Do not paste a personal email or a production cookie into the ticket. Do not log
 
 ## Picture: alert on use after deleted
 
-A leftover cookie after delete still has to be noticed and recovered from — not an excuse to quote notes in the paging channel. Recovery should mass-revoke.
+A leftover cookie after delete still has to be noticed. Leave notes out of the pager. Recovery should mass-revoke.
 
 ```mermaid
 flowchart TD
@@ -39,7 +39,7 @@ log_denied reason=session_after_delete user_id=alice request_id=req_41lc
 
 Not: a note body, a personal email, a production cookie, or “single sign-on revoked it.”
 
-If your alert includes a note body, you have opened a second leak in the paging channel.
+If your alert includes a note body, the pager now holds a leftover copy.
 
 A green identity-provider tile that says “user disabled” is not that check. If a replica session store still has `alice`, treat it as the same leftover session, not a separate “eventual consistency” pass. An “account deleted” email is not recovery.
 

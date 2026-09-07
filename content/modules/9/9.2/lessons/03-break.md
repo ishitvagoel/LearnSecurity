@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. `review_ok(diff)` does not merge anything. It returns true for every string. That is a **failed rule**, not live eval.
+The practice is not a website you attack. `review_ok(diff)` does not merge anything. It returns true for every string, including the lab's fake `eval` marker.
 
 > Eval on user input must not be approved. `review_ok("x = eval(user)")` must be false.
 
 ## Where you may practice
 
-Stay inside `labs/9.2/9.2-lab`. The helper is `review_ok(diff)`. Fake diff string `x = eval(user)` — the lab’s stand-in identifier, not a working exploit.
+Stay inside `labs/9.2/9.2-lab`. `review_ok(diff)` sees the fake diff string `x = eval(user)` — the lab’s stand-in identifier, not a working exploit.
 
 Do not write a working exploit. Do not run eval on untrusted input outside this practice. Do not probe a live GitHub org. Do not paste eval payloads “to see what happens.”
 

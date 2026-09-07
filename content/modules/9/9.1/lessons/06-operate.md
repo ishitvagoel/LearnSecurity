@@ -9,7 +9,7 @@ A new requirement can land without a test after `covered` was “fixed once.” 
 
 ## Picture: uncovered AUTHZ-1 is a signal
 
-An unmapped requirement still has to be noticed and recovered from — not an excuse to quote the note in the paging channel. The notice should name the requirement. Recovery should add the isolation test.
+An unmapped requirement still has to be noticed. Leave the requirement text out of the pager. The notice should name the requirement. Recovery should add the isolation test.
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ log_denied reason=unmapped_req_blocks_release req=AUTHZ-1 release=rel_91e
 
 Not: a note body, a patient name, or a live checklist portal trace.
 
-If your alert includes the matching note, you have copied the leak into the paging channel.
+If your alert includes the matching note, the pager now has the requirement example too.
 
 ## What the framework does vs what you still have to check
 

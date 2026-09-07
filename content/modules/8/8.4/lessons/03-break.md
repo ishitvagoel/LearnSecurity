@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a store listing you unpack. `api_allowed(build_type, attest)` returns true for every pair, so a debug build with `attest=ok` is allowed to call prod export. That is a **failed rule**, not an attack on a public APK.
+The practice is not a store listing you unpack. `api_allowed(build_type, attest)` returns true for every pair, so a debug build with `attest=ok` is allowed to call prod export, even with no public APK to unpack.
 
 > `api_allowed("debug", "ok")` must be false. A debug build must not call production export.
 
 ## Where you may practice
 
-Stay inside `labs/8.4/8.4-lab`. The helper is `api_allowed(build_type, attest)`. Fake build-type strings (`debug`, `release`). It does not open a network. Do not probe a live Play Console, unpack a public APK, or paste anti-debug steps onto a store listing.
+Stay inside `labs/8.4/8.4-lab`. Fake build-type strings (`debug`, `release`) feed `api_allowed(build_type, attest)`. It does not open a network. Do not probe a live Play Console, unpack a public APK, or paste anti-debug steps onto a store listing.
 
 Do not paste this exercise onto a public host, employer clinic, or live store APK.
 

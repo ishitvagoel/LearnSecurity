@@ -58,7 +58,7 @@ Write the backlog in sentences a peer can attack:
 
 1. **Log line.** The `note_read` line may hold event name, note id, tenant id. It may not hold the body.
 2. **Error dump.** Exception text and slow-query logs are other places. They get the same deny for the body, even if this check only covers `log_event`.
-3. **Support paste.** A ticket that quotes the body is a new place. Deny it this week; do not wait for a later product to “handle patient data.”
+3. **Support paste.** A ticket that quotes the body is a new place. Deny it here; do not wait for a later product to “handle patient data.”
 
 ## Step 4: leftover, not a deleted row
 

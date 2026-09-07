@@ -11,7 +11,7 @@ Do not log full URLs if they contain tokens (4.3). Do not fetch the denied desti
 
 ## Picture: a denied host is a signal
 
-A deny of a preview URL that is not on the allow-list still has to be noticed and recovered from — not an excuse to paste the URL into the paging channel. Recovery should keep the deny. Neither fetches the destination.
+A deny of a preview URL that is not on the allow-list still has to be noticed. Do not paste the URL into the pager. Recovery should keep the deny. Neither fetches the destination.
 
 ```mermaid
 flowchart TD
@@ -39,7 +39,7 @@ log_denied reason=egress_denied class=link_local request_id=req_65e
 
 Not: a full URL with a query token, a note body, a live-fetch transcript, or “the web filter caught it.”
 
-If your alert includes a full URL with a query token, you have opened a second leak in the paging channel (4.3).
+If your alert includes a full URL with a query token, the pager now holds a second copy (4.3).
 
 A green “HTTPS only” tile is not that check. Re-run `test_link_local_metadata_is_denied` after any importer change. Webhooks (7.3) are another path of the same deputy — inventory them before claiming recover.
 

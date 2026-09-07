@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `crash_report` returns a dict: it copies the note body into the report. That JSON is a **failed rule**, not a debug nit.
+The practice is not a website you attack. `crash_report` returns a dict: it copies the note body into the report, so the JSON already holds the secret.
 
 > A confidential note body must not appear in this crash report. If `crash_report("secret")` includes `secret`, telemetry has failed as a security control.
 

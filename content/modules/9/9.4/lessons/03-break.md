@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a public repo you scan. `ship_ok` takes findings and a map: it returns true for every pair. That true is a **failed rule**, not a green tile.
+The practice is not a public repo you scan. `ship_ok` takes findings and a map: it returns true for every pair, so an unmapped finding already ships.
 
 > An unmapped HIGH must not ship. If `ship_ok([{"id": "F1", "sev": "HIGH"}], {})` returns true, the ship gate has failed as a security control.
 

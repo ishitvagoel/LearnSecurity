@@ -5,7 +5,7 @@
 
 ## The rule
 
-The notes app stores an upload under a lab folder. The **filename is data**. After you join it to the folder and canonicalize, the object must still be that folder. An earlier topic taught data vs interpreter grammar; this week's rule is **which file object** the path parser selected.
+The notes app stores an upload under a lab folder. The **filename is data**. After you join it to the folder and canonicalize, the object must still be that folder. An earlier topic taught data vs interpreter grammar; the rule here is **which file object** the path parser selected.
 
 > `resolve` must not return a path outside `/tmp/sc-lab`. A `../` name is data that tried to become a different object. This practice checks the prefix and raises; it does not read host files.
 

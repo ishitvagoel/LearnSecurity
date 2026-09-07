@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. `fetch_sql` and `is_bound`. It does not open PostgreSQL. It glues company and note id into the SQL text. That is a **failed rule**, not a dump of another company.
+The practice is not a website you attack. `fetch_sql` and `is_bound` do not open PostgreSQL. They glue company and note id into the SQL text, so another company's id in the string is already another row.
 
 > Tenant and note id are bound parameters, not SQL grammar. `fetch_sql` must return a bound pair, not a concatenated string.
 
 ## Where you may practice
 
-Stay inside `labs/5.5/5.5-lab`. The files are `fetch_sql` / `is_bound`. Fake company `tA` and note ids. It does not open PostgreSQL.
+Stay inside `labs/5.5/5.5-lab`. Fake company `tA` and note ids feed `fetch_sql` / `is_bound`. It does not open PostgreSQL.
 
 Do not probe a live database. Do not probe an employer replica. Do not probe a classmate preview. Do not paste a live query “to see what happens.”
 

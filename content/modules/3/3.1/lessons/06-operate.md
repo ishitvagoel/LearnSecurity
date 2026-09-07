@@ -11,7 +11,7 @@ Do not paste the matching line into Slack, a ticket, or a lesson note.
 
 ## Picture: alert on the substring, then purge
 
-A redaction miss still has to be noticed and recovered from — not an excuse to quote the secret in the paging channel. Recovery should purge the line.
+A redaction miss still has to be noticed. The secret does not belong in the pager. Recovery should purge the line.
 
 ```mermaid
 flowchart TD
@@ -39,7 +39,7 @@ log_denied reason=confidential_field event=note_read request_id=req_81aa
 
 Not: `tenant-A-secret-body`, a note body, a patient chart, or a card number.
 
-If your alert includes the matching line, you have copied the leak into the paging channel.
+If your alert includes the matching line, the pager now has the secret too.
 
 ## What the framework does vs what you still have to check
 

@@ -9,7 +9,7 @@ A flag can still flip after `boot_ok` was “fixed once.” Do not log stack tra
 
 ## Picture: an illegal boot is a signal
 
-An illegal boot still has to be noticed and recovered from — not an excuse to quote the stack trace in the paging channel. The notice should name env, debug, and deploy. Recovery should kill the process and rotate secrets that already leaked.
+An illegal boot still has to be noticed. Leave the stack trace out of the pager. The notice should name env, debug, and deploy. Recovery should kill the process and rotate secrets that already leaked.
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ log_denied reason=prod_debug_forbidden env=prod debug=true deploy=sc-12
 
 Not: a stack trace, a secret, or “assurance gate complete.”
 
-If your alert includes the matching trace, you have copied the leak into the paging channel.
+If your alert includes the matching trace, the pager now has the stack too.
 
 ## What the framework does vs what you still have to check
 

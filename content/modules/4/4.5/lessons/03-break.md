@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `accept_token` uses fake claims. It does not open an identity provider or check a real signature. A JWT minted for another API still counting as a notes-app session is a **failed rule**, not a dump of a production token.
+The practice is not a website you attack. `accept_token` uses fake claims. It does not open an identity provider or check a real signature. A JWT minted for another API still counting as a notes-app session is already a broken rule; you do not need a production token.
 
 > A token for another API is not a notes-app session. `accept_token({"sub": "alice", "aud": "other-api"}, "securecollab-api")` must be false.
 

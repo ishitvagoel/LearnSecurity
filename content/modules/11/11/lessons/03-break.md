@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `revoke` does nothing and a `read` that always returns the body: revoke never drops the grant, and read never asks. That no-op revoke is a **failed rule**, not a paperwork nit.
+The practice is not a website you attack. `revoke` does nothing and a `read` that always returns the body: revoke never drops the grant, and read never asks, so a revoked share still reads.
 
 > After `revoke("n1", "B")`, `read("n1", "B")` must be None. If it still returns the body, a revoked share still reads the note.
 

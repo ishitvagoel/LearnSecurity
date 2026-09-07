@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. `argv_for_list` and `uses_shell`. It does not start a process. It glues the name into a shell string. That is a **failed rule**, not a live command.
+The practice is not a website you attack. `argv_for_list` and `uses_shell` do not start a process. They glue the name into a shell string, so the name is already a command fragment.
 
 > The export name is an argv element, not shell grammar. `argv_for_list` must not start `sh -c`.
 
 ## Where you may practice
 
-Stay inside `labs/6.1/6.1-lab`. The files are `argv_for_list` / `uses_shell`. Fake name `notes`. It does not spawn a process.
+Stay inside `labs/6.1/6.1-lab`. Fake name `notes` is the input to `argv_for_list` / `uses_shell`. It does not spawn a process.
 
 Do not run a live OS command. Do not probe an employer export worker. Do not probe a classmate preview. Do not paste a live command “to see what happens.”
 

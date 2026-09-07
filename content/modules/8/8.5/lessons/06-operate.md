@@ -9,7 +9,7 @@ A new SDK version can turn “include extras” back on after `crash_report` was
 
 ## Picture: body in telemetry is a signal
 
-A redaction miss still has to be noticed and recovered from — not an excuse to quote the note in the paging channel. The notice should name the crash. Recovery should purge the vendor copy.
+A crash-report redaction miss still has to be noticed. Leave the crash body out of the pager. The notice should name the crash. Recovery should purge the vendor copy.
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ log_denied reason=crash_body_redacted crash_id=cr_85e app=release
 
 Not: a note body, a patient name, or a live crash payload.
 
-If your alert includes the matching report, you have copied the leak into the paging channel.
+If your alert includes the matching report, the pager now has the crash body too.
 
 ## What the framework does vs what you still have to check
 

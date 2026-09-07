@@ -9,7 +9,7 @@ A closer can still mark Done after `close_finding` was "fixed once." Do not log 
 
 ## Picture: close without retest is a signal
 
-A close that skipped retest still has to be noticed and recovered from — not an excuse to quote the note in the paging channel. The notice should name the finding. Recovery should reopen and re-run the same isolation check.
+A close that skipped retest still has to be noticed. Leave the finding out of the pager. The notice should name the finding. Recovery should reopen and re-run the same isolation check.
 
 ```mermaid
 flowchart TD
@@ -40,7 +40,7 @@ log_denied reason=finding_closed_without_retest finding=F-authz-1
 
 Not: a note body, a live-target URL, or "assurance gate complete."
 
-If your alert includes the matching note, you have copied the leak into the paging channel.
+If your alert includes the matching note, the pager now has the finding too.
 
 ## What the framework does vs what you still have to check
 

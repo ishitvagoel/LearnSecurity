@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. `can_read` treats “Bob has a share somewhere” as a yes for every note. That is a **failed rule**, not a dump of another company’s body.
+The practice is not a website you attack. `can_read` treats “Bob has a share somewhere” as a yes for every note, so a share on n1 already opens n2.
 
 > A grant on n1 does not authorize n2. If `can_read("bob", "n2")` is true because Bob has n1, leftover permission has replaced the rule.
 
 ## Where you may practice
 
-Stay inside `labs/4.4/4.4-lab`. The check is `can_read`. Notes `n1` / `n2` / `n3` and companies `acme` / `clinic` are fake. It does not open FastAPI or PostgreSQL. Do not guess ids against a live company, an employer API, or a classmate preview.
+Stay inside `labs/4.4/4.4-lab`. Notes `n1` / `n2` / `n3` and companies `acme` / `clinic` are fake inputs to `can_read`. It does not open FastAPI or PostgreSQL. Do not guess ids against a live company, an employer API, or a classmate preview.
 
 What must not happen: a grant on n1 authorizes n2, plus owner/admin costumes that cross companies or skip the object key. `can_read("bob", "n2")` is true.
 

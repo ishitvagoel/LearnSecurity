@@ -11,7 +11,7 @@ Do not log note bodies or bound parameter values that are bodies (3.1 / 5.1). Do
 
 ## Picture: error shape is a signal
 
-A SQL syntax-error spike after a query helper change still has to be noticed and recovered from — not an excuse to quote note bodies in the paging channel. Recovery should stop the concatenating path and restore if needed.
+A SQL syntax-error spike after a query helper change still has to be noticed. Leave note bodies out of the pager. Recovery should stop the concatenating path and restore if needed.
 
 ```mermaid
 flowchart TD
@@ -39,7 +39,7 @@ log_denied reason=sql_error_spike tenant=tA request_id=req_55q stmt=fetch_note
 
 Not: a note body, a full SQL string with values, a real email, or “the web filter caught it.”
 
-If your alert includes a full SQL string with values, you have opened a second leak in the paging channel.
+If your alert includes a full SQL string with values, the pager now holds the query text too.
 
 A green “web-filter SQLi rule” tile is not that check. Report paths and ORDER BY builders are other paths of the same check — inventory them before claiming recover. If a replica was not restored, treat it as the same leftover, not a separate “eventual consistency” pass.
 

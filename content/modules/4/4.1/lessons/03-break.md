@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. `delete_user` and `session_valid`: delete marks the profile and leaves the session. That leftover is a **failed rule**, not a cleanup nit.
+The practice is not a website you attack. `delete_user` and `session_valid`: delete marks the profile and leaves the session, so the leftover session still works.
 
 > After `delete_user("alice")`, `session_valid("alice")` must be false. If it is still true, a leftover session still works.
 
 ## Where you may practice
 
-Stay inside `labs/4.1/4.1-lab`. The files are `SESSIONS` and `DELETED`. The user is the synthetic name `alice`. It does not open an identity provider, a logout product, or a browser cookie jar.
+Stay inside `labs/4.1/4.1-lab`. `SESSIONS` and `DELETED` track the synthetic name `alice`. It does not open an identity provider, a logout product, or a browser cookie jar.
 
 Do not replay a production cookie. Do not replay an employer single-sign-on session. Do not replay a classmate login. Do not steal a cookie “to see what happens.”
 

@@ -9,7 +9,7 @@ A misconfigured proxy can start trusting `*` again after `channel_is_https` was 
 
 ## Picture: header versus socket mismatch is a signal
 
-A client header saying https while the socket is http still has to be noticed and recovered from — not an excuse to quote cookies in the paging channel. Recovery should revoke the cleartext cookies.
+A client header saying https while the socket is http still has to be noticed. Leave cookies out of the pager. Recovery should revoke the cleartext cookies.
 
 ```mermaid
 flowchart TD
@@ -37,7 +37,7 @@ log_denied reason=header_https_socket_http socket=http request_id=req_54ch
 
 Not: a session cookie, a note body, or “HSTS handled.”
 
-If your alert includes a session cookie or a note body, you have opened a second leak in the paging channel.
+If your alert includes a session cookie or a note body, the pager now holds a second copy.
 
 A green “Force HTTPS” tile is not that check. Re-run `test_client_forwarded_proto_is_not_tls` after any proxy change. Page `https://` versus API socket `http` is another path of the same rule — inventory it before claiming recover.
 

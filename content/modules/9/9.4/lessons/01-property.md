@@ -43,7 +43,7 @@ flowchart LR
 | Vendor dashboard | Show empty or noisy counts | Look green | No join to the coverage map |
 | Someone with a score on a slide | Treat the score as the gate | Pass an audit | Same unowned HIGH |
 
-You do not need a live GitHub org this week. Those three already ship the finding.
+You do not need a live GitHub org. Those three already ship the finding.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
