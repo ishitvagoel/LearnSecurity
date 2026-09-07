@@ -26,7 +26,7 @@ flowchart TD
   Claim["integrity ok"] --> True[allow_export true]
 ```
 
-The broken files show **cause** (policy on the client field). Do not send claims at anything except these local files. What has to be true first: `allow_export` returns true when the client says `integrity=ok`, ignoring `server_attest`. You do not need an emulator. You must not call live attestation APIs.
+Policy sits on the client field. Do not send claims at anything except these local files. `allow_export` returns true when the client says `integrity=ok`, ignoring `server_attest`. You do not need an emulator. You must not call live attestation APIs.
 
 The phone sandbox raises the cost of *other apps* reading this process; it does not make *this* process honest. Last topic (1.2) still lives on the **server**.
 

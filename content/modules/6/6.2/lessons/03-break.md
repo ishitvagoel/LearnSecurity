@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `render` draws a title and leaves `<` as a tag delimiter, so extra tags stay in the output. Unencoded markup in HTML is already a broken rule, not an exploit recipe.
+The practice is not a website you attack. `render` draws a title and leaves `<` as a tag delimiter, so extra tags stay in the output. Unencoded markup in HTML is the break, not an exploit recipe.
 
 > `render` must encode `<` as `&lt;` in HTML text. Unencoded markup must not reach the HTML interpreter.
 
@@ -27,7 +27,7 @@ flowchart TD
   Echo --> Tag["extra tags remain tags"]
 ```
 
-The broken files show **cause** (HTML grammar mixed with data). The tame marker is `<`. Do not paste attack recipes into notes. What has to be true first: `render` interpolates the body into `<p>…</p>` with no encoding. You do not need a live page. You must not.
+HTML grammar is mixed with data. The tame marker is `<`. Do not paste attack recipes into notes. `render` interpolates the body into `<p>…</p>` with no encoding. You do not need a live page. You must not.
 
 A famous-bugs nickname for “script in HTML” is awareness after the cause, not this check.
 

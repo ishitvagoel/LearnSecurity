@@ -28,7 +28,7 @@ flowchart TD
   Str --> Fail["is_bound false"]
 ```
 
-The broken files show **cause** (data mixed into SQL grammar), not a dump of another company. What has to be true first: `fetch_sql` interpolates `tenant` and `note_id` into the SQL text; `is_bound` looking for `%s` *inside that concatenated string* is a false check. You do not need a live `psql`. You must not run one.
+Data is mixed into SQL grammar — not a dump of another company. `fetch_sql` interpolates `tenant` and `note_id` into the SQL text; `is_bound` looking for `%s` *inside that concatenated string* is a false check. You do not need a live `psql`. You must not run one.
 
 Use parameterized queries. A scanner name for this family is a weakness label, not that check. The test uses a **class** of hostile note-id text — punctuation the parser would treat as extra grammar. Treat it as data for the params tuple. Do not paste it into notes as a cookbook.
 

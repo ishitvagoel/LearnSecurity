@@ -19,7 +19,7 @@ flowchart TD
   Score["score >= 80"] --> Skip[part 1 skipped]
 ```
 
-`--impl vulnerable` returns true for scores ≥ 80. The broken files show **why** (a number treated as a capability), not an LMS exploit recipe. You do not need a live quiz. You must not probe a live LMS.
+`--impl vulnerable` returns true for scores ≥ 80. A number is treated as a capability — not an LMS exploit recipe. You do not need a live quiz. You must not probe a live LMS.
 
 A 100% quiz cannot observe whether you can write a 1.2 deny rule. Check-in 1 evidence is not a percentage.
 

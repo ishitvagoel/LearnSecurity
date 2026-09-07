@@ -27,7 +27,7 @@ flowchart TD
   Set -->|yes| True[Returns true — the rule is false]
 ```
 
-The broken files show **cause** (a shared secret treated as resistant), not an exploit recipe against a public site. What has to be true first: method is in `{password, otp, webauthn}`; origin is ignored. You do not need a live phishing page. You must not build one.
+A shared secret is treated as resistant — not an exploit recipe against a public site. Method is in `{password, otp, webauthn}`; origin is ignored. You do not need a live phishing page. You must not build one.
 
 A later hardware bar is not this check.
 

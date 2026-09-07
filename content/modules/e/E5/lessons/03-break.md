@@ -26,7 +26,7 @@ flowchart TD
   Fn --> Out[tenant B]
 ```
 
-The broken files (`--impl vulnerable`) prefer `body["tenant"]`. That is extra writable fields applied to the isolation key. What has to be true first: body tenant overrides session. You do not need GraphQL. You must not probe a live company.
+The broken files (`--impl vulnerable`) prefer `body["tenant"]`. That is extra writable fields applied to the isolation key. Body tenant overrides session. You do not need GraphQL. You must not probe a live company.
 
 Isolation of the object and the company. An earlier topic already said the object id is not the grant; this rule is **the company context is not a client field**. This site does not mark you as finished.
 

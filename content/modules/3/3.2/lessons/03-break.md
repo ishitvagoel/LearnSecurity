@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `assemble_threat_model` does not open a scanner tenant, a Semgrep cloud org, or a production dashboard. Fake threat ids only. An empty list is already a broken rule, not a clean bill of health.
+The practice is not a website you attack. `assemble_threat_model` does not open a scanner tenant, a Semgrep cloud org, or a production dashboard. Fake threat ids only. An empty list is already the miss, not a clean bill of health.
 
 > A green scan still lists `cross-tenant-read`. `threats_from_scan(True)` must not return `[]`.
 
@@ -26,7 +26,7 @@ flowchart TD
   List --> Reviewer[The assurance story looks clean]
 ```
 
-The broken files show **cause** (tool output treated as thinking), not a dump of a vendor report. What has to be true first: `scanner_green` is true; the assembler returns `{"threats": []}`. You do not need a live scan. You must not point a scanner at someone else’s system.
+Tool output is treated as thinking — not a dump of a vendor report. `scanner_green` is true; the assembler returns `{"threats": []}`. You do not need a live scan. You must not point a scanner at someone else’s system.
 
 A green dashboard is a tool observation. It is not documented security decisions you can check.
 

@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `accept_token` uses fake claims. It does not open an identity provider or check a real signature. A JWT minted for another API still counting as a notes-app session is already a broken rule; you do not need a production token.
+The practice is not a website you attack. `accept_token` uses fake claims. It does not open an identity provider or check a real signature. A JWT minted for another API still counting as a notes-app session is the break; you do not need a production token.
 
 > A token for another API is not a notes-app session. `accept_token({"sub": "alice", "aud": "other-api"}, "securecollab-api")` must be false.
 
@@ -28,7 +28,7 @@ flowchart TD
   Sub -->|no| False[False]
 ```
 
-The broken files show **cause** (audience never consulted), not a dump of a production access token. What has to be true first: `accept_token` returns true when `sub` is in the dict. You do not need a signed JWT. You must not paste a live one.
+Audience is never consulted — not a dump of a production access token. `accept_token` returns true when `sub` is in the dict. You do not need a signed JWT. You must not paste a live one.
 
 A library saying the signature is fine is a tool observation, not that sentence.
 

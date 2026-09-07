@@ -28,7 +28,7 @@ flowchart TD
   Last --> Extra["extra readers 6 through 8"]
 ```
 
-The broken files show **cause** (policy only in the UI / no write-path check), not a load test against a public API. What has to be true first: `add_share` increments `_n` with no cap. You do not need eight HTTP clients. You must not flood a live API.
+Policy lives only in the UI; there is no write-path check — not a load test against a public API. `add_share` increments `_n` with no cap. You do not need eight HTTP clients. You must not flood a live API.
 
 A React `max={5}` is a usability hint, not that implementation.
 

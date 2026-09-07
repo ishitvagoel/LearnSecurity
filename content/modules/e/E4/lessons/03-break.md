@@ -31,7 +31,7 @@ sequenceDiagram
   V-->>V: destination length 8
 ```
 
-The broken files copy `src[: declared_len + 8]`. For an 8-byte source that is the whole buffer — longer than `bufsize` 4. Do not treat the `+ 8` as a C exploit size. What has to be true first: declared length is trusted over destination size. You do not need a compiler. You must not ship a native walkthrough.
+The broken files copy `src[: declared_len + 8]`. For an 8-byte source that is the whole buffer — longer than `bufsize` 4. Do not treat the `+ 8` as a C exploit size. Declared length is trusted over destination size. You do not need a compiler. You must not ship a native walkthrough.
 
 An earlier topic already said path length is checking every path for *which file*. This rule is **spatial length at the copy**. This page does not finish a check-in.
 

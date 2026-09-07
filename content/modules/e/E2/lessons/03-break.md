@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `isolation_enforced` treats Report-Only as on. Counting Report-Only as isolation is already a broken rule, not an exploit recipe.
+The practice is not a website you attack. `isolation_enforced` treats Report-Only as on. Counting Report-Only as isolation is the break, not an exploit recipe.
 
 > `isolation_enforced` must be false when the only header is `Content-Security-Policy-Report-Only`. An enforcing `Content-Security-Policy` header may count.
 
@@ -26,7 +26,7 @@ flowchart TD
   Any[Report-Only or CSP] --> True[isolation_enforced true]
 ```
 
-The broken files show **cause** (Report-Only mistaken for on). Do not probe public hosts. What has to be true first: either header name makes the function true. You do not need a browser. You must not load a live page.
+Report-Only is mistaken for on. Do not probe public hosts. Either header name makes the function true. You do not need a browser. You must not load a live page.
 
 Encoding is already the rule in 6.2. The check is **the header name that actually blocks**. Check-in 7 and milestone M2 stay **not finished**.
 

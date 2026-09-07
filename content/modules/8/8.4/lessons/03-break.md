@@ -26,7 +26,7 @@ flowchart TD
   Call["api_allowed debug ok"] --> True[returns true]
 ```
 
-The broken files show **cause** (prod trusts any build). Do not attack store listings. What has to be true first: `api_allowed` returns true for every pair. You do not need Gradle. You must not unpack a store APK.
+Prod trusts any build. Do not attack store listings. `api_allowed` returns true for every pair. You do not need Gradle. You must not unpack a store APK.
 
 Topic 8.1 already said the APK is hostile. This rule is **debug must not call prod even if attest=ok**. Secrets in the APK are a 5.3 leftover, not this grant.
 

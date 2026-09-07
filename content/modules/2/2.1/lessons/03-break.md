@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. Note ingest here is a first-key scan for who is allowed, and `json.loads` for storage. Two meanings of the same bytes are already a broken rule, not a JSON nit.
+The practice is not a website you attack. Note ingest here is a first-key scan for who is allowed, and `json.loads` for storage. Two meanings of the same bytes already disagree — not a JSON nit.
 
 > The same request bytes must yield one company meaning for both the who-is-allowed check and the stored row. If two readers would disagree, ingest refuses.
 
@@ -32,7 +32,7 @@ flowchart TD
   Accept --> Harm[Company A policy wraps company B body]
 ```
 
-The broken files show **cause** (two readers), not an exploit recipe. What has to be true first: duplicate company keys in one object; split parse.
+Two readers parse the same bytes — not an exploit recipe. Duplicate company keys sit in one object; the parsers split.
 
 ## What to read in the broken files
 

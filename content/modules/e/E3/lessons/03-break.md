@@ -26,7 +26,7 @@ flowchart TD
   Any[any capture] --> Append[CHARGES plus one]
 ```
 
-The broken files show **cause** (a side effect that is not bound to the key). Do not probe public APIs. What has to be true first: every `capture` appends. You do not need a payment company. You must not hit a live processor. `conftest.py` should call `reset()` so ledger state does not leak across tests.
+A side effect is not bound to the key. Do not probe public APIs. Every `capture` appends. You do not need a payment company. You must not hit a live processor. `conftest.py` should call `reset()` so ledger state does not leak across tests.
 
 Topics 2.4 and 6.6 already said consume-once; this rule is **money-like grain**. This site does not mark you as finished. This practice is not in card-network scope.
 

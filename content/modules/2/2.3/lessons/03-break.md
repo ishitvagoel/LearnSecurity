@@ -26,7 +26,7 @@ flowchart TD
   Ignore --> Leak["returns synthetic-session"]
 ```
 
-The broken files show **cause** (the session value is handed to the script reader), not an exploit recipe. What has to be true first: a cookie object whose `httponly` flag is already `True`; a reader that returns `value` anyway. `Secure` is already true on `HTTPONLY_SESSION` — HTTPS does not mean unreadability to JS.
+The session value is handed to the script reader — not an exploit recipe. A cookie object whose `httponly` flag is already `True`; a reader that returns `value` anyway. `Secure` is already true on `HTTPONLY_SESSION` — HTTPS does not mean unreadability to JS.
 
 ## What to look at: the cause, not a hunt
 

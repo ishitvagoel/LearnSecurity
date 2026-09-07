@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `apply(user, body)`: `user.update(body)` copies every key, so `is_admin` becomes true. Extra keys writing `is_admin` is already a broken rule; you do not need a public API.
+The practice is not a website you attack. `apply(user, body)`: `user.update(body)` copies every key, so `is_admin` becomes true. Extra keys writing `is_admin` already raise the role; you do not need a public API.
 
 > After `apply(user, {"is_admin": true})`, `is_admin` must still be false. Extra keys are not writable fields.
 
@@ -27,7 +27,7 @@ flowchart TD
   Update --> True["is_admin is true"]
 ```
 
-The broken files show **cause** (the binder maps any key). Do not send extra keys at anything except these local files. What has to be true first: `apply` copies every item from `body` onto `user`. You do not need HTTP. You must not probe a public API.
+The binder maps any key. Do not send extra keys at anything except these local files. `apply` copies every item from `body` onto `user`. You do not need HTTP. You must not probe a public API.
 
 Allowed fields have to be limited per action. Topic 1.2 already said who-is-allowed is a rule; this rule is **which keys that rule may write**. GraphQL query cost is 6.7’s resource account, not this PATCH.
 

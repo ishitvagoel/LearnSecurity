@@ -28,7 +28,7 @@ flowchart TD
   Any2 -->|yes| Cross["reads acme n1"]
 ```
 
-The broken files show **cause** (wrong lookup key), not a dump of another company’s note body. What has to be true first: `can_read` returns true if *any* grant exists for the user, or if role is `owner` / `admin`. You do not need a live GET. You must not guess ids on a live API.
+The lookup key is wrong — not a dump of another company’s note body. `can_read` returns true if *any* grant exists for the user, or if role is `owner` / `admin`. You do not need a live GET. You must not guess ids on a live API.
 
 A scanner “IDOR” name is a weakness label, not that rule.
 

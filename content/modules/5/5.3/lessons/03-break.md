@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `auth` uses disposable `sk-lab-hardcoded` and `rotated-now`. It does not open a vault or a cloud identity API. An old hardcoded default still counting as a valid key after rotation is already a broken rule; do not hunt a live key.
+The practice is not a website you attack. `auth` uses disposable `sk-lab-hardcoded` and `rotated-now`. It does not open a vault or a cloud identity API. An old hardcoded default still counting as a valid key after rotation is the break; do not hunt a live key.
 
 > A rotated secret must kill the hardcoded default. `auth("sk-lab-hardcoded", current="rotated-now")` must be false.
 
@@ -27,7 +27,7 @@ flowchart TD
   Or -->|DEFAULT| True["returns true"]
 ```
 
-The broken files show **cause** (the default never died), not a scan of GitHub for real keys. What has to be true first: `auth` returns true if `current` is missing (allow when it should deny) **or** if presented equals `DEFAULT` **or** `current`. You do not need a live key. You must not search for one.
+The default never died — not a scan of GitHub for real keys. `auth` returns true if `current` is missing (allow when it should deny) **or** if presented equals `DEFAULT` **or** `current`. You do not need a live key. You must not search for one.
 
 A secrets-manager sticker is a tool observation, not that sentence.
 

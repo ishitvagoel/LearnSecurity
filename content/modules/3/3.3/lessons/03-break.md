@@ -28,7 +28,7 @@ flowchart TD
   Allow --> Body["tA notes readable"]
 ```
 
-The broken files show **cause** (all-powerful runtime user / missing same-company check), not a live `SELECT *` against a real cluster. What has to be true first: `can_select` returns `True` for every role; `runtime_connection_role` is `postgres`. You do not need a live dump. You must not dump a live cluster.
+The runtime user is all-powerful and there is no same-company check — not a live `SELECT *` against a real cluster. `can_select` returns `True` for every role; `runtime_connection_role` is `postgres`. You do not need a live dump. You must not dump a live cluster.
 
 A private-network diagram is a topology observation, not that second check.
 

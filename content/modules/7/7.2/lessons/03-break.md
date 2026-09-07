@@ -26,7 +26,7 @@ flowchart TD
   Call["resolve member secret_internal"] --> True[returns true]
 ```
 
-The broken files show **cause** (no field table). Do not query anything except this practice. What has to be true first: `resolve` returns true for every pair. You do not need HTTP. You must not query a public GraphQL host.
+There is no field table. Do not query anything except this practice. `resolve` returns true for every pair. You do not need HTTP. You must not query a public GraphQL host.
 
 Identifiers find a row. They do not authorize fields. Object×company grants were 4.4; this rule is **which fields that grant may read**. Extra keys on *write* were 7.1.
 

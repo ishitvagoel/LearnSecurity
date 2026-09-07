@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `channel_is_https` uses fake headers and a `server_scheme` string. It does not open a socket or a CDN. A client `X-Forwarded-Proto: https` on an `http` socket still counting as TLS is already a broken rule; you do not need a strip attack.
+The practice is not a website you attack. `channel_is_https` uses fake headers and a `server_scheme` string. It does not open a socket or a CDN. A client `X-Forwarded-Proto: https` on an `http` socket still counting as TLS is the break; you do not need a strip attack.
 
 > A client Forwarded-Proto header is not TLS. `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` must be false.
 
@@ -27,7 +27,7 @@ flowchart TD
   Or -->|header| True["returns true"]
 ```
 
-The broken files show **cause** (the app believes the client about the channel), not a strip-attack walkthrough. What has to be true first: `channel_is_https` returns true if the header is `https` **or** the socket is `https`. You do not need a live man-in-the-middle. You must not run one.
+The app believes the client about the channel — not a strip-attack walkthrough. `channel_is_https` returns true if the header is `https` **or** the socket is `https`. You do not need a live man-in-the-middle. You must not run one.
 
 TLS has to be on the public HTTP service with no cleartext fallback. A client header is not that TLS.
 

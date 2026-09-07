@@ -26,7 +26,7 @@ flowchart TD
   Save["save_note secret"] --> Disk["DISK note equals secret"]
 ```
 
-The broken files show **cause** (a text file). Do not dump personal device storage. What has to be true first: `save_note` stores the body as-is. You do not need an emulator. You must not image a phone.
+The note is stored as a text file. Do not dump personal device storage. `save_note` stores the body as-is. You do not need an emulator. You must not image a phone.
 
 Sensitive data stored securely. Last crypto topic (5.2) already refused Base64; this rule is **the phone’s disk**. Topic 8.1 already said the device is hostile.
 

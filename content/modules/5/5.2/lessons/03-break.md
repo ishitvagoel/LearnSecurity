@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `protect` / `looks_encrypted` uses fake plaintext `secret`. It does not open a database or a cipher library. Base64 labeled encryption is already a broken rule; do not decode live data.
+The practice is not a website you attack. `protect` / `looks_encrypted` uses fake plaintext `secret`. It does not open a database or a cipher library. Base64 labeled as encryption is the break; do not decode live data.
 
 > `protect("secret")` must not round-trip as Base64 of the plaintext. If `base64.b64decode(protect("secret"))` equals `"secret"`, encoding was sold as secrecy.
 
@@ -27,7 +27,7 @@ flowchart TD
   B64 --> Decode[decode equals secret]
 ```
 
-The broken files show **cause** (encoding named encryption), not a decoder script for production. What has to be true first: `protect` returns `base64.b64encode(p)`; `looks_encrypted` is `t != "secret"`. You do not need a live column. You must not decode one.
+Encoding is named encryption — not a decoder script for production. `protect` returns `base64.b64encode(p)`; `looks_encrypted` is `t != "secret"`. You do not need a live column. You must not decode one.
 
 Use approved authenticated encryption, not encoding. Argon2 is for **passwords**, not this field.
 

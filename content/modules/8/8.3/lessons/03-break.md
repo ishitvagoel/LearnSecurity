@@ -26,7 +26,7 @@ flowchart TD
   Q["as admin"] --> Session["current_user admin"]
 ```
 
-The broken files show **cause** (identity from the link). Do not send Intents at anything except these local files. What has to be true first: `open_link` copies `as` onto the session. You do not need Android. You must not install a malware APK.
+Identity comes from the link. Do not send Intents at anything except these local files. `open_link` copies `as` onto the session. You do not need Android. You must not install a malware APK.
 
 Last topic already said the session is identity (4.3). This rule is **the Intent must not become the principal**.
 

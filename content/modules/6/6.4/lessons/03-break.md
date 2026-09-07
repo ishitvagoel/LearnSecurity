@@ -27,7 +27,7 @@ flowchart TD
   Join --> Escapes["canonical path leaves folder"]
 ```
 
-The broken files show **cause** (path grammar mixed with data). The name `../outside` is **data**. Do not use it against other directories. What has to be true first: `resolve` returns `str(ROOT / name)` without canonicalize-and-prefix. You do not need to `open()` the result. You must not.
+Path grammar is mixed with data. The name `../outside` is **data**. Do not use it against other directories. `resolve` returns `str(ROOT / name)` without canonicalize-and-prefix. You do not need to `open()` the result. You must not.
 
 An awareness list that names “path walk” is not the failing check.
 

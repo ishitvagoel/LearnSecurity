@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. `session_from_request` uses fake token `secret`. It does not open uvicorn, a CDN, or a browser history. A query-string session is already a broken rule; you do not need a log dump.
+The practice is not a website you attack. `session_from_request` uses fake token `secret`. It does not open uvicorn, a CDN, or a browser history. A query-string session is the break; you do not need a log dump.
 
 > `session_from_request({"access_token": "secret"}, {}, None)` must return `None`. A session must not start from a query-string token.
 
@@ -30,7 +30,7 @@ flowchart TD
   Sess --> Log[Would appear in URL copies]
 ```
 
-The broken files show **cause** (token in a logged, shared channel), not a dump of production logs. What has to be true first: `session_from_request` prefers `query.get("access_token")`. You do not need a live GET. You must not fetch a URL that contains a real token.
+The token sits in a logged, shared channel — not a dump of production logs. `session_from_request` prefers `query.get("access_token")`. You do not need a live GET. You must not fetch a URL that contains a real token.
 
 Secrets belong in the body or headers, not in the URL. HTTPS is a hop tool, not that sentence.
 

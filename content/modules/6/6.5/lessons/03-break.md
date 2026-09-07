@@ -27,7 +27,7 @@ flowchart TD
   Scheme -->|yes| True["returns true"]
 ```
 
-The broken files show **cause** (the server would dial whoever the URL names). The link-local address is a **named destination string**. Do not send packets to it. What has to be true first: `allowed` returns true for any `http`/`https` scheme. You do not need a GET. You must not.
+The server would dial whoever the URL names. The link-local address is a **named destination string**. Do not send packets to it. `allowed` returns true for any `http`/`https` scheme. You do not need a GET. You must not.
 
 Use an allow-list of protocols, hosts, paths, and ports before calling another service. The check is the predicate, not a live fetch. A famous-bugs nickname for server-side requests is awareness after the cause, not that check.
 
