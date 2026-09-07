@@ -32,7 +32,7 @@ After DELETE, `test_revoked_share_cannot_read` still has to go red if B can read
 | Recover | Notify A; rotate share links; wipe caches |
 | Leftover | Copies already sent; delayed worker; named exceptions later |
 
-A scanner dashboard will show coverage and stay silent when CI’s `read` ignores grants. Detection must observe **B after revoke is None**, not “revoke was called.” The note body attached to `revoked_share_read_denied` is the share.
+Scanner coverage can look complete while CI’s `read` ignores grants. Detection must observe **B after revoke is None**, not “revoke was called.” The note body attached to `revoked_share_read_denied` is the share.
 
 ```text
 log_denied reason=revoked_share_read_denied note=n1 tenant=B

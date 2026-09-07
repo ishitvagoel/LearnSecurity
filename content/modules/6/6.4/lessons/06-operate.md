@@ -32,7 +32,7 @@ Recovery is incomplete if the next route still joins `UploadFile.filename` witho
 
 ## What the framework does vs what you still have to check
 
-A WAF will page on `../` in the URL and stay silent when `UploadFile.filename` still joins without canonicalize. Notice must observe **canonical path left the folder**, not a denylist hit. A patient filename or a host path cookbook would name the scan on `path_escape_denied`.
+WAF `../` hits do not see `UploadFile.filename` still joining without canonicalize. Notice must observe **canonical path left the folder**, not a denylist hit. A patient filename or a host path cookbook would name the scan on `path_escape_denied`.
 
 ## Practice
 

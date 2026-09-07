@@ -32,7 +32,7 @@ The migrate job is leftover you must keep named: it exists, it is offline at req
 
 ## What the framework does vs what you still have to check
 
-Cloud IAM dashboards will show “database in a private subnet” and stay silent when the connection user is `postgres`. Notice must observe the **runtime role**, not the private network. Leave the note body out of the IAM metric.
+“Database in a private subnet” on Cloud IAM does not name the connection user `postgres`. Notice must observe the **runtime role**, not the private network. Leave the note body out of the IAM metric.
 
 ## Practice
 

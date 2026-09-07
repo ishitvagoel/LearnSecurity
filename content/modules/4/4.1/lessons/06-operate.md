@@ -45,7 +45,7 @@ A green identity-provider tile that says “user disabled” is not that check. 
 
 ## What the framework does vs what you still have to check
 
-An identity-provider dashboard will show “user disabled” and stay silent when a self-contained token still verifies. Detection must observe **session_valid after deleted**, not the HR ticket. SessionMiddleware does not emit this alert for you.
+“User disabled” on the identity-provider tile will not notice a self-contained token that still verifies. Detection must observe **session_valid after deleted**, not the HR ticket. SessionMiddleware does not emit this alert for you.
 
 ## Can people still use it
 

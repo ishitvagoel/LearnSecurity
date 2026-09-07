@@ -31,7 +31,7 @@ While the header is Report-Only, `test_report_only_is_not_enforcement` is the ch
 
 ## What the framework does vs what you still have to check
 
-A content-security reporting dashboard will show violation counts and stay silent when CI’s `isolation_enforced` treats Report-Only as on. Notice must observe **Report-Only is not enforcement**, not report volume. HTML next to a Report-Only-as-enforcement reading is a logging leak (3.1). Reporting from a content-security policy is extra, later, and advanced — reports are not close.
+CSP violation counts do not mean CI’s `isolation_enforced` requires the enforcing header. Notice must observe **Report-Only is not enforcement**, not report volume. HTML next to a Report-Only-as-enforcement reading is a logging leak (3.1). Reporting from a content-security policy is extra, later, and advanced — reports are not close.
 
 `csp_report_only_not_enforced` fires without HTML, and a reporting dashboard is extra, not this enforcement.
 
