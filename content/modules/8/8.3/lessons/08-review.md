@@ -7,7 +7,7 @@
 
 Review `labs/8.3/8.3-lab/vulnerable/` as a change to the notes app’s App Link handling. Check whether `open_link({"as": "admin"})` still switches `current_user()`.
 
-A comment “we should ignore extras later” is not a pass on `test_deeplink_as_param_does_not_switch_user`. An App Links screenshot is not this review.
+Do not treat “we should ignore extras later” as a green `test_deeplink_as_param_does_not_switch_user`. An App Links screenshot does not stop `as=admin`.
 
 ## Picture: current_user = extras['as']
 
@@ -48,4 +48,4 @@ A clinic change that “verified App Links” without an `as=` deny check is an 
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will ignore extras later.” That comment is leftover without an owner. Do not install a malware APK to prove the finding.
+A deeplink that still switches the user, plus “will ignore extras later,” is leftover with no owner. Do not install a malware APK to prove the finding.

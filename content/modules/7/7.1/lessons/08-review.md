@@ -7,7 +7,7 @@
 
 Review `labs/7.1/7.1-lab/vulnerable/` as a change to the notes app’s profile PATCH. Check whether `apply(..., {"is_admin": true})` still writes true.
 
-A comment “we should allow-list later” is not a pass on `test_is_admin_cannot_be_patched`. An inventory ticket about leftover endpoints is not this review.
+A sticky note “we should allow-list later” is not `test_is_admin_cannot_be_patched` going green. An inventory ticket about leftover endpoints does not drop `is_admin`.
 
 ## Picture: user.update(body) / __dict__.update
 
@@ -48,4 +48,4 @@ A clinic change that “documented the PATCH in OpenAPI” without an `is_staff`
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will allow-list later.” That comment is leftover without an owner. Do not probe a public API to prove the finding.
+A PATCH that still writes `is_admin`, plus “will allow-list later,” has no owner. Do not probe a public API to prove the finding.

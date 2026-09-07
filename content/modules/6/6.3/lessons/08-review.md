@@ -7,7 +7,7 @@
 
 You are reviewing share. Check whether `allow_share` for a foreign origin with `token=None` is still true.
 
-A comment “will add CSRF later” is not a pass on `test_foreign_origin_post_is_denied`.
+If `test_foreign_origin_post_is_denied` still fails, “will add CSRF later” is not the review.
 
 ## Picture: leftover cookie auth + no Origin check
 
@@ -48,4 +48,4 @@ Clinic change that “set SameSite=Lax” without an origin-and-token test is an
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will add CSRF later.” That comment is leftover without an owner. Do not visit a live third-party page to prove the finding.
+Postpone CSRF in a comment and nobody owns the foreign-origin deny. Do not visit a live third-party page to prove the finding.

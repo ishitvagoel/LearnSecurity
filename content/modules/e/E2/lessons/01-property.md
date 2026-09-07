@@ -31,7 +31,7 @@ flowchart LR
   Csp --> NotEnc[not encoding]
 ```
 
-Helmet defaults, a green reporting dashboard, or “we set a header” is not this check.
+Helmet defaults, a green reporting dashboard, and “we set a header” do not turn Report-Only into enforcement.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

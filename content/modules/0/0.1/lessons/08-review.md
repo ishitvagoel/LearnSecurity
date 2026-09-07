@@ -20,7 +20,7 @@ flowchart TD
   Q -->|a guide mapped| False[False assurance]
 ```
 
-A public host still has to be denied. If the change never checks a hostname allow-list, that leftover path is still open.
+A public host still has to be denied. Without a hostname allow-list, example.com stays authorized.
 
 ## Problems to find (name them yourself)
 
@@ -45,4 +45,4 @@ A contractor change that “added the guide and a proxy” without a host allow-
 
 ## What this page is not doing
 
-Do not merge by adding a comment “do not scan production.” That comment is leftover risk without an owner. Do not fetch a public host to prove the finding.
+A comment that says “do not scan production” does not own the allow-list. Keep the finding open until someone does. Do not fetch a public host to prove the finding.

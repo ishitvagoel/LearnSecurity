@@ -5,9 +5,9 @@
 
 ## What you are reviewing
 
-You are reviewing logging. Label each claim **rule**, **tool**, or **false assurance**. Say whether the body still lands in the log if they ship. Start at `log_event` and the body×log row, not at a scanner color or a spreadsheet.
+You are reviewing logging. Label each claim **rule**, **tool**, or **false assurance**. Say whether the body still lands in the log if they ship. Open `log_event` and the body×log row. A scanner color or a spreadsheet can wait.
 
-A comment “will redact later” is not a pass on `test_note_body_is_not_logged`.
+“Will redact later” is a promise. `test_note_body_is_not_logged` is the evidence.
 
 ## Picture: problems to find (name them yourself)
 
@@ -51,4 +51,4 @@ If the dashboard shows a Confidential or redaction-miss badge, do not encode it 
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will redact later.” That comment is leftover without an owner. Do not dump production logs to prove the finding.
+You cannot waive a logged body with “will redact later.” Assign an owner or keep the finding open. Do not dump production logs to prove the finding.

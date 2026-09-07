@@ -5,9 +5,9 @@
 
 ## What you are reviewing
 
-You are reviewing export listing. Label each claim **rule**, **tool**, or **false assurance**. Say whether `argv_for_list("notes")` still starts `["sh", "-c"]` if they ship. Start at `sh -c` concatenation, not at a scanner color.
+You are reviewing export listing. Label each claim **rule**, **tool**, or **false assurance**. Say whether `argv_for_list("notes")` still starts `["sh", "-c"]` if they ship. Start at `sh -c` concatenation, not at a green scan.
 
-A comment “will switch to argv later” is not a pass on `test_does_not_invoke_shell`.
+Someone still has to make `test_does_not_invoke_shell` pass; “will switch to argv later” does not do that.
 
 ## Picture: problems to find (name them yourself)
 
@@ -46,4 +46,4 @@ Clinic change that “sanitized the filename” and still calls `sh -c` is an in
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will switch to argv later.” That comment is leftover without an owner. Do not execute a live command to prove the finding.
+Do not merge a shell call because a comment promises argv later. Do not execute a live command to prove the finding.

@@ -29,7 +29,7 @@ flowchart TD
 
 What you trust is the **versioned list with owners and triggers**, plus the check that those ids exist. The scanner process is not the whole check. FastAPI, Semgrep, and a vendor dashboard do not know `cross-tenant-read`.
 
-Threat Dragon, a data-flow picture, or “we did STRIDE in the sprint” is not this check.
+Threat Dragon, a data-flow picture, and “we did STRIDE in the sprint” do not put `cross-tenant-read` on a green-scan model.
 
 ## Picture: four questions, not a sticker pack
 

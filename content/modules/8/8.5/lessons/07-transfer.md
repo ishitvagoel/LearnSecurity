@@ -13,7 +13,7 @@ An EHR-lite “debug crash includes the last chart so support can reproduce,” 
 
 ## Picture: same place, clinical object
 
-Here, a patient name is still this topic’s note body. Name the field, the place it is sent, and what still changes after the store form is filled. Enabling a crash product and filling the store form does not omit the field.
+A patient name leaks the same way a note body leaks in a crash report. Enabling a crash product and filling the store form does not omit the field.
 
 | Notes app | Clinic sketch |
 |---|---|

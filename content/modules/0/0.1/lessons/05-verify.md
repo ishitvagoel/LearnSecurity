@@ -10,7 +10,7 @@ Saying you’ll be careful does not authorize the target. An authorization chapt
 
 ## Picture: the broken files must fail on the public host
 
-The failing observation on `--impl vulnerable` is **public host**. A passing collection count is not this check.
+The failing observation on `--impl vulnerable` is **public host**. Counting passing tests does not show that example.com is denied.
 
 ```mermaid
 flowchart LR

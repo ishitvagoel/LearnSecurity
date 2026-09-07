@@ -54,7 +54,7 @@ In `vulnerable/share.py`, `share_note` appends `note_id` to `_SHARES` on every c
 
 ## What the framework does vs what you still have to check
 
-A FastAPI route, Next.js disable-on-submit, or “PostgreSQL will unique-constrain it” is not this check. A unique constraint on `(note_id)` would block **any** second share, including a legitimate new key — wrong check. Two calls with `k1`, `share_count() == 1`.
+A FastAPI route, Next.js disable-on-submit, and “PostgreSQL will unique-constrain it” do not remember the first share outcome. A unique constraint on `(note_id)` would block **any** second share, including a legitimate new key — wrong check. Two calls with `k1`, `share_count() == 1`.
 
 ## Practice
 

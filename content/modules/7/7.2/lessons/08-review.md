@@ -7,7 +7,7 @@
 
 Review `labs/7.2/7.2-lab/vulnerable/` as a change to the notes app’s note JSON. Check whether `resolve("member", "secret_internal")` is still true.
 
-A comment “will matrix later” is not a pass on `test_member_cannot_resolve_internal_field`.
+Until `test_member_cannot_resolve_internal_field` passes, “will matrix later” is unfinished work.
 
 ## Picture: resolver / dump always true
 
@@ -48,4 +48,4 @@ A clinic change that “hid SSN in the table” without a member×field deny tes
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will matrix later.” That comment is leftover without an owner. Do not query a public GraphQL host to prove the finding.
+Do not ship a member-readable internal field because a comment promises a field matrix later. Do not query a public GraphQL host to prove the finding.

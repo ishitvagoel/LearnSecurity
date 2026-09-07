@@ -7,7 +7,7 @@
 
 You are reviewing export. Label each claim **rule**, **tool**, or **false assurance**. Say whether `allow(4)` is still true if they ship. Start at unbounded allow, not at a famous API-abuse list.
 
-A comment “will cap later” is not a pass on `test_fourth_export_is_denied`.
+A TODO to cap later does not satisfy `test_fourth_export_is_denied`.
 
 ## Picture: problems to find (name them yourself)
 
@@ -48,4 +48,4 @@ Clinic change that “rate-limited at the edge” without a per-person fourth-ex
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will cap later.” That comment is leftover without an owner. Do not load-test a public host to prove the finding.
+Leave “will cap later” out of the merge until someone owns the fourth-export deny. Do not load-test a public host to prove the finding.

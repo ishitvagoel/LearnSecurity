@@ -13,7 +13,7 @@ An EHR-lite "the assessor delivered a 40-page PDF with severity 9.8 so we closed
 
 ## Picture: same close loop, clinical object
 
-Here, closing a clinic ticket is still this topic’s close-without-retest rule. Name the rule, the retest, and what still changes after close. Filing the PDF and marking the ticket Done does not set `retest` to `"pass"`.
+Closing a clinic ticket is the close-without-retest rule. Filing the PDF and marking the ticket Done does not set `retest` to `"pass"`.
 
 | Notes app | Clinic sketch |
 |---|---|

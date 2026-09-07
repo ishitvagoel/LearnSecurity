@@ -7,7 +7,7 @@
 
 Review `labs/7.3/7.3-lab/vulnerable/` as a change to a notes-app billing webhook. Check whether `accept("", "body", "lab-secret")` is still true.
 
-A comment “will HMAC later” is not a pass on `test_missing_signature_is_rejected`. A famous-bugs ticket is not.
+“Will HMAC later” is a promise. `test_missing_signature_is_rejected` is the evidence. A famous-bugs ticket does not verify the signature.
 
 ## Picture: accept always true / process because the path matched
 
@@ -48,4 +48,4 @@ Clinic change that “terminated TLS and allow-listed the vendor” without a mi
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will HMAC later.” That comment is leftover without an owner. Do not POST a live provider to prove the finding.
+You cannot waive a missing signature with “will HMAC later.” Assign an owner or keep the finding open. Do not POST a live provider to prove the finding.

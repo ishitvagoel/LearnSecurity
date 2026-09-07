@@ -24,7 +24,7 @@ flowchart TD
 
 The attacker cloned the repo or an old image. Trusting `.gitignore` or “we use Vault” without a rotation test is not what you trust.
 
-AWS Secrets Manager, a Python settings library, or a `.env` file is not this check.
+AWS Secrets Manager, a Python settings library, and a `.env` file do not kill a hardcoded default after rotate.
 
 ## Picture: three secret classes
 

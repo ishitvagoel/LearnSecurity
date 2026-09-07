@@ -28,7 +28,7 @@ flowchart TD
 
 Picture a member with a real grant on `n1` who swaps `note_id`, or someone guessing ids. Trusting “they are a collaborator” as a boolean is not what you trust.
 
-Casbin, OPA, a database row rule, or a signed note id is not this check.
+Casbin, OPA, a database row rule, and a signed note id do not make a grant on n1 fail for n2.
 
 ## Picture: company is a second key, not a costume
 

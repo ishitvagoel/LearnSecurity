@@ -25,7 +25,7 @@ SQLAlchemy `to_dict()`, GraphQL default resolvers, and REST `?fields=` that echo
 
 Picture a member session that asks for extra fields — a clinic GraphQL `Patient { ssn }`, a REST `?fields=` dump, or a CSV exporter that serializes every ORM column. What you trust is local `resolve(role, field)` on the server. Hiding the key in the SPA is not the rule.
 
-“Private JSON keys,” “GraphQL schema is typed,” “we already passed 4.4 object tests” is not this check.
+Private JSON keys, a typed GraphQL schema, and a passing 4.4 object suite do not stop a member from resolving an internal field.
 
 ## Picture: role times field is a table
 

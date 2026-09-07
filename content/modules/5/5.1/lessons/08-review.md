@@ -5,9 +5,9 @@
 
 ## What you are reviewing
 
-You are reviewing deletion. Label each claim **rule**, **tool**, or **false assurance**. Say whether `body_retained("alice")` is still `"secret"` after `delete_account("alice")` if they ship. Start at leftover analytics after delete, not at a scanner color or a contract ticket.
+You are reviewing deletion. Label each claim **rule**, **tool**, or **false assurance**. Say whether `body_retained("alice")` is still `"secret"` after `delete_account("alice")` if they ship. Start at leftover analytics after delete. A contract ticket is the wrong starting place.
 
-A comment “will add warehouse purge later” is not a pass on `test_deleted_account_leaves_no_analytics_body`.
+`test_deleted_account_leaves_no_analytics_body` is the check. “Will add warehouse purge later” is a postponement.
 
 ## Picture: problems to find (name them yourself)
 
@@ -21,7 +21,7 @@ flowchart TD
   Q -->|"privacy policy"| False[False assurance]
 ```
 
-Analytics and search bodies still have to be None after delete. If that same delete never pops those copies, that leftover path is still open. “We anonymized user ids” while the body column remains is still the same problem.
+Analytics and search bodies still have to be None after delete. A delete that never pops those copies still leaves the body in the warehouse. “We anonymized user ids” while the body column remains is still the same problem.
 
 ## Problems to find (name them yourself)
 
@@ -50,4 +50,4 @@ If the dashboard shows an “account deleted” badge, do not encode it as color
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will add warehouse purge later.” That comment is leftover without an owner. Do not dump a live warehouse to prove the finding.
+Shipping “will add warehouse purge later” leaves the analytics body on disk with nobody assigned. Do not dump a live warehouse to prove the finding.

@@ -208,4 +208,4 @@ Write two short paragraphs:
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will fix the header later.” Do not open the keys file before your review is evaluated. Do not try the same calls against a public or employer system.
+Do not ship “will fix the header later” as the review. Do not open the keys file before your review is evaluated. Do not try the same calls against a public or employer system.

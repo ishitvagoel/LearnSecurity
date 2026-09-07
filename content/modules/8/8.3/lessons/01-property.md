@@ -34,7 +34,7 @@ flowchart LR
 
 On older API levels `exported` defaults were surprising. Treat export as explicit.
 
-“App Links verified,” “https,” “WebView is Chrome” is not this check.
+“App Links verified,” “https,” and “WebView is Chrome” do not stop a deep link from switching the signed-in user.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

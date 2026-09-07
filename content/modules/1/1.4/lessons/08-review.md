@@ -5,9 +5,9 @@
 
 ## What you are reviewing
 
-This review is about a notes-app recovery confirm and a “risk register.” Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say which outcome (lockout, shortcut/secrecy, or a missing record) breaks if they ship. Start at the confirm widget and the register row, not at a scanner color or an accessibility badge.
+You are reviewing a notes-app recovery confirm and a “risk register.” Label each claim **rule**, **tool**, or **false assurance**. Say which outcome (lockout, shortcut/secrecy, or a missing record) breaks if they ship. Open the confirm widget and the register row. An accessibility badge can wait.
 
-A comment “will fix accessibility later” is not a pass on `test_recovery_control_is_usable_and_accessible`.
+The review is whether `test_recovery_control_is_usable_and_accessible` passes, not whether someone wrote “will fix accessibility later.”
 
 ## Picture: problems to find (name them yourself)
 
@@ -46,4 +46,4 @@ Keyboard, not-color-alone, and a large enough target apply to the control. They 
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will fix accessibility later.” That comment is leftover risk without an owner.
+A mouse-only confirm with only “will fix accessibility later” is leftover lockout with no owner.

@@ -13,7 +13,7 @@ An EHR-lite “we left DEBUG on for five minutes so support can see traces,” p
 
 ## Picture: five minutes vs a boot
 
-Here, a clinic compose file is still this topic’s production boot. Name env, debug, and what still changes after someone “just needs five minutes.” Leaving DEBUG on for five minutes is still a production boot.
+Treat the clinic compose file as a production boot. Leaving DEBUG on for five minutes is still a production boot.
 
 | Notes app | Clinic sketch |
 |---|---|

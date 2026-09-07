@@ -7,7 +7,7 @@
 
 Review `labs/2.1/2.1-parser-boundaries/vulnerable/` as a change to notes-app ingest. Reconstruct whether ACL and store still parse the same bytes twice.
 
-A comment “JSON should not duplicate keys” is not a pass on `test_duplicate_tenant_keys_are_one_meaning`.
+Do not treat “JSON should not duplicate keys” as a green `test_duplicate_tenant_keys_are_one_meaning`.
 
 ## Picture: problems to find (name them yourself)
 
@@ -44,4 +44,4 @@ GraphQL and REST both ingest the same note — two grammars. A change that “va
 
 ## What this page is not doing
 
-Do not merge by adding a comment “JSON should not duplicate keys.” The spec says should, not this check.
+Do not merge because RFC 8259 says JSON should not duplicate keys. Should is not `test_duplicate_tenant_keys_are_one_meaning`.

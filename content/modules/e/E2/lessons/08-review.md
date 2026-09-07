@@ -7,7 +7,7 @@
 
 Review `labs/E2/e2-lab/vulnerable/` as a change to the notes app’s header middleware. Check whether Report-Only still makes `isolation_enforced` true.
 
-A comment “we should enforce later” is not a pass on `test_report_only_is_not_enforcement`.
+“We should enforce later” does not close `test_report_only_is_not_enforcement`.
 
 ## Picture: Report-Only counted as on
 
@@ -48,4 +48,4 @@ A clinic change that “added Report-Only and a dashboard” without an enforcin
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will enforce later.” That comment is leftover without an owner. Do not load a public page to prove the finding.
+Report-Only counted as on, plus “will enforce later,” is still a header nobody owns. Do not load a public page to prove the finding.

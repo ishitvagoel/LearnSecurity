@@ -5,9 +5,9 @@
 
 ## What you are reviewing
 
-You are reviewing offboarding. Label each claim **rule**, **tool**, or **false assurance**. Say whether `session_valid("alice")` is still true after `delete_user` if they ship. Start at the leftover session after delete, not at a scanner color or an HR ticket.
+You are reviewing offboarding. Label each claim **rule**, **tool**, or **false assurance**. Say whether `session_valid("alice")` is still true after `delete_user` if they ship. Start at the leftover session after delete. An HR ticket does not kill the cookie.
 
-A comment “will revoke sessions later” is not a pass on `test_deleted_user_session_is_dead`.
+The review is whether `test_deleted_user_session_is_dead` passes, not whether someone wrote “will revoke sessions later.”
 
 ## Picture: problems to find (name them yourself)
 
@@ -50,4 +50,4 @@ If the dashboard shows a signed-out badge, do not encode it as color only. That 
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will revoke sessions later.” That comment is leftover without an owner. Do not replay a live cookie to prove the finding.
+A deleted-user session with only “will revoke later” is still a live session nobody owns. Do not replay a live cookie to prove the finding.

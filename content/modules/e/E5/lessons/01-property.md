@@ -33,7 +33,7 @@ flowchart LR
   Set --> Not12[not the check]
 ```
 
-A subdomain Host header, a JWT `org` claim copied from the client, a relationship-graph dashboard, a famous-bugs mapping is not this check.
+A subdomain Host header, a JWT `org` claim copied from the client, and a relationship-graph dashboard do not bind the company from the session. A famous-bugs mapping is a label after the fact.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

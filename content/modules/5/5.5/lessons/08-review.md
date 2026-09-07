@@ -5,9 +5,9 @@
 
 ## What you are reviewing
 
-You are reviewing persistence. Label each claim **rule**, **tool**, or **false assurance**. Say whether `fetch_sql` still returns a concatenated `str` if they ship. Start at concatenated SQL, not at a scanner color.
+You are reviewing persistence. Label each claim **rule**, **tool**, or **false assurance**. Say whether `fetch_sql` still returns a concatenated `str` if they ship. Start at concatenated SQL, not at an ORM sticker.
 
-A comment “will parameterize later” is not a pass on `test_query_is_bound_not_concatenated`.
+Do not treat “will parameterize later” as a green `test_query_is_bound_not_concatenated`.
 
 ## Picture: problems to find (name them yourself)
 
@@ -46,4 +46,4 @@ Clinic change that “switched to SQLAlchemy” without a bound-tuple test is an
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will parameterize later.” That comment is leftover without an owner. Do not probe a live database to prove the finding.
+A concatenation path with only “will parameterize later” has no owner. Do not probe a live database to prove the finding.

@@ -25,7 +25,7 @@ flowchart TD
 
 The attacker holds a token minted for another API (confused deputy), or replays a stolen bearer. Trusting “it verified” without checking `aud` is not what you trust.
 
-Auth0, Authlib, or “we turned on OpenID Connect” is not this check.
+Auth0, Authlib, and “we turned on OpenID Connect” do not reject a token with the wrong audience.
 
 ## Picture: three client shapes
 

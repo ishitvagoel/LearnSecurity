@@ -57,4 +57,4 @@ Notice search-box syntax errors; do not paste patient names into the ticket. Do 
 
 ## What this page is not doing
 
-A web filter is not this check. Do not use live SQL hunts. This site does not mark you as finished. Answer keys are not on this site.
+A web filter does not bind parameters. Do not use live SQL hunts. This site does not mark you as finished. Answer keys are not on this site.

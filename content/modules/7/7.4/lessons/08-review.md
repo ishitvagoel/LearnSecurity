@@ -7,7 +7,7 @@
 
 Review `labs/7.4/7.4-lab/vulnerable/` as a change to notes-app overnight export. Check whether `exporter({"user_session": "alice", "service": None})` still returns `"alice"`.
 
-A comment “will bind service later” is not a pass on `test_user_session_is_not_worker_identity`.
+The review is whether `test_user_session_is_not_worker_identity` passes, not whether someone wrote “will bind service later.”
 
 ## Picture: user_session or service fallback / copy request cookies into the job
 
@@ -48,4 +48,4 @@ Clinic change that “runs on the hospital VLAN with zero trust” without a lef
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will bind service later.” That comment is leftover without an owner. Do not attach to a live broker to prove the finding.
+A user session treated as worker identity, plus “will bind service later,” is leftover with no owner. Do not attach to a live broker to prove the finding.

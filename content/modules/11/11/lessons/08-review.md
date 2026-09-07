@@ -7,7 +7,7 @@
 
 Review `labs/11/11-lab/vulnerable/` as a change to the notes app’s share revoke. Check whether `read("n1", "B")` after `revoke("n1", "B")` still returns the body.
 
-Start at `revoke` / `read` and the B-after-revoke row, not at a scanner color or a README screenshot. A comment “will consult grants later” is not a pass on `test_revoked_share_cannot_read`.
+Trace `revoke` / `read` and the B-after-revoke row. A README screenshot is decoration. `test_revoked_share_cannot_read` is the check; “will consult grants later” is a postponement.
 
 ## Picture: read after revoke succeeds
 
@@ -52,4 +52,4 @@ A deny notice must say why the read was refused (share revoked), not only “wil
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will consult grants later.” That comment is leftover without an owner. Do not scrape a public notes app to prove the finding.
+Shipping “will consult grants later” leaves a revoked share readable with nobody assigned. Do not scrape a public notes app to prove the finding.

@@ -13,7 +13,7 @@ An EHR-lite “we hit DELETE /guardians/12 so the next chart read is fine,” pl
 
 ## Picture: same revoke loop, clinical object
 
-Here, a revoked clinic share is still this topic’s revoked note. Name the owner, the grant, and what still changes after DELETE returns 200. Filing DELETE 200 does not consult `GRANTS` on the next read.
+A revoked clinic share is the same leftover as a revoked note. Filing DELETE 200 does not consult `GRANTS` on the next read.
 
 | Notes app | Clinic sketch |
 |---|---|

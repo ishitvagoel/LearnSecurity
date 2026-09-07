@@ -7,7 +7,7 @@
 
 Review `labs/5.3/5.3-lab/vulnerable/` as a change to notes-app secret rotation. Check whether `auth("sk-lab-hardcoded", current="rotated-now")` is still true.
 
-A comment “will rotate later” is not a pass on `test_hardcoded_default_does_not_auth`.
+`test_hardcoded_default_does_not_auth` is the check. “Will rotate later” is a postponement.
 
 ## Picture: DEFAULT still accepted
 
@@ -21,7 +21,7 @@ flowchart TD
   Q -->|"gitignore"| False[False assurance]
 ```
 
-The default still has to be dead after rotate, and a missing current still has to deny. If the change never checks equality with current, that leftover path is still open. A vault import without killing `DEFAULT` is still the same problem.
+The default still has to be dead after rotate, and a missing current still has to deny. Rotate without killing `DEFAULT` and the old secret still authenticates. A vault import without killing `DEFAULT` is still the same problem.
 
 ## Problems to find (name them yourself)
 
@@ -46,4 +46,4 @@ Clinic change that “moved the key to Vault” without killing the default is a
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will rotate later.” That comment is leftover risk without an owner. Do not fetch a live gist to prove the finding.
+Shipping a hardcoded default plus “will rotate later” leaves the old secret live with nobody assigned. Do not fetch a live gist to prove the finding.

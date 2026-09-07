@@ -7,7 +7,7 @@
 
 Review `labs/6.5/6.5-lab/vulnerable/` as a change to notes-app unfurl. Check whether `allowed` is still true for the named link-local metadata URL.
 
-A comment “will allow-list later” is not a pass on `test_link_local_metadata_is_denied`.
+A TODO to allow-list later does not satisfy `test_link_local_metadata_is_denied`.
 
 ## Picture: requests.get of the user URL / scheme-only allow
 
@@ -46,4 +46,4 @@ Clinic change that “switched the importer to HTTPS” without a host allow-lis
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will allow-list later.” That comment is leftover without an owner. Do not fetch a live URL to prove the finding.
+Leave “will allow-list later” out of the merge until someone owns the link-local deny. Do not fetch a live URL to prove the finding.

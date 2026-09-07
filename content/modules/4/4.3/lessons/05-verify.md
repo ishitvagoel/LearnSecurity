@@ -9,7 +9,7 @@ A Referrer-Policy header does not prove the parser ignores query tokens. HTTPS i
 
 ## Picture: query returns secret must fail
 
-A passing collection count is not this rule. The failing observation on the broken files is **query returns secret**.
+How many tests passed is the wrong scoreboard. The failing observation on the broken files is **query returns secret**.
 
 ```mermaid
 flowchart LR

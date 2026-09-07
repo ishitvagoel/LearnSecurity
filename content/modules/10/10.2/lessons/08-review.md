@@ -7,7 +7,7 @@
 
 Review `labs/10.2/10.2-lab/vulnerable/` as a change to the notes app’s CI install check. Check whether `install_ok("aaa", "bbb")` still returns true.
 
-Start at `install_ok` and the two hash strings, not at a scanner color or an SBOM screenshot. A comment “will pin later” is not a pass on `test_hash_mismatch_refuses_install`.
+Compare the two hash strings in `install_ok`. An SBOM screenshot can wait. The review is whether `test_hash_mismatch_refuses_install` passes, not whether someone wrote “will pin later.”
 
 ## Picture: install_ok true on hash mismatch
 
@@ -53,4 +53,4 @@ A denied install must say *digest mismatch* in words. Do not hide the reason beh
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will pin later.” That comment is leftover without an owner. Do not typosquat a public registry to prove the finding.
+A hash mismatch that still installs, plus “will pin later,” has no owner. Do not typosquat a public registry to prove the finding.

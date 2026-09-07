@@ -7,7 +7,7 @@
 
 Review `labs/10.4/10.4-lab/vulnerable/` as a change to the notes app’s compose boot check. Check whether `boot_ok("prod", True)` still returns true.
 
-Start at `boot_ok` and the prod-plus-debug pair, not at a scanner color or a `NODE_ENV` screenshot. A comment “will turn debug off later” is not a pass on `test_prod_debug_must_not_boot`.
+Open `boot_ok` and the prod-plus-debug pair. A `NODE_ENV` screenshot is the wrong starting place. Writing “will turn debug off later” does not make `test_prod_debug_must_not_boot` pass.
 
 ## Picture: boot_ok true on prod plus debug
 
@@ -52,4 +52,4 @@ A refused boot must say *prod debug refused*, not only “will turn debug off la
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will turn debug off later.” That comment is leftover without an owner. Do not hit a public debug endpoint to prove the finding.
+Do not ship production-plus-debug because a comment promises to turn debug off later. Do not hit a public debug endpoint to prove the finding.

@@ -26,7 +26,7 @@ flowchart TD
 
 The attacker is a collaborator who can edit a title (stored), or anyone who can bounce a title through a reflected path. What you trust is local `render()`. Real browser sinks wait for later work. This practice is a string.
 
-A content-security header, a scanner finding labeled “XSS,” or React’s defaults is not this check.
+A content-security header, a scanner finding labeled “XSS,” and React’s defaults do not encode angle brackets in the note body.
 
 ## Picture: context is the encoding
 

@@ -25,7 +25,7 @@ flowchart TD
 
 The person who can hurt you here is a log operator, a Referer collector, or someone with a shared screenshot — not a brand-new JWT bug.
 
-“We use JWTs,” NextAuth, or a blog titled SPA best practice 2016 is not this check.
+“We use JWTs,” NextAuth, and a 2016 SPA blog post do not stop a token in the query string.
 
 ## Picture: three channels, one deny
 

@@ -10,7 +10,7 @@ Calling someone advanced does not skip part 1. A 100% LMS tile is a dashboard nu
 
 ## Picture: the broken files must fail on score 100 skip
 
-The failing observation on `--impl vulnerable` is **score 100 skip**. A passing collection count is not this check.
+The failing observation on `--impl vulnerable` is **score 100 skip**. A green collection count can hide that skip.
 
 ```mermaid
 flowchart LR

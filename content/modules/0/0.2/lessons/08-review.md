@@ -20,7 +20,7 @@ flowchart TD
   Q -->|job title mapped| False[False assurance]
 ```
 
-A part-1 skip still has to be denied. If the change never checks an always-false skip, that leftover path is still open.
+A part-1 skip still has to be denied. Without an always-false skip, a 100 score still walks into part 1.
 
 ## Problems to find (name them yourself)
 
@@ -45,4 +45,4 @@ A clinic change that “added an onboarding quiz and a job-title mapping” with
 
 ## What this page is not doing
 
-Do not merge by adding a comment “advanced learners may skip.” That comment is leftover risk without an owner. Do not attack an LMS to prove the finding.
+Do not ship a quiz-as-skip because a comment says advanced learners may skip. Nobody owns that leftover. Do not attack an LMS to prove the finding.

@@ -5,9 +5,9 @@
 
 ## What you are reviewing
 
-You are reviewing merge gating. Label each claim **rule**, **tool**, or **false assurance**. Say whether `review_ok("x = eval(user)")` still returns true if they ship. Start at always-true `review_ok`, not at a scanner color.
+You are reviewing merge gating. Label each claim **rule**, **tool**, or **false assurance**. Say whether `review_ok("x = eval(user)")` still returns true if they ship. Start at always-true `review_ok`, not at a coverage tile.
 
-A comment “will ban eval later” is not a pass on `test_eval_on_user_input_is_rejected`.
+`test_eval_on_user_input_is_rejected` still fails if the only change is a note about banning eval later.
 
 ## Picture: approved eval(user)
 
@@ -48,4 +48,4 @@ Clinic change that “continuous integration formatted the template” without a
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will ban eval later.” That comment is leftover without an owner. Do not run eval on live input to prove the finding.
+A merge that only promises to ban eval later leaves eval unowned. Do not run eval on live input to prove the finding.

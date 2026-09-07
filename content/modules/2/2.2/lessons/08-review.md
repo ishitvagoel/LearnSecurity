@@ -5,9 +5,9 @@
 
 ## What you are reviewing
 
-This review is about a notes-app edge cache. Your job is to label each claim **rule**, **tool**, or **false assurance**, and to say which outcome (company B reading company A’s body) breaks if they ship. Start at the store key, not at a scanner color or an HTTPS checkbox.
+You are reviewing a notes-app edge cache. Label each claim **rule**, **tool**, or **false assurance**. Say whether company B can read company A’s body if they ship. Start at the store key. An HTTPS checkbox is the wrong starting place.
 
-Reconstruct whether the store still keys only on path. Compare that with the rule. Write changes a developer can verify. A comment “will add Vary later” is not a pass on `test_other_tenant_does_not_receive_cached_body`.
+Reconstruct whether the store still keys only on path. Compare that with the rule. Write changes a developer can verify. `test_other_tenant_does_not_receive_cached_body` is the check. “Will add Vary later” is a postponement.
 
 ## Picture: problems to find (name them yourself)
 
@@ -46,4 +46,4 @@ Authenticated RSS or export CSV via CDN. A change that “turns on HTTPS” on o
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will add Vary later.” That comment is leftover risk without an owner.
+Shipping a path-only cache key plus “will add Vary later” leaves the cached body unowned.

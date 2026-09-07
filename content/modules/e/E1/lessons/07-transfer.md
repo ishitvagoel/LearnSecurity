@@ -13,7 +13,7 @@ An EHR-lite "the model is only allowed to summarize, the system prompt forbids S
 
 ## Picture: same tool loop, clinical object
 
-Here, a clinic chart question is still this topic’s tool call. Name the rule, the allow-list, and what still changes after the prompt is “safe.” Telling the model to summarize does not take `exec_sql` out of always-run `run_tool`.
+Ask the clinic chart question the way you ask a tool call. Telling the model to summarize does not take `exec_sql` out of always-run `run_tool`.
 
 | Notes app | Clinic sketch |
 |---|---|

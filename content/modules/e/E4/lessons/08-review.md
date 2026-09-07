@@ -7,7 +7,7 @@
 
 Review `labs/E4/e4-lab/vulnerable/` as a change to the notes app’s unpacker. Check whether `copy_into(4, b"abcdefgh", 4)` still returns more than 4 bytes.
 
-A comment “will bound later” is not a pass on `test_copy_does_not_exceed_buffer`.
+A sticky note “will bound later” is not `test_copy_does_not_exceed_buffer` going green.
 
 ## Picture: copy returns full src / declared_len plus 8
 
@@ -50,4 +50,4 @@ Clinic change that “added a Kotlin rewrite and an awareness-list mapping” wi
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will bound later.” That comment is leftover risk without an owner. Do not fuzz a public binary to prove the finding.
+Until `test_copy_does_not_exceed_buffer` passes, “will bound later” is unfinished work. Do not fuzz a public binary to prove the finding.

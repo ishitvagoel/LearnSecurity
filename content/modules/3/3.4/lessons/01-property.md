@@ -11,7 +11,7 @@ The notes app lets an owner share a note with other people. The product rule is 
 
 What must not happen is **cap exceeded**: looping `add_share()` eight times yields `last > 5`. Extra rows are extra readers nobody intended: more people on the note, more places a break can reach, a noisier threat model.
 
-The limit has to be written down, enforced on a trusted service, actually implemented, and locked so two parallel sixths cannot both land. Multi-user approval for a support override is an advanced extra, not a silent baseline. A famous-bugs list may mention unrestricted consumption after this sentence exists. That list is not the syllabus.
+The limit has to be written down, enforced on a trusted service, actually implemented, and locked so two parallel sixths cannot both land. Multi-user approval for a support override is an advanced extra, not a silent baseline. A famous-bugs list may mention unrestricted consumption after the write-path cap exists. That list is not the syllabus.
 
 ## Picture: UI max is not the write path
 
@@ -28,7 +28,7 @@ flowchart TD
 
 Nobody needs a new bug name. A loop, a retrying UI, or a support tool is enough. Trusting “the owner will stop at five” is not what you trust.
 
-HTML `max`, nginx `limit_req`, or a filter named after an awareness list is not this check.
+HTML `max`, nginx `limit_req`, and a filter named after an awareness list do not stop the sixth share on the write path.
 
 ## Picture: rate limit is not the product cap
 

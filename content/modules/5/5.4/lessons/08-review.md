@@ -7,7 +7,7 @@
 
 Review `labs/5.4/5.4-lab/vulnerable/` as a change to notes-app channel binding. Check whether `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` is still true.
 
-A comment “will bind the proxy later” is not a pass on `test_client_forwarded_proto_is_not_tls`.
+Do not treat “will bind the proxy later” as a green `test_client_forwarded_proto_is_not_tls`.
 
 ## Picture: problems to find (name them yourself)
 
@@ -50,4 +50,4 @@ If the dashboard shows an HTTPS badge, do not encode it as color only. That is a
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will bind the proxy later.” That comment is leftover without an owner. Do not probe a live host to prove the finding.
+A client `X-Forwarded-Proto` trusted as TLS, plus “will bind the proxy later,” is leftover with no owner. Do not probe a live host to prove the finding.

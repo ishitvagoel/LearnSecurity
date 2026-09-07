@@ -7,7 +7,7 @@
 
 Review `labs/10.3/10.3-lab/vulnerable/` as a change to the notes app's cluster admission. Check whether `pod_ok("cluster-admin")` still returns true.
 
-Start at `pod_ok` and the cluster-admin row, not at a scanner color or a CIS screenshot. A comment "will tighten RBAC later" is not a pass on `test_cluster_admin_pod_is_denied`.
+Look at `pod_ok` and the cluster-admin row. A CIS screenshot can wait. Shipping "will tighten RBAC later" leaves `test_cluster_admin_pod_is_denied` failing.
 
 ## Picture: cluster-admin on app SA
 
@@ -52,4 +52,4 @@ A denied admission must say why the pod stayed out (cluster-admin refused), not 
 
 ## What this page is not doing
 
-Do not merge by adding a comment "will tighten RBAC later." That comment is leftover without an owner. Do not attack a live cluster to prove the finding.
+A cluster-admin pod that still runs, plus "will tighten RBAC later," has no owner. Do not attack a live cluster to prove the finding.

@@ -31,7 +31,7 @@ flowchart LR
   Stripe --> NotYours[not this rule]
 ```
 
-A payment company's header, a filled-in questionnaire, or “we are high-assurance” is not this check.
+A payment company’s header, a filled-in questionnaire, and “we are high-assurance” do not stop a duplicate capture from charging twice.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

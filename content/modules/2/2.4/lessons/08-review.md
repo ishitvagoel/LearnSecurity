@@ -7,7 +7,7 @@
 
 Review `labs/2.4/2.4-state-time/vulnerable/` as a change to notes-app share. Check whether a second `share_note` with `k1` still appends a row.
 
-A comment “will add remembering later” is not a pass on `test_retry_does_not_duplicate_side_effect`.
+If `test_retry_does_not_duplicate_side_effect` still fails, “will add remembering later” is unfinished work.
 
 ## Picture: INSERT share on every POST
 
@@ -21,7 +21,7 @@ flowchart TD
   Q -->|"HTTP 201 means once"| False[False assurance]
 ```
 
-The share count still has to stay under retry. If that second call never remembers the first outcome, that leftover path is still open.
+The share count still has to stay under retry. A second call that forgets the first outcome still doubles the side effect.
 
 ## Problems to find (name them yourself)
 
@@ -51,4 +51,4 @@ Disable-on-submit is not the rule. Accessible “still working” must not mint 
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will add remembering later.” That comment is leftover risk without an owner.
+Someone still has to remember the first share outcome; “will add remembering later” does not do that.

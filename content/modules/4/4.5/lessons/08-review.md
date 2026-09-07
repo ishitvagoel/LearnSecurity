@@ -7,7 +7,7 @@
 
 Review `labs/4.5/4.5-lab/vulnerable/` as a change to notes-app token acceptance. Check whether `accept_token` still returns true for `aud=other-api`.
 
-A comment “will check aud later” is not a pass on `test_wrong_audience_is_rejected`.
+The review is whether `test_wrong_audience_is_rejected` passes, not whether someone wrote “will check aud later.”
 
 ## Picture: verify signature, skip aud
 
@@ -21,7 +21,7 @@ flowchart TD
   Q -->|"OpenID Connect is on"| False[False assurance]
 ```
 
-A wrong `aud` still has to be denied. If the change never compares `aud`, that leftover path is still open.
+A wrong `aud` still has to be denied. Skip the audience compare and another API’s token still works here.
 
 ## Problems to find (name them yourself)
 
@@ -46,4 +46,4 @@ Clinic change that “enables SMART” without an `aud` test is an incomplete re
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will check aud later.” That comment is leftover risk without an owner. Do not replay a live token to prove the finding.
+A wrong-audience token that still authenticates, plus “will check aud later,” has no owner. Do not replay a live token to prove the finding.

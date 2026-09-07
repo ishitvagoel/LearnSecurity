@@ -21,7 +21,7 @@ flowchart TD
   Q -->|HttpOnly means no XSS| False[False assurance]
 ```
 
-A script still has to be blocked from reading the session. If that read never honors HttpOnly, that leftover path is still open.
+A script still has to be blocked from reading the session. If the jar ignores HttpOnly, `document.cookie` still wins.
 
 ## Problems to label yourself
 
@@ -46,4 +46,4 @@ Clinic portal or WebView bridge. A change that “adds CSP3” without HttpOnly 
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will add HttpOnly later.” That comment is leftover risk without an owner.
+A script-readable session plus “will add HttpOnly later” is leftover with no owner.

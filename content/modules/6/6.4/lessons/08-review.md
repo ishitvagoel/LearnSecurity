@@ -7,7 +7,7 @@
 
 Review `labs/6.4/6.4-lab/vulnerable/` as a change to notes-app uploads. Check whether `resolve("../outside")` still leaves `/tmp/sc-lab`.
 
-A comment “will canonicalize later” is not a pass on `test_dotdot_does_not_escape_root`.
+“Will canonicalize later” does not close `test_dotdot_does_not_escape_root`.
 
 ## Picture: open(user_path) / join without canonicalize
 
@@ -21,7 +21,7 @@ flowchart TD
   Q -->|"Content-Type"| False[False assurance]
 ```
 
-The canonical object still has to stay under the folder. If the change never joins, canonicalizes, and checks the prefix, that leftover path is still open. A `..` denylist without a prefix test is still the same problem.
+The canonical object still has to stay under the folder. A `..` denylist without a prefix test still walks out of the root. A `..` denylist without a prefix test is still the same problem.
 
 Zip member paths are another parser of this rule, not a reason to skip `test_dotdot_does_not_escape_root`. Starlette `UploadFile.filename` is still client data after the change “randomizes names.”
 
@@ -48,4 +48,4 @@ Clinic change that “randomized filenames” without a prefix test is an incomp
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will canonicalize later.” That comment is leftover risk without an owner. Do not open host files to prove the finding.
+If the change never joins, canonicalizes, and checks the prefix, “will canonicalize later” is not a merge. Do not open host files to prove the finding.

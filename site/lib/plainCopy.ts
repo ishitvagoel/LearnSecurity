@@ -230,7 +230,7 @@ export function plainLessonTitle(title: string): string {
   t = t.replace(/attack-surface/gi, "ways in");
   t = t.replace(/^the notes app risk register/i, "The notes app risk register");
   t = t.replace(/ is a browser cell/gi, " is a browser setting");
-  t = t.replace(/ is not a 1\.2 cell/g, " is not a pass on who-is-allowed");
+  t = t.replace(/ is not a 1\.2 cell/g, " does not pass who-is-allowed");
   t = t.replace(/ is not a 1\.1 rule/g, " is not the original rule");
   t = t.replace(/\bthe TCB\b/g, "what you trust");
   t = t.replace(/\bTCB\b/g, "what you trust");
@@ -263,8 +263,14 @@ export function plainMechanismLead(text: string): string | null {
     return null;
   }
   let rest = text.slice(prefix.length).trim();
-  rest = rest.replace(/\.”$/, "”").replace(/\.$/, "");
-  return rest ? `${rest} is not this check.` : null;
+  if (!rest) {
+    return null;
+  }
+  rest = rest.charAt(0).toUpperCase() + rest.slice(1);
+  if (!/[.!?]$/.test(rest) && !/[.!?][”"]$/.test(rest)) {
+    rest += ".";
+  }
+  return rest;
 }
 
 const PROSE_PHRASES: [RegExp, string][] = [
@@ -656,8 +662,8 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/The folder (`[^`]+`) is the change\./g, ""],
   [/Treat the files in (`[^`]+`) as the pull request\./g, ""],
   [
-    /You already ran (`[^`]+`)\. A (comment|banner) ([“"][^“”"]+[”"]) is not\./g,
-    "A $2 $3 is not a pass on $1.",
+    /You already ran (\u0000C\d+\u0000)\. A (comment|banner) ([“"][^“”"]+[”"]) is not\./g,
+    "$3 does not make $1 pass.",
   ],
   [
     /The check you already ran \((`[^`]+`)\) is the rule (?:test|check)\./g,
@@ -682,31 +688,31 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/Write fail or pass next to [^.]+. /g, ""],
   [
     /Renaming “([^”]+)” to “([^”]+)” is not transfer\./g,
-    "Here, $2 is this topic’s $1.",
+    "$2 here is the same kind of thing as $1.",
   ],
   [
     /Renaming "([^"]+)" to "([^"]+)" is not transfer\./g,
-    "Here, $2 is this topic’s $1.",
+    "$2 here is the same kind of thing as $1.",
   ],
   [
-    /Renaming (`[^`]+`) to (`[^`]+`) is not transfer\./g,
-    "Here, $2 is this topic’s $1.",
+    /Renaming (\u0000C\d+\u0000) to (\u0000C\d+\u0000) is not transfer\./g,
+    "$2 here is the same kind of thing as $1.",
   ],
   [
     /Calling it “([^”]+)” instead of “([^”]+)” does not move the work\./g,
-    "Here, $1 is this topic’s $2.",
+    "$1 here is the same kind of thing as $2.",
   ],
   [
     /Here, “([^”]+)” is still “([^”]+)” for this rule\./g,
-    "Here, $1 is this topic’s $2.",
+    "$1 here is the same kind of thing as $2.",
   ],
   [
     /Here, "([^"]+)" is still "([^"]+)" for this rule\./g,
-    'Here, $1 is this topic’s $2.',
+    "$1 here is the same kind of thing as $2.",
   ],
   [
-    /Here, (`[^`]+`) is still (`[^`]+`) for this rule\./g,
-    "Here, $1 is this topic’s $2.",
+    /Here, (\u0000C\d+\u0000) is still (\u0000C\d+\u0000) for this rule\./g,
+    "$1 here is the same kind of thing as $2.",
   ],
   [/ Object, bad case, and leftover change\./g, ""],
   [/ Finding, map, and leftover change\./g, ""],
@@ -804,7 +810,7 @@ const PROSE_PHRASES: [RegExp, string][] = [
   ],
   [
     /A test that only asserts HTTP 200 is not this topic['’]s evidence\./g,
-    "HTTP 200 is not this check.",
+    "HTTP 200 does not finish this.",
   ],
   [/\bA (?:test|check|review) that only asserts /g, "Asserting "],
   [
@@ -1004,6 +1010,25 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/\bElectives do not stamp them\.?/g, ""],
   [/\bAnswer keys are not in this file\.?/g, "Answer keys are not on this site."],
   [/\bAnswer keys stay out of (?:this file|lessons)\.?/g, "Answer keys are not on this site."],
+  [/A comment ([“"][^“”"]+[”"]) is not a pass on /g, "$1 does not close "],
+  [/A banner ([“"][^“”"]+[”"]) is not a pass on /g, "$1 does not close "],
+  [
+    /Do not merge by adding a comment ([“"][^“”"]+[”"])\. That comment is leftover(?: risk)? without an owner\./g,
+    "Do not ship $1 as the merge. Name who owns that leftover.",
+  ],
+  [
+    /Do not merge by adding a comment ([“"][^“”"]+[”"])\. That comment is a leftover without an owner\./g,
+    "Do not ship $1 as the merge. Name who owns that leftover.",
+  ],
+  [/Do not merge by adding a comment ([“"][^“”"]+[”"])\./g, "Do not ship $1 as the merge."],
+  [/Here, (.+?) is still this topic['’]s (.+?)\./g, "$1 here is the same job as $2."],
+  [/that leftover path is still open\./g, "the old path still works."],
+  [
+    /A passing collection count is not this (?:check|rule)\./g,
+    "A green suite count does not finish this.",
+  ],
+  [/, not at a scanner color or an? ([^.]+)\./g, ". A $1 can wait."],
+  [/, not at a scanner color\./g, "."],
 ];
 
 const HIDDEN_LAB_NOTES = [

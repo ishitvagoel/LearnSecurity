@@ -7,7 +7,7 @@
 
 Review `labs/10.5/10.5-lab/vulnerable/` as a change to the notes app’s incident close. Check whether `close_incident({"recovery": "todo", "logs": "ok"})` still returns true.
 
-Start at `close_incident` and the recovery-todo row, not at a scanner color or a SIEM screenshot. A comment “will restore later” is not a pass on `test_cannot_close_without_recovery`.
+Read `close_incident` and the recovery-todo row before a SIEM tile. Shipping “will restore later” leaves `test_cannot_close_without_recovery` failing.
 
 ## Picture: close with recovery todo
 
@@ -52,4 +52,4 @@ A reopen notice must say why the ticket stayed open (recovery still todo), not o
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will restore later.” That comment is leftover without an owner. Do not run a live incident against a third-party system to prove the finding.
+A close without recovery, plus “will restore later,” is still an unowned leftover. Do not run a live incident against a third-party system to prove the finding.

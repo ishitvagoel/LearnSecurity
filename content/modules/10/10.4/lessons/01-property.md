@@ -5,7 +5,7 @@
 
 ## The rule
 
-The notes app’s FastAPI and Next.js compose file has an `env` name and a `debug` flag. Least privilege of the running config is whether production can start with debug on. `NODE_ENV=production` is a string in a file. It is not this check.
+The notes app’s FastAPI and Next.js compose file has an `env` name and a `debug` flag. Least privilege of the running config is whether production can start with debug on. `NODE_ENV=production` is a string in a file. Production can still boot with debug on.
 
 > `boot_ok("prod", True)` must be false. `boot_ok("prod", False)` may be true.
 

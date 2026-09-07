@@ -11,7 +11,7 @@ The folders `labs/1.2/1.2-authority-matrix/vulnerable/authority.py` and `vulnera
 
 ## Picture: hunt leftover permission at the mutation
 
-Leftover identity hides in defaults: the function that “already signed in,” the role that lost company scope, the helper that serializes before `decide()`. Keep the rule. If that effect never checks a current grant, that leftover path is still open.
+Leftover identity hides in defaults: the function that “already signed in,” the role that lost company scope, the helper that serializes before `decide()`. Keep the rule. If that effect never checks a current grant, leftover permission still mutates the note.
 
 ```mermaid
 flowchart TD

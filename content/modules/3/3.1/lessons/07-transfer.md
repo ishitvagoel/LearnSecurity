@@ -11,7 +11,7 @@ You get a **clinic booking card**. Chart text and appointment time sit on the sa
 
 ## Picture: time is not the chart
 
-Here, the chart text is still this topic’s note body. Name the field, every place it is printed, and what still changes after the log line is “clean.” Logging the time does not authorize logging the chart. A single “sensitive” sticker that does not name places is just a sticker.
+Chart text is still a note body wherever it is printed. Logging the time does not authorize logging the chart. A single “sensitive” sticker that does not name places is just a sticker.
 
 | Notes app | Clinic sketch |
 |---|---|

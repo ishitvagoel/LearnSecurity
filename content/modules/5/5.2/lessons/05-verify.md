@@ -9,7 +9,7 @@ Naming AES in a comment does not encrypt the body. A `bytea` column type is stor
 
 ## Picture: Base64 round-trip must fail the check
 
-A passing collection count is not this rule. The failing observation on the broken files is **Base64 round-trip**.
+A green tally of passing tests is not the Base64 check. The failing observation on the broken files is **Base64 round-trip**.
 
 ```mermaid
 flowchart LR

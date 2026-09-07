@@ -7,7 +7,7 @@
 
 Review `labs/3.3/3.3-lab/vulnerable/` as a change to the notes app’s database role. Check whether `can_select("app", "tB", "tA")` is still true.
 
-A comment “row-level security later” is not a pass on `test_app_role_cannot_read_other_tenant`.
+“Row-level security later” does not close `test_app_role_cannot_read_other_tenant`.
 
 ## Picture: DATABASE_URL uses superuser
 
@@ -21,7 +21,7 @@ flowchart TD
   Q -->|"VPC is isolation"| False[False assurance]
 ```
 
-tB still cannot SELECT tA. If the change never checks the same company, that leftover path is still open.
+tB still cannot SELECT tA. A role that is not bound to the same company still reads across tenants.
 
 ## Problems to find (name them yourself)
 
@@ -46,4 +46,4 @@ A serverless change that “uses a managed database” without a same-company ch
 
 ## What this page is not doing
 
-Do not merge by adding a comment “row-level security later.” That comment is leftover risk without an owner. Do not connect to a live cloud database to prove the finding.
+If the change never checks the same company, “row-level security later” is not a merge. Do not connect to a live cloud database to prove the finding.

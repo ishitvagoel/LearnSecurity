@@ -7,7 +7,7 @@
 
 Review `labs/9.5/9.5-lab/vulnerable/` as a change to the notes app's close gate. Check whether `close_finding({"retest": None})` still returns true.
 
-Start at `close_finding` and the missing-retest row, not at a scanner color or a PDF screenshot. A comment "will retest later" is not a pass on `test_cannot_close_without_retest`.
+Open `close_finding` and the missing-retest row, not a PDF on a shelf. A sticky note "will retest later" is not `test_cannot_close_without_retest` going green.
 
 ## Picture: close without retest
 
@@ -52,4 +52,4 @@ A reopen notice must say why the finding stayed open (missing retest), not only 
 
 ## What this page is not doing
 
-Do not merge by adding a comment "will retest later." That comment is leftover without an owner. Do not pentest a public host to prove the finding.
+A close without retest, plus "will retest later," is still unfinished work. Do not pentest a public host to prove the finding.

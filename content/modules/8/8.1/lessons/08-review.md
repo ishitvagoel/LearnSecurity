@@ -7,7 +7,7 @@
 
 Review `labs/8.1/8.1-lab/vulnerable/` as a change to the notes app’s Android export. Check whether `allow_export({"integrity": "ok"}, "fail")` still returns true.
 
-A comment “we will attest later” is not a pass on `test_client_integrity_claim_is_not_authorization`. A sticker about a mobile checklist is not this review.
+Shipping “we will attest later” leaves `test_client_integrity_claim_is_not_authorization` failing. A sticker about a mobile checklist does not make the APK honest.
 
 ## Picture: if integrity==ok: export
 
@@ -48,4 +48,4 @@ A clinic change that “enabled Play Integrity” without a failing-attest deny 
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will attest later.” That comment is leftover without an owner. Do not instrument a live device to prove the finding.
+A client `integrity=ok` claim with only “will attest later” still has no owner on the server check. Do not instrument a live device to prove the finding.

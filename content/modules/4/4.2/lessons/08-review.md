@@ -7,7 +7,7 @@
 
 Review `labs/4.2/4.2-lab/vulnerable/` as a change to notes-app login copy. Reconstruct whether `phishing_resistant("password", EVIL, REAL)` is still true.
 
-A banner “phishing-resistant password” is not a pass on `test_password_is_not_phishing_resistant`.
+A banner that says “phishing-resistant password” does not make `test_password_is_not_phishing_resistant` pass.
 
 ## Picture: problems to find (name them yourself)
 
@@ -46,4 +46,4 @@ Clinic SSO change that “adds MFA” without an origin-fail check is an incompl
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will add WebAuthn later.” That comment is a leftover without an owner. Do not visit a live lookalike to prove the finding.
+Until `test_password_is_not_phishing_resistant` passes, “will add WebAuthn later” is unfinished work. Do not visit a live lookalike to prove the finding.

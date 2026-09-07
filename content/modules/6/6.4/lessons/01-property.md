@@ -24,7 +24,7 @@ flowchart TD
 
 Picture an uploader who controls a filename field. Local `resolve()` under `/tmp/sc-lab`. Do not open host files outside this practice.
 
-A UUID stored filename, an antivirus product, or a denylist of `..` is not this check.
+A UUID stored filename, an antivirus product, and a denylist of `..` do not keep a canonical path under the folder.
 
 ## Picture: join, canonicalize, then prefix
 

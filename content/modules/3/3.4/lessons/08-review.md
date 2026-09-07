@@ -7,7 +7,7 @@
 
 Review `labs/3.4/3.4-lab/vulnerable/` as a change to notes-app share. Check whether eight `add_share` calls still leave `last > 5`.
 
-A comment “will cap later” is not a pass on `test_share_cap_is_enforced`.
+A sticky note “will cap later” is not `test_share_cap_is_enforced` going green.
 
 ## Picture: cap in React only
 
@@ -21,7 +21,7 @@ flowchart TD
   Q -->|"filter has awareness rule"| False[False assurance]
 ```
 
-The count still has to be ≤ 5 after eight writes. If the loop never checks a write-path ceiling, that leftover path is still open.
+The count still has to be ≤ 5 after eight writes. A loop with no write-path ceiling still mints a sixth reader.
 
 ## Problems to find (name them yourself)
 
@@ -50,4 +50,4 @@ Error “share limit reached” must be something assistive tech can announce, n
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will cap later.” That comment is leftover risk without an owner. Do not flood a public API to prove the finding.
+A sixth share that still lands, plus “will cap later,” is leftover with no owner. Do not flood a public API to prove the finding.

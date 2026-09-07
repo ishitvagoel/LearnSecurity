@@ -13,7 +13,7 @@ An EHR-lite “CODEOWNERS plus annual HIPAA training so we merge identity change
 
 ## Picture: same check, clinical training
 
-Here, a clinic identity change is still this topic’s notes-app change. Name the surfaces, the threat-model id, and what still changes after training is marked complete. Marking HIPAA training complete does not put `threat_model` on the change.
+A clinic identity change still needs a threat-model id, the same as a notes-app change. Marking HIPAA training complete does not put `threat_model` on the change.
 
 | Notes app | Clinic sketch |
 |---|---|

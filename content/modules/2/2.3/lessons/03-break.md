@@ -47,7 +47,7 @@ The session value is handed to the script reader — not an exploit recipe. A co
 
 ## What the framework does vs what you still have to check
 
-A FastAPI `Set-Cookie` helper, Next.js `cookies().set`, or “HttpOnly is on in staging for one cookie” is not this check. The app must actually set the flag on `sc_session`, and the jar must refuse script reads. Browser defaults differ by name; a debug cookie without the flag is a new row, not a leftover you can ignore.
+A FastAPI `Set-Cookie` helper, Next.js `cookies().set`, and “HttpOnly is on in staging for one cookie” do not make the jar refuse script reads of `sc_session`. The app must actually set the flag on `sc_session`, and the jar must refuse script reads. Browser defaults differ by name; a debug cookie without the flag is a new row, not a leftover you can ignore.
 
 ## Practice
 

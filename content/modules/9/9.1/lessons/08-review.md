@@ -7,7 +7,7 @@
 
 Review `labs/9.1/9.1-lab/vulnerable/` as a change to the notes app’s coverage check. Check whether a status-only AUTHZ-1 row still counts as covered.
 
-Start at `covered` and the AUTHZ-1 row, not at a scanner color or a PDF screenshot. A comment “will map tests later” is not a pass on `test_status_only_row_is_not_coverage`.
+Begin at `covered` and the AUTHZ-1 row, not with a PDF. Do not treat “will map tests later” as a green `test_status_only_row_is_not_coverage`.
 
 ## Picture: matching any requirement id counts as covered
 
@@ -52,4 +52,4 @@ A human exception path must say what is still uncovered and when it expires. Do 
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will map tests later.” That comment is leftover without an owner. Do not scrape a live portal to prove the finding.
+A status-only coverage row plus “will map tests later” still needs someone who owns the map. Do not scrape a live portal to prove the finding.

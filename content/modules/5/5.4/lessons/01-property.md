@@ -25,7 +25,7 @@ flowchart TD
 
 Picture a client on cleartext who wants the app to think TLS is on. Trusting any `X-Forwarded-*` from the socket peer is not what you trust unless that peer is a locked load balancer you bound.
 
-“Force HTTPS” in a dashboard, HSTS preload, or certificate pinning is not this check.
+“Force HTTPS” in a dashboard, HSTS preload, and certificate pinning do not stop a client `X-Forwarded-Proto` from counting as TLS.
 
 ## Picture: a trusted proxy is identity, not a header
 

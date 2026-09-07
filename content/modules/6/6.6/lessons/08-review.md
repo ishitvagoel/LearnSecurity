@@ -5,9 +5,9 @@
 
 ## What you are reviewing
 
-You are reviewing invite. Label each claim **rule**, **tool**, or **false assurance**. Say whether second `accept("t1")` is still true if they ship. Start at consume-once, not at a scanner color or a mailer ticket.
+You are reviewing invite. Label each claim **rule**, **tool**, or **false assurance**. Say whether second `accept("t1")` is still true if they ship. Start at consume-once. A mailer ticket can wait.
 
-A comment “will consume later” is not a pass on `test_invite_token_is_single_use`.
+“Will consume later” does not close `test_invite_token_is_single_use`.
 
 ## Picture: problems to find (name them yourself)
 
@@ -52,4 +52,4 @@ If the dashboard shows “link already used,” do not encode it as color only. 
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will consume later.” That comment is leftover without an owner. Do not click a live invite to prove the finding.
+“Will consume later” is unfinished work, not a merge. Do not click a live invite to prove the finding.

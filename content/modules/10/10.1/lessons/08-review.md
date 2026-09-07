@@ -7,7 +7,7 @@
 
 Review `labs/10.1/10.1-lab/vulnerable/` as a change to the notes app’s merge check. Check whether `merge_ok({})` still returns true.
 
-Start at `merge_ok` and the empty dict, not at a scanner color or a training screenshot. A comment “will add a threat model later” is not a pass on `test_merge_requires_threat_model_id`.
+Look at `merge_ok` and the empty dict. A training screenshot is not the merge check. “Will add a threat model later” is a promise; `test_merge_requires_threat_model_id` is the evidence.
 
 ## Picture: merge_ok True without a threat-model id
 
@@ -55,4 +55,4 @@ A human exception path must say which surface still needs a threat-model id and 
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will add a threat model later.” That comment is leftover without an owner. Do not change a live GitHub org to prove the finding.
+You cannot waive a missing threat-model id with “will add a threat model later.” Assign an owner or keep the finding open. Do not change a live GitHub org to prove the finding.

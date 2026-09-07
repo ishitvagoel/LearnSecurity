@@ -7,7 +7,7 @@
 
 You are reviewing who-is-allowed. Check whether `can_read("bob", "n2")` is still true.
 
-A comment “will add object checks later” is not a pass on `test_grant_on_n1_is_not_grant_on_n2`.
+Shipping “will add object checks later” leaves `test_grant_on_n1_is_not_grant_on_n2` failing.
 
 ## Picture: if user.has_any_share: return note
 
@@ -21,7 +21,7 @@ flowchart TD
   Q -->|"IDs are hard to guess"| False[False assurance]
 ```
 
-n2 still has to be denied for Bob. If the change never uses an object-keyed lookup, that leftover path is still open. A role list named `admin` without a company comparison is the eve×n1 example.
+n2 still has to be denied for Bob. A grant on n1 that is not keyed by object still opens n2. A role list named `admin` without a company comparison is the eve×n1 example.
 
 Leftover permission is permission from the surroundings — a signed-in user, “has any share,” an unscoped admin flag — used as if it were a yes for this person, this note, and this action.
 
@@ -48,4 +48,4 @@ Clinic change that “checks the user is a clinician” without keying the chart
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will add object checks later.” That comment is leftover without an owner. Do not guess ids on a live API to prove the finding.
+Object checks promised for later still need a named owner before merge. Do not guess ids on a live API to prove the finding.

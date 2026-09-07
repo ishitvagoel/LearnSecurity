@@ -35,7 +35,7 @@ flowchart LR
 
 OpenAPI can *describe* the contract. It does not *enforce* the drop. A generated spec that is out of date is an inventory hole, not a substitute for the allow-list.
 
-“We have Swagger,” “GraphQL is typed,” “we versioned to v2” is not this check.
+Swagger, a typed GraphQL schema, and a v2 bump do not drop `is_admin` from a PATCH.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

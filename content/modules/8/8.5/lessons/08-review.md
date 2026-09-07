@@ -7,7 +7,7 @@
 
 Review `labs/8.5/8.5-lab/vulnerable/` as a change to the notes app’s crash telemetry. Check whether `crash_report("secret")` still contains `'secret'`.
 
-Start at `crash_report` and the body×crash row, not at a scanner color or a store screenshot. A comment “will redact later” is not a pass on `test_crash_report_omits_note_body`.
+Look at `crash_report` and the body×crash row before a store form. “Will redact later” does not close `test_crash_report_omits_note_body`.
 
 ## Picture: crash_report includes the body
 
@@ -52,4 +52,4 @@ In-app “send feedback” must not require attaching a screenshot of a fake cha
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will redact later.” That comment is leftover without an owner. Do not call a live vendor to prove the finding.
+A crash report that still includes the note body, plus “will redact later,” has no owner. Do not call a live vendor to prove the finding.

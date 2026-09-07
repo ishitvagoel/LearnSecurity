@@ -7,7 +7,7 @@
 
 Review `labs/6.2/6.2-lab/vulnerable/` as a change to the notes app’s HTML drawing. Check whether `render` still leaves `<` as markup.
 
-A comment “we should encode later” is not a pass on `test_angle_brackets_are_encoded`.
+If `test_angle_brackets_are_encoded` still fails, “we should encode later” is unfinished work.
 
 ## Picture: template concatenates title
 
@@ -48,4 +48,4 @@ A clinic change that “added a content-security policy” without an encode che
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will encode later.” That comment is leftover without an owner. Do not load a live page to prove the finding.
+Someone still has to encode angle brackets; “will encode later” does not do that. Do not load a live page to prove the finding.

@@ -7,7 +7,7 @@
 
 You are reviewing company binding. Check whether `tenant_for({"tenant": "A"}, {"tenant": "B"})` still returns `"B"`.
 
-Review it as if it were the notes app’s note query. A comment “will bind later” is not a pass on `test_body_cannot_switch_tenant`. The JSON body is not the tenant. Body tenant overrides session is the smell. Bind tenant from the session is the structural change.
+Review it as if it were the notes app’s note query. Writing “will bind later” does not make `test_body_cannot_switch_tenant` pass. The JSON body is not the tenant. Body tenant overrides session is the smell. Bind tenant from the session is the structural change.
 
 ## Picture: company taken from the body
 
@@ -48,4 +48,4 @@ Clinic change that “enabled row-level rules and mapped a famous-bugs list” w
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will bind later.” That comment is leftover without an owner. Do not send `org_id` to a public product to prove the finding.
+Do not ship a TODO that says you will bind later. Name who owns the bind. Do not send `org_id` to a public product to prove the finding.

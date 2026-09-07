@@ -7,7 +7,7 @@
 
 Review `labs/E1/e1-lab/vulnerable/` as a change to the notes app's summarizer agent. Check whether `run_tool("exec_sql", {})` still runs.
 
-Start at `run_tool` and the `exec_sql` row, not at a scanner color or a famous-bugs screenshot. A comment "will allow-list later" is not a pass on `test_exec_sql_tool_is_denied`.
+Start with `run_tool` and the `exec_sql` row. A famous-bugs screenshot is the wrong evidence. Until `test_exec_sql_tool_is_denied` passes, "will allow-list later" is unfinished work.
 
 ## Picture: exec_sql available
 
@@ -52,4 +52,4 @@ A denied tool must say why it stayed out (`exec_sql` not allow-listed), not only
 
 ## What this page is not doing
 
-Do not merge by adding a comment "will allow-list later." That comment is leftover without an owner. Do not jailbreak a public model to prove the finding.
+Do not ship always-run `exec_sql` because a comment promises an allow-list later. Do not jailbreak a public model to prove the finding.

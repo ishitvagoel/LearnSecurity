@@ -29,7 +29,7 @@ flowchart TD
 
 What you trust for this topic is the **runtime connection role plus its grants** (lab stand-in: `can_select`). The handler is still required. Trusting ORM defaults or a pooler user named `app` without a same-company check is not what you trust.
 
-SQLAlchemy `session`, a Kubernetes network policy, or a ticket titled “row-level security later” is not this check.
+A SQLAlchemy `session`, a Kubernetes network policy, and a ticket titled “row-level security later” do not stop tB from reading tA.
 
 ## Picture: the running app versus migrate and look-but-don’t-read
 

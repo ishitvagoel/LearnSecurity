@@ -7,7 +7,7 @@
 
 Review `labs/E3/e3-lab/vulnerable/` as a change to the notes app's simulated copay. Check whether two `capture("k1")` still leave count 2.
 
-A comment “will add SEEN later” is not a pass on `test_duplicate_capture_does_not_double_charge`.
+A TODO that says “will add SEEN later” does not satisfy `test_duplicate_capture_does_not_double_charge`.
 
 ## Picture: two capture(k1) charge twice
 
@@ -48,4 +48,4 @@ Clinic change that “added a payment company and a questionnaire PDF” without
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will add SEEN later.” That comment is leftover without an owner. Do not charge a public store to prove the finding.
+Leave “will add SEEN later” out of the merge until a named person owns the duplicate-charge deny. Do not charge a public store to prove the finding.

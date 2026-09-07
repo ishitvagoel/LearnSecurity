@@ -34,7 +34,7 @@ flowchart LR
 
 Play App Signing protects *store* signing. It does not stop a debug application id from using a leaked prod API key.
 
-`minifyEnabled`, a SafetyNet brand name, “we hide the URL” is not this check.
+`minifyEnabled`, a SafetyNet brand name, and “we hide the URL” do not stop a debug build from calling production export.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

@@ -7,7 +7,7 @@
 
 Review `labs/8.4/8.4-lab/vulnerable/` as a change to the notes app’s prod export gating. Check whether `api_allowed("debug", "ok")` still returns true.
 
-A comment “we should split flavors later” is not a pass on `test_debug_build_cannot_call_prod_export`. An R8 screenshot is not this review.
+If `test_debug_build_cannot_call_prod_export` still fails, “we should split flavors later” is not the review. An R8 screenshot does not split debug from prod.
 
 ## Picture: api_allowed debug+ok true
 
@@ -48,4 +48,4 @@ A clinic change that “enabled R8 and Play App Signing” without a debug-to-pr
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will split flavors later.” That comment is leftover without an owner. Do not unpack a store APK to prove the finding.
+Someone still has to split debug from prod; “will split flavors later” does not do that. Do not unpack a store APK to prove the finding.

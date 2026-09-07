@@ -7,7 +7,7 @@
 
 Review `labs/9.3/9.3-lab/vulnerable/` as a change to the notes app’s security-suite gate. Check whether `{status_asserted: True}` still counts as a security test.
 
-Start at `is_security_test` and the 200-only row, not at a scanner color or a coverage screenshot. A comment “will add isolation later” is not a pass on `test_http_200_only_is_not_a_security_test`.
+Look at `is_security_test` and the 200-only row. Coverage color is not the review. If `test_http_200_only_is_not_a_security_test` still fails, “will add isolation later” is unfinished work.
 
 ## Picture: assert r.status_code==200 only
 
@@ -52,4 +52,4 @@ A failing security test must say what must not happen in the assertion message, 
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will add isolation later.” That comment is leftover without an owner. Do not fuzz a public host to prove the finding.
+A 200-only suite with only “will add isolation later” has no owner for the isolation check. Do not fuzz a public host to prove the finding.

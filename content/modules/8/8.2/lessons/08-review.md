@@ -7,7 +7,7 @@
 
 Review `labs/8.2/8.2-lab/vulnerable/` as a change to the notes app’s offline cache. Check whether `save_note("secret")` still leaves `'secret'` on disk.
 
-A comment “we should wrap later” is not a pass on `test_cached_note_is_not_plaintext_on_disk`. A storage sticker in the ticket is not this review.
+`test_cached_note_is_not_plaintext_on_disk` is the check. “We should wrap later” is a postponement. A storage sticker in the ticket does not encrypt the cache.
 
 ## Picture: write body to cache.txt
 
@@ -48,4 +48,4 @@ A clinic change that “stored charts internally with a fingerprint lock” with
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will wrap later.” That comment is leftover without an owner. Do not image a personal phone to prove the finding.
+Shipping plaintext cache plus “will wrap later” leaves the disk copy unowned. Do not image a personal phone to prove the finding.

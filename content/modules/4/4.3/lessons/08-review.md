@@ -7,7 +7,7 @@
 
 Review `labs/4.3/4.3-lab/vulnerable/` as a change to notes-app session parsing. Check whether `session_from_request` still returns the query token.
 
-A comment “will move to cookies later” is not a pass on `test_query_string_token_is_rejected`.
+“Will move to cookies later” is a promise. `test_query_string_token_is_rejected` is the evidence.
 
 ## Picture: session_from_request uses query
 
@@ -21,7 +21,7 @@ flowchart TD
   Q -->|"TLS hides logs"| False[False assurance]
 ```
 
-The query still has to yield `None`. If the change never drops the query channel, that leftover path is still open. “We use JWTs” and “SPA best practice” are tool slogans until the check fails on the broken files.
+The query still has to yield `None`. Tokens in the query string still leak if that channel stays open. “We use JWTs” and “SPA best practice” are tool slogans until the check fails on the broken files.
 
 ## Problems to find (name them yourself)
 
@@ -46,4 +46,4 @@ Clinic deep-link change that “adds a token query param for convenience” is a
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will move to cookies later.” That comment is leftover risk without an owner. Do not dump live logs to prove the finding.
+You cannot waive a query-string token with “will move to cookies later.” Assign an owner or keep the finding open. Do not dump live logs to prove the finding.

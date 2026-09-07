@@ -7,7 +7,7 @@
 
 Review `labs/5.2/5.2-lab/vulnerable/` as a change to notes-app at-rest protection. Check whether Base64 decode of `protect("secret")` still equals `"secret"`.
 
-A comment “will add AES later” is not a pass on `test_protect_is_not_mere_encoding`.
+Shipping “will add AES later” leaves `test_protect_is_not_mere_encoding` failing.
 
 ## Picture: protect equals base64
 
@@ -46,4 +46,4 @@ Clinic change that renames a column to `ssn_encrypted` without a reversibility t
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will add AES later.” That comment is leftover without an owner. Do not decode a live column to prove the finding.
+Base64 named as AES, plus “will add AES later,” is leftover with no owner. Do not decode a live column to prove the finding.

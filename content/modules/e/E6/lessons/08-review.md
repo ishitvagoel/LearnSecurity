@@ -7,7 +7,7 @@
 
 Review `labs/E6/e6-lab/vulnerable/` as a change to the notes app’s leftover-risk register. Check whether `accept_exception({"owner": "", "review_by": None})` still returns true.
 
-Start at `accept_exception` and the empty-owner row, not at a scanner color or a maturity screenshot. A comment “will add dates later” is not a pass on `test_exception_needs_owner_review_and_wcag`.
+Read `accept_exception` and the empty-owner row first. A maturity screenshot can wait. `test_exception_needs_owner_review_and_wcag` still fails if the only change is “will add dates later.”
 
 ## Picture: accept with empty owner
 
@@ -52,4 +52,4 @@ A deny notice must say why the exception stayed incomplete (missing owner, revie
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will add dates later.” That comment is leftover without an owner. Do not email a vendor disclosure inbox to prove the finding.
+An exception row with no owner and only “will add dates later” is still unowned leftover. Do not email a vendor disclosure inbox to prove the finding.

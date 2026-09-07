@@ -36,7 +36,7 @@ flowchart LR
 
 The store listing and code signing prove *which package id was installed*, not *what that process will send next*.
 
-Play Integrity, shrinking the app, SafetyNet brand names, “Kotlin is memory-safe” is not this check.
+Play Integrity, shrinking the app, and SafetyNet brand names do not stop a patched APK from sending `integrity=ok`. “Kotlin is memory-safe” does not make this process honest.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

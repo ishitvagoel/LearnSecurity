@@ -7,7 +7,7 @@
 
 Review `labs/9.4/9.4-lab/vulnerable/` as a change to the notes app’s ship gate. Check whether `ship_ok([HIGH], {})` still returns true.
 
-Start at `ship_ok` and the HIGH×map row, not at a scanner color or a dashboard screenshot. A comment “will map later” is not a pass on `test_unmapped_high_blocks_ship`.
+Read `ship_ok` and the HIGH×map row. A dashboard screenshot does not own the HIGH. A TODO to map later does not satisfy `test_unmapped_high_blocks_ship`.
 
 ## Picture: ship_ok true on unmapped HIGH
 
@@ -52,4 +52,4 @@ The triage screen must say *why* F1 is blocked, in words. Do not encode “block
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will map later.” That comment is leftover without an owner. Do not scan a public repo to prove the finding.
+Leave “will map later” out of the ship until someone owns the unmapped HIGH. Do not scan a public repo to prove the finding.

@@ -13,7 +13,7 @@ An EHR-lite “prod pod runs npm install so we always get latest,” plus “we 
 
 ## Picture: latest vs lockfile
 
-Here, a clinic install is still this topic’s digest pin. Name the expected digest, the digest you got, and what still changes after `npm install` ran. Marking “npm install ran” does not compare hashes.
+A clinic install still has to pin the digest. Marking “npm install ran” does not compare hashes.
 
 | Notes app | Clinic sketch |
 |---|---|

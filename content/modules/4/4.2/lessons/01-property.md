@@ -25,7 +25,7 @@ flowchart TD
 
 Nobody needs a new bug name. A lookalike login page is enough. Trusting “the user will read the URL” is not what you trust.
 
-A passkey vendor dashboard, `autocomplete=webauthn`, or “we turned on MFA” is not this check.
+A passkey vendor dashboard, `autocomplete=webauthn`, and “we turned on MFA” do not make a password at a lookalike site fail.
 
 ## Picture: origin binding vs a shared secret
 
@@ -77,7 +77,7 @@ Tie the check to the password-at-lookalike boolean, not to a vendor name.
 
 ## Use it somewhere new
 
-Step-up before export: still origin-bound? Clinic staff SSO: password MFA to a lookalike identity provider is still this sentence.
+Step-up before export: still origin-bound? Clinic staff SSO: password MFA to a lookalike identity provider is still origin-bound.
 
 ## What this page is not doing
 

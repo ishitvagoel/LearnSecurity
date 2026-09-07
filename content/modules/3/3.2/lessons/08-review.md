@@ -7,7 +7,7 @@
 
 Review `labs/3.2/3.2-lab/vulnerable/` as a change to the notes-app threat list. Check whether `threats_from_scan(True)` still omits `cross-tenant-read`.
 
-A comment “will threat-model later” is not a pass on `test_green_scanner_is_not_an_empty_threat_model`.
+A TODO to threat-model later does not satisfy `test_green_scanner_is_not_an_empty_threat_model`.
 
 ## Picture: threats = [] if scanner_green
 
@@ -21,7 +21,7 @@ flowchart TD
   Q -->|"scanner was green"| False[False assurance]
 ```
 
-The always-name id still has to be present on green. If the change never checks a seeded join, that leftover path is still open.
+The always-name id still has to be present on green. A scan-only change still ships an empty model.
 
 ## Problems to find (name them yourself)
 
@@ -46,4 +46,4 @@ Clinic SMS change that “adds a HIPAA sticker” without seeding `sms-content-l
 
 ## What this page is not doing
 
-Do not merge by adding a comment “will threat-model later.” That comment is leftover risk without an owner. Do not run a live scanner to prove the finding.
+Leave “will threat-model later” out of the merge until someone owns the always-name ids. Do not run a live scanner to prove the finding.
