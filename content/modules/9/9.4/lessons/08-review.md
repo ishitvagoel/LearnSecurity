@@ -1,4 +1,4 @@
-# Review always-true ship_ok like a pull request
+# Would you merge this always-true ship_ok?
 
 **Kind:** code-review
 **Loop step:** Review
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|maturity score| False[False comfort]
 ```
 
-Start from what must stay true (unmapped HIGH denied). Everything that is not a join to the coverage map at that call is a candidate always-ship path. A scanner screenshot without that check is the same problem, not a different kind of finding.
+Hold onto unmapped HIGH denied. If that call is missing a join to the coverage map, you still have an always-ship leftover. A scanner screenshot without that check is still the same problem.
 
 Who-is-allowed blind spots are review and isolation tests — name them, do not skip `test_unmapped_high_blocks_ship`. Do not claim the verification gate is done. Do not scan a live tenant to prove the finding.
 

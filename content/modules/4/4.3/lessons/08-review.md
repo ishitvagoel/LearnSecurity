@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"TLS hides logs"| False[False comfort]
 ```
 
-Start from what must stay true (query yields `None`). Everything that is not a dropped query channel at that call is a candidate leftover path. “We use JWTs” and “SPA best practice” are tool slogans until the pytest fails on the broken files.
+Hold onto query yields `None`. If that call is missing a dropped query channel, you still have a leftover path. “We use JWTs” and “SPA best practice” are tool slogans until the pytest fails on the broken files.
 
 ## Problems to find (name them yourself)
 

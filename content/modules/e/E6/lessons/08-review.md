@@ -1,4 +1,4 @@
-# Review always-accept exception like a pull request
+# Would you merge this always-accept exception?
 
 **Kind:** code-review
 **Loop step:** Review
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|maturity mapped| False[False comfort]
 ```
 
-Start from what must stay true (empty owner denied). Everything that is not the schema at that call is a candidate always-accept path. A maturity screenshot without that check is the same problem, not a different kind of finding.
+Hold onto empty owner denied. If that call is missing the schema, you still have an always-accept leftover. A maturity screenshot without that check is still the same problem.
 
 Unread register is leftover. Tech-debt rename is leftover. Do not skip `test_exception_needs_owner_review_and_wcag`. This page does not mark you as finished. Do not contact a live disclosure inbox to prove the finding.
 

@@ -1,4 +1,4 @@
-# Review always-true api_allowed like a pull request
+# Would you merge this always-true api_allowed?
 
 **Kind:** code-review
 **Loop step:** Review
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|Play App Signing| False[False comfort]
 ```
 
-Start from what must stay true (debug plus ok denied). Everything that is not a server `release` and attest check at that call is a candidate debug-to-prod path. An R8 screenshot without that check is the same problem, not a different kind of finding.
+Hold onto debug plus ok denied. If that call is missing a server `release` and attest check, you still have a debug-to-prod path. An R8 screenshot without that check is still the same problem.
 
 Signing keys in the repo (5.3) and the same API key in debug and release are other leftover holes — name them, do not skip `test_debug_build_cannot_call_prod_export`. Resilience checklists raise cost; they do not become Gate 8 evidence.
 

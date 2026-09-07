@@ -1,4 +1,4 @@
-# Review declared_len-plus-8 like a pull request
+# Would you merge this declared_len-plus-8?
 
 **Kind:** code-review
 **Loop step:** Review
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|awareness-list mapped| False[False comfort]
 ```
 
-Start from what must stay true (length ≤ bufsize). Everything that is not the three-way min at that call is a candidate oversize path. A language sticker without that check is the same problem, not a different kind of finding.
+Hold onto length ≤ bufsize. If that call is missing the three-way min, you still have an oversize path. A language sticker without that check is still the same problem.
 
 Helpers that call C are leftover. Integer wrap is leftover. Do not skip `test_copy_does_not_exceed_buffer`. Do not claim a course gate. Do not compile a native overflow to prove the finding.
 

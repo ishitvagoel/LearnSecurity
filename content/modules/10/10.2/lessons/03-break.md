@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a registry you attack. It is a tiny Python `install_ok(expected_hash, got_hash)` that returns true or false. The failure is already in the function: every pair is allowed. The point is to see that the check treats that as a **failed rule**, not as a missing package name.
+The practice is not a registry you attack. It is a tiny Python `install_ok(expected_hash, got_hash)` that returns true or false. The failure is already in the function: every pair is allowed. Watch the check treat that as a **failed rule**, not as a missing package name.
 
 The rule under test:
 

@@ -23,7 +23,7 @@ flowchart TD
   Q -->|HttpOnly means no XSS| False[False comfort]
 ```
 
-Start from what must stay true (script read of the session). Everything that is not an HttpOnly honor at that read is a leftover path.
+Hold onto script read of the session. If that read is missing an HttpOnly honor, you still have a leftover path.
 
 ## Problems to label yourself
 

@@ -20,7 +20,11 @@ const HEADING_EXACT: Record<string, string> = {
   "Usability and accessibility": "Can people still use it",
   "HITL / WCAG 2.2": "Can people still use it",
   "An invariant that cannot fail a test is still a slogan":
-    "If you cannot test it, it is still a slogan",
+    "Until you can fail it, it is still a slogan",
+  "If you cannot test it, it is still a slogan":
+    "Until you can fail it, it is still a slogan",
+  "If you cannot check it, it is still a slogan":
+    "Until you can fail it, it is still a slogan",
   "What this is not": "What this is not",
   "The claim this module owns": "The rule",
   "Start with the claim": "Start with the rule",
@@ -40,7 +44,7 @@ const HEADING_EXACT: Record<string, string> = {
   "Step 1: freeze pieces": "Step 1: name the pieces",
   "Invariant prompts": "Questions to ask",
   "Threat-model prompts": "Who might attack, and how",
-  "Lab briefs": "Practice notes",
+  "Lab briefs": "Practice files",
   "Assessment blueprint": "How you will show this",
   "Review triggers": "When to look again",
   "Operational considerations": "Running this for real",
@@ -69,6 +73,9 @@ export function displayHeading(raw: string): string {
   if (text.startsWith("Framework defaults versus")) {
     return "What the framework does vs what you still have to check";
   }
+  if (text.includes("what you still have a to check")) {
+    return "What the framework does vs what you still have to check";
+  }
   if (text.startsWith("Transfer:")) {
     return `Use it somewhere new:${text.slice("Transfer:".length)}`;
   }
@@ -94,6 +101,8 @@ export function plainLessonTitle(title: string): string {
   let t = title.trim();
   t = t.replace(/^Local fixture:\s*/i, "Practice: ");
   t = t.replace(/^Transfer:\s*/i, "Somewhere new: ");
+  t = t.replace(/^Same idea:\s*/i, "Somewhere new: ");
+  t = t.replace(/^Review (.+) like a pull request$/i, "Would you merge this $1?");
   t = t.replace(/ as a PR$/i, " like a pull request");
   t = t.replace(
     /^Fail on the broken files, then pass on the repaired ones$/i,
@@ -265,13 +274,24 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/What this practice is supposed to show: \*\*this\*\* (?=`)/g, "What this practice is supposed to show: "],
   [
     /, and Naming a product is not this week's rule\.?/g,
-    ". Naming a product is not the rule.",
+    ". A vendor name is not this week's rule.",
   ],
   [
     /Broken must fail that question\. Repaired must pass it/g,
     "The broken files must fail that. The repaired files must pass it",
   ],
-  [/You are here to see that/g, "The point is to see that"],
+  [
+    /A (?:check|test) that only (.+?) can pass while (.+?)\. Ask whether .+?\. (?:The )?[Bb]roken files must fail that(?: question)?\. (?:The )?[Rr]epaired files must pass it/g,
+    "A check that only $1 can still look green while $2. The broken files have to fail that case. The repaired files have to pass it",
+  ],
+  [/ is a \*\*what must not happen\*\* (?:check|test|pair): /g, " exists so "],
+  [/ is not allowed to count as a pass/g, " cannot count as a pass"],
+  [/Ask whether .+? still counts as a pass\. /g, ""],
+  [/Ask whether .+? is allowed to count as a pass(?: for [^.]+)?\. /g, ""],
+  [/You are here to see that the check treats/g, "Watch the check treat"],
+  [/The point is to see that the check treats/g, "Watch the check treat"],
+  [/You are here to see that/g, "Watch for this: "],
+  [/The point is to see that/g, "Watch for this: "],
   [/still counts as a passing control/g, "still counts as a pass"],
   [/count as a passing control/g, "count as a pass"],
   [/\bwhat-must-not-happen\b/g, "what must not happen"],
@@ -289,20 +309,31 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/are not what you trust for this rule\.?/g, "are not enough."],
   [/are not what you trust for this check\.?/g, "are not enough."],
   [/are not what you trust\.?/g, "are not enough."],
-  [/Classification starts at the protected effect/g, "Start from what must stay true"],
-  [/Review starts at the protected effect/g, "Start from what must stay true"],
+  [/Classification starts at the protected effect/g, "Hold onto the rule"],
+  [/The review starts at the protected effect/g, "Hold onto the rule"],
+  [/Review starts at the protected effect/g, "Hold onto the rule"],
   [
     /the same smell, not a different finding class/g,
-    "the same problem, not a different kind of finding",
+    "still the same problem",
   ],
+  [
+    /the same problem, not a different kind of finding/g,
+    "still the same problem",
+  ],
+  [/, not a different finding class/g, ""],
   [/Industry checklists want /g, "Industry lists ask for "],
   [/Industry lists want /g, "Industry lists ask for "],
   [
     /Industry lists name detect, respond, recover\./g,
-    "Industry lists talk about noticing, responding, and recovering.",
+    "Noticing, responding, and recovering still need an owner.",
   ],
-  [/A ([A-Za-z0-9.+-]+) product name is not the rule\./g, "Naming a $1 product is not the rule."],
-  [/An ([A-Za-z0-9.+-]+) product name is not the rule\./g, "Naming an $1 product is not the rule."],
+  [
+    /Industry lists talk about noticing, responding, and recovering\./g,
+    "Noticing, responding, and recovering still need an owner.",
+  ],
+  [/Naming a product is not the rule\./g, "A vendor name is not this week's rule."],
+  [/A ([A-Za-z0-9.+-]+) product name is not the rule\./g, "A $1 name is not this week's rule."],
+  [/An ([A-Za-z0-9.+-]+) product name is not the rule\./g, "An $1 name is not this week's rule."],
   [/Do not add a live-([a-z-]+) trophy\./g, "Do not treat a live $1 screenshot as proof."],
   [/Do not add a live ([A-Za-z]+) trophy\./g, "Do not treat a live $1 screenshot as proof."],
   [/Do not add a native-overflow trophy\./g, "Do not treat a native overflow as a prize."],
@@ -341,7 +372,7 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/\bthe cell\b/gi, "the rule"],
   [/of the same cell/g, "of the same rule"],
   [/\ba different cell\b/g, "a different rule"],
-  [/A [A-Za-z0-9-]+-product name is not the rule/g, "Naming a product is not the rule"],
+  [/A [A-Za-z0-9-]+-product name is not the rule/g, "A vendor name is not this week's rule"],
   [/Naming a ([AaEeIiOoUu])/g, "Naming an $1"],
   [/Naming a (R8|API|MDM)\b/g, "Naming an $1"],
   [/\*\*different cell\*\*/g, "**different rule**"],
@@ -399,6 +430,7 @@ function transformProseLine(line: string): string {
   for (const [pattern, replacement] of PROSE_PHRASES) {
     next = next.replace(pattern, replacement);
   }
+  next = next.replace(/you still have a to /g, "you still have to ");
   next = next.replace(/\bthe the notes app\b/g, "the notes app");
   next = next.replace(/\ban empty the notes app\b/g, "an empty notes-app");
   next = next.replace(/\ban rule\b/g, "a rule");

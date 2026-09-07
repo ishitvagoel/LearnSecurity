@@ -1,4 +1,4 @@
-# Same idea: clinic HIPAA exception
+# Somewhere new: clinic HIPAA exception
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

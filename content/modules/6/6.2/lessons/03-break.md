@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python model of drawing a title. The failure is already in the string: `render` leaves `<` as a tag delimiter, so extra tags stay in the output. The point is to see that unencoded markup reaching HTML is **a failed rule**, not a trophy script.
+The practice is not a website you attack. It is a tiny Python model of drawing a title. The failure is already in the string: `render` leaves `<` as a tag delimiter, so extra tags stay in the output. Watch for this: unencoded markup reaching HTML is **a failed rule**, not a trophy script.
 
 The rule under test:
 

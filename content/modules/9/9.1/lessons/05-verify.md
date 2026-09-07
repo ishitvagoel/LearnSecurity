@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “Matrix imported” is not evidence. “CI is green” is a tool observation. The check is: `covered("AUTHZ-1", [status-only])` is false and `covered("AUTHZ-1", [isolation assert])` may be true. That status-only observation must be **false** on the broken files and **true** on the repaired files. Do not call a live checklist portal.
 
 ## Picture: a broken coverage check must fail the status-only test
 
-A test that only counts passing tests can pass while a status-only row still counts as coverage. Ask whether membership without an isolation assert still counts as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only counts passing tests can still look green while a status-only row still counts as coverage. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at `asserts_isolation`. If both fail, the 
 | Abuse | Unsure flags are not coverage (fail closed; leftover if not in this check) |
 | Not claimed | A real checklist assessment; the verification gate; a later draft of a practice guide; that the named test actually isolates |
 
-The file is `labs/9.1/9.1-lab/tests/test_property.py`. The test `test_status_only_row_is_not_coverage` is a **what must not happen** test: membership without an isolation assert is not allowed to count as coverage.
+The file is `labs/9.1/9.1-lab/tests/test_property.py`. The test `test_status_only_row_is_not_coverage` exists so membership without an isolation assert cannot count as coverage.
 
 Honest isolation-assert rows may pass on both implementations. That does not excuse the status-only deny test. If the broken files do not fail `test_status_only_row_is_not_coverage`, the lab is miswired — fix the wiring, not the assertion.
 

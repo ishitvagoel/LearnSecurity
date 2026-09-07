@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `review_ok(diff)`. It does not merge anything. The failure is already in the function: it returns true for every string. The point is to see that the check treats that as a **failed rule**, not as a trophy eval.
+The practice is not a website you attack. It is a tiny Python `review_ok(diff)`. It does not merge anything. The failure is already in the function: it returns true for every string. Watch the check treat that as a **failed rule**, not as a trophy eval.
 
 The rule under test:
 

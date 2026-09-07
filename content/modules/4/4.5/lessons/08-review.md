@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"OpenID Connect is on"| False[False comfort]
 ```
 
-Start from what must stay true (wrong aud denied). Everything that is not an `aud` comparison at that call is a candidate leftover path.
+Hold onto wrong aud denied. If that call is missing an `aud` comparison, you still have a leftover path.
 
 ## Problems to find (name them yourself)
 

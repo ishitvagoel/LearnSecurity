@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python helper named `phishing_resistant`. The failure is already in the function: any enrolled method returns true, and origin is ignored. The point is to see that a password at a lookalike origin counted as **resistant** is a failed rule, not a trophy kit.
+The practice is not a website you attack. It is a tiny Python helper named `phishing_resistant`. The failure is already in the function: any enrolled method returns true, and origin is ignored. Watch for this: a password at a lookalike origin counted as **resistant** is a failed rule, not a trophy kit.
 
 The rule under test:
 

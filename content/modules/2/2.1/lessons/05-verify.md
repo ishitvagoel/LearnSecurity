@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
-Happy-path HTTP 200 is not evidence. The check must be **false** on the broken files and **true** on the repaired files, against a named “what must not happen.”
+A 200 on the happy path is not evidence. The check must be **false** on the broken files and **true** on the repaired files, against a named “what must not happen.”
 
 ## Picture: broken files must fail the duplicate-key check
 
-A check that only counts passing cases can pass while two readers still disagree. Ask whether two company meanings still count as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only counts passing cases can still look green while two readers still disagree. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -29,7 +29,7 @@ If both pass, the check is not looking at ACL tenant vs stored tenant. If both f
 | Wrong input / abuse | Messy duplicate keys: refused **or** both tenants identical |
 | When things break | Uncertainty does not persist a body under a guessed company |
 
-The file is `labs/2.1/2.1-parser-boundaries/tests/test_parser.py`. The checks are `test_unambiguous_json_is_accepted` and `test_duplicate_tenant_keys_are_one_meaning`. The second is a **what must not happen** check: last-key-wins `acl_tenant != stored_tenant` is not allowed to count as a pass.
+The file is `labs/2.1/2.1-parser-boundaries/tests/test_parser.py`. The checks are `test_unambiguous_json_is_accepted` and `test_duplicate_tenant_keys_are_one_meaning`. The second exists so last-key-wins `acl_tenant != stored_tenant` cannot count as a pass.
 
 ```text
 python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl vulnerable
@@ -53,7 +53,7 @@ Run from `labs/2.1/2.1-parser-boundaries` if a repo-root collection picks up `si
 - Unicode identifier spoofing
 - Authorization for an honest unique-key object (that is the who-is-allowed topic)
 
-Record those as leftover risk or later topics, not as silent passes.
+Write those down as leftover risk or later topics, not as silent passes.
 
 ## Practice
 

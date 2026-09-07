@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `exporter`. It does not open a live queue. The failure is already in the function: leftover `user_session` wins if it is present. The point is to see that the check treats that as a **failed rule**, not as a trophy against a public broker.
+The practice is not a website you attack. It is a tiny Python `exporter`. It does not open a live queue. The failure is already in the function: leftover `user_session` wins if it is present. Watch the check treat that as a **failed rule**, not as a trophy against a public broker.
 
 The rule under test:
 

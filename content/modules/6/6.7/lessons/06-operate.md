@@ -21,7 +21,7 @@ flowchart TD
   Cost --> Stop[Disable token if stolen session]
 ```
 
-Industry lists talk about noticing, responding, and recovering. They do not count exports. Naming a product is not the rule. Someone still has to own the budget.
+Noticing, responding, and recovering still need an owner. They do not count exports. A vendor name is not this week's rule. Someone still has to own the budget.
 
 ## Signals that do not become a second leak
 
@@ -63,4 +63,4 @@ If a human sees a quota deny, announce “try tomorrow.” A spinner that retrie
 
 ## What this page is not doing
 
-Naming a product is not the rule. Public load tests are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+A vendor name is not this week's rule. Public load tests are out of scope. This site does not mark you as finished. Answer keys are not on this site.

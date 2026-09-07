@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"privacy policy"| False[False comfort]
 ```
 
-The review starts at the protected effect (analytics and search bodies None after delete). Everything that is not a pop of that copy in the same delete is a candidate leftover path. “We anonymized user ids” while the body column remains is the same problem, not a different kind of finding.
+Hold onto this: analytics and search bodies are None after delete. If that same delete is missing a pop of those copies, you still have a leftover path. “We anonymized user ids” while the body column remains is still the same problem.
 
 ## Seeded smells (label them yourself)
 

@@ -20,7 +20,7 @@ flowchart TD
   Metric --> Drain[Rotate service creds and drain queue]
 ```
 
-Industry lists talk about noticing, responding, and recovering. They do not bind the principal. Naming a zero-trust product is not the rule. Someone still has to own the worker identity.
+Noticing, responding, and recovering still need an owner. They do not bind the principal. Naming a zero-trust product is not the rule. Someone still has to own the worker identity.
 
 ## Signals that do not become a second leak
 

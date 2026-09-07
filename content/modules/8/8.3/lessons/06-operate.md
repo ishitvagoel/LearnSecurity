@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Relogin[Force re-login if session already flipped]
 ```
 
-Industry lists talk about noticing, responding, and recovering. They do not copy “ignore identity keys.” They do not prove a checklist. Someone still has to own the leftover.
+Noticing, responding, and recovering still need an owner. They do not copy “ignore identity keys.” They do not prove a checklist. Someone still has to own the leftover.
 
 ## Signals that do not become a second leak
 
@@ -33,7 +33,7 @@ Naming a mobile-filter product is not the rule. Re-run `test_deeplink_as_param_d
 
 Play Console App Link status will show verified hosts and stay silent when an exported Activity still copies `as`. Notice must observe **alice unchanged**, not host association. If the alert includes a full deep-link URL or an OAuth code, you have opened a logging leak (4.3).
 
-What this practice is supposed to show: dropped `as=` fires without the URL. Naming a product is not the rule.
+What this practice is supposed to show: dropped `as=` fires without the URL. A vendor name is not this week's rule.
 
 ## Practice
 

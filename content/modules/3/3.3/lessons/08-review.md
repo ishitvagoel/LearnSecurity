@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"VPC is isolation"| False[False comfort]
 ```
 
-Start from what must stay true (tB cannot SELECT tA). Everything that is not a same-company check at that call is a leftover path.
+Hold onto tB cannot SELECT tA. If that call is missing a same-company check, you still have a leftover path.
 
 ## Problems to find (name them yourself)
 

@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Kill[kill and rotate trace secrets]
 ```
 
-Industry lists talk about noticing, responding, and recovering. They do not pick a canary product. They do not prove this boot refused prod plus debug. Someone still has to own the leftover.
+Noticing, responding, and recovering still need an owner. A canary product is not the rule, and this boot refused prod plus debug is not proof.
 
 Re-run `test_prod_debug_must_not_boot` after any compose change. A green `NODE_ENV` tile is not that check. Emergency debug is E6 — inventory it before you claim recover.
 
@@ -46,7 +46,7 @@ If your alert includes the matching trace, you have copied the leak into the pag
 
 ## What the framework does vs what you still have to check
 
-The same feature flags, sidecar debug, and public admin bind that bypass this practice will also bypass a “scan our canary dashboard” detector. Name those places before you claim recover. Naming a product is not the rule.
+The same feature flags, sidecar debug, and public admin bind that bypass this practice will also bypass a “scan our canary dashboard” detector. Name those places before you claim recover. A vendor name is not this week's rule.
 
 Cause vs cost stays split here too: the **cause** is fail-open boot (debug ignored); the **cost** is traces and extra attack surface; **how you stop it** is the prod-and-debug check; **how you notice** is `prod_debug_forbidden`; **how you recover** is kill-and-rotate. What the tool cannot do: this alert does not catch a feature flag that turns off authorization (1.2), and it does not catch sidecar debug.
 

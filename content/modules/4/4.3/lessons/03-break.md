@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `session_from_request`. Fake token `secret`. It does not open uvicorn, a CDN, or a browser history. The point is to see that the check treats a query-string session as a **failed rule**, not as a trophy dump of a log.
+The practice is not a website you attack. It is a tiny in-process `session_from_request`. Fake token `secret`. It does not open uvicorn, a CDN, or a browser history. Watch the check treat a query-string session as a **failed rule**, not as a trophy dump of a log.
 
 The rule under test:
 

@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “Field authz is on” is not evidence. “The SPA hides the column” is a tool observation. The check is: `resolve("member", "secret_internal")` is false **and** `resolve("member", "display_name")` is true. The member-internal observation must be **false** on `--impl vulnerable` (returns true) and **true** on `--impl fixed`. Do not query public GraphQL.
 
 ## Picture: broken files must fail member × secret_internal
 
-A check that only counts passing cases can pass while a member still resolves `secret_internal`. Ask whether that dump is allowed to count as a pass. The broken files must fail that. The repaired files must pass it. Honest `display_name` may pass on both — that is the product, not an excuse to skip the deny.
+A check that only counts passing cases can still look green while a member still resolves `secret_internal`. The broken files have to fail that case. The repaired files have to pass it. Honest `display_name` may pass on both — that is the product, not an excuse to skip the deny.
 
 ```mermaid
 flowchart LR
@@ -26,7 +26,7 @@ If both pass, the check is not looking at the field table. If both fail, the fix
 | Service | service × `secret_internal` true |
 | Not claimed | object×company (4.4); extra-key writes (7.1); advanced cache leftover |
 
-The checks live in `labs/7.2/7.2-lab/tests/test_property.py`. `test_member_cannot_resolve_internal_field` is a **what must not happen** check: a dump that always returns true is not allowed to count as a pass. `test_member_can_resolve_display_name` is the honest path.
+The checks live in `labs/7.2/7.2-lab/tests/test_property.py`. `test_member_cannot_resolve_internal_field` exists so a dump that always returns true cannot count as a pass. `test_member_can_resolve_display_name` is the honest path.
 
 ```text
 python3 -m pytest labs/7.2/7.2-lab/tests --impl vulnerable
@@ -43,7 +43,7 @@ Honest `display_name` may pass on both implementations. That does not excuse the
 - Object×company (4.4) — a passing field test does not prove Bob cannot GET Alice’s note
 - Extra-key writes (7.1)
 
-Record those as leftover risk or later topics, not as silent passes.
+Write those down as leftover risk or later topics, not as silent passes.
 
 ## Practice
 

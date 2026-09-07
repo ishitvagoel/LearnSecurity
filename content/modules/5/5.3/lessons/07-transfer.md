@@ -1,4 +1,4 @@
-# Same idea: a gist-leaked clinic API key
+# Somewhere new: a gist-leaked clinic API key
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

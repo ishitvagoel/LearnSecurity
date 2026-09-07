@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python model of note ingest. The failure is already in the object: a first-key scan for who is allowed, and `json.loads` for storage. The point is to see that the check treats two meanings of the same bytes as **a failed rule**, not as a JSON nit.
+The practice is not a website you attack. It is a tiny Python model of note ingest. The failure is already in the object: a first-key scan for who is allowed, and `json.loads` for storage. Watch the check treat two meanings of the same bytes as **a failed rule**, not as a JSON nit.
 
 The rule under test:
 

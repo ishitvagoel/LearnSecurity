@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 "We use retrieval" is not evidence. "The prompt forbids SQL" is a tool observation. The check is: `run_tool("exec_sql", {})` is None and `search_notes` may run. That `exec_sql` observation must be **false** on the broken files and **true** on the repaired files. Do not call live models.
 
 ## Picture: a broken runtime must fail the check
 
-A test that only counts passing tests can pass while `run_tool("exec_sql", {})` still returns a ran-string. Ask whether always-run `run_tool` still counts as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only counts passing tests can still look green while `run_tool("exec_sql", {})` still returns a ran-string. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at `exec_sql`. If both fail, the fix is no
 | Abuse | Unknown tools still deny (fail closed) |
 | Not claimed | A live vendor API; a famous-bugs dashboard; an assurance gate; that `search_notes` is encoded |
 
-The file is `labs/E1/e1-lab/tests/test_property.py`. The test `test_exec_sql_tool_is_denied` is a **what must not happen** test: always-run `run_tool` is not allowed to count as a pass.
+The file is `labs/E1/e1-lab/tests/test_property.py`. The test `test_exec_sql_tool_is_denied` exists so always-run `run_tool` cannot count as a pass.
 
 Honest `search_notes` may pass on both implementations. That does not excuse the `exec_sql` deny test. If the broken files do not fail `test_exec_sql_tool_is_denied`, the lab is miswired — fix the wiring, not the assertion.
 

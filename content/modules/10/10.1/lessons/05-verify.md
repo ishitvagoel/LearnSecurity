@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “CODEOWNERS is on” is not evidence. “Maturity Level 3” is a tool observation. The check is: `merge_ok({})` is false and `{"threat_model": "TM-12"}` may merge. That empty-change observation must be **false** on the broken files (they return true) and **true** on the repaired files. Do not merge in a live GitHub org.
 
 ## Picture: a broken merge check must fail the empty-change test
 
-A test that only counts passing checks can pass while an empty dict still merges. Ask whether merge without a threat-model id still counts as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only counts passing checks can still look green while an empty dict still merges. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at `threat_model`. If both fail, the fix i
 | Abuse | Unsure or empty ids are deny (fail closed; leftover if not in this check) |
 | Not claimed | A live GitHub org; Gate 10; a maturity score; that TM-12 covers this change |
 
-The file is `labs/10.1/10.1-lab/tests/test_property.py`. The test `test_merge_requires_threat_model_id` is a **what must not happen** test: always-true `merge_ok` is not allowed to count as a pass.
+The file is `labs/10.1/10.1-lab/tests/test_property.py`. The test `test_merge_requires_threat_model_id` exists so always-true `merge_ok` cannot count as a pass.
 
 Honest `{"threat_model": "TM-12"}` may pass on both implementations. That does not excuse the empty-change deny test. If the broken files do not fail `test_merge_requires_threat_model_id`, the lab is miswired — fix the wiring, not the assertion.
 

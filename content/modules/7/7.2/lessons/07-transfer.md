@@ -1,4 +1,4 @@
-# Same idea: a clinic member cannot resolve SSN
+# Somewhere new: a clinic member cannot resolve SSN
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

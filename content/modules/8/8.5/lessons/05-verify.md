@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “We filled in the store’s privacy form” is not evidence. “The crash product uses HTTPS” is a tool observation. The check is: `'secret' not in str(crash_report("secret"))` and an honest crash still has a `stack` key. That body-absent observation must be **false** on the broken files and **true** on the repaired files. Do not call a crash vendor.
 
 ## Picture: a broken crash report must fail the check
 
-A test that only counts passing tests can pass while the body is still in the report. Ask whether a confidential field in this crash JSON still counts as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only counts passing tests can still look green while the body is still in the report. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at the body substring. If both fail, the f
 | Abuse | Unsure values are not attached (fail closed; leftover if not in this check) |
 | Not claimed | A real crash console; the public store; screenshot pipelines; vendor DLP |
 
-The file is `labs/8.5/8.5-lab/tests/test_property.py`. The test `test_crash_report_omits_note_body` is a **what must not happen** test: a report that includes the body is not allowed to count as a pass.
+The file is `labs/8.5/8.5-lab/tests/test_property.py`. The test `test_crash_report_omits_note_body` exists so a report that includes the body cannot count as a pass.
 
 Honest stack-present may pass on both implementations. That does not excuse the body-omit test. If the broken files do not fail `test_crash_report_omits_note_body`, the lab is miswired — fix the wiring, not the assertion.
 

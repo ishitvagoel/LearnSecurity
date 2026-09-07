@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"HTTPS"| False[False comfort]
 ```
 
-The review starts at the protected effect (decode is not the plaintext). Everything that is not a keyed, non-encoding transform at `protect` is a candidate reversible path. A comment that says AES without a round-trip test is tool theater, not a different finding class.
+Hold onto this: decode is not the plaintext. If `protect` is missing a keyed, non-encoding transform, you still have a reversible leftover. A comment that says AES without a round-trip test is tool theater.
 
 ## Problems to find (name them yourself)
 

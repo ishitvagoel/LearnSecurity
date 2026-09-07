@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Rotate[rotate cluster creds]
 ```
 
-Industry lists talk about noticing, responding, and recovering. They do not pick a CIS product. They do not prove this ServiceAccount was least-privileged. Someone still has to own the leftover.
+Noticing, responding, and recovering still need an owner. A CIS product is not the rule, and this ServiceAccount was least-privileged is not proof.
 
 Re-run `test_cluster_admin_pod_is_denied` after any Helm change. A green "namespace private" tile is not that check. Break-glass ClusterRoles are a later elective — inventory them before you claim recover.
 
@@ -46,7 +46,7 @@ If your alert includes the matching kubeconfig, you have copied the leak into th
 
 ## What the framework does vs what you still have to check
 
-The same lying `"app"` Role, metadata hop, and Helm convenience ClusterRoles that bypass this practice will also bypass a "scan our CIS dashboard" detector. Name those places before you claim recover. Naming a product is not the rule.
+The same lying `"app"` Role, metadata hop, and Helm convenience ClusterRoles that bypass this practice will also bypass a "scan our CIS dashboard" detector. Name those places before you claim recover. A vendor name is not this week's rule.
 
 Cause vs cost stays split here too: the **cause** is always-true admission (or a chart that adds ClusterRoleBinding); the **cost** is control-plane takeover from one app bug; **how you stop it** is the allow-list; **how you notice** is `cluster_admin_denied`; **how you recover** is delete-and-rotate. What the tool cannot do: this alert does not prove `"app"` is least privilege, and it does not block the metadata hop.
 

@@ -1,4 +1,4 @@
-# Review always-true review_ok like a pull request
+# Would you merge this always-true review_ok?
 
 **Kind:** code-review
 **Loop step:** Review
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|bot looks good| False[False comfort]
 ```
 
-The review starts at the protected effect (eval-on-user rejected). Everything that is not an interpreter question at that call is a candidate always-approve path. A formatter screenshot without that check is the same problem, not a different kind of finding.
+Hold onto eval-on-user rejected. If that call is missing an interpreter question, you still have an always-approve leftover. A formatter screenshot without that check is still the same problem.
 
 The lab substring is a stand-in — name `exec(` and generated code as leftover, do not skip `test_eval_on_user_input_is_rejected`. Do not dump weaponized eval. Do not claim a course gate.
 

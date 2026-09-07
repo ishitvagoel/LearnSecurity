@@ -27,7 +27,7 @@ A broken retry is a notice-and-recover problem, not a licence to fail open or to
 | Recover | Take extra shares back; tell the owner; re-run `test_retry_does_not_duplicate_side_effect` |
 | Leftover | A lost first response needs a path so the owner can see the share; never fail open if the key store is down |
 
-Industry lists talk about noticing, responding, and recovering. They do not pick a log product. They do not prove this share rule. An awareness-list name is not the runbook title. Naming a SIEM product is not the rule.
+Noticing, responding, and recovering still need an owner. They do not pick a log product. They do not prove this share rule. An awareness-list name is not the runbook title. Naming a SIEM product is not the rule.
 
 ## What the framework does vs what you still have to check
 
@@ -53,4 +53,4 @@ Disable-on-submit is not the rule. Accessible “still working” must reuse the
 
 ## What this page is not doing
 
-Naming a product is not the rule. Do not instruct live load tests. Answer keys are not on this site.
+A vendor name is not this week's rule. Do not instruct live load tests. Answer keys are not on this site.

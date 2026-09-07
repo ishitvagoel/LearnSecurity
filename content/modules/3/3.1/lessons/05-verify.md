@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “We have a classification spreadsheet” is not evidence. “Logs are internal” is a trust assumption, not an observation. The check is: `log_event("note_read", "tenant-A-secret-body")` does not contain `tenant-A-secret-body` and does contain a redaction marker. That observation must be **false** on the broken files and **true** on the repaired files.
 
 ## Picture: a broken log line must fail the check
 
-A test that only asserts logs exist can pass while the body is still in the line. Ask whether a confidential field in this log still counts as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only asserts logs exist can still look green while the body is still in the line. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at the body substring. If both fail, the f
 | Abuse | Unsure values are not logged (fail closed; leftover if not in this check) |
 | Not claimed | All places covered; production logs clean; exception middleware safe; access logs safe |
 
-The file is `labs/3.1/3.1-lab/tests/test_property.py`. The test `test_note_body_is_not_logged` calls `log_event` with the synthetic body and asserts the substring is absent. That is a **what must not happen** test: a confidential field in this log is not allowed to count as a pass.
+The file is `labs/3.1/3.1-lab/tests/test_property.py`. The test `test_note_body_is_not_logged` calls `log_event` with the synthetic body and asserts the substring is absent. That check exists so a confidential field in this log cannot count as a pass.
 
 A test that only asserts HTTP 200 is not this topic's evidence. A test that only greps `Confidential` in a spreadsheet without calling `log_event` is not this topic's evidence. This practice never opens a production drain.
 

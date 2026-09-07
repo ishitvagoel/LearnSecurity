@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Revoke[Remove extra membership if one landed]
 ```
 
-Industry lists talk about noticing, responding, and recovering. They do not pick a log product. They do not consume the token. Someone still has to own the leftover.
+Noticing, responding, and recovering still need an owner. They do not pick a log product. They do not consume the token.
 
 ## Signals that do not become a second leak
 
@@ -63,4 +63,4 @@ A clinic example: notice guardian-invite replays; do not paste the mail link int
 
 ## What this page is not doing
 
-Naming a product is not the rule. Live invite replay is out of scope. This site does not mark you as finished. Answer keys are not on this site.
+A vendor name is not this week's rule. Live invite replay is out of scope. This site does not mark you as finished. Answer keys are not on this site.

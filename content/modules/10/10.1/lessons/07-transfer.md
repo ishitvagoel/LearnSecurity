@@ -1,4 +1,4 @@
-# Same idea: clinic HIPAA training as merge
+# Somewhere new: clinic HIPAA training as merge
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “Webhooks are signed” is not evidence. “TLS is on” is a tool observation. The check is: `accept("", "body", "lab-secret")` is false and a matching HMAC over the same raw body is true. The empty-sig observation must be **false** on the broken files (returns true) and **true** on the repaired files. Tests stay local. Do not hit live providers.
 
 ## Picture: empty sig on the broken files must fail the check
 
-A test that only counts passing cases can pass while an unsigned body is still accepted. Ask whether an always-true `accept` still counts as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only counts passing cases can still look green while an unsigned body is still accepted. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at a missing sig. If both fail, the fix is
 | Failure | If you cannot name the signature, do not accept |
 | Not claimed | Replay window; parse-before-MAC; 1.2; live Stripe |
 
-The file is `labs/7.3/7.3-lab/tests/test_property.py`. The test `test_missing_signature_is_rejected` is a **what must not happen** test: an always-true `accept` is not allowed to count as a pass.
+The file is `labs/7.3/7.3-lab/tests/test_property.py`. The test `test_missing_signature_is_rejected` exists so an always-true `accept` cannot count as a pass.
 
 A test that only asserts HTTP 200 on `/webhook` is not this topic’s evidence. A test that only greps `hmac` in source without calling `accept("", "body", "lab-secret")` is not this topic’s evidence. This practice never POSTs a live webhook.
 

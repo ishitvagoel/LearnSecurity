@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “Secrets Manager is enabled” is not this topic’s evidence. “The wiki says we rotated” is a tool observation. The check is: `auth("sk-lab-hardcoded", current="rotated-now")` is False and `auth("rotated-now", current=None)` is False. That observation must be **false** on the broken files (default still authenticates / missing current allows) and **true** on the repaired files.
 
 ## Picture: leftover default must fail
 
-A test that only counts passing cases can pass while a leftover default still counts as a valid key. Ask whether a leftover default is allowed to count as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only counts passing cases can still look green while a leftover default still counts as a valid key. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -23,7 +23,7 @@ flowchart LR
 | Wrong input / abuse | hardcoded default false after rotate; missing current denies; broken files must fail |
 | Not claimed | hardware box; timed rotation; worker second default |
 
-Lab tests in `labs/5.3/5.3-lab/tests/test_property.py`. `test_hardcoded_default_does_not_auth` is a **what must not happen** test: a leftover default is not allowed to count as a pass.
+The checks live in `labs/5.3/5.3-lab/tests/test_property.py`. `test_hardcoded_default_does_not_auth` exists so a leftover default cannot count as a pass.
 
 ```text
 python3 -m pytest labs/5.3/5.3-lab/tests --impl vulnerable

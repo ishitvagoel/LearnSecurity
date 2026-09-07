@@ -1,4 +1,4 @@
-# Review extras as= like a pull request
+# Would you merge this extras as=?
 
 **Kind:** code-review
 **Loop step:** Review
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|App Links verified| False[False comfort]
 ```
 
-Start from what must stay true (alice unchanged). Everything that is not “ignore identity keys” at that call is a candidate session switch. An App Links screenshot without that check is the same problem, not a different kind of finding.
+Hold onto alice unchanged. If that call is missing “ignore identity keys”, you still have a session switch. An App Links screenshot without that check is still the same problem.
 
 WebView `addJavascriptInterface` and custom schemes are other IPC holes — name them, do not skip `test_deeplink_as_param_does_not_switch_user`.
 

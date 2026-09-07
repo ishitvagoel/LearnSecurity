@@ -12,7 +12,7 @@ export default function LabsIndexPage() {
       <PageHeader kicker="On your computer" title="Practice">
         <p>
           Practice files live in the course repository, not on this website.
-          Each note tells you what to try and what must not happen. This site
+          Each page tells you what to try and what must not happen. This site
           does not run the broken apps.
         </p>
       </PageHeader>

@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “We have roles” is not evidence. “Ids are hard to guess” is a tool observation. The check is: `can_read("bob", "n2") is False`. That observation must be **false** on the broken files (returns true) and **true** on the repaired files.
 
 ## Picture: broken must fail the n2 and cross-company denies
 
-A test that only counts how many grants exist can pass while leftover permission still opens n2. Ask whether a grant on n1 is allowed to count as a pass for n2. The broken files must fail that. The repaired files must pass it.
+A check that only counts how many grants exist can still look green while leftover permission still opens n2. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -23,7 +23,7 @@ flowchart LR
 | Wrong input / abuse | bob×n2, alice×n3, eve×n1, eve×n3 are false; broken files must fail |
 | Not claimed | Title vs body; search index; worker; row-level rules |
 
-The file is `labs/4.4/4.4-lab/tests/test_property.py`. `test_grant_on_n1_is_not_grant_on_n2` is a **what must not happen** test: leftover permission is not allowed to count as a pass.
+The file is `labs/4.4/4.4-lab/tests/test_property.py`. `test_grant_on_n1_is_not_grant_on_n2` exists so leftover permission cannot count as a pass.
 
 ```text
 python3 -m pytest labs/4.4/4.4-lab/tests --impl vulnerable

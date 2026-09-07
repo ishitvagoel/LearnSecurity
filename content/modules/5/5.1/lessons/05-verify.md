@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “We have a contract” is not evidence. “The notes row is gone” is a tool observation. The check is: after `delete_account("alice")`, `body_retained("alice") is None` and `search_retained("alice") is None`. That observation must be **false** on the broken files (the helper still returns `"secret"`) and **true** on the repaired files.
 
 ## Picture: leftover analytics or search must fail the check
 
-A test that only asserts the notes row is gone can pass while the warehouse still holds the body. Ask whether leftover analytics or search after delete still counts as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only asserts the notes row is gone can still look green while the warehouse still holds the body. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at `body_retained` after delete. If both f
 | Failure | Honest-path tests may pass on both; that does not excuse the leftover-copy tests |
 | Not claimed | Backups (later); a phone's offline cache (later); scheduled warehouse jobs |
 
-The file is `labs/5.1/5.1-lab/tests/test_property.py`. The test `test_deleted_account_leaves_no_analytics_body` calls `delete_account` then `body_retained`. That is a **what must not happen** test: a leftover warehouse body is not allowed to count as a pass.
+The file is `labs/5.1/5.1-lab/tests/test_property.py`. The test `test_deleted_account_leaves_no_analytics_body` calls `delete_account` then `body_retained`. That check exists so a leftover warehouse body cannot count as a pass.
 
 A test that only asserts HTTP 200 is not this topic's evidence. A test that only greps `DELETE FROM notes` without calling `body_retained` is not this topic's evidence. This practice never opens a live warehouse.
 

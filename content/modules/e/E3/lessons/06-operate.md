@@ -23,7 +23,7 @@ flowchart TD
 | Recover | Credit extra in a runbook; still fail the test first |
 | Leftover | New-key retry; webhook race |
 
-Industry lists talk about noticing, responding, and recovering. They do not prove this ledger rule. Naming a product is not the rule. Re-run `test_duplicate_capture_does_not_double_charge` after any capture-path change; a green “processor remembers” tile is not that check. Webhook inserts are the same family — inventory them before claiming recover.
+Noticing, responding, and recovering still need an owner. They do not prove this ledger rule. A vendor name is not this week's rule. Re-run `test_duplicate_capture_does_not_double_charge` after any capture-path change; a green “processor remembers” tile is not that check. Webhook inserts are the same family — inventory them before claiming recover.
 
 ## What the framework does vs what you still have to check
 

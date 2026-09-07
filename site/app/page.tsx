@@ -49,7 +49,7 @@ export default function HomePage() {
                 A list of what to do next, so you are not guessing.
               </li>
               <li>
-                <strong className="block text-ink">Practice notes</strong>
+                <strong className="block text-ink">Practice files</strong>
                 When a lesson asks you to try something, you clone the course
                 files and run them on your computer. This website never runs
                 the broken apps.

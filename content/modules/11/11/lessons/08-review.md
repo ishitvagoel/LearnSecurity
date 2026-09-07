@@ -1,4 +1,4 @@
-# Review no-op revoke like a pull request
+# Would you merge this no-op revoke?
 
 **Kind:** code-review
 **Loop step:** Review
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|scanner green| False[False comfort]
 ```
 
-Start from what must stay true (B after revoke is None). Everything that is not owner-or-grant at that call is a candidate always-read path. A scanner screenshot without that check is the same problem, not a different kind of finding.
+Hold onto this: B after revoke is None. If that call is missing owner-or-grant, you still have an always-read leftover. A scanner screenshot without that check is still the same problem.
 
 Cache invalidation is a phone leftover. Worker leftover session is a delayed-job leftover. Do not skip `test_revoked_share_cannot_read`. This page does not mark you as finished. Do not hit a live tenant to prove the finding.
 

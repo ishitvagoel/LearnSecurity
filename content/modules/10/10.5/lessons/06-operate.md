@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Reopen[reopen and restore]
 ```
 
-Industry lists talk about noticing, responding, and recovering. They do not pick a SIEM product. They do not prove this ticket’s restore ran. Someone still has to own the leftover.
+Noticing, responding, and recovering still need an owner. A SIEM product is not the rule, and this ticket’s restore ran is not proof.
 
 Re-run `test_cannot_close_without_recovery` after any close-workflow change. A green “alerts stopped” tile is not that check. Also re-run `test_cannot_close_when_logs_contain_note_body` — a second sink (crash reports, web telemetry) can reopen the leftover-body hole.
 
@@ -46,7 +46,7 @@ If your alert includes the matching note, you have copied the leak into the pagi
 
 ## What the framework does vs what you still have to check
 
-The same always-true close, leftover bodies, and support-tool god-mode that bypass this practice will also bypass a “scan our SIEM dashboard” detector. Name those places before you claim recover. Naming a product is not the rule.
+The same always-true close, leftover bodies, and support-tool god-mode that bypass this practice will also bypass a “scan our SIEM dashboard” detector. Name those places before you claim recover. A vendor name is not this week's rule.
 
 Cause vs cost stays split here too: the **cause** is close looking at detection quality instead of recovery done and no `note_body`; the **cost** is an attacker still in plus extra note copies; **how you stop it** is the conjunction; **how you notice** is `incident_closed_without_recovery`; **how you recover** is reopen and restore. What the tool cannot do: this alert does not prove the restore drill ran, and it does not ship logs to a separate system.
 

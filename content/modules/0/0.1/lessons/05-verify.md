@@ -4,7 +4,7 @@
 **Loop step:** 5 Verify
 **Standards:** WSTG 4.2 as catalogue, not the oracle; CSF 2.0 GV as outcome language.
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “I’ll be careful” is not evidence. “The guide has an authorization chapter” is a catalogue observation. The check is: `target_is_authorized("https://example.com/")` is false. That must be **false** on `--impl vulnerable` (the helper returns true) and **true** on `--impl fixed`. Do not fetch example.com; the test string is enough.
 
@@ -25,7 +25,7 @@ flowchart LR
 | Failure | An unparseable host denies (leftover if not in this check) |
 | Not claimed | Following redirects is safe; `/etc/hosts` cannot lie; the first check-in is done; a testing-guide dashboard is green |
 
-The checks live in `labs/0.1/0.1-orientation/tests/test_scope.py`. The second one is a **what must not happen** check: a public host treated as allowed must not count as a pass.
+The checks live in `labs/0.1/0.1-orientation/tests/test_scope.py`. The second one exists so a public host treated as allowed cannot count as a pass.
 
 ```text
 python3 -m pytest labs/0.1/0.1-orientation/tests --impl vulnerable

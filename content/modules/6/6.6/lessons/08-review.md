@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"fail-open DB"| False[False comfort]
 ```
 
-The review starts at the protected effect (second accept false). Everything that is not a used-write at that call is a candidate replay path. HTTP 400 after membership already exists is the same problem, not a different kind of finding.
+Hold onto second accept false. If that call is missing a used-write, you still have a replay path. HTTP 400 after membership already exists is still the same problem.
 
 A unique index that is never written still leaves `accept` always true. Password-reset consume is the same family — name it as leftover, do not skip `test_invite_token_is_single_use`.
 

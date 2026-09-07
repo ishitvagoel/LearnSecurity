@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “We use Stripe” is not evidence. “The questionnaire is filed” is a tool observation. The check is: two `capture("k1")` leave count 1 and the first capture may succeed. That two-k1 observation must be **false** on `--impl vulnerable` (count 2) and **true** on `--impl fixed`. Do not hit live processors.
 
 ## Picture: a second k1 that charges twice must fail
 
-A test that only greps a processor header can pass while every capture still appends. Ask whether a double charge still counts as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only greps a processor header can still look green while every capture still appends. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -23,7 +23,7 @@ flowchart LR
 | Normal | first k1 → may charge (may pass on both) |
 | Not claimed | live Stripe; card-network scope; a course gate; webhook path |
 
-Lab tests in `labs/E3/e3-lab/tests/test_property.py`. `test_duplicate_capture_does_not_double_charge` is a **what must not happen** test: always-append `capture` is not allowed to count as a pass. `reset()` keeps ledger state from leaking.
+The checks live in `labs/E3/e3-lab/tests/test_property.py`. `test_duplicate_capture_does_not_double_charge` exists so always-append `capture` cannot count as a pass. `reset()` keeps ledger state from leaking.
 
 ```text
 python3 -m pytest labs/E3/e3-lab/tests --impl vulnerable

@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Revoke[revoke agent creds]
 ```
 
-Industry lists talk about noticing, responding, and recovering. They do not pick a vendor product. They do not prove this tool gate was the allow-list. Someone still has to own the leftover.
+Noticing, responding, and recovering still need an owner. A vendor product is not the rule, and this tool gate was the allow-list is not proof.
 
 Re-run `test_exec_sql_tool_is_denied` after any tool-registration change. A green "prompt forbids SQL" tile is not that check. Coding-assistant install tools in CI are the same family — inventory them before you claim recover.
 
@@ -46,7 +46,7 @@ If your alert includes the matching transcript, you have copied the leak into th
 
 ## What the framework does vs what you still have to check
 
-The same lying `search_notes` HTML, hallucinated packages, and prompt-only policy that bypass this practice will also bypass a "scan our agent dashboard" detector. Name those places before you claim recover. Naming a product is not the rule.
+The same lying `search_notes` HTML, hallucinated packages, and prompt-only policy that bypass this practice will also bypass a "scan our agent dashboard" detector. Name those places before you claim recover. A vendor name is not this week's rule.
 
 Cause vs cost stays split here too: the **cause** is model output treated as policy; the **cost** is an interpreter via English; **how you stop it** is the allow-list; **how you notice** is `tool_denied`; **how you recover** is revoke leftover agent credentials. What the tool cannot do: this alert does not encode `search_notes` HTML, and it does not stop hallucinated packages.
 
@@ -70,4 +70,4 @@ A clinic example: deny the chart-SQL tool; do not paste the prompt into the tick
 
 ## What this page is not doing
 
-Naming a product is not the rule. This page does not mark you as finished. A famous-bugs label is not this alert. Answer keys are not on this site.
+A vendor name is not this week's rule. This page does not mark you as finished. A famous-bugs label is not this alert. Answer keys are not on this site.

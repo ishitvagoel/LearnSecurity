@@ -19,7 +19,7 @@ flowchart TD
   Alert --> Revoke[Revoke cookies issued on that path]
 ```
 
-Industry lists talk about noticing, responding, and recovering. They do not bind the socket. They do not pick a log product. Someone still has to own the mismatch.
+Noticing, responding, and recovering still need an owner. They do not bind the socket. They do not pick a log product. Someone still has to own the mismatch.
 
 ## Signals that do not become a second leak
 
@@ -61,4 +61,4 @@ A clinic example: notice page-https versus API-http; do not paste cookies into t
 
 ## What this page is not doing
 
-Naming a product is not the rule. Live TLS hunts are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+A vendor name is not this week's rule. Live TLS hunts are out of scope. This site does not mark you as finished. Answer keys are not on this site.

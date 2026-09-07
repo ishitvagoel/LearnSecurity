@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “Capstone scanner green” is not evidence. “DELETE returned 200” is a tool observation. The check is: B after revoke is None, A after revoke still reads, B before revoke still reads. The B-after-revoke observation must be **false** on the broken files (returns the body) and **true** on the repaired files. Do not hit live tenants.
 
 ## Picture: a broken no-op revoke must fail the check
 
-A test that only counts passing tests can pass while B after revoke still reads. Ask whether a revoked share still reading the note counts as a passing control. The broken files must fail that. The repaired files must pass it.
+A check that only counts passing tests can still look green while B after revoke still reads. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at B after revoke. If both fail, the fix i
 | Normal | B before revoke → body (may pass on both) |
 | Not claimed | live clinic; an assurance gate; worker or cache wipe |
 
-The file is `labs/11/11-lab/tests/test_property.py`. The test `test_revoked_share_cannot_read` is a **what must not happen** test: no-op `revoke` is not allowed to count as a pass. `conftest.py` calls `reset()` so grant state does not leak.
+The file is `labs/11/11-lab/tests/test_property.py`. The test `test_revoked_share_cannot_read` exists so no-op `revoke` cannot count as a pass. `conftest.py` calls `reset()` so grant state does not leak.
 
 Honest owner-after-revoke and share-before-revoke may pass on both implementations. That does not excuse the B-after-revoke deny test. If the broken files do not fail `test_revoked_share_cannot_read`, the lab is miswired — fix the wiring, not the assertion.
 

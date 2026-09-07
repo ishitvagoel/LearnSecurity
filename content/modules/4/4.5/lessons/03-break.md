@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `accept_token`. Fake claims. It does not open an identity provider or check a real signature. The point is to see that a JWT minted for another API still counting as a notes-app session is a **failed rule**, not a trophy dump of a production token.
+The practice is not a website you attack. It is a tiny in-process `accept_token`. Fake claims. It does not open an identity provider or check a real signature. Watch for this: a JWT minted for another API still counting as a notes-app session is a **failed rule**, not a trophy dump of a production token.
 
 The rule under test:
 

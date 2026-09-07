@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python model of a recovery **confirm** control. The failure is already in the object: color without a name, mouse without a keyboard. The point is to see that the check treats that object as a **failed rule**, not as a UI nit.
+The practice is not a website you attack. It is a tiny Python model of a recovery **confirm** control. The failure is already in the object: color without a name, mouse without a keyboard. Watch the check treat that object as a **failed rule**, not as a UI nit.
 
 The rule under test:
 

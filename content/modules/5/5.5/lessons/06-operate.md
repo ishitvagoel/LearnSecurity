@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Restore[Rotate creds; restore if mutated]
 ```
 
-Industry lists talk about noticing, responding, and recovering. They do not bind parameters. Naming a product is not the rule. Someone still has to own the concatenating path.
+Noticing, responding, and recovering still need an owner. They do not bind parameters. A vendor name is not this week's rule. Someone still has to own the concatenating path.
 
 ## Signals that do not become a second leak
 
@@ -59,4 +59,4 @@ A clinic example: notice search-box syntax errors; do not paste patient names in
 
 ## What this page is not doing
 
-Naming a product is not the rule. A web filter is not this check. Live SQL hunts are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+A vendor name is not this week's rule. A web filter is not this check. Live SQL hunts are out of scope. This site does not mark you as finished. Answer keys are not on this site.

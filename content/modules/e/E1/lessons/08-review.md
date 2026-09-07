@@ -1,4 +1,4 @@
-# Review always-run run_tool like a pull request
+# Would you merge this always-run run_tool?
 
 **Kind:** code-review
 **Loop step:** Review
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|famous-bugs mapped| False[False comfort]
 ```
 
-Start from what must stay true (`exec_sql` is None). Everything that is not allow-list membership at that call is a candidate always-run path. A prompt screenshot without that check is the same problem, not a different kind of finding.
+Hold onto this: `exec_sql` is None. If that call is missing allow-list membership, you still have an always-run leftover. A prompt screenshot without that check is still the same problem.
 
 Retrieved docs are untrusted. Coding-assistant install tools are a later leftover. Name them, do not skip `test_exec_sql_tool_is_denied`. This page does not mark you as finished. Do not call a live model to prove the finding.
 

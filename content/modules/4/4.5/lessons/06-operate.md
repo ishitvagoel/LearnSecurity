@@ -24,7 +24,7 @@ flowchart TD
 | Recover | Revoke the client; rotate signing keys if tokens self-verify |
 | Leftover | PKCE / nonce / DPoP not in this practice |
 
-Industry lists talk about noticing, responding, and recovering. They do not prove the `aud` comparison. Naming a product is not the rule. Re-run `test_wrong_audience_is_rejected` after any verifier change; a green OpenID dashboard is not that check. Missing `aud` is the same what must not happen as `aud=other-api` — do not close one without retesting the other. A leaked token that already has the *correct* audience is leftover (revocation / sender-constraint), not a pass for this metric.
+Noticing, responding, and recovering still need an owner. They do not prove the `aud` comparison. A vendor name is not this week's rule. Re-run `test_wrong_audience_is_rejected` after any verifier change; a green OpenID dashboard is not that check. Missing `aud` is the same what must not happen as `aud=other-api` — do not close one without retesting the other. A leaked token that already has the *correct* audience is leftover (revocation / sender-constraint), not a pass for this metric.
 
 ## What the framework does vs what you still have to check
 
@@ -46,4 +46,4 @@ A clinic example: notice FHIR tokens with the wrong hospital aud; do not paste t
 
 ## What this page is not doing
 
-Naming a product is not the rule. Live identity-provider audits are out of scope. This site does not mark you as finished.
+A vendor name is not this week's rule. Live identity-provider audits are out of scope. This site does not mark you as finished.

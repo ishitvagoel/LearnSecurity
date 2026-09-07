@@ -23,7 +23,7 @@ flowchart TD
   Q -->|logs are internal| False[False comfort]
 ```
 
-Start from what must stay true (body substring absent from this log). Everything that is not an allow-listed log API at that call is a candidate extra path.
+Hold onto body substring absent from this log. If that call is missing an allow-listed log API, you still have leftover.
 
 ## Seeded smells (label them yourself)
 

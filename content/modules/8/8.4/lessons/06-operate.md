@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Revoke[Revoke debug client id]
 ```
 
-Industry lists talk about noticing, responding, and recovering. They do not prove secrets stayed out of the APK. Someone still has to own the leftover flavor.
+Noticing, responding, and recovering still need an owner. They do not prove secrets stayed out of the APK.
 
 ## Signals that do not become a second leak
 
@@ -33,7 +33,7 @@ Naming an R8 product is not the rule. Re-run `test_debug_build_cannot_call_prod_
 
 A Play Console dashboard will show signing status and stay silent when FastAPI still allows `build_type=debug`. Notice must observe **debug plus ok is false**, not store health. If the alert includes signing keys or an APK, you have opened a leftover hole from topic 5.3.
 
-What this practice is supposed to show: debug-to-prod denials fire without the APK. Naming a product is not the rule.
+What this practice is supposed to show: debug-to-prod denials fire without the APK. A vendor name is not this week's rule.
 
 ## Practice
 

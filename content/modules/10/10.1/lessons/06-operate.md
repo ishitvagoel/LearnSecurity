@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Stop[block merge]
 ```
 
-Industry lists talk about noticing, responding, and recovering. They do not prove the design-review practice exists. They do not pick a GitHub product. Naming a product is not the rule. Someone still has to own the leftover.
+Noticing, responding, and recovering still need an owner. They do not prove the design-review practice exists. They do not pick a GitHub product. A vendor name is not this week's rule. Someone still has to own the leftover.
 
 Re-run `test_merge_requires_threat_model_id` after any merge-bot change. A green “CODEOWNERS required” tile is not that check. Stale TM-12 that never mentions OAuth is a 3.2 leftover — inventory it before you claim recover.
 
@@ -44,7 +44,7 @@ Not: a token, a real org name, a threat-model body, or “Gate 10 complete.”
 
 ## What the framework does vs what you still have to check
 
-The same always-true merge, stale TM-12, and docs exemptions that bypass this practice will also bypass a “scan our CODEOWNERS” detector. Name those places before you claim recover. Naming a product is not the rule.
+The same always-true merge, stale TM-12, and docs exemptions that bypass this practice will also bypass a “scan our CODEOWNERS” detector. Name those places before you claim recover. A vendor name is not this week's rule.
 
 Why it happens vs what it costs stays split here too: the **cause** is merge without a threat-model id; the **cost** is an identity surface that 3.2 never modelled; **how you stop it** is the truthy `threat_model` check; **how you notice** is `merge_blocked_no_tm`; **how you recover** is add a threat-model id and re-run `merge_ok`. What this alert cannot do: it does not prove TM-12 covers this change’s files, and it does not replace 3.2 authorship or 10.4 governance evidence.
 
@@ -68,4 +68,4 @@ A clinic example: block an identity change with no threat-model id; do not paste
 
 ## What this page is not doing
 
-Naming a product is not the rule. Live-org traces are out of scope. Gate 10 and M4 stay not finished. An unverified “secure by design” page stays unverified. A later draft of the design-review guide stays a draft. Answer keys are not on this site.
+A vendor name is not this week's rule. Live-org traces are out of scope. Gate 10 and M4 stay not finished. An unverified “secure by design” page stays unverified. A later draft of the design-review guide stays a draft. Answer keys are not on this site.

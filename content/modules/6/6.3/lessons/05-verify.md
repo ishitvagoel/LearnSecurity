@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “SameSite is Lax” is not evidence. “CORS is configured” is a tool observation. The check is: `allow_share` for a foreign origin with `token=None` is False. That observation must be **false** on the broken files (returns true) and **true** on the repaired files.
 
 ## Picture: broken must fail foreign origin
 
-A test that only counts passing cases can pass while leftover cookies still authorize a share. Ask whether a cookie-only share is allowed to count as a pass. The broken files must fail that. The repaired files must pass it — the deny plus the honest allow.
+A check that only counts passing cases can still look green while leftover cookies still authorize a share. The broken files have to fail that case. The repaired files have to pass it — the deny plus the honest allow.
 
 ```mermaid
 flowchart LR
@@ -25,7 +25,7 @@ flowchart LR
 | Normal / fail-closed | missing cookie → deny (may pass on both) |
 | Not claimed | GET mutate; clickjacking; CORS; postMessage |
 
-The file is `labs/6.3/6.3-lab/tests/test_property.py`. `test_foreign_origin_post_is_denied` is a **what must not happen** test: a cookie-only share is not allowed to count as a pass.
+The file is `labs/6.3/6.3-lab/tests/test_property.py`. `test_foreign_origin_post_is_denied` exists so a cookie-only share cannot count as a pass.
 
 ```text
 python3 -m pytest labs/6.3/6.3-lab/tests --impl vulnerable

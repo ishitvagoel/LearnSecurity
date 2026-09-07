@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `is_security_test` that returns a boolean. The failure is already in the function: it returns true when `status_asserted` is set. The point is to see that the check treats that count as a **failed rule**, not as a missing checklist tick.
+The practice is not a website you attack. It is a tiny Python `is_security_test` that returns a boolean. The failure is already in the function: it returns true when `status_asserted` is set. Watch the check treat that count as a **failed rule**, not as a missing checklist tick.
 
 The rule under test:
 

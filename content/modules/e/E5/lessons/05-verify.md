@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “We have row-level rules” is not evidence. “A famous-bugs list is mapped” is a tool observation. The check is: `tenant_for({"tenant": "A"}, {"tenant": "B"}) == "A"` and matching A/A may keep A. The JSON body is not the tenant. The body-switch observation must be **false** on the broken files (returns B: body tenant overrides session) and **true** on the repaired files (bind tenant from the session). Do not hit public companies.
 
 ## Picture: broken must fail: body switch
 
-A test that only counts how many row-level rules exist can pass while a body-chosen company still wins. Ask whether body-wins `tenant_for` is allowed to count as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only counts how many row-level rules exist can still look green while a body-chosen company still wins. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -23,7 +23,7 @@ flowchart LR
 | Normal | session A, body A → A (may pass on both) |
 | Not claimed | relationship graph; famous-bugs dashboard; course gate; search/cache keys |
 
-The file is `labs/E5/e5-lab/tests/test_property.py`. `test_body_cannot_switch_tenant` is a **what must not happen** test: body-wins `tenant_for` is not allowed to count as a pass.
+The file is `labs/E5/e5-lab/tests/test_property.py`. `test_body_cannot_switch_tenant` exists so body-wins `tenant_for` cannot count as a pass.
 
 ```text
 python3 -m pytest labs/E5/e5-lab/tests --impl vulnerable

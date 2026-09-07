@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"scanner was green"| False[False comfort]
 ```
 
-Start from what must stay true (always-name id present on green). Everything that is not a seeded join at that call is a leftover path.
+Hold onto always-name id present on green. If that call is missing a seeded join, you still have a leftover path.
 
 ## Problems to find (name them yourself)
 

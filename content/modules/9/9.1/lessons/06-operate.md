@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Stop[block release]
 ```
 
-Industry lists talk about noticing, responding, and recovering. They do not pick a governance product. They do not prove this requirement is covered. Someone still has to own the leftover.
+Noticing, responding, and recovering still need an owner. A governance product is not the rule, and this requirement is covered is not proof.
 
 Re-run `test_status_only_row_is_not_coverage` after any matrix change. A green “checklist imported” tile is not that check. Mobile storage rows (8.2) are other requirements of the same check — inventory them before you claim recover. A 200-only test that someone flagged `asserts_isolation` by mistake is a later lying-flag leftover (9.3), not a silent pass.
 
@@ -46,7 +46,7 @@ If your alert includes the matching note, you have copied the leak into the pagi
 
 ## What the framework does vs what you still have to check
 
-The same HTTP-200 tests, unnamed extra rows, and expired exceptions that bypass this practice will also bypass a “scan our Done column” detector. Name those places before you claim recover. Naming a product is not the rule.
+The same HTTP-200 tests, unnamed extra rows, and expired exceptions that bypass this practice will also bypass a “scan our Done column” detector. Name those places before you claim recover. A vendor name is not this week's rule.
 
 ## Can people still use it
 
@@ -68,4 +68,4 @@ A clinic example: block a release when the HIPAA “done” column has no isolat
 
 ## What this page is not doing
 
-Naming a product is not the rule. Live portal traces are out of scope. This page does not finish the verification check-in. Answer keys are not on this site.
+A vendor name is not this week's rule. Live portal traces are out of scope. This page does not finish the verification check-in. Answer keys are not on this site.

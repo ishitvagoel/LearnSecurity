@@ -1,4 +1,4 @@
-# Review client booleans like a pull request
+# Would you merge this client booleans?
 
 **Kind:** code-review
 **Loop step:** Review
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|Play Integrity logo| False[False comfort]
 ```
 
-Start from what must stay true (client ok plus attest fail denied). Everything that is not a server-attest check at that call is a candidate client-boolean path. A Play Integrity logo without that check is the same problem, not a different kind of finding.
+Hold onto client ok plus attest fail denied. If that call is missing a server-attest check, you still have a client-boolean path. A Play Integrity logo without that check is still the same problem.
 
 Shrinking the app and a platform-integrity check raise cost; they do not become 1.2. Feature flags and 8.4 debug clients are other hostile-client paths — name them, do not skip `test_client_integrity_claim_is_not_authorization`.
 

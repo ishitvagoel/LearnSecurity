@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `close_finding` that returns true for every dict. The failure is already in the function: it never looks at `retest`. The point is to see that the check treats that always-true close as a **failed rule**, not as a paperwork nit.
+The practice is not a website you attack. It is a tiny Python `close_finding` that returns true for every dict. The failure is already in the function: it never looks at `retest`. Watch the check treat that always-true close as a **failed rule**, not as a paperwork nit.
 
 The rule under test:
 

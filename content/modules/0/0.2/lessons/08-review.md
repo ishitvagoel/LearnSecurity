@@ -1,4 +1,4 @@
-# Review quiz-as-skip like a pull request
+# Would you merge this quiz-as-skip?
 
 **Kind:** code-review
 **Loop step:** Review
@@ -22,7 +22,7 @@ flowchart TD
   Q -->|job title mapped| False[False assurance]
 ```
 
-Start from what must stay true (part-1 skip denied). Everything that is not an always-false skip at that call is a leftover path.
+Hold onto part-1 skip denied. If that call is missing an always-false skip, you still have a leftover path.
 
 ## Problems to find (name them yourself)
 

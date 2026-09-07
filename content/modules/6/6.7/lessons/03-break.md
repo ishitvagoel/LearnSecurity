@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `allow`. It does not open a live export API. The failure is already in the function: it says yes for every `n`. The point is to see that the check treats that as a **failed rule**, not as a trophy against a public host.
+The practice is not a website you attack. It is a tiny Python `allow`. It does not open a live export API. The failure is already in the function: it says yes for every `n`. Watch the check treat that as a **failed rule**, not as a trophy against a public host.
 
 The rule under test:
 

@@ -1,4 +1,4 @@
-# Same idea: clinic test_get_patient_200
+# Somewhere new: clinic test_get_patient_200
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

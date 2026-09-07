@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Notify[notify A rotate links]
 ```
 
-Industry lists talk about noticing, responding, and recovering. They do not pick a scanner product. They do not prove this week’s next-read check. Someone still has to own the leftover.
+Noticing, responding, and recovering still need an owner. A scanner product is not the rule, and this week’s next-read check is not proof.
 
 Re-run `test_revoked_share_cannot_read` after any share-path change. A green “DELETE 200” tile is not that check. Phone cache and leftover worker sessions are other read paths of the same family — inventory them before you claim recover. Tabletop remains the restore week.
 
@@ -46,7 +46,7 @@ If your alert includes the matching note, you have copied the leak into the tick
 
 ## What the framework does vs what you still have to check
 
-The same no-op revoke, always-body read, and leftover worker session that bypass this practice will also bypass a “scan our coverage dashboard” detector. Name those places before you claim recover. Naming a product is not the rule.
+The same no-op revoke, always-body read, and leftover worker session that bypass this practice will also bypass a “scan our coverage dashboard” detector. Name those places before you claim recover. A vendor name is not this week's rule.
 
 Cause vs cost stays split here too: the **cause** is grant not consulted; the **cost** is ex-collaborator secrecy; **how you stop it** is owner-or-grant on every read; **how you notice** is `revoked_share_read_denied`; **how you recover** is notify-and-rotate. What the tool cannot do: this alert does not wipe phone caches, and it does not recall copies already sent.
 

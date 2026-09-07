@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “`minifyEnabled` is true” is not evidence. “Play App Signing is on” is a tool observation. The check is: `api_allowed("debug", "ok")` is false, and `api_allowed("release", "ok")` may be true. The debug-plus-ok observation must be **false** on `--impl vulnerable` (returns true) and **true** on `--impl fixed`. Do not unpack store APKs.
 
 ## Picture: broken files must fail: debug plus ok
 
-A check that only counts passing cases can pass while debug still calls prod. Ask whether always-true `api_allowed` still counts as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only counts passing cases can still look green while debug still calls prod. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the check is not looking at debug-to-prod. If both fail, the fix i
 | Extra | release + fail → false (`test_release_without_attest_is_denied`) |
 | Not claimed | real Play Integrity; R8; live signing; hardware-backed keys |
 
-The checks live in `labs/8.4/8.4-lab/tests/test_property.py`. `test_debug_build_cannot_call_prod_export` is a **what must not happen** check: an always-true `api_allowed` is not allowed to count as a pass.
+The checks live in `labs/8.4/8.4-lab/tests/test_property.py`. `test_debug_build_cannot_call_prod_export` exists so an always-true `api_allowed` cannot count as a pass.
 
 ```text
 python3 -m pytest labs/8.4/8.4-lab/tests --impl vulnerable
@@ -46,7 +46,7 @@ Honest release plus ok may pass on both implementations. That does not excuse th
 - That signing keys are absent from the repo (5.3)
 - Completeness of an APK inventory list (10.2)
 
-Record those as leftover risk or later topics, not as silent passes.
+Write those down as leftover risk or later topics, not as silent passes.
 
 ## Practice
 

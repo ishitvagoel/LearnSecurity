@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `can_read`. The failure is already in the function: it treats “Bob has a share somewhere” as a yes for every note. The point is to see that the check treats that as a **failed rule**, not as a trophy dump of another company’s body.
+The practice is not a website you attack. It is a tiny Python `can_read`. The failure is already in the function: it treats “Bob has a share somewhere” as a yes for every note. Watch the check treat that as a **failed rule**, not as a trophy dump of another company’s body.
 
 The rule under test:
 

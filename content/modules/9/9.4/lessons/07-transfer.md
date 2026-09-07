@@ -1,4 +1,4 @@
-# Same idea: clinic 50 unmapped HIGHs
+# Somewhere new: clinic 50 unmapped HIGHs
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

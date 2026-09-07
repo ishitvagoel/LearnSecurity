@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Expire[expire or re-accept]
 ```
 
-Industry lists talk about noticing, responding, and recovering. They do not pick a governance product. They do not prove this schema. Someone still has to own the leftover.
+Noticing, responding, and recovering still need an owner. A governance product is not the rule, and this schema is not proof.
 
 Re-run `test_exception_needs_owner_review_and_wcag` after any register-form change. A green “maturity 2.5” tile is not that check. Expired `review_by` dates are the same family — inventory them before claiming recover.
 

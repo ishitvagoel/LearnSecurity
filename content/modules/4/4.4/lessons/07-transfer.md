@@ -1,4 +1,4 @@
-# Same idea: appointment A is not chart B
+# Somewhere new: appointment A is not chart B
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

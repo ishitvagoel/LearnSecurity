@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `argv_for_list` and `uses_shell`. It does not start a process. The failure is already in the function: it glues the name into a shell string. The point is to see that the check treats that as a **failed rule**, not as a trophy command.
+The practice is not a website you attack. It is a tiny Python `argv_for_list` and `uses_shell`. It does not start a process. The failure is already in the function: it glues the name into a shell string. Watch the check treat that as a **failed rule**, not as a trophy command.
 
 The rule under test:
 

@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"HTTP 201 means once"| False[False comfort]
 ```
 
-Start from what must stay true (share count under retry). Everything that is not a remembered first outcome at that second call is a candidate leftover path.
+Hold onto share count under retry. If that second call is missing a remembered first outcome, you still have a leftover path.
 
 ## Problems to find (name them yourself)
 

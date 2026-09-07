@@ -3,7 +3,7 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “We set Referrer-Policy” is not evidence that the parser ignores query tokens. “HTTPS” is a hop observation. The check is: `session_from_request({"access_token": "secret"}, {}, None)` is `None`. That observation must be **false** on the broken files (returns `secret`) and **true** on the repaired files.
 
@@ -24,7 +24,7 @@ flowchart LR
 | Header | Authorization still works |
 | Not claimed | Production Referer; magic-link exchange; HttpOnly on the wire |
 
-Lab tests in `labs/4.3/4.3-lab/tests/test_property.py`. `test_query_string_token_is_rejected` is a **what must not happen** test: a query-minted session is not allowed to count as a pass.
+The checks live in `labs/4.3/4.3-lab/tests/test_property.py`. `test_query_string_token_is_rejected` exists so a query-minted session cannot count as a pass.
 
 ```text
 python3 -m pytest labs/4.3/4.3-lab/tests --impl vulnerable

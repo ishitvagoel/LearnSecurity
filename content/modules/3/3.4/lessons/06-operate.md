@@ -24,7 +24,7 @@ flowchart TD
 | Recover | Trim extra grants; tell the owner |
 | Leftover | Teams >5 need an owned exception |
 
-Announce “share limit reached” so people can hear it. That announcement is not the cap. Industry lists talk about noticing, responding, and recovering. They do not prove the write-path cap. Naming a product is not the rule.
+Announce “share limit reached” so people can hear it. That announcement is not the cap. Noticing, responding, and recovering still need an owner. They do not prove the write-path cap. A vendor name is not this week's rule.
 
 ## What the framework does vs what you still have to check
 
@@ -50,4 +50,4 @@ The owner-visible error must be something assistive tech can announce, not only 
 
 ## What this page is not doing
 
-Naming a product is not the rule. Live load tests are out of scope. Answer keys are not on this site.
+A vendor name is not this week's rule. Live load tests are out of scope. Answer keys are not on this site.

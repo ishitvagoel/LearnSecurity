@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `auth`. Disposable `sk-lab-hardcoded` and `rotated-now`. It does not open a vault or a cloud identity API. The point is to see that an old hardcoded default still counting as a valid key after rotation is a **failed rule**, not a trophy hunt for a live key.
+The practice is not a website you attack. It is a tiny in-process `auth`. Disposable `sk-lab-hardcoded` and `rotated-now`. It does not open a vault or a cloud identity API. Watch for this: an old hardcoded default still counting as a valid key after rotation is a **failed rule**, not a trophy hunt for a live key.
 
 The rule under test:
 

@@ -1,4 +1,4 @@
-# Review always-true merge_ok like a pull request
+# Would you merge this always-true merge_ok?
 
 **Kind:** code-review
 **Loop step:** Review
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|HIPAA training| False[False comfort]
 ```
 
-Start from what must stay true (empty change denied). Everything that is not a truthy `threat_model` at that call is a candidate always-merge path. A training screenshot without that check is the same problem, not a different kind of finding.
+Hold onto empty change denied. If that call is missing a truthy `threat_model`, you still have an always-merge path. A training screenshot without that check is still the same problem.
 
 Stale TM-12 is 3.2. Governance evidence is 10.4. Do not skip `test_merge_requires_threat_model_id`. Do not claim Gate 10. Do not change a live org to prove the finding.
 

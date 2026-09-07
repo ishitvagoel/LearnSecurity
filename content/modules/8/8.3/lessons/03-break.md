@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a phone you attack. It is a tiny Python `open_link(query)` / `current_user()`. The failure is already in the function: extras become the user, so `as=admin` switches the session. The point is to see that a deep link `as=` switching the signed-in user is **a failed rule**, not a trophy against a public app.
+The practice is not a phone you attack. It is a tiny Python `open_link(query)` / `current_user()`. The failure is already in the function: extras become the user, so `as=admin` switches the session. Watch for this: a deep link `as=` switching the signed-in user is **a failed rule**, not a trophy against a public app.
 
 The rule under test:
 

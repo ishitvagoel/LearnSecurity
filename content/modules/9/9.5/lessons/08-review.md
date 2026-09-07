@@ -1,4 +1,4 @@
-# Review always-true close_finding like a pull request
+# Would you merge this always-true close_finding?
 
 **Kind:** code-review
 **Loop step:** Review
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"severity 9.8"| False[False comfort]
 ```
 
-Start from what must stay true (missing retest denied). Everything that is not `retest == "pass"` at that call is a candidate always-close path. A PDF screenshot without that check is the same problem, not a different kind of finding.
+Hold onto missing retest denied. If that call is missing `retest == "pass"`, you still have an always-close leftover. A PDF screenshot without that check is still the same problem.
 
 Variants (extra fields) and a role-change cache are other leftover. Name them, do not skip `test_cannot_close_without_retest`. This page does not mark you as finished. Do not pentest a live tenant to prove the finding.
 

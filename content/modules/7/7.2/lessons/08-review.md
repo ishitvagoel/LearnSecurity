@@ -1,4 +1,4 @@
-# Review ORM dumps like a pull request
+# Would you merge this ORM dumps?
 
 **Kind:** code-review
 **Loop step:** Review
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|UUID obscure| False[False comfort]
 ```
 
-Start from what must stay true (member denied `secret_internal`). Everything that is not a server role×field check at that call is a candidate dump path. A hidden SPA column without that check is the same problem, not a different kind of finding.
+Hold onto member denied `secret_internal`. If that call is missing a server role×field check, you still have a dump path. A hidden SPA column without that check is still the same problem.
 
 Identifiers find a row. They do not authorize fields. Object GET tests (4.4) do not bind this grain. CSV and later workers (7.4) are other serializers — name them, do not skip `test_member_cannot_resolve_internal_field`.
 

@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny in-process `resolve`. It does not open a live upload folder, an employer imaging store, or a classmate preview. The failure is already in the object: the name is joined onto the folder and returned as a string, with no canonicalize-and-prefix. The point is to see that the check treats that as a **failed rule**, not as a clumsy filename.
+The practice is not a website you attack. It is a tiny in-process `resolve`. It does not open a live upload folder, an employer imaging store, or a classmate preview. The failure is already in the object: the name is joined onto the folder and returned as a string, with no canonicalize-and-prefix. Watch the check treat that as a **failed rule**, not as a clumsy filename.
 
 The rule under test:
 

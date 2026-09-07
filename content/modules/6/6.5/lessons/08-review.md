@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"follows redirects"| False[False comfort]
 ```
 
-The review starts at the protected effect (link-local denied). Everything that is not parse-then-allow-list at that call is a candidate deputy path. An HTTPS prefix without a host allow-list is the same problem, not a different kind of finding.
+Hold onto link-local denied. If that call is missing parse-then-allow-list, you still have a deputy path. An HTTPS prefix without a host allow-list is still the same problem.
 
 ## Problems to find (name them yourself)
 

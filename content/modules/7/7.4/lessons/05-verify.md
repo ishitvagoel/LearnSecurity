@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “Workers use a service account” is not evidence. “The queue is internal” is a tool observation. The check is: `exporter({"user_session": "alice", "service": None})` is `None` and `exporter({"service": "worker-sc"})` is `"worker-sc"`. The Alice-session observation must be **false** on the broken files (returns `"alice"`) and **true** on the repaired files. Do not attach to live brokers.
 
 ## Picture: leftover Alice must fail the check
 
-A test that only counts passing cases can pass while leftover Alice still becomes the worker. Ask whether a leftover cookie that becomes the principal still counts as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only counts passing cases can still look green while leftover Alice still becomes the worker. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at leftover Alice. If both fail, the fix i
 | Mixed | alice + wrong service → `None` |
 | Not claimed | later originating-subject check (advanced); poison loops; live task library |
 
-The file is `labs/7.4/7.4-lab/tests/test_property.py`. The test `test_user_session_is_not_worker_identity` is a **what must not happen** test: a leftover cookie that becomes the principal is not allowed to count as a pass.
+The file is `labs/7.4/7.4-lab/tests/test_property.py`. The test `test_user_session_is_not_worker_identity` exists so a leftover cookie that becomes the principal cannot count as a pass.
 
 A test that only asserts the job was enqueued is not this topic’s evidence. A test that only greps `worker-sc` in a YAML file without calling `exporter({"user_session": "alice", "service": None})` is not this topic’s evidence. This practice never opens a public broker.
 

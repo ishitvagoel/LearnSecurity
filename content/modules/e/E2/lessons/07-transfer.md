@@ -1,4 +1,4 @@
-# Same idea: clinic Report-Only as a HIPAA header
+# Somewhere new: clinic Report-Only as a HIPAA header
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

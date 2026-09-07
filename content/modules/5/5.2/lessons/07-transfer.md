@@ -1,4 +1,4 @@
-# Same idea: a column labeled encrypted that is Base64
+# Somewhere new: a column labeled encrypted that is Base64
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

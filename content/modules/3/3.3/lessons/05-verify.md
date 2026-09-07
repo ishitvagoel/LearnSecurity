@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “We have row-level security in the backlog” is not evidence. “Private subnet” is a topology observation. The check is: `can_select("app", "tB", "tA") is False`. That observation must be **false** on the broken files (the helper returns true) and **true** on the repaired files.
 
 ## Picture: broken must fail — tB reads tA
 
-A test that only counts passing cases can pass while tB still reads tA. Ask whether a shared app role reading tA as tB still counts as a pass. The broken files must fail that. The repaired files must pass it — deny the other company, and still allow own-company read.
+A check that only counts passing cases can still look green while tB still reads tA. The broken files have to fail that case. The repaired files have to pass it — deny the other company, and still allow own-company read.
 
 ```mermaid
 flowchart LR
@@ -24,7 +24,7 @@ flowchart LR
 | When things break | migrator cannot SELECT at runtime; connection is not `postgres` |
 | Not claimed | Production row-level security; replica fleet; SQL injection complete |
 
-Lab tests in `labs/3.3/3.3-lab/tests/test_property.py`. `test_app_role_cannot_read_other_tenant` is a **what must not happen** test: a shared app role reading tA as tB is not allowed to count as a pass.
+The checks live in `labs/3.3/3.3-lab/tests/test_property.py`. `test_app_role_cannot_read_other_tenant` exists so a shared app role reading tA as tB cannot count as a pass.
 
 ```text
 python3 -m pytest labs/3.3/3.3-lab/tests --impl vulnerable

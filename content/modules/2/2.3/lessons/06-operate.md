@@ -19,7 +19,7 @@ flowchart TD
   Log --> Rotate[Rotate session ids]
 ```
 
-Industry lists talk about noticing, responding, and recovering. They do not pick a log product. They do not prove a checklist. Report-Only CSP is a **different** notice path. It does not restore this rule.
+Noticing, responding, and recovering still need an owner. They do not pick a log product. They do not prove a checklist. Report-Only CSP is a **different** notice path. It does not restore this rule.
 
 | Outcome | This topic |
 |---|---|
@@ -51,4 +51,4 @@ The alternate path after rotation (sign in again) must itself meet keyboard, nam
 
 ## What this page is not doing
 
-Naming a product is not the rule. Answer keys are not on this site.
+A vendor name is not this week's rule. Answer keys are not on this site.

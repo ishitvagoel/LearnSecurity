@@ -1,4 +1,4 @@
-# Same idea: clinic Django DEBUG=True
+# Somewhere new: clinic Django DEBUG=True
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

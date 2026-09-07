@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"single sign-on is on"| False[False comfort]
 ```
 
-The review starts at the protected effect (session dead after delete). Everything that is not leftover-kill in that same delete is a candidate extra path.
+Hold onto session dead after delete. If that same delete is missing leftover-kill, you still have leftover.
 
 ## Seeded smells (label them yourself)
 

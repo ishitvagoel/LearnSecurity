@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Pin[repin known-good]
 ```
 
-Industry lists talk about noticing, responding, and recovering. They do not pick an SBOM vendor. They do not prove the lockfile was checked. Someone still has to own the leftover.
+Noticing, responding, and recovering still need an owner. They do not pick an SBOM vendor. They do not prove the lockfile was checked.
 
 Re-run `test_hash_mismatch_refuses_install` after any installer change. A green “SBOM attached” tile is not that check. Cache poisoning and `@v1` Actions are sibling grains — inventory them before you claim recover.
 

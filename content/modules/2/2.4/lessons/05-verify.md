@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 HTTP 200 on a single click is not this topic’s evidence. “The button is disabled” is a tool observation. The check is: for two `share_note("n1", idempotency_key="k1")` calls, `share_count() == 1`. That observation must be **false** on the broken files and **true** on the repaired files.
 
 ## Picture: a retry that appends twice must fail
 
-A test that only asserts HTTP 200 once can pass while a retry still appends a second share. Ask whether a second grant still counts as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only asserts HTTP 200 once can still look green while a retry still appends a second share. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -24,7 +24,7 @@ flowchart LR
 | When things break | Key-store uncertainty does not insert (not in this check; write it as leftover) |
 | Not claimed | Two first writes at the same time solved; worker stale shares gone; awareness-list “compliant”; payments safe |
 
-Lab tests: `test_single_share` and `test_retry_does_not_duplicate_side_effect` in `labs/2.4/2.4-state-time/tests/test_idempotency.py`. The second test calls `share_note` twice with `k1` and expects count 1. That is a **what must not happen** test: a second grant is not allowed to count as a pass.
+Lab tests: `test_single_share` and `test_retry_does_not_duplicate_side_effect` in `labs/2.4/2.4-state-time/tests/test_idempotency.py`. The second test calls `share_note` twice with `k1` and expects count 1. That check exists so a second grant cannot count as a pass.
 
 ```text
 python3 -m pytest labs/2.4/2.4-state-time/tests --impl vulnerable

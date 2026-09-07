@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “OpenID Connect is configured” is not this topic’s evidence. “The JWT verifies” is a tool observation. The check is: `accept_token({"sub": "alice", "aud": "other-api"}, "securecollab-api")` is false. That observation must be **false** on the broken files (returns true) and **true** on the repaired files.
 
 ## Picture: other-api and missing aud must fail
 
-A test that only asserts a library called `verify` can pass while a wrong-audience token still counts as a session. Ask whether a token for another API still counts as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only asserts a library called `verify` can still look green while a wrong-audience token still counts as a session. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -23,7 +23,7 @@ flowchart LR
 | Wrong input / abuse | `aud=other-api` and missing `aud` are false; broken files must fail |
 | Not claimed | PKCE; JWKS; DPoP; who-is-allowed on notes |
 
-Lab tests in `labs/4.5/4.5-lab/tests/test_property.py`. `test_wrong_audience_is_rejected` is a **what must not happen** test: a wrong-audience token accepted as a session is not allowed to count as a pass.
+The checks live in `labs/4.5/4.5-lab/tests/test_property.py`. `test_wrong_audience_is_rejected` exists so a wrong-audience token accepted as a session cannot count as a pass.
 
 ```text
 python3 -m pytest labs/4.5/4.5-lab/tests --impl vulnerable

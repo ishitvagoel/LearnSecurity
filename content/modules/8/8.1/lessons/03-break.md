@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a phone you attack. It is a tiny Python `allow_export(client_claims, server_attest)`. The failure is already in the function: it returns true when the client says `integrity=ok`, so a failing server attest still exports. The point is to see that **client `integrity=ok` authorizes export** is a failed rule, not a trophy against a device farm.
+The practice is not a phone you attack. It is a tiny Python `allow_export(client_claims, server_attest)`. The failure is already in the function: it returns true when the client says `integrity=ok`, so a failing server attest still exports. Watch for this: **client `integrity=ok` authorizes export** is a failed rule, not a trophy against a device farm.
 
 The rule under test:
 

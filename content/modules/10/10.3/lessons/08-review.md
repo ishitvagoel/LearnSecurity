@@ -1,4 +1,4 @@
-# Review always-true pod_ok like a pull request
+# Would you merge this always-true pod_ok?
 
 **Kind:** code-review
 **Loop step:** Review
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|CIS scan green| False[False comfort]
 ```
 
-Start from what must stay true (cluster-admin denied). Everything that is not allow-list membership at that call is a candidate always-run path. A CIS screenshot without that check is the same problem, not a different kind of finding.
+Hold onto cluster-admin denied. If that call is missing allow-list membership, you still have an always-run leftover. A CIS screenshot without that check is still the same problem.
 
 A restricted pod profile is pod spec. A network policy is egress. Instance metadata is a sibling leftover. Name them, do not skip `test_cluster_admin_pod_is_denied`. This page does not mark you as finished. Do not apply manifests to a live cluster to prove the finding.
 

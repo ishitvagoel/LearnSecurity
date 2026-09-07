@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 "PDF delivered" is not evidence. "The severity is 9.8" is a priority input. The check is: `close_finding({"retest": None})` is false and `{retest: "pass"}` may close. That missing-retest observation must be **false** on the broken files and **true** on the repaired files. Do not pentest public hosts.
 
 ## Picture: a broken close gate must fail the check
 
-A test that only counts passing tests can pass while `{retest: None}` still closes. Ask whether a finding closed without a retest still counts as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only counts passing tests can still look green while `{retest: None}` still closes. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at missing retest. If both fail, the fix i
 | Abuse | Missing, fail, or scheduled still deny (fail closed) |
 | Not claimed | A live testing catalogue run; an assurance gate; a severity calculator; that pass hit the same URL |
 
-The file is `labs/9.5/9.5-lab/tests/test_property.py`. The test `test_cannot_close_without_retest` is a **what must not happen** test: always-true `close_finding` is not allowed to count as a pass.
+The file is `labs/9.5/9.5-lab/tests/test_property.py`. The test `test_cannot_close_without_retest` exists so always-true `close_finding` cannot count as a pass.
 
 Honest `{retest: "pass"}` may pass on both implementations. That does not excuse the missing-retest deny test. If the broken files do not fail `test_cannot_close_without_retest`, the lab is miswired — fix the wiring, not the assertion.
 

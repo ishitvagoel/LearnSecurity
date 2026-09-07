@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “`NODE_ENV=production`” is not evidence. “Canary 10%” is a tool observation. The check is: `boot_ok("prod", True)` is false and `("prod", False)` may boot. That prod-plus-debug observation must be **false** on the broken files and **true** on the repaired files. Do not boot a live host.
 
 ## Picture: a broken boot check must fail prod plus debug
 
-A test that only counts passing tests can pass while production still boots with debug. Ask whether always-true `boot_ok` still counts as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only counts passing tests can still look green while production still boots with debug. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at prod plus debug. If both fail, the fix 
 | Abuse | Unsure flags are not a production boot (fail closed; leftover if not in this check) |
 | Not claimed | Live compose; a canary; an assurance gate; other flags |
 
-The file is `labs/10.4/10.4-lab/tests/test_property.py`. The test `test_prod_debug_must_not_boot` is a **what must not happen** test: always-true `boot_ok` is not allowed to count as a pass.
+The file is `labs/10.4/10.4-lab/tests/test_property.py`. The test `test_prod_debug_must_not_boot` exists so always-true `boot_ok` cannot count as a pass.
 
 Honest prod without debug may pass on both implementations. That does not excuse the prod-plus-debug deny test. If the broken files do not fail `test_prod_debug_must_not_boot`, the lab is miswired — fix the wiring, not the assertion.
 

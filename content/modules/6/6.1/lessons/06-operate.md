@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Kill[Kill child; isolate plugin]
 ```
 
-Industry lists talk about noticing, responding, and recovering. They do not build argv. Naming a product is not the rule. Someone still has to own the concatenating path.
+Noticing, responding, and recovering still need an owner. They do not build argv. A vendor name is not this week's rule. Someone still has to own the concatenating path.
 
 ## Signals that do not become a second leak
 
@@ -59,4 +59,4 @@ A clinic example: notice unexpected `sh` under the export worker; do not paste f
 
 ## What this page is not doing
 
-Naming a product is not the rule. Live command execution is out of scope. This site does not mark you as finished. Answer keys are not on this site.
+A vendor name is not this week's rule. Live command execution is out of scope. This site does not mark you as finished. Answer keys are not on this site.

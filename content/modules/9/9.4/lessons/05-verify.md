@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “Code scanning on” is not evidence. “We have a high maturity score” is a tool observation. The check is: `ship_ok([HIGH], {})` is false and a mapped HIGH may ship. That empty-map observation must be **false** on the broken files and **true** on the repaired files. Do not scan public repos.
 
 ## Picture: a broken ship_ok must fail the check
 
-A test that only counts passing tests can pass while unmapped HIGH still ships. Ask whether an unmapped HIGH still counts as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only counts passing tests can still look green while unmapped HIGH still ships. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at the empty map. If both fail, the fix is
 | Abuse | Suppression with no owner is still deny (leftover if not in this check) |
 | Not claimed | A real GitHub tenant; the verification gate; a maturity score; that the mapped requirement is the right row |
 
-The file is `labs/9.4/9.4-lab/tests/test_property.py`. The test `test_unmapped_high_blocks_ship` is a **what must not happen** test: always-true `ship_ok` is not allowed to count as a pass.
+The file is `labs/9.4/9.4-lab/tests/test_property.py`. The test `test_unmapped_high_blocks_ship` exists so always-true `ship_ok` cannot count as a pass.
 
 Honest mapped HIGH may pass on both implementations. That does not excuse the empty-map deny test. If the broken files do not fail `test_unmapped_high_blocks_ship`, the lab is miswired — fix the wiring, not the assertion.
 

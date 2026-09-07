@@ -1,4 +1,4 @@
-# Same idea: clinic app SA is cluster-admin
+# Somewhere new: clinic app SA is cluster-admin
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

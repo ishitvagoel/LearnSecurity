@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"IDs are hard to guess"| False[False comfort]
 ```
 
-Start from what must stay true (n2 denied for Bob). Everything that is not an object-keyed lookup at that call is a candidate leftover path. A role list named `admin` without a company comparison is the eve×n1 smell, not a different finding class.
+Hold onto n2 denied for Bob. If that call is missing an object-keyed lookup, you still have a leftover path. A role list named `admin` without a company comparison is the eve×n1 smell.
 
 Leftover permission is permission from the surroundings — a signed-in user, “has any share,” an unscoped admin flag — used as if it were a yes for this person, this note, and this action.
 

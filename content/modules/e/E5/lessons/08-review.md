@@ -1,4 +1,4 @@
-# Review body-chosen company like a pull request
+# Would you merge this body-chosen company?
 
 **Kind:** code-review
 **Loop step:** Review
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|famous-bugs mapped| False[False comfort]
 ```
 
-Start from what must stay true (session A plus body B is A). Everything that is not session binding at that call is a candidate body-wins path. A row-level screenshot without that check is the same problem, not a different kind of finding.
+Hold onto this: session A plus body B is A. If that call is missing session binding, you still have a body-wins path. A row-level screenshot without that check is still the same problem.
 
 Cache keys without company are leftover. Silent impersonation is a later topic. Do not skip `test_body_cannot_switch_tenant`. Do not claim a course gate. Do not probe a live company to prove the finding.
 

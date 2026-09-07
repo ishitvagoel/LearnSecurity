@@ -212,4 +212,4 @@ A document-preview pipeline changes operational priorities: parser crashes and r
 
 ## What this page is not doing
 
-Naming a product is not the rule. Live production incidents as practice. Real sensitive data as a canary. Answer keys are not on this site.
+A vendor name is not this week's rule. Live production incidents as practice. Real sensitive data as a canary. Answer keys are not on this site.

@@ -21,7 +21,7 @@ flowchart TD
   Alert --> Purge[Purge partition]
 ```
 
-Industry lists talk about noticing, responding, and recovering. They do not pick a log product. They do not walk the deletion graph. Someone still has to own the leftover.
+Noticing, responding, and recovering still need an owner. They do not pick a log product. They do not walk the deletion graph.
 
 ## Signals that do not become a second leak
 
@@ -63,4 +63,4 @@ A clinic example: notice appointment-card notes after patient delete; do not pas
 
 ## What this page is not doing
 
-Naming a product is not the rule. Do not run live queries against a production warehouse. Answer keys are not on this site.
+A vendor name is not this week's rule. Do not run live queries against a production warehouse. Answer keys are not on this site.

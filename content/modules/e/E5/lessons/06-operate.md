@@ -25,7 +25,7 @@ flowchart TD
 | Recover | Audit B; take back the confused session |
 | Leftover | Copies; silent impersonation; GraphQL aliases |
 
-Industry lists talk about noticing, responding, and recovering. They do not prove company isolation. A row-level vendor name is not the rule. Re-run `test_body_cannot_switch_tenant` after any query-layer change; a green “row-level rules on” tile is not that check. Search, cache, and lake copies are the same family — inventory them before you claim recover.
+Noticing, responding, and recovering still need an owner. They do not prove company isolation. A row-level vendor name is not the rule. Re-run `test_body_cannot_switch_tenant` after any query-layer change; a green “row-level rules on” tile is not that check. Search, cache, and lake copies are the same family — inventory them before you claim recover.
 
 ## What the framework does vs what you still have to check
 

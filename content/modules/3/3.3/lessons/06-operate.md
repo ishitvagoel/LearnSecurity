@@ -26,7 +26,7 @@ A broken grant is a notice-and-recover problem, not a licence to dump the note i
 | Recover | Rotate password; fix `GRANT`; take migrator offline |
 | Leftover | Stolen `app` still reads one company; write that rule down |
 
-Industry lists talk about noticing, responding, and recovering. They do not configure `GRANT`. They do not prove this company rule. Naming a product is not the rule. Re-run `test_app_role_cannot_read_other_tenant` after any GRANT change; a green IAM dashboard is not that check.
+Noticing, responding, and recovering still need an owner. They do not configure `GRANT`. They do not prove this company rule. A vendor name is not this week's rule. Re-run `test_app_role_cannot_read_other_tenant` after any GRANT change; a green IAM dashboard is not that check.
 
 The migrate job is leftover you must keep named: it exists, it is offline at request time, and a leaked migrate secret is a different owner than a leaked `app` password. Do not collapse those two alerts into “database issue.”
 
@@ -50,4 +50,4 @@ Serverless: notice the function using the migrate secret. Clinic replica: notice
 
 ## What this page is not doing
 
-Naming a product is not the rule. Live GRANT dumps are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+A vendor name is not this week's rule. Live GRANT dumps are out of scope. This site does not mark you as finished. Answer keys are not on this site.

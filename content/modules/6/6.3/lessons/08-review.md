@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"CORS star"| False[False comfort]
 ```
 
-Start from what must stay true (foreign origin without token denied). Everything that is not origin-and-token at that call is a candidate leftover-cookie path. SameSite=Lax without that test is the same problem, not a different kind of finding.
+Hold onto foreign origin without token denied. If that call is missing origin-and-token, you still have a leftover-cookie path. SameSite=Lax without that test is still the same problem.
 
 Leftover cookies are leftover permission from login — a signed-in session cookie that rides along — used as if it were consent for this person, this share, and this origin.
 

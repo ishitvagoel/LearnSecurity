@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"filter has awareness rule"| False[False comfort]
 ```
 
-Start from what must stay true (count ≤ 5 after eight writes). Everything that is not a write-path ceiling at that loop is a candidate leftover path.
+Hold onto count ≤ 5 after eight writes. If that loop is missing a write-path ceiling, you still have a leftover path.
 
 ## Problems to find (name them yourself)
 

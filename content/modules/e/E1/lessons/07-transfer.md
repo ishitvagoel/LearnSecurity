@@ -1,4 +1,4 @@
-# Same idea: clinic summarizer over charts
+# Somewhere new: clinic summarizer over charts
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

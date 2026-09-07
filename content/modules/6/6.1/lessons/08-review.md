@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"internal users"| False[False comfort]
 ```
 
-The review starts at the protected effect (program is not `sh`; name is one element). Everything that is not an argv list at that call is a candidate second parser. A denylist of punctuation while `uses_shell` stays true is the same problem, not a different kind of finding.
+Hold onto this: program is not `sh`; name is one element. If that call is missing an argv list, you still have a second parser. A denylist of punctuation while `uses_shell` stays true is still the same problem.
 
 ## Seeded smells (label them yourself)
 

@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `merge_ok(pr)` that returns true or false. The failure is already in the function: every dict is allowed to merge. The point is to see that the check treats that as a **failed rule**, not as a missing GitHub setting.
+The practice is not a website you attack. It is a tiny Python `merge_ok(pr)` that returns true or false. The failure is already in the function: every dict is allowed to merge. Watch the check treat that as a **failed rule**, not as a missing GitHub setting.
 
 The rule under test:
 

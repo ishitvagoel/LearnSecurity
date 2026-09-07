@@ -21,7 +21,7 @@ flowchart TD
   Metric --> Rotate[Rotate keys later]
 ```
 
-Industry lists talk about noticing, responding, and recovering. They do not encrypt the column. They do not pick a log product. Someone still has to own the leftover.
+Noticing, responding, and recovering still need an owner. They do not encrypt the column. They do not pick a log product.
 
 ## Signals that do not become a second leak
 
@@ -60,4 +60,4 @@ A clinic example: notice Base64 SSN columns; do not paste values into the ticket
 
 ## What this page is not doing
 
-Naming a product is not the rule. Live column dumps are out of scope. This site does not mark you as finished. Answer keys are not on this site.
+A vendor name is not this week's rule. Live column dumps are out of scope. This site does not mark you as finished. Answer keys are not on this site.

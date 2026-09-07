@@ -1,4 +1,4 @@
-# Same idea: clinic fetch of a lab-result PDF
+# Somewhere new: clinic fetch of a lab-result PDF
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

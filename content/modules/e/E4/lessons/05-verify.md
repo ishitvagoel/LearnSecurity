@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “We use Kotlin” is not this topic’s evidence. “A sanitizer is on” is a tool observation. The check is: `len(copy_into(4, b"abcdefgh", 4)) <= 4` and a short honest copy may fit. The oversize observation must be **false** on the broken files (length 8) and **true** on the repaired files. Do not compile native exploits.
 
 ## Picture: broken must fail the oversize copy
 
-A test that only greps `Kotlin` in a README can pass while `copy_into(4, b"abcdefgh", 4)` still returns 8 bytes. Ask whether an oversize copy still counts as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only greps `Kotlin` in a README can still look green while `copy_into(4, b"abcdefgh", 4)` still returns 8 bytes. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -23,7 +23,7 @@ flowchart LR
 | Normal | Short declared length may copy (may pass on both) |
 | Not claimed | A C walkthrough; an awareness-list dashboard; a course gate; integer wrap |
 
-Lab tests in `labs/E4/e4-lab/tests/test_property.py`. `test_copy_does_not_exceed_buffer` is a **what must not happen** test: `declared_len` plus 8 is not allowed to count as a pass.
+The checks live in `labs/E4/e4-lab/tests/test_property.py`. `test_copy_does_not_exceed_buffer` exists so `declared_len` plus 8 cannot count as a pass.
 
 ```text
 python3 -m pytest labs/E4/e4-lab/tests --impl vulnerable

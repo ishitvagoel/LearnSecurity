@@ -1,4 +1,4 @@
-# Same idea: clinic npm install in a prod pod
+# Somewhere new: clinic npm install in a prod pod
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

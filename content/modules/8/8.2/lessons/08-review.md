@@ -1,4 +1,4 @@
-# Review cache.txt like a pull request
+# Would you merge this cache.txt?
 
 **Kind:** code-review
 **Loop step:** Review
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|MODE_PRIVATE| False[False comfort]
 ```
 
-Start from what must stay true (`plaintext_on_disk()` false). Everything that is not a wrap-then-write at that call is a candidate plaintext path. A fingerprint prompt without that check is the same problem, not a different kind of finding.
+Hold onto `plaintext_on_disk()` false. If that call is missing a wrap-then-write, you still have a plaintext path. A fingerprint prompt without that check is still the same problem.
 
 `MODE_PRIVATE` keeps other apps out on a healthy OS; it does not encrypt. Backups and 4.1 logout wipe are other copies — name them, do not skip `test_cached_note_is_not_plaintext_on_disk`. Do not claim the lab `aead:` prefix is AES.
 

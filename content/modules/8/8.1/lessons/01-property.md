@@ -11,7 +11,7 @@ The notes app this week has an Android phone client, written in Kotlin. The Andr
 
 What must not happen: **a client `integrity=ok` claim authorizes export**. That is authorization decided on the attacker's CPU.
 
-Industry lists talk about how the app talks to the OS and other apps. A platform-integrity check **raises cost**; it does not become 1.2. Play Integrity is a vendor **signal** the server may consult — not a grant. A famous-bugs nickname for “insecure client” is awareness after the cause, not this sentence.
+How the app talks to the OS and other apps is a platform topic, not this rule. A platform-integrity check **raises cost**; it does not become 1.2. Play Integrity is a vendor **signal** the server may consult — not a grant. A famous-bugs nickname for “insecure client” is awareness after the cause, not this sentence.
 
 ## Picture: policy on the attacker's CPU
 

@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “We put max on the select” is not this topic’s evidence. “The filter has an awareness-list rule” is a tool observation. The check is: after eight `add_share()` calls, `last <= 5`. That observation must be **false** on the broken files and **true** on the repaired files.
 
 ## Picture: last greater than 5 must fail
 
-A test that only asserts a max attribute exists can pass while eight calls still leave count 8. Ask whether a sixth grant still counts as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only asserts a max attribute exists can still look green while eight calls still leave count 8. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -24,7 +24,7 @@ flowchart LR
 | Sixth | Does not increment past 5 |
 | Not claimed | Production locks; GraphQL; rate limits; awareness-list compliance |
 
-Lab tests in `labs/3.4/3.4-lab/tests/test_property.py`. `test_share_cap_is_enforced` is a **what must not happen** test: a sixth grant is not allowed to count as a pass.
+The checks live in `labs/3.4/3.4-lab/tests/test_property.py`. `test_share_cap_is_enforced` exists so a sixth grant cannot count as a pass.
 
 ```text
 python3 -m pytest labs/3.4/3.4-lab/tests --impl vulnerable

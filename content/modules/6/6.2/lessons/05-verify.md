@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “We added a content-security policy” is not evidence. “React is on” is a tool observation. The check is: `render` of a string containing `<` has `&lt;` and does not contain the extra-tag marker `"<img"`. That observation must be **false** on `--impl vulnerable` (raw `<` remains) and **true** on `--impl fixed`.
 
 ## Picture: broken files must fail: raw <
 
-A check that only counts passing cases can pass while unencoded markup still reaches HTML. Ask whether unencoded markup still counts as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only counts passing cases can still look green while unencoded markup still reaches HTML. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -27,7 +27,7 @@ If both pass, the check is not looking at encoding. If both fail, the fix is not
 | Wrong input / abuse | `<` becomes `&lt;`; extra tags absent; broken files must fail |
 | Not claimed | Attribute / JavaScript / URL contexts; live page attacks; content-security enforcement |
 
-The checks live in `labs/6.2/6.2-lab/tests/test_property.py`. `test_angle_brackets_are_encoded` is a **what must not happen** check: unencoded markup is not allowed to count as a pass. The tame marker is enough; do not add an attack recipe to the check.
+The checks live in `labs/6.2/6.2-lab/tests/test_property.py`. `test_angle_brackets_are_encoded` exists so unencoded markup cannot count as a pass. The tame marker is enough; do not add an attack recipe to the check.
 
 ```text
 python3 -m pytest labs/6.2/6.2-lab/tests --impl vulnerable
@@ -44,7 +44,7 @@ Honest titles may pass on both implementations. That does not excuse the encode 
 - A markdown cleaner (2.1)
 - HttpOnly cookies (2.3)
 
-Record those as leftover risk or later topics, not as silent passes.
+Write those down as leftover risk or later topics, not as silent passes.
 
 ## Practice
 

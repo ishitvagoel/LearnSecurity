@@ -1,4 +1,4 @@
-# Same idea: clinic debug build against prod FHIR
+# Somewhere new: clinic debug build against prod FHIR
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

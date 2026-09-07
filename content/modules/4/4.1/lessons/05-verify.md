@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “We deleted the row” is not evidence. “Single sign-on is on” is a tool observation. The check is: after `delete_user("alice")`, `session_valid("alice")` is False. That observation must be **false** on the broken files (the helper still returns true) and **true** on the repaired files.
 
 ## Picture: a leftover session must fail the check
 
-A test that only asserts the profile is gone can pass while the cookie still works. Ask whether a leftover session after delete still counts as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only asserts the profile is gone can still look green while the cookie still works. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at `session_valid` after delete. If both f
 | Failure | Resurrected map entry still denied (`test_deleted_denies_even_if_session_map_still_has_row`) |
 | Not claimed | Identity-provider logout; refresh tokens; phone cache; token denylist complete |
 
-The file is `labs/4.1/4.1-lab/tests/test_property.py`. The test `test_deleted_user_session_is_dead` calls `delete_user` then `session_valid`. That is a **what must not happen** test: a leftover session that still works is not allowed to count as a pass.
+The file is `labs/4.1/4.1-lab/tests/test_property.py`. The test `test_deleted_user_session_is_dead` calls `delete_user` then `session_valid`. That check exists so a leftover session that still works cannot count as a pass.
 
 A test that only asserts HTTP 200 is not this topic's evidence. A test that only greps `DELETED.add` without calling `session_valid` after `delete_user` is not this topic's evidence. This practice never opens a live identity provider.
 

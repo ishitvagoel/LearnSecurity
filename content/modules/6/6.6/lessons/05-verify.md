@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “Unique constraint exists” is not evidence. “We return 400” is a tool observation. The check is: first `accept("t1")` is true and second `accept("t1")` is false. That second observation must be **false** on the broken files (the helper still returns true) and **true** on the repaired files.
 
 ## Picture: second t1 must fail the check
 
-A test that only greps `UNIQUE` in a migration can pass while `accept("t1")` is still true twice. Ask whether a second true still counts as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only greps `UNIQUE` in a migration can still look green while `accept("t1")` is still true twice. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at the second `t1`. If both fail, the fix 
 | Failure | store error denies (named in review; fail-closed smell) |
 | Not claimed | threaded race; mail delivery; lock semantics |
 
-The file is `labs/6.6/6.6-lab/tests/test_property.py`. The test `test_invite_token_is_single_use` is a **what must not happen** test: a second true is not allowed to count as a pass. Sequential calls are enough; do not add a race harness.
+The file is `labs/6.6/6.6-lab/tests/test_property.py`. The test `test_invite_token_is_single_use` exists so a second true cannot count as a pass. Sequential calls are enough; do not add a race harness.
 
 A test that only asserts HTTP 200 on `/accept` is not this topic's evidence. A test that only greps `UNIQUE` without calling `accept("t1")` twice is not this topic's evidence. This practice never opens a live mailer.
 

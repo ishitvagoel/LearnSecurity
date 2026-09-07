@@ -1,4 +1,4 @@
-# Review path-trusted callbacks like a pull request
+# Would you merge this path-trusted callbacks?
 
 **Kind:** code-review
 **Loop step:** Review
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|vendor CIDR| False[False comfort]
 ```
 
-The review starts at the protected effect (empty sig denied). Everything that is not a raw-body MAC at that call is a candidate path-trust. A TLS terminator without that check is the same problem, not a different kind of finding.
+Hold onto empty sig denied. If that call is missing a raw-body MAC, you still have a path-trust. A TLS terminator without that check is still the same problem.
 
 Parse-before-MAC (2.1) and secret-in-query (4.3) are other authenticity holes — name them, do not skip `test_missing_signature_is_rejected`.
 

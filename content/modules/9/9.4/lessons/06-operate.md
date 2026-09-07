@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Stop[block ship]
 ```
 
-Industry lists talk about noticing, responding, and recovering. They do not pick a scanner product. They do not prove this finding is owned. Someone still has to own the leftover.
+Noticing, responding, and recovering still need an owner. A scanner product is not the rule, and this finding is owned is not proof.
 
 Re-run `test_unmapped_high_blocks_ship` after any scanner-rule change. A green “code scanning on” tile is not that check. SCA CVEs that are not actually called still need an *owner* on the map — inventory them before you claim recover.
 
@@ -46,7 +46,7 @@ If your alert includes the matching scanner snippet, you have copied the leak in
 
 ## What the framework does vs what you still have to check
 
-The same who-is-allowed holes that bypass this practice will also bypass a “scan our dashboard” detector. Name those places before you claim recover. Naming a product is not the rule.
+The same who-is-allowed holes that bypass this practice will also bypass a “scan our dashboard” detector. Name those places before you claim recover. A vendor name is not this week's rule.
 
 ## Can people still use it
 
@@ -70,4 +70,4 @@ A clinic example: block a release with fifty unmapped HIGHs; do not paste scanne
 
 ## What this page is not doing
 
-Naming a product is not the rule. Live org traces are out of scope. Answer keys are not on this site.
+A vendor name is not this week's rule. Live org traces are out of scope. Answer keys are not on this site.

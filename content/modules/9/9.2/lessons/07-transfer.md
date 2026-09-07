@@ -1,4 +1,4 @@
-# Same idea: clinic eval in a report template
+# Somewhere new: clinic eval in a report template
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

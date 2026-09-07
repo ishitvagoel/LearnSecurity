@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Rotate[Rotate if the value escaped]
 ```
 
-Industry lists talk about noticing, responding, and recovering. They do not check role × field. They do not prove field permission. Naming a GraphQL-gateway product is not the rule. Re-run `test_member_cannot_resolve_internal_field` after any serializer change; a green “field authz enabled” tile is not that check. Search highlighting and overnight export are other dumps of the same row — inventory them before you claim recover.
+Noticing, responding, and recovering still need an owner. They do not check role × field. They do not prove field permission. Naming a GraphQL-gateway product is not the rule. Re-run `test_member_cannot_resolve_internal_field` after any serializer change; a green “field authz enabled” tile is not that check. Search highlighting and overnight export are other dumps of the same row — inventory them before you claim recover.
 
 ## Signals that do not become a second leak
 

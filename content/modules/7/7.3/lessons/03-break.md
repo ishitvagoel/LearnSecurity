@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `accept`. It does not open a network. The failure is already in the function: it returns true for every triple. The point is to see that an unsigned body counting as authentic is a **failed rule**, not a trophy POST to a live provider.
+The practice is not a website you attack. It is a tiny Python `accept`. It does not open a network. The failure is already in the function: it returns true for every triple. Watch for this: an unsigned body counting as authentic is a **failed rule**, not a trophy POST to a live provider.
 
 The rule under test:
 

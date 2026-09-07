@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `allowed`. It does not open a network. The failure is already in the function: it treats any `http` or `https` scheme as fine. The point is to see that a link-local metadata URL counting as an allowed peer is a **failed rule**, not a trophy fetch of cloud identity.
+The practice is not a website you attack. It is a tiny Python `allowed`. It does not open a network. The failure is already in the function: it treats any `http` or `https` scheme as fine. Watch for this: a link-local metadata URL counting as an allowed peer is a **failed rule**, not a trophy fetch of cloud identity.
 
 The rule under test:
 

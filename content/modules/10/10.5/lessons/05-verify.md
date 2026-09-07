@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “SIEM green” is not evidence. “Paging acked” is a tool observation. The check is: recovery todo is false, `note_body` in logs is false, and done + ok may close. The recovery-todo observation must be **false** on the broken files and **true** on the repaired files. Do not query a live SIEM.
 
 ## Picture: a broken close gate must fail the check
 
-A test that only counts passing tests can pass while recovery todo still closes. Ask whether an incident closed without recovery still counts as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only counts passing tests can still look green while recovery todo still closes. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -30,7 +30,7 @@ The second what must not happen is **`note_body` in logs** — `test_cannot_clos
 | Normal | done + ok → may close (may pass on both) |
 | Not claimed | live paging; a known-exploited list; an assurance gate; that restore actually ran |
 
-The file is `labs/10.5/10.5-lab/tests/test_property.py`. The test `test_cannot_close_without_recovery` is a **what must not happen** test: always-true `close_incident` is not allowed to count as a pass.
+The file is `labs/10.5/10.5-lab/tests/test_property.py`. The test `test_cannot_close_without_recovery` exists so always-true `close_incident` cannot count as a pass.
 
 Honest recovery plus safe logs may pass on both implementations. That does not excuse the two deny tests. If the broken files do not fail `test_cannot_close_without_recovery`, the lab is miswired — fix the wiring, not the assertion.
 

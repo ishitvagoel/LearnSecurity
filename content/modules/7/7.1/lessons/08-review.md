@@ -1,4 +1,4 @@
-# Review update(body) like a pull request
+# Would you merge this update(body)?
 
 **Kind:** code-review
 **Loop step:** Review
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|SPA omits checkbox| False[False comfort]
 ```
 
-Start from what must stay true (`is_admin` still false). Everything that is not a server `ALLOWED` copy at that call is a candidate extra-key path. An OpenAPI file without that check is the same problem, not a different kind of finding.
+Hold onto `is_admin` still false. If that call is missing a server `ALLOWED` copy, you still have an extra-key leftover. An OpenAPI file without that check is still the same problem.
 
 A missing SPA checkbox (3.4’s client leftover, restated for fields) does not bind `apply`. Leftover `/v0` and GraphQL `input: JSON` are other binders — name them, do not skip `test_is_admin_cannot_be_patched`.
 

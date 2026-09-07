@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"gitignore"| False[False comfort]
 ```
 
-Start from what must stay true (default dead after rotate; missing current denies). Everything that is not equality with current at that call is a candidate leftover path. A vault import without killing `DEFAULT` is the same problem, not a different kind of finding.
+Hold onto default dead after rotate; missing current denies. If that call is missing equality with current, you still have a leftover path. A vault import without killing `DEFAULT` is still the same problem.
 
 ## Problems to find (name them yourself)
 

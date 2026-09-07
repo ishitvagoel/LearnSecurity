@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"Content-Type"| False[False comfort]
 ```
 
-Start from what must stay true (canonical object still under the folder). Everything that is not join-canonicalize-prefix at that call is a candidate leftover path. A `..` denylist without a prefix test is the same problem, not a different kind of finding.
+Hold onto canonical object still under the folder. If that call is missing join-canonicalize-prefix, you still have a leftover path. A `..` denylist without a prefix test is still the same problem.
 
 Zip member paths are another parser of this rule, not a reason to skip `test_dotdot_does_not_escape_root`. Starlette `UploadFile.filename` is still client data after the change “randomizes names.”
 

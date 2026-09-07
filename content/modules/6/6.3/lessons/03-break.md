@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `allow_share`. The failure is already in the function: it treats a leftover session cookie as consent to share. The point is to see that the check treats that as a **failed rule**, not as a trophy against another site.
+The practice is not a website you attack. It is a tiny Python `allow_share`. The failure is already in the function: it treats a leftover session cookie as consent to share. Watch the check treat that as a **failed rule**, not as a trophy against another site.
 
 The rule under test:
 

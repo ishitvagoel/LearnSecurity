@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “EncryptedSharedPreferences is on” is not evidence. “Internal storage” is a tool observation. The check is: after `save_note("secret")`, `plaintext_on_disk()` is false. That observation must be **false** on `--impl vulnerable` (DISK holds `'secret'`) and **true** on `--impl fixed`. Do not image phones.
 
 ## Picture: broken files must fail: plaintext secret
 
-A check that only counts passing cases can pass while the cache still holds `'secret'`. Ask whether a text-file cache of `'secret'` still counts as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only counts passing cases can still look green while the cache still holds `'secret'`. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -27,7 +27,7 @@ If both pass, the check is not looking at the body on disk. If both fail, the fi
 | Normal | save `'other'` → not reported as plaintext secret (may pass on both) |
 | Not claimed | Real AES; backup exclusion; screenshot `FLAG_SECURE`; Keystore hardware |
 
-The checks live in `labs/8.2/8.2-lab/tests/test_property.py`. `test_cached_note_is_not_plaintext_on_disk` is a **what must not happen** check: a text-file cache of `'secret'` is not allowed to count as a pass.
+The checks live in `labs/8.2/8.2-lab/tests/test_property.py`. `test_cached_note_is_not_plaintext_on_disk` exists so a text-file cache of `'secret'` cannot count as a pass.
 
 ```text
 python3 -m pytest labs/8.2/8.2-lab/tests --impl vulnerable
@@ -45,7 +45,7 @@ Honest `'other'` saves may pass on both implementations. That does not excuse th
 - That the lab `aead:` prefix is AES-GCM (it is a stand-in)
 - 4.1 logout wipe of the store
 
-Record those as leftover risk or later topics, not as silent passes.
+Write those down as leftover risk or later topics, not as silent passes.
 
 ## Practice
 

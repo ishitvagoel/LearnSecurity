@@ -1,4 +1,4 @@
-# Review always-true close_incident like a pull request
+# Would you merge this always-true close_incident?
 
 **Kind:** code-review
 **Loop step:** Review
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|known-exploited dashboard| False[False comfort]
 ```
 
-Start from what must stay true (recovery todo denied). Everything that is not the conjunction at that call is a candidate always-close path. A SIEM screenshot without that check is the same problem, not a different kind of finding.
+Hold onto recovery todo denied. If that call is missing the conjunction, you still have an always-close leftover. A SIEM screenshot without that check is still the same problem.
 
 Note bodies in logs are the second what must not happen. Support-tool god-mode is leftover from earlier cluster lessons. Do not skip `test_cannot_close_without_recovery`. This page does not mark you as finished. Do not query a live SIEM to prove the finding.
 

@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “App Links are verified” is not evidence. “The link is https” is a tool observation. The check is: after `open_link({"as": "admin"})`, `current_user()` is still `"alice"`. The `as=admin` observation must be **false** on `--impl vulnerable` (session becomes admin) and **true** on `--impl fixed`. Do not fire live Intents.
 
 ## Picture: broken files must fail: as=admin
 
-A check that only counts passing cases can pass while `as=` still switches the session. Ask whether a link that switches the principal still counts as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only counts passing cases can still look green while `as=` still switches the session. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -27,7 +27,7 @@ If both pass, the check is not looking at identity keys. If both fail, the fix i
 | Wrong input / abuse | `as=admin` keeps alice; broken files must fail (`test_deeplink_as_param_does_not_switch_user`) |
 | Not claimed | WebView; custom schemes; live OAuth; real `exported` flags |
 
-The checks live in `labs/8.3/8.3-lab/tests/test_property.py`. `test_deeplink_as_param_does_not_switch_user` is a **what must not happen** check: a link that switches the principal is not allowed to count as a pass.
+The checks live in `labs/8.3/8.3-lab/tests/test_property.py`. `test_deeplink_as_param_does_not_switch_user` exists so a link that switches the principal cannot count as a pass.
 
 ```text
 python3 -m pytest labs/8.3/8.3-lab/tests --impl vulnerable
@@ -44,7 +44,7 @@ Honest note locators may pass on both implementations. That does not excuse the 
 - 4.5 audience after a valid OAuth redirect
 - That a locator `note=n1` is authorized (4.4)
 
-Record those as leftover risk or later topics, not as silent passes.
+Write those down as leftover risk or later topics, not as silent passes.
 
 ## Practice
 

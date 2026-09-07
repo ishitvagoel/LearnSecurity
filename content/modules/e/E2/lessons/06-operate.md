@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Flip[add enforcing header]
 ```
 
-Industry lists talk about noticing, responding, and recovering. They do not prove the enforcing header is present. Someone still has to own the leftover.
+Noticing, responding, and recovering still need an owner. They do not prove the enforcing header is present.
 
 ## Signals that do not become a second leak
 
@@ -27,7 +27,7 @@ Industry lists talk about noticing, responding, and recovering. They do not prov
 | Recover | Flip to enforcing after encoding (6.2) |
 | Leftover | XS-Leaks; cache strip; Trusted Types draft |
 
-Naming a product is not the rule. Re-run `test_report_only_is_not_enforcement` after any header-middleware change; a green reporting dashboard is not that check. Encoding (6.2) still has to exist before you claim Recover — a content-security policy is a layer.
+A vendor name is not this week's rule. Re-run `test_report_only_is_not_enforcement` after any header-middleware change; a green reporting dashboard is not that check. Encoding (6.2) still has to exist before you claim Recover — a content-security policy is a layer.
 
 ## What the framework does vs what you still have to check
 

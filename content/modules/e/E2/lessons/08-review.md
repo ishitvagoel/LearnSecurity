@@ -1,4 +1,4 @@
-# Review Report-Only-as-on like a pull request
+# Would you merge this Report-Only-as-on?
 
 **Kind:** code-review
 **Loop step:** Review
@@ -23,7 +23,7 @@ flowchart TD
   Q -->|dashboard green| False[False comfort]
 ```
 
-Start from what must stay true (Report-Only is not enforcement). Everything that is not the enforcing header name at that call is a candidate always-on path. A dashboard screenshot without that check is the same problem, not a different kind of finding.
+Hold onto this: Report-Only is not enforcement. If that call is missing the enforcing header name, you still have an always-on leftover. A dashboard screenshot without that check is still the same problem.
 
 Encoding is 6.2. CDN strip is 2.2. Do not skip `test_report_only_is_not_enforcement`. Do not claim check-in 7. Do not load a live page to prove the finding.
 

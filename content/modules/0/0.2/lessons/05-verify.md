@@ -4,7 +4,7 @@
 **Loop step:** 5 Verify
 **Standards:** Gate 1 evidence rules of this course. NICE is vocabulary, not the oracle.
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “They’re advanced” is not evidence. “LMS mastery is 100%” is a tool observation. The check is: `quiz_score_grants_phase1_skip(100)` is false. That must be **false** on `--impl vulnerable` (the helper returns true) and **true** on `--impl fixed`. Do not hack an LMS; the integer is enough.
 
@@ -25,7 +25,7 @@ flowchart LR
 | Failure | A missing diagnostic defaults to no skip (these files always return a bool) |
 | Not claimed | You can write a deny rule; Git/SQL/HTTP gaps are gone; 1.4 was taught; check-in 1 is done |
 
-The checks live in `labs/0.2/0.2-bridge/tests/test_diagnostic.py`. The first one is a **what must not happen** check: a high score treated as a 1.2 skip must not count as a pass.
+The checks live in `labs/0.2/0.2-bridge/tests/test_diagnostic.py`. The first one exists so a high score treated as a 1.2 skip cannot count as a pass.
 
 ```text
 python3 -m pytest labs/0.2/0.2-bridge/tests --impl vulnerable

@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “We use Play Integrity” is not evidence. “The Compose button is disabled” is a tool observation. The check is: `allow_export({"integrity": "ok"}, "fail")` is false, and `allow_export({"integrity": "ok"}, "play_integrity_pass")` may be true. The client-ok-plus-attest-fail observation must be **false** on `--impl vulnerable` (returns true) and **true** on `--impl fixed`. Do not call live attestation APIs.
 
 ## Picture: broken files must fail: client ok plus attest fail
 
-A check that only counts passing cases can pass while client `integrity=ok` still authorizes export. Ask whether that grant still counts as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only counts passing cases can still look green while client `integrity=ok` still authorizes export. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the check is not looking at the client boolean. If both fail, the 
 | Extra | missing client claim, attest fail → false (`test_missing_client_claim_does_not_authorize`) |
 | Not claimed | emulator farms; 4.4 object grant; live Play; platform integrity on a physical phone |
 
-The checks live in `labs/8.1/8.1-lab/tests/test_property.py`. `test_client_integrity_claim_is_not_authorization` is a **what must not happen** check: a client boolean that authorizes export is not allowed to count as a pass.
+The checks live in `labs/8.1/8.1-lab/tests/test_property.py`. `test_client_integrity_claim_is_not_authorization` exists so a client boolean that authorizes export cannot count as a pass.
 
 ```text
 python3 -m pytest labs/8.1/8.1-lab/tests --impl vulnerable
@@ -46,7 +46,7 @@ Honest server-pass may pass on both implementations. That does not excuse the fa
 - 4.4 object grants after export is allowed
 - 6.7 quota
 
-Record those as leftover risk or later topics, not as silent passes.
+Write those down as leftover risk or later topics, not as silent passes.
 
 ## Practice
 

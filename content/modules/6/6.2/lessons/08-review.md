@@ -23,7 +23,7 @@ flowchart TD
   Q -->|"cleaner after innerHTML"| False[False comfort]
 ```
 
-Start from what must stay true (`&lt;` present, extra tags absent). Everything that is not encoding at that sink is a candidate grammar mix. A content-security header in report-only mode without an encode check is the same problem, not a different kind of finding.
+Hold onto `&lt;` present, extra tags absent. If that sink is missing encoding, you still have a grammar mix. A content-security header in report-only mode without an encode check is still the same problem.
 
 A markdown pipeline that emits raw tags after this template is encoded is 2.1, not a reason to skip `test_angle_brackets_are_encoded`. HttpOnly cookies (2.3) do not encode HTML.
 

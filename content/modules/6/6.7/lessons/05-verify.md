@@ -3,13 +3,13 @@
 **Kind:** verification-lab
 **Loop step:** 5 Verify
 
-## If you cannot test it, it is still a slogan
+## Until you can fail it, it is still a slogan
 
 “Rate limit is on” is not evidence. “The button is disabled” is a tool observation. The check is: `allow(4)` is false and `allow(3)` is true. That fourth-export observation must be **false** on the broken files (returns true) and **true** on the repaired files. Do not load-test public hosts.
 
 ## Picture: unbounded allow must fail the check
 
-A test that only counts passing cases can pass while the fourth export still goes through. Ask whether an unbounded fourth still counts as a pass. The broken files must fail that. The repaired files must pass it.
+A check that only counts passing cases can still look green while the fourth export still goes through. The broken files have to fail that case. The repaired files have to pass it.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ If both pass, the test is not looking at the fourth export. If both fail, the fi
 | Failure | If you cannot read the count, deny |
 | Not claimed | Per-IP fairness; GraphQL; live requests per second |
 
-The file is `labs/6.7/6.7-lab/tests/test_property.py`. The test `test_fourth_export_is_denied` is a **what must not happen** test: an unbounded fourth is not allowed to count as a pass.
+The file is `labs/6.7/6.7-lab/tests/test_property.py`. The test `test_fourth_export_is_denied` exists so an unbounded fourth cannot count as a pass.
 
 A test that only asserts HTTP 200 on `/export` is not this topic’s evidence. A test that only greps an edge-proxy keyword without calling `allow(4)` is not this topic’s evidence. This practice never opens a public host.
 

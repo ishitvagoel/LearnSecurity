@@ -1,4 +1,4 @@
-# Same idea: clinic Android hipaaMode=true
+# Somewhere new: clinic Android hipaaMode=true
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer

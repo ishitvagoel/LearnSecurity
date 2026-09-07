@@ -1,4 +1,4 @@
-# Same idea: clinic revoke a guardian
+# Somewhere new: clinic revoke a guardian
 
 **Kind:** transfer-challenge
 **Loop step:** 7 Transfer
