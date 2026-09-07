@@ -13,7 +13,7 @@ Also name signed redirects and outbound webhook SSRF (6.5) as the same authentic
 
 ## Picture: the vendor’s IP range is still not a MAC
 
-Here, “lab-result webhook” is still “billing webhook” for this rule.
+Here, a lab-result webhook is this topic’s billing webhook.
 
 | Notes app | Clinic sketch |
 |---|---|

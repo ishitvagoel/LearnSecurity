@@ -20,7 +20,7 @@ Clinic billing replica that should see invoice rows, not chart text.
 
 ## Picture: a new compute shape is still a role
 
-Here, “function” is still “app” for this rule. A shared `admin` string and a billing replica that can read chart text are new rules. Microservices and serverless still do not add a same-company check by existing.
+Here, a function is this topic’s app. A shared `admin` string and a billing replica that can read chart text are new rules. Microservices and serverless still do not add a same-company check by existing.
 
 ```mermaid
 flowchart LR

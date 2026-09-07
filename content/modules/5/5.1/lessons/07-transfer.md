@@ -11,7 +11,7 @@ After `delete_account("alice")`, `body_retained("alice")` is None. For a clinic,
 
 ## Picture: the card is another copy
 
-Here, “patient” is still “alice” for this rule. Deleting the patient row does not authorize leaving the appointment-card notes alive. A “right to be forgotten” banner is not the check.
+Here, a patient is this topic’s alice. Deleting the patient row does not authorize leaving the appointment-card notes alive. A “right to be forgotten” banner is not the check.
 
 | Notes app | Clinic sketch |
 |---|---|

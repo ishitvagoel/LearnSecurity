@@ -13,7 +13,7 @@ An EHR-lite “prod pod runs npm install so we always get latest,” plus “we 
 
 ## Picture: latest vs lockfile
 
-Here, “chart” is still “note” for this rule. Expected digest, got digest, and leftover change. Marking “npm install ran” does not compare hashes.
+Here, a clinic chart is still this topic’s note. Name the expected digest, the digest you got, and what still changes after `npm install` ran. Marking “npm install ran” does not compare hashes.
 
 | Notes app | Clinic sketch |
 |---|---|

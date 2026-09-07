@@ -13,7 +13,7 @@ An EHR-lite “we have 94% coverage and GET /patient/1 returns 200,” plus a te
 
 ## Picture: same 200, clinical object
 
-Here, “patient” is still “note” for this rule. Object, bad case, and leftover change. Enabling a coverage product and ticking the guide does not name what must not happen.
+Here, a patient row is still this topic’s note. Name the object, the bad case, and what still changes after the suite is green. Enabling a coverage product and ticking the guide does not name what must not happen.
 
 | Notes app | Clinic sketch |
 |---|---|

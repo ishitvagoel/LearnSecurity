@@ -15,7 +15,7 @@ A small records app — “designers can put expressions in the discharge templa
 
 ## Picture: same interpreter, clinical object
 
-Here, “report template” is still “export helper” for this rule.
+Here, a report template is this topic’s export helper.
 
 | Notes app | Clinic sketch |
 |---|---|

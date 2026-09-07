@@ -19,7 +19,7 @@ flowchart LR
   Json["JSON hipaaMode true"] --> Reality[server grant if unchecked]
 ```
 
-Here, `hipaaMode` is still `integrity` for this rule. If the Compose switch is “HIPAA mode” while the server binds `hipaaMode=true` as a grant, the rule is gone. Play Integrity in the app, shrinking the app, and the store listing do not ignore the client boolean. Feature flags and `premium=true` are the same claim family — name them, do not run those app files here. The phone sandbox still does not put this process in what you trust (the first page).
+Here, `hipaaMode` is this topic’s `integrity`. If the Compose switch is “HIPAA mode” while the server binds `hipaaMode=true` as a grant, the rule is gone. Play Integrity in the app, shrinking the app, and the store listing do not ignore the client boolean. Feature flags and `premium=true` are the same claim family — name them, do not run those app files here. The phone sandbox still does not put this process in what you trust (the first page).
 
 | Notes app | Clinic sketch |
 |---|---|

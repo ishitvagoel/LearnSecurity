@@ -13,7 +13,7 @@ An EHR-lite “CODEOWNERS plus annual HIPAA training so we merge identity change
 
 ## Picture: same check, clinical training
 
-Here, “chart” is still “note” for this rule. Surfaces, threat-model id, and leftover change. Marking HIPAA training complete does not put `threat_model` on the change.
+Here, a clinic chart is still this topic’s note. Name the surfaces, the threat-model id, and what still changes after training is marked complete. Marking HIPAA training complete does not put `threat_model` on the change.
 
 | Notes app | Clinic sketch |
 |---|---|

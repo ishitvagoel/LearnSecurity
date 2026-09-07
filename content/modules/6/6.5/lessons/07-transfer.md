@@ -13,7 +13,7 @@ Also name webhook delivery (7.3) as the same egress deputy, without running thos
 
 ## Picture: the PDF URL is still a steering wheel
 
-Here, “PDF URL” is still “preview URL” for this rule.
+Here, a PDF URL is this topic’s preview URL.
 
 | Notes app | Clinic sketch |
 |---|---|

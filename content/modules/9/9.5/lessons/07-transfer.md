@@ -13,7 +13,7 @@ An EHR-lite "the assessor delivered a 40-page PDF with severity 9.8 so we closed
 
 ## Picture: same close loop, clinical object
 
-Here, "chart" is still "note" for this rule. Rule, retest, and leftover change. Filing the PDF and marking the ticket Done does not set `retest` to `"pass"`.
+Here, a clinic chart is still this topic’s note. Name the rule, the retest, and what still changes after close. Filing the PDF and marking the ticket Done does not set `retest` to `"pass"`.
 
 | Notes app | Clinic sketch |
 |---|---|

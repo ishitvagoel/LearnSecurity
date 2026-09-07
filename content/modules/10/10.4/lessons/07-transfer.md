@@ -13,7 +13,7 @@ An EHR-lite “we left DEBUG on for five minutes so support can see traces,” p
 
 ## Picture: five minutes vs a boot
 
-Here, “chart” is still “note” for this rule. Env, debug, and leftover change. Leaving DEBUG on for five minutes is still a production boot.
+Here, a clinic chart is still this topic’s note. Name env, debug, and what still changes after someone “just needs five minutes.” Leaving DEBUG on for five minutes is still a production boot.
 
 | Notes app | Clinic sketch |
 |---|---|

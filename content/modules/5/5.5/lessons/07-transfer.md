@@ -13,7 +13,7 @@ Also name NoSQL operators and GraphQL arguments as the same shape (7.1), without
 
 ## Picture: the search box is still an interpreter
 
-Here, “search box” is still “note id” for this rule.
+Here, a search box is this topic’s note id.
 
 | Notes app | Clinic sketch |
 |---|---|

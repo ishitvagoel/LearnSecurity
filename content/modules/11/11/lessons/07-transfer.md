@@ -13,7 +13,7 @@ An EHR-lite “we hit DELETE /guardians/12 so the next chart read is fine,” pl
 
 ## Picture: same revoke loop, clinical object
 
-Here, “chart” is still “note” for this rule. Owner, grant, and leftover change. Filing DELETE 200 does not consult `GRANTS` on the next read.
+Here, a clinic chart is still this topic’s note. Name the owner, the grant, and what still changes after DELETE returns 200. Filing DELETE 200 does not consult `GRANTS` on the next read.
 
 | Notes app | Clinic sketch |
 |---|---|

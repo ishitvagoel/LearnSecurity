@@ -13,7 +13,7 @@ Also name Jinja, SQL (5.5), and mail headers as the same shape, without running 
 
 ## Picture: the filename is still an interpreter input
 
-Here, “CSV filename” is still “export name” for this rule.
+Here, a CSV filename is this topic’s export name.
 
 | Notes app | Clinic sketch |
 |---|---|

@@ -9,7 +9,7 @@ You get a **clinic portal** that adds a second factor, and a **banking re-auth**
 
 ## Picture: transfer changes the envelope, not the product name
 
-Here, “clinic step-up” is still “recovery confirm” for this rule. Keyboard lockout and chart-exposing shortcuts are new rules. Support reading a code aloud is a new who-is-allowed row, not a usability win.
+Here, a clinic step-up is this topic’s recovery confirm. Keyboard lockout and chart-exposing shortcuts are new rules. Support reading a code aloud is a new who-is-allowed row, not a usability win.
 
 | Notes app | Clinic / bank sketch |
 |---|---|

@@ -26,7 +26,7 @@ flowchart LR
   Jni[JNI copy] --> Reality[needs smallest of three]
 ```
 
-Here, “DICOM parser” is still “notes unpacker” for this rule. If the app is “mostly Kotlin” while `copy_into` trusts `declared_len` plus 8, the rule is gone. A company language roadmap and an awareness-list mapping do not put `min(bufsize, declared_len, len(src))` next to the copy. A protobuf C extension is the same grain — name it, do not fuzz a third-party binary here. An awareness-list name is a regression label *after* the length cause, not the syllabus. Native unpacker leftover is later and harder: not this check.
+Here, a DICOM parser is this topic’s notes unpacker. If the app is “mostly Kotlin” while `copy_into` trusts `declared_len` plus 8, the rule is gone. A company language roadmap and an awareness-list mapping do not put `min(bufsize, declared_len, len(src))` next to the copy. A protobuf C extension is the same grain — name it, do not fuzz a third-party binary here. An awareness-list name is a regression label *after* the length cause, not the syllabus. Native unpacker leftover is later and harder: not this check.
 
 An oversize copy still has to be denied. A short honest copy may still fit. Adding a Kotlin rewrite without a destination bound leaves length > 4. The local check is `test_copy_does_not_exceed_buffer` — on a practice, not a live codec.
 

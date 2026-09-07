@@ -13,7 +13,7 @@ An EHR-lite “code scanning is on and the dashboard is noisy so we ship Fridays
 
 ## Picture: same join, clinical object
 
-Here, “clinic finding” is still “note finding” for this rule. Finding, map, and leftover change. Enabling code scanning without a mapping check does not own the HIGH.
+Here, a clinic finding is still this topic’s note finding. Name the finding, the map, and what still changes after scanning is on. Enabling code scanning without a mapping check does not own the HIGH.
 
 | Notes app | Clinic sketch |
 |---|---|

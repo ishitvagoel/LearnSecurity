@@ -11,7 +11,7 @@ You get a **clinic staff SSO** portal. Optionally: a second ceremony before char
 
 ## Picture: MFA to the wrong identity provider is still phishing
 
-Here, `"otp"` is still `"password"` for this rule. A lookalike identity provider is still the wrong origin. Who-is-allowed still runs after login.
+Here, `"otp"` is this topic’s `"password"`. A lookalike identity provider is still the wrong origin. Who-is-allowed still runs after login.
 
 | Notes app | Clinic sketch |
 |---|---|

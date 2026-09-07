@@ -5,7 +5,7 @@
 
 ## Use it somewhere new
 
-You get a **clinic patient-portal** session cookie, and a **React Native WebView cookie bridge** as a second sketch. Here, `clinic_session` is still `sc_session` for this rule. Person, object, reader, and leftover change. Chart access and a new bridge are new rules. You must rebuild the sentence.
+You get a **clinic patient-portal** session cookie, and a **React Native WebView cookie bridge** as a second sketch. Here, `clinic_session` is still this topic’s `sc_session`. Name the person, the cookie, the reader, and what still changes after HttpOnly is on. Chart access and a new bridge are new rules. You must rebuild the sentence.
 
 Content Security Policy Level 3 and Trusted Types stay labeled **Working Drafts**. Do not cite a famous-bugs list as the definition of security.
 

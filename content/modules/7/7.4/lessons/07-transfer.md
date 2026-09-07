@@ -13,7 +13,7 @@ Also name outbox pattern and event schemas as the same identity family, without 
 
 ## Picture: cookie in the job is still a session
 
-Here, “export patients overnight” is still “export notes” for this rule.
+Here, overnight patient export is this topic’s notes export.
 
 | Notes app | Clinic sketch |
 |---|---|

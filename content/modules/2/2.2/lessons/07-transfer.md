@@ -9,7 +9,7 @@ You get a **clinic portal** that caches `GET /patients/me` at the edge, and auth
 
 ## Picture: `/me` is still a shared URL
 
-Here, “chart” is still “note body” for this rule. TLS on one hop stays hop proof. The cache key still decides who reads.
+Here, a clinic chart is this topic’s note body. TLS on one hop stays hop proof. The cache key still decides who reads.
 
 | Notes app | Clinic sketch |
 |---|---|

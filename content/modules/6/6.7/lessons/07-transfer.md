@@ -13,7 +13,7 @@ Also name notification fan-out and search complexity as the same budget family (
 
 ## Picture: bulk export is still a budget row
 
-Here, “export patients” is still “export notes” for this rule.
+Here, a patient export is this topic’s notes export.
 
 | Notes app | Clinic sketch |
 |---|---|

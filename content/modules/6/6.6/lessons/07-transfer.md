@@ -13,7 +13,7 @@ Also name password reset, 2.4 share retry, and later jobs (7.4) as the same fami
 
 ## Picture: guardian invite is still a limited seat
 
-Here, “guardian” is still “t1” for this rule. A click counter is not consume. FastAPI, a unique-index screenshot, and “we emailed the guardian” do not consume.
+Here, a guardian invite is this topic’s t1. A click counter is not consume. FastAPI, a unique-index screenshot, and “we emailed the guardian” do not consume.
 
 | Notes app | Clinic sketch |
 |---|---|
