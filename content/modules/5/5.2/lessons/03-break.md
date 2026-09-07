@@ -60,7 +60,7 @@ You do not need a new cipher name.
 | How you recover later | Re-protect with real encryption; rotate keys later |
 | Out of scope | A cipher product name, HTTPS, or a live decoder |
 
-Postgres `bytea` is not authenticated encryption. FastAPI will store whatever string you hand it. Next.js does not encrypt the column. The app's promise this week is: **these** local files, Base64 decode of `protect("secret")` is not `"secret"`.
+Postgres `bytea` is not authenticated encryption. FastAPI will store whatever string you hand it. Next.js does not encrypt the column. Base64 decode of `protect("secret")` is not `"secret"`.
 
 ## Practice
 

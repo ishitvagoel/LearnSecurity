@@ -33,7 +33,7 @@ flowchart LR
   Road --> NotNow[not accept_exception]
 ```
 
-A one-year slide is a plan. It is not this week’s hole. A process-maturity score still does not write the row.
+A one-year slide is a plan. It is not the hole named above. A process-maturity score still does not write the row.
 
 ## Step 1: name the pieces
 
@@ -63,7 +63,7 @@ A missing owner is how a spoken yes becomes “accepted.” Write the hole.
 
 ## Practice
 
-Label `risk.py` in `labs/E6/e6-lab`.
+In `labs/E6/e6-lab`, mark `risk.py`.
 
 ## Use it somewhere new
 

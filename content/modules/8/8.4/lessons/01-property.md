@@ -5,7 +5,7 @@
 
 ## The rule
 
-The notes app this week ships a debug APK for developers and a release APK for members. Production export is a **server** decision (8.1). A debug-signed lab build must not call that API even if the client sends `attest=ok`. Channel plus build type sit next to attest in what the server trusts.
+The notes app ships a debug APK for developers and a release APK for members. Production export is a **server** decision (8.1). A debug-signed lab build must not call that API even if the client sends `attest=ok`. Channel plus build type sit next to attest in what the server trusts.
 
 > `api_allowed("debug", "ok")` must be false. `api_allowed("release", "ok")` may be true.
 
@@ -52,7 +52,7 @@ Play App Signing protects *store* signing. It does not stop a debug application 
 
 Gradle `debug` / `release` types are not a server check. R8 does not authorize. Play Console “app signing” is not “secrets stay out of the binary.” FastAPI will accept `attest=ok` from a debug client if you bind it.
 
-What this practice is supposed to show: debug plus ok is false — files in `labs/8.4/8.4-lab`. It is local only. It is not a live store.
+Debug plus ok is false — files in `labs/8.4/8.4-lab`. It is local only. It is not a live store.
 
 ## What the tool cannot do
 

@@ -11,7 +11,7 @@ The notes app stores notes per company. A signed-in session already names which 
 
 What must not happen is **the JSON body switches the bound company**. At product scale that is a read or write into another company through every copy — search, cache, and analytics included.
 
-Isolation of the object and the company. They also want unused or writable fields not to become policy. Extra rows about applying grant changes immediately are advanced — not this week's check. Famous “broken object” lists are a later awareness check after this binding exists. They are not the syllabus. PostgreSQL row-level rules and a relationship-graph product are **layers**, not this sentence.
+Isolation of the object and the company. They also want unused or writable fields not to become policy. Extra rows about applying grant changes immediately are advanced — not this check. Famous “broken object” lists are a later awareness check after this binding exists. They are not the syllabus. PostgreSQL row-level rules and a relationship-graph product are **layers**, not this sentence.
 
 ## Picture: body vs session
 
@@ -51,7 +51,7 @@ flowchart LR
 
 PostgreSQL row-level rules will isolate whatever session variable you set. If you set it from the body, the database enforces the **attacker's** company.
 
-What this practice is supposed to show: `tenant_for`, session A plus body B is A — files in `labs/E5/e5-lab`. It is local only. It is not a live company.
+`tenant_for`, session A plus body B is A — files in `labs/E5/e5-lab`. It is local only. It is not a live company.
 
 ## What the tool cannot do
 

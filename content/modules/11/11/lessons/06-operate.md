@@ -9,7 +9,7 @@ A cache or worker can still serve the old grant after `read` was “fixed once.�
 
 ## Picture: post-revoke read is a signal
 
-A read that skipped the grant is something you still have to notice and recover from, not an excuse to quote the note in the ticket. The notice should name the note id and the person. Recover notifies A and rotates links.
+A read that skipped the grant still has to be noticed and recovered from — not an excuse to quote the note in the ticket. The notice should name the note id and the person. Recovery should notify A and rotate links.
 
 ```mermaid
 flowchart TD
@@ -18,7 +18,7 @@ flowchart TD
   Metric --> Notify[notify A rotate links]
 ```
 
-A scanner product is not the rule, and this week’s next-read check is not proof.
+A scanner product is not the rule, and this next-read check is not proof.
 
 Re-run `test_revoked_share_cannot_read` after any share-path change. A green “DELETE 200” tile is not that check. Phone cache and leftover worker sessions are other read paths of the same family — inventory them before you claim recover. Tabletop remains the restore week.
 

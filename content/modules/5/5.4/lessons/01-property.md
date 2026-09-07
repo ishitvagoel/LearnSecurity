@@ -11,7 +11,7 @@ The notes app must know whether the **server socket** negotiated TLS. A browser 
 
 What must not happen is **a client-supplied Forwarded-Proto counted as TLS**. Cookies marked Secure and HSTS fire while the user stays on cleartext. That is an authenticity failure of the transport.
 
-TLS has to be on the public HTTP service with no cleartext fallback. A current TLS version (TLS 1.3 is the current handshake). Clients still have to check certificates — that is a different rule. OCSP stapling and encrypted client hello are advanced extras, not this week's check. A server flag that trusts proxy headers is not this sentence.
+TLS has to be on the public HTTP service with no cleartext fallback. A current TLS version (TLS 1.3 is the current handshake). Clients still have to check certificates — that is a different rule. OCSP stapling and encrypted client hello are advanced extras, not this check. A server flag that trusts proxy headers is not this sentence.
 
 ## Picture: hop vs claim
 
@@ -54,7 +54,7 @@ Pinning on a phone (later) is leftover: operational breakage versus extra bindin
 
 ## What the framework does vs what you still have to check
 
-A server flag that trusts proxy headers, with no trusted-proxy IP, is this bug. A browser `https://` in the page’s API client is not the API socket. What this practice is supposed to show: `labs/5.4/5.4-lab`. No live load balancer.
+A server flag that trusts proxy headers, with no trusted-proxy IP, is this bug. A browser `https://` in the page’s API client is not the API socket. Files in `labs/5.4/5.4-lab`. No live load balancer.
 
 ## What the tool cannot do
 

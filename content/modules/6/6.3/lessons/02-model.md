@@ -55,7 +55,7 @@ This lab is the leftover-cookie helper. Do not treat a Bearer-only API as “CSR
 
 ## Practice
 
-Label `csrf.py` in `labs/6.3/6.3-lab`.
+In `labs/6.3/6.3-lab`, mark `csrf.py`.
 
 ## Use it somewhere new
 

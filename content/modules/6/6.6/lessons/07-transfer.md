@@ -15,7 +15,7 @@ Also name password reset, 2.4 share retry, and later jobs (7.4) as the same fami
 
 Calling it “guardian” instead of “t1” does not move the work. A click counter is not consume. FastAPI, a unique-index screenshot, and “we emailed the guardian” do not consume.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | `t1` invite token | Guardian mail-link token |
 | `accept` | Join analogue |
@@ -29,7 +29,7 @@ flowchart LR
   Twice[two accepts] --> Reality[two memberships if not consumed]
 ```
 
-If the mail link always returns 200 and never writes used, the hole is open. A magic-link that stays a standing session is 4.3 — exchange it for a cookie; this week's check owns consume. Adding a unique index without a second-accept test leaves `accept` always true. The local check is `test_invite_token_is_single_use` — on a practice, not a live mail link.
+If the mail link always returns 200 and never writes used, the hole is open. A magic-link that stays a standing session is 4.3 — exchange it for a cookie; this check owns consume. Adding a unique index without a second-accept test leaves `accept` always true. The local check is `test_invite_token_is_single_use` — on a practice, not a live mail link.
 
 ## Write this for a clinic invite-guardian
 

@@ -54,7 +54,7 @@ A random stored name is extra. It is not a substitute for the prefix check on an
 
 ## Practice
 
-Label `path.py` in `labs/6.4/6.4-lab`.
+In `labs/6.4/6.4-lab`, mark `path.py`.
 
 ## Use it somewhere new
 

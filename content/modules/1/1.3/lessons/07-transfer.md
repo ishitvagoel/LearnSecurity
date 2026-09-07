@@ -43,7 +43,7 @@ flowchart LR
 
 At least these assumptions change:
 
-| Notes app this week | PreviewForge challenge |
+| Notes app | PreviewForge challenge |
 |---|---|
 | Primary hostile influence arrives as request metadata | Hostile bytes become a **stored entry point** processed later by different code |
 | Protected effect is a direct summary export | Effects include parsing/execution-like behavior, resource consumption, file writes, egress, preview publication, and cached release |

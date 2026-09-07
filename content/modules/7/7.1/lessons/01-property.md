@@ -5,7 +5,7 @@
 
 ## The rule
 
-The notes app this week lets a member change their profile. The JSON document is **data**. `is_admin`, company id, and billing flags are **not** in the writable set. Last topic (1.2) said who-is-allowed is a rule. This week's grain is **which keys that rule may write**. Extra keys are not writable fields.
+The notes app lets a member change their profile. The JSON document is **data**. `is_admin`, company id, and billing flags are **not** in the writable set. Last topic (1.2) said who-is-allowed is a rule. The grain is **which keys that rule may write**. Extra keys are not writable fields.
 
 > After `apply(user, {"is_admin": true})`, `is_admin` must still be false. An honest `display_name` may change.
 
@@ -53,7 +53,7 @@ OpenAPI can *describe* the contract. It does not *enforce* the drop. A generated
 
 FastAPI will bind extra fields if the model allows it. GraphQL will accept mutation arguments that the schema names — and will still honor extras if you pass a generic `input: JSON`. gRPC unknown fields are a third binder. None of those defaults is 1.2.
 
-What this practice is supposed to show: `apply`, extra keys are not writable fields — files in `labs/7.1/7.1-lab`. It is local only. It is not a live API.
+`apply`, extra keys are not writable fields — files in `labs/7.1/7.1-lab`. It is local only. It is not a live API.
 
 ## What the tool cannot do
 

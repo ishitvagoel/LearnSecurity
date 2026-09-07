@@ -22,7 +22,7 @@ flowchart TD
 
 The repaired files require that both-at-once check. Do not accept “`NODE_ENV` is production” as the check. Production still needs other flags — a feature flag that turns off authorization (1.2) is leftover, not this check. Docs and monitoring pages that stay public, and extra version leakage with debug already off, remain leftover. Emergency debug is E6, not a silent `return True`.
 
-A checklist that wants debug off in production covers prod plus debug. This week's check is the local stand-in.
+A checklist that wants debug off in production covers prod plus debug. The check is the local stand-in.
 
 ## What the repaired files must show
 

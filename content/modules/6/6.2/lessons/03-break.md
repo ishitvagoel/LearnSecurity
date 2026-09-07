@@ -55,7 +55,7 @@ You do not need a new marker.
 
 ## What the framework does vs what you still have to check
 
-React JSX encodes text children by default; `dangerouslySetInnerHTML` does not. FastAPI `HTMLResponse` will ship whatever string you build. Jinja autoescape is off unless you turn it on. What this practice is supposed to show: the extra-tag marker `"<img"` is absent and `&lt;` is present.
+React JSX encodes text children by default; `dangerouslySetInnerHTML` does not. FastAPI `HTMLResponse` will ship whatever string you build. Jinja autoescape is off unless you turn it on. The extra-tag marker `"<img"` is absent and `&lt;` is present.
 
 ## Practice
 

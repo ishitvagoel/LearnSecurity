@@ -11,7 +11,7 @@ You get a **clinic portal** that adds a second factor, and a **banking re-auth**
 
 Calling it “clinic step-up” instead of “recovery confirm” does not move the work. Keyboard lockout and chart-exposing shortcuts are new rules. Support reading a code aloud is a new who-is-allowed row, not a usability win.
 
-| Notes app this week | Clinic / bank sketch |
+| Notes app | Clinic / bank sketch |
 |---|---|
 | Owner recovering a notes account | Exhausted clinician or customer on a shared workstation |
 | Recovery confirm widget | Second-factor or re-auth dialog over a chart or balance |

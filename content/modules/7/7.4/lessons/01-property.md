@@ -54,7 +54,7 @@ If the worker’s database role is god-mode (3.3), the deputy is worse: it can r
 
 A task library can copy the request into the later job. FastAPI `Depends()` is gone once the HTTP worker returns. A message broker on a private network is still untrusted input (2.1).
 
-What this practice is supposed to show: leftover Alice is `None`; the named worker may run — files in `labs/7.4/7.4-lab`. Fake job dicts only. No live broker.
+Leftover Alice is `None`; the named worker may run — files in `labs/7.4/7.4-lab`. Fake job dicts only. No live broker.
 
 ## What the tool cannot do
 

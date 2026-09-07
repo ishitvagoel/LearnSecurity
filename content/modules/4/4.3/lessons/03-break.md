@@ -59,7 +59,7 @@ You do not need a new token string.
 
 ## What the framework does vs what you still have to check
 
-FastAPI will bind query params. Next.js router will put them in the address bar. TLS encrypts the hop, not the log. What this practice is supposed to show: query-only → `None`.
+FastAPI will bind query params. Next.js router will put them in the address bar. TLS encrypts the hop, not the log. Query-only → `None`.
 
 ## Practice
 

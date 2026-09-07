@@ -15,7 +15,7 @@ Also name notification fan-out and search complexity as the same budget family (
 
 Calling it “export patients” instead of “export notes” does not move the work.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | `allow(n)` on export | Bulk-export of patients |
 | Cap 3 in the lab window | Same shape: a per-person resource account |
@@ -34,7 +34,7 @@ The fourth export still has to be false. The third may still be true. Rate-limit
 
 ## Write this for a clinic bulk-export
 
-**Product sketch:** a small clinic app with an “Export all” button that is disabled in the browser.
+A small clinic app with an “Export all” button that is disabled in the browser.
 
 1. who can act (scripted clinician session — not a live clinic);
 2. what you trust (server `n <= 3` is what you trust; the disabled button and an IP rate limit are not);

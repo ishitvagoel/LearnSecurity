@@ -13,7 +13,7 @@ You get a **clinic page** whose API client uses `https://` while the API socket 
 
 Calling it “clinic” instead of “notes app” does not move the work. An https page does not authorize treating the API socket as TLS. A dashboard toggle is not the check.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | `X-Forwarded-Proto: https` | Page API client `https://` |
 | `server_scheme http` | API socket `http` |

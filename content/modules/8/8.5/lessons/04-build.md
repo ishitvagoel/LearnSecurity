@@ -50,7 +50,7 @@ Fail closed: if you are unsure whether a value is the note body, omit it. Uncert
 - Screenshots in “send feedback.”
 - Frozen-app traces and logcat if a leftover `READ_LOGS` path still prints the body.
 - The vendor as a processor — a contract plus 5.1, not disappearance.
-- Last-chance error handlers that dump frames with arguments. That is an advanced extra, not this week's check.
+- Last-chance error handlers that dump frames with arguments. That is an advanced extra, not this check.
 - Web crash reports (10.5) are another place for the same body.
 
 ## Can people still use it

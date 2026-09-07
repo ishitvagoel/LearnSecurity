@@ -11,7 +11,7 @@ The notes app will later accept access tokens at its API. An access token is a c
 
 What must not happen is **a JWT with the wrong audience accepted as a notes-app session**. The token is treated as a login even though it was minted for someone else. Then who-is-allowed runs as whoever `sub` names.
 
-The API has to accept only tokens meant for that service. Keep tokens only in components that need them (in a backend-for-frontend, the browser does not hold the access token). The code flow still needs PKCE or `state`. Sender-constrained tokens (DPoP / mutual TLS) are an advanced extra, not this week's check. RFC 9700 is the OAuth 2.0 security practice. RFC 10017 is the browser-app practice. RFC 8252 is native apps. Do not present OAuth 2.1 as final.
+The API has to accept only tokens meant for that service. Keep tokens only in components that need them (in a backend-for-frontend, the browser does not hold the access token). The code flow still needs PKCE or `state`. Sender-constrained tokens (DPoP / mutual TLS) are an advanced extra, not this check. RFC 9700 is the OAuth 2.0 security practice. RFC 10017 is the browser-app practice. RFC 8252 is native apps. Do not present OAuth 2.1 as final.
 
 ## Picture: audience is a name, not a signature
 
@@ -52,7 +52,7 @@ This practice runs the resource-server `aud` check. Where the browser stores tok
 
 ## What the framework does vs what you still have to check
 
-Authlib and many JWT libraries will check a signature if you give them a key and skip `aud`. Next.js middleware that “has a Bearer” is not an audience check. What this practice is supposed to show: `labs/4.5/4.5-lab`. No live identity provider.
+Authlib and many JWT libraries will check a signature if you give them a key and skip `aud`. Next.js middleware that “has a Bearer” is not an audience check. Files in `labs/4.5/4.5-lab`. No live identity provider.
 
 ## What the tool cannot do
 

@@ -5,7 +5,7 @@
 
 ## The rule
 
-The notes app this week may send a content-security policy on its Next.js responses. **Isolation of script execution** is whether the *enforcing* header is present. `Content-Security-Policy-Report-Only` is a signal. It is not that check.
+The notes app may send a content-security policy on its Next.js responses. **Isolation of script execution** is whether the *enforcing* header is present. `Content-Security-Policy-Report-Only` is a signal. It is not that check.
 
 > `isolation_enforced({"Content-Security-Policy-Report-Only": "default-src 'none'"})` must be false. An enforcing `Content-Security-Policy` header may make it true.
 
@@ -49,7 +49,7 @@ flowchart LR
 
 Some templates ship Report-Only. A CDN can strip the enforcing header (2.2).
 
-What this practice is supposed to show: on **these** practice headers, Report-Only alone is not isolation — files in `labs/E2/e2-lab`. It is local only. It is not a live page and not a public site.
+Report-Only alone is not isolation — files in `labs/E2/e2-lab`. It is local only. It is not a live page and not a public site.
 
 ## What the tool cannot do
 

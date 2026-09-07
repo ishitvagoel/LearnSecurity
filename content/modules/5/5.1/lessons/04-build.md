@@ -25,7 +25,7 @@ flowchart TD
 
 The repaired files pop all three maps. Production still needs an inventory that includes replicas, support tickets, and backups (named later). A privacy-law footer does not pop `ANALYTICS`. A privacy-framework “control” label is an outcome name, not this check.
 
-Sensitive data must not be sent to an untrusted second party. This week's check is the deletion half of that sentence: if analytics already has the body, delete must still walk it. A scheduled automatic deletion job is advanced work, not this check.
+Sensitive data must not be sent to an untrusted second party. The check is the deletion half of that sentence: if analytics already has the body, delete must still walk it. A scheduled automatic deletion job is advanced work, not this check.
 
 ## What the repaired files must show
 

@@ -61,7 +61,7 @@ You do not need a new field name.
 | How you recover later | Keep the redact; purge the vendor; tell people if the copy left what you trust |
 | Out of scope | A crash product name, a live vendor, or the store form as redaction |
 
-A crash SDK will ship whatever you attach. Private storage on the phone (8.2) does not encrypt the HTTPS payload. A web crash product (10.5) is the same field on the server. What this practice is supposed to show: practice, `'secret'` is absent from the report.
+A crash SDK will ship whatever you attach. Private storage on the phone (8.2) does not encrypt the HTTPS payload. A web crash product (10.5) is the same field on the server. `'secret'` is absent from the report.
 
 ## Practice
 

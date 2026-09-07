@@ -61,7 +61,7 @@ You do not need a new payload.
 
 ## What the framework does vs what you still have to check
 
-GitHub’s “approve” button is not this rule. Formatters do not see eval as a grant of Python. Later review bots are a help, not the whole check. What this practice is supposed to show: eval-on-user is not approved.
+GitHub’s “approve” button is not this rule. Formatters do not see eval as a grant of Python. Later review bots are a help, not the whole check. Eval-on-user is not approved.
 
 ## Practice
 

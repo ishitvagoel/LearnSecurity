@@ -53,7 +53,7 @@ A Python slice in this practice is a teaching stand-in. C will not do this for y
 
 ## What the framework does vs what you still have to check
 
-Python slicing will not save a C copy. A memory-safe language reduces this class of overwrite **in that language**. Helpers that call C, and leftover codecs, still copy. What this practice is supposed to show: length ≤ 4.
+Python slicing will not save a C copy. A memory-safe language reduces this class of overwrite **in that language**. Helpers that call C, and leftover codecs, still copy. Length ≤ 4.
 
 ## What the tool cannot do
 

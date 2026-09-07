@@ -10,7 +10,7 @@ In this course, `quiz_score_grants_phase1_skip(100)` is false. The same rule has
 
 Onboarding at a clinic-booking product. Also name a vendor cert used to skip a threat-model review.
 
-**Product sketch:** “They scored 100% so skip isolation labs,” plus “job-title competency so check-in 1 is done.”
+“They scored 100% so skip isolation labs,” plus “job-title competency so check-in 1 is done.”
 
 1. who might try (a hurried new hire or manager with a badge — **not** a live HR LMS attack);
 2. what you trust (the skip check; not a quiz, a job title, a badge, or an LMS percentage);

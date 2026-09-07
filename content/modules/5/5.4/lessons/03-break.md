@@ -63,7 +63,7 @@ You do not need a new header name.
 
 ## What the framework does vs what you still have to check
 
-A server flag that trusts proxy headers, with a wildcard trusted hop, will believe whoever sent the header. The request URL scheme after that middleware is not the socket. Headers the page reads in the browser are not TLS. What this practice is supposed to show: header https + socket http is False.
+A server flag that trusts proxy headers, with a wildcard trusted hop, will believe whoever sent the header. The request URL scheme after that middleware is not the socket. Headers the page reads in the browser are not TLS. Header https + socket http is False.
 
 ## Practice
 

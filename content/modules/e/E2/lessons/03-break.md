@@ -28,7 +28,7 @@ flowchart TD
 
 The broken files show **cause** (Report-Only mistaken for on). Do not probe public hosts. What has to be true first: either header name makes the function true. You do not need a browser. You must not load a live page.
 
-Encoding is already the rule in 6.2. This week’s check is **the header name that actually blocks**. Check-in 7 and milestone M2 stay **not finished**.
+Encoding is already the rule in 6.2. The check is **the header name that actually blocks**. Check-in 7 and milestone M2 stay **not finished**.
 
 ## What to read in the practice files
 
@@ -54,7 +54,7 @@ You do not need a new header.
 
 ## What the framework does vs what you still have to check
 
-Some templates ship Report-Only. Helmet will send whatever you configure. A CDN can strip the enforcing header (2.2). What this practice is supposed to show: Report-Only only is false.
+Some templates ship Report-Only. Helmet will send whatever you configure. A CDN can strip the enforcing header (2.2). Report-Only only is false.
 
 ## Practice
 

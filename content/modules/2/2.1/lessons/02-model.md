@@ -57,7 +57,7 @@ The client, the app, the model, or the prompt is hostile. What you trust is the 
 | worker | re-parse stored bytes | persist-or-export | allow only if meaning matches the original result |
 | reader tA | stored body | read | who-is-allowed check; ingest agreement does not grant a cross-company read |
 
-A missing worker cell is how delayed-machine transfer appears. Write the hole even if this week has no queue.
+A missing worker cell is how delayed-machine transfer appears. Write the hole even if this topic has no queue.
 
 ## Step 4: a list of messy objects, not a bug-list
 
@@ -72,7 +72,7 @@ Do not add public JSON bombs or live Unicode weaponization. Those are out of sco
 
 ## Practice
 
-Draw the map so someone else could name the checks without opening the answer-key folder. Label `parse_note.py` in `labs/2.1/2.1-parser-boundaries`. Label the first-key scan and `json.loads` as two readers even in the repaired tree — the fix is agreement-or-refuse, not pretending the scan became JSON.
+In `labs/2.1/2.1-parser-boundaries`, mark `parse_note.py`. Label the first-key scan and `json.loads` as two readers even in the repaired tree — the fix is agreement-or-refuse, not pretending the scan became JSON.
 
 ## Use it somewhere new
 

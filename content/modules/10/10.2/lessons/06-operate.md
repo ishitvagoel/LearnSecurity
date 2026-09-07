@@ -9,7 +9,7 @@ A cache can serve old bytes after `install_ok` was “fixed once.” Do not log 
 
 ## Picture: digest mismatch is a signal
 
-A denied mismatch is something you still have to notice and recover from, not an excuse to quote a registry token in the paging channel. The notice should name the package and the two digest ids. Recover pins known-good.
+A denied mismatch still has to be noticed and recovered from — not an excuse to quote a registry token in the paging channel. The notice should name the package and the two digest ids. Recovery should pin known-good.
 
 ```mermaid
 flowchart TD

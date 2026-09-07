@@ -57,7 +57,7 @@ You do not need a new `aud` string.
 
 ## What the framework does vs what you still have to check
 
-Authlib and many JWT libraries will check a signature if you give them a key and skip `aud`. Next.js middleware that “has a Bearer” is not an audience check. What this practice is supposed to show: wrong `aud` → false.
+Authlib and many JWT libraries will check a signature if you give them a key and skip `aud`. Next.js middleware that “has a Bearer” is not an audience check. Wrong `aud` → false.
 
 ## Practice
 

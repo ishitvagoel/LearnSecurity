@@ -59,7 +59,7 @@ You do not need a new finding key.
 | How you recover later | Reopen; run the same isolation check |
 | Out of scope | A severity number; a live pentest; claiming an assurance gate |
 
-A ticket tracker will show Done. A pentest vendor PDF is evidence that *someone tested once*. A severity score ranks work. The notes app's API will still serve the hole if the close gate is always true. What this practice is supposed to show: practice, `retest` None is deny.
+A ticket tracker will show Done. A pentest vendor PDF is evidence that *someone tested once*. A severity score ranks work. The notes app's API will still serve the hole if the close gate is always true. `retest` None is deny.
 
 ## Practice
 

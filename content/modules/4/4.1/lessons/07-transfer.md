@@ -13,7 +13,7 @@ After `delete_user("alice")`, `session_valid("alice")` is false. When a clinicia
 
 Calling it “clinician” instead of “alice” does not move the work. Disabling the badge does not authorize leaving the chart cookie alive. A logout product name is not the check.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | `alice` session cookie | Chart browser cookie |
 | `delete_user` | Offboard analogue |

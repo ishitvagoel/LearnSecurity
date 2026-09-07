@@ -27,7 +27,7 @@ Write:
 
 ## Industry lists (after the design)
 
-You may now look up password storage on the industry lists. You should see the same ideas: slow hash, unique salt, no plaintext. If a list says "encrypt passwords," read carefully — reversible encryption is not this week's store.
+You may now look up password storage on the industry lists. You should see the same ideas: slow hash, unique salt, no plaintext. If a list says "encrypt passwords," read carefully — reversible encryption is not the password store this page is about.
 
 We map to those lists on the sources page. Do not start a design from the list code. Start from the rule, then tick the list.
 
@@ -37,7 +37,7 @@ If your transfer still says "because OWASP said so" and never names the store, i
 
 ## What can still go wrong
 
-A local hashed claim is not a server session. Copying this JSON to a VPS and opening port 443 does not inherit this week's evidence.
+A local hashed claim is not a server session. Copying this JSON to a VPS and opening port 443 does not inherit the evidence from this page.
 
 ## Where this shows up later
 

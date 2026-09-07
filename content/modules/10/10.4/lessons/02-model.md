@@ -61,7 +61,7 @@ A missing prod-plus-debug deny is how a compose slogan becomes false assurance. 
 
 ## Practice
 
-Label `cfg.py` in `labs/10.4/10.4-lab`.
+In `labs/10.4/10.4-lab`, mark `cfg.py`.
 
 ## Use it somewhere new
 

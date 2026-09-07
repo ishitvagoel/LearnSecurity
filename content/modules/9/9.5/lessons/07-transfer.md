@@ -9,13 +9,13 @@ You get a **clinic pentest PDF on a shelf**.
 
 `close_finding({"retest": None})` must be false. For a clinic, missing retest denied, passing retest may close. A PDF on a shelf is still a report, not a retest.
 
-**Product sketch:** an EHR-lite "the assessor delivered a 40-page PDF with severity 9.8 so we closed isolation," plus "the known-exploited list says we must scan the hospital portal."
+An EHR-lite "the assessor delivered a 40-page PDF with severity 9.8 so we closed isolation," plus "the known-exploited list says we must scan the hospital portal."
 
 ## Picture: same close loop, clinical object
 
 Renaming "note" to "chart" is not transfer. Rule, retest, and leftover change. Filing the PDF and marking the ticket Done does not set `retest` to `"pass"`.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Bob must not read alice's note | A clinic staffer must not read another patient's chart |
 | The isolation check must pass before close | Same isolation check on **local** practice files |
@@ -52,7 +52,7 @@ Also name known-exploited list vs internal-only.
 |---|---|
 | "Severity 9.8 so we closed" | Input, not retest |
 | Live clinic / public known-exploited scan | Course rules |
-| A testing-guide draft as the current final pin | Draft, not this week's pin |
+| A testing-guide draft as the current final pin | Draft, not this pin |
 | Ticket Done as this topic | Workflow, not the check |
 | PDF attachment as `retest` | Report is not the same-rule check |
 

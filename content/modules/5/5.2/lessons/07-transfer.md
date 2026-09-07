@@ -11,13 +11,13 @@ You get a **clinic SSN column**. The label on the column says encrypted. The byt
 
 Clinic: SSN column labeled “encrypted” that is Base64. Also name password hashing vs field encryption vs backup encryption.
 
-**Product sketch:** a small clinic record with an `ssn_encrypted` column.
+A small clinic record with an `ssn_encrypted` column.
 
 ## Picture: the label is not the tool
 
 Calling it “SSN” instead of “secret” does not move the work. A column named `ssn_encrypted` does not authorize leaving the bytes as Base64. A disk-encryption checkbox is not the check.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | `protect("secret")` | `protect` analogue on the SSN stand-in |
 | Base64 of the body | Base64 of the SSN |

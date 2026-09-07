@@ -11,7 +11,7 @@ The notes app already treats a share as a grant. Sharing a note is a **change th
 
 What must not happen is **a cross-site POST that changes a share, authorized by cookie alone**. That is an integrity failure of share grants: an unwanted share, with the browser acting as a helper that sent the leftover cookie.
 
-Use an anti-forgery token, or an extra header that a simple cross-site form cannot set, when a CORS preflight is not the defense. Changes should use unsafe methods (not GET), or a strict fetch-metadata check. SameSite still has to match the cookie’s purpose — a helper, not the whole rule. Extra rows about authenticated embeds and CORP are **advanced**, not this week's check.
+Use an anti-forgery token, or an extra header that a simple cross-site form cannot set, when a CORS preflight is not the defense. Changes should use unsafe methods (not GET), or a strict fetch-metadata check. SameSite still has to match the cookie’s purpose — a helper, not the whole rule. Extra rows about authenticated embeds and CORP are **advanced**, not this check.
 
 ## Picture: leftover cookie authority without site-bound intent
 
@@ -53,7 +53,7 @@ A token you put on `Authorization` by hand is a **different helper**. It does no
 
 ## What the framework does vs what you still have to check
 
-SameSite=Lax is not complete (top-level GET, browser exceptions, old clients). FastAPI does not add a CSRF token because you used cookies. CORS allowing `*` with credentials is a leak, not a CSRF defense. The app’s promise is this `allow_share` check. The local folder is `labs/6.3/6.3-lab`. No live foreign origin.
+SameSite=Lax is not complete (top-level GET, browser exceptions, old clients). FastAPI does not add a CSRF token because you used cookies. CORS allowing `*` with credentials is a leak, not a CSRF defense. This `allow_share` check is the local check — files in `labs/6.3/6.3-lab`. No live foreign origin.
 
 ## What the tool cannot do
 

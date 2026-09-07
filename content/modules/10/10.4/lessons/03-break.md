@@ -59,7 +59,7 @@ You do not need a new flag.
 | How you recover later | Kill the process; rotate secrets that appeared in traces |
 | Out of scope | A canary percentage; live compose; claiming an assurance gate |
 
-FastAPI `debug=True` is a developer default. Next.js will print stack traces when `NODE_ENV` is not production — and the string can lie. Compose will start whatever you wrote. The notes app’s promise this week is: **this** practice, prod plus debug is deny.
+FastAPI `debug=True` is a developer default. Next.js will print stack traces when `NODE_ENV` is not production — and the string can lie. Compose will start whatever you wrote. Prod plus debug is deny.
 
 ## Practice
 

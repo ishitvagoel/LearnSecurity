@@ -9,13 +9,13 @@ You get a **clinic crash**. A fake patient name sits in the last chart.
 
 `crash_report("secret")` must not contain `secret`. For a clinic, field × place, allow or deny. The store’s privacy form is still disclosure, not redaction.
 
-**Product sketch:** an EHR-lite “debug crash includes the last chart so support can reproduce,” plus a completed store privacy form.
+An EHR-lite “debug crash includes the last chart so support can reproduce,” plus a completed store privacy form.
 
 ## Picture: same place, clinical object
 
 Calling it “patient name” instead of “note body” does not move the work. Field, place, and leftover change. Enabling a crash product and filling the store form does not omit the field.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Note body is confidential | Fake patient name / chart text is confidential |
 | Stack identifier may send | Stack identifier may send |

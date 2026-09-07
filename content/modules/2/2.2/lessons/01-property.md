@@ -46,7 +46,7 @@ The broken files’ `cache_put` ignores the company argument when storing. Compa
 
 Sensitive data in a load-balancer or application cache is one store. The browser’s `Cache-Control: no-store` is another. They are different stores. A correct origin `no-store` does not fix a CDN that keys on path. A correct CDN company key does not fix a browser that cached a note body.
 
-Web cache deception — unexpected types, files that do not exist — is a later, harder topic. This week’s check is company disagreement on the same path, not a public CDN poison.
+Web cache deception — unexpected types, files that do not exist — is a later, harder topic. The check is company disagreement on the same path, not a public CDN poison.
 
 ## Bound company versus forwarded identity
 
@@ -79,7 +79,7 @@ A path-only shared cache fails because **the designers trusted the URL as identi
 
 Next.js `fetch` cache and FastAPI defaults do not encode company. `Vary: Accept-Encoding` is a compression selector, not a company selector. Stale-while-revalidate can serve company A to company B if the key is still path-only. HTTP/2 push and URL normalization are later surfaces; they do not delete this sentence.
 
-What this practice is supposed to show: on **these** practice files, `cache_get("/notes/n1", "tB")` after a company A put is not `tenant-A-note`. The practice folder is the local check for that sentence. It is not a live CDN and not a public cache.
+`cache_get("/notes/n1", "tB")` after a company A put is not `tenant-A-note`. It is not a live CDN and not a public cache.
 
 ## What the tool cannot do
 

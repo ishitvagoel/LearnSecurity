@@ -13,7 +13,7 @@ Architecture is a **second** check: the role the app uses at request time must n
 
 What must not happen is a **shared app role that reads tA as tB**: `can_select("app", "tB", "tA") is True`. Who-is-allowed failed, and the database did not catch it. That is a secrecy failure.
 
-There has to be a second check so work never hits another company’s rows, and that check belongs on a trusted server, not in the Next.js client. Extra isolation around dangerous work is an advanced row, not this week's check. A manufacturer-ownership pledge does not configure `GRANT`.
+There has to be a second check so work never hits another company’s rows, and that check belongs on a trusted server, not in the Next.js client. Extra isolation around dangerous work is an advanced row, not this check. A manufacturer-ownership pledge does not configure `GRANT`.
 
 ## Picture: two gates, one forgotten WHERE
 
@@ -57,7 +57,7 @@ Migrator and superuser exist. They must not be `DATABASE_URL` at request time. A
 
 ## What the framework does vs what you still have to check
 
-FastAPI does not scope PostgreSQL. Splitting into microservices without new grants is a topology drawing. What this practice is supposed to show: `can_select("app", "tB", "tA") is False` and the runtime connection is not `postgres` — files in `labs/3.3/3.3-lab`. No live databases.
+FastAPI does not scope PostgreSQL. Splitting into microservices without new grants is a topology drawing. `can_select("app", "tB", "tA") is False` and the runtime connection is not `postgres` — files in `labs/3.3/3.3-lab`. No live databases.
 
 ## What the tool cannot do
 

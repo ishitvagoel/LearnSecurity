@@ -57,7 +57,7 @@ You do not need a new origin string.
 
 ## What the framework does vs what you still have to check
 
-FastAPI does not know the RP ID. A Next.js password field will happily POST to evil.example. What this practice is supposed to show: password at the lookalike origin → false.
+FastAPI does not know the RP ID. A Next.js password field will happily POST to evil.example. Password at the lookalike origin → false.
 
 ## Practice
 

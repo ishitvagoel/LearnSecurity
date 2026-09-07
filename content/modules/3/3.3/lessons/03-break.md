@@ -58,7 +58,7 @@ You do not need a new company id.
 
 ## What the framework does vs what you still have to check
 
-FastAPI does not scope PostgreSQL. Splitting into microservices without new grants is a topology drawing. What this practice is supposed to show: `can_select("app", "tB", "tA") is False`.
+FastAPI does not scope PostgreSQL. Splitting into microservices without new grants is a topology drawing. `can_select("app", "tB", "tA") is False`.
 
 ## Practice
 

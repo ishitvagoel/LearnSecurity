@@ -29,7 +29,7 @@ flowchart TD
 
 The token is never consumed. Sequential double-accept is enough. You do not need a new token string. The leftover still returning true *is* the leak.
 
-Lock so a limited seat cannot be booked twice. This week's check is sequential consume-once, not a threaded race.
+Lock so a limited seat cannot be booked twice. The check is sequential consume-once, not a threaded race.
 
 ## What to look at: the cause, not a hunt
 
@@ -60,7 +60,7 @@ You do not need a new token string.
 | How you recover later | Keep deny; remove surprise members |
 | Out of scope | A famous-bugs list, HTTP 400, or a live race harness |
 
-FastAPI will run `accept` twice if two requests arrive. Postgres unique indexes do nothing until you write the used row. Next.js will happily POST the mail link again. The app's promise this week is: **these** local files, second `t1` is False.
+FastAPI will run `accept` twice if two requests arrive. Postgres unique indexes do nothing until you write the used row. Next.js will happily POST the mail link again. Second `t1` is False.
 
 ## Practice
 

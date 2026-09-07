@@ -61,7 +61,7 @@ A missing isolation-assert cell is how a done checkbox becomes false assurance. 
 
 ## Practice
 
-Label `trace.py` in `labs/9.1/9.1-lab`.
+In `labs/9.1/9.1-lab`, mark `trace.py`.
 
 ## Use it somewhere new
 

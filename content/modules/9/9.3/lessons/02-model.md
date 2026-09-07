@@ -60,7 +60,7 @@ A missing bad-case × isolation row is how 200-only occupies the security slot. 
 
 ## Practice
 
-Label `stest.py` in `labs/9.3/9.3-lab`.
+In `labs/9.3/9.3-lab`, mark `stest.py`.
 
 ## Use it somewhere new
 

@@ -61,7 +61,7 @@ You do not need a new tenant. `conftest.py` calls `reset()` so grant state does 
 | How you recover later | Notify A; rotate links; wipe caches |
 | Out of scope | A capstone scanner; live clinic; claiming an assurance gate |
 
-FastAPI will return 200 for DELETE if you wrote that route. A scanner will stay green if the suite never reads after revoke. The notes app’s promise this week is: **this** practice, B after revoke is None.
+FastAPI will return 200 for DELETE if you wrote that route. A scanner will stay green if the suite never reads after revoke. B after revoke is None.
 
 ## Practice
 

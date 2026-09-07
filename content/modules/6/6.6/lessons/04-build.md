@@ -53,7 +53,7 @@ Fail closed: if you cannot ask the store, the answer is no. Uncertainty is a **d
 - Fail-open on store errors re-opens the hole.
 - A last-resort error handler is advanced work, not this practice.
 - Phishable mail (4.2) still delivers the first consume to the wrong person.
-- A magic-link that stays a standing session is 4.3 — this week's check owns consume, not the cookie exchange.
+- A magic-link that stays a standing session is 4.3 — this check owns consume, not the cookie exchange.
 
 ## Can people still use it
 

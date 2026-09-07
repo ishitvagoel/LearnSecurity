@@ -9,7 +9,7 @@ You get **clinic SMS reminders** — a new channel that HTTP scans of the notes 
 
 Clinic SMS reminders — a new channel that HTTP scans will not enumerate.
 
-**Product sketch:** An EHR-lite booking card that texts “your appointment” to a phone number.
+An EHR-lite booking card that texts “your appointment” to a phone number.
 
 1. who can act (number-swap; SMS intercept on an untrusted hop; an operator who pastes chart text into the template — **not** a live clinic, carrier, or public SMS API);
 2. what you trust (which assembler or markdown file is the list you keep; the SMS vendor questionnaire is not);

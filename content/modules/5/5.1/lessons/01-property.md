@@ -13,7 +13,7 @@ Encrypting a warehouse you still keep is not deletion. A privacy-policy PDF is n
 
 So what must not happen: **analytics (or search) still holds the note body after account deletion**. The body was already confidential. After the person leaves, keeping the field is leftover privacy too. Encryption without erasure still retains.
 
-You need to name sensitive data, write down how long you keep it, not hand the body to a second party you do not control, and actually carry those rules out. A scheduled warehouse job that maybe runs later is advanced work, not this week's check. A published privacy framework names identify, govern, control, and communicate. A newer draft of that framework is still a draft. A threat-method name does not walk the copies. The local maps do. Phone privacy profiles come later. A country privacy-law name is awareness, not this check. A database DELETE is not this sentence.
+You need to name sensitive data, write down how long you keep it, not hand the body to a second party you do not control, and actually carry those rules out. A scheduled warehouse job that maybe runs later is advanced work, not this check. A published privacy framework names identify, govern, control, and communicate. A newer draft of that framework is still a draft. A threat-method name does not walk the copies. The local maps do. Phone privacy profiles come later. A country privacy-law name is awareness, not this check. A database DELETE is not this sentence.
 
 ## Picture: the deletion graph
 
@@ -42,7 +42,7 @@ flowchart LR
   Kept -->|no| Gone["Deletion graph complete"]
 ```
 
-Secrecy can hold while privacy fails. The body was already classified confidential. This week's question is whether that field still exists after delete.
+Secrecy can hold while privacy fails. The body was already classified confidential. The question is whether that field still exists after delete.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
@@ -60,7 +60,7 @@ Someone deleted the notes row and left the other copies. That is the cause. The 
 
 ## What the framework does vs what you still have to check
 
-A database DELETE is not warehouse DELETE. The web app does not erase object-store analytics. What this practice is supposed to show: after `delete_account("alice")`, `body_retained("alice")` is None and `search_retained("alice")` is None — files in `labs/5.1/5.1-lab`. Fake data only. No live warehouse.
+A database DELETE is not warehouse DELETE. The web app does not erase object-store analytics. After `delete_account("alice")`, `body_retained("alice")` is None and `search_retained("alice")` is None — files in `labs/5.1/5.1-lab`. Fake data only. No live warehouse.
 
 ## What the tool cannot do
 

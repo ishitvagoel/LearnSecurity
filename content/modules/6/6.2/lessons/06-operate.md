@@ -34,7 +34,7 @@ Re-run `test_angle_brackets_are_encoded` after any renderer change; a green “c
 
 A content-security report-only dashboard will page on blocked scripts and stay silent when the stored title still contains raw `<`. Notice must observe **raw angle brackets at the encode sink**, not report-only counts. If the alert includes the title text, you have opened a logging leak (3.1).
 
-What this practice is supposed to show: a stored-field review fires without the title body, and a content-security report is extra, not this week’s enforcement.
+A stored-field review fires without the title body, and a content-security report is extra, not this enforcement.
 
 ## Practice
 

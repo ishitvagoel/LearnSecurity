@@ -11,7 +11,7 @@ You get a **clinic booking** API. A JSON object (REST) and a GraphQL variable ma
 
 Renaming `"tenant"` to `patient_id` is not transfer. Two grammars are two readers. Who-is-allowed still runs after one meaning exists.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Poster sending a note | Someone who can POST or query an appointment |
 | `"tenant"` on a JSON note | `patient_id` on REST and on GraphQL variables |

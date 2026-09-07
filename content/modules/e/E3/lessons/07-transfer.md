@@ -9,7 +9,7 @@ You get a **health-record append-only audit**, plus a **simulated copay**. Two `
 
 Health record append-only audit. Also name a simulated copay.
 
-**Product sketch:** EHR-lite “the processor said retries are fine,” plus “we filed a questionnaire so high-assurance is done.”
+EHR-lite “the processor said retries are fine,” plus “we filed a questionnaire so high-assurance is done.”
 
 1. who can act (504 retry / double-click — not a live clinic processor attack);
 2. what you trust (key identity is what you trust; a payment company and a questionnaire are not);

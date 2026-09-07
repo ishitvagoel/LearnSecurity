@@ -63,7 +63,7 @@ Write the cap down. Implement it on every write. Do not substitute a later rate 
 
 ## Practice
 
-Label `share_limit.py` in `labs/3.4/3.4-lab`.
+In `labs/3.4/3.4-lab`, mark `share_limit.py`.
 
 ## Use it somewhere new
 

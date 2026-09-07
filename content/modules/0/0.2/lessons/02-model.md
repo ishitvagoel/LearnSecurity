@@ -53,7 +53,7 @@ flowchart LR
 
 ## Practice
 
-Label `diagnostic.py` in `labs/0.2/0.2-bridge`.
+In `labs/0.2/0.2-bridge`, mark `diagnostic.py`.
 
 ## Use it somewhere new
 

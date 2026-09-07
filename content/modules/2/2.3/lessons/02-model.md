@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks from your table?
 
-A poster of “we use CSP, cookies, and CORS” is not this page. A browser policy table names **which reader** may see `sc_session` and **which controls are not this week’s check**.
+A poster of “we use CSP, cookies, and CORS” is not this page. A browser policy table names **which reader** may see `sc_session` and **which controls are not this check**.
 
 A local cookie-jar model. No real DOM exploit page, no third-party iframe product, no live CORS test against someone else’s site.
 
@@ -47,7 +47,7 @@ If `JS` can reach the value while `httponly` is true, the map already predicts `
 
 A missing analytics row is how a second cookie quietly becomes a session. Write the hole.
 
-## Step 3: draft versus this week’s check
+## Step 3: draft versus this check
 
 | Control | Status in this snapshot | Relation to HttpOnly |
 |---|---|---|
@@ -55,11 +55,11 @@ A missing analytics row is how a second cookie quietly becomes a session. Write 
 | Secure | Final sister expectation | Sister rule; the practice object includes it |
 | CSP3 | Working Draft | Not a substitute; Report-Only is notice, not this rule |
 | Trusted Types | Working Draft | Sink typing; later encoding work |
-| SameSite | Sister cookie rule | CSRF-adjacent; not this week’s check |
+| SameSite | Sister cookie rule | CSRF-adjacent; not this check |
 
 ## Practice
 
-Label `cookies.py` in `labs/2.3/2.3-browser-policy`.
+In `labs/2.3/2.3-browser-policy`, mark `cookies.py`.
 
 ## Use it somewhere new
 

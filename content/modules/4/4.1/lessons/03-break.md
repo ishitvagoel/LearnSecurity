@@ -61,7 +61,7 @@ You do not need a new username.
 | How you recover later | Mass revoke; rotate signing keys if tokens self-verify |
 | Out of scope | A single-sign-on product name, SessionMiddleware, or “we emailed them” |
 
-SessionMiddleware does not know HR offboarding. A token with `exp` in 30 days still verifies unless you check a per-user not-before. The app's promise this week is: **these** local files, after `delete_user("alice")`, `session_valid("alice")` is False.
+SessionMiddleware does not know HR offboarding. A token with `exp` in 30 days still verifies unless you check a per-user not-before. After `delete_user("alice")`, `session_valid("alice")` is False.
 
 ## Practice
 

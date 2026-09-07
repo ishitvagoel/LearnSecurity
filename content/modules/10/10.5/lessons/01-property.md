@@ -11,11 +11,11 @@ The notes app may get an incident ticket with a `recovery` field and a `logs` bl
 
 So what must not happen: **an incident closed without recovery evidence**, and **a note body in the logs**. Detect without recover is theater. Logs with bodies are leftover copies at the observability sink — the same family as earlier lessons on note bodies, extra copies, and crash dumps.
 
-A logging list names *what* you keep. It does not prove restore ran. Logs should match how sensitive the data is — note bodies are not “forensics.” Ship logs to a separate system so a breach of the app does not erase the evidence. Logging every authorization decision without the sensitive data is extra, advanced work, not this week’s check.
+A logging list names *what* you keep. It does not prove restore ran. Logs should match how sensitive the data is — note bodies are not “forensics.” Ship logs to a separate system so a breach of the app does not erase the evidence. Logging every authorization decision without the sensitive data is extra, advanced work, not this check.
 
 Industry “detect / respond / recover” labels name outcomes, not a product. A known-exploited list is useful for patch order. It is not a close decision, and it is not permission to scan a public clinic.
 
-This week’s practice is this course’s local files or official labs. Do not tell anyone to try attacks on public or third-party systems.
+The practice is this course’s local files or official labs. Do not tell anyone to try attacks on public or third-party systems.
 
 ## Picture: detect vs recover
 
@@ -68,7 +68,7 @@ Someone closed on detection quality. That is the cause. The system still broken,
 
 A SIEM will go green when the *rule* stops firing. That is not a restore test. Untested backups are not recover. Support tools with cluster-admin are a second incident.
 
-What this practice is supposed to show: `close_incident({"recovery": "todo", "logs": "ok"})` is false, and a leaked `note_body` cannot close either — files in `labs/10.5/10.5-lab`. Fake data only. No live SIEM. No real people’s notes.
+`close_incident({"recovery": "todo", "logs": "ok"})` is false, and a leaked `note_body` cannot close either — files in `labs/10.5/10.5-lab`. Fake data only. No live SIEM. No real people’s notes.
 
 ## What the tool cannot do
 

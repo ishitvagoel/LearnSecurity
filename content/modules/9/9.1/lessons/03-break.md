@@ -59,7 +59,7 @@ You do not need a new requirement id.
 | How you recover later | Add the test; do not backfill “done” |
 | Out of scope | A checklist PDF page, a live portal, or claiming the verification gate |
 
-A green CI job is not AUTHZ-1. Copied-wholesale checklists are inventory, not a tailored matrix. A FastAPI TestClient 200 is a product test (9.3). What this practice is supposed to show: practice, status-only is not covered.
+A green CI job is not AUTHZ-1. Copied-wholesale checklists are inventory, not a tailored matrix. A FastAPI TestClient 200 is a product test (9.3). Status-only is not covered.
 
 ## Practice
 

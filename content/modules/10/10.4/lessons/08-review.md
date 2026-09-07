@@ -40,7 +40,7 @@ Also reject: live production attacks; booting without re-running `test_prod_debu
 - Canary equals secure config
 - Feature flags are not something you trust
 - `NODE_ENV` is `boot_ok`
-- A famous-bugs list is this week’s rule
+- A famous-bugs list is the rule
 
 ## Use it somewhere new
 

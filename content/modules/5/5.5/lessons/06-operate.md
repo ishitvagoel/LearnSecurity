@@ -11,7 +11,7 @@ Do not log note bodies or bound parameter values that are bodies (3.1 / 5.1). Do
 
 ## Picture: error shape is a signal
 
-A SQL syntax-error spike after a query helper change is something you still have to notice and recover from, not an excuse to quote note bodies in the paging channel. Recover stops the concatenating path and restores if needed.
+A SQL syntax-error spike after a query helper change still has to be noticed and recovered from — not an excuse to quote note bodies in the paging channel. Recovery should stop the concatenating path and restore if needed.
 
 ```mermaid
 flowchart TD

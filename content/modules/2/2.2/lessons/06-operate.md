@@ -9,7 +9,7 @@ Even after the key includes the company, someone can still leak a body: a CDN co
 
 ## Picture: signal, purge, then secrecy work if bodies escaped
 
-A wrong hit is something you still have to notice and recover from, not an excuse to print the body into the log. The notice should name the mismatch. Recover purges. Neither writes `tenant-A-note`.
+A wrong hit still has to be noticed and recovered from — not an excuse to print the body into the log. The notice should name the mismatch. Recovery should purge. Neither writes `tenant-A-note`.
 
 ```mermaid
 flowchart TD
@@ -36,7 +36,7 @@ Certificate-failure drills belong to TLS deployment, not this cache-key sentence
 | Recover | Prefix is gone; keep watching the live window |
 | Leftover | Operator error at the CDN remains; this practice is not production telemetry |
 
-Varnish, Fastly, and Next.js data cache will still hit on whatever key you configured. `Cache-Control` is a hint. What this practice is supposed to show: on **these** practice files, a company B get after a company A put is a miss, and the mismatch log never includes `tenant-A-note`.
+Varnish, Fastly, and Next.js data cache will still hit on whatever key you configured. `Cache-Control` is a hint. A company B get after a company A put is a miss, and the mismatch log never includes `tenant-A-note`.
 
 What the tool cannot do: purge without a prefix that includes company can widen who is down. Stale-while-revalidate at a new node is leftover. Cookie leakage from a cached body is later session work, not a log-product green.
 

@@ -57,7 +57,7 @@ You do not need a new note id.
 
 ## What the framework does vs what you still have to check
 
-FastAPI does not know “five members.” SQLAlchemy `add()` will insert a sixth row. An accessible denial is not the cap. What this practice is supposed to show: after eight calls, `last <= 5`.
+FastAPI does not know “five members.” SQLAlchemy `add()` will insert a sixth row. An accessible denial is not the cap. After eight calls, `last <= 5`.
 
 ## Practice
 

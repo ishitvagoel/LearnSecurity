@@ -55,7 +55,7 @@ You do not need a new name.
 
 ## What the framework does vs what you still have to check
 
-Starlette `UploadFile.filename` is client data. `pathlib.Path / name` does not canonicalize. FastAPI will write wherever you tell it. What this practice is supposed to show: `../outside` does not leave `/tmp/sc-lab`.
+Starlette `UploadFile.filename` is client data. `pathlib.Path / name` does not canonicalize. FastAPI will write wherever you tell it. `../outside` does not leave `/tmp/sc-lab`.
 
 ## Practice
 

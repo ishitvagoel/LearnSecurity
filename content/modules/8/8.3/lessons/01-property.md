@@ -5,13 +5,13 @@
 
 ## The rule
 
-The notes app this week opens notes from a link. The **session** is identity (4.3). The Intent extras and the query string are **data** (2.1 / 7.1). A parameter `as=admin` must not become the signed-in user.
+The notes app opens notes from a link. The **session** is identity (4.3). The Intent extras and the query string are **data** (2.1 / 7.1). A parameter `as=admin` must not become the signed-in user.
 
 > After `open_link({"as": "admin"})`, `current_user()` must still be `"alice"`. An honest locator such as `note=n1` may still open a note.
 
 What must not happen: **a deep link `as=` switches the signed-in user**. That is authenticity of the principal, not “the link was https.”
 
-IPC has to be used securely. A WebView is another HTML interpreter (6.2), not this week’s session. Claimed HTTPS app links for OAuth redirects still leave custom schemes hijackable. “The link was https” is not this sentence.
+IPC has to be used securely. A WebView is another HTML interpreter (6.2), not this session. Claimed HTTPS app links for OAuth redirects still leave custom schemes hijackable. “The link was https” is not this sentence.
 
 ## Picture: link locates, session authorizes
 
@@ -50,9 +50,9 @@ On older API levels `exported` defaults were surprising. Treat export as explici
 
 ## What the framework does vs what you still have to check
 
-`exported=true` defaults on old Android. Custom schemes are first-come, first-served. WebView `addJavascriptInterface` is a new IPC. None of those defaults is this week’s session.
+`exported=true` defaults on old Android. Custom schemes are first-come, first-served. WebView `addJavascriptInterface` is a new IPC. None of those defaults is this session.
 
-What this practice is supposed to show: `open_link`, `as=admin` does not become the user — files in `labs/8.3/8.3-lab`. It is local only. It is not a live app.
+`open_link`, `as=admin` does not become the user — files in `labs/8.3/8.3-lab`. It is local only. It is not a live app.
 
 ## What the tool cannot do
 

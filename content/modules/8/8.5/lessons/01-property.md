@@ -67,14 +67,14 @@ Someone put the note body into the exception or the report builder. That is the 
 
 A crash SDK will ship whatever you attach. Private storage on the phone (8.2) does not encrypt the HTTPS payload. The same protection-level rule as the log lesson (3.1) now applies at this mobile place.
 
-What this practice is supposed to show: `crash_report("secret")` does not contain `secret` — files in `labs/8.5/8.5-lab`. Fake data only. No live crash product. No real people's notes.
+`crash_report("secret")` does not contain `secret` — files in `labs/8.5/8.5-lab`. Fake data only. No live crash product. No real people's notes.
 
 ## What the tool cannot do
 
 - Screenshots in “send feedback.”
 - Frozen-app traces and logcat if a leftover `READ_LOGS` path still prints the body.
 - The vendor as a processor — a contract plus the extra-copy lesson (5.1), not disappearance.
-- Last-chance error handlers that dump every frame, including function arguments. That is an advanced extra, not this week's check.
+- Last-chance error handlers that dump every frame, including function arguments. That is an advanced extra, not this check.
 
 ## Can people still use it
 

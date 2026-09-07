@@ -29,7 +29,7 @@ flowchart TD
 
 The broken files show **cause** (the server would dial whoever the URL names). The link-local address is a **named destination string**. Do not send packets to it. What has to be true first: `allowed` returns true for any `http`/`https` scheme. You do not need a GET. You must not.
 
-Use an allow-list of protocols, hosts, paths, and ports before calling another service. This week's check is the predicate, not a live fetch. A famous-bugs nickname for server-side requests is awareness after the cause, not that check.
+Use an allow-list of protocols, hosts, paths, and ports before calling another service. The check is the predicate, not a live fetch. A famous-bugs nickname for server-side requests is awareness after the cause, not that check.
 
 ## What to look at: the cause, not a fetch
 
@@ -63,7 +63,7 @@ You do not need a new URL.
 
 ## What the framework does vs what you still have to check
 
-`requests.get(user_url)` will dial whoever you pass. FastAPI has no outbound allow-list. urllib `urlparse` is not a policy. What this practice is supposed to show: a link-local metadata URL is False. **Do not curl anything.**
+`requests.get(user_url)` will dial whoever you pass. FastAPI has no outbound allow-list. urllib `urlparse` is not a policy. A link-local metadata URL is False. **Do not curl anything.**
 
 ## Practice
 

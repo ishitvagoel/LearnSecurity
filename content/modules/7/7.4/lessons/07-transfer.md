@@ -15,7 +15,7 @@ Also name outbox pattern and event schemas as the same identity family, without 
 
 Calling it “export patients overnight” instead of “export notes” does not move the work.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | `exporter(job)` | Batch-export worker |
 | Leftover `user_session` alice denied | Leftover clinician cookie denied |
@@ -34,7 +34,7 @@ A leftover session still has to be `None`. `service=worker-sc` may still be allo
 
 ## Write this for a clinic batch-export worker
 
-**Product sketch:** a small clinic app with “Export overnight” that copies the clinician cookie into the task so “the job knows who asked.”
+A small clinic app with “Export overnight” that copies the clinician cookie into the task so “the job knows who asked.”
 
 1. who can act (stolen session stuffed into a job, or inherited request context — not a live clinic);
 2. what you trust (worker authenticates as `worker-sc` is what you trust; VLAN, internal queue, and a zero-trust sticker are not);

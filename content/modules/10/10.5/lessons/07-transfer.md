@@ -9,13 +9,13 @@ You get a **clinic that closes the ticket when the SIEM is green**.
 
 `close_incident({"recovery": "todo", "logs": "ok"})` must be false. For a clinic, recovery todo denied, `note_body` denied, done + ok may close. A green SIEM is still a detect tile, not recover.
 
-**Product sketch:** an EHR-lite “alerts stopped so we closed INC-12,” plus “we have nightly backups and a known-exploited dashboard.”
+An EHR-lite “alerts stopped so we closed INC-12,” plus “we have nightly backups and a known-exploited dashboard.”
 
 ## Picture: same close loop, clinical object
 
 Calling it “chart” instead of “note” does not move the work. Recovery evidence, log inventory, and leftover change. Filing a green tile and marking the ticket Done does not set `recovery` to `"done"`.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Incident ticket with recovery + logs | Clinic ticket with the same two fields |
 | Restore drill before close | Same restore evidence on **local** practice files |

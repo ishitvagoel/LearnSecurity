@@ -5,13 +5,13 @@
 
 ## The rule
 
-The notes app may list an export folder. The **name is data**. The operating system must not read that name as a shell program. Module 5.5 already taught parameters versus SQL grammar. This week's check is the same shape at the process boundary.
+The notes app may list an export folder. The **name is data**. The operating system must not read that name as a shell program. Module 5.5 already taught parameters versus SQL grammar. The check is the same shape at the process boundary.
 
 > `argv_for_list` must not start a shell. Pass the name as a list of arguments. A denylist of punctuation is incomplete — encodings from 2.1 still beat string filters.
 
 What must not happen is **a user-chosen name run through a shell string**. That is an integrity failure at the OS interpreter: extra words in the name can become extra commands. This practice checks **argv shape only**. It does not run a live OS command.
 
-OS calls have to pass arguments as parameters. Encoding the name for a shell is a leftover, not this week's check. Formula characters in a CSV file are **advanced** work and show up in the clinic transfer, not this practice. FastAPI has no opinion about argv.
+OS calls have to pass arguments as parameters. Encoding the name for a shell is a leftover, not this check. Formula characters in a CSV file are **advanced** work and show up in the clinic transfer, not this practice. FastAPI has no opinion about argv.
 
 ## Picture: data vs shell grammar
 
@@ -54,7 +54,7 @@ SQL, shell, templates, and mail headers fail the same way: untrusted data become
 
 Python `subprocess` is easy to misuse (`shell=True`, or a string instead of a list). FastAPI does not mediate OS calls. Next.js `child_process.exec` is a shell.
 
-What this practice is supposed to show: `argv_for_list` is a list whose program is not `sh` — files in `labs/6.1/6.1-lab`. Fake names only. No live OS command.
+`argv_for_list` is a list whose program is not `sh` — files in `labs/6.1/6.1-lab`. Fake names only. No live OS command.
 
 ## What the tool cannot do
 

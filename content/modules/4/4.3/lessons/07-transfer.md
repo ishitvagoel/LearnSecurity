@@ -9,7 +9,7 @@ You get a **clinic appointment deep link**. Optionally: a **magic-link email** (
 
 Clinic appointment deep link. Optionally: magic-link email (still a URL token — short-lived, one-time).
 
-**Product sketch:** EHR-lite “open this visit” SMS or email.
+EHR-lite “open this visit” SMS or email.
 
 1. who can act (Referer to a tracking pixel; SMS forward; access-log operator — **not** a live clinic);
 2. what you trust (which parser is trusted; the SMS vendor is not);

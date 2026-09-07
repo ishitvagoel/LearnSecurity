@@ -62,7 +62,7 @@ You do not need a new `n`.
 
 ## What the framework does vs what you still have to check
 
-An IP limit at the edge is a bucket per address, not a per-person export account. FastAPI will run export as often as you call it. Next.js disabling a button does not bind `n`. What this practice is supposed to show: `allow(4)` is false.
+An IP limit at the edge is a bucket per address, not a per-person export account. FastAPI will run export as often as you call it. Next.js disabling a button does not bind `n`. `allow(4)` is false.
 
 ## Practice
 

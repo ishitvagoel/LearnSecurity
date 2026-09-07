@@ -11,7 +11,7 @@ Do not log session cookies or note bodies (3.1 / 4.3). Do not attach the token t
 
 ## Picture: leftover session is a signal
 
-A leftover cookie used as the principal is something you still have to notice and recover from, not an excuse to quote the cookie in the paging channel. Recover keeps the deny and rotates the worker.
+A leftover cookie used as the principal still has to be noticed and recovered from — not an excuse to quote the cookie in the paging channel. Recovery should keep the deny and rotate the worker.
 
 ```mermaid
 flowchart TD

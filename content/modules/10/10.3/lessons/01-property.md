@@ -11,9 +11,9 @@ The notes app's API pods run on a lab cluster (or a serverless analogue). **Auth
 
 So what must not happen: **an app pod granted cluster-admin**. That is least privilege at cluster grain — the same idea as a shared database god-role: one app bug becomes cluster takeover.
 
-Backend pieces should authenticate with their own service accounts, not a shared god role. Those accounts should be least-privileged. Use an outbound allow-list — the hop to instance metadata is how node credentials leak into the pod. Documented connection and retry toward the cluster API is extra, advanced work, not this week's check. A container-stack guide names five layers (image, registry, orchestrator, container, host). It does not make a managed cluster "secure by default." A restricted pod profile hardens the *pod spec*. It does not replace who may call the API.
+Backend pieces should authenticate with their own service accounts, not a shared god role. Those accounts should be least-privileged. Use an outbound allow-list — the hop to instance metadata is how node credentials leak into the pod. Documented connection and retry toward the cluster API is extra, advanced work, not this check. A container-stack guide names five layers (image, registry, orchestrator, container, host). It does not make a managed cluster "secure by default." A restricted pod profile hardens the *pod spec*. It does not replace who may call the API.
 
-This week's practice is this course's local files. Do not tell anyone to try attacks on public or third-party clusters.
+The practice is this course's local files. Do not tell anyone to try attacks on public or third-party clusters.
 
 ## Picture: namespace vs ClusterRole
 
@@ -55,7 +55,7 @@ Someone granted god-mode for convenience. That is the cause. Cluster takeover fr
 
 A default ServiceAccount in a namespace often mounts a token. Managed Kubernetes still accepts a ClusterRoleBinding you apply. `Dockerfile USER root` and `hostNetwork` are extra grains, not this rule.
 
-What this practice is supposed to show: `pod_ok("cluster-admin")` is false — files in `labs/10.3/10.3-lab`. Fake role strings only. No live clusters.
+`pod_ok("cluster-admin")` is false — files in `labs/10.3/10.3-lab`. Fake role strings only. No live clusters.
 
 ## What the tool cannot do
 

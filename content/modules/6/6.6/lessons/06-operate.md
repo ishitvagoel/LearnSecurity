@@ -11,7 +11,7 @@ Do not log tokens (4.3) or email addresses as if they were public ids. Do not pa
 
 ## Picture: second accept is a signal
 
-A second accept after consume is something you still have to notice and recover from, not an excuse to quote the token in the paging channel. Recover removes the extra membership.
+A second accept after consume still has to be noticed and recovered from — not an excuse to quote the token in the paging channel. Recovery should remove the extra membership.
 
 ```mermaid
 flowchart TD

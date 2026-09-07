@@ -62,7 +62,7 @@ You do not need a new secret.
 
 ## What the framework does vs what you still have to check
 
-FastAPI will accept a POST with an empty header. nginx TLS termination proves a hop, not a MAC. A vendor address range is shared-fate (NAT, shared cloud egress). Next.js never sees the callback. What this practice is supposed to show: empty sig is false. **Do not POST a live webhook.**
+FastAPI will accept a POST with an empty header. nginx TLS termination proves a hop, not a MAC. A vendor address range is shared-fate (NAT, shared cloud egress). Next.js never sees the callback. Empty sig is false. **Do not POST a live webhook.**
 
 ## Practice
 

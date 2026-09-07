@@ -15,7 +15,7 @@ Also name NoSQL operators and GraphQL arguments as the same shape (7.1), without
 
 Calling it “search box” instead of “note id” does not move the work.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | `note_id` glued into SQL | Search-box text glued into SQL or a query language |
 | `fetch_sql` | Patient-lookup helper |

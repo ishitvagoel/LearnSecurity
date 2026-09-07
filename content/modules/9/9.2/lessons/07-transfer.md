@@ -11,13 +11,13 @@ You get a **clinic report template** where designers can put expressions.
 
 Also name Terraform `local-exec` and GitHub Actions yaml as the same interpreter family, without running those systems.
 
-**Product sketch:** a small records app — “designers can put expressions in the discharge template,” plus “continuous integration formatted the file so we approved it.”
+A small records app — “designers can put expressions in the discharge template,” plus “continuous integration formatted the file so we approved it.”
 
 ## Picture: same interpreter, clinical object
 
 Calling it “report template” instead of “export helper” does not move the work.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | `x = eval(user)` approved | Template eval of a patient field approved |
 | `review_ok` | Template-change review helper |
@@ -49,7 +49,7 @@ Eval-on-user still has to be rejected. Honest `int(user)` may still pass. Format
 |---|---|
 | “Formatter passed” | Not an interpreter review |
 | Weaponized eval / live GitHub | Course rules |
-| “A bot reviewed it” | Later bots are a help, not this week |
+| “A bot reviewed it” | Later bots are a help, not this topic |
 | Documented as dangerous, still merged | Writing it down is not reject |
 | Draft vocabulary as certified | Draft; not a course gate |
 

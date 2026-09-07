@@ -9,7 +9,7 @@ You get a **clinic scan upload** whose original filename is kept. `resolve` must
 
 Clinic scan upload whose original filename is kept. Also name XML entity expansion, pickle, and YAML load as other parsers (same earlier data-vs-grammar shape).
 
-**Product sketch:** EHR-lite “attach imaging” that joins the filename onto a public folder.
+EHR-lite “attach imaging” that joins the filename onto a public folder.
 
 1. who can act (patient or device supplying a filename — **not** a live clinic);
 2. what you trust (canonical prefix is what you trust; a UUID sticker is not);

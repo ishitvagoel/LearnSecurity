@@ -59,7 +59,7 @@ You do not need a new descriptor key.
 | How you recover later | Add the isolation test; keep 200-only as product tests |
 | Out of scope | A testing-guide chapter; live fuzz; claiming a later gate |
 
-A FastAPI test client 200 is a product test. Snapshot tests are not isolation. Line coverage is not the isolation check. What this practice is supposed to show: practice, 200-only is not a security test.
+A FastAPI test client 200 is a product test. Snapshot tests are not isolation. Line coverage is not the isolation check. 200-only is not a security test.
 
 ## Practice
 

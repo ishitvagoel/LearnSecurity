@@ -9,13 +9,13 @@ You get a **clinic dashboard**. Fifty HIGH findings sit unmapped.
 
 `ship_ok([HIGH], {})` must be false. For a clinic, finding × map, allow or deny. A noisy dashboard is still noise, not a map.
 
-**Product sketch:** an EHR-lite “code scanning is on and the dashboard is noisy so we ship Fridays,” plus a maturity score on a slide.
+An EHR-lite “code scanning is on and the dashboard is noisy so we ship Fridays,” plus a maturity score on a slide.
 
 ## Picture: same join, clinical object
 
 Calling it “clinic finding” instead of “note finding” does not move the work. Finding, map, and leftover change. Enabling code scanning without a mapping check does not own the HIGH.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | HIGH finding is unowned until mapped | Same — fifty unmapped HIGHs |
 | Coverage-map requirement id | Same join, clinic requirement names |

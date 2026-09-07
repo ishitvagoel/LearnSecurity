@@ -53,7 +53,7 @@ You do not need a new company letter. Do not paste the practice files into a pub
 | How you recover later | Audit B for A's actions; take back the confused session |
 | Out of scope | A famous-bugs name, a row-level product, a live company, a course gate |
 
-FastAPI will bind whatever field you declare. PostgreSQL row-level rules will isolate whatever session variable you `SET`. A subdomain Host header is client-controlled. What this practice is supposed to show: session A plus body B is A.
+FastAPI will bind whatever field you declare. PostgreSQL row-level rules will isolate whatever session variable you `SET`. A subdomain Host header is client-controlled. Session A plus body B is A.
 
 ## Practice
 

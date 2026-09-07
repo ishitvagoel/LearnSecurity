@@ -52,7 +52,7 @@ Stripping `..` without canonicalize still fails on encodings. UUID names without
 
 ## What the framework does vs what you still have to check
 
-Starlette `UploadFile.filename` is hostile. FastAPI does not canonicalize for you. Content-Type is a client claim. What this practice is supposed to show: after join and canonicalize, the object is still `/tmp/sc-lab` or a child — files in `labs/6.4/6.4-lab`. No live walk against a public upload folder.
+Starlette `UploadFile.filename` is hostile. FastAPI does not canonicalize for you. Content-Type is a client claim. After join and canonicalize, the object is still `/tmp/sc-lab` or a child — files in `labs/6.4/6.4-lab`. No live walk against a public upload folder.
 
 ## What the tool cannot do
 

@@ -9,7 +9,7 @@ You get a **clinic guardian list**, an **invite token**, or an **export quota**.
 
 Clinic: max 3 guardians per child. Optionally map invite tokens and export quotas as *different objects, same shape*.
 
-**Product sketch:** EHR-lite guardian list on a booking card.
+EHR-lite guardian list on a booking card.
 
 1. who can act (scripted add; disabled UI max; import — **not** a live clinic);
 2. what you trust (which write path is trusted; HTML is not);

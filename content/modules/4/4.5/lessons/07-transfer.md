@@ -9,7 +9,7 @@ You get a **clinic FHIR resource server**. `accept_token` is false for `aud=othe
 
 Clinic: wrong-audience FHIR token. Also name native redirect (claimed HTTPS, not a custom scheme) vs browser vs backend-for-frontend storage.
 
-**Product sketch:** EHR-lite that accepts SMART-on-FHIR-shaped access tokens.
+EHR-lite that accepts SMART-on-FHIR-shaped access tokens.
 
 1. who can act (token minted for another hospital API; stolen browser token; malicious phone app claiming a custom scheme — **not** a live clinic);
 2. what you trust (which resource-server `aud` check is trusted; the vendor “OpenID dashboard” is not);

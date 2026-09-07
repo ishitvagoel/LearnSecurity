@@ -9,7 +9,7 @@ You get a clinic offline chart cache. Also name iOS Keychain vs Android Keystore
 
 After `save_note("secret")`, `plaintext_on_disk()` must be false.
 
-**Product sketch:** an EHR-lite “available offline” that writes the chart as `charts.json` in internal storage, plus a fingerprint prompt to open the app.
+An EHR-lite “available offline” that writes the chart as `charts.json` in internal storage, plus a fingerprint prompt to open the app.
 
 ## Picture: fingerprint is not the file wrap
 
@@ -21,7 +21,7 @@ flowchart LR
 
 Renaming `save_note` to `save_chart` is not transfer. If “available offline” writes `charts.json` while a fingerprint prompt unlocks the app screen, the rule is gone. `MODE_PRIVATE`, Room, and a local fingerprint do not wrap the file. iOS Keychain vs Android Keystore and desktop Electron are the same disk family — name them, do not image those devices here. The lab `aead:` prefix is a stand-in, not AES.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Lost-device finder / USB backup | Lost clinic tablet / backup — not a live hospital |
 | `save_note("secret")` then `plaintext_on_disk()` | Clinic chart cache on disk |

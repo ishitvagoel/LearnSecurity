@@ -60,7 +60,7 @@ You do not need a new incident key.
 | How you recover later | This *is* the step — restore drill |
 | Out of scope | A SIEM product; live paging; claiming an assurance gate |
 
-A SIEM dashboard turns green when alerts stop. A paging ack is a human click. The notes app’s API will log whatever you print. What this practice is supposed to show: practice, recovery todo is deny and `note_body` in logs is deny.
+A SIEM dashboard turns green when alerts stop. A paging ack is a human click. The notes app’s API will log whatever you print. Recovery todo is deny and `note_body` in logs is deny.
 
 ## Practice
 

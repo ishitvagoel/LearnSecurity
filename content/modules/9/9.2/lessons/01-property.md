@@ -5,7 +5,7 @@
 
 ## The rule
 
-The notes app this week reviews a helper that exports a note. Review is a gate. `eval` on what a user typed must not get a yes.
+The notes app reviews a helper that exports a note. Review is a gate. `eval` on what a user typed must not get a yes.
 
 Last topic (6.1) taught that a name is data, not a shell program. This week is the same idea at merge time: a user string is data, not Python grammar. “Looks good to me” after “the screen still looks fine” is not a finished review.
 
@@ -53,7 +53,7 @@ flowchart LR
 
 GitHub’s “approve” button is not this rule. Formatters do not see eval as a grant of Python. Later review bots (9.4) are a help, not the whole check.
 
-What this practice is supposed to show: **this** review helper, `review_ok("x = eval(user)")` is false — files in `labs/9.2/9.2-lab`. Fake diffs only. Local only.
+`review_ok("x = eval(user)")` is false — files in `labs/9.2/9.2-lab`. Fake diffs only. Local only.
 
 ## What the tool cannot do
 

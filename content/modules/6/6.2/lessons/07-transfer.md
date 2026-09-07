@@ -9,7 +9,7 @@ You get a **clinic patient nickname** field drawn on a shared board. Also name m
 
 `render` encodes `<` as `&lt;` in HTML text.
 
-**Product sketch:** an EHR-lite “preferred name” that concatenates into an HTML badge.
+An EHR-lite “preferred name” that concatenates into an HTML badge.
 
 ## Picture: nickname is still HTML input
 
@@ -21,7 +21,7 @@ flowchart LR
 
 Calling it “nickname” instead of “title” does not move the work. If the nickname is concatenated into an HTML badge, the rule is gone. FastAPI, a content-security header in report-only mode, and React defaults on a different component do not encode this sink. Markdown-to-HTML is 2.1’s second parser: even a well-encoded badge fails if markdown emits raw tags later. Trusted Types remain draft.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Collaborator editing a title | Patient or clerk supplying a nickname — not a live clinic |
 | `render` of a title into `<p>` text | Preferred name concatenated into an HTML badge |

@@ -9,7 +9,7 @@ You get a **clinic lab API key in a gist**. `auth("sk-lab-hardcoded", current="r
 
 Clinic lab API key in a gist. Also sketch envelope wrapping (data key vs wrapping key) on compromise.
 
-**Product sketch:** EHR-lite with a backend integration key.
+EHR-lite with a backend integration key.
 
 1. who can act (gist reader; old container — **not** a live clinic);
 2. what you trust (which current secret is trusted; the vault brand is not);

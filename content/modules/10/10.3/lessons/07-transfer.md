@@ -9,13 +9,13 @@ You get a **clinic app ServiceAccount that is cluster-admin**.
 
 `pod_ok("cluster-admin")` must be false. For a clinic, cluster-admin denied, app may run. A private namespace is still a name, not isolation.
 
-**Product sketch:** an EHR-lite "the API namespace is private so ClusterRole is fine," plus "we attached a network policy and a CIS Kubernetes scan."
+An EHR-lite "the API namespace is private so ClusterRole is fine," plus "we attached a network policy and a CIS Kubernetes scan."
 
 ## Picture: same admission loop, clinical object
 
 Renaming "note" to "chart" is not transfer. Rule, allow-list, and leftover change. Putting the app in a private namespace does not put `"app"` in `ALLOWED_ROLES`.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | App pod must not be cluster-admin | Clinic API SA must not be cluster-admin |
 | `pod_ok("cluster-admin")` false | Same call — cluster-admin still denied |

@@ -55,7 +55,7 @@ You do not need a new CVE id.
 
 ## What the framework does vs what you still have to check
 
-A “no High findings” ticket is not a threat model. HttpOnly cookies and parameterized queries are real later rows. They do not enumerate cross-tenant read. What this practice is supposed to show: the helper still returns `cross-tenant-read` when the scanner is green.
+A “no High findings” ticket is not a threat model. HttpOnly cookies and parameterized queries are real later rows. They do not enumerate cross-tenant read. The helper still returns `cross-tenant-read` when the scanner is green.
 
 ## Practice
 

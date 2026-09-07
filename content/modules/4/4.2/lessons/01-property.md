@@ -11,7 +11,7 @@ The notes app logs a browser user in at `https://app.securecollab.test`. A passw
 
 What must not happen is a **password (or wrong-origin WebAuthn) counted as phishing-resistant**. That is a login bound to the *wrong* site, then a session that acts as the victim.
 
-Authenticator guidance still treats passwords and OTP as phishable. “We turned on 2FA” is not this sentence. WebAuthn Level 3 is still a Candidate Recommendation, not a finished Rec. A later, stricter bar wants a hardware, user-intent, phishing-resistant factor. Treat that as later, not as this week's check.
+Authenticator guidance still treats passwords and OTP as phishable. “We turned on 2FA” is not this sentence. WebAuthn Level 3 is still a Candidate Recommendation, not a finished Rec. A later, stricter bar wants a hardware, user-intent, phishing-resistant factor. Treat that as later, not as this check.
 
 ## Picture: the secret walks to the wrong site
 
@@ -55,7 +55,7 @@ OTP is a second factor. It is still typed into the phishing page. Prompt bombing
 
 FastAPI does not know the RP ID. A Next.js password field will happily POST to evil.example. The login still has to work with a keyboard, a name a screen reader can use, and errors that are not color-only. A mouse-only WebAuthn button pushes people onto the password leftover — that is a security leftover, not polish.
 
-The app’s promise is the boolean helper, not a live authenticator — files in `labs/4.2/4.2-lab`. It is not a live phishing site.
+The boolean helper is the check, not a live authenticator — files in `labs/4.2/4.2-lab`. It is not a live phishing site.
 
 ## What the tool cannot do
 

@@ -50,7 +50,7 @@ flowchart LR
 
 pip and npm will fetch a name. A lockfile that is not *checked* is documentation. A private registry still serves whatever was published.
 
-What this practice is supposed to show: `aaa` vs `bbb` is deny — files in `labs/10.2/10.2-lab`. Fake digest strings only. No live registries.
+`aaa` vs `bbb` is deny — files in `labs/10.2/10.2-lab`. Fake digest strings only. No live registries.
 
 ## What the tool cannot do
 

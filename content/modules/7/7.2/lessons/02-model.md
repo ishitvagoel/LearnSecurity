@@ -54,7 +54,7 @@ Identifiers find a row. They do not authorize fields. Obscure identifiers are no
 
 ## Practice
 
-Label `field.py` in `labs/7.2/7.2-lab`.
+In `labs/7.2/7.2-lab`, mark `field.py`.
 
 ## Use it somewhere new
 

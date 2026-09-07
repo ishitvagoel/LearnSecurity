@@ -9,7 +9,7 @@ You get a **clinic DICOM / image parser**. `len(copy_into(4, b"abcdefgh", 4))` m
 
 Clinic DICOM / image parser. Also name a protobuf C extension.
 
-**Product sketch:** EHR-lite “the app is mostly Kotlin so copies are safe,” plus “we mapped an awareness-list name so the unpacker is done.”
+EHR-lite “the app is mostly Kotlin so copies are safe,” plus “we mapped an awareness-list name so the unpacker is done.”
 
 1. who can act (hostile header length — not a live clinic binary attack);
 2. what you trust (smallest of three at the **native** copy is what you trust; Kotlin / a company roadmap / an awareness-list name are not);

@@ -32,7 +32,7 @@ flowchart LR
   Mail[copy already sent] --> Residual[already sent]
 ```
 
-A copy already sitting in email is leftover, not this week's check.
+A copy already sitting in email is leftover, not this check.
 
 ## Step 1: name the pieces
 
@@ -62,7 +62,7 @@ A missing “B after revoke × body × deny” row is how a revoke event becomes
 
 ## Practice
 
-Label `capstone.py` in `labs/11/11-lab`.
+In `labs/11/11-lab`, mark `capstone.py`.
 
 ## Use it somewhere new
 

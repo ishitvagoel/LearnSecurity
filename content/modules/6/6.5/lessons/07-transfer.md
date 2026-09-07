@@ -15,7 +15,7 @@ Also name webhook delivery (7.3) as the same egress deputy, without running thos
 
 Calling it “PDF URL” instead of “preview URL” does not move the work.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Preview URL on a note | Lab-result PDF URL on a form |
 | `allowed` | Importer allow-check |

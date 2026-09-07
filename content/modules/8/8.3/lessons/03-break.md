@@ -54,7 +54,7 @@ You do not need a new query key.
 
 ## What the framework does vs what you still have to check
 
-`exported=true` defaults on old Android. Custom schemes are first-come, first-served. Verified App Links prove the *host* is associated with the app; they still deliver the query string. FastAPI will bind `as=admin` if you put it on a cookie. What this practice is supposed to show: alice stays alice.
+`exported=true` defaults on old Android. Custom schemes are first-come, first-served. Verified App Links prove the *host* is associated with the app; they still deliver the query string. FastAPI will bind `as=admin` if you put it on a cookie. Alice stays alice.
 
 ## Practice
 

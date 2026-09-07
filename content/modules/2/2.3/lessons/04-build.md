@@ -28,7 +28,7 @@ The repaired files honor the flag. XSS is **not** solved: encoding, CSP (draft),
 | Cookie header to the origin | Still allowed; the jar may send `Cookie` |
 | Non-session cookies | May remain script-readable if that is the product intent; do not silently reuse the session name |
 
-Cookie rules ask for HttpOnly when the value is not meant for scripts. This week's check is that cookie rule, not a full cookie list.
+Cookie rules ask for HttpOnly when the value is not meant for scripts. The check is that cookie rule, not a full cookie list.
 
 ## What this is not
 

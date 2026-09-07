@@ -55,7 +55,7 @@ You do not need a new flavor name.
 
 ## What the framework does vs what you still have to check
 
-Gradle `debug` / `release` types are not a server check. R8 does not authorize. Play Console “app signing” is not “secrets stay out of the binary.” FastAPI will accept `attest=ok` from a debug client if you bind it. What this practice is supposed to show: debug plus ok is false.
+Gradle `debug` / `release` types are not a server check. R8 does not authorize. Play Console “app signing” is not “secrets stay out of the binary.” FastAPI will accept `attest=ok` from a debug client if you bind it. Debug plus ok is false.
 
 ## Practice
 

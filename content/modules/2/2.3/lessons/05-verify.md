@@ -5,7 +5,7 @@
 
 ## If you cannot fail a check, it is still a slogan
 
-A green CSP scanner is not this week’s evidence. “Set-Cookie is present” is a tool observation. The check is: for `HTTPONLY_SESSION`, `js_read_session` returns `None`. That observation must be **false** on `--impl vulnerable` and **true** on `--impl fixed`.
+A green CSP scanner is not the evidence for this check. “Set-Cookie is present” is a tool observation. The check is: for `HTTPONLY_SESSION`, `js_read_session` returns `None`. That observation must be **false** on `--impl vulnerable` and **true** on `--impl fixed`.
 
 ## Picture: broken must fail the HttpOnly read
 

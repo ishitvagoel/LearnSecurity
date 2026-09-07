@@ -9,13 +9,13 @@ You get a **clinic that treats “HIPAA training complete” as enough to merge*
 
 `merge_ok({})` must be false. For a clinic, empty change is deny; a threat-model id may merge. A training checkbox is still a belief, not a threat model.
 
-**Product sketch:** an EHR-lite “CODEOWNERS plus annual HIPAA training so we merge identity changes,” plus a maturity score on a slide.
+An EHR-lite “CODEOWNERS plus annual HIPAA training so we merge identity changes,” plus a maturity score on a slide.
 
 ## Picture: same check, clinical training
 
 Calling it “chart” instead of “note” does not move the work. Surfaces, threat-model id, and leftover change. Marking HIPAA training complete does not put `threat_model` on the change.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Empty change must not merge | Empty change must not merge |
 | `merge_ok({})` | `merge_ok({})` on local practice files |

@@ -50,7 +50,7 @@ A scanner “IDOR” name is a weakness label, not that rule.
 | How you recover later | Take back the leftover flag; audit Bob’s reads of n2 |
 | Out of scope | A scanner “IDOR” name, a roles product, or id length |
 
-`Depends(get_user)` is not `Depends(can_read_note)`. Starlette and Next.js middleware do not key the grant. What this practice is supposed to show: `can_read("bob", "n2") is False`.
+`Depends(get_user)` is not `Depends(can_read_note)`. Starlette and Next.js middleware do not key the grant. `can_read("bob", "n2") is False`.
 
 ## Practice
 

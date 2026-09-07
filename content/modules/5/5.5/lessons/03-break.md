@@ -63,7 +63,7 @@ You do not need a new payload.
 
 ## What the framework does vs what you still have to check
 
-SQLAlchemy `text()` with an f-string is still concatenation. A later row-level rule in Postgres does not parse parameters for you. FastAPI will pass whatever string you interpolate. What this practice is supposed to show: `fetch_sql` is not a `str`.
+SQLAlchemy `text()` with an f-string is still concatenation. A later row-level rule in Postgres does not parse parameters for you. FastAPI will pass whatever string you interpolate. `fetch_sql` is not a `str`.
 
 ## Practice
 

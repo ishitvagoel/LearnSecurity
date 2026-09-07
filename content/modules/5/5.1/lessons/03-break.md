@@ -61,7 +61,7 @@ You do not need a new store name.
 | How you recover later | Purge partitions; a named legal-hold owner |
 | Out of scope | A privacy-law name, a contract checkbox, or a live warehouse dump |
 
-A database `DELETE FROM notes` is not warehouse DELETE. The web app does not erase object-store analytics. An HTTP 200 on `/account` is not `body_retained is None`. The app's promise this week is: **these** local files, after delete, both copies are None.
+A database `DELETE FROM notes` is not warehouse DELETE. The web app does not erase object-store analytics. An HTTP 200 on `/account` is not `body_retained is None`. After delete, both copies are None.
 
 ## Practice
 

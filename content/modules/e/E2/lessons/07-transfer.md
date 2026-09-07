@@ -9,7 +9,7 @@ You get a **clinic** that ships Report-Only and calls it a “HIPAA header.” A
 
 Report-Only must not make `isolation_enforced` true.
 
-**Product sketch:** an EHR-lite “we ship Content-Security-Policy-Report-Only so scripts are blocked,” plus “the reporting dashboard is green.”
+An EHR-lite “we ship Content-Security-Policy-Report-Only so scripts are blocked,” plus “the reporting dashboard is green.”
 
 ## Picture: green report vs blocked script
 
@@ -21,7 +21,7 @@ flowchart LR
 
 Calling it “charts” instead of “notes” does not move the work. If the dashboard is green while `isolation_enforced` treats Report-Only as on, the rule is gone. Helmet, a HIPAA sticker, and the current content-security spec do not put the enforcing name on the response. Trusted Types and COOP/COEP are sibling isolation leftovers — name them, do not load a live clinic here. The current content-security spec is still a **draft**; encoding (6.2) remains the first rule. Reporting from that policy is extra, later, and advanced: reporting, not enforcement.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Next.js response headers | EHR-lite response headers |
 | Report-Only counted as isolation | Report-Only called a “HIPAA header” |

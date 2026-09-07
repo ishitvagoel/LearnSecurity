@@ -9,13 +9,13 @@ You get a **clinic page test**. `test_get_patient_200` asserts the owner’s GET
 
 `is_security_test({"status_asserted": True})` must be false. For a clinic, 200-only is not a security test; a named what must not happen may count. A testing-guide checkbox is still a list, not a test shape.
 
-**Product sketch:** an EHR-lite “we have 94% coverage and GET /patient/1 returns 200,” plus a testing-guide checklist ticked.
+An EHR-lite “we have 94% coverage and GET /patient/1 returns 200,” plus a testing-guide checklist ticked.
 
 ## Picture: same 200, clinical object
 
 Calling it “patient” instead of “note” does not move the work. Object, bad case, and leftover change. Enabling a coverage product and ticking the guide does not name what must not happen.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Isolation row is the requirement | Other clinician must not read this chart |
 | Owner GET 200 is a product test | Owner GET 200 is a product test |

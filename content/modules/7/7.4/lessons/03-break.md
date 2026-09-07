@@ -63,7 +63,7 @@ You do not need a new identity string.
 
 ## What the framework does vs what you still have to check
 
-A task library can copy the request into the later job. FastAPI `Depends()` is gone once the HTTP worker returns. A message broker on a private network is still untrusted input (2.1). Next.js never sees the overnight job. What this practice is supposed to show: Alice session yields `None`.
+A task library can copy the request into the later job. FastAPI `Depends()` is gone once the HTTP worker returns. A message broker on a private network is still untrusted input (2.1). Next.js never sees the overnight job. Alice session yields `None`.
 
 ## Practice
 

@@ -11,7 +11,7 @@ Do not log full URLs if they contain tokens (4.3). Do not fetch the denied desti
 
 ## Picture: a denied host is a signal
 
-A deny of a preview URL that is not on the allow-list is something you still have to notice and recover from, not an excuse to paste the URL into the paging channel. Recover keeps the deny. Neither fetches the destination.
+A deny of a preview URL that is not on the allow-list still has to be noticed and recovered from — not an excuse to paste the URL into the paging channel. Recovery should keep the deny. Neither fetches the destination.
 
 ```mermaid
 flowchart TD

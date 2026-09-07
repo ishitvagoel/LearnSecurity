@@ -11,7 +11,7 @@ The notes app stores a stand-in for a note body. Secrecy against someone who can
 
 What must not happen: **`protect()` reversible as Base64 to `secret`**. Anyone who can read the stored field gets the body. That is a secrecy failure of the stored note. Encoding is not confidentiality.
 
-Use a real, reviewed encryption library, not encoding dressed up as encryption. Authenticated encryption (AES-GCM class), not ECB and not Base64. Password stretching (Argon2) is for passwords, not note bodies. Unique nonces and a post-quantum plan are advanced work, not this week's check. Keys still wait for a later lesson.
+Use a real, reviewed encryption library, not encoding dressed up as encryption. Authenticated encryption (AES-GCM class), not ECB and not Base64. Password stretching (Argon2) is for passwords, not note bodies. Unique nonces and a post-quantum plan are advanced work, not this check. Keys still wait for a later lesson.
 
 ## Picture: encoding vs encryption
 
@@ -53,7 +53,7 @@ A stronger algorithm does not fix a missing key story (later) or nonce reuse (ad
 
 ## What the framework does vs what you still have to check
 
-Password libraries are for passwords, not note bodies. Disk encryption is not app-level secrecy against a database admin. What this practice is supposed to show: Base64 decode of `protect("secret")` is not `"secret"` — files in `labs/5.2/5.2-lab`. Fake data only. No live key service.
+Password libraries are for passwords, not note bodies. Disk encryption is not app-level secrecy against a database admin. Base64 decode of `protect("secret")` is not `"secret"` — files in `labs/5.2/5.2-lab`. Fake data only. No live key service.
 
 ## What the tool cannot do
 

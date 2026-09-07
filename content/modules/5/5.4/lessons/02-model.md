@@ -57,7 +57,7 @@ A missing “header https × socket http × deny” row is how the client header
 
 ## Practice
 
-Label `channel.py` in `labs/5.4/5.4-lab`. Your artifact is a versioned list (even a table in your notes) with hop, who may assert proto, allow or deny, and what would show the deny is false. Fake data only.
+In `labs/5.4/5.4-lab`, mark `channel.py`. Write down hop, who may assert proto, allow or deny, and what would show the deny is false. Fake data only.
 
 ## Use it somewhere new
 

@@ -11,7 +11,7 @@ Do not paste a personal email or a production cookie into the ticket. Do not log
 
 ## Picture: alert on use after deleted
 
-A leftover cookie after delete is something you still have to notice and recover from, not an excuse to quote notes in the paging channel. Recover mass-revokes.
+A leftover cookie after delete still has to be noticed and recovered from — not an excuse to quote notes in the paging channel. Recovery should mass-revoke.
 
 ```mermaid
 flowchart TD

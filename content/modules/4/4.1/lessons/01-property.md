@@ -13,7 +13,7 @@ A leftover session cookie is still her. A leftover refresh token is still her. A
 
 So what must not happen: **a deleted user’s leftover session still works**. `delete_user` marks the profile deleted, but `SESSIONS["alice"]` stays true. The notes are still readable after the person is gone.
 
-All active sessions have to be killed when an account is disabled or deleted. They also want further use of that session refused — kill the server-side state. Self-contained tokens need a denylist or a per-user not-before. Revoking a stolen login factor is advanced work, not this week's check. Identity guidance separates identifiers, authenticators, and session. This week's check is session-after-delete, not proofing who someone is.
+All active sessions have to be killed when an account is disabled or deleted. They also want further use of that session refused — kill the server-side state. Self-contained tokens need a denylist or a per-user not-before. Revoking a stolen login factor is advanced work, not this check. Identity guidance separates identifiers, authenticators, and session. The check is session-after-delete, not proofing who someone is.
 
 ## Picture: the leftover outlives the person
 
@@ -42,7 +42,7 @@ stateDiagram-v2
   Deleted --> Deleted: leftover session must fail
 ```
 
-Disabled and deleted are different product states. Both must fail `session_valid` in this week's practice. Recovery and signing up again come later. They must not bring the old cookie back to life.
+Disabled and deleted are different product states. Both must fail `session_valid` in this practice. Recovery and signing up again come later. They must not bring the old cookie back to life.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 
@@ -60,7 +60,7 @@ Someone killed the profile row and left the session. That is the cause. The pers
 
 ## What the framework does vs what you still have to check
 
-SessionMiddleware does not know HR offboarding. A token with `exp` in 30 days still verifies unless you check a per-user not-before. What this practice is supposed to show: after `delete_user("alice")`, `session_valid("alice")` is False — files in `labs/4.1/4.1-lab`. Fake data only. No live identity provider.
+SessionMiddleware does not know HR offboarding. A token with `exp` in 30 days still verifies unless you check a per-user not-before. After `delete_user("alice")`, `session_valid("alice")` is False — files in `labs/4.1/4.1-lab`. Fake data only. No live identity provider.
 
 ## What the tool cannot do
 

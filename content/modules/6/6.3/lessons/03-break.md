@@ -53,7 +53,7 @@ You do not need a new origin string.
 | How you recover later | Keep deny; revoke grants created in the window |
 | Out of scope | SameSite as the definition, CORS, or a live third-party page |
 
-FastAPI `Request.cookies` will attach whatever the browser sent. Starlette CORS middleware is not CSRF. Next.js server actions still need origin and token at the grant. What this practice is supposed to show: foreign origin + no token is False.
+FastAPI `Request.cookies` will attach whatever the browser sent. Starlette CORS middleware is not CSRF. Next.js server actions still need origin and token at the grant. Foreign origin + no token is False.
 
 ## Practice
 

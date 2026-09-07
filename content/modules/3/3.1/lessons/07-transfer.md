@@ -13,7 +13,7 @@ You get a **clinic booking card**. Chart text and appointment time sit on the sa
 
 Calling it “chart text” instead of “note body” does not move the work. Field, place, and leftover change. Logging the time does not authorize logging the chart. A single “sensitive” sticker that does not name places is just a sticker.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Note body is Confidential | Chart text is Confidential |
 | Note id / tenant id may be Internal | Appointment time may be Internal |

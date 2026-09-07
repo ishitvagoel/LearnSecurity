@@ -5,7 +5,7 @@
 
 ## The rule
 
-The notes app this week has an Android phone client, written in Kotlin. The Android app file you install (the APK), the files on the phone, and every JSON field the app sends are **modifiable**. The phone's sandbox (a separate user id, permissions) raises the cost of *other apps* reading this process. It does not make *this* process honest. Last topic (1.2) still lives on the **server**.
+The notes app has an Android phone client, written in Kotlin. The Android app file you install (the APK), the files on the phone, and every JSON field the app sends are **modifiable**. The phone's sandbox (a separate user id, permissions) raises the cost of *other apps* reading this process. It does not make *this* process honest. Last topic (1.2) still lives on the **server**.
 
 > `allow_export({"integrity": "ok"}, "fail")` must be false. `allow_export({"integrity": "ok"}, "play_integrity_pass")` may be true.
 
@@ -54,7 +54,7 @@ The store listing and code signing prove *which package id was installed*, not *
 
 Android sandbox defaults are not 1.2. Jetpack libraries do not authorize export. FastAPI will accept `integrity=ok` if you bind it.
 
-What this practice is supposed to show: `allow_export`, client ok plus attest fail is false — files in `labs/8.1/8.1-lab`. It is local only. It is not a live phone, Play Console, or public app store listing.
+`allow_export`, client ok plus attest fail is false — files in `labs/8.1/8.1-lab`. It is local only. It is not a live phone, Play Console, or public app store listing.
 
 ## What the tool cannot do
 

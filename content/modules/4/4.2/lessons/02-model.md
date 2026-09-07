@@ -58,11 +58,11 @@ The client, the lookalike page, and “the user will notice the URL” are hosti
 | user | webauthn | lookalike origin | deny |
 | user | webauthn | real origin | resistant-login-only |
 
-A missing step-up cell is how export theater appears. Write the hole even if this week has no export button.
+A missing step-up cell is how export theater appears. Write the hole even if this topic has no export button.
 
 ## Practice
 
-Draw this map so someone else could name the checks without opening the answer-key folder. Label `authn.py` in `labs/4.2/4.2-lab`. Label password and OTP as phishable even at the real origin — the leftover is honest, not a silent pass.
+In `labs/4.2/4.2-lab`, mark `authn.py`. Label password and OTP as phishable even at the real origin — the leftover is honest, not a silent pass.
 
 ## Use it somewhere new
 

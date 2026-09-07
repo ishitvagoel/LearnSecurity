@@ -55,7 +55,7 @@ flowchart LR
 
 ## Practice
 
-Label `disk.py` in `labs/8.2/8.2-lab`. Label the store even in the repaired tree — the fix is the ciphertext stand-in, not pretending a private folder became encryption.
+In `labs/8.2/8.2-lab`, mark `disk.py`. Label the store even in the repaired tree — the fix is the ciphertext stand-in, not pretending a private folder became encryption.
 
 ## Use it somewhere new
 

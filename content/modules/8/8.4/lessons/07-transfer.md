@@ -9,7 +9,7 @@ You get a clinic debug build against prod FHIR. Also name an APK inventory list 
 
 `api_allowed("debug", "ok")` must be false.
 
-**Product sketch:** an EHR-lite “debug flavor uses the same application id and API key so testers can hit real data,” plus R8 on release.
+An EHR-lite “debug flavor uses the same application id and API key so testers can hit real data,” plus R8 on release.
 
 ## Picture: same key, two flavors
 
@@ -21,7 +21,7 @@ flowchart LR
 
 If testers share the prod API key while `api_allowed` is always true, the rule is gone. R8, Play App Signing, and root detection do not check `build_type`. An APK inventory list (10.2) is a list of what shipped, not this channel check — name it, do not unpack store APKs here. Debug should still reach a **lab** FHIR sandbox.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Leaked debug APK or student flavor | Clinic debug flavor — not a live hospital |
 | `api_allowed("debug", "ok")` | Same helper idea on a local FHIR stand-in |

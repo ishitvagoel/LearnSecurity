@@ -9,13 +9,13 @@ You get a **clinic that runs npm install in a prod pod**. A fake “always get l
 
 `install_ok("aaa", "bbb")` must be false. For a clinic, mismatch is deny; a matching pair may install. An SBOM is still inventory, not verify.
 
-**Product sketch:** an EHR-lite “prod pod runs npm install so we always get latest,” plus “we attach a CycloneDX SBOM and a provenance badge.”
+An EHR-lite “prod pod runs npm install so we always get latest,” plus “we attach a CycloneDX SBOM and a provenance badge.”
 
 ## Picture: latest vs lockfile
 
 Calling it “chart” instead of “note” does not move the work. Expected digest, got digest, and leftover change. Marking “npm install ran” does not compare hashes.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | `install_ok("aaa", "bbb")` must be false | Same check on local practice files |
 | Lockfile digest is the pin | Prod pod still needs a pin |

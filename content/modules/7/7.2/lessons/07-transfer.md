@@ -11,7 +11,7 @@ You get a **clinic sketch** with a patient page that omits the SSN column in the
 
 Clinic member cannot resolve SSN. Also name bulk update and search highlighting leaking snippets.
 
-**Product sketch:** EHR-lite patient page that omits the SSN column in the table, plus GraphQL `Patient { ssn }`.
+EHR-lite patient page that omits the SSN column in the table, plus GraphQL `Patient { ssn }`.
 
 ## Picture: a hidden column is not field authorization
 
@@ -25,7 +25,7 @@ If the table omits the SSN column while `resolve` is always true, the rule is go
 
 Member × SSN still has to be false. Member × display name may still be true. Hiding SSN in the table without a member×field deny test leaves the serializer open. The local check is `test_member_cannot_resolve_internal_field` — on a practice, not a live EHR GraphQL query.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Member session asking for extra fields | Clinician session selecting extra fields — not a live clinic |
 | `resolve("member", "secret_internal")` false | `resolve("member", "ssn")` false |

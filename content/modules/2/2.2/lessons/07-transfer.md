@@ -11,7 +11,7 @@ You get a **clinic portal** that caches `GET /patients/me` at the edge, and auth
 
 Calling it “chart” instead of “note body” does not move the work. TLS on one hop stays hop proof. The cache key still decides who reads.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Company A / company B members | Two patients on the same CDN |
 | `GET /notes/n1` | `GET /patients/me` — same path string for everyone |

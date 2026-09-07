@@ -9,13 +9,13 @@ You get a **clinic that files a “HIPAA exception.”**
 
 `accept_exception({"owner": "", "review_by": None})` must be false. For a clinic, empty owner denied, complete record may accept. “Legal said we accept it” is still a spoken yes, not a register row.
 
-**Product sketch:** an EHR-lite “legal said we accept it,” plus “our maturity score is 2.5 so exceptions are done.”
+An EHR-lite “legal said we accept it,” plus “our maturity score is 2.5 so exceptions are done.”
 
 ## Picture: same accept loop, clinical object
 
 Calling it “chart” instead of “note” does not move the work. Owner, review date, and accessibility flag still have to be on the row. Filing a HIPAA slide and marking the hole Accepted does not set `owner` or `review_by`.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Exception dict with owner + review_by + wcag_checked | Clinic exception with the same three fields |
 | Schema before accept | Same schema on **local** practice files |

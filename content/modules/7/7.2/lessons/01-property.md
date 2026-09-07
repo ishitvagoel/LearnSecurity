@@ -5,13 +5,13 @@
 
 ## The rule
 
-The notes app this week stores a note with a member-visible `display_name` and a service-only `secret_internal` (a fake integration token in this practice, not a real secret). Last topic on object grants (4.4) already said: a share on this note is a yes for **this row**. This week's rule is **which fields that share may read**. Extra keys on *write* were last week (7.1).
+The notes app stores a note with a member-visible `display_name` and a service-only `secret_internal` (a fake integration token in this practice, not a real secret). Last topic on object grants (4.4) already said: a share on this note is a yes for **this row**. The rule is **which fields that share may read**. Extra keys on *write* were last week (7.1).
 
 > `resolve("member", "secret_internal")` must be false. `resolve("member", "display_name")` may be true. `resolve("service", "secret_internal")` may be true.
 
 What must not happen is **a member resolves `secret_internal`**. That is who-is-allowed at field grain. Being able to call GET `/notes` is not this sentence. A UUID in the URL finds the row. It does not authorize every column.
 
-Field-level access has to be limited to consumers with an explicit yes. Function-level permission is coarser. Object-level permission was 4.4. Applying a role change through every serializer right away is **advanced**, not this week's check. Famous “broken object / property / function” lists are awareness after this table exists. They are not the syllabus.
+Field-level access has to be limited to consumers with an explicit yes. Function-level permission is coarser. Object-level permission was 4.4. Applying a role change through every serializer right away is **advanced**, not this check. Famous “broken object / property / function” lists are awareness after this table exists. They are not the syllabus.
 
 ## Picture: the dump helper writes every column
 
@@ -56,7 +56,7 @@ A UUID locates the row. It is not a capability for every column. Hiding the key 
 
 ORM dump helpers are convenience, not field permission. GraphQL will resolve any field the schema exposes. FastAPI `response_model` helps only if it is the actual response, not an optional overlay.
 
-What this practice is supposed to show: `resolve`, member × `secret_internal` is false — files in `labs/7.2/7.2-lab`. It is local. No live GraphQL.
+`resolve`, member × `secret_internal` is false — files in `labs/7.2/7.2-lab`. It is local. No live GraphQL.
 
 ## What the tool cannot do
 

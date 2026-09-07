@@ -57,7 +57,7 @@ For Confidential bodies: no log, no raw APM payload, no paste into a support tic
 Write the backlog in sentences a peer can attack:
 
 1. **Log line.** The `note_read` line may hold event name, note id, tenant id. It may not hold the body.
-2. **Error dump.** Exception text and slow-query logs are other places. They get the same deny for the body, even if this week's check only covers `log_event`.
+2. **Error dump.** Exception text and slow-query logs are other places. They get the same deny for the body, even if this check only covers `log_event`.
 3. **Support paste.** A ticket that quotes the body is a new place. Deny it this week; do not wait for a later product to “handle patient data.”
 
 ## Step 4: leftover, not a deleted row
@@ -72,7 +72,7 @@ A maturity score and a scanner color do not belong in this list.
 
 ## Practice
 
-Label `classify.py` in `labs/3.1/3.1-lab`. Your artifact is a versioned list (even a table in your notes) with field, level, place, allow or deny, and what would show the deny is false. No real people's data.
+In `labs/3.1/3.1-lab`, mark `classify.py`. Write down field, level, place, allow or deny, and what would show the deny is false. No real people's data.
 
 ## Use it somewhere new
 

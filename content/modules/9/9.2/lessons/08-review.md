@@ -38,7 +38,7 @@ Also reject: weaponized eval; closing findings without re-running `test_eval_on_
 
 - Tests mean review is optional
 - Formatters catch security
-- A later review bot replaces this week
+- A later review bot replaces this topic
 - Writing down that eval is dangerous is rejecting eval
 - A later draft vocabulary is final
 

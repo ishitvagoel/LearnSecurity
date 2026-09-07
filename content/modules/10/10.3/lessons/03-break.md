@@ -59,7 +59,7 @@ You do not need a new role string.
 | How you recover later | Delete the binding; rotate cluster credentials |
 | Out of scope | A CIS score; a live managed cluster; claiming an assurance gate |
 
-A managed cluster will still accept a ClusterRoleBinding. A restricted pod profile hardens the *pod spec*. FastAPI will still run as whatever SA the chart mounts. The notes app's API will still take the cluster if admission is always true. What this practice is supposed to show: practice, `cluster-admin` is deny.
+A managed cluster will still accept a ClusterRoleBinding. A restricted pod profile hardens the *pod spec*. FastAPI will still run as whatever SA the chart mounts. The notes app's API will still take the cluster if admission is always true. `cluster-admin` is deny.
 
 ## Practice
 

@@ -9,7 +9,7 @@ You get a clinic deep link `as=doctor`. Also name OAuth redirect to the app (4.5
 
 After `open_link({"as": "admin"})`, `current_user()` must still be `"alice"`.
 
-**Product sketch:** an EHR-lite claimed HTTPS app link `open?as=doctor` “for kiosk demos,” plus App Links verified.
+An EHR-lite claimed HTTPS app link `open?as=doctor` “for kiosk demos,” plus App Links verified.
 
 ## Picture: verified host is not a principal
 
@@ -21,7 +21,7 @@ flowchart LR
 
 Renaming `as=admin` to `as=doctor` is not transfer. If the kiosk demo uses a verified host while `open_link` copies `as`, the rule is gone. HTTPS, App Links, and `exported=false` without a test do not keep alice. OAuth redirect to the app (4.5) and WebView bridges are the same extras family — name them, do not run those systems here. Claimed HTTPS still wants a real host; custom schemes remain hijackable.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Other app on the tablet sending extras | Same — not a live clinic |
 | `open_link({"as": "admin"})` | Clinic deep link `as=doctor` |

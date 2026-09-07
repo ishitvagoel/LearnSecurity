@@ -15,7 +15,7 @@ Also name Jinja, SQL (5.5), and mail headers as the same shape, without running 
 
 Calling it “CSV filename” instead of “export name” does not move the work.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | `name` glued into `sh -c` | Clerk-chosen filename glued into `sh -c` |
 | `argv_for_list` | Export-worker spawn helper |

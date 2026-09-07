@@ -55,7 +55,7 @@ You do not need a new key string.
 
 ## What the framework does vs what you still have to check
 
-A FastAPI route, Next.js disable-on-submit, or “PostgreSQL will unique-constrain it” is not this check. A unique constraint on `(note_id)` would block **any** second share, including a legitimate new key — wrong check. What this practice is supposed to show: two calls with `k1`, `share_count() == 1`.
+A FastAPI route, Next.js disable-on-submit, or “PostgreSQL will unique-constrain it” is not this check. A unique constraint on `(note_id)` would block **any** second share, including a legitimate new key — wrong check. Two calls with `k1`, `share_count() == 1`.
 
 ## Practice
 

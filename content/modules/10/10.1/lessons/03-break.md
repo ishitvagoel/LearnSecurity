@@ -59,7 +59,7 @@ You do not need a new pull-request key.
 | How you recover later | Add a threat-model id; re-run `merge_ok` |
 | Out of scope | A maturity score, a live GitHub org, or claiming Gate 10 |
 
-Required reviewers on GitHub are off until someone turns them on, and an admin can still bypass them. CODEOWNERS says who clicks, not what changed. FastAPI has no software-lifecycle check. What this practice is supposed to show: practice, an empty change is deny.
+Required reviewers on GitHub are off until someone turns them on, and an admin can still bypass them. CODEOWNERS says who clicks, not what changed. FastAPI has no software-lifecycle check. An empty change is deny.
 
 A design-review guide is vocabulary, not this check. Gate 10 and M4 stay **not finished**.
 

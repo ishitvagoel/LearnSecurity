@@ -47,7 +47,7 @@ flowchart LR
 
 ## What the framework does vs what you still have to check
 
-A processor can remember its own side and still leave your row inserting twice. Payment screens that trap people cause retries (this bug). What this practice is supposed to show: two k1, count 1.
+A processor can remember its own side and still leave your row inserting twice. Payment screens that trap people cause retries (this bug). Two k1, count 1.
 
 ## What the tool cannot do
 

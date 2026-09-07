@@ -9,13 +9,13 @@ You get a **clinic summarizer over charts**.
 
 `run_tool("exec_sql", {})` must be None. For a clinic, `exec_sql` still has to be denied. `search_notes` may still run. A system prompt is still English, not permission.
 
-**Product sketch:** an EHR-lite "the model is only allowed to summarize, the system prompt forbids SQL," plus "we mapped a famous-bugs list so the agent is done."
+An EHR-lite "the model is only allowed to summarize, the system prompt forbids SQL," plus "we mapped a famous-bugs list so the agent is done."
 
 ## Picture: same tool loop, clinical object
 
 Renaming "note" to "chart" is not transfer. Rule, allow-list, and leftover change. Telling the model to summarize does not take `exec_sql` out of always-run `run_tool`.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Agent must not run `exec_sql` | Clinic summarizer must not run chart-SQL |
 | `run_tool("exec_sql", {})` is None | Same call — `exec_sql` still denied |
@@ -29,7 +29,7 @@ flowchart LR
   Sql[exec_sql] --> Reality[interpreter]
 ```
 
-If the model "only summarizes" while `run_tool` is always-run, the rule is gone. A system prompt, retrieval, and a famous-bugs mapping do not put `exec_sql` outside `ALLOWED`. A coding assistant in CI that can install packages is the same allow-list grain — name it, do not jailbreak a live model here. Guidance documents on AI risk are not this check. Cryptographically bound approvals are extra, advanced work, not this week's check.
+If the model "only summarizes" while `run_tool` is always-run, the rule is gone. A system prompt, retrieval, and a famous-bugs mapping do not put `exec_sql` outside `ALLOWED`. A coding assistant in CI that can install packages is the same allow-list grain — name it, do not jailbreak a live model here. Guidance documents on AI risk are not this check. Cryptographically bound approvals are extra, advanced work, not this check.
 
 `exec_sql` denied, `search_notes` may run. Adding a prompt without an allow-list leaves `run_tool("exec_sql")` running. The local check is `test_exec_sql_tool_is_denied` — on a practice, not a live model.
 

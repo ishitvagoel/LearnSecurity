@@ -5,13 +5,13 @@
 
 ## The rule
 
-The notes app invites people with a token. That token is a **join once**. Module 2.4 already taught that a retry is not a second grant. This week's check is **consume-once** when two tabs, or a copied link, both call `accept`.
+The notes app invites people with a token. That token is a **join once**. Module 2.4 already taught that a retry is not a second grant. The check is **consume-once** when two tabs, or a copied link, both call `accept`.
 
 > `accept('t1')` may be true once. The second `accept('t1')` must be false. A check-then-set race and a retry are the same family: both try to spend the invite again.
 
 So what must not happen: **an invite token accepted twice**. That is an integrity failure of membership. You get an extra member, or a replay after you meant to revoke.
 
-Lock so a limited seat cannot be booked twice. The join has to succeed entirely or roll back. Fail closed when the store errors. A last-resort error handler is advanced work, not this week's check. A famous-bugs list is awareness after the cause. A unique index is not this sentence until the consume actually writes it.
+Lock so a limited seat cannot be booked twice. The join has to succeed entirely or roll back. Fail closed when the store errors. A last-resort error handler is advanced work, not this check. A famous-bugs list is awareness after the cause. A unique index is not this sentence until the consume actually writes it.
 
 ## Picture: issued, then consumed, then dead
 
@@ -51,7 +51,7 @@ A used flag without locking still races. This practice’s check is a sequential
 
 ## What the framework does vs what you still have to check
 
-A unique constraint helps only if `accept` actually inserts or updates that row. FastAPI does not consume tokens for you. If the database errors and you still mint a membership, you failed open. What this practice is supposed to show: `accept('t1')` is true once — files in `labs/6.6/6.6-lab`. Fake tokens only. No live mail.
+A unique constraint helps only if `accept` actually inserts or updates that row. FastAPI does not consume tokens for you. If the database errors and you still mint a membership, you failed open. `accept('t1')` is true once — files in `labs/6.6/6.6-lab`. Fake tokens only. No live mail.
 
 ## What the tool cannot do
 

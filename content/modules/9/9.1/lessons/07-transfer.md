@@ -9,13 +9,13 @@ You get a **clinic HIPAA “done” column**. A fake isolation row sits in a che
 
 `covered("AUTHZ-1", [status-only])` must be false. For a clinic, status-only is not coverage; an isolation assert may count. A pasted checklist is still inventory, not a tailored matrix.
 
-**Product sketch:** an EHR-lite “we imported the HIPAA checklist and marked isolation done,” plus a green CI.
+An EHR-lite “we imported the HIPAA checklist and marked isolation done,” plus a green CI.
 
 ## Picture: same check, clinical checklist
 
 Calling it “chart” instead of “note” does not move the work. Threat, requirement, test, and leftover change. Marking HIPAA isolation done does not assert isolation.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | AUTHZ-1 is the isolation row | Fake HIPAA isolation row |
 | Status-only must not count | Done column must not count |

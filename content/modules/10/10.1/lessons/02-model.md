@@ -60,7 +60,7 @@ A missing threat-model cell is how a required-reviewer list becomes false assura
 
 ## Practice
 
-Label `sdl.py` in `labs/10.1/10.1-lab`.
+In `labs/10.1/10.1-lab`, mark `sdl.py`.
 
 ## Use it somewhere new
 

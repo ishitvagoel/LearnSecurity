@@ -62,7 +62,7 @@ You do not need a new name string.
 
 ## What the framework does vs what you still have to check
 
-FastAPI has no opinion about argv. `subprocess.run(..., shell=True)` will parse the name. Next.js `child_process.exec` is a shell. What this practice is supposed to show: `cmd[:2] != ["sh", "-c"]` and `uses_shell` is false.
+FastAPI has no opinion about argv. `subprocess.run(..., shell=True)` will parse the name. Next.js `child_process.exec` is a shell. `cmd[:2] != ["sh", "-c"]` and `uses_shell` is false.
 
 ## Practice
 

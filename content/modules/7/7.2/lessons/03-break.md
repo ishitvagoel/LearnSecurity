@@ -55,7 +55,7 @@ You do not need a new secret name.
 
 ## What the framework does vs what you still have to check
 
-ORM dump helpers are convenience, not field permission. GraphQL will resolve any field the schema exposes. FastAPI `response_model` helps only if it is the actual response. Next.js hiding a table column does not bind `resolve`. What this practice is supposed to show: member × `secret_internal` is false.
+ORM dump helpers are convenience, not field permission. GraphQL will resolve any field the schema exposes. FastAPI `response_model` helps only if it is the actual response. Next.js hiding a table column does not bind `resolve`. Member × `secret_internal` is false.
 
 ## Practice
 

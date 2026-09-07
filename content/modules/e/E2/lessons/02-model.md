@@ -51,7 +51,7 @@ flowchart LR
 
 ## Practice
 
-Label `csp.py` in `labs/E2/e2-lab`. Report-Only as a signal even in the repaired files — the fix is the enforcing header name, not pretending a report became a block.
+In `labs/E2/e2-lab`, mark `csp.py`. Report-Only as a signal even in the repaired files — the fix is the enforcing header name, not pretending a report became a block.
 
 ## Use it somewhere new
 
@@ -59,7 +59,7 @@ Clinic HIPAA header: Report-Only is still a signal.
 
 ## What can still go wrong
 
-XS-Leaks. Trusted Types still **draft**. Reporting from a content-security policy is extra, later, and advanced — not this week’s enforcement.
+XS-Leaks. Trusted Types still **draft**. Reporting from a content-security policy is extra, later, and advanced — not this enforcement.
 
 ## What this page is not doing
 

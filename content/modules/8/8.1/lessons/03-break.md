@@ -55,7 +55,7 @@ You do not need a new boolean name.
 
 ## What the framework does vs what you still have to check
 
-Android sandbox defaults are not 1.2. Jetpack libraries do not authorize export. FastAPI will accept `integrity=ok` if you bind it. Compose `enabled=false` does not bind `allow_export`. What this practice is supposed to show: client ok plus attest fail is false.
+Android sandbox defaults are not 1.2. Jetpack libraries do not authorize export. FastAPI will accept `integrity=ok` if you bind it. Compose `enabled=false` does not bind `allow_export`. Client ok plus attest fail is false.
 
 ## Practice
 

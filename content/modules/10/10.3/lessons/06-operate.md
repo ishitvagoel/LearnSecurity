@@ -9,7 +9,7 @@ A chart can still add a ClusterRoleBinding after admission was "set once." Do no
 
 ## Picture: god-mode binding is a signal
 
-A god-mode binding is something you still have to notice and recover from, not an excuse to quote kubeconfig in the paging channel. The notice should name the ServiceAccount. Recover deletes the binding and rotates cluster credentials.
+A god-mode binding still has to be noticed and recovered from — not an excuse to quote kubeconfig in the paging channel. The notice should name the ServiceAccount. Recovery should delete the binding and rotate cluster credentials.
 
 ```mermaid
 flowchart TD

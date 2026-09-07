@@ -24,7 +24,7 @@ flowchart LR
   Delete --> Search
 ```
 
-If an arrow is missing, leftover retention appears. This week's check runs notes, analytics, and search.
+If an arrow is missing, leftover retention appears. The check runs notes, analytics, and search.
 
 ## Picture: name the copies before you redact
 
@@ -65,7 +65,7 @@ A missing “deleted alice × analytics body × deny” row is how the warehouse
 
 ## Practice
 
-Label `lifecycle.py` in `labs/5.1/5.1-lab`. Your artifact is a versioned list (even a table in your notes) with copy, allow or deny, and what would show the deny is false. Fake data only.
+In `labs/5.1/5.1-lab`, mark `lifecycle.py`. Write down copy, allow or deny, and what would show the deny is false. Fake data only.
 
 ## Use it somewhere new
 

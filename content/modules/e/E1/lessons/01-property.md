@@ -11,9 +11,9 @@ The notes app may add an optional note summarizer that can call tools. **Authori
 
 So what must not happen: **the agent runs `exec_sql` because the model asked**. That is the interpreter lesson plus the mediation lesson, with the model as the confused deputy.
 
-Access-control decisions belong in application logic or a policy engine, **never by the model**. An allow-list before a tool runs. Cryptographically bound human approvals are extra, advanced work, not this week's check. A famous-bugs list for language models names "too much agency" as a regression label after the cause, not the syllabus. Guidance documents on AI risk are not what this local check looks at.
+Access-control decisions belong in application logic or a policy engine, **never by the model**. An allow-list before a tool runs. Cryptographically bound human approvals are extra, advanced work, not this check. A famous-bugs list for language models names "too much agency" as a regression label after the cause, not the syllabus. Guidance documents on AI risk are not what this local check looks at.
 
-This week's practice is this course's local files. Do not tell anyone to try attacks on a public or live model.
+The practice is this course's local files. Do not tell anyone to try attacks on a public or live model.
 
 ## Picture: model vs runtime
 
@@ -55,7 +55,7 @@ Someone treated model output as policy. That is the cause. An interpreter reache
 
 A tool library will expose whatever tools you pass. A system prompt is another string the model may ignore.
 
-What this practice is supposed to show: `run_tool("exec_sql", {})` is `None` — files in `labs/E1/e1-lab`. Fake tool names only. No live models.
+`run_tool("exec_sql", {})` is `None` — files in `labs/E1/e1-lab`. Fake tool names only. No live models.
 
 ## What the tool cannot do
 

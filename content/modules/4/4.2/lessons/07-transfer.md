@@ -13,7 +13,7 @@ You get a **clinic staff SSO** portal. Optionally: a second ceremony before char
 
 Renaming `"password"` to `"otp"` is not transfer. A lookalike identity provider is still the wrong origin. Who-is-allowed still runs after login.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Browser user at the notes-app origin | Clinician at the staff SSO portal |
 | Password or OTP at `https://evil.example` | Password or OTP at a lookalike identity provider |

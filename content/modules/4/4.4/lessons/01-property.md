@@ -11,7 +11,7 @@ The notes app stores notes per company. Bob has a share on note `n1` in company 
 
 What must not happen is **a grant on n1 authorizes n2**, plus the sibling **owner or admin costume that walks into another company**. That is a secrecy failure because who-is-allowed never ran on the requested object.
 
-Function permissions and data-item permissions have to be checked on a trusted server, not in the Next.js client. They also want work never to hit another company’s rows. Extra rows about applying grant changes immediately, and carrying the original person through a worker, are advanced — not this week's check. Famous “broken object / property / function” lists are a later awareness check after this table exists. They are not the syllabus.
+Function permissions and data-item permissions have to be checked on a trusted server, not in the Next.js client. They also want work never to hit another company’s rows. Extra rows about applying grant changes immediately, and carrying the original person through a worker, are advanced — not this check. Famous “broken object / property / function” lists are a later awareness check after this table exists. They are not the syllabus.
 
 ## Picture: a collection flag vs a grant on this note
 
@@ -57,7 +57,7 @@ A later database-role check is a *second* gate. This table is still required. A 
 
 ## What the framework does vs what you still have to check
 
-`Depends(get_user)` is not `Depends(can_read_note)`. Starlette, Next.js middleware, and “the user is logged in” do not key the grant. A later PostgreSQL row-level rule does not replace this rule. The app’s promise is this lookup. The local folder is `labs/4.4/4.4-lab`. No live company.
+`Depends(get_user)` is not `Depends(can_read_note)`. Starlette, Next.js middleware, and “the user is logged in” do not key the grant. A later PostgreSQL row-level rule does not replace this rule. This lookup is the check — files in `labs/4.4/4.4-lab`. No live company.
 
 ## What the tool cannot do
 

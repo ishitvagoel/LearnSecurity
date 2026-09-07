@@ -52,7 +52,7 @@ The cookie lesson already separated cookie-jar sending from script readability. 
 
 ## What the framework does vs what you still have to check
 
-FastAPI will bind query params. Next.js router will put them in the address bar. TLS encrypts the hop, not the log. What this practice is supposed to show: a query-only request yields `None`; cookie and header still work — files in `labs/4.3/4.3-lab`. No live CDNs.
+FastAPI will bind query params. Next.js router will put them in the address bar. TLS encrypts the hop, not the log. A query-only request yields `None`; cookie and header still work — files in `labs/4.3/4.3-lab`. No live CDNs.
 
 ## What the tool cannot do
 

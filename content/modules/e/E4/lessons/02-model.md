@@ -64,7 +64,7 @@ A header length is data. Treat it like any other field the requester sent.
 
 ## Practice
 
-Label `copy.py` in `labs/E4/e4-lab`.
+In `labs/E4/e4-lab`, mark `copy.py`.
 
 ## Use it somewhere new
 

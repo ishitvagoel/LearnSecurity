@@ -56,7 +56,7 @@ You do not need a new privileged field.
 
 ## What the framework does vs what you still have to check
 
-FastAPI will bind extra fields if the model allows it. Pydantic allowing extras and `user.update(body)` are the same shape. Next.js omitting a checkbox does not bind the server. A generated OpenAPI file is inventory, not the drop. What this practice is supposed to show: `is_admin` stays false.
+FastAPI will bind extra fields if the model allows it. Pydantic allowing extras and `user.update(body)` are the same shape. Next.js omitting a checkbox does not bind the server. A generated OpenAPI file is inventory, not the drop. `is_admin` stays false.
 
 ## Practice
 

@@ -59,7 +59,7 @@ You do not need a new field.
 | How you recover later | Expire; fix or re-accept with fields |
 | Out of scope | A maturity dashboard; live disclosure; claiming an assurance gate |
 
-A ticket type named “risk” will close without dates if you let it. Industry “govern” labels name outcomes; they do not write the row. An unverified pledge is manufacturer talk, not this function. The notes app’s promise this week is: **this** practice, empty owner is deny.
+A ticket type named “risk” will close without dates if you let it. Industry “govern” labels name outcomes; they do not write the row. An unverified pledge is manufacturer talk, not this function. Empty owner is deny.
 
 ## Practice
 

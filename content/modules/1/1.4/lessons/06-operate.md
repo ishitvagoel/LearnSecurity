@@ -9,7 +9,7 @@ Even after the button is fixed, someone will still fail recovery: a new exclusio
 
 ## Picture: the loop continues without lowering the bar
 
-A broken recovery widget is something you still have to notice and recover from, not an excuse to let support read codes aloud. The alternate path must still be a checked, usable control. The notice should name keyboard vs mouse. Recover restores access. Neither emails notes.
+A broken recovery widget still has to be noticed and recovered from — not an excuse to let support read codes aloud. The alternate path must still be a checked, usable control. The notice should name keyboard vs mouse. Recovery should restore access. Neither emails notes.
 
 ```mermaid
 flowchart TD

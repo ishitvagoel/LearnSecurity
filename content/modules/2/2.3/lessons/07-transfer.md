@@ -21,7 +21,7 @@ flowchart TD
   WebView --> Bridge{Bridge exposes value to JS?}
 ```
 
-| Notes app this week | Clinic / WebView sketch |
+| Notes app | Clinic / WebView sketch |
 |---|---|
 | Member session cookie `sc_session` | Patient-portal session, or a copy into a WebView |
 | Browser jar vs page script | Browser jar **and** a bridge that may hand the value to JS |
@@ -52,7 +52,7 @@ The same session is copied into a WebView that exposes cookies to injected JS.
 | Reject | Why |
 |---|---|
 | HttpOnly means no XSS | Encoding work still exists |
-| CSP3 as this week’s check | Draft, different rule |
+| CSP3 as this check | Draft, different rule |
 | Live clinic or third-party CSRF test | Course rules |
 | `localStorage` as the “accessible” fix | Script share enlarged; usable login not helped |
 

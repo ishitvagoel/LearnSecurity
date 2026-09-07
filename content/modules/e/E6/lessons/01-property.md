@@ -11,9 +11,9 @@ The notes app’s leadership may accept leftover risk. **Accountability of lefto
 
 What must not happen: **an incomplete exception accepted**. Unowned holes last forever. Inaccessible recovery (people cannot finish the reset path) is quietly kept.
 
-A process-maturity score measures whether a practice exists somewhere. It is not a row in the register. Industry “govern” labels name outcomes. They do not write the exception. A design-review guide is vocabulary for “think while you design.” It is not `accept_exception`. An unverified “secure by design” pledge page talks about manufacturer ownership. It is not this week’s check and not an assurance stamp. Extra advanced work — document the dangerous function — is a reason to *require* a record. It is not this check. A later draft of the design-review guide stays a **draft**.
+A process-maturity score measures whether a practice exists somewhere. It is not a row in the register. Industry “govern” labels name outcomes. They do not write the exception. A design-review guide is vocabulary for “think while you design.” It is not `accept_exception`. An unverified “secure by design” pledge page talks about manufacturer ownership. It is not this check and not an assurance stamp. Extra advanced work — document the dangerous function — is a reason to *require* a record. It is not this check. A later draft of the design-review guide stays a **draft**.
 
-This week’s practice is this course’s local files or official labs. Do not tell anyone to try attacks on public or third-party systems.
+The practice is this course’s local files or official labs. Do not tell anyone to try attacks on public or third-party systems.
 
 ## Picture: talk vs record
 
@@ -63,7 +63,7 @@ Oral acceptance treated as a register row. That is the cause. The unowned hole t
 
 A ticket workflow named “risk” will accept whatever fields you leave optional. Optional owner is this bug.
 
-What this practice is supposed to show: `accept_exception({"owner": "", "review_by": None})` is false, and a complete record may accept — files in `labs/E6/e6-lab`. Fake owner strings only. No live disclosure inbox. No real people’s notes.
+`accept_exception({"owner": "", "review_by": None})` is false, and a complete record may accept — files in `labs/E6/e6-lab`. Fake owner strings only. No live disclosure inbox. No real people’s notes.
 
 ## What the tool cannot do
 

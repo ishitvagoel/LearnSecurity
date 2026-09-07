@@ -11,7 +11,7 @@ You get a **clinic sketch** with group practices and an `org_id` in JSON.
 
 Clinic group practice switching `org_id` in JSON. Also name a relationship-graph tuple vs this binding.
 
-**Product sketch:** clinic-lite “PostgreSQL row-level rules are on so companies are done,” plus “we mapped a famous-bugs list so isolation is done.”
+Clinic-lite “PostgreSQL row-level rules are on so companies are done,” plus “we mapped a famous-bugs list so isolation is done.”
 
 ## Picture: row-level sticker vs binding
 

@@ -11,7 +11,7 @@ The notes app may unfurl a link so a note can show a preview. That URL is **untr
 
 What must not happen is **a server-side fetch to link-local metadata allowed**. In a real cloud that is a secrecy failure of the machine’s own identity. Here the test fails closed on the string.
 
-Use an allow-list of protocols, hosts, paths, and ports before the server calls another service. Use an outbound allow-list. Open redirects still have to land on an allow-list. Telling the person they are about to leave the site is **advanced** work, not this week's check. A famous-bugs nickname for server-side requests is awareness after the cause. `requests.get` is not this sentence.
+Use an allow-list of protocols, hosts, paths, and ports before the server calls another service. Use an outbound allow-list. Open redirects still have to land on an allow-list. Telling the person they are about to leave the site is **advanced** work, not this check. A famous-bugs nickname for server-side requests is awareness after the cause. `requests.get` is not this sentence.
 
 ## Picture: the server is the deputy
 
@@ -54,7 +54,7 @@ A regex on the raw string still loses to encodings (2.1), decimal IPs, IPv6, and
 
 `requests.get` is not an allow-list. urllib follows redirects unless you stop it. HTTPS to an IP is still the server’s network. FastAPI will dial whoever you pass.
 
-What this practice is supposed to show: `allowed` check, on **this** practice string, is false for link-local metadata — files in `labs/6.5/6.5-lab`. Fake URLs only. No live fetch.
+`allowed` is false for link-local metadata — files in `labs/6.5/6.5-lab`. Fake URLs only. No live fetch.
 
 ## What the tool cannot do
 

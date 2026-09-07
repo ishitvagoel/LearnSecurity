@@ -59,7 +59,7 @@ You do not need a new digest string.
 | How you recover later | Pin known-good; rotate CI secrets (5.3) |
 | Out of scope | An SBOM product, live npm, or claiming the ship gate |
 
-`npm install` latest is a convenience default. Dependabot opens pull requests; it does not verify bytes at install. A pip install without a hash requirement will take whatever the index returns. What this practice is supposed to show: practice, `aaa` vs `bbb` is deny.
+`npm install` latest is a convenience default. Dependabot opens pull requests; it does not verify bytes at install. A pip install without a hash requirement will take whatever the index returns. `aaa` vs `bbb` is deny.
 
 ## Practice
 

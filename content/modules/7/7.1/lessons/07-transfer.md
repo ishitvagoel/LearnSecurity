@@ -9,7 +9,7 @@ You get a clinic PATCH patient `{is_staff:true}`. Also name GraphQL mutation arg
 
 After `apply(user, {"is_admin": true})`, `is_admin` must still be false.
 
-**Product sketch:** an EHR-lite “Edit profile” form with no staff checkbox in the SPA, plus a generated OpenAPI file.
+An EHR-lite “Edit profile” form with no staff checkbox in the SPA, plus a generated OpenAPI file.
 
 ## Picture: missing checkbox is not the contract
 
@@ -21,7 +21,7 @@ flowchart LR
 
 Renaming `is_admin` to `is_staff` is not transfer. If “Edit profile” omits the staff checkbox while the server `apply` copies every key, the rule is gone. FastAPI, a generated OpenAPI file, and GraphQL “typed schema” do not copy `ALLOWED`. GraphQL mutation arguments and protobuf field numbers not in the writable set are the same binder family — name them, do not run those systems here. Honest `display_name` XSS is a 6.2 leftover even when extras are dropped.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Signed-in member sending extra JSON | Authenticated clinician session sending extra JSON — not a live clinic |
 | `apply(user, {"is_admin": true})` | Clinic PATCH `{is_staff:true}` |

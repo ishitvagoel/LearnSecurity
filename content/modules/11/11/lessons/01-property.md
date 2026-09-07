@@ -15,7 +15,7 @@ There has to be a permission check on every access, not a share event that is fo
 
 A numbered thirteen-item slogan is not the portable pack of tests, models, and restore notes this course asks for.
 
-This week’s practice is this course’s local files or official labs. Do not tell anyone to try attacks on public or third-party systems.
+The practice is this course’s local files or official labs. Do not tell anyone to try attacks on public or third-party systems.
 
 ## Picture: event vs next read
 
@@ -66,7 +66,7 @@ Someone recorded revoke and never asked the grant on the next read. That is the 
 
 FastAPI will not consult a grant you never check. A phone cache and a worker leftover session are extra grains of the same rule.
 
-What this practice is supposed to show: `read("n1", "B")` after `revoke("n1", "B")` is `None`, while A may still read, and B before revoke may still read — files in `labs/11/11-lab`. Fake data only. No live tenants.
+`read("n1", "B")` after `revoke("n1", "B")` is `None`, while A may still read, and B before revoke may still read — files in `labs/11/11-lab`. Fake data only. No live tenants.
 
 ## What the tool cannot do
 

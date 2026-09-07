@@ -52,7 +52,7 @@ If both arrows append, the map already predicts `test_duplicate_capture_does_not
 
 ## Practice
 
-Label `pay.py` in `labs/E3/e3-lab`.
+In `labs/E3/e3-lab`, mark `pay.py`.
 
 ## Use it somewhere new
 

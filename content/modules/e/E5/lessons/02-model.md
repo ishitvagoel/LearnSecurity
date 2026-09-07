@@ -53,7 +53,7 @@ flowchart LR
 
 ## Practice
 
-Label `rls.py` in `labs/E5/e5-lab`.
+In `labs/E5/e5-lab`, mark `rls.py`.
 
 ## Use it somewhere new
 

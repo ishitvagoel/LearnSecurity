@@ -47,7 +47,7 @@ The broken files show **cause** (the session value is handed to the script reade
 
 ## What the framework does vs what you still have to check
 
-A FastAPI `Set-Cookie` helper, Next.js `cookies().set`, or “HttpOnly is on in staging for one cookie” is not this week’s check. The app must actually set the flag on `sc_session`, and the jar must refuse script reads. Browser defaults differ by name; a debug cookie without the flag is a new row, not a leftover you can ignore.
+A FastAPI `Set-Cookie` helper, Next.js `cookies().set`, or “HttpOnly is on in staging for one cookie” is not this check. The app must actually set the flag on `sc_session`, and the jar must refuse script reads. Browser defaults differ by name; a debug cookie without the flag is a new row, not a leftover you can ignore.
 
 ## Practice
 

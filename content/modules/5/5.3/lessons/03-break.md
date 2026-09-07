@@ -56,7 +56,7 @@ You do not need a new key string.
 
 ## What the framework does vs what you still have to check
 
-A settings library will still load a default if you leave one in code. FastAPI `Depends` does not rotate. A vault dashboard tile does not pop `DEFAULT`. What this practice is supposed to show: `auth("sk-lab-hardcoded", current="rotated-now")` is False.
+A settings library will still load a default if you leave one in code. FastAPI `Depends` does not rotate. A vault dashboard tile does not pop `DEFAULT`. `auth("sk-lab-hardcoded", current="rotated-now")` is False.
 
 ## Practice
 

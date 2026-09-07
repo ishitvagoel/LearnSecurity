@@ -15,7 +15,7 @@ Also name signed redirects and outbound webhook SSRF (6.5) as the same authentic
 
 Calling it “lab-result webhook” instead of “billing webhook” does not move the work.
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Billing / export-ready / invite-used callback | Lab-result POST on `/lab-results` |
 | `accept` | Same check before any write |
@@ -34,7 +34,7 @@ An empty sig still has to be false. A matching HMAC over the same raw body may s
 
 ## Write this for a clinic lab-result webhook
 
-**Product sketch:** EHR-lite `POST /lab-results` behind TLS, IP-allow-listed to “the lab vendor,” no MAC.
+EHR-lite `POST /lab-results` behind TLS, IP-allow-listed to “the lab vendor,” no MAC.
 
 1. who can act (anyone who can POST the clinic callback URL — not a live clinic);
 2. what you trust (raw-body HMAC + `compare_digest`; TLS and vendor address range are not);

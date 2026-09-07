@@ -5,7 +5,7 @@
 
 ## The rule
 
-The notes app this week may cache notes so you can read them offline. That cache lives on a **hostile phone** (last topic, 8.1). A world-readable Downloads file is worse. A private app folder is still not encryption. Last crypto topic (5.2) already refused Base64. This week’s grain is **the phone’s disk**.
+The notes app may cache notes so you can read them offline. That cache lives on a **hostile phone** (last topic, 8.1). A world-readable Downloads file is worse. A private app folder is still not encryption. Last crypto topic (5.2) already refused Base64. The grain is **the phone’s disk**.
 
 > After `save_note("secret")`, `plaintext_on_disk()` must be false.
 
@@ -53,7 +53,7 @@ A prompt that shows the list is not wrapping the cache key. A compromised OS can
 
 EncryptedSharedPreferences is not automatic for every file. Room defaults to plaintext SQLite. iOS Data Protection classes are a later mirror — still not “the file is gone.”
 
-What this practice is supposed to show: a save leaves `plaintext_on_disk()` false — files in `labs/8.2/8.2-lab`. It is local only. It is not a live phone.
+A save leaves `plaintext_on_disk()` false — files in `labs/8.2/8.2-lab`. It is local only. It is not a live phone.
 
 ## What the tool cannot do
 

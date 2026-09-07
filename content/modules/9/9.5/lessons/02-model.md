@@ -61,7 +61,7 @@ A missing retest field is how a PDF on a shelf becomes "Done." Write the hole.
 
 ## Practice
 
-Label `pentest.py` in `labs/9.5/9.5-lab`.
+In `labs/9.5/9.5-lab`, mark `pentest.py`.
 
 ## Use it somewhere new
 
@@ -69,7 +69,7 @@ Known-exploited list: a bug seen in the wild still needs a *local* retest if it 
 
 ## What can still go wrong
 
-Unknown variants. A role-change cache that still serves the old grant. That leftover is extra, advanced work, not this week's check.
+Unknown variants. A role-change cache that still serves the old grant. That leftover is extra, advanced work, not this check.
 
 ## What this page is not doing
 

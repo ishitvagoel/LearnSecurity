@@ -33,7 +33,7 @@ Naming an R8 product is not the rule. Re-run `test_debug_build_cannot_call_prod_
 
 A Play Console dashboard will show signing status and stay silent when FastAPI still allows `build_type=debug`. Notice must observe **debug plus ok is false**, not store health. If the alert includes signing keys or an APK, you have opened a leftover hole from topic 5.3.
 
-What this practice is supposed to show: debug-to-prod denials fire without the APK.
+Debug-to-prod denials fire without the APK.
 
 ## Practice
 

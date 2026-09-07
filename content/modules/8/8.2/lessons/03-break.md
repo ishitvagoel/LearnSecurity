@@ -54,7 +54,7 @@ You do not need a new filename.
 
 ## What the framework does vs what you still have to check
 
-EncryptedSharedPreferences is not automatic for every file. Room defaults to plaintext SQLite. `MODE_PRIVATE` keeps other *apps* out on a healthy OS; root, backup agents, and USB still see bytes. What this practice is supposed to show: `plaintext_on_disk()` is false after save.
+EncryptedSharedPreferences is not automatic for every file. Room defaults to plaintext SQLite. `MODE_PRIVATE` keeps other *apps* out on a healthy OS; root, backup agents, and USB still see bytes. `plaintext_on_disk()` is false after save.
 
 ## Practice
 

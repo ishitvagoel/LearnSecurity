@@ -62,7 +62,7 @@ A missing anonymous cell is how `Cache-Control: public` on `/notes/{id}` appears
 
 ## Practice
 
-Draw the map so someone else could name the checks without opening the keys file. Label `cache.py` in `labs/2.2/2.2-request-path`. Label path-only versus `(path, bound company)`.
+In `labs/2.2/2.2-request-path`, mark `cache.py`. Label path-only versus `(path, bound company)`.
 
 ## Use it somewhere new
 

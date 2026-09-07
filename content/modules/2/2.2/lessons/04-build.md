@@ -22,7 +22,7 @@ The repaired files key `(path, tenant)`. Production may instead **refuse to cach
 
 Company in the key must be the company the who-is-allowed check already resolved, not `Host` or `X-Forwarded-*` from the client.
 
-Do not accept `Cache-Control: private` as membership in the key. Next.js `fetch` cache defaults do not encode company. A CDN that keys on path will still serve company A’s note to company B. `Vary: Cookie` is not a company id. What this practice is supposed to show: on **these** practice files, `cache_get("/notes/n1", "tB")` after a company A put is `None`.
+Do not accept `Cache-Control: private` as membership in the key. Next.js `fetch` cache defaults do not encode company. A CDN that keys on path will still serve company A’s note to company B. `Vary: Cookie` is not a company id. `cache_get("/notes/n1", "tB")` after a company A put is `None`.
 
 Cached sensitive data has to stay isolated. This check covers path-only keys.
 

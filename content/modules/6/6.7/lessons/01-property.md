@@ -5,13 +5,13 @@
 
 ## The rule
 
-The notes app lets a member export notes. Export copies note bodies into a CSV. If export can run forever, two things happen: you spend the machine and the bill, and you mint extra copies of the same bodies. Fairness is an **availability and cost** rule, not “ops will scale it.” Module 3.4 already put a cap on shares on the write path. This week’s check is **how many exports in a window**.
+The notes app lets a member export notes. Export copies note bodies into a CSV. If export can run forever, two things happen: you spend the machine and the bill, and you mint extra copies of the same bodies. Fairness is an **availability and cost** rule, not “ops will scale it.” Module 3.4 already put a cap on shares on the write path. The check is **how many exports in a window**.
 
 > `allow(4)` must be false in the lab window. `allow(3)` may be true. The fourth export is denied.
 
 What must not happen is **unbounded exports (fourth allowed)**. That burns availability and cost. It also makes extra CSVs of note bodies, which is a second secrecy problem from the copies lesson (5.1).
 
-There has to be a stop against scripts that burn quota and costly work. Per-person and whole-app limits written down, then actually enforced. Human timing tricks are **advanced** work, not this week's check. An edge proxy’s request limit is not this sentence.
+There has to be a stop against scripts that burn quota and costly work. Per-person and whole-app limits written down, then actually enforced. Human timing tricks are **advanced** work, not this check. An edge proxy’s request limit is not this sentence.
 
 ## Picture: a resource account per person
 
@@ -51,7 +51,7 @@ A quota is not encryption and not deletion. It bounds how many copies you mint.
 
 ## What the framework does vs what you still have to check
 
-A web page with `disabled={count>=3}` is not the server. FastAPI has no default export budget. Autoscaling spends more money; it does not enforce the cap. What this practice is supposed to show: `allow(4)` is false in the lab window — files in `labs/6.7/6.7-lab`. Fake counts only. No live traffic.
+A web page with `disabled={count>=3}` is not the server. FastAPI has no default export budget. Autoscaling spends more money; it does not enforce the cap. `allow(4)` is false in the lab window — files in `labs/6.7/6.7-lab`. Fake counts only. No live traffic.
 
 ## What the tool cannot do
 

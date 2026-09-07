@@ -9,7 +9,7 @@ A closer can still mark Done after `close_incident` was “fixed once.” Do not
 
 ## Picture: illegal close is a signal
 
-A close that skipped recovery is something you still have to notice and recover from, not an excuse to quote the note in the paging channel. The notice should name the incident. Recover reopens and runs the restore drill.
+A close that skipped recovery still has to be noticed and recovered from — not an excuse to quote the note in the paging channel. The notice should name the incident. Recovery should reopen and run the restore drill.
 
 ```mermaid
 flowchart TD

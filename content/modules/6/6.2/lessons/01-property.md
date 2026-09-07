@@ -5,9 +5,9 @@
 
 ## The rule
 
-The notes app this week draws a note title as HTML text. The title is **data**. Angle brackets are data. The browser must not treat them as extra tags.
+The notes app draws a note title as HTML text. The title is **data**. Angle brackets are data. The browser must not treat them as extra tags.
 
-Last topic (6.1) taught data versus interpreter grammar. This week's rule is the HTML parser.
+Last topic (6.1) taught data versus interpreter grammar. The rule is the HTML parser.
 
 > `render` must turn `<` into `&lt;` when it writes HTML text. Encoding depends on where you write. A content-security header is not this sentence.
 
@@ -56,7 +56,7 @@ Encoding for HTML text is wrong inside a JavaScript string. Encoding for attribu
 
 React JSX encodes text by default. `dangerouslySetInnerHTML` and a FastAPI HTML template do not. HttpOnly (2.3) does not stop script in the origin; it only hides the cookie from script.
 
-What this practice is supposed to show: `render`, on **this** practice title, turns `<` into `&lt;` in HTML text — files in `labs/6.2/6.2-lab`. It is not a live page and not a public site.
+`render` turns `<` into `&lt;` in HTML text — files in `labs/6.2/6.2-lab`. It is not a live page and not a public site.
 
 ## What the tool cannot do
 

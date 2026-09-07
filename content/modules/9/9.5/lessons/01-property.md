@@ -13,9 +13,9 @@ So what must not happen: **a finding closed without a retest**. That is honesty 
 
 A testing-guide list names *what* an authorized web check may try. It does not close tickets. A severity score tells you how to rank work. A 9.8 does not make the close decision for you. A known-exploited list says whether someone has seen the bug used in the wild. That is useful context for an internal-only bug. It is not permission to scan a public clinic.
 
-If you later require that a role change takes effect right away, retest the cache after the role change, not a different URL. That is extra, advanced work, not this week's check.
+If you later require that a role change takes effect right away, retest the cache after the role change, not a different URL. That is extra, advanced work, not this check.
 
-This week's practice is this course's local files or official labs. Do not tell anyone to try attacks on public or third-party systems.
+The practice is this course's local files or official labs. Do not tell anyone to try attacks on public or third-party systems.
 
 ## Picture: a report is not a retest
 
@@ -65,14 +65,14 @@ Someone closed on intent. That is the cause. The remaining isolation hole is a *
 
 Issue trackers have a Done state. That is a workflow default. It is not a passing retest of "bob must not read alice's note."
 
-What this practice is supposed to show: `close_finding({"retest": None})` is false — files in `labs/9.5/9.5-lab`. Fake data only. No live clinics. No real people's notes.
+`close_finding({"retest": None})` is false — files in `labs/9.5/9.5-lab`. Fake data only. No live clinics. No real people's notes.
 
 ## What the tool cannot do
 
 - A retest of a different endpoint (`/health` 200 is not isolation).
 - Variants of the same root cause (extra fields on the note).
 - Severity vs business priority still needs a human.
-- A role-change cache that still serves the old grant. That is extra work, not this week's check.
+- A role-change cache that still serves the old grant. That is extra work, not this check.
 
 ## Can people still use it
 

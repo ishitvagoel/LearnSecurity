@@ -64,7 +64,7 @@ Each always-name id (`cross-tenant-read`, `hostile-browser`, `stolen-worker`) ne
 
 ## Practice
 
-Label `model.py` in `labs/3.2/3.2-lab`.
+In `labs/3.2/3.2-lab`, mark `model.py`.
 
 ## Use it somewhere new
 

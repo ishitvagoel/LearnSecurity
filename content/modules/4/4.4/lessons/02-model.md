@@ -61,7 +61,7 @@ If a path is missing from the table, leftover permission appears there even if G
 
 ## Practice
 
-Label `grant.py` in `labs/4.4/4.4-lab`.
+In `labs/4.4/4.4-lab`, mark `grant.py`.
 
 ## Use it somewhere new
 

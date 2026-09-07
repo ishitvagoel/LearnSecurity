@@ -25,7 +25,7 @@ flowchart LR
   Delete --> Mobile
 ```
 
-If any arrow is missing, leftover access appears. This week's check only runs the session arrow.
+If any arrow is missing, leftover access appears. The check only runs the session arrow.
 
 ## Picture: delete is a path, not a SQL statement
 
@@ -67,7 +67,7 @@ A missing “deleted alice × leftover session × deny” row is how the cookie 
 
 ## Practice
 
-Label `lifecycle.py` in `labs/4.1/4.1-lab`. Your artifact is a versioned list (even a table in your notes) with state, leftover, allow or deny, and what would show the deny is false. Fake data only.
+In `labs/4.1/4.1-lab`, mark `lifecycle.py`. Write down state, leftover, allow or deny, and what would show the deny is false. Fake data only.
 
 ## Use it somewhere new
 

@@ -11,7 +11,7 @@ The notes app’s FastAPI and Next.js compose file has an `env` name and a `debu
 
 What must not happen: **a production process boots with debug enabled**. That leaks stack traces, interactive debuggers, extra headers, and sometimes secrets. The secrets lesson already said keep secrets out of traces.
 
-A checklist that wants debug modes off in production is vocabulary, not this function. Docs and monitoring pages should stay off unless you meant to expose them. Extra detail about leaking backend version numbers is extra, advanced work, not this week’s check. A manufacturer-defaults program page we have not verified is not the lab’s answer key. A famous-bugs list is a label you apply *after* you find the fail-open cause. It is not this week’s rule.
+A checklist that wants debug modes off in production is vocabulary, not this function. Docs and monitoring pages should stay off unless you meant to expose them. Extra detail about leaking backend version numbers is extra, advanced work, not this check. A manufacturer-defaults program page we have not verified is not the lab’s answer key. A famous-bugs list is a label you apply *after* you find the fail-open cause. It is not this rule.
 
 ## Picture: a flag vs an environment name
 
@@ -63,7 +63,7 @@ Fail-open defaults. That is the cause. The person who later reads a stack trace 
 
 Next.js will run with `NODE_ENV=development` if you tell compose to. FastAPI `debug=True` is a constructor argument, not a cloud setting. Django `DEBUG` is the clinic grain. Compose will start whatever you wrote.
 
-What this practice is supposed to show: production plus debug is deny — files in `labs/10.4/10.4-lab`. Fake flags only. No live production hosts.
+Production plus debug is deny — files in `labs/10.4/10.4-lab`. Fake flags only. No live production hosts.
 
 ## What the tool cannot do
 

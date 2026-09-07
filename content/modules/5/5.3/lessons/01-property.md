@@ -51,7 +51,7 @@ Mixing classes is how a tenant id becomes a “key,” or a password becomes a s
 
 ## What the framework does vs what you still have to check
 
-A settings library reading `.env` does not rotate anything. Vault without a rotation test is a new dump. What this practice is supposed to show: `labs/5.3/5.3-lab`. No live key service. The lab string is disposable.
+A settings library reading `.env` does not rotate anything. Vault without a rotation test is a new dump. Files in `labs/5.3/5.3-lab`. No live key service. The lab string is disposable.
 
 ## What the tool cannot do
 

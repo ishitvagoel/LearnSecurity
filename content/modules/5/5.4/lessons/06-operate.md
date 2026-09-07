@@ -9,7 +9,7 @@ A misconfigured proxy can start trusting `*` again after `channel_is_https` was 
 
 ## Picture: header versus socket mismatch is a signal
 
-A client header saying https while the socket is http is something you still have to notice and recover from, not an excuse to quote cookies in the paging channel. Recover revokes the cleartext cookies.
+A client header saying https while the socket is http still has to be noticed and recovered from — not an excuse to quote cookies in the paging channel. Recovery should revoke the cleartext cookies.
 
 ```mermaid
 flowchart TD

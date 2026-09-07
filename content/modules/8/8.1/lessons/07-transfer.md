@@ -9,7 +9,7 @@ You get a clinic Android client that sends `hipaaMode=true`. Also name feature f
 
 `allow_export({"integrity": "ok"}, "fail")` must be false.
 
-**Product sketch:** an EHR-lite Compose switch “HIPAA mode” that the API trusts as a boolean.
+An EHR-lite Compose switch “HIPAA mode” that the API trusts as a boolean.
 
 ## Picture: a client switch is still a client claim
 
@@ -21,7 +21,7 @@ flowchart LR
 
 Renaming `integrity` to `hipaaMode` is not transfer. If the Compose switch is “HIPAA mode” while the server binds `hipaaMode=true` as a grant, the rule is gone. Play Integrity in the app, shrinking the app, and the store listing do not ignore the client boolean. Feature flags and `premium=true` are the same claim family — name them, do not run those app files here. The phone sandbox still does not put this process in what you trust (the first page).
 
-| Notes app this week | Clinic sketch |
+| Notes app | Clinic sketch |
 |---|---|
 | Patched notes-app file sending `integrity=ok` | Patched clinic app file sending `hipaaMode=true` — not a live hospital device |
 | `allow_export({"integrity": "ok"}, "fail")` | Clinic export on client `hipaaMode` with failing attest |

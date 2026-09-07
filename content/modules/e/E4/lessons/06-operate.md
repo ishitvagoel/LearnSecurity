@@ -16,7 +16,7 @@ flowchart TD
   Metric --> Stop[stop serving that parser version]
 ```
 
-A broken copy is something you still have to notice and recover from, not an excuse to dump file bytes into the log.
+A broken copy still has to be noticed and recovered from — not an excuse to dump file bytes into the log.
 
 | Outcome | This topic |
 |---|---|
